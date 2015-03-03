@@ -16,17 +16,26 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'restangular'
   ])
+  .config(function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('linshare');
+    RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json'});
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/login', {
+        templateUrl: '../views/common/loginForm.html',
+        controller: 'LoginController'
+      })
+      .when('/files', {
+        templateUrl: 'views/files.html',
+        controller: 'FilesController'
       })
       .otherwise({
         redirectTo: '/'
