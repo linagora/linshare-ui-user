@@ -4,7 +4,7 @@
 module.exports = function(config) {
   config.set({
 
-    // base path that will be used to resolve all patterns (eg. files, exclude)
+    // base path that will be used to resolve all patterns (eg. documents, exclude)
     basePath: '..',
 
 
@@ -13,7 +13,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
 
-    // list of files / patterns to load in the browser
+    // list of documents / patterns to load in the browser
     files: [
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
@@ -32,12 +32,12 @@ module.exports = function(config) {
     ],
 
 
-    // list of files to exclude
+    // list of documents to exclude
     exclude: [
     ],
 
 
-    // preprocess matching files before serving them to the browser
+    // preprocess matching documents before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
     },
