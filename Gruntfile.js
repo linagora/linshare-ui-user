@@ -27,7 +27,7 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
-    // Watches files for changes and runs tasks based on the changed files
+    // Watches documents for changes and runs tasks based on the changed documents
     watch: {
       bower: {
         files: ['bower.json'],
@@ -203,7 +203,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Compiles Sass to CSS and generates necessary files if requested
+    // Compiles Sass to CSS and generates necessary documents if requested
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
@@ -232,7 +232,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Renames files for browser caching purposes
+    // Renames documents for browser caching purposes
     filerev: {
       dist: {
         src: [
@@ -245,7 +245,7 @@ module.exports = function (grunt) {
     },
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
+    // concat, minify and revision documents. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
@@ -276,13 +276,13 @@ module.exports = function (grunt) {
       }
     },
 
-    // The following *-min tasks will produce minified files in the dist folder
+    // The following *-min tasks will produce minified documents in the dist folder
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
     // cssmin: {
     //   dist: {
-    //     files: {
+    //     documents: {
     //       '<%= yeoman.dist %>/styles/main.css': [
     //         '.tmp/styles/{,*/}*.css'
     //       ]
@@ -291,7 +291,7 @@ module.exports = function (grunt) {
     // },
     // uglify: {
     //   dist: {
-    //     files: {
+    //     documents: {
     //       '<%= yeoman.dist %>/scripts/scripts.js': [
     //         '<%= yeoman.dist %>/scripts/scripts.js'
     //       ]
@@ -362,7 +362,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Copies remaining files to places other tasks can use
+    // Copies remaining documents to places other tasks can use
     copy: {
       dist: {
         files: [{

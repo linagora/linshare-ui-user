@@ -4,6 +4,6 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .controller('FilesController', function($scope){
-
+  .controller('FilesController', function($scope, filesService){
+    $scope.test = filesService.getAllFiles();
   });

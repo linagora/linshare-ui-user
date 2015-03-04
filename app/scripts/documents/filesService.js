@@ -4,22 +4,26 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .Factory('filesService', function(Restangular){
+  .factory('filesService', function(Restangular){
+    var baseRestDocuments = Restangular.all('documents');
     return {
       getAllFiles: function(){
-        return Restangular.all('').getList();
+        return Restangular.all('documents').getList();
       },
-      getFileInfo: function(){
-        return Restangular.get('').one('');
+      getFileInfo: function(uuid) {
+        return Restangular.one('documents', uuid).get();
       },
-      uploadFiles: function(){
-
+      downloadFiles: function(uuid){
+        return Restangular.all('documents').one(uuid, 'download').get();
       },
-      downloadFiles: function(){
-
+      getThumbnail: function(uuid) {
+        return Restangular.one('documents', uuid).one('thumbnail').get();
+      },
+      uploadFiles: function(documentDto){
+        return Restangular.all('documents').post(documentDto);
       },
       shareFiles: function(){
 
       }
-    }
+    };
   });

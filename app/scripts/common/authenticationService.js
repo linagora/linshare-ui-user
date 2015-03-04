@@ -3,7 +3,7 @@
 /* Authentication Factory */
 
 angular.module('linshareUiUserApp')
-  .Factory('AuthenticationService', function(Restangular, authService, $q, $log, $cookies) {
+  .factory('AuthenticationService', function(Restangular, $q, $log, $cookies, authService) {
     var deferred = $q.defer();
 
     var baseAuthentication = Restangular.all('authentication');
@@ -20,13 +20,15 @@ angular.module('linshareUiUserApp')
     return {
       login: function (login, password) {
         $log.debug('Authentication:login');
-        return baseAuthentication.customGET('authorized', {
+        return baseAuthentication.customGET('authorized',{
+          //while the all requests have no auth header we need to ignote authmodule
+          ignoreAuthModule: true}, {
           Authorization: 'Basic ' + Base64.encode(login + ':' + password)
         }).then(function(user) {
-          $log.debug('Authentication success : logged as ' + user.mail);
+          $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName);
           authService.loginConfirmed();
           deferred.resolve(user);
-        }, function(error){
+        }, function(error) {
           $log.error('Authentication failed', error.status);
           deferred.reject(error);
         });
@@ -44,11 +46,11 @@ angular.module('linshareUiUserApp')
           });
       },
       getCurrentUser: function() {
-        baseAuthentication.customGET('authorized')
-          .then(function(user) {
-            deferred.resolve(user);
-            return deferred.promise();
-          });
+        //baseAuthentication.customGET('authorized')
+        //  .then(function(user) {
+        //    deferred.resolve(user);
+            return deferred.promise;
+         //});
       }
     };
   });

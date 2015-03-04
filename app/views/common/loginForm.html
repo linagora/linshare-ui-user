@@ -1,5 +1,54 @@
-<div>
- <input type="text" ng-model=""/><br/>
-  <input type="password" />
-  <button type="submit">Submit</button>
-</div>
+<form class="form-horizontal" name="signup_form"
+      novalidate ng-submit="signupForm()">
+  <fieldset>
+    <legend>Connexion</legend>
+
+    <div class="form-group">
+      <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email"
+               class="form-control"
+               placeholder="Email"
+               name="email"
+               ng-model="input.email"
+               id="inputEmail"
+               placeholder="Email"
+               required/>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label for="inputPassword"
+             class="col-sm-2 control-label">Password
+      </label>
+      <div class="col-sm-10">
+        <input type="password"
+               class="form-control"
+               id="inputPassword"
+               placeholder="Password"
+               ng-model="input.password"
+               name="password"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Remember me
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit"
+                class="btn btn-default">Connexion
+        </button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+
