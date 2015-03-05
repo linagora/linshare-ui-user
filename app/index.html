@@ -35,7 +35,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Profile</a></li>
+            <li><a href="#/login">Login</a></li>
           </ul>
           <form class="navbar-form navbar-left">
             <input type="text" class="form-control" placeholder="Search...">
@@ -47,29 +47,19 @@
     <div class="container-fluid">
 
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#/">Accueil <span class="sr-only">(current)</span></a></li>
-            <li><a ng-href="#/files">Mes fichiers</a></li>
-            <li><a ng-href="#/received">Reçus</a></li>
-            <li><a ng-href="#/logout">Groupes</a></li>
-            <li><a ng-href="#/logout">Listes</a></li>
-            <li><a ng-href="#/logout">Utilisateurs</a></li>
-            <li><a ng-href="#/logout">Invitation de dépôt</a></li>
-            <li><a ng-href="#/logout">Demande invitation de dépôt</a></li>
-            <li><a ng-href="#/logout">Favoris</a></li>
-            <li><a ng-href="#/logout">Activité</a></li>
-          </ul>
+          <div ls-sidebar></div>
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <div ng-view=""></div>
+          <!--<div ng-hide="true" auth-directive></div>-->
         </div>
     </div>
 
     <div class="footer">
-      <div class="container">
+
         <p>You are using the Open Source and free version of <a href="http://www.linshare.org">LinShare™</a>, powered by <a href="http://www.linagora.com">Linagora ©</a> 2009–2015. Contribute to LinShare R&D by subscribing to an Enterprise offer.</p>
-      </div>
+
     </div>
 
 
@@ -101,6 +91,9 @@
         <script src="scripts/documents/filesController.js"></script>
         <script src="scripts/documents/receivedShare.js"></script>
         <script src="scripts/documents/receivedController.js"></script>
+        <script src="scripts/common/MenuService.js"></script>
+        <script src="scripts/common/sidebarDirective.js"></script>
+        <script src="scripts/common/authenticationDirective.js"></script>
 
         <!-- endbuild -->
 </body>

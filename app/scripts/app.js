@@ -31,7 +31,12 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          user: function(AuthenticationService){
+            return AuthenticationService.getCurrentUser();
+          }
+        }
       })
       .when('/login', {
         templateUrl: 'views/common/loginForm.html',
@@ -43,25 +48,43 @@ angular
       })
       .when('/files', {
         templateUrl: 'views/documents/files.html',
-        controller: 'FilesController'
+        controller: 'FilesController',
+        resolve: {
+          user: function(AuthenticationService) {
+            console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
+            return AuthenticationService.getCurrentUser();
+          }
+        }
       })
       .when('/received', {
         templateUrl: 'views/documents/received.html',
-        controller: 'ReceivedController'
+        controller: 'ReceivedController',
+        resolve: {
+          user: function(AuthenticationService) {
+            return AuthenticationService.getCurrentUser();
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'
       });
   })
   .run(function($rootScope, $location, AuthenticationService){
-    $rootScope.$on('$routeChangeStart', function(evt, next, current) {
-      console.log(AuthenticationService.getCurrentUser());
-      if(!AuthenticationService.getCurrentUser()){
-        if(next.templateUrl === 'login.html') {
-
-        } else {
-          $location.path('/login');
-        }
-      }
+    //$rootScope.$on('$routeChangeStart', function(evt, next, current) {
+    //  console.log(AuthenticationService.getCurrentUser());
+    //  if(!AuthenticationService.getCurrentUser()){
+    //    if(next.templateUrl === 'login.html') {
+	//
+    //    } else {
+    //      $location.path('/login');
+    //    }
+    //  }
+    //});
+    $rootScope.$on('event:auth-loginRequired', function(){
+      $location.path('/login');
+      console.log('scope $on', '$location.path()');
+    });
+    $rootScope.$on('event:auth-loginConfirmed', function(){
+      console.log('rootscope $on', 'auth confirmed');
     });
   });

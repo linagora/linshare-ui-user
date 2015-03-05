@@ -7,6 +7,3 @@ angular.module('linshareUiUserApp')
   .controller('ReceivedController', function($scope, receivedShare){
     $scope.test = receivedShare.getAllFiles();
   });
-/**
- * Created by vagrant on 3/4/15.
- */

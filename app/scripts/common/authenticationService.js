@@ -25,7 +25,7 @@ angular.module('linshareUiUserApp')
           ignoreAuthModule: true}, {
           Authorization: 'Basic ' + Base64.encode(login + ':' + password)
         }).then(function(user) {
-          $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName);
+          $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
           authService.loginConfirmed();
           deferred.resolve(user);
         }, function(error) {
@@ -46,9 +46,9 @@ angular.module('linshareUiUserApp')
           });
       },
       getCurrentUser: function() {
-        //baseAuthentication.customGET('authorized')
-        //  .then(function(user) {
-        //    deferred.resolve(user);
+        baseAuthentication.customGET('authorized');
+          //.then(function(user) {
+          //  deferred.resolve(user);
             return deferred.promise;
          //});
       }
