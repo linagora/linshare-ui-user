@@ -18,6 +18,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'restangular',
+    'ngTable',
     'http-auth-interceptor'
   ])
   .config(function(RestangularProvider) {
@@ -29,9 +30,9 @@ angular
   })
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+      .when('/home', {
+        templateUrl: 'views/home/home.html',
+        controller: 'HomeController',
         resolve: {
           user: function(AuthenticationService){
             return AuthenticationService.getCurrentUser();
@@ -42,19 +43,15 @@ angular
         templateUrl: 'views/common/loginForm.html',
         controller: 'AuthenticationController'
       })
-      .when('/logout', {
-        templateUrl: 'views/common/loginForm.html',
-        controller: 'AuthenticationController'
-      })
       .when('/files', {
         templateUrl: 'views/documents/files.html',
-        controller: 'FilesController',
-        resolve: {
-          user: function(AuthenticationService) {
-            console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
-            return AuthenticationService.getCurrentUser();
-          }
-        }
+        controller: 'FilesController'
+        //resolve: {
+        //  user: function(AuthenticationService) {
+        //    console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
+        //    return AuthenticationService.getCurrentUser();
+        //  }
+        //}
       })
       .when('/received', {
         templateUrl: 'views/documents/received.html',
@@ -65,26 +62,39 @@ angular
           }
         }
       })
+      .when('/threads', {
+        templateUrl: 'views/threads/thread.html',
+        controller: 'ThreadController'
+      })
       .otherwise({
         redirectTo: '/'
       });
   })
   .run(function($rootScope, $location, AuthenticationService){
-    //$rootScope.$on('$routeChangeStart', function(evt, next, current) {
-    //  console.log(AuthenticationService.getCurrentUser());
-    //  if(!AuthenticationService.getCurrentUser()){
-    //    if(next.templateUrl === 'login.html') {
-	//
-    //    } else {
-    //      $location.path('/login');
-    //    }
-    //  }
+    $rootScope.$on('$routeChangeStart', function(evt, next, current) {
+      var nexturl = next;
+      $rootScope.$on('event:auth-loginRequired', function(){
+        $location.path('/login');
+      });
+      $rootScope.$on('event:auth-loginConfirmed', function(){
+        console.log('NEXTMQSDJ',nexturl, evt);
+        $location.path('/' + nexturl.templateUrl);
+      });
+      //console.log(AuthenticationService.getCurrentUser());
+      //if(!AuthenticationService.getCurrentUser()){
+      //  if(next.templateUrl === 'login.html') {
+	  //
+      //  } else {
+      //    $location.path('/login');
+      //  }
+      //}
+    });
+    //$rootScope.$on('event:auth-loginRequired', function(){
+    //  $location.path('/login');
+    //  console.log('scope $on', '$location.path()');
     //});
-    $rootScope.$on('event:auth-loginRequired', function(){
-      $location.path('/login');
-      console.log('scope $on', '$location.path()');
-    });
-    $rootScope.$on('event:auth-loginConfirmed', function(){
-      console.log('rootscope $on', 'auth confirmed');
-    });
+    //$rootScope.$on('event:auth-loginConfirmed', function(evt, next, current){
+    //  console.log('rootscope $on', 'auth confirmed');
+    //  $location.path('/'+ next.templateUrl);
+    //});
   });

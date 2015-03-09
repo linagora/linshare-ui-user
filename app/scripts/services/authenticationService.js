@@ -3,7 +3,7 @@
 /* Authentication Factory */
 
 angular.module('linshareUiUserApp')
-  .factory('AuthenticationService', function(Restangular, $q, $log, $cookies, authService, Session) {
+  .factory('AuthenticationService', function(Restangular, $q, $log, $cookies, authService, Session, $location) {
     var deferred = $q.defer();
 
     var baseAuthentication = Restangular.all('authentication');
@@ -36,15 +36,18 @@ angular.module('linshareUiUserApp')
         });
       },
       logout: function() {
-        $log.debug('Authentication:changePassword');
+        $log.debug('Authentication:logout');
         baseAuthentication.one('logout').get()
           .then(function() {
+            console.log('avant',$cookies.JSESSIONID);
             delete $cookies.JSESSIONID;
+            authService.loginCancelled();
+            console.log("apres cookie delete", $cookies.JSESSIONID);
             //After being disconnected, authentication model is reloaded
             //you can use $location to redirect through home page (login page)
-            //baseAuthentication.customGET('authorized').then(function(user) {
-            //  deferred.resolve(user);
-            //});
+            baseAuthentication.customGET('authorized').then(function(user) {
+              deferred.resolve(user);
+            });
           });
       },
       getCurrentUser: function() {

@@ -1,5 +1,17 @@
+
+<div class="btn-group">
+  <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" >
+    Ajouter
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li>importer un fichier</li>
+  </ul>
+</div>
 <div>
+
   <ul class="nav nav-sidebar" ng-repeat="tab in tabs">
-    <li><a href="#{{tab.link}}">{{tab.name}}</a></li>
+    <li>
+      <a href="#{{tab.link}}"><span class="{{tab.icon}}" style="margin-right: 10px;"></span>{{tab.name}}</a>
+    </li>
   </ul>
 </div>

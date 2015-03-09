@@ -5,7 +5,7 @@ angular.module('linshareUiUserApp')
       var tabs = [
           {
             name: 'Accueil',
-            link: '/',
+            link: '/home',
             icon: 'fa fa-home'
           }, {
             name: 'Fichiers',
@@ -29,11 +29,11 @@ angular.module('linshareUiUserApp')
             icon: 'fa fa-user'
           },{
             name: 'Invitation de dépôt',
-            link: '',
+            link: 'upload_request',
             icon: 'fa fa-external-link'
           }, {
             name: 'Demande invitation de dépôt',
-            link: '',
+            link: 'upload_proposition',
             icon: 'fa fa-location-arrow'
           }, {
             name: 'Favoris',
@@ -41,7 +41,7 @@ angular.module('linshareUiUserApp')
             icon: 'fa fa-star'
           }, {
             name: 'Activity',
-            link: '',
+            link: '/activity',
             icon: 'fa fa-tachometer'
           }
         ];

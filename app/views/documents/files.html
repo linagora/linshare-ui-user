@@ -1,20 +1,24 @@
-<table class="table-responsive">
-  <tr ng-repeat="o in test">
-    <td>
-      {{o.name}}
+<div class="table-responsive">
+
+<table class="table" ng-table="tableParams">
+  <tr ng-repeat="o in $data">
+
+    <td data-title="'Nom'" class="col-md-10">
+      <span><i>
+        <input type="checkbox" name="check"/> </i>
+      </span>
+
+      <span class="glyphicon glyphicon-star-empty"></span>
+      <span class="glyphicon glyphicon-file"></span>&nbsp; &nbsp;
+      <a ng-href="/linshare/documents/{{o.uuid}}/download">{{o.name}}</a>
     </td>
-    <td>
-      {{o.size}}
+    <td data-title="'Taille du fichier'">
+      {{o.size | readableSize}}
     </td>
+    <td data-title="'Partagé'"></td>
   </tr>
 </table>
+</div>
 
-<!--<div ng-repeat="o in test">-->
-  <!--<ul>-->
-    <!--<li>-->
-      <!--{{o}}-->
-    <!--</li>-->
-  <!--</ul>-->
-<!--</div>-->
 
-{{user}}
+
