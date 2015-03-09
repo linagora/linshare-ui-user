@@ -3,7 +3,7 @@
 /* Authentication Factory */
 
 angular.module('linshareUiUserApp')
-  .factory('AuthenticationService', function(Restangular, $q, $log, $cookies, authService) {
+  .factory('AuthenticationService', function(Restangular, $q, $log, $cookies, authService, Session) {
     var deferred = $q.defer();
 
     var baseAuthentication = Restangular.all('authentication');
@@ -11,10 +11,10 @@ angular.module('linshareUiUserApp')
      Check if the user is authorized
      */
     baseAuthentication.customGET('authorized')
-      .then( function (userLoggedIn){
-        return userLoggedIn;
+      .then( function (userLoggedIn) {
+        deferred.resolve(userLoggedIn);
       }, function(error) {
-        $log.debug('authentication error', error);
+        $log.debug('current user not authenticated', error);
       });
 
     return {
@@ -27,7 +27,9 @@ angular.module('linshareUiUserApp')
         }).then(function(user) {
           $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
           authService.loginConfirmed();
+          Session.create(user.uuid, user.role);
           deferred.resolve(user);
+          console.log('resolveeee', deferred);
         }, function(error) {
           $log.error('Authentication failed', error.status);
           deferred.reject(error);
@@ -46,11 +48,7 @@ angular.module('linshareUiUserApp')
           });
       },
       getCurrentUser: function() {
-        baseAuthentication.customGET('authorized');
-          //.then(function(user) {
-          //  deferred.resolve(user);
             return deferred.promise;
-         //});
       }
     };
   });
