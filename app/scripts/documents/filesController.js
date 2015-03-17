@@ -22,6 +22,9 @@ $scope.download = function(uuid){
 
   });
 };
+    $scope.close = function(){
+      console.log('error');
+    };
     $scope.tableParams = new ngTableParams({
       page: 1,
       count: 10

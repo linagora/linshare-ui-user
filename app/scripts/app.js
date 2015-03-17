@@ -19,7 +19,8 @@ angular
     'ngTouch',
     'restangular',
     'ngTable',
-    'http-auth-interceptor'
+    'http-auth-interceptor',
+    'ui.bootstrap'
   ])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('linshare');
@@ -44,7 +45,7 @@ angular
         controller: 'AuthenticationController'
       })
       .when('/files', {
-        templateUrl: 'views/documents/files.html',
+        templateUrl: '../views/documents/list.html',
         controller: 'FilesController'
         //resolve: {
         //  user: function(AuthenticationService) {
@@ -66,20 +67,25 @@ angular
         templateUrl: 'views/threads/thread.html',
         controller: 'ThreadController'
       })
+      .when('/profile', {
+        templateUrl: 'views/common/user-profile.html',
+        controller: 'AuthenticationController'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/404.html'
       });
   })
   .run(function($rootScope, $location, AuthenticationService){
-    $rootScope.$on('$routeChangeStart', function(evt, next, current) {
-      var nexturl = next;
-      $rootScope.$on('event:auth-loginRequired', function(){
-        $location.path('/login');
-      });
-      $rootScope.$on('event:auth-loginConfirmed', function(){
-        console.log('NEXTMQSDJ',nexturl, evt);
-        $location.path('/' + nexturl.templateUrl);
-      });
+    //$rootScope.$on('$routeChangeStart', function(evt, next, current) {
+    //  var nexturl = next;
+    //  $rootScope.$on('event:auth-loginRequired', function(){
+    //    console.log('login required, next is', nexturl);
+    //    $location.path('/login');
+    //  });
+    //  $rootScope.$on('event:auth-loginConfirmed', function(){
+    //    console.log('NEXTMQSDJ',nexturl, evt);
+    //    $location.path('/' + nexturl.templateUrl);
+    //  });
       //console.log(AuthenticationService.getCurrentUser());
       //if(!AuthenticationService.getCurrentUser()){
       //  if(next.templateUrl === 'login.html') {
@@ -88,7 +94,7 @@ angular
       //    $location.path('/login');
       //  }
       //}
-    });
+    //});
     //$rootScope.$on('event:auth-loginRequired', function(){
     //  $location.path('/login');
     //  console.log('scope $on', '$location.path()');

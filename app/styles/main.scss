@@ -99,7 +99,7 @@ body {
 /* Sidebar navigation */
 
 .navbar-inverse {
-  background-color: #428bca;
+  background-color: #5680FF;
 }
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
@@ -133,6 +133,10 @@ body {
 .main .page-header {
   margin-top: 20px;
 }
+.panel {
+  color: #ffffff !important;
+  background-color: #269abc;
+}
 
 .footer {
   width:100%;
@@ -140,7 +144,7 @@ body {
   position:fixed;
   bottom:0;
   text-align: center;
-  padding: 20px 0;
+  padding: 10px 0;
   margin-top: 70px;
   border-top: 1px solid #e5e5e5;
   background-color: #f5f5f5;

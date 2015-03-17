@@ -12,7 +12,7 @@ angular.module('linshareUiUserApp')
             console.log(file);
             $scope.url = window.URL.createObjectURL(file);
             console.log('url', url);
-            $window.open(url);
+            //$window.open(url);
             //return file;
 
           });
