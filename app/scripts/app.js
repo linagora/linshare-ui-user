@@ -20,17 +20,33 @@ angular
     'restangular',
     'ngTable',
     'http-auth-interceptor',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'flow'
   ])
-  .config(function(RestangularProvider) {
+  .config(function(RestangularProvider, flowFactoryProvider) {
     RestangularProvider.setBaseUrl('linshare');
     RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json'});
     RestangularProvider.addFullRequestInterceptor(function (element, operation, route, url, headers) {
       headers['WWW-No-Authenticate'] = 'linshare';
     });
+    flowFactoryProvider.defaults = {
+      simultaneousUploads: 1,
+      //testChunks:false,
+      target: 'linshare/flow.json',
+      permanentErrors:[401, 500, 501]
+    };
   })
   .config(function ($routeProvider) {
     $routeProvider
+      .when('/', {
+        templateUrl: function() {
+          if(NotloggedIn)
+            return 'views/common/loginForm.html';
+          else {
+            return 'views/home/home.html';
+          }
+        }
+      })
       .when('/home', {
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
@@ -45,7 +61,7 @@ angular
         controller: 'AuthenticationController'
       })
       .when('/files', {
-        templateUrl: '../views/documents/list.html',
+        templateUrl: 'views/documents/list.html',
         controller: 'FilesController'
         //resolve: {
         //  user: function(AuthenticationService) {
@@ -72,16 +88,28 @@ angular
         controller: 'AuthenticationController'
       })
       .otherwise({
-        redirectTo: '/404.html'
+        redirectTo: '404.html'
       });
   })
   .run(function($rootScope, $location, AuthenticationService){
-    //$rootScope.$on('$routeChangeStart', function(evt, next, current) {
-    //  var nexturl = next;
-    //  $rootScope.$on('event:auth-loginRequired', function(){
-    //    console.log('login required, next is', nexturl);
-    //    $location.path('/login');
-    //  });
+    $rootScope.$on('$routeChangeStart', function(evt, next, current) {
+      var nexturl = next;
+      console.log('routechangestart',next);
+      if (AuthenticationService.getCurrentUser()){
+        console.log('logged boss', AuthenticationService.getCurrentUser());
+      }
+      if(next.templateUrl === 'views/common/loginForm.html'){
+        console.log('in there');
+        $rootScope.$on('event:auth-loginConfirmed', function(){
+          console.log('in event');
+          $location.path('/home');
+        })
+      }
+    });
+      //$rootScope.$on('event:auth-loginRequired', function(){
+      //  console.log('login required, next is', nexturl);
+      //  $location.path('/login');
+      //});
     //  $rootScope.$on('event:auth-loginConfirmed', function(){
     //    console.log('NEXTMQSDJ',nexturl, evt);
     //    $location.path('/' + nexturl.templateUrl);

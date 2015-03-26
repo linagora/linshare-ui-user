@@ -1,53 +1,37 @@
+<div class="row"> conteneur de bouton doptions
+</div>
+<div class="row" flow-init  flow-files-submitted="$flow.upload()" flow-drop flow-drag-enter="style={border: '4px solid green'}"
+     flow-drag-leave="style={}" ng-style="style">
 
-<div class="row">
-
-<section class="col-lg-10">
-  <div class="table-responsive">
-    <table class="table" ng-table="tableParams"  ng-show="$data.length>0">
-      <tr ng-repeat="o in $data">
-        <td data-title="'Nom'" class="col-md-10" panel-files-detail="">
+  <section class="col-lg-10" >
+    <div class="table-responsive">
+      <table class="table" ng-table="tableParams"  ng-show="$data.length>0">
+        <tr ng-repeat="o in $data">
+          <td data-title="'Nom'" class="col-md-10" panel-files-detail="">
       <span>
         <input type="checkbox" name="check" ng-model="selected"/>
       </span>
-          <span class="fa fa-star-o"></span>
-          <span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;
-          <a ng-href="/linshare/documents/{{o.uuid}}/download">{{o.name}}</a>
-        </td>
-        <td data-title="'Taille du fichier'">
-          {{o.size | readableSize}}
-        </td>
-        <td data-title="'Partagé'"></td>
-      </tr>
-    </table>
-  </div>
-</section>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;
+            <a ng-href="/linshare/documents/{{o.uuid}}/download">{{o.name}}</a>
+          </td>
+          <td data-title="'Taille du fichier'">
+            {{o.size | readableSize}}
+          </td>
+          <td data-title="'Partagé'"></td>
+        </tr>
+      </table>
+    </div>
+  </section>
 
-  <section class="col-lg-2">
+  <section class="col-lg-2"  ng-if="open">
     <div class="pull-right">
-      <i x-ng-click="close()" class="fa fa-close"></i>
-  </div>
+      <a href="" x-ng-click="close()" class="fa fa-close"></a>
+    </div>
     qsdfqsd
     qsdfsdqf
   </section>
 </div>
-
-
-
-
-
-<section class="content"
-         x-ng-controller="UserManagementCtrl">
-  <div class="row">
-    <section class="col-lg-6">
-      <div x-ls-user-list></div>
-    </section>
-    <section class="col-lg-6"
-             x-ng-if="getCurrentUser()">
-      <div x-ls-user-form></div>
-    </section>
-  </div>
-</section>
-
 
 
 

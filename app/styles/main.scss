@@ -121,15 +121,17 @@ body {
  */
 
 .main {
-  padding: 20px;
+  //padding: 20px;
   padding-top: 60px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
-@media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}
+//@media (min-width: 768px) {
+//  .main {
+//    padding-right: 0px;
+//    padding-left: 0px;
+//  }
+//}
 .main .page-header {
   margin-top: 20px;
 }
@@ -137,7 +139,9 @@ body {
   color: #ffffff !important;
   background-color: #269abc;
 }
-
+.row {
+  margin-left: 0px;
+}
 .footer {
   width:100%;
   font-size: 16px;
