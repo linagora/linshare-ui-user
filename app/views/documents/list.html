@@ -1,11 +1,14 @@
 <div class="row"> conteneur de bouton doptions
+  <button ng-if="SelectedElement.length() == 0" class="btn btn-default" role="button" ng-click="delete()">Link</button>
+  <hr />
 </div>
+  {{SelectedElement}}
 <div class="row" flow-init  flow-files-submitted="$flow.upload()" flow-drop flow-drag-enter="style={border: '4px solid green'}"
      flow-drag-leave="style={}" ng-style="style">
 
   <section class="col-lg-10" >
     <div class="table-responsive">
-      <table class="table" ng-table="tableParams"  ng-show="$data.length>0">
+      <table class="table table-hover table-condensed" ng-table="tableParams"  ng-show="$data.length>0">
         <tr ng-repeat="o in $data">
           <td data-title="'Nom'" class="col-md-10" panel-files-detail="">
       <span>

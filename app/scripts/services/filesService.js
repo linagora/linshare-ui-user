@@ -24,6 +24,9 @@ angular.module('linshareUiUserApp')
       },
       shareFiles: function(){
 
+      },
+      delete: function(uuid) {
+        return Restangular.one('documents', uuid).remove();
       }
     };
   });
