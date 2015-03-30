@@ -7,6 +7,7 @@ angular.module('linshareUiUserApp')
   .controller('ReceivedController', function($scope,  $filter, ngTableParams, receivedShare){
 
         //$scope.user = user;
+
         $scope.download = function(uuid){
           filesService.downloadFiles(uuid).then(function(file){
             console.log(file);

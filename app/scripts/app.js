@@ -79,6 +79,10 @@ angular
           }
         }
       })
+      .when('/share', {
+        templateUrl: 'views/documents/shareModal.html',
+        controller: 'ReceivedController'
+      })
       .when('/threads', {
         templateUrl: 'views/threads/thread.html',
         controller: 'ThreadController'

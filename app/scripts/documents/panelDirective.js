@@ -27,22 +27,25 @@ angular.module('linshareUiUserApp')
           if(newValue === true) {
 
             scope.SelectedElement.push(scope.o.uuid);
-            console.log('TESTE', 'scope.objects');
-            console.log('dir', element.find('span'));
+            console.log('SELECTED ELEMENT', scope.SelectedElement);
+            //console.log('dir', element.find('span'));
             if(element.parent().hasClass('panel')){
 
             } else {
+              console.log('adding class info');
               element.parent().addClass('info');
             }
           }
           if(newValue === false) {
-            console.log('remove', element.parent());
+            console.log('remove class info', element.parent());
             element.parent().removeClass('info');
             console.log('MY SZLZX', scope.SelectedElement);
-            var removed = _.remove(scope.SelectedElement, function(n){
-              return n == scope.SelectedElement;
-            });
-            console.log('remodev element',removed);
+            var index = scope.SelectedElement.indexOf(scope.o.uuid);
+            if (index >-1){
+              console.log('index', index);
+              scope.SelectedElement.splice(index, 1);
+            }
+            console.log(index);
           }
         });
         scope.$watch('open', function(n, o) {

@@ -1,0 +1,88 @@
+
+<form class="form-horizontal" name="signup_form"
+      novalidate ng-submit="signupForm()">
+  <fieldset>
+    <legend>Share </legend>
+
+    <div class="form-group">
+      <label for="shareEmail" class="col-sm-2 control-label">Recipients (email)
+      </label>
+      <div class="col-sm-6">
+        <input type="email"
+               class="form-control"
+               placeholder="Email"
+               name="ShareEmail"
+               ng-model="input.email"
+               id="shareEmail"
+               placeholder="Email"
+               required/>
+      </div>
+
+    </div>
+
+
+    <div class="form-group">
+      <label for="shareEmail" class="col-sm-2 control-label">Recipients (mailing list)
+      </label>
+      <div class="col-sm-6">
+        <input type="email"
+               class="form-control"
+               placeholder="Email"
+               name="email"
+               ng-model="share.email"
+               id="emaillanguage"
+               placeholder="Email"
+               required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="shareSubject" class="col-sm-2 control-label">Recipients (mailing list)
+      </label>
+      <div class="col-sm-6">
+        <input type="text"
+               class="form-control"
+               placeholder="Email"
+               name="email"
+               ng-model="share.email"
+               id="shareSubject"
+               placeholder="Email"
+               required/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="shareMessage" class="col-sm-2 control-label">Recipients (mailing list)
+      </label>
+      <div class="col-sm-6">
+        <input type="email"
+               class="form-control"
+               placeholder="Email"
+               name="email"
+               ng-model="share.email"
+               id="shareMessage"
+               placeholder="Email"
+               required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="shareEmail" class="col-sm-2 control-label">Droit</label>
+      <div class="col-sm-6">
+        <input type="email"
+               class="form-control"
+               placeholder="Email"
+               name="email"
+               ng-model="share.email"
+               id="droit"
+               placeholder="Email"
+               required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit"
+                class="btn btn-default">Share
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</form>

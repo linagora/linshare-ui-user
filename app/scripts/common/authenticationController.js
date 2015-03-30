@@ -26,15 +26,6 @@ angular.module('linshareUiUserApp')
   //});
 
 
-
-
-
-
-
-
-
-
-
     var modalInstance;
     $scope.$on('event:auth-loginRequired', function () {
       $log.debug('event:auth-loginRequired received');
