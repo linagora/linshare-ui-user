@@ -8,6 +8,9 @@ angular.module('linshareUiUserApp')
     return {
       getAllFiles: function(){
         return Restangular.all('receivedShares').getList();
+      },
+      shareDocuments: function(shareDocument){
+        return Restangular.all('shares').post(shareDocument);
       }
     };
   });

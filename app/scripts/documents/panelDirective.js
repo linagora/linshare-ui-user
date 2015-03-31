@@ -9,19 +9,22 @@ angular.module('linshareUiUserApp')
         console.log('link scope',scope.selected);
         console.log('scope from checkbox', scope.selected);
         //scope.selected = false;
-        //element.parent().bind('click', function() {
-        //  scope.selected = !scope.selected;
-        //  //if(scope.selected === false) {
-        //  //  element.parent().toggleClass('info');
-        //  //  //if (element.parent().hasClass('panel')){
-        //  //  //  console.log('scope open');
-        //  //  //  scope.open = true;
-        //  //  //}
-        //  //}
-        //});
-        //element.parent().bind('mouseenter mouseleave', function(){
-        //  element.parent().toggleClass('panel');
-        //});
+        element.parent().bind('click', function() {
+
+          if(scope.selected === false || scope.selected == undefined) {
+            element.parent().toggleClass('info');
+            //if (element.parent().hasClass('panel')){
+            //  console.log('scope open');
+            //  scope.open = true;
+            //}
+          }
+          else {
+            scope.selected = false;
+          }
+        });
+        element.parent().bind('mouseenter mouseleave', function(){
+          element.parent().toggleClass('panel');
+        });
 
         scope.$watch('selected', function(newValue, oldValue) {
           if(newValue === true) {
@@ -29,7 +32,7 @@ angular.module('linshareUiUserApp')
             scope.SelectedElement.push(scope.o.uuid);
             console.log('SELECTED ELEMENT', scope.SelectedElement);
             //console.log('dir', element.find('span'));
-            if(element.parent().hasClass('panel')){
+            if(element.parent().hasClass('info')){
 
             } else {
               console.log('adding class info');

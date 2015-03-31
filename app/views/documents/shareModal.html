@@ -1,6 +1,6 @@
 
-<form class="form-horizontal" name="signup_form"
-      novalidate ng-submit="signupForm()">
+<form class="form-horizontal" name="share_form"
+      novalidate ng-submit="submitShare()">
   <fieldset>
     <legend>Share </legend>
 
@@ -12,70 +12,12 @@
                class="form-control"
                placeholder="Email"
                name="ShareEmail"
-               ng-model="input.email"
+               ng-model="shareMail"
                id="shareEmail"
                placeholder="Email"
-               required/>
+               required />
       </div>
 
-    </div>
-
-
-    <div class="form-group">
-      <label for="shareEmail" class="col-sm-2 control-label">Recipients (mailing list)
-      </label>
-      <div class="col-sm-6">
-        <input type="email"
-               class="form-control"
-               placeholder="Email"
-               name="email"
-               ng-model="share.email"
-               id="emaillanguage"
-               placeholder="Email"
-               required/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="shareSubject" class="col-sm-2 control-label">Recipients (mailing list)
-      </label>
-      <div class="col-sm-6">
-        <input type="text"
-               class="form-control"
-               placeholder="Email"
-               name="email"
-               ng-model="share.email"
-               id="shareSubject"
-               placeholder="Email"
-               required/>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="shareMessage" class="col-sm-2 control-label">Recipients (mailing list)
-      </label>
-      <div class="col-sm-6">
-        <input type="email"
-               class="form-control"
-               placeholder="Email"
-               name="email"
-               ng-model="share.email"
-               id="shareMessage"
-               placeholder="Email"
-               required/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="shareEmail" class="col-sm-2 control-label">Droit</label>
-      <div class="col-sm-6">
-        <input type="email"
-               class="form-control"
-               placeholder="Email"
-               name="email"
-               ng-model="share.email"
-               id="droit"
-               placeholder="Email"
-               required/>
-      </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
@@ -85,4 +27,10 @@
       </div>
     </div>
   </fieldset>
+  {{SelectedElement}}<br />
+  {{share}}<br />
+  {{shareMail}}
 </form>
+
+
+</div>

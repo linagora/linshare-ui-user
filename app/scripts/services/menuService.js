@@ -6,43 +6,43 @@ angular.module('linshareUiUserApp')
           {
             name: 'Accueil',
             link: '/home',
-            icon: 'fa fa-home'
+            icon: 'fa fa-home fa-lg'
           }, {
             name: 'Fichiers',
             link: '/files',
-            icon: 'fa fa-folder'
+            icon: 'fa fa-folder fa-lg'
           }, {
             name: 'Reçus',
             link: '/received',
-            icon: 'fa fa-download'
+            icon: 'fa fa-download fa-lg'
           }, {
             name: 'Groupes',
             link: '/threads',
-            icon: 'fa fa-group'
+            icon: 'fa fa-group fa-lg'
           }, {
             name: 'Liste',
             link: '/lists',
-            icon: 'fa fa-list-ul'
+            icon: 'fa fa-list-ul fa-lg'
           }, {
             name: 'Utilisateurs',
             link: '/users',
-            icon: 'fa fa-user'
+            icon: 'fa fa-user fa-lg'
           },{
             name: 'Invitation de dépôt',
             link: 'upload_request',
-            icon: 'fa fa-external-link'
+            icon: 'fa fa-external-link fa-lg'
           }, {
             name: 'Demande invitation de dépôt',
             link: 'upload_proposition',
-            icon: 'fa fa-location-arrow'
+            icon: 'fa fa-location-arrow fa-lg'
           }, {
             name: 'Favoris',
             link: '/favoris',
-            icon: 'fa fa-star'
+            icon: 'fa fa-star fa-lg'
           }, {
             name: 'Activity',
             link: '/activity',
-            icon: 'fa fa-tachometer'
+            icon: 'fa fa-tachometer fa-lg'
           }
         ];
 
