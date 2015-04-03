@@ -21,7 +21,9 @@ angular
     'ngTable',
     'http-auth-interceptor',
     'ui.bootstrap',
-    'flow'
+    'flow',
+    'ui.grid',
+    'pageslide-directive'
   ])
   .config(function(RestangularProvider, flowFactoryProvider) {
     RestangularProvider.setBaseUrl('linshare');
@@ -40,9 +42,9 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: function() {
-          if(NotloggedIn)
+          if('NotloggedIn') {
             return 'views/common/loginForm.html';
-          else {
+          } else {
             return 'views/home/home.html';
           }
         }
@@ -107,7 +109,7 @@ angular
         $rootScope.$on('event:auth-loginConfirmed', function(){
           console.log('in event');
           $location.path('/home');
-        })
+        });
       }
     });
       //$rootScope.$on('event:auth-loginRequired', function(){

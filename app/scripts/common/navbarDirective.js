@@ -7,5 +7,5 @@ angular.module('linshareUiUserApp')
       replace: true,
       controller: 'AuthenticationController',
       templateUrl: 'views/common/navbar.html'
-    }
+    };
   });

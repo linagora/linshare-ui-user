@@ -1,28 +1,52 @@
-<section style="height: 800px;" flow-init  flow-files-submitted="$flow.upload()" flow-drop flow-drag-enter="style={border: '4px solid green'}"
-         flow-drag-leave="style={}" x-flow-complete="tableParams.reload()" ng-style="style">
-  <section>
-    <div class="row">
-      <a href="" title="add files"><i class="fa fa-plus-square-o fa-lg" >Add files</i></a>
-      <!--<i class="fa fa-check-square-o fa-lg"></i>-->
-      <a href="" ng-click="delete()" ngDisabled ng-if="SelectedElement.length >0 " title="Delete"><i class="fa fa-trash fa-lg">delete</i></a>&nbsp;
-      <a ng-href="url" ng-click="download()" title="Download"><i class="fa fa-download fa-lg" ng-if="SelectedElement.length >0 ">download</i></a>&nbsp;
-      <a href="" title="Share"><i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length >0" ls-share-modal="">share</i></a>
+<section style="height: 800px;"
+         flow-init
+         flow-files-submitted="$flow.upload()"
+         flow-drop
+         flow-drag-enter="style={border: '4px solid #5e89c0', display:'none'}"
+         flow-drag-leave="style={display: 'block'}"
+         flow-complete="tableParams.reload()"
+         ng-style="style">
 
-        <hr />
+  <section>
+    <input type="checkbox" value="false" ng-model="checked">
+
+    <div class="row">
+      <a href="" title="add files">
+        <i class="fa fa-plus-square-o fa-lg">Add files</i>
+      </a>
+      <!--<i class="fa fa-check-square-o fa-lg"></i>-->
+      <a href="" ng-click="delete()" ngDisabled ng-if="SelectedElement.length >0 " title="Delete">
+        <i class="fa fa-trash fa-lg">delete</i>
+      </a>&nbsp;
+      <a ng-href="url" ng-click="download()" title="Download">
+        <i class="fa fa-download fa-lg" ng-if="SelectedElement.length >0 ">download</i>
+      </a>&nbsp;
+      <a href="" title="Share">
+        <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length >0" ls-share-modal="">share</i>
+      </a>
+
+      <hr/>
     </div>
     {{SelectedElement}}
   </section>
 
-  <section>
-      <section class="col-lg-10" >
+  <section class="col-md-12">
+    <div class="row">
+      <section class="col-md-9">
         <div class="table-responsive">
-          <table class="table table-hover table-condensed" ng-table="tableParams"  ng-show="$data.length>0">
-            <tr ng-repeat="o in $data">
-              <td data-title="'Nom'" class="col-md-10" panel-files-detail>
-      <span>
-        <input type="checkbox" name="check" ng-model="selected"/>
-      </span>
-                <!--<span class="fa fa-star-o"></span>-->
+          <table class="table table-condensed" ng-table="tableParams" ng-show="$data.length>0">
+            <tr ng-repeat="o in $data"
+                panel-files-detail uuid={{o.uuid}}
+                ischecked={{o.isSelected}}
+                selected-element="SelectedElement"
+                doc-details="documentDetails">
+              <td><input type="checkbox" name="check" ng-model="o.isSelected"/></td>
+              <!--<td><span class="fa fa-file-excel-o"></span></td>-->
+              <td data-title="'Nom'" class="col-xs-12 col-md-10" uuid={{o.uuid}}>
+                <!--<span>-->
+                <!--<input type="checkbox" name="check" ng-model="selected"/>-->
+                <!--</span>-->
+                <!--&lt;!&ndash;<span class="fa fa-star-o"></span>&ndash;&gt;-->
                 <span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;
                 <a ng-href="/linshare/documents/{{o.uuid}}/download">{{o.name}}</a>
               </td>
@@ -35,12 +59,55 @@
         </div>
       </section>
 
-      <section class="col-lg-2"  ng-if="open">
+      <section class="col-md-3" style="display: block;">
         <div class="pull-right">
-          <a href="" x-ng-click="close()" class="fa fa-close"></a>
+
+          <a class="fa fa-close fa-2x" href="" x-ng-click="close()"></a>
         </div>
-        qsdfqsd
-        qsdfsdqf
+        <div>
+          <h3>{{documentDetails.detail.name}}</h3></div>
+
+        <tabset justified="true">
+          <tab heading="Detail">
+              <div>
+                   <p> <img src="data:image/png;base64,{{documenteur}}"/></p>
+
+              </div>
+
+            <div>
+              <p>Taille du fichier:{{documentDetails.detail.size}}</p>
+            </div>
+
+            <div>
+              <p>Type:{{documentDetails.detail.type}}</p>
+            </div>
+            <div>
+              <p>Créé le:{{documentDetails.detail.creationDate}}</p>
+            </div>
+            <div>
+
+              <p>Modifié le:{{documentDetails.detail.ModificationDate}}</p>
+            </div>
+            <div>
+              <p>Expire le:{{documentDetails.detail.expirationDate}}</p>
+            </div>
+
+          </tab>
+          <tab heading="Activity" active="active">
+            {{SelectedElement}}
+            {{documentDetails.detail.thumbnail}}
+            {{documenteur}}
+          </tab>
+        </tabset>
+
+        <!--class="pull-right" style="display: none;">-->
+        <!--<a href="" x-ng-click="close()" class="fa fa-close fa-lg"></a>-->
+        <!--<div  pageslide ps-open="false">-->
+        <!--<p>some random content...</p>-->
+        <!--</div>-->
+
+        <!--qsdfqsd-->
+        <!--{{checked}}-->
       </section>
     </div>
 

@@ -21,12 +21,12 @@ angular.module('linshareUiUserApp')
           console.log('url', $scope.url);
          // $window.open(url);
         //return file;
-      })
+      });
 
       });
     };
     $scope.SelectedElement = [];
-
+    $scope.allFiles = filesService.getAllFiles();
     $scope.delete = function() {
       angular.forEach($scope.SelectedElement, function(uuid){
         $log.debug('value to delete', uuid);
@@ -36,16 +36,22 @@ angular.module('linshareUiUserApp')
         });
       });
     };
-
-    $scope.close = function(){
+    $scope.documentDetails = {};
+    filesService.getThumbnail('55d3085d-2e93-4b19-a062-0974838982a5').then(function(thumbnail){
+      console.log('cont', thumbnail.replace(/\s/g, ''));
+      $scope.documenteur= btoa(thumbnail.replace(/\s/g, ''));
+      //$scope.document.detail.thumbnail = btoa(encodeURI(thumbnail));
+      //console.log('64', $scope.document.detail.thumbnail);
+    });
+    $scope.close = function() {
       console.log('error');
     };
     $scope.tableParams = new ngTableParams({
       page: 1,
       count: 20
     }, {
-      getData: function($defer, params){
-        filesService.getAllFiles().then(function(files){
+      getData: function($defer, params) {
+        $scope.allFiles.then(function(files) {
           files = params.sorting() ? $filter('orderBy')(files, params.orderBy()) : files;
           params.total(files.length);
           $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));

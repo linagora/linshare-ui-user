@@ -1,10 +1,7 @@
-
-<div class="btn-group">
-    <input type="button" value="Ajouter">
-
+<div flow-init flow-files-submitted="$flow.upload()" ng-style="style">
+  <button class="btn-add-files" flow-btn>Ajouter</button>
 </div>
 <div>
-
   <ul class="nav nav-sidebar" ng-repeat="tab in tabs">
     <li>
       <a href="#{{tab.link}}"><span class="{{tab.icon}}" style="margin-right: 10px;"></span>{{tab.name}}</a>

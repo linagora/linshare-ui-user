@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .controller('ReceivedController', function($scope,  $filter, ngTableParams, receivedShare){
+  .controller('ReceivedController', function($scope,  $filter, ngTableParams, receivedShare, filesService){
 
         //$scope.user = user;
 
@@ -12,7 +12,7 @@ angular.module('linshareUiUserApp')
           filesService.downloadFiles(uuid).then(function(file){
             console.log(file);
             $scope.url = window.URL.createObjectURL(file);
-            console.log('url', url);
+            console.log('url', 'url');
             //$window.open(url);
             //return file;
 
@@ -30,7 +30,7 @@ angular.module('linshareUiUserApp')
             });
           }
 
-        })
+        });
 
 
   });

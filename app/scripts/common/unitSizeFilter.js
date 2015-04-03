@@ -12,5 +12,5 @@ angular.module('linshareUiUserApp')
       var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
         number = Math.floor(Math.log(size) / Math.log(1024));
       return (size / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
-    }
+    };
   });

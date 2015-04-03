@@ -10,7 +10,7 @@ angular.module('linshareUiUserApp')
             backdrop: 'static',
             controller: function($scope, receivedShare){
               $scope.share = {};
-              $scope.$watch('shareMail', function(n, o){
+              $scope.$watch('shareMail', function(n){
                 console.log('new value', n);
                 $scope.share.recipients = [{uuid: '14992f22-b658-4ad0-86e8-cc39be7693db', mail:  $scope.shareMail}];
               });
@@ -26,7 +26,7 @@ angular.module('linshareUiUserApp')
           });
 
 
-        })
+        });
       }
-    }
+    };
   });

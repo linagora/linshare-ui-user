@@ -9,5 +9,5 @@ angular.module('linshareUiUserApp')
       create: function(threadDto){
         return Restangular.all('threads').post(threadDto);
       }
-    }
+    };
   });
