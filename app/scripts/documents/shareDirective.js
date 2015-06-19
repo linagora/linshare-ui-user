@@ -12,7 +12,7 @@ angular.module('linshareUiUserApp')
               $scope.share = {};
               $scope.$watch('shareMail', function(n){
                 console.log('new value', n);
-                $scope.share.recipients = [{uuid: '14992f22-b658-4ad0-86e8-cc39be7693db', mail:  $scope.shareMail}];
+                $scope.share.recipients = [{mail:  $scope.shareMail}];
               });
               $scope.share.documents = scope.SelectedElement;
               console.log('my sahre', $scope.share);
@@ -21,12 +21,22 @@ angular.module('linshareUiUserApp')
                 });
                 console.log('sharing document');
               };
+              $scope.close = function() {
+                console.log('hahaha');
+              }
             },
             templateUrl: 'views/documents/shareModal.html'
           });
 
 
         });
-      }
+      }//,
+      //controller: function($scope) {
+      //  $scope.showModal = function(_dao) {
+      //    $scope.data.dao = _dao;
+      //    $modal({title: _dao.name, content: 'body', scope: $scope, animation: 'am-fade-and-slide-top',
+      //      template: '../modules/digital-object/modal_dao.html', show: true});
+      //  };
+      //}
     };
   });

@@ -2,37 +2,55 @@
          flow-init
          flow-files-submitted="$flow.upload()"
          flow-drop
-         flow-drag-enter="style={border: '4px solid #5e89c0', display:'none'}"
-         flow-drag-leave="style={display: 'block'}"
+         flow-drag-enter="myStyle={'background-color':'#f3f3f3'}"
+         flow-drag-leave="myStyle={}"
          flow-complete="tableParams.reload()"
-         ng-style="style">
+         flow-file-success="$file.msg = $message"
+         ng-style="myStyle">
 
   <section>
-    <input type="checkbox" value="false" ng-model="checked">
-
-    <div class="row">
-      <a href="" title="add files">
-        <i class="fa fa-plus-square-o fa-lg">Add files</i>
-      </a>
-      <!--<i class="fa fa-check-square-o fa-lg"></i>-->
-      <a href="" ng-click="delete()" ngDisabled ng-if="SelectedElement.length >0 " title="Delete">
-        <i class="fa fa-trash fa-lg">delete</i>
-      </a>&nbsp;
-      <a ng-href="url" ng-click="download()" title="Download">
-        <i class="fa fa-download fa-lg" ng-if="SelectedElement.length >0 ">download</i>
-      </a>&nbsp;
-      <a href="" title="Share">
-        <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length >0" ls-share-modal="">share</i>
-      </a>
-
-      <hr/>
+    <div class="well well-sm">
+      <ul class="list-inline">
+        <li>
+          <a href="" title="add files">
+            <i class="fa fa-plus-square-o fa-lg">Add files</i>
+          </a>
+        </li>
+        <li>
+          <a href="" ng-click="delete()" ng-if="SelectedElement.length >0 " title="Delete">
+            <i class="fa fa-trash fa-lg">delete</i>
+          </a>
+        </li>
+        <li>
+          <a ng-href="url" ng-click="download()" title="Download">
+            <i class="fa fa-download fa-lg" ng-if="SelectedElement.length >0 ">download</i>
+          </a>
+        </li>
+        <li>
+          <a href="" title="Share">
+            <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length >0" ls-share-modal="">share</i>
+          </a>
+        </li>
+        <li>
+          <a href="" title="Share">
+            <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length >0" ls-share-modal="">Copy to group</i>
+          </a>
+        </li>
+        <li class="pull-right">
+        <progressbar popover-placement="bottom" popover="{{$flow}}"
+                     class="progress-striped active"
+                     max="200" value="200"><ls-upload-progressbar tanta="SelectedElement"></ls-upload-progressbar>
+          <i>166 / 200</i>
+        </progressbar>
+        </li>
+      </ul>
     </div>
-    {{SelectedElement}}
+    myselectedfiles {{SelectedElement}}{{$flow.files}}
   </section>
 
   <section class="col-md-12">
     <div class="row">
-      <section class="col-md-9">
+      <section>
         <div class="table-responsive">
           <table class="table table-condensed" ng-table="tableParams" ng-show="$data.length>0">
             <tr ng-repeat="o in $data"
@@ -42,24 +60,20 @@
                 doc-details="documentDetails">
               <td><input type="checkbox" name="check" ng-model="o.isSelected"/></td>
               <!--<td><span class="fa fa-file-excel-o"></span></td>-->
-              <td data-title="'Nom'" class="col-xs-12 col-md-10" uuid={{o.uuid}}>
-                <!--<span>-->
-                <!--<input type="checkbox" name="check" ng-model="selected"/>-->
-                <!--</span>-->
-                <!--&lt;!&ndash;<span class="fa fa-star-o"></span>&ndash;&gt;-->
+              <td data-title="'Nom'" class="col-md-9" uuid={{o.uuid}}>
                 <span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;
                 <a ng-href="/linshare/documents/{{o.uuid}}/download">{{o.name}}</a>
               </td>
-              <td data-title="'Taille du fichier'">
-                {{o.size | readableSize}}
+              <td data-title="'Taille du fichier'" class="col-md-2">
+                {{o.size | readableSize: false}}
               </td>
-              <td data-title="'Partagé'"></td>
+              <td data-title="'Partagé'" class="col-md-1"></td>
             </tr>
           </table>
         </div>
       </section>
 
-      <section class="col-md-3" style="display: block;">
+      <section class="col-md-3" style="display: none;">
         <div class="pull-right">
 
           <a class="fa fa-close fa-2x" href="" x-ng-click="close()"></a>
@@ -70,12 +84,12 @@
         <tabset justified="true">
           <tab heading="Detail">
               <div>
-                   <p> <img src="data:image/png;base64,{{documenteur}}"/></p>
+                   <p> <img src="data:image/png;base64,{{documentDetails.detail.thumbnail}}"/></p>
 
               </div>
 
             <div>
-              <p>Taille du fichier:{{documentDetails.detail.size}}</p>
+              <p>Taille du fichier:{{documentDetails.detail.size | readableSize }}</p>
             </div>
 
             <div>
@@ -91,12 +105,16 @@
             <div>
               <p>Expire le:{{documentDetails.detail.expirationDate}}</p>
             </div>
-
+            <div>
+              <p>Chiffré:{{documentDetails.detail.ciphered}}</p>
+            </div>
+            {{'HEADLINE' | translate}}
           </tab>
           <tab heading="Activity" active="active">
             {{SelectedElement}}
             {{documentDetails.detail.thumbnail}}
-            {{documenteur}}
+
+            <p> <img ng-src="{{documentDetails.detail.thumbnail}}"/></p>
           </tab>
         </tabset>
 
@@ -112,4 +130,5 @@
     </div>
 
   </section>
+<div flow-file-progress="hello">Hello</div>
 </section>

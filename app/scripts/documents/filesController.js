@@ -32,22 +32,20 @@ angular.module('linshareUiUserApp')
         $log.debug('value to delete', uuid);
         filesService.delete(uuid).then(function(){
           $scope.tableParams.reload();
+
           $scope.SelectedElement = [];
         });
       });
     };
     $scope.documentDetails = {};
-    filesService.getThumbnail('55d3085d-2e93-4b19-a062-0974838982a5').then(function(thumbnail){
-      console.log('cont', thumbnail.replace(/\s/g, ''));
-      $scope.documenteur= btoa(thumbnail.replace(/\s/g, ''));
-      //$scope.document.detail.thumbnail = btoa(encodeURI(thumbnail));
-      //console.log('64', $scope.document.detail.thumbnail);
-    });
     $scope.close = function() {
-      console.log('error');
+      document.getElementsByTagName('section')[3].style.className = 'col-md-12';
+      document.getElementsByTagName('section')[4].style.display = 'none';
+
     };
     $scope.tableParams = new ngTableParams({
       page: 1,
+      sorting: {creationDate: 'desc'},
       count: 20
     }, {
       getData: function($defer, params) {
@@ -58,6 +56,6 @@ angular.module('linshareUiUserApp')
         });
       }
 
-    })
+    });
 
   });

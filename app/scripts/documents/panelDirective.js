@@ -18,10 +18,10 @@ angular.module('linshareUiUserApp')
 
           if($scope.ischecked === 'false' || $scope.ischecked === '') {
             $log.debug('sibling', element.siblings(), 'ischecked',$scope.ischecked);
-            element.toggleClass('info').siblings().removeClass('info');
+            element.toggleClass('info');//.siblings().removeClass('info');
             if(element.hasClass('info')) {
               $scope.open = true;
-              element.parent().parent().addClass('col-md-10');
+              element.parent().parent().addClass('col-md-9');
               console.log($scope.open, 'here', $scope.uuid);
 
               filesService.getFileInfo($scope.uuid).then(function(info){
@@ -30,9 +30,7 @@ angular.module('linshareUiUserApp')
 
               });
               filesService.getThumbnail($scope.uuid).then(function(thumbnail){
-                console.log(encodeURI(thumbnail));
                 $scope.document.detail.thumbnail = thumbnail;
-                //$scope.document.detail.thumbnail = btoa(encodeURI(thumbnail));
                 console.log('64', $scope.document.detail.thumbnail);
               })
             } else {
@@ -78,10 +76,16 @@ angular.module('linshareUiUserApp')
           }
         });
         $scope.$watch('open', function(n) {
+          console.log('watch', n);
           if(n === true) {
+            document.getElementsByTagName('section')[3].className = 'col-md-9';
+            document.getElementsByTagName('section')[4].style.display = 'block';
+
             console.log('open treue');
           }
           else {
+            console.log('open falsee');
+            document.getElementsByTagName('section')[4].style.display = 'none';
             console.log('open falsee');
           }
         });
