@@ -3,34 +3,35 @@
  */
 'use strict';
 
-describe('Factory: AuthenticationService', function () {
+describe('Testing AuthenticationService Factory: ', function () {
 
   // load the controller's module
   beforeEach(module('linshareUiUserApp'));
+  //beforeEach(angular.mock.module('linshareUiUserApp'));
 
-  var MainCtrl,
-    scope;
-  var restangular, auth_Service, q, log, cookies;
-
+  var MainCtrl, scope;
+  var restangular, auth_Service, cookies, authenticationService, $httpBackend;
   // Initialize the controller and a mock scope
-  beforeEach(inject(function (_Restangular_, _authService_, _$q_, _$log_, _$cookies_) {
-    restangular = _Restangular_;
-    auth_Service = _authService_;
-    q = _$q_;
-    log = _$log_;
-    cookies = _$cookies_;
+  beforeEach(inject(function (_$httpBackend_, _AuthenticationService_) {
 
-    //scope = $rootScope.$new();
-    //MainCtrl = $controller('MainCtrl', {
-    //  $scope: scope
-    //});
+    authenticationService = _AuthenticationService_;
+    $httpBackend = _$httpBackend_;
+    $httpBackend.expectGET('linshare/authentication/authorized')
+      .respond(200, {
+        uuid: "9a9ece25-7a0e-4d75-bb55-d4070e25e1e1",
+        creationDate: 1434729746196,
+        modificationDate: 1434729746196,
+        locale: 'FRENCH'
+      });
   }));
 
-  it('should contain an Restangular, authService, $q, $log and $cookies services',
-    inject(function(Restangular, authService, $q, $log, $cookies){
+  it('should contain an Restangular, authService, $q, $log and $cookies services', function(){
+      authenticationService.getCurrentUser();
+      $httpBackend.flush();
+    });
 
-    }))
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+    authenticationService.login('bart.simpson', 'secret');
+    //expect(scope.awesomeThings.length).toBe(3);
   });
 });

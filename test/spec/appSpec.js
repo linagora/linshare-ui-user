@@ -3,37 +3,60 @@
  */
 'use strict';
 
-describe('Routes test', function() {
+describe('/Routes test/', function() {
 
   beforeEach(module('linshareUiUserApp'));
 
   var location, route, rootScope;
 
   beforeEach(
-    inject( function(_$location_, _$route_, _$rootScope_) {
-      location = _$location_;
-      route = _$route_;
-      rootScope = _$rootScope_;
+    inject( function($injector) {
+      location = $injector.get('$location');
+      route = $injector.get('$route');
+      rootScope = $injector.get('$rootScope');
     }));
 
-  describe('home page route', function() {
+  describe('/home page route/', function() {
     beforeEach(
       inject( function($httpBackend) {
-        $httpBackend.expectGET('views/main.html')
+        $httpBackend.expectGET('linshare/authentication/authorized')
           .respond(200, 'main HTML');
       })
     );
 
-    it('should load the Home page on successful load of /', function(){
-      location.path('/');
+    it('should load the Home page on successful load of /', inject(function($httpBackend){
+      $httpBackend.expectGET('views/home/home.html')
+        .respond(200, 'main HTML');
+      location.path('/home');
       rootScope.$digest();
-      expect(route.current.controller).toBe('MainCtrl')
-    });
-    it('should redirect to the index path on non-existent route', function(){
+      expect(route.current.controller).toBe('HomeController')
+    }));
+
+    it('should load login page on path call /login', inject(function ($httpBackend) {
+      $httpBackend.expectGET('views/common/loginForm.html')
+        .respond(200, 'login HTML');
+      location.path('/login');
+      rootScope.$digest();
+      expect(route.current.controller).toBe('AuthenticationController');
+      })
+    );
+
+    it('should load login page on path call /received', inject(function ($httpBackend) {
+        $httpBackend.expectGET('views/documents/received.html')
+          .respond(200, 'login HTML');
+        location.path('/received');
+        rootScope.$digest();
+        expect(route.current.controller).toBe('ReceivedController');
+      })
+    );
+
+    it('should redirect to the index path on non-existent route', inject(function($httpBackend){
+      $httpBackend.expectGET('views/home/home.html')
+        .respond(200, 'main HTML');
       location.path('/not/a/route');
       rootScope.$digest();
-      expect(route.current.controller).toBe('MainCtrl')
-    })
+      expect(route.current.controller).toBe('HomeController')
+    }))
   });
 
 });

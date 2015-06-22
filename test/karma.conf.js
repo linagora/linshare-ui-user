@@ -26,8 +26,18 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/lodash/dist/lodash.js',
       'bower_components/restangular/src/restangular.js',
+      'bower_components/ng-table/dist/ng-table.js',
+      'bower_components/angular-http-auth/src/http-auth-interceptor.js',
+      'bower_components/angular-bootstrap/ui-bootstrap.js',
+      'bower_components/flow.js/dist/flow.js',
+      'bower_components/ng-flow/dist/ng-flow.js',
+      'bower_components/angular-ui-grid/ui-grid.js',
+      'bower_components/angular-pageslide-directive/dist/angular-pageslide-directive.js',
+      'bower_components/angular-translate/angular-translate.js',
+      'bower_components/angularjs-toaster/toaster.js',
+      'bower_components/js-base64/base64.js',
       'app/scripts/*.js',
-      'app/scripts/controllers/*.js',
+      'app/scripts/**/*.js',
       'test/spec/**/*.js'
     ],
 
@@ -59,7 +69,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DISABLE,
 
 
     // enable / disable watching file and executing tests whenever any file changes

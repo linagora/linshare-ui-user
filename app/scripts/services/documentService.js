@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .factory('filesService', function(Restangular, $log){
+  .factory('documentService', function(Restangular, $log){
     var baseRestDocuments = Restangular.all('documents');
     var baseRestShares = Restangular.all('shares');
     return {

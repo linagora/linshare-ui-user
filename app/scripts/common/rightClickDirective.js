@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('linshareAdminApp')
+angular.module('linshareUiUserApp')
   .directive('rightClick', function(){
     return;
 

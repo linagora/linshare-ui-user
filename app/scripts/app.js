@@ -76,7 +76,7 @@ angular
       })
       .when('/files', {
         templateUrl: 'views/documents/list.html',
-        controller: 'FilesController'
+        controller: 'DocumentController'
         //resolve: {
         //  user: function(AuthenticationService) {
         //    console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
@@ -106,7 +106,7 @@ angular
         controller: 'AuthenticationController'
       })
       .otherwise({
-        redirectTo: '404.html'
+        redirectTo: '/home'
       });
   })
   .run(function($rootScope, $location, AuthenticationService){
