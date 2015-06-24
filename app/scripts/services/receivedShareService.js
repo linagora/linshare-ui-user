@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .factory('receivedShare', function(Restangular){
+  .factory('ReceivedShare', function(Restangular){
     return {
       getAllFiles: function(){
         return Restangular.all('receivedShares').getList();

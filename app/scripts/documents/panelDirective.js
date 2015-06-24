@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .directive('panelFilesDetail', function(filesService, $log) {
+  .directive('panelFilesDetail', function(DocumentService, $log) {
     return {
       scope: {
         uuid : '@',
@@ -24,12 +24,12 @@ angular.module('linshareUiUserApp')
               element.parent().parent().addClass('col-md-9');
               console.log($scope.open, 'here', $scope.uuid);
 
-              filesService.getFileInfo($scope.uuid).then(function(info){
+              DocumentService.getFileInfo($scope.uuid).then(function(info){
                 $scope.document.detail = info;
                 $log.debug('Document Details ', $scope.uuid, info);
 
               });
-              filesService.getThumbnail($scope.uuid).then(function(thumbnail){
+              DocumentService.getThumbnail($scope.uuid).then(function(thumbnail){
                 $scope.document.detail.thumbnail = thumbnail;
                 console.log('64', $scope.document.detail.thumbnail);
               })

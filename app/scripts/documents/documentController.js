@@ -10,11 +10,11 @@
  * Controller of the linshareUiUserApp
  */
 angular.module('linshareUiUserApp')
-  .controller('DocumentController', function($scope,  $filter, documentService, ngTableParams, $window, $log){
+  .controller('DocumentController', function($scope,  $filter, DocumentService, ngTableParams, $window, $log) {
     //$scope.user = user;
     $scope.download = function(){
       angular.forEach($scope.SelectedElement, function(uuid){
-        documentService.downloadFiles(uuid).then(function(file) {
+        DocumentService.downloadFiles(uuid).then(function(file) {
           console.log(file);
           var blob = new Blob([file], {type: 'text/plain'});
           $scope.url = window.URL.createObjectURL(blob);
@@ -26,11 +26,11 @@ angular.module('linshareUiUserApp')
       });
     };
     $scope.SelectedElement = [];
-    $scope.allFiles = documentService.getAllFiles();
+    $scope.allFiles = DocumentService.getAllFiles();
     $scope.delete = function() {
       angular.forEach($scope.SelectedElement, function(uuid){
         $log.debug('value to delete', uuid);
-        documentService.delete(uuid).then(function(){
+        DocumentService.delete(uuid).then(function(){
           $scope.tableParams.reload();
 
           $scope.SelectedElement = [];

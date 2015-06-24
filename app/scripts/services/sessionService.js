@@ -2,6 +2,7 @@
 
 angular.module('linshareUiUserApp')
   .service('Session', function() {
+
     this.create = function (userId, userRole) {
       this.userId = userId;
       this.userRole = userRole;

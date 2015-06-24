@@ -7,10 +7,10 @@ describe('Testing AuthenticationService Factory: ', function () {
 
   // load the controller's module
   beforeEach(module('linshareUiUserApp'));
-  //beforeEach(angular.mock.module('linshareUiUserApp'));
 
   var MainCtrl, scope;
-  var restangular, auth_Service, cookies, authenticationService, $httpBackend;
+  var authenticationService, $httpBackend;
+
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, _AuthenticationService_) {
 
@@ -25,13 +25,15 @@ describe('Testing AuthenticationService Factory: ', function () {
       });
   }));
 
-  it('should contain an Restangular, authService, $q, $log and $cookies services', function(){
-      authenticationService.getCurrentUser();
-      $httpBackend.flush();
-    });
+  it('should contain an Restangular, authService, $q, $log and $cookies services', function () {
+    authenticationService.getCurrentUser();
+    $httpBackend.flush();
+  });
 
   it('should attach a list of awesomeThings to the scope', function () {
+    $httpBackend.expectGET('linshare/authentication/authorized?ignoreAuthModule=true')
+      .respond(200, {});
     authenticationService.login('bart.simpson', 'secret');
-    //expect(scope.awesomeThings.length).toBe(3);
+    $httpBackend.flush();
   });
 });
