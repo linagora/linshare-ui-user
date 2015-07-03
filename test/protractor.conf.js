@@ -1,0 +1,9 @@
+
+exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+  specs: ['e2e/spec.js'],
+  frameword: 'jasmine2',
+  capabilities: {
+    browserName: 'firefox'
+    }
+};

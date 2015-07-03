@@ -34,14 +34,14 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/unit/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
@@ -130,7 +130,7 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/unit/{,*/}*.js']
       }
     },
 
@@ -418,6 +418,21 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: true
+      }
+    },
+
+    protractor: {
+      options: "node_modules/protractor/example/conf.js",
+      keepAlive: true,
+      noColor: false,
+      args: {
+        // Arguments passed to the command
+      },
+      your_target: {
+        options: {
+          configFile: "e2e.conf.js",
+          args: {}
+        }
       }
     }
   });
