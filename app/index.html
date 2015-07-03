@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Linshare User Interface</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -64,26 +64,28 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/home/main.js"></script>
-        <script src="scripts/services/sessionService.js"></script>
-        <script src="scripts/services/authenticationService.js"></script>
-        <script src="scripts/common/authenticationController.js"></script>
-        <script src="scripts/services/documentService.js"></script>
-        <script src="scripts/documents/documentController.js"></script>
-        <script src="scripts/services/receivedShareService.js"></script>
-        <script src="scripts/documents/receivedController.js"></script>
-        <script src="scripts/documents/panelDirective.js"></script>
-        <script src="scripts/services/threadService.js"></script>
-        <script src="scripts/threads/threadController.js"></script>
-        <script src="scripts/services/menuService.js"></script>
-        <script src="scripts/common/sidebarDirective.js"></script>
-        <script src="scripts/common/authenticationDirective.js"></script>
-        <script src="scripts/common/unitSizeFilter.js"></script>
-        <script src="scripts/common/navbarDirective.js"></script>
-        <script src="scripts/documents/shareDirective.js"></script>
-        <script src="scripts/common/uploadProgressbarDirective.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="modules/linshare.user/userProfile.js"></script>
+    <script src="modules/linshare.authentication/authenticationService.js"></script>
+    <script src="modules/linshare.authentication/authenticationController.js"></script>
+    <script src="modules/linshare.document/document.js"></script>
+    <script src="modules/linshare.share/share.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/route.js"></script>
+    <script src="scripts/home/main.js"></script>
+    <script src="scripts/services/sessionService.js"></script>
+    <script src="scripts/documents/sharedController.js"></script>
+    <script src="scripts/documents/receivedController.js"></script>
+    <script src="scripts/documents/panelDirective.js"></script>
+    <script src="scripts/services/threadService.js"></script>
+    <script src="scripts/threads/threadController.js"></script>
+    <script src="scripts/services/menuService.js"></script>
+    <script src="scripts/common/sidebarDirective.js"></script>
+    <script src="scripts/common/authenticationDirective.js"></script>
+    <script src="scripts/common/unitSizeFilter.js"></script>
+    <script src="scripts/common/navbarDirective.js"></script>
+    <script src="scripts/documents/shareDirective.js"></script>
+    <script src="scripts/common/uploadProgressbarDirective.js"></script>
+    <!-- endbuild -->
   </body>
 </html>

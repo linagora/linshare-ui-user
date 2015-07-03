@@ -1,6 +1,3 @@
-/**
- * Created by alpha on 6/24/15.
- */
 'use strict';
 
 describe('Unit test for menuService', function() {

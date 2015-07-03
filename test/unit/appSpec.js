@@ -1,6 +1,3 @@
-/**
- * Created by Alpha Sall on 3/3/15.
- */
 'use strict';
 
 describe('/Routes test/', function() {

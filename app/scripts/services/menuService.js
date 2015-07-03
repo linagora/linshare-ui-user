@@ -12,6 +12,10 @@ angular.module('linshareUiUserApp')
             link: '/files',
             icon: 'fa fa-folder fa-lg'
           }, {
+            name: 'Partagés',
+            link: '/shared',
+            icon: 'fa fa-download fa-lg'
+          }, {
             name: 'Reçus',
             link: '/received',
             icon: 'fa fa-download fa-lg'

@@ -36,9 +36,10 @@ module.exports = function(config) {
       'bower_components/angular-translate/angular-translate.js',
       'bower_components/angularjs-toaster/toaster.js',
       'bower_components/js-base64/base64.js',
-      'app/scripts/*.js',
-      'app/scripts/**/*.js',
-      'test/spec/**/*.js'
+      'app/scripts/{,*/}*.js',
+      'app/modules/linshare.authentication/authenticationService.js',
+      'app/modules/{,*/}*.js',
+      'test/unit/**/*.js'
     ],
 
 

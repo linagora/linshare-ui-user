@@ -8,7 +8,8 @@ angular.module('linshareUiUserApp')
         element.bind('click', function(){
           var modalInstance = $modal.open({
             backdrop: 'static',
-            controller: function($scope, receivedShare){
+            backdropClass: 'modal-backdrop',
+            controller: function($scope, LinshareShareService, $modalInstance){
               $scope.share = {};
               $scope.$watch('shareMail', function(n){
                 console.log('new value', n);
@@ -17,7 +18,8 @@ angular.module('linshareUiUserApp')
               $scope.share.documents = scope.SelectedElement;
               console.log('my sahre', $scope.share);
               $scope.submitShare = function() {
-                receivedShare.shareDocuments($scope.share).then(function(){
+                LinshareShareService.shareDocuments($scope.share).then(function(){
+                  $modalInstance.close();
                 });
                 console.log('sharing document');
               };
@@ -27,8 +29,6 @@ angular.module('linshareUiUserApp')
             },
             templateUrl: 'views/documents/shareModal.html'
           });
-
-
         });
       }//,
       //controller: function($scope) {

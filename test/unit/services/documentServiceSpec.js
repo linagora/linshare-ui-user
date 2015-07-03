@@ -55,7 +55,4 @@ describe('Unit test for DocumentService', function () {
     documentService.getThumbnail('d90a5e28-7f38-4fce-b42e-b0dcaf8e503f');
     $httpBackend.flush();
   });
-
-
-
 });

@@ -1,6 +1,3 @@
-/**
- * Created by Alpha Sall on 3/5/15.
- */
 'use strict';
 
 angular.module('linshareUiUserApp')
@@ -8,7 +5,7 @@ angular.module('linshareUiUserApp')
     return {
       replace: false,
       restrict: 'A',
-      templateUrl: 'views/common/loginForm.html',
+      templateUrl: 'modules/linshare.authentication/loginForm.html',
       controller: 'AuthenticationController'
     };
   });
