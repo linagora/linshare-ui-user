@@ -4,10 +4,11 @@
  * @ngdoc overview
  * @name linshareUiUserApp
  * @description
- * # linshareUiUserApp
  *
- * Main module of the application.
- */
+ * This is the main module of the application
+ * The app is in construction
+ *
+ **/
 angular
   .module('linshareUiUserApp', [
     'ngAnimate',
@@ -25,7 +26,7 @@ angular
     'ui.grid',
     'pageslide-directive',
     'pascalprecht.translate',
-    'toaster',
+    'angular-growl',
     'linshare.userProfile',
     'linshare.authentication',
     'linshare.document',
@@ -54,7 +55,17 @@ angular
       permanentErrors:[401, 500, 501]
     };
   })
-  .run(function($rootScope, $location, AuthenticationService) {
+  .run(function($rootScope, $location, AuthenticationService, Restangular, growl) {
+    /**
+     * Restangular Interceptor
+     * Show message box when an error occured
+     */
+    Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+      if(response.status === 503) {
+        growl.error('503 - Serveur Indisponible');
+      }
+      return true;
+    });
     $rootScope.$on('$routeChangeStart', function(evt, next, current) {
       var nexturl = next;
       console.log('routechangestart',next);
