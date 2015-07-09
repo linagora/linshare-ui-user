@@ -20,23 +20,23 @@
           </a>
         </li>
         <li>
-          <a href="" ng-click="delete()" ng-if="SelectedElement.length >0 " title="Delete">
+          <a href="" ng-click="delete()" ng-if="SelectedElement.length > 0 " title="Delete">
             <i class="fa fa-trash fa-lg">delete</i>
           </a>
         </li>
         <li>
           <a ng-href="url" ng-click="download()" title="Download">
-            <i class="fa fa-download fa-lg" ng-if="SelectedElement.length >0 ">download</i>
+            <i class="fa fa-download fa-lg" ng-if="SelectedElement.length > 0 ">download</i>
           </a>
         </li>
         <li>
           <a href="" title="Share">
-            <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length >0" ls-share-modal="">share</i>
+            <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length > 0" ls-share-modal="">share</i>
           </a>
         </li>
         <li>
           <a href="" title="Share">
-            <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length >0" ls-share-modal="">Copy to group</i>
+            <i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length > 0" ls-share-modal="">Copy to group</i>
           </a>
         </li>
         <!--<li class="pull-right">-->
@@ -48,19 +48,18 @@
         <!--</li>-->
       </ul>
     </div>
-    myselectedfiles {{SelectedElement}}{{$flow.files}}
+
   </section>
 
   <section class="col-md-12">
     <div class="row">
       <section>
         <div class="table-responsive">
-          <table class="table table-condensed" ng-table="tableParams" ng-show="$data.length>0">
+          <table class="table table-condensed" ng-table="tableParams" ng-init="SelectedElement = []">
             <tr ng-repeat="o in $data"
                 panel-files-detail uuid={{o.uuid}}
                 ischecked="isChecked"
-                selected-element="SelectedElement"
-                doc-details="documentDetails">
+                selected="SelectedElement">
               <td><input type="checkbox" name="check" ng-checked="isChecked" ng-init="isChecked = false"
                          ng-model="isChecked"/></td>
               <!--<td><span class="fa fa-file-excel-o"></span></td>-->
@@ -75,6 +74,9 @@
             </tr>
           </table>
         </div>
+        <div ng-hide="allFiles.$object.length > 0">
+         You have no files . You can drag and drop files here or click the button add files.
+        </div>
       </section>
 
       <section class="col-md-3" style="display: none;">
@@ -88,7 +90,7 @@
         <tabset justified="true">
           <tab heading="Detail">
             <div>
-              <p><img src="data:image/png;base64,{{documentDetails.detail.thumbnail}}"/></p>
+              <p><img ng-src="data:image/png;base64,{{documentDetails.detail.thumbnail}}"/></p>
 
             </div>
 
@@ -134,5 +136,6 @@
     </div>
 
   </section>
-  <div flow-file-progress="hello">Hello</div>
 </section>
+Selected Files : {{SelectedElement}}
+<!--<div flow-file-progress="hello">Hello</div>-->

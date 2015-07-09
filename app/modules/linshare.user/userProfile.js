@@ -1,9 +1,21 @@
-/**
- * Created by alpha on 6/24/15.
- */
 'use strict';
 
+/**
+ * @ngdoc overview
+ * @name linshare.userProfile
+ * @description
+ *
+ * A module in which we have one service
+ *
+ */
 angular.module('linshare.userProfile', [])
+/**
+ * @ngdoc service
+ * @name linshare.userProfile.service:LinshareUserService
+ * @description
+ *
+ * This service will help to store in a object the user information
+ */
   .service('LinshareUserService', function () {
 
     this.profile = {

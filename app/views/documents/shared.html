@@ -1,7 +1,7 @@
 <div class="table-responsive">
 
-  <table class="table" ng-table="tableParams">
-    <tr ng-repeat="o in $data">
+  <table class="table" ng-table="tableParams" ng-show="$data.length > 0">
+    <tr ng-repeat="shared in $data">
 
       <td data-title="'Nom'" class="col-md-10">
       <span><i>
@@ -10,10 +10,10 @@
 
         <span class="glyphicon glyphicon-star-empty"></span>
         <span class="glyphicon glyphicon-file"></span>&nbsp; &nbsp;
-        <a ng-href="/linshare/documents/{{o.uuid}}/download">{{o.name}}</a>
+        <a ng-href="/linshare/documents/{{shared.uuid}}/download">{{shared.name}}</a>
       </td>
       <td data-title="'Taille du fichier'">
-        {{o.size | readableSize}}
+        {{shared.size | readableSize}}
       </td>
       <td data-title="'Partagé'"></td>
     </tr>

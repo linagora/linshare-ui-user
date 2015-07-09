@@ -1,13 +1,21 @@
 'use strict';
 /**
- * @ngdoc function
- * @name linshareUiUserApp.controller:DocumentController
+ * @ngdoc overview
+ * @name linshare.document
  * @description
- * # LinshareDocumentController
- * Controller of the linshare.document module
+ *
+ * # LinshareDocumentService
+ * Service of the linshare.document module
  */
 
 angular.module('linshare.document', ['restangular'])
+/**
+ * @ngdoc service
+ * @name linshare.document.service:LinshareDocumentService
+ * @description
+ *
+ * Service dealing with documents
+ */
   .factory('LinshareDocumentService', function(Restangular, $log) {
     var baseRestDocuments = Restangular.all('documents');
     var baseRestShares = Restangular.all('shares');
@@ -39,9 +47,21 @@ angular.module('linshare.document', ['restangular'])
       autocomplete: function(pattern) {
         $log.debug('FileService:autocomplete');
         return Restangular.all('users').one('autocomplete', pattern).get();
+      },
+      updateFile: function(uuid, documentDto) {
+        $log.debug('LinshareDocumentService : updating a document');
+        return Restangular.all('documents').post('')
       }
+      //editFile,
     };
   })
+/**
+ * @ngdoc controller
+ * @name linshare.document.controller:LinshareDocumentController
+ * @description
+ *
+ * The controller to manage documents
+ */
   .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $window, $log) {
     //$scope.user = user;
     $scope.download = function() {
@@ -57,6 +77,9 @@ angular.module('linshare.document', ['restangular'])
 
       });
     };
+    $scope.editProperties = function(restangObject) {
+      restangObject.save();
+    };
     $scope.SelectedElement = [];
     $scope.allFiles = LinshareDocumentService.getAllFiles();
     $scope.delete = function() {
@@ -65,16 +88,19 @@ angular.module('linshare.document', ['restangular'])
         LinshareDocumentService.delete(uuid).then(function(){
           $scope.tableParams.reload();
 
-          $scope.SelectedElement = [];
+          //$scope.SelectedElement = [];
         });
       });
     };
     $scope.documentDetails = {};
+
+    //NEVER EVER : TO REMOVE ASAP
     $scope.close = function() {
       document.getElementsByTagName('section')[3].style.className = 'col-md-12';
       document.getElementsByTagName('section')[4].style.display = 'none';
 
     };
+
     $scope.tableParams = new ngTableParams({
       page: 1,
       sorting: {creationDate: 'desc'},

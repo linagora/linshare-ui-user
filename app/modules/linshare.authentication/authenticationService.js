@@ -1,5 +1,8 @@
 'use strict';
-
+/**
+ * @ngdoc overview
+ * @name linshare.Authentication
+ */
 angular.module('linshare.authentication', ['restangular', 'linshare.userProfile', 'http-auth-interceptor', 'ui.bootstrap'])
   .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService', 'Session', 'LinshareUserService',
     function (Restangular, $q, $log, authService, Session, LinshareUserService) {

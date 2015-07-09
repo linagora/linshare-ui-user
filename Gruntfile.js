@@ -413,6 +413,10 @@ module.exports = function (grunt) {
       ]
     },
 
+    ngdocs: {
+      all: ['app/scripts/{,*/}*.js', 'app/modules/{,*/}*.js']
+    },
+
     // Test settings
     karma: {
       unit: {
@@ -422,7 +426,7 @@ module.exports = function (grunt) {
     },
 
     protractor: {
-      options: "node_modules/protractor/example/conf.js",
+      options: "test/protractor.conf.js",
       keepAlive: true,
       noColor: false,
       args: {
