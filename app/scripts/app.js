@@ -18,12 +18,12 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'restangular',
     'ngTable',
+    'restangular',
+    'ui.router',
     'http-auth-interceptor',
     'ui.bootstrap',
     'flow',
-    'ui.grid',
     'pageslide-directive',
     'pascalprecht.translate',
     'angular-growl',
@@ -60,14 +60,13 @@ angular
      * Restangular Interceptor
      * Show message box when an error occured
      */
-    Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+    Restangular.setErrorInterceptor(function(response) {
       if(response.status === 503) {
         growl.error('503 - Serveur Indisponible');
       }
       return true;
     });
-    $rootScope.$on('$routeChangeStart', function(evt, next, current) {
-      var nexturl = next;
+    $rootScope.$on('$routeChangeStart', function(evt, next) {
       console.log('routechangestart',next);
       if (AuthenticationService.getCurrentUser()) {
         console.log('logged boss', AuthenticationService.getCurrentUser());

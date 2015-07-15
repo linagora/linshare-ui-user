@@ -7,7 +7,7 @@
  * This is the directive to show the nav header of the app
  */
 angular.module('linshareUiUserApp')
-  .directive('linshareNavHeader', function(LinshareUserService, AuthenticationService){
+  .directive('linshareNavHeader', function(){
     return {
       restrict: 'A',
       replace: true,

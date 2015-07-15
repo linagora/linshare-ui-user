@@ -18,7 +18,7 @@ angular.module('linshareUiUserApp')
             //});
           }
         ],
-        link: function(scope, element, attr) {
+        link: function(scope, element) {
           element.parent().bind('oncontextmenu', function(){
             console.info('yoyo');
           });

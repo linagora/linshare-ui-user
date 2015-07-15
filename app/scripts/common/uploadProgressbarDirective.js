@@ -9,5 +9,5 @@ angular.module('linshareUiUserApp')
       },
       template : '<div><table><tr ng-repeat="file in scope.data"><td>{{$index+1}}}}</td>' +
      '<td>{{file}}</td></tr></table></div>'
-    }
+    };
   });

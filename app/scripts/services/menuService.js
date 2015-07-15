@@ -28,8 +28,8 @@ angular.module('linshareUiUserApp')
             link: '/lists',
             icon: 'fa fa-list-ul fa-lg'
           }, {
-            name: 'Utilisateurs',
-            link: '/users',
+            name: 'Guests',
+            link: '/guests',
             icon: 'fa fa-user fa-lg'
           },{
             name: 'Invitation de dépôt',
@@ -50,7 +50,6 @@ angular.module('linshareUiUserApp')
           }
         ];
 
-      var self = this;
 
       // Public API here
       return {

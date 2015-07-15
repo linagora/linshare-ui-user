@@ -4,9 +4,9 @@ angular.module('linshareUiUserApp')
   .directive('lsShareModal', function($modal){
     return {
       scope: false,
-      link: function(scope, element, attr){
+      link: function(scope, element){
         element.bind('click', function(){
-          var modalInstance = $modal.open({
+          $modal.open({
             backdrop: 'static',
             backdropClass: 'modal-backdrop',
             controller: function($scope, LinshareShareService, $modalInstance){
@@ -25,7 +25,7 @@ angular.module('linshareUiUserApp')
               };
               $scope.close = function() {
                 console.log('hahaha');
-              }
+              };
             },
             templateUrl: 'views/documents/shareModal.html'
           });

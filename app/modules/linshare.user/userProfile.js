@@ -64,4 +64,28 @@ angular.module('linshare.userProfile', [])
     this.hasRightAccountType = function(accountType) {
       return self.profile.accountType == accountType;
     };
+
+  })
+  .factory('LinshareGuestService', function(Restangular) {
+    var baseGuestRest = Restangular.all('guests');
+    return {
+      find: function(uuid) {
+        return baseGuestRest.one(uuid).get();
+      },
+      getList: function() {
+        return baseGuestRest.getList();
+      },
+      addGuest: function(guestDto) {
+        return baseGuestRest.post(guestDto);
+      },
+      delete: function(guestDto) {
+        return baseGuestRest.remove(guestDto);
+      },
+      update: function(uuid) {
+        return baseGuestRest.put(uuid);
+      },
+      assignGroup: function(uuid) {
+        return null;
+      }
+    }
   });

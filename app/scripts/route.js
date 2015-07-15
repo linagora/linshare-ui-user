@@ -3,15 +3,15 @@
 angular.module('linshareUiUserApp')
   .config(function ($routeProvider) {
     $routeProvider
-      //.when('/', {
-      //  templateUrl: function() {
-      //    if('NotloggedIn') {
-      //      return 'views/common/loginForm.html';
-      //    } else {
-      //      return 'views/home/home.html';
-      //    }
-      //  }
-      //})
+      .when('/', {
+        templateUrl: function(LinshareUserService) {
+          if(!LinshareUserService.isLoggedIn) {
+            return 'views/common/loginForm.html';
+          } else {
+            return 'views/home/home.html';
+          }
+        }
+      })
       .when('/home', {
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
@@ -21,19 +21,19 @@ angular.module('linshareUiUserApp')
           }
         }
       })
-      //.when('/login', {
-      //  templateUrl: 'views/common/loginForm.html',
-      //  controller: 'AuthenticationController'
-      //})
+      .when('/login', {
+        templateUrl: 'views/common/loginForm.html',
+        controller: 'AuthenticationController'
+      })
       .when('/files', {
         templateUrl: 'views/documents/list.html',
-        controller: 'LinshareDocumentController'
-        //resolve: {
-        //  user: function(AuthenticationService) {
-        //    console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
-        //    return AuthenticationService.getCurrentUser();
-        //  }
-        //}
+        controller: 'LinshareDocumentController',
+        resolve: {
+          user: function(AuthenticationService) {
+            console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
+            return AuthenticationService.getCurrentUser();
+          }
+        }
       })
       .when('/received', {
         templateUrl: 'views/documents/received.html',
@@ -60,7 +60,20 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/common/user-profile.html',
         controller: 'AuthenticationController'
       })
+      .when('/guests', {
+        templateUrl: 'views/guests/guestList.html',
+        controller: 'LinshareGuestController',
+        resolve: {
+          guestList: function(LinshareGuestService) {
+            return LinshareGuestService.getList();
+          }
+        }
+      })
+      .when('/guests/:uuid', {
+        templateUrl: 'views/guests/guestDetails.html',
+        controller: 'LinshareGuestController'
+      })
       .otherwise({
         redirectTo: '/home'
       });
-  })
+  });
