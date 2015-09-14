@@ -1,0 +1,21 @@
+<div class="table-responsive">
+
+  <table class="table" ng-table="tableParams" ng-show="$data.length > 0">
+    <tr ng-repeat="shared in $data">
+
+      <td data-title="'Nom'" class="col-md-10">
+      <span><i>
+        <input type="checkbox" name="check"/> </i>
+      </span>
+
+        <span class="glyphicon glyphicon-star-empty"></span>
+        <span class="glyphicon glyphicon-file"></span>&nbsp; &nbsp;
+        <a ng-href="/linshare/documents/{{shared.uuid}}/download">{{shared.name}}</a>
+      </td>
+      <td data-title="'Taille du fichier'">
+        {{shared.size | readableSize}}
+      </td>
+      <td data-title="'Partagé'"></td>
+    </tr>
+  </table>
+</div>

@@ -5,48 +5,48 @@ angular.module('linshareUiUserApp')
       var tabs = [
           {
             name: 'Accueil',
-            link: '/home',
-            icon: 'fa fa-home fa-lg'
+            link: 'home',
+            icon: 'md md-home'
           }, {
             name: 'Fichiers',
-            link: '/files',
-            icon: 'fa fa-folder fa-lg'
+            link: 'files',
+            icon: 'md md-folder'
           }, {
             name: 'Partagés',
-            link: '/shared',
-            icon: 'fa fa-download fa-lg'
+            link: 'shared',
+            icon: 'md md-publish'
           }, {
             name: 'Reçus',
-            link: '/received',
-            icon: 'fa fa-download fa-lg'
+            link: 'received',
+            icon: 'md md-file-download'
           }, {
             name: 'Groupes',
-            link: '/threads',
-            icon: 'fa fa-group fa-lg'
+            link: 'threads',
+            icon: 'md md-group'
           }, {
             name: 'Liste',
-            link: '/lists',
-            icon: 'fa fa-list-ul fa-lg'
+            link: 'lists',
+            icon: 'md md-accounts-list-alt'
           }, {
             name: 'Guests',
-            link: '/guests',
-            icon: 'fa fa-user fa-lg'
+            link: 'guests',
+            icon: 'md md-user'
           },{
             name: 'Invitation de dépôt',
             link: 'upload_request',
-            icon: 'fa fa-external-link fa-lg'
+            icon: 'md md-external-link'
           }, {
             name: 'Demande invitation de dépôt',
             link: 'upload_proposition',
-            icon: 'fa fa-location-arrow fa-lg'
+            icon: 'md md-location-arrow'
           }, {
             name: 'Favoris',
-            link: '/favoris',
-            icon: 'fa fa-star fa-lg'
+            link: 'favoris',
+            icon: 'md md-star'
           }, {
             name: 'Activity',
-            link: '/activity',
-            icon: 'fa fa-tachometer fa-lg'
+            link: 'activity',
+            icon: 'md md-tachometer'
           }
         ];
 

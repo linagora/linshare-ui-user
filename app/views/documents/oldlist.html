@@ -1,0 +1,172 @@
+<!--<section style="height: 800px;"-->
+         <!--flow-init-->
+         <!--flow-files-submitted="$flow.upload()"-->
+         <!--flow-drop-->
+         <!--flow-drag-enter="myStyle={'background-color':'#f3f3f3'}"-->
+         <!--flow-drag-leave="myStyle={}"-->
+         <!--flow-complete="tableParams.reload()"-->
+         <!--flow-file-success="$file.msg = $message"-->
+         <!--ng-style="myStyle">-->
+
+  <!--<section>-->
+    <!--<div class="well well-sm">-->
+      <!--<ul class="list-inline">-->
+        <!--<li>-->
+          <!--<a href="" title="add files">-->
+            <!--<span>-->
+              <!--<i class="fa fa-plus-square-o fa-sm"></i>-->
+            <!--</span>-->
+            <!--Add files-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<a href="" ng-click="delete()" ng-if="SelectedElement.length > 0 " title="Delete">-->
+            <!--<i class="fa fa-trash fa-lg">delete</i>-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<a ng-href="url" ng-click="download()" title="Download">-->
+            <!--<i class="fa fa-download fa-lg" ng-if="SelectedElement.length > 0 ">download</i>-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<a href="" title="Share">-->
+            <!--<i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length > 0" ls-share-modal="">share</i>-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<a href="" title="Share">-->
+            <!--<i class="fa fa-share-alt fa-lg" ng-if="SelectedElement.length > 0" ls-share-modal="">Copy to group</i>-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--&lt;!&ndash;<li class="pull-right">&ndash;&gt;-->
+        <!--&lt;!&ndash;<progressbar popover-placement="bottom" popover="{{$flow}}"&ndash;&gt;-->
+        <!--&lt;!&ndash;class="progress-striped active"&ndash;&gt;-->
+        <!--&lt;!&ndash;max="200" value="200"><ls-upload-progressbar tanta="SelectedElement"></ls-upload-progressbar>&ndash;&gt;-->
+        <!--&lt;!&ndash;<i>166 / 200</i>&ndash;&gt;-->
+        <!--&lt;!&ndash;</progressbar>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+      <!--</ul>-->
+    <!--</div>-->
+
+  <!--</section>-->
+
+  <!--<section class="col-md-12">-->
+    <!--<div class="row">-->
+      <!--<section>-->
+        <!--<div class="table-responsive">-->
+          <!--<table class="table table-condensed" ng-table="tableParams" ng-init="SelectedElement = []">-->
+            <!--<tr ng-repeat="o in $data"-->
+                <!--panel-files-detail uuid={{o.uuid}}-->
+                <!--ischecked="isChecked"-->
+                <!--selected="SelectedElement">-->
+              <!--<td><input type="checkbox" name="check" ng-checked="isChecked" ng-init="isChecked = false"-->
+                         <!--ng-model="isChecked"/></td>-->
+              <!--&lt;!&ndash;<td><span class="fa fa-file-excel-o"></span></td>&ndash;&gt;-->
+              <!--<td data-title="'Nom'" class="col-md-9" uuid={{o.uuid}}>-->
+                <!--<span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;-->
+                <!--<a ng-href="/linshare/documents/{{o.uuid}}/download">{{o.name}}</a>-->
+              <!--</td>-->
+              <!--<td data-title="'Taille du fichier'" class="col-md-2">-->
+                <!--{{o.size | readableSize: false}}-->
+              <!--</td>-->
+              <!--<td data-title="'Partagé'" class="col-md-1"></td>-->
+            <!--</tr>-->
+          <!--</table>-->
+        <!--</div>-->
+        <!--<div ng-hide="allFiles.$object.length > 0">-->
+         <!--You have no files . You can drag and drop files here or click the button add files.-->
+        <!--</div>-->
+      <!--</section>-->
+
+      <!--<section class="col-md-3" style="display: none;">-->
+        <!--<div class="pull-right">-->
+
+          <!--<a class="fa fa-close fa-2x" href="" x-ng-click="close()"></a>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<h3>{{documentDetails.detail.name}}</h3></div>-->
+
+        <!--<tabset justified="true">-->
+          <!--<tab heading="Detail">-->
+            <!--<div>-->
+              <!--<p><img ng-src="data:image/png;base64,{{documentDetails.detail.thumbnail}}"/></p>-->
+
+            <!--</div>-->
+
+            <!--<div>-->
+              <!--<p>Taille du fichier:{{documentDetails.detail.size | readableSize }}</p>-->
+            <!--</div>-->
+
+            <!--<div>-->
+              <!--<p>Type:{{documentDetails.detail.type}}</p>-->
+            <!--</div>-->
+            <!--<div>-->
+              <!--<p>Créé le:{{documentDetails.detail.creationDate}}</p>-->
+            <!--</div>-->
+            <!--<div>-->
+
+              <!--<p>Modifié le:{{documentDetails.detail.ModificationDate}}</p>-->
+            <!--</div>-->
+            <!--<div>-->
+              <!--<p>Expire le:{{documentDetails.detail.expirationDate}}</p>-->
+            <!--</div>-->
+            <!--<div>-->
+              <!--<p>Chiffré:{{documentDetails.detail.ciphered}}</p>-->
+            <!--</div>-->
+            <!--{{'HEADLINE' | translate}}-->
+          <!--</tab>-->
+          <!--<tab heading="Activity" active="active">-->
+            <!--{{SelectedElement}}-->
+            <!--{{documentDetails.detail.thumbnail}}-->
+
+            <!--<p><img ng-src="{{documentDetails.detail.thumbnail}}"/></p>-->
+          <!--</tab>-->
+        <!--</tabset>-->
+
+        <!--&lt;!&ndash;class="pull-right" style="display: none;">&ndash;&gt;-->
+        <!--&lt;!&ndash;<a href="" x-ng-click="close()" class="fa fa-close fa-lg"></a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div  pageslide ps-open="false">&ndash;&gt;-->
+        <!--&lt;!&ndash;<p>some random content...</p>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;qsdfqsd&ndash;&gt;-->
+        <!--&lt;!&ndash;{{checked}}&ndash;&gt;-->
+      <!--</section>-->
+    <!--</div>-->
+
+  <!--</section>-->
+<!--</section>-->
+<!--Selected Files : {{SelectedElement}}-->
+<!--<div flow-file-progress="hello">Hello</div>-->
+
+
+
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Selection Example <small>Ensure that the data attribute [data-identifier="true"] is set on one column header.</small></h2>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped" ng-table="tableParams" data-bootgrid-selection>
+        <thead>
+        <tr>
+          <th data-column-id="name" data-identifier="true" data-type="numeric">Name</th>
+          <th data-column-id="size">Size</th>
+          <!--<th data-column-id="shared" data-order="desc">Shared</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="documentFile in $data">
+          {{dataList}}
+          <td>{{documentFile.name}}</td>
+          <td>{{documentFile.size}}</td>
+          <!--<td>shared</td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

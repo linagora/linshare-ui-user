@@ -1,41 +1,37 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: function(LinshareUserService) {
-          if(!LinshareUserService.isLoggedIn) {
-            return 'views/common/loginForm.html';
-          } else {
-            return 'views/home/home.html';
-          }
-        }
-      })
-      .when('/home', {
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
+
+    $stateProvider
+      .state('home', {
+        url:'/',
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
         resolve: {
-          user: function(AuthenticationService){
-            return AuthenticationService.getCurrentUser();
-          }
-        }
-      })
-      .when('/login', {
-        templateUrl: 'views/common/loginForm.html',
-        controller: 'AuthenticationController'
-      })
-      .when('/files', {
-        templateUrl: 'views/documents/list.html',
-        controller: 'LinshareDocumentController',
-        resolve: {
           user: function(AuthenticationService) {
-            console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
             return AuthenticationService.getCurrentUser();
           }
         }
       })
-      .when('/received', {
+      .state('login', {
+        url:'/login?next',
+        templateUrl: 'views/common/loginForm.html'
+      })
+      .state('files', {
+        url:'/files',
+        templateUrl: 'modules/linshare.document/views/list.html',
+        controller: 'LinshareDocumentController'
+        //resolve: {
+        //  user: function(AuthenticationService) {
+        //    console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
+        //    return AuthenticationService.getCurrentUser();
+        //  }
+        //}
+      })
+      .state('received', {
+        url:'/received',
         templateUrl: 'views/documents/received.html',
         controller: 'ReceivedController',
         resolve: {
@@ -44,23 +40,28 @@ angular.module('linshareUiUserApp')
           }
         }
       })
-      .when('/shared', {
+      .state('shared', {
+        url:'/shared',
         templateUrl: 'views/documents/shared.html',
         controller: 'SharedController'
       })
-      .when('/share', {
+      .state('share', {
+        url:'/share',
         templateUrl: 'views/documents/shareModal.html',
         controller: 'ReceivedController'
       })
-      .when('/threads', {
+      .state('threads', {
+        url:'/threads',
         templateUrl: 'views/threads/thread.html',
         controller: 'ThreadController'
       })
-      .when('/profile', {
+      .state('profile', {
+        url: '/profile',
         templateUrl: 'views/common/user-profile.html',
         controller: 'AuthenticationController'
       })
-      .when('/guests', {
+      .state('guests', {
+        url: '/guests',
         templateUrl: 'views/guests/guestList.html',
         controller: 'LinshareGuestController',
         resolve: {
@@ -69,11 +70,9 @@ angular.module('linshareUiUserApp')
           }
         }
       })
-      .when('/guests/:uuid', {
+      .state('guests.uuid', {
+        url:'/guests/:uuid',
         templateUrl: 'views/guests/guestDetails.html',
         controller: 'LinshareGuestController'
-      })
-      .otherwise({
-        redirectTo: '/home'
       });
   });

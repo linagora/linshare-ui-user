@@ -1,10 +1,17 @@
-<div flow-init flow-files-submitted="$flow.upload()" ng-style="style">
-  <button class="btn-add-files" flow-btn>Ajouter</button>
-</div>
-<div>
-  <ul class="nav nav-sidebar" ng-repeat="tab in tabs">
-    <li>
-      <a href="#{{tab.link}}"><span class="{{tab.icon}}" style="margin-right: 10px;"></span>{{tab.name}}</a>
+<!--<div flow-init flow-files-submitted="$flow.upload()" ng-style="style">-->
+  <!--<button class="btn-add-files" flow-btn>Ajouter</button>-->
+<!--</div>-->
+<!--<div>-->
+<!--<div class="sidebar-inner c-overflow">-->
+  <ul class="main-menu" ng-repeat="tab in tabs">
+    <li data-ui-sref-active="active">
+      <a data-ui-sref="{{tab.link}}" data-ng-click="mactrl.sidebarStat($event)"><i class="{{tab.icon}}"></i> {{tab.name}}</a>
     </li>
+
+
+  <!--<ul class="main-menu" >-->
+    <!--<li>-->
+      <!--<a href="#{{tab.link}}"><span class="{{tab.icon}}" style="margin-right: 10px;"></span>{{tab.name}}</a>-->
+    <!--</li>-->
   </ul>
-</div>
+<!--</div>-->

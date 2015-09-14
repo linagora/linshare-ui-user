@@ -4,8 +4,16 @@
  * @name linshare.Authentication
  */
 angular.module('linshare.authentication', ['restangular', 'linshare.userProfile', 'http-auth-interceptor', 'ui.bootstrap'])
-  .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService', 'Session', 'LinshareUserService',
-    function (Restangular, $q, $log, authService, Session, LinshareUserService) {
+  .config(function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('linshare');
+    RestangularProvider.setDefaultHttpFields({cache: false});
+    RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json;'});
+    RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers) {
+      headers['WWW-No-Authenticate'] = 'linshare';
+    });
+  })
+  .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService', 'LinshareUserService',
+    function (Restangular, $q, $log, authService, LinshareUserService) {
       var deferred = $q.defer();
 
       var baseAuthentication = Restangular.all('authentication');
@@ -19,6 +27,7 @@ angular.module('linshare.authentication', ['restangular', 'linshare.userProfile'
           deferred.resolve(userLoggedIn);
         }, function (error) {
           $log.debug('current user not authenticated', error);
+          if (error.status == 401) LinshareUserService = null;
         });
 
       return {
@@ -32,7 +41,7 @@ angular.module('linshare.authentication', ['restangular', 'linshare.userProfile'
           }).then(function (user) {
             $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
             authService.loginConfirmed();
-            Session.create(user.uuid, user.role);
+            //Session.create(user.uuid, user.role);
             LinshareUserService.fillProfile(user);
             deferred.resolve(user);
             console.log('resolveeee', deferred);

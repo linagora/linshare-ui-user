@@ -38,6 +38,7 @@ angular.module('linshare.userProfile', [])
       self.profile.role = userDto.role;
       self.profile.mail = userDto.mail;
       self.profile.accountType = userDto.accountType;
+      self.loggedIn = true;
     };
 
     this.init = function() {

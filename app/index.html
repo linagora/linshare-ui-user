@@ -1,66 +1,94 @@
 <!doctype html>
-<html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title>Linshare User Interface</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<!--[if IE 9 ]><html class="ie9" data-ng-app="linshareUiUserApp" data-ng-controller="materialadminCtrl as mactrl"><![endif]-->
+<![if IE 9 ]><html data-ng-app="linshareUiUserApp" data-ng-controller="materialadminCtrl as mactrl"><![endif]>
+ <head>
+   <meta charset="utf-8">
+   <title>Linshare User Interface</title>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/angular-growl-v2/build/angular-growl.css" />
+    <link rel="stylesheet" href="vendors/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="vendors/bower_components/ng-table/dist/ng-table.min.css" />
+    <link rel="stylesheet" href="vendors/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="vendors/bower_components/angular-growl-v2/build/angular-growl.css" />
+    <link rel="stylesheet" href="vendors/bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.css" />
+    <link rel="stylesheet" href="vendors/bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="vendors/bower_components/waves/dist/waves.min.css" />
+    <link rel="stylesheet" href="vendors/bower_components/fullcalendar/dist/fullcalendar.css" />
+    <link rel="stylesheet" href="vendors/bower_components/sweetalert/dist/sweetalert.css" />
+    <link rel="stylesheet" href="vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="modules/materialAdmin/css/app.min.1.css">
+    <link rel="stylesheet" href="modules/materialAdmin/css/app.min.2.css">
+    <link rel="stylesheet" href="modules/materialAdmin/css/demo.css">
     <link rel="stylesheet" href="styles/main.css">
+   <!--<link rel="stylesheet" href="styles/main.css">-->
     <!-- endbuild -->
   </head>
-  <body ng-app="linshareUiUserApp" flow-prevent-drop>
+  <body  data-ng-controller="UiUserMainController" data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1' }" flow-prevent-drop>
+    <data ui-view></data>
     <!-- Add your site or application content here -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div linshare-nav-header></div>
-    </nav>
-    <div class="container-fluid">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <div ls-sidebar></div>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <div ng-view=""></div>
-          <div growl></div>
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+      <!--<div linshare-nav-header></div>-->
+    <!--</nav>-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="col-sm-3 col-md-2 sidebar">-->
+          <!--<div ls-sidebar></div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
+          <!--<div ng-view=""></div>-->
+          <!--<div growl></div>-->
           <!--<div ng-hide="true" auth-directive></div>-->
-        </div>
-    </div>
-    <footer class="footer">
-        <p>Powered by <a href="http://www.linagora.com">Linagora ©</a> 2009–2015.</p>
-    </footer>
+        <!--</div>-->
+    <!--</div>-->
+    <!--<footer class="footer">-->
+        <!--<p>Powered by <a href="http://www.linagora.com">Linagora ©</a> 2009–2015.</p>-->
+    <!--</footer>-->
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/restangular/dist/restangular.js"></script>
-    <script src="bower_components/js-base64/base64.js"></script>
-    <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
-    <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/flow.js/dist/flow.js"></script>
-    <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
-    <script src="bower_components/angular-pageslide-directive/dist/angular-pageslide-directive.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.js"></script>
-    <script src="bower_components/angular-growl-v2/build/angular-growl.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendors/bower_components/jquery/dist/jquery.js"></script>
+    <script src="vendors/bower_components/angular/angular.js"></script>
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="vendors/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="vendors/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="vendors/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="vendors/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="vendors/bower_components/angular-route/angular-route.js"></script>
+    <script src="vendors/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="vendors/bower_components/angular-touch/angular-touch.js"></script>
+    <script src="vendors/bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="vendors/bower_components/restangular/dist/restangular.js"></script>
+    <script src="vendors/bower_components/js-base64/base64.js"></script>
+    <script src="vendors/bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script src="vendors/bower_components/ng-table/dist/ng-table.min.js"></script>
+    <script src="vendors/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="vendors/bower_components/flow.js/dist/flow.js"></script>
+    <script src="vendors/bower_components/ng-flow/dist/ng-flow.js"></script>
+    <script src="vendors/bower_components/angular-pageslide-directive/dist/angular-pageslide-directive.js"></script>
+    <script src="vendors/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="vendors/bower_components/angular-growl-v2/build/angular-growl.js"></script>
+    <script src="vendors/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendors/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="vendors/bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="vendors/bower_components/chosen/chosen.jquery.min.js"></script>
+    <script src="vendors/bower_components/waves/dist/waves.min.js"></script>
+    <script src="vendors/bower_components/remarkable-bootstrap-growl/bootstrap-growl.js"></script>
+    <script src="vendors/bower_components/jquery-nicescroll/jquery.nicescroll.js"></script>
+    <script src="vendors/bower_components/moment/moment.js"></script>
+    <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="vendors/bower_components/requirejs/require.js"></script>
+    <script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.js"></script>
+    <script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.js"></script>
+    <script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.js"></script>
+    <script src="vendors/bower_components/jquery-sparkline/dist/jquery.sparkline.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -70,7 +98,29 @@
     <script src="modules/linshare.authentication/authenticationController.js"></script>
     <script src="modules/linshare.document/document.js"></script>
     <script src="modules/linshare.share/share.js"></script>
+
+    <!-- App level -->
+    <script src="modules/materialAdmin/js/app.js"></script>
+    <script src="modules/materialAdmin/js/config.js"></script>
+    <script src="modules/materialAdmin/js/controllers.js"></script>
+    <script src="modules/materialAdmin/js/services.js"></script>
+    <script src="modules/materialAdmin/js/templates.js"></script>
+
+
+    <!-- Template Modules -->
+    <script src="modules/materialAdmin/js/modules/template.js"></script>
+    <script src="modules/materialAdmin/js/modules/ui.js"></script>
+    <script src="modules/materialAdmin/js/modules/charts/flot.js"></script>
+    <script src="modules/materialAdmin/js/modules/charts/other-charts.js"></script>
+    <script src="modules/materialAdmin/js/modules/form.js"></script>
+    <script src="modules/materialAdmin/js/modules/table.js"></script>
+    <script src="modules/materialAdmin/js/modules/media.js"></script>
+    <script src="modules/materialAdmin/js/modules/components.js"></script>
+    <script src="modules/materialAdmin/js/modules/calendar.js"></script>
+    <script src="modules/materialAdmin/js/modules/demo.js"></script>
+
     <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/route.js"></script>
     <script src="scripts/home/main.js"></script>
     <script src="scripts/services/sessionService.js"></script>
@@ -85,6 +135,7 @@
     <script src="scripts/common/authenticationDirective.js"></script>
     <script src="scripts/common/unitSizeFilter.js"></script>
     <script src="scripts/common/navbarDirective.js"></script>
+    <script src="scripts/common/appMainController.js"></script>
     <script src="scripts/documents/shareDirective.js"></script>
     <script src="scripts/common/uploadProgressbarDirective.js"></script>
     <!-- endbuild -->
