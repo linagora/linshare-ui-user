@@ -50,12 +50,17 @@ angular.module('linshareUiUserApp')
 
       .state('documents.received', {
         url:'/received',
-        templateUrl: 'views/documents/received.html',
+        templateUrl: 'modules/linshare.receivedShare/views/list.html',
         controller: 'ReceivedController',
         resolve: {
           user: function(AuthenticationService) {
             return AuthenticationService.getCurrentUser();
-          }
+          },
+          files: function(LinshareReceivedShareService) {
+           return LinshareReceivedShareService.getReceivedShares();
+           // .then(function(files){
+           // });
+         }
         }
       })
 

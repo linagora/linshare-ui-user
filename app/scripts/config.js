@@ -1,15 +1,26 @@
-angular.module('linshareUiUserApp')
-  .config(function(RestangularProvider, flowFactoryProvider, $translateProvider) {
-    $translateProvider.translations('en', {
-      HEADLINE: 'Hello there, This is my awesome app!',
-      INTRO_TEXT: 'And it has i18n support!'
-    })
-      .translations('de', {
-        HEADLINE: 'Hey, das ist meine großartige App!',
-        INTRO_TEXT: 'Und sie untersützt mehrere Sprachen!'
-      });
+'use strict';
 
-    $translateProvider.preferredLanguage('en');
+angular.module('linshareUiUserApp')
+  .factory('MyErrorHandler', function ($q, $log, $http, lsAppConfig) {
+    return function (part, lang) {
+      $log.error('The "' + lsAppConfig.localPath + lang + '/' + part +'.json' + '" part was not loaded.');
+      var path = 'i18n/original/' + lang + '/' + part +'.json';
+      var content = null;
+      return $q.when(
+        $http.get(path).then(function(data) {
+          return data.data;
+        })
+      );
+    };
+  })
+  .config(function(RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider, $translatePartialLoaderProvider, lsAppConfig) {
+    var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
+    $translateProvider.useLoader('$translatePartialLoader', {
+      urlTemplate: pathToLocal + '{lang}/{part}.json',
+      loadFailureHandler: 'MyErrorHandler'
+    });
+    $translatePartialLoaderProvider.addPart('general');
+    $translateProvider.preferredLanguage('fr');
     RestangularProvider.setBaseUrl('linshare');
     RestangularProvider.setDefaultHttpFields({cache: false});
     RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json;'});
@@ -22,13 +33,22 @@ angular.module('linshareUiUserApp')
       target: 'linshare/flow.json',
       permanentErrors: [401, 500, 501]
     };
+    /*
+    ** aHrefSanitizationWhitelist :
+    ** The sanitization is a security measure aimed at preventing XSS attacks via html links.
+    ** Any url about to be assigned to a[href] via data-binding is first normalized and turned into an absolute url.
+    ** If a match is found, the original url is written into the dom.
+    ** Otherwise, the absolute url is prefixed with 'unsafe:' string and only then is it written into the DOM.
+    ** More info : https://docs.angularjs.org/api/ng/provider/$compileProvider
+    */
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   })
   .config(function(localStorageServiceProvider) {
     localStorageServiceProvider
       .setPrefix('lsUser')
       .setNotify(true, true);
   })
-  .run(function($rootScope, $location, Restangular, growl) {
+  .run(function($rootScope, $location, $translate, Restangular, growl) {
     /**
      * Restangular Interceptor
      * Show message box when an error occured
@@ -64,6 +84,13 @@ angular.module('linshareUiUserApp')
     //  console.log('login required, next is', '');
     //// $location.path('/login');
     //});
+    $rootScope.$on('event:auth-loginRequired', function(){
+      console.log('login required, next is', '');
+    // $location.path('/login');
+    });
+    $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
+      $translate.refresh();
+    });
     //  $rootScope.$on('event:auth-loginConfirmed', function(){
     //    console.log('NEXTMQSDJ',nexturl, evt);
     //    $location.path('/' + nexturl.templateUrl);

@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-.controller('UiUserMainController', function($rootScope, $scope, $location, $state, $log) {
+.controller('UiUserMainController', function($rootScope, $scope, $location, $state, $log, $translatePartialLoader) {
+
+    $translatePartialLoader.addPart('general');
+    localStorage.setItem('ma-layout-status', 1);
 
     $scope.$on('event:auth-loginRequired', function(event, data) {
       console.log('my state auth-loginRequired in ze controller ', $rootScope.$state, $rootScope.$stateParams);

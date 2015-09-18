@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="vendors/bower_components/fullcalendar/dist/fullcalendar.css" />
     <link rel="stylesheet" href="vendors/bower_components/sweetalert/dist/sweetalert.css" />
     <link rel="stylesheet" href="vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.css" />
+    <link rel="stylesheet" href="vendors/bower_components/angular-mighty-datepicker/build/angular-mighty-datepicker.css" />
+    <link rel="stylesheet" href="vendors/bower_components/bootstrap-daterangepicker/daterangepicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -28,6 +30,7 @@
     <link rel="stylesheet" href="modules/materialAdmin/css/app.min.2.css">
     <link rel="stylesheet" href="modules/materialAdmin/css/demo.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/received.css">
    <!--<link rel="stylesheet" href="styles/main.css">-->
     <!-- endbuild -->
   </head>
@@ -64,6 +67,8 @@
     <script src="vendors/bower_components/ng-flow/dist/ng-flow.js"></script>
     <script src="vendors/bower_components/angular-pageslide-directive/dist/angular-pageslide-directive.js"></script>
     <script src="vendors/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="vendors/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="vendors/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="vendors/bower_components/angular-growl-v2/build/angular-growl.js"></script>
     <script src="vendors/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="vendors/bower_components/angular-loading-bar/build/loading-bar.js"></script>
@@ -81,6 +86,13 @@
     <script src="vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.js"></script>
     <script src="vendors/bower_components/jquery-sparkline/dist/jquery.sparkline.js"></script>
     <script src="vendors/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="vendors/bower_components/angular-moment/angular-moment.js"></script>
+    <script src="vendors/bower_components/angular-bindonce/bindonce.js"></script>
+    <script src="vendors/bower_components/momentjs/moment.js"></script>
+    <script src="vendors/bower_components/moment-range/lib/moment-range.js"></script>
+    <script src="vendors/bower_components/angular-mighty-datepicker/build/angular-mighty-datepicker.js"></script>
+    <script src="vendors/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="vendors/bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -91,6 +103,8 @@
     <script src="modules/linshare.document/document.js"></script>
     <script src="modules/linshare.document/directives/changeFileSelection.js"></script>
     <script src="modules/linshare.share/share.js"></script>
+    <script src="modules/linshare.receivedShare/receivedShareService.js"></script>
+    <script src="modules/linshare.receivedShare/receivedShareController.js"></script>
 
     <!-- App level -->
     <script src="modules/materialAdmin/js/app.js"></script>
@@ -113,12 +127,12 @@
     <script src="modules/materialAdmin/js/modules/demo.js"></script>
 
     <script src="scripts/app.js"></script>
+    <!-- <script src="scripts/translation.js"></script> -->
     <script src="scripts/config.js"></script>
     <script src="scripts/route.js"></script>
     <script src="scripts/home/main.js"></script>
     <script src="scripts/services/sessionService.js"></script>
     <script src="scripts/documents/sharedController.js"></script>
-    <script src="scripts/documents/receivedController.js"></script>
     <script src="scripts/documents/panelDirective.js"></script>
     <script src="scripts/services/threadService.js"></script>
     <script src="scripts/threads/threadController.js"></script>
@@ -133,6 +147,7 @@
     <script src="scripts/documents/shareDirective.js"></script>
     <script src="scripts/common/uploadProgressbarDirective.js"></script>
     <script src="scripts/common/lsFlowEnterAndLeaveStyleDirective.js"></script>
+    <script src="scripts/appConfig.js"></script>
     <!-- endbuild -->
   </body>
 </html>

@@ -7,7 +7,9 @@ angular.module('linshareUiUserApp')
       return {
         restrict: 'A',
         transclude: true,
-        scope: false,
+        scope: {
+          open: '='
+        },
         controller: ['$rootScope', '$scope', '$log', 'MenuService',
           function($rootScope, $scope, $log, MenuService) {
             //Authentication.getCurrentUser().then(function(user) {
@@ -23,7 +25,7 @@ angular.module('linshareUiUserApp')
             console.info('yoyo');
           });
           console.log('mychild' , element.children());
-          //element.parent().removeClass('sidebar');
+          // element.parent().removeClass('sidebar');
         },
         templateUrl: 'views/common/sidebar.html',
         replace: false

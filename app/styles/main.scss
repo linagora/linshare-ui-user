@@ -1,105 +1,186 @@
-//// bower:scss
-// endbower
-//
-//.browsehappy {
-//  margin: 0.2em 0;
-//  background: #ccc;
-//  color: #000;
-//  padding: 0.2em 0;
-//}
-//
-//body {
-//  padding: 0;
-//}
-//
-///* Everything but the jumbotron gets side spacing for mobile first views */
-//.header,
-//.marketing,
-//.footer {
-//  padding-left: 15px;
-//  padding-right: 15px;
-//}
-//
-///* Custom page header */
-//.header {
-//  border-bottom: 1px solid #e5e5e5;
-//  margin-bottom: 10px;
-//
-//  /* Make the masthead heading the same height as the navigation */
-//  h3 {
-//    margin-top: 0;
-//    margin-bottom: 0;
-//    line-height: 40px;
-//    padding-bottom: 19px;
-//  }
-//}
-//a {
-//  color: #606060;
+/*
+**
+** DatePicker
+**
+*/
+.mighty-picker__month-name {
+	text-align: center;
+}
+.mighty-picker-calendar__weekday {
+    padding: 5px;
+}
+.mighty-picker-calendar__day-wrapper {
+    text-align: center;
+}
+.mighty-picker__navigation-next {
+	vertical-align: top;
+	cursor: pointer;
+    font-weight: bold;
+}
+.mighty-picker__navigation-prev {
+	vertical-align: top;
+	cursor: pointer;
+    font-weight: bold;
+}
+
+/*
+** INPUT
+*/
+.input-group-addon.top {
+	vertical-align: top;
+}
+.input-group-addon.bottom {
+	vertical-align: bottom;
+}
+.input-group-addon.middle {
+	vertical-align: middle;
+}
+.form-control {
+	height: 30px;
+}
+/*
+** NG TABLE
+*/
+.table > thead > tr > th {
+    background-color: #FFF;
+    vertical-align: middle;
+    font-weight: 500;
+    color: #333;
+    border-width: 1px;
+    padding: 0px 10px;
+}
+.ng-table th.sortable .sort-indicator {
+    padding-left: 12px;
+    position: relative;
+}
+.ng-table th.sortable .sort-indicator::after, .ng-table th.sortable .sort-indicator::before {
+    content: "";
+    border-width: 0px 4px 4px;
+    border-style: solid;
+    border-color: #000 transparent;
+    visibility: visible;
+    right: inherit;
+    top: 50%;
+    position: absolute;
+    opacity: 0.3;
+    margin-top: -4px;
+    left: 5px;
+}
+.ng-table th {
+    -moz-user-select: none;
+    text-align: left;
+}
+.ng-table th.sortable .sort-indicator {
+    padding-left: 20px;
+    position: relative;
+}
+.pagination > li > a, .pagination > li > span {
+    border-radius: 50% !important;
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    z-index: 1;
+    position: relative;
+}
+.ng-table th.sortable.sort-desc, .ng-table th.sortable.sort-asc {
+    background-color: rgb(250, 250, 250);
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.75);
+}
+// .ng-table th.sortable .sort-indicator:after, .ng-table th.sortable .sort-indicator:before {
+//     content: "";
+//     border-width: 0 4px 4px;
+//     border-style: solid;
+//     border-color: #000 transparent;
+//     visibility: visible;
+//     left: 5px;
+//     right: initial;
+//     top: 50%;
+//     position: absolute;
+//     opacity: .3;
+//     margin-top: -4px;
 // }
-//
-///* Custom page footer */
-//.footer {
-//  padding-top: 19px;
-//  color: #777;
-//  border-top: 1px solid #e5e5e5;
-//}
-//
-//.container-narrow > hr {
-//  margin: 30px 0;
-//}
-//
-///* Main marketing message and sign up button */
-//.jumbotron {
-//  text-align: center;
-//  border-bottom: 1px solid #e5e5e5;
-//
-//  .btn {
-//    font-size: 21px;
-//    padding: 14px 24px;
-//  }
-//}
-//
-///* Supporting marketing content */
-//.marketing {
-//  margin: 40px 0;
-//
-//  p + h4 {
-//    margin-top: 28px;
-//  }
-//}
-//
-//
-///*
-// * Sidebar
-// */
-//
-//
-///* Hide for mobile, show later */
-//.sidebar {
-//  display: none;
-//}
-//
-//.sidebar > li > a {
-//  color: #555555;
-//
-//}
-//
-//@media (min-width: 768px) {
-//  .sidebar {
-//    position: fixed;
-//    top: 51px;
-//    bottom: 0;
-//    left: 0;
-//    z-index: 1000;
-//    display: block;
-//    padding: 20px;
-//    overflow-x: hidden;
-//    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-//    background-color: #f3f3f3;
-//    border-right: 1px solid #eee;
-//  }
-//}
-//
+// .ng-table th, .ng-table th.sortable {
+//     /* text-align: left; */
+//     -webkit-touch-callout: none;
+//     -webkit-user-select: none;
+//     -khtml-user-select: none;
+//     -moz-user-select: none;
+//     -ms-user-select: none;
+//     user-select: none;
+//     text-overflow: ellipsis;
+//     color: #000;
+//     line-height: 15px;
+//     overflow: hidden;
+//     white-space: nowrap;
+//     -webkit-user-select: none;
+//     width: 50px;
+// }
+
+/*
+** BODY ELEMENT
+*/
+body {
+	background-color: #ffffff;
+	#content {
+		padding: 0px;
+	}
+}
+html:not(.ie9) .select::before {
+    background-color: #F5F5F5;
+    background-image: url("../img/select.png");
+}
+/*
+** PERSSONNAL CLASSES
+*/
+#sidebar {
+	box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.3);
+	.sidebar-inner {
+	    background-color: #F4F4F4;
+	}
+	.main-menu > li.active > a {
+	    background-color: #e9e9e9;
+	}
+	.main-menu > li > a:hover {
+	    background-color: #F4F4F4;
+	    color: #4285F4;
+	    font-weight: bold;
+	    cursor: pointer;
+	}
+}
+.card {
+	box-shadow: none;
+	.card-header {
+		.fg-line .form-control:not(:disabled), html:not(.ie9) .select:before {
+		    color: #000;
+		    background-color: #f5f5f5;
+		}
+		background-color: #f5f5f5;
+		border-bottom: solid 1px #ddd;
+		h2 {
+			line-height: 33px;
+    		float: left;
+		}
+		.search-bar {
+			    margin-left: 60px;
+			    float: left;
+			    min-width: 50px;
+			    max-width: 58%;
+			    width: 58%;
+			.more-option {
+			    font-size: 35px;
+	    		cursor: pointer;
+			}
+		}
+	}
+}
+
+.form-control {
+	height: 30px;
+}
+
 .btn-add-files {
   color: #5e89c0;
   border-color: #5e89c0;
@@ -112,92 +193,65 @@
   margin: 10% 15% -5px 15%;
   background-color: inherit;
 }
-//
-///* Sidebar navigation */
-//
-//.navbar-inverse {
-//  background-color: #5e89c0;
-//}
-//.nav-sidebar {
-//  margin-right: -21px; /* 20px padding + 1px border */
-//  margin-left: -20px;
-//}
-//.nav-sidebar > li > a {
-//  padding-right: 20px;
-//  padding-left: 20px;
-//  font-weight: bold;
-//}
-//.nav-sidebar > .active > a,
-//.nav-sidebar > .active > a:hover,
-//.nav-sidebar > .active > a:focus {
-//  color: #428bca;
-//}
-//
-//
-///*
-// * Main content
-// */
-//
-//.main {
-//  //padding: 20px;
-//  padding-top: 60px;
-//  padding-left: 0px;
-//  padding-right: 0px;
-//  margin-bottom: 2%;
-//}
-//@media (min-width: 768px) {
-//  .main {
-//    padding-right: 0px;
-//    padding-left: 0px;
-//  }
-//}
-//.main .page-header {
-//  margin-top: 20px;
-//}
-//.fileSelected {
-//  color: #ffffff !important;
-//  background-color: #89aedb;
-//}
-//.row {
-//  margin-left: 0px;
-//}
-//.footer {
-//  width:100%;
-//  font-size: 16px;
-//  position:fixed;
-//  bottom:0;
-//  text-align: center;
-//  padding: 10px 0;
-//  margin-top: 70px;
-//  border-top: 1px solid #e5e5e5;
-//  background-color: #f5f5f5;
-//  z-index:10;
-//
-//  p {
-//    margin-bottom: 0;
-//    color: #777;
-//  }
-//}
-//
-///* Responsive: Portrait tablets and up */
-//@media screen and (min-width: 768px) {
-//  .container {
-//    max-width: 730px;
-//  }
-//
-//  /* Remove the padding we set earlier */
-//  .header,
-//  .marketing,
-//  .footer {
-//    padding-left: 0;
-//    padding-right: 0;
-//  }
-//  /* Space out the masthead */
-//  .header {
-//    margin-bottom: 30px;
-//  }
-//  /* Remove the bottom border on the jumbotron for visual effect */
-//  .jumbotron {
-//    border-bottom: 0;
-//  }
-//}
+
+/*
+** RESPONSIVE
+*/
+@media (min-width: 1200px) {
+	body.sw-toggled #content {
+		padding: 0 0 0 268px;
+	}
+	body.sw-toggled #content > .container {
+	    width: 100%;
+	}
+	#header {
+    	box-shadow: 268px 2px 4px rgba(0, 0, 0, 0.3);
+	}
+	body.sw-toggled #sidebar {
+		box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.3)
+	}
+}
+
+@media (min-width: 992px) {
+	.container {
+    	width: 100%;
+    	padding: 0px;
+    	margin: 0px;
+	}
+}
+
+@media (max-width: 991px) {
+	.container {
+    	width: 100%;
+    	padding: 0px;
+    	margin: 0px;
+	}
+	.card {
+		box-shadow: none;
+		.card-header {
+			h2 {
+				float: none;
+			}
+			.search-bar {
+				    margin-left: 0px;
+				    float: none;
+				    min-width: 50px;
+				    max-width: 100%;
+				    width: 100%;
+				    margin: 0px -10px;
+				.more-option {
+				    font-size: 35px;
+		    		cursor: pointer;
+				}
+			}
+		}
+	}
+
+}
+@media (min-width: 768px) {
+	.container {
+    	width: 100%;
+    	padding: 0px;
+    	margin: 0px;
+	}
+}

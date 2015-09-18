@@ -25,12 +25,16 @@ angular
     'ui.bootstrap',
     'flow',
     'pageslide-directive',
-    'pascalprecht.translate',
     'angular-growl',
     'linshare.userProfile',
     'linshare.authentication',
     'linshare.document',
     'linshare.share',
+    'linshare.receivedShare',
     'LocalStorageModule',
+    'ngBootstrap',
+    'mightyDatepicker',
+    'pasvaz.bindonce',
+    'pascalprecht.translate',
     'materialAdmin'
   ]);

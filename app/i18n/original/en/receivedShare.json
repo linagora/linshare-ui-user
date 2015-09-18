@@ -1,0 +1,9 @@
+{
+  "TITLE": "Received share files",
+  "TOOLTIP" : {
+    "ADVANCED_FILTER" : "Show advanced filters",
+    "REMOVE_FILES" : "Remove selected files",
+    "DOWNLOAD_FILES" : "Download selected files",
+    "SHOW_MORE_OPTIONS" : "Show more options"
+  }
+}

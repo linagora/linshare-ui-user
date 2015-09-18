@@ -6,25 +6,25 @@
             <div class="line bottom"></div>
         </div>
     </li>
-
-    <li class="logo hidden-xs">
-        <a href="index.html">Material Admin {{ layoutSS }}</a>
+    <li class="logo">
+        <a href="index.html">{{ 'APPLICATION_NAME' | translate }}</a>
     </li>
 
     <li class="pull-right">
         <ul class="top-menu">
 
-            <li id="toggle-width">
+            <!-- <li id="toggle-width">
                 <div class="toggle-switch">
+                     {{mactrl.layoutType}}
                     <input id="tw-switch" type="checkbox" hidden="hidden" data-change-layout="mactrl.layoutType">
                     <label for="tw-switch" class="ts-helper"></label>
                 </div>
-            </li>
+            </li> -->
 
             <li id="top-search">
                 <a class="tm-search" href="" data-ng-click="hctrl.openSearch()"></a>
             </li>
-            <li class="dropdown">
+            <!-- <li class="dropdown">
                 <a data-toggle="dropdown" class="tm-message" href=""><i class="tmn-counts">6</i></a>
                 <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
                     <div class="listview">
@@ -150,7 +150,7 @@
                     <a data-ng-controller="AuthenticationController" data-ng-click="logout()" href=""><i class="md md-settings"></i> Logout</a>
                   </li>
                 </ul>
-            </li>
+            </li> -->
             <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
                 <a class="tm-chat" href=""></a><i class="md md-info-outline md-3x"></i>
             </li>

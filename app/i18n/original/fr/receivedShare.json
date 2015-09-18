@@ -1,0 +1,9 @@
+{
+  "TITLE": "Fichiers partagés reçu",
+  "TOOLTIP" : {
+    "ADVANCED_FILTER" : "Voir les filtres avancés",
+    "REMOVE_FILES" : "Supprimer les fichiers séléctionnés",
+    "DOWNLOAD_FILES" : "Télécharger les fichiers séléctionnés",
+    "SHOW_MORE_OPTIONS" : "Voir plus d'options"
+  }
+}
