@@ -20,7 +20,7 @@ angular.module('linshare.document', ['restangular'])
     var baseRestDocuments = Restangular.all('documents');
     var baseRestShares = Restangular.all('shares');
     return {
-      getAllFiles: function(){
+      getAllFiles: function() {
         $log.debug('FileService:getAllFiles');
         return baseRestDocuments.getList();
       },
@@ -28,7 +28,7 @@ angular.module('linshare.document', ['restangular'])
         $log.debug('FileService:getFileInfo');
         return Restangular.one('documents', uuid).get();
       },
-      downloadFiles: function(uuid){
+      downloadFiles: function(uuid) {
         $log.debug('FileService:downloadFiles');
         return Restangular.all('documents').one(uuid, 'download').get();
       },
@@ -80,17 +80,32 @@ angular.module('linshare.document', ['restangular'])
     $scope.editProperties = function(restangObject) {
       restangObject.save();
     };
-    $scope.SelectedElement = [];
-    $scope.allFiles = LinshareDocumentService.getAllFiles();
-    $scope.delete = function() {
-      angular.forEach($scope.SelectedElement, function(uuid){
-        $log.debug('value to delete', uuid);
-        LinshareDocumentService.delete(uuid).then(function(){
-          $scope.tableParams.reload();
 
-          //$scope.SelectedElement = [];
+    $scope.allFiles = LinshareDocumentService.getAllFiles();
+
+    $scope.deleteSelected = function() {
+      swal({
+        title: "Are you sure?",
+        text: "You are about to remove " + $scope.fileSelection.length + " file(s) !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "cancel!",
+        closeOnConfirm: true,
+        closeOnCancel: true },
+        function(isConfirm) {
+          if (isConfirm) {
+            angular.forEach($scope.fileSelection, function(uuid) {
+              $log.debug('value to delete', uuid);
+              LinshareDocumentService.delete(uuid).then(function() {
+                  $scope.tableParams.reload();
+              }, function(error) {
+                $log.debug('error on deleting file with uuid = ', uuid);
+              })
+            });
+          }
         });
-      });
     };
     $scope.documentDetails = {};
 
@@ -103,7 +118,7 @@ angular.module('linshare.document', ['restangular'])
 
     $scope.tableParams = new ngTableParams({
       page: 1,
-      sorting: {creationDate: 'desc'},
+      sorting: {modificationDate: 'desc'},
       count: 20
     }, {
       getData: function($defer, params) {
@@ -115,5 +130,4 @@ angular.module('linshare.document', ['restangular'])
       }
 
     });
-
   });

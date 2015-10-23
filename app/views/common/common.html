@@ -1,0 +1,19 @@
+<header id="header" data-ng-include src="'views/includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+  <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+  <aside id="chat" data-ng-include src="'views/includes/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
+  <section id="content" class="page-view" data-ui-view
+           flow-files-submitted="$flow.upload()"
+           flow-drop
+           flow-drag-enter="myStyle={'background-color': 'blue'}"
+           flow-drag-leave="myStyle={}"
+           flow-complete="tableParams.reload()"
+           flow-file-success="$file.msg = $message"
+           ng-style="myStyle">
+  </section>
+</section>
+
+<!--<footer id="footer" data-ng-include src="'includes/footer.html'"></footer>-->

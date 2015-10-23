@@ -32,7 +32,8 @@
     <!-- endbuild -->
   </head>
   <body  data-ng-controller="UiUserMainController"
-         data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1' }">
+         data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1' }"
+         flow-init flow-prevent-drop>
     <data ui-view>
 
     </data>
@@ -88,6 +89,7 @@
     <script src="modules/linshare.authentication/authenticationService.js"></script>
     <script src="modules/linshare.authentication/authenticationController.js"></script>
     <script src="modules/linshare.document/document.js"></script>
+    <script src="modules/linshare.document/directives/changeFileSelection.js"></script>
     <script src="modules/linshare.share/share.js"></script>
 
     <!-- App level -->
@@ -130,6 +132,7 @@
     <script src="scripts/common/fileInfoDirective.js"></script>
     <script src="scripts/documents/shareDirective.js"></script>
     <script src="scripts/common/uploadProgressbarDirective.js"></script>
+    <script src="scripts/common/lsFlowEnterAndLeaveStyleDirective.js"></script>
     <!-- endbuild -->
   </body>
 </html>

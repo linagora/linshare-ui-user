@@ -15,11 +15,27 @@ angular.module('linshareUiUserApp')
           }
         }
       })
+
+      //------------------------------
+      // LOGIN
+      //------------------------------
+
       .state('login', {
         url:'/login?next',
         templateUrl: 'views/common/loginForm.html'
       })
-      .state('files', {
+
+
+      //------------------------------
+      // RECEIVED DOCUMENT
+      //------------------------------
+
+      .state('documents', {
+        url: '',
+        templateUrl: 'views/common/common.html'
+      })
+
+      .state('documents.files', {
         url:'/files',
         templateUrl: 'modules/linshare.document/views/list.html',
         controller: 'LinshareDocumentController'
@@ -30,7 +46,9 @@ angular.module('linshareUiUserApp')
         //  }
         //}
       })
-      .state('received', {
+
+
+      .state('documents.received', {
         url:'/received',
         templateUrl: 'views/documents/received.html',
         controller: 'ReceivedController',
@@ -40,27 +58,30 @@ angular.module('linshareUiUserApp')
           }
         }
       })
-      .state('shared', {
+
+      .state('documents.shared', {
         url:'/shared',
         templateUrl: 'views/documents/shared.html',
         controller: 'SharedController'
       })
-      .state('share', {
+
+      .state('documents.share', {
         url:'/share',
         templateUrl: 'views/documents/shareModal.html',
         controller: 'ReceivedController'
       })
-      .state('threads', {
+
+      .state('documents.threads', {
         url:'/threads',
         templateUrl: 'views/threads/thread.html',
         controller: 'ThreadController'
       })
-      .state('profile', {
+      .state('documents.profile', {
         url: '/profile',
         templateUrl: 'views/common/user-profile.html',
         controller: 'AuthenticationController'
       })
-      .state('guests', {
+      .state('documents.guests', {
         url: '/guests',
         templateUrl: 'views/guests/guestList.html',
         controller: 'LinshareGuestController',
@@ -70,7 +91,7 @@ angular.module('linshareUiUserApp')
           }
         }
       })
-      .state('guests.uuid', {
+      .state('documents.guests.uuid', {
         url:'/guests/:uuid',
         templateUrl: 'views/guests/guestDetails.html',
         controller: 'LinshareGuestController'
