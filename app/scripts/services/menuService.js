@@ -9,19 +9,19 @@ angular.module('linshareUiUserApp')
             icon: 'md md-home'
           }, {
             name: 'Fichiers',
-            link: 'files',
+            link: 'documents.files',
             icon: 'md md-folder'
           }, {
             name: 'Partagés',
-            link: 'shared',
+            link: 'documents.shared',
             icon: 'md md-publish'
           }, {
             name: 'Reçus',
-            link: 'received',
+            link: 'documents.received',
             icon: 'md md-file-download'
           }, {
             name: 'Groupes',
-            link: 'threads',
+            link: 'documents.threads',
             icon: 'md md-group'
           }, {
             name: 'Liste',
@@ -29,7 +29,7 @@ angular.module('linshareUiUserApp')
             icon: 'md md-accounts-list-alt'
           }, {
             name: 'Guests',
-            link: 'guests',
+            link: 'documents.guests',
             icon: 'md md-user'
           },{
             name: 'Invitation de dépôt',
