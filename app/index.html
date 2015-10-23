@@ -31,22 +31,12 @@
    <!--<link rel="stylesheet" href="styles/main.css">-->
     <!-- endbuild -->
   </head>
-  <body  data-ng-controller="UiUserMainController" data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1' }" flow-prevent-drop>
-    <data ui-view></data>
-    <!-- Add your site or application content here -->
-    <!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
-      <!--<div linshare-nav-header></div>-->
-    <!--</nav>-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="col-sm-3 col-md-2 sidebar">-->
-          <!--<div ls-sidebar></div>-->
-        <!--</div>-->
-        <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
-          <!--<div ng-view=""></div>-->
-          <!--<div growl></div>-->
-          <!--<div ng-hide="true" auth-directive></div>-->
-        <!--</div>-->
-    <!--</div>-->
+  <body  data-ng-controller="UiUserMainController"
+         data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1' }">
+    <data ui-view>
+
+    </data>
+
     <!--<footer class="footer">-->
         <!--<p>Powered by <a href="http://www.linagora.com">Linagora ©</a> 2009–2015.</p>-->
     <!--</footer>-->
@@ -89,6 +79,7 @@
     <script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
     <script src="vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.js"></script>
     <script src="vendors/bower_components/jquery-sparkline/dist/jquery.sparkline.js"></script>
+    <script src="vendors/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -136,6 +127,7 @@
     <script src="scripts/common/unitSizeFilter.js"></script>
     <script src="scripts/common/navbarDirective.js"></script>
     <script src="scripts/common/appMainController.js"></script>
+    <script src="scripts/common/fileInfoDirective.js"></script>
     <script src="scripts/documents/shareDirective.js"></script>
     <script src="scripts/common/uploadProgressbarDirective.js"></script>
     <!-- endbuild -->

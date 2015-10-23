@@ -23,6 +23,11 @@ angular.module('linshareUiUserApp')
       permanentErrors: [401, 500, 501]
     };
   })
+  .config(function(localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('lsUser')
+      .setNotify(true, true);
+  })
   .run(function($rootScope, $location, Restangular, growl) {
     /**
      * Restangular Interceptor

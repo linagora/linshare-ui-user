@@ -31,5 +31,6 @@ angular
     'linshare.authentication',
     'linshare.document',
     'linshare.share',
+    'LocalStorageModule',
     'materialAdmin'
   ]);

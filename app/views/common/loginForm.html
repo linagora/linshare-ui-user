@@ -1,56 +1,29 @@
-<form data-ng-controller="AuthenticationController" class="form-horizontal" name="login_form"
-      novalidate ng-submit="signupForm2()">
-  <fieldset>
-    <legend class="modal-header">
-      Connexion
-    </legend>
-    <div class="modal-body">
-      <div class="form-group">
-        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-        <div class="col-sm-8">
-          <input type="email"
-                 class="form-control"
-                 placeholder="Email"
-                 name="email"
-                 ng-model="input.email"
-                 id="inputEmail"
-                 required/>
-        </div>
-
-      </div>
-      <div class="form-group">
-        <label for="inputPassword"
-               class="col-sm-2 control-label">Password
-        </label>
-
-        <div class="col-sm-8">
-          <input type="password"
-                 class="form-control"
-                 id="inputPassword"
-                 placeholder="Password"
-                 ng-model="input.password"
-                 name="password"/>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Remember me
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit"
-                  class="btn btn-primary">Connexion
-          </button>
-        </div>
-      </div>
+<!-- Login -->
+<div data-ng-controller="AuthenticationController" ls-login-form-display class="lc-block toggled" id="l-login">
+  <div class="input-group m-b-20">
+    <span class="input-group-addon"><i class="md md-person"></i></span>
+    <div class="fg-line">
+      <input type="email" class="form-control" placeholder="Email" ng-model="input.email">
     </div>
-  </fieldset>
-</form>
+  </div>
+
+  <div class="input-group m-b-20">
+    <span class="input-group-addon"><i class="md md-accessibility"></i></span>
+    <div class="fg-line">
+      <input type="password" class="form-control" placeholder="Password" ng-model="input.password">
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      <i class="input-helper"></i>
+      Keep me signed in
+    </label>
+  </div>
+
+  <a href="" class="btn btn-login btn-danger btn-float" data-ng-click="signupForm2()"><i class="md md-arrow-forward"></i></a>
+
+</div>

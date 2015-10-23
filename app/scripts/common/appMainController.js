@@ -12,8 +12,7 @@ angular.module('linshareUiUserApp')
     $scope.$on('event:auth-loginConfirmed', function () {
       $log.debug('event:auth-loginConfirmed received');
       $log.debug('my URLloginafter', $scope.urlTogoAfterLogin);
-      $log.debug('////////**************///////', $rootScope.$stateParams);
-      if ($scope.urlTogoAfterLogin != undefined || $scope.urlTogoAfterLogin != ' ') {
+      if ($scope.urlTogoAfterLogin != undefined && $scope.urlTogoAfterLogin != ' ' && $scope.urlTogoAfterLogin != 'login') {
         $state.go($scope.urlTogoAfterLogin);
       }
       else {
