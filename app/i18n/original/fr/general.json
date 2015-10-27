@@ -1,5 +1,17 @@
 {
   "APPLICATION_NAME": "Linshare",
   "REMOVE": "Supprimer",
-  "DOWNLOAD": "Télécharger"
+  "DOWNLOAD": "Télécharger",
+  "EXTENSIONS" : {
+    "PDF" : "PDF",
+    "IMAGE" : "Image",
+    "AUDIO" : "Audio",
+    "VIDEO" : "Vidéo",
+    "POWERPONT" : "Powerpont",
+    "WORD" : "Word",
+    "ARCHIVE" : "Archive",
+    "EXCEL" : "Excel",
+    "TEXT" : "Texte",
+    "CODE" : "Code"
+  }
 }

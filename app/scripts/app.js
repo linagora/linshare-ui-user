@@ -32,7 +32,6 @@ angular
     'linshare.share',
     'linshare.receivedShare',
     'LocalStorageModule',
-    'ngBootstrap',
     'mightyDatepicker',
     'pasvaz.bindonce',
     'pascalprecht.translate',

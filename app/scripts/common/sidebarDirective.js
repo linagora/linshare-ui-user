@@ -7,9 +7,7 @@ angular.module('linshareUiUserApp')
       return {
         restrict: 'A',
         transclude: true,
-        scope: {
-          open: '='
-        },
+        scope: false,
         controller: ['$rootScope', '$scope', '$log', 'MenuService',
           function($rootScope, $scope, $log, MenuService) {
             //Authentication.getCurrentUser().then(function(user) {

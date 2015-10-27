@@ -26,16 +26,16 @@ angular.module('linshare.receivedShare')
     var setExtensions = function(list) {
       var data = [];
       var type = [
-        {regex: /pdf/, image: 'fa-file-pdf-o', info: 'pdf'},
-        {regex: /image/, image: 'fa-file-image-o', info: 'Image'},
-        {regex: /audio/, image: 'fa-file-audio-o', info: 'Audio'},
-        {regex: /video/, image: 'fa-file-video-o', info: 'Video'},
-        {regex: /powerpoint/, image: 'fa-file-powerpoint-o', info: 'Powerpoint'},
-        {regex: /word/, image: 'fa-file-word-o', info: 'Word'},
-        {regex: /zip|tar|compressed/, image: 'fa-file-archive-o', info: 'Zip'},
-        {regex: /excel/, image: 'fa-file-excel-o', info: 'Excel'},
-        {regex: /text\/plain/, image: 'fa-file-text-o', info: 'Text'},
-        {regex: /text/, image: 'fa-file-code-o', info: 'Code'}
+        {regex: /pdf/, image: 'fa-file-pdf-o', info: 'PDF'},
+        {regex: /image/, image: 'fa-file-image-o', info: 'IMAGE'},
+        {regex: /audio/, image: 'fa-file-audio-o', info: 'AUDIO'},
+        {regex: /video/, image: 'fa-file-video-o', info: 'VIDEO'},
+        {regex: /powerpoint/, image: 'fa-file-powerpoint-o', info: 'POWERPOINT'},
+        {regex: /word/, image: 'fa-file-word-o', info: 'WORD'},
+        {regex: /zip|tar|compressed/, image: 'fa-file-archive-o', info: 'ARCHIVE'},
+        {regex: /excel/, image: 'fa-file-excel-o', info: 'EXCEL'},
+        {regex: /text\/plain/, image: 'fa-file-text-o', info: 'TEXT'},
+        {regex: /text/, image: 'fa-file-code-o', info: 'CODE'}
       ];
       angular.forEach(list, function(value, key) {
         type.forEach( function (regex)
@@ -48,7 +48,7 @@ angular.module('linshare.receivedShare')
         });
         if (!value.typeImage) {
           value.typeImage = 'fa-file-text-o';
-            value.info = 'Text';
+            value.info = 'TEXT';
         }
         this.push(value);
       }, data);

@@ -134,10 +134,10 @@
                           ng-change="showUnit = paramsIsActivate(filters['unity'])"
                           ng-init="filters['unity'] = '1024'"
                           ng-model="filters['unity']">
-                    <option value="1024">Ko</option>
-                    <option value="1048576">Mo</option>
-                    <option value="1073741834">Go</option>
-                    <option value="1099511627776">To</option>
+                    <option value="1000">Ko</option>
+                    <option value="1000000">Mo</option>
+                    <option value="1000000000">Go</option>
+                    <option value="1000000000000">To</option>
                   </select>
                 </div>
               </div>
@@ -235,20 +235,12 @@
       <table class="table table-striped m-b-30" data-ng-table="tableParams" show-filter="true">
 
         <tr data-ng-repeat="documentFile in $data">
-        <!--   <td class="favorites"
-              data-title="'Favoris'"
-              sortable="'stars'">
-            <a href="#"
-               x-ng-click="documentFile.stars = !documentFile.stars">
-              <i x-ng-class="{'md-star-outline': !documentFile.stars, 'md-star yellow': documentFile.stars}"></i>
-            </a>
-          </td> -->
           <td data-title="'Type'" class="col-md-1 col-lg-1">
             <i class="fa fa-lg"
                data-toggle="tooltip"
                title=""
                data-placement="bottom"
-               data-original-title="{{documentFile.info}}"
+               data-original-title="{{'EXTENSIONS.' + documentFile.info | translate }}"
                sortable="'typeImage'"
                ng-class="documentFile.typeImage"></i>&nbsp; &nbsp;
           </td>
@@ -259,6 +251,7 @@
               <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a>
           </td>
           <td class="col-md-1 col-lg-1"
+              sortable="'size'"
               data-title="'Taille'">
             {{documentFile.size | readableSize: true}}
           </td>
