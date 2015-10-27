@@ -26,27 +26,27 @@ angular.module('linshareUiUserApp')
           }, {
             name: 'Liste',
             link: 'lists',
-            icon: 'md md-accounts-list-alt'
+            icon: 'md md-recent-actors'
           }, {
             name: 'Guests',
             link: 'documents.guests',
-            icon: 'md md-user'
+            icon: 'md md-portrait'
           },{
             name: 'Invitation de dépôt',
             link: 'upload_request',
-            icon: 'md md-external-link'
+            icon: 'md md-call-made'
           }, {
             name: 'Demande invitation de dépôt',
             link: 'upload_proposition',
-            icon: 'md md-location-arrow'
+            icon: 'md md-call-received'
           }, {
             name: 'Favoris',
             link: 'favoris',
-            icon: 'md md-star'
+            icon: 'md md-grade'
           }, {
             name: 'Activity',
             link: 'activity',
-            icon: 'md md-tachometer'
+            icon: 'md md-data-usage'
           }
         ];
 
