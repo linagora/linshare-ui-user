@@ -47,41 +47,41 @@
                         <a class="lv-footer" href="">View All</a>
                     </div>
                 </div>
-            </li>
-            <li class="dropdown">
-                <a data-toggle="dropdown" class="tm-notification" href=""><i class="tmn-counts">9</i></a>
-                <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
-                    <div class="listview" id="notifications">
-                        <div class="lv-header">
-                            Notification
+            </li>-->
+            <!--<li class="dropdown">-->
+                <!--<a data-toggle="dropdown" class="tm-notification" href=""><i class="tmn-counts">9</i></a>-->
+                <!--<div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">-->
+                    <!--<div class="listview" id="notifications">-->
+                        <!--<div class="lv-header">-->
+                            <!--Notification-->
 
-                            <ul class="actions">
-                                <li class="dropdown">
-                                    <a href="" data-ng-click="hctrl.clearNotification($event)">
-                                        <i class="md md-done-all"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="lv-body c-overflow">
-                            <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="lv-img-sm" ng-src="modules/materialAdmin/img/profile-pics/{{ w.img }}" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">{{ w.user }}</div>
-                                        <small class="lv-small">{{ w.text }}</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                            <!--<ul class="actions">-->
+                                <!--<li class="dropdown">-->
+                                    <!--<a href="" data-ng-click="hctrl.clearNotification($event)">-->
+                                        <!--<i class="md md-done-all"></i>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                        <!--<div class="lv-body c-overflow">-->
+                            <!--<a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">-->
+                                <!--<div class="media">-->
+                                    <!--<div class="pull-left">-->
+                                        <!--<img class="lv-img-sm" ng-src="styles/materialAdmin/img/profile-pics/{{ w.img }}" alt="">-->
+                                    <!--</div>-->
+                                    <!--<div class="media-body">-->
+                                        <!--<div class="lv-title">{{ w.user }}</div>-->
+                                        <!--<small class="lv-small">{{ w.text }}</small>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</div>-->
 
-                        <a class="lv-footer" href="">View Previous</a>
-                    </div>
+                        <!--<a class="lv-footer" href="">View Previous</a>-->
+                    <!--</div>-->
 
-                </div>
-            </li>
+                <!--</div>-->
+            <!--</li> -->
             <li class="dropdown hidden-xs">
                 <a data-toggle="dropdown" class="tm-task" href=""><i class="tmn-counts">{{$flow.files.length}}</i></a>
                 <div class="dropdown-menu pull-right stop-propagate dropdown-menu-lg">
@@ -92,7 +92,7 @@
                         <div class="lv-body">
                             <div class="lv-item" ng-init="wid = 10" x-ng-repeat="file in $flow.files">
                                 <div class="lv-title m-b-5">
-                                  <span>{{file.name}}{{file.progress() | number:2}} ___ {{$flow.progress(true) | number:2}}</span>
+                                  <span>{{file.name}}</span>
                                   <div class="pull-right">
                                     <button class="btn btn-warning btn-xs"
                                             x-ng-click="file.pause()"
@@ -150,9 +150,9 @@
                     <a data-ng-controller="AuthenticationController" data-ng-click="logout()" href=""><i class="md md-settings"></i> Logout</a>
                   </li>
                 </ul>
-            </li> -->
+            </li>
             <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
-                <a class="tm-chat" href=""></a><i class="md md-info-outline md-3x"></i>
+                <a class="tm-chat" href=""></a>
             </li>
         </ul>
     </li>

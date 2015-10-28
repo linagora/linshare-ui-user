@@ -1,81 +1,67 @@
-<!--<header id="header" data-ng-include src="'views/includes/header.html'"-->
-        <!--data-ng-controller="headerCtrl as hctrl"></header>-->
+<div class="container" ng-init="fileSelection = []">
 
-<!--<section id="main">-->
-  <!--<aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'"-->
-         <!--data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>-->
+  <!--  ACTIONS ON DOCUMENTS  -->
 
-  <!--<aside id="chat" data-ng-include src="'views/includes/chat.html'"-->
-         <!--data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>-->
-  <!--<section id="content">-->
+  <div class="card">
 
-    <div class="container" ls-flow-style-in-out="" ng-init="fileSelection = []">
+    <div class="card-header m-b-20">
+      <h2>FICHIERS</h2>
 
-      <!--  ACTIONS ON DOCUMENTS  -->
-      <div class="block-header">
-        <h2>FICHIERS</h2>
+      <ul class="actions" ng-show="fileSelection.length > 0">
+        <li>
+          <a href="" title="delete" ng-click="deleteSelected()">
+            <i class="md md-delete"></i>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="md md-done-all"></i>
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="" data-toggle="dropdown">
+            <i class="md md-more-vert"></i>
+          </a>
 
-        <ul class="actions" ng-show="fileSelection.length > 0">
-          <li>
-            <a href="" title="delete" ng-click="deleteSelected()">
-              <i class="md md-delete"></i>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="md md-done-all"></i>
-            </a>
-          </li>
-          <li class="dropdown">
-            <a href="" data-toggle="dropdown">
-              <i class="md md-more-vert"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li>
-                <a href="">Refresh</a>
-              </li>
-              <li>
-                <a href="">Manage Widgets</a>
-              </li>
-              <li>
-                <a href="">Widgets Settings</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <!--  DOCUMENTS LIST  -->
-      <div class="card">
-        <div class="card-header">
-          <h2>Liste de vos fichiers
-            <!--<small>Ensure that the data attribute [data-identifier="true"] is set on one column header.</small>-->
-          </h2>
-          {{fileSelection}}
-        </div>
-
-        <div class="table-responsive">
-          <table class="table table-striped" data-ng-table="tableParams">
-
-            <tr data-ng-repeat="documentFile in $data">
-              <td><input type="checkbox" name="check" data-file-selection="fileSelection" uuid="documentFile.uuid"></i></td>
-              <td><span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;</td>
-              <td class="col-md-9" data-title="'Nom'" sortable="'name'" uuid={{o.uuid}}>
-                <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a></td>
-              </td>
-              <td class="col-md-2" data-title="'Modification date'" sortable="'modificationDate'">
-                {{documentFile.modificationDate | date:'medium'}}
-              </td>
-              <td class="col-md-2" data-title="'Taille'" sortable="'size'">
-                {{documentFile.size | readableSize: false}}
-              </td>
-              <td class="col-md-1" data-title="'Partagé'" sortable="'shared'"> {{documentFile.shared}}</td>
-            </tr>
-          </table>
-        </div>
-
-      </div>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+              <a href="">Refresh</a>
+            </li>
+            <li>
+              <a href="">Manage Widgets</a>
+            </li>
+            <li>
+              <a href="">Widgets Settings</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
     </div>
-  <!--</section>-->
-<!--</section>-->
+
+    <!--  DOCUMENTS LIST  -->
+
+    <div class="table-responsive hidden-xs">
+      <table class="table table-striped m-b-30" data-ng-table="tableParams" show-filter="true">
+
+        <tr data-ng-repeat="documentFile in $data">
+
+          <td data-title="'Type'" class="col-md-1 col-lg-1"><span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;</td>
+          <td class="col-md-4 col-lg-5" data-title="'Nom'" sortable="'name'" uuid={{o.uuid}}>
+            <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a></td>
+          </td>
+          <td class="col-md-2 col-lg-2" data-title="'Modification date'" sortable="'modificationDate'">
+            {{documentFile.modificationDate | date:'shortDate'}}
+          </td>
+          <td class="col-md-1 col-lg-1" data-title="'Taille'" sortable="'size'">
+            {{documentFile.size | readableSize: false}}
+          </td>
+          <td class="col-md-1" data-title="'Partagé'" sortable="'shared'"> {{documentFile.shared}}</td>
+          <td class="col-md-1 col-lg-1"><input type="checkbox" name="check" data-file-selection="fileSelection"
+                                               uuid="documentFile.uuid"/></td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
