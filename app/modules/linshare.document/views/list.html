@@ -1,13 +1,13 @@
-<div class="container" ng-init="fileSelection = []">
+<div class="container" ng-init="selectedDocuments = []">
 
+  <aside id="chat" data-ng-include src="'views/includes/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
   <!--  ACTIONS ON DOCUMENTS  -->
 
   <div class="card">
 
     <div class="card-header m-b-20">
       <h2>FICHIERS</h2>
-
-      <ul class="actions" ng-show="fileSelection.length > 0">
+      <ul class="actions" ng-show="selectedDocuments.length > 0">
         <li>
           <a href="" title="delete" ng-click="deleteSelected()">
             <i class="md md-delete"></i>
@@ -25,7 +25,7 @@
 
           <ul class="dropdown-menu dropdown-menu-right">
             <li>
-              <a href="">Refresh</a>
+              <a href="" title="delete" ng-click="reload()">Refresh</a>
             </li>
             <li>
               <a href="">Manage Widgets</a>
@@ -44,7 +44,7 @@
     <div class="table-responsive hidden-xs">
       <table class="table table-striped m-b-30" data-ng-table="tableParams" show-filter="true">
 
-        <tr data-ng-repeat="documentFile in $data">
+        <tr data-ng-repeat="documentFile in $data" data-file-selection-v="selectedDocuments" uuid="documentFile">
 
           <td data-title="'Type'" class="col-md-1 col-lg-1"><span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;</td>
           <td class="col-md-4 col-lg-5" data-title="'Nom'" sortable="'name'" uuid={{o.uuid}}>
@@ -57,8 +57,8 @@
             {{documentFile.size | readableSize: false}}
           </td>
           <td class="col-md-1" data-title="'Partagé'" sortable="'shared'"> {{documentFile.shared}}</td>
-          <td class="col-md-1 col-lg-1"><input type="checkbox" name="check" data-file-selection="fileSelection"
-                                               uuid="documentFile.uuid"/></td>
+          <!--<td class="col-md-1 col-lg-1"><input type="checkbox" name="check" data-file-selection="selectedDocuments"-->
+                                               <!--uuid="documentFile"/></td>-->
         </tr>
       </table>
     </div>

@@ -1,94 +1,97 @@
-<div class="chat-search">
-    <div class="fg-line">
-        <input type="text" class="form-control" placeholder="Search People">
-    </div>
+<div class="container">
+
+  <div class="block-header">
+    <h2>{{selectedDocuments[0].name}} <small>my selected file current</small></h2>
+
+  </div>
+
+  <div class="card" id="profile-main">
+    <div class="pm-overview c-overflow">
+      <div class="pmo-pic">
+        <div class="p-relative">
+          <a href="">
+            <img class="img-responsive" src="styles/materialAdmin/img/profile-pics/profile-pic-2.jpg" alt="">
+          </a>
+        </div>
+      </div>
+
+      <div class="pmo-block pmo-contact hidden-xs">
+
+        <div class="listview">
+
+          <div class="media">
+            <div class="pull-left p-relative">
+              Date de depot
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].creationDate | date:'shortDate'}}</div>
+            </div>
+          </div>
+
+          <div class="media">
+            <div class="pull-left p-relative">
+              Taille
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].size  | readableSize: false}}</div>
+            </div>
+          </div>
+
+          <div class="media">
+            <div class="pull-left p-relative">
+              Type
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].type}}</div>
+            </div>
+          </div>
+
+          <div class="media">
+            <div class="pull-left p-relative">
+              Date de modification
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].modificationDate | date:'shortDate'}}</div>
+            </div>
+          </div>
+
+          <div class="media">
+            <div class="pull-left p-relative">
+              Expiration Date
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].expirationDate | date:'shortDate'}}</div>
+            </div>
+          </div>
+            <div class="media">
+              <div class="pull-left">
+                Chiffré
+              </div>
+              <div class="media-body">
+                <div class="lv-title">{{selectedDocuments[0].ciphered}}</div>
+              </div>
+            </div>
+
+          <div class="media">
+            <div class="pull-left">
+              Partagé
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].shared}}</div>
+            </div>
+          </div>
+            <div class="media">
+              <div class="pull-left">
+                Partagé
+              </div>
+              <div class="media-body">
+                <div class="lv-title">{{selectedDocuments[0].description}}</div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      </div>
+  </div>
 </div>
-
-<div class="listview">
-    <a class="lv-item" href="">
-        <div class="media">
-            <div class="pull-left p-relative">
-                <img class="lv-img-sm" src="modules/materialAdmin/img/profile-pics/2.jpg" alt="">
-                <i class="chat-status-busy"></i>
-            </div>
-            <div class="media-body">
-                <div class="lv-title">Jonathan Morris</div>
-                <small class="lv-small">Available</small>
-            </div>
-        </div>
-    </a>
-
-    <a class="lv-item" href="">
-        <div class="media">
-            <div class="pull-left">
-                <img class="lv-img-sm" src="modules/materialAdmin/img/profile-pics/1.jpg" alt="">
-            </div>
-            <div class="media-body">
-                <div class="lv-title">David Belle</div>
-                <small class="lv-small">Last seen 3 hours ago</small>
-            </div>
-        </div>
-    </a>
-
-    <a class="lv-item" href="">
-        <div class="media">
-            <div class="pull-left p-relative">
-                <img class="lv-img-sm" src="modules/materialAdmin/img/profile-pics/3.jpg" alt="">
-                <i class="chat-status-online"></i>
-            </div>
-            <div class="media-body">
-                <div class="lv-title">Fredric Mitchell Jr.</div>
-                <small class="lv-small">Availble</small>
-            </div>
-        </div>
-    </a>
-
-    <a class="lv-item" href="">
-        <div class="media">
-            <div class="pull-left p-relative">
-                <img class="lv-img-sm" src="modules/materialAdmin/img/profile-pics/4.jpg" alt="">
-                <i class="chat-status-online"></i>
-            </div>
-            <div class="media-body">
-                <div class="lv-title">Glenn Jecobs</div>
-                <small class="lv-small">Availble</small>
-            </div>
-        </div>
-    </a>
-
-    <a class="lv-item" href="">
-        <div class="media">
-            <div class="pull-left">
-                <img class="lv-img-sm" src="modules/materialAdmin/img/profile-pics/5.jpg" alt="">
-            </div>
-            <div class="media-body">
-                <div class="lv-title">Bill Phillips</div>
-                <small class="lv-small">Last seen 3 days ago</small>
-            </div>
-        </div>
-    </a>
-
-    <a class="lv-item" href="">
-        <div class="media">
-            <div class="pull-left">
-                <img class="lv-img-sm" src="modules/materialAdmin/img/profile-pics/6.jpg" alt="">
-            </div>
-            <div class="media-body">
-                <div class="lv-title">Wendy Mitchell</div>
-                <small class="lv-small">Last seen 2 minutes ago</small>
-            </div>
-        </div>
-    </a>
-    <a class="lv-item" href="">
-        <div class="media">
-            <div class="pull-left p-relative">
-                <img class="lv-img-sm" src="modules/materialAdmin/img/profile-pics/7.jpg" alt="">
-                <i class="chat-status-busy"></i>
-            </div>
-            <div class="media-body">
-                <div class="lv-title">Teena Bell Ann</div>
-                <small class="lv-small">Busy</small>
-            </div>
-        </div>
-    </a>
 </div>

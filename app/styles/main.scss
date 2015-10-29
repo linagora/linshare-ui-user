@@ -195,6 +195,13 @@ html:not(.ie9) .select::before {
 }
 
 /*
+** CHAT
+*/
+#chat {
+  width: 350px;
+  top: 145px;
+}
+/*
 ** RESPONSIVE
 */
 @media (min-width: 1200px) {

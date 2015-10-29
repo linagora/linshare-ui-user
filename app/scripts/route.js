@@ -38,7 +38,12 @@ angular.module('linshareUiUserApp')
       .state('documents.files', {
         url:'/files',
         templateUrl: 'modules/linshare.document/views/list.html',
-        controller: 'LinshareDocumentController'
+        controller: 'LinshareDocumentController',
+        resolve: {
+          documentsList: function(LinshareDocumentService) {
+            return LinshareDocumentService.getAllFiles();
+          }
+        }
         //resolve: {
         //  user: function(AuthenticationService) {
         //    console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());

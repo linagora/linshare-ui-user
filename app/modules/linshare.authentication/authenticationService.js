@@ -3,7 +3,7 @@
  * @ngdoc overview
  * @name linshare.Authentication
  */
-angular.module('linshare.authentication', ['restangular', 'linshare.userProfile', 'http-auth-interceptor', 'ui.bootstrap'])
+angular.module('linshare.authentication', ['restangular', 'linshare.userProfile', 'http-auth-interceptor'])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('linshare');
     RestangularProvider.setDefaultHttpFields({cache: false});
