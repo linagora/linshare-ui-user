@@ -21,7 +21,7 @@ angular.module('linshareUiUserApp')
     });
     $translatePartialLoaderProvider.addPart('general');
     $translateProvider.preferredLanguage('fr');
-    RestangularProvider.setBaseUrl('linshare');
+    RestangularProvider.setBaseUrl(lsAppConfig.baseEndpoint);
     RestangularProvider.setDefaultHttpFields({cache: false});
     RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json;'});
     RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers) {
@@ -30,7 +30,7 @@ angular.module('linshareUiUserApp')
     flowFactoryProvider.defaults = {
       simultaneousUploads: 1,
       //testChunks:false,
-      target: 'linshare/flow.json',
+      target: lsAppConfig.baseEndpoint + '/flow.json',
       permanentErrors: [401, 500, 501]
     };
     /*

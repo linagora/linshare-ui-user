@@ -2,5 +2,6 @@
 
 angular.module('linshareUiUserApp')
 .constant('lsAppConfig', {
-	localPath: 'i18n/plouf/'
+    baseEndpoint: 'linshare',
+	  localPath: 'i18n/plouf/'
 });

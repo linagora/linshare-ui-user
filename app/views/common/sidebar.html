@@ -1,10 +1,8 @@
-<div>
   <button class="btn-add-files" flow-btn>Ajouter</button>
 
     <ul class="main-menu" ng-repeat="tab in tabs">
       <li data-ui-sref-active="active">
-        <a data-ui-sref="{{tab.link}}" data-ng-click="mactrl.sidebarStat($event)">
+        <a data-ui-sref="{{tab.link}}" data-ng-class="{'disabled': tab.disabled }" data-ng-click="mactrl.sidebarStat($event)">
         <i class="{{tab.icon}}"></i> {{tab.name}}</a>
       </li>
     </ul>
-  </div>

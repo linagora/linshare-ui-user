@@ -124,6 +124,7 @@
 */
 body {
 	background-color: #ffffff;
+  padding-top: 50px;
 	#content {
 		padding: 0px;
 	}
@@ -137,6 +138,7 @@ html:not(.ie9) .select::before {
 */
 #sidebar {
 	box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.3);
+  top: 50px;
 	.sidebar-inner {
 	    background-color: #F4F4F4;
 	}
@@ -199,7 +201,11 @@ html:not(.ie9) .select::before {
 */
 #chat {
   width: 350px;
-  top: 145px;
+  top: 115px;
+}
+
+#sidebar .main-menu >li > a[class*='disabled'] {
+  pointer-events: none;
 }
 /*
 ** RESPONSIVE
@@ -213,7 +219,11 @@ html:not(.ie9) .select::before {
 	}
 	#header {
     	box-shadow: 268px 2px 4px rgba(0, 0, 0, 0.3);
+      height: 50px;
 	}
+  .header-inner {
+    padding: 8px 0px;
+  }
 	body.sw-toggled #sidebar {
 		box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.3)
 	}

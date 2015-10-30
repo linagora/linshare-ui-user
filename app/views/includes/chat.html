@@ -1,26 +1,27 @@
 <div class="container">
 
   <div class="block-header">
-    <h2>{{selectedDocuments[0].name}} <small>my selected file current</small></h2>
-
+    <h2>{{selectedDocuments[0].name}}
+      <small>my selected file current</small>
+    </h2>
   </div>
 
   <div class="card" id="profile-main">
     <div class="pm-overview c-overflow">
       <div class="pmo-pic">
         <div class="p-relative">
-          <a href="">
-            <img class="img-responsive" src="styles/materialAdmin/img/profile-pics/profile-pic-2.jpg" alt="">
+          <a ng-show="selectedDocuments[0].hasThumbnail == true" href="">
+            <img class="img-responsive" ng-src="data:image/png;base64,{{selectedDocuments[0].thumbnail}}" alt="">
           </a>
         </div>
       </div>
 
-      <div class="pmo-block pmo-contact hidden-xs">
+      <div ng-show="selectedDocuments.length == 1" class="pmo-block pmo-contact hidden-xs">
 
         <div class="listview">
 
           <div class="media">
-            <div class="pull-left p-relative">
+            <div class="pull-left p-relative col-md-7">
               Date de depot
             </div>
             <div class="media-body">
@@ -29,16 +30,16 @@
           </div>
 
           <div class="media">
-            <div class="pull-left p-relative">
+            <div class="pull-left p-relative col-md-7">
               Taille
             </div>
             <div class="media-body">
-              <div class="lv-title">{{selectedDocuments[0].size  | readableSize: false}}</div>
+              <div class="lv-title">{{selectedDocuments[0].size | readableSize: false}}</div>
             </div>
           </div>
 
           <div class="media">
-            <div class="pull-left p-relative">
+            <div class="pull-left p-relative col-md-7">
               Type
             </div>
             <div class="media-body">
@@ -47,7 +48,7 @@
           </div>
 
           <div class="media">
-            <div class="pull-left p-relative">
+            <div class="pull-left p-relative col-md-7">
               Date de modification
             </div>
             <div class="media-body">
@@ -56,42 +57,42 @@
           </div>
 
           <div class="media">
-            <div class="pull-left p-relative">
+            <div class="pull-left p-relative col-md-7">
               Expiration Date
             </div>
             <div class="media-body">
               <div class="lv-title">{{selectedDocuments[0].expirationDate | date:'shortDate'}}</div>
             </div>
           </div>
-            <div class="media">
-              <div class="pull-left">
-                Chiffré
-              </div>
-              <div class="media-body">
-                <div class="lv-title">{{selectedDocuments[0].ciphered}}</div>
-              </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              Chiffré
             </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].ciphered}}</div>
+            </div>
+          </div>
 
           <div class="media">
-            <div class="pull-left">
+            <div class="pull-left col-md-7">
               Partagé
             </div>
             <div class="media-body">
               <div class="lv-title">{{selectedDocuments[0].shared}}</div>
             </div>
           </div>
-            <div class="media">
-              <div class="pull-left">
-                Partagé
-              </div>
-              <div class="media-body">
-                <div class="lv-title">{{selectedDocuments[0].description}}</div>
-              </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              Description
             </div>
+            <div class="media-body">
+              <div class="lv-title">{{selectedDocuments[0].description}}</div>
+              <textarea class="lv-title">rtrt{{selectedDocuments[0].description}}</textarea>
+            </div>
+          </div>
         </div>
       </div>
 
-      </div>
+    </div>
   </div>
-</div>
 </div>

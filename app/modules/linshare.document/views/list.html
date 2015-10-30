@@ -4,34 +4,45 @@
   <!--  ACTIONS ON DOCUMENTS  -->
 
   <div class="card">
-
     <div class="card-header m-b-20">
-      <h2>FICHIERS</h2>
-      <ul class="actions" ng-show="selectedDocuments.length > 0">
-        <li>
+      <h2 style="line-height: 17px">FICHIERS</h2>
+      <ul class="actions">
+        <li ng-hide="selectedDocuments.length == 0">
           <a href="" title="delete" ng-click="deleteSelected()">
             <i class="md md-delete"></i>
           </a>
         </li>
-        <li>
-          <a href="">
+        <li ng-init="multipleSelection = false" data-ng-class="{ 'open': multipleSelection === true }">
+          <a href=""  ng-click="multipleSelection = !multipleSelection">
             <i class="md md-done-all"></i>
           </a>
         </li>
-        <li class="dropdown">
+        <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
+          <a href="">
+            <i class="md md-info"></i>
+          </a>
+        </li>
+        <!--<detail-documents class=""></detail-documents> -->
+        <li ng-hide="selectedDocuments.length == 0" class="dropdown">
           <a href="" data-toggle="dropdown">
             <i class="md md-more-vert"></i>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-right">
             <li>
-              <a href="" title="delete" ng-click="reload()">Refresh</a>
+              <a href="" title="delete" alt="delete" ng-click="reload()">Refresh</a>
             </li>
             <li>
-              <a href="">Manage Widgets</a>
+              <a href="" ng-click="">Copier dans un groupe</a>
             </li>
             <li>
-              <a href="">Widgets Settings</a>
+              <a href="" ng-click="">Partager</a>
+            </li>
+            <li>
+              <a href="" ng-click="">Supprimer</a>
+            </li>
+            <li>
+              <a href="" ng-click="">Télécharger</a>
             </li>
           </ul>
         </li>
@@ -39,12 +50,12 @@
       <div class="clearfix"></div>
     </div>
 
-    <!--  DOCUMENTS LIST  -->
+    <!--<!--  DOCUMENTS LIST  -->
 
-    <div class="table-responsive hidden-xs">
+    <div class="table-responsive">
       <table class="table table-striped m-b-30" data-ng-table="tableParams" show-filter="true">
 
-        <tr data-ng-repeat="documentFile in $data" data-file-selection-v="selectedDocuments" uuid="documentFile">
+        <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select file-selection-v="selectedDocuments" uuid="documentFile" multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}">
 
           <td data-title="'Type'" class="col-md-1 col-lg-1"><span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;</td>
           <td class="col-md-4 col-lg-5" data-title="'Nom'" sortable="'name'" uuid={{o.uuid}}>
@@ -57,8 +68,8 @@
             {{documentFile.size | readableSize: false}}
           </td>
           <td class="col-md-1" data-title="'Partagé'" sortable="'shared'"> {{documentFile.shared}}</td>
-          <!--<td class="col-md-1 col-lg-1"><input type="checkbox" name="check" data-file-selection="selectedDocuments"-->
-                                               <!--uuid="documentFile"/></td>-->
+          <!--<!--<td class="col-md-1 col-lg-1"><input type="checkbox" name="check" data-file-selection="selectedDocuments"-->
+                                               <!--<!--uuid="documentFile"/></td>-->
         </tr>
       </table>
     </div>

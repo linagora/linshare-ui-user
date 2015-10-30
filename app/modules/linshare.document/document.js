@@ -62,7 +62,7 @@ angular.module('linshare.document', ['restangular'])
  *
  * The controller to manage documents
  */
-  .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $window, $log, documentsList) {
+  .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $window, $log, documentsList, growlService) {
 
     $scope.download = function() {
       angular.forEach($scope.SelectedElement, function(uuid){
@@ -109,6 +109,7 @@ angular.module('linshare.document', ['restangular'])
                 removeElementFromCollection(documentsList, document);
                 removeElementFromCollection($scope.selectedDocuments, document);
                 $scope.tableParams.reload();
+                growlService.growl('suppression réussie', 'inverse');
               });
             });
           }
@@ -116,6 +117,13 @@ angular.module('linshare.document', ['restangular'])
     };
 
     $scope.documentDetails = 'test ';
+
+    $scope.$watch('selectedDocuments', function(n) {
+      if(n.length != 1) {
+        $log.debug('watcher ******', $scope.mactrl, n);
+        $scope.mactrl.sidebarToggle.right = false;
+      }
+    }, true);
 
     //NEVER EVER : TO REMOVE ASAP
     $scope.close = function() {
