@@ -1,6 +1,6 @@
 <div class="container" ng-init="selectedDocuments = []">
 
-  <aside id="chat" data-ng-include src="'views/includes/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
   <!--  ACTIONS ON DOCUMENTS  -->
 
   <div class="card">
@@ -61,18 +61,18 @@
           <td class="col-md-4 col-lg-5" data-title="'Nom'" sortable="'name'" uuid={{o.uuid}}>
             <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a></td>
           </td>
-          <td class="col-md-2 col-lg-2" data-title="'Modification date'" sortable="'modificationDate'">
+          <td ng-show="mactrl.sidebarToggle.right === false" class="col-md-2 col-lg-2" data-title="'Modification date'" sortable="'modificationDate'">
             {{documentFile.modificationDate | date:'shortDate'}}
           </td>
-          <td class="col-md-1 col-lg-1" data-title="'Taille'" sortable="'size'">
+          <td ng-show="mactrl.sidebarToggle.right === false" class="col-md-1 col-lg-1" data-title="'Taille'" sortable="'size'">
             {{documentFile.size | readableSize: false}}
           </td>
-          <td class="col-md-1" data-title="'Partagé'" sortable="'shared'"> {{documentFile.shared}}</td>
+          <td ng-show="mactrl.sidebarToggle.right === false" class="col-md-1" data-title="'Partagé'" sortable="'shared'"> {{documentFile.shared}}</td>
           <!--<!--<td class="col-md-1 col-lg-1"><input type="checkbox" name="check" data-file-selection="selectedDocuments"-->
                                                <!--<!--uuid="documentFile"/></td>-->
         </tr>
       </table>
     </div>
-
+    <aside id="chat" data-ng-include src="'views/includes/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
   </div>
 </div>

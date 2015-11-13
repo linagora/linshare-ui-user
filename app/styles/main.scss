@@ -204,6 +204,10 @@ html:not(.ie9) .select::before {
   top: 115px;
 }
 
+#filetable.toggled {
+  width: 50%;
+}
+
 #sidebar .main-menu >li > a[class*='disabled'] {
   pointer-events: none;
 }

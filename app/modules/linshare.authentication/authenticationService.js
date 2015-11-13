@@ -3,7 +3,7 @@
  * @ngdoc overview
  * @name linshare.Authentication
  */
-angular.module('linshare.authentication', ['restangular', 'linshare.userProfile', 'http-auth-interceptor'])
+angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor'])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('linshare');
     RestangularProvider.setDefaultHttpFields({cache: false});
@@ -12,8 +12,8 @@ angular.module('linshare.authentication', ['restangular', 'linshare.userProfile'
       headers['WWW-No-Authenticate'] = 'linshare';
     });
   })
-  .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService', 'LinshareUserService',
-    function (Restangular, $q, $log, authService, LinshareUserService) {
+  .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService',
+    function (Restangular, $q, $log, authService) {
       var deferred = $q.defer();
 
       var baseAuthentication = Restangular.all('authentication');
@@ -22,12 +22,9 @@ angular.module('linshare.authentication', ['restangular', 'linshare.userProfile'
        */
       baseAuthentication.customGET('authorized')
         .then(function (userLoggedIn) {
-          LinshareUserService.fillProfile(userLoggedIn);
-          console.log('hihih auth', LinshareUserService.profile);
           deferred.resolve(userLoggedIn);
         }, function (error) {
           $log.debug('current user not authenticated', error);
-          if (error.status == 401) LinshareUserService = null;
         });
 
       return {
@@ -42,7 +39,6 @@ angular.module('linshare.authentication', ['restangular', 'linshare.userProfile'
             $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
             authService.loginConfirmed();
             //Session.create(user.uuid, user.role);
-            LinshareUserService.fillProfile(user);
             deferred.resolve(user);
             console.log('resolveeee', deferred);
           }, function (error) {
@@ -52,8 +48,6 @@ angular.module('linshare.authentication', ['restangular', 'linshare.userProfile'
         },
         logout: function () {
           $log.debug('Authentication:logout');
-          LinshareUserService.init();
-          $log.info('///////////////////////', LinshareUserService);
           baseAuthentication.one('logout').get()
             .then(function () {
               authService.loginCancelled();

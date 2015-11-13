@@ -48,14 +48,14 @@ angular.module('linshareUiUserApp')
       .setPrefix('lsUser')
       .setNotify(true, true);
   })
-  .run(function($rootScope, $location, $translate, Restangular, growl) {
+  .run(function($rootScope, $location, $translate, Restangular, growlService) {
     /**
      * Restangular Interceptor
      * Show message box when an error occured
      */
     Restangular.setErrorInterceptor(function(response) {
       if (response.status === 503) {
-        growl.error('503 - Serveur Indisponible');
+        growlService.growl('503 - Serveur Indisponible');
       }
       return true;
     });

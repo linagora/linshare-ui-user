@@ -8,7 +8,7 @@
  * Service of the linshare.document module
  */
 
-angular.module('linshare.document', ['restangular'])
+angular.module('linshare.document', ['restangular', 'ngTable'])
 /**
  * @ngdoc service
  * @name linshare.document.service:LinshareDocumentService
@@ -55,6 +55,42 @@ angular.module('linshare.document', ['restangular'])
       //editFile,
     };
   })
+
+
+  //==============================================
+  // BOOTSTRAP GROWL
+  //==============================================
+
+  .service('growlService', function(){
+    var gs = {};
+    gs.growl = function(message, type) {
+      $.growl({
+        message: message
+      },{
+        type: type,
+        allow_dismiss: false,
+        label: 'Cancel',
+        className: 'btn-xs btn-inverse',
+        placement: {
+          from: 'top',
+          align: 'right'
+        },
+        delay: 2500,
+        animate: {
+          enter: 'animated bounceIn',
+          exit: 'animated bounceOut'
+        },
+        offset: {
+          x: 20,
+          y: 85
+        }
+      });
+    }
+
+    return gs;
+  })
+
+
 /**
  * @ngdoc controller
  * @name linshare.document.controller:LinshareDocumentController
@@ -64,16 +100,19 @@ angular.module('linshare.document', ['restangular'])
  */
   .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $window, $log, documentsList, growlService) {
 
-    $scope.download = function() {
-      angular.forEach($scope.SelectedElement, function(uuid){
-        LinshareDocumentService.downloadFiles(uuid).then(function(file) {
-          console.log(file);
-          var blob = new Blob([file], {type: 'text/plain'});
-          $scope.url = window.URL.createObjectURL(blob);
-          console.log('url', $scope.url);
-          // $window.open(url);
-          //return file;
-        });
+    $scope.selectedDocuments = [];
+
+    $scope.download = function(selectedDocuments) {
+      angular.forEach(selectedDocuments, function(document){
+        LinshareDocumentService.downloadFiles(document.uuid);
+        //.then(function(file) {
+        //  console.log(file);
+        //  var blob = new Blob([file], {type: 'text/plain'});
+        //  $scope.url = window.URL.createObjectURL(blob);
+        //  console.log('url', $scope.url);
+        //  // $window.open(url);
+        //  //return file;
+        //});
       });
     };
 
@@ -105,7 +144,7 @@ angular.module('linshare.document', ['restangular'])
             angular.forEach($scope.selectedDocuments, function(document) {
               $log.debug('value to delete', document);
               $log.debug('value to delete', documentsList.length);
-              documentsList.one(document.uuid).remove().then(function() {
+              LinshareDocumentService.delete(document.uuid).then(function() {
                 removeElementFromCollection(documentsList, document);
                 removeElementFromCollection($scope.selectedDocuments, document);
                 $scope.tableParams.reload();
@@ -113,10 +152,11 @@ angular.module('linshare.document', ['restangular'])
               });
             });
           }
-        });
+        }
+      );
     };
 
-    $scope.documentDetails = 'test ';
+    $scope.documentDetails = 'test';
 
     $scope.$watch('selectedDocuments', function(n) {
       if(n.length != 1) {
@@ -129,7 +169,6 @@ angular.module('linshare.document', ['restangular'])
     $scope.close = function() {
       document.getElementsByTagName('section')[3].style.className = 'col-md-12';
       document.getElementsByTagName('section')[4].style.display = 'none';
-
     };
 
     $scope.reload = function() {

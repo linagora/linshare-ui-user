@@ -2,18 +2,15 @@
 
 angular.module('linshare.authentication')
   .controller('AuthenticationController',
-    ['$scope', '$log', 'AuthenticationService', '$location', '$state',
-      function ($scope, $log, AuthenticationService, $location, $state) {
+    ['$scope', '$log', 'AuthenticationService',
+      function ($scope, $log, AuthenticationService) {
 
-        $scope.$on('event:auth-loginRequired', function () {
-          $log.debug('event:auth-loginRequired received');
-        });
-        $scope.input = {};
+        $scope.input = {email: '', password: ''};
         $scope.submitted = false;
         //todo form validate
-        $scope.signupForm2 = function() {
+        $scope.submitLoginForm = function() {
           AuthenticationService.login($scope.input.email, $scope.input.password);
-          console.log('auth success: current user', AuthenticationService.getCurrentUser());
+          $log.debug('auth success: current user', AuthenticationService.getCurrentUser());
         };
 
         $scope.logout = function() {
