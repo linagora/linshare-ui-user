@@ -6,57 +6,57 @@ angular.module('linshareUiUserApp')
           {
             name: 'Accueil',
             link: 'home',
-            icon: 'md md-home',
+            icon: 'zmdi zmdi-home',
             disabled: false
           }, {
             name: 'Fichiers',
             link: 'documents.files',
-            icon: 'md md-folder',
+            icon: 'zmdi zmdi-folder',
             disabled: false
           }, {
             name: 'Partagés',
             link: 'documents.shared',
-            icon: 'md md-publish',
+            icon: 'zmdi zmdi-upload',
             disabled: true
           }, {
             name: 'Reçus',
             link: 'documents.received',
-            icon: 'md md-file-download',
+            icon: 'zmdi zmdi-download',
             disabled: false
           }, {
             name: 'Groupes',
             link: 'documents.threads',
-            icon: 'md md-group',
+            icon: 'zmdi zmdi-accounts',
             disabled: true
           }, {
             name: 'Liste',
             link: 'lists',
-            icon: 'md md-recent-actors',
+            icon: 'zmdi zmdi-accounts-list',
             disabled: true
           }, {
             name: 'Guests',
             link: 'documents.guests',
-            icon: 'md md-portrait',
+            icon: 'zmdi zmdi-account-box-o',
             disabled: true
           },{
             name: 'Invitation de dépôt',
             link: 'upload_request',
-            icon: 'md md-call-made',
+            icon: 'zmdi zmdi-arrow-out',
             disabled: true
           }, {
             name: 'Demande invitation de dépôt',
             link: 'upload_proposition',
-            icon: 'md md-call-received',
+            icon: 'zmdi zmdi-arrow-in',
             disabled: true
           }, {
             name: 'Favoris',
             link: 'favoris',
-            icon: 'md md-grade',
+            icon: 'zmdi zmdi-star-circle',
             disabled: true
           }, {
             name: 'Activity',
             link: 'activity',
-            icon: 'md md-data-usage',
+            icon: 'zmdi zmdi-chart-donut',
             disabled: true
           }
         ];

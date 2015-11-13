@@ -9,23 +9,23 @@
       <ul class="actions">
         <li ng-hide="selectedDocuments.length == 0">
           <a href="" title="delete" ng-click="deleteSelected()">
-            <i class="md md-delete"></i>
+            <i class="zmdi zmdi-delete"></i>
           </a>
         </li>
         <li ng-init="multipleSelection = false" data-ng-class="{ 'open': multipleSelection === true }">
           <a href=""  ng-click="multipleSelection = !multipleSelection">
-            <i class="md md-done-all"></i>
+            <i class="zmdi zmdi-check-all"></i>
           </a>
         </li>
         <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
           <a href="">
-            <i class="md md-info"></i>
+            <i class="zmdi zmdi-info"></i>
           </a>
         </li>
         <!--<detail-documents class=""></detail-documents> -->
         <li ng-hide="selectedDocuments.length == 0" class="dropdown">
           <a href="" data-toggle="dropdown">
-            <i class="md md-more-vert"></i>
+            <i class="zmdi zmdi-more-vert"></i>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-right">
