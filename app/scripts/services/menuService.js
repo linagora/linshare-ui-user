@@ -17,7 +17,7 @@ angular.module('linshareUiUserApp')
             name: 'Partagés',
             link: 'documents.shared',
             icon: 'zmdi zmdi-upload',
-            disabled: true
+            disabled: false
           }, {
             name: 'Reçus',
             link: 'documents.received',

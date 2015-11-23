@@ -8,23 +8,28 @@
       <h2 style="line-height: 17px">FICHIERS</h2>
       <ul class="actions">
         <li ng-hide="selectedDocuments.length == 0">
+          <a href="" title="share" ls-share-modal>
+            <i class="zmdi zmdi-share"></i>
+          </a>
+        </li>
+        <li ng-hide="selectedDocuments.length == 0">
           <a href="" title="delete" ng-click="deleteSelected()">
             <i class="zmdi zmdi-delete"></i>
           </a>
         </li>
         <li ng-init="multipleSelection = false" data-ng-class="{ 'open': multipleSelection === true }">
-          <a href=""  ng-click="multipleSelection = !multipleSelection">
+          <a href="" title="multiple select" ng-click="multipleSelection = !multipleSelection">
             <i class="zmdi zmdi-check-all"></i>
           </a>
         </li>
         <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
-          <a href="">
+          <a href="" title="info">
             <i class="zmdi zmdi-info"></i>
           </a>
         </li>
         <!--<detail-documents class=""></detail-documents> -->
         <li ng-hide="selectedDocuments.length == 0" class="dropdown">
-          <a href="" data-toggle="dropdown">
+          <a href="" title="more actions" data-toggle="dropdown">
             <i class="zmdi zmdi-more-vert"></i>
           </a>
 

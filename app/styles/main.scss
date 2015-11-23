@@ -211,6 +211,11 @@ html:not(.ie9) .select::before {
 #sidebar .main-menu >li > a[class*='disabled'] {
   pointer-events: none;
 }
+
+#sidebar .main-menu > li > a > i {
+  padding: 13px 0px;
+}
+
 /*
 ** RESPONSIVE
 */

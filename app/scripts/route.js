@@ -71,8 +71,13 @@ angular.module('linshareUiUserApp')
 
       .state('documents.shared', {
         url:'/shared',
-        templateUrl: 'views/documents/shared.html',
-        controller: 'SharedController'
+        templateUrl: 'modules/linshare.share/views/shared.html',
+        controller: 'LinshareShareController',
+        resolve: {
+          sharedDocumentsList: function(LinshareShareService) {
+            return LinshareShareService.getMyShares();
+          }
+        }
       })
 
       .state('documents.share', {

@@ -1,21 +1,83 @@
-<div class="table-responsive">
+<div class="container" ng-init="selectedDocuments = []">
 
-  <table class="table" ng-table="tableParams" ng-show="$data.length > 0">
-    <tr ng-repeat="shared in $data">
 
-      <td data-title="'Nom'" class="col-md-10">
-      <span><i>
-        <input type="checkbox" name="check"/> </i>
-      </span>
+  <!--  ACTIONS ON DOCUMENTS  -->
 
-        <span class="glyphicon glyphicon-star-empty"></span>
-        <span class="glyphicon glyphicon-file"></span>&nbsp; &nbsp;
-        <a ng-href="/linshare/documents/{{shared.uuid}}/download">{{shared.name}}</a>
-      </td>
-      <td data-title="'Taille du fichier'">
-        {{shared.size | readableSize}}
-      </td>
-      <td data-title="'Partagé'"></td>
-    </tr>
-  </table>
+  <div class="card">
+    <div class="card-header m-b-20">
+      <h2 style="line-height: 17px">FICHIERS</h2>
+      <ul class="actions">
+        <li ng-hide="selectedDocuments.length == 0">
+          <a href="" title="share" ls-share-modal>
+            <i class="zmdi zmdi-share"></i>
+          </a>
+        </li>
+        <li ng-hide="selectedDocuments.length == 0">
+          <a href="" title="delete" ng-click="deleteSelected()">
+            <i class="zmdi zmdi-delete"></i>
+          </a>
+        </li>
+        <li ng-init="multipleSelection = false" data-ng-class="{ 'open': multipleSelection === true }">
+          <a href="" title="multiple select" ng-click="multipleSelection = !multipleSelection">
+            <i class="zmdi zmdi-check-all"></i>
+          </a>
+        </li>
+        <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
+          <a href="" title="info">
+            <i class="zmdi zmdi-info"></i>
+          </a>
+        </li>
+        <!--<detail-documents class=""></detail-documents> -->
+        <li ng-hide="selectedDocuments.length == 0" class="dropdown">
+          <a href="" title="more actions" data-toggle="dropdown">
+            <i class="zmdi zmdi-more-vert"></i>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+              <a href="" title="delete" alt="delete" ng-click="reload()">Refresh</a>
+            </li>
+            <li>
+              <a href="" ng-click="">Copier dans un groupe</a>
+            </li>
+            <li>
+              <a href="" ng-click="">Partager</a>
+            </li>
+            <li>
+              <a href="" ng-click="">Supprimer</a>
+            </li>
+            <li>
+              <a href="" ng-click="">Télécharger</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+
+    <!--<!--  DOCUMENTS LIST  -->
+
+    <div class="table-responsive">
+      <table class="table table-striped m-b-30" data-ng-table="tableParams" show-filter="true">
+
+        <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select file-selection-v="selectedDocuments" uuid="documentFile" multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}">
+
+          <td data-title="'Type'" class="col-md-1 col-lg-1"><span class="fa fa-file-excel-o"></span>&nbsp; &nbsp;</td>
+          <td class="col-md-4 col-lg-5" data-title="'Nom'" sortable="'name'" uuid={{o.uuid}}>
+            <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a></td>
+          </td>
+          <td ng-show="mactrl.sidebarToggle.right === false" class="col-md-2 col-lg-2" data-title="'Modification date'" sortable="'modificationDate'">
+            {{documentFile.modificationDate | date:'shortDate'}}
+          </td>
+          <td ng-show="mactrl.sidebarToggle.right === false" class="col-md-1 col-lg-1" data-title="'Taille'" sortable="'size'">
+            {{documentFile.document.size | readableSize: false}}
+          </td>
+          <td ng-show="mactrl.sidebarToggle.right === false" class="col-md-1" data-title="'Partagé'" sortable="'shared'"> {{documentFile.document.shared}}</td>
+          <!--<!--<td class="col-md-1 col-lg-1"><input type="checkbox" name="check" data-file-selection="selectedDocuments"-->
+          <!--<!--uuid="documentFile"/></td>-->
+        </tr>
+      </table>
+    </div>
+    <aside id="chat" data-ng-include src="'views/includes/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+  </div>
 </div>

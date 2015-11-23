@@ -8,7 +8,8 @@
  * This module has two services written
  * to make all http calls about sharing file.
  */
-angular.module('linshare.share', [])
+angular.module('linshare.share', ['ui.bootstrap'])
+
 /**
  * @ngdoc service
  * @name linshare.share.service:LinshareShareService
@@ -44,41 +45,25 @@ angular.module('linshare.share', [])
       }
     }
   })
+
+
 /**
- * @ngdoc service
- * @name linshare.share.service:LinshareReceivedShareService
+ * @ngdoc controller
+ * @name linshare.share.controller:LinshareShareController
  * @description
  *
- * Service to get and post all information about files others shared with me
+ * The controller to manage shared documents
  */
-  .factory('LinshareReceivedShareService', function (Restangular, $log) {
-    return {
-      getReceivedShares: function () {
-        $log.debug('LinshareReceivedShareService : getReceivedShares');
-        return Restangular.all('received_shares').getList();
-      },
-      getReceivedShare: function(uuid) {
-        $log.debug('LinshareReceivedShareService : getReceivedShare');
-        return Restangular.one('received_shares', uuid).get();
-      },
-      downloadThumbnail: function() {
-        $log.debug('LinshareReceivedShareService : downloadThumbnail');
-        return Restangular.one('received_shares', uuid).one('thumbnail').get();
-      },
-      delete: function(uuid) {
-        $log.debug('LinshareReceivedShareService : delete');
-        return Restangular.one('received_shares', uuid).remove();
-      },
-      copy: function(uuid) {
-        $log.debug('LinshareReceivedShareService : copy', uuid);
-        // return Restangular.one('received_shares').post('copy', uuid).then(function (data){
-        //   console.log('By the service LinshareReceivedShareService action copy : ', data);
-        // });
-        return Restangular.one('received_shares').one('copy', uuid).post();
-      },
-      download: function(uuid) {
-        $log.debug('LinshareReceivedShareService : download');
-        return Restangular.one('received_shares', uuid).one('download').get();
+  .controller('LinshareShareController', function($scope, $filter, ngTableParams, sharedDocumentsList) {
+    $scope.tableParams = new ngTableParams({
+      page: 1,
+      sorting: {modificationDate: 'desc'},
+      count: 20
+    }, {
+      getData: function($defer, params) {
+        var files =  params.sorting() ? $filter('orderBy')(sharedDocumentsList, params.orderBy()) : sharedDocumentsList;
+        params.total(files.length);
+        $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
-    };
+    });
   });
