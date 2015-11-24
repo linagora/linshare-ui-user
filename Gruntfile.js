@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/**/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -123,7 +123,8 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/modules/**/*.js'
         ]
       },
       test: {
@@ -211,7 +212,7 @@ module.exports = function (grunt) {
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/styles/fonts',
+        fontsDir: ['<%= yeoman.app %>/styles/materialAdmin/fonts', '<%= yeoman.app %>/styles/fonts'],
         importPath: './vendors/bower_components',
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
@@ -336,7 +337,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
+          src: ['*.html', 'views/{,*/}*.html', 'modules/**/views/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -375,7 +376,10 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'modules/**/views/*.html',
+            'i18n/original/{,*/}*.json',
             'images/{,*/}*.{webp}',
+            'styles/materialAdmin/img/icons/{,*/}*',
             'styles/fonts/{,*/}*.*'
           ]
         }, {
@@ -387,6 +391,26 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'vendors/bower_components/bootstrap/dist',
           src: 'fonts/*',
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: 'vendors/bower_components/material-design-iconic-font/dist',
+          src: 'fonts/*',
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: 'vendors/bower_components/font-awesome',
+          src: 'fonts/*',
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles/materialAdmin',
+          src: 'fonts/{,*/}*',
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles/materialAdmin',
+          src: 'img/icons/{,*/}*',
           dest: '<%= yeoman.dist %>'
         }]
       },
@@ -419,9 +443,18 @@ module.exports = function (grunt) {
 
     // Test settings
     karma: {
-      unit: {
+      options: {
         configFile: 'test/karma.conf.js',
         singleRun: true
+      },
+      linshareAuthentication: {
+        configFile: 'app/modules/linshare.authentication/test/karma.conf.js'
+      },
+      linshareDocument: {
+        configFile: 'app/modules/linshare.document/test/karma.conf.js'
+      },
+      unit: {
+        configFile: 'test/karma.conf.js'
       }
     },
 
@@ -480,7 +513,6 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
