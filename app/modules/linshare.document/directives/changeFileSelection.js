@@ -89,6 +89,7 @@ angular.module('linshare.document')
       }
     }
   })
+  //this directive is not used yet
   .directive('getThumbnail', function(LinshareDocumentService) {
     return {
       restrict: 'A',

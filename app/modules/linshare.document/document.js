@@ -156,8 +156,6 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       );
     };
 
-    $scope.documentDetails = 'test';
-
     $scope.$watch('selectedDocuments', function(n) {
       if(n.length != 1) {
         $log.debug('watcher ******', $scope.mactrl, n);
@@ -165,15 +163,8 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       }
     }, true);
 
-    //NEVER EVER : TO REMOVE ASAP
-    $scope.close = function() {
-      document.getElementsByTagName('section')[3].style.className = 'col-md-12';
-      document.getElementsByTagName('section')[4].style.display = 'none';
-    };
-
     $scope.reload = function() {
       $scope.tableParams.reload();
-      console.log('hqfsmlkdhfmqlskhd', documentsList);
     };
 
     $scope.tableParams = new ngTableParams({

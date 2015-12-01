@@ -38,9 +38,7 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
           }).then(function (user) {
             $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
             authService.loginConfirmed();
-            //Session.create(user.uuid, user.role);
             deferred.resolve(user);
-            console.log('resolveeee', deferred);
           }, function (error) {
             $log.error('Authentication failed', error.status);
             deferred.reject(error);

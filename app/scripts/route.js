@@ -44,12 +44,6 @@ angular.module('linshareUiUserApp')
             return LinshareDocumentService.getAllFiles();
           }
         }
-        //resolve: {
-        //  user: function(AuthenticationService) {
-        //    console.log('curentuser from files resolve' , AuthenticationService.getCurrentUser());
-        //    return AuthenticationService.getCurrentUser();
-        //  }
-        //}
       })
 
 
@@ -63,8 +57,6 @@ angular.module('linshareUiUserApp')
           },
           files: function(LinshareReceivedShareService) {
            return LinshareReceivedShareService.getReceivedShares();
-           // .then(function(files){
-           // });
          }
         }
       })

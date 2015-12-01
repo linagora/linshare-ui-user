@@ -7,7 +7,7 @@ angular.module('linshareUiUserApp')
     localStorage.setItem('ma-layout-status', 1);
 
     $scope.$on('event:auth-loginRequired', function(event, data) {
-      console.log('my state auth-loginRequired in ze controller ', $rootScope.$state, $rootScope.$stateParams);
+      $log.debug('my state auth-loginRequired in the controller ', $rootScope.$state, $rootScope.$stateParams);
       $scope.urlTogoAfterLogin = $rootScope.$state.current.name;
       $log.debug('my URLLoginBefore', $scope.urlTogoAfterLogin);
       $state.go('login', {next: $scope.urlTogoAfterLogin});
