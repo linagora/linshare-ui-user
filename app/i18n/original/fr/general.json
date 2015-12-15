@@ -7,11 +7,31 @@
     "IMAGE" : "Image",
     "AUDIO" : "Audio",
     "VIDEO" : "Vidéo",
-    "POWERPONT" : "Powerpont",
+    "POWERPOINT" : "PowerPoint",
     "WORD" : "Word",
     "ARCHIVE" : "Archive",
     "EXCEL" : "Excel",
     "TEXT" : "Texte",
     "CODE" : "Code"
-  }
+  },
+  "NAVIGATION" : {
+    "HOME" : "Accueil",
+    "FILES" : "Fichiers",
+    "MY_FILES" : "Mes fichiers",
+    "RECEIVED_SHARES" : "Mes partages reçus",
+    "SHARES" : "Mes fichiers partagés",
+    "GROUPS" : "Mes groupes",
+    "ADMIN" : "Administration",
+    "LISTS" : "Mes listes",
+    "GUESTS" : "Mes invités",
+    "USERS" : "Les utilisateurs",
+    "GROUP_MEMBERS" : "Mes groupes",
+    "UPLOAD_MANAGMENT" : "Invitations de dépôts",
+    "UPLOAD_REQUESTS" : "Invitations de dépôts",
+    "UPLOAD_PROPOSITIONS" : "Demandes d'invitations de dépôts",
+    "AUDIT" : "Audit",
+    "AUDIT_GLOBAL" : "Audit global",
+    "AUDIT_UPLOAD_REQUEST" : "Audit invitations de dépôts"
+  },
+  "LINK_DISABLED": "Lien inactif"
 }

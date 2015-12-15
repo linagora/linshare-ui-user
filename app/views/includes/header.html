@@ -12,88 +12,22 @@
 
     <li class="pull-right">
         <ul class="top-menu">
-
-            <!-- <li id="toggle-width">
-                <div class="toggle-switch">
-                     {{mactrl.layoutType}}
-                    <input id="tw-switch" type="checkbox" hidden="hidden" data-change-layout="mactrl.layoutType">
-                    <label for="tw-switch" class="ts-helper"></label>
-                </div>
-            </li> -->
-
             <li id="top-search">
-                <a class="tm-search" href="" data-ng-click="hctrl.openSearch()"></a>
+                <a href="" data-ng-click="hctrl.openSearch()">
+                    <i class="zmdi zmdi-search zmdi-hc-2x zmdi-hc-fw"></i>
+                </a>
+                <!-- <a class="tm-search" href="" data-ng-click="hctrl.openSearch()"></a> -->
             </li>
-            <!-- <li class="dropdown">
-                <a data-toggle="dropdown" class="tm-message" href=""><i class="tmn-counts">6</i></a>
-                <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
-                    <div class="listview">
-                        <div class="lv-header">
-                            Messages
-                        </div>
-                        <div class="lv-body c-overflow">
-                            <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="lv-img-sm" ng-src="modules/materialAdmin/img/profile-pics/{{ w.img }}" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">{{ w.user }}</div>
-                                        <small class="lv-small">{{ w.text }}</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <a class="lv-footer" href="">View All</a>
-                    </div>
-                </div>
-            </li>-->
-            <!--<li class="dropdown">-->
-                <!--<a data-toggle="dropdown" class="tm-notification" href=""><i class="tmn-counts">9</i></a>-->
-                <!--<div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">-->
-                    <!--<div class="listview" id="notifications">-->
-                        <!--<div class="lv-header">-->
-                            <!--Notification-->
-
-                            <!--<ul class="actions">-->
-                                <!--<li class="dropdown">-->
-                                    <!--<a href="" data-ng-click="hctrl.clearNotification($event)">-->
-                                        <!--<i class="md md-done-all"></i>-->
-                                    <!--</a>-->
-                                <!--</li>-->
-                            <!--</ul>-->
-                        <!--</div>-->
-                        <!--<div class="lv-body c-overflow">-->
-                            <!--<a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">-->
-                                <!--<div class="media">-->
-                                    <!--<div class="pull-left">-->
-                                        <!--<img class="lv-img-sm" ng-src="styles/materialAdmin/img/profile-pics/{{ w.img }}" alt="">-->
-                                    <!--</div>-->
-                                    <!--<div class="media-body">-->
-                                        <!--<div class="lv-title">{{ w.user }}</div>-->
-                                        <!--<small class="lv-small">{{ w.text }}</small>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</a>-->
-                        <!--</div>-->
-
-                        <!--<a class="lv-footer" href="">View Previous</a>-->
-                    <!--</div>-->
-
-                <!--</div>-->
-            <!--</li> -->
             <li class="dropdown hidden-xs">
                 <a ng-show="$flow.progress() > 0" data-toggle="dropdown" href="" class="col-md-2" >
                   <i class="tmn-counts">{{$flow.files.length}}</i>
                   <div class="progress m-t-15">
                     <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="$flow.progress()*100" aria-valuemin="0" aria-valuemax="100" style="padding-top: 15px; width: {{$flow.progress()*100}}%">
-                      <!--<span >100% Complete (success)</span>-->
                     </div>
                   </div>
-                  <!--<i class="tmn-counts">{{$flow.files.length}}</i>-->
                 </a>
 
-                <a ng-hide="$flow.progress() > 0" data-toggle="dropdown" style="color: #FFFFFF; text-align: center" href=""><i class="zmdi zmdi-upload zmdi-hc-2x zmdi-hc-fw"></i></a>
+                <a ng-hide="$flow.progress() > 0" data-toggle="dropdown" href=""><i class="zmdi zmdi-upload zmdi-hc-2x zmdi-hc-fw"></i></a>
 
                 <div class="dropdown-menu pull-right stop-propagate dropdown-menu-lg">
                     <div class="listview">
@@ -143,7 +77,7 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a data-toggle="dropdown" class="tm-settings" href=""></a>
+                <a data-toggle="dropdown" href=""><i class="zmdi zmdi-settings zmdi-hc-2x zmdi-hc-fw"></i></a>
                 <ul class="dropdown-menu dm-icon pull-right">
                     <li>
                         <a data-ng-click="hctrl.fullScreen()" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
@@ -154,11 +88,7 @@
                 </ul>
             </li>
           <li class="dropdown">
-            <!--<a data-toggle="dropdown" href="">-->
-              <!--<img class="img-circle" src="styles/materialAdmin/img/profile-pics/2.jpg" alt="">-->
-            <!--</a>-->
-            <!--<a data-toggle="dropdown" href=""><i class="md md-account-balance-wallet md-4x"></i></a>-->
-            <a data-toggle="dropdown" style="color: #FFFFFF; text-align: center" href=""><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i></a>
+            <a data-toggle="dropdown" href=""><i class="zmdi zmdi-account zmdi-hc-2x"></i></a>
             <ul class="dropdown-menu dm-icon pull-right">
 
               <li>

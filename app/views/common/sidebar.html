@@ -1,8 +1,40 @@
-  <button class="btn-add-files" flow-btn>Ajouter</button>
-
-    <ul class="main-menu" ng-repeat="tab in tabs">
-      <li data-ui-sref-active="active">
-        <a data-ui-sref="{{tab.link}}" data-ng-class="{'disabled': tab.disabled }" data-ng-click="mactrl.sidebarStat($event)">
-        <i class="{{tab.icon}}"></i> {{tab.name}}</a>
+  <button class="btn-add-files" flow-btn>
+    <!-- <i class="zmdi zmdi-upload zmdi-hc-fw"></i> -->
+    <i class="zmdi zmdi-file-plus zmdi-hc-fw"></i>
+    <span>Ajouter des fichiers</span>
+  </button>
+  <!-- <div>
+    <button class="btn btn-info btn-icon waves-effect waves-circle">
+    </button>
+    <p>AJOUTER DES FICHIERS</p>
+  </div> -->
+  <div class="quota-information">
+    <div class="quota-used"></div>
+    <div class="quota-free"></div>
+    <p>10 GB of 15 GB used</p>
+  </div>
+	<ul class="main-menu" ng-repeat="tab in tabs">
+      <li ng-if="tab.link"
+          data-ng-class="{ 'active simple-menu': linkActive==tab.name}">
+        <a data-ui-sref="{{tab.link}}"
+           data-ng-class="{'disabled': tab.disabled }">
+        	<i class="{{tab.icon}}"></i> {{ tab.name | translate }}
+    	</a>
+      </li>
+      <li class="sub-menu" ng-if="tab.links"
+          data-ng-class="{ 'active toggled': (linkActive==tab.name) || (linkActive=='NAVIGATION.HOME' && tab.name=='NAVIGATION.FILES') }">
+        <a toggle-submenu>
+        	<i class="{{tab.icon}}"></i> {{ tab.name | translate }}
+          {{active}}
+    	  </a>
+      	<ul>
+      		<li ng-repeat="link in tab.links">
+            <a data-ui-sref="{{link.link}}"
+               data-ui-sref-active="active"
+               data-ng-class="{'disabled': link.disabled }">
+		        	{{ link.name | translate }}
+		    	  </a>
+  		    </li>
+      	</ul>
       </li>
     </ul>

@@ -3,7 +3,7 @@
 angular.module('linshareUiUserApp')
   .factory('MyErrorHandler', function ($q, $log, $http, lsAppConfig) {
     return function (part, lang) {
-      $log.error('The "' + lsAppConfig.localPath + lang + '/' + part +'.json' + '" part was not loaded.');
+      $log.error('The "' + lsAppConfig.localPath + '/' + lang + '/' + part +'.json' + '" part was not loaded.');
       var path = 'i18n/original/' + lang + '/' + part +'.json';
       var content = null;
       return $q.when(
@@ -16,7 +16,7 @@ angular.module('linshareUiUserApp')
   .config(function(RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider, $translatePartialLoaderProvider, lsAppConfig) {
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
     $translateProvider.useLoader('$translatePartialLoader', {
-      urlTemplate: pathToLocal + '{lang}/{part}.json',
+      urlTemplate: pathToLocal + '/{lang}/{part}.json',
       loadFailureHandler: 'MyErrorHandler'
     });
     $translatePartialLoaderProvider.addPart('general');

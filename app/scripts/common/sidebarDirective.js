@@ -8,9 +8,29 @@ angular.module('linshareUiUserApp')
         restrict: 'A',
         transclude: true,
         scope: false,
-        controller: ['$rootScope', '$scope', '$log', 'MenuService',
-          function($rootScope, $scope, $log, MenuService) {
+        controller: ['$rootScope', '$scope', '$state', '$log', 'MenuService',
+          function($rootScope, $scope, $state, $log, MenuService) {
             $scope.tabs = MenuService.getAvailableTabs();
+            var setLinkActive = function (currentState) {
+              angular.forEach($scope.tabs, function(value) {
+                if (value.links) {
+                  angular.forEach(value.links, function(link) {
+                    if (link.link == currentState) {
+                      $scope.linkActive = value.name;
+                    }
+                  })
+                } else if (value.link == currentState) {
+                  $scope.linkActive = value.name;
+                }
+              });
+            };
+
+            setLinkActive($state.current.name);
+
+            $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState, fromParams) {
+                setLinkActive(toState.name);
+            });
           }
         ],
         link: function(scope, element) {
