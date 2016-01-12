@@ -43,9 +43,17 @@ module.exports = function(config) {
       'vendors/bower_components/oclazyload/dist/ocLazyLoad.js',
       'vendors/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js',
       'vendors/bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js',
+      'vendors/bower_components/angular-nouislider/src/nouislider.js',
       'app/modules/linshare.authentication/authenticationService.js',
+      'app/modules/materialAdmin/js/{,*/}*.js',
+      'app/modules/linshare.authentication/{,*/}*.js',
+      'app/modules/linshare.document/document.js',
+      'app/modules/linshare.document/{,*/}*.js',
       'app/modules/linshare.receivedShare/receivedShareService.js',
-      'app/modules/{,*/}*.js',
+      'app/modules/linshare.receivedShare/{,*/}*.js',
+      'app/modules/linshare.share/share.js',
+      'app/modules/linshare.share/{,*/}*.js',
+      'app/modules/linshare.user/{,*/}*.js',
       'app/scripts/{,*/}*.js',
       'test/unit/**/*.js'
     ],
@@ -53,6 +61,7 @@ module.exports = function(config) {
 
     // list of documents to exclude
     exclude: [
+      'app/modules/materialAdmin/js/config.js'
     ],
 
 

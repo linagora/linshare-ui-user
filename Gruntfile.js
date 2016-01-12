@@ -124,7 +124,9 @@ module.exports = function (grunt) {
         src: [
           'Gruntfile.js',
           '<%= yeoman.app %>/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/modules/**/*.js'
+          '<%= yeoman.app %>/modules/**/*.js',
+          '!<%= yeoman.app %>/modules/materialAdmin/js/**/*.js',
+          '!<%= yeoman.app %>/modules/**/test/karma.conf.js'
         ]
       },
       test: {
@@ -212,7 +214,7 @@ module.exports = function (grunt) {
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: ['<%= yeoman.app %>/styles/materialAdmin/fonts', '<%= yeoman.app %>/styles/fonts'],
+        fontsDir: ['<%= yeoman.app %>/modules/materialAdmin/fonts', '<%= yeoman.app %>/styles/fonts'],
         importPath: './vendors/bower_components',
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
@@ -377,9 +379,10 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'modules/**/views/*.html',
+            '!modules/materialAdmin/views/*.html',
             'i18n/original/{,*/}*.json',
             'images/{,*/}*.{webp}',
-            'styles/materialAdmin/img/icons/{,*/}*',
+            'modules/materialAdmin/img/icons/{,*/}*',
             'styles/fonts/{,*/}*.*'
           ]
         }, {
@@ -404,12 +407,12 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>'
         }, {
           expand: true,
-          cwd: '<%= yeoman.app %>/styles/materialAdmin',
+          cwd: '<%= yeoman.app %>/modules/materialAdmin',
           src: 'fonts/{,*/}*',
           dest: '<%= yeoman.dist %>'
         }, {
           expand: true,
-          cwd: '<%= yeoman.app %>/styles/materialAdmin',
+          cwd: '<%= yeoman.app %>/modules/materialAdmin',
           src: 'img/icons/{,*/}*',
           dest: '<%= yeoman.dist %>'
         }]
