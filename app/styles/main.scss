@@ -409,9 +409,10 @@ html:not(.ie9) .select::before {
 /*
 ** CHAT
 */
-#chat {
-  width: 350px;
-  top: 115px;
+#chat.toggled{
+  width: 25%;
+  width: -moz-calc(30% - 80.4px);
+  width: -webkit-calc(30% - 80.4px);
 }
 
 #filetable.toggled {

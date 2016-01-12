@@ -127,10 +127,13 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       }
     };
 
-    $scope.deleteSelected = function() {
+    $scope.deleteDocuments = function(document) {
+      if(!angular.isArray(document)) {
+        document = [document];
+      }
       swal({
           title: "Are you sure?",
-          text: "You are about to remove " + $scope.selectedDocuments.length + " file(s) !",
+          text: "You are about to remove " + document.length + " file(s) !",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
@@ -141,12 +144,12 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
         },
         function(isConfirm) {
           if (isConfirm) {
-            angular.forEach($scope.selectedDocuments, function(document) {
-              $log.debug('value to delete', document);
+            angular.forEach(document, function(doc) {
+              $log.debug('value to delete', doc);
               $log.debug('value to delete', documentsList.length);
-              LinshareDocumentService.delete(document.uuid).then(function() {
-                removeElementFromCollection(documentsList, document);
-                removeElementFromCollection($scope.selectedDocuments, document);
+              LinshareDocumentService.delete(doc.uuid).then(function() {
+                removeElementFromCollection(documentsList, doc);
+                removeElementFromCollection($scope.selectedDocuments, doc);
                 $scope.tableParams.reload();
                 growlService.growl('suppression réussie', 'inverse');
               });
