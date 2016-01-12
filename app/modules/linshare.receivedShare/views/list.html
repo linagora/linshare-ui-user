@@ -23,9 +23,10 @@
                 title=""
                 data-placement="right"
                 data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}">
-              <i class="md more-option hidden-xs"
-                 x-ng-class="{'md-arrow-drop-down': !advancedFilterBool,
-                              'md-arrow-drop-up': advancedFilterBool}"></i>
+                <!-- zmdi zmdi-caret-right-circle zmdi-hc-fw -->
+              <i class="zmdi hidden-xs"
+                 x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
+                              'zmdi-chevron-up': advancedFilterBool}"></i>
           </span>
         </div>
       </div>
@@ -175,11 +176,17 @@
                            ng-model="filters['dateStart']"
                            maxlengh="3" disabled />
                 </div>
-                <mighty-datepicker ng-model="filters['dateStart']"
-                                   options="optionsDbA"
-                                   ng-show="showDateRange && showDateRangeStart"
-                                   before="filters['dateEnd']">
-                </mighty-datepicker>
+                <div class="dd-block">
+                    <div class="date-picker">
+                        <datepicker
+                            show-weeks="false"
+                            ng-show="showDateRange && showDateRangeStart"
+                            ng-model="filters['dateStart']"
+                            max-date="filters['dateEnd']"
+                            close-text="Close" placeholder="Select Date"
+                            class="dp-inline"></datepicker>
+                    </div>
+                </div>
               </div>
               <div class="form-group">
                 <div class="fg-line disabled"
@@ -189,11 +196,17 @@
                            ng-model="filters['dateEnd']"
                            maxlengh="3" disabled />
                 </div>
-                <mighty-datepicker ng-model="filters['dateEnd']"
-                                   options="optionsDbB"
-                                   ng-show="showDateRange && showDateRangeStart"
-                                   after="filters['dateStart']">
-                </mighty-datepicker>
+                <div class="dd-block">
+                    <div class="date-picker dp-red">
+                      <datepicker
+                            show-weeks="false"
+                            ng-show="showDateRange && showDateRangeStart"
+                            ng-model="filters['dateEnd']"
+                            min-date="filters['dateStart']"
+                            close-text="Close" placeholder="Select Date"
+                            class="dp-inline"></datepicker>
+                    </div>
+                </div>
               </div>
               <div class="form-group">
               </div>

@@ -1,13 +1,22 @@
 <ul class="header-inner">
-    <li id="menu-trigger" data-target="mainmenu" data-toggle-sidebar data-model-left="mactrl.sidebarToggle.left" data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
+    <li id="menu-trigger"
+        data-target="mainmenu"
+        data-toggle-sidebar
+        data-model-left="mactrl.sidebarToggle.left"
+        data-ng-class="{ 'open': mactrl.sidebarToggle.left }">
         <div class="line-wrap">
             <div class="line top"></div>
             <div class="line center"></div>
             <div class="line bottom"></div>
         </div>
     </li>
+    <li class="page-title">
+        {{ linkActive.name | translate }}
+    </li>
     <li class="logo">
-        <a href="index.html">{{ 'APPLICATION_NAME' | translate }}</a>
+        <a href="/#/">
+            <img src="/images/logo-white.png" alt="Logo LinShare" />
+        </a>
     </li>
 
     <li class="pull-right">
@@ -19,7 +28,7 @@
                 <!-- <a class="tm-search" href="" data-ng-click="hctrl.openSearch()"></a> -->
             </li>
             <li class="dropdown hidden-xs">
-                <a ng-show="$flow.progress() > 0" data-toggle="dropdown" href="" class="col-md-2" >
+                <a ng-show="$flow.progress() > 0" data-toggle="dropdown" href="" class="col-md-2" style="height: 15px;">
                   <i class="tmn-counts">{{$flow.files.length}}</i>
                   <div class="progress m-t-15">
                     <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="$flow.progress()*100" aria-valuemin="0" aria-valuemax="100" style="padding-top: 15px; width: {{$flow.progress()*100}}%">
@@ -91,6 +100,9 @@
             <a data-toggle="dropdown" href=""><i class="zmdi zmdi-account zmdi-hc-2x"></i></a>
             <ul class="dropdown-menu dm-icon pull-right">
 
+              <li>
+                <a href="">{{ user.firstName }} {{ user.lastName }}</a>
+              </li>
               <li>
                 <a href=""><i class="zmdi zmdi-person"></i> Privacy Settings</a>
               </li>

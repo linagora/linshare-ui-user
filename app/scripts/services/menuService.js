@@ -7,26 +7,37 @@ angular.module('linshareUiUserApp')
         name: 'NAVIGATION.HOME',
         link: 'home',
         icon: 'zmdi zmdi-home',
+        color: '#03A9F4',
+        // blue
+        // purple
+        // color: '#673AB7',
         disabled: false
       };
 
       var files = {
         name: 'NAVIGATION.FILES',
         icon: 'zmdi zmdi-folder',
+        // pink
+        // color: '#2196F3',
+        // blue
+        color: '#2196F3',
         links: [
           {
             name: 'NAVIGATION.MY_FILES',
             link: 'documents.files',
             disabled: false
-          }, {
+          }
+          , {
             name: 'NAVIGATION.RECEIVED_SHARES',
             link: 'documents.received',
             disabled: false
-          }, {
+          }
+          , {
             name: 'NAVIGATION.SHARES',
             link: 'documents.shared',
             disabled: false
-          }, {
+          }
+          , {
             name: 'NAVIGATION.GROUPS',
             link: 'documents.threads',
             disabled: false
@@ -37,22 +48,23 @@ angular.module('linshareUiUserApp')
       var administrations = {
         name: 'NAVIGATION.ADMIN',
         icon: 'zmdi zmdi-settings',
+        color: '#E91E63',
         links: [
           {
             name: 'NAVIGATION.LISTS',
-            link: '#',
+            link: 'administration.lists',
             disabled: true
           }, {
             name: 'NAVIGATION.GUESTS',
-            link: '#',
+            link: 'administration.guests',
             disabled: true
           }, {
             name: 'NAVIGATION.USERS',
-            link: '#',
+            link: 'administration.users',
             disabled: true
           }, {
             name: 'NAVIGATION.GROUPS',
-            link: '#',
+            link: 'administration.groups',
             disabled: true
           }
         ]
@@ -61,6 +73,7 @@ angular.module('linshareUiUserApp')
       var uploads = {
         name: 'NAVIGATION.UPLOAD_MANAGMENT',
         icon: 'zmdi zmdi-arrow-in',
+        color: '#8BC34A',
         links: [
           {
             name: 'NAVIGATION.UPLOAD_PROPOSITIONS',
@@ -77,6 +90,7 @@ angular.module('linshareUiUserApp')
       var others = {
         name: 'NAVIGATION.AUDIT',
         icon: 'zmdi zmdi-info',
+        color: '#FFC107',
         links: [
           {
             name: 'NAVIGATION.AUDIT_GLOBAL',
@@ -97,6 +111,36 @@ angular.module('linshareUiUserApp')
         getAvailableTabs: function() {
           $log.debug('Menu:getAvailableTabs');
           return tabs;
+        },
+        getProperties: function (currentState) {
+          var res;
+          angular.forEach(tabs, function(value) {
+            if (value.links) {
+              angular.forEach(value.links, function(link) {
+                if (link.link == currentState) {
+                  res = value;
+                }
+              })
+            } else if (value.link == currentState) {
+              res = value;
+            }
+          });
+          return res;
+        },
+        getSectionName: function (currentState) {
+          var res;
+          angular.forEach(tabs, function(value) {
+            if (value.links) {
+              angular.forEach(value.links, function(link) {
+                if (link.link == currentState) {
+                  res = link;
+                }
+              })
+            } else if (value.link == currentState) {
+              res = value;
+            }
+          });
+          return res;
         }
       };
     }

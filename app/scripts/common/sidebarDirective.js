@@ -11,29 +11,14 @@ angular.module('linshareUiUserApp')
         controller: ['$rootScope', '$scope', '$state', '$log', 'MenuService',
           function($rootScope, $scope, $state, $log, MenuService) {
             $scope.tabs = MenuService.getAvailableTabs();
-            var setLinkActive = function (currentState) {
-              angular.forEach($scope.tabs, function(value) {
-                if (value.links) {
-                  angular.forEach(value.links, function(link) {
-                    if (link.link == currentState) {
-                      $scope.linkActive = value.name;
-                    }
-                  })
-                } else if (value.link == currentState) {
-                  $scope.linkActive = value.name;
-                }
-              });
+            $scope.changeColor = function (color) {
+              if (this.link.disabled == false)
+                this.customColor = {'color': color};
             };
-
-            setLinkActive($state.current.name);
-
-            $rootScope.$on('$stateChangeStart',
-            function(event, toState, toParams, fromState, fromParams) {
-                setLinkActive(toState.name);
-            });
           }
         ],
-        link: function(scope, element) {
+        link: function(scope, element, $document) {
+          scope.sizeNavigation = {'height': element[0].offsetHeight - (76+110)+'px'};
           element.parent().bind('oncontextmenu', function(){
           });
         },

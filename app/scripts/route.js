@@ -102,5 +102,31 @@ angular.module('linshareUiUserApp')
         url:'/guests/:uuid',
         templateUrl: 'views/guests/guestDetails.html',
         controller: 'LinshareGuestController'
+      })
+
+      .state('administration', {
+        url: '',
+        templateUrl: 'views/common/common.html'
+      })
+
+      .state('administration.lists', {
+        url:'/lists',
+        templateUrl: 'modules/linshare.administration/views/lists.html',
+        controller: 'LinshareGuestController'
+      })
+      .state('administration.guests', {
+        url:'/adminguests',
+        templateUrl: 'modules/linshare.administration/views/guests.html',
+        controller: 'LinshareGuestController'
+      })
+      .state('administration.users', {
+        url:'/users',
+        templateUrl: 'modules/linshare.administration/views/users.html',
+        controller: 'LinshareGuestController'
+      })
+      .state('administration.groups', {
+        url:'/groups',
+        templateUrl: 'modules/linshare.administration/views/groups.html',
+        controller: 'LinshareGuestController'
       });
   });

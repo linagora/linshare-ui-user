@@ -33,5 +33,6 @@
     "AUDIT_GLOBAL" : "Global audit",
     "AUDIT_UPLOAD_REQUEST" : "Upload requests audit"
   },
-  "LINK_DISABLED": "Link disabled"
+  "LINK_DISABLED": "Link disabled",
+  "WELCOME_USER": "Welcome "
 }

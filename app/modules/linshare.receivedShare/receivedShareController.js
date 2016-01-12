@@ -18,6 +18,12 @@ angular.module('linshare.receivedShare')
     $scope.optionsDbB = {
       template: template
     };
+    $scope.openDatePicker = function($event, opened) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope[opened] = true;
+    };
 
     var checkdatasIsSelecteds = function() {
       if ($scope.showActions.length != $scope.tableData.length && $scope.showActions.length != 0)

@@ -1,5 +1,5 @@
 {
-  "APPLICATION_NAME": "Linshare",
+  "APPLICATION_NAME": "LinShare",
   "REMOVE": "Supprimer",
   "DOWNLOAD": "Télécharger",
   "EXTENSIONS" : {
@@ -33,5 +33,6 @@
     "AUDIT_GLOBAL" : "Audit global",
     "AUDIT_UPLOAD_REQUEST" : "Audit invitations de dépôts"
   },
-  "LINK_DISABLED": "Lien inactif"
+  "LINK_DISABLED": "Lien inactif",
+  "WELCOME_USER": "Bienvenue "
 }
