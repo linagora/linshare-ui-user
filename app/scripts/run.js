@@ -13,7 +13,7 @@ angular.module('linshareUiUserApp')
       );
     };
   })
-  .config(function(RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider, $translatePartialLoaderProvider, lsAppConfig) {
+  .config(function(RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider, $translatePartialLoaderProvider, lsAppConfig, $windowProvider) {
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
     $translateProvider.useLoader('$translatePartialLoader', {
       urlTemplate: pathToLocal + '/{lang}/{part}.json',
@@ -29,7 +29,7 @@ angular.module('linshareUiUserApp')
     flowFactoryProvider.defaults = {
       simultaneousUploads: 1,
       //testChunks:false,
-      target: lsAppConfig.baseEndpoint + '/flow.json',
+      target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
       permanentErrors: [401, 500, 501]
     };
     /*
