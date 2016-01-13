@@ -77,11 +77,11 @@ angular.module('linshareUiUserApp')
         links: [
           {
             name: 'NAVIGATION.UPLOAD_PROPOSITIONS',
-            link: '#',
+            link: 'upload_request.propositions',
             disabled: true
           }, {
             name: 'NAVIGATION.UPLOAD_REQUESTS',
-            link: '#',
+            link: 'upload_request.requests',
             disabled: true
           }
         ]
@@ -94,11 +94,11 @@ angular.module('linshareUiUserApp')
         links: [
           {
             name: 'NAVIGATION.AUDIT_GLOBAL',
-            link: '#',
+            link: 'audit.global',
             disabled: true
           }, {
             name: 'NAVIGATION.AUDIT_UPLOAD_REQUEST',
-            link: '#',
+            link: 'audit.upload_request',
             disabled: true
           }
         ]

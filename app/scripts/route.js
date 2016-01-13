@@ -111,22 +111,54 @@ angular.module('linshareUiUserApp')
 
       .state('administration.lists', {
         url:'/lists',
-        templateUrl: 'modules/linshare.administration/views/lists.html',
+        templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
       .state('administration.guests', {
         url:'/adminguests',
-        templateUrl: 'modules/linshare.administration/views/guests.html',
+        templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
       .state('administration.users', {
         url:'/users',
-        templateUrl: 'modules/linshare.administration/views/users.html',
+        templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
       .state('administration.groups', {
         url:'/groups',
-        templateUrl: 'modules/linshare.administration/views/groups.html',
+        templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
-      });
+      })
+
+      .state('upload_request', {
+        url: '',
+        templateUrl: 'views/common/common.html'
+      })
+
+      .state('upload_request.requests', {
+        url:'/requests',
+        templateUrl: 'views/home/main.html',
+        controller: 'LinshareGuestController'
+      })
+      .state('upload_request.propositions', {
+        url:'/propositions',
+        templateUrl: 'views/home/main.html',
+        controller: 'LinshareGuestController'
+      })
+
+      .state('audit', {
+        url: '',
+        templateUrl: 'views/common/common.html'
+      })
+
+      .state('audit.global', {
+        url:'/audit_global',
+        templateUrl: 'views/home/main.html',
+        controller: 'LinshareGuestController'
+      })
+      .state('audit.upload_request', {
+        url:'/audit_upload_request',
+        templateUrl: 'views/home/main.html',
+        controller: 'LinshareGuestController'
+      })
   });
