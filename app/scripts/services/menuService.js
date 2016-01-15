@@ -7,7 +7,7 @@ angular.module('linshareUiUserApp')
         name: 'NAVIGATION.HOME',
         link: 'home',
         icon: 'zmdi zmdi-home',
-        color: '#03A9F4',
+        color: '#05B1FF',
         // blue
         // purple
         // color: '#673AB7',

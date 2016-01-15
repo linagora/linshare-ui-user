@@ -84,9 +84,67 @@ body {
 		margin-top: 30px;
 		h4 {
 			font-family: 'roboto';
-			color: #2F3186;
+			color: #05b1ff;
+			font-weight: 100;
 		}
 	}
+}
+
+#wip-ctn-page {
+	position:relative;
+	#wip-page {
+		position:absolute;
+		display:block;
+		width:100%;
+		height:100%;
+		.dashboard-wip {
+			display: block;
+			width: 100%;
+			position: absolute;
+			top: 13%;
+			text-align: center;
+			h4 {
+				font-family: 'roboto';
+				color: #05b1ff;
+				font-size:5em;
+				text-transform:uppercase;
+				font-weight: 100;
+			}
+		}
+	}
+}
+
+
+.msg-info {
+	margin-left:10%;
+	width:100%;
+	margin-top: 5%;
+	p {
+		font-size:1.1em;
+		color:#82caeb;
+		border-bottom: 3px solid rgb(231, 244, 255);
+		margin-bottom: 0;
+		padding-left:20px;
+	}
+
+	span.ctn {
+			display:inline-block;
+			width:26px;
+			height:26px;
+			margin-left: -26px;
+			margin-top: -22px;
+			color:#82caeb;
+			 background: url("../images/info-circle-bg-3.png") center;
+			vertical-align: middle;
+			text-align: center;
+
+
+			span{
+						display:inline-block;
+						padding-top:2px;
+			}
+		}
+
 }
 /*
 **
@@ -339,9 +397,9 @@ html:not(.ie9) .select::before {
 		    display: table-cell;
 		    vertical-align: middle;
 		    font-size: 22px;
-		    color: #32348C;
-		    span {
-		    	color: #5e5e5e;
+		    color: #05b1ff;
+			span {
+				color: #bababa;
 		    }
     	}
     }
