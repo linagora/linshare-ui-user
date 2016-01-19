@@ -242,6 +242,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '!<%= yeoman.dist %>/scripts/config.js',
           '<%= yeoman.dist %>/styles/fonts/*'
         ]
       }
@@ -383,6 +384,7 @@ module.exports = function (grunt) {
             'i18n/original/{,*/}*.json',
             'images/{,*/}*.{webp}',
             'modules/materialAdmin/img/icons/{,*/}*',
+            'scripts/config.js',
             'styles/fonts/{,*/}*.*'
           ]
         }, {
@@ -415,6 +417,9 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/modules/materialAdmin',
           src: 'img/icons/{,*/}*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          src: 'bower.json',
+          dest: '<%= yeoman.dist %>/about.json'
         }]
       },
       styles: {
@@ -505,6 +510,20 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('build-nomin', [
+    'clean:dist',
+    'wiredep',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'ngAnnotate',
+    'copy:dist',
+    'cssmin',
+    'filerev',
+    'usemin'
   ]);
 
   grunt.registerTask('build', [
