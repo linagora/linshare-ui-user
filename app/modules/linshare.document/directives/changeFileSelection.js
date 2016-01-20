@@ -34,7 +34,7 @@ angular.module('linshare.document')
       restrict: 'A',
       scope: {
         fileSelectionV: '=',
-        uuid: '=',
+        currentDocument: '=uuid',
         multipleSelectOn: '='
       },
       link: function(scope, element, attr, ctrl) {
@@ -42,13 +42,13 @@ angular.module('linshare.document')
           if(scope.multipleSelectOn == true) {
             element.toggleClass('info');
             if(element.hasClass('info')) {
-              scope.current = scope.uuid;
+              scope.current = scope.currentDocument;
               scope.$apply(function() {
-                scope.fileSelectionV.push(scope.uuid);
+                scope.fileSelectionV.push(scope.currentDocument);
               });
             } else {
               scope.current = {};
-              var index = scope.fileSelectionV.indexOf(scope.uuid);
+              var index = scope.fileSelectionV.indexOf(scope.currentDocument);
               if (index > -1) {
                 scope.$apply(function() {
                   scope.fileSelectionV.splice(index, 1);
@@ -61,22 +61,22 @@ angular.module('linshare.document')
               element.addClass('info');
               scope.$apply(function() {
                 scope.fileSelectionV.splice(0, scope.fileSelectionV.length);
-                scope.fileSelectionV.push(scope.uuid);
+                scope.fileSelectionV.push(scope.currentDocument);
               });
             } else {
                 element.toggleClass('info');
                 if(element.hasClass('info')) {
-                  if(scope.uuid.hasThumbnail == true && attr.sidebar == 'true') {
-                    LinshareDocumentService.getThumbnail(scope.uuid.uuid).then(function(thumbnail) {
-                      scope.uuid.thumbnail = thumbnail;
+                  if(scope.currentDocument.hasThumbnail == true && attr.sidebar == 'true') {
+                    LinshareDocumentService.getThumbnail(scope.currentDocument.uuid).then(function(thumbnail) {
+                      scope.currentDocument.thumbnail = thumbnail;
                     });
                   }
               scope.$apply(function() {
                 scope.fileSelectionV.shift();
-                scope.fileSelectionV.push(scope.uuid);
+                scope.fileSelectionV.push(scope.currentDocument);
               });
             } else {
-              var index = scope.fileSelectionV.indexOf(scope.uuid);
+              var index = scope.fileSelectionV.indexOf(scope.currentDocument);
               if (index > -1) {
                 scope.$apply(function() {
                   scope.fileSelectionV.splice(index, 1);

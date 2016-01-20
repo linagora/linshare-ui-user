@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="card" id="profile-main" data-ng-controller="profileCtrl as pctrl">
+    <div class="pm-overview c-overflow">
+
+      <div class="pmo-block pmo-contact hidden-xs">
+        <h2>Fichiers à partager</h2>
+
+        <ul>
+          <li ng-repeat="file in filesToShare"><i class="zmdi zmdi-phone"></i> {{ file.name }}</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="pm-body clearfix">
+      <ul class="tab-nav tn-justified">
+        <li class="btn-wave" data-ui-sref-active="active"><a data-ui-sref="share.files.new-share">Nouveau partage</a>
+        </li>
+        <li class="btn-wave" data-ui-sref-active="active"><a data-ui-sref="share.files.share-detail">Partage
+          existants</a></li>
+      </ul>
+
+      <data ui-view></data>
+    </div>
+  </div>
+</div>

@@ -31,7 +31,7 @@ angular.module('linshareUiUserApp')
       //------------------------------
 
       .state('documents', {
-        url: '',
+        url: '/files',
         templateUrl: 'views/common/common.html'
       })
 
@@ -98,6 +98,7 @@ angular.module('linshareUiUserApp')
           }
         }
       })
+
       .state('documents.guests.uuid', {
         url:'/guests/:uuid',
         templateUrl: 'views/guests/guestDetails.html',
@@ -105,7 +106,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('administration', {
-        url: '',
+        url: '/lists',
         templateUrl: 'views/common/common.html'
       })
 
@@ -160,5 +161,36 @@ angular.module('linshareUiUserApp')
         url:'/audit_upload_request',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
+      })
+
+      .state('share', {
+        url: '/share',
+        templateUrl: 'views/common/common.html'
+      })
+
+      .state('share.files', {
+        url: '/advancedshare',
+        templateUrl: 'modules/linshare.share/views/advancedSharing.html',
+        params: {
+          "selected": null,
+          "hiddenParam": "YES"
+        },
+        controller: 'LinshareShareActionController'
+      })
+
+      .state('share.files.new-share', {
+        url:'/new_share',
+        templateUrl: 'modules/linshare.share/views/new_advanced_sharing.html',
+        controller: 'LinshareAdvancedShareController',
+        resolve: {
+          allFunctionalities: function(LinshareFunctionalityService) {
+            return LinshareFunctionalityService.getAll();
+          }
+        }
+      })
+
+      .state('share.files.share-detail', {
+        url:'/share_detail',
+        templateUrl: 'modules/linshare.share/views/shares_detail.html'
       })
   });

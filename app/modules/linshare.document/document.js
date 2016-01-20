@@ -34,7 +34,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       },
       getThumbnail: function(uuid) {
         $log.debug('FileService:getThumbnail');
-        return Restangular.one('documents', uuid).one('thumbnail').get();
+        return Restangular.one('documents', uuid).one('thumbnail').get({base64: true});
       },
       uploadFiles: function(documentDto) {
         $log.debug('FileService:uploadFiles');
@@ -166,6 +166,15 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       }
     }, true);
 
+    $scope.$watch('mactrl.sidebarToggle.right', function(n) {
+      if(n === true) {
+        angular.element('.card').css('width', '70%');
+      } else {
+        angular.element('.card').css('width', '100%');
+      }
+    });
+
+    $scope.users = [];
     $scope.reload = function() {
       $scope.tableParams.reload();
     };
@@ -181,4 +190,6 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
           $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
+
+
   });

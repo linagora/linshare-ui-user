@@ -42,6 +42,10 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
       delete: function(uuid) {
         $log.debug('LinshareShareService : delete');
         return Restangular.one('shares', uuid).remove();
+      },
+      autocomplete: function(pattern) {
+        $log.debug('FileService:autocomplete');
+        return Restangular.all('users').one('autocomplete', pattern).get();
       }
     }
   })
@@ -66,4 +70,47 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
         $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
+  })
+
+  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService) {
+    $scope.share = {
+      recipients: [],
+      documents: []
+    };
+
+    angular.forEach($scope.selectedDocuments, function(doc) {
+      $scope.share.documents.push(doc.uuid);
+    });
+
+    $scope.$watch('selectedDocuments', function(n, o) {
+      if (n) {
+        $scope.share.documents = [];
+        angular.forEach(n, function(doc) {
+          $scope.share.documents.push(doc.uuid);
+        });
+      }
+    }, true);
+
+    $scope.selectedContact = {};
+    $scope.submitShare = function(shareCreationDto) {
+      angular.forEach($scope.selectedDocuments, function(doc) {
+        shareCreationDto.documents.push(doc.uuid);
+      });
+      if ($scope.selectedContact.length > 0) {
+        shareCreationDto.recipients.push({mail: $scope.selectedContact})
+      }
+      LinshareShareService.shareDocuments(shareCreationDto).then(function() {
+        $scope.share.recipients = [];
+        growlService.growl('Partage réussie', 'inverse');
+      });
+    };
+
+    $scope.filesToShare = $stateParams.selected;
+  })
+  .controller('LinshareAdvancedShareController', function($scope, allFunctionalities) {
+    angular.forEach($scope.filesToShare, function(doc) {
+      $scope.share.documents.push(doc.uuid);
+    });
+    $scope.allFunctionalities = allFunctionalities;
+
   });

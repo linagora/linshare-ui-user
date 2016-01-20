@@ -43,7 +43,8 @@ angular.module('linshareUiUserApp')
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   })
 
-  .config(function(localStorageServiceProvider) {
+  .config(function(localStorageServiceProvider, $logProvider, lsAppConfig) {
+  $logProvider.debugEnabled(lsAppConfig.debug);
     localStorageServiceProvider
       .setPrefix('lsUser')
       .setNotify(true, true);
@@ -95,6 +96,7 @@ angular.module('linshareUiUserApp')
     Restangular.setBaseUrl(lsAppConfig.backendUrl);
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+    $rootScope.linshareModeProduction = lsAppConfig.production;
   })
 
   .run(['$templateCache', '$http', function($templateCache, $http) {

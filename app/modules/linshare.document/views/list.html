@@ -65,7 +65,6 @@
 
 
     <!--<!--  DOCUMENTS LIST  -->
-    <div class="card">
 
       <div class="card-body">
 
@@ -82,11 +81,11 @@
                 <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a>
               </td>
 
-              <td class="text-center" ng-show="mactrl.sidebarToggle.right === false" data-title="'Modified'" sortable="'modificationDate'">
+              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Modified'" sortable="'modificationDate'">
                 {{documentFile.modificationDate | date:'shortDate'}}
               </td>
 
-              <td class="text-center" ng-show="mactrl.sidebarToggle.right === false" data-title="'Size'" sortable="'size'">
+              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Size'" sortable="'size'">
                 {{documentFile.size | readableSize: false}}
               </td>
 
@@ -94,7 +93,7 @@
                 <!--<button type="button" class="btn btn-default"><i class="zmdi zmdi-download"></i></button>-->
                 <ul class="actions hidden-xs">
                   <li>
-                    <a href="" title="share" ls-share-modal>
+                    <a href="" title="share" ng-click="mactrl.sidebarToggle.right = true;">
                       <i ng-show="documentFile.shared === 0" class="zmdi zmdi-share"></i>
                       <i ng-show="documentFile.shared > 0" class="zmdi zmdi-share" style="color: green"></i>
                     </a>
@@ -137,6 +136,7 @@
         <aside id="chat" data-ng-include src="'views/includes/chat.html'"
                data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
       </div>
-    </div>
   </div>
+  <!--<aside id="chat" data-ng-include src="'views/includes/chat.html'"-->
+         <!--data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>-->
 </div>

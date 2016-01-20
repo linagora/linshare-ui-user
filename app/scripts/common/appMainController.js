@@ -46,4 +46,33 @@ angular.module('linshareUiUserApp')
         }
       });
     });
-  });
+  })
+  .controller('LinshareAutocompleteController', function($scope, LinshareShareService, $log) {
+    $scope.userRepresentation = function(u) {
+      if (angular.isString(u)) {
+        return u;
+      }
+      return u.firstName.concat(" ", u.lastName, " ", u.mail, " ", u.domain);
+    };
+
+    $scope.searchGuestRestrictedContacts = function(pattern) {
+      return LinshareShareService.autocomplete(pattern);
+    };
+
+    $scope.addRecipients = function(users, contact) {
+      var exists = false;
+      angular.forEach(users, function(elem) {
+        if (elem.mail == contact.mail && elem.domain == contact.domain) {
+          exists = true;
+          $log.info('The contact ' + contact.mail + ' has already been added to that guest\'s restricted contacts');
+        }
+      });
+      if (!exists) {
+        users.push(_.omit(contact, 'restrictedContacts', 'uuid'));
+      }
+    };
+
+    $scope.removeRecipients = function(users, index) {
+      users.splice(index, 1);
+    };
+  });;
