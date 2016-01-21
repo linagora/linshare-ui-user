@@ -46,6 +46,10 @@ angular.module('linshareUiUserApp')
         }
       });
     });
+
+    $scope.reloadFiles = function() {
+      $scope.$broadcast('linshare-upload-complete');
+    }
   })
   .controller('LinshareAutocompleteController', function($scope, LinshareShareService, $log) {
     $scope.userRepresentation = function(u) {

@@ -176,7 +176,11 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
 
     $scope.users = [];
     $scope.reload = function() {
-      $scope.tableParams.reload();
+      LinshareDocumentService.getAllFiles().then(function(data) {
+        documentsList = data;
+        $scope.tableParams.total(documentsList.length);
+        $scope.tableParams.reload();
+      });
     };
 
     $scope.tableParams = new ngTableParams({
@@ -191,5 +195,8 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       }
     });
 
+    $scope.$on('linshare-upload-complete', function() {
+      $scope.reload();
+    });
 
   });
