@@ -2,28 +2,16 @@
 
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($scope,  $filter, $window, $translatePartialLoader, ngTableParams, LinshareReceivedShareService, files){
+    function($scope,  $filter, $window, $translatePartialLoader, ngTableParams, LinshareReceivedShareService, files, $log){
     $translatePartialLoader.addPart('receivedShare');
     $scope.datasIsSelected = false;
     $scope.advancedFilterBool = false;
     $scope.showActions = [];
     $scope.filters = {};
     $scope.showDateRangeStart = false;
-    $scope.filters.dateStart = moment().add('month', -1);
-    $scope.filters.dateEnd = moment().add('day', +1);
-    var template = "<div class=\"mighty-picker__wrapperxx\">\n <i class=\"md md-navigate-before mighty-picker__prev-month mighty-picker__navigation-prev\" ng-click=\"moveMonth(-1)\"></i>\n  <div class=\"mighty-picker__month\"\n    bindonce ng-repeat=\"month in months track by $index\">\n    <div class=\"mighty-picker__month-name\" ng-bind=\"month.name\"></div>\n    <table class=\"mighty-picker-calendar\">\n      <tr class=\"mighty-picker-calendar__days\">\n        <th bindonce ng-repeat=\"day in month.weeks[1]\"\n          class=\"mighty-picker-calendar__weekday\"\n          bo-text=\"day.date.format('dd')\">\n        </th>\n      </tr>\n      <tr bindonce ng-repeat=\"week in month.weeks\">\n        <td\n            bo-class='{\n              \"mighty-picker-calendar__day\": day,\n              \"mighty-picker-calendar__day--selected\": day.selected,\n              \"mighty-picker-calendar__day--disabled\": day.disabled,\n              \"mighty-picker-calendar__day--marked\": day.marker\n            }'\n            ng-repeat=\"day in week track by $index\" ng-click=\"select(day)\">\n            <div style=\"font-style: italic;\" class=\"mighty-picker-calendar__day-wrapper\"\n              bo-text=\"day.date.date()\"></div>\n            <div class=\"mighty-picker-calendar__day-marker-wrapper\">\n              <div class=\"mighty-picker-calendar__day-marker\"\n                ng-if=\"day.marker\"\n                ng-bind-template=\"\">\n              </div>\n            </div>\n        </td>\n      </tr>\n    </table>\n  </div>\n  <i class=\"md md-navigate-next mighty-picker__next-month mighty-picker__navigation-next\" ng-click=\"moveMonth(1)\"></i>\n</div>";
-    $scope.optionsDbA = {
-      template: template
-    };
-    $scope.optionsDbB = {
-      template: template
-    };
-    $scope.openDatePicker = function($event, opened) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope[opened] = true;
-    };
+    $scope.filters.dateStart = '';
+    $scope.filters.dateEnd ='';
+    $scope.showUnit == true;
 
     var checkdatasIsSelecteds = function() {
       if ($scope.showActions.length != $scope.tableData.length && $scope.showActions.length != 0)
@@ -64,24 +52,24 @@ angular.module('linshare.receivedShare')
 
     // Used to check/activate the checkbox related to the params
     $scope.paramsIsActivate = function(param) {
-    	if (param > 0)
-    		return true;
-    	return false;
+      if (param > 0)
+        return true;
+      return false;
     };
     $scope.clearParams = function(){
       $scope.filters.sizeStart = null;
       $scope.filters.sizeEnd = null;
-      $scope.filters.unity = '1024';
+      $scope.filters.unity = '1000';
       $scope.filters.dateType = '1';
-      $scope.filters.dateStart = moment().add('month', -1);
-      $scope.filters.dateEnd = moment().add('day', +1);
-      $scope.showUnit = false;
-      $scope.showDateRange = false;
+      $scope.filters.dateStart ='';
+      $scope.filters.dateEnd = '';
+      $scope.showUnit = true;
+      $scope.showDateRange = true;
       $scope.tableParams.reload();
     };
     $scope.updateParams = function(){
       $scope.tableParams.reload();
-      checkdatasIsSelecteds();
+     checkdatasIsSelecteds();
     };
     $scope.copy = function(){
       angular.forEach($scope.showActions, function(file, key) {
@@ -186,11 +174,11 @@ angular.module('linshare.receivedShare')
       $scope.showActions = [];
       $scope.datasIsSelected = !$scope.datasIsSelected;
       angular.forEach($scope.tableData.slice(($scope.tableParams.$params.page - 1) * $scope.tableParams.$params.count, $scope.tableParams.$params.page * $scope.tableParams.$params.count), function(file, key) {
-        $scope.tableData[key].isChecked = $scope.datasIsSelected;
-        if ($scope.datasIsSelected) {
-          file.isChecked = true;
-          $scope.showActions.push(file);
-        }
+      $scope.tableData[key].isChecked = $scope.datasIsSelected;
+          if ($scope.datasIsSelected) {
+            file.isChecked = true;
+            $scope.showActions.push(file);
+          }
       });
     };
     // When the page changed check / uncheck
@@ -218,25 +206,34 @@ angular.module('linshare.receivedShare')
         // i load the files in the ngTable and i stock it in the scope
         // with this method when i will delete file i can reload ngTable with the new data
         if ($scope.showUnit || $scope.showDateRange) {
-
-          filteredData = _.filter(filteredData, function(file){
+          if(($scope.showUnit == false) && ($scope.filters.sizeStart ==null)) {
+            $scope.filters.sizeStart =null;
+            $scope.filters.sizeEnd =null;
+          }
+           filteredData = _.filter(filteredData, function(file){
             var sizeIsValide = true;
             var dateIsValide = true;
-            if ($scope.filters.sizeStart || $scope.filters.sizeEnd) {
-              // convert the size to select byte
-              var start = ($scope.filters.sizeStart) ?
-                            parseInt($scope.filters.sizeStart, 10) * parseInt($scope.filters.unity, 10) :
-                            0;
-              var end = ($scope.filters.sizeEnd) ?
-                          parseInt($scope.filters.sizeEnd, 10) * parseInt($scope.filters.unity, 10) :
-                          file.size + 10;
-              var size = file.size.toFixed(1);
-              sizeIsValide = (size >= start && size <= end);
-            }
+            if($scope.showUnit == true){
+                if ($scope.filters.sizeStart || $scope.filters.sizeEnd) {
+                    // convert the size to select byte
+                      var start = ($scope.filters.sizeStart) ?
+                                    parseInt($scope.filters.sizeStart, 10) * parseInt($scope.filters.unity, 10) : 0;
+                      var end = ($scope.filters.sizeEnd) ?
+                                  parseInt($scope.filters.sizeEnd, 10) * parseInt($scope.filters.unity, 10) : file.size + 10;
+                      var size = file.size.toFixed(1);
+                      sizeIsValide = (size >= start && size <= end);
+                    }
+                  }
             if ($scope.showDateRange) {
               var dateFile = ($scope.filters.dateType == '1') ? moment(file.modificationDate) : moment(file.creationDate);
               // moment set la date a 00:00, il faut ajouter une journée afin de cibler la journée entiere
-              var dateEnd = moment($scope.filters.dateEnd).add('day', +1);
+             var dateEnd;
+            if($scope.filters.dateEnd){
+               dateEnd = moment($scope.filters.dateEnd).add('day', +1);
+              }else{
+                dateEnd = moment().add('day', +1);
+              }
+
               dateIsValide = (dateFile >= $scope.filters.dateStart && dateFile <= dateEnd);
             }
             return (sizeIsValide && dateIsValide);
@@ -258,4 +255,85 @@ angular.module('linshare.receivedShare')
       }
     });
 
-  });
+
+        $scope.today = function() {
+            $scope.dt = new Date();
+        };
+        $scope.today();
+        $scope.minRange="";
+        $scope.toggleMin = function() {
+            $scope.minDate = $scope.minDate ? null : new Date();
+             $scope.maxDate = $scope.maxDate ? null : new Date();
+        };
+        $scope.toggleMin();
+        $scope.open = function($event, opened) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope[opened] = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1,
+        };
+
+        $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+  }).directive('slideable', function () {
+    return {
+        restrict:'C',
+        compile: function (element, attr) {
+            // wrap tag
+            var contents = element.html();
+            element.html('<div class="slideable_content" style="margin:0 !important; padding:0 !important" >' + contents + '</div>');
+
+            return function postLink(scope, element, attrs) {
+                // default properties
+                attrs.duration = (!attrs.duration) ? '1s' : attrs.duration;
+                attrs.easing = (!attrs.easing) ? 'ease-in-out' : attrs.easing;
+                element.css({
+                    'overflow': 'hidden',
+                    'height': '0px',
+                    'transitionProperty': 'height',
+                    'transitionDuration': attrs.duration,
+                    'transitionTimingFunction': attrs.easing
+                });
+
+            };
+        }
+    };
+})
+.directive('slideToggle', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var target = document.querySelector(attrs.slideToggle);
+            attrs.expanded = false;
+            element.bind('click', function() {
+              var innerHeightInnerCtn=$('.slideable_content').innerHeight();
+                if(!attrs.expanded) {
+                var y = innerHeightInnerCtn;
+                var  initClicked = $("#searchFilterCtn").attr('style');
+
+              var heightRestStyle =  initClicked.replace("0px", y + 'px');
+              var heightAndOverflow = heightRestStyle.replace("hidden", "initial");
+              $("#searchFilterCtn").attr('style',heightRestStyle).delay(750).promise().done(function() {
+              $("#searchFilterCtn").attr('style',heightAndOverflow);
+               });
+
+                } else {
+                var innerHeightInnerCtn=$('.slideable_content').innerHeight();
+                 var y =innerHeightInnerCtn;
+                  var  stateExpandedStyle = $("#searchFilterCtn").attr('style');
+                  var resetOverflowStyle = stateExpandedStyle.replace("initial", "hidden");
+                  var resetHeightStyle =  resetOverflowStyle.replace(''+y+'px',"0px");
+
+              $("#searchFilterCtn").attr('style',resetOverflowStyle).delay(10).promise().done(function() {
+             $("#searchFilterCtn").attr('style',resetHeightStyle);
+               });
+            }
+            attrs.expanded = !attrs.expanded;
+            });
+        }
+    }
+});

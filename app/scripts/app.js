@@ -31,8 +31,6 @@ angular
     'linshare.share',
     'linshare.receivedShare',
     'LocalStorageModule',
-    'mightyDatepicker',
-    'pasvaz.bindonce',
     'pascalprecht.translate',
     'materialAdmin'
   ]);
