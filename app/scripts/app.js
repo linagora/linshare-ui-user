@@ -24,7 +24,6 @@ angular
     'http-auth-interceptor',
     'ui.bootstrap',
     'flow',
-    'pageslide-directive',
     'angular-growl',
     'linshare.userProfile',
     'linshare.authentication',

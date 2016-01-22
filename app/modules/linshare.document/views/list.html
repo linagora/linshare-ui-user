@@ -6,24 +6,24 @@
   <div class="card">
     <div class="lv-header-alt clearfix m-b-5">
 
-      <h2 class="lvh-label hidden-xs">Files list</h2>
+      <h2 class="lvh-label hidden-xs">Liste de mes fichiers</h2>
 
       <ul class="lv-actions actions">
 
         <li ng-hide="selectedDocuments.length == 0">
-          <a href="" title="share" ls-share-modal>
+          <a href="" title="partage" ls-share-modal>
             <i class="zmdi zmdi-share"></i>
           </a>
         </li>
 
         <li ng-hide="selectedDocuments.length == 0">
-          <a href="" title="delete" ng-click="deleteDocuments(selectedDocuments)">
+          <a href="" title="supprimer" ng-click="deleteDocuments(selectedDocuments)">
             <i class="zmdi zmdi-delete"></i>
           </a>
         </li>
 
         <li ng-init="multipleSelection = false" data-ng-class="{ 'open': multipleSelection === true }">
-          <a href="" title="multiple select" ng-click="multipleSelection = !multipleSelection">
+          <a href="" title=" selection multiple" ng-click="multipleSelection = !multipleSelection">
             <i class="zmdi zmdi-check-all"></i>
           </a>
         </li>
@@ -36,14 +36,14 @@
         </li>
 
         <li ng-hide="selectedDocuments.length == 0" class="dropdown" dropdown>
-          <a href="" title="more actions" dropdown-toggle>
+          <a href="" title="plus ..." dropdown-toggle>
             <i class="zmdi zmdi-more-vert"></i>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-right">
 
             <li>
-              <a href="" title="delete" alt="delete" ng-click="reload()">Refresh</a>
+              <a href="" title="supprimer" alt="supprimer" ng-click="reload()">Actualiser</a>
             </li>
             <li>
               <a href="" ng-click="">Copier dans un groupe</a>
@@ -55,7 +55,7 @@
               <a href="" ng-click="deleteDocuments(selectedDocuments)">Supprimer</a>
             </li>
             <li>
-              <a href="" ng-click="">Télécharger</a>
+              <a href="" ng-click="downloadSelectedFiles(selectedDocuments)">Télécharger</a>
             </li>
           </ul>
         </li>
@@ -77,15 +77,15 @@
 
               <td><span class="fa fa-file-excel-o"></span></td>
 
-              <td data-title="'Name'" class="col-md-7" sortable="'name'" uuid={{o.uuid}}>
-                <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a>
+              <td data-title="'Nom'" class="col-md-6" sortable="'name'" uuid={{o.uuid}}>
+                {{documentFile.name}}
               </td>
 
-              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Modified'" sortable="'modificationDate'">
+              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Modification'" sortable="'modificationDate'">
                 {{documentFile.modificationDate | date:'shortDate'}}
               </td>
 
-              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Size'" sortable="'size'">
+              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Taille'" sortable="'size'">
                 {{documentFile.size | readableSize: false}}
               </td>
 
@@ -99,7 +99,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="" title="download" ls-share-modal>
+                    <a href="" title="télécharger" ng-click="downloadCurrentFile(documentFile)">
                       <i class="zmdi zmdi-download"></i>
                     </a>
                   </li>
@@ -120,7 +120,7 @@
                         <a href="" ng-click="deleteDocuments(documentFile)">Supprimer</a>
                       </li>
                       <li>
-                        <a href="" ng-click="">Télécharger</a>
+                        <a href="" ng-click="downloadCurrentFile(documentFile)">Télécharger</a>
                       </li>
                     </ul>
                   </li>

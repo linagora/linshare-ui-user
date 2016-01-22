@@ -102,18 +102,52 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
 
     $scope.selectedDocuments = [];
 
-    $scope.download = function(selectedDocuments) {
-      angular.forEach(selectedDocuments, function(document){
-        LinshareDocumentService.downloadFiles(document.uuid);
-        //.then(function(file) {
-        //  console.log(file);
-        //  var blob = new Blob([file], {type: 'text/plain'});
-        //  $scope.url = window.URL.createObjectURL(blob);
-        //  console.log('url', $scope.url);
-        //  // $window.open(url);
-        //  //return file;
-        //});
-      });
+    $scope.downloadSelectedFiles = function(selectedDocuments) {
+      angular.forEach(selectedDocuments, function(doc) {
+        $scope.downloadCurrentFile(doc.uuid);
+      }
+      );
+    };
+
+    $scope.downloadCurrentFile = function(currentFile) {
+      LinshareDocumentService.downloadFiles(currentFile.uuid)
+        .then(function(downloadedFile) {
+          var fileType = currentFile.type;
+          var blob = new Blob([downloadedFile], {type: fileType});
+          var windowUrl = window.URL || window.webkitURL || window.mozURL || window.msURL;
+          var urlObject;
+
+          // https://msdn.microsoft.com/fr-fr/library/hh779016(v=vs.85).aspx
+          if (navigator.msSaveBlob) {
+            navigator.msSaveBlob(blob, currentFile.name);
+          }
+          else if (windowUrl) {
+            // create tag element a to simulate a download by click
+            var link = document.createElement('a');
+
+            // if the attribute download isset in the tag a
+            if ('download' in link) {
+              // Prepare a blob URL
+              urlObject = windowUrl.createObjectURL(blob);
+
+              // Set the attribute to the tag element a
+              link.setAttribute('href', urlObject);
+              link.setAttribute('download', currentFile.name);
+
+              // Simulate clicking the download link
+              var event = document.createEvent('MouseEvents');
+              event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+              link.dispatchEvent(event);
+            }
+            else {
+              // Prepare a blob URL
+              // Use application/octet-stream when using window.location to force download
+              blob = new Blob([downloadedFile], {type: octetStreamMime});
+              urlObject = windowUrl.createObjectURL(blob);
+              $window.location = url;
+            }
+          }
+        });
     };
 
     $scope.editProperties = function(restangObject) {

@@ -419,6 +419,24 @@ html:not(.ie9) .select::before {
   width: -webkit-calc(30% - 80.4px);
 }
 
+#sharewithlist {
+  display: inline;
+  list-style: none;
+}
+
+#sharewithlist li {
+  display: inline;
+}
+
+#sharewithlist li:after {
+  content: ", ";
+}
+
+#sharewithlist li:last-child:after {
+  content: "";
+}
+
+
 #filetable.toggled {
   width: 50%;
 }

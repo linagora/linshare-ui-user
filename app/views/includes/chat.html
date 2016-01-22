@@ -66,36 +66,48 @@
                       Chiffré
                     </div>
                     <div class="media-body">
-                      <div class="col-sm-4 m-b-20">
-                        <div class="toggle-switch">
-                          <input id="ts1" type="checkbox" hidden="hidden" checked="selectedDocuments[0].ciphered">
-                          <label for="ts1" class="ts-helper"></label>
-                        </div>
-                      </div>
+                          <span ng-show="selectedDocuments[0].ciphered == true">
+                            <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-green"></i>
+                          </span>
+                          <span ng-show="selectedDocuments[0].ciphered == false">
+                            <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-grey"></i>
+                          </span>
                     </div>
                   </div>
 
                   <div class="media">
                     <div class="pull-left col-md-7">
-                      Partagé
+                      Partagé avec :
                     </div>
                     <div class="media-body">
-                      <div class="lv-title">{{selectedDocuments[0].shared}}</div>
+                      <div class="lv-title">{{selectedDocuments[0].shared}} personne(s) <i class="zmdi zmdi-eye zmdi-hc-lg mdc-text-blue p-l-10" style="cursor: pointer"  ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed"></i></div>
+
+
                     </div>
                   </div>
+                  <div class="media">
+                    <div collapse="isCollapsed">
+                        <ul id="sharewithlist">
+                          <li>linda</li>
+                          <li>linda</li>
+                          <li>linda</li>
+                        </ul>
+                    </div>
+                  </div>
+
                   <div class="media">
                     <div class="pull-left col-md-7">
                       Description
                     </div>
                     <div class="media-body">
                       <div class="lv-title">{{selectedDocuments[0].description}}</div>
-                      <textarea class="lv-title">rtrt{{selectedDocuments[0].description}}</textarea>
                     </div>
                   </div>
                 </div>
               </div>
 
-            <div class="input-group p-b-20 p-t-20" data-ng-controller="LinshareShareActionController">
+            <div ng-show="selectedDocuments.length > 0" class="input-group p-b-20 p-t-20" data-ng-controller="LinshareShareActionController">
+              <h4 class="text-center">Partage rapide</h4>
               <div class="fg-line " style="background: white;" data-ng-controller="LinshareAutocompleteController">
                 <ul class="list-inline">
                   <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom" tooltip={{userRepresentation(recipient)}}
@@ -106,7 +118,7 @@
                       </span>
                   </li>
                 </ul>
-                <input type="text" class="form-control input-sm" autocomplete="off"
+                <input type="text" class="form-control input-sm" autocomplete="off" placeholder="adresse email des destinataires" autofocus
                        x-ng-model="selectedContact"
                        x-typeahead-min-length="3"
                        x-typeahead-on-select="addRecipients(share.recipients, selectedContact)"
