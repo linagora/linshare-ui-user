@@ -101,7 +101,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
       }
       LinshareShareService.shareDocuments(shareCreationDto).then(function() {
         $scope.share.recipients = [];
-        growlService.growl('Partage réussie', 'inverse');
+        growlService.growl('Partage réussi', 'inverse');
+        $scope.$emit('linshare-upload-complete');
       });
     };
 

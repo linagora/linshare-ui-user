@@ -11,7 +11,7 @@
       <ul class="lv-actions actions">
 
         <li ng-hide="selectedDocuments.length == 0">
-          <a href="" title="partage" ls-share-modal>
+          <a href="" title="partage" ng-click="onShare(); mactrl.sidebarToggle.right = true;">
             <i class="zmdi zmdi-share"></i>
           </a>
         </li>
@@ -46,10 +46,10 @@
               <a href="" title="supprimer" alt="supprimer" ng-click="reload()">Actualiser</a>
             </li>
             <li>
-              <a href="" ng-click="">Copier dans un groupe</a>
+              <a href="" ng-show="linshareModeProduction == false" ng-click="">Copier dans un groupe</a>
             </li>
             <li>
-              <a href="" ng-click="">Partager</a>
+              <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">Partager</a>
             </li>
             <li>
               <a href="" ng-click="deleteDocuments(selectedDocuments)">Supprimer</a>
@@ -81,37 +81,37 @@
                 {{documentFile.name}}
               </td>
 
-              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Modification'" sortable="'modificationDate'">
+              <td ng-if="mactrl.sidebarToggle.right === false" data-title="'Modification'" sortable="'modificationDate'">
                 {{documentFile.modificationDate | date:'shortDate'}}
               </td>
 
-              <td class="text-center" ng-if="mactrl.sidebarToggle.right === false" data-title="'Taille'" sortable="'size'">
+              <td ng-if="mactrl.sidebarToggle.right === false" data-title="'Taille'" sortable="'size'">
                 {{documentFile.size | readableSize: false}}
               </td>
 
-              <td class="text-center" data-title="'Actions'" sortable="'shared'">
+              <td data-title="'Actions'" sortable="'shared'">
                 <!--<button type="button" class="btn btn-default"><i class="zmdi zmdi-download"></i></button>-->
                 <ul class="actions hidden-xs">
                   <li>
-                    <a href="" title="share" ng-click="mactrl.sidebarToggle.right = true;">
+                    <a href="" title="share" event-propagation-stop ng-click="onShare(); mactrl.sidebarToggle.right = true;">
                       <i ng-show="documentFile.shared === 0" class="zmdi zmdi-share"></i>
                       <i ng-show="documentFile.shared > 0" class="zmdi zmdi-share" style="color: green"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="" title="télécharger" ng-click="downloadCurrentFile(documentFile)">
+                    <a href="" title="télécharger" event-propagation-stop ng-click="downloadCurrentFile(documentFile)">
                       <i class="zmdi zmdi-download"></i>
                     </a>
                   </li>
                   <li class="dropdown" dropdown>
-                    <a href="" title="more actions" dropdown-toggle>
+                    <a href="" title="more actions" dropdown-toggle event-propagation-stop>
                       <i class="zmdi zmdi-more-vert"></i>
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
 
                       <li>
-                        <a href="" ng-click="">Copier dans un groupe</a>
+                        <a href="" ng-show="linshareModeProduction == false" ng-click="">Copier dans un groupe</a>
                       </li>
                       <li>
                         <a href="" ls-share-modal>Partager</a>

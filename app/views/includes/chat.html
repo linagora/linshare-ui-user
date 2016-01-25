@@ -61,7 +61,7 @@
                       <div class="lv-title">{{selectedDocuments[0].expirationDate | date:'shortDate'}}</div>
                     </div>
                   </div>
-                  <div class="media">
+                  <div ng-show="linshareModeProduction == false" class="media">
                     <div class="pull-left col-md-7">
                       Chiffré
                     </div>
@@ -80,17 +80,19 @@
                       Partagé avec :
                     </div>
                     <div class="media-body">
-                      <div class="lv-title">{{selectedDocuments[0].shared}} personne(s) <i class="zmdi zmdi-eye zmdi-hc-lg mdc-text-blue p-l-10" style="cursor: pointer"  ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed"></i></div>
-
-
+                      <div class="lv-title">{{selectedDocuments[0].shared}} personne(s)
+                        <i class="zmdi zmdi-eye zmdi-hc-lg mdc-text-blue p-l-10"
+                           style="cursor: pointer"
+                           ng-init="isCollapsed = true"
+                           ng-click="isCollapsed = !isCollapsed"></i>
+                      </div>
                     </div>
                   </div>
+
                   <div class="media">
                     <div collapse="isCollapsed">
-                        <ul id="sharewithlist">
-                          <li>linda</li>
-                          <li>linda</li>
-                          <li>linda</li>
+                        <ul ng-repeat="shareElement in selectedDocuments[0].shares">
+                          <li><a href="mailto:{{shareElement.recipient.mail}}">{{shareElement.recipient.firstName}} {{shareElement.recipient.lastName}}</a></li>
                         </ul>
                     </div>
                   </div>
@@ -110,7 +112,8 @@
               <h4 class="text-center">Partage rapide</h4>
               <div class="fg-line " style="background: white;" data-ng-controller="LinshareAutocompleteController">
                 <ul class="list-inline">
-                  <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom" tooltip={{userRepresentation(recipient)}}
+                  <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom"
+                      tooltip={{userRepresentation(recipient)}}
                       x-ng-repeat="recipient in share.recipients">{{recipient.lastName}}&nbsp;{{recipient.firstName}}
                       <span style="cursor: pointer;">
                           <i class="glyphicon glyphicon-remove" style="color: #333;"
@@ -118,7 +121,8 @@
                       </span>
                   </li>
                 </ul>
-                <input type="text" class="form-control input-sm" autocomplete="off" placeholder="adresse email des destinataires" autofocus
+                <input id="focusInputShare" type="text" class="form-control input-sm" autocomplete="off"
+                       placeholder="adresse de courriel des destinataires" autofocus
                        x-ng-model="selectedContact"
                        x-typeahead-min-length="3"
                        x-typeahead-on-select="addRecipients(share.recipients, selectedContact)"
@@ -127,7 +131,11 @@
                        x-typeahead-input-formatter="angular.noop"
                        x-typeahead="u as userRepresentation(u) for u in searchGuestRestrictedContacts($viewValue) | limitTo:3" />
               </div>
-              <span class="input-group-addon last"><button class="btn bgm-blue waves-circle" ng-click="submitShare(share)"><i class="zmdi zmdi-share zmdi-hc-lg"></i></button></span>
+              <span class="input-group-addon last">
+               <button class="btn btn-primary btn-icon waves-effect waves-circle" ng-click="submitShare(share)">
+                 <i class="zmdi zmdi-share"></i>
+               </button>
+              </span>
             </div>
 
             <label ng-if="share.recipients.length > 0" class="p-t-20">
@@ -137,12 +145,13 @@
         </div>
       </tab>
 
-      <tab heading="Historique">
+      <tab heading="Historique" disabled="true">
         <div ng-show="linshareModeProduction == false" class="p-l-10 p-r-10" data-ng-controller="LinshareShareActionController">
           <div class="input-group p-b-20">
             <div class="fg-line " style="background: white;">
               <ul class="list-inline">
-                <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom" tooltip={{userRepresentation(recipient)}}
+                <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom"
+                    tooltip={{userRepresentation(recipient)}}
                     x-ng-repeat="recipient in share.recipients">{{recipient.lastName}}&nbsp;{{recipient.firstName}}
                       <span style="cursor: pointer;">
                           <i class="glyphicon glyphicon-remove" style="color: #333;"
@@ -159,7 +168,11 @@
                      x-typeahead-input-formatter="angular.noop"
                      x-typeahead="u as userRepresentation(u) for u in searchGuestRestrictedContacts($viewValue) | limitTo:3" />
             </div>
-            <span class="input-group-addon last"><button class="btn bgm-blue waves-circle" ng-click="submitShare(share)"><i class="zmdi zmdi-mail-send"></i></button></span>
+            <span class="input-group-addon last">
+              <button class="btn bgm-blue waves-circle" ng-click="submitShare(share)">
+                <i class="zmdi zmdi-mail-send"></i>
+              </button>
+            </span>
           </div>
 
             <label ng-if="share.recipients.length > 0" class="p-t-20">

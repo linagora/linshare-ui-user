@@ -21,6 +21,7 @@ angular.module('linshareUiUserApp')
         // color: '#2196F3',
         // blue
         color: '#2196F3',
+        disabled: false,
         links: [
           {
             name: 'NAVIGATION.MY_FILES',
@@ -30,17 +31,17 @@ angular.module('linshareUiUserApp')
           , {
             name: 'NAVIGATION.RECEIVED_SHARES',
             link: 'documents.received',
-            disabled: false
+            disabled: true
           }
           , {
             name: 'NAVIGATION.SHARES',
             link: 'documents.shared',
-            disabled: false
+            disabled: true
           }
           , {
             name: 'NAVIGATION.GROUPS',
             link: 'documents.threads',
-            disabled: false
+            disabled: true
           }
         ]
       };
@@ -49,6 +50,7 @@ angular.module('linshareUiUserApp')
         name: 'NAVIGATION.ADMIN',
         icon: 'zmdi zmdi-settings',
         color: '#E91E63',
+        disabled: true,
         links: [
           {
             name: 'NAVIGATION.LISTS',
@@ -74,6 +76,7 @@ angular.module('linshareUiUserApp')
         name: 'NAVIGATION.UPLOAD_MANAGMENT',
         icon: 'zmdi zmdi-arrow-in',
         color: '#8BC34A',
+        disabled: true,
         links: [
           {
             name: 'NAVIGATION.UPLOAD_PROPOSITIONS',
@@ -91,6 +94,7 @@ angular.module('linshareUiUserApp')
         name: 'NAVIGATION.AUDIT',
         icon: 'zmdi zmdi-info',
         color: '#FFC107',
+        disabled: true,
         links: [
           {
             name: 'NAVIGATION.AUDIT_GLOBAL',

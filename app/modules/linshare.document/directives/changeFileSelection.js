@@ -29,7 +29,7 @@ angular.module('linshare.document')
       }
     };
   })
-  .directive('lsOnDocumentSelect', function(LinshareDocumentService){
+  .directive('lsOnDocumentSelect', function(LinshareDocumentService, LinshareShareService){
     return {
       restrict: 'A',
       scope: {
@@ -70,6 +70,11 @@ angular.module('linshare.document')
                     LinshareDocumentService.getThumbnail(scope.currentDocument.uuid).then(function(thumbnail) {
                       scope.currentDocument.thumbnail = thumbnail;
                     });
+                  }
+                  if(scope.currentDocument.shared > 0) {
+                    LinshareDocumentService.getFileInfo(scope.currentDocument.uuid).then(function(data) {
+                      scope.currentDocument.shares = data.shares;
+                    })
                   }
               scope.$apply(function() {
                 scope.fileSelectionV.shift();

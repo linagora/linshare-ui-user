@@ -81,7 +81,7 @@
                             </div>
                         </div>
 
-                        <a class="lv-footer" href="">View All</a>
+                        <a ng-show="linshareModeProduction == false" class="lv-footer" href="">View All</a>
                     </div>
                 </div>
             </li>
@@ -103,10 +103,10 @@
               <li>
                 <a href="">{{ user.firstName }} {{ user.lastName }}</a>
               </li>
-              <li>
+              <li ng-show="linshareModeProduction == false">
                 <a href=""><i class="zmdi zmdi-person"></i> Privacy Settings</a>
               </li>
-              <li>
+              <li ng-show="linshareModeProduction == false">
                 <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
               </li>
               <li>

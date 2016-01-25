@@ -12,13 +12,13 @@
           <i class="{{tab.icon}}" style="color: {{ tab.color | translate }}"></i> {{ tab.name | translate }}
         </a>
       </li>
-      <li class="sub-menu" ng-if="tab.links"
+      <li ng-show="tab.disabled == false" class="sub-menu" ng-if="tab.links"
           data-ng-class="{ 'active toggled': currentState.name==tab.name || (currentState.name=='NAVIGATION.HOME' && tab.name=='NAVIGATION.FILES') }">
         <a toggle-submenu>
           <i class="{{tab.icon}}" style="color: {{ tab.color }}"></i> {{ tab.name | translate }}
         </a>
         <ul>
-          <li ng-repeat="link in tab.links"
+          <li ng-show="link.disabled == false" ng-repeat="link in tab.links"
               ng-mouseover="changeColor(tab.color)"
               ng-mouseleave="changeColor('inherit')">
             <a data-ui-sref="{{link.link}}"

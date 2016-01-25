@@ -26,7 +26,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       },
       getFileInfo: function(uuid) {
         $log.debug('FileService:getFileInfo');
-        return Restangular.one('documents', uuid).get();
+        return Restangular.one('documents', uuid).get({withShares: true});
       },
       downloadFiles: function(uuid) {
         $log.debug('FileService:downloadFiles');
@@ -233,4 +233,19 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       $scope.reload();
     });
 
+    $scope.onShare = function() {
+      $('#focusInputShare').focus();
+    };
+  })
+  .directive('eventPropagationStop', function() {
+    return {
+      link: function(scope, elm) {
+        elm.bind('click', function(event) {
+          if(elm.parent().parent().parent().parent().hasClass('info')) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        });
+      }
+    }
   });
