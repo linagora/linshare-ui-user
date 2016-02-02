@@ -1,5 +1,5 @@
-$logoBleu: #05B1FF;
-
+$logoBlue: #05B1FF;
+$dispBlue: #06A6EE;
 .line-wrap {
   margin: 11px 20px;
 }
@@ -7,7 +7,6 @@ $logoBleu: #05B1FF;
 body {
   font-family: 'Open Sans', sans-serif;
 }
-
 /*
 **
 ** DatePicker
@@ -17,20 +16,70 @@ body {
 li.dp-actions {
   display: none;
 }
+.popover {
+  padding:0;
+  h3{
+    color:$dispBlue;
+    letter-spacing: 0.05em;
+  }
+}
+.dropdown-menu li a span:first-child  {
+
+  display:inline-block;
+  width:32%;
+}
+
+/***
+**  Style for the typeahead autocomplete
+*/
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+  color: #9d9d9;
+  text-decoration: none;
+  outline: 0;
+  background-color: $dispBlue;
+}
+.dropdown-menu > li  {
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-menu:not([class*="bgm-"]) > li > a{
+  color: #4C4C4C;
+}
+
+
+.dropdown-menu:not([class*="bgm-"]) > li.active > a,
+.dropdown-menu:not([class*="bgm-"]) > li.active > a:hover,
+.dropdown-menu:not([class*="bgm-"]) > li.active > a:focus {
+  color: #ffffff;
+
+}
+
+.dropdown-menu > li > a {
+  padding: 8px 17px;
+  -webkit-transition: background-color;
+  -o-transition: background-color;
+  transition: background-color;
+  -webkit-transition-duration: 250ms;
+  transition-duration: 250ms;
+  font-family: roboto;
+  font-size:1.02em;
+}
+
 
 /*
 **
 ** HEADER
 **
 */
-
+.m-t-50{
+  margin-top: 50px !important;
+}
 .card-header .actions {
   z-index: 888;
 }
 
 .clickable {
   cursor: pointer;
-
 }
 
 html:not(.ie9) .formsearch .select::before {
@@ -141,6 +190,9 @@ html:not(.ie9) .formsearch .select::before {
   label {
     margin-bottom: 1em;
     margin-top: 3em;
+    font-weight:normal;
+    font-size:1em;
+    color:$dispBlue;
   }
   select, input:focus, select:focus, select.form-control.outlineFFremove:focus {
     outline: 0;
@@ -261,7 +313,7 @@ html:not(.ie9) .formsearch .select::before {
     margin-top: 30px;
     h4 {
       font-family: 'roboto';
-      color: $logoBleu;
+      color: $logoBlue;
       font-weight: 100;
     }
   }

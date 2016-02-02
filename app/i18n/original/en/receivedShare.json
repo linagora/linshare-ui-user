@@ -4,6 +4,8 @@
     "ADVANCED_FILTER" : "Show advanced filters",
     "REMOVE_FILES" : "Remove selected files",
     "DOWNLOAD_FILES" : "Download selected files",
-    "SHOW_MORE_OPTIONS" : "Show more options"
+    "SHOW_MORE_OPTIONS" : "Show more options",
+    "DATE_OF_MODIFICATION" :"Modification date",
+    "DATE_OF_CREATION" :"Creation date"
   }
 }

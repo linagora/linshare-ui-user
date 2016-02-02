@@ -31,7 +31,7 @@ angular.module('linshareUiUserApp')
           , {
             name: 'NAVIGATION.RECEIVED_SHARES',
             link: 'documents.received',
-            disabled: true
+            disabled: false
           }
           , {
             name: 'NAVIGATION.SHARES',
