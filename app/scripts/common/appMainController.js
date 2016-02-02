@@ -140,7 +140,6 @@ angular.module('linshareUiUserApp')
   .controller('UiUserMainController',
   function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate, AuthenticationService, MenuService, growlService) {
 
-    $translatePartialLoader.addPart('general');
     localStorage.setItem('ma-layout-status', 0);
 
     $scope.mactrl.sidebarToggle.left = false;

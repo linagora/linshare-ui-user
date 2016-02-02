@@ -7,5 +7,13 @@
     "SHOW_MORE_OPTIONS" : "Voir plus d'options",
     "DATE_OF_MODIFICATION" :"Date de modification",
     "DATE_OF_CREATION" :"Date de création"
+  },
+  "TABLE_HEADER": {
+    "NAME": "Nom",
+    "TYPE": "Type",
+    "MODIFICATION_DATE": "Dernière modification",
+    "CREATION_DATE": "Date de création",
+    "SIZE": "Taille",
+    "ACTION": "Actions"
   }
 }

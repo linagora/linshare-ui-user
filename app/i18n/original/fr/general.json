@@ -14,6 +14,7 @@
     "TEXT" : "Texte",
     "CODE" : "Code"
   },
+  "BOUTON_ADD_FILE_TITLE": "Ajouter des fichiers",
   "NAVIGATION" : {
     "HOME" : "Accueil",
     "FILES" : "Fichiers",
@@ -34,5 +35,67 @@
     "AUDIT_UPLOAD_REQUEST" : "Audit invitations de dépôts"
   },
   "LINK_DISABLED": "Lien inactif",
-  "WELCOME_USER": "Bienvenue "
+  "WELCOME_USER": "Bienvenue ",
+  "BOUTON_LABEL_TITLE": {
+    "SHARE": "partager",
+    "DELETE": "supprimer",
+    "MULTIPLE_SELECT": "sélection multiple",
+    "INFO": "info",
+    "MORE_ACTIONS": "plus d'actions",
+    "DOWNLOAD": "télécharger"
+  },
+  "LOGIN": {
+    "EMAIL_PLACEHOLDER": "Courriel",
+    "PASSWORD_PLACEHOLDER": "Mot de passe",
+    "KEEP_SIGNED": "Rester connecté"
+  },
+  "HEADER": {
+    "SETTINGS": "Paramètres",
+    "LOGOUT": "Déconnexion",
+    "FULL_SCREEN": "Plein écran",
+    "CLEAR_LOCAL_STORAGE": "Purger le stockage local",
+    "UPLOAD_PROGRESS": "Progression de dépôt"
+  },
+  "ACTION": {
+    "DOWNLOAD": "Télécharger",
+    "SHARE": "Partager",
+    "REFRESH": "Actualiser",
+    "COPY_IN_GROUP": "Copier dans un groupe",
+    "DELETE": "Supprimer"
+  },
+  "SWEET_ALERT": {
+    "ON_FILE_DELETE": {
+      "TITLE": "Êtes-vous sûr?",
+      "TEXT": "Vous êtes sur le point de supprimer des fichiers !",
+      "CONFIRM_BUTTON": "Oui, continuez !",
+      "CANCEL_BUTTON": "Annulez !"
+    }
+  },
+  "GROWL_ALERT": {
+    "DELETE": "Suppression réussie",
+    "SHARE": "Partage réussi"
+  },
+  "FILTER_COMPONENT": {
+    "PLACEHOLDER_FILE_NAME": "Nom de fichier",
+    "FILTER_BY_SIZE": "Filtrer par taille",
+    "FILTER_BY_DATE": {
+      "HEADER": "Filtrer par date",
+      "MODIFICATION_DATE": "Date de modification",
+      "CREATION_DATE": "Date de création",
+      "BEGINNING_DATE": "Date de début",
+      "ENDING_DATE": "Date de fin"
+    },
+    "FILTER_BY_RECIPIENT": {
+      "HEADER": "Filtrer par destinataire",
+      "PLACEHOLDER": "Veuillez saisir un courriel, un nom ou un prénom"
+    },
+    "SUBMIT": "Filtrer",
+    "REINITIALIZE": "Réinitialiser"
+  },
+  "TABLE_HEADER": {
+    "NAME": "Nom",
+    "MODIFICATION_DATE": "Dernière modification",
+    "SIZE": "Taille",
+    "ACTION": "Actions"
+  }
 }

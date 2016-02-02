@@ -5,7 +5,7 @@
   </div>
   <div>
     <tabset justified="true">
-      <tab heading="Details">
+      <tab heading="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}">
         <div class="p-l-10 p-r-10">
           <div id="profile-main">
                 <div class="p-relative m-b-20">
@@ -19,7 +19,7 @@
 
                   <div class="media">
                     <div class="pull-left p-relative col-md-7">
-                      Date de dépôt
+                      {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}
                     </div>
                     <div class="media-body">
                       <div class="lv-title">{{selectedDocuments[0].creationDate | date:'shortDate'}}</div>
@@ -28,7 +28,7 @@
 
                   <div class="media">
                     <div class="pull-left p-relative col-md-7">
-                      Taille
+                      {{'RIGHT_PANEL.DETAILS.SIZE' | translate}}
                     </div>
                     <div class="media-body">
                       <div class="lv-title">{{selectedDocuments[0].size | readableSize: false}}</div>
@@ -46,7 +46,7 @@
 
                   <div class="media">
                     <div class="pull-left p-relative col-md-7">
-                      Date de modification
+                      {{'RIGHT_PANEL.DETAILS.MODIFICATION_DATE' | translate}}
                     </div>
                     <div class="media-body">
                       <div class="lv-title">{{selectedDocuments[0].modificationDate | date:'shortDate'}}</div>
@@ -55,7 +55,7 @@
 
                   <div class="media">
                     <div class="pull-left p-relative col-md-7">
-                      Date d'expiration
+                      {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}
                     </div>
                     <div class="media-body">
                       <div class="lv-title">{{selectedDocuments[0].expirationDate | date:'shortDate'}}</div>
@@ -63,7 +63,7 @@
                   </div>
                   <div ng-show="linshareModeProduction == false" class="media">
                     <div class="pull-left col-md-7">
-                      Chiffré
+                      {{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}}
                     </div>
                     <div class="media-body">
                           <span ng-show="selectedDocuments[0].ciphered == true">
@@ -77,10 +77,10 @@
 
                   <div class="media">
                     <div class="pull-left col-md-7">
-                      Partagé avec :
+                      {{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}
                     </div>
                     <div class="media-body">
-                      <div class="lv-title">{{selectedDocuments[0].shared}} personne(s)
+                      <div class="lv-title">{{selectedDocuments[0].shared}} {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' | translate}}
                         <i class="zmdi zmdi-eye zmdi-hc-lg mdc-text-blue p-l-10"
                            style="cursor: pointer"
                            ng-init="isCollapsed = true"
@@ -99,7 +99,7 @@
 
                   <div class="media">
                     <div class="pull-left col-md-7">
-                      Description
+                      {{'RIGHT_PANEL.DETAILS.DESCRIPTION' | translate}}
                     </div>
                     <div class="media-body">
                       <div class="lv-title">{{selectedDocuments[0].description}}</div>
@@ -109,7 +109,7 @@
               </div>
 
             <div ng-show="selectedDocuments.length > 0" class="input-group p-b-20 p-t-20" data-ng-controller="LinshareShareActionController">
-              <h4 class="text-center">Partage rapide</h4>
+              <h4 class="text-center">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h4>
               <div class="fg-line " style="background: white;" data-ng-controller="LinshareAutocompleteController">
                 <ul class="list-inline">
                   <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom"
@@ -122,7 +122,7 @@
                   </li>
                 </ul>
                 <input id="focusInputShare" type="text" class="form-control input-sm" autocomplete="off"
-                       placeholder="adresse de courriel des destinataires" autofocus
+                       placeholder="{{'RIGHT_PANEL.DETAILS.SHARE_PLACEHOLDER' | translate}}" autofocus
                        x-ng-model="selectedContact"
                        x-typeahead-min-length="3"
                        x-typeahead-on-select="addRecipients(share.recipients, selectedContact)"
@@ -145,7 +145,7 @@
         </div>
       </tab>
 
-      <tab heading="Historique" disabled="true">
+      <tab heading="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" disabled="true">
         <div ng-show="linshareModeProduction == false" class="p-l-10 p-r-10" data-ng-controller="LinshareShareActionController">
           <div class="input-group p-b-20">
             <div class="fg-line " style="background: white;">
@@ -179,7 +179,7 @@
               <textarea ng-model="share.sharingNote" placeholder="add a note"></textarea>
             </label>
           <div class="p-t-20" ng-show="linshareModeProduction == false">
-            <a ui-sref="share.files.new-share({selected: selectedDocuments})" href="">partage avancé</a>
+            <a ui-sref="share.files.new-share({selected: selectedDocuments})" href="">{{'RIGHT_PANEL.ACTIVITIES.ADVANCED_SHARE' | translate}}</a>
           </div>
           <div ng-show="linshareModeProduction == false">
             share{{share}}<br />

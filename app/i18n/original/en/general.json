@@ -14,6 +14,7 @@
     "TEXT" : "Text",
     "CODE" : "Code"
   },
+  "BOUTON_ADD_FILE_TITLE": "Add files",
   "NAVIGATION" : {
     "HOME" : "Home",
     "FILES" : "Files",
@@ -34,5 +35,61 @@
     "AUDIT_UPLOAD_REQUEST" : "Upload requests audit"
   },
   "LINK_DISABLED": "Link disabled",
-  "WELCOME_USER": "Welcome "
+  "WELCOME_USER": "Welcome ",
+  "BOUTON_LABEL_TITLE": {
+    "SHARE": "share",
+    "DELETE": "delete",
+    "MULTIPLE_SELECT": "multiple selection",
+    "INFO": "info",
+    "MORE_ACTIONS": "more actions",
+    "DOWNLOAD": "download"
+  },
+  "LOGIN": {
+    "EMAIL_PLACEHOLDER": "Email",
+    "PASSWORD_PLACEHOLDER": "Password",
+    "KEEP_SIGNED": "Keep me signed in"
+  },
+  "HEADER": {
+    "SETTINGS": "My settings",
+    "LOGOUT": "Logout",
+    "FULL_SCREEN": "Full screen",
+    "CLEAR_LOCAL_STORAGE": "Clear Local Storage",
+    "UPLOAD_PROGRESS": "Upload progress"
+  },
+  "ACTION": {
+    "DOWNLOAD": "Download",
+    "SHARE": "Share",
+    "REFRESH": "Refresh",
+    "COPY_IN_GROUP": "Copy in a group",
+    "DELETE": "Delete"
+  },
+  "SWEET_ALERT": {
+    "ON_FILE_DELETE": {
+      "TITLE": "Are you sure?",
+      "TEXT": "You are about to remove files !",
+      "CONFIRM_BUTTON": "Yes, delete it!",
+      "CANCEL_BUTTON": "Cancel!"
+    }
+  },
+  "GROWL_ALERT": {
+    "DELETE": "File(s) has been deleted",
+    "SHARE": "share done with success"
+  },
+  "FILTER_COMPONENT": {
+    "PLACEHOLDER_FILE_NAME": "File Name",
+    "FILTER_BY_SIZE": "Filter by size",
+    "FILTER_BY_DATE": {
+      "HEADER": "Filter by date",
+      "MODIFICATION_DATE": "Modification date",
+      "CREATION_DATE": "Creation date",
+      "BEGINNING_DATE": "Beginning date",
+      "ENDING_DATE": "Ending date"
+    },
+    "FILTER_BY_RECIPIENT": {
+      "HEADER": "Filter by recipient",
+      "PLACEHOLDER": "Please enter a recipient email, first name or last name"
+    },
+    "SUBMIT": "Filter",
+    "REINITIALIZE": "Clear"
+  }
 }

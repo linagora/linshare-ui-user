@@ -13,7 +13,7 @@
       <div class="search-bar">
         <div class="input-group">
           <div class="fg-line">
-            <input type="text" class="form-control" placeholder="Nom de fichier"
+            <input type="text" class="form-control" placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
                    ng-change="updateParams()"
                    ng-model="filters['name']">
           </div>
@@ -75,26 +75,9 @@
                  x-ng-click="download()">{{ 'DOWNLOAD' | translate }}</a>
             </li>
             <li>
-              <a href="">Télécharger sous forme d'arhive</a>
-            </li>
-            <li>
               <a href=""
                  x-ng-show="showActions.length > 0"
-                 x-ng-click="copy()">Copier</a>
-            </li>
-            <li>
-              <a href=""
-                 x-ng-show="showActions.length > 0"
-                 x-ng-click="copy()">Copier dans un groupe</a>
-            </li>
-            <li>
-              <a href="">Transférer</a>
-            </li>
-            <li>
-              <a href="">Encrypté</a>
-            </li>
-            <li>
-              <a href="">Decrypté</a>
+                 x-ng-click="copy()">{{'ACTION.COPY_IN_GROUP' | translate }}</a>
             </li>
           </ul>
         </li>
@@ -102,7 +85,7 @@
       <div class="clearfix"></div>
     <div id="searchFilterCtn" class="slideable"   duration="750ms" easing="cubic-bezier(.02, .01, .47, 1);">
       <div class="hidden-xs row fix-margin-row col-md-12 m-t-30 formsearch" style="float:none;" >
-        <label>Filtrer par taille</label>
+        <label>{{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate }}</label>
         <div class="clearfix"></div>
         <div class="col-sm-3">
           <div class="input-group">
@@ -163,7 +146,7 @@
             </div>
           </div>
         </div>
-        <label>Filtrer par date</label>
+        <label>{{'FILTER_COMPONENT.FILTER_BY_DATE.HEADER' | translate }}</label>
         <div class="clearfix"></div>
         <div ng-init="showDateRange=true">
           <div class="col-sm-3">
@@ -173,12 +156,11 @@
               </span>
               <div class="fg-line select"  ng-class="{disabledIcon: !showDateRange}">
                 <select ng-disabled="!showDateRange" ng-model="filters['dateType']"
-                         data-placeholder="Date de Modification"
                          class="form-control outlineFFremove w-100 custumSelect"
                          ng-init="filters['dateType'] = '1'"
                          >
-                  <option value="1" >{{'TOOLTIP.DATE_OF_MODIFICATION' | translate }}</option>
-                  <option value="2">{{'TOOLTIP.DATE_OF_CREATION' | translate }}</option>
+                  <option value="1" >{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}</option>
+                  <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}</option>
                 </select>
               </div>
             </div>
@@ -192,7 +174,8 @@
                 <input ng-disabled="!showDateRange" ng-click="open($event, 'dateStartOpened')" type="text"
                        class="form-control" datepicker-popup="{{format}}" show-weeks="false"
                        is-open="dateStartOpened"   max-date="maxDate" datepicker-options="dateOptions"
-                       ng-required="true" close-text="Close"  placeholder="Date de début"
+                       ng-required="true" close-text="Close"
+                       placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate }}"
                        ng-model="filters['dateStart']"/>
               </div>
             </div>
@@ -209,7 +192,7 @@
                         ng-model="filters['dateEnd']" is-open="dateEndOpened"
                         max-date="maxDate" min-date="filters['dateStart']"
                         datepicker-options="dateOptions" ng-required="true"
-                        close-text="Close" placeholder="Date de fin" />
+                        close-text="Close" placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate }}" />
               </div>
             </div>
           </div>
@@ -227,7 +210,7 @@
               </div>
             </div>
           </div>
-          <label>Filtrer par destinataire</label>
+          <label>{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER' | translate }}</label>
           <div class="clearfix"></div>
           <div class="col-sm-7">
             <div class="input-group" ng-init="showRecipients=true" >
@@ -239,7 +222,7 @@
                        ng-disabled="!showRecipients"
                        autocomplete="off"
                        class="form-control"
-                       placeholder="Veuillez saisir un email un nom ou un prénom"
+                       placeholder="{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER' | translate }}"
                        ng-model="filters['selectedContact']"
                        x-typeahead-min-length="3"
                        x-typeahead-on-select="addRecipients(share.recipients, filters['selectedContact'])"
@@ -272,10 +255,10 @@
 
         <div class="col-md-9 m-t-50 m-b-30" >
           <button class="btn bgm-gray waves-effect" ng-click="clearParams()">
-            Reinitialiser
+            {{'FILTER_COMPONENT.REINITIALIZE' | translate }}
           </button>
           <button class="btn bgm-blue waves-effect" ng-click="updateParams()">
-            Filtrer
+            {{'FILTER_COMPONENT.SUBMIT' | translate }}
           </button>
         </div>
         <div class="clearfix"></div>
@@ -297,7 +280,7 @@
           <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a>
           <p class="text-left m-b-0">{{documentFile.size | readableSize: true}}</p>
           <p class="text-right">
-            <strong>Date de modification: </strong>{{documentFile.modificationDate | date:medium}}</p>
+            <strong>{{'TABLE_HEADER.MODIFICATION_DATE' | translate}}: </strong>{{documentFile.modificationDate | date:medium}}</p>
         </div>
       </div>
     </div>
@@ -305,7 +288,7 @@
       <table class="table table-striped m-b-30" data-ng-table="tableParams" show-filter="true">
 
         <tr data-ng-repeat="documentFile in $data">
-          <td data-title="'Type'" class="col-md-1 col-lg-1">
+          <td data-title="'TABLE_HEADER.TYPE' | translate" class="col-md-1 col-lg-1">
             <i class="fa fa-lg"
                data-toggle="tooltip"
                title=""
@@ -315,24 +298,23 @@
                ng-class="documentFile.typeImage"></i>&nbsp; &nbsp;
           </td>
           <td class="col-md-4 col-lg-5"
-              data-title="'Nom'"
+              data-title="'TABLE_HEADER.NAME' | translate"
               x-uuid={{o.uuid}}
               sortable="'name'">
             <a ng-href="/linshare/documents/{{documentFile.uuid}}/download">{{documentFile.name}}</a>
           </td>
           <td class="col-md-1 col-lg-1"
               sortable="'size'"
-              data-title="'Taille'">
-            {{documentFile.size | readableSize: true}}
+              data-title="'TABLE_HEADER.SIZE' | translate">
+            {{documentFile.size | readableSize: true }}
           </td>
-          <td data-title="'Date de modification'" class="col-md-2 col-lg-2" sortable="'modificationDate'">
+          <td data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" class="col-md-2 col-lg-2" sortable="'modificationDate'">
             {{documentFile.modificationDate | date:medium}}
           </td>
-          <td data-title="'Date de création'" class="col-md-2 col-lg-2" sortable="'modificationDate'">
+          <td data-title="'TABLE_HEADER.CREATION_DATE' | translate" class="col-md-2 col-lg-2" sortable="'modificationDate'">
             {{documentFile.creationDate | date:medium}}
           </td>
-          <td sortable="'isChecked'" class="col-md-1 col-lg-1"
-              filter="{ isChecked: 'path/to/your/filters/checkbox.html'}">
+          <td sortable="'isChecked'" class="col-md-1 col-lg-1">
             <label class="checkbox checkbox-inline m-r-20">
               <input type="checkbox" name="check"
                      x-ng-checked="documentFile.isChecked"

@@ -7,7 +7,11 @@
       <div class="input-group m-b-20">
         <span class="input-group-addon"><i class="zmdi zmdi-male zmdi-hc-2x"></i></span>
         <div class="fg-line">
-          <input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="input.email" required>
+          <input type="email"
+                 class="form-control"
+                 id="inputEmail"
+                 placeholder="{{'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
+                 ng-model="input.email" required />
         </div>
       </div>
     </div>
@@ -18,7 +22,11 @@
       <div class="input-group m-b-20">
         <span class="input-group-addon"><i class="zmdi zmdi-key zmdi-hc-2x"></i></span>
         <div class="fg-line">
-          <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="input.password" required>
+          <input type="password"
+                 class="form-control"
+                 id="inputPassword"
+                 placeholder="{{'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+                 ng-model="input.password" required />
         </div>
       </div>
     </div>
@@ -28,8 +36,7 @@
       <div class="checkbox">
         <label>
           <input type="checkbox" value="">
-          <i class="input-helper"></i>
-          Keep me signed in
+          <i class="input-helper"></i>{{'LOGIN.KEEP_SIGNED' | translate }}
         </label>
       </div>
 

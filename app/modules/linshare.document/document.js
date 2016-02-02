@@ -98,8 +98,9 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
  *
  * The controller to manage documents
  */
-  .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $window, $log, documentsList, growlService) {
-
+  .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $translate,
+                                                     $window, $log, documentsList, growlService, $translatePartialLoader) {
+    $translatePartialLoader.addPart('filesList');
     $scope.selectedDocuments = [];
 
     $scope.downloadSelectedFiles = function(selectedDocuments) {
@@ -160,19 +161,26 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
         collection.splice(index, 1);
       }
     };
-
+    $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
+      'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON', 'GROWL_ALERT.DELETE']).then(function(translations) {
+      $scope.swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
+      $scope.swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
+      $scope.swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
+      $scope.swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
+      $scope.growlMsgDelete = translations['GROWL_ALERT.DELETE'];
+    });
     $scope.deleteDocuments = function(document) {
       if(!angular.isArray(document)) {
         document = [document];
       }
       swal({
-          title: "Are you sure?",
-          text: "You are about to remove " + document.length + " file(s) !",
+          title: $scope.swalTitle,
+          text: $scope.swalText,
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "cancel!",
+          confirmButtonText: $scope.swalConfirm,
+          cancelButtonText: $scope.swalCancel,
           closeOnConfirm: true,
           closeOnCancel: true
         },
@@ -185,7 +193,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
                 removeElementFromCollection(documentsList, doc);
                 removeElementFromCollection($scope.selectedDocuments, doc);
                 $scope.tableParams.reload();
-                growlService.growl('suppression réussie', 'inverse');
+                growlService.growl($scope.growlMsgDelete, 'inverse');
               });
             });
           }

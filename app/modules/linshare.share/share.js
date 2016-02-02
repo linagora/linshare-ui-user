@@ -72,7 +72,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
     });
   })
 
-  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService) {
+  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService, $translate) {
     $scope.share = {
       recipients: [],
       documents: []
@@ -91,6 +91,10 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
       }
     }, true);
 
+    $translate('GROWL_ALERT.SHARE').then(function(translations) {
+      $scope.growlMsgShareSuccess = translations;
+    });
+
     $scope.selectedContact = {};
     $scope.submitShare = function(shareCreationDto) {
       angular.forEach($scope.selectedDocuments, function(doc) {
@@ -101,7 +105,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
       }
       LinshareShareService.shareDocuments(shareCreationDto).then(function() {
         $scope.share.recipients = [];
-        growlService.growl('Partage réussi', 'inverse');
+        growlService.growl($scope.growlMsgShareSuccess, 'inverse');
         $scope.$emit('linshare-upload-complete');
       });
     };

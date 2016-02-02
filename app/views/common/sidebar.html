@@ -1,7 +1,7 @@
 <div ng-class="{'hidden': !mactrl.sidebarToggle.left}">
   <button class="btn-add-files" flow-btn>
     <i class="zmdi zmdi-file-plus zmdi-hc-fw"></i>
-    <span>Ajouter des fichiers</span>
+    <span>{{'BOUTON_ADD_FILE_TITLE' | translate }}</span>
   </button>
   <div class="c-overflow" id="navigation" ng-style="sizeNavigation">
     <ul class="main-menu" ng-repeat="tab in tabs">
@@ -24,8 +24,7 @@
             <a data-ui-sref="{{link.link}}"
                data-ui-sref-active="active"
                data-ng-class="{'disabled': link.disabled }"
-               ng-style="customColor"
-               >
+               ng-style="customColor">
               {{ link.name | translate }}
             </a>
           </li>
@@ -35,13 +34,13 @@
   </div>
   <div class="quota">
     <div class="linshare">
-      <img src="/images/logo-blue-grey.png" alt="Logo LinShare" />
+      <img src="images/logo-blue-grey.png" alt="Logo LinShare" />
       <p><span>Lin</span>Share</p>
     </div>
     <div class="quota-used"></div>
     <div class="quota-free"></div>
     <div class="quota-information">
-      <p>10 GB of 15 GB used</p>
+      <p>10 GB out of 15 GB used</p>
     </div>
   </div>
 </div>

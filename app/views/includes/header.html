@@ -15,7 +15,7 @@
     </li>
     <li class="logo">
         <a href="/#/">
-            <img src="/images/logo-white.png" alt="Logo LinShare" />
+            <img src="images/logo-white.png" alt="Logo LinShare" />
         </a>
     </li>
 
@@ -41,7 +41,7 @@
                 <div class="dropdown-menu pull-right stop-propagate dropdown-menu-lg">
                     <div class="listview">
                         <div class="lv-header">
-                            Upload progress
+                          {{'HEADER.UPLOAD_PROGRESS' | translate}}
                         </div>
                         <div class="lv-body">
                             <div class="lv-item" ng-init="wid = 10" x-ng-repeat="file in $flow.files">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
 
-                        <a ng-show="linshareModeProduction == false" class="lv-footer" href="">View All</a>
+                        <!--<a ng-show="linshareModeProduction == false" class="lv-footer" href="">View All</a>-->
                     </div>
                 </div>
             </li>
@@ -89,10 +89,14 @@
                 <a data-toggle="dropdown" href=""><i class="zmdi zmdi-settings zmdi-hc-2x zmdi-hc-fw"></i></a>
                 <ul class="dropdown-menu dm-icon pull-right">
                     <li>
-                        <a data-ng-click="hctrl.fullScreen()" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                        <a data-ng-click="hctrl.fullScreen()" href="">
+                          <i class="zmdi zmdi-fullscreen"></i>{{'HEADER.FULL_SCREEN' | translate}}
+                        </a>
                     </li>
                     <li>
-                        <a data-ng-click="hctrl.clearLocalStorage()" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
+                        <a data-ng-click="hctrl.clearLocalStorage()" href="">
+                          <i class="zmdi zmdi-delete"></i>{{'HEADER.CLEAR_LOCAL_STORAGE' | translate}}
+                        </a>
                     </li>
                 </ul>
             </li>
@@ -104,13 +108,12 @@
                 <a href="">{{ user.firstName }} {{ user.lastName }}</a>
               </li>
               <li ng-show="linshareModeProduction == false">
-                <a href=""><i class="zmdi zmdi-person"></i> Privacy Settings</a>
-              </li>
-              <li ng-show="linshareModeProduction == false">
-                <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
+                <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
               </li>
               <li>
-                <a data-ng-controller="AuthenticationController" data-ng-click="logout()" href=""><i class="zmdi zmdi-settings"></i> Logout</a>
+                <a data-ng-controller="AuthenticationController" data-ng-click="logout()" href="">
+                  <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
+                </a>
               </li>
             </ul>
           </li>

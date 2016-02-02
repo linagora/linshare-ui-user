@@ -1,0 +1,29 @@
+{
+  "PAGE_FILE_TITLE": "Files list",
+  "TABLE_HEADER": {
+    "NAME": "Name",
+    "MODIFICATION_DATE": "Last modification",
+    "SIZE": "Size",
+    "ACTION": "Actions"
+  },
+  "RIGHT_PANEL": {
+    "DETAILS": {
+      "TITLE": "DETAILS",
+      "UPLOAD_DATE": "Upload date",
+      "SIZE": "Size",
+      "TYPE": "Type",
+      "MODIFICATION_DATE": "Modification date",
+      "EXPIRATION_DATE": "Expiration date",
+      "CIPHERED": "Ciphered",
+      "SHARED_WITH": "Shared with:",
+      "PEOPLE_SHARED_WITH": "contact(s)",
+      "DESCRIPTION": "Description",
+      "QUICK_SHARE": "Quick share",
+      "SHARE_PLACEHOLDER": "emails of recipients",
+      "ADVANCED_SHARE": "Advanced sharing"
+    },
+    "ACTIVITIES": {
+      "TITLE": "ACTIVITIES"
+    }
+  }
+}

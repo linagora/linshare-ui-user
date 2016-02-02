@@ -1,0 +1,29 @@
+{
+  "PAGE_FILE_TITLE": "Liste de mes fichiers",
+  "TABLE_HEADER": {
+    "NAME": "Nom",
+    "MODIFICATION_DATE": "Dernière modification",
+    "SIZE": "Taille",
+    "ACTION": "Actions"
+  },
+  "RIGHT_PANEL": {
+    "DETAILS": {
+      "TITLE": "DETAILS",
+      "UPLOAD_DATE": "Date de dépôt",
+      "SIZE": "Taille",
+      "TYPE": "Type",
+      "MODIFICATION_DATE": "Date de modification",
+      "EXPIRATION_DATE": "Date d'expiration",
+      "CIPHERED": "Chiffré",
+      "SHARED_WITH": "Partagé avec:",
+      "PEOPLE_SHARED_WITH": "personne(s)",
+      "DESCRIPTION": "Description",
+      "QUICK_SHARE": "Partage rapide",
+      "SHARE_PLACEHOLDER": "adresse de courriel des destinataires",
+      "ADVANCED_SHARE": "Partage avancé"
+    },
+    "ACTIVITIES": {
+      "TITLE": "Historique"
+    }
+  }
+}
