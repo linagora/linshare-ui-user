@@ -169,7 +169,7 @@ angular.module('linshareUiUserApp')
       $scope.linkActive = MenuService.getSectionName(toState.name);
     });
     AuthenticationService.getCurrentUser().then(function (user) {
-      $scope.user = user;
+      $scope.loggedUser = user;
     });
 
     $scope.$on('event:auth-loginRequired', function() {
@@ -177,11 +177,13 @@ angular.module('linshareUiUserApp')
       $scope.urlTogoAfterLogin = $rootScope.$state.current.name;
       $log.debug('my urlTogoAfterLogin', $scope.urlTogoAfterLogin);
       $state.go('login', {next: $scope.urlTogoAfterLogin});
+      $scope.loggedUser = '';
     });
     $scope.$on('event:auth-loginConfirmed', function () {
       $log.debug('event:auth-loginConfirmed received');
       $log.debug('my urlTogoAfterLogin', $scope.urlTogoAfterLogin);
       AuthenticationService.getCurrentUser().then(function (user) {
+        $scope.loggedUser = user;
         $translate('WELCOME_USER').then(function(welcome) {
           growlService.growl(welcome + user.firstName + ' ' + user.lastName, 'inverse');
         });

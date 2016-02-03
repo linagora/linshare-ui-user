@@ -1,4 +1,4 @@
-<ul class="header-inner">
+<ul class="header-inner" data-flow-files-submitted="$flow.upload()">
     <li id="menu-trigger"
         data-target="mainmenu"
         data-toggle-sidebar
@@ -111,7 +111,7 @@
                 <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
               </li>
               <li>
-                <a data-ng-controller="AuthenticationController" data-ng-click="logout()" href="">
+                <a data-ng-controller="AuthenticationController" data-ng-click="logout(); $flow.cancel()" href="">
                   <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
                 </a>
               </li>
