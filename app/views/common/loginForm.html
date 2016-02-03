@@ -1,6 +1,6 @@
 <!-- Login -->
 <div data-ng-controller="AuthenticationController" ls-login-form-display class="lc-block toggled" id="l-login">
-  <form class="form-horizontal" role="form">
+  <form class="form-horizontal" ng-submit="submitLoginForm()" role="form">
 
     <div class="form-group">
       <label class="sr-only" for="inputEmail"></label>
@@ -9,6 +9,7 @@
         <div class="fg-line">
           <input type="email"
                  class="form-control"
+                 name="Email"
                  id="inputEmail"
                  placeholder="{{'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
                  ng-model="input.email" required />
@@ -24,6 +25,7 @@
         <div class="fg-line">
           <input type="password"
                  class="form-control"
+                 name="Password"
                  id="inputPassword"
                  placeholder="{{'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
                  ng-model="input.password" required />
@@ -40,8 +42,9 @@
         </label>
       </div>
 
-      <a href="" class="btn btn-login btn-danger btn-float" data-ng-click="submitLoginForm()"><i
-        class="zmdi zmdi-arrow-right"></i></a>
+      <button type="submit" class="btn btn-login btn-danger btn-float">
+        <i class="zmdi zmdi-arrow-right"></i>
+      </button>
 
     </div>
   </form>
