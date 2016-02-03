@@ -6,13 +6,13 @@
 </header>
 <section id="main">
   <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
-  <aside id="chat" data-ng-include src="'views/includes/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
   <section id="content"
            ng-class="{'content-toggled': mactrl.sidebarToggle.left }">
     <div class="container" id="home" style="height: {{sizeHeight}}px">
         <div class="dashboard-welcome">
           <img src="images/logo-sky.png" />
-          <h4>Bienvenue sur votre application de partage de fichiers <b>LinShare</b>.</h4>
+          <h4>{{'APPLICATION_WELCOME_HOME' | translate }} <b>LinShare</b>.</h4>
         </div>
 
     </div>

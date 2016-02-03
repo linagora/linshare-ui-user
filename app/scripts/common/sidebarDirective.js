@@ -12,12 +12,13 @@ angular.module('linshareUiUserApp')
           function($rootScope, $scope, $state, $log, MenuService) {
             $scope.tabs = MenuService.getAvailableTabs();
             $scope.changeColor = function (color) {
-              if (this.link.disabled == false)
+              if (this.link.disabled === false) {
                 this.customColor = {'color': color};
+              }
             };
           }
         ],
-        link: function(scope, element, $document) {
+        link: function(scope, element) {
           scope.sizeNavigation = {'height': element[0].offsetHeight - (76+110)+'px'};
           element.parent().bind('oncontextmenu', function(){
           });

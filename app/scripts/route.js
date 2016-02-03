@@ -2,7 +2,7 @@
 
 angular.module('linshareUiUserApp')
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('home', {
@@ -172,8 +172,8 @@ angular.module('linshareUiUserApp')
         url: '/advancedshare',
         templateUrl: 'modules/linshare.share/views/advancedSharing.html',
         params: {
-          "selected": null,
-          "hiddenParam": "YES"
+          'selected': null,
+          'hiddenParam': 'YES'
         },
         controller: 'LinshareShareActionController'
       })
@@ -192,5 +192,5 @@ angular.module('linshareUiUserApp')
       .state('share.files.share-detail', {
         url:'/share_detail',
         templateUrl: 'modules/linshare.share/views/shares_detail.html'
-      })
+      });
   });

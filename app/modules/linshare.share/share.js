@@ -47,7 +47,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
         $log.debug('FileService:autocomplete');
         return Restangular.all('users').one('autocomplete', pattern).get();
       }
-    }
+    };
   })
 
 
@@ -82,7 +82,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
       $scope.share.documents.push(doc.uuid);
     });
 
-    $scope.$watch('selectedDocuments', function(n, o) {
+    $scope.$watch('selectedDocuments', function(n) {
       if (n) {
         $scope.share.documents = [];
         angular.forEach(n, function(doc) {
@@ -101,7 +101,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
         shareCreationDto.documents.push(doc.uuid);
       });
       if ($scope.selectedContact.length > 0) {
-        shareCreationDto.recipients.push({mail: $scope.selectedContact})
+        shareCreationDto.recipients.push({mail: $scope.selectedContact});
       }
       LinshareShareService.shareDocuments(shareCreationDto).then(function() {
         $scope.share.recipients = [];

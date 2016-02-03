@@ -18,7 +18,6 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
  */
   .factory('LinshareDocumentService', function(Restangular, $log) {
     var baseRestDocuments = Restangular.all('documents');
-    var baseRestShares = Restangular.all('shares');
     return {
       getAllFiles: function() {
         $log.debug('FileService:getAllFiles');
@@ -40,7 +39,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
         $log.debug('FileService:uploadFiles');
         return Restangular.all('documents').post(documentDto);
       },
-      delete: function(uuid) {
+      deleteFile: function(uuid) {
         $log.debug('FileService:deleteFiles');
         return Restangular.one('documents', uuid).remove();
       },
@@ -50,9 +49,8 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       },
       updateFile: function(uuid, documentDto) {
         $log.debug('LinshareDocumentService : updating a document');
-        return Restangular.all('documents').post('')
+        return Restangular.all('documents').one(uuid).post(documentDto);
       }
-      //editFile,
     };
   })
 
@@ -85,7 +83,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
           y: 85
         }
       });
-    }
+    };
 
     return gs;
   })
@@ -145,7 +143,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
               // Use application/octet-stream when using window.location to force download
               blob = new Blob([downloadedFile], {type: octetStreamMime});
               urlObject = windowUrl.createObjectURL(blob);
-              $window.location = url;
+              $window.location = urlObject;
             }
           }
         });
@@ -161,8 +159,10 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
         collection.splice(index, 1);
       }
     };
+
     $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
-      'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON', 'GROWL_ALERT.DELETE']).then(function(translations) {
+      'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON',
+      'GROWL_ALERT.DELETE']).then(function(translations) {
       $scope.swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
       $scope.swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
       $scope.swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
@@ -176,9 +176,9 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       swal({
           title: $scope.swalTitle,
           text: $scope.swalText,
-          type: "warning",
+          type: 'warning',
           showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
+          confirmButtonColor: '#DD6B55',
           confirmButtonText: $scope.swalConfirm,
           cancelButtonText: $scope.swalCancel,
           closeOnConfirm: true,
@@ -189,7 +189,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
             angular.forEach(document, function(doc) {
               $log.debug('value to delete', doc);
               $log.debug('value to delete', documentsList.length);
-              LinshareDocumentService.delete(doc.uuid).then(function() {
+              LinshareDocumentService.deleteFile(doc.uuid).then(function() {
                 removeElementFromCollection(documentsList, doc);
                 removeElementFromCollection($scope.selectedDocuments, doc);
                 $scope.tableParams.reload();
@@ -202,8 +202,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
     };
 
     $scope.$watch('selectedDocuments', function(n) {
-      if(n.length != 1) {
-        $log.debug('watcher ******', $scope.mactrl, n);
+      if(n.length !== 1) {
         $scope.mactrl.sidebarToggle.right = false;
       }
     }, true);
@@ -255,5 +254,5 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
           }
         });
       }
-    }
+    };
   });

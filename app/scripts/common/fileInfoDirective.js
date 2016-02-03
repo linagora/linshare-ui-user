@@ -7,7 +7,6 @@ angular.module('linshareUiUserApp')
         elm.parent().addClass('login-content');
         elm.css('margin-top','100px');
         elm.css('margin-left','30%');
-
       }
-    }
+    };
   });

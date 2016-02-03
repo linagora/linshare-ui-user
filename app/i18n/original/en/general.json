@@ -1,5 +1,6 @@
 {
   "APPLICATION_NAME": "Linshare",
+  "APPLICATION_WELCOME_HOME": "Welcome to your sharing files application",
   "REMOVE": "Remove",
   "DOWNLOAD": "Download",
   "EXTENSIONS" : {
@@ -69,6 +70,13 @@
       "TEXT": "You are about to remove files !",
       "CONFIRM_BUTTON": "Yes, delete it!",
       "CANCEL_BUTTON": "Cancel!"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "Are you sure?",
+      "TEXT": "All your saved localStorage values will be removed",
+      "CONFIRM_BUTTON": "Yes, delete it!",
+      "DONE": "Done",
+      "IS_CLEARED": "LocalStorage is cleared"
     }
   },
   "GROWL_ALERT": {

@@ -5,7 +5,6 @@ angular.module('linshareUiUserApp')
     return function (part, lang) {
       $log.error('The "' + lsAppConfig.localPath + '/' + lang + '/' + part +'.json' + '" part was not loaded.');
       var path = 'i18n/original/' + lang + '/' + part +'.json';
-      var content = null;
       return $q.when(
         $http.get(path).then(function(data) {
           return data.data;
@@ -50,7 +49,9 @@ angular.module('linshareUiUserApp')
       .setNotify(true, true);
   })
 
-  .run(function($rootScope, $location, $translate, Restangular, growlService, $log) {
+  .run(function($rootScope, $location, $translate, Restangular, growlService, $log, $window) {
+    var browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
+    $translate.use(browserLanguage.split('-')[0]);
     /**
      * Restangular Interceptor
      * Show message box when an error occured
@@ -63,7 +64,9 @@ angular.module('linshareUiUserApp')
     });
     Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       $log.debug('my addresponseintercep', response);
-      if (response.status === 401)  $rootScope.$emit('lsIntercept401', 'yoyo');
+      if (response.status === 401) {
+        $rootScope.$emit('lsIntercept401');
+      }
       return data;
     });
 
@@ -105,7 +108,7 @@ angular.module('linshareUiUserApp')
 
   .run(['$templateCache', function($templateCache) {
 
-    $templateCache.get('views/includes/chat.html');
+    $templateCache.get('views/includes/sidebar-right.html');
 
     $templateCache.get('views/includes/footer.html');
 
@@ -115,7 +118,7 @@ angular.module('linshareUiUserApp')
 
     $templateCache.get('views/includes/sidebar-left.html');
 
-    $templateCache.put('views/includes/templates.html', "");
+    $templateCache.put('views/includes/templates.html', '');
 
   }]);
 

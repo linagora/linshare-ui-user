@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .controller('materialadminCtrl', function($timeout, $state, growlService){
+  .controller('materialadminCtrl', function($timeout, $state){
 
     // Detact Mobile Browser
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -43,7 +43,7 @@ angular.module('linshareUiUserApp')
   // =========================================================================
   // Header
   // =========================================================================
-  .controller('headerCtrl', function($timeout){
+  .controller('headerCtrl', function($timeout, $translate){
 
     // Top Search
     this.openSearch = function(){
@@ -83,20 +83,32 @@ angular.module('linshareUiUserApp')
     };
 
     // Clear Local Storage
+    var self = this;
+    $translate(['SWEET_ALERT.ON_LOCALSTORAGE_DELETE.TITLE', 'SWEET_ALERT.ON_LOCALSTORAGE_DELETE.TEXT',
+      'SWEET_ALERT.ON_LOCALSTORAGE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_LOCALSTORAGE_DELETE.DONE',
+      'SWEET_ALERT.ON_LOCALSTORAGE_DELETE.IS_CLEARED']).then(function(translations) {
+      self.swalTitle = translations['SWEET_ALERT.ON_LOCALSTORAGE_DELETE.TITLE'];
+      self.swalText = translations['SWEET_ALERT.ON_LOCALSTORAGE_DELETE.TEXT'];
+      self.swalConfirm = translations['SWEET_ALERT.ON_LOCALSTORAGE_DELETE.CONFIRM_BUTTON'];
+      self.swalDone = translations['SWEET_ALERT.ON_LOCALSTORAGE_DELETE.DONE'];
+      self.swalCleared = translations['SWEET_ALERT.ON_LOCALSTORAGE_DELETE.IS_CLEARED'];
+    });
+
     this.clearLocalStorage = function() {
 
       //Get confirmation, if confirmed clear the localStorage
+      var thisLocal = this;
       swal({
-        title: "Are you sure?",
-        text: "All your saved localStorage values will be removed",
-        type: "warning",
+        title: this.swalTitle,
+        text: this.swalText,
+        type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#F44336",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonColor: '#F44336',
+        confirmButtonText: this.swalConfirm,
         closeOnConfirm: false
       }, function(){
         localStorage.clear();
-        swal("Done!", "localStorage is cleared", "success");
+        swal(thisLocal.swalDone, thisLocal.swalCleared, 'success');
       });
 
     };
@@ -133,7 +145,7 @@ angular.module('linshareUiUserApp')
       else {
         launchIntoFullscreen(document.documentElement);
       }
-    }
+    };
 
   })
 
@@ -143,16 +155,16 @@ angular.module('linshareUiUserApp')
     localStorage.setItem('ma-layout-status', 0);
 
     $scope.mactrl.sidebarToggle.left = false;
-    if($window.localStorage.getItem('sidebarToggleLeft') == 'true') {
+    if($window.localStorage.getItem('sidebarToggleLeft') === 'true') {
       $scope.mactrl.sidebarToggle.left = true;
     }
-    $scope.$watch("mactrl.sidebarToggle.left", function() {
+    $scope.$watch('mactrl.sidebarToggle.left', function() {
       $window.localStorage.setItem('sidebarToggleLeft', $scope.mactrl.sidebarToggle.left);
     });
     $scope.sizeHeight = $window.innerHeight - 50;
 
     $rootScope.$on('$stateChangeStart',
-    function(event, toState, toParams, fromState, fromParams) {
+    function(event, toState) {
       $scope.currentState = MenuService.getProperties(toState.name);
       $scope.linkActive = MenuService.getSectionName(toState.name);
     });
@@ -160,7 +172,7 @@ angular.module('linshareUiUserApp')
       $scope.user = user;
     });
 
-    $scope.$on('event:auth-loginRequired', function(event, data) {
+    $scope.$on('event:auth-loginRequired', function() {
       $log.debug('my state auth-loginRequired in the controller ', $rootScope.$state, $rootScope.$stateParams);
       $scope.urlTogoAfterLogin = $rootScope.$state.current.name;
       $log.debug('my urlTogoAfterLogin', $scope.urlTogoAfterLogin);
@@ -172,8 +184,8 @@ angular.module('linshareUiUserApp')
       AuthenticationService.getCurrentUser().then(function (user) {
         $translate('WELCOME_USER').then(function(welcome) {
           growlService.growl(welcome + user.firstName + ' ' + user.lastName, 'inverse');
-        })
-        if ($scope.urlTogoAfterLogin != undefined && $scope.urlTogoAfterLogin != ' ' && $scope.urlTogoAfterLogin != 'login') {
+        });
+        if ($scope.urlTogoAfterLogin !== undefined && $scope.urlTogoAfterLogin !== ' ' && $scope.urlTogoAfterLogin !== 'login') {
           $state.go($scope.urlTogoAfterLogin);
         }
         else {
@@ -184,14 +196,14 @@ angular.module('linshareUiUserApp')
 
     $scope.reloadFiles = function() {
       $scope.$broadcast('linshare-upload-complete');
-    }
+    };
   })
   .controller('LinshareAutocompleteController', function($scope, LinshareShareService, $log) {
     $scope.userRepresentation = function(u) {
       if (angular.isString(u)) {
         return u;
       }
-      return u.firstName.concat(" ", u.lastName, " ", u.mail, " ", u.domain);
+      return u.firstName.concat(' ', u.lastName, ' ', u.mail, ' ', u.domain);
     };
 
     $scope.searchGuestRestrictedContacts = function(pattern) {
@@ -201,7 +213,7 @@ angular.module('linshareUiUserApp')
     $scope.addRecipients = function(users, contact) {
       var exists = false;
       angular.forEach(users, function(elem) {
-        if (elem.mail == contact.mail && elem.domain == contact.domain) {
+        if (elem.mail === contact.mail && elem.domain === contact.domain) {
           exists = true;
           $log.info('The contact ' + contact.mail + ' has already been added to that guest\'s restricted contacts');
         }

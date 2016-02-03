@@ -36,7 +36,7 @@
         </li>
 
         <li ng-hide="selectedDocuments.length == 0" class="dropdown" dropdown>
-          <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTION' | translate}}" dropdown-toggle>
+          <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle>
             <i class="zmdi zmdi-more-vert"></i>
           </a>
 
@@ -81,7 +81,8 @@
                 {{documentFile.name}}
               </td>
 
-              <td ng-if="mactrl.sidebarToggle.right === false" data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" sortable="'modificationDate'">
+              <td ng-if="mactrl.sidebarToggle.right === false" data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate"
+                  sortable="'modificationDate'">
                 {{documentFile.modificationDate | date:'shortDate'}}
               </td>
 
@@ -93,13 +94,15 @@
                 <!--<button type="button" class="btn btn-default"><i class="zmdi zmdi-download"></i></button>-->
                 <ul class="actions hidden-xs">
                   <li>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                    <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop
+                       ng-click="onShare(); mactrl.sidebarToggle.right = true;">
                       <i ng-show="documentFile.shared === 0" class="zmdi zmdi-share"></i>
                       <i ng-show="documentFile.shared > 0" class="zmdi zmdi-share" style="color: green"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop ng-click="downloadCurrentFile(documentFile)">
+                    <a href="" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop
+                       ng-click="downloadCurrentFile(documentFile)">
                       <i class="zmdi zmdi-download"></i>
                     </a>
                   </li>
@@ -129,10 +132,8 @@
             </tr>
           </table>
         </div>
-        <aside id="chat" data-ng-include src="'views/includes/chat.html'"
+        <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
                data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
       </div>
   </div>
-  <!--<aside id="chat" data-ng-include src="'views/includes/chat.html'"-->
-         <!--data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>-->
 </div>

@@ -60,10 +60,10 @@ angular.module('linshare.userProfile', [])
       return self.loggedIn;
     };
     this.hasRightRole = function (role) {
-      return self.profile.role == role;
+      return self.profile.role === role;
     };
     this.hasRightAccountType = function(accountType) {
-      return self.profile.accountType == accountType;
+      return self.profile.accountType === accountType;
     };
 
   })
