@@ -320,6 +320,9 @@
                       <directory>node_modules</directory>
                     </fileset>
                     <fileset>
+                      <directory>vendors</directory>
+                    </fileset>
+                    <fileset>
                       <directory>bower_components</directory>
                     </fileset>
                   </filesets>
