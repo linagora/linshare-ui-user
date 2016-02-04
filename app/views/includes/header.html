@@ -105,13 +105,13 @@
             <ul class="dropdown-menu dm-icon pull-right">
 
               <li>
-                <a href="">{{ user.firstName }} {{ user.lastName }}</a>
+                <a href="">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</a>
               </li>
               <li ng-show="linshareModeProduction == false">
                 <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
               </li>
               <li>
-                <a data-ng-controller="AuthenticationController" data-ng-click="logout(); $flow.cancel()" href="">
+                <a data-ng-controller="AuthenticationController" data-ng-click="logout(); $flow.cancel()" ui-sref="login">
                   <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
                 </a>
               </li>

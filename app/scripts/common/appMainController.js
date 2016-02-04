@@ -150,7 +150,8 @@ angular.module('linshareUiUserApp')
   })
 
   .controller('UiUserMainController',
-  function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate, AuthenticationService, MenuService, growlService) {
+  function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
+           AuthenticationService, MenuService, growlService) {
 
     localStorage.setItem('ma-layout-status', 0);
 
@@ -173,26 +174,24 @@ angular.module('linshareUiUserApp')
     });
 
     $scope.$on('event:auth-loginRequired', function() {
-      $log.debug('my state auth-loginRequired in the controller ', $rootScope.$state, $rootScope.$stateParams);
-      $scope.urlTogoAfterLogin = $rootScope.$state.current.name;
-      $log.debug('my urlTogoAfterLogin', $scope.urlTogoAfterLogin);
-      $state.go('login', {next: $scope.urlTogoAfterLogin});
+      $log.debug('event:auth-loginRequired : toState', $rootScope.toState);
+      $scope.urlTogoAfterLogin = $rootScope.toState;
+      if($scope.urlTogoAfterLogin === 'login') {
+        $scope.urlTogoAfterLogin = 'home';
+        $state.go('login');
+      } else {
+        $state.go('login', {next: $scope.urlTogoAfterLogin});
+      }
       $scope.loggedUser = '';
     });
-    $scope.$on('event:auth-loginConfirmed', function () {
-      $log.debug('event:auth-loginConfirmed received');
-      $log.debug('my urlTogoAfterLogin', $scope.urlTogoAfterLogin);
-      AuthenticationService.getCurrentUser().then(function (user) {
-        $scope.loggedUser = user;
-        $translate('WELCOME_USER').then(function(welcome) {
-          growlService.growl(welcome + user.firstName + ' ' + user.lastName, 'inverse');
-        });
-        if ($scope.urlTogoAfterLogin !== undefined && $scope.urlTogoAfterLogin !== ' ' && $scope.urlTogoAfterLogin !== 'login') {
-          $state.go($scope.urlTogoAfterLogin);
-        }
-        else {
-          $state.go('home');
-        }
+
+    $scope.$on('event:auth-loginConfirmed', function (event, data) {
+      $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
+      $scope.loggedUser = data;
+      $state.go($scope.urlTogoAfterLogin);
+
+      $translate('WELCOME_USER').then(function(welcome) {
+        growlService.growl(welcome + data.firstName + ' ' + data.lastName, 'inverse');
       });
     });
 

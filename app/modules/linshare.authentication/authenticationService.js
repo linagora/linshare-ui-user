@@ -37,7 +37,7 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
             Authorization: 'Basic ' + Base64.encode(login + ':' + password)
           }).then(function (user) {
             $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
-            authService.loginConfirmed();
+            authService.loginConfirmed(user);
             deferred.resolve(user);
           }, function (error) {
             $log.error('Authentication failed', error.status);
@@ -52,7 +52,6 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
               //After being disconnected, authentication model is reloaded
               //you can use $location to redirect through home page (login page)
               Restangular.all('authentication').customGET('authorized').then(function (user) {
-
                 deferred.resolve(user);
               });
             });

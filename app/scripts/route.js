@@ -132,7 +132,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('upload_request', {
-        url: '',
+        url: '/upload_requests',
         templateUrl: 'views/common/common.html'
       })
 
@@ -148,7 +148,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('audit', {
-        url: '',
+        url: '/audit',
         templateUrl: 'views/common/common.html'
       })
 

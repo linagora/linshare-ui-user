@@ -76,14 +76,8 @@ angular.module('linshareUiUserApp')
 
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       $log.debug('routechangestart', toState, 'my event', evt, 'toParams', toParams, 'fromState', fromState);
-
-      if (toState.templateUrl === 'views/common/loginForm.html') {
-        $log.debug('in there');
-        $rootScope.$on('event:auth-loginConfirmed', function() {
-          $log.debug('in event');
-          $location.path('/home');
-        });
-      }
+      $rootScope.toState = toState.name;
+      $rootScope.fromState = fromState.name;
     });
 
     $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
