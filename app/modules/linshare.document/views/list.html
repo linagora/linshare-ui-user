@@ -4,11 +4,30 @@
   <!--  ACTIONS ON DOCUMENTS  -->
 
   <div class="card">
-    <div class="lv-header-alt m-b-5">
+    <div class="card-header m-b-5">
 
-      <h2 class="lvh-label hidden-xs">{{ 'PAGE_FILE_TITLE' | translate }}</h2>
-
-      <ul class="lv-actions actions">
+      <h2>{{ 'PAGE_FILE_TITLE' | translate }}</h2>
+      <div class="search-bar">
+        <div class="input-group">
+          <div class="fg-line">
+            <input type="text" class="form-control" placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                   ng-change="updateParams()"
+                   ng-model="paramFilter['name']">
+          </div>
+            <span class="input-group-addon last clickable"
+                  x-ng-click="advancedFilterBool = !advancedFilterBool"
+                  data-toggle="tooltip"
+                  title=""
+                  data-placement="right"
+                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                  slide-toggle="#searchFilterCtn">
+              <i class="zmdi hidden-xs clickable"
+                 x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
+                              'zmdi-chevron-up': advancedFilterBool} "></i>
+          </span>
+        </div>
+      </div>
+      <ul class="actions">
 
         <li ng-hide="selectedDocuments.length == 0">
           <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" ng-click="onShare(); mactrl.sidebarToggle.right = true;">
@@ -39,7 +58,6 @@
           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle>
             <i class="zmdi zmdi-more-vert"></i>
           </a>
-
           <ul class="dropdown-menu dropdown-menu-right">
 
             <li>
@@ -60,12 +78,15 @@
           </ul>
         </li>
       </ul>
+      <div class="clearfix"></div>
 
+      <!-- FILTER COMPONENT  -->
+      <filtering-component class="" ls-size="true" ls-date="true"></filtering-component>
     </div>
 
 
-    <!--<!--  DOCUMENTS LIST  -->
 
+      <!-- DOCUMENTS LIST  -->
       <div class="card-body">
 
         <div class="table-responsive">

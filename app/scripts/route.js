@@ -27,7 +27,7 @@ angular.module('linshareUiUserApp')
 
 
       //------------------------------
-      // RECEIVED DOCUMENT
+      // USER DOCUMENTS
       //------------------------------
 
       .state('documents', {
@@ -83,11 +83,13 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/threads/thread.html',
         controller: 'ThreadController'
       })
+
       .state('documents.profile', {
         url: '/profile',
         templateUrl: 'views/common/user-profile.html',
         controller: 'AuthenticationController'
       })
+
       .state('documents.guests', {
         url: '/guests',
         templateUrl: 'views/guests/guestList.html',
@@ -110,26 +112,37 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/common/common.html'
       })
 
+      //------------------------------
+      // ADMINISTRATION
+      //------------------------------
+
       .state('administration.lists', {
         url:'/lists',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
+
       .state('administration.guests', {
         url:'/adminguests',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
+
       .state('administration.users', {
         url:'/users',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
+
       .state('administration.groups', {
         url:'/groups',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
+
+      //------------------------------
+      // UPLOAD REQUESTS
+      //------------------------------
 
       .state('upload_request', {
         url: '/upload_requests',
@@ -147,6 +160,10 @@ angular.module('linshareUiUserApp')
         controller: 'LinshareGuestController'
       })
 
+      //------------------------------
+      // AUDIT
+      //------------------------------
+
       .state('audit', {
         url: '/audit',
         templateUrl: 'views/common/common.html'
@@ -162,6 +179,10 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
+
+      //------------------------------
+      // SHARE
+      //------------------------------
 
       .state('share', {
         url: '/share',

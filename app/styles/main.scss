@@ -88,7 +88,7 @@ html:not(.ie9) .formsearch .select::before {
   content: "";
   height: calc(100% - 1px);
   width: 12px;
-  background-color: #f5f5f5;
+  background-color: transparent;
   background-position: right calc(100% - 7px);
   background-repeat: no-repeat;
   background-image: url(../images/select.png);
@@ -108,7 +108,6 @@ html:not(.ie9) .formsearch .select::before {
 
   .fg-line select.form-control:not(:disabled) {
     color: #9d9d9d !important;
-    background-color: #9d9d9d;
     padding-right: 12px;
   }
   .fg-line select.form-control:disabled {

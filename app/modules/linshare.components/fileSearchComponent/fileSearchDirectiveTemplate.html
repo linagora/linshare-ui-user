@@ -1,0 +1,249 @@
+<div class="search-bar" ng-show="activatedField.name == 'true'">
+  <div class="input-group">
+    <div class="fg-line">
+      <input type="text" class="form-control" placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+             ng-change="updateParams()"
+             ng-model="paramFilter['name']">
+    </div>
+            <span class="input-group-addon last clickable"
+                  x-ng-click="advancedFilterBool = !advancedFilterBool"
+                  data-toggle="tooltip"
+                  title=""
+                  data-placement="right"
+                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                  slide-toggle="#searchFilterCtn">
+              <i class="zmdi hidden-xs clickable"
+                 x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
+                              'zmdi-chevron-up': advancedFilterBool} "></i>
+          </span>
+  </div>
+</div>
+
+<div id="searchFilterCtn" class="slideable" duration="750ms" easing="cubic-bezier(.02, .01, .47, 1);">
+  <div class="hidden-xs row fix-margin-row col-md-12 m-t-30 formsearch" style="float:none;">
+
+    <div ng-show="activatedField.size == 'true'">
+      <label>{{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate }}</label>
+
+      <div class="clearfix"></div>
+
+      <!--SIZE START -->
+      <div class="col-sm-3">
+        <div class="input-group">
+            <span class="input-group-addon">
+              <i class="zmdi zmdi-trending-down" ng-class="{disabledIcon: !showUnit}"></i>
+            </span>
+
+          <div class="fg-line" ng-init="showUnit=true">
+            <input type="text" ng-disabled="!showUnit"
+                   class="form-control" name="start"
+                   maxlengh="3" placeholder="min"
+                   ng-model="filters['sizeStart']">
+          </div>
+        </div>
+      </div>
+
+      <!--SIZE END -->
+      <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">
+              <i class="zmdi zmdi-trending-up" ng-class="{disabledIcon: !showUnit}"></i>
+            </span>
+
+          <div class="fg-line">
+            <input type="text" ng-disabled="!showUnit" name="end" class="form-control" placeholder="max"
+                   ng-model="filters['sizeEnd']"
+                   maxlengh="3"/>
+          </div>
+        </div>
+      </div>
+
+
+      <!--SIZE UNITY -->
+      <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-database" ng-class="{disabledIcon: !showUnit}"></i>
+            </span>
+
+          <div class="fg-line select" ng-class="{disabledIcon: !showUnit}">
+            <select ng-disabled="!showUnit" ng-model="filters['unity']"
+                    class="form-control custumSelect outlineFFremove w-100"
+                    ng-init="filters['unity'] = '1000'">
+              <option value="1000">Ko</option>
+              <option value="1000000">Mo</option>
+              <option value="1000000000">Go</option>
+              <option value="1000000000000">To</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+      <!--CHECKBOX INIT-->
+      <div class="col-sm-1">
+        <div class="input-group">
+          <div class="fg-line">
+            <span class="input-group-addon middle"><i class="md md-today"></i></span>
+
+            <div class="form-inline">
+              <label class="checkbox checkbox-inline m-r-20">
+                <input type="checkbox" ng-checked="true" name="check"
+                       x-ng-checked="showUnit"
+                       x-ng-model="showUnit">
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--DATE TYPE -->
+    <div ng-show="activatedField.date == 'true'">
+      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_DATE.HEADER' | translate }}</label>
+
+      <div class="clearfix"></div>
+
+      <!--TAG SELECT DATE -->
+      <div ng-init="showDateRange=true">
+        <div class="col-sm-3">
+          <div class="input-group">
+              <span class="input-group-addon">
+                <i class="zmdi zmdi-calendar ma-icon" ng-class="{disabledIcon: !showDateRange}"></i>
+              </span>
+
+            <div class="fg-line select" ng-class="{disabledIcon: !showDateRange}">
+              <select ng-disabled="!showDateRange" ng-model="filters['dateType']"
+                      class="form-control outlineFFremove w-100 custumSelect"
+                      ng-init="filters['dateType'] = '1'">
+                <option value="1">{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}</option>
+                <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!--DATE START -->
+        <div class="col-sm-4">
+          <div class="date-picker input-group dp-blue" ng-class="{ 'is-opened': dateStartOpened == true }">
+              <span class="input-group-addon">
+                <i class="zmdi zmdi-calendar-check ma-icon" ng-class="{disabledIcon: !showDateRange}"></i>
+              </span>
+
+            <div class="fg-line" ng-class="{ 'fg-toggled': dateStartOpened == true }">
+              <input ng-disabled="!showDateRange" ng-click="open($event, 'dateStartOpened')" type="text"
+                     class="form-control" datepicker-popup="{{format}}" show-weeks="false"
+                     is-open="dateStartOpened" max-date="maxDate" datepicker-options="dateOptions"
+                     ng-required="true" close-text="Close"
+                     placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate }}"
+                     ng-model="filters['dateStart']"/>
+            </div>
+          </div>
+        </div>
+
+        <!--DATE END -->
+        <div class="col-sm-4">
+          <div class="date-picker input-group dp-blue" ng-class="{ 'is-opened': dateEndOpened == true }">
+              <span class="input-group-addon">
+                <i class="zmdi zmdi-calendar-close ma-icon" ng-class="{disabledIcon: !showDateRange}"></i>
+              </span>
+
+            <div class="fg-line" ng-class="{ 'fg-toggled': opened2 == true }">
+              <input ng-disabled="!showDateRange" ng-click="open($event, 'dateEndOpened')"
+                     type="text" class="form-control"
+                     datepicker-popup="{{format}}" show-weeks="false"
+                     ng-model="filters['dateEnd']" is-open="dateEndOpened"
+                     max-date="maxDate" min-date="filters['dateStart']"
+                     datepicker-options="dateOptions" ng-required="true"
+                     close-text="Close" placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate }}"/>
+            </div>
+          </div>
+        </div>
+
+
+        <!--CHECKBOX INIT -->
+        <div class="col-sm-1">
+          <div class="input-group">
+            <div class="fg-line">
+              <span class="input-group-addon middle"><i class="md md-today"></i></span>
+
+              <div class="form-inline">
+                <label class="checkbox checkbox-inline m-r-20">
+                  <input type="checkbox" name="isDateActive" name="check" ng-checked="true"
+                         ng-model="showDateRange"/>
+                  <i class="input-helper"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--RECIPIENT -->
+    <div ng-show="activatedField.email == 'true'">
+      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER' | translate }}</label>
+
+      <div class="clearfix"></div>
+      <div class="col-sm-7">
+        <div class="input-group" ng-init="showRecipients=true">
+          <span class="input-group-addon">
+            <i class="zmdi zmdi-account" ng-class="{disabledIcon: !showRecipients}"></i>
+          </span>
+
+          <div class="fg-line">
+            <input id="typeaheadDestinataires" type="text"
+                   ng-disabled="!showRecipients"
+                   autocomplete="off"
+                   class="form-control"
+                   placeholder="{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER' | translate }}"
+                   ng-model="filters['selectedContact']"
+                   x-typeahead-min-length="3"
+                   x-typeahead-on-select="addRecipients(share.recipients, filters['selectedContact'])"
+                   x-typeahead-wait-ms="30"
+                   x-typeahead-loading="searchingContact"
+                   x-typeahead-input-formatter="formatLabel(filters['selectedContact'])"
+                   x-typeahead="u as userRepresentation(u) for u in searchGuestRestrictedContacts($viewValue) | limitTo:3"
+                   popover-placement="bottom"
+                   popover-trigger="mouseenter"
+                   popover-title="Email"
+                   popover="{{popoverValue}}">
+          </div>
+        </div>
+      </div>
+
+
+      <!--CHECKBOX -->
+      <div class="col-sm-1 pull-right">
+        <div class="input-group">
+          <div class="fg-line">
+            <span class="input-group-addon middle"><i class="md md-today"></i></span>
+
+            <div class="form-inline">
+              <label class="checkbox checkbox-inline m-r-20">
+                <input type="checkbox" name="isDestinatairesActive" ng-checked="true"
+                       ng-model="showRecipients"/>
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--VALIDATE-->
+  <div class="col-md-9 m-t-50 m-b-30">
+    <button class="btn bgm-gray waves-effect" ng-click="clearParams()">
+      {{'FILTER_COMPONENT.REINITIALIZE' | translate }}
+    </button>
+    <button class="btn bgm-blue waves-effect" ng-click="updateFilters()">
+      {{'FILTER_COMPONENT.SUBMIT' | translate }}
+    </button>
+  </div>
+
+  <div class="clearfix"></div>
+</div>
+<br/>

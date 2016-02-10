@@ -8,7 +8,7 @@
  * Service of the linshare.document module
  */
 
-angular.module('linshare.document', ['restangular', 'ngTable'])
+angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.components'])
 /**
  * @ngdoc service
  * @name linshare.document.service:LinshareDocumentService
@@ -160,27 +160,29 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
       }
     };
 
+    var swalTitle, swalText, swalConfirm, swalCancel, growlMsgDelete;
     $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
       'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON',
       'GROWL_ALERT.DELETE']).then(function(translations) {
-      $scope.swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
-      $scope.swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
-      $scope.swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
-      $scope.swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
-      $scope.growlMsgDelete = translations['GROWL_ALERT.DELETE'];
+      swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
+      swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
+      swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
+      swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
+      growlMsgDelete = translations['GROWL_ALERT.DELETE'];
     });
+
     $scope.deleteDocuments = function(document) {
       if(!angular.isArray(document)) {
         document = [document];
       }
       swal({
-          title: $scope.swalTitle,
-          text: $scope.swalText,
+          title: swalTitle,
+          text: swalText,
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#DD6B55',
-          confirmButtonText: $scope.swalConfirm,
-          cancelButtonText: $scope.swalCancel,
+          confirmButtonText: swalConfirm,
+          cancelButtonText: swalCancel,
           closeOnConfirm: true,
           closeOnCancel: true
         },
@@ -193,7 +195,7 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
                 removeElementFromCollection(documentsList, doc);
                 removeElementFromCollection($scope.selectedDocuments, doc);
                 $scope.tableParams.reload();
-                growlService.growl($scope.growlMsgDelete, 'inverse');
+                growlService.growl(growlMsgDelete, 'inverse');
               });
             });
           }
@@ -223,14 +225,23 @@ angular.module('linshare.document', ['restangular', 'ngTable'])
         $scope.tableParams.reload();
       });
     };
+    $scope.paramFilter = {
+      name: ''
+    };
+
+    $scope.documentsList2 = documentsList;
+    $scope.documentsList = documentsList;
 
     $scope.tableParams = new ngTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},
-      count: 20
+      count: 20,
+      filter: $scope.paramFilter
     }, {
       getData: function($defer, params) {
-          var files =  params.sorting() ? $filter('orderBy')(documentsList, params.orderBy()) : documentsList;
+        var filteredData = params.filter() ?
+          $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
+          var files =  params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(files.length);
           $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }

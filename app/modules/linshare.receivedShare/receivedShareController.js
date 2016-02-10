@@ -19,7 +19,7 @@ angular.module('linshare.receivedShare')
       $scope.filters.selectedContact = initDestinataireObject;
       $scope.selectedRecipient = {};
       var checkdatasIsSelecteds = function() {
-        if ($scope.showActions.length !== $scope.tableData.length && $scope.showActions.length !== 0) {
+        if ($scope.showActions.length !== orderedData.length && $scope.showActions.length !== 0) {
           $scope.datasIsSelected = false;
         }
       };
@@ -53,7 +53,7 @@ angular.module('linshare.receivedShare')
         }, data);
         return data;
       };
-      $scope.files = setExtensions(files);
+      var receivedFiles = setExtensions(files);
       // Used to check/activate the checkbox related to the params
       $scope.paramsIsActivate = function(param) {
         return param > 0;
@@ -79,9 +79,9 @@ angular.module('linshare.receivedShare')
       $scope.copy = function() {
         angular.forEach($scope.showActions, function(file, key) {
           LinshareReceivedShareService.copy(file.uuid).then(function(data) {
-            angular.forEach($scope.files, function(f, k) {
+            angular.forEach(receivedFiles, function(f, k) {
               if (f.uuid === file.uuid) {
-                $scope.files.splice(k, 1);
+                receivedFiles.splice(k, 1);
                 $scope.showActions.splice(key, 1);
                 $scope.tableParams.reload();
               }
@@ -130,6 +130,7 @@ angular.module('linshare.receivedShare')
           });
         });
       };
+
       $scope.remove = function() {
         swal({
           title: 'Are you sure?',
@@ -142,9 +143,9 @@ angular.module('linshare.receivedShare')
         }, function(){
           angular.forEach($scope.showActions, function(file, key) {
             LinshareReceivedShareService.delete(file.uuid).then(function(){
-              angular.forEach($scope.files, function(f, k) {
+              angular.forEach(receivedFiles, function(f, k) {
                 if (f.uuid === file.uuid) {
-                  $scope.files.splice(k, 1);
+                  receivedFiles.splice(k, 1);
                   $scope.showActions.splice(key, 1);
                   $scope.tableParams.reload();
                 }
@@ -206,71 +207,32 @@ angular.module('linshare.receivedShare')
         }
       });
 
+      $scope.paramFilter = {
+        name: ''
+      };
+
+      $scope.documentsList2 = receivedFiles;
+      $scope.documentsList = receivedFiles;
+
       $scope.tableParams = new ngTableParams({
         page: 1,
-        count: 25
+        count: 25,
+        filter: $scope.paramFilter
       }, {
         getData: function($defer, params){
-          var filteredData = $scope.files;
-          params.filter().name = $scope.filters.name;
           var userData = {
             firstName: $scope.selectedRecipient.firstName,
             lastName: $scope.selectedRecipient.lastName,
             mail: $scope.selectedRecipient.mail
           };
-          if($scope.showRecipients === false) {
-            userData = {};
-          }
           params.filter().sender = {};
           params.filter().sender = userData;
+          var filteredData = params.filter() ?
+              $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
+          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 
-          // i load the files in the ngTable and i stock it in the scope
-          // with this method when i will delete file i can reload ngTable with the new data
-          if ($scope.showUnit || $scope.showDateRange) {
-            if(($scope.showUnit === false) && ($scope.filters.sizeStart === null)) {
-              $scope.filters.sizeStart = null;
-              $scope.filters.sizeEnd = null;
-            }
-            filteredData = _.filter(filteredData, function(file){
-              var sizeIsValide = true;
-              var dateIsValide = true;
-              if($scope.showUnit === true){
-                if ($scope.filters.sizeStart || $scope.filters.sizeEnd) {
-                  // convert the size to select byte
-                  var start = ($scope.filters.sizeStart) ? parseInt($scope.filters.sizeStart, 10) * parseInt($scope.filters.unity, 10) : 0;
-                  var end = ($scope.filters.sizeEnd) ? parseInt($scope.filters.sizeEnd, 10) * parseInt($scope.filters.unity, 10) : file.size + 10;
-                  var size = file.size.toFixed(1);
-                  sizeIsValide = (size >= start && size <= end);
-                }
-              }
-              if ($scope.showDateRange) {
-                var dateFile = ($scope.filters.dateType === '1') ? moment(file.modificationDate) : moment(file.creationDate);
-                // moment set la date a 00:00, il faut ajouter une journée afin de cibler la journée entiere
-                var dateEnd;
-                if($scope.filters.dateEnd){
-                  dateEnd = moment($scope.filters.dateEnd).add('day', +1);
-                }else{
-                  dateEnd = moment().add('day', +1);
-                }
-
-                dateIsValide = (dateFile >= $scope.filters.dateStart && dateFile <= dateEnd);
-              }
-              return (sizeIsValide && dateIsValide);
-            });
-            filteredData = params.filter() ?
-              $filter('filter')(filteredData, params.filter()) :
-              filteredData;
-            $scope.tableData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-          } else {
-            filteredData = params.filter() ?
-              $filter('filter')($scope.files, params.filter()) :
-              $scope.files;
-            $scope.tableData = params.sorting() ?
-              $filter('orderBy')(filteredData, params.orderBy()) :
-              filteredData;
-          }
-          params.total($scope.tableData.length);
-          $defer.resolve($scope.tableData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          params.total(orderedData.length);
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
 
@@ -298,19 +260,23 @@ angular.module('linshare.receivedShare')
         $scope.filters.selectedContact = contact;
         $scope.popoverValue = contact.mail;
       };
+
       $scope.removeRecipients = function(users, index) {
         users.splice(index, 1);
       };
+
       $scope.today = function() {
         $scope.dt = new Date();
       };
       $scope.today();
       $scope.minRange = '';
+
       $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
         $scope.maxDate = $scope.maxDate ? null : new Date();
       };
       $scope.toggleMin();
+
       $scope.open = function($event, dateStartOpened) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -324,7 +290,12 @@ angular.module('linshare.receivedShare')
 
       $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
-    }).directive('slideable', function () {
+    })
+
+  // ===========================================================================
+  // SLIDEABLE
+  // ===========================================================================
+  .directive('slideable', function () {
     return {
       restrict:'C',
       compile: function (element) {
@@ -348,6 +319,10 @@ angular.module('linshare.receivedShare')
       }
     };
   })
+
+  // ===========================================================================
+  // SLIDETOGGLE
+  // ===========================================================================
   .directive('slideToggle', function() {
     return {
       restrict: 'A',
