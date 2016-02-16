@@ -4,6 +4,7 @@
         data-ng-controller="headerCtrl as hctrl">
 </header>
 <section id="main">
+  <div id="overlayMobile" data-ng-class="{ 'toggledShowOverlay': mactrl.sidebarToggle.left }" >&nbsp;</div>
   <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
   <section id="content" class="page-view" data-ui-view
            flow-files-submitted="$flow.upload()"
@@ -14,6 +15,7 @@
            flow-file-success="$file.msg = $message"
            ng-class="{'content-toggled': mactrl.sidebarToggle.left }"
            ng-style="myStyle">
+
   </section>
 </section>
 

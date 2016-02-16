@@ -32,5 +32,7 @@ angular
     'linshare.receivedShare',
     'LocalStorageModule',
     'pascalprecht.translate',
-    'materialAdmin'
+    'materialAdmin',
+    'ngMaterial'
+
   ]);

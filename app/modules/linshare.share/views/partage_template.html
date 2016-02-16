@@ -1,0 +1,428 @@
+<div class="bottom-btn visible-xs row col-xs-12 transfertFilesBtnCtn">
+  <button ng-click="moveSliderBackwards()" class="btn bgm-lightblue waves-effect col-xs-6">PRECEDENT</button>
+  <button ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect nextLink col-xs-6">SUIVANT</button>
+  <button ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect col-xs-6 sendLink hide">ENVOYER</button>
+</div>
+<div class="container" ng-init="selectedDocuments = []">
+  <div id='transfert-ctn'>
+    <div class="card row" style="margin:auto">
+      <div class="form-wizard-nav col-sm-12 col-md-10 centered">
+        <div class="progress" style="width: 95%;">
+          <div class="progress-bar progress-bar-primary"></div>
+        </div>
+        <div class="col-xs-12 sliderLinksCtn">
+          <div class="active col-xs-4">
+            <a ng-click="goToSlide(1)">
+              <span class="step hidden-xs"><span class="stepNum">1</span><i class="zmdi zmdi-edit hide"></i></span>
+              <span class="title"><span class="hidden-xs">Sélection des</span> fichiers</span>
+            </a>
+          </div>
+          <div class="col-xs-4 middle">
+            <a ng-click="goToSlide(2)">
+              <span class="step hidden-xs"><span class="stepNum">2</span><i class="zmdi zmdi-edit hide"></i></span>
+              <span class="title"><span class="hidden-xs">Sélection des</span> destinataires</span>
+            </a>
+          </div>
+          <div class=" col-xs-4 last">
+            <a ng-click="goToSlide(3)"><span class="step hidden-xs"><span class="stepNum">3</span><i
+              class="zmdi zmdi-edit hide"></i></span></span>
+              <span class="title">Paramétrage<span class="hidden-xs"> *Optionnel</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card hidden-xs">
+      <div class="card-body card-padding">
+        <div class="alert alert-info row " role="alert">
+          <p class='col-sm-10 col-lg-11 '><i class="zmdi zmdi-info hidden-xs"></i>
+            Vos fichiers sont en cours de stockage, poursuivez pour partager.
+          </p>
+          <div class="hidden-xs transfertFilesBtnCtn">
+            <button ng-click="moveSliderForward()"
+                    class="btn bgm-lightblue waves-effect col-md-2 col-lg-1 nextLink pull-left ">SUIVANT
+            </button>
+            <button ng-click="moveSliderForward()"
+                    class="btn bgm-lightblue waves-effect col-md-2 col-lg-1  pull-left sendLink hide ">ENVOYER
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="topFixedHeaderList">
+      <div class="listview lv-bordered lv-lg">
+        <div class="lv-header-alt clearfix ">
+          <div class='col-xs-10 col-sm-11 col-md-11'>
+            <h2 class="lvh-label"><b>Total :</b><span class="numFilesInfo">2 <i class="zmdi zmdi-file"></i></span><span
+              class="minutesInfo">18 min restantes </span>| <span class="sizeInfo">540Mb</span></h2>
+            <progressbar max="max" value="dynamic"></progressbar>
+            <!-- ngIf: mactrl.listviewSearchStat -->
+          </div>
+          <div class='col-xs-1 col-sm-1 col-md-1'>
+            <ul class="lv-actions actions col-xs-12 text-center">
+              <li class='hidden-xs col-sm-6'>
+                <a popover-placement="top" popover-trigger="mouseenter" popover="Tout mettre en pause">
+                  <i class="zmdi zmdi-pause"></i>
+                </a>
+              </li>
+              <li class='hidden-xs col-sm-6'>
+                <a popover-placement="top" popover-trigger="mouseenter" popover="Tout annuler">
+                  <i class="zmdi zmdi-close"></i>
+                </a>
+              </li>
+              <li class="dropdown visible-xs col-xs-12 text-center" dropdown>
+                <a href="" dropdown-toggle aria-expanded="true">
+                  <i class="zmdi zmdi-more-vert"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li>
+                    <a href="">Tout mettre en pause</a>
+                  </li>
+                  <li>
+                    <a href="">Tout annuler</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="slideCtn">
+      <div class="slide slide1 col-xs-4">
+        <div class="card col-sm-10 col-xs-11  col-centered">
+          <div class="listview lv-bordered lv-lg" id="listFilesView">
+            <div class="lv-header-alt clearfix">
+              <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
+            </div>
+            <!--<button class="btn bgm-red btn-float waves-effect " ><i class="zmdi zmdi-plus"></i></button>-->
+            <div ng-controller="DemoCtrl as demo" layout="column" ng-cloak="" class="fabSpeedDialdemoBasicUsage"
+                 id="ajouterFichier">
+              <md-fab-speed-dial md-open="demo.isOpen" md-direction="left" ng-class="demo.selectedMode">
+                <md-fab-trigger>
+                  <md-button aria-label="menu" class="md-fab md-red">
+                    <md-tooltip md-direction="top" md-visible="tooltipVisible">Ajouter des fichiers à la liste
+                    </md-tooltip>
+                    <i class="zmdi zmdi-plus"></i>
+                  </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                  <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="top" md-visible="tooltipVisible">Uploader des fichiers</md-tooltip>
+                    <i class="zmdi zmdi-upload"></i>
+                  </md-button>
+                  <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="top" md-visible="tooltipVisible">Ajouter depuis mon Linshare</md-tooltip>
+                    <i class="zmdi zmdi-file"></i>
+                  </md-button>
+                </md-fab-actions>
+              </md-fab-speed-dial>
+            </div>
+            <div class="lv-body">
+              <div class="media-body">
+                <div class='col-xs-10 col-sm-12 ' style='overflow:hidden;'>
+                  <div col-x class='col-xs-24 col-sm-12 animLeft noPadding'>
+                    <div class='col-xs-6 col-sm-10 pull-left'>
+                      <div class=' previewIconCtn pull-left hidden-v-xs'>
+                        <p class='img-circle '>PDF</p>
+                      </div>
+                      <div class=' pull-left dataListCtn'>
+                        <div class="lv-title">Nom du fichier 1</div>
+                        <small class="lv-small pull-left">18 min restantes</small>
+                        <small class="lv-small pull-right">125Mb</small>
+                        <div class='clearfix'></div>
+                        <progressbar max="max" value="dynamic"></progressbar>
+                      </div>
+                    </div>
+                    <div class=' col-xs-6 col-sm-2 pull-left '>
+                      <ul class="lv-actions actions alignListIcons ">
+                        <li class='col-xs-4'>
+                          <a>
+                            <i class="zmdi zmdi-file"><span>note</span></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a>
+                            <i class="zmdi zmdi-pause"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a>
+                            <i class="zmdi zmdi-close"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-xs-2 visible-xs '>
+                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                    <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="media-body">
+                <div class='col-xs-10 col-sm-12 ' style='overflow:hidden;'>
+                  <div col-x class='col-xs-24 col-sm-12 animLeft noPadding'>
+                    <div class='col-xs-6 col-sm-10 pull-left'>
+                      <div class=' previewIconCtn pull-left hidden-v-xs'>
+                        <p class='img-circle '>PDF</p>
+                      </div>
+                      <div class=' pull-left dataListCtn'>
+                        <div class="lv-title">Nom du fichier 1</div>
+                        <small class="lv-small pull-left">18 min restantes</small>
+                        <small class="lv-small pull-right">125Mb</small>
+                        <div class='clearfix'></div>
+                        <progressbar max="max" value="dynamic"></progressbar>
+                      </div>
+                    </div>
+                    <div class=' col-xs-6 col-sm-2 pull-left '>
+                      <ul class="lv-actions actions alignListIcons ">
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-file"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-pause"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-close"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-xs-2 visible-xs '>
+                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                    <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="media-body">
+                <div class='col-xs-10 col-sm-12 ' style='overflow:hidden;'>
+                  <div col-x class='col-xs-24 col-sm-12 animLeft noPadding'>
+                    <div class='col-xs-6 col-sm-10 pull-left'>
+                      <div class=' previewIconCtn pull-left hidden-v-xs'>
+                        <p class='img-circle '>PDF</p>
+                      </div>
+                      <div class=' pull-left dataListCtn'>
+                        <div class="lv-title">Nom du fichier 1</div>
+                        <small class="lv-small pull-left">18 min restantes</small>
+                        <small class="lv-small pull-right">125Mb</small>
+                        <div class='clearfix'></div>
+                        <progressbar max="max" value="dynamic"></progressbar>
+                      </div>
+                    </div>
+                    <div class=' col-xs-6 col-sm-2 pull-left '>
+                      <ul class="lv-actions actions alignListIcons ">
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-file"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-pause"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-close"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-xs-2 visible-xs '>
+                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                    <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="media-body">
+                <div class='col-xs-10 col-sm-12 ' style='overflow:hidden;'>
+                  <div col-x class='col-xs-24 col-sm-12 animLeft noPadding'>
+                    <div class='col-xs-6 col-sm-10 pull-left'>
+                      <div class=' previewIconCtn pull-left hidden-v-xs'>
+                        <p class='img-circle '>PDF</p>
+                      </div>
+                      <div class=' pull-left dataListCtn'>
+                        <div class="lv-title">Nom du fichier 1</div>
+                        <small class="lv-small pull-left">18 min restantes</small>
+                        <small class="lv-small pull-right">125Mb</small>
+                        <div class='clearfix'></div>
+                        <progressbar max="max" value="dynamic"></progressbar>
+                      </div>
+                    </div>
+                    <div class=' col-xs-6 col-sm-2 pull-left '>
+                      <ul class="lv-actions actions alignListIcons ">
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-file"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-pause"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-close"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-xs-2 visible-xs '>
+                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                    <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="media-body">
+                <div class='col-xs-10 col-sm-12 ' style='overflow:hidden;'>
+                  <div col-x class='col-xs-24 col-sm-12 animLeft noPadding'>
+                    <div class='col-xs-6 col-sm-10 pull-left'>
+                      <div class=' previewIconCtn pull-left hidden-v-xs'>
+                        <p class='img-circle '>PDF</p>
+                      </div>
+                      <div class=' pull-left dataListCtn'>
+                        <div class="lv-title">Nom du fichier 1</div>
+                        <small class="lv-small pull-left">18 min restantes</small>
+                        <small class="lv-small pull-right">125Mb</small>
+                        <div class='clearfix'></div>
+                        <progressbar max="max" value="dynamic"></progressbar>
+                      </div>
+                    </div>
+                    <div class=' col-xs-6 col-sm-2 pull-left '>
+                      <ul class="lv-actions actions alignListIcons ">
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-file"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-pause"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-close"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-xs-2 visible-xs '>
+                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                    <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="media-body">
+                <div class='col-xs-10 col-sm-12 ' style='overflow:hidden;'>
+                  <div col-x class='col-xs-24 col-sm-12 animLeft noPadding'>
+                    <div class='col-xs-6 col-sm-10 pull-left'>
+                      <div class=' previewIconCtn pull-left hidden-v-xs'>
+                        <p class='img-circle '>PDF</p>
+                      </div>
+                      <div class=' pull-left dataListCtn'>
+                        <div class="lv-title">Nom du fichier 1</div>
+                        <small class="lv-small pull-left">18 min restantes</small>
+                        <small class="lv-small pull-right">125Mb</small>
+                        <div class='clearfix'></div>
+                        <progressbar max="max" value="dynamic"></progressbar>
+                      </div>
+                    </div>
+                    <div class=' col-xs-6 col-sm-2 pull-left '>
+                      <ul class="lv-actions actions alignListIcons ">
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-file"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-pause"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-close"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-xs-2 visible-xs '>
+                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                    <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="media-body">
+                <div class='col-xs-10 col-sm-12 ' style='overflow:hidden;'>
+                  <div col-x class='col-xs-24 col-sm-12 animLeft noPadding'>
+                    <div class='col-xs-6 col-sm-10 pull-left'>
+                      <div class=' previewIconCtn pull-left hidden-v-xs'>
+                        <p class='img-circle '>PDF</p>
+                      </div>
+                      <div class=' pull-left dataListCtn'>
+                        <div class="lv-title">Nom du fichier 1</div>
+                        <small class="lv-small pull-left">18 min restantes</small>
+                        <small class="lv-small pull-right">125Mb</small>
+                        <div class='clearfix'></div>
+                        <progressbar max="max" value="dynamic"></progressbar>
+                      </div>
+                    </div>
+                    <div class=' col-xs-6 col-sm-2 pull-left '>
+                      <ul class="lv-actions actions alignListIcons ">
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-file"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-pause"></i>
+                          </a>
+                        </li>
+                        <li class='col-xs-4'>
+                          <a href="">
+                            <i class="zmdi zmdi-close"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-xs-2 visible-xs '>
+                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                    <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide slide2 col-xs-4">
+        <p>I am slide 2</p>
+      </div>
+      <div class="slide slide3 col-xs-4">
+        <p>I am slide 3</p>
+      </div>
+    </section>
+  </div>
+</div>

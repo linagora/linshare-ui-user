@@ -210,8 +210,20 @@ angular.module('linshareUiUserApp')
         }
       })
 
+      .state('transfert', {
+        url:'/transfert',
+        templateUrl: 'views/common/common.html'
+      })
+
+      .state('transfert.test', {
+        url: '/transfert',
+        templateUrl: 'modules/linshare.share/views/partage_template.html',
+        controller: 'nomController'
+      })
+
       .state('share.files.share-detail', {
         url:'/share_detail',
         templateUrl: 'modules/linshare.share/views/shares_detail.html'
-      });
+      })
+    ;
   });
