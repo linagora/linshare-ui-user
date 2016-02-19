@@ -7,6 +7,11 @@ $dispBlue: #06A6EE;
 body {
   font-family: 'Open Sans', sans-serif;
 }
+
+#main {
+  padding: 0;
+}
+
 /*
 **
 ** DatePicker
@@ -234,7 +239,7 @@ html:not(.ie9) .formsearch .select::before {
 }
 
 #header {
-  height: 50px;
+  min-height: 50px;
   .page-title {
     font-size: 20px;
     color: #fff;
