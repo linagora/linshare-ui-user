@@ -108,6 +108,14 @@ angular.module('linshareUiUserApp')
           return tabs;
         },
         getProperties: function (currentState) {
+
+          //to remove: if
+          if (currentState === 'transfert.new_share') {
+            return {
+              color: '#05B1FF'
+            }
+          }
+
           var res;
           angular.forEach(tabs, function(value) {
             if (value.links) {

@@ -26,7 +26,7 @@ angular.module('linshareUiUserApp')
       headers['WWW-No-Authenticate'] = 'linshare';
     });
     flowFactoryProvider.defaults = {
-      simultaneousUploads: 1,
+      simultaneousUploads: 5,
       //testChunks:false,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
       permanentErrors: [401, 500, 501]

@@ -215,10 +215,9 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/common/common.html'
       })
 
-      .state('transfert.test', {
-        url: '/transfert',
-        templateUrl: 'modules/linshare.share/views/partage_template.html',
-        controller: 'nomController'
+      .state('transfert.new_share', {
+        url: '/newShare',
+        templateUrl: 'modules/linshare.share/views/partage_template.html'
       })
 
       .state('share.files.share-detail', {

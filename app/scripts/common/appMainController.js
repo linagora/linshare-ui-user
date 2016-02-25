@@ -198,6 +198,13 @@ angular.module('linshareUiUserApp')
     $scope.reloadFiles = function() {
       $scope.$broadcast('linshare-upload-complete');
     };
+
+    /**
+     * This is the initial array of shares.
+     * It will contain all the shares
+     */
+    $scope.share_array = [];
+
   })
   .controller('LinshareAutocompleteController', function($scope, LinshareShareService, $log) {
     $scope.userRepresentation = function(u) {
@@ -227,4 +234,20 @@ angular.module('linshareUiUserApp')
     $scope.removeRecipients = function(users, index) {
       users.splice(index, 1);
     };
+  })
+  .controller('InitNewFlowUploaderController', function($scope, ShareObjectService) {
+    /**
+     * Each time we create a sharing, this function is called
+     * It create a new ShareObject and add it to the global array
+     */
+    var createFormShare = function() {
+      var newShare = new ShareObjectService();
+      newShare.id = $scope.share_array.length + 1;
+      newShare.flowObjectFiles = angular.copy($scope.$flow);
+      $scope.share_array.push(newShare);
+    };
+
+    for (var i = 0; i < 3; i++) {
+      createFormShare();
+    }
   });

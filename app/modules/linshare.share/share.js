@@ -50,6 +50,25 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
     };
   })
 
+  .factory('ShareObjectService', function() {
+
+    return function() {
+
+      this.id = null;
+
+      this.share = {};
+
+      this.validationStep = null;
+
+      this.flowObjectFiles = {};
+
+      this.linshareFiles = [];
+    };
+
+    //SETTER AND GETTER AND OTHER METHODS
+
+  })
+
 
 /**
  * @ngdoc controller
@@ -58,8 +77,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
  *
  * The controller to manage shared documents
  */
-  .controller('LinshareShareController', function($scope, $filter, ngTableParams, sharedDocumentsList) {
-    $scope.tableParams = new ngTableParams({
+  .controller('LinshareShareController', function($scope, $filter, NgTableParams, sharedDocumentsList) {
+    $scope.tableParams = new NgTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},
       count: 20
@@ -112,16 +131,13 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap'])
 
     $scope.filesToShare = $stateParams.selected;
   })
-  .controller('LinshareAdvancedShareController', function($scope, allFunctionalities) {
+  .controller('LinshareAdvancedShareController', function($scope) {
+
     angular.forEach($scope.filesToShare, function(doc) {
       $scope.share.documents.push(doc.uuid);
     });
-    $scope.allFunctionalities = allFunctionalities;
 
-  })
-  .controller('nomController', function($scope) {
-
-
+    $scope.id = 1;
 
     $scope.currSlide=1;
 
