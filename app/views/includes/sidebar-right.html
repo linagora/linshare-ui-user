@@ -22,7 +22,7 @@
                       {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}
                     </div>
                     <div class="media-body">
-                      <div class="lv-title">{{selectedDocuments[0].creationDate | date:'shortDate'}}</div>
+                      <div class="lv-title">{{selectedDocuments[0].creationDate | date:'medium'}}</div>
                     </div>
                   </div>
 
@@ -49,7 +49,7 @@
                       {{'RIGHT_PANEL.DETAILS.MODIFICATION_DATE' | translate}}
                     </div>
                     <div class="media-body">
-                      <div class="lv-title">{{selectedDocuments[0].modificationDate | date:'shortDate'}}</div>
+                      <div class="lv-title">{{selectedDocuments[0].modificationDate | date:'medium'}}</div>
                     </div>
                   </div>
 
@@ -58,7 +58,7 @@
                       {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}
                     </div>
                     <div class="media-body">
-                      <div class="lv-title">{{selectedDocuments[0].expirationDate | date:'shortDate'}}</div>
+                      <div class="lv-title">{{selectedDocuments[0].expirationDate | date:'medium'}}</div>
                     </div>
                   </div>
                   <div ng-show="linshareModeProduction == false" class="media">

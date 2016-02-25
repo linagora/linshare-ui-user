@@ -63,8 +63,8 @@
               <span class="numFilesInfo">{{share_array[id].flowObjectFiles.files.length}}
                 <i class="zmdi zmdi-file"></i>
               </span>
-              <span class="minutesInfo">{{share_array[id].flowObjectFiles.timeRemaining()}} secondes restantes </span>|
-              <span class="sizeInfo">{{share_array[id].flowObjectFiles.getSize()}} octets</span>
+              <span class="minutesInfo">{{share_array[id].flowObjectFiles.timeRemaining() | remainingTime}} </span>|
+              <span class="sizeInfo">{{share_array[id].flowObjectFiles.getSize() | readableSize: false}}</span>
             </h2>
             <progressbar max="100" value="share_array[id].flowObjectFiles.progress()*100"></progressbar>
           </div>
@@ -151,8 +151,8 @@
                       </div>
                       <div class="pull-left dataListCtn">
                         <div class="lv-title">{{file.name}}</div>
-                        <small class="lv-small pull-left">{{file.timeRemaining()}} secondes restantes</small>
-                        <small class="lv-small pull-right">{{file.size}}</small>
+                        <small class="lv-small pull-left">{{file.timeRemaining() | remainingTime }}</small>
+                        <small class="lv-small pull-right">{{file.size | readableSize: false}}</small>
                         <div class="clearfix"></div>
                         <progressbar max="100" value="file.progress()*100"></progressbar>
                       </div>

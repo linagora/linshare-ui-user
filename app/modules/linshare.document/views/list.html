@@ -104,7 +104,7 @@
 
               <td ng-if="mactrl.sidebarToggle.right === false" data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate"
                   sortable="'modificationDate'">
-                {{documentFile.modificationDate | date:'shortDate'}}
+                {{documentFile.modificationDate | relativeTime}}
               </td>
 
               <td ng-if="mactrl.sidebarToggle.right === false" data-title="'TABLE_HEADER.SIZE' | translate" sortable="'size'">
