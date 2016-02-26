@@ -151,7 +151,7 @@ angular.module('linshareUiUserApp')
 
   .controller('UiUserMainController',
   function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
-           AuthenticationService, MenuService, growlService) {
+           AuthenticationService, MenuService) {
 
     localStorage.setItem('ma-layout-status', 0);
 
@@ -189,10 +189,6 @@ angular.module('linshareUiUserApp')
       $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
       $scope.loggedUser = data;
       $state.go($scope.urlTogoAfterLogin);
-
-      $translate('WELCOME_USER').then(function(welcome) {
-        growlService.growl(welcome + data.firstName + ' ' + data.lastName, 'inverse');
-      });
     });
 
     $scope.reloadFiles = function() {

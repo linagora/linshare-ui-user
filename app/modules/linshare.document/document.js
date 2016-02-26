@@ -55,40 +55,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
   })
 
 
-  //==============================================
-  // BOOTSTRAP GROWL
-  //==============================================
-
-  .service('growlService', function(){
-    var gs = {};
-    gs.growl = function(message, type) {
-      $.growl({
-        message: message
-      },{
-        type: type,
-        allow_dismiss: false,
-        label: 'Cancel',
-        className: 'btn-xs btn-inverse',
-        placement: {
-          from: 'top',
-          align: 'right'
-        },
-        delay: 2500,
-        animate: {
-          enter: 'animated bounceIn',
-          exit: 'animated bounceOut'
-        },
-        offset: {
-          x: 20,
-          y: 85
-        }
-      });
-    };
-
-    return gs;
-  })
-
-
 /**
  * @ngdoc controller
  * @name linshare.document.controller:LinshareDocumentController
@@ -192,10 +158,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
               $log.debug('value to delete', doc);
               $log.debug('value to delete', documentsList.length);
               LinshareDocumentService.deleteFile(doc.uuid).then(function() {
+                growlService.notifyTopRight(growlMsgDelete, 'success');
                 removeElementFromCollection(documentsList, doc);
                 removeElementFromCollection($scope.selectedDocuments, doc);
                 $scope.tableParams.reload();
-                growlService.growl(growlMsgDelete, 'inverse');
               });
             });
           }

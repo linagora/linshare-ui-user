@@ -58,7 +58,7 @@ angular.module('linshareUiUserApp')
      */
     Restangular.setErrorInterceptor(function(response) {
       if (response.status === 503) {
-        growlService.growl('503 - Serveur Indisponible');
+        growlService.notifyTopCenter('503 - Serveur Indisponible', 'danger');
       }
       return true;
     });
