@@ -5,7 +5,17 @@ angular.module('linshareUiUserApp')
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
+
+      //------------------------------
+      // COMMON TEMPLATE
+      //------------------------------
+
+      .state('common', {
+        templateUrl: 'views/common/common.html'
+      })
+
       .state('home', {
+        parent: 'common',
         url:'/',
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
@@ -31,8 +41,9 @@ angular.module('linshareUiUserApp')
       //------------------------------
 
       .state('documents', {
+        parent: 'common',
         url: '/files',
-        templateUrl: 'views/common/common.html'
+        template:'<div ui-view></div>'
       })
 
       .state('documents.files', {
@@ -108,8 +119,9 @@ angular.module('linshareUiUserApp')
       })
 
       .state('administration', {
-        url: '/lists',
-        templateUrl: 'views/common/common.html'
+        parent: 'common',
+        url: '/administration',
+        template:'<div ui-view></div>'
       })
 
       //------------------------------
@@ -145,8 +157,9 @@ angular.module('linshareUiUserApp')
       //------------------------------
 
       .state('upload_request', {
+        parent: 'common',
         url: '/upload_requests',
-        templateUrl: 'views/common/common.html'
+        template:'<div ui-view></div>'
       })
 
       .state('upload_request.requests', {
@@ -165,8 +178,9 @@ angular.module('linshareUiUserApp')
       //------------------------------
 
       .state('audit', {
+        parent: 'common',
         url: '/audit',
-        templateUrl: 'views/common/common.html'
+        template:'<div ui-view></div>'
       })
 
       .state('audit.global', {
@@ -211,8 +225,9 @@ angular.module('linshareUiUserApp')
       })
 
       .state('transfert', {
+        parent: 'common',
         url:'/transfert',
-        templateUrl: 'views/common/common.html'
+        template:'<div ui-view></div>'
       })
 
       .state('transfert.new_share', {

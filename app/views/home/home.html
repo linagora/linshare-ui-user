@@ -1,12 +1,4 @@
-<header id="header"
-        style="background-color: {{ currentState.color }}"
-        data-ng-include
-        src="'views/includes/header.html'"
-        data-ng-controller="headerCtrl as hctrl">
-</header>
 <section id="main">
-  <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
-  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
   <section id="content"
            ng-class="{'content-toggled': mactrl.sidebarToggle.left }">
     <div class="container" id="home" style="height: {{sizeHeight}}px">
@@ -18,6 +10,4 @@
     </div>
   </section>
 </section>
-
-<footer id="footer" data-ng-include src="'includes/footer.html'"></footer>
 
