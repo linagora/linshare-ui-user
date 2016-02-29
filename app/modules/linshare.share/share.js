@@ -92,23 +92,25 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
   })
 
   .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService, $translate) {
+
+    //Share Object
     $scope.share = {
       recipients: [],
       documents: []
     };
 
-    angular.forEach($scope.selectedDocuments, function(doc) {
-      $scope.share.documents.push(doc.uuid);
-    });
-
-    $scope.$watch('selectedDocuments', function(n) {
-      if (n) {
-        $scope.share.documents = [];
-        angular.forEach(n, function(doc) {
-          $scope.share.documents.push(doc.uuid);
-        });
-      }
-    }, true);
+    //angular.forEach($scope.selectedDocuments, function(doc) {
+    //  $scope.share.documents.push(doc.uuid);
+    //});
+    //
+    //$scope.$watch('selectedDocuments', function(n) {
+    //  if (n) {
+    //    $scope.share.documents = [];
+    //    angular.forEach(n, function(doc) {
+    //      $scope.share.documents.push(doc.uuid);
+    //    });
+    //  }
+    //}, true);
 
     $translate('GROWL_ALERT.SHARE').then(function(translations) {
       $scope.growlMsgShareSuccess = translations;
@@ -124,8 +126,12 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       }
       LinshareShareService.shareDocuments(shareCreationDto).then(function() {
         $scope.share.recipients = [];
-        growlService.notifyTopRight($scope.growlMsgShareSuccess, 'inverse');
+        $scope.share.documents = [];
+        growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
         $scope.$emit('linshare-upload-complete');
+        $scope.mactrl.sidebarToggle.right = false;
+        angular.element('tr').removeClass('info');
+        $scope.initSelectedDocuments();
       });
     };
 

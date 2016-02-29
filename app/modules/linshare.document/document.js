@@ -65,7 +65,12 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
   .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $translate,
                                                      $window, $log, documentsList, growlService, $translatePartialLoader) {
     $translatePartialLoader.addPart('filesList');
-    $scope.selectedDocuments = [];
+    $scope.selectedDocuments = [];//basket
+    $scope.initSelectedDocuments = function() {
+      $scope.selectedDocuments = [];
+    };
+    $scope.currentDocument = {};
+    $scope.indexSelectedDocuments = [];
 
     $scope.downloadSelectedFiles = function(selectedDocuments) {
       angular.forEach(selectedDocuments, function(doc) {
@@ -169,11 +174,32 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       );
     };
 
-    $scope.$watch('selectedDocuments', function(n) {
-      if(n.length !== 1) {
-        $scope.mactrl.sidebarToggle.right = false;
+    $scope.multipleSelection = true;
+    $scope.currentSelectedDocument = {current: 'test'};
+    $scope.sidebarData = 'details';
+
+    $scope.showCurrentFile = function(currentFile) {
+      $scope.currentSelectedDocument.current = currentFile;
+      $scope.sidebarData = 'details';
+      if(currentFile.shared > 0) {
+        LinshareDocumentService.getFileInfo(currentFile.uuid).then(function(data) {
+          $scope.currentSelectedDocument.current.shares = data.shares;
+        });
       }
-    }, true);
+      if(currentFile.hasThumbnail === true) {
+        LinshareDocumentService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
+          $scope.currentSelectedDocument.current.thumbnail = thumbnail;
+        });
+      }
+      $scope.mactrl.sidebarToggle.right = true;
+    };
+
+    $scope.$watch('multipleSelection', function(n) {
+      if(n === false) {
+        $scope.selectedDocuments = [];
+        angular.element('tr').removeClass('info');
+      }
+    });
 
     $scope.$watch('mactrl.sidebarToggle.right', function(n) {
       if(n === true) {
@@ -204,6 +230,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       count: 20,
       filter: $scope.paramFilter
     }, {
+      total: $scope.documentsList.length,
       getData: function($defer, params) {
         var filteredData = params.filter() ?
           $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
@@ -219,13 +246,15 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     $scope.onShare = function() {
       $('#focusInputShare').focus();
+      $scope.sidebarData = 'share';
     };
   })
   .directive('eventPropagationStop', function() {
     return {
-      link: function(scope, elm) {
+      link: function(scope, elm, attrs) {
         elm.bind('click', function(event) {
-          if(elm.parent().parent().parent().parent().hasClass('info')) {
+          var hasInfoClass = elm.parent().parent().parent().parent().hasClass('info');
+          if (!attrs.eventPropagationStop || hasInfoClass) {
             event.preventDefault();
             event.stopPropagation();
           }

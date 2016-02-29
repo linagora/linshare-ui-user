@@ -51,4 +51,9 @@ angular.module('linshare.components')
     return function(time) {
       return moment(time).fromNow();
     }
+  })
+  .filter('getextension', function() {
+    return function(filename) {
+      return filename.split('.').pop().toUpperCase();
+    }
   });
