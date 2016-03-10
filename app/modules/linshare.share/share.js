@@ -136,8 +136,44 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     };
 
     $scope.filesToShare = $stateParams.selected;
-  })
-  .controller('LinshareAdvancedShareController', function($scope) {
+
+    $scope.shareCreationObject = function() {
+      this._recipients = [];
+      this._documents = [];
+      this.secured = false;
+      this.creationAcknowledgement = false;
+      this.expirationDate = null;
+      this.subject = '';
+      this.enableUSDA = false;
+      this.notificationDateForUSDA = null;
+      this.sharingNote = '';
+      this.mailingListUuid = '';
+      this.creationAcknowledgement = false;
+      var self = this;
+
+      this.addRecipient = function(contact) {
+        var exists = false;
+        angular.forEach(self._recipients, function(elem) {
+          if (elem.mail === contact.mail && elem.domain === contact.domain) {
+            exists = true;
+            $log.info('The contact ' + contact.mail + ' is already in the recipients list');
+          }
+        });
+        if (!exists) {
+          self._recipients.push(_.omit(contact, 'restrictedContacts', 'uuid'));
+        }
+      };
+
+      this.addDocument = function(documents) {
+        angular.forEach(documents, function(doc) {
+          self._documents.push(doc);
+        });
+      }
+
+    }
+
+    })
+    .controller('LinshareAdvancedShareController', function($scope) {
 
     angular.forEach($scope.filesToShare, function(doc) {
       $scope.share.documents.push(doc.uuid);

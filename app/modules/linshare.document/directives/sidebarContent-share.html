@@ -2,29 +2,18 @@
      data-ng-controller="LinshareShareActionController">
   <h4 class="text-center">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h4>
 
-  <div data-ng-controller="LinshareAutocompleteController">
-    <div class="chat-search">
-      <div class="fg-line">
-        <ul class="list-inline">
-          <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom"
-              tooltip={{userRepresentation(recipient)}}
-              x-ng-repeat="recipient in share.recipients">{{recipient.lastName}}&nbsp;{{recipient.firstName}}
+  <div>
+    <ul class="list-inline">
+      <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom"
+          tooltip={{userRepresentation(recipient)}}
+          x-ng-repeat="recipient in share.recipients">{{recipient.lastName}}&nbsp;{{recipient.firstName}}
                       <span style="cursor: pointer;">
                           <i class="glyphicon glyphicon-remove" style="color: #333;"
                              x-ng-click="removeRecipients(share.recipients, $index)"></i>
                       </span>
-          </li>
-        </ul>
-        <input id="focusInputShare" type="text" class="form-control" placeholder="Search People" autofocus
-               x-ng-model="selectedContact"
-               x-typeahead-min-length="3"
-               x-typeahead-on-select="addRecipients(share.recipients, selectedContact)"
-               x-typeahead-wait-ms="30"
-               x-typeahead-loading="searchingContact"
-               x-typeahead-input-formatter="angular.noop"
-               x-typeahead="u as userRepresentation(u) for u in searchGuestRestrictedContacts($viewValue) | limitTo:3">
-      </div>
-    </div>
+      </li>
+    </ul>
+    <div autocomplete-user="" data-selected-users-list="share.recipients"></div>
     <div>
       <span class="input-group-addon last">
         <button class="btn btn-primary btn-icon waves-effect waves-circle"
