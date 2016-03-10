@@ -101,4 +101,29 @@ angular.module('linshare.components')
       },
       templateUrl: componentsConfig.path + 'fileSearchComponent/fileSearchDirectiveTemplate.html'
     };
+  })
+  .directive('workingDatePicker', function(componentsConfig, $translate) {
+    var FR_DATE_FORMAT = 'dd/MM/yyyy';
+    var EN_DATE_FORMAT = 'yyyy/MM/dd';
+    return {
+      restrict: 'E',
+      scope: false,
+      transclude: true,
+      link: function(scope, elm, attrs) {
+        scope.dt = new Date();
+        scope.minRange = '';
+        scope.minDate = scope.minDate ? null : new Date();
+        scope.maxDate = scope.maxDate ? null : new Date();
+        scope.open = function($event, dateStartOpened) {
+          $event.preventDefault();
+          $event.stopPropagation();
+          scope[dateStartOpened] = true;
+        };
+        scope.dateOptions = {
+          formatYear: 'yy',
+          startingDay: 1
+        };
+        scope.format = $translate.use() == 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
+      }
+    };
   });

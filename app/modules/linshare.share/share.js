@@ -138,81 +138,168 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     });
 
     $scope.id = 1;
+    var dropDownIsOpen = false;
+    // list - upon clicking on any contact list item, it is removed
+    $scope.removeItem = function($event) {
+      var currItem = $event.currentTarget;
+      $(currItem).parent().parent().css("display", "none");
+    };
 
-    $scope.currSlide=1;
+    // pop up :  save recipients to a list
+    // once the  : "save as list" button is clicked it sets the field to focus
+    $scope.toggled = function() {
+      dropDownIsOpen = !dropDownIsOpen;
+      if (dropDownIsOpen) {
+        $("#labelList").focus();
+      }
+    };
+    /* once the "create button" is clicked (located within the "save as list" pop up) it launches a function and then
+     closes the drop down pop up
+     */
+    $scope.createRecipientList = function($event) {
+      closeDropdownPopUp($event)
+    };
+    /* once the cancel button is clicked (located within the "save as list" pop up) it launches a function and then
+     closes the drop down pop up
+     */
+    $scope.closeDropdown = function($event) {
+      closeDropdownPopUp($event);
+    };
 
-   function clearNavClasses () {
-      $(".slideCtn").removeClass('goToSlide1 goToSlide2 goToSlide3');
-
+    function closeDropdownPopUp($event) {
+      $(".savelistBtn").click();
     }
-    function setSendLink(){
+
+    /* chosen : if the user selects an item located within the select dropdown, it launches a function
+     in order to create a new contact chip  */
+    $(".chosen-select").chosen({
+      width: "100%"
+    });
+    $('.chosen-results').on('change', function(evt, params) {
+      createNewItem();
+    });
+
+    function createNewItem() {}
+    /* affix : slide 2 recipients: set up required in order to maintain the left sidebar recipient selection
+     onto the screen after the users scrolls down beyond the "add recipient" first field's position*/
+    $(function() {
+      setSticky();
+      $(window).resize(function() {
+        setSticky();
+      });
+
+      function setSticky() {
+        var wWidth = $(".sticky").parent().width();
+        if (wWidth > 768) {
+          if (!!$('.sticky').offset()) {
+            var widthSticky = (wWidth * 41) / 100;
+            $(".sticky").css("max-width", widthSticky);
+            var stickyTop = $('.sticky').offset().top;
+            stickyTop -= 50; // our header height
+            $(window).scroll(function() { // scroll event
+              var windowTop = $(window).scrollTop();
+              if (stickyTop < windowTop) {
+                $('.sticky').css({
+                  position: 'fixed',
+                  top: 50
+                });
+              } else {
+                $('.sticky').css({
+                  position: 'static',
+                  clear: 'both'
+                });
+              }
+            });
+          }
+          $("#recipientsCtn").removeClass("w768");
+          $(".custumListContainer").css({
+            width: '58%'
+          });
+        }
+        if (wWidth < 450) {
+          $("#recipientsCtn").addClass("w450");
+        }
+        if ((wWidth > 450) && ($("#recipientsCtn").hasClass("w450"))) {
+          $("#recipientsCtn").removeClass("w450");
+        }
+        if (wWidth < 750) {
+          $(".sticky").css("max-width", "100%");
+          $(".custumListContainer").css({
+            width: '100%'
+          });
+          $("#recipientsCtn").addClass("w768");
+        }
+      }
+    });
+    /*slider navigation code */
+    $scope.currSlide = 1;
+
+    function clearNavClasses() {
+      $(".slideCtn").removeClass('goToSlide1 goToSlide2 goToSlide3');
+    }
+
+    function setSendLink() {
       $(".transfertFilesBtnCtn .nextLink").addClass('hide');
       $(".transfertFilesBtnCtn .sendLink").removeClass('hide');
     }
-    function resetSendLink(){
+
+    function resetSendLink() {
       $(".transfertFilesBtnCtn .sendLink").addClass('hide');
       $(".transfertFilesBtnCtn .nextLink").removeClass('hide');
     }
-    function goToNextSlide (currNum) {
 
-     var currSlideNum=currNum;
-     var nextNumSlide=currSlideNum+1;
-     clearNavClasses();
-      resetSendLink();
-
-      if(currNum==1){
-        var isSlideDone=$(".sliderLinksCtn div:nth-child("+currSlideNum+")").hasClass('done');
-        if(!isSlideDone)$(".form-wizard-nav .progress-bar").css('width','50%');
-      }else if(currNum==2){
-        $(".form-wizard-nav .progress-bar").css('width','100%');
-        setSendLink();
-
-      }else if(currNum==3){
-        nextNumSlide=1;
-      }
-      $(".slideCtn").addClass('goToSlide'+nextNumSlide+'');
-      $(".form-wizard-nav div.active").removeClass('active');
-      $(".sliderLinksCtn div:nth-child("+nextNumSlide+")").addClass('active');
-      $(".sliderLinksCtn div:nth-child("+currSlideNum+")").addClass('done');
-      $scope.currSlide =nextNumSlide;
-    }
-
-
-    function goToPreviousSlide (currNum) {
-      var currSlideNum=currNum;
-      var prevNumSlide=currSlideNum-1;
+    function goToNextSlide(currNum) {
+      var currSlideNum = currNum;
+      var nextNumSlide = currSlideNum + 1;
       clearNavClasses();
       resetSendLink();
-      if(currNum==1){
-        prevNumSlide=1;
+      if (currNum == 1) {
+        var isSlideDone = $(".sliderLinksCtn div:nth-child(" + currSlideNum + ")").hasClass('done');
+        if (!isSlideDone) $(".form-wizard-nav .progress-bar").css('width', '50%');
+      } else if (currNum == 2) {
+        $(".form-wizard-nav .progress-bar").css('width', '100%');
+        setSendLink();
+      } else if (currNum == 3) {
+        nextNumSlide = 1;
       }
-      $(".slideCtn").addClass('goToSlide'+prevNumSlide+'');
+      $(".slideCtn").addClass('goToSlide' + nextNumSlide + '');
       $(".form-wizard-nav div.active").removeClass('active');
-      $(".sliderLinksCtn div:nth-child("+prevNumSlide+")").addClass('active');
-      $scope.currSlide =prevNumSlide;
+      $(".sliderLinksCtn div:nth-child(" + nextNumSlide + ")").addClass('active');
+      $(".sliderLinksCtn div:nth-child(" + currSlideNum + ")").addClass('done');
+      $scope.currSlide = nextNumSlide;
     }
 
+    function goToPreviousSlide(currNum) {
+      var currSlideNum = currNum;
+      var prevNumSlide = currSlideNum - 1;
+      clearNavClasses();
+      resetSendLink();
+      if (currNum == 1) {
+        prevNumSlide = 1;
+      }
+      $(".slideCtn").addClass('goToSlide' + prevNumSlide + '');
+      $(".form-wizard-nav div.active").removeClass('active');
+      $(".sliderLinksCtn div:nth-child(" + prevNumSlide + ")").addClass('active');
+      $scope.currSlide = prevNumSlide;
+    }
     $scope.moveSliderForward = function() {
       goToNextSlide($scope.currSlide);
-       }
+    }
 
     $scope.moveSliderBackwards = function() {
       goToPreviousSlide($scope.currSlide);
     }
-
     $scope.goToSlide = function(numSlide) {
       resetSendLink();
       clearNavClasses();
-      if(numSlide==3) {
+      if (numSlide == 3) {
         setSendLink();
       }
-      $(".slideCtn").addClass('goToSlide'+numSlide);
+      $(".slideCtn").addClass('goToSlide' + numSlide);
       $(".form-wizard-nav div.active").removeClass('active');
-      $(".sliderLinksCtn div:nth-child("+numSlide+")").addClass('active');
+      $(".sliderLinksCtn div:nth-child(" + numSlide + ")").addClass('active');
       $scope.currSlide = numSlide;
-
     }
-
     $scope.showBtnList = function($event) {
       var showBtnListElem = $event.currentTarget;
       if ($(showBtnListElem).hasClass('activeShowMore')) {
@@ -221,10 +308,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         $(showBtnListElem).css('display:none !important;');
       } else {
         $(showBtnListElem).addClass('activeShowMore').parent().prev().find('div').first().addClass('dataListSlideToggle');
-
       }
     }
-
   })
   .controller('DemoCtrl', function() {
 

@@ -203,12 +203,163 @@
           </div>
         </div>
       </div>
-      <div class="slide slide2 col-xs-4">
-        <p>I am slide 2</p>
+      <div class="slide slide2 col-xs-4" >
+        <div class="card" id="recipientsCtn">
+          <div class="card-header">
+            <h2>Sélections des destinataires</h2>
+          </div>
+          <div class="card-body card-padding col-xs-12 col-sm-5 sticky ">
+            <form role="form">
+              <div class="form-group fg-line col-xs-12">
+                <label for="text">Saisissez par destinataires :</label>
+                <input type="email" class="form-control input-sm" placeholder="Saisissez un email, un nom ou un prénom">
+              </div>
+              <div class="form-group fg-line col-xs-12 multiSelectCtn select">
+                <label for="Liste">Saisissez par liste</label>
+                <br/>
+                <select data-placeholder="Sélectionnez vos listes..." class="chosen-select select" multiple
+                        style="width:100%"
+                        tabindex="4">
+                  <option value=""></option>
+                  <option value="United States">United States</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="custumListContainer col-sm-7 scrollRight ">
+            <div class="card-body custumHeaderList col-xs-12 ">
+              <p class="pull-left headerSubCtn"><span>Total :</span>18 Destinataires sélectionnés</p>
+              <div class="dropdown popOverForm savelistBtn" dropdown auto-close="outsideClick" is-open="false" on-toggle="toggled()">
+                <button class="dropdown-toggle btn btn-default" dropdown-toggle >
+                  <i class="zmdi zmdi-accounts-list-alt" style="font-size:1em;"></i>Créer une liste
+                </button>
+                <div class="dropdown-menu pull-right">
+                  <p class="labelListCtn">
+                    <input type="email" class="form-control input-sm" id="labelList"
+                           placeholder="Saisissez le nom de votre liste">
+                  </p>
+                  <md-divider></md-divider>
+                  <div>
+                    <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">Annuler</button>
+                    <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">Créer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="custumListBody col-xs-12 ">
+              <div class="custumListItem" >
+                <p class="pull-left"><span class="circle userBg">Ext</span></p>
+                <div class="pull-left">
+                  <p class="pull-left inner-text-li">Sarra Mamlouk</p>
+                  <p class=" close-list-icone-btn" ng-click="removeItem($event)">
+                    <i class="zmdi zmdi-close "></i>
+                  </p>
+                </div>
+              </div>
+              <div class="custumListItem" >
+                <p class="pull-left"><span class="circle userBg">30</span></p>
+                <div class="pull-left">
+                  <p class="pull-left inner-text-li">Marketing</p>
+                  <p class=" close-list-icone-btn" ng-click="removeItem($event)">
+                    <i class="zmdi zmdi-close"></i>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+          </div>
+          <div class="clearfix">&nbsp;</div>
+        </div>
       </div>
       <div class="slide slide3 col-xs-4">
-        <p>I am slide 3</p>
+        <div class="card">
+          <div class="card-header">
+            <h2>Paramétrage</h2>
+            <div class="navBarBtn" >
+              <button class="btn btn-default waves-effect" aria-haspopup="true" aria-expanded="false">
+                <i class="zmdi zmdi-accounts-list-alt" style="font-size:1em;"></i>Sauvegarder
+                <span class="hidden-xs">paramétres</span>
+              </button>
+            </div>
+          </div>
+          <div class="card-body card-padding">
+            <div>
+              <working-date-picker class="" ls-name="true" ls-size="true" ls-date="true" ls-email="true">
+              </working-date-picker>
+            </div>
+            <form class="advancedSharingSettings">
+              <div class="form-group col-xs-12">
+                <legend>Ajouter une note :</legend>
+                <textarea class="form-control comment" rows="5" placeholder="Saississez votre message"/>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-4 fieldCtn" id="dateField">
+                <label for="comment" class="labelDateExpiration">Date d'expiration:</label>
+                <div class="datepickerBorderFix date-picker dp-blue"  ng-class="{ 'is-opened': opened == true }">
+                  <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }" >
+                    <div class="form-inline">
+                      <input  ng-click="open($event, 'opened')"  type="text"
+                              class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                              is-open="opened" min-date="minDate" datepicker-options="dateOptions"
+                              ng-required="true" close-text="Close"
+                              placeholder={{dt}}
+                              ng-model="dtPopup"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+                <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
+                  <div class="form-inline">
+                    <label for="comment">Recevoir un accusé de partage:</label>
+                    <label class="checkbox checkbox-inline m-r-20">
+                      <input type="checkbox" name="SharingNotification" ng-checked="true"
+                             ng-model="SharingNotification"/>
+                      <i class="input-helper"></i>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+                <div class="fg-line">
+                  <div class="form-inline">
+                    <label for="comment">Recevoir un accusé de non-téléchargement:</label>
+                    <label class="checkbox checkbox-inline m-r-20">
+                      <input type="checkbox" name="nonDownloadedNotification" ng-checked="true"
+                             ng-model="nonDownloadedNotification"/>
+                      <i class="input-helper"></i>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body custumHeaderMailForm col-xs-12 ">
+                <div>
+                  <div class="form-group fg-line col-xs-12 col-sm-6 col-lg-4 titleMailCustumisation ">
+                    <div class="form-inline">
+                      <label for="comment">Personaliser le mail</label>
+                      <label class="checkbox checkbox-inline m-r-20">
+                        <input type="checkbox" name="mailCustum" ng-checked="boo"
+                               ng-model="mailCustum" ng-init="boo=false" ng-click="boo = !boo"/>
+                        <i class="input-helper"></i>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="cssSlideUp col-xs-12 " ng-hide="!boo">
+                    <div class="form-group clearfix fg-line col-xs-12">
+                      <input type="email" class="form-control input-sm "
+                             placeholder="Saisissez un email, un nom ou un prénom">
+                    </div>
+                    <textarea class="form-control comment" rows="5"  placeholder="Saississez votre message"/>
+                  </div>
+                  <md-divider class="col-xs-12 mailDivider" ></md-divider>
+                </div>
+              </div>
+              <div class="clearfix">&nbsp;</div>
+            </form>
+          </div>
+        </div>
       </div>
+      <div class="clearfix">&nbsp;</div>
     </section>
   </div>
 </div>
