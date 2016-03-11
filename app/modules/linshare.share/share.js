@@ -45,28 +45,182 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       },
       autocomplete: function(pattern) {
         $log.debug('FileService:autocomplete');
-        return Restangular.all('users').one('autocomplete', pattern).get();
+        return Restangular.all('autocomplete').one(pattern).get({type: 'SHARING'});
+      }
+    };
+  })
+  .factory('LinshareFunctionalityService', function(Restangular, $log, $q) {
+    var allFunctionalities = {};
+    var deferred = $q.defer();
+    return {
+      getAll: function() {
+        $log.debug('Functionality:getAll');
+        return Restangular.all('functionalities').getList().then(function(allfunc) {
+          angular.forEach(allfunc, function(elm) {
+            allFunctionalities[elm.identifier] = elm;
+          });
+          deferred.resolve(allFunctionalities);
+          return deferred.promise;
+        });
+      },
+      get: function(funcId) {
+        $log.debug('Functionality:get');
+        return Restangular.all('functionalities').one(funcId).get();
       }
     };
   })
 
-  .factory('ShareObjectService', function() {
+  .factory('ShareObjectService', function($log, LinshareFunctionalityService) {
 
-    return function() {
+    var
+      recipients = [],
+      documents = [],
+      mailingListUuid = [],
+      functionalities = {},
+      expirationDate = {enable: false, value: '', userCanOverride: false},
+      creationAcknowledgement = {enable: false, value: '', userCanOverride: false},
+      enableUSDA = {},
+      notificationDateForUSDA = {enable: false, value: '', userCanOverride: false},
+      secured = {enable: false, value: '', userCanOverride: false},
+      submitShare = false;
 
-      this.id = null;
 
-      this.share = {};
+    LinshareFunctionalityService.getAll().then(function(func) {
+      //Getting functionalities in map format
+      angular.forEach(func, function(elm) {
+        functionalities[elm.identifier] = elm;
+      });
 
-      this.validationStep = null;
+      //if share_expiration is activated, then set default value
+      if(functionalities.SHARE_EXPIRATION.enable) {
+        expirationDate.enable = true;
+        expirationDate.value = moment().endOf('day').add(functionalities.SHARE_EXPIRATION.value,
+          functionalities.SHARE_EXPIRATION.unit).subtract(1, 'd');
+        expirationDate.userCanOverride = functionalities.SHARE_EXPIRATION.canOverride
+      }
+
+      //if creationAcknowledgement is activated, then set default value
+      if(functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER.enable) {
+        creationAcknowledgement.enable = true;
+        creationAcknowledgement.value = functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER.value;
+        creationAcknowledgement.userCanOverride = functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER.canOverride;
+      }
+
+      if(functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT.enable) {
+        enableUSDA.enable = true;
+        enableUSDA.value = functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT.value;
+        enableUSDA.userCanOverride = functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT.canOverride;
+      }
+
+      if(functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION.enable) {
+        notificationDateForUSDA.enable = true;
+        notificationDateForUSDA.value = moment().add(functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION.value,
+        'days');
+        notificationDateForUSDA.userCanOverride = functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION.canOverride;
+      }
+
+      if(functionalities.ANONYMOUS_URL.enable) {
+        secured.enable = true;
+        secured.value = functionalities.ANONYMOUS_URL.value;
+        secured.userCanOverride = functionalities.ANONYMOUS_URL.canOverride;
+      }
+    });
+
+
+    function shareObjectForm() {
+
+      this.secured = secured;
+      this.creationAcknowledgement = creationAcknowledgement;
+
+      this.expirationDate = expirationDate;
+      this.enableUSDA = enableUSDA;
+      this.notificationDateForUSDA = notificationDateForUSDA;
+
+      this.sharingNote = '';
+      this.subject = '';
+      this.message = '';
+
+      this.asyncShare = false;
+      this.setAsyncShare = function(state) {
+        self.asyncShare = state;
+      };
 
       this.flowObjectFiles = {};
 
-      this.linshareFiles = [];
-    };
+      var self = this;
 
-    //SETTER AND GETTER AND OTHER METHODS
+      this.addRecipient = function(contact) {
+        var exists = false;
+        if(contact.type === 'ListAutoCompleteResultDto') {
+          angular.forEach(mailingListUuid, function(element) {
+            if(element.identifier === contact.identifier) {
+              exists = true;
+              $log.info('The list ' + contact.listName + ' is already in the mailinglist');
+            }
+          });
+          if (!exists) {
+            mailingListUuid.push(contact.identifier);
+          }
+        } else if(contact.type === 'UserAutoCompleteResultDto') {
+          angular.forEach(recipients, function (elem) {
+            if (elem.mail === contact.mail && elem.domain === contact.domain) {
+              exists = true;
+              $log.info('The user ' + contact.mail + ' is already in the recipients list');
+            }
+          });
+          if (!exists) {
+            recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
+          }
+        }
+      };
 
+      this.removeRecipient = function(index) {
+        recipients.splice(index, 1);
+      };
+
+      this.removeMailingList = function(index) {
+        mailingListUuid.splice(index, 1);
+      };
+
+      this.addDocuments = function (documentList) {
+        angular.forEach(documentList, function (doc) {
+          documents.push(doc.uuid);
+        });
+      };
+
+      this.getFormObj = function() {
+        return {
+          recipients: recipients,
+          documents: documents,
+          mailingListUuid: mailingListUuid,
+          secured: secured.value,
+          creationAcknowledgement: creationAcknowledgement.value,
+          expirationDate: expirationDate.value,
+          enableUSDA: enableUSDA.value,
+          notificationDateForUSDA: notificationDateForUSDA.value,
+          sharingNote: self.sharingNote,
+          subject: self.subject,
+          message: self.message
+        }
+      };
+
+      this.getRecipients = function() {
+        return recipients;
+      };
+
+      this.getDocuments = function() {
+        return documents;
+      };
+
+      this.getMailingListUuid = function() {
+        return mailingListUuid;
+      };
+
+      this.isValid = function() {
+        return documents.length > 0 && (recipients.length || mailingListUuid.length > 0);
+      }
+    }
+    return shareObjectForm;
   })
 
 
@@ -99,19 +253,6 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       documents: []
     };
 
-    //angular.forEach($scope.selectedDocuments, function(doc) {
-    //  $scope.share.documents.push(doc.uuid);
-    //});
-    //
-    //$scope.$watch('selectedDocuments', function(n) {
-    //  if (n) {
-    //    $scope.share.documents = [];
-    //    angular.forEach(n, function(doc) {
-    //      $scope.share.documents.push(doc.uuid);
-    //    });
-    //  }
-    //}, true);
-
     $translate('GROWL_ALERT.SHARE').then(function(translations) {
       $scope.growlMsgShareSuccess = translations;
     });
@@ -124,9 +265,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       if ($scope.selectedContact.length > 0) {
         shareCreationDto.recipients.push({mail: $scope.selectedContact});
       }
-      LinshareShareService.shareDocuments(shareCreationDto).then(function() {
-        $scope.share.recipients = [];
-        $scope.share.documents = [];
+      LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
         growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
@@ -137,49 +276,45 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
     $scope.filesToShare = $stateParams.selected;
 
-    $scope.shareCreationObject = function() {
-      this._recipients = [];
-      this._documents = [];
-      this.secured = false;
-      this.creationAcknowledgement = false;
-      this.expirationDate = null;
-      this.subject = '';
-      this.enableUSDA = false;
-      this.notificationDateForUSDA = null;
-      this.sharingNote = '';
-      this.mailingListUuid = '';
-      this.creationAcknowledgement = false;
-      var self = this;
-
-      this.addRecipient = function(contact) {
-        var exists = false;
-        angular.forEach(self._recipients, function(elem) {
-          if (elem.mail === contact.mail && elem.domain === contact.domain) {
-            exists = true;
-            $log.info('The contact ' + contact.mail + ' is already in the recipients list');
-          }
-        });
-        if (!exists) {
-          self._recipients.push(_.omit(contact, 'restrictedContacts', 'uuid'));
-        }
-      };
-
-      this.addDocument = function(documents) {
-        angular.forEach(documents, function(doc) {
-          self._documents.push(doc);
-        });
-      }
-
-    }
-
     })
-    .controller('LinshareAdvancedShareController', function($scope) {
+    .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
 
+    $translate('GROWL_ALERT.SHARE').then(function(translations) {
+      $scope.growlMsgShareSuccess = translations;
+    });
+
+    $scope.submitShare = function(shareCreationDto, now) {
+      if(now) {
+        LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
+          growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
+          $scope.$emit('linshare-upload-complete');
+          $scope.mactrl.sidebarToggle.right = false;
+          angular.element('tr').removeClass('info');
+          $scope.initSelectedDocuments();
+        }, function(errorData) {
+          growlService.notifyTopRight(errorData.statusText, 'danger');
+        });
+      } else {
+        shareCreationDto.setAsyncShare(!now);
+      }
+    };
     angular.forEach($scope.filesToShare, function(doc) {
       $scope.share.documents.push(doc.uuid);
     });
 
     $scope.id = 1;
+
+    $scope.addUploadedDocument = function(file, message, flow) {
+      var documentResponse = [angular.fromJson(message)];
+      $scope.share_array[1].addDocuments(documentResponse);
+    };
+    $scope.isComplete = false;
+    $scope.onCompleteUpload = function(shareCreationDto) {
+      $scope.isComplete = true;
+      if(shareCreationDto.asyncShare) {
+        $scope.submitShare(shareCreationDto, true);
+      }
+    };
     var dropDownIsOpen = false;
     // list - upon clicking on any contact list item, it is removed
     $scope.removeItem = function($event) {

@@ -17,7 +17,7 @@ angular.module('linshareUiUserApp')
       },
       get: function(funcId) {
         $log.debug('Functionality:get');
-        return Restangular.one('functionalities').get(funcId);
+        return Restangular.all('functionalities').one(funcId).get();
       }
     };
   });

@@ -1087,7 +1087,7 @@ html:not(.ie9) .formsearch .select::before {
 }
 
 #header {
-  height: 50px;
+  min-height: 50px;
   .page-title {
     font-size: 20px;
     color: #fff;
@@ -1530,26 +1530,6 @@ html:not(.ie9) .select::before {
 
 #sharewithlist li {
   display: inline;
-}
-
-#selectedDocumentsActionArea {
-  position: fixed;
-  top: 50px;
-  background-color: lightgoldenrodyellow;
-  z-index: 889;
-  width: inherit;
-  height: 68px;
-  display: none;
-  .card-header {
-    padding-bottom: 0;
-  }
-  .actions {
-    position: static;
-  }
-  .actions > li > a {
-    width: auto;
-    margin-left: 30px;
-  }
 }
 
 #sharewithlist li:after {

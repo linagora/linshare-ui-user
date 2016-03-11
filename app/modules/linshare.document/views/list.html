@@ -6,10 +6,12 @@
   <div class="card">
     <div class="card-header">
       <span class="pull-left">{{selectedDocuments.length}} fichier(s) sélectionné(s)</span>
+
       <div class="search-bar">
         <div class="input-group">
           <div class="fg-line">
-            <input type="text" class="form-control" placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+            <input type="text" class="form-control"
+                   placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
                    ng-change="updateParams()"
                    ng-model="paramFilter['name']">
           </div>
@@ -29,7 +31,8 @@
       <ul class="actions">
 
         <li ng-hide="selectedDocuments.length == 0">
-          <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+          <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}"
+             ng-click="onShare(); mactrl.sidebarToggle.right = true;">
             <i class="zmdi zmdi-share flash c-blue" data-ng-class="{ 'animated': selectedDocuments.length > 0}"></i>
           </a>
         </li>
@@ -54,19 +57,23 @@
           <ul class="dropdown-menu dropdown-menu-right">
 
             <li>
-              <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.REFRESH' | translate}}</a>
+              <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.REFRESH' |
+                translate}}</a>
             </li>
             <li>
-              <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.UPLOAD' | translate}}</a>
+              <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.UPLOAD' |
+                translate}}</a>
             </li>
             <li ng-hide="selectedDocuments.length == 0">
-              <a href="" ng-show="linshareModeProduction == false" ng-click="">{{'ACTION.COPY_IN_GROUP' | translate}}</a>
+              <a href="" ng-show="linshareModeProduction == false" ng-click="">{{'ACTION.COPY_IN_GROUP' |
+                translate}}</a>
             </li>
             <li ng-hide="selectedDocuments.length == 0">
               <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.SHARE' | translate}}</a>
             </li>
             <li>
-              <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.ADVANCED_SHARING' | translate}}</a>
+              <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.ADVANCED_SHARING' |
+                translate}}</a>
             </li>
             <li ng-hide="selectedDocuments.length == 0">
               <a href="" ng-click="deleteDocuments(selectedDocuments)">{{'ACTION.DELETE' | translate}}</a>
@@ -83,128 +90,89 @@
       <filtering-component class="" ls-size="true" ls-date="true"></filtering-component>
     </div>
 
-    <!--<div id="selectedDocumentsActionArea" class="card-header" data-ng-class="{'show': selectedDocuments.length > 0 }">-->
-      <!--<div class="row">-->
-        <!--<div class="col-md-3">-->
-          <!--<span></span> {{selectedDocuments.length}} item sélectionné-->
-        <!--</div>-->
-        <!--<div class="col-md-9">-->
-          <!--<ul class="actions">-->
+    <!-- DOCUMENTS LIST  -->
+    <div class="card-body">
 
-            <!--<li>-->
-              <!--<a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}"-->
-                 <!--ng-click="onShare(); mactrl.sidebarToggle.right = true;">-->
-                <!--<i class="zmdi zmdi-share"></i> Partager-->
-              <!--</a>-->
-            <!--</li>-->
+      <div class="table-responsive">
+        <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
 
-            <!--<li>-->
-              <!--<a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}"-->
-                 <!--ng-click="deleteDocuments(selectedDocuments)">-->
-                <!--<i class="zmdi zmdi-delete"></i> Supprimer-->
-              <!--</a>-->
-            <!--</li>-->
+          <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
+              file-selection-v="selectedDocuments" uuid="documentFile"
+              current-selected-document="currentSelectedDocument"
+              multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}"
+              data-ng-class="{info: documentFile.selected === true}" class="p-b-5">
 
+            <td ls-right-click="test"><span class="fa fa-file-excel-o"></span></td>
 
-            <!--<li>-->
-              <!--<a href="" title="{{'BOUTON_LABEL_TITLE.MULTIPLE_SELECT' | translate}}"-->
-                 <!--ng-click="multipleSelection = !multipleSelection">-->
-                <!--<i class="zmdi zmdi-check-all"></i> Télécharger-->
-              <!--</a>-->
-            <!--</li>-->
-            <!--<li data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right">-->
-              <!--<a href="" title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">-->
-                <!--<i class="zmdi zmdi-info"></i> Copier dans un groupe-->
-              <!--</a>-->
-            <!--</li>-->
-            <!--<li>-->
-              <!--<a ng-click=""><i class="zmdi zmdi-close zmdi-hc-2x"></i></a>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+            <td data-title="'TABLE_HEADER.NAME' | translate" class="col-md-6" sortable="'name'" uuid={{o.uuid}}>
+              {{documentFile.name}}
+            </td>
 
+            <td class="hidden-xs"
+                ng-if="mactrl.sidebarToggle.right === false"
+                data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" sortable="'modificationDate'">
+              {{documentFile.modificationDate | relativeTime}}
+            </td>
 
-      <!-- DOCUMENTS LIST  -->
-      <div class="card-body">
+            <td class="hidden-xs"
+                ng-if="mactrl.sidebarToggle.right === false"
+                data-title="'TABLE_HEADER.SIZE' | translate" sortable="'size'">
+              {{documentFile.size | readableSize: false}}
+            </td>
 
-        <div class="table-responsive">
-          <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
+            <td data-title="'TABLE_HEADER.ACTION' | translate" sortable="'shared'">
+              <!--<button type="button" class="btn btn-default"><i class="zmdi zmdi-download"></i></button>-->
+              <ul class="actions hidden-xs">
+                <li data-ng-class="{ 'openr': mactrl.sidebarToggle.right === true }">
+                  <a href="" ng-click="showCurrentFile(documentFile)" event-propagation-stop
+                     title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
+                    <i class="zmdi zmdi-info"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
+                     ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                    <i ng-show="documentFile.shared === 0" class="zmdi zmdi-share"></i>
+                    <i ng-show="documentFile.shared > 0" class="zmdi zmdi-share" style="color: green"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop
+                     ng-click="downloadCurrentFile(documentFile)">
+                    <i class="zmdi zmdi-download"></i>
+                  </a>
+                </li>
+                <li class="dropdown" dropdown>
+                  <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle
+                     event-propagation-stop>
+                    <i class="zmdi zmdi-more-vert"></i>
+                  </a>
 
-            <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
-                file-selection-v="selectedDocuments" uuid="documentFile" current-selected-document="currentSelectedDocument"
-                multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}"
-                data-ng-class="{info: documentFile.selected === true}" class="p-b-5">
+                  <ul class="dropdown-menu dropdown-menu-right">
 
-              <td ls-right-click="test"><span class="fa fa-file-excel-o"></span></td>
-
-              <td data-title="'TABLE_HEADER.NAME' | translate" class="col-md-6" sortable="'name'" uuid={{o.uuid}}>
-                {{documentFile.name}}
-              </td>
-
-              <td class="hidden-xs"
-                  ng-if="mactrl.sidebarToggle.right === false"
-                  data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" sortable="'modificationDate'">
-                {{documentFile.modificationDate | relativeTime}}
-              </td>
-
-              <td class="hidden-xs"
-                  ng-if="mactrl.sidebarToggle.right === false"
-                  data-title="'TABLE_HEADER.SIZE' | translate" sortable="'size'">
-                {{documentFile.size | readableSize: false}}
-              </td>
-
-              <td data-title="'TABLE_HEADER.ACTION' | translate" sortable="'shared'">
-                <!--<button type="button" class="btn btn-default"><i class="zmdi zmdi-download"></i></button>-->
-                <ul class="actions hidden-xs">
-                  <li data-ng-class="{ 'openr': mactrl.sidebarToggle.right === true }">
-                    <a href="" ng-click="showCurrentFile(documentFile)" event-propagation-stop
-                       title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
-                      <i class="zmdi zmdi-info"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
-                       ng-click="onShare(); mactrl.sidebarToggle.right = true;">
-                      <i ng-show="documentFile.shared === 0" class="zmdi zmdi-share"></i>
-                      <i ng-show="documentFile.shared > 0" class="zmdi zmdi-share" style="color: green"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop
-                       ng-click="downloadCurrentFile(documentFile)">
-                      <i class="zmdi zmdi-download"></i>
-                    </a>
-                  </li>
-                  <li class="dropdown" dropdown>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle event-propagation-stop>
-                      <i class="zmdi zmdi-more-vert"></i>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-right">
-
-                      <li>
-                        <a href="" ng-show="linshareModeProduction == false" ng-click="" event-propagation-stop>{{'ACTION.COPY_IN_GROUP' | translate}}</a>
-                      </li>
-                      <li>
-                        <a href="" ls-share-modal event-propagation-stop>{{'ACTION.SHARE' | translate}}</a>
-                      </li>
-                      <li>
-                        <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
-                      </li>
-                      <li>
-                        <a href="" ng-click="downloadCurrentFile(documentFile)" event-propagation-stop>{{'ACTION.DOWNLOAD' | translate}}</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-               data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+                    <li>
+                      <a href="" ng-show="linshareModeProduction == false" ng-click="" event-propagation-stop>{{'ACTION.COPY_IN_GROUP'
+                        | translate}}</a>
+                    </li>
+                    <li>
+                      <a href="" ls-share-modal event-propagation-stop>{{'ACTION.SHARE' | translate}}</a>
+                    </li>
+                    <li>
+                      <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
+                    </li>
+                    <li>
+                      <a href="" ng-click="downloadCurrentFile(documentFile)" event-propagation-stop>{{'ACTION.DOWNLOAD'
+                        | translate}}</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
       </div>
+      <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+             data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+    </div>
   </div>
 </div>

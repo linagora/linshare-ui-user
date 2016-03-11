@@ -104,7 +104,7 @@ angular.module('linshare.components')
   })
   .directive('workingDatePicker', function(componentsConfig, $translate) {
     var FR_DATE_FORMAT = 'dd/MM/yyyy';
-    var EN_DATE_FORMAT = 'yyyy/MM/dd';
+    var EN_DATE_FORMAT = 'MM/dd/yyyy';
     return {
       restrict: 'E',
       scope: false,

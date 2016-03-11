@@ -13,7 +13,7 @@ angular.module('linshare.components')
       },
       template: '<div class="chat-search">' +
       '<div class="fg-line">' +
-      '<input id="focusInputShare" type="text" class="form-control" placeholder="Search People" autofocus ' +
+      '<input id="focusInputShare" type="text" class="form-control" placeholder="Search People" autocomplete="off"' +
       'x-ng-model="selectedUser" ' +
       'x-typeahead-min-length="3" ' +
       'x-typeahead-on-select="dealWithSelectedUser(selectedUser, selectedUsersList)" ' +
@@ -27,6 +27,9 @@ angular.module('linshare.components')
         $scope.userRepresentation = function(u) {
           if (angular.isString(u)) {
             return u;
+          }
+          if(u.type === 'ListAutoCompleteResultDto') {
+            return u.listName.concat(' ', u.ownerLastName, ' ', u.ownerFirstName);
           }
           return u.firstName.concat(' ', u.lastName, ' ', u.mail, ' ', u.domain);
         };

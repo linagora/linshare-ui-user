@@ -7,7 +7,9 @@
   <div id="transfert-ctn"
        flow-init
        flow-object="share_array[id].flowObjectFiles"
+       flow-file-success="addUploadedDocument($file, $message, $flow)"
        flow-files-submitted="$flow.upload()"
+       flow-complete="onCompleteUpload(share_array[id])"
        id="transfert-header">
     <div class="card row" style="margin:auto">
       <div class="form-wizard-nav col-sm-12 col-md-11 centered">
@@ -29,7 +31,7 @@
           </div>
           <div class=" col-xs-4 last">
             <a ng-click="goToSlide(3)"><span class="step hidden-xs"><span class="stepNum">3</span><i
-              class="zmdi zmdi-edit hide"></i></span></span>
+              class="zmdi zmdi-edit hide"></i></span>
               <span class="title">Paramétrage<span class="hidden-xs"> *Optionnel</span></span>
             </a>
           </div>
@@ -47,7 +49,7 @@
             <button ng-click="moveSliderForward()"
                     class="btn bgm-lightblue waves-effect col-md-2 col-lg-1 nextLink pull-left ">SUIVANT
             </button>
-            <button ng-click="moveSliderForward()"
+            <button ng-click="submitShare(share_array[1], isComplete)"
                     class="btn bgm-lightblue waves-effect col-md-2 col-lg-1  pull-left sendLink hide ">ENVOYER
             </button>
           </div>
@@ -212,18 +214,7 @@
             <form role="form">
               <div class="form-group fg-line col-xs-12">
                 <label for="text">Saisissez par destinataires :</label>
-                <input type="email" class="form-control input-sm" placeholder="Saisissez un email, un nom ou un prénom">
-              </div>
-              <div class="form-group fg-line col-xs-12 multiSelectCtn select">
-                <label for="Liste">Saisissez par liste</label>
-                <br/>
-                <select data-placeholder="Sélectionnez vos listes..." class="chosen-select select" multiple
-                        style="width:100%"
-                        tabindex="4">
-                  <option value=""></option>
-                  <option value="United States">United States</option>
-                  <option value="United Kingdom">United Kingdom</option>
-                </select>
+                <div autocomplete-user="" data-on-select-function="share_array[1].addRecipient"></div>
               </div>
             </form>
           </div>
@@ -248,20 +239,20 @@
               </div>
             </div>
             <div class="custumListBody col-xs-12 ">
-              <div class="custumListItem" >
+              <div class="custumListItem" ng-repeat="recipient in share_array[1].getRecipients()">
                 <p class="pull-left"><span class="circle userBg">Ext</span></p>
                 <div class="pull-left">
-                  <p class="pull-left inner-text-li">Sarra Mamlouk</p>
-                  <p class=" close-list-icone-btn" ng-click="removeItem($event)">
+                  <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
+                  <p class=" close-list-icone-btn" ng-click="share_array[1].removeRecipient($index)">
                     <i class="zmdi zmdi-close "></i>
                   </p>
                 </div>
               </div>
-              <div class="custumListItem" >
-                <p class="pull-left"><span class="circle userBg">30</span></p>
+              <div class="custumListItem" ng-repeat="list in share_array[1].getMailingListUuid()">
+                <p class="pull-left"><span class="circle userBg">L</span></p>
                 <div class="pull-left">
-                  <p class="pull-left inner-text-li">Marketing</p>
-                  <p class=" close-list-icone-btn" ng-click="removeItem($event)">
+                  <p class="pull-left inner-text-li">{{list.listName}}</p>
+                  <p class=" close-list-icone-btn" ng-click="share_array[1].removeMailingList($index)">
                     <i class="zmdi zmdi-close"></i>
                   </p>
                 </div>
@@ -285,15 +276,16 @@
           </div>
           <div class="card-body card-padding">
             <div>
-              <working-date-picker class="" ls-name="true" ls-size="true" ls-date="true" ls-email="true">
-              </working-date-picker>
+              <working-date-picker></working-date-picker>
             </div>
             <form class="advancedSharingSettings">
               <div class="form-group col-xs-12">
                 <legend>Ajouter une note :</legend>
-                <textarea class="form-control comment" rows="5" placeholder="Saississez votre message"/>
+                <textarea class="form-control comment" ng-model="share_array[1].sharingNote" rows="5"
+                          placeholder="Saississez votre message">
+                </textarea>
               </div>
-              <div class="col-xs-12 col-sm-6 col-lg-4 fieldCtn" id="dateField">
+              <div ng-show="share_array[1].expirationDate.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn" id="dateField">
                 <label for="comment" class="labelDateExpiration">Date d'expiration:</label>
                 <div class="datepickerBorderFix date-picker dp-blue"  ng-class="{ 'is-opened': opened == true }">
                   <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }" >
@@ -302,33 +294,65 @@
                               class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
                               is-open="opened" min-date="minDate" datepicker-options="dateOptions"
                               ng-required="true" close-text="Close"
-                              placeholder={{dt}}
-                              ng-model="dtPopup"/>
+                              placeholder="{{share_array[1].expirationDate.value | date: 'shortDate'}}"
+                              ng-disabled="!share_array[1].expirationDate.userCanOverride"
+                              ng-model="share_array[1].expirationDate.value"/>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
-                <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
+              <div ng-show="share_array[1].secured.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+                <div class="fg-line">
                   <div class="form-inline">
-                    <label for="comment">Recevoir un accusé de partage:</label>
+                    <label for="comment">Sécuriser le partage:</label>
                     <label class="checkbox checkbox-inline m-r-20">
-                      <input type="checkbox" name="SharingNotification" ng-checked="true"
-                             ng-model="SharingNotification"/>
+                      <input type="checkbox" name="secureSharing" ng-checked="true"
+                             ng-disabled="!share_array[1].secured.userCanOverride"
+                             ng-model="share_array[1].secured.value"/>
                       <i class="input-helper"></i>
                     </label>
                   </div>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+              <div ng-show="share_array[1].creationAcknowledgement.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+                <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
+                  <div class="form-inline">
+                    <label for="comment">Recevoir un accusé de partage:</label>
+                    <label class="checkbox checkbox-inline m-r-20">
+                      <input type="checkbox" name="SharingNotification"
+                             ng-disabled="!share_array[1].creationAcknowledgement.userCanOverride"
+                             ng-model="share_array[1].creationAcknowledgement.value"/>
+                      <i class="input-helper"></i>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div ng-show="share_array[1].enableUSDA.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
                 <div class="fg-line">
                   <div class="form-inline">
                     <label for="comment">Recevoir un accusé de non-téléchargement:</label>
                     <label class="checkbox checkbox-inline m-r-20">
                       <input type="checkbox" name="nonDownloadedNotification" ng-checked="true"
-                             ng-model="nonDownloadedNotification"/>
+                             ng-disabled="!share_array[1].enableUSDA.userCanOverride"
+                             ng-model="share_array[1].enableUSDA.value"/>
                       <i class="input-helper"></i>
                     </label>
+                  </div>
+                </div>
+              </div>
+              <div ng-show="share_array[1].enableUSDA.value" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn" id="dateField">
+                <label for="comment" class="labelDateExpiration">Date de notification:</label>
+                <div class="datepickerBorderFix date-picker dp-blue"  ng-class="{ 'is-opened': opened2 == true }">
+                  <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened2 == true }" >
+                    <div class="form-inline">
+                      <input  ng-click="open($event, 'opened2')"  type="text"
+                              class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                              is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
+                              ng-required="true" close-text="Close"
+                              placeholder="{{share_array[1].notificationDateForUSDA.value | date: 'medium'}}"
+                              ng-disabled="!share_array[1].notificationDateForUSDA.userCanOverride"
+                              ng-model="share_array[1].notificationDateForUSDA.value"/>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -346,10 +370,12 @@
                   </div>
                   <div class="cssSlideUp col-xs-12 " ng-hide="!boo">
                     <div class="form-group clearfix fg-line col-xs-12">
-                      <input type="email" class="form-control input-sm "
-                             placeholder="Saisissez un email, un nom ou un prénom">
+                      <input type="text" class="form-control input-sm"
+                             ng-model="share_array[1].subject" placeholder="Subject">
                     </div>
-                    <textarea class="form-control comment" rows="5"  placeholder="Saississez votre message"/>
+                    <textarea class="form-control comment" rows="5"  placeholder="Saississez votre message"
+                              ng-model="share_array[1].message">
+                    </textarea>
                   </div>
                   <md-divider class="col-xs-12 mailDivider" ></md-divider>
                 </div>
