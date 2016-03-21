@@ -235,6 +235,11 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.share/views/partage_template.html'
       })
 
+      .state('transfert.new_upload', {
+        url: '/newUpload',
+        templateUrl: 'modules/linshare.share/views/upload_template.html'
+      })
+
       .state('share.files.share-detail', {
         url:'/share_detail',
         templateUrl: 'modules/linshare.share/views/shares_detail.html'

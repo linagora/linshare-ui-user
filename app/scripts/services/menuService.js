@@ -110,7 +110,7 @@ angular.module('linshareUiUserApp')
         getProperties: function (currentState) {
 
           //to remove: if
-          if (currentState === 'transfert.new_share') {
+          if (currentState === 'transfert.new_share' ||currentState === 'transfert.new_upload') {
             return {
               color: '#05B1FF'
             }

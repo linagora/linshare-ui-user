@@ -43,7 +43,7 @@ angular.module('linshareUiUserApp')
   // =========================================================================
   // Header
   // =========================================================================
-  .controller('headerCtrl', function($timeout, $translate){
+  .controller('headerCtrl', function($timeout, $translate, $scope){
 
     // Top Search
     this.openSearch = function(){
@@ -147,6 +147,28 @@ angular.module('linshareUiUserApp')
       }
     };
 
+    if($scope.mactrl.sidebarToggle.left){
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+    }
+    this.resizeDragNDropCtn=function(attr) {
+      checkAndSetNewWidth(attr);
+    }
+    function checkAndSetNewWidth(attr) {
+      if (attr) {
+        var widthWindow = $(window).width();
+        var nwidthWindow = widthWindow - 268;
+        angular.element(".resetContentWidth").width(nwidthWindow);
+      } else {
+        angular.element(".resetContentWidth").width("100%");
+      }
+    }
+    angular.element(window).resize(function(){
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+    });
+
+    $scope.$on('$stateChangeSuccess', function() {
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+    });
   })
 
   .controller('UiUserMainController',

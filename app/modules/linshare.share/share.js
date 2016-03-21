@@ -275,7 +275,6 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     };
 
     $scope.filesToShare = $stateParams.selected;
-
     })
     .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
 
@@ -298,10 +297,11 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         shareCreationDto.setAsyncShare(!now);
       }
     };
+  })
+  .controller('LinshareAdvancedShareController', function($scope) {
     angular.forEach($scope.filesToShare, function(doc) {
       $scope.share.documents.push(doc.uuid);
     });
-
     $scope.id = 1;
     var dropDownIsOpen = false;
     // list - upon clicking on any contact list item, it is removed
@@ -560,11 +560,11 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     }
     $scope.moveSliderForward = function() {
       goToNextSlide($scope.currSlide);
-    }
+    };
 
     $scope.moveSliderBackwards = function() {
       goToPreviousSlide($scope.currSlide);
-    }
+    };
     $scope.goToSlide = function(numSlide) {
       resetSendLink();
       clearNavClasses();
@@ -585,13 +585,172 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       } else {
         $(showBtnListElem).addClass('activeShowMore').parent().prev().find('div').first().addClass('dataListSlideToggle');
       }
-    }
+    };
+
+    $scope.numSelectedItems = [];
+
+    $scope.isAllSelected = {status: false, origin: ''};
+    $scope.$watch('isAllSelected', function(n, o) {
+      if(n.status === true) {
+        var numItems=$(".media-body").length;
+
+        angular.element('.media-body').addClass('highlightListElem');
+
+        $scope.numSelectedItems.length=numItems;
+      }
+       else {
+        if(n.origin !== 'directive') {
+
+          angular.element('.media-body').removeClass('highlightListElem');
+          $scope.numSelectedItems.pop($scope.numSelectedItems.length);
+        }
+      }
+    }, true);
+   // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
+    $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+      $("#selection-actions").addClass("showMultiMenu");
+      $(".dragNDropCtn").addClass("outOfFocus");
+      //pertains to upload-box
+      if(angular.element("upload-box") !== null){
+        $(".infoPartager").css("opacity","1");
+      }
+    });
+    // display the files pertaining to the clicked share
+    $scope.showSharingItems=function(numIndex){
+      $scope.isCurrentPartage=true;
+      numIndex++;
+      angular.element('.media-body').each(function( index ) {
+        if($(this).hasClass("partage"+numIndex)){
+          $(this).addClass("highlightListElem");
+        };
+      });
+      $scope.numSelectedItems.length=$(".partage"+numIndex+"").length;
+      $("#selection-actions").addClass("showMultiMenu");
+          $scope.currentSharingIndex = numIndex;
+          $scope.isUpdate=true;
+    };
+
+    // add numbered classes onto each file list item
+    $scope.createSharing= function(){
+      // if new share
+      if(!$scope.isUpdate) {
+        $scope.numberOfSharings++;
+        $scope.resetSelection();
+        $scope.sharingsBtn.push(1);
+        // slide up the multiselect menu
+        $scope.closeMultiSelectMenu();
+        $scope.numSelectedItems.length=0;
+      }else{
+        $scope.updateSharing();
+      }
+    };
+    // update the selection of the files  for the current or newly created share
+    $scope.resetSelection=function(){
+      $('.media-body').each(function( index ) {
+        $(this).removeClass("partage" + $scope.numberOfSharings);
+        if($( this ).hasClass("highlightListElem")){
+          if(!$scope.isUpdate) {
+            $(this).addClass("partage" + $scope.numberOfSharings);
+          }else{
+            $(this).addClass("partage" + $scope.currentSharingIndex);
+          }
+        }
+      });
+    };
+    $scope.updateSharing= function(){
+      $scope.resetSelection();
+      $scope.numSelectedItems.pop($scope.numSelectedItems.length);
+      $scope.closeMultiSelectMenu()
+      $scope.currentSharingIndex=0;
+      $scope.isUpdate=false;
+      $scope.isCurrentPartage=true;
+    };
+    // if closure of multiselect reset state
+    angular.element(".exitSelection").bind('click',function() {
+      $scope.isCurrentPartage=false;
+      $scope.isUpdate=false;
+    });
+    // if share link has been clicked show quishare here
+    angular.element(".partageLink").click(function(){
+      $scope.$apply(function() {
+        $scope.isCurrentPartage = true;
+      });
+    });
+    // if closure of multiselect reset state
+    $scope.closeMultiSelectMenu=function(){
+      $("#selection-actions").removeClass("showMultiMenu");
+      angular.element('.media-body').removeClass('highlightListElem');
+    };
+
+    $scope.currentSharingIndex=0;
+    $scope.numberOfSharings=0;
+    $scope.isUpdate=false;
+    $scope.isCurrentPartage=false;
+    $scope.sharingsBtn=[];
+
   })
   .controller('DemoCtrl', function() {
 
     this.isOpen = false;
-
     this.selectedMode = 'md-scale';
-
     this.selectedDirection = 'left';
+  }).directive('uploadBoxSelection', function() {
+    var initSelectedItem = [];
+
+      return {
+      restrict: 'A',
+      scope: false,
+      link: function(scope, elm, attrs) {
+        elm.bind('click', function(event) {
+          var numItems=$(".media-body").length;
+          var isCurrentlySelected=elm.hasClass("highlightListElem");
+          elm.toggleClass("highlightListElem","removeListElem");
+          checkifMultiMenuVisible();
+
+        if(scope.isAllSelected.status == true) {
+            scope.$apply(function() {
+              scope.isAllSelected.status = false;
+              scope.isAllSelected.origin = 'directive';
+            })
+        }
+          if(isCurrentlySelected){
+            scope.$apply(function() {
+              scope.numSelectedItems.pop(1);
+            })
+          }else {
+            scope.$apply(function() {
+              scope.numSelectedItems.push(1);
+              var numSelectedItems=scope.numSelectedItems.length;
+              if(numSelectedItems == numItems) {
+                elm.addClass("highlightListElem");
+                scope.isAllSelected.status = true;
+              }
+            })
+          }
+
+          if(numItems ==0){
+            $(".dragNDropCtn").removeClass("outOfFocus");
+          }
+        });
+
+            angular.element(".exitSelection").bind('click',function(){
+           scope.closeContextualToolBar();
+         });
+        function checkifMultiMenuVisible(){
+          if(scope.numSelectedItems.length ==0){
+            angular.element("#selection-actions").addClass("showMultiMenu");
+          }
+        }
+
+        scope.closeContextualToolBar = function(){
+
+          scope.$apply(function() {
+            scope.numSelectedItems.pop(scope.numSelectedItems.length);
+          });
+          $("#selection-actions").removeClass("showMultiMenu");
+          angular.element('.media-body').removeClass('highlightListElem');
+        }
+      }
+
+    };
   });
