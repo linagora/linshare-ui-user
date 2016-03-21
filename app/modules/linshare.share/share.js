@@ -303,6 +303,33 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     });
 
     $scope.id = 1;
+    var dropDownIsOpen = false;
+    // list - upon clicking on any contact list item, it is removed
+    $scope.removeItem = function($event) {
+      var currItem = $event.currentTarget;
+      $(currItem).parent().parent().css("display", "none");
+    };
+
+    // pop up :  save recipients to a list
+    // once the  : "save as list" button is clicked it sets the field to focus
+    $scope.toggled = function() {
+      dropDownIsOpen = !dropDownIsOpen;
+      if (dropDownIsOpen) {
+        $("#labelList").focus();
+      }
+    };
+    /* once the "create button" is clicked (located within the "save as list" pop up) it launches a function and then
+     closes the drop down pop up
+     */
+    $scope.createRecipientList = function($event) {
+      closeDropdownPopUp($event)
+    };
+    /* once the cancel button is clicked (located within the "save as list" pop up) it launches a function and then
+     closes the drop down pop up
+     */
+    $scope.closeDropdown = function($event) {
+      closeDropdownPopUp($event);
+    };
 
     $scope.addUploadedDocument = function(file, message, flow) {
       var documentResponse = [angular.fromJson(message)];
@@ -342,6 +369,78 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.closeDropdown = function($event) {
       closeDropdownPopUp($event);
     };
+
+    function closeDropdownPopUp($event) {
+      $(".savelistBtn").click();
+    }
+
+    /* chosen : if the user selects an item located within the select dropdown, it launches a function
+     in order to create a new contact chip  */
+    $(".chosen-select").chosen({
+      width: "100%"
+    });
+    $('.chosen-results').on('change', function(evt, params) {
+      createNewItem();
+    });
+
+    function createNewItem() {}
+    /* affix : slide 2 recipients: set up required in order to maintain the left sidebar recipient selection
+     onto the screen after the users scrolls down beyond the "add recipient" first field's position*/
+    $(function() {
+      setSticky();
+      $(window).resize(function() {
+        setSticky();
+      });
+
+      function setSticky() {
+        var wWidth = $(".sticky").parent().width();
+        if (wWidth > 768) {
+          if (!!$('.sticky').offset()) {
+            var widthSticky = (wWidth * 41) / 100;
+            $(".sticky").css("max-width", widthSticky);
+            var stickyTop = $('.sticky').offset().top;
+            stickyTop -= 50; // our header height
+            $(window).scroll(function() { // scroll event
+              var windowTop = $(window).scrollTop();
+              if (stickyTop < windowTop) {
+                $('.sticky').css({
+                  position: 'fixed',
+                  top: 50
+                });
+              } else {
+                $('.sticky').css({
+                  position: 'static',
+                  clear: 'both'
+                });
+              }
+            });
+          }
+          $("#recipientsCtn").removeClass("w768");
+          $(".custumListContainer").css({
+            width: '58%'
+          });
+        }
+        if (wWidth < 450) {
+          $("#recipientsCtn").addClass("w450");
+        }
+        if ((wWidth > 450) && ($("#recipientsCtn").hasClass("w450"))) {
+          $("#recipientsCtn").removeClass("w450");
+        }
+        if (wWidth < 750) {
+          $(".sticky").css("max-width", "100%");
+          $(".custumListContainer").css({
+            width: '100%'
+          });
+          $("#recipientsCtn").addClass("w768");
+        }
+      }
+    });
+    /*slider navigation code */
+    $scope.currSlide = 1;
+
+    function clearNavClasses() {
+      $(".slideCtn").removeClass('goToSlide1 goToSlide2 goToSlide3');
+    }
 
     function closeDropdownPopUp($event) {
       $(".savelistBtn").click();
