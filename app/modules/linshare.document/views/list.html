@@ -1,96 +1,140 @@
-<div class="container">
+<div class="container" id="files">
 
 
   <!--  ACTIONS ON DOCUMENTS  -->
 
   <div class="card">
     <div class="card-header">
-      <span class="pull-left">{{selectedDocuments.length}} fichier(s) sélectionné(s)</span>
-
-      <div class="search-bar">
-        <div class="input-group">
-          <div class="fg-line">
-            <input type="text" class="form-control"
-                   placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                   ng-change="updateParams()"
-                   ng-model="paramFilter['name']">
+        <div id="breadcrumb-wrap"  ng-controller="DemoCtrl as demo">
+          <div class="breadcrumbsCtn">
+            <a href="#" class="breadcrumb"><i class="zmdi zmdi-file" ></i>Mes dépots</a>
           </div>
-            <span class="input-group-addon last clickable"
-                  x-ng-click="advancedFilterBool = !advancedFilterBool"
-                  data-toggle="tooltip"
-                  title=""
-                  data-placement="right"
-                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
-                  slide-toggle="#searchFilterCtn">
-              <i class="zmdi hidden-xs clickable"
-                 x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
-                              'zmdi-chevron-up': advancedFilterBool} "></i>
-          </span>
+          <div class="navBarBtn" >
+            <button class="btn btn-default waves-effect blueBtn" flow-btn flow-files-submitted="$flow.upload()" >
+              <i class="zmdi zmdi-upload" ><span>Importez un fichier</span></i>
+            </button>
+          </div>
+          <div id="action-header">
+            <div class="actions-ctn">
+              <ul class="actions">
+
+                <li ng-hide="selectedDocuments.length == 0">
+                  <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}"
+                     ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                    <i class="zmdi zmdi-share flash c-blue" data-ng-class="{ 'animated': selectedDocuments.length > 0}"></i>
+                  </a>
+                </li>
+
+                <li ng-hide="selectedDocuments.length == 0">
+                  <a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}" ng-click="deleteDocuments(selectedDocuments)">
+                    <i class="zmdi zmdi-delete flash c-red" data-ng-class="{ 'animated': selectedDocuments.length > 0}"></i>
+                  </a>
+                </li>
+
+                <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right"
+                    data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
+                  <a href="" title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
+                    <i class="zmdi zmdi-info"></i>
+                  </a>
+                </li>
+
+                <li class="dropdown" dropdown>
+                  <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle>
+                    <i class="zmdi zmdi-more-vert"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+
+                    <li>
+                      <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.REFRESH' |
+                        translate}}</a>
+                    </li>
+                    <li>
+                      <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.UPLOAD' |
+                        translate}}</a>
+                    </li>
+                    <li ng-hide="selectedDocuments.length == 0">
+                      <a href="" ng-show="linshareModeProduction == false" ng-click="">{{'ACTION.COPY_IN_GROUP' |
+                        translate}}</a>
+                    </li>
+                    <li ng-hide="selectedDocuments.length == 0">
+                      <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.SHARE' | translate}}</a>
+                    </li>
+                    <li>
+                      <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.ADVANCED_SHARING' |
+                        translate}}</a>
+                    </li>
+                    <li ng-hide="selectedDocuments.length == 0">
+                      <a href="" ng-click="deleteDocuments(selectedDocuments)">{{'ACTION.DELETE' | translate}}</a>
+                    </li>
+                    <li ng-hide="selectedDocuments.length == 0">
+                      <a href="" ng-click="downloadSelectedFiles(selectedDocuments)">{{'ACTION.DOWNLOAD' | translate}}</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="input-group search-bar">
+              <div class="fg-line">
+                <input type="text" class="form-control"
+                       placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                       ng-change="updateParams()"
+                       ng-model="paramFilter['name']">
+              </div>
+           <span class="input-group-addon last clickable"
+                 x-ng-click="advancedFilterBool = !advancedFilterBool"
+                 data-toggle="tooltip"
+                 title=""
+                 data-placement="right"
+                 data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                 slide-toggle="#searchFilterCtn">
+           <i class="zmdi hidden-xs clickable"
+              x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
+           'zmdi-chevron-up': advancedFilterBool} "></i>
+           </span>
+            </div>
+          </div>
         </div>
-      </div>
-      <ul class="actions">
-
-        <li ng-hide="selectedDocuments.length == 0">
-          <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}"
-             ng-click="onShare(); mactrl.sidebarToggle.right = true;">
-            <i class="zmdi zmdi-share flash c-blue" data-ng-class="{ 'animated': selectedDocuments.length > 0}"></i>
-          </a>
-        </li>
-
-        <li ng-hide="selectedDocuments.length == 0">
-          <a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}" ng-click="deleteDocuments(selectedDocuments)">
-            <i class="zmdi zmdi-delete flash c-red" data-ng-class="{ 'animated': selectedDocuments.length > 0}"></i>
-          </a>
-        </li>
-
-        <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right"
-            data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
-          <a href="" title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
-            <i class="zmdi zmdi-info"></i>
-          </a>
-        </li>
-
-        <li class="dropdown" dropdown>
-          <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle>
-            <i class="zmdi zmdi-more-vert"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right">
-
-            <li>
-              <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.REFRESH' |
-                translate}}</a>
-            </li>
-            <li>
-              <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.UPLOAD' |
-                translate}}</a>
-            </li>
-            <li ng-hide="selectedDocuments.length == 0">
-              <a href="" ng-show="linshareModeProduction == false" ng-click="">{{'ACTION.COPY_IN_GROUP' |
-                translate}}</a>
-            </li>
-            <li ng-hide="selectedDocuments.length == 0">
-              <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.SHARE' | translate}}</a>
-            </li>
-            <li>
-              <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.ADVANCED_SHARING' |
-                translate}}</a>
-            </li>
-            <li ng-hide="selectedDocuments.length == 0">
-              <a href="" ng-click="deleteDocuments(selectedDocuments)">{{'ACTION.DELETE' | translate}}</a>
-            </li>
-            <li ng-hide="selectedDocuments.length == 0">
-              <a href="" ng-click="downloadSelectedFiles(selectedDocuments)">{{'ACTION.DOWNLOAD' | translate}}</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <div class="clearfix"></div>
-
+      <!--<span style="display:none" class="pull-left">{{selectedDocuments.length}} fichier(s) sélectionné(s)</span>-->
       <!-- FILTER COMPONENT  -->
       <filtering-component class="" ls-size="true" ls-date="true"></filtering-component>
+      <div class="clearfix"></div>
     </div>
 
+
     <!-- DOCUMENTS LIST  -->
+    <div id="dropArea" >
+
+      <div id="selection-actions" class="showMultiMenu" style="display: block;" ng-init="isAllSelected.status = false">
+        <div class="exitSelection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
+          <i class="zmdi zmdi-close" ></i>
+        </div>
+        <div class="displayNumSelectedItems"><span>{{numSelectedItems.length}}</span> Items Selectionnés </div>
+        <div id="toolbar-actions">
+       <span ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
+         <a class="selectAllItems plainTxtBtn">
+           <i ng-show="isAllSelected.status"  class="fa fa-square-o"></i>
+           <span ng-show="isAllSelected.status">Tout désélectionner</span>
+           <i ng-show="!isAllSelected.status" class="fa fa-check-square-o"></i>
+           <span ng-show="!isAllSelected.status">Tout sélectionner</span>
+         </a>
+       </span>
+      <span><a class="plainTxtBtn partageLink" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >
+        <i class="zmdi zmdi-share"></i><span>Partager</span></a></span>
+        </div>
+      </div>
+
+      <div class="dragNDropCtn resetContentWidth">
+        <div class="dragNDropContent">
+          <div class="dragIconCtn ">
+            <div class="borderedCircle">&nbsp;</div>
+            <img src="images/upload-dnd-grey.png">
+          </div>
+          <h1>Déposez vos fichiers ici</h1>
+          <p>Cliquez ou glissez-déposez vos fichiers dans l'interface pour les importer.</p>
+        </div>
+      </div>
+
     <div class="card-body">
 
       <div class="table-responsive">
@@ -175,4 +219,5 @@
              data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
     </div>
   </div>
+</div>
 </div>
