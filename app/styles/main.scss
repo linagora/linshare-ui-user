@@ -1,6 +1,152 @@
 $logoBlue: #05B1FF;
 $dispBlue: #06A6EE;
 
+.destinataires-form-area{
+  margin-top:2em;
+}
+.bottomSidebarBtn {
+  position:absolute;
+  bottom:0;
+  width: 100%;
+  button{
+    height: 50px;
+    font-size: 1.1em;
+  }
+}
+
+
+#chat {
+  padding:0;
+  .chat-search {
+    padding:0;
+    padding-left:20px;
+  }
+}
+#recipientsCtnSidebar {
+  .advancedSharingSettings legend {
+    display: block;
+    width: 100%;
+    font-weight: inherit;
+    padding: 0;
+    margin-bottom: 18px;
+    font-size: 1em;
+    line-height: inherit;
+    color: #7D7D7D;
+    border: 0;
+    border-bottom: none;
+  }
+  .addNote.form-group {
+    margin-bottom: 3em;
+  }
+  position: relative;
+  .custumListItem {
+    .circleCtn{
+      min-width: 17%;
+    }
+    .nameRecipientsCtn {
+      width: 83%;
+    }
+  }
+
+  .more-options {
+    display:inline-block;
+    float: right;
+  }
+  h2 {
+
+    text-align: left;
+    font-size: 1.3em;
+  }
+  h2.headerSubCtn  {
+    font-size: 1.15em;
+    color: #676767;
+    clear:  both;
+    margin-top:0;
+    margin-bottom: 1.5em;
+    i{
+      display: inline-block;
+      margin-right: 0.5em;
+    }
+  }
+  .savelistBtn {
+    float: right;
+    padding-top: 2px;
+    top: -7px;
+  }
+  .header-sidebar{
+
+    .zmdi-close{
+      position: absolute;
+      top: 15px;
+      right: 17px;
+      font-size: 1.2em;
+    }
+  }
+}
+.clearfix{
+  clear:both !important;
+}
+.blueBtn {
+  color: #FFFFFF !important;
+  font-weight: bold !important;;
+  font-size: 1.1em;
+  background-color: #2196F3 !important;;
+}
+#files {
+  .card-header{
+    padding:0;
+  }
+  .search-bar {
+    float:right;
+  }
+  #action-header {
+    float:right;
+    width: 70%;
+    margin-top: 14px;
+    .actions-ctn {
+      width: 7%;
+    }
+    > div {
+      float:right;
+    }
+    .actions {
+      position: relative;
+      right: 0;
+      top: 0
+    }
+    .search-bar{
+      width:93%;
+    }
+    .navBarBtn {
+    }
+  }
+  #fileListTable thead tr:first-child  th{
+    height:50px;
+  }
+  #breadcrumb-wrap .navBarBtn {
+
+    float: left;
+    padding-top: 2px;
+    top: 14px;
+    padding: 0px;
+    margin-left: 70px;
+    left: 70px;
+  }
+  #breadcrumb-wrap {
+    height: 55px;
+  }
+  .card-body{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+  }
+  #selection-actions {
+    z-index: 4;
+  }
+  .breadcrumbsCtn {
+     top: 6px;
+  }
+}
 
 .blueBtn {
   color: #FFFFFF !important;
@@ -739,8 +885,9 @@ background-color: #fff;
 .custumListItem {
   padding: 0;
   margin: 0;
-  width: auto;
+  width: 50%;
   float: left;
+  overflow: hidden;
   background-color: #ECECEC;
   height: 30px;
   border-radius: 25px;

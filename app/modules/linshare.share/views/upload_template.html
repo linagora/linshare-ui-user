@@ -9,8 +9,9 @@
      flow-files-submitted="$flow.upload()" ng-init="testeur = share_array[id].flowObjectFiles.files.length" >
     <div id="breadcrumb-wrap"  ng-controller="DemoCtrl as demo">
       <div class="breadcrumbsCtn">
-        <a href="#" class="breadcrumb"><i class="zmdi zmdi-file" ></i>Mes dépots</a>
+        <a ng-click="showSharingItems($index)" class="breadcrumb"><i class="zmdi zmdi-file" ></i>Mes dépots</a>
       </div>
+
       <div id="action-header">
         <div class="navBarBtn" >
           <button class="btn btn-default waves-effect" ng-click="createSharing()">
@@ -21,18 +22,12 @@
           </button>
         </div>
       </div>
+
     </div>
 <div id="dropArea" >
-
-
-
-
     <div class="infoPartager">
       <p><i  class="fa fa-info"></i> Sélectionnez des fichiers si vous souhaitez les partager</p>
     </div>
-
-
-
   <div id="selection-actions" style="display: block;" ng-init="isAllSelected.status = false">
     <div class="exitSelection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
       <i class="zmdi zmdi-close" ></i>
@@ -47,8 +42,11 @@
            <span ng-show="!isAllSelected.status">Tout sélectionner</span>
          </a>
        </span>
-      <span><a class="plainTxtBtn partageLink" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >
-        <i class="zmdi zmdi-share"></i><span>Partager</span></a></span>
+      <span>
+        <!--<a class="plainTxtBtn partageLink" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >-->
+        <!--<i class="zmdi zmdi-share"></i><span>Partager</span></a>-->
+      <a class="plainTxtBtn partageLink" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" href=""
+         ng-click="onShare(); mactrl.sidebarToggle.right = true;"><i class="zmdi zmdi-share"></i><span>{{'ACTION.SHARE' | translate}}</span></a></span>
     </div>
   </div>
 
@@ -127,9 +125,11 @@
   </div>
 
   <div class="partage-list">
-    <button class="btn btn-default waves-effect"  ng-repeat="n in sharingsBtn track by $index" ng-click="showSharingItems($index)">
+    <button class="btn btn-default waves-effect"   ng-repeat="n in sharingsBtn track by $index" ng-click="showSharingItems($index)">
       <span>Partage {{$index+1}}</span> <i class="zmdi zmdi-edit"></i>
     </button>
   </div>
+  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+         data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
 </div>
 </div>

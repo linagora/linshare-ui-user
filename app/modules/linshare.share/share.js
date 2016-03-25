@@ -687,6 +687,10 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.isUpdate=false;
     $scope.isCurrentPartage=false;
     $scope.sharingsBtn=[];
+    $scope.onShare = function() {
+      $('#focusInputShare').focus();
+      $scope.sidebarData = 'more-options';
+    };
 
   })
   .controller('DemoCtrl', function() {

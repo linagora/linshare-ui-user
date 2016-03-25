@@ -1,0 +1,121 @@
+<div ng-show="currentSelectedDocument.current" class="p-b-20 p-t-20"
+     data-ng-controller="LinshareShareActionController">
+  <h4 class="text-center">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h4>
+
+  <div>
+    <ul class="list-inline">
+      <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom"
+          tooltip={{userRepresentation(recipient)}}
+          x-ng-repeat="recipient in share.recipients">{{recipient.lastName}}&nbsp;{{recipient.firstName}}
+                      <span style="cursor: pointer;">
+                          <i class="glyphicon glyphicon-remove" style="color: #333;"
+                             x-ng-click="removeRecipients(share.recipients, $index)"></i>
+                      </span>
+      </li>
+    </ul>
+    <div autocomplete-user="" data-selected-users-list="share.recipients"></div>
+    <div>
+      <span class="input-group-addon last">
+        <button class="btn btn-primary btn-icon waves-effect waves-circle"
+            ng-click="submitShare(share)">
+          <i class="zmdi zmdi-share"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="card col-xs-12" id="recipientsCtnSidebar" >
+
+  <div class="header-sidebar">
+    <h2><span>3</span> Fichiers sélectionnées</h2>
+    <i class="zmdi zmdi-close" ></i>
+  </div>
+
+  <md-divider style="margin-bottom: 2.5em;"></md-divider>
+  <div class="custumListContainer ">
+    <div class="custumHeaderList">
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings" > </i>Paramétrages</h2>
+        <a class="more-options" >
+          plus d'options
+        </a>
+      </div>
+
+
+      <div ng-show="share_array[1].expirationDate.enable" class="col-xs-12  fieldCtn" id="dateField">
+        <label for="comment" class="labelDateExpiration col-xs-6">Date d'expiration:</label>
+        <div class="datepickerBorderFix date-picker dp-blue col-xs-6"  ng-class="{ 'is-opened': opened == true }">
+          <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }" >
+            <div class="form-inline ">
+              <input  ng-click="open($event, 'opened')"  type="text"
+                      class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                      is-open="opened" min-date="minDate" datepicker-options="dateOptions"
+                      ng-required="true" close-text="Close"
+                      placeholder="{{share_array[1].expirationDate.value | date: 'shortDate'}}"
+                      ng-disabled="!share_array[1].expirationDate.userCanOverride"
+                      ng-model="share_array[1].expirationDate.value"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="destinataires-form-area">
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings" > </i>Sélections des destinataires</h2>
+
+      <div class="dropdown popOverForm savelistBtn" dropdown auto-close="outsideClick" is-open="false" on-toggle="toggled()">
+        <button class="dropdown-toggle btn btn-default" dropdown-toggle >
+          <i class="zmdi zmdi-accounts-list-alt" style="font-size:1em;"></i>Créer une liste
+        </button>
+        <div class="dropdown-menu pull-right">
+          <p class="labelListCtn">
+            <input type="email" class="form-control input-sm" id="labelList"
+                   placeholder="Saisissez le nom de votre liste">
+          </p>
+          <md-divider></md-divider>
+          <div>
+            <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">Annuler</button>
+            <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">Créer</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      <form role="form" class="clearfix">
+        <div class="form-group fg-line">
+
+          <div autocomplete-user="" data-on-select-function="share_array[1].addRecipient"></div>
+        </div>
+      </form>
+    </div>
+    <div class="custumListBody col-xs-12 ">
+      <div class="custumListItem" ng-repeat="recipient in share_array[1].getRecipients()">
+        <p class="pull-left circleCtn"><span class="circle userBg">Ext</span></p>
+        <div class="pull-left nameRecipientsCtn">
+          <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
+          <p class=" close-list-icone-btn pull-right" ng-click="share_array[1].removeRecipient($index)">
+            <i class="zmdi zmdi-close "></i>
+          </p>
+        </div>
+      </div>
+      <div class="custumListItem" ng-repeat="list in share_array[1].getMailingListUuid()">
+        <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
+        <div class="pull-left nameRecipientsCtn">
+          <p class="pull-left inner-text-li">{{list.listName}}</p>
+          <p class=" close-list-icone-btn pull-right" ng-click="share_array[1].removeMailingList($index)">
+            <i class="zmdi zmdi-close"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+  </div>
+  <div class="clearfix">&nbsp;</div>
+
+</div>
+<div class="bottomSidebarBtn">
+  <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">Annuler </button>
+  <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">Partager</button>
+</div>
+
+
