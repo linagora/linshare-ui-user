@@ -89,6 +89,11 @@ angular.module('linshareUiUserApp')
         controller: 'ReceivedController'
       })
 
+      .state('documents.upload', {
+        url: '/upload',
+        templateUrl: 'modules/linshare.document/views/upload_template.html'
+      })
+
       .state('documents.threads', {
         url:'/threads',
         templateUrl: 'views/threads/thread.html',

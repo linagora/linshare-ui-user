@@ -66,17 +66,49 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
                                                      $window, $log, documentsList, growlService, $translatePartialLoader) {
     $translatePartialLoader.addPart('filesList');
     $scope.selectedDocuments = [];//basket
-    $scope.initSelectedDocuments = function() {
+
+    $scope.resetSelectedDocuments = function() {
+      angular.forEach($scope.selectedDocuments, function(selectedDoc) {
+        selectedDoc.isSelected = false;
+      });
       $scope.selectedDocuments = [];
     };
+
+    $scope.flagsOnSelectedPages = {};
+
+    $scope.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
+      var currentPage = page || $scope.tableParams.page();
+      var dataOnPage = data || $scope.tableParams.data;
+      var select = selectFlag || $scope.flagsOnSelectedPages[currentPage];
+      if(!select) {
+        angular.forEach(dataOnPage, function(element) {
+          if(!element.isSelected) {
+            element.isSelected = true;
+            $scope.selectedDocuments.push(element);
+          }
+        });
+        $scope.flagsOnSelectedPages[currentPage] = true;
+      } else {
+        $scope.selectedDocuments = _.xor($scope.selectedDocuments, dataOnPage);
+        angular.forEach(dataOnPage, function(element) {
+          if(element.isSelected) {
+            element.isSelected = false;
+            _.remove($scope.selectedDocuments, function(n) {
+              return n.uuid === element.uuid;
+            });
+          }
+        });
+        $scope.flagsOnSelectedPages[currentPage] = false;
+      }
+    };
+
     $scope.currentDocument = {};
     $scope.indexSelectedDocuments = [];
 
     $scope.downloadSelectedFiles = function(selectedDocuments) {
       angular.forEach(selectedDocuments, function(doc) {
         $scope.downloadCurrentFile(doc.uuid);
-      }
-      );
+      });
     };
 
     $scope.downloadCurrentFile = function(currentFile) {
@@ -197,7 +229,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.$watch('multipleSelection', function(n) {
       if(n === false) {
         $scope.selectedDocuments = [];
-        angular.element('tr').removeClass('info');
+        angular.element('tr').removeClass('highlightListElem');
       }
     });
 
@@ -253,7 +285,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     return {
       link: function(scope, elm, attrs) {
         elm.bind('click', function(event) {
-          var hasInfoClass = elm.parent().parent().parent().parent().hasClass('info');
+          var hasInfoClass = elm.parent().parent().parent().parent().hasClass('highlightListElem');
           if (!attrs.eventPropagationStop || hasInfoClass) {
             event.preventDefault();
             event.stopPropagation();

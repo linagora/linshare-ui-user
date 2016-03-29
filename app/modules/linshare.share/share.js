@@ -273,6 +273,21 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         $scope.initSelectedDocuments();
       });
     };
+    $scope.submitQuickShare = function(shareCreationDto) {
+      angular.forEach($scope.selectedDocuments, function(doc) {
+        shareCreationDto.documents.push(doc.uuid);
+      });
+      if ($scope.selectedContact.length > 0) {
+        shareCreationDto.recipients.push({mail: $scope.selectedContact});
+      }
+      LinshareShareService.shareDocuments(shareCreationDto).then(function() {
+        growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
+        $scope.$emit('linshare-upload-complete');
+        $scope.mactrl.sidebarToggle.right = false;
+        angular.element('tr').removeClass('highlightListElem');
+        $scope.initSelectedDocuments();
+      });
+    };
 
     $scope.filesToShare = $stateParams.selected;
     })
@@ -298,7 +313,25 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       }
     };
   })
-  .controller('LinshareAdvancedShareController', function($scope) {
+  .controller('LinshareAdvancedShareController', function($scope, LinshareShareService, growlService, $translate) {
+    $translate('GROWL_ALERT.SHARE').then(function(translations) {
+      $scope.growlMsgShareSuccess = translations;
+    });
+    $scope.submitShare = function(shareCreationDto, now) {
+      if(now) {
+        LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
+          growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
+          $scope.$emit('linshare-upload-complete');
+          $scope.mactrl.sidebarToggle.right = false;
+          angular.element('tr').removeClass('info');
+          $scope.initSelectedDocuments();
+        }, function(errorData) {
+          growlService.notifyTopRight(errorData.statusText, 'danger');
+        });
+      } else {
+        shareCreationDto.setAsyncShare(!now);
+      }
+    };
     angular.forEach($scope.filesToShare, function(doc) {
       $scope.share.documents.push(doc.uuid);
     });

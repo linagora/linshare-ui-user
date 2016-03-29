@@ -30,6 +30,10 @@ angular.module('linshareUiUserApp')
             link: 'documents.shared',
             disabled: lsAppConfig.production
           }, {
+            name: 'NAVIGATION.UPLOAD',
+            link: 'documents.upload',
+            disabled: lsAppConfig.production
+          }, {
             name: 'NAVIGATION.GROUPS',
             link: 'documents.threads',
             disabled: lsAppConfig.production

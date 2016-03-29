@@ -41,9 +41,9 @@ angular.module('linshare.document')
       link: function(scope, element, attr) {
         element.bind('click', function() {
           if(scope.multipleSelectOn === true) {
-            element.toggleClass('info');
-            if(element.hasClass('info')) {
-              scope.documentFile['selected'] = true;
+            element.toggleClass('highlightListElem');
+            if(element.hasClass('highlightListElem')) {
+              scope.documentFile['isSelected'] = true;
               scope.currentFile = scope.documentFile;
               scope.$apply(function() {
                 scope.currentSelectedDocument.current = scope.documentFile;
@@ -51,7 +51,7 @@ angular.module('linshare.document')
               });
             } else {
               scope.current = {};
-              scope.documentFile['selected'] = false;
+              scope.documentFile['isSelected'] = false;
               var indexMulSelect = scope.fileSelectionV.indexOf(scope.documentFile);
               if (indexMulSelect > -1) {
                 scope.$apply(function() {

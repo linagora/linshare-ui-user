@@ -47,7 +47,7 @@ angular.module('linshare.components')
             }
           });
           if (!exists) {
-            selectedUsersList.push(_.omit(selectedUser, 'restrictedContacts', 'uuid'));
+            selectedUsersList.push(_.omit(selectedUser, 'restrictedContacts', 'uuid', 'type', 'identifier', 'display'));
           }
         };
 

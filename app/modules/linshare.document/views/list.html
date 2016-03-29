@@ -5,11 +5,11 @@
 
   <div class="card">
     <div class="card-header">
-        <div id="breadcrumb-wrap"  ng-controller="DemoCtrl as demo">
+        <div id="breadcrumb-wrap">
           <div class="breadcrumbsCtn">
             <a href="#" class="breadcrumb"><i class="zmdi zmdi-file" ></i>Mes dépots</a>
           </div>
-          <div class="navBarBtn" >
+          <div class="navBarBtn">
             <button class="btn btn-default waves-effect blueBtn" flow-btn flow-files-submitted="$flow.upload()" >
               <i class="zmdi zmdi-upload" ><span>Importez un fichier</span></i>
             </button>
@@ -103,24 +103,34 @@
 
 
     <!-- DOCUMENTS LIST  -->
-    <div id="dropArea" >
+    <div id="dropArea">
 
-      <div id="selection-actions" class="showMultiMenu" style="display: block;" ng-init="isAllSelected.status = false">
-        <div class="exitSelection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
-          <i class="zmdi zmdi-close" ></i>
+      <div id="selection-actions" class="showMultiMenu" data-ng-class="{'show': selectedDocuments.length > 0}">
+        <div class="exitSelection" ng-click="resetSelectedDocuments()">
+          <i class="zmdi zmdi-close"></i>
         </div>
-        <div class="displayNumSelectedItems"><span>{{numSelectedItems.length}}</span> Items Selectionnés </div>
+        <div class="displayNumSelectedItems">
+          <span>{{selectedDocuments.length}}</span> Items Selectionnés
+        </div>
         <div id="toolbar-actions">
-       <span ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
-         <a class="selectAllItems plainTxtBtn">
-           <i ng-show="isAllSelected.status"  class="fa fa-square-o"></i>
-           <span ng-show="isAllSelected.status">Tout désélectionner</span>
-           <i ng-show="!isAllSelected.status" class="fa fa-check-square-o"></i>
-           <span ng-show="!isAllSelected.status">Tout sélectionner</span>
-         </a>
-       </span>
-      <span><a class="plainTxtBtn partageLink" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >
-        <i class="zmdi zmdi-share"></i><span>Partager</span></a></span>
+          <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())">
+            <a class="selectAllItems plainTxtBtn">
+              <i ng-show="flagsOnSelectedPages[tableParams.page()]"  class="fa fa-square-o"></i>
+              <span ng-show="flagsOnSelectedPages[tableParams.page()]">Tout désélectionner</span>
+              <i ng-show="!flagsOnSelectedPages[tableParams.page()]" class="fa fa-check-square-o"></i>
+              <span ng-show="!flagsOnSelectedPages[tableParams.page()]" >Tout sélectionner</span>
+            </a>
+          </span>
+          <span>
+            <a class="plainTxtBtn partageLink"
+               ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >
+              <i class="zmdi zmdi-share"></i><span>Partager</span></a>
+          </span>
+               <span>
+            <a class="plainTxtBtn partageLink"
+               ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >
+              <i class="zmdi zmdi-delete"></i><span>Supprimer</span></a>
+          </span>
         </div>
       </div>
 
@@ -144,7 +154,7 @@
               file-selection-v="selectedDocuments" uuid="documentFile"
               current-selected-document="currentSelectedDocument"
               multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}"
-              data-ng-class="{info: documentFile.selected === true}" class="p-b-5">
+              data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5">
 
             <td ls-right-click="test"><span class="fa fa-file-excel-o"></span></td>
 

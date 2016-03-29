@@ -466,6 +466,7 @@ width:100%;
 }
 #selection-actions.showMultiMenu{
   margin-top:0px;
+  display: none;
 }
 
 #selection-actions {
@@ -496,9 +497,10 @@ width:100%;
     background: #05B1FF;
     padding: 4px 8px;
     font-size: 0.85em;
-    box-shadow: inset 0px 1px 0px 0px rgba(0, 0, 0, 0.06), 0px 1px 0px 0px rgba(255, 255, 255, 0.3);  }
-
+    box-shadow: inset 0px 1px 0px 0px rgba(0, 0, 0, 0.06), 0px 1px 0px 0px rgba(255, 255, 255, 0.3);
+  }
 }
+
 #toolbar-actions {
   font-family: roboto;
   float: left;

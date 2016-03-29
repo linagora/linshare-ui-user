@@ -39,38 +39,35 @@
 
                 <a ng-hide="$flow.progress() > 0" data-toggle="dropdown" href=""><i class="zmdi zmdi-upload zmdi-hc-2x zmdi-hc-fw"></i></a>
 
-                <div class="dropdown-menu pull-right stop-propagate dropdown-menu-lg">
+                <div class="dropdown-menu pull-right dropdown-menu-lg">
                     <div class="listview">
-                        <div class="lv-header">
+                        <div class="lv-header stop-propagate">
                           {{'HEADER.UPLOAD_PROGRESS' | translate}}
                         </div>
-                        <div class="lv-body">
+                        <div class="lv-body stop-propagate">
+
                             <div class="lv-item" ng-init="wid = 10" x-ng-repeat="file in $flow.files">
+
                                 <div class="lv-title m-b-5">
                                   <span>{{file.name}}</span>
                                   <div class="pull-right">
-                                    <button class="btn btn-warning btn-xs"
-                                            x-ng-click="file.pause()"
-                                            x-ng-show="!file.paused"
-                                            x-ng-hide="file.isComplete()">
-                                      <i class="fa fa-pause"></i>
-                                    </button>
-                                    <button class="btn btn-success btn-xs"
-                                            x-ng-click="file.resume()"
-                                            x-ng-show="file.paused"
-                                            x-ng-hide="file.isComplete()">
-                                      <i class="fa fa-play"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-xs"
-                                            x-ng-click="file.cancel()"
-                                            x-ng-hide="file.isComplete()">
-                                      <i class="fa fa-stop"></i>
-                                    </button>
-                                    <button class="btn btn-success btn-xs"
-                                            x-ng-click="file.cancel()"
-                                            x-ng-show="file.isComplete() && !file.error">
-                                      <i class="fa fa-eject"></i>
-                                    </button>
+                                    <ul class="lv-actions actions alignListIcons">
+                                      <li class="col-xs-4" x-ng-if="file.isUploading()">
+                                        <a href="" ng-click="file.cancel()">
+                                          <i class="zmdi zmdi-stop"></i>
+                                        </a>
+                                      </li>
+                                      <li class="col-xs-4" x-ng-if="file.isComplete() && !file.error">
+                                        <a href="" ng-click="file.cancel()">
+                                          <i class="zmdi zmdi-format-clear-all"></i>
+                                        </a>
+                                      </li>
+                                      <li class="col-xs-4" x-ng-if="file.error">
+                                        <a href="" ng-click="file.retry()">
+                                          <i class="zmdi zmdi-replay"></i>
+                                        </a>
+                                      </li>
+                                    </ul>
                                   </div>
                                 </div>
 
@@ -82,7 +79,7 @@
                             </div>
                         </div>
 
-                        <!--<a ng-show="linshareModeProduction == false" class="lv-footer" href="">View All</a>-->
+                        <a ng-show="linshareModeProduction == false" class="lv-footer" ui-sref="documents.upload" href=""> View All</a>
                     </div>
                 </div>
             </li>
