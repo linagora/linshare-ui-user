@@ -95,7 +95,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       if(functionalities.SHARE_EXPIRATION.enable) {
         expirationDate.enable = true;
         expirationDate.value = moment().endOf('day').add(functionalities.SHARE_EXPIRATION.value,
-          functionalities.SHARE_EXPIRATION.unit).subtract(1, 'd');
+          functionalities.SHARE_EXPIRATION.unit).subtract(1, 'd').valueOf();
         expirationDate.userCanOverride = functionalities.SHARE_EXPIRATION.canOverride
       }
 
@@ -115,7 +115,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       if(functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION.enable) {
         notificationDateForUSDA.enable = true;
         notificationDateForUSDA.value = moment().add(functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION.value,
-        'days');
+        'days').valueOf();
         notificationDateForUSDA.userCanOverride = functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION.canOverride;
       }
 
@@ -245,13 +245,16 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     });
   })
 
-  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService, $translate) {
+  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService,
+                                                        $translate, ShareObjectService) {
 
     //Share Object
-    $scope.share = {
-      recipients: [],
-      documents: []
-    };
+    //$scope.share = {
+    //  recipients: [],
+    //  documents: []
+    //};
+    $scope.share = new ShareObjectService();
+    //share.id = $scope.share_array.length + 1;
 
     $translate('GROWL_ALERT.SHARE').then(function(translations) {
       $scope.growlMsgShareSuccess = translations;
@@ -259,13 +262,22 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
     $scope.selectedContact = {};
     $scope.submitShare = function(shareCreationDto) {
-      angular.forEach($scope.selectedDocuments, function(doc) {
-        shareCreationDto.documents.push(doc.uuid);
-      });
-      if ($scope.selectedContact.length > 0) {
-        shareCreationDto.recipients.push({mail: $scope.selectedContact});
+      if($scope.selectedDocuments.length === 0 ) {
+        growlService.notifyBottomRight('You must select at least one file to share', 'warning');
+        return;
       }
-      LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
+      if(shareCreationDto.getRecipients().length === 0 ) {
+        growlService.notifyBottomRight('You must select at least recipient to share with', 'warning');
+        return;
+      }
+      //angular.forEach($scope.selectedDocuments, function(doc) {
+      //  shareCreationDto.documents.push(doc.uuid);
+      //});
+      $scope.share_array[1].addDocuments($scope.selectedDocuments);
+      //if ($scope.selectedContact.length > 0) {
+      //  shareCreationDto.recipients.push({mail: $scope.selectedContact});
+      //}
+      LinshareShareService.shareDocuments($scope.share_array[1].getFormObj()).then(function() {
         growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
@@ -318,6 +330,10 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       $scope.growlMsgShareSuccess = translations;
     });
     $scope.submitShare = function(shareCreationDto, now) {
+      if($scope.selectedDocuments.length === 0 ) {
+        growlService.notifyTopRight('You must select at least one file to share', 'warning');
+        return;
+      }
       if(now) {
         LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
           growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');

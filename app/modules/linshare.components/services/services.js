@@ -33,6 +33,7 @@ angular.module('linshare.components')
   .service('growlService', function() {
     var fromTopAlignRight = {from: 'top', align: 'right', icon: 'icon', timer: 1000};
     var fromBottomAlignLeft = {from: 'bottom', align: 'left', icon: 'icon', timer: 1000};
+    var fromBottomAlignRight = {from: 'bottom', align: 'right', icon: 'icon', timer: 1000};
     var fromTopCenter = {from: 'top', align: 'center', icon: 'icon', timer: 0};
     // option = {from, align, icon, type, animIn, animOut}
 
@@ -84,6 +85,9 @@ angular.module('linshare.components')
       },
       notifyBottomLeft: function(message, type) {
         return growlNotifyer(message, type, fromBottomAlignLeft);
+      },
+      notifyBottomRight: function(message, type) {
+        return growlNotifyer(message, type, fromBottomAlignRight);
       },
       notifyTopCenter: function(message, type) {
         return growlNotifyer(message, type, fromTopCenter);

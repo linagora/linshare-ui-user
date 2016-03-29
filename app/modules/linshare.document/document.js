@@ -276,9 +276,13 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $scope.reload();
     });
 
+    $scope.loadSidebarContent = function(content) {
+      $scope.sidebarData = content || 'share';
+    };
+
     $scope.onShare = function() {
       $('#focusInputShare').focus();
-      $scope.sidebarData = 'share';
+      $scope.loadSidebarContent();
     };
   })
   .directive('eventPropagationStop', function() {
