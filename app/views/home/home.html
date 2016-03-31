@@ -2,10 +2,65 @@
   <section id="content"
            ng-class="{'content-toggled': mactrl.sidebarToggle.left }">
     <div class="container" id="home" style="height: {{sizeHeight}}px">
-        <div class="dashboard-welcome">
-          <img src="images/logo-sky.png" />
-          <h4>{{'APPLICATION_WELCOME_HOME' | translate }} <b>LinShare</b>.</h4>
+
+      <div class="block-header">
+        <h2>Basic Examples</h2>
+
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header ch-alt">
+            <h2><a ui-sref="documents.files.upload">Déposer</a></h2>
+
+          </div>
+
+          <div class="card-body card-padding">
+            Déposer un fichier dans votre espace Linshare
+          </div>
         </div>
+      </div>
+
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-header ch-alt">
+              <h2><a ui-sref="documents.files.upload">Déposer et partager</a></h2>
+
+            </div>
+
+            <div class="card-body card-padding">
+              Après la selection des fichiers vous serez sur un formulaire de partage de fichiers
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-header ch-alt">
+              <h2><small>Déposer dans un groupe</small></h2>
+
+            </div>
+
+            <div class="card-body card-padding">
+              A venir ...
+            </div>
+          </div>
+        </div>
+
+
+        <!--<div class="col-sm-4">-->
+          <!--<div class="card">-->
+            <!--<div class="card-header">-->
+              <!--<div class="dashboard-welcome">-->
+                <!--<img src="images/logo-sky.png"/>-->
+                <!--<h4>{{'APPLICATION_WELCOME_HOME' | translate }} <b>LinShare</b>.</h4>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+      </div>
+
 
     </div>
   </section>

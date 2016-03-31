@@ -47,13 +47,24 @@ angular.module('linshareUiUserApp')
       })
 
       .state('documents.files', {
-        url:'/files',
+        url:'/list',
         templateUrl: 'modules/linshare.document/views/list.html',
         controller: 'LinshareDocumentController',
         resolve: {
           documentsList: function(LinshareDocumentService) {
             return LinshareDocumentService.getAllFiles();
           }
+        }
+      })
+
+
+      .state('documents.files.selected', {
+        url:'/selected_files',
+        templateUrl: 'modules/linshare.document/views/selected_files.html',
+        controller: 'LinshareSelectedDocumentsController',
+        params: {
+          'selected': null,
+          'hiddenParam': 'YES'
         }
       })
 
@@ -89,7 +100,7 @@ angular.module('linshareUiUserApp')
         controller: 'ReceivedController'
       })
 
-      .state('documents.upload', {
+      .state('documents.files.upload', {
         url: '/upload',
         templateUrl: 'modules/linshare.document/views/upload_template.html'
       })
@@ -155,6 +166,11 @@ angular.module('linshareUiUserApp')
         url:'/groups',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
+      })
+
+      .state('administration.hided_links', {
+        url:'/hided_links',
+        templateUrl: 'views/common/hided_links.html'
       })
 
       //------------------------------

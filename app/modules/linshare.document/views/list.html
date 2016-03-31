@@ -1,3 +1,4 @@
+<div ui-view>
 <div class="container" id="files">
 
 
@@ -91,7 +92,7 @@
           <i class="zmdi zmdi-close"></i>
         </div>
         <div class="displayNumSelectedItems">
-          <span>{{selectedDocuments.length}}</span> Items Selectionnés
+            <span>{{selectedDocuments.length}}</span> Items Selectionnés
         </div>
         <div id="toolbar-actions">
           <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())">
@@ -215,4 +216,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

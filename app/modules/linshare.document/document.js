@@ -241,6 +241,14 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       }
     });
 
+    $scope.$on('$stateChangeSuccess', function() {
+      if($scope.mactrl.sidebarToggle.right) {
+        angular.element('.card').css('width', '70%');
+      } else {
+        angular.element('.card').css('width', '100%');
+      }
+    });
+
     $scope.users = [];
     $scope.reload = function() {
       LinshareDocumentService.getAllFiles().then(function(data) {
@@ -285,6 +293,44 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $scope.loadSidebarContent();
     };
   })
+
+/**
+ * @ngdoc controller
+ * @name linshare.document.controller:LinshareSelectedDocumentsController
+ * @description
+ *
+ * The controller to visualize and manage selected documents
+ */
+  .controller('LinshareSelectedDocumentsController', function($scope, $stateParams, $timeout) {
+    var param = $stateParams.selected;
+    angular.forEach(param, function(n) {
+      $scope.selectedDocuments.push(n);
+    });
+
+    $scope.loadSidebarContent = function(content) {
+      $scope.sidebarData = content || 'share';
+    };
+    $scope.mactrl.sidebarToggle.right = true;
+
+    $scope.$watch('mactrl.sidebarToggle.right', function(n) {
+      if(n === true) {
+        angular.element('.card').css('width', '70%');
+      } else {
+        angular.element('.card').css('width', '100%');
+      }
+    });
+
+    $scope.removeSelectedDocuments = function(document) {
+      var index = $scope.selectedDocuments.indexOf(document);
+      if(index > -1) {
+        document.isSelected = false;
+        $scope.selectedDocuments.splice(index, 1);
+      }
+    };
+
+
+  })
+
   .directive('eventPropagationStop', function() {
     return {
       link: function(scope, elm, attrs) {

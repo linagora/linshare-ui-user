@@ -168,6 +168,11 @@ angular.module('linshareUiUserApp')
 
     $scope.$on('$stateChangeSuccess', function() {
       checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+      if($scope.mactrl.sidebarToggle.right) {
+        angular.element('.card').css('width', '70%');
+      } else {
+        angular.element('.card').css('width', '100%');
+      }
     });
   })
 
@@ -222,6 +227,15 @@ angular.module('linshareUiUserApp')
      * It will contain all the shares
      */
     $scope.share_array = [];
+
+    /**
+     *
+     * This function is call on file upload success to add metadata from the server to the flowFile
+     * That will be usefull to delete/share a uploaded document from anywhere.
+     */
+    $scope.addUploadedDocument = function(flowFile, serverResponse, flowObject) {
+      flowFile.linshareDocument = angular.fromJson(serverResponse);
+    };
 
   })
   .controller('LinshareAutocompleteController', function($scope, LinshareShareService, $log) {

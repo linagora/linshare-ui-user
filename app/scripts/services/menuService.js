@@ -30,10 +30,6 @@ angular.module('linshareUiUserApp')
             link: 'documents.shared',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.UPLOAD',
-            link: 'documents.upload',
-            disabled: lsAppConfig.production
-          }, {
             name: 'NAVIGATION.GROUPS',
             link: 'documents.threads',
             disabled: lsAppConfig.production
@@ -114,9 +110,9 @@ angular.module('linshareUiUserApp')
         getProperties: function (currentState) {
 
           //to remove: if
-          if (currentState === 'transfert.new_share' ||currentState === 'transfert.new_upload') {
+          if (currentState.indexOf('transfert') > -1  || currentState.indexOf('documents') > -1 ) {
             return {
-              color: '#05B1FF'
+              color: '#2196F3'
             }
           }
 
