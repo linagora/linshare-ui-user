@@ -379,7 +379,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
-            'modules/**/views/*.html',
+            'modules/**/**/*.html',
             '!modules/materialAdmin/views/*.html',
             'i18n/original/{,*/}*.json',
             'images/{,*/}*.{webp}',

@@ -44,13 +44,13 @@ angular.module('linshare.document')
             element.toggleClass('highlightListElem');
             if(element.hasClass('highlightListElem')) {
               scope.documentFile['isSelected'] = true;
-              scope.currentFile = scope.documentFile;
+              //scope.currentFile = scope.documentFile;
               scope.$apply(function() {
                 scope.currentSelectedDocument.current = scope.documentFile;
                 scope.fileSelectionV.push(scope.documentFile);
               });
             } else {
-              scope.current = {};
+              //scope.current = {};
               scope.documentFile['isSelected'] = false;
               var indexMulSelect = scope.fileSelectionV.indexOf(scope.documentFile);
               if (indexMulSelect > -1) {

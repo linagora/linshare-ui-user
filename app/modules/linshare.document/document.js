@@ -301,7 +301,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  *
  * The controller to visualize and manage selected documents
  */
-  .controller('LinshareSelectedDocumentsController', function($scope, $stateParams, $timeout) {
+  .controller('LinshareSelectedDocumentsController', function($scope, $stateParams) {
     var param = $stateParams.selected;
     angular.forEach(param, function(n) {
       $scope.selectedDocuments.push(n);
@@ -310,6 +310,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.loadSidebarContent = function(content) {
       $scope.sidebarData = content || 'share';
     };
+    $scope.sidebarData = 'share';
     $scope.mactrl.sidebarToggle.right = true;
 
     $scope.$watch('mactrl.sidebarToggle.right', function(n) {
@@ -328,6 +329,30 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       }
     };
 
+
+  })
+
+  .controller('LinshareUploadViewController', function($scope) {
+    $scope.selectedUploadedFiles = [];
+
+    // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
+    $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+      angular.element('.dragNDropCtn').addClass('outOfFocus');
+      //pertains to upload-box
+      if(angular.element('upload-box') !== null){
+        angular.element('.infoPartager').css('opacity','1');
+      }
+    });
+
+    $scope.removeSelectedDocuments = function(document) {
+      var index = $scope.selectedUploadedFiles.indexOf(document);
+      if(index > -1) {
+        document.isSelected = false;
+        $scope.selectedUploadedFiles.splice(index, 1);
+      }
+    };
+
+    $scope.currentSelectedDocument = {};
 
   })
 

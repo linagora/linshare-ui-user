@@ -248,11 +248,6 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
   .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService,
                                                         $translate, ShareObjectService) {
 
-    //Share Object
-    //$scope.share = {
-    //  recipients: [],
-    //  documents: []
-    //};
     $scope.share = new ShareObjectService();
     //share.id = $scope.share_array.length + 1;
 
@@ -282,6 +277,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
         angular.element('tr').removeClass('info');
+        $scope.share_array[1] = {};
         $scope.initSelectedDocuments();
       });
     };
@@ -303,29 +299,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
     $scope.filesToShare = $stateParams.selected;
     })
-    .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
 
-    $translate('GROWL_ALERT.SHARE').then(function(translations) {
-      $scope.growlMsgShareSuccess = translations;
-    });
-
-    $scope.submitShare = function(shareCreationDto, now) {
-      if(now) {
-        LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
-          growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
-          $scope.$emit('linshare-upload-complete');
-          $scope.mactrl.sidebarToggle.right = false;
-          angular.element('tr').removeClass('info');
-          $scope.initSelectedDocuments();
-        }, function(errorData) {
-          growlService.notifyTopRight(errorData.statusText, 'danger');
-        });
-      } else {
-        shareCreationDto.setAsyncShare(!now);
-      }
-    };
-  })
-  .controller('LinshareAdvancedShareController', function($scope, LinshareShareService, growlService, $translate) {
+  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
     $translate('GROWL_ALERT.SHARE').then(function(translations) {
       $scope.growlMsgShareSuccess = translations;
     });
@@ -341,6 +316,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           $scope.mactrl.sidebarToggle.right = false;
           angular.element('tr').removeClass('info');
           $scope.initSelectedDocuments();
+          $scope.share_array[1] = {};
         }, function(errorData) {
           growlService.notifyTopRight(errorData.statusText, 'danger');
         });
@@ -655,15 +631,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         }
       }
     }, true);
-   // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
-    $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
-      $("#selection-actions").addClass("showMultiMenu");
-      $(".dragNDropCtn").addClass("outOfFocus");
-      //pertains to upload-box
-      if(angular.element("upload-box") !== null){
-        $(".infoPartager").css("opacity","1");
-      }
-    });
+
     // display the files pertaining to the clicked share
     $scope.showSharingItems=function(numIndex){
       $scope.isCurrentPartage=true;
@@ -747,7 +715,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     this.isOpen = false;
     this.selectedMode = 'md-scale';
     this.selectedDirection = 'left';
-  }).directive('uploadBoxSelection', function() {
+  })
+  .directive('uploadBoxSelection', function() {
     var initSelectedItem = [];
 
       return {

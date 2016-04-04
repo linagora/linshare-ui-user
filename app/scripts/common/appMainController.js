@@ -234,7 +234,8 @@ angular.module('linshareUiUserApp')
      * That will be usefull to delete/share a uploaded document from anywhere.
      */
     $scope.addUploadedDocument = function(flowFile, serverResponse, flowObject) {
-      flowFile.linshareDocument = angular.fromJson(serverResponse);
+      var response = angular.fromJson(serverResponse);
+      flowFile.linshareDocument = response.entry;
     };
 
   })

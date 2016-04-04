@@ -382,12 +382,16 @@ div.borderedCircle {
   z-index: 5 !important;
 }
 
+#content{
+  position: relative;
+  z-index: 4;
+}
 #dropCtn {
   position: fixed;
 width:100%;
   height: calc(100% - 50px);
   top: 50px;
- // z-index: 5;
+  z-index: -1;
   display:table-cell;
   vertical-align:middle;
 
@@ -826,7 +830,6 @@ background-color: #fff;
     font-size: 1.05em;
   }
   .card-header h2 small {
-    display: block;
     margin-top: 7px;
     color: #AEAEAE;
     line-height: 160%;
@@ -2044,7 +2047,7 @@ html:not(.ie9) .select::before {
     border-bottom: solid 1px #ddd;
     h2 {
       line-height: 33px;
-      float: left;
+//      float: left;
     }
     .search-bar {
       margin-left: 60px;
