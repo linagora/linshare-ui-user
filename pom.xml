@@ -325,6 +325,53 @@
     </profile>
 
     <profile>
+      <id>update-version</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>replacer</artifactId>
+            <version>1.5.3</version>
+            <executions>
+              <execution>
+                <id>package.json</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>replace</goal>
+                </goals>
+                <configuration>
+                  <file>package.json</file>
+                  <replacements>
+                    <replacement>
+                      <token>"version": ".*",</token>
+                      <value>"version": "${project.version}",</value>
+                    </replacement>
+                  </replacements>
+                </configuration>
+              </execution>
+              <execution>
+                <id>bower.json</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>replace</goal>
+                </goals>
+                <configuration>
+                  <file>bower.json</file>
+                  <replacements>
+                    <replacement>
+                      <token>"version": ".*",</token>
+                      <value>"version": "${project.version}",</value>
+                    </replacement>
+                  </replacements>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
       <id>hard-clean</id>
       <build>
         <plugins>
