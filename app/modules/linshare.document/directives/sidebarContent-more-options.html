@@ -3,7 +3,7 @@
   <div class="header-sidebar">
     <i class="zmdi zmdi-chevron-left zmdi-hc-2x" ng-click="loadSidebarContent('share')"></i>
 
-    <h2 class="header-more-options">Paramétrage</h2>
+    <h2 class="header-more-options">{{ "RIGHT_PANEL.SHARE_OPTIONS.TITLE" | translate }}</h2>
     <span>
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
@@ -16,16 +16,16 @@
   </div>
   <form class="advancedSharingSettings">
     <div class="form-group col-xs-12 addNote">
-      <legend>Ajouter une note :</legend>
+      <legend>{{ "RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate }} :</legend>
       <textarea class="form-control comment" ng-model="share_array[1].sharingNote" rows="5"
-                placeholder="Saississez votre message">
+                placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE_PLACEHOLDER' | translate }}">
       </textarea>
     </div>
 
     <div ng-show="share_array[1].secured.enable" class="col-xs-12  fieldCtn">
       <div class="fg-line">
         <div class="form-inline">
-          <label for="comment">Sécuriser le partage:</label>
+          <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="secureSharing" ng-checked="true"
                    ng-disabled="!share_array[1].secured.userCanOverride"
@@ -38,7 +38,7 @@
     <div ng-show="share_array[1].creationAcknowledgement.enable" class="col-xs-12 fieldCtn">
       <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
         <div class="form-inline">
-          <label for="comment">Recevoir un accusé de partage:</label>
+          <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="SharingNotification"
                    ng-disabled="!share_array[1].creationAcknowledgement.userCanOverride"
@@ -51,7 +51,7 @@
     <div ng-show="share_array[1].enableUSDA.enable" class="col-xs-12 fieldCtn">
       <div class="fg-line">
         <div class="form-inline">
-          <label for="comment">Recevoir un accusé de non-téléchargement:</label>
+          <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="nonDownloadedNotification" ng-checked="true"
                    ng-disabled="!share_array[1].enableUSDA.userCanOverride"
@@ -62,7 +62,9 @@
       </div>
     </div>
     <div ng-show="share_array[1].enableUSDA.value" class="col-xs-12 fieldCtn" id="dateField">
-      <label for="comment" class="labelDateExpiration">Date de notification:</label>
+      <label for="comment" class="labelDateExpiration">
+        {{ "RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate }}:
+      </label>
 
       <div class="datepickerBorderFix date-picker dp-blue" ng-class="{ 'is-opened': opened2 == true }">
         <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened2 == true }">
@@ -82,7 +84,7 @@
       <div>
         <div class="form-group fg-line col-xs-12 titleMailCustumisation ">
           <div class="form-inline">
-            <label for="comment">Personaliser le mail</label>
+            <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.ATTACH_EMAIL" | translate }}</label>
             <label class="checkbox checkbox-inline m-r-20">
               <input type="checkbox" name="mailCustum" ng-checked="boo"
                      ng-model="mailCustum" ng-init="boo=false" ng-click="boo = !boo"/>
@@ -93,9 +95,11 @@
         <div class="cssSlideUp col-xs-12 " ng-hide="!boo">
           <div class="form-group clearfix fg-line col-xs-12">
             <input type="text" class="form-control input-sm"
-                   ng-model="share_array[1].subject" placeholder="Subject">
+                   ng-model="share_array[1].subject"
+                   placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate }}">
           </div>
-          <textarea class="form-control comment" rows="5" placeholder="Saississez votre message"
+          <textarea class="form-control comment" rows="5"
+                    placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate }}"
                     ng-model="share_array[1].message">
           </textarea>
         </div>
@@ -108,9 +112,11 @@
 
 <div class="bottomSidebarBtn">
   <button class="btn btn-default col-xs-6" ng-click="mactrl.sidebarToggle.right = false; closeDropdown($event)">
-    Annuler
+    {{ "NAVIGATION.CANCEL" | translate }}
   </button>
-  <button class="btn btn-primary col-xs-6" ng-click="submitShare(share_array[1])">Partager</button>
+  <button class="btn btn-primary col-xs-6" ng-click="submitShare(share_array[1])">
+    {{ "NAVIGATION.SHARE" | translate }}
+  </button>
 </div>
 
 

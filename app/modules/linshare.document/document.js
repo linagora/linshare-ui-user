@@ -332,7 +332,8 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
   })
 
-  .controller('LinshareUploadViewController', function($scope) {
+  .controller('LinshareUploadViewController', function($scope, $translatePartialLoader) {
+    $translatePartialLoader.addPart('filesList');
     $scope.selectedUploadedFiles = [];
 
     // once a file has been uploaded we hide the drag and drop background and display the multi-select menu

@@ -3,6 +3,17 @@
   "APPLICATION_WELCOME_HOME": "Bienvenue sur votre application de partage de fichiers",
   "REMOVE": "Supprimer",
   "DOWNLOAD": "Télécharger",
+  "NAVIGATION": {
+    "NEXT": "Suivant",
+    "PREVIOUS": "Précédent",
+    "PAUSE": "Pause",
+    "STOP": "Arrêter",
+    "PLAY": "Continuer",
+    "REPLAY": "Replay",
+    "SEND": "Envoyer",
+    "CANCEL": "Annuler",
+    "SHARE": "Partager"
+  },
   "EXTENSIONS" : {
     "PDF" : "PDF",
     "IMAGE" : "Image",
@@ -16,7 +27,7 @@
     "CODE" : "Code"
   },
   "BOUTON_ADD_FILE_TITLE": "Ajouter des fichiers",
-  "NAVIGATION" : {
+  "MENU_TITLE" : {
     "HOME" : "Accueil",
     "FILES" : "Fichiers",
     "MY_FILES" : "Mes fichiers",
@@ -55,7 +66,10 @@
     "LOGOUT": "Déconnexion",
     "FULL_SCREEN": "Plein écran",
     "CLEAR_LOCAL_STORAGE": "Purger le stockage local",
-    "UPLOAD_PROGRESS": "Progression de dépôt"
+    "UPLOAD_PROGRESS": {
+      "TITLE": "Progression de dépôt",
+      "FOOTER": "Voir tout"
+    }
   },
   "ACTION": {
     "DOWNLOAD": "Télécharger",
@@ -105,5 +119,17 @@
     "MODIFICATION_DATE": "Dernière modification",
     "SIZE": "Taille",
     "ACTION": "Actions"
+  },
+  "SELECTION_TOOLBAR": {
+    "SELECTED_FILES": "fichier(s) sélectionné(s)",
+    "SELECT_ALL": "Tout sélectionner",
+    "DESELECT_ALL": "Tout désélectionner",
+    "SHARE": "Partager",
+    "DELETE": "Supprimer"
+  },
+  "COMPONENTS": {
+    "AUTOCOMPLETE_USERS": {
+      "INPUT_PLACEHOLDER": "Rechercher des utilisateurs"
+    }
   }
 }

@@ -1,11 +1,12 @@
 {
-  "PAGE_FILE_TITLE": "Liste de mes fichiers",
+  "PAGE_FILE_TITLE": "Mes fichiers",
   "TABLE_HEADER": {
     "NAME": "Nom",
     "MODIFICATION_DATE": "Dernière modification",
     "SIZE": "Taille",
     "ACTION": "Actions"
   },
+  "BREADCRUMB_TITLE": "Mes fichiers",
   "RIGHT_PANEL": {
     "DETAILS": {
       "TITLE": "DETAILS",
@@ -24,6 +25,39 @@
     },
     "ACTIVITIES": {
       "TITLE": "Historique"
+    },
+    "SHARE": {
+      "SELECTED_FILES": "fichier(s) sélectionné(s)",
+      "SHOW_SELECTED_FILES": "voir",
+      "SETTINGS": "Paramètres avancés",
+      "MORE_OPTIONS": "plus d'options",
+      "RECIPIENTS": "Ajouter des destinataires",
+      "CREATE_MAILING_LIST": "Créer une liste d'envoi"
+    },
+    "SHARE_OPTIONS": {
+      "TITLE": "Options du partage",
+      "ADD_NOTE": "Ajouter une note",
+      "ADD_NOTE_PLACEHOLDER": "Saisissez une note de partage",
+      "SECURE_SHARING": "Sécuriser le partage",
+      "SHARING_ACKNOWLEDGEMENT": "Recevoir un accusé de partage",
+      "USDA": "Recevoir un accusé de non téléchargement",
+      "NOTIFICATION_DATE": "Date de notification",
+      "ATTACH_EMAIL": "Personnaliser le courriel",
+      "ATTACHED_EMAIL_SUBJECT": "Sujet",
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message"
     }
+  },
+  "SELECTED_FILES": {
+    "BREADCRUMB_TITLE": "Fichiers sélectionnés",
+    "BACK_TO_ALL_FILES": "Retour à mes fichiers"
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Mes dépôts",
+    "UPLOAD_FILES_BUTTON": "Nouveau dépôt",
+    "SELECT_INFO": "Sélectionnez des fichiers si vous souhaitez les partager"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Déposez vos fichiers ici",
+    "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer"
   }
 }

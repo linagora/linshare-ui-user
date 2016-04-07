@@ -8,23 +8,27 @@
   </div>
 
   <div class="header-sidebar f-15">
-    <span>{{selectedDocuments.length}}</span> fichier(s) sélectionné(s)
+    <span>{{selectedDocuments.length}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
     <a class="pull-right" href="" ui-sref="documents.files.selected">
-      voir
+      {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
     </a>
   </div>
 
   <md-divider style="margin-bottom: 2.5em;"></md-divider>
   <div class="custumListContainer ">
     <div class="custumHeaderList">
-      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"> </i>Paramétrage</h2>
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"></i>
+        {{ "RIGHT_PANEL.SHARE.SETTINGS" | translate }}
+      </h2>
       <a class="more-options" href="" ng-click="loadSidebarContent('more-options')">
-        plus d'options
+        {{ "RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate }}
       </a>
     </div>
 
     <div ng-show="share_array[1].expirationDate.enable" class="col-xs-12  fieldCtn" id="dateField">
-      <label for="comment" class="labelDateExpiration col-xs-6">Date d'expiration:</label>
+      <label for="comment" class="labelDateExpiration col-xs-6">
+        {{ "RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+      </label>
 
       <div class="datepickerBorderFix date-picker dp-blue col-xs-6" ng-class="{ 'is-opened': opened == true }">
         <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }">
@@ -44,12 +48,14 @@
 
     <div class="clearfix">&nbsp;</div>
     <div class="destinataires-form-area">
-      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"> </i>Sélections des destinataires</h2>
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"> </i>
+        {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2>
 
       <div class="dropdown popOverForm savelistBtn" dropdown auto-close="outsideClick" is-open="false"
            on-toggle="toggled()">
         <button class="dropdown-toggle btn btn-default" dropdown-toggle>
-          <i class="zmdi zmdi-accounts-list-alt" style="font-size:1em;"></i>Créer une liste
+          <i class="zmdi zmdi-accounts-list-alt" style="font-size:1em;"></i>
+          {{ "RIGHT_PANEL.SHARE.CREATE_MAILING_LIST" | translate }}
         </button>
         <div class="dropdown-menu pull-right">
           <p class="labelListCtn">
@@ -58,8 +64,12 @@
           </p>
           <md-divider></md-divider>
           <div>
-            <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">Annuler</button>
-            <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">Créer</button>
+            <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">
+              {{ "NAVIGATION.CANCEL" | translate }}
+            </button>
+            <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">
+              {{ "NAVIGATION.SEND" | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -103,7 +113,9 @@
 
 <div class="bottomSidebarBtn">
   <button class="btn btn-default col-xs-6" ng-click="mactrl.sidebarToggle.right = false; closeDropdown($event)">
-    Annuler
+    {{ "NAVIGATION.CANCEL" | translate }}
   </button>
-  <button class="btn btn-primary col-xs-6" ng-click="submitShare(share_array[1])">Partager</button>
+  <button class="btn btn-primary col-xs-6" ng-click="submitShare(share_array[1])">
+    {{ "NAVIGATION.SHARE" | translate }}
+  </button>
 </div>

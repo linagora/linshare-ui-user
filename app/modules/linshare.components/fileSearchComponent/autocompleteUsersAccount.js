@@ -13,7 +13,8 @@ angular.module('linshare.components')
       },
       template: '<div class="chat-search">' +
       '<div class="fg-line">' +
-      '<input id="focusInputShare" type="text" class="form-control" placeholder="Search People" autocomplete="off"' +
+      '<input id="focusInputShare" type="text" class="form-control"' +
+      'placeholder="{{ \'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER \' | translate}}" autocomplete="off"' +
       'x-ng-model="selectedUser" required' +
       'x-typeahead-min-length="3" ' +
       'x-typeahead-on-select="dealWithSelectedUser(selectedUser, selectedUsersList)" ' +

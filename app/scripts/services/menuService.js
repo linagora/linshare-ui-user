@@ -4,7 +4,7 @@ angular.module('linshareUiUserApp')
   .factory('MenuService', function($log, lsAppConfig) {
 
       var home = {
-        name: 'NAVIGATION.HOME',
+        name: 'MENU_TITLE.HOME',
         link: 'home',
         icon: 'zmdi zmdi-home',
         color: '#05B1FF',
@@ -12,25 +12,25 @@ angular.module('linshareUiUserApp')
       };
 
       var files = {
-        name: 'NAVIGATION.FILES',
+        name: 'MENU_TITLE.FILES',
         icon: 'zmdi zmdi-folder',
         color: '#2196F3',
         disabled: false,
         links: [
           {
-            name: 'NAVIGATION.MY_FILES',
+            name: 'MENU_TITLE.MY_FILES',
             link: 'documents.files',
             disabled: false
           }, {
-            name: 'NAVIGATION.RECEIVED_SHARES',
+            name: 'MENU_TITLE.RECEIVED_SHARES',
             link: 'documents.received',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.SHARES',
+            name: 'MENU_TITLE.SHARES',
             link: 'documents.shared',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.GROUPS',
+            name: 'MENU_TITLE.GROUPS',
             link: 'documents.threads',
             disabled: lsAppConfig.production
           }
@@ -38,25 +38,25 @@ angular.module('linshareUiUserApp')
       };
 
       var administrations = {
-        name: 'NAVIGATION.ADMIN',
+        name: 'MENU_TITLE.ADMIN',
         icon: 'zmdi zmdi-settings',
         color: '#E91E63',
         disabled: lsAppConfig.production,
         links: [
           {
-            name: 'NAVIGATION.LISTS',
+            name: 'MENU_TITLE.LISTS',
             link: 'administration.lists',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.GUESTS',
+            name: 'MENU_TITLE.GUESTS',
             link: 'administration.guests',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.USERS',
+            name: 'MENU_TITLE.USERS',
             link: 'administration.users',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.GROUPS',
+            name: 'MENU_TITLE.GROUPS',
             link: 'administration.groups',
             disabled: lsAppConfig.production
           }
@@ -64,17 +64,17 @@ angular.module('linshareUiUserApp')
       };
 
       var uploads = {
-        name: 'NAVIGATION.UPLOAD_MANAGMENT',
+        name: 'MENU_TITLE.UPLOAD_MANAGMENT',
         icon: 'zmdi zmdi-arrow-in',
         color: '#8BC34A',
         disabled: lsAppConfig.production,
         links: [
           {
-            name: 'NAVIGATION.UPLOAD_PROPOSITIONS',
+            name: 'MENU_TITLE.UPLOAD_PROPOSITIONS',
             link: 'upload_request.propositions',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.UPLOAD_REQUESTS',
+            name: 'MENU_TITLE.UPLOAD_REQUESTS',
             link: 'upload_request.requests',
             disabled: lsAppConfig.production
           }
@@ -82,17 +82,17 @@ angular.module('linshareUiUserApp')
       };
 
       var others = {
-        name: 'NAVIGATION.AUDIT',
+        name: 'MENU_TITLE.AUDIT',
         icon: 'zmdi zmdi-info',
         color: '#FFC107',
         disabled: lsAppConfig.production,
         links: [
           {
-            name: 'NAVIGATION.AUDIT_GLOBAL',
+            name: 'MENU_TITLE.AUDIT_GLOBAL',
             link: 'audit.global',
             disabled: lsAppConfig.production
           }, {
-            name: 'NAVIGATION.AUDIT_UPLOAD_REQUEST',
+            name: 'MENU_TITLE.AUDIT_UPLOAD_REQUEST',
             link: 'audit.upload_request',
             disabled: lsAppConfig.production
           }

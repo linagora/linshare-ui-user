@@ -8,9 +8,9 @@
     <div class="card-header">
       <div id="breadcrumb-wrap">
         <div class="breadcrumbsCtn">
-          <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>Mes dépots</a>
+          <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>{{ "BREADCRUMB_TITLE" | translate }}</a>
         </div>
-        <div class="navBarBtn">
+        <div class="navBarBtn visible-xs">
           <button class="btn btn-default waves-effect blueBtn" flow-btn flow-files-submitted="$flow.upload()">
             <i class="zmdi zmdi-upload"><span>Importez un fichier</span></i>
           </button>
@@ -92,28 +92,28 @@
           <i class="zmdi zmdi-close"></i>
         </div>
         <div class="displayNumSelectedItems">
-            <span>{{selectedDocuments.length}}</span> Items Selectionnés
+            <span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}
         </div>
         <div id="toolbar-actions">
           <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())">
             <a class="selectAllItems plainTxtBtn">
               <i ng-show="flagsOnSelectedPages[tableParams.page()]" class="fa fa-square-o"></i>
-              <span ng-show="flagsOnSelectedPages[tableParams.page()]">Tout désélectionner</span>
+              <span ng-show="flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate}}</span>
               <i ng-show="!flagsOnSelectedPages[tableParams.page()]" class="fa fa-check-square-o"></i>
-              <span ng-show="!flagsOnSelectedPages[tableParams.page()]">Tout sélectionner</span>
+              <span ng-show="!flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.SELECT_ALL" | translate}}</span>
             </a>
           </span>
           <span>
             <a class="plainTxtBtn partageLink"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="onShare(); mactrl.sidebarToggle.right = true;">
-              <i class="zmdi zmdi-share"></i><span>{{'BOUTON_LABEL_TITLE.SHARE' | translate}}</span></a>
+              <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
           </span>
           <span>
             <a class="plainTxtBtn partageLink"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="deleteDocuments(selectedDocuments)">
-              <i class="zmdi zmdi-delete"></i><span>{{'BOUTON_LABEL_TITLE.DELETE' | translate}}</span></a>
+              <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span></a>
           </span>
         </div>
       </div>

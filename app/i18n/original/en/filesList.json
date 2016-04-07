@@ -6,6 +6,7 @@
     "SIZE": "Size",
     "ACTION": "Actions"
   },
+  "BREADCRUMB_TITLE": "My files",
   "RIGHT_PANEL": {
     "DETAILS": {
       "TITLE": "DETAILS",
@@ -24,6 +25,40 @@
     },
     "ACTIVITIES": {
       "TITLE": "ACTIVITIES"
+    },
+    "SHARE": {
+      "TITLE": "SHARING",
+      "SELECTED_FILES": "selected file(s)",
+      "SHOW_SELECTED_FILES": "show",
+      "SETTINGS": "Settings",
+      "MORE_OPTIONS": "more options",
+      "RECIPIENTS": "Add recipients",
+      "CREATE_MAILING_LIST": "Create a mailing list"
+    },
+    "SHARE_OPTIONS": {
+      "TITLE": "Sharing options",
+      "ADD_NOTE": "Add a note",
+      "ADD_NOTE_PLACEHOLDER": "Enter a sharing note",
+      "SECURE_SHARING": "Secure the sharing",
+      "SHARING_ACKNOWLEDGEMENT": "Sharing acknowledgement",
+      "USDA": "Not downloaded document alert",
+      "NOTIFICATION_DATE": "Notification date",
+      "ATTACH_EMAIL": "customize the email",
+      "ATTACHED_EMAIL_SUBJECT": "Subject",
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Enter your message"
     }
+  },
+  "SELECTED_FILES": {
+    "BREADCRUMB_TITLE": "Selected files",
+    "BACK_TO_ALL_FILES": "Back to my files"
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Uploads",
+    "UPLOAD_FILES_BUTTON": "New upload",
+    "SELECT_INFO": "Select files to share"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Upload your files here",
+    "COMMENT": "Drag and drop your files here to upload them"
   }
 }

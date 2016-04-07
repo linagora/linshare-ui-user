@@ -3,6 +3,17 @@
   "APPLICATION_WELCOME_HOME": "Welcome to your sharing files application",
   "REMOVE": "Remove",
   "DOWNLOAD": "Download",
+  "NAVIGATION": {
+    "NEXT": "Next",
+    "PREVIOUS": "Previous",
+    "PAUSE": "Pause",
+    "STOP": "Stop",
+    "PLAY": "Play",
+    "REPLAY": "Replay",
+    "SEND": "Send",
+    "CANCEL": "Cancel",
+    "SHARE": "Share"
+  },
   "EXTENSIONS" : {
     "PDF" : "PDF",
     "IMAGE" : "Image",
@@ -16,7 +27,7 @@
     "CODE" : "Code"
   },
   "BOUTON_ADD_FILE_TITLE": "Add files",
-  "NAVIGATION" : {
+  "MENU_TITLE" : {
     "HOME" : "Home",
     "FILES" : "Files",
     "MY_FILES" : "My files",
@@ -55,7 +66,10 @@
     "LOGOUT": "Logout",
     "FULL_SCREEN": "Full screen",
     "CLEAR_LOCAL_STORAGE": "Clear Local Storage",
-    "UPLOAD_PROGRESS": "Upload progress"
+    "UPLOAD_PROGRESS": {
+      "TITLE": "Upload progress",
+      "FOOTER": "View all"
+    }
   },
   "ACTION": {
     "DOWNLOAD": "Download",
@@ -99,5 +113,17 @@
     },
     "SUBMIT": "Filter",
     "REINITIALIZE": "Clear"
+  },
+  "SELECTION_TOOLBAR": {
+    "SELECTED_FILES": "selected file(s)",
+    "SELECT_ALL": "Select all",
+    "DESELECT_ALL": "Deselect all",
+    "SHARE": "Share",
+    "DELETE": "Delete"
+  },
+  "COMPONENTS": {
+    "AUTOCOMPLETE_USERS": {
+      "INPUT_PLACEHOLDER": "Search people"
+    }
   }
 }
