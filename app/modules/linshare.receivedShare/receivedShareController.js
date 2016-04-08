@@ -1,7 +1,9 @@
 'use strict';
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($scope,  $filter, $window, $translatePartialLoader, ngTableParams, LinshareReceivedShareService, LinshareShareService, files){
+    function($scope,  $filter, $window, $translatePartialLoader, ngTableParams, LinshareReceivedShareService,
+             LinshareShareService, LinshareDocumentService, files, $translate, growlService, $log){
+      $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;
@@ -131,30 +133,142 @@ angular.module('linshare.receivedShare')
         });
       };
 
-      $scope.remove = function() {
-        swal({
-          title: 'Are you sure?',
-          text: 'You will not be able to recover this imaginary file!',
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#DD6B55',
-          confirmButtonText: 'Yes, delete it!',
-          closeOnConfirm: false
-        }, function(){
-          angular.forEach($scope.showActions, function(file, key) {
-            LinshareReceivedShareService.delete(file.uuid).then(function(){
-              angular.forEach(receivedFiles, function(f, k) {
-                if (f.uuid === file.uuid) {
-                  receivedFiles.splice(k, 1);
-                  $scope.showActions.splice(key, 1);
-                  $scope.tableParams.reload();
-                }
-              });
-            });
+      $scope.multipleSelection = true;
+      $scope.selectedDocuments = [];//basket
+      $scope.currentSelectedDocument = {current: ''};
+      $scope.flagsOnSelectedPages = {};
+      $scope.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
+        var currentPage = page || $scope.tableParams.page();
+        var dataOnPage = data || $scope.tableParams.data;
+        var select = selectFlag || $scope.flagsOnSelectedPages[currentPage];
+        if(!select) {
+          angular.forEach(dataOnPage, function(element) {
+            if(!element.isSelected) {
+              element.isSelected = true;
+              $scope.selectedDocuments.push(element);
+            }
           });
-          swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
-        });
+          $scope.flagsOnSelectedPages[currentPage] = true;
+        } else {
+          $scope.selectedDocuments = _.xor($scope.selectedDocuments, dataOnPage);
+          angular.forEach(dataOnPage, function(element) {
+            if(element.isSelected) {
+              element.isSelected = false;
+              _.remove($scope.selectedDocuments, function(n) {
+                return n.uuid === element.uuid;
+              });
+            }
+          });
+          $scope.flagsOnSelectedPages[currentPage] = false;
+        }
       };
+
+      $scope.$watch('mactrl.sidebarToggle.right', function(n) {
+        if(n === true) {
+          angular.element('.card').css('width', '70%');
+        } else {
+          angular.element('.card').css('width', '100%');
+        }
+      });
+      $scope.loadSidebarContent = function(content) {
+        $scope.sidebarData = content || 'share';
+      };
+
+      $scope.onShare = function() {
+        $('#focusInputShare').focus();
+        $scope.loadSidebarContent();
+      };
+
+      $scope.showCurrentFile = function(currentFile) {
+        $scope.currentSelectedDocument.current = currentFile;
+        $scope.sidebarData = 'details';
+        if(currentFile.shared > 0) {
+          LinshareDocumentService.getFileInfo(currentFile.uuid).then(function(data) {
+            $scope.currentSelectedDocument.current.shares = data.shares;
+          });
+        }
+        if(currentFile.hasThumbnail === true) {
+          LinshareDocumentService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
+            $scope.currentSelectedDocument.current.thumbnail = thumbnail;
+          });
+        }
+        $scope.mactrl.sidebarToggle.right = true;
+      };
+
+
+      //$scope.remove = function() {
+      //  swal({
+      //    title: 'Are you sure?',
+      //    text: 'You will not be able to recover this imaginary file!',
+      //    type: 'warning',
+      //    showCancelButton: true,
+      //    confirmButtonColor: '#DD6B55',
+      //    confirmButtonText: 'Yes, delete it!',
+      //    closeOnConfirm: false
+      //  }, function(){
+      //    angular.forEach($scope.showActions, function(file, key) {
+      //      LinshareReceivedShareService.delete(file.uuid).then(function(){
+      //        angular.forEach(receivedFiles, function(f, k) {
+      //          if (f.uuid === file.uuid) {
+      //            receivedFiles.splice(k, 1);
+      //            $scope.showActions.splice(key, 1);
+      //            $scope.tableParams.reload();
+      //          }
+      //        });
+      //      });
+      //    });
+      //    swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
+      //  });
+      //};
+
+      var swalTitle, swalText, swalConfirm, swalCancel, growlMsgDelete;
+      $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
+        'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON',
+        'GROWL_ALERT.DELETE']).then(function(translations) {
+        swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
+        swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
+        swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
+        swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
+        growlMsgDelete = translations['GROWL_ALERT.DELETE'];
+      });
+      var removeElementFromCollection = function(collection, element) {
+        var index = collection.indexOf(element);
+        if (index > -1) {
+          collection.splice(index, 1);
+        }
+      };
+      $scope.deleteDocuments = function(document) {
+        if(!angular.isArray(document)) {
+          document = [document];
+        }
+        swal({
+            title: swalTitle,
+            text: swalText,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: swalConfirm,
+            cancelButtonText: swalCancel,
+            closeOnConfirm: true,
+            closeOnCancel: true
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              angular.forEach(document, function(doc, indice) {
+                $log.debug('value to delete', doc);
+                $log.debug('value to delete', receivedFiles.length);
+                LinshareReceivedShareService.delete(doc.uuid).then(function() {
+                  growlService.notifyTopRight(growlMsgDelete, 'success');
+                  removeElementFromCollection(receivedFiles, doc);
+                  removeElementFromCollection($scope.selectedDocuments, doc);
+                  $scope.tableParams.reload();
+                });
+              });
+            }
+          }
+        );
+      };
+
       // onChange on the inputs in the table
       // Insert or remove the file in the list of selected files
       $scope.setShowActions = function (documentFile) {

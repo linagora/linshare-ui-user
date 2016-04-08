@@ -1,91 +1,83 @@
-<script type="text/ng-template" id="path/to/your/filters/checkbox.html">
-  <label class="checkbox checkbox-inline m-r-20">
-    <input type="checkbox" name="check"
-           x-ng-click="selectAll()"
-           x-ng-checked="datasIsSelected"/>
-  <i class="input-helper"></i>
-  </label>
-</script>
-<div class="container">
+<div class="container" id="files">
   <div class="card">
-    <div class="card-header m-b-20">
-      <h2>{{ 'TITLE' | translate }}</h2>
-      <div class="search-bar">
-        <div class="input-group">
-          <div class="fg-line">
-            <input type="text" class="form-control" placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                   ng-change="updateParams()"
-                   ng-model="paramFilter['name']">
+    <div class="card-header">
+      <div id="breadcrumb-wrap">
+        <div class="breadcrumbsCtn">
+          <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>{{ "BREADCRUMB_TITLE" | translate }}</a>
+        </div>
+        <div class="navBarBtn visible-xs">
+          <button class="btn btn-default waves-effect blueBtn" flow-btn flow-files-submitted="$flow.upload()">
+            <i class="zmdi zmdi-upload"><span>Importez un fichier</span></i>
+          </button>
+        </div>
+        <div id="action-header">
+          <div class="actions-ctn">
+            <ul class="actions">
+              <li class="dropdown" dropdown>
+                <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle>
+                  <i class="zmdi zmdi-more-vert"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+
+                  <li>
+                    <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.REFRESH' |
+                      translate}}</a>
+                  </li>
+                  <li>
+                    <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.UPLOAD' |
+                      translate}}</a>
+                  </li>
+                  <li ng-hide="selectedDocuments.length == 0">
+                    <a href="" ng-show="linshareModeProduction == false" ng-click="">{{'ACTION.COPY_IN_GROUP' |
+                      translate}}</a>
+                  </li>
+                  <li ng-hide="selectedDocuments.length == 0">
+                    <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.SHARE' |
+                      translate}}</a>
+                  </li>
+                  <li>
+                    <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.ADVANCED_SHARING' |
+                      translate}}</a>
+                  </li>
+                  <li ng-hide="selectedDocuments.length == 0">
+                    <a href="" ng-click="deleteDocuments(selectedDocuments)">{{'ACTION.DELETE' | translate}}</a>
+                  </li>
+                  <li ng-hide="selectedDocuments.length == 0">
+                    <a href="" ng-click="downloadSelectedFiles(selectedDocuments)">{{'ACTION.DOWNLOAD' |
+                      translate}}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
+
+          <div class="input-group search-bar">
+            <div class="fg-line">
+              <input type="text" class="form-control"
+                     placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                     ng-change="updateParams()"
+                     ng-model="paramFilter['name']">
+            </div>
             <span class="input-group-addon last clickable"
-                      x-ng-click="advancedFilterBool = !advancedFilterBool"
-                      data-toggle="tooltip"
-                      title=""
-                      data-placement="right"
-                      data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
-                      slide-toggle="#searchFilterCtn">
+                  x-ng-click="advancedFilterBool = !advancedFilterBool"
+                  data-toggle="tooltip"
+                  title=""
+                  data-placement="right"
+                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                  slide-toggle="#searchFilterCtn">
               <i class="zmdi hidden-xs clickable"
-                  x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
-                              'zmdi-chevron-up': advancedFilterBool} "></i>
-          </span>
+                 x-ng-class="{'zmdi-chevron-down': !advancedFilterBool, 'zmdi-chevron-up': advancedFilterBool}"></i>
+            </span>
+          </div>
         </div>
       </div>
-      <ul class="actions">
-        <li>
-          <a href=""
-             x-ng-show="showActions.length > 0"
-             x-ng-click="remove()"
-             data-toggle="tooltip"
-             title=""
-             data-placement="bottom"
-             data-original-title="{{ 'TOOLTIP.REMOVE_FILES' | translate }}">
-            <i class="zmdi zmdi-delete"></i>
-          </a>
-        </li>
-        <li>
-          <a href=""
-             x-ng-show="showActions.length > 0"
-             x-ng-click="download()"
-             data-toggle="tooltip"
-             title=""
-             data-placement="bottom"
-             data-original-title="{{ 'TOOLTIP.DOWNLOAD_FILES' | translate }}">
-            <i class="zmdi zmdi-download"></i>
-          </a>
-        </li>
-        <li class="dropdown" x-ng-show="showActions.length > 0">
-          <a href="" data-toggle="dropdown"
-             data-toggle="tooltip"
-             title=""
-             data-placement="left"
-             data-original-title="{{ 'TOOLTIP.SHOW_MORE_OPTIONS' | translate }}">
-            <i class="zmdi zmdi-more-vert"></i>
-          </a>
-
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li>
-              <a href=""
-                 x-ng-show="showActions.length > 0"
-                 x-ng-click="remove()">{{ 'REMOVE' | translate }}</a>
-            </li>
-            <li>
-              <a href=""
-                 x-ng-show="showActions.length > 0"
-                 x-ng-click="download()">{{ 'DOWNLOAD' | translate }}</a>
-            </li>
-            <li>
-              <a href=""
-                 x-ng-show="showActions.length > 0"
-                 x-ng-click="copy()">{{'ACTION.COPY_IN_GROUP' | translate }}</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <div class="clearfix"></div>
 
       <!-- FILTER COMPONENT  -->
       <filtering-component class="" ls-size="true" ls-date="true" ls-email="true"></filtering-component>
+      <div class="clearfix"></div>
+
     </div>
+
     <div class="table-responsive visible-xs">
       <div class="col-xs-12" ng-repeat="documentFile in tableParams.data">
         <div class="col-xs-1">
@@ -93,56 +85,150 @@
             <input type="checkbox" name="check"
                    x-ng-checked="documentFile.isChecked"
                    x-ng-model="documentFile.isChecked"
-                   ng-change="setShowActions(documentFile)" />
+                   ng-change="setShowActions(documentFile)"/>
             <i class="input-helper"></i>
           </label>
         </div>
         <div class="col-xs-11">
           {{documentFile.name}}
           <p class="text-left m-b-0">{{documentFile.size | readableSize: true}}</p>
+
           <p class="text-right">
-            <strong>{{'TABLE_HEADER.MODIFICATION_DATE' | translate}}: </strong>{{documentFile.modificationDate | date:medium}}</p>
+            <strong>{{'TABLE_HEADER.MODIFICATION_DATE' | translate}}: </strong>{{documentFile.modificationDate |
+            date:medium}}</p>
         </div>
       </div>
     </div>
-    <div class="table-responsive hidden-xs">
-      <table class="table table-striped m-b-30" data-ng-table="tableParams" show-filter="true">
 
-        <tr data-ng-repeat="documentFile in $data">
-          <td data-title="'TABLE_HEADER.TYPE' | translate" class="col-md-1 col-lg-1">
-            <i class="fa fa-lg"
-               data-toggle="tooltip"
-               title=""
-               data-placement="bottom"
-               data-original-title="{{'EXTENSIONS.' + documentFile.info | translate }}"
-               sortable="'typeImage'"
-               ng-class="documentFile.typeImage"></i>&nbsp; &nbsp;
-          </td>
-          <td class="col-md-4 col-lg-5" data-title="'TABLE_HEADER.NAME' | translate" x-uuid={{o.uuid}} sortable="'name'">
-            {{documentFile.name}}
-          </td>
-          <td class="col-md-1 col-lg-1"
-              sortable="'size'"
-              data-title="'TABLE_HEADER.SIZE' | translate">
-            {{documentFile.size | readableSize: true }}
-          </td>
-          <td data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" class="col-md-2 col-lg-2" sortable="'modificationDate'">
-            {{documentFile.modificationDate | date:medium}}
-          </td>
-          <td data-title="'TABLE_HEADER.CREATION_DATE' | translate" class="col-md-2 col-lg-2" sortable="'modificationDate'">
-            {{documentFile.creationDate | date:medium}}
-          </td>
-          <td sortable="'isChecked'" class="col-md-1 col-lg-1">
-            <label class="checkbox checkbox-inline m-r-20">
-              <input type="checkbox" name="check"
-                     x-ng-checked="documentFile.isChecked"
-                     x-ng-model="documentFile.isChecked"
-                     ng-change="setShowActions(documentFile)" />
-              <i class="input-helper"></i>
-            </label>
-          </td>
-        </tr>
-      </table>
+
+    <div id="dropArea">
+      <div id="selection-actions" class="showMultiMenu" data-ng-class="{'show': selectedDocuments.length > 0}">
+        <div class="exitSelection" ng-click="resetSelectedDocuments()">
+          <i class="zmdi zmdi-close"></i>
+        </div>
+        <div class="displayNumSelectedItems">
+          <span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}
+        </div>
+        <div id="toolbar-actions">
+          <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())">
+            <a class="selectAllItems plainTxtBtn">
+              <i ng-show="flagsOnSelectedPages[tableParams.page()]" class="fa fa-square-o"></i>
+              <span
+                ng-show="flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate}}</span>
+              <i ng-show="!flagsOnSelectedPages[tableParams.page()]" class="fa fa-check-square-o"></i>
+              <span
+                ng-show="!flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.SELECT_ALL" | translate}}</span>
+            </a>
+          </span>
+          <span>
+            <a class="plainTxtBtn partageLink"
+               ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
+               ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+              <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
+          </span>
+          <span>
+            <a class="plainTxtBtn partageLink"
+               ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
+               ng-click="deleteDocuments(selectedDocuments)">
+              <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span></a>
+          </span>
+        </div>
+      </div>
+
+      <div class="dragNDropCtn resetContentWidth">
+        <div class="dragNDropContent">
+          <div class="dragIconCtn ">
+            <div class="borderedCircle">&nbsp;</div>
+            <img src="images/upload-dnd-grey.png">
+          </div>
+          <h1>Déposez vos fichiers ici</h1>
+
+          <p>Cliquez ou glissez-déposez vos fichiers dans l'interface pour les importer.</p>
+        </div>
+      </div>
+      <!-- DOCUMENTS LIST  -->
+      <div class="card-body">
+
+        <div class="table-responsive">
+          <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
+
+            <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
+                file-selection-v="selectedDocuments" uuid="documentFile"
+                current-selected-document="currentSelectedDocument"
+                multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}"
+                data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5">
+
+              <td><i class="fa fa-lg" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i></td>
+
+              <td data-title="'TABLE_HEADER.NAME' | translate" class="col-md-6" sortable="'name'" uuid={{o.uuid}}>
+                {{documentFile.name}}
+              </td>
+
+              <td class="hidden-xs"
+                  ng-if="mactrl.sidebarToggle.right === false"
+                  data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" sortable="'modificationDate'">
+                {{documentFile.modificationDate | relativeTime}}
+              </td>
+
+              <td class="hidden-xs"
+                  ng-if="mactrl.sidebarToggle.right === false"
+                  data-title="'TABLE_HEADER.SIZE' | translate" sortable="'size'">
+                {{documentFile.size | readableSize: false}}
+              </td>
+
+              <td data-title="'TABLE_HEADER.ACTION' | translate" sortable="'shared'">
+                <!--<button type="button" class="btn btn-default"><i class="zmdi zmdi-download"></i></button>-->
+                <ul class="actions hidden-xs">
+                  <li data-ng-class="{ 'openr': mactrl.sidebarToggle.right === true }">
+                    <a href="" ng-click="showCurrentFile(documentFile)" event-propagation-stop
+                       title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
+                      <i class="zmdi zmdi-info"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
+                       ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                      <i class="zmdi zmdi-share" style="color: green"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop
+                       ng-click="downloadCurrentFile(documentFile)">
+                      <i class="zmdi zmdi-download"></i>
+                    </a>
+                  </li>
+                  <li class="dropdown" dropdown>
+                    <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle
+                       event-propagation-stop>
+                      <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+
+                      <li>
+                        <a href="" ng-show="linshareModeProduction == false" ng-click="" event-propagation-stop>
+                          {{'ACTION.COPY_IN_GROUP' | translate}}</a>
+                      </li>
+                      <li>
+                        <a href="" ls-share-modal event-propagation-stop>{{'ACTION.SHARE' | translate}}</a>
+                      </li>
+                      <li>
+                        <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
+                      </li>
+                      <li>
+                        <a href="" ng-click="downloadCurrentFile(documentFile)" event-propagation-stop>
+                          {{'ACTION.DOWNLOAD' | translate}}</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+               data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+      </div>
     </div>
   </div>
 </div>
