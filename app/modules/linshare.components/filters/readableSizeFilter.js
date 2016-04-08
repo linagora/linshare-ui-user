@@ -56,4 +56,29 @@ angular.module('linshare.components')
     return function(filename) {
       return filename.split('.').pop().toUpperCase();
     }
+  })
+  .filter('mimetypeIcone', function() {
+    return function(fileType) {
+      var icone = 'fa-file-text-o';
+      var type = [
+        {regex: /pdf/, icone: 'fa-file-pdf-o', info: 'PDF'},
+        {regex: /image/, icone: 'fa-file-image-o', info: 'IMAGE'},
+        {regex: /audio/, icone: 'fa-file-audio-o', info: 'AUDIO'},
+        {regex: /video/, icone: 'fa-file-video-o', info: 'VIDEO'},
+        {regex: /powerpoint/, icone: 'fa-file-powerpoint-o', info: 'POWERPOINT'},
+        {regex: /word/, icone: 'fa-file-word-o', info: 'WORD'},
+        {regex: /zip|tar|compressed/, icone: 'fa-file-archive-o', info: 'ARCHIVE'},
+        {regex: /excel/, icone: 'fa-file-excel-o', info: 'EXCEL'},
+        {regex: /text\/plain/, icone: 'fa-file-text-o', info: 'TEXT'},
+        {regex: /text/, icone: 'fa-file-code-o', info: 'CODE'}
+      ];
+
+      angular.forEach(type, function(elm) {
+        if (fileType.match(elm.regex)) {
+          icone = elm.icone;
+          return icone;
+        }
+      });
+      return icone;
+    };
   });
