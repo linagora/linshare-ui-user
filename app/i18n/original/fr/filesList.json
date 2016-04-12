@@ -8,6 +8,7 @@
   },
   "BREADCRUMB_TITLE": "Mes fichiers",
   "RIGHT_PANEL": {
+    "EMPTY": "Aucun fichier sélectionné",
     "DETAILS": {
       "TITLE": "DETAILS",
       "UPLOAD_DATE": "Date de dépôt",

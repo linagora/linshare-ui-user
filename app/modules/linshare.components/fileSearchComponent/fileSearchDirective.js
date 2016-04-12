@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('linshare.components')
-  .directive('filteringComponent', function(componentsConfig, $translate) {
-    var FR_DATE_FORMAT = 'dd/MM/yyyy';
-    var EN_DATE_FORMAT = 'yyyy/MM/dd';
+  .directive('filteringComponent', function(componentsConfig, $translate, lsAppConfig) {
+    var FR_DATE_FORMAT = lsAppConfig.date_fr_format;
+    var EN_DATE_FORMAT = lsAppConfig.date_en_format;
     return {
       restrict: 'E',
       scope: false,
@@ -102,9 +102,9 @@ angular.module('linshare.components')
       templateUrl: componentsConfig.path + 'fileSearchComponent/fileSearchDirectiveTemplate.html'
     };
   })
-  .directive('workingDatePicker', function(componentsConfig, $translate) {
-    var FR_DATE_FORMAT = 'dd/MM/yyyy';
-    var EN_DATE_FORMAT = 'MM/dd/yyyy';
+  .directive('workingDatePicker', function(componentsConfig, $translate, lsAppConfig) {
+    var FR_DATE_FORMAT = lsAppConfig.date_fr_format;
+    var EN_DATE_FORMAT = lsAppConfig.date_en_format;
     return {
       restrict: 'E',
       scope: false,

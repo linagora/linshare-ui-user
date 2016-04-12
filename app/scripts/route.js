@@ -168,9 +168,9 @@ angular.module('linshareUiUserApp')
         controller: 'LinshareGuestController'
       })
 
-      .state('administration.hided_links', {
-        url:'/hided_links',
-        templateUrl: 'views/common/hided_links.html'
+      .state('administration.hidden_links', {
+        url:'/hidden_links',
+        templateUrl: 'views/common/hidden_links.html'
       })
 
       //------------------------------

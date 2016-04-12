@@ -207,7 +207,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.multipleSelection = true;
-    $scope.currentSelectedDocument = {current: 'test'};
+    $scope.currentSelectedDocument = {current: ''};
     $scope.sidebarData = 'details';
 
     $scope.showCurrentFile = function(currentFile) {

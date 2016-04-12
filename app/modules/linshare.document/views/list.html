@@ -76,7 +76,6 @@
           </div>
         </div>
       </div>
-      <!--<span style="display:none" class="pull-left">{{selectedDocuments.length}} fichier(s) sélectionné(s)</span>-->
 
       <!-- FILTER COMPONENT  -->
       <filtering-component class="" ls-size="true" ls-date="true"></filtering-component>
@@ -124,9 +123,9 @@
             <div class="borderedCircle">&nbsp;</div>
             <img src="images/upload-dnd-grey.png">
           </div>
-          <h1>Déposez vos fichiers ici</h1>
+          <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
 
-          <p>Cliquez ou glissez-déposez vos fichiers dans l'interface pour les importer.</p>
+          <p>{{ "DRAG_DROP_BACKGROUND.COMMENT" | translate }}</p>
         </div>
       </div>
 
@@ -161,7 +160,6 @@
               </td>
 
               <td data-title="'TABLE_HEADER.ACTION' | translate" sortable="'shared'">
-                <!--<button type="button" class="btn btn-default"><i class="zmdi zmdi-download"></i></button>-->
                 <ul class="actions hidden-xs">
                   <li data-ng-class="{ 'openr': mactrl.sidebarToggle.right === true }">
                     <a href="" ng-click="showCurrentFile(documentFile)" event-propagation-stop
