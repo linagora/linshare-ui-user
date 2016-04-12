@@ -27,7 +27,7 @@
       <ul class="list-group" >
         <li class="list-group-item" data-ng-repeat="documentFile in selectedDocuments">
           <span class="badge" ng-click="removeSelectedDocuments(documentFile)"><i class="zmdi zmdi-close"></i></span>
-          <span class="fa fa-file-excel-o m-r-10" aria-hidden="true"></span>{{documentFile.name}}
+          <span class="fa ls-1p5x m-r-10" ng-class="'{{documentFile.type | mimetypeIcone}}'" aria-hidden="true"></span>{{documentFile.name}}
         </li>
       </ul>
     </div>

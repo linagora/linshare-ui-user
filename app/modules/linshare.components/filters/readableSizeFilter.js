@@ -61,16 +61,16 @@ angular.module('linshare.components')
     return function(fileType) {
       var icone = 'fa-file-text-o';
       var type = [
-        {regex: /pdf/, icone: 'fa-file-pdf-o', info: 'PDF'},
-        {regex: /image/, icone: 'fa-file-image-o', info: 'IMAGE'},
-        {regex: /audio/, icone: 'fa-file-audio-o', info: 'AUDIO'},
-        {regex: /video/, icone: 'fa-file-video-o', info: 'VIDEO'},
-        {regex: /powerpoint/, icone: 'fa-file-powerpoint-o', info: 'POWERPOINT'},
-        {regex: /word/, icone: 'fa-file-word-o', info: 'WORD'},
-        {regex: /zip|tar|compressed/, icone: 'fa-file-archive-o', info: 'ARCHIVE'},
-        {regex: /excel/, icone: 'fa-file-excel-o', info: 'EXCEL'},
-        {regex: /text\/plain/, icone: 'fa-file-text-o', info: 'TEXT'},
-        {regex: /text/, icone: 'fa-file-code-o', info: 'CODE'}
+        {regex: /pdf/, icone: 'fa-file-pdf-o iconcolor-pdf', info: 'PDF'},
+        {regex: /image/, icone: 'fa-file-image-o iconcolor-text', info: 'IMAGE'},
+        {regex: /audio/, icone: 'fa-file-audio-o iconcolor-text', info: 'AUDIO'},
+        {regex: /video/, icone: 'fa-file-video-o iconcolor-text', info: 'VIDEO'},
+        {regex: /powerpoint/, icone: 'fa-file-powerpoint-o iconcolor-powerpoint', info: 'POWERPOINT'},
+        {regex: /word/, icone: 'fa-file-word-o iconcolor-word', info: 'WORD'},
+        {regex: /zip|tar|compressed/, icone: 'fa-file-archive-o iconcolor-text', info: 'ARCHIVE'},
+        {regex: /excel/, icone: 'fa-file-excel-o iconcolor-excel', info: 'EXCEL'},
+        {regex: /text\/plain/, icone: 'fa-file-text-o iconcolor-text', info: 'TEXT'},
+        {regex: /text/, icone: 'fa-file-code-o iconcolor-text', info: 'CODE'}
       ];
 
       angular.forEach(type, function(elm) {
