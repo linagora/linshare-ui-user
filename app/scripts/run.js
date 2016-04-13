@@ -19,6 +19,7 @@ angular.module('linshareUiUserApp')
       loadFailureHandler: 'MyErrorHandler'
     });
     $translatePartialLoaderProvider.addPart('general');
+    $translatePartialLoaderProvider.addPart('notification');
     $translateProvider.preferredLanguage('fr');
     RestangularProvider.setDefaultHttpFields({cache: false});
     RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json;'});
@@ -58,7 +59,7 @@ angular.module('linshareUiUserApp')
      */
     Restangular.setErrorInterceptor(function(response) {
       if (response.status === 503) {
-        growlService.notifyTopCenter('503 - Serveur Indisponible', 'danger');
+        growlService.notifyTopCenter('GROWL_ALERT.ERROR.503', 'danger');
       }
       return true;
     });

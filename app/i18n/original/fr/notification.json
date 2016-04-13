@@ -1,0 +1,30 @@
+{
+  "SWEET_ALERT": {
+    "ON_FILE_DELETE": {
+      "TITLE": "Êtes-vous sûr?",
+      "TEXT": "Vous êtes sur le point de supprimer des fichiers !",
+      "CONFIRM_BUTTON": "Oui, continuez !",
+      "CANCEL_BUTTON": "Annulez !"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "Êtes-vous sûr?",
+      "TEXT": "Toutes les valeurs du stockage local seront effacées",
+      "CONFIRM_BUTTON": "Oui, continuez !",
+      "DONE": "Terminé",
+      "IS_CLEARED": "Le stockage local a été effacé"
+    }
+  },
+  "GROWL_ALERT": {
+    "ACTION": {
+      "DELETE": "Suppression réussie",
+      "SHARE": "Partage réussi"
+    },
+    "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
+      "AT_LEAST_ONE_DOCUMENT": "Aucun fichier sélectionné"
+    },
+    "ERROR": {
+      "503": "Serveur Indisponible"
+    }
+  }
+}

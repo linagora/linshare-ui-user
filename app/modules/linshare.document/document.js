@@ -163,16 +163,15 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       }
     };
 
-    var swalTitle, swalText, swalConfirm, swalCancel, growlMsgDelete;
+    var swalTitle, swalText, swalConfirm, swalCancel;
     $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
-      'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON',
-      'GROWL_ALERT.DELETE']).then(function(translations) {
-      swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
-      swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
-      swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
-      swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
-      growlMsgDelete = translations['GROWL_ALERT.DELETE'];
-    });
+      'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'])
+      .then(function(translations) {
+        swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
+        swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
+        swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
+        swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
+      });
 
     $scope.deleteDocuments = function(document) {
       if(!angular.isArray(document)) {
@@ -195,7 +194,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
               $log.debug('value to delete', doc);
               $log.debug('value to delete', documentsList.length);
               LinshareDocumentService.deleteFile(doc.uuid).then(function() {
-                growlService.notifyTopRight(growlMsgDelete, 'success');
+                growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
                 removeElementFromCollection(documentsList, doc);
                 removeElementFromCollection($scope.selectedDocuments, doc);
                 $scope.tableParams.reload();

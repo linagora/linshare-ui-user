@@ -251,18 +251,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.share = new ShareObjectService();
     //share.id = $scope.share_array.length + 1;
 
-    $translate('GROWL_ALERT.SHARE').then(function(translations) {
-      $scope.growlMsgShareSuccess = translations;
-    });
-
     $scope.selectedContact = {};
     $scope.submitShare = function(shareCreationDto) {
       if($scope.selectedDocuments.length === 0 ) {
-        growlService.notifyBottomRight('You must select at least one file to share', 'warning');
+        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
         return;
       }
       if(shareCreationDto.getRecipients().length === 0 ) {
-        growlService.notifyBottomRight('You must select at least recipient to share with', 'warning');
+        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT', 'warning');
         return;
       }
       //angular.forEach($scope.selectedDocuments, function(doc) {
@@ -273,7 +269,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       //  shareCreationDto.recipients.push({mail: $scope.selectedContact});
       //}
       LinshareShareService.shareDocuments($scope.share_array[1].getFormObj()).then(function() {
-        growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
+        growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
         angular.element('tr').removeClass('info');
@@ -301,17 +297,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     })
 
   .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
-    $translate('GROWL_ALERT.SHARE').then(function(translations) {
-      $scope.growlMsgShareSuccess = translations;
-    });
     $scope.submitShare = function(shareCreationDto, now) {
       if($scope.selectedDocuments.length === 0 ) {
-        growlService.notifyTopRight('You must select at least one file to share', 'warning');
+        growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
         return;
       }
       if(now) {
         LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
-          growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
           $scope.$emit('linshare-upload-complete');
           $scope.mactrl.sidebarToggle.right = false;
           angular.element('tr').removeClass('info');

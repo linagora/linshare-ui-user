@@ -93,10 +93,6 @@
       "IS_CLEARED": "Le stockage local a été effacé"
     }
   },
-  "GROWL_ALERT": {
-    "DELETE": "Suppression réussie",
-    "SHARE": "Partage réussi"
-  },
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Nom de fichier",
     "FILTER_BY_SIZE": "Filtrer par taille",

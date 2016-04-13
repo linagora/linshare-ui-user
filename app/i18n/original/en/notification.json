@@ -1,0 +1,30 @@
+{
+  "SWEET_ALERT": {
+    "ON_FILE_DELETE": {
+      "TITLE": "Are you sure?",
+      "TEXT": "You are about to remove files !",
+      "CONFIRM_BUTTON": "Yes, delete it!",
+      "CANCEL_BUTTON": "Cancel!"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "Are you sure?",
+      "TEXT": "All your saved localStorage values will be removed",
+      "CONFIRM_BUTTON": "Yes, delete it!",
+      "DONE": "Done",
+      "IS_CLEARED": "LocalStorage is cleared"
+    }
+  },
+  "GROWL_ALERT": {
+    "ACTION": {
+      "DELETE": "File(s) has been deleted",
+      "SHARE": "share done with success"
+    },
+    "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",
+      "AT_LEAST_ONE_DOCUMENT": "No file is selected"
+    },
+    "ERROR": {
+      "503": "Service Unavailable"
+    }
+  }
+}

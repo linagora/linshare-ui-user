@@ -93,10 +93,6 @@
       "IS_CLEARED": "LocalStorage is cleared"
     }
   },
-  "GROWL_ALERT": {
-    "DELETE": "File(s) has been deleted",
-    "SHARE": "share done with success"
-  },
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "File Name",
     "FILTER_BY_SIZE": "Filter by size",
