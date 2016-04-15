@@ -22,3 +22,20 @@ linshare.document/
     ├── detail.html
     └── list.html
 
+
+## change current version
+mvn versions:set -DnewVersion=0.1.0-SNAPSHOT && mvn validate -Pupdate-version
+git commit
+
+## Packaging
+mvn package
+
+## Deploy snapshot
+mvn deploy
+
+## release
+mvn -Dresume=false release:prepare release:perform
+
+## Hard clean
+mvn -Phard-clean
+
