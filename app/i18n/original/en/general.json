@@ -26,7 +26,7 @@
     "TEXT" : "Text",
     "CODE" : "Code"
   },
-  "BOUTON_ADD_FILE_TITLE": "Add files",
+  "BOUTON_ADD_FILE_TITLE": "Add",
   "MENU_TITLE" : {
     "HOME" : "Home",
     "FILES" : "Files",
@@ -125,5 +125,16 @@
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Search people"
     }
+  },
+  "ADD_FILES_DROPDOWN": {
+    "UPLOAD_FILE": "Upload file",
+    "UPLOAD_AND_SHARE": "Upload and share",
+    "UPLOAD_IN_GROUP": "Upload in a group"
+  },
+  "TRANSFERS_DROPDOWN": {
+    "SHARE": "Shares",
+    "SHARE_NUMBER": "Share",
+    "UPLOADS": "Uploads",
+    "BEFORE_SENDINGS": "before sending"
   }
 }

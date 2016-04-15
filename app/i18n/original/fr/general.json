@@ -26,7 +26,7 @@
     "TEXT" : "Texte",
     "CODE" : "Code"
   },
-  "BOUTON_ADD_FILE_TITLE": "Ajouter des fichiers",
+  "BOUTON_ADD_FILE_TITLE": "Ajouter",
   "MENU_TITLE" : {
     "HOME" : "Accueil",
     "FILES" : "Fichiers",
@@ -131,5 +131,17 @@
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Rechercher des utilisateurs"
     }
+  },
+    "ADD_FILES_DROPDOWN": {
+      "UPLOAD_FILE": "Déposer un fichier",
+      "UPLOAD_AND_SHARE": "Déposer et partager ",
+      "UPLOAD_IN_GROUP": "Déposer dans un groupe"
+    },
+  "TRANSFERS_DROPDOWN": {
+    "SHARE": "Partage",
+    "SHARE_NUMBER": "Partage",
+    "UPLOADS": "Dépôt",
+    "BEFORE_SENDINGS": "avant l'envoi"
   }
 }
+

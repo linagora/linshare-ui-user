@@ -1,21 +1,48 @@
 <div ng-class="{'hidden': !mactrl.sidebarToggle.left}">
-  <button class="btn-add-files" flow-btn>
-    <i class="zmdi zmdi-file-plus zmdi-hc-fw"></i>
-    <span>{{'BOUTON_ADD_FILE_TITLE' | translate }}</span>
-  </button>
+  <div class="btn-add-files-ctn">
+    <div class="dropdown-ctn">
+      <div dropdown is-open="status.isopen">
+        <button id="single-button" type="button" class="btn btn-custum-secondary btn-add-files"
+                dropdown-toggle ng-disabled="disabled">
+          <i class="zmdi zmdi-upload "></i><span>{{'BOUTON_ADD_FILE_TITLE' | translate }}</span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+          <li role="menuitem" flow-btn>
+            <a href="">
+              <i class="zmdi zmdi-file-plus"></i>
+              {{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate }}
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#">
+              <i class="zmdi zmdi-share menu-item-share"></i>
+              {{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate }}
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" style="color:#ACACAC">
+              <i class="zmdi zmdi-accounts-alt"></i>
+              {{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="c-overflow" id="navigation" ng-style="sizeNavigation">
     <ul class="main-menu" ng-repeat="tab in tabs">
       <li ng-if="tab.link"
           data-ng-class="{ 'active simple-menu': currentState.name==tab.name}">
         <a data-ui-sref="{{tab.link}}"
            data-ng-class="{'disabled': tab.disabled }">
-          <i class="{{tab.icon}}" style="color: {{ tab.color | translate }}"></i> {{ tab.name | translate }}
+          <i class="{{tab.icon}}" ></i> {{ tab.name | translate }}
         </a>
       </li>
       <li ng-show="tab.disabled == false" class="sub-menu" ng-if="tab.links"
-          data-ng-class="{ 'active toggled': currentState.name==tab.name || (currentState.name=='MENU_TITLE.HOME' && tab.name=='MENU_TITLE.FILES') }">
+          data-ng-class="{ 'active toggled': currentState.name==tab.name ||
+           (currentState.name=='MENU_TITLE.HOME' && tab.name=='MENU_TITLE.FILES') }">
         <a toggle-submenu>
-          <i class="{{tab.icon}}" style="color: {{ tab.color }}"></i> {{ tab.name | translate }}
+          <i class="{{tab.icon}}" ></i> {{ tab.name | translate }}
         </a>
         <ul>
           <li ng-show="link.disabled == false" ng-repeat="link in tab.links"
@@ -23,8 +50,7 @@
               ng-mouseleave="changeColor('inherit')">
             <a data-ui-sref="{{link.link}}"
                data-ui-sref-active="active"
-               data-ng-class="{'disabled': link.disabled }"
-               ng-style="customColor">
+               data-ng-class="{'disabled': link.disabled }">
               {{ link.name | translate }}
             </a>
           </li>
@@ -33,14 +59,14 @@
     </ul>
   </div>
   <div class="quota">
-    <div class="linshare">
-      <img src="images/logo-blue-grey.png" alt="Logo LinShare" />
-      <p><span>Lin</span>Share</p>
-    </div>
     <div class="quota-used"></div>
     <div class="quota-free"></div>
     <div class="quota-information">
       <p>10 GB out of 15 GB used</p>
+    </div>
+    <div class="libre-and-free">
+      <img src="images/common/community.png" alt="Logo LinShare" />
+      <p>Libre & Free</p>
     </div>
   </div>
 </div>

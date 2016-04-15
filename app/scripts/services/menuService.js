@@ -13,7 +13,7 @@ angular.module('linshareUiUserApp')
 
       var files = {
         name: 'MENU_TITLE.FILES',
-        icon: 'zmdi zmdi-folder',
+        icon: 'fa fa-files-o',
         color: '#2196F3',
         disabled: false,
         links: [
@@ -29,13 +29,16 @@ angular.module('linshareUiUserApp')
             name: 'MENU_TITLE.SHARES',
             link: 'documents.shared',
             disabled: lsAppConfig.production
-          }, {
-            name: 'MENU_TITLE.GROUPS',
-            link: 'documents.threads',
-            disabled: lsAppConfig.production
           }
         ]
       };
+    var groups = {
+      name: 'MENU_TITLE.GROUPS',
+      link: 'documents.threads',
+      icon: 'zmdi zmdi-accounts-alt',
+      color: '#05B1FF',
+      disabled: lsAppConfig.production
+    };
 
       var administrations = {
         name: 'MENU_TITLE.ADMIN',
@@ -65,7 +68,7 @@ angular.module('linshareUiUserApp')
 
       var uploads = {
         name: 'MENU_TITLE.UPLOAD_MANAGMENT',
-        icon: 'zmdi zmdi-arrow-in',
+        icon: 'zmdi zmdi-pin-account',
         color: '#8BC34A',
         disabled: lsAppConfig.production,
         links: [
@@ -83,7 +86,7 @@ angular.module('linshareUiUserApp')
 
       var others = {
         name: 'MENU_TITLE.AUDIT',
-        icon: 'zmdi zmdi-info',
+        icon: 'fa fa-line-chart',
         color: '#FFC107',
         disabled: lsAppConfig.production,
         links: [
@@ -99,7 +102,7 @@ angular.module('linshareUiUserApp')
         ]
       };
 
-      var tabs = [home, files, administrations, uploads, others];
+      var tabs = [home, files, groups, administrations, uploads, others];
 
       // Public API here
       return {

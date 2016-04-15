@@ -1,5 +1,6 @@
 <ul class="header-inner clearfix" data-flow-files-submitted="$flow.upload()">
     <li id="menu-trigger"
+        class="pull-left"
         ng-click="hctrl.resizeDragNDropCtn(mactrl.sidebarToggle.left)"
         data-target="mainmenu"
         data-toggle-sidebar
@@ -11,55 +12,115 @@
             <div class="line bottom"></div>
         </div>
     </li>
-    <li class="page-title hidden-xs">
+    <li class="page-title visible-xs">
         {{ linkActive.name | translate }}
     </li>
-    <li class="logo hidden-xs">
+    <li class="logo hidden-xs pull-left">
         <a href="/#/">
-            <img src="images/logo-white.png" alt="Logo LinShare" />
+            <img src="images/common/linshare-logo-white.png" alt="Logo LinShare" />
         </a>
     </li>
-
     <li class="pull-right">
         <ul class="top-menu">
-            <li ng-show="linshareModeProduction == false" id="top-search">
-                <a href="" data-ng-click="hctrl.openSearch()">
-                    <i class="zmdi zmdi-search zmdi-hc-2x zmdi-hc-fw"></i>
-                </a>
-                <!-- <a class="tm-search" href="" data-ng-click="hctrl.openSearch()"></a> -->
-            </li>
-            <li class="dropdown hidden-xs">
-                <a ng-show="$flow.progress() > 0" data-toggle="dropdown" href="" class="col-md-2" style="height: 15px;">
+            <li class="dropdown" id="transfert-dropdown">
+                <a ng-show="$flow.progress() > 0" data-toggle="dropdown" class="col-md-2 ctn-badge-count"
+                   style="height: 15px;">
                   <i class="tmn-counts">{{$flow.files.length}}</i>
                   <div class="progress m-t-15">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="$flow.progress()*100" aria-valuemin="0" aria-valuemax="100" style="padding-top: 15px; width: {{$flow.progress()*100}}%">
+                    <div class="progress-bar progress-bar-warning" role="progressbar"
+                         aria-valuenow="$flow.progress()*100" aria-valuemin="0" aria-valuemax="100"
+                         style="padding-top: 15px; width: {{$flow.progress()*100}}%">
                     </div>
                   </div>
                 </a>
-
-                <a ng-hide="$flow.progress() > 0" data-toggle="dropdown" href=""><i class="zmdi zmdi-upload zmdi-hc-2x zmdi-hc-fw"></i></a>
-
+                <a data-toggle="dropdown" href=""><i class="tm-icon icon-transfert"></i></a>
                 <div class="dropdown-menu pull-right dropdown-menu-lg">
-                    <div class="listview">
-                        <div class="lv-header stop-propagate">
-                          {{'HEADER.UPLOAD_PROGRESS.TITLE' | translate}}
-                        </div>
-                        <div class="lv-body stop-propagate">
-
-                            <div class="lv-item" ng-init="wid = 10" x-ng-repeat="file in $flow.files">
-
-                                <div class="lv-title m-b-5">
-                                  <span>{{file.name}}</span>
-                                  <div class="pull-right">
+                  <div class="listview">
+                    <div class="lv-body stop-propagate">
+                      <div ng-cloak="" class="tabsdemoDynamicHeight">
+                        <md-content>
+                          <md-tabs md-dynamic-height="" md-border-bottom="">
+                            <md-tab label="{{'TRANSFERS_DROPDOWN.UPLOADS' | translate}}">
+                              <md-content class="md-padding">
+                                  <div class="lv-item row" x-ng-repeat="file in $flow.files">
+                                    <div class="col-xs-10 p-0">
+                                      <div class="lv-title p-0">
+                                        <div class="p-0 file-name">
+                                          <span>{{file.name}}</span>
+                                        </div>
+                                        <div class="p-0 secondary-info-ctn">
+                                          <span class="secondary-info-text">512Mb</span>
+                                        </div>
+                                      </div>
+                                        <p class="time-remaining">30min</p>
+                                      <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
+                                          <span class="sr-only">100% Complete (success)</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-2 p-0">
+                                      <ul class="lv-actions actions alignListIcons">
+                                        <li class="col-xs-4" x-ng-if="file.isUploading()">
+                                          <a href="" ng-click="file.cancel()">
+                                            <i class="zmdi zmdi-stop"></i>
+                                          </a>
+                                        </li>
+                                        <li class="col-xs-4" x-ng-if="file.isComplete() && !file.error">
+                                          <a href="" ng-click="file.cancel()">
+                                            <i class="zmdi zmdi zmdi-check"></i>
+                                          </a>
+                                        </li>
+                                        <li class="col-xs-4" x-ng-if="file.error">
+                                          <a href="" ng-click="file.retry()">
+                                            <i class="zmdi zmdi-replay"></i>
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                 </md-content>
+                              <a ng-show="linshareModeProduction == false" class="lv-footer" ui-sref="documents.upload"
+                              href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
+                            </md-tab>
+                            <md-tab label="{{'TRANSFERS_DROPDOWN.SHARE' | translate}}">
+                              <md-content class="md-padding">
+                                <div class="lv-item row" x-ng-repeat="file in $flow.files">
+                                  <div class="col-xs-10 p-0">
+                                    <div class="lv-title p-0">
+                                      <div  class="p-0 file-name">
+                                        <span> {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} 1</span>
+                                      </div>
+                                      <div class="p-0 secondary-info-ctn">
+                                        <span class="secondary-info-text">
+                                          <span class="files-count">3
+                                          <i class="fa fa-file-o"></i>
+                                        </span>
+                                          <span class="recipients-count">8
+                                            <i class="zmdi zmdi-account-o"></i>
+                                          </span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <p class="time-remaining">30min {{'TRANSFERS_DROPDOWN.BEFORE_SENDINGS' | translate}}</p>
+                                    <div class="progress">
+                                      <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
+                                           aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
+                                        <span class="sr-only">100% Complete (success)</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-xs-2 p-0">
                                     <ul class="lv-actions actions alignListIcons">
                                       <li class="col-xs-4" x-ng-if="file.isUploading()">
                                         <a href="" ng-click="file.cancel()">
-                                          <i class="zmdi zmdi-stop"></i>
+                                          <i class="zmdi zmdi-eye"></i>
                                         </a>
                                       </li>
                                       <li class="col-xs-4" x-ng-if="file.isComplete() && !file.error">
                                         <a href="" ng-click="file.cancel()">
-                                          <i class="zmdi zmdi-format-clear-all"></i>
+                                          <i class="zmdi zmdi zmdi-check"></i>
                                         </a>
                                       </li>
                                       <li class="col-xs-4" x-ng-if="file.error">
@@ -70,39 +131,43 @@
                                     </ul>
                                   </div>
                                 </div>
-
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100" aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
-                                       <span class="sr-only">100% Complete (success)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a ng-show="linshareModeProduction == false" class="lv-footer" ui-sref="documents.upload"
-                           href=""> {{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
+                              </md-content>
+                            </md-tab>
+                          </md-tabs>
+                        </md-content>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </li>
-            <li class="dropdown">
-                <a data-toggle="dropdown" href=""><i class="zmdi zmdi-settings zmdi-hc-2x zmdi-hc-fw"></i></a>
-                <ul class="dropdown-menu dm-icon pull-right">
-                    <li>
-                        <a data-ng-click="hctrl.fullScreen()" href="">
-                          <i class="zmdi zmdi-fullscreen"></i>{{'HEADER.FULL_SCREEN' | translate}}
-                        </a>
-                    </li>
-                    <li>
-                        <a data-ng-click="hctrl.clearLocalStorage()" href="">
-                          <i class="zmdi zmdi-delete"></i>{{'HEADER.CLEAR_LOCAL_STORAGE' | translate}}
-                        </a>
-                    </li>
-                </ul>
-            </li>
+              </li>
           <li class="dropdown">
-            <a data-toggle="dropdown" href=""><i class="zmdi zmdi-account zmdi-hc-2x"></i></a>
+            <a  data-toggle="dropdown" href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
+              <i class="tmn-counts">5</i>
+            </a>
+            <a data-toggle="dropdown" href=""><i class="tm-icon zmdi zmdi-notifications-none"></i></a>
+            <div class="dropdown-menu pull-right dropdown-menu-lg">
+              <div class="listview">
+                <div class="lv-header stop-propagate">Notifications
+                  <ul class="actions">
+                    <li class="dropdown">
+                      <a href="" data-clear="notification">
+                        <i class="zmdi zmdi-check-all"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="lv-body stop-propagate placeholder-work-in-progress">
+                  <div class="lv-item" >
+                  </div>
+                </div>
+                <a ng-show="linshareModeProduction == false" class="lv-footer" ui-sref="documents.upload"
+                   href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="dropdown" href=""><i class="tm-icon zmdi zmdi-account zmdi-hc-2x"></i></a>
             <ul class="dropdown-menu dm-icon pull-right">
-
               <li>
                 <a href="">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</a>
               </li>
@@ -119,7 +184,6 @@
         </ul>
     </li>
 </ul>
-
 <!-- Top Search Content -->
 <div id="top-search-wrap">
     <input type="text">
