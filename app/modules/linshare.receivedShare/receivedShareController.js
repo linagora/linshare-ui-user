@@ -3,7 +3,6 @@ angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope,  $filter, $window, $translatePartialLoader, ngTableParams, LinshareReceivedShareService,
              LinshareShareService, LinshareDocumentService, files, $translate, growlService, $log){
-      $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;
@@ -18,6 +17,7 @@ angular.module('linshare.receivedShare')
         mail: '',
         lastName: ''
       };
+      $scope.selectedDocuments = [];
       $scope.filters.selectedContact = initDestinataireObject;
       $scope.selectedRecipient = {};
       var checkdatasIsSelecteds = function() {
@@ -94,47 +94,17 @@ angular.module('linshare.receivedShare')
       $scope.download = function() {
         angular.forEach($scope.showActions, function(file, key) {
           LinshareReceivedShareService.download(file.uuid).then(function(data) {
-            var url;
-            var contentType = file.type;
-            var blob = new Blob([data], {type: contentType});
-            var urlCreator = window.URL || window.webkitURL || window.mozURL || window.msURL;
-            //  creation of a Blob object using the BlobBuilder Api
-             // https://msdn.microsoft.com/fr-fr/library/hh779016(v=vs.85).aspx
-            if (navigator.msSaveBlob) {
-              navigator.msSaveBlob(blob, file.name);
-            }
-            else if (urlCreator) {
-              // create tag element a to simulate a download by click
-              var link = document.createElement('a');
-
-              // if the attribute download isset in the tag a
-              if ('download' in link) {
-                // Prepare a blob URL
-                url = urlCreator.createObjectURL(blob);
-
-                // Set the attribute to the tag element a
-                link.setAttribute('href', url);
-                link.setAttribute('download', file.name);
-
-                // Simulate clicking the download link
-                var event = document.createEvent('MouseEvents');
-                event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-                link.dispatchEvent(event);
-              }
-              else {
-                // Prepare a blob URL
-                // Use application/octet-stream when using window.location to force download
-                blob = new Blob([data], { type: octetStreamMime });
-                url = urlCreator.createObjectURL(blob);
-                $window.location = url;
-              }
-            }
+            $scope.downloadFileFromResponse(file.name, file.type, data);
           });
         });
       };
 
-      $scope.multipleSelection = true;
-      $scope.selectedDocuments = [];//basket
+      $scope.downloadCurrentFile = function(currentFile) {
+        LinshareReceivedShareService.download(currentFile.uuid).then(function(downloadedFile) {
+            $scope.downloadFileFromResponse(currentFile.name, currentFile.type, downloadedFile);
+          });
+      };
+
       $scope.currentSelectedDocument = {current: ''};
       $scope.flagsOnSelectedPages = {};
       $scope.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
@@ -170,18 +140,10 @@ angular.module('linshare.receivedShare')
           angular.element('.card').css('width', '100%');
         }
       });
-      $scope.loadSidebarContent = function(content) {
-        $scope.sidebarData = content || 'share';
-      };
-
-      $scope.onShare = function() {
-        $('#focusInputShare').focus();
-        $scope.loadSidebarContent();
-      };
 
       $scope.showCurrentFile = function(currentFile) {
         $scope.currentSelectedDocument.current = currentFile;
-        $scope.sidebarData = 'details';
+        $scope.sidebarRightDataType = 'details';
         if(currentFile.shared > 0) {
           LinshareDocumentService.getFileInfo(currentFile.uuid).then(function(data) {
             $scope.currentSelectedDocument.current.shares = data.shares;
@@ -194,32 +156,6 @@ angular.module('linshare.receivedShare')
         }
         $scope.mactrl.sidebarToggle.right = true;
       };
-
-
-      //$scope.remove = function() {
-      //  swal({
-      //    title: 'Are you sure?',
-      //    text: 'You will not be able to recover this imaginary file!',
-      //    type: 'warning',
-      //    showCancelButton: true,
-      //    confirmButtonColor: '#DD6B55',
-      //    confirmButtonText: 'Yes, delete it!',
-      //    closeOnConfirm: false
-      //  }, function(){
-      //    angular.forEach($scope.showActions, function(file, key) {
-      //      LinshareReceivedShareService.delete(file.uuid).then(function(){
-      //        angular.forEach(receivedFiles, function(f, k) {
-      //          if (f.uuid === file.uuid) {
-      //            receivedFiles.splice(k, 1);
-      //            $scope.showActions.splice(key, 1);
-      //            $scope.tableParams.reload();
-      //          }
-      //        });
-      //      });
-      //    });
-      //    swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
-      //  });
-      //};
 
       var swalTitle, swalText, swalConfirm, swalCancel;
       $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',

@@ -42,6 +42,7 @@ angular.module('linshareUiUserApp')
 
       .state('documents', {
         parent: 'common',
+        controller: 'DocumentsController',
         url: '/files',
         template:'<div ui-view></div>'
       })

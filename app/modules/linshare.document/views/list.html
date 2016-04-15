@@ -97,9 +97,9 @@
           <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())">
             <a class="selectAllItems plainTxtBtn">
               <i ng-show="flagsOnSelectedPages[tableParams.page()]" class="fa fa-square-o"></i>
-              <span ng-show="flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate}}</span>
-              <i ng-show="!flagsOnSelectedPages[tableParams.page()]" class="fa fa-check-square-o"></i>
-              <span ng-show="!flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.SELECT_ALL" | translate}}</span>
+              <span ng-if="flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate}}</span>
+              <i ng-if="!flagsOnSelectedPages[tableParams.page()]" class="fa fa-check-square-o"></i>
+              <span ng-if="!flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.SELECT_ALL" | translate}}</span>
             </a>
           </span>
           <span>
