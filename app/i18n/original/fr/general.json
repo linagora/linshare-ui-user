@@ -59,7 +59,14 @@
   "LOGIN": {
     "EMAIL_PLACEHOLDER": "Courriel",
     "PASSWORD_PLACEHOLDER": "Mot de passe",
-    "KEEP_SIGNED": "Rester connecté"
+    "KEEP_SIGNED": "Rester connecté",
+    "LOGIN_HEADER": "Connexion",
+    "FORGOTTEN_PASSWORD": "Mot de passe oublié ?",
+    "CONNECTION_LINK": "Se connecter",
+    "TAGLINE": "Partage de fichiers sécurisé en open source",
+    "COPYRIGHT": "Vous utilisez la version libre et gratuite de LinShare™, développé par , Linagora © 2009–2016.Contribuez à la R&D du produit en souscrivant à une offre entreprise."
+
+
   },
   "HEADER": {
     "SETTINGS": "Paramètres",

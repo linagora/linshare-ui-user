@@ -1,51 +1,69 @@
-<!-- Login -->
-<div data-ng-controller="AuthenticationController" ls-login-form-display class="lc-block toggled" id="l-login">
-  <form class="form-horizontal" ng-submit="submitLoginForm()" role="form">
-
-    <div class="form-group">
-      <label class="sr-only" for="inputEmail"></label>
-      <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="zmdi zmdi-male zmdi-hc-2x"></i></span>
-        <div class="fg-line">
-          <input type="email"
-                 class="form-control"
-                 name="Email"
-                 id="inputEmail"
-                 placeholder="{{'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
-                 ng-model="input.email" required />
+<div id="login-page">
+  <div id="bg">
+    <img src="images/login-bg.jpg" alt="">
+  </div>
+  <div id="copyright-login">
+    <img src="images/common/linshare-logo-white.png" alt="">
+    <p>{{'LOGIN.COPYRIGHT' | translate }}</p>
+  </div>
+  <div class="quota login-libreNfreeCtn">
+    <div class="libre-and-free">
+      <img src="images/community-white.png" alt="Logo LinShare">
+      <p>Libre &amp; Free</p>
+    </div>
+  </div>
+  <div class="login-content">
+    <div data-ng-controller="AuthenticationController" ls-login-form-display class="parent-login-form-alignment" id="l-login">
+      <div class="logo-title">
+        <img src="images/ls-logo-big.png" alt="">
+        <p>{{'LOGIN.TAGLINE' | translate }}</p>
+      </div>
+      <div class="lc-block toggled child-centered-login-form" >
+        <div class="inner-content-form-ctn">
+          <div class="header-login-form">
+            <h1>{{'LOGIN.LOGIN_HEADER' | translate }}</h1>
+          </div>
+          <form class="form-horizontal" ng-submit="submitLoginForm()" role="form">
+            <div class="form-group">
+              <label class="sr-only" for="inputEmail"></label>
+              <div class="input-group m-b-30">
+                <div class="fg-line">
+                  <input type="email"
+                         class="form-control"
+                         name="Email"
+                         id="inputEmail"
+                         placeholder="{{'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
+                         ng-model="input.email" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="inputPassword"></label>
+              <div class="input-group m-b-30">
+                <div class="fg-line">
+                  <input type="password"
+                         class="form-control"
+                         name="Password"
+                         id="inputPassword"
+                         placeholder="{{'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+                         ng-model="input.password" required />
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="checkbox pull-left">
+              <label>
+                <input type="checkbox" value="">
+                <i class="input-helper"></i>
+                {{'LOGIN.KEEP_SIGNED' | translate }}
+              </label>
+            </div>
+            <a class="pull-right">{{'LOGIN.FORGOTTEN_PASSWORD' | translate }}</a>
+            <div class="clearfix"></div>
+            <button class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate }}</button>
+          </form>
         </div>
       </div>
     </div>
-
-
-    <div class="form-group">
-      <label class="sr-only" for="inputPassword"></label>
-      <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="zmdi zmdi-key zmdi-hc-2x"></i></span>
-        <div class="fg-line">
-          <input type="password"
-                 class="form-control"
-                 name="Password"
-                 id="inputPassword"
-                 placeholder="{{'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
-                 ng-model="input.password" required />
-        </div>
-      </div>
-    </div>
-
-
-    <div class="form-group">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">
-          <i class="input-helper"></i>{{'LOGIN.KEEP_SIGNED' | translate }}
-        </label>
-      </div>
-
-      <button type="submit" class="btn btn-login btn-danger btn-float">
-        <i class="zmdi zmdi-arrow-right"></i>
-      </button>
-
-    </div>
-  </form>
+  </div>
 </div>

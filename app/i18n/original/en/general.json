@@ -59,7 +59,12 @@
   "LOGIN": {
     "EMAIL_PLACEHOLDER": "Email",
     "PASSWORD_PLACEHOLDER": "Password",
-    "KEEP_SIGNED": "Keep me signed in"
+    "KEEP_SIGNED": "Keep me signed in",
+    "LOGIN_HEADER": "Connection",
+    "FORGOTTEN_PASSWORD": "Forgot password ?",
+    "CONNECTION_LINK": "Log in",
+    "TAGLINE": "Secure file sharing app in open source",
+    "COPYRIGHT":"You are using the Open Source and free version of LinShare™, powered by Linagora © 2009–2016. Contribute to LinShare R&D by subscribing to an Enterprise offer."
   },
   "HEADER": {
     "SETTINGS": "My settings",
