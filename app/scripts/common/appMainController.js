@@ -222,6 +222,8 @@ angular.module('linshareUiUserApp')
       $scope.$broadcast('linshare-upload-complete');
     };
 
+    $rootScope.alphahide = true;
+
     /**
      * This is the initial array of shares.
      * It will contain all the shares

@@ -61,13 +61,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $scope.multipleSelection = true;
       $scope.sidebarRightDataType = 'details';
 
-      $scope.resetSelectedDocuments = function() {
-        angular.forEach($scope.selectedDocuments, function(selectedDoc) {
-          selectedDoc.isSelected = false;
-        });
-        $scope.selectedDocuments = [];
-      };
-
       $scope.downloadFileFromResponse = function(fileName, fileType, fileStream) {
         var blob = new Blob([fileStream], {type: fileType});
         var windowUrl = window.URL || window.webkitURL || window.mozURL || window.msURL;
@@ -165,6 +158,13 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       if (index > -1) {
         collection.splice(index, 1);
       }
+    };
+
+    $scope.resetSelectedDocuments = function() {
+      angular.forEach($scope.selectedDocuments, function(selectedDoc) {
+        selectedDoc.isSelected = false;
+      });
+      $scope.selectedDocuments = [];
     };
 
     var swalTitle, swalText, swalConfirm, swalCancel;
@@ -334,8 +334,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
   })
 
-  .controller('LinshareUploadViewController', function($scope, $translatePartialLoader) {
-    $translatePartialLoader.addPart('filesList');
+  .controller('LinshareUploadViewController', function($scope, $rootScope, growlService) {
     $scope.selectedUploadedFiles = [];
 
     // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
@@ -357,6 +356,14 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     $scope.currentSelectedDocument = {};
 
+    $scope.shareSelectedUpload = function(selectedUpload) {
+      if(selectedUpload.length === 0) {
+        growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
+        return;
+      }
+      $rootScope.$state.go('documents.files.selected', {'selected': selectedUpload});
+    };
+
   })
 
   .directive('eventPropagationStop', function() {
@@ -365,7 +372,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         elm.bind('click', function(event) {
           var hasInfoClass = elm.parent().parent().parent().parent().hasClass('highlightListElem');
           if (!attrs.eventPropagationStop || hasInfoClass) {
-            event.preventDefault();
             event.stopPropagation();
           }
         });

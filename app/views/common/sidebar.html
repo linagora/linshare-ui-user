@@ -31,7 +31,7 @@
   </div>
   <div class="c-overflow" id="navigation" ng-style="sizeNavigation">
     <ul class="main-menu" ng-repeat="tab in tabs">
-      <li ng-if="tab.link"
+      <li ng-if="tab.link" ng-show="tab.disabled == false"
           data-ng-class="{ 'active simple-menu': currentState.name==tab.name}">
         <a data-ui-sref="{{tab.link}}"
            data-ng-class="{'disabled': tab.disabled }">
@@ -39,8 +39,7 @@
         </a>
       </li>
       <li ng-show="tab.disabled == false" class="sub-menu" ng-if="tab.links"
-          data-ng-class="{ 'active toggled': currentState.name==tab.name ||
-           (currentState.name=='MENU_TITLE.HOME' && tab.name=='MENU_TITLE.FILES') }">
+          data-ng-class="{ 'active toggled': currentState.name==tab.name}">
         <a toggle-submenu>
           <i class="{{tab.icon}}" ></i> {{ tab.name | translate }}
         </a>

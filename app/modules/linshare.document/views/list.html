@@ -16,46 +16,6 @@
           </button>
         </div>
         <div id="action-header">
-          <div class="actions-ctn">
-            <ul class="actions">
-              <li class="dropdown" dropdown>
-                <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle>
-                  <i class="zmdi zmdi-more-vert"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-
-                  <li>
-                    <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.REFRESH' |
-                      translate}}</a>
-                  </li>
-                  <li>
-                    <a href="" title="{{'ACTION.REFRESH' | translate}}" ng-click="reload()">{{'ACTION.UPLOAD' |
-                      translate}}</a>
-                  </li>
-                  <li ng-hide="selectedDocuments.length == 0">
-                    <a href="" ng-show="linshareModeProduction == false" ng-click="">{{'ACTION.COPY_IN_GROUP' |
-                      translate}}</a>
-                  </li>
-                  <li ng-hide="selectedDocuments.length == 0">
-                    <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.SHARE' |
-                      translate}}</a>
-                  </li>
-                  <li>
-                    <a href="" ng-click="onShare(); mactrl.sidebarToggle.right = true;">{{'ACTION.ADVANCED_SHARING' |
-                      translate}}</a>
-                  </li>
-                  <li ng-hide="selectedDocuments.length == 0">
-                    <a href="" ng-click="deleteDocuments(selectedDocuments)">{{'ACTION.DELETE' | translate}}</a>
-                  </li>
-                  <li ng-hide="selectedDocuments.length == 0">
-                    <a href="" ng-click="downloadSelectedFiles(selectedDocuments)">{{'ACTION.DOWNLOAD' |
-                      translate}}</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
           <div class="input-group search-bar">
             <div class="fg-line">
               <input type="text" class="form-control"
@@ -95,11 +55,13 @@
         </div>
         <div id="toolbar-actions">
           <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())">
-            <a class="selectAllItems plainTxtBtn">
-              <i ng-show="flagsOnSelectedPages[tableParams.page()]" class="fa fa-square-o"></i>
-              <span ng-if="flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate}}</span>
-              <i ng-if="!flagsOnSelectedPages[tableParams.page()]" class="fa fa-check-square-o"></i>
-              <span ng-if="!flagsOnSelectedPages[tableParams.page()]">{{"SELECTION_TOOLBAR.SELECT_ALL" | translate}}</span>
+            <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
+              <i class="fa fa-check-square-o"></i>
+              <span>{{"SELECTION_TOOLBAR.SELECT_ALL" | translate}}</span>
+            </a>
+            <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
+              <i class="fa fa-square-o"></i>
+              <span>{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate}}</span>
             </a>
           </span>
           <span>
@@ -175,8 +137,8 @@
                     </a>
                   </li>
                   <li>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop
-                       ng-click="downloadCurrentFile(documentFile)">
+                    <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                       title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
                       <i class="zmdi zmdi-download"></i>
                     </a>
                   </li>
@@ -199,7 +161,7 @@
                         <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
                       </li>
                       <li>
-                        <a href="" ng-click="downloadCurrentFile(documentFile)" event-propagation-stop>
+                        <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download" event-propagation-stop>
                           {{'ACTION.DOWNLOAD' | translate}}</a>
                       </li>
                     </ul>

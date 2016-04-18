@@ -119,8 +119,9 @@
   "SELECTION_TOOLBAR": {
     "SELECTED_FILES": "fichier(s) sélectionné(s)",
     "SELECT_ALL": "Tout sélectionner",
-    "DESELECT_ALL": "Tout désélectionner",
+    "DESELECT_ALL": "Désélectionner",
     "SHARE": "Partager",
+    "COPY": "Copier",
     "DELETE": "Supprimer"
   },
   "COMPONENTS": {

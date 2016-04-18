@@ -78,13 +78,13 @@ angular.module('linshare.receivedShare')
         $scope.tableParams.reload();
         checkdatasIsSelecteds();
       };
-      $scope.copy = function() {
-        angular.forEach($scope.showActions, function(file, key) {
+      $scope.copyIntoFiles = function(selectedDocuments) {
+        angular.forEach(selectedDocuments, function(file, key) {
           LinshareReceivedShareService.copy(file.uuid).then(function(data) {
             angular.forEach(receivedFiles, function(f, k) {
               if (f.uuid === file.uuid) {
                 receivedFiles.splice(k, 1);
-                $scope.showActions.splice(key, 1);
+                selectedDocuments.splice(key, 1);
                 $scope.tableParams.reload();
               }
             });
@@ -103,6 +103,13 @@ angular.module('linshare.receivedShare')
         LinshareReceivedShareService.download(currentFile.uuid).then(function(downloadedFile) {
             $scope.downloadFileFromResponse(currentFile.name, currentFile.type, downloadedFile);
           });
+      };
+
+      $scope.resetSelectedDocuments = function() {
+        angular.forEach($scope.selectedDocuments, function(selectedDoc) {
+          selectedDoc.isSelected = false;
+        });
+        $scope.selectedDocuments = [];
       };
 
       $scope.currentSelectedDocument = {current: ''};

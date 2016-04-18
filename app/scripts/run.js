@@ -94,6 +94,7 @@ angular.module('linshareUiUserApp')
     Restangular.setBaseUrl(lsAppConfig.backendUrl);
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+    $rootScope.linshareBaseUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
     $rootScope.linshareModeProduction = lsAppConfig.production;
   })
 

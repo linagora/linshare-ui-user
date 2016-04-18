@@ -115,6 +115,7 @@
     "SELECT_ALL": "Select all",
     "DESELECT_ALL": "Deselect all",
     "SHARE": "Share",
+    "COPY": "Copy",
     "DELETE": "Delete"
   },
   "COMPONENTS": {

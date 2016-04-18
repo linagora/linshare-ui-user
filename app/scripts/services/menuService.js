@@ -28,16 +28,17 @@ angular.module('linshareUiUserApp')
           }, {
             name: 'MENU_TITLE.SHARES',
             link: 'documents.shared',
-            disabled: lsAppConfig.production
+            disabled: true
           }
         ]
       };
+
     var groups = {
       name: 'MENU_TITLE.GROUPS',
       link: 'documents.threads',
       icon: 'zmdi zmdi-accounts-alt',
       color: '#05B1FF',
-      disabled: lsAppConfig.production
+      disabled: true
     };
 
       var administrations = {
