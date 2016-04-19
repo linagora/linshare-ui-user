@@ -1,6 +1,6 @@
 {
   "name": "linshare-ui-user",
-  "version": "0.1.0",
+  "version": "0.1.1-SNAPSHOT",
   "dependencies": {
     "angular": "^1.4.8",
     "bootstrap": "3.3.2",
