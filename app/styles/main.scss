@@ -1,6 +1,10 @@
 @import "fonts.scss";
 @import "colors.scss";
 
+.custumListBody {
+  padding: 0 !important;
+}
+
 #login-page {
   .quota.login-libreNfreeCtn {
     border: none;
@@ -336,7 +340,6 @@ background-color: $secondaryClr;
   padding: 5px 0;
   .chat-search {
     padding:0;
-    padding-left:20px;
   }
 }
 #recipientsCtnSidebar {
@@ -358,10 +361,10 @@ background-color: $secondaryClr;
   position: relative;
   .custumListItem {
     .circleCtn{
-      min-width: 17%;
+      min-width: 26px;
     }
     .nameRecipientsCtn {
-      width: 83%;
+      width: 112px;
     }
   }
   .more-options {
@@ -1159,7 +1162,7 @@ background-color: #fff;
     }
   }
   .custumListBody {
-    padding: 0;
+    padding: 0 ;
   }
   .custumHeaderList {
     border-bottom: solid 1px #ddd;
@@ -1212,24 +1215,34 @@ background-color: #fff;
 .custumListItem {
   padding: 0;
   margin: 0;
-  width: 50%;
+  width: 139px;
   float: left;
   overflow: hidden;
   background-color: #ECECEC;
-  height: 30px;
+  height: 26px;
   border-radius: 25px;
   float: left;
-  margin-right: 20px;
+
   margin-bottom: 1em;
   .inner-text-li {
+    font-size: 0.91em;
     padding: 5px 8px 0 7px;
+    width: 87px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
   .close-list-icone-btn {
-    padding-top: 5px;
+
+    padding-top: 3px;
     padding-left: 4px;
     padding-right: 12px;
     font-size: 1.2em;
+    width:25px;
   }
+}
+.custumListItem:nth-child(odd) {
+  margin-right: 17px;
 }
 .custumHeaderList {
   position: relative;
@@ -1247,14 +1260,13 @@ background-color: #fff;
   padding: 3px;
   font-size: 0.9em;
   color: #fff;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
 }
-.fabSpeedDialdemoBasicUsage .md-fab:hover,
-.fabSpeedDialdemoBasicUsage .md-fab.md-focused {} .fabSpeedDialdemoBasicUsage .zmdi-plus {
-                                                    font-size: 2em;
-                                                    vertical-align: middle;
-                                                  }
+.fabSpeedDialdemoBasicUsage .zmdi-plus {
+    font-size: 2em;
+ vertical-align: middle;
+ }
 .fabSpeedDialdemoBasicUsage .md-button.md-red.md-fab {
   color: #515151;
   background-color: #EBEBEB;
@@ -2104,6 +2116,7 @@ html:not(.ie9) .formsearch .select::before {
 
 #wip-ctn-page {
   position: relative;
+  overflow: hidden;
   #wip-page {
     position: absolute;
     display: block;
@@ -2121,6 +2134,15 @@ html:not(.ie9) .formsearch .select::before {
         font-size: 5em;
         text-transform: uppercase;
         font-weight: 100;
+      }
+      .wip-content-ctn {
+        position: relative;
+        p{
+          color:$primaryClr;
+          margin-top:-10%;
+          font-size: 1.9em;
+          text-transform: uppercase;
+        }
       }
     }
   }

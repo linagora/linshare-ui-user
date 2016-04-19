@@ -138,5 +138,9 @@
     "SHARE_NUMBER": "Share",
     "UPLOADS": "Uploads",
     "BEFORE_SENDINGS": "before sending"
+  },
+  "WORK_IN_PROGRESS": {
+  "WORK_IN_PROGRESS_INFO": "This page is currently unavailable",
+  "WORK_IN_PROGRESS_MSG": "CURRENTLY UNDER CONSTRUCTION"
   }
 }

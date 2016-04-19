@@ -146,6 +146,10 @@
     "SHARE_NUMBER": "Partage",
     "UPLOADS": "Dépôt",
     "BEFORE_SENDINGS": "avant l'envoi"
+  },
+  "WORK_IN_PROGRESS": {
+    "WORK_IN_PROGRESS_INFO": "Cette section est actuellement indisponible",
+    "WORK_IN_PROGRESS_MSG": "EN COURS DE CONSTRUCTION"
   }
 }
 
