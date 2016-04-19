@@ -121,6 +121,14 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.selectedDocuments = [];
     $scope.flagsOnSelectedPages = {};
 
+    $scope.loadSidebarContent = function(content) {
+      $scope.sidebarRightDataType = content || 'share';
+    };
+    $scope.onShare = function() {
+      $('#focusInputShare').focus();
+      $scope.loadSidebarContent();
+    };
+
     $scope.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
       var currentPage = page || $scope.tableParams.page();
       var dataOnPage = data || $scope.tableParams.data;
