@@ -2,6 +2,36 @@
   <div id="bg">
     <img src="images/login-bg.jpg" alt="">
   </div>
+  <div id="language-dropdown">
+    <div class="dropdown-ctn">
+      <div dropdown is-open="status.isopen">
+        <button id="single-button" type="button" class="btn btn-custum-transparent"
+                dropdown-toggle ng-disabled="disabled">
+          <img src="images/flags/fr.png" alt="français"/><span class="disp-language">FR</span><i class="zmdi zmdi-chevron-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right flag-list-ctn" role="menu" aria-labelledby="single-button">
+          <li role="menuitem" >
+            <a href="">
+              <img src="images/flags/fr.png" alt="France"/>
+              <span class="lang-short">FR</span><span class="lang-label">France</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="">
+              <img src="images/flags/us.png " alt="United States"/>
+              <span class="lang-short">US</span><span class="lang-label">United States</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="">
+              <img src="images/flags/es.png" alt="Español"/>
+              <span class="lang-short">ES</span><span class="lang-label">Español</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div id="copyright-login">
     <img src="images/common/linshare-logo-white.png" alt="">
     <p>{{'LOGIN.COPYRIGHT' | translate }}</p>
