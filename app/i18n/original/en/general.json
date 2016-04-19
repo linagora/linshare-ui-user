@@ -73,6 +73,7 @@
     "CLEAR_LOCAL_STORAGE": "Clear Local Storage",
     "UPLOAD_PROGRESS": {
       "TITLE": "Upload progress",
+      "UPLOAD_DONE": "done",
       "FOOTER": "View all"
     }
   },

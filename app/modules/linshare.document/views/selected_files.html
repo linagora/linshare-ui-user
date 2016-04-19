@@ -11,7 +11,7 @@
             {{"SELECTED_FILES.BREADCRUMB_TITLE" | translate }}
           </a>
         </div>
-        <div class="navBarBtn">
+        <div ng-show="devMode" class="navBarBtn">
           <button class="btn btn-default waves-effect blueBtn pull-right" ng-click="$state.go('documents.files')">
             {{ "SELECTED_FILES.BACK_TO_ALL_FILES" | translate }}
           </button>

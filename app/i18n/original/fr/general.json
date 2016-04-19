@@ -75,6 +75,7 @@
     "CLEAR_LOCAL_STORAGE": "Purger le stockage local",
     "UPLOAD_PROGRESS": {
       "TITLE": "Progression de dépôt",
+      "UPLOAD_DONE": "terminé",
       "FOOTER": "Voir tout"
     }
   },

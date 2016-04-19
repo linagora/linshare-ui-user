@@ -8,5 +8,6 @@ angular.module('linshareUiUserApp')
     date_fr_format: 'dd/MM/yyyy',
     date_en_format : 'MM/dd/yyyy',
     simultaneous_upload: 1,
+    devMode: true,
     production: false
 });

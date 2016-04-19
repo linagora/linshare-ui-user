@@ -10,7 +10,7 @@ angular.module('linshareUiUserApp')
 
     // By default Sidbars are hidden in boxed layout and in wide layout only the right sidebar is hidden.
     this.sidebarToggle = {
-      left: false,
+      left: true,
       right: false
     };
 
@@ -182,7 +182,6 @@ angular.module('linshareUiUserApp')
 
     localStorage.setItem('ma-layout-status', 0);
 
-    $scope.mactrl.sidebarToggle.left = false;
     if($window.localStorage.getItem('sidebarToggleLeft') === 'true') {
       $scope.mactrl.sidebarToggle.left = true;
     }
@@ -221,8 +220,6 @@ angular.module('linshareUiUserApp')
     $scope.reloadFiles = function() {
       $scope.$broadcast('linshare-upload-complete');
     };
-
-    $rootScope.alphahide = true;
 
     /**
      * This is the initial array of shares.

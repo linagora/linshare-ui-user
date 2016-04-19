@@ -17,51 +17,51 @@
   <form class="advancedSharingSettings">
     <div class="form-group col-xs-12 addNote">
       <legend>{{ "RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate }} :</legend>
-      <textarea class="form-control comment" ng-model="share_array[1].sharingNote" rows="5"
+      <textarea class="form-control comment" ng-model="newShare.sharingNote" rows="5"
                 placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE_PLACEHOLDER' | translate }}">
       </textarea>
     </div>
 
-    <div ng-show="share_array[1].secured.enable" class="col-xs-12  fieldCtn">
+    <div ng-show="newShare.secured.enable" class="col-xs-12  fieldCtn">
       <div class="fg-line">
         <div class="form-inline">
           <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="secureSharing" ng-checked="true"
-                   ng-disabled="!share_array[1].secured.userCanOverride"
-                   ng-model="share_array[1].secured.value"/>
+                   ng-disabled="!newShare.secured.userCanOverride"
+                   ng-model="newShare.secured.value"/>
             <i class="input-helper"></i>
           </label>
         </div>
       </div>
     </div>
-    <div ng-show="share_array[1].creationAcknowledgement.enable" class="col-xs-12 fieldCtn">
+    <div ng-show="newShare.creationAcknowledgement.enable" class="col-xs-12 fieldCtn">
       <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
         <div class="form-inline">
           <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="SharingNotification"
-                   ng-disabled="!share_array[1].creationAcknowledgement.userCanOverride"
-                   ng-model="share_array[1].creationAcknowledgement.value"/>
+                   ng-disabled="!newShare.creationAcknowledgement.userCanOverride"
+                   ng-model="newShare.creationAcknowledgement.value"/>
             <i class="input-helper"></i>
           </label>
         </div>
       </div>
     </div>
-    <div ng-show="share_array[1].enableUSDA.enable" class="col-xs-12 fieldCtn">
+    <div ng-show="newShare.enableUSDA.enable" class="col-xs-12 fieldCtn">
       <div class="fg-line">
         <div class="form-inline">
           <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="nonDownloadedNotification" ng-checked="true"
-                   ng-disabled="!share_array[1].enableUSDA.userCanOverride"
-                   ng-model="share_array[1].enableUSDA.value"/>
+                   ng-disabled="!newShare.enableUSDA.userCanOverride"
+                   ng-model="newShare.enableUSDA.value"/>
             <i class="input-helper"></i>
           </label>
         </div>
       </div>
     </div>
-    <div ng-show="share_array[1].enableUSDA.value" class="col-xs-12 fieldCtn" id="dateField">
+    <div ng-show="newShare.enableUSDA.value" class="col-xs-12 fieldCtn" id="dateField">
       <label for="comment" class="labelDateExpiration">
         {{ "RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate }}:
       </label>
@@ -73,9 +73,9 @@
                    class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
                    is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
                    ng-required="true" close-text="Close"
-                   placeholder="{{share_array[1].notificationDateForUSDA.value | date: 'medium'}}"
-                   ng-disabled="!share_array[1].notificationDateForUSDA.userCanOverride"
-                   ng-model="share_array[1].notificationDateForUSDA.value"/>
+                   placeholder="{{newShare.notificationDateForUSDA.value | date: 'medium'}}"
+                   ng-disabled="!newShare.notificationDateForUSDA.userCanOverride"
+                   ng-model="newShare.notificationDateForUSDA.value"/>
           </div>
         </div>
       </div>
@@ -95,12 +95,12 @@
         <div class="cssSlideUp col-xs-12 " ng-hide="!boo">
           <div class="form-group clearfix fg-line col-xs-12">
             <input type="text" class="form-control input-sm"
-                   ng-model="share_array[1].subject"
+                   ng-model="newShare.subject"
                    placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate }}">
           </div>
           <textarea class="form-control comment" rows="5"
                     placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate }}"
-                    ng-model="share_array[1].message">
+                    ng-model="newShare.message">
           </textarea>
         </div>
         <md-divider class="col-xs-12 mailDivider" md-inset=""></md-divider>
@@ -114,7 +114,7 @@
   <button class="btn btn-default col-xs-6" ng-click="mactrl.sidebarToggle.right = false; closeDropdown($event)">
     {{ "NAVIGATION.CANCEL" | translate }}
   </button>
-  <button class="btn btn-primary col-xs-6" ng-click="submitShare(share_array[1])">
+  <button class="btn btn-primary col-xs-6" ng-click="submitShare(newShare)">
     {{ "NAVIGATION.SHARE" | translate }}
   </button>
 </div>

@@ -204,6 +204,27 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         }
       };
 
+      this.resetForm = function() {
+        recipients = [];
+        documents = [];
+        mailingListUuid = [];
+        self.secured = secured;
+        self.creationAcknowledgement = creationAcknowledgement;
+
+        self.expirationDate = expirationDate;
+        self.enableUSDA = enableUSDA;
+        self.notificationDateForUSDA = notificationDateForUSDA;
+
+        self.sharingNote = '';
+        self.subject = '';
+        self.message = '';
+
+        self.asyncShare = false;
+        self.setAsyncShare = function(state) {
+          self.asyncShare = state;
+        };
+      };
+
       this.getRecipients = function() {
         return recipients;
       };
@@ -248,10 +269,10 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
   .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService,
                                                         $translate, ShareObjectService) {
 
-    $scope.share = new ShareObjectService();
-    //share.id = $scope.share_array.length + 1;
+    $scope.newShare = new ShareObjectService();
 
     $scope.selectedContact = {};
+
     $scope.submitShare = function(shareCreationDto) {
       if($scope.selectedDocuments.length === 0 ) {
         growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
@@ -261,20 +282,17 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT', 'warning');
         return;
       }
-      //angular.forEach($scope.selectedDocuments, function(doc) {
-      //  shareCreationDto.documents.push(doc.uuid);
-      //});
-      $scope.share_array[1].addDocuments($scope.selectedDocuments);
-      //if ($scope.selectedContact.length > 0) {
-      //  shareCreationDto.recipients.push({mail: $scope.selectedContact});
-      //}
-      LinshareShareService.shareDocuments($scope.share_array[1].getFormObj()).then(function() {
+
+      $scope.newShare.addDocuments($scope.selectedDocuments);
+
+      LinshareShareService.shareDocuments($scope.newShare.getFormObj()).then(function() {
         growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
-        angular.element('tr').removeClass('info');
-        $scope.share_array[1] = {};
-        $scope.initSelectedDocuments();
+        angular.element('tr').removeClass('highlightListElem');
+        $scope.share_array.push(angular.copy($scope.newShare.getFormObj()));
+        $scope.newShare.resetForm();
+        $scope.resetSelectedDocuments();
       });
     };
     $scope.submitQuickShare = function(shareCreationDto) {
@@ -289,7 +307,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
         angular.element('tr').removeClass('highlightListElem');
-        $scope.initSelectedDocuments();
+        $scope.resetSelectedDocuments();
       });
     };
 

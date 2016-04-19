@@ -272,7 +272,7 @@ angular.module('linshare.receivedShare')
 
       $scope.tableParams = new ngTableParams({
         page: 1,
-        count: 25,
+        count: 10,
         filter: $scope.paramFilter
       }, {
         getData: function($defer, params){

@@ -16,7 +16,7 @@
         {{ linkActive.name | translate }}
     </li>
     <li class="logo hidden-xs pull-left">
-        <a href="/#/">
+        <a href="" ui-sref="home">
             <img src="images/common/linshare-logo-white.png" alt="Logo LinShare" />
         </a>
     </li>
@@ -49,11 +49,16 @@
                                           <span>{{file.name}}</span>
                                         </div>
                                         <div class="p-0 secondary-info-ctn">
-                                          <span class="secondary-info-text">512Mb</span>
+                                          <span class="secondary-info-text">{{file.size | readableSize: false}}</span>
                                         </div>
                                       </div>
-                                        <p class="time-remaining">30min</p>
-                                      <div class="progress">
+                                        <p ng-hide="file.isComplete()" class="time-remaining">
+                                          {{file.timeRemaining() | remainingTime}}
+                                        </p>
+                                        <p ng-show="file.isComplete()" class="time-remaining">
+                                          {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
+                                        </p>
+                                      <div class="progress">)
                                         <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
                                              aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
                                           <span class="sr-only">100% Complete (success)</span>
@@ -81,55 +86,56 @@
                                     </div>
                                   </div>
                                  </md-content>
-                              <a ng-show="linshareModeProduction == false" class="lv-footer" ui-sref="documents.upload"
-                              href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
+                              <a ng-show="linshareModeProduction == false" class="lv-footer"
+                                 ui-sref="documents.upload"
+                                 href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
                             </md-tab>
                             <md-tab label="{{'TRANSFERS_DROPDOWN.SHARE' | translate}}">
                               <md-content class="md-padding">
-                                <div class="lv-item row" x-ng-repeat="file in $flow.files">
+                                <div class="lv-item row" x-ng-repeat="share in share_array">
                                   <div class="col-xs-10 p-0">
                                     <div class="lv-title p-0">
                                       <div  class="p-0 file-name">
-                                        <span> {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} 1</span>
+                                        <span> {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} {{$index + 1}}</span>
                                       </div>
                                       <div class="p-0 secondary-info-ctn">
                                         <span class="secondary-info-text">
-                                          <span class="files-count">3
+                                          <span class="files-count">{{share.documents.length}}
                                           <i class="fa fa-file-o"></i>
                                         </span>
-                                          <span class="recipients-count">8
+                                          <span class="recipients-count">{{share.recipients.length}}
                                             <i class="zmdi zmdi-account-o"></i>
                                           </span>
                                         </span>
                                       </div>
                                     </div>
-                                    <p class="time-remaining">30min {{'TRANSFERS_DROPDOWN.BEFORE_SENDINGS' | translate}}</p>
-                                    <div class="progress">
-                                      <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
-                                           aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
-                                        <span class="sr-only">100% Complete (success)</span>
-                                      </div>
-                                    </div>
+                                    <!--<p class="time-remaining">30min {{'TRANSFERS_DROPDOWN.BEFORE_SENDINGS' | translate}}</p>-->
+                                    <!--<div class="progress">-->
+                                      <!--<div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"-->
+                                           <!--aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">-->
+                                        <!--<span class="sr-only">100% Complete (success)</span>-->
+                                      <!--</div>-->
+                                    <!--</div>-->
                                   </div>
-                                  <div class="col-xs-2 p-0">
-                                    <ul class="lv-actions actions alignListIcons">
-                                      <li class="col-xs-4" x-ng-if="file.isUploading()">
-                                        <a href="" ng-click="file.cancel()">
-                                          <i class="zmdi zmdi-eye"></i>
-                                        </a>
-                                      </li>
-                                      <li class="col-xs-4" x-ng-if="file.isComplete() && !file.error">
-                                        <a href="" ng-click="file.cancel()">
-                                          <i class="zmdi zmdi zmdi-check"></i>
-                                        </a>
-                                      </li>
-                                      <li class="col-xs-4" x-ng-if="file.error">
-                                        <a href="" ng-click="file.retry()">
-                                          <i class="zmdi zmdi-replay"></i>
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
+                                  <!--<div class="col-xs-2 p-0">-->
+                                    <!--<ul class="lv-actions actions alignListIcons">-->
+                                      <!--<li class="col-xs-4" x-ng-if="file.isUploading()">-->
+                                        <!--<a href="" ng-click="file.cancel()">-->
+                                          <!--<i class="zmdi zmdi-eye"></i>-->
+                                        <!--</a>-->
+                                      <!--</li>-->
+                                      <!--<li class="col-xs-4" x-ng-if="file.isComplete() && !file.error">-->
+                                        <!--<a href="" ng-click="file.cancel()">-->
+                                          <!--<i class="zmdi zmdi zmdi-check"></i>-->
+                                        <!--</a>-->
+                                      <!--</li>-->
+                                      <!--<li class="col-xs-4" x-ng-if="file.error">-->
+                                        <!--<a href="" ng-click="file.retry()">-->
+                                          <!--<i class="zmdi zmdi-replay"></i>-->
+                                        <!--</a>-->
+                                      <!--</li>-->
+                                    <!--</ul>-->
+                                  <!--</div>-->
                                 </div>
                               </md-content>
                             </md-tab>
@@ -141,7 +147,7 @@
                 </div>
               </li>
           <li class="dropdown">
-            <a  ng-show="false" data-toggle="dropdown" href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
+            <a  ng-show="devMode" data-toggle="dropdown" href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
               <i class="tmn-counts">5</i>
             </a>
             <a data-toggle="dropdown" href=""><i class="tm-icon zmdi zmdi-notifications-none"></i></a>
@@ -160,7 +166,7 @@
                   <div class="lv-item" >
                   </div>
                 </div>
-                <a ng-show="false" class="lv-footer"
+                <a ng-show="devMode" class="lv-footer"
                    href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
               </div>
             </div>

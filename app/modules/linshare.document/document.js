@@ -281,7 +281,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.tableParams = new ngTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},
-      count: 20,
+      count: 10,
       filter: $scope.paramFilter
     }, {
       total: $scope.documentsList.length,

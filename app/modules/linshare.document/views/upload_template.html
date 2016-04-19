@@ -34,14 +34,14 @@
 
     <div id="selection-actions" class="showMultiMenu" ng-init="isAllSelected.status = false"
          data-ng-class="{'show': $flow.files.length > 0}">
-      <div ng-hide="alphahide" class="exitSelection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
+      <div ng-show="devMode" class="exitSelection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
         <i class="zmdi zmdi-close"></i>
       </div>
       <div class="displayNumSelectedItems">
         <span>{{selectedUploadedFiles.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate }}
       </div>
       <div id="toolbar-actions">
-       <span ng-hide="alphahide" ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
+       <span ng-show="devMode" ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
          <a ng-if="isAllSelected.status" class="selectAllItems plainTxtBtn">
            <i class="fa fa-square-o"></i>
            <span>{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate }}</span>
@@ -90,7 +90,12 @@
                     </div>
                     <div class="pull-left dataListCtn">
                       <div class="lv-title">{{file.name}}</div>
-                      <small class="lv-small pull-left">{{file.timeRemaining() }}</small>
+                      <small ng-hide="file.isComplete()" class="lv-small pull-left">
+                        {{file.timeRemaining() | remainingTime}}
+                      </small>
+                      <small ng-show="file.isComplete()" class="lv-small pull-left">
+                        {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
+                      </small>
                       <small class="lv-small pull-right">{{file.size | readableSize: false}}</small>
                       <div class="clearfix"></div>
                       <progressbar max="100" value="file.progress()*100"></progressbar>
