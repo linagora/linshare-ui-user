@@ -1,0 +1,30 @@
+{
+  "SWEET_ALERT": {
+    "ON_FILE_DELETE": {
+      "TITLE": "Bạn có chắc chắn không?",
+      "TEXT": "Bạn đang chuẩn bị xóa những tập này!",
+      "CONFIRM_BUTTON": "Có!",
+      "CANCEL_BUTTON": "Không!"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "Bạn có chắc chắn không?",
+      "TEXT": "Tất cả các dữ liệu lưu trên localStorage sẽ bị xóa",
+      "CONFIRM_BUTTON": "Có!",
+      "DONE": "Đã xóa xong",
+      "IS_CLEARED": "LocalStorage rỗng"
+    }
+  },
+  "GROWL_ALERT": {
+    "ACTION": {
+      "DELETE": "Đã xóa tập tin thành công",
+      "SHARE": "Đã chia sẻ thành công"
+    },
+    "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",
+      "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn"
+    },
+    "ERROR": {
+      "503": "Lỗi máy chủ"
+    }
+  }
+}

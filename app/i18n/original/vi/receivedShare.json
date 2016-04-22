@@ -1,0 +1,19 @@
+{
+  "BREADCRUMB_TITLE": "Đã nhận tập tin",
+  "TOOLTIP" : {
+    "ADVANCED_FILTER" : "Bộ lọc nâng cao",
+    "REMOVE_FILES" : "Xóa tập tin được chọn",
+    "DOWNLOAD_FILES" : "Tải về",
+    "SHOW_MORE_OPTIONS" : "Thêm lựa chọn",
+    "DATE_OF_MODIFICATION" :"Ngày thay đổi",
+    "DATE_OF_CREATION" :"Ngày khởi tạo"
+  },
+  "TABLE_HEADER": {
+    "NAME": "Tên",
+    "TYPE": "Thể loại",
+    "MODIFICATION_DATE": "Lần thay đổi cuối cùng",
+    "CREATION_DATE": "Ngày khởi tạo",
+    "SIZE": "Kích cỡ",
+    "ACTION": "Tác vụ"
+  }
+}

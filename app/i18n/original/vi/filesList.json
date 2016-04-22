@@ -1,0 +1,65 @@
+{
+  "PAGE_FILE_TITLE": "Danh sách tập tin",
+  "TABLE_HEADER": {
+    "NAME": "Tên",
+    "MODIFICATION_DATE": "Lần thay đổi cuối cùng",
+    "SIZE": "Kích cỡ",
+    "ACTION": "Tác vụ"
+  },
+  "BREADCRUMB_TITLE": "Tập tin của tôi",
+  "RIGHT_PANEL": {
+    "EMPTY": "Không có tập tin nào được chọn",
+    "DETAILS": {
+      "TITLE": "CHI TIẾT",
+      "UPLOAD_DATE": "Ngày tải lên",
+      "SIZE": "Kích cỡ",
+      "TYPE": "Thể loại",
+      "MODIFICATION_DATE": "Ngày thay đổi",
+      "EXPIRATION_DATE": "Ngày hết hạn",
+      "CIPHERED": "Mã hóa",
+      "SHARED_WITH": "Chia sẻ với:",
+      "PEOPLE_SHARED_WITH": "Người dùng",
+      "DESCRIPTION": "Miêu tả",
+      "QUICK_SHARE": "Chia sẻ nhanh",
+      "SHARE_PLACEHOLDER": "địa chỉ thư người nhận",
+      "ADVANCED_SHARE": "Chia sẻ nâng cao"
+    },
+    "ACTIVITIES": {
+      "TITLE": "Lịch sử hoạt động"
+    },
+    "SHARE": {
+      "TITLE": "CHIA SẺ",
+      "SELECTED_FILES": "Tập tin được chọn",
+      "SHOW_SELECTED_FILES": "Xem",
+      "SETTINGS": "Cài đặt",
+      "MORE_OPTIONS": "Thêm lựa chọn",
+      "RECIPIENTS": "Thêm người nhận",
+      "CREATE_MAILING_LIST": "Tạo danh sách người nhận"
+    },
+    "SHARE_OPTIONS": {
+      "TITLE": "Chia sẻ",
+      "ADD_NOTE": "Thêm miêu tả",
+      "ADD_NOTE_PLACEHOLDER": "Nhập miêu tả",
+      "SECURE_SHARING": "Chia sẻ bảo mật",
+      "SHARING_ACKNOWLEDGEMENT": "Chứng nhận đã chia sẻ",
+      "USDA": "Chứng nhận không tải về sau khi chia sẻ",
+      "NOTIFICATION_DATE": "Ngày thay đổi",
+      "ATTACH_EMAIL": "Tùy chỉnh thư điện tử",
+      "ATTACHED_EMAIL_SUBJECT": "Chủ đề",
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản"
+    }
+  },
+  "SELECTED_FILES": {
+    "BREADCRUMB_TITLE": "Tập tin được chọn",
+    "BACK_TO_ALL_FILES": "Quay lại danh sách tập tin"
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Danh sách tập tin tải lên",
+    "UPLOAD_FILES_BUTTON": "Tải tập tin mới lên",
+    "SELECT_INFO": "Chọn tập tin sẽ được tải lên"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Tải tập tin lên đây",
+    "COMMENT": "Kéo và thả tập tin tại đây"
+  }
+}

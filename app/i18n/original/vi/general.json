@@ -1,0 +1,147 @@
+{
+  "APPLICATION_NAME": "LinShare",
+  "APPLICATION_WELCOME_HOME": "Chào mừng bạn đã đến với ứng dụng chia sẻ dữ liệu LinShare",
+  "REMOVE": "Xóa",
+  "DOWNLOAD": "Tải về",
+  "NAVIGATION": {
+    "NEXT": "Trang sau",
+    "PREVIOUS": "Trang trước",
+    "PAUSE": "Tạm dừng",
+    "STOP": "Dừng",
+    "PLAY": "Tiếp",
+    "REPLAY": "Làm lại",
+    "SEND": "Gửi",
+    "CANCEL": "Hủy",
+    "SHARE": "Chia sẻ"
+  },
+  "EXTENSIONS" : {
+    "PDF" : "PDF",
+    "IMAGE" : "Hình ảnh",
+    "AUDIO" : "Âm thanh",
+    "VIDEO" : "Video",
+    "POWERPOINT" : "PowerPoint",
+    "WORD" : "Word",
+    "ARCHIVE" : "Archive",
+    "EXCEL" : "Excel",
+    "TEXT" : "Text",
+    "CODE" : "Code"
+  },
+  "BOUTON_ADD_FILE_TITLE": "Bổ sung",
+  "MENU_TITLE" : {
+    "HOME" : "Trang chủ",
+    "FILES" : "Tập tin",
+    "MY_FILES" : "Tập tin của tôi",
+    "RECEIVED_SHARES" : "Tập tin chia sẻ cho tôi",
+    "SHARES" : "Tập tin do tôi chia sẻ",
+    "GROUPS" : "Nhóm",
+    "ADMIN" : "Quản trị",
+    "LISTS" : "Danh sách",
+    "GUESTS" : "Khách mời",
+    "USERS" : "Người dùng",
+    "GROUP_MEMBERS" : "Thành viên nhóm",
+    "UPLOAD_MANAGMENT" : "Mời tải tập tin lên",
+    "UPLOAD_REQUESTS" : "Mời tải tập tin lên",
+    "UPLOAD_PROPOSITIONS" : "Lời mời tải tập tin lên",
+    "AUDIT" : "Lịch sử",
+    "AUDIT_GLOBAL" : "Tổng quát",
+    "AUDIT_UPLOAD_REQUEST" : "Danh sách lời mời tải tập tin lên"
+  },
+  "LINK_DISABLED": "Đường dẫn không hoạt động",
+  "WELCOME_USER": "Xin chào ",
+  "BOUTON_LABEL_TITLE": {
+    "SHARE": "chia sẻ",
+    "DELETE": "xóa",
+    "MULTIPLE_SELECT": "Đa lựa chọn",
+    "INFO": "Thông tin",
+    "MORE_ACTIONS": "thêm tác vụ",
+    "DOWNLOAD": "Tải về"
+  },
+  "LOGIN": {
+    "EMAIL_PLACEHOLDER": "Thư điện tử",
+    "PASSWORD_PLACEHOLDER": "Mật khẩu",
+    "KEEP_SIGNED": "Giữ trạng thái đăng nhập",
+    "LOGIN_HEADER": "Đang truy cập",
+    "FORGOTTEN_PASSWORD": "Quên mật khẩu ?",
+    "CONNECTION_LINK": "Đăng nhập",
+    "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở",
+    "COPYRIGHT":"Bạn đang sử dụng phiên bản nguồn mở và miễn phí của LinShare, được phát triển bởi Linagora © 2009–2016. Hãy đóng góp vào sự phát triển của sản phẩm bằng cách đăng ký gói dịch vụ doanh nghiệp của Linagora."
+  },
+  "HEADER": {
+    "SETTINGS": "Cài đặt",
+    "LOGOUT": "Đăng xuất",
+    "FULL_SCREEN": "Toàn màn hình",
+    "CLEAR_LOCAL_STORAGE": "Xóa Local Storage",
+    "UPLOAD_PROGRESS": {
+      "TITLE": "QUá trình tải lên",
+      "UPLOAD_DONE": "xong",
+      "FOOTER": "Xem tất cả"
+    }
+  },
+  "ACTION": {
+    "DOWNLOAD": "Tải về",
+    "SHARE": "Chia sẻ",
+    "REFRESH": "Làm mới",
+    "COPY_IN_GROUP": "Sao chép tập tin vào nhóm",
+    "DELETE": "Xóa"
+  },
+  "SWEET_ALERT": {
+    "ON_FILE_DELETE": {
+      "TITLE": "Bạn có chắc chắn không?",
+      "TEXT": "Bạn đang chuẩn bị xóa tập tin này!",
+      "CONFIRM_BUTTON": "Có!",
+      "CANCEL_BUTTON": "Hủy!"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "Bạn có chắc chắn không?",
+      "TEXT": "Tất cả dữ liệu trên localStorage sẽ bị xóa",
+      "CONFIRM_BUTTON": "Có!",
+      "DONE": "Xong",
+      "IS_CLEARED": "LocalStorage rỗng"
+    }
+  },
+  "FILTER_COMPONENT": {
+    "PLACEHOLDER_FILE_NAME": "Tên tập tin",
+    "FILTER_BY_SIZE": "Lọc bằng kích cỡ",
+    "FILTER_BY_DATE": {
+      "HEADER": "Lọc bằng ngày",
+      "MODIFICATION_DATE": "Ngày thay đổi",
+      "CREATION_DATE": "Ngày khởi tạo",
+      "BEGINNING_DATE": "Ngày bắt đầu",
+      "ENDING_DATE": "Ngày kết thúc"
+    },
+    "FILTER_BY_RECIPIENT": {
+      "HEADER": "Lọc qua người nhận",
+      "PLACEHOLDER": "Mời bạn nhập địa chỉ thư người nhận, họ hoặc tên"
+    },
+    "SUBMIT": "Lọc",
+    "REINITIALIZE": "Làm lại"
+  },
+  "SELECTION_TOOLBAR": {
+    "SELECTED_FILES": "Các tập tin được chọn",
+    "SELECT_ALL": "Chọn tất cả",
+    "DESELECT_ALL": "Xóa tất cả",
+    "SHARE": "Chia sẻ",
+    "COPY": "Sao chép",
+    "DELETE": "Xóa"
+  },
+  "COMPONENTS": {
+    "AUTOCOMPLETE_USERS": {
+      "INPUT_PLACEHOLDER": "Tìm kiếm người dùng"
+    }
+  },
+  "ADD_FILES_DROPDOWN": {
+    "UPLOAD_FILE": "Tải tập tin lên",
+    "UPLOAD_AND_SHARE": "Tải lên và chia sẻ",
+    "UPLOAD_IN_GROUP": "Tải tập tin vào nhóm"
+  },
+  "TRANSFERS_DROPDOWN": {
+    "SHARE": "Chia sẻ",
+    "SHARE_NUMBER": "Chia sẻ",
+    "UPLOADS": "Tập tin tải lên",
+    "BEFORE_SENDINGS": "trước khi gửi"
+  },
+  "WORK_IN_PROGRESS": {
+  "WORK_IN_PROGRESS_INFO": "Trang này hiện không hoạt động",
+  "WORK_IN_PROGRESS_MSG": "ĐANG HOÀN THIỆN"
+  }
+}
