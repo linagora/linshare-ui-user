@@ -1,34 +1,34 @@
 <div ng-class="{'hidden': !mactrl.sidebarToggle.left}">
   <div class="btn-add-files-ctn">
-    <div class="dropdown-ctn">
-      <div dropdown is-open="status.isopen">
-        <button id="single-button" type="button" class="btn btn-custum-secondary btn-add-files"
-                dropdown-toggle ng-disabled="disabled">
-          <i class="zmdi zmdi-upload "></i><span>{{'BOUTON_ADD_FILE_TITLE' | translate }}</span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-          <li role="menuitem" flow-btn>
-            <a href="" ui-sref="documents.files">
-              <i class="zmdi zmdi-file-plus"></i>
-              {{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate }}
-            </a>
-          </li>
-          <li role="menuitem" flow-btn>
-            <a href="" ui-sref="documents.upload">
-              <i class="zmdi zmdi-share menu-item-share"></i>
-              {{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate }}
-            </a>
-          </li>
-          <li role="menuitem">
-            <a href="#" style="color:#ACACAC">
-              <i class="zmdi zmdi-accounts-alt"></i>
-              {{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate }}
-            </a>
-          </li>
-        </ul>
+    <div class="dropdown-ctn sidebar-add-ctn">
+        <div class="dropdown dropdown-standard" uib-dropdown >
+          <button type="button" class="dropdown-toggle btn btn-custum-secondary btn-add-files" uib-dropdown-toggle  ng-disabled="disabled">
+            <i class="zmdi zmdi-upload "></i><span>{{'BOUTON_ADD_FILE_TITLE' | translate }}</span>
+          </button>
+
+          <ul class="dropdown-menu">
+            <li role="menuitem" flow-btn>
+              <a href="" ui-sref="documents.files">
+                <i class="zmdi zmdi-file-plus"></i>
+                {{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate }}
+              </a>
+            </li>
+            <li role="menuitem" flow-btn>
+              <a href="" ui-sref="documents.upload">
+                <i class="zmdi zmdi-share menu-item-share"></i>
+                {{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate }}
+              </a>
+            </li>
+            <li role="menuitem">
+              <a href="#" style="color:#ACACAC">
+                <i class="zmdi zmdi-accounts-alt"></i>
+                {{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate }}
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
   <div class="c-overflow" id="navigation" ng-style="sizeNavigation">
     <ul class="main-menu" ng-repeat="tab in tabs">
       <li ng-if="tab.link" ng-show="tab.disabled == false"

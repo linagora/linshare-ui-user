@@ -2,11 +2,12 @@
   <div id="bg">
     <img src="images/login-bg.jpg" alt="">
   </div>
+
   <div id="language-dropdown">
     <div class="dropdown-ctn">
-      <div dropdown is-open="status.isopen">
-        <button id="single-button" type="button" class="btn btn-custum-transparent"
-                dropdown-toggle ng-disabled="disabled">
+      <div class="dropdown dropdown-standard" uib-dropdown>
+        <button id="single-button" type="button" class="dropdown-toggle btn btn-custum-transparent"
+                uib-dropdown-toggle ng-disabled="disabled">
           <img src="images/flags/fr.png" alt="français"/><span class="disp-language">FR</span><i class="zmdi zmdi-chevron-down"></i>
         </button>
         <ul class="dropdown-menu pull-right flag-list-ctn" role="menu" aria-labelledby="single-button">

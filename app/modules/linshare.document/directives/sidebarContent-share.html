@@ -25,7 +25,7 @@
       </a>
     </div>
 
-    <div ng-show="newShare.expirationDate.enable" class="col-xs-12  fieldCtn" id="dateField">
+    <div ng-show="newShare.expirationDate.enable" class="col-xs-12 fieldCtn" id="dateField">
       <label for="comment" class="labelDateExpiration col-xs-6">
         {{ "RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
       </label>
@@ -43,26 +43,26 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="clearfix">&nbsp;</div>
     <div class="destinataires-form-area">
       <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"> </i>
         {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2>
-
-      <div class="dropdown popOverForm savelistBtn" dropdown auto-close="outsideClick" is-open="false"
+      <div class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
            on-toggle="toggled()">
-        <button class="dropdown-toggle btn btn-default" dropdown-toggle>
+        <button class="dropdown-toggle btn btn-default" uib-dropdown-toggle  ng-disabled="disabled" >
           <i class="zmdi zmdi-accounts-list-alt" style="font-size:1em;"></i>
           {{ "RIGHT_PANEL.SHARE.CREATE_MAILING_LIST" | translate }}
         </button>
         <div class="dropdown-menu pull-right">
+          <div class="stop-propagate">
           <p class="labelListCtn">
             <input type="email" class="form-control input-sm" id="labelList"
                    placeholder="Saisissez le nom de votre liste">
           </p>
           <md-divider></md-divider>
+          </div>
           <div>
             <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">
               {{ "NAVIGATION.CANCEL" | translate }}
