@@ -1,180 +1,321 @@
-<div ui-view>
-<div class="container" id="files" flow-complete="reloadFiles()">
-
-
-  <!--  ACTIONS ON DOCUMENTS  -->
-
-  <div class="card">
-    <div class="card-header">
-      <div id="breadcrumb-wrap">
-        <div class="breadcrumbsCtn">
-          <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>{{ "BREADCRUMB_TITLE" | translate }}</a>
-        </div>
-        <div class="navBarBtn visible-xs">
-          <button class="btn btn-default waves-effect blueBtn" flow-btn flow-files-submitted="$flow.upload()">
-            <i class="zmdi zmdi-upload"><span>Importez un fichier</span></i>
-          </button>
-        </div>
-        <div id="action-header">
-          <div class="input-group search-bar">
-            <div class="fg-line">
-              <input type="text" class="form-control"
-                     placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                     ng-change="updateParams()"
-                     ng-model="paramFilter['name']">
+<div ui-view class="file-listing-ctn">
+  <div class="container files"  flow-complete="reloadFiles()">
+    <!--  ACTIONS ON DOCUMENTS  -->
+    <!-- contextmenu -->
+    <div class="card">
+      <div class="card-header">
+        <div id="breadcrumb-wrap">
+          <div class="breadcrumbsCtn hidden-xs">
+            <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
+              {{ "BREADCRUMB_TITLE" | translate }}
+            </a>
+            <span class="subCategorieChevron"><i class="zmdi zmdi-chevron-right"></i></span>
+          </div>
+          <div id="action-header">
+            <div class="fg-line toolbar-actions-items" >
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs">
+                <a href="" data-ng-click="toggleSearchState()">
+                  <i class="tm-icon zmdi zmdi-search" ng-class="{'activeLink': searchMobileDropdown }"></i>
+                </a>
+              </div>
+              <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+                    class="visible-xs toolbar-mobile-item col-xs-3" >
+              <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
+                <i class="fa fa-square-o"></i>
+              </a>
+              <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
+                <i class="fa fa-check-square-o activeLink" ></i>
+              </a>
+              </span>
+              <div class="sortDropdown col-xs-3">
+                <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
+                  <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
+                     ng-disabled="disabled" aria-haspopup="true" aria-expanded="false" >
+                    <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
+                  </a>
+                  <ul class="dropdown-menu pull-right dm-icon stop-propagate">
+                    <li role="menuitem">
+                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                      <span class="caretArea">
+                      <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                      <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                      </span>
+                        {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                      <span class="caretArea">
+                      <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                      <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                      </span>
+                        {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                      <span class="caretArea">
+                      <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                      <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                      </span>
+                        {{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate }}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                      <span class="caretArea">
+                      <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                      <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                      </span>
+                        {{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate }}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                      <span class="caretArea">
+                      <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                      <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                      </span>
+                        {{'FILTER_COMPONENT.IS_SHARED' | translate }}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+              </a>
             </div>
-            <span class="input-group-addon last clickable"
-                  x-ng-click="advancedFilterBool = !advancedFilterBool"
-                  data-toggle="tooltip"
-                  title=""
-                  data-placement="right"
-                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
-                  slide-toggle="#searchFilterCtn">
+            <div class="input-group search-bar hidden-xs" >
+              <div class="fg-line">
+                <input type="text" class="form-control"
+                       placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                       ng-change="updateParams()"
+                       ng-model="paramFilter['name']">
+              </div>
+              <span class="input-group-addon last clickable"
+                    x-ng-click="advancedFilterBool = !advancedFilterBool"
+                    data-toggle="tooltip"
+                    title=""
+                    data-placement="right"
+                    data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                    slide-toggle="#searchFilterCtn">
               <i class="zmdi hidden-xs clickable"
                  x-ng-class="{'zmdi-chevron-down': !advancedFilterBool, 'zmdi-chevron-up': advancedFilterBool}"></i>
-            </span>
+              </span>
+            </div>
           </div>
         </div>
+        <!-- FILTER COMPONENT  -->
+        <filtering-component class="" ls-size="true" ls-date="true"></filtering-component>
+        <div class="clearfix"></div>
       </div>
-
-      <!-- FILTER COMPONENT  -->
-      <filtering-component class="" ls-size="true" ls-date="true"></filtering-component>
-      <div class="clearfix"></div>
-
-    </div>
-
-
-    <div id="dropArea">
-
-      <div id="selection-actions" class="showMultiMenu" data-ng-class="{'show': selectedDocuments.length > 0}">
-        <div class="exitSelection" ng-click="resetSelectedDocuments()">
-          <i class="zmdi zmdi-close"></i>
+      <div id="dropArea">
+        <div id="top-search-wrap">
+          <i id="top-search-close"  data-ng-click="toggleSearchState()">&times;</i>
+          <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
+                 placeholder="Nom de fichier" ng-change="updateParams()" ng-model="paramFilter['name']"
+                 aria-invalid="false">
         </div>
-        <div class="displayNumSelectedItems">
-            <span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}
-        </div>
-        <div id="toolbar-actions">
-          <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())">
-            <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
+        <div id="selection-actions" class="defaultMultiToolbarState"
+             data-ng-class="{'showMultiMenu': selectedDocuments.length > 0}">
+          <div class="toogleCkeckboxToolbar" ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
+            <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope" >
+              <i class="fa fa fa-square-o checkboxTable"></i>
+            </a>
+            <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope">
               <i class="fa fa-check-square-o"></i>
-              <span>{{"SELECTION_TOOLBAR.SELECT_ALL" | translate}}</span>
             </a>
-            <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
-              <i class="fa fa-square-o"></i>
-              <span>{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate}}</span>
+          </div>
+          <div class="exitSelection" ng-click="resetSelectedDocuments()">
+            <i class="zmdi zmdi-close"></i>
+          </div>
+          <div class="displayNumSelectedItems">
+            <span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}
+          </div>
+          <div id="toolbar-actions" class="hidden-xs">
+            <span ng-click="resetSelectedDocuments()">
+            <a class="plainTxtBtn">
+              <i class="zmdi zmdi-refresh-alt" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+              <span>{{'SELECTION_TOOLBAR.RESET' | translate}}</span>
             </a>
-          </span>
-          <span>
+            </span>
+            <span>
             <a class="plainTxtBtn partageLink"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="onShare(); mactrl.sidebarToggle.right = true;">
               <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
-          </span>
-          <span>
+            </span>
+            <span>
             <a class="plainTxtBtn partageLink"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="deleteDocuments(selectedDocuments)">
               <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span></a>
-          </span>
-        </div>
-      </div>
-
-      <div class="dragNDropCtn resetContentWidth">
-        <div class="dragNDropContent">
-          <div class="dragIconCtn ">
-            <div class="borderedCircle">&nbsp;</div>
-            <img src="images/upload-dnd-grey.png">
+            </span>
           </div>
-          <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-
-          <p>{{ "DRAG_DROP_BACKGROUND.COMMENT" | translate }}</p>
         </div>
-      </div>
-
-      <!-- DOCUMENTS LIST  -->
-      <div class="card-body">
-
-        <div class="table-responsive">
-          <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
-
-            <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
-                file-selection-v="selectedDocuments" uuid="documentFile"
-                current-selected-document="currentSelectedDocument"
-                multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}"
-                data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5">
-
-              <td><i class="fa ls-1p5x" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i></td>
-
-              <td data-title="'TABLE_HEADER.NAME' | translate" class="col-md-6" sortable="'name'" uuid={{o.uuid}}>
-                {{documentFile.name}}
-              </td>
-
-              <td class="hidden-xs"
-                  ng-if="mactrl.sidebarToggle.right === false"
-                  data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" sortable="'modificationDate'">
-                {{documentFile.modificationDate | relativeTime}}
-              </td>
-
-              <td class="hidden-xs"
-                  ng-if="mactrl.sidebarToggle.right === false"
-                  data-title="'TABLE_HEADER.SIZE' | translate" sortable="'size'">
-                {{documentFile.size | readableSize: false}}
-              </td>
-
-              <td data-title="'TABLE_HEADER.ACTION' | translate" sortable="'shared'">
-                <ul class="actions hidden-xs">
-                  <li data-ng-class="{ 'openr': mactrl.sidebarToggle.right === true }">
-                    <a href="" ng-click="showCurrentFile(documentFile)" event-propagation-stop
-                       title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
-                      <i class="zmdi zmdi-info"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
-                       ng-click="onShare(); mactrl.sidebarToggle.right = true;">
-                      <i ng-show="documentFile.shared === 0" class="zmdi zmdi-share"></i>
-                      <i ng-show="documentFile.shared > 0" class="zmdi zmdi-share" style="color: green"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
-                       title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
-                      <i class="zmdi zmdi-download"></i>
-                    </a>
-                  </li>
-                  <li class="dropdown" dropdown>
-                    <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle
-                       event-propagation-stop>
-                      <i class="zmdi zmdi-more-vert"></i>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-right">
-
-                      <li>
-                        <a href="" ng-show="linshareModeProduction == false" ng-click="" event-propagation-stop>
-                          {{'ACTION.COPY_IN_GROUP' | translate}}</a>
-                      </li>
-                      <li>
-                        <a href="" ls-share-modal event-propagation-stop>{{'ACTION.SHARE' | translate}}</a>
-                      </li>
-                      <li>
-                        <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
-                      </li>
-                      <li>
-                        <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download" event-propagation-stop>
-                          {{'ACTION.DOWNLOAD' | translate}}</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </table>
+        <div class="dragNDropCtn resetContentWidth hidden-xs">
+          <div class="dragNDropContent">
+            <div class="dragIconCtn ">
+              <div class="borderedCircle">&nbsp;</div>
+              <img src="images/upload-dnd-grey.png">
+            </div>
+            <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
+            <p>{{ "DRAG_DROP_BACKGROUND.COMMENT" | translate }}</p>
+          </div>
         </div>
-        <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-               data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+        <script type="text/ng-template" id="checkboxheader.html">
+          <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+                role="button" tabindex="0" style="display:block" class="center">
+          <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope" >
+            <i class="fa fa fa-square-o checkboxTable"></i>
+          </a>
+          <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope">
+            <i class="fa fa-check-square-o"></i>
+          </a>
+          </span>
+        </script>
+        <!-- DOCUMENTS LIST  -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams"  show-filter="true" >
+              <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
+                  file-selection-v="selectedDocuments" uuid="documentFile"
+                  current-selected-document="currentSelectedDocument"
+                  multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}"
+                  data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
+                  context-menu="moreOptionsContexualMenu ">
+                <td data-header="'checkboxheader.html'" class="center thumb-type-item">
+                  <i class="fa ls-1p5x" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+                </td>
+                <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
+                    sortable="'name'" uuid={{o.uuid}}>
+                  <div class="ctn-name-actions">
+                    <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                      {{documentFile.name}}
+                      <span>
+                        <span ng-show="documentFile.shared > 0" class="sharedActivated hidden-xs">
+                        {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
+                        </span>
+                        <p class="mobile-list-item-info visible-xs">
+                          {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}}
+                        </p>
+                      </span>
+                    </span>
+                    <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
+                      <ul class="actions pull-right" data-ng-class=
+                        "{ 'openr': (mactrl.sidebarToggle.right === true) && (sidebarRightDataType === 'details')}">
+                        <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop>
+                          <a href=""
+                             title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
+                            <i class="zmdi zmdi-info-outline"></i>
+                          </a>
+                        </li>
+                        <li class="hidden-xs">
+                          <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
+                             ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                            <i class="zmdi zmdi-share"></i>
+                          </a>
+                        </li>
+                        <li class="hidden-xs">
+                          <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                             title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
+                            <i class="zmdi zmdi-download"></i>
+                          </a>
+                        </li>
+                        <li class="dropdown hidden-xs" dropdown>
+                          <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" dropdown-toggle
+                             event-propagation-stop>
+                            <i class="zmdi zmdi-more-vert"></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                              <a href="" ng-show="linshareModeProduction == false" ng-click="" event-propagation-stop>
+                                {{'ACTION.COPY_IN_GROUP' | translate}}</a>
+                            </li>
+                            <li>
+                              <a href="" ls-share-modal event-propagation-stop>{{'ACTION.SHARE' | translate}}</a>
+                            </li>
+                            <li>
+                              <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
+                            </li>
+                            <li>
+                              <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                                 event-propagation-stop>{{'ACTION.DOWNLOAD' | translate}}
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
+                </td>
+                <td class="hidden-xs"
+                    ng-if="mactrl.sidebarToggle.right === false"
+                    data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" sortable="'modificationDate'">
+                  {{documentFile.modificationDate | relativeTime}}
+                </td>
+                <td class="hidden-xs"
+                    ng-if="mactrl.sidebarToggle.right === false"
+                    data-title="'TABLE_HEADER.SIZE' | translate" sortable="'size'">
+                  {{documentFile.size | readableSize: false}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+                 data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <div id="fabMyFiles">
+    <md-fab-toolbar  md-open="fab.isOpen" count="fab.count"
+                     md-direction="{{fab.selectedDirection}}" class="visible-xs">
+      <md-fab-trigger class="align-with-text">
+        <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;" id="primary-fab-action">
+          <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-toolbar style="padding:0">
+        <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate }}</p>
+        <md-fab-actions class="md-toolbar-tools">
+          <md-button aria-label="label" class="md-icon-button" flow-btn>
+            <a href="#/files/upload" ui-sref="documents.upload">
+              <i class="zmdi zmdi-share"></i>
+              <span>{{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate}}</span>
+            </a>
+          </md-button>
+          <md-button aria-label="comment" class="md-icon-button" flow-btn>
+            <a href="#/files/list" ui-sref="documents.files">
+              <i class="zmdi zmdi-file-plus"></i>
+              <span>{{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate}}</span>
+            </a>
+          </md-button>
+          <md-button aria-label="comment" class="md-icon-button" flow-btn>
+            <a href="#/files/list" ui-sref="documents.files" class="disabled-work-in-progress">
+              <i class="zmdi zmdi-accounts-alt disabled-work-in-progress"></i>
+              <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate }}</span>
+            </a>
+          </md-button>
+        </md-fab-actions>
+      </md-toolbar>
+    </md-fab-toolbar>
+  </div>
+  <section class="row multi-select-mobile visible-xs"
+           data-ng-class="{'showMobileMultiMenu': selectedDocuments.length > 0}">
+    <div class="col-xs-2 ctn-mobile-select-count">
+      <span class="numberOfiles">{{selectedDocuments.length}}</span>
+      <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
+    </div>
+    <div class="col-xs-8">
+      <i class="zmdi zmdi-share col-xs-3" ng-click="onShare(); mactrl.sidebarToggle.right = true;"></i>
+      <i class="zmdi zmdi-delete col-xs-3" ng-click="deleteDocuments(selectedDocuments)"></i>
+      <i class="zmdi zmdi-download col-xs-3 disabled-work-in-progress"></i>
+      <i class="zmdi zmdi-copy col-xs-3 disabled-work-in-progress"></i>
+    </div>
+    <div class="col-xs-1 pull-right" ng-click="resetSelectedDocuments()">
+      <i class="zmdi zmdi zmdi-close"></i>
+    </div>
+  </section>
 </div>

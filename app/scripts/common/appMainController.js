@@ -152,10 +152,13 @@ angular.module('linshareUiUserApp')
     }
     this.resizeDragNDropCtn=function(attr) {
       checkAndSetNewWidth(attr);
-    }
+    };
     function checkAndSetNewWidth(attr) {
+      var widthWindow = $(window).width();
+      if(widthWindow > 768){
+        $scope.mactrl.sidebarToggle.left = true;
+      }
       if (attr) {
-        var widthWindow = $(window).width();
         var nwidthWindow = widthWindow - 268;
         angular.element(".resetContentWidth").width(nwidthWindow);
       } else {

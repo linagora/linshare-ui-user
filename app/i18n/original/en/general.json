@@ -54,7 +54,8 @@
     "MULTIPLE_SELECT": "multiple selection",
     "INFO": "info",
     "MORE_ACTIONS": "more actions",
-    "DOWNLOAD": "download"
+    "DOWNLOAD": "download",
+    "SHARED": "Shared"
   },
   "LOGIN": {
     "EMAIL_PLACEHOLDER": "Email",
@@ -102,6 +103,7 @@
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "File Name",
     "FILTER_BY_SIZE": "Filter by size",
+    "IS_SHARED": "Partagé",
     "FILTER_BY_DATE": {
       "HEADER": "Filter by date",
       "MODIFICATION_DATE": "Modification date",
@@ -122,7 +124,9 @@
     "DESELECT_ALL": "Deselect all",
     "SHARE": "Share",
     "COPY": "Copy",
-    "DELETE": "Delete"
+    "DELETE": "Delete",
+    "RESET": "Reset",
+    "FILES": "Files"
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
@@ -141,7 +145,10 @@
     "BEFORE_SENDINGS": "before sending"
   },
   "WORK_IN_PROGRESS": {
-  "WORK_IN_PROGRESS_INFO": "This page is currently unavailable",
-  "WORK_IN_PROGRESS_MSG": "CURRENTLY UNDER CONSTRUCTION"
-  }
+    "WORK_IN_PROGRESS_INFO": "This page is currently unavailable",
+    "WORK_IN_PROGRESS_MSG": "CURRENTLY UNDER CONSTRUCTION"
+  },
+  "SELECTION": {
+    "NUM_ITEM_SELECTED": "Files selected"
+}
 }

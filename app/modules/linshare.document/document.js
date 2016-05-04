@@ -67,15 +67,15 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         var urlObject;
 
         // https://msdn.microsoft.com/fr-fr/library/hh779016(v=vs.85).aspx
-        if (navigator.msSaveBlob) {
+        if(navigator.msSaveBlob) {
           navigator.msSaveBlob(blob, fileName);
         }
-        else if (windowUrl) {
+        else if(windowUrl) {
           // create tag element a to simulate a download by click
           var link = document.createElement('a');
 
           // if the attribute download isset in the tag a
-          if ('download' in link) {
+          if('download' in link) {
             // Prepare a blob URL
             urlObject = windowUrl.createObjectURL(blob);
 
@@ -117,7 +117,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  * The controller to manage documents
  */
   .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, ngTableParams, $translate,
-                                                     $window, $log, documentsList, growlService) {
+                                                     $window, $log, documentsList, growlService, $timeout) {
     $scope.selectedDocuments = [];
     $scope.flagsOnSelectedPages = {};
 
@@ -163,12 +163,12 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     var removeElementFromCollection = function(collection, element) {
       var index = collection.indexOf(element);
-      if (index > -1) {
+      if(index > -1) {
         collection.splice(index, 1);
       }
     };
 
-    $scope.resetSelectedDocuments = function() {
+    $scope.resetSelectedDocuments = function(){
       angular.forEach($scope.selectedDocuments, function(selectedDoc) {
         selectedDoc.isSelected = false;
       });
@@ -201,7 +201,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
           closeOnCancel: true
         },
         function(isConfirm) {
-          if (isConfirm) {
+          if(isConfirm) {
             angular.forEach(document, function(doc) {
               $log.debug('value to delete', doc);
               $log.debug('value to delete', documentsList.length);
@@ -232,7 +232,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     $scope.currentSelectedDocument = {current: ''};
 
-    $scope.showCurrentFile = function(currentFile) {
+    $scope.showCurrentFile = function(currentFile, event) {
       $scope.currentSelectedDocument.current = currentFile;
       $scope.sidebarRightDataType = 'details';
       if(currentFile.shared > 0) {
@@ -246,6 +246,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         });
       }
       $scope.mactrl.sidebarToggle.right = true;
+      var currElm = event.currentTarget;
+      angular.element("#fileListTable tr li").removeClass("activeActionButton").promise().done(function() {
+       angular.element(currElm).addClass("activeActionButton");
+      });
     };
 
     $scope.$watch('multipleSelection', function(n) {
@@ -296,19 +300,108 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       getData: function($defer, params) {
         var filteredData = params.filter() ?
           $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
-          var files =  params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+        var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(files.length);
           $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
+        }
+
     });
 
     $scope.$on('linshare-upload-complete', function() {
       $scope.reload();
     });
 
+    var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems;
+    $translate(['ACTION.COPY_IN_GROUP', 'ACTION.SHARE',
+      'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'])
+      .then(function(translations) {
+        swalCopyInGroup = translations['ACTION.COPY_IN_GROUP'];
+        swalShare = translations['ACTION.SHARE'];
+        swalDelete = translations['ACTION.DELETE'];
+        swalDownload = translations['ACTION.DOWNLOAD'];
+        numItems = translations['SELECTION.NUM_ITEM_SELECTED'];
+        $scope.moreOptionsContexualMenu = [
+          [function($itemScope, $event) {
+            return $itemScope.selectedDocuments.length + ' ' + numItems;
+          }],
+          [swalShare, function($itemScope) {
+            $scope.onShare();
+            $scope.mactrl.sidebarToggle.right = true;
+          }],
+          [swalDelete, function($itemScope) {
+            $scope.deleteDocuments($itemScope.selectedDocuments);
+          }],
+          [swalCopyInGroup, function($itemScope, $event, model) {
+          }, function() {
+            return false
+          }],
+          [swalDownload, function($itemScope) {
+            window.location.assign($itemScope.linshareBaseUrl + '/documents/' + $itemScope.documentFile.uuid + '/download');
 
+          }, function($itemScope) {
+            return !$itemScope.selectedDocuments.length > 1;
+          }
+          ]
+        ];
+      });
+    $scope.closeDetailSidebar = function() {
+      angular.element("#fileListTable tr li").removeClass("activeActionButton");
+    };
+    $scope.sortDropdownSetActive = function($event) {
+      var currentStateToggle = $scope.toggleSelectedSort;
+      $scope.toggleSelectedSort = !currentStateToggle;
+      var currTarget = $event.currentTarget;
+      angular.element(".files .sortDropdown a ").removeClass("selectedSorting").promise().done(function() {
+        angular.element(currTarget).addClass("selectedSorting");
+      });
+    };
+
+    $scope.toggleSearchState=function(){
+      if(!$scope.searchMobileDropdown){
+        $scope.openSearch();
+      }else{
+        $scope.closeSearch();
+      }
+      $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
+    };
+    $scope.openSearch = function(){
+      angular.element('#dropArea').addClass('search-toggled');
+      angular.element('#top-search-wrap input').focus();
+    };
+
+    $scope.closeSearch = function(){
+      angular.element('#dropArea').removeClass('search-toggled');
+      angular.element('#searchInMobileFiles').val("").trigger('change');
+    };
+    angular.element("md-fab-toolbar").appendTo( "#content-container");
+    $scope.$on('$stateChangeSuccess', function() {
+      angular.element(".multi-select-mobile").appendTo("body");
+    });
+
+    $scope.fab = {
+      isOpen: false,
+      count: 0,
+      selectedDirection: 'left'
+    };
+
+    $scope.$watch('fab.isOpen', function(isOpen) {
+      if(isOpen) {
+        angular.element(".md-toolbar-tools").addClass("setWhite");
+        angular.element(".multi-select-mobile").addClass("setDisabled");
+        $timeout(function() {
+          angular.element("#overlayMobileFab").addClass("toggledMobileShowOverlay");
+          angular.element("#content-container").addClass("setDisabled");
+        }, 250)
+      } else {
+        angular.element(".md-toolbar-tools").removeClass("setWhite");
+        $timeout(function() {
+          angular.element(".multi-select-mobile").removeClass("setDisabled");
+          angular.element("#overlayMobileFab").removeClass("toggledMobileShowOverlay");
+          angular.element("#content-container").removeClass("setDisabled");
+        }, 250)
+      }
+    });
   })
-
 /**
  * @ngdoc controller
  * @name linshare.document.controller:LinshareSelectedDocumentsController
@@ -346,7 +439,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.selectedUploadedFiles = [];
 
     // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
-    $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+    $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
       angular.element('.dragNDropCtn').addClass('outOfFocus');
       //pertains to upload-box
       if(angular.element('upload-box') !== null){
@@ -379,7 +472,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       link: function(scope, elm, attrs) {
         elm.bind('click', function(event) {
           var hasInfoClass = elm.parent().parent().parent().parent().hasClass('highlightListElem');
-          if (!attrs.eventPropagationStop || hasInfoClass) {
+          if(!attrs.eventPropagationStop || hasInfoClass) {
             event.stopPropagation();
           }
         });

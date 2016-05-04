@@ -1,10 +1,11 @@
+<div id="overlayMobileFab" >&nbsp;</div>
 <header id="header"
         data-ng-include
         src="'views/includes/header.html'"
         data-ng-controller="headerCtrl as hctrl">
 </header>
 <section id="main">
-  <div id="overlayMobile" data-ng-class="{ 'toggledShowOverlay': mactrl.sidebarToggle.left }" >&nbsp;</div>
+  <div id="overlayMobile" data-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left }">&nbsp;</div>
   <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
     <div id="content-container" flow-files-submitted="$flow.upload()" flow-drop=""
          flow-drag-enter="dropClass='drag-over'"
@@ -14,7 +15,7 @@
          ng-class="{'content-toggled': mactrl.sidebarToggle.left, 'drag-over' : dropClass == 'drag-over', 'fadeOutElm': dropClass == 'fadeOutElm'  }"
          ng-style="myStyle">
 
-      <div id="dropCtn" class="drop borderAnim resetContentWidth " flow-drop="">
+      <div id="dropCtn" class="drop borderAnim resetContentWidth" flow-drop="">
         <div style="position:relative;width:100%;height:100%;">
           <div class="dragNDropAlert ">
             <p>{{ "DRAG_DROP_BACKGROUND.TITLE" | translate }}</p>
@@ -24,5 +25,4 @@
     <section id="content" class="page-view" data-ui-view=""></section>
   </div>
 </section>
-
 <!--<footer id="footer" data-ng-include src="'includes/footer.html'"></footer>-->

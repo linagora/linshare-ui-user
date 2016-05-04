@@ -33,6 +33,6 @@ angular
     'LocalStorageModule',
     'pascalprecht.translate',
     'materialAdmin',
-    'ngMaterial'
-
+    'ngMaterial',
+    'ui.bootstrap.contextMenu'
   ]);
