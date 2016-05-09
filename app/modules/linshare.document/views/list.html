@@ -178,13 +178,13 @@
         <!-- DOCUMENTS LIST  -->
         <div class="card-body">
           <div class="table-responsive">
-            <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams"  show-filter="true" >
+            <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true" >
               <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
                   file-selection-v="selectedDocuments" uuid="documentFile"
                   current-selected-document="currentSelectedDocument"
-                  multiple-select-on="multipleSelection" sidebar="{{mactrl.sidebarToggle.right}}"
+                  sidebar-right="mactrl.sidebarToggle.right"
                   data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
-                  context-menu="moreOptionsContexualMenu ">
+                  context-menu="moreOptionsContexualMenu">
                 <td data-header="'checkboxheader.html'" class="center thumb-type-item">
                   <i class="fa ls-1p5x" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
                 </td>

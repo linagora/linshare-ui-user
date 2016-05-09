@@ -80,8 +80,9 @@
           </div>
           <div class="lv-body">
             <div class="media-body" ng-repeat="file in $flow.files" data-ls-on-document-select=""
-                 file-selection-v="selectedUploadedFiles" uuid="file.linshareDocument" multiple-select-on="true"
-                 current-selected-document="currentSelectedDocument">
+                 file-selection-v="selectedUploadedFiles" uuid="file.linshareDocument"
+                 current-selected-document="currentSelectedDocument"
+                 data-ng-class="{'highlightListElem': file.linshareDocument.isSelected }">
               <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
                 <div class="col-xs-24 col-sm-12 animLeft noPadding">
                   <div class="col-xs-7 col-sm-11 pull-left">
