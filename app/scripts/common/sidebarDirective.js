@@ -2,8 +2,8 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .directive('lsSidebar', [
-    function() {
+  .directive('lsSidebar', ['$timeout',
+    function($timeout) {
       return {
         restrict: 'A',
         transclude: true,
@@ -20,8 +20,9 @@ angular.module('linshareUiUserApp')
         ],
         link: function(scope, element) {
           scope.sizeNavigation = {'height': element[0].offsetHeight - (76+110)+'px'};
-          element.parent().bind('oncontextmenu', function(){
-          });
+          $timeout(function() {
+            scope.sizeNavigation = {'height': element[0].offsetHeight - (76+110)+'px'};
+          }, 0);
         },
         templateUrl: 'views/common/sidebar.html',
         replace: false
