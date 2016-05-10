@@ -157,10 +157,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     $scope.currentDocument = {};
 
-    $scope.editProperties = function(restangObject) {
-      restangObject.save();
-    };
-
     var removeElementFromCollection = function(collection, element) {
       var index = collection.indexOf(element);
       if(index > -1) {
@@ -185,6 +181,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
       });
 
+    // DELETE ONE OR MANY DOCUMENTS
     $scope.deleteDocuments = function(document) {
       if(!angular.isArray(document)) {
         document = [document];
@@ -204,11 +201,11 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
           if(isConfirm) {
             angular.forEach(document, function(doc) {
               $log.debug('value to delete', doc);
-              $log.debug('value to delete', documentsList.length);
               LinshareDocumentService.deleteFile(doc.uuid).then(function() {
                 growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-                removeElementFromCollection(documentsList, doc);
+                removeElementFromCollection($scope.documentsList, doc);
                 removeElementFromCollection($scope.selectedDocuments, doc);
+                $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
                 $scope.tableParams.reload();
               });
             });
@@ -247,17 +244,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       }
       $scope.mactrl.sidebarToggle.right = true;
       var currElm = event.currentTarget;
-      angular.element("#fileListTable tr li").removeClass("activeActionButton").promise().done(function() {
-       angular.element(currElm).addClass("activeActionButton");
+      angular.element("#fileListTable tr li").removeClass('activeActionButton').promise().done(function() {
+        angular.element(currElm).addClass('activeActionButton');
       });
     };
-
-    $scope.$watch('multipleSelection', function(n) {
-      if(n === false) {
-        $scope.selectedDocuments = [];
-        angular.element('tr').removeClass('highlightListElem');
-      }
-    });
 
     $scope.$watch('mactrl.sidebarToggle.right', function(n) {
       if(n === true) {
@@ -275,19 +265,22 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       }
     });
 
-    $scope.users = [];
-    $scope.reload = function() {
+    $scope.reloadDocuments = function() {
       LinshareDocumentService.getAllFiles().then(function(data) {
-        documentsList = data;
-        $scope.tableParams.total(documentsList.length);
+        $scope.documentsList = data;
+        $scope.documentsListCopy = data;
         $scope.tableParams.reload();
       });
     };
+    $scope.$on('linshare-upload-complete', function() {
+      $scope.reloadDocuments();
+    });
+
     $scope.paramFilter = {
       name: ''
     };
 
-    $scope.documentsList2 = documentsList;
+    $scope.documentsListCopy = documentsList;
     $scope.documentsList = documentsList;
 
     $scope.tableParams = new ngTableParams({
@@ -305,10 +298,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
           $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
 
-    });
-
-    $scope.$on('linshare-upload-complete', function() {
-      $scope.reload();
     });
 
     var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems;

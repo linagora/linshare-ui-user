@@ -176,8 +176,8 @@
   }
   th.sortable.sort-desc {
   }
-  th.sortable:not(.sort-desc):not(.sort-asc) .sort-indicator::after, th.sortable:not(.sort-desc):not(.sort-asc) .sort-indicator::before,
-  {
+  th.sortable:not(.sort-desc):not(.sort-asc) .sort-indicator::after,
+  th.sortable:not(.sort-desc):not(.sort-asc) .sort-indicator::before {
     content: "";
     border-width: 0px 4px 4px;
     border-style: solid;

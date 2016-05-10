@@ -220,7 +220,7 @@ angular.module('linshareUiUserApp')
       $state.go($scope.urlTogoAfterLogin);
     });
 
-    $scope.reloadFiles = function() {
+    $scope.callReloadDocuments = function() {
       $scope.$broadcast('linshare-upload-complete');
     };
 
@@ -238,6 +238,7 @@ angular.module('linshareUiUserApp')
     $scope.addUploadedDocument = function(flowFile, serverResponse, flowObject) {
       var response = angular.fromJson(serverResponse);
       flowFile.linshareDocument = response.entry;
+      $scope.callReloadDocuments();
     };
 
   })

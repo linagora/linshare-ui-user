@@ -289,7 +289,6 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
-        angular.element('tr').removeClass('highlightListElem');
         $scope.share_array.push(angular.copy($scope.newShare.getFormObj()));
         $scope.newShare.resetForm();
         $scope.resetSelectedDocuments();

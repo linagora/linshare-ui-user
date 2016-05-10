@@ -69,7 +69,7 @@ angular.module('linshare.components')
               scope.filters.sizeStart = null;
               scope.filters.sizeEnd = null;
             }
-            scope.documentsList = _.filter(scope.documentsList2, function(file) {
+            scope.documentsList = _.filter(scope.documentsListCopy, function(file) {
               var sizeIsValide = true;
               var dateIsValide = true;
               if (scope.showUnit === true) {

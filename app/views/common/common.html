@@ -11,7 +11,7 @@
          flow-drag-enter="dropClass='drag-over'"
          flow-file-success="addUploadedDocument($file, $message, $flow)"
          flow-drag-leave="dropClass='fadeOutElm'"
-         flow-complete="reloadFiles()" flow-file-success="$file.msg = $message"
+         flow-file-success="$file.msg = $message"
          ng-class="{'content-toggled': mactrl.sidebarToggle.left, 'drag-over' : dropClass == 'drag-over', 'fadeOutElm': dropClass == 'fadeOutElm'  }"
          ng-style="myStyle">
 

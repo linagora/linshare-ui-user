@@ -267,7 +267,7 @@ angular.module('linshare.receivedShare')
         name: ''
       };
 
-      $scope.documentsList2 = receivedFiles;
+      $scope.documentsListCopy = receivedFiles;
       $scope.documentsList = receivedFiles;
 
       $scope.tableParams = new ngTableParams({
