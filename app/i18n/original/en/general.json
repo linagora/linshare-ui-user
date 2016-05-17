@@ -99,6 +99,12 @@
       "CONFIRM_BUTTON": "Yes, delete it!",
       "DONE": "Done",
       "IS_CLEARED": "LocalStorage is cleared"
+    },
+    "ON_FILE_COPY": {
+      "TITLE": "Are you sure?",
+      "TEXT": "You are about to move received files into your own files !",
+      "CONFIRM_BUTTON": "Yes, copy!",
+      "CANCEL_BUTTON": "Cancel!"
     }
   },
   "FILTER_COMPONENT": {

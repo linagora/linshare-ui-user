@@ -101,6 +101,12 @@
       "CONFIRM_BUTTON": "Oui, continuez !",
       "DONE": "Terminé",
       "IS_CLEARED": "Le stockage local a été effacé"
+    },
+    "ON_FILE_COPY": {
+      "TITLE": "Êtes-vous sûr?",
+      "TEXT": "Vous êtes sur le point de copier des fichiers reçus dans votre espace !",
+      "CONFIRM_BUTTON": "Oui, copiez!",
+      "CANCEL_BUTTON": "Annulez !"
     }
   },
   "FILTER_COMPONENT": {
