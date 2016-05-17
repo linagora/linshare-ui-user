@@ -80,6 +80,9 @@ angular.module('linshare.receivedShare')
         checkdatasIsSelecteds();
       };
       $scope.copyIntoFiles = function(selectedDocuments) {
+        if(!angular.isArray(selectedDocuments)) {
+          selectedDocuments = [selectedDocuments];
+        }
         angular.forEach(selectedDocuments, function(file, key) {
           LinshareReceivedShareService.copy(file.uuid).then(function() {
             angular.forEach(receivedFiles, function(f, k) {
@@ -149,7 +152,7 @@ angular.module('linshare.receivedShare')
         }
       });
 
-      $scope.showCurrentFile = function(currentFile) {
+      $scope.showCurrentFile = function(currentFile, event) {
         $scope.currentSelectedDocument.current = currentFile;
         $scope.sidebarRightDataType = 'details';
         if(currentFile.shared > 0) {
@@ -163,6 +166,10 @@ angular.module('linshare.receivedShare')
           });
         }
         $scope.mactrl.sidebarToggle.right = true;
+        var currElm = event.currentTarget;
+        angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
+          angular.element(currElm).addClass('activeActionButton');
+        });
       };
 
       var swalTitle, swalText, swalConfirm, swalCancel;

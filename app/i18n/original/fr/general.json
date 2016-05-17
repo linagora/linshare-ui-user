@@ -55,7 +55,8 @@
     "INFO": "info",
     "MORE_ACTIONS": "plus d'actions",
     "DOWNLOAD": "télécharger",
-    "SHARED": "Partagé"
+    "SHARED": "Partagé",
+    "COPY": "copier"
   },
   "LOGIN": {
     "EMAIL_PLACEHOLDER": "Courriel",
