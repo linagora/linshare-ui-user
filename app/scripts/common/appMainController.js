@@ -43,7 +43,7 @@ angular.module('linshareUiUserApp')
   // =========================================================================
   // Header
   // =========================================================================
-  .controller('headerCtrl', function($timeout, $translate, $scope){
+  .controller('headerCtrl', function($timeout, $translate){
 
     // Top Search
     this.openSearch = function(){
@@ -146,45 +146,14 @@ angular.module('linshareUiUserApp')
         launchIntoFullscreen(document.documentElement);
       }
     };
-
-    function checkAndSetNewWidth(attr) {
-      var widthWindow = $(window).width();
-      if(widthWindow > 768){
-        $scope.mactrl.sidebarToggle.left = true;
-      }
-      if (attr) {
-        var nwidthWindow = widthWindow - 268;
-        angular.element('.resetContentWidth').width(nwidthWindow);
-      } else {
-        angular.element('.resetContentWidth').width('100%');
-      }
-    }
-
-    if($scope.mactrl.sidebarToggle.left){
-      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-    }
-    this.resizeDragNDropCtn=function(attr) {
-      checkAndSetNewWidth(attr);
-    };
-
-    angular.element(window).resize(function(){
-      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-    });
-
-    $scope.$on('$stateChangeSuccess', function() {
-      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-      if($scope.mactrl.sidebarToggle.right) {
-        angular.element('.card').css('width', '70%');
-      } else {
-        angular.element('.card').css('width', '100%');
-      }
-    });
   })
 
   .controller('UiUserMainController',
   function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
            AuthenticationService, MenuService) {
-
+    $rootScope.sidebarRightWidth = 350;
+    $rootScope.sidebarLeftWidth = 268;
+    $rootScope.mobileWidthBreakpoint=768;
     localStorage.setItem('ma-layout-status', 0);
 
     if($window.localStorage.getItem('sidebarToggleLeft') === 'true') {
@@ -243,8 +212,73 @@ angular.module('linshareUiUserApp')
       $scope.callReloadDocuments();
     };
 
-  })
+    $scope.$on('flow::filesSubmitted', function() {
+      angular.element('#newUploadIcon').show(0,function(){
+       angular.element(this).addClass('activeAnimTransfertIcon');
+      }).delay(3000).hide(0,function(){
+        angular.element(this).removeClass('activeAnimTransfertIcon');
+      });
+    });
 
+    function checkAndSetNewWidth(attr) {
+      var widthWindow = angular.element(window).width();
+      if(widthWindow > 1057){
+        $scope.mactrl.sidebarToggle.left = true;
+      }else{
+        $scope.mactrl.sidebarToggle.left = false;
+      }
+      if(attr) {
+        var nwidthWindow = widthWindow - $rootScope.sidebarLeftWidth;
+        angular.element('.resetContentWidth').width(nwidthWindow);
+      } else {
+        angular.element('.resetContentWidth').width('100%');
+      }
+    }
+    this.resizeDragNDropCtn = function(attr) {
+      checkAndSetNewWidth(attr);
+    };
+    if($scope.mactrl.sidebarToggle.left){
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+    }
+    var widthWindow = angular.element(window).width();
+    $scope.$watch('mactrl.sidebarToggle.right', function(n) {
+      checkAndSetNewWidthSidebarRight();
+      if(widthWindow > $rootScope.mobileWidthBreakpoint) {
+        if (n === true) {
+          angular.element('#collapsible-content').addClass('setWidth');
+             }
+        else {
+          angular.element('#collapsible-content').removeClass('setWidth');
+          angular.element('#collapsible-content').css('width', '100%');
+        }
+      }else{
+        angular.element('#collapsible-content').removeClass('setWidth');
+        angular.element('#collapsible-content').css('width', '100%');
+      }
+    });
+    function checkAndSetNewWidthSidebarRight(){
+      var widthWindow = angular.element(window).width();
+      if(widthWindow < $rootScope.mobileWidthBreakpoint) {
+        angular.element('aside#chat.sidebar-right').appendTo('body');
+        angular.element('aside#chat.sidebar-right').addClass('setSidebarRightMobileState');
+      }else{
+        angular.element('aside#chat.sidebar-right').removeClass('setSidebarRightMobileState');
+      }
+    }
+    $scope.$on('$stateChangeSuccess', function() {
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+      checkAndSetNewWidthSidebarRight();
+    });
+    angular.element(window).resize(function(){
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+      checkAndSetNewWidthSidebarRight();
+    });
+    $scope.$watch(function(){
+      return $window.innerWidth;
+    }, function() {
+      checkAndSetNewWidthSidebarRight();
+    });
+  })
   .controller('InitNewFlowUploaderController', function($scope, ShareObjectService) {
     /**
      * Each time we create a sharing, this function is called

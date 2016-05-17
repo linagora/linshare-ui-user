@@ -1,60 +1,59 @@
-<div class="card col-xs-12" id="recipientsCtnSidebar">
-
-  <div class="header-sidebar">
-    <h2 class="header-more-options">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h2>
-    <span>
+<working-date-picker></working-date-picker>
+<div class="header-sidebar">
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
+  <h2 class="header-more-options">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h2>
+    <span class="hidden-xs">
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
-  </div>
-
-  <div class="header-sidebar f-15">
+</div>
+<div class="card col-xs-12" id="recipientsCtnSidebar">
+  <div class="num-items-section-ctn">
     <span>{{selectedDocuments.length}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
-    <a class="pull-right" href="" ui-sref="documents.files.selected">
+    <a class="pull-right sidebar-link" href="" ui-sref="documents.files.selected">
       {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
     </a>
   </div>
-
-  <md-divider style="margin-bottom: 2.5em;"></md-divider>
   <div class="custumListContainer ">
-    <div class="custumHeaderList">
-      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"></i>
-        {{ "RIGHT_PANEL.SHARE.SETTINGS" | translate }}
-      </h2>
-      <a class="more-options" href="" ng-click="loadSidebarContent('more-options')">
-        {{ "RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate }}
-      </a>
-    </div>
+    <div class="recipients-form-sections clearfix">
+      <div class="custumHeaderList">
+        <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"></i>
+          {{ "RIGHT_PANEL.SHARE.SETTINGS" | translate }}
+        </h2>
+        <a class="more-options sidebar-link" href="" ng-click="loadSidebarContent('more-options')">
+          {{ "RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate }}
+        </a>
+      </div>
+      <div ng-show="newShare.expirationDate.enable" class="col-xs-12 fieldCtn clearfix" id="dateField">
+        <label for="comment" class="labelDateExpiration col-xs-6">
+          {{ "RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+        </label>
 
-    <div ng-show="newShare.expirationDate.enable" class="col-xs-12 fieldCtn" id="dateField">
-      <label for="comment" class="labelDateExpiration col-xs-6">
-        {{ "RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
-      </label>
-
-      <div class="datepickerBorderFix date-picker dp-blue col-xs-6" ng-class="{ 'is-opened': opened == true }">
-        <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }">
-          <div class="form-inline ">
-            <input ng-click="open($event, 'opened')" type="text"
-                   class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
-                   is-open="opened" min-date="minDate" datepicker-options="dateOptions"
-                   ng-required="true" close-text="Close"
-                   placeholder="{{newShare.expirationDate.value | date: 'fullDate'}}"
-                   ng-disabled="!newShare.expirationDate.userCanOverride"
-                   ng-model="newShare.expirationDate.value"/>
+        <div class="datepickerBorderFix date-picker dp-blue col-xs-6 datepicker-drop-right"
+             ng-class="{ 'is-opened': opened == true }">
+          <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }">
+            <div class="form-inline ">
+              <input ng-click="open($event, 'opened')" type="text"
+                     class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                     is-open="opened" min-date="minDate" datepicker-options="dateOptions"
+                     ng-required="true" close-text="Close"
+                     placeholder="{{newShare.expirationDate.value | date: 'fullDate'}}"
+                     ng-disabled="!newShare.expirationDate.userCanOverride"
+                     ng-model="newShare.expirationDate.value"/>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="clearfix">&nbsp;</div>
-    <div class="destinataires-form-area">
-      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"> </i>
-        {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2>
+    <div class="recipients-form-sections clearfix">
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
+        {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2><span class="required-field-hint">*</span>
       <div class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
            on-toggle="toggled()">
-        <button class="dropdown-toggle btn btn-default" uib-dropdown-toggle  ng-disabled="disabled" >
-          <i class="zmdi zmdi-accounts-list-alt" style="font-size:1em;"></i>
+        <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle  ng-disabled="disabled"
+           alt="{{ 'RIGHT_PANEL.SHARE.CREATE_MAILING_LIST_ALT' | translate }}">
           {{ "RIGHT_PANEL.SHARE.CREATE_MAILING_LIST" | translate }}
-        </button>
+        </a>
         <div class="dropdown-menu pull-right">
           <div class="stop-propagate">
           <p class="labelListCtn">
@@ -73,9 +72,7 @@
           </div>
         </div>
       </div>
-
     </div>
-
     <form role="form" class="clearfix">
       <div class="form-group fg-line">
         <div autocomplete-user="" data-on-select-function="newShare.addRecipient"></div>
@@ -84,32 +81,29 @@
   </div>
   <div class="custumListBody col-xs-12 ">
     <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients()">
-      <p class="pull-left circleCtn"><span class="circle userBg">Ext</span></p>
+      <md-tooltip md-direction="bottom">
+        {{recipient.domain}}
+    </md-tooltip>
 
+      <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0)}}</span></p>
       <div class="pull-left nameRecipientsCtn">
         <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
-
-        <p class=" close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
+        <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
           <i class="zmdi zmdi-close "></i>
         </p>
       </div>
     </div>
     <div class="custumListItem" ng-repeat="list in newShare.getMailingListUuid()">
       <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
-
       <div class="pull-left nameRecipientsCtn">
         <p class="pull-left inner-text-li">{{list.listName}}</p>
-
         <p class=" close-list-icone-btn pull-right" ng-click="newShare.removeMailingList($index)">
           <i class="zmdi zmdi-close"></i>
         </p>
       </div>
     </div>
   </div>
-  <div class="clearfix">&nbsp;</div>
 </div>
-<div class="clearfix">&nbsp;</div>
-
 <div class="bottomSidebarBtn">
   <button class="btn btn-default col-xs-6" ng-click="mactrl.sidebarToggle.right = false; closeDropdown($event)">
     {{ "NAVIGATION.CANCEL" | translate }}

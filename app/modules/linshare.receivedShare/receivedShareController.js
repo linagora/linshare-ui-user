@@ -168,14 +168,6 @@ angular.module('linshare.receivedShare')
         }
       };
 
-      $scope.$watch('mactrl.sidebarToggle.right', function(n) {
-        if(n === true) {
-          angular.element('.card').css('width', '70%');
-        } else {
-          angular.element('.card').css('width', '100%');
-        }
-      });
-
       $scope.showCurrentFile = function(currentFile, event) {
         $scope.currentSelectedDocument.current = currentFile;
         $scope.sidebarRightDataType = 'details';

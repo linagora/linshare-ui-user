@@ -280,7 +280,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         return;
       }
       if(shareCreationDto.getRecipients().length === 0 ) {
-        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT', 'warning');
+        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT', 'danger');
         return;
       }
 

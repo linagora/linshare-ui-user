@@ -250,22 +250,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       });
     };
 
-    $scope.$watch('mactrl.sidebarToggle.right', function(n) {
-      if(n === true) {
-        angular.element('.card').css('width', '70%');
-      } else {
-        angular.element('.card').css('width', '100%');
-      }
-    });
-
-    $scope.$on('$stateChangeSuccess', function() {
-      if($scope.mactrl.sidebarToggle.right) {
-        angular.element('.card').css('width', '70%');
-      } else {
-        angular.element('.card').css('width', '100%');
-      }
-    });
-
     $scope.reloadDocuments = function() {
       LinshareDocumentService.getAllFiles().then(function(data) {
         $scope.documentsList = data;
@@ -273,9 +257,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         $scope.tableParams.reload();
       });
     };
-    $scope.$on('linshare-upload-complete', function() {
-      $scope.reloadDocuments();
-    });
 
     $scope.paramFilter = {
       name: ''
@@ -301,14 +282,19 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     });
 
-    var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems;
-    $translate(['ACTION.COPY_IN_GROUP', 'ACTION.SHARE',
+    $scope.$on('linshare-upload-complete', function() {
+      $scope.reloadDocuments();
+    });
+
+    var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
+    $translate(['ACTION.COPY_IN_GROUP', 'ACTION.SHARE', 'ACTION.INFORMATION',
       'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'])
       .then(function(translations) {
         swalCopyInGroup = translations['ACTION.COPY_IN_GROUP'];
         swalShare = translations['ACTION.SHARE'];
         swalDelete = translations['ACTION.DELETE'];
         swalDownload = translations['ACTION.DOWNLOAD'];
+        swalInformation = translations['ACTION.INFORMATION'];
         numItems = translations['SELECTION.NUM_ITEM_SELECTED'];
         /* jshint unused: false */
         $scope.moreOptionsContexualMenu = [
@@ -322,17 +308,21 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
           [swalDelete, function($itemScope) {
             $scope.deleteDocuments($itemScope.selectedDocuments);
           }],
+          [swalInformation, function($itemScope) {
+            $scope.showCurrentFile($itemScope.documentFile);
+          }, function($itemScope) {
+            return $itemScope.selectedDocuments.length === 1;
+          }],
           [swalCopyInGroup, function($itemScope, $event, model) {
           }, function() {
             return false;
           }],
           [swalDownload, function($itemScope) {
-            window.location.assign($itemScope.linshareBaseUrl + '/documents/' + $itemScope.documentFile.uuid + '/download');
-
+            var landingUrl = $itemScope.linshareBaseUrl + '/documents/' + $itemScope.documentFile.uuid + '/download';
+            $window.location.href = landingUrl;
           }, function($itemScope) {
             return $itemScope.selectedDocuments.length < 1;
-          }
-          ]
+          }]
         ];
       });
     $scope.closeDetailSidebar = function() {
@@ -407,16 +397,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     });
 
     $scope.sidebarRightDataType = 'share';
-    $scope.mactrl.sidebarToggle.right = true;
-
-    $scope.$watch('mactrl.sidebarToggle.right', function(n) {
-      if(n === true) {
-        angular.element('.card').css('width', '70%');
-      } else {
-        angular.element('.card').css('width', '100%');
-      }
-    });
-
     $scope.removeSelectedDocuments = function(document) {
       var index = $scope.selectedDocuments.indexOf(document);
       if(index > -1) {
@@ -448,7 +428,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.currentSelectedDocument = {};
-
     $scope.shareSelectedUpload = function(selectedUpload) {
       if(selectedUpload.length === 0) {
         growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');

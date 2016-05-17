@@ -34,7 +34,8 @@
       "SETTINGS": "Settings",
       "MORE_OPTIONS": "more options",
       "RECIPIENTS": "Add recipients",
-      "CREATE_MAILING_LIST": "Create a mailing list"
+      "CREATE_MAILING_LIST": "Save",
+      "CREATE_MAILING_LIST_ALT": "Create a mailing list"
     },
     "SHARE_OPTIONS": {
       "TITLE": "Sharing options",

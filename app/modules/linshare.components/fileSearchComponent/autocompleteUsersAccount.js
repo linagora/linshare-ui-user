@@ -32,7 +32,14 @@ angular.module('linshare.components')
           if(u.type === 'ListAutoCompleteResultDto') {
             return u.listName.concat(' ', u.ownerLastName, ' ', u.ownerFirstName);
           }
-          return u.firstName.concat(' ', u.lastName, ' ', u.mail, ' ', u.domain);
+          var firstLetter = u.firstName.charAt(0);
+          var userSuggestionTemplate='' +
+            '<div  class="recipientsAutocomplete" title=" '+u.domain+' ">' +
+            '<span class="firstLetterFormat">'+firstLetter+'</span>' +'<p class="recipientsInfo">' +
+            '<span class="user-full-name">'+u.firstName+' '+u.lastName+'</span> <span class="email">'+u.mail+'</span>' +
+            '</p>' +
+            '</div>';
+          return userSuggestionTemplate;
         };
 
         $scope.searchUsersAccount = function(pattern) {

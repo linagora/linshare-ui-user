@@ -1,6 +1,119 @@
 @import "fonts.scss";
 @import "colors.scss";
 
+.recipientsAutocomplete {
+  height: 33px;
+  .firstLetterFormat {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    width: 30px;
+    height: 30px;
+    background-color: #05B1FF;
+    color: #fff;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+  }
+  .recipientsInfo {
+    margin: 0;
+    margin-left: 1em;
+    float: left;
+    height: 30px;
+    span {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .recipientsInfo .email {
+    min-width:166px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+  }
+
+
+  #recipientsCtnSidebar {
+    .custumListContainer form {
+      margin-left: 0;
+    }
+    .custumListBody.col-xs-12 {
+      margin-left: 0;
+      .custumListItem:nth-child(odd), .custumListItem{
+        margin-right: 5px;
+      }
+
+    }
+  }
+
+
+}
+.search-toggled #top-search-wrap {
+  pointer-events: all;
+}
+#top-search-wrap {
+  pointer-events: none;
+}
+.required-field-hint {
+  color: red;
+  font-size: 0.85em;
+}
+#header > ul.header-inner .icon-transfert {
+  position: absolute;
+  left: 0;
+  text-align: center;
+  width: 48px;
+  margin: auto;
+}
+.hideVis {
+  visibility: hidden;
+}
+#header > ul.header-inner > li.pull-right > ul.top-menu > li > a {
+  height: 41px;
+}
+#newUploadIcon {
+  position: absolute;
+  left: 0;
+  display: none;
+  -webkit-transform-origin: top center;
+  -moz-transform-origin: top center;
+  -ms-transform-origin: top center;
+  transform-origin: top center;
+  -moz-transform: scale(6);
+  -ms-transform: scale(6);
+  -webkit-transform: scale(6);
+  transform: scale(6);
+  color: #DFDFDF;
+  opacity: 1;
+  -webkit-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+#newUploadIcon.activeAnimTransfertIcon {
+  visibility: visible;
+  transform: scale(1);
+  opacity: 0;
+}
+#search-field-ctn .search-style {
+  .form-control {
+    background-image: url("../images/icons/search-magnifying-glass.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 30px;
+    -webkit-transition: all;
+    -o-transition: all;
+    transition: all;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  .form-control:focus {
+    background-position: right center;
+    padding: 0 30px 0 0;
+  }
+}
 .user-icon-area {
   width: 15%;
   height: 100%;
@@ -36,6 +149,10 @@
   margin-bottom: 7px;
   background-color: rgba(255, 255, 255, 0.57);
 }
+
+/******
+*****  GLOBAL CLASSES
+****/
 .noMargin {
   margin: 0;
 }
@@ -45,12 +162,12 @@
 .setWhite {
   opacity: 1 !important;}
 .setDisabled  {
-   z-index:-1 !important;
- }
+  z-index:-1 !important;
+}
 .activeLink {
   color:$primaryClr !important;
 }
-
+/*********************/
 .sortDropdown ul {
   padding-top:0;
   padding-bottom:0;
@@ -154,6 +271,7 @@
 }
 
 #fileListTable.ng-table {
+  table-layout:fixed;
   th:nth-child(1){width: 5%;}
   th:nth-child(2){width: 60%;}
   th:nth-child(3){width: 20%;}
@@ -377,7 +495,10 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   min-width: 50%;
   min-height: 50%;
 }
-
+.login-content {
+  margin-top: -50px;
+  text-align: center;
+}
 #l-login {
   .checkbox input:checked + .input-helper:before {
     -webkit-transform: scale(0.7);
@@ -429,25 +550,17 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   }
   .parent-login-form-alignment {
     position: relative;
-  }
-  .child-centered-login-form {
+    position: fixed;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     margin-top: -50px;
   }
-  .logo-title {
-    position: absolute;
-    top: 27%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: -55px;
-    p {
+  .logo-title p {
       margin-top: 15px;
       color: #fff;
       font-size: 19px;
-    }
   }
   .input-group {
     width: 100%;
@@ -458,6 +571,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     text-align: left;
   }
   .lc-block {
+    margin-top: 1.5em;
     width: 380px;
     padding: 0;
     form {
@@ -495,9 +609,83 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     }
   }
 }
+@media (max-width: 768px) {
+  p {
+    margin-bottom: 7px;
+  }
+  #l-login {
+    .parent-login-form-alignment {
+      margin-top: 0px;
+    }
+    .lc-block {
+      margin-top: 0;
+      min-width: 280px;
+      width: 80%;
+    }
+    .logo-title p {
+      font-size: 1em;
+    }
+    .logo-title img {
+      width: 80%;
+    }
+  }
+  #login-page #copyright-login {
+    width: 100%;
+    bottom: -18px;
+    p {
+      font-size: 0.8em;
+    }
+    img {
+      display: none;
+    }
+  }
+  .form-horizontal .radio,
+  .form-horizontal .checkbox {
+    min-height: 3px;
+  }
+  .checkbox,
+  .mdp-forgotten {
+    font-size: 0.85em;
+  }
+  .checkbox .input-helper:before {
+    width: 1em;
+    height: 1em;
+    top: 1px;
+  }
+}
 
-.login-content {
-  text-align: center;
+@media (min-width: 768px) and (max-height: 768px) {
+  #login-page #copyright-login {
+    width: 100%;
+    bottom: -45px;
+  }
+}
+
+@media (max-height: 575px) {
+  p {
+    margin-bottom: 7px;
+  }
+  #l-login {
+    .logo-title {
+      display: none;
+    }
+  }
+  #login-page #copyright-login {
+    width: 100%;
+    bottom: -28px;
+    img {
+      display: inline-block;
+    }
+  }
+  #login-page {
+    position: relative;
+    overflow: scroll;
+    min-height: 429px;
+    min-width: 320px;
+    height: calc(100% + 50px);
+    width: 100%;
+    margin-top: -50px;
+  }
 }
 
 .dropdown-menu .menu-item-share {
@@ -655,10 +843,116 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   padding: 5px 0;
   .chat-search {
     padding: 0;
+    .dropdown-menu:not([class*="bgm-"]) > li.active > a, .dropdown-menu:not([class*="bgm-"]) > li.active > a:hover,
+    .dropdown-menu:not([class*="bgm-"]) > li.active > a:focus {
+      color: #484848;
+    }
+    .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+      color: #9d9d9;
+      text-decoration: none;
+      outline: 0;
+      background-color: #EFEFEF;
+    }
   }
 }
 
+.header-sidebar {
+  padding: 1em;
+  padding-top: 1.5em;
+  vertical-align: middle;
+  height: 50px;
+  background-color: #FDFDFD;
+  margin-bottom: 2em;
+  border-bottom: solid 1px #E7E7E7;
+  h2.header-more-options {
+    margin: 0;
+    font-size: 1.1em;
+    color: $textColorDark;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .zmdi-close {
+    position: absolute;
+    top: 19px;
+    right: 10px;
+    font-size: 1.7em;
+    cursor: pointer;
+    color: $textColorDark;
+  }
+  .zmdi-chevron-left {
+    position: absolute;
+    left: 0;
+    top: 13px;
+    cursor: pointer;
+    color: $primaryClr;
+    width: 42px;
+    height: 42px;
+    text-align: center;
+  }
+}
 #recipientsCtnSidebar {
+  .recipients-form-sections {
+    margin-top: 3em;
+  }
+  .datepickerBorderFix {
+    text-align: right;
+    padding: 0;
+    width: 92px;
+    float: right;
+  }
+  .datepickerCtn {
+    > div {
+      margin-right: 16px;
+    }
+    .form-control {
+      height: 21px;
+      text-align: RIGHT;
+      width: 70px;
+    }
+  }
+  #dateField label.labelDateExpiration {
+    font-weight: normal;
+    color: #999999;
+  }
+  form {
+    margin-left: 2.2em;
+  }
+  .custumListBody {
+    margin-left: 2em;
+  }
+  .num-items-section-ctn {
+    margin-bottom: 2.5em;
+    span {
+      background-color: $secondaryClr;
+      display: inline-block;
+      border-radius: 50% !important;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      line-height: 21px;
+      text-align: center;
+      font-size: 10px;
+      z-index: 1;
+      position: relative;
+      border: 0;
+      margin-right: 0.4em;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+  }
+  h2.headerSubCtn {
+    font-size: 1.15em;
+    color: #676767;
+    clear: both;
+    margin-top: 0;
+    margin-bottom: 1.7em;
+    i {
+      padding-left: 3px;
+      display: inline-block;
+      margin-right: 0.3em;
+      font-size: 1.25em;
+    }
+  }
   .advancedSharingSettings legend {
     display: block;
     width: 100%;
@@ -687,56 +981,42 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     display: inline-block;
     float: right;
   }
+  .sidebar-link {
+    text-transform: lowercase;
+    font-size: 11px;
+  }
   h2 {
     text-align: left;
     font-size: 1.3em;
-  }
-  h2.headerSubCtn {
-    font-size: 1.15em;
-    color: #676767;
-    clear: both;
-    margin-top: 0;
-    margin-bottom: 1.5em;
-    i {
-      display: inline-block;
-      margin-right: 0.5em;
-    }
-  }
-  h2.header-more-options {
-    text-align: center;
   }
   .savelistBtn {
     float: right;
     padding-top: 2px;
     top: -7px;
   }
-  .header-sidebar {
-    .zmdi-close {
-      position: absolute;
-      top: 19px;
-      right: 10px;
-      font-size: 1.7em;
-      cursor: pointer;
-    }
-    .zmdi-chevron-left {
-      position: absolute;
-      left: 11px;
-      top: 16px;
-      cursor: pointer;
-      color: #2196F3;
-    }
+  .fieldCtn {
+    padding: 0;
+    margin-left: 1em;
+  }
+  .dropdown.popOverForm:not([data-animation]).open .dropdown-menu {
+    right: 0;
+    max-width: 210px;
+    left: inherit;
   }
 }
 
-.clearfix {
-  clear: both !important;
+.clearfix:after {
+  visibility: hidden;
+  content:"" ;
+  display:block  !important;
+  clear:both  !important;
 }
 
 .blueBtn {
   color: #FFFFFF !important;
-  font-weight: bold !important;;
+  font-weight: bold !important;
   font-size: 1.1em;
-  background-color: #2196F3 !important;;
+  background-color: #2196F3 !important;
 }
 
 .files {
@@ -771,6 +1051,11 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     height: 50px;
   }
   #fileListTable {
+    .file-name-col {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
     .ctn-name-actions {
       color: #0E0E0E;
       .mobile-list-item-info{
@@ -1265,7 +1550,6 @@ div.borderedCircle {
 .defaultMultiToolbarState {
   visibility: hidden;
 }
-
 #selection-actions {
   padding-top: 15px;
   position: absolute;
@@ -1282,19 +1566,62 @@ div.borderedCircle {
   margin-top: -60px;
 
   .displayNumSelectedItems {
+    cursor:pointer;
     float: left;
     margin-top: -3px;
     margin-left: 20px;
     text-align: center;
     font-weight: bold;
     margin-right: 0;
-    border-radius: 18px;
+    border-radius: 5px;
     color: #FFFFFF;
     white-space: nowrap;
     background: #05B1FF;
-    padding: 4px 8px;
     font-size: 0.85em;
-    box-shadow: inset 0px 1px 0px 0px rgba(0, 0, 0, 0.06), 0px 1px 0px 0px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+    -webkit-transition: all 250ms ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    -moz-transition: all .250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+    i {
+      position: absolute;
+      font-size: 1.2em;
+      vertical-align: bottom;
+      line-height: 2em;
+      right: 0.5em;
+    }
+    p{
+      margin:0;
+      margin-top: 2px;
+      float: left;
+      padding: 4px 8px;
+    }
+
+  }
+  .view-icons-ctn {
+    float:left;
+    width: 29px;
+    height: 25px;
+    position: relative;
+    padding-left: 0.6em;
+    padding-right: 0.5em;
+    background-color: #fff;
+    color: #05B1FF;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-transition: all 250s ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    -moz-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+
+  }
+  .displayNumSelectedItems.activeBtnShowSelection{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    .view-icons-ctn {
+      border-left: solid 1px #C8ECFD;
+      background: #F3F3F3;
+      color: #004E71;
+    }
   }
 }
 
@@ -1303,7 +1630,7 @@ div.borderedCircle {
   float: left;
   > span {
     display: inline-block;
-    margin-left: 3em;
+    margin-left: 2.5em;
     margin-top: 0;
     font-size: 1.05em;
   }
@@ -1468,24 +1795,26 @@ div.borderedCircle {
   }
 }
 
+.datepicker-drop-right .dropdown-menu{
+  -webkit-transform-origin: top right !important;
+  -moz-transform-origin: top right !important;
+  -ms-transform-origin: top right !important;
+  transform-origin: top right !important;
+  right: 0;
+  left: auto;
+  float:right !important;
+}
+
 .advancedSharingSettings {
+  margin-left: 0 !important;
   .form-group.titleMailCustumisation {
     padding-left: 1em;
-    padding-right: 2em;
+    padding-right: 0.5em;
   }
   label {
     max-width: 85%;
   }
-  .datepickerCtn {
-    > div {
-      margin-right: 16px;
-    }
-    .form-control {
-      height: 21px;
-      TEXT-ALIGN: RIGHT;
-      WIDTH: 70px;
-    }
-  }
+
   .fieldCtn {
     padding-right: 2em;
     padding-left: 1em;
@@ -1519,10 +1848,7 @@ div.borderedCircle {
   .cssSlideUp.ng-hide {
     height: 0;
   }
-  .datepickerBorderFix {
-    margin-top: -8px;
-    float: right;
-  }
+
   .fg-line.datepickerCtn {
     display: block;
     width: auto;
@@ -1569,12 +1895,12 @@ div.borderedCircle {
     float: right;
   }
   .checkbox input:checked + .input-helper::before {
-    transform: scale(1.6);
+    transform: scale(1.3);
     left: 0px;
     border: 1px solid #E4E1E1;
   }
   .checkbox input:checked + .input-helper::after {
-    transform: scale(0.6) rotate(-50deg);
+    transform: scale(0.53) rotate(-50deg);
     opacity: 1;
   }
   .custumHeaderMailForm {
@@ -1685,9 +2011,7 @@ div.borderedCircle {
       }
     }
   }
-  .custumListContainer {
-    padding: 0px 25px;
-  }
+
 }
 
 .userBg {
@@ -3133,19 +3457,35 @@ body:not(.sw-toggled) #sidebar {
 }
 
 /*
-** CHAT
+** chat
 */
-#chat {
+
+.setWidth {
+  width: calc(100% - 350px) !important;
+}
+
+#chat , #chat.sidebar-right {
   top: 50px;
   height: calc(100% - 50px);
+  min-width: 350px;
+  z-index: -1;
+  padding-top:0;
 }
 
-#chat.toggled {
-  width: 25%;
-  width: -moz-calc(30% - 80.4px);
-  width: -webkit-calc(30% - 80.4px);
+#chat.toggled , #chat.sidebar-right.toggled{
+  z-index: 40;
+  display:block;
+  position: fixed;
+  pointer-events: all;
 }
-
+#chat.setSidebarRightMobileState {
+  position:fixed;
+  top:0;
+  min-width:100%;
+  z-index: 40;
+  height:100%;
+  pointer-events: none;
+}
 #sharewithlist {
   display: inline;
   list-style: none;
@@ -3383,9 +3723,10 @@ body:not(.sw-toggled) #sidebar {
       display: block;
       font-size: 0.8em;
       padding-left: 0.5em;
+      color: $primaryClr;
     }
     .numberOfiles {
-      color: #000;
+      color: $primaryClr;
       font-weight: 500;
     }
   }
@@ -3409,7 +3750,75 @@ body:not(.sw-toggled) #sidebar {
     filter: alpha(opacity=1);
   }
 }
+@media (max-width: 1294px) {
+  .right-sidebar-toggled {
+    #toolbar-actions > {
+      span:first-child {
+        margin-left: 0;
+      }
+      span {
+        margin-left: 1em;
+      }
+    }
+    #breadcrumb-wrap #action-header {
+      width: 67%;
+    }
+    #breadcrumb-wrap #action-header .search-bar {
+      margin: 0;
+    }
+    #breadcrumb-wrap .toolbar-actions-items {
+      float: right;
+      width: 30%;
+      margin: 0;
+    }
+    .exitSelection {
+      margin-right: 5px;
+    }
+  }
+}
+@media (max-width: 1196px) {
+  .right-sidebar-toggled {
+    #toolbar-actions span a span {
+      display: none;
+    }
+    #toolbar-actions > {
+      span , span:first-child {
+        margin-left: 1em;
+      }
+    }
+  }
+}
 
+@media (max-width: 1057px) {
+  body #content.content-toggled, body #content-container.content-toggled {
+    margin-left: 0;
+  }
+  #sidebar.toggled {
+    position: fixed;
+    z-index: 6;
+  }
+  #overlayMobile.toggledShowOverlay {
+    display: block;
+    position: fixed;
+    z-index: 6;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  #overlayMobileFab.toggledMobileShowOverlay {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  #menu-trigger {
+    display: block;
+  }
+}
+
+@media (min-width: 1058px) {
+  #menu-trigger {
+    display: none;
+  }
+}
 /*
 ** RESPONSIVE
 */
@@ -3435,18 +3844,6 @@ body:not(.sw-toggled) #sidebar {
   }
 }
 
-@media (min-width: 768px) {
-  #menu-trigger {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  #menu-trigger {
-    display: block;
-  }
-}
-
 @media (min-width: 992px) {
   .container {
     width: 100%;
@@ -3469,24 +3866,20 @@ body:not(.sw-toggled) #sidebar {
       width:75%;
       padding: 0;
       margin: 0;
-
     }
-    .toolbar-actions-items{
-      width:25%;
-    }
-    .file-name-col{
+     .file-name-col{
     }
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
   .card-header:not(.ch-alt) {
     padding: 23px 25px 0;
   }
   .container {
     width: 100%;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
   }
 }
 
@@ -3505,7 +3898,6 @@ body:not(.sw-toggled) #sidebar {
     width: auto;
     padding: 5px !important;
   }
-
   #transfert-ctn .dataListCtn {
     width: 80%;
     margin-left: 5px !important;
@@ -3676,23 +4068,7 @@ body:not(.sw-toggled) #sidebar {
   body #content.content-toggled {
     padding-left: 0px !important;
   }
-  #sidebar.toggled {
-    position: fixed;
-    z-index: 6;
-  }
-  #overlayMobile.toggledShowOverlay {
-    display: block;
-    position: fixed;
-    z-index: 6;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    //pointer-events: none;
-  }
-  #overlayMobileFab.toggledMobileShowOverlay {
-    display: block;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+
 }
 
 @media (max-width: 938px) {
@@ -3715,6 +4091,11 @@ body:not(.sw-toggled) #sidebar {
 }
 
 @media (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
   #sidebar.toggled {
     position: fixed;
     z-index: 6;
@@ -3746,10 +4127,22 @@ body:not(.sw-toggled) #sidebar {
     padding-top: 0 !important;
   }
   .custumListContainer {
-    padding: 0px 15px !important;
+    padding: 0px;
   }
   .custumListItem {
     margin-right: 15px;
+  }
+  .header-sidebar {
+    background-color: $primaryClr;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+    border-bottom: 0;
+    h2.header-more-options {
+      color: #fff;
+    }
+    .zmdi-chevron-left {
+      color: #fff;
+    }
+
   }
 }
 
@@ -3844,18 +4237,13 @@ body:not(.sw-toggled) #sidebar {
     max-width: 85%;
   }
 }
-@media (min-width: 320px) and (max-width: 350px) {
+@media (max-width: 350px) {
   .files #fileListTable tr > td:nth-child(2) {
     width: 285px;
+    padding-left: 5px;
   }
 }
-@media (max-width: 320px) {
-  .files #fileListTable tr > td:nth-child(1),
-  .files #fileListTable tr > td:nth-child(2) {
-    display: table-cell !important;
-    width: auto !important;
-  }
-}
+
 @media (max-width: 768px) {
   .btn-add-files-ctn {
     padding-top: 0;
@@ -3887,8 +4275,8 @@ body:not(.sw-toggled) #sidebar {
   }
   .advancedSharingSettings {
     .form-group.titleMailCustumisation {
-      padding-left: 0em;
-      padding-right: 0em;
+      padding-left: 1em;
+      padding-right: 2.3em;
     }
     .checkbox-inline,
     .radio-inline {
@@ -3908,17 +4296,41 @@ body:not(.sw-toggled) #sidebar {
         WIDTH: 70px;
       }
     }
-    .fieldCtn {
-      padding: 0;
-      margin-bottom: 1.5em;
-    }
     .custumHeaderMailForm {
       margin-top: 0em;
+    }
+    .fieldCtn {
+      padding-left: 1em;
+      margin-bottom: 1.5em;
+      padding-right: 1.67em !important;
+    }
+  }
+  .advancedSharingSettings {
+    .checkbox input:checked + {
+      .input-helper::before {
+        transform: scale(1.6);
+        left: 0px;
+      }
+      .input-helper::after {
+        transform: scale(0.53) rotate(-50deg);
+        opacity: 1;
+        left: -4px;
+      }
+    }
+    .fg-line.datepickerCtn {
+      margin-left: 1.5em;
+    }
+    .cssSlideUp {
+      padding-left: 1em;
+      padding-right: 1em;
+      > .col-xs-12 {
+        padding: 0;
+      }
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .container {
     margin-right: auto;
     margin-left: auto;
@@ -4017,6 +4429,7 @@ body:not(.sw-toggled) #sidebar {
       }
       .actions-list-ctn {
         float: right;
+        text-align:center ;
       }
       .thumb-type-item i {
         padding-top: 7px;

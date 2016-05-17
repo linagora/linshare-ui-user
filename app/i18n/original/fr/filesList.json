@@ -20,7 +20,7 @@
       "SHARED_WITH": "Partagé avec:",
       "PEOPLE_SHARED_WITH": "personne(s)",
       "DESCRIPTION": "Description",
-      "QUICK_SHARE": "Partage rapide",
+      "QUICK_SHARE": "Partage",
       "SHARE_PLACEHOLDER": "adresse de courriel des destinataires",
       "ADVANCED_SHARE": "Partage avancé"
     },
@@ -33,7 +33,8 @@
       "SETTINGS": "Paramètres avancés",
       "MORE_OPTIONS": "plus d'options",
       "RECIPIENTS": "Ajouter des destinataires",
-      "CREATE_MAILING_LIST": "Créer une liste d'envoi"
+      "CREATE_MAILING_LIST": "Sauvegarder",
+      "CREATE_MAILING_LIST_ALT": "Créer une liste d'envoi"
     },
     "SHARE_OPTIONS": {
       "TITLE": "Options du partage",

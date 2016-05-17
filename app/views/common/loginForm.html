@@ -43,13 +43,13 @@
       <p>Libre &amp; Free</p>
     </div>
   </div>
-  <div class="login-content">
-    <div data-ng-controller="AuthenticationController" ls-login-form-display class="parent-login-form-alignment" id="l-login">
+  <div class="login-content" id="l-login"  data-ng-controller="AuthenticationController">
+    <div class="parent-login-form-alignment">
       <div class="logo-title">
-        <img src="images/ls-logo-big.png" alt="">
+        <img src="images/ls-logo-big.png" alt="logo">
         <p>{{'LOGIN.TAGLINE' | translate }}</p>
       </div>
-      <div class="lc-block toggled child-centered-login-form" >
+      <div class="lc-block toggled child-centered-login-form">
         <div class="inner-content-form-ctn">
           <div class="header-login-form">
             <h1>{{'LOGIN.LOGIN_HEADER' | translate }}</h1>
@@ -89,7 +89,7 @@
                 {{'LOGIN.KEEP_SIGNED' | translate }}
               </label>
             </div>
-            <a class="pull-right">{{'LOGIN.FORGOTTEN_PASSWORD' | translate }}</a>
+            <a class="pull-right mdp-forgotten">{{'LOGIN.FORGOTTEN_PASSWORD' | translate }}</a>
             <div class="clearfix"></div>
             <button class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate }}</button>
           </form>

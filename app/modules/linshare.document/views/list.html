@@ -1,8 +1,8 @@
-<div ui-view class="file-listing-ctn">
+<div ui-view class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }" >
   <div class="container files">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
-    <div class="card">
+    <div class="card" id="collapsible-content">
       <div class="card-header">
         <div id="breadcrumb-wrap">
           <div class="breadcrumbsCtn hidden-xs">
@@ -27,7 +27,7 @@
                 <i class="fa fa-check-square-o activeLink" ></i>
               </a>
               </span>
-              <div class="sortDropdown col-xs-3">
+              <div class="sortDropdown col-xs-3 toolbar-mobile-item">
                 <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
                   <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
                      ng-disabled="disabled" aria-haspopup="true" aria-expanded="false" >
@@ -87,11 +87,16 @@
               </a>
             </div>
             <div class="input-group search-bar hidden-xs" >
-              <div class="fg-line">
-                <input type="text" class="form-control"
-                       placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                       ng-change="updateParams()"
-                       ng-model="paramFilter['name']">
+              <div id="search-field-ctn" >
+                <div class="search-style">
+                  <div class="fg-line">
+                    <input type="text" class="form-control"
+                           autocomplete="off"
+                           ng-model="paramFilter['name']"
+                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                           ng-change="updateParams()">
+                  </div>
+                </div>
               </div>
               <span class="input-group-addon last clickable"
                     x-ng-click="advancedFilterBool = !advancedFilterBool"
@@ -127,27 +132,34 @@
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
-          <div class="exitSelection" ng-click="resetSelectedDocuments()">
+          <div class="exitSelection" ng-click="resetSelectedDocuments()"
+               title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
             <i class="zmdi zmdi-close"></i>
           </div>
-          <div class="displayNumSelectedItems">
-            <span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}
+          <div class="displayNumSelectedItems" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}"
+               data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
+               ng-click="activeBtnShowSelection = !activeBtnShowSelection">
+              <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
+              <div class="pull-left view-icons-ctn">
+                <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
+                <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
+              </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span ng-click="resetSelectedDocuments()">
-            <a class="plainTxtBtn">
+            <a class="plainTxtBtn" title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
               <i class="zmdi zmdi-refresh-alt" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
               <span>{{'SELECTION_TOOLBAR.RESET' | translate}}</span>
             </a>
             </span>
             <span>
-            <a class="plainTxtBtn partageLink"
+            <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="onShare(); mactrl.sidebarToggle.right = true;">
               <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
             </span>
             <span>
-            <a class="plainTxtBtn partageLink"
+            <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="deleteDocuments(selectedDocuments)">
               <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span></a>
@@ -202,7 +214,7 @@
                         </p>
                       </span>
                     </span>
-                    <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
+                    <span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right" data-ng-class=
                         "{ 'openr': (mactrl.sidebarToggle.right === true) && (sidebarRightDataType === 'details')}">
                         <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop>
@@ -263,8 +275,7 @@
               </tr>
             </table>
           </div>
-          <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-                 data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
         </div>
       </div>
     </div>
@@ -319,3 +330,6 @@
     </div>
   </section>
 </div>
+<aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+       data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
+</aside>

@@ -1,19 +1,12 @@
-<div class="card col-xs-12" id="recipientsCtnSidebar">
-
-  <div class="header-sidebar">
-    <i class="zmdi zmdi-chevron-left zmdi-hc-2x" ng-click="loadSidebarContent('share')"></i>
-
-    <h2 class="header-more-options">{{ "RIGHT_PANEL.SHARE_OPTIONS.TITLE" | translate }}</h2>
-    <span>
+<div class="header-sidebar">
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x" ng-click="loadSidebarContent('share')"></i>
+  <h2 class="header-more-options">{{ "RIGHT_PANEL.SHARE_OPTIONS.TITLE" | translate }}</h2>
+    <span class="hidden-xs">
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
-  </div>
-
-  <md-divider style="margin-bottom: 2.5em;"></md-divider>
-
-  <div>
-    <working-date-picker></working-date-picker>
-  </div>
+</div>
+<div class="card col-xs-12 " id="recipientsCtnSidebar"  ng-style="sizeSidebarRight">
+  <working-date-picker></working-date-picker>
   <form class="advancedSharingSettings">
     <div class="form-group col-xs-12 addNote">
       <legend>{{ "RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate }} :</legend>
@@ -21,11 +14,10 @@
                 placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE_PLACEHOLDER' | translate }}">
       </textarea>
     </div>
-
-    <div ng-show="newShare.secured.enable" class="col-xs-12  fieldCtn">
+    <div ng-show="newShare.secured.enable" class="col-xs-12 fieldCtn">
       <div class="fg-line">
         <div class="form-inline">
-          <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate }}:</label>
+          <label for="secureSharing">{{ "RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="secureSharing" ng-checked="true"
                    ng-disabled="!newShare.secured.userCanOverride"
@@ -38,7 +30,7 @@
     <div ng-show="newShare.creationAcknowledgement.enable" class="col-xs-12 fieldCtn">
       <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
         <div class="form-inline">
-          <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate }}:</label>
+          <label for="SharingNotification">{{ "RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="SharingNotification"
                    ng-disabled="!newShare.creationAcknowledgement.userCanOverride"
@@ -51,7 +43,7 @@
     <div ng-show="newShare.enableUSDA.enable" class="col-xs-12 fieldCtn">
       <div class="fg-line">
         <div class="form-inline">
-          <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate }}:</label>
+          <label for="nonDownloadedNotification">{{ "RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate }}:</label>
           <label class="checkbox checkbox-inline m-r-20">
             <input type="checkbox" name="nonDownloadedNotification" ng-checked="true"
                    ng-disabled="!newShare.enableUSDA.userCanOverride"
@@ -62,11 +54,11 @@
       </div>
     </div>
     <div ng-show="newShare.enableUSDA.value" class="col-xs-12 fieldCtn" id="dateField">
-      <label for="comment" class="labelDateExpiration">
+      <label for="notificationDate" >
         {{ "RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate }}:
       </label>
 
-      <div class="datepickerBorderFix date-picker dp-blue" ng-class="{ 'is-opened': opened2 == true }">
+      <div class="datepickerBorderFix date-picker dp-blue datepicker-drop-right" ng-class="{ 'is-opened': opened2 == true }">
         <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened2 == true }">
           <div class="form-inline">
             <input ng-click="open($event, 'opened2')" type="text"
@@ -80,12 +72,12 @@
         </div>
       </div>
     </div>
-    <div class="custumHeaderMailForm col-xs-12">
+    <div class="custumHeaderMailForm col-xs-12 clearfix">
       <div>
         <div class="form-group fg-line col-xs-12 titleMailCustumisation ">
           <div class="form-inline">
-            <label for="comment">{{ "RIGHT_PANEL.SHARE_OPTIONS.ATTACH_EMAIL" | translate }}</label>
-            <label class="checkbox checkbox-inline m-r-20">
+            <label for="mailCustum">{{ "RIGHT_PANEL.SHARE_OPTIONS.ATTACH_EMAIL" | translate }}</label>
+            <label class="checkbox checkbox-inline">
               <input type="checkbox" name="mailCustum" ng-checked="boo"
                      ng-model="mailCustum" ng-init="boo=false" ng-click="boo = !boo"/>
               <i class="input-helper"></i>
@@ -103,10 +95,9 @@
                     ng-model="newShare.message">
           </textarea>
         </div>
-        <md-divider class="col-xs-12 mailDivider" md-inset=""></md-divider>
+        <md-divider class="col-xs-12 mailDivider hidden-xs" md-inset=""></md-divider>
       </div>
     </div>
-    <div class="clearfix">&nbsp;</div>
   </form>
 </div>
 

@@ -86,7 +86,8 @@
     "SHARE": "Partager",
     "REFRESH": "Actualiser",
     "COPY_IN_GROUP": "Copier dans un groupe",
-    "DELETE": "Supprimer"
+    "DELETE": "Supprimer",
+    "INFORMATION" : "Information"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
@@ -141,7 +142,8 @@
     "COPY": "Copier",
     "DELETE": "Supprimer",
     "RESET": "Réinitialiser",
-    "FILES": "Fichier(s)"
+    "FILES": "Fichier(s)",
+    "SHOW_SELECTION": "Voir sélection"
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
