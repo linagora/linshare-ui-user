@@ -40,22 +40,22 @@ angular.module('linshare.components')
       if(seconds < NB_SECONDS_IN_MIN) {
         return seconds + ' s';
       } else if(NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
-        return secToMin(seconds)
+        return secToMin(seconds);
       } else if(NB_SECONDS_IN_HOUR <= seconds < NB_SECONDS_IN_DAY) {
         return secToHour(seconds);
       }
-    }
+    };
   })
   .filter('relativeTime', function($translate) {
     moment.locale($translate.use());
     return function(time) {
       return moment(time).fromNow();
-    }
+    };
   })
   .filter('getextension', function() {
     return function(filename) {
       return filename.split('.').pop().toUpperCase();
-    }
+    };
   })
   .filter('mimetypeIcone', function() {
     return function(fileType) {

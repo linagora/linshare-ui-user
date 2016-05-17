@@ -61,7 +61,7 @@ angular.module('linshare.components')
           startingDay: 1
         };
 
-        scope.format = $translate.use() == 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
+        scope.format = $translate.use() === 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
 
         scope.updateFilters = function() {
           if (scope.showUnit || scope.showDateRange) {
@@ -109,7 +109,7 @@ angular.module('linshare.components')
       restrict: 'E',
       scope: false,
       transclude: true,
-      link: function(scope, elm, attrs) {
+      link: function(scope) {
         scope.dt = new Date();
         scope.minRange = '';
         scope.minDate = scope.minDate ? null : new Date();
@@ -123,7 +123,7 @@ angular.module('linshare.components')
           formatYear: 'yy',
           startingDay: 1
         };
-        scope.format = $translate.use() == 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
+        scope.format = $translate.use() === 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
       }
     };
   });

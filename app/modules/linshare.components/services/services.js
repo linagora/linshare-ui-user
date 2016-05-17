@@ -93,5 +93,5 @@ angular.module('linshare.components')
       notifyTopCenter: function(message, type) {
         return growlNotifyer(message, type, fromTopCenter);
       }
-    }
+    };
   });

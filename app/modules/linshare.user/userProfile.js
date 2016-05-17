@@ -85,8 +85,8 @@ angular.module('linshare.userProfile', [])
       update: function(uuid) {
         return baseGuestRest.put(uuid);
       },
-      assignGroup: function(uuid) {
+      assignGroup: function() {
         return null;
       }
-    }
+    };
   });

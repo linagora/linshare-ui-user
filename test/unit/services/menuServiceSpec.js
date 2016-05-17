@@ -11,6 +11,6 @@ describe('Unit test for menuService', function() {
 
   it('should return a not null tab', function() {
     expect(menuService.getAvailableTabs()).not.toBeNull();
-  })
+  });
 
 });

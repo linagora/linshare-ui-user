@@ -147,12 +147,6 @@ angular.module('linshareUiUserApp')
       }
     };
 
-    if($scope.mactrl.sidebarToggle.left){
-      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-    }
-    this.resizeDragNDropCtn=function(attr) {
-      checkAndSetNewWidth(attr);
-    };
     function checkAndSetNewWidth(attr) {
       var widthWindow = $(window).width();
       if(widthWindow > 768){
@@ -160,11 +154,19 @@ angular.module('linshareUiUserApp')
       }
       if (attr) {
         var nwidthWindow = widthWindow - 268;
-        angular.element(".resetContentWidth").width(nwidthWindow);
+        angular.element('.resetContentWidth').width(nwidthWindow);
       } else {
-        angular.element(".resetContentWidth").width("100%");
+        angular.element('.resetContentWidth').width('100%');
       }
     }
+
+    if($scope.mactrl.sidebarToggle.left){
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+    }
+    this.resizeDragNDropCtn=function(attr) {
+      checkAndSetNewWidth(attr);
+    };
+
     angular.element(window).resize(function(){
       checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
     });
@@ -235,7 +237,7 @@ angular.module('linshareUiUserApp')
      * This function is call on file upload success to add metadata from the server to the flowFile
      * That will be usefull to delete/share a uploaded document from anywhere.
      */
-    $scope.addUploadedDocument = function(flowFile, serverResponse, flowObject) {
+    $scope.addUploadedDocument = function(flowFile, serverResponse) {
       var response = angular.fromJson(serverResponse);
       flowFile.linshareDocument = response.entry;
       $scope.callReloadDocuments();

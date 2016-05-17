@@ -3,10 +3,10 @@
 angular.module('linshare.document')
 
   // DIRECTIVE TO TOGGLE DOCUMENT SELECTION
-  .directive('lsOnDocumentSelect', function(LinshareDocumentService, $log) {
+  .directive('lsOnDocumentSelect', function(LinshareDocumentService) {
     var toggleDocumentSelection = function(scope) {
       scope.currentSelectedDocument.current = scope.documentFile;
-      scope.documentFile['isSelected'] = !scope.documentFile['isSelected'];
+      scope.documentFile.isSelected = !scope.documentFile.isSelected;
       if(scope.documentFile.isSelected) {
         if(scope.sidebarRight) {
           if(scope.documentFile.shared > 0) {
@@ -41,8 +41,8 @@ angular.module('linshare.document')
         currentSelectedDocument: '=',
         sidebarRight: '='
       },
-      link: function(scope, element, attr) {
-        element.bind('contextmenu', function(event) {
+      link: function(scope, element) {
+        element.bind('contextmenu', function() {
           var isHighlighted = element.hasClass('highlightListElem');
           if(!isHighlighted) {
             toggleDocumentSelection(scope);
@@ -66,5 +66,5 @@ angular.module('linshare.document')
       templateUrl: function(elm, attr) {
         return 'modules/linshare.document/directives/sidebarContent-' + attr.sidebarContent + '.html';
       }
-    }
+    };
   });

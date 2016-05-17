@@ -117,7 +117,7 @@ angular.module('linshareUiUserApp')
           if (currentState.indexOf('transfert') > -1  || currentState.indexOf('documents') > -1 ) {
             return {
               color: '#2196F3'
-            }
+            };
           }
 
           var res;

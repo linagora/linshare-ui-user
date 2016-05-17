@@ -55,5 +55,5 @@ angular.module('linshare.components')
         $scope.dealWithSelectedUser = $scope.onSelectFunction || addRecipients;
       },
       replace: true
-    }
+    };
   });

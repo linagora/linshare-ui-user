@@ -63,6 +63,8 @@ angular.module('linshareUiUserApp')
       }
       return true;
     });
+
+    /*jshint unused: false */
     Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       $log.debug('my addresponseintercep', response);
       if (response.status === 401) {
@@ -75,7 +77,7 @@ angular.module('linshareUiUserApp')
       $log.debug('data from lsIntercept401', data);
     });
 
-    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
       $log.debug('routechangestart', toState, 'my event', evt, 'toParams', toParams, 'fromState', fromState);
       $rootScope.toState = toState.name;
       $rootScope.fromState = fromState.name;
@@ -119,6 +121,7 @@ angular.module('linshareUiUserApp')
 
   }]);
 
+/*jshint latedef:false */
 function validate(str) {
   str = str.trim();
   str = str.replace(/^\/|\/$/g, ''); //remove first and last slash if present

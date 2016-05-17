@@ -1,5 +1,6 @@
 'use strict';
 
+/*jshint ignore:start */
 describe('Testing Documents Module: ', function () {
 
   // load the module
@@ -99,4 +100,5 @@ describe('Testing Documents Module: ', function () {
   });
 
 });
+/*jshint ignore:end */
 

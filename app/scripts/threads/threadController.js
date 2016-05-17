@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .controller('ThreadController', function($scope, ThreadService, ngTableParams, $filter){
+  .controller('ThreadController', function($scope, ThreadService, NgTableParams, $filter){
     //ThreadService.getAll().then(function(threads) {
     //  $scope.threads = threads;
     //});
 
-    $scope.tableParams = new ngTableParams({
+    $scope.tableParams = new NgTableParams({
       page: 1,
       count: 20
     }, {

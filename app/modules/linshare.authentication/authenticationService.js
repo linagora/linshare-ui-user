@@ -30,6 +30,7 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
       return {
         login: function (login, password) {
           $log.debug('Authentication:login');
+          /* globals Base64 */
           return baseAuthentication.customGET('authorized', {
             //while the all requests have no auth header we need to ignote authmodule
             ignoreAuthModule: true

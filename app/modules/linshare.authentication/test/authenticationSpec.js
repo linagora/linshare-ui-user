@@ -1,5 +1,6 @@
 'use strict';
 
+/*jshint ignore:start */
 describe('Testing Authentication Module: ', function () {
 
   // load the module
@@ -92,3 +93,4 @@ describe('Testing Authentication Module: ', function () {
 
 
 });
+/* jshint ignore:end */

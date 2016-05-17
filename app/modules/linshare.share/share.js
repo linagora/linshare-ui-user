@@ -70,6 +70,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     };
   })
 
+  /* jshint ignore:start */
   .factory('ShareObjectService', function($log, LinshareFunctionalityService) {
 
     var
@@ -81,8 +82,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       creationAcknowledgement = {enable: false, value: '', userCanOverride: false},
       enableUSDA = {},
       notificationDateForUSDA = {enable: false, value: '', userCanOverride: false},
-      secured = {enable: false, value: '', userCanOverride: false},
-      submitShare = false;
+      secured = {enable: false, value: '', userCanOverride: false};
+      //submitShare = false;
 
 
     LinshareFunctionalityService.getAll().then(function(func) {
@@ -96,7 +97,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         expirationDate.enable = true;
         expirationDate.value = moment().endOf('day').add(functionalities.SHARE_EXPIRATION.value,
           functionalities.SHARE_EXPIRATION.unit).subtract(1, 'd').valueOf();
-        expirationDate.userCanOverride = functionalities.SHARE_EXPIRATION.canOverride
+        expirationDate.userCanOverride = functionalities.SHARE_EXPIRATION.canOverride;
       }
 
       //if creationAcknowledgement is activated, then set default value
@@ -201,7 +202,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           sharingNote: self.sharingNote,
           subject: self.subject,
           message: self.message
-        }
+        };
       };
 
       this.resetForm = function() {
@@ -239,11 +240,11 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
       this.isValid = function() {
         return documents.length > 0 && (recipients.length || mailingListUuid.length > 0);
-      }
+      };
     }
     return shareObjectForm;
   })
-
+  /* jshint ignore:end */
 
 /**
  * @ngdoc controller
@@ -313,7 +314,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.filesToShare = $stateParams.selected;
     })
 
-  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
+  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService) {
     $scope.submitShare = function(shareCreationDto, now) {
       if($scope.selectedDocuments.length === 0 ) {
         growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
@@ -342,7 +343,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     // list - upon clicking on any contact list item, it is removed
     $scope.removeItem = function($event) {
       var currItem = $event.currentTarget;
-      $(currItem).parent().parent().css("display", "none");
+      angular.element(currItem).parent().parent().css('display', 'none');
     };
 
     // pop up :  save recipients to a list
@@ -350,14 +351,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.toggled = function() {
       dropDownIsOpen = !dropDownIsOpen;
       if (dropDownIsOpen) {
-        $("#labelList").focus();
+        angular.element('#labelList').focus();
       }
     };
     /* once the "create button" is clicked (located within the "save as list" pop up) it launches a function and then
      closes the drop down pop up
      */
     $scope.createRecipientList = function($event) {
-      closeDropdownPopUp($event)
+      closeDropdownPopUp($event);
     };
     /* once the cancel button is clicked (located within the "save as list" pop up) it launches a function and then
      closes the drop down pop up
@@ -366,6 +367,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       closeDropdownPopUp($event);
     };
 
+    /*jshint unused:false */
     $scope.addUploadedDocument = function(file, message, flow) {
       var documentResponse = [angular.fromJson(message)];
       $scope.share_array[1].addDocuments(documentResponse);
@@ -377,186 +379,136 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         $scope.submitShare(shareCreationDto, true);
       }
     };
-    var dropDownIsOpen = false;
-    // list - upon clicking on any contact list item, it is removed
-    $scope.removeItem = function($event) {
-      var currItem = $event.currentTarget;
-      $(currItem).parent().parent().css("display", "none");
-    };
 
-    // pop up :  save recipients to a list
-    // once the  : "save as list" button is clicked it sets the field to focus
-    $scope.toggled = function() {
-      dropDownIsOpen = !dropDownIsOpen;
-      if (dropDownIsOpen) {
-        $("#labelList").focus();
-      }
-    };
-    /* once the "create button" is clicked (located within the "save as list" pop up) it launches a function and then
-     closes the drop down pop up
-     */
-    $scope.createRecipientList = function($event) {
-      closeDropdownPopUp($event)
-    };
-    /* once the cancel button is clicked (located within the "save as list" pop up) it launches a function and then
-     closes the drop down pop up
-     */
-    $scope.closeDropdown = function($event) {
-      closeDropdownPopUp($event);
-    };
-
-    function closeDropdownPopUp($event) {
-      $(".savelistBtn").click();
+    function closeDropdownPopUp() {
+      angular.element('.savelistBtn').click();
     }
 
     /* chosen : if the user selects an item located within the select dropdown, it launches a function
      in order to create a new contact chip  */
-    $(".chosen-select").chosen({
-      width: "100%"
+    angular.element('.chosen-select').chosen({
+      width: '100%'
     });
-    $('.chosen-results').on('change', function(evt, params) {
+    /*jshint unused:false */
+    angular.element('.chosen-results').on('change', function(evt, params) {
       createNewItem();
     });
 
     function createNewItem() {}
     /* affix : slide 2 recipients: set up required in order to maintain the left sidebar recipient selection
      onto the screen after the users scrolls down beyond the "add recipient" first field's position*/
-    $(function() {
-      setSticky();
-      $(window).resize(function() {
-        setSticky();
-      });
-
+    angular.element(function() {
       function setSticky() {
-        var wWidth = $(".sticky").parent().width();
+        var wWidth = angular.element('.sticky').parent().width();
         if (wWidth > 768) {
-          if (!!$('.sticky').offset()) {
+          if (!!angular.element('.sticky').offset()) {
             var widthSticky = (wWidth * 41) / 100;
-            $(".sticky").css("max-width", widthSticky);
-            var stickyTop = $('.sticky').offset().top;
+            angular.element('.sticky').css('max-width', widthSticky);
+            var stickyTop = angular.element('.sticky').offset().top;
             stickyTop -= 50; // our header height
-            $(window).scroll(function() { // scroll event
-              var windowTop = $(window).scrollTop();
+            angular.element(window).scroll(function() { // scroll event
+              var windowTop = angular.element(window).scrollTop();
               if (stickyTop < windowTop) {
-                $('.sticky').css({
+                angular.element('.sticky').css({
                   position: 'fixed',
                   top: 50
                 });
               } else {
-                $('.sticky').css({
+                angular.element('.sticky').css({
                   position: 'static',
                   clear: 'both'
                 });
               }
             });
           }
-          $("#recipientsCtn").removeClass("w768");
-          $(".custumListContainer").css({
+          angular.element('#recipientsCtn').removeClass('w768');
+          angular.element('.custumListContainer').css({
             width: '58%'
           });
         }
         if (wWidth < 450) {
-          $("#recipientsCtn").addClass("w450");
+          angular.element('#recipientsCtn').addClass('w450');
         }
-        if ((wWidth > 450) && ($("#recipientsCtn").hasClass("w450"))) {
-          $("#recipientsCtn").removeClass("w450");
+        if ((wWidth > 450) && (angular.element('#recipientsCtn').hasClass('w450'))) {
+          angular.element('#recipientsCtn').removeClass('w450');
         }
         if (wWidth < 750) {
-          $(".sticky").css("max-width", "100%");
-          $(".custumListContainer").css({
+          angular.element('.sticky').css('max-width', '100%');
+          angular.element('.custumListContainer').css({
             width: '100%'
           });
-          $("#recipientsCtn").addClass("w768");
+          angular.element('#recipientsCtn').addClass('w768');
         }
       }
+      setSticky();
+      angular.element(window).resize(function() {
+        setSticky();
+      });
     });
     /*slider navigation code */
     $scope.currSlide = 1;
 
     function clearNavClasses() {
-      $(".slideCtn").removeClass('goToSlide1 goToSlide2 goToSlide3');
+      angular.element('.slideCtn').removeClass('goToSlide1 goToSlide2 goToSlide3');
     }
 
-    function closeDropdownPopUp($event) {
-      $(".savelistBtn").click();
-    }
-
-    /* chosen : if the user selects an item located within the select dropdown, it launches a function
-     in order to create a new contact chip  */
-    $(".chosen-select").chosen({
-      width: "100%"
-    });
-    $('.chosen-results').on('change', function(evt, params) {
-      createNewItem();
-    });
-
-    function createNewItem() {}
-    /* affix : slide 2 recipients: set up required in order to maintain the left sidebar recipient selection
-     onto the screen after the users scrolls down beyond the "add recipient" first field's position*/
     $(function() {
-      setSticky();
-      $(window).resize(function() {
-        setSticky();
-      });
-
       function setSticky() {
-        var wWidth = $(".sticky").parent().width();
+        var wWidth = angular.element('.sticky').parent().width();
         if (wWidth > 768) {
-          if (!!$('.sticky').offset()) {
+          if (!!angular.element('.sticky').offset()) {
             var widthSticky = (wWidth * 41) / 100;
-            $(".sticky").css("max-width", widthSticky);
-            var stickyTop = $('.sticky').offset().top;
+            angular.element('.sticky').css('max-width', widthSticky);
+            var stickyTop = angular.element('.sticky').offset().top;
             stickyTop -= 50; // our header height
-            $(window).scroll(function() { // scroll event
-              var windowTop = $(window).scrollTop();
+            angular.element(window).scroll(function() { // scroll event
+              var windowTop = angular.element(window).scrollTop();
               if (stickyTop < windowTop) {
-                $('.sticky').css({
+                angular.element('.sticky').css({
                   position: 'fixed',
                   top: 50
                 });
               } else {
-                $('.sticky').css({
+                angular.element('.sticky').css({
                   position: 'static',
                   clear: 'both'
                 });
               }
             });
           }
-          $("#recipientsCtn").removeClass("w768");
-          $(".custumListContainer").css({
+          angular.element('#recipientsCtn').removeClass('w768');
+          angular.element('.custumListContainer').css({
             width: '58%'
           });
         }
         if (wWidth < 450) {
-          $("#recipientsCtn").addClass("w450");
+          angular.element('#recipientsCtn').addClass('w450');
         }
-        if ((wWidth > 450) && ($("#recipientsCtn").hasClass("w450"))) {
-          $("#recipientsCtn").removeClass("w450");
+        if ((wWidth > 450) && (angular.element('#recipientsCtn').hasClass('w450'))) {
+          angular.element('#recipientsCtn').removeClass('w450');
         }
         if (wWidth < 750) {
-          $(".sticky").css("max-width", "100%");
-          $(".custumListContainer").css({
+          angular.element('.sticky').css('max-width', '100%');
+          angular.element('.custumListContainer').css({
             width: '100%'
           });
-          $("#recipientsCtn").addClass("w768");
+          angular.element('#recipientsCtn').addClass('w768');
         }
       }
+      setSticky();
+      angular.element(window).resize(function() {
+        setSticky();
+      });
     });
-    /*slider navigation code */
-    $scope.currSlide = 1;
-
-    function clearNavClasses() {
-      $(".slideCtn").removeClass('goToSlide1 goToSlide2 goToSlide3');
-    }
 
     function setSendLink() {
-      $(".transfertFilesBtnCtn .nextLink").addClass('hide');
-      $(".transfertFilesBtnCtn .sendLink").removeClass('hide');
+      angular.element('.transfertFilesBtnCtn .nextLink').addClass('hide');
+      angular.element('.transfertFilesBtnCtn .sendLink').removeClass('hide');
     }
 
     function resetSendLink() {
-      $(".transfertFilesBtnCtn .sendLink").addClass('hide');
-      $(".transfertFilesBtnCtn .nextLink").removeClass('hide');
+      angular.element('.transfertFilesBtnCtn .sendLink').addClass('hide');
+      angular.element('.transfertFilesBtnCtn .nextLink').removeClass('hide');
     }
 
     function goToNextSlide(currNum) {
@@ -564,33 +516,34 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       var nextNumSlide = currSlideNum + 1;
       clearNavClasses();
       resetSendLink();
-      if (currNum == 1) {
-        var isSlideDone = $(".sliderLinksCtn div:nth-child(" + currSlideNum + ")").hasClass('done');
-        if (!isSlideDone) $(".form-wizard-nav .progress-bar").css('width', '50%');
-      } else if (currNum == 2) {
-        $(".form-wizard-nav .progress-bar").css('width', '100%');
+      if (currNum === 1) {
+        var isSlideDone = angular.element('.sliderLinksCtn div:nth-child(' + currSlideNum + ')').hasClass('done');
+        if (!isSlideDone) {
+          angular.element('.form-wizard-nav .progress-bar').css('width', '50%');
+        }
+      } else if (currNum === 2) {
+        angular.element('.form-wizard-nav .progress-bar').css('width', '100%');
         setSendLink();
-      } else if (currNum == 3) {
+      } else if (currNum === 3) {
         nextNumSlide = 1;
       }
-      $(".slideCtn").addClass('goToSlide' + nextNumSlide + '');
-      $(".form-wizard-nav div.active").removeClass('active');
-      $(".sliderLinksCtn div:nth-child(" + nextNumSlide + ")").addClass('active');
-      $(".sliderLinksCtn div:nth-child(" + currSlideNum + ")").addClass('done');
+      angular.element('.slideCtn').addClass('goToSlide' + nextNumSlide + '');
+      angular.element('.form-wizard-nav div.active').removeClass('active');
+      angular.element('.sliderLinksCtn div:nth-child(' + nextNumSlide + ')').addClass('active');
+      angular.element('.sliderLinksCtn div:nth-child(' + currSlideNum + ')').addClass('done');
       $scope.currSlide = nextNumSlide;
     }
 
     function goToPreviousSlide(currNum) {
-      var currSlideNum = currNum;
-      var prevNumSlide = currSlideNum - 1;
+      var prevNumSlide = currNum - 1;
       clearNavClasses();
       resetSendLink();
-      if (currNum == 1) {
+      if (currNum === 1) {
         prevNumSlide = 1;
       }
-      $(".slideCtn").addClass('goToSlide' + prevNumSlide + '');
-      $(".form-wizard-nav div.active").removeClass('active');
-      $(".sliderLinksCtn div:nth-child(" + prevNumSlide + ")").addClass('active');
+      angular.element('.slideCtn').addClass('goToSlide' + prevNumSlide + '');
+      angular.element('.form-wizard-nav div.active').removeClass('active');
+      angular.element('.sliderLinksCtn div:nth-child(' + prevNumSlide + ')').addClass('active');
       $scope.currSlide = prevNumSlide;
     }
     $scope.moveSliderForward = function() {
@@ -603,31 +556,31 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.goToSlide = function(numSlide) {
       resetSendLink();
       clearNavClasses();
-      if (numSlide == 3) {
+      if (numSlide === 3) {
         setSendLink();
       }
-      $(".slideCtn").addClass('goToSlide' + numSlide);
-      $(".form-wizard-nav div.active").removeClass('active');
-      $(".sliderLinksCtn div:nth-child(" + numSlide + ")").addClass('active');
+      angular.element('.slideCtn').addClass('goToSlide' + numSlide);
+      angular.element('.form-wizard-nav div.active').removeClass('active');
+      angular.element('.sliderLinksCtn div:nth-child(' + numSlide + ')').addClass('active');
       $scope.currSlide = numSlide;
-    }
+    };
     $scope.showBtnList = function($event) {
       var showBtnListElem = $event.currentTarget;
-      if ($(showBtnListElem).hasClass('activeShowMore')) {
-        $(showBtnListElem).parent().prev().find('div').first().removeClass('dataListSlideToggle');
-        $(showBtnListElem).removeClass('activeShowMore');
-        $(showBtnListElem).css('display:none !important;');
+      if (angular.element(showBtnListElem).hasClass('activeShowMore')) {
+        angular.element(showBtnListElem).parent().prev().find('div').first().removeClass('dataListSlideToggle');
+        angular.element(showBtnListElem).removeClass('activeShowMore');
+        angular.element(showBtnListElem).css('display:none !important;');
       } else {
-        $(showBtnListElem).addClass('activeShowMore').parent().prev().find('div').first().addClass('dataListSlideToggle');
+        angular.element(showBtnListElem).addClass('activeShowMore').parent().prev().find('div').first().addClass('dataListSlideToggle');
       }
     };
 
     $scope.numSelectedItems = [];
 
     $scope.isAllSelected = {status: false, origin: ''};
-    $scope.$watch('isAllSelected', function(n, o) {
+    $scope.$watch('isAllSelected', function(n) {
       if(n.status === true) {
-        var numItems=$(".media-body").length;
+        var numItems = angular.element('.media-body').length;
 
         angular.element('.media-body').addClass('highlightListElem');
 
@@ -646,13 +599,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.showSharingItems=function(numIndex){
       $scope.isCurrentPartage=true;
       numIndex++;
-      angular.element('.media-body').each(function( index ) {
-        if($(this).hasClass("partage"+numIndex)){
-          $(this).addClass("highlightListElem");
-        };
+      /*jshint unused:false */
+      angular.element('.media-body').each(function(index) {
+        if(angular.element(this).hasClass('partage'+numIndex)){
+          angular.element(this).addClass('highlightListElem');
+        }
       });
-      $scope.numSelectedItems.length=$(".partage"+numIndex+"").length;
-      $("#selection-actions").addClass("showMultiMenu");
+      $scope.numSelectedItems.length=angular.element('.partage'+numIndex+'').length;
+      angular.element('#selection-actions').addClass('showMultiMenu');
           $scope.currentSharingIndex = numIndex;
           $scope.isUpdate=true;
     };
@@ -673,13 +627,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     };
     // update the selection of the files  for the current or newly created share
     $scope.resetSelection=function(){
-      $('.media-body').each(function( index ) {
-        $(this).removeClass("partage" + $scope.numberOfSharings);
-        if($( this ).hasClass("highlightListElem")){
+      /*jshint unused:false */
+      angular.element('.media-body').each(function(index) {
+        angular.element(this).removeClass('partage' + $scope.numberOfSharings);
+        if(angular.element( this ).hasClass('highlightListElem')){
           if(!$scope.isUpdate) {
-            $(this).addClass("partage" + $scope.numberOfSharings);
+            angular.element(this).addClass('partage' + $scope.numberOfSharings);
           }else{
-            $(this).addClass("partage" + $scope.currentSharingIndex);
+            angular.element(this).addClass('partage' + $scope.currentSharingIndex);
           }
         }
       });
@@ -687,25 +642,25 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.updateSharing= function(){
       $scope.resetSelection();
       $scope.numSelectedItems.pop($scope.numSelectedItems.length);
-      $scope.closeMultiSelectMenu()
+      $scope.closeMultiSelectMenu();
       $scope.currentSharingIndex=0;
       $scope.isUpdate=false;
       $scope.isCurrentPartage=true;
     };
     // if closure of multiselect reset state
-    angular.element(".exitSelection").bind('click',function() {
+    angular.element('.exitSelection').bind('click',function() {
       $scope.isCurrentPartage=false;
       $scope.isUpdate=false;
     });
     // if share link has been clicked show quishare here
-    angular.element(".partageLink").click(function(){
+    angular.element('.partageLink').click(function(){
       $scope.$apply(function() {
         $scope.isCurrentPartage = true;
       });
     });
     // if closure of multiselect reset state
     $scope.closeMultiSelectMenu=function(){
-      $("#selection-actions").removeClass("showMultiMenu");
+      angular.element('#selection-actions').removeClass('showMultiMenu');
       angular.element('.media-body').removeClass('highlightListElem');
     };
 
@@ -715,7 +670,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.isCurrentPartage=false;
     $scope.sharingsBtn=[];
     $scope.onShare = function() {
-      $('#focusInputShare').focus();
+      angular.element('#focusInputShare').focus();
       $scope.sidebarRightDataType = 'more-options';
     };
 
@@ -727,62 +682,59 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     this.selectedDirection = 'left';
   })
   .directive('uploadBoxSelection', function() {
-    var initSelectedItem = [];
-
       return {
       restrict: 'A',
       scope: false,
-      link: function(scope, elm, attrs) {
-        elm.bind('click', function(event) {
-          var numItems=$(".media-body").length;
-          var isCurrentlySelected=elm.hasClass("highlightListElem");
-          elm.toggleClass("highlightListElem","removeListElem");
+      link: function(scope, elm) {
+        elm.bind('click', function() {
+          var numItems=angular.element('.media-body').length;
+          var isCurrentlySelected=elm.hasClass('highlightListElem');
+          elm.toggleClass('highlightListElem','removeListElem');
           checkifMultiMenuVisible();
 
-        if(scope.isAllSelected.status == true) {
+        if(scope.isAllSelected.status === true) {
             scope.$apply(function() {
               scope.isAllSelected.status = false;
               scope.isAllSelected.origin = 'directive';
-            })
+            });
         }
           if(isCurrentlySelected){
             scope.$apply(function() {
               scope.numSelectedItems.pop(1);
-            })
+            });
           }else {
             scope.$apply(function() {
               scope.numSelectedItems.push(1);
               var numSelectedItems=scope.numSelectedItems.length;
-              if(numSelectedItems == numItems) {
-                elm.addClass("highlightListElem");
+              if(numSelectedItems === numItems) {
+                elm.addClass('highlightListElem');
                 scope.isAllSelected.status = true;
               }
-            })
+            });
           }
 
-          if(numItems ==0){
-            $(".dragNDropCtn").removeClass("outOfFocus");
+          if(numItems === 0){
+            angular.element('.dragNDropCtn').removeClass('outOfFocus');
           }
         });
 
-            angular.element(".exitSelection").bind('click',function(){
+            angular.element('.exitSelection').bind('click',function(){
            scope.closeContextualToolBar();
          });
         function checkifMultiMenuVisible(){
-          if(scope.numSelectedItems.length ==0){
-            angular.element("#selection-actions").addClass("showMultiMenu");
+          if(scope.numSelectedItems.length === 0){
+            angular.element('#selection-actions').addClass('showMultiMenu');
           }
         }
 
-        scope.closeContextualToolBar = function(){
+        scope.closeContextualToolBar = function() {
 
           scope.$apply(function() {
             scope.numSelectedItems.pop(scope.numSelectedItems.length);
           });
-          $("#selection-actions").removeClass("showMultiMenu");
+          angular.element('#selection-actions').removeClass('showMultiMenu');
           angular.element('.media-body').removeClass('highlightListElem');
-        }
+        };
       }
-
     };
   });

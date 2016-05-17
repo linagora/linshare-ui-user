@@ -1,7 +1,7 @@
 'use strict';
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($scope,  $filter, $window, $translatePartialLoader, ngTableParams, LinshareReceivedShareService,
+    function($scope,  $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
              LinshareShareService, LinshareDocumentService, files, $translate, growlService, $log){
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
@@ -21,6 +21,7 @@ angular.module('linshare.receivedShare')
       $scope.filters.selectedContact = initDestinataireObject;
       $scope.selectedRecipient = {};
       var checkdatasIsSelecteds = function() {
+        /* jshint undef: false */
         if ($scope.showActions.length !== orderedData.length && $scope.showActions.length !== 0) {
           $scope.datasIsSelected = false;
         }
@@ -39,7 +40,7 @@ angular.module('linshare.receivedShare')
           {regex: /text\/plain/, image: 'fa-file-text-o', info: 'TEXT'},
           {regex: /text/, image: 'fa-file-code-o', info: 'CODE'}
         ];
-        angular.forEach(list, function(value, key) {
+        angular.forEach(list, function(value) {
           type.forEach( function (regex)
           {
             if (value.type.match(regex.regex)) {
@@ -80,7 +81,7 @@ angular.module('linshare.receivedShare')
       };
       $scope.copyIntoFiles = function(selectedDocuments) {
         angular.forEach(selectedDocuments, function(file, key) {
-          LinshareReceivedShareService.copy(file.uuid).then(function(data) {
+          LinshareReceivedShareService.copy(file.uuid).then(function() {
             angular.forEach(receivedFiles, function(f, k) {
               if (f.uuid === file.uuid) {
                 receivedFiles.splice(k, 1);
@@ -92,7 +93,7 @@ angular.module('linshare.receivedShare')
         });
       };
       $scope.download = function() {
-        angular.forEach($scope.showActions, function(file, key) {
+        angular.forEach($scope.showActions, function(file) {
           LinshareReceivedShareService.download(file.uuid).then(function(data) {
             $scope.downloadFileFromResponse(file.name, file.type, data);
           });
@@ -196,7 +197,7 @@ angular.module('linshare.receivedShare')
           },
           function(isConfirm) {
             if (isConfirm) {
-              angular.forEach(document, function(doc, indice) {
+              angular.forEach(document, function(doc) {
                 $log.debug('value to delete', doc);
                 $log.debug('value to delete', receivedFiles.length);
                 LinshareReceivedShareService.delete(doc.uuid).then(function() {
@@ -254,12 +255,13 @@ angular.module('linshare.receivedShare')
           angular.forEach(
             $scope.tableData.slice(($scope.tableParams.$params.page - 1) * $scope.tableParams.$params.count,
               $scope.tableParams.$params.page * $scope.tableParams.$params.count),
-            function(file, key) {
+            function(file) {
             if (!file.isChecked) {
               isSelected = false;
             }
           });
-          $scope.datasIsSelected = check;
+
+          $scope.datasIsSelected = isSelected;
         }
       });
 
@@ -270,7 +272,7 @@ angular.module('linshare.receivedShare')
       $scope.documentsListCopy = receivedFiles;
       $scope.documentsList = receivedFiles;
 
-      $scope.tableParams = new ngTableParams({
+      $scope.tableParams = new NgTableParams({
         page: 1,
         count: 10,
         filter: $scope.paramFilter
@@ -398,10 +400,10 @@ angular.module('linshare.receivedShare')
 
           } else {
             innerHeightInnerCtn = $('.slideable_content').innerHeight();
-            var y =innerHeightInnerCtn;
+            var yy = innerHeightInnerCtn;
             var  stateExpandedStyle = $('#searchFilterCtn').attr('style');
             var resetOverflowStyle = stateExpandedStyle.replace('initial', 'hidden');
-            var resetHeightStyle =  resetOverflowStyle.replace('' + y + 'px', '0px');
+            var resetHeightStyle =  resetOverflowStyle.replace('' + yy + 'px', '0px');
 
             $('#searchFilterCtn').attr('style', resetOverflowStyle).delay(10).promise().done(function() {
               $('#searchFilterCtn').attr('style', resetHeightStyle);
