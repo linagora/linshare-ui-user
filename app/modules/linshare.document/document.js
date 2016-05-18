@@ -328,9 +328,9 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.closeDetailSidebar = function() {
       angular.element('#fileListTable tr li').removeClass('activeActionButton');
     };
-    $scope.sortDropdownSetActive = function($event) {
-      var currentStateToggle = $scope.toggleSelectedSort;
-      $scope.toggleSelectedSort = !currentStateToggle;
+    $scope.sortDropdownSetActive = function(sortField, $event) {
+      $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
+      $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
       angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
         angular.element(currTarget).addClass('selectedSorting');

@@ -235,6 +235,15 @@ angular.module('linshare.receivedShare')
         );
       };
 
+      $scope.sortDropdownSetActive = function(sortField, $event) {
+        $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
+        $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
+        var currTarget = $event.currentTarget;
+        angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
+          angular.element(currTarget).addClass('selectedSorting');
+        });
+      };
+
       // onChange on the inputs in the table
       // Insert or remove the file in the list of selected files
       $scope.setShowActions = function (documentFile) {
@@ -297,6 +306,7 @@ angular.module('linshare.receivedShare')
 
       $scope.tableParams = new NgTableParams({
         page: 1,
+        sorting: {modificationDate: 'desc'},
         count: 10,
         filter: $scope.paramFilter
       }, {

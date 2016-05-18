@@ -32,7 +32,7 @@
                 </a>
                 <ul class="dropdown-menu pull-right dm-icon stop-propagate">
                   <li role="menuitem">
-                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive('modificationDate', $event)">
                       <span class="caretArea">
                         <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                         <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -41,7 +41,7 @@
                     </a>
                   </li>
                   <li role="menuitem">
-                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive('creationDate', $event)">
                       <span class="caretArea">
                         <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                         <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -50,7 +50,7 @@
                     </a>
                   </li>
                   <li role="menuitem">
-                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive('size', $event)">
                       <span class="caretArea">
                         <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                         <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -59,21 +59,12 @@
                     </a>
                   </li>
                   <li role="menuitem">
-                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
+                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive('name', $event)">
                       <span class="caretArea">
                         <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                         <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                       </span>
                       {{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate }}
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding" ng-click="sortDropdownSetActive($event)">
-                      <span class="caretArea">
-                        <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                        <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                      </span>
-                      {{'FILTER_COMPONENT.IS_SHARED' | translate }}
                     </a>
                   </li>
                 </ul>
@@ -187,7 +178,6 @@
             <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
                 file-selection-v="selectedDocuments" uuid="documentFile"
                 current-selected-document="currentSelectedDocument"
-                multiple-select-on="multipleSelection"
                 sidebar-right="mactrl.sidebarToggle.right"
                 data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5">
 
