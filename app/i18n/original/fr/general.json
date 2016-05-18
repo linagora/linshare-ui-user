@@ -86,8 +86,10 @@
     "SHARE": "Partager",
     "REFRESH": "Actualiser",
     "COPY_IN_GROUP": "Copier dans un groupe",
+    "COPY_IN_MY_FILES": "Copier dans mes fichiers",
     "DELETE": "Supprimer",
-    "INFORMATION" : "Information"
+    "INFORMATION" : "Information",
+    "TRANSFERT" : "Transférer"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {

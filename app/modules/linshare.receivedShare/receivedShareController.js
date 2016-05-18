@@ -2,7 +2,7 @@
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope,  $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
-             LinshareShareService, LinshareDocumentService, files, $translate, growlService, $log){
+             LinshareShareService, LinshareDocumentService, files, $translate, growlService, $log, $timeout){
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;
@@ -381,6 +381,103 @@ angular.module('linshare.receivedShare')
 
       $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
+
+      var swalCopyInGroup, swalTransferer, swalDelete, swalDownload, numItems, swalInformation;
+      $translate(['ACTION.COPY_IN_MY_FILES', 'ACTION.TRANSFERT', 'ACTION.INFORMATION',
+        'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'])
+        .then(function(translations) {
+          swalCopyInGroup = translations['ACTION.COPY_IN_MY_FILES'];
+          swalTransferer = translations['ACTION.TRANSFERT'];
+          swalDelete = translations['ACTION.DELETE'];
+          swalDownload = translations['ACTION.DOWNLOAD'];
+          swalInformation = translations['ACTION.INFORMATION'];
+          numItems = translations['SELECTION.NUM_ITEM_SELECTED'];
+          /* jshint unused: false */
+          $scope.moreOptionsContexualMenu = [
+            [function($itemScope, $event) {
+              return $itemScope.selectedDocuments.length + ' ' + numItems;
+            }],
+            [swalCopyInGroup, function($itemScope) {
+              $scope.copyIntoFiles($itemScope.documentFile);
+            }],
+            [swalDownload, function($itemScope) {
+              var landingUrl = $itemScope.linshareBaseUrl + '/documents/' + $itemScope.documentFile.uuid + '/download';
+              $window.location.href = landingUrl;
+            }, function($itemScope) {
+              return $itemScope.selectedDocuments.length === 1;
+            }],
+            [swalTransferer, function($itemScope, $event, model) {
+            }, function() {
+              return false;
+            }],
+            [swalDelete, function($itemScope) {
+              $scope.deleteDocuments($itemScope.selectedDocuments);
+            }],
+            [swalInformation, function($itemScope) {
+              $scope.showCurrentFile($itemScope.documentFile);
+            }, function($itemScope) {
+              return $itemScope.selectedDocuments.length === 1;
+            }]
+          ];
+        });
+
+      $scope.closeDetailSidebar = function() {
+        angular.element('#fileListTable tr li').removeClass('activeActionButton');
+      };
+      $scope.sortDropdownSetActive = function($event) {
+        var currentStateToggle = $scope.toggleSelectedSort;
+        $scope.toggleSelectedSort = !currentStateToggle;
+        var currTarget = $event.currentTarget;
+        angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
+          angular.element(currTarget).addClass('selectedSorting');
+        });
+      };
+
+      $scope.toggleSearchState=function(){
+        if(!$scope.searchMobileDropdown){
+          $scope.openSearch();
+        }else{
+          $scope.closeSearch();
+        }
+        $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
+      };
+      $scope.openSearch = function(){
+        angular.element('#dropArea').addClass('search-toggled');
+        angular.element('#top-search-wrap input').focus();
+      };
+
+      $scope.closeSearch = function(){
+        angular.element('#dropArea').removeClass('search-toggled');
+        angular.element('#searchInMobileFiles').val('').trigger('change');
+      };
+
+      $scope.$on('$stateChangeSuccess', function() {
+        angular.element('.multi-select-mobile').appendTo('body');
+      });
+
+      $scope.fab = {
+        isOpen: false,
+        count: 0,
+        selectedDirection: 'left'
+      };
+
+      $scope.$watch('fab.isOpen', function(isOpen) {
+        if(isOpen) {
+          angular.element('.md-toolbar-tools').addClass('setWhite');
+          angular.element('.multi-select-mobile').addClass('setDisabled');
+          $timeout(function() {
+            angular.element('#overlayMobileFab').addClass('toggledMobileShowOverlay');
+            angular.element('#content-container').addClass('setDisabled');
+          }, 250);
+        } else {
+          angular.element('.md-toolbar-tools').removeClass('setWhite');
+          $timeout(function() {
+            angular.element('.multi-select-mobile').removeClass('setDisabled');
+            angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
+            angular.element('#content-container').removeClass('setDisabled');
+          }, 250);
+        }
+      });
     })
 
   // ===========================================================================

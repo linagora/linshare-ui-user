@@ -321,7 +321,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
             var landingUrl = $itemScope.linshareBaseUrl + '/documents/' + $itemScope.documentFile.uuid + '/download';
             $window.location.href = landingUrl;
           }, function($itemScope) {
-            return $itemScope.selectedDocuments.length < 1;
+            return $itemScope.selectedDocuments.length === 1;
           }]
         ];
       });
@@ -354,7 +354,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       angular.element('#dropArea').removeClass('search-toggled');
       angular.element('#searchInMobileFiles').val('').trigger('change');
     };
-    angular.element('md-fab-toolbar').appendTo( '#content-container');
     $scope.$on('$stateChangeSuccess', function() {
       angular.element('.multi-select-mobile').appendTo('body');
     });

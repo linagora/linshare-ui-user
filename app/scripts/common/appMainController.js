@@ -150,7 +150,7 @@ angular.module('linshareUiUserApp')
 
   .controller('UiUserMainController',
   function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
-           AuthenticationService, MenuService) {
+           AuthenticationService, MenuService, $timeout) {
     $rootScope.sidebarRightWidth = 350;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.mobileWidthBreakpoint=768;
@@ -227,9 +227,13 @@ angular.module('linshareUiUserApp')
       }else{
         $scope.mactrl.sidebarToggle.left = false;
       }
-      if(attr) {
+      if((attr) || (widthWindow > 1057) ) {
         var nwidthWindow = widthWindow - $rootScope.sidebarLeftWidth;
         angular.element('.resetContentWidth').width(nwidthWindow);
+        $timeout(function(){
+          angular.element('.resetContentWidth').width(nwidthWindow);
+          angular.element('.dragNDropContent').fadeTo( 1200 ,1);
+          }, 250);
       } else {
         angular.element('.resetContentWidth').width('100%');
       }
@@ -276,6 +280,7 @@ angular.module('linshareUiUserApp')
     $scope.$watch(function(){
       return $window.innerWidth;
     }, function() {
+      checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
       checkAndSetNewWidthSidebarRight();
     });
   })

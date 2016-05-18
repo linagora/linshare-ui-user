@@ -13,8 +13,8 @@
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items" >
-              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs">
-                <a href="" data-ng-click="toggleSearchState()">
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
+                <a href="">
                   <i class="tm-icon zmdi zmdi-search" ng-class="{'activeLink': searchMobileDropdown }"></i>
                 </a>
               </div>
@@ -241,9 +241,10 @@
                             <i class="zmdi zmdi-more-vert"></i>
                           </a>
                           <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
+                            <li class="disabled">
                               <a href="" ng-show="linshareModeProduction == false" ng-click="" event-propagation-stop>
-                                {{'ACTION.COPY_IN_GROUP' | translate}}</a>
+                                {{'ACTION.COPY_IN_GROUP' | translate}}
+                              </a>
                             </li>
                             <li>
                               <a href="" ls-share-modal event-propagation-stop>{{'ACTION.SHARE' | translate}}</a>

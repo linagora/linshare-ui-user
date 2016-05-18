@@ -1,6 +1,15 @@
 @import "fonts.scss";
 @import "colors.scss";
 
+
+@media (min-width: 768px) {
+
+  .table-responsive {
+
+    padding-bottom: 100px !important;
+  }
+}
+
 .recipientsAutocomplete {
   height: 33px;
   .firstLetterFormat {
@@ -350,15 +359,16 @@
     li a:hover {
       background-color: $midGreyBg;
     }
-    li.disabled {
-      pointer-events: none;
-      a {
-        color: $disabled;
-      }
-    }
+
   }
 }
-
+.disabled {
+  pointer-events: none !important;
+  color: $disabled !important;
+  a {
+    color: $disabled !important;
+  }
+}
 .selectedContextualMenu {
   background-color: green;
 }
@@ -1291,7 +1301,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   .dragNDropContent {
     display: table-cell;
     vertical-align: middle;
-
+opacity :0;
   }
   .dragIconCtn {
     position: relative;
@@ -1640,7 +1650,6 @@ div.borderedCircle {
     color: #C9C9C9;
   }
   span a {
-    color: #B87414;
     color: #4E4E4E;
     cursor: pointer;
     padding-left: 15px;
@@ -1654,6 +1663,12 @@ div.borderedCircle {
       font-weight: 500;
       font-size: 0.95em;
       color: #656565;
+    }
+  }
+  span a:hover, span a:focus {
+    color: $primaryClr;
+    span {
+      color: $primaryClr;
     }
   }
 }
@@ -2580,7 +2595,9 @@ body {
     .card-body.card-padding {
       padding: 23px 25px 5px;
     }
+
   }
+
   .card {
 
     margin-bottom: 0;
@@ -3761,20 +3778,30 @@ body:not(.sw-toggled) #sidebar {
       }
     }
     #breadcrumb-wrap #action-header {
-      width: 67%;
+      width: auto;
     }
     #breadcrumb-wrap #action-header .search-bar {
       margin: 0;
     }
     #breadcrumb-wrap .toolbar-actions-items {
       float: right;
-      width: 30%;
+      width: 100%;
       margin: 0;
     }
     .exitSelection {
       margin-right: 5px;
     }
+    .search-bar{
+      display:none;
+    }
+    #action-header #top-search {
+      display: block !important;
+    }
+    #top-search a {
+      color: #535050;
+    }
   }
+
 }
 @media (max-width: 1196px) {
   .right-sidebar-toggled {
