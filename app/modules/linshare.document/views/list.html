@@ -201,7 +201,7 @@
                   <i class="fa ls-1p5x" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
                 </td>
                 <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
-                    sortable="'name'" uuid={{o.uuid}}>
+                    data-sortable="'name'" uuid={{o.uuid}}>
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       {{documentFile.name}}
@@ -264,12 +264,12 @@
                 </td>
                 <td class="hidden-xs"
                     ng-if="mactrl.sidebarToggle.right === false"
-                    data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" sortable="'modificationDate'">
+                    data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
                   {{documentFile.modificationDate | relativeTime}}
                 </td>
                 <td class="hidden-xs"
                     ng-if="mactrl.sidebarToggle.right === false"
-                    data-title="'TABLE_HEADER.SIZE' | translate" sortable="'size'">
+                    data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
                   {{documentFile.size | readableSize: false}}
                 </td>
               </tr>
