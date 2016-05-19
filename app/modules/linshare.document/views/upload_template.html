@@ -38,7 +38,7 @@
         <i class="zmdi zmdi-close"></i>
       </div>
       <div class="displayNumSelectedItems">
-        <span>{{selectedUploadedFiles.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate }}
+        <span>{{lengthOfSelectedUploads()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate }}
       </div>
       <div id="toolbar-actions">
        <span ng-show="devMode" ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
@@ -79,10 +79,8 @@
             <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
           </div>
           <div class="lv-body">
-            <div class="media-body" ng-repeat="file in $flow.files" data-ls-on-document-select=""
-                 file-selection-v="selectedUploadedFiles" uuid="file.linshareDocument"
-                 current-selected-document="currentSelectedDocument"
-                 data-ng-class="{'highlightListElem': file.linshareDocument.isSelected }">
+            <div class="media-body" ng-repeat="file in $flow.files" ls-on-upload-select
+                 data-ng-class="{'highlightListElem': file.isSelected }">
               <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
                 <div class="col-xs-24 col-sm-12 animLeft noPadding">
                   <div class="col-xs-7 col-sm-11 pull-left">

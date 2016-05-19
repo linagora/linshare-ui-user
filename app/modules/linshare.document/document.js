@@ -406,9 +406,20 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  */
   .controller('LinshareSelectedDocumentsController', function($scope, $stateParams) {
     var param = $stateParams.selected;
-    angular.forEach(param, function(n) {
-      $scope.selectedDocuments.push(n);
-    });
+    $scope.selectedFlowIdentifiers = {};
+
+    // Depends on source of the selected documents (upload or files)
+    if(angular.isArray(param)) {
+      angular.forEach(param, function(n) {
+        $scope.selectedDocuments.push(n);
+      });
+    } else {
+      for (var id in param) {
+        var flowToShare = $scope.$flow.getFromUniqueIdentifier(id);
+        $scope.selectedDocuments.push(flowToShare.linshareDocument);
+      }
+    }
+
 
     $scope.sidebarRightDataType = 'share';
     $scope.removeSelectedDocuments = function(document) {
@@ -421,16 +432,25 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
   })
 
   .controller('LinshareUploadViewController', function($scope, $rootScope, growlService) {
-    $scope.selectedUploadedFiles = [];
+    $scope.selectedUploadedFiles = {};
+    $scope.lengthOfSelectedUploads = function() {
+      return Object.keys($scope.selectedUploadedFiles).length;
+    };
 
     // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
     /* jshint unused: false */
     $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
+      flowFile.isSelected = true;
+      $scope.selectedUploadedFiles[flowFile.uniqueIdentifier] = {name: flowFile.name};
       angular.element('.dragNDropCtn').addClass('outOfFocus');
       //pertains to upload-box
-      if(angular.element('upload-box') !== null){
+      if(angular.element('upload-box') !== null) {
         angular.element('.infoPartager').css('opacity','1');
       }
+    });
+
+    $scope.identifiers = [];
+    $scope.$on('flow::filesSubmitted', function(event, $flow, flowFile) {
     });
 
     $scope.removeSelectedDocuments = function(document) {
@@ -443,7 +463,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     $scope.currentSelectedDocument = {};
     $scope.shareSelectedUpload = function(selectedUpload) {
-      if(selectedUpload.length === 0) {
+      if(Object.keys(selectedUpload).length === 0) {
         growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
         return;
       }

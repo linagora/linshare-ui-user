@@ -59,6 +59,25 @@ angular.module('linshare.document')
     };
   })
 
+  // DIRECTIVE TO TOGGLE A CURRENT UPLOAD SELECTION
+  .directive('lsOnUploadSelect', function() {
+    return {
+      restrict: 'A',
+      scope: false,
+      link: function(scope, element) {
+        element.bind('click', function() {
+          scope.file.isSelected = !scope.file.isSelected;
+          if(scope.file.isSelected) {
+            scope.selectedUploadedFiles[scope.file.uniqueIdentifier] = {name: scope.file.name}
+          } else {
+            delete scope.selectedUploadedFiles[scope.file.uniqueIdentifier];
+          }
+          scope.$apply();
+        })
+      }
+    }
+  })
+
   //DIRECTIVE TO DISPLAY DIFFERENT CONTENTS INSIDE THE RIGHT SIDEBAR
   .directive('sidebarContent', function() {
     return {

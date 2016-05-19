@@ -201,6 +201,9 @@ angular.module('linshareUiUserApp')
      */
     $scope.share_array = [];
 
+    // ref index flow shares
+    $scope.refFlowShares = {};
+
     /**
      *
      * This function is call on file upload success to add metadata from the server to the flowFile
@@ -218,6 +221,12 @@ angular.module('linshareUiUserApp')
       }).delay(3000).hide(0,function(){
         angular.element(this).removeClass('activeAnimTransfertIcon');
       });
+
+      var index = $scope.refFlowShares[flowFile.uniqueIdentifier];
+      if(index) {
+        $scope.share_array[index].addDocuments(flowFile.linshareDocument);
+        delete $scope.refFlowShares[flowFile.uniqueIdentifier];
+      }
     });
 
     function checkAndSetNewWidth(attr) {
