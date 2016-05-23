@@ -1,4 +1,5 @@
-<div ui-view class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
+<div ui-view>
+<div class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }" >
   <div class="container files">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
@@ -335,3 +336,4 @@
 <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
        data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
 </aside>
+</div>

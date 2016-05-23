@@ -17,7 +17,9 @@
   "GROWL_ALERT": {
     "ACTION": {
       "DELETE": "File(s) has been deleted",
-      "SHARE": "share done with success"
+      "SHARE": "share done with success",
+      "SHARE_ASYNC": "You sharing will be sent after the upload of all files",
+      "SHARE_FAILED": "Your sharing has failed"
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",

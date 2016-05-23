@@ -8,7 +8,7 @@
 </div>
 <div class="card col-xs-12" id="recipientsCtnSidebar">
   <div class="num-items-section-ctn">
-    <span>{{selectedDocuments.length}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
+    <span>{{lengthOfSelectedDocuments()}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
     <a class="pull-right sidebar-link" href="" ui-sref="documents.files.selected">
       {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
     </a>
@@ -112,7 +112,7 @@
   <button class="btn btn-default col-xs-6" ng-click="mactrl.sidebarToggle.right = false; closeDropdown($event)">
     {{ "NAVIGATION.CANCEL" | translate }}
   </button>
-  <button class="btn btn-primary col-xs-6" ng-click="submitShare(newShare)">
+  <button class="btn btn-primary col-xs-6" ng-click="submitShare(newShare, selectedDocuments, selectedUploads)">
     {{ "NAVIGATION.SHARE" | translate }}
   </button>
 </div>

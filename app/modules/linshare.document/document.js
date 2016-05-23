@@ -99,6 +99,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         }
       };
 
+      //SELECTED FILES AND UPLOADS
+      $scope.selectedDocuments = [];
+      $scope.selectedUploads = {};
+
       $scope.loadSidebarContent = function(content) {
         $scope.sidebarRightDataType = content || 'share';
       };
@@ -130,6 +134,9 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $timeout(function() {
           angular.element('#focusInputShare').trigger('focus');
       }, 350);
+    };
+    $scope.lengthOfSelectedDocuments = function() {
+      return $scope.selectedDocuments.length;
     };
 
     $scope.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
@@ -405,23 +412,13 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  * The controller to visualize and manage selected documents
  */
   .controller('LinshareSelectedDocumentsController', function($scope, $stateParams) {
-    var param = $stateParams.selected;
-    $scope.selectedFlowIdentifiers = {};
+    $scope.selectedFlowIdentifiers = $stateParams.selected;
 
-    // Depends on source of the selected documents (upload or files)
-    if(angular.isArray(param)) {
-      angular.forEach(param, function(n) {
-        $scope.selectedDocuments.push(n);
-      });
-    } else {
-      for (var id in param) {
-        var flowToShare = $scope.$flow.getFromUniqueIdentifier(id);
-        $scope.selectedDocuments.push(flowToShare.linshareDocument);
-      }
-    }
-
-
-    $scope.sidebarRightDataType = 'share';
+    $scope.lengthOfSelectedDocuments = function() {
+      return $scope.selectedDocuments.length + Object.keys($scope.selectedUploads).length;
+    };
+    $scope.mactrl.sidebarToggle.right = true;
+    $scope.$parent.sidebarRightDataType = 'share';
     $scope.removeSelectedDocuments = function(document) {
       var index = $scope.selectedDocuments.indexOf(document);
       if(index > -1) {
@@ -432,16 +429,20 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
   })
 
   .controller('LinshareUploadViewController', function($scope, $rootScope, growlService) {
-    $scope.selectedUploadedFiles = {};
-    $scope.lengthOfSelectedUploads = function() {
-      return Object.keys($scope.selectedUploadedFiles).length;
+
+    $scope.lengthOfSelectedDocuments = function() {
+      return Object.keys($scope.selectedUploads).length;
     };
 
     // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
     /* jshint unused: false */
     $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
       flowFile.isSelected = true;
-      $scope.selectedUploadedFiles[flowFile.uniqueIdentifier] = {name: flowFile.name};
+      $scope.selectedUploads[flowFile.uniqueIdentifier] = {
+        name: flowFile.name,
+        size: flowFile.size,
+        type: flowFile.getType()
+      };
       angular.element('.dragNDropCtn').addClass('outOfFocus');
       //pertains to upload-box
       if(angular.element('upload-box') !== null) {
@@ -454,10 +455,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     });
 
     $scope.removeSelectedDocuments = function(document) {
-      var index = $scope.selectedUploadedFiles.indexOf(document);
+      var index = $scope.selectedUploads.indexOf(document);
       if(index > -1) {
         document.isSelected = false;
-        $scope.selectedUploadedFiles.splice(index, 1);
+        $scope.selectedUploads.splice(index, 1);
       }
     };
 
@@ -468,6 +469,32 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         return;
       }
       $rootScope.$state.go('documents.files.selected', {'selected': selectedUpload});
+    };
+    $scope.selectAll = false;
+
+    $scope.selectUploadingDocuments = function() {
+      angular.forEach($scope.$flow.files, function(flowFile) {
+        flowFile.isSelected = $scope.selectAll;
+        if(flowFile.isSelected) {
+          $scope.selectedUploads[flowFile.uniqueIdentifier] = {
+            name: flowFile.name,
+            size: flowFile.size,
+            type: flowFile.getType()
+          };
+        } else {
+          delete $scope.selectedUploads[flowFile.uniqueIdentifier];
+        }
+      });
+      $scope.selectAll = !$scope.selectAll;
+    };
+
+    $scope.resetSelectedDocuments = function() {
+      angular.forEach($scope.selectedUploads, function(value, key) {
+        var a = $scope.$flow.getFromUniqueIdentifier(key);
+        a.isSelected = false;
+        delete $scope.selectedUploads[key];
+      });
+      $scope.selectAll = true;
     };
 
   })

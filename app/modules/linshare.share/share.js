@@ -71,7 +71,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
   })
 
   /* jshint ignore:start */
-  .factory('ShareObjectService', function($log, LinshareFunctionalityService, LinshareShareService) {
+  .factory('ShareObjectService', function($log, LinshareFunctionalityService, LinshareShareService, $q, growlService) {
 
     var
       recipients = [],
@@ -194,6 +194,10 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         });
       };
 
+      this.addwaitingUploadIdentifiers = function(identifier) {
+        self.waitingUploadIdentifiers.push(identifier);
+      };
+
       this.getFormObj = function() {
         return {
           recipients: recipients,
@@ -211,9 +215,25 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       };
 
       this.share = function() {
+        var deferred = $q.defer();
         if(self.waitingUploadIdentifiers.length === 0) {
-          return LinshareShareService.shareDocuments(self.getFormObj());
+          return LinshareShareService.shareDocuments(self.getFormObj()).then(function() {
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
+          });
+        } else {
+          deferred.reject({statusText: 'asyncMode'});
+          return deferred.promise;
         }
+      };
+
+      //on file upload complete check if id is in the waiting share
+      this.addLinshareDocumentsAndShare = function(flowIdentifier, linshareDocument) {
+        var ind = self.waitingUploadIdentifiers.indexOf(flowIdentifier);
+        if(ind > -1) {
+          documents.push(linshareDocument.uuid);
+          self.waitingUploadIdentifiers.splice(ind, 1);
+        }
+        self.share();
       };
 
       this.resetForm = function() {
@@ -285,8 +305,22 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
     $scope.selectedContact = {};
 
-    $scope.submitShare = function(shareCreationDto) {
-      if($scope.selectedDocuments.length === 0 ) {
+    $scope.submitShare = function(shareCreationDto, selectedDocuments, selectedUploads) {
+      var currentUploads = selectedUploads || {};
+      for(var upload in currentUploads) {
+        if(currentUploads.hasOwnProperty(upload)) {
+          var flowFile = $scope.$flow.getFromUniqueIdentifier(upload);
+          if(flowFile.isComplete()) {
+            flowFile.isSelected = false;
+            $scope.newShare.addDocuments(flowFile.linshareDocument);
+          } else {
+            $scope.refFlowShares[upload] = [0];
+            $scope.newShare.addwaitingUploadIdentifiers(upload);
+          }
+        }
+      }
+
+      if($scope.selectedDocuments.length === 0 && Object.keys(currentUploads).length === 0) {
         growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
         return;
       }
@@ -297,12 +331,22 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
       $scope.newShare.addDocuments($scope.selectedDocuments);
       $scope.newShare.share().then(function() {
-        growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
         $scope.share_array.push(angular.copy($scope.newShare.getFormObj()));
         $scope.newShare.resetForm();
         $scope.resetSelectedDocuments();
+        $scope.selectedUploads = {};
+      }, function(data) {
+        if(data.statusText === 'asyncMode') {
+          $log.debug('share processing with files in upload progress', data);
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_ASYNC', 'info');
+          $scope.mactrl.sidebarToggle.right = false;
+          $scope.share_array.push(angular.copy($scope.newShare));
+          $scope.selectedUploads = {};
+        } else {
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_FAILED', 'danger');
+        }
       });
     };
     $scope.submitQuickShare = function(shareCreationDto) {
@@ -328,7 +372,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
   .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
 
     $scope.sharesContainer = {waiting: [], done: []};
-    $scope.onfileComplete = function (flow) {
+    $scope.onfileComplete = function () {
       if($scope.sharesContainer.waiting.length > 0) {
         // $scope.sharesContainer.waiting
       }

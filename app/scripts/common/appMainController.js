@@ -201,7 +201,7 @@ angular.module('linshareUiUserApp')
      */
     $scope.share_array = [];
 
-    // ref index flow shares
+    // ref index flow shares {identifier: [key of waiting shares]}
     $scope.refFlowShares = {};
 
     /**
@@ -212,6 +212,16 @@ angular.module('linshareUiUserApp')
     $scope.addUploadedDocument = function(flowFile, serverResponse) {
       var response = angular.fromJson(serverResponse);
       flowFile.linshareDocument = response.entry;
+      var fileIdentifier = flowFile.uniqueIdentifier;
+      var associativeSharings = $scope.refFlowShares[fileIdentifier] || {};
+      if(associativeSharings.length > 0) {
+        angular.forEach(associativeSharings, function(shareIndex) {
+          var correspondingShare = {};
+          angular.extend(correspondingShare, $scope.share_array[shareIndex]);
+          correspondingShare.addLinshareDocumentsAndShare(fileIdentifier, flowFile.linshareDocument);
+        });
+        delete $scope.refFlowShares[fileIdentifier];
+      }
       $scope.callReloadDocuments();
     };
 
@@ -221,12 +231,6 @@ angular.module('linshareUiUserApp')
       }).delay(3000).hide(0,function(){
         angular.element(this).removeClass('activeAnimTransfertIcon');
       });
-
-      var index = $scope.refFlowShares[flowFile.uniqueIdentifier];
-      if(index) {
-        $scope.share_array[index].addDocuments(flowFile.linshareDocument);
-        delete $scope.refFlowShares[flowFile.uniqueIdentifier];
-      }
     });
 
     function checkAndSetNewWidth(attr) {

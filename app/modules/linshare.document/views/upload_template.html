@@ -1,14 +1,3 @@
-<div class="bottom-btn visible-xs row col-xs-12 transfertFilesBtnCtn">
-  <button ng-click="moveSliderBackwards()" class="btn bgm-lightblue waves-effect col-xs-6">
-    {{"NAVIGATION.PREVIOUS" | translate}}
-  </button>
-  <button ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect nextLink col-xs-6">
-    {{"NAVIGATION.NEXT" | translate}}
-  </button>
-  <button ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect col-xs-6 sendLink hide">
-    {{"NAVIGATION.PREVIOUS.SEND" | translate}}
-  </button>
-</div>
 <div class="container" id="upload-box" ng-controller="LinshareUploadViewController"
      flow-files-submitted="$flow.upload()">
   <div id="breadcrumb-wrap">
@@ -17,47 +6,47 @@
         <i class="zmdi zmdi-file"></i>{{ "UPLOADED_FILES.BREADCRUMB_TITLE" | translate }}
       </a>
     </div>
-    <div id="action-header">
-      <div class="navBarBtn">
-        <button class="btn btn-default waves-effect" flow-btn flow-files-submitted="$flow.upload()">
-          <i class="zmdi zmdi-upload"><span>{{"UPLOADED_FILES.UPLOAD_FILES_BUTTON" | translate }}</span></i>
-        </button>
-      </div>
-    </div>
   </div>
 
-  <div id="dropArea">
+  <div id="collapsible-content">
+    <div id="dropArea">
 
     <div class="infoPartager">
       <p><i class="fa fa-info"></i> {{"UPLOADED_FILES.SELECT_INFO" | translate}}</p>
     </div>
 
-    <div id="selection-actions" class="showMultiMenu" ng-init="isAllSelected.status = false"
-         data-ng-class="{'show': $flow.files.length > 0}">
-      <div ng-show="devMode" class="exitSelection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
-        <i class="zmdi zmdi-close"></i>
+    <div id="selection-actions" class="defaultMultiToolbarState"
+         data-ng-class="{'showMultiMenu': $flow.files.length > 0}">
+      <div class="toogleCkeckboxToolbar" ng-click="selectUploadingDocuments()">
+        <a ng-if="selectAll" class="selectAllItems plainTxtBtn ng-scope" >
+          <i class="fa fa fa-square-o checkboxTable"></i>
+        </a>
+        <a ng-if="!selectAll" class="selectAllItems plainTxtBtn ng-scope">
+          <i class="fa fa-check-square-o"></i>
+        </a>
       </div>
-      <div class="displayNumSelectedItems">
-        <span>{{lengthOfSelectedUploads()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate }}
+      <div class="displayNumSelectedItems" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}"
+           data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
+           ng-click="activeBtnShowSelection = !activeBtnShowSelection">
+        <p><span>{{lengthOfSelectedDocuments()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
+        <div class="pull-left view-icons-ctn">
+          <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
+          <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
+        </div>
       </div>
-      <div id="toolbar-actions">
-       <span ng-show="devMode" ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
-         <a ng-if="isAllSelected.status" class="selectAllItems plainTxtBtn">
-           <i class="fa fa-square-o"></i>
-           <span>{{"SELECTION_TOOLBAR.DESELECT_ALL" | translate }}</span>
-         </a>
-         <a ng-if="!isAllSelected.status" class="selectAllItems plainTxtBtn">
-           <i class="fa fa-check-square-o"></i>
-           <span>{{"SELECTION_TOOLBAR.SELECT_ALL" | translate }}</span>
-         </a>
-       </span>
-       <span>
-         <a class="plainTxtBtn partageLink"
-            ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
-            ng-click="shareSelectedUpload(selectedUploadedFiles)">
-           <i class="zmdi zmdi-share"></i><span>{{"SELECTION_TOOLBAR.SHARE" | translate }}</span>
-         </a>
-       </span>
+      <div id="toolbar-actions" class="hidden-xs">
+            <span ng-click="resetSelectedDocuments()">
+            <a class="plainTxtBtn" title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
+              <i class="zmdi zmdi-refresh-alt" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+              <span>{{'SELECTION_TOOLBAR.RESET' | translate}}</span>
+            </a>
+            </span>
+            <span>
+            <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
+               ng-class="{'deActivateSharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+              <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
+            </span>
       </div>
     </div>
 
@@ -149,4 +138,8 @@
       </button>
     </div>
   </div>
+  </div>
+  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+         data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
+  </aside>
 </div>

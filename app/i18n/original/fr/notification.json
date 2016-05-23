@@ -17,7 +17,9 @@
   "GROWL_ALERT": {
     "ACTION": {
       "DELETE": "Suppression réussie",
-      "SHARE": "Partage réussi"
+      "SHARE": "Partage réussi",
+      "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront uploadés.",
+      "SHARE_FAILED": "Votre partage a échoué"
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
