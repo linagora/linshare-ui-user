@@ -1,4 +1,4 @@
-<div class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }" >
+<div  class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
 <div class="container files">
   <div class="card" id="collapsible-content">
     <div class="card-header">
@@ -76,28 +76,28 @@
             </a>
           </div>
           <div class="input-group search-bar hidden-xs">
-            <div id="search-field-ctn" >
-              <div class="search-style">
-                <div class="fg-line">
-                  <input type="text" class="form-control"
-                         autocomplete="off"
-                         ng-model="paramFilter['name']"
-                         placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                         ng-change="updateParams()">
+              <div id="search-field-ctn">
+                <div class="search-style">
+                  <div class="fg-line">
+                    <input type="text" class="form-control"
+                           autocomplete="off"
+                           ng-model="paramFilter['name']"
+                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                           ng-change="updateParams()">
+                  </div>
                 </div>
               </div>
-            </div>
-            <span class="input-group-addon last clickable"
-                    x-ng-click="advancedFilterBool = !advancedFilterBool"
-                    data-toggle="tooltip"
-                    title=""
-                    data-placement="right"
-                    data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
-                    slide-toggle="#searchFilterCtn">
-                    <i class="zmdi hidden-xs clickable" x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
-                     'zmdi-chevron-up': advancedFilterBool}">
-                   </i>
-            </span>
+              <span class="input-group-addon last clickable"
+                      x-ng-click="advancedFilterBool = !advancedFilterBool"
+                      data-toggle="tooltip"
+                      title=""
+                      data-placement="right"
+                      data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                      slide-toggle="#searchFilterCtn">
+                      <i class="zmdi hidden-xs clickable" x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
+                       'zmdi-chevron-up': advancedFilterBool}">
+                     </i>
+              </span>
           </div>
         </div>
       </div>
@@ -158,7 +158,7 @@
         </div>
       </div>
 
-      <div class="dragNDropCtn resetContentWidth hidden-xs"">
+      <div class="dragNDropCtn resetContentWidth hidden-xs">
         <div class="dragNDropContent">
           <div class="dragIconCtn ">
             <div class="borderedCircle">&nbsp;</div>

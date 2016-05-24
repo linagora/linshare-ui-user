@@ -281,7 +281,9 @@ angular.module('linshareUiUserApp')
       return $window.innerWidth;
     }, function() {
       checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-      checkAndSetNewWidthSidebarRight();
+      $timeout(function(){
+        checkAndSetNewWidthSidebarRight();
+      }, 450);
     });
   })
   .controller('InitNewFlowUploaderController', function($scope, ShareObjectService) {

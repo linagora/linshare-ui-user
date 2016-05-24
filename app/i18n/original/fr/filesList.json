@@ -22,10 +22,30 @@
       "DESCRIPTION": "Description",
       "QUICK_SHARE": "Partage",
       "SHARE_PLACEHOLDER": "adresse de courriel des destinataires",
-      "ADVANCED_SHARE": "Partage avancé"
+      "ADVANCED_SHARE": "Partage avancé",
+      "NO_PREVIEW": "Aucune prévisualisation",
+      "TYPE": "Type"
+    },
+    "DETAIL_SHARE": {
+      "TITLE": "Détails du partage",
+      "SHARED_DATE": "Partagé le",
+      "EXPIRATION_DATE": "Expire le",
+      "DOWNLOADED": "Téléchargé",
+      "TIMES": "fois",
+      "EDIT": "Modifier",
+      "VIEW_MORE": "Voir le détail",
+      "RESEND": "Relancer",
+      "ABORT_SHARE": "Annuler le partage"
     },
     "ACTIVITIES": {
       "TITLE": "Historique"
+    },
+    "RECIPIENTS":{
+      "TITLE": "Partages",
+      "DOWNLOADED": "Téléchargé",
+      "NOT_DOWNLOADED": "Non-téléchargé",
+      "SEARCH_USERS": "Rechercher par destinataires",
+      "NO_SHARES": "Vous n'avez aucun partage en cours."
     },
     "SHARE": {
       "SELECTED_FILES": "fichier(s) sélectionné(s)",

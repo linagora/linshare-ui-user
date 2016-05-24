@@ -104,10 +104,9 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       };
 
       $scope.onShare = function() {
-        angular.element('#focusInputShare').focus();
         $scope.loadSidebarContent();
-      };
-
+        angular.element('#focusInputShare').focus();
+       };
   }])
 
 /**
@@ -119,6 +118,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  */
   .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, NgTableParams, $translate,
                                                      $window, $log, documentsList, growlService, $timeout) {
+    $scope.mactrl.sidebarToggle.right = false;
     $scope.selectedDocuments = [];
     $scope.flagsOnSelectedPages = {};
 
@@ -126,8 +126,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $scope.sidebarRightDataType = content || 'share';
     };
     $scope.onShare = function() {
-      angular.element('#focusInputShare').focus();
       $scope.loadSidebarContent();
+      $timeout(function() {
+          angular.element('#focusInputShare').trigger('focus');
+      }, 350);
     };
 
     $scope.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
@@ -381,6 +383,19 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         }, 250);
       }
     });
+    $scope.currentPage='my_files';
+
+    $scope.data = {
+      selectedIndex: 0,
+      bottom:        false
+    };
+    $scope.nextTab = function() {
+      $scope.data.selectedIndex = Math.min($scope.data.selectedIndex + 1, 2) ;
+    };
+    $scope.previousTab = function() {
+      $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
+    };
+
   })
 /**
  * @ngdoc controller

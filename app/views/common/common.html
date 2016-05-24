@@ -5,14 +5,17 @@
         data-ng-controller="headerCtrl as hctrl">
 </header>
 <section id="main">
-  <div id="overlayMobile" data-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left }">&nbsp;</div>
-  <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
+  <div id="overlayMobile" data-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left }"
+       ng-click="mactrl.sidebarToggle.left = false">&nbsp;</div>
+  <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'"
+         data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
     <div id="content-container" flow-files-submitted="$flow.upload()" flow-drop=""
          flow-drag-enter="dropClass='drag-over'"
          flow-file-success="addUploadedDocument($file, $message, $flow)"
          flow-drag-leave="dropClass='fadeOutElm'"
          flow-file-success="$file.msg = $message"
-         ng-class="{'content-toggled': mactrl.sidebarToggle.left, 'drag-over' : dropClass == 'drag-over', 'fadeOutElm': dropClass == 'fadeOutElm'  }"
+         ng-class="{'content-toggled': mactrl.sidebarToggle.left, 'drag-over' : dropClass == 'drag-over',
+          'fadeOutElm': dropClass == 'fadeOutElm'  }"
          ng-style="myStyle">
 
       <div id="dropCtn" class="drop borderAnim resetContentWidth" flow-drop="">

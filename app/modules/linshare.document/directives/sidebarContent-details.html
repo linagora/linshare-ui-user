@@ -1,173 +1,209 @@
-<div class="block-header">
-  <h2 class="text-center">{{currentSelectedDocument.current.name}}
-     <span class="pull-right">
-      <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="closeDetailSidebar(); mactrl.sidebarToggle.right = false"></i>
-    </span>
-  </h2>
-</div>
 <div>
-  <tabset justified="true" id="sidebarContent-details">
-    <tab heading="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}">
-      <div ng-show="currentSelectedDocument.current.name" class="p-l-10 p-r-10">
-        <div id="profile-main">
-          <div class="p-relative m-b-20">
-            <a ng-show="currentSelectedDocument.current.hasThumbnail === true" href="">
-              <img class="img-responsive" ng-src="data:image/png;base64,{{currentSelectedDocument.current.thumbnail}}" alt="">
-            </a>
-          </div>
-          <div class="hidden-xs">
+  <div class="header-sidebar">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
+    <h2 class="header-more-options setEllipsis"> {{currentSelectedDocument.current.name}} </h2>
+    <span class="hidden-xs">
+      <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
+    </span>
+  </div>
 
-            <div class="listview">
+  <div ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
+    <md-content>
+      <md-tabs md-selected="data.selectedIndex"  md-dynamic-height="" md-border-bottom="">
+        <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 noPadding">
+          <md-content>
+            <div ng-show="currentSelectedDocument.current.name">
+              <div id="profile-main">
+                <div class="p-relative m-b-20 img-preview-ctn">
+                  <p ng-show="currentSelectedDocument.current.hasThumbnail === true" href="">
+                    <img class="img-responsive"
+                         ng-src="data:image/png;base64,{{currentSelectedDocument.current.thumbnail}}" alt="">
+                  </p>
+                  <div ng-show="!currentSelectedDocument.current.hasThumbnail === true" class="np-preview-ctn">
+                    <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
+                    <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
+                  </div>
+                </div>
+                <div class="visible-xs clearfix sidebar-toolbar">
+                  <ul class="actions col-xs-12">
+                    <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="col-xs-3">
+                      <a href=""
+                         title="{{'ACTION.DELETE' | translate}}">
+                        <i class="zmdi zmdi-delete"></i>
+                      </a>
+                    </li>
+                    <li  class="col-xs-3">
+                      <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
+                         ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                        <i class="zmdi zmdi-share"></i>
+                      </a>
+                    </li>
+                    <li  class="col-xs-3">
+                      <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                         title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
+                        <i class="zmdi zmdi-download"></i>
+                      </a>
+                    </li>
+                    <li class="col-xs-3">
+                      <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}" dropdown-toggle
+                         event-propagation-stop>
+                        <i class="zmdi zmdi-copy"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="p-10">
+                  <div class="listview">
 
-              <div class="media">
-                <div class="pull-left p-relative col-md-7">
-                  {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}
-                </div>
-                <div class="media-body">
-                  <div class="lv-title">{{currentSelectedDocument.current.creationDate | date:'medium'}}</div>
-                </div>
-              </div>
+                    <div class="media">
+                      <div class="pull-left p-relative col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title">{{currentSelectedDocument.current.creationDate | date:'medium'}}</div>
+                      </div>
+                    </div>
 
-              <div class="media">
-                <div class="pull-left p-relative col-md-7">
-                  {{'RIGHT_PANEL.DETAILS.SIZE' | translate}}
-                </div>
-                <div class="media-body">
-                  <div class="lv-title">{{currentSelectedDocument.current.size | readableSize: false}}</div>
-                </div>
-              </div>
+                    <div class="media">
+                      <div class="pull-left p-relative col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.SIZE' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title">{{currentSelectedDocument.current.size | readableSize: false}}</div>
+                      </div>
+                    </div>
 
-              <div class="media">
-                <div class="pull-left p-relative col-md-7">
-                  Type
-                </div>
-                <div class="media-body">
-                  <div class="lv-title">{{currentSelectedDocument.current.type}}</div>
-                </div>
-              </div>
+                    <div class="media">
+                      <div class="pull-left p-relative col-md-7">
+                         {{'RIGHT_PANEL.DETAILS.TYPE' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title">{{currentSelectedDocument.current.type}}</div>
+                      </div>
+                    </div>
 
-              <div class="media">
-                <div class="pull-left p-relative col-md-7">
-                  {{'RIGHT_PANEL.DETAILS.MODIFICATION_DATE' | translate}}
-                </div>
-                <div class="media-body">
-                  <div class="lv-title">{{currentSelectedDocument.current.modificationDate | date:'medium'}}</div>
-                </div>
-              </div>
+                    <div class="media">
+                      <div class="pull-left p-relative col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.MODIFICATION_DATE' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title">{{currentSelectedDocument.current.modificationDate | date:'medium'}}</div>
+                      </div>
+                    </div>
 
-              <div class="media">
-                <div class="pull-left p-relative col-md-7">
-                  {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}
-                </div>
-                <div class="media-body">
-                  <div class="lv-title">{{currentSelectedDocument.current.expirationDate | date:'medium'}}</div>
-                </div>
-              </div>
-              <div ng-show="linshareModeProduction == false" class="media">
-                <div class="pull-left col-md-7">
-                  {{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}}
-                </div>
-                <div class="media-body">
+                    <div class="media">
+                      <div class="pull-left p-relative col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title">{{currentSelectedDocument.current.expirationDate | date:'medium'}}</div>
+                      </div>
+                    </div>
+                    <div ng-show="linshareModeProduction == false" class="media">
+                      <div class="pull-left col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}}
+                      </div>
+                      <div class="media-body">
                           <span ng-show="currentSelectedDocument.current.ciphered == true">
                             <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-green"></i>
                           </span>
                           <span ng-show="currentSelectedDocument.current.ciphered == false">
                             <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-grey"></i>
                           </span>
-                </div>
-              </div>
+                      </div>
+                    </div>
 
-              <div class="media">
-                <div class="pull-left col-md-7">
-                  {{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}
+                    <div class="media"  ng-if="currentPage == 'my_files'">
+                      <div class="pull-left col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title" ng-click="nextTab()">
+                          {{currentSelectedDocument.current.shared}}
+                          {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' | translate}}
+                          <i class="zmdi zmdi-eye zmdi-hc-lg mdc-text-blue p-l-10"
+                             style="cursor: pointer"></i>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="media">
+                      <div class="pull-left col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.DESCRIPTION' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="media-body">
-                  <div class="lv-title">{{currentSelectedDocument.current.shared}} {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' |
-                    translate}}
-                    <i class="zmdi zmdi-eye zmdi-hc-lg mdc-text-blue p-l-10"
-                       style="cursor: pointer"
-                       ng-init="isCollapsed = true"
-                       ng-click="isCollapsed = !isCollapsed"></i>
+                <label ng-if="share.recipients.length > 0" class="p-t-20">
+                  <textarea ng-model="share.sharingNote" placeholder="add a note"></textarea>
+                </label>
+              </div>
+            </div>
+            <div ng-hide="currentSelectedDocument.current.name" class="p-l-10 p-r-10">
+              {{"RIGHT_PANEL.EMPTY" | translate }}
+            </div>
+          </md-content>
+        </md-tab>
+        <md-tab id="tab2" ng-if="currentPage == 'my_files'" label="{{'RIGHT_PANEL.RECIPIENTS.TITLE' | translate}}"
+                class="col-xs-4 noPadding">
+          <md-content class="md-padding">
+            <p class="empty-res" ng-if="currentSelectedDocument.current.shared == 0">
+              <i class="zmdi zmdi-info-outline"></i><span>{{'RIGHT_PANEL.RECIPIENTS.NO_SHARES' | translate}}</span>
+            </p>
+
+            <div ng-if="currentSelectedDocument.current.shared > 0">
+              <div class="input-group search-bar col-xs-12">
+                <div id="search-field-ctn">
+                  <div class="search-style">
+                    <div class="fg-line">
+                      <input type="text" class="form-control" autocomplete="off" ng-model="paramFilter['name']"
+                             placeholder="{{'RIGHT_PANEL.RECIPIENTS.SEARCH_USERS' | translate}}"
+                             ng-change="updateParams()">
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="media">
-                <div collapse="isCollapsed">
-                  <ul ng-repeat="shareElement in currentSelectedDocument.current.shares">
-                    <li><a href="mailto:{{shareElement.recipient.mail}}">{{shareElement.recipient.firstName}}
-                      {{shareElement.recipient.lastName}}</a></li>
-                  </ul>
-                </div>
-              </div>
+              <div class="recipients-list-sharing-details">
+                <div class="recipientsAutocomplete actions"
+                     ng-repeat="shareElement in currentSelectedDocument.current.shares"
+                     title="{{ shareElement.recipient.domain}}"
+                     ng-click="loadSidebarContent('share-details')">
+                  <span class="firstLetterFormat">{{shareElement.recipient.firstName.charAt(0)}}</span>
 
-              <div class="media">
-                <div class="pull-left col-md-7">
-                  {{'RIGHT_PANEL.DETAILS.DESCRIPTION' | translate}}
-                </div>
-                <div class="media-body">
-                  <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+                  <p class="recipientsInfo"><span class="user-full-name">
+                  <strong>{{shareElement.recipient.firstName}} <span class="lastName">
+                    {{shareElement.recipient.lastName.toUpperCase() }}</span>
+                  </strong>
+                    </span>
+                    <span class="email">{{'RIGHT_PANEL.RECIPIENTS.NOT_DOWNLOADED' | translate}}</span>
+                  </p>
+                  <a class="info-partage-link" href=""><i class="zmdi zmdi-info-outline"></i></a>
                 </div>
               </div>
             </div>
-          </div>
 
-          <label ng-if="share.recipients.length > 0" class="p-t-20">
-            <textarea ng-model="share.sharingNote" placeholder="add a note"></textarea>
-          </label>
-        </div>
-      </div>
-      <div ng-hide="currentSelectedDocument.current.name" class="p-l-10 p-r-10">
-        {{"RIGHT_PANEL.EMPTY" | translate }}
-      </div>
-    </tab>
+          </md-content>
+        </md-tab>
 
-    <tab heading="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" ng-show="devMode">
-      <div ng-show="linshareModeProduction == false" class="p-l-10 p-r-10"
-           data-ng-controller="LinshareShareActionController">
-        <div class="input-group p-b-20">
-          <div class="fg-line " style="background: white;">
-            <ul class="list-inline">
-              <li style="border: 1px solid #AAA; padding: 1px; margin: 2px" tooltip-placement="bottom"
-                  tooltip={{userRepresentation(recipient)}}
-                  x-ng-repeat="recipient in share.recipients">{{recipient.lastName}}&nbsp;{{recipient.firstName}}
-                      <span style="cursor: pointer;">
-                          <i class="glyphicon glyphicon-remove" style="color: #333;"
-                             x-ng-click="removeRecipients(share.recipients, $index)"></i>
-                      </span>
-              </li>
-            </ul>
-            <input type="text" class="form-control input-sm" autocomplete="off"
-                   x-ng-model="selectedContact"
-                   x-typeahead-min-length="3"
-                   x-typeahead-on-select="addRecipients(share.recipients, selectedContact)"
-                   x-typeahead-wait-ms="30"
-                   x-typeahead-loading="searchingContact"
-                   x-typeahead-input-formatter="angular.noop"
-                   x-typeahead="u as userRepresentation(u) for u in searchGuestRestrictedContacts($viewValue) | limitTo:3"/>
-          </div>
-            <span class="input-group-addon last">
-              <button class="btn bgm-blue waves-circle" ng-click="submitShare(share)">
-                <i class="zmdi zmdi-mail-send"></i>
-              </button>
-            </span>
-        </div>
-
-        <label ng-if="share.recipients.length > 0" class="p-t-20">
-          <textarea ng-model="share.sharingNote" placeholder="add a note"></textarea>
-        </label>
-
-        <div class="p-t-20" ng-show="linshareModeProduction == false">
-          <a ui-sref="share.files.new-share({selected: selectedDocuments})" href="">{{'RIGHT_PANEL.ACTIVITIES.ADVANCED_SHARE'
-            | translate}}</a>
-        </div>
-        <div ng-show="linshareModeProduction == false">
-          share{{share}}<br/>
-          contact {{selectedContact}}
-          shareTabActive {{shareTabActive}}
-        </div>
-      </div>
-    </tab>
-  </tabset>
-
+        <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 noPadding disabled">
+          <md-content class="md-padding">
+            <div class="lv-body stop-propagate">
+              <div class="lv-item">
+                <div class="work-in-progress-ctn-elm">
+                  <div class="work-in-progress-content">
+                    <img src="images/wip-banner-small.png">
+                    <p class="ng-binding">EN COURS DE CONSTRUCTION</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
 </div>

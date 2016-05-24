@@ -3,6 +3,7 @@ angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope,  $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
              LinshareShareService, LinshareDocumentService, files, $translate, growlService, $log, $timeout){
+      $scope.mactrl.sidebarToggle.right = false;
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;
@@ -478,6 +479,7 @@ angular.module('linshare.receivedShare')
           }, 250);
         }
       });
+      $scope.currentPage='received_files';
     })
 
   // ===========================================================================

@@ -14,6 +14,66 @@
     </a>
   </div>
   <div class="custumListContainer ">
+
+    <div class="recipients-form-sections clearfix">
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
+        {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2><span class="required-field-hint">*</span>
+      <div class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
+           on-toggle="toggled()">
+        <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle  ng-disabled="disabled"
+           alt="{{ 'RIGHT_PANEL.SHARE.CREATE_MAILING_LIST_ALT' | translate }}">
+          {{ "RIGHT_PANEL.SHARE.CREATE_MAILING_LIST" | translate }}
+        </a>
+        <div class="dropdown-menu pull-right">
+          <div class="stop-propagate">
+            <p class="labelListCtn">
+              <input type="email" class="form-control input-sm" id="labelList"
+                     placeholder="Saisissez le nom de votre liste">
+            </p>
+            <md-divider></md-divider>
+          </div>
+          <div>
+            <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">
+              {{ "NAVIGATION.CANCEL" | translate }}
+            </button>
+            <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">
+              {{ "NAVIGATION.SEND" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form role="form" class="clearfix">
+      <div class="form-group fg-line">
+        <div autocomplete-user="" data-on-select-function="newShare.addRecipient"></div>
+      </div>
+    </form>
+
+    <div class="custumListBody col-xs-12 ">
+      <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients()">
+        <md-tooltip md-direction="bottom">
+          {{recipient.domain}}
+        </md-tooltip>
+
+        <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0)}}</span></p>
+        <div class="pull-left nameRecipientsCtn">
+          <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
+          <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
+            <i class="zmdi zmdi-close "></i>
+          </p>
+        </div>
+      </div>
+      <div class="custumListItem" ng-repeat="list in newShare.getMailingListUuid()">
+        <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
+        <div class="pull-left nameRecipientsCtn">
+          <p class="pull-left inner-text-li">{{list.listName}}</p>
+          <p class=" close-list-icone-btn pull-right" ng-click="newShare.removeMailingList($index)">
+            <i class="zmdi zmdi-close"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="recipients-form-sections clearfix">
       <div class="custumHeaderList">
         <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"></i>
@@ -45,63 +105,7 @@
       </div>
     </div>
 
-    <div class="recipients-form-sections clearfix">
-      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
-        {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2><span class="required-field-hint">*</span>
-      <div class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
-           on-toggle="toggled()">
-        <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle  ng-disabled="disabled"
-           alt="{{ 'RIGHT_PANEL.SHARE.CREATE_MAILING_LIST_ALT' | translate }}">
-          {{ "RIGHT_PANEL.SHARE.CREATE_MAILING_LIST" | translate }}
-        </a>
-        <div class="dropdown-menu pull-right">
-          <div class="stop-propagate">
-          <p class="labelListCtn">
-            <input type="email" class="form-control input-sm" id="labelList"
-                   placeholder="Saisissez le nom de votre liste">
-          </p>
-          <md-divider></md-divider>
-          </div>
-          <div>
-            <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">
-              {{ "NAVIGATION.CANCEL" | translate }}
-            </button>
-            <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">
-              {{ "NAVIGATION.SEND" | translate }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <form role="form" class="clearfix">
-      <div class="form-group fg-line">
-        <div autocomplete-user="" data-on-select-function="newShare.addRecipient"></div>
-      </div>
-    </form>
-  </div>
-  <div class="custumListBody col-xs-12 ">
-    <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients()">
-      <md-tooltip md-direction="bottom">
-        {{recipient.domain}}
-    </md-tooltip>
 
-      <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0)}}</span></p>
-      <div class="pull-left nameRecipientsCtn">
-        <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
-        <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
-          <i class="zmdi zmdi-close "></i>
-        </p>
-      </div>
-    </div>
-    <div class="custumListItem" ng-repeat="list in newShare.getMailingListUuid()">
-      <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
-      <div class="pull-left nameRecipientsCtn">
-        <p class="pull-left inner-text-li">{{list.listName}}</p>
-        <p class=" close-list-icone-btn pull-right" ng-click="newShare.removeMailingList($index)">
-          <i class="zmdi zmdi-close"></i>
-        </p>
-      </div>
-    </div>
   </div>
 </div>
 <div class="bottomSidebarBtn">

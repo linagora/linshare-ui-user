@@ -22,10 +22,30 @@
       "DESCRIPTION": "Description",
       "QUICK_SHARE": "Quick share",
       "SHARE_PLACEHOLDER": "emails of recipients",
-      "ADVANCED_SHARE": "Advanced sharing"
+      "ADVANCED_SHARE": "Advanced sharing",
+      "NO_PREVIEW": "No preview available",
+      "TYPE": "Type"
+    },
+    "DETAIL_SHARE": {
+      "TITLE": "Share detail",
+      "SHARED_DATE": "Shared on the",
+      "EXPIRATION_DATE": " Expire on the",
+      "DOWNLOADED": "Downloaded",
+      "TIMES": "times",
+      "EDIT": "edit",
+      "VIEW_MORE": "view details",
+      "RESEND": "Resend",
+      "ABORT_SHARE": "Cancel the share"
     },
     "ACTIVITIES": {
       "TITLE": "ACTIVITIES"
+    },
+    "RECIPIENTS":{
+      "TITLE": "SHARES",
+      "DOWNLOADED": "Downloaded",
+      "NOT_DOWNLOADED": "Not downloaded",
+      "SEARCH_USERS": "Search by recipients",
+      "NO_SHARES": "You currently have no share."
     },
     "SHARE": {
       "TITLE": "SHARING",

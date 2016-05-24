@@ -1,4 +1,4 @@
-<div ui-view class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }" >
+<div ui-view class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
   <div class="container files">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
@@ -216,16 +216,17 @@
                     </span>
                     <span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right" data-ng-class=
-                        "{ 'openr': (mactrl.sidebarToggle.right === true) && (sidebarRightDataType === 'details')}">
+                        "{ 'openr': (mactrl.sidebarToggle.right === true) &&
+                        ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
+                        )}">
                         <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop>
                           <a href=""
                              title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
                             <i class="zmdi zmdi-info-outline"></i>
                           </a>
                         </li>
-                        <li class="hidden-xs">
-                          <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
-                             ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                        <li class="hidden-xs"  ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                          <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true">
                             <i class="zmdi zmdi-share"></i>
                           </a>
                         </li>
