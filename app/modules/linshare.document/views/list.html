@@ -139,7 +139,7 @@
           </div>
           <div class="displayNumSelectedItems" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}"
                data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
-               ng-click="activeBtnShowSelection = !activeBtnShowSelection">
+               ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()">
               <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
               <div class="pull-left view-icons-ctn">
                 <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>

@@ -174,7 +174,8 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       }
     };
 
-    $scope.resetSelectedDocuments = function(){
+    $scope.resetSelectedDocuments = function() {
+      delete $scope.tableParams.filter().isSelected;
       angular.forEach($scope.selectedDocuments, function(selectedDoc) {
         selectedDoc.isSelected = false;
       });
@@ -270,7 +271,13 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.paramFilter = {
       name: ''
     };
-
+    $scope.toggleFilterBySelectedFiles = function() {
+      if($scope.tableParams.filter().isSelected) {
+        delete $scope.tableParams.filter().isSelected;
+      } else {
+        $scope.tableParams.filter().isSelected = true;
+      }
+    };
     $scope.documentsListCopy = documentsList;
     $scope.documentsList = documentsList;
 
