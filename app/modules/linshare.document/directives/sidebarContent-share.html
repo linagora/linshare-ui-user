@@ -9,7 +9,8 @@
 <div class="card col-xs-12" id="recipientsCtnSidebar">
   <div class="num-items-section-ctn">
     <span>{{lengthOfSelectedDocuments()}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
-    <a class="pull-right sidebar-link" href="" ui-sref="documents.files.selected">
+    <a class="pull-right sidebar-link" href="" ui-sref="documents.files.selected"
+       ng-click="loadSidebarContent('active-share-details')">
       {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
     </a>
   </div>

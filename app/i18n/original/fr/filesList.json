@@ -67,6 +67,16 @@
       "ATTACH_EMAIL": "Personnaliser le courriel",
       "ATTACHED_EMAIL_SUBJECT": "Sujet",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message"
+
+    },
+    "CURRENT_SHARE_DETAIL": {
+      "TITLE": "Details du partage",
+      "RECIPIENTS": "Destinataires",
+      "SHARE_PARAMS": "Paramètres de partage",
+      "NOTE": "Note",
+      "MAIL_CONTENT": "Corps du mail",
+      "CUSTUM_MAIL_TEMPLATE": "Personalisation du mail",
+      "SHARE_OPTIONS": "Annuler partage"
     }
   },
   "SELECTED_FILES": {

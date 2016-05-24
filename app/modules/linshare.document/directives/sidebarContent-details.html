@@ -25,7 +25,7 @@
                   </div>
                 </div>
                 <div class="visible-xs clearfix sidebar-toolbar">
-                  <ul class="actions col-xs-12">
+                  <ul class="actions col-xs-12" ng-show="currentPage == 'my_files'">
                     <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="col-xs-3">
                       <a href=""
                          title="{{'ACTION.DELETE' | translate}}">
@@ -47,6 +47,33 @@
                     <li class="col-xs-3">
                       <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}" dropdown-toggle
                          event-propagation-stop>
+                        <i class="zmdi zmdi-copy"></i>
+                      </a>
+                    </li>
+                  </ul>
+
+                  <ul class="actions col-xs-12" ng-show="currentPage == 'received_files'">
+                    <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="col-xs-3">
+                      <a href=""
+                         title="{{'ACTION.DELETE' | translate}}">
+                        <i class="zmdi zmdi-delete"></i>
+                      </a>
+                    </li>
+                    <li  class="col-xs-3">
+                      <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
+                        class="disabled-work-in-progress">
+                        <i class="zmdi zmdi-swap"></i>
+                      </a>
+                    </li>
+                    <li  class="col-xs-3">
+                      <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                         title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
+                        <i class="zmdi zmdi-download"></i>
+                      </a>
+                    </li>
+                    <li class="col-xs-3" >
+                      <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}" dropdown-toggle
+                         event-propagation-stop ng-click="copyIntoFiles(selectedDocuments)">
                         <i class="zmdi zmdi-copy"></i>
                       </a>
                     </li>

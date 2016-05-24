@@ -1,19 +1,23 @@
 <div class="container files">
 
-
   <!--  ACTIONS ON DOCUMENTS  -->
 
-  <div class="card">
-    <div class="card-header">
+  <div class="card setWidth" id="collapsible-content">
+    <div class="card-header noPadding">
       <div id="breadcrumb-wrap">
         <div class="breadcrumbsCtn">
           <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
             {{"SELECTED_FILES.BREADCRUMB_TITLE" | translate }}
           </a>
         </div>
+
+        <div ng-show="devMode" class="navBarBtn">
+          <button class="btn btn-default waves-effect blueBtn pull-right" ng-click="$state.go('documents.files')">
+            {{ "SELECTED_FILES.BACK_TO_ALL_FILES" | translate }}
+          </button>
+        </div>
       </div>
     </div>
-
 
     <!-- SELECTED DOCUMENTS LIST  -->
     <div class="card-body">
@@ -29,9 +33,6 @@
       </ul>
     </div>
   </div>
-
-
 </div>
 <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-       data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
-
+       data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right"></aside>

@@ -1,0 +1,164 @@
+<div class="header-sidebar">
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
+  <h2 class="header-more-options">{{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.TITLE' | translate}}</h2>
+</div>
+<div class="card col-xs-12" id="recipientsCtnSidebar">
+  <div class="num-items-section-ctn">
+    <span>{{selectedDocuments.length}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
+  </div>
+  <div class="custumListContainer clearfix">
+    <div class="recipients-form-sections clearfix">
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
+        {{currentSelectedDocument.current.shared}}
+        {{ "RIGHT_PANEL.CURRENT_SHARE_DETAIL.RECIPIENTS" | translate }}
+      </h2>
+    </div>
+    <div class="custumListBody col-xs-12">
+      <div class="custumListItem readonly">
+        <p class="pull-left circleCtn"><span class="circle userBg">T</span></p>
+        <div class="pull-left nameRecipientsCtn">
+          <p class="pull-left inner-text-li">Tim Sanchez</p>
+          <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
+            <i class="zmdi zmdi-close "></i>
+          </p>
+        </div>
+      </div>
+      <div class="custumListItem readonly" ng-repeat="recipient in newShare.getRecipients()">
+        <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0)}}</span></p>
+        <div class="pull-left nameRecipientsCtn">
+          <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
+          <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
+            <i class="zmdi zmdi-close "></i>
+          </p>
+        </div>
+      </div>
+      <div class="custumListItem readonly" ng-repeat="list in newShare.getMailingListUuid()">
+        <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
+        <div class="pull-left nameRecipientsCtn">
+          <p class="pull-left inner-text-li">{{list.listName}}</p>
+          <p class=" close-list-icone-btn pull-right" ng-click="newShare.removeMailingList($index)">
+            <i class="zmdi zmdi-close"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="recipients-form-sections clearfix">
+    <div class="custumHeaderList clearfix">
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"></i>
+        {{ "RIGHT_PANEL.CURRENT_SHARE_DETAIL.SHARE_PARAMS" | translate }} :
+      </h2>
+    </div>
+    <div id="profile-main">
+      <div class="p-10">
+        <div class="listview">
+          <div class="media">
+            <div class="pull-left p-relative col-md-7">
+              {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}} :
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{currentSelectedDocument.current.expirationDate | date:'medium'}}</div>
+            </div>
+          </div>
+          <div class="media">
+            <div class="pull-left p-relative col-md-7">
+              {{'RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE' | translate}} :
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{currentSelectedDocument.current.expirationDate | date:'medium'}}</div>
+            </div>
+          </div>
+          <div ng-show="linshareModeProduction == false" class="media">
+            <div class="pull-left col-md-7">
+              {{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}} :
+            </div>
+            <div class="media-body">
+              <span ng-show="currentSelectedDocument.current.ciphered == true">
+              <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-green"></i>
+              </span>
+              <span ng-show="currentSelectedDocument.current.ciphered == false">
+              <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-grey"></i>
+              </span>
+            </div>
+          </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              {{'RIGHT_PANEL.SHARE_OPTIONS.USDA' | translate}} :
+            </div>
+            <div class="media-body">
+              <div class="lv-title">
+                <span ng-show="currentSelectedDocument.current.ciphered == true">
+                <i class="fa fa-check-square-o"></i>
+                </span>
+                <span ng-show="currentSelectedDocument.current.ciphered == false">
+                <i class="fa fa-square-o"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              {{'RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT' | translate}} :
+            </div>
+            <div class="media-body">
+              <div class="lv-title">
+                <span ng-show="currentSelectedDocument.current.ciphered == true">
+                <i class="fa fa-check-square-o"></i>
+                </span>
+                <span ng-show="currentSelectedDocument.current.ciphered == false">
+                <i class="fa fa-square-o"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              {{'RIGHT_PANEL.SHARE_OPTIONS.USDA' | translate}} :
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+            </div>
+          </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.CUSTUM_MAIL_TEMPLATE' | translate}} :
+            </div>
+            <div class="media-body">
+              <span ng-show="currentSelectedDocument.current.ciphered == true">
+              <i class="fa fa-check-square-o"></i>
+              </span>
+              <span ng-show="currentSelectedDocument.current.ciphered == false">
+              <i class="fa fa-square-o"></i>
+              </span>
+            </div>
+          </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              {{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}} :
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+            </div>
+          </div>
+          <div class="media">
+            <div class="pull-left col-md-7">
+              {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.MAIL_CONTENT' | translate}} :
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <label ng-if="share.recipients.length > 0" class="p-t-20">
+        <textarea ng-model="share.sharingNote" placeholder="add a note"></textarea>
+      </label>
+    </div>
+  </div>
+</div>
+</div>
+<div class="bottomSidebarBtn">
+  <button class="btn btn-primary col-xs-12" ng-click="submitShare(newShare)">
+    {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.SHARE_OPTIONS' | translate}}
+  </button>
+</div>

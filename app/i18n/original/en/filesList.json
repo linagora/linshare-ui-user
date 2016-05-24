@@ -68,6 +68,15 @@
       "ATTACH_EMAIL": "Customize the email",
       "ATTACHED_EMAIL_SUBJECT": "Subject",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Enter your message"
+    },
+    "CURRENT_SHARE_DETAIL": {
+      "TITLE": "Share details",
+      "RECIPIENTS": "Recipients",
+      "SHARE_PARAMS": "Share settings",
+      "NOTE": "Message",
+      "MAIL_CONTENT": "Email body content",
+      "CUSTUM_MAIL_TEMPLATE": "Custum email template",
+      "SHARE_OPTIONS": "Cancel share"
     }
   },
   "SELECTED_FILES": {

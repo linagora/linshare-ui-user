@@ -484,7 +484,7 @@
   margin: 0;
 }
 .noPadding {
-  padding: 0;
+  padding: 0 !important;
 }
 .setWhite {
   opacity: 1 !important;}
@@ -1222,7 +1222,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
 #recipientsCtnSidebar {
   margin-top: 1.5em;
   .recipients-form-sections {
-    margin-top: 3em;
+    margin-top: 2.5em;
   }
   .datepickerBorderFix {
     text-align: right;
@@ -1251,7 +1251,6 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     margin-left: 2em;
   }
   .num-items-section-ctn {
-    margin-bottom: 2.5em;
     span {
       background-color: $secondaryClr;
       display: inline-block;
@@ -2404,12 +2403,23 @@ div.borderedCircle {
     text-overflow: ellipsis;
   }
   .close-list-icone-btn {
-
     padding-top: 3px;
     padding-left: 4px;
     padding-right: 12px;
     font-size: 1.2em;
     width: 25px;
+  }
+}
+
+.custumListItem.readonly {
+  pointer-events: none;
+  .inner-text-li {
+    font-size: 0.91em;
+    padding: 5px 8px 0 7px;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

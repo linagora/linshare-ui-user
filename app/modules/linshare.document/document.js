@@ -426,6 +426,12 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
     $scope.mactrl.sidebarToggle.right = true;
     $scope.$parent.sidebarRightDataType = 'share';
+    $scope.currentPage = '';
+    var param = $stateParams.selected;
+    angular.forEach(param, function(n) {
+      $scope.selectedDocuments.push(n);
+    });
+    $scope.sidebarRightDataType = 'active-share-details';
     $scope.removeSelectedDocuments = function(document) {
       var index = $scope.selectedDocuments.indexOf(document);
       if(index > -1) {
@@ -433,6 +439,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         $scope.selectedDocuments.splice(index, 1);
       }
     };
+
   })
 
   .controller('LinshareUploadViewController', function($scope, $rootScope, growlService) {
