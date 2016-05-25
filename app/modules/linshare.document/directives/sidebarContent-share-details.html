@@ -12,8 +12,8 @@
     <div id="site-visits" class="dash-widget-item bgm-lin-blue">
       <div class="dash-widget-header">
         <div class="design-content">
-          <span class="firstLetterFormat">L</span>
-          <p>jane.doe@linagora.com</p>
+          <span class="firstLetterFormat">{{recipientShareDetails.current.recipient.firstName.charAt(0)}}</span>
+          <p>{{recipientShareDetails.current.recipient.mail}}</p>
         </div>
         <div class="p-20 bg-design">
           <div class="dash-widget-visits" data-sparkline-line></div>
@@ -27,7 +27,7 @@
 
         <div class="action-share-details-row clearfix actions">
           <small>{{'RIGHT_PANEL.DETAIL_SHARE.SHARED_DATE' | translate}}</small>
-          <p class="data"> 20/11/2016</p>
+          <p class="data"> {{recipientShareDetails.current.creationDate | date:'medium' }}</p>
           <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.RESEND' | translate}}" class="disabled">
             <i class="fa fa-share" aria-hidden="true"></i>
           </a>
@@ -35,7 +35,7 @@
 
         <div class="action-share-details-row clearfix actions">
           <small>{{'RIGHT_PANEL.DETAIL_SHARE.EXPIRATION_DATE' | translate}}</small>
-          <p class="data">22/12/2016</p>
+          <p class="data">{{recipientShareDetails.current.expirationDate | date:'medium' }}</p>
           <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.EDIT' | translate}}" ng-init="isDatepickerOpened=false"
              class="disabled"
              ng-click="isDatepickerOpened = !isDatepickerOpened">
@@ -65,7 +65,7 @@
         </div>
         <div class="action-share-details-row clearfix actions">
           <small>{{'RIGHT_PANEL.DETAIL_SHARE.DOWNLOADED' | translate}}</small>
-          <p class="data">3 {{'RIGHT_PANEL.DETAIL_SHARE.TIMES' | translate}}</p>
+          <p class="data">{{recipientShareDetails.current.downloaded }} {{'RIGHT_PANEL.DETAIL_SHARE.TIMES' | translate}}</p>
           <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.VIEW_MORE' | translate}}" class="disabled">
             <i class="fa fa-eye" aria-hidden="true"></i>
           </a>
@@ -75,7 +75,7 @@
   </div>
 </div>
 <div class="card col-xs-12 ">
-  <button class="btn abort-sharing-cta disabled-btn" ng-click="submitShare(newShare)"  >
+  <button class="btn abort-sharing-cta disabled-btn" ng-click="">
     <i class="zmdi zmdi-close"></i>
     <span>{{'RIGHT_PANEL.DETAIL_SHARE.ABORT_SHARE' | translate}}</span>
   </button>

@@ -1,3 +1,33 @@
-<div>
-  Work in progress
+<div class="container files">
+
+
+  <!--  ACTIONS ON DOCUMENTS  -->
+
+  <div class="card setWidth" id="collapsible-content">
+    <div class="card-header noPadding">
+      <div id="breadcrumb-wrap">
+        <div class="breadcrumbsCtn">
+          <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
+            {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} {{shareIndex +1}}
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- SELECTED DOCUMENTS LIST  -->
+    <div class="card-body">
+      <ul class="list-group" >
+        <li class="list-group-item" data-ng-repeat="documentFile in shareToDisplay.documents">
+          <span class="fa ls-1p5x m-l-10 m-r-20" ng-class="'{{documentFile.type | mimetypeIcone}}'" aria-hidden="true">
+          </span>{{documentFile.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+         data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
+  </aside>
 </div>

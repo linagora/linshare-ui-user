@@ -94,7 +94,8 @@
                             </md-tab>
                             <md-tab label="{{'TRANSFERS_DROPDOWN.SHARE' | translate}}">
                               <md-content class="md-padding">
-                                <div class="lv-item row" x-ng-repeat="share in share_array">
+                                <div class="lv-item row" style="cursor: pointer" x-ng-repeat="share in share_array"
+                                     ui-sref="share.detail({id: $index})">
                                   <div class="col-xs-10 p-0">
                                     <div class="lv-title p-0">
                                       <div  class="p-0 file-name">

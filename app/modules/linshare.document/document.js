@@ -239,6 +239,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.currentSelectedDocument = {current: ''};
+    $scope.recipientShareDetails = {current: ''};
 
     $scope.showCurrentFile = function(currentFile, event) {
       $scope.currentSelectedDocument.current = currentFile;

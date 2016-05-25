@@ -221,8 +221,20 @@ angular.module('linshareUiUserApp')
       //------------------------------
 
       .state('share', {
+        parent: 'common',
         url: '/share',
-        templateUrl: 'views/common/common.html'
+        template:'<div ui-view></div>'
+      })
+
+      .state('share.detail', {
+        url: '/view/:id',
+        templateUrl: 'modules/linshare.share/views/shares_detail.html',
+        controller: 'shareDetailController',
+        resolve: {
+          shareIndex: function($stateParams) {
+            return $stateParams.id;
+          }
+        }
       })
 
       .state('share.files', {

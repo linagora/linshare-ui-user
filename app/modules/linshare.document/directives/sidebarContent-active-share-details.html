@@ -14,16 +14,7 @@
       </h2>
     </div>
     <div class="custumListBody col-xs-12">
-      <div class="custumListItem readonly">
-        <p class="pull-left circleCtn"><span class="circle userBg">T</span></p>
-        <div class="pull-left nameRecipientsCtn">
-          <p class="pull-left inner-text-li">Tim Sanchez</p>
-          <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
-            <i class="zmdi zmdi-close "></i>
-          </p>
-        </div>
-      </div>
-      <div class="custumListItem readonly" ng-repeat="recipient in newShare.getRecipients()">
+      <div class="custumListItem readonly" ng-repeat="recipient in shareToDisplay.recipients">
         <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0)}}</span></p>
         <div class="pull-left nameRecipientsCtn">
           <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
@@ -32,7 +23,7 @@
           </p>
         </div>
       </div>
-      <div class="custumListItem readonly" ng-repeat="list in newShare.getMailingListUuid()">
+      <div class="custumListItem readonly" ng-repeat="list in shareToDisplay.mailingListUuid">
         <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
         <div class="pull-left nameRecipientsCtn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
@@ -57,7 +48,7 @@
               {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{currentSelectedDocument.current.expirationDate | date:'medium'}}</div>
+              <div class="lv-title">{{shareToDisplay.expirationDate | date:'medium'}}</div>
             </div>
           </div>
           <div class="media">
@@ -65,19 +56,19 @@
               {{'RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{currentSelectedDocument.current.expirationDate | date:'medium'}}</div>
+              <div class="lv-title">{{shareToDisplay.notificationDateForUSDA | date:'medium'}}</div>
             </div>
           </div>
-          <div ng-show="linshareModeProduction == false" class="media">
+          <div class="media">
             <div class="pull-left col-md-7">
-              {{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}} :
+              {{'RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING' | translate}} :
             </div>
             <div class="media-body">
-              <span ng-show="currentSelectedDocument.current.ciphered == true">
-              <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-green"></i>
+              <span ng-show="shareToDisplay.secured === true">
+                <i class="fa fa-check-square-o"></i>
               </span>
-              <span ng-show="currentSelectedDocument.current.ciphered == false">
-              <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-grey"></i>
+              <span ng-show="shareToDisplay.secured === false">
+                <i class="fa fa-square-o"></i>
               </span>
             </div>
           </div>
@@ -87,11 +78,11 @@
             </div>
             <div class="media-body">
               <div class="lv-title">
-                <span ng-show="currentSelectedDocument.current.ciphered == true">
-                <i class="fa fa-check-square-o"></i>
+                <span ng-show="shareToDisplay.enableUSDA == true">
+                  <i class="fa fa-check-square-o"></i>
                 </span>
-                <span ng-show="currentSelectedDocument.current.ciphered == false">
-                <i class="fa fa-square-o"></i>
+                <span ng-show="shareToDisplay.enableUSDA == false">
+                  <i class="fa fa-square-o"></i>
                 </span>
               </div>
             </div>
@@ -102,42 +93,22 @@
             </div>
             <div class="media-body">
               <div class="lv-title">
-                <span ng-show="currentSelectedDocument.current.ciphered == true">
-                <i class="fa fa-check-square-o"></i>
+                <span ng-show="shareToDisplay.creationAcknowledgement == true">
+                  <i class="fa fa-check-square-o"></i>
                 </span>
-                <span ng-show="currentSelectedDocument.current.ciphered == false">
-                <i class="fa fa-square-o"></i>
+                <span ng-show="shareToDisplay.creationAcknowledgement == false">
+                  <i class="fa fa-square-o"></i>
                 </span>
               </div>
             </div>
           </div>
-          <div class="media">
-            <div class="pull-left col-md-7">
-              {{'RIGHT_PANEL.SHARE_OPTIONS.USDA' | translate}} :
-            </div>
-            <div class="media-body">
-              <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
-            </div>
-          </div>
-          <div class="media">
-            <div class="pull-left col-md-7">
-              {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.CUSTOM_MAIL_TEMPLATE' | translate}} :
-            </div>
-            <div class="media-body">
-              <span ng-show="currentSelectedDocument.current.ciphered == true">
-              <i class="fa fa-check-square-o"></i>
-              </span>
-              <span ng-show="currentSelectedDocument.current.ciphered == false">
-              <i class="fa fa-square-o"></i>
-              </span>
-            </div>
-          </div>
+
           <div class="media">
             <div class="pull-left col-md-7">
               {{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+              <div class="lv-title">{{shareToDisplay.subject}}</div>
             </div>
           </div>
           <div class="media">
@@ -145,20 +116,16 @@
               {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.MAIL_CONTENT' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+              <div class="lv-title">{{shareToDisplay.message}}</div>
             </div>
           </div>
         </div>
       </div>
-      <label ng-if="share.recipients.length > 0" class="p-t-20">
-        <textarea ng-model="share.sharingNote" placeholder="add a note"></textarea>
-      </label>
     </div>
   </div>
 </div>
-</div>
 <div class="bottomSidebarBtn">
-  <button class="btn btn-primary col-xs-12" ng-click="submitShare(newShare)">
+  <button class="btn btn-primary col-xs-12" ng-click="$state.go('documents.files')">
     {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.SHARE_OPTIONS' | translate}}
   </button>
 </div>

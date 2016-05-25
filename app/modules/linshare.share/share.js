@@ -190,7 +190,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           documentList = [documentList];
         }
         angular.forEach(documentList, function (doc) {
-          documents.push(doc.uuid);
+          documents.push(doc);
         });
       };
 
@@ -199,6 +199,26 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       };
 
       this.getFormObj = function() {
+        var docUuid = [];
+        angular.forEach(documents, function(doc) {
+          docUuid.push(doc.uuid);
+        });
+        return {
+          recipients: recipients,
+          documents: docUuid,
+          mailingListUuid: mailingListUuid,
+          secured: secured.value,
+          creationAcknowledgement: creationAcknowledgement.value,
+          expirationDate: expirationDate.value,
+          enableUSDA: enableUSDA.value,
+          notificationDateForUSDA: notificationDateForUSDA.value,
+          sharingNote: self.sharingNote,
+          subject: self.subject,
+          message: self.message
+        }
+      };
+
+      this.getObjectCopy = function() {
         return {
           recipients: recipients,
           documents: documents,
@@ -230,7 +250,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       this.addLinshareDocumentsAndShare = function(flowIdentifier, linshareDocument) {
         var ind = self.waitingUploadIdentifiers.indexOf(flowIdentifier);
         if(ind > -1) {
-          documents.push(linshareDocument.uuid);
+          documents.push(linshareDocument);
           self.waitingUploadIdentifiers.splice(ind, 1);
         }
         self.share();
@@ -310,11 +330,11 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       for(var upload in currentUploads) {
         if(currentUploads.hasOwnProperty(upload)) {
           var flowFile = $scope.$flow.getFromUniqueIdentifier(upload);
+          flowFile.isSelected = false;
           if(flowFile.isComplete()) {
-            flowFile.isSelected = false;
             $scope.newShare.addDocuments(flowFile.linshareDocument);
           } else {
-            $scope.refFlowShares[upload] = [0];
+            $scope.refFlowShares[upload] = [$scope.share_array.length];
             $scope.newShare.addwaitingUploadIdentifiers(upload);
           }
         }
@@ -333,17 +353,25 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       $scope.newShare.share().then(function() {
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
-        $scope.share_array.push(angular.copy($scope.newShare.getFormObj()));
+        $scope.share_array.push(angular.copy($scope.newShare.getObjectCopy()));
         $scope.newShare.resetForm();
         $scope.resetSelectedDocuments();
-        $scope.selectedUploads = {};
+        for(var upload in currentUploads) {
+          if(currentUploads.hasOwnProperty(upload)) {
+            delete $scope.selectedUploads[upload];
+          }
+        }
       }, function(data) {
         if(data.statusText === 'asyncMode') {
           $log.debug('share processing with files in upload progress', data);
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_ASYNC', 'info');
           $scope.mactrl.sidebarToggle.right = false;
           $scope.share_array.push(angular.copy($scope.newShare));
-          $scope.selectedUploads = {};
+          for(var upload in currentUploads) {
+            if(currentUploads.hasOwnProperty(upload)) {
+              delete $scope.selectedUploads[upload];
+            }
+          }
         } else {
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_FAILED', 'danger');
         }
@@ -368,6 +396,13 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     $scope.filesToShare = $stateParams.selected;
     })
 
+  .controller('shareDetailController', function($scope, shareIndex) {
+    $scope.shareToDisplay = $scope.share_array[shareIndex];
+    $scope.selectedDocuments = $scope.shareToDisplay.documents;
+    $scope.shareIndex = shareIndex;
+    $scope.sidebarRightDataType = 'active-share-details';
+    $scope.mactrl.sidebarToggle.right = true;
+  })
 
   .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
 

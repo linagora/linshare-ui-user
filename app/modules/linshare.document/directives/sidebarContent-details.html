@@ -177,7 +177,7 @@
         <md-tab id="tab2" ng-if="currentPage == 'my_files'" label="{{'RIGHT_PANEL.RECIPIENTS.TITLE' | translate}}"
                 class="col-xs-4 noPadding">
           <md-content class="md-padding">
-            <p class="empty-res" ng-if="currentSelectedDocument.current.shared == 0">
+            <p class="empty-res" ng-if="currentSelectedDocument.current.shared === 0">
               <i class="zmdi zmdi-info-outline"></i><span>{{'RIGHT_PANEL.RECIPIENTS.NO_SHARES' | translate}}</span>
             </p>
 
@@ -198,7 +198,7 @@
                 <div class="recipientsAutocomplete actions"
                      ng-repeat="shareElement in currentSelectedDocument.current.shares"
                      title="{{ shareElement.recipient.domain}}"
-                     ng-click="loadSidebarContent('share-details')">
+                     ng-click="recipientShareDetails.current = shareElement; loadSidebarContent('share-details')">
                   <span class="firstLetterFormat">{{shareElement.recipient.firstName.charAt(0)}}</span>
 
                   <p class="recipientsInfo"><span class="user-full-name">

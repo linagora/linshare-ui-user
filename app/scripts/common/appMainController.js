@@ -219,6 +219,7 @@ angular.module('linshareUiUserApp')
           var correspondingShare = {};
           angular.extend(correspondingShare, $scope.share_array[shareIndex]);
           correspondingShare.addLinshareDocumentsAndShare(fileIdentifier, flowFile.linshareDocument);
+          $scope.share_array[shareIndex] = correspondingShare.getObjectCopy();
         });
         delete $scope.refFlowShares[fileIdentifier];
       }
