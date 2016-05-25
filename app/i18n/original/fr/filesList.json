@@ -49,7 +49,8 @@
     },
     "SHARE": {
       "SELECTED_FILES": "fichier(s) sélectionné(s)",
-      "SHOW_SELECTED_FILES": "voir",
+      "UNHIDE_FILES": "afficher tout",
+      "SHOW_SELECTED_FILES": "isoler sélection",
       "SETTINGS": "Paramètres avancés",
       "MORE_OPTIONS": "plus d'options",
       "RECIPIENTS": "Ajouter des destinataires",
@@ -75,7 +76,7 @@
       "SHARE_PARAMS": "Paramètres de partage",
       "NOTE": "Note",
       "MAIL_CONTENT": "Corps du mail",
-      "CUSTUM_MAIL_TEMPLATE": "Personalisation du mail",
+      "CUSTOM_MAIL_TEMPLATE": "Personnalisation du mail",
       "SHARE_OPTIONS": "Annuler partage"
     }
   },

@@ -398,6 +398,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       }
     });
     $scope.currentPage='my_files';
+    $scope.toggleSelectedSort = true;
 
     $scope.data = {
       selectedIndex: 0,
@@ -443,7 +444,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
   })
 
   .controller('LinshareUploadViewController', function($scope, $rootScope, growlService) {
-
+    $scope.mactrl.sidebarToggle.right = false;
     $scope.lengthOfSelectedDocuments = function() {
       return Object.keys($scope.selectedUploads).length;
     };

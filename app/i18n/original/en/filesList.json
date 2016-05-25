@@ -50,7 +50,8 @@
     "SHARE": {
       "TITLE": "SHARING",
       "SELECTED_FILES": "selected file(s)",
-      "SHOW_SELECTED_FILES": "show",
+      "UNHIDE_FILES": "show all",
+      "SHOW_SELECTED_FILES": "isolate selection",
       "SETTINGS": "Settings",
       "MORE_OPTIONS": "more options",
       "RECIPIENTS": "Add recipients",
@@ -75,7 +76,7 @@
       "SHARE_PARAMS": "Share settings",
       "NOTE": "Message",
       "MAIL_CONTENT": "Email body content",
-      "CUSTUM_MAIL_TEMPLATE": "Custum email template",
+      "CUSTOM_MAIL_TEMPLATE": "Custom email template",
       "SHARE_OPTIONS": "Cancel share"
     }
   },

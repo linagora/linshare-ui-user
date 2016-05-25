@@ -9,12 +9,18 @@
 <div class="card col-xs-12" id="recipientsCtnSidebar">
   <div class="num-items-section-ctn">
     <span>{{lengthOfSelectedDocuments()}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
-    <a class="pull-right sidebar-link" href="" ui-sref="documents.files.selected"
-       ng-click="loadSidebarContent('active-share-details')">
-      {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
-    </a>
+      <a class="pull-right sidebar-link" href=""
+         ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()"
+         data-ng-show="!activeBtnShowSelection">
+        {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
+      </a>
+      <a class="pull-right sidebar-link" href=""
+         ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()"
+         data-ng-show="activeBtnShowSelection">
+        {{ "RIGHT_PANEL.SHARE.UNHIDE_FILES" | translate }}
+      </a>
   </div>
-  <div class="custumListContainer ">
+  <div class="custumListContainer clearfix">
 
     <div class="recipients-form-sections clearfix">
       <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
@@ -74,39 +80,37 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="recipients-form-sections clearfix">
-      <div class="custumHeaderList">
-        <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"></i>
-          {{ "RIGHT_PANEL.SHARE.SETTINGS" | translate }}
-        </h2>
-        <a class="more-options sidebar-link" href="" ng-click="loadSidebarContent('more-options')">
-          {{ "RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate }}
-        </a>
-      </div>
-      <div ng-show="newShare.expirationDate.enable" class="col-xs-12 fieldCtn clearfix" id="dateField">
-        <label for="comment" class="labelDateExpiration col-xs-6">
-          {{ "RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
-        </label>
+  <div class="recipients-form-sections clearfix">
+    <div class="custumHeaderList">
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-settings"></i>
+        {{ "RIGHT_PANEL.SHARE.SETTINGS" | translate }}
+      </h2>
+      <a class="more-options sidebar-link" href="" ng-click="loadSidebarContent('more-options')">
+        {{ "RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate }}
+      </a>
+    </div>
+    <div ng-show="newShare.expirationDate.enable" class="col-xs-12 fieldCtn clearfix" id="dateField">
+      <label for="comment" class="labelDateExpiration col-xs-6">
+        {{ "RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+      </label>
 
-        <div class="datepickerBorderFix date-picker dp-blue col-xs-6 datepicker-drop-right"
-             ng-class="{ 'is-opened': opened == true }">
-          <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }">
-            <div class="form-inline ">
-              <input ng-click="open($event, 'opened')" type="text"
-                     class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
-                     is-open="opened" min-date="minDate" datepicker-options="dateOptions"
-                     ng-required="true" close-text="Close"
-                     placeholder="{{newShare.expirationDate.value | date: 'fullDate'}}"
-                     ng-disabled="!newShare.expirationDate.userCanOverride"
-                     ng-model="newShare.expirationDate.value"/>
-            </div>
+      <div class="datepickerBorderFix date-picker dp-blue col-xs-6 datepicker-drop-right"
+           ng-class="{ 'is-opened': opened == true }">
+        <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }">
+          <div class="form-inline ">
+            <input ng-click="open($event, 'opened')" type="text"
+                   class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                   is-open="opened" min-date="minDate" datepicker-options="dateOptions"
+                   ng-required="true" close-text="Close"
+                   placeholder="{{newShare.expirationDate.value | date: 'fullDate'}}"
+                   ng-disabled="!newShare.expirationDate.userCanOverride"
+                   ng-model="newShare.expirationDate.value"/>
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
 </div>
 <div class="bottomSidebarBtn">

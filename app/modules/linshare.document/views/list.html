@@ -36,7 +36,7 @@
                   </a>
                   <ul class="dropdown-menu pull-right dm-icon stop-propagate">
                     <li role="menuitem">
-                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive('modificationDate', $event)">
+                      <a href="" class="ng-binding selectedSorting" ng-click="sortDropdownSetActive('modificationDate', $event)">
                       <span class="caretArea">
                       <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                       <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -211,7 +211,10 @@
                         {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                         </span>
                         <p class="mobile-list-item-info visible-xs">
-                          {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}}
+                          {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}},
+                             <span ng-show="documentFile.shared > 0">
+                               {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
+                             </span>
                         </p>
                       </span>
                     </span>
