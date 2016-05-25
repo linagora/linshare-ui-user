@@ -189,9 +189,6 @@
           <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
 
             <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
-                file-selection-v="selectedDocuments" uuid="documentFile"
-                current-selected-document="currentSelectedDocument"
-                sidebar-right="mactrl.sidebarToggle.right"
                 data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
                 context-menu="moreOptionsContexualMenu">
 

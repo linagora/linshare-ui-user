@@ -26,9 +26,9 @@ angular.module('linshare.receivedShare', ['restangular'])
         $log.debug('LinshareReceivedShareService : getReceivedShare');
         return Restangular.one('received_shares', uuid).get();
       },
-      downloadThumbnail: function(uuid) {
+      getThumbnail: function(uuid) {
         $log.debug('LinshareReceivedShareService : downloadThumbnail');
-        return Restangular.one('received_shares', uuid).one('thumbnail').get();
+        return Restangular.one('received_shares', uuid).one('thumbnail').get({base64: true});
       },
       delete: function(uuid) {
         $log.debug('LinshareReceivedShareService : delete');

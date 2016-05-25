@@ -193,9 +193,7 @@
           <div class="table-responsive">
             <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true" >
               <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
-                  file-selection-v="selectedDocuments" uuid="documentFile"
-                  current-selected-document="currentSelectedDocument"
-                  sidebar-right="mactrl.sidebarToggle.right"
+                  ng-click="backToSidebarContentDetails()"
                   data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
                   context-menu="moreOptionsContexualMenu">
                 <td data-header="'checkboxheader.html'" class="center thumb-type-item">
@@ -319,7 +317,6 @@
       </md-toolbar>
     </md-fab-toolbar>
   </div>
-
 </div>
 <section class="row multi-select-mobile visible-xs"
          data-ng-class="{'showMobileMultiMenu': selectedDocuments.length > 0}"

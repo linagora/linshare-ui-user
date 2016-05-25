@@ -24,7 +24,7 @@ angular.module('linshareUiUserApp')
           }, {
             name: 'MENU_TITLE.RECEIVED_SHARES',
             link: 'documents.received',
-            disabled: lsAppConfig.production
+            disabled: false
           }, {
             name: 'MENU_TITLE.SHARES',
             link: 'documents.shared',

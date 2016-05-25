@@ -3,21 +3,17 @@
 angular.module('linshare.document')
 
   // DIRECTIVE TO TOGGLE DOCUMENT SELECTION
-  .directive('lsOnDocumentSelect', function(LinshareDocumentService) {
+  .directive('lsOnDocumentSelect', function() {
     var toggleDocumentSelection = function(scope) {
       scope.currentSelectedDocument.current = scope.documentFile;
       scope.documentFile.isSelected = !scope.documentFile.isSelected;
       if(scope.documentFile.isSelected) {
-        if(scope.sidebarRight) {
+        if(scope.mactrl.sidebarToggle.right) {
           if(scope.documentFile.shared > 0) {
-            LinshareDocumentService.getFileInfo(scope.documentFile.uuid).then(function(data) {
-              scope.currentSelectedDocument.current.shares = data.shares;
-            });
+            scope.getDocumentInfo(scope.documentFile.uuid);
           }
           if(scope.documentFile.hasThumbnail === true) {
-            LinshareDocumentService.getThumbnail(scope.documentFile.uuid).then(function(thumbnail) {
-              scope.currentSelectedDocument.current.thumbnail = thumbnail;
-            });
+            scope.getDocumentThumbnail(scope.documentFile.uuid);
           }
         }
         scope.$apply(function() {
@@ -35,12 +31,7 @@ angular.module('linshare.document')
 
     return {
       restrict: 'A',
-      scope: {
-        selectedDocuments: '=fileSelectionV',
-        documentFile: '=uuid',
-        currentSelectedDocument: '=',
-        sidebarRight: '='
-      },
+      scope: false,
       link: function(scope, element) {
         element.bind('contextmenu', function() {
           var isHighlighted = element.hasClass('highlightListElem');
@@ -49,7 +40,7 @@ angular.module('linshare.document')
           }
         });
         element.bind('click', function() {
-          if(scope.sidebarRight) {
+          if(scope.mactrl.sidebarToggle.right) {
             element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
             element.find('li')[0].className = 'activeActionButton';
           }

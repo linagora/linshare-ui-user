@@ -238,6 +238,24 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       });
     };
 
+    $scope.getDocumentThumbnail = function(uuid) {
+      LinshareDocumentService.getThumbnail(uuid).then(function(thumbnail) {
+        $scope.currentSelectedDocument.current.thumbnail = thumbnail;
+      });
+    };
+
+    $scope.getDocumentInfo = function(uuid) {
+      LinshareDocumentService.getFileInfo(uuid).then(function(data) {
+        $scope.currentSelectedDocument.current.shares = data.shares;
+      });
+    };
+
+    $scope.backToSidebarContentDetails = function() {
+      if($scope.sidebarRightDataType === 'share-details') {
+        $scope.loadSidebarContent('details');
+      }
+    };
+
     $scope.currentSelectedDocument = {current: ''};
     $scope.recipientShareDetails = {current: ''};
 
