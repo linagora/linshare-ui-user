@@ -62,12 +62,12 @@ angular.module('linshare.components')
       var icone = 'fa-file-text-o';
       var type = [
         {regex: /pdf/, icone: 'fa-file-pdf-o iconcolor-pdf', info: 'PDF'},
-        {regex: /image/, icone: 'fa-file-image-o iconcolor-text', info: 'IMAGE'},
+        {regex: /image|png|jpeg|jpg/, icone: 'fa-file-image-o iconcolor-text', info: 'IMAGE'},
         {regex: /audio/, icone: 'fa-file-audio-o iconcolor-text', info: 'AUDIO'},
         {regex: /video/, icone: 'fa-file-video-o iconcolor-text', info: 'VIDEO'},
         {regex: /powerpoint/, icone: 'fa-file-powerpoint-o iconcolor-powerpoint', info: 'POWERPOINT'},
         {regex: /word/, icone: 'fa-file-word-o iconcolor-word', info: 'WORD'},
-        {regex: /zip|tar|compressed/, icone: 'fa-file-archive-o iconcolor-text', info: 'ARCHIVE'},
+        {regex: /zip|tar|compressed|tar.bz2|tgz/, icone: 'fa-file-archive-o iconcolor-text', info: 'ARCHIVE'},
         {regex: /excel/, icone: 'fa-file-excel-o iconcolor-excel', info: 'EXCEL'},
         {regex: /text\/plain/, icone: 'fa-file-text-o iconcolor-text', info: 'TEXT'},
         {regex: /text/, icone: 'fa-file-code-o iconcolor-text', info: 'CODE'}

@@ -45,7 +45,8 @@
     "UPLOAD_PROPOSITIONS" : "Upload propositions",
     "AUDIT" : "Audit",
     "AUDIT_GLOBAL" : "Global audit",
-    "AUDIT_UPLOAD_REQUEST" : "Upload requests audit"
+    "AUDIT_UPLOAD_REQUEST" : "Upload requests audit",
+    "UPLOAD_QUEUE" : "Uploads"
   },
   "LINK_DISABLED": "Link disabled",
   "WELCOME_USER": "Welcome ",
@@ -138,7 +139,15 @@
     "DELETE": "Delete",
     "RESET": "Reset",
     "FILES": "Files",
-    "SHOW_SELECTION": "Show selection"
+    "SHOW_SELECTION": "Show selection",
+    "SHOW_IN_FILES": "Show in files",
+    "PAUSE_ALL": "Pause all",
+    "PAUSE": "Pause",
+    "CLEAR_ALL": "Clear all",
+    "CLEAR": "Clear",
+    "PLAY": "Play",
+    "REPLAY": "Replay",
+    "STOP": "Stop"
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {

@@ -45,7 +45,8 @@
     "UPLOAD_PROPOSITIONS" : "Demandes d'invitations de dépôts",
     "AUDIT" : "Audit",
     "AUDIT_GLOBAL" : "Audit global",
-    "AUDIT_UPLOAD_REQUEST" : "Audit invitations de dépôts"
+    "AUDIT_UPLOAD_REQUEST" : "Audit invitations de dépôts",
+    "UPLOAD_QUEUE" : "Mes dépôts"
   },
   "LINK_DISABLED": "Lien inactif",
   "WELCOME_USER": "Bienvenue ",
@@ -146,7 +147,15 @@
     "DELETE": "Supprimer",
     "RESET": "Réinitialiser",
     "FILES": "Fichier(s)",
-    "SHOW_SELECTION": "Voir sélection"
+    "SHOW_SELECTION": "Voir sélection",
+    "SHOW_IN_FILES": "Voir dans mes fichiers",
+    "PAUSE_ALL": "Tout mettre en pause",
+    "CLEAR_ALL": "Tout nettoyer",
+    "PAUSE": "Pause",
+    "CLEAR": "Nettoyer",
+    "PLAY": "Lancer",
+    "REPLAY": "Relancer",
+    "STOP": "Arrêter"
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
