@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('linshare.components')
-  .directive('autocompleteUser', function(LinshareShareService, $log) {
+  .directive('autocompleteUser', function(LinshareShareService, $log, $q) {
     return {
       restrict: 'A',
       scope: {
@@ -20,8 +20,10 @@ angular.module('linshare.components')
       'x-typeahead-on-select="dealWithSelectedUser(selectedUser, selectedUsersList)" ' +
       'x-typeahead-wait-ms="30" ' +
       'x-typeahead-loading="searchingContact" ' +
+      'x-typeahead-editable="false"' +
+      'x-typeahead-no-results="noResult"' +
       'x-typeahead-input-formatter="angular.noop" ' +
-      'x-typeahead="u as userRepresentation(u) for u in searchUsersAccount($viewValue) | limitTo:3">' +
+      'x-uib-typeahead="u as userRepresentation(u) for u in searchUsersAccount($viewValue) | limitTo:3">' +
       '</div>' +
       '</div>',
       controller: function($scope) {
@@ -33,7 +35,7 @@ angular.module('linshare.components')
             return u.listName.concat(' ', u.ownerLastName, ' ', u.ownerFirstName);
           }
           var firstLetter = u.firstName.charAt(0);
-          var userSuggestionTemplate='' +
+          var userSuggestionTemplate = '' +
             '<div  class="recipientsAutocomplete" title=" '+u.domain+' ">' +
             '<span class="firstLetterFormat">'+firstLetter+'</span>' +'<p class="recipientsInfo">' +
             '<span class="user-full-name">'+u.firstName+' '+u.lastName+'</span> <span class="email">'+u.mail+'</span>' +
@@ -43,7 +45,16 @@ angular.module('linshare.components')
         };
 
         $scope.searchUsersAccount = function(pattern) {
-          return LinshareShareService.autocomplete(pattern);
+          if(pattern.length >= 3) {
+            var deferred = $q.defer();
+            LinshareShareService.autocomplete(pattern).then(function(data) {
+              if(data.length === 0) {
+                $scope.userEmail = pattern;
+              }
+              deferred.resolve(data);
+            });
+            return deferred.promise;
+          }
         };
 
         var addRecipients = function(selectedUser, selectedUsersList) {
@@ -60,6 +71,24 @@ angular.module('linshare.components')
         };
 
         $scope.dealWithSelectedUser = $scope.onSelectFunction || addRecipients;
+      },
+      link: function(scope, elm) {
+        elm.bind('keypress', function(event) {
+          if(event.keyCode === 13) {
+            if(scope.noResult === true) {
+              if(typeof scope.userEmail === 'string') {
+                scope.selectedUser = {
+                  mail: scope.userEmail,
+                  firstName: null,
+                  lastName: null,
+                  domain: null,
+                  type: 'UserAutoCompleteResultDto'
+                };
+              }
+              scope.dealWithSelectedUser(scope.selectedUser, scope.selectedUsersList);
+            }
+          }
+        });
       },
       replace: true
     };

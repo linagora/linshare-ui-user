@@ -59,12 +59,20 @@
     <div class="custumListBody col-xs-12 ">
       <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients()">
         <md-tooltip md-direction="bottom">
-          {{recipient.domain}}
+          {{recipient.domain || recipient.mail}}
         </md-tooltip>
 
-        <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0)}}</span></p>
+        <p class="pull-left circleCtn">
+          <span ng-show="recipient.domain" class="circle userBg">{{recipient.firstName.charAt(0)}}</span>
+          <span ng-show="!recipient.domain" class="circle userBg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
+        </p>
         <div class="pull-left nameRecipientsCtn">
-          <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
+          <p ng-show="recipient.domain" class="pull-left inner-text-li">
+            {{recipient.firstName + ' ' + recipient.lastName}}
+          </p>
+          <p ng-show="!recipient.domain" class="pull-left inner-text-li">
+            {{recipient.mail}}
+          </p>
           <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
             <i class="zmdi zmdi-close "></i>
           </p>

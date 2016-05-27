@@ -199,12 +199,21 @@
                      ng-repeat="shareElement in currentSelectedDocument.current.shares"
                      title="{{ shareElement.recipient.domain}}"
                      ng-click="recipientShareDetails.current = shareElement; loadSidebarContent('share-details')">
-                  <span class="firstLetterFormat">{{shareElement.recipient.firstName.charAt(0)}}</span>
+                  <span ng-show="!shareElement.recipient.external" class="firstLetterFormat">
+                    {{shareElement.recipient.firstName.charAt(0)}}
+                  </span>
+                  <span ng-show="shareElement.recipient.external" class="firstLetterFormat">
+                    {{shareElement.recipient.mail.charAt(0)}}
+                  </span>
 
-                  <p class="recipientsInfo"><span class="user-full-name">
-                  <strong>{{shareElement.recipient.firstName}} <span class="lastName">
-                    {{shareElement.recipient.lastName.toUpperCase() }}</span>
-                  </strong>
+                  <p class="recipientsInfo">
+                    <span ng-show="!shareElement.recipient.external" class="user-full-name">
+                      <strong>{{shareElement.recipient.firstName}}
+                        <span class="lastName">{{shareElement.recipient.lastName.toUpperCase() }}</span>
+                      </strong>
+                    </span>
+                    <span ng-show="shareElement.recipient.external" class="user-full-name">
+                      <strong>{{shareElement.recipient.mail}}</strong>
                     </span>
                     <span class="email">{{'RIGHT_PANEL.RECIPIENTS.NOT_DOWNLOADED' | translate}}</span>
                   </p>
