@@ -34,6 +34,9 @@ angular.module('linshare.components')
           if(u.type === 'ListAutoCompleteResultDto') {
             return u.listName.concat(' ', u.ownerLastName, ' ', u.ownerFirstName);
           }
+          if(u.type === 'AutoCompleteResultDto') {
+            return u.identifier;
+          }
           var firstLetter = u.firstName.charAt(0);
           var userSuggestionTemplate = '' +
             '<div  class="recipientsAutocomplete" title=" '+u.domain+' ">' +

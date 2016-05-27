@@ -71,7 +71,7 @@
                         <i class="zmdi zmdi-download"></i>
                       </a>
                     </li>
-                    <li class="col-xs-3" >
+                    <li class="col-xs-3">
                       <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}" dropdown-toggle
                          event-propagation-stop ng-click="copyIntoFiles(selectedDocuments)">
                         <i class="zmdi zmdi-copy"></i>
@@ -83,8 +83,11 @@
                   <div class="listview">
 
                     <div class="media">
-                      <div class="pull-left p-relative col-md-7">
+                      <div ng-if="currentPage == 'my_files'" class="pull-left p-relative col-md-7">
                         {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}
+                      </div>
+                      <div ng-if="currentPage == 'received_files'" class="pull-left p-relative col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.SHARING_DATE' | translate}}
                       </div>
                       <div class="media-body">
                         <div class="lv-title">{{currentSelectedDocument.current.creationDate | date:'medium'}}</div>
@@ -140,7 +143,7 @@
                       </div>
                     </div>
 
-                    <div class="media"  ng-if="currentPage == 'my_files'">
+                    <div class="media" ng-if="currentPage == 'my_files'">
                       <div class="pull-left col-md-7">
                         {{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}
                       </div>

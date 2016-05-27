@@ -174,6 +174,17 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           if (!exists) {
             recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
           }
+        } else if(contact.type === 'AutoCompleteResultDto') {
+          angular.forEach(recipients, function (elem) {
+            if (elem.mail === contact.identifier) {
+              exists = true;
+              $log.info('The user ' + contact.identifier + ' is already in the recipients list');
+            }
+          });
+          if (!exists) {
+            contact.mail = contact.identifier;
+            recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
+          }
         }
       };
 
