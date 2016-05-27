@@ -486,7 +486,7 @@ angular.module('linshare.receivedShare')
           }, 250);
         }
       });
-      $scope.currentPage='received_files';
+      $scope.currentPage = 'received_files';
     })
 
   // ===========================================================================

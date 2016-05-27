@@ -154,6 +154,17 @@
                       </div>
                     </div>
 
+                    <div class="media"  ng-if="currentPage == 'received_files'">
+                      <div class="pull-left col-md-7">
+                        {{'RIGHT_PANEL.DETAILS.SHARED_BY' | translate}}
+                      </div>
+                      <div class="media-body">
+                        <div class="lv-title">
+                          {{currentSelectedDocument.current.sender.mail}}
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="media">
                       <div class="pull-left col-md-7">
                         {{'RIGHT_PANEL.DETAILS.DESCRIPTION' | translate}}
