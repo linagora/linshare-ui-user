@@ -5,6 +5,9 @@
 <div class="card col-xs-12" id="recipientsCtnSidebar">
   <div class="num-items-section-ctn">
     <span>{{selectedDocuments.length}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
+    <a class="pull-right sidebar-link" href="#" id="show-selected-files" ng-click="mactrl.sidebarToggle.right = false;">
+      {{ "RIGHT_PANEL.SHARE_OPTIONS.SHOW_SELECTED_FILES" | translate }}
+    </a>
   </div>
   <div class="custumListContainer clearfix">
     <div class="recipients-form-sections clearfix">

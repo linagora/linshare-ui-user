@@ -445,6 +445,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       return $scope.selectedDocuments.length + Object.keys($scope.selectedUploads).length;
     };
     $scope.mactrl.sidebarToggle.right = true;
+
     $scope.$parent.sidebarRightDataType = 'share';
     $scope.currentPage = '';
     var param = $stateParams.selected;
@@ -459,6 +460,19 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         $scope.selectedDocuments.splice(index, 1);
       }
     };
+    /* For the mobile user flow : the sidebar  is hidden at first ( when the page loads up )*/
+    function resetMobileState(){
+      $scope.mactrl.sidebarToggle.right = false;
+      angular.element('#collapsible-content').removeClass('setWidth');
+    }
+
+    var isMobile = angular.element('html').hasClass('ismobile');
+    if (isMobile) {
+      resetMobileState();
+    }
+    angular.element(window).resize(function() {
+      resetMobileState();
+    });
 
   })
 

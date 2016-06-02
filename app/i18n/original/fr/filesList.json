@@ -68,7 +68,8 @@
       "NOTIFICATION_DATE": "Date de notification",
       "ATTACH_EMAIL": "Personnaliser le courriel",
       "ATTACHED_EMAIL_SUBJECT": "Sujet",
-      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message"
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message",
+      "SHOW_SELECTED_FILES": "Voir les fichiers"
 
     },
     "CURRENT_SHARE_DETAIL": {
@@ -83,7 +84,8 @@
   },
   "SELECTED_FILES": {
     "BREADCRUMB_TITLE": "Fichiers sélectionnés",
-    "BACK_TO_ALL_FILES": "Retour à mes fichiers"
+    "BACK_TO_ALL_FILES": "Retour à mes fichiers",
+    "SHOW_DETAILS": "Voir détails"
   },
   "UPLOADED_FILES": {
     "BREADCRUMB_TITLE": "Mes dépôts",
