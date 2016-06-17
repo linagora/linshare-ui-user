@@ -18,55 +18,44 @@ angular.module('linshare.userProfile', [])
  */
   .service('LinshareUserService', function () {
 
-    this.profile = {
-      firstName: null,
-      lastName: null,
-      locale: null,
-      role: null,
-      mail: null,
-      accountType: null
-    };
+    function User() {
+      this.firstName = null;
+      this.lastName = null;
+      this.mail = null;
+      this.locale = null;
+      this.role = null;
+      this.accountType = null;
+      this.preferences = {};
+    }
 
-    var self = this;
-    this.loggedIn = false;
-    this.authorized = false;
+    angular.extend(User.prototype, {
 
-    this.fillProfile = function (userDto) {
-      self.profile.firstName = userDto.firstName;
-      self.profile.lastName = userDto.lastName;
-      self.profile.locale = userDto.locale;
-      self.profile.role = userDto.role;
-      self.profile.mail = userDto.mail;
-      self.profile.accountType = userDto.accountType;
-      self.loggedIn = true;
-    };
+      getUser: function() {
+        return this;
+      },
 
-    this.init = function() {
-      self.profile = {
-        firstName: null,
-        lastName: null,
-        locale: null,
-        role: null,
-        mail: null,
-        accountType: null
-      };
-    };
+      setUser: function(user) {
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.mail = user.mail;
+        this.locale = user.locale;
+        this.role = user.role;
+        this.accountType = user.accountType;
+      },
 
-    // will see the implementation of these methods
-    this.getProfile = function () {
-      return self.profile;
-    };
-    this.isLoggedIn = function () {
-      return self.loggedIn;
-    };
-    this.hasRightRole = function (role) {
-      return self.profile.role === role;
-    };
-    this.hasRightAccountType = function(accountType) {
-      return self.profile.accountType === accountType;
-    };
+      hasRightAccountType: function(accountType) {
+        return this.accountType === accountType;
+      },
 
+      hasRightRole: function(role) {
+        return this.role === role;
+      }
+    });
+
+    return User;
   })
+
+
   .factory('LinshareGuestService', function(Restangular) {
     var baseGuestRest = Restangular.all('guests');
     return {

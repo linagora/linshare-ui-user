@@ -150,7 +150,7 @@ angular.module('linshareUiUserApp')
 
   .controller('UiUserMainController',
   function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
-           AuthenticationService, MenuService, $timeout) {
+           AuthenticationService, MenuService, $timeout, LinshareUserService) {
     $rootScope.sidebarRightWidth = 350;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.mobileWidthBreakpoint=768;
@@ -169,25 +169,27 @@ angular.module('linshareUiUserApp')
       $scope.currentState = MenuService.getProperties(toState.name);
       $scope.linkActive = MenuService.getSectionName(toState.name);
     });
+    $scope.loggedUser = new LinshareUserService();
+
     AuthenticationService.getCurrentUser().then(function (user) {
-      $scope.loggedUser = user;
+      $scope.loggedUser.setUser(user);
     });
 
     $scope.$on('event:auth-loginRequired', function() {
       $log.debug('event:auth-loginRequired : toState', $rootScope.toState);
       $scope.urlTogoAfterLogin = $rootScope.toState;
+      $scope.loggedUser.getUser();
       if($scope.urlTogoAfterLogin === 'login') {
         $scope.urlTogoAfterLogin = 'home';
         $state.go('login');
       } else {
         $state.go('login', {next: $scope.urlTogoAfterLogin});
       }
-      $scope.loggedUser = '';
     });
 
     $scope.$on('event:auth-loginConfirmed', function (event, data) {
       $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
-      $scope.loggedUser = data;
+      $scope.loggedUser.setUser(data);
       $state.go($scope.urlTogoAfterLogin);
     });
 
@@ -299,6 +301,7 @@ angular.module('linshareUiUserApp')
         checkAndSetNewWidthSidebarRight();
       }, 450);
     });
+
   })
   .controller('InitNewFlowUploaderController', function($scope, ShareObjectService) {
     /**

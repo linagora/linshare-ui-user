@@ -1,4 +1,4 @@
-<div id="login-page">
+<div data-ng-controller="loginController as loginctrl" id="login-page">
   <div id="bg">
     <img src="images/login-bg.jpg" alt="">
   </div>
@@ -8,25 +8,27 @@
       <div class="dropdown dropdown-standard" uib-dropdown>
         <button id="single-button" type="button" class="dropdown-toggle btn btn-custum-transparent"
                 uib-dropdown-toggle ng-disabled="disabled">
-          <img src="images/flags/fr.png" alt="français"/><span class="disp-language">FR</span><i class="zmdi zmdi-chevron-down"></i>
+          <span class="flag-icon" ng-class="'flag-icon-' + loginctrl.loginLocale.country"></span>
+          <span class="disp-language">{{loginctrl.loginLocale.language}}</span>
+          <i class="zmdi zmdi-chevron-down"></i>
         </button>
         <ul class="dropdown-menu pull-right flag-list-ctn" role="menu" aria-labelledby="single-button">
           <li role="menuitem" >
-            <a href="">
-              <img src="images/flags/fr.png" alt="France"/>
+            <a href="" ng-click="loginctrl.changeLoginLanguage('fr-FR')">
+              <span class="flag-icon flag-icon-fr"></span>
               <span class="lang-short">FR</span><span class="lang-label">France</span>
             </a>
           </li>
           <li role="menuitem">
-            <a href="">
-              <img src="images/flags/us.png " alt="United States"/>
+            <a href="" ng-click="loginctrl.changeLoginLanguage('en-US')">
+              <span class="flag-icon flag-icon-us"></span>
               <span class="lang-short">US</span><span class="lang-label">United States</span>
             </a>
           </li>
           <li role="menuitem">
-            <a href="">
-              <img src="images/flags/es.png" alt="Español"/>
-              <span class="lang-short">ES</span><span class="lang-label">Español</span>
+            <a href="" ng-click="loginctrl.changeLoginLanguage('vi-VN')">
+              <span class="flag-icon flag-icon-vn"></span>
+              <span class="lang-short">VN</span><span class="lang-label">tiếng Việt</span>
             </a>
           </li>
         </ul>
@@ -43,7 +45,7 @@
       <p>Libre &amp; Free</p>
     </div>
   </div>
-  <div class="login-content" id="l-login"  data-ng-controller="AuthenticationController">
+  <div class="login-content" id="l-login">
     <div class="parent-login-form-alignment">
       <div class="logo-title">
         <img src="images/ls-logo-big.png" alt="logo">
@@ -54,7 +56,7 @@
           <div class="header-login-form">
             <h1>{{'LOGIN.LOGIN_HEADER' | translate }}</h1>
           </div>
-          <form class="form-horizontal" ng-submit="submitLoginForm()" role="form">
+          <form class="form-horizontal" ng-submit="loginctrl.submitForm()" role="form">
             <div class="form-group">
               <label class="sr-only" for="inputEmail"></label>
               <div class="input-group m-b-30">
@@ -64,7 +66,7 @@
                          name="Email"
                          id="inputEmail"
                          placeholder="{{'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
-                         ng-model="input.email" required />
+                         ng-model="loginctrl.email" required />
                 </div>
               </div>
             </div>
@@ -77,7 +79,7 @@
                          name="Password"
                          id="inputPassword"
                          placeholder="{{'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
-                         ng-model="input.password" required />
+                         ng-model="loginctrl.password" required />
                 </div>
               </div>
             </div>

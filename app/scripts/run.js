@@ -18,9 +18,10 @@ angular.module('linshareUiUserApp')
       urlTemplate: pathToLocal + '/{lang}/{part}.json',
       loadFailureHandler: 'MyErrorHandler'
     });
+    $translateProvider.fallbackLanguage('en-US');
     $translatePartialLoaderProvider.addPart('general');
     $translatePartialLoaderProvider.addPart('notification');
-    $translateProvider.preferredLanguage('fr');
+    $translateProvider.preferredLanguage('en-US');
     RestangularProvider.setDefaultHttpFields({cache: false});
     RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json;'});
     RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers) {
@@ -50,9 +51,15 @@ angular.module('linshareUiUserApp')
       .setNotify(true, true);
   })
 
-  .run(function($rootScope, $location, $translate, Restangular, growlService, $log, $window) {
-    var browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
-    $translate.use(browserLanguage.split('-')[0]);
+  .run(function($rootScope, $location, Restangular, growlService, $log, $window, localStorageService, languageService) {
+    $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
+    var storedLocale = localStorageService.get('locale');
+    if(storedLocale) {
+      languageService.changeLocale(storedLocale);
+    } else {
+      languageService.changeLocale($rootScope.browserLanguage);
+    }
+
     /**
      * Restangular Interceptor
      * Show message box when an error occured
@@ -84,7 +91,7 @@ angular.module('linshareUiUserApp')
     });
 
     $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
-      $translate.refresh();
+      languageService.refreshLocale();
     });
   })
 
