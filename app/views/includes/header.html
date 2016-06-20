@@ -22,8 +22,8 @@
     </li>
     <li class="pull-right">
         <ul class="top-menu">
-            <li class="dropdown" id="transfert-dropdown">
-                <a ng-show="$flow.progress() > 0" data-toggle="dropdown" class="col-md-2 ctn-badge-count"
+            <li class="dropdown" id="transfert-dropdown" uib-dropdown auto-close="outsideClick">
+                <a ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
                    style="height: 15px;">
                   <i class="tmn-counts">{{$flow.files.length}}</i>
                   <div class="progress m-t-15">
@@ -33,12 +33,12 @@
                     </div>
                   </div>
                 </a>
-                <a data-toggle="dropdown" href=""><i class="tm-icon icon-transfert"></i>
+                <a uib-dropdown-toggle href=""><i class="tm-icon icon-transfert"></i>
                   <i class="tm-icon icon-transfert" id="newUploadIcon"></i>
                 </a>
-                <div class="dropdown-menu pull-right dropdown-menu-lg">
+                <div class="dropdown-menu pull-right dropdown-menu-lg" uib-dropdown-menu>
                   <div class="listview">
-                    <div class="lv-body stop-propagate">
+                    <div class="lv-body">
                       <div ng-cloak="" class="tabsdemoDynamicHeight">
                         <md-content>
                           <md-tabs md-dynamic-height="" md-border-bottom="">
@@ -148,54 +148,54 @@
                     </div>
                   </div>
                 </div>
-              </li>
-          <li class="dropdown">
-            <a  ng-show="devMode" data-toggle="dropdown" href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
-              <i class="tmn-counts">5</i>
-            </a>
-            <a data-toggle="dropdown" href=""><i class="tm-icon zmdi zmdi-notifications-none"></i></a>
-            <div class="dropdown-menu pull-right dropdown-menu-lg">
-              <div class="listview">
-                <div class="lv-header stop-propagate">Notifications
-                  <ul class="actions">
-                    <li class="dropdown">
-                      <a href="" data-clear="notification">
-                        <i class="zmdi zmdi-check-all"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="lv-body stop-propagate">
-                  <div class="lv-item" >
-                    <div class="work-in-progress-ctn-elm">
-                      <div class="work-in-progress-content">
-                        <img src="images/wip-banner-small.png"/>
-                        <p>{{'WORK_IN_PROGRESS.WORK_IN_PROGRESS_MSG' | translate}}</p>
+            </li>
+            <li class="dropdown" uib-dropdown auto-close="outsideClick">
+              <a  ng-show="devMode" uib-dropdown-toggle href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
+                <i class="tmn-counts">5</i>
+              </a>
+              <a uib-dropdown-toggle href=""><i class="tm-icon zmdi zmdi-notifications-none"></i></a>
+              <div class="dropdown-menu pull-right dropdown-menu-lg" uib-dropdown-menu>
+                <div class="listview">
+                  <div class="lv-header stop-propagate">Notifications
+                    <ul class="actions">
+                      <li class="dropdown">
+                        <a href="" data-clear="notification">
+                          <i class="zmdi zmdi-check-all"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="lv-body stop-propagate">
+                    <div class="lv-item" >
+                      <div class="work-in-progress-ctn-elm">
+                        <div class="work-in-progress-content">
+                          <img src="images/wip-banner-small.png"/>
+                          <p>{{'WORK_IN_PROGRESS.WORK_IN_PROGRESS_MSG' | translate}}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <a ng-show="devMode" class="lv-footer"
+                     href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
                 </div>
-                <a ng-show="devMode" class="lv-footer"
-                   href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
               </div>
-            </div>
-          </li>
-          <li class="dropdown hidden-xs">
-            <a data-toggle="dropdown" href=""><i class="tm-icon zmdi zmdi-account zmdi-hc-2x"></i></a>
-            <ul class="dropdown-menu dm-icon pull-right">
-              <li>
-                <a href="">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</a>
-              </li>
-              <li ng-show="linshareModeProduction == false">
-                <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
-              </li>
-              <li>
-                <a data-ng-controller="AuthenticationController" data-ng-click="logout(); $flow.cancel()" ui-sref="login">
-                  <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
-                </a>
-              </li>
-            </ul>
-          </li>
+            </li>
+            <li class="dropdown hidden-xs" uib-dropdown>
+              <a uib-dropdown-toggle href=""><i class="tm-icon zmdi zmdi-account zmdi-hc-2x"></i></a>
+              <ul class="dropdown-menu dm-icon pull-right">
+                <li>
+                  <a href="">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</a>
+                </li>
+                <li ng-show="linshareModeProduction == false">
+                  <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
+                </li>
+                <li>
+                  <a data-ng-controller="AuthenticationController" data-ng-click="logout(); $flow.cancel()" ui-sref="login">
+                    <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
+                  </a>
+                </li>
+              </ul>
+            </li>
         </ul>
     </li>
 </ul>
