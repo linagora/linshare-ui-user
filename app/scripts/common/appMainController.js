@@ -260,6 +260,15 @@ angular.module('linshareUiUserApp')
     if($scope.mactrl.sidebarToggle.left){
       checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
     }
+    function checkAndSetNewWidthSidebarRight(){
+      var widthWindow = angular.element(window).width();
+      if(widthWindow < $rootScope.mobileWidthBreakpoint) {
+        angular.element('aside#chat.sidebar-right').appendTo('body');
+        angular.element('aside#chat.sidebar-right').addClass('setSidebarRightMobileState');
+      }else{
+        angular.element('aside#chat.sidebar-right').removeClass('setSidebarRightMobileState');
+      }
+    }
     var widthWindow = angular.element(window).width();
     $scope.$watch('mactrl.sidebarToggle.right', function(n) {
       checkAndSetNewWidthSidebarRight();
@@ -276,15 +285,6 @@ angular.module('linshareUiUserApp')
         angular.element('#collapsible-content').css('width', '100%');
       }
     });
-    function checkAndSetNewWidthSidebarRight(){
-      var widthWindow = angular.element(window).width();
-      if(widthWindow < $rootScope.mobileWidthBreakpoint) {
-        angular.element('aside#chat.sidebar-right').appendTo('body');
-        angular.element('aside#chat.sidebar-right').addClass('setSidebarRightMobileState');
-      }else{
-        angular.element('aside#chat.sidebar-right').removeClass('setSidebarRightMobileState');
-      }
-    }
     $scope.$on('$stateChangeSuccess', function() {
       checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
       checkAndSetNewWidthSidebarRight();

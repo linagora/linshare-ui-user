@@ -34,7 +34,7 @@
     "MY_FILES" : "Mes fichiers",
     "RECEIVED_SHARES" : "Mes partages reçus",
     "SHARES" : "Mes fichiers partagés",
-    "GROUPS" : "Mes groupes",
+    "SHARED_SPACE" : "Espace commun",
     "ADMIN" : "Administration",
     "LISTS" : "Mes listes",
     "GUESTS" : "Mes invités",
@@ -87,11 +87,20 @@
     "DOWNLOAD": "Télécharger",
     "SHARE": "Partager",
     "REFRESH": "Actualiser",
-    "COPY_IN_GROUP": "Copier dans un groupe",
+    "COPY_IN_WORKGROUP": "Copier dans un groupe de travail",
     "COPY_IN_MY_FILES": "Copier dans mes fichiers",
     "DELETE": "Supprimer",
+    "TRANSFERT" : "Transférer",
     "INFORMATION" : "Information",
-    "TRANSFERT" : "Transférer"
+    "FAVORITES" : "Favoris",
+    "SILENCE" : "Silence",
+    "ADD_MEMBER" : "Ajouter un membre",
+    "RENAME" : "Renommer",
+    "COPY" : "Copier",
+    "COPY_IN_MY_FILES" : "Copier vers mes fichiers",
+    "GO_TO_TRASH" : "Voir la corbeille",
+    "NEW_WORKGROUP" : "Nouveau groupe de travail",
+    "MOVE" : "Déplacer"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
@@ -140,6 +149,7 @@
   },
   "SELECTION_TOOLBAR": {
     "SELECTED_FILES": "fichier(s) sélectionné(s)",
+    "SELECTED_ELEMENTS": "élément(s) sélectionné(s)",
     "SELECT_ALL": "Tout sélectionner",
     "DESELECT_ALL": "Désélectionner",
     "SHARE": "Partager",
@@ -147,6 +157,7 @@
     "DELETE": "Supprimer",
     "RESET": "Réinitialiser",
     "FILES": "Fichier(s)",
+    "ELEMENTS": "Eléments",
     "SHOW_SELECTION": "Voir sélection",
     "SHOW_IN_FILES": "Voir dans mes fichiers",
     "PAUSE_ALL": "Tout mettre en pause",
@@ -165,7 +176,7 @@
     "ADD_FILES_DROPDOWN": {
       "UPLOAD_FILE": "Déposer un fichier",
       "UPLOAD_AND_SHARE": "Déposer et partager ",
-      "UPLOAD_IN_GROUP": "Déposer dans un groupe"
+      "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail"
     },
   "TRANSFERS_DROPDOWN": {
     "SHARE": "Partage",

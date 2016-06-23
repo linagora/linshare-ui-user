@@ -23,7 +23,7 @@ angular.module('linshare.receivedShare')
       $scope.selectedRecipient = {};
       var checkdatasIsSelecteds = function() {
         /* jshint undef: false */
-        if ($scope.showActions.length !== orderedData.length && $scope.showActions.length !== 0) {
+        if ($scope.showActions.length !== $scope.showActions.length !== 0) {
           $scope.datasIsSelected = false;
         }
       };
@@ -88,38 +88,6 @@ angular.module('linshare.receivedShare')
           swalCopyText = translations['SWEET_ALERT.ON_FILE_COPY.TEXT'];
           swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
         });
-      $scope.copyIntoFiles = function(selectedDocuments) {
-        if(!angular.isArray(selectedDocuments)) {
-          selectedDocuments = [selectedDocuments];
-        }
-        swal({
-            title: swalTitle,
-            text: swalCopyText,
-            type: 'info',
-            showCancelButton: true,
-            confirmButtonColor: '#05b1ff',
-            confirmButtonText: swalCopyConfirm,
-            cancelButtonText: swalCancel,
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              angular.forEach(selectedDocuments, function(file, key) {
-                LinshareReceivedShareService.copy(file.uuid).then(function() {
-                  angular.forEach(receivedFiles, function(f, k) {
-                    if (f.uuid === file.uuid) {
-                      receivedFiles.splice(k, 1);
-                      selectedDocuments.splice(key, 1);
-                      $scope.tableParams.reload();
-                    }
-                  });
-                });
-              });
-            }
-          }
-        );
-      };
       $scope.download = function() {
         angular.forEach($scope.showActions, function(file) {
           LinshareReceivedShareService.download(file.uuid).then(function(data) {
@@ -243,6 +211,38 @@ angular.module('linshare.receivedShare')
         );
       };
 
+      $scope.copyIntoFiles = function(selectedDocuments) {
+        if(!angular.isArray(selectedDocuments)) {
+          selectedDocuments = [selectedDocuments];
+        }
+        swal({
+            title: swalTitle,
+            text: swalCopyText,
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#05b1ff',
+            confirmButtonText: swalCopyConfirm,
+            cancelButtonText: swalCancel,
+            closeOnConfirm: true,
+            closeOnCancel: true
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              angular.forEach(selectedDocuments, function(file, key) {
+                LinshareReceivedShareService.copy(file.uuid).then(function() {
+                  angular.forEach(receivedFiles, function(f, k) {
+                    if (f.uuid === file.uuid) {
+                      receivedFiles.splice(k, 1);
+                      selectedDocuments.splice(key, 1);
+                      $scope.tableParams.reload();
+                    }
+                  });
+                });
+              });
+            }
+          }
+        );
+      };
       $scope.sortDropdownSetActive = function(sortField, $event) {
         $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
         $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');

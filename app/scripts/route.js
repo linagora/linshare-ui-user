@@ -106,10 +106,15 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.document/views/upload_template.html'
       })
 
-      .state('documents.threads', {
-        url:'/threads',
-        templateUrl: 'views/threads/thread.html',
-        controller: 'ThreadController'
+      .state('documents.sharedspace', {
+        url:'/sharedspace',
+        templateUrl: 'views/sharedspace/workgroups.html',
+        controller: 'SharedSpaceController',
+        resolve: {
+          Workgroups: function(ThreadService) {
+            return ThreadService.getAll();
+          }
+        }
       })
 
       .state('documents.profile', {
@@ -164,7 +169,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('administration.groups', {
-        url:'/groups',
+        url:'/sharedspace',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })

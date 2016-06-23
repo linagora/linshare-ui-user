@@ -463,6 +463,10 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         angular.element('#labelList').focus();
       }
     };
+    function closeDropdownPopUp() {
+      angular.element('.savelistBtn').click();
+    }
+
     /* once the "create button" is clicked (located within the "save as list" pop up) it launches a function and then
      closes the drop down pop up
      */
@@ -488,11 +492,6 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         $scope.submitShare(shareCreationDto, true);
       }
     };
-
-    function closeDropdownPopUp() {
-      angular.element('.savelistBtn').click();
-    }
-
     /* chosen : if the user selects an item located within the select dropdown, it launches a function
      in order to create a new contact chip  */
     angular.element('.chosen-select').chosen({
@@ -500,10 +499,9 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     });
     /*jshint unused:false */
     angular.element('.chosen-results').on('change', function(evt, params) {
-      createNewItem();
     });
 
-    function createNewItem() {}
+
     /* affix : slide 2 recipients: set up required in order to maintain the left sidebar recipient selection
      onto the screen after the users scrolls down beyond the "add recipient" first field's position*/
     angular.element(function() {
@@ -795,6 +793,11 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       restrict: 'A',
       scope: false,
       link: function(scope, elm) {
+        function checkifMultiMenuVisible(){
+          if(scope.numSelectedItems.length === 0){
+            angular.element('#selection-actions').addClass('showMultiMenu');
+          }
+        }
         elm.bind('click', function() {
           var numItems=angular.element('.media-body').length;
           var isCurrentlySelected=elm.hasClass('highlightListElem');
@@ -830,11 +833,6 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
             angular.element('.exitSelection').bind('click',function(){
            scope.closeContextualToolBar();
          });
-        function checkifMultiMenuVisible(){
-          if(scope.numSelectedItems.length === 0){
-            angular.element('#selection-actions').addClass('showMultiMenu');
-          }
-        }
 
         scope.closeContextualToolBar = function() {
 

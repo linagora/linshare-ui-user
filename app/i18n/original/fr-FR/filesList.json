@@ -95,5 +95,13 @@
   "DRAG_DROP_BACKGROUND": {
     "TITLE": "Déposez vos fichiers ici",
     "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer"
+  },
+  "WORKGROUPS_LIST": {
+    "PROJECT": "Projet",
+    "FOLDER": "Répertoire",
+    "SHARED_FOLDER": "Groupe de travail",
+    "UPLOAD_FILE": "Dépôt",
+    "UPLOAD_REQUEST": "Inv. de dépot",
+    "ADD_A_MEMBER": "Membre"
   }
 }

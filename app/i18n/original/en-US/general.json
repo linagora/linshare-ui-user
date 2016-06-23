@@ -34,7 +34,7 @@
     "MY_FILES" : "My files",
     "RECEIVED_SHARES" : "Received shares",
     "SHARES" : "Files shares",
-    "GROUPS" : "Groups",
+    "SHARED_SPACE" : "Shared space",
     "ADMIN" : "Administration",
     "LISTS" : "Lists",
     "GUESTS" : "Guests",
@@ -85,11 +85,20 @@
     "DOWNLOAD": "Download",
     "SHARE": "Share",
     "REFRESH": "Refresh",
-    "COPY_IN_GROUP": "Copy in a group",
+    "COPY_IN_WORKGROUP": "Copy in a workgroup",
     "COPY_IN_MY_FILES": "Copy in my files",
     "DELETE": "Delete",
     "TRANSFERT" : "Transfert",
-    "INFORMATION" : "Information"
+    "INFORMATION" : "Information",
+    "FAVORITES" : "Favorites",
+    "SILENCE" : "Silence",
+    "ADD_MEMBER" : "Add a member",
+    "RENAME" : "Rename",
+    "COPY" : "Copy",
+    "GO_TO_TRASH" : "Go to trash",
+    "COPY_IN_MY_FILES" : "Copy in my files",
+    "NEW_WORKGROUP" : "New workgroup",
+    "MOVE" : "Move"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
@@ -132,6 +141,7 @@
   },
   "SELECTION_TOOLBAR": {
     "SELECTED_FILES": "selected file(s)",
+    "SELECTED_ELEMENTS": "selected elements(s)",
     "SELECT_ALL": "Select all",
     "DESELECT_ALL": "Deselect all",
     "SHARE": "Share",
@@ -139,6 +149,7 @@
     "DELETE": "Delete",
     "RESET": "Reset",
     "FILES": "Files",
+    "ELEMENTS": "Elements",
     "SHOW_SELECTION": "Show selection",
     "SHOW_IN_FILES": "Show in files",
     "PAUSE_ALL": "Pause all",

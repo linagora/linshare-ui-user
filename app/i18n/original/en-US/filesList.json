@@ -95,5 +95,13 @@
   "DRAG_DROP_BACKGROUND": {
     "TITLE": "Upload your files here",
     "COMMENT": "Drag and drop your files here to upload them"
+  },
+  "WORKGROUPS_LIST": {
+    "PROJECT": "Project",
+    "FOLDER": "Folder",
+    "SHARED_FOLDER": "Workgroup",
+    "UPLOAD_FILE": "File upload",
+    "UPLOAD_REQUEST": "Upload request",
+    "ADD_A_MEMBER": "Member"
   }
 }

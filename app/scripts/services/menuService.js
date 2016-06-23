@@ -33,13 +33,13 @@ angular.module('linshareUiUserApp')
         ]
       };
 
-    var groups = {
-      name: 'MENU_TITLE.GROUPS',
-      link: 'documents.threads',
-      icon: 'zmdi zmdi-accounts-alt',
-      color: '#05B1FF',
-      disabled: true
-    };
+      var groups = {
+        name: 'MENU_TITLE.SHARED_SPACE',
+        link: 'documents.sharedspace',
+        icon: 'zmdi zmdi-accounts-alt',
+        color: '#05B1FF',
+        disabled: false
+      };
 
       var administrations = {
         name: 'MENU_TITLE.ADMIN',

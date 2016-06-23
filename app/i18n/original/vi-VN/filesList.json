@@ -61,5 +61,13 @@
   "DRAG_DROP_BACKGROUND": {
     "TITLE": "Tải tập tin lên đây",
     "COMMENT": "Kéo và thả tập tin tại đây"
+  },
+  "WORKGROUPS_LIST": {
+    "TBT__PROJECT": "",
+    "TBT__FOLDER": "",
+    "TBT__SHARED_FOLDER": "",
+    "TBT__UPLOAD_FILE": "",
+    "TBT__UPLOAD_REQUEST": "",
+    "TBT__ADD_A_MEMBER": ""
   }
 }

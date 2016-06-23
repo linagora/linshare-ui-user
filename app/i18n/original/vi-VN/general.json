@@ -33,7 +33,7 @@
     "MY_FILES" : "Tập tin của tôi",
     "RECEIVED_SHARES" : "Tập tin chia sẻ cho tôi",
     "SHARES" : "Tập tin do tôi chia sẻ",
-    "GROUPS" : "Nhóm",
+    "TBT__SHARED_SPACE" : "Nhóm",
     "ADMIN" : "Quản trị",
     "LISTS" : "Danh sách",
     "GUESTS" : "Khách mời",
@@ -81,8 +81,17 @@
     "DOWNLOAD": "Tải về",
     "SHARE": "Chia sẻ",
     "REFRESH": "Làm mới",
-    "COPY_IN_GROUP": "Sao chép tập tin vào nhóm",
-    "DELETE": "Xóa"
+    "TBT__COPY_IN_WORKGROUP": "Sao chép tập tin vào nhóm",
+    "DELETE": "Xóa",
+    "TBT__FAVORITES" : "",
+    "TBT__SILENCE" : "",
+    "TBT__ADD_MEMBER" : "",
+    "TBT__RENAME" : "",
+    "TBT__COPY" : "",
+    "TBT__GO_TO_TRASH" : "",
+    "TBT__COPY_IN_MY_FILES" : "",
+    "TBT__NEW_WORKGROUP" : "",
+    "TBT__MOVE" : ""
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
@@ -118,11 +127,13 @@
   },
   "SELECTION_TOOLBAR": {
     "SELECTED_FILES": "Các tập tin được chọn",
+    "TBT__SELECTED_ELEMENTS": "",
     "SELECT_ALL": "Chọn tất cả",
     "DESELECT_ALL": "Xóa tất cả",
     "SHARE": "Chia sẻ",
     "COPY": "Sao chép",
-    "DELETE": "Xóa"
+    "DELETE": "Xóa",
+    "TBT__ELEMENTS": ""
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
