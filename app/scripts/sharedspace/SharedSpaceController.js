@@ -99,14 +99,40 @@ angular.module('linshareUiUserApp')
           angular.element('#content-container').addClass('setDisabled');
         }, 250);
       } else {
-        angular.element('#overlayMobileFab').removeClass('double-row-fab');
         angular.element('.md-toolbar-tools').removeClass('setWhite');
         $timeout(function () {
           angular.element('.multi-select-mobile').removeClass('setDisabled');
           angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
           angular.element('#content-container').removeClass('setDisabled');
+          angular.element('#overlayMobileFab').removeClass('double-row-fab');
         }, 250);
       }
     });
     $scope.currentPage = 'group_list';
-  });
+    $scope.sortDropdownSetActive = function(sortField, $event) {
+      $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
+      $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
+      var currTarget = $event.currentTarget;
+      angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
+        angular.element(currTarget).addClass('selectedSorting');
+      });
+    };
+  })
+
+  .directive('hoverDropdownFix', function() {
+    return {
+      restrict: 'A',
+      link: function(scope, el) {
+        scope.$watch(function() {
+          return el.hasClass('open');
+        }, function(newValue) {
+          if(newValue) {
+            angular.element(el).parent().addClass('setVisible');
+          }else{
+            angular.element(el).parent().removeClass('setVisible');
+          }
+        });
+
+      }
+    };
+});

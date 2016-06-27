@@ -95,10 +95,19 @@
     "ADD_MEMBER" : "Add a member",
     "RENAME" : "Rename",
     "COPY" : "Copy",
-    "GO_TO_TRASH" : "Go to trash",
+    "GO_TO_TRASH" : "Go to trash can",
     "COPY_IN_MY_FILES" : "Copy in my files",
     "NEW_WORKGROUP" : "New workgroup",
-    "MOVE" : "Move"
+    "MOVE" : "Move",
+    "VIEW_VERSIONING": "View previous updates",
+    "COPY_DROPDOWN": {
+      "COPY_TO_MY_FILES": "In my files",
+      "COPY_AND_SHARE": "Copy & share",
+      "SIMPLE_COPY": "Simple copy"
+    },
+    "INFO_WORKGROUP": "View workgroup details",
+    "EXTERNAL_EDIT": "Download & lock",
+    "LOCK": "Lock"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {

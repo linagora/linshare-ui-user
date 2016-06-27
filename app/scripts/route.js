@@ -116,7 +116,11 @@ angular.module('linshareUiUserApp')
           }
         }
       })
-
+      .state('documents.sharedspace.files', {
+        url:'/files',
+        templateUrl: 'views/sharedspace/list-files.html',
+        controller: 'SharedSpaceListController'
+      })
       .state('documents.profile', {
         url: '/profile',
         templateUrl: 'views/common/user-profile.html',

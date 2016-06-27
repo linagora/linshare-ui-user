@@ -97,10 +97,18 @@
     "ADD_MEMBER" : "Ajouter un membre",
     "RENAME" : "Renommer",
     "COPY" : "Copier",
-    "COPY_IN_MY_FILES" : "Copier vers mes fichiers",
     "GO_TO_TRASH" : "Voir la corbeille",
     "NEW_WORKGROUP" : "Nouveau groupe de travail",
-    "MOVE" : "Déplacer"
+    "MOVE" : "Déplacer",
+    "VIEW_VERSIONING": "Voir l'historique",
+    "COPY_DROPDOWN": {
+      "COPY_TO_MY_FILES": "Vers mes fichier",
+      "COPY_AND_SHARE": "Copier & partager",
+      "SIMPLE_COPY": "Copie simple"
+      },
+    "LOCK": "Verrouiller",
+    "EXTERNAL_EDIT": "Télécharger & verrouiller",
+    "INFO_WORKGROUP": "Détail du groupe de travail"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {

@@ -91,7 +91,15 @@
     "TBT__GO_TO_TRASH" : "",
     "TBT__COPY_IN_MY_FILES" : "",
     "TBT__NEW_WORKGROUP" : "",
-    "TBT__MOVE" : ""
+    "TBT__MOVE" : "",
+    "TBT__VIEW_VERSIONING": "",
+    "TBT__COPY_DROPDOWN": {
+      "TBT__COPY_TO_MY_FILES": "",
+      "TBT__COPY_AND_SHARE": "",
+      "TBT__SIMPLE_COPY": ""
+    },
+    "TBT__EXTERNAL_EDIT": "",
+    "TBT__INFO_WORKGROUP": ""
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
