@@ -52,8 +52,8 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.document/views/list.html',
         controller: 'LinshareDocumentController',
         resolve: {
-          documentsList: function(LinshareDocumentService) {
-            return LinshareDocumentService.getAllFiles();
+          documentsList: function(LinshareDocumentRestService) {
+            return LinshareDocumentRestService.getAllFiles();
           }
         }
       })

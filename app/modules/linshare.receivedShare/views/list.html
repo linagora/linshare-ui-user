@@ -226,7 +226,7 @@
                           </a>
                         </li>
                         <li class="hidden-xs">
-                          <a ng-href="{{linshareBaseUrl}}/received_shares/{{documentFile.uuid}}/download"
+                          <a href="" data-ng-click="downloadCurrentFile(documentFile)"
                              title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
                             <i class="zmdi zmdi-download"></i>
                           </a>
@@ -245,10 +245,10 @@
                               <a href="" ls-share-modal event-propagation-stop>{{'ACTION.TRANSFERT' | translate}}</a>
                             </li>
                             <li>
-                              <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
+                              <a href="" data-ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
                             </li>
                             <li>
-                              <a ng-href="{{linshareBaseUrl}}/received_shares/{{documentFile.uuid}}/download"
+                              <a href="" data-ng-click="downloadCurrentFile(documentFile)"
                                  event-propagation-stop>{{'ACTION.DOWNLOAD' | translate}}
                               </a>
                             </li>

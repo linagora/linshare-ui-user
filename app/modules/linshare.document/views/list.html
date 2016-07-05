@@ -193,7 +193,7 @@
           <div class="table-responsive">
             <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true" >
               <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
-                  ng-click="backToSidebarContentDetails()"
+                  data-ng-click="backToSidebarContentDetails()"
                   data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
                   context-menu="moreOptionsContexualMenu">
                 <td data-header="'checkboxheader.html'" class="center thumb-type-item">
@@ -221,19 +221,19 @@
                         "{ 'openr': (mactrl.sidebarToggle.right === true) &&
                         ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
                         )}">
-                        <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop>
+                        <li data-ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop>
                           <a href=""
                              title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
                             <i class="zmdi zmdi-info-outline"></i>
                           </a>
                         </li>
-                        <li class="hidden-xs"  ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                        <li class="hidden-xs" data-ng-click="onShare(); mactrl.sidebarToggle.right = true;">
                           <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true">
                             <i class="zmdi zmdi-share"></i>
                           </a>
                         </li>
                         <li class="hidden-xs">
-                          <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                          <a href="" data-ng-click="downloadCurrentFile(documentFile)"
                              title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
                             <i class="zmdi zmdi-download"></i>
                           </a>
@@ -253,10 +253,10 @@
                               <a href="" ls-share-modal event-propagation-stop>{{'ACTION.SHARE' | translate}}</a>
                             </li>
                             <li>
-                              <a href="" ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
+                              <a href="" data-ng-click="deleteDocuments(documentFile)">{{'ACTION.DELETE' | translate}}</a>
                             </li>
                             <li>
-                              <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                              <a href="" data-ng-click="downloadCurrentFile(documentFile)"
                                  event-propagation-stop>{{'ACTION.DOWNLOAD' | translate}}
                               </a>
                             </li>

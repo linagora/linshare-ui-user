@@ -1,8 +1,8 @@
 'use strict';
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($scope,  $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
-             LinshareShareService, LinshareDocumentService, files, $translate, growlService, $log, $timeout){
+    function($scope, $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
+             LinshareShareService, files, $translate, growlService, $log, $timeout, DocumentUtilsService){
       $scope.mactrl.sidebarToggle.right = false;
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
@@ -88,18 +88,17 @@ angular.module('linshare.receivedShare')
           swalCopyText = translations['SWEET_ALERT.ON_FILE_COPY.TEXT'];
           swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
         });
-      $scope.download = function() {
-        angular.forEach($scope.showActions, function(file) {
-          LinshareReceivedShareService.download(file.uuid).then(function(data) {
-            $scope.downloadFileFromResponse(file.name, file.type, data);
-          });
-        });
-      };
 
       $scope.downloadCurrentFile = function(currentFile) {
         LinshareReceivedShareService.download(currentFile.uuid).then(function(downloadedFile) {
-            $scope.downloadFileFromResponse(currentFile.name, currentFile.type, downloadedFile);
-          });
+          DocumentUtilsService.downloadFileFromResponse(downloadedFile, currentFile.name, currentFile.type);
+        });
+      };
+
+      $scope.download = function() {
+        angular.forEach($scope.showActions, function(file) {
+          $scope.downloadCurrentFile(file);
+        });
       };
 
       $scope.resetSelectedDocuments = function() {
@@ -108,7 +107,6 @@ angular.module('linshare.receivedShare')
         });
         $scope.selectedDocuments = [];
       };
-
 
       $scope.getDocumentThumbnail = function(uuid) {
         LinshareReceivedShareService.getThumbnail(uuid).then(function(thumbnail) {
@@ -173,12 +171,7 @@ angular.module('linshare.receivedShare')
         swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
         swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
       });
-      var removeElementFromCollection = function(collection, element) {
-        var index = collection.indexOf(element);
-        if (index > -1) {
-          collection.splice(index, 1);
-        }
-      };
+
       $scope.deleteDocuments = function(document) {
         if(!angular.isArray(document)) {
           document = [document];
@@ -201,8 +194,8 @@ angular.module('linshare.receivedShare')
                 $log.debug('value to delete', receivedFiles.length);
                 LinshareReceivedShareService.delete(doc.uuid).then(function() {
                   growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-                  removeElementFromCollection(receivedFiles, doc);
-                  removeElementFromCollection($scope.selectedDocuments, doc);
+                  DocumentUtilsService.removeElementFromCollection(receivedFiles, doc);
+                  DocumentUtilsService.removeElementFromCollection($scope.selectedDocuments, doc);
                   $scope.tableParams.reload();
                 });
               });

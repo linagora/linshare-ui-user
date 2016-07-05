@@ -16,88 +16,82 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  *
  * Service dealing with documents
  */
-  .factory('LinshareDocumentService', function(Restangular, $log) {
+  .factory('LinshareDocumentRestService', function(Restangular, $log) {
     var baseRestDocuments = Restangular.all('documents');
     return {
       getAllFiles: function() {
-        $log.debug('FileService:getAllFiles');
+        $log.debug('LinshareDocumentRestService:getAllFiles');
         return baseRestDocuments.getList();
       },
       getFileInfo: function(uuid) {
-        $log.debug('FileService:getFileInfo');
+        $log.debug('LinshareDocumentRestService:getFileInfo');
         return Restangular.one('documents', uuid).get({withShares: true});
       },
-      downloadFiles: function(uuid) {
-        $log.debug('FileService:downloadFiles');
-        return Restangular.all('documents').one(uuid, 'download').get();
+      downloadFile: function(uuid) {
+        $log.debug('LinshareDocumentRestService:downloadFiles');
+        return Restangular.all('documents').one(uuid, 'download').withHttpConfig({responseType: 'arraybuffer'}).get();
       },
       getThumbnail: function(uuid) {
-        $log.debug('FileService:getThumbnail');
+        $log.debug('LinshareDocumentRestService:getThumbnail');
         return Restangular.one('documents', uuid).one('thumbnail').get({base64: true});
       },
       uploadFiles: function(documentDto) {
-        $log.debug('FileService:uploadFiles');
+        $log.debug('LinshareDocumentRestService:uploadFiles');
         return Restangular.all('documents').post(documentDto);
       },
       deleteFile: function(uuid) {
-        $log.debug('FileService:deleteFiles');
+        $log.debug('LinshareDocumentRestService:deleteFiles');
         return Restangular.one('documents', uuid).remove();
       },
       autocomplete: function(pattern) {
-        $log.debug('FileService:autocomplete');
+        $log.debug('LinshareDocumentRestService:autocomplete');
         return Restangular.all('users').one('autocomplete', pattern).get();
       },
       updateFile: function(uuid, documentDto) {
-        $log.debug('LinshareDocumentService : updating a document');
+        $log.debug('LinshareDocumentRestService : updating a document');
         return Restangular.all('documents').one(uuid).post(documentDto);
       }
     };
   })
 
-  .controller('DocumentsController', ['$scope', '$translatePartialLoader', 'LinshareDocumentService', '$window',
-    function($scope, $translatePartialLoader, LinshareDocumentService, $window) {
+  .factory('DocumentUtilsService', function() {
+
+    function downloadFileFromResponse(fileStream, fileName, fileType) {
+      var blob = new Blob([fileStream], {type: fileType});
+      var windowUrl = window.URL || window.webkitURL || window.mozURL || window.msURL;
+      var urlObject = windowUrl.createObjectURL(blob);
+
+      // create tag element a to simulate a download by click
+      var a = document.createElement('a');
+      a.setAttribute('href', urlObject);
+      a.setAttribute('download', fileName);
+
+      // create a click event and dispatch it on the tag element
+      var event = new MouseEvent('click');
+      a.dispatchEvent(event);
+    }
+
+
+    function removeElementFromCollection(collection, element) {
+      var index = collection.indexOf(element);
+      if(index > -1) {
+        collection.splice(index, 1);
+      }
+    }
+
+
+    return {
+      downloadFileFromResponse: downloadFileFromResponse,
+      removeElementFromCollection: removeElementFromCollection
+    };
+  })
+
+  .controller('DocumentsController', ['$scope', '$translatePartialLoader',
+    function($scope, $translatePartialLoader) {
 
       $translatePartialLoader.addPart('filesList');
       $scope.multipleSelection = true;
       $scope.sidebarRightDataType = 'details';
-
-      $scope.downloadFileFromResponse = function(fileName, fileType, fileStream) {
-        var blob = new Blob([fileStream], {type: fileType});
-        var windowUrl = window.URL || window.webkitURL || window.mozURL || window.msURL;
-        var urlObject;
-
-        // https://msdn.microsoft.com/fr-fr/library/hh779016(v=vs.85).aspx
-        if(navigator.msSaveBlob) {
-          navigator.msSaveBlob(blob, fileName);
-        }
-        else if(windowUrl) {
-          // create tag element a to simulate a download by click
-          var link = document.createElement('a');
-
-          // if the attribute download isset in the tag a
-          if('download' in link) {
-            // Prepare a blob URL
-            urlObject = windowUrl.createObjectURL(blob);
-
-            // Set the attribute to the tag element a
-            link.setAttribute('href', urlObject);
-            link.setAttribute('download', fileName);
-
-            // Simulate clicking the download link
-            var event = document.createEvent('MouseEvents');
-            event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-            link.dispatchEvent(event);
-          }
-          else {
-            // Prepare a blob URL
-            // Use application/octet-stream when using window.location to force download
-            /* globals  octetStreamMime */
-            blob = new Blob([fileStream], {type: octetStreamMime});
-            urlObject = windowUrl.createObjectURL(blob);
-            $window.location = urlObject;
-          }
-        }
-      };
 
       //SELECTED FILES AND UPLOADS
       $scope.selectedDocuments = [];
@@ -120,8 +114,8 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  *
  * The controller to manage documents
  */
-  .controller('LinshareDocumentController', function($scope,  $filter, LinshareDocumentService, NgTableParams, $translate,
-                                                     $window, $log, documentsList, growlService, $timeout) {
+  .controller('LinshareDocumentController', function($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate,
+                                                     $window, $log, documentsList, growlService, $timeout, DocumentUtilsService) {
     $scope.mactrl.sidebarToggle.right = false;
     $scope.selectedDocuments = [];
     $scope.flagsOnSelectedPages = {};
@@ -167,13 +161,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     $scope.currentDocument = {};
 
-    var removeElementFromCollection = function(collection, element) {
-      var index = collection.indexOf(element);
-      if(index > -1) {
-        collection.splice(index, 1);
-      }
-    };
-
     $scope.resetSelectedDocuments = function() {
       delete $scope.tableParams.filter().isSelected;
       angular.forEach($scope.selectedDocuments, function(selectedDoc) {
@@ -212,10 +199,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
           if(isConfirm) {
             angular.forEach(document, function(doc) {
               $log.debug('value to delete', doc);
-              LinshareDocumentService.deleteFile(doc.uuid).then(function() {
+              LinshareDocumentRestService.deleteFile(doc.uuid).then(function() {
                 growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-                removeElementFromCollection($scope.documentsList, doc);
-                removeElementFromCollection($scope.selectedDocuments, doc);
+                DocumentUtilsService.removeElementFromCollection($scope.documentsList, doc);
+                DocumentUtilsService.removeElementFromCollection($scope.selectedDocuments, doc);
                 $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
                 $scope.tableParams.reload();
               });
@@ -226,9 +213,9 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.downloadCurrentFile = function(currentFile) {
-      LinshareDocumentService.downloadFiles(currentFile.uuid)
-        .then(function(downloadedFile) {
-          $scope.downloadFileFromResponse(currentFile.name, currentFile.type, downloadedFile);
+      LinshareDocumentRestService.downloadFile(currentFile.uuid)
+        .then(function(fileStream) {
+          DocumentUtilsService.downloadFileFromResponse(fileStream, currentFile.name, currentFile.type);
         });
     };
 
@@ -239,13 +226,13 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.getDocumentThumbnail = function(uuid) {
-      LinshareDocumentService.getThumbnail(uuid).then(function(thumbnail) {
+      LinshareDocumentRestService.getThumbnail(uuid).then(function(thumbnail) {
         $scope.currentSelectedDocument.current.thumbnail = thumbnail;
       });
     };
 
     $scope.getDocumentInfo = function(uuid) {
-      LinshareDocumentService.getFileInfo(uuid).then(function(data) {
+      LinshareDocumentRestService.getFileInfo(uuid).then(function(data) {
         $scope.currentSelectedDocument.current.shares = data.shares;
       });
     };
@@ -263,12 +250,12 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $scope.currentSelectedDocument.current = currentFile;
       $scope.sidebarRightDataType = 'details';
       if(currentFile.shared > 0) {
-        LinshareDocumentService.getFileInfo(currentFile.uuid).then(function(data) {
+        LinshareDocumentRestService.getFileInfo(currentFile.uuid).then(function(data) {
           $scope.currentSelectedDocument.current.shares = data.shares;
         });
       }
       if(currentFile.hasThumbnail === true) {
-        LinshareDocumentService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
+        LinshareDocumentRestService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
           $scope.currentSelectedDocument.current.thumbnail = thumbnail;
         });
       }
@@ -280,7 +267,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.reloadDocuments = function() {
-      LinshareDocumentService.getAllFiles().then(function(data) {
+      LinshareDocumentRestService.getAllFiles().then(function(data) {
         $scope.documentsList = data;
         $scope.documentsListCopy = data;
         $scope.tableParams.reload();
