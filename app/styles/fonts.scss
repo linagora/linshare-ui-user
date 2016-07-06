@@ -281,11 +281,11 @@
 
 @font-face {
   font-family: 'groups';
-  src:    url('fonts/shared-folder/groups.eot?azn2rz');
-  src:    url('fonts/shared-folder/groups.eot?azn2rz#iefix') format('embedded-opentype'),
-  url('fonts/shared-folder/groups.ttf?azn2rz') format('truetype'),
-  url('fonts/shared-folder/groups.woff?azn2rz') format('woff'),
-  url('fonts/shared-folder/groups.svg?azn2rz#groups   ') format('svg');
+  src:    url('fonts/shared-folder/groups.eot?54czre');
+  src:    url('fonts/shared-folder/groups.eot?54czre#iefix') format('embedded-opentype'),
+  url('fonts/shared-folder/groups.ttf?54czre') format('truetype'),
+  url('fonts/shared-folder/groups.woff?54czre') format('woff'),
+  url('fonts/shared-folder/groups.svg?54czre#groups   ') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -306,6 +306,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.groups-user-group:before {
+  content: "\e90d";
+}
+.groups-user-member:before {
+  content: "\e90e";
+}
 
 .groups-lock-download-alt:before {
   content: "\e90c";

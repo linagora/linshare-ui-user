@@ -1,0 +1,32 @@
+{
+  "MEMBER_TAB" : {
+    "ADD_MEMBER": "Ajouter des membres",
+    "NUM_MEMBER": "Membres existants",
+    "TITLE": "Membres",
+    "ADD": "Ajouter",
+    "UPDATE": "Modifier",
+    "EDIT_RIGHTS": "Editer les droits",
+    "REMOVE_TEAM_MEMBER": "Supprimer du groupe",
+    "ACTIVATED": "activé",
+    "NOTIFICATION_ACTIVATED": "notification activée",
+    "ADMIN": "Admin",
+    "WRITE": "Ecriture",
+    "READ": "Lecture",
+    "ADMIN_RIGHTS": "Droit d'admin",
+    "WRITE_RIGHTS": "Droit d'écriture",
+    "READ_RIGHTS": "Droit de lecture",
+    "MULTI_SELECT": "Edition multiple",
+    "JOINING_DATE": "Date d'ajout",
+    "USER_NAME": "Nom d'utilisateurs",
+    "USER_RIGHTS": "Droit affecté",
+    "SORT_BY": "Trier par",
+    "FILTER_BY": "Filtrer par"
+  },
+    "INFORMATION_TAB" : {
+      "TITLE": "DETAILS"
+    }
+}
+
+
+
+

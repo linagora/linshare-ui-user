@@ -331,10 +331,10 @@
                             data-ng-class="{ 'openr': (mactrl.sidebarToggle.right === true) &&
                           ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
                           )}">
-                          <li class="hidden-xs"  ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                          <li class="hidden-xs"  ng-click="onAddMember(); mactrl.sidebarToggle.right = true;">
                             <a href="" class="p-t-10" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
                                event-propagation-stop="true">
-                              <i><span class="groups-add-member"></span></i>
+                              <i><span class="groups-user-member"></span></i>
                             </a>
                           </li>
                           <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="set-col-6">

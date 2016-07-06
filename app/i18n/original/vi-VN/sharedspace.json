@@ -1,0 +1,29 @@
+{
+  "TBT__MEMBER_TAB" : {
+    "TBT__ADD_MEMBER": "A",
+    "TBT__NUM_MEMBER": "",
+    "TBT__TITLE": "",
+    "TBT__ADD": "",
+    "TBT__UPDATE": "",
+    "TBT__EDIT_RIGHTS": "",
+    "TBT__REMOVE_TEAM_MEMBER": "",
+    "TBT__ACTIVATED": "",
+    "TBT__NOTIFICATION_ACTIVATED": "",
+    "TBT__ADMIN": "",
+    "TBT__WRITE": "",
+    "TBT__READ": "",
+    "TBT__ADMIN_RIGHTS": "",
+    "TBT__WRITE_RIGHTS": "",
+    "TBT__READ_RIGHTS": "",
+    "TBT__MULTI_SELECT": "",
+    "TBT__JOINING_DATE": "",
+    "TBT__USER_NAME": "",
+    "TBT__USER_RIGHTS": "",
+    "SORT_BY": "",
+    "FILTER_BY": ""
+  },
+  "TBT__INFORMATION_TAB" : {
+    "TBT__TITLE": ""
+  }
+}
+

@@ -1,6 +1,373 @@
 @import "fonts.scss";
 @import "colors.scss";
 
+i.checkDropdownIconContent {
+  content: "\f26b";
+  font-family: 'Material-Design-Iconic-Font';
+  position: absolute;
+  right: inherit;
+  left: 15px;
+  top: 10px;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.double-drop {
+  padding-bottom: 0;
+  .selectedSortingMembers .caretArea {
+    visibility: visible;
+  }
+  .caretArea {
+    visibility: hidden;
+    line-height: 13px;
+  }
+  .active-check:before {
+    content: "";
+    display: none;
+  }
+  .active-check .checkboxctn {
+    visibility: visible !important;
+  }
+  .checkboxctn {
+    width: 20px;
+    height: 20px;
+    line-height: 32px;
+    float: left;
+    font-size: 1.4em;
+    padding-top: 0px;
+    visibility: hidden;
+  }
+  .checkboxctn:before {
+    content: "\f26b";
+    font-family: 'Material-Design-Iconic-Font';
+    position: absolute;
+    right: inherit;
+    left: 20px;
+    top: 5px;
+    font-size: 13px;
+    line-height: 24px;
+  }
+}
+.list-menu {
+  position: relative;
+  p{
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+    margin-bottom: 0em;
+    border-bottom: solid 1px #e4e4e4;
+    /* padding-bottom: 0.5em; */
+    padding: 0.85em;
+    color: #545454;
+  }
+  .filter-menu {
+    a {
+      padding-left: 20px;
+      position: relative;
+    }
+  }
+}
+.list-menu:nth-child(2) p{
+  border-top: solid 1px #e4e4e4;
+}
+.list-menu .dropdown-menu{
+  position: relative;
+  top: 100%;
+  left: 0;
+  z-index: 9;
+  display: block;
+  float: none;
+  min-width: initial;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 13px;
+  text-align: left;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  box-shadow: none;
+  background-clip: padding-box;
+  width: 100%;
+  li {
+    border-bottom: none;
+    font-size: 0.87em;
+  }
+}
+
+.user-rights-dropdown {
+  min-width:inherit;
+  width:inherit;
+  li a {
+    padding-left: 40px !important;
+  }
+  li {
+    position:relative;
+  }
+}
+.align-right li a, .align-right{
+  text-align:right !important;
+}
+.active-check:before {
+  content: "\f26b";
+  font-family: 'Material-Design-Iconic-Font';
+  position: absolute;
+  right: inherit;
+  left: 15px;
+  top: 10px;
+  font-size: 13px;
+  line-height: 24px;
+}
+.existing-member-list-ctn {
+  clear:both;
+  margin-top:3.5em;
+}
+.fields-search-member {
+  clear: both;
+  display: -webkit-flex;
+  display: flex;
+  .dropdown-filters {
+    flex: 0 0 45px;
+    border: 1px solid #f0f0f0;
+    display: flex;
+    border: 1px solid #f0f0f0;
+    justify-content: center;
+    align-items: center;
+    .dropdown {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      vertical-align: middle;
+      a.dropdown-toggle {
+        color: #6b6b6b;
+        width: 100%;
+        height: 100%;
+        display: block;
+        padding: 0.4em;
+      }
+    }
+  }
+  .search-style {
+    flex: 1 1 100%;
+  }
+}
+.flex-ctn {
+  display: -webkit-flex;
+  display: flex;
+  margin-left: 1.33em;
+  padding-bottom: 0.75em;
+  border-bottom: 1px solid #f0f0f0;
+
+  .first-letter {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 2px 1px rgba(0, 0, 0, 0.12);
+    width: 30px;
+    height: 30px;
+    background-color: #00bfa5;
+    color: #fff;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+  }
+  .itemL {
+    flex: 0 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .itemMid {
+    flex: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-left:0.45em;
+    .name{
+      display: flex;
+      flex: 0 0 100%;
+      font-weight: bold;
+      font-size: 1.05em;
+      margin-bottom: 0.05em;
+    }
+    .info-item-member {
+      font-size: 0.85em;
+      margin-right: 7px;
+      text-transform: lowercase;
+    }
+  }
+  .itemR {
+    flex: 0 0 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+      font-size: 1.4em;
+      color: #6b6b6b;
+      flex: 50%;
+      text-align: center;
+      align-self: center;
+    }
+    span.dropdown{
+      margin-right: 0.4em;
+    }
+  }
+}
+.flex-ctn:first-child {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.6em;
+}
+
+
+.r-a-lin {
+  display: inline-block;
+  float : right;
+  font-size: 0.75em;
+  margin-top:0.6em;
+}
+#member-sidebar {
+  md-tab-content.md-no-scroll {
+    bottom: auto;
+    overflow: visible;
+    > div {
+      overflow: visible;
+      height: 100% !important;
+    }
+  }
+  .advancedSharingSettings {
+    margin-bottom: 1.5em;
+  }
+}
+md-content #recipientsCtnSidebar {
+  margin-top: 0;
+  position: relative;
+  padding: 0;
+  .custumListContainer .recipients-form-sections {
+    margin-top:2em;
+  }
+  .group-member-field-ctn {
+  }
+}
+
+.fields-add-member {
+  .btn-primary.add-btn,.btn-primary.update-btn {
+    padding: 6px 0;
+    font-size: 0.85em;
+    width: 77px;
+    float: right;
+    letter-spacing: 0.015em;
+
+  }
+  .btn-primary.update-btn {
+    background-color: $secondaryClr;
+  }
+}
+
+.chosen-container-single.chosen-container-single-nosearch {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  zoom: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  width: 81px !important;
+  float: right;
+  a {
+    cursor: pointer;
+  }
+
+  .chosen-drop {
+    width:104px;
+    cursor: pointer;
+    position: absolute;
+    background-color: white;
+    z-index: 900;
+    cursor: pointer;
+    -webkit-transform-origin: top right;
+    -moz-transform-origin:top right ;
+    -o-transform-origin: top right;
+    transform-origin: top right;
+    text-align: right;
+    right: 0;
+    left: inherit !important;
+    .chosen-search {
+      display: none;
+    }
+    .chosen-results {
+      list-style-type: none;
+      li{
+        padding-left: 25px;
+      }
+      li.result-selected:before {
+        right: inherit;
+        left: 12px;
+        top: 10px;
+        font-size: 14px;
+      }
+    }
+    transform-origin: top right;
+  }
+
+  .chosen-single {
+    position: relative;
+    display: block;
+    padding: 0;
+    height: 30px;
+    background-color: #fff;
+    background-clip: padding-box;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+    font-size: 0.9em;
+    span {
+      display: block;
+      overflow: hidden;
+      margin-right: 15px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    > div {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: block;
+      width: 18px;
+      height: 100%;
+      b {
+        background-image: url(../images/select.png) !important;
+        background-repeat: no-repeat;
+        background-position: right 12px;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+#recipientsCtnSidebar form.fields-add-member  {
+    margin-left: 1.35em;
+}
+
+.group-member-field-ctn {
+  box-shadow : none;
+  .dropdown-menu {
+    min-width: 264px;
+  }
+ button {
+   background-color: #fff;
+   border: none;
+ }
+  > div {
+    float :left;
+  }
+}
+
+.group-member-field-ctn.btn-group:not(.bootstrap-select), .btn-group-vertical:not(.bootstrap-select) {
+  box-shadow: none;
+}
 .dropdown-menu {
   .groups-lock-download-alt {
     font-size: 16px;
@@ -619,7 +986,7 @@ div#toolbar-actions.show-details-mobile-link {
     width:115px;
     min-width:100px;
     font-weight: 500 !important;
-    color: #4C4C4C !important;
+    color: #9e9e9e !important;
     font-size: 1em !important;
     letter-spacing: 0.01em !important;
   }
@@ -736,7 +1103,7 @@ div#toolbar-actions.show-details-mobile-link {
   transform: scale(1);
   opacity: 0;
 }
-#search-field-ctn .search-style {
+.search-style {
   .form-control {
     background-image: url("../images/icons/search-magnifying-glass.png");
     background-repeat: no-repeat;
@@ -1385,6 +1752,13 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     margin-top: -50px;
   }
 }
+.tab-nav-detail {
+  md-tabs.md-default-theme md-ink-bar,
+  md-tabs md-ink-bar {
+    color: rgb(5, 177, 255) !important;
+    background: rgb(5, 177, 255) !important;
+  }
+}
 .dropdown-menu .menu-item-share {
   font-size: 1.2em;
 }
@@ -1399,8 +1773,8 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   }
   md-tabs.md-default-theme md-ink-bar,
   md-tabs md-ink-bar {
-    color: rgb(5, 177, 255);
-    background: rgb(5, 177, 255);
+    color: rgb(5, 177, 255) !important;
+    background: rgb(5, 177, 255) !important;
   }
   md-pagination-wrapper {
     width: 100% !important;
@@ -1410,11 +1784,11 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   }
   md-tabs {
     .md-tab.md-active {
-      color: rgb(5, 177, 255) !important;
+      color: #4e4e4e !important;
     }
     .md-tab {
       font-weight: 500 !important;
-      color: #4C4C4C !important;
+      color: #9e9e9e !important;
       font-size: 1em !important;
       letter-spacing: 0.01em !important;
     }
@@ -1577,6 +1951,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   }
 }
 #recipientsCtnSidebar {
+  padding-left:13px;
   margin-top: 1.5em;
   .recipients-form-sections {
     margin-top: 2.5em;
@@ -1602,7 +1977,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     color: #999999;
   }
   form {
-    margin-left: 2.2em;
+    margin-left: 1.35em;
   }
   .custumListBody {
     margin-left: 2em;
@@ -1635,7 +2010,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     i {
       padding-left: 3px;
       display: inline-block;
-      margin-right: 0.3em;
+      margin-right: 0.15em;
       font-size: 1.25em;
     }
   }
@@ -1679,6 +2054,9 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     float: right;
     padding-top: 2px;
     top: -7px;
+    > div.dropdown-menu {
+      padding-bottom: 10px !important;
+    }
   }
   .fieldCtn {
     padding: 0;
@@ -5889,14 +6267,14 @@ div#toolbar-actions.show-details-mobile-link {
 .tab-nav-detail {
   margin-top: 1.1em;
   md-tabs .md-tab.md-active {
-    color: #05b1ff !important;
+    color: #4e4e4e !important;
   }
   md-content md-tabs .md-tab {
     padding:0;
     width:115px;
     min-width:100px;
     font-weight: 500 !important;
-    color: #4C4C4C !important;
+    color: #9e9e9e !important;
     font-size: 1em !important;
     letter-spacing: 0.01em !important;
   }
@@ -6145,6 +6523,7 @@ div#toolbar-actions.show-details-mobile-link {
     font-size:0.95em;
   }
 }
+
 .ng-table-pagination > li:first-child:before, .ng-table-pagination > li:last-child:before {
   font-family: 'Material-Design-Iconic-Font';
   font-size: 0.75em;
@@ -6175,6 +6554,7 @@ div#toolbar-actions.show-details-mobile-link {
 .actions > li.activeActionButton  > a > i {
   color:$primaryClr !important;
 }
+
 .center {
   text-align: center !important;
 }
@@ -6672,8 +7052,8 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   }
   md-tabs.md-default-theme md-ink-bar,
   md-tabs md-ink-bar {
-    color: rgb(5, 177, 255);
-    background: rgb(5, 177, 255);
+    color: rgb(5, 177, 255) !important;
+    background: rgb(5, 177, 255) !important;
   }
   md-pagination-wrapper {
     width: 100% !important;
@@ -6687,7 +7067,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     }
     .md-tab {
       font-weight: 500 !important;
-      color: #4C4C4C !important;
+      color: #989898 !important;
       font-size: 1em !important;
       letter-spacing: 0.01em !important;
     }
@@ -6875,7 +7255,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     color: #999999;
   }
   form {
-    margin-left: 2.2em;
+    margin-left: 1.35em;
   }
   .custumListBody {
     margin-left: 2em;
@@ -6897,6 +7277,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
       margin-right: 0.4em;
       font-weight: bold;
       color: #FFFFFF;
+      top: 4px;
     }
   }
   h2.headerSubCtn {
@@ -6906,10 +7287,13 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     margin-top: 0;
     margin-bottom: 1.7em;
     i {
-      padding-left: 3px;
+      padding-left: 0;
       display: inline-block;
-      margin-right: 0.3em;
-      font-size: 1.25em;
+      margin-right: 0;
+      font-size: 1.15em;
+    }
+    i span.groups-user-group {
+      font-size: 0.85em;
     }
   }
   .advancedSharingSettings legend {

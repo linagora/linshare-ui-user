@@ -2,6 +2,7 @@
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, Workgroups, $translate) {
     $translatePartialLoader.addPart('filesList');
+    $translatePartialLoader.addPart('sharedspace');
     $scope.currentSelectedDocument = {};
     $scope.workgroupsData = Workgroups;
     var swalNewWorkGroup;
@@ -116,6 +117,30 @@ angular.module('linshareUiUserApp')
       angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
         angular.element(currTarget).addClass('selectedSorting');
       });
+    };
+
+    $scope.loadSidebarContent = function(content) {
+      $scope.sidebarRightDataType = content;
+    };
+
+    $scope.onAddMember = function() {
+      $scope.loadSidebarContent('add-member');
+      angular.element('#focusInputShare').focus();
+    };
+    $scope.setDropdownSelected = function ($event){
+      var currTarget = $event.currentTarget;
+      angular.element(currTarget).closest('ul').find('.active-check').removeClass('active-check');
+      $timeout(function () {
+        angular.element(currTarget).addClass('active-check');
+      }, 200);
+    };
+    $scope.sortSearchMember = function ($event) {
+      $scope.toggleSelectedSortMembers = !$scope.toggleSelectedSortMembers;
+      var currTarget = $event.currentTarget;
+      angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
+      $timeout(function () {
+        angular.element(currTarget).addClass('selectedSortingMembers');
+      }, 200);
     };
   })
 

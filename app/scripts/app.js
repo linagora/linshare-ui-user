@@ -34,5 +34,6 @@ angular
     'pascalprecht.translate',
     'materialAdmin',
     'ngMaterial',
-    'ui.bootstrap.contextMenu'
-  ]);
+    'ui.bootstrap.contextMenu',
+    'localytics.directives'
+ ]);

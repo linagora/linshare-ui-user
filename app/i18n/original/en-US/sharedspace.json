@@ -1,0 +1,29 @@
+{
+  "MEMBER_TAB" : {
+    "ADD_MEMBER": "Add team members",
+    "NUM_MEMBER": "Existing members",
+    "TITLE": "Members",
+    "ADD": "Add",
+    "UPDATE": "Update",
+    "EDIT_RIGHTS": "Edit user rights",
+    "REMOVE_TEAM_MEMBER": "Remove team member",
+    "ACTIVATED": "Activated",
+    "NOTIFICATION_ACTIVATED": "notification activated",
+    "ADMIN": "Admin",
+    "WRITE": "Write",
+    "READ": "Read",
+    "ADMIN_RIGHTS": "Admin rights",
+    "WRITE_RIGHTS": "Write rights",
+    "READ_RIGHTS": "Read rights",
+    "MULTI_SELECT": "multi-select",
+    "JOINING_DATE": "Joining date",
+    "USER_NAME": "User name",
+    "USER_RIGHTS": "User rights",
+    "SORT_BY": "Sort by",
+    "FILTER_BY": "Filter by"
+  },
+  "INFORMATION_TAB" : {
+    "TITLE": "DETAILS"
+  }
+}
+
