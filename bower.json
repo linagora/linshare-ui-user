@@ -28,7 +28,7 @@
     "material-design-iconic-font": "~2.2.0",
     "angular-loading-bar": "~0.8.0",
     "oclazyload": "~1.0.9",
-    "chosen": "~1.4.2",
+    "chosen": "~1.5.1",
     "waves": "~0.7.5",
     "remarkable-bootstrap-growl": "2.0.1",
     "jquery-nicescroll": "3.6.0",
@@ -45,7 +45,7 @@
     "angular-material": "~1.0.5",
     "angular-bootstrap-contextmenu": "0.9.6",
     "flag-icon-css": "~2.3.1",
-    "angular-chosen-localytics": "1.4.0"
+    "angular-chosen-localytics": "~1.4.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"
