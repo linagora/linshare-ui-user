@@ -22,9 +22,15 @@
     "SORT_BY": "Trier par",
     "FILTER_BY": "Filtrer par"
   },
-    "INFORMATION_TAB" : {
-      "TITLE": "DETAILS"
-    }
+  "INFORMATION_TAB" : {
+    "TITLE": "DETAILS",
+    "UPTADED_THE": "Modifié le ",
+    "META_DATA": "Méta données",
+    "INSERT_DESCRIPTION": "Saisissez une description",
+    "CREATED_THE": "Créé le",
+    "VERSION_HISTORIQUE": "Historique",
+    "VERSIONS": "Mise à jours"
+  }
 }
 
 

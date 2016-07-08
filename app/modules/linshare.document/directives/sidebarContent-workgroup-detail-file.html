@@ -1,0 +1,65 @@
+  <div class="header-sidebar">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
+    <h2 class="header-more-options setEllipsis"> {{currentSelectedDocument.current.name}}</h2>
+    <span class="hidden-xs">
+      <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
+    </span>
+  </div>
+
+  <div id="profile-main" class="detail-workgroup">
+    <div class="p-relative m-b-20 img-preview-ctn">
+      <p ng-show="currentSelectedDocument.current.hasThumbnail === true" href="">
+        <img class="img-responsive"
+             ng-src="data:image/png;base64,{{currentSelectedDocument.current.thumbnail}}" alt=""/>
+      </p>
+      <div class="np-preview-ctn">
+        <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
+        <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
+      </div>
+    </div>
+    <div class="description-ctn advancedSharingSettings">
+      <div contenteditable="true" class="comment"
+           ng-focus="slideTextarea($event)"
+           ng-blur="slideUpTextarea($event)"
+           ng-keyup="setTextInput($event);"></div>
+      <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+      <div class="edit-description">
+        <i class="zmdi zmdi-edit"></i>
+      </div>
+    </div>
+    <div class="content-detail-area">
+      <div class="flex-ctn detail-info-ctn">
+        <div class="itemL">
+          <span class="first-letter">L</span>
+        </div>
+        <div class="itemMid">
+          <div class="name">Amy Wolsh</div>
+          <div class="info-item-member">
+            <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} : 10/12/2017</span>
+          </div>
+        </div>
+        <div class="itemR actions">
+          <span>20Mb</span>
+          <span class="seperator-inline">|</span>
+          <span>PDF</span>
+        </div>
+      </div>
+
+      <div class="meta-data-ctn">
+        <h2 class="subheader">
+          <i class="fa fa-file-text" aria-hidden="true"></i>
+          {{'INFORMATION_TAB.META_DATA' | translate}}
+        </h2>
+        <div class="meta-data-content">
+          <div>
+            <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
+            <p>10/12/2017</p>
+          </div>
+          <div>
+            <p>{{'INFORMATION_TAB.VERSION_HISTORIQUE' | translate}}:</p>
+            <p>4 {{'INFORMATION_TAB.VERSIONS' | translate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
