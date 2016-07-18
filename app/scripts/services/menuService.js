@@ -33,9 +33,9 @@ angular.module('linshareUiUserApp')
         ]
       };
 
-      var groups = {
+      var sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
-        link: 'documents.sharedspace',
+        link: 'sharedspace.all',
         icon: 'zmdi zmdi-accounts-alt',
         color: '#05B1FF',
         disabled: false
@@ -103,7 +103,7 @@ angular.module('linshareUiUserApp')
         ]
       };
 
-      var tabs = [home, files, groups, administrations, uploads, others];
+      var tabs = [home, files, sharedSpace, administrations, uploads, others];
 
       // Public API here
       return {

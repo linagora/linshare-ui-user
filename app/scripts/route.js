@@ -106,21 +106,6 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.document/views/upload_template.html'
       })
 
-      .state('documents.sharedspace', {
-        url:'/sharedspace',
-        templateUrl: 'views/sharedspace/workgroups.html',
-        controller: 'SharedSpaceController',
-        resolve: {
-          Workgroups: function(ThreadService) {
-            return ThreadService.getAll();
-          }
-        }
-      })
-      .state('documents.sharedspace.files', {
-        url:'/files',
-        templateUrl: 'views/sharedspace/list-files.html',
-        controller: 'SharedSpaceListController'
-      })
       .state('documents.profile', {
         url: '/profile',
         templateUrl: 'views/common/user-profile.html',
@@ -144,15 +129,61 @@ angular.module('linshareUiUserApp')
         controller: 'LinshareGuestController'
       })
 
+      //------------------------------
+      // SHARESPACE - WORKGROUP
+      //------------------------------
+
+      .state('sharedspace', {
+        parent: 'common',
+        //controller: 'DocumentsController',
+        url: '/sharedspace',
+        template:'<div ui-view></div>'
+      })
+
+      .state('sharedspace.all', {
+        url:'/',
+        templateUrl: 'modules/linshare.sharedSpace/views/workgroups.html',
+        controller: 'SharedSpaceController',
+        resolve: {
+          workgroups: function(WorkGroupRestService) {
+            return WorkGroupRestService.getAllWorkGroups();
+          }
+        }
+      })
+
+
+      .state('sharedspace.workgroups', {
+        url:'/workgroups',
+        templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
+        //controller: 'SharedSpaceListController',
+        resolve: {
+          workGroupList: function(WorkGroupRestService) {
+            return WorkGroupRestService.getAllWorkGroups();
+          }
+        }
+      })
+
+      .state('sharedspace.workgroups.target', {
+        url:'/:uuid/:workgroupName',
+        templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
+        controller: 'SharedSpaceListController',
+        resolve: {
+          currentWorkGroup: function(WorkGroupRestService, $stateParams) {
+            return WorkGroupRestService.getWorkGroupContents($stateParams.uuid);
+            }
+          }
+      })
+
+      //------------------------------
+      // ADMINISTRATION
+      //------------------------------
+
       .state('administration', {
         parent: 'common',
         url: '/administration',
         template:'<div ui-view></div>'
       })
 
-      //------------------------------
-      // ADMINISTRATION
-      //------------------------------
 
       .state('administration.lists', {
         url:'/lists',

@@ -212,7 +212,7 @@
             </div>
             <div id="toolbar-actions" class="hidden-xs">
               <span>
-                  <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                  <a ng-href="{{linshareBaseUrl}}/threads/c4570914-d004-4506-8abf-04527f342e88/entries/{{documentFile.uuid}}/download"
                      event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                     <i class="zmdi zmdi-download"></i>
                     <span>{{'ACTION.DOWNLOAD' | translate}}</span>
@@ -237,7 +237,8 @@
                   <i class="zmdi zmdi-more-vert"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"uib-dropdown-menu="">
+                <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
+                    uib-dropdown-menu="">
                   <li class="hidden-xs" data-ng-show="selectedDocuments.length == 1">
                     <a href="" event-propagation-stop>
                       <i class="zmdi zmdi-info-outline "></i>
@@ -346,11 +347,7 @@
                       class="set-content-left thumb-type-item thumb-groups-preview-ls"
                       header-class="'col-2'">
                     <a class="" ng-click="isCheckedThumb = !isCheckedThumb">
-                      <i>
-                        <span class="groups-shared-folder">
-                          <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"></span>
-                        </span>
-                      </i>
+                        <i class="fa ls-1p5x" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
                       <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': isCheckedThumb }">
                         <i class="fa fa-square-o" ng-if="!isCheckedThumb"></i>
                         <i class="fa fa-check-square-o" ng-if="isCheckedThumb"></i>
@@ -388,7 +385,7 @@
                             </a>
                           </li>
                           <li class="hidden-xs">
-                            <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                            <a ng-href="{{linshareBaseUrl}}/threads/c4570914-d004-4506-8abf-04527f342e88/entries/{{documentFile.uuid}}/download"
                                event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                               <i class="zmdi zmdi-download"></i>
                             </a>
@@ -426,7 +423,7 @@
                               </li>
                               <li class="divider"></li>
                               <li class="hidden-xs" ng-show="linshareModeProduction == false">
-                                <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                                <a ng-href="{{linshareBaseUrl}}/threads/c4570914-d004-4506-8abf-04527f342e88/entries/{{documentFile.uuid}}/download"
                                    event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
                                   {{'ACTION.DOWNLOAD' | translate}}
@@ -502,7 +499,7 @@
                   <td class="hidden-xs"
                       ng-if="mactrl.sidebarToggle.right === false"
                       data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"
-                      header-class="'col-5'">>
+                      header-class="'col-5'">
                     {{documentFile.size | readableSize: false}}
                   </td>
                 </tr>

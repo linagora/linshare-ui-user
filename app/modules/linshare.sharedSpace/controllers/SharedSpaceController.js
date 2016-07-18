@@ -1,10 +1,11 @@
 'use strict';
 angular.module('linshareUiUserApp')
-  .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, Workgroups, $translate) {
+  .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, workgroups, $translate, $state) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
     $scope.currentSelectedDocument = {};
-    $scope.workgroupsData = Workgroups;
+    $scope.workgroupsData = workgroups;
+    $scope.selectedDocuments = [];
     var swalNewWorkGroup;
     $translate(['ACTION.NEW_WORKGROUP'])
       .then(function (translations) {
@@ -141,6 +142,10 @@ angular.module('linshareUiUserApp')
       $timeout(function () {
         angular.element(currTarget).addClass('selectedSortingMembers');
       }, 200);
+    };
+
+    $scope.gotoSharedSpaceTarget = function(uuid, name) {
+      $state.go('sharedspace.workgroups.target', {uuid: uuid, workgroupName: name});
     };
   })
 

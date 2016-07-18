@@ -1,5 +1,5 @@
 <div ui-view>
-  <div class="file-listing-ctn" ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
+  <div class="file-listing-ctn" ng-class="{'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
     <div class="container files">
       <!--  ACTIONS ON DOCUMENTS  -->
       <!-- contextmenu -->
@@ -285,7 +285,8 @@
                 <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
                     ng-click="backToSidebarContentDetails()"
                     data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
-                    context-menu="moreOptionsContexualMenu">
+                    context-menu="moreOptionsContexualMenu"
+                    ng-dblclick="gotoSharedSpaceTarget(documentFile.uuid, documentFile.name)">
                   <td data-header="'favoritsheader.html'"
                       class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
                       data-title=""
