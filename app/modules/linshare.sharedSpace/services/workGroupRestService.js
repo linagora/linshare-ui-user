@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .factory('WorkGroupRestService', function(Restangular, $log) {
+  .factory('WorkGroupRestService', function(Restangular, $log, $stateParams) {
 
     return {
 
       //WORKGROUP
+      workGroupUuid: $stateParams.uuid,
 
       getAllWorkGroups: function() {
         $log.info('WorkGroupRestService - Get All WorkGroups');
@@ -45,9 +46,9 @@ angular.module('linshareUiUserApp')
       getWorkGroupThumbnail: function(workGroupUuid, entryUuid) {
         return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customGET('thumbnail');
       },
-      deleteWorkGroupEntry: function(workGroupUuid, entryUuid) {
-        $log.info('WorkGroupRestService -  Delete a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', workGroupUuid);
-        return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).remove();
+      deleteFile: function(entryUuid) {
+        $log.info('WorkGroupRestService -  Delete a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', this.workGroupUuid);
+        return Restangular.one('threads', this.workGroupUuid).one('entries', entryUuid).remove();
       }
     };
   });

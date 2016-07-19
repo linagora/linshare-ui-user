@@ -54,38 +54,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
   })
 
-  .factory('DocumentUtilsService', function() {
-
-    function downloadFileFromResponse(fileStream, fileName, fileType) {
-      var blob = new Blob([fileStream], {type: fileType});
-      var windowUrl = window.URL || window.webkitURL || window.mozURL || window.msURL;
-      var urlObject = windowUrl.createObjectURL(blob);
-
-      // create tag element a to simulate a download by click
-      var a = document.createElement('a');
-      a.setAttribute('href', urlObject);
-      a.setAttribute('download', fileName);
-
-      // create a click event and dispatch it on the tag element
-      var event = new MouseEvent('click');
-      a.dispatchEvent(event);
-    }
-
-
-    function removeElementFromCollection(collection, element) {
-      var index = collection.indexOf(element);
-      if(index > -1) {
-        collection.splice(index, 1);
-      }
-    }
-
-
-    return {
-      downloadFileFromResponse: downloadFileFromResponse,
-      removeElementFromCollection: removeElementFromCollection
-    };
-  })
-
   .controller('DocumentsController', ['$scope', '$translatePartialLoader',
     function($scope, $translatePartialLoader) {
 
@@ -115,7 +83,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
  * The controller to manage documents
  */
   .controller('LinshareDocumentController', function($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate,
-                                                     $window, $log, documentsList, growlService, $timeout, DocumentUtilsService) {
+                                                     $window, $log, documentsList, growlService, $timeout, documentUtilsService) {
     $scope.mactrl.sidebarToggle.right = false;
     $scope.selectedDocuments = [];
     $scope.flagsOnSelectedPages = {};
@@ -169,53 +137,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $scope.selectedDocuments = [];
     };
 
-    var swalTitle, swalText, swalConfirm, swalCancel;
-    $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
-      'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'])
-      .then(function(translations) {
-        swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
-        swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
-        swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
-        swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
-      });
-
-    // DELETE ONE OR MANY DOCUMENTS
-    $scope.deleteDocuments = function(document) {
-      if(!angular.isArray(document)) {
-        document = [document];
-      }
-      swal({
-          title: swalTitle,
-          text: swalText,
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#DD6B55',
-          confirmButtonText: swalConfirm,
-          cancelButtonText: swalCancel,
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if(isConfirm) {
-            angular.forEach(document, function(doc) {
-              $log.debug('value to delete', doc);
-              LinshareDocumentRestService.deleteFile(doc.uuid).then(function() {
-                growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-                DocumentUtilsService.removeElementFromCollection($scope.documentsList, doc);
-                DocumentUtilsService.removeElementFromCollection($scope.selectedDocuments, doc);
-                $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
-                $scope.tableParams.reload();
-              });
-            });
-          }
-        }
-      );
-    };
-
     $scope.downloadCurrentFile = function(currentFile) {
       LinshareDocumentRestService.downloadFile(currentFile.uuid)
         .then(function(fileStream) {
-          DocumentUtilsService.downloadFileFromResponse(fileStream, currentFile.name, currentFile.type);
+          documentUtilsService.downloadFileFromResponse(fileStream, currentFile.name, currentFile.type);
         });
     };
 
@@ -303,7 +228,8 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         }
 
     });
-
+    $scope.deleteDocuments = documentUtilsService.deleteDocuments
+      .bind(this, LinshareDocumentRestService, $scope.documentsList, $scope.selectedDocuments, $scope.tableParams);
     $scope.$on('linshare-upload-complete', function() {
       $scope.reloadDocuments();
     });

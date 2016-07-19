@@ -29,6 +29,10 @@ angular.module('linshare.document')
       }
     };
 
+    var toggleSelection = function() {
+
+    };
+
     return {
       restrict: 'A',
       scope: false,

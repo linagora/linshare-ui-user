@@ -166,7 +166,7 @@ angular.module('linshareUiUserApp')
       .state('sharedspace.workgroups.target', {
         url:'/:uuid/:workgroupName',
         templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
-        controller: 'SharedSpaceListController',
+        controller: 'SharedSpaceListController as vm',
         resolve: {
           currentWorkGroup: function(WorkGroupRestService, $stateParams) {
             return WorkGroupRestService.getWorkGroupContents($stateParams.uuid);
