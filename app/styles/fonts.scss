@@ -281,11 +281,11 @@
 
 @font-face {
   font-family: 'groups';
-  src:    url('fonts/shared-folder/groups.eot?54czre');
-  src:    url('fonts/shared-folder/groups.eot?54czre#iefix') format('embedded-opentype'),
-  url('fonts/shared-folder/groups.ttf?54czre') format('truetype'),
-  url('fonts/shared-folder/groups.woff?54czre') format('woff'),
-  url('fonts/shared-folder/groups.svg?54czre#groups   ') format('svg');
+  src:    url('fonts/shared-folder/groups.eot?5cofn');
+  src:    url('fonts/shared-folder/groups.eot?5cofn#iefix') format('embedded-opentype'),
+  url('fonts/shared-folder/groups.ttf?5cofn') format('truetype'),
+  url('fonts/shared-folder/groups.woff?5cofn') format('woff'),
+  url('fonts/shared-folder/groups.svg?5cofn#groups   ') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -304,6 +304,20 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+.groups-home-share:before {
+  content: "\e910";
+}
+.groups-home-idd:before {
+  content: "\e911";
+}
+.groups-home-my-files:before {
+  content: "\e912";
+}
+.groups-home-workgroup:before {
+  content: "\e90f";
 }
 
 .groups-user-group:before {

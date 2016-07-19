@@ -30,7 +30,7 @@
   "BOUTON_ADD_FILE_TITLE": "Ajouter",
   "MENU_TITLE" : {
     "HOME" : "Accueil",
-    "FILES" : "Fichiers",
+    "FILES" : "Espace personnel",
     "MY_FILES" : "Mes fichiers",
     "RECEIVED_SHARES" : "Mes partages reçus",
     "SHARES" : "Mes fichiers partagés",
@@ -184,6 +184,8 @@
     "ADD_FILES_DROPDOWN": {
       "UPLOAD_FILE": "Déposer un fichier",
       "UPLOAD_AND_SHARE": "Déposer et partager ",
+      "UPLOAD_IN_MY_FILES": "Dans mes fichiers",
+      "UPLOAD_IN_WORKGROUP": "Dans un groupe de travail",
       "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail"
     },
   "TRANSFERS_DROPDOWN": {

@@ -12,11 +12,12 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
       headers['WWW-No-Authenticate'] = 'linshare';
     });
   })
-  .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService',
-    function (Restangular, $q, $log, authService) {
+  .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService', '$timeout', 'growlService', '$translate',
+    function (Restangular, $q, $log, authService, $timeout, growlService, $translate) {
       var deferred = $q.defer();
 
       var baseAuthentication = Restangular.all('authentication');
+
       /*
        Check if the user is authorized
        */
@@ -40,6 +41,16 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
             $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
             authService.loginConfirmed(user);
             deferred.resolve(user);
+            var swalWelcome;
+            $translate(['WELCOME_USER'])
+              .then(function(translations) {
+                swalWelcome = translations['WELCOME_USER'];
+              });
+            $timeout(function() {
+              var welcomeUserName = swalWelcome + user.firstName;
+              growlService.notifyTopRight(welcomeUserName, 'inverse');
+            }, 350);
+
           }, function (error) {
             $log.error('Authentication failed', error.status);
             deferred.reject(error);

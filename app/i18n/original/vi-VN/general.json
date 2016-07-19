@@ -29,7 +29,7 @@
   "BOUTON_ADD_FILE_TITLE": "Bổ sung",
   "MENU_TITLE" : {
     "HOME" : "Trang chủ",
-    "FILES" : "Tập tin",
+    "TBT__FILES" : "",
     "MY_FILES" : "Tập tin của tôi",
     "RECEIVED_SHARES" : "Tập tin chia sẻ cho tôi",
     "SHARES" : "Tập tin do tôi chia sẻ",
@@ -151,6 +151,8 @@
   "ADD_FILES_DROPDOWN": {
     "UPLOAD_FILE": "Tải tập tin lên",
     "UPLOAD_AND_SHARE": "Tải lên và chia sẻ",
+    "TBT__UPLOAD_IN_MY_FILES": "",
+    "TBT__UPLOAD_IN_WORKGROUP": "",
     "UPLOAD_IN_GROUP": "Tải tập tin vào nhóm"
   },
   "TRANSFERS_DROPDOWN": {

@@ -1,5 +1,14 @@
 {
   "UPLOAD": "Déposer",
-  "UPLOAD_SHARE": "Déposer et partager",
-  "UPLOAD_GROUP": "Déposer dans un groupe"
+  "UPLOAD_SHARE": "Déposer & partager",
+  "MY_FILES_SPACE": "Stocker vos fichiers",
+  "UPLOAD_GROUP": "Groupe de travail",
+  "UPLOAD_REQUEST": "Invitation de dépot",
+  "UPLOAD_SHARE_MSG": "Partagez des fichiers depuis votre espace personnel.",
+  "UPLOAD_GROUP_MSG": "Collaborez avec vos partenaires en déposant des fichiers dans l'espace commun.",
+  "UPLOAD_REQUEST_MSG": "Invitez des collaborateurs externes à déposer des fichiers dans votre espace.",
+  "MY_FILES_SPACE_MSG": "Visualisez vos fichiers dans votre espace personnel.",
+  "SET_AS_HOMEPAGE": "Définir comme page d'accueil",
+  "NO_NOTIFICATION": "Vous n'avez actuellement aucune notification.",
+  "WELCOME": "Bienvenue sur Linshare"
 }

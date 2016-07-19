@@ -154,15 +154,17 @@ angular.module('linshareUiUserApp')
     $rootScope.sidebarRightWidth = 350;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.mobileWidthBreakpoint=768;
+   
     localStorage.setItem('ma-layout-status', 0);
-
-    if($window.localStorage.getItem('sidebarToggleLeft') === 'true') {
-      $scope.mactrl.sidebarToggle.left = true;
-    }
     $scope.$watch('mactrl.sidebarToggle.left', function() {
       $window.localStorage.setItem('sidebarToggleLeft', $scope.mactrl.sidebarToggle.left);
     });
     $scope.sizeHeight = $window.innerHeight - 50;
+    $scope.$watch(function(){
+      return $window.innerHeight;
+    }, function() {
+      $scope.sizeHeight = $window.innerHeight - 50;
+    });
 
     $rootScope.$on('$stateChangeStart',
     function(event, toState) {

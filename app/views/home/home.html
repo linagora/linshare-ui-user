@@ -1,33 +1,232 @@
 <div class="container" id="home" style="height: {{sizeHeight}}px">
+  <div class="upper-container">
+    <img id="bg-img" src="images/login-bg.jpg" alt="" style="display:none">
+    <img id="bg-img" src="images/bgb6.jpg" alt=""/>
+    <img id="fg-img" src="images/common/logo-white-500.png" alt="Logo LinShare" class="visible-xs"/>
+    <div class="box-ctn hidden-xs">
+      <div class="box-3" ui-sref="documents.files">
+        <div class="card-img upload-share">
+          <i class="groups-home-my-files"></i>
+        </div>
+        <div class="box-content">
+          <div class="info-box" >
+            <h2 flow-btn class="box-title"><a >{{"MY_FILES_SPACE" | translate}}</a></h2>
+            <p class="box-txt">{{"MY_FILES_SPACE_MSG" | translate}}</p>
+          </div>
+          <div class="set-homepage-ctn" event-propagation-stop ng-init="isChecked = false;"
+               ng-click="isChecked = !isChecked">
+            <a href="" ng-show="isChecked == false">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                {{"WIP" | translate}}
+              </md-tooltip>
+            </a>
+            <a href="" ng-show="isChecked">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-check-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                {{"WIP" | translate}}
+              </md-tooltip>
+            </a>
 
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-header ch-alt">
-        <h2 flow-btn><a href="">{{"UPLOAD" | translate}}</a>
-          <!--<small>Déposer un fichier dans votre espace Linshare, vous serez redirigé dans vos fichiers</small>-->
-        </h2>
+          </div>
+        </div>
       </div>
+
+      <div class="box-3" flow-btn >
+        <div class="card-img upload-share"  ui-sref="documents.upload">
+          <i class="groups-home-share"></i>
+        </div>
+        <div class="box-content"  ui-sref="documents.upload">
+          <div class="info-box" >
+            <h2 class="box-title" >
+              <a >{{"UPLOAD_SHARE" | translate}}</a></h2>
+            <p class="box-txt">{{"UPLOAD_SHARE_MSG" | translate}}</p>
+          </div>
+          <div class="set-homepage-ctn" event-propagation-stop ng-init="isChecked = false;"
+               ng-click="isChecked = !isChecked">
+            <a href="" ng-show="isChecked == false">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                {{"WIP" | translate}}
+              </md-tooltip>
+            </a>
+            <a href="" ng-show="isChecked">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-check-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                {{"WIP" | translate}}
+              </md-tooltip>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-3" ui-sref="documents.sharedspace">
+        <div class="card-img upload-workgroup">
+          <i class="groups-home-workgroup"></i>
+        </div>
+        <div class="box-content">
+          <div class="info-box">
+            <h2 class="box-title"><a>{{"UPLOAD_GROUP" | translate}}</a></h2>
+            <p class="box-txt">{{"UPLOAD_GROUP_MSG" | translate}}</p>
+          </div>
+          <div class="set-homepage-ctn"  event-propagation-stop ng-init="isChecked = false;"
+               ng-click="isChecked = !isChecked">
+            <a href="" ng-show="isChecked == false">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                {{"WIP" | translate}}
+              </md-tooltip>
+            </a>
+            <a href="" ng-show="isChecked">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-check-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                {{"WIP" | translate}}
+              </md-tooltip>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="box-3">
+        <div class="card-img upload-request">
+          <i class="groups-home-idd"></i>
+        </div>
+        <div class="box-content">
+          <div class="info-box">
+            <h2 flow-btn class="box-title"><a>{{"UPLOAD_REQUEST" | translate}}</a></h2>
+            <p class="box-txt">{{"UPLOAD_REQUEST_MSG" | translate}}</p>
+          </div>
+          <div class="set-homepage-ctn" event-propagation-stop ng-init="isChecked = false;"
+               ng-click="isChecked = !isChecked">
+            <a href="" ng-show="isChecked == false">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-square-o"></i>
+            </a>
+            <a href="" ng-show="isChecked">
+              {{"SET_AS_HOMEPAGE" | translate}}
+              <i class="fa fa fa-check-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                {{"WIP" | translate}}
+              </md-tooltip>
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-header ch-alt">
-        <h2 flow-btn><a href="" ui-sref="documents.upload">{{"UPLOAD_SHARE" | translate}}</a>
-          <!--<small>Déposer et partager un fichier, vous serez redirigé vers l'interface d'upload</small>-->
-        </h2>
+  <div class="bottom-container">
+    <div>
+      <h2>{{"WELCOME" | translate}}</h2>
+      <div class="content-section custom-home-page-txt">
+        <p>Votre solution de partage de fichiers sécurisé en open source</p>
       </div>
     </div>
-  </div>
+    <h2>Notifications</h2>
+    <div class="content-section">
+      <p class="empty-notifications">{{"NO_NOTIFICATION" | translate}}</p>
+      <section class="notification-ctn">
+        <div class="flex-ctn notification-item">
+          <div class="itemL">
+            <span class="first-letter">W</span>
+          </div>
+          <div class="itemMid">
+            <div class="name">Amy Wolsh</div>
+            <div class="info-item-member">
+              <span class="ng-binding">Téléchargement : rapport-annuel.pdf</span>
+            </div>
+          </div>
+          <div class="itemR actions">
+            <span>17h20</span>
+          </div>
+        </div>
 
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-header ch-alt">
-        <h2>{{"UPLOAD_GROUP" | translate}}
-          <!--<small>A venir</small>-->
-        </h2>
-      </div>
+        <div class="flex-ctn notification-item">
+          <div class="itemL">
+            <span class="first-letter">W</span>
+          </div>
+          <div class="itemMid">
+            <div class="name">Amy Wolsh</div>
+            <div class="info-item-member">
+              <span class="ng-binding">Téléchargement : rapport-annuel.pdf</span>
+            </div>
+          </div>
+          <div class="itemR actions">
+            <span>17h20</span>
+          </div>
+        </div>
+
+        <div class="flex-ctn notification-item">
+          <div class="itemL">
+            <span class="first-letter">W</span>
+          </div>
+          <div class="itemMid">
+            <div class="name">Amy Wolsh</div>
+            <div class="info-item-member">
+              <span class="ng-binding">Téléchargement : rapport-annuel.pdf</span>
+            </div>
+          </div>
+          <div class="itemR actions">
+            <span>17h20</span>
+          </div>
+        </div>
+
+        <div class="flex-ctn notification-item">
+          <div class="itemL">
+            <span class="first-letter">W</span>
+          </div>
+          <div class="itemMid">
+            <div class="name">Amy Wolsh</div>
+            <div class="info-item-member">
+              <span class="ng-binding">Téléchargement : rapport-annuel.pdf</span>
+            </div>
+          </div>
+          <div class="itemR actions">
+            <span>17h20</span>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-
+</div>
+<div id="fabMyFiles">
+  <md-fab-toolbar md-open="fab.isOpen" count="fab.count"
+                  md-direction="{{fab.selectedDirection}}" class="visible-xs">
+    <md-fab-trigger class="align-with-text">
+      <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;" id="primary-fab-action">
+        <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-toolbar style="padding:0">
+      <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate }}</p>
+      <md-fab-actions class="md-toolbar-tools">
+        <md-button aria-label="label" class="md-icon-button" flow-btn>
+          <a href="#/files/upload" ui-sref="documents.upload">
+            <i class="zmdi zmdi-share"></i>
+            <span>{{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate}}</span>
+          </a>
+        </md-button>
+        <md-button aria-label="comment" class="md-icon-button" flow-btn>
+          <a href="#/files/list" ui-sref="documents.files">
+            <i class="zmdi zmdi-file-plus"></i>
+            <span>{{'ADD_FILES_DROPDOWN.UPLOAD_IN_MY_FILES' | translate}}</span>
+          </a>
+        </md-button>
+        <md-button aria-label="comment" class="md-icon-button" flow-btn>
+          <a href="#/files/list" ui-sref="documents.files" class="disabled-work-in-progress">
+            <i class="zmdi zmdi-accounts-alt disabled-work-in-progress"></i>
+            <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_WORKGROUP' | translate }}</span>
+          </a>
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
 </div>

@@ -1,5 +1,14 @@
 {
   "UPLOAD": "Tải lên",
   "UPLOAD_SHARE": "Tải lên và chia sẻ",
-  "UPLOAD_GROUP": "Tải vào nhóm"
+  "UPLOAD_GROUP": "Tải vào nhóm",
+  "TBT__MY_FILES_SPACE": "",
+  "TBT__UPLOAD_REQUEST": "",
+  "TBT__UPLOAD_SHARE_MSG": "",
+  "TBT__UPLOAD_GROUP_MSG": "",
+  "TBT__UPLOAD_REQUEST_MSG": "",
+  "TBT__MY_FILES_SPACE_MSG": "",
+  "TBT__SET_AS_HOMEPAGE": "",
+  "TBT__NO_NOTIFICATION": "",
+  "TBT__WELCOME": ""
 }

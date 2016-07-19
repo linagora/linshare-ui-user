@@ -1,5 +1,14 @@
 {
   "UPLOAD": "Upload",
-  "UPLOAD_SHARE": "Upload and share",
-  "UPLOAD_GROUP": "Upload inside a group"
+  "UPLOAD_SHARE": "Upload & share",
+  "UPLOAD_GROUP": "Upload to a group",
+  "MY_FILES_SPACE": "Host your files",
+  "UPLOAD_REQUEST": "Upload request",
+  "UPLOAD_SHARE_MSG": "Share your files from your personal space.",
+  "UPLOAD_GROUP_MSG": "Upload some files within the sharespace to collaborate with your team.",
+  "UPLOAD_REQUEST_MSG": "Invite external co-workers to share their files within your personal space.",
+  "MY_FILES_SPACE_MSG": "View  all your hosted files from your personal space.",
+  "SET_AS_HOMEPAGE": "Set as default home page",
+  "NO_NOTIFICATION": "You currently have no notifications.",
+  "WELCOME": "Welcome to Linshare"
 }
