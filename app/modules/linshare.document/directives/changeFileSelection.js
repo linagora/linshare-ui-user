@@ -4,7 +4,29 @@ angular.module('linshare.document')
 
   // DIRECTIVE TO TOGGLE DOCUMENT SELECTION
   .directive('lsOnDocumentSelect', function() {
-    var toggleDocumentSelection = function(scope) {
+
+
+    return {
+      restrict: 'A',
+      scope: false,
+      link: function(scope, element) {
+        element.bind('contextmenu', function() {
+          var isHighlighted = element.hasClass('highlightListElem');
+          if(!isHighlighted) {
+            toggleDocumentSelection(scope);
+          }
+        });
+        element.bind('click', function() {
+          if(scope.mactrl.sidebarToggle.right) {
+            element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
+            element.find('li')[0].className = 'activeActionButton';
+          }
+          toggleDocumentSelection(scope);
+        });
+      }
+    };
+
+    function toggleDocumentSelection(scope) {
       scope.currentSelectedDocument.current = scope.documentFile;
       scope.documentFile.isSelected = !scope.documentFile.isSelected;
       if(scope.documentFile.isSelected) {
@@ -27,15 +49,19 @@ angular.module('linshare.document')
           });
         }
       }
-    };
+    }
+  })
 
-    var toggleSelection = function() {
-
-    };
+  .directive('lsItemSelection', function() {
 
     return {
       restrict: 'A',
-      scope: false,
+      scope: {
+        selectedDocuments:'=',
+        currentSelectedDocument: '=',
+        documentFile: '=',
+        rightSidebarOpen: '='
+      },
       link: function(scope, element) {
         element.bind('contextmenu', function() {
           var isHighlighted = element.hasClass('highlightListElem');
@@ -44,7 +70,7 @@ angular.module('linshare.document')
           }
         });
         element.bind('click', function() {
-          if(scope.mactrl.sidebarToggle.right) {
+          if(scope.rightSidebarOpen) {
             element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
             element.find('li')[0].className = 'activeActionButton';
           }
@@ -52,6 +78,22 @@ angular.module('linshare.document')
         });
       }
     };
+
+    function toggleDocumentSelection(scope) {
+      scope.currentSelectedDocument.current = scope.documentFile;
+      var multipleSelection = false;
+      if(multipleSelection) {
+        // code goes here when using a multiple connexion
+      }
+      if(scope.rightSidebarOpen) {
+        if(scope.documentFile.shared > 0) {
+          scope.getItemDetails(scope.documentFile.uuid);
+        }
+        if(scope.documentFile.hasThumbnail === true) {
+          scope.getItemThumbnail(scope.documentFile.uuid);
+        }
+      }
+    }
   })
 
   // DIRECTIVE TO TOGGLE A CURRENT UPLOAD SELECTION

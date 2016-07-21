@@ -13,7 +13,7 @@
                 </i>
                 <p>{{ "WORKGROUPS_LIST.PROJECT" | translate }}</p>
               </a>
-              <a class="col-xs-6" ng-click="addRow();" href="javascript:void(0)" >
+              <a class="col-xs-6" ng-click="vm.addRow();" href="javascript:void(0)" >
                 <i class="groups-shared-folder">
                   <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
                 </i>
@@ -61,8 +61,8 @@
             </div>
             <div id="action-header">
               <div class="fg-line toolbar-actions-items" >
-                <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
-                  <a href="" href="javascript:void(0)">
+                <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="vm.toggleSearchState()">
+                  <a href="javascript:void(0)">
                     <i class="tm-icon zmdi zmdi-search" ng-class="{'activeLink': searchMobileDropdown }"></i>
                   </a>
                 </div>
@@ -84,46 +84,46 @@
                     <ul class="dropdown-menu pull-right dm-icon stop-propagate">
                       <li role="menuitem">
                         <a href="" class="ng-binding selectedSorting"
-                           ng-click="sortDropdownSetActive('modificationDate',$event)">
+                           ng-click="vm.sortDropdownSetActive('modificationDate',$event)">
                         <span class="caretArea">
-                        <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                        <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                        <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
                           {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding" ng-click="sortDropdownSetActive('creationDate', $event)">
+                        <a href="" class="ng-binding" ng-click="vm.sortDropdownSetActive('creationDate', $event)">
                         <span class="caretArea">
-                        <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                        <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                        <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
                           {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding" ng-click="sortDropdownSetActive('size', $event)">
+                        <a href="" class="ng-binding" ng-click="vm.sortDropdownSetActive('size', $event)">
                         <span class="caretArea">
-                        <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                        <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                        <i ng-show="!!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
                           {{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate }}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding" ng-click="sortDropdownSetActive('name', $event)">
+                        <a href="" class="ng-binding" ng-click="vm.sortDropdownSetActive('name', $event)">
                           <span class="caretArea">
-                            <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                            <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
                           {{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate }}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding" ng-click="sortDropdownSetActive('shared', $event)">
+                        <a href="" class="ng-binding" ng-click="vm.sortDropdownSetActive('shared', $event)">
                         <span class="caretArea">
-                        <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                        <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                        <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
                           {{'FILTER_COMPONENT.IS_SHARED' | translate }}
                         </a>
@@ -166,13 +166,13 @@
         </div>
         <div id="dropArea">
           <div id="top-search-wrap">
-            <i id="top-search-close" data-ng-click="toggleSearchState()">&times;</i>
+            <i id="top-search-close" data-ng-click="vm.toggleSearchState()">&times;</i>
             <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
                    placeholder="Nom de fichier" ng-change="updateParams()" ng-model="paramFilter['name']"
                    aria-invalid="false">
           </div>
           <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
-               data-ng-class="{'showMultiMenu': selectedDocuments.length > 0}">
+               data-ng-class="{'showMultiMenu': vm.selectedDocuments.length > 0}">
             <div class="toogleCkeckboxToolbar"
                  ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
               <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope" >
@@ -189,7 +189,7 @@
             <div class="displayNumSelectedItems" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
               <div class="pull-left" data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
                    ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()">
-                <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
+                <p><span>{{vm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
                 <div class="pull-left view-icons-ctn groups-view">
                   <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
                   <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
@@ -280,13 +280,18 @@
           <!-- DOCUMENTS LIST  -->
           <div class="card-body">
             <div class="table-responsive">
-              <table id="fileListTable" class="table table-vmiddle col-4-table" data-ng-table="tableParams"
+              <table id="fileListTable" class="table table-vmiddle col-4-table" data-ng-table="vm.tableParams"
                      show-filter="true" >
-                <tr data-ng-repeat="documentFile in $data" data-ls-on-document-select
+                <tr data-ng-repeat="documentFile in $data"
+                    ls-item-selection=""
+                    data-selected-documents="vm.selectedDocuments"
+                    data-document-file="documentFile"
+                    data-current-selected-Document="vm.currentSelectedDocument"
+                    data-sidebar-toggle="mactrl.sidebarToggle.right"
                     ng-click="backToSidebarContentDetails()"
                     data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
                     context-menu="moreOptionsContexualMenu"
-                    ng-dblclick="gotoSharedSpaceTarget(documentFile.uuid, documentFile.name)">
+                    ng-dblclick="vm.gotoSharedSpaceTarget(documentFile.uuid, documentFile.name)">
                   <td data-header="'favoritsheader.html'"
                       class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
                       data-title=""
@@ -298,15 +303,15 @@
                   </td>
                   <td data-header="'checkboxheader.html'" class="set-content-left thumb-type-item thumb-groups-preview-ls"
                       header-class="'col-2'">
-                    <a class="" ng-click="isCheckedThumb = !isCheckedThumb">
+                    <a class="" ng-click="vm.addSelectedDocument(documentFile)">
                       <i>
                         <span class="groups-shared-folder">
                           <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"></span>
                         </span>
                       </i>
-                      <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': isCheckedThumb }">
-                        <i class="fa fa-square-o" ng-if="!isCheckedThumb"></i>
-                        <i class="fa fa-check-square-o" ng-if="isCheckedThumb"></i>
+                      <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': documentFile.isSelected }">
+                        <i class="fa fa-square-o" ng-if="!documentFile.isSelected"></i>
+                        <i class="fa fa-check-square-o" ng-if="documentFile.isSelected"></i>
                       </div>
                     </a>
                   </td>
@@ -338,7 +343,7 @@
                               <i><span class="groups-user-member"></span></i>
                             </a>
                           </li>
-                          <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="set-col-6">
+                          <li ng-click="vm.showItemDetails(documentFile,$event)" event-propagation-stop class="set-col-6">
                             <a href=""
                                title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
                                class="set-col-12">
@@ -360,19 +365,19 @@
                             </a>
                             <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
                               <li class="hidden-xs">
-                                <a href="" ls-share-modal event-propagation-stop>
+                                <a href="" data-ng-click="vm.showItemDetails(documentFile,$event)">
                                   <i class="zmdi zmdi-info-outline "></i>
                                   {{'ACTION.INFORMATION' | translate}}
                                 </a>
                               </li>
                               <li ng-show="linshareModeProduction == false">
-                                <a href="" ls-share-modal event-propagation-stop>
+                                <a href="" event-propagation-stop>
                                   <i class="zmdi zmdi-star"></i>
                                   {{'ACTION.FAVORITES' | translate}}
                                 </a>
                               </li>
                               <li ng-show="linshareModeProduction == false">
-                                <a href="" ls-share-modal event-propagation-stop>
+                                <a href="" event-propagation-stop>
                                   <i class="fa fa-bell-slash-o"></i>
                                   {{'ACTION.SILENCE' | translate}}
                                 </a>
@@ -513,10 +518,10 @@
     </div>
   </div>
   <section class="row multi-select-mobile visible-xs"
-           data-ng-class="{'showMobileMultiMenu': selectedDocuments.length > 0}"
+           data-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
            ng-show="currentPage == 'group_list'">
     <div class="col-xs-2 ctn-mobile-select-count">
-      <span class="numberOfiles">{{selectedDocuments.length}}</span>
+      <span class="numberOfiles">{{vm.selectedDocuments.length}}</span>
       <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.ELEMENTS' | translate}}</span>
     </div>
     <div class="col-xs-8">
@@ -560,7 +565,7 @@
     </div>
     <div class="col-xs-1 pull-right" ng-click="resetSelectedDocuments()">
       <i class="zmdi zmdi zmdi-close"></i>
-    </div>
+    </div>side
   </section>
   <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
          data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">

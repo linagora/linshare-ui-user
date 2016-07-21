@@ -1,11 +1,19 @@
 'use strict';
 angular.module('linshareUiUserApp')
-  .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, workgroups, $translate, $state) {
+  .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
+                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService) {
+    var thisctrl = this;
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
-    $scope.currentSelectedDocument = {};
-    $scope.workgroupsData = workgroups;
-    $scope.selectedDocuments = [];
+    thisctrl.currentSelectedDocument = {};
+    thisctrl.workgroupsData = workgroups;
+    thisctrl.selectedDocuments = [];
+    thisctrl.deleteWorkGroup = deleteWorkGroup;
+    thisctrl.addSelectedDocument = addSelectedDocument();
+    thisctrl.currentSelectedDocument = {};
+    thisctrl.showItemDetails = showItemDetails;
+
+
     var swalNewWorkGroup;
     $translate(['ACTION.NEW_WORKGROUP'])
       .then(function (translations) {
@@ -20,51 +28,55 @@ angular.module('linshareUiUserApp')
         });
       angular.element(idElem).focus();
     };
-    $scope.addRow = function () {
+    thisctrl.addRow = function () {
       var currentTimestamp = moment().valueOf();
-      $scope.tableParams.sorting({modificationDate: 'desc'});
-      $scope.workgroupsData.push(
+      thisctrl.tableParams.sorting({modificationDate: 'desc'});
+      thisctrl.workgroupsData.push(
         {
           'uuid': '1',
           'modificationDate': currentTimestamp,
           'name': swalNewWorkGroup
         }
       );
-      $scope.tableParams.reload();
+      thisctrl.tableParams.reload();
       $timeout(function () {
         var targetNameDips = angular.element('#fileListTable tbody > tr:first-child').find('.file-name-disp');
         setElemToEditable(targetNameDips);
       });
     };
 
-    $scope.renameFolder = function (id) {
+    thisctrl.renameFolder = function (id) {
       var folderNameElem = $('td[uuid='+ id +']').find('.file-name-disp');
       setElemToEditable(folderNameElem);
     };
-    $scope.tableParams = new NgTableParams({
+
+    thisctrl.tableParams = new NgTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},
       count: 20
     }, {
       getData: function ($defer, params) {
-        var workgroups = params.sorting() ? $filter('orderBy')($scope.workgroupsData, params.orderBy()) : $scope.workgroupsData;
+        var workgroups = params.sorting() ? $filter('orderBy')(thisctrl.workgroupsData, params.orderBy()) : thisctrl.workgroupsData;
         params.total(workgroups.length);
         $defer.resolve(workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
-    $scope.sortDropdownSetActive = function ($event) {
-      $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
+
+    thisctrl.sortDropdownSetActive = function ($event) {
+      thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
       var currTarget = $event.currentTarget;
       angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function () {
         angular.element(currTarget).addClass('selectedSorting');
       });
     };
-    $scope.resetSelectedDocuments = function () {
-      angular.forEach($scope.selectedDocuments, function (selectedDoc) {
+
+    thisctrl.resetSelectedDocuments = function () {
+      angular.forEach(thisctrl.selectedDocuments, function (selectedDoc) {
         selectedDoc.isSelected = false;
       });
-      $scope.selectedDocuments = [];
+      thisctrl.selectedDocuments = [];
     };
+
     var openSearch = function () {
       angular.element('#dropArea').addClass('search-toggled');
       angular.element('#top-search-wrap input').focus();
@@ -74,19 +86,19 @@ angular.module('linshareUiUserApp')
       angular.element('#searchInMobileFiles').val('').trigger('change');
     };
 
-    $scope.toggleSearchState = function () {
-      if (!$scope.searchMobileDropdown) {
+    thisctrl.toggleSearchState = function () {
+      if (!thisctrl.searchMobileDropdown) {
         openSearch();
       } else {
         closeSearch();
       }
-      $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
+      thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
     };
 
     $scope.$on('$stateChangeSuccess', function () {
       angular.element('.multi-select-mobile').appendTo('body');
     });
-    $scope.fab = {
+    thisctrl.fab = {
       isOpen: false,
       count: 0,
       selectedDirection: 'left'
@@ -110,33 +122,36 @@ angular.module('linshareUiUserApp')
         }, 250);
       }
     });
-    $scope.currentPage = 'group_list';
-    $scope.sortDropdownSetActive = function(sortField, $event) {
-      $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
-      $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
+    thisctrl.currentPage = 'group_list';
+
+    thisctrl.sortDropdownSetActive = function(sortField, $event) {
+      thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
+      thisctrl.tableParams.sorting(sortField, thisctrl.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
       angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
         angular.element(currTarget).addClass('selectedSorting');
       });
     };
 
-    $scope.loadSidebarContent = function(content) {
-      $scope.sidebarRightDataType = content;
+    thisctrl.loadSidebarContent = function(content) {
+      thisctrl.sidebarRightDataType = content;
     };
 
-    $scope.onAddMember = function() {
-      $scope.loadSidebarContent('add-member');
+    thisctrl.onAddMember = function() {
+      thisctrl.loadSidebarContent('add-member');
       angular.element('#focusInputShare').focus();
     };
-    $scope.setDropdownSelected = function ($event){
+
+    thisctrl.setDropdownSelected = function ($event){
       var currTarget = $event.currentTarget;
       angular.element(currTarget).closest('ul').find('.active-check').removeClass('active-check');
       $timeout(function () {
         angular.element(currTarget).addClass('active-check');
       }, 200);
     };
-    $scope.sortSearchMember = function ($event) {
-      $scope.toggleSelectedSortMembers = !$scope.toggleSelectedSortMembers;
+
+    thisctrl.sortSearchMember = function ($event) {
+      thisctrl.toggleSelectedSortMembers = !thisctrl.toggleSelectedSortMembers;
       var currTarget = $event.currentTarget;
       angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
       $timeout(function () {
@@ -144,9 +159,34 @@ angular.module('linshareUiUserApp')
       }, 200);
     };
 
-    $scope.gotoSharedSpaceTarget = function(uuid, name) {
+    thisctrl.gotoSharedSpaceTarget = function(uuid, name) {
       $state.go('sharedspace.workgroups.target', {uuid: uuid, workgroupName: name});
     };
+
+    function deleteWorkGroup() {
+      return documentUtilsService.deleteDocuments
+        .bind(undefined, workGroupRestService, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
+    }
+
+    function addSelectedDocument() {
+      return documentUtilsService.selectDocument.bind(undefined, thisctrl.selectedDocuments);
+    }
+
+    function showItemDetails(current, event) {
+      thisctrl.sidebarRightDataType = 'details';
+      $scope.sidebarRightDataType = 'details';
+
+      workGroupRestService.getWorkGroup(current.uuid).then(function(data) {
+        thisctrl.currentSelectedDocument.current = data;
+      });
+
+      $scope.mactrl.sidebarToggle.right = true;
+      var currElm = event.currentTarget;
+      angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
+        angular.element(currElm).addClass('activeActionButton');
+      });
+    }
+
   })
 
   .directive('hoverDropdownFix', function() {

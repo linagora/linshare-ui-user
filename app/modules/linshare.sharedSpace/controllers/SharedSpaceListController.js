@@ -3,15 +3,17 @@
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
-             WorkGroupRestService, $stateParams) {
+             workGroupRestService, $stateParams) {
 
-      var self = this;
-      self.uuid = $stateParams.uuid;
-      self.name = $stateParams.workgroupName;
-      self.allDocuments = currentWorkGroup;
-      self.selectedDocuments = [];
+      var thisctrl = this;
+      thisctrl.uuid = $stateParams.uuid;
+      thisctrl.name = $stateParams.workgroupName;
+      thisctrl.allDocuments = currentWorkGroup;
+      thisctrl.selectedDocuments = [];
+      thisctrl.currentSelectedDocument = {};
+      thisctrl.showItemDetails = showItemDetails;
 
-      self.tableParams = new NgTableParams({
+      thisctrl.tableParams = new NgTableParams({
         page: 1,
         sorting: {modificationDate: 'desc'},
         count: 20
@@ -23,29 +25,31 @@ angular.module('linshareUiUserApp')
         }
       });
 
-      self.addSelectedDocument = addSelectedDocument();
-      self.deleteDocuments = deleteDocuments();
+      thisctrl.addSelectedDocument = addSelectedDocument();
+      thisctrl.deleteDocuments = deleteDocuments();
 
-      self.currentPage = 'group_list_files';
+      thisctrl.downloadDocument = downloadDocument;
+
+      thisctrl.currentPage = 'group_list_files';
       $scope.$on('$stateChangeSuccess', function() {
         angular.element('.multi-select-mobile').appendTo('body');
       });
 
-      self.loadSidebarContent = function(content) {
+      thisctrl.loadSidebarContent = function(content) {
         $scope.sidebarRightDataType = content;
       };
 
-      self.slideTextarea = function($event) {
+      thisctrl.slideTextarea = function($event) {
         var currTarget = $event.currentTarget;
         angular.element(currTarget).parent().addClass('show-full-comment');
       };
 
-      self.slideUpTextarea = function($event) {
+      thisctrl.slideUpTextarea = function($event) {
         var currTarget = $event.currentTarget;
         angular.element(currTarget).parent().removeClass('show-full-comment');
       };
 
-      self.setTextInput = function($event) {
+      thisctrl.setTextInput = function($event) {
         var currTarget = $event.currentTarget;
         var inputTxt = angular.element(currTarget).text();
         if(inputTxt === '') {
@@ -56,12 +60,33 @@ angular.module('linshareUiUserApp')
       };
 
       function deleteDocuments() {
-        WorkGroupRestService.workGroupUuid = self.uuid;
+        workGroupRestService.workGroupUuid = thisctrl.uuid;
         return documentUtilsService.deleteDocuments
-          .bind(undefined, WorkGroupRestService, self.allDocuments, self.selectedDocuments, self.tableParams);
+          .bind(undefined, workGroupRestService, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
       }
 
       function addSelectedDocument() {
-        return documentUtilsService.selectDocument.bind(undefined, self.selectedDocuments);
+        return documentUtilsService.selectDocument.bind(undefined, thisctrl.selectedDocuments);
+      }
+
+      function downloadDocument(document) {
+        return workGroupRestService.downloadWorkGroupEntry(thisctrl.uuid, document.uuid).then(function(fileStream) {
+            documentUtilsService.downloadFileFromResponse(fileStream, document.name, document.type);
+          });
+      }
+
+      function showItemDetails(current, event) {
+        thisctrl.sidebarRightDataType = 'details';
+        $scope.sidebarRightDataType = 'details';
+
+        workGroupRestService.getWorkGroupEntry(thisctrl.uuid, current.uuid).then(function(data) {
+          thisctrl.currentSelectedDocument.current = data;
+        });
+
+        $scope.mactrl.sidebarToggle.right = true;
+        var currElm = event.currentTarget;
+        angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
+          angular.element(currElm).addClass('activeActionButton');
+        });
       }
     });

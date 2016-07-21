@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .factory('WorkGroupRestService', function(Restangular, $log, $stateParams) {
+  .factory('workGroupRestService', function(Restangular, $log, $stateParams) {
 
     return {
 

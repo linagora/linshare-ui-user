@@ -330,7 +330,11 @@
             <div class="table-responsive">
               <table id="fileListTable" class="table table-vmiddle col-4-table" data-ng-table="vm.tableParams"
                      show-filter="true">
-                <tr data-ng-repeat="documentFile in $data"
+                <tr data-ng-repeat="documentFile in $data" ls-item-selection=""
+                    data-selected-documents="vm.selectedDocuments"
+                    data-document-file="documentFile"
+                    data-current-selected-Document="vm.currentSelectedDocument"
+                    data-sidebar-toggle="mactrl.sidebarToggle.right"
                     ng-click="backToSidebarContentDetails()"
                     data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
                     context-menu="moreOptionsContexualMenu">
@@ -385,7 +389,7 @@
                             </a>
                           </li>
                           <li class="hidden-xs">
-                            <a ng-href="{{linshareBaseUrl}}/threads/c4570914-d004-4506-8abf-04527f342e88/entries/{{documentFile.uuid}}/download"
+                            <a ng-href="{{linshareBaseUrl}}/threads/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
                                event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                               <i class="zmdi zmdi-download"></i>
                             </a>
@@ -423,7 +427,7 @@
                               </li>
                               <li class="divider"></li>
                               <li class="hidden-xs" ng-show="linshareModeProduction == false">
-                                <a ng-href="{{linshareBaseUrl}}/threads/c4570914-d004-4506-8abf-04527f342e88/entries/{{documentFile.uuid}}/download"
+                                <a ng-href="{{linshareBaseUrl}}/threads/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
                                    event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
                                   {{'ACTION.DOWNLOAD' | translate}}

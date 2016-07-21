@@ -2,7 +2,7 @@
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope, $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
-             LinshareShareService, files, $translate, growlService, $log, $timeout, DocumentUtilsService){
+             LinshareShareService, files, $translate, growlService, $log, $timeout, documentUtilsService){
       $scope.mactrl.sidebarToggle.right = false;
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
@@ -91,7 +91,7 @@ angular.module('linshare.receivedShare')
 
       $scope.downloadCurrentFile = function(currentFile) {
         LinshareReceivedShareService.download(currentFile.uuid).then(function(downloadedFile) {
-          DocumentUtilsService.downloadFileFromResponse(downloadedFile, currentFile.name, currentFile.type);
+          documentUtilsService.downloadFileFromResponse(downloadedFile, currentFile.name, currentFile.type);
         });
       };
 
@@ -194,8 +194,8 @@ angular.module('linshare.receivedShare')
                 $log.debug('value to delete', receivedFiles.length);
                 LinshareReceivedShareService.delete(doc.uuid).then(function() {
                   growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-                  DocumentUtilsService.removeElementFromCollection(receivedFiles, doc);
-                  DocumentUtilsService.removeElementFromCollection($scope.selectedDocuments, doc);
+                  documentUtilsService.removeElementFromCollection(receivedFiles, doc);
+                  documentUtilsService.removeElementFromCollection($scope.selectedDocuments, doc);
                   $scope.tableParams.reload();
                 });
               });
