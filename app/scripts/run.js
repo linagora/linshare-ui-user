@@ -26,6 +26,13 @@ angular.module('linshareUiUserApp')
     RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json;'});
     RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers) {
       headers['WWW-No-Authenticate'] = 'linshare';
+      console.log('this is an element', element);
+      if(angular.isObject(element)) {
+        delete element.isSelected;
+        delete element.typeImage;
+        delete element.info;
+      }
+      return element;
     });
     flowFactoryProvider.defaults = {
       simultaneousUploads: lsAppConfig.simultaneous_upload,
@@ -79,6 +86,11 @@ angular.module('linshareUiUserApp')
       }
       return data;
     });
+
+    // Restangular.setRequestInterceptor(function(element, operation, route, url) {
+    //   delete element.isSelected;
+    //   return element;
+    // });
 
     $rootScope.$on('lsIntercept401', function(event, data) {
       $log.debug('data from lsIntercept401', data);

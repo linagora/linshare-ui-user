@@ -172,38 +172,6 @@ angular.module('linshare.receivedShare')
         swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
       });
 
-      $scope.deleteDocuments = function(document) {
-        if(!angular.isArray(document)) {
-          document = [document];
-        }
-        swal({
-            title: swalTitle,
-            text: swalText,
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#DD6B55',
-            confirmButtonText: swalConfirm,
-            cancelButtonText: swalCancel,
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              angular.forEach(document, function(doc) {
-                $log.debug('value to delete', doc);
-                $log.debug('value to delete', receivedFiles.length);
-                LinshareReceivedShareService.delete(doc.uuid).then(function() {
-                  growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-                  documentUtilsService.removeElementFromCollection(receivedFiles, doc);
-                  documentUtilsService.removeElementFromCollection($scope.selectedDocuments, doc);
-                  $scope.tableParams.reload();
-                });
-              });
-            }
-          }
-        );
-      };
-
       $scope.copyIntoFiles = function(selectedDocuments) {
         if(!angular.isArray(selectedDocuments)) {
           selectedDocuments = [selectedDocuments];
@@ -327,7 +295,8 @@ angular.module('linshare.receivedShare')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
-
+      $scope.deleteDocuments = documentUtilsService.deleteDocuments
+        .bind(this, $scope.documentsList, $scope.selectedDocuments, $scope.tableParams);
       $scope.formatLabel = function(u) {
         if (u.firstName !== '' ) {
           return u.firstName.concat(' ', u.lastName);

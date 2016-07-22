@@ -50,10 +50,10 @@ function documentService($translate, growlService, $log, $timeout) {
     return collection;
   }
 
-  function deleteDocuments(restService, documentsList, selectedDocuments, tableParams, documentsToBeDeleted) {
+  function deleteDocuments(allItems, selectedItems, tableParams, items) {
 
-    if(!angular.isArray(documentsToBeDeleted)) {
-      documentsToBeDeleted = [documentsToBeDeleted];
+    if(!angular.isArray(items)) {
+      items = [items];
     }
     swal({
         title: swalTitle,
@@ -68,13 +68,13 @@ function documentService($translate, growlService, $log, $timeout) {
       },
       function(isConfirm) {
         if(isConfirm) {
-          angular.forEach(documentsToBeDeleted, function(doc) {
-            $log.debug('value to delete', doc);
-            restService.deleteFile(doc.uuid).then(function() {
+          angular.forEach(items, function(restangularizedItem) {
+            $log.debug('value to delete', restangularizedItem);
+            restangularizedItem.remove().then(function() {
               growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-              removeElementFromCollection(documentsList, doc);
-              removeElementFromCollection(selectedDocuments, doc);
-              //documentsListCopy = documentsList; // I keep a copy of the data for the filter module
+              _.remove(allItems, restangularizedItem);
+              _.remove(selectedItems, restangularizedItem);
+              //documentsListCopy = allItems; // I keep a copy of the data for the filter module
               tableParams.reload();
             });
           });

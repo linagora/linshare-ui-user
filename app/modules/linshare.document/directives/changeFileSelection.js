@@ -76,7 +76,11 @@ angular.module('linshare.document')
           }
           toggleDocumentSelection(scope);
         });
-      }
+      },
+      controller: function() {
+
+      },
+      controllerAs: 'lsdir'
     };
 
     function toggleDocumentSelection(scope) {

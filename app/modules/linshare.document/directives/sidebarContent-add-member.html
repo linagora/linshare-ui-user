@@ -8,8 +8,8 @@
   </div>
   <div ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
     <md-content>
-      <md-tabs md-selected="data.selectedIndex"  md-dynamic-height="" md-border-bottom="">
-        <md-tab id="tab1" ng-if="currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
+      <md-tabs md-selected="data.selectedIndex" md-dynamic-height="" md-border-bottom="">
+        <md-tab id="tab1" ng-if="vm.currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
                 class="col-xs-4 noPadding">
           <md-content class="md-padding">
           </md-content>

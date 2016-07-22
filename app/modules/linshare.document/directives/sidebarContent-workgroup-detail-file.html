@@ -1,6 +1,6 @@
   <div class="header-sidebar">
     <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
-    <h2 class="header-more-options setEllipsis"> {{currentSelectedDocument.current.name}}</h2>
+    <h2 class="header-more-options setEllipsis"> {{vm.currentSelectedDocument.current.name}}</h2>
     <span class="hidden-xs">
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
@@ -8,9 +8,9 @@
 
   <div id="profile-main" class="detail-workgroup">
     <div class="p-relative m-b-20 img-preview-ctn">
-      <p ng-show="currentSelectedDocument.current.hasThumbnail === true" href="">
+      <p ng-show="vm.currentSelectedDocument.current.hasThumbnail === true" href="">
         <img class="img-responsive"
-             ng-src="data:image/png;base64,{{currentSelectedDocument.current.thumbnail}}" alt=""/>
+             ng-src="data:image/png;base64,{{vm.currentSelectedDocument.current.thumbnail}}" alt=""/>
       </p>
       <div class="np-preview-ctn">
         <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>

@@ -229,7 +229,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
     });
     $scope.deleteDocuments = documentUtilsService.deleteDocuments
-      .bind(this, LinshareDocumentRestService, $scope.documentsList, $scope.selectedDocuments, $scope.tableParams);
+      .bind(this, $scope.documentsList, $scope.selectedDocuments, $scope.tableParams);
     $scope.$on('linshare-upload-complete', function() {
       $scope.reloadDocuments();
     });

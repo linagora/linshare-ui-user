@@ -60,9 +60,8 @@ angular.module('linshareUiUserApp')
       };
 
       function deleteDocuments() {
-        workGroupRestService.workGroupUuid = thisctrl.uuid;
         return documentUtilsService.deleteDocuments
-          .bind(undefined, workGroupRestService, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
+          .bind(undefined, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
       }
 
       function addSelectedDocument() {

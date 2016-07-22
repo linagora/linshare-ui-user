@@ -13,7 +13,7 @@
                 </i>
                 <p>{{ "WORKGROUPS_LIST.PROJECT" | translate }}</p>
               </a>
-              <a class="col-xs-6" ng-click="vm.addRow();" href="javascript:void(0)" >
+              <a class="col-xs-6" ng-click="vm.createWorkGroup();" href="javascript:void(0)" >
                 <i class="groups-shared-folder">
                   <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
                 </i>
@@ -210,7 +210,7 @@
               <span>
               <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                  ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
-                 ng-click="deleteDocuments(selectedDocuments)">
+                 ng-click="vm.deleteWorkGroup(vm.selectedDocuments)">
                 <i class="zmdi zmdi-delete"></i>
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
               </a>
@@ -281,7 +281,7 @@
           <div class="card-body">
             <div class="table-responsive">
               <table id="fileListTable" class="table table-vmiddle col-4-table" data-ng-table="vm.tableParams"
-                     show-filter="true" >
+                     show-filter="true">
                 <tr data-ng-repeat="documentFile in $data"
                     ls-item-selection=""
                     data-selected-documents="vm.selectedDocuments"
@@ -337,7 +337,7 @@
                             data-ng-class="{ 'openr': (mactrl.sidebarToggle.right === true) &&
                           ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
                           )}">
-                          <li class="hidden-xs"  ng-click="onAddMember(); mactrl.sidebarToggle.right = true;">
+                          <li class="hidden-xs" ng-click="vm.onAddMember(); mactrl.sidebarToggle.right = true;">
                             <a href="" class="p-t-10" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
                                event-propagation-stop="true">
                               <i><span class="groups-user-member"></span></i>
@@ -399,8 +399,7 @@
                               </li>
                               <li class="divider"></li>
                               <li>
-                                <a
-                                  ng-click="renameFolder(documentFile.uuid)">
+                                <a ng-click="vm.renameFolder(documentFile)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
                                 </a>
@@ -414,7 +413,7 @@
                               </li>
                               <li class="divider"></li>
                               <li>
-                                <a href="" ng-click="deleteDocuments(documentFile)">
+                                <a href="" ng-click="vm.deleteWorkGroup(documentFile)">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                   {{'ACTION.DELETE' | translate}}
                                 </a>
@@ -526,7 +525,7 @@
     </div>
     <div class="col-xs-8">
       <i class="groups-add-member col-xs-3"></i>
-      <i class="zmdi zmdi-delete col-xs-3" ng-click="deleteDocuments(selectedDocuments)"></i>
+      <i class="zmdi zmdi-delete col-xs-3" ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"></i>
       <i class="fa fa-bell-slash-o col-xs-3 disabled-work-in-progress"
          ng-show="linshareModeProduction == false"></i>
       <span class="dropdown col-xs-3" dropdown ng-show="linshareModeProduction == false">

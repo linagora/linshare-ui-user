@@ -22,7 +22,7 @@ angular.module('linshareUiUserApp')
       },
       updateWorkGroup: function(WorkGroupDto) {
         $log.info('WorkGroupRestService - Update WorkGroup');
-        return Restangular.one('threads', WorkGroupDto.uuid).post(WorkGroupDto);
+        return Restangular.one('threads', WorkGroupDto.uuid).customPUT(WorkGroupDto);
       },
       getWorkGroupContents: function(WorkGroupUuid) {
         $log.info('WorkGroupRestService -  Get all WorkGroupEntries of the WorkGroup ', WorkGroupUuid);

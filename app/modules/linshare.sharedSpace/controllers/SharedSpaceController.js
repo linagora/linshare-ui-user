@@ -1,66 +1,53 @@
 'use strict';
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
-                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService) {
+                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService, $interval) {
     var thisctrl = this;
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
     thisctrl.currentSelectedDocument = {};
-    thisctrl.workgroupsData = workgroups;
+    thisctrl.allDocuments = workgroups;
     thisctrl.selectedDocuments = [];
-    thisctrl.deleteWorkGroup = deleteWorkGroup;
     thisctrl.addSelectedDocument = addSelectedDocument();
     thisctrl.currentSelectedDocument = {};
     thisctrl.showItemDetails = showItemDetails;
-
-
-    var swalNewWorkGroup;
-    $translate(['ACTION.NEW_WORKGROUP'])
-      .then(function (translations) {
-        swalNewWorkGroup = translations['ACTION.NEW_WORKGROUP'];
-      });
-    var setElemToEditable = function (idElem) {
-      angular.element(idElem).attr('contenteditable', 'true')
-        .on('focus', function () {
-          document.execCommand('selectAll', false, null);})
-        .on('focusout', function () {
-          angular.element(this).attr('contenteditable', 'false');
-        });
-      angular.element(idElem).focus();
-    };
-    thisctrl.addRow = function () {
-      var currentTimestamp = moment().valueOf();
-      thisctrl.tableParams.sorting({modificationDate: 'desc'});
-      thisctrl.workgroupsData.push(
-        {
-          'uuid': '1',
-          'modificationDate': currentTimestamp,
-          'name': swalNewWorkGroup
-        }
-      );
-      thisctrl.tableParams.reload();
-      $timeout(function () {
-        var targetNameDips = angular.element('#fileListTable tbody > tr:first-child').find('.file-name-disp');
-        setElemToEditable(targetNameDips);
-      });
-    };
-
-    thisctrl.renameFolder = function (id) {
-      var folderNameElem = $('td[uuid='+ id +']').find('.file-name-disp');
-      setElemToEditable(folderNameElem);
-    };
-
     thisctrl.tableParams = new NgTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},
       count: 20
     }, {
       getData: function ($defer, params) {
-        var workgroups = params.sorting() ? $filter('orderBy')(thisctrl.workgroupsData, params.orderBy()) : thisctrl.workgroupsData;
+        var workgroups = params.sorting() ? $filter('orderBy')(thisctrl.allDocuments, params.orderBy()) : thisctrl.allDocuments;
         params.total(workgroups.length);
         $defer.resolve(workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
+    thisctrl.deleteWorkGroup = deleteWorkGroup();
+
+    var swalNewWorkGroupName;
+    $translate(['ACTION.NEW_WORKGROUP'])
+      .then(function (translations) {
+        swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
+      });
+    var setElemToEditable = function(idElem, data) {
+      angular.element(idElem).attr('contenteditable', 'true')
+        .on('focus', function () {
+          document.execCommand('selectAll', false, null);})
+        .on('focusout', function () {
+          console.log(idElem);
+          data.name = idElem[0].textContent;
+          workGroupRestService.updateWorkGroup(data).then(function() {
+            angular.element(this).attr('contenteditable', 'false');
+          });
+        });
+      angular.element(idElem).focus();
+    };
+
+    thisctrl.createWorkGroup = function() {
+      createFolder(swalNewWorkGroupName);
+    };
+
+    thisctrl.renameFolder = renameFolder;
 
     thisctrl.sortDropdownSetActive = function ($event) {
       thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
@@ -135,6 +122,7 @@ angular.module('linshareUiUserApp')
 
     thisctrl.loadSidebarContent = function(content) {
       thisctrl.sidebarRightDataType = content;
+      $scope.sidebarRightDataType = content;
     };
 
     thisctrl.onAddMember = function() {
@@ -165,7 +153,7 @@ angular.module('linshareUiUserApp')
 
     function deleteWorkGroup() {
       return documentUtilsService.deleteDocuments
-        .bind(undefined, workGroupRestService, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
+        .bind(undefined, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
     }
 
     function addSelectedDocument() {
@@ -184,6 +172,21 @@ angular.module('linshareUiUserApp')
       var currElm = event.currentTarget;
       angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
         angular.element(currElm).addClass('activeActionButton');
+      });
+    }
+
+    function renameFolder(folder) {
+      var folderNameElem = $('td[uuid='+ folder.uuid +']').find('.file-name-disp');
+      setElemToEditable(folderNameElem, folder);
+    }
+
+    function createFolder(folderName) {
+      workGroupRestService.createWorkGroup({name: folderName}).then(function(data) {
+        thisctrl.allDocuments.push(data);
+        thisctrl.tableParams.reload();
+        $timeout(function () {
+          renameFolder(data);
+        },0);
       });
     }
 
