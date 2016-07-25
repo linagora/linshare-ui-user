@@ -52,7 +52,7 @@ angular.module('linshare.document')
     }
   })
 
-  .directive('lsItemSelection', function() {
+  .directive('lsItemSelection', function($log) {
 
     return {
       restrict: 'A',
@@ -70,6 +70,7 @@ angular.module('linshare.document')
           }
         });
         element.bind('click', function() {
+          $log.debug('directive itemselection : click event');
           if(scope.rightSidebarOpen) {
             element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
             element.find('li')[0].className = 'activeActionButton';
@@ -78,13 +79,14 @@ angular.module('linshare.document')
         });
       },
       controller: function() {
-
       },
-      controllerAs: 'lsdir'
+      controllerAs: 'itemlistCtrl'
     };
 
     function toggleDocumentSelection(scope) {
-      scope.currentSelectedDocument.current = scope.documentFile;
+      scope.$apply(function() {
+        scope.currentSelectedDocument.current = scope.documentFile;
+      });
       var multipleSelection = false;
       if(multipleSelection) {
         // code goes here when using a multiple connexion

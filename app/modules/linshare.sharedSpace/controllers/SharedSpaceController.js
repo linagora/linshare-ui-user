@@ -1,15 +1,16 @@
 'use strict';
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
-                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService, $interval) {
-    var thisctrl = this;
+                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
+    $scope.mactrl.sidebarToggle.right = false;
+
+    var thisctrl = this;
     thisctrl.currentSelectedDocument = {};
     thisctrl.allDocuments = workgroups;
     thisctrl.selectedDocuments = [];
     thisctrl.addSelectedDocument = addSelectedDocument();
-    thisctrl.currentSelectedDocument = {};
     thisctrl.showItemDetails = showItemDetails;
     thisctrl.tableParams = new NgTableParams({
       page: 1,
@@ -23,6 +24,8 @@ angular.module('linshareUiUserApp')
       }
     });
     thisctrl.deleteWorkGroup = deleteWorkGroup();
+    thisctrl.removeMember = removeMember;
+    thisctrl.memberRole = 'admin';
 
     var swalNewWorkGroupName;
     $translate(['ACTION.NEW_WORKGROUP'])
@@ -34,7 +37,6 @@ angular.module('linshareUiUserApp')
         .on('focus', function () {
           document.execCommand('selectAll', false, null);})
         .on('focusout', function () {
-          console.log(idElem);
           data.name = idElem[0].textContent;
           workGroupRestService.updateWorkGroup(data).then(function() {
             angular.element(this).attr('contenteditable', 'false');
@@ -125,8 +127,8 @@ angular.module('linshareUiUserApp')
       $scope.sidebarRightDataType = content;
     };
 
-    thisctrl.onAddMember = function() {
-      thisctrl.loadSidebarContent('add-member');
+    thisctrl.onAddMember = function(uuid) {
+      $state.go('sharedspace.all.detail', {id: uuid});
       angular.element('#focusInputShare').focus();
     };
 
@@ -188,6 +190,11 @@ angular.module('linshareUiUserApp')
           renameFolder(data);
         },0);
       });
+    }
+
+    function removeMember(workgroup, member) {
+      _.remove(workgroup.members, member);
+      return workGroupRestService.deleteMember(workgroup.uuid, member.uuid);
     }
 
   })

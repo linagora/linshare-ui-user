@@ -135,13 +135,12 @@ angular.module('linshareUiUserApp')
 
       .state('sharedspace', {
         parent: 'common',
-        //controller: 'DocumentsController',
         url: '/sharedspace',
         template:'<div ui-view></div>'
       })
 
       .state('sharedspace.all', {
-        url:'/',
+        url:'/list',
         templateUrl: 'modules/linshare.sharedSpace/views/workgroups.html',
         controller: 'SharedSpaceController as vm',
         resolve: {
@@ -151,11 +150,27 @@ angular.module('linshareUiUserApp')
         }
       })
 
+      .state('sharedspace.all.detail', {
+        url:'/:id/members',
+        template: '<aside id="chat" data-ng-include src="\'views/includes/sidebar-right.html\'"'+
+        'data-ng-class="{ \'toggled\': mactrl.sidebarToggle.right === true }" class="sidebar-right">' +
+        '</aside>',
+        controller: 'WorkGroupMembersController as wkgrpmemberctrl',
+        resolve: {
+          members: function(workGroupRestService, $stateParams) {
+            return workGroupRestService.getAllMembers($stateParams.id);
+          },
+          currentWorkgroup: function(workGroupRestService, $stateParams) {
+            return workGroupRestService.getWorkGroup($stateParams.id);
+          }
+        }
+      })
+
 
       .state('sharedspace.workgroups', {
         url:'/workgroups',
         templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
-        //controller: 'SharedSpaceListController',
+        controller: 'SharedSpaceListController',
         resolve: {
           workGroupList: function(workGroupRestService) {
             return workGroupRestService.getAllWorkGroups();

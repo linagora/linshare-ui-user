@@ -49,6 +49,28 @@ angular.module('linshareUiUserApp')
       deleteFile: function(entryUuid) {
         $log.info('WorkGroupRestService -  Delete a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', this.workGroupUuid);
         return Restangular.one('threads', this.workGroupUuid).one('entries', entryUuid).remove();
+      },
+
+      // WORKGROUPS MEMBERS
+      getAllMembers: function(workGroupUuid) {
+        $log.info('WorkGroupRestService -  Get a WorkGroup Member ' + workGroupUuid );
+        return Restangular.one('threads', workGroupUuid).all('members').getList();
+      },
+      createMember: function(workGroupUuid, member) {
+        $log.info('WorkGroupRestService -  createMember');
+        return Restangular.one('threads', workGroupUuid).all('members').post(member);
+      },
+      getMember: function(workGroupUuid, memberUuid) {
+        $log.info('WorkGroupRestService -  getMember');
+        return Restangular.one('threads', workGroupUuid).one('members', memberUuid).get();
+      },
+      updateMember: function(workGroupUuid, member) {
+        $log.info('WorkGroupRestService -  updateMember');
+        return Restangular.one('threads', workGroupUuid).one('members', member.uuid).customPUT(member);
+      },
+      deleteMember: function(workGroupUuid, memberUuid) {
+        $log.info('WorkGroupRestService -  deleteMember');
+        return Restangular.one('threads', workGroupUuid).one('members', memberUuid).remove();
       }
     };
   });

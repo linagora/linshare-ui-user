@@ -1,7 +1,7 @@
 <div id="member-sidebar">
   <div class="header-sidebar">
-    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
-    <h2 class="header-more-options setEllipsis"> {{currentSelectedDocument.current.name}}</h2>
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false" ></i>
+    <h2 class="header-more-options setEllipsis"> {{wkgrpmemberctrl.currentWorkGroup.name}}</h2>
     <span class="hidden-xs">
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
@@ -28,17 +28,18 @@
                     </div>
                     <form role="form" class="clearfix fields-add-member">
                       <div class="form-group fg-line group-member-field-ctn col-xs-12 noPadding">
-                        <div autocomplete-user="" class="col-xs-8 pull-left"
-                             data-on-select-function="newShare.addRecipient"></div>
+                        <div  class="col-xs-8 pull-left" autocomplete-user=""
+                              data-on-select-function="wkgrpmemberctrl.addMember"
+                              data-selected-users-list="wkgrpmemberctrl.workgroupMembers"></div>
                         <div class="select-chosen-ctn col-xs-3 noPadding pull-right">
-                          <select chosen
+                          <select name="rights_select" id="rights_select" chosen
                                   data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
                                   disable-search="true"
-                                  allow-single-deselect="true">
-                            <option value=""></option>
-                            <option >{{'MEMBER_TAB.ADMIN' | translate}}</option>
-                            <option checked = "checked">{{'MEMBER_TAB.WRITE' | translate}}</option>
-                            <option>{{'MEMBER_TAB.READ' | translate}}</option>
+                                  allow-single-deselect="true"
+                                  ng-model="wkgrpmemberctrl.memberRole">
+                            <option ng-repeat="role in wkgrpmemberctrl.membersRights" value="{{role}}">
+                              {{'MEMBER_TAB.'+ role | translate}}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -62,7 +63,7 @@
                           <div class="fg-line">
                             <input type="text" class="form-control"
                                    autocomplete="off"
-                                   ng-model="paramFilter['name']"
+                                   ng-model="wkgrpmemberctrl.membersSearchFilter"
                                    placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER' | translate}}"
                                    ng-change="updateParams()">
                           </div>
@@ -135,19 +136,22 @@
                           </span>
                         </div>
                       </form>
-                      <a href="javascript:void(0)" class="r-a-lin" ng-click="loadSidebarContent('multi-select-rights')"
+                      <a href="javascript:void(0)" class="r-a-lin" ng-click="wkgrpmemberctrl.loadSidebarContent('multi-select-rights')"
                          title="{{'MEMBER_TAB.MULTI_SELECT' | translate}}">
                         {{ "MEMBER_TAB.MULTI_SELECT" | translate }}
                       </a>
                     </div>
                     <div class="existing-member-list-ctn">
-                      <div class="flex-ctn">
+                      <div class="flex-ctn"
+                           ng-repeat="workgroupMember in wkgrpmemberctrl.workgroupMembers | filter: wkgrpmemberctrl.membersSearchFilter">
                         <div class="itemL"><span class="first-letter">L</span></div>
                         <div class="itemMid">
-                          <div class="name">Amy Wolsh</div>
-                          <div class="info-item-member">
+                          <div class="name">{{workgroupMember.firstName}} {{workgroupMember.lastName}}</div>
+                          <div class="info-item-member" ng-switch="workgroupMember.role">
                             <i class="zmdi zmdi-account"></i>
-                            <span>{{ "MEMBER_TAB.ADMIN" | translate }}</span>
+                            <span ng-switch-when="admin">{{ "MEMBER_TAB.ADMIN" | translate }}</span>
+                            <span ng-switch-when="normal">{{ "MEMBER_TAB.WRITE" | translate }}</span>
+                            <span ng-switch-default="">{{ "MEMBER_TAB.READ" | translate }}</span>
                           </div>
                           <div class="info-item-member" title="{{'MEMBER_TAB.NOTIFICATION_ACTIVATED' | translate}}">
                             <i class="zmdi zmdi-notifications-none"></i>
@@ -162,24 +166,25 @@
                               <i class="zmdi zmdi-edit"></i>
                             </a>
                             <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown">
-                              <li>
-                                <a href=""  ng-click="setDropdownSelected($event)" >
-                                  {{ "MEMBER_TAB.ADMIN" | translate }}
+                              <li ng-repeat="role in wkgrpmemberctrl.membersRights" ng-switch="role">
+                                <a href="" ng-click="setDropdownSelected(workgroupMember, role)"
+                                   ng-switch-when="ADMIN" ng-class="{'active-check': workgroupMember.role == 'admin'}">
+                                  {{ "MEMBER_TAB." + role | translate }}
                                 </a>
-                              </li>
-                              <li>
-                                <a href=""  ng-click="setDropdownSelected($event)" class="active-check" >
-                                  {{ "MEMBER_TAB.WRITE" | translate }}
+                                  <a href="" ng-click="tsetDropdownSelected(workgroupMember, role)"
+                                     ng-switch-when="WRITE" ng-class="{'active-check': workgroupMember.role == 'normal'}">
+                                  {{ "MEMBER_TAB." + role | translate }}
                                 </a>
-                              </li>
-                              <li>
-                                <a href=""  ng-click="setDropdownSelected($event)">
-                                 {{ "MEMBER_TAB.READ" | translate }}
+                                <a href="" ng-click="tsetDropdownSelected(workgroupMember, role)"
+                                   ng-switch-when="READ" ng-class="{'active-check': workgroupMember.readonly == true}">
+                                  {{ "MEMBER_TAB." + role | translate }}
                                 </a>
                               </li>
                             </ul>
                           </span>
-                          <a href="javascript:void(0)" title="{{'MEMBER_TAB.REMOVE_TEAM_MEMBER' | translate}}">
+                          <a href="javascript:void(0)"
+                             ng-click="wkgrpmemberctrl.removeMember(wkgrpmemberctrl.workgroupMembers, workgroupMember)"
+                             title="{{'MEMBER_TAB.REMOVE_TEAM_MEMBER' | translate}}">
                             <i class="zmdi zmdi-close"></i>
                           </a>
                         </div>
