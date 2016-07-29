@@ -72,7 +72,7 @@
                           <span uib-dropdown dropdown-append-to-body  class="dropdown link-dropdown"
                                 auto-close="outsideClick">
                             <a class="plainTxtBtn partageLink"  href="javascript:void(0)"
-                               uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">$
+                               uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                               <i class="zmdi zmdi-settings"></i>
                             </a>
                             <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop">
@@ -171,7 +171,7 @@
                                    ng-switch-when="ADMIN" ng-class="{'active-check': workgroupMember.role == 'admin'}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>
-                                  <a href="" ng-click="tsetDropdownSelected(workgroupMember, role)"
+                                <a href="" ng-click="tsetDropdownSelected(workgroupMember, role)"
                                      ng-switch-when="WRITE" ng-class="{'active-check': workgroupMember.role == 'normal'}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>

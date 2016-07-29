@@ -4,7 +4,6 @@ angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
              workGroupRestService, $stateParams) {
-
       var thisctrl = this;
       thisctrl.uuid = $stateParams.uuid;
       thisctrl.name = $stateParams.workgroupName;
@@ -19,10 +18,15 @@ angular.module('linshareUiUserApp')
         count: 20
       }, {
         getData: function($defer, params) {
-          var filesList = params.sorting() ? $filter('orderBy')(currentWorkGroup, params.orderBy()) : currentWorkGroup;
+          var filesList = params.sorting() ? $filter('orderBy')(thisctrl.allDocuments, params.orderBy()) : thisctrl.allDocuments;
           params.total(filesList.length);
           $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
+      });
+
+      $scope.$on('linshare-upload-complete', function(event, data) {
+        thisctrl.allDocuments.push(data);
+        thisctrl.tableParams.reload();
       });
 
       thisctrl.addSelectedDocument = addSelectedDocument();

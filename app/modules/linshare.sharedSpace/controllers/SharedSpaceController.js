@@ -140,14 +140,14 @@ angular.module('linshareUiUserApp')
       }, 200);
     };
 
-    thisctrl.sortSearchMember = function ($event) {
-      thisctrl.toggleSelectedSortMembers = !thisctrl.toggleSelectedSortMembers;
-      var currTarget = $event.currentTarget;
-      angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
-      $timeout(function () {
-        angular.element(currTarget).addClass('selectedSortingMembers');
-      }, 200);
-    };
+    // thisctrl.sortSearchMember = function ($event) {
+    //   thisctrl.toggleSelectedSortMembers = !thisctrl.toggleSelectedSortMembers;
+    //   var currTarget = $event.currentTarget;
+    //   angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
+    //   $timeout(function () {
+    //     angular.element(currTarget).addClass('selectedSortingMembers');
+    //   }, 200);
+    // };
 
     thisctrl.gotoSharedSpaceTarget = function(uuid, name) {
       $state.go('sharedspace.workgroups.target', {uuid: uuid, workgroupName: name});

@@ -196,8 +196,8 @@ angular.module('linshareUiUserApp')
       $state.go($scope.urlTogoAfterLogin);
     });
 
-    $scope.callReloadDocuments = function() {
-      $scope.$broadcast('linshare-upload-complete');
+    $scope.callReloadDocuments = function(data) {
+      $scope.$broadcast('linshare-upload-complete', data);
     };
 
     /**
@@ -228,7 +228,7 @@ angular.module('linshareUiUserApp')
         });
         delete $scope.refFlowShares[fileIdentifier];
       }
-      $scope.callReloadDocuments();
+      $scope.callReloadDocuments(flowFile.linshareDocument);
     };
 
     $scope.$on('flow::filesSubmitted', function() {

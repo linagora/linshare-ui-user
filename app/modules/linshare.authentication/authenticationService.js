@@ -3,6 +3,7 @@
  * @ngdoc overview
  * @name linshare.Authentication
  */
+/*jshint sub:true*/
 angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor'])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('linshare');

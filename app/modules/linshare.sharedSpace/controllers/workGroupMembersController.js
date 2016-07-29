@@ -18,9 +18,20 @@ function WorkGroupMembersController($scope, workGroupRestService, $stateParams, 
   thisCtrl.membersRights = {admin: 'ADMIN', write: 'WRITE', readonly: 'READ'};
   thisCtrl.memberRole = thisCtrl.membersRights.write;
 
+  thisCtrl.propertyFilter = 'name';
+
   thisCtrl.addMember = addMember;
   thisCtrl.removeMember = removeMember;
   thisCtrl.updateMember = updateMember;
+
+  thisCtrl.sortSearchMember = function($event) {
+    thisctrl.toggleSelectedSortMembers = !thisctrl.toggleSelectedSortMembers;
+    var currTarget = $event.currentTarget;
+    angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
+    $timeout(function() {
+      angular.element(currTarget).addClass('selectedSortingMembers');
+    }, 200);
+  };
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);
