@@ -4,6 +4,7 @@
   "REMOVE": "Remove",
   "DOWNLOAD": "Download",
   "WIP": "Work in progress",
+  "ME": "Me",
   "NAVIGATION": {
     "NEXT": "Next",
     "PREVIOUS": "Previous",
@@ -85,7 +86,9 @@
     "DOWNLOAD": "Download",
     "SHARE": "Share",
     "REFRESH": "Refresh",
+    "COPY_TO": "Copy to",
     "COPY_IN_WORKGROUP": "Copy in a workgroup",
+    "COPY_TO_SHARED_SPACE": "Shared space",
     "COPY_IN_MY_FILES": "Copy in my files",
     "DELETE": "Delete",
     "TRANSFERT" : "Transfert",
@@ -96,7 +99,6 @@
     "RENAME" : "Rename",
     "COPY" : "Copy",
     "GO_TO_TRASH" : "Go to trash can",
-    "COPY_IN_MY_FILES" : "Copy in my files",
     "NEW_WORKGROUP" : "New workgroup",
     "MOVE" : "Move",
     "VIEW_VERSIONING": "View previous updates",
@@ -142,8 +144,8 @@
       "ENDING_DATE": "Ending date"
     },
     "FILTER_BY_RECIPIENT": {
-      "HEADER": "Filter by recipient",
-      "PLACEHOLDER": "Please enter a recipient email, first name or last name"
+      "HEADER": "Filter by sender",
+      "PLACEHOLDER": "Please enter an email, first name or last name"
     },
     "SUBMIT": "Filter",
     "REINITIALIZE": "Clear"
@@ -167,7 +169,8 @@
     "CLEAR": "Clear",
     "PLAY": "Play",
     "REPLAY": "Replay",
-    "STOP": "Stop"
+    "STOP": "Stop",
+    "ORDER_BY": "Order by"
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
@@ -179,7 +182,8 @@
     "UPLOAD_AND_SHARE": "Upload and share",
     "UPLOAD_IN_MY_FILES": "In my files",
     "UPLOAD_IN_WORKGROUP": "Upload in a workgroup",
-    "UPLOAD_IN_GROUP": "Upload in a group"
+    "UPLOAD_IN_GROUP": "Upload in a group",
+    "UPLOAD_SHARE": "Upload and share"
   },
   "TRANSFERS_DROPDOWN": {
     "SHARE": "Shares",
@@ -193,5 +197,14 @@
   },
   "SELECTION": {
     "NUM_ITEM_SELECTED": "Files selected"
-}
+  },
+  "INFORMATION_TAB" : {
+    "TITLE": "DETAILS",
+    "UPTADED_THE": "Updated the ",
+    "META_DATA": "Meta data",
+    "INSERT_DESCRIPTION": "Add a file description",
+    "CREATED_THE": "Created the",
+    "VERSION_HISTORIQUE": "Previous updates",
+    "VERSIONS": "Updates"
+  }
 }

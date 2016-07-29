@@ -17,6 +17,8 @@
       "MODIFICATION_DATE": "Ngày thay đổi",
       "EXPIRATION_DATE": "Ngày hết hạn",
       "CIPHERED": "Mã hóa",
+      "TBT__CIPHERED_YES": "",
+      "TBT__CIPHERED_NO": "",
       "SHARED_WITH": "Chia sẻ với:",
       "PEOPLE_SHARED_WITH": "Người dùng",
       "DESCRIPTION": "Miêu tả",

@@ -2,28 +2,28 @@
 <div class="header-sidebar">
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
   <h2 class="header-more-options">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h2>
-    <span class="hidden-xs">
+  <span class="hidden-xs">
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
 </div>
-<div class="card col-xs-12" id="recipientsCtnSidebar">
-  <div class="num-items-section-ctn">
-    <span>{{lengthOfSelectedDocuments()}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
-      <a class="pull-right sidebar-link" href=""
-         ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()"
-         data-ng-show="!activeBtnShowSelection">
-        {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
-      </a>
-      <a class="pull-right sidebar-link" href=""
-         ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()"
-         data-ng-show="activeBtnShowSelection">
-        {{ "RIGHT_PANEL.SHARE.UNHIDE_FILES" | translate }}
-      </a>
-  </div>
-  <div class="custumListContainer clearfix">
 
+<div class="num-items-section-ctn">
+  <span>{{lengthOfSelectedDocuments()}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
+  <a class="pull-right sidebar-link" href=""
+     ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()"
+     data-ng-show="!activeBtnShowSelection">
+    {{ "RIGHT_PANEL.SHARE.SHOW_SELECTED_FILES" | translate }}
+  </a>
+  <a class="pull-right sidebar-link" href=""
+     ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()"
+     data-ng-show="activeBtnShowSelection">
+     {{ "RIGHT_PANEL.SHARE.UNHIDE_FILES" | translate }}
+  </a>
+</div>
+<div class="card col-xs-12" id="recipientsCtnSidebar">
+  <div class="custumListContainer clearfix">
     <div class="recipients-form-sections clearfix">
-      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
+      <h2 class="pull-left headerSubCtn"><i class="groups-user-group"></i>
         {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2><span class="required-field-hint">*</span>
       <div class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
            on-toggle="toggled()">
@@ -57,11 +57,9 @@
     </form>
 
     <div class="custumListBody col-xs-12 ">
-      <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients()">
-        <md-tooltip md-direction="bottom">
-          {{recipient.domain || recipient.mail}}
-        </md-tooltip>
-
+      <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients() | orderBy : '-'"
+           tooltip-placement="bottom" tooltip-popup-delay="700"
+           uib-tooltip="{{recipient.domain || recipient.mail}}">
         <p class="pull-left circleCtn">
           <span ng-show="recipient.domain" class="circle userBg">{{recipient.firstName.charAt(0)}}</span>
           <span ng-show="!recipient.domain" class="circle userBg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
@@ -117,6 +115,33 @@
                    ng-model="newShare.expirationDate.value"/>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="advancedSharingSettings">
+
+      <div class="form-group col-xs-12 addNote">
+        <div class="form-group fg-line">
+          <div class="form-inline">
+            <label for="mailCustum">{{ "RIGHT_PANEL.SHARE_OPTIONS.ATTACH_EMAIL" | translate }}</label>
+            <label class="checkbox checkbox-inline">
+              <input type="checkbox" name="mailCustum" ng-checked="custumMailInput"
+                     ng-model="mailCustum" ng-init="boo=false" ng-click="custumMailInput = !custumMailInput"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <div class="cssSlideUp col-xs-12 " ng-hide="!custumMailInput">
+          <div class="form-group clearfix fg-line">
+            <input type="text" class="form-control input-sm"
+                   ng-model="newShare.subject"
+                   placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate }}">
+          </div>
+          <textarea class="form-control comment" rows="5"
+                    placeholder="{{ 'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate }}"
+                    ng-model="newShare.message">
+          </textarea>
+        </div>
+        <md-divider class="col-xs-12 mailDivider hidden-xs" md-inset=""></md-divider>
       </div>
     </div>
   </div>

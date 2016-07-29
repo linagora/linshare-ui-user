@@ -192,12 +192,21 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.reloadDocuments = function() {
-      LinshareDocumentRestService.getAllFiles().then(function(data) {
-        $scope.documentsList = data;
-        $scope.documentsListCopy = data;
-        $scope.tableParams.reload();
+        $timeout(function () {
+          LinshareDocumentRestService.getAllFiles().then(function (data) {
+          $scope.documentsList = data;
+          $scope.documentsListCopy = data;
+          $scope.isNewAddition = true;
+          $scope.tableParams.reload();
+            $timeout(function () {
+              $scope.isNewAddition = false;
+            }, 0);
+        }, 500);
+
+
       });
     };
+
 
     $scope.paramFilter = {
       name: ''
@@ -235,10 +244,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     });
 
     var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
-    $translate(['ACTION.COPY_IN_GROUP', 'ACTION.SHARE', 'ACTION.INFORMATION',
+    $translate(['ACTION.COPY_TO', 'ACTION.SHARE', 'ACTION.INFORMATION',
       'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'])
       .then(function(translations) {
-        swalCopyInGroup = translations['ACTION.COPY_IN_GROUP'];
+        swalCopyInGroup = translations['ACTION.COPY_TO'];
         swalShare = translations['ACTION.SHARE'];
         swalDelete = translations['ACTION.DELETE'];
         swalDownload = translations['ACTION.DOWNLOAD'];
@@ -343,6 +352,57 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
     };
 
+    $scope.slideTextarea = function($event){
+      var currTarget = $event.currentTarget;
+      angular.element(currTarget).parent().addClass('show-full-comment');
+    };
+    $scope.slideUpTextarea = function($event){
+      var currTarget = $event.currentTarget;
+      angular.element(currTarget).parent().removeClass('show-full-comment');
+    };
+    $scope.setTextInput = function ($event) {
+      var currTarget = $event.currentTarget;
+      var inputTxt = angular.element(currTarget).text();
+      if (inputTxt === '') {
+        angular.element(currTarget).parent().find('span').css('display', 'block');
+      } else {
+        angular.element(currTarget).parent().find('span').css('display', 'none');
+      }
+    };
+    $scope.lsFormat = function() {
+      return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';
+    };
+    $scope.lsFullDateFormat = function() {
+      return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
+    };
+    $scope.addSelectedDocument = addSelectedDocument();
+    function addSelectedDocument() {
+      return documentUtilsService.selectDocument.bind(undefined, $scope.selectedDocuments);
+    }
+
+
+    var  swalMultipleDownloadTitle , swalMultipleDownloadText ,
+      swalMultipleDownloadConfirm;
+    $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
+      'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
+      'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
+      .then(function(translations) {
+        swalMultipleDownloadTitle= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
+        swalMultipleDownloadText= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
+        swalMultipleDownloadConfirm= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+      });
+
+    $scope.unavailableMultiDownload = function() {
+      swal({
+          title: swalMultipleDownloadTitle,
+          text: swalMultipleDownloadText,
+          type: 'error',
+          confirmButtonColor: '#05b1ff',
+          confirmButtonText: swalMultipleDownloadConfirm,
+          closeOnConfirm: true
+        }
+      );
+    };
   })
 /**
  * @ngdoc controller
@@ -505,4 +565,18 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         });
       }
     };
-  });
+  })
+  .directive('newUploadAnim', function() {
+  return function(scope, element) {
+    if (scope.isNewAddition) {
+      if (scope.$first) {
+        angular.element(element).addClass('set-hidden-anim').delay(200).queue(function(){
+          $(this).addClass('anim-in');
+        });
+        scope.isNewAddition = false;
+      }else{
+        scope.isNewAddition = false;
+      }
+    }
+  };
+});

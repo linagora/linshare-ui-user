@@ -154,7 +154,6 @@ angular.module('linshareUiUserApp')
     $rootScope.sidebarRightWidth = 350;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.mobileWidthBreakpoint=768;
-   
     localStorage.setItem('ma-layout-status', 0);
     $scope.$watch('mactrl.sidebarToggle.left', function() {
       $window.localStorage.setItem('sidebarToggleLeft', $scope.mactrl.sidebarToggle.left);
@@ -175,6 +174,8 @@ angular.module('linshareUiUserApp')
 
     AuthenticationService.getCurrentUser().then(function (user) {
       $scope.loggedUser.setUser(user);
+      user.firstLetter = user.firstName.charAt(0);
+      $scope.userLogged = user;
     });
 
     $scope.$on('event:auth-loginRequired', function() {

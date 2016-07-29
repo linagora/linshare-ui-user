@@ -4,6 +4,7 @@
   "REMOVE": "Supprimer",
   "DOWNLOAD": "Télécharger",
   "WIP": "En cours de contruction",
+  "ME": "Moi",
   "NAVIGATION": {
     "NEXT": "Suivant",
     "PREVIOUS": "Précédent",
@@ -87,7 +88,9 @@
     "DOWNLOAD": "Télécharger",
     "SHARE": "Partager",
     "REFRESH": "Actualiser",
+    "COPY_TO": "Copier vers",
     "COPY_IN_WORKGROUP": "Copier dans un groupe de travail",
+    "COPY_TO_SHARED_SPACE": "Vers l'espace commun",
     "COPY_IN_MY_FILES": "Copier dans mes fichiers",
     "DELETE": "Supprimer",
     "TRANSFERT" : "Transférer",
@@ -106,9 +109,9 @@
       "COPY_AND_SHARE": "Copier & partager",
       "SIMPLE_COPY": "Copie simple"
       },
-    "LOCK": "Verrouiller",
+    "INFO_WORKGROUP": "Détail du groupe de travail",
     "EXTERNAL_EDIT": "Télécharger & verrouiller",
-    "INFO_WORKGROUP": "Détail du groupe de travail"
+    "LOCK": "Verrouiller"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
@@ -143,7 +146,7 @@
       "ENDING_DATE": "Date de fin"
     },
     "FILTER_BY_RECIPIENT": {
-      "HEADER": "Filtrer par destinataire",
+      "HEADER": "Filtrer par Emetteur",
       "PLACEHOLDER": "Veuillez saisir un courriel, un nom ou un prénom"
     },
     "SUBMIT": "Filtrer",
@@ -174,7 +177,8 @@
     "CLEAR": "Nettoyer",
     "PLAY": "Lancer",
     "REPLAY": "Relancer",
-    "STOP": "Arrêter"
+    "STOP": "Arrêter",
+    "ORDER_BY": "Ordonner par"
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
@@ -183,10 +187,11 @@
   },
     "ADD_FILES_DROPDOWN": {
       "UPLOAD_FILE": "Déposer un fichier",
-      "UPLOAD_AND_SHARE": "Déposer et partager ",
+      "UPLOAD_AND_SHARE": "Déposer & partager ",
       "UPLOAD_IN_MY_FILES": "Dans mes fichiers",
       "UPLOAD_IN_WORKGROUP": "Dans un groupe de travail",
-      "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail"
+      "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail",
+      "UPLOAD_SHARE": "Dépôt & Partage"
     },
   "TRANSFERS_DROPDOWN": {
     "SHARE": "Partage",
@@ -200,6 +205,15 @@
   },
   "SELECTION": {
     "NUM_ITEM_SELECTED": "Fichiers sélectionnés"
+  },
+  "INFORMATION_TAB" : {
+  "TITLE": "DETAILS",
+  "UPTADED_THE": "Modifié le ",
+  "META_DATA": "Méta données",
+  "INSERT_DESCRIPTION": "Saisissez une description",
+  "CREATED_THE": "Créé le",
+  "VERSION_HISTORIQUE": "Historique",
+  "VERSIONS": "Mise à jours"
   }
 }
 

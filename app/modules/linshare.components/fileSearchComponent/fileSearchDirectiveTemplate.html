@@ -65,11 +65,15 @@
             <span class="input-group-addon">
               <i class="fa fa-database" ng-class="{disabledIcon: !showUnit}"></i>
             </span>
-
-          <div class="fg-line select" ng-class="{disabledIcon: !showUnit}">
-            <select ng-disabled="!showUnit" ng-model="filters['unity']"
+          <div class="fg-line " ng-class="{disabledIcon: !showUnit}">
+            <select chosen
+                    data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
+                    disable-search="true"
+                    allow-single-deselect="true"
+                    ng-model="filters['unity']"
                     class="form-control custumSelect outlineFFremove w-100"
-                    ng-init="filters['unity'] = '1000'">
+                    ng-init="filters['unity'] = '1000'"
+                    ng-disabled="!showUnit" >
               <option value="1000">Ko</option>
               <option value="1000000">Mo</option>
               <option value="1000000000">Go</option>
@@ -113,10 +117,15 @@
                 <i class="zmdi zmdi-calendar ma-icon" ng-class="{disabledIcon: !showDateRange}"></i>
               </span>
 
-            <div class="fg-line select" ng-class="{disabledIcon: !showDateRange}">
-              <select ng-disabled="!showDateRange" ng-model="filters['dateType']"
-                      class="form-control outlineFFremove w-100 custumSelect"
+            <div class="fg-line" ng-class="{disabledIcon: !showDateRange}">
+              <select chosen
+                      data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
+                      disable-search="true"
+                      allow-single-deselect="true"
+                      ng-model="filters['dateType']"
+                      class="form-control custumSelect outlineFFremove w-100"
                       ng-init="filters['dateType'] = '1'">
+                      ng-disabled="!showDateRange">
                 <option value="1">{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}</option>
                 <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}</option>
               </select>

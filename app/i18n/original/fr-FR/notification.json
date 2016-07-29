@@ -12,6 +12,11 @@
       "CONFIRM_BUTTON": "Oui, continuez !",
       "DONE": "Terminé",
       "IS_CLEARED": "Le stockage local a été effacé"
+    },
+    "ON_MULTIPLE_DOWNLOAD": {
+      "TITLE": "Téléchargement multiple indisponible",
+      "TEXT": "Désolé, la fonctionalitée de téléchargement multiple est en cours de construction",
+      "CONFIRM_BUTTON": "OK"
     }
   },
   "GROWL_ALERT": {

@@ -12,6 +12,11 @@
       "CONFIRM_BUTTON": "Có!",
       "DONE": "Đã xóa xong",
       "IS_CLEARED": "LocalStorage rỗng"
+    },
+    "TBT__ON_MULTIPLE_DOWNLOAD": {
+      "TBT__TITLE": "",
+      "TBT__TEXT": "",
+      "TBT__CONFIRM_BUTTON": ""
     }
   },
   "GROWL_ALERT": {

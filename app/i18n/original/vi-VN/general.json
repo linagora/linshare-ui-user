@@ -3,6 +3,7 @@
   "APPLICATION_WELCOME_HOME": "Chào mừng bạn đã đến với ứng dụng chia sẻ dữ liệu LinShare",
   "REMOVE": "Xóa",
   "DOWNLOAD": "Tải về",
+  "TBT__ME": "",
   "NAVIGATION": {
     "NEXT": "Trang sau",
     "PREVIOUS": "Trang trước",
@@ -81,7 +82,10 @@
     "DOWNLOAD": "Tải về",
     "SHARE": "Chia sẻ",
     "REFRESH": "Làm mới",
+    "TBT__COPY_TO": "",
     "TBT__COPY_IN_WORKGROUP": "Sao chép tập tin vào nhóm",
+    "TBT__COPY_TO_SHARED_SPACE": "",
+    "TBT__COPY_IN_MY_FILES": "",
     "DELETE": "Xóa",
     "TBT__FAVORITES" : "",
     "TBT__SILENCE" : "",
@@ -89,7 +93,6 @@
     "TBT__RENAME" : "",
     "TBT__COPY" : "",
     "TBT__GO_TO_TRASH" : "",
-    "TBT__COPY_IN_MY_FILES" : "",
     "TBT__NEW_WORKGROUP" : "",
     "TBT__MOVE" : "",
     "TBT__VIEW_VERSIONING": "",
@@ -141,7 +144,8 @@
     "SHARE": "Chia sẻ",
     "COPY": "Sao chép",
     "DELETE": "Xóa",
-    "TBT__ELEMENTS": ""
+    "TBT__ELEMENTS": "",
+    "TBT__ORDER_BY": ""
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
@@ -153,7 +157,8 @@
     "UPLOAD_AND_SHARE": "Tải lên và chia sẻ",
     "TBT__UPLOAD_IN_MY_FILES": "",
     "TBT__UPLOAD_IN_WORKGROUP": "",
-    "UPLOAD_IN_GROUP": "Tải tập tin vào nhóm"
+    "UPLOAD_IN_GROUP": "Tải tập tin vào nhóm",
+    "UPLOAD_SHARE": "Tải lên và chia sẻ"
   },
   "TRANSFERS_DROPDOWN": {
     "SHARE": "Chia sẻ",
@@ -164,5 +169,14 @@
   "WORK_IN_PROGRESS": {
   "WORK_IN_PROGRESS_INFO": "Trang này hiện không hoạt động",
   "WORK_IN_PROGRESS_MSG": "ĐANG HOÀN THIỆN"
+  },
+  "TBT__INFORMATION_TAB" : {
+    "TITLE": "",
+    "UPTADED_THE": "",
+    "META_DATA": "",
+    "INSERT_DESCRIPTION": "n",
+    "CREATED_THE": "",
+    "VERSION_HISTORIQUE": "",
+    "VERSIONS": ""
   }
 }

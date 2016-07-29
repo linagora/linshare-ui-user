@@ -81,12 +81,20 @@ angular.module('linshare.receivedShare')
         checkdatasIsSelecteds();
       };
 
-      var swalCopyText, swalCopyConfirm;
+      var swalCopyText, swalCopyConfirm, swalMultipleDownloadTitle , swalMultipleDownloadText ,
+        swalMultipleDownloadConfirm;
       $translate(['SWEET_ALERT.ON_FILE_COPY.TEXT',
-        'SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'])
+        'SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON',
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
         .then(function(translations) {
           swalCopyText = translations['SWEET_ALERT.ON_FILE_COPY.TEXT'];
           swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
+          swalMultipleDownloadTitle= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
+          swalMultipleDownloadText= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
+          swalMultipleDownloadConfirm= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+
         });
 
       $scope.downloadCurrentFile = function(currentFile) {
@@ -201,6 +209,18 @@ angular.module('linshare.receivedShare')
                 });
               });
             }
+          }
+        );
+      };
+
+      $scope.unavailableMultiDownload = function() {
+        swal({
+            title: swalMultipleDownloadTitle,
+            text: swalMultipleDownloadText,
+            type: 'error',
+            confirmButtonColor: '#05b1ff',
+            confirmButtonText: swalMultipleDownloadConfirm,
+            closeOnConfirm: true
           }
         );
       };
@@ -394,9 +414,9 @@ angular.module('linshare.receivedShare')
       $scope.closeDetailSidebar = function() {
         angular.element('#fileListTable tr li').removeClass('activeActionButton');
       };
-      $scope.sortDropdownSetActive = function($event) {
-        var currentStateToggle = $scope.toggleSelectedSort;
-        $scope.toggleSelectedSort = !currentStateToggle;
+      $scope.sortDropdownSetActive = function(sortField, $event) {
+        $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
+        $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
         var currTarget = $event.currentTarget;
         angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
           angular.element(currTarget).addClass('selectedSorting');
@@ -449,6 +469,34 @@ angular.module('linshare.receivedShare')
         }
       });
       $scope.currentPage = 'received_files';
+      $scope.slideTextarea = function($event){
+        var currTarget = $event.currentTarget;
+        angular.element(currTarget).parent().addClass('show-full-comment');
+      };
+      $scope.slideUpTextarea = function($event){
+        var currTarget = $event.currentTarget;
+        angular.element(currTarget).parent().removeClass('show-full-comment');
+      };
+      $scope.setTextInput = function ($event) {
+        var currTarget = $event.currentTarget;
+        var inputTxt = angular.element(currTarget).text();
+        if (inputTxt === '') {
+          angular.element(currTarget).parent().find('span').css('display', 'block');
+        } else {
+          angular.element(currTarget).parent().find('span').css('display', 'none');
+        }
+      };
+      $scope.lsFormat = function() {
+        return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';
+      };
+      $scope.lsFullDateFormat = function() {
+        return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
+      };
+
+      $scope.addSelectedDocument = addSelectedDocument();
+      function addSelectedDocument() {
+        return documentUtilsService.selectDocument.bind(undefined, $scope.selectedDocuments);
+      }
     })
 
   // ===========================================================================

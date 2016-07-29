@@ -288,7 +288,9 @@
                     data-current-selected-Document="vm.currentSelectedDocument"
                     data-right-sidebar-open="mactrl.sidebarToggle.right"
                     ng-click="backToSidebarContentDetails()"
-                    data-ng-class="{'highlightListElem': documentFile.isSelected }" class="p-b-5"
+                    data-ng-class="{'highlightListElem': documentFile.isSelected ,
+                   'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid }"
+                    class="p-b-5"
                     context-menu="moreOptionsContexualMenu"
                     ng-dblclick="vm.gotoSharedSpaceTarget(documentFile.uuid, documentFile.name)">
                   <td data-header="'favoritsheader.html'"
@@ -308,9 +310,8 @@
                           <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"></span>
                         </span>
                       </i>
-                      <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': documentFile.isSelected }">
-                        <i class="fa fa-square-o" ng-if="!documentFile.isSelected"></i>
-                        <i class="fa fa-check-square-o" ng-if="documentFile.isSelected"></i>
+                      <div class="checkbox-ctn-thumb"
+                           ng-class="{'maintain-vis': documentFile.isSelected }">
                       </div>
                     </a>
                   </td>

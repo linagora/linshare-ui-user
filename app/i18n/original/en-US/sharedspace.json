@@ -21,15 +21,6 @@
     "USER_RIGHTS": "User rights",
     "SORT_BY": "Sort by",
     "FILTER_BY": "Filter by"
-  },
-  "INFORMATION_TAB" : {
-    "TITLE": "DETAILS",
-    "UPTADED_THE": "Updated the ",
-    "META_DATA": "Meta data",
-    "INSERT_DESCRIPTION": "Add a file description",
-    "CREATED_THE": "Created the",
-    "VERSION_HISTORIQUE": "Previous updates",
-    "VERSIONS": "Updates"
   }
 }
 

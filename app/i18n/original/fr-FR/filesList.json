@@ -18,6 +18,8 @@
       "MODIFICATION_DATE": "Date de modification",
       "EXPIRATION_DATE": "Date d'expiration",
       "CIPHERED": "Chiffré",
+      "CIPHERED_YES": "Oui",
+      "CIPHERED_NO": "Non",
       "SHARED_WITH": "Partagé avec:",
       "SHARED_BY": "Partagé par:",
       "PEOPLE_SHARED_WITH": "personne(s)",

@@ -170,7 +170,7 @@ angular.module('linshareUiUserApp')
       .state('sharedspace.workgroups', {
         url:'/workgroups',
         templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
-        controller: 'SharedSpaceListController',
+        //controller: 'SharedSpaceListController',
         resolve: {
           workGroupList: function(workGroupRestService) {
             return workGroupRestService.getAllWorkGroups();

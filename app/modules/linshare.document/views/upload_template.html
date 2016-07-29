@@ -24,7 +24,13 @@
         <i class="zmdi zmdi-check-all col-xs-3 disabled"></i>
       </div>
     </section>
-    <div class="breadcrumbsCtn hidden-xs col-xs-12">
+    <div class="menu-popover-ctn hidden-xs clickable"
+         flow-btn href="javascript:void(0)">
+      <a class="add-menu-group" tabindex="0">
+        <i class="zmdi zmdi-plus"></i>
+      </a>
+    </div>
+    <div class="breadcrumbsCtn hidden-xs">
       <a href="#" class="breadcrumb col-xs-11">
         <i class="zmdi zmdi-file"></i>{{ "UPLOADED_FILES.BREADCRUMB_TITLE" | translate }}
       </a>
@@ -61,18 +67,15 @@
            data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
            ng-click="activeBtnShowSelection = !activeBtnShowSelection">
         <p><span>{{lengthOfSelectedDocuments()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
-        <div class="pull-left view-icons-ctn">
+        <div class="pull-left view-icons-ctn groups-view">
           <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
           <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
         </div>
+        <div class="pull-left view-icons-ctn reset-icon" ng-click="resetSelectedDocuments()">
+          <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+        </div>
       </div>
       <div id="toolbar-actions" class="hidden-xs">
-            <span ng-click="resetSelectedDocuments()">
-            <a class="plainTxtBtn" title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
-              <i class="zmdi zmdi-refresh-alt" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
-              <span>{{'SELECTION_TOOLBAR.RESET' | translate}}</span>
-            </a>
-            </span>
             <span>
             <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
                ng-class="{'deActivateSharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
@@ -99,14 +102,18 @@
           <div class="lv-header-alt clearfix" style="display:none">
             <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
           </div>
-          <div class="lv-body">
-            <div class="media-body" ng-repeat="file in $flow.files" ls-on-upload-select
-                 data-ng-class="{'highlightListElem': file.isSelected }">
+          <div class="lv-body ng-table" id="fileListTable" ng-init="isCheckedThumb = true;">
+            <div class="media-body" ng-repeat="file in $flow.files"
+                 ls-on-upload-select
+                 data-ng-class="{'highlightListElem': file.isSelected }"
+                 ng-click="isCheckedThumb = !isCheckedThumb">
               <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
                 <div class="col-xs-24 col-sm-12 animLeft noPadding">
                   <div class="col-xs-6 col-sm-11 pull-left">
-                    <div class="previewIconCtn pull-left hidden-v-xs">
+                    <div class="previewIconCtn pull-left hidden-v-xs set-content-left thumb-type-item " >
                       <i class="fa ls-1p5x" ng-class="'{{file.getType() | mimetypeIcone}}'"></i>
+                          <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': isCheckedThumb }">
+                          </div>
                     </div>
                     <div class="pull-left dataListCtn">
                       <div class="lv-title">{{file.name}}</div>

@@ -13,7 +13,7 @@
         <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 noPadding">
           <md-content>
             <div ng-show="currentSelectedDocument.current.name">
-              <div id="profile-main">
+              <div id="profile-main" class="detail-workgroup">
                 <div class="p-relative m-b-20 img-preview-ctn">
                   <p ng-show="currentSelectedDocument.current.hasThumbnail === true" href="">
                     <img class="img-responsive"
@@ -24,6 +24,19 @@
                     <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
                   </div>
                 </div>
+
+                <div class="description-ctn advancedSharingSettings">
+                  <div contenteditable="true" class="comment"
+                       ng-focus="slideTextarea($event)"
+                       ng-blur="slideUpTextarea($event)"
+                       ng-keyup="setTextInput($event);"></div>
+                  <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+                  <div class="edit-description">
+                    {{currentSelectedDocument.current.description}}
+                    <i class="zmdi zmdi-edit"></i>
+                  </div>
+                </div>
+
                 <div class="visible-xs clearfix sidebar-toolbar">
                   <ul class="actions col-xs-12" ng-show="currentPage == 'my_files'">
                     <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="col-xs-3">
@@ -79,101 +92,82 @@
                     </li>
                   </ul>
                 </div>
-                <div class="p-10">
-                  <div class="listview">
 
-                    <div class="media">
-                      <div ng-if="currentPage == 'my_files'" class="pull-left p-relative col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}
+                <div class="content-detail-area">
+                  <div class="flex-ctn detail-info-ctn">
+                    <div class="itemL">
+                      <span class="first-letter user-info" ng-if="currentPage == 'my_files'">
+                        {{userLogged.firstLetter}}
+                      </span>
+                      <span class="first-letter user-info" ng-if="currentPage == 'received_files'">
+                        {{currentSelectedDocument.current.sender.firstName.charAt(0)}}
+                      </span>
+                    </div>
+
+                    <div class="itemMid">
+                      <div class="name" ng-if="currentPage == 'my_files'">{{'ME' | translate}}</div>
+                      <div class="name" ng-if="currentPage == 'received_files'">
+                        {{currentSelectedDocument.current.sender.firstName}}
+                        {{currentSelectedDocument.current.sender.lastName}}
                       </div>
-                      <div ng-if="currentPage == 'received_files'" class="pull-left p-relative col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.SHARING_DATE' | translate}}
-                      </div>
-                      <div class="media-body">
-                        <div class="lv-title">{{currentSelectedDocument.current.creationDate | date:'medium'}}</div>
+                      <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
+                           uib-tooltip="{{currentSelectedDocument.current.modificationDate | date : lsFullDateFormat()}}">
+                        <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
+                          {{currentSelectedDocument.current.modificationDate | date: lsFormat()}}
+                        </span>
                       </div>
                     </div>
 
-                    <div class="media">
-                      <div class="pull-left p-relative col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.SIZE' | translate}}
-                      </div>
-                      <div class="media-body">
-                        <div class="lv-title">{{currentSelectedDocument.current.size | readableSize: false}}</div>
-                      </div>
+                    <div class="itemR actions">
+                      <span>{{currentSelectedDocument.current.size | readableSize: false}}</span>
+                      <span class="seperator-inline">|</span>
+                      <span title="{{currentSelectedDocument.current.type}}">PDF</span>
                     </div>
+                  </div>
 
-                    <div class="media">
-                      <div class="pull-left p-relative col-md-7">
-                         {{'RIGHT_PANEL.DETAILS.TYPE' | translate}}
+                  <div class="meta-data-ctn">
+                    <h2 class="subheader">
+                      <i class="fa fa-file-text" aria-hidden="true"></i>
+                      {{'INFORMATION_TAB.META_DATA' | translate}}
+                    </h2>
+                    <div class="meta-data-content">
+                      <div>
+                        <p ng-if="currentPage == 'my_files'">
+                          {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}:
+                        </p>
+                        <p ng-if="currentPage == 'received_files'">
+                          {{'RIGHT_PANEL.DETAILS.SHARING_DATE'  | translate}}:
+                        </p>
+                        <p tooltip-placement="bottom" tooltip-popup-delay="500"
+                           uib-tooltip="{{currentSelectedDocument.current.creationDate | date : lsFullDateFormat()}}">
+                           {{currentSelectedDocument.current.creationDate | date : lsFormat()}}
+                        </p>
                       </div>
-                      <div class="media-body">
-                        <div class="lv-title">{{currentSelectedDocument.current.type}}</div>
+                      <div>
+                        <p>{{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}:</p>
+                        <p tooltip-placement="bottom" tooltip-popup-delay="500"
+                           uib-tooltip="{{currentSelectedDocument.current.expirationDate | date : lsFullDateFormat()}}">
+                          {{currentSelectedDocument.current.expirationDate | date : lsFormat()}}
+                        </p>
                       </div>
-                    </div>
-
-                    <div class="media">
-                      <div class="pull-left p-relative col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.MODIFICATION_DATE' | translate}}
+                      <div ng-if="currentPage == 'my_files'">
+                        <p>{{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}</p>
+                        <p ng-click="nextTab()">
+                          <a>{{currentSelectedDocument.current.shared}}
+                          {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' | translate}}
+                          </a>
+                        </p>
                       </div>
-                      <div class="media-body">
-                        <div class="lv-title">{{currentSelectedDocument.current.modificationDate | date:'medium'}}</div>
-                      </div>
-                    </div>
-
-                    <div class="media">
-                      <div class="pull-left p-relative col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}
-                      </div>
-                      <div class="media-body">
-                        <div class="lv-title">{{currentSelectedDocument.current.expirationDate | date:'medium'}}</div>
-                      </div>
-                    </div>
-                    <div ng-show="linshareModeProduction == false" class="media">
-                      <div class="pull-left col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}}
-                      </div>
-                      <div class="media-body">
-                          <span ng-show="currentSelectedDocument.current.ciphered == true">
-                            <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-green"></i>
+                      <div ng-show="linshareModeProduction == false" >
+                        <p>{{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}}:</p>
+                        <p>
+                           <span ng-show="currentSelectedDocument.current.ciphered == true">
+                            {{'RIGHT_PANEL.DETAILS.CIPHERED_YES' | translate}}
                           </span>
                           <span ng-show="currentSelectedDocument.current.ciphered == false">
-                            <i class="zmdi zmdi-shield-check zmdi-hc-lg mdc-text-grey"></i>
+                            {{'RIGHT_PANEL.DETAILS.CIPHERED_NO' | translate}}
                           </span>
-                      </div>
-                    </div>
-
-                    <div class="media" ng-if="currentPage == 'my_files'">
-                      <div class="pull-left col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}
-                      </div>
-                      <div class="media-body">
-                        <div class="lv-title" ng-click="nextTab()">
-                          {{currentSelectedDocument.current.shared}}
-                          {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' | translate}}
-                          <i class="zmdi zmdi-eye zmdi-hc-lg mdc-text-blue p-l-10"
-                             style="cursor: pointer"></i>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="media"  ng-if="currentPage == 'received_files'">
-                      <div class="pull-left col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.SHARED_BY' | translate}}
-                      </div>
-                      <div class="media-body">
-                        <div class="lv-title">
-                          {{currentSelectedDocument.current.sender.mail}}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="media">
-                      <div class="pull-left col-md-7">
-                        {{'RIGHT_PANEL.DETAILS.DESCRIPTION' | translate}}
-                      </div>
-                      <div class="media-body">
-                        <div class="lv-title">{{currentSelectedDocument.current.description}}</div>
+                        </p>
                       </div>
                     </div>
                   </div>

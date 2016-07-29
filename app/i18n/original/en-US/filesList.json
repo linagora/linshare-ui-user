@@ -18,6 +18,8 @@
       "MODIFICATION_DATE": "Modification date",
       "EXPIRATION_DATE": "Expiration date",
       "CIPHERED": "Ciphered",
+      "CIPHERED_YES": "Yes",
+      "CIPHERED_NO": "No",
       "SHARED_WITH": "Shared with:",
       "SHARED_BY": "Shared by:",
       "PEOPLE_SHARED_WITH": "contact(s)",

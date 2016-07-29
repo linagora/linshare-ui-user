@@ -12,6 +12,11 @@
       "CONFIRM_BUTTON": "Yes, delete it!",
       "DONE": "Done",
       "IS_CLEARED": "LocalStorage is cleared"
+    },
+    "ON_MULTIPLE_DOWNLOAD": {
+      "TITLE": "Multiple downloads are currently unavailable",
+      "TEXT": "Sorry the multiple downloads feature is under construction",
+      "CONFIRM_BUTTON": "OK"
     }
   },
   "GROWL_ALERT": {
