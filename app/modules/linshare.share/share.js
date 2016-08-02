@@ -23,8 +23,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         $log.debug('LinshareShareService : getMyShares');
         return Restangular.all('shares').getList();
       },
-      getShare: function(uuid) {
-        $log.debug('LinshareShareService : getShare');
+      get: function(uuid) {
+        $log.debug('LinshareShareService : get a Share');
         return Restangular.one('shares', uuid).get();
       },
       shareDocuments: function (shareDocument) {

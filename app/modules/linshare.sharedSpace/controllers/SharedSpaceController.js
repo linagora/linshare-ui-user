@@ -24,7 +24,6 @@ angular.module('linshareUiUserApp')
       }
     });
     thisctrl.deleteWorkGroup = deleteWorkGroup();
-    thisctrl.removeMember = removeMember;
     thisctrl.memberRole = 'admin';
 
     var swalNewWorkGroupName;
@@ -38,7 +37,7 @@ angular.module('linshareUiUserApp')
           document.execCommand('selectAll', false, null);})
         .on('focusout', function () {
           data.name = idElem[0].textContent;
-          workGroupRestService.updateWorkGroup(data).then(function() {
+          workGroupRestService.update(data).then(function() {
             angular.element(this).attr('contenteditable', 'false');
           });
         });
@@ -140,15 +139,6 @@ angular.module('linshareUiUserApp')
       }, 200);
     };
 
-    // thisctrl.sortSearchMember = function ($event) {
-    //   thisctrl.toggleSelectedSortMembers = !thisctrl.toggleSelectedSortMembers;
-    //   var currTarget = $event.currentTarget;
-    //   angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
-    //   $timeout(function () {
-    //     angular.element(currTarget).addClass('selectedSortingMembers');
-    //   }, 200);
-    // };
-
     thisctrl.gotoSharedSpaceTarget = function(uuid, name) {
       $state.go('sharedspace.workgroups.target', {uuid: uuid, workgroupName: name});
     };
@@ -166,7 +156,7 @@ angular.module('linshareUiUserApp')
       thisctrl.sidebarRightDataType = 'details';
       $scope.sidebarRightDataType = 'details';
 
-      workGroupRestService.getWorkGroup(current.uuid).then(function(data) {
+      workGroupRestService.get(current.uuid).then(function(data) {
         thisctrl.currentSelectedDocument.current = data;
       });
 
@@ -183,18 +173,13 @@ angular.module('linshareUiUserApp')
     }
 
     function createFolder(folderName) {
-      workGroupRestService.createWorkGroup({name: folderName}).then(function(data) {
+      workGroupRestService.create({name: folderName}).then(function(data) {
         thisctrl.allDocuments.push(data);
         thisctrl.tableParams.reload();
         $timeout(function () {
           renameFolder(data);
         },0);
       });
-    }
-
-    function removeMember(workgroup, member) {
-      _.remove(workgroup.members, member);
-      return workGroupRestService.deleteMember(workgroup.uuid, member.uuid);
     }
 
   })

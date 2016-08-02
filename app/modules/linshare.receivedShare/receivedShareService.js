@@ -1,3 +1,7 @@
+/**
+ * @author Alpha O. Sall
+ */
+
 'use strict';
 
 /**
@@ -22,8 +26,8 @@ angular.module('linshare.receivedShare', ['restangular'])
         $log.debug('LinshareReceivedShareService : getReceivedShares');
         return Restangular.all('received_shares').getList();
       },
-      getReceivedShare: function(uuid) {
-        $log.debug('LinshareReceivedShareService : getReceivedShare');
+      get: function(uuid) {
+        $log.debug('LinshareReceivedShareService : get a ReceivedShare');
         return Restangular.one('received_shares', uuid).get();
       },
       getThumbnail: function(uuid) {

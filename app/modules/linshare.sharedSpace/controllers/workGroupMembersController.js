@@ -7,7 +7,7 @@
 angular.module('linshareUiUserApp')
 .controller('WorkGroupMembersController', WorkGroupMembersController);
 
-function WorkGroupMembersController($scope, workGroupRestService, $stateParams, members, currentWorkgroup) {
+function WorkGroupMembersController($scope, workGroupMembersRestService, $stateParams, members, currentWorkgroup) {
 
   $scope.sidebarRightDataType = 'add-member';
   $scope.mactrl.sidebarToggle.right = true;
@@ -35,7 +35,7 @@ function WorkGroupMembersController($scope, workGroupRestService, $stateParams, 
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);
-    return workGroupRestService.deleteMember(thisCtrl.workgroupUuid, member.uuid);
+    return workGroupMembersRestService.delete(thisCtrl.workgroupUuid, member.uuid);
   }
 
   function addMember(member, listMembers) {
@@ -45,7 +45,7 @@ function WorkGroupMembersController($scope, workGroupRestService, $stateParams, 
       readonly: thisCtrl.memberRole === thisCtrl.membersRights.readonly,
       admin: thisCtrl.memberRole === thisCtrl.membersRights.admin
     };
-    workGroupRestService.createMember(thisCtrl.workgroupUuid, jsonMember).then(function(data) {
+    workGroupMembersRestService.create(thisCtrl.workgroupUuid, jsonMember).then(function(data) {
       listMembers.push(data.plain());
     });
   }

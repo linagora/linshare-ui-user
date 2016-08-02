@@ -326,8 +326,9 @@
                 <tr data-ng-repeat="documentFile in $data" ls-item-selection=""
                     data-selected-documents="vm.selectedDocuments"
                     data-document-file="documentFile"
-                    data-current-selected-Document="vm.currentSelectedDocument"
-                    data-sidebar-toggle="mactrl.sidebarToggle.right"
+                    data-current-selected-document="vm.currentSelectedDocument"
+                    data-details-function="vm.getDetails"
+                    data-right-sidebar-open="mactrl.sidebarToggle.right"
                     ng-click="backToSidebarContentDetails()"
                     data-ng-class="{'highlightListElem': documentFile.isSelected ,
                    'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid }"

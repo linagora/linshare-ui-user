@@ -3,7 +3,7 @@
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
-             workGroupRestService, $stateParams) {
+             workGroupEntriesRestService, $stateParams, Restangular) {
       var thisctrl = this;
       thisctrl.uuid = $stateParams.uuid;
       thisctrl.name = $stateParams.workgroupName;
@@ -23,8 +23,11 @@ angular.module('linshareUiUserApp')
           $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
-
+      thisctrl.getDetails = function(item) {
+        return documentUtilsService.getItemDetails(workGroupEntriesRestService, item);
+      };
       $scope.$on('linshare-upload-complete', function(event, data) {
+        Restangular.restangularizeElement(currentWorkGroup, data, data.uuid);
         thisctrl.allDocuments.push(data);
         thisctrl.tableParams.reload();
       });
@@ -73,7 +76,7 @@ angular.module('linshareUiUserApp')
       }
 
       function downloadDocument(document) {
-        return workGroupRestService.downloadWorkGroupEntry(thisctrl.uuid, document.uuid).then(function(fileStream) {
+        return workGroupEntriesRestService.download(thisctrl.uuid, document.uuid).then(function(fileStream) {
             documentUtilsService.downloadFileFromResponse(fileStream, document.name, document.type);
           });
       }
@@ -82,7 +85,7 @@ angular.module('linshareUiUserApp')
         thisctrl.sidebarRightDataType = 'details';
         $scope.sidebarRightDataType = 'details';
 
-        workGroupRestService.getWorkGroupEntry(thisctrl.uuid, current.uuid).then(function(data) {
+        workGroupEntriesRestService.get(thisctrl.uuid, current.uuid).then(function(data) {
           thisctrl.currentSelectedDocument.current = data;
         });
 

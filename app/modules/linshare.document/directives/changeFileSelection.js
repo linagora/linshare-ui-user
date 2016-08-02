@@ -8,12 +8,12 @@ angular.module('linshare.document')
 
     return {
       restrict: 'A',
-      scope: false,
+      scope: true,
       link: function(scope, element) {
         element.bind('contextmenu', function() {
           var isHighlighted = element.hasClass('highlightListElem');
           if(!isHighlighted) {
-            toggleDocumentSelection(scope);
+            scope.toggleDocumentSelection();
           }
         });
         element.bind('click', function() {
@@ -21,35 +21,61 @@ angular.module('linshare.document')
             element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
             element.find('li')[0].className = 'activeActionButton';
           }
-          toggleDocumentSelection(scope);
+          scope.toggleDocumentSelection();
         });
+      },
+      controller: function($scope) {
+        $scope.toggleDocumentSelection = function() {
+          $scope.currentSelectedDocument.current = $scope.documentFile;
+          $scope.documentFile.isSelected = !$scope.documentFile.isSelected;
+          if($scope.documentFile.isSelected) {
+            if($scope.mactrl.sidebarToggle.right) {
+              if($scope.documentFile.shared > 0) {
+                $scope.getDocumentInfo($scope.documentFile.uuid);
+              }
+              if($scope.documentFile.hasThumbnail === true) {
+                $scope.getDocumentThumbnail($scope.documentFile.uuid);
+              }
+            }
+            $scope.$apply(function() {
+              $scope.selectedDocuments.push($scope.documentFile);
+            });
+          } else {
+            var indexMulSelect = $scope.selectedDocuments.indexOf($scope.documentFile);
+            if(indexMulSelect > -1) {
+              $scope.$apply(function() {
+                $scope.selectedDocuments.splice(indexMulSelect, 1);
+              });
+            }
+          }
+        }
       }
     };
 
-    function toggleDocumentSelection(scope) {
-      scope.currentSelectedDocument.current = scope.documentFile;
-      scope.documentFile.isSelected = !scope.documentFile.isSelected;
-      if(scope.documentFile.isSelected) {
-        if(scope.mactrl.sidebarToggle.right) {
-          if(scope.documentFile.shared > 0) {
-            scope.getDocumentInfo(scope.documentFile.uuid);
-          }
-          if(scope.documentFile.hasThumbnail === true) {
-            scope.getDocumentThumbnail(scope.documentFile.uuid);
-          }
-        }
-        scope.$apply(function() {
-          scope.selectedDocuments.push(scope.documentFile);
-        });
-      } else {
-        var indexMulSelect = scope.selectedDocuments.indexOf(scope.documentFile);
-        if(indexMulSelect > -1) {
-          scope.$apply(function() {
-            scope.selectedDocuments.splice(indexMulSelect, 1);
-          });
-        }
-      }
-    }
+    // function toggleDocumentSelection(scope) {
+    //   scope.currentSelectedDocument.current = scope.documentFile;
+    //   scope.documentFile.isSelected = !scope.documentFile.isSelected;
+    //   if(scope.documentFile.isSelected) {
+    //     if(scope.mactrl.sidebarToggle.right) {
+    //       if(scope.documentFile.shared > 0) {
+    //         scope.getDocumentInfo(scope.documentFile.uuid);
+    //       }
+    //       if(scope.documentFile.hasThumbnail === true) {
+    //         scope.getDocumentThumbnail(scope.documentFile.uuid);
+    //       }
+    //     }
+    //     scope.$apply(function() {
+    //       scope.selectedDocuments.push(scope.documentFile);
+    //     });
+    //   } else {
+    //     var indexMulSelect = scope.selectedDocuments.indexOf(scope.documentFile);
+    //     if(indexMulSelect > -1) {
+    //       scope.$apply(function() {
+    //         scope.selectedDocuments.splice(indexMulSelect, 1);
+    //       });
+    //     }
+    //   }
+    // }
   })
 
   .directive('lsItemSelection', function($log) {
@@ -59,14 +85,15 @@ angular.module('linshare.document')
       scope: {
         selectedDocuments:'=',
         currentSelectedDocument: '=',
-        documentFile: '=',
+        item: '=documentFile',
+        detailsFunction: '=',
         rightSidebarOpen: '='
       },
       link: function(scope, element) {
         element.bind('contextmenu', function() {
           var isHighlighted = element.hasClass('highlightListElem');
           if(!isHighlighted) {
-            toggleDocumentSelection(scope);
+            scope.toggleDocumentSelection();
           }
         });
         element.bind('click', function() {
@@ -75,31 +102,25 @@ angular.module('linshare.document')
             element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
             element.find('li')[0].className = 'activeActionButton';
           }
-          toggleDocumentSelection(scope);
+          scope.toggleDocumentSelection();
         });
       },
-      controller: function() {
-      },
-      controllerAs: 'itemlistCtrl'
+      controller: function($scope) {
+        $scope.toggleDocumentSelection = function() {
+          $scope.currentSelectedDocument.current = $scope.item;
+          var multipleSelection = false;
+          if(multipleSelection) {
+            // code goes here when implementing the multiple selection
+          }
+          if($scope.rightSidebarOpen) {
+            $scope.detailsFunction($scope.item).then(function(details) {
+              $scope.currentSelectedDocument.current = details;
+            });
+          }
+          $scope.$apply();
+        }
+      }
     };
-
-    function toggleDocumentSelection(scope) {
-      scope.$apply(function() {
-        scope.currentSelectedDocument.current = scope.documentFile;
-      });
-      var multipleSelection = false;
-      if(multipleSelection) {
-        // code goes here when using a multiple connexion
-      }
-      if(scope.rightSidebarOpen) {
-        if(scope.documentFile.shared > 0) {
-          scope.getItemDetails(scope.documentFile.uuid);
-        }
-        if(scope.documentFile.hasThumbnail === true) {
-          scope.getItemThumbnail(scope.documentFile.uuid);
-        }
-      }
-    }
   })
 
   // DIRECTIVE TO TOGGLE A CURRENT UPLOAD SELECTION
@@ -125,7 +146,7 @@ angular.module('linshare.document')
     };
   })
 
-  //DIRECTIVE TO DISPLAY DIFFERENT CONTENTS INSIDE THE RIGHT SIDEBAR
+  // DIRECTIVE TO DISPLAY DIFFERENT CONTENTS INSIDE THE RIGHT SIDEBAR
   .directive('sidebarContent', function() {
     return {
       restrict: 'A',

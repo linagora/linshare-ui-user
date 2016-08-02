@@ -1,3 +1,7 @@
+/**
+ * @author Alpha O. Sall
+ */
+
 'use strict';
 /**
  * @ngdoc overview
@@ -23,8 +27,8 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         $log.debug('LinshareDocumentRestService:getAllFiles');
         return baseRestDocuments.getList();
       },
-      getFileInfo: function(uuid) {
-        $log.debug('LinshareDocumentRestService:getFileInfo');
+      get: function(uuid) {
+        $log.debug('LinshareDocumentRestService:get a File details');
         return Restangular.one('documents', uuid).get({withShares: true});
       },
       downloadFile: function(uuid) {
@@ -157,7 +161,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
 
     $scope.getDocumentInfo = function(uuid) {
-      LinshareDocumentRestService.getFileInfo(uuid).then(function(data) {
+      LinshareDocumentRestService.get(uuid).then(function(data) {
         $scope.currentSelectedDocument.current.shares = data.shares;
       });
     };
@@ -174,12 +178,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.showCurrentFile = function(currentFile, event) {
       $scope.currentSelectedDocument.current = currentFile;
       $scope.sidebarRightDataType = 'details';
-      if(currentFile.shared > 0) {
-        LinshareDocumentRestService.getFileInfo(currentFile.uuid).then(function(data) {
-          $scope.currentSelectedDocument.current.shares = data.shares;
-        });
-      }
-      if(currentFile.hasThumbnail === true) {
+      LinshareDocumentRestService.get(currentFile.uuid).then(function(data) {
+        $scope.currentSelectedDocument.current = data;
+      });
+      if(currentFile.hasThumbnail) {
         LinshareDocumentRestService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
           $scope.currentSelectedDocument.current.thumbnail = thumbnail;
         });
@@ -189,6 +191,10 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
         angular.element(currElm).addClass('activeActionButton');
       });
+    };
+
+    $scope.getDetails = function(item) {
+      return documentUtilsService.getItemDetails(LinshareDocumentRestService, item);
     };
 
     $scope.reloadDocuments = function() {

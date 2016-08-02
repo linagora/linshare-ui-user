@@ -7,7 +7,7 @@
 angular.module('linshare.document')
   .factory('documentUtilsService', documentService);
 
-function documentService($translate, growlService, $log, $timeout) {
+function documentService($translate, growlService, $log, $timeout, $q) {
   var swalTitle, swalText, swalConfirm, swalCancel;
   $timeout(function() {
     $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
@@ -24,7 +24,8 @@ function documentService($translate, growlService, $log, $timeout) {
     downloadFileFromResponse: downloadFileFromResponse,
     removeElementFromCollection: removeElementFromCollection,
     deleteDocuments: deleteDocuments,
-    selectDocument: selectDocument
+    selectDocument: selectDocument,
+    getItemDetails: getItemDetails
   };
 
   function downloadFileFromResponse(fileStream, fileName, fileType) {
@@ -93,5 +94,25 @@ function documentService($translate, growlService, $log, $timeout) {
         selectedDocuments.splice(indexMulSelect, 1);
       }
     }
+  }
+
+  function getItemDetails(itemService, item) {
+    var details = {};
+    var deferred = $q.defer();
+    itemService.get(item.uuid).then(function(data) {
+      details = data;
+      if(data.hasThumbnail) {
+        itemService.getThumbnail(item.uuid).then(function(thumbnail) {
+          details.thumbnail = thumbnail;
+        });
+      } else {
+        delete details.thumbnail;
+      }
+      deferred.resolve(details);
+    }, function(error) {
+      deferred.reject(error);
+    });
+
+    return deferred.promise;
   }
 }

@@ -1,4 +1,9 @@
+/**
+ * @author Alpha O. Sall
+ */
+
 'use strict';
+
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope, $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
@@ -154,7 +159,7 @@ angular.module('linshare.receivedShare')
         $scope.currentSelectedDocument.current = currentFile;
         $scope.sidebarRightDataType = 'details';
         if(currentFile.shared > 0) {
-          LinshareReceivedShareService.getReceivedShare(currentFile.uuid).then(function(data) {
+          LinshareReceivedShareService.get(currentFile.uuid).then(function(data) {
             $scope.currentSelectedDocument.current.shares = data.shares;
           });
         }
@@ -491,6 +496,10 @@ angular.module('linshare.receivedShare')
       };
       $scope.lsFullDateFormat = function() {
         return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
+      };
+
+      $scope.getDetails = function(item) {
+        return documentUtilsService.getItemDetails(LinshareReceivedShareService, item);
       };
 
       $scope.addSelectedDocument = addSelectedDocument();
