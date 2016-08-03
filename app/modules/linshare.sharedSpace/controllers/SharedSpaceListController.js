@@ -11,14 +11,18 @@ angular.module('linshareUiUserApp')
       thisctrl.selectedDocuments = [];
       thisctrl.currentSelectedDocument = {};
       thisctrl.showItemDetails = showItemDetails;
-
+      thisctrl.paramFilter = {
+        name: ''
+      };
       thisctrl.tableParams = new NgTableParams({
         page: 1,
         sorting: {modificationDate: 'desc'},
-        count: 20
+        count: 20,
+        filter: thisctrl.paramFilter
       }, {
         getData: function($defer, params) {
-          var filesList = params.sorting() ? $filter('orderBy')(thisctrl.allDocuments, params.orderBy()) : thisctrl.allDocuments;
+          var filteredData = params.filter() ? $filter('filter')(thisctrl.allDocuments, params.filter()) : thisctrl.allDocuments;
+          var filesList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(filesList.length);
           $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
@@ -42,6 +46,8 @@ angular.module('linshareUiUserApp')
           growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'success');
         });
       };
+
+      thisctrl.renameItem = renameItem;
 
       thisctrl.currentPage = 'group_list_files';
       $scope.$on('$stateChangeSuccess', function() {
@@ -100,5 +106,23 @@ angular.module('linshareUiUserApp')
         angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
           angular.element(currElm).addClass('activeActionButton');
         });
+      }
+
+      var setElemToEditable = function(idElem, data) {
+        angular.element(idElem).attr('contenteditable', 'true')
+          .on('focus', function () {
+            document.execCommand('selectAll', false, null);})
+          .on('focusout', function () {
+            data.name = idElem[0].textContent;
+            workGroupEntriesRestService.update(thisctrl.uuid, data.uuid, data).then(function() {
+              angular.element(this).attr('contenteditable', 'false');
+            });
+          });
+        angular.element(idElem).focus();
+      };
+
+      function renameItem(item) {
+        var itemNameElem = $('td[uuid='+ item.uuid +']').find('.file-name-disp');
+        setElemToEditable(itemNameElem, item);
       }
     });

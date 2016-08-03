@@ -33,7 +33,6 @@ angular.module('linshareUiUserApp')
 
   // WORKGROUPS ENTRIES REST SERVICE- FILES
   .factory('workGroupEntriesRestService', function(Restangular, $log) {
-
     return {
       getAll: function(WorkGroupUuid) {
         $log.info('workGroupEntriesRestService -  Get all WorkGroupEntries of the WorkGroup ', WorkGroupUuid);
@@ -50,6 +49,10 @@ angular.module('linshareUiUserApp')
       copy: function(workGroupUuid, entryUuid) {
         $log.info('workGroupEntriesRestService - Copy a entry ' + entryUuid + ' of the workgroup', workGroupUuid);
         return Restangular.one('threads', workGroupUuid).one('entries/copy', entryUuid).post();
+      },
+      update: function(workGroupUuid, entryUuid, workGroupEntry) {
+        $log.info('workGroupEntriesRestService - update a entry ' + entryUuid + ' of the workgroup', workGroupUuid);
+        return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customPUT(workGroupEntry);
       },
       getThumbnail: function(workGroupUuid, entryUuid) {
         return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customGET('thumbnail');

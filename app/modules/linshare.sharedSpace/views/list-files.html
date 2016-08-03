@@ -155,7 +155,7 @@
                     <div class="fg-line">
                       <input type="text" class="form-control"
                              autocomplete="off"
-                             ng-model="paramFilter['name']"
+                             ng-model="vm.paramFilter['name']"
                              placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
                              ng-change="updateParams()">
                     </div>
@@ -182,7 +182,7 @@
           <div id="top-search-wrap">
             <i id="top-search-close" data-ng-click="toggleSearchState()">&times;</i>
             <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-                   placeholder="Nom de fichier" ng-change="updateParams()" ng-model="paramFilter['name']"
+                   placeholder="Nom de fichier" ng-change="updateParams()" ng-model="vm.paramFilter['name']"
                    aria-invalid="false">
           </div>
           <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
@@ -277,7 +277,7 @@
                   </li>
                   <li class="divider" ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1"></li>
                   <li ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1">
-                    <a ng-click="renameFolder(documentFile.uuid)">
+                    <a ng-click="vm.renameItem(documentFile)">
                        <i class="zmdi zmdi-border-color"></i>
                        {{'ACTION.RENAME' | translate}}
                     </a>
@@ -442,7 +442,7 @@
                               </li>
                               <li class="divider"></li>
                               <li>
-                                <a ng-click="renameFolder(documentFile.uuid)">
+                                <a ng-click="vm.renameItem(documentFile)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
                                 </a>
@@ -628,7 +628,7 @@
         <li class="divider" ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1"></li>
         <li ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1">
           <a
-            ng-click="renameFolder(documentFile.uuid)">
+            ng-click="vm.renameItem(documentFile)">
           <i class="zmdi zmdi-border-color"></i>
           {{'ACTION.RENAME' | translate}}
           </a>

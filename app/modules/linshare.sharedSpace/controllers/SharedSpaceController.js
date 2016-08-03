@@ -12,13 +12,18 @@ angular.module('linshareUiUserApp')
     thisctrl.selectedDocuments = [];
     thisctrl.addSelectedDocument = addSelectedDocument();
     thisctrl.showItemDetails = showItemDetails;
+    thisctrl.paramFilter = {
+      name: ''
+    };
     thisctrl.tableParams = new NgTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},
-      count: 20
+      count: 20,
+      filter: thisctrl.paramFilter
     }, {
       getData: function ($defer, params) {
-        var workgroups = params.sorting() ? $filter('orderBy')(thisctrl.allDocuments, params.orderBy()) : thisctrl.allDocuments;
+        var filteredData = params.filter() ? $filter('filter')(thisctrl.allDocuments, params.filter()) : thisctrl.allDocuments;
+        var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
         params.total(workgroups.length);
         $defer.resolve(workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
