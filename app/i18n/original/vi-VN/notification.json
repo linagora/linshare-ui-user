@@ -22,7 +22,10 @@
   "GROWL_ALERT": {
     "ACTION": {
       "DELETE": "Đã xóa tập tin thành công",
-      "SHARE": "Đã chia sẻ thành công"
+      "SHARE": "Đã chia sẻ thành công",
+      "TBT__COPY": "",
+      "TBT__SHARE_ASYNC": "",
+      "TBT__SHARE_FAILED": ""
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",

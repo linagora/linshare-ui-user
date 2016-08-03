@@ -36,25 +36,29 @@ angular.module('linshareUiUserApp')
 
     return {
       getAll: function(WorkGroupUuid) {
-        $log.info('WorkGroupRestService -  Get all WorkGroupEntries of the WorkGroup ', WorkGroupUuid);
+        $log.info('workGroupEntriesRestService -  Get all WorkGroupEntries of the WorkGroup ', WorkGroupUuid);
         return Restangular.one('threads', WorkGroupUuid).getList('entries');
       },
       get: function(workGroupUuid, entryUuid) {
-        $log.info('WorkGroupRestService -  Get a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', workGroupUuid);
+        $log.info('workGroupEntriesRestService -  Get a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', workGroupUuid);
         return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).get();
       },
       download: function(workGroupUuid, entryUuid) {
-        $log.info('WorkGroupRestService -  Download a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', workGroupUuid);
+        $log.info('workGroupEntriesRestService -  Download a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', workGroupUuid);
         return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customGET('download');
+      },
+      copy: function(workGroupUuid, entryUuid) {
+        $log.info('workGroupEntriesRestService - Copy a entry ' + entryUuid + ' of the workgroup', workGroupUuid);
+        return Restangular.one('threads', workGroupUuid).one('entries/copy', entryUuid).post();
       },
       getThumbnail: function(workGroupUuid, entryUuid) {
         return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customGET('thumbnail');
       },
       delete: function(entryUuid) {
-        $log.info('WorkGroupRestService -  Delete a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', this.workGroupUuid);
+        $log.info('workGroupEntriesRestService -  Delete a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', this.workGroupUuid);
         return Restangular.one('threads', this.workGroupUuid).one('entries', entryUuid).remove();
       }
-    }
+    };
   })
 
   // WORKGROUPS MEMBERS REST SERVICE
@@ -81,5 +85,5 @@ angular.module('linshareUiUserApp')
         $log.info('WorkGroupRestService -  deleteMember');
         return Restangular.one('threads', workGroupUuid).one('members', memberUuid).remove();
       }
-    }
+    };
   });

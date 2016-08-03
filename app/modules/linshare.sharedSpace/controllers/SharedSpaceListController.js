@@ -37,6 +37,12 @@ angular.module('linshareUiUserApp')
 
       thisctrl.downloadDocument = downloadDocument;
 
+      thisctrl.copy = function(entryUuid) {
+        workGroupEntriesRestService.copy(thisctrl.uuid, entryUuid).then(function() {
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'success');
+        });
+      };
+
       thisctrl.currentPage = 'group_list_files';
       $scope.$on('$stateChangeSuccess', function() {
         angular.element('.multi-select-mobile').appendTo('body');

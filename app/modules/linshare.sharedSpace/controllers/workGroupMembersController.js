@@ -7,7 +7,7 @@
 angular.module('linshareUiUserApp')
 .controller('WorkGroupMembersController', WorkGroupMembersController);
 
-function WorkGroupMembersController($scope, workGroupMembersRestService, $stateParams, members, currentWorkgroup) {
+function WorkGroupMembersController($scope, workGroupMembersRestService, $stateParams, members, currentWorkgroup, $timeout) {
 
   $scope.sidebarRightDataType = 'add-member';
   $scope.mactrl.sidebarToggle.right = true;
@@ -25,7 +25,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
   thisCtrl.updateMember = updateMember;
 
   thisCtrl.sortSearchMember = function($event) {
-    thisctrl.toggleSelectedSortMembers = !thisctrl.toggleSelectedSortMembers;
+    thisCtrl.toggleSelectedSortMembers = !thisCtrl.toggleSelectedSortMembers;
     var currTarget = $event.currentTarget;
     angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
     $timeout(function() {

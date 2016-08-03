@@ -434,7 +434,7 @@
                                   {{'ACTION.LOCK' | translate}}
                                 </a>
                               </li>
-                               <li ng-show="linshareModeProduction == false">
+                              <li ng-show="linshareModeProduction == false">
                                 <a href=""  event-propagation-stop>
                                   <i class="groups-lock-download-alt"></i>
                                   {{'ACTION.EXTERNAL_EDIT' | translate}}
@@ -442,34 +442,34 @@
                               </li>
                               <li class="divider"></li>
                               <li>
-                                <a
-                                  ng-click="renameFolder(documentFile.uuid)">
+                                <a ng-click="renameFolder(documentFile.uuid)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
                                 </a>
                               </li>
                               <li class="divider hidden-xs" ng-show="linshareModeProduction == false"></li>
-                                 <li class="hidden-xs" ng-show="linshareModeProduction == false">
-                                  <a href="" class="parent-sub-menu-link">
-                                    <i class="zmdi zmdi-copy"></i>
-                                    {{'ACTION.COPY' | translate}}
-                                      <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon "></i>
-                                  </a>
-                                   <ul>
-                                    <li><a href="#"><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}} </a></li>
-                                      <li ng-show="linshareModeProduction == false">
-                                        <a href="#">
-                                          <i class="fa fa-files-o"></i>
-                                          {{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}</a>
-                                      </li>
-                                     <li ng-show="linshareModeProduction == false">
-                                       <a href="#">
-                                         <i class="zmdi zmdi-share"></i>
-                                         {{'ACTION.COPY_DROPDOWN.COPY_AND_SHARE' | translate}}
-                                       </a>
-                                     </li>
-                                   </ul>
-                                </li>
+                              <li class="hidden-xs" ng-show="linshareModeProduction == false">
+                                <a href="" class="parent-sub-menu-link">
+                                  <i class="zmdi zmdi-copy"></i>
+                                  {{'ACTION.COPY' | translate}}
+                                  <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon "></i>
+                                </a>
+                                <ul>
+                                  <li><a href="#"><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}} </a></li>
+                                    <li ng-show="linshareModeProduction == false">
+                                      <a href="" ng-click="vm.copy(documentFile.uuid)">ddd
+                                        <i class="fa fa-files-o"></i>
+                                        {{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}
+                                      </a>
+                                    </li>
+                                  <li ng-show="linshareModeProduction == false">
+                                    <a href="#">
+                                      <i class="zmdi zmdi-share"></i>
+                                      {{'ACTION.COPY_DROPDOWN.COPY_AND_SHARE' | translate}}
+                                    </a>
+                                  </li>
+                                </ul>
+                              </li>
                               <li class="hidden-xs" ng-show="linshareModeProduction == false">
                                 <a href="" event-propagation-stop>
                                   <i class="zmdi zmdi-arrows"></i>

@@ -48,7 +48,7 @@ angular.module('linshare.document')
               });
             }
           }
-        }
+        };
       }
     };
 
@@ -118,7 +118,7 @@ angular.module('linshare.document')
             });
           }
           $scope.$apply();
-        }
+        };
       }
     };
   })
