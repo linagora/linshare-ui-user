@@ -55,6 +55,10 @@ angular.module('linshareUiUserApp')
 
     thisctrl.renameFolder = renameFolder;
 
+    thisctrl.getDetails = function(item) {
+      return documentUtilsService.getItemDetails(workGroupRestService, item);
+    };
+
     thisctrl.sortDropdownSetActive = function ($event) {
       thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
       var currTarget = $event.currentTarget;

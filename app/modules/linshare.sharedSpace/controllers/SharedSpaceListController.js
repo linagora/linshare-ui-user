@@ -6,6 +6,7 @@ angular.module('linshareUiUserApp')
              workGroupEntriesRestService, $stateParams, Restangular) {
       var thisctrl = this;
       thisctrl.uuid = $stateParams.uuid;
+      workGroupEntriesRestService.setWorkgroupUuid(thisctrl.uuid);
       thisctrl.name = $stateParams.workgroupName;
       thisctrl.allDocuments = currentWorkGroup;
       thisctrl.selectedDocuments = [];

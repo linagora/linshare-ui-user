@@ -1,13 +1,11 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .factory('workGroupRestService', function(Restangular, $log, $stateParams) {
+  .factory('workGroupRestService', function(Restangular, $log) {
 
     return {
 
       //WORKGROUP
-      workGroupUuid: $stateParams.uuid,
-
       getAll: function() {
         $log.info('WorkGroupRestService - Get All WorkGroups');
         return Restangular.all('threads').getList();
@@ -24,7 +22,7 @@ angular.module('linshareUiUserApp')
         $log.info('WorkGroupRestService - Update WorkGroup');
         return Restangular.one('threads', WorkGroupDto.uuid).customPUT(WorkGroupDto);
       },
-      deleteWorkGroup: function(WorkGroupUuid) {
+      delete: function(WorkGroupUuid) {
         $log.info('WorkGroupRestService - Delete WorkGroups');
         return Restangular.one('threads', WorkGroupUuid).remove();
       }
@@ -33,33 +31,38 @@ angular.module('linshareUiUserApp')
 
   // WORKGROUPS ENTRIES REST SERVICE- FILES
   .factory('workGroupEntriesRestService', function(Restangular, $log) {
+    var _workGroupUuid = null;
+
     return {
-      getAll: function(WorkGroupUuid) {
-        $log.info('workGroupEntriesRestService -  Get all WorkGroupEntries of the WorkGroup ', WorkGroupUuid);
-        return Restangular.one('threads', WorkGroupUuid).getList('entries');
+      getAll: function() {
+        $log.info('workGroupEntriesRestService -  Get all WorkGroupEntries of the WorkGroup ', _workGroupUuid);
+        return Restangular.one('threads', _workGroupUuid).getList('entries');
       },
-      get: function(workGroupUuid, entryUuid) {
-        $log.info('workGroupEntriesRestService -  Get a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', workGroupUuid);
-        return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).get();
+      get: function(entryUuid) {
+        $log.info('workGroupEntriesRestService -  Get a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', _workGroupUuid);
+        return Restangular.one('threads', _workGroupUuid).one('entries', entryUuid).get();
       },
-      download: function(workGroupUuid, entryUuid) {
-        $log.info('workGroupEntriesRestService -  Download a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', workGroupUuid);
-        return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customGET('download');
+      download: function(entryUuid) {
+        $log.info('workGroupEntriesRestService - Download a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', _workGroupUuid);
+        return Restangular.one('threads', _workGroupUuid).one('entries', entryUuid).customGET('download');
       },
-      copy: function(workGroupUuid, entryUuid) {
+      copy: function(entryUuid) {
         $log.info('workGroupEntriesRestService - Copy a entry ' + entryUuid + ' of the workgroup', workGroupUuid);
-        return Restangular.one('threads', workGroupUuid).one('entries/copy', entryUuid).post();
+        return Restangular.one('threads', _workGroupUuid).one('entries/copy', entryUuid).post();
       },
-      update: function(workGroupUuid, entryUuid, workGroupEntry) {
+      update: function(entryUuid, workGroupEntry) {
         $log.info('workGroupEntriesRestService - update a entry ' + entryUuid + ' of the workgroup', workGroupUuid);
-        return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customPUT(workGroupEntry);
+        return Restangular.one('threads', _workGroupUuid).one('entries', entryUuid).customPUT(workGroupEntry);
       },
-      getThumbnail: function(workGroupUuid, entryUuid) {
-        return Restangular.one('threads', workGroupUuid).one('entries', entryUuid).customGET('thumbnail');
+      getThumbnail: function(entryUuid) {
+        return Restangular.one('threads', _workGroupUuid).one('entries', entryUuid).customGET('thumbnail', {base64: true});
       },
       delete: function(entryUuid) {
-        $log.info('workGroupEntriesRestService -  Delete a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', this.workGroupUuid);
-        return Restangular.one('threads', this.workGroupUuid).one('entries', entryUuid).remove();
+        $log.info('workGroupEntriesRestService -  Delete a WorkGroupEntry ' + entryUuid + ' of the WorkGroup ', _workGroupUuid);
+        return Restangular.one('threads', _workGroupUuid).one('entries', entryUuid).remove();
+      },
+      setWorkgroupUuid: function(uuid) {
+        _workGroupUuid = uuid;
       }
     };
   })

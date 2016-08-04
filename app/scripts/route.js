@@ -184,7 +184,8 @@ angular.module('linshareUiUserApp')
         controller: 'SharedSpaceListController as vm',
         resolve: {
           currentWorkGroup: function(workGroupEntriesRestService, $stateParams) {
-            return workGroupEntriesRestService.getAll($stateParams.uuid);
+            workGroupEntriesRestService.setWorkgroupUuid($stateParams.uuid);
+            return workGroupEntriesRestService.getAll();
           }
         }
       })
