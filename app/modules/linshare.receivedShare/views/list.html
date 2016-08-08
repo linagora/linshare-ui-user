@@ -113,7 +113,11 @@
       </div>
 
       <!-- FILTER COMPONENT  -->
-      <filtering-component class="" ls-size="true" ls-date="true" ls-email="true"></filtering-component>
+      <filtering-component class="" ls-size="true" ls-date="true" ls-email="true"
+                           filtered-items-list="documentsList"
+                           initial-items-list="documentsListCopy"
+                           reload-items="tableParams.reload">
+      </filtering-component>
       <div class="clearfix"></div>
     </div>
 

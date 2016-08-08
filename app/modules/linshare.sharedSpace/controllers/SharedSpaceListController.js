@@ -8,7 +8,8 @@ angular.module('linshareUiUserApp')
       thisctrl.uuid = $stateParams.uuid;
       workGroupEntriesRestService.setWorkgroupUuid(thisctrl.uuid);
       thisctrl.name = $stateParams.workgroupName;
-      thisctrl.allDocuments = currentWorkGroup;
+      thisctrl.itemsList = currentWorkGroup;
+      thisctrl.itemsListCopy = thisctrl.itemsList;
       thisctrl.selectedDocuments = [];
       thisctrl.currentSelectedDocument = {};
       thisctrl.showItemDetails = showItemDetails;
@@ -22,7 +23,7 @@ angular.module('linshareUiUserApp')
         filter: thisctrl.paramFilter
       }, {
         getData: function($defer, params) {
-          var filteredData = params.filter() ? $filter('filter')(thisctrl.allDocuments, params.filter()) : thisctrl.allDocuments;
+          var filteredData = params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
           var filesList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(filesList.length);
           $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
@@ -33,7 +34,7 @@ angular.module('linshareUiUserApp')
       };
       $scope.$on('linshare-upload-complete', function(event, data) {
         Restangular.restangularizeElement(currentWorkGroup, data, data.uuid);
-        thisctrl.allDocuments.push(data);
+        thisctrl.itemsList.push(data);
         thisctrl.tableParams.reload();
       });
 
@@ -81,7 +82,7 @@ angular.module('linshareUiUserApp')
 
       function deleteDocuments() {
         return documentUtilsService.deleteDocuments
-          .bind(undefined, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
+          .bind(undefined, thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams);
       }
 
       function addSelectedDocument() {

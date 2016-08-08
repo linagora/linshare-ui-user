@@ -305,13 +305,6 @@ angular.module('linshare.receivedShare')
         filter: $scope.paramFilter
       }, {
         getData: function($defer, params){
-          var userData = {
-            firstName: $scope.selectedRecipient.firstName,
-            lastName: $scope.selectedRecipient.lastName,
-            mail: $scope.selectedRecipient.mail
-          };
-          params.filter().sender = {};
-          params.filter().sender = userData;
           var filteredData = params.filter() ?
               $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
           var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;

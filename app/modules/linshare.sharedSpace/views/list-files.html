@@ -176,7 +176,11 @@
             </div>
           </div>
           <!-- FILTER COMPONENT  -->
-          <filtering-component class="clearfix" ls-size="true" ls-date="true"></filtering-component>
+          <filtering-component class="clearfix" ls-size="true" ls-date="true"
+                               filtered-items-list="vm.itemsList"
+                               initial-items-list="vm.itemsListCopy"
+                               reload-items="vm.tableParams.reload">
+          </filtering-component>
         </div>
         <div id="dropArea">
           <div id="top-search-wrap">

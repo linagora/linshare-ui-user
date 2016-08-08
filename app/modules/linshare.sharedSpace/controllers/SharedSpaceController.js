@@ -8,7 +8,8 @@ angular.module('linshareUiUserApp')
 
     var thisctrl = this;
     thisctrl.currentSelectedDocument = {};
-    thisctrl.allDocuments = workgroups;
+    thisctrl.itemsList = workgroups;
+    thisctrl.itemsListCopy = thisctrl.itemsList;
     thisctrl.selectedDocuments = [];
     thisctrl.addSelectedDocument = addSelectedDocument();
     thisctrl.showItemDetails = showItemDetails;
@@ -22,7 +23,7 @@ angular.module('linshareUiUserApp')
       filter: thisctrl.paramFilter
     }, {
       getData: function ($defer, params) {
-        var filteredData = params.filter() ? $filter('filter')(thisctrl.allDocuments, params.filter()) : thisctrl.allDocuments;
+        var filteredData = params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
         var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
         params.total(workgroups.length);
         $defer.resolve(workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
@@ -154,7 +155,7 @@ angular.module('linshareUiUserApp')
 
     function deleteWorkGroup() {
       return documentUtilsService.deleteDocuments
-        .bind(undefined, thisctrl.allDocuments, thisctrl.selectedDocuments, thisctrl.tableParams);
+        .bind(undefined, thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams);
     }
 
     function addSelectedDocument() {
@@ -183,7 +184,7 @@ angular.module('linshareUiUserApp')
 
     function createFolder(folderName) {
       workGroupRestService.create({name: folderName}).then(function(data) {
-        thisctrl.allDocuments.push(data);
+        thisctrl.itemsList.push(data);
         thisctrl.tableParams.reload();
         $timeout(function () {
           renameFolder(data);
