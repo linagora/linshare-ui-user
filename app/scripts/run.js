@@ -71,15 +71,31 @@ angular.module('linshareUiUserApp')
      * Show message box when an error occured
      */
     Restangular.setErrorInterceptor(function(response) {
-      if (response.status === 503) {
-        growlService.notifyTopCenter('GROWL_ALERT.ERROR.503', 'danger');
+      switch (response.status) {
+        case 400:
+          growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
+          $log.debug('Error ' + response.status, response);
+          break;
+        case 404:
+          $log.debug('Resource not found', response);
+          break;
+        case 500:
+          growlService.notifyTopCenter('GROWL_ALERT.ERROR.500', 'danger');
+          $log.debug('Error ' + response.status, response);
+          break;
+        case 503:
+          growlService.notifyTopCenter('GROWL_ALERT.ERROR.503', 'danger');
+          break;
+        default:
+          growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + response.status, 'danger');
+          $log.debug('Error ' + response.status, response);
       }
       return true;
     });
 
     /*jshint unused: false */
     Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-      $log.debug('my addresponseintercep', response);
+      $log.debug('addResponseInterceptor => date, response', data, response);
       if (response.status === 401) {
         $rootScope.$emit('lsIntercept401');
       }
