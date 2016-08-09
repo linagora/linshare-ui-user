@@ -47,11 +47,11 @@ angular.module('linshareUiUserApp')
         return Restangular.one('threads', _workGroupUuid).one('entries', entryUuid).customGET('download');
       },
       copy: function(entryUuid) {
-        $log.info('workGroupEntriesRestService - Copy a entry ' + entryUuid + ' of the workgroup', workGroupUuid);
+        $log.info('workGroupEntriesRestService - Copy a entry ' + entryUuid + ' of the workgroup', _workGroupUuid);
         return Restangular.one('threads', _workGroupUuid).one('entries/copy', entryUuid).post();
       },
       update: function(entryUuid, workGroupEntry) {
-        $log.info('workGroupEntriesRestService - update a entry ' + entryUuid + ' of the workgroup', workGroupUuid);
+        $log.info('workGroupEntriesRestService - update a entry ' + entryUuid + ' of the workgroup', _workGroupUuid);
         return Restangular.one('threads', _workGroupUuid).one('entries', entryUuid).customPUT(workGroupEntry);
       },
       getThumbnail: function(entryUuid) {

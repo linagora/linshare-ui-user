@@ -40,8 +40,8 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
 
   function addMember(member, listMembers) {
     var jsonMember = {
-      mail: member.mail,
-      domain: member.domain,
+      userMail: member.mail,
+      userDomainId: member.domain,
       readonly: thisCtrl.memberRole === thisCtrl.membersRights.readonly,
       admin: thisCtrl.memberRole === thisCtrl.membersRights.admin
     };
