@@ -22,9 +22,9 @@
     "SORT_BY": "Trier par",
     "FILTER_BY": "Filtrer par",
     "SORT_MEMBER" : {
-      "FIRSTNAME": "First name",
-      "LASTNAME": "Last name",
-      "RIGHT": "Role"
+      "FIRSTNAME": "Prénom",
+      "LASTNAME": "Nom",
+      "RIGHT": "Rôle"
     }
   }
 }

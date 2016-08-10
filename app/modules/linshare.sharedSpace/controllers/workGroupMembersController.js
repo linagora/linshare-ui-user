@@ -40,7 +40,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);
-    return workGroupMembersRestService.delete(thisCtrl.workgroupUuid, member.uuid);
+    return workGroupMembersRestService.delete(thisCtrl.workgroupUuid, member.userUuid);
   }
 
   function addMember(member, listMembers) {

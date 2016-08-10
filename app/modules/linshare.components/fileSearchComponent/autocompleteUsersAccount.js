@@ -28,23 +28,33 @@ angular.module('linshare.components')
       '</div>',
       controller: function($scope) {
         $scope.userRepresentation = function(u) {
-          if (angular.isString(u)) {
-            return u;
+          var template = '';
+          switch (u.type) {
+            case 'simple':
+                  template = u.identifier;
+                  break;
+            case 'mailinglist':
+                  template = u.listName.concat(' ', u.ownerLastName, ' ', u.ownerFirstName);
+                  break;
+            case 'user':
+                  var firstLetter = u.firstName.charAt(0);
+                  template = '' +
+                    '<div  class="recipientsAutocomplete" title="' + u.domain + '">' +
+                    '<span class="firstLetterFormat">' + firstLetter +'</span>' +
+                    '<p class="recipientsInfo">' +
+                    '<span class="user-full-name">'+ u.firstName + ' '+ u.lastName + '</span>' +
+                    '<span class="email">' + u.mail + '</span>' +
+                    '</p>' +
+                    '</div>';
+                  break;
+            case 'threadmember':
+                  //TODO
+                  break;
+            default:
+                  template = u;
+                  break;
           }
-          if(u.type === 'ListAutoCompleteResultDto') {
-            return u.listName.concat(' ', u.ownerLastName, ' ', u.ownerFirstName);
-          }
-          if(u.type === 'AutoCompleteResultDto') {
-            return u.identifier;
-          }
-          var firstLetter = u.firstName.charAt(0);
-          var userSuggestionTemplate = '' +
-            '<div  class="recipientsAutocomplete" title=" '+u.domain+' ">' +
-            '<span class="firstLetterFormat">'+firstLetter+'</span>' +'<p class="recipientsInfo">' +
-            '<span class="user-full-name">'+u.firstName+' '+u.lastName+'</span> <span class="email">'+u.mail+'</span>' +
-            '</p>' +
-            '</div>';
-          return userSuggestionTemplate;
+          return template;
         };
 
         $scope.searchUsersAccount = function(pattern) {
@@ -85,7 +95,7 @@ angular.module('linshare.components')
                   firstName: null,
                   lastName: null,
                   domain: null,
-                  type: 'UserAutoCompleteResultDto'
+                  type: 'user'
                 };
               }
               scope.dealWithSelectedUser(scope.selectedUser, scope.selectedUsersList);
