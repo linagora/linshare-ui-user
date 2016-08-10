@@ -7,7 +7,7 @@
 angular.module('linshareUiUserApp')
 .controller('WorkGroupMembersController', WorkGroupMembersController);
 
-function WorkGroupMembersController($scope, workGroupMembersRestService, $stateParams, members, currentWorkgroup, $timeout) {
+function WorkGroupMembersController($scope, workGroupMembersRestService, $stateParams, members, currentWorkgroup, $filter) {
 
   $scope.sidebarRightDataType = 'add-member';
   $scope.mactrl.sidebarToggle.right = true;
@@ -18,20 +18,25 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
   thisCtrl.membersRights = {admin: 'ADMIN', write: 'WRITE', readonly: 'READ'};
   thisCtrl.memberRole = thisCtrl.membersRights.write;
 
-  thisCtrl.propertyFilter = 'name';
+  thisCtrl.propertyFilter = '';
+  thisCtrl.membersSearchFilter = {$: '', role: ''};
+
+  thisCtrl.propertyOrderBy = 'firstName';
+  thisCtrl.propertyOrderByAsc = true;
+
+  thisCtrl.changePropertyOrderBy = function(orderParam) {
+    thisCtrl.propertyOrderBy = orderParam;
+    thisCtrl.propertyOrderByAsc = thisCtrl.propertyOrderBy === orderParam ? !thisCtrl.propertyOrderByAsc : true;
+    thisCtrl.workgroupMembers = $filter('orderBy')(thisCtrl.workgroupMembers, orderParam, thisCtrl.propertyOrderByAsc);
+  };
+
+  thisCtrl.changeFilterByProperty = function(filterParam) {
+    thisCtrl.membersSearchFilter.role = thisCtrl.membersSearchFilter.role === filterParam ? '' : filterParam;
+  };
 
   thisCtrl.addMember = addMember;
   thisCtrl.removeMember = removeMember;
   thisCtrl.updateMember = updateMember;
-
-  thisCtrl.sortSearchMember = function($event) {
-    thisCtrl.toggleSelectedSortMembers = !thisCtrl.toggleSelectedSortMembers;
-    var currTarget = $event.currentTarget;
-    angular.element('.double-drop a ').removeClass('selectedSortingMembers') ;
-    $timeout(function() {
-      angular.element(currTarget).addClass('selectedSortingMembers');
-    }, 200);
-  };
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);

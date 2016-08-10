@@ -5,6 +5,7 @@ angular.module('linshareUiUserApp')
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
              workGroupEntriesRestService, $stateParams, Restangular) {
       var thisctrl = this;
+      $scope.mactrl.sidebarToggle.right = false;
       thisctrl.uuid = $stateParams.uuid;
       workGroupEntriesRestService.setWorkgroupUuid(thisctrl.uuid);
       thisctrl.name = $stateParams.workgroupName;

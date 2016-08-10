@@ -63,7 +63,7 @@
                           <div class="fg-line">
                             <input type="text" class="form-control"
                                    autocomplete="off"
-                                   ng-model="wkgrpmemberctrl.membersSearchFilter"
+                                   ng-model="wkgrpmemberctrl.membersSearchFilter.$"
                                    placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER' | translate}}"
                                    ng-change="updateParams()">
                           </div>
@@ -79,7 +79,7 @@
                               <div class="list-menu">
                                 <p>{{ "MEMBER_TAB.SORT_BY" | translate }}</p>
                                 <ul class="dropdown-menu dm-icon ">
-                                  <li role="menuitem">
+                                  <li role="menuitem" ng-if="linshareModeProduction === false">
                                     <a href="" class="ng-binding selectedSortingMembers"
                                        ng-click="sortSearchMember($event)">
                                       <span class="caretArea">
@@ -90,19 +90,34 @@
                                     </a>
                                   </li>
                                   <li role="menuitem">
-                                    <a href="" class="ng-binding" ng-click="sortSearchMember($event)">
+                                    <a href="" class="ng-binding"
+                                       ng-class="{'selectedSortingMembers': wkgrpmemberctrl.propertyOrderBy === 'firstName'}"
+                                       ng-click="wkgrpmemberctrl.changePropertyOrderBy('firstName')">
                                       <span class="caretArea">
-                                        <i ng-show="toggleSelectedSortMembers" class="zmdi zmdi-caret-down"></i>
-                                        <i ng-show="!toggleSelectedSortMembers" class="zmdi zmdi-caret-up"></i>
+                                        <i ng-show="wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
+                                        <i ng-show="!wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                                       </span>
-                                      {{'MEMBER_TAB.USER_NAME' | translate }}
+                                     {{'MEMBER_TAB.SORT_MEMBER.FIRSTNAME' | translate }}
                                     </a>
                                   </li>
                                   <li role="menuitem">
-                                    <a href="" class="ng-binding" ng-click="sortSearchMember($event)">
+                                    <a href="" class="ng-binding"
+                                       ng-class="{'selectedSortingMembers': wkgrpmemberctrl.propertyOrderBy === 'lastName'}"
+                                       ng-click="wkgrpmemberctrl.changePropertyOrderBy('lastName')">
                                       <span class="caretArea">
-                                        <i ng-show="toggleSelectedSortMembers" class="zmdi zmdi-caret-down"></i>
-                                        <i ng-show="!toggleSelectedSortMembers" class="zmdi zmdi-caret-up"></i>
+                                        <i ng-show="wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
+                                        <i ng-show="!wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
+                                      </span>
+                                      {{'MEMBER_TAB.SORT_MEMBER.LASTNAME' | translate }}
+                                    </a>
+                                  </li>
+                                  <li role="menuitem">
+                                    <a href="" class="ng-binding"
+                                       ng-class="{'selectedSortingMembers': wkgrpmemberctrl.propertyOrderBy === 'role'}"
+                                       ng-click="wkgrpmemberctrl.changePropertyOrderBy('role')">
+                                      <span class="caretArea">
+                                       <i ng-show="wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
+                                        <i ng-show="!wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                                       </span>
                                       {{'MEMBER_TAB.USER_RIGHTS' | translate }}
                                     </a>
@@ -113,19 +128,25 @@
                                 <p>{{"MEMBER_TAB.FILTER_BY" | translate }}</p>
                                 <ul class="dropdown-menu dm-icon filter-menu">
                                   <li>
-                                    <a href="" class="active-check" ng-click="setDropdownSelected($event)">
+                                    <a href=""
+                                       ng-class="{'active-check': wkgrpmemberctrl.membersSearchFilter.role === 'admin'}"
+                                       ng-click="wkgrpmemberctrl.changeFilterByProperty('admin')">
                                       <span class="checkboxctn"></span>
                                       {{ "MEMBER_TAB.ADMIN_RIGHTS" | translate }}
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="" ng-click="setDropdownSelected($event)">
+                                    <a href=""
+                                       ng-class="{'active-check': wkgrpmemberctrl.membersSearchFilter.role === 'normal'}"
+                                       ng-click="wkgrpmemberctrl.changeFilterByProperty('normal')">
                                       <span class="checkboxctn"></span>
                                       {{ "MEMBER_TAB.WRITE_RIGHTS" | translate }}
                                     </a>
                                   </li>
                                   <li >
-                                    <a href="" ng-click="setDropdownSelected($event)">
+                                    <a href=""
+                                       ng-class="{'active-check': wkgrpmemberctrl.membersSearchFilter.role === 'restricted'}"
+                                       ng-click="wkgrpmemberctrl.changeFilterByProperty('restricted')">
                                       <span class="checkboxctn"></span>
                                       {{ "MEMBER_TAB.READ_RIGHTS" | translate }}
                                     </a>
@@ -143,7 +164,8 @@
                     </div>
                     <div class="existing-member-list-ctn">
                       <div class="flex-ctn"
-                           ng-repeat="workgroupMember in wkgrpmemberctrl.workgroupMembers | filter: wkgrpmemberctrl.membersSearchFilter">
+                           ng-repeat="workgroupMember in wkgrpmemberctrl.workgroupMembers |
+                           filter: wkgrpmemberctrl.membersSearchFilter">
                         <div class="itemL"><span class="first-letter">L</span></div>
                         <div class="itemMid">
                           <div class="name">{{workgroupMember.firstName}} {{workgroupMember.lastName}}</div>
@@ -167,15 +189,15 @@
                             </a>
                             <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown">
                               <li ng-repeat="role in wkgrpmemberctrl.membersRights" ng-switch="role">
-                                <a href="" ng-click="setDropdownSelected(workgroupMember, role)"
+                                <a href="" ng-click="wkgrpmemberctrl.setDropdownSelected(workgroupMember, role)"
                                    ng-switch-when="ADMIN" ng-class="{'active-check': workgroupMember.role == 'admin'}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>
-                                <a href="" ng-click="tsetDropdownSelected(workgroupMember, role)"
+                                <a href="" ng-click="wkgrpmemberctrl.setDropdownSelected(workgroupMember, role)"
                                      ng-switch-when="WRITE" ng-class="{'active-check': workgroupMember.role == 'normal'}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>
-                                <a href="" ng-click="tsetDropdownSelected(workgroupMember, role)"
+                                <a href="" ng-click="wkgrpmemberctrl.setDropdownSelected(workgroupMember, role)"
                                    ng-switch-when="READ" ng-class="{'active-check': workgroupMember.readonly == true}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>

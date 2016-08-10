@@ -20,6 +20,11 @@
     "TBT__USER_NAME": "",
     "TBT__USER_RIGHTS": "",
     "SORT_BY": "",
-    "FILTER_BY": ""
+    "FILTER_BY": "",
+    "SORT_MEMBER" : {
+      "TBT__FIRSTNAME": "",
+      "TBT__LASTNAME": "",
+      "TBT__RIGHT": ""
+    }
   }
 }

@@ -20,7 +20,12 @@
     "USER_NAME": "Nom d'utilisateurs",
     "USER_RIGHTS": "Droit affecté",
     "SORT_BY": "Trier par",
-    "FILTER_BY": "Filtrer par"
+    "FILTER_BY": "Filtrer par",
+    "SORT_MEMBER" : {
+      "FIRSTNAME": "First name",
+      "LASTNAME": "Last name",
+      "RIGHT": "Role"
+    }
   }
 }
 

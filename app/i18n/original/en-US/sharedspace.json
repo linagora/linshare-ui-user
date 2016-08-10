@@ -20,7 +20,12 @@
     "USER_NAME": "User name",
     "USER_RIGHTS": "User rights",
     "SORT_BY": "Sort by",
-    "FILTER_BY": "Filter by"
+    "FILTER_BY": "Filter by",
+    "SORT_MEMBER" : {
+      "FIRSTNAME": "First name",
+      "LASTNAME": "Last name",
+      "RIGHT": "Role"
+    }
   }
 }
 
