@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('linshare.components')
-  .directive('filteringComponent', function(componentsConfig, $translate, lsAppConfig, LinshareShareService) {
+  .directive('filteringComponent', function(componentsConfig, $translate, lsAppConfig, autocompleteUserRestService) {
     var FR_DATE_FORMAT = lsAppConfig.date_fr_format;
     var EN_DATE_FORMAT = lsAppConfig.date_en_format;
     return {
@@ -78,7 +78,7 @@ angular.module('linshare.components')
         $scope.searchGuestRestrictedContacts = function(pattern) {
           $scope.popoverValue = '';
           $scope.selectedRecipient = '';
-          return LinshareShareService.autocomplete(pattern);
+          return autocompleteUserRestService(pattern, 'USERS');
         };
 
         $scope.userRepresentation = function(u) {

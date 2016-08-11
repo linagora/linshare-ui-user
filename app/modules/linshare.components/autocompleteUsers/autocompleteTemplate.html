@@ -1,0 +1,15 @@
+<div class="chat-search">
+  <div class="fg-line">
+    <input id="focusInputShare" type="text" class="form-control"
+           placeholder="{{ 'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}" autocomplete="off"
+           x-ng-model="selectedUser" required
+           x-typeahead-min-length="3"
+           x-typeahead-on-select="dealWithSelectedUser(selectedUser, selectedUsersList)"
+           x-typeahead-wait-ms="30"
+           x-typeahead-loading="searchingContact"
+           x-typeahead-editable="false"
+           x-typeahead-no-results="noResult"
+           x-typeahead-input-formatter="angular.noop"
+           x-uib-typeahead="u as userRepresentation(u) for u in searchUsersAccount($viewValue) | limitTo:3">
+  </div>
+</div>

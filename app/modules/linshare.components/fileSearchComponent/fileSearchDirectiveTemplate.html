@@ -213,7 +213,7 @@
                    x-typeahead-wait-ms="30"
                    x-typeahead-loading="searchingContact"
                    x-typeahead-input-formatter="formatLabel(filters['selectedContact'])"
-                   x-typeahead="u as userRepresentation(u) for u in searchGuestRestrictedContacts($viewValue) | limitTo:3"
+                   x-uib-typeahead="u as userRepresentation(u) for u in searchGuestRestrictedContacts($viewValue) | limitTo:3"
                    popover-placement="bottom"
                    popover-trigger="mouseenter"
                    popover-title="Email"

@@ -135,7 +135,7 @@
     }
   },
   "FILTER_COMPONENT": {
-    "PLACEHOLDER_FILE_NAME": "Nom de fichier",
+    "PLACEHOLDER_FILE_NAME": "Recherche par nom",
     "FILTER_BY_SIZE": "Filtrer par taille",
     "IS_SHARED": "Partagé",
     "FILTER_BY_DATE": {

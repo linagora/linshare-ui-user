@@ -133,7 +133,7 @@
     }
   },
   "FILTER_COMPONENT": {
-    "PLACEHOLDER_FILE_NAME": "File Name",
+    "PLACEHOLDER_FILE_NAME": "Search by name",
     "FILTER_BY_SIZE": "Filter by size",
     "IS_SHARED": "Partagé",
     "FILTER_BY_DATE": {

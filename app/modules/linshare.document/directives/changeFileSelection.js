@@ -51,31 +51,6 @@ angular.module('linshare.document')
         };
       }
     };
-
-    // function toggleDocumentSelection(scope) {
-    //   scope.currentSelectedDocument.current = scope.documentFile;
-    //   scope.documentFile.isSelected = !scope.documentFile.isSelected;
-    //   if(scope.documentFile.isSelected) {
-    //     if(scope.mactrl.sidebarToggle.right) {
-    //       if(scope.documentFile.shared > 0) {
-    //         scope.getDocumentInfo(scope.documentFile.uuid);
-    //       }
-    //       if(scope.documentFile.hasThumbnail === true) {
-    //         scope.getDocumentThumbnail(scope.documentFile.uuid);
-    //       }
-    //     }
-    //     scope.$apply(function() {
-    //       scope.selectedDocuments.push(scope.documentFile);
-    //     });
-    //   } else {
-    //     var indexMulSelect = scope.selectedDocuments.indexOf(scope.documentFile);
-    //     if(indexMulSelect > -1) {
-    //       scope.$apply(function() {
-    //         scope.selectedDocuments.splice(indexMulSelect, 1);
-    //       });
-    //     }
-    //   }
-    // }
   })
 
   .directive('lsItemSelection', function($log) {

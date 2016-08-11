@@ -54,7 +54,6 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
 
           }, function (error) {
             $log.error('Authentication failed', error.status);
-
             deferred.reject(error);
           });
         },

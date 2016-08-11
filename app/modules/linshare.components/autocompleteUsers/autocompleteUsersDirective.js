@@ -4,28 +4,14 @@
 'use strict';
 
 angular.module('linshare.components')
-  .directive('autocompleteUser', function(LinshareShareService, $log, $q) {
+  .directive('lsAutocompleteUser', function(autocompleteUserRestService, $log, $q, componentsConfig) {
     return {
       restrict: 'A',
       scope: {
         selectedUsersList: '=',
         onSelectFunction: '='
       },
-      template: '<div class="chat-search">' +
-      '<div class="fg-line">' +
-      '<input id="focusInputShare" type="text" class="form-control"' +
-      'placeholder="{{ \'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER \' | translate}}" autocomplete="off"' +
-      'x-ng-model="selectedUser" required' +
-      'x-typeahead-min-length="3" ' +
-      'x-typeahead-on-select="dealWithSelectedUser(selectedUser, selectedUsersList)" ' +
-      'x-typeahead-wait-ms="30" ' +
-      'x-typeahead-loading="searchingContact" ' +
-      'x-typeahead-editable="false"' +
-      'x-typeahead-no-results="noResult"' +
-      'x-typeahead-input-formatter="angular.noop" ' +
-      'x-uib-typeahead="u as userRepresentation(u) for u in searchUsersAccount($viewValue) | limitTo:3">' +
-      '</div>' +
-      '</div>',
+      templateUrl: componentsConfig.path + 'autocompleteUsers/autocompleteTemplate.html',
       controller: function($scope) {
         $scope.userRepresentation = function(u) {
           var template = '';
@@ -48,7 +34,15 @@ angular.module('linshare.components')
                     '</div>';
                   break;
             case 'threadmember':
-                  //TODO
+                  var isMemberClass = u.member === true ? ' firstLetterBgdGreen': '';
+                  template = '' +
+                    '<div class="recipientsAutocomplete" title="' + u.domain + '">' +
+                    '<span class="firstLetterFormat' + isMemberClass + '">' + u.firstName.charAt() + '</span>' +
+                    '<p class="recipientsInfo">' +
+                    '<span class="user-full-name">'+ u.firstName + ' '+ u.lastName + '</span>' +
+                    '<span class="email">' + u.mail + '</span>' +
+                    '</p>' +
+                    '</div>';
                   break;
             default:
                   template = u;
@@ -60,7 +54,7 @@ angular.module('linshare.components')
         $scope.searchUsersAccount = function(pattern) {
           if(pattern.length >= 3) {
             var deferred = $q.defer();
-            LinshareShareService.autocomplete(pattern).then(function(data) {
+            autocompleteUserRestService(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
               if(data.length === 0) {
                 $scope.userEmail = pattern;
               }
@@ -85,7 +79,9 @@ angular.module('linshare.components')
 
         $scope.dealWithSelectedUser = $scope.onSelectFunction || addRecipients;
       },
-      link: function(scope, elm) {
+      link: function(scope, elm, attrs) {
+        scope.completeType = attrs.lsAutocompleteUser;
+        scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
         elm.bind('keypress', function(event) {
           if(event.keyCode === 13) {
             if(scope.noResult === true) {
