@@ -3,7 +3,9 @@
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
-             workGroupEntriesRestService, $stateParams, Restangular) {
+             workGroupEntriesRestService, $stateParams, Restangular, $translatePartialLoader) {
+      $translatePartialLoader.addPart('filesList');
+      $translatePartialLoader.addPart('sharedspace');
       var thisctrl = this;
       $scope.mactrl.sidebarToggle.right = false;
       thisctrl.uuid = $stateParams.uuid;
@@ -39,7 +41,7 @@ angular.module('linshareUiUserApp')
         thisctrl.tableParams.reload();
       });
 
-      thisctrl.addSelectedDocument = addSelectedDocument();
+      thisctrl.addSelectedDocument = addSelectedDocument;
       thisctrl.deleteDocuments = deleteDocuments();
 
       thisctrl.downloadDocument = downloadDocument;
@@ -81,13 +83,55 @@ angular.module('linshareUiUserApp')
         }
       };
 
+      thisctrl.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
+      thisctrl.flagsOnSelectedPages = {};
+
+      thisctrl.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
+        var currentPage = page || thisctrl.tableParams.page();
+        var dataOnPage = data || thisctrl.tableParams.data;
+        var select = selectFlag || thisctrl.flagsOnSelectedPages[currentPage];
+        if(!select) {
+          angular.forEach(dataOnPage, function(element) {
+            if(!element.isSelected) {
+              element.isSelected = true;
+              thisctrl.selectedDocuments.push(element);
+            }
+          });
+          thisctrl.flagsOnSelectedPages[currentPage] = true;
+        } else {
+          thisctrl.selectedDocuments = _.xor(thisctrl.selectedDocuments, dataOnPage);
+          angular.forEach(dataOnPage, function(element) {
+            if(element.isSelected) {
+              element.isSelected = false;
+              _.remove(thisctrl.selectedDocuments, function(n) {
+                return n.uuid === element.uuid;
+              });
+            }
+          });
+          thisctrl.flagsOnSelectedPages[currentPage] = false;
+        }
+      };
+
+      thisctrl.resetSelectedDocuments = function() {
+        delete thisctrl.tableParams.filter().isSelected;
+        documentUtilsService.resetItemSelection(thisctrl.selectedDocuments);
+      };
+
       function deleteDocuments() {
         return documentUtilsService.deleteDocuments
           .bind(undefined, thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams);
       }
 
-      function addSelectedDocument() {
-        return documentUtilsService.selectDocument.bind(undefined, thisctrl.selectedDocuments);
+      function addSelectedDocument(document) {
+        documentUtilsService.selectDocument(thisctrl.selectedDocuments, document);
+      }
+
+      function toggleFilterBySelectedFiles() {
+        if(thisctrl.tableParams.filter().isSelected) {
+          delete thisctrl.tableParams.filter().isSelected;
+        } else {
+          thisctrl.tableParams.filter().isSelected = true;
+        }
       }
 
       function downloadDocument(document) {
@@ -117,7 +161,7 @@ angular.module('linshareUiUserApp')
             document.execCommand('selectAll', false, null);})
           .on('focusout', function () {
             data.name = idElem[0].textContent;
-            workGroupEntriesRestService.update(thisctrl.uuid, data.uuid, data).then(function() {
+            workGroupEntriesRestService.update(data.uuid, data).then(function() {
               angular.element(this).attr('contenteditable', 'false');
             });
           });

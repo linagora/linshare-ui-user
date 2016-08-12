@@ -3,6 +3,7 @@
   "TABLE_HEADER": {
     "NAME": "Name",
     "MODIFICATION_DATE": "Last modification",
+    "CREATION_DATE": "Creation date",
     "SIZE": "Size",
     "ACTION": "Actions"
   },

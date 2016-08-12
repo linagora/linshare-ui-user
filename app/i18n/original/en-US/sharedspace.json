@@ -26,6 +26,8 @@
       "LASTNAME": "Last name",
       "RIGHT": "Role"
     }
-  }
+  },
+  "BREADCRUMB_TITLE_WORKGROUP": "Workgroups",
+  "BREADCRUMB_TITLE_WORKGROUP_FILES": "Files"
 }
 

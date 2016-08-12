@@ -24,8 +24,9 @@ function documentService($translate, growlService, $log, $timeout, $q) {
     downloadFileFromResponse: downloadFileFromResponse,
     removeElementFromCollection: removeElementFromCollection,
     deleteDocuments: deleteDocuments,
-    selectDocument: selectDocument,
-    getItemDetails: getItemDetails
+    selectDocument: toggleItemSelection,
+    getItemDetails: getItemDetails,
+    resetItemSelection: resetItemSelection
   };
 
   function downloadFileFromResponse(fileStream, fileName, fileType) {
@@ -84,14 +85,14 @@ function documentService($translate, growlService, $log, $timeout, $q) {
     );
   }
 
-  function selectDocument(selectedDocuments, document) {
-    document.isSelected = !document.isSelected;
-    if(document.isSelected) {
-      selectedDocuments.push(document);
+  function toggleItemSelection(selectedItems, item) {
+    item.isSelected = !item.isSelected;
+    if(item.isSelected) {
+      selectedItems.push(item);
     } else {
-      var indexMulSelect = selectedDocuments.indexOf(document);
-      if(indexMulSelect > -1) {
-        selectedDocuments.splice(indexMulSelect, 1);
+      var index = selectedItems.indexOf(item);
+      if(index > -1) {
+        selectedItems.splice(index, 1);
       }
     }
   }
@@ -114,5 +115,12 @@ function documentService($translate, growlService, $log, $timeout, $q) {
     });
 
     return deferred.promise;
+  }
+
+  function resetItemSelection(selectedItems) {
+    for(var i = selectedItems.length - 1; i >= 0; i--) {
+      selectedItems[i].isSelected = false;
+      selectedItems.splice(i, 1);
+    }
   }
 }

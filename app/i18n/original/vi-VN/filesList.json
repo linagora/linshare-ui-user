@@ -3,6 +3,7 @@
   "TABLE_HEADER": {
     "NAME": "Tên",
     "MODIFICATION_DATE": "Lần thay đổi cuối cùng",
+    "TBT__CREATION_DATE": "",
     "SIZE": "Kích cỡ",
     "ACTION": "Tác vụ"
   },

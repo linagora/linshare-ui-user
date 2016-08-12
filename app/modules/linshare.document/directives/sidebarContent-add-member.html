@@ -12,6 +12,16 @@
         <md-tab id="tab1" ng-if="vm.currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
                 class="col-xs-4 noPadding">
           <md-content class="md-padding">
+            <div class="lv-body stop-propagate">
+              <div class="lv-item">
+                <div class="work-in-progress-ctn-elm">
+                  <div class="work-in-progress-content">
+                    <img src="images/wip-banner-small.png">
+                    <p class="ng-binding">EN COURS DE CONSTRUCTION</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </md-content>
         </md-tab>
         <md-tab id="tab2" label="{{'MEMBER_TAB.TITLE' | translate}}" class="col-xs-4 noPadding disabled">
@@ -158,7 +168,9 @@
                           </span>
                         </div>
                       </form>
-                      <a href="javascript:void(0)" class="r-a-lin" ng-click="wkgrpmemberctrl.loadSidebarContent('multi-select-rights')"
+                      <a ng-if="linshareModeProduction === false"
+                         href="javascript:void(0)" class="r-a-lin"
+                         ng-click="wkgrpmemberctrl.loadSidebarContent('multi-select-rights')"
                          title="{{'MEMBER_TAB.MULTI_SELECT' | translate}}">
                         {{ "MEMBER_TAB.MULTI_SELECT" | translate }}
                       </a>
@@ -190,15 +202,15 @@
                             </a>
                             <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown">
                               <li ng-repeat="role in wkgrpmemberctrl.membersRights" ng-switch="role">
-                                <a href="" ng-click="wkgrpmemberctrl.setDropdownSelected(workgroupMember, role)"
-                                   ng-switch-when="ADMIN" ng-class="{'active-check': workgroupMember.role == 'admin'}">
+                                <a href="" ng-click="wkgrpmemberctrl.updateMember(workgroupMember, 'admin')"
+                                   ng-switch-when="ADMIN" ng-class="{'active-check': workgroupMember.admin == true}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>
-                                <a href="" ng-click="wkgrpmemberctrl.setDropdownSelected(workgroupMember, role)"
+                                <a href="" ng-click="wkgrpmemberctrl.updateMember(workgroupMember, 'normal')"
                                      ng-switch-when="WRITE" ng-class="{'active-check': workgroupMember.role == 'normal'}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>
-                                <a href="" ng-click="wkgrpmemberctrl.setDropdownSelected(workgroupMember, role)"
+                                <a href="" ng-click="wkgrpmemberctrl.updateMember(workgroupMember, 'readonly')"
                                    ng-switch-when="READ" ng-class="{'active-check': workgroupMember.readonly == true}">
                                   {{ "MEMBER_TAB." + role | translate }}
                                 </a>

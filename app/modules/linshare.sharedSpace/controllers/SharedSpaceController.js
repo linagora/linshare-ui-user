@@ -11,11 +11,9 @@ angular.module('linshareUiUserApp')
     thisctrl.itemsList = workgroups;
     thisctrl.itemsListCopy = thisctrl.itemsList;
     thisctrl.selectedDocuments = [];
-    thisctrl.addSelectedDocument = addSelectedDocument();
+    thisctrl.addSelectedDocument = addSelectedDocument;
     thisctrl.showItemDetails = showItemDetails;
-    thisctrl.paramFilter = {
-      name: ''
-    };
+    thisctrl.paramFilter = {name: ''};
     thisctrl.tableParams = new NgTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},
@@ -29,7 +27,7 @@ angular.module('linshareUiUserApp')
         $defer.resolve(workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
-    thisctrl.deleteWorkGroup = deleteWorkGroup();
+    thisctrl.deleteWorkGroup = deleteWorkGroup;
     thisctrl.memberRole = 'admin';
 
     var swalNewWorkGroupName;
@@ -60,6 +58,8 @@ angular.module('linshareUiUserApp')
       return documentUtilsService.getItemDetails(workGroupRestService, item);
     };
 
+    thisctrl.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
+
     thisctrl.sortDropdownSetActive = function ($event) {
       thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
       var currTarget = $event.currentTarget;
@@ -68,11 +68,9 @@ angular.module('linshareUiUserApp')
       });
     };
 
-    thisctrl.resetSelectedDocuments = function () {
-      angular.forEach(thisctrl.selectedDocuments, function (selectedDoc) {
-        selectedDoc.isSelected = false;
-      });
-      thisctrl.selectedDocuments = [];
+    thisctrl.resetSelectedDocuments = function() {
+      delete thisctrl.tableParams.filter().isSelected;
+      documentUtilsService.resetItemSelection(thisctrl.selectedDocuments);
     };
 
     var openSearch = function () {
@@ -153,13 +151,48 @@ angular.module('linshareUiUserApp')
       $state.go('sharedspace.workgroups.target', {uuid: uuid, workgroupName: name});
     };
 
-    function deleteWorkGroup() {
-      return documentUtilsService.deleteDocuments
-        .bind(undefined, thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams);
+    thisctrl.flagsOnSelectedPages = {};
+
+    thisctrl.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
+      var currentPage = page || thisctrl.tableParams.page();
+      var dataOnPage = data || thisctrl.tableParams.data;
+      var select = selectFlag || thisctrl.flagsOnSelectedPages[currentPage];
+      if(!select) {
+        angular.forEach(dataOnPage, function(element) {
+          if(!element.isSelected) {
+            element.isSelected = true;
+            thisctrl.selectedDocuments.push(element);
+          }
+        });
+        thisctrl.flagsOnSelectedPages[currentPage] = true;
+      } else {
+        thisctrl.selectedDocuments = _.xor(thisctrl.selectedDocuments, dataOnPage);
+        angular.forEach(dataOnPage, function(element) {
+          if(element.isSelected) {
+            element.isSelected = false;
+            _.remove(thisctrl.selectedDocuments, function(n) {
+              return n.uuid === element.uuid;
+            });
+          }
+        });
+        thisctrl.flagsOnSelectedPages[currentPage] = false;
+      }
+    };
+
+    function deleteWorkGroup(document) {
+      documentUtilsService.deleteDocuments(thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams, document);
     }
 
-    function addSelectedDocument() {
-      return documentUtilsService.selectDocument.bind(undefined, thisctrl.selectedDocuments);
+    function addSelectedDocument(document) {
+      documentUtilsService.selectDocument(thisctrl.selectedDocuments, document);
+    }
+
+    function toggleFilterBySelectedFiles() {
+      if(thisctrl.tableParams.filter().isSelected) {
+        delete thisctrl.tableParams.filter().isSelected;
+      } else {
+        thisctrl.tableParams.filter().isSelected = true;
+      }
     }
 
     function showItemDetails(current, event) {
@@ -192,30 +225,4 @@ angular.module('linshareUiUserApp')
       });
     }
 
-  })
-
-  .directive('hoverDropdownFix', function() {
-    return {
-      restrict: 'A',
-      link: function(scope, el) {
-        scope.$watch(function() {
-          return el.hasClass('open');
-        }, function(newValue,closeDropdown) {
-          if(closeDropdown) {
-            angular.element('.uib-dropdown-menu.open').removeClass('open');
-          }
-          if(newValue) {
-            angular.element('.uib-dropdown-menu').each(function() {
-              var state= angular.element(this).css('display');
-              if(state === 'block') {
-                angular.element(this).addClass('open');
-              }
-            });
-            angular.element(el).parent().addClass('setVisible');
-          }else{
-            angular.element(el).parent().removeClass('setVisible');
-          }
-        });
-      }
-    };
-});
+  });

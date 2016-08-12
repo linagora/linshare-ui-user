@@ -381,9 +381,9 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.lsFullDateFormat = function() {
       return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
     };
-    $scope.addSelectedDocument = addSelectedDocument();
-    function addSelectedDocument() {
-      return documentUtilsService.selectDocument.bind(undefined, $scope.selectedDocuments);
+    $scope.addSelectedDocument = addSelectedDocument;
+    function addSelectedDocument(document) {
+      documentUtilsService.selectDocument($scope.selectedDocuments, document);
     }
 
 

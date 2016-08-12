@@ -55,7 +55,22 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
     });
   }
 
-  function updateMember() {
-
+  function updateMember(member, role) {
+    member.role = role;
+    if(role === 'admin') {
+      member.admin = true;
+      member.readonly = false;
+    }
+    if(role === 'readonly') {
+      member.admin = false;
+      member.readonly = true;
+    }
+    if(role === 'normal') {
+      member.admin = false;
+      member.readonly = false;
+    }
+    workGroupMembersRestService.update(thisCtrl.workgroupUuid, member).then(function(updatedMember) {
+      member = updatedMember;
+    });
   }
 }

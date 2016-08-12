@@ -1,5 +1,5 @@
 {
-  "BREADCRUMB_TITLE": "Received files",
+  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Received files",
   "TOOLTIP" : {
     "ADVANCED_FILTER" : "Show advanced filters",
     "REMOVE_FILES" : "Remove selected files",
