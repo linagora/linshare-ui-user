@@ -90,10 +90,7 @@ function documentService($translate, growlService, $log, $timeout, $q) {
     if(item.isSelected) {
       selectedItems.push(item);
     } else {
-      var index = selectedItems.indexOf(item);
-      if(index > -1) {
-        selectedItems.splice(index, 1);
-      }
+      removeElementFromCollection(selectedItems, item);
     }
   }
 

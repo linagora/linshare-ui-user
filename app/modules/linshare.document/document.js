@@ -95,11 +95,20 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.loadSidebarContent = function(content) {
       $scope.sidebarRightDataType = content || 'share';
     };
-    $scope.onShare = function() {
+    $scope.onShare = function(document) {
       $scope.loadSidebarContent();
       $timeout(function() {
           angular.element('#focusInputShare').trigger('focus');
       }, 350);
+      if(document) {
+        var index = $scope.selectedDocuments.indexOf(document);
+        if(index === -1) {
+          document.isSelected = true;
+          $scope.selectedDocuments.push(document);
+        } else {
+          $log.debug('addItem - item is already in the list');
+        }
+      }
     };
     $scope.lengthOfSelectedDocuments = function() {
       return $scope.selectedDocuments.length;
