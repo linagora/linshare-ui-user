@@ -57,7 +57,7 @@
     </form>
 
     <div class="custumListBody col-xs-12 ">
-      <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients() | orderBy : '-'"
+      <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients() | orderBy : '-' as results"
            tooltip-placement="bottom" tooltip-popup-delay="700"
            uib-tooltip="{{recipient.domain || recipient.mail}}">
         <p class="pull-left circleCtn">
@@ -71,7 +71,7 @@
           <p ng-show="!recipient.domain" class="pull-left inner-text-li">
             {{recipient.mail}}
           </p>
-          <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
+          <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient(results.length - $index -1)">
             <i class="zmdi zmdi-close "></i>
           </p>
         </div>
