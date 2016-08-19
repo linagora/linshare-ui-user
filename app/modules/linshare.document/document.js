@@ -208,8 +208,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
               $scope.isNewAddition = false;
             }, 0);
         }, 500);
-
-
       });
     };
 

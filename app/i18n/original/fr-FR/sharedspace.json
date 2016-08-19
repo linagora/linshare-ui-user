@@ -27,6 +27,10 @@
       "RIGHT": "Rôle"
     }
   },
+  "DETAILS": {
+    "FULL_SIZE": "Taille totale ",
+    "TRASH_FULL_SIZE": "Taille corbeille "
+  },
   "BREADCRUMB_TITLE_WORKGROUP": "Groupes",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers"
 }

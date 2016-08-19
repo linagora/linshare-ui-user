@@ -160,7 +160,7 @@
                  placeholder="Nom de fichier" ng-change="updateParams()" ng-model="paramFilter['name']"
                  aria-invalid="false">
         </div>
-        <div id="selection-actions" class="defaultMultiToolbarState"
+        <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
              data-ng-class="{'showMultiMenu': selectedDocuments.length > 0}">
           <div class="toogleCkeckboxToolbar" ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
             <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope" >

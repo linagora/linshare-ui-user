@@ -121,7 +121,9 @@
                     <div class="itemR actions">
                       <span>{{currentSelectedDocument.current.size | readableSize: false}}</span>
                       <span class="seperator-inline">|</span>
-                      <span title="{{currentSelectedDocument.current.type}}">PDF</span>
+                      <span title="{{currentSelectedDocument.current.type}}">
+                          {{currentSelectedDocument.current.name | getextension }}
+                      </span>
                     </div>
                   </div>
 

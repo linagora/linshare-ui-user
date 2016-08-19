@@ -27,5 +27,10 @@
       "TBT__RIGHT": ""
     }
   },
-  "TBT__BREADCRUMB_TITLE": ""
+  "TBT__DETAILS": {
+    "TBT__FULL_SIZE": "",
+    "TBT__TRASH_FULL_SIZE": ""
+  },
+  "TBT__BREADCRUMB_TITLE_WORKGROUP": "",
+  "TBT__BREADCRUMB_TITLE_WORKGROUP_FILES": ""
 }

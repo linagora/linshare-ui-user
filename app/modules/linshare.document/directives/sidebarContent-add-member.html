@@ -11,13 +11,75 @@
       <md-tabs md-selected="data.selectedIndex" md-dynamic-height="" md-border-bottom="">
         <md-tab id="tab1" ng-if="vm.currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
                 class="col-xs-4 noPadding">
-          <md-content class="md-padding">
-            <div class="lv-body stop-propagate">
-              <div class="lv-item">
-                <div class="work-in-progress-ctn-elm">
-                  <div class="work-in-progress-content">
-                    <img src="images/wip-banner-small.png">
-                    <p class="ng-binding">EN COURS DE CONSTRUCTION</p>
+          <md-content>
+            <div>
+              <div id="profile-main" class="detail-workgroup">
+                <div class="p-relative m-b-20 img-preview-ctn">
+                  <div class="np-preview-ctn">
+                    <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
+                    <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
+                  </div>
+                </div>
+                <div class="description-ctn advancedSharingSettings">
+                  <div contenteditable="false" class="comment"
+                       ng-focus="slideTextarea($event)"
+                       ng-blur="slideUpTextarea($event)"
+                       ng-keyup="setTextInput($event);"></div>
+                  <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+                  <div class="edit-description">
+                    {{currentSelectedDocument.current.description}}
+                    <i class="zmdi zmdi-edit"></i>
+                  </div>
+                </div>
+                <div class="content-detail-area">
+                  <div class="flex-ctn detail-info-ctn">
+                    <div class="itemL">
+                      <span class="first-letter user-info">
+                       {{'UNKNOWN_FIRST_LETTER' | translate}}
+                      </span>
+                    </div>
+                    <div class="itemMid">
+                      <div class="name">{{'UNKNOWN_USER' | translate}}</div>
+                      <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
+                           uib-tooltip="{{wkgrpmemberctrl.currentWorkGroup.modificationDate | date : lsFullDateFormat()}}">
+                        <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
+                          {{wkgrpmemberctrl.currentWorkGroup.modificationDate | date: lsFormat()}}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="itemR actions">
+                      <span title="{{'DETAILS.FULL_SIZE' | translate}}">n.c Kib</span>
+                      <span class="seperator-inline">|</span>
+                      <span title="{{'DETAILS.TRASH_FULL_SIZE' | translate}}">
+                        <i class="fa fa-trash-o inner-icon"></i>
+                        n.c Kib
+                      </span>
+                    </div>
+                  </div>
+                  <div class="meta-data-ctn">
+                    <h2 class="subheader">
+                      <i class="fa fa-file-text" aria-hidden="true"></i>
+                      {{'INFORMATION_TAB.META_DATA' | translate}}
+                    </h2>
+                    <div class="meta-data-content">
+                      <div>
+                        <p>
+                          {{'INFORMATION_TAB.CREATED_THE' | translate}}:
+                        </p>
+                        <p tooltip-placement="bottom" tooltip-popup-delay="500"
+                           uib-tooltip="{{currentSelectedDocument.current.creationDate | date : lsFullDateFormat()}}">
+                          {{wkgrpmemberctrl.currentWorkGroup.creationDate | date : lsFormat()}}
+                        </p>
+                      </div>
+                      <div>
+                        <p>{{'MEMBER_TAB.TITLE' | translate}}</p>
+                        <p ng-click="nextTab()">
+                          <a>{{wkgrpmemberctrl.currentWorkGroup.members.length}}
+                            {{'MEMBER_TAB.TITLE' | translate}}
+                          </a>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -68,7 +130,7 @@
                         <span>{{lengthOfSelectedDocuments()}}</span> {{ "MEMBER_TAB.NUM_MEMBER" | translate }}
                       </h2>
                     </div>
-                    <div class="advancedSharingSettings">
+                    <div class="advancedSharingSettings clearfix">
                       <form role="form" class="fields-search-member">
                         <div class="search-style">
                           <div class="fg-line">
@@ -88,7 +150,7 @@
                             </a>
                             <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop">
                               <div class="list-menu">
-                                <p>{{ "MEMBER_TAB.SORT_BY" | translate }}</p>
+                                <p>{{ "SELECTION_TOOLBAR.ORDER_BY" | translate }}</p>
                                 <ul class="dropdown-menu dm-icon ">
                                   <li role="menuitem" ng-if="linshareModeProduction === false">
                                     <a href="" class="ng-binding selectedSortingMembers"
@@ -178,8 +240,8 @@
                     <div class="existing-member-list-ctn">
                       <div class="flex-ctn"
                            ng-repeat="workgroupMember in wkgrpmemberctrl.workgroupMembers |
-                           filter: wkgrpmemberctrl.membersSearchFilter">
-                        <div class="itemL"><span class="first-letter">L</span></div>
+                           filter: wkgrpmemberctrl.membersSearchFilter | orderBy : '-' ">
+                        <div class="itemL"><span class="first-letter">{{workgroupMember.firstName.charAt(0)}}</span></div>
                         <div class="itemMid">
                           <div class="name">{{workgroupMember.firstName}} {{workgroupMember.lastName}}</div>
                           <div class="info-item-member" ng-switch="workgroupMember.role">

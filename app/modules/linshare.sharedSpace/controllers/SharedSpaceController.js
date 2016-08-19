@@ -24,6 +24,7 @@ angular.module('linshareUiUserApp')
         var filteredData = params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
         var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
         params.total(workgroups.length);
+        params.settings({ counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
         $defer.resolve(workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
@@ -41,10 +42,19 @@ angular.module('linshareUiUserApp')
           document.execCommand('selectAll', false, null);})
         .on('focusout', function () {
           data.name = idElem[0].textContent;
+          if(data.name.trim() === '') {
+            angular.element(idElem).text(swalNewWorkGroupName);
+            data.name = swalNewWorkGroupName;
+          }
           workGroupRestService.update(data).then(function() {
             angular.element(this).attr('contenteditable', 'false');
           });
-        });
+        })
+        .on('keypress', function (e) {
+          if(e.which === 13) {
+            angular.element(this).blur();
+          }
+      });
       angular.element(idElem).focus();
     };
 

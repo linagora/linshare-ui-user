@@ -5,6 +5,8 @@
   "DOWNLOAD": "Télécharger",
   "WIP": "En cours de contruction",
   "ME": "Moi",
+  "UNKNOWN_USER": "Utilisateur inconnu",
+  "UNKNOWN_FIRST_LETTER": "NC",
   "NAVIGATION": {
     "NEXT": "Suivant",
     "PREVIOUS": "Précédent",
@@ -135,7 +137,7 @@
     }
   },
   "FILTER_COMPONENT": {
-    "PLACEHOLDER_FILE_NAME": "Recherche par nom",
+    "PLACEHOLDER_FILE_NAME": "Nom de l'élément",
     "FILTER_BY_SIZE": "Filtrer par taille",
     "IS_SHARED": "Partagé",
     "FILTER_BY_DATE": {

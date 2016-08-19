@@ -3,7 +3,7 @@
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
-             workGroupEntriesRestService, $stateParams, Restangular, $translatePartialLoader) {
+             workGroupEntriesRestService, $stateParams, Restangular, $translatePartialLoader, $timeout) {
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('sharedspace');
       var thisctrl = this;
@@ -29,6 +29,7 @@ angular.module('linshareUiUserApp')
           var filteredData = params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
           var filesList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(filesList.length);
+          params.settings({ counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
           $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
@@ -38,7 +39,7 @@ angular.module('linshareUiUserApp')
       $scope.$on('linshare-upload-complete', function(event, data) {
         Restangular.restangularizeElement(currentWorkGroup, data, data.uuid);
         thisctrl.itemsList.push(data);
-        thisctrl.tableParams.reload();
+        $scope.reloadDocuments();
       });
 
       thisctrl.addSelectedDocument = addSelectedDocument;
@@ -51,7 +52,19 @@ angular.module('linshareUiUserApp')
           growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'success');
         });
       };
-
+      $scope.reloadDocuments = function() {
+        $timeout(function () {
+          workGroupEntriesRestService.getAll().then(function (data) {
+            thisctrl.itemsList = data;
+            thisctrl.itemsListCopy = data;
+            $scope.isNewAddition = true;
+            thisctrl.tableParams.reload();
+            $timeout(function () {
+              $scope.isNewAddition = false;
+            }, 0);
+          }, 500);
+        });
+      };
       thisctrl.renameItem = renameItem;
 
       thisctrl.currentPage = 'group_list_files';
@@ -111,6 +124,32 @@ angular.module('linshareUiUserApp')
           thisctrl.flagsOnSelectedPages[currentPage] = false;
         }
       };
+      var openSearch = function () {
+        angular.element('#dropArea').addClass('search-toggled');
+        angular.element('#top-search-wrap input').focus();
+      };
+      var closeSearch = function () {
+        angular.element('#dropArea').removeClass('search-toggled');
+        angular.element('#searchInMobileFiles').val('').trigger('change');
+      };
+      thisctrl.toggleSearchState = function () {
+        if (!thisctrl.searchMobileDropdown) {
+          openSearch();
+        } else {
+          closeSearch();
+        }
+        thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
+      };
+
+      thisctrl.sortDropdownSetActive = function(sortField, $event) {
+        thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
+        thisctrl.tableParams.sorting(sortField, thisctrl.toggleSelectedSort ? 'desc' : 'asc');
+        var currTarget = $event.currentTarget;
+        angular.element('.files .sortDropdown a').removeClass('selectedSorting').promise().done(function() {
+          angular.element(currTarget).addClass('selectedSorting');
+        });
+      };
+
 
       thisctrl.resetSelectedDocuments = function() {
         delete thisctrl.tableParams.filter().isSelected;
@@ -155,18 +194,44 @@ angular.module('linshareUiUserApp')
         });
       }
 
-      var setElemToEditable = function(idElem, data) {
+      var setElemToEditable = function (idElem, data) {
+        var  initialName = idElem[0].textContent;
+        var fileExtension = data.name.substr(initialName.lastIndexOf('.'));
         angular.element(idElem).attr('contenteditable', 'true')
           .on('focus', function () {
-            document.execCommand('selectAll', false, null);})
+            document.execCommand('selectAll', false, null);
+          })
           .on('focusout', function () {
             data.name = idElem[0].textContent;
-            workGroupEntriesRestService.update(data.uuid, data).then(function() {
-              angular.element(this).attr('contenteditable', 'false');
-            });
+            if (data.name.trim() === '') {
+              // if the new name is empty then replace with by previous once
+              angular.element(idElem).text(initialName);
+              data.name = initialName;
+              updateNewName(data,idElem);
+            } else {
+              if (data.name.indexOf('.') === -1) {
+                // if the new name does not contain a file name extension then add the previous original extension to it
+                data.name = data.name + fileExtension;
+                angular.element(idElem).text(data.name);
+                updateNewName(data,idElem);
+              } else {
+                updateNewName(data,idElem);
+               }
+            }
+          })
+          .on('keypress', function (e) {
+            if (e.which === 13) {
+              angular.element(this).blur();
+            }
           });
         angular.element(idElem).focus();
       };
+
+      function updateNewName(data, elem) {
+        workGroupEntriesRestService.update(data.uuid, data).then(function () {
+          angular.element(elem).attr('contenteditable', 'false');
+        });
+      }
 
       function renameItem(item) {
         var itemNameElem = $('td[uuid='+ item.uuid +']').find('.file-name-disp');

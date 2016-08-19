@@ -27,6 +27,10 @@
       "RIGHT": "Role"
     }
   },
+  "DETAILS": {
+    "FULL_SIZE": "Full size",
+    "TRASH_FULL_SIZE": "Trash size"
+  },
   "BREADCRUMB_TITLE_WORKGROUP": "Workgroups",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Files"
 }

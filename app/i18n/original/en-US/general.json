@@ -5,6 +5,8 @@
   "DOWNLOAD": "Download",
   "WIP": "Work in progress",
   "ME": "Me",
+  "UNKNOWN_USER": "Unknown user",
+  "UNKNOWN_FIRST_LETTER": "UNK",
   "NAVIGATION": {
     "NEXT": "Next",
     "PREVIOUS": "Previous",
@@ -135,7 +137,7 @@
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Search by name",
     "FILTER_BY_SIZE": "Filter by size",
-    "IS_SHARED": "Partagé",
+    "IS_SHARED": "Shared",
     "FILTER_BY_DATE": {
       "HEADER": "Filter by date",
       "MODIFICATION_DATE": "Modification date",
