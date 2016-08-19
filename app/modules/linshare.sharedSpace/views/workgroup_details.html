@@ -1,0 +1,42 @@
+<div class="container">
+  <div id="member-sidebar">
+    <div class="header-sidebar">
+      <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ui-sref="sharedspace.all" ng-click="mactrl.sidebarToggle.right = false"></i>
+      <h2 class="header-more-options setEllipsis"> {{vm.currentSelectedDocument.current.name}}</h2>
+      <span class="hidden-xs">
+        <i class="zmdi zmdi-close zmdi-hc-lg" ui-sref="sharedspace.all" ng-click="mactrl.sidebarToggle.right = false"></i>
+      </span>
+    </div>
+    <div ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
+      <md-content>
+        <md-tabs md-selected="vm.mdtabsSelection.selectedIndex" md-dynamic-height="" md-border-bottom="">
+          <md-tab id="tab1" ng-if="vm.currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
+                  class="col-xs-4 noPadding" ui-sref="sharedspace.all">
+            <md-content class="md-padding">
+              <div class="lv-body stop-propagate">
+                <div class="lv-item">
+                  <div class="work-in-progress-ctn-elm">
+                    <div class="work-in-progress-content">
+                      <img src="images/wip-banner-small.png">
+                      <p class="ng-binding">EN COURS DE CONSTRUCTION</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </md-content>
+          </md-tab>
+          <md-tab id="tab2" label="{{'MEMBER_TAB.TITLE' | translate}}" class="col-xs-4 noPadding disabled"
+                  ui-sref="sharedspace.all.members({id: vm.currentSelectedDocument.current.uuid})">
+            <md-content class="md-padding">
+
+              <!--MEMBER LIST-->
+              <div ui-view></div>
+
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-content>
+    </div>
+  </div>
+</div>

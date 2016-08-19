@@ -1,7 +1,7 @@
 'use strict';
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
-                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService) {
+                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService, $stateParams) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
     $scope.mactrl.sidebarToggle.right = false;
@@ -30,6 +30,9 @@ angular.module('linshareUiUserApp')
     });
     thisctrl.deleteWorkGroup = deleteWorkGroup;
     thisctrl.memberRole = 'admin';
+    thisctrl.mdtabsSelection = {
+      selectedIndex : 0
+    };
 
     var swalNewWorkGroupName;
     $translate(['ACTION.NEW_WORKGROUP'])
@@ -145,7 +148,9 @@ angular.module('linshareUiUserApp')
     };
 
     thisctrl.onAddMember = function(uuid) {
-      $state.go('sharedspace.all.detail', {id: uuid});
+      $scope.sidebarRightDataType = 'add-member';
+      thisctrl.mdtabsSelection.selectedIndex = 1;
+      $state.go('sharedspace.all.members', {id: uuid});
       angular.element('#focusInputShare').focus();
     };
 
@@ -158,7 +163,7 @@ angular.module('linshareUiUserApp')
     };
 
     thisctrl.gotoSharedSpaceTarget = function(uuid, name) {
-      $state.go('sharedspace.workgroups.target', {uuid: uuid, workgroupName: name});
+      $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name});
     };
 
     thisctrl.flagsOnSelectedPages = {};
@@ -206,14 +211,12 @@ angular.module('linshareUiUserApp')
     }
 
     function showItemDetails(current, event) {
-      thisctrl.sidebarRightDataType = 'details';
-      $scope.sidebarRightDataType = 'details';
-
       workGroupRestService.get(current.uuid).then(function(data) {
         thisctrl.currentSelectedDocument.current = data;
+        $scope.mactrl.sidebarToggle.right = true;
+        thisctrl.mdtabsSelection.selectedIndex = 0;
       });
 
-      $scope.mactrl.sidebarToggle.right = true;
       var currElm = event.currentTarget;
       angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
         angular.element(currElm).addClass('activeActionButton');

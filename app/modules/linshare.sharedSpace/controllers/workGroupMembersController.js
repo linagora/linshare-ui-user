@@ -8,9 +8,8 @@ angular.module('linshareUiUserApp')
 .controller('WorkGroupMembersController', WorkGroupMembersController);
 
 function WorkGroupMembersController($scope, workGroupMembersRestService, $stateParams, members, currentWorkgroup, $filter) {
+  $scope.vm.mdtabsSelection.selectedIndex = 1;
 
-  $scope.sidebarRightDataType = 'add-member';
-  $scope.mactrl.sidebarToggle.right = true;
   var thisCtrl = this;
   thisCtrl.currentWorkGroup = currentWorkgroup;
   thisCtrl.workgroupUuid = $stateParams.id;
@@ -35,8 +34,9 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
   };
 
   thisCtrl.addMember = addMember;
-  thisCtrl.removeMember = removeMember;
+  thisCtrl.removeMember = removeMember;0
   thisCtrl.updateMember = updateMember;
+  $scope.mactrl.sidebarToggle.right = true;
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);
