@@ -230,8 +230,8 @@
               </div>
             </div>
             <div id="toolbar-actions" class="hidden-xs">
-              <span>
-                  <a ng-href="{{linshareBaseUrl}}/threads/c4570914-d004-4506-8abf-04527f342e88/entries/{{documentFile.uuid}}/download"
+              <span ng-class="{'hide': vm.selectedDocuments.length > 1}">
+                  <a ng-href="{{linshareBaseUrl}}/threads/{{vm.uuid}}/entries/{{vm.selectedDocuments[0].uuid}}/download"
                      event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                     <i class="zmdi zmdi-download"></i>
                     <span>{{'ACTION.DOWNLOAD' | translate}}</span>

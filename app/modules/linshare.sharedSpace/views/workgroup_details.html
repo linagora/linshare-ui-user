@@ -60,7 +60,7 @@
             </div>
             <div>
               <p>{{'MEMBER_TAB.TITLE' | translate}}</p>
-              <p ng-click="nextTab()">
+              <p ng-click="vm.mdtabsSelection.selectedIndex = 1">
                 <a>{{vm.currentSelectedDocument.current.members.length}}
                   {{'MEMBER_TAB.TITLE' | translate}}
                 </a>
