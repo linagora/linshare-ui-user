@@ -1,7 +1,7 @@
 'use strict';
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceController', function ($scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
-                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService, $stateParams) {
+                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
     $scope.mactrl.sidebarToggle.right = false;
@@ -147,10 +147,9 @@ angular.module('linshareUiUserApp')
       $scope.sidebarRightDataType = content;
     };
 
-    thisctrl.onAddMember = function(uuid) {
-      $scope.sidebarRightDataType = 'add-member';
+    thisctrl.onAddMember = function() {
       thisctrl.mdtabsSelection.selectedIndex = 1;
-      $state.go('sharedspace.all.members', {id: uuid});
+      $scope.mactrl.sidebarToggle.right = true;
       angular.element('#focusInputShare').focus();
     };
 

@@ -7,13 +7,10 @@
 angular.module('linshareUiUserApp')
 .controller('WorkGroupMembersController', WorkGroupMembersController);
 
-function WorkGroupMembersController($scope, workGroupMembersRestService, $stateParams, members, currentWorkgroup, $filter) {
-  $scope.vm.mdtabsSelection.selectedIndex = 1;
+function WorkGroupMembersController($scope, workGroupMembersRestService, $filter) {
 
   var thisCtrl = this;
-  thisCtrl.currentWorkGroup = currentWorkgroup;
-  thisCtrl.workgroupUuid = $stateParams.id;
-  thisCtrl.workgroupMembers = members;
+  thisCtrl.currentWorkGroup = $scope.vm.currentSelectedDocument;
   thisCtrl.membersRights = {admin: 'ADMIN', write: 'WRITE', readonly: 'READ'};
   thisCtrl.memberRole = thisCtrl.membersRights.write;
 
@@ -26,7 +23,8 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
   thisCtrl.changePropertyOrderBy = function(orderParam) {
     thisCtrl.propertyOrderBy = orderParam;
     thisCtrl.propertyOrderByAsc = thisCtrl.propertyOrderBy === orderParam ? !thisCtrl.propertyOrderByAsc : true;
-    thisCtrl.workgroupMembers = $filter('orderBy')(thisCtrl.workgroupMembers, orderParam, thisCtrl.propertyOrderByAsc);
+    thisCtrl.currentWorkGroup.current.members = $filter('orderBy')(thisCtrl.currentWorkGroup.current.members,
+      orderParam, thisCtrl.propertyOrderByAsc);
   };
 
   thisCtrl.changeFilterByProperty = function(filterParam) {
@@ -34,13 +32,12 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
   };
 
   thisCtrl.addMember = addMember;
-  thisCtrl.removeMember = removeMember;0
+  thisCtrl.removeMember = removeMember;
   thisCtrl.updateMember = updateMember;
-  $scope.mactrl.sidebarToggle.right = true;
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);
-    return workGroupMembersRestService.delete(thisCtrl.workgroupUuid, member.userUuid);
+    return workGroupMembersRestService.delete(thisCtrl.currentWorkGroup.current.uuid, member.userUuid);
   }
 
   function addMember(member, listMembers) {
@@ -50,7 +47,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
       readonly: thisCtrl.memberRole === thisCtrl.membersRights.readonly,
       admin: thisCtrl.memberRole === thisCtrl.membersRights.admin
     };
-    workGroupMembersRestService.create(thisCtrl.workgroupUuid, jsonMember).then(function(data) {
+    workGroupMembersRestService.create(thisCtrl.currentWorkGroup.current.uuid, jsonMember).then(function(data) {
       listMembers.push(data.plain());
     });
   }
@@ -69,7 +66,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $stateP
       member.admin = false;
       member.readonly = false;
     }
-    workGroupMembersRestService.update(thisCtrl.workgroupUuid, member).then(function(updatedMember) {
+    workGroupMembersRestService.update(thisCtrl.currentWorkGroup.current.uuid, member).then(function(updatedMember) {
       member = updatedMember;
     });
   }

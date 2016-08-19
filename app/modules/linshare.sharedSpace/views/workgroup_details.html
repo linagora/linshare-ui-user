@@ -1,42 +1,74 @@
-<div class="container">
-  <div id="member-sidebar">
-    <div class="header-sidebar">
-      <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ui-sref="sharedspace.all" ng-click="mactrl.sidebarToggle.right = false"></i>
-      <h2 class="header-more-options setEllipsis"> {{vm.currentSelectedDocument.current.name}}</h2>
-      <span class="hidden-xs">
-        <i class="zmdi zmdi-close zmdi-hc-lg" ui-sref="sharedspace.all" ng-click="mactrl.sidebarToggle.right = false"></i>
-      </span>
-    </div>
-    <div ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
-      <md-content>
-        <md-tabs md-selected="vm.mdtabsSelection.selectedIndex" md-dynamic-height="" md-border-bottom="">
-          <md-tab id="tab1" ng-if="vm.currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
-                  class="col-xs-4 noPadding" ui-sref="sharedspace.all">
-            <md-content class="md-padding">
-              <div class="lv-body stop-propagate">
-                <div class="lv-item">
-                  <div class="work-in-progress-ctn-elm">
-                    <div class="work-in-progress-content">
-                      <img src="images/wip-banner-small.png">
-                      <p class="ng-binding">EN COURS DE CONSTRUCTION</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </md-content>
-          </md-tab>
-          <md-tab id="tab2" label="{{'MEMBER_TAB.TITLE' | translate}}" class="col-xs-4 noPadding disabled"
-                  ui-sref="sharedspace.all.members({id: vm.currentSelectedDocument.current.uuid})">
-            <md-content class="md-padding">
-
-              <!--MEMBER LIST-->
-              <div ui-view></div>
-
-            </md-content>
-          </md-tab>
-        </md-tabs>
-      </md-content>
+<div class="lv-body stop-propagate">
+  <div>
+    <div id="profile-main" class="detail-workgroup">
+      <div class="p-relative m-b-20 img-preview-ctn">
+        <div class="np-preview-ctn">
+          <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
+          <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
+        </div>
+      </div>
+      <div class="description-ctn advancedSharingSettings">
+        <div contenteditable="false" class="comment"
+             ng-focus="slideTextarea($event)"
+             ng-blur="slideUpTextarea($event)"
+             ng-keyup="setTextInput($event);"></div>
+        <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+        <div class="edit-description">
+          {{vm.currentSelectedDocument.current.description}}
+          <i class="zmdi zmdi-edit"></i>
+        </div>
+      </div>
+      <div class="content-detail-area">
+        <div class="flex-ctn detail-info-ctn">
+          <div class="itemL">
+                      <span class="first-letter user-info">
+                       {{'UNKNOWN_FIRST_LETTER' | translate}}
+                      </span>
+          </div>
+          <div class="itemMid">
+            <div class="name">{{'UNKNOWN_USER' | translate}}</div>
+            <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
+                 uib-tooltip="{{vm.currentSelectedDocument.current.modificationDate | date : lsFullDateFormat()}}">
+                        <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
+                          {{vm.currentSelectedDocument.current.modificationDate | date: lsFormat()}}
+                        </span>
+            </div>
+          </div>
+          <div class="itemR actions">
+            <span title="{{'DETAILS.FULL_SIZE' | translate}}">n.c Kib</span>
+            <span class="seperator-inline">|</span>
+                      <span title="{{'DETAILS.TRASH_FULL_SIZE' | translate}}">
+                        <i class="fa fa-trash-o inner-icon"></i>
+                        n.c Kib
+                      </span>
+          </div>
+        </div>
+        <div class="meta-data-ctn">
+          <h2 class="subheader">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            {{'INFORMATION_TAB.META_DATA' | translate}}
+          </h2>
+          <div class="meta-data-content">
+            <div>
+              <p>
+                {{'INFORMATION_TAB.CREATED_THE' | translate}}:
+              </p>
+              <p tooltip-placement="bottom" tooltip-popup-delay="500"
+                 uib-tooltip="{{vm.currentSelectedDocument.current.creationDate | date : lsFullDateFormat()}}">
+                {{vm.currentSelectedDocument.current.creationDate | date : lsFormat()}}
+              </p>
+            </div>
+            <div>
+              <p>{{'MEMBER_TAB.TITLE' | translate}}</p>
+              <p ng-click="nextTab()">
+                <a>{{vm.currentSelectedDocument.current.members.length}}
+                  {{'MEMBER_TAB.TITLE' | translate}}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

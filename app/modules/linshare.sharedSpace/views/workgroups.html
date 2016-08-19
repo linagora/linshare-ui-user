@@ -196,7 +196,7 @@
             <div id="toolbar-actions" class="hidden-xs">
               <span ng-if="vm.selectedDocuments.length === 1">
                 <a class="plainTxtBtn partageLink" title="{{'ACTION.ADD_MEMBER' | translate}}"
-                   ng-click="vm.onAddMember(vm.selectedDocuments[0].uuid)">
+                   ng-click="vm.onAddMember()">
                   <i class="groups-add-member"></i>
                   <span>{{'ACTION.ADD_MEMBER' | translate}}</span>
                 </a>
@@ -347,7 +347,7 @@
                             data-ng-class="{ 'openr': (mactrl.sidebarToggle.right === true) &&
                           ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
                           )}">
-                          <li class="hidden-xs" ng-click="vm.onAddMember(documentFile.uuid)">
+                          <li class="hidden-xs" ng-click="vm.onAddMember()">
                             <a href="" class="p-t-10" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
                                event-propagation-stop="true">
                               <i><span class="groups-user-member"></span></i>
@@ -393,7 +393,7 @@
                                 </a>
                               </li>
                               <li class="divider"></li>
-                              <li ng-click="vm.onAddMember(documentFile.uuid)">
+                              <li ng-click="vm.onAddMember()">
                                 <a href="" >
                                   <i class="groups-add-member align-style"></i>
                                   {{'ACTION.ADD_MEMBER' | translate}}
@@ -570,8 +570,6 @@
       <i class="zmdi zmdi zmdi-close"></i>
     </div>side
   </section>
-<aside id="chat" data-ng-include src="'modules/linshare.sharedSpace/views/workgroup_details.html'"
+<aside id="chat" data-ng-include src="'modules/linshare.sharedSpace/views/sidebar.html'"
        data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
 </aside>
-<!--<div ui-view>-->
-<!--</div>-->

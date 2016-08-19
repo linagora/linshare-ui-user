@@ -1,4 +1,4 @@
-<div class="lv-body stop-propagate">
+<div class="lv-body stop-propagate" ng-controller="WorkGroupMembersController as wkgrpmemberctrl">
   <div class="lv-item">
     <div class="card col-xs-12" id="recipientsCtnSidebar">
       <div class="custumListContainer clearfix">
@@ -11,9 +11,9 @@
         <form role="form" class="clearfix fields-add-member">
           <div class="form-group fg-line group-member-field-ctn col-xs-12 noPadding">
             <div  class="col-xs-8 pull-left" ls-autocomplete-user="THREAD_MEMBERS"
-                  data-ls-complete-thread-uuid="{{wkgrpmemberctrl.workgroupUuid}}"
+                  data-ls-complete-thread-uuid="{{vm.currentSelectedDocument.current.uuid}}"
                   data-on-select-function="wkgrpmemberctrl.addMember"
-                  data-selected-users-list="wkgrpmemberctrl.workgroupMembers"></div>
+                  data-selected-users-list="vm.currentSelectedDocument.current.members"></div>
             <div class="select-chosen-ctn col-xs-3 noPadding pull-right">
               <select name="rights_select" id="rights_select" chosen
                       data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
@@ -40,7 +40,7 @@
             <span>{{lengthOfSelectedDocuments()}}</span> {{ "MEMBER_TAB.NUM_MEMBER" | translate }}
           </h2>
         </div>
-        <div class="advancedSharingSettings">
+        <div class="advancedSharingSettings clearfix">
           <form role="form" class="fields-search-member">
             <div class="search-style">
               <div class="fg-line">
@@ -149,9 +149,9 @@
         </div>
         <div class="existing-member-list-ctn">
           <div class="flex-ctn"
-               ng-repeat="workgroupMember in wkgrpmemberctrl.workgroupMembers |
-                           filter: wkgrpmemberctrl.membersSearchFilter">
-            <div class="itemL"><span class="first-letter">L</span></div>
+               ng-repeat="workgroupMember in vm.currentSelectedDocument.current.members |
+                           filter: wkgrpmemberctrl.membersSearchFilter | orderBy: '-' ">
+            <div class="itemL"><span class="first-letter">{{workgroupMember.firstName.charAt(0)}}</span></div>
             <div class="itemMid">
               <div class="name">{{workgroupMember.firstName}} {{workgroupMember.lastName}}</div>
               <div class="info-item-member" ng-switch="workgroupMember.role">
@@ -190,7 +190,7 @@
                             </ul>
                           </span>
               <a href="javascript:void(0)"
-                 ng-click="wkgrpmemberctrl.removeMember(wkgrpmemberctrl.workgroupMembers, workgroupMember)"
+                 ng-click="wkgrpmemberctrl.removeMember(vm.currentSelectedDocument.current.members, workgroupMember)"
                  title="{{'MEMBER_TAB.REMOVE_TEAM_MEMBER' | translate}}">
                 <i class="zmdi zmdi-close"></i>
               </a>

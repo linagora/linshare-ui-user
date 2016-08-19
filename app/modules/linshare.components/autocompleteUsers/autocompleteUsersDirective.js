@@ -83,6 +83,7 @@ angular.module('linshare.components')
         scope.completeType = attrs.lsAutocompleteUser;
         scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
         elm.bind('keypress', function(event) {
+          scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
           if(event.keyCode === 13) {
             if(scope.noResult === true) {
               if(typeof scope.userEmail === 'string') {
