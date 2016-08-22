@@ -43,7 +43,7 @@ angular.module('linshareUiUserApp')
       });
 
       thisctrl.addSelectedDocument = addSelectedDocument;
-      thisctrl.deleteDocuments = deleteDocuments();
+      thisctrl.deleteDocuments = deleteDocuments;
 
       thisctrl.downloadDocument = downloadDocument;
 
@@ -156,9 +156,8 @@ angular.module('linshareUiUserApp')
         documentUtilsService.resetItemSelection(thisctrl.selectedDocuments);
       };
 
-      function deleteDocuments() {
-        return documentUtilsService.deleteDocuments
-          .bind(undefined, thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams);
+      function deleteDocuments(items) {
+        documentUtilsService.deleteDocuments(thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams, items);
       }
 
       function addSelectedDocument(document) {
