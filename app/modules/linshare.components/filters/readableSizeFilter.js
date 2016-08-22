@@ -54,7 +54,9 @@ angular.module('linshare.components')
   })
   .filter('getextension', function() {
     return function(filename) {
-      return filename.split('.').pop().toUpperCase();
+      if(filename) {
+        return filename.split('.').pop().toUpperCase();
+      }
     };
   })
   .filter('mimetypeIcone', function() {

@@ -9,45 +9,53 @@ angular.module('linshareUiUserApp')
 
 function WorkGroupMembersController($scope, workGroupMembersRestService, $filter) {
 
-  var thisCtrl = this;
-  thisCtrl.currentWorkGroup = $scope.vm.currentSelectedDocument;
-  thisCtrl.membersRights = {admin: 'ADMIN', write: 'WRITE', readonly: 'READ'};
-  thisCtrl.memberRole = thisCtrl.membersRights.write;
+  var wgmember = this;
+  wgmember.currentWorkGroup = $scope.vm.currentSelectedDocument;
+  wgmember.membersRights = {admin: 'ADMIN', write: 'WRITE', readonly: 'READ'};
+  wgmember.memberRole = wgmember.membersRights.write;
 
-  thisCtrl.propertyFilter = '';
-  thisCtrl.membersSearchFilter = {$: '', role: ''};
+  wgmember.propertyFilter = '';
+  wgmember.membersSearchFilter = {$: '', role: ''};
 
-  thisCtrl.propertyOrderBy = 'firstName';
-  thisCtrl.propertyOrderByAsc = true;
+  wgmember.propertyOrderBy = 'firstName';
+  wgmember.propertyOrderByAsc = true;
 
-  thisCtrl.changePropertyOrderBy = function(orderParam) {
-    thisCtrl.propertyOrderBy = orderParam;
-    thisCtrl.propertyOrderByAsc = thisCtrl.propertyOrderBy === orderParam ? !thisCtrl.propertyOrderByAsc : true;
-    thisCtrl.currentWorkGroup.current.members = $filter('orderBy')(thisCtrl.currentWorkGroup.current.members,
-      orderParam, thisCtrl.propertyOrderByAsc);
+  wgmember.changePropertyOrderBy = function(orderParam) {
+    wgmember.propertyOrderBy = orderParam;
+    wgmember.propertyOrderByAsc = wgmember.propertyOrderBy === orderParam ? !wgmember.propertyOrderByAsc : true;
+    wgmember.currentWorkGroup.current.members = $filter('orderBy')(wgmember.currentWorkGroup.current.members,
+      orderParam, wgmember.propertyOrderByAsc);
   };
 
-  thisCtrl.changeFilterByProperty = function(filterParam) {
-    thisCtrl.membersSearchFilter.role = thisCtrl.membersSearchFilter.role === filterParam ? '' : filterParam;
+  wgmember.changeFilterByProperty = function(filterParam) {
+    wgmember.membersSearchFilter.role = wgmember.membersSearchFilter.role === filterParam ? '' : filterParam;
   };
 
-  thisCtrl.addMember = addMember;
-  thisCtrl.removeMember = removeMember;
-  thisCtrl.updateMember = updateMember;
+  $scope.$watch('vm.currentSelectedDocument.current', function(currentWorkGroup) {
+    if(currentWorkGroup && $scope.mactrl.sidebarToggle.right) {
+     workGroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
+       wgmember.currentWorkgroupMember = member;
+     })
+    }
+  });
+
+  wgmember.addMember = addMember;
+  wgmember.removeMember = removeMember;
+  wgmember.updateMember = updateMember;
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);
-    return workGroupMembersRestService.delete(thisCtrl.currentWorkGroup.current.uuid, member.userUuid);
+    return workGroupMembersRestService.delete(wgmember.currentWorkGroup.current.uuid, member.userUuid);
   }
 
   function addMember(member, listMembers) {
     var jsonMember = {
       userMail: member.mail,
       userDomainId: member.domain,
-      readonly: thisCtrl.memberRole === thisCtrl.membersRights.readonly,
-      admin: thisCtrl.memberRole === thisCtrl.membersRights.admin
+      readonly: wgmember.memberRole === wgmember.membersRights.readonly,
+      admin: wgmember.memberRole === wgmember.membersRights.admin
     };
-    workGroupMembersRestService.create(thisCtrl.currentWorkGroup.current.uuid, jsonMember).then(function(data) {
+    workGroupMembersRestService.create(wgmember.currentWorkGroup.current.uuid, jsonMember).then(function(data) {
       listMembers.push(data.plain());
     });
   }
@@ -66,7 +74,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
       member.admin = false;
       member.readonly = false;
     }
-    workGroupMembersRestService.update(thisCtrl.currentWorkGroup.current.uuid, member).then(function(updatedMember) {
+    workGroupMembersRestService.update(wgmember.currentWorkGroup.current.uuid, member).then(function(updatedMember) {
       member = updatedMember;
     });
   }
