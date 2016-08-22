@@ -419,6 +419,11 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/modules/materialAdmin',
           src: 'img/icons/{,*/}*',
           dest: '<%= yeoman.dist %>'
+        },{
+          expand: true,
+          cwd: 'vendors/bower_components/flag-icon-css',
+          src: 'flags/{,*/}*',
+          dest: '<%= yeoman.dist %>'
         }, {
           src: 'bower.json',
           dest: '<%= yeoman.dist %>/about.json'
