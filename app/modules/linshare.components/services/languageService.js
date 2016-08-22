@@ -15,6 +15,7 @@ angular.module('linshare.components')
         return storedLocale ? storedLocale : $translate.use();
       },
       changeLocale: function(key) {
+        key = addCountryLocaleCode(key);
         $translate.use(key);
         localStorageService.set('locale', key);
         $log.debug('locale changed to ', key);
@@ -23,4 +24,23 @@ angular.module('linshare.components')
         $translate.refresh();
       }
     };
+
+    function addCountryLocaleCode(key) {
+      if(key.indexOf('-') === -1) {
+        switch (key) {
+          case 'fr':
+            key += '-FR';
+            break;
+          case 'en':
+            key += '-US';
+            break;
+          case 'vi':
+            key += '-VN';
+            break;
+          default:
+            key = 'en-US';
+        }
+      }
+      return key;
+    }
   }]);

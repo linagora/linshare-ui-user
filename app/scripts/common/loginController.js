@@ -15,7 +15,10 @@ angular.module('linshareUiUserApp')
     var splitLocale = function(locale) {
       locale = locale.split('-');
       var language = locale[0];
-      var country = locale[1].toLowerCase();
+      var country;
+      if(locale.length > 1) {
+        country = locale[1].toLowerCase();
+      }
       return {language: language, country: country};
     };
     this.loginLocale = splitLocale(locale);
