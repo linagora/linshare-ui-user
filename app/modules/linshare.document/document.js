@@ -67,7 +67,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
       //SELECTED FILES AND UPLOADS
       $scope.selectedDocuments = [];
-      $scope.selectedUploads = {};
 
       $scope.loadSidebarContent = function(content) {
         $scope.sidebarRightDataType = content || 'share';
@@ -464,9 +463,15 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
 
   .controller('LinshareUploadViewController', function($scope, $rootScope, growlService, $timeout) {
     $scope.mactrl.sidebarToggle.right = false;
+    $scope.selectedUploads = {};
     $scope.lengthOfSelectedDocuments = function() {
       return Object.keys($scope.selectedUploads).length;
     };
+    $scope.$flow.files.forEach(function(n) {
+      if(n.isSelected) {
+        n.isSelected = false;
+      }
+    });
 
     // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
     /* jshint unused: false */
