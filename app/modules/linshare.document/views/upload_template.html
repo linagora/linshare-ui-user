@@ -102,17 +102,15 @@
           <div class="lv-header-alt clearfix" style="display:none">
             <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
           </div>
-          <div class="lv-body ng-table" id="fileListTable" ng-init="isCheckedThumb = true;">
+          <div class="lv-body ng-table" id="fileListTable">
             <div class="media-body" ng-repeat="file in $flow.files"
-                 ls-on-upload-select
-                 data-ng-class="{'highlightListElem': file.isSelected }"
-                 ng-click="isCheckedThumb = !isCheckedThumb">
+                 data-ng-class="{'highlightListElem': file.isSelected }">
               <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
                 <div class="col-xs-24 col-sm-12 animLeft noPadding">
                   <div class="col-xs-6 col-sm-11 pull-left">
-                    <div class="previewIconCtn pull-left hidden-v-xs set-content-left thumb-type-item " >
+                    <div ls-on-upload-select class="previewIconCtn pull-left hidden-v-xs set-content-left thumb-type-item " >
                       <i class="fa ls-1p5x" ng-class="'{{file.getType() | mimetypeIcone}}'"></i>
-                          <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': isCheckedThumb }">
+                          <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': file.isSelected }">
                           </div>
                     </div>
                     <div class="pull-left dataListCtn">
