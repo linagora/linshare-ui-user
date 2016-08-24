@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <div class="box-3" ui-sref="documents.sharedspace">
+      <div class="box-3 disabled" ui-sref="documents.sharedspace">
         <div class="card-img upload-workgroup">
           <i class="groups-home-workgroup"></i>
         </div>
@@ -74,27 +74,22 @@
             <p class="box-txt">{{"UPLOAD_GROUP_MSG" | translate}}</p>
           </div>
           <div class="set-homepage-ctn"  event-propagation-stop ng-init="isChecked = false;"
+               ng-if="linshareModeProduction == false"
                ng-click="isChecked = !isChecked">
             <a href="" ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
-              </md-tooltip>
             </a>
             <a href="" ng-show="isChecked">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-check-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
-              </md-tooltip>
             </a>
           </div>
         </div>
       </div>
 
 
-      <div class="box-3">
+      <div class="box-3"  ng-show="linshareModeProduction == false">
         <div class="card-img upload-request">
           <i class="groups-home-idd"></i>
         </div>

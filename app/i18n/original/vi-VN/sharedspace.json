@@ -25,7 +25,8 @@
       "TBT__FIRSTNAME": "",
       "TBT__LASTNAME": "",
       "TBT__RIGHT": ""
-    }
+    },
+    "TBT__MY_RIGHTS": ""
   },
   "TBT__DETAILS": {
     "TBT__FULL_SIZE": "",

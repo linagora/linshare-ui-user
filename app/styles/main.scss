@@ -492,7 +492,6 @@ i.checkDropdownIconContent {
   margin-left: 1.33em;
   margin-top: 0.5em;
   padding-bottom: 0.75em;
-  border-bottom: 1px solid #f0f0f0;
 
   .first-letter {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 2px 1px rgba(0, 0, 0, 0.12);
@@ -507,7 +506,7 @@ i.checkDropdownIconContent {
     line-height: 30px;
   }
   .itemL {
-    flex: 0 0 40px;
+    flex: 0 0 43px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -517,7 +516,8 @@ i.checkDropdownIconContent {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    padding-left: 0.45em;
+    padding-left: 0.5em;
+    border-left: 1px solid #f0f0f0;
     .name {
       display: flex;
       flex: 0 0 100%;
@@ -556,7 +556,6 @@ i.checkDropdownIconContent {
 }
 
 .flex-ctn:first-child {
-  border-top: 1px solid #f0f0f0;
   padding-top: 0.6em;
 }
 
@@ -564,7 +563,6 @@ i.checkDropdownIconContent {
   margin-left: 0em;
   .flex-ctn.detail-info-ctn {
     border-top: none;
-    padding-top: 0.95em;
   }
 }
 
@@ -708,7 +706,7 @@ i.checkDropdownIconContent {
     }
   }
   .advancedSharingSettings {
-    margin-bottom: 1.5em;
+    margin-bottom: 0 !important;
   }
 }
 
@@ -785,12 +783,16 @@ md-content #recipientsCtnSidebar {
   }
 
   .chosen-single {
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
     position: relative;
     display: block;
     padding: 0;
     height: 30px;
-    background-color: #fff;
+    background-color: transparent;
     background-clip: padding-box;
+    background-image: none;
+    box-shadow: none;
     color: #000;
     text-decoration: none;
     white-space: nowrap;
@@ -1037,7 +1039,7 @@ md-content #recipientsCtnSidebar {
   .groups-add-member.align-style {
     margin-left: 4px;
     font-size: 1.2em;
-    margin-right: 10px;
+    margin-right: 5px;
   }
 }
 
@@ -2985,7 +2987,7 @@ div#toolbar-actions.show-details-mobile-link {
   pointer-events: none !important;
   color: $disabled !important;
 
-  a , span {
+  a , span, p{
     color: $disabled !important;
   }
 }
@@ -3811,9 +3813,6 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
     }
     .show-li-actions:hover .actions > li:not(:last-child){
       visibility: visible;
-    }
-    .show-li-actions:hover {
-      cursor: pointer;
     }
   }
   .table > tbody > tr > td.no-padding {
@@ -4890,6 +4889,8 @@ i.deActivateSharing {
   font-size: .91em;
   padding: 5px 8px 0 7px;
   width: 87px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
 }
 .custumListItem .close-list-icone-btn {

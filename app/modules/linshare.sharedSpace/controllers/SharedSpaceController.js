@@ -40,21 +40,30 @@ angular.module('linshareUiUserApp')
         swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
       });
     var setElemToEditable = function(idElem, data) {
+      var  initialName = swalNewWorkGroupName;
       angular.element(idElem).attr('contenteditable', 'true')
         .on('focus', function () {
-          document.execCommand('selectAll', false, null);})
+          document.execCommand('selectAll', false, null);
+          initialName = data.name;
+          })
         .on('focusout', function () {
           data.name = idElem[0].textContent;
           if(data.name.trim() === '') {
-            angular.element(idElem).text(swalNewWorkGroupName);
-            data.name = swalNewWorkGroupName;
+            angular.element(idElem).text(initialName);
+            data.name = initialName;
           }
-          workGroupRestService.update(data).then(function() {
-            angular.element(this).attr('contenteditable', 'false');
-          });
+          workGroupRestService.update(data);
+          angular.element(this).attr('contenteditable', 'false');
         })
         .on('keypress', function (e) {
           if(e.which === 13) {
+            data.name = idElem[0].textContent;
+            if((data.name.trim() === initialName) || (data.name.trim() === '')) {
+              angular.element(idElem).text(initialName);
+              data.name = initialName;
+            }
+            workGroupRestService.update(data);
+            angular.element(this).attr('contenteditable', 'false');
             angular.element(this).blur();
           }
       });

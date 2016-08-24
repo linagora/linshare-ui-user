@@ -3,7 +3,7 @@
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
-             workGroupEntriesRestService, $stateParams, Restangular, $translatePartialLoader, $timeout) {
+             workGroupEntriesRestService, $stateParams, Restangular, $translatePartialLoader, $timeout , $translate) {
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('sharedspace');
       var thisctrl = this;
@@ -149,7 +149,28 @@ angular.module('linshareUiUserApp')
           angular.element(currTarget).addClass('selectedSorting');
         });
       };
+      var  swalMultipleDownloadTitle , swalMultipleDownloadText ,
+        swalMultipleDownloadConfirm;
+      $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
+        .then(function(translations) {
+          swalMultipleDownloadTitle= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
+          swalMultipleDownloadText= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
+          swalMultipleDownloadConfirm= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+        });
 
+      thisctrl.unavailableMultiDownload = function() {
+        swal({
+            title: swalMultipleDownloadTitle,
+            text: swalMultipleDownloadText,
+            type: 'error',
+            confirmButtonColor: '#05b1ff',
+            confirmButtonText: swalMultipleDownloadConfirm,
+            closeOnConfirm: true
+          }
+        );
+      };
 
       thisctrl.resetSelectedDocuments = function() {
         delete thisctrl.tableParams.filter().isSelected;
@@ -199,6 +220,7 @@ angular.module('linshareUiUserApp')
         angular.element(idElem).attr('contenteditable', 'true')
           .on('focus', function () {
             document.execCommand('selectAll', false, null);
+            initialName = idElem[0].textContent;
           })
           .on('focusout', function () {
             data.name = idElem[0].textContent;
@@ -220,16 +242,15 @@ angular.module('linshareUiUserApp')
           })
           .on('keypress', function (e) {
             if (e.which === 13) {
-              angular.element(this).blur();
+              angular.element(idElem).focusout();
             }
           });
         angular.element(idElem).focus();
       };
 
       function updateNewName(data, elem) {
-        workGroupEntriesRestService.update(data.uuid, data).then(function () {
-          angular.element(elem).attr('contenteditable', 'false');
-        });
+        workGroupEntriesRestService.update(data.uuid, data);
+        angular.element(elem).attr('contenteditable', 'false');
       }
 
       function renameItem(item) {

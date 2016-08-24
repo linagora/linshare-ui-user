@@ -137,7 +137,9 @@
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Search by name",
     "FILTER_BY_SIZE": "Filter by size",
+    "BY_SIZE": "Size",
     "IS_SHARED": "Shared",
+    "ORDER_BY_NAME": "Name",
     "FILTER_BY_DATE": {
       "HEADER": "Filter by date",
       "MODIFICATION_DATE": "Modification date",

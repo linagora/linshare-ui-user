@@ -59,7 +59,7 @@
     <div class="custumListBody col-xs-12 ">
       <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients() | orderBy : '-' as results"
            tooltip-placement="bottom" tooltip-popup-delay="700"
-           uib-tooltip="{{recipient.domain || recipient.mail}}">
+           uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.domain || recipient.mail}}">
         <p class="pull-left circleCtn">
           <span ng-show="recipient.domain" class="circle userBg">{{recipient.firstName.charAt(0)}}</span>
           <span ng-show="!recipient.domain" class="circle userBg">{{recipient.mail.charAt(0).toUpperCase()}}</span>

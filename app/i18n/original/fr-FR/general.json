@@ -83,7 +83,7 @@
     "UPLOAD_PROGRESS": {
       "TITLE": "Progression de dépôt",
       "UPLOAD_DONE": "terminé",
-      "FOOTER": "Voir tout"
+      "FOOTER": "Voir tous"
     }
   },
   "ACTION": {
@@ -137,9 +137,11 @@
     }
   },
   "FILTER_COMPONENT": {
-    "PLACEHOLDER_FILE_NAME": "Nom de l'élément",
+    "PLACEHOLDER_FILE_NAME": "Rechercher par nom",
     "FILTER_BY_SIZE": "Filtrer par taille",
+    "BY_SIZE": "Taille",
     "IS_SHARED": "Partagé",
+    "ORDER_BY_NAME": "Nom",
     "FILTER_BY_DATE": {
       "HEADER": "Filtrer par date",
       "MODIFICATION_DATE": "Date de modification",

@@ -7,17 +7,19 @@
           <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
         </div>
       </div>
-      <div class="description-ctn advancedSharingSettings">
-        <div contenteditable="false" class="comment"
-             ng-focus="slideTextarea($event)"
-             ng-blur="slideUpTextarea($event)"
-             ng-keyup="setTextInput($event);"></div>
-        <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
-        <div class="edit-description">
-          {{vm.currentSelectedDocument.current.description}}
-          <i class="zmdi zmdi-edit"></i>
+      <div title="{{'WIP' | translate}}">
+        <div class="description-ctn advancedSharingSettings disabled">
+          <div contenteditable="false" class="comment"
+               ng-focus="slideTextarea($event)"
+               ng-blur="slideUpTextarea($event)"
+               ng-keyup="setTextInput($event);"></div>
+          <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+          <div class="edit-description">
+            {{vm.currentSelectedDocument.current.description}}
+            <i class="zmdi zmdi-edit"></i>
+          </div>
         </div>
-      </div>
+        </div>
       <div class="content-detail-area">
         <div class="flex-ctn detail-info-ctn">
           <div class="itemL">
@@ -64,6 +66,15 @@
                 <a>{{vm.currentSelectedDocument.current.members.length}}
                   {{'MEMBER_TAB.TITLE' | translate}}
                 </a>
+              </p>
+            </div>
+            <div>
+              <p>
+                {{'MEMBER_TAB.MY_RIGHTS' | translate}}:
+              </p>
+              <p>
+                <i class="zmdi zmdi-account p-r-3"></i>
+                Admin false
               </p>
             </div>
           </div>

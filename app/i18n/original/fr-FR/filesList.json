@@ -72,8 +72,8 @@
       "ATTACH_EMAIL": "Personnaliser le courriel",
       "ATTACHED_EMAIL_SUBJECT": "Sujet",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message",
-      "SHOW_SELECTED_FILES": "Voir les fichiers"
-
+      "SHOW_SELECTED_FILES": "Voir les fichiers",
+      "GO_TO_UPLOAD_FILES": "Retour vers les dépots"
     },
     "CURRENT_SHARE_DETAIL": {
       "TITLE": "Details du partage",

@@ -160,7 +160,8 @@
                 <span ng-switch-when="normal">{{ "MEMBER_TAB.WRITE" | translate }}</span>
                 <span ng-switch-default="">{{ "MEMBER_TAB.READ" | translate }}</span>
               </div>
-              <div class="info-item-member" title="{{'MEMBER_TAB.NOTIFICATION_ACTIVATED' | translate}}">
+              <div class="info-item-member" title="{{'MEMBER_TAB.NOTIFICATION_ACTIVATED' | translate}}"
+                   ng-if="linshareModeProduction == false" >
                 <i class="zmdi zmdi-notifications-none"></i>
                 <span>{{ "MEMBER_TAB.ACTIVATED" | translate }}</span>
               </div>

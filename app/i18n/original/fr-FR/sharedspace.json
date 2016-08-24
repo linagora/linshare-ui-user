@@ -25,7 +25,8 @@
       "FIRSTNAME": "Prénom",
       "LASTNAME": "Nom",
       "RIGHT": "Rôle"
-    }
+    },
+    "MY_RIGHTS": "Mes droits"
   },
   "DETAILS": {
     "FULL_SIZE": "Taille totale ",

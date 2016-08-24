@@ -2,13 +2,13 @@
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false"></i>
   <h2 class="header-more-options">{{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.TITLE' | translate}}</h2>
 </div>
+<div class="num-items-section-ctn">
+  <span>{{selectedDocuments.length}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
+  <a class="pull-right sidebar-link" ui-sref="documents.upload"  id="show-selected-files" ng-click="mactrl.sidebarToggle.right = false;">
+    {{ "RIGHT_PANEL.SHARE_OPTIONS.GO_TO_UPLOAD_FILES" | translate }}
+  </a>
+</div>
 <div class="card col-xs-12" id="recipientsCtnSidebar">
-  <div class="num-items-section-ctn">
-    <span>{{selectedDocuments.length}}</span> {{ "RIGHT_PANEL.SHARE.SELECTED_FILES" | translate }}
-    <a class="pull-right sidebar-link" href="#" id="show-selected-files" ng-click="mactrl.sidebarToggle.right = false;">
-      {{ "RIGHT_PANEL.SHARE_OPTIONS.SHOW_SELECTED_FILES" | translate }}
-    </a>
-  </div>
   <div class="custumListContainer clearfix">
     <div class="recipients-form-sections clearfix">
       <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>

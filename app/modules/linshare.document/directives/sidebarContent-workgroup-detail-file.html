@@ -18,14 +18,16 @@
         <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
       </div>
     </div>
-    <div class="description-ctn advancedSharingSettings">
-      <div contenteditable="true" class="comment"
-           ng-focus="vm.slideTextarea($event)"
-           ng-blur="vm.slideUpTextarea($event)"
-           ng-keyup="vm.setTextInput($event);"></div>
-      <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
-      <div class="edit-description">
-        <i class="zmdi zmdi-edit"></i>
+    <div title="{{'WIP' | translate}}">
+      <div class="description-ctn advancedSharingSettings disabled">
+        <div contenteditable="true" class="comment"
+             ng-focus="vm.slideTextarea($event)"
+             ng-blur="vm.slideUpTextarea($event)"
+             ng-keyup="vm.setTextInput($event);"></div>
+        <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+        <div class="edit-description">
+          <i class="zmdi zmdi-edit"></i>
+        </div>
       </div>
     </div>
     <div class="content-detail-area">
@@ -60,7 +62,7 @@
             <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
             <p>{{vm.currentSelectedDocument.current.creationDate | date: lsFormat()}}</p>
           </div>
-          <div>
+          <div ng-if="linshareModeProduction == false">
             <p>{{'INFORMATION_TAB.VERSION_HISTORIQUE' | translate}}:</p>
             <p>0 {{'INFORMATION_TAB.VERSIONS' | translate}}</p>
           </div>

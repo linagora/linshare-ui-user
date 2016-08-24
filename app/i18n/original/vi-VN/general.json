@@ -124,6 +124,8 @@
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Tên tập tin",
     "FILTER_BY_SIZE": "Lọc bằng kích cỡ",
+    "TBT__BY_SIZE": "",
+    "TBT__ORDER_BY_NAME": "",
     "FILTER_BY_DATE": {
       "HEADER": "Lọc bằng ngày",
       "MODIFICATION_DATE": "Ngày thay đổi",

@@ -111,7 +111,7 @@
                             <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                             <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
-                          {{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate }}
+                          {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate }}
                         </a>
                       </li>
                     </ul>
@@ -216,7 +216,7 @@
               </a>
               </span>
               <span class="dropdown link-dropdown" dropdown
-                    ng-show="(linshareModeProduction == false) && (vm.selectedDocuments.length == 1)">
+                    ng-show="(linshareModeProduction == false) || (vm.selectedDocuments.length == 1)">
                 <a class="plainTxtBtn partageLink"
                    dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>
@@ -297,7 +297,6 @@
                     data-current-selected-Document="vm.currentSelectedDocument"
                     data-details-function="vm.getDetails"
                     data-right-sidebar-open="mactrl.sidebarToggle.right"
-
                     data-ng-class="{'highlightListElem': documentFile.isSelected ,
                    'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid }"
                     class="p-b-5"
@@ -329,11 +328,12 @@
                       data-sortable="'name'" uuid={{documentFile.uuid}}  header-class="'col-3'">
                     <div class="ctn-name-actions">
                       <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                        <span class="file-name-disp single-line" contenteditable="false" spellcheck="false" >{{documentFile.name}}</span>
-                        <span>
-                          <span ng-show="documentFile.shared > 0" class="sharedActivated hidden-xs">
-                          {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
+                        <span class="file-name-disp single-line" contenteditable="false" spellcheck="false">
+                          <span ng-click="vm.gotoSharedSpaceTarget(documentFile.uuid, documentFile.name)">
+                            {{documentFile.name}}
                           </span>
+                        </span>
+                        <span>
                           <p class="mobile-list-item-info visible-xs">
                             {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}},
                             <span ng-show="documentFile.shared > 0">

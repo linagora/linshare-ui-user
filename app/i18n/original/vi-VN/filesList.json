@@ -49,7 +49,8 @@
       "NOTIFICATION_DATE": "Ngày thay đổi",
       "ATTACH_EMAIL": "Tùy chỉnh thư điện tử",
       "ATTACHED_EMAIL_SUBJECT": "Chủ đề",
-      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản"
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản",
+      "TBT__GO_TO_UPLOAD_FILES": ""
     }
   },
   "SELECTED_FILES": {

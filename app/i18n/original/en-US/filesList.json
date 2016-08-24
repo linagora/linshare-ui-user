@@ -73,7 +73,7 @@
       "ATTACH_EMAIL": "Customize the email",
       "ATTACHED_EMAIL_SUBJECT": "Subject",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Enter your message",
-      "SHOW_SELECTED_FILES": "Show files"
+      "GO_TO_UPLOAD_FILES": "Go back to uploads"
     },
     "CURRENT_SHARE_DETAIL": {
       "TITLE": "Share details",

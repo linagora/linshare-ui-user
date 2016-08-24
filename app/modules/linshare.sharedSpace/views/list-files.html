@@ -132,7 +132,7 @@
                               <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                               <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
-                            {{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate }}
+                            {{'FILTER_COMPONENT.BY_SIZE' | translate }}
                           </a>
                         </li>
                         <li role="menuitem">
@@ -141,16 +141,7 @@
                               <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                               <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
-                            {{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate }}
-                          </a>
-                        </li>
-                        <li role="menuitem">
-                          <a href="" class="ng-binding" ng-click="vm.sortDropdownSetActive('shared', $event)">
-                            <span class="caretArea">
-                              <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                            </span>
-                            {{'FILTER_COMPONENT.IS_SHARED' | translate }}
+                            {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate }}
                           </a>
                         </li>
                       </ul>
@@ -237,6 +228,13 @@
                     <span>{{'ACTION.DOWNLOAD' | translate}}</span>
                   </a>
               </span>
+              <span ng-if="vm.selectedDocuments.length > 1">
+              <a class="plainTxtBtn"  title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
+                 ng-click="vm.unavailableMultiDownload()">
+                <i class="zmdi zmdi-download"></i>
+                <span>{{'DOWNLOAD' | translate}}</span>
+              </a>
+            </span>
               <span>
                 <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                    ng-click="vm.deleteDocuments(vm.selectedDocuments)">
@@ -250,7 +248,8 @@
                   <span> {{'ACTION.MOVE' | translate}}</span>
                 </a>
               </span>
-              <span class="dropdown link-dropdown" uib-dropdown>
+              <span class="dropdown link-dropdown" uib-dropdown
+                    ng-show="(linshareModeProduction == false) || (vm.selectedDocuments.length == 1)">
                 <a class="plainTxtBtn partageLink"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>

@@ -24,19 +24,19 @@
                     <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
                   </div>
                 </div>
-
-                <div class="description-ctn advancedSharingSettings">
-                  <div contenteditable="true" class="comment"
-                       ng-focus="slideTextarea($event)"
-                       ng-blur="slideUpTextarea($event)"
-                       ng-keyup="setTextInput($event);"></div>
-                  <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
-                  <div class="edit-description">
-                    {{currentSelectedDocument.current.description}}
-                    <i class="zmdi zmdi-edit"></i>
+                <div title="{{'WIP' | translate}}">
+                  <div class="description-ctn advancedSharingSettings disabled">
+                    <div contenteditable="true" class="comment"
+                         ng-focus="slideTextarea($event)"
+                         ng-blur="slideUpTextarea($event)"
+                         ng-keyup="setTextInput($event);"></div>
+                    <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+                    <div class="edit-description">
+                      {{currentSelectedDocument.current.description}}
+                      <i class="zmdi zmdi-edit"></i>
+                    </div>
                   </div>
                 </div>
-
                 <div class="visible-xs clearfix sidebar-toolbar">
                   <ul class="actions col-xs-12" ng-show="currentPage == 'my_files'">
                     <li ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="col-xs-3">
