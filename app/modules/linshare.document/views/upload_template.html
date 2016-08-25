@@ -31,15 +31,23 @@
       </a>
     </div>
     <div class="breadcrumbsCtn hidden-xs">
-      <a href="#" class="breadcrumb col-xs-11">
+      <a href="#" class="breadcrumb col-xs-10">
         <i class="zmdi zmdi-file"></i>{{ "UPLOADED_FILES.BREADCRUMB_TITLE" | translate }}
       </a>
 
-      <div class="pull-right col-xs-1 upload-actions-toolbar actions">
-        <a href="" class="col-xs-6">
-          <i class="zmdi zmdi-pause " title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
+      <div ng-show="$flow.files.length > 0" class="pull-right col-xs-2 upload-actions-toolbar actions">
+        <a href="" class="col-xs-6"
+           ng-show="isFlowInprogress($flow) && !$flow.isPaused"
+           ng-click="pauseFlow($flow)">
+          <i class="zmdi zmdi-pause" title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
         </a>
-        <a href="" class="col-xs-6">
+        <a ng-show="$flow.isPaused" href="" class="col-xs-6" ng-click="resumeFlow($flow)">
+          <i class="zmdi zmdi-play " title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
+        </a>
+        <a ng-show="isFlowInprogress($flow)" href="" class="col-xs-6" ng-click="$flow.cancel()">
+          <i class="zmdi zmdi-stop " title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
+        </a>
+        <a href="" class="col-xs-6" ng-click="cleanFlowQueue($flow)">
           <i class="zmdi zmdi-check-all" title="{{ 'SELECTION_TOOLBAR.CLEAR_ALL' | translate }}"></i>
         </a>
       </div>
@@ -68,7 +76,7 @@
            ng-click="activeBtnShowSelection = !activeBtnShowSelection">
         <p><span>{{lengthOfSelectedDocuments()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
         <div class="pull-left view-icons-ctn groups-view">
-          <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show="activeBtnShowSelection"></i>
           <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
         </div>
         <div class="pull-left view-icons-ctn reset-icon" ng-click="resetSelectedDocuments()">
@@ -144,13 +152,18 @@
                         </a>
                       </li>
                       <li class="col-xs-6" x-ng-if="file.isComplete() && !file.error">
-                        <a href="" ng-click="removeSelectedDocuments(file); file.cancel()" event-propagation-stop
+                        <a href="" ng-click="removeSelectedDocuments(file)"
                            title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}">
                             <i class="zmdi zmdi-check" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"></i>
                         </a>
                       </li>
                       <li class="col-xs-6" x-ng-if="file.error">
-                        <a href="" ng-click="file.retry()" event-propagation-stop>
+                        <a href="" ng-click="file.retry()">
+                          <i class="zmdi zmdi-undo" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
+                        </a>
+                      </li>
+                      <li class="col-xs-6" x-ng-show="!file.isComplete()">
+                        <a href="" ng-click="removeSelectedDocuments(file)">
                           <i class="zmdi zmdi-stop" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
                         </a>
                       </li>
