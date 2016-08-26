@@ -1,6 +1,7 @@
 /**
  * @author Alpha O. Sall
  */
+'use strict';
 
 angular.module('linshare.document')
 
@@ -54,8 +55,9 @@ angular.module('linshare.document')
     };
     $scope.cleanFlowQueue = function(flowObj) {
       for(var i = flowObj.files.length - 1; i >= 0; i--) {
-        if(flowObj.files[i].isComplete())
-          flowObj.files[i].cancel();
+        if(flowObj.files[i].isComplete()) {
+          $scope.removeSelectedDocuments(flowObj.files[i]);
+        }
       }
     };
     $scope.isFlowInprogress = function(flowObj) {

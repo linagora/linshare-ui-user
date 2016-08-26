@@ -94,6 +94,9 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.loadSidebarContent = function(content) {
       $scope.sidebarRightDataType = content || 'share';
     };
+    var initFlagsOnSelectedPages = function() {
+      $scope.flagsOnSelectedPages = {};
+    };
     $scope.onShare = function(document) {
       $scope.loadSidebarContent();
       $timeout(function() {
@@ -146,6 +149,7 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
       angular.forEach($scope.selectedDocuments, function(selectedDoc) {
         selectedDoc.isSelected = false;
       });
+      initFlagsOnSelectedPages();
       $scope.selectedDocuments = [];
     };
 
@@ -249,8 +253,24 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         }
 
     });
-    $scope.deleteDocuments = documentUtilsService.deleteDocuments
-      .bind(this, $scope.documentsList, $scope.selectedDocuments, $scope.tableParams);
+    $scope.deleteDocuments = function(items) {
+      documentUtilsService.deleteDocuments(items, deleteCallback);
+    };
+
+    function deleteCallback(items) {
+      angular.forEach(items, function(restangularizedItem) {
+        $log.debug('value to delete', restangularizedItem);
+        restangularizedItem.remove().then(function() {
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+          _.remove($scope.documentsList, restangularizedItem);
+          _.remove($scope.selectedDocuments, restangularizedItem);
+          $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
+          $scope.tableParams.reload();
+          initFlagsOnSelectedPages();
+        });
+      });
+    }
+
     $scope.$on('linshare-upload-complete', function() {
       $scope.reloadDocuments();
     });

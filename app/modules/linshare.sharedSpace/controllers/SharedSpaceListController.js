@@ -178,7 +178,20 @@ angular.module('linshareUiUserApp')
       };
 
       function deleteDocuments(items) {
-        documentUtilsService.deleteDocuments(thisctrl.itemsList, thisctrl.selectedDocuments, thisctrl.tableParams, items);
+        documentUtilsService.deleteDocuments(items, deleteCallback);
+      }
+
+      function deleteCallback(items) {
+        angular.forEach(items, function(restangularizedItem) {
+          $log.debug('value to delete', restangularizedItem);
+          restangularizedItem.remove().then(function() {
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+            _.remove(thisctrl.itemsList, restangularizedItem);
+            _.remove(thisctrl.selectedDocuments, restangularizedItem);
+            thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module
+            thisctrl.tableParams.reload();
+          });
+        });
       }
 
       function addSelectedDocument(document) {

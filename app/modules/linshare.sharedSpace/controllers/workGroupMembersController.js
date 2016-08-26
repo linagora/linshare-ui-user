@@ -35,7 +35,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
     if(currentWorkGroup && $scope.mactrl.sidebarToggle.right) {
      workGroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
        wgmember.currentWorkgroupMember = member;
-     })
+     });
     }
   });
 

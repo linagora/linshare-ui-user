@@ -52,7 +52,7 @@ function documentService($translate, growlService, $log, $timeout, $q) {
     return collection;
   }
 
-  function deleteDocuments(allItems, selectedItems, tableParams, items) {
+  function deleteDocuments(items, callback) {
 
     if(!angular.isArray(items)) {
       items = [items];
@@ -70,16 +70,7 @@ function documentService($translate, growlService, $log, $timeout, $q) {
       },
       function(isConfirm) {
         if(isConfirm) {
-          angular.forEach(items, function(restangularizedItem) {
-            $log.debug('value to delete', restangularizedItem);
-            restangularizedItem.remove().then(function() {
-              growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
-              _.remove(allItems, restangularizedItem);
-              _.remove(selectedItems, restangularizedItem);
-              //documentsListCopy = allItems; // I keep a copy of the data for the filter module
-              tableParams.reload();
-            });
-          });
+          callback(items);
         }
       }
     );

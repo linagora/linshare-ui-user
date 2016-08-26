@@ -119,6 +119,7 @@ angular.module('linshare.receivedShare')
           selectedDoc.isSelected = false;
         });
         $scope.selectedDocuments = [];
+        $scope.flagsOnSelectedPages = {};
       };
 
       $scope.getDocumentThumbnail = function(uuid) {
@@ -129,6 +130,9 @@ angular.module('linshare.receivedShare')
 
       $scope.currentSelectedDocument = {current: ''};
       $scope.flagsOnSelectedPages = {};
+      var initFlagsOnSelectedPages = function() {
+        $scope.flagsOnSelectedPages = {};
+      };
       $scope.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
         var currentPage = page || $scope.tableParams.page();
         var dataOnPage = data || $scope.tableParams.data;
@@ -313,8 +317,25 @@ angular.module('linshare.receivedShare')
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
-      $scope.deleteDocuments = documentUtilsService.deleteDocuments
-        .bind(this, $scope.documentsList, $scope.selectedDocuments, $scope.tableParams);
+
+      $scope.deleteDocuments = function(items) {
+        documentUtilsService.deleteDocuments(items, deleteCallback);
+      };
+
+      function deleteCallback(items) {
+        angular.forEach(items, function(restangularizedItem) {
+          $log.debug('value to delete', restangularizedItem);
+          restangularizedItem.remove().then(function() {
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+            _.remove($scope.documentsList, restangularizedItem);
+            _.remove($scope.selectedDocuments, restangularizedItem);
+            $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
+            $scope.tableParams.reload();
+            initFlagsOnSelectedPages();
+          });
+        });
+      }
+
       $scope.formatLabel = function(u) {
         if (u.firstName !== '' ) {
           return u.firstName.concat(' ', u.lastName);
