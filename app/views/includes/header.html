@@ -21,7 +21,7 @@
         </a>
     </li>
     <li class="pull-right">
-        <ul class="top-menu">
+      <ul class="top-menu">
             <li class="dropdown" id="transfert-dropdown" uib-dropdown auto-close="outsideClick">
                 <a ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
                    style="height: 15px;">
@@ -36,7 +36,7 @@
                 <a uib-dropdown-toggle href=""><i class="tm-icon icon-transfert"></i>
                   <i class="tm-icon icon-transfert" id="newUploadIcon"></i>
                 </a>
-                <div class="dropdown-menu pull-right dropdown-menu-lg" uib-dropdown-menu>
+                <div class="dropdown-menu pull-right dropdown-menu-lg action-link" uib-dropdown-menu>
                   <div class="listview">
                     <div class="lv-body">
                       <div ng-cloak="" class="tabsdemoDynamicHeight">
@@ -44,8 +44,8 @@
                           <md-tabs md-dynamic-height="" md-border-bottom="">
                             <md-tab label="{{'TRANSFERS_DROPDOWN.UPLOADS' | translate}}">
                               <md-content class="md-padding">
-                                  <div class="lv-item row" x-ng-repeat="file in $flow.files">
-                                    <div class="col-xs-10 p-0">
+                                <div class="lv-item row" x-ng-repeat="file in $flow.files | orderBy: '-'">
+                                    <a class="col-xs-10 p-0" ui-sref="documents.upload({idUpload: file.uniqueIdentifier})">
                                       <div class="lv-title p-0">
                                         <div class="p-0 file-name">
                                           <span>{{file.name}}</span>
@@ -66,20 +66,20 @@
                                           <span class="sr-only">100% Complete (success)</span>
                                         </div>
                                       </div>
-                                    </div>
+                                    </a>
                                     <div class="col-xs-2 p-0">
                                       <ul class="lv-actions actions alignListIcons">
-                                        <li class="col-xs-4" x-ng-show="!file.isComplete()">
+                                        <li class="col-xs-12" x-ng-show="!file.isComplete()">
                                           <a href="" ng-click="file.cancel()">
-                                            <i class="zmdi zmdi-stop"></i>
+                                            <i class="zmdi zmdi-close"></i>
                                           </a>
                                         </li>
-                                        <li class="col-xs-4" x-ng-if="file.isComplete() && !file.error">
+                                        <li class="col-xs-12" x-ng-if="file.isComplete() && !file.error">
                                           <a href="" ng-click="file.cancel()">
                                             <i class="zmdi zmdi zmdi-check"></i>
                                           </a>
                                         </li>
-                                        <li class="col-xs-4" x-ng-if="file.error">
+                                        <li class="col-xs-12" x-ng-if="file.error">
                                           <a href="" ng-click="file.retry()">
                                             <i class="zmdi zmdi-replay"></i>
                                           </a>
@@ -94,9 +94,15 @@
                             </md-tab>
                             <md-tab label="{{'TRANSFERS_DROPDOWN.SHARE' | translate}}">
                               <md-content class="md-padding">
+                                <p class="empty-res" ng-if="share_array.length === 0">
+                                  <i class="zmdi zmdi-info-outline"></i>
+                                  <span>
+                                    {{'RIGHT_PANEL.RECIPIENTS.NO_SHARES' | translate}}
+                                  </span>
+                                </p>
                                 <div class="lv-item row" style="cursor: pointer" x-ng-repeat="share in share_array"
                                      ui-sref="share.detail({id: $index})">
-                                  <div class="col-xs-10 p-0">
+                                  <div class="col-xs-12 p-0">
                                     <div class="lv-title p-0">
                                       <div  class="p-0 file-name">
                                         <span> {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} {{$index + 1}}</span>
@@ -104,10 +110,10 @@
                                       <div class="p-0 secondary-info-ctn">
                                         <span class="secondary-info-text">
                                           <span class="files-count">{{share.documents.length}}
-                                          <i class="fa fa-file-o"></i>
+                                          <i class="fa fa-file"></i>
                                         </span>
                                           <span class="recipients-count">{{share.recipients.length}}
-                                            <i class="zmdi zmdi-account-o"></i>
+                                            <i class="zmdi zmdi-account"></i>
                                           </span>
                                         </span>
                                       </div>

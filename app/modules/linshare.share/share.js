@@ -253,7 +253,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         var deferred = $q.defer();
         if(self.waitingUploadIdentifiers.length === 0) {
           return LinshareShareService.shareDocuments(self.getFormObj()).then(function() {
-            growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
           });
         } else {
           deferred.reject({statusText: 'asyncMode'});
@@ -356,7 +356,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       }
 
       if($scope.selectedDocuments.length === 0 && Object.keys(currentUploads).length === 0) {
-        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
+        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'danger');
         return;
       }
       if(shareCreationDto.getRecipients().length === 0 ) {
@@ -379,7 +379,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       }, function(data) {
         if(data.statusText === 'asyncMode') {
           $log.debug('share processing with files in upload progress', data);
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_ASYNC', 'info');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_ASYNC', 'inverse');
           $scope.mactrl.sidebarToggle.right = false;
           $scope.share_array.push(angular.copy($scope.newShare));
           for(var upload in currentUploads) {
@@ -400,7 +400,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
         shareCreationDto.recipients.push({mail: $scope.selectedContact});
       }
       LinshareShareService.shareDocuments(shareCreationDto).then(function() {
-        growlService.notifyTopRight($scope.growlMsgShareSuccess, 'success');
+        growlService.notifyTopRight($scope.growlMsgShareSuccess, 'inverse');
         $scope.$emit('linshare-upload-complete');
         $scope.mactrl.sidebarToggle.right = false;
         angular.element('tr').removeClass('highlightListElem');
@@ -430,12 +430,12 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
     $scope.submitShare = function(shareCreationDto, now) {
       if($scope.selectedDocuments.length === 0 ) {
-        growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
+        growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'danger');
         return;
       }
       if(now) {
         LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'success');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
           $scope.$emit('linshare-upload-complete');
           $scope.mactrl.sidebarToggle.right = false;
           angular.element('tr').removeClass('info');

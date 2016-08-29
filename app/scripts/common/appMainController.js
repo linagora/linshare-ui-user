@@ -199,7 +199,6 @@ angular.module('linshareUiUserApp')
     $scope.callReloadDocuments = function(data) {
       $scope.$broadcast('linshare-upload-complete', data);
     };
-
     /**
      * This is the initial array of shares.
      * It will contain all the shares

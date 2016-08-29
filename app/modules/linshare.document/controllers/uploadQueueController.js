@@ -12,7 +12,7 @@ angular.module('linshare.document')
  *
  * The controller to visualize and manage selected documents
  */
-  .controller('LinshareUploadViewController', function($scope, $rootScope, growlService, $timeout) {
+  .controller('LinshareUploadViewController', function($scope, $rootScope, growlService, $timeout, $stateParams) {
     $scope.mactrl.sidebarToggle.right = false;
     $scope.selectedUploads = {};
     $scope.lengthOfSelectedDocuments = function() {
@@ -24,6 +24,19 @@ angular.module('linshare.document')
       }
     });
 
+    var idUpload=$stateParams.idUpload;
+    if(idUpload){
+      $scope.currentElemFlow = $scope.$flow.getFromUniqueIdentifier(idUpload);
+      $scope.currentElemFlow.isSelected = true;
+      $scope.selectedUploads[$scope.currentElemFlow] = {
+        name: $scope.currentElemFlow.name,
+        size: $scope.currentElemFlow.size,
+        type: $scope.currentElemFlow.getType()
+      };
+      $timeout(function() {
+        window.scrollTo(0, angular.element('div.media-body[data-uid-flow="'+idUpload+'"]').first().offset().top);
+      }, 250);
+    }
     // once a file has been uploaded we hide the drag and drop background and display the multi-select menu
     /* jshint unused: false */
     $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {

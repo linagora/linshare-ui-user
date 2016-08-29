@@ -1,13 +1,29 @@
 @import "fonts.scss";
 @import "colors.scss";
 
+
+.groups-shared-folder.grey-clr{
+  .path2:before {
+    color : #dcdcdc ;
+  }
+  .path1:before {
+    color : rgb(244, 244, 244) ;
+  }
+  .path3:before {
+    color : rgba(216, 205, 205, 0.2)
+  }
+}
+
+.groups-shared-folder.bg-info-icon{
+  font-size: 7em;
+  line-height: 202%;
+}
 .file-name-disp {
   display: block;
 }
 [contenteditable].single-line br {
   display:none;
 }
-
 
 #transfert-ctn  #fileListTable.ng-table {
   .noPadding .previewIconCtn {
@@ -1049,6 +1065,13 @@ md-content #recipientsCtnSidebar {
 
 .dropdown-menu:not([class*="bgm-"]) li a {
   color: #4C4C4C;
+}
+
+.action-link.dropdown-menu:not([class*="bgm-"]) li a {
+  padding: 0 !important;
+  width: 30px;
+  height: 30px;
+  line-height: 37px;
 }
 
 .dropdown-divided li:not(.divider) {
@@ -3418,7 +3441,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
     font-size: 0.9em;
   }
   .recipients-count i {
-    font-size: 1.2em;
+    font-size: 1.233em;
     vertical-align: middle;
     margin-left: 0.1em;
   }
@@ -3711,6 +3734,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
     float: right;
     width: 70%;
     margin-top: 14px;
+    flex: 1 1 60%;
     .actions-ctn {
       width: 7%;
     }
@@ -3832,6 +3856,8 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
       float: right;
       font-size: 17px;
       width: 90px;
+      flex: 0 auto !important;
+      display: flex;
       .sortDropdown {
         float: left;
         text-align: center;
@@ -3868,7 +3894,6 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
         margin-right: 1em;
         color: $loginDarkText;
         cursor: pointer;
-        /* line-height: 29px; */
       }
       .sortDropdown > a {
         width: 100%;
@@ -3876,6 +3901,10 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
     }
     #action-header .search-bar {
       float: right;
+      display: flex;
+      flex: 0 auto !important;
+      margin: 0;
+      width: auto;
     }
   }
   .card-body {
@@ -4486,6 +4515,9 @@ i.deActivateSharing {
   }
 }
 
+.menu-popover-ctn {
+  flex : 0 0 55px;
+}
 #breadcrumb-wrap {
   border-bottom: 1px solid $dividerClr;
   color: #282829;
@@ -4494,13 +4526,15 @@ i.deActivateSharing {
   font-weight: bold;
   height: 43px;
   left: 0;
-  //overflow: hidden;
   overflow: inherit;
   position: relative;
   right: 0;
   top: 0;
   background: $midGreyBg;
   z-index: 4;
+  display: flex;
+  flex-wrap: nowrap;
+
   .breadcrumbsCtn {
     position: relative;
     float: left;
@@ -4515,6 +4549,7 @@ i.deActivateSharing {
     text-transform: uppercase;
     font-size: 1.1em;
     letter-spacing: 0.005em;
+    flex: 1 1 40%;
     .subCategorieChevron {
       display: inline-block;
       margin-left: 7px;
@@ -5009,6 +5044,13 @@ body {
 
 .dropdown-menu li {
   clear: both;
+}
+.action-link.dropdown-menu li {
+  padding: 0;
+  text-align: center;
+  margin: auto;
+  vertical-align: middle;
+  padding-left: 10px;
 }
 
 .lvh-label {

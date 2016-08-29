@@ -8,6 +8,8 @@
     "ACTION": "Tác vụ"
   },
   "BREADCRUMB_TITLE": "Tập tin của tôi",
+  "TBT__BACKGROUND_WORKGROUP_TITLE_MSG": "",
+  "TBT__BACKGROUND_WORKGROUP_MSG": "",
   "RIGHT_PANEL": {
     "EMPTY": "Không có tập tin nào được chọn",
     "DETAILS": {
@@ -16,6 +18,7 @@
       "SIZE": "Kích cỡ",
       "TYPE": "Thể loại",
       "MODIFICATION_DATE": "Ngày thay đổi",
+      "TBT__CREATION_DATE": "",
       "EXPIRATION_DATE": "Ngày hết hạn",
       "CIPHERED": "Mã hóa",
       "TBT__CIPHERED_YES": "",
@@ -25,7 +28,8 @@
       "DESCRIPTION": "Miêu tả",
       "QUICK_SHARE": "Chia sẻ nhanh",
       "SHARE_PLACEHOLDER": "địa chỉ thư người nhận",
-      "ADVANCED_SHARE": "Chia sẻ nâng cao"
+      "ADVANCED_SHARE": "Chia sẻ nâng cao",
+      "TBT__UNDEFINED": ""
     },
     "ACTIVITIES": {
       "TITLE": "Lịch sử hoạt động"

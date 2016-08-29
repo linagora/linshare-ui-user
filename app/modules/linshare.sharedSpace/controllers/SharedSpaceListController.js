@@ -49,7 +49,7 @@ angular.module('linshareUiUserApp')
 
       thisctrl.copy = function(entryUuid) {
         workGroupEntriesRestService.copy(thisctrl.uuid, entryUuid).then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'success');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'inverse');
         });
       };
       $scope.reloadDocuments = function() {

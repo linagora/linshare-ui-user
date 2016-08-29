@@ -8,6 +8,8 @@
     "ACTION": "Actions"
   },
   "BREADCRUMB_TITLE": "Mes fichiers",
+  "BACKGROUND_WORKGROUP_TITLE_MSG": "GROUPES DE TRAVAIL",
+  "BACKGROUND_WORKGROUP_MSG": "Créer des groupes de travail pour échanger des fichiers avec vos collègues.",
   "RIGHT_PANEL": {
     "EMPTY": "Aucun fichier sélectionné",
     "DETAILS": {
@@ -16,8 +18,9 @@
       "SHARING_DATE": "Date de partage",
       "SIZE": "Taille",
       "TYPE": "Type",
-      "MODIFICATION_DATE": "Date de modification",
-      "EXPIRATION_DATE": "Date d'expiration",
+      "CREATION_DATE": "Créé le",
+      "MODIFICATION_DATE": "Modifié le",
+      "EXPIRATION_DATE": "Expire le",
       "CIPHERED": "Chiffré",
       "CIPHERED_YES": "Oui",
       "CIPHERED_NO": "Non",
@@ -28,7 +31,8 @@
       "QUICK_SHARE": "Partage",
       "SHARE_PLACEHOLDER": "adresse de courriel des destinataires",
       "ADVANCED_SHARE": "Partage avancé",
-      "NO_PREVIEW": "Aucune prévisualisation"
+      "NO_PREVIEW": "Aucune prévisualisation",
+      "UNDEFINED": "Non défini"
     },
     "DETAIL_SHARE": {
       "TITLE": "Détails du partage",

@@ -135,7 +135,7 @@
                     <div class="meta-data-content">
                       <div>
                         <p ng-if="currentPage == 'my_files'">
-                          {{'RIGHT_PANEL.DETAILS.UPLOAD_DATE' | translate}}:
+                          {{'RIGHT_PANEL.DETAILS.CREATION_DATE' | translate}}:
                         </p>
                         <p ng-if="currentPage == 'received_files'">
                           {{'RIGHT_PANEL.DETAILS.SHARING_DATE'  | translate}}:
@@ -149,7 +149,12 @@
                         <p>{{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}:</p>
                         <p tooltip-placement="bottom" tooltip-popup-delay="500"
                            uib-tooltip="{{currentSelectedDocument.current.expirationDate | date : lsFullDateFormat()}}">
-                          {{currentSelectedDocument.current.expirationDate | date : lsFormat()}}
+                          <span ng-if="currentSelectedDocument.current.expirationDate !== null">
+                            {{currentSelectedDocument.current.expirationDate | date : lsFormat()}}
+                          </span>
+                          <span ng-if="currentSelectedDocument.current.expirationDate == null">
+                            {{'RIGHT_PANEL.DETAILS.UNDEFINED'  | translate}}
+                          </span>
                         </p>
                       </div>
                       <div ng-if="currentPage == 'my_files'">
@@ -190,7 +195,6 @@
             <p class="empty-res" ng-if="currentSelectedDocument.current.shared === 0">
               <i class="zmdi zmdi-info-outline"></i><span>{{'RIGHT_PANEL.RECIPIENTS.NO_SHARES' | translate}}</span>
             </p>
-
             <div ng-if="currentSelectedDocument.current.shared > 0">
               <div class="input-group search-bar col-xs-12">
                 <div id="search-field-ctn">

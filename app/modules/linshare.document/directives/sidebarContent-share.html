@@ -25,7 +25,8 @@
     <div class="recipients-form-sections clearfix">
       <h2 class="pull-left headerSubCtn"><i class="groups-user-group"></i>
         {{ "RIGHT_PANEL.SHARE.RECIPIENTS" | translate }}</h2><span class="required-field-hint">*</span>
-      <div class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
+      <div ng-if="linshareModeProduction == false"
+           class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
            on-toggle="toggled()">
         <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle  ng-disabled="disabled"
            alt="{{ 'RIGHT_PANEL.SHARE.CREATE_MAILING_LIST_ALT' | translate }}">

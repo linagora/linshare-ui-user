@@ -103,6 +103,9 @@ angular.module('linshareUiUserApp')
 
       .state('documents.upload', {
         url: '/upload',
+        params: {
+          idUpload: null
+        },
         templateUrl: 'modules/linshare.document/views/upload_template.html'
       })
 

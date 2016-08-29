@@ -45,7 +45,7 @@
           <i class="zmdi zmdi-play " title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
         </a>
         <a ng-show="isFlowInprogress($flow)" href="" class="col-xs-6" ng-click="$flow.cancel()">
-          <i class="zmdi zmdi-stop " title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
+          <i class="zmdi zmdi-close" title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
         </a>
         <a href="" class="col-xs-6" ng-click="cleanFlowQueue($flow)">
           <i class="zmdi zmdi-check-all" title="{{ 'SELECTION_TOOLBAR.CLEAR_ALL' | translate }}"></i>
@@ -112,7 +112,8 @@
           </div>
           <div class="lv-body ng-table" id="fileListTable">
             <div class="media-body" ng-repeat="file in $flow.files"
-                 data-ng-class="{'highlightListElem': file.isSelected }">
+                 data-ng-class="{'highlightListElem': file.isSelected }"
+                 data-uid-flow="{{file.uniqueIdentifier}}">
               <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
                 <div class="col-xs-24 col-sm-12 animLeft noPadding">
                   <div class="col-xs-6 col-sm-11 pull-left">
@@ -125,6 +126,7 @@
                       <div class="lv-title">{{file.name}}</div>
                       <small ng-hide="file.isComplete()" class="lv-small pull-left">
                         {{file.timeRemaining() | remainingTime}}
+                        <span ng-show="file.progress() == 0 " >{{'PENDING_UPLOADS' | translate}}</span>
                       </small>
                       <small ng-show="file.isComplete()" class="lv-small pull-left">
                         {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
@@ -164,7 +166,7 @@
                       </li>
                       <li class="col-xs-6" x-ng-show="!file.isComplete()">
                         <a href="" ng-click="removeSelectedDocuments(file)">
-                          <i class="zmdi zmdi-stop" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
+                          <i class="zmdi zmdi-close" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
                         </a>
                       </li>
                     </ul>
