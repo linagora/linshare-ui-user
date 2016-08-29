@@ -49,6 +49,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       }
     };
   })
+
   .factory('LinshareFunctionalityService', function(Restangular, $log, $q) {
     var allFunctionalities = {};
     var deferred = $q.defer();
@@ -340,6 +341,11 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
 
     $scope.selectedContact = {};
 
+    $scope.closeSideBar = function() {
+      $scope.newShare.resetForm();
+      $scope.mactrl.sidebarToggle.right = false;
+    };
+
     $scope.submitShare = function(shareCreationDto, selectedDocuments, selectedUploads) {
       var currentUploads = selectedUploads || {};
       for(var upload in currentUploads) {
@@ -381,12 +387,15 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           $log.debug('share processing with files in upload progress', data);
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_ASYNC', 'inverse');
           $scope.mactrl.sidebarToggle.right = false;
-          $scope.share_array.push(angular.copy($scope.newShare));
+          $scope.newShare.currentUpload = [];
+          // $scope.share_array.push(angular.copy($scope.newShare));
           for(var upload in currentUploads) {
             if(currentUploads.hasOwnProperty(upload)) {
+              $scope.newShare.currentUpload.push(currentUploads[upload]);
               delete $scope.selectedUploads[upload];
             }
           }
+          $scope.share_array.push(angular.copy($scope.newShare));
         } else {
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_FAILED', 'danger');
         }
@@ -409,17 +418,28 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
     };
 
     $scope.filesToShare = $stateParams.selected;
-    })
+  })
 
   .controller('shareDetailController', function($scope, shareIndex) {
-    $scope.shareToDisplay = $scope.share_array[shareIndex];
-    $scope.selectedDocuments = $scope.shareToDisplay.documents;
+    //$scope.shareToDisplay = $scope.share_array[shareIndex];
+    var currentShare = $scope.share_array[shareIndex];
+
+
+    if(currentShare.waitingUploadIdentifiers) {
+      $scope.shareToDisplay = currentShare.getObjectCopy();
+      $scope.selectedDocuments = currentShare.getDocuments();
+      $scope.selectedDocuments.documents.push(currentShare.currentUpload);
+      $scope.shareToDisplay.documents = $scope.selectedDocuments.documents;
+    } else {
+      $scope.shareToDisplay = currentShare;
+      $scope.selectedDocuments = currentShare.documents;
+    }
     $scope.shareIndex = shareIndex;
     $scope.sidebarRightDataType = 'active-share-details';
     $scope.mactrl.sidebarToggle.right = true;
   })
 
-  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, $translate) {
+  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService) {
 
     $scope.sharesContainer = {waiting: [], done: []};
     $scope.onfileComplete = function () {
