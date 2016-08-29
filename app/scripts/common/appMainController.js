@@ -150,7 +150,7 @@ angular.module('linshareUiUserApp')
 
   .controller('UiUserMainController',
   function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
-           AuthenticationService, MenuService, $timeout, LinshareUserService) {
+           AuthenticationService, MenuService, $timeout, LinshareUserService, ShareObjectService) {
     $rootScope.sidebarRightWidth = 350;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.mobileWidthBreakpoint=768;
@@ -222,8 +222,9 @@ angular.module('linshareUiUserApp')
         angular.forEach(associativeSharings, function(shareIndex) {
           var correspondingShare = {};
           angular.extend(correspondingShare, $scope.share_array[shareIndex]);
-          correspondingShare.addLinshareDocumentsAndShare(fileIdentifier, flowFile.linshareDocument);
-          $scope.share_array[shareIndex] = angular.copy(correspondingShare.getObjectCopy());
+          var shareInProgress = new ShareObjectService(correspondingShare);
+          shareInProgress.addLinshareDocumentsAndShare(fileIdentifier, flowFile.linshareDocument);
+          $scope.share_array[shareIndex] = angular.copy(shareInProgress.getObjectCopy());
         });
         delete $scope.refFlowShares[fileIdentifier];
       }

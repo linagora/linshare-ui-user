@@ -28,7 +28,7 @@ angular.module('linshare.document')
     if(idUpload){
       $scope.currentElemFlow = $scope.$flow.getFromUniqueIdentifier(idUpload);
       $scope.currentElemFlow.isSelected = true;
-      $scope.selectedUploads[$scope.currentElemFlow] = {
+      $scope.selectedUploads[$scope.currentElemFlow.uniqueIdentifier] = {
         name: $scope.currentElemFlow.name,
         size: $scope.currentElemFlow.size,
         type: $scope.currentElemFlow.getType()
@@ -44,7 +44,8 @@ angular.module('linshare.document')
       $scope.selectedUploads[flowFile.uniqueIdentifier] = {
         name: flowFile.name,
         size: flowFile.size,
-        type: flowFile.getType()
+        type: flowFile.getType(),
+        flowId: flowFile.uniqueIdentifier
       };
       angular.element('.dragNDropCtn').addClass('outOfFocus');
       //pertains to upload-box
