@@ -18,7 +18,7 @@
     </div>
     <div class="custumListBody col-xs-12">
       <div class="custumListItem readonly" ng-repeat="recipient in shareToDisplay.recipients"
-           ng-if="recipient.firstName !== null">
+           ng-if="recipient.domain">
         <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0).toUpperCase()}}</span></p>
         <div class="pull-left nameRecipientsCtn">
           <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="custumListItem readonly" ng-repeat="recipient in shareToDisplay.recipients"
-           ng-if="recipient.firstName === null">
+           ng-if="!recipient.domain">
         <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.mail.charAt(0).toUpperCase()}}</span></p>
         <div class="pull-left nameRecipientsCtn">
           <p class="pull-left inner-text-li" title="{{recipient.mail}}">{{recipient.mail}}</p>
