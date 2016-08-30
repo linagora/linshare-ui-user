@@ -81,6 +81,7 @@
     "LOGOUT": "Déconnexion",
     "FULL_SCREEN": "Plein écran",
     "CLEAR_LOCAL_STORAGE": "Purger le stockage local",
+    "NO_SHARES": "Vous n'avez aucun partage en cours.",
     "UPLOAD_PROGRESS": {
       "TITLE": "Progression de dépôt",
       "UPLOAD_DONE": "terminé",
@@ -120,21 +121,21 @@
     "ON_FILE_DELETE": {
       "TITLE": "Êtes-vous sûr?",
       "TEXT": "Vous êtes sur le point de supprimer des fichiers !",
-      "CONFIRM_BUTTON": "Oui, continuez !",
-      "CANCEL_BUTTON": "Annulez !"
+      "CONFIRM_BUTTON": "Supprimer !",
+      "CANCEL_BUTTON": "Annuler !"
     },
     "ON_LOCALSTORAGE_DELETE": {
       "TITLE": "Êtes-vous sûr?",
       "TEXT": "Toutes les valeurs du stockage local seront effacées",
-      "CONFIRM_BUTTON": "Oui, continuez !",
+      "CONFIRM_BUTTON": "Effacer",
       "DONE": "Terminé",
       "IS_CLEARED": "Le stockage local a été effacé"
     },
     "ON_FILE_COPY": {
       "TITLE": "Êtes-vous sûr?",
       "TEXT": "Vous êtes sur le point de copier des fichiers reçus dans votre espace !",
-      "CONFIRM_BUTTON": "Oui, copiez!",
-      "CANCEL_BUTTON": "Annulez !"
+      "CONFIRM_BUTTON": "Copier",
+      "CANCEL_BUTTON": "Annuler"
     }
   },
   "FILTER_COMPONENT": {

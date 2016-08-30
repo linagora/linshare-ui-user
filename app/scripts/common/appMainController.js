@@ -108,7 +108,7 @@ angular.module('linshareUiUserApp')
         closeOnConfirm: false
       }, function(){
         localStorage.clear();
-        swal(thisLocal.swalDone, thisLocal.swalCleared, 'success');
+        swal(thisLocal.swalDone, thisLocal.swalCleared, 'inverse');
       });
 
     };

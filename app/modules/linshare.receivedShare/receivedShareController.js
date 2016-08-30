@@ -326,7 +326,7 @@ angular.module('linshare.receivedShare')
         angular.forEach(items, function(restangularizedItem) {
           $log.debug('value to delete', restangularizedItem);
           restangularizedItem.remove().then(function() {
-            growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
             _.remove($scope.documentsList, restangularizedItem);
             _.remove($scope.selectedDocuments, restangularizedItem);
             $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module

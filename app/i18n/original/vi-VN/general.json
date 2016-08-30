@@ -75,6 +75,7 @@
     "LOGOUT": "Đăng xuất",
     "FULL_SCREEN": "Toàn màn hình",
     "CLEAR_LOCAL_STORAGE": "Xóa Local Storage",
+    "TBT__NO_SHARES": "",
     "UPLOAD_PROGRESS": {
       "TITLE": "QUá trình tải lên",
       "UPLOAD_DONE": "xong",

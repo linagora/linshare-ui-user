@@ -79,6 +79,7 @@
     "LOGOUT": "Logout",
     "FULL_SCREEN": "Full screen",
     "CLEAR_LOCAL_STORAGE": "Clear Local Storage",
+    "NO_SHARES": "You currently haven no shares.",
     "UPLOAD_PROGRESS": {
       "TITLE": "Upload progress",
       "UPLOAD_DONE": "done",
@@ -118,20 +119,20 @@
     "ON_FILE_DELETE": {
       "TITLE": "Are you sure?",
       "TEXT": "You are about to remove files !",
-      "CONFIRM_BUTTON": "Yes, delete it!",
+      "CONFIRM_BUTTON": "Delete",
       "CANCEL_BUTTON": "Cancel!"
     },
     "ON_LOCALSTORAGE_DELETE": {
       "TITLE": "Are you sure?",
       "TEXT": "All your saved localStorage values will be removed",
-      "CONFIRM_BUTTON": "Yes, delete it!",
+      "CONFIRM_BUTTON": "Delete",
       "DONE": "Done",
       "IS_CLEARED": "LocalStorage is cleared"
     },
     "ON_FILE_COPY": {
       "TITLE": "Are you sure?",
       "TEXT": "You are about to move received files into your own files !",
-      "CONFIRM_BUTTON": "Yes, copy!",
+      "CONFIRM_BUTTON": "Copy",
       "CANCEL_BUTTON": "Cancel!"
     }
   },
