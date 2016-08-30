@@ -4,7 +4,7 @@ angular.module('linshare.share')
 
 
 /**
- * This is controller is not used in the current user flow off the application
+ * This is controller is not used in the current user flow of the application
  * It has been written for the advanced sharing with the sharing in three steps (slides)
  */
   .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService) {

@@ -80,6 +80,10 @@
       "TITLE": "QUá trình tải lên",
       "UPLOAD_DONE": "xong",
       "FOOTER": "Xem tất cả"
+    },
+    "TBT_SHARING_PROGRESS": {
+      "TBT_SHARE_DONE": "",
+      "TBT_SHARE_IN_PROGRESS": ""
     }
   },
   "ACTION": {

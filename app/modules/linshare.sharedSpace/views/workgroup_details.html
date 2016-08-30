@@ -72,9 +72,14 @@
               <p>
                 {{'MEMBER_TAB.MY_RIGHTS' | translate}}:
               </p>
-              <p>
-                <i class="zmdi zmdi-account p-r-3"></i>
-                Admin false
+              <p ng-show="vm.currentWorkgroupMember.admin">
+                <i class="zmdi zmdi-account p-r-3"></i> {{ "MEMBER_TAB.ADMIN" | translate }}<br />
+              </p>
+              <p ng-show="vm.currentWorkgroupMember.readonly">
+                <i class="zmdi zmdi-account p-r-3"></i> {{ "MEMBER_TAB.READ" | translate }}<br />
+              </p>
+              <p ng-show="vm.currentWorkgroupMember.role === 'normal'">
+                <i class="zmdi zmdi-account p-r-3"></i> {{ "MEMBER_TAB.WRITE" | translate }}<br />
               </p>
             </div>
           </div>

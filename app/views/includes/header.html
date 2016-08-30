@@ -106,45 +106,25 @@
                                     <div class="lv-title p-0">
                                       <div  class="p-0 file-name">
                                         <span> {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} {{$index + 1}}</span>
+                                        <i ng-show="share.waitingUploadIdentifiers.length > 0">
+                                          {{"HEADER.SHARING_PROGRESS.SHARE_IN_PROGRESS" | translate}}
+                                        </i>
+                                        <i ng-show="share.waitingUploadIdentifiers.length === 0">
+                                          {{"HEADER.SHARING_PROGRESS.SHARE_DONE" | translate }}
+                                        </i>
                                       </div>
                                       <div class="p-0 secondary-info-ctn">
                                         <span class="secondary-info-text">
                                           <span class="files-count">{{share.documents.length}}
-                                          <i class="fa fa-file"></i>
-                                        </span>
+                                            <i class="fa fa-file"></i>
+                                          </span>
                                           <span class="recipients-count">{{share.recipients.length}}
                                             <i class="zmdi zmdi-account"></i>
                                           </span>
                                         </span>
                                       </div>
                                     </div>
-                                    <!--<p class="time-remaining">30min {{'TRANSFERS_DROPDOWN.BEFORE_SENDINGS' | translate}}</p>-->
-                                    <!--<div class="progress">-->
-                                      <!--<div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"-->
-                                           <!--aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">-->
-                                        <!--<span class="sr-only">100% Complete (success)</span>-->
-                                      <!--</div>-->
-                                    <!--</div>-->
                                   </div>
-                                  <!--<div class="col-xs-2 p-0">-->
-                                    <!--<ul class="lv-actions actions alignListIcons">-->
-                                      <!--<li class="col-xs-4" x-ng-if="file.isUploading()">-->
-                                        <!--<a href="" ng-click="file.cancel()">-->
-                                          <!--<i class="zmdi zmdi-eye"></i>-->
-                                        <!--</a>-->
-                                      <!--</li>-->
-                                      <!--<li class="col-xs-4" x-ng-if="file.isComplete() && !file.error">-->
-                                        <!--<a href="" ng-click="file.cancel()">-->
-                                          <!--<i class="zmdi zmdi zmdi-check"></i>-->
-                                        <!--</a>-->
-                                      <!--</li>-->
-                                      <!--<li class="col-xs-4" x-ng-if="file.error">-->
-                                        <!--<a href="" ng-click="file.retry()">-->
-                                          <!--<i class="zmdi zmdi-replay"></i>-->
-                                        <!--</a>-->
-                                      <!--</li>-->
-                                    <!--</ul>-->
-                                  <!--</div>-->
                                 </div>
                               </md-content>
                             </md-tab>

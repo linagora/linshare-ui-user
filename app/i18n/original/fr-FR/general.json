@@ -86,6 +86,10 @@
       "TITLE": "Progression de dépôt",
       "UPLOAD_DONE": "terminé",
       "FOOTER": "Voir tous"
+    },
+    "SHARING_PROGRESS": {
+      "SHARE_DONE": "envoyé",
+      "SHARE_IN_PROGRESS": "en cours ..."
     }
   },
   "ACTION": {

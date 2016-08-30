@@ -10,6 +10,14 @@
             {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} {{shareIndex +1}}
           </a>
         </div>
+        <div class="breadcrumbsCtn text-center">
+          <i class="breadcrumb" ng-show="shareToDisplay.waitingUploadIdentifiers.length > 0">
+            {{"HEADER.SHARING_PROGRESS.SHARE_IN_PROGRESS" | translate}}
+          </i>
+          <i class="breadcrumb" ng-show="shareToDisplay.waitingUploadIdentifiers.length === 0">
+            {{"HEADER.SHARING_PROGRESS.SHARE_DONE" | translate }}
+          </i>
+        </div>
         <section class="row multi-select visible-xs">
           <div class="col-xs-2 ctn-mobile-select-count">
             <span class="numberOfiles">{{selectedDocuments.length}}</span>

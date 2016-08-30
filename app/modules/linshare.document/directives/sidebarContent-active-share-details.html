@@ -117,7 +117,7 @@
             </div>
           </div>
 
-          <div class="media">
+          <div class="media" ng-show="shareToDisplay.subject">
             <div class="pull-left col-md-7">
               {{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}} :
             </div>
@@ -125,7 +125,7 @@
               <div class="lv-title">{{shareToDisplay.subject}}</div>
             </div>
           </div>
-          <div class="media">
+          <div class="media" ng-show="shareToDisplay.message">
             <div class="pull-left col-md-7">
               {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.MAIL_CONTENT' | translate}} :
             </div>

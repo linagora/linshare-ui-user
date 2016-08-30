@@ -44,8 +44,6 @@ angular.module('linshare.share')
         }
       }
 
-
-
       $scope.newShare.addDocuments($scope.selectedDocuments);
       $scope.newShare.share().then(function() {
         $scope.$emit('linshare-upload-complete');

@@ -14,6 +14,7 @@ angular.module('linshareUiUserApp')
     thisctrl.addSelectedDocument = addSelectedDocument;
     thisctrl.showItemDetails = showItemDetails;
     thisctrl.paramFilter = {name: ''};
+    thisctrl.currentWorkgroupMember = {};
     thisctrl.tableParams = new NgTableParams({
       page: 1,
       sorting: {modificationDate: 'desc'},

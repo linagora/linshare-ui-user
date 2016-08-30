@@ -84,6 +84,10 @@
       "TITLE": "Upload progress",
       "UPLOAD_DONE": "done",
       "FOOTER": "View all"
+    },
+    "SHARING_PROGRESS": {
+      "SHARE_DONE": "sent",
+      "SHARE_IN_PROGRESS": "in progress ..."
     }
   },
   "ACTION": {
