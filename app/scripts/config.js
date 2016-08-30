@@ -2,7 +2,7 @@
 
 angular.module('linshareUiUserApp')
 .constant('lsAppConfig', {
-    baseRestUrl: 'linshare/webservice/rest/user', // default: 'linshare/webservice/rest/user'
+    baseRestUrl: 'linshare/webservice/rest/user/v2', // default: 'linshare/webservice/rest/user/v2'
 	  localPath: 'i18n/original', //custom your i18n folder path
     debug: true,
     date_fr_format: 'dd/MM/yyyy',

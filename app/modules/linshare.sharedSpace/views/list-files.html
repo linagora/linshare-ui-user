@@ -227,7 +227,7 @@
             </div>
             <div id="toolbar-actions" class="hidden-xs">
               <span ng-class="{'hide': vm.selectedDocuments.length > 1}">
-                  <a ng-href="{{linshareBaseUrl}}/threads/{{vm.uuid}}/entries/{{vm.selectedDocuments[0].uuid}}/download"
+                  <a ng-href="{{linshareBaseUrl}}/work_groups/{{vm.uuid}}/entries/{{vm.selectedDocuments[0].uuid}}/download"
                      event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                     <i class="zmdi zmdi-download"></i>
                     <span>{{'ACTION.DOWNLOAD' | translate}}</span>
@@ -417,7 +417,7 @@
                             </a>
                           </li>
                           <li class="hidden-xs">
-                            <a ng-href="{{linshareBaseUrl}}/threads/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
+                            <a ng-href="{{linshareBaseUrl}}/work_groups/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
                                event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                               <i class="zmdi zmdi-download"></i>
                             </a>
@@ -457,7 +457,7 @@
                               </li>
                               <li class="divider"></li>
                               <li class="hidden-xs" ng-show="linshareModeProduction == false">
-                                <a ng-href="{{linshareBaseUrl}}/threads/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
+                                <a ng-href="{{linshareBaseUrl}}/work_groups/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
                                    event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
                                   {{'ACTION.DOWNLOAD' | translate}}
