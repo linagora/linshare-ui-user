@@ -37,6 +37,7 @@ angular.module('linshareUiUserApp')
       simultaneousUploads: lsAppConfig.simultaneous_upload,
       //testChunks:false,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
+      allowDuplicateUploads: true,
       permanentErrors: [401, 500, 501]
     };
     /*
