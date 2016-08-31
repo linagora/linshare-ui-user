@@ -30,7 +30,12 @@
                 </i>
                 <p>{{ "WORKGROUPS_LIST.FOLDER" | translate }}</p>
               </a>
-              <a class="col-xs-6" flow-btn href="javascript:void(0)">
+              <a ng-hide="vm.currentWorkgroupMember.readonly" class="col-xs-6" flow-btn href="javascript:void(0)">
+                <i class="zmdi zmdi-upload"></i>
+                <p>{{ "WORKGROUPS_LIST.UPLOAD_FILE" | translate }}</p>
+              </a>
+              <a ng-show="vm.currentWorkgroupMember.readonly" class="col-xs-6 disabled-work-in-progress" href=""
+                 uib-tooltip="">
                 <i class="zmdi zmdi-upload"></i>
                 <p>{{ "WORKGROUPS_LIST.UPLOAD_FILE" | translate }}</p>
               </a>
@@ -38,7 +43,7 @@
                 <i class="zmdi zmdi-pin-account"></i>
                 <p>{{ "WORKGROUPS_LIST.UPLOAD_REQUEST" | translate }}</p>
               </a>
-              <a class="col-xs-6">
+              <a class="col-xs-6" ng-show="linshareModeProduction == false">
                 <i><span class="groups-add-member"></span></i>
                 <p>{{ "WORKGROUPS_LIST.ADD_A_MEMBER" | translate }}</p>
               </a>

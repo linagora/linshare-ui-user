@@ -2,7 +2,7 @@
 
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
-    function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService,
+    function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService, workGroupMembersRestService,
              workGroupEntriesRestService, $stateParams, Restangular, $translatePartialLoader, $timeout , $translate) {
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('sharedspace');
@@ -66,6 +66,11 @@ angular.module('linshareUiUserApp')
         });
       };
       thisctrl.renameItem = renameItem;
+
+      workGroupMembersRestService.get(thisctrl.uuid, $scope.userLogged.uuid).then(function(member) {
+        thisctrl.currentWorkgroupMember = member;
+        //$scope.vm.currentWorkgroupMember = member;
+      });
 
       thisctrl.currentPage = 'group_list_files';
       $scope.$on('$stateChangeSuccess', function() {
