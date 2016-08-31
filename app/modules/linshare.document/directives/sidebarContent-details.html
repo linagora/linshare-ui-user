@@ -229,7 +229,12 @@
                     <span ng-show="shareElement.recipient.external" class="user-full-name">
                       <strong>{{shareElement.recipient.mail}}</strong>
                     </span>
-                    <span class="email">{{'RIGHT_PANEL.RECIPIENTS.NOT_DOWNLOADED' | translate}}</span>
+                    <span ng-if="shareElement.downloaded === 0" class="email">
+                      {{'RIGHT_PANEL.RECIPIENTS.NOT_DOWNLOADED' | translate}}
+                    </span>
+                    <span ng-if="shareElement.downloaded !== 0" class="email">
+                      {{'RIGHT_PANEL.RECIPIENTS.DOWNLOADED' | translate}}: {{shareElement.downloaded}}
+                    </span>
                   </p>
                   <a class="info-partage-link" href=""><i class="zmdi zmdi-info-outline"></i></a>
                 </div>
