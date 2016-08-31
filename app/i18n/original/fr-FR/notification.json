@@ -32,6 +32,7 @@
       "AT_LEAST_ONE_DOCUMENT": "Aucun fichier sélectionné"
     },
     "ERROR": {
+      "FILE_UPLOAD": "Le dépôt a échoué",
       "503": "Serveur Indisponible"
     }
   }

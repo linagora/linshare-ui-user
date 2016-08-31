@@ -32,6 +32,7 @@
       "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn"
     },
     "ERROR": {
+      "TBT_FILE_UPLOAD": "",
       "503": "Lỗi máy chủ"
     }
   }

@@ -150,7 +150,7 @@ angular.module('linshareUiUserApp')
 
   .controller('UiUserMainController',
   function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
-           AuthenticationService, MenuService, $timeout, LinshareUserService, ShareObjectService) {
+           AuthenticationService, MenuService, $timeout, LinshareUserService, ShareObjectService, growlService) {
     $rootScope.sidebarRightWidth = 350;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.mobileWidthBreakpoint=768;
@@ -215,6 +215,11 @@ angular.module('linshareUiUserApp')
      */
     $scope.addUploadedDocument = function(flowFile, serverResponse) {
       var response = angular.fromJson(serverResponse);
+      if(!response.chunkUploadSuccess) {
+        $log.error('Error occured while uploading file :' + response.fileName);
+        $log.error('The error message is ' + response.errorMessage);
+        growlService.notifyTopCenter('GROWL_ALERT.ERROR.FILE_UPLOAD', 'danger');
+      }
       flowFile.linshareDocument = response.entry;
       var fileIdentifier = flowFile.uniqueIdentifier;
       var associativeSharings = $scope.refFlowShares[fileIdentifier] || {};

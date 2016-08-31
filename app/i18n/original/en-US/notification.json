@@ -32,6 +32,7 @@
       "AT_LEAST_ONE_DOCUMENT": "No file is selected"
     },
     "ERROR": {
+      "FILE_UPLOAD": "The upload failed",
       "503": "Service Unavailable"
     }
   }
