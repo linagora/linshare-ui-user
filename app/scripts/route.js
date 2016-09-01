@@ -20,9 +20,9 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
         resolve: {
-          user: function(AuthenticationService) {
-            return AuthenticationService.getCurrentUser();
-          }
+          // user: function(AuthenticationService) {
+          //   return AuthenticationService.getCurrentUser();
+          // }
         }
       })
 

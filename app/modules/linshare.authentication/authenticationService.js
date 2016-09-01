@@ -22,12 +22,13 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
       /*
        Check if the user is authorized
        */
-      baseAuthentication.customGET('authorized')
-        .then(function (userLoggedIn) {
-          deferred.resolve(userLoggedIn);
-        }, function (error) {
-          $log.debug('current user not authenticated', error);
-        });
+      // baseAuthentication.customGET('authorized')
+      //   .then(function (userLoggedIn) {
+      //     deferred.resolve(userLoggedIn);
+      //     $log.debug('current user not authenticated ---------------------' );
+      //   }, function (error) {
+      //     $log.debug('current user not authenticated', error);
+      //   });
 
       return {
         login: function (login, password) {
@@ -70,6 +71,7 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
             });
         },
         getCurrentUser: function () {
+          console.log('')
           return deferred.promise;
         }
       };

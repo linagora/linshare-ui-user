@@ -35,5 +35,6 @@ angular
     'materialAdmin',
     'ngMaterial',
     'ui.bootstrap.contextMenu',
-    'localytics.directives'
- ]);
+    'localytics.directives',
+    'linshare.anonymousUrl'
+  ]);
