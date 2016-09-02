@@ -19,17 +19,6 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
 
       var baseAuthentication = Restangular.all('authentication');
 
-      /*
-       Check if the user is authorized
-       */
-      // baseAuthentication.customGET('authorized')
-      //   .then(function (userLoggedIn) {
-      //     deferred.resolve(userLoggedIn);
-      //     $log.debug('current user not authenticated ---------------------' );
-      //   }, function (error) {
-      //     $log.debug('current user not authenticated', error);
-      //   });
-
       return {
         login: function (login, password) {
           $log.debug('Authentication:login');
@@ -70,8 +59,18 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
               });
             });
         },
+        checkAuthentication: function() {
+          /*
+           Check if the user is authorized
+           */
+          baseAuthentication.customGET('authorized')
+            .then(function(userLoggedIn) {
+              deferred.resolve(userLoggedIn);
+            }, function(error) {
+              $log.debug('current user not authenticated', error);
+            });
+        },
         getCurrentUser: function () {
-          console.log('')
           return deferred.promise;
         }
       };

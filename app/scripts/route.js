@@ -11,7 +11,15 @@ angular.module('linshareUiUserApp')
       //------------------------------
 
       .state('common', {
-        templateUrl: 'views/common/common.html'
+        templateUrl: 'views/common/common.html',
+        resolve: {
+          authentication: function(AuthenticationService) {
+            return AuthenticationService.checkAuthentication();
+          },
+          functionalities: function(LinshareFunctionalityService) {
+            return LinshareFunctionalityService.getFunctionalities();
+          }
+        }
       })
 
       .state('home', {

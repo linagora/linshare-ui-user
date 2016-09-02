@@ -4,17 +4,20 @@ angular.module('linshareUiUserApp')
   .factory('LinshareFunctionalityService', function(Restangular, $log, $q) {
     var allFunctionalities = {};
     var deferred = $q.defer();
-    Restangular.all('functionalities').getList().then(function(allfunc) {
-      angular.forEach(allfunc, function(elm) {
-        var func = {};
-        func[elm.identifier] = elm;
-        angular.extend(allFunctionalities, func);
-      });
-      deferred.resolve(allFunctionalities);
-    }, function(err) {
-      $log.error('error getting all functionalities', err);
-    });
+
     return {
+      getFunctionalities: function() {
+        Restangular.all('functionalities').getList().then(function(allfunc) {
+          angular.forEach(allfunc, function(elm) {
+            var func = {};
+            func[elm.identifier] = elm;
+            angular.extend(allFunctionalities, func);
+          });
+          deferred.resolve(allFunctionalities);
+        }, function(err) {
+          $log.error('error getting all functionalities', err);
+        });
+      },
       getAll: function() {
         $log.debug('Functionality:getAll');
         return deferred.promise;
