@@ -2,10 +2,19 @@
   "name": "linshare-ui-user",
   "version": "2.0.0-SNAPSHOT",
   "repository": {},
+  "license": "http://www.linshare.org/licenses/LinShare-License_AfferoGPL-v3_en.pdf",
   "contributors": [
     {
       "name": "Alpha Oumar Sall",
       "email": "asall@linagora.com"
+    },
+    {
+      "name": "Sarra Mamlook-Sanchez",
+      "email": "smamlouk@linagora.com"
+    },
+    {
+      "name": "Frédéric Martin",
+      "email": "fmartin@linagora.com"
     }
   ],
   "dependencies": {},
