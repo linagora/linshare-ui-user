@@ -198,6 +198,14 @@
               <file>dist/scripts/config.js</file>
               <replacements>
                 <replacement>
+                  <token>production: false</token>
+                  <token>production: true</token>
+                </replacement>
+                <replacement>
+                  <token>devMode:: true</token>
+                  <value>devMode:: false</value>
+                </replacement>
+                <replacement>
                   <token>debug: true</token>
                   <value>debug: false</value>
                 </replacement>
