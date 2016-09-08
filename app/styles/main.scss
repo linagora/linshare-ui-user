@@ -6782,3 +6782,19 @@ body:not(.sw-toggled) #sidebar {
     margin: 0px;
   }
 }
+.anonymous-url{
+  padding: 3em;
+  #fileListTable{
+    border: solid 1px #eee;
+  }
+  .anonymous-user-msg{
+    margin: 3em 0;
+    p{
+      font-size:1.1em;
+    }
+    h3{
+      color: #05b1ff;
+    }
+  }
+  
+}

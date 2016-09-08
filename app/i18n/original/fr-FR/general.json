@@ -224,6 +224,10 @@
   "CREATED_THE": "Créé le",
   "VERSION_HISTORIQUE": "Historique",
   "VERSIONS": "Mise à jours"
+  },
+  "ANONYMOUS_URL" : {
+    "HELLO": "Bonjour",
+    "MSG": "Vous avez reçu des fichiers de la part de "
   }
 }
 

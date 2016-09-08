@@ -1,12 +1,16 @@
 <div>
 
-  <div class="file-listing-ctn">
+  <div class="file-listing-ctn anonymous-url">
     <div class="container files">
       <!--  ACTIONS ON DOCUMENTS  -->
       <!-- contextmenu -->
-      {{urlCtrl.anonymousUrlData.actor}} <br />
-      {{urlCtrl.anonymousUrlData.recipient}} <br />
-
+      <div class="anonymous-user-msg">
+        <h3>{{'ANONYMOUS_URL.HELLO'| translate}}  {{urlCtrl.anonymousUrlData.recipient.mail}} !</h3>
+        <p>{{'ANONYMOUS_URL.MSG'| translate}}
+          <b> {{urlCtrl.anonymousUrlData.actor.firstName}}
+          {{urlCtrl.anonymousUrlData.actor.lastName}}</b>.
+        </p>
+        </div>
       <div class="card" id="collapsible-content">
         <div class="card-header">
           <div id="breadcrumb-wrap">

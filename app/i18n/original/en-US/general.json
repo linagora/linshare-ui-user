@@ -216,5 +216,9 @@
     "CREATED_THE": "Created the",
     "VERSION_HISTORIQUE": "Previous updates",
     "VERSIONS": "Updates"
+  },
+  "ANONYMOUS_URL" : {
+    "HELLO": "Hello",
+    "MSG": "You have received some files from "
   }
 }
