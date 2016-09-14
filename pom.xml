@@ -199,11 +199,11 @@
               <replacements>
                 <replacement>
                   <token>production: false</token>
-                  <token>production: true</token>
+                  <value>production: true</value>
                 </replacement>
                 <replacement>
-                  <token>devMode:: true</token>
-                  <value>devMode:: false</value>
+                  <token>devMode: true</token>
+                  <value>devMode: false</value>
                 </replacement>
                 <replacement>
                   <token>debug: true</token>
