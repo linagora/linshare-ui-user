@@ -25,7 +25,7 @@ angular.module('linshare.components')
 
     var secToMin = function(seconds) {
       return parseInt(seconds/NB_SECONDS_IN_MIN) + ' min' +
-        (parseFloat(seconds/NB_SECONDS_IN_MIN) - parseInt(seconds/NB_SECONDS_IN_MIN)) * 60 + ' s';
+        Math.round((parseFloat(seconds/NB_SECONDS_IN_MIN) - parseInt(seconds/NB_SECONDS_IN_MIN)) * 60) + ' s';
     };
 
     var secToHour = function(seconds) {
@@ -38,7 +38,7 @@ angular.module('linshare.components')
         return '-';
       }
       if(seconds < NB_SECONDS_IN_MIN) {
-        return seconds + ' s';
+        return Math.round(seconds) + ' s';
       } else if(NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
         return secToMin(seconds);
       } else if(NB_SECONDS_IN_HOUR <= seconds < NB_SECONDS_IN_DAY) {
