@@ -54,11 +54,14 @@
                                           <span class="secondary-info-text">{{file.size | readableSize: false}}</span>
                                         </div>
                                       </div>
-                                        <p ng-hide="file.isComplete()" class="time-remaining">
+                                        <p ng-hide="file.isComplete() || file.paused" class="time-remaining">
                                           {{file.timeRemaining() | remainingTime}}
                                         </p>
                                         <p ng-show="file.isComplete()" class="time-remaining">
                                           {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
+                                        </p>
+                                        <p ng-show="file.paused && !file.isComplete()" class="time-remaining">
+                                          {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate }}
                                         </p>
                                       <div class="progress">)
                                         <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"

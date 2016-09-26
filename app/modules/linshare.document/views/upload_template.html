@@ -124,12 +124,15 @@
                     </div>
                     <div class="pull-left dataListCtn">
                       <div class="lv-title">{{file.name}}</div>
-                      <small ng-hide="file.isComplete()" class="lv-small pull-left">
+                      <small ng-hide="file.isComplete() || file.paused" class="lv-small pull-left">
                         {{file.timeRemaining() | remainingTime}}
                         <span ng-show="file.progress() == 0 " >{{'PENDING_UPLOADS' | translate}}</span>
                       </small>
                       <small ng-show="file.isComplete()" class="lv-small pull-left">
                         {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
+                      </small>
+                      <small ng-show="file.paused && !file.isComplete()" class="lv-small pull-left">
+                        {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate }}
                       </small>
                       <small class="lv-small pull-right clearfix">{{file.size | readableSize: false}}</small>
                       <div class="clearfix"></div>
