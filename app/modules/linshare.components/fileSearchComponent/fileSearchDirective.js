@@ -36,10 +36,10 @@ angular.module('linshare.components')
             lastName: ''
           }
         };
-        $scope.filters = filters;
+        $scope.filters = angular.copy(filters);
 
         $scope.clearParams = function() {
-          $scope.filters = filters;
+          $scope.filters = angular.copy(filters);
           $scope.reloadItems();
         };
 
