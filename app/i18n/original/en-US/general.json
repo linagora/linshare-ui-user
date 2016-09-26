@@ -83,6 +83,7 @@
     "UPLOAD_PROGRESS": {
       "TITLE": "Upload progress",
       "UPLOAD_DONE": "done",
+      "UPLOAD_SERVER": "server processing",
       "FOOTER": "View all"
     },
     "SHARING_PROGRESS": {

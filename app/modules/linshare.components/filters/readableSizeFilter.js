@@ -17,7 +17,7 @@ angular.module('linshare.components')
     };
   })
 
-.filter('remainingTime', function() {
+.filter('remainingTime', ['$filter', function($filter) {
 
     var NB_SECONDS_IN_MIN = 60;
     var NB_SECONDS_IN_HOUR = 3600;
@@ -37,7 +37,10 @@ angular.module('linshare.components')
       if(!Number.isFinite(seconds)) {
         return '-';
       }
-      if(seconds < NB_SECONDS_IN_MIN) {
+      if (seconds == 0){
+        var $translate = $filter('translate');
+        return $translate("HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER");
+      } else if(seconds < NB_SECONDS_IN_MIN) {
         return Math.round(seconds) + ' s';
       } else if(NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
         return secToMin(seconds);
@@ -45,7 +48,7 @@ angular.module('linshare.components')
         return secToHour(seconds);
       }
     };
-  })
+  }])
   .filter('relativeTime', function($translate) {
     moment.locale($translate.use());
     return function(time) {

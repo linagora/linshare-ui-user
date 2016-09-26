@@ -79,6 +79,7 @@
     "UPLOAD_PROGRESS": {
       "TITLE": "QUá trình tải lên",
       "UPLOAD_DONE": "xong",
+      "TBT__UPLOAD_SERVER": "",
       "FOOTER": "Xem tất cả"
     },
     "TBT_SHARING_PROGRESS": {

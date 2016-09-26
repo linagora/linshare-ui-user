@@ -85,6 +85,7 @@
     "UPLOAD_PROGRESS": {
       "TITLE": "Progression de dépôt",
       "UPLOAD_DONE": "terminé",
+      "UPLOAD_SERVER": "traitement serveur en cours",
       "FOOTER": "Voir tous"
     },
     "SHARING_PROGRESS": {
