@@ -37,9 +37,9 @@ angular.module('linshare.components')
       if(!Number.isFinite(seconds)) {
         return '-';
       }
-      if (seconds == 0){
+      if(seconds === 0) {
         var $translate = $filter('translate');
-        return $translate("HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER");
+        return $translate('HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER');
       } else if(seconds < NB_SECONDS_IN_MIN) {
         return Math.round(seconds) + ' s';
       } else if(NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
