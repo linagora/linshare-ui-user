@@ -1,5 +1,6 @@
 <div ng-class="{'hidden': !mactrl.sidebarToggle.left}">
     <div class="btn-add-files-ctn">
+      <div class="dark-overlay"></div>
       <div id="user-account-mobile" class="row noPadding noMargin visible-xs">
         <div class="pull-left user-icon-area">
           <i class="tm-icon zmdi zmdi-account zmdi-hc-2x"></i>
@@ -21,32 +22,12 @@
           </ul>
         </div>
       </div>
-    <div class="dropdown-ctn sidebar-add-ctn hidden-xs">
-        <div class="dropdown dropdown-standard" uib-dropdown >
-          <button type="button" class="dropdown-toggle btn btn-custum-secondary btn-add-files" uib-dropdown-toggle  ng-disabled="disabled">
-            <i class="zmdi zmdi-upload "></i><span>{{'BOUTON_ADD_FILE_TITLE' | translate }}</span>
-          </button>
-
-          <ul class="dropdown-menu">
-            <li role="menuitem" flow-btn>
-              <a href="">
-                <i class="zmdi zmdi-file-plus"></i>
-                {{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate }}
-              </a>
-            </li>
-            <li role="menuitem" flow-btn>
-              <a href="" ui-sref="documents.upload">
-                <i class="zmdi zmdi-share menu-item-share"></i>
-                {{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate }}
-              </a>
-            </li>
-            <li role="menuitem">
-              <a href="#" style="color:#ACACAC">
-                <i class="zmdi zmdi-accounts-alt"></i>
-                {{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate }}
-              </a>
-            </li>
-          </ul>
+      <div id="userNameSidebar">
+        <div class="flex-ctn detail-info-ctn">
+          <div class="itemL">
+           <span class="first-letter user-info ng-binding ng-scope">{{ loggedUser.firstName.charAt(0)}}</span>
+          </div>
+          <p>{{ loggedUser.firstName }} {{ loggedUser.lastName }}</p>
         </div>
       </div>
     </div>

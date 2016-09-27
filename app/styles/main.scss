@@ -170,6 +170,8 @@ md-tooltip .md-content {
   -webkit-box-shadow: inset 0px 0px 13px 0px rgba(0, 0, 0, 0.34);
   -moz-box-shadow: inset 0px 0px 13px 0px rgba(0, 0, 0, 0.34);
   box-shadow: inset 0px 0px 13px 0px rgba(0, 0, 0, 0.34);
+  background-image: url(../images/banner_homepage_linshare.png);
+  background-size: cover;
   .tagline-ctn {
     display: flex;
     width: 100%;
@@ -190,15 +192,15 @@ md-tooltip .md-content {
       overflow: hidden;
       text-align: center;
       .card-img {
-        background-color: rgba(255, 255, 255, 0.22);
+        background-color: rgba(248, 248, 248, 0.97);
         flex: 0 0 40%;
         background-repeat: no-repeat;
         display: flex;
         justify-content: center;
         align-items: center;
         i {
-          font-size: 7em;
-          color: white;
+          font-size: 6em;
+          color: #4f4f4f;
         }
       }
       .card-img.upload-share {
@@ -285,14 +287,6 @@ md-tooltip .md-content {
         }
       }
     }
-  }
-  #bg-img {
-    position: absolute;
-    display: block;
-    align-self: stretch;
-    z-index: -1;
-    width: 100%;
-    flex: 1 1 100%;
   }
 }
 
@@ -1765,7 +1759,7 @@ div#toolbar-actions.show-details-mobile-link {
 }
 
 /******
-*****  GLOBAL CLASSES
+*****   CLASSES
 ****/
 .setEllipsis {
   white-space: nowrap;
@@ -3087,9 +3081,15 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
     margin-top: -50px;
+    bottom: 0;
+    padding: 0;
     p {
       color: #E6E6E6;
+      margin-bottom: 0;
     }
     img {
       width: 100px;
@@ -3315,7 +3315,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
 @media (min-width: 768px) and (max-height: 768px) {
   #login-page #copyright-login {
     width: 100%;
-    bottom: -45px;
+    bottom: 0;
   }
 }
 
@@ -5866,7 +5866,7 @@ html:not(.ie9) .formsearch .select::before {
 */
 #home {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex-direction: column;
   .dashboard-welcome {
     display: table-cell;
@@ -6085,7 +6085,6 @@ body:not(.sw-toggled) #sidebar {
 
 #sidebar {
   box-shadow: none;
-  border-right: solid 2px $dividerClr;
   top: 50px;
   height: calc(100% - 50px);
   width: 0px;
@@ -6138,7 +6137,6 @@ body:not(.sw-toggled) #sidebar {
     border-bottom: solid 1px #ddd;
     h2 {
       line-height: 33px;
-      //      float: left;
     }
     .search-bar {
       margin-left: 60px;
@@ -6157,14 +6155,49 @@ body:not(.sw-toggled) #sidebar {
 .form-control {
   height: 30px;
 }
-
+#userNameSidebar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index:4;
+  .detail-info-ctn.flex-ctn {
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.35em;
+    p{
+      margin: 0.25em 0 0;
+      color: #fff;
+    }
+    .first-letter {
+      color: #0070a3;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 1.35em;
+      background-color: #fff !important;
+    }
+  }
+}
+.dark-overlay {
+  width : 100%;
+  height:100%;
+  background-color:rgba(0, 145, 211, 0.33);
+  position:absolute;
+  z-index:3;
+}
 .btn-add-files-ctn {
   width: 100%;
+  z-index:2;
   padding: 0;
-  padding-top: 29px;
-  background: url(../images/common/bg-menu-cta.jpg) no-repeat right center;
+  background: url(../images/banner_linshare_thumb.png) no-repeat right center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: table;
-  height: 85px;
+  height: 107px;
+  position:relative;
   .dropdown-ctn {
     display: table;
     width: auto;
@@ -6194,8 +6227,12 @@ body:not(.sw-toggled) #sidebar {
     margin-right: 10px;
   }
 }
+.c-overflow.mCustomScrollbar{
+  border-right: solid 2px #f0f0f0;
+}
 
 .quota {
+  border-right: solid 2px #f0f0f0;
   background-color: #F9F9F9;
   border-top: 1px solid #E8E8E8;
   margin: 0;
@@ -6732,7 +6769,6 @@ body:not(.sw-toggled) #sidebar {
     width: 100%;
   }
   #header {
-    box-shadow: none;
     height: 50px;
   }
   .header-inner {
@@ -6767,8 +6803,6 @@ body:not(.sw-toggled) #sidebar {
       padding: 0;
       margin: 0;
     }
-    .file-name-col {
-    }
   }
 }
 
@@ -6796,5 +6830,5 @@ body:not(.sw-toggled) #sidebar {
       color: #05b1ff;
     }
   }
-  
+
 }
