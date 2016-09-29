@@ -238,9 +238,9 @@
                 </div>
               </div>
             </div>
-            <div class="custumListBody col-xs-12 ">
-              <div class="custumListItem" ng-repeat="recipient in share_array[1].getRecipients()">
-                <p class="pull-left"><span class="circle userBg">Ext</span></p>
+            <div class="custom-list-body col-xs-12 ">
+              <div class="custom-list-item" ng-repeat="recipient in share_array[1].getRecipients()">
+                <p class="pull-left"><span class="circle  user-bg">Ext</span></p>
                 <div class="pull-left">
                   <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
                   <p class=" close-list-icone-btn" ng-click="share_array[1].removeRecipient($index)">
@@ -248,8 +248,8 @@
                   </p>
                 </div>
               </div>
-              <div class="custumListItem" ng-repeat="list in share_array[1].getMailingListUuid()">
-                <p class="pull-left"><span class="circle userBg">L</span></p>
+              <div class="custom-list-item" ng-repeat="list in share_array[1].getMailingListUuid()">
+                <p class="pull-left"><span class="circle  user-bg">L</span></p>
                 <div class="pull-left">
                   <p class="pull-left inner-text-li">{{list.listName}}</p>
                   <p class=" close-list-icone-btn" ng-click="share_array[1].removeMailingList($index)">
@@ -278,20 +278,20 @@
             <div>
               <working-date-picker></working-date-picker>
             </div>
-            <form class="advancedSharingSettings">
+            <form class="form-sidebar">
               <div class="form-group col-xs-12">
                 <legend>Ajouter une note :</legend>
                 <textarea class="form-control comment" ng-model="share_array[1].sharingNote" rows="5"
                           placeholder="Saississez votre message">
                 </textarea>
               </div>
-              <div ng-show="share_array[1].expirationDate.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn" id="dateField">
+              <div ng-show="share_array[1].expirationDate.enable" class="col-xs-12 col-sm-6 col-lg-4 field-ctn" id="dateField">
                 <label for="comment" class="labelDateExpiration">Date d'expiration:</label>
-                <div class="datepickerBorderFix date-picker dp-blue"  ng-class="{ 'is-opened': opened == true }">
-                  <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }" >
+                <div class="datepicker-border-fix date-picker dp-blue"  ng-class="{ 'is-opened': opened == true }">
+                  <div class="fg-line datepicker-ctn" ng-class="{ 'fg-toggled': opened == true }" >
                     <div class="form-inline">
                       <input  ng-click="open($event, 'opened')"  type="text"
-                              class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                              class="form-control  date-picker-input" datepicker-popup="{{format}}" show-weeks="false"
                               is-open="opened" min-date="minDate" datepicker-options="dateOptions"
                               ng-required="true" close-text="Close"
                               placeholder="{{share_array[1].expirationDate.value | date: 'shortDate'}}"
@@ -301,7 +301,7 @@
                   </div>
                 </div>
               </div>
-              <div ng-show="share_array[1].secured.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+              <div ng-show="share_array[1].secured.enable" class="col-xs-12 col-sm-6 col-lg-4 field-ctn">
                 <div class="fg-line">
                   <div class="form-inline">
                     <label for="comment">Sécuriser le partage:</label>
@@ -314,7 +314,7 @@
                   </div>
                 </div>
               </div>
-              <div ng-show="share_array[1].creationAcknowledgement.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+              <div ng-show="share_array[1].creationAcknowledgement.enable" class="col-xs-12 col-sm-6 col-lg-4 field-ctn">
                 <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
                   <div class="form-inline">
                     <label for="comment">Recevoir un accusé de partage:</label>
@@ -327,7 +327,7 @@
                   </div>
                 </div>
               </div>
-              <div ng-show="share_array[1].enableUSDA.enable" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn">
+              <div ng-show="share_array[1].enableUSDA.enable" class="col-xs-12 col-sm-6 col-lg-4 field-ctn">
                 <div class="fg-line">
                   <div class="form-inline">
                     <label for="comment">Recevoir un accusé de non-téléchargement:</label>
@@ -340,13 +340,13 @@
                   </div>
                 </div>
               </div>
-              <div ng-show="share_array[1].enableUSDA.value" class="col-xs-12 col-sm-6 col-lg-4 fieldCtn" id="dateField">
+              <div ng-show="share_array[1].enableUSDA.value" class="col-xs-12 col-sm-6 col-lg-4 field-ctn" id="dateField">
                 <label for="comment" class="labelDateExpiration">Date de notification:</label>
-                <div class="datepickerBorderFix date-picker dp-blue"  ng-class="{ 'is-opened': opened2 == true }">
-                  <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened2 == true }" >
+                <div class="datepicker-border-fix date-picker dp-blue"  ng-class="{ 'is-opened': opened2 == true }">
+                  <div class="fg-line datepicker-ctn" ng-class="{ 'fg-toggled': opened2 == true }" >
                     <div class="form-inline">
                       <input  ng-click="open($event, 'opened2')"  type="text"
-                              class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                              class="form-control  date-picker-input" datepicker-popup="{{format}}" show-weeks="false"
                               is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
                               ng-required="true" close-text="Close"
                               placeholder="{{share_array[1].notificationDateForUSDA.value | date: 'medium'}}"
@@ -368,7 +368,7 @@
                       </label>
                     </div>
                   </div>
-                  <div class="cssSlideUp col-xs-12 " ng-hide="!boo">
+                  <div class="css-slide-up col-xs-12 " ng-hide="!boo">
                     <div class="form-group clearfix fg-line col-xs-12">
                       <input type="text" class="form-control input-sm"
                              ng-model="share_array[1].subject" placeholder="Subject">

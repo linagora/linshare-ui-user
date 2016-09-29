@@ -20,7 +20,7 @@
      {{ "RIGHT_PANEL.SHARE.UNHIDE_FILES" | translate }}
   </a>
 </div>
-<div class="card col-xs-12" id="recipientsCtnSidebar">
+<div class="card col-xs-12" id="content-ctn-sidebar">
   <div class="custumListContainer clearfix">
     <div class="recipients-form-sections clearfix">
       <h2 class="pull-left headerSubCtn"><i class="groups-user-group"></i>
@@ -57,15 +57,15 @@
       </div>
     </form>
 
-    <div class="custumListBody col-xs-12 ">
-      <div class="custumListItem" ng-repeat="recipient in newShare.getRecipients() | orderBy : '-' as results"
+    <div class="custom-list-body col-xs-12 ">
+      <div class="custom-list-item" ng-repeat="recipient in newShare.getRecipients() | orderBy : '-' as results"
            tooltip-placement="bottom" tooltip-popup-delay="700"
            uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.domain || recipient.mail}}">
-        <p class="pull-left circleCtn">
-          <span ng-show="recipient.domain" class="circle userBg">{{recipient.firstName.charAt(0)}}</span>
-          <span ng-show="!recipient.domain" class="circle userBg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
+        <p class="pull-left circle-ctn">
+          <span ng-show="recipient.domain" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
+          <span ng-show="!recipient.domain" class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
         </p>
-        <div class="pull-left nameRecipientsCtn">
+        <div class="pull-left name-recipients-ctn">
           <p ng-show="recipient.domain" class="pull-left inner-text-li">
             {{recipient.firstName + ' ' + recipient.lastName}}
           </p>
@@ -77,9 +77,9 @@
           </p>
         </div>
       </div>
-      <div class="custumListItem" ng-repeat="list in newShare.getMailingListUuid()">
-        <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
-        <div class="pull-left nameRecipientsCtn">
+      <div class="custom-list-item" ng-repeat="list in newShare.getMailingListUuid()">
+        <p class="pull-left circle-ctn"><span class="circle  user-bg">L</span></p>
+        <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
           <p class=" close-list-icone-btn pull-right" ng-click="newShare.removeMailingList($index)">
             <i class="zmdi zmdi-close"></i>
@@ -98,17 +98,17 @@
         {{ "RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate }}
       </a>
     </div>
-    <div ng-show="newShare.expirationDate.enable" class="col-xs-12 fieldCtn clearfix" id="dateField">
+    <div ng-show="newShare.expirationDate.enable" class="col-xs-12 field-ctn clearfix" id="dateField">
       <label for="comment" class="labelDateExpiration col-xs-6">
         {{ "RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
       </label>
 
-      <div class="datepickerBorderFix date-picker dp-blue col-xs-6 datepicker-drop-right"
+      <div class="datepicker-border-fix date-picker dp-blue col-xs-6 datepicker-drop-right"
            ng-class="{ 'is-opened': opened == true }">
-        <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }">
+        <div class="fg-line datepicker-ctn" ng-class="{ 'fg-toggled': opened == true }">
           <div class="form-inline ">
             <input ng-click="open($event, 'opened')" type="text"
-                   class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                   class="form-control  date-picker-input" datepicker-popup="{{format}}" show-weeks="false"
                    is-open="opened" min-date="minDate" datepicker-options="dateOptions"
                    ng-required="true" close-text="Close"
                    placeholder="{{newShare.expirationDate.value | date: 'fullDate'}}"
@@ -118,7 +118,7 @@
         </div>
       </div>
     </div>
-    <div class="advancedSharingSettings">
+    <div class="form-sidebar">
 
       <div class="form-group col-xs-12 addNote">
         <div class="form-group fg-line">
@@ -131,7 +131,7 @@
             </label>
           </div>
         </div>
-        <div class="cssSlideUp col-xs-12 " ng-hide="!custumMailInput">
+        <div class="css-slide-up col-xs-12 " ng-hide="!custumMailInput">
           <div class="form-group clearfix fg-line">
             <input type="text" class="form-control input-sm"
                    ng-model="newShare.subject"
@@ -147,7 +147,7 @@
     </div>
   </div>
 </div>
-<div class="bottomSidebarBtn">
+<div class="bottom-sidebar-btn">
   <button class="btn btn-default col-xs-6" ng-click="closeSideBar(); closeDropdown($event)">
     {{ "NAVIGATION.CANCEL" | translate }}
   </button>

@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-<div class="card col-xs-12" id="recipientsCtnSidebar" >
+<div class="card col-xs-12" id="content-ctn-sidebar" >
 
   <div class="header-sidebar">
     <h2><span>3</span> Fichiers sélectionnées</h2>
@@ -41,13 +41,13 @@
       </div>
 
 
-      <div ng-show="share_array[1].expirationDate.enable" class="col-xs-12  fieldCtn" id="dateField">
+      <div ng-show="share_array[1].expirationDate.enable" class="col-xs-12  field-ctn" id="dateField">
         <label for="comment" class="labelDateExpiration col-xs-6">Date d'expiration:</label>
-        <div class="datepickerBorderFix date-picker dp-blue col-xs-6"  ng-class="{ 'is-opened': opened == true }">
-          <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened == true }" >
+        <div class="datepicker-border-fix date-picker dp-blue col-xs-6"  ng-class="{ 'is-opened': opened == true }">
+          <div class="fg-line datepicker-ctn" ng-class="{ 'fg-toggled': opened == true }" >
             <div class="form-inline ">
               <input  ng-click="open($event, 'opened')"  type="text"
-                      class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                      class="form-control  date-picker-input" datepicker-popup="{{format}}" show-weeks="false"
                       is-open="opened" min-date="minDate" datepicker-options="dateOptions"
                       ng-required="true" close-text="Close"
                       placeholder="{{share_array[1].expirationDate.value | date: 'shortDate'}}"
@@ -88,19 +88,19 @@
         </div>
       </form>
     </div>
-    <div class="custumListBody col-xs-12 ">
-      <div class="custumListItem" ng-repeat="recipient in share_array[1].getRecipients()">
-        <p class="pull-left circleCtn"><span class="circle userBg">Ext</span></p>
-        <div class="pull-left nameRecipientsCtn">
+    <div class="custom-list-body col-xs-12 ">
+      <div class="custom-list-item" ng-repeat="recipient in share_array[1].getRecipients()">
+        <p class="pull-left circle-ctn"><span class="circle  user-bg">Ext</span></p>
+        <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
           <p class=" close-list-icone-btn pull-right" ng-click="share_array[1].removeRecipient($index)">
             <i class="zmdi zmdi-close "></i>
           </p>
         </div>
       </div>
-      <div class="custumListItem" ng-repeat="list in share_array[1].getMailingListUuid()">
-        <p class="pull-left circleCtn"><span class="circle userBg">L</span></p>
-        <div class="pull-left nameRecipientsCtn">
+      <div class="custom-list-item" ng-repeat="list in share_array[1].getMailingListUuid()">
+        <p class="pull-left circle-ctn"><span class="circle  user-bg">L</span></p>
+        <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
           <p class=" close-list-icone-btn pull-right" ng-click="share_array[1].removeMailingList($index)">
             <i class="zmdi zmdi-close"></i>
@@ -113,7 +113,7 @@
   <div class="clearfix">&nbsp;</div>
 
 </div>
-<div class="bottomSidebarBtn">
+<div class="bottom-sidebar-btn">
   <button class="btn btn-default col-xs-6" ng-click="closeDropdown($event)">Annuler </button>
   <button class="btn btn-primary col-xs-6" ng-click="createRecipientList($event)">Partager</button>
 </div>

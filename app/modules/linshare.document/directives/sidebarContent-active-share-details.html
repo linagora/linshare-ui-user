@@ -8,7 +8,7 @@
     {{ "RIGHT_PANEL.SHARE_OPTIONS.GO_TO_UPLOAD_FILES" | translate }}
   </a>
 </div>
-<div class="card col-xs-12" id="recipientsCtnSidebar">
+<div class="card col-xs-12" id="content-ctn-sidebar">
   <div class="custumListContainer clearfix">
     <div class="recipients-form-sections clearfix">
       <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
@@ -16,30 +16,30 @@
         {{ "RIGHT_PANEL.CURRENT_SHARE_DETAIL.RECIPIENTS" | translate }}
       </h2>
     </div>
-    <div class="custumListBody col-xs-12">
-      <div class="custumListItem readonly" ng-repeat="recipient in shareToDisplay.recipients"
+    <div class="custom-list-body col-xs-12">
+      <div class="custom-list-item readonly" ng-repeat="recipient in shareToDisplay.recipients"
            ng-if="recipient.domain">
-        <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.firstName.charAt(0).toUpperCase()}}</span></p>
-        <div class="pull-left nameRecipientsCtn">
+        <p class="pull-left circle-ctn"><span class="circle  user-bg">{{recipient.firstName.charAt(0).toUpperCase()}}</span></p>
+        <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
           <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
             <i class="zmdi zmdi-close "></i>
           </p>
         </div>
       </div>
-      <div class="custumListItem readonly" ng-repeat="recipient in shareToDisplay.recipients"
+      <div class="custom-list-item readonly" ng-repeat="recipient in shareToDisplay.recipients"
            ng-if="!recipient.domain">
-        <p class="pull-left circleCtn"><span class="circle userBg">{{recipient.mail.charAt(0).toUpperCase()}}</span></p>
-        <div class="pull-left nameRecipientsCtn">
+        <p class="pull-left circle-ctn"><span class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span></p>
+        <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li" title="{{recipient.mail}}">{{recipient.mail}}</p>
           <p class="close-list-icone-btn pull-right" ng-click="newShare.removeRecipient($index)">
             <i class="zmdi zmdi-close "></i>
           </p>
         </div>
       </div>
-      <div class="custumListItem readonly" ng-repeat="list in shareToDisplay.mailingListUuid">
-        <p class="pull-left circleCtn"><span class="circle userBg">{{list.listName.charAt(0)}}</span></p>
-        <div class="pull-left nameRecipientsCtn">
+      <div class="custom-list-item readonly" ng-repeat="list in shareToDisplay.mailingListUuid">
+        <p class="pull-left circle-ctn"><span class="circle  user-bg">{{list.listName.charAt(0)}}</span></p>
+        <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
           <p class=" close-list-icone-btn pull-right" ng-click="newShare.removeMailingList($index)">
             <i class="zmdi zmdi-close"></i>
@@ -138,7 +138,7 @@
     </div>
   </div>
 </div>
-<div class="bottomSidebarBtn hide">
+<div class="bottom-sidebar-btn hide">
   <button class="btn btn-primary col-xs-12" ng-click="$state.go('documents.files')">
     {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.SHARE_OPTIONS' | translate}}
   </button>

@@ -5,9 +5,9 @@
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
 </div>
-<div class="card col-xs-12 m-t-2em" id="recipientsCtnSidebar"  ng-style="sizeSidebarRight">
+<div class="card col-xs-12 m-t-2em" id="content-ctn-sidebar"  ng-style="sizeSidebarRight">
   <working-date-picker></working-date-picker>
-  <form class="advancedSharingSettings">
+  <form class="form-sidebar">
       <div class="form-group col-xs-12 ">
         <label>{{ "RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate }} :</label>
         <textarea class="form-control comment" ng-model="newShare.sharingNote" rows="5"
@@ -15,7 +15,7 @@
       </textarea>
       </div>
 
-    <div ng-show="newShare.secured.enable" class="col-xs-12 fieldCtn">
+    <div ng-show="newShare.secured.enable" class="col-xs-12 field-ctn">
       <div class="fg-line">
         <div class="form-inline">
           <label for="secureSharing">{{ "RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate }}:</label>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div ng-show="newShare.creationAcknowledgement.enable" class="col-xs-12 fieldCtn">
+    <div ng-show="newShare.creationAcknowledgement.enable" class="col-xs-12 field-ctn">
       <div class=" fg-line date-picker input-group dp-blue" ng-class="{'is-opened': dateStartOpened }">
         <div class="form-inline">
           <label for="SharingNotification">{{ "RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate }}:</label>
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div ng-show="newShare.enableUSDA.enable" class="col-xs-12 fieldCtn">
+    <div ng-show="newShare.enableUSDA.enable" class="col-xs-12 field-ctn">
       <div class="fg-line">
         <div class="form-inline">
           <label for="nonDownloadedNotification">{{ "RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate }}:</label>
@@ -54,16 +54,16 @@
         </div>
       </div>
     </div>
-    <div ng-show="newShare.enableUSDA.value" class="col-xs-12 fieldCtn" id="dateField">
+    <div ng-show="newShare.enableUSDA.value" class="col-xs-12 field-ctn" id="dateField">
       <label for="notificationDate" >
         {{ "RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate }}:
       </label>
 
-      <div class="datepickerBorderFix date-picker dp-blue datepicker-drop-right" ng-class="{ 'is-opened': opened2 == true }">
-        <div class="fg-line datepickerCtn" ng-class="{ 'fg-toggled': opened2 == true }">
+      <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right" ng-class="{ 'is-opened': opened2 == true }">
+        <div class="fg-line datepicker-ctn" ng-class="{ 'fg-toggled': opened2 == true }">
           <div class="form-inline">
             <input ng-click="open($event, 'opened2')" type="text"
-                   class="form-control datePickerInput" datepicker-popup="{{format}}" show-weeks="false"
+                   class="form-control  date-picker-input" datepicker-popup="{{format}}" show-weeks="false"
                    is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
                    ng-required="true" close-text="Close"
                    placeholder="{{newShare.notificationDateForUSDA.value | date: 'medium'}}"
@@ -76,7 +76,7 @@
   </form>
 </div>
 
-<div class="bottomSidebarBtn">
+<div class="bottom-sidebar-btn">
   <button class="btn btn-default col-xs-6" ng-click="mactrl.sidebarToggle.right = false; closeDropdown($event)">
     {{ "NAVIGATION.CANCEL" | translate }}
   </button>

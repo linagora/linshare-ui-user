@@ -1,0 +1,20 @@
+{
+  "ADD_GUEST_SIDEBAR": {
+    "TITLE": "CREATE GUEST ACCOUNT",
+    "LASTNAME": "Lastname",
+    "FIRSTNAME": "Firstname",
+    "EMAIL": "Email",
+    "EXP_DATE": "Expiration date",
+    "MSG_EMAIL": "Add a message",
+    "ENTER_MSG": "Enter your message",
+    "ADVANCED_OPTIONS": "Advanced options",
+    "ALLOW_MODIFICATORS": "Allow other users to modify this account",
+    "ACTIVATE_USER_SPACE": "Activate user space",
+    "RESTRICT_CONTACTS": "Restrict contact list",
+    "ADD_DESCRIPTION": "Add user description",
+    "ENTER_DESCRIPTION": "Enter your description",
+    "INVALID_EMPTY_FIELD": "This field cannot be empty.",
+    "INVALID_EMAIL": "Email address is invalid.",
+    "INVALID_DATE": "The date needs to be greater than today's date and cannot exceed the maximum expiry date being the : "
+  }
+}

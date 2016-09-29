@@ -1,0 +1,20 @@
+{
+  "TBT__ADD_GUEST_SIDEBAR": {
+    "TBT__TITLE": "",
+    "TBT__LASTNAME": "",
+    "TBT__FIRSTNAME": "",
+    "TBT__EMAIL": "",
+    "TBT__EXP_DATE": "",
+    "TBT__MSG_EMAIL": "",
+    "TBT__ENTER_MSG": "",
+    "TBT__ADVANCED_OPTIONS": "",
+    "TBT__ALLOW_MODIFICATORS": "",
+    "TBT__ACTIVATE_USER_SPACE": "",
+    "TBT__RESTRICT_CONTACTS": "",
+    "TBT__ADD_DESCRIPTION": "",
+    "TBT__ENTER_DESCRIPTION": "",
+    "TBT__INVALID_EMPTY_FIELD": "",
+    "TBT__INVALID_EMAIL": "",
+    "TBT__INVALID_DATE": ""
+  }
+}

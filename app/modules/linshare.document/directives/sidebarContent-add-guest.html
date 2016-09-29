@@ -1,0 +1,242 @@
+<div class="header-sidebar">
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"></i>
+  <h2 class="header-more-options">{{ "ADD_GUEST_SIDEBAR.TITLE" | translate }}</h2>
+  <span class="hidden-xs">
+      <i class="zmdi zmdi-close zmdi-hc-lg" x-ng-click="mactrl.sidebarToggle.right = false"></i>
+  </span>
+</div>
+<div class="card col-xs-12 m-t-2em form-create-guests" id="content-ctn-sidebar">
+  <working-date-picker></working-date-picker>
+  <form class="form-sidebar" name="createGuest">
+    <div class="form-group fg-float m-b-30">
+      <div class="fg-line"
+           x-ng-class="{'has-error' : (createGuest.lastname.$touched && createGuest.lastname.$invalid)}">
+        <input type="text" required class="input-sm form-control fg-input"
+               x-ng-model="lastname" name="lastname" id="lastname">
+        <label class="fg-label required" for="lastname">{{ "ADD_GUEST_SIDEBAR.LASTNAME" | translate }}</label>
+        <span x-ng-show="createGuest.lastname.$touched && createGuest.lastname.$invalid">
+           {{ "ADD_GUEST_SIDEBAR.INVALID_EMPTY_FIELD" | translate }}
+        </span>
+      </div>
+    </div>
+    <div class="form-group fg-float m-b-30">
+      <div class="fg-line"
+           x-ng-class="{'has-error' : (createGuest.firstname.$touched && createGuest.firstname.$invalid)}">
+        <input type="text" required class="input-sm form-control fg-input"
+               name="firstname" x-ng-model="firstname" id="firstname">
+        <label class="fg-label required" for="firstname">{{ "ADD_GUEST_SIDEBAR.FIRSTNAME" | translate }}</label>
+        <span x-ng-show="createGuest.firstname.$touched && createGuest.firstname.$invalid">
+            {{ "ADD_GUEST_SIDEBAR.INVALID_EMPTY_FIELD" | translate }}
+        </span>
+      </div>
+    </div>
+    <div class="form-group fg-float m-b-30">
+      <div class="fg-line" x-ng-class="{'has-error' : (createGuest.email.$touched && createGuest.email.$invalid)}">
+        <input type="email" required class="input-sm form-control fg-input"
+               name="email" x-ng-model="email" id="email">
+        <label class="fg-label required" for="email">{{ "ADD_GUEST_SIDEBAR.EMAIL" | translate }}</label>
+        <span x-ng-show="createGuest.email.$touched && createGuest.email.$invalid">
+         {{ "ADD_GUEST_SIDEBAR.INVALID_EMAIL" | translate }}
+        </span>
+      </div>
+    </div>
+    <!-- TODO: update newShare.enableUSDA.value to the right date format within this controller-->
+    <div class="m-b-30 col-xs-12 field-ctn" id="dateField" x-ng-class="{'has-error' : (createGuest.expirationDate.$touched && createGuest.expirationDate.$invalid)}">
+      <label for="expirationDate">
+        {{ "ADD_GUEST_SIDEBAR.EXP_DATE" | translate }}
+      </label>
+      <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
+           x-ng-class="{ 'is-opened': opened2 == true}">
+        <div class="fg-line datepicker-ctn"
+             x-ng-class="{ 'fg-toggled': opened2 == true}">
+          <div class="form-inline clearfix">
+            <input x-ng-click="open($event, 'opened2')" type="text"
+                   class="form-control  date-picker-input" datepicker-popup="{{format}}" show-weeks="false"
+                   is-open="opened2" min-date="minDate" min-date="maxDate" datepicker-options="dateOptions"
+                   name="expirationDate"
+                   id="expirationDate"
+                   required="true" close-text="Close"
+                   placeholder="{{newShare.notificationDateForUSDA.value | date: 'medium'}}"
+                   x-ng-model="newShare.notificationDateForUSDA.value"/>
+          </div>
+        </div>
+      </div>
+      <span x-ng-show="createGuest.expirationDate.$touched && createGuest.expirationDate.$invalid">
+           {{ "ADD_GUEST_SIDEBAR.INVALID_DATE" | translate }} {{maxDate | date: 'medium' }}
+        </span>
+    </div>
+    <div class="m-b-30 form-group">
+      <label for="message" class="p-b-10">{{ "ADD_GUEST_SIDEBAR.MSG_EMAIL" | translate }} :</label>
+      <textarea class="form-control comment" id="message" x-ng-model="message" name="message" rows="5"
+                placeholder="{{ 'ADD_GUEST_SIDEBAR.ENTER_MSG' | translate }}">
+      </textarea>
+    </div>
+    <p x-ng-click="showMoreOptions =! showMoreOptions" x-ng-class="{'animate-chevron' : showMoreOptions}">
+      <a href="">
+        {{ "ADD_GUEST_SIDEBAR.ADVANCED_OPTIONS" | translate }}
+      </a>
+      <i class="zmdi zmdi-chevron-down toggle-chevron pull-right"></i>
+    </p>
+    <div x-ng-hide="!showMoreOptions">
+      <div class="m-b-20 col-xs-12 field-ctn">
+        <div class="fg-line input-group dp-blue">
+          <div class="form-inline">
+            <label for="allow-editors" class="p-b-10">{{ "ADD_GUEST_SIDEBAR.ALLOW_MODIFICATORS" | translate }} :</label>
+            <label class="checkbox checkbox-inline">
+              <input type="checkbox" name="allow-editors"
+                     x-ng-checked="activateOtherAdmins"
+                     x-ng-click="activateOtherAdmins = !activateOtherAdmins"
+                     x-ng-model="allowEditors"
+                     id="allow-editors"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <!-- TODO: update the JSON object in order to differentiate these autocomplete fields :
+         restrict contact list and the following admin contact list -->
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!activateOtherAdmins">
+          <form role="form" class="clearfix">
+            <div class="form-group fg-line">
+              <div ls-autocomplete-user="SHARING" data-on-select-function="newShare.addRecipient"></div>
+            </div>
+          </form>
+          <div class="custom-list-body col-xs-12 m-0 p-0">
+            <div class="custom-list-item" x-ng-repeat="recipient in newShare.getRecipients() | orderBy : '-' as results"
+                 tooltip-placement="bottom" tooltip-popup-delay="700"
+                 uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.domain || recipient.mail}}">
+              <p class="pull-left circle-ctn">
+                <span x-ng-show="recipient.domain" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
+                <span x-ng-show="!recipient.domain"
+                      class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
+              </p>
+              <div class="pull-left name-recipients-ctn">
+                <p x-ng-show="recipient.domain" class="pull-left inner-text-li">
+                  {{recipient.firstName + ' ' + recipient.lastName}}
+                </p>
+                <p x-ng-show="!recipient.domain" class="pull-left inner-text-li">
+                  {{recipient.mail}}
+                </p>
+                <p class="close-list-icone-btn pull-right"
+                   x-ng-click="newShare.removeRecipient(results.length - $index -1)">
+                  <i class="zmdi zmdi-close "></i>
+                </p>
+              </div>
+            </div>
+            <div class="custom-list-item" x-ng-repeat="list in newShare.getMailingListUuid()">
+              <p class="pull-left circle-ctn"><span class="circle  user-bg">L</span></p>
+              <div class="pull-left name-recipients-ctn">
+                <p class="pull-left inner-text-li">{{list.listName}}</p>
+                <p class=" close-list-icone-btn pull-right" x-ng-click="newShare.removeMailingList($index)">
+                  <i class="zmdi zmdi-close"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn">
+        <div class="fg-line">
+          <div class="form-inline">
+            <label for="user-space">{{ "ADD_GUEST_SIDEBAR.ACTIVATE_USER_SPACE" | translate }} :</label>
+            <label class="checkbox checkbox-inline">
+              <input type="checkbox" x-ng-checked="activateUserSpace"
+                     x-ng-click="activateUserSpace = !activateUserSpace"
+                     x-ng-model="userSpace"
+                     id="user-space"
+                     name="user-space"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- TODO: update the JSON object in order to differentiate these autocomplete fields :
+      restrict contact list and the following admin contact list -->
+      <div x-ng-hide="!activateUserSpace" class="m-b-30 col-xs-12 field-ctn">
+        <div class="fg-line">
+          <div class="form-inline">
+            <label for="restrict-contact" class="p-b-10">
+              {{ "ADD_GUEST_SIDEBAR.RESTRICT_CONTACTS" | translate }}:
+            </label>
+            <label class="checkbox checkbox-inline">
+              <input type="checkbox" x-ng-checked="areContactRestricted"
+                     x-ng-click="areContactRestricted = !areContactRestricted"
+                     x-ng-model="restrictContact"
+                     id="restrict-contact"
+                     name="restrict-contact"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!areContactRestricted">
+          <form role="form" class="clearfix m-0">
+            <div class="form-group fg-line">
+              <div ls-autocomplete-user="SHARING" data-on-select-function="newShare.addRecipient"></div>
+            </div>
+          </form>
+          <div class="custom-list-body col-xs-12 m-0 p-0">
+            <div class="custom-list-item" x-ng-repeat="recipient in newShare.getRecipients() | orderBy : '-' as results"
+                 tooltip-placement="bottom" tooltip-popup-delay="700"
+                 uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.domain || recipient.mail}}">
+              <p class="pull-left circle-ctn">
+                <span x-ng-show="recipient.domain" class="circle  user-bg">
+                  {{recipient.firstName.charAt(0)}}
+                </span>
+                <span x-ng-show="!recipient.domain" class="circle  user-bg">
+                  {{recipient.mail.charAt(0).toUpperCase()}}
+                </span>
+              </p>
+              <div class="pull-left name-recipients-ctn">
+                <p x-ng-show="recipient.domain" class="pull-left inner-text-li">
+                  {{recipient.firstName + ' ' + recipient.lastName}}
+                </p>
+                <p x-ng-show="!recipient.domain" class="pull-left inner-text-li">
+                  {{recipient.mail}}
+                </p>
+                <p class="close-list-icone-btn pull-right"
+                   x-ng-click="newShare.removeRecipient(results.length - $index -1)">
+                  <i class="zmdi zmdi-close "></i>
+                </p>
+              </div>
+            </div>
+            <div class="custom-list-item" x-ng-repeat="list in newShare.getMailingListUuid()">
+              <p class="pull-left circle-ctn"><span class="circle  user-bg">L</span></p>
+              <div class="pull-left name-recipients-ctn">
+                <p class="pull-left inner-text-li">{{list.listName}}</p>
+                <p class="close-list-icone-btn pull-right" x-ng-click="newShare.removeMailingList($index)">
+                  <i class="zmdi zmdi-close"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn">
+          <div class="form-inline p-b-10">
+            <label for="activate-description">{{ "ADD_GUEST_SIDEBAR.ADD_DESCRIPTION" | translate }} :</label>
+            <label class="checkbox checkbox-inline">
+              <input type="checkbox" x-ng-checked="addDescription"
+                     x-ng-click="addDescription = !addDescription"
+                     x-ng-model="activateDescription"
+                     id="activate-description"
+                     name="activate-description"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+          <div class="css-slide-up form-group" x-ng-hide="!addDescription">
+              <textarea class="form-control comment" x-ng-model="description" name="description" rows="3"
+                        placeholder="{{ 'ADD_GUEST_SIDEBAR.ENTER_DESCRIPTION' | translate }}">
+              </textarea>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- UPDATE BTN links-->
+<div class="bottom-sidebar-btn">
+  <button class="btn btn-default col-xs-6" x-ng-click="mactrl.sidebarToggle.right = false; closeDropdown($event)">
+    {{ "NAVIGATION.CANCEL" | translate }}
+  </button>
+  <button class="btn btn-primary col-xs-6" x-ng-click="submitShare(newShare)">
+    {{ "NAVIGATION.SHARE" | translate }}
+  </button>
+</div>

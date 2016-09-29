@@ -39,7 +39,7 @@
     background-color: #0683bb;
     border: solid 1px #0683bb;
   }
-   .media-body:hover .thumb-type-item .checkbox-ctn-thumb {
+  .media-body:hover .thumb-type-item .checkbox-ctn-thumb {
     opacity: 1;
   }
   .checkbox-ctn-thumb {
@@ -252,7 +252,6 @@ md-tooltip .md-content {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.9em;
           transition: 250ms cubic-bezier(0.35, 0, 0.25, 1) all;
           cursor: pointer;
           background-color: #f5f5f5;
@@ -610,7 +609,7 @@ i.checkDropdownIconContent {
   margin-bottom: 0 !important;
 }
 
-.description-ctn.advancedSharingSettings {
+.description-ctn.form-sidebar {
   position: relative;
   height: 40px;
   overflow: hidden;
@@ -669,7 +668,7 @@ i.checkDropdownIconContent {
   }
 }
 
-.description-ctn.advancedSharingSettings.show-full-comment {
+.description-ctn.form-sidebar.show-full-comment {
   background-color: #fff;
   height: 112px !important;
   cursor: text;
@@ -715,12 +714,12 @@ i.checkDropdownIconContent {
       height: 100% !important;
     }
   }
-  .advancedSharingSettings {
+  .form-sidebar {
     margin-bottom: 0 !important;
   }
 }
 
-md-content #recipientsCtnSidebar {
+md-content #content-ctn-sidebar {
   margin-top: 0;
   position: relative;
   padding: 0;
@@ -855,7 +854,7 @@ md-content #recipientsCtnSidebar {
   }
 }
 
-#recipientsCtnSidebar form.fields-add-member {
+#content-ctn-sidebar form.fields-add-member {
   margin-left: 1.35em;
 }
 
@@ -1316,13 +1315,13 @@ div#toolbar-actions.show-details-mobile-link {
   -o-transition: 0.1s ease-in-out all;
   transition: 0.1s ease-in-out all;
   height: 50px;
-  .datepickerBorderFix {
+  .datepicker-border-fix {
     input {
       width: 90px !important;
       text-align: right;
     }
   }
-  .datepickerBorderFix {
+  .datepicker-border-fix {
     float: right;
   }
 }
@@ -1634,13 +1633,16 @@ div#toolbar-actions.show-details-mobile-link {
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  #recipientsCtnSidebar {
+  #content-ctn-sidebar.form-create-guests{
+    width: 100% !important;
+  }
+  #content-ctn-sidebar {
     .custumListContainer form {
       margin-left: 0;
     }
-    .custumListBody.col-xs-12 {
+    .custom-list-body.col-xs-12 {
       margin-left: 0;
-      .custumListItem:nth-child(odd), .custumListItem {
+      .custom-list-item:nth-child(odd), .custom-list-item {
         margin-right: 5px;
       }
     }
@@ -1758,6 +1760,17 @@ div#toolbar-actions.show-details-mobile-link {
   background-color: rgba(255, 255, 255, 0.57);
 }
 
+
+// form
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+label.required::before{
+  content:"* ";
+  color:red;
+}
+
 /******
 *****   CLASSES
 ****/
@@ -1787,6 +1800,12 @@ div#toolbar-actions.show-details-mobile-link {
   color: $primaryClr !important;
 }
 
+.has-error > span {
+  color : $error;
+  clear: both;
+  display: block;
+  margin-top: 7px;
+}
 /*********************/
 .sortDropdown ul {
   padding-top: 0;
@@ -2309,7 +2328,7 @@ div#toolbar-actions.show-details-mobile-link {
   .custumListContainer {
     padding: 0px;
   }
-  .custumListItem {
+  .custom-list-item {
     margin-right: 15px;
   }
   .header-sidebar {
@@ -2327,7 +2346,7 @@ div#toolbar-actions.show-details-mobile-link {
 
 @media (max-width: 450px) {
   .slideCtn {
-    .custumListBody {
+    .custom-list-body {
       padding: 0;
     }
   }
@@ -2342,7 +2361,7 @@ div#toolbar-actions.show-details-mobile-link {
   .custumListContainer {
     padding: 0px 15px !important;
   }
-  .custumListItem {
+  .custom-list-item {
     margin-right: 15px;
   }
   .sticky {
@@ -2364,7 +2383,7 @@ div#toolbar-actions.show-details-mobile-link {
   .custumListContainer {
     width: 100%;
   }
-  .custumListItem {
+  .custom-list-item {
     width: 100%;
     height: 35px;
     > p {
@@ -2524,7 +2543,7 @@ div#toolbar-actions.show-details-mobile-link {
   body #content-container.content-toggled {
     margin-left: 0px;
   }
-  .advancedSharingSettings {
+  .form-sidebar {
     .form-group.titleMailCustumisation {
       padding-left: 1em;
       padding-right: 2.3em;
@@ -2537,7 +2556,7 @@ div#toolbar-actions.show-details-mobile-link {
       display: inline-block;
       max-width: 80%;
     }
-    .datepickerCtn {
+    .datepicker-ctn {
       > div {
         margin-right: 0px;
       }
@@ -2550,13 +2569,13 @@ div#toolbar-actions.show-details-mobile-link {
     .custumHeaderMailForm {
       margin-top: 0em;
     }
-    .fieldCtn {
+    .field-ctn {
       padding-left: 1em;
       margin-bottom: 1.5em;
       padding-right: 1.67em !important;
     }
   }
-  .advancedSharingSettings {
+  .form-sidebar {
     .checkbox input:checked + {
       .input-helper::before {
         transform: scale(1.6);
@@ -2568,10 +2587,10 @@ div#toolbar-actions.show-details-mobile-link {
         left: -4px;
       }
     }
-    .fg-line.datepickerCtn {
+    .fg-line.datepicker-ctn {
       margin-left: 1.5em;
     }
-    .cssSlideUp {
+    .css-slide-up {
       padding-left: 1em;
       padding-right: 1em;
       > .col-xs-12 {
@@ -3060,7 +3079,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   }
 }
 
-.custumListBody {
+.custom-list-body {
   padding: 0 !important;
 }
 
@@ -3489,7 +3508,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
   margin-top: 2em;
 }
 
-.bottomSidebarBtn {
+.bottom-sidebar-btn {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -3579,18 +3598,18 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
 .m-t-2em {
   margin-top: 2em;
 }
-#recipientsCtnSidebar {
+#content-ctn-sidebar {
 
   .recipients-form-sections {
     margin-top: 2.5em;
   }
-  .datepickerBorderFix {
+  .datepicker-border-fix {
     text-align: right;
     padding: 0;
     width: 92px;
     float: right;
   }
-  .datepickerCtn {
+  .datepicker-ctn {
     > div {
       margin-right: 0px;
     }
@@ -3607,7 +3626,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
   form {
     margin-left: 1.35em;
   }
-  .custumListBody {
+  .custom-list-body {
     margin-left: 2em;
   }
 
@@ -3628,7 +3647,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
       font-size: 0.85em;
     }
   }
-  .advancedSharingSettings legend {
+  .form-sidebar legend {
     display: block;
     width: 100%;
     font-weight: inherit;
@@ -3650,11 +3669,11 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
     }
   }
   position: relative;
-  .custumListItem {
-    .circleCtn {
+  .custom-list-item {
+    .circle-ctn {
       min-width: 26px;
     }
-    .nameRecipientsCtn {
+    .name-recipients-ctn {
       width: 112px;
     }
   }
@@ -3675,7 +3694,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
     padding-top: 2px;
     top: -7px;
   }
-  .fieldCtn {
+  .field-ctn {
     padding: 0;
     margin-bottom: 1.5em;
   }
@@ -3712,6 +3731,24 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
     padding: 0;
   }
 }
+
+
+// Create guest form sidebar
+#content-ctn-sidebar.form-create-guests {
+  position: fixed;
+  width : 350px;
+  height: calc(100% - 140px);
+  overflow-y: auto;
+  margin-top: 0;
+  padding-top: 2em;
+  .fg-float .fg-label {
+    color: inherit;
+  }
+  label{
+    font-weight : normal;
+  }
+}
+
 
 #fileListTable tbody > tr.set-hidden-anim {
   opacity: 0;
@@ -4619,7 +4656,7 @@ i.deActivateSharing {
 .dropdown-menu .divider {
   margin: 0;
 }
-.advancedSharingSettings {
+.form-sidebar {
   margin-left: 0 !important;
   .form-group.titleMailCustumisation {
     padding-left: 1em;
@@ -4628,7 +4665,7 @@ i.deActivateSharing {
   label {
     max-width: 85%;
   }
-  .fieldCtn {
+  .field-ctn {
     padding-right: 2em;
     padding-left: 1em;
     margin-bottom: 1.5em;
@@ -4647,11 +4684,14 @@ i.deActivateSharing {
     display: block !important;
     /* yes, important */
   }
-  .cssSlideUp {
+  .css-slide-up {
     padding: 0;
     margin-bottom: 1em;
-    transition: 0.1s ease-in-out all;
-    height: 170px;
+    -o-transition: 0.2s ease-in-out all;
+    -webkit-transition: 0.2s ease-in-out all;
+    -moz-transition: 0.2s ease-in-out all;
+    transition: 0.2s ease-in-out all;
+    height: auto;
     overflow: hidden;
     > div {
       margin-bottom: 1em;
@@ -4659,10 +4699,10 @@ i.deActivateSharing {
       padding-right: 0;
     }
   }
-  .cssSlideUp.ng-hide {
+  .css-slide-up.ng-hide {
     height: 0;
   }
-  .fg-line.datepickerCtn {
+  .fg-line.datepicker-ctn {
     display: block;
     width: auto;
   }
@@ -4806,7 +4846,7 @@ i.deActivateSharing {
       font-size: 0.95em;
     }
   }
-  .custumListBody {
+  .custom-list-body {
     padding: 0;
   }
   .custumHeaderList {
@@ -4826,7 +4866,7 @@ i.deActivateSharing {
   }
 }
 
-.userBg {
+.user-bg {
   background-color: #9AC3D6;
 }
 
@@ -4864,7 +4904,7 @@ i.deActivateSharing {
 }
 
 .dropdown-menu{
- padding :0 ;
+  padding :0 ;
 }
 
 .transfert-dropdown {
@@ -4895,7 +4935,7 @@ i.deActivateSharing {
   }
 }
 
-.custumListItem.readonly {
+.custom-list-item.readonly {
   pointer-events: none;
   .inner-text-li {
     font-size: 0.91em;
@@ -4907,11 +4947,11 @@ i.deActivateSharing {
   }
 }
 
-.custumListItem:nth-child(odd) {
+.custom-list-item:nth-child(odd) {
   margin-right: 17px;
 }
 
-.custumListItem {
+.custom-list-item {
   padding: 0;
   margin: 0 0 1em;
   width: 139px;
@@ -4921,7 +4961,7 @@ i.deActivateSharing {
   border-radius: 25px;
   float: left;
 }
-.custumListItem .inner-text-li {
+.custom-list-item .inner-text-li {
   font-size: .91em;
   padding: 5px 8px 0 7px;
   width: 87px;
@@ -4929,14 +4969,14 @@ i.deActivateSharing {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.custumListItem .close-list-icone-btn {
+.custom-list-item .close-list-icone-btn {
   padding-top: 3px;
   padding-left: 4px;
   padding-right: 12px;
   font-size: 1.2em;
   width: 25px;
 }
-#recipientsCtnSidebar .custumListItem .nameRecipientsCtn {
+#content-ctn-sidebar .custom-list-item .name-recipients-ctn {
   width: 112px;
 }
 .custumHeaderList {
@@ -6126,6 +6166,22 @@ body:not(.sw-toggled) #sidebar {
   }
 }
 
+.toggle-chevron {
+  font-size:1.5em;
+  color: #0a6ebd;
+  -webkit-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+
+}
+
+.animate-chevron .toggle-chevron {
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Safari */
+  transform: rotate(180deg);
+}
+
 .card {
   box-shadow: none;
   .card-header {
@@ -6832,3 +6888,5 @@ body:not(.sw-toggled) #sidebar {
   }
 
 }
+
+
