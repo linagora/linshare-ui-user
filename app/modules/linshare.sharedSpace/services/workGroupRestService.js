@@ -92,4 +92,39 @@ angular.module('linshareUiUserApp')
         return Restangular.one('work_groups', workGroupUuid).one('members', memberUuid).remove();
       }
     };
+  })
+
+  // WORKGROUPS FOLDERS REST SERVICE
+  .factory('workGroupFoldersRestService', function(Restangular, $log) {
+    var _workGroupUuid = null;
+
+    return {
+      getAll: function() {
+        $log.info('WorkGroupRestService - Get a WorkGroup Folder ' + _workGroupUuid);
+        return Restangular.one('work_groups', _workGroupUuid).getList('folders');
+      },
+      create: function(folder) {
+        $log.info('WorkGroupRestService - createFolder ' + _workGroupUuid);
+        return Restangular.one('work_groups', _workGroupUuid).all('folders').post(folder);
+      },
+      get: function(folderUuid) {
+        $log.info('WorkGroupRestService - getFolder');
+        return Restangular.one('work_groups', _workGroupUuid).one('folders', folderUuid).get();
+      },
+      getParent: function(folderUuid) {
+        $log.info('WorkGroupRestService - getFolder');
+        return Restangular.one('work_groups', _workGroupUuid).getList('folders', {parent: folderUuid});
+      },
+      update: function(folder) {
+        $log.info('WorkGroupRestService - updateFolder');
+        return Restangular.one('work_groups', _workGroupUuid).one('folders').customPUT(folder);
+      },
+      delete: function(folderUuid) {
+        $log.info('WorkGroupRestService - deleteFolder');
+        return Restangular.one('work_groups', _workGroupUuid).one('folders', folderUuid).remove();
+      },
+      setWorkgroupUuid: function(uuid) {
+        _workGroupUuid = uuid;
+      }
+    };
   });

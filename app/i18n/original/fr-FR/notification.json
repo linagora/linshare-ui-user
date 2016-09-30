@@ -33,7 +33,11 @@
     },
     "ERROR": {
       "FILE_UPLOAD": "Le dépôt a échoué",
-      "503": "Serveur Indisponible"
+      "503": "Serveur Indisponible",
+      "RENAME_FOLDER": "Un dossier avec le même nom existe déjà",
+      "DELETE_ERROR": {
+        "26006": "La suppression de dossier non vide n'est pas encore supporté"
+      }
     }
   }
 }

@@ -1,9 +1,11 @@
 <header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
 
 <section id="main">
-    <aside id="sidebar" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
+    <aside id="sidebar" data-ng-include src="'includes/sidebar-left.html'"
+           data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
 
-    <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+    <aside id="chat" data-ng-include src="'includes/chat.html'"
+           data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
 
     <section id="content">
 
@@ -45,7 +47,9 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h2>Sales Statistics <small>Vestibulum purus quam scelerisque, mollis nonummy metus</small></h2>
+                    <h2>Sales Statistics
+                        <small>Vestibulum purus quam scelerisque, mollis nonummy metus</small>
+                    </h2>
 
                     <ul class="actions">
                         <li>
@@ -293,15 +297,19 @@
                         <div class="clearfix"></div>
 
                         <div class="tl-body">
-                            <div id="add-tl-item" data-ng-class="{ 'toggled': tctrl.addTodoStat === 1 }" data-ng-click="tctrl.addTodoStat = 1">
+                            <div id="add-tl-item" data-ng-class="{ 'toggled': tctrl.addTodoStat === 1 }"
+                                 data-ng-click="tctrl.addTodoStat = 1">
                                 <i class="add-new-item md md-add" data-ng-click="tctrl.addTodo($event)"></i>
 
                                 <div class="add-tl-body">
-                                    <textarea placeholder="What you want to do..." data-ng-model="tctrl.todo"></textarea>
+                                    <textarea placeholder="What you want to do..."
+                                              data-ng-model="tctrl.todo"></textarea>
 
                                     <div class="add-tl-actions">
-                                        <a href="" data-tl-action="dismiss" class="a-prevent md md-close" data-ng-click="tctrl.clearTodo()"></a>
-                                        <a href="" data-tl-action="save" class="a-prevent md md-check" data-ng-click="tctrl.clearTodo()"></a>
+                                        <a href="" data-tl-action="dismiss" class="a-prevent md md-close"
+                                           data-ng-click="tctrl.clearTodo()"></a>
+                                        <a href="" data-tl-action="save" class="a-prevent md md-check"
+                                           data-ng-click="tctrl.clearTodo()"></a>
                                     </div>
                                 </div>
                             </div>
@@ -338,7 +346,9 @@
                     <!-- Recent Items -->
                     <div class="card" data-ng-controller="recentitemCtrl as rictrl">
                         <div class="card-header">
-                            <h2>Recent Items <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
+                            <h2>Recent Items
+                                <small>Phasellus condimentum ipsum id auctor imperdie</small>
+                            </h2>
                             <ul class="actions">
                                 <li class="dropdown">
                                     <a href="" data-toggle="dropdown">
@@ -363,18 +373,18 @@
                         <div class="card-body m-t-0">
                             <table class="table table-inner table-vmiddle">
                                 <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th style="width: 60px">Price</th>
-                                    </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th style="width: 60px">Price</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-repeat="w in rictrl.riResult.list">
-                                        <td class="f-500 c-cyan">{{ w.id }}</td>
-                                        <td>{{ w.name }}</td>
-                                        <td class="f-500 c-cyan">{{ w.price }}</td>
-                                    </tr>
+                                <tr data-ng-repeat="w in rictrl.riResult.list">
+                                    <td class="f-500 c-cyan">{{ w.id }}</td>
+                                    <td>{{ w.name }}</td>
+                                    <td class="f-500 c-cyan">{{ w.price }}</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -384,7 +394,9 @@
                     <!-- Recent Posts -->
                     <div class="card" data-ng-controller="recentpostCtrl as rpctrl">
                         <div class="card-header ch-alt m-b-20">
-                            <h2>Recent Posts <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
+                            <h2>Recent Posts
+                                <small>Phasellus condimentum ipsum id auctor imperdie</small>
+                            </h2>
                             <ul class="actions">
                                 <li>
                                     <a href="">

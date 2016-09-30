@@ -77,7 +77,7 @@ angular.module('linshareUiUserApp')
     Restangular.setErrorInterceptor(function(response) {
       switch (response.status) {
         case 400:
-          growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
+          if(response.data.errCode != 26006) growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
           $log.debug('Error ' + response.status, response);
           break;
         case 404:

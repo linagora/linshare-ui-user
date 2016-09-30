@@ -112,6 +112,7 @@
     "COPY" : "Copier",
     "GO_TO_TRASH" : "Voir la corbeille",
     "NEW_WORKGROUP" : "Nouveau groupe de travail",
+    "NEW_FOLDER" : "Nouveau répertoire",
     "MOVE" : "Déplacer",
     "VIEW_VERSIONING": "Voir l'historique",
     "COPY_DROPDOWN": {

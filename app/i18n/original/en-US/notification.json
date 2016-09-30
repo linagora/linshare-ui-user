@@ -33,7 +33,11 @@
     },
     "ERROR": {
       "FILE_UPLOAD": "The upload failed",
-      "503": "Service Unavailable"
+      "503": "Service Unavailable",
+      "RENAME_FOLDER": "A folder with the same name already exists",
+      "DELETE_ERROR": {
+        "26006": "Deletion of a non-empty folder is not supported yet"
+      }
     }
   }
 }

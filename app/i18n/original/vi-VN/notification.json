@@ -33,7 +33,11 @@
     },
     "ERROR": {
       "TBT_FILE_UPLOAD": "",
-      "503": "Lỗi máy chủ"
+      "503": "Lỗi máy chủ",
+      "RENAME_FOLDER": "",
+      "DELETE_ERROR": {
+        "26006": ""
+      }
     }
   }
 }

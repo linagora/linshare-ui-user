@@ -110,6 +110,7 @@
     "COPY" : "Copy",
     "GO_TO_TRASH" : "Go to trash can",
     "NEW_WORKGROUP" : "New workgroup",
+    "NEW_FOLDER" : "New folder",
     "MOVE" : "Move",
     "VIEW_VERSIONING": "View previous updates",
     "COPY_DROPDOWN": {

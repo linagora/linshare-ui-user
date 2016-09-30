@@ -104,6 +104,7 @@
     "TBT__COPY" : "",
     "TBT__GO_TO_TRASH" : "",
     "TBT__NEW_WORKGROUP" : "",
+    "TBT__NEW_FOLDER" : "",
     "TBT__MOVE" : "",
     "TBT__VIEW_VERSIONING": "",
     "TBT__COPY_DROPDOWN": {

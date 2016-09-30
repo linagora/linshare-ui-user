@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
 
-      //------------------------------
-      // COMMON TEMPLATE
-      //------------------------------
+    //------------------------------
+    // COMMON TEMPLATE
+    //------------------------------
 
       .state('common', {
         templateUrl: 'views/common/common.html',
@@ -24,7 +24,7 @@ angular.module('linshareUiUserApp')
 
       .state('home', {
         parent: 'common',
-        url:'/',
+        url: '/',
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
         resolve: {
@@ -39,7 +39,7 @@ angular.module('linshareUiUserApp')
       //------------------------------
 
       .state('login', {
-        url:'/login?next',
+        url: '/login?next',
         templateUrl: 'views/common/loginForm.html'
       })
 
@@ -52,11 +52,11 @@ angular.module('linshareUiUserApp')
         parent: 'common',
         controller: 'DocumentsController',
         url: '/files',
-        template:'<div ui-view></div>'
+        template: '<div ui-view></div>'
       })
 
       .state('documents.files', {
-        url:'/list',
+        url: '/list',
         templateUrl: 'modules/linshare.document/views/list.html',
         controller: 'LinshareDocumentController',
         resolve: {
@@ -68,7 +68,7 @@ angular.module('linshareUiUserApp')
 
 
       .state('documents.files.selected', {
-        url:'/selected_files',
+        url: '/selected_files',
         templateUrl: 'modules/linshare.document/views/selected_files.html',
         controller: 'LinshareSelectedDocumentsController',
         params: {
@@ -79,7 +79,7 @@ angular.module('linshareUiUserApp')
 
 
       .state('documents.received', {
-        url:'/received',
+        url: '/received',
         templateUrl: 'modules/linshare.receivedShare/views/list.html',
         controller: 'ReceivedController',
         resolve: {
@@ -87,13 +87,13 @@ angular.module('linshareUiUserApp')
             return AuthenticationService.getCurrentUser();
           },
           files: function(LinshareReceivedShareService) {
-           return LinshareReceivedShareService.getReceivedShares();
-         }
+            return LinshareReceivedShareService.getReceivedShares();
+          }
         }
       })
 
       .state('documents.shared', {
-        url:'/shared',
+        url: '/shared',
         templateUrl: 'modules/linshare.share/views/shared.html',
         controller: 'LinshareShareController',
         resolve: {
@@ -104,7 +104,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('documents.share', {
-        url:'/share',
+        url: '/share',
         templateUrl: 'views/documents/shareModal.html',
         controller: 'ReceivedController'
       })
@@ -135,7 +135,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('documents.guests.uuid', {
-        url:'/guests/:uuid',
+        url: '/guests/:uuid',
         templateUrl: 'views/guests/guestDetails.html',
         controller: 'LinshareGuestController'
       })
@@ -147,11 +147,11 @@ angular.module('linshareUiUserApp')
       .state('sharedspace', {
         parent: 'common',
         url: '/sharedspace',
-        template:'<div ui-view></div>'
+        template: '<div ui-view></div>'
       })
 
       .state('sharedspace.all', {
-        url:'/list',
+        url: '/list',
         templateUrl: 'modules/linshare.sharedSpace/views/workgroups.html',
         controller: 'SharedSpaceController as vm',
         resolve: {
@@ -162,7 +162,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('sharedspace.workgroups', {
-        url:'/workgroups',
+        url: '/workgroups',
         //controller: 'WorkGroupController',
         template: '<div ui-view></div>',
         resolve: {
@@ -173,13 +173,14 @@ angular.module('linshareUiUserApp')
       })
 
       .state('sharedspace.workgroups.entries', {
-        url:'/:uuid/:workgroupName',
+        url: '/:uuid/:workgroupName/folders/:parent/:folderUuid/:folderName',
         templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
         controller: 'SharedSpaceListController as vm',
         resolve: {
-          currentWorkGroup: function(workGroupEntriesRestService, $stateParams) {
-            workGroupEntriesRestService.setWorkgroupUuid($stateParams.uuid);
-            return workGroupEntriesRestService.getAll();
+          currentWorkGroup: function(workGroupFoldersRestService, $stateParams) {
+            console.log('ENTRED IN SHARED FOLDER', $stateParams.uuid, $stateParams.folderUuid, $stateParams.folderName);
+            workGroupFoldersRestService.setWorkgroupUuid($stateParams.uuid);
+            return workGroupFoldersRestService.getParent($stateParams.folderUuid);
           }
         }
       })
@@ -191,12 +192,12 @@ angular.module('linshareUiUserApp')
       .state('administration', {
         parent: 'common',
         url: '/administration',
-        template:'<div ui-view></div>'
+        template: '<div ui-view></div>'
       })
 
 
       .state('administration.lists', {
-        url:'/lists',
+        url: '/lists',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
@@ -208,19 +209,19 @@ angular.module('linshareUiUserApp')
       })
 
       .state('administration.users', {
-        url:'/users',
+        url: '/users',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
 
       .state('administration.groups', {
-        url:'/sharedspace',
+        url: '/sharedspace',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
 
       .state('administration.hidden_links', {
-        url:'/hidden_links',
+        url: '/hidden_links',
         templateUrl: 'views/common/hidden_links.html'
       })
 
@@ -231,16 +232,16 @@ angular.module('linshareUiUserApp')
       .state('upload_request', {
         parent: 'common',
         url: '/upload_requests',
-        template:'<div ui-view></div>'
+        template: '<div ui-view></div>'
       })
 
       .state('upload_request.requests', {
-        url:'/requests',
+        url: '/requests',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
       .state('upload_request.propositions', {
-        url:'/propositions',
+        url: '/propositions',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
@@ -252,16 +253,16 @@ angular.module('linshareUiUserApp')
       .state('audit', {
         parent: 'common',
         url: '/audit',
-        template:'<div ui-view></div>'
+        template: '<div ui-view></div>'
       })
 
       .state('audit.global', {
-        url:'/audit_global',
+        url: '/audit_global',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
       .state('audit.upload_request', {
-        url:'/audit_upload_request',
+        url: '/audit_upload_request',
         templateUrl: 'views/home/main.html',
         controller: 'LinshareGuestController'
       })
@@ -273,7 +274,7 @@ angular.module('linshareUiUserApp')
       .state('share', {
         parent: 'common',
         url: '/share',
-        template:'<div ui-view></div>'
+        template: '<div ui-view></div>'
       })
 
       .state('share.detail', {
@@ -298,7 +299,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('share.files.new-share', {
-        url:'/new_share',
+        url: '/new_share',
         templateUrl: 'modules/linshare.share/views/new_advanced_sharing.html',
         controller: 'LinshareAdvancedShareController',
         resolve: {
@@ -310,8 +311,8 @@ angular.module('linshareUiUserApp')
 
       .state('transfert', {
         parent: 'common',
-        url:'/transfert',
-        template:'<div ui-view></div>'
+        url: '/transfert',
+        template: '<div ui-view></div>'
       })
 
       .state('transfert.new_share', {
@@ -325,7 +326,7 @@ angular.module('linshareUiUserApp')
       })
 
       .state('share.files.share-detail', {
-        url:'/share_detail',
+        url: '/share_detail',
         templateUrl: 'modules/linshare.share/views/shares_detail.html'
       })
     ;

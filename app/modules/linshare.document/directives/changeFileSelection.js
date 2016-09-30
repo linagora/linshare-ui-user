@@ -64,21 +64,21 @@ angular.module('linshare.document')
         detailsFunction: '=',
         rightSidebarOpen: '='
       },
-      link: function(scope, element) {
+      link: function(scope, element, attrs) {
         element.bind('contextmenu', function() {
           var isHighlighted = element.hasClass('highlightListElem');
           if(!isHighlighted) {
             scope.toggleDocumentSelection();
           }
         });
-        element.bind('click', function() {
-          $log.debug('directive itemselection : click event');
-          if(scope.rightSidebarOpen) {
-            element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
-            element.find('li')[0].className = 'activeActionButton';
-          }
-          scope.toggleDocumentSelection();
-        });
+          element.bind('click', function() {
+            $log.debug('directive itemselection : click event');
+            if(scope.rightSidebarOpen) {
+              element.siblings().find('li.activeActionButton').removeClass('activeActionButton');
+              element.find('li')[0].className = 'activeActionButton';
+            }
+            scope.toggleDocumentSelection();
+          });
       },
       controller: function($scope) {
         $scope.toggleDocumentSelection = function() {

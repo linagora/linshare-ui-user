@@ -3,14 +3,17 @@
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceListController',
     function($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService, workGroupMembersRestService,
-             workGroupEntriesRestService, $stateParams, Restangular, $translatePartialLoader, $timeout , $translate) {
+              workGroupEntriesRestService, workGroupFoldersRestService, $state, $stateParams, Restangular, $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService) {
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('sharedspace');
       var thisctrl = this;
       $scope.mactrl.sidebarToggle.right = false;
       thisctrl.uuid = $stateParams.uuid;
-      workGroupEntriesRestService.setWorkgroupUuid(thisctrl.uuid);
       thisctrl.name = $stateParams.workgroupName;
+      thisctrl.folderUuid = $stateParams.folderUuid;
+      thisctrl.folderName = $stateParams.folderName;
+      thisctrl.parent = $stateParams.parent;
+      workGroupEntriesRestService.setWorkgroupUuid(thisctrl.uuid);
       thisctrl.itemsList = currentWorkGroup;
       thisctrl.itemsListCopy = thisctrl.itemsList;
       thisctrl.selectedDocuments = [];
@@ -29,10 +32,11 @@ angular.module('linshareUiUserApp')
           var filteredData = params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
           var filesList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(filesList.length);
-          params.settings({ counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
+          params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
           $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+      pushEntriesAndBreadcrumb();
       thisctrl.getDetails = function(item) {
         return documentUtilsService.getItemDetails(workGroupEntriesRestService, item);
       };
@@ -52,24 +56,32 @@ angular.module('linshareUiUserApp')
           growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'inverse');
         });
       };
+
       $scope.reloadDocuments = function() {
-        $timeout(function () {
-          workGroupEntriesRestService.getAll().then(function (data) {
-            thisctrl.itemsList = data;
-            thisctrl.itemsListCopy = data;
-            $scope.isNewAddition = true;
-            thisctrl.tableParams.reload();
-            $timeout(function () {
-              $scope.isNewAddition = false;
+        $timeout(function() {
+          if(thisctrl.folderUuid == thisctrl.uuid) {
+            workGroupFoldersRestService.getParent(thisctrl.uuid).then(function(folder) {
+              thisctrl.goToSharedSpaceFolderTarget(thisctrl.uuid, thisctrl.name, folder[0].parent, folder[0].uuid, folder[0].name, true, true)
             }, 0);
-          }, 500);
+          } else {
+            workGroupFoldersRestService.getParent(thisctrl.folderUuid).then(function(data) {
+              thisctrl.itemsList = data;
+              thisctrl.itemsListCopy = data;
+              $scope.isNewAddition = true;
+              pushEntriesAndBreadcrumb();
+              thisctrl.tableParams.reload();
+              $timeout(function() {
+                $scope.isNewAddition = false;
+              }, 0);
+            }, 0);
+          }
         });
       };
       thisctrl.renameItem = renameItem;
+      thisctrl.renameFolder = renameFolder;
 
       workGroupMembersRestService.get(thisctrl.uuid, $scope.userLogged.uuid).then(function(member) {
         thisctrl.currentWorkgroupMember = member;
-        //$scope.vm.currentWorkgroupMember = member;
       });
 
       thisctrl.currentPage = 'group_list_files';
@@ -94,7 +106,7 @@ angular.module('linshareUiUserApp')
       thisctrl.setTextInput = function($event) {
         var currTarget = $event.currentTarget;
         var inputTxt = angular.element(currTarget).text();
-        if(inputTxt === '') {
+        if (inputTxt === '') {
           angular.element(currTarget).parent().find('span').css('display', 'block');
         } else {
           angular.element(currTarget).parent().find('span').css('display', 'none');
@@ -108,9 +120,9 @@ angular.module('linshareUiUserApp')
         var currentPage = page || thisctrl.tableParams.page();
         var dataOnPage = data || thisctrl.tableParams.data;
         var select = selectFlag || thisctrl.flagsOnSelectedPages[currentPage];
-        if(!select) {
+        if (!select) {
           angular.forEach(dataOnPage, function(element) {
-            if(!element.isSelected) {
+            if (!element.isSelected) {
               element.isSelected = true;
               thisctrl.selectedDocuments.push(element);
             }
@@ -119,7 +131,7 @@ angular.module('linshareUiUserApp')
         } else {
           thisctrl.selectedDocuments = _.xor(thisctrl.selectedDocuments, dataOnPage);
           angular.forEach(dataOnPage, function(element) {
-            if(element.isSelected) {
+            if (element.isSelected) {
               element.isSelected = false;
               _.remove(thisctrl.selectedDocuments, function(n) {
                 return n.uuid === element.uuid;
@@ -129,15 +141,15 @@ angular.module('linshareUiUserApp')
           thisctrl.flagsOnSelectedPages[currentPage] = false;
         }
       };
-      var openSearch = function () {
+      var openSearch = function() {
         angular.element('#dropArea').addClass('search-toggled');
         angular.element('#top-search-wrap input').focus();
       };
-      var closeSearch = function () {
+      var closeSearch = function() {
         angular.element('#dropArea').removeClass('search-toggled');
         angular.element('#searchInMobileFiles').val('').trigger('change');
       };
-      thisctrl.toggleSearchState = function () {
+      thisctrl.toggleSearchState = function() {
         if (!thisctrl.searchMobileDropdown) {
           openSearch();
         } else {
@@ -154,15 +166,15 @@ angular.module('linshareUiUserApp')
           angular.element(currTarget).addClass('selectedSorting');
         });
       };
-      var  swalMultipleDownloadTitle , swalMultipleDownloadText ,
+      var swalMultipleDownloadTitle, swalMultipleDownloadText,
         swalMultipleDownloadConfirm;
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
         .then(function(translations) {
-          swalMultipleDownloadTitle= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadText= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
-          swalMultipleDownloadConfirm= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+          swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
+          swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
+          swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
 
       thisctrl.unavailableMultiDownload = function() {
@@ -188,13 +200,17 @@ angular.module('linshareUiUserApp')
 
       function deleteCallback(items) {
         angular.forEach(items, function(restangularizedItem) {
-          $log.debug('value to delete', restangularizedItem);
+          _.remove(restangularizedItem.lastAuthor);
           restangularizedItem.remove().then(function() {
             growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
             _.remove(thisctrl.itemsList, restangularizedItem);
             _.remove(thisctrl.selectedDocuments, restangularizedItem);
             thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module
             thisctrl.tableParams.reload();
+          }, function(error) {
+            if(error.status == 400 && error.data.errCode == 26006) {
+              growlService.notifyTopRight('GROWL_ALERT.ERROR.DELETE_ERROR.26006', 'danger');
+            }
           });
         });
       }
@@ -204,7 +220,7 @@ angular.module('linshareUiUserApp')
       }
 
       function toggleFilterBySelectedFiles() {
-        if(thisctrl.tableParams.filter().isSelected) {
+        if (thisctrl.tableParams.filter().isSelected) {
           delete thisctrl.tableParams.filter().isSelected;
         } else {
           thisctrl.tableParams.filter().isSelected = true;
@@ -213,8 +229,8 @@ angular.module('linshareUiUserApp')
 
       function downloadDocument(document) {
         return workGroupEntriesRestService.download(thisctrl.uuid, document.uuid).then(function(fileStream) {
-            documentUtilsService.downloadFileFromResponse(fileStream, document.name, document.type);
-          });
+          documentUtilsService.downloadFileFromResponse(fileStream, document.name, document.type);
+        });
       }
 
       function showItemDetails(current, event) {
@@ -232,33 +248,33 @@ angular.module('linshareUiUserApp')
         });
       }
 
-      var setElemToEditable = function (idElem, data) {
-        var  initialName = idElem[0].textContent;
+      var setFileToEditable = function(idElem, data) {
+        var initialName = idElem[0].textContent;
         var fileExtension = data.name.substr(initialName.lastIndexOf('.'));
         angular.element(idElem).attr('contenteditable', 'true')
-          .on('focus', function () {
+          .on('focus', function() {
             document.execCommand('selectAll', false, null);
             initialName = idElem[0].textContent;
           })
-          .on('focusout', function () {
+          .on('focusout', function() {
             data.name = idElem[0].textContent;
             if (data.name.trim() === '') {
               // if the new name is empty then replace with by previous once
               angular.element(idElem).text(initialName);
               data.name = initialName;
-              updateNewName(data,idElem);
+              updateNewName(data, idElem);
             } else {
               if (data.name.indexOf('.') === -1) {
                 // if the new name does not contain a file name extension then add the previous original extension to it
                 data.name = data.name + fileExtension;
                 angular.element(idElem).text(data.name);
-                updateNewName(data,idElem);
+                updateNewName(data, idElem);
               } else {
-                updateNewName(data,idElem);
-               }
+                updateNewName(data, idElem);
+              }
             }
           })
-          .on('keypress', function (e) {
+          .on('keypress', function(e) {
             if (e.which === 13) {
               angular.element(idElem).focusout();
             }
@@ -267,12 +283,160 @@ angular.module('linshareUiUserApp')
       };
 
       function updateNewName(data, elem) {
+        delete data.lastAuthor;
         workGroupEntriesRestService.update(data.uuid, data);
         angular.element(elem).attr('contenteditable', 'false');
       }
 
       function renameItem(item) {
-        var itemNameElem = $('td[uuid='+ item.uuid +']').find('.file-name-disp');
-        setElemToEditable(itemNameElem, item);
+        var itemNameElem = $('td[uuid=' + item.uuid + ']').find('.file-name-disp');
+        setFileToEditable(itemNameElem, item);
+      }
+
+      thisctrl.goToSharedSpaceFolderTarget = function(uuid, name, parent, folderUuid, folderName, fromBreacrumb, needReplace) {
+        var folderNameElem = $('td[uuid=' + folderUuid + ']').find('.file-name-disp');
+        var options = needReplace ? { location: 'replace' } : {};
+        if(angular.element(folderNameElem).attr('contenteditable') == "false" || fromBreacrumb) $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name.trim(), parent: parent, folderUuid: folderUuid, folderName: folderName.trim()}, options);
+      };
+
+      thisctrl.createFolder = function() {
+        var defaultNamePos = newFolderNumber(thisctrl.itemsList);
+        var defaultName = defaultNamePos != 0 ? swalNewFolderName+' ('+defaultNamePos+')' : swalNewFolderName;
+        createFolder(defaultName);
+      };
+
+      function newFolderNumber(items) {
+        var foldersName = [];
+        _.forEach(items, function(item) {
+          if(!item.type) foldersName.push(item.name);
+        });
+        if(foldersName.length == 0 || !_.includes(foldersName, swalNewFolderName)) return 0;
+        else {
+          var iteration = 1;
+          var foldersIndex = [];
+          var regex = new RegExp('^'+swalNewFolderName+' \\([0-9]+\\)');
+          _.forEach(items, function(item) {
+            if(!item.type && regex.test(item.name)) foldersIndex.push(parseInt(item.name.replace(/\D/g, '')));
+          });
+          foldersIndex = _.sortBy(foldersIndex, function(val){ return val; } );
+          _.forEach(foldersIndex, function(index, key) {
+            if(index == key+1) iteration++;
+            else return iteration;
+          });
+          return iteration;
+        }
+      }
+
+      function createFolder(folderName) {
+        var folder = {
+          name: folderName.trim(),
+          uuid: Math.random().toString(36).substring(7),
+          parent: thisctrl.folderUuid
+        };
+        thisctrl.itemsList.push(folder);
+        thisctrl.tableParams.reload();
+        $timeout(function() {
+          renameFolder(folder, true);
+        }, 0);
+      }
+
+      function saveNewFolder(folder) {
+        workGroupFoldersRestService.create(folder).then(function(data) {
+          thisctrl.itemsList.pop();
+          thisctrl.itemsList.push(data);
+          thisctrl.tableParams.reload();
+          return false;
+        });
+      }
+
+      var swalNewFolderName;
+      $translate(['ACTION.NEW_FOLDER'])
+        .then(function(translations) {
+          swalNewFolderName = translations['ACTION.NEW_FOLDER'];
+        });
+      var setFolderToEditable = function(idElem, data, newFolder) {
+        var initialName = swalNewFolderName;
+        angular.element(idElem).attr('contenteditable', 'true')
+          .on('focus', function() {
+            document.execCommand('selectAll', false, null);
+            initialName = data.name;
+          })
+          .on('focusout', function() {
+            if(newFolder || data.name != idElem[0].textContent) {
+              if(folderNotExits(thisctrl.itemsList, idElem[0].textContent.trim(), newFolder)) {
+                data.name = idElem[0].textContent.trim();
+                if (data.name.trim() === '') {
+                  angular.element(idElem).text(initialName);
+                  data.name = initialName.trim();
+                }
+                newFolder ? saveNewFolder(data) : workGroupFoldersRestService.update(data);
+                angular.element(this).attr('contenteditable', 'false');
+              } else {
+                $log('Folder name exists');
+                data.name = initialName;
+                newFolder ? saveNewFolder(data) : null;
+                growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_FOLDER', 'danger');
+                angular.element(idElem).text(initialName);
+                angular.element(this).attr('contenteditable', 'false');
+                angular.element(this).blur();
+              }
+            }
+          })
+          .on('keypress', function(e) {
+            if (e.which === 13) {
+              if(newFolder || data.name != idElem[0].textContent) {
+                if(folderNotExits(thisctrl.itemsList, idElem[0].textContent.trim(), newFolder)) {
+                  data.name = idElem[0].textContent.trim();
+                  if ((data.name.trim() === initialName) || (data.name.trim() === '')) {
+                    angular.element(idElem).text(initialName);
+                    data.name = initialName.trim();
+                  }
+                  newFolder ? saveNewFolder(data) : data.name != initialName ? workGroupFoldersRestService.update(data) : null;
+                  angular.element(this).attr('contenteditable', 'false');
+                } else {
+                  $log('Folder name exists');
+                  data.name = initialName;
+                  newFolder ? saveNewFolder(data) : null;
+                  growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_FOLDER', 'danger');
+                  angular.element(idElem).text(initialName);
+                  angular.element(this).attr('contenteditable', 'false');
+                }
+              }
+              return false;
+            }
+          });
+        angular.element(idElem).focus();
+      };
+
+      function renameFolder(folder, newFolder) {
+        var folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
+        setFolderToEditable(folderNameElem, folder, newFolder);
+      }
+
+      function folderNotExits(items, newName, newFolder) {
+        var notExists = true;
+        var itemsList = _.clone(items);
+        if(newFolder) itemsList.pop();
+        _.forEach(itemsList, function(item) {
+          if(!item.type && item.name.toLowerCase() == newName.toLowerCase()) notExists = false;
+        });
+        return notExists;
+      }
+
+      function pushEntriesAndBreadcrumb() {
+        workGroupFoldersRestService.get(thisctrl.folderUuid).then(function(folder) {
+          var currentWorkGroupEntries = _.clone(currentWorkGroup);
+          currentWorkGroupEntries.route = 'entries';
+          sharedSpaceBreadcrumbService.build(folder.ancestors).then(function(breadcrumb) {
+            thisctrl.breadcrumbFolders = breadcrumb;
+          });
+
+          _.forEach(folder.entries, function(entry) {
+            Restangular.restangularizeElement(currentWorkGroup, entry, 'entries/'+entry.uuid);
+            entry.parentResource['route'] = '';
+            thisctrl.itemsList.push(entry);
+            thisctrl.tableParams.reload();
+          });
+        }, 0);
       }
     });
