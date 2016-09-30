@@ -13,8 +13,8 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
       headers['WWW-No-Authenticate'] = 'linshare';
     });
   })
-  .factory('AuthenticationService', ['Restangular', '$q', '$log', 'authService', '$timeout', 'growlService', '$translate', '$cookies',
-    function (Restangular, $q, $log, authService, $timeout, growlService, $translate, $cookies) {
+  .factory('AuthenticationService', ['Restangular', '$q', '$log', '$translate', '$cookies', '$location', '$window', '$timeout', 'authService', 'growlService', 'lsAppConfig',
+    function (Restangular, $q, $log, $translate, $cookies, $location, $window, $timeout, authService, growlService, lsAppConfig) {
       var deferred = $q.defer();
 
       var baseAuthentication = Restangular.all('authentication');
@@ -56,9 +56,15 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
               $cookies.remove('JSESSIONID');
               //After being disconnected, authentication model is reloaded
               //you can use $location to redirect through home page (login page)
-              Restangular.all('authentication').customGET('authorized').then(function (user) {
-                deferred.resolve(user);
-              });
+              // Restangular.all('authentication').customGET('authorized').then(function (user) {
+              //   deferred.resolve(user);
+              // });
+              if (lsAppConfig.postLogoutUrl) {
+                  $window.location.href = lsAppConfig.postLogoutUrl;
+              } else {
+                  var absUrl = $location.absUrl();
+                  $window.location = absUrl.split('#')[0];
+              }
             },
             function(error) {
               $log.error('Authentication logout : failed', error.status);
