@@ -61,7 +61,7 @@ angular.module('linshareUiUserApp')
       .setNotify(true, true);
   })
 
-  .run(function($rootScope, $location, Restangular, growlService, $log, $window, localStorageService, languageService) {
+  .run(function($rootScope, $filter, $location, Restangular, growlService, $log, $window, localStorageService, languageService) {
     $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
     var storedLocale = localStorageService.get('locale');
     if(storedLocale) {
@@ -74,7 +74,7 @@ angular.module('linshareUiUserApp')
      * Restangular Interceptor
      * Show message box when an error occured
      */
-    Restangular.setErrorInterceptor(function(response) {
+    Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
       switch (response.status) {
         case 400:
           if(response.data.errCode != 26006) growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
@@ -91,8 +91,19 @@ angular.module('linshareUiUserApp')
           growlService.notifyTopCenter('GROWL_ALERT.ERROR.503', 'danger');
           break;
         default:
-          growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + response.status, 'danger');
-          $log.debug('Error ' + response.status, response);
+          if (response.status) {
+            growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + response.status, 'danger');
+            $log.debug('Error ' + response.status, response);
+          }
+          else {
+            var $translate = $filter('translate');
+            growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + $translate('NO_RESPONSE_ERROR'), 'danger');
+            $log.debug('deferred', deferred);
+            $log.debug('response', response);
+            $log.debug('responseHandler', responseHandler);
+            deferred.resolve(false);
+            return false;
+          }
       }
       return true;
     });

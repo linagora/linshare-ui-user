@@ -37,7 +37,8 @@
       "RENAME_FOLDER": "Un dossier avec le même nom existe déjà",
       "DELETE_ERROR": {
         "26006": "La suppression de dossier non vide n'est pas encore supporté"
-      }
+      },
+      "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs."
     }
   }
 }

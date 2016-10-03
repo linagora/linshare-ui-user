@@ -37,7 +37,8 @@
       "RENAME_FOLDER": "",
       "DELETE_ERROR": {
         "26006": ""
-      }
+      },
+      "TBT_NO_RESPONSE_ERROR": ""
     }
   }
 }
