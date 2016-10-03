@@ -223,5 +223,11 @@
   "ANONYMOUS_URL" : {
     "HELLO": "Hello",
     "MSG": "You have received some files from "
+  },
+  "COMMON": {
+    "SIDEBAR": {
+      "PRODUCT_VERSION": "Product version",
+      "CORE_VERSION": "Core version"
+    }
   }
 }

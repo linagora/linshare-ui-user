@@ -83,6 +83,10 @@ angular.module('linshare.authentication', ['restangular', 'http-auth-interceptor
         },
         getCurrentUser: function () {
           return deferred.promise;
+        },
+        version: function() {
+          $log.debug('Authentication:version');
+          return Restangular.one('authentication', 'version').get();
         }
       };
     }]);

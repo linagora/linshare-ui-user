@@ -149,7 +149,7 @@ angular.module('linshareUiUserApp')
   })
 
   .controller('UiUserMainController',
-  function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
+  function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate, $http,
            AuthenticationService, MenuService, $timeout, LinshareUserService, ShareObjectService, growlService) {
     $rootScope.sidebarRightWidth = 350;
     $rootScope.sidebarLeftWidth = 268;
@@ -310,6 +310,22 @@ angular.module('linshareUiUserApp')
       }, 450);
     });
 
+    /**
+     * Get the core version from the REST API
+     * @type {string}
+     */
+    AuthenticationService.version().then(function(data){
+      $scope.coreVersion = data.version;
+    });
+
+    /**
+     * Get the product version from the json file 'about'
+     * @type {string}
+     */
+    $scope.productVersion = 'dev';
+    $http.get('/about.json').success(function (data) {
+      $scope.productVersion = data.version;
+    });
   })
   .controller('InitNewFlowUploaderController', function($scope, ShareObjectService) {
     /**
