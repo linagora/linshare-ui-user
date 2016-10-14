@@ -7,6 +7,7 @@
   "TBT__UNKNOWN_USER": "",
   "TBT__UNKNOWN_FIRST_LETTER": "",
   "TBT__PENDING_UPLOADS": "",
+  "TBT_SAVING":"",
   "NAVIGATION": {
     "NEXT": "Trang sau",
     "PREVIOUS": "Trang trước",
@@ -190,7 +191,9 @@
     "INSERT_DESCRIPTION": "n",
     "CREATED_THE": "",
     "VERSION_HISTORIQUE": "",
-    "VERSIONS": ""
+    "VERSIONS": "",
+    "TBT__EDIT_DESCRIPTION": "",
+    "TBT__ABORT_EDIT": ""
   },
   "TBT__ANONYMOUS_URL" : {
     "TBT__HELLO": "",

@@ -51,8 +51,22 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
         $log.debug('LinshareDocumentRestService:autocomplete');
         return Restangular.all('users').one('autocomplete', pattern).get();
       },
-      updateFile: function(uuid, documentDto) {
+      /**
+       * Call to the rest api for updating a Document
+       * @param uuid
+       * @param documentDto
+       * @returns {*}
+       */
+      update: function(uuid, documentDto) {
         $log.debug('LinshareDocumentRestService : updating a document');
+        var documentUpdated = _.cloneDeep(documentDto);
+        if (documentUpdated.thumbnail) {
+          delete documentUpdated.thumbnail;
+        }
+        return Restangular.one('documents', uuid).customPUT(documentUpdated);
+      },
+      updateFile: function(uuid, documentDto) {
+        $log.debug('LinshareDocumentRestService : updating the file inside the document');
         return Restangular.all('documents').one(uuid).post(documentDto);
       }
     };
@@ -208,6 +222,22 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     $scope.getDetails = function(item) {
       return documentUtilsService.getItemDetails(LinshareDocumentRestService, item);
     };
+
+    /**
+     * Update a document
+     * @param document
+     */
+     $scope.updateDocument = function(document) {
+       var documentServer = _.cloneDeep(document);
+       $translate(['SAVING'])
+       .then(function(translations) {
+         var swalSaving = translations['SAVING'];
+         $scope.currentSelectedDocument.current.description = swalSaving;
+         LinshareDocumentRestService.update(documentServer.uuid, documentServer).then(function() {
+           $scope.currentSelectedDocument.current.description = documentServer.description;
+         });
+       });
+     };
 
     $scope.reloadDocuments = function() {
         $timeout(function () {
@@ -382,24 +412,6 @@ angular.module('linshare.document', ['restangular', 'ngTable', 'linshare.compone
     };
     $scope.previousTab = function() {
       $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
-    };
-
-    $scope.slideTextarea = function($event){
-      var currTarget = $event.currentTarget;
-      angular.element(currTarget).parent().addClass('show-full-comment');
-    };
-    $scope.slideUpTextarea = function($event){
-      var currTarget = $event.currentTarget;
-      angular.element(currTarget).parent().removeClass('show-full-comment');
-    };
-    $scope.setTextInput = function ($event) {
-      var currTarget = $event.currentTarget;
-      var inputTxt = angular.element(currTarget).text();
-      if (inputTxt === '') {
-        angular.element(currTarget).parent().find('span').css('display', 'block');
-      } else {
-        angular.element(currTarget).parent().find('span').css('display', 'none');
-      }
     };
     $scope.lsFormat = function() {
       return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';

@@ -8,6 +8,7 @@
   "UNKNOWN_USER": "Utilisateur inconnu",
   "UNKNOWN_FIRST_LETTER": "NC",
   "PENDING_UPLOADS": "en attente",
+  "SAVING": "Sauvegarde en cours...",
   "NAVIGATION": {
     "NEXT": "Suivant",
     "PREVIOUS": "Précédent",
@@ -226,7 +227,9 @@
   "INSERT_DESCRIPTION": "Saisissez une description",
   "CREATED_THE": "Créé le",
   "VERSION_HISTORIQUE": "Historique",
-  "VERSIONS": "Mise à jours"
+  "VERSIONS": "Mise à jours",
+  "EDIT_DESCRIPTION": "Editer la description",
+  "ABORT_EDIT": "Annuler votre modification"
   },
   "ANONYMOUS_URL" : {
     "HELLO": "Bonjour",
@@ -239,4 +242,3 @@
     }
   }
 }
-

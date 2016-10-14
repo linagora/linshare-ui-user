@@ -488,23 +488,7 @@ angular.module('linshare.receivedShare')
         }
       });
       $scope.currentPage = 'received_files';
-      $scope.slideTextarea = function($event){
-        var currTarget = $event.currentTarget;
-        angular.element(currTarget).parent().addClass('show-full-comment');
-      };
-      $scope.slideUpTextarea = function($event){
-        var currTarget = $event.currentTarget;
-        angular.element(currTarget).parent().removeClass('show-full-comment');
-      };
-      $scope.setTextInput = function ($event) {
-        var currTarget = $event.currentTarget;
-        var inputTxt = angular.element(currTarget).text();
-        if (inputTxt === '') {
-          angular.element(currTarget).parent().find('span').css('display', 'block');
-        } else {
-          angular.element(currTarget).parent().find('span').css('display', 'none');
-        }
-      };
+
       $scope.lsFormat = function() {
         return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';
       };

@@ -9,7 +9,7 @@
 
   <div ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
     <md-content>
-      <md-tabs md-selected="data.selectedIndex"  md-dynamic-height="" md-border-bottom="">
+      <md-tabs md-selected="data.selectedIndex" md-dynamic-height="" md-border-bottom="">
         <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 noPadding">
           <md-content>
             <div ng-show="currentSelectedDocument.current.name">
@@ -24,16 +24,32 @@
                     <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
                   </div>
                 </div>
-                <div title="{{'WIP' | translate}}">
-                  <div class="description-ctn form-sidebar disabled">
-                    <div contenteditable="true" class="comment"
-                         ng-focus="slideTextarea($event)"
-                         ng-blur="slideUpTextarea($event)"
-                         ng-keyup="setTextInput($event);"></div>
-                    <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
-                    <div class="edit-description">
-                      {{currentSelectedDocument.current.description}}
-                      <i class="zmdi zmdi-edit"></i>
+                <div>
+                  <div class="description-ctn form-sidebar"
+                       x-ng-class="{'show-full-comment': commentFocused}"
+                       x-ng-init="commentFocused = false">
+                    <textarea title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"
+                              class="comment"
+                              spellcheck="false"
+                              name="description"
+                              id="description"
+                              x-ng-attr-placeholder="{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}"
+                              x-ng-model="currentSelectedDocument.current.description"
+                              x-ng-bind="currentSelectedDocument.current.description"
+                              x-ng-change="updateDocument(currentSelectedDocument.current)"
+                              x-ng-model-options="{ updateOn: 'blur' }"
+                              x-ng-init="commentFocused = false"
+                              x-ng-focus="commentFocused = true"
+                              x-ng-blur="commentFocused = false"
+                              x-ng-readonly="currentPage !== 'my_files'">
+
+                    </textarea>
+                    <span x-ng-if="(((!commentFocused) && (currentSelectedDocument.current.description.length > 54)));">...</span>
+                    <div class="edit-description clic-enabled" x-ng-click="commentFocused = !commentFocused ; commentFocused">
+                      <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
+                         title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
+                      <i class="zmdi zmdi-close" x-ng-if="commentFocused"
+                         title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
                     </div>
                   </div>
                 </div>
@@ -45,13 +61,13 @@
                         <i class="zmdi zmdi-delete"></i>
                       </a>
                     </li>
-                    <li  class="col-xs-3">
+                    <li class="col-xs-3">
                       <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
                          ng-click="onShare(); mactrl.sidebarToggle.right = true;">
                         <i class="zmdi zmdi-share"></i>
                       </a>
                     </li>
-                    <li  class="col-xs-3">
+                    <li class="col-xs-3">
                       <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
                          title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
                         <i class="zmdi zmdi-download"></i>
@@ -72,13 +88,13 @@
                         <i class="zmdi zmdi-delete"></i>
                       </a>
                     </li>
-                    <li  class="col-xs-3">
+                    <li class="col-xs-3">
                       <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
-                        class="disabled-work-in-progress">
+                         class="disabled-work-in-progress">
                         <i class="zmdi zmdi-swap"></i>
                       </a>
                     </li>
-                    <li  class="col-xs-3">
+                    <li class="col-xs-3">
                       <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
                          title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
                         <i class="zmdi zmdi-download"></i>
@@ -138,11 +154,11 @@
                           {{'RIGHT_PANEL.DETAILS.CREATION_DATE' | translate}}:
                         </p>
                         <p ng-if="currentPage == 'received_files'">
-                          {{'RIGHT_PANEL.DETAILS.SHARING_DATE'  | translate}}:
+                          {{'RIGHT_PANEL.DETAILS.SHARING_DATE' | translate}}:
                         </p>
                         <p tooltip-placement="bottom" tooltip-popup-delay="500"
                            uib-tooltip="{{currentSelectedDocument.current.creationDate | date : lsFullDateFormat()}}">
-                           {{currentSelectedDocument.current.creationDate | date : lsFormat()}}
+                          {{currentSelectedDocument.current.creationDate | date : lsFormat()}}
                         </p>
                       </div>
                       <div>
@@ -161,11 +177,11 @@
                         <p>{{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}</p>
                         <p ng-click="nextTab()">
                           <a>{{currentSelectedDocument.current.shared}}
-                          {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' | translate}}
+                            {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' | translate}}
                           </a>
                         </p>
                       </div>
-                      <div ng-show="linshareModeProduction == false" >
+                      <div ng-show="linshareModeProduction == false">
                         <p>{{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}}:</p>
                         <p>
                            <span ng-show="currentSelectedDocument.current.ciphered == true">

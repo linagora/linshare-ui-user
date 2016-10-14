@@ -8,6 +8,7 @@
   "UNKNOWN_USER": "Unknown user",
   "UNKNOWN_FIRST_LETTER": "UNK",
   "PENDING_UPLOADS": "pending",
+  "SAVING":"Saving...",
   "NAVIGATION": {
     "NEXT": "Next",
     "PREVIOUS": "Previous",
@@ -218,7 +219,9 @@
     "INSERT_DESCRIPTION": "Add a file description",
     "CREATED_THE": "Created the",
     "VERSION_HISTORIQUE": "Previous updates",
-    "VERSIONS": "Updates"
+    "VERSIONS": "Updates",
+    "EDIT_DESCRIPTION": "Edit description",
+    "ABORT_EDIT": "Cancel edition"
   },
   "ANONYMOUS_URL" : {
     "HELLO": "Hello",

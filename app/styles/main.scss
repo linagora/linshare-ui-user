@@ -611,59 +611,55 @@ i.checkDropdownIconContent {
 
 .description-ctn.form-sidebar {
   position: relative;
-  height: 40px;
+  height: 35px;
   overflow: hidden;
   padding-left: 1.33em;
   border: 1px solid #e0e0e0;
   background-color: #F6F6F6;
   margin-bottom: 1em;
-  -webkit-transition: all 500ms ease-out;
-  -o-transition: all 500ms ease-out;
-  -moz-transition: all 500ms ease-out;
-  transition: all 500ms ease-out;
+  -webkit-transition: all 400ms ease-out;
+  -o-transition: all 400ms ease-out;
+  -moz-transition: all 400ms ease-out;
+  transition: all 400ms ease-out;
   cursor: pointer;
   .comment {
+    word-break: break-all;
+    overflow: hidden;
+    resize: none;
     border: none;
     background-color: transparent;
-    padding: 0.85em;
-    width: 100%;
-    padding-right: 40px;
-    padding-left: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 20px;
+    width: 81%;
     color: #858585;
     font-size: 0.90em;
     font-style: italic;
+    padding: 0;
+    padding-top: 10px;
     div {
       display: none;
     }
   }
   span {
-    pointer-events: none;
-    display: block;
-    color: #858585;
-    font-size: 0.90em;
-    font-style: italic;
-    position: absolute;
-    top: 11px;
-    left: 18px;
+    line-height: 18px;
+    padding-top: 10px;
+    margin-left: -5px;
+    display: inline-block;
   }
   .edit-description {
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
     width: 40px;
-    height: 40px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: none;
     border: 1px solid #e0e0e0;
-    -webkit-transition: all 500ms ease-out;
-    -o-transition: all 500ms ease-out;
-    -moz-transition: all 500ms ease-out;
-    transition: all 500ms ease-out;
+    border-bottom: none;
+    -webkit-transition: all 400ms ease-out;
+    -o-transition: all 400ms ease-out;
+    -moz-transition: all 400ms ease-out;
+    transition: all 400ms ease-out;
     background-color: #F6F6F6;
   }
 }
@@ -672,18 +668,23 @@ i.checkDropdownIconContent {
   background-color: #fff;
   height: 112px !important;
   cursor: text;
-  .comment {
-    overflow: visible;
+   .comment {
+    line-height: 18px;
+    height: inherit;
+    resize: none;
     text-overflow: inherit;
     white-space: normal;
-    width: 100%;
+    width: 90%;
     padding-right: 0.85em;
     div {
       display: block;
     }
   }
   .edit-description {
-    right: -50px;
+    pointer-events: cursor;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -1769,6 +1770,9 @@ input:-webkit-autofill {
 label.required::before{
   content:"* ";
   color:red;
+}
+.clic-enabled{
+  cursor : pointer;
 }
 
 /******
