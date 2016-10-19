@@ -50,18 +50,21 @@ angular.module('linshareUiUserApp')
 
       .state('documents', {
         parent: 'common',
-        controller: 'DocumentsController',
+        controller: 'documentsController',
         url: '/files',
         template: '<div ui-view></div>'
       })
 
       .state('documents.files', {
         url: '/list',
-        templateUrl: 'modules/linshare.document/views/list.html',
-        controller: 'LinshareDocumentController',
+        templateUrl: 'modules/linshare.document/views/documentsList.html',
+        controller: 'documentController',
+        params: {
+          uploadedFileUuid: null
+        },
         resolve: {
-          documentsList: function(LinshareDocumentRestService) {
-            return LinshareDocumentRestService.getAllFiles();
+          documentsList: function(documentRestService) {
+            return documentRestService.getAllFiles();
           }
         }
       })
@@ -70,7 +73,7 @@ angular.module('linshareUiUserApp')
       .state('documents.files.selected', {
         url: '/selected_files',
         templateUrl: 'modules/linshare.document/views/selected_files.html',
-        controller: 'LinshareSelectedDocumentsController',
+        controller: 'selectedDocumentsController',
         params: {
           'selected': null,
           'hiddenParam': 'YES'
@@ -110,11 +113,19 @@ angular.module('linshareUiUserApp')
       })
 
       .state('documents.upload', {
-        url: '/upload',
+        url: '/upload/:from',
         params: {
           idUpload: null
         },
-        templateUrl: 'modules/linshare.document/views/upload_template.html'
+        templateUrl: 'modules/linshare.upload/views/lsUpload.html',
+        controller: 'uploadQueueController',
+        resolve: {
+          function ($state, $stateParams, lsAppConfig) {
+            if($stateParams.from !== lsAppConfig.mySpacePage && $stateParams.from !== lsAppConfig.workgroupPage) {
+              return $state.go('documents.upload', { 'from': lsAppConfig.mySpacePage });
+            }
+          }
+        }
       })
 
       .state('documents.profile', {
@@ -159,10 +170,12 @@ angular.module('linshareUiUserApp')
       .state('sharedspace.workgroups.entries', {
         url: '/:uuid/:workgroupName/folders/:parent/:folderUuid/:folderName',
         templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
-        controller: 'SharedSpaceListController as vm',
+        controller: 'SharedSpaceListController as sharedSpaceListVm',
+        params: {
+          uploadedFileUuid: null
+        },
         resolve: {
           currentWorkGroup: function(workGroupFoldersRestService, $stateParams) {
-            console.log('ENTRED IN SHARED FOLDER', $stateParams.uuid, $stateParams.folderUuid, $stateParams.folderName);
             workGroupFoldersRestService.setWorkgroupUuid($stateParams.uuid);
             return workGroupFoldersRestService.getParent($stateParams.folderUuid);
           }

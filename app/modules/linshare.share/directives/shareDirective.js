@@ -26,11 +26,6 @@ angular.module('linshare.share')
                 $scope.shareMail = '';
               };
 
-              //$scope.$watch('selectedRecipients', function(n){
-              //  console.log('new value', n);
-              //  $scope.share.recipients = $scope.selectedRecipients;
-              //});
-
               $scope.submitShare = function() {
                 LinshareShareService.shareDocuments($scope.share).then(function() {
                   $modalInstance.close();

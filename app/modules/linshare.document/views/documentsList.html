@@ -1,0 +1,46 @@
+<div
+     flow-object="$flow"
+     flow-files-submitted="flowUploadService.uploadFiles($files, $flow, mySpacePage)" flow-drop=""
+     flow-drag-enter="dropClass='drag-over'"
+     flow-file-success="addUploadedDocument($file, $message)"
+     flow-drag-leave="dropClass='fade-out-elm'"
+     ng-class="{'right-sidebar-toggled': mactrl.sidebarToggle.right === true, 'drag-over' : dropClass == 'drag-over',
+          'fade-out-elm': dropClass == 'fade-out-elm'  }"
+     class="file-listing-ctn">
+  <div id="drop-ctn" class="drop border-anim reset-content-width">
+    <div>
+      <div class="drag-and-drop-alert ">
+        <p>{{ "DRAG_DROP_BACKGROUND.TITLE" | translate }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container files">
+    <!--  ACTIONS ON DOCUMENTS  -->
+    <!-- contextmenu -->
+    <div class="card" id="collapsible-content">
+      <div ng-include src="'modules/linshare.document/views/documentsListPartials/cardHeader.html'"></div>
+      <div ng-include src="'modules/linshare.document/views/documentsListPartials/dropArea.html'"></div>
+    </div>
+  </div>
+  <div ng-include src="'modules/linshare.document/views/documentsListPartials/fab.html'"></div>
+</div>
+<section class="row multi-select-mobile visible-xs"
+         data-ng-class="{'showMobileMultiMenu': selectedDocuments.length > 0}"
+         ng-show="currentPage == 'my_files'">
+  <div class="col-xs-2 ctn-mobile-select-count">
+    <span class="number-of-files">{{selectedDocuments.length}}</span>
+    <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
+  </div>
+  <div class="col-xs-8">
+    <i class="zmdi zmdi-share col-xs-3" ng-click="onShare(); mactrl.sidebarToggle.right = true;"></i>
+    <i class="zmdi zmdi-delete col-xs-3" ng-click="deleteDocuments(selectedDocuments)"></i>
+    <i class="zmdi zmdi-download col-xs-3 disabled-work-in-progress"></i>
+    <i class="zmdi zmdi-copy col-xs-3 disabled-work-in-progress"></i>
+  </div>
+  <div class="col-xs-1 pull-right" ng-click="resetSelectedDocuments()">
+    <i class="zmdi zmdi zmdi-close"></i>
+  </div>
+</section>
+<aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+       data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
+</aside>

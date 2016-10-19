@@ -25,6 +25,7 @@ angular
     'ui.bootstrap',
     'flow',
     'angular-growl',
+    'linshare.upload',
     'linshare.userProfile',
     'linshare.authentication',
     'linshare.document',

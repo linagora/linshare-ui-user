@@ -65,7 +65,6 @@ angular.module('linshare.share')
 
     ShareObjectForm.prototype.addRecipient = function(contact) {
       var exists = false;
-      var self = this;
       switch (contact.type) {
         case 'simple':
           angular.forEach(recipients, function (elem) {
@@ -80,7 +79,6 @@ angular.module('linshare.share')
           }
           break;
         case 'user':
-          console.log('thisthisthis', self, 'yyyy', this);
           angular.forEach(recipients, function (elem) {
             if (elem.mail === contact.mail && elem.domain === contact.domain) {
               exists = true;

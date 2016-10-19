@@ -116,7 +116,7 @@
     <section class="slideCtn">
       <div class="slide slide1 col-xs-4">
         <div class="card col-sm-10 col-xs-11  col-centered">
-          <div class="listview lv-bordered lv-lg" id="listFilesView">
+          <div class="listview lv-bordered lv-lg" id="list-files-view">
             <div class="lv-header-alt clearfix">
               <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
             </div>
@@ -146,12 +146,12 @@
             <div class="lv-body">
               <div class="media-body" ng-repeat="file in share_array[id].flowObjectFiles.files">
                 <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
-                  <div class="col-xs-24 col-sm-12 animLeft no-padding">
+                  <div class="col-xs-24 col-sm-12 anim-left no-padding">
                     <div class="col-xs-6 col-sm-10 pull-left">
-                      <div class="previewIconCtn pull-left hidden-v-xs">
+                      <div class="preview-icon-ctn pull-left hidden-v-xs">
                         <p class="img-circle">{{file.getExtension()  | uppercase }}</p>
                       </div>
-                      <div class="pull-left dataListCtn">
+                      <div class="pull-left data-list-ctn">
                         <div class="lv-title">{{file.name}}</div>
                         <small class="lv-small pull-left">{{file.timeRemaining() | remainingTime }}</small>
                         <small class="lv-small pull-right">{{file.size | readableSize: false}}</small>
@@ -160,7 +160,7 @@
                       </div>
                     </div>
                     <div class="col-xs-6 col-sm-2 pull-left">
-                      <ul class="lv-actions actions alignListIcons ">
+                      <ul class="lv-actions actions align-list-icons ">
                         <li class="col-xs-4">
                           <a>
                             <i class="zmdi zmdi-file"><span>note</span></i>
@@ -196,7 +196,7 @@
                   </div>
                 </div>
                 <div class="col-xs-2 visible-xs">
-                  <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+                  <ul class="lv-actions actions align-list-icons " ng-click="showBtnList($event)">
                     <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
                   </ul>
                 </div>

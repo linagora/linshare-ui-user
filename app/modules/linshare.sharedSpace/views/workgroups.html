@@ -69,11 +69,11 @@
               </div>
               <span ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())"
                     class="visible-xs toolbar-mobile-item col-xs-3 clickable">
-                <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn">
+                <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-text-button">
                   <i class="fa fa-square-o"></i>
                 </a>
-                <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn">
-                  <i class="fa fa-check-square-o active-link"></i>
+                <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-text-button">
+                  <i class="fa fa-check-square-o activeLink"></i>
                 </a>
                 </span>
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
@@ -170,16 +170,17 @@
         </div>
 
         <!-- DROP AREA WHEN FILES ARE SELECTED -->
-        <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
-             data-ng-class="{'showMultiMenu': vm.selectedDocuments.length > 0}">
-          <div class="toogleCkeckboxToolbar"
+        <div id="selection-actions" class="default-multi-toolbar-state multi-btns"
+             data-ng-class="{'show-multi-menu': vm.selectedDocuments.length > 0}">
+          <div class="toggle-checkbox-toolbar"
                ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())">
             <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]"
-               class="select-all-items plain-txt-btn ng-scope">
+
+               class="select-all-items plain-text-button ng-scope">
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
             <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]"
-               class="select-all-items plain-txt-btn ng-scope">
+               class="select-all-items plain-text-button ng-scope">
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
@@ -188,7 +189,7 @@
             <i class="zmdi zmdi-close"></i>
           </div>
           <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
-            <div class="pull-left" data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
+            <div class="pull-left" data-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
                  ng-click="activeBtnShowSelection = !activeBtnShowSelection; vm.toggleFilterBySelectedFiles()">
               <p><span>{{vm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" |
                 translate}}</p>
@@ -204,29 +205,29 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
               <span ng-if="vm.selectedDocuments.length === 1">
-                <a class="plain-txt-btn partage-link" title="{{'ACTION.ADD_MEMBER' | translate}}"
+                <a class="plain-text-button share-link" title="{{'ACTION.ADD_MEMBER' | translate}}"
                    ng-click="vm.onAddMember()">
                   <i class="groups-add-member"></i>
                   <span>{{'ACTION.ADD_MEMBER' | translate}}</span>
                 </a>
               </span>
             <span>
-              <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
-                 ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
+              <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+                 ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                  ng-click="vm.deleteWorkGroup(vm.selectedDocuments)">
                 <i class="zmdi zmdi-delete"></i>
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
               </a>
               </span>
             <span ng-show="linshareModeProduction == false">
-              <a class="plain-txt-btn partage-link" title=" {{'ACTION.SILENCE' | translate}}">
+              <a class="plain-text-button share-link" title=" {{'ACTION.SILENCE' | translate}}">
                 <i class="fa fa-bell-slash-o"></i>
                 <span> {{'ACTION.SILENCE' | translate}}</span>
               </a>
               </span>
             <span class="dropdown link-dropdown" dropdown
                   ng-show="(linshareModeProduction == false) || (vm.selectedDocuments.length == 1)">
-                <a class="plain-txt-btn partage-link"
+                <a class="plain-text-button share-link"
                    dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
@@ -277,8 +278,8 @@
               </span>
           </div>
         </div>
-        <div class="drag-n-Drop-ctn reset-content-width hidden-xs">
-          <div class="drag-n-drop-content">
+        <div class="drag-and-drop-ctn reset-content-width hidden-xs">
+          <div class="drag-and-drop-content">
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
               <span class="groups-shared-folder grey-clr bg-info-icon">
@@ -294,10 +295,10 @@
           <span ng-click="vm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
                 role="button" tabindex="0" style="display:block">
             <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]"
-               class="select-all-items plain-txt-btn ng-scope checkbox-ctn">
+               class="select-all-items plain-text-button ng-scope checkboxCtn">
               <i class="fa fa-square-o checkbox-table"></i>
             </a>
-            <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn ng-scope">
+            <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-text-button ng-scope">
               <i class="fa fa-check-square-o"></i>
             </a>
             </span>
@@ -318,7 +319,7 @@
                   data-current-selected-Document="vm.currentSelectedDocument"
                   data-details-function="vm.getDetails"
                   data-right-sidebar-open="mactrl.sidebarToggle.right"
-                  data-ng-class="{'highlightListElem': documentFile.isSelected ,
+                  data-ng-class="{'highlight-list-elem': documentFile.isSelected ,
                    'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid }"
                   class="p-b-5"
                   context-menu="moreOptionsContexualMenu"
@@ -560,7 +561,7 @@
          data-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
          ng-show="currentPage == 'group_list'">
   <div class="col-xs-2 ctn-mobile-select-count">
-    <span class="numberOfiles">{{vm.selectedDocuments.length}}</span>
+    <span class="number-of-files">{{vm.selectedDocuments.length}}</span>
     <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.ELEMENTS' | translate}}</span>
   </div>
   <div class="col-xs-8">

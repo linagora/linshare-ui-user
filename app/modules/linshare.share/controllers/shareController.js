@@ -46,7 +46,7 @@ angular.module('linshare.share')
 
       $scope.newShare.addDocuments($scope.selectedDocuments);
       $scope.newShare.share().then(function() {
-        $scope.$emit('linshare-upload-complete');
+        $scope.$emit('linshare-share-done');
         $scope.mactrl.sidebarToggle.right = false;
         $scope.share_array.push(angular.copy($scope.newShare.getObjectCopy()));
         $scope.newShare.resetForm();
@@ -85,9 +85,9 @@ angular.module('linshare.share')
       }
       LinshareShareService.shareDocuments(shareCreationDto).then(function() {
         growlService.notifyTopRight($scope.growlMsgShareSuccess, 'inverse');
-        $scope.$emit('linshare-upload-complete');
+        $scope.$emit('linshare-share-done');
         $scope.mactrl.sidebarToggle.right = false;
-        angular.element('tr').removeClass('highlightListElem');
+        angular.element('tr').removeClass('highlight-list-elem');
         $scope.resetSelectedDocuments();
       });
     };

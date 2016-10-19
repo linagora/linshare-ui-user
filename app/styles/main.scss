@@ -1,6 +1,13 @@
 @import "fonts.scss";
 @import "colors.scss";
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.display-none {
+  display: none;
+}
 
 .groups-shared-folder.grey-clr{
   .path2:before {
@@ -26,7 +33,7 @@
 }
 
 #transfert-ctn  #file-list-table.ng-table {
-  .no-padding .previewIconCtn {
+  .no-padding .preview-icon-ctn {
     padding-top: 0;
     position: relative;
     width: 42px;
@@ -1771,7 +1778,7 @@ div#toolbar-actions.show-details-mobile-link {
   transition: all 1s ease-out;
 }
 
-#newUploadIcon.activeAnimTransfertIcon {
+#newUploadIcon.active-anim-transfert-icon {
   visibility: visible;
   transform: scale(1);
   opacity: 0;
@@ -2175,11 +2182,11 @@ label.required::before{
     box-sizing: border-box;
     padding: 2px;
   }
-  #transfert-ctn .previewIconCtn {
+  #transfert-ctn .preview-icon-ctn {
     width: auto;
     padding: 5px !important;
   }
-  #transfert-ctn .dataListCtn {
+  #transfert-ctn .data-list-ctn {
     width: 80%;
     margin-left: 5px !important;
   }
@@ -2218,19 +2225,19 @@ label.required::before{
 }
 
 @media (min-width: 769px) and (max-width: 1134px) {
-  #transfert-ctn .dataListCtn {
+  #transfert-ctn .data-list-ctn {
     width: 91%;
   }
 }
 
 @media (min-width: 284px) and (max-width: 320px) {
-  #transfert-ctn .dataListCtn {
+  #transfert-ctn .data-list-ctn {
     width: 74%;
   }
 }
 
 @media (max-width: 284px) {
-  #transfert-ctn .dataListCtn {
+  #transfert-ctn .data-list-ctn {
     width: 96%;
   }
   .hidden-v-xs {
@@ -2386,7 +2393,7 @@ label.required::before{
   .media-body > div:hover {
     background-color: #9AD7F2;
     background-color: #EFEFEF;
-    .alignListIcons > li > a > i {
+    .align-list-icons > li > a > i {
       color: #555 !important;
     }
   }
@@ -3824,7 +3831,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
   }
 }
 
-.drag-n-Drop-ctn {
+.drag-and-drop-ctn {
   position: fixed;
   z-index: 0;
   width: 100%;
@@ -3838,7 +3845,8 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
   transition: 0.5s ease-in-out background;
   -webkit-transition: 0.5s ease-in-out background;
   -moz-transition: 0.5s ease-in-out background;
-  .drag-n-drop-content {
+
+  .drag-and-drop-content {
     display: table-cell;
     vertical-align: middle;
     opacity: 0;
@@ -3870,7 +3878,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
   }
 }
 
-.drag-n-Drop-ctn.outOfFocus {
+.drag-and-drop-ctn.out-of-focus {
   opacity: 0.34;
   h1 {
     color: #E8E8E8;
@@ -3908,7 +3916,7 @@ div.bordered-circle {
 //  background: rgba(255, 255, 255, 0);
 //
 //}
-.dragNDropAlert {
+.drag-and-drop-alert {
   opacity: 0;
   position: relative;
   margin: 0px 0px 0px -266.5px;
@@ -3935,23 +3943,23 @@ div.bordered-circle {
   }
 }
 
-.drag-over .dragNDropAlert {
+.drag-over .drag-and-drop-alert {
   opacity: 1;
   -webkit-animation-name: fadeInUp;
   animation-name: fadeInUp;
 }
 
-.fadeOutElm .dragNDropAlert {
+.fade-out-elm .drag-and-drop-alert {
   opacity: 0;
   -webkit-animation-name: fadeOutDown;
   animation-name: fadeOutDown;
 }
 
-.borderAnim {
+.border-anim {
   transition: all 0.1s ease;
 }
 
-.drag-over .borderAnim {
+.drag-over .border-anim {
   box-shadow: inset 0 0 0 5px rgba(33, 150, 243, 0.25);;
 }
 
@@ -3960,7 +3968,7 @@ div.bordered-circle {
   background-color: rgba(255, 255, 255, 0.85);
 }
 
-.drag-over #dropCtn {
+.drag-over #drop-ctn {
   z-index: 5 !important;
 }
 
@@ -3969,7 +3977,7 @@ div.bordered-circle {
   z-index: 4;
 }
 
-#dropCtn {
+#drop-ctn {
   position: fixed;
   width: 100%;
   height: calc(100% - 50px);
@@ -3977,6 +3985,11 @@ div.bordered-circle {
   z-index: -1;
   display: table-cell;
   vertical-align: middle;
+  > div:first-child{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
   .animBox {
     top: 70%;
     width: 100px;
@@ -3992,7 +4005,7 @@ div.bordered-circle {
   }
 }
 
-.drag-over #dropCtn.animBox {
+.drag-over #drop-ctn.animBox {
   opacity: 1;
 }
 
@@ -4000,7 +4013,7 @@ div.bordered-circle {
   transition: 0.5s ease-in-out all;
 }
 
-#dropCtn.drag-over .spinner {
+#drop-ctn.drag-over .spinner {
   opacity: 1;
   position: absolute;
   top: 50%;
@@ -4018,7 +4031,7 @@ div.bordered-circle {
   display: table;
   height: calc(100% - 50px);
   z-index: 2;
-  .infoPartager {
+  .info-share {
     z-index: 1;
     opacity: 0;
     position: absolute;
@@ -4068,7 +4081,7 @@ div.bordered-circle {
   -moz-transition: 0.1s ease-in-out all;
 }
 
-.highlightListElem {
+.highlight-list-elem {
   border-left: none;
   background-color: rgba(89, 94, 101, 0.08) !important;
   color: #4E4E4E;
@@ -4088,13 +4101,13 @@ div.bordered-circle {
   cursor: pointer;
 }
 
-#selection-actions.showMultiMenu {
+#selection-actions.show-multi-menu {
   margin-top: 0px;
   visibility: visible;
   display: block;
 }
 
-.defaultMultiToolbarState {
+.default-multi-toolbar-state {
   visibility: hidden;
 }
 
@@ -4187,7 +4200,8 @@ div.bordered-circle {
     -moz-transition: all 250ms ease-in-out;
     transition: all 250ms ease-in-out;
   }
-  .display-num-selected-items.activeBtnShowSelection {
+
+  .display-num-selected-items.active-button-show-selection {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
     .view-icons-ctn {
       border-left: solid 1px #C8ECFD;
@@ -4197,7 +4211,7 @@ div.bordered-circle {
   }
 }
 
-i.deActivateSharing {
+i.de-activate-sharing {
   pointer-events: none;
   font-weight: inherit;
   color: #C9C9C9;
@@ -4212,7 +4226,7 @@ i.deActivateSharing {
     margin-top: 0;
     font-size: 1.05em;
   }
-  span a.deActivateSharing, span a.deActivateSharing span {
+  span a.de-activate-sharing, span a.de-activate-sharing span {
     pointer-events: none;
     font-weight: inherit;
     color: #C9C9C9;
@@ -4292,7 +4306,7 @@ i.deActivateSharing {
   vertical-align: top;
 }
 
-.toogleCkeckboxToolbar {
+.toggle-checkbox-toolbar {
   height: 19px;
   width: 18px;
   float: left;
@@ -4316,19 +4330,19 @@ i.deActivateSharing {
   background-color: $primaryClr;
 }
 
-#transfert-ctn.transfertCtnWhite {
+#transfert-ctn.transfert-ctn-white {
   background-color: #fff;
   padding-top: 53px;
-  #listFilesView .lv-header-alt {
+  #list-files-view .lv-header-alt {
     background: transparent;
     padding: 0;
     color: #000;
   }
-  #listFilesView .lvh-label {
+  #list-files-view .lvh-label {
     color: #000;
     font-size: 1em;
   }
-  #listFilesView {
+  #list-files-view {
     background-color: #FFFFFF;
     padding-bottom: 0;
     margin: 0em;
@@ -4845,7 +4859,7 @@ body {
   top: 11px;
 }
 
-.alignListIcons span {
+.align-list-icons span {
   display: none;
   position: absolute;
   font-size: 0.60em;
@@ -4853,7 +4867,7 @@ body {
   left: 0.2em;
 }
 
-.alignListIcons span {
+.align-list-icons span {
   font-size: 0.65em;
 }
 
@@ -5193,15 +5207,15 @@ body {
     margin: 0 auto;
     padding: 0;
   }
-  #listFilesView {
+  #list-files-view {
     background-color: #f0f0f0;
     padding-bottom: 1em;
     margin: 0em;
   }
-  .alignListIcons {
+  .align-list-icons {
     padding-top: 12px;
   }
-  .animLeft {
+  .anim-left {
     -webkit-transition: margin .6s ease;
     -o-transition: margin .6s ease;
     transition: margin .6s ease;
@@ -5211,11 +5225,11 @@ body {
     div {
       padding: 0;
     }
-    .previewIconCtn {
+    .preview-icon-ctn {
       padding-top: 8px;
     }
   }
-  .dataListSlideToggle {
+  .data-list-slide-toggle {
     margin-left: -100%;
   }
   .showSlideBtn {
@@ -5242,7 +5256,7 @@ body {
   .actions > li > a > i, .actions > a > i {
     color: #5D5D5D;
   }
-  #listFilesView {
+  #list-files-view {
     .lvh-label {
       color: #fff;
       font-size: 1em;
@@ -5292,7 +5306,7 @@ body {
     padding: 0;
     margin-bottom: 1.5em;
   }
-  .previewIconCtn {
+  .preview-icon-ctn {
     width: auto;
     margin: auto;
     padding: 5px;
@@ -5309,7 +5323,7 @@ body {
       height: 30px;
     }
   }
-  .dataListCtn {
+  .data-list-ctn {
     width: 94%;
     margin-left: 5px;
   }
@@ -6730,6 +6744,9 @@ body:not(.sw-toggled) #sidebar {
     }
     .toolbar-actions-items {
       width: auto;
+    .number-of-files {
+      color: $primaryClr;
+      font-weight: 500;
     }
   }
 }
@@ -7072,8 +7089,8 @@ body:not(.sw-toggled) #sidebar {
 }
 
 #profile-main.detail-guest {
-  .img-preview-ctn{
-    height:200px;
+  .img-preview-ctn {
+    height: 200px;
     background-color: #0b97c4;
     background-image: url(../images/banner_linshare.jpg);
     opacity: 1;
@@ -7085,7 +7102,7 @@ body:not(.sw-toggled) #sidebar {
     height: 100%;
     display: flex;
     z-index: 4;
-    .detail-info-ctn.flex-ctn{
+    .detail-info-ctn.flex-ctn {
       margin: auto;
       flex-wrap: wrap;
       justify-content: center;
@@ -7108,10 +7125,10 @@ body:not(.sw-toggled) #sidebar {
         font-size: 1.03em;
         color: #fff;
       }
-      p.email{
+      p.email {
         font-size: 0.85em;
       }
     }
   }
-
+}
 }

@@ -1,8 +1,19 @@
-<div flow-init="{query: {threadUuid: vm.uuid, workGroupFolderUuid: vm.folderUuid}}"
-     flow-files-submitted="$flow.upload()"
-     flow-file-success="addUploadedDocument($file, $message, $flow)"
-     class="file-listing-ctn"
-     ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
+<div
+  flow-object="$flow"
+  flow-files-submitted="sharedSpaceListVm.flowUploadService.uploadFiles($files, $flow, sharedSpaceListVm.workgroupPage, sharedSpaceListVm.folderInfos)" flow-drop=""
+  flow-drag-enter="dropClass='drag-over'"
+  flow-file-success="sharedSpaceListVm.addUploadedEntry($file, $message)"
+  flow-drag-leave="dropClass='fade-out-elm'"
+  ng-class="{'right-sidebar-toggled': mactrl.sidebarToggle.right === true, 'drag-over' : dropClass == 'drag-over',
+          'fade-out-elm': dropClass == 'fade-out-elm'  }"
+  class="file-listing-ctn">
+  <div id="drop-ctn" class="drop border-anim reset-content-width">
+    <div>
+      <div class="drag-and-drop-alert">
+        <p>{{ "DRAG_DROP_BACKGROUND.TITLE" | translate }}</p>
+      </div>
+    </div>
+  </div>
   <div class="container files">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
@@ -22,21 +33,21 @@
               </i>
               <p>{{ "WORKGROUPS_LIST.SHARED_FOLDER" | translate }}</p>
             </a>
-            <a class="col-xs-6" ng-click="vm.createFolder();"
+            <a class="col-xs-6" ng-click="sharedSpaceListVm.createFolder();"
                href="javascript:void(0)">
               <i>
-                                  <span class="groups-folder">
-                                        <span class="path1"></span><span class="path2"></span>
-                                  </span>
+                <span class="groups-folder">
+                      <span class="path1"></span><span class="path2"></span>
+                </span>
               </i>
               <p>{{ "WORKGROUPS_LIST.FOLDER" | translate }}</p>
             </a>
-            <a ng-hide="vm.currentWorkgroupMember.readonly" class="col-xs-6" flow-btn
+            <a ng-hide="sharedSpaceListVm.currentWorkgroupMember.readonly" class="col-xs-6" flow-btn
                href="javascript:void(0)">
               <i class="zmdi zmdi-upload"></i>
               <p>{{ "WORKGROUPS_LIST.UPLOAD_FILE" | translate }}</p>
             </a>
-            <a ng-show="vm.currentWorkgroupMember.readonly" class="col-xs-6 disabled-work-in-progress"
+            <a ng-show="sharedSpaceListVm.currentWorkgroupMember.readonly" class="col-xs-6 disabled-work-in-progress"
                href=""
                uib-tooltip="">
               <i class="zmdi zmdi-upload"></i>
@@ -67,39 +78,37 @@
               <i class="zmdi zmdi-file"></i>
               {{ "BREADCRUMB_TITLE_WORKGROUP" | translate }}
             </a>
-            <span ng-repeat-start="folder in vm.breadcrumbFolders" class="sub-categorie-chevron"><i
-              class="zmdi zmdi-chevron-right"></i></span>
+            <span ng-repeat-start="folder in sharedSpaceListVm.breadcrumbFolders" class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
             <a ng-repeat-end class="breadcrumb"
-               ng-click="vm.goToSharedSpaceFolderTarget(vm.uuid, vm.name, folder.parent, folder.uuid, folder.name, true)">
+               ng-click="sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, folder.parent, folder.uuid, folder.name, true)">
               {{ folder.name }}
             </a>
             <span class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
             <span>
-              &nbsp;&nbsp;{{ vm.folderName }}
+              &nbsp;&nbsp;{{ sharedSpaceListVm.folderName }}
             </span>
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items group-list">
               <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
-                   data-ng-click="vm.toggleSearchState()">
+                   data-ng-click="sharedSpaceListVm.toggleSearchState()">
                 <a href="" href="javascript:void(0)">
                   <i class="tm-icon zmdi zmdi-search"
                      ng-class="{'active-link': searchMobileDropdown }"></i>
                 </a>
               </div>
-              <span ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())"
+              <span ng-click="sharedSpaceListVm.selectDocumentsOnCurrentPage(sharedSpaceListVm.tableParams.data, sharedSpaceListVm.tableParams.page())"
                     class="visible-xs toolbar-mobile-item col-xs-3 clickable">
-
-                <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn">
+                <a ng-if="!sharedSpaceListVm.flagsOnSelectedPages[sharedSpaceListVm.tableParams.page()]" class="select-all-items plain-text-button">
                   <i class="fa fa-square-o"></i>
                 </a>
-                <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn">
+                <a ng-if="sharedSpaceListVm.flagsOnSelectedPages[sharedSpaceListVm.tableParams.page()]" class="select-all-items plain-text-button">
                   <i class="fa fa-check-square-o active-link"></i>
                 </a>
                 </span>
 
               <a href="" class="hidden-xs pull-left"
-                 ng-click="vm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;"
+                 ng-click="sharedSpaceListVm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;"
                  title="{'ACTION.INFO_WORKGROUP' | translate }}" aria-hidden="false">
                 <i class="zmdi zmdi-info-outline" aria-hidden="true"></i>
               </a>
@@ -125,10 +134,10 @@
                       <li class="divided"></li>
                       <li role="menuitem">
                         <a href="" class="ng-binding selected-sorting"
-                           ng-click="vm.sort-dropdownSetActive('modificationDate', $event)">
+                           ng-click="sharedSpaceListVm.sort-dropdownSetActive('modificationDate', $event)">
                             <span class="caret-area">
-                                <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                                <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                                <i ng-show="sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                                <i ng-show="!sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
                           {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}
                         </a>
@@ -137,28 +146,28 @@
                         <a href="" class="ng-binding"
                            ng-click="vm.sort-dropdownSetActive('creationDate', $event)">
                             <span class="caret-area">
-                              <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i ng-show="sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i ng-show="!sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
                           {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}
                         </a>
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-click="vm.sort-dropdownSetActive('size', $event)">
+                           ng-click="sharedSpaceListVm.sort-dropdownSetActive('size', $event)">
                             <span class="caret-area">
-                              <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i ng-show="sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i ng-show="!sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
                           {{'FILTER_COMPONENT.BY_SIZE' | translate }}
                         </a>
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-click="vm.sort-dropdownSetActive('name', $event)">
+                           ng-click="sharedSpaceListVm.sort-dropdownSetActive('name', $event)">
                             <span class="caret-area">
-                              <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i ng-show="sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i ng-show="!sharedSpaceListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
                           {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate }}
                         </a>
@@ -177,7 +186,7 @@
                   <div class="fg-line">
                     <input type="text" class="form-control"
                            autocomplete="off"
-                           ng-model="vm.paramFilter['name']"
+                           ng-model="sharedSpaceListVm.paramFilter['name']"
                            placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
                            ng-change="updateParams()">
                   </div>
@@ -199,39 +208,39 @@
         </div>
         <!-- FILTER COMPONENT  -->
         <filtering-component class="clearfix" ls-size="true" ls-date="true"
-                             filtered-items-list="vm.itemsList"
-                             initial-items-list="vm.itemsListCopy"
-                             reload-items="vm.tableParams.reload">
+                             filtered-items-list="sharedSpaceListVm.itemsList"
+                             initial-items-list="sharedSpaceListVm.itemsListCopy"
+                             reload-items="sharedSpaceListVm.tableParams.reload">
         </filtering-component>
       </div>
       <div id="drop-area">
         <div id="top-search-wrap">
-          <i id="top-search-close" data-ng-click="vm.toggleSearchState()">&times;</i>
+          <i id="top-search-close" data-ng-click="sharedSpaceListVm.toggleSearchState()">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-                 placeholder="Nom de fichier" ng-change="updateParams()" ng-model="vm.paramFilter['name']"
+                 placeholder="Nom de fichier" ng-change="updateParams()" ng-model="sharedSpaceListVm.paramFilter['name']"
                  aria-invalid="false">
         </div>
-        <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
-             data-ng-class="{'showMultiMenu': vm.selectedDocuments.length > 0}">
-          <div class="toogleCkeckboxToolbar"
-               ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())">
-            <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]"
+        <div id="selection-actions" class="default-multi-toolbar-state multi-btns"
+             data-ng-class="{'show-multi-menu': sharedSpaceListVm.selectedDocuments.length > 0}">
+          <div class="toggle-checkbox-toolbar"
+               ng-click="sharedSpaceListVm.selectDocumentsOnCurrentPage(sharedSpaceListVm.tableParams.data, sharedSpaceListVm.tableParams.page())">
+            <a ng-if="!sharedSpaceListVm.flagsOnSelectedPages[sharedSpaceListVm.tableParams.page()]"
                class="select-all-items plain-txt-btn ng-scope">
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
-            <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]"
+            <a ng-if="sharedSpaceListVm.flagsOnSelectedPages[sharedSpaceListVm.tableParams.page()]"
                class="select-all-items plain-txt-btn ng-scope">
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
-          <div class="exit-selection" ng-click="vm.resetSelectedDocuments()"
+          <div class="exit-selection" ng-click="sharedSpaceListVm.resetSelectedDocuments()"
                title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
             <i class="zmdi zmdi-close"></i>
           </div>
           <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
-            <div class="pull-left" data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
-                 ng-click="activeBtnShowSelection = !activeBtnShowSelection; vm.toggleFilterBySelectedFiles()">
-              <p><span>{{vm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" |
+            <div class="pull-left" data-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
+                 ng-click="activeBtnShowSelection = !activeBtnShowSelection; sharedSpaceListVm.toggleFilterBySelectedFiles()">
+              <p><span>{{sharedSpaceListVm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" |
                 translate}}</p>
               <div class="pull-left view-icons-ctn groups-view">
                 <i class="fa fa-eye-slash" aria-hidden="true"
@@ -239,50 +248,50 @@
                 <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
               </div>
             </div>
-            <div class="pull-left view-icons-ctn reset-icon" ng-click="vm.resetSelectedDocuments()">
+            <div class="pull-left view-icons-ctn reset-icon" ng-click="sharedSpaceListVm.resetSelectedDocuments()">
               <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
-              <span ng-class="{'hide': vm.selectedDocuments.length > 1}">
+              <span ng-class="{'hide': sharedSpaceListVm.selectedDocuments.length > 1}">
                   <a
-                    ng-href="{{linshareBaseUrl}}/work_groups/{{vm.uuid}}/entries/{{vm.selectedDocuments[0].uuid}}/download"
+                    ng-href="{{linshareBaseUrl}}/work_groups/{{sharedSpaceListVm.uuid}}/entries/{{sharedSpaceListVm.selectedDocuments[0].uuid}}/download"
                     event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                     <i class="zmdi zmdi-download"></i>
                     <span>{{'ACTION.DOWNLOAD' | translate}}</span>
                   </a>
               </span>
-            <span ng-if="vm.selectedDocuments.length > 1">
-              <a class="plain-txt-btn" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
-                 ng-click="vm.unavailableMultiDownload()">
+            <span ng-if="sharedSpaceListVm.selectedDocuments.length > 1">
+              <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
+                 ng-click="sharedSpaceListVm.unavailableMultiDownload()">
                 <i class="zmdi zmdi-download"></i>
                 <span>{{'DOWNLOAD' | translate}}</span>
               </a>
             </span>
             <span>
-                <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
-                   ng-click="vm.deleteDocuments(vm.selectedDocuments)">
+                <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+                   ng-click="sharedSpaceListVm.deleteDocuments(sharedSpaceListVm.selectedDocuments)">
                   <i class="zmdi zmdi-delete"></i>
                   <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
                 </a>
               </span>
             <span ng-show="linshareModeProduction == false">
-                <a class="plain-txt-btn partage-link" title=" {{'ACTION.MOVE' | translate}}">
+                <a class="plain-text-button share-link" title=" {{'ACTION.MOVE' | translate}}">
                   <i class="zmdi zmdi-arrows"></i>
                   <span> {{'ACTION.MOVE' | translate}}</span>
                 </a>
               </span>
             <span class="dropdown link-dropdown" uib-dropdown
-                  ng-show="(linshareModeProduction == false) || (vm.selectedDocuments.length == 1)">
-                <a class="plain-txt-btn partage-link"
+                  ng-show="(linshareModeProduction == false) || (sharedSpaceListVm.selectedDocuments.length == 1)">
+                <a class="plain-text-button share-link"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
                     uib-dropdown-menu="">
-                  <li class="hidden-xs" data-ng-show="vm.selectedDocuments.length == 1"
-                      ng-click="vm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;">
+                  <li class="hidden-xs" data-ng-show="sharedSpaceListVm.selectedDocuments.length == 1"
+                      ng-click="sharedSpaceListVm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;">
                     <a href="">
                       <i class="zmdi zmdi-info-outline "></i>
                       {{'ACTION.INFORMATION' | translate}}
@@ -295,14 +304,14 @@
                     </a>
                   </li>
                   <li class="divider"></li>
-                  <li ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1">
+                  <li ng-if="linshareModeProduction == false" ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
                     <a href="" event-propagation-stop>
                       <i class="zmdi zmdi-time-restore"></i>
                       {{'ACTION.VIEW_VERSIONING' | translate}}
                     </a>
                   </li>
                   <li class="divider"
-                      ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1"></li>
+                      ng-if="linshareModeProduction == false" ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
                   <li ng-show="linshareModeProduction == false">
                     <a href="" event-propagation-stop>
                       <i class="zmdi zmdi-lock"></i>
@@ -316,9 +325,9 @@
                     </a>
                   </li>
                   <li class="divider" ng-if="linshareModeProduction == false"
-                      ng-show="vm.selectedDocuments.length == 1"></li>
-                  <li ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1">
-                    <a ng-click="vm.selectedDocuments[0].type ? vm.renameItem(vm.selectedDocuments[0]) : vm.renameFolder(vm.selectedDocuments[0], false)">
+                      ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
+                  <li ng-if="linshareModeProduction == false" ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
+                    <a ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0], false)">
                        <i class="zmdi zmdi-border-color"></i>
                        {{'ACTION.RENAME' | translate}}
                     </a>
@@ -344,8 +353,8 @@
               </span>
           </div>
         </div>
-        <div class="drag-n-Drop-ctn reset-content-width hidden-xs">
-          <div class="drag-n-drop-content">
+        <div class="drag-and-drop-ctn reset-content-width hidden-xs">
+          <div class="drag-and-drop-content">
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
               <img src="images/upload-dnd-grey.png">
@@ -355,13 +364,13 @@
           </div>
         </div>
         <script type="text/ng-template" id="checkboxheader.html">
-          <span ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())"
+          <span ng-click="sharedSpaceListVm.selectDocumentsOnCurrentPage(sharedSpaceListVm.tableParams.data, sharedSpaceListVm.tableParams.page())"
                 role="button" tabindex="0" style="display:block">
-              <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]"
-                 class="select-all-items plain-txt-btn ng-scope checkbox-ctn">
+              <a ng-if="!sharedSpaceListVm.flagsOnSelectedPages[sharedSpaceListVm.tableParams.page()]"
+                 class="select-all-items plain-text-button ng-scope checkboxCtn">
                 <i class="fa fa fa-square-o checkbox-table"></i>
               </a>
-              <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn ng-scope">
+              <a ng-if="sharedSpaceListVm.flagsOnSelectedPages[sharedSpaceListVm.tableParams.page()]" class="select-all-items plain-text-button ng-scope">
                 <i class="fa fa-check-square-o"></i>
               </a>
             </span>
@@ -372,21 +381,21 @@
         <!-- DOCUMENTS LIST  -->
         <div class="card-body">
           <div class="table-responsive">
-            <table id="file-list-table" class="table table-vmiddle" data-ng-table="vm.tableParams"
+            <table id="file-list-table" class="table table-vmiddle" data-ng-table="sharedSpaceListVm.tableParams"
                    show-filter="true" ng-class=" {'col-4-table' : linshareModeProduction == false }">
               <tr data-ng-repeat="documentFile in $data" ls-item-selection="{{documentFile.type ? 'file' : null}}"
                   role="listitem"
-                  data-selected-documents="vm.selectedDocuments"
+                  data-selected-documents="sharedSpaceListVm.selectedDocuments"
                   data-document-file="documentFile"
-                  data-current-selected-document="vm.currentSelectedDocument"
-                  data-details-function="vm.getDetails"
+                  data-current-selected-document="sharedSpaceListVm.currentSelectedDocument"
+                  data-details-function="sharedSpaceListVm.getDetails"
                   data-right-sidebar-open="mactrl.sidebarToggle.right"
                   ng-click="backToSidebarContentDetails()"
-                  data-ng-class="{'highlightListElem': documentFile.isSelected ,
-                   'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid }"
+                  data-ng-class="{'highlight-list-elem': documentFile.isSelected ,
+                   'current-vis': sharedSpaceListVm.currentSelectedDocument.current.uuid === documentFile.uuid }"
                   class="p-b-5"
                   context-menu="moreOptionsContexualMenu"
-                  ng-dblclick="!documentFile.type ? vm.goToSharedSpaceFolderTarget(vm.uuid, vm.name, documentFile.parent, documentFile.uuid, documentFile.name, false) : null"
+                  ng-dblclick="!documentFile.type ? sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, documentFile.parent, documentFile.uuid, documentFile.name, false) : null"
                   new-upload-anim>
                 <td data-header="'favoritsheader.html'"
                     ng-if="linshareModeProduction == false"
@@ -401,7 +410,7 @@
                 <td data-header="'checkboxheader.html'"
                     class="set-content-left thumb-type-item thumb-groups-preview-ls"
                     header-class="'col-2'">
-                  <a class="" ng-click="vm.addSelectedDocument(documentFile)">
+                  <a class="" ng-click="sharedSpaceListVm.addSelectedDocument(documentFile)">
                     <i ng-if="documentFile.type" class="fa" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
                     <i ng-if="!documentFile.type" class="groups-folder">
                       <span class="path1"></span><span class="path2"></span>
@@ -418,7 +427,7 @@
                   <div class="ctn-name-actions">
                       <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                         <span class="file-name-disp single-line" spellcheck="false" contenteditable="false"
-                              ng-click="!documentFile.type ? vm.goToSharedSpaceFolderTarget(vm.uuid, vm.name, documentFile.parent, documentFile.uuid, documentFile.name, false) : null">{{documentFile.name}}</span>
+                              ng-click="!documentFile.type ? sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, documentFile.parent, documentFile.uuid, documentFile.name, false) : null">{{documentFile.name}}</span>
                         <span>
                           <span ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
                           {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
@@ -438,7 +447,7 @@
                           ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
                           )}">
                           <li
-                            ng-click="vm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;"
+                            ng-click="sharedSpaceListVm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;"
                             class="set-col-6">
                             <a href=""
                                title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
@@ -448,13 +457,13 @@
                           </li>
                           <li class="hidden-xs">
                             <a
-                              ng-href="{{linshareBaseUrl}}/work_groups/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
+                              ng-href="{{linshareBaseUrl}}/work_groups/{{sharedSpaceListVm.uuid}}/entries/{{documentFile.uuid}}/download"
                               event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                               <i class="zmdi zmdi-download"></i>
                             </a>
                           </li>
                           <li class="hidden-xs">
-                            <a href="" ng-click="vm.deleteDocuments(documentFile)"
+                            <a href="" ng-click="sharedSpaceListVm.deleteDocuments(documentFile)"
                                title="{{'ACTION.DELETE' | translate}}">
                               <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </a>
@@ -468,7 +477,7 @@
                             <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
                                 uib-dropdown-menu="">
                               <li class="hidden-xs"
-                                  ng-click="vm.loadSidebarContent('workgroup-detail-file');
+                                  ng-click="sharedSpaceListVm.loadSidebarContent('workgroup-detail-file');
                                    mactrl.sidebarToggle.right = true;">
                                 <a href="">
                                   <i class="zmdi zmdi-info-outline "></i>
@@ -490,7 +499,7 @@
                               <li class="divider"></li>
                               <li class="hidden-xs" ng-show="linshareModeProduction == false">
                                 <a
-                                  ng-href="{{linshareBaseUrl}}/work_groups/{{vm.uuid}}/entries/{{documentFile.uuid}}/download"
+                                  ng-href="{{linshareBaseUrl}}/work_groups/{{sharedSpaceListVm.uuid}}/entries/{{documentFile.uuid}}/download"
                                   event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
                                   {{'ACTION.DOWNLOAD' | translate}}
@@ -511,7 +520,7 @@
                               <li class="divider"></li>
                               <li>
                                 <a
-                                  ng-click="documentFile.type ? vm.renameItem(documentFile) : vm.renameFolder(documentFile, false)">
+                                  ng-click="documentFile.type ? sharedSpaceListVm.renameItem(documentFile) : sharedSpaceListVm.renameFolder(documentFile, false)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
                                 </a>
@@ -526,7 +535,7 @@
                                 <ul>
                                   <li><a href="#"><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}} </a></li>
                                     <li ng-show="linshareModeProduction == false">
-                                      <a href="" ng-click="vm.copy(documentFile.uuid)">
+                                      <a href="" ng-click="sharedSpaceListVm.copy(documentFile.uuid)">
                                         <i class="fa fa-files-o"></i>
                                         {{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}
                                       </a>
@@ -547,7 +556,7 @@
                               </li>
                               <li class="divider"></li>
                               <li>
-                                <a href="" ng-click="vm.deleteDocuments(documentFile)">
+                                <a href="" ng-click="sharedSpaceListVm.deleteDocuments(documentFile)">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                   {{'ACTION.DELETE' | translate}}
                                 </a>
@@ -656,15 +665,15 @@
   </div>
 </div>
 <section class="row multi-select-mobile visible-xs"
-         data-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
-         ng-show="vm.currentPage == 'group_list_files'">
+         data-ng-class="{'showMobileMultiMenu': sharedSpaceListVm.selectedDocuments.length > 0}"
+         ng-show="sharedSpaceListVm.currentPage == 'group_list_files'">
   <div class="col-xs-2 ctn-mobile-select-count">
-    <span class="numberOfiles">{{vm.selectedDocuments.length}}</span>
+    <span class="number-of-files">{{sharedSpaceListVm.selectedDocuments.length}}</span>
     <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.ELEMENTS' | translate}}</span>
   </div>
   <div class="col-xs-8">
     <i class="zmdi zmdi-download col-xs-3"></i>
-    <i class="zmdi zmdi-delete col-xs-3" ng-click="vm.deleteDocuments(vm.selectedDocuments)"></i>
+    <i class="zmdi zmdi-delete col-xs-3" ng-click="sharedSpaceListVm.deleteDocuments(sharedSpaceListVm.selectedDocuments)"></i>
     <i class="zmdi zmdi-arrows col-xs-3 disabled-work-in-progress"
        ng-show="linshareModeProduction == false"></i>
     <span class="dropdown col-xs-3" uib-dropdown="" ng-show="linshareModeProduction == false">
@@ -673,8 +682,8 @@
            dropdown-toggle uib-dropdown-toggle=""></i>
        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
            uib-dropdown-menu="">
-        <li class="hidden-xs" data-ng-show="vm.selectedDocuments.length == 1"
-            ng-click="vm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;">
+        <li class="hidden-xs" data-ng-show="sharedSpaceListVm.selectedDocuments.length == 1"
+            ng-click="sharedSpaceListVm.loadSidebarContent('workgroup-detail-file'); mactrl.sidebarToggle.right = true;">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-info-outline "></i>
           {{'ACTION.INFORMATION' | translate}}
@@ -687,13 +696,13 @@
           </a>
         </li>
         <li class="divider"></li>
-        <li ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1">
+        <li ng-if="linshareModeProduction == false" ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-time-restore"></i>
           {{'ACTION.VIEW_VERSIONING' | translate}}
           </a>
         </li>
-        <li class="divider" ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1"></li>
+        <li class="divider" ng-if="linshareModeProduction == false" ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
         <li ng-show="linshareModeProduction == false">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-lock"></i>
@@ -706,10 +715,10 @@
           {{'ACTION.EXTERNAL_EDIT' | translate}}
           </a>
         </li>
-        <li class="divider" ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1"></li>
-        <li ng-if="linshareModeProduction == false" ng-show="vm.selectedDocuments.length == 1">
+        <li class="divider" ng-if="linshareModeProduction == false" ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
+        <li ng-if="linshareModeProduction == false" ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
           <a
-            ng-click="vm.selectedDocuments[0].type ? vm.renameItem(vm.selectedDocuments[0]) : vm.renameFolder(vm.selectedDocuments[0], false)">
+            ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0], false)">
           <i class="zmdi zmdi-border-color"></i>
           {{'ACTION.RENAME' | translate}}
           </a>
@@ -727,7 +736,7 @@
       </ul>
       </span>
   </div>
-  <div class="col-xs-1 pull-right" ng-click="vm.resetSelectedDocuments()">
+  <div class="col-xs-1 pull-right" ng-click="sharedSpaceListVm.resetSelectedDocuments()">
     <i class="zmdi zmdi zmdi-close"></i>
   </div>
 </section>

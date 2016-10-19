@@ -34,7 +34,7 @@
                   </div>
                 </a>
                 <a uib-dropdown-toggle href=""><i class="tm-icon icon-transfert"></i>
-                  <i class="tm-icon icon-transfert" id="newUploadIcon"></i>
+                  <i class="tm-icon icon-transfert" id="newUploadIcon" new-upload-bounce></i>
                 </a>
                 <div class="dropdown-menu pull-right dropdown-menu-lg action-link" uib-dropdown-menu>
                   <div class="listview">
@@ -43,54 +43,8 @@
                         <md-content>
                           <md-tabs md-dynamic-height="" md-border-bottom="">
                             <md-tab label="{{'TRANSFERS_DROPDOWN.UPLOADS' | translate}}">
-                              <md-content class="md-padding">
-                                <div class="lv-item row" x-ng-repeat="file in $flow.files | orderBy: '-'">
-                                    <a class="col-xs-10 p-0" ui-sref="documents.upload({idUpload: file.uniqueIdentifier})">
-                                      <div class="lv-title p-0">
-                                        <div class="p-0 file-name">
-                                          <span>{{file.name}}</span>
-                                        </div>
-                                        <div class="p-0 secondary-info-ctn">
-                                          <span class="secondary-info-text">{{file.size | readableSize: false}}</span>
-                                        </div>
-                                      </div>
-                                        <p ng-hide="file.isComplete() || file.paused" class="time-remaining">
-                                          {{file.timeRemaining() | remainingTime}}
-                                        </p>
-                                        <p ng-show="file.isComplete()" class="time-remaining">
-                                          {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
-                                        </p>
-                                        <p ng-show="file.paused && !file.isComplete()" class="time-remaining">
-                                          {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate }}
-                                        </p>
-                                      <div class="progress">)
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
-                                          <span class="sr-only">100% Complete (success)</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="col-xs-2 p-0">
-                                      <ul class="lv-actions actions alignListIcons">
-                                        <li class="col-xs-12" x-ng-show="!file.isComplete()">
-                                          <a href="" ng-click="file.cancel()">
-                                            <i class="zmdi zmdi-close"></i>
-                                          </a>
-                                        </li>
-                                        <li class="col-xs-12" x-ng-if="file.isComplete() && !file.error">
-                                          <a href="" ng-click="file.cancel()">
-                                            <i class="zmdi zmdi zmdi-check"></i>
-                                          </a>
-                                        </li>
-                                        <li class="col-xs-12" x-ng-if="file.error">
-                                          <a href="" ng-click="file.retry()">
-                                            <i class="zmdi zmdi-replay"></i>
-                                          </a>
-                                        </li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                                 </md-content>
+                              <md-content class="md-padding" upload-popup-files="{{ mySpacePage }}"></md-content>
+                              <md-content class="md-padding" upload-popup-files="{{ workgroupPage }}"></md-content>
                               <a class="lv-footer"
                                  ui-sref="documents.upload"
                                  href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>

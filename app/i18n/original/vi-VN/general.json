@@ -77,6 +77,7 @@
     "FULL_SCREEN": "Toàn màn hình",
     "CLEAR_LOCAL_STORAGE": "Xóa Local Storage",
     "TBT__NO_SHARES": "",
+    "TBT__FILES_TO_SHARE": "",
     "UPLOAD_PROGRESS": {
       "TITLE": "QUá trình tải lên",
       "UPLOAD_DONE": "xong",
@@ -159,6 +160,11 @@
     "SHARE": "Chia sẻ",
     "COPY": "Sao chép",
     "DELETE": "Xóa",
+    "TBT__DELETE_ALL": "",
+    "TBT__CANCEL": "",
+    "TBT__CANCEL_ALL": "",
+    "TBT__RETRY": "",
+    "TBT__RETRY_ALL": "",
     "TBT__ELEMENTS": "",
     "TBT__ORDER_BY": ""
   },
@@ -186,13 +192,13 @@
   "WORK_IN_PROGRESS_MSG": "ĐANG HOÀN THIỆN"
   },
   "TBT__INFORMATION_TAB" : {
-    "TITLE": "",
-    "UPTADED_THE": "",
-    "META_DATA": "",
+    "TBT__TITLE": "",
+    "TBT__UPTADED_THE": "",
+    "TBT__META_DATA": "",
     "INSERT_DESCRIPTION": "n",
-    "CREATED_THE": "",
-    "VERSION_HISTORIQUE": "",
-    "VERSIONS": "",
+    "TBT__CREATED_THE": "",
+    "TBT__VERSION_HISTORIQUE": "",
+    "TBT__VERSIONS": "",
     "TBT__EDIT_DESCRIPTION": "",
     "TBT__ABORT_EDIT": ""
   },

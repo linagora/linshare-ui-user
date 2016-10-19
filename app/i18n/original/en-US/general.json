@@ -81,6 +81,7 @@
     "FULL_SCREEN": "Full screen",
     "CLEAR_LOCAL_STORAGE": "Clear Local Storage",
     "NO_SHARES": "You currently haven no shares.",
+    "FILES_TO_SHARE": "Files are destinated to share",
     "UPLOAD_PROGRESS": {
       "TITLE": "Upload progress",
       "UPLOAD_DONE": "done",
@@ -173,6 +174,9 @@
     "SHARE": "Share",
     "COPY": "Copy",
     "DELETE": "Delete",
+    "DELETE_ALL": "Delete all",
+    "CANCEL": "Cancel",
+    "CANCEL_ALL": "Cancel all",
     "RESET": "Reset",
     "FILES": "Files",
     "ELEMENTS": "Elements",
@@ -183,7 +187,8 @@
     "CLEAR_ALL": "Clear all",
     "CLEAR": "Clear",
     "PLAY": "Play",
-    "REPLAY": "Replay",
+    "RETRY": "Retry",
+    "RETRY_ALL": "Retry all",
     "STOP": "Stop",
     "ORDER_BY": "Order by"
   },

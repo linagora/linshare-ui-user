@@ -77,7 +77,9 @@ angular.module('linshareUiUserApp')
     Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
       switch (response.status) {
         case 400:
-          if(response.data.errCode != 26006) growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
+          if(response.data.errCode !== 26006) {
+            growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
+          }
           $log.debug('Error ' + response.status, response);
           break;
         case 404:
@@ -122,7 +124,6 @@ angular.module('linshareUiUserApp')
     });
 
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
-      $log.debug('routechangestart', toState, 'my event', evt, 'toParams', toParams, 'fromState', fromState);
       $rootScope.toState = toState.name;
       $rootScope.fromState = fromState.name;
     });

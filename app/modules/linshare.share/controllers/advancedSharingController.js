@@ -19,7 +19,7 @@ angular.module('linshare.share')
       if(now) {
         LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
-          $scope.$emit('linshare-upload-complete');
+          $scope.$emit('linshare-share-done');
           $scope.mactrl.sidebarToggle.right = false;
           angular.element('tr').removeClass('info');
           $scope.initSelectedDocuments();
@@ -264,11 +264,11 @@ angular.module('linshare.share')
     $scope.showBtnList = function($event) {
       var showBtnListElem = $event.currentTarget;
       if(angular.element(showBtnListElem).hasClass('activeShowMore')) {
-        angular.element(showBtnListElem).parent().prev().find('div').first().removeClass('dataListSlideToggle');
+        angular.element(showBtnListElem).parent().prev().find('div').first().removeClass('data-list-slide-toggle');
         angular.element(showBtnListElem).removeClass('activeShowMore');
         angular.element(showBtnListElem).css('display:none !important;');
       } else {
-        angular.element(showBtnListElem).addClass('activeShowMore').parent().prev().find('div').first().addClass('dataListSlideToggle');
+        angular.element(showBtnListElem).addClass('activeShowMore').parent().prev().find('div').first().addClass('data-list-slide-toggle');
       }
     };
 
@@ -279,14 +279,14 @@ angular.module('linshare.share')
       if(n.status === true) {
         var numItems = angular.element('.media-body').length;
 
-        angular.element('.media-body').addClass('highlightListElem');
+        angular.element('.media-body').addClass('highlight-list-elem');
 
         $scope.numSelectedItems.length = numItems;
       }
       else {
         if(n.origin !== 'directive') {
 
-          angular.element('.media-body').removeClass('highlightListElem');
+          angular.element('.media-body').removeClass('highlight-list-elem');
           $scope.numSelectedItems.pop($scope.numSelectedItems.length);
         }
       }
@@ -299,11 +299,11 @@ angular.module('linshare.share')
       /*jshint unused:false */
       angular.element('.media-body').each(function(index) {
         if(angular.element(this).hasClass('partage' + numIndex)) {
-          angular.element(this).addClass('highlightListElem');
+          angular.element(this).addClass('highlight-list-elem');
         }
       });
       $scope.numSelectedItems.length = angular.element('.partage' + numIndex + '').length;
-      angular.element('#selection-actions').addClass('showMultiMenu');
+      angular.element('#selection-actions').addClass('show-multi-menu');
       $scope.currentSharingIndex = numIndex;
       $scope.isUpdate = true;
     };
@@ -327,7 +327,7 @@ angular.module('linshare.share')
       /*jshint unused:false */
       angular.element('.media-body').each(function(index) {
         angular.element(this).removeClass('partage' + $scope.numberOfSharings);
-        if(angular.element(this).hasClass('highlightListElem')) {
+        if(angular.element(this).hasClass('highlight-list-elem')) {
           if(!$scope.isUpdate) {
             angular.element(this).addClass('partage' + $scope.numberOfSharings);
           } else {
@@ -350,15 +350,15 @@ angular.module('linshare.share')
       $scope.isUpdate = false;
     });
     // if share link has been clicked show quishare here
-    angular.element('.partage-link').click(function() {
+    angular.element('.share-link').click(function() {
       $scope.$apply(function() {
         $scope.isCurrentPartage = true;
       });
     });
     // if closure of multiselect reset state
     $scope.closeMultiSelectMenu = function() {
-      angular.element('#selection-actions').removeClass('showMultiMenu');
-      angular.element('.media-body').removeClass('highlightListElem');
+      angular.element('#selection-actions').removeClass('show-multi-menu');
+      angular.element('.media-body').removeClass('highlight-list-elem');
     };
 
     $scope.currentSharingIndex = 0;

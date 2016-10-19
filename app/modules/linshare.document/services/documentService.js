@@ -5,9 +5,9 @@
 'use strict';
 
 angular.module('linshare.document')
-  .factory('documentUtilsService', documentService);
+  .factory('documentUtilsService', documentUtilsService);
 
-function documentService($translate, growlService, $log, $timeout, $q) {
+function documentUtilsService($translate, growlService, $log, $timeout, $q) {
   var swalTitle, swalText, swalConfirm, swalCancel;
   $timeout(function() {
     $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
@@ -18,7 +18,7 @@ function documentService($translate, growlService, $log, $timeout, $q) {
         swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
         swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
       });
-  },0);
+  }, 0);
 
   return {
     downloadFileFromResponse: downloadFileFromResponse,

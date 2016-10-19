@@ -194,7 +194,7 @@
                  aria-invalid="false" x-ng-focus="searchMobileDropdown === true">
         </div>
         <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
-             data-ng-class="{'showMultiMenu': guestListVm.selectedDocuments.length > 0}">
+             data-ng-class="{'show-multi-menu': guestListVm.selectedDocuments.length > 0}">
           <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->
           <div class="toogleCkeckboxToolbar" x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
             <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope" >

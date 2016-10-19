@@ -25,7 +25,7 @@
 
     </div>
 <div id="drop-area" >
-    <div class="infoPartager">
+    <div class="info-share">
       <p><i  class="fa fa-info"></i> Sélectionnez des fichiers si vous souhaitez les partager</p>
     </div>
   <div id="selection-actions" style="display: block;" ng-init="isAllSelected.status = false">
@@ -35,7 +35,7 @@
     <div class="display-num-selected-items"><span>{{numSelectedItems.length}}</span> Items Selectionnés </div>
     <div id="toolbar-actions">
        <span ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
-         <a class="select-all-items plain-txt-btn">
+         <a class="select-all-items plain-text-button">
            <i ng-show="isAllSelected.status"  class="fa fa-square-o"></i>
            <span ng-show="isAllSelected.status">Tout désélectionner</span>
            <i ng-show="!isAllSelected.status" class="fa fa-check-square-o"></i>
@@ -43,15 +43,14 @@
          </a>
        </span>
       <span>
-        <!--<a class="plain-txt-btn partage-link" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >-->
+        <!--<a class="plain-text-button share-link" ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >-->
         <!--<i class="zmdi zmdi-share"></i><span>Partager</span></a>-->
-      <a class="plain-txt-btn partage-link" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" href=""
+      <a class="plain-text-button share-link" ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" href=""
          ng-click="onShare(); mactrl.sidebarToggle.right = true;"><i class="zmdi zmdi-share"></i><span>{{'ACTION.SHARE' | translate}}</span></a></span>
     </div>
   </div>
-
-  <div class="drag-n-Drop-ctn reset-content-width">
-    <div class="drag-n-drop-content">
+  <div class="drag-and-drop-ctn reset-content-width">
+    <div class="drag-and-drop-content">
       <div class="drag-icon-ctn ">
         <div class="bordered-circle">&nbsp;</div>
         <img src="images/upload-dnd-grey.png">
@@ -60,21 +59,21 @@
     <p>Cliquez ou glissez-déposez vos fichiers dans l'interface pour les importer.</p>
   </div>
   </div>
-  <div id="transfert-ctn" class="transfertCtnWhite selectableList" flow-prevent-drop>
+  <div id="transfert-ctn" class="transfert-ctn-white selectable-list" flow-prevent-drop>
     <div class="card col-sm-12 col-xs-11 col-centered">
-      <div class="listview lv-bordered lv-lg" id="listFilesView">
-        <div class="lv-header-alt clearfix" style="display:none">
+      <div class="listview lv-bordered lv-lg" id="list-files-view">
+        <div class="lv-header-alt clearfix display-none">
           <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
         </div>
         <div class="lv-body">
           <div class="media-body" ng-repeat="file in share_array[id].flowObjectFiles.files" upload-box-selection>
-            <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
-              <div class="col-xs-24 col-sm-12 animLeft no-padding">
+            <div class="col-xs-10 col-sm-12 overflow-hidden">
+              <div class="col-xs-24 col-sm-12 anim-left no-padding">
                 <div class="col-xs-7 col-sm-11 pull-left">
-                  <div class="previewIconCtn pull-left hidden-v-xs">
+                  <div class="preview-icon-ctn pull-left hidden-v-xs">
                     <p class="img-circle">{{file.getExtension()  | uppercase }}</p>
                   </div>
-                  <div class="pull-left dataListCtn">
+                  <div class="pull-left data-list-ctn">
                     <div class="lv-title">{{file.name}}</div>
                     <small class="lv-small pull-left">{{file.timeRemaining() | remainingTime }}</small>
                     <small class="lv-small pull-right">{{file.size | readableSize: false}}</small>
@@ -83,7 +82,7 @@
                   </div>
                 </div>
                 <div class="col-xs-5 col-sm-1 pull-left">
-                  <ul class="lv-actions actions alignListIcons ">
+                  <ul class="lv-actions actions align-list-icons ">
                     <li class="col-xs-6" x-ng-if="!file.paused" x-ng-hide="file.isComplete()">
                       <a href="" ng-click="file.pause()">
                         <i class="zmdi zmdi-pause"></i>
@@ -114,7 +113,7 @@
               </div>
             </div>
             <div class="col-xs-2 visible-xs">
-              <ul class="lv-actions actions alignListIcons " ng-click="showBtnList($event)">
+              <ul class="lv-actions actions align-list-icons " ng-click="showBtnList($event)">
                 <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
               </ul>
             </div>

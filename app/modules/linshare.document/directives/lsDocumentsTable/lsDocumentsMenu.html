@@ -1,0 +1,66 @@
+<span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
+  <ul class="actions pull-right" data-ng-class=
+    "{ 'openr': (mactrl.sidebarToggle.right === true) &&
+    ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
+    )}">
+    <li data-ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop
+        class="hidden-action-links">
+      <a href=""
+         title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
+        <i class="zmdi zmdi-info-outline"></i>
+      </a>
+    </li>
+    <li class="hidden-xs hidden-action-links"
+        data-ng-click="onShare(documentFile); mactrl.sidebarToggle.right = true;">
+      <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true">
+        <i class="zmdi zmdi-share"></i>
+      </a>
+    </li>
+    <li class="hidden-xs hidden-action-links">
+      <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+         title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
+        <i class="zmdi zmdi-download"></i>
+      </a>
+    </li>
+    <li uib-dropdown dropdown-append-to-body class="dropdown  set-col-6 no-padding hidden-xs"
+        auto-close="always" hover-dropdown-fix>
+      <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
+         event-propagation-stop>
+        <i class="zmdi zmdi-more-vert"></i>
+      </a>
+
+      <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided">
+         <li>
+          <a href="" ls-share-modal event-propagation-stop>
+            <i class="zmdi zmdi-share"></i>
+            {{'ACTION.SHARE' | translate}}</a>
+        </li>
+        <li>
+          <a href="" data-ng-click="deleteDocuments(documentFile)">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            {{'ACTION.DELETE' | translate}}</a>
+        </li>
+        <li>
+          <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+             event-propagation-stop>
+            <i class="zmdi zmdi-download"></i>
+            {{'ACTION.DOWNLOAD' | translate}}
+          </a>
+        </li>
+        <li data-ng-click="showCurrentFile(documentFile,$event)">
+          <a href="">
+            <i class="zmdi zmdi-info-outline "></i>
+            {{'ACTION.INFORMATION' | translate}}
+          </a>
+        </li>
+         <li ng-show="linshareModeProduction == false">
+          <a href="" ng-click="" event-propagation-stop>
+            <i class="zmdi zmdi-copy"></i>
+            {{'ACTION.COPY_TO' | translate}}
+          </a>
+        </li>
+      </ul>
+
+    </li>
+  </ul>
+</span>

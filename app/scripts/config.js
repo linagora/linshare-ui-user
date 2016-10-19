@@ -10,5 +10,7 @@ angular.module('linshareUiUserApp')
     date_en_format : 'MM/dd/yyyy',
     simultaneous_upload: 1,
     devMode: true,
-    production: false
+    production: false,
+    mySpacePage: 'myspace',
+    workgroupPage: 'workgroup'
 });

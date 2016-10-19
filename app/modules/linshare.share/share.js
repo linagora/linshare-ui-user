@@ -23,14 +23,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       link: function(scope, elm) {
         function checkifMultiMenuVisible() {
           if(scope.numSelectedItems.length === 0) {
-            angular.element('#selection-actions').addClass('showMultiMenu');
+            angular.element('#selection-actions').addClass('show-multi-menu');
           }
         }
 
         elm.bind('click', function() {
           var numItems = angular.element('.media-body').length;
-          var isCurrentlySelected = elm.hasClass('highlightListElem');
-          elm.toggleClass('highlightListElem', 'removeListElem');
+          var isCurrentlySelected = elm.hasClass('highlight-list-elem');
+          elm.toggleClass('highlight-list-elem', 'removeListElem');
           checkifMultiMenuVisible();
 
           if(scope.isAllSelected.status === true) {
@@ -48,14 +48,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
               scope.numSelectedItems.push(1);
               var numSelectedItems = scope.numSelectedItems.length;
               if(numSelectedItems === numItems) {
-                elm.addClass('highlightListElem');
+                elm.addClass('highlight-list-elem');
                 scope.isAllSelected.status = true;
               }
             });
           }
 
           if(numItems === 0) {
-            angular.element('.drag-n-Drop-ctn').removeClass('outOfFocus');
+            angular.element('.drag-and-drop-ctn').removeClass('out-of-focus');
           }
         });
 
@@ -68,8 +68,8 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           scope.$apply(function() {
             scope.numSelectedItems.pop(scope.numSelectedItems.length);
           });
-          angular.element('#selection-actions').removeClass('showMultiMenu');
-          angular.element('.media-body').removeClass('highlightListElem');
+          angular.element('#selection-actions').removeClass('show-multi-menu');
+          angular.element('.media-body').removeClass('highlight-list-elem');
         };
       }
     };

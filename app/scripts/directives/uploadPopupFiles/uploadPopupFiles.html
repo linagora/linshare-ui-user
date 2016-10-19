@@ -1,0 +1,49 @@
+<md-list-item style="color: #0683bb; font-weight: bold">{{ fromWhere == mySpacePage ? "MENU_TITLE.MY_FILES" : "MENU_TITLE.SHARED_SPACE" | translate }}
+  <md-icon style="width: 40px"><a ng-href="{{$state.href('documents.upload', {from: fromWhere})}}" style="clear: none">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a></md-icon>
+</md-list-item>
+<div class="lv-item row" x-ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere} | limitTo: 3 as filesFilterred">
+  <a class="col-xs-10 p-0" ui-sref="documents.upload({from: fromWhere, idUpload: file.uniqueIdentifier})">
+    <div class="lv-title p-0">
+      <div class="p-0 file-name">
+        <span>{{file.name}}</span>
+      </div>
+      <div class="p-0 secondary-info-ctn">
+        <span class="secondary-info-text">{{file.size | readableSize: false}}</span>
+      </div>
+    </div>
+    <p ng-hide="file.isComplete() || file.paused" class="time-remaining">
+      {{file.timeRemaining() | remainingTime}}
+    </p>
+    <p ng-show="file.isComplete()" class="time-remaining">
+      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
+    </p>
+    <p ng-show="file.paused && !file.isComplete()" class="time-remaining">
+      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate }}
+    </p>
+    <div class="progress">)
+      <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
+           aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
+        <span class="sr-only">100% Complete (success)</span>
+      </div>
+    </div>
+  </a>
+  <div class="col-xs-2 p-0">
+    <ul class="lv-actions actions align-list-icons">
+      <li class="col-xs-12" x-ng-show="!file.isComplete()">
+        <a href="" ng-click="file.cancel()">
+          <i class="zmdi zmdi-close"></i>
+        </a>
+      </li>
+      <li class="col-xs-12" x-ng-if="file.isComplete() && !file.error">
+        <a href="" ng-click="file.cancel()">
+          <i class="zmdi zmdi zmdi-check"></i>
+        </a>
+      </li>
+      <li class="col-xs-12" x-ng-if="file.error">
+        <a href="" ng-click="file.retry()">
+          <i class="zmdi zmdi-replay"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
