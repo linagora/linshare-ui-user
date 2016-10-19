@@ -37,5 +37,19 @@
     "EXPIRATION_DATE" : "Expiration date",
     "EMAIL" : "Email",
     "DOMAIN_NAME" : "Domain name"
+  },
+  "GUEST_DETAILS":{
+    "DETAIL_OF_GUEST_ACCOUNT": "Guest account details",
+    "EDIT_GUEST": "Edit",
+    "EXPIRE_THE": "Expire the",
+    "DOMAIN": "Domain",
+    "ADMIN": "Administrator",
+    "MY_SPACE": "My space",
+    "RESTRICTED_CONTACTS": "Restricted contacts",
+    "ACTIVATED": "Activated",
+    "DEACTIVATED": "Deactivated",
+    "AVAILABLE_CONTACTS": "Available contacts list",
+    "ALREADY_A_MEMBER": "already a member",
+    "JOIN_RESTRICTED_CONTACT_LIST": "Join contacts list"
   }
 }

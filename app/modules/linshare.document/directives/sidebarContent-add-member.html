@@ -1,12 +1,12 @@
 <div id="member-sidebar">
   <div class="header-sidebar">
     <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mactrl.sidebarToggle.right = false" ></i>
-    <h2 class="header-more-options setEllipsis"> {{wkgrpmemberctrl.currentWorkGroup.name}}</h2>
+    <h2 class="header-more-options set-ellipsis"> {{wkgrpmemberctrl.currentWorkGroup.name}}</h2>
     <span class="hidden-xs">
       <i class="zmdi zmdi-close zmdi-hc-lg" ng-click="mactrl.sidebarToggle.right = false"></i>
     </span>
   </div>
-  <div ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
+  <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
     <md-content>
       <md-tabs md-selected="data.selectedIndex" md-dynamic-height="" md-border-bottom="">
         <md-tab id="tab1" ng-if="vm.currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"

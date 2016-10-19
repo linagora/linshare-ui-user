@@ -521,7 +521,6 @@ i.checkDropdownIconContent {
   margin-left: 1.33em;
   margin-top: 0.5em;
   padding-bottom: 0.75em;
-
   .item-l {
     flex: 0 0 43px;
     display: flex;
@@ -539,7 +538,7 @@ i.checkDropdownIconContent {
       display: flex;
       flex: 0 0 100%;
       font-weight: bold;
-      font-size: 1.05em;
+      font-size: 1em;
       margin-bottom: 0.05em;
     }
     .info-item-member {
@@ -598,7 +597,7 @@ i.checkDropdownIconContent {
     padding: 0 1.3em;
     flex-wrap: wrap;
     > div {
-      flex: 1 1 50%;
+      flex: 0 0 50%;
       margin-bottom: 1em;
       p {
         margin: 0;
@@ -609,6 +608,9 @@ i.checkDropdownIconContent {
       }
       p:nth-child(2) {
       }
+    }
+    .custom-list-item{
+      flex: 0 0 45%;
     }
   }
 }
@@ -689,7 +691,7 @@ i.checkDropdownIconContent {
     }
   }
   .edit-description {
-    pointer-events: cursor;
+    cursor: pointer;
     background-color: #fff;
     width: 30px;
     height: 30px;
@@ -698,6 +700,7 @@ i.checkDropdownIconContent {
 
 .detail-info-ctn.flex-ctn {
   margin-left: 0.5em;
+  margin-right: 0.5em;
   .item-r {
     align-items: flex-start;
     font-size: 0.8em;
@@ -1847,7 +1850,7 @@ label.required::before{
 /******
 *****   CLASSES
 ****/
-.setEllipsis {
+.set-ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -2743,7 +2746,6 @@ label.required::before{
       height: 90px !important;
     }
     .title-fab {
-      padding: 0;
       margin: 0;
       font-size: 0.75em;
       padding: 0.5em 0 0.65em 0.7em;
@@ -5900,6 +5902,9 @@ html:not(.ie9) .select::before {
 ** CUSTOM CLASSES
 */
 
+.last-name{
+  text-transform: uppercase;
+}
 body:not(.sw-toggled) #sidebar {
   box-shadow: none;
 }
@@ -7064,4 +7069,49 @@ body:not(.sw-toggled) #sidebar {
       }
     }
   }
+}
+
+#profile-main.detail-guest {
+  .img-preview-ctn{
+    height:200px;
+    background-color: #0b97c4;
+    background-image: url(../images/banner_linshare.jpg);
+    opacity: 1;
+    background-size: cover;
+  }
+  .user-preview-ctn {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 4;
+    .detail-info-ctn.flex-ctn{
+      margin: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      .item-l {
+        flex: 0 0 43px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .first-letter {
+        color: #0070a3;
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        font-size: 3em;
+        background-color: #fff !important;
+      }
+      p {
+        font-size: 1.03em;
+        color: #fff;
+      }
+      p.email{
+        font-size: 0.85em;
+      }
+    }
+  }
+
 }

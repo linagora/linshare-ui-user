@@ -37,6 +37,20 @@
     "EXPIRATION_DATE" : "Date d'expiration",
     "EMAIL" : "Courriel",
     "DOMAIN_NAME" : "Nom de domaine"
+  },
+  "GUEST_DETAILS":{
+    "DETAIL_OF_GUEST_ACCOUNT": "Détail compte invité",
+    "EDIT_GUEST": "Editer",
+    "EXPIRE_THE": "Expire le",
+    "DOMAIN": "Domaine",
+    "ADMIN": "Administrateur",
+    "MY_SPACE": "Espace personnel",
+    "RESTRICTED_CONTACTS": "Contact restreint",
+    "ACTIVATED": "Activé",
+    "DEACTIVATED": "Désactivé",
+    "AVAILABLE_CONTACTS": "Liste de contacts disponible",
+    "ALREADY_A_MEMBER": "Déjà membre",
+    "JOIN_RESTRICTED_CONTACT_LIST": "Rejoindre la liste"
   }
 }
 

@@ -37,5 +37,19 @@
     "TBT__EXPIRATION_DATE" : "",
     "TBT__EMAIL" : "",
     "TBT__DOMAIN_NAME" : ""
+  },
+  "TBT__GUEST_DETAILS":{
+    "TBT__DETAIL_OF_GUEST_ACCOUNT": "",
+    "TBT__EDIT_GUEST": "",
+    "TBT__EXPIRE_THE": "",
+    "TBT__DOMAIN": "",
+    "TBT__ADMIN": "",
+    "TBT__MY_SPACE": "",
+    "TBT__RESTRICTED_CONTACTS": "",
+    "TBT__ACTIVATED": "",
+    "TBT__DEACTIVATED": "",
+    "TBT__AVAILABLE_CONTACTS": "",
+    "TBT__ALREADY_A_MEMBER": "",
+    "TBT__JOIN_RESTRICTED_CONTACT_LIST": ""
   }
 }

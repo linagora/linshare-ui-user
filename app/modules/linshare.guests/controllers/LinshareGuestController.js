@@ -2,6 +2,7 @@
 angular.module('linshare.guests', ['restangular', 'ui.bootstrap', 'linshare.components'])
 
   .controller('LinshareGuestController', function ($scope, $filter, $translatePartialLoader, NgTableParams, $timeout, documentUtilsService) {
+    $scope.sidebarRightDataType = 'guest-sidebar';
     $scope.mactrl.sidebarToggle.right = false;
     var guestList = [
       {
@@ -102,7 +103,7 @@ angular.module('linshare.guests', ['restangular', 'ui.bootstrap', 'linshare.comp
         selectedDoc.isSelected = false;
       });
       guestListVm.selectedDocuments = [];
-    };
+    }
 
     guestListVm.singleEventFab = function ($event) {
       $event.stopPropagation();
@@ -116,6 +117,5 @@ angular.module('linshare.guests', ['restangular', 'ui.bootstrap', 'linshare.comp
       angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });
-    };
-
+    }
   });
