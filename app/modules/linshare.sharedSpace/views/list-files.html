@@ -62,18 +62,18 @@
               <i class="zmdi zmdi-plus"></i>
             </a>
           </div>
-          <div class="breadcrumbsCtn hidden-xs">
+          <div class="breadcrumbs-ctn hidden-xs">
             <a href="" ui-sref="sharedspace.all" class="breadcrumb">
               <i class="zmdi zmdi-file"></i>
               {{ "BREADCRUMB_TITLE_WORKGROUP" | translate }}
             </a>
-            <span ng-repeat-start="folder in vm.breadcrumbFolders" class="subCategorieChevron"><i
+            <span ng-repeat-start="folder in vm.breadcrumbFolders" class="sub-categorie-chevron"><i
               class="zmdi zmdi-chevron-right"></i></span>
             <a ng-repeat-end class="breadcrumb"
                ng-click="vm.goToSharedSpaceFolderTarget(vm.uuid, vm.name, folder.parent, folder.uuid, folder.name, true)">
               {{ folder.name }}
             </a>
-            <span class="subCategorieChevron"><i class="zmdi zmdi-chevron-right"></i></span>
+            <span class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
             <span>
               &nbsp;&nbsp;{{ vm.folderName }}
             </span>
@@ -84,17 +84,17 @@
                    data-ng-click="vm.toggleSearchState()">
                 <a href="" href="javascript:void(0)">
                   <i class="tm-icon zmdi zmdi-search"
-                     ng-class="{'activeLink': searchMobileDropdown }"></i>
+                     ng-class="{'active-link': searchMobileDropdown }"></i>
                 </a>
               </div>
               <span ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())"
                     class="visible-xs toolbar-mobile-item col-xs-3 clickable">
 
-                <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]" class="selectAllItems plainTxtBtn">
+                <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn">
                   <i class="fa fa-square-o"></i>
                 </a>
-                <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="selectAllItems plainTxtBtn">
-                  <i class="fa fa-check-square-o activeLink"></i>
+                <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn">
+                  <i class="fa fa-check-square-o active-link"></i>
                 </a>
                 </span>
 
@@ -108,7 +108,7 @@
                  title="{{'ACTION.GO_TO_TRASH' | translate }}" aria-hidden="false">
                 <i class="fa fa-recycle" aria-hidden="true"></i>
               </a>
-              <div class="sortDropdown col-xs-3 toolbar-mobile-item">
+              <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
                 <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown=""
                      dropdown-append-to-body>
                   <div class="actions">
@@ -124,9 +124,9 @@
                       </li>
                       <li class="divided"></li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding selectedSorting"
-                           ng-click="vm.sortDropdownSetActive('modificationDate', $event)">
-                            <span class="caretArea">
+                        <a href="" class="ng-binding selected-sorting"
+                           ng-click="vm.sort-dropdownSetActive('modificationDate', $event)">
+                            <span class="caret-area">
                                 <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                                 <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
@@ -135,8 +135,8 @@
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-click="vm.sortDropdownSetActive('creationDate', $event)">
-                            <span class="caretArea">
+                           ng-click="vm.sort-dropdownSetActive('creationDate', $event)">
+                            <span class="caret-area">
                               <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                               <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
@@ -145,8 +145,8 @@
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-click="vm.sortDropdownSetActive('size', $event)">
-                            <span class="caretArea">
+                           ng-click="vm.sort-dropdownSetActive('size', $event)">
+                            <span class="caret-area">
                               <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                               <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
@@ -155,8 +155,8 @@
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-click="vm.sortDropdownSetActive('name', $event)">
-                            <span class="caretArea">
+                           ng-click="vm.sort-dropdownSetActive('name', $event)">
+                            <span class="caret-area">
                               <i ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                               <i ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
@@ -204,7 +204,7 @@
                              reload-items="vm.tableParams.reload">
         </filtering-component>
       </div>
-      <div id="dropArea">
+      <div id="drop-area">
         <div id="top-search-wrap">
           <i id="top-search-close" data-ng-click="vm.toggleSearchState()">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
@@ -216,19 +216,19 @@
           <div class="toogleCkeckboxToolbar"
                ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())">
             <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]"
-               class="selectAllItems plainTxtBtn ng-scope">
-              <i class="fa fa fa-square-o checkboxTable"></i>
+               class="select-all-items plain-txt-btn ng-scope">
+              <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
             <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]"
-               class="selectAllItems plainTxtBtn ng-scope">
+               class="select-all-items plain-txt-btn ng-scope">
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
-          <div class="exitSelection" ng-click="vm.resetSelectedDocuments()"
+          <div class="exit-selection" ng-click="vm.resetSelectedDocuments()"
                title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
             <i class="zmdi zmdi-close"></i>
           </div>
-          <div class="displayNumSelectedItems" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+          <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
             <div class="pull-left" data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
                  ng-click="activeBtnShowSelection = !activeBtnShowSelection; vm.toggleFilterBySelectedFiles()">
               <p><span>{{vm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" |
@@ -253,28 +253,28 @@
                   </a>
               </span>
             <span ng-if="vm.selectedDocuments.length > 1">
-              <a class="plainTxtBtn" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
+              <a class="plain-txt-btn" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
                  ng-click="vm.unavailableMultiDownload()">
                 <i class="zmdi zmdi-download"></i>
                 <span>{{'DOWNLOAD' | translate}}</span>
               </a>
             </span>
             <span>
-                <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+                <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                    ng-click="vm.deleteDocuments(vm.selectedDocuments)">
                   <i class="zmdi zmdi-delete"></i>
                   <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
                 </a>
               </span>
             <span ng-show="linshareModeProduction == false">
-                <a class="plainTxtBtn partageLink" title=" {{'ACTION.MOVE' | translate}}">
+                <a class="plain-txt-btn partage-link" title=" {{'ACTION.MOVE' | translate}}">
                   <i class="zmdi zmdi-arrows"></i>
                   <span> {{'ACTION.MOVE' | translate}}</span>
                 </a>
               </span>
             <span class="dropdown link-dropdown" uib-dropdown
                   ng-show="(linshareModeProduction == false) || (vm.selectedDocuments.length == 1)">
-                <a class="plainTxtBtn partageLink"
+                <a class="plain-txt-btn partage-link"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
@@ -344,10 +344,10 @@
               </span>
           </div>
         </div>
-        <div class="dragNDropCtn resetContentWidth hidden-xs">
-          <div class="dragNDropContent">
-            <div class="dragIconCtn ">
-              <div class="borderedCircle">&nbsp;</div>
+        <div class="drag-n-Drop-ctn reset-content-width hidden-xs">
+          <div class="drag-n-drop-content">
+            <div class="drag-icon-ctn ">
+              <div class="bordered-circle">&nbsp;</div>
               <img src="images/upload-dnd-grey.png">
             </div>
             <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
@@ -358,10 +358,10 @@
           <span ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())"
                 role="button" tabindex="0" style="display:block">
               <a ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]"
-                 class="selectAllItems plainTxtBtn ng-scope checkboxCtn">
-                <i class="fa fa fa-square-o checkboxTable"></i>
+                 class="select-all-items plain-txt-btn ng-scope checkbox-ctn">
+                <i class="fa fa fa-square-o checkbox-table"></i>
               </a>
-              <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope">
+              <a ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-txt-btn ng-scope">
                 <i class="fa fa-check-square-o"></i>
               </a>
             </span>
@@ -372,7 +372,7 @@
         <!-- DOCUMENTS LIST  -->
         <div class="card-body">
           <div class="table-responsive">
-            <table id="fileListTable" class="table table-vmiddle" data-ng-table="vm.tableParams"
+            <table id="file-list-table" class="table table-vmiddle" data-ng-table="vm.tableParams"
                    show-filter="true" ng-class=" {'col-4-table' : linshareModeProduction == false }">
               <tr data-ng-repeat="documentFile in $data" ls-item-selection="{{documentFile.type ? 'file' : null}}"
                   role="listitem"
@@ -413,14 +413,14 @@
                   </a>
                 </td>
                 <td data-title="'TABLE_HEADER.NAME' | translate"
-                    class="row no-padding show-li-actions col-3"
+                    class="row show-li-actions col-3"
                     data-sortable="'name'" uuid={{documentFile.uuid}} header-class="'col-3'">
                   <div class="ctn-name-actions">
                       <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                         <span class="file-name-disp single-line" spellcheck="false" contenteditable="false"
                               ng-click="!documentFile.type ? vm.goToSharedSpaceFolderTarget(vm.uuid, vm.name, documentFile.parent, documentFile.uuid, documentFile.name, false) : null">{{documentFile.name}}</span>
                         <span>
-                          <span ng-show="documentFile.shared > 0" class="sharedActivated hidden-xs">
+                          <span ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
                           {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                           </span>
                           <p class="mobile-list-item-info visible-xs">
@@ -459,7 +459,7 @@
                               <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </a>
                           </li>
-                          <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 noPadding"
+                          <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                               auto-close="always" hover-dropdown-fix>
                             <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                                class="set-col-12 dropdown-toggle">
@@ -668,7 +668,7 @@
     <i class="zmdi zmdi-arrows col-xs-3 disabled-work-in-progress"
        ng-show="linshareModeProduction == false"></i>
     <span class="dropdown col-xs-3" uib-dropdown="" ng-show="linshareModeProduction == false">
-        <i class="zmdi zmdi-more-vert" ng-class="{'activeLink': isActiveMoreDropdown }"
+        <i class="zmdi zmdi-more-vert" ng-class="{'active-link': isActiveMoreDropdown }"
            ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
            dropdown-toggle uib-dropdown-toggle=""></i>
        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"

@@ -8,7 +8,7 @@
      flow-object="share_array[id].flowObjectFiles"
      flow-files-submitted="$flow.upload()" ng-init="testeur = share_array[id].flowObjectFiles.files.length" >
     <div id="breadcrumb-wrap"  ng-controller="DemoCtrl as demo">
-      <div class="breadcrumbsCtn">
+      <div class="breadcrumbs-ctn">
         <a ng-click="showSharingItems($index)" class="breadcrumb"><i class="zmdi zmdi-file" ></i>Mes dépots</a>
       </div>
 
@@ -24,18 +24,18 @@
       </div>
 
     </div>
-<div id="dropArea" >
+<div id="drop-area" >
     <div class="infoPartager">
       <p><i  class="fa fa-info"></i> Sélectionnez des fichiers si vous souhaitez les partager</p>
     </div>
   <div id="selection-actions" style="display: block;" ng-init="isAllSelected.status = false">
-    <div class="exitSelection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
+    <div class="exit-selection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
       <i class="zmdi zmdi-close" ></i>
     </div>
-    <div class="displayNumSelectedItems"><span>{{numSelectedItems.length}}</span> Items Selectionnés </div>
+    <div class="display-num-selected-items"><span>{{numSelectedItems.length}}</span> Items Selectionnés </div>
     <div id="toolbar-actions">
        <span ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
-         <a class="selectAllItems plainTxtBtn">
+         <a class="select-all-items plain-txt-btn">
            <i ng-show="isAllSelected.status"  class="fa fa-square-o"></i>
            <span ng-show="isAllSelected.status">Tout désélectionner</span>
            <i ng-show="!isAllSelected.status" class="fa fa-check-square-o"></i>
@@ -43,17 +43,17 @@
          </a>
        </span>
       <span>
-        <!--<a class="plainTxtBtn partageLink" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >-->
+        <!--<a class="plain-txt-btn partage-link" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >-->
         <!--<i class="zmdi zmdi-share"></i><span>Partager</span></a>-->
-      <a class="plainTxtBtn partageLink" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" href=""
+      <a class="plain-txt-btn partage-link" ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" href=""
          ng-click="onShare(); mactrl.sidebarToggle.right = true;"><i class="zmdi zmdi-share"></i><span>{{'ACTION.SHARE' | translate}}</span></a></span>
     </div>
   </div>
 
-  <div class="dragNDropCtn resetContentWidth">
-    <div class="dragNDropContent">
-      <div class="dragIconCtn ">
-        <div class="borderedCircle">&nbsp;</div>
+  <div class="drag-n-Drop-ctn reset-content-width">
+    <div class="drag-n-drop-content">
+      <div class="drag-icon-ctn ">
+        <div class="bordered-circle">&nbsp;</div>
         <img src="images/upload-dnd-grey.png">
       </div>
     <h1>Déposez vos fichiers ici</h1>
@@ -69,7 +69,7 @@
         <div class="lv-body">
           <div class="media-body" ng-repeat="file in share_array[id].flowObjectFiles.files" upload-box-selection>
             <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
-              <div class="col-xs-24 col-sm-12 animLeft noPadding">
+              <div class="col-xs-24 col-sm-12 animLeft no-padding">
                 <div class="col-xs-7 col-sm-11 pull-left">
                   <div class="previewIconCtn pull-left hidden-v-xs">
                     <p class="img-circle">{{file.getExtension()  | uppercase }}</p>

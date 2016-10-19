@@ -123,22 +123,6 @@ angular.module('linshareUiUserApp')
         controller: 'AuthenticationController'
       })
 
-      .state('documents.guests', {
-        url: '/guests',
-        templateUrl: 'views/guests/guestList.html',
-        controller: 'LinshareGuestController',
-        resolve: {
-          guestList: function(LinshareGuestService) {
-            return LinshareGuestService.getList();
-          }
-        }
-      })
-
-      .state('documents.guests.uuid', {
-        url: '/guests/:uuid',
-        templateUrl: 'views/guests/guestDetails.html',
-        controller: 'LinshareGuestController'
-      })
 
       //------------------------------
       // SHARESPACE - WORKGROUP
@@ -205,7 +189,8 @@ angular.module('linshareUiUserApp')
       .state('administration.guests', {
         url:'/adminguests',
         templateUrl: 'modules/linshare.guests/views/list.html',
-        controller: 'guestController'
+        controller: 'LinshareGuestController',
+        controllerAs: 'guestListVm',
       })
 
       .state('administration.users', {

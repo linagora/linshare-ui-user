@@ -3,29 +3,29 @@
   <div class="card" id="collapsible-content">
     <div class="card-header">
       <div id="breadcrumb-wrap">
-        <div class="breadcrumbsCtn hidden-xs">
+        <div class="breadcrumbs-ctn hidden-xs">
           <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
             {{ "BREADCRUMB_TITLE_RECEIVED_SHARES" | translate }}
           </a>
-          <span class="subCategorieChevron"><i class="zmdi zmdi-chevron-right"></i></span>
+          <span class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
         </div>
         <div id="action-header">
           <div class="fg-line toolbar-actions-items">
             <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
               <a href="">
-                <i class="tm-icon zmdi zmdi-search" ng-class="{'activeLink': searchMobileDropdown }"></i>
+                <i class="tm-icon zmdi zmdi-search" ng-class="{'active-link': searchMobileDropdown }"></i>
               </a>
             </div>
               <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
                     class="visible-xs toolbar-mobile-item col-xs-3" >
-              <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
+              <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn">
                 <i class="fa fa-square-o"></i>
               </a>
-              <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn">
-                <i class="fa fa-check-square-o activeLink" ></i>
+              <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn">
+                <i class="fa fa-check-square-o active-link" ></i>
               </a>
               </span>
-            <div class="sortDropdown col-xs-3 toolbar-mobile-item">
+            <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
               <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
                 <div class="actions">
                   <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
@@ -40,8 +40,8 @@
                     </li>
                     <li class="divided"></li>
                     <li role="menuitem">
-                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive('name', $event)">
-                        <span class="caretArea">
+                      <a href="" class="ng-binding" ng-click="sort-dropdownSetActive('name', $event)">
+                        <span class="caret-area">
                           <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
@@ -49,9 +49,9 @@
                       </a>
                     </li>
                     <li role="menuitem">
-                      <a href="" class="ng-binding selectedSorting"
-                         ng-click="sortDropdownSetActive('modificationDate', $event)">
-                        <span class="caretArea">
+                      <a href="" class="ng-binding selected-sorting"
+                         ng-click="sort-dropdownSetActive('modificationDate', $event)">
+                        <span class="caret-area">
                           <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
@@ -59,8 +59,8 @@
                       </a>
                     </li>
                     <li role="menuitem">
-                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive('creationDate', $event)">
-                        <span class="caretArea">
+                      <a href="" class="ng-binding" ng-click="sort-dropdownSetActive('creationDate', $event)">
+                        <span class="caret-area">
                           <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
@@ -68,8 +68,8 @@
                       </a>
                     </li>
                     <li role="menuitem">
-                      <a href="" class="ng-binding" ng-click="sortDropdownSetActive('size', $event)">
-                        <span class="caretArea">
+                      <a href="" class="ng-binding" ng-click="sort-dropdownSetActive('size', $event)">
+                        <span class="caret-area">
                           <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
@@ -121,7 +121,7 @@
       <div class="clearfix"></div>
     </div>
 
-    <div id="dropArea">
+    <div id="drop-area">
       <div id="top-search-wrap">
         <i id="top-search-close"  data-ng-click="toggleSearchState()">&times;</i>
         <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
@@ -131,17 +131,17 @@
       <div id="selection-actions" class="defaultMultiToolbarState"
            data-ng-class="{'showMultiMenu': selectedDocuments.length > 0}">
         <div class="toogleCkeckboxToolbar" ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
-          <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope" >
-            <i class="fa fa fa-square-o checkboxTable"></i>
+          <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope" >
+            <i class="fa fa fa-square-o checkbox-table"></i>
           </a>
-          <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope">
+          <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope">
             <i class="fa fa-check-square-o"></i>
           </a>
         </div>
-        <div class="exitSelection" ng-click="resetSelectedDocuments()">
+        <div class="exit-selection" ng-click="resetSelectedDocuments()">
           <i class="zmdi zmdi-close"></i>
         </div>
-        <div class="displayNumSelectedItems" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}"
+        <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}"
              data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
              ng-click="activeBtnShowSelection = !activeBtnShowSelection">
           <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
@@ -155,34 +155,34 @@
         </div>
         <div id="toolbar-actions" class="hidden-xs">
           <span ng-class="{'hide': selectedDocuments.length > 1}">
-            <a class="plainTxtBtn partageLin"
+            <a class="plain-txt-btn partageLin"
                ng-click="downloadCurrentFile(selectedDocuments[0])">
               <i class="zmdi zmdi-download"></i>
               <span>{{'DOWNLOAD' | translate}}</span>
             </a>
           </span>
           <span ng-class="{'hide': selectedDocuments.length <= 1}">
-            <a class="plainTxtBtn partageLin"
+            <a class="plain-txt-btn partageLin"
                ng-click="unavailableMultiDownload()">
               <i class="zmdi zmdi-download"></i>
               <span>{{'DOWNLOAD' | translate}}</span>
             </a>
           </span>
           <span>
-            <a class="plainTxtBtn partageLink"
+            <a class="plain-txt-btn partage-link"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="copyIntoFiles(selectedDocuments)">
               <i class="fa fa-files-o"></i><span>{{'SELECTION_TOOLBAR.COPY' | translate}}</span></a>
           </span>
           <span>
-            <a class="plainTxtBtn partageLink"
+            <a class="plain-txt-btn partage-link"
                ng-class="{'deActivateSharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
                ng-click="deleteDocuments(selectedDocuments)">
               <i class="fa fa-trash-o"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
             </a>
           </span>
           <span class="dropdown link-dropdown" dropdown ng-show="linshareModeProduction == false">
-                <a class="plainTxtBtn partageLink"
+                <a class="plain-txt-btn partage-link"
                    dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
@@ -206,10 +206,10 @@
         </div>
       </div>
 
-      <div class="dragNDropCtn resetContentWidth hidden-xs">
-        <div class="dragNDropContent">
-          <div class="dragIconCtn ">
-            <div class="borderedCircle">&nbsp;</div>
+      <div class="drag-n-Drop-ctn reset-content-width hidden-xs">
+        <div class="drag-n-drop-content">
+          <div class="drag-icon-ctn ">
+            <div class="bordered-circle">&nbsp;</div>
             <img src="images/upload-dnd-grey.png">
           </div>
           <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
@@ -220,10 +220,10 @@
       <script type="text/ng-template" id="checkboxheader.html">
         <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
               role="button" tabindex="0" style="display:block" class="center">
-          <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope" >
-            <i class="fa fa fa-square-o checkboxTable"></i>
+          <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope" >
+            <i class="fa fa fa-square-o checkbox-table"></i>
           </a>
-          <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="selectAllItems plainTxtBtn ng-scope">
+          <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope">
             <i class="fa fa-check-square-o"></i>
           </a>
           </span>
@@ -233,7 +233,7 @@
       <div class="card-body">
 
         <div class="table-responsive">
-          <table id="fileListTable" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
+          <table id="file-list-table" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
 
             <tr data-ng-repeat="documentFile in $data"
                 ls-item-selection=""
@@ -264,7 +264,7 @@
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       {{documentFile.name}}
                       <span>
-                        <span ng-show="documentFile.shared > 0" class="sharedActivated hidden-xs">
+                        <span ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
                         {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                         </span>
                         <p class="mobile-list-item-info visible-xs">
@@ -294,7 +294,7 @@
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
-                        <li  uib-dropdown dropdown-append-to-body class="dropdown set-col-6 noPadding hidden-xs"
+                        <li  uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding hidden-xs"
                              auto-close="always" hover-dropdown-fix>
                           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                              event-propagation-stop >

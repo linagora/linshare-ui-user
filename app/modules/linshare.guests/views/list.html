@@ -1,3 +1,542 @@
+<div class="file-listing-ctn" x-ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
+  <div class="container files guest-list">
+    <!--  ACTIONS ON DOCUMENTS  -->
+    <!-- contextmenu -->
+    <div class="card" id="collapsible-content">
+      <div class="card-header">
+        <div id="breadcrumb-wrap">
+          <div class="menu-popover-ctn hidden-xs clickable">
+            <a class="add-menu-group"
+               tabindex="0">
+              <i class="zmdi zmdi-plus"></i>
+            </a>
+          </div>
+
+          <div class="breadcrumbs-ctn hidden-xs">
+            <a href="#" class="breadcrumb"><i class="zmdi zmdi-account-box"></i>
+              {{ "BREADCRUMB_TITLE" | translate }}
+            </a>
+            <span class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+          </div>
+          <div id="action-header">
+            <div class="fg-line toolbar-actions-items">
+              <!-- If the button id clicked for the second time (disabled) then the selected items should be deselected cf resetSelectedDocuments() -->
+              <span x-ng-click="showCheckboxes = !showCheckboxes "
+                    class="visible-xs toolbar-mobile-item col-xs-3" >
+                <a  class="select-all-items plain-txt-btn">
+                  <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes }"></i>
+                </a>
+              </span>
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="searchMobileDropdown = !searchMobileDropdown">
+                <a href="">
+                  <i class="tm-icon zmdi zmdi-search" x-ng-class="{'active-link': searchMobileDropdown }"></i>
+                </a>
+              </div>
+              <!-- TODO: mobile filter-->
+              <div class="dropdown-filters  toolbar-mobile-item col-xs-3 visible-xs">
+                <span uib-dropdown  class="dropdown link-dropdown"
+                      auto-close="outsideClick">
+                  <a class="plain-txt-btn partage-link" href="javascript:void(0)"
+                     uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+                    <i class="zmdi zmdi-filter-list"></i>
+                  </a>
+                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop">
+                    <div class="list-menu">
+                      <p>{{"FILTER_COMPONENT.FILTER_BY" | translate }}</p>
+                      <ul class="dropdown-menu dm-icon filter-menu">
+                        <li>
+                          <a href=""
+                             ng-class="{'active-check':!isAllGuestSelected}"
+                             ng-click="isAllGuestSelected = false">
+                            <span class="checkbox-ctn "></span>
+                            {{'MY_GUESTS' | translate}}
+                          </a>
+                        </li>
+                        <li>
+                          <a href=""
+                             ng-class="{'active-check':isAllGuestSelected}"
+                             ng-click="isAllGuestSelected = true">
+                            <span class="checkbox-ctn"></span>
+                           {{'ALL_GUESTS' | translate}}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </span>
+              </div>
+
+              <!-- Please enable the filtering feature according to the appropriate labels-->
+              <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
+                <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
+                  <div class="actions">
+                    <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
+                       x-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
+                      <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                      <li role="menuitem">
+                        <a href="" class="center">
+                          {{'SELECTION_TOOLBAR.ORDER_BY' | translate }}
+                        </a>
+                      </li>
+                      <li class="divided"></li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestListVm.sortDropdownSetActive('name', $event)">
+                        <span class="caret-area">
+                          <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                          {{'ADD_GUEST_SIDEBAR.LASTNAME' | translate }}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestListVm.sortDropdownSetActive('size', $event)">
+                        <span class="caret-area">
+                          <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                          {{'ADD_GUEST_SIDEBAR.FIRSTNAME' | translate }}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestListVm.sortDropdownSetActive('name', $event)">
+                        <span class="caret-area">
+                          <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                          {{'ORDER_BY.EMAIL' | translate }}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestListVm.sortDropdownSetActive('shared', $event)">
+                        <span class="caret-area">
+                          <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                          {{'ORDER_BY.DOMAIN_NAME' | translate }}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding selected-sorting"
+                           x-ng-click="guestListVm.sortDropdownSetActive('modificationDate', $event)">
+                        <span class="caret-area">
+                          <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                          {{'ORDER_BY.EXPIRATION_DATE' | translate }}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding"
+                           x-ng-click="guestListVm.sortDropdownSetActive('modificationDate', $event)">
+                        <span class="caret-area">
+                          <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                          {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestListVm.sortDropdownSetActive('creationDate', $event)">
+                        <span class="caret-area">
+                          <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                          {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-group search-bar hidden-xs" >
+              <span class="filter-views pull-right">Afficher :</span>
+              <div class="select-chosen-ctn no-padding pull-right" id="guest-account-chosen">
+                <select name="guests-viz"
+                        data-placeholder-text-single="'{{'MY_GUESTS' | translate}}'"
+                        id="guests-viz"
+                        chosen
+                        disable-search="true"
+                        allow-single-deselect="true">
+                  <option value=""></option>
+                  <option>
+                    {{'MY_GUESTS' | translate}}
+                  </option>
+                  <option>
+                    {{'ALL_GUESTS' | translate}}
+                  </option>
+                </select>
+              </div>
+              <!--TODO: search by first name, lastname or by email -->
+              <div id="search-field-ctn" >
+                <div class="search-style">
+                  <div class="fg-line">
+                    <input type="text" class="form-control"
+                           autocomplete="off"
+                           x-ng-model="paramFilter['name']"
+                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                           x-ng-change="guestListVm.updateParams()">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div id="drop-area" x-ng-init ="searchMobileDropdown = false;" x-ng-class="{'search-toggled': searchMobileDropdown}">
+        <div id="top-search-wrap">
+          <i id="top-search-close"  x-ng-click="searchMobileDropdown = !searchMobileDropdown">&times;</i>
+          <input type="text" id="searchInMobileFiles" class="form-control x-ng-pristine x-ng-untouched x-ng-valid"
+                 placeholder="Nom de fichier" x-ng-change="guestListVm.updateParams()" x-ng-model="paramFilter['name']"
+                 aria-invalid="false" x-ng-focus="searchMobileDropdown === true">
+        </div>
+        <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
+             data-ng-class="{'showMultiMenu': guestListVm.selectedDocuments.length > 0}">
+          <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->
+          <div class="toogleCkeckboxToolbar" x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
+            <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope" >
+              <i class="fa fa fa-square-o checkbox-table"></i>
+            </a>
+            <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope">
+              <i class="fa fa-check-square-o"></i>
+            </a>
+          </div>
+          <div class="exit-selection" x-ng-click="guestListVm.resetSelectedDocuments()"
+               title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
+            <i class="zmdi zmdi-close"></i>
+          </div>
+          <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+            <div class="pull-left" data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
+                 x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; guestListVm.toggleFilterBySelectedFiles()">
+              <p><span>{{guestListVm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
+              <div class="pull-left view-icons-ctn groups-view">
+                <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
+                <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
+              </div>
+            </div>
+            <div class="pull-left view-icons-ctn reset-icon" x-ng-click="guestListVm.resetSelectedDocuments()">
+              <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+            </div>
+          </div>
+          <div id="toolbar-actions" class="hidden-xs">
+            <span>
+            <a class="plain-txt-btn partage-link" title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
+               x-ng-class="{'hide': guestListVm.selectedDocuments.length > 1}">
+            <i class="zmdi zmdi-edit"></i>
+            <span>{{'BOUTON_LABEL_TITLE.EDIT' | translate}}</span>
+            </a>
+            </span>
+            <span>
+            <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}">
+            <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
+            </a>
+            </span>
+            <span x-ng-class="{'hide': guestListVm.selectedDocuments.length > 1}">
+            <a class="plain-txt-btn"  title="{{'ACTION.INFORMATION' | translate}}">
+            <i class="zmdi zmdi-info-outline"></i>
+            <span>{{'ACTION.INFORMATION' | translate}}</span>
+            </a>
+            </span>
+            <span class="dropdown link-dropdown" uib-dropdown>
+              <a class="plain-txt-btn partage-link"
+                 uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+                <i class="zmdi zmdi-more-vert"></i>
+                <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
+                  uib-dropdown-menu="">
+                <li>
+                  <a href="" event-propagation-stop>
+                    <i class="fa fa-pencil-square-o"></i>
+                  {{'ACTION.ADMIN_REQUEST' | translate}}</a>
+                </li>
+                <li>
+                  <a href="" event-propagation-stop>
+                  <i class="zmdi zmdi-accounts-list"></i>
+                  {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}</a>
+                </li>
+                <li>
+                  <a href="">
+                  <i class="groups-shared-folder">
+                  <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                  </i>
+                  {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
+                  </a>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+        <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->
+        <script type="text/ng-template" id="checkboxheader.html">
+          <span x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+                role="button" tabindex="0" style="display:block" class="center">
+          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope" >
+            <i class="fa fa fa-square-o checkbox-table"></i>
+          </a>
+          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope">
+            <i class="fa fa-check-square-o"></i>
+          </a>
+          </span>
+        </script>
+        <!-- DOCUMENTS LIST  -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="file-list-table" class="table table-vmiddle" data-ng-table="guestListVm.tableParams" show-filter="true" >
+              <tr data-ng-repeat="guestsData in $data"
+                  ls-item-selection=""
+                  data-selected-documents="guestListVm.selectedDocuments"
+                  data-document-file="guestsData"
+                  data-current-selected-Document="guestListVm.currentSelectedDocument"
+                  data-details-function="guestListVm.getDetails"
+                  data-right-sidebar-open="mactrl.sidebarToggle.right"
+                  data-ng-click="backToSidebarContentDetails()"
+                  data-ng-class="{'highlightListElem': guestsData.isSelected ,
+                'current-vis': guestListVm.currentSelectedDocument.current.uuid === guestsData.uuid }"
+                  class="p-b-5"
+                  context-menu="moreOptionsContexualMenu">
+                <td data-header="'checkboxheader.html'"
+                    class="center set-content-left thumb-type-item thumb-groups-preview-ls"
+                    header-class="'col-2'">
+                  <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile cf scripts/common/MainController-->
+                  <!--ligne 249 : y buena suerte-->
+                  <a x-ng-click="showCheckboxes ? guestListVm.addSelectedDocument(guestsData) : null" class="visible-xs">
+                    <div class="item-l" x-ng-class="{ 'invisible' : showCheckboxes}">
+                      <span class="first-letter guest-account-li">{{guestsData.firstName.charAt(0)}}</span>
+                    </div>
+                    <div class="checkbox-ctn-thumb"
+                         x-ng-class="{'maintain-vis': guestsData.isSelected , 'hidden-xs' : !showCheckboxes}">
+                    </div>
+                  </a>
+                  <a x-ng-click="guestListVm.addSelectedDocument(guestsData)" class="hidden-xs">
+                    <div class="item-l" x-ng-class="{ 'invisible' : showCheckboxes}">
+                      <span class="first-letter guest-account-li">{{guestsData.firstName.charAt(0)}}</span>
+                    </div>
+                    <div class="checkbox-ctn-thumb"
+                         x-ng-class="{'maintain-vis': guestsData.isSelected , 'hidden-xs' : !showCheckboxes}">
+                    </div>
+                  </a>
+                </td>
+                <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
+                    data-sortable="'name'" uuid={{o.uuid}}>
+                  <div class="ctn-name-actions">
+                    <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                      <span class="first-name">{{guestsData.firstName}} </span>
+                      <span class="last-name">{{guestsData.lastName}}</span>
+                      <span>
+                        <p class="secondary-list-item-info hidden-xs">
+                          {{guestsData.mail}}
+                        </p>
+                        <p class="mobile-list-item-info visible-xs">
+                          {{guestsData.modificationDate | relativeTime}}, {{guestsData.size | readableSize: false}},
+                          <span x-ng-show="guestsData.shared > 0">
+                          {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
+                          </span>
+                        </p>
+                      </span>
+                    </span>
+                    <span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
+                    <ul class="actions pull-right">
+                      <li event-propagation-stop
+                          class="hidden-action-links hidden-xs">
+                        <a href=""
+                           title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
+                        <i class="zmdi zmdi-info-outline"></i>
+                        </a>
+                      </li>
+                      <li class="hidden-xs hidden-action-links">
+                        <a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}" event-propagation-stop="true">
+                        <i class="fa fa-trash-o"></i>
+                        </a>
+                      </li>
+                      <li class="hidden-xs hidden-action-links">
+                        <a title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}" event-propagation-stop>
+                        <i class="zmdi zmdi-edit"></i>
+                        </a>
+                      </li>
+                      <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
+                          auto-close="always" hover-dropdown-fix>
+                        <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
+                           event-propagation-stop>
+                        <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+                        <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided">
+                          <li>
+                            <a href="" ls-share-modal event-propagation-stop>
+                              <i class="fa fa-pencil-square-o"></i>
+                            {{'ACTION.ADMIN_REQUEST' | translate}}</a>
+                          </li>
+                          <li>
+                            <a href="" ls-share-modal event-propagation-stop>
+                            <i class="zmdi zmdi-accounts-list"></i>
+                            {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}</a>
+                          </li>
+                          <li>
+                            <a href="">
+                              <i class="groups-shared-folder">
+                                <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                              </i>
+                              {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
+                            </a>
+                          </li>
+                          <li>
+                          <a event-propagation-stop>
+                          <i class="zmdi zmdi-info-outline"></i>
+                          {{'ACTION.INFORMATION' | translate}}
+                          </a>
+                          </li>
+                          <li>
+                          <a href="">
+                          <i class="zmdi zmdi-edit"></i>
+                          {{'BOUTON_LABEL_TITLE.EDIT' | translate}}
+                          </a>
+                          </li>
+                          <li>
+                          <a href=""  x-ng-click="" event-propagation-stop>
+                          <i class="fa fa-trash-o"></i>
+                          {{'BOUTON_LABEL_TITLE.DELETE' | translate}}
+                          </a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    </span>
+                  </div>
+                </td>
+                <td class="hidden-xs"
+                    x-ng-if="mactrl.sidebarToggle.right === false"
+                    data-title="'ADD_GUEST_SIDEBAR.EXP_DATE' | translate" data-sortable="'expirationDate'">
+                  {{guestsData.expirationDate | relativeTime}}
+                </td>
+                <td class="hidden-xs"
+                    x-ng-if="mactrl.sidebarToggle.right === false"
+                    data-title="'HEADER_GUEST.DOMAIN' | translate" data-sortable="'domain'">
+                  {{guestsData.domain}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="fabMyFiles">
+    <!-- TODO: set up : on press lauch the create guest sidebar-->
+    <md-fab-toolbar  md-open="guestListVm.fab.isOpen" count="guestListVm.fab.count" ng-click="guestListVm.singleEventFab($event)"
+                     md-direction="{{guestListVm.fab.selectedDirection}}" class="visible-xs">
+      <md-fab-trigger class="align-with-text" >
+        <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;" id="primary-fab-action">
+          <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-toolbar></md-toolbar>
+    </md-fab-toolbar>
+  </div>
+</div>
+<div  class="hidden-xs">
+  <span>
+    <a class="plain-txt-btn partage-link" title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
+       x-ng-class="{'hide': guestListVm.selectedDocuments.length > 1}">
+      <i class="zmdi zmdi-edit"></i>
+      <span>{{'BOUTON_LABEL_TITLE.EDIT' | translate}}</span>
+    </a>
+  </span>
+  <span>
+    <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}">
+      <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
+    </a>
+  </span>
+  <span x-ng-class="{'hide': guestListVm.selectedDocuments.length > 1}">
+      <a class="plain-txt-btn"  title="{{'ACTION.INFORMATION' | translate}}">
+        <i class="zmdi zmdi-info-outline"></i>
+        <span>{{'ACTION.INFORMATION' | translate}}</span>
+      </a>
+  </span>
+  <span class="dropdown link-dropdown" uib-dropdown
+        x-ng-show="(linshareModeProduction == false) || (guestListVm.selectedDocuments.length == 1)">
+    <a class="plain-txt-btn partage-link"
+       uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+      <i class="zmdi zmdi-more-vert"></i>
+      <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
+        uib-dropdown-menu="">
+      <li>
+        <a href="" event-propagation-stop>
+          <i class="fa fa-pencil-square-o"></i>
+        {{'ACTION.ADMIN_REQUEST' | translate}}</a>
+      </li>
+      <li>
+        <a href="" event-propagation-stop>
+        <i class="zmdi zmdi-accounts-list"></i>
+        {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}</a>
+      </li>
+      <li>
+        <a href="">
+        <i class="groups-shared-folder">
+          <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+        </i>
+        {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
+        </a>
+      </li>
+    </ul>
+  </span>
+</div>
+<section class="row multi-select-mobile visible-xs"
+         data-ng-class="{'showMobileMultiMenu': guestListVm.selectedDocuments.length > 0}"
+         x-ng-show="guestListVm.currentPage == 'my_guests'">
+  <div class="col-xs-2 ctn-mobile-select-count">
+    <span class="numberOfiles">{{guestListVm.selectedDocuments.length}}</span>
+    <span class="file-multi-select-label">{{'BOUTON_LABEL_TITLE.GUEST' | translate}}</span>
+  </div>
+  <div class="col-xs-9">
+    <span x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+          class="visible-xs toolbar-mobile-item col-xs-2" >
+      <i class="fa fa-check-square-o select-all-items plain-txt-btn"
+         x-ng-if="!flagsOnSelectedPages[tableParams.page()]">
+      </i>
+      <i class="fa fa-square-o active-link select-all-items plain-txt-btn"
+         x-ng-if="flagsOnSelectedPages[tableParams.page()]">
+      </i>
+    </span>
+    <i class="zmdi zmdi-edit col-xs-2" x-ng-class="{'disabled-work-in-progress': guestListVm.selectedDocuments.length > 1}"></i>
+    <i class="zmdi zmdi-delete col-xs-2"></i>
+    <i class="zmdi zmdi-info-outline col-xs-2" x-ng-class="{'disabled-work-in-progress': guestListVm.selectedDocuments.length > 1}"></i>
+    <span class="dropdown col-xs-2" uib-dropdown="" x-ng-show="linshareModeProduction == false">
+    <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown }"
+       x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
+       dropdown-toggle uib-dropdown-toggle=""></i>
+    <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
+        uib-dropdown-menu="">
+      <li>
+        <a href="" event-propagation-stop>
+          <i class="fa fa-pencil-square-o"></i>
+          {{'ACTION.ADMIN_REQUEST' | translate}}
+        </a>
+      </li>
+      <li>
+        <a href="" event-propagation-stop>
+          <i class="zmdi zmdi-accounts-list"></i>
+          {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <i class="groups-shared-folder">
+            <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+          </i>
+        {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
+        </a>
+      </li>
+    </ul>
+    </span>
+  </div>
+  <div class="col-xs-1 pull-right" x-ng-click="guestListVm.resetSelectedDocuments()">
+    <i class="zmdi zmdi zmdi-close"></i>
+  </div>
+</section>
 <aside id="chat" x-ng-include src="'views/includes/sidebar-right.html'"
-       x-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
-</aside>
+       x-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right"></aside>

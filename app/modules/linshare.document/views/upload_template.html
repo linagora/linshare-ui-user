@@ -30,7 +30,7 @@
         <i class="zmdi zmdi-plus"></i>
       </a>
     </div>
-    <div class="breadcrumbsCtn hidden-xs">
+    <div class="breadcrumbs-ctn hidden-xs">
       <div class="breadcrumb col-xs-10">
         <i class="zmdi zmdi-file"></i>{{ "UPLOADED_FILES.BREADCRUMB_TITLE" | translate }}
       </div>
@@ -55,7 +55,7 @@
   </div>
 
   <div id="collapsible-content">
-    <div id="dropArea">
+    <div id="drop-area">
 
     <div class="infoPartager  hidden-xs">
       <p><i class="fa fa-info"></i> {{"UPLOADED_FILES.SELECT_INFO" | translate}}</p>
@@ -64,14 +64,14 @@
     <div id="selection-actions" class="defaultMultiToolbarState hidden-xs"
          data-ng-class="{'showMultiMenu': $flow.files.length > 0}">
       <div class="toogleCkeckboxToolbar" ng-click="selectUploadingDocuments()">
-        <a ng-if="selectAll" class="selectAllItems plainTxtBtn ng-scope" >
-          <i class="fa fa fa-square-o checkboxTable"></i>
+        <a ng-if="selectAll" class="select-all-items plain-txt-btn ng-scope" >
+          <i class="fa fa fa-square-o checkbox-table"></i>
         </a>
-        <a ng-if="!selectAll" class="selectAllItems plainTxtBtn ng-scope">
+        <a ng-if="!selectAll" class="select-all-items plain-txt-btn ng-scope">
           <i class="fa fa-check-square-o"></i>
         </a>
       </div>
-      <div class="displayNumSelectedItems" title="{{'WIP' | translate}}"
+      <div class="display-num-selected-items" title="{{'WIP' | translate}}"
            data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
            ng-click="activeBtnShowSelection = !activeBtnShowSelection">
         <p><span>{{lengthOfSelectedDocuments()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
@@ -85,7 +85,7 @@
       </div>
       <div id="toolbar-actions" class="hidden-xs">
             <span>
-            <a class="plainTxtBtn partageLink" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
+            <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
                ng-class="{'deActivateSharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
                ng-click="onShare(); mactrl.sidebarToggle.right = true;">
               <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
@@ -93,10 +93,10 @@
       </div>
     </div>
 
-    <div class="dragNDropCtn resetContentWidth hidden-xs">
-      <div class="dragNDropContent">
-        <div class="dragIconCtn ">
-          <div class="borderedCircle">&nbsp;</div>
+    <div class="drag-n-Drop-ctn reset-content-width hidden-xs">
+      <div class="drag-n-drop-content">
+        <div class="drag-icon-ctn ">
+          <div class="bordered-circle">&nbsp;</div>
           <img src="images/upload-dnd-grey.png">
         </div>
         <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
@@ -110,12 +110,12 @@
           <div class="lv-header-alt clearfix" style="display:none">
             <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
           </div>
-          <div class="lv-body ng-table" id="fileListTable">
+          <div class="lv-body ng-table" id="file-list-table">
             <div class="media-body" ng-repeat="file in $flow.files"
                  data-ng-class="{'highlightListElem': file.isSelected }"
                  data-uid-flow="{{file.uniqueIdentifier}}">
               <div class="col-xs-10 col-sm-12" style="overflow:hidden;">
-                <div class="col-xs-24 col-sm-12 animLeft noPadding">
+                <div class="col-xs-24 col-sm-12 animLeft no-padding">
                   <div class="col-xs-6 col-sm-11 pull-left">
                     <div ls-on-upload-select class="previewIconCtn pull-left hidden-v-xs set-content-left thumb-type-item " >
                       <i class="fa ls-1p5x" ng-class="'{{file.getType() | mimetypeIcone}}'"></i>

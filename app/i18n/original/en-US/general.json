@@ -150,6 +150,7 @@
     "BY_SIZE": "Size",
     "IS_SHARED": "Shared",
     "ORDER_BY_NAME": "Name",
+    "FILTER_BY": "Filter by",
     "FILTER_BY_DATE": {
       "HEADER": "Filter by date",
       "MODIFICATION_DATE": "Modification date",

@@ -152,6 +152,7 @@
     "BY_SIZE": "Taille",
     "IS_SHARED": "Partagé",
     "ORDER_BY_NAME": "Nom",
+    "FILTER_BY": "Filtrer par",
     "FILTER_BY_DATE": {
       "HEADER": "Filtrer par date",
       "MODIFICATION_DATE": "Date de modification",

@@ -116,7 +116,7 @@ angular.module('linshare.share')
             });
           }
           angular.element('#recipientsCtn').removeClass('w768');
-          angular.element('.custumListContainer').css({
+          angular.element('.custom-list-container').css({
             width: '58%'
           });
         }
@@ -128,7 +128,7 @@ angular.module('linshare.share')
         }
         if(wWidth < 750) {
           angular.element('.sticky').css('max-width', '100%');
-          angular.element('.custumListContainer').css({
+          angular.element('.custom-list-container').css({
             width: '100%'
           });
           angular.element('#recipientsCtn').addClass('w768');
@@ -172,7 +172,7 @@ angular.module('linshare.share')
             });
           }
           angular.element('#recipientsCtn').removeClass('w768');
-          angular.element('.custumListContainer').css({
+          angular.element('.custom-list-container').css({
             width: '58%'
           });
         }
@@ -184,7 +184,7 @@ angular.module('linshare.share')
         }
         if(wWidth < 750) {
           angular.element('.sticky').css('max-width', '100%');
-          angular.element('.custumListContainer').css({
+          angular.element('.custom-list-container').css({
             width: '100%'
           });
           angular.element('#recipientsCtn').addClass('w768');
@@ -345,12 +345,12 @@ angular.module('linshare.share')
       $scope.isCurrentPartage = true;
     };
     // if closure of multiselect reset state
-    angular.element('.exitSelection').bind('click', function() {
+    angular.element('.exit-selection').bind('click', function() {
       $scope.isCurrentPartage = false;
       $scope.isUpdate = false;
     });
     // if share link has been clicked show quishare here
-    angular.element('.partageLink').click(function() {
+    angular.element('.partage-link').click(function() {
       $scope.$apply(function() {
         $scope.isCurrentPartage = true;
       });

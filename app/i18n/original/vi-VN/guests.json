@@ -16,5 +16,26 @@
     "TBT__INVALID_EMPTY_FIELD": "",
     "TBT__INVALID_EMAIL": "",
     "TBT__INVALID_DATE": ""
+  },
+  "TBT__BREADCRUMB_TITLE": "",
+  "TBT__HEADER_GUEST": {
+    "DOMAIN" : ""
+  },
+  "TBT__MY_GUESTS": "",
+  "TBT__ALL_GUESTS": "",
+  "TBT__BOUTON_LABEL_TITLE": {
+    "TBT__EDIT" : "",
+    "TBT__DELETE" : "",
+    "TBT__GUEST" : ""
+  },
+  "TBT__ACTION": {
+    "TBT__JOIN_RESTRICTED_CONTACTS" : "",
+    "TBT__ADD_TO_WORKGROUPS" : "",
+    "TBT__ADMIN_REQUEST" : ""
+  },
+  "TBT__ORDER_BY": {
+    "TBT__EXPIRATION_DATE" : "",
+    "TBT__EMAIL" : "",
+    "TBT__DOMAIN_NAME" : ""
   }
 }

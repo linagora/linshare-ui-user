@@ -10,7 +10,7 @@
   <div ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
     <md-content>
       <md-tabs md-selected="data.selectedIndex" md-dynamic-height="" md-border-bottom="">
-        <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 noPadding">
+        <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 no-padding">
           <md-content>
             <div ng-show="currentSelectedDocument.current.name">
               <div id="profile-main" class="detail-workgroup">
@@ -111,7 +111,7 @@
 
                 <div class="content-detail-area">
                   <div class="flex-ctn detail-info-ctn">
-                    <div class="itemL">
+                    <div class="item-l">
                       <span class="first-letter user-info" ng-if="currentPage == 'my_files'">
                         {{userLogged.firstLetter}}
                       </span>
@@ -120,7 +120,7 @@
                       </span>
                     </div>
 
-                    <div class="itemMid">
+                    <div class="item-mid">
                       <div class="name" ng-if="currentPage == 'my_files'">{{'ME' | translate}}</div>
                       <div class="name" ng-if="currentPage == 'received_files'">
                         {{currentSelectedDocument.current.sender.firstName}}
@@ -134,7 +134,7 @@
                       </div>
                     </div>
 
-                    <div class="itemR actions">
+                    <div class="item-r actions">
                       <span>{{currentSelectedDocument.current.size | readableSize: false}}</span>
                       <span class="seperator-inline">|</span>
                       <span title="{{currentSelectedDocument.current.type}}">
@@ -206,7 +206,7 @@
           </md-content>
         </md-tab>
         <md-tab id="tab2" ng-if="currentPage == 'my_files'" label="{{'RIGHT_PANEL.RECIPIENTS.TITLE' | translate}}"
-                class="col-xs-4 noPadding">
+                class="col-xs-4 no-padding">
           <md-content class="md-padding">
             <p class="empty-res" ng-if="currentSelectedDocument.current.shared === 0">
               <i class="zmdi zmdi-info-outline"></i><span>{{'RIGHT_PANEL.RECIPIENTS.NO_SHARES' | translate}}</span>
@@ -260,7 +260,7 @@
           </md-content>
         </md-tab>
 
-        <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 noPadding disabled">
+        <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 no-padding disabled">
           <md-content class="md-padding">
             <div class="lv-body stop-propagate">
               <div class="lv-item">

@@ -41,12 +41,12 @@
           </div>
         </div>
 
-        <div id="dropArea">
+        <div id="drop-area">
 
           <!-- DOCUMENTS LIST  -->
           <div class="card-body">
             <div class="table-responsive">
-              <table id="fileListTable" class="table table-vmiddle" data-ng-table="urlCtrl.tableParams"
+              <table id="file-list-table" class="table table-vmiddle" data-ng-table="urlCtrl.tableParams"
                      show-filter="true">
                 <tr data-ng-repeat="documentFile in $data"
                     ng-click="backToSidebarContentDetails()"
@@ -64,7 +64,7 @@
                           {{documentFile.name}}
                           </a>
                           <span>
-                            <span ng-show="documentFile.shared > 0" class="sharedActivated hidden-xs">
+                            <span ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
                             {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                             </span>
                             <p class="mobile-list-item-info visible-xs">

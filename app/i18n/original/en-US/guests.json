@@ -16,5 +16,26 @@
     "INVALID_EMPTY_FIELD": "This field cannot be empty.",
     "INVALID_EMAIL": "Email address is invalid.",
     "INVALID_DATE": "The date needs to be greater than today's date and cannot exceed the maximum expiry date being the : "
+  },
+  "BREADCRUMB_TITLE": "Guests accounts",
+  "HEADER_GUEST": {
+    "DOMAIN" : "Domain"
+  },
+  "MY_GUESTS": "My guest",
+  "ALL_GUESTS": "All guest",
+  "BOUTON_LABEL_TITLE": {
+    "EDIT" : "Edit",
+    "DELETE" : "Delete",
+    "GUEST" : "Guest(s)"
+  },
+  "ACTION": {
+    "JOIN_RESTRICTED_CONTACTS" : "Join restricted contact list",
+    "ADD_TO_WORKGROUPS" : "Add to workgroups",
+    "ADMIN_REQUEST" : "Request administrator rights"
+  },
+  "ORDER_BY": {
+    "EXPIRATION_DATE" : "Expiration date",
+    "EMAIL" : "Email",
+    "DOMAIN_NAME" : "Domain name"
   }
 }

@@ -1,7 +1,7 @@
 <div class="lv-body stop-propagate" ng-controller="WorkGroupMembersController as wkgrpmemberctrl">
   <div class="lv-item">
     <div class="card col-xs-12" id="content-ctn-sidebar">
-      <div ng-show="wkgrpmemberctrl.currentWorkgroupMember.admin" class="custumListContainer clearfix">
+      <div ng-show="wkgrpmemberctrl.currentWorkgroupMember.admin" class="custom-list-container clearfix">
         <div class="recipients-form-sections clearfix">
           <h2 class="pull-left headerSubCtn">
             <span class="groups-add-member"></span>
@@ -9,12 +9,12 @@
           </h2>
         </div>
         <form role="form" class="clearfix fields-add-member">
-          <div class="form-group fg-line group-member-field-ctn col-xs-12 noPadding">
+          <div class="form-group fg-line group-member-field-ctn col-xs-12 no-padding">
             <div class="col-xs-8 pull-left" ls-autocomplete-user="THREAD_MEMBERS"
                   data-ls-complete-thread-uuid="{{vm.currentSelectedDocument.current.uuid}}"
                   data-on-select-function="wkgrpmemberctrl.addMember"
                   data-selected-users-list="vm.currentSelectedDocument.current.members"></div>
-            <div class="select-chosen-ctn col-xs-3 noPadding pull-right">
+            <div class="select-chosen-wkgps col-xs-3 no-padding pull-right">
               <select name="rights_select" id="rights_select" chosen
                       data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
                       disable-search="true"
@@ -35,7 +35,7 @@
         </form>
       </div>
       <div class="recipients-form-sections clearfix">
-        <div class="custumHeaderList">
+        <div class="custom-header-list">
           <h2 class="pull-left headerSubCtn"><i><span class="groups-user-group"></span></i>
             <span>{{lengthOfSelectedDocuments()}}</span> {{ "MEMBER_TAB.NUM_MEMBER" | translate }}
           </h2>
@@ -54,7 +54,7 @@
             <div class="dropdown-filters">
               <span uib-dropdown dropdown-append-to-body  class="dropdown link-dropdown"
                     auto-close="outsideClick">
-                <a class="plainTxtBtn partageLink"  href="javascript:void(0)"
+                <a class="plain-txt-btn partage-link"  href="javascript:void(0)"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-settings"></i>
                 </a>
@@ -63,9 +63,9 @@
                     <p>{{ "MEMBER_TAB.SORT_BY" | translate }}</p>
                     <ul class="dropdown-menu dm-icon ">
                       <li role="menuitem" ng-if="linshareModeProduction === false">
-                        <a href="" class="ng-binding selectedSortingMembers"
+                        <a href="" class="ng-binding selected-sorting-members"
                            ng-click="sortSearchMember($event)">
-                          <span class="caretArea">
+                          <span class="caret-area">
                             <i ng-show="toggleSelectedSortMembers" class="zmdi zmdi-caret-down"></i>
                             <i ng-show="!toggleSelectedSortMembers" class="zmdi zmdi-caret-up"></i>
                           </span>
@@ -74,9 +74,9 @@
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-class="{'selectedSortingMembers': wkgrpmemberctrl.propertyOrderBy === 'firstName'}"
+                           ng-class="{'selected-sorting-members': wkgrpmemberctrl.propertyOrderBy === 'firstName'}"
                            ng-click="wkgrpmemberctrl.changePropertyOrderBy('firstName')">
-                          <span class="caretArea">
+                          <span class="caret-area">
                             <i ng-show="wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
                             <i ng-show="!wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                           </span>
@@ -85,9 +85,9 @@
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-class="{'selectedSortingMembers': wkgrpmemberctrl.propertyOrderBy === 'lastName'}"
+                           ng-class="{'selected-sorting-members': wkgrpmemberctrl.propertyOrderBy === 'lastName'}"
                            ng-click="wkgrpmemberctrl.changePropertyOrderBy('lastName')">
-                          <span class="caretArea">
+                          <span class="caret-area">
                             <i ng-show="wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
                             <i ng-show="!wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                           </span>
@@ -96,9 +96,9 @@
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding"
-                           ng-class="{'selectedSortingMembers': wkgrpmemberctrl.propertyOrderBy === 'role'}"
+                           ng-class="{'selected-sorting-members': wkgrpmemberctrl.propertyOrderBy === 'role'}"
                            ng-click="wkgrpmemberctrl.changePropertyOrderBy('role')">
-                          <span class="caretArea">
+                          <span class="caret-area">
                            <i ng-show="wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
                             <i ng-show="!wkgrpmemberctrl.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                           </span>
@@ -114,7 +114,7 @@
                         <a href=""
                            ng-class="{'active-check': wkgrpmemberctrl.membersSearchFilter.role === 'admin'}"
                            ng-click="wkgrpmemberctrl.changeFilterByProperty('admin')">
-                          <span class="checkboxctn"></span>
+                          <span class="checkbox-ctn"></span>
                           {{ "MEMBER_TAB.ADMIN_RIGHTS" | translate }}
                         </a>
                       </li>
@@ -122,7 +122,7 @@
                         <a href=""
                            ng-class="{'active-check': wkgrpmemberctrl.membersSearchFilter.role === 'normal'}"
                            ng-click="wkgrpmemberctrl.changeFilterByProperty('normal')">
-                          <span class="checkboxctn"></span>
+                          <span class="checkbox-ctn"></span>
                           {{ "MEMBER_TAB.WRITE_RIGHTS" | translate }}
                         </a>
                       </li>
@@ -130,7 +130,7 @@
                         <a href=""
                            ng-class="{'active-check': wkgrpmemberctrl.membersSearchFilter.role === 'restricted'}"
                            ng-click="wkgrpmemberctrl.changeFilterByProperty('restricted')">
-                          <span class="checkboxctn"></span>
+                          <span class="checkbox-ctn"></span>
                           {{ "MEMBER_TAB.READ_RIGHTS" | translate }}
                         </a>
                       </li>
@@ -151,8 +151,8 @@
           <div class="flex-ctn"
                ng-repeat="workgroupMember in vm.currentSelectedDocument.current.members |
                            filter: wkgrpmemberctrl.membersSearchFilter | orderBy: '-' ">
-            <div class="itemL"><span class="first-letter">{{workgroupMember.firstName.charAt(0)}}</span></div>
-            <div class="itemMid">
+            <div class="item-l"><span class="first-letter">{{workgroupMember.firstName.charAt(0)}}</span></div>
+            <div class="item-mid">
               <div class="name">{{workgroupMember.firstName}} {{workgroupMember.lastName}}</div>
               <div class="info-item-member" ng-switch="workgroupMember.role">
                 <i class="zmdi zmdi-account"></i>
@@ -166,10 +166,10 @@
                 <span>{{ "MEMBER_TAB.ACTIVATED" | translate }}</span>
               </div>
             </div>
-            <div ng-show="wkgrpmemberctrl.currentWorkgroupMember.admin" class="itemR actions">
+            <div ng-show="wkgrpmemberctrl.currentWorkgroupMember.admin" class="item-r actions">
                           <span uib-dropdown dropdown-append-to-body class="dropdown link-dropdown actions"
                                 auto-close="always">
-                            <a class="plainTxtBtn partageLink" href="javascript:void(0)"
+                            <a class="plain-txt-btn partage-link" href="javascript:void(0)"
                                uib-dropdown-toggle title="{{'MEMBER_TAB.EDIT_RIGHTS' | translate}}">
                               <i class="zmdi zmdi-edit"></i>
                             </a>

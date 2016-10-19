@@ -9,7 +9,7 @@
  * to make all http calls about sharing file.
  */
 angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.components'])
-  
+
   .controller('DemoCtrl', function() {
 
     this.isOpen = false;
@@ -55,11 +55,11 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           }
 
           if(numItems === 0) {
-            angular.element('.dragNDropCtn').removeClass('outOfFocus');
+            angular.element('.drag-n-Drop-ctn').removeClass('outOfFocus');
           }
         });
 
-        angular.element('.exitSelection').bind('click', function() {
+        angular.element('.exit-selection').bind('click', function() {
           scope.closeContextualToolBar();
         });
 

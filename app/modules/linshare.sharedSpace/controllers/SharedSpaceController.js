@@ -86,8 +86,8 @@ angular.module('linshareUiUserApp')
     thisctrl.sortDropdownSetActive = function($event) {
       thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
       var currTarget = $event.currentTarget;
-      angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
-        angular.element(currTarget).addClass('selectedSorting');
+      angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
+        angular.element(currTarget).addClass('selected-sorting');
       });
     };
 
@@ -97,11 +97,11 @@ angular.module('linshareUiUserApp')
     };
 
     var openSearch = function() {
-      angular.element('#dropArea').addClass('search-toggled');
+      angular.element('#drop-area').addClass('search-toggled');
       angular.element('#top-search-wrap input').focus();
     };
     var closeSearch = function() {
-      angular.element('#dropArea').removeClass('search-toggled');
+      angular.element('#drop-area').removeClass('search-toggled');
       angular.element('#searchInMobileFiles').val('').trigger('change');
     };
 
@@ -147,8 +147,8 @@ angular.module('linshareUiUserApp')
       thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
       thisctrl.tableParams.sorting(sortField, thisctrl.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
-      angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
-        angular.element(currTarget).addClass('selectedSorting');
+      angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
+        angular.element(currTarget).addClass('selected-sorting');
       });
     };
 
@@ -244,7 +244,7 @@ angular.module('linshareUiUserApp')
       });
 
       var currElm = event.currentTarget;
-      angular.element('#fileListTable tr li').removeClass('activeActionButton').promise().done(function() {
+      angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
         angular.element(currElm).addClass('activeActionButton');
       });
     }

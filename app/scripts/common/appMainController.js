@@ -246,6 +246,9 @@ angular.module('linshareUiUserApp')
 
     function checkAndSetNewWidth(attr) {
       var widthWindow = angular.element(window).width();
+      if(widthWindow > $rootScope.mobileWidthBreakpoint) {
+        $rootScope.isMobile = true;
+      }
       if(widthWindow > 1057){
         $scope.mactrl.sidebarToggle.left = true;
       }else{
@@ -253,13 +256,13 @@ angular.module('linshareUiUserApp')
       }
       if((attr) || (widthWindow > 1057) ) {
         var nwidthWindow = widthWindow - $rootScope.sidebarLeftWidth;
-        angular.element('.resetContentWidth').width(nwidthWindow);
+        angular.element('.reset-content-width').width(nwidthWindow);
         $timeout(function(){
-          angular.element('.resetContentWidth').width(nwidthWindow);
-          angular.element('.dragNDropContent').fadeTo( 1200 ,1);
+          angular.element('.reset-content-width').width(nwidthWindow);
+          angular.element('.drag-n-drop-content').fadeTo( 1200 ,1);
           }, 250);
       } else {
-        angular.element('.resetContentWidth').width('100%');
+        angular.element('.reset-content-width').width('100%');
       }
     }
     this.resizeDragNDropCtn = function(attr) {

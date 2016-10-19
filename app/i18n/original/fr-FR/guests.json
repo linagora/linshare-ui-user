@@ -16,6 +16,27 @@
     "INVALID_EMPTY_FIELD": "Ce champ ne peut être vide.",
     "INVALID_EMAIL": "Format d'adresse électronique invalide.",
     "INVALID_DATE": "La date saisit doit être supérieur à la date d'aujourd'hui et inférieur à la date maximal du :"
+  },
+  "BREADCRUMB_TITLE": "Comptes invités",
+  "HEADER_GUEST": {
+    "DOMAIN" : "Domaine"
+  },
+  "MY_GUESTS": "Mes invités",
+  "ALL_GUESTS": "Tous les invités",
+  "BOUTON_LABEL_TITLE": {
+    "EDIT" : "Modifier",
+    "DELETE" : "Supprimer",
+    "GUEST" : "Invité(s)"
+  },
+  "ACTION": {
+    "JOIN_RESTRICTED_CONTACTS" : "S'ajouter aux contacts restreint",
+    "ADD_TO_WORKGROUPS" : "Ajouter à des groupes de travail",
+    "ADMIN_REQUEST" : "Obtenir les droits d'administration"
+  },
+  "ORDER_BY": {
+    "EXPIRATION_DATE" : "Date d'expiration",
+    "EMAIL" : "Courriel",
+    "DOMAIN_NAME" : "Nom de domaine"
   }
 }
 

@@ -47,7 +47,7 @@ angular.module('linshare.document')
         type: flowFile.getType(),
         flowId: flowFile.uniqueIdentifier
       };
-      angular.element('.dragNDropCtn').addClass('outOfFocus');
+      angular.element('.drag-n-Drop-ctn').addClass('outOfFocus');
       //pertains to upload-box
       if(angular.element('upload-box') !== null) {
         angular.element('.infoPartager').css('opacity','1');
