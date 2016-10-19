@@ -120,7 +120,7 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.upload/views/lsUpload.html',
         controller: 'uploadQueueController',
         resolve: {
-          function ($state, $stateParams, lsAppConfig) {
+          checkUrl: function ($state, $stateParams, lsAppConfig) {
             if($stateParams.from !== lsAppConfig.mySpacePage && $stateParams.from !== lsAppConfig.workgroupPage) {
               return $state.go('documents.upload', { 'from': lsAppConfig.mySpacePage });
             }
