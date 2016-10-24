@@ -78,12 +78,12 @@
               <i class="zmdi zmdi-file"></i>
               {{ "BREADCRUMB_TITLE_WORKGROUP" | translate }}
             </a>
-            <span ng-repeat-start="folder in sharedSpaceListVm.breadcrumbFolders" class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+            <span ng-repeat-start="folder in sharedSpaceListVm.breadcrumbFolders" class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
             <a ng-repeat-end class="breadcrumb"
                ng-click="sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, folder.parent, folder.uuid, folder.name, true)">
               {{ folder.name }}
             </a>
-            <span class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+            <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
             <span>
               &nbsp;&nbsp;{{ sharedSpaceListVm.folderName }}
             </span>

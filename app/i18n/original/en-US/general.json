@@ -87,7 +87,9 @@
       "UPLOAD_DONE": "done",
       "UPLOAD_PAUSED": "paused",
       "UPLOAD_SERVER": "server processing",
-      "FOOTER": "View all"
+      "FOOTER": "View all",
+      "TO_MY_SPACE": "Into myspace",
+      "TO_COMMON_SPACE": "Into common space"
     },
     "SHARING_PROGRESS": {
       "SHARE_DONE": "sent",

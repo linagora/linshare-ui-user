@@ -16,7 +16,7 @@
             <a href="#" class="breadcrumb"><i class="zmdi zmdi-account-box"></i>
               {{ "BREADCRUMB_TITLE" | translate }}
             </a>
-            <span class="sub-categorie-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+            <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items">
@@ -196,7 +196,7 @@
         <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
              data-ng-class="{'show-multi-menu': guestListVm.selectedDocuments.length > 0}">
           <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->
-          <div class="toogleCkeckboxToolbar" x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
+          <div class="toggle-checkbox-toolbar" x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
             <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope" >
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>

@@ -89,7 +89,9 @@
       "UPLOAD_DONE": "terminé",
       "UPLOAD_PAUSED": "en pause",
       "UPLOAD_SERVER": "traitement serveur en cours",
-      "FOOTER": "Voir tous"
+      "FOOTER": "Voir tous",
+      "TO_MY_SPACE": "Vers mon espace personnel",
+      "TO_COMMON_SPACE": "Vers l'espace commun"
     },
     "SHARING_PROGRESS": {
       "SHARE_DONE": "envoyé",

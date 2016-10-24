@@ -1,5 +1,6 @@
-<md-list-item style="color: #0683bb; font-weight: bold">{{ fromWhere == mySpacePage ? "MENU_TITLE.MY_FILES" : "MENU_TITLE.SHARED_SPACE" | translate }}
-  <md-icon style="width: 40px"><a ng-href="{{$state.href('documents.upload', {from: fromWhere})}}" style="clear: none">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a></md-icon>
+<md-list-item>
+  <span>{{ fromWhere == mySpacePage ? "HEADER.UPLOAD_PROGRESS.TO_MY_SPACE" : "HEADER.UPLOAD_PROGRESS.TO_COMMON_SPACE" | translate }}</span>
+  <span><a ng-href="{{$state.href('documents.upload', {from: fromWhere})}}">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a></span>
 </md-list-item>
 <div class="lv-item row" x-ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere} | limitTo: 3 as filesFilterred">
   <a class="col-xs-10 p-0" ui-sref="documents.upload({from: fromWhere, idUpload: file.uniqueIdentifier})">
@@ -20,7 +21,7 @@
     <p ng-show="file.paused && !file.isComplete()" class="time-remaining">
       {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate }}
     </p>
-    <div class="progress">)
+    <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
            aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress()*100}}%">
         <span class="sr-only">100% Complete (success)</span>

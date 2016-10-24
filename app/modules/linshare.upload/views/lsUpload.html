@@ -4,79 +4,77 @@
      flow-drag-enter="dropClass='drag-over'"
      flow-file-success="addUploadedFile($file, $message)"
      flow-drag-leave="dropClass='fade-out-elm'"
-     ng-class="{'drag-over' : dropClass == 'drag-over', 'fade-out-elm': dropClass == 'fade-out-elm'  }">
+     x-ng-class="{'drag-over' : dropClass == 'drag-over', 'fade-out-elm': dropClass == 'fade-out-elm'  }">
   <div id="drop-ctn" class="drop border-anim reset-content-width">
     <div>
       <div class="drag-and-drop-alert ">
-        <p>{{ "DRAG_DROP_BACKGROUND.TITLE" | translate }}</p>
+        <p>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</p>
       </div>
     </div>
   </div>
   <div id="breadcrumb-wrap">
     <section class="row multi-select visible-xs">
       <div class="col-xs-2 ctn-mobile-select-count">
-        <span class="number-of-files ng-binding">{{lengthOfSelectedDocuments()}}</span>
-        <span class="file-multi-select-label ng-binding">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
+        <span class="number-of-files ">{{lengthOfSelectedDocuments()}}</span>
+        <span class="file-multi-select-label ">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
       </div>
       <div class="col-xs-10">
         <i class="zmdi zmdi-share col-xs-3"
            title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
-           ng-class="{'de-activate-sharing': lengthOfSelectedDocuments() === 0}"
-           ng-click="onShare(); mactrl.sidebarToggle.right = true;" role="button" tabindex="0">
+           x-ng-class="{'de-activate-sharing': lengthOfSelectedDocuments() === 0}"
+           x-ng-click="onShare(); mactrl.sidebarToggle.right = true;" role="button" tabindex="0">
         </i>
-        <i ng-if="selectAll" ng-click="selectUploadingDocuments()"
+        <i x-ng-if="selectAll" x-ng-click="selectUploadingDocuments()"
            class="fa fa fa-square-o col-xs-3"
-           ng-class="{'de-activate-sharing': $flow.files.length === 0 }">
+           x-ng-class="{'de-activate-sharing': $flow.files.length === 0 }">
         </i>
-        <i ng-if="!selectAll" ng-click="selectUploadingDocuments()"
+        <i x-ng-if="!selectAll" x-ng-click="selectUploadingDocuments()"
            class="fa fa-check-square-o col-xs-3"
-           ng-class="{'de-activate-sharing': $flow.files.length === 0 } ">
+           x-ng-class="{'de-activate-sharing': $flow.files.length === 0 } ">
         </i>
         <i class="zmdi zmdi-pause col-xs-3 disabled"></i>
         <i class="zmdi zmdi-check-all col-xs-3 disabled"></i>
       </div>
     </section>
-    <div class="menu-popover-ctn hidden-xs clickable" ng-show="linshareModeProduction == false"
+    <div class="menu-popover-ctn hidden-xs clickable" x-ng-show="linshareModeProduction == false"
          flow-btn href="javascript:void(0)">
       <a class="add-menu-group" tabindex="0">
         <i class="zmdi zmdi-plus"></i>
       </a>
     </div>
     <div class="breadcrumbs-ctn hidden-xs">
-      <div class="breadcrumb col-xs-6">
-        <i class="zmdi zmdi-file"></i>{{ "UPLOADED_FILES.BREADCRUMB_TITLE" | translate }}
+      <div class="breadcrumb">
+        <i class="zmdi zmdi-file"></i>{{"UPLOADED_FILES.BREADCRUMB_TITLE" | translate}}
       </div>
-
-      <div class="col-xs-4">
-        <ul class="nav nav-pills">
-          <li ng-class="{'active' : isFromMySpace}"><a
-            ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">{{ "MENU_TITLE.MY_FILES" | translate
-            }}</a></li>
-          <li ng-class="{'active' : !isFromMySpace}"><a
-            ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">{{ "MENU_TITLE.SHARED_SPACE" |
-            translate }}</a></li>
-        </ul>
+      <div class="pull-right actions-upload-queue col-xs-2">
+        <div x-ng-show="$flow.files.length > 0" class="upload-actions-toolbar actions">
+          <a href="" class="col-xs-6"
+             x-ng-show="!$flow.isPaused"
+             x-ng-click="pauseAllFiles()">
+            <i class="zmdi zmdi-pause" title="{{'SELECTION_TOOLBAR.PAUSE_ALL' | translate}}"></i>
+          </a>
+          <a x-ng-show="$flow.isPaused" href="" class="col-xs-6" x-ng-click="resumeAllFiles()">
+            <i class="zmdi zmdi-play " title="{{'SELECTION_TOOLBAR.PLAY_ALL' | translate}}"></i>
+          </a>
+          <a href="" class="col-xs-6" x-ng-show="isflowUploadingError"
+             x-ng-click="retryAllFiles()">
+            <i class="zmdi zmdi-undo" title="{{'SELECTION_TOOLBAR.RETRY_ALL' | translate}}"></i>
+          </a>
+          <a href="" class="col-xs-6" x-ng-click="cancelAllFiles()">
+            <i class="zmdi zmdi-close" title="{{'SELECTION_TOOLBAR.CANCEL_ALL' | translate}}"></i>
+          </a>
+          <a href="" class="col-xs-6" x-ng-click="clearAllFiles()">
+            <i class="zmdi zmdi-check-all" title="{{'SELECTION_TOOLBAR.CLEAR_ALL' | translate}}"></i>
+          </a>
+        </div>
       </div>
-
-      <div ng-show="$flow.files.length > 0" class="pull-right col-xs-2 upload-actions-toolbar actions">
-        <a href="" class="col-xs-6"
-           ng-show="!$flow.isPaused"
-           ng-click="pauseAllFiles()">
-          <i class="zmdi zmdi-pause" title="{{ 'SELECTION_TOOLBAR.PAUSE_ALL' | translate }}"></i>
-        </a>
-        <a ng-show="$flow.isPaused" href="" class="col-xs-6" ng-click="resumeAllFiles()">
-          <i class="zmdi zmdi-play " title="{{ 'SELECTION_TOOLBAR.PLAY_ALL' | translate }}"></i>
-        </a>
-        <a href="" class="col-xs-6" ng-show="isflowUploadingError"
-           ng-click="retryAllFiles()">
-          <i class="zmdi zmdi-undo" title="{{ 'SELECTION_TOOLBAR.RETRY_ALL' | translate }}"></i>
-        </a>
-        <a href="" class="col-xs-6" ng-click="cancelAllFiles()">
-          <i class="zmdi zmdi-close" title="{{ 'SELECTION_TOOLBAR.CANCEL_ALL' | translate }}"></i>
-        </a>
-        <a href="" class="col-xs-6" ng-click="clearAllFiles()">
-          <i class="zmdi zmdi-check-all" title="{{ 'SELECTION_TOOLBAR.CLEAR_ALL' | translate }}"></i>
-        </a>
+      <div class="pull-right m-r-20 m-t-5">
+          <span x-ng-class="{'active' : isFromMySpace , 'left-elem-toggle-inactive' : !isFromMySpace}" class="toggle-pill"><a
+            x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">{{"MENU_TITLE.FILES" | translate
+           }}</a></span>
+        <span x-ng-class="{'active' : !isFromMySpace , 'right-elem-toggle-inactive' : isFromMySpace}" class="toggle-pill"><a
+          x-ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">{{"MENU_TITLE.SHARED_SPACE" |
+            translate}}</a></span>
       </div>
     </div>
   </div>
@@ -89,63 +87,63 @@
       </div>
 
       <div id="selection-actions" class="default-multi-toolbar-state hidden-xs"
-           data-ng-class="{'show-multi-menu': $flow.files.length > 0}">
-        <div class="toggle-checkbox-toolbar" ng-click="selectUploadingDocuments()">
-          <a ng-if="selectAll" class="select-all-items plain-text-button ng-scope">
+           x-ng-class="{'show-multi-menu': $flow.files.length > 0}">
+        <div class="toggle-checkbox-toolbar" x-ng-click="selectUploadingDocuments()">
+          <a x-ng-if="selectAll" class="select-all-items plain-text-button">
             <i class="fa fa fa-square-o checkbox-table"></i>
           </a>
-          <a ng-if="!selectAll" class="select-all-items plain-text-button ng-scope">
+          <a x-ng-if="!selectAll" class="select-all-items plain-text-button">
             <i class="fa fa-check-square-o"></i>
           </a>
         </div>
         <div class="display-num-selected-items" title="{{'WIP' | translate}}"
-             data-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
-             ng-click="activeBtnShowSelection = !activeBtnShowSelection">
+             x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
+             x-ng-click="activeBtnShowSelection = !activeBtnShowSelection">
           <p><span>{{lengthOfSelectedDocuments()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
           <div class="pull-left view-icons-ctn groups-view">
-            <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show="activeBtnShowSelection"></i>
-            <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
+            <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection"></i>
+            <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
           </div>
-          <div class="pull-left view-icons-ctn reset-icon" ng-click="resetSelectedDocuments()">
+          <div class="pull-left view-icons-ctn reset-icon" x-ng-click="resetSelectedDocuments()">
             <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
           </div>
         </div>
         <div id="toolbar-actions" class="hidden-xs">
-          <span ng-if="isFromMySpace">
+          <span x-ng-if="isFromMySpace">
           <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
-             ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
-             ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+             x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+             x-ng-click="onShare(); mactrl.sidebarToggle.right = true;">
             <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
           </span>
           <span>
-            <a class="plain-text-button share-link" title="{{ 'SELECTION_TOOLBAR.PLAY' | translate }}"
-               ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
-               ng-click="resumeSelectedFiles()">
-              <i class="zmdi zmdi-play"></i><span>{{ 'SELECTION_TOOLBAR.PLAY' | translate }}</span></a>
+            <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.PLAY' | translate}}"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-click="resumeSelectedFiles()">
+              <i class="zmdi zmdi-play"></i><span>{{'SELECTION_TOOLBAR.PLAY' | translate}}</span></a>
             </span>
           <span>
-            <a class="plain-text-button share-link" title="{{ 'SELECTION_TOOLBAR.PAUSE' | translate }}"
-               ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
-               ng-click="pauseSelectedFiles()">
-              <i class="zmdi zmdi-pause"></i><span>{{ 'SELECTION_TOOLBAR.PAUSE' | translate }}</span></a>
+            <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.PAUSE' | translate}}"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-click="pauseSelectedFiles()">
+              <i class="zmdi zmdi-pause"></i><span>{{'SELECTION_TOOLBAR.PAUSE' | translate}}</span></a>
             </span>
           <span>
-            <a class="plain-text-button share-link" title="{{ 'SELECTION_TOOLBAR.CANCEL' | translate }}"
-               ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
-               ng-click="cancelSelectedFiles()">
-              <i class="zmdi zmdi-close"></i><span>{{ 'SELECTION_TOOLBAR.CANCEL' | translate }}</span></a>
+            <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.CANCEL' | translate}}"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-click="cancelSelectedFiles()">
+              <i class="zmdi zmdi-close"></i><span>{{'SELECTION_TOOLBAR.CANCEL' | translate}}</span></a>
             </span>
           <span>
-            <a class="plain-text-button share-link" title="{{ 'SELECTION_TOOLBAR.CLEAR' | translate }}"
-               ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
-               ng-click="clearSelectedFiles()">
-              <i class="zmdi zmdi-check-all"></i><span>{{ 'SELECTION_TOOLBAR.CLEAR' | translate }}</span></a>
+            <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-click="clearSelectedFiles()">
+              <i class="zmdi zmdi-check-all"></i><span>{{'SELECTION_TOOLBAR.CLEAR' | translate}}</span></a>
             </span>
-          <span ng-if="isflowUploadingError">
-            <a class="plain-text-button share-link" title="{{ 'SELECTION_TOOLBAR.RETRY' | translate }}"
-               ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
-               ng-click="retrySelectedFiles()">
-              <i class="zmdi zmdi-undo"></i><span>{{ 'SELECTION_TOOLBAR.RETRY' | translate }}</span></a>
+          <span x-ng-if="isflowUploadingError">
+            <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.RETRY' | translate}}"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-click="retrySelectedFiles()">
+              <i class="zmdi zmdi-undo"></i><span>{{'SELECTION_TOOLBAR.RETRY' | translate}}</span></a>
             </span>
         </div>
       </div>
@@ -158,15 +156,15 @@
           </div>
           <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
 
-          <p>{{ "DRAG_DROP_BACKGROUND.COMMENT" | translate }}</p>
+          <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
         </div>
       </div>
-      <ls-upload-queue from-where="{{ fromWhere }}"></ls-upload-queue>
+      <ls-upload-queue from-where="{{fromWhere}}"></ls-upload-queue>
 
       <div class="partage-list">
-        <button class="btn btn-default waves-effect" ng-repeat="n in sharingsBtn track by $index"
-                ng-click="showSharingItems($index)">
-          <span>{{ 'TRANSFERS_DROPDOWN.SHARE' | translate }} {{$index+1}}</span> <i class="zmdi zmdi-edit"></i>
+        <button class="btn btn-default waves-effect" x-ng-repeat="n in sharingsBtn track by $index"
+                x-ng-click="showSharingItems($index)">
+          <span>{{'TRANSFERS_DROPDOWN.SHARE' | translate}} {{$index+1}}</span> <i class="zmdi zmdi-edit"></i>
         </button>
       </div>
 
@@ -178,7 +176,7 @@
           </md-button>
         </md-fab-trigger>
         <md-toolbar style="padding:0">
-          <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate }}</p>
+          <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
           <md-fab-actions class="md-toolbar-tools">
             <md-button aria-label="label" class="md-icon-button" flow-btn>
               <a href="#/files/upload" ui-sref="documents.upload">
@@ -195,7 +193,7 @@
             <md-button aria-label="comment" class="md-icon-button" flow-btn>
               <a class="disabled-work-in-progress">
                 <i class="zmdi zmdi-accounts-alt disabled-work-in-progress"></i>
-                <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate }}</span>
+                <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate}}</span>
               </a>
             </md-button>
           </md-fab-actions>
@@ -204,7 +202,7 @@
 
     </div>
   </div>
-  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-         data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
+  <aside id="chat" x-ng-include src="'views/includes/sidebar-right.html'"
+         x-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
   </aside>
 </div>

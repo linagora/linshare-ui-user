@@ -83,7 +83,9 @@
       "UPLOAD_DONE": "xong",
       "TBT__UPLOAD_PAUSED": "",
       "TBT__UPLOAD_SERVER": "",
-      "FOOTER": "Xem tất cả"
+      "FOOTER": "Xem tất cả",
+      "TBT__TO_MY_SPACE": "",
+      "TBT__TO_COMMON_SPACE": ""
     },
     "TBT_SHARING_PROGRESS": {
       "TBT_SHARE_DONE": "",
