@@ -8,7 +8,7 @@
   function uploadPopupFilesDirective() {
     return {
       restrict: 'A',
-      templateUrl: 'scripts/directives/uploadPopupFiles/uploadPopupFiles.html',
+      templateUrl: 'directives/uploadPopupFiles/uploadPopupFiles.html',
       scope: true,
       link: function(scope, elem, attrs) {
         var totalFilesFrom;
