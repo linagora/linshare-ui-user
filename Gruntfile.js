@@ -36,7 +36,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/**/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/directives/*/*.js', '<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/**/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -126,6 +126,7 @@ module.exports = function (grunt) {
         src: [
           'Gruntfile.js',
           '<%= yeoman.app %>/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/directives/*/*.js',
           '<%= yeoman.app %>/modules/**/*.js',
           '!<%= yeoman.app %>/modules/materialAdmin/**/*.js',
           '!<%= yeoman.app %>/modules/**/test/karma.conf.js'
@@ -242,6 +243,7 @@ module.exports = function (grunt) {
       dist: {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
+          '<%= yeoman.dist %>/directives/*/*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '!<%= yeoman.dist %>/scripts/config.js',
@@ -342,7 +344,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html', 'modules/**/views/*.html'],
+          src: ['*.html', 'views/{,*/}*.html', 'directives/*/*.html', 'modules/**/views/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -381,6 +383,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'directives/*/*.html',
             'modules/**/**/*.html',
             '!modules/materialAdmin/views/*.html',
             'i18n/original/{,*/}*.json',
@@ -453,7 +456,7 @@ module.exports = function (grunt) {
     },
 
     ngdocs: {
-      all: ['app/scripts/{,*/}*.js', 'app/modules/{,*/}*.js']
+      all: ['app/scripts/{,*/}*.js', 'app/directives/*/*.js', 'app/modules/{,*/}*.js']
     },
 
     // Test settings
