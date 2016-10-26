@@ -1,14 +1,13 @@
-<div class="container" data-ng-controller="LinshareShareActionController">
-
-  <div ng-if="sidebarRightDataType === 'details' " sidebar-content="details"></div>
-  <div ng-if="sidebarRightDataType === 'share' " sidebar-content="share"></div>
-  <div ng-if="sidebarRightDataType === 'more-options' " sidebar-content="more-options"></div>
-  <div ng-if="sidebarRightDataType === 'share-details' " sidebar-content="share-details"></div>
-  <div ng-if="sidebarRightDataType === 'active-share-details' " sidebar-content="active-share-details"></div>
-  <div ng-if="sidebarRightDataType === 'add-member' " sidebar-content="add-member"></div>
-  <div ng-if="sidebarRightDataType === 'multi-select-rights' " sidebar-content="multi-select-rights"></div>
-  <div ng-if="sidebarRightDataType === 'workgroup-detail-file' " sidebar-content="workgroup-detail-file"></div>
-  <div ng-if="sidebarRightDataType === 'add-guest' " sidebar-content="add-guest"></div>
-  <div ng-if="sidebarRightDataType === 'guest-sidebar' " sidebar-content="guest-sidebar"></div>
-
+<div class="container" x-ng-controller="LinshareShareActionController as shareActionVm">
+  <div x-ng-if="mainVm.sidebar.getContent() === 'share' " sidebar-content="share"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'more-options' " sidebar-content="more-options"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'share-details' " sidebar-content="share-details"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'active-share-details' " sidebar-content="active-share-details"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'add-guest' " sidebar-content="add-guest"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'guest' " sidebar-content="guest"></div>
+  <!--Not using shareActionVm-->
+  <div x-ng-if="mainVm.sidebar.getContent() === 'details' " sidebar-content="details"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'add-member' " sidebar-content="add-member"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'workgroup' " sidebar-content="workgroup"></div>
+  <div x-ng-if="mainVm.sidebar.getContent() === 'workgroup-detail-file' " sidebar-content="workgroup-detail-file"></div>
 </div>

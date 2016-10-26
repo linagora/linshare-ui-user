@@ -26,7 +26,7 @@ angular.module('linshareUiUserApp')
     RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json;'});
     RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers) {
       headers['WWW-No-Authenticate'] = 'linshare';
-      if(angular.isObject(element)) {
+      if (angular.isObject(element)) {
         delete element.isSelected;
         delete element.typeImage;
         delete element.info;
@@ -64,7 +64,7 @@ angular.module('linshareUiUserApp')
   .run(function($rootScope, $filter, $location, Restangular, growlService, $log, $window, localStorageService, languageService) {
     $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
     var storedLocale = localStorageService.get('locale');
-    if(storedLocale) {
+    if (storedLocale) {
       languageService.changeLocale(storedLocale);
     } else {
       languageService.changeLocale($rootScope.browserLanguage);
@@ -77,7 +77,7 @@ angular.module('linshareUiUserApp')
     Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
       switch (response.status) {
         case 400:
-          if(response.data.errCode !== 26006) {
+          if (response.data.errCode !== 26006) {
             growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
           }
           $log.debug('Error ' + response.status, response);

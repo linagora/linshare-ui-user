@@ -9,13 +9,13 @@ angular.module('linshareUiUserApp')
         scope.$watch(function() {
           return el.hasClass('open');
         }, function(newValue,closeDropdown) {
-          if(closeDropdown) {
+          if (closeDropdown) {
             angular.element('.uib-dropdown-menu.open').removeClass('open');
           }
-          if(newValue) {
+          if (newValue) {
             angular.element('.uib-dropdown-menu').each(function() {
               var state= angular.element(this).css('display');
-              if(state === 'block') {
+              if (state === 'block') {
                 angular.element(this).addClass('open');
               }
             });

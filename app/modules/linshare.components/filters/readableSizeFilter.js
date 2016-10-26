@@ -34,17 +34,17 @@ angular.module('linshare.components')
     };
 
     return function(seconds) {
-      if(!Number.isFinite(seconds)) {
+      if (!Number.isFinite(seconds)) {
         return '-';
       }
-      if(seconds === 0) {
+      if (seconds === 0) {
         var $translate = $filter('translate');
         return $translate('HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER');
-      } else if(seconds < NB_SECONDS_IN_MIN) {
+      } else if (seconds < NB_SECONDS_IN_MIN) {
         return Math.round(seconds) + ' s';
-      } else if(NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
+      } else if (NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
         return secToMin(seconds);
-      } else if(NB_SECONDS_IN_HOUR <= seconds < NB_SECONDS_IN_DAY) {
+      } else if (NB_SECONDS_IN_HOUR <= seconds < NB_SECONDS_IN_DAY) {
         return secToHour(seconds);
       }
     };
@@ -57,7 +57,7 @@ angular.module('linshare.components')
   })
   .filter('getextension', function() {
     return function(filename) {
-      if(filename) {
+      if (filename) {
         return filename.split('.').pop().toUpperCase();
       }
     };

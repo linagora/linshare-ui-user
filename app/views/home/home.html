@@ -11,16 +11,16 @@
             <h2 flow-btn class="box-title"><a >{{"MY_FILES_SPACE" | translate}}</a></h2>
             <p class="box-txt">{{"MY_FILES_SPACE_MSG" | translate}}</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop ng-init="isChecked = false;"
-               ng-click="isChecked = !isChecked">
-            <a href="" ng-show="isChecked == false">
+          <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
+               x-ng-click="isChecked = !isChecked">
+            <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
               <md-tooltip md-direction="bottom">
                 {{"WIP" | translate}}
               </md-tooltip>
             </a>
-            <a href="" ng-show="isChecked">
+            <a href="" x-ng-show="isChecked">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
@@ -42,16 +42,16 @@
               <a >{{"UPLOAD_SHARE" | translate}}</a></h2>
             <p class="box-txt">{{"UPLOAD_SHARE_MSG" | translate}}</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop ng-init="isChecked = false;"
-               ng-click="isChecked = !isChecked">
-            <a href="" ng-show="isChecked == false">
+          <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
+               x-ng-click="isChecked = !isChecked">
+            <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
               <md-tooltip md-direction="bottom">
                 {{"WIP" | translate}}
               </md-tooltip>
             </a>
-            <a href="" ng-show="isChecked">
+            <a href="" x-ng-show="isChecked">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
@@ -71,13 +71,13 @@
             <h2 class="box-title"><a>{{"UPLOAD_GROUP" | translate}}</a></h2>
             <p class="box-txt">{{"UPLOAD_GROUP_MSG" | translate}}</p>
           </div>
-          <div class="set-homepage-ctn"  event-propagation-stop ng-init="isChecked = false;"
-               ng-click="isChecked = !isChecked">
-            <a href="" ng-show="isChecked == false">
+          <div class="set-homepage-ctn"  event-propagation-stop x-ng-init="isChecked = false;"
+               x-ng-click="isChecked = !isChecked">
+            <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
             </a>
-            <a href="" ng-show="isChecked">
+            <a href="" x-ng-show="isChecked">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
@@ -89,7 +89,7 @@
       </div>
 
 
-      <div class="box-3"  ng-show="linshareModeProduction == false">
+      <div class="box-3"  x-ng-show="linshareModeProduction == false">
         <div class="card-img upload-request">
           <i class="groups-home-idd"></i>
         </div>
@@ -98,13 +98,13 @@
             <h2 flow-btn class="box-title"><a>{{"UPLOAD_REQUEST" | translate}}</a></h2>
             <p class="box-txt">{{"UPLOAD_REQUEST_MSG" | translate}}</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop ng-init="isChecked = false;"
-               ng-click="isChecked = !isChecked">
-            <a href="" ng-show="isChecked == false">
+          <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
+               x-ng-click="isChecked = !isChecked">
+            <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
             </a>
-            <a href="" ng-show="isChecked">
+            <a href="" x-ng-show="isChecked">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
@@ -201,7 +201,7 @@
       </md-button>
     </md-fab-trigger>
     <md-toolbar style="padding:0">
-      <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate }}</p>
+      <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
       <md-fab-actions class="md-toolbar-tools">
         <md-button aria-label="label" class="md-icon-button" flow-btn>
           <a href="#/files/upload" ui-sref="documents.upload">
@@ -218,7 +218,7 @@
         <md-button aria-label="comment" class="md-icon-button" flow-btn>
           <a href="#/files/list" ui-sref="documents.files" class="disabled-work-in-progress">
             <i class="zmdi zmdi-accounts-alt disabled-work-in-progress"></i>
-            <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_WORKGROUP' | translate }}</span>
+            <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_WORKGROUP' | translate}}</span>
           </a>
         </md-button>
       </md-fab-actions>

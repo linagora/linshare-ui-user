@@ -4,33 +4,33 @@
       <div class="lv-header-alt clearfix display-none">
         <h2 class="lvh-label"><b>{{'HEADER.FILES_TO_SHARE' | translate}}</b></h2>
       </div>
-      <div class="lv-body ng-table" id="file-list-table">
-        <div class="media-body" ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere}"
-             data-ng-class="{'highlight-list-elem': file.isSelected }"
+      <div class="lv-body x-ng-table" id="file-list-table">
+        <div class="media-body" x-ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere}"
+             x-ng-class="{'highlight-list-elem': file.isSelected}"
              data-uid-flow="{{file.uniqueIdentifier}}">
           <div class="col-xs-10 col-sm-12 overflow-hidden">
             <div class="col-xs-24 col-sm-12 anim-left no-padding">
               <div class="col-xs-6 col-sm-11 pull-left">
                 <div ls-on-upload-select
                      class="preview-icon-ctn pull-left hidden-v-xs set-content-left thumb-type-item ">
-                  <i class="fa ls-1p5x" ng-class="'{{file.getType() | mimetypeIcone}}'"></i>
-                  <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': file.isSelected }">
+                  <i class="fa ls-1p5x" x-ng-class="'{{file.getType() | mimetypeIcone}}'"></i>
+                  <div class="checkbox-ctn-thumb" x-ng-class="{'maintain-vis': file.isSelected}">
                   </div>
                 </div>
                 <div class="pull-left data-list-ctn">
                   <div class="lv-title">{{file.name}}</div>
-                  <small ng-hide="file.isComplete() || file.paused" class="lv-small pull-left">
+                  <small x-ng-hide="file.isComplete() || file.paused" class="lv-small pull-left">
                     {{file.timeRemaining() | remainingTime}}
-                    <span ng-show="file.progress() == 0 ">{{'PENDING_UPLOADS' | translate}}</span>
+                    <span x-ng-show="file.progress() == 0 ">{{'PENDING_UPLOADS' | translate}}</span>
                   </small>
-                  <small ng-show="file.isComplete()" class="lv-small pull-left">
-                    {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
+                  <small x-ng-show="file.isComplete()" class="lv-small pull-left">
+                    {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate}}
                   </small>
-                  <small ng-show="file.paused && !file.isComplete()" class="lv-small pull-left">
-                    {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate }}
+                  <small x-ng-show="file.paused && !file.isComplete()" class="lv-small pull-left">
+                    {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate}}
                   </small>
-                  <small ng-if="file.folderInfos" class="lv-small pull-left">
-                    <span>&nbsp;| Dest : {{ file.folderInfos.workgroupName | uppercase }} >> {{ file.folderInfos.folderName }}</span>
+                  <small x-ng-if="file.folderInfos" class="lv-small pull-left">
+                    <span>&nbsp;| Dest : {{file.folderInfos.workgroupName | uppercase}} >> {{file.folderInfos.folderName}}</span>
                   </small>
                   <small class="lv-small pull-right clearfix">{{file.size | readableSize: false}}</small>
                   <div class="clearfix"></div>
@@ -40,33 +40,33 @@
               <div class="col-xs-6 col-sm-1 pull-left">
                 <ul class="lv-actions actions align-list-icons ">
                   <li class="col-xs-6" x-ng-if="!file.paused" x-ng-hide="file.isComplete()">
-                    <a href="" ng-click="file.pause()" event-propagation-stop>
+                    <a href="" x-ng-click="file.pause()" event-propagation-stop>
                       <i class="zmdi zmdi-pause" title="{{'SELECTION_TOOLBAR.PAUSE' | translate}}"></i>
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-show="file.isComplete()">
-                    <a ng-click="showFileInSource(file)">
+                    <a x-ng-click="showFileInSource(file)">
                       <i class="fa fa-eye" title="{{'SELECTION_TOOLBAR.SHOW_IN_FILES' | translate}}"></i>
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-if="file.paused" x-ng-hide="file.isComplete()">
-                    <a href="" ng-click="file.resume()" event-propagation-stop>
+                    <a href="" x-ng-click="file.resume()" event-propagation-stop>
                       <i class="zmdi zmdi-play" title="{{'SELECTION_TOOLBAR.PLAY' | translate}}"></i>
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-if="file.isComplete() && !file.error">
-                    <a href="" ng-click="removeSelectedDocuments(file)"
+                    <a href="" x-ng-click="removeSelectedDocuments(file)"
                        title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}">
                       <i class="zmdi zmdi-check" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"></i>
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-if="file.error">
-                    <a href="" ng-click="file.retry()">
+                    <a href="" x-ng-click="file.retry()">
                       <i class="zmdi zmdi-undo" title="{{'SELECTION_TOOLBAR.RETRY' | translate}}"></i>
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-show="!file.isComplete()">
-                    <a href="" ng-click="removeSelectedDocuments(file)">
+                    <a href="" x-ng-click="removeSelectedDocuments(file)">
                       <i class="zmdi zmdi-close" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
                     </a>
                   </li>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="col-xs-2 visible-xs">
-            <ul class="lv-actions actions align-list-icons " ng-click="showBtnList($event)" event-propagation-stop>
+            <ul class="lv-actions actions align-list-icons " x-ng-click="showBtnList($event)" event-propagation-stop>
               <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
             </ul>
           </div>

@@ -18,6 +18,7 @@
       uploadFiles: uploadFiles,
       deleteFile: deleteFile,
       autocomplete: autocomplete,
+      update: update,
       updateFile: updateFile
     };
 
@@ -54,6 +55,21 @@
     function autocomplete(pattern) {
       $log.debug('documentRestService:autocomplete');
       return Restangular.all('users').one('autocomplete', pattern).get();
+    }
+
+		/**
+     * Call to the rest api for updating a Document
+     * @param uuid
+     * @param documentDto
+     * @returns {*}
+     */
+    function update (uuid, documentDto) {
+      $log.debug('LinshareDocumentRestService : updating a document');
+      var documentUpdated = _.cloneDeep(documentDto);
+      if (documentUpdated.thumbnail) {
+        delete documentUpdated.thumbnail;
+      }
+      return Restangular.one('documents', uuid).customPUT(documentUpdated);
     }
 
     function updateFile(uuid, documentDto) {

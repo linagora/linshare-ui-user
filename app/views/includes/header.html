@@ -1,11 +1,11 @@
 <ul class="header-inner clearfix" data-flow-files-submitted="$flow.upload()">
     <li id="menu-trigger"
         class="pull-left"
-        ng-click="hctrl.resizeDragNDropCtn(mactrl.sidebarToggle.left)"
+        x-ng-click="hctrl.resizeDragNDropCtn(mactrl.sidebarToggle.left)"
         data-target="mainmenu"
         data-toggle-sidebar
         data-model-left="mactrl.sidebarToggle.left"
-        data-ng-class="{ 'open': mactrl.sidebarToggle.left }">
+        x-ng-class="{'open': mactrl.sidebarToggle.left}">
         <div class="line-wrap">
             <div class="line top"></div>
             <div class="line center"></div>
@@ -13,7 +13,7 @@
         </div>
     </li>
     <li class="page-title visible-xs">
-        {{ linkActive.name | translate }}
+        {{linkActive.name | translate}}
     </li>
     <li class="logo hidden-xs pull-left">
         <a href="" ui-sref="home">
@@ -23,7 +23,7 @@
     <li class="pull-right">
       <ul class="top-menu">
             <li class="dropdown" id="transfert-dropdown" uib-dropdown auto-close="outsideClick">
-                <a ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
+                <a x-ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
                    style="height: 15px;">
                   <i class="tmn-counts">{{$flow.files.length}}</i>
                   <div class="progress m-t-15">
@@ -39,16 +39,19 @@
                 <div class="dropdown-menu pull-right dropdown-menu-lg action-link" uib-dropdown-menu>
                   <div class="listview">
                     <div class="lv-body">
-                      <div ng-cloak="" class="tabsdemoDynamicHeight">
+                      <div x-ng-cloak="" class="tabsdemoDynamicHeight">
                         <md-content>
                           <md-tabs md-dynamic-height="" md-border-bottom="">
                             <md-tab label="{{'TRANSFERS_DROPDOWN.UPLOADS' | translate}}">
-                              <md-content class="md-padding m-t-10" upload-popup-files="{{ mySpacePage }}"></md-content>
-                              <md-content class="md-padding m-t-10" upload-popup-files="{{ workgroupPage }}"></md-content>
+                              <md-content class="md-padding" upload-popup-files="{{mySpacePage}}"></md-content>
+                              <md-content class="md-padding" upload-popup-files="{{workgroupPage}}"></md-content>
+                              <a class="lv-footer"
+                                 ui-sref="documents.upload"
+                                 href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
                             </md-tab>
                             <md-tab label="{{'TRANSFERS_DROPDOWN.SHARE' | translate}}">
                               <md-content class="md-padding">
-                                <p class="empty-res" ng-if="share_array.length === 0">
+                                <p class="empty-res" x-ng-if="share_array.length === 0">
                                   <i class="zmdi zmdi-info-outline"></i>
                                   <span>
                                     {{'HEADER.NO_SHARES' | translate}}
@@ -60,11 +63,11 @@
                                     <div class="lv-title p-0">
                                       <div  class="p-0 file-name">
                                         <span> {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} {{$index + 1}}</span>
-                                        <i ng-show="share.waitingUploadIdentifiers.length > 0">
+                                        <i x-ng-show="share.waitingUploadIdentifiers.length > 0">
                                           {{"HEADER.SHARING_PROGRESS.SHARE_IN_PROGRESS" | translate}}
                                         </i>
-                                        <i ng-show="share.waitingUploadIdentifiers.length === 0">
-                                          {{"HEADER.SHARING_PROGRESS.SHARE_DONE" | translate }}
+                                        <i x-ng-show="share.waitingUploadIdentifiers.length === 0">
+                                          {{"HEADER.SHARING_PROGRESS.SHARE_DONE" | translate}}
                                         </i>
                                       </div>
                                       <div class="p-0 secondary-info-ctn">
@@ -90,7 +93,7 @@
                 </div>
             </li>
             <li class="dropdown" uib-dropdown auto-close="outsideClick">
-              <a  ng-show="devMode" uib-dropdown-toggle href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
+              <a  x-ng-show="devMode" uib-dropdown-toggle href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
                 <i class="tmn-counts">5</i>
               </a>
               <a uib-dropdown-toggle href=""><i class="tm-icon zmdi zmdi-notifications-none"></i></a>
@@ -123,13 +126,13 @@
               <a uib-dropdown-toggle href=""><i class="tm-icon zmdi zmdi-account zmdi-hc-2x"></i></a>
               <ul class="dropdown-menu dm-icon pull-right">
                 <li>
-                  <a href="">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</a>
+                  <a href="">{{loggedUser.firstName}} {{loggedUser.lastName}}</a>
                 </li>
-                <li ng-show="linshareModeProduction == false">
+                <li x-ng-show="linshareModeProduction == false">
                   <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
                 </li>
                 <li>
-                  <a data-ng-controller="AuthenticationController" data-ng-click="logout(); $flow.cancel()" ui-sref="login">
+                  <a x-ng-controller="AuthenticationController" x-ng-click="logout(); $flow.cancel()" ui-sref="login">
                     <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
                   </a>
                 </li>

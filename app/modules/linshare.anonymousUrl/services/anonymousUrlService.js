@@ -48,7 +48,7 @@ function anonymousUrlService($http, $log, $q, lsAnonymousUrlConfig, $uibModal, $
   }
 
   function callbackError(error) {
-    if(error.status === 403) {
+    if (error.status === 403) {
       status = error.status;
       $uibModal.open({
         backdrop: 'static',
@@ -70,7 +70,7 @@ function anonymousUrlService($http, $log, $q, lsAnonymousUrlConfig, $uibModal, $
         templateUrl: 'modules/linshare.anonymousUrl/views/passwordModal.html'
       });
 
-    } else if(error.status === 404) {
+    } else if (error.status === 404) {
       $log.debug('anonymous url not found');
       status = error.status;
     }

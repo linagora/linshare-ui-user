@@ -75,3 +75,6 @@ mvn -Dresume=false release:prepare release:perform
 ## Hard clean
 mvn -Phard-clean
 
+## Pitfall
+A list of encountered pitfall is registered [here](README.PITFALL.MD)
+

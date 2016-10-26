@@ -8,6 +8,7 @@ angular.module('linshare.document')
   .factory('documentUtilsService', documentUtilsService);
 
 function documentUtilsService($translate, growlService, $log, $timeout, $q) {
+  this.reloadDocumentsList = false;
   var swalTitle, swalText, swalConfirm, swalCancel;
   $timeout(function() {
     $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
@@ -26,7 +27,8 @@ function documentUtilsService($translate, growlService, $log, $timeout, $q) {
     deleteDocuments: deleteDocuments,
     selectDocument: toggleItemSelection,
     getItemDetails: getItemDetails,
-    resetItemSelection: resetItemSelection
+    resetItemSelection: resetItemSelection,
+    reloadDocumentsList: this.reloadDocumentsList
   };
 
   function downloadFileFromResponse(fileStream, fileName, fileType) {
@@ -46,7 +48,7 @@ function documentUtilsService($translate, growlService, $log, $timeout, $q) {
 
   function removeElementFromCollection(collection, element) {
     var index = collection.indexOf(element);
-    if(index > -1) {
+    if (index > -1) {
       collection.splice(index, 1);
     }
     return collection;
@@ -54,7 +56,7 @@ function documentUtilsService($translate, growlService, $log, $timeout, $q) {
 
   function deleteDocuments(items, callback) {
 
-    if(!angular.isArray(items)) {
+    if (!angular.isArray(items)) {
       items = [items];
     }
     swal({
@@ -69,7 +71,7 @@ function documentUtilsService($translate, growlService, $log, $timeout, $q) {
         closeOnCancel: true
       },
       function(isConfirm) {
-        if(isConfirm) {
+        if (isConfirm) {
           callback(items);
         }
       }
@@ -78,7 +80,7 @@ function documentUtilsService($translate, growlService, $log, $timeout, $q) {
 
   function toggleItemSelection(selectedItems, item) {
     item.isSelected = !item.isSelected;
-    if(item.isSelected) {
+    if (item.isSelected) {
       selectedItems.push(item);
     } else {
       removeElementFromCollection(selectedItems, item);
@@ -90,7 +92,7 @@ function documentUtilsService($translate, growlService, $log, $timeout, $q) {
     var deferred = $q.defer();
     itemService.get(item.uuid).then(function(data) {
       details = data;
-      if(data.hasThumbnail) {
+      if (data.hasThumbnail) {
         itemService.getThumbnail(item.uuid).then(function(thumbnail) {
           details.thumbnail = thumbnail;
         });

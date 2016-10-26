@@ -18,7 +18,7 @@
             <div id="action-header">
               <div class="fg-line toolbar-actions-items">
                 <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
-                     data-ng-click="toggleSearchState()">
+                     x-ng-click="toggleSearchState()">
                   <a href="">
                     <i class="tm-icon zmdi zmdi-search"></i>
                   </a>
@@ -30,9 +30,9 @@
                     <div class="fg-line">
                       <input type="text" class="form-control"
                              autocomplete="off"
-                             ng-model="urlCtrl.paramFilter['name']"
+                             x-ng-model="urlCtrl.paramFilter['name']"
                              placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                             ng-change="updateParams()">
+                             x-ng-change="updateParams()">
                     </div>
                   </div>
                 </div>
@@ -46,30 +46,30 @@
           <!-- DOCUMENTS LIST  -->
           <div class="card-body">
             <div class="table-responsive">
-              <table id="file-list-table" class="table table-vmiddle" data-ng-table="urlCtrl.tableParams"
+              <table id="file-list-table" class="table table-vmiddle" x-ng-table="urlCtrl.tableParams"
                      show-filter="true">
-                <tr data-ng-repeat="documentFile in $data"
-                    ng-click="backToSidebarContentDetails()"
+                <tr x-ng-repeat="documentFile in $data"
+                    x-ng-click="backToSidebarContentDetails()"
                     class="p-b-5"
                     context-menu="moreOptionsContexualMenu">
                   <td class="center thumb-type-item">
-                    <i class="fa ls-1p5x" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+                    <i class="fa ls-1p5x" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
                   </td>
                   <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
                       data-sortable="'name'" uuid={{o.uuid}}>
                     <div class="ctn-name-actions">
                         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                          <a ng-click="urlCtrl.download(documentFile.uuid)"
+                          <a x-ng-click="urlCtrl.download(documentFile.uuid)"
                              title="{{'BOUTON_LABEL_TITLE.DOWNLOAD'| translate}}">
                           {{documentFile.name}}
                           </a>
                           <span>
-                            <span ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
+                            <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
                             {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                             </span>
                             <p class="mobile-list-item-info visible-xs">
                               {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}},
-                                 <span ng-show="documentFile.shared > 0">
+                                 <span x-ng-show="documentFile.shared > 0">
                                    {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                                  </span>
                             </p>
@@ -80,7 +80,7 @@
 
                             <li class="hidden-xs">
                               <!--ng-href="{{urlCtrl.baseUrl}}/{{urlCtrl.urlUuid}}/{{documentFile.uuid}}/download"-->
-                              <a ng-click="urlCtrl.download(documentFile.uuid)"
+                              <a x-ng-click="urlCtrl.download(documentFile.uuid)"
                                 title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" download="w3logo"
                                 event-propagation-stop>
                                 <i class="zmdi zmdi-download"></i>
@@ -91,12 +91,12 @@
                     </div>
                   </td>
                   <td class="hidden-xs"
-                      ng-if="mactrl.sidebarToggle.right === false"
+                      x-ng-if="!mainVm.isVisible()"
                       data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
                     {{documentFile.modificationDate | relativeTime}}
                   </td>
                   <td class="hidden-xs"
-                      ng-if="mactrl.sidebarToggle.right === false"
+                      x-ng-if="!mainVm.isVisible()"
                       data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
                     {{documentFile.size | readableSize: false}}
                   </td>

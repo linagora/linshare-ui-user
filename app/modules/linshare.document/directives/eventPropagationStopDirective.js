@@ -10,7 +10,7 @@
       link: function(scope, elm, attrs) {
         elm.bind('click', function(event) {
           var hasInfoClass = elm.parent().parent().parent().parent().hasClass('highlight-list-elem');
-          if(!attrs.eventPropagationStop || hasInfoClass) {
+          if (!attrs.eventPropagationStop || hasInfoClass) {
             event.stopPropagation();
           }
         });

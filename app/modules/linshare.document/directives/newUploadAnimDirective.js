@@ -7,8 +7,8 @@
 
   function newUploadAnimDirective() {
     return function(scope, element) {
-      if(scope.isNewAddition) {
-        if(scope.$first) {
+      if (scope.isNewAddition) {
+        if (scope.$first) {
           angular.element(element).addClass('set-hidden-anim').delay(200).queue(function() {
             $(this).addClass('anim-in');
           });

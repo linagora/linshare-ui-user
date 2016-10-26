@@ -121,8 +121,8 @@ angular.module('linshareUiUserApp')
         controller: 'uploadQueueController',
         resolve: {
           checkUrl: function ($state, $stateParams, lsAppConfig) {
-            if($stateParams.from !== lsAppConfig.mySpacePage && $stateParams.from !== lsAppConfig.workgroupPage) {
-              return $state.go('documents.upload', { 'from': lsAppConfig.mySpacePage });
+            if ($stateParams.from !== lsAppConfig.mySpacePage && $stateParams.from !== lsAppConfig.workgroupPage) {
+              return $state.go('documents.upload', {'from': lsAppConfig.mySpacePage });
             }
           }
         }
@@ -134,21 +134,6 @@ angular.module('linshareUiUserApp')
         controller: 'AuthenticationController'
       })
 
-      .state('documents.guests', {
-        url: '/guests',
-        templateUrl: 'views/guests/guests-list.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
-        //TODO: should do a route resolve promises for loading the list and not using activate()
-        //See: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#route-resolve-promises
-      })
-
-      .state('documents.guests.uuid', {
-        url: '/guests/:uuid',
-        templateUrl: 'views/guests/guest-details.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
-      })
 
       //------------------------------
       // SHARESPACE - WORKGROUP
@@ -211,8 +196,6 @@ angular.module('linshareUiUserApp')
       .state('administration.lists', {
         url: '/lists',
         templateUrl: 'views/home/main.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
       })
 
       .state('administration.guests', {
@@ -225,15 +208,11 @@ angular.module('linshareUiUserApp')
       .state('administration.users', {
         url: '/users',
         templateUrl: 'views/home/main.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
       })
 
       .state('administration.groups', {
         url: '/sharedspace',
         templateUrl: 'views/home/main.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
       })
 
       .state('administration.hidden_links', {
@@ -251,19 +230,6 @@ angular.module('linshareUiUserApp')
         template: '<div ui-view></div>'
       })
 
-      .state('upload_request.requests', {
-        url: '/requests',
-        templateUrl: 'views/home/main.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
-      })
-      .state('upload_request.propositions', {
-        url: '/propositions',
-        templateUrl: 'views/home/main.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
-      })
-
       //------------------------------
       // AUDIT
       //------------------------------
@@ -277,14 +243,10 @@ angular.module('linshareUiUserApp')
       .state('audit.global', {
         url: '/audit_global',
         templateUrl: 'views/home/main.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
       })
       .state('audit.upload_request', {
         url: '/audit_upload_request',
         templateUrl: 'views/home/main.html',
-        controller: 'LinshareGuestsController',
-        controllerAs: 'guestVm'
       })
 
       //------------------------------

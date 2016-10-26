@@ -1,9 +1,9 @@
 <span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
-  <ul class="actions pull-right" data-ng-class=
-    "{ 'openr': (mactrl.sidebarToggle.right === true) &&
-    ((sidebarRightDataType === 'details') || (sidebarRightDataType === 'share-details')
+  <ul class="actions pull-right" x-ng-class=
+    "{'open-r': (mainVm.sidebar.isVisible()) &&
+    ((mainVm.sidebar.getContent() === lsAppConfig.details) || (mainVm.sidebar.getContent() === lsAppConfig.shareDetails)
     )}">
-    <li data-ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop
+    <li x-ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop
         class="hidden-action-links">
       <a href=""
          title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
@@ -11,13 +11,13 @@
       </a>
     </li>
     <li class="hidden-xs hidden-action-links"
-        data-ng-click="onShare(documentFile); mactrl.sidebarToggle.right = true;">
+        x-ng-click="onShare(documentFile)">
       <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true">
         <i class="zmdi zmdi-share"></i>
       </a>
     </li>
     <li class="hidden-xs hidden-action-links">
-      <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+      <a x-ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
          title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
         <i class="zmdi zmdi-download"></i>
       </a>
@@ -36,25 +36,25 @@
             {{'ACTION.SHARE' | translate}}</a>
         </li>
         <li>
-          <a href="" data-ng-click="deleteDocuments(documentFile)">
+          <a href="" x-ng-click="deleteDocuments(documentFile)">
             <i class="fa fa-trash-o" aria-hidden="true"></i>
             {{'ACTION.DELETE' | translate}}</a>
         </li>
         <li>
-          <a ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+          <a x-ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
              event-propagation-stop>
             <i class="zmdi zmdi-download"></i>
             {{'ACTION.DOWNLOAD' | translate}}
           </a>
         </li>
-        <li data-ng-click="showCurrentFile(documentFile,$event)">
+        <li x-ng-click="showCurrentFile(documentFile,$event)">
           <a href="">
             <i class="zmdi zmdi-info-outline "></i>
             {{'ACTION.INFORMATION' | translate}}
           </a>
         </li>
-         <li ng-show="linshareModeProduction == false">
-          <a href="" ng-click="" event-propagation-stop>
+         <li x-ng-show="linshareModeProduction == false">
+          <a href="" x-ng-click="" event-propagation-stop>
             <i class="zmdi zmdi-copy"></i>
             {{'ACTION.COPY_TO' | translate}}
           </a>

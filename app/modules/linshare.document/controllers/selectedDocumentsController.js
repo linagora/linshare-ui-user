@@ -5,43 +5,63 @@
     .module('linshare.document')
     .controller('selectedDocumentsController', selectedDocumentsController);
 
-  selectedDocumentsController.$inject = [];
+  selectedDocumentsController.$inject = ['lsAppConfig'];
 
-  function selectedDocumentsController($scope, $stateParams) {
+  function selectedDocumentsController($scope, $stateParams, lsAppConfig) {
+    var isMobile = angular.element('html').hasClass('ismobile');
+    var param = $stateParams.selected;
+    
+    $scope.currentPage = '';
+    $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
+    $scope.loadSidebarContent = loadSidebarContent;
+    $scope.removeSelectedDocuments = removeSelectedDocuments;
     $scope.selectedFlowIdentifiers = $stateParams.selected;
 
-    $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
-    $scope.mactrl.sidebarToggle.right = true;
+    activate();
 
-    $scope.$parent.sidebarRightDataType = 'share';
-    $scope.currentPage = '';
-    var param = $stateParams.selected;
-    angular.forEach(param, function(n) {
-      $scope.selectedDocuments.push(n);
-    });
-    $scope.sidebarRightDataType = 'active-share-details';
-    $scope.removeSelectedDocuments = removeSelectedDocuments;
+    ////////////////
+    
+    function activate() {
+      if (isMobile) {
+        resetMobileState();
+      }
+
+      angular.element(window).resize(function() {
+        resetMobileState();
+      });
+
+      angular.forEach(param, function(n) {
+        $scope.selectedDocuments.push(n);
+      });
+      $scope.loadSidebarContent(lsAppConfig.share);
+    }
+    
     /* For the mobile user flow : the sidebar  is hidden at first ( when the page loads up )*/
     function resetMobileState() {
-      $scope.mactrl.sidebarToggle.right = false;
-      angular.element('#collapsible-content').removeClass('setWidth');
+      $scope.mainVm.sidebar.hide();
+      angular.element('#collapsible-content').removeClass('set-width');
     }
-
-    var isMobile = angular.element('html').hasClass('ismobile');
-    if(isMobile) {
-      resetMobileState();
-    }
-    angular.element(window).resize(function() {
-      resetMobileState();
-    });
 
     function lengthOfSelectedDocuments() {
       return $scope.selectedDocuments.length + Object.keys($scope.selectedUploads).length;
     }
 
+    /**
+     * @name loadSidebarContent
+     * @desc Update the content of the sidebar
+     * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     */
+    function loadSidebarContent(content) {
+      $scope.mainVm.sidebar.setData($scope);
+      if (content !== undefined) {
+        $scope.mainVm.sidebar.setContent(content);
+      }
+      $scope.mainVm.sidebar.show();
+    };
+    
     function removeSelectedDocuments(document) {
       var index = $scope.selectedDocuments.indexOf(document);
-      if(index > -1) {
+      if (index > -1) {
         document.isSelected = false;
         $scope.selectedDocuments.splice(index, 1);
       }

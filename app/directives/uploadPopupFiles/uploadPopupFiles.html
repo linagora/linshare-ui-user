@@ -1,6 +1,6 @@
 <md-list-item>
-  <span>{{ fromWhere == mySpacePage ? "HEADER.UPLOAD_PROGRESS.TO_MY_SPACE" : "HEADER.UPLOAD_PROGRESS.TO_COMMON_SPACE" | translate }}</span>
-  <span><a ng-href="{{$state.href('documents.upload', {from: fromWhere})}}">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a></span>
+  <span>{{fromWhere == mySpacePage ? "HEADER.UPLOAD_PROGRESS.TO_MY_SPACE" : "HEADER.UPLOAD_PROGRESS.TO_COMMON_SPACE" | translate}}</span>
+  <span><a x-ng-href="{{$state.href('documents.upload', {from: fromWhere})}}">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a></span>
 </md-list-item>
 <div class="lv-item row" x-ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere} | limitTo: 3 as filesFilterred">
   <a class="col-xs-10 p-0" ui-sref="documents.upload({from: fromWhere, idUpload: file.uniqueIdentifier})">
@@ -12,14 +12,14 @@
         <span class="secondary-info-text">{{file.size | readableSize: false}}</span>
       </div>
     </div>
-    <p ng-hide="file.isComplete() || file.paused" class="time-remaining">
+    <p x-ng-hide="file.isComplete() || file.paused" class="time-remaining">
       {{file.timeRemaining() | remainingTime}}
     </p>
-    <p ng-show="file.isComplete()" class="time-remaining">
-      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate }}
+    <p x-ng-show="file.isComplete()" class="time-remaining">
+      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate}}
     </p>
-    <p ng-show="file.paused && !file.isComplete()" class="time-remaining">
-      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate }}
+    <p x-ng-show="file.paused && !file.isComplete()" class="time-remaining">
+      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate}}
     </p>
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="file.progress()*100"
@@ -31,17 +31,17 @@
   <div class="col-xs-2 p-0">
     <ul class="lv-actions actions align-list-icons">
       <li class="col-xs-12" x-ng-show="!file.isComplete()">
-        <a href="" ng-click="file.cancel()">
+        <a href="" x-ng-click="file.cancel()">
           <i class="zmdi zmdi-close"></i>
         </a>
       </li>
       <li class="col-xs-12" x-ng-if="file.isComplete() && !file.error">
-        <a href="" ng-click="file.cancel()">
+        <a href="" x-ng-click="file.cancel()">
           <i class="zmdi zmdi zmdi-check"></i>
         </a>
       </li>
       <li class="col-xs-12" x-ng-if="file.error">
-        <a href="" ng-click="file.retry()">
+        <a href="" x-ng-click="file.retry()">
           <i class="zmdi zmdi-replay"></i>
         </a>
       </li>

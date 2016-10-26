@@ -1,6 +1,6 @@
 <!doctype html>
-<!--[if IE 9 ]><html class="ie9" data-ng-app="linshareUiUserApp" data-ng-controller="materialadminCtrl as mactrl"><![endif]-->
-<![if IE 9 ]><html data-ng-app="linshareUiUserApp" data-ng-controller="materialadminCtrl as mactrl"><![endif]>
+<!--[if IE 9 ]><html class="ie9" x-ng-app="linshareUiUserApp" x-ng-controller="materialadminCtrl as mactrl"><![endif]-->
+<![if IE 9 ]><html x-ng-app="linshareUiUserApp" x-ng-controller="materialadminCtrl as mactrl"><![endif]>
  <head>
    <meta charset="utf-8">
    <title>Linshare User Interface</title>
@@ -40,10 +40,10 @@
     <!-- endbuild -->
 
   </head>
-  <body  data-ng-controller="UiUserMainController"
-         data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1' }"
+  <body x-ng-controller="UiUserMainController as mainVm"
+         x-ng-class="{'sw-toggled': mactrl.layoutType === '1'}"
          flow-init flow-prevent-drop>
-    <data ui-view ng-cloak="">
+    <data ui-view x-ng-cloak="">
 
     </data>
 
@@ -118,7 +118,6 @@
     <script src="modules/linshare.document/controllers/selectedDocumentsController.js"></script>
     <script src="modules/linshare.document/directives/newUploadAnimDirective.js"></script>
     <script src="modules/linshare.document/directives/eventPropagationStopDirective.js"></script>
-    <script src="modules/linshare.document/directives/sidebarContent/sidebarContentDirective.js"></script>
     <script src="modules/linshare.document/directives/lsDocumentsTable/lsDocumentsTableDirective.js"></script>
     <script src="modules/linshare.document/directives/lsDocumentsTable/lsDocumentsMenuDirective.js"></script>
     <script src="modules/linshare.document/directives/lsOnDocumentSelectDirective.js"></script>
@@ -147,6 +146,7 @@
     <script src="modules/linshare.anonymousUrl/controllers/anonymousUrlController.js"></script>
     <script src="modules/linshare.anonymousUrl/directives/response_template.js"></script>
     <script src="modules/linshare.guests/linshareGuestsModule.js"></script>
+    <!-- TODO: Both controller of linshre.guests shall be merged -->
     <script src="modules/linshare.guests/controllers/linshareGuestsController.js"></script>
     <script src="modules/linshare.guests/services/linshareGuestsService.js"></script>
 
@@ -171,12 +171,13 @@
     <script src="scripts/common/loginController.js"></script>
     <script src="scripts/home/home.js"></script>
     <script src="scripts/services/sessionService.js"></script>
+    <script src="directives/sidebar-content/sidebar-content.directive.js"></script>
     <script src="modules/linshare.sharedSpace/services/workGroupRestService.js"></script>
     <script src="modules/linshare.sharedSpace/services/sharedSpaceBreadcrumbService.js"></script>
     <script src="modules/linshare.sharedSpace/controllers/SharedSpaceController.js"></script>
     <script src="modules/linshare.sharedSpace/directives/hoverDropdownFix.js"></script>
     <script src="modules/linshare.sharedSpace/controllers/SharedSpaceListController.js"></script>
-    <script src="modules/linshare.sharedSpace/controllers/workGroupMembersController.js"></script>
+    <script src="scripts/controllers/workGroupMembersController.js"></script>
     <script src="scripts/services/menuService.js"></script>
     <script src="scripts/services/functionalityService.js"></script>
     <script src="modules/linshare.guests/controllers/LinshareGuestController.js"></script>
@@ -189,6 +190,8 @@
     <script src="scripts/common/lsFlowEnterAndLeaveStyleDirective.js"></script>
     <script src="directives/newUploadBounce/newUploadBounceDirective.js"></script>
     <script src="directives/uploadPopupFiles/uploadPopupFilesDirective.js"></script>
+    <script src="scripts/controllers/linshareSidebarController.js"></script>
+    <script src="directives/sidebar/sidebar.directive.js"></script>
     <!-- endbuild -->
     <script src="scripts/config.js"></script>
   </body>

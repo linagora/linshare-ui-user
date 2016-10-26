@@ -2,7 +2,7 @@
 
   <!--  ACTIONS ON DOCUMENTS  -->
 
-  <div class="card setWidth" id="collapsible-content">
+  <div class="card set-width" id="collapsible-content">
     <div class="card-header no-padding">
       <div id="breadcrumb-wrap">
         <div class="breadcrumbs-ctn hidden-xs">
@@ -11,11 +11,11 @@
           </a>
         </div>
         <div class="breadcrumbs-ctn text-center">
-          <i class="breadcrumb" ng-show="shareToDisplay.waitingUploadIdentifiers.length > 0">
+          <i class="breadcrumb" x-ng-show="shareToDisplay.waitingUploadIdentifiers.length > 0">
             {{"HEADER.SHARING_PROGRESS.SHARE_IN_PROGRESS" | translate}}
           </i>
-          <i class="breadcrumb" ng-show="shareToDisplay.waitingUploadIdentifiers.length === 0">
-            {{"HEADER.SHARING_PROGRESS.SHARE_DONE" | translate }}
+          <i class="breadcrumb" x-ng-show="shareToDisplay.waitingUploadIdentifiers.length === 0">
+            {{"HEADER.SHARING_PROGRESS.SHARE_DONE" | translate}}
           </i>
         </div>
         <section class="row multi-select visible-xs">
@@ -25,7 +25,7 @@
           </div>
           <div id="toolbar-actions" class="col-xs-10 show-details-mobile-link">
             <span>
-            <a ng-click="mactrl.sidebarToggle.right = true;">
+            <a x-ng-click="mainVm.sidebar.setData($scope); mainVm.sidebar.show();">
               <i class="fa fa-eye"></i>
               <span>{{'SELECTED_FILES.SHOW_DETAILS' | translate}}</span>
             </a>
@@ -38,14 +38,11 @@
     <!-- SELECTED DOCUMENTS LIST  -->
     <div class="card-body selected-files-list-items">
       <ul class="list-group actions" >
-        <li class="list-group-item col-xs-12" data-ng-repeat="documentFile in shareToDisplay.documents">
-          <span class="fa ls-1p5x m-r-10" ng-class="'{{documentFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
+        <li class="list-group-item col-xs-12" x-ng-repeat="documentFile in shareToDisplay.documents">
+          <span class="fa ls-1p5x m-r-10" x-ng-class="'{{documentFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
           <span>{{documentFile.name}}</span>
         </li>
       </ul>
     </div>
   </div>
 </div>
-<aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-       data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
-</aside>

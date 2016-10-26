@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html class="login-content" data-ng-app="linshare.authentication">
+    <html class="login-content" x-ng-app="linshare.authentication">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,20 +15,20 @@
         <link href="styles/materialAdmin/css/app.min.2.css" rel="stylesheet">
     </head>
 
-    <body class="login-content" data-ng-controller="AuthenticationController as lctrl">
+    <body class="login-content" x-ng-controller="AuthenticationController as lctrl">
         <!-- Login -->
         <div class="lc-block toggled" id="l-login">
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="md md-person"></i></span>
                 <div class="fg-line">
-                    <input type="email" class="form-control" placeholder="Email" ng-model="input.email">
+                    <input type="email" class="form-control" placeholder="Email" x-ng-model="input.email">
                 </div>
             </div>
 
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="md md-accessibility"></i></span>
                 <div class="fg-line">
-                    <input type="password" class="form-control" placeholder="Password" ng-model="input.password">
+                    <input type="password" class="form-control" placeholder="Password" x-ng-model="input.password">
                 </div>
             </div>
 
@@ -42,11 +42,11 @@
                 </label>
             </div>
 
-            <a href="" class="btn btn-login btn-danger btn-float" data-ng-click="signupForm2()"><i class="md md-arrow-forward"></i></a>
+            <a href="" class="btn btn-login btn-danger btn-float" x-ng-click="signupForm2()"><i class="md md-arrow-forward"></i></a>
 
             <!--<ul class="login-navigation">-->
-                <!--<li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.login = 0; lctrl.register = 1">Register</li>-->
-                <!--<li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.login = 0; lctrl.forgot = 1">Forgot Password?</li>-->
+                <!--<li data-block="#l-register" class="bgm-red" x-ng-click="lctrl.login = 0; lctrl.register = 1">Register</li>-->
+                <!--<li data-block="#l-forget-password" class="bgm-orange" x-ng-click="lctrl.login = 0; lctrl.forgot = 1">Forgot Password?</li>-->
             <!--</ul>-->
         </div>
 

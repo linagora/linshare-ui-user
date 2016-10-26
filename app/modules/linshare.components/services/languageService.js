@@ -26,7 +26,7 @@ angular.module('linshare.components')
     };
 
     function addCountryLocaleCode(key) {
-      if(key.indexOf('-') === -1) {
+      if (key.indexOf('-') === -1) {
         switch (key) {
           case 'fr':
             key += '-FR';

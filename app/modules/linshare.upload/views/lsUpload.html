@@ -4,7 +4,7 @@
      flow-drag-enter="dropClass='drag-over'"
      flow-file-success="addUploadedFile($file, $message)"
      flow-drag-leave="dropClass='fade-out-elm'"
-     x-ng-class="{'drag-over' : dropClass == 'drag-over', 'fade-out-elm': dropClass == 'fade-out-elm'  }">
+     x-ng-class="{'drag-over' : dropClass == 'drag-over', 'fade-out-elm': dropClass == 'fade-out-elm'}">
   <div id="drop-ctn" class="drop border-anim reset-content-width">
     <div>
       <div class="drag-and-drop-alert ">
@@ -15,8 +15,8 @@
   <div id="breadcrumb-wrap">
     <section class="row multi-select visible-xs">
       <div class="col-xs-2 ctn-mobile-select-count">
-        <span class="number-of-files ">{{lengthOfSelectedDocuments()}}</span>
-        <span class="file-multi-select-label ">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
+        <span class="number-of-files">{{lengthOfSelectedDocuments()}}</span>
+        <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
       </div>
       <div class="col-xs-10">
         <i class="zmdi zmdi-share col-xs-3"
@@ -26,11 +26,11 @@
         </i>
         <i x-ng-if="selectAll" x-ng-click="selectUploadingDocuments()"
            class="fa fa fa-square-o col-xs-3"
-           x-ng-class="{'de-activate-sharing': $flow.files.length === 0 }">
+           x-ng-class="{'de-activate-sharing': $flow.files.length === 0}">
         </i>
         <i x-ng-if="!selectAll" x-ng-click="selectUploadingDocuments()"
            class="fa fa-check-square-o col-xs-3"
-           x-ng-class="{'de-activate-sharing': $flow.files.length === 0 } ">
+           x-ng-class="{'de-activate-sharing': $flow.files.length === 0} ">
         </i>
         <i class="zmdi zmdi-pause col-xs-3 disabled"></i>
         <i class="zmdi zmdi-check-all col-xs-3 disabled"></i>
@@ -70,8 +70,7 @@
       </div>
       <div class="pull-right m-r-20 m-t-5">
           <span x-ng-class="{'active' : isFromMySpace , 'left-elem-toggle-inactive' : !isFromMySpace}" class="toggle-pill"><a
-            x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">{{"MENU_TITLE.FILES" | translate
-           }}</a></span>
+            x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">{{"MENU_TITLE.FILES" | translate}}</a></span>
         <span x-ng-class="{'active' : !isFromMySpace , 'right-elem-toggle-inactive' : isFromMySpace}" class="toggle-pill"><a
           x-ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">{{"MENU_TITLE.SHARED_SPACE" |
             translate}}</a></span>
@@ -111,37 +110,37 @@
         <div id="toolbar-actions" class="hidden-xs">
           <span x-ng-if="isFromMySpace">
           <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
-             x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+             x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
              x-ng-click="onShare(); mactrl.sidebarToggle.right = true;">
             <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
           </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.PLAY' | translate}}"
-               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="resumeSelectedFiles()">
               <i class="zmdi zmdi-play"></i><span>{{'SELECTION_TOOLBAR.PLAY' | translate}}</span></a>
             </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.PAUSE' | translate}}"
-               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="pauseSelectedFiles()">
               <i class="zmdi zmdi-pause"></i><span>{{'SELECTION_TOOLBAR.PAUSE' | translate}}</span></a>
             </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.CANCEL' | translate}}"
-               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="cancelSelectedFiles()">
               <i class="zmdi zmdi-close"></i><span>{{'SELECTION_TOOLBAR.CANCEL' | translate}}</span></a>
             </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"
-               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="clearSelectedFiles()">
               <i class="zmdi zmdi-check-all"></i><span>{{'SELECTION_TOOLBAR.CLEAR' | translate}}</span></a>
             </span>
           <span x-ng-if="isflowUploadingError">
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.RETRY' | translate}}"
-               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true) }"
+               x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="retrySelectedFiles()">
               <i class="zmdi zmdi-undo"></i><span>{{'SELECTION_TOOLBAR.RETRY' | translate}}</span></a>
             </span>
@@ -202,7 +201,4 @@
 
     </div>
   </div>
-  <aside id="chat" x-ng-include src="'views/includes/sidebar-right.html'"
-         x-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
-  </aside>
 </div>

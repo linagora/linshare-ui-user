@@ -1,14 +1,17 @@
-<div id="overlayMobileFab" >&nbsp;</div>
+<div id="overlayMobileFab">&nbsp;</div>
 <header id="header"
-        data-ng-include
+        x-ng-include
         src="'views/includes/header.html'"
-        data-ng-controller="headerCtrl as hctrl">
+        x-ng-controller="headerCtrl as hctrl">
 </header>
 <section id="main">
-  <div id="overlayMobile" data-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left }"
-       ng-click="mactrl.sidebarToggle.left = false">&nbsp;</div>
-  <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
-  <div id="content-container" ng-class="{'content-toggled': mactrl.sidebarToggle.left }">
+  <div id="overlayMobile" x-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left}"
+       x-ng-click="mactrl.sidebarToggle.left = false">&nbsp;</div>
+  <aside id="sidebar" x-ng-include src="'views/includes/sidebar-left.html'" x-ng-class="{'toggled': mactrl.sidebarToggle.left}"></aside>
+  <aside id="chat" x-ng-include src="'views/includes/sidebar-right.html'"
+         x-ng-class="{'toggled': mainVm.sidebar.isVisible()}" class="sidebar-right">
+  </aside>
+  <div id="content-container" x-ng-class="{'content-toggled': mactrl.sidebarToggle.left}">
     <section id="content" class="page-view" data-ui-view=""></section>
   </div>
 </section>

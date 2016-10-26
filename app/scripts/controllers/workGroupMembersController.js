@@ -10,7 +10,7 @@ angular.module('linshareUiUserApp')
 function WorkGroupMembersController($scope, workGroupMembersRestService, $filter) {
 
   var wgmember = this;
-  wgmember.currentWorkGroup = $scope.vm.currentSelectedDocument;
+  wgmember.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
   wgmember.membersRights = {admin: 'ADMIN', write: 'WRITE', readonly: 'READ'};
   wgmember.memberRole = wgmember.membersRights.write;
 
@@ -31,14 +31,14 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
     wgmember.membersSearchFilter.role = wgmember.membersSearchFilter.role === filterParam ? '' : filterParam;
   };
 
-  $scope.$watch('vm.currentSelectedDocument.current', function(currentWorkGroup) {
-    if(currentWorkGroup && $scope.mactrl.sidebarToggle.right) {
-     workGroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
-       wgmember.currentWorkgroupMember = member;
-       $scope.vm.currentWorkgroupMember = member;
-     });
-    }
-  });
+  $scope.$watch(function() {
+    return $scope.mainVm.sidebar.getData().currentSelectedDocument.current;
+  }, function (currentWorkGroup) {
+    workGroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
+      wgmember.currentWorkgroupMember = member;
+      $scope.mainVm.sidebar.addData('currentWorkgroupMember', member);
+    });
+  }, true);
 
   wgmember.addMember = addMember;
   wgmember.removeMember = removeMember;
@@ -63,15 +63,15 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
 
   function updateMember(member, role) {
     member.role = role;
-    if(role === 'admin') {
+    if (role === 'admin') {
       member.admin = true;
       member.readonly = false;
     }
-    if(role === 'readonly') {
+    if (role === 'readonly') {
       member.admin = false;
       member.readonly = true;
     }
-    if(role === 'normal') {
+    if (role === 'normal') {
       member.admin = false;
       member.readonly = false;
     }

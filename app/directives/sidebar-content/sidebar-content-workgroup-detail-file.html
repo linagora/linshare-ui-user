@@ -1,0 +1,73 @@
+<div class="header-sidebar">
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" x-ng-click="mainVm.sidebar.hide();"></i>
+  <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}</h2>
+  <span class="hidden-xs">
+      <i class="zmdi zmdi-close zmdi-hc-lg" x-ng-click="mainVm.sidebar.hide();"></i>
+    </span>
+</div>
+
+<div id="profile-main" class="detail-workgroup">
+  <div class="p-relative m-b-20 img-preview-ctn">
+    <p x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail === true" href="">
+      <img class="img-responsive"
+           x-ng-src="data:image/png;base64,{{mainVm.sidebar.getData().currentSelectedDocument.current.thumbnail}}" alt=""/>
+    </p>
+    <div class="np-preview-ctn"
+         x-ng-hide="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail === true">
+      <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
+      <p>{{"RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate}}</p>
+    </div>
+  </div>
+  <div title="{{'WIP' | translate}}">
+    <div class="description-ctn form-sidebar disabled">
+      <div contenteditable="true" class="comment"
+           x-ng-focus="mainVm.sidebar.getData().slideTextarea($event)"
+           x-ng-blur="mainVm.sidebar.getData().slideUpTextarea($event)"
+           x-ng-keyup="mainVm.sidebar.getData().setTextInput($event);"></div>
+      <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
+      <div class="edit-description">
+        <i class="zmdi zmdi-edit"></i>
+      </div>
+    </div>
+  </div>
+  <div class="content-detail-area">
+    <div class="flex-ctn detail-info-ctn">
+      <div class="item-l">
+        <span class="first-letter">{{'UNKNOWN_FIRST_LETTER' | translate}}</span>
+      </div>
+      <div class="item-mid">
+        <div class="name">{{'UNKNOWN_USER' | translate}}</div>
+        <div class="info-item-member">
+            <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date: mainVm.sidebar.getData().lsFormat()}}
+            </span>
+        </div>
+      </div>
+      <div class="item-r actions">
+        <span>{{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: false}}</span>
+        <span class="seperator-inline">|</span>
+        <span title="{{mainVm.sidebar.getData().currentSelectedDocument.current.type}}">
+            {{mainVm.sidebar.getData().currentSelectedDocument.current.name | getextension}}
+          </span>
+      </div>
+    </div>
+
+    <div class="meta-data-ctn">
+      <h2 class="subheader">
+        <i class="fa fa-file-text" aria-hidden="true"></i>
+        {{'INFORMATION_TAB.META_DATA' | translate}}
+      </h2>
+      <div class="meta-data-content">
+        <div>
+          <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
+          <p>{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date:
+            mainVm.sidebar.getData().lsFormat()}}</p>
+        </div>
+        <div x-ng-if="mainVm.sidebar.getData().linshareModeProduction == false">
+          <p>{{'INFORMATION_TAB.PREVIOUS_UPDATE' | translate}}:</p>
+          <p>0 {{'INFORMATION_TAB.VERSIONS' | translate}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

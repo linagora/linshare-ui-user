@@ -1873,7 +1873,7 @@ label.required::before{
     display: none;
   }
 }
-.openr {
+.open-r {
   visibility: visible !important;
 }
 #file-list-table.ng-table.col-4-table {
@@ -2437,7 +2437,7 @@ label.required::before{
       padding-left: 5px;
     }
   }
-  .setWidth {
+  .set-width {
     #file-list-table.ng-table.col-4-table .file-name-col {
       padding-left: 5px;
     }
@@ -4050,7 +4050,7 @@ i.de-activate-sharing {
     }
   }
 }
-#collapsible-content.setWidth {
+#collapsible-content.set-width {
   #selection-actions.multi-btns {
     #toolbar-actions {
       > span {
@@ -5834,7 +5834,7 @@ body:not(.sw-toggled) #sidebar {
 /*
 ** chat
 */
-.setWidth {
+.set-width {
   width: calc(100% - 350px) !important;
 }
 #chat, #chat.sidebar-right {
@@ -5845,7 +5845,7 @@ body:not(.sw-toggled) #sidebar {
   padding-top: 0;
 }
 #chat.toggled, #chat.sidebar-right.toggled {
-  z-index: 40;
+  z-index: 6;
   display: block;
   position: fixed;
   pointer-events: all;

@@ -16,7 +16,7 @@ angular.module('linshareUiUserApp')
       locale = locale.split('-');
       var language = locale[0];
       var country;
-      if(locale.length > 1) {
+      if (locale.length > 1) {
         country = locale[1].toLowerCase();
       }
       return {language: language, country: country};

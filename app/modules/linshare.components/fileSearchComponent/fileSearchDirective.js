@@ -128,7 +128,7 @@ angular.module('linshare.components')
               return (sizeIsValide && dateIsValide);
             });
           }
-          if($scope.activatedField.email) {
+          if ($scope.activatedField.email) {
 
             var userData = {
               firstName: $scope.selectedRecipient.firstName,

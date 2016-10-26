@@ -16,7 +16,7 @@ angular.module('linshareUiUserApp')
       selectedDirection: 'left'
     };
     $scope.$watch('fab.isOpen', function(isOpen) {
-      if(isOpen) {
+      if (isOpen) {
         angular.element('.md-toolbar-tools').addClass('setWhite');
         angular.element('.multi-select-mobile').addClass('setDisabled');
         $timeout(function() {

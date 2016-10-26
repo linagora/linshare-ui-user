@@ -1,7 +1,7 @@
   <div id="member-sidebar">
     <div class="header-sidebar">
       <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
-         ng-click="mactrl.sidebarToggle.right = false">
+         x-ng-click="mactrl.sidebarToggle.right = false">
       </i>
       <h2 class="header-more-options set-ellipsis  visible-xs">
         {{'GUEST_DETAILS.DETAIL_OF_GUEST_ACCOUNT' | translate}}
@@ -10,20 +10,20 @@
       <h2 class="header-more-options set-ellipsis  hidden-xs">Robin Shultz</h2>
       <span class="hidden-xs">
         <i class="zmdi zmdi-close zmdi-hc-lg"
-           ng-click="mactrl.sidebarToggle.right = false">
+           x-ng-click="mactrl.sidebarToggle.right = false">
         </i>
       </span>
     </div>
 
-    <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail" ng-class="{ 'two-tabs': currentPage !== 'my_files'}">
+    <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail" x-ng-class="{'two-tabs': currentPage !== 'my_files'}">
       <md-content>
         <md-tabs md-selected="vm.mdtabsSelection.selectedIndex" md-dynamic-height="" md-border-bottom="">
-          <md-tab id="tab1" ng-if="currentPage == 'guest_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
+          <md-tab id="tab1" x-ng-if="currentPage == 'guest_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
                   class="col-xs-4 no-padding">
 
             <!-- GUEST DETAILS -->
             <md-content>
-              <div ng-include="'modules/linshare.document/directives/sidebarContent-guest-details.html'"></div>
+              <div x-ng-include="'scripts/directives/sidebar-content/sidebar-content-guest-details.html'"></div>
             </md-content>
 
           </md-tab>
@@ -33,7 +33,7 @@
 
             <md-content class="md-padding">
               <!-- TODO: Replace with edit guest form - similar to thethe create aside from the add message form field
-                <div ng-include="'modules/linshare.sharedSpace/views/workgroup_members.html'"></div>
+                <div x-ng-include="'modules/linshare.sharedSpace/views/workgroup_members.html'"></div>
                 -->
             </md-content>
 

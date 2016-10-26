@@ -1,10 +1,12 @@
 'use strict';
 angular.module('linshareUiUserApp')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
-                                                 workgroups, $translate, $state, documentUtilsService, workGroupRestService, workGroupFoldersRestService, growlService) {
+                                                workgroups, $translate, $state, documentUtilsService,
+                                                workGroupRestService, workGroupFoldersRestService, growlService,
+                                                lsAppConfig) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
-    $scope.mactrl.sidebarToggle.right = false;
+    $scope.mainVm.sidebar.hide();
 
     var thisctrl = this;
     thisctrl.currentSelectedDocument = {};
@@ -153,13 +155,14 @@ angular.module('linshareUiUserApp')
     };
 
     thisctrl.loadSidebarContent = function(content) {
-      thisctrl.sidebarRightDataType = content;
-      $scope.sidebarRightDataType = content;
+      $scope.mainVm.sidebar.setData(thisctrl);
+      $scope.mainVm.sidebar.setContent(content);
+      $scope.mainVm.sidebar.show();
     };
 
     thisctrl.onAddMember = function() {
       thisctrl.mdtabsSelection.selectedIndex = 1;
-      $scope.mactrl.sidebarToggle.right = true;
+      thisctrl.loadSidebarContent(lsAppConfig.workgroupPage)
       angular.element('#focusInputShare').focus();
     };
 
@@ -174,7 +177,7 @@ angular.module('linshareUiUserApp')
     thisctrl.goToSharedSpaceTarget = function(uuid, name) {
       workGroupFoldersRestService.setWorkgroupUuid(uuid);
       workGroupFoldersRestService.getParent(uuid).then(function(folder) {
-        if(folder[0] == null) {
+        if (folder[0] == null) {
           $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name, parent: uuid, folderUuid: uuid, folderName: name.trim()});
         } else {
           $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name.trim(), parent: folder[0].parent, folderUuid: folder[0].uuid, folderName: folder[0].name.trim()});
@@ -242,7 +245,7 @@ angular.module('linshareUiUserApp')
     function showItemDetails(current, event) {
       workGroupRestService.get(current.uuid).then(function(data) {
         thisctrl.currentSelectedDocument.current = data;
-        $scope.mactrl.sidebarToggle.right = true;
+        thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
         thisctrl.mdtabsSelection.selectedIndex = 0;
       });
 

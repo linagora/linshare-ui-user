@@ -75,24 +75,24 @@ angular.module('linshareUiUserApp')
     this.fullScreen = function() {
       //Launch
       function launchIntoFullscreen(element) {
-        if(element.requestFullscreen) {
+        if (element.requestFullscreen) {
           element.requestFullscreen();
-        } else if(element.mozRequestFullScreen) {
+        } else if (element.mozRequestFullScreen) {
           element.mozRequestFullScreen();
-        } else if(element.webkitRequestFullscreen) {
+        } else if (element.webkitRequestFullscreen) {
           element.webkitRequestFullscreen();
-        } else if(element.msRequestFullscreen) {
+        } else if (element.msRequestFullscreen) {
           element.msRequestFullscreen();
         }
       }
 
       //Exit
       function exitFullscreen() {
-        if(document.exitFullscreen) {
+        if (document.exitFullscreen) {
           document.exitFullscreen();
-        } else if(document.mozCancelFullScreen) {
+        } else if (document.mozCancelFullScreen) {
           document.mozCancelFullScreen();
-        } else if(document.webkitExitFullscreen) {
+        } else if (document.webkitExitFullscreen) {
           document.webkitExitFullscreen();
         }
       }

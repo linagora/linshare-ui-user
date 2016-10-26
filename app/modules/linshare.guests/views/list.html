@@ -1,4 +1,4 @@
-<div class="file-listing-ctn" x-ng-class="{ 'right-sidebar-toggled': mactrl.sidebarToggle.right === true }">
+<div class="file-listing-ctn" x-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}">
   <div class="container files guest-list">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
@@ -14,7 +14,7 @@
 
           <div class="breadcrumbs-ctn hidden-xs">
             <a href="#" class="breadcrumb"><i class="zmdi zmdi-account-box"></i>
-              {{ "BREADCRUMB_TITLE" | translate }}
+              {{"BREADCRUMB_TITLE" | translate}}
             </a>
             <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
           </div>
@@ -24,12 +24,12 @@
               <span x-ng-click="showCheckboxes = !showCheckboxes "
                     class="visible-xs toolbar-mobile-item col-xs-3" >
                 <a  class="select-all-items plain-txt-btn">
-                  <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes }"></i>
+                  <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes}"></i>
                 </a>
               </span>
-              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="searchMobileDropdown = !searchMobileDropdown">
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" x-ng-click="searchMobileDropdown = !searchMobileDropdown">
                 <a href="">
-                  <i class="tm-icon zmdi zmdi-search" x-ng-class="{'active-link': searchMobileDropdown }"></i>
+                  <i class="tm-icon zmdi zmdi-search" x-ng-class="{'active-link': searchMobileDropdown}"></i>
                 </a>
               </div>
               <!-- TODO: mobile filter-->
@@ -42,20 +42,20 @@
                   </a>
                   <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop">
                     <div class="list-menu">
-                      <p>{{"FILTER_COMPONENT.FILTER_BY" | translate }}</p>
+                      <p>{{"FILTER_COMPONENT.FILTER_BY" | translate}}</p>
                       <ul class="dropdown-menu dm-icon filter-menu">
                         <li>
                           <a href=""
-                             ng-class="{'active-check':!isAllGuestSelected}"
-                             ng-click="isAllGuestSelected = false">
+                             x-ng-class="{'active-check':!isAllGuestSelected}"
+                             x-ng-click="isAllGuestSelected = false">
                             <span class="checkbox-ctn "></span>
                             {{'MY_GUESTS' | translate}}
                           </a>
                         </li>
                         <li>
                           <a href=""
-                             ng-class="{'active-check':isAllGuestSelected}"
-                             ng-click="isAllGuestSelected = true">
+                             x-ng-class="{'active-check':isAllGuestSelected}"
+                             x-ng-click="isAllGuestSelected = true">
                             <span class="checkbox-ctn"></span>
                            {{'ALL_GUESTS' | translate}}
                           </a>
@@ -77,7 +77,7 @@
                     <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
                       <li role="menuitem">
                         <a href="" class="center">
-                          {{'SELECTION_TOOLBAR.ORDER_BY' | translate }}
+                          {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
                         </a>
                       </li>
                       <li class="divided"></li>
@@ -87,7 +87,7 @@
                           <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
-                          {{'ADD_GUEST_SIDEBAR.LASTNAME' | translate }}
+                          {{'ADD_GUEST_SIDEBAR.LASTNAME' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
@@ -96,7 +96,7 @@
                           <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
-                          {{'ADD_GUEST_SIDEBAR.FIRSTNAME' | translate }}
+                          {{'ADD_GUEST_SIDEBAR.FIRSTNAME' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
@@ -105,7 +105,7 @@
                           <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
-                          {{'ORDER_BY.EMAIL' | translate }}
+                          {{'ORDER_BY.EMAIL' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
@@ -114,7 +114,7 @@
                           <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
-                          {{'ORDER_BY.DOMAIN_NAME' | translate }}
+                          {{'ORDER_BY.DOMAIN_NAME' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
@@ -124,7 +124,7 @@
                           <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
-                          {{'ORDER_BY.EXPIRATION_DATE' | translate }}
+                          {{'ORDER_BY.EXPIRATION_DATE' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
@@ -134,7 +134,7 @@
                           <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
-                          {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}
+                          {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
@@ -143,7 +143,7 @@
                           <i x-ng-show="guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                         </span>
-                          {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}
+                          {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
                         </a>
                       </li>
                     </ul>
@@ -189,18 +189,18 @@
       <div id="drop-area" x-ng-init ="searchMobileDropdown = false;" x-ng-class="{'search-toggled': searchMobileDropdown}">
         <div id="top-search-wrap">
           <i id="top-search-close"  x-ng-click="searchMobileDropdown = !searchMobileDropdown">&times;</i>
-          <input type="text" id="searchInMobileFiles" class="form-control x-ng-pristine x-ng-untouched x-ng-valid"
+          <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
                  placeholder="Nom de fichier" x-ng-change="guestListVm.updateParams()" x-ng-model="paramFilter['name']"
                  aria-invalid="false" x-ng-focus="searchMobileDropdown === true">
         </div>
         <div id="selection-actions" class="defaultMultiToolbarState multi-btns"
-             data-ng-class="{'show-multi-menu': guestListVm.selectedDocuments.length > 0}">
+             x-ng-class="{'show-multi-menu': guestListVm.selectedDocuments.length > 0}">
           <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->
           <div class="toggle-checkbox-toolbar" x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
-            <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope" >
+            <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope" >
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
-            <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope">
+            <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope">
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
@@ -209,12 +209,12 @@
             <i class="zmdi zmdi-close"></i>
           </div>
           <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
-            <div class="pull-left" data-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
+            <div class="pull-left" x-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
                  x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; guestListVm.toggleFilterBySelectedFiles()">
               <p><span>{{guestListVm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
               <div class="pull-left view-icons-ctn groups-view">
-                <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
-                <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
+                <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show=" activeBtnShowSelection"></i>
+                <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
               </div>
             </div>
             <div class="pull-left view-icons-ctn reset-icon" x-ng-click="guestListVm.resetSelectedDocuments()">
@@ -274,10 +274,10 @@
         <script type="text/ng-template" id="checkboxheader.html">
           <span x-ng-click="guestListVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
                 role="button" tabindex="0" style="display:block" class="center">
-          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope" >
+          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope" >
             <i class="fa fa fa-square-o checkbox-table"></i>
           </a>
-          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope">
+          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn ng-scope">
             <i class="fa fa-check-square-o"></i>
           </a>
           </span>
@@ -285,17 +285,17 @@
         <!-- DOCUMENTS LIST  -->
         <div class="card-body">
           <div class="table-responsive">
-            <table id="file-list-table" class="table table-vmiddle" data-ng-table="guestListVm.tableParams" show-filter="true" >
-              <tr data-ng-repeat="guestsData in $data"
+            <table id="file-list-table" class="table table-vmiddle" x-ng-table="guestListVm.tableParams" show-filter="true" >
+              <tr x-ng-repeat="guestsData in $data"
                   ls-item-selection=""
                   data-selected-documents="guestListVm.selectedDocuments"
                   data-document-file="guestsData"
                   data-current-selected-Document="guestListVm.currentSelectedDocument"
                   data-details-function="guestListVm.getDetails"
-                  data-right-sidebar-open="mactrl.sidebarToggle.right"
-                  data-ng-click="backToSidebarContentDetails()"
-                  data-ng-class="{'highlightListElem': guestsData.isSelected ,
-                'current-vis': guestListVm.currentSelectedDocument.current.uuid === guestsData.uuid }"
+                  data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                  x-ng-click="backToSidebarContentDetails()"
+                  x-ng-class="{'highlightListElem': guestsData.isSelected ,
+                'current-vis': guestListVm.currentSelectedDocument.current.uuid === guestsData.uuid}"
                   class="p-b-5"
                   context-menu="moreOptionsContexualMenu">
                 <td data-header="'checkboxheader.html'"
@@ -304,7 +304,7 @@
                   <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile cf scripts/common/MainController-->
                   <!--ligne 249 : y buena suerte-->
                   <a x-ng-click="showCheckboxes ? guestListVm.addSelectedDocument(guestsData) : null" class="visible-xs">
-                    <div class="item-l" x-ng-class="{ 'invisible' : showCheckboxes}">
+                    <div class="item-l" x-ng-class="{'invisible' : showCheckboxes}">
                       <span class="first-letter guest-account-li">{{guestsData.firstName.charAt(0)}}</span>
                     </div>
                     <div class="checkbox-ctn-thumb"
@@ -312,7 +312,7 @@
                     </div>
                   </a>
                   <a x-ng-click="guestListVm.addSelectedDocument(guestsData)" class="hidden-xs">
-                    <div class="item-l" x-ng-class="{ 'invisible' : showCheckboxes}">
+                    <div class="item-l" x-ng-class="{'invisible' : showCheckboxes}">
                       <span class="first-letter guest-account-li">{{guestsData.firstName.charAt(0)}}</span>
                     </div>
                     <div class="checkbox-ctn-thumb"
@@ -407,12 +407,12 @@
                   </div>
                 </td>
                 <td class="hidden-xs"
-                    x-ng-if="mactrl.sidebarToggle.right === false"
+                    ng-if="!mainVm.sidebar.isVisible()"
                     data-title="'ADD_GUEST_SIDEBAR.EXP_DATE' | translate" data-sortable="'expirationDate'">
                   {{guestsData.expirationDate | relativeTime}}
                 </td>
                 <td class="hidden-xs"
-                    x-ng-if="mactrl.sidebarToggle.right === false"
+                    ng-if="!mainVm.sidebar.isVisible()"
                     data-title="'HEADER_GUEST.DOMAIN' | translate" data-sortable="'domain'">
                   {{guestsData.domain}}
                 </td>
@@ -425,7 +425,7 @@
   </div>
   <div id="fabMyFiles">
     <!-- TODO: set up : on press lauch the create guest sidebar-->
-    <md-fab-toolbar  md-open="guestListVm.fab.isOpen" count="guestListVm.fab.count" ng-click="guestListVm.singleEventFab($event)"
+    <md-fab-toolbar  md-open="guestListVm.fab.isOpen" count="guestListVm.fab.count" x-ng-click="guestListVm.singleEventFab($event)"
                      md-direction="{{guestListVm.fab.selectedDirection}}" class="visible-xs">
       <md-fab-trigger class="align-with-text" >
         <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;" id="primary-fab-action">
@@ -486,7 +486,7 @@
   </span>
 </div>
 <section class="row multi-select-mobile visible-xs"
-         data-ng-class="{'showMobileMultiMenu': guestListVm.selectedDocuments.length > 0}"
+         x-ng-class="{'showMobileMultiMenu': guestListVm.selectedDocuments.length > 0}"
          x-ng-show="guestListVm.currentPage == 'my_guests'">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="numberOfiles">{{guestListVm.selectedDocuments.length}}</span>
@@ -506,7 +506,7 @@
     <i class="zmdi zmdi-delete col-xs-2"></i>
     <i class="zmdi zmdi-info-outline col-xs-2" x-ng-class="{'disabled-work-in-progress': guestListVm.selectedDocuments.length > 1}"></i>
     <span class="dropdown col-xs-2" uib-dropdown="" x-ng-show="linshareModeProduction == false">
-    <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown }"
+    <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown}"
        x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
        dropdown-toggle uib-dropdown-toggle=""></i>
     <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"

@@ -2,14 +2,14 @@
 
   <div class="card">
 
-    <div class="card-body card-padding" data-ng-controller="DatepickerDemoCtrl">
+    <div class="card-body card-padding" x-ng-controller="DatepickerDemoCtrl">
 
       <br/>
 
       <div class="input-group">
         <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
 
-        <div class="fg-line " style="background: white;" data-ng-controller="LinshareAutocompleteController">
+        <div class="fg-line " style="background: white;" x-ng-controller="LinshareAutocompleteController">
           <ul class="list-inline">
             <li style="border: 1px solid #AAA; padding: 1px; margin: 2px"
                 tooltip-placement="bottom" tooltip={{userRepresentation(recipient)}}
@@ -36,13 +36,13 @@
       <div class="row m-b-20">
         <div class="col-sm-4">
 
-          <div class="date-picker input-group" ng-class="{ 'is-opened': opened == true }">
+          <div class="date-picker input-group" x-ng-class="{'is-opened': opened == true}">
             <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
 
-            <div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
-              <input ng-click="open($event, 'opened')" type="text" class="form-control" datepicker-popup="{{format}}"
-                     show-weeks="false" ng-model="share.expirationDate" is-open="opened" min-date="minDate"
-                     datepicker-options="dateOptions" ng-required="true" close-text="Close"
+            <div class="fg-line" x-ng-class="{'fg-toggled': opened == true}">
+              <input x-ng-click="open($event, 'opened')" type="text" class="form-control" datepicker-popup="{{format}}"
+                     show-weeks="false" x-ng-model="share.expirationDate" is-open="opened" min-date="minDate"
+                     datepicker-options="dateOptions" x-ng-required="true" close-text="Close"
                      placeholder="Expiration Date"/>
             </div>
           </div>
@@ -50,33 +50,33 @@
         </div>
       </div>
 
-      <div class="row m-b-20" ng-show="allFunctionalities.ANONYMOUS_URL.canOverride == true">
+      <div class="row m-b-20" x-ng-show="allFunctionalities.ANONYMOUS_URL.canOverride == true">
         <div class="toggle-switch" data-ts-color="blue">
           <label for="ts1" class="ts-label">Secure Sharing</label>
-          <input id="ts1" type="checkbox" ng-model="share.secured"
-                 ng-init="share.secured = allFunctionalities.ANONYMOUS_URL.value" hidden="hidden">
+          <input id="ts1" type="checkbox" x-ng-model="share.secured"
+                 x-ng-init="share.secured = allFunctionalities.ANONYMOUS_URL.value" hidden="hidden">
           <label for="ts1" class="ts-helper"></label>
         </div>
       </div>
 
-      <div class="row" ng-show="allFunctionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER.canOverride == true">
+      <div class="row" x-ng-show="allFunctionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER.canOverride == true">
         <div class="m-b-20">
           <div class="toggle-switch" data-ts-color="blue">
             <label for="ts2" class="ts-label">Share creation acknowledgement</label>
-            <input id="ts2" type="checkbox" ng-model="share.creationAcknowledgement"
-                   ng-init="share.creationAcknowledgement = allFunctionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER.value"
+            <input id="ts2" type="checkbox" x-ng-model="share.creationAcknowledgement"
+                   x-ng-init="share.creationAcknowledgement = allFunctionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER.value"
                    hidden="hidden">
             <label for="ts2" class="ts-helper"></label>
           </div>
         </div>
       </div>
 
-      <div class="row" ng-show="allFunctionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT.canOverride == true">
+      <div class="row" x-ng-show="allFunctionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT.canOverride == true">
         <div class="m-b-20">
           <div class="toggle-switch" data-ts-color="blue">
             <label for="ts3" class="ts-label">Undownloaded shared documents alert</label>
-            <input id="ts3" type="checkbox" ng-model="share.enableUSDA"
-                   ng-init="share.enableUSDA = allFunctionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT.value"
+            <input id="ts3" type="checkbox" x-ng-model="share.enableUSDA"
+                   x-ng-init="share.enableUSDA = allFunctionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT.value"
                    hidden="hidden">
             <label for="ts3" class="ts-helper"></label>
           </div>
@@ -85,13 +85,13 @@
       <div class="row m-b-20">
         <div class="col-sm-4">
 
-          <div class="date-picker input-group dp-blue" ng-class="{ 'is-opened': opened2 == true }">
+          <div class="date-picker input-group dp-blue" x-ng-class="{'is-opened': opened2 == true}">
             <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
 
-            <div class="fg-line" ng-class="{ 'fg-toggled': opened2 == true }">
-              <input ng-click="open($event, 'opened2')" type="text" class="form-control" datepicker-popup="{{format}}"
-                     show-weeks="false" ng-model="share.notificationDateForUSDA" is-open="opened2" min-date="minDate"
-                     datepicker-options="dateOptions" ng-required="true" close-text="Close"
+            <div class="fg-line" x-ng-class="{'fg-toggled': opened2 == true}">
+              <input x-ng-click="open($event, 'opened2')" type="text" class="form-control" datepicker-popup="{{format}}"
+                     show-weeks="false" x-ng-model="share.notificationDateForUSDA" is-open="opened2" min-date="minDate"
+                     datepicker-options="dateOptions" x-ng-required="true" close-text="Close"
                      placeholder="Notification Date"/>
             </div>
           </div>
@@ -101,22 +101,22 @@
 
       <div class="form-group">
         <div class="fg-line m-b-20">
-          <textarea class="form-control" rows="5" ng-model="share.sharingNote" placeholder="Add a Note"></textarea>
+          <textarea class="form-control" rows="5" x-ng-model="share.sharingNote" placeholder="Add a Note"></textarea>
         </div>
       </div>
 
       <div class="fg-line m-b-20">
-        <input type="text" class="form-control" ng-model="share.subject" placeholder="Email subject"/>
+        <input type="text" class="form-control" x-ng-model="share.subject" placeholder="Email subject"/>
       </div>
 
       <div class="form-group">
         <div class="fg-line">
-          <textarea class="form-control" rows="5" ng-model="share.message" placeholder="message ..."></textarea>
+          <textarea class="form-control" rows="5" x-ng-model="share.message" placeholder="message ..."></textarea>
         </div>
       </div>
     </div>
     <br/>
-    <span class="input-group-addon last"><button class="btn bgm-blue waves-circle" ng-click="submitShare(share)"><i
+    <span class="input-group-addon last"><button class="btn bgm-blue waves-circle" x-ng-click="submitShare(share)"><i
       class="zmdi zmdi-share zmdi-hc-lg"></i></button></span>
   </div>
 </div>

@@ -2,8 +2,9 @@
 angular.module('linshare.guests', ['restangular', 'ui.bootstrap', 'linshare.components'])
 
   .controller('LinshareGuestController', function ($scope, $filter, $translatePartialLoader, NgTableParams, $timeout, documentUtilsService) {
-    $scope.sidebarRightDataType = 'guest-sidebar';
-    $scope.mactrl.sidebarToggle.right = false;
+    
+    $scope.mainVm.sidebar.setContent('guest-sidebar');
+    $scope.mainVm.sidebar.hide();
     var guestList = [
       {
         'canUpload': false,
@@ -44,7 +45,7 @@ angular.module('linshare.guests', ['restangular', 'ui.bootstrap', 'linshare.comp
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('guests');
     guestListVm.addSelectedDocument = addSelectedDocument;
-    //guestListVm.sidebarRightDataType = 'add-guest';
+    //guestListVm.sidebarRightDataType = lsAppConfig.addGuest;
     // For the multiselect - upon checkbox activated
     // In order to activate some contextualized features based on the current view
     guestListVm.currentPage = 'my_guests';

@@ -5,23 +5,35 @@
     .module('linshare.document')
     .controller('documentsController', documentsController);
 
-  documentsController.$inject = ['$scope', '$translatePartialLoader'];
+  documentsController.$inject = ['$scope', '$translatePartialLoader', 'lsAppConfig'];
 
-  function documentsController($scope, $translatePartialLoader) {
-    $translatePartialLoader.addPart('filesList');
+  function documentsController($scope, $translatePartialLoader, lsAppConfig) {
+    $scope.loadSidebarContent = loadSidebarContent;
     $scope.multipleSelection = true;
-    $scope.sidebarRightDataType = 'details';
-
-    //SELECTED FILES AND UPLOADS
+    $scope.onShare = onShare;
     $scope.selectedDocuments = [];
+    $translatePartialLoader.addPart('filesList');
 
-    $scope.loadSidebarContent = function(content) {
-      $scope.sidebarRightDataType = content || 'share';
-    };
+    ////////////
 
-    $scope.onShare = function() {
+    function activate(){
+      $scope.loadSidebarContent(lsAppConfig.details);
+    } 
+    
+		/**
+     * @name loadSidebarContent
+     * @desc Update the content of the sidebar
+     * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     */
+    function loadSidebarContent(content) {
+      $scope.mainVm.sidebar.setData($scope);
+      $scope.mainVm.sidebar.setContent(content || lsAppConfig.share);
+      $scope.mainVm.sidebar.show();
+    }
+
+    function onShare() {
       $scope.loadSidebarContent();
       angular.element('#focusInputShare').focus();
-    };
+    }
   }
 })();

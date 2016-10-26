@@ -4,18 +4,18 @@
       <div class="p-relative m-b-20 img-preview-ctn">
         <div class="np-preview-ctn">
           <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
-          <p>{{ "RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate }}</p>
+          <p>{{"RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate}}</p>
         </div>
       </div>
       <div title="{{'WIP' | translate}}">
         <div class="description-ctn form-sidebar disabled">
           <div contenteditable="false" class="comment"
-               ng-focus="slideTextarea($event)"
-               ng-blur="slideUpTextarea($event)"
-               ng-keyup="setTextInput($event);"></div>
+               x-ng-focus="mainVm.sidebar.getData().slideTextarea($event)"
+               x-ng-blur="mainVm.sidebar.getData().slideUpTextarea($event)"
+               x-ng-keyup="mainVm.sidebar.getData().setTextInput($event);"></div>
           <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
           <div class="edit-description">
-            {{vm.currentSelectedDocument.current.description}}
+            {{mainVm.sidebar.getData().currentSelectedDocument.current.description}}
             <i class="zmdi zmdi-edit"></i>
           </div>
         </div>
@@ -30,9 +30,9 @@
           <div class="item-mid">
             <div class="name">{{'UNKNOWN_USER' | translate}}</div>
             <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{vm.currentSelectedDocument.current.modificationDate | date : lsFullDateFormat()}}">
+                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
                         <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                          {{vm.currentSelectedDocument.current.modificationDate | date: lsFormat()}}
+                          {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date: mainVm.sidebar.getData().lsFormat()}}
                         </span>
             </div>
           </div>
@@ -56,14 +56,14 @@
                 {{'INFORMATION_TAB.CREATED_THE' | translate}}:
               </p>
               <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{vm.currentSelectedDocument.current.creationDate | date : lsFullDateFormat()}}">
-                {{vm.currentSelectedDocument.current.creationDate | date : lsFormat()}}
+                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date : mainVm.sidebar.getData().lsFormat()}}
               </p>
             </div>
             <div>
               <p>{{'MEMBER_TAB.TITLE' | translate}}</p>
-              <p ng-click="vm.mdtabsSelection.selectedIndex = 1">
-                <a>{{vm.currentSelectedDocument.current.members.length}}
+              <p x-ng-click="mainVm.sidebar.getData().mdtabsSelection.selectedIndex = 1">
+                <a>{{mainVm.sidebar.getData().currentSelectedDocument.current.members.length}}
                   {{'MEMBER_TAB.TITLE' | translate}}
                 </a>
               </p>
@@ -72,14 +72,14 @@
               <p>
                 {{'MEMBER_TAB.MY_RIGHTS' | translate}}:
               </p>
-              <p ng-show="vm.currentWorkgroupMember.admin">
-                <i class="zmdi zmdi-account p-r-3"></i> {{ "MEMBER_TAB.ADMIN" | translate }}<br />
+              <p x-ng-show="mainVm.sidebar.getData().currentWorkgroupMember.admin">
+                <i class="zmdi zmdi-account p-r-3"></i> {{"MEMBER_TAB.ADMIN" | translate}}<br />
               </p>
-              <p ng-show="vm.currentWorkgroupMember.readonly">
-                <i class="zmdi zmdi-account p-r-3"></i> {{ "MEMBER_TAB.READ" | translate }}<br />
+              <p x-ng-show="mainVm.sidebar.getData().currentWorkgroupMember.readonly">
+                <i class="zmdi zmdi-account p-r-3"></i> {{"MEMBER_TAB.READ" | translate}}<br />
               </p>
-              <p ng-show="vm.currentWorkgroupMember.role === 'normal'">
-                <i class="zmdi zmdi-account p-r-3"></i> {{ "MEMBER_TAB.WRITE" | translate }}<br />
+              <p x-ng-show="mainVm.sidebar.getData().currentWorkgroupMember.role === 'normal'">
+                <i class="zmdi zmdi-account p-r-3"></i> {{"MEMBER_TAB.WRITE" | translate}}<br />
               </p>
             </div>
           </div>

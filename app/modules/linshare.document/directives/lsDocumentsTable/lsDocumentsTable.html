@@ -1,24 +1,24 @@
-<table id="file-list-table" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
-  <tr data-ng-repeat="documentFile in $data"
+<table id="file-list-table" class="table table-vmiddle" x-ng-table="tableParams" show-filter="true">
+  <tr x-ng-repeat="documentFile in $data"
       ls-item-selection=""
       data-selected-documents="selectedDocuments"
       data-document-file="documentFile"
       data-current-selected-Document="currentSelectedDocument"
       data-details-function="getDetails"
-      data-right-sidebar-open="mactrl.sidebarToggle.right"
-      data-ng-click="backToSidebarContentDetails()"
-      data-ng-class="{'highlight-list-elem': documentFile.isSelected ,
-                   'current-vis': currentSelectedDocument.current.uuid === documentFile.uuid }"
+      data-right-sidebar-open="mainVm.sidebar.isVisible()"
+      x-ng-click="backToSidebarContentDetails()"
+      x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
+                   'current-vis': currentSelectedDocument.current.uuid === documentFile.uuid}"
       class="p-b-5"
       context-menu="moreOptionsContexualMenu"
       new-upload-anim>
     <td data-header="'checkboxheader.html'"
         class="center set-content-left thumb-type-item thumb-groups-preview-ls"
         header-class="'col-2'">
-      <a ng-click="addSelectedDocument(documentFile)">
-        <i class="fa" ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+      <a x-ng-click="addSelectedDocument(documentFile)">
+        <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
         <div class="checkbox-ctn-thumb"
-             ng-class="{'maintain-vis': documentFile.isSelected }">
+             x-ng-class="{'maintain-vis': documentFile.isSelected}">
         </div>
       </a>
     </td>
@@ -28,12 +28,12 @@
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
           {{documentFile.name}}
           <span>
-            <span ng-show="documentFile.shared > 0" class="sharedActivated hidden-xs">
+            <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
             {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
             </span>
             <p class="mobile-list-item-info visible-xs">
               {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}},
-                 <span ng-show="documentFile.shared > 0">
+                 <span x-ng-show="documentFile.shared > 0">
                    {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                  </span>
             </p>
@@ -43,12 +43,12 @@
       </div>
     </td>
     <td class="hidden-xs"
-        ng-if="mactrl.sidebarToggle.right === false"
+        ng-if="!mainVm.sidebar.isVisible()"
         data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
       {{documentFile.modificationDate | relativeTime}}
     </td>
     <td class="hidden-xs"
-        ng-if="mactrl.sidebarToggle.right === false"
+        ng-if="!mainVm.sidebar.isVisible()"
         data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
       {{documentFile.size | readableSize: false}}
     </td>

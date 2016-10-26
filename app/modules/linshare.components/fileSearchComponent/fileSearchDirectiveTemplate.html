@@ -1,16 +1,16 @@
-<div class="search-bar" ng-show="activatedField.name == 'true'">
+<div class="search-bar" x-ng-show="activatedField.name == 'true'">
   <div class="input-group">
     <div class="fg-line">
       <input type="text" class="form-control" placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-             ng-change="updateParams()"
-             ng-model="paramFilter['name']">
+             x-ng-change="updateParams()"
+             x-ng-model="paramFilter['name']">
     </div>
             <span class="input-group-addon last clickable"
                   x-ng-click="advancedFilterBool = !advancedFilterBool"
                   data-toggle="tooltip"
                   title=""
                   data-placement="right"
-                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                  data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate}}"
                   slide-toggle="#searchFilterCtn">
               <i class="zmdi hidden-xs clickable"
                  x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
@@ -22,8 +22,8 @@
 <div id="searchFilterCtn" class="slideable" duration="750ms" easing="cubic-bezier(.02, .01, .47, 1);">
   <div class="hidden-xs row fix-margin-row col-md-12 m-t-30 formsearch" style="float:none;">
 
-    <div ng-show="activatedField.size == 'true'">
-      <label>{{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate }}</label>
+    <div x-ng-show="activatedField.size == 'true'">
+      <label>{{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate}}</label>
 
       <div class="clearfix"></div>
 
@@ -31,14 +31,14 @@
       <div class="col-sm-3">
         <div class="input-group">
             <span class="input-group-addon">
-              <i class="zmdi zmdi-trending-down" ng-class="{disabledIcon: !showUnit}"></i>
+              <i class="zmdi zmdi-trending-down" x-ng-class="{disabledIcon: !showUnit}"></i>
             </span>
 
-          <div class="fg-line" ng-init="showUnit=true">
-            <input type="text" ng-disabled="!showUnit"
+          <div class="fg-line" x-ng-init="showUnit=true">
+            <input type="text" x-ng-disabled="!showUnit"
                    class="form-control" name="start"
                    maxlengh="3" placeholder="min"
-                   ng-model="filters['sizeStart']">
+                   x-ng-model="filters['sizeStart']">
           </div>
         </div>
       </div>
@@ -47,12 +47,12 @@
       <div class="col-sm-4">
         <div class="input-group">
             <span class="input-group-addon">
-              <i class="zmdi zmdi-trending-up" ng-class="{disabledIcon: !showUnit}"></i>
+              <i class="zmdi zmdi-trending-up" x-ng-class="{disabledIcon: !showUnit}"></i>
             </span>
 
           <div class="fg-line">
-            <input type="text" ng-disabled="!showUnit" name="end" class="form-control" placeholder="max"
-                   ng-model="filters['sizeEnd']"
+            <input type="text" x-ng-disabled="!showUnit" name="end" class="form-control" placeholder="max"
+                   x-ng-model="filters['sizeEnd']"
                    maxlengh="3"/>
           </div>
         </div>
@@ -63,17 +63,17 @@
       <div class="col-sm-4">
         <div class="input-group">
             <span class="input-group-addon">
-              <i class="fa fa-database" ng-class="{disabledIcon: !showUnit}"></i>
+              <i class="fa fa-database" x-ng-class="{disabledIcon: !showUnit}"></i>
             </span>
-          <div class="fg-line " ng-class="{disabledIcon: !showUnit}">
+          <div class="fg-line " x-ng-class="{disabledIcon: !showUnit}">
             <select chosen
                     data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
                     disable-search="true"
                     allow-single-deselect="true"
-                    ng-model="filters['unity']"
+                    x-ng-model="filters['unity']"
                     class="form-control custumSelect outlineFFremove w-100"
-                    ng-init="filters['unity'] = '1000'"
-                    ng-disabled="!showUnit" >
+                    x-ng-init="filters['unity'] = '1000'"
+                    x-ng-disabled="!showUnit" >
               <option value="1000">Ko</option>
               <option value="1000000">Mo</option>
               <option value="1000000000">Go</option>
@@ -92,7 +92,7 @@
 
             <div class="form-inline">
               <label class="checkbox checkbox-inline m-r-20">
-                <input type="checkbox" ng-checked="true" name="check"
+                <input type="checkbox" x-ng-checked="true" name="check"
                        x-ng-checked="showUnit"
                        x-ng-model="showUnit">
                 <i class="input-helper"></i>
@@ -104,30 +104,30 @@
     </div>
 
     <!--DATE TYPE -->
-    <div ng-show="activatedField.date == 'true'">
-      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_DATE.HEADER' | translate }}</label>
+    <div x-ng-show="activatedField.date == 'true'">
+      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_DATE.HEADER' | translate}}</label>
 
       <div class="clearfix"></div>
 
       <!--TAG SELECT DATE -->
-      <div ng-init="showDateRange=true">
+      <div x-ng-init="showDateRange=true">
         <div class="col-sm-3">
           <div class="input-group">
               <span class="input-group-addon">
-                <i class="zmdi zmdi-calendar ma-icon" ng-class="{disabledIcon: !showDateRange}"></i>
+                <i class="zmdi zmdi-calendar ma-icon" x-ng-class="{disabledIcon: !showDateRange}"></i>
               </span>
 
-            <div class="fg-line" ng-class="{disabledIcon: !showDateRange}">
+            <div class="fg-line" x-ng-class="{disabledIcon: !showDateRange}">
               <select chosen
                       data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
                       disable-search="true"
                       allow-single-deselect="true"
-                      ng-model="filters['dateType']"
+                      x-ng-model="filters['dateType']"
                       class="form-control custumSelect outlineFFremove w-100"
-                      ng-init="filters['dateType'] = '1'">
-                      ng-disabled="!showDateRange">
-                <option value="1">{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}</option>
-                <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}</option>
+                      x-ng-init="filters['dateType'] = '1'">
+                      x-ng-disabled="!showDateRange">
+                <option value="1">{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}</option>
+                <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}</option>
               </select>
             </div>
           </div>
@@ -135,37 +135,37 @@
 
         <!--DATE START -->
         <div class="col-sm-4">
-          <div class="date-picker input-group dp-blue" ng-class="{ 'is-opened': dateStartOpened == true }">
+          <div class="date-picker input-group dp-blue" x-ng-class="{'is-opened': dateStartOpened == true}">
               <span class="input-group-addon">
-                <i class="zmdi zmdi-calendar-check ma-icon" ng-class="{disabledIcon: !showDateRange}"></i>
+                <i class="zmdi zmdi-calendar-check ma-icon" x-ng-class="{disabledIcon: !showDateRange}"></i>
               </span>
 
-            <div class="fg-line" ng-class="{ 'fg-toggled': dateStartOpened == true }">
-              <input ng-disabled="!showDateRange" ng-click="open($event, 'dateStartOpened')" type="text"
+            <div class="fg-line" x-ng-class="{'fg-toggled': dateStartOpened == true}">
+              <input x-ng-disabled="!showDateRange" x-ng-click="open($event, 'dateStartOpened')" type="text"
                      class="form-control" datepicker-popup="{{format}}" show-weeks="false"
                      is-open="dateStartOpened" max-date="maxDate" datepicker-options="dateOptions"
-                     ng-required="true" close-text="Close"
-                     placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate }}"
-                     ng-model="filters['dateStart']"/>
+                     x-ng-required="true" close-text="Close"
+                     placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate}}"
+                     x-ng-model="filters['dateStart']"/>
             </div>
           </div>
         </div>
 
         <!--DATE END -->
         <div class="col-sm-4">
-          <div class="date-picker input-group dp-blue" ng-class="{ 'is-opened': dateEndOpened == true }">
+          <div class="date-picker input-group dp-blue" x-ng-class="{'is-opened': dateEndOpened == true}">
               <span class="input-group-addon">
-                <i class="zmdi zmdi-calendar-close ma-icon" ng-class="{disabledIcon: !showDateRange}"></i>
+                <i class="zmdi zmdi-calendar-close ma-icon" x-ng-class="{disabledIcon: !showDateRange}"></i>
               </span>
 
-            <div class="fg-line" ng-class="{ 'fg-toggled': opened2 == true }">
-              <input ng-disabled="!showDateRange" ng-click="open($event, 'dateEndOpened')"
+            <div class="fg-line" x-ng-class="{'fg-toggled': opened2 == true}">
+              <input x-ng-disabled="!showDateRange" x-ng-click="open($event, 'dateEndOpened')"
                      type="text" class="form-control"
                      datepicker-popup="{{format}}" show-weeks="false"
-                     ng-model="filters['dateEnd']" is-open="dateEndOpened"
+                     x-ng-model="filters['dateEnd']" is-open="dateEndOpened"
                      max-date="maxDate" min-date="filters['dateStart']"
-                     datepicker-options="dateOptions" ng-required="true"
-                     close-text="Close" placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate }}"/>
+                     datepicker-options="dateOptions" x-ng-required="true"
+                     close-text="Close" placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate}}"/>
             </div>
           </div>
         </div>
@@ -179,8 +179,8 @@
 
               <div class="form-inline">
                 <label class="checkbox checkbox-inline m-r-20">
-                  <input type="checkbox" name="isDateActive" name="check" ng-checked="true"
-                         ng-model="showDateRange"/>
+                  <input type="checkbox" name="isDateActive" name="check" x-ng-checked="true"
+                         x-ng-model="showDateRange"/>
                   <i class="input-helper"></i>
                 </label>
               </div>
@@ -191,23 +191,23 @@
     </div>
 
     <!--RECIPIENT -->
-    <div ng-show="activatedField.email == 'true'">
-      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER' | translate }}</label>
+    <div x-ng-show="activatedField.email == 'true'">
+      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER' | translate}}</label>
 
       <div class="clearfix"></div>
       <div class="col-sm-7">
-        <div class="input-group" ng-init="showRecipients=true">
+        <div class="input-group" x-ng-init="showRecipients=true">
           <span class="input-group-addon">
-            <i class="zmdi zmdi-account" ng-class="{disabledIcon: !showRecipients}"></i>
+            <i class="zmdi zmdi-account" x-ng-class="{disabledIcon: !showRecipients}"></i>
           </span>
 
           <div class="fg-line">
             <input id="typeaheadDestinataires" type="text"
-                   ng-disabled="!showRecipients"
+                   x-ng-disabled="!showRecipients"
                    autocomplete="off"
                    class="form-control"
-                   placeholder="{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER' | translate }}"
-                   ng-model="filters['selectedContact']"
+                   placeholder="{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER' | translate}}"
+                   x-ng-model="filters['selectedContact']"
                    x-typeahead-min-length="3"
                    x-typeahead-on-select="addRecipients(share.recipients, filters['selectedContact'])"
                    x-typeahead-wait-ms="30"
@@ -231,8 +231,8 @@
 
             <div class="form-inline">
               <label class="checkbox checkbox-inline m-r-20">
-                <input type="checkbox" name="isDestinatairesActive" ng-checked="true"
-                       ng-model="showRecipients"/>
+                <input type="checkbox" name="isDestinatairesActive" x-ng-checked="true"
+                       x-ng-model="showRecipients"/>
                 <i class="input-helper"></i>
               </label>
             </div>
@@ -245,11 +245,11 @@
 
   <!--VALIDATE-->
   <div class="col-md-9 m-t-50 m-b-30">
-    <button class="btn bgm-white waves-effect" ng-click="clearParams()">
-      {{'FILTER_COMPONENT.REINITIALIZE' | translate }}
+    <button class="btn bgm-white waves-effect" x-ng-click="clearParams()">
+      {{'FILTER_COMPONENT.REINITIALIZE' | translate}}
     </button>
-    <button class="btn bgm-blue waves-effect" ng-click="updateFilters()">
-      {{'FILTER_COMPONENT.SUBMIT' | translate }}
+    <button class="btn bgm-blue waves-effect" x-ng-click="updateFilters()">
+      {{'FILTER_COMPONENT.SUBMIT' | translate}}
     </button>
   </div>
 

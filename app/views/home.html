@@ -1,12 +1,6 @@
-<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+<header id="header" x-ng-include src="'includes/header.html'" x-ng-controller="headerCtrl as hctrl"></header>
 
 <section id="main">
-    <aside id="sidebar" data-ng-include src="'includes/sidebar-left.html'"
-           data-ng-class="{ 'toggled': mactrl.sidebarToggle.left }"></aside>
-
-    <aside id="chat" data-ng-include src="'includes/chat.html'"
-           data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
-
     <section id="content">
 
         <div class="container">
@@ -229,7 +223,7 @@
                     </div>
 
                     <div class="col-md-3 col-sm-6">
-                        <div id="best-selling" class="dash-widget-item" data-ng-controller="bestsellingCtrl as wctrl">
+                        <div id="best-selling" class="dash-widget-item" x-ng-controller="bestsellingCtrl as wctrl">
                             <div class="dash-widget-header">
                                 <div class="dash-widget-title">Best Sellings</div>
                                 <img src="img/widgets/alpha.jpg" alt="">
@@ -240,14 +234,14 @@
                             </div>
 
                             <div class="listview p-t-5">
-                                <a class="lv-item" href="" data-ng-repeat="w in wctrl.bsResult.list">
+                                <a class="lv-item" href="" x-ng-repeat="w in wctrl.bsResult.list">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img class="lv-img-sm" data-ng-src="img/widgets/{{ w.img }}" alt="">
+                                            <img class="lv-img-sm" x-ng-src="img/widgets/{{w.img}}" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <div class="lv-title">{{ w.name }}</div>
-                                            <small class="lv-small">{{ w.range }}</small>
+                                            <div class="lv-title">{{w.name}}</div>
+                                            <small class="lv-small">{{w.range}}</small>
                                         </div>
                                     </div>
                                 </a>
@@ -268,7 +262,7 @@
                     <div id="calendar-widget" data-full-calendar></div>
 
                     <!-- Todo Lists -->
-                    <div id="todo-lists" data-ng-controller="todoCtrl as tctrl">
+                    <div id="todo-lists" x-ng-controller="todoCtrl as tctrl">
                         <div class="tl-header">
                             <h2>Todo Lists</h2>
                             <small>Add, edit and manage your Todo Lists</small>
@@ -297,24 +291,24 @@
                         <div class="clearfix"></div>
 
                         <div class="tl-body">
-                            <div id="add-tl-item" data-ng-class="{ 'toggled': tctrl.addTodoStat === 1 }"
-                                 data-ng-click="tctrl.addTodoStat = 1">
-                                <i class="add-new-item md md-add" data-ng-click="tctrl.addTodo($event)"></i>
+                            <div id="add-tl-item" x-ng-class="{'toggled': tctrl.addTodoStat === 1}"
+                                 x-ng-click="tctrl.addTodoStat = 1">
+                                <i class="add-new-item md md-add" x-ng-click="tctrl.addTodo($event)"></i>
 
                                 <div class="add-tl-body">
                                     <textarea placeholder="What you want to do..."
-                                              data-ng-model="tctrl.todo"></textarea>
+                                              x-ng-model="tctrl.todo"></textarea>
 
                                     <div class="add-tl-actions">
                                         <a href="" data-tl-action="dismiss" class="a-prevent md md-close"
-                                           data-ng-click="tctrl.clearTodo()"></a>
+                                           x-ng-click="tctrl.clearTodo()"></a>
                                         <a href="" data-tl-action="save" class="a-prevent md md-check"
-                                           data-ng-click="tctrl.clearTodo()"></a>
+                                           x-ng-click="tctrl.clearTodo()"></a>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="checkbox media" data-ng-repeat="w in tctrl.tdResult.list">
+                            <div class="checkbox media" x-ng-repeat="w in tctrl.tdResult.list">
                                 <div class="pull-right">
                                     <ul class="actions actions-alt">
                                         <li class="dropdown">
@@ -333,7 +327,7 @@
                                     <label>
                                         <input type="checkbox">
                                         <i class="input-helper"></i>
-                                        <span>{{ w.todo }}</span>
+                                        <span>{{w.todo}}</span>
                                     </label>
                                 </div>
                             </div>
@@ -344,7 +338,7 @@
 
                 <div class="col-sm-6">
                     <!-- Recent Items -->
-                    <div class="card" data-ng-controller="recentitemCtrl as rictrl">
+                    <div class="card" x-ng-controller="recentitemCtrl as rictrl">
                         <div class="card-header">
                             <h2>Recent Items
                                 <small>Phasellus condimentum ipsum id auctor imperdie</small>
@@ -380,10 +374,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr data-ng-repeat="w in rictrl.riResult.list">
-                                    <td class="f-500 c-cyan">{{ w.id }}</td>
-                                    <td>{{ w.name }}</td>
-                                    <td class="f-500 c-cyan">{{ w.price }}</td>
+                                <tr x-ng-repeat="w in rictrl.riResult.list">
+                                    <td class="f-500 c-cyan">{{w.id}}</td>
+                                    <td>{{w.name}}</td>
+                                    <td class="f-500 c-cyan">{{w.price}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -392,7 +386,7 @@
                     </div>
 
                     <!-- Recent Posts -->
-                    <div class="card" data-ng-controller="recentpostCtrl as rpctrl">
+                    <div class="card" x-ng-controller="recentpostCtrl as rpctrl">
                         <div class="card-header ch-alt m-b-20">
                             <h2>Recent Posts
                                 <small>Phasellus condimentum ipsum id auctor imperdie</small>
@@ -433,14 +427,14 @@
                         <div class="card-body">
                             <div class="listview">
 
-                                <a class="lv-item" href="" data-ng-repeat="w in rpctrl.rpResult.list">
+                                <a class="lv-item" href="" x-ng-repeat="w in rpctrl.rpResult.list">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img class="lv-img-sm" data-ng-src="img/profile-pics/{{ w.img }}" alt="">
+                                            <img class="lv-img-sm" x-ng-src="img/profile-pics/{{w.img}}" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <div class="lv-title">{{ w.user }}</div>
-                                            <small class="lv-small">{{ w.text }}</small>
+                                            <div class="lv-title">{{w.user}}</div>
+                                            <small class="lv-small">{{w.text}}</small>
                                         </div>
                                     </div>
                                 </a>
@@ -455,4 +449,4 @@
     </section>
 </section>
 
-<footer id="footer" data-ng-include src="'includes/footer.html'"></footer>
+<footer id="footer" x-ng-include src="'includes/footer.html'"></footer>

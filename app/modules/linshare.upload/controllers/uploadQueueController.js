@@ -39,7 +39,7 @@
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
 
     $scope.$flow.files.forEach(function(n) {
-      if(n.isSelected) {
+      if (n.isSelected) {
         n.isSelected = false;
       }
     });
@@ -47,7 +47,7 @@
     activate();
 
     function activate() {
-      if(idUpload) {
+      if (idUpload) {
         var currentElemFlow;
         currentElemFlow = $scope.$flow.getFromUniqueIdentifier(idUpload);
         currentElemFlow.isSelected = true;
@@ -76,7 +76,7 @@
       };
       angular.element('.drag-and-drop-ctn').addClass('out-of-focus');
       //pertains to upload-box
-      if(angular.element('upload-box') !== null) {
+      if (angular.element('upload-box') !== null) {
         angular.element('.info-share').css('opacity', '1');
       }
     });
@@ -97,7 +97,7 @@
     // MANAGE FLOW SELECTED ELEMENTS
     function resumeSelectedFiles() {
       _.forEach($scope.$flow.files, function(file) {
-        if(file.isSelected && file.paused) {
+        if (file.isSelected && file.paused) {
           file.resume();
         }
       });
@@ -105,7 +105,7 @@
 
     function pauseSelectedFiles() {
       _.forEach($scope.$flow.files, function(file) {
-        if(file.isSelected && !file.paused) {
+        if (file.isSelected && !file.paused) {
           file.pause();
         }
       });
@@ -113,7 +113,7 @@
 
     function retrySelectedFiles() {
       _.forEach($scope.$flow.files, function(file) {
-        if(file.isSelected && file.error) {
+        if (file.isSelected && file.error) {
           file.retry();
         }
       });
@@ -121,7 +121,7 @@
 
     function cancelSelectedFiles() {
       for(var i = $scope.$flow.files.length - 1; i >= 0; i--) {
-        if($scope.$flow.files[i].isSelected && !$scope.$flow.files[i].isComplete()) {
+        if ($scope.$flow.files[i].isSelected && !$scope.$flow.files[i].isComplete()) {
           $scope.removeSelectedDocuments($scope.$flow.files[i]);
         }
       }
@@ -129,7 +129,7 @@
 
     function clearSelectedFiles() {
       for(var i = $scope.$flow.files.length - 1; i >= 0; i--) {
-        if($scope.$flow.files[i].isSelected && $scope.$flow.files[i].isComplete()) {
+        if ($scope.$flow.files[i].isSelected && $scope.$flow.files[i].isComplete()) {
           $scope.removeSelectedDocuments($scope.$flow.files[i]);
         }
       }
@@ -138,7 +138,7 @@
     // MANAGE FLOW ALL ELEMENTS
     function resumeAllFiles() {
       for(var i = $scope.$flow.files.length - 1; i >= 0; i--) {
-        if(($scope.$flow.files[i]._from === $scope.fromWhere) && $scope.$flow.files[i].paused) {
+        if (($scope.$flow.files[i]._from === $scope.fromWhere) && $scope.$flow.files[i].paused) {
           $scope.$flow.files[i].resume();
         }
       }
@@ -147,7 +147,7 @@
 
     function pauseAllFiles() {
       for(var i = $scope.$flow.files.length - 1; i >= 0; i--) {
-        if(($scope.$flow.files[i]._from === $scope.fromWhere) && !$scope.$flow.files[i].paused) {
+        if (($scope.$flow.files[i]._from === $scope.fromWhere) && !$scope.$flow.files[i].paused) {
           $scope.$flow.files[i].pause();
         }
       }
@@ -156,7 +156,7 @@
 
     function retryAllFiles() {
       for(var i = $scope.$flow.files.length - 1; i >= 0; i--) {
-        if(($scope.$flow.files[i]._from === $scope.fromWhere) && $scope.$flow.files[i].error) {
+        if (($scope.$flow.files[i]._from === $scope.fromWhere) && $scope.$flow.files[i].error) {
           $scope.$flow.files[i].retry();
         }
       }
@@ -165,7 +165,7 @@
 
     function cancelAllFiles() {
       for(var i = $scope.$flow.files.length - 1; i >= 0; i--) {
-        if(($scope.$flow.files[i]._from === $scope.fromWhere) && !$scope.$flow.files[i].isComplete()) {
+        if (($scope.$flow.files[i]._from === $scope.fromWhere) && !$scope.$flow.files[i].isComplete()) {
           $scope.removeSelectedDocuments($scope.$flow.files[i]);
         }
       }
@@ -173,7 +173,7 @@
 
     function clearAllFiles() {
       for(var i = $scope.$flow.files.length - 1; i >= 0; i--) {
-        if(($scope.$flow.files[i]._from === $scope.fromWhere) && $scope.$flow.files[i].isComplete()) {
+        if (($scope.$flow.files[i]._from === $scope.fromWhere) && $scope.$flow.files[i].isComplete()) {
           $scope.removeSelectedDocuments($scope.$flow.files[i]);
         }
       }
@@ -190,14 +190,14 @@
 
     function addUploadedFile(flowFile, serverResponse) {
       var uploadedDocument = flowUploadService.addUploadedFile(flowFile, serverResponse);
-      if($scope.isFromMySpace) {
+      if ($scope.isFromMySpace) {
         sharableDocumentService.sharableDocuments(uploadedDocument, $scope.share_array, $scope.refFlowShares);
       }
     }
 
     function showFileInSource(file) {
       console.log(file, file.folderInfos);
-      if(!_.isUndefined(file.folderInfos)) {
+      if (!_.isUndefined(file.folderInfos)) {
         file.folderInfos.uploadedFileUuid = file.linshareDocument.uuid;
         $state.go('sharedspace.workgroups.entries', file.folderInfos);
       } else {
@@ -206,7 +206,7 @@
     }
 
     function shareSelectedUpload(selectedUpload) {
-      if(Object.keys(selectedUpload).length === 0) {
+      if (Object.keys(selectedUpload).length === 0) {
         growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'warning');
         return;
       }
@@ -216,7 +216,7 @@
     function selectUploadingDocuments() {
       _.forEach($scope.$flow.files, function(flowFile) {
         flowFile.isSelected = $scope.selectAll;
-        if(flowFile.isSelected) {
+        if (flowFile.isSelected) {
           $scope.selectedUploads[flowFile.uniqueIdentifier] = {
             name: flowFile.name,
             size: flowFile.size,
@@ -246,7 +246,7 @@
     };
 
     $scope.$watch('fab.isOpen', function(isOpen) {
-      if(isOpen) {
+      if (isOpen) {
         angular.element('.md-toolbar-tools').addClass('setWhite');
         angular.element('.multi-select-mobile').addClass('setDisabled');
         $timeout(function() {
@@ -265,7 +265,7 @@
 
     function showBtnList($event) {
       var showBtnListElem = $event.currentTarget;
-      if(angular.element(showBtnListElem).hasClass('activeShowMore')) {
+      if (angular.element(showBtnListElem).hasClass('activeShowMore')) {
         angular.element(showBtnListElem).parent().prev().find('div').first()
           .removeClass('data-list-slide-toggle activeShowMore').css('display:none !important;');
       } else {

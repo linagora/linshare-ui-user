@@ -1,20 +1,20 @@
 
 <div class="bottom-btn visible-xs row col-xs-12 transfertFilesBtnCtn">
-  <button ng-click="moveSliderBackwards()" class="btn bgm-lightblue waves-effect col-xs-6">PRECEDENT</button>
-  <button ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect nextLink col-xs-6">SUIVANT</button>
-  <button ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect col-xs-6 sendLink hide">ENVOYER</button>
+  <button x-ng-click="moveSliderBackwards()" class="btn bgm-lightblue waves-effect col-xs-6">PRECEDENT</button>
+  <button x-ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect nextLink col-xs-6">SUIVANT</button>
+  <button x-ng-click="moveSliderForward()" class="btn bgm-lightblue waves-effect col-xs-6 sendLink hide">ENVOYER</button>
 </div>
-<div class="container" id="upload-box" ng-controller="LinshareAdvancedShareController" flow-init
+<div class="container" id="upload-box" x-ng-controller="LinshareAdvancedShareController" flow-init
      flow-object="share_array[id].flowObjectFiles"
-     flow-files-submitted="$flow.upload()" ng-init="testeur = share_array[id].flowObjectFiles.files.length" >
-    <div id="breadcrumb-wrap"  ng-controller="DemoCtrl as demo">
+     flow-files-submitted="$flow.upload()" x-ng-init="testeur = share_array[id].flowObjectFiles.files.length" >
+    <div id="breadcrumb-wrap"  x-ng-controller="DemoCtrl as demo">
       <div class="breadcrumbs-ctn">
-        <a ng-click="showSharingItems($index)" class="breadcrumb"><i class="zmdi zmdi-file" ></i>Mes dépots</a>
+        <a x-ng-click="showSharingItems($index)" class="breadcrumb"><i class="zmdi zmdi-file" ></i>Mes dépots</a>
       </div>
 
       <div id="action-header">
         <div class="navBarBtn" >
-          <button class="btn btn-default waves-effect" ng-click="createSharing()">
+          <button class="btn btn-default waves-effect" x-ng-click="createSharing()">
             <span>valider</span>
           </button>
           <button class="btn btn-default waves-effect" flow-btn flow-files-submitted="$flow.upload()" >
@@ -28,25 +28,23 @@
     <div class="info-share">
       <p><i  class="fa fa-info"></i> Sélectionnez des fichiers si vous souhaitez les partager</p>
     </div>
-  <div id="selection-actions" style="display: block;" ng-init="isAllSelected.status = false">
-    <div class="exit-selection" ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
+  <div id="selection-actions" style="display: block;" x-ng-init="isAllSelected.status = false">
+    <div class="exit-selection" x-ng-click="isAllSelected.status = false; isAllSelected.origin = ''">
       <i class="zmdi zmdi-close" ></i>
     </div>
     <div class="display-num-selected-items"><span>{{numSelectedItems.length}}</span> Items Selectionnés </div>
     <div id="toolbar-actions">
-       <span ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
+       <span x-ng-click="isAllSelected.status = !isAllSelected.status; isAllSelected.origin = ''">
          <a class="select-all-items plain-text-button">
-           <i ng-show="isAllSelected.status"  class="fa fa-square-o"></i>
-           <span ng-show="isAllSelected.status">Tout désélectionner</span>
-           <i ng-show="!isAllSelected.status" class="fa fa-check-square-o"></i>
-           <span ng-show="!isAllSelected.status">Tout sélectionner</span>
+           <i x-ng-show="isAllSelected.status"  class="fa fa-square-o"></i>
+           <span x-ng-show="isAllSelected.status">Tout désélectionner</span>
+           <i x-ng-show="!isAllSelected.status" class="fa fa-check-square-o"></i>
+           <span x-ng-show="!isAllSelected.status">Tout sélectionner</span>
          </a>
        </span>
       <span>
-        <!--<a class="plain-text-button share-link" ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" >-->
-        <!--<i class="zmdi zmdi-share"></i><span>Partager</span></a>-->
-      <a class="plain-text-button share-link" ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }" href=""
-         ng-click="onShare(); mactrl.sidebarToggle.right = true;"><i class="zmdi zmdi-share"></i><span>{{'ACTION.SHARE' | translate}}</span></a></span>
+      <a class="plain-text-button share-link" x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}" href=""
+         x-ng-click="onShare()"><i class="zmdi zmdi-share"></i><span>{{'ACTION.SHARE' | translate}}</span></a></span>
     </div>
   </div>
   <div class="drag-and-drop-ctn reset-content-width">
@@ -66,16 +64,16 @@
           <h2 class="lvh-label"><b>Fichiers destinés au partage</b></h2>
         </div>
         <div class="lv-body">
-          <div class="media-body" ng-repeat="file in share_array[id].flowObjectFiles.files" upload-box-selection>
+          <div class="media-body" x-ng-repeat="file in share_array[id].flowObjectFiles.files" upload-box-selection>
             <div class="col-xs-10 col-sm-12 overflow-hidden">
               <div class="col-xs-24 col-sm-12 anim-left no-padding">
                 <div class="col-xs-7 col-sm-11 pull-left">
                   <div class="preview-icon-ctn pull-left hidden-v-xs">
-                    <p class="img-circle">{{file.getExtension()  | uppercase }}</p>
+                    <p class="img-circle">{{file.getExtension()  | uppercase}}</p>
                   </div>
                   <div class="pull-left data-list-ctn">
                     <div class="lv-title">{{file.name}}</div>
-                    <small class="lv-small pull-left">{{file.timeRemaining() | remainingTime }}</small>
+                    <small class="lv-small pull-left">{{file.timeRemaining() | remainingTime}}</small>
                     <small class="lv-small pull-right">{{file.size | readableSize: false}}</small>
                     <div class="clearfix"></div>
                     <progressbar max="100" value="file.progress()*100"></progressbar>
@@ -84,12 +82,12 @@
                 <div class="col-xs-5 col-sm-1 pull-left">
                   <ul class="lv-actions actions align-list-icons ">
                     <li class="col-xs-6" x-ng-if="!file.paused" x-ng-hide="file.isComplete()">
-                      <a href="" ng-click="file.pause()">
+                      <a href="" x-ng-click="file.pause()">
                         <i class="zmdi zmdi-pause"></i>
                       </a>
                     </li>
                     <li class="col-xs-6" x-ng-if="file.paused" x-ng-hide="file.isComplete()">
-                      <a href="" ng-click="file.resume()">
+                      <a href="" x-ng-click="file.resume()">
                         <i class="zmdi zmdi-play"></i>
                       </a>
                     </li>
@@ -99,12 +97,12 @@
                       </a>
                     </li>
                     <li class="col-xs-6" x-ng-if="file.error">
-                      <a href="" ng-click="file.retry()">
+                      <a href="" x-ng-click="file.retry()">
                         <i class="zmdi zmdi-replay"></i>
                       </a>
                     </li>
                     <li class="col-xs-6">
-                      <a href="" ng-click="file.cancel()">
+                      <a href="" x-ng-click="file.cancel()">
                         <i class="zmdi zmdi-close"></i>
                       </a>
                     </li>
@@ -113,7 +111,7 @@
               </div>
             </div>
             <div class="col-xs-2 visible-xs">
-              <ul class="lv-actions actions align-list-icons " ng-click="showBtnList($event)">
+              <ul class="lv-actions actions align-list-icons " x-ng-click="showBtnList($event)">
                 <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
               </ul>
             </div>
@@ -124,11 +122,9 @@
   </div>
 
   <div class="partage-list">
-    <button class="btn btn-default waves-effect"   ng-repeat="n in sharingsBtn track by $index" ng-click="showSharingItems($index)">
+    <button class="btn btn-default waves-effect"   x-ng-repeat="n in sharingsBtn track by $index" x-ng-click="showSharingItems($index)">
       <span>Partage {{$index+1}}</span> <i class="zmdi zmdi-edit"></i>
     </button>
   </div>
-  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-         data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
-</div>
+ </div>
 </div>

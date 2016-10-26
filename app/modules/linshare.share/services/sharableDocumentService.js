@@ -15,7 +15,7 @@
     function sharableDocuments(uploadedDocument, share_array, refFlowShares) {
       var fileIdentifier = uploadedDocument.uniqueIdentifier;
       var associativeSharings = refFlowShares[fileIdentifier] || {};
-      if(associativeSharings.length > 0) {
+      if (associativeSharings.length > 0) {
         _.forEach(associativeSharings, function(shareIndex) {
           var correspondingShare = {};
           angular.extend(correspondingShare, share_array[shareIndex]);

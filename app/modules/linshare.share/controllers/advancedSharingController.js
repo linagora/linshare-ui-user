@@ -7,20 +7,20 @@ angular.module('linshare.share')
  * This is controller is not used in the current user flow of the application
  * It has been written for the advanced sharing with the sharing in three steps (slides)
  */
-  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService) {
+  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, lsAppConfig) {
 
     $scope.sharesContainer = {waiting: [], done: []};
 
     $scope.submitShare = function(shareCreationDto, now) {
-      if($scope.selectedDocuments.length === 0 ) {
+      if ($scope.selectedDocuments.length === 0 ) {
         growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'danger');
         return;
       }
-      if(now) {
+      if (now) {
         LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
           $scope.$emit('linshare-share-done');
-          $scope.mactrl.sidebarToggle.right = false;
+          $scope.mainVm.sidebar.hide();
           angular.element('tr').removeClass('info');
           $scope.initSelectedDocuments();
           $scope.share_array[1] = {};
@@ -46,7 +46,7 @@ angular.module('linshare.share')
     // once the  : "save as list" button is clicked it sets the field to focus
     $scope.toggled = function() {
       dropDownIsOpen = !dropDownIsOpen;
-      if(dropDownIsOpen) {
+      if (dropDownIsOpen) {
         angular.element('#labelList').focus();
       }
     };
@@ -75,7 +75,7 @@ angular.module('linshare.share')
     $scope.isComplete = false;
     $scope.onCompleteUpload = function(shareCreationDto) {
       $scope.isComplete = true;
-      if(shareCreationDto.asyncShare) {
+      if (shareCreationDto.asyncShare) {
         $scope.submitShare(shareCreationDto, true);
       }
     };
@@ -94,15 +94,15 @@ angular.module('linshare.share')
     angular.element(function() {
       function setSticky() {
         var wWidth = angular.element('.sticky').parent().width();
-        if(wWidth > 768) {
-          if(!!angular.element('.sticky').offset()) {
+        if (wWidth > 768) {
+          if (!!angular.element('.sticky').offset()) {
             var widthSticky = (wWidth * 41) / 100;
             angular.element('.sticky').css('max-width', widthSticky);
             var stickyTop = angular.element('.sticky').offset().top;
             stickyTop -= 50; // our header height
-            angular.element(window).scroll(function() { // scroll event
+            angular.element(window).scroll(function() {// scroll event
               var windowTop = angular.element(window).scrollTop();
-              if(stickyTop < windowTop) {
+              if (stickyTop < windowTop) {
                 angular.element('.sticky').css({
                   position: 'fixed',
                   top: 50
@@ -120,13 +120,13 @@ angular.module('linshare.share')
             width: '58%'
           });
         }
-        if(wWidth < 450) {
+        if (wWidth < 450) {
           angular.element('#recipientsCtn').addClass('w450');
         }
-        if((wWidth > 450) && (angular.element('#recipientsCtn').hasClass('w450'))) {
+        if ((wWidth > 450) && (angular.element('#recipientsCtn').hasClass('w450'))) {
           angular.element('#recipientsCtn').removeClass('w450');
         }
-        if(wWidth < 750) {
+        if (wWidth < 750) {
           angular.element('.sticky').css('max-width', '100%');
           angular.element('.custom-list-container').css({
             width: '100%'
@@ -150,15 +150,15 @@ angular.module('linshare.share')
     $(function() {
       function setSticky() {
         var wWidth = angular.element('.sticky').parent().width();
-        if(wWidth > 768) {
-          if(!!angular.element('.sticky').offset()) {
+        if (wWidth > 768) {
+          if (!!angular.element('.sticky').offset()) {
             var widthSticky = (wWidth * 41) / 100;
             angular.element('.sticky').css('max-width', widthSticky);
             var stickyTop = angular.element('.sticky').offset().top;
             stickyTop -= 50; // our header height
-            angular.element(window).scroll(function() { // scroll event
+            angular.element(window).scroll(function() {// scroll event
               var windowTop = angular.element(window).scrollTop();
-              if(stickyTop < windowTop) {
+              if (stickyTop < windowTop) {
                 angular.element('.sticky').css({
                   position: 'fixed',
                   top: 50
@@ -176,13 +176,13 @@ angular.module('linshare.share')
             width: '58%'
           });
         }
-        if(wWidth < 450) {
+        if (wWidth < 450) {
           angular.element('#recipientsCtn').addClass('w450');
         }
-        if((wWidth > 450) && (angular.element('#recipientsCtn').hasClass('w450'))) {
+        if ((wWidth > 450) && (angular.element('#recipientsCtn').hasClass('w450'))) {
           angular.element('#recipientsCtn').removeClass('w450');
         }
-        if(wWidth < 750) {
+        if (wWidth < 750) {
           angular.element('.sticky').css('max-width', '100%');
           angular.element('.custom-list-container').css({
             width: '100%'
@@ -212,15 +212,15 @@ angular.module('linshare.share')
       var nextNumSlide = currSlideNum + 1;
       clearNavClasses();
       resetSendLink();
-      if(currNum === 1) {
+      if (currNum === 1) {
         var isSlideDone = angular.element('.sliderLinksCtn div:nth-child(' + currSlideNum + ')').hasClass('done');
-        if(!isSlideDone) {
+        if (!isSlideDone) {
           angular.element('.form-wizard-nav .progress-bar').css('width', '50%');
         }
-      } else if(currNum === 2) {
+      } else if (currNum === 2) {
         angular.element('.form-wizard-nav .progress-bar').css('width', '100%');
         setSendLink();
-      } else if(currNum === 3) {
+      } else if (currNum === 3) {
         nextNumSlide = 1;
       }
       angular.element('.slideCtn').addClass('goToSlide' + nextNumSlide + '');
@@ -234,7 +234,7 @@ angular.module('linshare.share')
       var prevNumSlide = currNum - 1;
       clearNavClasses();
       resetSendLink();
-      if(currNum === 1) {
+      if (currNum === 1) {
         prevNumSlide = 1;
       }
       angular.element('.slideCtn').addClass('goToSlide' + prevNumSlide + '');
@@ -253,7 +253,7 @@ angular.module('linshare.share')
     $scope.goToSlide = function(numSlide) {
       resetSendLink();
       clearNavClasses();
-      if(numSlide === 3) {
+      if (numSlide === 3) {
         setSendLink();
       }
       angular.element('.slideCtn').addClass('goToSlide' + numSlide);
@@ -263,7 +263,7 @@ angular.module('linshare.share')
     };
     $scope.showBtnList = function($event) {
       var showBtnListElem = $event.currentTarget;
-      if(angular.element(showBtnListElem).hasClass('activeShowMore')) {
+      if (angular.element(showBtnListElem).hasClass('activeShowMore')) {
         angular.element(showBtnListElem).parent().prev().find('div').first().removeClass('data-list-slide-toggle');
         angular.element(showBtnListElem).removeClass('activeShowMore');
         angular.element(showBtnListElem).css('display:none !important;');
@@ -276,7 +276,7 @@ angular.module('linshare.share')
 
     $scope.isAllSelected = {status: false, origin: ''};
     $scope.$watch('isAllSelected', function(n) {
-      if(n.status === true) {
+      if (n.status === true) {
         var numItems = angular.element('.media-body').length;
 
         angular.element('.media-body').addClass('highlight-list-elem');
@@ -284,7 +284,7 @@ angular.module('linshare.share')
         $scope.numSelectedItems.length = numItems;
       }
       else {
-        if(n.origin !== 'directive') {
+        if (n.origin !== 'directive') {
 
           angular.element('.media-body').removeClass('highlight-list-elem');
           $scope.numSelectedItems.pop($scope.numSelectedItems.length);
@@ -298,7 +298,7 @@ angular.module('linshare.share')
       numIndex++;
       /*jshint unused:false */
       angular.element('.media-body').each(function(index) {
-        if(angular.element(this).hasClass('partage' + numIndex)) {
+        if (angular.element(this).hasClass('partage' + numIndex)) {
           angular.element(this).addClass('highlight-list-elem');
         }
       });
@@ -311,7 +311,7 @@ angular.module('linshare.share')
     // add numbered classes onto each file list item
     $scope.createSharing = function() {
       // if new share
-      if(!$scope.isUpdate) {
+      if (!$scope.isUpdate) {
         $scope.numberOfSharings++;
         $scope.resetSelection();
         $scope.sharingsBtn.push(1);
@@ -327,8 +327,8 @@ angular.module('linshare.share')
       /*jshint unused:false */
       angular.element('.media-body').each(function(index) {
         angular.element(this).removeClass('partage' + $scope.numberOfSharings);
-        if(angular.element(this).hasClass('highlight-list-elem')) {
-          if(!$scope.isUpdate) {
+        if (angular.element(this).hasClass('highlight-list-elem')) {
+          if (!$scope.isUpdate) {
             angular.element(this).addClass('partage' + $scope.numberOfSharings);
           } else {
             angular.element(this).addClass('partage' + $scope.currentSharingIndex);
@@ -361,6 +361,12 @@ angular.module('linshare.share')
       angular.element('.media-body').removeClass('highlight-list-elem');
     };
 
+    $scope.loadSidebarContent = function(content) {
+      $scope.mainVm.sidebar.setData($scope);
+      $scope.mainVm.sidebar.setContent(content);
+      $scope.mainVm.sidebar.show();
+    };
+
     $scope.currentSharingIndex = 0;
     $scope.numberOfSharings = 0;
     $scope.isUpdate = false;
@@ -368,7 +374,7 @@ angular.module('linshare.share')
     $scope.sharingsBtn = [];
     $scope.onShare = function() {
       angular.element('#focusInputShare').focus();
-      $scope.sidebarRightDataType = 'more-options';
+      $scope.loadSidebarContent(lsAppConfig.moreOptions);
     };
 
   });

@@ -1,4 +1,4 @@
-<div ng-class="{'hidden': !mactrl.sidebarToggle.left}">
+<div x-ng-class="{'hidden': !mactrl.sidebarToggle.left}">
     <div class="btn-add-files-ctn">
       <div class="dark-overlay"></div>
       <div id="user-account-mobile" class="row no-padding noMargin visible-xs">
@@ -6,16 +6,16 @@
           <i class="tm-icon zmdi zmdi-account zmdi-hc-2x"></i>
         </div>
         <div class="pull-left dropdown dropdown-standard  user-icon-dropdown" uib-dropdown>
-          <a href="" class="pull-right" uib-dropdown-toggle  ng-disabled="disabled">
-            {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+          <a href="" class="pull-right" uib-dropdown-toggle  x-ng-disabled="disabled">
+            {{loggedUser.firstName}} {{loggedUser.lastName}}
             <i class="zmdi zmdi-chevron-down"></i>
           </a>
           <ul class="dropdown-menu dm-icon pull-right">
-            <li ng-show="linshareModeProduction == false">
+            <li x-ng-show="linshareModeProduction == false">
               <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
             </li>
             <li>
-              <a data-ng-controller="AuthenticationController" data-ng-click="logout(); $flow.cancel()" ui-sref="login">
+              <a x-ng-controller="AuthenticationController" x-ng-click="logout(); $flow.cancel()" ui-sref="login">
                 <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
               </a>
             </li>
@@ -25,34 +25,34 @@
       <div id="userNameSidebar">
         <div class="flex-ctn detail-info-ctn">
           <div class="item-l">
-           <span class="first-letter user-info ng-binding ng-scope">{{ loggedUser.firstName.charAt(0)}}</span>
+           <span class="first-letter user-info ng-binding ng-scope">{{loggedUser.firstName.charAt(0)}}</span>
           </div>
-          <p>{{ loggedUser.firstName }} {{ loggedUser.lastName }}</p>
+          <p>{{loggedUser.firstName}} {{loggedUser.lastName}}</p>
         </div>
       </div>
     </div>
-   <div class="c-overflow" id="navigation" ng-style="sizeNavigation">
-    <ul class="main-menu" ng-repeat="tab in tabs">
-      <li ng-if="tab.link" ng-show="tab.disabled == false"
-          data-ng-class="{ 'active simple-menu': currentState.name==tab.name}">
+   <div class="c-overflow" id="navigation" x-ng-style="sizeNavigation">
+    <ul class="main-menu" x-ng-repeat="tab in tabs">
+      <li x-ng-if="tab.link" x-ng-show="tab.disabled == false"
+          x-ng-class="{'active simple-menu': currentState.name==tab.name}">
         <a data-ui-sref="{{tab.link}}"
-           data-ng-class="{'disabled': tab.disabled }">
-          <i class="{{tab.icon}}" ></i> {{ tab.name | translate }}
+           x-ng-class="{'disabled': tab.disabled}">
+          <i class="{{tab.icon}}" ></i> {{tab.name | translate}}
         </a>
       </li>
-      <li ng-show="tab.disabled == false" class="sub-menu" ng-if="tab.links"
-          data-ng-class="{ 'active toggled': currentState.name==tab.name}">
+      <li x-ng-show="tab.disabled == false" class="sub-menu" x-ng-if="tab.links"
+          x-ng-class="{'active toggled': currentState.name==tab.name}">
         <a toggle-submenu>
-          <i class="{{tab.icon}}" ></i> {{ tab.name | translate }}
+          <i class="{{tab.icon}}" ></i> {{tab.name | translate}}
         </a>
         <ul>
-          <li ng-show="link.disabled == false" ng-repeat="link in tab.links"
-              ng-mouseover="changeColor(tab.color)"
-              ng-mouseleave="changeColor('inherit')">
+          <li x-ng-show="link.disabled == false" x-ng-repeat="link in tab.links"
+              x-ng-mouseover="changeColor(tab.color)"
+              x-ng-mouseleave="changeColor('inherit')">
             <a data-ui-sref="{{link.link}}"
                data-ui-sref-active="active"
-               data-ng-class="{'disabled': link.disabled }">
-              {{ link.name | translate }}
+               x-ng-class="{'disabled': link.disabled}">
+              {{link.name | translate}}
             </a>
           </li>
         </ul>
@@ -70,8 +70,8 @@
       <p>Libre & Free</p>
     </div>
     <div class="product-version">
-      <p><span>{{ 'COMMON.SIDEBAR.PRODUCT_VERSION' | translate }}</span> : {{productVersion}}</p><span>|</span>
-      <p><span>{{ 'COMMON.SIDEBAR.CORE_VERSION' | translate }}</span> : {{coreVersion}}</p>
+      <p><span>{{'COMMON.SIDEBAR.PRODUCT_VERSION' | translate}}</span> : {{productVersion}}</p><span>|</span>
+      <p><span>{{'COMMON.SIDEBAR.CORE_VERSION' | translate}}</span> : {{coreVersion}}</p>
     </div>
   </div>
 </div>

@@ -1,70 +1,70 @@
 <div id="drop-area">
   <div id="top-search-wrap">
-    <i id="top-search-close" data-ng-click="toggleSearchState()">&times;</i>
+    <i id="top-search-close" x-ng-click="toggleSearchState()">&times;</i>
     <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-           placeholder="Nom de fichier" ng-change="updateParams()" ng-model="paramFilter['name']"
+           placeholder="Nom de fichier" x-ng-change="updateParams()" x-ng-model="paramFilter['name']"
            aria-invalid="false">
   </div>
   <div id="selection-actions" class="default-multi-toolbar-state multi-btns"
-       data-ng-class="{'show-multi-menu': selectedDocuments.length > 0}">
-    <div class="toggle-checkbox-toolbar" ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
-      <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+       x-ng-class="{'show-multi-menu': selectedDocuments.length > 0}">
+    <div class="toggle-checkbox-toolbar" x-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
+      <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
         <i class="fa fa fa-square-o checkbox-table"></i>
       </a>
-      <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+      <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
         <i class="fa fa-check-square-o"></i>
       </a>
     </div>
-    <div class="exit-selection" ng-click="resetSelectedDocuments()"
+    <div class="exit-selection" x-ng-click="resetSelectedDocuments()"
          title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
       <i class="zmdi zmdi-close"></i>
     </div>
     <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
-      <div class="pull-left" data-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
-           ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()">
+      <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
+           x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()">
         <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
         <div class="pull-left view-icons-ctn groups-view">
-          <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show=" activeBtnShowSelection"></i>
-          <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show=" activeBtnShowSelection"></i>
+          <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
         </div>
       </div>
-      <div class="pull-left view-icons-ctn reset-icon" ng-click="resetSelectedDocuments()">
+      <div class="pull-left view-icons-ctn reset-icon" x-ng-click="resetSelectedDocuments()">
         <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
       </div>
     </div>
     <div id="toolbar-actions" class="hidden-xs">
             <span>
               <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
-                 ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
-                 ng-click="onShare(); mactrl.sidebarToggle.right = true;">
+                 x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}"
+                 x-ng-click="onShare()">
                 <i class="zmdi zmdi-share"></i>
                 <span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span>
               </a>
             </span>
       <span>
               <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
-                 ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true) }"
-                 ng-click="deleteDocuments(selectedDocuments)">
+                 x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}"
+                 x-ng-click="deleteDocuments(selectedDocuments)">
                 <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
               </a>
             </span>
-      <span ng-class="{'hide': selectedDocuments.length > 1}"
-            ng-click="downloadCurrentFile(selectedDocuments[0])">
+      <span x-ng-class="{'hide': selectedDocuments.length > 1}"
+            x-ng-click="downloadCurrentFile(selectedDocuments[0])">
               <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
                 <i class="zmdi zmdi-download"></i>
                 <span>{{'DOWNLOAD' | translate}}</span>
               </a>
             </span>
-      <span ng-class="{'hide': selectedDocuments.length <= 1}">
+      <span x-ng-class="{'hide': selectedDocuments.length <= 1}">
               <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
-                 ng-click="unavailableMultiDownload()">
+                 x-ng-click="unavailableMultiDownload()">
                 <i class="zmdi zmdi-download"></i>
                 <span>{{'DOWNLOAD' | translate}}</span>
               </a>
             </span>
 
 
-      <span ng-show="linshareModeProduction == false">
+      <span x-ng-show="linshareModeProduction == false">
               <a class="plain-text-button" title="{{'ACTION.COPY_TO' | translate}}">
                 <i class="zmdi zmdi-copy" title="{{'ACTION.COPY_TO' | translate}}"></i>
                 <span>{{'ACTION.COPY_TO' | translate}}</span>
@@ -79,16 +79,16 @@
         <img src="images/upload-dnd-grey.png">
       </div>
       <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-      <p>{{ "DRAG_DROP_BACKGROUND.COMMENT" | translate }}</p>
+      <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
     </div>
   </div>
   <script type="text/ng-template" id="checkboxheader.html">
-    <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+    <span x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
           role="button" tabindex="0" style="display:block" class="center">
-          <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
             <i class="fa fa fa-square-o checkbox-table"></i>
           </a>
-          <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
             <i class="fa fa-check-square-o"></i>
           </a>
           </span>

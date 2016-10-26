@@ -52,10 +52,10 @@ angular.module('linshare.components')
         };
 
         $scope.searchUsersAccount = function(pattern) {
-          if(pattern.length >= 3) {
+          if (pattern.length >= 3) {
             var deferred = $q.defer();
             autocompleteUserRestService(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
-              if(data.length === 0) {
+              if (data.length === 0) {
                 $scope.userEmail = pattern;
               }
               deferred.resolve(data);
@@ -84,9 +84,9 @@ angular.module('linshare.components')
         scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
         elm.bind('keypress', function(event) {
           scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
-          if(event.keyCode === 13) {
-            if(scope.noResult === true) {
-              if(typeof scope.userEmail === 'string') {
+          if (event.keyCode === 13) {
+            if (scope.noResult === true) {
+              if (typeof scope.userEmail === 'string') {
                 scope.selectedUser = {
                   mail: scope.userEmail,
                   firstName: null,

@@ -2,12 +2,12 @@
 
   <!--  ACTIONS ON DOCUMENTS  -->
 
-  <div class="card setWidth" id="collapsible-content">
+  <div class="card set-width" id="collapsible-content">
     <div class="card-header no-padding">
       <div id="breadcrumb-wrap">
         <div class="breadcrumbs-ctn hidden-xs">
           <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
-            {{"SELECTED_FILES.BREADCRUMB_TITLE" | translate }}
+            {{"SELECTED_FILES.BREADCRUMB_TITLE" | translate}}
           </a>
         </div>
         <section class="row multi-select visible-xs">
@@ -17,7 +17,7 @@
           </div>
           <div id="toolbar-actions" class="col-xs-10 show-details-mobile-link">
             <span>
-              <a ng-click="mactrl.sidebarToggle.right = true;">
+              <a x-ng-click="loadSidebarContent()">
                 <i class="fa fa-eye"></i>
                 <span>{{'SELECTED_FILES.SHOW_DETAILS' | translate}}</span>
               </a>
@@ -30,17 +30,17 @@
     <!-- SELECTED DOCUMENTS LIST  -->
     <div class="card-body selected-files-list-items">
       <ul class="list-group actions" >
-        <li class="list-group-item col-xs-12" data-ng-repeat="documentFile in selectedDocuments">
-          <span class="fa ls-1p5x m-r-10" ng-class="'{{documentFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
+        <li class="list-group-item col-xs-12" x-ng-repeat="documentFile in selectedDocuments">
+          <span class="fa ls-1p5x m-r-10" x-ng-class="'{{documentFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
           <span>{{documentFile.name}}</span>
-          <a href="" class="action-list-selected-files" ng-click="removeSelectedDocuments(documentFile)">
+          <a href="" class="action-list-selected-files" x-ng-click="removeSelectedDocuments(documentFile)">
             <i class="zmdi zmdi-close"></i>
           </a>
         </li>
-        <li class="list-group-item col-xs-12" data-ng-repeat="(identifier, uploadFile) in selectedUploads">
-          <span class="fa ls-1p5x m-r-10" ng-class="'{{uploadFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
+        <li class="list-group-item col-xs-12" x-ng-repeat="(identifier, uploadFile) in selectedUploads">
+          <span class="fa ls-1p5x m-r-10" x-ng-class="'{{uploadFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
           <span>{{uploadFile.name}}</span>
-          <a href="" class="action-list-selected-files" ng-click="removeSelectedDocuments(identifier)">
+          <a href="" class="action-list-selected-files" x-ng-click="removeSelectedDocuments(identifier)">
             <i class="zmdi zmdi-close"></i>
           </a>
         </li>
@@ -48,6 +48,3 @@
     </div>
   </div>
 </div>
-<aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
-       data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }" class="sidebar-right">
-</aside>

@@ -1,5 +1,5 @@
 <form class="form-horizontal" name="login_form"
-      novalidate ng-submit="signupForm()">
+      novalidate x-ng-submit="signupForm()">
   <fieldset>
     <legend class="modal-header">
       Connexion
@@ -13,7 +13,7 @@
                  class="form-control"
                  placeholder="Email"
                  name="email"
-                 ng-model="input.email"
+                 x-ng-model="input.email"
                  id="inputEmail"
                  required/>
         </div>
@@ -29,7 +29,7 @@
                  class="form-control"
                  id="inputPassword"
                  placeholder="Password"
-                 ng-model="input.password"
+                 x-ng-model="input.password"
                  name="password"/>
         </div>
       </div>

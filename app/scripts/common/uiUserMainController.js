@@ -3,7 +3,72 @@
 angular.module('linshareUiUserApp')
   .controller('UiUserMainController',
     function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate, AuthenticationService, MenuService, $timeout, LinshareUserService, lsAppConfig) {
-      $rootScope.sidebarRightWidth = 350;
+   		//TODO: shall be moved to the directive controller of linshareSidebar directive
+   		var Sidebar = function() {
+   		  var sidebar = {
+   		    visible: false,
+   		    content: '',
+   		    data: {},
+   		    setContent: setContent,
+   		    getContent: getContent,
+   		    setData: setData,
+   		    getData: getData,
+   		    addData: addData,
+   		    removeData: removeData,
+   		    toggle: toggle,
+   		    show: show,
+   		    hide: hide,
+   		    isVisible: isVisible,
+   		  };
+
+   		  return sidebar;
+   		  ////////////
+
+   		  function setContent(content) {
+   		    sidebar.content = content;
+   		  }
+
+   		  function getContent() {
+   		    return sidebar.content;
+   		  }
+
+   		  function setData(data) {
+   		    sidebar.data = data;
+   		  }
+
+   		  function getData() {
+   		    return sidebar.data;
+   		  }
+
+   		  function addData(key, value) {
+   		    sidebar.data[key] = value;
+   		  }
+
+   		  function removeData(key) {
+   		    delete sidebar.data['key'];
+   		  }
+
+   		  function toggle() {
+   		    sidebar.visible = !sidebar.toggle;
+   		  }
+
+   		  function show() {
+   		    sidebar.visible = true;
+   		  }
+
+   		  function hide() {
+   		    sidebar.visible = false;
+   		  }
+
+   		  function isVisible() {
+   		    return sidebar.visible;
+   		  }
+   		};
+
+   		var mainVm = this;
+   		mainVm.sidebar = new Sidebar();
+
+			$rootScope.sidebarRightWidth = 350;
       $rootScope.sidebarLeftWidth = 268;
       $rootScope.mobileWidthBreakpoint=768;
       localStorage.setItem('ma-layout-status', 0);
@@ -38,7 +103,7 @@ angular.module('linshareUiUserApp')
         $log.debug('event:auth-loginRequired : toState', $rootScope.toState);
         $scope.urlTogoAfterLogin = $rootScope.toState;
         $scope.loggedUser.getUser();
-        if($scope.urlTogoAfterLogin === 'login') {
+        if ($scope.urlTogoAfterLogin === 'login') {
           $scope.urlTogoAfterLogin = 'home';
           $state.go('login');
         } else {
@@ -64,12 +129,12 @@ angular.module('linshareUiUserApp')
 
       function checkAndSetNewWidth(attr) {
         var widthWindow = angular.element(window).width();
-        if(widthWindow > 1057){
+        if (widthWindow > 1057){
           $scope.mactrl.sidebarToggle.left = true;
         }else{
           $scope.mactrl.sidebarToggle.left = false;
         }
-        if((attr) || (widthWindow > 1057) ) {
+        if ((attr) || (widthWindow > 1057) ) {
           var nwidthWindow = widthWindow - $rootScope.sidebarLeftWidth;
           angular.element('.reset-content-width').width(nwidthWindow);
           $timeout(function(){
@@ -83,12 +148,12 @@ angular.module('linshareUiUserApp')
       this.resizeDragNDropCtn = function(attr) {
         checkAndSetNewWidth(attr);
       };
-      if($scope.mactrl.sidebarToggle.left){
+      if ($scope.mactrl.sidebarToggle.left){
         checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
       }
       function checkAndSetNewWidthSidebarRight(){
         var widthWindow = angular.element(window).width();
-        if(widthWindow < $rootScope.mobileWidthBreakpoint) {
+        if (widthWindow < $rootScope.mobileWidthBreakpoint) {
           angular.element('aside#chat.sidebar-right').appendTo('body');
           angular.element('aside#chat.sidebar-right').addClass('setSidebarRightMobileState');
         }else{
@@ -96,18 +161,18 @@ angular.module('linshareUiUserApp')
         }
       }
       var widthWindow = angular.element(window).width();
-      $scope.$watch('mactrl.sidebarToggle.right', function(n) {
+      $scope.$watch('mainVm.sidebar.isVisible()', function(n) {
         checkAndSetNewWidthSidebarRight();
-        if(widthWindow > $rootScope.mobileWidthBreakpoint) {
+        if (widthWindow > $rootScope.mobileWidthBreakpoint) {
           if (n === true) {
-            angular.element('#collapsible-content').addClass('setWidth');
+            angular.element('#collapsible-content').addClass('set-width');
           }
           else {
-            angular.element('#collapsible-content').removeClass('setWidth');
+            angular.element('#collapsible-content').removeClass('set-width');
             angular.element('#collapsible-content').css('width', '100%');
           }
         }else{
-          angular.element('#collapsible-content').removeClass('setWidth');
+          angular.element('#collapsible-content').removeClass('set-width');
           angular.element('#collapsible-content').css('width', '100%');
         }
       });

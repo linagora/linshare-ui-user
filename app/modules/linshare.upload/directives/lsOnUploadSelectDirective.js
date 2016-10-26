@@ -12,7 +12,7 @@
       link: function(scope, element) {
         element.bind('click', function() {
           scope.file.isSelected = !scope.file.isSelected;
-          if(scope.file.isSelected) {
+          if (scope.file.isSelected) {
             scope.selectedUploads[scope.file.uniqueIdentifier] = {
               name: scope.file.name,
               size: scope.file.size,

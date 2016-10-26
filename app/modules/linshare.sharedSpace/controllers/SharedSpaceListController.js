@@ -16,7 +16,7 @@
     var openSearch = openSearchFunction;
     var closeSearch = closeSearchFunction;
 
-    $scope.mactrl.sidebarToggle.right = false;
+    $scope.mainVm.sidebar.hide();
     $scope.reloadDocuments = reloadDocuments;
 
     sharedSpaceListVm.addSelectedDocument = addSelectedDocument;
@@ -55,6 +55,7 @@
     sharedSpaceListVm.unavailableMultiDownload = unavailableMultiDownload;
     sharedSpaceListVm.uuid = $stateParams.uuid;
     sharedSpaceListVm.workgroupPage = lsAppConfig.workgroupPage;
+    sharedSpaceListVm.workgroupDetailFile = lsAppConfig.workgroupDetailFile;
 
     activate();
 
@@ -103,7 +104,7 @@
     }
 
     function closeSearchFunction() {
-      angular.element('#').removeClass('search-toggled');
+      angular.element('#drop-area').removeClass('search-toggled');
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
@@ -142,7 +143,7 @@
           sharedSpaceListVm.itemsListCopy = sharedSpaceListVm.itemsList; // I keep a copy of the data for the filter module
           sharedSpaceListVm.tableParams.reload();
         }, function(error) {
-          if(error.status === 400 && error.data.errCode === 26006) {
+          if (error.status === 400 && error.data.errCode === 26006) {
             growlService.notifyTopRight('GROWL_ALERT.ERROR.DELETE_ERROR.26006', 'danger');
           }
         });
@@ -162,11 +163,11 @@
     function folderNotExits(items, newName, newFolder) {
       var notExists = true;
       var itemsList = _.clone(items);
-      if(newFolder) {
+      if (newFolder) {
         itemsList.pop();
       }
       _.forEach(itemsList, function(item) {
-        if(!item.type && item.name.toLowerCase() === newName.toLowerCase()) {
+        if (!item.type && item.name.toLowerCase() === newName.toLowerCase()) {
           notExists = false;
         }
       });
@@ -180,7 +181,7 @@
     function goToSharedSpaceFolderTarget(uuid, name, parent, folderUuid, folderName, fromBreacrumb, needReplace) {
       var folderNameElem = $('td[uuid=' + folderUuid + ']').find('.file-name-disp');
       var options = needReplace ? {location: 'replace'} : {};
-      if(angular.element(folderNameElem).attr('contenteditable') === 'false' || fromBreacrumb) {
+      if (angular.element(folderNameElem).attr('contenteditable') === 'false' || fromBreacrumb) {
         $state.go('sharedspace.workgroups.entries', {
           uuid: uuid,
           workgroupName: name.trim(),
@@ -193,18 +194,25 @@
 
     function loadSelectedDocument(filteredData) {
       var documentToSelect = _.find(filteredData, {'uuid': $stateParams.uploadedFileUuid});
-      if(!_.isUndefined(documentToSelect)) {
+      if (!_.isUndefined(documentToSelect)) {
         addSelectedDocument(documentToSelect);
       }
     }
 
+    /**
+     * @name loadSidebarContent
+     * @desc Update the content of the sidebar
+     * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     */
     function loadSidebarContent(content) {
-      $scope.sidebarRightDataType = content;
+      $scope.mainVm.sidebar.setData(sharedSpaceListVm);
+      $scope.mainVm.sidebar.setContent(content);
+      $scope.mainVm.sidebar.show();
     }
 
     function loadSpecificPage() {
       var items = _.orderBy(sharedSpaceListVm.itemsList.plain(), 'modificationDate', ['desc']);
-      if($stateParams.uploadedFileUuid) {
+      if ($stateParams.uploadedFileUuid) {
         return Math.floor(_.findIndex(items, {'uuid': $stateParams.uploadedFileUuid}) / 10) + 1;
       }
       return 1;
@@ -224,7 +232,7 @@
               var filesList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
               params.total(filesList.length);
               params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-              if($stateParams.uploadedFileUuid) {
+              if ($stateParams.uploadedFileUuid) {
                 loadSelectedDocument(filteredData);
               }
               $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
@@ -237,18 +245,18 @@
     function newFolderNumber(items) {
       var foldersName = [];
       _.forEach(items, function(item) {
-        if(!item.type) {
+        if (!item.type) {
           foldersName.push(item.name);
         }
       });
-      if(foldersName.length === 0 || !_.includes(foldersName, swalNewFolderName)) {
+      if (foldersName.length === 0 || !_.includes(foldersName, swalNewFolderName)) {
         return 0;
       } else {
         var iteration = 1;
         var foldersIndex = [];
         var regex = new RegExp('^' + swalNewFolderName + ' \\([0-9]+\\)');
         _.forEach(items, function(item) {
-          if(!item.type && regex.test(item.name)) {
+          if (!item.type && regex.test(item.name)) {
             foldersIndex.push(parseInt(item.name.replace(/\D/g, '')));
           }
         });
@@ -256,7 +264,7 @@
           return val;
         });
         _.forEach(foldersIndex, function(index, key) {
-          if(index === key + 1) {
+          if (index === key + 1) {
             iteration++;
           } else {
             return iteration;
@@ -267,7 +275,7 @@
     }
 
     function openSearchFunction() {
-      angular.element('#').addClass('search-toggled');
+      angular.element('#drop-area').addClass('search-toggled');
       angular.element('#top-search-wrap input').focus();
     }
 
@@ -293,7 +301,7 @@
 
     function reloadDocuments() {
       $timeout(function() {
-        if(sharedSpaceListVm.folderUuid === sharedSpaceListVm.uuid) {
+        if (sharedSpaceListVm.folderUuid === sharedSpaceListVm.uuid) {
           workGroupFoldersRestService.getParent(sharedSpaceListVm.uuid).then(function(folder) {
             sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, folder[0].parent, folder[0].uuid, folder[0].name, true, true);
           }, 0);
@@ -340,9 +348,9 @@
       var currentPage = page || sharedSpaceListVm.tableParams.page();
       var dataOnPage = data || sharedSpaceListVm.tableParams.data;
       var select = selectFlag || sharedSpaceListVm.flagsOnSelectedPages[currentPage];
-      if(!select) {
-        angular.forEach(dataOnPage, function(element) {
-          if(!element.isSelected) {
+      if (!select) {
+        _.forEach(dataOnPage, function(element) {
+          if (!element.isSelected) {
             element.isSelected = true;
             sharedSpaceListVm.selectedDocuments.push(element);
           }
@@ -351,7 +359,7 @@
       } else {
         sharedSpaceListVm.selectedDocuments = _.xor(sharedSpaceListVm.selectedDocuments, dataOnPage);
         angular.forEach(dataOnPage, function(element) {
-          if(element.isSelected) {
+          if (element.isSelected) {
             element.isSelected = false;
             _.remove(sharedSpaceListVm.selectedDocuments, function(n) {
               return n.uuid === element.uuid;
@@ -372,13 +380,13 @@
         })
         .on('focusout', function() {
           data.name = idElem[0].textContent;
-          if(data.name.trim() === '') {
+          if (data.name.trim() === '') {
             // if the new name is empty then replace with by previous once
             angular.element(idElem).text(initialName);
             data.name = initialName;
             updateNewName(data, idElem);
           } else {
-            if(data.name.indexOf('.') === -1) {
+            if (data.name.indexOf('.') === -1) {
               // if the new name does not contain a file name extension then add the previous original extension to it
               data.name = data.name + fileExtension;
               angular.element(idElem).text(data.name);
@@ -389,7 +397,7 @@
           }
         })
         .on('keypress', function(e) {
-          if(e.which === 13) {
+          if (e.which === 13) {
             angular.element(idElem).focusout();
           }
         });
@@ -404,14 +412,14 @@
           initialName = data.name;
         })
         .on('focusout', function() {
-          if(newFolder || data.name !== idElem[0].textContent) {
-            if(folderNotExits(sharedSpaceListVm.itemsList, idElem[0].textContent.trim(), newFolder)) {
+          if (newFolder || data.name !== idElem[0].textContent) {
+            if (folderNotExits(sharedSpaceListVm.itemsList, idElem[0].textContent.trim(), newFolder)) {
               data.name = idElem[0].textContent.trim();
-              if(data.name.trim() === '') {
+              if (data.name.trim() === '') {
                 angular.element(idElem).text(initialName);
                 data.name = initialName.trim();
               }
-              if(newFolder) {
+              if (newFolder) {
                 saveNewFolder(data);
               } else {
                 workGroupFoldersRestService.update(data);
@@ -420,7 +428,7 @@
             } else {
               $log('Folder name exists');
               data.name = initialName;
-              if(newFolder) {
+              if (newFolder) {
                 saveNewFolder(data);
               }
               growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_FOLDER', 'danger');
@@ -431,18 +439,18 @@
           }
         })
         .on('keypress', function(e) {
-          if(e.which === 13) {
-            if(newFolder || data.name !== idElem[0].textContent) {
-              if(folderNotExits(sharedSpaceListVm.itemsList, idElem[0].textContent.trim(), newFolder)) {
+          if (e.which === 13) {
+            if (newFolder || data.name !== idElem[0].textContent) {
+              if (folderNotExits(sharedSpaceListVm.itemsList, idElem[0].textContent.trim(), newFolder)) {
                 data.name = idElem[0].textContent.trim();
-                if((data.name.trim() === initialName) || (data.name.trim() === '')) {
+                if ((data.name.trim() === initialName) || (data.name.trim() === '')) {
                   angular.element(idElem).text(initialName);
                   data.name = initialName.trim();
                 }
-                if(newFolder) {
+                if (newFolder) {
                   saveNewFolder(data);
                 } else {
-                  if(data.name !== initialName) {
+                  if (data.name !== initialName) {
                     workGroupFoldersRestService.update(data);
                   }
                 }
@@ -450,7 +458,7 @@
               } else {
                 $log('Folder name exists');
                 data.name = initialName;
-                if(newFolder) {
+                if (newFolder) {
                   saveNewFolder(data);
                 }
                 growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_FOLDER', 'danger');
@@ -467,7 +475,7 @@
     function setTextInput($event) {
       var currTarget = $event.currentTarget;
       var inputTxt = angular.element(currTarget).text();
-      if(inputTxt === '') {
+      if (inputTxt === '') {
         angular.element(currTarget).parent().find('span').css('display', 'block');
       } else {
         angular.element(currTarget).parent().find('span').css('display', 'none');
@@ -475,14 +483,10 @@
     }
 
     function showItemDetails(current, event) {
-      sharedSpaceListVm.sidebarRightDataType = 'details';
-      $scope.sidebarRightDataType = 'details';
-
       workGroupEntriesRestService.get(sharedSpaceListVm.uuid, current.uuid).then(function(data) {
         sharedSpaceListVm.currentSelectedDocument.current = data;
       });
-
-      $scope.mactrl.sidebarToggle.right = true;
+      $scope.loadSidebarContent(sharedSpaceListVm.workgroupDetailFile);
       var currElm = event.currentTarget;
       angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
         angular.element(currElm).addClass('activeActionButton');
@@ -509,7 +513,7 @@
     }
 
     function toggleFilterBySelectedFiles() {
-      if(sharedSpaceListVm.tableParams.filter().isSelected) {
+      if (sharedSpaceListVm.tableParams.filter().isSelected) {
         delete sharedSpaceListVm.tableParams.filter().isSelected;
       } else {
         sharedSpaceListVm.tableParams.filter().isSelected = true;
@@ -517,7 +521,7 @@
     }
 
     function toggleSearchState() {
-      if(!sharedSpaceListVm.searchMobileDropdown) {
+      if (!sharedSpaceListVm.searchMobileDropdown) {
         openSearch();
       } else {
         closeSearch();

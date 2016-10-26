@@ -25,7 +25,7 @@
 
     function setPosition(ancestors, folder) {
       for(var i = 0; i < ancestors.length; i++) {
-        if(folder.uuid === ancestors[i]) {
+        if (folder.uuid === ancestors[i]) {
           return i;
         }
       }

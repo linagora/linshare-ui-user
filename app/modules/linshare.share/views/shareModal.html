@@ -4,7 +4,7 @@
   </h3>
 </div>
 <form class="form" name="mimePolicyForm" role="form" novalidate
-      ng-submit="submitShare()">
+      x-ng-submit="submitShare()">
   <fieldset>
     <div class="modal-body">
       <!-- Name -->
@@ -16,10 +16,10 @@
         </label>
         <input id="name" name="name" type="text" class="form-control"
                required
-               x-ng-model="shareMail"/><i class="zmdi zmdi-plus-circle" ng-click="addRecipients(shareMail)"></i>
+               x-ng-model="shareMail"/><i class="zmdi zmdi-plus-circle" x-ng-click="addRecipients(shareMail)"></i>
       </div>
     </div>
-    <ul ng-repeat="recipient in share.recipients">
+    <ul x-ng-repeat="recipient in share.recipients">
       <li>{{recipient.mail}}</li>
     </ul>
     <div class="modal-footer">

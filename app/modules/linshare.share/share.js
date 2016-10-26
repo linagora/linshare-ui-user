@@ -22,7 +22,7 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
       scope: false,
       link: function(scope, elm) {
         function checkifMultiMenuVisible() {
-          if(scope.numSelectedItems.length === 0) {
+          if (scope.numSelectedItems.length === 0) {
             angular.element('#selection-actions').addClass('show-multi-menu');
           }
         }
@@ -33,13 +33,13 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
           elm.toggleClass('highlight-list-elem', 'removeListElem');
           checkifMultiMenuVisible();
 
-          if(scope.isAllSelected.status === true) {
+          if (scope.isAllSelected.status === true) {
             scope.$apply(function() {
               scope.isAllSelected.status = false;
               scope.isAllSelected.origin = 'directive';
             });
           }
-          if(isCurrentlySelected) {
+          if (isCurrentlySelected) {
             scope.$apply(function() {
               scope.numSelectedItems.pop(1);
             });
@@ -47,14 +47,14 @@ angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.compo
             scope.$apply(function() {
               scope.numSelectedItems.push(1);
               var numSelectedItems = scope.numSelectedItems.length;
-              if(numSelectedItems === numItems) {
+              if (numSelectedItems === numItems) {
                 elm.addClass('highlight-list-elem');
                 scope.isAllSelected.status = true;
               }
             });
           }
 
-          if(numItems === 0) {
+          if (numItems === 0) {
             angular.element('.drag-and-drop-ctn').removeClass('out-of-focus');
           }
         });

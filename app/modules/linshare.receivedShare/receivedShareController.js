@@ -7,8 +7,8 @@
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope, $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
-             LinshareShareService, files, $translate, growlService, $log, $timeout, documentUtilsService){
-      $scope.mactrl.sidebarToggle.right = false;
+             LinshareShareService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig) {
+      $scope.mainVm.sidebar.hide();
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;
@@ -46,9 +46,8 @@ angular.module('linshare.receivedShare')
           {regex: /text\/plain/, image: 'fa-file-text-o', info: 'TEXT'},
           {regex: /text/, image: 'fa-file-code-o', info: 'CODE'}
         ];
-        angular.forEach(list, function(value) {
-          type.forEach( function (regex)
-          {
+        _.forEach(list, function(value) {
+          _.forEach(type, function(regex) {
             if (value.type.match(regex.regex)) {
               value.typeImage = regex.image;
               value.info = regex.info;
@@ -58,8 +57,8 @@ angular.module('linshare.receivedShare')
             value.typeImage = 'fa-file-text-o';
             value.info = 'TEXT';
           }
-          this.push(value);
-        }, data);
+          data.push(value);
+        });
         return data;
       };
       var receivedFiles = setExtensions(files);
@@ -67,12 +66,15 @@ angular.module('linshare.receivedShare')
       $scope.paramsIsActivate = function(param) {
         return param > 0;
       };
-      $scope.clearParams = function(){
+      
+      $scope.clearParams = clearParams;
+     
+      function clearParams() {
         $scope.filters.sizeStart = null;
         $scope.filters.sizeEnd = null;
         $scope.filters.unity = '1000';
         $scope.filters.dateType = '1';
-        $scope.filters.dateStart ='';
+        $scope.filters.dateStart = '';
         $scope.filters.dateEnd = '';
         $scope.showUnit = true;
         $scope.filters.selectedContact = initDestinataireObject;
@@ -81,12 +83,15 @@ angular.module('linshare.receivedShare')
         $scope.showDateRange = true;
         $scope.tableParams.reload();
       };
-      $scope.updateParams = function(){
+     
+      $scope.updateParams = updateParams; 
+      
+      function updateParams() {
         $scope.tableParams.reload();
         checkdatasIsSelecteds();
       };
 
-      var swalCopyText, swalCopyConfirm, swalMultipleDownloadTitle , swalMultipleDownloadText ,
+      var swalCopyText, swalCopyConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText,
         swalMultipleDownloadConfirm;
       $translate(['SWEET_ALERT.ON_FILE_COPY.TEXT',
         'SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON',
@@ -96,9 +101,9 @@ angular.module('linshare.receivedShare')
         .then(function(translations) {
           swalCopyText = translations['SWEET_ALERT.ON_FILE_COPY.TEXT'];
           swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
-          swalMultipleDownloadTitle= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadText= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
-          swalMultipleDownloadConfirm= translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+          swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
+          swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
+          swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
 
         });
 
@@ -128,6 +133,19 @@ angular.module('linshare.receivedShare')
         });
       };
 
+      $scope.loadSidebarContent = loadSidebarContent;
+    
+     /**
+      * @name loadSidebarContent
+      * @desc Update the content of the sidebar
+      * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+      */
+      function loadSidebarContent(content) {
+        $scope.mainVm.sidebar.setData($scope);
+        $scope.mainVm.sidebar.setContent(content || lsAppConfig.share);
+        $scope.mainVm.sidebar.show();
+      };
+
       $scope.currentSelectedDocument = {current: ''};
       $scope.flagsOnSelectedPages = {};
       var initFlagsOnSelectedPages = function() {
@@ -137,9 +155,9 @@ angular.module('linshare.receivedShare')
         var currentPage = page || $scope.tableParams.page();
         var dataOnPage = data || $scope.tableParams.data;
         var select = selectFlag || $scope.flagsOnSelectedPages[currentPage];
-        if(!select) {
+        if (!select) {
           angular.forEach(dataOnPage, function(element) {
-            if(!element.isSelected) {
+            if (!element.isSelected) {
               element.isSelected = true;
               $scope.selectedDocuments.push(element);
             }
@@ -148,7 +166,7 @@ angular.module('linshare.receivedShare')
         } else {
           $scope.selectedDocuments = _.xor($scope.selectedDocuments, dataOnPage);
           angular.forEach(dataOnPage, function(element) {
-            if(element.isSelected) {
+            if (element.isSelected) {
               element.isSelected = false;
               _.remove($scope.selectedDocuments, function(n) {
                 return n.uuid === element.uuid;
@@ -161,18 +179,19 @@ angular.module('linshare.receivedShare')
 
       $scope.showCurrentFile = function(currentFile, event) {
         $scope.currentSelectedDocument.current = currentFile;
-        $scope.sidebarRightDataType = 'details';
-        if(currentFile.shared > 0) {
+        if (currentFile.shared > 0) {
           LinshareReceivedShareService.get(currentFile.uuid).then(function(data) {
             $scope.currentSelectedDocument.current.shares = data.shares;
           });
         }
-        if(currentFile.hasThumbnail === true) {
+        if (currentFile.hasThumbnail === true) {
           LinshareReceivedShareService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
             $scope.currentSelectedDocument.current.thumbnail = thumbnail;
           });
         }
-        $scope.mactrl.sidebarToggle.right = true;
+
+        $scope.loadSidebarContent(lsAppConfig.details);
+
         var currElm = event.currentTarget;
         angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
           angular.element(currElm).addClass('activeActionButton');
@@ -183,14 +202,14 @@ angular.module('linshare.receivedShare')
       $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
         'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'])
         .then(function(translations) {
-        swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
-        swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
-        swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
-        swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
-      });
+          swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
+          swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
+          swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
+          swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
+        });
 
       $scope.copyIntoFiles = function(selectedDocuments) {
-        if(!angular.isArray(selectedDocuments)) {
+        if (!_.isArray(selectedDocuments)) {
           selectedDocuments = [selectedDocuments];
         }
         swal({
@@ -242,9 +261,11 @@ angular.module('linshare.receivedShare')
         });
       };
 
+      $scope.setShowActions = setShowActions;
+      
       // onChange on the inputs in the table
       // Insert or remove the file in the list of selected files
-      $scope.setShowActions = function (documentFile) {
+      function setShowActions(documentFile) {
         var exist = false;
         // check if document isset in the array
         angular.forEach($scope.showActions, function(file, key) {
@@ -260,21 +281,24 @@ angular.module('linshare.receivedShare')
           }
         }
       };
+     
+      $scope.selectAll = selectAll;
+              
       // Used by the template to select all data in the table
       // Only in the current page of the pagination table
-      $scope.selectAll = function () {
+      function selectAll() {
         $scope.showActions = [];
         $scope.datasIsSelected = !$scope.datasIsSelected;
-        angular.forEach(
+        _.forEach(
           $scope.tableData.slice(($scope.tableParams.$params.page - 1) * $scope.tableParams.$params.count,
-          $scope.tableParams.$params.page * $scope.tableParams.$params.count),
+            $scope.tableParams.$params.page * $scope.tableParams.$params.count),
           function(file, key) {
-          $scope.tableData[key].isChecked = $scope.datasIsSelected;
-          if ($scope.datasIsSelected) {
-            file.isChecked = true;
-            $scope.showActions.push(file);
-          }
-        });
+            $scope.tableData[key].isChecked = $scope.datasIsSelected;
+            if ($scope.datasIsSelected) {
+              file.isChecked = true;
+              $scope.showActions.push(file);
+            }
+          });
       };
       // When the page changed check / uncheck
       // the checkbox in the filter template
@@ -286,10 +310,10 @@ angular.module('linshare.receivedShare')
             $scope.tableData.slice(($scope.tableParams.$params.page - 1) * $scope.tableParams.$params.count,
               $scope.tableParams.$params.page * $scope.tableParams.$params.count),
             function(file) {
-            if (!file.isChecked) {
-              isSelected = false;
-            }
-          });
+              if (!file.isChecked) {
+                isSelected = false;
+              }
+            });
 
           $scope.datasIsSelected = isSelected;
         }
@@ -308,9 +332,9 @@ angular.module('linshare.receivedShare')
         count: 10,
         filter: $scope.paramFilter
       }, {
-        getData: function($defer, params){
+        getData: function($defer, params) {
           var filteredData = params.filter() ?
-              $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
+            $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
           var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 
           params.total(orderedData.length);
@@ -337,7 +361,7 @@ angular.module('linshare.receivedShare')
       }
 
       $scope.formatLabel = function(u) {
-        if (u.firstName !== '' ) {
+        if (u.firstName !== '') {
           return u.firstName.concat(' ', u.lastName);
         }
       };
@@ -346,7 +370,7 @@ angular.module('linshare.receivedShare')
         if (angular.isString(u)) {
           return u;
         }
-        return '<span>' + u.firstName + ' ' + u.lastName + '</span> <span > <i class="zmdi zmdi-email"></i> &nbsp;'+ u.mail + '</span>';
+        return '<span>' + u.firstName + ' ' + u.lastName + '</span> <span > + <i class="zmdi zmdi-email"></i> &nbsp;' + u.mail + '</span>';
       };
 
       $scope.searchGuestRestrictedContacts = function(pattern) {
@@ -442,10 +466,12 @@ angular.module('linshare.receivedShare')
         });
       };
 
-      $scope.toggleSearchState=function(){
-        if(!$scope.searchMobileDropdown){
+      $scope.toggleSearchState = toggleSearchState;
+              
+      function toggleSearchState() {
+        if (!$scope.searchMobileDropdown) {
           $scope.openSearch();
-        }else{
+        } else {
           $scope.closeSearch();
         }
         $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
@@ -471,7 +497,7 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.$watch('fab.isOpen', function(isOpen) {
-        if(isOpen) {
+        if (isOpen) {
           angular.element('.md-toolbar-tools').addClass('setWhite');
           angular.element('.multi-select-mobile').addClass('setDisabled');
           $timeout(function() {
@@ -488,7 +514,6 @@ angular.module('linshare.receivedShare')
         }
       });
       $scope.currentPage = 'received_files';
-
       $scope.lsFormat = function() {
         return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';
       };
@@ -509,10 +534,10 @@ angular.module('linshare.receivedShare')
   // ===========================================================================
   // SLIDEABLE
   // ===========================================================================
-  .directive('slideable', function () {
+  .directive('slideable', function() {
     return {
-      restrict:'C',
-      compile: function (element) {
+      restrict: 'C',
+      compile: function(element) {
         // wrap tag
         var contents = element.html();
         element.html('<div class="slideable_content" style="margin:0 !important; padding:0 !important" >' + contents + '</div>');
@@ -544,11 +569,11 @@ angular.module('linshare.receivedShare')
         attrs.expanded = false;
         element.bind('click', function() {
           var innerHeightInnerCtn = $('.slideable_content').innerHeight();
-          if(!attrs.expanded) {
+          if (!attrs.expanded) {
             var y = innerHeightInnerCtn;
-            var  initClicked = $('#searchFilterCtn').attr('style');
+            var initClicked = $('#searchFilterCtn').attr('style');
 
-            var heightRestStyle =  initClicked.replace('0px', y + 'px');
+            var heightRestStyle = initClicked.replace('0px', y + 'px');
             var heightAndOverflow = heightRestStyle.replace('hidden', 'initial');
             $('#searchFilterCtn').attr('style', heightRestStyle).delay(750).promise().done(function() {
               $('#searchFilterCtn').attr('style', heightAndOverflow);
@@ -557,9 +582,9 @@ angular.module('linshare.receivedShare')
           } else {
             innerHeightInnerCtn = $('.slideable_content').innerHeight();
             var yy = innerHeightInnerCtn;
-            var  stateExpandedStyle = $('#searchFilterCtn').attr('style');
+            var stateExpandedStyle = angular.element('#searchFilterCtn').attr('style');
             var resetOverflowStyle = stateExpandedStyle.replace('initial', 'hidden');
-            var resetHeightStyle =  resetOverflowStyle.replace('' + yy + 'px', '0px');
+            var resetHeightStyle = resetOverflowStyle.replace('' + yy + 'px', '0px');
 
             $('#searchFilterCtn').attr('style', resetOverflowStyle).delay(10).promise().done(function() {
               $('#searchFilterCtn').attr('style', resetHeightStyle);

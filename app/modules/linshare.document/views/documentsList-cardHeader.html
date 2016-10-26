@@ -3,12 +3,12 @@
     <div class="add-submenu-set clearfix">
       <a class="col-xs-6" flow-btn href="javascript:void(0)">
         <i class="zmdi zmdi-upload"></i>
-        <p>{{ "WORKGROUPS_LIST.UPLOAD_FILE" | translate }}</p>
+        <p>{{"WORKGROUPS_LIST.UPLOAD_FILE" | translate}}</p>
       </a>
       <div flow-btn>
         <a class="col-xs-6" ui-sref="documents.upload">
           <i class="groups-home-share"></i>
-          <p>{{ "ADD_FILES_DROPDOWN.UPLOAD_SHARE" | translate }}</p>
+          <p>{{"ADD_FILES_DROPDOWN.UPLOAD_SHARE" | translate}}</p>
         </a>
       </div>
     </div>
@@ -26,23 +26,23 @@
     </div>
     <div class="breadcrumbs-ctn hidden-xs">
       <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
-        {{ "BREADCRUMB_TITLE" | translate }}
+        {{"BREADCRUMB_TITLE" | translate}}
       </a>
       <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
     </div>
     <div id="action-header">
       <div class="fg-line toolbar-actions-items">
-        <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
+        <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" x-ng-click="toggleSearchState()">
           <a href="">
-            <i class="tm-icon zmdi zmdi-search" ng-class="{'activeLink': searchMobileDropdown }"></i>
+            <i class="tm-icon zmdi zmdi-search" x-ng-class="{'activeLink': searchMobileDropdown}"></i>
           </a>
         </div>
-        <span ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+        <span x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
               class="visible-xs toolbar-mobile-item col-xs-3">
-              <a ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
+              <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
                 <i class="fa fa-square-o"></i>
               </a>
-              <a ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
+              <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
                 <i class="fa fa-check-square-o activeLink"></i>
               </a>
               </span>
@@ -50,60 +50,60 @@
           <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
             <div class="actions">
               <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
-                 ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
+                 x-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
                 <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
               </a>
               <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
                 <li role="menuitem">
                   <a href="" class="center">
-                    {{'SELECTION_TOOLBAR.ORDER_BY' | translate }}
+                    {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
                   </a>
                 </li>
                 <li class="divided"></li>
                 <li role="menuitem">
                   <a href="" class="ng-binding selectedSorting"
-                     ng-click="sortDropdownSetActive('modificationDate', $event)">
+                     x-ng-click="sortDropdownSetActive('modificationDate', $event)">
                       <span class="caretArea">
-                      <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                      <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                      <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                      <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                       </span>
-                    {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate }}
+                    {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('creationDate', $event)">
+                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('creationDate', $event)">
                           <span class="caretArea">
-                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate }}
+                    {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('size', $event)">
+                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('size', $event)">
                           <span class="caretArea">
-                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.BY_SIZE' | translate }}
+                    {{'FILTER_COMPONENT.BY_SIZE' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('name', $event)">
+                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('name', $event)">
                           <span class="caretArea">
-                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate }}
+                    {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('shared', $event)">
+                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('shared', $event)">
                           <span class="caretArea">
-                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.IS_SHARED' | translate }}
+                    {{'FILTER_COMPONENT.IS_SHARED' | translate}}
                   </a>
                 </li>
               </ul>
@@ -120,9 +120,9 @@
             <div class="fg-line">
               <input type="text" class="form-control"
                      autocomplete="off"
-                     ng-model="paramFilter['name']"
+                     x-ng-model="paramFilter['name']"
                      placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                     ng-change="updateParams()">
+                     x-ng-change="updateParams()">
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@
               data-toggle="tooltip"
               title=""
               data-placement="right"
-              data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+              data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate}}"
               slide-toggle="#searchFilterCtn">
                 <i class="zmdi hidden-xs clickable"
                    x-ng-class="{'zmdi-chevron-down': !advancedFilterBool, 'zmdi-chevron-up': advancedFilterBool}">

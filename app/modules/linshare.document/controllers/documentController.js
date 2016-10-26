@@ -32,9 +32,11 @@
     $scope.getDocumentThumbnail = getDocumentThumbnail;
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.loadSidebarContent = loadSidebarContent;
-    $scope.lsFormat = lsFormat;
+    $scope.lsAppConfig = lsAppConfig;
+		$scope.lsFormat = lsFormat;
     $scope.lsFullDateFormat = lsFullDateFormat;
     $scope.mactrl.sidebarToggle.right = false;
+    $scope.mainVm.sidebar.hide();
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.nextTab = nextTab;
     $scope.onShare = onShare;
@@ -55,6 +57,7 @@
     $scope.toggleSearchState = toggleSearchState;
     $scope.toggleSelectedSort = true;
     $scope.unavailableMultiDownload = unavailableMultiDownload;
+    $scope.updateDocument = updateDocument;	
 
     activate();
 
@@ -121,9 +124,17 @@
       $scope.$on('$stateChangeSuccess', function() {
         angular.element('.multi-select-mobile').appendTo('body');
       });
+      
+      $scope.$watch(function() {
+				return documentUtilsService.reloadDocumentsList;
+			}, function (newValue) {
+        if (newValue) {
+          $scope.reloadDocuments();
+        }
+      }, true);
 
       $scope.$watch('fab.isOpen', function(isOpen) {
-        if(isOpen) {
+        if (isOpen) {
           angular.element('.md-toolbar-tools').addClass('setWhite');
           angular.element('.multi-select-mobile').addClass('setDisabled');
           $timeout(function() {
@@ -156,8 +167,8 @@
     }
 
     function backToSidebarContentDetails() {
-      if($scope.sidebarRightDataType === 'share-details') {
-        $scope.loadSidebarContent('details');
+      if ($scope.sidebarRightDataType === lsAppConfig.shareDetails) {
+        $scope.loadSidebarContent(lsAppConfig.details);
       }
     }
 
@@ -166,7 +177,7 @@
     }
 
     function closeSearch() {
-      angular.element('#').removeClass('search-toggled');
+      angular.element('#drop-area').removeClass('search-toggled');
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
@@ -227,18 +238,25 @@
 
     function loadSelectedDocument(filteredData) {
       var documentToSelect = _.find(filteredData, {'uuid': $stateParams.uploadedFileUuid});
-      if(!_.isUndefined(documentToSelect)) {
+      if (!_.isUndefined(documentToSelect)) {
         addSelectedDocument(documentToSelect);
       }
     }
-
+ 
+    /**
+     * @name loadSidebarContent
+     * @desc Update the content of the sidebar
+     * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     */
     function loadSidebarContent(content) {
-      $scope.sidebarRightDataType = content || 'share';
+      $scope.mainVm.sidebar.setData($scope);
+      $scope.mainVm.sidebar.setContent(content || lsAppConfig.share);
+      $scope.mainVm.sidebar.show();
     }
 
     function loadSpecificPage() {
       var items = _.orderBy($scope.documentsList.plain(), 'modificationDate', ['desc']);
-      if($stateParams.uploadedFileUuid) {
+      if ($stateParams.uploadedFileUuid) {
         return Math.floor(_.findIndex(items, {'uuid': $stateParams.uploadedFileUuid}) / 10) + 1;
       }
       return 1;
@@ -258,7 +276,7 @@
               var filteredData = params.filter() ? $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
               var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
               params.total(files.length);
-              if($stateParams.uploadedFileUuid) {
+              if ($stateParams.uploadedFileUuid) {
                 loadSelectedDocument(filteredData);
               }
               $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
@@ -285,9 +303,9 @@
       $timeout(function() {
         angular.element('#focusInputShare').trigger('focus');
       }, 350);
-      if(document) {
+      if (document) {
         var index = $scope.selectedDocuments.indexOf(document);
-        if(index === -1) {
+        if (index === -1) {
           document.isSelected = true;
           $scope.selectedDocuments.push(document);
         } else {
@@ -297,7 +315,7 @@
     }
 
     function openSearch() {
-      angular.element('#').addClass('search-toggled');
+      angular.element('#drop-area').addClass('search-toggled');
       angular.element('#top-search-wrap input').focus();
     }
 
@@ -332,9 +350,9 @@
       var currentPage = page || $scope.tableParams.page();
       var dataOnPage = data || $scope.tableParams.data;
       var select = selectFlag || $scope.flagsOnSelectedPages[currentPage];
-      if(!select) {
+      if (!select) {
         _.forEach(dataOnPage, function(element) {
-          if(!element.isSelected) {
+          if (!element.isSelected) {
             element.isSelected = true;
             $scope.selectedDocuments.push(element);
           }
@@ -343,7 +361,7 @@
       } else {
         $scope.selectedDocuments = _.xor($scope.selectedDocuments, dataOnPage);
         _.forEach(dataOnPage, function(element) {
-          if(element.isSelected) {
+          if (element.isSelected) {
             element.isSelected = false;
             _.remove($scope.selectedDocuments, function(n) {
               return n.uuid === element.uuid;
@@ -357,7 +375,7 @@
     function setTextInput($event) {
       var currTarget = $event.currentTarget;
       var inputTxt = angular.element(currTarget).text();
-      if(inputTxt === '') {
+      if (inputTxt === '') {
         angular.element(currTarget).parent().find('span').css('display', 'block');
       } else {
         angular.element(currTarget).parent().find('span').css('display', 'none');
@@ -366,16 +384,15 @@
 
     function showCurrentFile(currentFile, event) {
       $scope.currentSelectedDocument.current = currentFile;
-      $scope.sidebarRightDataType = 'details';
       documentRestService.get(currentFile.uuid).then(function(data) {
         $scope.currentSelectedDocument.current = data;
       });
-      if(currentFile.hasThumbnail) {
+      if (currentFile.hasThumbnail) {
         documentRestService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
           $scope.currentSelectedDocument.current.thumbnail = thumbnail;
         });
       }
-      $scope.mactrl.sidebarToggle.right = true;
+      $scope.loadSidebarContent(lsAppConfig.details);
       var currElm = event.currentTarget;
       angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
         angular.element(currElm).addClass('activeActionButton');
@@ -402,7 +419,7 @@
     }
 
     function toggleFilterBySelectedFiles() {
-      if($scope.tableParams.filter().isSelected) {
+      if ($scope.tableParams.filter().isSelected) {
         delete $scope.tableParams.filter().isSelected;
       } else {
         $scope.tableParams.filter().isSelected = true;
@@ -410,13 +427,29 @@
     }
 
     function toggleSearchState() {
-      if(!$scope.searchMobileDropdown) {
+      if (!$scope.searchMobileDropdown) {
         $scope.openSearch();
       } else {
         $scope.closeSearch();
       }
       $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
     }
+
+		/**
+     * Update a document
+     * @param document
+     */
+		 function updateDocument(document) {
+       var documentServer = _.cloneDeep(document);
+       $translate(['SAVING'])
+       .then(function(translations) {
+         var swalSaving = translations['SAVING'];
+         $scope.currentSelectedDocument.current.description = swalSaving;
+         documentRestService.update(documentServer.uuid, documentServer).then(function() {
+           $scope.currentSelectedDocument.current.description = documentServer.description;
+         });
+       });
+     };
 
     function unavailableMultiDownload() {
       swal({

@@ -12,5 +12,16 @@ angular.module('linshareUiUserApp')
     devMode: true,
     production: false,
     mySpacePage: 'myspace',
-    workgroupPage: 'workgroup'
+    workgroupPage: 'workgroup',
+
+    //Value used for sidebar
+    share: "share",
+    moreOptions: "more-options",
+    shareDetails: "share-details",
+    activeShareDetails: "active-share-details",
+    addGuest: "add-guest",
+    guest: "guest",
+    details: "details",
+    addMember: "add-member",
+    workgroupDetailFile: "workgroup-detail-file"
 });

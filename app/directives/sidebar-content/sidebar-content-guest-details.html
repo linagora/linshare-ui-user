@@ -14,9 +14,9 @@
       </div>
       <div class="description-ctn form-sidebar">
         <div contenteditable="false" class="comment"
-             ng-focus="slideTextarea($event)"
-             ng-blur="slideUpTextarea($event)"
-             ng-keyup="setTextInput($event);"></div>
+             x-ng-focus="slideTextarea($event)"
+             x-ng-blur="slideUpTextarea($event)"
+             x-ng-keyup="setTextInput($event);"></div>
         <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
         <div class="edit-description">
           <!-- TODO: Replace by the profile description if it exists-->
@@ -85,10 +85,10 @@
                 {{'GUEST_DETAILS.MY_SPACE' | translate}}:
               </p>
               <!-- TODO: is his own space activated or deactivated-->
-              <p ng-if="activated">
+              <p x-ng-if="activated">
                 {{'GUEST_DETAILS.ACTIVATED' | translate}}
               </p>
-              <p ng-if="!activated">
+              <p x-ng-if="!activated">
                 {{'GUEST_DETAILS.DEACTIVATED' | translate}}
               </p>
             </div>
@@ -105,15 +105,15 @@
                  if the restricted contacts feature has been enabled sand the current viewer
                 is not in the list then display the link JOIN_RESTRICTED_CONTACT_LIST
                 -->
-              <p ng-if="!activated">
+              <p x-ng-if="!activated">
                 <a>
                   {{'GUEST_DETAILS.JOIN_RESTRICTED_CONTACT_LIST' | translate}}
                 </a>
               </p>
-              <p ng-if="activated">
+              <p x-ng-if="activated">
                 {{'GUEST_DETAILS.ALLREADY_A_MEMBER' | translate}}
               </p>
-              <p ng-if="activated">
+              <p x-ng-if="activated">
                 {{'GUEST_DETAILS.DEACTIVATED' | translate}}
               </p>
             </div>
