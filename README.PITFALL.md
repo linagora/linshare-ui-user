@@ -4,7 +4,7 @@ _This file will serve as a guide to inform about every common issues the develop
 
 ### NgTable
 
-Every directive **ng-if** used inside the tag <table> as to be put as is, whitout *data-* or *x-*.
+Every directive **ng-if** used inside the tag **<table\>** as to be put as is, whitout *data-* or *x-*.
 
 ```html
 <!-- Do -->
