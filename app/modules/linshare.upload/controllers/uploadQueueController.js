@@ -17,7 +17,7 @@
     $scope.showBtnList = showBtnList;
     $scope.identifiers = [];
     $scope.currentSelectedDocument = {};
-    $scope.mactrl.sidebarToggle.right = false;
+    $scope.mainVm.sidebar.hide(); 
     $scope.selectedUploads = {};
     $scope.resumeSelectedFiles = resumeSelectedFiles;
     $scope.pauseSelectedFiles = pauseSelectedFiles;

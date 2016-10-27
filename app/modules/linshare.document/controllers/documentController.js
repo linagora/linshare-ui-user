@@ -35,7 +35,6 @@
     $scope.lsAppConfig = lsAppConfig;
 		$scope.lsFormat = lsFormat;
     $scope.lsFullDateFormat = lsFullDateFormat;
-    $scope.mactrl.sidebarToggle.right = false;
     $scope.mainVm.sidebar.hide();
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.nextTab = nextTab;
@@ -90,7 +89,6 @@
             }],
             [swalShare, function() {
               $scope.onShare();
-              $scope.mactrl.sidebarToggle.right = true;
             }],
             [swalDelete, function($itemScope) {
               $scope.deleteDocuments($itemScope.selectedDocuments);
