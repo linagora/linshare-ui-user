@@ -15,7 +15,7 @@
         <link href="styles/materialAdmin/css/app.min.2.css" rel="stylesheet">
     </head>
 
-    <body class="login-content" x-ng-controller="AuthenticationController as lctrl">
+    <body class="login-content" x-ng-controller="AuthenticationController as authenticationVm">
         <!-- Login -->
         <div class="lc-block toggled" id="l-login">
             <div class="input-group m-b-20">
@@ -122,7 +122,7 @@
 
          <!-- App level -->
         <script src="modules/linshare.user/userProfile.js"></script>
-        <script src="modules/linshare.authentication/authenticationService.js"></script>
-        <script src="modules/linshare.authentication/authenticationController.js"></script>
+        <script src="modules/linshare.authentication/services/authenticationService.js"></script>
+        <script src="modules/linshare.authentication/controllers/authenticationController.js"></script>
     </body>
 </html>

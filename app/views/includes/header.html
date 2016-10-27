@@ -132,7 +132,7 @@
                   <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
                 </li>
                 <li>
-                  <a x-ng-controller="AuthenticationController" x-ng-click="logout(); $flow.cancel()" ui-sref="login">
+                  <a x-ng-controller="AuthenticationController as authenticationVm" x-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
                     <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
                   </a>
                 </li>

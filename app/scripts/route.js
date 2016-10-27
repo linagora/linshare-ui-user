@@ -131,7 +131,8 @@ angular.module('linshareUiUserApp')
       .state('documents.profile', {
         url: '/profile',
         templateUrl: 'views/common/user-profile.html',
-        controller: 'AuthenticationController'
+        controller: 'AuthenticationController',
+        controllerAs: 'authenticationVm'
       })
 
 

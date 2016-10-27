@@ -6,6 +6,7 @@ angular.module('linshareUiUserApp')
       replace: false,
       restrict: 'A',
       templateUrl: '../../modules/linshare.authentication/views/loginForm.html',
-      controller: 'AuthenticationController'
+      controller: 'AuthenticationController',
+      controllerAs: 'authenticationVm'
     };
   });
