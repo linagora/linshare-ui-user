@@ -15,11 +15,15 @@
         scope.fromWhere = attrs.uploadPopupFiles;
         elem.hide();
         scope.$watch('filesFilterred', function() {
-          scope.filesFilterred.length > 0 ? elem.show() : elem.hide();
+          if (scope.filesFilterred.length > 0) {
+            elem.show();
+          } else {
+            elem.hide();
+          }
           totalFilesFrom = _.filter(scope.$flow.files, {'_from': scope.fromWhere});
           scope.currentFilesLength = totalFilesFrom ? totalFilesFrom.length : 0;
         });
       }
-    }
+    };
   }
 })();

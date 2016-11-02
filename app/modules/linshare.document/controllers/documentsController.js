@@ -18,8 +18,8 @@
 
     function activate(){
       $scope.loadSidebarContent(lsAppConfig.details);
-    } 
-    
+    }
+
 		/**
      * @name loadSidebarContent
      * @desc Update the content of the sidebar

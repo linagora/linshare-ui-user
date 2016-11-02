@@ -10,13 +10,13 @@
       <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
       <md-fab-actions class="md-toolbar-tools">
         <md-button aria-label="label" class="md-icon-button" flow-btn>
-          <a href="#/files/upload" ui-sref="documents.upload">
+          <a x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
             <i class="zmdi zmdi-share"></i>
             <span>{{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate}}</span>
           </a>
         </md-button>
         <md-button aria-label="comment" class="md-icon-button" flow-btn>
-          <a href="#/files/list" ui-sref="documents.files">
+          <a>
             <i class="zmdi zmdi-file-plus"></i>
             <span>{{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate}}</span>
           </a>

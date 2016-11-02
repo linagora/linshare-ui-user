@@ -10,13 +10,13 @@ angular.module('linshare.share')
     shareActionVm.selectedContact = {};
     shareActionVm.submitShare = submitShare;
 
-    //////////////// 
-                                                        
+    ////////////////
+
     function closeSideBar() {
       shareActionVm.newShare.resetForm();
       $scope.mainVm.sidebar.hide();
     };
-    
+
     function submitShare(shareCreationDto, selectedDocuments, selectedUploads) {
       if (selectedDocuments.length === 0 && (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
         growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'danger');
@@ -65,7 +65,8 @@ angular.module('linshare.share')
           for (var upload in currentUploads) {
             if (currentUploads.hasOwnProperty(upload)) {
               shareCopy.documents.push(currentUploads[upload]);
-              delete $scope.selectedUploads[upload];
+              // TODO: check if sidebar changed if it still works
+              delete $scope.mainVm.sidebar.getData().selectedUploads[upload];
             }
           }
 

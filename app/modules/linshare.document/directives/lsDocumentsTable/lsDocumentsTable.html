@@ -17,9 +17,7 @@
         header-class="'col-2'">
       <a x-ng-click="addSelectedDocument(documentFile)">
         <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
-        <div class="checkbox-ctn-thumb"
-             x-ng-class="{'maintain-vis': documentFile.isSelected}">
-        </div>
+        <div class="checkbox-ctn-thumb" x-ng-class="{'maintain-vis': documentFile.isSelected}"></div>
       </a>
     </td>
     <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
@@ -47,8 +45,7 @@
         data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
       {{documentFile.modificationDate | relativeTime}}
     </td>
-    <td class="hidden-xs"
-        ng-if="!mainVm.sidebar.isVisible()"
+    <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
         data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
       {{documentFile.size | readableSize: false}}
     </td>

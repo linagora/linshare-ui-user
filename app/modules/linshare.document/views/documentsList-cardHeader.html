@@ -6,7 +6,7 @@
         <p>{{"WORKGROUPS_LIST.UPLOAD_FILE" | translate}}</p>
       </a>
       <div flow-btn>
-        <a class="col-xs-6" ui-sref="documents.upload">
+        <a class="col-xs-6" x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
           <i class="groups-home-share"></i>
           <p>{{"ADD_FILES_DROPDOWN.UPLOAD_SHARE" | translate}}</p>
         </a>

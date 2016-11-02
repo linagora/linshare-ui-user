@@ -4,10 +4,10 @@
       <div class="lv-header-alt clearfix display-none">
         <h2 class="lvh-label"><b>{{'HEADER.FILES_TO_SHARE' | translate}}</b></h2>
       </div>
-      <div class="lv-body x-ng-table" id="file-list-table">
-        <div class="media-body" x-ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere}"
-             x-ng-class="{'highlight-list-elem': file.isSelected}"
-             data-uid-flow="{{file.uniqueIdentifier}}">
+      <div class="lv-body ng-table" id="file-list-table">
+        <div class="media-body" x-ng-repeat="file in uploadQueueVm.$flow.files | orderBy: '-' | filter: {_from: fromWhere}"
+             x-ng-class="{'highlight-list-elem': file.isSelected }"
+             data-uid-flow="{{file.uniqueIdentifier}}" x-ng-if="!file.hideOnIsolate">
           <div class="col-xs-10 col-sm-12 overflow-hidden">
             <div class="col-xs-24 col-sm-12 anim-left no-padding">
               <div class="col-xs-6 col-sm-11 pull-left">
@@ -45,7 +45,7 @@
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-show="file.isComplete()">
-                    <a x-ng-click="showFileInSource(file)">
+                    <a x-ng-click="uploadQueueVm.showFileInSource(file)">
                       <i class="fa fa-eye" title="{{'SELECTION_TOOLBAR.SHOW_IN_FILES' | translate}}"></i>
                     </a>
                   </li>
@@ -55,7 +55,7 @@
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-if="file.isComplete() && !file.error">
-                    <a href="" x-ng-click="removeSelectedDocuments(file)"
+                    <a href="" x-ng-click="uploadQueueVm.removeSelectedDocuments(file)"
                        title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}">
                       <i class="zmdi zmdi-check" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"></i>
                     </a>
@@ -66,7 +66,7 @@
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-show="!file.isComplete()">
-                    <a href="" x-ng-click="removeSelectedDocuments(file)">
+                    <a href="" x-ng-click="uploadQueueVm.removeSelectedDocuments(file)">
                       <i class="zmdi zmdi-close" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
                     </a>
                   </li>

@@ -8,7 +8,6 @@
   function lsOnUploadSelectDirective() {
     return {
       restrict: 'A',
-      scope: false,
       link: function(scope, element) {
         element.bind('click', function() {
           scope.file.isSelected = !scope.file.isSelected;

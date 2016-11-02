@@ -177,6 +177,7 @@ angular.module('linshareUiUserApp')
     thisctrl.goToSharedSpaceTarget = function(uuid, name) {
       workGroupFoldersRestService.setWorkgroupUuid(uuid);
       workGroupFoldersRestService.getParent(uuid).then(function(folder) {
+        /* jshint validthis:true */
         if (folder[0] == null) {
           $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name, parent: uuid, folderUuid: uuid, folderName: name.trim()});
         } else {

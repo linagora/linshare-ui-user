@@ -39,6 +39,7 @@ angular.module('linshareUiUserApp')
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
       allowDuplicateUploads: true,
       generateUniqueIdentifier: function() {
+        /* jshint validthis:true */
         return uuid.v4();
       },
       permanentErrors: [401, 500, 501]
