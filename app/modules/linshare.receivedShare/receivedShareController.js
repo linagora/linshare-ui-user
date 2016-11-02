@@ -66,9 +66,9 @@ angular.module('linshare.receivedShare')
       $scope.paramsIsActivate = function(param) {
         return param > 0;
       };
-      
+
       $scope.clearParams = clearParams;
-     
+
       function clearParams() {
         $scope.filters.sizeStart = null;
         $scope.filters.sizeEnd = null;
@@ -82,14 +82,14 @@ angular.module('linshare.receivedShare')
         $scope.selectedRecipient = '';
         $scope.showDateRange = true;
         $scope.tableParams.reload();
-      };
-     
-      $scope.updateParams = updateParams; 
-      
+      }
+
+      $scope.updateParams = updateParams;
+
       function updateParams() {
         $scope.tableParams.reload();
         checkdatasIsSelecteds();
-      };
+      }
 
       var swalCopyText, swalCopyConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText,
         swalMultipleDownloadConfirm;
@@ -134,7 +134,7 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.loadSidebarContent = loadSidebarContent;
-    
+
      /**
       * @name loadSidebarContent
       * @desc Update the content of the sidebar
@@ -144,7 +144,7 @@ angular.module('linshare.receivedShare')
         $scope.mainVm.sidebar.setData($scope);
         $scope.mainVm.sidebar.setContent(content || lsAppConfig.share);
         $scope.mainVm.sidebar.show();
-      };
+      }
 
       $scope.currentSelectedDocument = {current: ''};
       $scope.flagsOnSelectedPages = {};
@@ -262,7 +262,7 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.setShowActions = setShowActions;
-      
+
       // onChange on the inputs in the table
       // Insert or remove the file in the list of selected files
       function setShowActions(documentFile) {
@@ -280,10 +280,10 @@ angular.module('linshare.receivedShare')
             $scope.showActions.splice(exist, 1);
           }
         }
-      };
-     
+      }
+
       $scope.selectAll = selectAll;
-              
+
       // Used by the template to select all data in the table
       // Only in the current page of the pagination table
       function selectAll() {
@@ -299,7 +299,7 @@ angular.module('linshare.receivedShare')
               $scope.showActions.push(file);
             }
           });
-      };
+      }
       // When the page changed check / uncheck
       // the checkbox in the filter template
       // if one data in the table is checked the checkboxe is also checked
@@ -467,7 +467,7 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.toggleSearchState = toggleSearchState;
-              
+
       function toggleSearchState() {
         if (!$scope.searchMobileDropdown) {
           $scope.openSearch();
@@ -475,7 +475,7 @@ angular.module('linshare.receivedShare')
           $scope.closeSearch();
         }
         $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
-      };
+      }
       $scope.openSearch = function(){
         angular.element('#drop-area').addClass('search-toggled');
         angular.element('#top-search-wrap input').focus();

@@ -8,7 +8,7 @@
 
 angular
   .module('linshare.authentication')
-  .controller('AuthenticationController', AuthenticationController)
+  .controller('AuthenticationController', AuthenticationController);
 
   AuthenticationController.$inject = ['$scope', '$log', 'AuthenticationService'];
 
@@ -32,6 +32,6 @@ angular
      */
     function logout() {
       AuthenticationService.logout();
-    };
+    }
   }
 })();

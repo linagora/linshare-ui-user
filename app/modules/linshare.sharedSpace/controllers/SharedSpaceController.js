@@ -162,7 +162,7 @@ angular.module('linshareUiUserApp')
 
     thisctrl.onAddMember = function() {
       thisctrl.mdtabsSelection.selectedIndex = 1;
-      thisctrl.loadSidebarContent(lsAppConfig.workgroupPage)
+      thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
       angular.element('#focusInputShare').focus();
     };
 
@@ -177,7 +177,7 @@ angular.module('linshareUiUserApp')
     thisctrl.goToSharedSpaceTarget = function(uuid, name) {
       workGroupFoldersRestService.setWorkgroupUuid(uuid);
       workGroupFoldersRestService.getParent(uuid).then(function(folder) {
-        /* jshint validthis:true */
+        /*jshint eqnull: true*/
         if (folder[0] == null) {
           $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name, parent: uuid, folderUuid: uuid, folderName: name.trim()});
         } else {

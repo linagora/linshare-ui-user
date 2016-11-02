@@ -15,7 +15,7 @@ angular.module('linshare.share')
     function closeSideBar() {
       shareActionVm.newShare.resetForm();
       $scope.mainVm.sidebar.hide();
-    };
+    }
 
     function submitShare(shareCreationDto, selectedDocuments, selectedUploads) {
       if (selectedDocuments.length === 0 && (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
@@ -76,5 +76,5 @@ angular.module('linshare.share')
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_FAILED', 'danger');
         }
       });
-    };
+    }
   });

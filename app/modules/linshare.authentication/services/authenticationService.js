@@ -7,8 +7,8 @@
   'use strict';
   angular
     .module('linshare.authentication')
-    .factory('AuthenticationService', AuthenticationService)
-  
+    .factory('AuthenticationService', AuthenticationService);
+
   AuthenticationService.$inject = ['Restangular', '$q', '$log', '$translate', '$cookies', '$location', '$window',
                                   '$timeout', 'authService', 'growlService', 'lsAppConfig'];
 
@@ -16,7 +16,7 @@
    * @namespace AuthenticationService
    * @desc Application authentication system service
    * @memberOf Linshare.Authentication
-   */    
+   */
   function AuthenticationService(Restangular, $q, $log, $translate, $cookies, $location, $window, $timeout,
                                 authService, growlService, lsAppConfig) {
     var baseAuthentication = Restangular.all('authentication');
@@ -29,10 +29,10 @@
       version: version
     };
 
-    return service; 
+    return service;
 
     ////////////
-    
+
     /**
      * @name checkAuthentication
      * @desc Check user atuhorization
@@ -45,7 +45,7 @@
         }, function(error) {
           $log.debug('current user not authenticated', error);
         });
-    };
+    }
 
     /**
      * @name getCurrentUser
@@ -55,7 +55,7 @@
      */
     function getCurrentUser() {
       return deferred.promise;
-    };
+    }
 
     /**
      * @name login
@@ -79,18 +79,19 @@
         var swalWelcome;
         $translate(['WELCOME_USER'])
           .then(function(translations) {
+            /* jshint sub: true */
             swalWelcome = translations['WELCOME_USER'];
           });
         $timeout(function() {
           var welcomeUserName = swalWelcome + user.firstName;
           growlService.notifyTopRight(welcomeUserName, 'inverse');
         }, 350);
-  
+
       }, function (error) {
         $log.error('Authentication failed', error.status);
         deferred.reject(error);
       });
-    };
+    }
 
     /**
      * @name logout
@@ -114,17 +115,17 @@
         function(error) {
           $log.error('Authentication logout : failed', error.status);
         });
-    };
-    
+    }
+
     /**
      * @name version
      * @desc Get the version of the core API
-     * @return {restangularObject} 
+     * @return {restangularObject}
      * @memberOf Linshare.Authentication.AuthenticationService
      */
     function version() {
       $log.debug('Authentication:version');
       return Restangular.one('authentication', 'version').get();
-    };
+    }
   }
-})(); 
+})();

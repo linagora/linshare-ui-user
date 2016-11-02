@@ -56,7 +56,7 @@
     $scope.toggleSearchState = toggleSearchState;
     $scope.toggleSelectedSort = true;
     $scope.unavailableMultiDownload = unavailableMultiDownload;
-    $scope.updateDocument = updateDocument;	
+    $scope.updateDocument = updateDocument;
 
     activate();
 
@@ -122,7 +122,7 @@
       $scope.$on('$stateChangeSuccess', function() {
         angular.element('.multi-select-mobile').appendTo('body');
       });
-      
+
       $scope.$watch(function() {
 				return documentUtilsService.reloadDocumentsList;
 			}, function (newValue) {
@@ -240,7 +240,7 @@
         addSelectedDocument(documentToSelect);
       }
     }
- 
+
     /**
      * @name loadSidebarContent
      * @desc Update the content of the sidebar
@@ -441,13 +441,14 @@
        var documentServer = _.cloneDeep(document);
        $translate(['SAVING'])
        .then(function(translations) {
+         /* jshint sub: true */
          var swalSaving = translations['SAVING'];
          $scope.currentSelectedDocument.current.description = swalSaving;
          documentRestService.update(documentServer.uuid, documentServer).then(function() {
            $scope.currentSelectedDocument.current.description = documentServer.description;
          });
        });
-     };
+     }
 
     function unavailableMultiDownload() {
       swal({

@@ -16,6 +16,7 @@
 
     ////////////
 
+    /*jshint unused: false */
     function activate(){
       $scope.loadSidebarContent(lsAppConfig.details);
     }

@@ -45,7 +45,7 @@ angular.module('linshareUiUserApp')
    		  }
 
    		  function removeData(key) {
-   		    delete sidebar.data['key'];
+   		    delete sidebar.data[key];
    		  }
 
    		  function toggle() {

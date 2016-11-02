@@ -10,7 +10,7 @@
   function selectedDocumentsController($scope, $stateParams, lsAppConfig) {
     var isMobile = angular.element('html').hasClass('ismobile');
     var param = $stateParams.selected;
-    
+
     $scope.currentPage = '';
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.loadSidebarContent = loadSidebarContent;
@@ -20,7 +20,7 @@
     activate();
 
     ////////////////
-    
+
     function activate() {
       if (isMobile) {
         resetMobileState();
@@ -35,7 +35,7 @@
       });
       $scope.loadSidebarContent(lsAppConfig.share);
     }
-    
+
     /* For the mobile user flow : the sidebar  is hidden at first ( when the page loads up )*/
     function resetMobileState() {
       $scope.mainVm.sidebar.hide();
@@ -57,8 +57,8 @@
         $scope.mainVm.sidebar.setContent(content);
       }
       $scope.mainVm.sidebar.show();
-    };
-    
+    }
+
     function removeSelectedDocuments(document) {
       var index = $scope.selectedDocuments.indexOf(document);
       if (index > -1) {

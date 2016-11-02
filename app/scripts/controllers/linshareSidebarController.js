@@ -9,6 +9,7 @@
 
   //TODO: unused for now, move sidebar element from UiUserMainController
   function LinshareSidebar($log) {
+    /*jshint unused: false */
     /* jshint validthis: true */
     var linshareSidebarVm = this;
 

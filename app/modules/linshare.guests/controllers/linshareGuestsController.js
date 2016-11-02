@@ -46,6 +46,6 @@
       $scope.mainVm.sidebar.setData($scope);
       $scope.mainVm.sidebar.setContent(content || lsAppConfig.share);
       $scope.mainVm.sidebar.show();
-    };
+    }
   }
 })();

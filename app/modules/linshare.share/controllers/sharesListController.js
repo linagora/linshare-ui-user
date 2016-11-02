@@ -8,11 +8,12 @@ angular.module('linshare.share')
     $scope.selectedDocuments = currentShare.documents;
     $scope.shareIndex = Number(shareIndex) + 1;
     $scope.shareToDisplay = currentShare;
-  
+
     ////////////
-  
+
+    /*jshint unused: false */
     function activate(){
-      $scope.loadSidebarContent(lsAppConfig.activeShareDetails)
+      $scope.loadSidebarContent(lsAppConfig.activeShareDetails);
     }
 
     /**

@@ -21,7 +21,7 @@
       controllerAs: 'linshareSidebarVm',
       bindToController: true
     };
-
+    /*jshint unused: false */
     function linkFunc(scope, element, attrs, exampleVm, transcludeFn) {
 
     }
