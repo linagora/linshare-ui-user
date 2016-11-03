@@ -2,7 +2,7 @@
 
 angular.module('linshareUiUserApp')
   .controller('UiUserMainController',
-    function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate, AuthenticationService, MenuService, $timeout, LinshareUserService, lsAppConfig) {
+    function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate, AuthenticationService, MenuService, $timeout, LinshareUserService, lsAppConfig, $http) {
    		//TODO: shall be moved to the directive controller of linshareSidebar directive
    		var Sidebar = function() {
    		  var sidebar = {
@@ -193,4 +193,20 @@ angular.module('linshareUiUserApp')
         }, 450);
       });
 
+      /**
+       * Get the core version from the REST API
+       * @type {string}
+       */
+      AuthenticationService.version().then(function(data){
+        $scope.coreVersion = data.version;
+      });
+
+      /**
+       * Get the product version from the json file 'about'
+       * @type {string}
+       */
+      $scope.productVersion = 'dev';
+      $http.get('/about.json').success(function (data) {
+        $scope.productVersion = data.version;
+      });
     });
