@@ -1,0 +1,29 @@
+{
+  "SERVER_RESPONSE": {
+    "DEFAULT": {
+      "ERROR_400": "MAUVAISE REQUETE",
+      "ERROR_401": "NON AUTORISE",
+      "ERROR_403": "INTERDIS",
+      "ERROR_404": "NON TROUVE",
+      "ERROR_405": "METHODE NON AUTORISEE",
+      "ERROR_408": "TEMPS D'ATTENTE ECOULE",
+      "ERROR_500": "ERREUR SERVER INTERNE",
+      "ERROR_501": "NON IMPLEMENTEE",
+      "ERROR_502": "MAUVAISE PASSERELLE",
+      "ERROR_503": "SERVICE NON DISPONIBLE",
+      "ERROR_520": "LE SERVER WEB RETOURNE UNE ERREUR INCONNUE",
+      "ERROR_DEFAULT": "LE SERVER WEB RETOURNE UNE ERREUR INCONNUE",
+      "DETAILS": {
+        "NONE": "",
+        "1000": "Erreur inconnue",
+        "2000": "Erreur d'authentification",
+        "28000": "L'invité n'a pas été trouvé",
+        "28001": "L'invité existe dèjà",
+        "28403": "Vous n'etes pas autorisé à accéder à cet invité",
+        "28405": "La liste de contact restreint de l'invité est vide",
+        "28406": "La recherche pour les invités est invalide",
+        "38400": "La date d'expiration de l'invité est invalide"
+      }
+    }
+  }
+}

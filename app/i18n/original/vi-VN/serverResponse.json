@@ -1,0 +1,29 @@
+{
+  "SERVER_RESPONSE": {
+    "DEFAULT": {
+      "TBT__ERROR_400": "",
+      "TBT__ERROR_401": "",
+      "TBT__ERROR_403": "",
+      "TBT__ERROR_404": "",
+      "TBT__ERROR_405": "",
+      "TBT__ERROR_408": "",
+      "TBT__ERROR_500": "",
+      "TBT__ERROR_501": "",
+      "TBT__ERROR_502": "",
+      "TBT__ERROR_503": "",
+      "TBT__ERROR_520": "",
+      "TBT__ERROR_DEFAULT": "",
+      "DETAILS": {
+        "TBT__NONE": "",
+        "TBT__1000": "",
+        "TBT__2000": "",
+        "TBT__28000": "",
+        "TBT__28001": "",
+        "TBT__28403": "",
+        "TBT__28405": "",
+        "TBT__28406": "",
+        "TBT__38400": ""
+      }
+    }
+  }
+}

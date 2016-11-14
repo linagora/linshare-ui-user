@@ -1,0 +1,29 @@
+{
+  "SERVER_RESPONSE": {
+    "DEFAULT": {
+      "ERROR_400": "BAD REQUEST",
+      "ERROR_401": "UNAUTHORIZED",
+      "ERROR_403": "FORBIDDEN",
+      "ERROR_404": "NOT FOUND",
+      "ERROR_405": "METHOD NOT ALLOWED",
+      "ERROR_408": "REQUEST TIME OUT",
+      "ERROR_500": "INTERNAL SERVER ERROR",
+      "ERROR_501": "NOT IMPLEMENTED",
+      "ERROR_502": "BAD GATEWAY",
+      "ERROR_503": "SERVICE UNAVAILABLE",
+      "ERROR_520": "WEB SERVER IS RETURNING AN UNKNOW ERROR",
+      "ERROR_DEFAULT": "ERROR NOT MANAGED",
+      "DETAILS": {
+        "NONE": "",
+        "1000": "Unknow error",
+        "2000": "Authentication error",
+        "28000": "The guest has not been found",
+        "28001": "The guest already exists",
+        "28403": "You are not authorized to access this guest",
+        "28405": "The guest restricted contacts list is empty",
+        "28406": "The search for guests is invalid",
+        "38400": "The guest expiration date is invalid"
+      }
+    }
+  }
+}
