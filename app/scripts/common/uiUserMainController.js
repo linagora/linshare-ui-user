@@ -56,9 +56,13 @@ angular.module('linshareUiUserApp')
    		    sidebar.visible = true;
    		  }
 
-   		  function hide() {
-   		    sidebar.visible = false;
-   		  }
+         function hide(form) {
+           sidebar.visible = false;
+           if (form) {
+             form.$setPristine();
+             form.$setUntouched();
+           }
+         }
 
    		  function isVisible() {
    		    return sidebar.visible;
