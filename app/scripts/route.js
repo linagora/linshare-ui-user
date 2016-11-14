@@ -203,8 +203,8 @@ angular.module('linshareUiUserApp')
       .state('administration.guests', {
         url:'/adminguests',
         templateUrl: 'modules/linshare.guests/views/list.html',
-        controller: 'LinshareGuestController',
-        controllerAs: 'guestListVm',
+        controller: 'LinshareGuestsController',
+        controllerAs: 'guestVm',
       })
 
       .state('administration.users', {
