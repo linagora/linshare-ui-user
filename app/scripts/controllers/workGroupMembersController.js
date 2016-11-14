@@ -49,7 +49,10 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
     return workGroupMembersRestService.delete(wgmember.currentWorkGroup.current.uuid, member.userUuid);
   }
 
-  function addMember(member, listMembers) {
+  function addMember() {
+    var
+      member = this.selectedUser,
+      listMembers = this.selectedUsersList;
     var jsonMember = {
       userMail: member.mail,
       userDomainId: member.domain,

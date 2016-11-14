@@ -205,7 +205,8 @@
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
-      "INPUT_PLACEHOLDER": "Rechercher des utilisateurs"
+      "INPUT_PLACEHOLDER": "Rechercher des utilisateurs",
+      "INVALID_EMPTY_LIST": "Cette liste ne peut être vide."
     }
   },
     "ADD_FILES_DROPDOWN": {

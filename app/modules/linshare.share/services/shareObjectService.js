@@ -63,7 +63,9 @@ angular.module('linshare.share')
 
     }
 
-    ShareObjectForm.prototype.addRecipient = function(contact) {
+    //TODO: shouldn't exist same as app/modules/linshare.components/autocompleteUsers/autocompleteUsersController.js
+    ShareObjectForm.prototype.addRecipient = function() {
+      var contact = this.selectedUser;
       var exists = false;
       switch (contact.type) {
         case 'simple':

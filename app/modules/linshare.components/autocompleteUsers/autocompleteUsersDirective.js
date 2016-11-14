@@ -1,105 +1,78 @@
 /**
- * Created by Alpha O. Sall on 10/03/16.
+ * lsAutocompleteUser Directive
+ * @namespace LinShare.components
  */
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('linshare.components')
-  .directive('lsAutocompleteUser', function(autocompleteUserRestService, $log, $q, componentsConfig) {
-    return {
+  angular
+    .module('linshare.components')
+    .directive('lsAutocompleteUser', lsAutocompleteUser);
+
+  lsAutocompleteUser.$inject = ['componentsConfig'];
+
+  /** 
+   *  @namespace lsAutocompleteUser 
+   *  @desc Autompletion for searching a type of user and add it to a list on selection
+   *  @example <div ls-autocomplete-user></div>
+   *  @memberOf LinShare.components
+   */
+  /**TODO - KLE: This directive should be surround by the following tag, have to test for every case we use it
+   * <x-ng-form name="editors" role="form" class="clearfix">
+   *   <div class="form-group fg-line">
+  */
+  function lsAutocompleteUser(componentsConfig) {
+    var directive = {
       restrict: 'A',
       scope: {
+        isRequired: '=?',
+        onSelectFunction: '=',
         selectedUsersList: '=',
-        onSelectFunction: '='
+        withEmail: '=?'
       },
       templateUrl: componentsConfig.path + 'autocompleteUsers/autocompleteTemplate.html',
-      controller: function($scope) {
-        $scope.userRepresentation = function(u) {
-          var template = '';
-          switch (u.type) {
-            case 'simple':
-                  template = u.identifier;
-                  break;
-            case 'mailinglist':
-                  template = u.listName.concat(' ', u.ownerLastName, ' ', u.ownerFirstName);
-                  break;
-            case 'user':
-                  var firstLetter = u.firstName.charAt(0);
-                  template = '' +
-                    '<div  class="recipientsAutocomplete" title="' + u.domain + '">' +
-                    '<span class="firstLetterFormat">' + firstLetter +'</span>' +
-                    '<p class="recipientsInfo">' +
-                    '<span class="user-full-name">'+ u.firstName + ' '+ u.lastName + '</span>' +
-                    '<span class="email">' + u.mail + '</span>' +
-                    '</p>' +
-                    '</div>';
-                  break;
-            case 'threadmember':
-                  var isMemberClass = u.member === true ? ' firstLetterBgdGreen': '';
-                  template = '' +
-                    '<div class="recipientsAutocomplete" title="' + u.domain + '">' +
-                    '<span class="firstLetterFormat' + isMemberClass + '">' + u.firstName.charAt() + '</span>' +
-                    '<p class="recipientsInfo">' +
-                    '<span class="user-full-name">'+ u.firstName + ' '+ u.lastName + '</span>' +
-                    '<span class="email">' + u.mail + '</span>' +
-                    '</p>' +
-                    '</div>';
-                  break;
-            default:
-                  template = u;
-                  break;
-          }
-          return template;
-        };
-
-        $scope.searchUsersAccount = function(pattern) {
-          if (pattern.length >= 3) {
-            var deferred = $q.defer();
-            autocompleteUserRestService(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
-              if (data.length === 0) {
-                $scope.userEmail = pattern;
-              }
-              deferred.resolve(data);
-            });
-            return deferred.promise;
-          }
-        };
-
-        var addRecipients = function(selectedUser, selectedUsersList) {
-          var exists = false;
-          angular.forEach(selectedUsersList, function(elem) {
-            if (elem.mail === selectedUser.mail && elem.domain === selectedUser.domain) {
-              exists = true;
-              $log.info('The contact ' + selectedUser.mail + ' has already been added to that guest\'s restricted contacts');
-            }
-          });
-          if (!exists) {
-            selectedUsersList.push(_.omit(selectedUser, 'restrictedContacts', 'uuid', 'type', 'identifier', 'display'));
-          }
-        };
-
-        $scope.dealWithSelectedUser = $scope.onSelectFunction || addRecipients;
-      },
-      link: function(scope, elm, attrs) {
-        scope.completeType = attrs.lsAutocompleteUser;
-        scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
-        elm.bind('keypress', function(event) {
-          scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
-          if (event.keyCode === 13) {
-            if (scope.noResult === true) {
-              if (typeof scope.userEmail === 'string') {
-                scope.selectedUser = {
-                  mail: scope.userEmail,
-                  firstName: null,
-                  lastName: null,
-                  domain: null,
-                  type: 'user'
-                };
-              }
-              scope.dealWithSelectedUser(scope.selectedUser, scope.selectedUsersList);
-            }
-          }
-        });
-      },
-      replace: true
+      controller: 'AutocompleteUsersController',
+      controllerAs: 'autocompleteUsersVm',
+      bindToController: true,
+      link: linkFn,
+      replace: true,
+      require: '^form'
     };
-  });
+
+    return directive;
+
+    /** 
+     *  @name linkFn 
+     *  @desc link function of the directive
+     *  @param {Object} scope - Angular scope object of the directive
+     *  @param {Object} elm - jqLite-wrapped element that this directive matches
+     *  @param {Object} attrs - Normalized attribute names and their corresponding attribute values
+     *  @param {Object} form - Directive's required controller instance(s)
+     *  @memberOf LinShare.components.lsAutocompleteUsers
+     */
+    function linkFn(scope, elm, attrs, form) {
+      scope.autocompleteUsersVm.name = 'focusInputShare' + Math.random().toString(36).match(/[a-z]+/g).join('');
+      scope.autocompleteUsersVm.form = form;
+      scope.autocompleteUsersVm.withEmail = (_.isUndefined(scope.autocompleteUsersVm.withEmail)) ? true : scope.autocompleteUsersVm.withEmail;
+      scope.completeType = attrs.lsAutocompleteUser;
+      scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
+      elm.bind('keypress', function(event) {
+        scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
+        if (event.keyCode === 13) {
+          if (scope.noResult === true) {
+            if (typeof scope.userEmail === 'string') {
+             scope.autocompleteUsersVm.selectedUser = {
+                mail: scope.userEmail,
+                firstName: null,
+                lastName: null,
+                domain: null,
+                type: 'user'
+              };
+            }
+            scope.autocompleteUsersVm.dealWithSelectedUser();
+          }
+        }
+      });
+    }
+  }
+})();

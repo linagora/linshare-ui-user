@@ -196,7 +196,8 @@
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
-      "INPUT_PLACEHOLDER": "Search people"
+      "INPUT_PLACEHOLDER": "Search people",
+      "INVALID_EMPTY_LIST": "This list cannot be empty."
     }
   },
   "ADD_FILES_DROPDOWN": {

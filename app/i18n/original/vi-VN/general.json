@@ -172,7 +172,8 @@
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
-      "INPUT_PLACEHOLDER": "Tìm kiếm người dùng"
+      "INPUT_PLACEHOLDER": "Tìm kiếm người dùng",
+      "TBT__INVALID_EMPTY_LIST": ""
     }
   },
   "ADD_FILES_DROPDOWN": {
