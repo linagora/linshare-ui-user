@@ -1,4 +1,3 @@
-<working-date-picker></working-date-picker>
 <div class="header-sidebar">
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" x-ng-click="shareActionVm.closeSideBar()"></i>
   <h2 class="header-more-options">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h2>
@@ -106,13 +105,16 @@
       <label for="comment" class="labelDateExpiration col-xs-6">
         {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
       </label>
-
+      <!--
+        TODO: The directive shall be refactored with a proper template and passing different options.
+              See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+      -->
       <div class="datepicker-border-fix date-picker dp-blue col-xs-6 datepicker-drop-right"
            x-ng-class="{'is-opened': opened == true}">
         <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
           <div class="form-inline ">
-            <input x-ng-click="mainVm.sidebar.getData().open($event, 'opened')" type="text"
-                   class="form-control  date-picker-input" datepicker-popup="{{mainVm.sidebar.getData().format}}"
+            <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                   class="form-control date-picker-input" datepicker-popup="{{format}}"
                    show-weeks="false"
                    is-open="opened" min-date="mainVm.sidebar.getData().minDate"
                    datepicker-options="mainVm.sidebar.getData().dateOptions"

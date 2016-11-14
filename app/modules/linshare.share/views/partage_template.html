@@ -276,7 +276,6 @@
           </div>
           <div class="card-body card-padding">
             <div>
-              <working-date-picker></working-date-picker>
             </div>
             <form class="form-sidebar">
               <div class="form-group col-xs-12">
@@ -287,10 +286,15 @@
               </div>
               <div x-ng-show="share_array[1].expirationDate.enable" class="col-xs-12 col-sm-6 col-lg-4 field-ctn" id="dateField">
                 <label for="comment" class="labelDateExpiration">Date d'expiration:</label>
-                <div class="datepicker-border-fix date-picker dp-blue"  x-ng-class="{'is-opened': opened == true}">
+                <!--
+                  TODO: The directive shall be refactored with a proper template and passing different options.
+                        See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+                -->
+                <div class="datepicker-border-fix date-picker dp-blue"
+                     x-ng-class="{'is-opened': opened == true}">
                   <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}" >
                     <div class="form-inline">
-                      <input  x-ng-click="open($event, 'opened')"  type="text"
+                      <input working-date-picker x-ng-click="open($event, 'opened')"  type="text"
                               class="form-control  date-picker-input" datepicker-popup="{{format}}" show-weeks="false"
                               is-open="opened" min-date="minDate" datepicker-options="dateOptions"
                               x-ng-required="true" close-text="Close"

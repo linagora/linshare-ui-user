@@ -7,7 +7,6 @@
     </span>
 </div>
 <div class="card col-xs-12 m-t-2em" id="content-ctn-sidebar" x-ng-style="sizeSidebarRight">
-  <working-date-picker></working-date-picker>
   <form class="form-sidebar">
     <div class="form-group col-xs-12 ">
       <label>{{"RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate}} :</label>
@@ -60,13 +59,16 @@
       <label for="notificationDate">
         {{"RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate}}:
       </label>
-
+      <!--
+        TODO: The directive shall be refactored with a proper template and passing different options. 
+              See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker 
+      -->
       <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
            x-ng-class="{'is-opened': opened2 == true}">
         <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened2 == true}">
           <div class="form-inline">
-            <input x-ng-click="mainVm.sidebar.getData().open($event, 'opened2')" type="text"
-                   class="form-control  date-picker-input" datepicker-popup="{{mainVm.sidebar.getData().format}}"
+            <input working-date-picker x-ng-click="open($event, 'opened2')" type="text"
+                   class="form-control  date-picker-input" datepicker-popup="{{format}}"
                    show-weeks="false"
                    is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
                    x-ng-required="true" close-text="Close"

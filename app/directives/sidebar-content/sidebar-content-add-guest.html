@@ -2,11 +2,10 @@
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"></i>
   <h2 class="header-more-options">{{"ADD_GUEST_SIDEBAR.TITLE" | translate}}</h2>
   <span class="hidden-xs">
-      <i class="zmdi zmdi-close zmdi-hc-lg" x-ng-click="mainVm.sidebar.hide();"></i>
+      <i class="zmdi zmdi-close zmdi-hc-lg" x-ng-click="mainVm.sidebar.hide()"></i>
   </span>
 </div>
 <div class="card col-xs-12 m-t-2em form-create-guests" id="content-ctn-sidebar">
-  <working-date-picker></working-date-picker>
   <form class="form-sidebar" name="createGuest">
     <div class="form-group fg-float m-b-30">
       <div class="fg-line"
@@ -46,20 +45,20 @@
       <label for="expirationDate">
         {{"ADD_GUEST_SIDEBAR.EXP_DATE" | translate}}
       </label>
+      <!--
+        TODO: The directive shall be refactored with a proper template and passing different options. 
+              See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker 
+      -->
       <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
-           x-ng-class="{'is-opened': mainVm.sidebar.getData().opened2 == true}">
-        <div class="fg-line datepicker-ctn"
-             x-ng-class="{'fg-toggled': mainVm.sidebar.getData().opened2 == true}">
+           x-ng-class="{'is-opened': opened2 == true}">
+        <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened2 == true}">
           <div class="form-inline clearfix">
-            <input x-ng-click="mainVm.sidebar.getData().open($event, 'opened2')" type="text"
-                   class="form-control  date-picker-input" datepicker-popup="{{mainVm.sidebar.getData().format}}"
-                   show-weeks="false"
-                   is-open="opened2" min-date="mainVm.sidebar.getData().minDate" min-date="mainVm.sidebar.getData().maxDate"
-                   datepicker-options="mainVm.sidebar.getData().dateOptions"
-                   name="expirationDate"
-                   id="expirationDate"
-                   required="true" close-text="Close"
-                   placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'medium'}}"
+            <input working-date-picker x-ng-click="open($event, 'opened2')" type="text"
+                   class="form-control date-picker-input" datepicker-popup="{{format}}"
+                   show-weeks="false" is-open="opened2" min-date="mainVm.sidebar.getData().minDate"
+                   max-date="mainVm.sidebar.getData().maxDate" datepicker-options="mainVm.sidebar.getData().dateOptions"
+                   name="expirationDate" id="expirationDate" required="true" close-text="Close"
+                   placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'fullDate'}}"
                    x-ng-model="shareActionVm.newShare.notificationDateForUSDA.value"/>
           </div>
         </div>

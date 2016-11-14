@@ -86,11 +86,11 @@ angular.module('linshare.components')
             return u;
           }
           return '<span>' + u.firstName + ' ' + u.lastName + '</span> <span >' +
-            ' <i class="zmdi zmdi-email"></i> &nbsp;'+ u.mail + '</span>';
+            ' <i class="zmdi zmdi-email"></i> &nbsp;' + u.mail + '</span>';
         };
 
         $scope.formatLabel = function(u) {
-          if (u.firstName !== '' ) {
+          if (u.firstName !== '') {
             return u.firstName.concat(' ', u.lastName);
           }
         };
@@ -135,36 +135,13 @@ angular.module('linshare.components')
               lastName: $scope.selectedRecipient.lastName,
               mail: $scope.selectedRecipient.mail
             };
-            $scope.filteredItemsList = $filter('filter')($scope.filteredItemsList, {sender: userData}, true);
+            $scope.filteredItemsList = $filter('filter')($scope.filteredItemsList, {
+              sender: userData
+            }, true);
           }
           $scope.reloadItems();
         };
       },
       templateUrl: componentsConfig.path + 'fileSearchComponent/fileSearchDirectiveTemplate.html'
-    };
-  })
-  .directive('workingDatePicker', function(componentsConfig, $translate, lsAppConfig) {
-    var FR_DATE_FORMAT = lsAppConfig.date_fr_format;
-    var EN_DATE_FORMAT = lsAppConfig.date_en_format;
-    return {
-      restrict: 'E',
-      scope: false,
-      transclude: true,
-      link: function(scope) {
-        scope.dt = new Date();
-        scope.minRange = '';
-        scope.minDate = scope.minDate ? null : new Date();
-        scope.maxDate = scope.maxDate ? null : new Date();
-        scope.open = function($event, dateStartOpened) {
-          $event.preventDefault();
-          $event.stopPropagation();
-          scope[dateStartOpened] = true;
-        };
-        scope.dateOptions = {
-          formatYear: 'yy',
-          startingDay: 1
-        };
-        scope.format = $translate.use() === 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
-      }
     };
   });
