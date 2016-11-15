@@ -6786,3 +6786,25 @@ UPLOAD QUEUE
   z-index: 4;
   padding-right: 33px;
 }
+
+.delete-file-toast.anim-toast{
+  visibility: visible;
+  height: auto;
+  overflow-y: auto;
+}
+
+.delete-file-toast{
+  visibility: hidden;
+  height: 0px;
+  transition: height 700ms ease-in-out;
+}
+
+md-toast.toast-dynamic-height .md-toast-content{
+    height: auto;
+    max-height: 500px;
+    overflow: visible;
+}
+
+.md-button.close-button {
+    min-width: 20px;
+}

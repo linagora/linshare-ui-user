@@ -5,16 +5,22 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
-  function documentController($scope, $filter, documentRestService, NgTableParams, $translate, $window, $log, documentsList, growlService, $timeout, documentUtilsService, $q, flowUploadService, flowParamsService, sharableDocumentService, lsAppConfig, $stateParams) {
+  function documentController($scope, $filter, documentRestService, NgTableParams,
+                              $translate, $window, $log, $mdToast, documentsList, growlService,
+                              $timeout, documentUtilsService, $q, flowUploadService,
+                              flowParamsService, sharableDocumentService, lsAppConfig, $stateParams) {
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
     var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
+    var swalNoDeleteElements, swalActionDelete, swalInfoErrorFile, swalClose, swalNoDeleteElements;
+    var swalCodeError404, swalCodeError403,swalCodeError400, swalCodeError500;
 
     $scope.addSelectedDocument = addSelectedDocument;
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
     $scope.closeDetailSidebar = closeDetailSidebar;
     $scope.closeSearch = closeSearch;
+    $scope.closeToastDeleteError = closeToastDeleteError;
     $scope.currentDocument = {};
     $scope.currentPage = 'my_files';
     $scope.currentSelectedDocument = {current: ''};
@@ -48,6 +54,7 @@
     $scope.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     $scope.selectedDocuments = [];
     $scope.showCurrentFile = showCurrentFile;
+    $scope.showToastDeleteError = showToastDeleteError;
     $scope.sortDropdownSetActive = sortDropdownSetActive;
     $scope.setTextInput = setTextInput;
     $scope.slideTextarea = slideTextarea;
@@ -67,13 +74,24 @@
 
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
+        'GROWL_ALERT.ACTION.DELETE', 'TOAST_ALERT.ACTION.INFO_ERROR_FILE',
+        'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED',
+        'TOAST_ALERT.WARNING.ERROR_404', 'TOAST_ALERT.WARNING.ERROR_403',
+        'TOAST_ALERT.WARNING.ERROR_400', 'TOAST_ALERT.WARNING.ERROR_500'])
         .then(function(translations) {
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+          swalActionDelete = translations['GROWL_ALERT.ACTION.DELETE'];
+          swalInfoErrorFile = translations['TOAST_ALERT.ACTION.INFO_ERROR_FILE'];
+          swalClose = translations['TOAST_ALERT.ACTION.CLOSE'];
+          swalNoDeleteElements = translations['TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED'];
+          swalCodeError404 = translations['TOAST_ALERT.WARNING.ERROR_404'];
+          swalCodeError403 = translations['TOAST_ALERT.WARNING.ERROR_403'];
+          swalCodeError400 = translations['TOAST_ALERT.WARNING.ERROR_400'];
+          swalCodeError500 = translations['TOAST_ALERT.WARNING.ERROR_500'];
         });
-
       $translate(['ACTION.COPY_TO', 'ACTION.SHARE', 'ACTION.INFORMATION',
         'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'])
         .then(function(translations) {
@@ -179,18 +197,39 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
-    function deleteCallback(items) {
-      _.forEach(items, function(restangularizedItem) {
-        $log.debug('value to delete', restangularizedItem);
-        restangularizedItem.remove().then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
-          _.remove($scope.documentsList, restangularizedItem);
-          _.remove($scope.selectedDocuments, restangularizedItem);
-          $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
-          $scope.tableParams.reload();
-          initFlagsOnSelectedPages();
-        });
+    function closeToastDeleteError() {
+      $mdToast.hide().then(function() {
       });
+    };
+
+    function deleteCallback(items) {
+      var responsesDeletion = [];
+      $q.all(sortResponseDeletion(items, responsesDeletion)).then(function(promises) {
+        if (responsesDeletion.length > 0) {
+          $scope.showToastDeleteError();
+          $scope.responses = [];
+          _.forEach(responsesDeletion, function(responseItems){
+            switch(responseItems[1].status) {
+              case 404:
+                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError404 });
+                break;
+              case 403:
+                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError403 });
+                break;
+              case 400:
+                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError400 });
+              break;
+              default:
+                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError500 });
+            }
+          });
+        } else {
+          $timeout(function() {
+            growlService.notifyTopRight("GROWL_ALERT.ACTION.DELETE", 'inverse');
+          }, 350);
+        };
+      });
+      closeToastDeleteError();
     }
 
     function deleteDocuments(items) {
@@ -397,6 +436,16 @@
       });
     }
 
+    function showToastDeleteError() {
+      $mdToast.show({
+        scope : $scope,
+        preserveScope: true,
+        hideDelay   : 0,
+        position    : 'top right',
+        templateUrl : 'modules/linshare.document/views/toast-delete-file-error.html'
+      });
+    };
+
     function slideTextarea($event) {
       var currTarget = $event.currentTarget;
       angular.element(currTarget).parent().addClass('show-full-comment');
@@ -414,6 +463,24 @@
       angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
         angular.element(currTarget).addClass('selectedSorting');
       });
+    }
+
+    function sortResponseDeletion(items, responsesDeletion) {
+      if (items) {
+        return _.map(items, function(restangularizedItem) {
+          return restangularizedItem.remove().then(function(response) {
+            _.remove($scope.documentsList, restangularizedItem);
+            _.remove($scope.selectedDocuments, restangularizedItem);
+            $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
+            $scope.tableParams.reload();
+            initFlagsOnSelectedPages();
+            return responsesDeletion;
+          }).catch(function(error){
+            responsesDeletion.push([restangularizedItem.name, error]);
+            return responsesDeletion;
+          });
+        })
+      }
     }
 
     function toggleFilterBySelectedFiles() {

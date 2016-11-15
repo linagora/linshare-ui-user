@@ -1,0 +1,14 @@
+<md-toast class="toast-dynamic-height">
+  <div x-ng-init ="details = false">
+  <span class="md-toast-text" flex>{{responses.length}} {{"TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED" | translate}}</span>
+  <md-button class="md-highlight" x-ng-click="details = !details">
+    {{"TOAST_ALERT.ACTION.INFO_ERROR_FILE" | translate}}
+  </md-button>
+  <md-button class="close-button" x-ng-click="closeToastDeleteError()">
+    <i class="zmdi zmdi-close"></i>
+  </md-button>
+    <ul class="delete-file-toast" x-ng-class="{'anim-toast' : details}" x-ng-repeat="response in responses track by $index" >
+      <li x-ng-show ="details"> {{response.name}}: {{response.messageError}}</li>
+    </ul>
+    </div>
+</md-toast>

@@ -40,5 +40,18 @@
       },
       "NO_RESPONSE_ERROR": "Error without server response, see logs."
     }
+  },
+  "TOAST_ALERT": {
+    "ACTION": {
+      "CLOSE": "Close",
+      "INFO_ERROR_FILE": "View more"
+    },
+    "WARNING": {
+      "ELEMENTS_NOT_DELETED": "element(s) haven't been deleted",
+      "ERROR_404": "Element not found",
+      "ERROR_403": "You are not authorized to delete this document",
+      "ERROR_400": "The request couldn't be achieved",
+      "ERROR_500": "Server error"
+    }
   }
 }

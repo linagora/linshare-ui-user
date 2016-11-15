@@ -40,5 +40,18 @@
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs."
     }
+  },
+  "TOAST_ALERT": {
+    "ACTION": {
+      "CLOSE": "Fermer",
+      "INFO_ERROR_FILE": "Voir plus"
+    },
+    "WARNING": {
+      "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",
+      "ERROR_404": "Élément introuvable",
+      "ERROR_403": "Vous n'êtes pas autorisé à supprimer cet élément",
+      "ERROR_400": "Suppression impossible",
+      "ERROR_500": "Erreur du serveur"
+    }
   }
 }
