@@ -1,5 +1,5 @@
 <div class="header-sidebar">
-  <i class="zmdi zmdi-chevron-left zmdi-hc-2x" 
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x"
      x-ng-click="mainVm.sidebar.getData().loadSidebarContent(lsAppConfig.share)"></i>
   <h2 class="header-more-options">{{"RIGHT_PANEL.SHARE_OPTIONS.TITLE" | translate}}</h2>
   <span class="hidden-xs">
@@ -8,7 +8,7 @@
 </div>
 <div class="card col-xs-12 m-t-2em" id="content-ctn-sidebar" x-ng-style="sizeSidebarRight">
   <form class="form-sidebar">
-    <div class="form-group col-xs-12 ">
+    <div class="form-group m-b-20">
       <label>{{"RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate}} :</label>
       <textarea class="form-control comment" x-ng-model="shareActionVm.newShare.sharingNote" rows="5"
                 placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE_PLACEHOLDER' | translate}}">
@@ -19,7 +19,7 @@
       <div class="fg-line">
         <div class="form-inline">
           <label for="secureSharing">{{"RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate}}:</label>
-          <label class="checkbox checkbox-inline m-r-20">
+          <label class="checkbox checkbox-inline m-r-0">
             <input type="checkbox" name="secureSharing" x-ng-checked="true"
                    x-ng-disabled="!shareActionVm.newShare.secured.userCanOverride"
                    x-ng-model="shareActionVm.newShare.secured.value"/>
@@ -33,7 +33,7 @@
            x-ng-class="{'is-opened': mainVm.sidebar.getData().dateStartOpened}">
         <div class="form-inline">
           <label for="SharingNotification">{{"RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate}}:</label>
-          <label class="checkbox checkbox-inline m-r-20">
+          <label class="checkbox checkbox-inline m-r-0">
             <input type="checkbox" name="SharingNotification"
                    x-ng-disabled="!shareActionVm.newShare.creationAcknowledgement.userCanOverride"
                    x-ng-model="shareActionVm.newShare.creationAcknowledgement.value"/>
@@ -46,7 +46,7 @@
       <div class="fg-line">
         <div class="form-inline">
           <label for="nonDownloadedNotification">{{"RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate}}:</label>
-          <label class="checkbox checkbox-inline m-r-20">
+          <label class="checkbox checkbox-inline m-r-0">
             <input type="checkbox" name="nonDownloadedNotification" x-ng-checked="true"
                    x-ng-disabled="!shareActionVm.newShare.enableUSDA.userCanOverride"
                    x-ng-model="shareActionVm.newShare.enableUSDA.value"/>

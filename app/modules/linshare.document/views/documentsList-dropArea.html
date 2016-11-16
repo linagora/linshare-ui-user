@@ -5,7 +5,7 @@
            placeholder="Nom de fichier" x-ng-change="updateParams()" x-ng-model="paramFilter['name']"
            aria-invalid="false">
   </div>
-  <div id="selection-actions" class="default-multi-toolbar-state multi-btns"
+  <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
        x-ng-class="{'show-multi-menu': selectedDocuments.length > 0}">
     <div class="toggle-checkbox-toolbar" x-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
       <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
@@ -70,29 +70,32 @@
             </span>
     </div>
   </div>
-  <div class="drag-and-drop-ctn reset-content-width hidden-xs">
-    <div class="drag-and-drop-content">
-      <div class="drag-icon-ctn ">
-        <div class="bordered-circle">&nbsp;</div>
-        <img src="images/upload-dnd-grey.png">
+  <div class="drag-and-drop-centered collapsible-content">
+    <div class="drag-and-drop-ctn reset-content-width hidden-xs">
+      <div class="drag-and-drop-content">
+        <div class="drag-icon-ctn ">
+          <div class="bordered-circle">&nbsp;</div>
+          <img src="images/upload-dnd-grey.png">
+        </div>
+        <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
+        <p>{{ "DRAG_DROP_BACKGROUND.COMMENT" | translate }}</p>
       </div>
-      <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-      <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
     </div>
   </div>
+  <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->
   <script type="text/ng-template" id="checkboxheader.html">
     <span x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
           role="button" tabindex="0" style="display:block" class="center">
-          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope" >
             <i class="fa fa fa-square-o checkbox-table"></i>
           </a>
-          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn x-ng-scope">
             <i class="fa fa-check-square-o"></i>
           </a>
           </span>
   </script>
   <!-- DOCUMENTS LIST  -->
-  <div class="card-body">
+  <div class="card-body collapsible-content">
     <div class="table-responsive">
       <ls-documents-table></ls-documents-table>
     </div>

@@ -1,4 +1,4 @@
-<span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
+<span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
   <ul class="actions pull-right" x-ng-class=
     "{'open-r': (mainVm.sidebar.isVisible()) &&
     ((mainVm.sidebar.getContent() === lsAppConfig.details) || (mainVm.sidebar.getContent() === lsAppConfig.shareDetails)
@@ -22,16 +22,16 @@
         <i class="zmdi zmdi-download"></i>
       </a>
     </li>
-    <li uib-dropdown dropdown-append-to-body class="dropdown  set-col-6 no-padding hidden-xs"
+    <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
         auto-close="always" hover-dropdown-fix>
       <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
-         event-propagation-stop>
+         event-propagation-stop class="set-col-12">
         <i class="zmdi zmdi-more-vert"></i>
       </a>
 
-      <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided">
+      <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
          <li>
-          <a href="" ls-share-modal event-propagation-stop>
+          <a href="" x-ng-click="onShare(documentFile)" event-propagation-stop>
             <i class="zmdi zmdi-share"></i>
             {{'ACTION.SHARE' | translate}}</a>
         </li>

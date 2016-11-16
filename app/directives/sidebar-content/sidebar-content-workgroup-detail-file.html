@@ -18,7 +18,7 @@
       <p>{{"RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate}}</p>
     </div>
   </div>
-  <div title="{{'WIP' | translate}}">
+  <div title="{{'WIP' | translate}}" class="m-b-10">
     <div class="description-ctn form-sidebar disabled">
       <div contenteditable="true" class="comment"
            x-ng-focus="mainVm.sidebar.getData().slideTextarea($event)"
@@ -29,6 +29,88 @@
         <i class="zmdi zmdi-edit"></i>
       </div>
     </div>
+  </div>
+  <!-- TODO: Set the appropriate action links -->
+  <div class="visible-xs clearfix sidebar-toolbar">
+    <ul class="actions col-xs-12">
+      <li x-ng-click="mainVm.sidebar.getData().showCurrentFile(mainVm.sidebar.getData().documentFile,$event)"
+          event-propagation-stop class="col-xs-3">
+        <a href=""  x-ng-click="deleteDocuments(documentFile)"
+           title="{{'ACTION.DELETE' | translate}}">
+          <i class="zmdi zmdi-download col-xs-2"></i>
+        </a>
+      </li>
+      <li class="col-xs-3">
+        <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
+           x-ng-click="mainVm.sidebar.getData().onShare()">
+          <i class="zmdi zmdi-delete col-xs-2"></i>
+        </a>
+      </li>
+      <li class="col-xs-3">
+        <a>
+          <i class="zmdi zmdi-arrows col-xs-2 disabled-work-in-progress"></i>
+        </a>
+      </li>
+      <li class="col-xs-3" >
+        <a class="dropdown disabled-work-in-progress">
+          <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown }"
+             x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown" uib-dropdown-toggle=""></i>
+          <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
+              uib-dropdown-menu="">
+            <li class="hidden-xs" x-ng-show="sharedSpaceListVm.selectedDocuments.length === 1"
+                x-ng-click="sharedSpaceListVm.loadSidebarContent(sharedSpaceListVm.workgroupDetailFile)">
+              <a href="" event-propagation-stop>
+                <i class="zmdi zmdi-info-outline "></i>
+                {{'ACTION.INFORMATION' | translate}}
+              </a>
+            </li>
+            <li x-ng-show="!linshareModeProduction">
+              <a href="" event-propagation-stop>
+                <i class="zmdi zmdi-star"></i>
+                {{'ACTION.FAVORITES' | translate}}
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li x-ng-if="!linshareModeProduction">
+              <a href="" event-propagation-stop>
+                <i class="zmdi zmdi-time-restore"></i>
+                {{'ACTION.VIEW_VERSIONING' | translate}}
+              </a>
+            </li>
+            <li class="divider" x-ng-if="!linshareModeProduction"></li>
+            <li x-ng-show="!linshareModeProduction">
+              <a href="" event-propagation-stop>
+                <i class="zmdi zmdi-lock"></i>
+                {{'ACTION.LOCK' | translate}}
+              </a>
+            </li>
+            <li x-ng-show="!linshareModeProduction">
+              <a href="" event-propagation-stop>
+                <i class="groups-lock-download-alt"></i>
+                {{'ACTION.EXTERNAL_EDIT' | translate}}
+              </a>
+            </li>
+            <li class="divider" x-ng-if="!linshareModeProduction" ></li>
+            <li x-ng-if="!linshareModeProduction" x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
+              <a x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0], false)">
+                <i class="zmdi zmdi-border-color"></i>
+                {{'ACTION.RENAME' | translate}}
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href=""><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}}</a>
+            </li>
+            <li x-ng-show="!linshareModeProduction">
+              <a href=""><i class="fa fa-files-o"></i>{{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}</a>
+            </li>
+            <li x-ng-show="!linshareModeProduction">
+              <a href=""><i class="zmdi zmdi-share"></i>{{'ACTION.COPY_DROPDOWN.COPY_AND_SHARE' | translate}}</a>
+            </li>
+          </ul>
+        </a>
+      </li>
+    </ul>
   </div>
   <div class="content-detail-area">
     <div class="flex-ctn detail-info-ctn">

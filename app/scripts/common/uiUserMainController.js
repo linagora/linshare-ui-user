@@ -133,20 +133,10 @@ angular.module('linshareUiUserApp')
 
       function checkAndSetNewWidth(attr) {
         var widthWindow = angular.element(window).width();
-        if (widthWindow > 1057){
+        if(widthWindow > 1093){
           $scope.mactrl.sidebarToggle.left = true;
         }else{
           $scope.mactrl.sidebarToggle.left = false;
-        }
-        if ((attr) || (widthWindow > 1057) ) {
-          var nwidthWindow = widthWindow - $rootScope.sidebarLeftWidth;
-          angular.element('.reset-content-width').width(nwidthWindow);
-          $timeout(function(){
-            angular.element('.reset-content-width').width(nwidthWindow);
-            angular.element('.drag-and-drop-content').fadeTo( 1200 ,1);
-          }, 250);
-        } else {
-          angular.element('.reset-content-width').width('100%');
         }
       }
       this.resizeDragNDropCtn = function(attr) {
@@ -154,6 +144,13 @@ angular.module('linshareUiUserApp')
       };
       if ($scope.mactrl.sidebarToggle.left){
         checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+      }
+      function checkAndSetNewTableHeight(){
+        // In order to restrict the scrolling within the table's  tbody
+        // need to be set as a directive onto the tbody elements
+        var heightWindow = angular.element(window).height();
+        var tableHeight= heightWindow - 243;
+       angular.element('#file-list-table tbody').attr('style','max-height : '+ tableHeight + 'px');
       }
       function checkAndSetNewWidthSidebarRight(){
         var widthWindow = angular.element(window).width();
@@ -169,24 +166,38 @@ angular.module('linshareUiUserApp')
         checkAndSetNewWidthSidebarRight();
         if (widthWindow > $rootScope.mobileWidthBreakpoint) {
           if (n === true) {
-            angular.element('#collapsible-content').addClass('set-width');
+            angular.element('.collapsible-content').addClass('set-width');
+            if(widthWindow >= 900 ){
+              angular.element('.collapsible-actions-toolbar').addClass('set-width');
+            }
           }
           else {
-            angular.element('#collapsible-content').removeClass('set-width');
-            angular.element('#collapsible-content').css('width', '100%');
+            angular.element('#file-list-table td .ctn-name-actions').attr('style','');
+            angular.element('.collapsible-content').removeClass('set-width');
+            angular.element('.collapsible-content').css('width', '100%');
+            if(widthWindow >= 900 ){
+              angular.element('.collapsible-actions-toolbar').removeClass('set-width');
+              angular.element('.collapsible-actions-toolbar').css('width', '100%');
+            }
           }
         }else{
-          angular.element('#collapsible-content').removeClass('set-width');
-          angular.element('#collapsible-content').css('width', '100%');
+          angular.element('.collapsible-content').removeClass('set-width');
+          angular.element('.collapsible-content').css('width', '100%');
+          if(widthWindow >= 900 ){
+            angular.element('.collapsible-actions-toolbar').removeClass('set-width');
+            angular.element('.collapsible-actions-toolbar').css('width', '100%');
+          }
         }
       });
       $scope.$on('$stateChangeSuccess', function() {
         checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
         checkAndSetNewWidthSidebarRight();
+        checkAndSetNewTableHeight();
       });
       angular.element(window).resize(function(){
         checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
         checkAndSetNewWidthSidebarRight();
+        checkAndSetNewTableHeight();
       });
       $scope.$watch(function(){
         return $window.innerWidth;
@@ -195,6 +206,15 @@ angular.module('linshareUiUserApp')
         $timeout(function(){
           checkAndSetNewWidthSidebarRight();
         }, 450);
+      });
+
+      $scope.$watch(function(){
+        return $window.innerHeight;
+      }, function() {
+        checkAndSetNewTableHeight();
+        $timeout(function(){
+          checkAndSetNewTableHeight();
+        }, 1000);
       });
 
       /**

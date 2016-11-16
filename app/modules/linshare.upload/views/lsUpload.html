@@ -13,8 +13,24 @@
       </div>
     </div>
   </div>
-  <div id="breadcrumb-wrap">
-    <section class="row multi-select visible-xs">
+  <section class="visible-xs col-xs-12 header-mobile-upload">
+    <div class="m-t-5">
+     <span x-ng-class="{'active' : uploadQueueVm.isFromMySpace , 'left-elem-toggle-inactive' :
+          !uploadQueueVm.isFromMySpace}" class="toggle-pill">
+          <a x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
+            {{"MENU_TITLE.FILES" | translate}}
+          </a>
+     </span>
+     <span x-ng-class="{'active' : !uploadQueueVm.isFromMySpace , 'right-elem-toggle-inactive' :
+           uploadQueueVm.isFromMySpace}" class="toggle-pill">
+          <a x-ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">
+            {{"MENU_TITLE.SHARED_SPACE" | translate}}
+          </a>
+     </span>
+    </div>
+  </section>
+  <div id="breadcrumb-wrap" class="clear-floats">
+    <section class="row multi-select visible-xs upload-multi-ctn">
       <div class="col-xs-2 ctn-mobile-select-count">
         <span class="number-of-files ng-binding">{{lengthOfSelectedDocuments()}}</span>
         <span class="file-multi-select-label ng-binding">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
@@ -33,8 +49,45 @@
            class="fa fa-check-square-o col-xs-3"
            x-ng-class="{'de-activate-sharing': uploadQueueVm.$flow.files.length === 0 } ">
         </i>
-        <i class="zmdi zmdi-pause col-xs-3 disabled"></i>
-        <i class="zmdi zmdi-check-all col-xs-3 disabled"></i>
+          <span class="dropdown col-xs-2 dropdown-standard pull-right" uib-dropdown="">
+        <i class="zmdi zmdi-more-vert" ng-class="{'active-link': isActiveMoreDropdown }"
+           ng-click="isActiveMoreDropdown = !isActiveMoreDropdown" uib-dropdown-toggle="">
+        </i>
+        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
+          <li x-ng-show="isflowUploadingError">
+            <a href="" event-propagation-stop x-ng-click="retryAllFiles()">
+              <i class="zmdi zmdi-undo"></i>
+              {{'SELECTION_TOOLBAR.RETRY_ALL' | translate}}
+            </a>
+          </li>
+          <li>
+            <a href="" event-propagation-stop  x-ng-click="cancelAllFiles()">
+              <i class="zmdi zmdi-close"></i>
+              {{'SELECTION_TOOLBAR.CANCEL' | translate}}
+            </a>
+          </li>
+          <li>
+            <a href="" event-propagation-stop  x-ng-click="clearAllFiles()">
+              <i class="zmdi zmdi-check-all"></i>
+              {{'SELECTION_TOOLBAR.CLEAR_ALL' | translate}}
+            </a>
+          </li>
+        </ul>
+        </span>
+        <i class="zmdi zmdi-pause col-xs-2 pull-right"
+           x-ng-class="{'de-activate-sharing': lengthOfSelectedDocuments() === 0}"
+           x-ng-show="!$flow.isPaused" x-ng-click="pauseAllFiles()">
+        </i>
+        <i class="zmdi zmdi-play col-xs-2 pull-right"
+           x-ng-class="{'de-activate-sharing': lengthOfSelectedDocuments() === 0}"
+           x-ng-click="resumeAllFiles()"  x-ng-show="$flow.isPaused">
+        </i>
+        <i class="zmdi zmdi-share col-xs-2 pull-right"
+           x-ng-if="isFromMySpace"
+           title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
+           x-ng-class="{'de-activate-sharing': lengthOfSelectedDocuments() === 0}"
+           x-ng-click="onShare(); mactrl.sidebarToggle.right = true;" role="button" tabindex="0">
+        </i>
       </div>
     </section>
     <div class="menu-popover-ctn hidden-xs" x-ng-class="!uploadQueueVm.isFromMySpace ? 'disabled-work-in-progress' : 'clickable'"
@@ -77,12 +130,12 @@
     </div>
   </div>
 
-    <div id="collapsible-content">
-      <div id="drop-area">
 
-        <div class="info-share hidden-xs">
-          <p><i class="fa fa-info"></i> {{"UPLOADED_FILES.SELECT_INFO" | translate}}</p>
-        </div>
+  <div>
+    <div id="drop-area" class="collapsible-content">
+      <div class="info-share hidden-xs">
+        <p><i class="fa fa-info"></i> {{"UPLOADED_FILES.SELECT_INFO" | translate}}</p>
+      </div>
 
         <div id="selection-actions" class="default-multi-toolbar-state hidden-xs"
              x-ng-class="{'show-multi-menu': uploadQueueVm.$flow.files.length > 0}">
@@ -146,19 +199,21 @@
             </span>
           </div>
         </div>
+      <div class="drag-and-drop-centered collapsible-content">
+          <div class="drag-and-drop-ctn reset-content-width hidden-xs">
+            <div class="drag-and-drop-content">
+              <div class="drag-icon-ctn ">
+                <div class="bordered-circle">&nbsp;</div>
+                <img src="images/upload-dnd-grey.png">
+              </div>
+              <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
 
-        <div class="drag-and-drop-ctn reset-content-width hidden-xs">
-          <div class="drag-and-drop-content">
-            <div class="drag-icon-ctn ">
-              <div class="bordered-circle">&nbsp;</div>
-              <img src="images/upload-dnd-grey.png">
+              <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
             </div>
-            <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-
-            <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
           </div>
         </div>
         <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}"></ls-upload-queue>
+
 
         <div class="partage-list">
           <button class="btn btn-default waves-effect" x-ng-repeat="n in sharingsBtn track by $index"
@@ -167,38 +222,17 @@
           </button>
         </div>
 
-        <md-fab-toolbar md-open="fab.isOpen" count="fab.count"
-                        md-direction="{{uploadQueueVm.fab.selectedDirection}}" class="visible-xs">
-          <md-fab-trigger class="align-with-text">
-            <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;" id="primary-fab-action">
-              <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
-            </md-button>
-          </md-fab-trigger>
-          <md-toolbar style="padding:0">
-            <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
-            <md-fab-actions class="md-toolbar-tools">
-              <md-button aria-label="label" class="md-icon-button" flow-btn>
-                <a>
-                  <i class="zmdi zmdi-share"></i>
-                  <span>{{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate}}</span>
-                </a>
+        <div id="fabMyFiles">
+          <md-fab-toolbar x-ng-if="uploadQueueVm.isFromMySpace" md-open="fab.isOpen" count="uploadQueueVm.fab.count" flow-btn
+                          md-direction="{{uploadQueueVm.fab.selectedDirection}}" class="visible-xs">
+            <md-fab-trigger class="align-with-text">
+              <md-button aria-label="menu" class="md-fab md-primary" id="primary-fab-action">
+                <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
               </md-button>
-              <md-button aria-label="comment" class="md-icon-button" flow-btn>
-                <a x-ng-href="{{$state.href('documents.files')}}">
-                  <i class="zmdi zmdi-file-plus"></i>
-                  <span>{{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate}}</span>
-                </a>
-              </md-button>
-              <md-button aria-label="comment" class="md-icon-button" flow-btn>
-                <a class="disabled-work-in-progress">
-                  <i class="zmdi zmdi-accounts-alt disabled-work-in-progress"></i>
-                  <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate}}</span>
-                </a>
-              </md-button>
-            </md-fab-actions>
-          </md-toolbar>
-        </md-fab-toolbar>
-
+            </md-fab-trigger>
+            <md-toolbar></md-toolbar>
+          </md-fab-toolbar>
+        </div>
       </div>
     </div>
   </div>

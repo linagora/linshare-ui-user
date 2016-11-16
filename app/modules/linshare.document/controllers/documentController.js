@@ -460,8 +460,8 @@
       $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
       $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
-      angular.element('.files .sortDropdown a ').removeClass('selectedSorting').promise().done(function() {
-        angular.element(currTarget).addClass('selectedSorting');
+      angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
+        angular.element(currTarget).addClass('selected-sorting');
       });
     }
 

@@ -149,6 +149,7 @@
   },
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Search by name",
+    "ADVANCED_SEARCH_TITLE" : "Advanced search settings",
     "FILTER_BY_SIZE": "Filter by size",
     "BY_SIZE": "Size",
     "IS_SHARED": "Shared",

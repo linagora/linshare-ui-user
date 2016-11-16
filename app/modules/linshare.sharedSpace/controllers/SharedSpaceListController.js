@@ -73,6 +73,31 @@
         angular.element('.multi-select-mobile').appendTo('body');
       });
 
+      sharedSpaceListVm.fab = {
+        isOpen: false,
+        count: 0,
+        selectedDirection: 'left'
+      };
+      $scope.$watch('fab.isOpen', function(isOpen) {
+        if (isOpen) {
+          angular.element('.md-toolbar-tools').addClass('setWhite');
+          angular.element('.multi-select-mobile').addClass('setDisabled');
+          angular.element('#overlayMobileFab').addClass('double-row-fab');
+          $timeout(function() {
+            angular.element('#overlayMobileFab').addClass('toggledMobileShowOverlay');
+            angular.element('#content-container').addClass('setDisabled');
+          }, 250);
+        } else {
+          angular.element('.md-toolbar-tools').removeClass('setWhite');
+          $timeout(function() {
+            angular.element('.multi-select-mobile').removeClass('setDisabled');
+            angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
+            angular.element('#content-container').removeClass('setDisabled');
+            angular.element('#overlayMobileFab').removeClass('double-row-fab');
+          }, 250);
+        }
+      });
+
       $translate(['ACTION.NEW_FOLDER'])
         .then(function(translations) {
           swalNewFolderName = translations['ACTION.NEW_FOLDER'];
@@ -507,8 +532,8 @@
       sharedSpaceListVm.toggleSelectedSort = !sharedSpaceListVm.toggleSelectedSort;
       sharedSpaceListVm.tableParams.sorting(sortField, sharedSpaceListVm.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
-      angular.element('.files .sortDropdown a').removeClass('selectedSorting').promise().done(function() {
-        angular.element(currTarget).addClass('selectedSorting');
+      angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
+        angular.element(currTarget).addClass('selected-sorting');
       });
     }
 

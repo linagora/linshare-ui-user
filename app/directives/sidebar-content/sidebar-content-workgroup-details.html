@@ -7,7 +7,7 @@
           <p>{{"RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate}}</p>
         </div>
       </div>
-      <div title="{{'WIP' | translate}}">
+      <div title="{{'WIP' | translate}}" class="m-b-10">
         <div class="description-ctn form-sidebar disabled">
           <div contenteditable="false" class="comment"
                x-ng-focus="mainVm.sidebar.getData().slideTextarea($event)"
@@ -20,6 +20,63 @@
           </div>
         </div>
         </div>
+      <!-- TODO: Set the appropriate action links -->
+      <div class="visible-xs clearfix sidebar-toolbar">
+          <ul class="actions col-xs-12">
+            <li class="col-xs-3">
+              <a x-ng-click="">
+                <i class="groups-add-member col-xs-2"></i>
+              </a>
+            </li>
+            <li class="col-xs-3">
+              <a href=""  x-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"
+                 title="{{'ACTION.DELETE' | translate}}">
+                <i class="zmdi zmdi-delete col-xs-2" ></i>
+              </a>
+            </li>
+            <li class="col-xs-3">
+              <a>
+                <i class="fa fa-bell-slash-o col-xs-2 disabled-work-in-progress"></i>
+              </a>
+            </li>
+            <li class="col-xs-3" >
+              <a dropdown-toggle class="disabled-work-in-progress dropdown col-xs-2 dropdown-standard"
+                 uib-dropdown="">
+                <i class="zmdi zmdi-more-vert" ng-class="{'active-link': isActiveMoreDropdown }"
+                   x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
+                   uib-dropdown-toggle=""></i>
+                <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
+                  <li>
+                    <a href="" event-propagation-stop>
+                      <i class="zmdi zmdi-star"></i>
+                      {{'ACTION.FAVORITES' | translate}}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" event-propagation-stop>
+                      <i class="fa fa-bell-slash-o"></i>
+                      {{'ACTION.SILENCE' | translate}}
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="" event-propagation-stop>
+                      <i class="zmdi zmdi-arrows"></i>
+                      {{'ACTION.MOVE' | translate}}
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="hidden-xs">
+                    <a href="" event-propagation-stop>
+                      <i class="fa fa-recycle" aria-hidden="true"></i>
+                      {{'ACTION.GO_TO_TRASH' | translate}}
+                    </a>
+                  </li>
+                </ul>
+              </a>
+            </li>
+          </ul>
+        </div>
       <div class="content-detail-area">
         <div class="flex-ctn detail-info-ctn">
           <div class="item-l">
@@ -30,10 +87,12 @@
           <div class="item-mid">
             <div class="name">{{'UNKNOWN_USER' | translate}}</div>
             <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
-                        <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                          {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date: mainVm.sidebar.getData().lsFormat()}}
-                        </span>
+                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
+                 date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+                 <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}}
+                   : {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
+                   date: mainVm.sidebar.getData().lsFormat()}}
+                 </span>
             </div>
           </div>
           <div class="item-r actions">
@@ -56,8 +115,10 @@
                 {{'INFORMATION_TAB.CREATED_THE' | translate}}:
               </p>
               <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
-                {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date : mainVm.sidebar.getData().lsFormat()}}
+                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate |
+                 date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate |
+                date : mainVm.sidebar.getData().lsFormat()}}
               </p>
             </div>
             <div>

@@ -1,4 +1,5 @@
-<table id="file-list-table" class="table table-vmiddle" x-ng-table="tableParams" show-filter="true">
+<!-- TODO: Add the class p-t-10 if the function  toggleSearchState() has been activated -->
+<table id="file-list-table" class="table table-vmiddle" data-ng-table="tableParams" show-filter="true">
   <tr x-ng-repeat="documentFile in $data"
       ls-item-selection=""
       data-selected-documents="selectedDocuments"
@@ -12,17 +13,36 @@
       class="p-b-5"
       context-menu="moreOptionsContexualMenu"
       new-upload-anim>
+
     <td data-header="'checkboxheader.html'"
         class="center set-content-left thumb-type-item thumb-groups-preview-ls"
         header-class="'col-2'">
-      <a x-ng-click="addSelectedDocument(documentFile)">
-        <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
-        <div class="checkbox-ctn-thumb" x-ng-class="{'maintain-vis': documentFile.isSelected}"></div>
+      <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile cf scripts/common/MainController-->
+      <!--TODO: does not display even if the showCheckboxes has been changed to true  -->
+      <!--ligne 249 : y buena suerte-->
+      <a x-ng-click="showCheckboxes ? addSelectedDocument(documentFile) : null" class="visible-xs">
+        <div x-ng-class="{ 'invisible' : showCheckboxes}">
+          <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+        </div>
+        <div class="checkbox-ctn-thumb"
+             x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
+        </div>
+      </a>
+      <a x-ng-click="addSelectedDocument(documentFile)" class="hidden-xs">
+        <div x-ng-class="{ 'invisible' : showCheckboxes}">
+          <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+        </div>
+        <div class="checkbox-ctn-thumb"
+             x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
+        </div>
       </a>
     </td>
+
     <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
-        data-sortable="'name'" uuid={{o.uuid}}>
+        data-sortable="'name'" uuid={{o.uuid}} header-class="'flexible-table-col'">
       <div class="ctn-name-actions">
+        <!-- TODO: on a mobile , Default action should redirect toward the detail sidebar of the current
+         document -->
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
           {{documentFile.name}}
           <span>
@@ -41,11 +61,14 @@
       </div>
     </td>
     <td class="hidden-xs"
-        ng-if="!mainVm.sidebar.isVisible()"
+        x-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+        header-class="'hide-if-toggled-sidebar'"
         data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
       {{documentFile.modificationDate | relativeTime}}
     </td>
-    <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
+    <td class="hidden-xs"
+        ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+        header-class="'hide-if-toggled-sidebar'"
         data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
       {{documentFile.size | readableSize: false}}
     </td>

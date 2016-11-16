@@ -4,7 +4,7 @@
       <div class="lv-header-alt clearfix display-none">
         <h2 class="lvh-label"><b>{{'HEADER.FILES_TO_SHARE' | translate}}</b></h2>
       </div>
-      <div class="lv-body ng-table" id="file-list-table">
+      <div class="lv-body ng-table p-b-60" id="file-list-table">
         <div class="media-body" x-ng-repeat="file in uploadQueueVm.$flow.files | orderBy: '-' | filter: {_from: fromWhere}"
              x-ng-class="{'highlight-list-elem': file.isSelected }"
              data-uid-flow="{{file.uniqueIdentifier}}" x-ng-if="!file.hideOnIsolate">
@@ -37,7 +37,7 @@
                   <progressbar max="100" value="file.progress()*100"></progressbar>
                 </div>
               </div>
-              <div class="col-xs-6 col-sm-1 pull-left">
+              <div class="col-xs-6 col-sm-1 pull-left actions-ctn">
                 <ul class="lv-actions actions align-list-icons ">
                   <li class="col-xs-6" x-ng-if="!file.paused" x-ng-hide="file.isComplete()">
                     <a href="" x-ng-click="file.pause()" event-propagation-stop>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="col-xs-2 visible-xs">
-            <ul class="lv-actions actions align-list-icons " x-ng-click="showBtnList($event)" event-propagation-stop>
+            <ul class="lv-actions actions align-list-icons " x-ng-click="uploadQueueVm.showBtnList($event)" event-propagation-stop>
               <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
             </ul>
           </div>

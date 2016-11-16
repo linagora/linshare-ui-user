@@ -1,6 +1,6 @@
 <div  class="file-listing-ctn" x-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}">
 <div class="container files">
-  <div class="card" id="collapsible-content">
+  <div class="card">
     <div class="card-header">
       <div id="breadcrumb-wrap">
         <div class="breadcrumbs-ctn hidden-xs">
@@ -11,28 +11,29 @@
         </div>
         <div id="action-header">
           <div class="fg-line toolbar-actions-items">
-            <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" x-ng-click="toggleSearchState()">
+            <!-- TODO: If the button id clicked for the second time (disabled) then the selected items should be deselected cf resetSelectedDocuments() -->
+            <!-- TODO: DOES NOT WORK : the variable showcheckboxes should set the visibility of the checkboxers to toggle
+             cf document list first td -->
+            <span x-ng-click="showCheckboxes = !showCheckboxes"
+                  class="visible-xs toolbar-mobile-item col-xs-3" >
+               <a  class="select-all-items plain-txt-btn">
+                 <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes }"></i>
+               </a>
+            </span>
+            <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
               <a href="">
                 <i class="tm-icon zmdi zmdi-search" x-ng-class="{'active-link': searchMobileDropdown}"></i>
               </a>
             </div>
-              <span x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
-                    class="visible-xs toolbar-mobile-item col-xs-3" >
-              <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
-                <i class="fa fa-square-o"></i>
-              </a>
-              <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
-                <i class="fa fa-check-square-o activeLink" ></i>
-              </a>
-              </span>
             <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
-              <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
+              <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
+                   auto-close="always" hover-dropdown-fix>
                 <div class="actions">
-                  <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
-                     x-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false" >
+                  <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                     <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                   </a>
-                  <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                  <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown stop-propagate"
+                      uib-dropdown-menu="">
                     <li role="menuitem">
                       <a href="" class="center">
                         {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
@@ -40,7 +41,7 @@
                     </li>
                     <li class="divided"></li>
                     <li role="menuitem">
-                      <a href="" class="ng-binding" x-ng-click="sort-dropdownSetActive('name', $event)">
+                      <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('name', $event)">
                         <span class="caret-area">
                           <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -50,7 +51,7 @@
                     </li>
                     <li role="menuitem">
                       <a href="" class="ng-binding selected-sorting"
-                         x-ng-click="sort-dropdownSetActive('modificationDate', $event)">
+                         x-ng-click="sortDropdownSetActive('modificationDate', $event)">
                         <span class="caret-area">
                           <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -59,7 +60,7 @@
                       </a>
                     </li>
                     <li role="menuitem">
-                      <a href="" class="ng-binding" x-ng-click="sort-dropdownSetActive('creationDate', $event)">
+                      <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('creationDate', $event)">
                         <span class="caret-area">
                           <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -68,7 +69,7 @@
                       </a>
                     </li>
                     <li role="menuitem">
-                      <a href="" class="ng-binding" x-ng-click="sort-dropdownSetActive('size', $event)">
+                      <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('size', $event)">
                         <span class="caret-area">
                           <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
@@ -97,27 +98,36 @@
                   </div>
                 </div>
               </div>
-              <span class="input-group-addon last clickable"
-                      x-ng-click="advancedFilterBool = !advancedFilterBool"
-                      data-toggle="tooltip"
-                      title=""
-                      data-placement="right"
-                      data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate}}"
-                      slide-toggle="#searchFilterCtn">
-                      <i class="zmdi hidden-xs clickable" x-ng-class="{'zmdi-chevron-down': !advancedFilterBool,
-                       'zmdi-chevron-up': advancedFilterBool}">
-                     </i>
-              </span>
+            <span class="input-group-addon last clickable dropdown dropdown-standard"
+                  x-ng-click="advancedFilterBool = !advancedFilterBool"
+                  data-toggle="tooltip"
+                  popover-animation ="fade"
+                  title=""
+                  data-placement="right"
+                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+                  uib-popover-template="'advanced-search.html'"
+                  popover-placement="bottom"
+                  popover-append-to-body='true'
+                  popover-trigger="click"
+                  popover-class="popover-search-field">
+                <i class="zmdi hidden-xs clickable"
+                   x-ng-class="{'zmdi-settings': !advancedFilterBool, 'zmdi-chevron-up active-link': advancedFilterBool}">
+                </i>
+            </span>
           </div>
         </div>
       </div>
 
       <!-- FILTER COMPONENT  -->
-      <filtering-component class="" ls-size="true" ls-date="true" ls-email="true"
-                           filtered-items-list="documentsList"
-                           initial-items-list="documentsListCopy"
-                           reload-items="tableParams.reload">
-      </filtering-component>
+      <script type="text/ng-template" id="advanced-search.html">
+        <div id="search-filter-popover-ctn">
+          <filtering-component class="" ls-size="true" ls-date="true" ls-email="true"
+                               filtered-items-list="documentsList"
+                               initial-items-list="documentsListCopy"
+                               reload-items="tableParams.reload">
+          </filtering-component>
+        </div>
+      </script>
       <div class="clearfix"></div>
     </div>
 
@@ -128,7 +138,7 @@
                placeholder="Nom de fichier" x-ng-change="updateParams()" x-ng-model="paramFilter['name']"
                aria-invalid="false">
       </div>
-      <div id="selection-actions" class="default-multi-toolbar-state"
+      <div id="selection-actions" class="default-multi-toolbar-state collapsible-actions-toolbar"
            x-ng-class="{'show-multi-menu': selectedDocuments.length > 0}">
         <div class="toggle-checkbox-toolbar" x-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
           <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope" >
@@ -181,9 +191,10 @@
               <i class="fa fa-trash-o"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
             </a>
           </span>
-          <span class="dropdown link-dropdown" dropdown x-ng-show="linshareModeProduction == false">
+          <span class="dropdown link-dropdown" uib-dropdown x-ng-show="linshareModeProduction == false">
                 <a class="plain-text-button share-link"
-                   dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+                   uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}"
+                   event-propagation-stop>
                   <i class="zmdi zmdi-more-vert"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
                 </a>
@@ -205,31 +216,20 @@
           </span>
         </div>
       </div>
-      <div class="drag-and-drop-ctn reset-content-width hidden-xs">
-        <div class="drag-and-drop-content">
-          <div class="drag-icon-ctn ">
-            <div class="bordered-circle">&nbsp;</div>
-            <img src="images/upload-dnd-grey.png">
-          </div>
-          <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-          <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
-        </div>
-      </div>
-
+      <!-- TODO: does not work, please repair it : it needs to select all the list items -->
       <script type="text/ng-template" id="checkboxheader.html">
         <span x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
               role="button" tabindex="0" style="display:block" class="center">
-          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope" >
+          <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn" >
             <i class="fa fa fa-square-o checkbox-table"></i>
           </a>
-          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+          <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn">
             <i class="fa fa-check-square-o"></i>
           </a>
           </span>
       </script>
-
       <!-- DOCUMENTS LIST  -->
-      <div class="card-body">
+      <div class="card-body collapsible-content">
 
         <div class="table-responsive">
           <table id="file-list-table" class="table table-vmiddle" x-ng-table="tableParams" show-filter="true">
@@ -249,16 +249,27 @@
               <td data-header="'checkboxheader.html'"
                   class="center set-content-left thumb-type-item thumb-groups-preview-ls"
                   header-class="'col-2'">
-                <a class=""  x-ng-click="addSelectedDocument(documentFile)">
-                  <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+                <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile cf scripts/common/MainController-->
+                <!--ligne 249 : y buena suerte-->
+                <a x-ng-click="showCheckboxes ? addSelectedDocument(documentFile) : null" class="visible-xs">
+                  <div x-ng-class="{ 'invisible' : showCheckboxes}">
+                    <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+                  </div>
                   <div class="checkbox-ctn-thumb"
-                       x-ng-class="{'maintain-vis': documentFile.isSelected}">
+                       x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
+                  </div>
+                </a>
+                <a x-ng-click="addSelectedDocument(documentFile)" class="hidden-xs">
+                  <div x-ng-class="{ 'invisible' : showCheckboxes}">
+                    <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+                  </div>
+                  <div class="checkbox-ctn-thumb"
+                       x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
                   </div>
                 </a>
               </td>
-
               <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
-                  data-sortable="'name'" uuid={{o.uuid}}>
+                  data-sortable="'name'" uuid={{o.uuid}} header-class="'flexible-table-col'">
                 <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       {{documentFile.name}}
@@ -274,8 +285,7 @@
                     <div class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right" x-ng-class=
                         "{'open-r': (mainVm.sidebar.isVisible()) && (mainVm.sidebar.getContent() === lsAppConfig.details)}">
-                        <li x-ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop
-                            class="hidden-action-links">
+                        <li x-ng-click="showCurrentFile(documentFile,$event)" class="hidden-action-links">
                           <a href=""
                              title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
                             <i class="zmdi zmdi-info-outline"></i>
@@ -293,10 +303,10 @@
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
-                        <li  uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding hidden-xs"
+                        <li  uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                              auto-close="always" hover-dropdown-fix>
                           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
-                             event-propagation-stop >
+                             >
                             <i class="zmdi zmdi-more-vert"></i>
                           </a>
                           <ul
@@ -351,19 +361,21 @@
                 </div>
               </td>
 
-              <td class="hidden-xs"
-                  ng-if="!mainVm.sidebar.isVisible()"
-                  data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
+              <td class="hidden-xs hide-if-toggled-sidebar"
+                  ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+                  header-class="'hide-if-toggled-sidebar'"
+                  data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'"
+                  data-ng-animate="0">
                 {{documentFile.modificationDate | relativeTime}}
               </td>
 
-              <td class="hidden-xs"
-                  ng-if="!mainVm.sidebar.isVisible()"
-                  data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
+              <td class="hidden-xs hide-if-toggled-sidebar"
+                  ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+                  header-class="'hide-if-toggled-sidebar'"
+                  data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"*
+                  data-ng-animate="0">
                 {{documentFile.size | readableSize: false}}
               </td>
-
-
             </tr>
           </table>
         </div>
@@ -379,48 +391,23 @@
       <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
     </div>
     <div class="col-xs-8">
-      <i class="zmdi zmdi-copy col-xs-3"  x-ng-click="copyIntoFiles(selectedDocuments)"></i>
-      <i class="zmdi zmdi-delete col-xs-3" x-ng-click="deleteDocuments(selectedDocuments)"></i>
-      <i class="zmdi zmdi-download col-xs-3 disabled-work-in-progress"></i>
-      <i class="zmdi zmdi-swap col-xs-3 disabled-work-in-progress"></i>
+      <div x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+           class="visible-xs toolbar-mobile-item col-xs-3">
+        <i class="fa fa-check-square-o select-all-items p-r-10"
+           x-ng-if="!flagsOnSelectedPages[tableParams.page()]">
+        </i>
+        <i class="fa fa-square-o select-all-items p-r-10"
+           x-ng-if="flagsOnSelectedPages[tableParams.page()]">
+        </i>
+      </div>
+      <i class="zmdi zmdi-copy col-xs-2"  x-ng-click="copyIntoFiles(selectedDocuments)"></i>
+      <i class="zmdi zmdi-delete col-xs-2" x-ng-click="deleteDocuments(selectedDocuments)"></i>
+      <i class="zmdi zmdi-download col-xs-2 disabled-work-in-progress"></i>
+      <i class="zmdi zmdi-swap col-xs-2 disabled-work-in-progress"></i>
     </div>
-    <div class="col-xs-1 pull-right" x-ng-click="resetSelectedDocuments()">
+    <div class="col-xs-2 pull-right" x-ng-click="resetSelectedDocuments()">
       <i class="zmdi zmdi zmdi-close"></i>
     </div>
   </section>
-
-  <div id="fabMyFiles">
-    <md-fab-toolbar  md-open="fab.isOpen" count="fab.count"
-                     md-direction="{{fab.selectedDirection}}" class="visible-xs">
-      <md-fab-trigger class="align-with-text">
-        <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;" id="primary-fab-action">
-          <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
-        </md-button>
-      </md-fab-trigger>
-      <md-toolbar style="padding:0">
-        <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
-        <md-fab-actions class="md-toolbar-tools">
-          <md-button aria-label="label" class="md-icon-button" flow-btn>
-            <a href="#/files/upload" ui-sref="documents.upload">
-              <i class="zmdi zmdi-share"></i>
-              <span>{{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn>
-            <a href="#/files/list" ui-sref="documents.files">
-              <i class="zmdi zmdi-file-plus"></i>
-              <span>{{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn>
-            <a href="#/files/list" ui-sref="documents.files" class="disabled-work-in-progress">
-              <i class="zmdi zmdi-accounts-alt disabled-work-in-progress"></i>
-              <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_IN_GROUP' | translate}}</span>
-            </a>
-          </md-button>
-        </md-fab-actions>
-      </md-toolbar>
-    </md-fab-toolbar>
-  </div>
 </div>
 </div>

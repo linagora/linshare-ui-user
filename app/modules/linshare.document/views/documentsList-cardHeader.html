@@ -32,28 +32,29 @@
     </div>
     <div id="action-header">
       <div class="fg-line toolbar-actions-items">
+         <!-- TODO: If the button id clicked for the second time (disabled) then the selected items should be deselected cf resetSelectedDocuments() -->
+         <!-- TODO: DOES NOT WORK : the variable showcheckboxes should set the visibility of the checkboxes located within the first td elements
+          cf checkboxheader - within the mobile view -->
+         <span x-ng-click="showCheckboxes = !showCheckboxes"
+              class="visible-xs toolbar-mobile-item col-xs-3" >
+               <a  class="select-all-items plain-txt-btn">
+                 <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes }"></i>
+               </a>
+         </span>
         <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" x-ng-click="toggleSearchState()">
           <a href="">
-            <i class="tm-icon zmdi zmdi-search" x-ng-class="{'activeLink': searchMobileDropdown}"></i>
+            <i class="tm-icon zmdi zmdi-search" x-ng-class="{'active-link': searchMobileDropdown}"></i>
           </a>
         </div>
-        <span x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
-              class="visible-xs toolbar-mobile-item col-xs-3">
-              <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
-                <i class="fa fa-square-o"></i>
-              </a>
-              <a x-ng-if="flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button">
-                <i class="fa fa-check-square-o activeLink"></i>
-              </a>
-              </span>
         <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
-          <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
+          <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body
+               hover-dropdown-fix>
             <div class="actions">
-              <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
-                 x-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
+              <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                 <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
               </a>
-              <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+              <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown stop-propagate"
+                  uib-dropdown-menu="">
                 <li role="menuitem">
                   <a href="" class="center">
                     {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
@@ -61,9 +62,9 @@
                 </li>
                 <li class="divided"></li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding selectedSorting"
-                     x-ng-click="sortDropdownSetActive('modificationDate', $event)">
-                      <span class="caretArea">
+                  <a href="" class="ng-binding selected-sorting"
+                     ng-click="sortDropdownSetActive('modificationDate', $event)">
+                      <span class="caret-area">
                       <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                       <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                       </span>
@@ -72,25 +73,24 @@
                 </li>
                 <li role="menuitem">
                   <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('creationDate', $event)">
-                          <span class="caretArea">
-                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <span class="caret-area">
+                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
                     {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
                   </a>
                 </li>
-                <li role="menuitem">
-                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('size', $event)">
-                          <span class="caretArea">
-                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                <li role="menuitem"> <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('size', $event)">
+                          <span class="caret-area">
+                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
                     {{'FILTER_COMPONENT.BY_SIZE' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('name', $event)">
-                          <span class="caretArea">
+                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('name', $event)">
+                          <span class="caret-area">
                           <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
@@ -98,8 +98,8 @@
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('shared', $event)">
-                          <span class="caretArea">
+                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('shared', $event)">
+                          <span class="caret-area">
                           <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
@@ -126,25 +126,34 @@
             </div>
           </div>
         </div>
-        <span class="input-group-addon last clickable"
+        <span class="input-group-addon last clickable dropdown dropdown-standard"
               x-ng-click="advancedFilterBool = !advancedFilterBool"
               data-toggle="tooltip"
+              popover-animation ="fade"
               title=""
               data-placement="right"
-              data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate}}"
-              slide-toggle="#searchFilterCtn">
+              data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
+              uib-popover-template="'advanced-search.html'"
+              popover-placement="bottom"
+              popover-append-to-body='true'
+              popover-trigger="click"
+              popover-class="popover-search-field">
                 <i class="zmdi hidden-xs clickable"
-                   x-ng-class="{'zmdi-chevron-down': !advancedFilterBool, 'zmdi-chevron-up': advancedFilterBool}">
+                   x-ng-class="{'zmdi-settings': !advancedFilterBool, 'zmdi-chevron-up active-link': advancedFilterBool}">
                 </i>
-              </span>
+         </span>
       </div>
     </div>
   </div>
   <!-- FILTER COMPONENT  -->
-  <filtering-component class="" ls-size="true" ls-date="true"
-                       filtered-items-list="$parent.documentsList"
-                       initial-items-list="$parent.documentsListCopy"
-                       reload-items="$parent.tableParams.reload">
-  </filtering-component>
+  <script type="text/ng-template" id="advanced-search.html">
+    <div id="search-filter-popover-ctn">
+      <filtering-component class="" ls-size="true" ls-date="true"
+                           filtered-items-list="$parent.documentsList"
+                           initial-items-list="$parent.documentsListCopy"
+                           reload-items="$parent.tableParams.reload">
+      </filtering-component>
+    </div>
+  </script>
   <div class="clearfix"></div>
 </div>

@@ -2,7 +2,7 @@
   <div class="container files guest-list">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
-    <div class="card" id="collapsible-content">
+    <div class="card" >
       <div class="card-header">
         <div id="breadcrumb-wrap">
           <div class="menu-popover-ctn hidden-xs clickable">
@@ -187,7 +187,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <div id="drop-area" x-ng-init ="searchMobileDropdown = false;" x-ng-class="{'search-toggled': searchMobileDropdown}">
+      <div id="drop-area" class="collapsible-content" x-ng-init ="searchMobileDropdown = false;" x-ng-class="{'search-toggled': searchMobileDropdown}">
         <div id="top-search-wrap">
           <i id="top-search-close"  x-ng-click="searchMobileDropdown = !searchMobileDropdown">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
@@ -490,26 +490,24 @@
          x-ng-class="{'showMobileMultiMenu': guestVm.selectedDocuments.length > 0}"
          x-ng-show="guestVm.currentPage == 'my_guests'">
   <div class="col-xs-2 ctn-mobile-select-count">
-    <span class="numberOfiles">{{guestVm.selectedDocuments.length}}</span>
+    <span class="number-of-files">{{guestVm.selectedDocuments.length}}</span>
     <span class="file-multi-select-label">{{'BOUTON_LABEL_TITLE.GUEST' | translate}}</span>
   </div>
-  <div class="col-xs-9">
-    <span x-ng-click="guestVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
-          class="visible-xs toolbar-mobile-item col-xs-2" >
-      <i class="fa fa-check-square-o select-all-items plain-txt-btn"
-         x-ng-if="!flagsOnSelectedPages[tableParams.page()]">
+  <div class="col-xs-8">
+    <div x-ng-click="guestVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+          class="visible-xs toolbar-mobile-item col-xs-3" >
+      <i class="fa fa-check-square-o select-all-items p-r-10" x-ng-if="!flagsOnSelectedPages[tableParams.page()]">
       </i>
-      <i class="fa fa-square-o active-link select-all-items plain-txt-btn"
+      <i class="fa fa-square-o select-all-items p-r-10"
          x-ng-if="flagsOnSelectedPages[tableParams.page()]">
       </i>
-    </span>
+    </div>
     <i class="zmdi zmdi-edit col-xs-2" x-ng-class="{'disabled-work-in-progress': guestVm.selectedDocuments.length > 1}"></i>
     <i class="zmdi zmdi-delete col-xs-2"></i>
     <i class="zmdi zmdi-info-outline col-xs-2" x-ng-class="{'disabled-work-in-progress': guestVm.selectedDocuments.length > 1}"></i>
-    <span class="dropdown col-xs-2" uib-dropdown="" x-ng-show="linshareModeProduction == false">
-    <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown}"
-       x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
-       dropdown-toggle uib-dropdown-toggle=""></i>
+    <span class="dropdown col-xs-2 dropdown-standard" uib-dropdown="" x-ng-show="linshareModeProduction == false">
+    <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown }"
+       x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown" uib-dropdown-toggle=""></i>
     <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
         uib-dropdown-menu="">
       <li>
@@ -535,7 +533,7 @@
     </ul>
     </span>
   </div>
-  <div class="col-xs-1 pull-right" x-ng-click="guestVm.resetSelectedDocuments()">
+  <div class="col-xs-2 pull-right" x-ng-click="guestVm.resetSelectedDocuments()">
     <i class="zmdi zmdi zmdi-close"></i>
   </div>
 </section>

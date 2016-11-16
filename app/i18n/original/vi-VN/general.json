@@ -136,6 +136,7 @@
   },
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Tên tập tin",
+    "TBT__ADVANCED_SEARCH_TITLE" : "",
     "FILTER_BY_SIZE": "Lọc bằng kích cỡ",
     "TBT__BY_SIZE": "",
     "TBT__ORDER_BY_NAME": "",

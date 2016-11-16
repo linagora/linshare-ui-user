@@ -256,7 +256,7 @@ angular.module('linshare.receivedShare')
         $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
         $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
         var currTarget = $event.currentTarget;
-        angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
+        angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
           angular.element(currTarget).addClass('selected-sorting');
         });
       };
@@ -461,7 +461,7 @@ angular.module('linshare.receivedShare')
         $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
         $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
         var currTarget = $event.currentTarget;
-        angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
+        angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
           angular.element(currTarget).addClass('selected-sorting');
         });
       };
@@ -555,43 +555,6 @@ angular.module('linshare.receivedShare')
           });
 
         };
-      }
-    };
-  })
-
-  // ===========================================================================
-  // SLIDETOGGLE
-  // ===========================================================================
-  .directive('slideToggle', function() {
-    return {
-      restrict: 'A',
-      link: function(scope, element, attrs) {
-        attrs.expanded = false;
-        element.bind('click', function() {
-          var innerHeightInnerCtn = $('.slideable_content').innerHeight();
-          if (!attrs.expanded) {
-            var y = innerHeightInnerCtn;
-            var initClicked = $('#searchFilterCtn').attr('style');
-
-            var heightRestStyle = initClicked.replace('0px', y + 'px');
-            var heightAndOverflow = heightRestStyle.replace('hidden', 'initial');
-            $('#searchFilterCtn').attr('style', heightRestStyle).delay(750).promise().done(function() {
-              $('#searchFilterCtn').attr('style', heightAndOverflow);
-            });
-
-          } else {
-            innerHeightInnerCtn = $('.slideable_content').innerHeight();
-            var yy = innerHeightInnerCtn;
-            var stateExpandedStyle = angular.element('#searchFilterCtn').attr('style');
-            var resetOverflowStyle = stateExpandedStyle.replace('initial', 'hidden');
-            var resetHeightStyle = resetOverflowStyle.replace('' + yy + 'px', '0px');
-
-            $('#searchFilterCtn').attr('style', resetOverflowStyle).delay(10).promise().done(function() {
-              $('#searchFilterCtn').attr('style', resetHeightStyle);
-            });
-          }
-          attrs.expanded = !attrs.expanded;
-        });
       }
     };
   });

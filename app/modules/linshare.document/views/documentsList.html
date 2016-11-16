@@ -17,7 +17,7 @@
   <div class="container files">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
-    <div class="card" id="collapsible-content">
+    <div class="card">
       <div x-ng-include src="'modules/linshare.document/views/documentsList-cardHeader.html'"></div>
       <div x-ng-include src="'modules/linshare.document/views/documentsList-dropArea.html'"></div>
     </div>
@@ -32,12 +32,21 @@
     <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
   </div>
   <div class="col-xs-8">
-    <i class="zmdi zmdi-share col-xs-3" x-ng-click="onShare()"></i>
-    <i class="zmdi zmdi-delete col-xs-3" x-ng-click="deleteDocuments(selectedDocuments)"></i>
-    <i class="zmdi zmdi-download col-xs-3 disabled-work-in-progress"></i>
-    <i class="zmdi zmdi-copy col-xs-3 disabled-work-in-progress"></i>
+    <div x-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())"
+             class="visible-xs toolbar-mobile-item col-xs-3" >
+      <i class="fa fa-check-square-o select-all-items p-r-10"
+         x-ng-if="!flagsOnSelectedPages[tableParams.page()]">
+      </i>
+      <i class="fa fa-square-o select-all-items p-r-10"
+         x-ng-if="flagsOnSelectedPages[tableParams.page()]">
+      </i>
+    </div>
+    <i class="zmdi zmdi-share col-xs-2" x-ng-click="onShare()"></i>
+    <i class="zmdi zmdi-delete col-xs-2" x-ng-click="deleteDocuments(selectedDocuments)"></i>
+    <i class="zmdi zmdi-download col-xs-2 disabled-work-in-progress"></i>
+    <i class="zmdi zmdi-copy col-xs-2 disabled-work-in-progress"></i>
   </div>
-  <div class="col-xs-1 pull-right" x-ng-click="resetSelectedDocuments()">
-    <i class="zmdi zmdi zmdi-close"></i>
+  <div class="col-xs-2 pull-right">
+    <i class="zmdi zmdi zmdi-close" x-ng-click="resetSelectedDocuments()"></i>
   </div>
 </section>

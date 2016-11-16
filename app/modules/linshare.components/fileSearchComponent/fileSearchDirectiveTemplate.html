@@ -19,18 +19,19 @@
   </div>
 </div>
 
-<div id="searchFilterCtn" class="slideable" duration="750ms" easing="cubic-bezier(.02, .01, .47, 1);">
-  <div class="hidden-xs row fix-margin-row col-md-12 m-t-30 formsearch" style="float:none;">
+<div id="searchFilterCtn">
+  <h2><i class="zmdi zmdi-settings m-r-10"></i>{{'FILTER_COMPONENT.ADVANCED_SEARCH_TITLE' | translate }}</h2>
+  <div class="hidden-xs row fix-margin-row col-md-12 m-t-10 formsearch" style="float:none;">
 
-    <div x-ng-show="activatedField.size == 'true'">
-      <label>{{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate}}</label>
+    <div x-ng-if="activatedField.size == 'true'" class="clearfix">
+      <label class="title-label">{{'FILTER_COMPONENT.FILTER_BY_SIZE' | translate }}</label>
 
       <div class="clearfix"></div>
 
       <!--SIZE START -->
-      <div class="col-sm-3">
+      <div class="col-sm-3 p-l-0">
         <div class="input-group">
-            <span class="input-group-addon">
+            <span class="input-group-addon icon-size-fix">
               <i class="zmdi zmdi-trending-down" x-ng-class="{disabledIcon: !showUnit}"></i>
             </span>
 
@@ -86,34 +87,26 @@
 
       <!--CHECKBOX INIT-->
       <div class="col-sm-1">
-        <div class="input-group">
-          <div class="fg-line">
-            <span class="input-group-addon middle"><i class="md md-today"></i></span>
-
-            <div class="form-inline">
-              <label class="checkbox checkbox-inline m-r-20">
-                <input type="checkbox" x-ng-checked="true" name="check"
-                       x-ng-checked="showUnit"
-                       x-ng-model="showUnit">
-                <i class="input-helper"></i>
-              </label>
-            </div>
-          </div>
-        </div>
+        <label class="checkbox checkbox-inline">
+          <input type="checkbox" x-ng-checked="true" name="check"
+                 x-ng-checked="showUnit"
+                 x-ng-model="showUnit">
+          <i class="input-helper"></i>
+        </label>
       </div>
     </div>
 
     <!--DATE TYPE -->
-    <div x-ng-show="activatedField.date == 'true'">
-      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_DATE.HEADER' | translate}}</label>
+    <div x-ng-if="activatedField.date == 'true'" class="clearfix">
+      <label class="title-label">{{'FILTER_COMPONENT.FILTER_BY_DATE.HEADER' | translate }}</label>
 
       <div class="clearfix"></div>
 
       <!--TAG SELECT DATE -->
       <div x-ng-init="showDateRange=true">
-        <div class="col-sm-3">
+        <div class="col-sm-3 p-l-0">
           <div class="input-group">
-              <span class="input-group-addon">
+              <span class="input-group-addon icon-size-fix">
                 <i class="zmdi zmdi-calendar ma-icon" x-ng-class="{disabledIcon: !showDateRange}"></i>
               </span>
 
@@ -173,31 +166,23 @@
 
         <!--CHECKBOX INIT -->
         <div class="col-sm-1">
-          <div class="input-group">
-            <div class="fg-line">
-              <span class="input-group-addon middle"><i class="md md-today"></i></span>
-
-              <div class="form-inline">
-                <label class="checkbox checkbox-inline m-r-20">
-                  <input type="checkbox" name="isDateActive" name="check" x-ng-checked="true"
-                         x-ng-model="showDateRange"/>
-                  <i class="input-helper"></i>
-                </label>
-              </div>
-            </div>
-          </div>
+          <label class="checkbox checkbox-inline">
+            <input type="checkbox" name="isDateActive" name="check" x-ng-checked="true"
+                   x-ng-model="showDateRange"/>
+            <i class="input-helper"></i>
+          </label>
         </div>
       </div>
     </div>
 
     <!--RECIPIENT -->
-    <div x-ng-show="activatedField.email == 'true'">
-      <label class="m-t-30">{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER' | translate}}</label>
+    <div x-ng-if="activatedField.email == 'true'" class="clearfix">
+      <label class="title-label">{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER' | translate }}</label>
 
       <div class="clearfix"></div>
-      <div class="col-sm-7">
+      <div class="col-sm-7 p-l-0">
         <div class="input-group" x-ng-init="showRecipients=true">
-          <span class="input-group-addon">
+          <span class="input-group-addon icon-size-fix">
             <i class="zmdi zmdi-account" x-ng-class="{disabledIcon: !showRecipients}"></i>
           </span>
 
@@ -222,31 +207,21 @@
         </div>
       </div>
 
-
       <!--CHECKBOX -->
       <div class="col-sm-1 pull-right">
-        <div class="input-group">
-          <div class="fg-line">
-            <span class="input-group-addon middle"><i class="md md-today"></i></span>
-
-            <div class="form-inline">
-              <label class="checkbox checkbox-inline m-r-20">
-                <input type="checkbox" name="isDestinatairesActive" x-ng-checked="true"
-                       x-ng-model="showRecipients"/>
-                <i class="input-helper"></i>
-              </label>
-            </div>
-          </div>
-        </div>
+        <label class="checkbox checkbox-inline">
+          <input type="checkbox" name="isDestinatairesActive" x-ng-checked="true"
+                 x-ng-model="showRecipients"/>
+          <i class="input-helper"></i>
+        </label>
       </div>
-    </div>
   </div>
 
 
   <!--VALIDATE-->
-  <div class="col-md-9 m-t-50 m-b-30">
-    <button class="btn bgm-white waves-effect" x-ng-click="clearParams()">
-      {{'FILTER_COMPONENT.REINITIALIZE' | translate}}
+  <div class="col-md-9 m-t-50 m-b-30 p-l-0">
+    <button class="btn bgm-white waves-effect m-r-10" x-ng-click="clearParams()">
+      {{'FILTER_COMPONENT.REINITIALIZE' | translate }}
     </button>
     <button class="btn bgm-blue waves-effect" x-ng-click="updateFilters()">
       {{'FILTER_COMPONENT.SUBMIT' | translate}}

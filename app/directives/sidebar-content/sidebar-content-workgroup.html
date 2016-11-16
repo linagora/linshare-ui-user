@@ -11,10 +11,13 @@
       </span>
   </div>
 
-  <div x-ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail" x-ng-class="{'two-tabs': mainVm.sidebar.getData().currentPage !== 'my_files'}">
+  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail"
+       x-ng-class="{'two-tabs': mainVm.sidebar.getData().currentPage !== 'my_files'}">
     <md-content>
-      <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex" md-dynamic-height="" md-border-bottom="">
-        <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage == 'group_list'" label="{{'INFORMATION_TAB.TITLE' | translate}}"
+      <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex" md-dynamic-height=""
+               md-border-bottom="">
+        <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage == 'group_list'"
+                label="{{'INFORMATION_TAB.TITLE' | translate}}"
                 class="col-xs-4 noPadding">
 
           <!-- WORKGROUP DETAILS -->

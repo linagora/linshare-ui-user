@@ -3,7 +3,6 @@
     <input id="focusInputShare" name="{{autocompleteUsersVm.name}}" type="text" class="form-control"
            placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
            autocomplete="off"
-           typeahead-append-to-body="true"
            x-ng-model="autocompleteUsersVm.selectedUser"
            x-ng-required="autocompleteUsersVm.required()"
            x-typeahead-min-length="3"

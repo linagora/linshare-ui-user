@@ -351,7 +351,8 @@
       var showBtnListElem = $event.currentTarget;
       if (angular.element(showBtnListElem).hasClass('activeShowMore')) {
         angular.element(showBtnListElem).parent().prev().find('div').first()
-          .removeClass('data-list-slide-toggle activeShowMore').css('display:none !important;');
+          .removeClass('data-list-slide-toggle');
+        angular.element(showBtnListElem).removeClass('activeShowMore');
       } else {
         angular.element(showBtnListElem).addClass('activeShowMore').parent().prev().find('div')
           .first().addClass('data-list-slide-toggle');
