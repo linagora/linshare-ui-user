@@ -2,11 +2,11 @@
   <div class="upper-container">
     <img id="fg-img" src="images/common/logo-white-500.png" alt="Logo LinShare" class="visible-xs"/>
     <div class="box-ctn hidden-xs">
-      <div class="box-3" ui-sref="documents.files">
+      <div class="box-3">
         <div class="card-img upload-share">
           <i class="groups-home-my-files"></i>
         </div>
-        <div class="box-content">
+        <div class="box-content"  ui-sref="documents.files">
           <div class="info-box" >
             <h2 flow-btn class="box-title"><a >{{"MY_FILES_SPACE" | translate}}</a></h2>
             <p class="box-txt">{{"MY_FILES_SPACE_MSG" | translate}}</p>
@@ -31,9 +31,10 @@
           </div>
         </div>
       </div>
-
+      <!-- TODO: Link does not work, it is supposed to redirect to upload and share after the user selects his
+      uploaded files-->
       <div class="box-3" flow-btn >
-        <div class="card-img upload-share"  ui-sref="documents.upload">
+        <div class="card-img upload-share" x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
           <i class="groups-home-share"></i>
         </div>
         <div class="box-content"  ui-sref="documents.upload">
@@ -204,8 +205,8 @@
       <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
       <md-fab-actions class="md-toolbar-tools">
         <md-button aria-label="label" class="md-icon-button" flow-btn>
-          <a href="#/files/upload" ui-sref="documents.upload">
-            <i class="zmdi zmdi-share"></i>
+          <a x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
+            <i class="groups-home-share"></i>
             <span>{{'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE' | translate}}</span>
           </a>
         </md-button>

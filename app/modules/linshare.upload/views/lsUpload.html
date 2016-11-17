@@ -199,22 +199,18 @@
             </span>
           </div>
         </div>
-      <div class="drag-and-drop-centered collapsible-content">
-          <div class="drag-and-drop-ctn reset-content-width hidden-xs">
-            <div class="drag-and-drop-content">
-              <div class="drag-icon-ctn ">
-                <div class="bordered-circle">&nbsp;</div>
-                <img src="images/upload-dnd-grey.png">
-              </div>
-              <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-
-              <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
-            </div>
+      <div class="drag-and-drop-ctn reset-content-width hidden-xs">
+        <div class="drag-and-drop-content">
+          <div class="drag-icon-ctn ">
+            <div class="bordered-circle">&nbsp;</div>
+            <img src="images/upload-dnd-grey.png">
           </div>
+          <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
+
+          <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
         </div>
-        <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}"></ls-upload-queue>
-
-
+      </div>
+        <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}" id="upload-li-ctn"></ls-upload-queue>
         <div class="partage-list">
           <button class="btn btn-default waves-effect" x-ng-repeat="n in sharingsBtn track by $index"
                   x-ng-click="uploadQueueVm.showSharingItems($index)">

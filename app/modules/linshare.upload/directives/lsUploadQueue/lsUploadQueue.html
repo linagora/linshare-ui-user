@@ -4,7 +4,7 @@
       <div class="lv-header-alt clearfix display-none">
         <h2 class="lvh-label"><b>{{'HEADER.FILES_TO_SHARE' | translate}}</b></h2>
       </div>
-      <div class="lv-body ng-table p-b-60" id="file-list-table">
+      <div class="lv-body ng-table" id="file-list-table">
         <div class="media-body" x-ng-repeat="file in uploadQueueVm.$flow.files | orderBy: '-' | filter: {_from: fromWhere}"
              x-ng-class="{'highlight-list-elem': file.isSelected }"
              data-uid-flow="{{file.uniqueIdentifier}}" x-ng-if="!file.hideOnIsolate">
