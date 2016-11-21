@@ -5,15 +5,15 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
-  function documentController($scope, $filter, documentRestService, NgTableParams,
-                              $translate, $window, $log, $mdToast, documentsList, growlService,
-                              $timeout, documentUtilsService, $q, flowUploadService,
-                              flowParamsService, sharableDocumentService, lsAppConfig, $stateParams) {
+  function documentController($scope, $filter, documentRestService, NgTableParams, $translate, $window, $log,
+                              $mdToast, documentsList, growlService, $timeout, documentUtilsService, $q,
+                              flowUploadService, flowParamsService, sharableDocumentService, lsAppConfig,
+                              $stateParams) {
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
     var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
-    var swalNoDeleteElements, swalActionDelete, swalInfoErrorFile, swalClose, swalNoDeleteElements;
-    var swalCodeError404, swalCodeError403,swalCodeError400, swalCodeError500;
+    var swalNoDeleteElements, swalActionDelete, swalInfoErrorFile, swalClose;
+    var swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500;
 
     $scope.addSelectedDocument = addSelectedDocument;
     $scope.addUploadedDocument = addUploadedDocument;
@@ -23,14 +23,23 @@
     $scope.closeToastDeleteError = closeToastDeleteError;
     $scope.currentDocument = {};
     $scope.currentPage = 'my_files';
-    $scope.currentSelectedDocument = {current: ''};
-    $scope.data = {selectedIndex: 0, bottom: false};
+    $scope.currentSelectedDocument = {
+      current: ''
+    };
+    $scope.data = {
+      selectedIndex: 0,
+      bottom: false
+    };
     $scope.deleteDocuments = deleteDocuments;
     $scope.documentsList = documentsList;
     $scope.documentsListCopy = documentsList;
     $scope.downloadCurrentFile = downloadCurrentFile;
     $scope.downloadSelectedFiles = downloadSelectedFiles;
-    $scope.fab = {isOpen: false, count: 0, selectedDirection: 'left'};
+    $scope.fab = {
+      isOpen: false,
+      count: 0,
+      selectedDirection: 'left'
+    };
     $scope.flagsOnSelectedPages = {};
     $scope.flowUploadService = flowUploadService;
     $scope.getDetails = getDetails;
@@ -39,16 +48,20 @@
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.lsAppConfig = lsAppConfig;
-		$scope.lsFormat = lsFormat;
+    $scope.lsFormat = lsFormat;
     $scope.lsFullDateFormat = lsFullDateFormat;
     $scope.mainVm.sidebar.hide();
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.nextTab = nextTab;
     $scope.onShare = onShare;
     $scope.openSearch = openSearch;
-    $scope.paramFilter = {name: ''};
+    $scope.paramFilter = {
+      name: ''
+    };
     $scope.previousTab = previousTab;
-    $scope.recipientShareDetails = {current: ''};
+    $scope.recipientShareDetails = {
+      current: ''
+    };
     $scope.reloadDocuments = reloadDocuments;
     $scope.resetSelectedDocuments = resetSelectedDocuments;
     $scope.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
@@ -73,12 +86,13 @@
       flowParamsService.setFlowParams('', '');
 
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
-        'GROWL_ALERT.ACTION.DELETE', 'TOAST_ALERT.ACTION.INFO_ERROR_FILE',
-        'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED',
-        'TOAST_ALERT.WARNING.ERROR_404', 'TOAST_ALERT.WARNING.ERROR_403',
-        'TOAST_ALERT.WARNING.ERROR_400', 'TOAST_ALERT.WARNING.ERROR_500'])
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
+          'GROWL_ALERT.ACTION.DELETE', 'TOAST_ALERT.ACTION.INFO_ERROR_FILE',
+          'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED',
+          'TOAST_ALERT.WARNING.ERROR_404', 'TOAST_ALERT.WARNING.ERROR_403',
+          'TOAST_ALERT.WARNING.ERROR_400', 'TOAST_ALERT.WARNING.ERROR_500'
+        ])
         .then(function(translations) {
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
@@ -93,7 +107,8 @@
           swalCodeError500 = translations['TOAST_ALERT.WARNING.ERROR_500'];
         });
       $translate(['ACTION.COPY_TO', 'ACTION.SHARE', 'ACTION.INFORMATION',
-        'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'])
+          'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'
+        ])
         .then(function(translations) {
           swalCopyInGroup = translations['ACTION.COPY_TO'];
           swalShare = translations['ACTION.SHARE'];
@@ -116,8 +131,7 @@
             }, function($itemScope) {
               return $itemScope.selectedDocuments.length === 1;
             }],
-            [swalCopyInGroup, function() {
-            }, function() {
+            [swalCopyInGroup, function() {}, function() {
               return false;
             }],
             [swalDownload, function($itemScope) {
@@ -142,8 +156,8 @@
       });
 
       $scope.$watch(function() {
-				return documentUtilsService.reloadDocumentsList;
-			}, function (newValue) {
+        return documentUtilsService.reloadDocumentsList;
+      }, function(newValue) {
         if (newValue) {
           $scope.reloadDocuments();
         }
@@ -198,36 +212,47 @@
     }
 
     function closeToastDeleteError() {
-      $mdToast.hide().then(function() {
-      });
-    };
+      $mdToast.hide().then(function() {});
+    }
 
     function deleteCallback(items) {
       var responsesDeletion = [];
-      $q.all(sortResponseDeletion(items, responsesDeletion)).then(function(promises) {
+      $q.all(sortResponseDeletion(items, responsesDeletion)).then(function() {
         if (responsesDeletion.length > 0) {
           $scope.showToastDeleteError();
           $scope.responses = [];
-          _.forEach(responsesDeletion, function(responseItems){
-            switch(responseItems[1].status) {
+          _.forEach(responsesDeletion, function(responseItems) {
+            switch (responseItems[1].status) {
               case 404:
-                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError404 });
+                $scope.responses.push({
+                  'name': responseItems[0],
+                  'messageError': swalCodeError404
+                });
                 break;
               case 403:
-                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError403 });
+                $scope.responses.push({
+                  'name': responseItems[0],
+                  'messageError': swalCodeError403
+                });
                 break;
               case 400:
-                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError400 });
-              break;
+                $scope.responses.push({
+                  'name': responseItems[0],
+                  'messageError': swalCodeError400
+                });
+                break;
               default:
-                $scope.responses.push({"name" : responseItems[0], "messageError" : swalCodeError500 });
+                $scope.responses.push({
+                  'name': responseItems[0],
+                  'messageError': swalCodeError500
+                });
             }
           });
         } else {
           $timeout(function() {
-            growlService.notifyTopRight("GROWL_ALERT.ACTION.DELETE", 'inverse');
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
           }, 350);
-        };
+        }
       });
       closeToastDeleteError();
     }
@@ -274,7 +299,9 @@
     }
 
     function loadSelectedDocument(filteredData) {
-      var documentToSelect = _.find(filteredData, {'uuid': $stateParams.uploadedFileUuid});
+      var documentToSelect = _.find(filteredData, {
+        'uuid': $stateParams.uploadedFileUuid
+      });
       if (!_.isUndefined(documentToSelect)) {
         addSelectedDocument(documentToSelect);
       }
@@ -283,7 +310,8 @@
     /**
      * @name loadSidebarContent
      * @desc Update the content of the sidebar
-     * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     * @param {String} content The id of the content to load,
+     *                 see app/views/includes/sidebar-right.html for possible values
      */
     function loadSidebarContent(content) {
       $scope.mainVm.sidebar.setData($scope);
@@ -294,7 +322,9 @@
     function loadSpecificPage() {
       var items = _.orderBy($scope.documentsList.plain(), 'modificationDate', ['desc']);
       if ($stateParams.uploadedFileUuid) {
-        return Math.floor(_.findIndex(items, {'uuid': $stateParams.uploadedFileUuid}) / 10) + 1;
+        return Math.floor(_.findIndex(items, {
+          'uuid': $stateParams.uploadedFileUuid
+        }) / 10) + 1;
       }
       return 1;
     }
@@ -304,13 +334,16 @@
         resolve(
           new NgTableParams({
             page: loadSpecificPage(),
-            sorting: {modificationDate: 'desc'},
+            sorting: {
+              modificationDate: 'desc'
+            },
             count: 10,
             filter: $scope.paramFilter
           }, {
             total: $scope.documentsList.length,
             getData: function($defer, params) {
-              var filteredData = params.filter() ? $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
+              var filteredData =
+                params.filter() ? $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
               var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
               params.total(files.length);
               if ($stateParams.uploadedFileUuid) {
@@ -438,13 +471,13 @@
 
     function showToastDeleteError() {
       $mdToast.show({
-        scope : $scope,
+        scope: $scope,
         preserveScope: true,
-        hideDelay   : 0,
-        position    : 'top right',
-        templateUrl : 'modules/linshare.document/views/toast-delete-file-error.html'
+        hideDelay: 0,
+        position: 'top right',
+        templateUrl: 'modules/linshare.document/views/toast-delete-file-error.html'
       });
-    };
+    }
 
     function slideTextarea($event) {
       var currTarget = $event.currentTarget;
@@ -468,18 +501,18 @@
     function sortResponseDeletion(items, responsesDeletion) {
       if (items) {
         return _.map(items, function(restangularizedItem) {
-          return restangularizedItem.remove().then(function(response) {
+          return restangularizedItem.remove().then(function() {
             _.remove($scope.documentsList, restangularizedItem);
             _.remove($scope.selectedDocuments, restangularizedItem);
             $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
             $scope.tableParams.reload();
             initFlagsOnSelectedPages();
             return responsesDeletion;
-          }).catch(function(error){
+          }).catch(function(error) {
             responsesDeletion.push([restangularizedItem.name, error]);
             return responsesDeletion;
           });
-        })
+        });
       }
     }
 
@@ -500,33 +533,32 @@
       $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
     }
 
-		/**
+    /**
      * Update a document
      * @param document
      */
-		 function updateDocument(document) {
-       var documentServer = _.cloneDeep(document);
-       $translate(['SAVING'])
-       .then(function(translations) {
-         /* jshint sub: true */
-         var swalSaving = translations['SAVING'];
-         $scope.currentSelectedDocument.current.description = swalSaving;
-         documentRestService.update(documentServer.uuid, documentServer).then(function() {
-           $scope.currentSelectedDocument.current.description = documentServer.description;
-         });
-       });
-     }
+    function updateDocument(document) {
+      var documentServer = _.cloneDeep(document);
+      $translate(['SAVING'])
+        .then(function(translations) {
+          /* jshint sub: true */
+          var swalSaving = translations['SAVING'];
+          $scope.currentSelectedDocument.current.description = swalSaving;
+          documentRestService.update(documentServer.uuid, documentServer).then(function() {
+            $scope.currentSelectedDocument.current.description = documentServer.description;
+          });
+        });
+    }
 
     function unavailableMultiDownload() {
       swal({
-          title: swalMultipleDownloadTitle,
-          text: swalMultipleDownloadText,
-          type: 'error',
-          confirmButtonColor: '#05b1ff',
-          confirmButtonText: swalMultipleDownloadConfirm,
-          closeOnConfirm: true
-        }
-      );
+        title: swalMultipleDownloadTitle,
+        text: swalMultipleDownloadText,
+        type: 'error',
+        confirmButtonColor: '#05b1ff',
+        confirmButtonText: swalMultipleDownloadConfirm,
+        closeOnConfirm: true
+      });
     }
   }
 })();

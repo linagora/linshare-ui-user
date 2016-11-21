@@ -14,7 +14,8 @@
    * @desc controller of all variables and methods for upload queue
    * @memberOf LinShare.UploadQueue.uploadQueueController
    */
-  function uploadQueueController($scope, $rootScope, growlService, $timeout, $state, $stateParams, flowParamsService, flowUploadService, sharableDocumentService, lsAppConfig) {
+  function uploadQueueController($scope, $rootScope, growlService, $timeout, $state, $stateParams, flowParamsService,
+                                 flowUploadService, sharableDocumentService, lsAppConfig) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;
@@ -37,7 +38,11 @@
     uploadQueueVm.clearSelectedFiles = clearSelectedFiles;
     uploadQueueVm.currentPage = 'upload';
     uploadQueueVm.currentSelectedDocument = {};
-    uploadQueueVm.fab = {isOpen: false, count: 0, selectedDirection: 'left'};
+    uploadQueueVm.fab = {
+      isOpen: false,
+      count: 0,
+      selectedDirection: 'left'
+    };
     uploadQueueVm.flowUploadService = flowUploadService;
     uploadQueueVm.fromWhere = $stateParams.from;
     uploadQueueVm.identifiers = [];
@@ -208,11 +213,12 @@
     /**
      * @name loadSidebarContent
      * @desc update the content of the sidebar
-     * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     * @param {String} content The id of the content to load,
+     *                 see app/views/includes/sidebar-right.html for possible values
      */
     function loadSidebarContent(content) {
       $scope.mainVm.sidebar.setData(uploadQueueVm);
-      $scope.mainVm.sidebar.setContent(lsAppConfig.share);
+      $scope.mainVm.sidebar.setContent(content ||  lsAppConfig.share);
       $scope.mainVm.sidebar.show();
     }
 
@@ -369,7 +375,9 @@
         file.folderInfos.uploadedFileUuid = file.linshareDocument.uuid;
         $state.go('sharedspace.workgroups.entries', file.folderInfos);
       } else {
-        $state.go('documents.files', {uploadedFileUuid: file.linshareDocument.uuid});
+        $state.go('documents.files', {
+          uploadedFileUuid: file.linshareDocument.uuid
+        });
       }
     }
 
@@ -379,7 +387,7 @@
      * @memberOf LinShare.UploadQueue.uploadQueueController
      */
     function toggleFilterBySelectedFiles() {
-      _.forEach(uploadQueueVm.$flow.files, function (file) {
+      _.forEach(uploadQueueVm.$flow.files, function(file) {
         if (file.hideOnIsolate) {
           file.hideOnIsolate = false;
         } else if (!file.isSelected) {

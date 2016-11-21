@@ -4,18 +4,26 @@
 
 'use strict';
 
-angular.module('linshareUiUserApp')
-.controller('WorkGroupMembersController', WorkGroupMembersController);
+angular
+  .module('linshareUiUserApp')
+  .controller('WorkGroupMembersController', WorkGroupMembersController);
 
 function WorkGroupMembersController($scope, workGroupMembersRestService, $filter) {
 
   var wgmember = this;
   wgmember.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
-  wgmember.membersRights = {admin: 'ADMIN', write: 'WRITE', readonly: 'READ'};
+  wgmember.membersRights = {
+    admin: 'ADMIN',
+    write: 'WRITE',
+    readonly: 'READ'
+  };
   wgmember.memberRole = wgmember.membersRights.write;
 
   wgmember.propertyFilter = '';
-  wgmember.membersSearchFilter = {$: '', role: ''};
+  wgmember.membersSearchFilter = {
+    $: '',
+    role: ''
+  };
 
   wgmember.propertyOrderBy = 'firstName';
   wgmember.propertyOrderByAsc = true;
@@ -33,7 +41,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
 
   $scope.$watch(function() {
     return $scope.mainVm.sidebar.getData().currentSelectedDocument.current;
-  }, function (currentWorkGroup) {
+  }, function(currentWorkGroup) {
     workGroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
       wgmember.currentWorkgroupMember = member;
       $scope.mainVm.sidebar.addData('currentWorkgroupMember', member);
@@ -49,10 +57,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
     return workGroupMembersRestService.delete(wgmember.currentWorkGroup.current.uuid, member.userUuid);
   }
 
-  function addMember() {
-    var
-      member = this.selectedUser,
-      listMembers = this.selectedUsersList;
+  function addMember(member, listMembers) {
     var jsonMember = {
       userMail: member.mail,
       userDomainId: member.domain,
