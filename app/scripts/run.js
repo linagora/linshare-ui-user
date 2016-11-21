@@ -120,7 +120,7 @@ angular
 
   /*jshint unused: false */
   Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-    $log.debug('addResponseInterceptor => date, response', data, response);
+    $log.debug('addResponseInterceptor => response', response);
     if (response.status === 401) {
       $rootScope.$emit('lsIntercept401');
     }
