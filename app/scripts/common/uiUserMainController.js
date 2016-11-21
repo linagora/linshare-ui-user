@@ -58,11 +58,14 @@ angular
           sidebar.visible = true;
         }
 
-        function hide(form) {
+        function hide(form, obj) {
           sidebar.visible = false;
           if (form) {
             form.$setPristine();
             form.$setUntouched();
+          }
+          if (obj && !_.isUndefined(obj.reset)) {
+             obj.reset();
           }
         }
 
