@@ -1,3 +1,7 @@
+/**
+ * LinshareGuestSetvice Factory
+ * @namespace LinShare.guest
+ */
 (function() {
   'use strict';
 
@@ -7,17 +11,22 @@
 
   LinshareGuestService.$inject = ['Restangular', 'ServerManagerService'];
 
+  /**
+   *  @namespace LinshareGuestService
+   *  @desc Communication service with API to manage Guest Object
+   *  @memberOf NameSpaceGlobal
+   */
   function LinshareGuestService(Restangular, ServerManagerService) {
-    var baseGuestRest = Restangular.all('guests');
-
-    var service = {
-      findGuest: findGuest,
-      getList: getList,
-      addGuest: addGuest,
-      deleteGuest: deleteGuest,
-      updateGuest: updateGuest,
-      assignGroup: assignGroup
-    };
+    var
+      baseGuestRest = Restangular.all('guests'),
+      service = {
+        findGuest: findGuest,
+        getList: getList,
+        addGuest: addGuest,
+        deleteGuest: deleteGuest,
+        updateGuest: updateGuest,
+        assignGroup: assignGroup
+      };
 
     return service;
 
@@ -27,15 +36,22 @@
       return baseGuestRest.one(uuid).get();
     }
 
-    function getList() {
-      return baseGuestRest.getList();
+    /**
+     *  @name getList
+     *  @desc Get the list of guest
+     *  @param {Boolean} allGuest - Query param value for requesting all guest or not
+     *  @returns {Promise} The response of the server
+     *  @memberOf LinShare.guests.LinshareGuestService
+     */
+    function getList(allGuest) {
+      return ServerManagerService.responseHandler(baseGuestRest.getList(null, {all:allGuest}));
     }
 
     /**
      *  @name addGuest
      *  @desc Add a guest object
      *  @param {Object} guestDTO - The guest object to be updated
-     *  @returns {Object} The response of the server
+     *  @returns {Promise} The response of the server
      *  @memberOf LinShare.guests.LinshareGuestService
      */
     function addGuest(guestDto) {
@@ -51,7 +67,7 @@
      *  @desc Update a guest object
      *  @param {String} uuid - Uuid of the guest
      *  @param {Object} guestDTO - The guest object to be updated
-     *  @returns {Object} The response of the server
+     *  @returns {Promise} The response of the server
      *  @memberOf LinShare.guests.LinshareGuestService
      */
     //TODO: the put should be on guests/{uuid}, to be corrected B&F
@@ -61,6 +77,6 @@
 
     function assignGroup() {
       return null;
-      }
+    }
   }
 })();

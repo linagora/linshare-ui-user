@@ -1,5 +1,8 @@
 {
-  "TBT__ADD_GUEST_SIDEBAR": {
+  "ACTION": {
+    "TBT__ADD_TO_WORKGROUPS": ""
+  },
+  "ADD_GUEST_SIDEBAR": {
     "TBT__ACTIVATE_USER_SPACE": "",
     "TBT__ADD_DESCRIPTION": "",
     "TBT__ADVANCED_OPTIONS": "",
@@ -20,39 +23,40 @@
     "TBT__SUBMIT": "",
     "TBT__TITLE": ""
   },
+  "BOUTON_LABEL_TITLE": {
+    "TBT__EDIT": "",
+    "TBT__DELETE": "",
+    "TBT__GUEST": ""
+  },
   "TBT__BREADCRUMB_TITLE": "",
-  "TBT__HEADER_GUEST": {
-    "DOMAIN" : ""
+  "GUEST_CHOSEN": {
+    "TBT__ALL_GUESTS": "",
+    "TBT__MY_GUESTS": "",
+    "TBT__SHOW": ""
   },
-  "TBT__MY_GUESTS": "",
-  "TBT__ALL_GUESTS": "",
-  "TBT__BOUTON_LABEL_TITLE": {
-    "TBT__EDIT" : "",
-    "TBT__DELETE" : "",
-    "TBT__GUEST" : ""
-  },
-  "TBT__ACTION": {
-    "TBT__JOIN_RESTRICTED_CONTACTS" : "",
-    "TBT__ADD_TO_WORKGROUPS" : "",
-    "TBT__ADMIN_REQUEST" : ""
-  },
-  "TBT__ORDER_BY": {
-    "TBT__EXPIRATION_DATE" : "",
-    "TBT__EMAIL" : "",
-    "TBT__DOMAIN_NAME" : ""
-  },
-  "TBT__GUEST_DETAILS":{
+  "GUEST_DETAILS": {
+    "TBT__ACTIVATED": "",
+    "TBT__ADMIN": "",
+    "TBT__ALREADY_A_MEMBER": "",
+    "TBT__AVAILABLE_CONTACTS": "",
+    "COMMENT": {
+      "TBT__EMPTY": "",
+      "TBT__TITLE": ""
+    },
+    "TBT__DEACTIVATED": "",
     "TBT__DETAIL_OF_GUEST_ACCOUNT": "",
+    "TBT__DOMAIN": "",
     "TBT__EDIT_GUEST": "",
     "TBT__EXPIRE_THE": "",
-    "TBT__DOMAIN": "",
-    "TBT__ADMIN": "",
     "TBT__MY_SPACE": "",
-    "TBT__RESTRICTED_CONTACTS": "",
-    "TBT__ACTIVATED": "",
-    "TBT__DEACTIVATED": "",
-    "TBT__AVAILABLE_CONTACTS": "",
-    "TBT__ALREADY_A_MEMBER": "",
-    "TBT__JOIN_RESTRICTED_CONTACT_LIST": ""
+    "TBT__RESTRICTED_CONTACTS": ""
+  },
+  "HEADER_GUEST": {
+    "TBT__DOMAIN": ""
+  },
+  "ORDER_BY": {
+    "TBT__EXPIRATION_DATE": "",
+    "TBT__EMAIL": "",
+    "TBT__DOMAIN_NAME": ""
   }
 }

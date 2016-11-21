@@ -13,6 +13,7 @@ angular.module('linshareUiUserApp')
     production: false,
     mySpacePage: 'myspace',
     workgroupPage: 'workgroup',
+    guestsList: 'guests-list',
 
     //Value used for sidebar
     share: 'share',
@@ -20,7 +21,7 @@ angular.module('linshareUiUserApp')
     shareDetails: 'share-details',
     activeShareDetails: 'active-share-details',
     newGuest: 'new-guest',
-    guest: 'guest',
+    guestDetails: 'guest-details',
     details: 'details',
     addMember: 'add-member',
     workgroupDetailFile: 'workgroup-detail-file'

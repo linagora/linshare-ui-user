@@ -54,7 +54,7 @@ angular.module('linshareUiUserApp')
           }, {
             name: 'MENU_TITLE.GUESTS',
             link: 'administration.guests',
-            disabled: lsAppConfig.production
+            disabled: false
           }, {
             name: 'MENU_TITLE.USERS',
             link: 'administration.users',

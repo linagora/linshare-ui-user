@@ -1,4 +1,7 @@
 {
+  "ACTION": {
+    "ADD_TO_WORKGROUPS": "Add to workgroups"
+  },
   "ADD_GUEST_SIDEBAR": {
     "ACTIVATE_USER_SPACE": "Activate user space",
     "ADD_DESCRIPTION": "Add user description",
@@ -20,39 +23,40 @@
     "SUBMIT": "Create",
     "TITLE": "CREATE GUEST ACCOUNT"
   },
-  "BREADCRUMB_TITLE": "Guests accounts",
-  "HEADER_GUEST": {
-    "DOMAIN" : "Domain"
-  },
-  "MY_GUESTS": "My guest",
-  "ALL_GUESTS": "All guest",
   "BOUTON_LABEL_TITLE": {
-    "EDIT" : "Edit",
-    "DELETE" : "Delete",
-    "GUEST" : "Guest(s)"
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "GUEST": "Guest(s)"
   },
-  "ACTION": {
-    "JOIN_RESTRICTED_CONTACTS" : "Join restricted contact list",
-    "ADD_TO_WORKGROUPS" : "Add to workgroups",
-    "ADMIN_REQUEST" : "Request administrator rights"
+  "BREADCRUMB_TITLE": "Guests accounts",
+  "GUEST_CHOSEN": {
+    "ALL_GUESTS": "All guest",
+    "MY_GUESTS": "My guest",
+    "SHOW": "Show :"
   },
-  "ORDER_BY": {
-    "EXPIRATION_DATE" : "Expiration date",
-    "EMAIL" : "Email",
-    "DOMAIN_NAME" : "Domain name"
-  },
-  "GUEST_DETAILS":{
+  "GUEST_DETAILS": {
+    "ACTIVATED": "Activated",
+    "ADMIN": "Administrator",
+    "ALREADY_A_MEMBER": "Already a member",
+    "AVAILABLE_CONTACTS": "Available contacts list",
+    "COMMENT": {
+      "EMPTY": "No comment",
+      "TITLE": "Comment"
+    },
+    "DEACTIVATED": "Deactivated",
     "DETAIL_OF_GUEST_ACCOUNT": "Guest account details",
+    "DOMAIN": "Domain",
     "EDIT_GUEST": "Edit",
     "EXPIRE_THE": "Expire the",
-    "DOMAIN": "Domain",
-    "ADMIN": "Administrator",
     "MY_SPACE": "My space",
-    "RESTRICTED_CONTACTS": "Restricted contacts",
-    "ACTIVATED": "Activated",
-    "DEACTIVATED": "Deactivated",
-    "AVAILABLE_CONTACTS": "Available contacts list",
-    "ALREADY_A_MEMBER": "already a member",
-    "JOIN_RESTRICTED_CONTACT_LIST": "Join contacts list"
+    "RESTRICTED_CONTACTS": "Restricted contacts"
+  },
+  "HEADER_GUEST": {
+    "DOMAIN": "Domain"
+  },
+  "ORDER_BY": {
+    "EXPIRATION_DATE": "Expiration date",
+    "EMAIL": "Email",
+    "DOMAIN_NAME": "Domain name"
   }
 }

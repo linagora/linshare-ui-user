@@ -1,157 +1,39 @@
-<div class="lv-body stop-propagate">
-    <div id="profile-main" class="detail-guest">
-      <div class="p-relative img-preview-ctn p-0">
-        <div class="dark-overlay"></div>
-        <div class="user-preview-ctn">
-          <div class="flex-ctn detail-info-ctn p-0 p-t-10">
-            <div class="item-l m-b-10">
-              <span class="first-letter user-info">R</span>
-            </div>
-            <p class="m-b-0">Robin <span class="p-l-5 last-name">Shutlz</span></p>
-            <p class="m-b-0 email">robin.shutlz@int.lisnshare.com</p>
-          </div>
-        </div>
-      </div>
-      <div class="description-ctn form-sidebar">
-        <div contenteditable="false" class="comment"
-             x-ng-focus="slideTextarea($event)"
-             x-ng-blur="slideUpTextarea($event)"
-             x-ng-keyup="setTextInput($event);"></div>
-        <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
-        <div class="edit-description">
-          <!-- TODO: Replace by the profile description if it exists-->
-          {{vm.currentSelectedDocument.current.description}}
-          <i class="zmdi zmdi-edit"></i>
-        </div>
-      </div>
-      <div class="content-detail-area">
-        <div class="flex-ctn detail-info-ctn">
-          <div class="item-l">
-            <!-- TODO: replace by first letter of admin of the current guest in focus -->
-            <span class="first-letter user-info">A</span>
-          </div>
-          <div class="item-mid">
-            <!-- TODO: replace by admin first and lastname of  the current guest in focus -->
-            <div class="name">Amy Wolsh</div>
-            <!-- TODO: modification  date of the guest account cf date : lsFullDateFormat() date format format -->
-            <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{currentSelectedDocument.current.modificationDate | date : lsFullDateFormat()}}">
-              <span>
-                {{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                <!-- TODO: creation date of the guest account cf date : lsFormat() date format  -->
-                21/02/2017
-              </span>
-            </div>
-          </div>
-          <div class="item-r actions">
-            <span title="{{'GUEST_DETAILS.ADMIN' | translate}}">
-             {{'GUEST_DETAILS.ADMIN' | translate}}
-            </span>
-          </div>
-        </div>
-        <div class="meta-data-ctn">
-          <h2 class="subheader">
-            <i class="fa fa-file-text"></i>
-            {{'INFORMATION_TAB.META_DATA' | translate}}
-          </h2>
-          <div class="meta-data-content">
-            <div>
-              <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
-              <!-- TODO: creation  date of the guest account cf date : lsFullDateFormat() date format format -->
-              <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{vm.currentSelectedDocument.current.creationDate | date : lsFullDateFormat()}}">
-                <!-- TODO: creation date of the guest account cf date : lsFormat() date format  -->
-                28/01/2017
-              </p>
-            </div>
-            <div>
-              <p>{{'GUEST_DETAILS.EXPIRE_THE' | translate}}</p>
-              <!-- TODO: expiration date of the guest account cf date : lsFullDateFormat() date format format -->
-              <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{vm.currentSelectedDocument.current.creationDate | date : lsFullDateFormat()}}">
-                <!-- TODO: expiration date of the guest account cf date : lsFormat() date format  -->
-                28/04/2017
-              </p>
-            </div>
-            <div>
-              <p>{{'GUEST_DETAILS.DOMAIN' | translate}}</p>
-              <p>
-                <!-- TODO: replace by his domain to which he belongs   -->
-                Nom domaine
-              </p>
-            </div>
-            <div>
-              <p>
-                {{'GUEST_DETAILS.MY_SPACE' | translate}}:
-              </p>
-              <!-- TODO: is his own space activated or deactivated-->
-              <p x-ng-if="activated">
-                {{'GUEST_DETAILS.ACTIVATED' | translate}}
-              </p>
-              <p x-ng-if="!activated">
-                {{'GUEST_DETAILS.DEACTIVATED' | translate}}
-              </p>
-            </div>
-            <div>
-              <p>
-                {{'GUEST_DETAILS.RESTRICTED_CONTACTS' | translate}}:
-              </p>
-              <!-- TODO:
-                if the restricted contacts feature has not been enabled show deactivated
-
-                if the restricted contacts feature has been enabled sand the current viewer
-                is already a member of the contact list then  show ALLREADY_A_MEMBER
-
-                 if the restricted contacts feature has been enabled sand the current viewer
-                is not in the list then display the link JOIN_RESTRICTED_CONTACT_LIST
+<div id="member-sidebar">
+  <div class="header-sidebar">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" x-ng-click="mainVm.sidebar.hide()">
+      </i>
+    <h2 class="header-more-options set-ellipsis visible-xs">
+      {{'GUEST_DETAILS.DETAIL_OF_GUEST_ACCOUNT' | translate}}
+    </h2>
+    <h2 class="header-more-options set-ellipsis hidden-xs">
+      {{mainVm.sidebar.getData().selectedGuest.firstName}} {{mainVm.sidebar.getData().selectedGuest.lastName}}
+    </h2>
+    <span class="hidden-xs">
+        <i class="zmdi zmdi-close zmdi-hc-lg"
+           x-ng-click="mainVm.sidebar.hide()">
+        </i>
+      </span>
+  </div>
+  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail"
+       x-ng-class="{'two-tabs': mainVm.sidebar.getData().currentPage === 'guests-list'}">
+    <md-content>
+      <md-tabs md-dynamic-height="" md-border-bottom="">
+        <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage === 'guests-list'"
+                label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 no-padding">
+          <!-- GUEST DETAILS -->
+          <md-content>
+            <div x-ng-include="'directives/sidebar-content/sidebar-content-guest-details-read.html'"></div>
+          </md-content>
+        </md-tab>
+        <md-tab id="tab2" label="{{'GUEST_DETAILS.EDIT_GUEST' | translate}}" class="col-xs-4 no-padding disabled">
+          <!--EDIT tab-->
+          <md-content class="md-padding">
+            <!-- TODO: Replace with edit guest form - similar to thethe create aside from the add message form field
+                <div x-ng-include="'modules/linshare.sharedSpace/views/workgroup_members.html'"></div>
                 -->
-              <p x-ng-if="!activated">
-                <a>
-                  {{'GUEST_DETAILS.JOIN_RESTRICTED_CONTACT_LIST' | translate}}
-                </a>
-              </p>
-              <p x-ng-if="activated">
-                {{'GUEST_DETAILS.ALLREADY_A_MEMBER' | translate}}
-              </p>
-              <p x-ng-if="activated">
-                {{'GUEST_DETAILS.DEACTIVATED' | translate}}
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- Display only if the current viewer is the admin-->
-        <div class="meta-data-ctn">
-          <h2 class="subheader">
-            <i class="groups-user-group"></i>
-            {{'GUEST_DETAILS.AVAILABLE_CONTACTS' | translate}}
-          </h2>
-          <!--TODO: Replace with appopriate contact list from db -->
-          <div class="meta-data-content m-t-20">
-            <!--TODO: Put  the appropriate domain name within the title attribute cf MySubDomain -->
-            <div class="custom-list-item" tooltip-placement="bottom" tooltip-popup-delay="700"
-                 uib-tooltip="Cornell Able : MySubDomain">
-              <p class="pull-left circle-ctn">
-                <span class="circle user-bg">C</span>
-              </p>
-              <div class="pull-left name-recipients-ctn">
-                <p class="pull-left inner-text-li">
-                  Cornell Able
-                </p>
-              </div>
-            </div>
-            <div class="custom-list-item" tooltip-placement="bottom" tooltip-popup-delay="700"
-                 uib-tooltip="Cornell Able : MySubDomain">
-              <p class="pull-left circle-ctn">
-                <span class="circle user-bg">C</span>
-              </p>
-              <div class="pull-left name-recipients-ctn">
-                <p class="pull-left inner-text-li">
-                  Cornell Able
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
 </div>

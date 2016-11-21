@@ -1,4 +1,7 @@
 {
+  "ACTION": {
+    "ADD_TO_WORKGROUPS": "Ajouter à des groupes de travail"
+  },
   "ADD_GUEST_SIDEBAR": {
     "ACTIVATE_USER_SPACE": "Activer son expace personnel ",
     "ADD_DESCRIPTION": "Ajouter une description au profil",
@@ -20,41 +23,40 @@
     "SUBMIT": "Créer",
     "TITLE": "Ajouter compte invité"
   },
-  "BREADCRUMB_TITLE": "Comptes invités",
-  "HEADER_GUEST": {
-    "DOMAIN" : "Domaine"
-  },
-  "MY_GUESTS": "Mes invités",
-  "ALL_GUESTS": "Tous les invités",
   "BOUTON_LABEL_TITLE": {
-    "EDIT" : "Modifier",
-    "DELETE" : "Supprimer",
-    "GUEST" : "Invité(s)"
+    "EDIT": "Modifier",
+    "DELETE": "Supprimer",
+    "GUEST": "Invité(s)"
   },
-  "ACTION": {
-    "JOIN_RESTRICTED_CONTACTS" : "S'ajouter aux contacts restreint",
-    "ADD_TO_WORKGROUPS" : "Ajouter à des groupes de travail",
-    "ADMIN_REQUEST" : "Obtenir les droits d'administration"
+  "BREADCRUMB_TITLE": "Comptes invités",
+  "GUEST_CHOSEN": {
+    "ALL_GUESTS": "Tous les invités",
+    "MY_GUESTS": "Mes invités",
+    "SHOW": "Afficher :"
   },
-  "ORDER_BY": {
-    "EXPIRATION_DATE" : "Date d'expiration",
-    "EMAIL" : "Courriel",
-    "DOMAIN_NAME" : "Nom de domaine"
-  },
-  "GUEST_DETAILS":{
+  "GUEST_DETAILS": {
+    "ACTIVATED": "Activé",
+    "ADMIN": "Administrateur",
+    "ALREADY_A_MEMBER": "Déjà membre",
+    "AVAILABLE_CONTACTS": "Liste de contacts disponible",
+    "COMMENT": {
+      "EMPTY": "Pas de commentaire",
+      "TITLE": "Commentaire"
+    },
+    "DEACTIVATED": "Désactivé",
     "DETAIL_OF_GUEST_ACCOUNT": "Détail compte invité",
+    "DOMAIN": "Domaine",
     "EDIT_GUEST": "Editer",
     "EXPIRE_THE": "Expire le",
-    "DOMAIN": "Domaine",
-    "ADMIN": "Administrateur",
     "MY_SPACE": "Espace personnel",
-    "RESTRICTED_CONTACTS": "Contact restreint",
-    "ACTIVATED": "Activé",
-    "DEACTIVATED": "Désactivé",
-    "AVAILABLE_CONTACTS": "Liste de contacts disponible",
-    "ALREADY_A_MEMBER": "Déjà membre",
-    "JOIN_RESTRICTED_CONTACT_LIST": "Rejoindre la liste"
+    "RESTRICTED_CONTACTS": "Contact restreint"
+  },
+  "HEADER_GUEST": {
+    "DOMAIN": "Domaine"
+  },
+  "ORDER_BY": {
+    "EXPIRATION_DATE": "Date d'expiration",
+    "EMAIL": "Courriel",
+    "DOMAIN_NAME": "Nom de domaine"
   }
 }
-
-
