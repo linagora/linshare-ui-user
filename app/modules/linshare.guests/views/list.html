@@ -221,7 +221,8 @@
         </a>
         </span>
         <span>
-            <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}">
+            <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+               x-ng-click="guestVm.removeSelectedGuests(guestVm.selectedGuests)">
             <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
         </a>
         </span>
@@ -283,7 +284,6 @@
               data-current-selected-Document="guestVm.currentSelectedGuest"
               data-details-function="guestVm.getGuestDetails"
               data-right-sidebar-open="mainVm.sidebar.isVisible()"
-              x-ng-click="guestVm.showGuestDetails(guestData)"
               x-ng-class="{'highlightListElem': guestData.isSelected,
                            'current-vis': guestVm.currentSelectedGuest.current.uuid === guestData.uuid}"
               class="p-b-5" context-menu="moreOptionsContexualMenu">
@@ -337,7 +337,7 @@
                         <i class="zmdi zmdi-info-outline"></i>
                         </a>
                       </li>
-                      <li class="hidden-xs hidden-action-links">
+                      <li x-ng-click="guestVm.removeGuest(guestData)" class="hidden-xs hidden-action-links">
                         <a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}" event-propagation-stop="true">
                         <i class="fa fa-trash-o"></i>
                         </a>
@@ -385,7 +385,7 @@
                           </a>
                           </li>
                           <li>
-                          <a href=""  x-ng-click="" event-propagation-stop>
+                          <a href="" x-ng-click="guestVm.removeGuest(guestData)" event-propagation-stop>
                           <i class="fa fa-trash-o"></i>
                           {{'BOUTON_LABEL_TITLE.DELETE' | translate}}
                           </a>
@@ -433,7 +433,8 @@
   </a>
   </span>
   <span>
-    <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}">
+    <a class="plain-txt-btn partage-link" x-ng-click="guestVm.removeSelectedGuests(guestVm.selectedGuests)"
+       title="{{'SELECTION_TOOLBAR.DELETE' | translate}}">
       <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
   </a>
   </span>

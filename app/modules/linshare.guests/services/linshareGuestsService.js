@@ -58,8 +58,15 @@
       return ServerManagerService.responseHandler(baseGuestRest.post(guestDto));
     }
 
-    function deleteGuest(guestDto) {
-      return baseGuestRest.remove(guestDto);
+    /**
+     *  @name deleteGuest
+     *  @desc Delete a Guest object
+     *  @param {String} uuid - uuid of the Guest object
+     *  @returns {Promise} server reponse
+     *  @memberOf LinShare.guests.LinshareGuestService
+     */
+    function deleteGuest(uuid) {
+      return ServerManagerService.responseHandler(Restangular.one('guests', uuid).remove());
     }
 
     /**

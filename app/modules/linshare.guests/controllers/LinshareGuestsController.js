@@ -46,6 +46,8 @@
     guestVm.lsFullDateFormat = lsFullDateFormat;
     guestVm.newGuest = lsAppConfig.newGuest;
     guestVm.paramFilter = {};
+    guestVm.removeGuest = removeGuest;
+    guestVm.removeSelectedGuests = removeSelectedGuests;
     guestVm.selectedGuest = {};
     guestVm.selectedGuests = [];
     guestVm.setSubmitted = setSubmitted;
@@ -175,6 +177,33 @@
      */
     function lsFullDateFormat() {
       return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
+    }
+
+    /**
+     *  @name removeGuest
+     *  @desc remove a Guest object
+     *  @param {Object} guestObject - A Guest object
+     *  @return {Promise} server response
+     *  @memberOf LinShare.Guests.LinshareGuestsController
+     */
+    function removeGuest(guestObject) {
+      return LinshareGuestService.deleteGuest(guestObject.uuid).then(function() {
+        guestVm.tableParams.reload();
+      });
+    }
+
+    /**
+     *  @name removeSelectedGuests
+     *  @desc remove a Guest object
+     *  @param {Array<Object>} guestsList - An array of Guest object
+     *  @memberOf LinShare.Guests.LinshareGuestsController
+     */
+    function removeSelectedGuests(guestsList) {
+      _.forEach(guestsList, function(guestObject) {
+        guestVm.removeGuest(guestObject).then(function() {
+          _.remove(guestsList, guestObject);
+        });
+      });
     }
 
     /**
