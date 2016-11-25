@@ -10,14 +10,14 @@ angular
   .module('linshare.authentication')
   .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$log', 'AuthenticationService'];
+  AuthenticationController.$inject = ['$scope', '$log', 'authenticationRestService'];
 
   /**
    * @namespace AuthenticationController
    * @desc Application authentication system controller
    * @memberOf LinShare.Authentication
    */
-  function AuthenticationController($scope, $log, AuthenticationService) {
+  function AuthenticationController($scope, $log, authenticationRestService) {
     /* jshint validthis: true */
     var authenticationVm = this;
 
@@ -27,11 +27,11 @@ angular
 
     /**
      * @name logout
-     * @desc Call logout from AuthenticationService
+     * @desc Call logout from authenticationRestService
      * @memberOf LinShare.Authentication.AuthenticationController
      */
     function logout() {
-      AuthenticationService.logout();
+      authenticationRestService.logout();
     }
   }
 })();

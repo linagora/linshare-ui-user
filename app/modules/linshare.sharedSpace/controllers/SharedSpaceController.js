@@ -1,8 +1,8 @@
 'use strict';
-angular.module('linshareUiUserApp')
+angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
                                                 workgroups, $translate, $state, documentUtilsService,
-                                                workGroupRestService, workGroupFoldersRestService, growlService,
+                                                workgroupRestService, workgroupFoldersRestService, growlService,
                                                 lsAppConfig) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
@@ -55,7 +55,7 @@ angular.module('linshareUiUserApp')
             angular.element(idElem).text(initialName);
             data.name = initialName.trim();
           }
-          workGroupRestService.update(data);
+          workgroupRestService.update(data);
           angular.element(this).attr('contenteditable', 'false');
         })
         .on('keypress', function(e) {
@@ -65,7 +65,7 @@ angular.module('linshareUiUserApp')
               angular.element(idElem).text(initialName);
               data.name = initialName.trim();
             }
-            workGroupRestService.update(data);
+            workgroupRestService.update(data);
             angular.element(this).attr('contenteditable', 'false');
             angular.element(this).blur();
           }
@@ -80,7 +80,7 @@ angular.module('linshareUiUserApp')
     thisctrl.renameFolder = renameFolder;
 
     thisctrl.getDetails = function(item) {
-      return documentUtilsService.getItemDetails(workGroupRestService, item);
+      return documentUtilsService.getItemDetails(workgroupRestService, item);
     };
 
     thisctrl.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
@@ -175,8 +175,7 @@ angular.module('linshareUiUserApp')
     };
 
     thisctrl.goToSharedSpaceTarget = function(uuid, name) {
-      workGroupFoldersRestService.setWorkgroupUuid(uuid);
-      workGroupFoldersRestService.getParent(uuid).then(function(folder) {
+      workgroupFoldersRestService.getParent(uuid, uuid).then(function(folder) {
         /*jshint eqnull: true*/
         if (folder[0] == null) {
           $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name, parent: uuid, folderUuid: uuid, folderName: name.trim()});
@@ -244,7 +243,7 @@ angular.module('linshareUiUserApp')
     }
 
     function showItemDetails(current, event) {
-      workGroupRestService.get(current.uuid).then(function(data) {
+      workgroupRestService.get(current.uuid).then(function(data) {
         thisctrl.currentSelectedDocument.current = data;
         thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
         thisctrl.mdtabsSelection.selectedIndex = 0;
@@ -262,7 +261,7 @@ angular.module('linshareUiUserApp')
     }
 
     function createFolder(folderName) {
-      workGroupRestService.create({name: folderName.trim()}).then(function(data) {
+      workgroupRestService.create({name: folderName.trim()}).then(function(data) {
         thisctrl.itemsList.push(data);
         thisctrl.tableParams.reload();
         $timeout(function() {

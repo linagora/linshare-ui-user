@@ -6,7 +6,7 @@
 
 angular.module('linshare.share')
 
-  .factory('ShareObjectService', function($log, LinshareFunctionalityService, LinshareShareService, $q, growlService) {
+  .factory('ShareObjectService', function($log, functionalityRestService, LinshareShareService, $q, growlService) {
 
     var recipients = [],
       mailingListUuid = [],
@@ -16,24 +16,24 @@ angular.module('linshare.share')
       notificationDateForUSDA = {},
       secured = {};
 
-    LinshareFunctionalityService.getFunctionalityParams('SHARE_EXPIRATION').then(function(expiration) {
+    functionalityRestService.getFunctionalityParams('SHARE_EXPIRATION').then(function(expiration) {
       angular.extend(expirationDate, expiration);
       expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit).subtract(1, 'd').valueOf();
     });
 
-    LinshareFunctionalityService.getFunctionalityParams('SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER').then(function(param) {
+    functionalityRestService.getFunctionalityParams('SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER').then(function(param) {
       angular.extend(creationAcknowledgement, param);
     });
-    LinshareFunctionalityService.getFunctionalityParams('UNDOWNLOADED_SHARED_DOCUMENTS_ALERT').then(function(param) {
+    functionalityRestService.getFunctionalityParams('UNDOWNLOADED_SHARED_DOCUMENTS_ALERT').then(function(param) {
       angular.extend(enableUSDA, param);
     });
 
-    LinshareFunctionalityService.getFunctionalityParams('UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION').then(function(param) {
+    functionalityRestService.getFunctionalityParams('UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION').then(function(param) {
       angular.extend(notificationDateForUSDA, param);
       notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
     });
 
-    LinshareFunctionalityService.getFunctionalityParams('ANONYMOUS_URL').then(function(param) {
+    functionalityRestService.getFunctionalityParams('ANONYMOUS_URL').then(function(param) {
       angular.extend(secured, param);
     });
 
@@ -178,7 +178,7 @@ angular.module('linshare.share')
     ShareObjectForm.prototype.share = function() {
       var deferred = $q.defer();
       if (this.waitingUploadIdentifiers.length === 0) {
-        return LinshareShareService.shareDocuments(this.getFormObj()).then(function() {
+        return LinshareShareService.create(this.getFormObj()).then(function() {
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
         });
       } else {

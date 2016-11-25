@@ -1,80 +1,131 @@
+/**
+ * LinshareDocumentRestService factory
+ * @namespace LinShare.document
+ */
 (function() {
   'use strict';
 
   angular
     .module('linshare.document')
-    .factory('documentRestService', documentRestService);
+    .factory('LinshareDocumentRestService', LinshareDocumentRestService);
 
-  documentRestService.$inject = ['Restangular', '$log'];
+  LinshareDocumentRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
 
-  function documentRestService(Restangular, $log) {
-    var baseRestDocuments = Restangular.all('documents');
+  /**
+   *  @namespace LinshareDocumentRestService
+   *  @desc Service to interact with Document object by REST
+   *  @memberOf LinShare.document
+   */
+  function LinshareDocumentRestService($log, Restangular, ServerManagerService) {
+    var
+      handler = ServerManagerService.responseHandler,
+      restUrl = 'documents',
+      service = {
+        create: create,
+        download: download,
+        get: get,
+        getList: getList,
+        remove: remove,
+        thumbnail: thumbnail,
+        update: update
+      };
 
-    return {
-      getAllFiles: getAllFiles,
-      get: get,
-      downloadFile: downloadFile,
-      getThumbnail: getThumbnail,
-      uploadFiles: uploadFiles,
-      deleteFile: deleteFile,
-      autocomplete: autocomplete,
-      update: update,
-      updateFile: updateFile
-    };
+    return service;
 
-    function getAllFiles() {
-      $log.debug('documentRestService:getAllFiles');
-      return baseRestDocuments.getList();
-    }
+    ////////////
 
-    function get(uuid) {
-      $log.debug('documentRestService:get a File details');
-      return Restangular.one('documents', uuid).get({withShares: true});
-    }
-
-    function downloadFile(uuid) {
-      $log.debug('documentRestService:downloadFiles');
-      return Restangular.all('documents').one(uuid, 'download').withHttpConfig({responseType: 'arraybuffer'}).get();
-    }
-
-    function getThumbnail(uuid) {
-      $log.debug('documentRestService:getThumbnail');
-      return Restangular.one('documents', uuid).one('thumbnail').get({base64: true});
-    }
-
-    function uploadFiles(documentDto) {
-      $log.debug('documentRestService:uploadFiles');
-      return Restangular.all('documents').post(documentDto);
-    }
-
-    function deleteFile(uuid) {
-      $log.debug('documentRestService:deleteFiles');
-      return Restangular.one('documents', uuid).remove();
-    }
-
-    function autocomplete(pattern) {
-      $log.debug('documentRestService:autocomplete');
-      return Restangular.all('users').one('autocomplete', pattern).get();
-    }
-
-		/**
-     * Call to the rest api for updating a Document
-     * @param uuid
-     * @param documentDto
-     * @returns {*}
+    /**
+     *  @name create
+     *  @desc Create a Document object
+     *  @param {Object} documentDto - The Document object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
      */
-    function update (uuid, documentDto) {
-      $log.debug('LinshareDocumentRestService : updating a document');
+    function create(documentDto) {
+      $log.debug('LinshareDocumentRestService : create', documentDto);
+      return handler(Restangular.all(restUrl).post(documentDto));
+    }
+
+    /**
+     *  @name download
+     *  @desc Download file of a Document object
+     *  @param {String} uuid - The id of the Document object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function download(uuid) {
+      $log.debug('LinshareDocumentRestService : download', uuid);
+      return handler(Restangular.all(restUrl).one(uuid, 'download').withHttpConfig({
+        responseType: 'arraybuffer'
+      }).get());
+    }
+
+    /**
+     *  @name get
+     *  @desc Get a Document object
+     *  @param {String} uuid - The id of the Document object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function get(uuid) {
+      $log.debug('LinshareDocumentRestService : get', uuid);
+      return handler(Restangular.one(restUrl, uuid).get({
+        withShares: true
+      }));
+    }
+
+    /**
+     *  @name getList
+     *  @desc Get the list of the Documents object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function getList() {
+      $log.debug('LinshareDocumentRestService: getList');
+      return handler(Restangular.all(restUrl).getList());
+    }
+
+    /**
+     *  @name remove
+     *  @desc Remove a Document object
+     *  @param {String} uuid - The id of the Document object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function remove(uuid) {
+      $log.debug('LinshareDocumentRestService : remove', uuid);
+      return handler(Restangular.one(restUrl, uuid).remove());
+    }
+
+    /**
+     *  @name thumbnail
+     *  @desc Get the file thumbnail of a Document object
+     *  @param {String} uuid - The id of the Document object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function thumbnail(uuid) {
+      $log.debug('LinshareDocumentRestService : thumbnail', uuid);
+      return handler(Restangular.one(restUrl, uuid).one('thumbnail').get({
+        base64: true
+      }));
+    }
+
+    /**
+     *  @name update
+     *  @desc Update a Document object
+     *  @param {String} uuid - The id of the Document object
+     *  @param {Object} documentDto - The Document object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function update(uuid, documentDto) {
+      $log.debug('LinshareDocumentRestService : update', uuid, documentDto);
       var documentUpdated = _.cloneDeep(documentDto);
       if (documentUpdated.thumbnail) {
         delete documentUpdated.thumbnail;
       }
-      return Restangular.one('documents', uuid).customPUT(documentUpdated);
-    }
-
-    function updateFile(uuid, documentDto) {
-      $log.debug('documentRestService updating a document');
-      return Restangular.all('documents').one(uuid).post(documentDto);
+      return handler(Restangular.one(restUrl, uuid).customPUT(documentUpdated));
     }
   }
 })();

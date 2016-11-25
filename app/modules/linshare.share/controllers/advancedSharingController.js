@@ -17,7 +17,7 @@ angular.module('linshare.share')
         return;
       }
       if (now) {
-        LinshareShareService.shareDocuments(shareCreationDto.getFormObj()).then(function() {
+        LinshareShareService.create(shareCreationDto.getFormObj()).then(function() {
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
           $scope.$emit('linshare-share-done');
           $scope.mainVm.sidebar.hide();

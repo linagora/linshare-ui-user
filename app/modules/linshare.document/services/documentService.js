@@ -94,7 +94,7 @@ function documentUtilsService($translate, growlService, $log, $timeout, $q) {
     itemService.get(item.uuid).then(function(data) {
       details = data;
       if (data.hasThumbnail) {
-        itemService.getThumbnail(item.uuid).then(function(thumbnail) {
+        itemService.thumbnail(item.uuid).then(function(thumbnail) {
           details.thumbnail = thumbnail;
         });
       } else {

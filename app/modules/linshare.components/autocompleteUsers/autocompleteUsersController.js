@@ -125,7 +125,7 @@
     function searchUsersAccount(pattern) {
       if (pattern.length >= 3) {
         var deferred = $q.defer();
-        autocompleteUserRestService(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
+        autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
           if (data.length === 0 && autocompleteUsersVm.withEmail) {
             $scope.userEmail = pattern;
           }

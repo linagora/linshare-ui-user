@@ -6,11 +6,11 @@ describe('Testing Authentication Module: ', function () {
   // load the module
   beforeEach(module('linshare.authentication'));
 
-  var AuthenticationService, httpBackend;
+  var authenticationRestService, httpBackend;
 
-  beforeEach(inject(function(_$httpBackend_, _AuthenticationService_) {
+  beforeEach(inject(function(_$httpBackend_, _authenticationRestService_) {
     httpBackend = _$httpBackend_;
-    AuthenticationService = _AuthenticationService_;
+    authenticationRestService = _authenticationRestService_;
   }));
 
   describe('Test authenticationService', function() {
@@ -27,7 +27,7 @@ describe('Testing Authentication Module: ', function () {
 
       httpBackend.when('GET', 'linshare/authentication/authorized?ignoreAuthModule=true')
         .respond({uuid: '9514', firstName: 'John', lastName: 'Doe'});
-      AuthenticationService.login('login', 'passwd');
+      authenticationRestService.login('login', 'passwd');
       httpBackend.flush();
     });
 
@@ -37,7 +37,7 @@ describe('Testing Authentication Module: ', function () {
 
       httpBackend.when('GET', 'linshare/authentication/authorized?ignoreAuthModule=true')
         .respond({uuid: '9514', firstName: 'John', lastName: 'Doe'});
-      AuthenticationService.login(login, password);
+      authenticationRestService.login(login, password);
       httpBackend.flush();
       expect(authService.loginConfirmed.calls.any()).toEqual(true);
     });
@@ -47,7 +47,7 @@ describe('Testing Authentication Module: ', function () {
       httpBackend.whenGET('linshare/authentication/logout').respond(200);
       httpBackend.when('GET', 'linshare/authentication/authorized')
         .respond(200);
-      AuthenticationService.logout();
+      authenticationRestService.logout();
       httpBackend.flush();
       expect(authService.loginCancelled.calls.any()).toEqual(true);
     })
@@ -71,21 +71,21 @@ describe('Testing Authentication Module: ', function () {
     it('should submit authentication', function() {
       httpBackend.expect('GET', 'linshare/authentication/authorized')
         .respond({uuid: '9514', firstName: 'John', lastName: 'Doe'});
-      AuthenticationService.getCurrentUser();
+      authenticationRestService.getCurrentUser();
       httpBackend.flush();
     });
 
-    it('Logout function should call AuthenticationService login', function () {
+    it('Logout function should call authenticationRestService login', function () {
 
-      spyOn(AuthenticationService, 'login').and.callThrough();
+      spyOn(authenticationRestService, 'login').and.callThrough();
       $scope.submitLoginForm();
-      expect(AuthenticationService.login.calls.any()).toEqual(true);
+      expect(authenticationRestService.login.calls.any()).toEqual(true);
     });
 
-    it('Logout function should call AuthenticationService logout', function () {
-      spyOn(AuthenticationService, 'logout');
+    it('Logout function should call authenticationRestService logout', function () {
+      spyOn(authenticationRestService, 'logout');
       $scope.logout();
-      expect(AuthenticationService.logout.calls.any()).toEqual(true);
+      expect(authenticationRestService.logout.calls.any()).toEqual(true);
     });
 
   });

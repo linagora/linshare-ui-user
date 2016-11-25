@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('linshareUiUserApp')
+angular.module('linshare.sharedSpace')
 
   .directive('hoverDropdownFix', function() {
     return {

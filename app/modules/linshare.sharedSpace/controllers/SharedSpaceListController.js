@@ -2,10 +2,10 @@
   'use strict';
 
   angular
-    .module('linshareUiUserApp')
+    .module('linshare.sharedSpace')
     .controller('SharedSpaceListController', sharedSpaceListController);
 
-  function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService, workGroupMembersRestService, workGroupEntriesRestService, workGroupFoldersRestService, $state, $stateParams, Restangular, $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService, flowUploadService, flowParamsService, lsAppConfig, $q) {
+  function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService, workgroupMembersRestService, workgroupEntriesRestService, workgroupFoldersRestService, $state, $stateParams, Restangular, $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService, flowUploadService, flowParamsService, lsAppConfig, $q) {
     /* jshint validthis:true */
     var sharedSpaceListVm = this;
 
@@ -62,11 +62,10 @@
     ////////////////
 
     function activate() {
-      workGroupMembersRestService.get(sharedSpaceListVm.uuid, $scope.userLogged.uuid).then(function(member) {
+      workgroupMembersRestService.get(sharedSpaceListVm.uuid, $scope.userLogged.uuid).then(function(member) {
         sharedSpaceListVm.currentWorkgroupMember = member;
       });
 
-      workGroupEntriesRestService.setWorkgroupUuid(sharedSpaceListVm.uuid);
       flowParamsService.setFlowParams(sharedSpaceListVm.uuid, sharedSpaceListVm.folderUuid);
 
       $scope.$on('$stateChangeSuccess', function() {
@@ -134,7 +133,7 @@
     }
 
     function copy(entryUuid) {
-      workGroupEntriesRestService.copy(sharedSpaceListVm.uuid, entryUuid).then(function() {
+      workgroupEntriesRestService.copy(sharedSpaceListVm.uuid, entryUuid).then(function() {
         growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'inverse');
       });
     }
@@ -180,7 +179,7 @@
     }
 
     function downloadDocument(document) {
-      return workGroupEntriesRestService.download(sharedSpaceListVm.uuid, document.uuid).then(function(fileStream) {
+      return workgroupEntriesRestService.download(sharedSpaceListVm.uuid, document.uuid).then(function(fileStream) {
         documentUtilsService.downloadFileFromResponse(fileStream, document.name, document.type);
       });
     }
@@ -200,7 +199,26 @@
     }
 
     function getDetails(item) {
-      return documentUtilsService.getItemDetails(workGroupEntriesRestService, item);
+      var
+        deferred = $q.defer(),
+        details = {},
+        service = item.workGroup ? workgroupFoldersRestService : workgroupEntriesRestService;
+
+      service.get(sharedSpaceListVm.uuid, item.uuid).then(function(data) {
+        details = data;
+        if (data.hasThumbnail) {
+          service.thumbnail(sharedSpaceListVm.uuid, item.uuid).then(function(thumbnail) {
+            details.thumbnail = thumbnail;
+          });
+        } else {
+          delete details.thumbnail;
+        }
+        deferred.resolve(details);
+      }, function(error) {
+        deferred.reject(error);
+      });
+
+      return deferred.promise;
     }
 
     function goToSharedSpaceFolderTarget(uuid, name, parent, folderUuid, folderName, fromBreacrumb, needReplace) {
@@ -305,33 +323,39 @@
     }
 
     function pushEntriesAndBreadcrumb() {
-      workGroupFoldersRestService.get(sharedSpaceListVm.folderUuid).then(function(folder) {
-        var currentWorkGroupEntries = _.clone(currentWorkGroup);
-        currentWorkGroupEntries.route = 'entries';
-        sharedSpaceBreadcrumbService.build(folder.ancestors).then(function(breadcrumb) {
-          sharedSpaceListVm.breadcrumbFolders = breadcrumb;
-        });
+      if (sharedSpaceListVm.folderUuid !== sharedSpaceListVm.uuid) {
+        workgroupFoldersRestService.get(sharedSpaceListVm.uuid, sharedSpaceListVm.folderUuid).then(function(folder) {
+          var currentWorkGroupEntries = _.clone(currentWorkGroup);
+          currentWorkGroupEntries.route = 'entries';
+          sharedSpaceBreadcrumbService.build(sharedSpaceListVm.uuid, folder.ancestors).then(function(breadcrumb) {
+            sharedSpaceListVm.breadcrumbFolders = breadcrumb;
+          });
 
-        _.forEach(folder.entries, function(entry) {
-          Restangular.restangularizeElement(currentWorkGroup, entry, 'entries/' + entry.uuid);
-          entry.parentResource.route = '';
-          sharedSpaceListVm.itemsList.push(entry);
-        });
+          _.forEach(folder.entries, function(entry) {
+            Restangular.restangularizeElement(currentWorkGroup, entry, 'entries/' + entry.uuid);
+            entry.parentResource.route = '';
+            sharedSpaceListVm.itemsList.push(entry);
+          });
 
+          loadTable().then(function(data) {
+            sharedSpaceListVm.tableParams = data;
+          });
+        }, 0);
+      } else {
         loadTable().then(function(data) {
           sharedSpaceListVm.tableParams = data;
         });
-      }, 0);
+      }
     }
 
     function reloadDocuments() {
       $timeout(function() {
         if (sharedSpaceListVm.folderUuid === sharedSpaceListVm.uuid) {
-          workGroupFoldersRestService.getParent(sharedSpaceListVm.uuid).then(function(folder) {
+          workgroupFoldersRestService.getParent(sharedSpaceListVm.uuid, sharedSpaceListVm.uuid).then(function(folder) {
             sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, folder[0].parent, folder[0].uuid, folder[0].name, true, true);
           }, 0);
         } else {
-          workGroupFoldersRestService.getParent(sharedSpaceListVm.folderUuid).then(function(data) {
+          workgroupFoldersRestService.getParent(sharedSpaceListVm.uuid, sharedSpaceListVm.folderUuid).then(function(data) {
             sharedSpaceListVm.itemsList = data;
             sharedSpaceListVm.itemsListCopy = data;
             $scope.isNewAddition = true;
@@ -361,7 +385,7 @@
     }
 
     function saveNewFolder(folder) {
-      workGroupFoldersRestService.create(folder).then(function(data) {
+      workgroupFoldersRestService.create(sharedSpaceListVm.uuid, folder).then(function(data) {
         sharedSpaceListVm.itemsList.pop();
         sharedSpaceListVm.itemsList.push(data);
         sharedSpaceListVm.tableParams.reload();
@@ -447,7 +471,7 @@
               if (newFolder) {
                 saveNewFolder(data);
               } else {
-                workGroupFoldersRestService.update(data);
+                workgroupFoldersRestService.update(sharedSpaceListVm.uuid, data);
               }
               angular.element(this).attr('contenteditable', 'false');
             } else {
@@ -476,7 +500,7 @@
                   saveNewFolder(data);
                 } else {
                   if (data.name !== initialName) {
-                    workGroupFoldersRestService.update(data);
+                    workgroupFoldersRestService.update(sharedSpaceListVm.uuid, data);
                   }
                 }
                 angular.element(this).attr('contenteditable', 'false');
@@ -508,7 +532,7 @@
     }
 
     function showItemDetails(current, event) {
-      workGroupEntriesRestService.get(sharedSpaceListVm.uuid, current.uuid).then(function(data) {
+      workgroupEntriesRestService.get(sharedSpaceListVm.uuid, current.uuid).then(function(data) {
         sharedSpaceListVm.currentSelectedDocument.current = data;
       });
       $scope.loadSidebarContent(sharedSpaceListVm.workgroupDetailFile);
@@ -568,7 +592,7 @@
 
     function updateNewName(data, elem) {
       delete data.lastAuthor;
-      workGroupEntriesRestService.update(data.uuid, data);
+      workgroupEntriesRestService.update(sharedSpaceListVm.uuid, data.uuid, data);
       angular.element(elem).attr('contenteditable', 'false');
     }
   }

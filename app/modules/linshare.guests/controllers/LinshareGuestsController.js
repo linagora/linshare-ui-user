@@ -12,7 +12,7 @@
 
   //TODO - KLE: Check DI
   LinshareGuestsController.$inject = ['$filter', '$log', '$q', '$scope', '$translate', '$translatePartialLoader',
-    'growlService', 'GuestObjectService', 'LinshareGuestService', 'lsAppConfig', 'NgTableParams'
+    'growlService', 'GuestObjectService', 'guestRestService', 'lsAppConfig', 'NgTableParams'
   ];
 
   /**
@@ -21,7 +21,7 @@
    * @memberOf LinShare.Guests
    */
   function LinshareGuestsController($filter, $log, $q, $scope, $translate, $translatePartialLoader,
-    growlService, GuestObjectService, LinshareGuestService, lsAppConfig, NgTableParams) {
+    growlService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams) {
     /* jshint validthis: true */
     var guestVm = this;
 
@@ -103,7 +103,7 @@
      *  @memberOf LinShare.Guests.LinshareGuestsController
      */
     function getGuestDetails(item) {
-      return LinshareGuestService.findGuest(item.uuid);
+      return guestRestService.get(item.uuid);
     }
 
     /**
@@ -121,7 +121,7 @@
         filter: guestVm.paramFilter
       }, {
         getData: function(params) {
-          return LinshareGuestService.getList(guestVm.isAllGuestSelected).then(function(data) {
+          return guestRestService.getList(guestVm.isAllGuestSelected).then(function(data) {
             var filteredData = [];
             switch (params.filter().operator) {
               case '||':
@@ -187,7 +187,7 @@
      *  @memberOf LinShare.Guests.LinshareGuestsController
      */
     function removeGuest(guestObject) {
-      return LinshareGuestService.deleteGuest(guestObject.uuid).then(function() {
+      return guestRestService.deleteGuest(guestObject.uuid).then(function() {
         guestVm.tableParams.reload();
       });
     }

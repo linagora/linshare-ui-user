@@ -4,7 +4,7 @@ angular
   .module('linshareUiUserApp')
   .controller('UiUserMainController',
     function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
-             AuthenticationService, MenuService, $timeout, LinshareUserService, lsAppConfig, $http) {
+             authenticationRestService, MenuService, $timeout, LinshareUserService, lsAppConfig, $http) {
       //TODO: shall be moved to the directive controller of linshareSidebar directive
       var Sidebar = function() {
         var sidebar = {
@@ -102,7 +102,7 @@ angular
         });
       $scope.loggedUser = new LinshareUserService();
 
-      AuthenticationService.getCurrentUser().then(function(user) {
+      authenticationRestService.getCurrentUser().then(function(user) {
         $scope.loggedUser.setUser(user);
         user.firstLetter = user.firstName.charAt(0);
         $scope.userLogged = user;
@@ -229,7 +229,7 @@ angular
        * Get the core version from the REST API
        * @type {string}
        */
-      AuthenticationService.version().then(function(data) {
+      authenticationRestService.version().then(function(data) {
         $scope.coreVersion = data.version;
       });
 

@@ -2,20 +2,20 @@
   'use strict';
 
   angular
-    .module('linshareUiUserApp')
+    .module('linshare.sharedSpace')
     .factory('sharedSpaceBreadcrumbService', sharedSpaceBreadcrumbService);
 
-  function sharedSpaceBreadcrumbService($q, workGroupFoldersRestService) {
+  function sharedSpaceBreadcrumbService($q, workgroupFoldersRestService) {
 
     return {
       build: build
     };
 
-    function build(ancestors) {
+    function build(workgroupUuid, ancestors) {
       var deferred = $q.defer();
       var breadcrumb = [];
       _.forEach(ancestors, function(ancestor) {
-        workGroupFoldersRestService.get(ancestor).then(function(folder) {
+        workgroupFoldersRestService.get(workgroupUuid, ancestor).then(function(folder) {
           breadcrumb[setPosition(ancestors, folder)] = ({uuid: folder.uuid, name: folder.name, parent: folder.parent});
         });
       });

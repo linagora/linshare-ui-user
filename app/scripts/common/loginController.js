@@ -5,8 +5,8 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-.controller('loginController', ['$rootScope', 'AuthenticationService', 'languageService',
-  function($rootScope, AuthenticationService, languageService) {
+.controller('loginController', ['$rootScope', 'authenticationRestService', 'languageService',
+  function($rootScope, authenticationRestService, languageService) {
 
     this.email = '';
     this.password = '';
@@ -24,7 +24,7 @@ angular.module('linshareUiUserApp')
     this.loginLocale = splitLocale(locale);
 
     this.submitForm = function() {
-      AuthenticationService.login(this.email, this.password);
+      authenticationRestService.login(this.email, this.password);
     };
 
     this.changeLoginLanguage = function(lang) {

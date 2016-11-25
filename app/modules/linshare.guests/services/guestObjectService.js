@@ -9,16 +9,16 @@
     .module('linshare.guests')
     .factory('GuestObjectService', GuestObjectService);
 
-  GuestObjectService.$inject = ['$q', 'AuthenticationService', 'autocompleteUserRestService',
-    'LinshareFunctionalityService', 'LinshareGuestService'];
+  GuestObjectService.$inject = ['$q', 'authenticationRestService', 'autocompleteUserRestService',
+    'functionalityRestService', 'guestRestService'];
 
   /**
    *  @namespace GuestObjectService
    *  @desc Manipulation of guest object front/back
    *  @memberOf LinShare.guest
    */
-  function GuestObjectService($q, AuthenticationService, autocompleteUserRestService,
-    LinshareFunctionalityService, LinshareGuestService) {
+  function GuestObjectService($q, authenticationRestService, autocompleteUserRestService,
+    functionalityRestService, guestRestService) {
 
     var
       allowedToAddEditors = {},
@@ -87,14 +87,14 @@
      */
     function checkFunctionalities() {
       return $q.all([
-        LinshareFunctionalityService.getFunctionalityParams('GUESTS__CAN_UPLOAD').then(function(data) {
+        functionalityRestService.getFunctionalityParams('GUESTS__CAN_UPLOAD').then(function(data) {
           allowedToUpload = data;
           allowedToUpload.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
           allowedToUpload.value = _.isUndefined(data.value) ? false : data.value;
           form.activateUserSpace = allowedToUpload.value;
           form.activateMoreOptions = form.activateUserSpace ? true : form.activateMoreOptions;
         }),
-        LinshareFunctionalityService.getFunctionalityParams('GUESTS__EXPIRATION').then(function(data) {
+        functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION').then(function(data) {
           allowedToExpiration = data;
           allowedToExpiration.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
           allowedToExpiration.value = moment()
@@ -103,20 +103,20 @@
             .valueOf();
           form.datepicker.maxDate = allowedToExpiration.value;
         }),
-        LinshareFunctionalityService.getFunctionalityParams('GUESTS__EXPIRATION_ALLOW_PROLONGATION')
+        functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION_ALLOW_PROLONGATION')
         .then(function(data) {
           allowedToProlongExpiration = data;
           allowedToProlongExpiration.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
           allowedToProlongExpiration.value = _.isUndefined(data.value) ? false : data.value;
         }),
-        LinshareFunctionalityService.getFunctionalityParams('GUESTS__RESTRICTED').then(function(data) {
+        functionalityRestService.getFunctionalityParams('GUESTS__RESTRICTED').then(function(data) {
           allowedToRestrict = data;
           allowedToRestrict.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
           allowedToRestrict.value = _.isUndefined(data.value) ? false : data.value;
           form.activateRestricted = allowedToRestrict.value;
           form.activateMoreOptions = form.activateRestricted ? true : form.activateMoreOptions;
           if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
-            AuthenticationService.getCurrentUser().then(function(user) {
+            authenticationRestService.getCurrentUser().then(function(user) {
               contacts.push({
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -127,14 +127,14 @@
           }
         })
         //TODO: To be put once the back allow editors
-        //LinshareFunctionalityService.getFunctionalityParams('GUESTS__CAN_ALLOW_EDITORS').then(function(data) {
+        //functionalityRestService.getFunctionalityParams('GUESTS__CAN_ALLOW_EDITORS').then(function(data) {
         //  allowedToAddEditors = data;
         //  allowedToAddEditors.value = _.isUndefined(data.value) ? false : data.value;
         //  allowedToAddEditors.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
         //  form.activateEditors = allowedToRestrict.value;
         //}),
         //TODO: To be put oncethe back allow email edition
-        //LinshareFunctionalityService.getFunctionalityParams('GUESTS__CAN_EDIT_EMAIL').then(function(data) {
+        //functionalityRestService.getFunctionalityParams('GUESTS__CAN_EDIT_EMAIL').then(function(data) {
         //  allowedToEmail = data;
         //  allowedToEmail.value = _.isUndefined(data.value) ? false : data.value;
         //  allowedToEmail.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
@@ -208,9 +208,9 @@
       var
         deferred = $q.defer(),
         guestDTO = self.toDTO();
-      LinshareGuestService.addGuest(guestDTO).then(function(data) {
+      guestRestService.create(guestDTO).then(function(data) {
         if (!(guestDTO.restrictedContacts === null || guestDTO.restrictedContacts === [])) {
-          LinshareGuestService.updateGuest(data.uuid, guestDTO).then(function(data) {
+          guestRestService.update(data.uuid, guestDTO).then(function(data) {
             deferred.resolve(data);
           }).catch(function(error) {
             deferred.reject(error);

@@ -78,7 +78,7 @@ angular.module('linshare.components')
         $scope.searchGuestRestrictedContacts = function(pattern) {
           $scope.popoverValue = '';
           $scope.selectedRecipient = '';
-          return autocompleteUserRestService(pattern, 'USERS');
+          return autocompleteUserRestService.search(pattern, 'USERS');
         };
 
         $scope.userRepresentation = function(u) {

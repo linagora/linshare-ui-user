@@ -104,7 +104,7 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="modules/linshare.user/userProfile.js"></script>
     <script src="modules/linshare.authentication/authentication.js"></script>
-    <script src="modules/linshare.authentication/services/authenticationService.js"></script>
+    <script src="modules/linshare.authentication/services/authenticationRestService.js"></script>
     <script src="modules/linshare.authentication/controllers/authenticationController.js"></script>
     <script src="modules/linshare.components/appComponents.js"></script>
     <script src="modules/linshare.components/services/services.js"></script>
@@ -140,8 +140,9 @@
     <script src="modules/linshare.share/controllers/advancedSharingController.js"></script>
     <script src="modules/linshare.components/autocompleteUsers/autocompleteUsersDirective.js"></script>
     <script src="modules/linshare.components/autocompleteUsers/autocompleteUsersController.js"></script>
-    <script src="modules/linshare.components/autocompleteUsers/autocompleteUserService.js"></script>
-    <script src="modules/linshare.receivedShare/receivedShareService.js"></script>
+    <script src="modules/linshare.components/autocompleteUsers/autocompleteUserRestService.js"></script>
+    <script src="modules/linshare.receivedShare/receivedShare.js"></script>
+    <script src="modules/linshare.receivedShare/receivedShareRestService.js"></script>
     <script src="modules/linshare.receivedShare/receivedShareController.js"></script>
     <script src="modules/linshare.anonymousUrl/app.js"></script>
     <script src="modules/linshare.anonymousUrl/services/anonymousUrlService.js"></script>
@@ -150,7 +151,16 @@
     <script src="modules/linshare.guests/linshareGuestsModule.js"></script>
     <script src="modules/linshare.guests/services/guestObjectService.js"></script>
     <script src="modules/linshare.guests/controllers/LinshareGuestsController.js"></script>
-    <script src="modules/linshare.guests/services/linshareGuestsService.js"></script>
+    <script src="modules/linshare.guests/services/linshareGuestsRestService.js"></script>
+    <script src="modules/linshare.sharedSpace/sharedSpace.js"></script>
+    <script src="modules/linshare.sharedSpace/services/workGroupRestService.js"></script>
+    <script src="modules/linshare.sharedSpace/services/workGroupEntriesRestService.js"></script>
+    <script src="modules/linshare.sharedSpace/services/workGroupFoldersRestService.js"></script>
+    <script src="modules/linshare.sharedSpace/services/workGroupMemberRestService.js"></script>
+    <script src="modules/linshare.sharedSpace/services/sharedSpaceBreadcrumbService.js"></script>
+    <script src="modules/linshare.sharedSpace/controllers/SharedSpaceController.js"></script>
+    <script src="modules/linshare.sharedSpace/directives/hoverDropdownFix.js"></script>
+    <script src="modules/linshare.sharedSpace/controllers/SharedSpaceListController.js"></script>
 
      <!-- App level -->
     <script src="modules/materialAdmin/js/app.js"></script>
@@ -174,14 +184,9 @@
     <script src="scripts/home/home.js"></script>
     <script src="scripts/services/sessionService.js"></script>
     <script src="directives/sidebar-content/sidebar-content.directive.js"></script>
-    <script src="modules/linshare.sharedSpace/services/workGroupRestService.js"></script>
-    <script src="modules/linshare.sharedSpace/services/sharedSpaceBreadcrumbService.js"></script>
-    <script src="modules/linshare.sharedSpace/controllers/SharedSpaceController.js"></script>
-    <script src="modules/linshare.sharedSpace/directives/hoverDropdownFix.js"></script>
-    <script src="modules/linshare.sharedSpace/controllers/SharedSpaceListController.js"></script>
     <script src="scripts/controllers/workGroupMembersController.js"></script>
     <script src="scripts/services/menuService.js"></script>
-    <script src="scripts/services/functionalityService.js"></script>
+    <script src="scripts/services/functionalityRestService.js"></script>
     <script src="scripts/services/serverManagerService.js"></script>
     <script src="scripts/common/sidebarDirective.js"></script>
     <script src="scripts/common/authenticationDirective.js"></script>

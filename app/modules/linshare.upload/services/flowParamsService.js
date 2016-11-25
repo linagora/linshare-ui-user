@@ -6,7 +6,7 @@
 
   function flowParamsService() {
     var workgroupUuid = '';
-    var workGroupFolderUuid = '';
+    var workgroupFolderUuid = '';
 
     return {
       getFlowParams: getFlowParams,
@@ -15,11 +15,11 @@
 
     function setFlowParams(wu, wfu) {
       workgroupUuid = wu;
-      workGroupFolderUuid = wfu;
+      workgroupFolderUuid = wfu;
     }
 
     function getFlowParams() {
-      return {threadUuid: workgroupUuid, workGroupFolderUuid: workGroupFolderUuid};
+      return {threadUuid: workgroupUuid, workGroupFolderUuid: workgroupFolderUuid};
     }
   }
 })();

@@ -6,8 +6,8 @@
 
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($scope, $filter, $window, $translatePartialLoader, NgTableParams, LinshareReceivedShareService,
-             LinshareShareService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig) {
+    function($scope, $filter, $window, $translatePartialLoader, NgTableParams, receivedShareRestService,
+             autocompleteUserRestService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig) {
       $scope.mainVm.sidebar.hide();
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
@@ -108,7 +108,7 @@ angular.module('linshare.receivedShare')
         });
 
       $scope.downloadCurrentFile = function(currentFile) {
-        LinshareReceivedShareService.download(currentFile.uuid).then(function(downloadedFile) {
+        receivedShareRestService.download(currentFile.uuid).then(function(downloadedFile) {
           documentUtilsService.downloadFileFromResponse(downloadedFile, currentFile.name, currentFile.type);
         });
       };
@@ -128,7 +128,7 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.getDocumentThumbnail = function(uuid) {
-        LinshareReceivedShareService.getThumbnail(uuid).then(function(thumbnail) {
+        receivedShareRestService.thumbnail(uuid).then(function(thumbnail) {
           $scope.currentSelectedDocument.current.thumbnail = thumbnail;
         });
       };
@@ -180,12 +180,12 @@ angular.module('linshare.receivedShare')
       $scope.showCurrentFile = function(currentFile, event) {
         $scope.currentSelectedDocument.current = currentFile;
         if (currentFile.shared > 0) {
-          LinshareReceivedShareService.get(currentFile.uuid).then(function(data) {
+          receivedShareRestService.get(currentFile.uuid).then(function(data) {
             $scope.currentSelectedDocument.current.shares = data.shares;
           });
         }
         if (currentFile.hasThumbnail === true) {
-          LinshareReceivedShareService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
+          receivedShareRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
             $scope.currentSelectedDocument.current.thumbnail = thumbnail;
           });
         }
@@ -226,7 +226,7 @@ angular.module('linshare.receivedShare')
           function(isConfirm) {
             if (isConfirm) {
               angular.forEach(selectedDocuments, function(file, key) {
-                LinshareReceivedShareService.copy(file.uuid).then(function() {
+                receivedShareRestService.copy(file.uuid).then(function() {
                   angular.forEach(receivedFiles, function(f, k) {
                     if (f.uuid === file.uuid) {
                       receivedFiles.splice(k, 1);
@@ -376,7 +376,7 @@ angular.module('linshare.receivedShare')
       $scope.searchGuestRestrictedContacts = function(pattern) {
         $scope.popoverValue = '';
         $scope.selectedRecipient = '';
-        return LinshareShareService.autocomplete(pattern);
+        return autocompleteUserRestService.search(pattern, 'SHARING');
       };
 
       $scope.addRecipients = function(users, contact) {
@@ -522,7 +522,7 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.getDetails = function(item) {
-        return documentUtilsService.getItemDetails(LinshareReceivedShareService, item);
+        return documentUtilsService.getItemDetails(receivedShareRestService, item);
       };
 
       $scope.addSelectedDocument = addSelectedDocument();

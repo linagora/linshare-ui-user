@@ -21,7 +21,7 @@ describe('Testing Documents Module: ', function () {
 
     it('Should get all Files', function() {
       httpBackend.expect('GET', '/documents').respond();
-      LinshareDocumentService.getAllFiles();
+      LinshareDocumentService.getList();
       httpBackend.flush();
     });
 
@@ -33,13 +33,13 @@ describe('Testing Documents Module: ', function () {
 
     it('Should download File', function () {
       httpBackend.expectGET('/documents/' + uuid + '/download').respond();
-      LinshareDocumentService.downloadFiles(uuid);
+      LinshareDocumentService.download(uuid);
       httpBackend.flush();
     });
 
     it('Should get Thumbnail', function () {
       httpBackend.expectGET('/documents/' + uuid + '/thumbnail').respond();
-      LinshareDocumentService.getThumbnail(uuid);
+      LinshareDocumentService.thumbnail(uuid);
       httpBackend.flush();
     });
 
@@ -49,13 +49,13 @@ describe('Testing Documents Module: ', function () {
         name: 'doc.js'
       };
       httpBackend.expectPOST('/documents', documentDto).respond();
-      LinshareDocumentService.uploadFiles(documentDto);
+      LinshareDocumentService.create(documentDto);
       httpBackend.flush();
     });
 
     it('Should delete a File', function () {
       httpBackend.expectDELETE('/documents/' + uuid).respond();
-      LinshareDocumentService.delete(uuid);
+      LinshareDocumentService.remove(uuid);
       httpBackend.flush();
     });
   });

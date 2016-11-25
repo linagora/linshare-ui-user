@@ -13,11 +13,11 @@ angular.module('linshareUiUserApp')
       .state('common', {
         templateUrl: 'views/common/common.html',
         resolve: {
-          authentication: function(AuthenticationService) {
-            return AuthenticationService.checkAuthentication();
+          authentication: function(authenticationRestService) {
+            return authenticationRestService.checkAuthentication();
           },
-          functionalities: function(LinshareFunctionalityService) {
-            return LinshareFunctionalityService.getFunctionalities();
+          functionalities: function(functionalityRestService) {
+            return functionalityRestService.getFunctionalities();
           }
         }
       })
@@ -28,8 +28,8 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
         resolve: {
-          // user: function(AuthenticationService) {
-          //   return AuthenticationService.getCurrentUser();
+          // user: function(authenticationRestService) {
+          //   return authenticationRestService.getCurrentUser();
           // }
         }
       })
@@ -63,8 +63,8 @@ angular.module('linshareUiUserApp')
           uploadedFileUuid: null
         },
         resolve: {
-          documentsList: function(documentRestService) {
-            return documentRestService.getAllFiles();
+          documentsList: function(LinshareDocumentRestService) {
+            return LinshareDocumentRestService.getList();
           }
         }
       })
@@ -86,11 +86,11 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.receivedShare/views/list.html',
         controller: 'ReceivedController',
         resolve: {
-          user: function(AuthenticationService) {
-            return AuthenticationService.getCurrentUser();
+          user: function(authenticationRestService) {
+            return authenticationRestService.getCurrentUser();
           },
-          files: function(LinshareReceivedShareService) {
-            return LinshareReceivedShareService.getReceivedShares();
+          files: function(receivedShareRestService) {
+            return receivedShareRestService.getList();
           }
         }
       })
@@ -101,7 +101,7 @@ angular.module('linshareUiUserApp')
         controller: 'LinshareShareController',
         resolve: {
           sharedDocumentsList: function(LinshareShareService) {
-            return LinshareShareService.getMyShares();
+            return LinshareShareService.getList();
           }
         }
       })
@@ -152,8 +152,8 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.sharedSpace/views/workgroups.html',
         controller: 'SharedSpaceController as vm',
         resolve: {
-          workgroups: function(workGroupRestService) {
-            return workGroupRestService.getAll();
+          workgroups: function(workgroupRestService) {
+            return workgroupRestService.getList();
           }
         }
       })
@@ -163,8 +163,8 @@ angular.module('linshareUiUserApp')
         //controller: 'WorkGroupController',
         template: '<div ui-view></div>',
         resolve: {
-          workGroupList: function(workGroupRestService) {
-            return workGroupRestService.getAll();
+          workgroupList: function(workgroupRestService) {
+            return workgroupRestService.getList();
           }
         }
       })
@@ -177,9 +177,8 @@ angular.module('linshareUiUserApp')
           uploadedFileUuid: null
         },
         resolve: {
-          currentWorkGroup: function(workGroupFoldersRestService, $stateParams) {
-            workGroupFoldersRestService.setWorkgroupUuid($stateParams.uuid);
-            return workGroupFoldersRestService.getParent($stateParams.folderUuid);
+          currentWorkGroup: function(workgroupFoldersRestService, $stateParams) {
+            return workgroupFoldersRestService.getParent($stateParams.uuid, $stateParams.folderUuid);
           }
         }
       })
@@ -287,8 +286,8 @@ angular.module('linshareUiUserApp')
         templateUrl: 'modules/linshare.share/views/new_advanced_sharing.html',
         controller: 'LinshareAdvancedShareController',
         resolve: {
-          allFunctionalities: function(LinshareFunctionalityService) {
-            return LinshareFunctionalityService.getAll();
+          allFunctionalities: function(functionalityRestService) {
+            return functionalityRestService.getAll();
           }
         }
       })

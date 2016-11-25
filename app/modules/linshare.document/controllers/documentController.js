@@ -5,7 +5,7 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
-  function documentController($scope, $filter, documentRestService, NgTableParams, $translate, $window, $log,
+  function documentController($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate, $window, $log,
                               $mdToast, documentsList, growlService, $timeout, documentUtilsService, $q,
                               flowUploadService, flowParamsService, sharableDocumentService, lsAppConfig,
                               $stateParams) {
@@ -262,7 +262,7 @@
     }
 
     function downloadCurrentFile(currentFile) {
-      documentRestService.downloadFile(currentFile.uuid)
+      LinshareDocumentRestService.download(currentFile.uuid)
         .then(function(fileStream) {
           documentUtilsService.downloadFileFromResponse(fileStream, currentFile.name, currentFile.type);
         });
@@ -275,17 +275,17 @@
     }
 
     function getDetails(item) {
-      return documentUtilsService.getItemDetails(documentRestService, item);
+      return documentUtilsService.getItemDetails(LinshareDocumentRestService, item);
     }
 
     function getDocumentInfo(uuid) {
-      documentRestService.get(uuid).then(function(data) {
+      LinshareDocumentRestService.get(uuid).then(function(data) {
         $scope.currentSelectedDocument.current.shares = data.shares;
       });
     }
 
     function getDocumentThumbnail(uuid) {
-      documentRestService.getThumbnail(uuid).then(function(thumbnail) {
+      LinshareDocumentRestService.thumbnail(uuid).then(function(thumbnail) {
         $scope.currentSelectedDocument.current.thumbnail = thumbnail;
       });
     }
@@ -395,7 +395,7 @@
 
     function reloadDocuments() {
       $timeout(function() {
-        documentRestService.getAllFiles().then(function(data) {
+        LinshareDocumentRestService.getList().then(function(data) {
           $scope.documentsList = data;
           $scope.documentsListCopy = data;
           $scope.isNewAddition = true;
@@ -454,11 +454,11 @@
 
     function showCurrentFile(currentFile, event) {
       $scope.currentSelectedDocument.current = currentFile;
-      documentRestService.get(currentFile.uuid).then(function(data) {
+      LinshareDocumentRestService.get(currentFile.uuid).then(function(data) {
         $scope.currentSelectedDocument.current = data;
       });
       if (currentFile.hasThumbnail) {
-        documentRestService.getThumbnail(currentFile.uuid).then(function(thumbnail) {
+        LinshareDocumentRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
           $scope.currentSelectedDocument.current.thumbnail = thumbnail;
         });
       }
@@ -544,7 +544,7 @@
           /* jshint sub: true */
           var swalSaving = translations['SAVING'];
           $scope.currentSelectedDocument.current.description = swalSaving;
-          documentRestService.update(documentServer.uuid, documentServer).then(function() {
+          LinshareDocumentRestService.update(documentServer.uuid, documentServer).then(function() {
             $scope.currentSelectedDocument.current.description = documentServer.description;
           });
         });

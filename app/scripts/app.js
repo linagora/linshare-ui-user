@@ -29,6 +29,7 @@ angular
     'linshare.authentication',
     'linshare.document',
     'linshare.share',
+    'linshare.sharedSpace',
     'linshare.guests',
     'linshare.receivedShare',
     'LocalStorageModule',

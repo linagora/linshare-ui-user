@@ -8,7 +8,7 @@ angular
   .module('linshareUiUserApp')
   .controller('WorkGroupMembersController', WorkGroupMembersController);
 
-function WorkGroupMembersController($scope, workGroupMembersRestService, $filter) {
+function WorkGroupMembersController($scope, workgroupMembersRestService, $filter) {
 
   var wgmember = this;
   wgmember.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
@@ -42,7 +42,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
   $scope.$watch(function() {
     return $scope.mainVm.sidebar.getData().currentSelectedDocument.current;
   }, function(currentWorkGroup) {
-    workGroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
+    workgroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
       wgmember.currentWorkgroupMember = member;
       $scope.mainVm.sidebar.addData('currentWorkgroupMember', member);
     });
@@ -54,7 +54,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
 
   function removeMember(workgroupMembers, member) {
     _.remove(workgroupMembers, member);
-    return workGroupMembersRestService.delete(wgmember.currentWorkGroup.current.uuid, member.userUuid);
+    return workgroupMembersRestService.remove(wgmember.currentWorkGroup.current.uuid, member.userUuid);
   }
 
   function addMember(member, listMembers) {
@@ -64,7 +64,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
       readonly: wgmember.memberRole === wgmember.membersRights.readonly,
       admin: wgmember.memberRole === wgmember.membersRights.admin
     };
-    workGroupMembersRestService.create(wgmember.currentWorkGroup.current.uuid, jsonMember).then(function(data) {
+    workgroupMembersRestService.create(wgmember.currentWorkGroup.current.uuid, jsonMember).then(function(data) {
       listMembers.push(data.plain());
     });
   }
@@ -83,7 +83,7 @@ function WorkGroupMembersController($scope, workGroupMembersRestService, $filter
       member.admin = false;
       member.readonly = false;
     }
-    workGroupMembersRestService.update(wgmember.currentWorkGroup.current.uuid, member).then(function(updatedMember) {
+    workgroupMembersRestService.update(wgmember.currentWorkGroup.current.uuid, member).then(function(updatedMember) {
       member = updatedMember;
     });
   }
