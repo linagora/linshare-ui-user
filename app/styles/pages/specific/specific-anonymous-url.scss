@@ -1,0 +1,19 @@
+/**********************
+  ANONYMOUS URL
+***********************/
+
+.anonymous-url {
+  padding: 3em;
+  #file-list-table {
+    border: solid 1px #eee;
+  }
+  .anonymous-user-msg {
+    margin: 3em 0;
+    p {
+      font-size: 1.1em;
+    }
+    h3 {
+      color: #05b1ff;
+    }
+  }
+}

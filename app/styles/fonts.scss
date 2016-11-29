@@ -306,6 +306,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.groups-shared-folder.grey-clr{
+  .path2:before {
+    color : #dcdcdc ;
+  }
+  .path1:before {
+    color : rgb(244, 244, 244) ;
+  }
+  .path3:before {
+    color : rgba(216, 205, 205, 0.2)
+  }
+}
+.groups-shared-folder.bg-info-icon{
+  font-size: 7em;
+  line-height: 202%;
+}
 
 .groups-home-share:before {
   content: "\e910";

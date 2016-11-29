@@ -1,0 +1,557 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+  COMMON UI COMPONENT
+***********************/
+
+@import "component/component-ui-drag-and-drop.scss";
+@import "component/component-overlay-mobile.scss";
+@import "component/component-dropdown-menu.scss";
+@import "component/component-fab.scss";
+
+/**********************
+  GROWL MULTIPLE DELETION
+***********************/
+
+.delete-file-toast.anim-toast {
+  visibility: visible;
+  height: auto;
+  overflow-y: auto;
+}
+
+.delete-file-toast {
+  visibility: hidden;
+  height: 0;
+  transition: height 700ms ease-in-out;
+}
+
+md-toast.toast-dynamic-height .md-toast-content {
+  height: auto;
+  max-height: 500px;
+  overflow: visible;
+}
+
+.md-button.close-button {
+  min-width: 20px;
+}
+
+/**********************
+  TOOLTIP FIX
+***********************/
+
+.tooltip > {
+  .tooltip-inner {
+    background-color: #333 !important;
+    font-size: 0.85em;
+  }
+  .tooltip-arrow {
+    border-bottom-color: #333 !important;
+  }
+}
+
+md-tooltip .md-content {
+  position: relative;
+  opacity: 1;
+}
+
+/**********************
+ RECIPIENTS AUTOCOMPLETE
+***********************/
+
+.recipientsAutocomplete {
+  height: 33px;
+  .firstLetterFormat {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 2px 1px rgba(0, 0, 0, 0.12);
+    width: 30px;
+    height: 30px;
+    background-color: #05B1FF;
+    color: #fff;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+  }
+  .recipientsInfo {
+    margin: 0 0 0 1em;
+    float: left;
+    height: 30px;
+    span {
+      display: block;
+    }
+    .email {
+      max-width: 190px;
+      font-size: 0.85em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+  .firstLetterBgdGreen {
+    background-color: #00bfa5;
+  }
+}
+
+@media (max-width: 768px) {
+  .recipientsInfo .email {
+    min-width: 166px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+/**********************
+CHOSEN CUSTOM OVERIDE
+***********************/
+
+.chosen-container-single.chosen-container-single-nosearch {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  zoom: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  a {
+    cursor: pointer;
+  }
+  .chosen-drop {
+    width: auto;
+    position: absolute;
+    background-color: white;
+    z-index: 900;
+    cursor: pointer;
+    -webkit-transform-origin: top right;
+    -moz-transform-origin: top right;
+    -o-transform-origin: top right;
+    transform-origin: top right;
+    text-align: right;
+    right: 0;
+    left: inherit !important;
+    .chosen-search {
+      display: none;
+    }
+    .chosen-results {
+      list-style-type: none;
+      li {
+        padding-left: 25px;
+      }
+      li.result-selected:before {
+        right: inherit;
+        left: 12px;
+        top: 10px;
+        font-size: 14px;
+      }
+    }
+  }
+  .chosen-single {
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    display: block;
+    padding: 0;
+    height: 30px;
+    background: none transparent;
+    background-clip: padding-box;
+    box-shadow: none;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+    font-size: 0.9em;
+    span {
+      display: block;
+      overflow: hidden;
+      margin-right: 15px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    > div {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: block;
+      width: 18px;
+      height: 100%;
+      b {
+        background-image: url(../images/select.png) !important;
+        background-repeat: no-repeat;
+        background-position: right 12px;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+/**********************
+POPOVER ADD BUTTON OVERIDE
+***********************/
+
+.menu-popover-ctn {
+  .popover-inner {
+    .popover-title {
+      display: none;
+    }
+    a.disabled-work-in-progress {
+      color: $disabledAlt;
+      span.path1:before, span.path2:before, span.path3:before, span.path4:before {
+        color: $disabledAlt;
+      }
+    }
+    a {
+      display: block;
+      height: 55px;
+      vertical-align: middle;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      color: #688eb7;
+      i {
+        display: block;
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 10px;
+        height: 30px;
+      }
+      p {
+        font-size: 0.8em;
+        color: #767676;
+        text-transform: capitalize;
+        text-align: center;
+      }
+    }
+    .popover-content {
+      width: 236px;
+      padding: 0.5em !important;
+      padding-top: 1em !important;
+      padding-bottom: 1em !important;
+    }
+  }
+}
+
+.menu-popover-ctn div.popover.bottom {
+  left: 0 !important;
+  top: 44px !important;
+  border: solid 1px #ddd;
+  > .arrow {
+    left: 10%;
+    border-bottom-color: #dddddd !important;
+    margin-left: -8px;
+  }
+}
+
+/* TODO replace class by menu-popover-ctn > a */
+.add-menu-group {
+  float: left;
+  border-bottom: 1px solid #f0f0f0;
+  width: 55px;
+  background-color: #fff;
+  height: 55px;
+  display: table;
+  text-align: center;
+  vertical-align: middle;
+  border-right: solid 1px #e6e6e6;
+  i {
+    color: $primaryClr;
+    font-size: 2.2em;
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: bold;
+    pointer-events: none;
+  }
+}
+
+/**********************
+  SEARCH STYLE
+***********************/
+
+.search-style {
+  .form-control {
+    background-image: url("../images/icons/search-magnifying-glass.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 30px;
+    -webkit-transition: all;
+    -o-transition: all;
+    transition: all;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  .form-control:focus {
+    background-position: right center;
+    padding: 0 30px 0 0;
+  }
+}
+
+/**********************
+  SORT DROPDOWN
+***********************/
+
+.sort-dropdown ul {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block;
+  a.selected-sorting span i {
+    display: block;
+  }
+  a span i {
+    display: none;
+  }
+  > li > a {
+    padding-right: 30px;
+  }
+}
+
+/**********************
+  PAGINATION FIX
+***********************/
+
+.pagination > li > a,
+.pagination > li > span {
+  border-radius: 50% !important;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  z-index: 1;
+  position: relative;
+  border: 0;
+  .ng-binding {
+    font-size: 0.95em;
+  }
+}
+
+.ng-table-pagination > li:first-child:before,
+.ng-table-pagination > li:last-child:before {
+  font-family: 'Material-Design-Iconic-Font', sans-serif;
+  font-size: 0.75em;
+  position: absolute;
+  left: 11px;
+  top: 2px;
+  z-index: 12;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 2;
+  color: #ffffff;
+  background-color: $primaryClr;
+  border-color: #ffffff;
+  cursor: default;
+}
+
+.ng-table-pager {
+  padding: 25px 15px 20px;
+  min-height: initial;
+  height: 77px;
+}
+
+.ng-table-counts {
+  margin-top: 0;
+}
+
+.pagination {
+  margin: 0;
+}
+
+.pagination.ng-table-pagination {
+  li.disabled {
+    display: none;
+  }
+}
+
+.files {
+  .ng-table-pagination > li:first-child:before,
+  .ng-table-pagination > li:last-child:before {
+    font-family: 'Material-Design-Iconic-Font', 'sans-serif';
+    font-size: 1.2em;
+    left: 13px;
+    top: 5px;
+  }
+}
+
+/**********************
+  MOBILE PAGINATION
+***********************/
+
+@media (max-width: 767px) {
+  .pagination {
+    display: flex;
+  }
+  .pagination > li {
+    display: none;
+    position: relative;
+    flex: 1 1 100%;
+  }
+  .pagination > li > a .ng-binding,
+  .pagination > li:first-child {
+    display: block;
+  }
+  .pagination > li > a .ng-binding,
+  .pagination > li:last-child {
+    display: block;
+  }
+  .pagination > li.active {
+    display: block !important;
+  }
+  .pagination > li > a {
+    width: 100%;
+    border: 0;
+    border-radius: 2px !important;
+    flex: 1 1 100%;
+  }
+  .files .ng-table-pagination > li:first-child:before,
+  .files .ng-table-pagination > li:last-child:before {
+    left: inherit;
+  }
+}
+
+/**********************
+  SAVE LIST POPOVER DROPDOWN
+***********************/
+
+.popover {
+  padding: 0;
+  h3 {
+    color: $dispBlue;
+    letter-spacing: 0.05em;
+  }
+}
+
+.dropdown.popOverForm {
+  .dropdown-menu {
+    padding: 1.15em;
+    width: 210px;
+  }
+  .btn {
+    text-transform: inherit;
+    font-size: 0.9em;
+    padding: 6px;
+  }
+  i {
+    font-size: 1em;
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
+.dropdown.popOverForm > .dropdown-toggle.btn-default {
+  color: #2191EA;
+}
+
+.dropdown.popOverForm:not([data-animation]).open .dropdown-menu {
+  left: -106px;
+  max-width: 210px;
+}
+
+.savelistBtn {
+  float: right;
+  padding-top: 2px;
+  top: -5px;
+}
+
+/**********************
+  PROFRESS BARS
+***********************/
+
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: $secondaryClr;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  -webkit-transition: width .6s ease;
+  -o-transition: width .6s ease;
+  transition: width .6s ease;
+}
+
+#loading-bar .bar {
+  -webkit-transition: width;
+  -o-transition: width;
+  transition: width;
+  -webkit-transition-duration: 350ms;
+  transition-duration: 350ms;
+  background: rgba(0, 0, 0, 0.15);
+  position: fixed;
+  z-index: 10002;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  border-bottom-right-radius: 1px;
+  border-top-right-radius: 1px;
+}
+
+/**********************
+  DATEPICKER
+***********************/
+
+li.dp-actions {
+  display: none;
+}
+
+.btn-dpday {
+  border-radius: 50%;
+  width: 22px !important;
+  height: 22px;
+}
+
+.btn-dpbody {
+  padding: 3px;
+  font-size: 12px;
+}
+
+.tr-dpnav .btn-dp {
+  color: #fff;
+  padding: 15px 0;
+}
+
+.tr-dpday th {
+  padding: 8px 2PX 9px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.datepicker-drop-right .dropdown-menu {
+  -webkit-transform-origin: top right !important;
+  -moz-transform-origin: top right !important;
+  -ms-transform-origin: top right !important;
+  transform-origin: top right !important;
+  right: 0;
+  left: auto;
+  float: right !important;
+}
+
+/**********************
+ TOGGLED CHEVRON
+***********************/
+
+.toggle-chevron {
+  font-size: 1.5em;
+  color: #0a6ebd;
+  -webkit-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+}
+
+.animate-chevron .toggle-chevron {
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Safari */
+  transform: rotate(180deg);
+}

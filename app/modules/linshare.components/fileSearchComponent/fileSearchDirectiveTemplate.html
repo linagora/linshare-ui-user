@@ -29,7 +29,7 @@
       <div class="clearfix"></div>
 
       <!--SIZE START -->
-      <div class="col-sm-3 p-l-0">
+      <div class="col-sm-4 p-l-0">
         <div class="input-group">
             <span class="input-group-addon icon-size-fix">
               <i class="zmdi zmdi-trending-down" x-ng-class="{disabledIcon: !showUnit}"></i>
@@ -61,7 +61,7 @@
 
 
       <!--SIZE UNITY -->
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="input-group">
             <span class="input-group-addon">
               <i class="fa fa-database" x-ng-class="{disabledIcon: !showUnit}"></i>
@@ -104,37 +104,15 @@
 
       <!--TAG SELECT DATE -->
       <div x-ng-init="showDateRange=true">
-        <div class="col-sm-3 p-l-0">
-          <div class="input-group">
-              <span class="input-group-addon icon-size-fix">
-                <i class="zmdi zmdi-calendar ma-icon" x-ng-class="{disabledIcon: !showDateRange}"></i>
-              </span>
-
-            <div class="fg-line" x-ng-class="{disabledIcon: !showDateRange}">
-              <select chosen
-                      data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
-                      disable-search="true"
-                      allow-single-deselect="true"
-                      x-ng-model="filters['dateType']"
-                      class="form-control custumSelect outlineFFremove w-100"
-                      x-ng-init="filters['dateType'] = '1'">
-                      x-ng-disabled="!showDateRange">
-                <option value="1">{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}</option>
-                <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!--DATE START -->
-        <div class="col-sm-4">
+       <!--DATE START -->
+        <div class="col-sm-4 p-l-0">
           <div class="date-picker input-group dp-blue" x-ng-class="{'is-opened': dateStartOpened == true}">
-              <span class="input-group-addon">
+              <span class="input-group-addon icon-size-fix">
                 <i class="zmdi zmdi-calendar-check ma-icon" x-ng-class="{disabledIcon: !showDateRange}"></i>
               </span>
 
             <div class="fg-line" x-ng-class="{'fg-toggled': dateStartOpened == true}">
-              <input x-ng-disabled="!showDateRange" x-ng-click="open($event, 'dateStartOpened')" type="text"
+              <input x-ng-disabled="!showDateRange" x-ng-click="dateStartOpened = true" type="text"
                      class="form-control" datepicker-popup="{{format}}" show-weeks="false"
                      is-open="dateStartOpened" max-date="maxDate" datepicker-options="dateOptions"
                      x-ng-required="true" close-text="Close"
@@ -152,7 +130,7 @@
               </span>
 
             <div class="fg-line" x-ng-class="{'fg-toggled': opened2 == true}">
-              <input x-ng-disabled="!showDateRange" x-ng-click="open($event, 'dateEndOpened')"
+              <input x-ng-disabled="!showDateRange" x-ng-click="dateEndOpened = true"
                      type="text" class="form-control"
                      datepicker-popup="{{format}}" show-weeks="false"
                      x-ng-model="filters['dateEnd']" is-open="dateEndOpened"
@@ -162,7 +140,27 @@
             </div>
           </div>
         </div>
+        <div class="col-sm-3">
+          <div class="input-group">
+              <span class="input-group-addon">
+                <i class="zmdi zmdi-calendar ma-icon" x-ng-class="{disabledIcon: !showDateRange}"></i>
+              </span>
 
+            <div class="fg-line" x-ng-class="{disabledIcon: !showDateRange}">
+              <select chosen
+                      data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
+                      disable-search="true"
+                      allow-single-deselect="true"
+                      x-ng-model="filters['dateType']"
+                      class="form-control custumSelect outlineFFremove w-100"
+                      x-ng-init="filters['dateType'] = '1'">
+                x-ng-disabled="!showDateRange">
+                <option value="1">{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}</option>
+                <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <!--CHECKBOX INIT -->
         <div class="col-sm-1">
@@ -219,7 +217,7 @@
 
 
   <!--VALIDATE-->
-  <div class="col-md-9 m-t-50 m-b-30 p-l-0">
+  <div class="m-t-50 m-b-20 p-l-0 pull-right">
     <button class="btn bgm-white waves-effect m-r-10" x-ng-click="clearParams()">
       {{'FILTER_COMPONENT.REINITIALIZE' | translate }}
     </button>

@@ -98,36 +98,28 @@
                   </div>
                 </div>
               </div>
-            <span class="input-group-addon last clickable dropdown dropdown-standard"
+            <span uib-dropdown dropdown-append-to-body
+                  auto-close="outsideClick" hover-dropdown-fix
+                  class="input-group-addon last clickable dropdown"
                   x-ng-click="advancedFilterBool = !advancedFilterBool"
-                  data-toggle="tooltip"
-                  popover-animation ="fade"
-                  title=""
-                  data-placement="right"
-                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}"
-                  uib-popover-template="'advanced-search.html'"
-                  popover-placement="bottom"
-                  popover-append-to-body='true'
-                  popover-trigger="click"
-                  popover-class="popover-search-field">
+                  uib-dropdown-toggle
+                  data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}">
                 <i class="zmdi hidden-xs clickable"
                    x-ng-class="{'zmdi-settings': !advancedFilterBool, 'zmdi-chevron-up active-link': advancedFilterBool}">
                 </i>
-            </span>
+                <ul uib-dropdown-menu="" class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon
+                    dropdown-divided dropdown-content-left">
+                  <!-- FILTER COMPONENT  -->
+                  <filtering-component class="clearfix" ls-size="true" ls-date="true" ls-email="true"
+                                       filtered-items-list="documentsList"
+                                       initial-items-list="documentsListCopy"
+                                       reload-items="tableParams.reload">
+                </filtering-component>
+                </ul>
+              </span>
           </div>
         </div>
       </div>
-
-      <!-- FILTER COMPONENT  -->
-      <script type="text/ng-template" id="advanced-search.html">
-        <div id="search-filter-popover-ctn">
-          <filtering-component class="" ls-size="true" ls-date="true" ls-email="true"
-                               filtered-items-list="documentsList"
-                               initial-items-list="documentsListCopy"
-                               reload-items="tableParams.reload">
-          </filtering-component>
-        </div>
-      </script>
       <div class="clearfix"></div>
     </div>
 

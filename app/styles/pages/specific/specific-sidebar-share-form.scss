@@ -1,0 +1,46 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+  SHARE FILES FORM
+***********************/
+
+/*header form*/
+.num-items-section-ctn {
+  padding: 15px 15px 17px;
+  border-bottom: solid 1px #ddd;
+  font-size: 0.85em;
+  span {
+    background-color: #05b1ff;
+    display: inline-block;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16), 0 1px 1px rgba(0, 0, 0, 0.12);
+    border-radius: 50% !important;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    line-height: 21px;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+    border: 0;
+    margin-right: 0.4em;
+    font-weight: bold;
+    color: #FFFFFF;
+    top: -2px;
+    font-size: 1em;
+  }
+  .sidebar-link {
+    text-transform: lowercase;
+    font-size: 11px;
+  }
+}
+
+.form-sidebar {
+  .css-slide-up {
+    padding: 0;
+    margin-bottom: 1em;
+    transition: .2s ease-in-out all;
+    height: auto;
+    overflow: hidden;
+  }
+}

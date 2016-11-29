@@ -1,0 +1,92 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+  GUEST LISTS FILE LISTING
+***********************/
+
+.files.guest-list {
+
+  /* Table listing */
+  #file-list-table {
+    .first-letter {
+      text-transform: uppercase;
+      width: 25px;
+      min-width: 25px;
+      min-height: 25px;
+      height: 25px;
+      margin: auto;
+      font-size: 0.65em;
+      line-height: 26px;
+    }
+    .item-l {
+      display: flex;
+    }
+    .last-name {
+      text-transform: uppercase;
+    }
+    .first-name {
+      text-transform: capitalize;
+    }
+    .file-name-col {
+      padding-top: 7px;
+    }
+    .secondary-list-item-info {
+      margin: 0 0 0.5em 0;
+      font-size: 0.85em;
+      color: #4f4f4f;
+    }
+    .first-letter.guest-account-li {
+      background-color: #f4f4f4;
+      color: #7c7c7c;
+      line-height: 30px;
+      border: solid 1px #c4c4c4;
+      font-size: 0.5em !important;
+    }
+    .checkbox-ctn {
+      display: block;
+      margin-top: 4px;
+      margin-left: 9px;
+      font-size: 0.85em;
+      vertical-align: middle;
+    }
+  }
+
+  /* upper toolbar */
+  .search-bar #guest-account-chosen {
+    margin-right: 40px;
+  }
+  #breadcrumb-wrap {
+    #action-header .search-bar {
+      max-width: initial;
+    }
+    .toolbar-actions-items {
+      width: auto;
+      .number-of-files {
+        color: $primaryClr;
+        font-weight: 500;
+      }
+    }
+  }
+  .filter-views {
+    padding-top: 10px;
+    color: #4f4f4f;
+    padding-right: 10px !important;
+    font-weight: normal;
+  }
+
+}
+
+@media (max-width: 767px) {
+
+  .files {
+    .files.guest-list {
+      #breadcrumb-wrap .toolbar-actions-items {
+        width: 100% !important;
+      }
+      #file-list-table.ng-table td.thumb-type-item a {
+        padding-top: 10px;
+      }
+    }
+  }
+}

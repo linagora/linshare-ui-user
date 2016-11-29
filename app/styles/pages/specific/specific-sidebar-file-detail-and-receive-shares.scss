@@ -1,0 +1,44 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+ FILE DETAIL SIDEBAR  &  MY RECEIVED FILES DETAIL SIDEBAR
+***********************/
+
+.recipients-list-sharing-details {
+  margin-top: 2em;
+  .recipientsAutocomplete {
+    -webkit-transition: all 500ms ease-out;
+    -o-transition: all 500ms ease-out;
+    -moz-transition: all 500ms ease-out;
+    transition: all 500ms ease-out;
+    border-bottom: solid 1px $dividerClr;
+    height: 56px;
+    padding: 0.6em 0;
+    .firstLetterFormat {
+      margin-top: 4px;
+    }
+    .info-partage-link {
+      display: inline-block;
+      padding: 0;
+      margin-top: 6px;
+      font-size: 1.6em;
+      color: darkgrey;
+      width: 10%;
+      text-align: center;
+    }
+    .recipientsInfo {
+      width: 75%;
+      .lastName {
+        text-transform: uppercase;
+        display: inline-block;
+      }
+      .user-full-name {
+        font-size: 1.04em;
+      }
+      .email {
+        font-size: 0.91em;
+      }
+    }
+  }
+}

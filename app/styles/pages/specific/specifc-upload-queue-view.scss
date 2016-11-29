@@ -1,0 +1,419 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+  UPLOAD QUEUE LISTING HEADER -  LSUPLOAD QUEUE
+***********************/
+
+.upload-files #breadcrumb-wrap {
+  height: 55px !important;
+  display: flex !important;
+  .breadcrumbs-ctn {
+    height: 55px;
+    flex: 1 1 100%;
+    top: 0;
+    .breadcrumb i {
+      padding-top: 24px;
+    }
+    .upload-actions-toolbar {
+      margin-right: 1em;
+      padding-top: 13px;
+      font-size: 1.2em;
+      width: auto;
+    }
+  }
+  .actions a {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    line-height: 29px;
+    font-size: 1.15em;
+    margin: 0;
+    padding: 0;
+    i {
+      font-size: inherit;
+    }
+  }
+}
+
+#transfert-ctn.transfert-ctn-white {
+  overflow: hidden;
+  background-color: #fff;
+  padding-top: 53px;
+  #list-files-view {
+    background-color: #FFFFFF;
+    padding-bottom: 0;
+    margin: 0;
+    &.lv-header-alt {
+      background: transparent;
+      padding: 0;
+      margin-bottom: 0.5em;
+      color: #000;
+      > div {
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+    }
+    &.lvh-label {
+      color: #000;
+      font-size: 1em;
+      b {
+        display: inline-block;
+        margin-right: 1.0em;
+      }
+      span {
+        display: inline-block;
+        margin-left: 0.5em;
+        margin-right: 0.3em;
+      }
+    }
+  }
+  .card {
+    margin-bottom: 0;
+    &.col-centered {
+      float: none;
+      margin: 0 auto;
+      padding: 0;
+    }
+  }
+}
+
+/**********************
+ UPLOAD QUEUE FILE LISTING
+***********************/
+
+#transfert-ctn #file-list-table.ng-table {
+  .no-padding .preview-icon-ctn {
+    padding-top: 0;
+    position: relative;
+    width: 42px;
+    height: 37px;
+    vertical-align: middle;
+    line-height: 46px;
+  }
+
+  /*Checkbox*/
+  .checkbox-ctn-thumb.maintain-vis {
+    opacity: 1 !important;
+    background-color: #0683bb;
+    border: solid 1px #0683bb;
+  }
+  .media-body:hover .thumb-type-item .checkbox-ctn-thumb {
+    opacity: 1;
+  }
+  .checkbox-ctn-thumb {
+    position: absolute;
+    bottom: 2px;
+    width: 12px;
+    height: 12px;
+    left: inherit;
+    right: 4px;
+    font-size: 0.5em;
+    background-color: #ffffff;
+    border: solid 1px #0578ad;
+    border-radius: 0;
+    padding: 0.0001em 0.05em;
+    text-align: center;
+    opacity: 0;
+    color: #8a8a8a;
+  }
+
+  .anim-left {
+    display: block;
+    transition: margin .6s ease;
+    div:first-child {
+      flex: 1 1 100%;
+      display: flex;
+    }
+  }
+  .actions-ctn {
+    flex: 0 0 100px;
+    .align-list-icons {
+      display: flex;
+    }
+  }
+  .align-list-icons {
+    padding-top: 12px;
+    display: flex;
+  }
+  .anim-left.no-padding {
+    padding: 0;
+    div {
+      padding: 0;
+    }
+    .preview-icon-ctn {
+      padding-top: 8px;
+      flex: 0 0 42px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .data-list-slide-toggle {
+    margin-left: -100%;
+  }
+  .actions > li > a > i, .actions > a > i {
+    color: #5D5D5D;
+  }
+  .lv-body {
+    z-index: 4;
+    .progress {
+      box-shadow: none;
+      border-radius: 0;
+      height: 3px;
+      margin-bottom: 0;
+      margin-top: .25em;
+      background-color: white;
+    }
+    .actions > li > a > i, .actions > a > i {
+      color: #adadad;
+    }
+    .actions > li > a > i.fa.fa-eye, .actions > a > i.fa.fa-eye {
+      font-size: 1.3em;
+    }
+    .actions > li > a:hover > i {
+      color: #555;
+    }
+  }
+  .preview-icon-ctn {
+    width: auto;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+    flex: 0 0 42px;
+    align-items: center;
+    justify-content: center;
+    p {
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      padding: 3px;
+      background-color: #9AC3D6;
+      font-size: 0.8em;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .data-list-ctn {
+    width: 94%;
+    margin-left: 5px;
+    .lv-title {
+      font-size: 1em;
+    }
+  }
+  .listview {
+    background-color: #f0f0f0;
+    padding: 0;
+    margin-bottom: 1.5em;
+  }
+  .listview.lv-lg .lv-item {
+    padding: 17px 0 17px 0;
+  }
+  .media-body .icons {
+    height: 100%;
+    padding-top: 27px;
+    i {
+      display: inline-block;
+      font-size: 1.8em;
+      padding-left: 0;
+    }
+  }
+  .media-body {
+    margin: 0;
+    border-bottom: solid 1px #ddd;
+    background-color: #fff;
+    > div {
+      box-sizing: border-box;
+      padding: 9px 0;
+      -webkit-transition: background .6s ease;
+      -o-transition: background .6s ease;
+      -moz-transition: background .6s ease;
+      transition: background .6s ease;
+    }
+  }
+}
+
+/**********************
+  UPLOAD AND SHARE TOOLBAR HEADER
+***********************/
+
+.actions-upload-queue {
+  width: auto;
+  min-width: 12%;
+}
+
+.toggle-pill {
+  font-size: 0.9em;
+  padding: 5px 17px;
+  border-radius: 10px;
+  background-color: #e4e4e4;
+  -webkit-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.39);
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.39);
+  a {
+    color: #7b7b7b;
+  }
+}
+
+.right-elem-toggle-inactive {
+  position: relative;
+  margin-left: -25px;
+  z-index: 4;
+  padding-left: 33px;
+}
+
+.toggle-pill.active {
+  position: relative;
+  z-index: 5;
+  border: solid 2px #f2f2f3;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.39);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.39);
+  a {
+    color: $primaryClr;
+  }
+}
+
+.left-elem-toggle-inactive {
+  position: relative;
+  margin-right: -25px;
+  z-index: 4;
+  padding-right: 33px;
+}
+
+.upload-multi-ctn {
+  width: 100%;
+  padding: 0;
+}
+
+.header-mobile-upload {
+  padding-top: 1em;
+  padding-bottom: 1.5em;
+  background-color: #f9f9f9;
+  border-bottom: solid 1px #dbdbdb;
+}
+
+#upload-li-ctn {
+  background-color: #fff;
+  z-index: 4;
+}
+
+/**********************
+  RESPONSIVE
+***********************/
+
+@media (min-width: 769px) and (max-width: 1134px) {
+  #transfert-ctn .data-list-ctn {
+    width: 91%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card-body.card-padding {
+    padding: 23px 25px 5px;
+  }
+}
+
+/**********************
+  MOBILE RESPONSIVE
+***********************/
+
+@media (max-width: 767px) {
+
+  #transfert-ctn {
+    &.transfert-ctn-white {
+      margin-top: 0;
+      padding-top: 0;
+      .card {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+      .highlight-list-elem {
+        border: none;
+      }
+      .media-body {
+        padding: 5px;
+      }
+    }
+    .lvh-label {
+      font-size: 0.85em;
+    }
+    .lv-header-alt {
+      padding: 0 0 10px;
+    }
+    .media-body {
+      padding: 13px 5px;
+      > div {
+        box-sizing: border-box;
+        padding: 2px;
+      }
+      div:hover {
+        background-color: transparent;
+      }
+      .icons {
+        padding-top: 19px;
+      }
+    }
+    .listview {
+      margin-bottom: 1em;
+    }
+    .lv-body {
+      margin: 0 !important;
+    }
+    .preview-icon-ctn {
+      width: auto;
+      padding: 5px !important;
+    }
+    .data-list-ctn {
+      width: 80%;
+      margin-left: 5px !important;
+    }
+    .col-xs-24 {
+      width: 200%;
+    }
+    .anim-left {
+      display: block;
+    }
+    #file-list-table.ng-table .checkbox-ctn-thumb.maintain-vis:after {
+      width: 25px;
+      height: 14px;
+      left: -7px;
+      top: -3px;
+    }
+    .alert-info {
+      margin: 0;
+      padding: 5px;
+      p {
+        padding-left: 0;
+      }
+    }
+    .card-body.card-padding {
+      padding: 5px 0;
+    }
+  }
+  .header-mobile-upload.visible-xs {
+    display: flex !important;
+    > div {
+      margin: auto;
+    }
+  }
+}
+
+@media (min-width: 284px) and (max-width: 320px) {
+  #transfert-ctn .data-list-ctn {
+    width: 74%;
+  }
+}
+
+@media (max-width: 284px) {
+  #transfert-ctn .data-list-ctn {
+    width: 96%;
+  }
+  .hidden-v-xs {
+    display: none;
+  }
+}

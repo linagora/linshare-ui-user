@@ -167,7 +167,7 @@
       "PLACEHOLDER": "Please enter an email, first name or last name"
     },
     "SUBMIT": "Filter",
-    "REINITIALIZE": "Clear"
+    "REINITIALIZE": "RESET"
   },
   "SELECTION_TOOLBAR": {
     "SELECTED_FILES": "selected file(s)",

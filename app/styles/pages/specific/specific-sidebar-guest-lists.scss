@@ -1,0 +1,96 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+  SIDEBAR GUEST LIST
+***********************/
+
+/*TODO remove  select-chosen-ctn ref in guest views*/
+
+#guest-account-chosen .chosen-container-single.chosen-container-single-nosearch {
+  width: 100% !important;
+  .chosen-drop {
+    width: 140px;
+  }
+  .chosen-single {
+    color: #858585;
+    line-height: 33px;
+    font-weight: normal;
+  }
+  .chosen-results {
+    font-weight: normal;
+    color: #858585;
+  }
+  abbr {
+    display: none;
+  }
+}
+
+#content-ctn-sidebar.form-create-guests {
+  position: fixed;
+  width: 350px;
+  height: calc(100% - 140px);
+  overflow-y: auto;
+  margin-top: 0;
+  padding-top: 2em;
+  .fg-float .fg-label {
+    color: inherit;
+  }
+  label {
+    font-weight: normal;
+  }
+}
+
+#profile-main.detail-guest {
+  .img-preview-ctn {
+    height: 200px;
+    background: #0b97c4 url(../images/banner_linshare.jpg);
+    opacity: 1;
+    background-size: cover;
+  }
+  .user-preview-ctn {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 4;
+    .detail-info-ctn.flex-ctn {
+      margin: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      .item-l {
+        flex: 0 0 43px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .first-letter {
+        color: #0070a3;
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        font-size: 3em;
+        background-color: #fff !important;
+      }
+      p {
+        font-size: 1.03em;
+        color: #fff;
+      }
+      p.email {
+        font-size: 0.85em;
+      }
+    }
+  }
+}
+
+/**********************
+  MOBILE RESPONSIVE
+***********************/
+
+@media (max-width: 768px) {
+  #content-ctn-sidebar.form-create-guests {
+    width: 100% !important;
+  }
+}
+

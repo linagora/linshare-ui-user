@@ -1,0 +1,165 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+ COMMON HELPER CLASSES
+***********************/
+
+// TODO : alignement
+.ls-1p5x {
+  font-size: 1.5em;
+}
+
+.m-t-2em {
+  margin-top: 2em;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  content: "";
+  display: block !important;
+  clear: both !important;
+}
+
+// TODO : dangerous
+.hide {
+  display: none;
+}
+
+.disabled {
+  pointer-events: none !important;
+  color: $disabled !important;
+  a, span, p {
+    color: $disabled !important;
+  }
+}
+
+.disabled-work-in-progress {
+  .path1:before, .path2:before, .path3:before, .path4:before {
+    color: $disabledAlt;
+  }
+}
+
+//  TODO: Check if specify for action links in file listing
+.setVisible {
+  visibility: visible !important;
+  > li:not(:last-child) {
+    visibility: visible !important;
+  }
+}
+// TODO: CHECK if posible class replacement
+.hideVis {
+  visibility: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.display-none {
+  display: none;
+}
+
+.set-content-right {
+  text-align: right;
+}
+
+.set-content-left {
+  text-align: left;
+}
+
+.center {
+  text-align: center !important;
+}
+
+// TODO check if needed or specify view
+.align-right li a, .align-right {
+  text-align: right !important;
+}
+
+.required-field-hint {
+  color: red;
+  font-size: 0.85em;
+}
+
+.clic-enabled {
+  cursor: pointer;
+}
+
+.set-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.noMargin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.setWhite {
+  opacity: 1 !important;
+}
+
+.setDisabled {
+  z-index: -1 !important;
+}
+
+.active-link, .active-link span {
+  color: $primaryClr !important;
+}
+
+.has-error > span {
+  color: $error;
+  clear: both;
+  display: block;
+  margin-top: 7px;
+}
+
+.disabled-work-in-progress, .disabled-work-in-progress i {
+  color: $disabled !important;
+  pointer-events: none !important;
+  p {
+    color: $disabled important;
+  }
+}
+
+.align-list-icons span {
+  display: none;
+  position: absolute;
+  font-size: 0.65em;
+  bottom: -1.3em;
+  left: 0.2em;
+}
+
+.m-t-50 {
+  margin-top: 50px !important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clear-floats {
+  clear: both;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.pos-relative {
+  position: relative !important;
+}
+
+.p-b-60 {
+  padding-bottom: 60px;
+}
+
+.invisible {
+  visibility: hidden;
+  display: none !important;
+}
