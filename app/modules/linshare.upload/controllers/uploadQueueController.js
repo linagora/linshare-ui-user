@@ -14,8 +14,9 @@
    * @desc controller of all variables and methods for upload queue
    * @memberOf LinShare.UploadQueue.uploadQueueController
    */
-  function uploadQueueController($scope, $rootScope, growlService, $timeout, $state, $stateParams, flowParamsService,
-                                 flowUploadService, sharableDocumentService, lsAppConfig) {
+  function uploadQueueController($rootScope, $scope, $state, $stateParams, $timeout,
+                                 flowParamsService, flowUploadService, growlService, lsAppConfig,
+                                 sharableDocumentService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;
@@ -49,6 +50,7 @@
     uploadQueueVm.isflowUploadingError = false;
     uploadQueueVm.isFromMySpace = (uploadQueueVm.fromWhere === $scope.mySpacePage);
     uploadQueueVm.loadSidebarContent = loadSidebarContent;
+    uploadQueueVm.lsAppConfig = lsAppConfig;
     uploadQueueVm.pauseAllFiles = pauseAllFiles;
     uploadQueueVm.pauseSelectedFiles = pauseSelectedFiles;
     uploadQueueVm.removeSelectedDocuments = removeSelectedDocuments;
