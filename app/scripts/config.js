@@ -14,6 +14,7 @@ angular.module('linshareUiUserApp')
     mySpacePage: 'myspace',
     workgroupPage: 'workgroup',
     guestsList: 'guests-list',
+    workgroupList: 'group_list',
 
     //Value used for sidebar
     share: 'share',

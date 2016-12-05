@@ -92,7 +92,9 @@
               <span x-ng-click="showCheckboxes = !showCheckboxes"
                     class="visible-xs toolbar-mobile-item col-xs-3" >
                <a  class="select-all-items plain-txt-btn">
-                 <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes }"></i>
+                 <i class="zmdi zmdi-check-square"
+                    x-ng-class="{'active-link': showCheckboxes}"
+                    x-ng-click="showCheckboxes && sharedSpaceListVm.resetSelectedDocuments()"></i>
                </a>
              </span>
               <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"

@@ -20,7 +20,8 @@
       <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile cf scripts/common/MainController-->
       <!--TODO: does not display even if the showCheckboxes has been changed to true  -->
       <!--ligne 249 : y buena suerte-->
-      <a x-ng-click="showCheckboxes ? addSelectedDocument(documentFile) : null" class="visible-xs">
+      <!-- TODO: Remove $parent once the Document controller use ControllerAs instead of $scope -->
+      <a x-ng-click="$parent.showCheckboxes ? addSelectedDocument(documentFile) : null" class="visible-xs">
         <div x-ng-class="{ 'invisible' : showCheckboxes}">
           <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
         </div>

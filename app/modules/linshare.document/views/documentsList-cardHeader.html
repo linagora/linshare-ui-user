@@ -35,10 +35,13 @@
          <!-- TODO: If the button id clicked for the second time (disabled) then the selected items should be deselected cf resetSelectedDocuments() -->
          <!-- TODO: DOES NOT WORK : the variable showcheckboxes should set the visibility of the checkboxes located within the first td elements
           cf checkboxheader - within the mobile view -->
-         <span x-ng-click="showCheckboxes = !showCheckboxes"
+        <!-- TODO: Remove $parent once the Document controller use ControllerAs instead of $scope -->
+         <span x-ng-click="$parent.showCheckboxes = !$parent.showCheckboxes"
               class="visible-xs toolbar-mobile-item col-xs-3" >
                <a  class="select-all-items plain-txt-btn">
-                 <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes }"></i>
+                 <i class="zmdi zmdi-check-square"
+                    x-ng-class="{'active-link': showCheckboxes }"
+                    x-ng-click="$parent.showCheckboxes && resetSelectedDocuments()"></i>
                </a>
          </span>
         <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" x-ng-click="toggleSearchState()">

@@ -525,9 +525,9 @@ angular.module('linshare.receivedShare')
         return documentUtilsService.getItemDetails(receivedShareRestService, item);
       };
 
-      $scope.addSelectedDocument = addSelectedDocument();
-      function addSelectedDocument() {
-        return documentUtilsService.selectDocument.bind(undefined, $scope.selectedDocuments);
+      $scope.addSelectedDocument = addSelectedDocument;
+      function addSelectedDocument(document) {
+        documentUtilsService.selectDocument($scope.selectedDocuments, document);
       }
     })
 

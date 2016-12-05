@@ -9,6 +9,7 @@ angular.module('linshare.sharedSpace')
     $scope.mainVm.sidebar.hide();
 
     var thisctrl = this;
+    thisctrl.lsAppConfig = lsAppConfig;
     thisctrl.currentSelectedDocument = {};
     thisctrl.itemsList = workgroups;
     thisctrl.itemsListCopy = thisctrl.itemsList;

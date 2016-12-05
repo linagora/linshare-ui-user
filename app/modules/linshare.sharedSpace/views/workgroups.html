@@ -66,7 +66,7 @@
               <span x-ng-click="showCheckboxes = !showCheckboxes"
                     class="visible-xs toolbar-mobile-item col-xs-3" >
                <a  class="select-all-items plain-txt-btn">
-                 <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes }"></i>
+                 <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes}" ng-click="vm.resetSelectedDocuments()"></i>
                </a>
               </span>
               <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
@@ -571,7 +571,7 @@
 <!-- TODO: does not display  -->
 <section class="row multi-select-mobile visible-xs"
          x-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
-         x-ng-show="currentPage == 'group_list'">
+         x-ng-show="vm.currentPage === vm.lsAppConfig.workgroupList">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">{{vm.selectedDocuments.length}}</span>
     <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.ELEMENTS' | translate}}</span>
