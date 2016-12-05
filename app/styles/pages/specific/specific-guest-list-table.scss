@@ -9,12 +9,15 @@
 
   /* Table listing */
   #file-list-table {
+    td:nth-child(1) {
+      padding-left: 14px
+    }
     .first-letter {
       text-transform: uppercase;
-      width: 25px;
-      min-width: 25px;
-      min-height: 25px;
-      height: 25px;
+      width: 27px;
+      min-width: 27px;
+      min-height: 27px;
+      height: 27px;
       margin: auto;
       font-size: 0.65em;
       line-height: 26px;
@@ -30,6 +33,7 @@
     }
     .file-name-col {
       padding-top: 7px;
+      line-height: 1.1em;
     }
     .secondary-list-item-info {
       margin: 0 0 0.5em 0;
@@ -39,9 +43,9 @@
     .first-letter.guest-account-li {
       background-color: #f4f4f4;
       color: #7c7c7c;
-      line-height: 30px;
+      line-height: 26px;
       border: solid 1px #c4c4c4;
-      font-size: 0.5em !important;
+      font-size: 0.65em !important;
     }
     .checkbox-ctn {
       display: block;
@@ -49,6 +53,9 @@
       margin-left: 9px;
       font-size: 0.85em;
       vertical-align: middle;
+    }
+    .ctn-name-actions {
+      padding-top: 0.3em;
     }
   }
 
@@ -67,6 +74,14 @@
         font-weight: 500;
       }
     }
+    #search-field-ctn{
+      margin-right: 1.7em;
+    }
+    .toolbar-actions-items {
+      width: 50px;
+      min-width: 50px;
+      padding-left: 0;
+    }
   }
   .filter-views {
     padding-top: 10px;
@@ -77,12 +92,13 @@
 
 }
 
-@media (max-width: 767px) {
 
+@media (max-width: 767px) {
   .files {
-    .files.guest-list {
+    &.guest-list {
       #breadcrumb-wrap .toolbar-actions-items {
         width: 100% !important;
+        min-width: 100% !important;
       }
       #file-list-table.ng-table td.thumb-type-item a {
         padding-top: 10px;

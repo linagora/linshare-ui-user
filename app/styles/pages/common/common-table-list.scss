@@ -102,6 +102,9 @@
 .files {
   #file-list-table {
     border-spacing: 0 1px;
+    .checkbox-col {
+      justify-content: center;
+    }
     .row {
       margin: 0;
       padding: 0;
@@ -715,10 +718,14 @@
     tr > td:nth-child(2), tr > td:nth-child(3) {
       display: block;
       float: left;
-      width: calc(100% - 45px);
+      width: calc(100% - 33px);
       min-width: 281px;
       max-width: 93%;
       overflow: hidden;
+    }
+    #file-list-table.ng-table:not(.col-4-table) > tbody > tr > td:first-child {
+      display: flex;
+      justify-content: center;
     }
   }
   #file-list-table.ng-table.wider-first-col:not(.col-4-table) > tbody > tr > td:nth-child(2) {

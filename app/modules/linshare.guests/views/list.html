@@ -172,7 +172,7 @@
     </div>
     <div class="clearfix"></div>
   </div>
-  <div id="drop-area" class="collapsible-content" x-ng-init="searchMobileDropdown = false"
+  <div id="drop-area" x-ng-init="searchMobileDropdown = false"
        x-ng-class="{'search-toggled': searchMobileDropdown}">
     <div id="top-search-wrap">
       <i id="top-search-close" x-ng-click="searchMobileDropdown = !searchMobileDropdown">&times;</i>
@@ -275,7 +275,7 @@
           </span>
     </script>
     <!-- DOCUMENTS LIST  -->
-    <div class="card-body">
+    <div class="card-body collapsible-content">
       <div class="table-responsive">
         <table id="file-list-table" class="table table-vmiddle" x-ng-table="guestVm.tableParams" show-filter="true">
           <tr x-ng-repeat="guestData in $data" ls-item-selection=""
@@ -288,7 +288,7 @@
                            'current-vis': guestVm.currentSelectedGuest.current.uuid === guestData.uuid}"
               class="p-b-5" context-menu="moreOptionsContexualMenu">
             <td data-header="'checkboxheader.html'"
-                class="center set-content-left thumb-type-item thumb-groups-preview-ls" header-class="'col-2'">
+                class="center set-content-left thumb-type-item thumb-groups-preview-ls" header-class="'col-2 checkbox-col'">
               <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile
                         cf scripts/common/MainController-->
               <!--ligne 249 : y buena suerte-->
