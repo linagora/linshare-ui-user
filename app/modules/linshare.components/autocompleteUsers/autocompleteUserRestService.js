@@ -1,6 +1,6 @@
 /**
  * autocompleteUserRestService factory
- * @namespace LinShare.componenst
+ * @namespace LinShare.component
  */
 (function() {
   'use strict';
@@ -14,7 +14,7 @@
   /**
    *  @namespace autocompleteUserRestService
    *  @desc Service to interact with User object by REST for the autocompletion component
-   *  @memberOf LinShare.componenst
+   *  @memberof LinShare.component
    */
   function autocompleteUserRestService($log, $q, Restangular, ServerManagerService) {
     var

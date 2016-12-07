@@ -4,7 +4,7 @@ angular
   .module('linshareUiUserApp')
   .controller('UiUserMainController',
     function($window, $rootScope, $scope, $location, $state, $log, $translatePartialLoader, $translate,
-             authenticationRestService, MenuService, $timeout, LinshareUserService, lsAppConfig, $http) {
+             authenticationRestService, MenuService, $timeout, LinshareUserService, lsAppConfig, $http, checkTableHeightService) {
       //TODO: shall be moved to the directive controller of linshareSidebar directive
       var Sidebar = function() {
         var sidebar = {
@@ -65,7 +65,7 @@ angular
             form.$setUntouched();
           }
           if (obj && !_.isUndefined(obj.reset)) {
-             obj.reset();
+            obj.reset();
           }
         }
 
@@ -137,42 +137,16 @@ angular
       // ref index flow shares {identifier: [key of waiting shares]}
       $scope.refFlowShares = {};
 
-
-      function checkAndSetNewWidth() {
-        var widthWindow = angular.element(window).width();
-        if (widthWindow > 1093) {
-          $scope.mactrl.sidebarToggle.left = true;
-        } else {
-          $scope.mactrl.sidebarToggle.left = false;
-        }
-      }
       this.resizeDragNDropCtn = function(attr) {
-        checkAndSetNewWidth(attr);
+        checkTableHeightService.checkAndSetNewWidth(attr);
       };
       if ($scope.mactrl.sidebarToggle.left) {
-        checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+        checkTableHeightService.checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
       }
 
-      function checkAndSetNewTableHeight() {
-        // In order to restrict the scrolling within the table's  tbody
-        // need to be set as a directive onto the tbody elements
-        var heightWindow = angular.element(window).height();
-        var tableHeight = heightWindow - 243;
-        angular.element('#file-list-table tbody').attr('style', 'max-height : ' + tableHeight + 'px');
-      }
-
-      function checkAndSetNewWidthSidebarRight() {
-        var widthWindow = angular.element(window).width();
-        if (widthWindow < $rootScope.mobileWidthBreakpoint) {
-          angular.element('aside#chat.sidebar-right').appendTo('body');
-          angular.element('aside#chat.sidebar-right').addClass('setSidebarRightMobileState');
-        } else {
-          angular.element('aside#chat.sidebar-right').removeClass('setSidebarRightMobileState');
-        }
-      }
       var widthWindow = angular.element(window).width();
       $scope.$watch('mainVm.sidebar.isVisible()', function(n) {
-        checkAndSetNewWidthSidebarRight();
+        checkTableHeightService.checkAndSetNewWidthSidebarRight();
         if (widthWindow > $rootScope.mobileWidthBreakpoint) {
           if (n === true) {
             angular.element('.collapsible-content').addClass('set-width');
@@ -197,33 +171,7 @@ angular
           }
         }
       });
-      $scope.$on('$stateChangeSuccess', function() {
-        checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-        checkAndSetNewWidthSidebarRight();
-        checkAndSetNewTableHeight();
-      });
-      angular.element(window).resize(function() {
-        checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-        checkAndSetNewWidthSidebarRight();
-        checkAndSetNewTableHeight();
-      });
-      $scope.$watch(function() {
-        return $window.innerWidth;
-      }, function() {
-        checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
-        $timeout(function() {
-          checkAndSetNewWidthSidebarRight();
-        }, 450);
-      });
 
-      $scope.$watch(function() {
-        return $window.innerHeight;
-      }, function() {
-        checkAndSetNewTableHeight();
-        $timeout(function() {
-          checkAndSetNewTableHeight();
-        }, 1000);
-      });
 
       /**
        * Get the core version from the REST API

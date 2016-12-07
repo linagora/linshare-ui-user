@@ -327,7 +327,8 @@
                    'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid}"
                   class="p-b-5"
                   context-menu="moreOptionsContexualMenu"
-                  x-ng-dblclick="vm.goToSharedSpaceTarget(documentFile.uuid, documentFile.name)">
+                  x-ng-dblclick="vm.goToSharedSpaceTarget(documentFile.uuid, documentFile.name)"
+                  check-table-height>
                 <td data-header="'favoritsheader.html'" ng-if="linshareModeProduction == false"
                     class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
                     data-title=""
