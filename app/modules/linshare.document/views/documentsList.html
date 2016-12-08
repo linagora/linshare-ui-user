@@ -2,7 +2,7 @@
      flow-object="$flow"
      flow-files-submitted="flowUploadService.uploadFiles($files, $flow, mySpacePage)" flow-drop=""
      flow-drag-enter="dropClass='drag-over'"
-     flow-file-success="addUploadedDocument($file, $message)"
+     flow-complete="reloadDocuments()"
      flow-drag-leave="dropClass='fade-out-elm'"
      x-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible(), 'drag-over' : dropClass == 'drag-over',
           'fade-out-elm': dropClass == 'fade-out-elm' }"

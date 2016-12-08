@@ -14,9 +14,8 @@
    * @desc controller of all variables and methods for upload queue
    * @memberOf LinShare.UploadQueue.uploadQueueController
    */
-  function uploadQueueController($rootScope, $scope, $state, $stateParams, $timeout,
-                                 flowParamsService, flowUploadService, growlService, lsAppConfig,
-                                 sharableDocumentService) {
+  function uploadQueueController($rootScope, $scope, $state, $stateParams, $timeout, flowParamsService,
+    flowUploadService, growlService, lsAppConfig) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;
@@ -32,7 +31,6 @@
     uploadQueueVm.selectedUploads = $scope.selectedUploads;
 
     uploadQueueVm.$flow = $scope.$flow;
-    uploadQueueVm.addUploadedFile = addUploadedFile;
     uploadQueueVm.cancelAllFiles = cancelAllFiles;
     uploadQueueVm.cancelSelectedFiles = cancelSelectedFiles;
     uploadQueueVm.clearAllFiles = clearAllFiles;
@@ -137,18 +135,6 @@
           }, 250);
         }
       });
-    }
-
-    /**
-     * @namespace addUploadedFile
-     * @desc add the file to upload to upload queue and make it sharable if destination is my space
-     * @memberOf LinShare.UploadQueue.uploadQueueController
-     */
-    function addUploadedFile(flowFile, serverResponse) {
-      var uploadedDocument = uploadQueueVm.flowUploadService.addUploadedFile(flowFile, serverResponse);
-      if (uploadQueueVm.isFromMySpace) {
-        sharableDocumentService.sharableDocuments(uploadedDocument, $scope.share_array, $scope.refFlowShares);
-      }
     }
 
     /**
@@ -267,7 +253,8 @@
 
     /**
      * @namespace removeSelectedDocuments
-     * @desc resume selected uploading files
+     * @desc Remove selected uploading files
+     * @param {Object} flowFile - File uploadig to be removed
      * @memberOf LinShare.UploadQueue.uploadQueueController
      */
     function removeSelectedDocuments(flowFile) {

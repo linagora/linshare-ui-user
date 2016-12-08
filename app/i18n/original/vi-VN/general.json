@@ -3,17 +3,18 @@
   "APPLICATION_WELCOME_HOME": "Chào mừng bạn đã đến với ứng dụng chia sẻ dữ liệu LinShare",
   "REMOVE": "Xóa",
   "DOWNLOAD": "Tải về",
+  "TBT__WIP": "",
   "TBT__ME": "",
-  "TBT__BY" : "",
-  "TBT__NO_ACTION_AVAILABLE" : "",
-  "TBT__ACTIVITIES" : "",
-  "TBT__DOMAIN" : "",
-  "TBT__VALIDATE" : "",
-  "TBT__EDIT" : "",
+  "TBT__BY": "",
+  "TBT__NO_ACTION_AVAILABLE": "",
+  "TBT__ACTIVITIES": "",
+  "TBT__DOMAIN": "",
+  "TBT__VALIDATE": "",
+  "TBT__EDIT": "",
   "TBT__UNKNOWN_USER": "",
   "TBT__UNKNOWN_FIRST_LETTER": "",
   "TBT__PENDING_UPLOADS": "",
-  "TBT_SAVING":"",
+  "TBT_SAVING": "",
   "NAVIGATION": {
     "NEXT": "Trang sau",
     "PREVIOUS": "Trang trước",
@@ -25,37 +26,38 @@
     "CANCEL": "Hủy",
     "SHARE": "Chia sẻ"
   },
-  "EXTENSIONS" : {
-    "PDF" : "PDF",
-    "IMAGE" : "Hình ảnh",
-    "AUDIO" : "Âm thanh",
-    "VIDEO" : "Video",
-    "POWERPOINT" : "PowerPoint",
-    "WORD" : "Word",
-    "ARCHIVE" : "Archive",
-    "EXCEL" : "Excel",
-    "TEXT" : "Text",
-    "CODE" : "Code"
+  "EXTENSIONS": {
+    "PDF": "PDF",
+    "IMAGE": "Hình ảnh",
+    "AUDIO": "Âm thanh",
+    "VIDEO": "Video",
+    "POWERPOINT": "PowerPoint",
+    "WORD": "Word",
+    "ARCHIVE": "Archive",
+    "EXCEL": "Excel",
+    "TEXT": "Text",
+    "CODE": "Code"
   },
   "BOUTON_ADD_FILE_TITLE": "Bổ sung",
-  "MENU_TITLE" : {
-    "HOME" : "Trang chủ",
-    "TBT__FILES" : "",
-    "MY_FILES" : "Tập tin của tôi",
-    "RECEIVED_SHARES" : "Tập tin chia sẻ cho tôi",
-    "SHARES" : "Tập tin do tôi chia sẻ",
-    "TBT__SHARED_SPACE" : "Nhóm",
-    "ADMIN" : "Quản trị",
-    "LISTS" : "Danh sách",
-    "GUESTS" : "Khách mời",
-    "USERS" : "Người dùng",
-    "GROUP_MEMBERS" : "Thành viên nhóm",
-    "UPLOAD_MANAGMENT" : "Mời tải tập tin lên",
-    "UPLOAD_REQUESTS" : "Mời tải tập tin lên",
-    "UPLOAD_PROPOSITIONS" : "Lời mời tải tập tin lên",
-    "AUDIT" : "Lịch sử",
-    "AUDIT_GLOBAL" : "Tổng quát",
-    "AUDIT_UPLOAD_REQUEST" : "Danh sách lời mời tải tập tin lên"
+  "MENU_TITLE": {
+    "HOME": "Trang chủ",
+    "TBT__FILES": "",
+    "MY_FILES": "Tập tin của tôi",
+    "RECEIVED_SHARES": "Tập tin chia sẻ cho tôi",
+    "SHARES": "Tập tin do tôi chia sẻ",
+    "TBT__SHARED_SPACE": "Nhóm",
+    "ADMIN": "Quản trị",
+    "LISTS": "Danh sách",
+    "GUESTS": "Khách mời",
+    "USERS": "Người dùng",
+    "GROUP_MEMBERS": "Thành viên nhóm",
+    "UPLOAD_MANAGMENT": "Mời tải tập tin lên",
+    "UPLOAD_REQUESTS": "Mời tải tập tin lên",
+    "UPLOAD_PROPOSITIONS": "Lời mời tải tập tin lên",
+    "AUDIT": "Lịch sử",
+    "AUDIT_GLOBAL": "Tổng quát",
+    "AUDIT_UPLOAD_REQUEST": "Danh sách lời mời tải tập tin lên",
+    "TBT__UPLOAD_QUEUE": ""
   },
   "LINK_DISABLED": "Đường dẫn không hoạt động",
   "WELCOME_USER": "Xin chào ",
@@ -65,7 +67,9 @@
     "MULTIPLE_SELECT": "Đa lựa chọn",
     "INFO": "Thông tin",
     "MORE_ACTIONS": "thêm tác vụ",
-    "DOWNLOAD": "Tải về"
+    "DOWNLOAD": "Tải về",
+    "TBT__SHARED": "",
+    "TBT__COPY": ""
   },
   "LOGIN": {
     "EMAIL_PLACEHOLDER": "Thư điện tử",
@@ -75,7 +79,7 @@
     "FORGOTTEN_PASSWORD": "Quên mật khẩu ?",
     "CONNECTION_LINK": "Đăng nhập",
     "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở",
-    "COPYRIGHT":"Bạn đang sử dụng phiên bản nguồn mở và miễn phí của LinShare, được phát triển bởi Linagora © 2009–2016. Hãy đóng góp vào sự phát triển của sản phẩm bằng cách đăng ký gói dịch vụ doanh nghiệp của Linagora."
+    "COPYRIGHT": "Bạn đang sử dụng phiên bản nguồn mở và miễn phí của LinShare, được phát triển bởi Linagora © 2009–2016. Hãy đóng góp vào sự phát triển của sản phẩm bằng cách đăng ký gói dịch vụ doanh nghiệp của Linagora."
   },
   "HEADER": {
     "SETTINGS": "Cài đặt",
@@ -107,25 +111,26 @@
     "TBT__COPY_TO_SHARED_SPACE": "",
     "TBT__COPY_IN_MY_FILES": "",
     "DELETE": "Xóa",
-    "TBT__FAVORITES" : "",
-    "TBT__SILENCE" : "",
-    "TBT__ADD_MEMBER" : "",
-    "TBT__RENAME" : "",
-    "TBT__COPY" : "",
-    "TBT__GO_TO_TRASH" : "",
-    "TBT__NEW_WORKGROUP" : "",
-    "TBT__NEW_FOLDER" : "",
+    "TBT__FAVORITES": "",
+    "TBT__SILENCE": "",
+    "TBT__ADD_MEMBER": "",
+    "TBT__RENAME": "",
+    "TBT__COPY": "",
+    "TBT__GO_TO_TRASH": "",
+    "TBT__NEW_WORKGROUP": "",
+    "TBT__NEW_FOLDER": "",
     "TBT__NEW_CONTACTS_LIST": "",
     "TBT__COPY_ADJ": "",
-    "TBT__MOVE" : "",
+    "TBT__MOVE": "",
     "TBT__VIEW_VERSIONING": "",
     "TBT__COPY_DROPDOWN": {
       "TBT__COPY_TO_MY_FILES": "",
       "TBT__COPY_AND_SHARE": "",
       "TBT__SIMPLE_COPY": ""
     },
+    "TBT__INFO_WORKGROUP": "",
     "TBT__EXTERNAL_EDIT": "",
-    "TBT__INFO_WORKGROUP": ""
+    "TBT__LOCK": ""
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
@@ -140,13 +145,26 @@
       "CONFIRM_BUTTON": "Có!",
       "DONE": "Xong",
       "IS_CLEARED": "LocalStorage rỗng"
+    },
+    "TBT__ON_FILE_COPY": {
+      "TBT__TITLE": "",
+      "TBT__TEXT": "",
+      "TBT__CONFIRM_BUTTON": "",
+      "TBT__CANCEL_BUTTON": ""
+    },
+    "TBT__ON_SHARE_DELETE": {
+      "TBT__CANCEL_BUTTON": "",
+      "TBT__CONFIRM_BUTTON": "",
+      "TBT__TEXT": "",
+      "TBT__TITLE": ""
     }
   },
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Tên tập tin",
-    "TBT__ADVANCED_SEARCH_TITLE" : "",
+    "TBT__ADVANCED_SEARCH_TITLE": "",
     "FILTER_BY_SIZE": "Lọc bằng kích cỡ",
     "TBT__BY_SIZE": "",
+    "TBT_IS_SHARED": "",
     "TBT__ORDER_BY_NAME": "",
     "TBT__FILTER_BY": "",
     "FILTER_BY_DATE": {
@@ -174,9 +192,19 @@
     "TBT__DELETE_ALL": "",
     "TBT__CANCEL": "",
     "TBT__CANCEL_ALL": "",
+    "TBT__RESET": "",
+    "TBT__FILES": "",
+    "TBT__ELEMENTS": "",
+    "TBT__SHOW_SELECTION": "",
+    "TBT__SHOW_IN_FILES": "",
+    "TBT__PAUSE_ALL": "",
+    "TBT__PAUSE": "",
+    "TBT__CLEAR_ALL": "",
+    "TBT__CLEAR": "",
+    "TBT__PLAY": "",
     "TBT__RETRY": "",
     "TBT__RETRY_ALL": "",
-    "TBT__ELEMENTS": "",
+    "TBT__STOP": "",
     "TBT__ORDER_BY": ""
   },
   "COMPONENTS": {
@@ -200,10 +228,13 @@
     "BEFORE_SENDINGS": "trước khi gửi"
   },
   "WORK_IN_PROGRESS": {
-  "WORK_IN_PROGRESS_INFO": "Trang này hiện không hoạt động",
-  "WORK_IN_PROGRESS_MSG": "ĐANG HOÀN THIỆN"
+    "WORK_IN_PROGRESS_INFO": "Trang này hiện không hoạt động",
+    "WORK_IN_PROGRESS_MSG": "ĐANG HOÀN THIỆN"
   },
-  "TBT__INFORMATION_TAB" : {
+  "TBT__SELECTION": {
+    "TBT__NUM_ITEM_SELECTED": ""
+  },
+  "TBT__INFORMATION_TAB": {
     "TBT__TITLE": "",
     "TBT__UPTADED_THE": "",
     "TBT__META_DATA": "",
@@ -214,7 +245,7 @@
     "TBT__EDIT_DESCRIPTION": "",
     "TBT__ABORT_EDIT": ""
   },
-  "TBT__ANONYMOUS_URL" : {
+  "TBT__ANONYMOUS_URL": {
     "TBT__HELLO": "",
     "TBT__MSG": ""
   },

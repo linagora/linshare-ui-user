@@ -123,7 +123,7 @@ angular.module('linshareUiUserApp')
         resolve: {
           checkUrl: function ($state, $stateParams, lsAppConfig) {
             if ($stateParams.from !== lsAppConfig.mySpacePage && $stateParams.from !== lsAppConfig.workgroupPage) {
-              return $state.go('documents.upload', {'from': lsAppConfig.mySpacePage });
+              $state.go('documents.upload', {'from': lsAppConfig.mySpacePage});
             }
           }
         }
@@ -288,8 +288,16 @@ angular.module('linshareUiUserApp')
       .state('share.detail', {
         url: '/view/:id',
         templateUrl: 'modules/linshare.share/views/shares_detail.html',
-        controller: 'shareDetailController',
+        controller: 'LinshareShareListController',
+        controllerAs: 'shareListVm',
         resolve: {
+          previousState: function($state) {
+            var currentStateData = {
+              Name: $state.current.name,
+              Params: $state.params
+            };
+            return currentStateData;
+          },
           shareIndex: function($stateParams) {
             return $stateParams.id;
           }

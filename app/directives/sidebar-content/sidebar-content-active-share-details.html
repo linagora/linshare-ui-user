@@ -1,27 +1,30 @@
 <div class="header-sidebar">
-  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" x-ng-click="mainVm.sidebar.hide();"></i>
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"></i>
   <h2 class="header-more-options">{{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.TITLE' | translate}}</h2>
 </div>
 <div class="num-items-section-ctn">
-  <span>{{mainVm.sidebar.getData().selectedDocuments.length}}</span> {{"RIGHT_PANEL.SHARE.SELECTED_FILES" | translate}}
+  <span>{{mainVm.sidebar.getData().shareListVm.selectedDocuments.length}}</span>
+  {{"RIGHT_PANEL.SHARE.SELECTED_FILES" | translate}}
   <a class="pull-right sidebar-link" ui-sref="documents.upload" id="show-selected-files"
-     x-ng-click="mainVm.sidebar.hide();">
+     x-ng-click="mainVm.sidebar.hide()">
     {{"RIGHT_PANEL.SHARE_OPTIONS.GO_TO_UPLOAD_FILES" | translate}}
   </a>
 </div>
 <div class="card col-xs-12" id="content-ctn-sidebar">
   <div class="custom-list-container clearfix">
     <div class="recipients-form-sections clearfix">
-      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"> </i>
-        {{mainVm.sidebar.getData().currentSelectedDocument.current.shared}}
+      <h2 class="pull-left headerSubCtn"><i class="zmdi zmdi-accounts"></i>
+        {{mainVm.sidebar.getData().shareListVm.currentSelectedDocument.current.shared}}
         {{"RIGHT_PANEL.CURRENT_SHARE_DETAIL.RECIPIENTS" | translate}}
       </h2>
     </div>
     <div class="custom-list-body col-xs-12">
-      <div class="custom-list-item readonly" x-ng-repeat="recipient in mainVm.sidebar.getData().shareToDisplay.recipients"
+      <div class="custom-list-item readonly"
+           x-ng-repeat="recipient in mainVm.sidebar.getData().shareListVm.currentShare.recipients"
            x-ng-if="recipient.domain">
-        <p class="pull-left circle-ctn"><span
-          class="circle user-bg">{{recipient.firstName.charAt(0).toUpperCase()}}</span></p>
+        <p class="pull-left circle-ctn">
+          <span class="circle user-bg">{{recipient.firstName.charAt(0).toUpperCase()}}</span>
+        </p>
         <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{recipient.firstName + ' ' + recipient.lastName}}</p>
           <p class="close-list-icone-btn pull-right" x-ng-click="shareActionVm.newShare.removeRecipient($index)">
@@ -29,7 +32,8 @@
           </p>
         </div>
       </div>
-      <div class="custom-list-item readonly" x-ng-repeat="recipient in mainVm.sidebar.getData().shareToDisplay.recipients"
+      <div class="custom-list-item readonly"
+           x-ng-repeat="recipient in mainVm.sidebar.getData().shareListVm.currentShare.recipients"
            x-ng-if="!recipient.domain">
         <p class="pull-left circle-ctn"><span class="circle user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
         </p>
@@ -40,7 +44,8 @@
           </p>
         </div>
       </div>
-      <div class="custom-list-item readonly" x-ng-repeat="list in mainVm.sidebar.getData().shareToDisplay.mailingListUuid">
+      <div class="custom-list-item readonly"
+           x-ng-repeat="list in mainVm.sidebar.getData().shareListVm.currentShare.mailingListUuid">
         <p class="pull-left circle-ctn"><span class="circle  user-bg">{{list.listName.charAt(0)}}</span></p>
         <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
@@ -65,7 +70,9 @@
               {{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{mainVm.sidebar.getData().shareToDisplay.expirationDate | date:'medium'}}</div>
+              <div class="lv-title">
+                {{mainVm.sidebar.getData().shareListVm.currentShare.expirationDate | date:'medium'}}
+              </div>
             </div>
           </div>
           <div class="media">
@@ -73,7 +80,9 @@
               {{'RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{mainVm.sidebar.getData().shareToDisplay.notificationDateForUSDA | date:'medium'}}</div>
+              <div class="lv-title">
+                {{mainVm.sidebar.getData().shareListVm.currentShare.notificationDateForUSDA | date:'medium'}}
+              </div>
             </div>
           </div>
           <div class="media">
@@ -81,10 +90,10 @@
               {{'RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING' | translate}} :
             </div>
             <div class="media-body">
-              <span x-ng-show="mainVm.sidebar.getData().shareToDisplay.secured === true">
+              <span x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.secured">
                 <i class="fa fa-check-square-o"></i>
               </span>
-              <span x-ng-show="mainVm.sidebar.getData().shareToDisplay.secured === false">
+              <span x-ng-show="!mainVm.sidebar.getData().shareListVm.currentShare.secured">
                 <i class="fa fa-square-o"></i>
               </span>
             </div>
@@ -95,10 +104,10 @@
             </div>
             <div class="media-body">
               <div class="lv-title">
-                <span x-ng-show="mainVm.sidebar.getData().shareToDisplay.enableUSDA == true">
+                <span x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.enableUSDA">
                   <i class="fa fa-check-square-o"></i>
                 </span>
-                <span x-ng-show="mainVm.sidebar.getData().shareToDisplay.enableUSDA == false">
+                <span x-ng-show="!mainVm.sidebar.getData().shareListVm.currentShare.enableUSDA">
                   <i class="fa fa-square-o"></i>
                 </span>
               </div>
@@ -110,30 +119,30 @@
             </div>
             <div class="media-body">
               <div class="lv-title">
-                <span x-ng-show="mainVm.sidebar.getData().shareToDisplay.creationAcknowledgement == true">
+                <span x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.creationAcknowledgement">
                   <i class="fa fa-check-square-o"></i>
                 </span>
-                <span x-ng-show="mainVm.sidebar.getData().shareToDisplay.creationAcknowledgement == false">
+                <span x-ng-show="!mainVm.sidebar.getData().shareListVm.currentShare.creationAcknowledgement">
                   <i class="fa fa-square-o"></i>
                 </span>
               </div>
             </div>
           </div>
 
-          <div class="media" x-ng-show="mainVm.sidebar.getData().shareToDisplay.subject">
+          <div class="media" x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.subject">
             <div class="pull-left col-md-7">
               {{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{mainVm.sidebar.getData().shareToDisplay.subject}}</div>
+              <div class="lv-title">{{mainVm.sidebar.getData().shareListVm.currentShare.subject}}</div>
             </div>
           </div>
-          <div class="media" x-ng-show="mainVm.sidebar.getData().shareToDisplay.message">
+          <div class="media" x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.message">
             <div class="pull-left col-md-7">
               {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.MAIL_CONTENT' | translate}} :
             </div>
             <div class="media-body">
-              <div class="lv-title">{{mainVm.sidebar.getData().shareToDisplay.message}}</div>
+              <div class="lv-title">{{mainVm.sidebar.getData().shareListVm.currentShare.message}}</div>
             </div>
           </div>
         </div>
@@ -141,8 +150,11 @@
     </div>
   </div>
 </div>
-<div class="bottom-sidebar-btn hide">
-  <button class="btn btn-primary col-xs-12" x-ng-click="$state.go('documents.files')">
+<div class="bottom-sidebar-btn"
+     x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.waitingUploadIdentifiers.length > 0">
+  <button class="btn btn-primary col-xs-12"
+          x-ng-click="mainVm.sidebar.getData().shareListVm.cancelShare(
+                        mainVm.sidebar.getData().shareListVm.currentShare)">
     {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.SHARE_OPTIONS' | translate}}
   </button>
 </div>

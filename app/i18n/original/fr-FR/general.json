@@ -5,12 +5,12 @@
   "DOWNLOAD": "Télécharger",
   "WIP": "En cours de contruction",
   "ME": "Moi",
-  "BY" : "Par",
-  "NO_ACTION_AVAILABLE" : "Aucune action disponible",
-  "ACTIVITIES" : "Activités",
-  "DOMAIN" : "Domaine",
-  "VALIDATE" : "Valider",
-  "EDIT" : "Editer",
+  "BY": "Par",
+  "NO_ACTION_AVAILABLE": "Aucune action disponible",
+  "ACTIVITIES": "Activités",
+  "DOMAIN": "Domaine",
+  "VALIDATE": "Valider",
+  "EDIT": "Editer",
   "UNKNOWN_USER": "Utilisateur inconnu",
   "UNKNOWN_FIRST_LETTER": "NC",
   "PENDING_UPLOADS": "en attente",
@@ -26,38 +26,38 @@
     "CANCEL": "Annuler",
     "SHARE": "Partager"
   },
-  "EXTENSIONS" : {
-    "PDF" : "PDF",
-    "IMAGE" : "Image",
-    "AUDIO" : "Audio",
-    "VIDEO" : "Vidéo",
-    "POWERPOINT" : "PowerPoint",
-    "WORD" : "Word",
-    "ARCHIVE" : "Archive",
-    "EXCEL" : "Excel",
-    "TEXT" : "Texte",
-    "CODE" : "Code"
+  "EXTENSIONS": {
+    "PDF": "PDF",
+    "IMAGE": "Image",
+    "AUDIO": "Audio",
+    "VIDEO": "Vidéo",
+    "POWERPOINT": "PowerPoint",
+    "WORD": "Word",
+    "ARCHIVE": "Archive",
+    "EXCEL": "Excel",
+    "TEXT": "Texte",
+    "CODE": "Code"
   },
   "BOUTON_ADD_FILE_TITLE": "Ajouter",
-  "MENU_TITLE" : {
-    "HOME" : "Accueil",
-    "FILES" : "Espace personnel",
-    "MY_FILES" : "Mes fichiers",
-    "RECEIVED_SHARES" : "Mes partages reçus",
-    "SHARES" : "Mes fichiers partagés",
-    "SHARED_SPACE" : "Espace commun",
-    "ADMIN" : "Administration",
-    "LISTS" : "Mes listes",
-    "GUESTS" : "Mes invités",
-    "USERS" : "Les utilisateurs",
-    "GROUP_MEMBERS" : "Mes groupes",
-    "UPLOAD_MANAGMENT" : "Invitations de dépôts",
-    "UPLOAD_REQUESTS" : "Invitations de dépôts",
-    "UPLOAD_PROPOSITIONS" : "Demandes d'invitations de dépôts",
-    "AUDIT" : "Audit",
-    "AUDIT_GLOBAL" : "Audit global",
-    "AUDIT_UPLOAD_REQUEST" : "Audit invitations de dépôts",
-    "UPLOAD_QUEUE" : "Mes dépôts"
+  "MENU_TITLE": {
+    "HOME": "Accueil",
+    "FILES": "Espace personnel",
+    "MY_FILES": "Mes fichiers",
+    "RECEIVED_SHARES": "Mes partages reçus",
+    "SHARES": "Mes fichiers partagés",
+    "SHARED_SPACE": "Espace commun",
+    "ADMIN": "Administration",
+    "LISTS": "Mes listes",
+    "GUESTS": "Mes invités",
+    "USERS": "Les utilisateurs",
+    "GROUP_MEMBERS": "Mes groupes",
+    "UPLOAD_MANAGMENT": "Invitations de dépôts",
+    "UPLOAD_REQUESTS": "Invitations de dépôts",
+    "UPLOAD_PROPOSITIONS": "Demandes d'invitations de dépôts",
+    "AUDIT": "Audit",
+    "AUDIT_GLOBAL": "Audit global",
+    "AUDIT_UPLOAD_REQUEST": "Audit invitations de dépôts",
+    "UPLOAD_QUEUE": "Mes dépôts"
   },
   "LINK_DISABLED": "Lien inactif",
   "WELCOME_USER": "Bienvenue ",
@@ -114,25 +114,25 @@
     "COPY_IN_MY_FILES": "Copier dans mes fichiers",
     "DELETE": "Supprimer",
     "DELETE_ALL": "Tout supprimer",
-    "TRANSFERT" : "Transférer",
-    "INFORMATION" : "Information",
-    "FAVORITES" : "Favoris",
-    "SILENCE" : "Silence",
-    "ADD_MEMBER" : "Ajouter un membre",
-    "RENAME" : "Renommer",
-    "COPY" : "Copier",
-    "GO_TO_TRASH" : "Voir la corbeille",
-    "NEW_WORKGROUP" : "Nouveau groupe de travail",
-    "NEW_FOLDER" : "Nouveau répertoire",
+    "TRANSFERT": "Transférer",
+    "INFORMATION": "Information",
+    "FAVORITES": "Favoris",
+    "SILENCE": "Silence",
+    "ADD_MEMBER": "Ajouter un membre",
+    "RENAME": "Renommer",
+    "COPY": "Copier",
+    "GO_TO_TRASH": "Voir la corbeille",
+    "NEW_WORKGROUP": "Nouveau groupe de travail",
+    "NEW_FOLDER": "Nouveau répertoire",
     "NEW_CONTACTS_LIST": "Nouvelle liste de contacts",
-    "COPY_ADJ" : "Copie",
-    "MOVE" : "Déplacer",
+    "COPY_ADJ": "Copie",
+    "MOVE": "Déplacer",
     "VIEW_VERSIONING": "Voir l'historique",
     "COPY_DROPDOWN": {
       "COPY_TO_MY_FILES": "Vers mes fichier",
       "COPY_AND_SHARE": "Copier & partager",
       "SIMPLE_COPY": "Copie simple"
-      },
+    },
     "INFO_WORKGROUP": "Détail du groupe de travail",
     "EXTERNAL_EDIT": "Télécharger & verrouiller",
     "LOCK": "Verrouiller"
@@ -152,15 +152,20 @@
       "IS_CLEARED": "Le stockage local a été effacé"
     },
     "ON_FILE_COPY": {
-      "TITLE": "Êtes-vous sûr?",
       "TEXT": "Vous êtes sur le point de copier des fichiers reçus dans votre espace !",
       "CONFIRM_BUTTON": "Copier",
       "CANCEL_BUTTON": "Annuler"
+    },
+    "ON_SHARE_DELETE": {
+      "CANCEL_BUTTON": "Annuler!",
+      "CONFIRM_BUTTON": "Effacer",
+      "TEXT": "Vous êtes sur le point de supprimer un partage !",
+      "TITLE": "Êtes-vous sûr?"
     }
   },
   "FILTER_COMPONENT": {
     "PLACEHOLDER_FILE_NAME": "Rechercher par nom",
-    "ADVANCED_SEARCH_TITLE" : "Recherche avancée",
+    "ADVANCED_SEARCH_TITLE": "Recherche avancée",
     "FILTER_BY_SIZE": "Filtrer par taille",
     "BY_SIZE": "Taille",
     "IS_SHARED": "Partagé",
@@ -218,14 +223,14 @@
       "INVALID_EMPTY_LIST": "Cette liste ne peut être vide."
     }
   },
-    "ADD_FILES_DROPDOWN": {
-      "UPLOAD_FILE": "Déposer un fichier",
-      "UPLOAD_AND_SHARE": "Déposer & partager ",
-      "UPLOAD_IN_MY_FILES": "Dans mes fichiers",
-      "UPLOAD_IN_WORKGROUP": "Dans un groupe de travail",
-      "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail",
-      "UPLOAD_SHARE": "Dépôt & Partage"
-    },
+  "ADD_FILES_DROPDOWN": {
+    "UPLOAD_FILE": "Déposer un fichier",
+    "UPLOAD_AND_SHARE": "Déposer & partager ",
+    "UPLOAD_IN_MY_FILES": "Dans mes fichiers",
+    "UPLOAD_IN_WORKGROUP": "Dans un groupe de travail",
+    "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail",
+    "UPLOAD_SHARE": "Dépôt & Partage"
+  },
   "TRANSFERS_DROPDOWN": {
     "SHARE": "Partage",
     "SHARE_NUMBER": "Partage",
@@ -239,18 +244,18 @@
   "SELECTION": {
     "NUM_ITEM_SELECTED": "Fichiers sélectionnés"
   },
-  "INFORMATION_TAB" : {
-  "TITLE": "DETAILS",
-  "UPTADED_THE": "Modifié le ",
-  "META_DATA": "Méta données",
-  "INSERT_DESCRIPTION": "Saisissez une description",
-  "CREATED_THE": "Créé le",
-  "PREVIOUS_UPDATE": "Historique",
-  "VERSIONS": "Mise à jours",
-  "EDIT_DESCRIPTION": "Editer la description",
-  "ABORT_EDIT": "Annuler votre modification"
+  "INFORMATION_TAB": {
+    "TITLE": "DETAILS",
+    "UPTADED_THE": "Modifié le ",
+    "META_DATA": "Méta données",
+    "INSERT_DESCRIPTION": "Saisissez une description",
+    "CREATED_THE": "Créé le",
+    "PREVIOUS_UPDATE": "Historique",
+    "VERSIONS": "Mise à jours",
+    "EDIT_DESCRIPTION": "Editer la description",
+    "ABORT_EDIT": "Annuler votre modification"
   },
-  "ANONYMOUS_URL" : {
+  "ANONYMOUS_URL": {
     "HELLO": "Bonjour",
     "MSG": "Vous avez reçu des fichiers de la part de "
   },

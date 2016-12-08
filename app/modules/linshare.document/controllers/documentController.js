@@ -16,7 +16,6 @@
     var swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500;
 
     $scope.addSelectedDocument = addSelectedDocument;
-    $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
     $scope.closeDetailSidebar = closeDetailSidebar;
     $scope.closeSearch = closeSearch;
@@ -188,12 +187,6 @@
 
     function addSelectedDocument(document) {
       documentUtilsService.selectDocument($scope.selectedDocuments, document);
-    }
-
-    function addUploadedDocument(flowFile, serverResponse) {
-      var uploadedDocument = flowUploadService.addUploadedFile(flowFile, serverResponse);
-      sharableDocumentService.sharableDocuments(uploadedDocument, $scope.share_array, $scope.refFlowShares);
-      $scope.reloadDocuments();
     }
 
     function backToSidebarContentDetails() {
