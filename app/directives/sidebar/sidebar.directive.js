@@ -1,3 +1,7 @@
+/**
+ * linshareSidebar Directive
+ * @namespace linshareUiUserApp
+ */
 (function() {
   'use strict';
 
@@ -7,6 +11,12 @@
 
   linshareSidebar.$inject = ['LinshareSidebarController'];
 
+  /**
+   *  @namespace linshareSidebar
+   *  @desc TODO [TOFILL]
+   *  @param {Object} LinshareSidebarController controller of the sidebar
+   *  @memberOf linshareUiUserApp
+   */
   //TODO: unused for now, move sidebar element from UiUserMainController
   function linshareSidebar(LinshareSidebarController) {
     return {
@@ -16,14 +26,9 @@
         toggle: '=',
         dataType: '='
       },
-      link: linkFunc,
       controller: LinshareSidebarController,
       controllerAs: 'linshareSidebarVm',
       bindToController: true
     };
-    /*jshint unused: false */
-    function linkFunc(scope, element, attrs, exampleVm, transcludeFn) {
-
-    }
   }
 })();
