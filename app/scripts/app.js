@@ -27,6 +27,7 @@ angular
     'linshare.upload',
     'linshare.userProfile',
     'linshare.authentication',
+    'linshare.contactsLists',
     'linshare.document',
     'linshare.share',
     'linshare.sharedSpace',

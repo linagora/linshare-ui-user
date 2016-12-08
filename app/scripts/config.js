@@ -15,6 +15,8 @@ angular.module('linshareUiUserApp')
     workgroupPage: 'workgroup',
     guestsList: 'guests-list',
     workgroupList: 'group_list',
+    contactsListsMinePage: 'contactslists-mine',
+    contactsListsOthersPage: 'contactslists-others',
 
     //Value used for sidebar
     share: 'share',
@@ -25,5 +27,8 @@ angular.module('linshareUiUserApp')
     guestDetails: 'guest-details',
     details: 'details',
     addMember: 'add-member',
-    workgroupDetailFile: 'workgroup-detail-file'
+    workgroupDetailFile: 'workgroup-detail-file',
+    contactslists: 'contactslists',
+    contactslistsAddContacts: 'contactslists-add-contacts',
+    contactslistsContact: 'contactslists-contact'
 });

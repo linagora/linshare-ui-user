@@ -11,8 +11,8 @@
 
   lsAutocompleteUser.$inject = ['componentsConfig'];
 
-  /** 
-   *  @namespace lsAutocompleteUser 
+  /**
+   *  @namespace lsAutocompleteUser
    *  @desc Autompletion for searching a type of user and add it to a list on selection
    *  @example <div ls-autocomplete-user></div>
    *  @memberOf LinShare.components
@@ -41,8 +41,8 @@
 
     return directive;
 
-    /** 
-     *  @name linkFn 
+    /**
+     *  @name linkFn
      *  @desc link function of the directive
      *  @param {Object} scope - Angular scope object of the directive
      *  @param {Object} elm - jqLite-wrapped element that this directive matches
@@ -69,7 +69,7 @@
                 type: 'user'
               };
             }
-            scope.autocompleteUsersVm.dealWithSelectedUser();
+            scope.autocompleteUsersVm.onSelect();
           }
         }
       });

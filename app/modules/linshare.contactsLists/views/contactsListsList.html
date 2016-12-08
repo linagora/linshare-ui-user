@@ -1,0 +1,563 @@
+<div ui-view="" class="file-listing-ctn" x-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}">
+  <div class="container files">
+    <!--  ACTIONS ON DOCUMENTS  -->
+    <!-- contextmenu -->
+    <div class="card" id="collapsible-content">
+      <div class="card-header">
+        <div id="breadcrumb-wrap">
+          <div class="menu-popover-ctn hidden-xs clickable">
+            <a class="add-menu-group"
+               x-ng-click="contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.createContactsList() :
+                contactsListsListVm.goToMineAndCreateContactsList()">
+              <i class="zmdi zmdi-plus"></i>
+            </a>
+          </div>
+          <div class="breadcrumbs-ctn hidden-xs">
+            <a href="" href="javascript:void(0)" class="breadcrumb">
+              <i class="zmdi zmdi-file"></i>
+              {{"CONTACTS_LISTS_DETAILS.CONTACTS_LISTS" | translate}}
+            </a>
+            <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+          </div>
+          <div id="action-header">
+            <div class="fg-line toolbar-actions-items">
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
+                   x-ng-click="contactsListsListVm.toggleSearchState()">
+                <a href="javascript:void(0)">
+                  <i class="tm-icon zmdi zmdi-search"
+                     x-ng-class="{'active-link': searchMobileDropdown}"></i>
+                </a>
+              </div>
+              <span x-ng-click="contactsListsListVm.selectDocumentsOnCurrentPage(contactsListsListVm.tableParams.data,
+                 contactsListsListVm.tableParams.page())"
+                class="visible-xs toolbar-mobile-item col-xs-3 clickable">
+                <a x-ng-if="!contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
+                   class="select-all-items plain-text-button">
+                  <i class="fa fa-square-o"></i>
+                </a>
+                <a x-ng-if="contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
+                   class="select-all-items plain-text-button">
+                  <i class="fa fa-check-square-o activeLink"></i>
+                </a>
+                </span>
+              <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
+                <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown=""
+                     dropdown-append-to-body>
+                  <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
+                     x-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
+                    <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
+                  </a>
+                  <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                    <li role="menuitem">
+                      <a href="" class="center">
+                        {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href=""
+                         x-ng-click="contactsListsListVm.sortDropdownSetActive('name', $event)">
+                          <span class="caret-area">
+                            <i x-ng-show="contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          </span>
+                        {{'CONTACTS_LISTS_ACTION.ORDER_BY.LIST_NAME' | translate}}
+                      </a>
+                    </li>
+                    <li role="menuitem" x-ng-show="!contactsListsListVm.isFromMyContactsLists">
+                      <a href=""
+                         x-ng-click="contactsListsListVm.sortDropdownSetActive('owner.firstName', $event)">
+                          <span class="caret-area">
+                            <i x-ng-show="contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          </span>
+                        {{'CONTACTS_LISTS_ACTION.ORDER_BY.OWNER_FIRST_NAME' | translate}}
+                      </a>
+                    </li>
+                    <li role="menuitem" x-ng-show="!contactsListsListVm.isFromMyContactsLists">
+                      <a href=""
+                         x-ng-click="contactsListsListVm.sortDropdownSetActive('owner.lastName', $event)">
+                          <span class="caret-area">
+                            <i x-ng-show="contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          </span>
+                        {{'CONTACTS_LISTS_ACTION.ORDER_BY.OWNER_LAST_NAME' | translate}}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href=""
+                         x-ng-click="contactsListsListVm.sortDropdownSetActive('public', $event)">
+                          <span class="caret-area">
+                            <i x-ng-show="contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          </span>
+                        {{'CONTACTS_LISTS_ACTION.ORDER_BY.PRIVATE_PUBLIC' | translate}}
+                      </a>
+                    </li>
+                    <li role="menuitem" x-ng-show="!contactsListsListVm.isFromMyContactsLists">
+                      <a href=""
+                         x-ng-click="contactsListsListVm.sortDropdownSetActive('owner.mail', $event)">
+                          <span class="caret-area">
+                            <i x-ng-show="contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          </span>
+                        {{'CONTACTS_LISTS_ACTION.ORDER_BY.OWNER_MAIL' | translate}}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href="" class="selected-sorting"
+                         x-ng-click="contactsListsListVm.sortDropdownSetActive('modificationDate',$event)">
+                        <span class="caret-area">
+                        <i x-ng-show="contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                        <i x-ng-show="!contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                        {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a href=""
+                         x-ng-click="contactsListsListVm.sortDropdownSetActive('creationDate', $event)">
+                        <span class="caret-area">
+                        <i x-ng-show="contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                        <i x-ng-show="!contactsListsListVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                        {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="pull-right m-r-20 m-t-5">
+                <span
+                  x-ng-class="{'active' : contactsListsListVm.isFromMyContactsLists , 'left-elem-toggle-inactive' :
+                   !contactsListsListVm.isFromMyContactsLists}" class="toggle-pill">
+                  <a x-ng-href="{{$state.href('administration.contactslists', {from:
+                  contactsListsListVm.contactsListsMinePage, createNew: 'false'})}}">
+                    {{"CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS" | translate}}
+                  </a>
+                </span>
+              <span
+                x-ng-class="{'active' : !contactsListsListVm.isFromMyContactsLists , 'right-elem-toggle-inactive' :
+                 contactsListsListVm.isFromMyContactsLists}"
+                class="toggle-pill">
+                  <a
+                    x-ng-href="{{$state.href('administration.contactslists', {from:
+                    contactsListsListVm.contactsListsOthersPage, createNew: 'false'})}}">
+                    {{"CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS" | translate}}
+                  </a>
+                </span>
+            </div>
+            <div class="input-group search-bar hidden-xs">
+              <div id="search-field-ctn">
+                <div class="search-style">
+                  <div class="fg-line">
+                    <input type="text" class="form-control" autocomplete="off" x-ng-model="filterValue"
+                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                           x-ng-change="contactsListsListVm.tableApplyFilter(filterValue, ['name'], '||')">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILTER COMPONENT  -->
+        <script type="text/ng-template" id="advanced-search.html">
+          <div id="search-filter-popover-ctn">
+            <filtering-component class="clearfix" ls-date="true"
+                                 filtered-items-list="contactsListsListVm.itemsList"
+                                 initial-items-list="contactsListsListVm.itemsListCopy"
+                                 reload-items="contactsListsListVm.tableParams.reload">
+            </filtering-component>
+          </div>
+        </script>
+      </div>
+
+      <div id="drop-area">
+        <div id="top-search-wrap">
+          <i id="top-search-close" x-ng-click="contactsListsListVm.toggleSearchState()">&times;</i>
+          <input type="text" id="searchInMobileFiles" class="form-control"
+                 placeholder="{{'CONTACTS_LISTS_ACTION.SEARCH_BY_NAME' | translate}}" x-ng-change="updateParams()"
+                 x-ng-model="contactsListsListVm.paramFilter['name']"
+                 aria-invalid="false">
+        </div>
+
+        <!-- DROP AREA WHEN FILES ARE SELECTED -->
+        <div id="selection-actions" class="default-multi-toolbar-state multi-btns"
+             x-ng-class="{'show-multi-menu': contactsListsListVm.selectedContactsLists.length > 0}">
+          <div class="toggle-checkbox-toolbar"
+               x-ng-click="contactsListsListVm.selectDocumentsOnCurrentPage(contactsListsListVm.tableParams.data,
+               contactsListsListVm.tableParams.page())">
+            <a x-ng-if="!contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
+
+               class="select-all-items plain-text-button">
+              <i class="fa fa fa-square-o checkbox-table"></i>
+            </a>
+            <a x-ng-if="contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
+               class="select-all-items plain-text-button">
+              <i class="fa fa-check-square-o"></i>
+            </a>
+          </div>
+          <div class="exit-selection" x-ng-click="contactsListsListVm.resetSelectedDocuments()"
+               title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
+            <i class="zmdi zmdi-close"></i>
+          </div>
+          <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+            <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
+                 x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; contactsListsListVm.toggleFilterBySelectedFiles()">
+              <p><span>{{contactsListsListVm.selectedContactsLists.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" |
+                translate}}</p>
+              <div class="pull-left view-icons-ctn groups-view">
+                <i class="fa fa-eye-slash" aria-hidden="true"
+                   x-ng-show=" activeBtnShowSelection"></i>
+                <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
+              </div>
+            </div>
+            <div class="pull-left view-icons-ctn reset-icon" x-ng-click="contactsListsListVm.resetSelectedDocuments()">
+              <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+            </div>
+          </div>
+          <div id="toolbar-actions" class="hidden-xs">
+            <span
+              x-ng-if="contactsListsListVm.selectedContactsLists.length === 1 && contactsListsListVm.isFromMyContactsLists">
+              <a class="plain-text-button share-link" title="{{'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT' | translate}}"
+                 x-ng-click="contactsListsListVm.goToContactsListAndAddContacts(contactsListsListVm.selectedContactsLists[0].uuid,
+                  contactsListsListVm.selectedContactsLists[0].name)">
+                <i class="groups-add-member"></i>
+                <span>{{'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT' | translate}}</span>
+              </a>
+            </span>
+            <span
+              x-ng-if="contactsListsListVm.selectedContactsLists.length === 1 && contactsListsListVm.isFromMyContactsLists">
+              <a class="plain-text-button share-link"
+                 title="{{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}"
+                 x-ng-click="contactsListsListVm.duplicateItem(contactsListsListVm.selectedContactsLists[0])">
+                <i class="fa fa-copy"></i>
+                <span>{{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}</span>
+              </a>
+            </span>
+            <span x-ng-if="contactsListsListVm.isFromMyContactsLists">
+              <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+                 x-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)">
+                <i class="zmdi zmdi-delete"></i>
+                <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
+              </a>
+            </span>
+            <span
+              x-ng-show="!contactsListsListVm.isFromMyContactsLists && contactsListsListVm.selectedContactsLists.length === 1">
+              <a class="plain-text-button share-link" title="{{'CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS' | translate}}"
+                 x-ng-click="contactsListsListVm.goToContactsListTarget(contactsListsListVm.selectedContactsLists[0].uuid,
+                  contactsListsListVm.selectedContactsLists[0].name)">
+                <i class="fa fa-eye"></i>
+                <span>{{'CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS' | translate}}</span>
+              </a>
+            </span>
+            <span
+              x-ng-show="!contactsListsListVm.isFromMyContactsLists && contactsListsListVm.selectedContactsLists.length === 1">
+              <a class="plain-text-button share-link" title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
+                 x-ng-click="contactsListsListVm.showItemDetails(contactsListsListVm.selectedContactsLists[0],$event)">
+                <i class="zmdi zmdi-info-outline"></i>
+                <span>{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}</span>
+              </a>
+            </span>
+            <span
+              x-ng-show="!contactsListsListVm.isFromMyContactsLists && contactsListsListVm.selectedContactsLists.length === 1
+               && !linshareModeProduction">
+              <a class="plain-text-button share-link" title="{{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}"
+                 x-ng-click="">
+                <i class="fa fa-sign-out"></i>
+                <span>{{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}</span>
+              </a>
+            </span>
+            <span class="dropdown link-dropdown" dropdown
+                  x-ng-show="contactsListsListVm.selectedContactsLists.length === 1 && contactsListsListVm.isFromMyContactsLists">
+                <a class="plain-text-button share-link"
+                   dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+                  <i class="zmdi zmdi-more-vert"></i>
+                  <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
+                  <li class="hidden-xs" x-ng-show="contactsListsListVm.selectedContactsLists.length === 1">
+                    <a href=""
+                       x-ng-click="contactsListsListVm.goToContactsListTarget(contactsList.uuid, contactsList.name)">
+                      <i class="fa fa-eye"></i>
+                      {{'CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS' | translate}}
+                    </a>
+                  </li>
+                  <li class="hidden-xs" x-ng-show="contactsListsListVm.selectedContactsLists.length === 1">
+                    <a href=""
+                       x-ng-click="contactsListsListVm.showItemDetails(contactsListsListVm.selectedContactsLists[0],$event)">
+                      <i class="zmdi zmdi-info-outline"></i>
+                      {{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}
+                    </a>
+                  </li>
+                  <li class="hidden-xs"
+                      x-ng-show="contactsListsListVm.isFromMyContactsLists && contactsListsListVm.selectedContactsLists.length === 1">
+                    <a href=""
+                       x-ng-click="contactsListsListVm.renameContactsList(contactsListsListVm.selectedContactsLists[0], false)">
+                      <i class="zmdi zmdi-border-color"></i>
+                      {{'CONTACTS_LISTS_ACTION.MORE.RENAME' | translate}}
+                    </a>
+                  </li>
+                  <li class="hidden-xs" x-ng-show="!linshareModeProduction">
+                    <a href="" x-ng-click="">
+                      <i class="fa fa-sign-out"></i>
+                      {{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}
+                    </a>
+                  </li>
+                  <li class="hidden-xs" x-ng-show="!linshareModeProduction">
+                    <a href="">
+                      <i class="fa fa-sign-in"></i>
+                      {{'CONTACTS_LISTS_ACTION.MORE.IMPORT_CSV' | translate}}
+                    </a>
+                  </li>
+                </ul>
+              </span>
+            <span
+              x-ng-show="!contactsListsListVm.isFromMyContactsLists && contactsListsListVm.selectedContactsLists.length > 1">
+              <span>{{'NO_ACTION_AVAILABLE' | translate}}</span>
+            </span>
+          </div>
+        </div>
+        <script type="text/ng-template" id="checkboxheader.html">
+          <span x-ng-click="contactsListsListVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+                role="button" tabindex="0" class="display-block">
+            <a x-ng-if="!contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
+               class="select-all-items plain-text-button checkboxCtn">
+              <i class="fa fa-square-o checkbox-table"></i>
+            </a>
+            <a x-ng-if="contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
+               class="select-all-items plain-text-button">
+              <i class="fa fa-check-square-o"></i>
+            </a>
+            </span>
+        </script>
+        <script type="text/ng-template" id="favoritsheader.html">
+          <i class="zmdi zmdi-star"></i>
+        </script>
+
+        <!-- DOCUMENTS LIST  -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="file-list-table" class="table table-vmiddle" x-ng-table="contactsListsListVm.tableParams"
+                   show-filter="true" x-ng-class=" {'col-4-table' : !linshareModeProduction}">
+              <tr x-ng-repeat="contactsList in $data"
+                  ls-item-selection
+                  data-selected-documents="contactsListsListVm.selectedContactsLists"
+                  data-document-file="contactsList"
+                  data-current-selected-Document="contactsListsListVm.currentSelectedDocument"
+                  data-details-function="contactsListsListVm.getDetails"
+                  data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                  x-ng-class="{'highlight-list-elem': contactsList.isSelected ,
+                   'current-vis': contactsListsListVm.currentSelectedDocument.current.uuid === contactsList.uuid}"
+                  class="p-b-5"
+                  context-menu="moreOptionsContexualMenu"
+                  x-ng-dblclick="contactsListsListVm.goToContactsListTarget(contactsList.uuid, contactsList.name)">
+                <td data-header="'favoritsheader.html'" x-ng-if="!linshareModeProduction"
+                    class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
+                    data-title=""
+                    header-class="'set-content-right favorits-header col-1 hidden-xs'">
+                  <div>
+                    <i class="zmdi zmdi-star"></i>
+                    <i class="zmdi zmdi-star yellow-star"></i>
+                  </div>
+                </td>
+                <td data-header="'checkboxheader.html'"
+                    class="set-content-left thumb-type-item thumb-groups-preview-ls"
+                    header-class="'col-2'">
+                  <a class="" x-ng-click="contactsListsListVm.addSelectedDocument(contactsList)">
+                    <i>
+                        <span class="groups-shared-folder">
+                          <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"></span>
+                        </span>
+                    </i>
+                    <div class="checkbox-ctn-thumb"
+                         x-ng-class="{'maintain-vis': contactsList.isSelected}">
+                    </div>
+                  </a>
+                </td>
+                <td data-title="'CONTACTS_LISTS_ACTION.ORDER_BY.LIST_NAME' | translate"
+                    class="row show-li-actions col-3"
+                    data-sortable="'name'" uuid={{contactsList.uuid}} header-class="'col-3'">
+                  <div class="ctn-name-actions">
+                      <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                        <span class="file-name-disp single-line" contenteditable="false" spellcheck="false">
+                          <span
+                            x-ng-click="contactsListsListVm.goToContactsListTarget(contactsList.uuid, contactsList.name)">
+                            {{contactsList.name}}
+                          </span>
+                        </span>
+                        <span>
+                          <p class="secondary-list-item-info hidden-xs">
+                            {{'BY' | translate}} {{contactsListsListVm.getOwnerName(contactsList)}}
+                          </p>
+                          <p class="mobile-list-item-info visible-xs">
+                            {{'BY' | translate}} {{contactsListsListVm.getOwnerName(contactsList)}}
+                          </p>
+                        </span>
+                      </span>
+                    <span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
+                        <ul class="actions pull-right double-mobile-actions"
+                            x-ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
+                          <li x-ng-click="contactsListsListVm.showItemDetails(contactsList,$event)"
+                              event-propagation-stop
+                              class="set-col-6">
+                            <a href=""
+                               title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
+                               class="set-col-12">
+                              <i class="zmdi zmdi-info-outline"></i>
+                            </a>
+                          </li>
+                          <li
+                            x-ng-click="contactsListsListVm.goToContactsListTarget(contactsList.uuid, contactsList.name)"
+                            event-propagation-stop class="set-col-6">
+                            <a href=""
+                               title="{{'CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS' | translate}}"
+                               class="set-col-12">
+                              <i class="fa fa-eye"></i>
+                            </a>
+                          </li>
+                          <li class="hidden-xs" x-ng-if="contactsListsListVm.isFromMyContactsLists">
+                            <a x-ng-href=""
+                               x-ng-click="contactsListsListVm.goToContactsListAndAddContacts(contactsList.uuid, contactsList.name)"
+                               title="{{'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT' | translate}}" event-propagation-stop>
+                              <i class="zmdi zmdi-account-add"></i>
+
+                            </a>
+                          </li>
+                          <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
+                              auto-close="always" hover-dropdown-fix>
+                            <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
+                               event-propagation-stop class="set-col-12">
+                              <i class="zmdi zmdi-more-vert"></i>
+                            </a>
+                            <ul
+                              class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
+                              <li class="hidden-xs">
+                                <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
+                                  <i class="fa fa-copy"></i>
+                                  {{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}
+                                </a>
+                              </li>
+                              <li class="hidden-xs">
+                                <a href="" x-ng-click="contactsListsListVm.showItemDetails(contactsList,$event)">
+                                  <i class="zmdi zmdi-info-outline"></i>
+                                  {{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}
+                                </a>
+                              </li>
+                              <li class="hidden-xs" x-ng-show="contactsListsListVm.isFromMyContactsLists">
+                                <a href="" x-ng-click="contactsListsListVm.renameContactsList(contactsList, false)">
+                                  <i class="zmdi zmdi-border-color"></i>
+                                  {{'CONTACTS_LISTS_ACTION.MORE.RENAME' | translate}}
+                                </a>
+                              </li>
+                              <li class="hidden-xs" x-ng-show="contactsListsListVm.isFromMyContactsLists">
+                                <a href="" x-ng-click="contactsListsListVm.deleteContactsList(contactsList)">
+                                  <i class="fa fa-trash-o"></i>
+                                  {{'CONTACTS_LISTS_ACTION.MORE.DELETE' | translate}}
+                                </a>
+                              </li>
+                              <li class="hidden-xs" x-ng-show="!linshareModeProduction">
+                                <a href="" x-ng-click="">
+                                  <i class="fa fa-sign-out"></i>
+                                  {{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}
+                                </a>
+                              </li>
+                              <li class="hidden-xs">
+                                <a href="" x-ng-click="" x-ng-show="!linshareModeProduction">
+                                  <i class="fa fa-sign-in"></i>
+                                  {{'CONTACTS_LISTS_ACTION.MORE.IMPORT_CSV' | translate}}
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </span>
+                  </div>
+                </td>
+                <td class="hidden-xs"
+                    ng-if="!mainVm.sidebar.isVisible()"
+                    data-title="'CONTACTS_LISTS_DETAILS.VISIBILITY' | translate"
+                    data-sortable="'public'"
+                    header-class="'col-4'">
+                  <a x-ng-click="contactsListsListVm.showItemDetails(contactsList,$event)"
+                     x-ng-class="{'disabled' : !contactsListsListVm.isFromMyContactsLists}">
+                    {{contactsListsListVm.getVisibility(contactsList)}}
+                  </a>
+                </td>
+                <td class="hidden-xs"
+                    ng-if="!mainVm.sidebar.isVisible()"
+                    data-title="'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate"
+                    data-sortable="'modificationDate'"
+                    header-class="'col-4'">
+                  {{contactsList.modificationDate | relativeTime}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="fabMyFiles">
+    <md-button class="md-fab visible-xs" aria-label="{{'CONTACTS_LISTS_ACTION.CREATE_CONTACTS_LIST' | translate}}"
+               x-ng-click="contactsListsListVm.isFromMyContactsLists ?
+                contactsListsListVm.createContactsList() : contactsListsListVm.goToMineAndCreateContactsList()">
+      <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
+    </md-button>
+  </div>
+</div>
+<section class="row multi-select-mobile visible-xs"
+         x-ng-class="{'showMobileMultiMenu': contactsListsListVm.selectedContactsLists.length > 0}">
+  <div class="col-xs-2 ctn-mobile-select-count">
+    <span class="number-of-files">{{contactsListsListVm.selectedContactsLists.length}}</span>
+    <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.ELEMENTS' | translate}}</span>
+  </div>
+  <div class="col-xs-8">
+    <i class="groups-add-member col-xs-3"></i>
+    <i class="zmdi zmdi-delete col-xs-3"
+       x-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)"></i>
+    <i class="fa fa-bell-slash-o col-xs-3 disabled-work-in-progress"
+       x-ng-show="!linshareModeProduction"></i>
+    <span class="dropdown col-xs-3" dropdown x-ng-show="!linshareModeProduction">
+        <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown}"
+           x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
+           dropdown-toggle></i>
+        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
+          <li>
+            <a href="" event-propagation-stop>
+              <i class="zmdi zmdi-star"></i>
+              {{'ACTION.FAVORITES' | translate}}
+            </a>
+          </li>
+          <li>
+            <a href="" event-propagation-stop>
+              <i class="fa fa-bell-slash-o"></i>
+              {{'ACTION.SILENCE' | translate}}
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="" event-propagation-stop>
+              <i class="zmdi zmdi-arrows"></i>
+              {{'ACTION.MOVE' | translate}}
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li class="hidden-xs">
+            <a href="" event-propagation-stop>
+              <i class="fa fa-recycle" aria-hidden="true"></i>
+              {{'ACTION.GO_TO_TRASH' | translate}}
+            </a>
+          </li>
+        </ul>
+      </span>
+  </div>
+  <div class="col-xs-1 pull-right" x-ng-click="contactsListsListVm.resetSelectedDocuments()">
+    <i class="zmdi zmdi zmdi-close"></i>
+  </div>
+  side
+</section>

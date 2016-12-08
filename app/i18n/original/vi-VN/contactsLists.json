@@ -1,0 +1,54 @@
+{
+  "TBT__CONTACTS_LISTS_ACTION": {
+    "TBT__ADD_DESCRIPTION": "",
+    "TBT__CREATE_CONTACTS_LIST": "",
+    "FILTER_BY": {
+      "TBT__ALL_LISTS": "",
+      "TBT__MY_LISTS": "",
+      "TBT__OTHER_LISTS": ""
+    },
+    "MORE": {
+      "TBT__ADD_CONTACT": "",
+      "TBT__DELETE": "",
+      "TBT__DUPLICATE_LIST": "",
+      "TBT__EDIT": "",
+      "TBT__EXPORT_CSV": "",
+      "TBT__IMPORT_CSV": "",
+      "TBT__INFORMATION": "",
+      "TBT__RENAME": "",
+      "TBT__SHOW_CONTACTS": ""
+    },
+    "ORDER_BY": {
+      "TBT__CREATION_DATE": "",
+      "TBT__MAIL": "",
+      "TBT__FIRST_NAME": "",
+      "TBT__LAST_NAME": "",
+      "TBT__LIST_NAME": "",
+      "TBT__MODIFICATION_DATE": "",
+      "TBT__OWNER_FIRST_NAME": "",
+      "TBT__OWNER_LAST_NAME": "",
+      "TBT__OWNER_MAIL": "",
+      "TBT__PRIVATE_PUBLIC": ""
+    },
+    "TBT__SEARCH_BY_NAME": ""
+  },
+  "CONTACTS_LISTS_DETAILS": {
+    "TBT__CONTACT": "",
+    "TBT__CONTACTS": "",
+    "TBT__CONTACTS_LIST": "",
+    "TBT__CONTACTS_LIST_DUPLICATED": "",
+    "TBT__CONTACTS_LISTS": "",
+    "TBT__OWNER": "",
+    "TBT__OWNED_BY": "",
+    "TBT__PRIVATE": "",
+    "TBT__PUBLIC": "",
+    "TBT__UNCOMPLETE_PROFILE": "",
+    "TBT__UPDATE_CONTACT_INFORMATIONS": "",
+    "TBT__UPDATE_CONTACT_IMPOSSIBLE": "",
+    "TBT__VISIBILITY": ""
+  },
+  "FORMS_MESSAGES": {
+    "TBT__INVALID_EMAIL": "",
+    "TBT__INVALID_EMPTY_FIELD": ""
+  }
+}

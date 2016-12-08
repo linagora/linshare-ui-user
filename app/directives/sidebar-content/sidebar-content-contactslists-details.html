@@ -1,0 +1,121 @@
+<div class="lv-body stop-propagate">
+  <div>
+    <div id="profile-main" class="detail-guest">
+      <div class="p-relative img-preview-ctn p-0">
+        <div class="dark-overlay"></div>
+        <div class="user-preview-ctn">
+          <div class="flex-ctn detail-info-ctn p-0 p-t-10">
+            <div class="item-l m-b-10">
+              <span class="first-letter user-info">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.contacts.length}}
+              </span>
+            </div>
+            <p class="m-b-0">{{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div title="{{'WIP' | translate}}">
+        <div class="description-ctn form-sidebar disabled-work-in-progress"
+             x-ng-class="{'show-full-comment': commentFocused}"
+             x-ng-init="commentFocused = false">
+                    <textarea title="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
+                              class="comment"
+                              spellcheck="false"
+                              name="description"
+                              id="description"
+                              x-ng-attr-placeholder="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
+                              x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+                              x-ng-bind="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+                              x-ng-change="mainVm.sidebar.getData().updateDocument(mainVm.sidebar.getData().currentSelectedDocument.current)"
+                              x-ng-model-options="{updateOn: 'blur'}"
+                              x-ng-init="commentFocused = false"
+                              x-ng-focus="commentFocused = true"
+                              x-ng-blur="commentFocused = false">
+
+                    </textarea>
+          <span x-ng-if="(((!commentFocused) && (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
+          <div class="edit-description clic-enabled" x-ng-click="commentFocused = !commentFocused">
+            <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
+               title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
+            <i class="zmdi zmdi-close" x-ng-if="commentFocused"
+               title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
+          </div>
+        </div>
+      </div>
+      <div class="content-detail-area">
+        <div class="flex-ctn detail-info-ctn">
+          <div class="item-l">
+            <span class="first-letter user-info">
+             {{mainVm.sidebar.getData().currentSelectedDocument.current.owner ?
+              mainVm.sidebar.getData().getOwnerName(mainVm.sidebar.getData().currentSelectedDocument.current) :
+              'UNKNOWN_FIRST_LETTER' | translate | limitTo:1 | uppercase}}
+            </span>
+          </div>
+          <div class="item-mid">
+            <div class="name">
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.owner ?
+              mainVm.sidebar.getData().getOwnerName(mainVm.sidebar.getData().currentSelectedDocument.current) :
+              'UNKNOWN_USER' | translate}}
+            </div>
+            <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
+                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+                <span>{{'INFORMATION_TAB.CREATED_THE' | translate}} :
+                  {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date: mainVm.sidebar.getData().lsFormat()}}
+                </span>
+            </div>
+          </div>
+          <div class="item-r actions"
+               x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.owner.uuid === userLogged.uuid">
+            <span>{{'CONTACTS_LISTS_DETAILS.OWNER' | translate}}</span>
+          </div>
+        </div>
+        <div class="meta-data-ctn">
+          <h2 class="subheader">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            {{'INFORMATION_TAB.META_DATA' | translate}}
+          </h2>
+          <div class="meta-data-content">
+            <div>
+              <p>
+                {{'INFORMATION_TAB.UPTADED_THE' | translate}}:
+              </p>
+              <p tooltip-placement="bottom" tooltip-popup-delay="500"
+                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate
+                 | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate
+                | date : mainVm.sidebar.getData().lsFormat()}}
+              </p>
+            </div>
+            <div>
+              <p>{{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}}</p>
+              <p>
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.contacts.length}} {{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}}
+              </p>
+            </div>
+            <div>
+              <p>
+                {{'DOMAIN' | translate}} :
+              </p>
+              <p>{{mainVm.sidebar.getData().currentSelectedDocument.current.domain.label}}</p>
+            </div>
+            <div>
+              <p>
+                {{'CONTACTS_LISTS_DETAILS.VISIBILITY' | translate}} :
+              </p>
+              <p
+                x-ng-click="mainVm.sidebar.getData().switchVisibility(mainVm.sidebar.getData().currentSelectedDocument.current)"
+                x-ng-class="{'disabled' : !mainVm.sidebar.getData().isFromMyContactsLists}">
+                <a>
+                  {{mainVm.sidebar.getData().getVisibility(mainVm.sidebar.getData().currentSelectedDocument.current)}}
+                  <i
+                    x-ng-show="mainVm.sidebar.getData().isFromMyContactsLists" class="zmdi zmdi-swap">
+                  </i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,6 +22,8 @@
   "GROWL_ALERT": {
     "ACTION": {
       "DELETE": "Đã xóa tập tin thành công",
+      "TBT__INSERT": "",
+      "TBT__UPDATE": "",
       "SHARE": "Đã chia sẻ thành công",
       "TBT__COPY": "",
       "TBT__SHARE_ASYNC": "",
@@ -29,7 +31,9 @@
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",
-      "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn"
+      "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn",
+      "TBT__CONTACT_STILL_EXISTS" : "",
+      "TBT__INVALID_EMAIL": ""
     },
     "ERROR": {
       "TBT_FILE_UPLOAD": "",
@@ -38,7 +42,8 @@
       "DELETE_ERROR": {
         "26006": ""
       },
-      "TBT_NO_RESPONSE_ERROR": ""
+      "TBT_NO_RESPONSE_ERROR": "",
+      "TBT_RENAME_CONTACTS_LIST": ""
     }
   },
   "TOAST_ALERT": {

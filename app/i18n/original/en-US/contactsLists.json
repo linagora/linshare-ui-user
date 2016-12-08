@@ -1,0 +1,54 @@
+{
+  "CONTACTS_LISTS_ACTION": {
+    "ADD_DESCRIPTION": "Add a description",
+    "CREATE_CONTACTS_LIST": "Create contacts List",
+    "FILTER_BY": {
+      "ALL_LISTS": "All lists",
+      "MY_LISTS": "My lists",
+      "OTHER_LISTS": "Other lists"
+    },
+    "MORE": {
+      "ADD_CONTACT": "Add contact",
+      "DELETE": "Delete",
+      "DUPLICATE_LIST": "Duplicate list",
+      "EDIT": "Edit",
+      "EXPORT_CSV": "Export CSV",
+      "IMPORT_CSV": "Import CSV",
+      "INFORMATION": "Information",
+      "RENAME": "Rename",
+      "SHOW_CONTACTS": "Show contacts"
+    },
+    "ORDER_BY": {
+      "CREATION_DATE": "Creation date",
+      "MAIL": "Mail",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "LIST_NAME": "List name",
+      "MODIFICATION_DATE": "Modification date",
+      "OWNER_FIRST_NAME": "Owner first name",
+      "OWNER_LAST_NAME": "Owner last name",
+      "OWNER_MAIL": "Owner mail",
+      "PRIVATE_PUBLIC": "Private/public"
+    },
+    "SEARCH_BY_NAME": "Search by name"
+  },
+  "CONTACTS_LISTS_DETAILS": {
+    "CONTACT": "Contact",
+    "CONTACTS": "Contacts",
+    "CONTACTS_LIST": "Contacts list",
+    "CONTACTS_LIST_DUPLICATED": "Contacts list duplicated successfully",
+    "CONTACTS_LISTS": "Contacts lists",
+    "OWNER": "Owner",
+    "OWNED_BY": "Owned by",
+    "PRIVATE": "Private",
+    "PUBLIC": "Public",
+    "UNCOMPLETE_PROFILE": "Uncomplete profile",
+    "UPDATE_CONTACT_INFORMATIONS": "Update contact informations",
+    "UPDATE_CONTACT_IMPOSSIBLE": "You are not authorized to edit this contact",
+    "VISIBILITY": "Visibility"
+  },
+  "FORMS_MESSAGES": {
+    "INVALID_EMAIL": "Email address is invalid.",
+    "INVALID_EMPTY_FIELD": "This field cannot be empty."
+  }
+}

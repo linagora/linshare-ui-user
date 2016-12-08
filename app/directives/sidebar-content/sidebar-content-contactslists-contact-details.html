@@ -1,0 +1,54 @@
+<div class="lv-body stop-propagate">
+  <div>
+    <div id="profile-main" class="detail-guest">
+      <div class="p-relative img-preview-ctn p-0">
+        <div class="dark-overlay"></div>
+        <div class="user-preview-ctn">
+          <div class="flex-ctn detail-info-ctn p-0 p-t-10">
+            <div class="item-l m-b-10">
+              <span class="first-letter user-info">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.firstName | limitTo:1 | uppercase}}
+              </span>
+            </div>
+            <p class="m-b-0">{{mainVm.sidebar.getData().currentSelectedDocument.current.firstName}}
+              <span class="p-l-5 last-name">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.lastName}}
+              </span>
+            </p>
+            <p class="m-b-0 email">{{mainVm.sidebar.getData().currentSelectedDocument.current.mail}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="meta-data-ctn">
+        <h2 class="subheader">
+          <i class="fa fa-file-text" aria-hidden="true"></i>
+          {{'INFORMATION_TAB.META_DATA' | translate}}
+        </h2>
+        <div class="meta-data-content">
+          <div>
+            <p>
+              {{'INFORMATION_TAB.CREATED_THE' | translate}}:
+            </p>
+            <p tooltip-placement="bottom" tooltip-popup-delay="500"
+               uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate
+                | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate
+              | date : mainVm.sidebar.getData().lsFormat()}}
+            </p>
+          </div>
+          <div>
+            <p>
+              {{'INFORMATION_TAB.UPTADED_THE' | translate}}:
+            </p>
+            <p tooltip-placement="bottom" tooltip-popup-delay="500"
+               uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate
+               | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate
+              | date : mainVm.sidebar.getData().lsFormat()}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

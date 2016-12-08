@@ -22,6 +22,8 @@
   "GROWL_ALERT": {
     "ACTION": {
       "DELETE": "Delete succeeded",
+      "UPDATE": "Update succeeded",
+      "INSERT": "Insert succeeded",
       "COPY": "File(s) has been copied into your files",
       "SHARE": "share done with success",
       "SHARE_ASYNC": "You sharing will be sent after the upload of all files",
@@ -29,12 +31,15 @@
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",
-      "AT_LEAST_ONE_DOCUMENT": "No file is selected"
+      "AT_LEAST_ONE_DOCUMENT": "No file is selected",
+      "CONTACT_STILL_EXISTS" : "is already in list",
+      "INVALID_EMAIL": "Invalid email"
     },
     "ERROR": {
       "FILE_UPLOAD": "The upload failed",
       "503": "Service Unavailable",
       "RENAME_FOLDER": "A folder with the same name already exists",
+      "RENAME_CONTACTS_LIST": "A contacts list with the same name already exists",
       "DELETE_ERROR": {
         "26006": "Deletion of a non-empty folder is not supported yet"
       },

@@ -13,6 +13,7 @@
         currentSelectedDocument: '=',
         item: '=documentFile',
         detailsFunction: '=',
+        localDetails: '=',
         rightSidebarOpen: '='
       },
       link: function(scope, element) {
@@ -41,10 +42,12 @@
         if (multipleSelection) {
           // code goes here when implementing the multiple selection
         }
-        if ($scope.rightSidebarOpen) {
+        if ($scope.rightSidebarOpen && $scope.detailsFunction) {
           $scope.detailsFunction($scope.item).then(function(details) {
             $scope.currentSelectedDocument.current = details;
           });
+        } else if($scope.rightSidebarOpen && $scope.localDetails) {
+          $scope.currentSelectedDocument.current = $scope.localDetails;
         }
         $scope.$apply();
       };

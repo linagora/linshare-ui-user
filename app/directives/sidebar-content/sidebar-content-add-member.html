@@ -43,7 +43,7 @@
                       <div class="name">{{'UNKNOWN_USER' | translate}}</div>
                       <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                            uib-tooltip="{{mainVm.sidebar.getData().currentWorkGroup.modificationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
-                        <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
+                        <span>{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
                           {{mainVm.sidebar.getData().currentWorkGroup.modificationDate | date: mainVm.sidebar.getData().lsFormat()}}
                         </span>
                       </div>
@@ -157,7 +157,7 @@
                                 <p>{{"SELECTION_TOOLBAR.ORDER_BY" | translate}}</p>
                                 <ul class="dropdown-menu dm-icon ">
                                   <li role="menuitem" x-ng-if="mainVm.sidebar.getData().linshareModeProduction === false">
-                                    <a href="" class="ng-binding selected-sorting-members"
+                                    <a href="" class="selected-sorting-members"
                                        x-ng-click="mainVm.sidebar.getData().sortSearchMember($event)">
                                       <span class="caret-area">
                                         <i x-ng-show="mainVm.sidebar.getData().toggleSelectedSortMembers"
@@ -169,7 +169,7 @@
                                     </a>
                                   </li>
                                   <li role="menuitem">
-                                    <a href="" class="ng-binding"
+                                    <a href=""
                                        x-ng-class="{'selected-sorting-members': mainVm.sidebar.getData().propertyOrderBy === 'firstName'}"
                                        x-ng-click="mainVm.sidebar.getData().changePropertyOrderBy('firstName')">
                                       <span class="caret-area">
@@ -182,7 +182,7 @@
                                     </a>
                                   </li>
                                   <li role="menuitem">
-                                    <a href="" class="ng-binding"
+                                    <a href=""
                                        x-ng-class="{'selected-sorting-members': mainVm.sidebar.getData().propertyOrderBy === 'lastName'}"
                                        x-ng-click="mainVm.sidebar.getData().changePropertyOrderBy('lastName')">
                                       <span class="caret-area">
@@ -195,7 +195,7 @@
                                     </a>
                                   </li>
                                   <li role="menuitem">
-                                    <a href="" class="ng-binding"
+                                    <a href=""
                                        x-ng-class="{'selected-sorting-members': mainVm.sidebar.getData().propertyOrderBy === 'role'}"
                                        x-ng-click="mainVm.sidebar.getData().changePropertyOrderBy('role')">
                                       <span class="caret-area">

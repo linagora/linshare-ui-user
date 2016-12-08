@@ -193,10 +193,35 @@ angular.module('linshareUiUserApp')
         template: '<div ui-view></div>'
       })
 
+      .state('administration.contactslists', {
+        url: '/contactslists/:from?createNew',
+        templateUrl: 'modules/linshare.contactsLists/views/contactsListsList.html',
+        controller: 'contactsListsListController',
+        controllerAs: 'contactsListsListVm',
+        resolve: {
+          checkUrl: function($state, $stateParams, lsAppConfig) {
+            if($stateParams.from.length === 0) {
+              $stateParams.from = lsAppConfig.contactsListsMinePage;
+            } else if($stateParams.from !== lsAppConfig.contactsListsMinePage && $stateParams.from !== lsAppConfig.contactsListsOthersPage) {
+              return $state.go('administration.contactslists', {from: lsAppConfig.contactsListsMinePage});
+            }
+          },
+          contactsListsList: function($stateParams, lsAppConfig, contactsListsListRestService) {
+            return contactsListsListRestService.getList($stateParams.from !== lsAppConfig.contactsListsOthersPage);
+          }
+        }
+      })
 
-      .state('administration.lists', {
-        url: '/lists',
-        templateUrl: 'views/home/main.html',
+      .state('administration.contactslists.contacts', {
+        url: '/:contactsListUuid/:contactsListName/contacts?addContacts',
+        templateUrl: 'modules/linshare.contactsLists/views/contactsListsContacts.html',
+        controller: 'contactsListsContactsController',
+        controllerAs: 'contactsListsContactsVm',
+        resolve: {
+          contactsListsContacts: function(contactsListsContactsRestService, $stateParams) {
+            return contactsListsContactsRestService.getList($stateParams.contactsListUuid);
+          }
+        }
       })
 
       .state('administration.guests', {

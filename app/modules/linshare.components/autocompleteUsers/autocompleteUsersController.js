@@ -9,18 +9,19 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['$log', '$scope', '$q', 'autocompleteUserRestService'];
+  AutocompleteUsersController.$inject = ['$log', '$scope', '$q', 'autocompleteUserRestService', 'growlService'];
 
   /**
    * @namespace AutocompleteUsersController
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController($log, $scope, $q, autocompleteUserRestService) {
+  function AutocompleteUsersController($log, $scope, $q, autocompleteUserRestService, growlService) {
     var autocompleteUsersVm = this;
 
     autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
     autocompleteUsersVm.onError = onError;
+    autocompleteUsersVm.onSelect = onSelect;
     autocompleteUsersVm.required = required;
     autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
     autocompleteUsersVm.userRepresentation = userRepresentation;
@@ -104,6 +105,19 @@
     }
 
     /**
+     *  @name onSelect
+     *  @desc Evalutate if user exists
+     *  @memberOf LinShare.components.AutocompleteUsersController
+     */
+    function onSelect() {
+      if(autocompleteUsersVm.selectedUser) {
+        autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser, autocompleteUsersVm.selectedUsersList);
+      } else {
+        growlService.notifyTopRight('GROWL_ALERT.WARNING.INVALID_EMAIL', 'danger');
+      }
+    }
+
+    /**
      *  @name required
      *  @desc Evaluate if the field should be required
      *  @returns {Boolean}
@@ -125,9 +139,15 @@
     function searchUsersAccount(pattern) {
       if (pattern.length >= 3) {
         var deferred = $q.defer();
+        // TODO : IAB : stop searching in back if external email detected
         autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
-          if (data.length === 0 && autocompleteUsersVm.withEmail) {
-            $scope.userEmail = pattern;
+          // TODO : IAB : strong email validation (for this one and all other)
+          if (data.length === 0 && autocompleteUsersVm.withEmail && /^\S+@\S+\.\S+$/.test(pattern)) {
+            data.push({
+              mail: pattern,
+              identifier: pattern,
+              type: 'simple'
+            });
           }
           deferred.resolve(data);
         });

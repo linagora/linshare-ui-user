@@ -1,0 +1,72 @@
+<div class="lv-body stop-propagate">
+  <div>
+    <div id="profile-main" class="detail-guest">
+      <div class="content-detail-area">
+        <div class="meta-data-ctn">
+          <h2 class="subheader">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            {{'CONTACTS_LISTS_DETAILS.UPDATE_CONTACT_INFORMATIONS' | translate}}
+          </h2>
+          <div class="card col-xs-12 form-create-guests" id="content-ctn-sidebar">
+            <form class="form-sidebar" name="updateContactForm">
+              <div class="form-group fg-float m-b-30">
+                <div class="fg-line"
+                     x-ng-class="{'has-error' : ((updateContactForm.lastname.$touched || updateContactForm.$submitted)
+                     && updateContactForm.lastname.$invalid), 'fg-toggled' : lastnameFocus}">
+                  <input type="text" x-ng-focus="lastnameFocus=true" x-ng-blur="lastnameFocus=false"
+                         required class="input-sm form-control fg-input"
+                         x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.lastName"
+                         name="lastname" id="lastname"
+                         x-ng-class="{'fg-toggled' : lastnameFocus}">
+                  <label class="fg-label required" for="lastname">{{"CONTACTS_LISTS_ACTION.ORDER_BY.LAST_NAME" | translate}}</label>
+                  <span
+                    x-ng-show="(updateContactForm.lastname.$touched || updateContactForm.$submitted) && updateContactForm.lastname.$invalid">
+                     {{"FORMS_MESSAGES.INVALID_EMPTY_FIELD" | translate}}
+                  </span>
+                </div>
+              </div>
+              <div class="form-group fg-float m-b-30">
+                <div class="fg-line"
+                     x-ng-class="{'has-error' : ((updateContactForm.firstname.$touched || updateContactForm.$submitted)
+                     && updateContactForm.firstname.$invalid), 'fg-toggled' : firstnameFocus}">
+                  <input type="text" x-ng-focus="firstnameFocus=true" x-ng-blur="firstnameFocus=false"
+                         required class="form-control" name="firstname"
+                         x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.firstName" id="firstname"
+                         x-ng-class="{'fg-toggled' : firstnameFocus}">
+                  <label class="fg-label required" for="firstname">{{"CONTACTS_LISTS_ACTION.ORDER_BY.FIRST_NAME" | translate}}</label>
+                  <span
+                    x-ng-show="(updateContactForm.firstname.$touched || updateContactForm.$submitted) && updateContactForm.firstname.$invalid">
+                      {{"FORMS_MESSAGES.INVALID_EMPTY_FIELD" | translate}}
+                  </span>
+                </div>
+              </div>
+              <div class="form-group fg-float m-b-30">
+                <div class="fg-line"
+                     x-ng-class="{'has-error' : ((updateContactForm.mail.$touched || updateContactForm.$submitted)
+                     && updateContactForm.mail.$invalid),'fg-toggled' : emailFocus}">
+                  <input type="email" x-ng-focus="emailFocus=true" x-ng-blur="emailFocus=false"
+                         required class="input-sm form-control fg-input" name="mail"
+                         x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.mail" id="mail"
+                         x-ng-class="{'fg-toggled' : emailFocus}">
+                  <label class="fg-label required" for="mail">{{"CONTACTS_LISTS_ACTION.ORDER_BY.MAIL" | translate}}</label>
+                  <span
+                    x-ng-show="(updateContactForm.mail.$touched || updateContactForm.$submitted) && updateContactForm.mail.$invalid">
+                   {{"FORMS_MESSAGES.INVALID_EMAIL" | translate}}
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="bottom-sidebar-btn">
+  <button class="btn btn-default col-xs-6" x-ng-click="mainVm.sidebar.hide()">
+    {{"NAVIGATION.CANCEL" | translate}}
+  </button>
+  <button class="btn btn-primary col-xs-6"
+          x-ng-click="mainVm.sidebar.getData().updateContact(updateContactForm, mainVm.sidebar.getData().currentSelectedDocument.current)">
+    {{"VALIDATE" | translate}}
+  </button>
+</div>

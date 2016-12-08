@@ -1,0 +1,32 @@
+<div id="member-sidebar">
+  <div class="header-sidebar">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
+       x-ng-click="mainVm.sidebar.hide();">
+    </i>
+    <h2 class="header-more-options set-ellipsis">
+      {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}
+    </h2>
+    <span class="hidden-xs">
+      <i class="zmdi zmdi-close zmdi-hc-lg"
+         x-ng-click="mainVm.sidebar.hide();">
+      </i>
+    </span>
+  </div>
+  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs">
+    <md-content>
+      <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex"
+               md-dynamic-height="" md-border-bottom="">
+        <md-tab id="tab1" label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 noPadding">
+          <md-content>
+            <div x-ng-include="'directives/sidebar-content/sidebar-content-contactslists-details.html'"></div>
+          </md-content>
+        </md-tab>
+        <md-tab id="tab2" label="{{'ACTIVITIES' | translate}}" class="col-xs-4 noPadding disabled">
+          <md-content class="md-padding">
+            <div x-ng-include="'directives/sidebar-content/sidebar-content-contactslists-activities.html'"></div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
+</div>

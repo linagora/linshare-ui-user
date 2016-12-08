@@ -45,12 +45,12 @@ angular.module('linshareUiUserApp')
         name: 'MENU_TITLE.ADMIN',
         icon: 'zmdi zmdi-settings',
         color: '#E91E63',
-        disabled: !lsAppConfig.devMode,
+        disabled: false,
         links: [
           {
             name: 'MENU_TITLE.LISTS',
-            link: 'administration.lists',
-            disabled: lsAppConfig.production
+            link: 'administration.contactslists',
+            disabled: false
           }, {
             name: 'MENU_TITLE.GUESTS',
             link: 'administration.guests',
