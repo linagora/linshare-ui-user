@@ -67,7 +67,6 @@
      */
     function activate() {
       $translatePartialLoader.addPart('contactsLists');
-      $scope.mainVm.sidebar.hide();
 
       contactsListsListRestService.get(contactsListsContactsVm.contactsListUuid).then(function(details) {
         contactsListsContactsVm.contactsListDetails = details;

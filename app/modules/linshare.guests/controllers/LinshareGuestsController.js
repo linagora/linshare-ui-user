@@ -72,7 +72,6 @@
     function activate() {
       $translatePartialLoader.addPart('guests');
       $translatePartialLoader.addPart('filesList');
-      $scope.mainVm.sidebar.hide();
       guestVm.tableParams = guestVm.loadTable();
     }
 

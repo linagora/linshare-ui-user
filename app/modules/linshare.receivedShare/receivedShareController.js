@@ -8,7 +8,6 @@ angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope, $filter, $window, $translatePartialLoader, NgTableParams, receivedShareRestService,
              autocompleteUserRestService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig) {
-      $scope.mainVm.sidebar.hide();
       $translatePartialLoader.addPart('receivedShare');
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;

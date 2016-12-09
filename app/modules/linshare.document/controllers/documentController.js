@@ -49,7 +49,6 @@
     $scope.lsAppConfig = lsAppConfig;
     $scope.lsFormat = lsFormat;
     $scope.lsFullDateFormat = lsFullDateFormat;
-    $scope.mainVm.sidebar.hide();
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.nextTab = nextTab;
     $scope.onShare = onShare;

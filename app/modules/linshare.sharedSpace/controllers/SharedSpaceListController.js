@@ -16,7 +16,6 @@
     var openSearch = openSearchFunction;
     var closeSearch = closeSearchFunction;
 
-    $scope.mainVm.sidebar.hide();
     $scope.reloadDocuments = reloadDocuments;
 
     sharedSpaceListVm.addSelectedDocument = addSelectedDocument;

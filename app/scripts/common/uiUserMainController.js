@@ -27,6 +27,11 @@ angular
         mainVm.removeShareDocument(flowFile);
       });
 
+      $rootScope.$on('$stateChangeStart', function(/*event, toState, toParams, fromState, fromParams*/) {
+        //TODO: The hide should be filtered depending on state and param
+        mainVm.sidebar.hide();
+      });
+
       mainVm.removeShareDocument = removeShareDocument;
 
       /**

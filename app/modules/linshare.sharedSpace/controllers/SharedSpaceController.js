@@ -6,7 +6,6 @@ angular.module('linshare.sharedSpace')
                                                 lsAppConfig) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
-    $scope.mainVm.sidebar.hide();
 
     var thisctrl = this;
     thisctrl.lsAppConfig = lsAppConfig;

@@ -77,7 +77,6 @@
      */
     function activate() {
       $translatePartialLoader.addPart('contactsLists');
-      $scope.mainVm.sidebar.hide();
 
       loadTable();
 

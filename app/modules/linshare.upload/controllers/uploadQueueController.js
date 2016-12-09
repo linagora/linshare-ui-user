@@ -72,7 +72,6 @@
      * @memberOf LinShare.UploadQueue.uploadQueueController
      */
     function activate() {
-      $scope.mainVm.sidebar.hide();
 
       _.forEach(uploadQueueVm.$flow.files, function(file) {
         if (file.isSelected) {
