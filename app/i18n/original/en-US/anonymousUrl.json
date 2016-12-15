@@ -1,5 +1,19 @@
 {
-  "HEADER": {
-    "TITLE": "ANONYMOUS URL PORTAIL"
+  "ANONYMOUS_URL": {
+    "FORM": {
+      "CANCEL": "Cancel",
+      "EMPTY": "The password is required to access the anonymous share",
+      "INVALID": "The password provided is invalid",
+      "LABEL": "Password",
+      "SUBMIT": "Submit",
+      "TITLE": "Password of the anonymous share"
+    },
+    "HEADER": {
+      "TITLE": "ANONYMOUS URL PORTAIL"
+    },
+    "HOME": {
+      "404": "The url you tried to access is invalid",
+      "MESSAGE": "You need a valid url provided with a password to acces shared documents"
+    }
   }
 }

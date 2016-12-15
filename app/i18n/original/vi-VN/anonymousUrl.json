@@ -1,6 +1,20 @@
 {
-  "HEADER": {
-    "TITLE": "ANONYMOUS URL PORTAIL"
+  "ANONYMOUS_URL": {
+    "FORM": {
+      "TBT__CANCEL": "",
+      "TBT__EMPTY": "",
+      "TBT__INVALID": "",
+      "TBT__LABEL": "",
+      "TBT__SUBMIT": "",
+      "TBT__TITLE": ""
+    },
+    "HEADER": {
+      "TBT__TITLE": ""
+    },
+    "HOME": {
+      "TBT__404": "",
+      "TBT__MESSAGE": ""
+    }
   }
-
 }
+

@@ -190,6 +190,23 @@ angular
       });
 
       $scope.$on('event:auth-loginConfirmed', function(event, data) {
+        /**
+         * Get the core version from the REST API
+         * @type {string}
+         */
+        authenticationRestService.version().then(function(data) {
+          $scope.coreVersion = data.version;
+        });
+
+        /**
+         * Get the product version from the json file 'about'
+         * @type {string}
+         */
+        $scope.productVersion = 'dev';
+        $http.get('/about.json').success(function(data) {
+          $scope.productVersion = data.version;
+        });
+
         $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
         $scope.loggedUser.setUser(data);
         $state.go($scope.urlTogoAfterLogin);
@@ -237,23 +254,5 @@ angular
             angular.element('.collapsible-actions-toolbar').css('width', '100%');
           }
         }
-      });
-
-
-      /**
-       * Get the core version from the REST API
-       * @type {string}
-       */
-      authenticationRestService.version().then(function(data) {
-        $scope.coreVersion = data.version;
-      });
-
-      /**
-       * Get the product version from the json file 'about'
-       * @type {string}
-       */
-      $scope.productVersion = 'dev';
-      $http.get('/about.json').success(function(data) {
-        $scope.productVersion = data.version;
       });
     });

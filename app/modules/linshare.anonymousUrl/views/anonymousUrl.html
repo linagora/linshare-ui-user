@@ -1,14 +1,11 @@
-<div>
-
+<div x-ng-if="anonymousUrlVm.tableParams !== undefined">
   <div class="file-listing-ctn anonymous-url">
     <div class="container files">
-      <!--  ACTIONS ON DOCUMENTS  -->
-      <!-- contextmenu -->
       <div class="anonymous-user-msg">
-        <h3>{{'ANONYMOUS_URL.HELLO'| translate}}  {{urlCtrl.anonymousUrlData.recipient.mail}} !</h3>
+        <h3>{{'ANONYMOUS_URL.HELLO'| translate}}  {{anonymousUrlVm.anonymousUrlData.recipient.mail}} !</h3>
         <p>{{'ANONYMOUS_URL.MSG'| translate}}
-          <b> {{urlCtrl.anonymousUrlData.actor.firstName}}
-          {{urlCtrl.anonymousUrlData.actor.lastName}}</b>.
+          <b> {{anonymousUrlVm.anonymousUrlData.actor.firstName}}
+          {{anonymousUrlVm.anonymousUrlData.actor.lastName}}</b>.
         </p>
         </div>
       <div class="card" id="collapsible-content">
@@ -30,7 +27,7 @@
                     <div class="fg-line">
                       <input type="text" class="form-control"
                              autocomplete="off"
-                             x-ng-model="urlCtrl.paramFilter['name']"
+                             x-ng-model="anonymousUrlVm.paramFilter['name']"
                              placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
                              x-ng-change="updateParams()">
                     </div>
@@ -40,13 +37,10 @@
             </div>
           </div>
         </div>
-
         <div id="drop-area">
-
-          <!-- DOCUMENTS LIST  -->
           <div class="card-body">
             <div class="table-responsive">
-              <table id="file-list-table" class="table table-vmiddle" x-ng-table="urlCtrl.tableParams"
+              <table id="file-list-table" class="table table-vmiddle" x-ng-table="anonymousUrlVm.tableParams"
                      show-filter="true">
                 <tr x-ng-repeat="documentFile in $data"
                     x-ng-click="backToSidebarContentDetails()"
@@ -59,7 +53,7 @@
                       data-sortable="'name'" uuid={{o.uuid}}>
                     <div class="ctn-name-actions">
                         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                          <a x-ng-click="urlCtrl.download(documentFile.uuid)"
+                          <a x-ng-click="anonymousUrlVm.download(documentFile)"
                              title="{{'BOUTON_LABEL_TITLE.DOWNLOAD'| translate}}">
                           {{documentFile.name}}
                           </a>
@@ -68,7 +62,8 @@
                             {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                             </span>
                             <p class="mobile-list-item-info visible-xs">
-                              {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}},
+                              {{documentFile.modificationDate | relativeTime}},
+                              {{documentFile.size | readableSize: false}},
                                  <span x-ng-show="documentFile.shared > 0">
                                    {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                                  </span>
@@ -79,8 +74,7 @@
                           <ul class="actions pull-right">
 
                             <li class="hidden-xs">
-                              <!--ng-href="{{urlCtrl.baseUrl}}/{{urlCtrl.urlUuid}}/{{documentFile.uuid}}/download"-->
-                              <a x-ng-click="urlCtrl.download(documentFile.uuid)"
+                              <a x-ng-click="anonymousUrlVm.download(documentFile)"
                                 title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" download="w3logo"
                                 event-propagation-stop>
                                 <i class="zmdi zmdi-download"></i>
