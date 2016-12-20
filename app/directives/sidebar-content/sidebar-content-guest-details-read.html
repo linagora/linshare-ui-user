@@ -5,7 +5,7 @@
       <div class="user-preview-ctn">
         <div class="flex-ctn detail-info-ctn p-0 p-t-10">
           <div class="item-l m-b-10">
-            <span class="first-letter user-info">{{mainVm.sidebar.getData().selectedGuest.firstName[0]}}</span>
+            <span class="first-letter user-info">{{mainVm.sidebar.getData().selectedGuest.firstName.charAt(0)}}</span>
           </div>
           <p class="m-b-0">{{mainVm.sidebar.getData().selectedGuest.firstName}} 
             <span class="p-l-5 last-name">{{mainVm.sidebar.getData().selectedGuest.lastName}}</span>
@@ -20,13 +20,15 @@
                 name="comment" id="comment"
                 x-ng-attr-placeholder="{{'GUEST_DETAILS.COMMENT.EMPTY' | translate}}"
                 x-ng-model="mainVm.sidebar.getData().selectedGuest.comment"
+                x-ng-model-options="{updateOn: 'blur'}"
+                x-ng-change="mainVm.sidebar.getData().selectedGuest.update()"
                 x-ng-bind="mainVm.sidebar.getData().selectedGuest.comment"
                 x-ng-init="commentFocused = false" x-ng-focus="commentFocused = true"
-                x-ng-blur="commentFocused = false" x-ng-readonly="true">
+                x-ng-blur="commentFocused = false">
       </textarea>
       <span x-ng-if="!commentFocused && mainVm.sidebar.getData().selectedGuest.comment.length > 54">...</span>
       <div class="edit-description clic-enabled" x-ng-click="commentFocused = !commentFocused">
-        <i class="zmdi zmdi-eye" x-ng-if="!commentFocused"
+        <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
            title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
         <i class="zmdi zmdi-close" x-ng-if="commentFocused"
            title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
@@ -35,7 +37,7 @@
     <div class="content-detail-area">
       <div class="flex-ctn detail-info-ctn">
         <div class="item-l">
-          <span class="first-letter user-info">{{mainVm.sidebar.getData().selectedGuest.owner.firstName[0]}}</span>
+          <span class="first-letter user-info">{{mainVm.sidebar.getData().selectedGuest.owner.firstName.charAt(0)}}</span>
         </div>
         <div class="item-mid">
           <div class="name">
@@ -82,7 +84,7 @@
           <div>
             <p>{{'GUEST_DETAILS.DOMAIN' | translate}}</p>
             <p>
-              {{mainVm.sidebar.getData().selectedGuest.domain}}
+              {{'NC' | translate }}
             </p>
           </div>
           <div>
@@ -101,15 +103,13 @@
               {{'GUEST_DETAILS.RESTRICTED_CONTACTS' | translate}}:
             </p>
             <p x-ng-hide="linshareModeProduction" x-ng-if="mainVm.sidebar.getData().selectedGuest.restricted &&
-                _.find(mainVm.sidebar.getData().selectedGuest.restrictedContacts,
-                       {'mail': mainVm.sidebar.getData().loggedUser.mail}) === -1">
+                !mainVm.sidebar.getData().selectedGuest.form.isRestrictedContact">
               <a>
-                  {{'GUEST_DETAILS.JOIN_RESTRICTED_CONTACT_LIST' | translate}}
-                </a>
+                {{'GUEST_DETAILS.JOIN_RESTRICTED_CONTACT_LIST' | translate}}
+              </a>
             </p>
             <p x-ng-if="mainVm.sidebar.getData().selectedGuest.restricted &&
-                _.find(mainVm.sidebar.getData().selectedGuest.restrictedContacts,
-                       {'mail': mainVm.sidebar.getData().loggedUser.mail}) !== -1">
+                mainVm.sidebar.getData().selectedGuest.form.isRestrictedContact">
               {{'GUEST_DETAILS.ALREADY_A_MEMBER' | translate}}
             </p>
             <p x-ng-if="!mainVm.sidebar.getData().selectedGuest.restricted">

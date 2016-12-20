@@ -1,0 +1,22 @@
+<div class="header-sidebar">
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"></i>
+  <h2 class="header-more-options">{{"SIDEBAR.TITLE.CREATE" | translate}}</h2>
+  <span class="hidden-xs">
+      <i class="zmdi zmdi-close zmdi-hc-lg"
+         x-ng-click="mainVm.sidebar.hide(createGuest, mainVm.sidebar.getData().guestObject)"></i>
+  </span>
+</div>
+<div ls-guest-form x-guest-object="mainVm.sidebar.getData().guestObject" x-form-name="createGuest">
+</div>
+<!-- UPDATE BTN links-->
+<div class="bottom-sidebar-btn">
+  <button class="btn btn-default col-xs-6"
+          x-ng-click="mainVm.sidebar.hide(createGuest, mainVm.sidebar.getData().guestObject);
+                      mainVm.sidebar.getData().closeDropdown($event)">
+    {{"SIDEBAR.BUTTON.CANCEL" | translate}}
+  </button>
+  <button class="btn btn-primary col-xs-6"
+          x-ng-click="mainVm.sidebar.getData().addGuest(createGuest, mainVm.sidebar.getData().guestObject)">
+    {{"SIDEBAR.BUTTON.CREATE" | translate}}
+  </button>
+</div>

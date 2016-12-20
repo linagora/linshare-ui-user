@@ -2,38 +2,12 @@
   "ACTION": {
     "TBT__ADD_TO_WORKGROUPS": ""
   },
-  "ADD_GUEST_SIDEBAR": {
-    "TBT__ACTIVATE_USER_SPACE": "",
-    "TBT__ADD_DESCRIPTION": "",
-    "TBT__ADVANCED_OPTIONS": "",
-    "TBT__ALLOW_MODIFICATORS": "",
-    "TBT__CANCEL": "",
-    "TBT__EMAIL": "",
-    "TBT__ENTER_DESCRIPTION": "",
-    "TBT__ENTER_MSG": "",
-    "TBT__EXP_DATE": "",
-    "TBT__FIRSTNAME": "",
-    "TBT__INVALID_DATE": "",
-    "TBT__INVALID_EMAIL": "",
-    "TBT__INVALID_EMPTY_FIELD": "",
-    "TBT__LASTNAME": "",
-    "TBT__MSG_EMAIL": "",
-    "TBT__NOTIFICATION_SUCCESS": "",
-    "TBT__RESTRICT_CONTACTS": "",
-    "TBT__SUBMIT": "",
-    "TBT__TITLE": ""
-  },
   "BOUTON_LABEL_TITLE": {
     "TBT__EDIT": "",
     "TBT__DELETE": "",
     "TBT__GUEST": ""
   },
-  "TBT__BREADCRUMB_TITLE": "",
-  "GUEST_CHOSEN": {
-    "TBT__ALL_GUESTS": "",
-    "TBT__MY_GUESTS": "",
-    "TBT__SHOW": ""
-  },
+  "TBT__BREADCRUMB_TITLE_GUEST": "",
   "GUEST_DETAILS": {
     "TBT__ACTIVATED": "",
     "TBT__ADMIN": "",
@@ -52,11 +26,61 @@
     "TBT__RESTRICTED_CONTACTS": ""
   },
   "HEADER_GUEST": {
-    "TBT__DOMAIN": ""
+    "TBT__DOMAIN": "",
+    "SLIDER": {
+      "TBT__MY_GUEST": "",
+      "TBT__OTHER_GUEST": ""
+    }
   },
+  "TBT__NC": "",
   "ORDER_BY": {
     "TBT__EXPIRATION_DATE": "",
     "TBT__EMAIL": "",
     "TBT__DOMAIN_NAME": ""
+  },
+  "SIDEBAR": {
+    "TBT__ADMIN_RIGHT": "",
+    "BUTTON": {
+      "TBT__CREATE": "",
+      "TBT__CANCEL": "",
+      "TBT__UPDATE": ""
+    },
+    "ERROR": {
+      "TBT__INVALID_DATE": "",
+      "TBT__INVALID_EMAIL": "",
+      "TBT__INVALID_EMPTY_FIELD": ""
+    },
+    "LABEL": {
+      "TBT__ACTIVATE_USER_SPACE": "",
+      "TBT__ADD_DESCRIPTION": "",
+      "TBT__ADD_EMAIL": "",
+      "TBT__ADVANCED_OPTIONS": "",
+      "TBT__ALLOW_MODIFICATORS": "",
+      "TBT__EMAIL": "",
+      "TBT__ENTER_DESCRIPTION": "",
+      "TBT__ENTER_EMAIL": "",
+      "TBT__EXP_DATE": "",
+      "TBT__FIRSTNAME": "",
+      "TBT__LASTNAME": "",
+      "TBT__RESTRICT_CONTACTS": ""
+    },
+    "NOTIFICATION": {
+      "SUCCESS": {
+        "TBT__CREATE": "",
+        "TBT__UPDATE": ""
+      }
+    },
+    "TITLE": {
+      "TBT__CREATE": ""
+    }
+  },
+  "SWEET_ALERT": {
+    "ON_GUEST_DELETE": {
+      "TBT__CANCEL_BUTTON": "",
+      "TBT__CONFIRM_BUTTON": "",
+      "TBT__TEXT": "",
+      "TBT__TITLE": ""
+    }
   }
+
 }

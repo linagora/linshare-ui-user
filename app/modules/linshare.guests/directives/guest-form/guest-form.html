@@ -1,0 +1,235 @@
+<div class="card col-xs-12 m-t-2em form-create-guests" id="content-ctn-sidebar">
+  <form class="form-sidebar" name="formName">
+    <div class="form-group fg-float m-b-30">
+      <div class="fg-line" x-ng-class="{'has-error' : ((formName.lastname.$touched || formName.$submitted)
+                                                        && formName.lastname.$invalid),
+                                      'fg-toggled' : guestObject.lastName !== ''}">
+        <input type="text" class="input-sm form-control fg-input" name="lastname" id="lastname"
+               required x-ng-model="guestObject.lastName">
+        <label class="fg-label required" for="lastname">{{"SIDEBAR.LABEL.LASTNAME" | translate}}</label>
+        <span x-ng-show="(formName.lastname.$touched || formName.$submitted) && formName.lastname.$invalid">
+           {{"SIDEBAR.ERROR.INVALID_EMPTY_FIELD" | translate}}
+        </span>
+      </div>
+    </div>
+    <div class="form-group fg-float m-b-30">
+      <div class="fg-line" x-ng-class="{'has-error' : ((formName.firstname.$touched || formName.$submitted)
+                                                       && formName.firstname.$invalid),
+                                        'fg-toggled' : guestObject.firstName !== ''}">
+        <input type="text" class="input-sm form-control fg-input" name="firstname" id="firstname"
+               required x-ng-model="guestObject.firstName">
+        <label class="fg-label required" for="firstname">{{"SIDEBAR.LABEL.FIRSTNAME" | translate}}</label>
+        <span x-ng-show="(formName.firstname.$touched || formName.$submitted) && formName.firstname.$invalid">
+            {{"SIDEBAR.ERROR.INVALID_EMPTY_FIELD" | translate}}
+        </span>
+      </div>
+    </div>
+    <div class="form-group fg-float m-b-30">
+      <div class="fg-line" x-ng-class="{'has-error' : ((formName.email.$touched || formName.$submitted)
+                                                       && formName.email.$invalid),
+                                        'fg-toggled' : guestObject.mail !== ''}">
+        <input type="email" class="input-sm form-control fg-input" name="email" id="email"
+               required x-ng-model="guestObject.mail">
+        <label class="fg-label required" for="email">{{"SIDEBAR.LABEL.EMAIL" | translate}}</label>
+        <span x-ng-show="(formName.email.$touched || formName.$submitted) && formName.email.$invalid">
+         {{"SIDEBAR.ERROR.INVALID_EMAIL" | translate}}
+        </span>
+      </div>
+    </div>
+    <div class="m-b-30 col-xs-12 field-ctn" id="dateField"
+         x-ng-show="guestObject.allowedToExpiration.enable"
+         x-ng-class="{'has-error' : ((formName.expirationDate.$touched || formName.$submitted) &&
+                                    (formName.expirationDate.$invalid ||
+                                    formName.expirationDate.$error.invalidDate))}">
+      <label for="expirationDate">
+        {{"SIDEBAR.LABEL.EXP_DATE" | translate}}
+      </label>
+      <!--
+        TODO: The directive shall be refactored with a proper template and passing different options.
+              See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+      -->
+      <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
+           x-ng-class="{'is-opened': opened2}">
+        <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened2}">
+          <div class="form-inline clearfix">
+            <input type="text" class="form-control date-picker-input" name="expirationDate" id="expirationDate"
+                   required placeholder="{{guestObject.expirationDate.value | date: 'fullDate'}}"
+                   working-date-picker x-ng-click="open($event, 'opened2')"
+                   datepicker-popup="{{format}}"
+                   datepicker-options="guestObject.form.datepicker.options"
+                   show-weeks="false" is-open="opened2"
+                   min-date="guestObject.form.datepicker.minDate"
+                   min="{{guestObject.form.datepicker.minDate | date:'yyyy-MM-dd'}}"
+                   max-date="guestObject.form.datepicker.maxDate"
+                   max="{{guestObject.form.datepicker.maxDate | date:'yyyy-MM-dd'}}"
+                   x-ng-model="guestObject.expirationDate"
+                   x-ng-disabled="!guestObject.form.datepicker.isEditable"/>
+          </div>
+        </div>
+      </div>
+      <span x-ng-show="(formName.expirationDate.$touched || formName.$submitted) &&
+                    (formName.expirationDate.$invalid || formName.expirationDate.$error.invalidDate)">
+           {{"SIDEBAR.ERROR.INVALID_DATE" | translate}}
+           {{guestObject.form.datepicker.maxDate | date: 'fullDate'}}
+      </span>
+    </div>
+    <!--TODO: Once the back allow email edition change the ng-show value with "allowedToEmail.enable"-->
+    <div class="m-b-30 form-group" x-ng-show="!linshareModeProduction">
+      <h5>{{"WIP" | translate}}</h5>
+      <label for="message" class="p-b-10">{{"SIDEBAR.LABEL.ADD_EMAIL" | translate}} :</label>
+      <!-- TODO: Once the back allow email edition change the disabled with
+                 'x-ng-disabled="!allowedToEmail.canOverride"'-->
+      <textarea class="form-control comment" id="message" name="message" rows="5" disabled
+                placeholder="{{'SIDEBAR.LABEL.ENTER_EMAIL' | translate}}" x-ng-model="guestObject.message">
+      </textarea>
+    </div>
+    <p x-ng-click="guestObject.form.activateMoreOptions = !guestObject.form.activateMoreOptions"
+       x-ng-class="{'animate-chevron' : guestObject.form.activateMoreOptions}">
+      <a href="">
+        {{"SIDEBAR.LABEL.ADVANCED_OPTIONS" | translate}}
+      </a>
+      <i class="zmdi zmdi-chevron-down toggle-chevron pull-right"></i>
+    </p>
+    <div x-ng-hide="!guestObject.form.activateMoreOptions">
+      <!--TODO: Once the back allow editors change the ng-show value with "allowedToAddEditors.enable"-->
+      <div class="m-b-20 col-xs-12 field-ctn" x-ng-show="!linshareModeProduction">
+        <h5>{{"WIP" | translate}}</h5>
+        <div class="fg-line input-group dp-blue">
+          <div class="form-inline">
+            <label for="allow-editors" class="p-b-10">{{"SIDEBAR.LABEL.ALLOW_MODIFICATORS" | translate}} :</label>
+            <label class="checkbox checkbox-inline">
+              <!-- TODO: Once the back allow editors change the disabled with
+                         'x-ng-disabled="!allowedToAddEditors.canOverride"'-->
+              <input type="checkbox" name="allow-editors" id="allow-editors" disabled
+                     x-ng-checked="guestObject.form.activateEditors"
+                     x-ng-click="guestObject.form.activateEditors = !guestObject.form.activateEditors"
+                     x-ng-model="guestObject.form.editors"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!guestObject.form.activateEditors">
+          <x-ng-form name="editors" role="form" class="clearfix">
+            <div class="form-group fg-line">
+              <div ls-autocomplete-user="USERS" data-selected-users-list="guestObject.editorsContacts">
+              </div>
+            </div>
+          </x-ng-form>
+          <div class="custom-list-body col-xs-12 m-0 p-0">
+            <div class="custom-list-item"
+                 x-ng-repeat="editor in guestObject.editorsContacts | orderBy : '-' as results"
+                 tooltip-placement="bottom"
+                 tooltip-popup-delay="700"
+                 uib-tooltip="{{editor.firstName + ' ' + editor.lastName +' : '+editor.domain || editor.mail}}">
+              <p class="pull-left circle-ctn">
+                <span class="circle user-bg" x-ng-show="editor.domain">{{editor.firstName.charAt(0)}}</span>
+                <span class="circle user-bg" x-ng-show="!editor.domain">{{editor.mail.charAt(0).toUpperCase()}}</span>
+              </p>
+              <div class="pull-left name-recipients-ctn">
+                <p class="pull-left inner-text-li" x-ng-show="editor.domain">
+                  {{editor.firstName + ' ' + editor.lastName}}
+                </p>
+                <p class="pull-left inner-text-li" x-ng-show="!editor.domain">
+                  {{editor.mail}}
+                </p>
+                <p class="close-list-icone-btn pull-right"
+                   x-ng-click="guestObject.editorsContacts.splice(results.length - $index -1, 1)">
+                  <i class="zmdi zmdi-close"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn" x-ng-show="guestObject.allowedToUpload.enable">
+        <div class="fg-line">
+          <div class="form-inline">
+            <label for="user-space">{{"SIDEBAR.LABEL.ACTIVATE_USER_SPACE" | translate}} :</label>
+            <label class="checkbox checkbox-inline">
+              <input id="user-space" name="user-space" type="checkbox"
+                     x-ng-checked="guestObject.form.activateUserSpace"
+                     x-ng-click="guestObject.form.activateUserSpace = !guestObject.form.activateUserSpace"
+                     x-ng-model="guestObject.canUpload"
+                     x-ng-disabled="!guestObject.allowedToUpload.canOverride"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn" x-ng-show="guestObject.allowedToRestrict.enable &&
+                                                         guestObject.form.activateUserSpace">
+        <div class="fg-line">
+          <div class="form-inline">
+            <label for="restrict-contact" class="p-b-10">
+              {{"SIDEBAR.LABEL.RESTRICT_CONTACTS" | translate}}:
+            </label>
+            <label class="checkbox checkbox-inline">
+              <input id="restrict-contact" name="restrict-contact" type="checkbox"
+                     x-ng-checked="guestObject.form.activateRestricted"
+                     x-ng-click="guestObject.form.activateRestricted = !guestObject.form.activateRestricted"
+                     x-ng-model="guestObject.restricted"
+                     x-ng-disabled="!guestObject.allowedToRestrict.canOverride"/>
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!guestObject.form.activateRestricted">
+          <x-ng-form name="restrict" role="form" class="clearfix m-0">
+            <div class="form-group fg-line">
+              <div ls-autocomplete-user="USERS" data-selected-users-list="guestObject.restrictedContacts"
+                   data-is-required="guestObject.form.activateUserSpace && guestObject.form.activateRestricted"
+                   data-with-email="false">
+              </div>
+            </div>
+          </x-ng-form>
+          <div class="custom-list-body col-xs-12 m-0 p-0">
+            <div class="custom-list-item"
+                 x-ng-repeat="restrictedContact in guestObject.restrictedContacts | orderBy : '-' as results"
+                 tooltip-placement="bottom"
+                 tooltip-popup-delay="700"
+                 uib-tooltip="{{restrictedContact.firstName + ' ' + restrictedContact.lastName +' : '+
+                                restrictedContact.domain || restrictedContact.mail}}">
+              <p class="pull-left circle-ctn">
+                <span class="circle  user-bg"x-ng-show="restrictedContact.domain">
+                  {{restrictedContact.firstName.charAt(0)}}
+                </span>
+                <span class="circle  user-bg" x-ng-show="!restrictedContact.domain">
+                  {{restrictedContact.mail.charAt(0).toUpperCase()}}
+                </span>
+              </p>
+              <div class="pull-left name-recipients-ctn">
+                <p class="pull-left inner-text-li" x-ng-show="restrictedContact.domain">
+                  {{restrictedContact.firstName + ' ' + restrictedContact.lastName}}
+                </p>
+                <p class="pull-left inner-text-li" x-ng-show="!restrictedContact.domain">
+                  {{restrictedContact.mail}}
+                </p>
+                <p class="close-list-icone-btn pull-right"
+                   x-ng-click="guestObject.restrictedContacts.splice(results.length - $index -1, 1)">
+                  <i class="zmdi zmdi-close"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn" x-ng-hide="guestObject.uuid !== undefined">
+        <div class="form-inline p-b-10">
+          <label for="activate-description">{{"SIDEBAR.LABEL.ADD_DESCRIPTION" | translate}} :</label>
+          <label class="checkbox checkbox-inline">
+            <input type="checkbox" id="activate-description" name="activate-description"
+                   x-ng-checked="guestObject.form.activateDescription"
+                   x-ng-click="guestObject.form.activateDescription = !guestObject.form.activateDescription"/>
+            <i class="input-helper"></i>
+          </label>
+        </div>
+        <div class="css-slide-up form-group"
+             x-ng-hide="!guestObject.form.activateDescription">
+          <textarea class="form-control comment" name="comment" rows="3"
+                    placeholder="{{'SIDEBAR.LABEL.ENTER_DESCRIPTION' | translate}}" x-ng-model="guestObject.comment">
+          </textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

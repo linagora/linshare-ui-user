@@ -17,6 +17,8 @@
         "NONE": "",
         "1000": "Unknow error",
         "2000": "Authentication error",
+        "2203": "You are not authorized to delete this guest",
+        "2204": "You are not authorized to update this guest",
         "28000": "The guest has not been found",
         "28001": "The guest already exists",
         "28403": "You are not authorized to access this guest",

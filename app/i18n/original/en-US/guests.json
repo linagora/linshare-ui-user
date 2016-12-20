@@ -2,38 +2,12 @@
   "ACTION": {
     "ADD_TO_WORKGROUPS": "Add to workgroups"
   },
-  "ADD_GUEST_SIDEBAR": {
-    "ACTIVATE_USER_SPACE": "Activate user space",
-    "ADD_DESCRIPTION": "Add user description",
-    "ADVANCED_OPTIONS": "Advanced options",
-    "ALLOW_MODIFICATORS": "Allow other users to modify this account",
-    "CANCEL": "Cancel",
-    "EMAIL": "Email",
-    "ENTER_DESCRIPTION": "Enter your description",
-    "ENTER_MSG": "Enter your message",
-    "EXP_DATE": "Expiration date",
-    "FIRSTNAME": "Firstname",
-    "INVALID_DATE": "The date needs to be greater than today's date and cannot exceed the maximum expiry date being the : ",
-    "INVALID_EMAIL": "Email address is invalid.",
-    "INVALID_EMPTY_FIELD": "This field cannot be empty.",
-    "LASTNAME": "Lastname",
-    "MSG_EMAIL": "Add a message",
-    "NOTIFICATION_SUCCESS": "Guest successfully created",
-    "RESTRICT_CONTACTS": "Restrict contact list",
-    "SUBMIT": "Create",
-    "TITLE": "CREATE GUEST ACCOUNT"
-  },
   "BOUTON_LABEL_TITLE": {
     "EDIT": "Edit",
     "DELETE": "Delete",
     "GUEST": "Guest(s)"
   },
-  "BREADCRUMB_TITLE": "Guests accounts",
-  "GUEST_CHOSEN": {
-    "ALL_GUESTS": "All guest",
-    "MY_GUESTS": "My guest",
-    "SHOW": "Show :"
-  },
+  "BREADCRUMB_TITLE_GUEST": "Guests accounts",
   "GUEST_DETAILS": {
     "ACTIVATED": "Activated",
     "ADMIN": "Administrator",
@@ -52,11 +26,61 @@
     "RESTRICTED_CONTACTS": "Restricted contacts"
   },
   "HEADER_GUEST": {
-    "DOMAIN": "Domain"
+    "DOMAIN": "Domain",
+    "SLIDER": {
+      "MY_GUEST": "My guests",
+      "OTHER_GUEST": "Other guests"
+    }
+
   },
+  "NC": "N.C.",
   "ORDER_BY": {
     "EXPIRATION_DATE": "Expiration date",
     "EMAIL": "Email",
     "DOMAIN_NAME": "Domain name"
+  },
+  "SIDEBAR": {
+    "ADMIN_RIGHT": "You don't have the administrator rights to update this guest",
+    "BUTTON": {
+      "CREATE": "Create",
+      "CANCEL": "Cancel",
+      "UPDATE": "Update"
+    },
+    "ERROR": {
+      "INVALID_DATE": "The date needs to be greater than today's date and cannot exceed the maximum expiry date being the : ",
+      "INVALID_EMAIL": "Email address is invalid.",
+      "INVALID_EMPTY_FIELD": "This field cannot be empty."
+    },
+    "LABEL": {
+      "ACTIVATE_USER_SPACE": "Activate user space",
+      "ADD_DESCRIPTION": "Add user description",
+      "ADD_EMAIL": "Add a message",
+      "ADVANCED_OPTIONS": "Advanced options",
+      "ALLOW_MODIFICATORS": "Allow other users to modify this account",
+      "EMAIL": "Email",
+      "ENTER_DESCRIPTION": "Enter your description",
+      "ENTER_EMAIL": "Enter your message",
+      "EXP_DATE": "Expiration date",
+      "FIRSTNAME": "Firstname",
+      "LASTNAME": "Lastname",
+      "RESTRICT_CONTACTS": "Restrict contact list"
+    },
+    "NOTIFICATION": {
+      "SUCCESS": {
+        "CREATE": "Guest successfully created",
+        "UPDATE": "Guest successfully updated"
+      }
+    },
+    "TITLE": {
+      "CREATE": "CREATE GUEST ACCOUNT"
+    }
+  },
+  "SWEET_ALERT": {
+    "ON_GUEST_DELETE": {
+      "CANCEL_BUTTON": "Cancel!",
+      "CONFIRM_BUTTON": "Delete",
+      "TEXT": "You are about to delete ${count} guest${plural}!",
+      "TITLE": "Are you sure?"
+    }
   }
 }

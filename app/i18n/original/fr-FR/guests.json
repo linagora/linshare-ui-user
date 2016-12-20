@@ -2,38 +2,12 @@
   "ACTION": {
     "ADD_TO_WORKGROUPS": "Ajouter à des groupes de travail"
   },
-  "ADD_GUEST_SIDEBAR": {
-    "ACTIVATE_USER_SPACE": "Activer son expace personnel ",
-    "ADD_DESCRIPTION": "Ajouter une description au profil",
-    "ADVANCED_OPTIONS": "Options avançées",
-    "ALLOW_MODIFICATORS": "Autoriser d'autres utilisateurs à modifier ce compte",
-    "CANCEL": "Annuler",
-    "EMAIL": "Adresse électronique",
-    "ENTER_DESCRIPTION": "Saisissez votre description",
-    "ENTER_MSG": "Saisissez votre message",
-    "EXP_DATE": "Date d'expiration",
-    "FIRSTNAME": "Prénom",
-    "INVALID_DATE": "La date saisit doit être supérieur à la date d'aujourd'hui et inférieur à la date maximal du :",
-    "INVALID_EMAIL": "Format d'adresse électronique invalide.",
-    "INVALID_EMPTY_FIELD": "Ce champ ne peut être vide.",
-    "LASTNAME": "Nom",
-    "MSG_EMAIL": "Ajouter un message par email",
-    "NOTIFICATION_SUCCESS": "L'invité a été crée avec succès",
-    "RESTRICT_CONTACTS": "Restreindre sa liste de contact",
-    "SUBMIT": "Créer",
-    "TITLE": "Ajouter compte invité"
-  },
   "BOUTON_LABEL_TITLE": {
     "EDIT": "Modifier",
     "DELETE": "Supprimer",
     "GUEST": "Invité(s)"
   },
-  "BREADCRUMB_TITLE": "Comptes invités",
-  "GUEST_CHOSEN": {
-    "ALL_GUESTS": "Tous les invités",
-    "MY_GUESTS": "Mes invités",
-    "SHOW": "Afficher :"
-  },
+  "BREADCRUMB_TITLE_GUEST": "Comptes invités",
   "GUEST_DETAILS": {
     "ACTIVATED": "Activé",
     "ADMIN": "Administrateur",
@@ -52,11 +26,60 @@
     "RESTRICTED_CONTACTS": "Contact restreint"
   },
   "HEADER_GUEST": {
-    "DOMAIN": "Domaine"
+    "DOMAIN": "Domaine",
+    "SLIDER" : {
+      "MY_GUEST": "Mes invités",
+      "OTHER_GUEST": "Autre invités"
+    }
   },
+  "NC": "N.C.",
   "ORDER_BY": {
     "EXPIRATION_DATE": "Date d'expiration",
     "EMAIL": "Courriel",
     "DOMAIN_NAME": "Nom de domaine"
+  },
+  "SIDEBAR": {
+    "ADMIN_RIGHT": "Vous n'avez pas les droits d'aministration pour mettre à jour cet invité",
+    "BUTTON": {
+      "CREATE": "Créer",
+      "CANCEL": "Annuler",
+      "UPDATE": "Editer"
+    },
+    "ERROR": {
+      "INVALID_DATE": "La date saisit doit être supérieur à la date d'aujourd'hui et inférieur à la date maximal du :",
+      "INVALID_EMAIL": "Format d'adresse électronique invalide.",
+      "INVALID_EMPTY_FIELD": "Ce champ ne peut être vide."
+    },
+    "LABEL": {
+      "ACTIVATE_USER_SPACE": "Activer l'espace personnel ",
+      "ADD_DESCRIPTION": "Ajouter une description au profil",
+      "ADD_EMAIL": "Ajouter un message par email",
+      "ADVANCED_OPTIONS": "Options avançées",
+      "ALLOW_MODIFICATORS": "Autoriser d'autres utilisateurs à modifier ce compte",
+      "EMAIL": "Adresse électronique",
+      "ENTER_DESCRIPTION": "Saisissez votre description",
+      "ENTER_EMAIL": "Saisissez votre message",
+      "EXP_DATE": "Date d'expiration",
+      "FIRSTNAME": "Prénom",
+      "LASTNAME": "Nom",
+      "RESTRICT_CONTACTS": "Restreindre la liste de contact"
+    },
+    "NOTIFICATION": {
+      "SUCCESS": {
+        "CREATE": "L'invité a été crée avec succès",
+        "UPDATE": "L'invité a été mis à jour avec succès"
+      }
+    },
+    "TITLE": {
+      "CREATE": "Ajouter compte invité"
+    }
+  },
+  "SWEET_ALERT": {
+    "ON_GUEST_DELETE": {
+      "CANCEL_BUTTON": "Annuler!",
+      "CONFIRM_BUTTON": "Supprimer",
+      "TEXT": "Vous êtes sur le point de supprimer ${count} invité${plural} !",
+      "TITLE": "Êtes-vous sûr ?"
+    }
   }
 }

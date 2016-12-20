@@ -6,14 +6,14 @@
       <div class="card-header">
         <div id="breadcrumb-wrap">
           <div class="menu-popover-ctn hidden-xs clickable">
-            <a class="add-menu-group" x-ng-click="guestVm.loadSidebarContent(guestVm.newGuest)" tabindex="0">
+            <a class="add-menu-group" x-ng-click="guestVm.loadSidebarContent(guestVm.guestCreate)" tabindex="0">
               <i class="zmdi zmdi-plus"></i>
             </a>
           </div>
 
           <div class="breadcrumbs-ctn hidden-xs">
             <a href="#" class="breadcrumb"><i class="zmdi zmdi-account-box"></i>
-              {{"BREADCRUMB_TITLE" | translate}}
+              {{"BREADCRUMB_TITLE_GUEST" | translate}}
             </a>
             <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
           </div>
@@ -82,7 +82,7 @@
                       <span class="caret-area">
                           <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'ADD_GUEST_SIDEBAR.LASTNAME' | translate}}
+                        </span> {{'SIDEBAR.LABEL.LASTNAME' | translate}}
                     </a>
                   </li>
                   <li role="menuitem">
@@ -90,7 +90,7 @@
                       <span class="caret-area">
                           <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'ADD_GUEST_SIDEBAR.FIRSTNAME' | translate}}
+                        </span> {{'SIDEBAR.LABEL.FIRSTNAME' | translate}}
                     </a>
                   </li>
                   <li role="menuitem">
@@ -139,34 +139,21 @@
             </div>
           </div>
         </div>
-        <div class="input-group search-bar hidden-xs">
-          <!-- TODO: Update lib chosen, error if value are setted on option -->
-          <span class="filter-views pull-right">{{'GUEST_CHOSEN.SHOW' | translate}}</span>
-          <div class="select-chosen-ctn no-padding pull-right" id="guest-account-chosen">
-            <select name="guests-viz" x-ng-model="selectGuestLoad"
-                    x-ng-change="guestVm.isAllGuestSelected =
-                                   selectGuestsLoad === '{{'GUEST_CHOSEN.MY_GUESTS' | translate}}' ? true : false;
-                                 guestVm.tableParams.reload()"
-                    data-placeholder-text-single="'{{'MY_GUESTS' | translate}}'" id="guests-viz" chosen
-                    disable-search="true" allow-single-deselect="true">
-                  <option value=""></option>
-                  <option>
-                    {{'GUEST_CHOSEN.MY_GUESTS' | translate}}
-                  </option>
-                  <option>
-                    {{'GUEST_CHOSEN.ALL_GUESTS' | translate}}
-                  </option>
-                </select>
-          </div>
-          <div id="search-field-ctn">
-            <div class="search-style">
-              <div class="fg-line">
-                <input type="text" class="form-control" autocomplete="off" x-ng-model="filterValue"
-                       placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                       x-ng-change="guestVm.tableApplyFilter(filterValue, ['firstName', 'lastName', 'mail'], '||')">
-              </div>
-            </div>
-          </div>
+        <div class="pull-right m-r-20 m-t-5">
+          <span class="toggle-pill"
+                x-ng-class="{'active' : guestVm.isMineGuest , 'left-elem-toggle-inactive' : !guestVm.isMineGuest}">
+            <a x-ng-href="" x-ng-click="guestVm.isMineGuest = true; guestVm.tableParams.reload();
+                                        mainVm.sidebar.hide()">
+              {{"HEADER_GUEST.SLIDER.MY_GUEST" | translate}}
+            </a>
+          </span>
+          <span class="toggle-pill"
+                x-ng-class="{'active' : !guestVm.isMineGuest , 'right-elem-toggle-inactive' : guestVm.isMineGuest}">
+            <a x-ng-href="" x-ng-click="guestVm.isMineGuest = false; guestVm.tableParams.reload();
+                                        mainVm.sidebar.hide()">
+              {{"HEADER_GUEST.SLIDER.OTHER_GUEST" | translate}}
+            </a>
+          </span>
         </div>
       </div>
     </div>
@@ -213,50 +200,56 @@
         </div>
       </div>
       <div id="toolbar-actions" class="hidden-xs">
-        <span>
-            <a class="plain-txt-btn partage-link" title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
-               x-ng-class="{'hide': guestVm.selectedGuests.length > 1}">
+        <span x-ng-hide="!guestVm.isMineGuest">
+           <a class="plain-txt-btn partage-link" title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
+               x-ng-class="{'hide': guestVm.selectedGuests.length > 1}"
+               x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)">
             <i class="zmdi zmdi-edit"></i>
             <span>{{'BOUTON_LABEL_TITLE.EDIT' | translate}}</span>
-        </a>
+          </a>
         </span>
-        <span>
-            <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+        <span x-ng-hide="!guestVm.isMineGuest">
+          <a class="plain-txt-btn partage-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                x-ng-click="guestVm.removeSelectedGuests(guestVm.selectedGuests)">
             <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
-        </a>
+          </a>
         </span>
         <span x-ng-class="{'hide': guestVm.selectedGuests.length > 1}">
-            <a class="plain-txt-btn"  title="{{'ACTION.INFORMATION' | translate}}"
+          <a class="plain-txt-btn"  title="{{'ACTION.INFORMATION' | translate}}"
                x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])">
             <i class="zmdi zmdi-info-outline"></i>
             <span>{{'ACTION.INFORMATION' | translate}}</span>
-        </a>
+          </a>
         </span>
-        <span class="dropdown link-dropdown" uib-dropdown>
-              <a class="plain-txt-btn partage-link"
+        <span x-ng-hide="linshareModeProduction" class="dropdown link-dropdown" uib-dropdown>
+          <a class="plain-txt-btn partage-link"
                  uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
-                <i class="zmdi zmdi-more-vert"></i>
-                <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu="">
-          <li>
-            <a href="" event-propagation-stop>
-              <i class="fa fa-pencil-square-o"></i> {{'ACTION.ADMIN_REQUEST' | translate}}</a>
-          </li>
-          <li>
-            <a href="" event-propagation-stop>
-              <i class="zmdi zmdi-accounts-list"></i> {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}</a>
-          </li>
-          <li>
-            <a href="">
-              <i class="groups-shared-folder">
-                  <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
-              </i>
-              {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
-            </a>
-          </li>
-        </ul>
+            <i class="zmdi zmdi-more-vert"></i>
+            <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu="">
+            <li>
+              <a href="" event-propagation-stop>
+                <i class="fa fa-pencil-square-o"></i> {{'ACTION.ADMIN_REQUEST' | translate}}
+              </a>
+            </li>
+            <li>
+              <a href="" event-propagation-stop>
+                <i class="zmdi zmdi-accounts-list"></i> {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}
+              </a>
+            </li>
+            <li x-ng-hide="!guestVm.isMineGuest">
+              <a href="">
+                <i class="groups-shared-folder">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </i>
+                {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
+              </a>
+            </li>
+          </ul>
+        </span>
+        <span x-ng-show="linshareModeProduction && !guestVm.isMineGuest && guestVm.selectedGuests.length > 1">
+          {{'NO_ACTION_AVAILABLE' | translate}}
         </span>
       </div>
     </div>
@@ -337,13 +330,15 @@
                         <i class="zmdi zmdi-info-outline"></i>
                         </a>
                       </li>
-                      <li x-ng-click="guestVm.removeGuest(guestData)" class="hidden-xs hidden-action-links">
+                      <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.removeGuest(guestData, true)"
+                          class="hidden-xs hidden-action-links">
                         <a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}" event-propagation-stop="true">
                         <i class="fa fa-trash-o"></i>
                         </a>
                       </li>
-                      <li class="hidden-xs hidden-action-links">
-                        <a title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}" event-propagation-stop>
+                      <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.showGuestDetails(guestData, 1)"
+                          event-propagation-stop class="hidden-xs hidden-action-links">
+                        <a title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}">
                         <i class="zmdi zmdi-edit"></i>
                         </a>
                       </li>
@@ -353,18 +348,18 @@
                            event-propagation-stop>
                         <i class="zmdi zmdi-more-vert"></i>
                         </a>
-                        <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided">
-                          <li>
+                        <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
+                          <li x-ng-hide="linshareModeProduction">
                             <a href="" ls-share-modal event-propagation-stop>
                               <i class="fa fa-pencil-square-o"></i>
                             {{'ACTION.ADMIN_REQUEST' | translate}}</a>
                           </li>
-                          <li>
+                          <li x-ng-hide="linshareModeProduction">
                             <a href="" ls-share-modal event-propagation-stop>
                             <i class="zmdi zmdi-accounts-list"></i>
                             {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}</a>
                           </li>
-                          <li>
+                          <li x-ng-hide="linshareModeProduction">
                             <a href="">
                               <i class="groups-shared-folder">
                                 <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
@@ -372,23 +367,25 @@
                               {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
                             </a>
                           </li>
-                          <li>
-                          <a event-propagation-stop x-ng-click="guestVm.showGuestDetails(guestData)">
-                          <i class="zmdi zmdi-info-outline"></i>
-                          {{'ACTION.INFORMATION' | translate}}
-                          </a>
+                          <li x-ng-click="guestVm.showGuestDetails(guestData)">
+                            <a href="" >
+                              <i class="zmdi zmdi-info-outline"></i>
+                              {{'ACTION.INFORMATION' | translate}}
+                            </a>
                           </li>
-                          <li>
-                          <a href="">
-                          <i class="zmdi zmdi-edit"></i>
-                          {{'BOUTON_LABEL_TITLE.EDIT' | translate}}
-                          </a>
+                          <li x-ng-hide="!guestVm.isMineGuest"
+                              x-ng-click="guestVm.showGuestDetails(guestData, 1)">
+                            <a href="" >
+                              <i class="zmdi zmdi-edit"></i>
+                              {{'BOUTON_LABEL_TITLE.EDIT' | translate}}
+                            </a>
                           </li>
-                          <li>
-                          <a href="" x-ng-click="guestVm.removeGuest(guestData)" event-propagation-stop>
-                          <i class="fa fa-trash-o"></i>
-                          {{'BOUTON_LABEL_TITLE.DELETE' | translate}}
-                          </a>
+                          <li x-ng-hide="!guestVm.isMineGuest"
+                              x-ng-click="guestVm.removeGuest(guestData, true)">
+                            <a href="">
+                              <i class="fa fa-trash-o"></i>
+                              {{'BOUTON_LABEL_TITLE.DELETE' | translate}}
+                            </a>
                           </li>
                         </ul>
                       </li>
@@ -398,10 +395,10 @@
             </td>
             <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()" data-title="'HEADER_GUEST.DOMAIN' | translate"
                 data-sortable="'domain'">
-              {{guestData.domain}}
+              <!--{{guestData.domain}}--> {{'NC' | translate}}
             </td>
             <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
-                data-title="'ADD_GUEST_SIDEBAR.EXP_DATE' | translate" data-sortable="'expirationDate'">
+                data-title="'SIDEBAR.LABEL.EXP_DATE' | translate" data-sortable="'expirationDate'">
               {{guestData.expirationDate | relativeTime}}
             </td>
           </tr>
@@ -426,7 +423,8 @@
 </div>
 <div class="hidden-xs">
   <span>
-    <a class="plain-txt-btn partage-link" title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
+    <a class="plain-txt-btn partage-link" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"
+       title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
        x-ng-class="{'hide': guestVm.selectedGuests.length > 1}">
       <i class="zmdi zmdi-edit"></i>
       <span>{{'BOUTON_LABEL_TITLE.EDIT' | translate}}</span>

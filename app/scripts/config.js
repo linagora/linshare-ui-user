@@ -23,7 +23,7 @@ angular.module('linshareUiUserApp')
     moreOptions: 'more-options',
     shareDetails: 'share-details',
     activeShareDetails: 'active-share-details',
-    newGuest: 'new-guest',
+    guestCreate: 'guest-create',
     guestDetails: 'guest-details',
     details: 'details',
     addMember: 'add-member',

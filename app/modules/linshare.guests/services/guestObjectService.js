@@ -10,7 +10,8 @@
     .factory('GuestObjectService', GuestObjectService);
 
   GuestObjectService.$inject = ['$q', 'authenticationRestService', 'autocompleteUserRestService',
-    'functionalityRestService', 'guestRestService'];
+    'functionalityRestService', 'guestRestService'
+  ];
 
   /**
    *  @namespace GuestObjectService
@@ -34,11 +35,14 @@
         activateRestricted: false,
         activateUserSpace: false,
         datepicker: {
+          isEditable: false,
           maxDate: null,
-          minDate: moment().startOf('day').valueOf(),
+          minDate: moment().endOf('day').valueOf(),
           options: null
-        }
+        },
+        isRestrictedContact: false
       },
+      loggedUser = authenticationRestService.getCurrentUser().$$state.value,
       self;
 
     return GuestObject;
@@ -54,157 +58,122 @@
     function GuestObject(jsonObject) {
       self = this;
       jsonObject = jsonObject ||  {};
-      checkFunctionalities().then(function() {
-        self.allowedToAddEditors = jsonObject.allowedToAddEditors || _.cloneDeep(allowedToAddEditors);
-        self.allowedToExpiration = jsonObject.allowedToExpiration || _.cloneDeep(allowedToExpiration);
-        self.allowedToProlongExpiration = jsonObject.allowedToProlongExpiration || _.cloneDeep(allowedToProlongExpiration);
-        self.allowedToRestrict = jsonObject.allowedToRestrict || _.cloneDeep(allowedToRestrict);
-        self.allowedToUpload = jsonObject.allowedToUpload || _.cloneDeep(allowedToUpload);
-        self.canUpload = jsonObject.canUpload || _.clone(allowedToUpload.value);
-        self.comment = jsonObject.comment || '';
+      checkFunctionalities(jsonObject).then(function() {
+        self.allowedToAddEditors = _.cloneDeep(allowedToAddEditors);
+        self.allowedToExpiration = _.cloneDeep(allowedToExpiration);
+        self.allowedToProlongExpiration = _.cloneDeep(allowedToProlongExpiration);
+        self.allowedToRestrict = _.cloneDeep(allowedToRestrict);
+        self.allowedToUpload = _.cloneDeep(allowedToUpload);
+        self.canUpload = setPropertyValue(jsonObject.canUpload, _.clone(allowedToUpload.value));
+        self.comment = setPropertyValue(jsonObject.comment, '');
+        self.create = create;
+        self.creationDate = setPropertyValue(jsonObject.creationDate, '');
+        self.domain = setPropertyValue(jsonObject.domain, '');
         //TODO: To be put once the back allow editors$
-        //self.editors = jsonObject.editors || _.clone(allowedToAddEditors.value);
-        self.editors = jsonObject.editors || false;
-        self.editorsContacts = jsonObject.editorsContacts || [];
-        self.expirationDate = jsonObject.expirationDate || _.clone(form.datepicker.maxDate);
-        self.firstName = jsonObject.firstName || '';
-        self.form = _.cloneDeep(form);
-        self.lastName = jsonObject.lastName || '';
-        self.mail = jsonObject.mail || '';
-        self.message = jsonObject.message || '';
+        //self.editors = setPropertyValue(jsonObject.editors, _.clone(allowedToAddEditors.value));
+        self.editorsContacts = setPropertyValue(jsonObject.editorsContacts, []);
+        self.expirationDate = setPropertyValue(jsonObject.expirationDate, allowedToExpiration.value);
+        self.firstName = setPropertyValue(jsonObject.firstName, '');
+        self.lastName = setPropertyValue(jsonObject.lastName, '');
+        self.mail = setPropertyValue(jsonObject.mail, '');
+        self.message = setPropertyValue(jsonObject.message, '');
+        self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
+        self.owner = setPropertyValue(jsonObject.owner, {});
         self.reset = reset;
-        self.restricted = jsonObject.restricted || _.clone(allowedToRestrict.value);
-        self.restrictedContacts = jsonObject.restrictedContacts || _.cloneDeep(contacts);
-        self.save = save;
+        self.restricted = setPropertyValue(jsonObject.restricted, _.clone(allowedToRestrict.value));
+        self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(contacts));
         self.toDTO = toDTO;
+        self.update = update;
+        self.uuid = setPropertyValue(jsonObject.uuid, undefined);
+        setFormValue().then(function(formData) {
+          self.form = formData;
+          self.form.isRestrictedContact = _.some(self.restrictedContacts, {
+            'mail': loggedUser.mail
+          });
+          if (!_.isUndefined(self.uuid)) {
+            self.form.activateMoreOptions = true;
+          }
+        });
       });
     }
 
     /**
      *  @name checkFunctionalities
      *  @desc Check the different rights relative to the guest
+     *  @param {Object} jsonObject - Json object for constructing a guest object
      *  @memberOf LinShare.guests.GuestObjectService
      */
-    function checkFunctionalities() {
+    function checkFunctionalities(jsonObject) {
       return $q.all([
         functionalityRestService.getFunctionalityParams('GUESTS__CAN_UPLOAD').then(function(data) {
-          allowedToUpload = data;
-          allowedToUpload.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
-          allowedToUpload.value = _.isUndefined(data.value) ? false : data.value;
-          form.activateUserSpace = allowedToUpload.value;
-          form.activateMoreOptions = form.activateUserSpace ? true : form.activateMoreOptions;
+          var clonedData = _.cloneDeep(data);
+          allowedToUpload = clonedData;
+          allowedToUpload.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
+          allowedToUpload.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION').then(function(data) {
-          allowedToExpiration = data;
-          allowedToExpiration.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
+          var clonedData = _.cloneDeep(data);
+          allowedToExpiration = clonedData;
+          allowedToExpiration.canOverride =
+            _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
           allowedToExpiration.value = moment()
-            .startOf('day')
-            .add(data.value, data.unit)
+            .endOf('day')
+            .add(clonedData.value, clonedData.unit)
+            .subtract(1, 'days')
             .valueOf();
-          form.datepicker.maxDate = allowedToExpiration.value;
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION_ALLOW_PROLONGATION')
         .then(function(data) {
-          allowedToProlongExpiration = data;
-          allowedToProlongExpiration.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
-          allowedToProlongExpiration.value = _.isUndefined(data.value) ? false : data.value;
+          var clonedData = _.cloneDeep(data);
+          allowedToProlongExpiration = clonedData;
+          allowedToProlongExpiration.canOverride =
+            _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
+          allowedToProlongExpiration.fetchedValue = data.value;
+          allowedToProlongExpiration.value = jsonObject.modificationDate || null;
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__RESTRICTED').then(function(data) {
-          allowedToRestrict = data;
-          allowedToRestrict.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
-          allowedToRestrict.value = _.isUndefined(data.value) ? false : data.value;
-          form.activateRestricted = allowedToRestrict.value;
-          form.activateMoreOptions = form.activateRestricted ? true : form.activateMoreOptions;
+          var clonedData = _.cloneDeep(data);
+          allowedToRestrict = clonedData;
+          allowedToRestrict.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
+          allowedToRestrict.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
           if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
-            authenticationRestService.getCurrentUser().then(function(user) {
-              contacts.push({
-                firstName: user.firstName,
-                lastName: user.lastName,
-                domain: user.domain,
-                mail: user.mail
-              });
-            });
+            var myself = {
+              firstName: loggedUser.firstName,
+              lastName: loggedUser.lastName,
+              domain: loggedUser.domain,
+              mail: loggedUser.mail
+            };
+            if (_.isUndefined(_.find(contacts, myself))) {
+              contacts.push(myself);
+            }
           }
         })
         //TODO: To be put once the back allow editors
         //functionalityRestService.getFunctionalityParams('GUESTS__CAN_ALLOW_EDITORS').then(function(data) {
-        //  allowedToAddEditors = data;
-        //  allowedToAddEditors.value = _.isUndefined(data.value) ? false : data.value;
-        //  allowedToAddEditors.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
-        //  form.activateEditors = allowedToRestrict.value;
+        //  var clonedData = _.cloneDeep(data);
+        //  allowedToAddEditors = clonedData;
+        //  allowedToAddEditors.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
+        //  allowedToAddEditors.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         //}),
         //TODO: To be put oncethe back allow email edition
         //functionalityRestService.getFunctionalityParams('GUESTS__CAN_EDIT_EMAIL').then(function(data) {
-        //  allowedToEmail = data;
-        //  allowedToEmail.value = _.isUndefined(data.value) ? false : data.value;
-        //  allowedToEmail.canOverride = _.isUndefined(data.canOverride) ? false : data.canOverride;
+        //  var clonedData = _.cloneDeep(data);
+        //  allowedToEmail = clonedData;
+        //  allowedToEmail.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
+        //  allowedToEmail.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         //})
       ]);
     }
 
     /**
-     *  @name toDTO
-     *  @desc Build a guest DTO object from the curent guest object
-     *  @returns {Object} Return a guest DTO object
-     *  @memberOf LinShare.guests.GuestObjectService
-     */
-    function toDTO() {
-      var guestDTO = {};
-      guestDTO.canUpload = setFunctionalityValue(self.canUpload, allowedToUpload);
-      guestDTO.comment = _.isUndefined(self.comment) ? '' : self.comment;
-      guestDTO.expirationDate = setFunctionalityValue(self.expirationDate, allowedToExpiration);
-      guestDTO.firstName = _.isUndefined(self.firstName) ? '' : self.firstName;
-      guestDTO.lastName = _.isUndefined(self.lastName) ? '' : self.lastName;
-      guestDTO.mail = _.isUndefined(self.mail) ? '' : self.mail;
-      guestDTO.restricted = setFunctionalityValue(self.restricted, allowedToRestrict);
-      if (guestDTO.canUpload) {
-        if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
-          guestDTO.restrictedContacts = _.isUndefined(self.restrictedContacts) ? contacts : self.restrictedContacts;
-        } else {
-          guestDTO.restrictedContacts = null;
-        }
-      } else {
-        guestDTO.restricted = false;
-        guestDTO.restrictedContacts = null;
-      }
-      //TODO: To be put once done in DTO
-      //guestDTO.message = _.isUndefined(self.message) ? '' : _.clone(self.message);
-      //guestDTO.editors = setFunctionalityValue(self.editors, allowedToRestrict);
-      //if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
-      //  guestDTO.editorsContacts = _.isUndefined(self.editorsContacts) ? contacts : self.editorsContacts;
-      //} else {
-      //  guestDTO.editorsContacts = null;
-      //}
-      return guestDTO;
-    }
-
-    /**
-     *  @name reset
-     *  @desc Reset the instatiated object to the default values
-     *  @memberOf LinShare.guests.GuestObjectService
-     */
-    function reset() {
-      self.canUpload = _.clone(allowedToUpload.value);
-      self.comment = '';
-      self.expirationDate = _.clone(form.datepicker.maxDate);
-      self.firstName = '';
-      self.form = _.cloneDeep(form);
-      self.lastName = '';
-      self.mail = '';
-      self.restricted = _.clone(allowedToRestrict.value);
-      self.restrictedContacts = _.cloneDeep(contacts);
-      //self.editors = false;
-      //self.editorsContacts = [];
-      //self.message = '';
-    }
-
-    /**
-     *  @name save
-     *  @desc save the instatiated object by the API
+     *  @name create
+     *  @desc Create the instatiated object by the API
      *  @returns {Object} result promise
      *  @memberOf LinShare.guests.GuestObjectService
      */
-    function save() {
+    function create() {
+      /* jshint validthis:true */
+      self = this;
       var
         deferred = $q.defer(),
         guestDTO = self.toDTO();
@@ -221,6 +190,53 @@
       }).catch(function(error) {
         deferred.reject(error);
       });
+      return deferred.promise;
+    }
+
+    /**
+     *  @name reset
+     *  @desc Reset the instatiated object to the default values
+     *  @memberOf LinShare.guests.GuestObjectService
+     */
+    function reset() {
+      /* jshint validthis:true */
+      self = this;
+      self.canUpload = _.clone(allowedToUpload.value);
+      self.comment = '';
+      self.expirationDate = _.clone(form.datepicker.maxDate);
+      self.firstName = '';
+      self.form = _.cloneDeep(form);
+      self.lastName = '';
+      self.mail = '';
+      self.restricted = _.clone(allowedToRestrict.value);
+      self.restrictedContacts = _.cloneDeep(contacts);
+      //self.editors = false;
+      //self.editorsContacts = [];
+      //self.message = '';
+    }
+
+    /**
+     *  @name setFormValue
+     *  @desc Set form element value depending on ithe object property
+     *  @returns {Promise}
+     *  @memberOf LinShare.guests.GuestObjectService
+     */
+    function setFormValue() {
+      var deferred = $q.defer();
+
+      form.activateDescription = !(_.isUndefined(self.comment) || self.comment === '' || self.comment === null);
+      //  form.activateEditors = _.clone(allowedToRestrict.value);
+      form.activateRestricted = setPropertyValue(self.restricted, allowedToRestrict.value);
+      form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
+      form.datepicker.maxDate = _.clone(allowedToExpiration.value);
+      form.activateMoreOptions = (!form.activateUserSpace);
+      if ((_.isUndefined(self.uuid) && allowedToExpiration.canOverride) ||
+        (!_.isUndefined(self.uuid) &&
+          (allowedToProlongExpiration.canOverride || allowedToProlongExpiration.fetchedValue))) {
+        form.datepicker.isEditable = true;
+      }
+
+      deferred.resolve(_.cloneDeep(form));
       return deferred.promise;
     }
 
@@ -243,6 +259,86 @@
       } else {
         return null;
       }
+    }
+
+
+    /**
+     *  @name setPropertyValue
+     *  @desc Set element value depending on object retrieved property
+     *  @param {Object} value - Value wanted to be setted
+     *  @param {Object} defaultValue - The defaultValue if no object is retrieved
+     *  @returns {Object} the final value to set
+     *  @memberOf LinShare.guests.GuestObjectService
+     */
+    function setPropertyValue(value, defaultValue) {
+      return _.cloneDeep(_.isUndefined(value) ? defaultValue : value);
+    }
+
+    /**
+     *  @name toDTO
+     *  @desc Build a guest DTO object from the curent guest object
+     *  @returns {Object} Return a guest DTO object
+     *  @memberOf LinShare.guests.GuestObjectService
+     */
+    function toDTO() {
+      /* jshint validthis:true */
+      self = this;
+      var guestDTO = {};
+      guestDTO.canUpload = setFunctionalityValue(self.canUpload, allowedToUpload);
+      guestDTO.comment = _.isUndefined(self.comment) ? '' : self.comment;
+      moment(self.expirationDate).endOf('day').valueOf();
+      if (_.isUndefined(self.uuid)) {
+        guestDTO.expirationDate = setFunctionalityValue(self.expirationDate, allowedToExpiration);
+      } else {
+        guestDTO.expirationDate = setFunctionalityValue(self.expirationDate, allowedToProlongExpiration);
+      }
+      guestDTO.firstName = _.isUndefined(self.firstName) ? '' : self.firstName;
+      guestDTO.lastName = _.isUndefined(self.lastName) ? '' : self.lastName;
+      guestDTO.mail = _.isUndefined(self.mail) ? '' : self.mail;
+      guestDTO.restricted = setFunctionalityValue(self.restricted, allowedToRestrict);
+      if (guestDTO.canUpload) {
+        if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
+          guestDTO.restrictedContacts =
+            _.uniq(_.isUndefined(self.restrictedContacts) ? contacts : self.restrictedContacts);
+        } else {
+          guestDTO.restrictedContacts = null;
+        }
+      } else {
+        guestDTO.restricted = false;
+        guestDTO.restrictedContacts = null;
+      }
+      if (!_.isUndefined(self.uuid)) {
+        guestDTO.uuid = self.uuid;
+      }
+      //TODO: To be put once done in DTO
+      //guestDTO.message = _.isUndefined(self.message) ? '' : _.clone(self.message);
+      //guestDTO.editors = setFunctionalityValue(self.editors, allowedToRestrict);
+      //if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
+      //  guestDTO.editorsContacts = _.isUndefined(self.editorsContacts) ? contacts : self.editorsContacts;
+      //} else {
+      //  guestDTO.editorsContacts = null;
+      //}
+      return guestDTO;
+    }
+
+    /**
+     *  @name update
+     *  @desc Update the instatiated object by the API
+     *  @returns {Object} result promise
+     *  @memberOf LinShare.guests.GuestObjectService
+     */
+    function update() {
+      /* jshint validthis:true */
+      self = this;
+      var
+        deferred = $q.defer(),
+        guestDTO = self.toDTO();
+      guestRestService.update(guestDTO.uuid, guestDTO).then(function(data) {
+        deferred.resolve(data);
+      }).catch(function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
     }
   }
 })();
