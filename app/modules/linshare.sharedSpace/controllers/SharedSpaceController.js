@@ -2,12 +2,13 @@
 angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
                                                 workgroups, $translate, $state, documentUtilsService,
-                                                workgroupRestService, workgroupFoldersRestService, growlService,
-                                                lsAppConfig) {
+                                                workgroupRestService, workgroupFoldersRestService,
+                                                workgroupEntriesRestService, growlService, lsAppConfig) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
     var thisctrl = this;
+    thisctrl.downloadFile = downloadFile;
     thisctrl.lsAppConfig = lsAppConfig;
     thisctrl.currentSelectedDocument = {};
     thisctrl.itemsList = workgroups;
@@ -270,4 +271,15 @@ angular.module('linshare.sharedSpace')
       });
     }
 
+    /**
+     *  @name downloadFile
+     *  @desc Download a file of a document for the user
+     *  @param {Object) documentFile - A document object
+     *  @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function downloadFile(documentFile) {
+      workgroupEntriesRestService.download(thisctrl.uuid, documentFile.uuid).then(function(fileStream) {
+        documentUtilsService.downloadFileFromResponse(fileStream, documentFile.name, documentFile.type);
+      });
+    }
   });

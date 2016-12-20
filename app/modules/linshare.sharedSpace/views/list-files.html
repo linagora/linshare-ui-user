@@ -254,7 +254,8 @@
           <div id="toolbar-actions" class="hidden-xs">
               <span x-ng-class="{'hide': sharedSpaceListVm.selectedDocuments.length > 1}">
                   <a
-                    x-ng-href="{{linshareBaseUrl}}/work_groups/{{sharedSpaceListVm.uuid}}/entries/{{sharedSpaceListVm.selectedDocuments[0].uuid}}/download"
+                    x-ng-href=""
+                    x-ng-click="sharedSpaceListVm.downloadFile(sharedSpaceListVm.selectedDocuments[0])"
                     event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                     <i class="zmdi zmdi-download"></i>
                     <span>{{'ACTION.DOWNLOAD' | translate}}</span>
@@ -473,7 +474,9 @@
                           </li>
                           <li class="hidden-xs">
                             <a
-                              x-ng-href="{{linshareBaseUrl}}/work_groups/{{sharedSpaceListVm.uuid}}/entries/{{documentFile.uuid}}/download"
+                              x-ng-href=""
+                              x-ng-click="sharedSpaceListVm.downloadFile(documentFile)"
+
                               event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
                               <i class="zmdi zmdi-download"></i>
                             </a>
@@ -513,7 +516,8 @@
                               <li class="divider"></li>
                               <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
                                 <a
-                                  x-ng-href="{{linshareBaseUrl}}/work_groups/{{sharedSpaceListVm.uuid}}/entries/{{documentFile.uuid}}/download"
+                                  x-ng-href=""
+                                  x-ng-click="sharedSpaceListVm.downloadFile(documentFile)"
                                   event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
                                   {{'ACTION.DOWNLOAD' | translate}}

@@ -54,7 +54,9 @@
      */
     function download(uuid) {
       $log.debug('LinshareReceivedShareRestService : download', uuid);
-      return handler(Restangular.one(restUrl, uuid).one('download').get());
+      return handler(Restangular.all(restUrl).one(uuid, 'download').withHttpConfig({
+        responseType: 'arraybuffer'
+      }).get());
     }
 
     /**

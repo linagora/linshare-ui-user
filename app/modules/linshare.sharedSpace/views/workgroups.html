@@ -252,7 +252,7 @@
                   </li>
                   <li class="divider" x-ng-show="vm.selectedDocuments.length == 1"></li>
                   <li class="hidden-xs" x-ng-show="vm.selectedDocuments.length == 1">
-                    <a x-ng-href="{{linshareBaseUrl}}/work_groups/{{vm.uuid}}/entries/{{documentFile.uuid}}/download">
+                    <a x-ng-href="" x-ng-click="vm.downloadFile(documentFile)">
                       <i class="zmdi zmdi-download"></i>
                         {{'ACTION.DOWNLOAD' | translate}}
                      </a>
@@ -446,7 +446,7 @@
                               </li>
                               <li class="divider hidden-xs"></li>
                               <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
-                                <a x-ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+                                <a x-ng-href="" x-ng-click="vm.downloadFile(documentFile)"
                                    event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
                                   {{'ACTION.DOWNLOAD' | translate}}

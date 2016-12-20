@@ -32,7 +32,7 @@
     $scope.deleteDocuments = deleteDocuments;
     $scope.documentsList = documentsList;
     $scope.documentsListCopy = documentsList;
-    $scope.downloadCurrentFile = downloadCurrentFile;
+    $scope.downloadFile = downloadFile;
     $scope.downloadSelectedFiles = downloadSelectedFiles;
     $scope.fab = {
       isOpen: false,
@@ -253,16 +253,21 @@
       documentUtilsService.deleteDocuments(items, deleteCallback);
     }
 
-    function downloadCurrentFile(currentFile) {
-      LinshareDocumentRestService.download(currentFile.uuid)
-        .then(function(fileStream) {
-          documentUtilsService.downloadFileFromResponse(fileStream, currentFile.name, currentFile.type);
+    /**
+     *  @name downloadFile
+     *  @desc Download a file of a document for the user
+     *  @param {Object) documentFile - A document object
+     *  @memberOf LinShare.document.documentController
+     */
+    function downloadFile(documentFile) {
+      LinshareDocumentRestService.download(documentFile.uuid).then(function(fileStream) {
+          documentUtilsService.downloadFileFromResponse(fileStream, documentFile.name, documentFile.type);
         });
     }
 
     function downloadSelectedFiles(selectedDocuments) {
       _.forEach(selectedDocuments, function(document) {
-        $scope.downloadCurrentFile(document);
+        $scope.downloadFile(document);
       });
     }
 

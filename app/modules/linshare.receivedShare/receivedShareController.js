@@ -106,15 +106,21 @@ angular.module('linshare.receivedShare')
 
         });
 
-      $scope.downloadCurrentFile = function(currentFile) {
-        receivedShareRestService.download(currentFile.uuid).then(function(downloadedFile) {
-          documentUtilsService.downloadFileFromResponse(downloadedFile, currentFile.name, currentFile.type);
+    /**
+     *  @name downloadFile
+     *  @desc Download a file of a document for the user
+     *  @param {Object) documentFile - A document object
+     *  @memberOf LinShare.receivedShare.receivedShareController
+     */
+      $scope.downloadFile = function(documentFile) {
+        receivedShareRestService.download(documentFile.uuid).then(function(downloadedFile) {
+          documentUtilsService.downloadFileFromResponse(downloadedFile, documentFile.name, documentFile.type);
         });
       };
 
       $scope.download = function() {
         angular.forEach($scope.showActions, function(file) {
-          $scope.downloadCurrentFile(file);
+          $scope.downloadFile(file);
         });
       };
 

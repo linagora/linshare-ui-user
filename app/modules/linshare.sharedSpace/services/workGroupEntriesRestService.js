@@ -58,7 +58,10 @@
      */
     function download(workgroupUuid, entryUuid) {
       $log.debug('workgroupEntriesRestService : download', workgroupUuid, entryUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam[0], entryUuid).customGET('download'));
+      return handler(Restangular.all(restUrl).one(workgroupUuid, restParam[0]).one(entryUuid, 'download')
+        .withHttpConfig({
+          responseType: 'arraybuffer'
+        }).get());
     }
 
     /**

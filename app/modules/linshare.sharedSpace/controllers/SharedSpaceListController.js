@@ -25,7 +25,7 @@
     sharedSpaceListVm.currentPage = 'group_list_files';
     sharedSpaceListVm.currentSelectedDocument = {};
     sharedSpaceListVm.deleteDocuments = deleteDocuments;
-    sharedSpaceListVm.downloadDocument = downloadDocument;
+    sharedSpaceListVm.downloadFile = downloadFile;
     sharedSpaceListVm.flagsOnSelectedPages = {};
     sharedSpaceListVm.flowUploadService = flowUploadService;
     sharedSpaceListVm.folderInfos = $stateParams;
@@ -177,9 +177,15 @@
       documentUtilsService.deleteDocuments(items, deleteCallback);
     }
 
-    function downloadDocument(document) {
-      return workgroupEntriesRestService.download(sharedSpaceListVm.uuid, document.uuid).then(function(fileStream) {
-        documentUtilsService.downloadFileFromResponse(fileStream, document.name, document.type);
+    /**
+     *  @name downloadFile
+     *  @desc Download a file of a document for the user
+     *  @param {Object) documentFile - A document object
+     *  @memberOf LinShare.sharedSpace.SharedSpaceListController
+     */
+    function downloadFile(documentFile) {
+      workgroupEntriesRestService.download(sharedSpaceListVm.uuid, documentFile.uuid).then(function(fileStream) {
+        documentUtilsService.downloadFileFromResponse(fileStream, documentFile.name, documentFile.type);
       });
     }
 

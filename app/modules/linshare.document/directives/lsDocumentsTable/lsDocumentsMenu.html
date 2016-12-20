@@ -17,7 +17,8 @@
       </a>
     </li>
     <li class="hidden-xs hidden-action-links">
-      <a x-ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+      <a x-ng-href=""
+         x-ng-click="downloadFile(documentFile)"
          title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
         <i class="zmdi zmdi-download"></i>
       </a>
@@ -41,7 +42,8 @@
             {{'ACTION.DELETE' | translate}}</a>
         </li>
         <li>
-          <a x-ng-href="{{linshareBaseUrl}}/documents/{{documentFile.uuid}}/download"
+          <a x-ng-href=""
+             x-ng-click="downloadFile(documentFile)"
              event-propagation-stop>
             <i class="zmdi zmdi-download"></i>
             {{'ACTION.DOWNLOAD' | translate}}
