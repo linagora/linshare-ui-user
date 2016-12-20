@@ -110,7 +110,7 @@
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
     function onSelect() {
-      if(autocompleteUsersVm.selectedUser) {
+      if (autocompleteUsersVm.selectedUser) {
         autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser, autocompleteUsersVm.selectedUsersList);
       } else {
         growlService.notifyTopRight('GROWL_ALERT.WARNING.INVALID_EMAIL', 'danger');

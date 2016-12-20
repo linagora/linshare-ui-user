@@ -20,7 +20,7 @@
   /**TODO - KLE: This directive should be surround by the following tag, have to test for every case we use it
    * <x-ng-form name="editors" role="form" class="clearfix">
    *   <div class="form-group fg-line">
-  */
+   */
   function lsAutocompleteUser(componentsConfig) {
     var directive = {
       restrict: 'A',
@@ -59,16 +59,7 @@
       elm.bind('keypress', function(event) {
         scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
         if (event.keyCode === 13) {
-          if (scope.noResult === true) {
-            if (typeof scope.userEmail === 'string') {
-             scope.autocompleteUsersVm.selectedUser = {
-                mail: scope.userEmail,
-                firstName: null,
-                lastName: null,
-                domain: null,
-                type: 'user'
-              };
-            }
+          if (!scope.noResult || scope.autocompleteUsersVm.withEmail) {
             scope.autocompleteUsersVm.onSelect();
           }
         }
