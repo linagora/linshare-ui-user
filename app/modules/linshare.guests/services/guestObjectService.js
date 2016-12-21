@@ -40,6 +40,10 @@
           minDate: moment().endOf('day').valueOf(),
           options: null
         },
+        display: {
+          firstName: '',
+          lastName: ''
+        },
         isRestrictedContact: false
       },
       loggedUser = authenticationRestService.getCurrentUser().$$state.value,
@@ -67,7 +71,7 @@
         self.canUpload = setPropertyValue(jsonObject.canUpload, _.clone(allowedToUpload.value));
         self.comment = setPropertyValue(jsonObject.comment, '');
         self.create = create;
-        self.creationDate = setPropertyValue(jsonObject.creationDate, '');
+        self.creationDate = setPropertyValue(jsonObject.creationDate, '');
         self.domain = setPropertyValue(jsonObject.domain, '');
         //TODO: To be put once the back allow editors$
         //self.editors = setPropertyValue(jsonObject.editors, _.clone(allowedToAddEditors.value));
@@ -92,6 +96,8 @@
           });
           if (!_.isUndefined(self.uuid)) {
             self.form.activateMoreOptions = true;
+            self.form.display.firstName = _.clone(self.firstName);
+            self.form.display.lastName = _.clone(self.lastName);
           }
         });
       });
@@ -235,7 +241,6 @@
           (allowedToProlongExpiration.canOverride || allowedToProlongExpiration.fetchedValue))) {
         form.datepicker.isEditable = true;
       }
-
       deferred.resolve(_.cloneDeep(form));
       return deferred.promise;
     }
