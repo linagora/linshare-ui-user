@@ -188,6 +188,8 @@ body:not(.sw-toggled) #sidebar {
   background-color: rgba(0, 145, 211, 0.33);
   position: absolute;
   z-index: 3;
+  left: 0;
+  top: 0;
 }
 
 .btn-add-files-ctn {

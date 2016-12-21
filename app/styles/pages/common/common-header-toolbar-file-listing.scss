@@ -52,19 +52,6 @@
       font-size: 1.1em;
       letter-spacing: 0.005em;
       flex: 1 1 auto;
-      a{
-        float: left;
-        border: none;
-        color: #4a4a4a;
-        padding: 0 0 0 4px;
-        &:last-of-type
-        {
-          float: left;
-          border: none;
-          color: #05b1ff !important;
-          padding: 0 0 0 4px;
-        }
-      }
       .sub-category-chevron {
         display: inline-block;
         margin-left: 7px;
@@ -81,6 +68,22 @@
           margin-right: 0.6em;
         }
       }
+    }
+  }
+}
+
+.files #breadcrumb-wrap .breadcrumbs-ctn{
+  a{
+    float: left;
+    border: none;
+    color: #4a4a4a;
+    padding: 0 0 0 4px;
+    &:last-of-type
+    {
+      float: left;
+      border: none;
+      color: #05b1ff !important;
+      padding: 0 0 0 4px;
     }
   }
 }

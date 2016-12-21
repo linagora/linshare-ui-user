@@ -12,17 +12,23 @@
           </div>
 
           <div class="breadcrumbs-ctn hidden-xs">
-            <a href="#" class="breadcrumb"><i class="zmdi zmdi-account-box"></i>
+            <a class="click-disabled"><i class="zmdi zmdi-account-box"></i>
               {{"BREADCRUMB_TITLE_GUEST" | translate}}
             </a>
-            <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+            <span class="sub-category-chevron pipe-separator">|</span>
+            <a x-ng-if="guestVm.isMineGuest" class="click-disabled">
+              {{'HEADER_GUEST.SLIDER.MY_GUEST' | translate}}
+            </a>
+            <a x-ng-if="!guestVm.isMineGuest" class="click-disabled">
+              {{'HEADER_GUEST.SLIDER.OTHER_GUEST' | translate}}
+            </a>
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items">
               <!-- If the button id clicked for the second time (disabled)
                 then the selected items should be deselected cf resetSelectedGuests() -->
               <span x-ng-click="showCheckboxes = !showCheckboxes " class="visible-xs toolbar-mobile-item col-xs-3">
-                <a  class="select-all-items plain-txt-btn">
+                <a class="select-all-items plain-txt-btn">
                   <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes}"></i>
                 </a>
               </span>
@@ -42,18 +48,22 @@
                   <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop">
                     <div class="list-menu">
                       <p>{{"FILTER_COMPONENT.FILTER_BY" | translate}}</p>
-                      <ul class="dropdown-menu dm-icon filter-menu">
+                      <ul class="dropdown-menu dropdown-menu-right dm-icon filter-menu">
                         <li>
                           <a href=""
-                             x-ng-class="{'active-check':!guestVm.isAllGuestSelected}"
-                             x-ng-click="guestVm.isAllGuestSelected = false">
-                            <span class="checkbox-ctn "></span> {{'MY_GUESTS' | translate}}
+                             x-ng-class="{'active-check':guestVm.isMineGuest}"
+                             x-ng-click="guestVm.isMineGuest = true;
+                                         guestVm.tableParams.reload();
+                                         mainVm.sidebar.hide()">
+                            {{'HEADER_GUEST.SLIDER.MY_GUEST' | translate}}
                           </a>
                           </li>
                           <li>
-                            <a href="" x-ng-class="{'active-check':guestVm.isAllGuestSelected}"
-                               x-ng-click="guestVm.isAllGuestSelected = true">
-                              <span class="checkbox-ctn"></span> {{'ALL_GUESTS' | translate}}
+                            <a href="" x-ng-class="{'active-check':!guestVm.isMineGuest}"
+                               x-ng-click="guestVm.isMineGuest = false;
+                                           guestVm.tableParams.reload();
+                                           mainVm.sidebar.hide()">
+                              {{'HEADER_GUEST.SLIDER.OTHER_GUEST' | translate}}
                             </a>
                           </li>
                           </ul>
@@ -62,100 +72,135 @@
                  </span>
               </div>
 
-          <!-- Please enable the filtering feature according to the appropriate labels-->
-          <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
-            <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
-              <div class="actions">
-                <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle="" x-ng-disabled="disabled"
-                   aria-haspopup="true" aria-expanded="false">
-                  <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
-                </a>
-                <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
-                  <li role="menuitem">
-                    <a href="" class="center">
+              <!-- Please enable the filtering feature according to the appropriate labels-->
+              <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
+                <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
+                  <div class="actions">
+                    <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
+                       x-ng-disabled="disabled"
+                       aria-haspopup="true" aria-expanded="false">
+                      <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                      <li role="menuitem">
+                        <a href="" class="center">
                           {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
                         </a>
-                  </li>
-                  <li class="divided"></li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('lastName', $event)">
-                      <span class="caret-area">
-                          <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'SIDEBAR.LABEL.LASTNAME' | translate}}
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('firstName', $event)">
-                      <span class="caret-area">
-                          <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'SIDEBAR.LABEL.FIRSTNAME' | translate}}
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('mail', $event)">
-                      <span class="caret-area">
-                          <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'ORDER_BY.EMAIL' | translate}}
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('domain', $event)">
-                      <span class="caret-area">
-                          <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'ORDER_BY.DOMAIN_NAME' | translate}}
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding selected-sorting"
-                       x-ng-click="guestVm.tableSort('expirationDate', $event)">
-                      <span class="caret-area">
-                          <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'ORDER_BY.EXPIRATION_DATE' | translate}}
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('modificationDate', $event)">
-                      <span class="caret-area">
-                          <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('creationDate', $event)">
-                      <span class="caret-area">
-                          <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                        </span> {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
-                    </a>
-                  </li>
-                </ul>
+                      </li>
+                      <li class="divided"></li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('lastName', $event)">
+                          <span class="caret-area">
+                              <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'SIDEBAR.LABEL.LASTNAME' | translate}}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('firstName', $event)">
+                          <span class="caret-area">
+                              <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'SIDEBAR.LABEL.FIRSTNAME' | translate}}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('mail', $event)">
+                          <span class="caret-area">
+                              <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'ORDER_BY.EMAIL' | translate}}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('domain', $event)">
+                          <span class="caret-area">
+                              <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'ORDER_BY.DOMAIN_NAME' | translate}}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding selected-sorting"
+                           x-ng-click="guestVm.tableSort('expirationDate', $event)">
+                          <span class="caret-area">
+                              <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'ORDER_BY.EXPIRATION_DATE' | translate}}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('modificationDate', $event)">
+                          <span class="caret-area">
+                              <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('creationDate', $event)">
+                          <span class="caret-area">
+                              <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-group search-bar hidden-xs">
+              <div id="search-field-ctn">
+                <div class="search-style">
+                  <div class="fg-line">
+                    <input type="text" class="form-control" autocomplete="off" x-ng-model="filterValue"
+                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                           x-ng-change="guestVm.tableApplyFilter(filterValue, ['firstName', 'lastName', 'mail'],
+                    '||')">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pull-right hidden-xs toggle-view-dropdown">
+              <span class="filter-views ng-binding pull-left">{{"ACTION.DISPLAY" | translate}}:</span>
+              <div class="dropdown-filters pull-left">
+                <span uib-dropdown class="dropdown link-dropdown" auto-close="outsideClick">
+                  <a class="plain-txt-btn partage-link" href="javascript:void(0)"
+                     uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+                    <span x-ng-bind="guestVm.currentView"></span>
+                    <div><b></b></div>
+                  </a>
+                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop toggle-views">
+                    <div class="list-menu">
+                      <p>{{"FILTER_COMPONENT.FILTER_BY" | translate}}</p>
+                      <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
+                        <li>
+                          <!-- TODO : KLE Translation needed-->
+                          <a x-ng-class="{'active-check': guestVm.isMineGuest}"
+                             x-ng-click="guestVm.currentView = 'MES INVITES';
+                                         guestVm.isMineGuest = true;
+                                         guestVm.tableParams.reload();
+                                         mainVm.sidebar.hide()">
+                            {{"HEADER_GUEST.SLIDER.MY_GUEST" | translate}}
+                          </a>
+                        </li>
+                        <li>
+                          <a x-ng-class="{'active-check':!guestVm.isMineGuest}"
+                             x-ng-click="guestVm.currentView = 'AUTRES INVITES';
+                                         guestVm.isMineGuest = false;
+                                         guestVm.tableParams.reload();
+                                         mainVm.sidebar.hide()">
+                            {{"HEADER_GUEST.SLIDER.OTHER_GUEST" | translate}}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                 </span>
               </div>
             </div>
           </div>
-        </div>
-        <div class="pull-right m-r-20 m-t-5">
-          <span class="toggle-pill"
-                x-ng-class="{'active' : guestVm.isMineGuest , 'left-elem-toggle-inactive' : !guestVm.isMineGuest}">
-            <a x-ng-href="" x-ng-click="guestVm.isMineGuest = true; guestVm.tableParams.reload();
-                                        mainVm.sidebar.hide()">
-              {{"HEADER_GUEST.SLIDER.MY_GUEST" | translate}}
-            </a>
-          </span>
-          <span class="toggle-pill"
-                x-ng-class="{'active' : !guestVm.isMineGuest , 'right-elem-toggle-inactive' : guestVm.isMineGuest}">
-            <a x-ng-href="" x-ng-click="guestVm.isMineGuest = false; guestVm.tableParams.reload();
-                                        mainVm.sidebar.hide()">
-              {{"HEADER_GUEST.SLIDER.OTHER_GUEST" | translate}}
-            </a>
-          </span>
-        </div>
-      </div>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -279,7 +324,8 @@
               data-right-sidebar-open="mainVm.sidebar.isVisible()"
               x-ng-class="{'highlightListElem': guestData.isSelected,
                            'current-vis': guestVm.currentSelectedGuest.current.uuid === guestData.uuid}"
-              class="p-b-5 double-row" context-menu="moreOptionsContexualMenu">
+              class="p-b-5 double-row" context-menu="moreOptionsContexualMenu"
+              check-table-height>
             <td data-header="'checkboxheader.html'"
                 class="center set-content-left thumb-type-item thumb-groups-preview-ls" header-class="'col-2 checkbox-col'">
               <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile
@@ -408,17 +454,12 @@
   </div>
 </div>
 </div>
-<div id="fabMyFiles">
-  <!-- TODO: set up : on press lauch the create guest sidebar-->
-  <md-fab-toolbar md-open="guestVm.fab.isOpen" count="guestVm.fab.count" x-ng-click="guestVm.singleEventFab($event)"
-                  md-direction="{{guestVm.fab.selectedDirection}}" class="visible-xs">
-    <md-fab-trigger class="align-with-text">
-      <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;" id="primary-fab-action">
-        <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
-      </md-button>
-    </md-fab-trigger>
-    <md-toolbar></md-toolbar>
-  </md-fab-toolbar>
+  <div id="fabMyFiles" class="solo-fab">
+    <md-button class="md-fab visible-xs" aria-label="{{'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT' | translate}}"
+               x-ng-click="guestVm.loadSidebarContent(guestVm.guestCreate)">
+      <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
+    </md-button>
+  </div>
 </div>
 </div>
 <div class="hidden-xs">
@@ -471,7 +512,7 @@
 </div>
 <section class="row multi-select-mobile visible-xs"
          x-ng-class="{'showMobileMultiMenu': guestVm.selectedGuests.length > 0}"
-         x-ng-show="guestVm.currentPage == 'my_guests'">
+         x-ng-show="guestVm.currentPage == 'guests-list'">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">{{guestVm.selectedGuests.length}}</span>
     <span class="file-multi-select-label">{{'BOUTON_LABEL_TITLE.GUEST' | translate}}</span>
@@ -486,10 +527,10 @@
          x-ng-if="guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]">
       </i>
     </div>
-    <i class="zmdi zmdi-edit col-xs-2"
+    <i class="zmdi zmdi-edit col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
-    <i class="zmdi zmdi-delete col-xs-2"></i>
-    <i class="zmdi zmdi-info-outline col-xs-2"
+    <i class="zmdi zmdi-delete col-xs-2" x-ng-click="guestVm.removeSelectedGuests(guestVm.selectedGuests)"></i>
+    <i class="zmdi zmdi-info-outline col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
     <span class="dropdown col-xs-2 dropdown-standard" uib-dropdown="" x-ng-show="!linshareModeProduction">
     <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown}"

@@ -15,10 +15,10 @@
         </i>
       </span>
   </div>
-  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail" id="content-ctn-sidebar"
+  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail"
        x-ng-class="{'two-tabs': mainVm.sidebar.getData().currentPage === 'guests-list'}">
     <md-content>
-      <md-tabs md-dynamic-height="" md-border-bottom="" md-selected="mainVm.sidebar.getData().selectedTab">
+      <md-tabs md-border-bottom="" md-selected="mainVm.sidebar.getData().selectedTab">
         <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage === 'guests-list'"
                 label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 no-padding">
           <md-content>
@@ -27,7 +27,7 @@
         </md-tab>
         <md-tab id="tab2" label="{{'GUEST_DETAILS.EDIT_GUEST' | translate}}"
                 class="col-xs-4 no-padding disabled">
-          <md-content class="md-padding">
+          <md-content  class="bottom-action-form">
             <div x-ng-include="'directives/sidebar-content/sidebar-content-guest-details-update.html'"></div>
           </md-content>
         </md-tab>

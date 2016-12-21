@@ -5,6 +5,10 @@
  COMMON HELPER CLASSES
 ***********************/
 
+.pipe-separator{
+  font-size: 0.8em !important;
+}
+
 .owner-info {
   color: #1590c7;
 }
@@ -88,6 +92,10 @@
 
 .clic-enabled {
   cursor: pointer;
+}
+.click-disabled {
+  cursor: default !important;
+  pointer-events: none;
 }
 
 .set-ellipsis {

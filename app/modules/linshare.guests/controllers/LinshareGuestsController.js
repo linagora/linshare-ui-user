@@ -79,6 +79,8 @@
     function activate() {
       authenticationRestService.getCurrentUser().then(function(data) {
         if (data.accountType !== lsAppConfig.accountType.guest) {
+          // TODO : KLE Translation Needed
+          guestVm.currentView = guestVm.isMineGuest ? 'MES INVITES' : 'AUTRES INVITES';
           guestVm.guestObject = new GuestObjectService();
           $translatePartialLoader.addPart('guests');
           $translatePartialLoader.addPart('filesList');
@@ -111,7 +113,7 @@
       if (form.$valid) {
         newGuest.create().then(function() {
           $scope.mainVm.sidebar.hide(form, newGuest);
-          growlService.notifyTopRight('SIDEBAR.NOTIFICATION.SUCCESS.CREATE');
+          growlService.notifyTopRight('SIDEBAR.NOTIFICATION.SUCCESS.CREATE','inverse');
           guestVm.tableParams.reload();
         });
       } else {

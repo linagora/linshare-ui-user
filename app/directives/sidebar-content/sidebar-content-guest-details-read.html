@@ -1,4 +1,4 @@
-<div class="lv-body stop-propagate">
+<div class="lv-body stop-propagate" id="content-ctn-sidebar">
   <div id="profile-main" class="detail-guest">
     <div class="p-relative img-preview-ctn p-0">
       <div class="dark-overlay"></div>
@@ -7,7 +7,7 @@
           <div class="item-l m-b-10">
             <span class="first-letter user-info">{{mainVm.sidebar.getData().selectedGuest.firstName.charAt(0)}}</span>
           </div>
-          <p class="m-b-0">{{mainVm.sidebar.getData().selectedGuest.firstName}} 
+          <p class="m-b-0">{{mainVm.sidebar.getData().selectedGuest.firstName}}
             <span class="p-l-5 last-name">{{mainVm.sidebar.getData().selectedGuest.lastName}}</span>
           </p>
           <p class="m-b-0 email">{{mainVm.sidebar.getData().selectedGuest.mail}}</p>
@@ -41,7 +41,7 @@
         </div>
         <div class="item-mid">
           <div class="name">
-            {{mainVm.sidebar.getData().selectedGuest.owner.firstName}} 
+            {{mainVm.sidebar.getData().selectedGuest.owner.firstName}}
             {{mainVm.sidebar.getData().selectedGuest.owner.lastName}}
           </div>
           <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"

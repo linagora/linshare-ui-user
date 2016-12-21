@@ -40,6 +40,14 @@
     font-weight: normal;
   }
 }
+#content-ctn-sidebar.form-update-guests {
+  position: fixed;
+  width: 350px;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+  margin-top: 0;
+  padding: 2.5em 1.5em 50px 1.5em;
+}
 
 #profile-main.detail-guest {
   .img-preview-ctn {
@@ -57,6 +65,8 @@
     height: 100%;
     display: flex;
     z-index: 4;
+    left: 0;
+    top: 0;
     .detail-info-ctn.flex-ctn {
       margin: auto;
       flex-wrap: wrap;
@@ -107,7 +117,8 @@
 ***********************/
 
 @media (max-width: 768px) {
-  #content-ctn-sidebar.form-create-guests {
+  #content-ctn-sidebar.form-create-guests,
+  #content-ctn-sidebar.form-update-guests{
     width: 100% !important;
     height: calc(100% - 110px);
   }
