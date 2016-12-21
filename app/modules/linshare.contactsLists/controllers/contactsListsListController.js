@@ -25,7 +25,13 @@
 
     /* jshint validthis:true */
     var contactsListsListVm = this;
-    var byMe, copySuffix, newContactsListName, privateList, publicList, stillExists;
+
+    var byMe,
+      copySuffix,
+      newContactsListName,
+      privateList,
+      publicList,
+      stillExists;
 
     contactsListsListVm.addSelectedDocument = addSelectedDocument;
     contactsListsListVm.closeSearch = closeSearch;
@@ -76,14 +82,25 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function activate() {
+    // TODO : IAB Translation Needed
+      contactsListsListVm.currentView = contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.myLists : contactsListsListVm.otherLists;
       $translatePartialLoader.addPart('contactsLists');
 
       loadTable();
 
       $timeout(function() {
-        $translate(['ACTION.NEW_CONTACTS_LIST', 'ME', 'CONTACTS_LISTS_DETAILS.PRIVATE', 'CONTACTS_LISTS_DETAILS.PUBLIC', 'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS', 'ACTION.COPY_ADJ'])
+        $translate(['ACTION.NEW_CONTACTS_LIST',
+          'CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS',
+          'CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS',
+          'ME',
+          'CONTACTS_LISTS_DETAILS.PRIVATE',
+          'CONTACTS_LISTS_DETAILS.PUBLIC',
+          'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS',
+          'ACTION.COPY_ADJ'])
           .then(function(translations) {
             newContactsListName = translations['ACTION.NEW_CONTACTS_LIST'];
+            contactsListsListVm.myLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS'];
+            contactsListsListVm.otherLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS'];
             byMe = translations.ME;
             privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
             publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
@@ -147,7 +164,7 @@
       contactsListsContactsRestService.getList(contactsListUuidSource).then(function(success) {
         contactsListsListVm.contactsToAddList = success;
         saveContacts(true, contactListUuidDestination);
-        growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'success');
+        growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'inverse');
       });
     }
 
@@ -195,7 +212,7 @@
     function deleteCallback(items) {
       _.forEach(items, function(restangularizedItem) {
         restangularizedItem.remove().then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
           _.remove(contactsListsListVm.itemsList, restangularizedItem);
           _.remove(contactsListsListVm.selectedContactsLists, restangularizedItem);
           contactsListsListVm.tableParams.reload();
@@ -481,7 +498,7 @@
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
         contactsListsContactsRestService.create(contactListUuidDestination, contact).then(function() {
           if(!duplicate) {
-            growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'success');
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'inverse');
           }
           _.remove(contactsListsListVm.contactsToAddList, {
             mail: contact.mail

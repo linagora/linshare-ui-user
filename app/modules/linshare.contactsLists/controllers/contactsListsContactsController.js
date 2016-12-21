@@ -23,7 +23,9 @@
                                            documentUtilsService, growlService, lsAppConfig, NgTableParams) {
     /* jshint validthis:true */
     var contactsListsContactsVm = this;
-    var privateList, publicList, stillExists;
+    var privateList,
+      publicList,
+      stillExists;
 
     contactsListsContactsVm.addRecipientToCreateUsersList = addRecipientToCreateUsersList;
     contactsListsContactsVm.addSelectedDocument = addSelectedDocument;
@@ -149,7 +151,7 @@
       _.forEach(items, function(restangularizedItem) {
         delete restangularizedItem.show;
         restangularizedItem.remove().then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
           _.remove(contactsListsContactsVm.itemsList, restangularizedItem);
           _.remove(contactsListsContactsVm.selectedContacts, restangularizedItem);
           contactsListsContactsVm.itemsListCopy = contactsListsContactsVm.itemsList; // I keep a copy of the data for the filter module
@@ -263,7 +265,7 @@
     function saveContact(contact) {
       contactsListsContactsRestService.create(contactsListsContactsVm.contactsListUuid, contact).then(function(data) {
         contactsListsContactsVm.itemsList.push(data);
-        growlService.notifyTopRight('GROWL_ALERT.ACTION.INSERT', 'success');
+        growlService.notifyTopRight('GROWL_ALERT.ACTION.INSERT', 'inverse');
         contactsListsContactsVm.tableParams.reload();
       });
     }
@@ -347,6 +349,7 @@
       contactsListsContactsVm.loadSidebarContent(lsAppConfig.contactslistsContact);
       contactsListsContactsVm.mdtabsSelection.selectedIndex = whichTab || 0;
 
+      angular.element('#lastname').trigger('focus');
       if (event) {
         var currElm = event.currentTarget;
         angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
@@ -427,7 +430,7 @@
       if (form.$valid) {
         contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contact).then(function() {
           contactsListsContactsVm.itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contact.uuid})] = contact;
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'success');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'inverse');
           contactsListsContactsVm.tableParams.reload();
           $scope.mainVm.sidebar.hide();
         });

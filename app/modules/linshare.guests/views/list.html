@@ -48,19 +48,19 @@
                              x-ng-class="{'active-check':!guestVm.isAllGuestSelected}"
                              x-ng-click="guestVm.isAllGuestSelected = false">
                             <span class="checkbox-ctn "></span> {{'MY_GUESTS' | translate}}
-                </a>
-                </li>
-                <li>
-                  <a href="" x-ng-class="{'active-check':guestVm.isAllGuestSelected}"
-                     x-ng-click="guestVm.isAllGuestSelected = true">
-                    <span class="checkbox-ctn"></span> {{'ALL_GUESTS' | translate}}
-                  </a>
-                </li>
-                </ul>
+                          </a>
+                          </li>
+                          <li>
+                            <a href="" x-ng-class="{'active-check':guestVm.isAllGuestSelected}"
+                               x-ng-click="guestVm.isAllGuestSelected = true">
+                              <span class="checkbox-ctn"></span> {{'ALL_GUESTS' | translate}}
+                            </a>
+                          </li>
+                          </ul>
+                        </div>
+                      </div>
+                 </span>
               </div>
-            </div>
-            </span>
-          </div>
 
           <!-- Please enable the filtering feature according to the appropriate labels-->
           <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
@@ -256,7 +256,7 @@
     <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->
     <script type="text/ng-template" id="checkboxheader.html">
       <span x-ng-click="guestVm.tableSelectAll(guestVm.tableParams.data, guestVm.tableParams.page())" role="button"
-            tabindex="0" style="display:block" class="center">
+            tabindex="0" class="display-block center">
           <a x-ng-if="!guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]"
              class="select-all-items plain-txt-btn ng-scope" >
             <i class="fa fa fa-square-o checkbox-table"></i>
@@ -279,7 +279,7 @@
               data-right-sidebar-open="mainVm.sidebar.isVisible()"
               x-ng-class="{'highlightListElem': guestData.isSelected,
                            'current-vis': guestVm.currentSelectedGuest.current.uuid === guestData.uuid}"
-              class="p-b-5" context-menu="moreOptionsContexualMenu">
+              class="p-b-5 double-row" context-menu="moreOptionsContexualMenu">
             <td data-header="'checkboxheader.html'"
                 class="center set-content-left thumb-type-item thumb-groups-preview-ls" header-class="'col-2 checkbox-col'">
               <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile
@@ -304,93 +304,93 @@
               </a>
             </td>
             <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
-                data-sortable="'firstName'" uuid={{o.uuid}}>
+                data-sortable="'firstName'" uuid={{o.uuid}} header-class="'flexible-table-col'">
               <div class="ctn-name-actions">
                 <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                      <span class="first-name">{{guestData.firstName}} </span>
-                <span class="last-name">{{guestData.lastName}}</span>
-                <span>
-                        <p class="secondary-list-item-info hidden-xs">
-                          {{guestData.mail}}
-                        </p>
-                        <p class="mobile-list-item-info visible-xs">
-                          {{guestData.modificationDate | relativeTime}}, {{guestData.size | readableSize: false}},
-                          <span x-ng-show="guestData.shared > 0">
-                          {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
-                          </span>
-                </p>
-                </span>
+                  <span class="first-name">{{guestData.firstName}}</span>
+                  <span class="last-name">{{guestData.lastName}}</span>
+                  <span>
+                    <p class="secondary-list-item-info hidden-xs">
+                      {{guestData.mail}}
+                    </p>
+                    <p class="mobile-list-item-info visible-xs">
+                      {{guestData.modificationDate | relativeTime}}, {{guestData.size | readableSize: false}},
+                      <span x-ng-show="guestData.shared > 0">
+                      {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
+                      </span>
+                    </p>
+                  </span>
                 </span>
                 <span class="col-xs-3 col-sm-5 col-md-4 actions-list-ctn pull-right">
-                    <ul class="actions pull-right">
-                      <li x-ng-click="guestVm.showGuestDetails(guestData)" event-propagation-stop
-                          class="hidden-action-links hidden-xs">
-                        <a href=""
-                           title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
-                        <i class="zmdi zmdi-info-outline"></i>
-                        </a>
-                      </li>
-                      <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.removeGuest(guestData, true)"
-                          class="hidden-xs hidden-action-links">
-                        <a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}" event-propagation-stop="true">
-                        <i class="fa fa-trash-o"></i>
-                        </a>
-                      </li>
-                      <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.showGuestDetails(guestData, 1)"
-                          event-propagation-stop class="hidden-xs hidden-action-links">
-                        <a title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}">
-                        <i class="zmdi zmdi-edit"></i>
-                        </a>
-                      </li>
-                      <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                          auto-close="always" hover-dropdown-fix>
-                        <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
-                           event-propagation-stop>
-                        <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-                        <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
-                          <li x-ng-hide="linshareModeProduction">
-                            <a href="" ls-share-modal event-propagation-stop>
-                              <i class="fa fa-pencil-square-o"></i>
-                            {{'ACTION.ADMIN_REQUEST' | translate}}</a>
-                          </li>
-                          <li x-ng-hide="linshareModeProduction">
-                            <a href="" ls-share-modal event-propagation-stop>
-                            <i class="zmdi zmdi-accounts-list"></i>
-                            {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}</a>
-                          </li>
-                          <li x-ng-hide="linshareModeProduction">
-                            <a href="">
-                              <i class="groups-shared-folder">
-                                <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
-                              </i>
-                              {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
-                            </a>
-                          </li>
-                          <li x-ng-click="guestVm.showGuestDetails(guestData)">
-                            <a href="" >
-                              <i class="zmdi zmdi-info-outline"></i>
-                              {{'ACTION.INFORMATION' | translate}}
-                            </a>
-                          </li>
-                          <li x-ng-hide="!guestVm.isMineGuest"
-                              x-ng-click="guestVm.showGuestDetails(guestData, 1)">
-                            <a href="" >
-                              <i class="zmdi zmdi-edit"></i>
-                              {{'BOUTON_LABEL_TITLE.EDIT' | translate}}
-                            </a>
-                          </li>
-                          <li x-ng-hide="!guestVm.isMineGuest"
-                              x-ng-click="guestVm.removeGuest(guestData, true)">
-                            <a href="">
-                              <i class="fa fa-trash-o"></i>
-                              {{'BOUTON_LABEL_TITLE.DELETE' | translate}}
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                    </span>
+                  <ul class="actions pull-right">
+                    <li x-ng-click="guestVm.showGuestDetails(guestData)" event-propagation-stop
+                        class="hidden-action-links hidden-xs">
+                      <a href=""
+                         title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
+                      <i class="zmdi zmdi-info-outline"></i>
+                      </a>
+                    </li>
+                    <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.removeGuest(guestData, true)"
+                        class="hidden-xs hidden-action-links">
+                      <a href="" title="{{'BOUTON_LABEL_TITLE.DELETE' | translate}}" event-propagation-stop="true">
+                      <i class="fa fa-trash-o"></i>
+                      </a>
+                    </li>
+                    <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.showGuestDetails(guestData, 1)"
+                        event-propagation-stop class="hidden-xs hidden-action-links">
+                      <a title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}">
+                      <i class="zmdi zmdi-edit"></i>
+                      </a>
+                    </li>
+                    <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
+                        auto-close="always" hover-dropdown-fix>
+                      <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
+                         event-propagation-stop>
+                      <i class="zmdi zmdi-more-vert"></i>
+                      </a>
+                      <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
+                        <li x-ng-hide="linshareModeProduction">
+                          <a href="" ls-share-modal event-propagation-stop>
+                            <i class="fa fa-pencil-square-o"></i>
+                          {{'ACTION.ADMIN_REQUEST' | translate}}</a>
+                        </li>
+                        <li x-ng-hide="linshareModeProduction">
+                          <a href="" ls-share-modal event-propagation-stop>
+                          <i class="zmdi zmdi-accounts-list"></i>
+                          {{'ACTION.JOIN_RESTRICTED_CONTACTS' | translate}}</a>
+                        </li>
+                        <li x-ng-hide="linshareModeProduction">
+                          <a href="">
+                            <i class="groups-shared-folder">
+                              <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                            </i>
+                            {{'ACTION.ADD_TO_WORKGROUPS' | translate}}
+                          </a>
+                        </li>
+                        <li x-ng-click="guestVm.showGuestDetails(guestData)">
+                          <a href="" >
+                            <i class="zmdi zmdi-info-outline"></i>
+                            {{'ACTION.INFORMATION' | translate}}
+                          </a>
+                        </li>
+                        <li x-ng-hide="!guestVm.isMineGuest"
+                            x-ng-click="guestVm.showGuestDetails(guestData, 1)">
+                          <a href="" >
+                            <i class="zmdi zmdi-edit"></i>
+                            {{'BOUTON_LABEL_TITLE.EDIT' | translate}}
+                          </a>
+                        </li>
+                        <li x-ng-hide="!guestVm.isMineGuest"
+                            x-ng-click="guestVm.removeGuest(guestData, true)">
+                          <a href="">
+                            <i class="fa fa-trash-o"></i>
+                            {{'BOUTON_LABEL_TITLE.DELETE' | translate}}
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </span>
               </div>
             </td>
             <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()" data-title="'HEADER_GUEST.DOMAIN' | translate"

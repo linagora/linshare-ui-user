@@ -14,9 +14,9 @@
       </span>
   </div>
 
-  <div x-ng-cloak="" class="tabsdemoStaticTabs tab-nav-detail two-tabs">
+  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs">
     <md-content>
-      <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex" md-dynamic-height=""
+      <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex"
                md-border-bottom="">
         <md-tab id="tab1" label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 noPadding">
 
@@ -27,9 +27,10 @@
         </md-tab>
         <md-tab id="tab2" label="{{'EDIT' | translate}}" class="col-xs-4 noPadding disabled">
 
-          <md-content>
+          <md-content class="bottom-action-form">
             <p class="empty-res" x-ng-if="!mainVm.sidebar.getData().canManage">
-              <i class="zmdi zmdi-info-outline"></i><span>{{'CONTACTS_LISTS_DETAILS.UPDATE_CONTACT_IMPOSSIBLE' | translate}}</span>
+              <i class="zmdi zmdi-info-outline"></i>
+              <span>{{'CONTACTS_LISTS_DETAILS.UPDATE_CONTACT_IMPOSSIBLE' | translate}}</span>
             </p>
             <div x-ng-if="mainVm.sidebar.getData().canManage"
                  x-ng-include="'directives/sidebar-content/sidebar-content-contactslists-contact-edit.html'"></div>

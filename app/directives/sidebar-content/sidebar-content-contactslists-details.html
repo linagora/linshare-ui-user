@@ -8,9 +8,10 @@
             <div class="item-l m-b-10">
               <span class="first-letter user-info">
                 {{mainVm.sidebar.getData().currentSelectedDocument.current.contacts.length}}
+                <span class="temp-size">{{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}</span>
               </span>
             </div>
-            <p class="m-b-0">{{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}}</p>
+            <p class="m-b-0">{{'UNKNOWN_FIRST_LETTER' | translate}}</p>
           </div>
         </div>
       </div>
@@ -18,22 +19,24 @@
         <div class="description-ctn form-sidebar disabled-work-in-progress"
              x-ng-class="{'show-full-comment': commentFocused}"
              x-ng-init="commentFocused = false">
-                    <textarea title="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
-                              class="comment"
-                              spellcheck="false"
-                              name="description"
-                              id="description"
-                              x-ng-attr-placeholder="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
-                              x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.description"
-                              x-ng-bind="mainVm.sidebar.getData().currentSelectedDocument.current.description"
-                              x-ng-change="mainVm.sidebar.getData().updateDocument(mainVm.sidebar.getData().currentSelectedDocument.current)"
-                              x-ng-model-options="{updateOn: 'blur'}"
-                              x-ng-init="commentFocused = false"
-                              x-ng-focus="commentFocused = true"
-                              x-ng-blur="commentFocused = false">
-
-                    </textarea>
-          <span x-ng-if="(((!commentFocused) && (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
+          <textarea title="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
+            class="comment"
+            spellcheck="false"
+            name="description"
+            id="description"
+            x-ng-attr-placeholder="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
+            x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+            x-ng-bind="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+            x-ng-change="
+            mainVm.sidebar.getData().updateDocument(mainVm.sidebar.getData().currentSelectedDocument.current)"
+            x-ng-model-options="{updateOn: 'blur'}"
+            x-ng-init="commentFocused = false"
+            x-ng-focus="commentFocused = true"
+            x-ng-blur="commentFocused = false">
+          </textarea>
+          <span
+            x-ng-if="(((!commentFocused) &&
+            (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
           <div class="edit-description clic-enabled" x-ng-click="commentFocused = !commentFocused">
             <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
                title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
@@ -58,9 +61,12 @@
               'UNKNOWN_USER' | translate}}
             </div>
             <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
-                <span>{{'INFORMATION_TAB.CREATED_THE' | translate}} :
-                  {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date: mainVm.sidebar.getData().lsFormat()}}
+                 uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate |
+                 date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+                <span>
+                  {{'INFORMATION_TAB.CREATED_THE' | translate}} :
+                  {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate
+                  | date: mainVm.sidebar.getData().lsFormat()}}
                 </span>
             </div>
           </div>
@@ -89,7 +95,8 @@
             <div>
               <p>{{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}}</p>
               <p>
-                {{mainVm.sidebar.getData().currentSelectedDocument.current.contacts.length}} {{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}}
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.contacts.length}}
+                {{'CONTACTS_LISTS_DETAILS.CONTACTS' | translate}}
               </p>
             </div>
             <div>
@@ -103,7 +110,8 @@
                 {{'CONTACTS_LISTS_DETAILS.VISIBILITY' | translate}} :
               </p>
               <p
-                x-ng-click="mainVm.sidebar.getData().switchVisibility(mainVm.sidebar.getData().currentSelectedDocument.current)"
+                x-ng-click="
+                mainVm.sidebar.getData().switchVisibility(mainVm.sidebar.getData().currentSelectedDocument.current)"
                 x-ng-class="{'disabled' : !mainVm.sidebar.getData().isFromMyContactsLists}">
                 <a>
                   {{mainVm.sidebar.getData().getVisibility(mainVm.sidebar.getData().currentSelectedDocument.current)}}

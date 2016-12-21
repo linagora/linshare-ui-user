@@ -176,6 +176,7 @@ DROPDOWN ANIMATION FIX
       border-bottom: solid 1px #e4e4e4;
       padding: 0.85em;
       color: #545454;
+      text-transform: uppercase;
     }
     .filter-menu {
       a {
@@ -206,6 +207,15 @@ DROPDOWN ANIMATION FIX
         border-bottom: none;
       font-size: 0.87em;
       }
+    }
+  }
+  &.toggle-views .list-menu .filter-menu a {
+    padding-left: 25px;
+  }
+  &.toggle-views {
+    .active-check:before {
+      left: 9px;
+      top: 5px;
     }
   }
 }
@@ -255,10 +265,9 @@ DROPDOWN ANIMATION FIX
   text-align: left;
 }
 
-
-/**********************
-  DROP WITH SUBMENU
-***********************/
+  /**********************
+    DROP WITH SUBMENU
+  ***********************/
 
 /*TODO encompass witthin a  .dropdown-submenu ref  */
 .secondary-dropdown-menu-icon {

@@ -47,7 +47,7 @@
     "SHARES": "Tập tin do tôi chia sẻ",
     "TBT__SHARED_SPACE": "Nhóm",
     "ADMIN": "Quản trị",
-    "LISTS": "Danh sách",
+    "TBT_CONTACTS_LISTS": "",
     "GUESTS": "Khách mời",
     "USERS": "Người dùng",
     "GROUP_MEMBERS": "Thành viên nhóm",
@@ -103,6 +103,7 @@
     }
   },
   "ACTION": {
+    "TBT__DISPLAY": "",
     "DOWNLOAD": "Tải về",
     "SHARE": "Chia sẻ",
     "REFRESH": "Làm mới",

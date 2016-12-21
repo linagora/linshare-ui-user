@@ -123,6 +123,23 @@
       }
     }
   }
+  #fabMyFiles.solo-fab {
+    bottom:0;
+    button.md-fab {
+      float: right;
+      background-color: #05b1ff;
+      right: 3px;
+      bottom: 5px;
+      i{
+        display: inline-block;
+        font-size: 2em;
+        margin: auto;
+        position: absolute;
+        top: 14px;
+        left: 20px;
+      }
+    }
+  }
 }
 
 /**********************

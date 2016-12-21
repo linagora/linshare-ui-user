@@ -555,3 +555,12 @@ li.dp-actions {
   -webkit-transform: rotate(180deg); /* Safari */
   transform: rotate(180deg);
 }
+
+/**********************
+ FORM OVERIDE
+***********************/
+
+.fg-line.fg-not-empty .fg-label {
+  top : -20px !important;
+  font-size: 11px !important;
+}

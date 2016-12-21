@@ -9,9 +9,6 @@
 
   /* Table listing */
   #file-list-table {
-    td:nth-child(1) {
-      padding-left: 14px
-    }
     .first-letter {
       text-transform: uppercase;
       width: 27px;
@@ -31,31 +28,12 @@
     .first-name {
       text-transform: capitalize;
     }
-    .file-name-col {
-      padding-top: 7px;
-      line-height: 1.1em;
-    }
-    .secondary-list-item-info {
-      margin: 0 0 0.5em 0;
-      font-size: 0.85em;
-      color: #4f4f4f;
-    }
     .first-letter.guest-account-li {
       background-color: #f4f4f4;
       color: #7c7c7c;
       line-height: 26px;
       border: solid 1px #c4c4c4;
       font-size: 0.65em !important;
-    }
-    .checkbox-ctn {
-      display: block;
-      margin-top: 4px;
-      margin-left: 9px;
-      font-size: 0.85em;
-      vertical-align: middle;
-    }
-    .ctn-name-actions {
-      padding-top: 0.3em;
     }
   }
 

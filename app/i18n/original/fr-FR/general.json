@@ -12,7 +12,7 @@
   "VALIDATE": "Valider",
   "EDIT": "Editer",
   "UNKNOWN_USER": "Utilisateur inconnu",
-  "UNKNOWN_FIRST_LETTER": "NC",
+  "UNKNOWN_FIRST_LETTER": "N.C.",
   "PENDING_UPLOADS": "en attente",
   "SAVING": "Sauvegarde en cours...",
   "NAVIGATION": {
@@ -47,7 +47,7 @@
     "SHARES": "Mes fichiers partagés",
     "SHARED_SPACE": "Espace commun",
     "ADMIN": "Administration",
-    "LISTS": "Mes listes",
+    "CONTACTS_LISTS": "Listes de contacts",
     "GUESTS": "Comptes invités",
     "USERS": "Les utilisateurs",
     "GROUP_MEMBERS": "Mes groupes",
@@ -103,6 +103,7 @@
     }
   },
   "ACTION": {
+    "DISPLAY": "Afficher",
     "DOWNLOAD": "Télécharger",
     "SHARE": "Partager",
     "REFRESH": "Actualiser",

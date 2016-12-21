@@ -48,7 +48,7 @@ angular.module('linshareUiUserApp')
         disabled: false,
         links: [
           {
-            name: 'MENU_TITLE.LISTS',
+            name: 'MENU_TITLE.CONTACTS_LISTS',
             link: 'administration.contactslists',
             disabled: false
           }, {

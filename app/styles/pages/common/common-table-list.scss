@@ -462,6 +462,44 @@
   line-height: 37px;
 }
 
+
+
+/**********************
+ TABLE DOUBLE ROW ITEMS
+***********************/
+
+
+#file-list-table tr.double-row {
+
+  /* Table listing with double-row */
+    td:nth-child(1) {
+      padding-left: 14px !important;
+    }
+    .file-name-col {
+      padding-top: 7px;
+      line-height: 1.1em;
+    }
+    .secondary-list-item-info {
+      margin: 0 0 0.5em 0;
+      font-size: 0.85em;
+      color: #4f4f4f;
+    }
+    .checkbox-ctn {
+      display: block;
+      margin-top: 4px;
+      margin-left: 9px;
+      font-size: 0.85em;
+      vertical-align: middle;
+    }
+    .ctn-name-actions {
+      padding-top: 0.3em;
+    }
+}
+
+
+
+
+
 /**********************
  RESPONSIVE DESIGN - SIDEBAR RIGHT ENABLED
 ***********************/
@@ -718,7 +756,7 @@
     tr > td:nth-child(2), tr > td:nth-child(3) {
       display: block;
       float: left;
-      width: calc(100% - 33px);
+      width: calc(100% - 33px) !important;
       min-width: 281px;
       max-width: 93%;
       overflow: hidden;
@@ -738,7 +776,7 @@
 
 @media (max-width: 320px) {
   .files #file-list-table tr > td:nth-child(2) {
-    width: 285px;
+    width: 285px !important;
     padding-left: 5px;
   }
 }

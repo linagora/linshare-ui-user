@@ -1,0 +1,167 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+  CONTACT LISTS FILE LISTING
+***********************/
+
+.files.contacts-lists-list {
+
+  #file-list-table.ng-table th:nth-child(3), #file-list-table.ng-table td:nth-child(3) {
+    width: 15%;
+  }
+  #file-list-table.ng-table th:nth-child(4), #file-list-table.ng-table td:nth-child(4) {
+    width: 20%;
+  }
+}
+
+
+.files.contacts-lists-contacts {
+
+  #file-list-table.ng-table th:nth-child(2), #file-list-table.ng-table td:nth-child(2) {
+    width: 75%;
+    text-align: left;
+  }
+  #file-list-table.ng-table th:nth-child(3), #file-list-table.ng-table td:nth-child(3) {
+    width: 20%;
+  }
+  #breadcrumb-wrap #search-field-ctn {
+    margin-right: 1.7em;
+  }
+}
+
+.user-lists {
+  .first-letter {
+    text-transform: uppercase;
+    width: 27px;
+    min-width: 27px;
+    min-height: 27px;
+    height: 27px;
+    margin: auto;
+    font-size: 0.65em;
+    line-height: 26px;
+  }
+  .item-l {
+    display: flex;
+  }
+  .first-letter.guest-account-li {
+    background-color: #f4f4f4;
+    color: #7c7c7c;
+    line-height: 26px;
+    border: solid 1px #c4c4c4;
+    font-size: 0.65em !important;
+  }
+}
+
+.contact-lists td .zmdi-account-box-phone {
+  color :#636262 ;
+}
+
+/**********************
+ SIDEBAR CONTACT LIST
+***********************/
+
+#profile-main.detail-guest .user-preview-ctn .detail-info-ctn.flex-ctn .first-letter {
+  color: #0070a3;
+  width: 70px;
+  height: 70px;
+  line-height: 71px;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2.3em;
+  background-color: #fff !important;
+}
+
+.temp-size {
+  font-size: 0.85em;
+}
+
+.shared-activated.zmdi-alert-triangle {
+  color: #c74919 !important;
+  font-size: 1em;
+  font-style: normal;
+  margin-left: 3px;
+}
+
+.toggle-view-dropdown {
+.filter-views {
+  height: 31px;
+  line-height: 34px;
+  color: #4f4f4f;
+  padding-right: 10px;
+  font-weight: normal;
+}
+ .dropdown-filters {
+   display: inline;
+   margin-right: 30px;
+   > span {
+     width: 100% !important;
+     position: relative;
+     display: inline-block;
+     vertical-align: middle;
+     font-size: 13px;
+     zoom: 1;
+     -webkit-user-select: none;
+     > a {
+       color: #858585;
+       line-height: 33px;
+       font-weight: normal;
+       border: none;
+       border-bottom: 1px solid #e0e0e0;
+       position: relative;
+       display: block;
+       padding: 0;
+       height: 30px;
+       background: none transparent;
+       background-clip: padding-box;
+       box-shadow: none;
+       text-decoration: none;
+       white-space: nowrap;
+       font-size: 0.9em;
+       border-radius: 0;
+       overflow: visible;
+       text-transform : uppercase;
+       &:after{
+         box-sizing: border-box;
+         content: "";
+         width: 0;
+         background: #2196f3;
+         height: 2px;
+         position: absolute;
+         left: 0;
+         bottom: -1px;
+         -webkit-transition: width;
+         -o-transition: width;
+         transition: width;
+         -webkit-transition-duration: 300ms;
+         transition-duration: 300ms;
+       }
+        span {
+         display: block;
+         overflow: hidden;
+         margin-right: 15px;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+       }
+       > div{
+         position: absolute;
+         top: 0;
+         right: 0;
+         display: block;
+         width: 18px;
+         height: 100%;
+         b {
+           background-image: url(../images/select.png) !important;
+           background-repeat: no-repeat;
+           background-position: right 12px;
+           display: block;
+           width: 100%;
+           height: 100%;
+         }
+       }
+     }
+   }
+
+ }
+}

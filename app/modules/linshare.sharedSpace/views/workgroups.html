@@ -302,7 +302,8 @@
                class="select-all-items plain-text-button ng-scope checkboxCtn">
               <i class="fa fa-square-o checkbox-table"></i>
             </a>
-            <a x-ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]" class="select-all-items plain-text-button ng-scope">
+            <a x-ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]"
+               class="select-all-items plain-text-button">
               <i class="fa fa-check-square-o"></i>
             </a>
             </span>
@@ -341,8 +342,6 @@
                 <td data-header="'checkboxheader.html'"
                     class="center set-content-left thumb-type-item thumb-groups-preview-ls"
                     header-class="'col-2 checkbox-col'">
-                  <!--TODO: optimiser le code répeter et si besoin d'un test de detecion mobile cf scripts/common/MainController-->
-                  <!--ligne 249 : y buena suerte-->
                   <a x-ng-click="showCheckboxes ? vm.addSelectedDocument(documentFile) : null" class="visible-xs">
                     <div x-ng-class="{ 'invisible' : showCheckboxes}">
                       <i>
@@ -386,7 +385,7 @@
                         </span>
                       </span>
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
-                        <ul class="actions pull-right double-mobile-actions"
+                        <ul class="actions pull-right"
                             x-ng-class="{'open-r': (mainVm.sidebar.isVisible()) &&
                                           ((mainVm.sidebar.getContent() === lsAppConfig.details) ||
                                           (mainVm.sidebar.getContent() === lsAppConfig.shareDetails))}">

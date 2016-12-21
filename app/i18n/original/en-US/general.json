@@ -47,7 +47,7 @@
     "SHARES": "Files shares",
     "SHARED_SPACE": "Shared space",
     "ADMIN": "Administration",
-    "LISTS": "Lists",
+    "CONTACTS_LISTS": "Contacts Lists",
     "GUESTS": "Guests",
     "USERS": "Users",
     "GROUP_MEMBERS": "Groups",
@@ -103,6 +103,7 @@
     }
   },
   "ACTION": {
+    "DISPLAY": "Display",
     "DOWNLOAD": "Download",
     "SHARE": "Share",
     "REFRESH": "Refresh",
