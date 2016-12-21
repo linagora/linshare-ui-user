@@ -57,6 +57,24 @@
   color :#636262 ;
 }
 
+.files.contacts-lists-contacts  #breadcrumb-wrap #action-header {
+  float: right;
+  width: auto;
+  margin-top: 14px;
+  flex: 0 0 auto;
+}
+
+.current-list-ctn {
+display : flex ;
+  > span{
+    display : flex ;
+  }
+  span.current-list-label {
+    display: inline-block;
+    max-width: 230px;
+  }
+}
+
 /**********************
  SIDEBAR CONTACT LIST
 ***********************/
@@ -165,3 +183,30 @@
 
  }
 }
+
+
+/**********************
+  MOBILE RESPONSIVE
+***********************/
+
+@media (max-width: 1200px) {
+  .current-list-ctn > span.owner-info {
+    display:none
+  }
+}
+
+@media (max-width: 800px) {
+  .files.contacts-lists-list  #breadcrumb-wrap span.current-list-label {
+    max-width: 130px;
+  }
+}
+
+@media (max-width: 768px) {
+  .files.contacts-lists-contacts  #breadcrumb-wrap #action-header {
+    float: right;
+    width: 100%;
+    margin-top: 0;
+    flex: 1 1 auto;
+  }
+}
+

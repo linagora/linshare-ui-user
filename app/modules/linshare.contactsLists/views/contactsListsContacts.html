@@ -17,8 +17,10 @@
               {{"CONTACTS_LISTS_DETAILS.CONTACTS_LISTS" | translate}}
             </a>
             <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
-            <a>
-              &nbsp;&nbsp;{{contactsListsContactsVm.contactsListName}}
+            <a class="current-list-ctn">
+              <span class="set-ellipsis current-list-label" tooltip-placement="bottom" tooltip-append-to-body="true"
+                    tooltip-popup-delay="500" uib-tooltip="{{contactsListsContactsVm.contactsListName}}">
+                    &nbsp;&nbsp;{{contactsListsContactsVm.contactsListName}}</span>
               <span class="owner-info" tooltip-placement="bottom" tooltip-append-to-body="true"
                     tooltip-popup-delay="500" uib-tooltip="{{'CONTACTS_LISTS_DETAILS.OWNER' | translate}}">
                 | {{'BY' | translate}} {{contactsListsContactsVm.contactsListDetails.owner.firstName}}
