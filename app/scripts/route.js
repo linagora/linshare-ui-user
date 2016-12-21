@@ -43,7 +43,6 @@ angular.module('linshareUiUserApp')
         templateUrl: 'views/common/loginForm.html'
       })
 
-
       //------------------------------
       // USER DOCUMENTS
       //------------------------------

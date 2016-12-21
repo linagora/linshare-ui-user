@@ -39,5 +39,6 @@ angular
     'ngMaterial',
     'ui.bootstrap.contextMenu',
     'localytics.directives',
-    'linshare.anonymousUrl'
+    'linshare.anonymousUrl',
+    'linshare.resetPassword'
   ]);

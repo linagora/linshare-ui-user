@@ -17,6 +17,11 @@ angular.module('linshareUiUserApp')
     workgroupList: 'group_list',
     contactsListsMinePage: 'contactslists-mine',
     contactsListsOthersPage: 'contactslists-others',
+    lang : {
+      fr: 'fr-FR',
+      en: 'en-US',
+      vi: 'vi-VN'
+    },
 
     //Value used for sidebar
     share: 'share',

@@ -5,9 +5,10 @@
 'use strict';
 
 angular.module('linshareUiUserApp')
-.controller('loginController', ['$rootScope', 'authenticationRestService', 'languageService',
-  function($rootScope, authenticationRestService, languageService) {
+.controller('loginController', ['$rootScope', 'authenticationRestService', 'languageService', 'lsAppConfig',
+  function($rootScope, authenticationRestService, languageService, lsAppConfig) {
 
+    this.lsAppConfig = lsAppConfig;
     this.email = '';
     this.password = '';
 

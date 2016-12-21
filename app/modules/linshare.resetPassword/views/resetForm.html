@@ -1,0 +1,71 @@
+<div id="login-page">
+  <div id="bg">
+    <img src="images/bg-linshare-desktop.png" alt="" class="img-responsive">
+  </div>
+
+  <div id="language-dropdown">
+    <div class="dropdown-ctn">
+      <div class="dropdown dropdown-standard" uib-dropdown>
+        <button id="single-button" type="button" class="dropdown-toggle btn btn-custum-transparent"
+                uib-dropdown-toggle x-ng-disabled="disabled">
+          <span class="flag-icon" x-ng-class="'flag-icon-' + resetVm.loginLocale.country"></span>
+          <span class="disp-language">{{resetVm.loginLocale.language}}</span>
+          <i class="zmdi zmdi-chevron-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right flag-list-ctn" role="menu" aria-labelledby="single-button">
+          <li role="menuitem" >
+            <a href="" x-ng-click="resetVm.changeLoginLanguage(resetVm.lsAppConfig.lang.fr)">
+              <span class="flag-icon flag-icon-fr"></span>
+              <span class="lang-short">FR</span><span class="lang-label">France</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="" x-ng-click="resetVm.changeLoginLanguage(resetVm.lsAppConfig.lang.en)">
+              <span class="flag-icon flag-icon-us"></span>
+              <span class="lang-short">US</span><span class="lang-label">United States</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="" x-ng-click="resetVm.changeLoginLanguage(resetVm.lsAppConfig.lang.vi)">
+              <span class="flag-icon flag-icon-vn"></span>
+              <span class="lang-short">VN</span><span class="lang-label">tiếng Việt</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="copyright-login">
+    <img src="images/common/linshare-logo-white.png" alt="">
+    <p>{{'LOGIN.COPYRIGHT' | translate}}</p>
+  </div>
+  <div class="quota login-libreNfreeCtn">
+    <div class="libre-and-free">
+      <img src="images/community-white.png" alt="Logo LinShare">
+      <p>Libre &amp; Free</p>
+    </div>
+  </div>
+  <div class="login-content" id="l-login">
+    <div class="parent-login-form-alignment">
+      <div class="logo-title">
+        <img src="images/ls-logo-big.png" alt="logo">
+        <p>{{'LOGIN.TAGLINE' | translate}}</p>
+      </div>
+      <div x-ng-if="resetVm.reset.type === 'create'" ls-reset-form
+           x-reset-type="create" x-reset-action="resetVm.reset.action(formData)" x-reset-data="resetVm.reset.data">
+      </div>
+      <div x-ng-if="resetVm.reset.type === 'update'" ls-reset-form
+           x-reset-type="update" x-reset-action="resetVm.reset.action(formData)" x-reset-data="resetVm.reset.data">
+      </div>
+      <div x-ng-if="resetVm.reset.type === 'forgot'" ls-reset-form
+           x-reset-type="forgot" x-reset-action="resetVm.reset.action(formData)" x-reset-data="resetVm.reset.data">
+      </div>
+      <div x-ng-if="resetVm.reset.type === 'reinitialize'" ls-reset-form
+           x-reset-type="reinitialize" x-reset-action="resetVm.reset.action(formData)" x-reset-data="resetVm.reset.data">
+      </div>
+      <div x-ng-if="resetVm.reset.type === 'finalize'" ls-reset-form
+           x-reset-type="finalize" x-reset-action="resetVm.reset.action(formData)" x-reset-data="resetVm.reset.data">
+      </div>
+    </div>
+  </div>
+</div>

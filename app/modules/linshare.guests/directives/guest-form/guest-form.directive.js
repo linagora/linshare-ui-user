@@ -38,7 +38,7 @@
      */
     function linkFn(scope) {
       scope.formName = _.isUndefined(scope.formName) ?
-                        'guestForm' + Math.random().toString(36).match(/[a-z]+/g).join('') : scope.formName
+                        'guestForm' + Math.random().toString(36).match(/[a-z]+/g).join('') : scope.formName;
       scope.linshareModeProduction = scope.$root.linshareModeProduction;
     }
   }

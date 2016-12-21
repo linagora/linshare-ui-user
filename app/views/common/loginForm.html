@@ -14,19 +14,19 @@
         </button>
         <ul class="dropdown-menu pull-right flag-list-ctn" role="menu" aria-labelledby="single-button">
           <li role="menuitem" >
-            <a href="" x-ng-click="loginctrl.changeLoginLanguage('fr-FR')">
+            <a href="" x-ng-click="loginctrl.changeLoginLanguage(loginctrl.lsAppConfig.lang.fr)">
               <span class="flag-icon flag-icon-fr"></span>
               <span class="lang-short">FR</span><span class="lang-label">France</span>
             </a>
           </li>
           <li role="menuitem">
-            <a href="" x-ng-click="loginctrl.changeLoginLanguage('en-US')">
+            <a href="" x-ng-click="loginctrl.changeLoginLanguage(loginctrl.lsAppConfig.lang.en)">
               <span class="flag-icon flag-icon-us"></span>
               <span class="lang-short">US</span><span class="lang-label">United States</span>
             </a>
           </li>
           <li role="menuitem">
-            <a href="" x-ng-click="loginctrl.changeLoginLanguage('vi-VN')">
+            <a href="" x-ng-click="loginctrl.changeLoginLanguage(loginctrl.lsAppConfig.lang.vi)">
               <span class="flag-icon flag-icon-vn"></span>
               <span class="lang-short">VN</span><span class="lang-label">tiếng Việt</span>
             </a>
@@ -91,7 +91,7 @@
                 {{'LOGIN.KEEP_SIGNED' | translate}}
               </label>
             </div>
-            <a class="pull-right mdp-forgotten">{{'LOGIN.FORGOTTEN_PASSWORD' | translate}}</a>
+            <a ui-sref="reset" class="pull-right mdp-forgotten">{{'LOGIN.FORGOTTEN_PASSWORD' | translate}}</a>
             <div class="clearfix"></div>
             <button class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate}}</button>
           </form>
