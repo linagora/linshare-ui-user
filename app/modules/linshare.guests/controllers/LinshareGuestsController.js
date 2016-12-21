@@ -11,8 +11,9 @@
     .controller('LinshareGuestsController', LinshareGuestsController);
 
   //TODO - KLE: Check DI
-  LinshareGuestsController.$inject = ['$filter', '$log', '$q', '$scope', '$translate', '$translatePartialLoader',
-    'growlService', 'GuestObjectService', 'guestRestService', 'lsAppConfig', 'NgTableParams'
+  LinshareGuestsController.$inject = ['$filter', '$log', '$q', '$scope', '$state', '$translate',
+    '$translatePartialLoader', 'authenticationRestService', 'growlService', 'GuestObjectService',
+    'guestRestService', 'lsAppConfig', 'NgTableParams'
   ];
 
   /**
@@ -20,8 +21,8 @@
    * @desc Application guest management system controller
    * @memberOf LinShare.Guests
    */
-  function LinshareGuestsController($filter, $log, $q, $scope, $translate, $translatePartialLoader,
-    growlService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams) {
+  function LinshareGuestsController($filter, $log, $q, $scope, $state, $translate, $translatePartialLoader,
+    authenticationRestService, growlService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams) {
     /* jshint validthis: true */
     var
       guestVm = this,
@@ -40,7 +41,6 @@
     //TODO: use for what ?
     guestVm.flagsOnSelectedPages = {};
     guestVm.getGuestDetails = getGuestDetails;
-    guestVm.guestObject = new GuestObjectService();
     guestVm.guestDetails = lsAppConfig.guestDetails;
     guestVm.isMineGuest = true;
     guestVm.loadSidebarContent = loadSidebarContent;
@@ -77,20 +77,27 @@
      * @memberOf LinShare.Guests.LinshareGuestsController
      */
     function activate() {
-      $translatePartialLoader.addPart('guests');
-      $translatePartialLoader.addPart('filesList');
-      $translate.refresh().then(function() {
-        $translate(['SWEET_ALERT.ON_GUEST_DELETE.TITLE', 'SWEET_ALERT.ON_GUEST_DELETE.TEXT',
-            'SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON'
-          ])
-          .then(function(translations) {
-            swalTitle = translations['SWEET_ALERT.ON_GUEST_DELETE.TITLE'];
-            swalText = translations['SWEET_ALERT.ON_GUEST_DELETE.TEXT'];
-            swalConfirm = translations['SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON'];
-            swalCancel = translations['SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON'];
+      authenticationRestService.getCurrentUser().then(function(data) {
+        if (data.accountType !== lsAppConfig.accountType.guest) {
+          guestVm.guestObject = new GuestObjectService();
+          $translatePartialLoader.addPart('guests');
+          $translatePartialLoader.addPart('filesList');
+          $translate.refresh().then(function() {
+            $translate(['SWEET_ALERT.ON_GUEST_DELETE.TITLE', 'SWEET_ALERT.ON_GUEST_DELETE.TEXT',
+                'SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON'
+              ])
+              .then(function(translations) {
+                swalTitle = translations['SWEET_ALERT.ON_GUEST_DELETE.TITLE'];
+                swalText = translations['SWEET_ALERT.ON_GUEST_DELETE.TEXT'];
+                swalConfirm = translations['SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON'];
+                swalCancel = translations['SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON'];
+              });
           });
+          guestVm.tableParams = guestVm.loadTable();
+        } else {
+          $state.transitionTo('home');
+        }
       });
-      guestVm.tableParams = guestVm.loadTable();
     }
 
     /**

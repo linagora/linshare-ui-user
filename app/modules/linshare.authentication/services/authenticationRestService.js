@@ -105,21 +105,20 @@
      */
     function logout() {
       $log.debug('AuthenticationRestService : logout');
-      handler(Restangular.all(restUrl).one('logout').get())
-        .then(function() {
-            $log.info('Authentication logout : success');
-            authService.loginCancelled();
-            $cookies.remove('JSESSIONID');
-            if (lsAppConfig.postLogoutUrl) {
-              $window.location.href = lsAppConfig.postLogoutUrl;
-            } else {
-              var absUrl = $location.absUrl();
-              $window.location = absUrl.split('#')[0];
-            }
-          },
-          function(error) {
-            $log.error('Authentication logout : failed', error.status);
-          });
+      handler(Restangular.all(restUrl).one('logout').get()).then(function() {
+        deferred = undefined;
+        $log.info('Authentication logout : success');
+        $cookies.remove('JSESSIONID');
+        if (lsAppConfig.postLogoutUrl) {
+          $window.location.href = lsAppConfig.postLogoutUrl;
+        } else {
+          var absUrl = $location.absUrl();
+          $window.location = absUrl.split('#')[0];
+        }
+        authService.loginCancelled();
+      }).catch(function(error) {
+        $log.error('Authentication logout : failed', error.status);
+      });
     }
 
     /**
