@@ -23,8 +23,9 @@
                     &nbsp;&nbsp;{{contactsListsContactsVm.contactsListName}}</span>
               <span class="owner-info" tooltip-placement="bottom" tooltip-append-to-body="true"
                     tooltip-popup-delay="500" uib-tooltip="{{'CONTACTS_LISTS_DETAILS.OWNER' | translate}}">
-                | {{'BY' | translate}} {{contactsListsContactsVm.contactsListDetails.owner.firstName}}
-                {{contactsListsContactsVm.contactsListDetails.owner.lastName}}
+                &nbsp;|
+                {{'BY' | translate}}
+                {{contactsListsContactsVm.getOwnerName(contactsListsContactsVm.contactsListDetails, userLogged.uuid)}}
               </span>
             </a>
           </div>
@@ -295,13 +296,13 @@
                         <span class="file-name-disp single-line" contenteditable="false" spellcheck="false">
                           <span class="first-name">{{contactsListContact.firstName}} </span>
                           <span class="last-name">{{contactsListContact.lastName}}</span>
-                            <span
-                              x-ng-if="contactsListContact.lastName.length === 0 && contactsListsContactsVm.canManage"
-                                  class="shared-activated hidden-xs zmdi zmdi-alert-triangle"
-                                  x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)"
-                                  tooltip-placement="bottom" tooltip-append-to-body="true" tooltip-popup-delay="300"
-                                  uib-tooltip="{{'CONTACTS_LISTS_DETAILS.UNCOMPLETE_PROFILE' | translate}}">
-                            </span>
+                          <span
+                            x-ng-if="contactsListContact.lastName.length === 0 && contactsListsContactsVm.canManage"
+                                class="shared-activated hidden-xs zmdi zmdi-alert-triangle"
+                                x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)"
+                                tooltip-placement="bottom" tooltip-append-to-body="true" tooltip-popup-delay="300"
+                                uib-tooltip="{{'CONTACTS_LISTS_DETAILS.UNCOMPLETE_PROFILE' | translate}}">
+                          </span>
                         </span>
                         <span>
                           <p class="secondary-list-item-info hidden-xs">
@@ -311,71 +312,70 @@
                             {{contactsListContact.mail}}
                           </p>
                         </span>
-
                       </span>
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
-                        <ul class="actions pull-right"
-                            x-ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
-                          <li x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact,$event)"
-                              event-propagation-stop class="set-col-6">
-                            <a href=""
-                               title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
-                               class="set-col-12">
-                              <i class="zmdi zmdi-info-outline"></i>
-                            </a>
-                          </li>
-                          <li x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)"
-                              event-propagation-stop class="set-col-6" x-ng-if="contactsListsContactsVm.canManage">
-                            <a href=""
-                               title="{{'CONTACTS_LISTS_ACTION.MORE.EDIT' | translate}}"
-                               class="set-col-12">
-                              <i class="zmdi zmdi-edit"></i>
-                            </a>
-                          </li>
-                          <li class="hidden-xs" x-ng-if="contactsListsContactsVm.canManage">
-                            <a x-ng-click="contactsListsContactsVm.deleteContact(contactsListContact)"
-                               title="{{'CONTACTS_LISTS_ACTION.MORE.DELETE' | translate}}" event-propagation-stop>
-                              <i class="fa fa-trash-o"></i>
-                            </a>
-                          </li>
-                          <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                              auto-close="always" hover-dropdown-fix>
-                            <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
-                               event-propagation-stop class="set-col-12">
-                              <i class="zmdi zmdi-more-vert"></i>
-                            </a>
-                            <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided
-                             dropdown-content-left">
-                              <li>
-                                <a href=""
-                                   x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact,$event)">
-                                  <i class="zmdi zmdi-info-outline"></i>
-                                  {{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}
-                                </a>
-                              </li>
-                              <li x-ng-if="contactsListsContactsVm.canManage">
-                                <a href=""
-                                   x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)">
-                                  <i class="zmdi zmdi-edit"></i>
-                                  {{'CONTACTS_LISTS_ACTION.MORE.EDIT' | translate}}
-                                </a>
-                              </li>
-                              <li x-ng-if="contactsListsContactsVm.canManage">
-                                <a href="" x-ng-click="contactsListsContactsVm.deleteContact(contactsListContact)">
-                                  <i class="fa fa-trash-o"></i>
-                                  {{'CONTACTS_LISTS_ACTION.MORE.DELETE' | translate}}
-                                </a>
-                              </li>
-                              <li x-ng-if="!linshareModeProduction">
-                                <a href="">
-                                  <i class="fa fa-sign-out"></i>
-                                  {{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}
-                                </a>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </span>
+                      <ul class="actions pull-right"
+                          x-ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
+                        <li x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact,$event)"
+                            event-propagation-stop class="set-col-6">
+                          <a href=""
+                             title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
+                             class="set-col-12">
+                            <i class="zmdi zmdi-info-outline"></i>
+                          </a>
+                        </li>
+                        <li x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)"
+                            event-propagation-stop class="set-col-6" x-ng-if="contactsListsContactsVm.canManage">
+                          <a href=""
+                             title="{{'CONTACTS_LISTS_ACTION.MORE.EDIT' | translate}}"
+                             class="set-col-12">
+                            <i class="zmdi zmdi-edit"></i>
+                          </a>
+                        </li>
+                        <li class="hidden-xs" x-ng-if="contactsListsContactsVm.canManage">
+                          <a x-ng-click="contactsListsContactsVm.deleteContact(contactsListContact)"
+                             title="{{'CONTACTS_LISTS_ACTION.MORE.DELETE' | translate}}" event-propagation-stop>
+                            <i class="fa fa-trash-o"></i>
+                          </a>
+                        </li>
+                        <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
+                            auto-close="always" hover-dropdown-fix>
+                          <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
+                             event-propagation-stop class="set-col-12">
+                            <i class="zmdi zmdi-more-vert"></i>
+                          </a>
+                          <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided
+                           dropdown-content-left">
+                            <li>
+                              <a href=""
+                                 x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact,$event)">
+                                <i class="zmdi zmdi-info-outline"></i>
+                                {{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}
+                              </a>
+                            </li>
+                            <li x-ng-if="contactsListsContactsVm.canManage">
+                              <a href=""
+                                 x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)">
+                                <i class="zmdi zmdi-edit"></i>
+                                {{'CONTACTS_LISTS_ACTION.MORE.EDIT' | translate}}
+                              </a>
+                            </li>
+                            <li x-ng-if="contactsListsContactsVm.canManage">
+                              <a href="" x-ng-click="contactsListsContactsVm.deleteContact(contactsListContact)">
+                                <i class="fa fa-trash-o"></i>
+                                {{'CONTACTS_LISTS_ACTION.MORE.DELETE' | translate}}
+                              </a>
+                            </li>
+                            <li x-ng-if="!linshareModeProduction">
+                              <a href="">
+                                <i class="fa fa-sign-out"></i>
+                                {{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </span>
                   </div>
                 </td>
                 <td class="hidden-xs"

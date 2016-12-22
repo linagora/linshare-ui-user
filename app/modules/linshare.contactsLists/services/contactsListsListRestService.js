@@ -12,9 +12,9 @@
   contactsListsListRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
 
   /**
-   *  @namespace contactsListsListRestService
-   *  @descService to interact with ContactsListsList object by REST
-   *  @memberOf LinShare.contactsLists
+   * @namespace contactsListsListRestService
+   * @descService to interact with ContactsListsList object by REST
+   * @memberOf LinShare.contactsLists
    */
   function contactsListsListRestService($log, Restangular, ServerManagerService) {
     var
@@ -33,11 +33,11 @@
     ////////////
 
     /**
-     *  @name create
-     *  @desc Create a contactsList object
-     *  @param {Object} contactsListsDto - The contactsList object
-     *  @returns {Promise} server response
-     *  @memberOf LinShare.contactsLists.contactsListsListRestService
+     * @name create
+     * @desc Create a contactsList object
+     * @param {Object} contactsListsDto - The contactsList object
+     * @returns {Promise} server response
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
      */
     function create(contactsListsDto) {
       $log.debug('contactsListsListRestService - create');
@@ -45,11 +45,11 @@
     }
 
     /**
-     *  @name get
-     *  @desc Get a contactsList object
-     *  @param {String} contactsListsUuid - The uuid of a contactsList object
-     *  @returns {Promise} server response
-     *  @memberOf LinShare.contactsLists.contactsListsListRestService
+     * @name get
+     * @desc Get a contactsList object
+     * @param {String} contactsListsUuid - The uuid of a contactsList object
+     * @returns {Promise} server response
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
      */
     function get(contactsListsUuid) {
       $log.debug('contactsListsListRestService - get', contactsListsUuid);
@@ -57,11 +57,11 @@
     }
 
     /**
-     *  @name getList
-     *  @desc Get list of all contactsList
-     *  @param {Boolean} getOnlyMine - the boolean to check if get my contactsLists or others's
-     *  @returns {Promise} server response
-     *  @memberOf LinShare.contactsLists.contactsListsListRestService
+     * @name getList
+     * @desc Get list of all contactsList
+     * @param {Boolean} getOnlyMine - the boolean to check if get my contactsLists or others's
+     * @returns {Promise} server response
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
      */
     function getList(getOnlyMine) {
       $log.debug('contactsListsListRestService - getList');
@@ -69,11 +69,11 @@
     }
 
     /**
-     *  @name remove
-     *  @desc Remove a contactsList object
-     *  @param {String} contactsListsUuid - The uuid of a contactsList object
-     *  @returns {Promise} server response
-     *  @memberOf LinShare.contactsLists.contactsListsListRestService
+     * @name remove
+     * @desc Remove a contactsList object
+     * @param {String} contactsListsUuid - The uuid of a contactsList object
+     * @returns {Promise} server response
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
      */
     function remove(contactsListsUuid) {
       $log.debug('contactsListsListRestService - remove', contactsListsUuid);
@@ -81,11 +81,11 @@
     }
 
     /**
-     *  @name update
-     *  @desc Update a contactsList object
-     *  @param {Object} contactsListsDto - contactsList to update
-     *  @returns {Promise} server response
-     *  @memberOf LinShare.contactsLists.contactsListsListRestService
+     * @name update
+     * @desc Update a contactsList object
+     * @param {Object} contactsListsDto - contactsList to update
+     * @returns {Promise} server response
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
      */
     function update(contactsListsDto) {
       $log.debug('contactsListsListRestService - update');

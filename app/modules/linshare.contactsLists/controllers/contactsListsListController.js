@@ -11,7 +11,8 @@
 
   contactsListsListController.$inject = ['$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'documentUtilsService', 'growlService', 'lsAppConfig', 'NgTableParams'];
+    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService', 'growlService',
+    'lsAppConfig', 'NgTableParams'];
 
   /**
    * @namespace contactsListsListController
@@ -21,12 +22,13 @@
   function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, $translate,
                                        $translatePartialLoader, contactsListsList,
                                        contactsListsListRestService, contactsListsContactsRestService,
-                                       documentUtilsService, growlService, lsAppConfig, NgTableParams) {
+                                       contactsListsService, createNew, documentUtilsService, growlService,
+                                       lsAppConfig, NgTableParams) {
 
     /* jshint validthis:true */
     var contactsListsListVm = this;
 
-    var byMe,
+    var
       copySuffix,
       newContactsListName,
       privateList,
@@ -39,12 +41,13 @@
     contactsListsListVm.contactsListsOthersPage = lsAppConfig.contactsListsOthersPage;
     contactsListsListVm.contactsToAddList = [];
     contactsListsListVm.createContactsList = createContactsList;
+    contactsListsListVm.createNew = createNew;
     contactsListsListVm.currentSelectedDocument = {};
     contactsListsListVm.deleteContactsList = deleteContactsList;
     contactsListsListVm.duplicateItem = duplicateItem;
     contactsListsListVm.flagsOnSelectedPages = {};
     contactsListsListVm.getDetails = getDetails;
-    contactsListsListVm.getOwnerName = getOwnerName;
+    contactsListsListVm.getOwnerName = contactsListsService.getOwnerName;
     contactsListsListVm.getVisibility = getVisibility;
     contactsListsListVm.goToContactsListAndAddContacts = goToContactsListAndAddContacts;
     contactsListsListVm.goToContactsListTarget = goToContactsListTarget;
@@ -82,17 +85,14 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function activate() {
-    // TODO : IAB Translation Needed
-      contactsListsListVm.currentView = contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.myLists : contactsListsListVm.otherLists;
       $translatePartialLoader.addPart('contactsLists');
 
       loadTable();
 
-      $timeout(function() {
+      $translate.refresh().then(function() {
         $translate(['ACTION.NEW_CONTACTS_LIST',
           'CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS',
           'CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS',
-          'ME',
           'CONTACTS_LISTS_DETAILS.PRIVATE',
           'CONTACTS_LISTS_DETAILS.PUBLIC',
           'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS',
@@ -101,16 +101,16 @@
             newContactsListName = translations['ACTION.NEW_CONTACTS_LIST'];
             contactsListsListVm.myLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS'];
             contactsListsListVm.otherLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS'];
-            byMe = translations.ME;
+            contactsListsListVm.currentView = contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.myLists : contactsListsListVm.otherLists;
             privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
             publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
             stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
             copySuffix = translations['ACTION.COPY_ADJ'];
           });
-      }, 0);
+      });
 
       $timeout(function() {
-        if($stateParams.createNew === 'true' && contactsListsListVm.isFromMyContactsLists) {
+        if(contactsListsListVm.createNew && contactsListsListVm.isFromMyContactsLists) {
           createContactsList();
         }
       }, 0);
@@ -120,10 +120,10 @@
       });
     }
     /**
-     *  @name addSelectedDocument
-     *  @desc add contacts to list of new contacts to create
-     *  @param {Object} document - document to add to the list of selected contactsLists
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name addSelectedDocument
+     * @desc add contacts to list of new contacts to create
+     * @param {Object} document - document to add to the list of selected contactsLists
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB - refactor - remove document service and implement generic method which manage elements selections
     function addSelectedDocument(document) {
@@ -131,11 +131,11 @@
     }
 
     /**
-     *  @name cleanString
-     *  @desc remove useless spaces, backspaces and indents
-     *  @param {String} string - string to format
-     *  @returns {String} Formatted string
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name cleanString
+     * @desc remove useless spaces, backspaces and indents
+     * @param {String} string - string to format
+     * @returns {String} Formatted string
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB add it in utils service
     function cleanString(string) {
@@ -143,9 +143,9 @@
     }
 
     /**
-     *  @name closeSearch
-     *  @desc close search mode
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name closeSearch
+     * @desc close search mode
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB : refactor in directives/services
     function closeSearch() {
@@ -154,11 +154,11 @@
     }
 
     /**
-     *  @name copyAllContacts
-     *  @desc add all contacts from source contactsList to the duplicated contactsList
-     *  @param {String} contactsListUuidSource - uuid of source contactsList
-     *  @param {String} contactListUuidDestination - uuid of destination contactsList
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name copyAllContacts
+     * @desc add all contacts from source contactsList to the duplicated contactsList
+     * @param {String} contactsListUuidSource - uuid of source contactsList
+     * @param {String} contactListUuidDestination - uuid of destination contactsList
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function copyAllContacts(contactsListUuidSource, contactListUuidDestination) {
       contactsListsContactsRestService.getList(contactsListUuidSource).then(function(success) {
@@ -169,9 +169,9 @@
     }
 
     /**
-     *  @name createContactsList
-     *  @desc launch creation of contactsList with new unique name
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name createContactsList
+     * @desc launch creation of contactsList with new unique name
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function createContactsList() {
       if(!contactsListsListVm.isFromMyContactsLists) {
@@ -183,10 +183,10 @@
     }
 
     /**
-     *  @name createContactsListFunction
-     *  @desc create object contactList and add it to the table in edition mode
-     *  @param {String} itemName - name of the contactsList
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name createContactsListFunction
+     * @desc create object contactList and add it to the table in edition mode
+     * @param {String} itemName - name of the contactsList
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function createContactsListFunction(itemName) {
       var item = {
@@ -196,6 +196,7 @@
         show: true
       };
       contactsListsListVm.itemsList.push(item);
+      contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
       contactsListsListVm.tableParams.reload();
       $timeout(function() {
         renameContactsList(item, true);
@@ -203,10 +204,10 @@
     }
 
     /**
-     *  @name deleteCallback
-     *  @desc launch deletion of contactsLists
-     *  @param {Array<Object>} items - contactsLists to delete
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name deleteCallback
+     * @desc launch deletion of contactsLists
+     * @param {Array<Object>} items - contactsLists to delete
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB remove documentUtilsService and implement generic delete items methods (if possible in service)
     function deleteCallback(items) {
@@ -221,10 +222,10 @@
     }
 
     /**
-     *  @name deleteContactsList
-     *  @desc delete contacts alert
-     *  @param {Array<Object>} contactsListsList - contactsList to delete
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name deleteContactsList
+     * @desc delete contacts alert
+     * @param {Array<Object>} contactsListsList - contactsList to delete
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB remove documentUtilsService and implement generic delete items methods (if possible in service)
     function deleteContactsList(contactsListsList) {
@@ -232,10 +233,10 @@
     }
 
     /**
-     *  @name duplicateItem
-     *  @desc duplicate contactsList with unique name (with date)
-     *  @param {Object} item - contactsList to duplicate
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name duplicateItem
+     * @desc duplicate contactsList with unique name (with date)
+     * @param {Object} item - contactsList to duplicate
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function duplicateItem(item) {
       var itemCopy = _.clone(item);
@@ -245,11 +246,11 @@
     }
 
     /**
-     *  @name getDetails
-     *  @desc show details of contactsList
-     *  @param {Object} item - contactsList to show with details
-     *  @returns {Promise} Response of the server
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name getDetails
+     * @desc show details of contactsList
+     * @param {Object} item - contactsList to show with details
+     * @returns {Promise} Response of the server
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB remove documentUtilsService and implement own method
     function getDetails(item) {
@@ -257,26 +258,11 @@
     }
 
     /**
-     *  @name getOwnerName
-     *  @desc Get full name of owner
-     *  @param {Object} item - contactsList
-     *  @returns {String} Name of owner formatted
-     *  @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    function getOwnerName(item) {
-      if(item.owner.uuid === $scope.userLogged.uuid) {
-        return byMe;
-      } else {
-        return item.owner.firstName + ' ' + item.owner.lastName;
-      }
-    }
-
-    /**
-     *  @name getVisibility
-     *  @desc Get visibility of the contactsList (private of public)
-     *  @param {Object} item - contactsList
-     *  @returns {String} Private or public contactsList
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name getVisibility
+     * @desc Get visibility of the contactsList (private of public)
+     * @param {Object} item - contactsList
+     * @returns {String} Private or public contactsList
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function getVisibility(item) {
       if(item.public) {
@@ -287,26 +273,26 @@
     }
 
     /**
-     *  @name goToContactsListAndAddContacts
-     *  @desc redirect to the contactsList and open add contacts right sidebar
-     *  @param {String} contactsListUuid - uuid of the selected contactsList where to add new contacts
-     *  @param {String} contactsListName - name of the selected contactsList where to add new contacts
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name goToContactsListAndAddContacts
+     * @desc redirect to the contactsList and open add contacts right sidebar
+     * @param {String} contactsListUuid - uuid of the selected contactsList where to add new contacts
+     * @param {String} contactsListName - name of the selected contactsList where to add new contacts
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function goToContactsListAndAddContacts(contactsListUuid, contactsListName) {
       $state.go('administration.contactslists.contacts', {
         contactsListUuid: contactsListUuid,
         contactsListName: contactsListName,
-        addContacts: 'true'
+        addContacts: true
       });
     }
 
     /**
-     *  @name goToContactsListTarget
-     *  @desc add contacts to list of new contacts to create
-     *  @param {String} contactsListUuid - uuid of contactsList where to enter
-     *  @param {String} contactsListName - name of contactsList where to enter
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name goToContactsListTarget
+     * @desc add contacts to list of new contacts to create
+     * @param {String} contactsListUuid - uuid of contactsList where to enter
+     * @param {String} contactsListName - name of contactsList where to enter
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function goToContactsListTarget(contactsListUuid, contactsListName) {
       var contactsListNameElem = $('td[uuid=' + contactsListUuid + ']').find('.file-name-disp');
@@ -319,22 +305,22 @@
     }
 
     /**
-     *  @name goToMineAndCreateContactsList
-     *  @desc return to "Mine" tab and launch creation of contactsList
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name goToMineAndCreateContactsList
+     * @desc return to "Mine" tab and launch creation of contactsList
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function goToMineAndCreateContactsList() {
-      $state.go('administration.contactslists', {from: contactsListsListVm.contactsListsMinePage, createNew: 'true'});
+      $state.go('administration.contactslists', {from: contactsListsListVm.contactsListsMinePage, createNew: true});
     }
 
     /**
-     *  @name itemNotExits
-     *  @desc check if contactsList exists
-     *  @param {Array<Object>} items - list of contactsLists to look over
-     *  @param {String} newName - name to check
-     *  @param {object} newItem - new contactsList to compare
-     *  @returns {Boolean} if exists or not
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name itemNotExits
+     * @desc check if contactsList exists
+     * @param {Array<Object>} items - list of contactsLists to look over
+     * @param {String} newName - name to check
+     * @param {object} newItem - new contactsList to compare
+     * @returns {Boolean} if exists or not
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function itemNotExits(items, newName, newItem) {
       var notExists = true;
@@ -351,13 +337,13 @@
     }
 
     /**
-     *  @name itemNumber
-     *  @desc Check all "new contactsList (x)" where x is the number of the biggest value +1, or missing value
+     * @name itemNumber
+     * @desc Check all "new contactsList (x)" where x is the number of the biggest value +1, or missing value
               Exemple 1 : if 1, 2 and 3 exist, the next string will be => New contactsList (4),
               Exemple 2 : if 1, 2 ,4 exist the value of the next string will be => New contactsList (3), because 3 is missing
-     *  @param {Array<Object>} items - contactsLists
-     *  @returns {integer} number of new item name
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @param {Array<Object>} items - contactsLists
+     * @returns {integer} number of new item name
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function itemNumber(items) {
       if(items.length === 0 || !_.some(items, {name: newContactsListName})) {
@@ -386,10 +372,10 @@
     }
 
     /**
-     *  @name loadSidebarContent
-     *  @desc open the right sidebar with choosen template
-     *  @param {String} content - name of template to display
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name loadSidebarContent
+     * @desc open the right sidebar with choosen template
+     * @param {String} content - name of template to display
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function loadSidebarContent(content) {
       $scope.mainVm.sidebar.setData(contactsListsListVm);
@@ -398,9 +384,9 @@
     }
 
     /**
-     *  @name loadTable
-     *  @desc Load the table
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name loadTable
+     * @desc Load the table
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function loadTable() {
       contactsListsListVm.tableParams = new NgTableParams({
@@ -435,9 +421,9 @@
     }
 
     /**
-     *  @name openSearch
-     *  @desc focus to search input
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name openSearch
+     * @desc focus to search input
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB : refactor in directive/service
     function openSearch() {
@@ -446,9 +432,9 @@
     }
 
     /**
-     *  @name removeUnpersistedContactsLists
-     *  @desc remove all contactsLists which are not saved in database
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name removeUnpersistedContactsLists
+     * @desc remove all contactsLists which are not saved in database
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function removeUnpersistedContactsLists() {
       _.forEach(contactsListsListVm.itemsList, function(item) {
@@ -459,12 +445,12 @@
     }
 
     /**
-     *  @name renameContactsList
-     *  @desc switch contactsList name to edit mode
-     *  @param {Object} item - original contactsList
-     *  @param {Object} newItem - contactsList with new name
-     *  @returns {Promise} Response of the server
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name renameContactsList
+     * @desc switch contactsList name to edit mode
+     * @param {Object} item - original contactsList
+     * @param {Object} newItem - contactsList with new name
+     * @returns {Promise} Response of the server
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function renameContactsList(item, newItem) {
       var itemNameElem = $('td[uuid=' + item.uuid + ']').find('.file-name-disp');
@@ -472,9 +458,9 @@
     }
 
     /**
-     *  @name resetSelectedDocuments
-     *  @desc clear the array of selected documents
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name resetSelectedDocuments
+     * @desc clear the array of selected documents
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB remove documentUtilsService and implement generic selections methods with services
     function resetSelectedDocuments() {
@@ -484,12 +470,12 @@
     }
 
     /**
-     *  @name saveContacts
-     *  @desc Create contacts to a specific contactsList
-     *  @param {Boolean} duplicate - check if it is a new contactsList or a duplicata
-     *  @param {String} contactListUuidDestination - uuid of destination contactsList
-     *  @returns {Promise} Response of the server
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name saveContacts
+     * @desc Create contacts to a specific contactsList
+     * @param {Boolean} duplicate - check if it is a new contactsList or a duplicata
+     * @param {String} contactListUuidDestination - uuid of destination contactsList
+     * @returns {Promise} Response of the server
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function saveContacts(duplicate, contactListUuidDestination) {
       var errorOccured = false;
@@ -520,11 +506,11 @@
     }
 
     /**
-     *  @name saveNewItem
-     *  @desc persist new contactsList to database
-     *  @param {Object} item - contactsList to save
-     *  @param {Boolean} duplicate - is launched from new contactsList or duplicata
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name saveNewItem
+     * @desc persist new contactsList to database
+     * @param {Object} item - contactsList to save
+     * @param {Boolean} duplicate - is launched from new contactsList or duplicata
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function saveNewItem(item, duplicate) {
       contactsListsListRestService.create({name: cleanString(item.name)}).then(function(data) {
@@ -544,12 +530,12 @@
     }
 
     /**
-     *  @name selectDocumentsOnCurrentPage
-     *  @desc Helper to select all element of the current table page
-     *  @param {Array<Object>} data - List of element to be selected
-     *  @param {Integer} page - Page number of the table
-     *  @param {Boolean} selectFlag - element selected or not
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name selectDocumentsOnCurrentPage
+     * @desc Helper to select all element of the current table page
+     * @param {Array<Object>} data - List of element to be selected
+     * @param {Integer} page - Page number of the table
+     * @param {Boolean} selectFlag - element selected or not
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB remove documentUtilsService and implement generic selections methods with services
     function selectDocumentsOnCurrentPage(data, page, selectFlag) {
@@ -579,10 +565,10 @@
     }
 
     /**
-     *  @name setDropdownSelected
-     *  @desc open dropdown menu
-     *  @param {Object} $event - event handle
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name setDropdownSelected
+     * @desc open dropdown menu
+     * @param {Object} $event - event handle
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB : directive to externalize this code
     function setDropdownSelected($event) {
@@ -594,13 +580,13 @@
     }
 
     /**
-     *  @name setElemToEditable
-     *  @desc Set element to editable in the table to change name
-     *  @param {String} idElem - uuid of selected contactsList (also DOM's element's id)
-     *  @param {Object} data - selected contactsList
-     *  @param {Boolean} isNewItem -
-     *  @returns {Null}
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name setElemToEditable
+     * @desc Set element to editable in the table to change name
+     * @param {String} idElem - uuid of selected contactsList (also DOM's element's id)
+     * @param {Object} data - selected contactsList
+     * @param {Boolean} isNewItem -
+     * @returns {Null}
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB - refactor - directives and services
     function setElemToEditable(idElem, data, isNewItem) {
@@ -701,11 +687,11 @@
     }
 
     /**
-     *  @name showItemDetails
-     *  @desc Get selected contactsList's details and open right sidebar with these details
-     *  @param {Object} item - contactsList
-     *  @param {Object} event - event handle
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name showItemDetails
+     * @desc Get selected contactsList's details and open right sidebar with these details
+     * @param {Object} item - contactsList
+     * @param {Object} event - event handle
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB - refactor with service
     function showItemDetails(item, event) {
@@ -722,11 +708,11 @@
     }
 
     /**
-     *  @name sortDropdownSetActive
-     *  @desc change ordonnation of the table
-     *  @param {Object} sortField - contact to add
-     *  @param {Object} $event - event handle
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name sortDropdownSetActive
+     * @desc change ordonnation of the table
+     * @param {Object} sortField - contact to add
+     * @param {Object} $event - event handle
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function sortDropdownSetActive(sortField, $event) {
       contactsListsListVm.toggleSelectedSort = !contactsListsListVm.toggleSelectedSort;
@@ -738,10 +724,10 @@
     }
 
     /**
-     *  @name switchVisibility
-     *  @desc switch visibility of contactsList (private or public)
-     *  @param {Object} item - contactsList to edit
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name switchVisibility
+     * @desc switch visibility of contactsList (private or public)
+     * @param {Object} item - contactsList to edit
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function switchVisibility(item) {
       item.public = !item.public;
@@ -753,12 +739,12 @@
     }
 
     /**
-     *  @name tableApplyFilter
-     *  @desc Helper to apply a filter on a selection of colum
-     *  @param {String} filterValue - The value to use for the filters
-     *  @param {Array<String>} columns - The name of the column to apply the filter on
-     *  @param {String} operator - The filter operator
-     *  @memberOf LinShare.Guests.LinshareGuestsController
+     * @name tableApplyFilter
+     * @desc Helper to apply a filter on a selection of colum
+     * @param {String} filterValue - The value to use for the filters
+     * @param {Array<String>} columns - The name of the column to apply the filter on
+     * @param {String} operator - The filter operator
+     * @memberOf LinShare.Guests.LinshareGuestsController
      */
     //TODO - IAB: refactor as utils
     function tableApplyFilter(filterValue, columns, operator) {
@@ -771,9 +757,9 @@
     }
 
     /**
-     *  @name toggleFilterBySelectedFiles
-     *  @desc isolate selected elements
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name toggleFilterBySelectedFiles
+     * @desc isolate selected elements
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function toggleFilterBySelectedFiles() {
       if(contactsListsListVm.tableParams.filter().isSelected) {
@@ -784,9 +770,9 @@
     }
 
     /**
-     *  @name toggleSearchState
-     *  @desc open/close search input
-     *  @memberOf LinShare.contactsLists.contactsListsListController
+     * @name toggleSearchState
+     * @desc open/close search input
+     * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function toggleSearchState() {
       if(!contactsListsListVm.searchMobileDropdown) {

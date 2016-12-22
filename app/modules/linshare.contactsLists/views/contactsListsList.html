@@ -20,12 +20,12 @@
             <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
             <a x-ng-if="contactsListsListVm.isFromMyContactsLists"
                x-ui-sref="administration.contactslists({from:
-              contactsListsListVm.contactsListsMinePage, createNew: 'false'})">
+              contactsListsListVm.contactsListsMinePage})">
               {{"CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS" | translate}}
             </a>
             <a x-ng-if="!contactsListsListVm.isFromMyContactsLists"
                x-ui-sref="administration.contactslists({from:
-              contactsListsListVm.contactsListsOthersPage, createNew: 'false'})">
+              contactsListsListVm.contactsListsOthersPage})">
               {{"CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS" | translate}}
             </a>
           </div>
@@ -61,14 +61,14 @@
                           <!-- TODO : If I select a contact and then switch to the other list view the multislect
                            shoud not be displayed and th previous selection becomes deselected-->
                           <a x-ui-sref="administration.contactslists({from:
-                          contactsListsListVm.contactsListsMinePage, createNew: 'false'})"
+                          contactsListsListVm.contactsListsMinePage})"
                              x-ng-class="{'active-check':contactsListsListVm.isFromMyContactsLists}">
                             {{"CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS" | translate}}
                           </a>
                         </li>
                         <li>
                           <a x-ui-sref="administration.contactslists({from:
-                          contactsListsListVm.contactsListsOthersPage, createNew: 'false'})"
+                          contactsListsListVm.contactsListsOthersPage})"
                              x-ng-class="{'active-check':!contactsListsListVm.isFromMyContactsLists}">
                             {{"CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS" | translate}}
                           </a>
@@ -197,7 +197,7 @@
                         <li>
                           <!-- TODO : IAB Translation needed-->
                           <a x-ui-sref="administration.contactslists({from:
-                               contactsListsListVm.contactsListsMinePage, createNew: 'false'})"
+                               contactsListsListVm.contactsListsMinePage})"
                              x-ng-class="{'active-check':contactsListsListVm.isFromMyContactsLists}"
                              x-ng-click="contactsListsListVm.currentView = contactsListsListVm.myLists">
                             {{"CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS" | translate}}
@@ -205,7 +205,7 @@
                           </li>
                           <li>
                             <a x-ui-sref="administration.contactslists({from:
-                               contactsListsListVm.contactsListsOthersPage, createNew: 'false'})"
+                               contactsListsListVm.contactsListsOthersPage})"
                                x-ng-class="{'active-check':!contactsListsListVm.isFromMyContactsLists}"
                                x-ng-click="contactsListsListVm.currentView = contactsListsListVm.otherLists">
                               {{"CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS" | translate}}
@@ -292,9 +292,7 @@
                 <span>{{'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT' | translate}}</span>
               </a>
             </span>
-            <span
-              x-ng-class="{'hide' : (contactsListsListVm.selectedContactsLists.length > 1) ||
-              (!contactsListsListVm.isFromMyContactsLists)}">
+            <span x-ng-show="!linshareModeProduction">
               <a class="plain-text-button share-link"
                  title="{{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}"
                  x-ng-click="contactsListsListVm.duplicateItem(contactsListsListVm.selectedContactsLists[0])">
@@ -462,10 +460,10 @@
                         </span>
                         <span>
                           <p class="secondary-list-item-info hidden-xs">
-                            {{'BY' | translate}} {{contactsListsListVm.getOwnerName(contactsList)}}
+                            {{'BY' | translate}} {{contactsListsListVm.getOwnerName(contactsList, userLogged.uuid)}}
                           </p>
                           <p class="mobile-list-item-info visible-xs">
-                            {{'BY' | translate}} {{contactsListsListVm.getOwnerName(contactsList)}}
+                            {{'BY' | translate}} {{contactsListsListVm.getOwnerName(contactsList, userLogged.uuid)}}
                           </p>
                         </span>
                       </span>
@@ -506,7 +504,7 @@
                             <ul
                               class="uib-dropdown-menu dropdown-menu-right dm-icon
                                dropdown-divided dropdown-content-left">
-                              <li>
+                              <li x-ng-show="!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->
                                 <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
                                   <i class="fa fa-copy"></i>
                                   {{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}
@@ -619,8 +617,7 @@
          x-ng-class="{'hide' : (!contactsListsListVm.isFromMyContactsLists)}"
          x-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)"></i>
       <div class="col-xs-2"
-           x-ng-class="{'hide' : (contactsListsListVm.selectedContactsLists.length > 1) ||
-              (!contactsListsListVm.isFromMyContactsLists)}"
+           x-ng-show="!linshareModeProduction"
            x-ng-click="contactsListsListVm.duplicateItem(contactsListsListVm.selectedContactsLists[0])">
         <i class="fa fa-copy"></i>
       </div>

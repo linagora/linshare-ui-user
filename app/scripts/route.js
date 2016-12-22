@@ -193,7 +193,10 @@ angular.module('linshareUiUserApp')
       })
 
       .state('administration.contactslists', {
-        url: '/contactslists/:from?createNew',
+        url: '/contactslists/:from',
+        params: {
+          createNew: undefined
+        },
         templateUrl: 'modules/linshare.contactsLists/views/contactsListsList.html',
         controller: 'contactsListsListController',
         controllerAs: 'contactsListsListVm',
@@ -205,6 +208,9 @@ angular.module('linshareUiUserApp')
               return $state.go('administration.contactslists', {from: lsAppConfig.contactsListsMinePage});
             }
           },
+          createNew : function($stateParams) {
+            return _.isUndefined($stateParams.createNew) ? false : $stateParams.createNew;
+          },
           contactsListsList: function($stateParams, lsAppConfig, contactsListsListRestService) {
             return contactsListsListRestService.getList($stateParams.from !== lsAppConfig.contactsListsOthersPage);
           }
@@ -212,11 +218,17 @@ angular.module('linshareUiUserApp')
       })
 
       .state('administration.contactslists.contacts', {
-        url: '/:contactsListUuid/:contactsListName/contacts?addContacts',
+        url: '/:contactsListUuid/:contactsListName/contacts',
+        params: {
+          addContacts: undefined
+        },
         templateUrl: 'modules/linshare.contactsLists/views/contactsListsContacts.html',
         controller: 'contactsListsContactsController',
         controllerAs: 'contactsListsContactsVm',
         resolve: {
+          addContacts: function($stateParams) {
+            return _.isUndefined($stateParams.addContacts) ? false : $stateParams.addContacts;
+          },
           contactsListsContacts: function(contactsListsContactsRestService, $stateParams) {
             return contactsListsContactsRestService.getList($stateParams.contactsListUuid);
           }
