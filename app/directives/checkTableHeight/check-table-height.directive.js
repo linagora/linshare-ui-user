@@ -38,13 +38,13 @@
      */
     function linkFn(scope, element, attrs, checkTableHeightVm) {
       scope.$on('$stateChangeSuccess', function() {
-        checkTableHeightVm.checkAndSetNewWidth(scope.mactrl.sidebarToggle.left);
+        scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
         checkTableHeightVm.checkAndSetNewWidthSidebarRight();
         checkTableHeightVm.resizeTableBody();
       });
 
       angular.element(window).resize(function() {
-        checkTableHeightVm.checkAndSetNewWidth(scope.mactrl.sidebarToggle.left);
+        scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
         checkTableHeightVm.checkAndSetNewWidthSidebarRight();
         checkTableHeightVm.resizeTableBody();
       });
@@ -52,7 +52,7 @@
       scope.$watch(function($window) {
         return $window.innerWidth;
       }, function() {
-        checkTableHeightVm.checkAndSetNewWidth(scope.mactrl.sidebarToggle.left);
+        scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
         $timeout(function() {
           checkTableHeightVm.resizeTableBody();
         }, 450);

@@ -27,9 +27,23 @@ angular
         mainVm.removeShareDocument(flowFile);
       });
 
-      $rootScope.$on('$stateChangeStart', function(/*event, toState, toParams, fromState, fromParams*/) {
+      $rootScope.$on('$stateChangeStart', function( /*event, toState, toParams, fromState, fromParams*/ ) {
         //TODO: The hide should be filtered depending on state and param
         mainVm.sidebar.hide();
+      });
+
+      //Watcher for setting sidebar in mobile mode or desktop on resize
+      angular.element(window).resize(function() {
+         $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
+         checkTableHeightService.checkAndSetNewWidthSidebarRight();
+      });
+      $scope.$watch(function() {
+        return $window.innerWidth;
+      }, function() {
+         $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
+        $timeout(function() {
+           checkTableHeightService.checkAndSetNewWidthSidebarRight();
+        }, 450);
       });
 
       mainVm.removeShareDocument = removeShareDocument;
@@ -222,10 +236,10 @@ angular
       $scope.refFlowShares = {};
 
       this.resizeDragNDropCtn = function(attr) {
-        checkTableHeightService.checkAndSetNewWidth(attr);
+        attr = checkTableHeightService.checkAndSetNewWidth();
       };
       if ($scope.mactrl.sidebarToggle.left) {
-        checkTableHeightService.checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+        $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
       }
 
       var widthWindow = angular.element(window).width();

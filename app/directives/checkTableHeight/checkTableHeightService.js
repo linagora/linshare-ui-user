@@ -28,12 +28,12 @@
     /**
      *  @name checkAndSetNewWidth
      *  @desc Check and set a new width
-     *  @param {Boolean} element
+     *  @return {Boolean}
      *  @memberof linshareUiUserApp.checkTableHeightService
      */
-    function checkAndSetNewWidth(element) {
+    function checkAndSetNewWidth() {
       var widthWindow = angular.element(window).width();
-      element = widthWindow > 1093 ? true : false;
+      return widthWindow > 1093 ? true : false;
     }
 
     /*TODO: class name in hyphen*/
