@@ -24,8 +24,8 @@
   function LinshareGuestsController($filter, $log, $q, $scope, $state, $translate, $translatePartialLoader,
     authenticationRestService, growlService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams) {
     /* jshint validthis: true */
+    var guestVm = this;
     var
-      guestVm = this,
       swalCancel,
       swalConfirm,
       swalText,
@@ -79,20 +79,21 @@
     function activate() {
       authenticationRestService.getCurrentUser().then(function(data) {
         if (data.accountType !== lsAppConfig.accountType.guest) {
-          // TODO : KLE Translation Needed
-          guestVm.currentView = guestVm.isMineGuest ? 'MES INVITES' : 'AUTRES INVITES';
           guestVm.guestObject = new GuestObjectService();
           $translatePartialLoader.addPart('guests');
           $translatePartialLoader.addPart('filesList');
           $translate.refresh().then(function() {
             $translate(['SWEET_ALERT.ON_GUEST_DELETE.TITLE', 'SWEET_ALERT.ON_GUEST_DELETE.TEXT',
-                'SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON'
+                'SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON',
+                'HEADER_GUEST.SLIDER.MY_GUEST', 'HEADER_GUEST.SLIDER.OTHER_GUEST'
               ])
               .then(function(translations) {
                 swalTitle = translations['SWEET_ALERT.ON_GUEST_DELETE.TITLE'];
                 swalText = translations['SWEET_ALERT.ON_GUEST_DELETE.TEXT'];
                 swalConfirm = translations['SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON'];
                 swalCancel = translations['SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON'];
+                guestVm.currentView = guestVm.isMineGuest ?
+                  translations['HEADER_GUEST.SLIDER.MY_GUEST'] : translations['HEADER_GUEST.SLIDER.OTHER_GUEST'];
               });
           });
           guestVm.tableParams = guestVm.loadTable();
