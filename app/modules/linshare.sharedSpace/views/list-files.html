@@ -68,21 +68,21 @@
             </a>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
-            <a href="" ui-sref="sharedspace.all" class="breadcrumb">
-              <i class="zmdi zmdi-file"></i>
+            <a href="" ui-sref="sharedspace.all">
+              <i class="zmdi zmdi-accounts-alt"></i>
               {{"BREADCRUMB_TITLE_WORKGROUP" | translate}}
             </a>
             <span x-ng-repeat-start="folder in sharedSpaceListVm.breadcrumbFolders" class="sub-category-chevron">
               <i class="zmdi zmdi-chevron-right"></i>
             </span>
-            <a x-ng-repeat-end class="breadcrumb"
+            <a x-ng-repeat-end
                x-ng-click="sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, folder.parent, folder.uuid, folder.name, true)">
               {{folder.name}}
             </a>
             <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
-            <span>
+            <a>
               &nbsp;&nbsp;{{sharedSpaceListVm.folderName}}
-            </span>
+            </a>
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items wide-action-bar">

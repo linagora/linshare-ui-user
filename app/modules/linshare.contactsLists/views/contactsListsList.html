@@ -13,19 +13,15 @@
             </a>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
-            <a href="javascript:void(0)">
+            <a href="javascript:void(0)" class="click-disabled">
               <i class="zmdi zmdi-account-box-phone"></i>
               {{"CONTACTS_LISTS_DETAILS.CONTACTS_LISTS" | translate}}
             </a>
-            <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
-            <a x-ng-if="contactsListsListVm.isFromMyContactsLists"
-               x-ui-sref="administration.contactslists({from:
-              contactsListsListVm.contactsListsMinePage})">
+            <span class="sub-category-chevron pipe-separator">|</span>
+            <a x-ng-if="contactsListsListVm.isFromMyContactsLists" class="click-disabled">
               {{"CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS" | translate}}
             </a>
-            <a x-ng-if="!contactsListsListVm.isFromMyContactsLists"
-               x-ui-sref="administration.contactslists({from:
-              contactsListsListVm.contactsListsOthersPage})">
+            <a x-ng-if="!contactsListsListVm.isFromMyContactsLists" class="click-disabled"> 
               {{"CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS" | translate}}
             </a>
           </div>
