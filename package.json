@@ -19,9 +19,9 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "autoprefixer": "^6.5.4",
     "bower": "~1.7.0",
     "grunt": "~1.0.1",
-    "grunt-autoprefixer": "~3.0.4",
     "grunt-cli": "~1.2.0",
     "grunt-concurrent": "~2.3.0",
     "grunt-contrib-clean": "~1.0.0",
@@ -41,6 +41,7 @@
     "grunt-newer": "~1.2.0",
     "grunt-ng-annotate": "~2.0.2",
     "grunt-ngdocs": "~0.2.10",
+    "grunt-postcss": "^0.8.0",
     "grunt-protractor-runner": "~3.2.0",
     "grunt-svgmin": "~3.2.0",
     "grunt-usemin": "~3.1.1",
