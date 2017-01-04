@@ -1,19 +1,53 @@
 /**
- * Created by Alpha Sall on June 14th, 2016.
+ * loginController Controller
+ * @namespace linshareUiUserApp
  */
+(function() {
+  'use strict';
 
-'use strict';
+  angular
+    .module('linshareUiUserApp')
+    .controller('loginController', loginController);
 
-angular.module('linshareUiUserApp')
-.controller('loginController', ['$rootScope', 'authenticationRestService', 'languageService', 'lsAppConfig',
-  function($rootScope, authenticationRestService, languageService, lsAppConfig) {
+  loginController.$inject = ['authenticationRestService', 'languageService', 'lsAppConfig'];
 
-    this.lsAppConfig = lsAppConfig;
-    this.email = '';
-    this.password = '';
+  /**
+   * @namespace loginController
+   * @desc Manage login page
+   * @memberOf linshareUiUserApp
+   */
+  function loginController(authenticationRestService, languageService, lsAppConfig) {
+    /* jshint validthis: true */
+    var loginVm = this;
 
-    var locale = languageService.getLocale();
-    var splitLocale = function(locale) {
+    loginVm.changeLoginLanguage = changeLoginLanguage;
+    loginVm.email = '';
+    loginVm.lsAppConfig = lsAppConfig;
+    loginVm.password = '';
+    loginVm.submitForm = submitForm;
+
+    activate();
+
+    ////////////
+
+    /**
+     * @name activate
+     * @desc Activation function of the controller, launch at every instantiation
+     * @memberOf linshareUiUserApp.loginController
+     */
+    function activate() {
+      var locale = languageService.getLocale();
+      loginVm.loginLocale = splitLocale(locale);
+    }
+
+    /**
+     * @name splitLocale
+     * @desc Split locale's string
+     * @param {String} locale - location language value
+     * @returns {Object} language details
+     * @memberOf linshareUiUserApp.loginController
+     */
+    function splitLocale(locale) {
       locale = locale.split('-');
       var language = locale[0];
       var country;
@@ -21,16 +55,26 @@ angular.module('linshareUiUserApp')
         country = locale[1].toLowerCase();
       }
       return {language: language, country: country};
-    };
-    this.loginLocale = splitLocale(locale);
+    }
 
-    this.submitForm = function() {
-      authenticationRestService.login(this.email, this.password);
-    };
+    /**
+     * @name submitForm
+     * @desc Submit login form to login user
+     * @memberOf linshareUiUserApp.loginController
+     */
+    function submitForm() {
+      authenticationRestService.login(loginVm.email, loginVm.password);
+    }
 
-    this.changeLoginLanguage = function(lang) {
+    /**
+     * @name changeLoginLanguage
+     * @desc Change language of login page
+     * @param {String} lang - Language selected
+     * @memberOf linshareUiUserApp.loginController
+     */
+    function changeLoginLanguage(lang) {
       languageService.changeLocale(lang);
-      this.loginLocale = splitLocale(lang);
-    };
-
-}]);
+      loginVm.loginLocale = splitLocale(lang);
+    }
+  }
+})();

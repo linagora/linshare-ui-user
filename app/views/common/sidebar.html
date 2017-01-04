@@ -25,7 +25,7 @@
        </li>
      </ul>
    </div>
-  <ul class="main-menu" x-ng-repeat="tab in tabs">
+  <ul class="main-menu" x-ng-repeat="tab in lsLeftSidebarVm.tabs">
     <li x-ng-if="tab.link" x-ng-show="tab.disabled == false"
         x-ng-class="{'active simple-menu': currentState.name==tab.name}">
       <a x-ui-sref="{{tab.link}}"
@@ -40,11 +40,11 @@
       </a>
       <ul>
         <li x-ng-show="link.disabled == false" x-ng-repeat="link in tab.links"
-            x-ng-mouseover="changeColor(tab.color)"
-            x-ng-mouseleave="changeColor('inherit')">
+            x-ng-mouseover="lsLeftSidebarVm.changeColor(link, tab.color)"
+            x-ng-mouseleave="lsLeftSidebarVm.changeColor(link, 'inherit')">
           <a x-ui-sref="{{link.link}}"
              x-ui-sref-active="active"
-             x--ng-class="{'disabled': link.disabled }">
+             x--ng-class="{'disabled': link.disabled}">
             {{ link.name | translate }}
           </a>
         </li>
