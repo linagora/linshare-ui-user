@@ -2,23 +2,12 @@
 
 angular
   .module('linshareUiUserApp')
-  .factory('MyErrorHandler', function($q, $log, $http, lsAppConfig) {
-    return function(part, lang) {
-      $log.error('The "' + lsAppConfig.localPath + '/' + lang + '/' + part + '.json' + '" part was not loaded.');
-      var path = 'i18n/original/' + lang + '/' + part + '.json';
-      return $q.when(
-        $http.get(path).then(function(data) {
-          return data.data;
-        })
-      );
-    };
-  })
   .config(function(RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
                    $translatePartialLoaderProvider, lsAppConfig, $windowProvider) {
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
     $translateProvider.useLoader('$translatePartialLoader', {
       urlTemplate: pathToLocal + '/{lang}/{part}.json',
-      loadFailureHandler: 'MyErrorHandler'
+      loadFailureHandler: 'translateLoadFailureHandlerService'
     });
     $translateProvider.fallbackLanguage('en-US');
     $translatePartialLoaderProvider.addPart('general');
@@ -62,121 +51,126 @@ angular
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   })
 
-.config(function(localStorageServiceProvider, $logProvider, lsAppConfig) {
-  $logProvider.debugEnabled(lsAppConfig.debug);
-  localStorageServiceProvider
-    .setPrefix('lsUser')
-    .setNotify(true, true);
-})
+  .config(function(localStorageServiceProvider, $logProvider, lsAppConfig) {
+    $logProvider.debugEnabled(lsAppConfig.debug);
+    localStorageServiceProvider
+      .setPrefix('lsUser')
+      .setNotify(true, true);
+  })
 
-.run(function($rootScope, $filter, $location, Restangular, growlService, $log, $window, localStorageService,
-              languageService) {
-  $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
-  var storedLocale = localStorageService.get('locale');
-  if (storedLocale) {
-    languageService.changeLocale(storedLocale);
-  } else {
-    languageService.changeLocale($rootScope.browserLanguage);
-  }
+  .run(function($rootScope, $filter, $location, Restangular, growlService, $log, $window, localStorageService,
+                languageService) {
+    $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
+    var storedLocale = localStorageService.get('locale');
+    if (storedLocale) {
+      languageService.changeLocale(storedLocale);
+    } else {
+      languageService.changeLocale($rootScope.browserLanguage);
+    }
 
-  /**
-   * Restangular Interceptor
-   * Show message box when an error occured
-   */
-  Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
-    switch (response.status) {
-      case 400:
-        if (response.data.errCode !== 26006) {
-          growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
-        }
-        $log.debug('Error ' + response.status, response);
-        break;
-      case 404:
-        $log.debug('Resource not found', response);
-        break;
-      case 500:
-        growlService.notifyTopCenter('GROWL_ALERT.ERROR.500', 'danger');
-        $log.debug('Error ' + response.status, response);
-        break;
-      case 503:
-        growlService.notifyTopCenter('GROWL_ALERT.ERROR.503', 'danger');
-        break;
-      default:
-        if (response.status) {
-          growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + response.status, 'danger');
+    /**
+     * Restangular Interceptor
+     * Show message box when an error occured
+     */
+    Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+      switch(response.status) {
+        case 400:
+          if (response.data.errCode !== 26006) {
+            growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
+          }
           $log.debug('Error ' + response.status, response);
-        } else {
-          var $translate = $filter('translate');
-          growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + $translate('NO_RESPONSE_ERROR'), 'danger');
-          $log.debug('deferred', deferred);
-          $log.debug('response', response);
-          $log.debug('responseHandler', responseHandler);
-          deferred.resolve(false);
-          return false;
-        }
-    }
-    return true;
-  });
+          break;
+        case 404:
+          $log.debug('Resource not found', response);
+          break;
+        case 500:
+          growlService.notifyTopCenter('GROWL_ALERT.ERROR.500', 'danger');
+          $log.debug('Error ' + response.status, response);
+          break;
+        case 503:
+          growlService.notifyTopCenter('GROWL_ALERT.ERROR.503', 'danger');
+          break;
+        default:
+          if (response.status) {
+            growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + response.status, 'danger');
+            $log.debug('Error ' + response.status, response);
+          } else {
+            var $translate = $filter('translate');
+            growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + $translate('NO_RESPONSE_ERROR'), 'danger');
+            $log.debug('deferred', deferred);
+            $log.debug('response', response);
+            $log.debug('responseHandler', responseHandler);
+            deferred.resolve(false);
+            return false;
+          }
+      }
+      return true;
+    });
 
-  /*jshint unused: false */
-  Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-    $log.debug('addResponseInterceptor => response', response);
-    if (response.status === 401) {
-      $rootScope.$emit('lsIntercept401');
-    }
-    return data;
-  });
+    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
+      $rootScope.toState = toState.name;
+      $rootScope.toParams = toParams;
+      $rootScope.fromState = fromState.name;
+      $rootScope.fromParams = fromParams;
+    });
 
-  $rootScope.$on('lsIntercept401', function(event, data) {
-    $log.debug('data from lsIntercept401', data);
-  });
+    /*jshint unused: false */
+    Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+      $log.debug('addResponseInterceptor => response', response);
+      if (response.status === 401) {
+        $rootScope.$emit('lsIntercept401');
+      }
+      return data;
+    });
 
-  $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
-    $rootScope.toState = toState.name;
-    $rootScope.toParams = toParams;
-    $rootScope.fromState = fromState.name;
-    $rootScope.fromParams = fromParams;
-  });
+    $rootScope.$on('lsIntercept401', function(event, data) {
+      $log.debug('data from lsIntercept401', data);
+    });
 
-  $rootScope.$on('$translatePartialLoaderStructureChanged', function() {
-    languageService.refreshLocale();
-  });
-})
+    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
+      $rootScope.toState = toState.name;
+      $rootScope.fromState = fromState.name;
+    });
 
-.run(function($rootScope, $state, $stateParams, Restangular, lsAppConfig, $window) {
-  var protocol = $window.location.protocol;
-  var host = $window.location.host.replace(/\/$/, '');
-  var fqdn = protocol + '//' + host;
-  lsAppConfig.backendUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
-  Restangular.setBaseUrl(lsAppConfig.backendUrl);
-  $rootScope.$state = $state;
-  $rootScope.$stateParams = $stateParams;
-  $rootScope.linshareBaseUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
-  $rootScope.devMode = lsAppConfig.devMode;
-  $rootScope.linshareModeProduction = lsAppConfig.production;
-})
+    $rootScope.$on('$translatePartialLoaderStructureChanged', function() {
+      languageService.refreshLocale();
+    });
+  })
 
-.run(['$templateCache', '$http', function($templateCache, $http) {
-  $http.get('views/includes/templates.html', {
-    cache: $templateCache
-  });
-}])
+  .run(function($rootScope, $state, $stateParams, Restangular, lsAppConfig, $window) {
+    var protocol = $window.location.protocol;
+    var host = $window.location.host.replace(/\/$/, '');
+    var fqdn = protocol + '//' + host;
+    lsAppConfig.backendUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
+    Restangular.setBaseUrl(lsAppConfig.backendUrl);
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+    $rootScope.linshareBaseUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
+    $rootScope.devMode = lsAppConfig.devMode;
+    $rootScope.linshareModeProduction = lsAppConfig.production;
+  })
 
-.run(['$templateCache', function($templateCache) {
+  .run(['$templateCache', '$http', function($templateCache, $http) {
+    $http.get('views/includes/templates.html', {
+      cache: $templateCache
+    });
+  }])
 
-  $templateCache.get('views/includes/sidebar-right.html');
+  .run(['$templateCache', function($templateCache) {
 
-  $templateCache.get('views/includes/footer.html');
+    $templateCache.get('views/includes/sidebar-right.html');
 
-  $templateCache.get('views/includes/header.html');
+    $templateCache.get('views/includes/footer.html');
 
-  $templateCache.get('views/includes/profile-menu.html');
+    $templateCache.get('views/includes/header.html');
 
-  $templateCache.get('views/includes/sidebar-left.html');
+    $templateCache.get('views/includes/profile-menu.html');
 
-  $templateCache.put('views/includes/templates.html', '');
+    $templateCache.get('views/includes/sidebar-left.html');
 
-}]);
+    $templateCache.put('views/includes/templates.html', '');
+
+  }]);
 
 /*jshint latedef:false */
 function validate(str) {

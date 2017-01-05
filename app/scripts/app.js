@@ -1,16 +1,11 @@
-'use strict';
-
 /**
- * @ngdoc overview
- * @name linshareUiUserApp
- * @description
- *
- * This is the main module of the application
- * The app is in construction
- *
- **/
-angular
-  .module('linshareUiUserApp', [
+ * linshareUiUserApp Module
+ * @namespace linshareUiUserApp
+ */
+(function() {
+  'use strict';
+
+  angular.module('linshareUiUserApp', [
     'ngAnimate',
     'ngCookies',
     'ngMessages',
@@ -42,3 +37,5 @@ angular
     'linshare.anonymousUrl',
     'linshare.resetPassword'
   ]);
+
+})();
