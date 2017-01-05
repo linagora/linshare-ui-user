@@ -131,9 +131,11 @@ angular
     $log.debug('data from lsIntercept401', data);
   });
 
-  $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
+  $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
     $rootScope.toState = toState.name;
+    $rootScope.toParams = toParams;
     $rootScope.fromState = fromState.name;
+    $rootScope.fromParams = fromParams;
   });
 
   $rootScope.$on('$translatePartialLoaderStructureChanged', function() {

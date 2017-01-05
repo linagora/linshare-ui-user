@@ -93,6 +93,11 @@
         $scope.linkActive = MenuService.getSectionName(toState.name);
       });
 
+      $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+        $log.debug('$stateChangeError - ', error);
+        $state.go(URL_HOME);
+      });
+
       $scope.$on('event:auth-loginConfirmed', function(event, data) {
         authenticationRestService.version().then(function(data) {
           $scope.coreVersion = data.version;
@@ -101,12 +106,13 @@
 
         $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
         $scope.loggedUser.setUser(data);
-        $state.go($scope.urlTogoAfterLogin);
+        $state.go($scope.urlTogoAfterLogin, $scope.urlTogoAfterLoginParams);
       });
 
       $scope.$on('event:auth-loginRequired', function() {
         $log.debug('event:auth-loginRequired : toState', $rootScope.toState);
         $scope.urlTogoAfterLogin = $rootScope.toState;
+        $scope.urlTogoAfterLoginParams = $rootScope.toParams;
         $scope.loggedUser.getUser();
         if ($scope.urlTogoAfterLogin === URL_LOGIN) {
           $scope.urlTogoAfterLogin = URL_HOME;
