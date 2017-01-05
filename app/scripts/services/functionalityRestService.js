@@ -12,9 +12,9 @@
   functionalityRestService.$inject = ['$log', '$q', 'Restangular', 'ServerManagerService'];
 
   /**
-   *  @namespace functionalityRestService
-   *  @desc Service to interact with Functionality object by REST
-   *  @memberOf linshareUiUserApp
+   * @namespace functionalityRestService
+   * @desc Service to interact with Functionality object by REST
+   * @memberOf linshareUiUserApp
    */
   function functionalityRestService($log, $q, Restangular, ServerManagerService) {
     var
@@ -34,11 +34,11 @@
     ////////////
 
     /**
-     *  @name get
-     *  @desc Return the Object containing all functionality and associated param(s)
-     *  @param {String} funcId - The id of the Funcionality object
-     *  @returns {Promise} server response
-     *  @memberOf linshareUiUserApp.functionalityRestService
+     * @name get
+     * @desc Return the Object containing all functionality and associated param(s)
+     * @param {String} funcId - The id of the Funcionality object
+     * @returns {Promise} server response
+     * @memberOf linshareUiUserApp.functionalityRestService
      */
     function get(funcId) {
       $log.debug('LinshareFunctionalityRestService : get', funcId);
@@ -46,10 +46,10 @@
     }
 
     /**
-     *  @name getAll
-     *  @desc Return the Object containing all functionality and associated param(s)
-     *  @returns {Promise} Object functionality:param
-     *  @memberOf linshareUiUserApp.functionalityRestService
+     * @name getAll
+     * @desc Return the Object containing all functionality and associated param(s)
+     * @returns {Promise} Object functionality:param
+     * @memberOf linshareUiUserApp.functionalityRestService
      */
     function getAll() {
       $log.debug('LinshareFunctionalityRestService : getAll');
@@ -57,9 +57,9 @@
     }
 
     /**
-     *  @name getFunctionalities
-     *  @desc Contruct an Object containing the functionality and associated param(s)
-     *  @memberOf linshareUiUserApp.functionalityRestService
+     * @name getFunctionalities
+     * @desc Contruct an Object containing the functionality and associated param(s)
+     * @memberOf linshareUiUserApp.functionalityRestService
      */
     function getFunctionalities() {
       $log.debug('LinshareFunctionalityRestService : getFunctionalities');
@@ -76,15 +76,15 @@
     }
 
     /**
-     *  @name getFunctionalityParams
-     *  @desc Return the param(s) corresponding to the functionality key given
-     *  @param {String} key - The key name functionality
-     *  @returns {Promise} List of param
-     *  @memberOf linshareUiUserApp.functionalityRestService
+     * @name getFunctionalityParams
+     * @desc Return the param(s) corresponding to the functionality key given
+     * @param {String} key - The key name functionality
+     * @returns {Promise} List of param
+     * @memberOf linshareUiUserApp.functionalityRestService
      */
     function getFunctionalityParams(key) {
       $log.debug('LinshareFunctionalityRestService : getFunctionalityParams', key);
-      return this.getAll().then(function(all) {
+      return getAll().then(function(all) {
         return all[key];
       });
     }

@@ -89,8 +89,8 @@
 
       $rootScope.$on('$stateChangeStart', function(event, toState) {
         mainVm.sidebar.hide();
-        $scope.currentState = MenuService.getProperties(toState.name);
-        $scope.linkActive = MenuService.getSectionName(toState.name);
+        $scope.currentState = MenuService.getProperties(toState.name, false);
+        $scope.linkActive = MenuService.getProperties(toState.name, true);
       });
 
       $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
@@ -102,6 +102,7 @@
         authenticationRestService.version().then(function(data) {
           $scope.coreVersion = data.version;
         });
+
         getProductVersion();
 
         $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
@@ -251,7 +252,7 @@
         toggle: toggle,
         show: show,
         hide: hide,
-        isVisible: isVisible,
+        isVisible: isVisible
       };
 
       return sidebar;

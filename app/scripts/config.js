@@ -26,6 +26,11 @@ angular.module('linshareUiUserApp')
       internal: 'INTERNAL',
       guest: 'GUEST'
     },
+    roles: {
+      admin: 'ADMIN',
+      write: 'WRITE',
+      readonly: 'READ'
+    },
 
     //Value used for sidebar
     share: 'share',
