@@ -37,7 +37,12 @@ angular.module('linshare.share')
             shareActionVm.newShare.addDocuments(flowFile.linshareDocument);
             delete currentUploads[upload];
           } else {
-            $scope.refFlowShares[upload] = [$scope.share_array.length];
+            if (_.isUndefined($scope.refFlowShares[upload])) {
+              $scope.refFlowShares[upload] = {
+                shareArrayIndex: []
+              };
+            }
+            $scope.refFlowShares[upload].shareArrayIndex.push([$scope.share_array.length]);
             shareActionVm.newShare.addwaitingUploadIdentifiers(upload);
           }
         }

@@ -327,7 +327,8 @@
           $scope.selectedUploads[flowFile.uniqueIdentifier] = {
             name: flowFile.name,
             size: flowFile.size,
-            type: flowFile.getType()
+            type: flowFile.getType(),
+            flowId: flowFile.uniqueIdentifier
           };
         } else {
           delete $scope.selectedUploads[flowFile.uniqueIdentifier];
