@@ -1,159 +1,245 @@
 {
+  "ACTION": {
+    "ADD_MEMBER": "Ajouter un membre",
+    "COPY": "Copier",
+    "COPY_ADJ": "Copie",
+    "COPY_DROPDOWN": {
+      "COPY_AND_SHARE": "Copier & partager",
+      "COPY_TO_MY_FILES": "Vers mes fichier",
+      "SIMPLE_COPY": "Copie simple"
+    },
+    "COPY_IN_MY_FILES": "Copier dans mes fichiers",
+    "COPY_IN_WORKGROUP": "Copier dans un groupe de travail",
+    "COPY_TO": "Copier vers",
+    "COPY_TO_SHARED_SPACE": "Vers l'espace commun",
+    "DELETE": "Supprimer",
+    "DELETE_ALL": "Tout supprimer",
+    "DISPLAY": "Afficher",
+    "DOWNLOAD": "Télécharger",
+    "EXTERNAL_EDIT": "Télécharger & verrouiller",
+    "FAVORITES": "Favoris",
+    "GO_TO_TRASH": "Voir la corbeille",
+    "INFO_WORKGROUP": "Détail du groupe de travail",
+    "INFORMATION": "Information",
+    "LOCK": "Verrouiller",
+    "MOVE": "Déplacer",
+    "NEW_CONTACTS_LIST": "Nouvelle liste de contacts",
+    "NEW_FOLDER": "Nouveau répertoire",
+    "NEW_WORKGROUP": "Nouveau groupe de travail",
+    "REFRESH": "Actualiser",
+    "RENAME": "Renommer",
+    "SHARE": "Partager",
+    "SILENCE": "Silence",
+    "TRANSFERT": "Transférer",
+    "VIEW_VERSIONING": "Voir l'historique"
+  },
+  "ACTIVITIES": "Activités",
+  "ADD_FILES_DROPDOWN": {
+    "UPLOAD_AND_SHARE": "Déposer & partager ",
+    "UPLOAD_FILE": "Déposer un fichier",
+    "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail",
+    "UPLOAD_IN_MY_FILES": "Dans mes fichiers",
+    "UPLOAD_IN_WORKGROUP": "Dans un groupe de travail",
+    "UPLOAD_SHARE": "Dépôt & Partage"
+  },
+  "ANONYMOUS_URL": {
+    "HELLO": "Bonjour",
+    "MSG": "Vous avez reçu des fichiers de la part de "
+  },
   "APPLICATION_NAME": "LinShare",
   "APPLICATION_WELCOME_HOME": "Bienvenue sur votre application de partage de fichiers",
-  "REMOVE": "Supprimer",
-  "DOWNLOAD": "Télécharger",
-  "WIP": "En cours de contruction",
-  "ME": "Moi",
-  "BY": "Par",
-  "NO_ACTION_AVAILABLE": "Aucune action disponible",
-  "ACTIVITIES": "Activités",
-  "DOMAIN": "Domaine",
-  "VALIDATE": "Valider",
-  "EDIT": "Editer",
-  "UNKNOWN_USER": "Utilisateur inconnu",
-  "UNKNOWN_FIRST_LETTER": "N.C.",
-  "PENDING_UPLOADS": "en attente",
-  "SAVING": "Sauvegarde en cours...",
-  "NAVIGATION": {
-    "NEXT": "Suivant",
-    "PREVIOUS": "Précédent",
-    "PAUSE": "Pause",
-    "STOP": "Arrêter",
-    "PLAY": "Continuer",
-    "REPLAY": "Replay",
-    "SEND": "Envoyer",
-    "CANCEL": "Annuler",
-    "SHARE": "Partager"
-  },
-  "EXTENSIONS": {
-    "PDF": "PDF",
-    "IMAGE": "Image",
-    "AUDIO": "Audio",
-    "VIDEO": "Vidéo",
-    "POWERPOINT": "PowerPoint",
-    "WORD": "Word",
-    "ARCHIVE": "Archive",
-    "EXCEL": "Excel",
-    "TEXT": "Texte",
-    "CODE": "Code"
-  },
   "BOUTON_ADD_FILE_TITLE": "Ajouter",
-  "MENU_TITLE": {
-    "HOME": "Accueil",
-    "FILES": "Espace personnel",
-    "MY_FILES": "Mes fichiers",
-    "RECEIVED_SHARES": "Mes partages reçus",
-    "SHARES": "Mes fichiers partagés",
-    "SHARED_SPACE": "Espace commun",
-    "ADMIN": "Administration",
-    "CONTACTS_LISTS": "Listes de contacts",
-    "GUESTS": "Comptes invités",
-    "USERS": "Les utilisateurs",
-    "GROUP_MEMBERS": "Mes groupes",
-    "UPLOAD_MANAGMENT": "Invitations de dépôts",
-    "UPLOAD_REQUESTS": "Invitations de dépôts",
-    "UPLOAD_PROPOSITIONS": "Demandes d'invitations de dépôts",
-    "AUDIT": "Audit",
-    "AUDIT_GLOBAL": "Audit global",
-    "AUDIT_UPLOAD_REQUEST": "Audit invitations de dépôts",
-    "UPLOAD_QUEUE": "Mes dépôts"
-  },
-  "LINK_DISABLED": "Lien inactif",
-  "WELCOME_USER": "Bienvenue ",
   "BOUTON_LABEL_TITLE": {
-    "SHARE": "partager",
+    "COPY": "copier",
     "DELETE": "supprimer",
-    "MULTIPLE_SELECT": "sélection multiple",
+    "DOWNLOAD": "télécharger",
     "INFO": "info",
     "MORE_ACTIONS": "plus d'actions",
-    "DOWNLOAD": "télécharger",
-    "SHARED": "Partagé",
-    "COPY": "copier"
+    "MULTIPLE_SELECT": "sélection multiple",
+    "SHARE": "partager",
+    "SHARED": "Partagé"
   },
-  "LOGIN": {
-    "EMAIL_PLACEHOLDER": "Courriel",
-    "PASSWORD_PLACEHOLDER": "Mot de passe",
-    "KEEP_SIGNED": "Rester connecté",
-    "LOGIN_HEADER": "Connexion",
-    "FORGOTTEN_PASSWORD": "Mot de passe oublié ?",
-    "CONNECTION_LINK": "Se connecter",
-    "TAGLINE": "Partage de fichiers sécurisé en open source",
-    "COPYRIGHT": "Vous utilisez la version libre et gratuite de LinShare™, développé par , Linagora © 2009–2016.Contribuez à la R&D du produit en souscrivant à une offre entreprise."
+  "BY": "Par",
+  "COMMON": {
+    "SIDEBAR": {
+      "CORE_VERSION": "Version du core",
+      "PRODUCT_VERSION": "Version du produit"
+    }
+  },
+  "COMPONENTS": {
+    "AUTOCOMPLETE_USERS": {
+      "INPUT_PLACEHOLDER": "Rechercher des utilisateurs",
+      "INVALID_EMPTY_LIST": "Cette liste ne peut être vide."
+    }
+  },
+  "DOMAIN": "Domaine",
+  "DOWNLOAD": "Télécharger",
+  "EDIT": "Editer",
+  "EXTENSIONS": {
+    "ARCHIVE": "Archive",
+    "AUDIO": "Audio",
+    "CODE": "Code",
+    "EXCEL": "Excel",
+    "IMAGE": "Image",
+    "PDF": "PDF",
+    "POWERPOINT": "PowerPoint",
+    "TEXT": "Texte",
+    "VIDEO": "Vidéo",
+    "WORD": "Word"
+  },
+  "FILTER_COMPONENT": {
+    "ADVANCED_SEARCH_TITLE": "Recherche avancée",
+    "BY_SIZE": "Taille",
+    "FILTER_BY": "Filtrer par",
+    "FILTER_BY_DATE": {
+      "BEGINNING_DATE": "Date de début",
+      "CREATION_DATE": "Date de création",
+      "ENDING_DATE": "Date de fin",
+      "HEADER": "Filtrer par date",
+      "MODIFICATION_DATE": "Date de modification"
+    },
+    "FILTER_BY_RECIPIENT": {
+      "HEADER": "Filtrer par Emetteur",
+      "PLACEHOLDER": "Veuillez saisir un courriel, un nom ou un prénom"
+    },
+    "FILTER_BY_SIZE": "Filtrer par taille",
+    "IS_SHARED": "Partagé",
+    "ORDER_BY_NAME": "Nom",
+    "PLACEHOLDER_FILE_NAME": "Rechercher par nom",
+    "REINITIALIZE": "Réinitialiser",
+    "SUBMIT": "Filtrer"
   },
   "HEADER": {
-    "SETTINGS": "Paramètres",
-    "LOGOUT": "Déconnexion",
-    "FULL_SCREEN": "Plein écran",
     "CLEAR_LOCAL_STORAGE": "Purger le stockage local",
-    "NO_SHARES": "Vous n'avez aucun partage en cours.",
     "FILES_TO_SHARE": "Fichiers destinés au partage",
-    "UPLOAD_PROGRESS": {
-      "TITLE": "Progression de dépôt",
-      "UPLOAD_DONE": "terminé",
-      "UPLOAD_PAUSED": "en pause",
-      "UPLOAD_SERVER": "traitement serveur en cours",
-      "FOOTER": "Voir tous",
-      "TO_MY_SPACE": "Vers mon espace personnel",
-      "TO_COMMON_SPACE": "Vers l'espace commun"
-    },
+    "FULL_SCREEN": "Plein écran",
+    "LOGOUT": "Déconnexion",
+    "NO_SHARES": "Vous n'avez aucun partage en cours.",
+    "SETTINGS": "Paramètres",
     "SHARING_PROGRESS": {
       "SHARE_DONE": "envoyé",
       "SHARE_IN_PROGRESS": "en cours ..."
+    },
+    "UPLOAD_PROGRESS": {
+      "FOOTER": "Voir tous",
+      "TITLE": "Progression de dépôt",
+      "TO_COMMON_SPACE": "Vers l'espace commun",
+      "TO_MY_SPACE": "Vers mon espace personnel",
+      "UPLOAD_DONE": "terminé",
+      "UPLOAD_PAUSED": "en pause",
+      "UPLOAD_SERVER": "traitement serveur en cours"
     }
   },
-  "ACTION": {
-    "DISPLAY": "Afficher",
-    "DOWNLOAD": "Télécharger",
+  "INFORMATION_TAB": {
+    "ABORT_EDIT": "Annuler votre modification",
+    "CREATED_THE": "Créé le",
+    "EDIT_DESCRIPTION": "Editer la description",
+    "INSERT_DESCRIPTION": "Saisissez une description",
+    "META_DATA": "Méta données",
+    "PREVIOUS_UPDATE": "Historique",
+    "TITLE": "DETAILS",
+    "UPTADED_THE": "Modifié le ",
+    "VERSIONS": "Mise à jours"
+  },
+  "LINK_DISABLED": "Lien inactif",
+  "LOGIN": {
+    "CONNECTION_LINK": "Se connecter",
+    "COPYRIGHT": "Vous utilisez la version libre et gratuite de LinShare™, développé par , Linagora © 2009–2016.Contribuez à la R&D du produit en souscrivant à une offre entreprise.",
+    "EMAIL_PLACEHOLDER": "Courriel",
+    "FORGOTTEN_PASSWORD": "Mot de passe oublié ?",
+    "KEEP_SIGNED": "Rester connecté",
+    "LOGIN_HEADER": "Connexion",
+    "NOTIFICATION": {
+      "SUCCESS": "Bonjour ${firstName}",
+      "ERROR": "L'authentification a échoué, l'email ou le mot de passe est incorrect"
+    },
+    "PASSWORD_PLACEHOLDER": "Mot de passe",
+    "TAGLINE": "Partage de fichiers sécurisé en open source"
+  },
+  "ME": "Moi",
+  "MENU_TITLE": {
+    "ADMIN": "Administration",
+    "AUDIT": "Audit",
+    "AUDIT_GLOBAL": "Audit global",
+    "AUDIT_UPLOAD_REQUEST": "Audit invitations de dépôts",
+    "CONTACTS_LISTS": "Listes de contacts",
+    "FILES": "Espace personnel",
+    "GROUP_MEMBERS": "Mes groupes",
+    "GUESTS": "Comptes invités",
+    "HOME": "Accueil",
+    "MY_FILES": "Mes fichiers",
+    "RECEIVED_SHARES": "Mes partages reçus",
+    "SHARED_SPACE": "Espace commun",
+    "SHARES": "Mes fichiers partagés",
+    "UPLOAD_MANAGMENT": "Invitations de dépôts",
+    "UPLOAD_PROPOSITIONS": "Demandes d'invitations de dépôts",
+    "UPLOAD_QUEUE": "Mes dépôts",
+    "UPLOAD_REQUESTS": "Invitations de dépôts",
+    "USERS": "Les utilisateurs"
+  },
+  "NAVIGATION": {
+    "CANCEL": "Annuler",
+    "NEXT": "Suivant",
+    "PAUSE": "Pause",
+    "PLAY": "Continuer",
+    "PREVIOUS": "Précédent",
+    "REPLAY": "Replay",
+    "SEND": "Envoyer",
     "SHARE": "Partager",
-    "REFRESH": "Actualiser",
-    "COPY_TO": "Copier vers",
-    "COPY_IN_WORKGROUP": "Copier dans un groupe de travail",
-    "COPY_TO_SHARED_SPACE": "Vers l'espace commun",
-    "COPY_IN_MY_FILES": "Copier dans mes fichiers",
+    "STOP": "Arrêter"
+  },
+  "NO_ACTION_AVAILABLE": "Aucune action disponible",
+  "PENDING_UPLOADS": "en attente",
+  "REMOVE": "Supprimer",
+  "SAVING": "Sauvegarde en cours...",
+  "SELECTION": {
+    "NUM_ITEM_SELECTED": "Fichiers sélectionnés"
+  },
+  "SELECTION_TOOLBAR": {
+    "CANCEL": "Annuler",
+    "CANCEL_ALL": "Tout annuler",
+    "CLEAR": "Nettoyer",
+    "CLEAR_ALL": "Tout nettoyer",
+    "COPY": "Copier",
     "DELETE": "Supprimer",
     "DELETE_ALL": "Tout supprimer",
-    "TRANSFERT": "Transférer",
-    "INFORMATION": "Information",
-    "FAVORITES": "Favoris",
-    "SILENCE": "Silence",
-    "ADD_MEMBER": "Ajouter un membre",
-    "RENAME": "Renommer",
-    "COPY": "Copier",
-    "GO_TO_TRASH": "Voir la corbeille",
-    "NEW_WORKGROUP": "Nouveau groupe de travail",
-    "NEW_FOLDER": "Nouveau répertoire",
-    "NEW_CONTACTS_LIST": "Nouvelle liste de contacts",
-    "COPY_ADJ": "Copie",
-    "MOVE": "Déplacer",
-    "VIEW_VERSIONING": "Voir l'historique",
-    "COPY_DROPDOWN": {
-      "COPY_TO_MY_FILES": "Vers mes fichier",
-      "COPY_AND_SHARE": "Copier & partager",
-      "SIMPLE_COPY": "Copie simple"
-    },
-    "INFO_WORKGROUP": "Détail du groupe de travail",
-    "EXTERNAL_EDIT": "Télécharger & verrouiller",
-    "LOCK": "Verrouiller"
+    "DESELECT_ALL": "Désélectionner",
+    "ELEMENTS": "Eléments",
+    "FILES": "Fichier(s)",
+    "PAUSE": "Pause",
+    "PAUSE_ALL": "Tout mettre en pause",
+    "PLAY": "Lancer",
+    "ORDER_BY": "Ordonner par",
+    "RESET": "Réinitialiser",
+    "RETRY": "Réessayer",
+    "RETRY_ALL": "Réessayer tous",
+    "SELECT_ALL": "Tout sélectionner",
+    "SELECTED_ELEMENTS": "élément(s) sélectionné(s)",
+    "SELECTED_FILES": "fichier(s) sélectionné(s)",
+    "SHARE": "Partager",
+    "SHOW_IN_FILES": "Voir dans mes fichiers",
+    "SHOW_SELECTION": "Voir sélection",
+    "STOP": "Arrêter"
   },
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
-      "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Vous êtes sur le point de supprimer des fichiers !",
+      "CANCEL_BUTTON": "Annuler !",
       "CONFIRM_BUTTON": "Supprimer !",
-      "CANCEL_BUTTON": "Annuler !"
+      "TEXT": "Vous êtes sur le point de supprimer des fichiers !",
+      "TITLE": "Êtes-vous sûr?"
     },
     "ON_LOCALSTORAGE_DELETE": {
-      "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Toutes les valeurs du stockage local seront effacées",
       "CONFIRM_BUTTON": "Effacer",
       "DONE": "Terminé",
-      "IS_CLEARED": "Le stockage local a été effacé"
+      "IS_CLEARED": "Le stockage local a été effacé",
+      "TEXT": "Toutes les valeurs du stockage local seront effacées",
+      "TITLE": "Êtes-vous sûr?"
     },
     "ON_FILE_COPY": {
-      "TEXT": "Vous êtes sur le point de copier des fichiers reçus dans votre espace !",
+      "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Copier",
-      "CANCEL_BUTTON": "Annuler"
+      "TEXT": "Vous êtes sur le point de copier des fichiers reçus dans votre espace !",
+      "TITLE": "Êtes-vous sûr?"
     },
     "ON_SHARE_DELETE": {
       "CANCEL_BUTTON": "Annuler!",
@@ -162,106 +248,18 @@
       "TITLE": "Êtes-vous sûr?"
     }
   },
-  "FILTER_COMPONENT": {
-    "PLACEHOLDER_FILE_NAME": "Rechercher par nom",
-    "ADVANCED_SEARCH_TITLE": "Recherche avancée",
-    "FILTER_BY_SIZE": "Filtrer par taille",
-    "BY_SIZE": "Taille",
-    "IS_SHARED": "Partagé",
-    "ORDER_BY_NAME": "Nom",
-    "FILTER_BY": "Filtrer par",
-    "FILTER_BY_DATE": {
-      "HEADER": "Filtrer par date",
-      "MODIFICATION_DATE": "Date de modification",
-      "CREATION_DATE": "Date de création",
-      "BEGINNING_DATE": "Date de début",
-      "ENDING_DATE": "Date de fin"
-    },
-    "FILTER_BY_RECIPIENT": {
-      "HEADER": "Filtrer par Emetteur",
-      "PLACEHOLDER": "Veuillez saisir un courriel, un nom ou un prénom"
-    },
-    "SUBMIT": "Filtrer",
-    "REINITIALIZE": "Réinitialiser"
-  },
-  "TABLE_HEADER": {
-    "NAME": "Nom",
-    "MODIFICATION_DATE": "Dernière modification",
-    "SIZE": "Taille",
-    "ACTION": "Actions"
-  },
-  "SELECTION_TOOLBAR": {
-    "SELECTED_FILES": "fichier(s) sélectionné(s)",
-    "SELECTED_ELEMENTS": "élément(s) sélectionné(s)",
-    "SELECT_ALL": "Tout sélectionner",
-    "DESELECT_ALL": "Désélectionner",
-    "SHARE": "Partager",
-    "COPY": "Copier",
-    "DELETE": "Supprimer",
-    "DELETE_ALL": "Tout supprimer",
-    "CANCEL": "Annuler",
-    "CANCEL_ALL": "Tout annuler",
-    "RESET": "Réinitialiser",
-    "FILES": "Fichier(s)",
-    "ELEMENTS": "Eléments",
-    "SHOW_SELECTION": "Voir sélection",
-    "SHOW_IN_FILES": "Voir dans mes fichiers",
-    "PAUSE_ALL": "Tout mettre en pause",
-    "CLEAR_ALL": "Tout nettoyer",
-    "PAUSE": "Pause",
-    "CLEAR": "Nettoyer",
-    "PLAY": "Lancer",
-    "RETRY": "Réessayer",
-    "RETRY_ALL": "Réessayer tous",
-    "STOP": "Arrêter",
-    "ORDER_BY": "Ordonner par"
-  },
-  "COMPONENTS": {
-    "AUTOCOMPLETE_USERS": {
-      "INPUT_PLACEHOLDER": "Rechercher des utilisateurs",
-      "INVALID_EMPTY_LIST": "Cette liste ne peut être vide."
-    }
-  },
-  "ADD_FILES_DROPDOWN": {
-    "UPLOAD_FILE": "Déposer un fichier",
-    "UPLOAD_AND_SHARE": "Déposer & partager ",
-    "UPLOAD_IN_MY_FILES": "Dans mes fichiers",
-    "UPLOAD_IN_WORKGROUP": "Dans un groupe de travail",
-    "UPLOAD_IN_GROUP": "Déposer dans un groupe de travail",
-    "UPLOAD_SHARE": "Dépôt & Partage"
-  },
   "TRANSFERS_DROPDOWN": {
+    "BEFORE_SENDINGS": "avant l'envoi",
     "SHARE": "Partage",
     "SHARE_NUMBER": "Partage",
-    "UPLOADS": "Dépôt",
-    "BEFORE_SENDINGS": "avant l'envoi"
+    "UPLOADS": "Dépôt"
   },
+  "UNKNOWN_USER": "Utilisateur inconnu",
+  "UNKNOWN_FIRST_LETTER": "N.C.",
+  "VALIDATE": "Valider",
+  "WIP": "En cours de contruction",
   "WORK_IN_PROGRESS": {
     "WORK_IN_PROGRESS_INFO": "Cette section est actuellement indisponible",
     "WORK_IN_PROGRESS_MSG": "EN COURS DE CONSTRUCTION"
-  },
-  "SELECTION": {
-    "NUM_ITEM_SELECTED": "Fichiers sélectionnés"
-  },
-  "INFORMATION_TAB": {
-    "TITLE": "DETAILS",
-    "UPTADED_THE": "Modifié le ",
-    "META_DATA": "Méta données",
-    "INSERT_DESCRIPTION": "Saisissez une description",
-    "CREATED_THE": "Créé le",
-    "PREVIOUS_UPDATE": "Historique",
-    "VERSIONS": "Mise à jours",
-    "EDIT_DESCRIPTION": "Editer la description",
-    "ABORT_EDIT": "Annuler votre modification"
-  },
-  "ANONYMOUS_URL": {
-    "HELLO": "Bonjour",
-    "MSG": "Vous avez reçu des fichiers de la part de "
-  },
-  "COMMON": {
-    "SIDEBAR": {
-      "PRODUCT_VERSION": "Version du produit",
-      "CORE_VERSION": "Version du core"
-    }
   }
 }
