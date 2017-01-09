@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .controller('loginController', loginController);
 
-  loginController.$inject = ['authenticationRestService', 'languageService', 'lsAppConfig'];
+  loginController.$inject = ['$translate', 'authenticationRestService', 'growlService', 'languageService', 'lsAppConfig'];
 
   /**
    * @namespace loginController
    * @desc Manage login page
    * @memberOf linshareUiUserApp
    */
-  function loginController(authenticationRestService, languageService, lsAppConfig) {
+  function loginController($translate, authenticationRestService, growlService, languageService, lsAppConfig) {
     /* jshint validthis: true */
     var loginVm = this;
 
@@ -54,7 +54,10 @@
       if (locale.length > 1) {
         country = locale[1].toLowerCase();
       }
-      return {language: language, country: country};
+      return {
+        language: language,
+        country: country
+      };
     }
 
     /**
@@ -63,7 +66,22 @@
      * @memberOf linshareUiUserApp.loginController
      */
     function submitForm() {
-      authenticationRestService.login(loginVm.email, loginVm.password);
+      authenticationRestService.login(loginVm.email, loginVm.password)
+        .then(function(user) {
+          $translate(['LOGIN.NOTIFICATION.SUCCESS'])
+            .then(function(translations) {
+              growlService.notifyTopRight(
+                translations['LOGIN.NOTIFICATION.SUCCESS'].replace('${firstName}', user.firstName),
+                'inverse'
+              );
+            });
+        })
+        .catch(function() {
+          $translate(['LOGIN.NOTIFICATION.ERROR'])
+            .then(function(translations) {
+              growlService.notifyTopRight(translations['LOGIN.NOTIFICATION.ERROR'], 'danger');
+            });
+        });
     }
 
     /**

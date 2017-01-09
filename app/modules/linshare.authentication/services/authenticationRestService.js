@@ -8,17 +8,17 @@
     .module('linshare.authentication')
     .factory('authenticationRestService', authenticationRestService);
 
-  authenticationRestService.$inject = ['$cookies', '$location', '$log', '$q', '$timeout', '$translate', '$window',
-    'authService', 'growlService', 'lsAppConfig', 'Restangular', 'ServerManagerService'
+  authenticationRestService.$inject = ['$cookies', '$location', '$log', '$q', '$window', 'authService', 'lsAppConfig',
+    'Restangular', 'ServerManagerService'
   ];
 
   /**
    * @namespace authenticationRestService
    * @desc Service to interact with User Authentication object by REST
-   * @memberOf Linshare.Authentication
+   * @memberOf Linshare.authentication
    */
-  function authenticationRestService($cookies, $location, $log, $q, $timeout, $translate, $window,
-    authService, growlService, lsAppConfig, Restangular, ServerManagerService) {
+  function authenticationRestService($cookies, $location, $log, $q, $window, authService, lsAppConfig, Restangular,
+    ServerManagerService) {
     var
       deferred = $q.defer(),
       handler = ServerManagerService.responseHandler,
@@ -38,7 +38,7 @@
     /**
      * @name checkAuthentication
      * @desc Check user atuhorization
-     * @memberOf Linshare.Authentication.authenticationRestService
+     * @memberOf Linshare.authentication.authenticationRestService
      */
     function checkAuthentication() {
       $log.debug('AuthenticationRestService : checkAuthentication');
@@ -54,7 +54,7 @@
      * @name getCurrentUser
      * @desc get the current user connected
      * @return {Promise}
-     * @memberOf Linshare.Authentication.authenticationRestService
+     * @memberOf Linshare.authentication.authenticationRestService
      */
     function getCurrentUser() {
       $log.debug('AuthenticationRestService : getCurrentUser');
@@ -67,41 +67,30 @@
      * @param {string} login - Login of the user
      * @param {string} password - Password of the user
      * @return {Promise} server response
-     * @memberOf Linshare.Authentication.authenticationRestService
+     * @memberOf Linshare.authentication.authenticationRestService
      */
     function login(login, password) {
+      deferred = $q.defer();
       $log.debug('AuthenticationRestService : login');
       /* globals Base64 */
-      return handler(Restangular.all(restUrl).customGET('authorized', {
-        //while the all requests have no auth header we need to ignote authmodule
+      handler(Restangular.all(restUrl).withHttpConfig({
         ignoreAuthModule: true
-      }, {
+      }).customGET('authorized', {}, {
         Authorization: 'Basic ' + Base64.encode(login + ':' + password)
       })).then(function(user) {
-        $log.debug('Authentication success : logged as ' + user.firstName + ' ' + user.lastName + '');
         authService.loginConfirmed(user);
         deferred.resolve(user);
-        var swalWelcome;
-        $translate(['WELCOME_USER'])
-          .then(function(translations) {
-            /* jshint sub: true */
-            swalWelcome = translations['WELCOME_USER'];
-          });
-        $timeout(function() {
-          var welcomeUserName = swalWelcome + user.firstName;
-          growlService.notifyTopRight(welcomeUserName, 'inverse');
-        }, 350);
-
-      }, function(error) {
-        $log.error('Authentication failed', error.status);
+      }).catch(function(error) {
         deferred.reject(error);
       });
+
+      return deferred.promise;
     }
 
     /**
      * @name logout
      * @desc Logout system of the App
-     * @memberOf Linshare.Authentication.authenticationRestService
+     * @memberOf Linshare.authentication.authenticationRestService
      */
     function logout() {
       $log.debug('AuthenticationRestService : logout');
@@ -125,7 +114,7 @@
      * @name version
      * @desc Get the version of the core API
      * @return {Promise} server response
-     * @memberOf Linshare.Authentication.authenticationRestService
+     * @memberOf Linshare.authentication.authenticationRestService
      */
     function version() {
       $log.debug('AuthenticationRestService : version');
