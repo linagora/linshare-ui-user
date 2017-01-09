@@ -39,7 +39,9 @@
       })
       .state('login', {
         url: '/login?next',
-        templateUrl: 'views/common/loginForm.html'
+        templateUrl: 'views/common/loginForm.html',
+        controller: 'loginController',
+        controllerAs : 'loginVm'
       })
       .state('documents', {
         parent: 'common',

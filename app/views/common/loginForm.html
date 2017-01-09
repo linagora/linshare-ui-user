@@ -1,4 +1,4 @@
-<div x-ng-controller="loginController as loginctrl" id="login-page">
+<div id="login-page">
   <div id="bg">
     <img src="images/bg-linshare-desktop.png" alt="" class="img-responsive">
   </div>
@@ -8,25 +8,25 @@
       <div class="dropdown dropdown-standard" uib-dropdown>
         <button id="single-button" type="button" class="dropdown-toggle btn btn-custum-transparent"
                 uib-dropdown-toggle x-ng-disabled="disabled">
-          <span class="flag-icon" x-ng-class="'flag-icon-' + loginctrl.loginLocale.country"></span>
-          <span class="disp-language">{{loginctrl.loginLocale.language}}</span>
+          <span class="flag-icon" x-ng-class="'flag-icon-' + loginVm.loginLocale.country"></span>
+          <span class="disp-language">{{loginVm.loginLocale.language}}</span>
           <i class="zmdi zmdi-chevron-down"></i>
         </button>
         <ul class="dropdown-menu pull-right flag-list-ctn" role="menu" aria-labelledby="single-button">
           <li role="menuitem" >
-            <a href="" x-ng-click="loginctrl.changeLoginLanguage(loginctrl.lsAppConfig.lang.fr)">
+            <a href="" x-ng-click="loginVm.changeLoginLanguage(loginVm.lsAppConfig.lang.fr)">
               <span class="flag-icon flag-icon-fr"></span>
               <span class="lang-short">FR</span><span class="lang-label">France</span>
             </a>
           </li>
           <li role="menuitem">
-            <a href="" x-ng-click="loginctrl.changeLoginLanguage(loginctrl.lsAppConfig.lang.en)">
+            <a href="" x-ng-click="loginVm.changeLoginLanguage(loginVm.lsAppConfig.lang.en)">
               <span class="flag-icon flag-icon-us"></span>
               <span class="lang-short">US</span><span class="lang-label">United States</span>
             </a>
           </li>
           <li role="menuitem">
-            <a href="" x-ng-click="loginctrl.changeLoginLanguage(loginctrl.lsAppConfig.lang.vi)">
+            <a href="" x-ng-click="loginVm.changeLoginLanguage(loginVm.lsAppConfig.lang.vi)">
               <span class="flag-icon flag-icon-vn"></span>
               <span class="lang-short">VN</span><span class="lang-label">tiếng Việt</span>
             </a>
@@ -56,7 +56,7 @@
           <div class="header-login-form">
             <h1>{{'LOGIN.LOGIN_HEADER' | translate}}</h1>
           </div>
-          <form class="form-horizontal" x-ng-submit="loginctrl.submitForm()" role="form">
+          <form class="form-horizontal" x-ng-submit="loginVm.submitForm()" role="form">
             <div class="form-group">
               <label class="sr-only" for="inputEmail"></label>
               <div class="input-group m-b-30">
@@ -66,7 +66,7 @@
                          name="Email"
                          id="inputEmail"
                          placeholder="{{'LOGIN.EMAIL_PLACEHOLDER' | translate}}"
-                         x-ng-model="loginctrl.email" required />
+                         x-ng-model="loginVm.email" required />
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@
                          name="Password"
                          id="inputPassword"
                          placeholder="{{'LOGIN.PASSWORD_PLACEHOLDER' | translate}}"
-                         x-ng-model="loginctrl.password" required />
+                         x-ng-model="loginVm.password" required />
                 </div>
               </div>
             </div>
