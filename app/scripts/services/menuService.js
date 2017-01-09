@@ -22,7 +22,10 @@
       files,
       home,
       others,
-      service,
+      service = {
+        getAvailableTabs: getAvailableTabs,
+        getProperties: getProperties
+      },
       sharedSpace,
       uploads,
       tabs;
@@ -111,11 +114,6 @@
             disabled: lsAppConfig.production
           }
         ]
-      };
-
-      service = {
-        getAvailableTabs: getAvailableTabs,
-        getProperties: getProperties
       };
 
       sharedSpace = {
