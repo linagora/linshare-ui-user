@@ -77,7 +77,7 @@
       return resetPasswordService.update(formData).then(function() {
         resetVm.reset.type = 'finalize';
         $timeout(function() {
-          $state.transitionTo('home');
+          $state.transitionTo('login');
         }, 5000);
       }).catch(function(data) {
         resetVm.notify(data);
@@ -111,7 +111,7 @@
       return resetPasswordService.update(formData).then(function() {
         resetVm.reset.type = 'finalize';
         $timeout(function() {
-          $state.transitionTo('home');
+          $state.transitionTo('login');
         }, 5000);
       }).catch(function(data) {
         resetVm.notify(data);
