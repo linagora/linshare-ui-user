@@ -26,6 +26,11 @@
       localPath: 'i18n/original', //custom your i18n folder path
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso',
       production: false,
+      roles: {
+        admin: 'ADMIN',
+        write: 'WRITE',
+        readonly: 'READ'
+      },
       simultaneous_upload: 1,
 
       // For upload options management
