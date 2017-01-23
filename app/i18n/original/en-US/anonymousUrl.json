@@ -13,7 +13,7 @@
     },
     "HOME": {
       "404": "The url you tried to access is invalid",
-      "MESSAGE": "You need a valid url provided with a password to acces shared documents"
+      "MESSAGE": "You need a valid url to acces to shared documents"
     }
   }
 }

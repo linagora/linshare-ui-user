@@ -10,7 +10,7 @@
     .controller('AnonymousUrlController', AnonymousUrlController);
 
   AnonymousUrlController.$inject = ['$filter', '$log', '$state', '$translatePartialLoader', '$uibModal', 'anonymousUrlService',
-    'anonymousUrlUuid', 'NgTableParams'
+    'anonymousUrlData', 'NgTableParams'
   ];
 
   /**
@@ -19,7 +19,7 @@
    *  @memberOf LinShare.anonymousUrl
    */
   function AnonymousUrlController($filter, $log, $state, $translatePartialLoader, $uibModal, anonymousUrlService,
-    anonymousUrlUuid, NgTableParams) {
+    anonymousUrlData, NgTableParams) {
 
     /* jshint validthis:true */
     var anonymousUrlVm = this;
@@ -33,7 +33,7 @@
     anonymousUrlVm.paramFilter = {
       name: ''
     };
-    anonymousUrlVm.urlUuid = anonymousUrlUuid;
+    anonymousUrlVm.urlData = anonymousUrlData;
 
     activate();
 
@@ -47,8 +47,10 @@
     function activate() {
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('anonymousUrl');
-      if (!_.isUndefined(anonymousUrlVm.urlUuid)) {
+      if (anonymousUrlVm.urlData.protectedByPassword) {
         anonymousUrlVm.modalPasswordShow();
+      } else {
+        anonymousUrlVm.tableParams = anonymousUrlVm.loadTable();
       }
     }
 
@@ -59,7 +61,7 @@
      *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
      */
     function download(documentFile) {
-      anonymousUrlService.download(anonymousUrlVm.urlUuid, anonymousUrlVm.password, documentFile.uuid).then(function(data) {
+      anonymousUrlService.download(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password, documentFile.uuid).then(function(data) {
         downloadFileFromResponse(documentFile.name, documentFile.type, data.data);
       });
     }
@@ -105,7 +107,7 @@
       }, {
         total: anonymousUrlVm.anonymousUrlShareEntries.length,
         getData: function($defer, params) {
-          anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlUuid, anonymousUrlVm.password)
+          anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password)
             .then(function(anonymousUrl) {
               anonymousUrlVm.anonymousUrlData = anonymousUrl.data;
               anonymousUrlVm.anonymousUrlShareEntries = anonymousUrlVm.anonymousUrlData.documents;
@@ -166,7 +168,7 @@
            */
           function submit() {
             anonymousUrlVm.password = modalPasswordVm.password;
-            anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlUuid, anonymousUrlVm.password).then(function(data) {
+            anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password).then(function(data) {
               if (data.status === 403) {
                 if (!_.isUndefined(modalPasswordVm.password) && modalPasswordVm.password !== '') {
                   modalPasswordVm.invalid = true;

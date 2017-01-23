@@ -39,10 +39,17 @@
         controller: 'AnonymousUrlController',
         controllerAs: 'anonymousUrlVm',
         resolve: {
-          anonymousUrlUuid: function($q, $state, $stateParams, anonymousUrlService) {
+          anonymousUrlData: function($q, $state, $stateParams, anonymousUrlService) {
             var deferred = $q.defer();
-            anonymousUrlService.getAnonymousUrl($stateParams.uuid).then(function() {
-              deferred.resolve($stateParams.uuid);
+            anonymousUrlService.getAnonymousUrl($stateParams.uuid).then(function(data) {
+              var urlData = data.data;
+              if ( _.isUndefined(urlData.uuid)) {
+                urlData.protectedByPassword = true;
+                urlData.uuid = $stateParams.uuid;
+              } else {
+                urlData.protectedByPassword = false;
+              }
+              deferred.resolve(urlData);
             }).catch(function(error) {
               $state.go('anonymousUrl.home', {
                 'error': error
