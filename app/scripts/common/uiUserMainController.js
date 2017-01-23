@@ -167,10 +167,6 @@
         $scope.userLogged = user;
       });
 
-      authenticationRestService.version().then(function(data) {
-        $scope.coreVersion = data.version;
-      });
-
       localStorage.setItem('ma-layout-status', 0);
     }
 
