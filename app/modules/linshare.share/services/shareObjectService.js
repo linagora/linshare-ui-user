@@ -192,7 +192,7 @@ angular.module('linshare.share')
       var ind = this.waitingUploadIdentifiers.indexOf(flowIdentifier);
       if (ind > -1) {
         angular.forEach(this.documents, function(doc, index) {
-          if (doc.flowId === flowIdentifier) {
+          if (doc.uniqueIdentifier === flowIdentifier) {
             this.documents[index] = linshareDocument;
           }
         }, this);

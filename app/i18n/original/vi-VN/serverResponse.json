@@ -1,6 +1,6 @@
 {
   "SERVER_RESPONSE": {
-    "DEFAULT": {
+    "HTTP_CODES": {
       "TBT__ERROR_400": "",
       "TBT__ERROR_401": "",
       "TBT__ERROR_403": "",
@@ -12,19 +12,37 @@
       "TBT__ERROR_502": "",
       "TBT__ERROR_503": "",
       "TBT__ERROR_520": "",
-      "TBT__ERROR_DEFAULT": "",
-      "DETAILS": {
+      "TBT__ERROR_DEFAULT": ""
+    },
+    "DETAILS": {
+      "DEFAULT": {
         "TBT__NONE": "",
         "TBT__1000": "",
         "TBT__2000": "",
         "TBT__2203": "",
         "TBT__2204": "",
+        "TBT__20000": "",
         "TBT__28000": "",
         "TBT__28001": "",
         "TBT__28403": "",
         "TBT__28405": "",
         "TBT__28406": "",
         "TBT__38400": ""
+      },
+      "UPLOAD_ERROR": {
+        "TBT__NONE": "",
+        "TBT__39001": "",
+        "TBT__46001": "",
+        "TBT__46002": "",
+        "TBT__46003": "",
+        "TBT__46004": "",
+        "TBT__46010": "",
+        "TBT__46011": "",
+        "TBT__46012": "",
+        "TBT__46013": "",
+        "TBT__46014": "",
+        "TBT__46015": "",
+        "TBT__46403": ""
       }
     }
   }

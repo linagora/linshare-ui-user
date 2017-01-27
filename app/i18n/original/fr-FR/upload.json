@@ -1,0 +1,10 @@
+{
+  "UPLOAD_DESTINATION": "Dest.",
+  "UPLOAD_SHARE": {
+    "CANCEL": "Annuler",
+    "CONTINUE_AND_EXCLUDE": "Continuer et le(s) exclure de la liste",
+    "MESSAGE": "${nbErrorFilesSelected} fichier(s) ne peuvent être partagés, continuer ?",
+    "NO_SHAREABLE_FILE_SELECTED": "Aucun fichier sélectionné n'est partageable",
+    "TITLE": "Partager des fichiers"
+  }
+}

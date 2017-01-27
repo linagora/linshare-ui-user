@@ -1,9 +1,9 @@
 {
   "SERVER_RESPONSE": {
-    "DEFAULT": {
+    "HTTP_CODES": {
       "ERROR_400": "MAUVAISE REQUETE",
       "ERROR_401": "NON AUTORISE",
-      "ERROR_403": "INTERDIS",
+      "ERROR_403": "INTERDIT",
       "ERROR_404": "NON TROUVE",
       "ERROR_405": "METHODE NON AUTORISEE",
       "ERROR_408": "TEMPS D'ATTENTE ECOULE",
@@ -11,20 +11,38 @@
       "ERROR_501": "NON IMPLEMENTEE",
       "ERROR_502": "MAUVAISE PASSERELLE",
       "ERROR_503": "SERVICE NON DISPONIBLE",
-      "ERROR_520": "LE SERVER WEB RETOURNE UNE ERREUR INCONNUE",
-      "ERROR_DEFAULT": "LE SERVER WEB RETOURNE UNE ERREUR INCONNUE",
-      "DETAILS": {
+      "ERROR_520": "LE SERVEUR WEB RETOURNE UNE ERREUR INCONNUE",
+      "ERROR_DEFAULT": "LE SERVEUR WEB RETOURNE UNE ERREUR INCONNUE"
+    },
+    "DETAILS": {
+      "DEFAULT": {
         "NONE": "",
         "1000": "Erreur inconnue",
         "2000": "Erreur d'authentification",
         "2203": "Vous n'êtes pas autorisé à supprimer cet invité",
         "2204": "Vous n'êtes pas autorisé à mettre à jour cet invité",
+        "20000": "Une erreur est survenue dans la base de données",
         "28000": "L'invité n'a pas été trouvé",
         "28001": "L'invité existe dèjà",
         "28403": "Vous n'etes pas autorisé à accéder à cet invité",
         "28405": "La liste de contact restreint de l'invité est vide",
         "28406": "La recherche pour les invités est invalide",
         "38400": "La date d'expiration de l'invité est invalide"
+      },
+      "UPLOAD_ERROR": {
+        "NONE": "Une erreur est survenue pendant l'envoi du fichier",
+        "39001": "Vous ne pouvez pas envoyer de fichier pour le moment",
+        "46001": "Le quota du compte n'est pas encore configuré",
+        "46002": "Le quota du conteneur n'est pas encore configuré",
+        "46003": "Le quota du domaine n'est pas encore configuré",
+        "46004": "Le quota de la plateforme n'est pas encore configuré",
+        "46010": "La taille du fichier dépasse la taille maximale (${maxFileSize})",
+        "46011": "Le quota du compte est atteint",
+        "46012": "Le quota du conteneur est atteint",
+        "46013": "Le quota du domaine est atteint",
+        "46014": "Le quota de la plateforme est atteint (${quotaAttempt})",
+        "46015": "Le quota de la plateforme n'est pas encore configuré",
+        "46403": "Vous n'avez pas le droit de consulter ce quota"
       }
     }
   }

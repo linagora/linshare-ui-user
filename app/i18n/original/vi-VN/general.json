@@ -116,7 +116,7 @@
     "LOGOUT": "Đăng xuất",
     "TBT__NO_SHARES": "",
     "SETTINGS": "Cài đặt",
-    "TBT_SHARING_PROGRESS": {
+    "SHARING_PROGRESS": {
       "TBT_SHARE_DONE": "",
       "TBT_SHARE_IN_PROGRESS": ""
     },
@@ -126,6 +126,7 @@
       "TBT__TO_COMMON_SPACE": "",
       "TBT__TO_MY_SPACE": "",
       "UPLOAD_DONE": "xong",
+      "TBT__UPLOAD_ERROR": "",
       "TBT__UPLOAD_PAUSED": "",
       "TBT__UPLOAD_SERVER": ""
     }

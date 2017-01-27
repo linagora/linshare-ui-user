@@ -35,6 +35,11 @@
     // TODO : IAB externalize fab into directive
     function activate() {
       $translatePartialLoader.addPart('home');
+
+      $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
+        flowFile._from = $scope.mySpacePage;
+      });
+
       $scope.$watch('fab.isOpen', function(isOpen) {
         if (isOpen) {
           angular.element('.md-toolbar-tools').addClass('setWhite');

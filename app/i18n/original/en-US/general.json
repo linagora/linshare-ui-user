@@ -126,6 +126,7 @@
       "TO_COMMON_SPACE": "Into common space",
       "TO_MY_SPACE": "Into myspace",
       "UPLOAD_DONE": "done",
+      "UPLOAD_ERROR": "error",
       "UPLOAD_PAUSED": "paused",
       "UPLOAD_SERVER": "server processing"
     }

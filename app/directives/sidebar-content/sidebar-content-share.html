@@ -9,7 +9,8 @@
 </div>
 
 <div class="num-items-section-ctn">
-  <span>{{mainVm.sidebar.getData().lengthOfSelectedDocuments()}}</span> {{"RIGHT_PANEL.SHARE.SELECTED_FILES" | translate}}
+  <span>{{mainVm.sidebar.getData().lengthOfSelectedDocuments()}}</span>
+  {{"RIGHT_PANEL.SHARE.SELECTED_FILES" | translate}}
   <a class="pull-right sidebar-link hidden-xs" href=""
      x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; mainVm.sidebar.getData().toggleFilterBySelectedFiles()"
      x-ng-show="!activeBtnShowSelection">
@@ -163,7 +164,10 @@
     {{"NAVIGATION.CANCEL" | translate}}
   </button>
   <button class="btn btn-primary col-xs-6"
-          x-ng-click="shareActionVm.submitShare(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments,
+          x-ng-click="
+          mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
+          mainVm.sidebar.getData().checkSharableFiles(true, shareActionVm.submitShare, shareActionVm.newShare) :
+          shareActionVm.submitShare(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments,
                       mainVm.sidebar.getData().selectedUploads)">
     {{"NAVIGATION.SHARE" | translate}}
   </button>

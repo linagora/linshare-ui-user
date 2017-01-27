@@ -7,7 +7,7 @@
 
   function documentController($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate, $window, $log,
                               $mdToast, documentsList, growlService, $timeout, documentUtilsService, $q,
-                              flowUploadService, flowParamsService, sharableDocumentService, lsAppConfig,
+                              flowUploadService, sharableDocumentService, lsAppConfig,
                               $stateParams) {
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
     var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
@@ -16,6 +16,7 @@
     var swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500;
 
     $scope.addSelectedDocument = addSelectedDocument;
+    $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
     $scope.closeDetailSidebar = closeDetailSidebar;
     $scope.closeSearch = closeSearch;
@@ -81,8 +82,6 @@
     ////////////////
 
     function activate() {
-      flowParamsService.setFlowParams('', '');
-
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
@@ -186,6 +185,19 @@
 
     function addSelectedDocument(document) {
       documentUtilsService.selectDocument($scope.selectedDocuments, document);
+    }
+
+    function addUploadedDocument(flowFile) {
+      if(flowFile._from === $scope.mySpacePage) {
+        flowFile.asyncUploadDeferred.promise.then(function(file) {
+          $scope.documentsListCopy.push(file.linshareDocument);
+          $scope.isNewAddition = true;
+          $scope.tableParams.reload();
+          $timeout(function() {
+            $scope.isNewAddition = false;
+          }, 0);
+        });
+      }
     }
 
     function backToSidebarContentDetails() {

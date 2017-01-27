@@ -5,6 +5,7 @@ angular.module('linshare.share')
                                                         $translate, ShareObjectService, documentUtilsService) {
     var shareActionVm = this;
     shareActionVm.closeSideBar = closeSideBar;
+    shareActionVm.uploadPage = 'upload';
     shareActionVm.filesToShare = $stateParams.selected;
     shareActionVm.newShare = new ShareObjectService();
     shareActionVm.selectedContact = {};

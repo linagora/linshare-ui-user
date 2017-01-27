@@ -8,7 +8,7 @@
         </div>
         <div class="box-content"  ui-sref="documents.files">
           <div class="info-box" >
-            <h2 flow-btn class="box-title"><a >{{"MY_FILES_SPACE" | translate}}</a></h2>
+            <h2 class="box-title"><a >{{"MY_FILES_SPACE" | translate}}</a></h2>
             <p class="box-txt">{{"MY_FILES_SPACE_MSG" | translate}}</p>
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
@@ -31,16 +31,14 @@
           </div>
         </div>
       </div>
-      <!-- TODO: Link does not work, it is supposed to redirect to upload and share after the user selects his
-      uploaded files-->
-      <div class="box-3" flow-btn >
-        <div class="card-img upload-share" x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
+      <div class="box-3" flow-btn>
+        <div class="card-img upload-share" ui-sref="documents.upload">
           <i class="groups-home-share"></i>
         </div>
-        <div class="box-content"  ui-sref="documents.upload">
-          <div class="info-box" >
-            <h2 class="box-title" >
-              <a >{{"UPLOAD_SHARE" | translate}}</a></h2>
+        <div class="box-content" ui-sref="documents.upload">
+          <div class="info-box">
+            <h2 class="box-title">
+              <a>{{"UPLOAD_SHARE" | translate}}</a></h2>
             <p class="box-txt">{{"UPLOAD_SHARE_MSG" | translate}}</p>
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"

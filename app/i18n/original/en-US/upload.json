@@ -1,0 +1,10 @@
+{
+  "UPLOAD_DESTINATION": "Dest.",
+  "UPLOAD_SHARE": {
+    "CANCEL": "Cancel",
+    "CONTINUE_AND_EXCLUDE": "Continue and pop it/them from list",
+    "MESSAGE": "${nbErrorFilesSelected} file(s) cannot be shared, continue ?",
+    "NO_SHAREABLE_FILE_SELECTED": "No selected file is shareable",
+    "TITLE": "Share files"
+  }
+}

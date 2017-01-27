@@ -126,6 +126,7 @@
       "TO_COMMON_SPACE": "Vers l'espace commun",
       "TO_MY_SPACE": "Vers mon espace personnel",
       "UPLOAD_DONE": "terminé",
+      "UPLOAD_ERROR": "erreur",
       "UPLOAD_PAUSED": "en pause",
       "UPLOAD_SERVER": "traitement serveur en cours"
     }

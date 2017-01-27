@@ -5,7 +5,7 @@
     .module('linshare.sharedSpace')
     .controller('SharedSpaceListController', sharedSpaceListController);
 
-  function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService, workgroupMembersRestService, workgroupEntriesRestService, workgroupFoldersRestService, $state, $stateParams, Restangular, $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService, flowUploadService, flowParamsService, lsAppConfig, $q) {
+  function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService, workgroupMembersRestService, workgroupEntriesRestService, workgroupFoldersRestService, $state, $stateParams, Restangular, $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService, flowUploadService, lsAppConfig, $q) {
     /* jshint validthis:true */
     var sharedSpaceListVm = this;
 
@@ -28,7 +28,7 @@
     sharedSpaceListVm.downloadFile = downloadFile;
     sharedSpaceListVm.flagsOnSelectedPages = {};
     sharedSpaceListVm.flowUploadService = flowUploadService;
-    sharedSpaceListVm.folderInfos = $stateParams;
+    sharedSpaceListVm.folderDetails = $stateParams;
     sharedSpaceListVm.folderName = $stateParams.folderName;
     sharedSpaceListVm.folderUuid = $stateParams.folderUuid;
     sharedSpaceListVm.getDetails = getDetails;
@@ -64,8 +64,6 @@
       workgroupMembersRestService.get(sharedSpaceListVm.uuid, $scope.userLogged.uuid).then(function(member) {
         sharedSpaceListVm.currentWorkgroupMember = member;
       });
-
-      flowParamsService.setFlowParams(sharedSpaceListVm.uuid, sharedSpaceListVm.folderUuid);
 
       $scope.$on('$stateChangeSuccess', function() {
         angular.element('.multi-select-mobile').appendTo('body');
@@ -119,11 +117,20 @@
       documentUtilsService.selectDocument(sharedSpaceListVm.selectedDocuments, document);
     }
 
-    function addUploadedEntry(flowFile, serverResponse) {
-      var uploadedEntry = (flowUploadService.addUploadedFile(flowFile, serverResponse)).linshareDocument;
-      Restangular.restangularizeElement(currentWorkGroup, uploadedEntry, uploadedEntry.uuid);
-      sharedSpaceListVm.itemsList.push(uploadedEntry);
-      $scope.reloadDocuments();
+    function addUploadedEntry(flowFile) {
+      if (flowFile._from === $scope.workgroupPage) {
+        if (flowFile.folderDetails.uuid === sharedSpaceListVm.folderDetails.uuid &&
+          flowFile.folderDetails.folderUuid === sharedSpaceListVm.folderDetails.folderUuid) {
+          flowFile.asyncUploadDeferred.promise.then(function(file) {
+            sharedSpaceListVm.itemsList.push(file.linshareDocument);
+            $scope.isNewAddition = true;
+            sharedSpaceListVm.tableParams.reload();
+            $timeout(function() {
+              $scope.isNewAddition = false;
+            }, 0);
+          });
+        }
+      }
     }
 
     function closeSearchFunction() {

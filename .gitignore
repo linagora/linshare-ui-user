@@ -7,3 +7,5 @@ vendors
 app/modules/materialAdmin
 target
 target-grunt
+.idea
+node

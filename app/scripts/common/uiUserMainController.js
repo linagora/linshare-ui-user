@@ -36,6 +36,7 @@
     $scope.sizeHeight = $window.innerHeight - 50;
     $scope.workgroupPage = lsAppConfig.workgroupPage;
 
+    mainVm.flowUploadService = flowUploadService;
     mainVm.removeShareDocument = removeShareDocument;
     mainVm.resizeDragNDropCtn = resizeDragNDropCtn;
 
@@ -51,6 +52,8 @@
     function activate() {
       $scope.loggedUser = new LinshareUserService();
       mainVm.sidebar = new Sidebar();
+
+      flowUploadService.initFlowUploadService();
 
       if ($scope.mactrl.sidebarToggle.left) {
         checkTableHeightService.checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
@@ -72,11 +75,17 @@
 
       //TODO: Watcher to manage globally the state of an uploaded file waiting for share
       $scope.$on('flow::fileSuccess', function fileSuccessAction(event, $flow, flowFile, $message) {
-        $log.debug('event flow::fileSuccess fired');
-        if (flowFile._from === lsAppConfig.mySpacePage) {
-          var uploadedElement = flowUploadService.addUploadedFile(flowFile, $message);
-          sharableDocumentService.sharableDocuments(uploadedElement, $scope.share_array, $scope.refFlowShares);
-        }
+        $log.debug('UPLOAD SUCCESS', flowFile.name);
+        flowFile.doingAsyncUpload = true;
+        mainVm.flowUploadService.addUploadedFile(flowFile, $message).then(function(file) {
+          if (file._from === lsAppConfig.mySpacePage) {
+            sharableDocumentService.sharableDocuments(file, $scope.share_array, $scope.refFlowShares);
+          }
+        });
+      });
+
+      $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
+        mainVm.flowUploadService.checkQuotas([flowFile], false);
       });
 
       $scope.$on('flow::fileRemoved', function fileRemoveAction(event, $flow, flowFile) {
@@ -85,6 +94,15 @@
 
       $scope.$on('flow::fileError', function fileErrorAction(event, $flow, flowFile) {
         mainVm.removeShareDocument(flowFile);
+        mainVm.flowUploadService.checkQuotas([flowFile], true);
+      });
+
+      $scope.$on('flow::uploadStart', function(event, $flow) {
+        _.forEach($flow.files, function(flowFile) {
+          if (!flowFile.quotaChecked) {
+            mainVm.flowUploadService.checkQuotas([flowFile], false);
+          }
+        });
       });
 
       $rootScope.$on('$stateChangeStart', function(event, toState) {
@@ -124,6 +142,7 @@
           });
         }
       });
+
       $scope.$watch(function() {
         return $window.innerHeight;
       }, function() {
@@ -202,13 +221,13 @@
         shareObject =
           _.find(share_array, function(element) {
             return _.find(element.documents, function(doc) {
-              return doc.flowId === flowFile.uniqueIdentifier;
+              return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
             });
           });
 
       if (!_.isUndefined(shareObject)) {
         var document_object = _.find(shareObject.documents, function(doc) {
-          return doc.flowId === flowFile.uniqueIdentifier;
+          return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
         });
 
         _.remove(shareObject.documents, document_object);
@@ -220,7 +239,7 @@
           _.remove(share_array, shareObject);
         } else {
           var documentInUpload = _.find(shareObject.documents, function(doc) {
-            return doc.flowid;
+            return doc.uniqueIdentifier;
           });
           if (_.isUndefined(documentInUpload)) {
             new ShareObjectService(shareObject).share();
@@ -252,6 +271,7 @@
       };
 
       return sidebar;
+
       ////////////
 
       function setContent(content) {

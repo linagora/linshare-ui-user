@@ -1,6 +1,6 @@
 <div class="container upload-files" id="upload-box"
      flow-object="uploadQueueVm.$flow"
-     flow-files-submitted="uploadQueueVm.flowUploadService.uploadFiles($files, uploadQueueVm.$flow, mySpacePage)"
+     flow-files-submitted="uploadQueueVm.flowUploadService.uploadFiles($files, mySpacePage)"
      flow-drop=""
      flow-drag-enter="dropClass='drag-over'"
      flow-drag-leave="dropClass='fade-out-elm'"
@@ -38,7 +38,7 @@
         <i class="zmdi zmdi-share col-xs-3"
            title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
            x-ng-class="{'de-activate-sharing': lengthOfSelectedDocuments() === 0}"
-           x-ng-click="onShare(); uploadQueueVm.loadSidebarContent()" role="button" tabindex="0">
+           x-ng-click="uploadQueueVm.checkSharableFiles(false)" role="button" tabindex="0">
         </i>
         <i x-ng-if="uploadQueueVm.selectAll" x-ng-click="uploadQueueVm.selectUploadingDocuments()"
            class="fa fa-square-o col-xs-3"
@@ -163,7 +163,7 @@
           <span x-ng-if="uploadQueueVm.isFromMySpace">
           <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
              x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
-             x-ng-click="onShare(); uploadQueueVm.loadSidebarContent()">
+             x-ng-click="uploadQueueVm.checkSharableFiles(false)">
             <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
           </span>
             <span>

@@ -38,8 +38,20 @@ angular
         return uuid.v4();
         /* jshint ignore:end */
       },
-      permanentErrors: [401, 500, 501]
+      query: function(flowFile) {
+        var threadUuidParam = flowFile.folderDetails ? flowFile.folderDetails.uuid : '';
+        var workGroupFolderUuidParam = flowFile.folderDetails ? flowFile.folderDetails.folderUuid : '';
+        var flowParams = {
+          asyncTask: true,
+          threadUuid: threadUuidParam,
+          workGroupFolderUuid: workGroupFolderUuidParam
+        };
+        return flowParams;
+      },
+      permanentErrors: [401, 500, 501],
+      headers: {'WWW-No-Authenticate' : 'linshare'}
     };
+
     /*
      ** aHrefSanitizationWhitelist :
      ** The sanitization is a security measure aimed at preventing XSS attacks via html links.
@@ -75,24 +87,19 @@ angular
     Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
       switch(response.status) {
         case 400:
-          if (response.data.errCode !== 26006) {
-            growlService.notifyTopCenter('GROWL_ALERT.ERROR.400', 'danger');
-          }
           $log.debug('Error ' + response.status, response);
           break;
         case 404:
           $log.debug('Resource not found', response);
           break;
         case 500:
-          growlService.notifyTopCenter('GROWL_ALERT.ERROR.500', 'danger');
           $log.debug('Error ' + response.status, response);
           break;
         case 503:
-          growlService.notifyTopCenter('GROWL_ALERT.ERROR.503', 'danger');
+          $log.debug('Error ' + response.status, response);
           break;
         default:
           if (response.status) {
-            growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + response.status, 'danger');
             $log.debug('Error ' + response.status, response);
           } else {
             var $translate = $filter('translate');

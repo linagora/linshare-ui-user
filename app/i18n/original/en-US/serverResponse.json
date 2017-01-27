@@ -1,6 +1,6 @@
 {
   "SERVER_RESPONSE": {
-    "DEFAULT": {
+    "HTTP_CODES": {
       "ERROR_400": "BAD REQUEST",
       "ERROR_401": "UNAUTHORIZED",
       "ERROR_403": "FORBIDDEN",
@@ -11,20 +11,38 @@
       "ERROR_501": "NOT IMPLEMENTED",
       "ERROR_502": "BAD GATEWAY",
       "ERROR_503": "SERVICE UNAVAILABLE",
-      "ERROR_520": "WEB SERVER IS RETURNING AN UNKNOW ERROR",
-      "ERROR_DEFAULT": "ERROR NOT MANAGED",
-      "DETAILS": {
+      "ERROR_520": "WEB SERVER IS RETURNING AN UNKNOWN ERROR",
+      "ERROR_DEFAULT": "ERROR NOT MANAGED"
+    },
+    "DETAILS": {
+      "DEFAULT": {
         "NONE": "",
-        "1000": "Unknow error",
+        "1000": "Unknown error",
         "2000": "Authentication error",
         "2203": "You are not authorized to delete this guest",
         "2204": "You are not authorized to update this guest",
+        "20000": "An error occurred with the database",
         "28000": "The guest has not been found",
         "28001": "The guest already exists",
         "28403": "You are not authorized to access this guest",
         "28405": "The guest restricted contacts list is empty",
         "28406": "The search for guests is invalid",
         "38400": "The guest expiration date is invalid"
+      },
+      "UPLOAD_ERROR": {
+        "NONE": "An error occurred during upload",
+        "39001": "You can't upload any file for the moment",
+        "46001": "The account quota is not configured yet",
+        "46002": "The container quota is not configured yet",
+        "46003": "The domain quota is not configured yet",
+        "46004": "The platform quota is not configured yet",
+        "46010": "The file size is greater than the max file size (${maxFileSize})",
+        "46011": "The account quota has been reached",
+        "46012": "The container quota has been reached",
+        "46013": "The domain quota has been reached",
+        "46014": "The platform quota has been reached (${quotaAttempt})",
+        "46015": "The platform quota is not configured yet",
+        "46403": "You're not authorized to access the quota"
       }
     }
   }

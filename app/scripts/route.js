@@ -110,9 +110,8 @@
         resolve: {
           checkUrl: function($state, $stateParams, lsAppConfig) {
             if ($stateParams.from !== lsAppConfig.mySpacePage && $stateParams.from !== lsAppConfig.workgroupPage) {
-              $state.go('documents.upload', {
-                'from': lsAppConfig.mySpacePage
-              });
+              $state.go('documents.upload', {from: lsAppConfig.mySpacePage});
+              $stateParams.from = lsAppConfig.mySpacePage;
             }
           }
         }
