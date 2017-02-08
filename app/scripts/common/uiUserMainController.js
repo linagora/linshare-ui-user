@@ -125,7 +125,12 @@
 
         $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
         $scope.loggedUser.setUser(data);
-        $state.go($scope.urlTogoAfterLogin, $scope.urlTogoAfterLoginParams);
+        if (_.isUndefined($scope.urlTogoAfterLogin)) {
+          $state.go(URL_HOME);
+        }
+        else {
+          $state.go($scope.urlTogoAfterLogin, $scope.urlTogoAfterLoginParams);
+        }
       });
 
       $scope.$on('event:auth-loginRequired', function() {
