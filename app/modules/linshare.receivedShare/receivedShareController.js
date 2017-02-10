@@ -7,8 +7,10 @@
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope, $filter, $window, $translatePartialLoader, NgTableParams, receivedShareRestService,
-             autocompleteUserRestService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig) {
+             autocompleteUserRestService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig, $q, documentSelected) {
       $translatePartialLoader.addPart('receivedShare');
+      $scope.documentSelected = documentSelected;
+      $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;
       $scope.showActions = [];
@@ -125,6 +127,9 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.resetSelectedDocuments = function() {
+        $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
+        $scope.coatchMarkEye = false;
+        delete $scope.tableParams.filter().isSelected;
         angular.forEach($scope.selectedDocuments, function(selectedDoc) {
           selectedDoc.isSelected = false;
         });
@@ -327,6 +332,51 @@ angular.module('linshare.receivedShare')
       $scope.paramFilter = {
         name: ''
       };
+
+      loadTable().then(function(data) {
+        $scope.tableParams = data;
+        if (!_.isUndefined($scope.documentSelected)) {
+          $scope.popoverTemplate = 'modules/linshare.receivedShare/views/popover-isolated.html';
+          $scope.addSelectedDocument($scope.documentSelected);
+          $scope.coatchMarkEye = true;
+          $scope.toggleFilterBySelectedFiles();
+        }
+      });
+
+      function toggleFilterBySelectedFiles() {
+        $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
+        if ($scope.tableParams.filter().isSelected) {
+          delete $scope.tableParams.filter().isSelected;
+        } else {
+          $scope.tableParams.filter().isSelected = true;
+        }
+      }
+
+
+      function loadTable() {
+        return $q(function(resolve) {
+          resolve(
+            new NgTableParams({
+              page: 1,
+              sorting: {
+                modificationDate: 'desc'
+              },
+              count: 10,
+              filter: $scope.paramFilter
+            }, {
+              getData: function($defer, params) {
+                var filteredData = params.filter() ?
+                  $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
+                var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) :
+                  filteredData;
+
+                params.total(orderedData.length);
+                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+              }
+            })
+          );
+        });
+      }
 
       $scope.documentsListCopy = receivedFiles;
       $scope.documentsList = receivedFiles;

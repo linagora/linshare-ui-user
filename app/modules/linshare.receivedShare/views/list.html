@@ -144,13 +144,20 @@
         <div class="exit-selection" x-ng-click="resetSelectedDocuments()">
           <i class="zmdi zmdi-close"></i>
         </div>
-        <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}"
-             x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
-             x-ng-click="activeBtnShowSelection = !activeBtnShowSelection">
-          <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
-          <div class="pull-left view-icons-ctn groups-view">
-            <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show=" activeBtnShowSelection"></i>
-            <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
+        <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+          <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
+              x-ng-click="toggleFilterBySelectedFiles()">
+            <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
+            <div class="pull-left view-icons-ctn groups-view">
+              <i class="fa fa-eye-slash" aria-hidden="true"
+                 x-ng-show="activeBtnShowSelection && !coatchMarkEye"></i>
+              <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection && coatchMarkEye"
+                 popover-placement="bottom"
+                 uib-popover-template="popoverTemplate"
+                 popover-is-open="coatchMarkEye"
+                 popover-class="popover-eye-ctn"></i>
+              <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
+            </div>
           </div>
           <div class="pull-left view-icons-ctn reset-icon" x-ng-click="resetSelectedDocuments()">
             <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>

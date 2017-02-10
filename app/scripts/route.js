@@ -77,7 +77,7 @@
         }
       })
       .state('documents.received', {
-        url: '/received',
+        url: '/received?fileUuid',
         templateUrl: 'modules/linshare.receivedShare/views/list.html',
         controller: 'ReceivedController',
         resolve: {
@@ -86,6 +86,11 @@
           },
           files: function(receivedShareRestService) {
             return receivedShareRestService.getList();
+          },
+          documentSelected: function($stateParams, files) {
+            return _.find(files, function(doc) {
+              return doc.uuid === $stateParams.fileUuid;
+            });
           }
         }
       })
