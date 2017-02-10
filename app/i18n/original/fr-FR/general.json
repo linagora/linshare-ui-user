@@ -192,6 +192,12 @@
   },
   "NO_ACTION_AVAILABLE": "Aucune action disponible",
   "PENDING_UPLOADS": "en attente",
+  "POPOVER": {
+    "ISOLATED": {
+      "TEXT": "Cliquez ici pour afficher tous les fichiers",
+      "BUTTON": "Je le savais !"
+    }
+  },
   "REMOVE": "Supprimer",
   "SAVING": "Sauvegarde en cours...",
   "SELECTION": {

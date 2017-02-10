@@ -21,10 +21,15 @@
     </div>
     <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
       <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
-           x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; toggleFilterBySelectedFiles()">
+           x-ng-click="toggleFilterBySelectedFiles()">
         <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
         <div class="pull-left view-icons-ctn groups-view">
-          <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show=" activeBtnShowSelection"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection && !coatchMarkEye"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection && coatchMarkEye"
+             popover-placement="bottom"
+             uib-popover-template="popoverTemplate"
+             popover-is-open="$parent.coatchMarkEye"
+             popover-class="popover-eye-ctn"></i>
           <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
         </div>
       </div>

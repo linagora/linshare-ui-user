@@ -192,6 +192,12 @@
   },
   "TBT__NO_ACTION_AVAILABLE": "",
   "TBT__PENDING_UPLOADS": "",
+  "TBT__POPOVER": {
+    "ISOLATED": {
+      "TEXT": "",
+      "BUTTON": ""
+    }
+  },
   "REMOVE": "Xóa",
   "TBT_SAVING": "",
   "TBT__SELECTION": {

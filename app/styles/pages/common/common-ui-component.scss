@@ -265,6 +265,26 @@ POPOVER ADD BUTTON OVERIDE
   }
 }
 
+/* popover custom template */
+.popover-eye-ctn {
+  .popover-content {
+    padding: 0 !important;
+    .popover-custom {
+      display: flex;
+      .popover-text {
+        display: inline-block;
+        white-space: nowrap;
+        padding-top: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+      .popover-button {
+        right: 0;
+      }
+    }
+  }
+}
+
 /**********************
   SEARCH STYLE
 ***********************/

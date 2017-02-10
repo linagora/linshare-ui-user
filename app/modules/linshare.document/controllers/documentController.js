@@ -8,7 +8,7 @@
   function documentController($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate, $window, $log,
                               $mdToast, documentsList, growlService, $timeout, documentUtilsService, $q,
                               flowUploadService, sharableDocumentService, lsAppConfig,
-                              $stateParams) {
+                              $stateParams, documentSelected) {
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
     var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
@@ -33,6 +33,7 @@
     $scope.deleteDocuments = deleteDocuments;
     $scope.documentsList = documentsList;
     $scope.documentsListCopy = documentsList;
+    $scope.documentSelected = documentSelected;
     $scope.downloadFile = downloadFile;
     $scope.downloadSelectedFiles = downloadSelectedFiles;
     $scope.fab = {
@@ -180,6 +181,12 @@
 
       loadTable().then(function(data) {
         $scope.tableParams = data;
+        if (!_.isUndefined($scope.documentSelected)) {
+          $scope.popoverTemplate = 'modules/linshare.document/views/popover-isolated.html';
+          $scope.addSelectedDocument($scope.documentSelected);
+          $scope.coatchMarkEye = true;
+          $scope.toggleFilterBySelectedFiles();
+        }
       });
     }
 
@@ -418,6 +425,8 @@
     }
 
     function resetSelectedDocuments() {
+      $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
+      $scope.coatchMarkEye = false;
       delete $scope.tableParams.filter().isSelected;
       _.forEach($scope.selectedDocuments, function(selectedDoc) {
         selectedDoc.isSelected = false;
@@ -527,6 +536,7 @@
     }
 
     function toggleFilterBySelectedFiles() {
+      $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
       if ($scope.tableParams.filter().isSelected) {
         delete $scope.tableParams.filter().isSelected;
       } else {

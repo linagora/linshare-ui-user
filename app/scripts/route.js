@@ -50,7 +50,7 @@
         template: '<div ui-view></div>'
       })
       .state('documents.files', {
-        url: '/list',
+        url: '/list?fileUuid',
         templateUrl: 'modules/linshare.document/views/documentsList.html',
         controller: 'documentController',
         params: {
@@ -59,6 +59,11 @@
         resolve: {
           documentsList: function(LinshareDocumentRestService) {
             return LinshareDocumentRestService.getList();
+          },
+          documentSelected: function($stateParams, documentsList) {
+            return _.find(documentsList, function(doc) {
+              return doc.uuid === $stateParams.fileUuid;
+            });
           }
         }
       })
