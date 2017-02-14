@@ -169,6 +169,7 @@
     "GUESTS": "Khách mời",
     "HOME": "Trang chủ",
     "MY_FILES": "Tập tin của tôi",
+    "TBT__UPLOAD_AND_SHARE": "",
     "RECEIVED_SHARES": "Tập tin chia sẻ cho tôi",
     "TBT__SHARED_SPACE": "Nhóm",
     "SHARES": "Tập tin do tôi chia sẻ",
@@ -257,6 +258,11 @@
   },
   "TBT__UNKNOWN_USER": "",
   "TBT__UNKNOWN_FIRST_LETTER": "",
+  "USER_QUOTAS": {
+    "TBT__MAX_FILE_SIZE": "",
+    "TBT__REMAINING_OVER": "",
+    "TBT__USED": ""
+  },
   "TBT__VALIDATE": "",
   "TBT__WIP": "",
   "WORK_IN_PROGRESS": {

@@ -21,6 +21,7 @@
       administrations,
       files,
       home,
+      myUploads,
       others,
       service = {
         getAvailableTabs: getAvailableTabs,
@@ -98,6 +99,14 @@
         disabled: false
       };
 
+      myUploads = {
+        name: 'MENU_TITLE.UPLOAD_AND_SHARE',
+        link: 'documents.upload',
+        icon: 'zmdi zmdi-upload',
+        color: '#05B1FF',
+        disabled: false
+      };
+
       others = {
         name: 'MENU_TITLE.AUDIT',
         icon: 'fa fa-line-chart',
@@ -142,7 +151,7 @@
         ]
       };
 
-      tabs = [home, files, sharedSpace, administrations, uploads, others];
+      tabs = [home, myUploads, files, sharedSpace, administrations, uploads, others];
     }
 
     /**

@@ -44,27 +44,34 @@
             x-ng-mouseleave="lsLeftSidebarVm.changeColor(link, 'inherit')">
           <a x-ui-sref="{{link.link}}"
              x-ui-sref-active="active"
-             x--ng-class="{'disabled': link.disabled}">
+             x-ng-class="{'disabled': link.disabled}">
             {{ link.name | translate }}
           </a>
         </li>
       </ul>
     </li>
   </ul>
-</div>
-<div class="quota">
-  <div class="quota-used"></div>
-  <div class="quota-free"></div>
-  <div class="quota-information">
-    <p>10 GB out of 15 GB used</p>
+ </div>
+  <div class="quota">
+    <uib-progressbar
+      max="100"
+      value="userQuotas.percent"
+      class="progress-striped"
+      x-ng-class="userQuotas.progressBarColor"
+      title="{{'USER_QUOTAS.USED' | translate}} : {{userQuotas.used | readableSize:true}}"></uib-progressbar>
+    <div class="quota-information">
+      <p title="{{'USER_QUOTAS.MAX_FILE_SIZE' | translate}} {{userQuotas.maxFileSize | readableSize:true}}">
+        {{userQuotas.remaining | readableSize:true}} {{'USER_QUOTAS.REMAINING_OVER' | translate}} {{userQuotas.total |
+        readableSize:true}}
+      </p>
+    </div>
+    <div class="libre-and-free">
+      <img src="images/common/community.png" alt="Logo LinShare"/>
+      <p>Libre & Free</p>
+    </div>
+    <div class="product-version">
+      <p><span>{{ 'COMMON.SIDEBAR.PRODUCT_VERSION' | translate }}</span> : {{productVersion}}</p><span>|</span>
+      <p><span>{{ 'COMMON.SIDEBAR.CORE_VERSION' | translate }}</span> : {{coreVersion}}</p>
+    </div>
   </div>
-  <div class="libre-and-free">
-    <img src="images/common/community.png" alt="Logo LinShare" />
-    <p>Libre & Free</p>
-  </div>
-  <div class="product-version">
-    <p><span>{{ 'COMMON.SIDEBAR.PRODUCT_VERSION' | translate }}</span> : {{productVersion}}</p><span>|</span>
-    <p><span>{{ 'COMMON.SIDEBAR.CORE_VERSION' | translate }}</span> : {{coreVersion}}</p>
-  </div>
-</div>
 </div>

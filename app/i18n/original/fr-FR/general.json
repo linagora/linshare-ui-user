@@ -169,6 +169,7 @@
     "GUESTS": "Comptes invités",
     "HOME": "Accueil",
     "MY_FILES": "Mes fichiers",
+    "UPLOAD_AND_SHARE": "Dépôt & Partage",
     "RECEIVED_SHARES": "Mes partages reçus",
     "SHARED_SPACE": "Espace commun",
     "SHARES": "Mes fichiers partagés",
@@ -257,6 +258,11 @@
   },
   "UNKNOWN_USER": "Utilisateur inconnu",
   "UNKNOWN_FIRST_LETTER": "N.C.",
+  "USER_QUOTAS": {
+    "MAX_FILE_SIZE": "Taille de fichier max.",
+    "REMAINING_OVER": "disponible sur",
+    "USED": "Utilisé"
+  },
   "VALIDATE": "Valider",
   "WIP": "En cours de contruction",
   "WORK_IN_PROGRESS": {

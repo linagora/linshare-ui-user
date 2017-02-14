@@ -408,7 +408,7 @@
      */
     function resumeFile(flowFile) {
       flowFile.resume();
-      uploadQueueVm.flowUploadService.checkQuotas([flowFile], false);
+      uploadQueueVm.flowUploadService.checkQuotas([flowFile], false, $scope.setUserQuotas);
     }
 
     /**
@@ -432,7 +432,7 @@
      */
     function retryFile(flowFile) {
       if (flowFile.canBeRetried) {
-        uploadQueueVm.flowUploadService.checkQuotas([flowFile], true);
+        uploadQueueVm.flowUploadService.checkQuotas([flowFile], true, $scope.setUserQuotas);
       }
     }
 

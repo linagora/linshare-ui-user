@@ -4,7 +4,9 @@ angular.module('linshare.components')
   .filter('readableSize', function() {
     return function(bytes, si) {
       var thresh = si ? 1000 : 1024;
-      if (bytes < thresh) {
+      if(bytes < 0) {
+        return 0+ ' B';
+      } else if (bytes < thresh) {
         return bytes + ' B';
       }
       var units = si ? ['kB','MB','GB','TB','PB','EB','ZB','YB'] : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];

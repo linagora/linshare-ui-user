@@ -169,6 +169,7 @@
     "GUESTS": "Guests",
     "HOME": "Home",
     "MY_FILES": "Files",
+    "UPLOAD_AND_SHARE": "Upload & Share",
     "RECEIVED_SHARES": "Received shares",
     "SHARED_SPACE": "Shared space",
     "SHARES": "Files shares",
@@ -257,6 +258,11 @@
   },
   "UNKNOWN_USER": "Unknown user",
   "UNKNOWN_FIRST_LETTER": "UNK",
+  "USER_QUOTAS": {
+    "MAX_FILE_SIZE": "Max file size",
+    "REMAINING_OVER": "remaining over",
+    "USED": "Used"
+  },
   "VALIDATE": "Validate",
   "WIP": "Work in progress",
   "WORK_IN_PROGRESS": {

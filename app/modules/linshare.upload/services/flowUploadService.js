@@ -107,12 +107,15 @@
      * @desc Add upload source's folder details to all files to upload
      * @param {Array<Object>} flowFiles - List of files to upload
      * @param {Boolean} onError - Check if the function is called on start/retry upload, or on error
+     * @param {function} updateQuotas - Update user's quotas in left sidebar bottom
      * @memberOf LinShare.upload.flowUploadService
      */
-    function checkQuotas(flowFiles, onError) {
+    function checkQuotas(flowFiles, onError, updateQuotas) {
       authenticationRestService.getCurrentUser().then(function(user) {
         uploadRestService.getQuota(user.quotaUuid).then(function(quotas) {
           $log.debug('Getting quotas - ', quotas.plain());
+          updateQuotas(quotas.plain());
+
           _.forEach(flowFiles, function(flowFile) {
             flowFile.asyncUploadDeferred = $q.defer();
 

@@ -255,6 +255,7 @@
         } else {
           $timeout(function() {
             growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
+            $scope.getUserQuotas();
           }, 350);
         }
       });

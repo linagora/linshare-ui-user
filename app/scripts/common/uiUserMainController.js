@@ -12,11 +12,11 @@
 
   UiUserMainController.$inject = ['$http', '$log', '$rootScope', '$scope', '$state', '$timeout', '$window',
     'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'LinshareUserService', 'lsAppConfig',
-    'MenuService', 'sharableDocumentService', 'ShareObjectService'];
+    'MenuService', 'sharableDocumentService', 'ShareObjectService', 'uploadRestService'];
 
   function UiUserMainController($http, $log, $rootScope, $scope, $state, $timeout, $window, authenticationRestService,
                                 checkTableHeightService, flowUploadService, LinshareUserService, lsAppConfig,
-                                MenuService, sharableDocumentService, ShareObjectService) {
+                                MenuService, sharableDocumentService, ShareObjectService, uploadRestService) {
     /* jshint validthis:true */
     var mainVm = this;
 
@@ -29,11 +29,14 @@
     $rootScope.mobileWidthBreakpoint = 768;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.sidebarRightWidth = 350;
+    $scope.getUserQuotas = getUserQuotas;
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.productVersion = 'dev';
     $scope.refFlowShares = {};
+    $scope.setUserQuotas = setUserQuotas;
     $scope.share_array = [];
     $scope.sizeHeight = $window.innerHeight - 50;
+    $scope.userQuotas = {};
     $scope.workgroupPage = lsAppConfig.workgroupPage;
 
     mainVm.flowUploadService = flowUploadService;
@@ -78,6 +81,7 @@
         $log.debug('UPLOAD SUCCESS', flowFile.name);
         flowFile.doingAsyncUpload = true;
         mainVm.flowUploadService.addUploadedFile(flowFile, $message).then(function(file) {
+          $scope.getUserQuotas();
           if (file._from === lsAppConfig.mySpacePage) {
             sharableDocumentService.sharableDocuments(file, $scope.share_array, $scope.refFlowShares);
           }
@@ -85,7 +89,7 @@
       });
 
       $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
-        mainVm.flowUploadService.checkQuotas([flowFile], false);
+        mainVm.flowUploadService.checkQuotas([flowFile], false, $scope.setUserQuotas);
       });
 
       $scope.$on('flow::fileRemoved', function fileRemoveAction(event, $flow, flowFile) {
@@ -94,13 +98,13 @@
 
       $scope.$on('flow::fileError', function fileErrorAction(event, $flow, flowFile) {
         mainVm.removeShareDocument(flowFile);
-        mainVm.flowUploadService.checkQuotas([flowFile], true);
+        mainVm.flowUploadService.checkQuotas([flowFile], true, $scope.setUserQuotas);
       });
 
       $scope.$on('flow::uploadStart', function(event, $flow) {
         _.forEach($flow.files, function(flowFile) {
           if (!flowFile.quotaChecked) {
-            mainVm.flowUploadService.checkQuotas([flowFile], false);
+            mainVm.flowUploadService.checkQuotas([flowFile], false, $scope.setUserQuotas);
           }
         });
       });
@@ -121,14 +125,16 @@
           $scope.coreVersion = data.version;
         });
 
-        getProductVersion();
-
         $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
         $scope.loggedUser.setUser(data);
+        $scope.userLogged = data;
+
+        getUserQuotas();
+        getProductVersion();
+
         if (_.isUndefined($scope.urlTogoAfterLogin)) {
           $state.go(URL_HOME);
-        }
-        else {
+        } else {
           $state.go($scope.urlTogoAfterLogin, $scope.urlTogoAfterLoginParams);
         }
       });
@@ -189,6 +195,7 @@
         $scope.loggedUser.setUser(user);
         user.firstLetter = user.firstName.charAt(0);
         $scope.userLogged = user;
+        getUserQuotas();
       });
 
       localStorage.setItem('ma-layout-status', 0);
@@ -202,6 +209,17 @@
     function getProductVersion() {
       $http.get('/about.json').success(function(data) {
         $scope.productVersion = data.version;
+      });
+    }
+
+    /**
+     * @name getUserQuotas
+     * @desc Get user's quotas
+     * @memberOf linshareUiUserApp
+     */
+    function getUserQuotas() {
+      uploadRestService.getQuota($scope.userLogged.quotaUuid).then(function(quotas) {
+        $scope.setUserQuotas(quotas.plain());
       });
     }
 
@@ -250,6 +268,28 @@
             new ShareObjectService(shareObject).share();
           }
         }
+      }
+    }
+
+    /**
+     * @name setUserQuotas
+     * @desc Set user's quotas for left sidebar details in bottom
+     * @param {Object} quotas - Quotas details getted from server
+     * @memberOf linshareUiUserApp
+     */
+    function setUserQuotas(quotas) {
+      $scope.userQuotas.used = quotas.usedSpace;
+      $scope.userQuotas.total = quotas.quota;
+      $scope.userQuotas.remaining = $scope.userQuotas.total - $scope.userQuotas.used;
+      $scope.userQuotas.percent = Math.floor(($scope.userQuotas.used / $scope.userQuotas.total) * 100);
+      $scope.userQuotas.maxFileSize = quotas.maxFileSize;
+
+      if ($scope.userQuotas.percent >= 85 && $scope.userQuotas.percent < 95) {
+        $scope.userQuotas.progressBarColor = 'quotas-progress-bar-orange';
+      } else if ($scope.userQuotas.percent >= 95) {
+        $scope.userQuotas.progressBarColor = 'quotas-progress-bar-red';
+      } else {
+        $scope.userQuotas.progressBarColor = 'quotas-progress-bar-green';
       }
     }
 
