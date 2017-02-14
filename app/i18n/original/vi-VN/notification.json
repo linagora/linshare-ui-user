@@ -36,6 +36,7 @@
       "TBT__INVALID_EMAIL": ""
     },
     "ERROR": {
+      "TBT__FILE_NOT_FOUND": "",
       "TBT_FILE_UPLOAD": "",
       "503": "Lỗi máy chủ",
       "RENAME_FOLDER": "",

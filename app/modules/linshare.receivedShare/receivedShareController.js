@@ -335,7 +335,12 @@ angular.module('linshare.receivedShare')
 
       loadTable().then(function(data) {
         $scope.tableParams = data;
-        if (!_.isUndefined($scope.documentSelected)) {
+        if (_.isUndefined($scope.documentSelected)) {
+          $translate('GROWL_ALERT.ERROR.FILE_NOT_FOUND').then(function(message) {
+            growlService.notifyTopCenter(message, 'danger');
+          });
+        }
+        else if ($scope.documentSelected !== null ) {
           $scope.popoverTemplate = 'modules/linshare.receivedShare/views/popover-isolated.html';
           $scope.addSelectedDocument($scope.documentSelected);
           $scope.coatchMarkEye = true;

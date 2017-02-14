@@ -36,6 +36,7 @@
       "INVALID_EMAIL": "Invalid email"
     },
     "ERROR": {
+      "FILE_NOT_FOUND": "The selected file has not been found",
       "FILE_UPLOAD": "The upload failed",
       "503": "Service Unavailable",
       "RENAME_FOLDER": "A folder with the same name already exists",

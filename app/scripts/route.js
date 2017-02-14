@@ -61,6 +61,9 @@
             return LinshareDocumentRestService.getList();
           },
           documentSelected: function($stateParams, documentsList) {
+            if(_.isUndefined( $stateParams.fileUuid)) {
+              return null;
+            }
             return _.find(documentsList, function(doc) {
               return doc.uuid === $stateParams.fileUuid;
             });
@@ -88,6 +91,9 @@
             return receivedShareRestService.getList();
           },
           documentSelected: function($stateParams, files) {
+            if(_.isUndefined( $stateParams.fileUuid)) {
+              return null;
+            }
             return _.find(files, function(doc) {
               return doc.uuid === $stateParams.fileUuid;
             });
