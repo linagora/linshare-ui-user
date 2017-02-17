@@ -72,20 +72,20 @@
   }
 }
 
-.files #breadcrumb-wrap .breadcrumbs-ctn{
-  a{
+.files #breadcrumb-wrap .breadcrumbs-ctn, .upload-files #breadcrumb-wrap .breadcrumbs-ctn .breadcrumb-current-view{
+  a {
     float: left;
     border: none;
     color: #4a4a4a;
     padding: 0 0 0 4px;
-    &:last-of-type
+  }
+    a:last-of-type
     {
       float: left;
       border: none;
       color: #05b1ff !important;
       padding: 0 0 0 4px;
     }
-  }
 }
 
 .files {

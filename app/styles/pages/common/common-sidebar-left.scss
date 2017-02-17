@@ -223,11 +223,11 @@ body:not(.sw-toggled) #sidebar {
   background-color: #F9F9F9;
   border-top: 1px solid #E8E8E8;
   margin: 0;
-  padding: 10px 15px 15px 15px;
+  padding: 15px;
   position: absolute;
   bottom: 5px;
   width: 267px;
-  height: 94px;
+  height: 100px;
   overflow: hidden;
   z-index: 7;
   .quota-used {
@@ -292,6 +292,34 @@ body:not(.sw-toggled) #sidebar {
         font-weight: bold;
       }
     }
+  }
+}
+
+.quota {
+  .progress {
+    height: 10px;
+    background-color: #e2e2e2;
+    border-radius: 25px;
+    &.quotas-progress-bar-green .progress-bar {
+      background-color: $quotasProgressBarGreen;
+      background-image: none;
+    }
+    &.quotas-progress-bar-orange .progress-bar {
+      background-color: $quotasProgressBarOrange;
+    }
+    &.quotas-progress-bar-red .progress-bar {
+      background-color: $quotasProgressBarRed;
+    }
+  }
+}
+
+.quotas-tooltip-ctn{
+  padding-bottom: 10px;
+  padding-top: 5px;
+  p {
+    text-align: left;
+    margin: 0;
+    margin-top: 2px;
   }
 }
 

@@ -492,7 +492,7 @@ POPOVER ADD BUTTON OVERIDE
   line-height: 20px;
   color: #fff;
   text-align: center;
-  background-color: $quotasProgressBarGreen;
+  background-color: $quotasGreyBgProgressBar;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
   -webkit-transition: width .6s ease;
@@ -500,17 +500,6 @@ POPOVER ADD BUTTON OVERIDE
   transition: width .6s ease;
 }
 
-.progress-striped{
-  &.quotas-progress-bar-green .progress-bar{
-    background-color: $quotasProgressBarGreen;
-  }
-  &.quotas-progress-bar-orange .progress-bar{
-    background-color: $quotasProgressBarOrange;
-  }
-  &.quotas-progress-bar-red .progress-bar{
-    background-color: $quotasProgressBarRed;
-  }
-}
 
 #loading-bar .bar {
   -webkit-transition: width;

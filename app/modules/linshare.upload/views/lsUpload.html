@@ -96,8 +96,17 @@
       </a>
     </div>
     <div class="breadcrumbs-ctn hidden-xs">
-      <div class="breadcrumb">
-        <i class="zmdi zmdi-file"></i>{{"UPLOADED_FILES.BREADCRUMB_TITLE" | translate}}
+      <div class="breadcrumb-current-view m-t-5">
+        <a class="breadcrumb">
+          <i class="zmdi zmdi-upload"></i>{{"ADD_FILES_DROPDOWN.UPLOAD_SHARE" | translate}}
+        </a>
+        <span class="sub-category-chevron pipe-separator">|</span>
+        <a x-ng-if="uploadQueueVm.isFromMySpace" class="click-disabled">
+          {{"MENU_TITLE.FILES" | translate}}
+        </a>
+        <a x-ng-if="!uploadQueueVm.isFromMySpace" class="click-disabled">
+          {{"MENU_TITLE.SHARED_SPACE" | translate}}
+        </a>
       </div>
       <div class="pull-right actions-upload-queue col-xs-2">
         <div x-ng-class="{'disabled-work-in-progress': uploadQueueVm.$flow.files.length <= 0}" class="upload-actions-toolbar actions">
@@ -119,7 +128,7 @@
           </a>
         </div>
       </div>
-      <div class="pull-right m-r-20 m-t-5">
+      <div class="pull-right m-r-20">
           <span x-ng-class="{'active' : uploadQueueVm.isFromMySpace , 'left-elem-toggle-inactive' : !uploadQueueVm.isFromMySpace}" class="toggle-pill"><a
             x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">{{"MENU_TITLE.FILES" | translate}}</a></span>
         <span x-ng-class="{'active' : !uploadQueueVm.isFromMySpace , 'right-elem-toggle-inactive' : uploadQueueVm.isFromMySpace}" class="toggle-pill"><a

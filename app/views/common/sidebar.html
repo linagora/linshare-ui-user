@@ -53,17 +53,20 @@
   </ul>
  </div>
   <div class="quota">
-    <uib-progressbar
-      max="100"
-      value="userQuotas.percent"
-      class="progress-striped"
-      x-ng-class="userQuotas.progressBarColor"
-      title="{{'USER_QUOTAS.USED' | translate}} : {{userQuotas.used | readableSize:true}}"></uib-progressbar>
-    <div class="quota-information">
-      <p title="{{'USER_QUOTAS.MAX_FILE_SIZE' | translate}} {{userQuotas.maxFileSize | readableSize:true}}">
-        {{userQuotas.remaining | readableSize:true}} {{'USER_QUOTAS.REMAINING_OVER' | translate}} {{userQuotas.total |
-        readableSize:true}}
-      </p>
+    <div tooltip-placement="bottom"
+         uib-tooltip-template="'views/common/quotasTemplateTooltip.html'"
+         tooltip-popup-delay="250"
+         tooltip-class="quotas-tooltip-ctn">
+      <uib-progressbar
+        max="100"
+        value="userQuotas.percent"
+        x-ng-class="userQuotas.progressBarColor"></uib-progressbar>
+      <div class="quota-information">
+        <p>
+          {{userQuotas.remaining | readableSize:true}} {{'USER_QUOTAS.REMAINING_OVER' | translate}} {{userQuotas.total |
+          readableSize:true}}
+        </p>
+      </div>
     </div>
     <div class="libre-and-free">
       <img src="images/common/community.png" alt="Logo LinShare"/>
