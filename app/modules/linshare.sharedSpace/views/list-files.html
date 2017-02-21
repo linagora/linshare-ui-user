@@ -36,7 +36,7 @@
               <p>{{"WORKGROUPS_LIST.SHARED_FOLDER" | translate}}</p>
             </a>
             <a class="col-xs-6" x-ng-click="sharedSpaceListVm.createFolder();"
-               href="javascript:void(0)">
+               href="javascript:void(0)" x-ng-if="!linshareModeProduction">
               <i>
                 <span class="groups-folder">
                       <span class="path1"></span><span class="path2"></span>

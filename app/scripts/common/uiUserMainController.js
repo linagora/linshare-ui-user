@@ -30,6 +30,7 @@
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.sidebarRightWidth = 350;
     $scope.getUserQuotas = getUserQuotas;
+    $scope.lsAppConfig = lsAppConfig;
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.productVersion = 'dev';
     $scope.refFlowShares = {};

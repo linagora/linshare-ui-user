@@ -9,14 +9,15 @@
     .module('linshareUiUserApp')
     .controller('HomeController', homeController);
 
-  homeController.$inject = ['$scope', '$timeout', '$translatePartialLoader'];
+  homeController.$inject = ['$scope', '$timeout', '$translatePartialLoader', 'lsAppConfig'];
 
   /**
    * @namespace homeController
    * @desc Application home management system controller
    * @memberOf linshareUiUserApp
    */
-  function homeController($scope, $timeout, $translatePartialLoader) {
+  function homeController($scope, $timeout, $translatePartialLoader, lsAppConfig) {
+    $scope.lsAppConfig = lsAppConfig;
     $scope.fab = {
       isOpen: false,
       count: 0,

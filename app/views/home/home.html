@@ -12,7 +12,8 @@
             <p class="box-txt">{{"MY_FILES_SPACE_MSG" | translate}}</p>
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked">
+               x-ng-click="isChecked = !isChecked"
+               x-ng-if="!lsAppConfig.production">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
@@ -42,7 +43,8 @@
             <p class="box-txt">{{"UPLOAD_SHARE_MSG" | translate}}</p>
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked">
+               x-ng-click="isChecked = !isChecked"
+               x-ng-if="!lsAppConfig.production">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
@@ -71,7 +73,8 @@
             <p class="box-txt">{{"UPLOAD_GROUP_MSG" | translate}}</p>
           </div>
           <div class="set-homepage-ctn"  event-propagation-stop x-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked">
+               x-ng-click="isChecked = !isChecked"
+               x-ng-if="!lsAppConfig.production">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
@@ -98,7 +101,8 @@
             <p class="box-txt">{{"UPLOAD_REQUEST_MSG" | translate}}</p>
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked">
+               x-ng-click="isChecked = !isChecked"
+               x-ng-if="!lsAppConfig.production">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
