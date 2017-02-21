@@ -17,7 +17,7 @@
    * @memberOf LinShareUiUserApp
    */
   function routerConfiguration($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('login');
+    $urlRouterProvider.otherwise('home');
 
     $stateProvider
       .state('common', {
