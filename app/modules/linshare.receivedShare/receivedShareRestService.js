@@ -42,7 +42,7 @@
      */
     function copy(uuid) {
       $log.debug('LinshareReceivedShareRestService : copy', uuid);
-      return handler(Restangular.one(restUrl).one('copy', uuid).post());
+      return handler(Restangular.one(restUrl).one(uuid, 'copy').post());
     }
 
     /**
