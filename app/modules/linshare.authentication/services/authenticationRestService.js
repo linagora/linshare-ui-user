@@ -57,6 +57,7 @@
      * @memberOf Linshare.authentication.authenticationRestService
      */
     function getCurrentUser() {
+      checkAuthentication();
       $log.debug('AuthenticationRestService : getCurrentUser');
       return deferred.promise;
     }
