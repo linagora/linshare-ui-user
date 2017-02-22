@@ -334,22 +334,13 @@
                                 {{'ACTION.TRANSFERT' | translate}}
                               </a>
                             </li>
-                            <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
-                              <a href="" class="parent-sub-menu-link">
+                            <li>
+                              <a x-ng-href=""
+                                 x-ng-click="copyIntoFiles(documentFile)"
+                                 event-propagation-stop>
                                 <i class="zmdi zmdi-copy"></i>
                                 {{'ACTION.COPY' | translate}}
-                                <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon "></i>
                               </a>
-                              <ul>
-                                <li><a href="#"><i class="groups-home-workgroup"></i>
-                                  {{'ACTION.COPY_TO_SHARED_SPACE' | translate}}
-                                </a></li>
-                                <li x-ng-show="linshareModeProduction == false">
-                                  <a href="#">
-                                    <i class="fa fa-files-o"></i>
-                                    {{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}</a>
-                                </li>
-                              </ul>
                             </li>
                             <li>
                               <a href="" x-ng-click="deleteDocuments(documentFile)">
