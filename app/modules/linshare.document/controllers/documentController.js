@@ -334,6 +334,7 @@
      * @desc Update the content of the sidebar
      * @param {String} content The id of the content to load,
      *                 see app/views/includes/sidebar-right.html for possible values
+     * @memberOf LinShare.document.documentController
      */
     function loadSidebarContent(content) {
       $scope.mainVm.sidebar.setData($scope);
@@ -476,7 +477,15 @@
       }
     }
 
-    function showCurrentFile(currentFile, event) {
+    /**
+     * @name showCurrentFile
+     * @desc Get information from a file and show the sidebar details at a given tab
+     * @param {Object} currentFile - A Document file object
+     * @param {event} event - Event occuring launching the action
+     * @param {number} tabIndex - Index of the sidebar details tab to show
+     * @memberOf LinShare.document.documentController
+     */
+    function showCurrentFile(currentFile, event, tabIndex) {
       $scope.currentSelectedDocument.current = currentFile;
       LinshareDocumentRestService.get(currentFile.uuid).then(function(data) {
         $scope.currentSelectedDocument.current = data;
@@ -487,10 +496,13 @@
         });
       }
       $scope.loadSidebarContent(lsAppConfig.details);
-      var currElm = event.currentTarget;
-      angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-        angular.element(currElm).addClass('activeActionButton');
-      });
+      $scope.data.selectedIndex = tabIndex ? tabIndex : 0;
+      if (!_.isUndefined(event)) {
+        var currElm = event.currentTarget;
+        angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
+          angular.element(currElm).addClass('activeActionButton');
+        });
+      }
     }
 
     function showToastDeleteError() {

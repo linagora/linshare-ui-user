@@ -48,7 +48,8 @@
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
           {{documentFile.name}}
           <span>
-            <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
+            <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs"
+                  x-ng-click="showCurrentFile(documentFile, undefined, 1)" event-propagation-stop>
             {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
             </span>
             <p class="mobile-list-item-info visible-xs">
