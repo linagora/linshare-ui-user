@@ -57,7 +57,8 @@
       "ERROR_404": "Element not found",
       "ERROR_403": "You are not authorized to delete this document",
       "ERROR_400": "The request couldn't be achieved",
-      "ERROR_500": "Server error"
+      "ERROR_500": "Server error",
+      "ISOLATED_FILE": "Isolation mode activated: you are currently viewing a restricted file selection"
     }
   }
 }

@@ -50,14 +50,15 @@
   "TOAST_ALERT": {
     "ACTION": {
       "TBT_CLOSE": "",
-      "TBT_INFO_ERROR_FILE": ""
+      "TBT_ISOLATED_FILE: ""
     },
     "WARNING": {
       "TBT_ELEMENTS_NOT_DELETED": "",
       "TBT_ERROR_404": "",
       "TBT_ERROR_403": "",
       "TBT_ERROR_400": "",
-      "TBT_ERROR_500": ""
+      "TBT_ERROR_500": "",
+      "TBT_ISOLATED_FILE: ""
     }
   }
 }

@@ -7,8 +7,9 @@
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($scope, $filter, $window, $translatePartialLoader, NgTableParams, receivedShareRestService,
-             autocompleteUserRestService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig, $q, documentSelected) {
+             autocompleteUserRestService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig, $q, documentSelected, $mdToast) {
       $translatePartialLoader.addPart('receivedShare');
+      $scope.closeToast = closeToast;
       $scope.documentSelected = documentSelected;
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
       $scope.datasIsSelected = false;
@@ -201,11 +202,12 @@ angular.module('linshare.receivedShare')
         }
 
         $scope.loadSidebarContent(lsAppConfig.details);
-
-        var currElm = event.currentTarget;
-        angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-          angular.element(currElm).addClass('activeActionButton');
-        });
+        if (!_.isUndefined(event)) {
+          var currElm = event.currentTarget;
+          angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
+            angular.element(currElm).addClass('activeActionButton');
+          });
+        }
       };
 
       var swalTitle, swalText, swalConfirm, swalCancel;
@@ -341,13 +343,24 @@ angular.module('linshare.receivedShare')
           });
         }
         else if ($scope.documentSelected !== null ) {
-          $scope.popoverTemplate = 'modules/linshare.receivedShare/views/popover-isolated.html';
+          $mdToast.show({
+            scope: $scope,
+            preserverScope: true,
+            hideDelay: 0,
+            position: 'bottom',
+            templateUrl: 'modules/linshare.receivedShare/views/toast-file-isolate.html'
+          });
           $scope.addSelectedDocument($scope.documentSelected);
           $scope.coatchMarkEye = true;
           $scope.toggleFilterBySelectedFiles();
+          $scope.showCurrentFile($scope.documentSelected);
         }
       });
 
+      function closeToast() {
+        $mdToast.hide().then(function() {});
+      }
+  
       function toggleFilterBySelectedFiles() {
         $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
         if ($scope.tableParams.filter().isSelected) {

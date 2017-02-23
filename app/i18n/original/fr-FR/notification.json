@@ -57,7 +57,8 @@
       "ERROR_404": "Élément introuvable",
       "ERROR_403": "Vous n'êtes pas autorisé à supprimer cet élément",
       "ERROR_400": "Suppression impossible",
-      "ERROR_500": "Erreur du serveur"
+      "ERROR_500": "Erreur du serveur",
+      "ISOLATED_FILE": "Mode isolé séléction activé : vous visualisez une selection restreinte de fichiers"
     }
   }
 }

@@ -20,7 +20,7 @@
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
     $scope.closeDetailSidebar = closeDetailSidebar;
     $scope.closeSearch = closeSearch;
-    $scope.closeToastDeleteError = closeToastDeleteError;
+    $scope.closeToast = closeToast;
     $scope.currentDocument = {};
     $scope.currentPage = 'my_files';
     $scope.currentSelectedDocument = {
@@ -187,10 +187,17 @@
           });
         }
         else if ($scope.documentSelected !== null) {
-          $scope.popoverTemplate = 'modules/linshare.document/views/popover-isolated.html';
+          $mdToast.show({
+            scope: $scope,
+            preserverScope: true,
+            hideDelay: 0,
+            position: 'bottom',
+            templateUrl: 'modules/linshare.document/views/toast-file-isolate.html'
+          });
           $scope.addSelectedDocument($scope.documentSelected);
           $scope.coatchMarkEye = true;
           $scope.toggleFilterBySelectedFiles();
+          $scope.showCurrentFile($scope.documentSelected);
         }
       });
     }
@@ -227,7 +234,7 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
-    function closeToastDeleteError() {
+    function closeToast() {
       $mdToast.hide().then(function() {});
     }
 
@@ -271,7 +278,7 @@
           }, 350);
         }
       });
-      closeToastDeleteError();
+      closeToast();
     }
 
     function deleteDocuments(items) {

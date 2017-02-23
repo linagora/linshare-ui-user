@@ -27,6 +27,7 @@
 }
 
 md-toast.toast-dynamic-height .md-toast-content {
+  max-width: none !important;
   height: auto;
   max-height: 500px;
   overflow: visible;

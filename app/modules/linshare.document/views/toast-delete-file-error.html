@@ -4,7 +4,7 @@
   <md-button class="md-highlight" x-ng-click="details = !details">
     {{"TOAST_ALERT.ACTION.INFO_ERROR_FILE" | translate}}
   </md-button>
-  <md-button class="close-button" x-ng-click="closeToastDeleteError()">
+  <md-button class="close-button" x-ng-click="closeToast()">
     <i class="zmdi zmdi-close"></i>
   </md-button>
     <ul class="delete-file-toast" x-ng-class="{'anim-toast' : details}" x-ng-repeat="response in responses track by $index" >
