@@ -195,7 +195,6 @@
             templateUrl: 'modules/linshare.document/views/toast-file-isolate.html'
           });
           $scope.addSelectedDocument($scope.documentSelected);
-          $scope.coatchMarkEye = true;
           $scope.toggleFilterBySelectedFiles();
           $scope.showCurrentFile($scope.documentSelected);
         }
@@ -234,6 +233,11 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
+    /**
+     * @name closeToast
+     * @desc Hide the $mdToast
+     * @memberOf linashare.document.documentController
+     */
     function closeToast() {
       $mdToast.hide().then(function() {});
     }
@@ -439,7 +443,6 @@
 
     function resetSelectedDocuments() {
       $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
-      $scope.coatchMarkEye = false;
       delete $scope.tableParams.filter().isSelected;
       _.forEach($scope.selectedDocuments, function(selectedDoc) {
         selectedDoc.isSelected = false;

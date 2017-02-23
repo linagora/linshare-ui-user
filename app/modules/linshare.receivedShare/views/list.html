@@ -4,10 +4,14 @@
     <div class="card-header">
       <div id="breadcrumb-wrap">
         <div class="breadcrumbs-ctn hidden-xs">
-          <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
+          <a ui-sref="documents.received({fileUuid: undefined})">
+            <i class="zmdi zmdi-file"></i>
             {{"BREADCRUMB_TITLE_RECEIVED_SHARES" | translate}}
           </a>
-          <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+          <span class="sub-category-chevron pipe-separator" x-ng-if="activeBtnShowSelection">|</span>
+          <a href="javascript:void(0)" class="click-disabled" x-ng-if="activeBtnShowSelection">
+            {{"BREADCRUMB_ISOLATE" | translate}}
+          </a>
         </div>
         <div id="action-header">
           <div class="fg-line toolbar-actions-items">
@@ -149,13 +153,7 @@
               x-ng-click="toggleFilterBySelectedFiles()">
             <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" | translate}}</p>
             <div class="pull-left view-icons-ctn groups-view">
-              <i class="fa fa-eye-slash" aria-hidden="true"
-                 x-ng-show="activeBtnShowSelection && !coatchMarkEye"></i>
-              <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection && coatchMarkEye"
-                 popover-placement="bottom"
-                 uib-popover-template="popoverTemplate"
-                 popover-is-open="coatchMarkEye"
-                 popover-class="popover-eye-ctn"></i>
+              <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection"></i>
               <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
             </div>
           </div>

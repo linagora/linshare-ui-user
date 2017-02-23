@@ -18,17 +18,20 @@
       <a class="add-menu-group"
          tabindex="0"
          uib-popover-template="'popover-group.html'"
-         popover-title="Popover Title"
          popover-placement="bottom"
          popover-trigger="focus">
         <i class="zmdi zmdi-plus"></i>
       </a>
     </div>
     <div class="breadcrumbs-ctn hidden-xs">
-      <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
+      <a ui-sref="documents.files({fileUuid: undefined})">
+        <i class="zmdi zmdi-file"></i>
         {{"BREADCRUMB_TITLE" | translate}}
       </a>
-      <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+      <span class="sub-category-chevron pipe-separator" x-ng-if="activeBtnShowSelection">|</span>
+      <a class="click-disabled" x-ng-if="activeBtnShowSelection">
+        {{"BREADCRUMB_ISOLATE" | translate}}
+      </a>
     </div>
     <div id="action-header">
       <div class="fg-line toolbar-actions-items">

@@ -9,6 +9,7 @@
   },
   "BACKGROUND_WORKGROUP_TITLE_MSG": "WORKGROUPS LIST",
   "BACKGROUND_WORKGROUP_MSG": "Create a workgroup in order to exchange files beetween your colleagues",
+  "BREADCRUMB_ISOLATE": "Isolation mode",
   "BREADCRUMB_TITLE": "My files",
   "RIGHT_PANEL": {
     "EMPTY": "no file is selected",

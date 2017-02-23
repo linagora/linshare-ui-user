@@ -7,6 +7,7 @@
     "SIZE": "Taille",
     "ACTION": "Actions"
   },
+  "BREADCRUMB_ISOLATE": "Vue isolée",
   "BREADCRUMB_TITLE": "Mes fichiers",
   "BACKGROUND_WORKGROUP_TITLE_MSG": "GROUPES DE TRAVAIL",
   "BACKGROUND_WORKGROUP_MSG": "Créer des groupes de travail pour échanger des fichiers avec vos collègues.",

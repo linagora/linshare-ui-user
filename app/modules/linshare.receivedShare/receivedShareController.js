@@ -6,8 +6,9 @@
 
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($scope, $filter, $window, $translatePartialLoader, NgTableParams, receivedShareRestService,
-             autocompleteUserRestService, files, $translate, growlService, $log, $timeout, documentUtilsService, lsAppConfig, $q, documentSelected, $mdToast) {
+    function($filter, $log, $mdToast, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
+      autocompleteUserRestService, documentSelected, documentUtilsService, files, growlService, lsAppConfig,
+      NgTableParams, receivedShareRestService) {
       $translatePartialLoader.addPart('receivedShare');
       $scope.closeToast = closeToast;
       $scope.documentSelected = documentSelected;
@@ -129,7 +130,6 @@ angular.module('linshare.receivedShare')
 
       $scope.resetSelectedDocuments = function() {
         $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
-        $scope.coatchMarkEye = false;
         delete $scope.tableParams.filter().isSelected;
         angular.forEach($scope.selectedDocuments, function(selectedDoc) {
           selectedDoc.isSelected = false;
@@ -351,12 +351,16 @@ angular.module('linshare.receivedShare')
             templateUrl: 'modules/linshare.receivedShare/views/toast-file-isolate.html'
           });
           $scope.addSelectedDocument($scope.documentSelected);
-          $scope.coatchMarkEye = true;
           $scope.toggleFilterBySelectedFiles();
           $scope.showCurrentFile($scope.documentSelected);
         }
       });
 
+      /**
+       * @name closeToast
+       * @desc Hide the $mdToast
+       * @memberOf linashare.receivedShare.ReceivedController
+       */
       function closeToast() {
         $mdToast.hide().then(function() {});
       }
