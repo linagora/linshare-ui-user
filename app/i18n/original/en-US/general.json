@@ -160,9 +160,9 @@
   "ME": "Me",
   "MENU_TITLE": {
     "ADMIN": "Administration",
-    "AUDIT": "Audit",
-    "AUDIT_GLOBAL": "Global audit",
-    "AUDIT_UPLOAD_REQUEST": "Upload requests audit",
+    "AUDIT": "Activity logs",
+    "AUDIT_GLOBAL": "Global activity",
+    "AUDIT_UPLOAD_REQUEST": "Upload requests activity",
     "CONTACTS_LISTS": "Contacts Lists",
     "FILES": "My space",
     "GROUP_MEMBERS": "Groups",

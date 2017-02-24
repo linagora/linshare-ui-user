@@ -780,3 +780,146 @@
     padding-left: 5px;
   }
 }
+
+
+
+/**********************
+BASIC READONLY TABLE
+***********************/
+
+.table.standard-read-only-table {
+
+  &.table > thead > tr > th:first-child,
+  &.table > tbody > tr > th:first-child,
+  &.table > tfoot > tr > th:first-child,
+  &.table > thead > tr > td:first-child,
+  &.table > tbody > tr > td:first-child,
+  &.table > tfoot > tr > td:first-child{
+    padding-left: 10px;
+  }
+  td {
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: middle;
+  }
+  tr:hover {
+    width: 100% !important;
+    color: #555;
+    text-decoration: none;
+    background-color: #F8F8F8;
+  }
+  tr:hover, tr, td:hover, td {
+    cursor : default;
+  }
+  tbody {
+    tr {
+      height: 40px;
+      max-height: 40px;
+      border-top: solid 1px #f1f1f1;
+    }
+    td{
+      padding-left: 15px;
+    }
+  }
+  thead {
+    th, th:hover{
+      background-color: #fff;
+    }
+    th {
+      -moz-user-select: none;
+      text-align: left;
+    }
+    tr:first-child th {
+      height: 42px;
+      text-align: center;
+      padding-top: 8px;
+    }
+  }
+
+  > thead > tr > th {
+    background-color: #FFF !important;
+    vertical-align: middle;
+    font-weight: 500;
+    color: #333;
+    border-width: 1px;
+    padding: 0 10px;
+    text-transform: uppercase;
+  }
+  .sortable .ng-table-header:before {
+    font-family: 'Material-Design-Iconic-Font';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    font-size: 17px;
+    opacity: 0;
+    .sort-indicator:before {
+      color: red;
+    }
+  }
+  th.sortable .sort-indicator::after,
+  th.sortable .sort-indicator::before {
+    opacity: 0;
+  }
+  th.sortable.sort-asc .sort-indicator::after,
+  th.sortable.sort-desc .sort-indicator::after {
+    opacity: 1;
+  }
+}
+
+
+/**********************
+TABLE WITH SEARCH FORM FILTERS
+***********************/
+
+.table.table-form-filters{
+
+  .form-control {
+    border: 1px solid #E4E4E4;
+    padding: 5px;
+    height: 30px;
+    border-radius: 1px;
+  }
+  input.form-control  {
+    background-image: url(../images/icons/search-magnifying-glass.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 30px;
+    opacity :0.6;
+    background-size: 18px 18px;
+  }
+
+  tr.ng-table-filters th{
+    padding-bottom:7px;
+    padding-top:7px;
+  }
+}
+
+/**********************
+COLUMN WITH A SINGLE ACTION POPOVER LINK
+***********************/
+
+.detail-action-col{
+  .info-popover {
+    width: 100%;
+    height: 100%;
+    vertical-align : middle;
+    a {
+      vertical-align : middle;
+    }
+  }
+  .actions > li > a > i, .actions > a > i {
+    color: #0099de;
+    font-size: 16px;
+    vertical-align : middle;
+  }
+  .actions > a {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 3px;
+  }
+}
+
+

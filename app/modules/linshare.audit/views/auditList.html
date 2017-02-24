@@ -1,0 +1,175 @@
+<div class="file-listing-ctn">
+  <div class="container files guest-list">
+    <div class="card">
+      <div class="card-header">
+        <div id="breadcrumb-wrap" class="activity-breadcrumb-ctn">
+          <div class="breadcrumbs-ctn hidden-xs">
+            <a class="click-disabled">
+              <i class="zmdi zmdi-time-restore"></i>
+              {{"BREADCRUMB_TITLE_AUDIT" | translate}}
+            </a>
+          </div>
+          <div id="action-header" class="activity-logs-seach-panel">
+            <div>
+              <div class="col-sm-4 p-l-0">
+                <div class="date-picker input-group dp-blue" data-ng-class="{'is-opened': beginDateOpened}">
+                  <span class="input-group-addon">
+                    <i class="zmdi zmdi-calendar-check ma-icon"></i>
+                  </span>
+                  <div class="fg-line" data-ng-class="{'fg-toggled': beginDateOpened}">
+                    <input
+                      data-ng-click="beginDateOpened = true"
+                      type="text"
+                      class="form-control"
+                      datepicker-popup="{{auditVm.dateFormat}}"
+                      show-weeks="false"
+                      is-open="beginDateOpened"
+                      max-date="auditVm.endDate"
+                      datepicker-options="dateOptions"
+                      data-ng-required="true" close-text="Close"
+                      placeholder="{{'TOOLBAR.FILTER_BEGINNING_DATE' | translate}}"
+                      data-ng-model="auditVm.beginDate"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="date-picker input-group dp-blue" data-ng-class="{'is-opened': endDateOpened}">
+                  <span class="input-group-addon">
+                    <i class="zmdi zmdi-calendar-close ma-icon"></i>
+                  </span>
+                  <div class="fg-line" data-ng-class="{'fg-toggled': endDateOpened}">
+                    <input
+                      data-ng-click="endDateOpened = true"
+                      type="text"
+                      class="form-control"
+                      datepicker-popup="{{auditVm.dateFormat}}"
+                      show-weeks="false"
+                      is-open="endDateOpened"
+                      min-date="auditVm.beginDate"
+                      max-date="auditVm.maxDate"
+                      datepicker-options="dateOptions" data-ng-required="true"
+                      close-text="Close"
+                      placeholder="{{'TOOLBAR.FILTER_ENDING_DATE' | translate}}"
+                      data-ng-model="auditVm.endDate"/>
+                  </div>
+                </div>
+              </div>
+              <button class="btn waves-effect m-r-10 ls-icon-blue-btn"
+                      data-ng-click="auditVm.findAuditActionsByDate()">
+                <i class="zmdi zmdi-search"></i>{{'TOOLBAR.SEARCH' | translate}}
+              </button>
+              <div class="fg-line toolbar-actions-items">
+                <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
+                  <div class="dropdown dropdown-standard toolbar-mobile-item" uib-dropdown="">
+                    <div class="actions">
+                      <a href="" class="dropdown-toggle" uib-dropdown-toggle=""
+                         data-ng-disabled="disabled"
+                         aria-haspopup="true" aria-expanded="false">
+                        <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
+                      </a>
+                      <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                        <li role="menuitem">
+                          <a href="" class="center">
+                            {{'TOOLBAR.ORDER_BY' | translate}}
+                          </a>
+                        </li>
+                        <li class="divided"></li>
+                        <li role="menuitem">
+                          <a href="" data-ng-click="auditVm.tableSort('authorName', $event)">
+                          <span class="caret-area">
+                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'TABLE_HEADER.ACTOR' | translate}}
+                          </a>
+                        </li>
+                        <li role="menuitem">
+                          <a href="" data-ng-click="auditVm.tableSort('translatedAction', $event)">
+                          <span class="caret-area">
+                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'TABLE_HEADER.ACTION' | translate}}
+                          </a>
+                        </li>
+                        <li role="menuitem">
+                          <a href="" data-ng-click="auditVm.tableSort('translatedType', $event)">
+                          <span class="caret-area">
+                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'TABLE_HEADER.RESOURCE_TYPE' | translate}}
+                          </a>
+                        </li>
+                        <li role="menuitem">
+                          <a href="" data-ng-click="auditVm.tableSort('resource.name', $event)">
+                          <span class="caret-area">
+                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'TABLE_HEADER.RESOURCE_NAME' | translate}}
+                          </a>
+                        </li>
+                        <li role="menuitem">
+                          <a href="" data-ng-click="auditVm.tableSort('shareRecipient', $event)">
+                          <span class="caret-area">
+                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'TABLE_HEADER.RECIPIENT' | translate}}
+                          </a>
+                        </li>
+                        <li role="menuitem">
+                          <a href="" class="selected-sorting"
+                             data-ng-click="auditVm.tableSort('creationDate', $event)">
+                          <span class="caret-area">
+                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            </span> {{'TABLE_HEADER.DATE' | translate}}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body collapsible-content">
+        <div class="table-responsive">
+          <table class="table standard-read-only-table table-form-filters detail-action-col"
+                 id="fixed-activity-table-height" data-ng-table="auditVm.tableParams" show-filter="true">
+            <tr data-ng-repeat="auditAction in $data" data-ng-cloak check-table-height>
+              <td data-title="'TABLE_HEADER.ACTOR' | translate" data-filter="{authorName :'text'}"
+                  data-sortable="'authorName'">
+                {{auditAction.authorName | translate}}
+              </td>
+              <td data-title="'TABLE_HEADER.ACTION' | translate" data-filter="{translatedAction :'select'}"
+                  filter-data="auditVm.tableFilterAction" data-sortable="'translatedAction'">
+                {{auditAction.translatedAction}}
+              </td>
+              <td data-title="'TABLE_HEADER.RESOURCE_TYPE' | translate" data-filter="{translatedType :'select'}"
+                  filter-data="auditVm.tableFilterType" data-sortable="'translatedType'">
+                {{auditAction.translatedType}}
+              </td>
+              <td data-title="'TABLE_HEADER.RESOURCE_NAME' | translate" data-filter="{resourceName :'text'}"
+                  data-sortable="'resourceName'">
+                {{auditAction.resourceName}}
+              </td>
+              <td data-title="'TABLE_HEADER.RECIPIENT' | translate" data-filter="{'shareRecipient' :'text'}"
+                  data-sortable="'shareRecipient'">
+                {{auditAction.shareRecipient}}
+              </td>
+              <td data-title="'TABLE_HEADER.DATE' | translate" data-sortable="'creationDate'">
+                <span tooltip-placement="bottom" tooltip-popup-delay="300"
+                      uib-tooltip="{{auditAction.creationDate | calendarTime}}">
+                  {{auditAction.creationDate | relativeTime}}
+                </span>
+              </td>
+              <td data-title="'TABLE_HEADER.DETAIL' | translate" audit-details-popover="{{auditAction}}"
+                  class="center">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

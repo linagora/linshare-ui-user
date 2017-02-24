@@ -1,0 +1,466 @@
+{
+  "ACTIONS": {
+    "TBT__INFO": ""
+  },
+  "TBT__AUTHOR_ME": "",
+  "TBT__AUTHOR_SYSTEM": "",
+  "TBT__BREADCRUMB_TITLE_AUDIT": "",
+  "DETAILS_POPUP": {
+    "TBT__BY": "",
+    "TBT__MODIFICATIONS": "",
+    "SENTENCES": {
+      "ANONYMOUS_SHARE_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "ADMIN": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "READ": {
+          "ADMIN": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.READ"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.READ"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        }
+      },
+      "AUTHENTICATION": {
+        "FAILURE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+          }
+        },
+        "SUCCESS": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+          }
+        }
+      },
+      "CONTACTS_LISTS": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "CONTACTS_LISTS_CONTACTS": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "DOCUMENT_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "GUEST": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "SHARE_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "WORKGROUP": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "WORKGROUP_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "WORKGROUP_FOLDER": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "WORKGROUP_MEMBER": {
+        "CREATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      }
+    },
+    "UPDATED_FIELDS": {
+      "TBT__EXPIRATION_DATE": "",
+      "TBT__FIRST_NAME": "",
+      "TBT__LAST_NAME": "",
+      "TBT__MAIL": "",
+      "TBT__NAME": "",
+      "TBT__RIGHT": ""
+    },
+    "UPDATED_FIELDS_RIGHTS": {
+      "TBT__ADMIN": "",
+      "TBT__WRITE": "",
+      "TBT__READ": ""
+    }
+  },
+  "FILTERS_SELECT": {
+    "ACTION": {
+      "TBT__ADDITION": "",
+      "TBT__ALL": "",
+      "TBT__COPY": "",
+      "TBT__CREATE": "",
+      "TBT__CREATE_SHARE": "",
+      "TBT__DELETE": "",
+      "TBT__DOWNLOAD": "",
+      "TBT__FAILURE": "",
+      "TBT__READ": "",
+      "TBT__RECEIVE_SHARE": "",
+      "TBT__SUCCESS": "",
+      "TBT__UPDATE": "",
+      "TBT__UPLOAD": "",
+      "TBT__VIEWED": ""
+    },
+    "TYPE": {
+      "TBT__ALL": "",
+      "TBT__ANONYMOUS_SHARE_ENTRY": "",
+      "TBT__AUTHENTICATION": "",
+      "TBT__CONTACTS_LISTS": "",
+      "TBT__CONTACTS_LISTS_CONTACTS": "",
+      "TBT__DOCUMENT_ENTRY": "",
+      "TBT__GUEST": "",
+      "TBT__SHARE_ENTRY": "",
+      "TBT__WORKGROUP": "",
+      "TBT__WORKGROUP_ENTRY": "",
+      "TBT__WORKGROUP_FOLDER": "",
+      "TBT__WORKGROUP_MEMBER": ""
+    }
+  },
+  "TABLE_HEADER": {
+    "TBT__ACTION": "",
+    "TBT__ACTOR": "",
+    "TBT__DATE": "",
+    "TBT__DETAIL": "",
+    "TBT__RECIPIENT": "",
+    "TBT__RESOURCE_NAME": "",
+    "TBT__RESOURCE_TYPE": ""
+  },
+  "TOOLBAR": {
+    "TBT__ORDER_BY": "",
+    "TBT__FILTER_BEGINNING_DATE": "",
+    "TBT__FILTER_ENDING_DATE": "",
+    "TBT__SEARCH": ""
+  }
+}

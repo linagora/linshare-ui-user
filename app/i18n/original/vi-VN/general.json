@@ -160,9 +160,9 @@
   "TBT__ME": "",
   "MENU_TITLE": {
     "ADMIN": "Quản trị",
-    "AUDIT": "Lịch sử",
-    "AUDIT_GLOBAL": "Tổng quát",
-    "AUDIT_UPLOAD_REQUEST": "Danh sách lời mời tải tập tin lên",
+    "TBT__AUDIT": "",
+    "TBT__AUDIT_GLOBAL": "",
+    "TBT__AUDIT_UPLOAD_REQUEST": "",
     "TBT_CONTACTS_LISTS": "",
     "TBT__FILES": "",
     "GROUP_MEMBERS": "Thành viên nhóm",

@@ -1,0 +1,81 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+
+/**********************
+ ACTIVITY PAGE HEADER ADJUSTMENTS
+***********************/
+
+.files #breadcrumb-wrap.activity-breadcrumb-ctn{
+  flex: 0 0 auto;
+  #action-header.activity-logs-seach-panel {
+    display : block;
+    flex : 1 1 auto;
+    width: 0;
+    > div {
+      min-width: 614px;
+    }
+    .btn{
+      margin-top : 4px;
+    }
+  }
+  .date-picker table {
+    span{
+      font-weight: normal !important;
+    }
+  }
+
+}
+
+#fixed-activity-table-height{
+  table-layout: fixed;
+  overflow: hidden;
+
+  thead{
+    display: block;
+    tr {
+      display: flex;
+    }
+  }
+
+  tbody{
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+  }
+  thead tr th:first-child, tbody tr td:first-child{
+    width : 15%;
+  }
+  thead tr th:nth-child(2), tbody tr td:nth-child(2) {
+    width : 15%;
+  }
+  thead tr th:nth-child(3), tbody tr td:nth-child(3) {
+    width : 15%;
+  }
+  thead tr th:nth-child(4), tbody tr td:nth-child(4) {
+    width : 25%;
+  }
+
+  thead tr th:nth-child(5), tbody tr td:nth-child(5) {
+    width : 15%;
+  }
+  thead tr th:nth-child(6), tbody tr td:nth-child(6) {
+    width : 10%;
+  }
+  thead tr th:nth-child(7), tbody tr td:nth-child(7) {
+    width : 5%;
+  }
+
+  tbody tr{
+    display: flex;
+    td {
+      align-self: center;
+    }
+  }
+}
+
+@media (max-width: 770px) {
+  .files #breadcrumb-wrap.activity-breadcrumb-ctn #action-header.activity-logs-seach-panel {
+    display  :none;
+  }
+}

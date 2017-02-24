@@ -160,9 +160,9 @@
   "ME": "Moi",
   "MENU_TITLE": {
     "ADMIN": "Administration",
-    "AUDIT": "Audit",
-    "AUDIT_GLOBAL": "Audit global",
-    "AUDIT_UPLOAD_REQUEST": "Audit invitations de dépôts",
+    "AUDIT": "Historique d'activité",
+    "AUDIT_GLOBAL": "Activités global",
+    "AUDIT_UPLOAD_REQUEST": "Activité des invitations de dépôts",
     "CONTACTS_LISTS": "Listes de contacts",
     "FILES": "Espace personnel",
     "GROUP_MEMBERS": "Mes groupes",

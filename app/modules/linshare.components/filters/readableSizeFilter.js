@@ -18,12 +18,6 @@ angular.module('linshare.components')
       return bytes.toFixed(1) + ' ' + units[u];
     };
   })
-  .filter('relativeTime', function($translate) {
-    moment.locale($translate.use());
-    return function(time) {
-      return moment(time).fromNow();
-    };
-  })
   .filter('getextension', function() {
     return function(filename) {
       if (filename) {

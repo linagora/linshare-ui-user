@@ -18,6 +18,7 @@ angular.module('linshareUiUserApp', [
   'ui.bootstrap',
   'flow',
   'angular-growl',
+  'linshare.audit',
   'linshare.upload',
   'linshare.userProfile',
   'linshare.authentication',

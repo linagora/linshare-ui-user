@@ -253,11 +253,13 @@
       })
       .state('audit.global', {
         url: '/audit_global',
-        templateUrl: 'views/home/main.html',
+        templateUrl: 'modules/linshare.audit/views/auditList.html',
+        controller: 'AuditController',
+        controllerAs: 'auditVm',
       })
       .state('audit.upload_request', {
         url: '/audit_upload_request',
-        templateUrl: 'views/home/main.html',
+        templateUrl: 'views/home/main.html'
       })
       .state('share', {
         parent: 'common',

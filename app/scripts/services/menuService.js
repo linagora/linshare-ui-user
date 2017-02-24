@@ -19,17 +19,17 @@
   function menuService(lsAppConfig) {
     var
       administrations,
+      audit,
       files,
       home,
       myUploads,
-      others,
+      sharedSpace,
+      tabs,
+      uploads,
       service = {
         getAvailableTabs: getAvailableTabs,
         getProperties: getProperties
-      },
-      sharedSpace,
-      uploads,
-      tabs;
+      };
 
     activate();
 
@@ -67,6 +67,14 @@
             disabled: lsAppConfig.production
           }
         ]
+      };
+
+      audit = {
+        name: 'MENU_TITLE.AUDIT',
+        link: 'audit.global',
+        icon: 'zmdi zmdi-time-restore',
+        color: '#FFC107',
+        disabled: false
       };
 
       files = {
@@ -107,24 +115,6 @@
         disabled: false
       };
 
-      others = {
-        name: 'MENU_TITLE.AUDIT',
-        icon: 'fa fa-line-chart',
-        color: '#FFC107',
-        disabled: lsAppConfig.production,
-        links: [
-          {
-            name: 'MENU_TITLE.AUDIT_GLOBAL',
-            link: 'audit.global',
-            disabled: lsAppConfig.production
-          }, {
-            name: 'MENU_TITLE.AUDIT_UPLOAD_REQUEST',
-            link: 'audit.upload_request',
-            disabled: lsAppConfig.production
-          }
-        ]
-      };
-
       sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
         link: 'sharedspace.all',
@@ -151,7 +141,7 @@
         ]
       };
 
-      tabs = [home, myUploads, files, sharedSpace, administrations, uploads, others];
+      tabs = [home, myUploads, files, sharedSpace, administrations, uploads, audit];
     }
 
     /**
@@ -173,7 +163,7 @@
      * @memberOf linshareUiUserApp.menuService
      */
     function getProperties(currentState, isSubMenu) {
-      if(!isSubMenu) {
+      if (!isSubMenu) {
         if (currentState.indexOf('transfert') > -1 || currentState.indexOf('documents') > -1) {
           return {
             color: '#2196F3'
@@ -186,7 +176,7 @@
         if (!_.isUndefined(tab.links)) {
           _.forEach(tab.links, function(link) {
             if (link.link === currentState) {
-              selectedMenu = isSubMenu ? link: tab;
+              selectedMenu = isSubMenu ? link : tab;
             }
           });
         } else if (tab.link === currentState) {

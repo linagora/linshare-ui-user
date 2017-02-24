@@ -30,9 +30,16 @@
      *  @memberof LinShare.components.CheckTableHeightController
      */
     function resizeTableBody() {
-      var heightWindow = angular.element(window).height();
-      var tableHeight = heightWindow - 243;
+      var heightWindow = angular.element(window).outerHeight();
+      var navbarHeight = angular.element('#header').outerHeight();
+      var breadcrumbHeight = angular.element('#breadcrumb-wrap').outerHeight();
+      var theadHeight = angular.element('.table thead').outerHeight();
+      var paginationTableHeight = angular.element('.ng-table-pager').outerHeight();
+      var marginHeight = navbarHeight + breadcrumbHeight + theadHeight + paginationTableHeight;
+      var tableHeight = heightWindow - marginHeight - 2;
       angular.element('#file-list-table tbody').attr('style','max-height : '+ tableHeight + 'px');
+      /*  TODO: KLE put css changes into a directive */
+      angular.element('#fixed-activity-table-height tbody').attr('style','max-height : '+ tableHeight + 'px ; min-height :' + tableHeight + 'px');
     }
   }
 })();
