@@ -42,12 +42,17 @@
      */
     function checkAuthentication() {
       $log.debug('AuthenticationRestService : checkAuthentication');
-      handler(Restangular.all(restUrl).customGET('authorized'))
-        .then(function(userLoggedIn) {
-          deferred.resolve(userLoggedIn);
-        }, function(error) {
-          $log.debug('current user not authenticated', error);
-        });
+      return handler(Restangular.all(restUrl).withHttpConfig({
+          ignoreAuthModule: true
+      }).customGET('authorized'))
+      .then(function(userLoggedIn) {
+        deferred.resolve(userLoggedIn);
+        return (userLoggedIn);
+      }).catch(function(error) {
+        deferred.reject(error);
+        $log.debug('current user not authenticated', error);
+        return error;
+      });
     }
 
     /**
@@ -57,7 +62,6 @@
      * @memberOf Linshare.authentication.authenticationRestService
      */
     function getCurrentUser() {
-      checkAuthentication();
       $log.debug('AuthenticationRestService : getCurrentUser');
       return deferred.promise;
     }

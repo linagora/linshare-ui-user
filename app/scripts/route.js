@@ -17,7 +17,21 @@
    * @memberOf LinShareUiUserApp
    */
   function routerConfiguration($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('home');
+    $urlRouterProvider.otherwise(function($injector, $location) {
+        $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService){
+          if ($location.$$path !== '') {
+            authenticationRestService.checkAuthentication().then(function(data) {
+              if(data.status !== 401) {
+                $state.go('home');
+              } else {
+                $state.go('login');
+              }
+            });
+          } else {
+            $state.go('login');
+          }
+        }]);
+    });
 
     $stateProvider
       .state('common', {
