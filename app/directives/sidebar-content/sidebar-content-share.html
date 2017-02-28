@@ -166,7 +166,7 @@
   <button class="btn btn-primary col-xs-6"
           x-ng-click="
           mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
-          mainVm.sidebar.getData().checkSharableFiles(true, shareActionVm.submitShare, shareActionVm.newShare) :
+          mainVm.sidebar.getData().checkSharableFiles(shareActionVm.submitShare, shareActionVm.newShare) :
           shareActionVm.submitShare(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments,
                       mainVm.sidebar.getData().selectedUploads)">
     {{"NAVIGATION.SHARE" | translate}}

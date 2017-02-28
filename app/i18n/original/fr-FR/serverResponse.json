@@ -31,18 +31,23 @@
       },
       "UPLOAD_ERROR": {
         "NONE": "Une erreur est survenue pendant l'envoi du fichier",
-        "39001": "Vous ne pouvez pas envoyer de fichier pour le moment",
-        "46001": "Le quota du compte n'est pas encore configuré",
-        "46002": "Le quota du conteneur n'est pas encore configuré",
-        "46003": "Le quota du domaine n'est pas encore configuré",
-        "46004": "Le quota de la plateforme n'est pas encore configuré",
-        "46010": "La taille du fichier dépasse la taille maximale (${maxFileSize})",
-        "46011": "Le quota du compte est atteint",
-        "46012": "Le quota du conteneur est atteint",
-        "46013": "Le quota du domaine est atteint",
-        "46014": "Le quota de la plateforme est atteint (${quotaAttempt})",
-        "46015": "Le quota de la plateforme n'est pas encore configuré",
-        "46403": "Vous n'avez pas le droit de consulter ce quota"
+        "3000": "Ce type de fichier est interdit (type mime)",
+        "3002": "Ce type de fichier est interdit",
+        "3003": "Le fichier n'a pu être déposé car un virus a été détecté",
+        "39001": "Les dépôts sont temporairement désactivés car le mode maintenance est activé",
+        "40403": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
+        "40404": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
+        "46001": "Erreur de configuration serveur, dépôt impossible",
+        "46002": "Erreur de configuration serveur, dépôt impossible",
+        "46003": "Erreur de configuration serveur, dépôt impossible",
+        "46004": "Erreur de configuration serveur, dépôt impossible",
+        "46010": "La taille du fichier dépasse la taille maximale autorisé (${maxFileSize})",
+        "46011": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
+        "46012": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
+        "46013": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
+        "46014": "Espace insuffisant sur le serveur (${quotaAttempt}), libérez de l'espace puis réessayez",
+        "46015": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
+        "46403": "Erreur de configuration serveur, dépôt impossible"
       }
     }
   }

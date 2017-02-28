@@ -178,22 +178,31 @@ angular.module('linshare.share')
     ShareObjectForm.prototype.share = function() {
       var deferred = $q.defer();
       if (this.waitingUploadIdentifiers.length === 0) {
-        return LinshareShareService.create(this.getFormObj()).then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
-        });
+        if(this.documents.indexOf(undefined) === -1) {
+          return LinshareShareService.create(this.getFormObj()).then(function() {
+            growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
+          });
+        } else {
+          $log.debug('SHARE FAILED -', 'file(s) upload error');
+          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_FAILED', 'danger');
+          deferred.reject({statusText: 'file(s) upload error'});
+        }
       } else {
         deferred.reject({statusText: 'asyncMode'});
-        return deferred.promise;
       }
+      return deferred.promise;
     };
 
     //on file upload complete check if id is in the waiting share
     ShareObjectForm.prototype.addLinshareDocumentsAndShare = function(flowIdentifier, linshareDocument) {
       var ind = this.waitingUploadIdentifiers.indexOf(flowIdentifier);
+      var documents = this.documents;
       if (ind > -1) {
-        angular.forEach(this.documents, function(doc, index) {
-          if (doc.uniqueIdentifier === flowIdentifier) {
-            this.documents[index] = linshareDocument;
+        _.forEach(documents, function(doc, index) {
+          if (!_.isUndefined(doc)) {
+            if (doc.uniqueIdentifier === flowIdentifier) {
+              documents[index] = linshareDocument;
+            }
           }
         }, this);
         this.waitingUploadIdentifiers.splice(ind, 1);

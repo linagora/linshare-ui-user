@@ -1,10 +1,18 @@
 {
   "UPLOAD_DESTINATION": "Dest.",
-  "UPLOAD_SHARE": {
+  "UPLOAD_SHARE_ALERT": {
     "CANCEL": "Annuler",
-    "CONTINUE_AND_EXCLUDE": "Continuer et le(s) exclure de la liste",
+    "MAIN_DIALOG_BUTTON_TITLE": "Partager",
     "MESSAGE": "${nbErrorFilesSelected} fichier(s) ne peuvent être partagés, continuer ?",
-    "NO_SHAREABLE_FILE_SELECTED": "Aucun fichier sélectionné n'est partageable",
-    "TITLE": "Partager des fichiers"
+    "MESSAGE_PLURAL": "Des fichiers parmis la selection sont en erreurs et seront retirés du partage. Souhaitez-vous tout de même poursuivre et partager les fichiers restants ?",
+    "MESSAGE_SINGULAR": "Un fichier parmis la selection est en erreur et sera retiré du partage. Souhaitez-vous tout de même poursuivre et partager les fichiers restants ?",
+    "NO_SHAREABLE_FILE_SELECTED_PLURAL": "Les fichiers sélectionnés sont en erreur et ne peuvent être partagé",
+    "NO_SHAREABLE_FILE_SELECTED_SINGULAR": "Le fichier sélectionné est en erreur et ne peut être partagé",
+    "TITLE_SINGULAR": "Un fichier ne peut être partagé.",
+    "TITLE_PLURAL": "${nbErrorFilesSelected} fichiers ne peuvent être partagés."
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Mes dépôts",
+    "SELECT_INFO": "Déposez et sélectionnez des fichiers pour les partager en asynchrone"
   }
 }

@@ -10,7 +10,7 @@
     .module('linshare.upload')
     .factory('flowUploadService', flowUploadService);
 
-  flowUploadService.$inject = ['$filter', '$log', '$q', '$timeout', '$translate', '$translatePartialLoader',
+  flowUploadService.$inject = ['$filter', '$log', '$q', '$timeout', '$translatePartialLoader',
     'authenticationRestService', 'LinshareDocumentRestService', 'lsAppConfig', 'uploadRestService',
     'workgroupEntriesRestService'];
 
@@ -19,16 +19,17 @@
    * @desc Upload system service
    * @memberOf LinShare.upload
    */
-  function flowUploadService($filter, $log, $q, $timeout, $translate, $translatePartialLoader,
+  function flowUploadService($filter, $log, $q, $timeout, $translatePartialLoader,
                              authenticationRestService, LinshareDocumentRestService, lsAppConfig,
                              uploadRestService, workgroupEntriesRestService) {
 
     const
+      NONE = 'NONE',
+      RETRIABLE_ERROR_CASES = [NONE, 39001, 40403, 40404, 46011, 46012, 46013, 46014],
       STATUS_FAILED = 'FAILED',
       STATUS_SUCCESS = 'SUCCESS';
 
     var
-      error39001,
       error46010,
       error46014,
       errorNone,
@@ -47,7 +48,7 @@
 
     /**
      * @namespace addUploadedFile
-     * @desc Add upload source's folder details to all files to upload
+     * @desc Once upload is finished, check if file is in error and launch error flow, or launch asyncUploadDetails function
      * @param {Object} flowFile - File uploaded
      * @param {Object} serverResponse - Response from the server
      * @returns {promise} Promise with flowFile uploaded
@@ -59,9 +60,17 @@
       var response = serverResponse.length > 0 ? angular.fromJson(serverResponse) : undefined;
       var noResponse = _.isUndefined(response);
       if (noResponse || !response.chunkUploadSuccess) {
-        var logMessage = !noResponse ? response.errorMessage : null;
+        var logMessage = null;
+        var errorCode = NONE;
+        var errorMessage = errorNone;
+        if (!noResponse) {
+          logMessage = response.errorMessage;
+          errorCode = response.errorCode;
+          errorMessage = messagePrefix + errorCode;
+        }
+
         $log.error('Error occurred while uploading file : ' + flowFile.name + ' - ' + logMessage);
-        onErrorAction(flowFile, errorNone, !noResponse).catch(function(file) {
+        onErrorAction(flowFile, errorCode, errorMessage, false).catch(function(file) {
           flowFile.asyncUploadDeferred.reject(file);
         });
       } else {
@@ -77,8 +86,9 @@
 
     /**
      * @namespace checkAsyncUploadDetails
-     * @desc Add upload source's folder details to all files to upload
+     * @desc Check async upload details of the uploaded file, loop it while the server treatment is not finished
      * @param {Object} flowFile - File uploaded
+     * @returns {promise} Timer to get Async Upload details, or Promise with flowFile uploaded
      * @memberOf LinShare.upload.flowUploadService
      */
     function checkAsyncUploadDetails(flowFile) {
@@ -91,7 +101,23 @@
               flowFile.asyncUploadDeferred.resolve(data);
             });
           } else {
-            onErrorAction(flowFile, errorNone, false).then(function(data) {
+            var hasCustomMessage = false;
+            var errorCode = NONE;
+            var errorMessage = errorNone;
+            if (flowFile.asyncUploadDetails) {
+              errorCode = flowFile.asyncUploadDetails.errorCode;
+              if (errorCode === 46010) {
+                errorMessage = customErrorMessage(error46010, '${maxFileSize}', flowFile.quotas.maxFileSize);
+                hasCustomMessage = true;
+              } else if (errorCode === 46014) {
+                errorMessage = customErrorMessage(error46014, '${quotaAttempt}', flowFile.quotas.quota);
+                hasCustomMessage = true;
+              } else {
+                errorMessage = messagePrefix + errorCode;
+              }
+            }
+
+            onErrorAction(flowFile, errorCode, errorMessage, hasCustomMessage).then(function(data) {
               flowFile.asyncUploadDeferred.reject(data);
             });
           }
@@ -104,36 +130,43 @@
 
     /**
      * @namespace checkQuotas
-     * @desc Add upload source's folder details to all files to upload
+     * @desc Check quotas of each uploaded files, before launching their upload
      * @param {Array<Object>} flowFiles - List of files to upload
      * @param {Boolean} onError - Check if the function is called on start/retry upload, or on error
      * @param {function} updateQuotas - Update user's quotas in left sidebar bottom
      * @memberOf LinShare.upload.flowUploadService
      */
     function checkQuotas(flowFiles, onError, updateQuotas) {
+      // TODO IAB : translate better in improvement (with directive translate and translate-values)
+      error46010 = $filter('translate')(messagePrefix + 46010);
+      error46014 = $filter('translate')(messagePrefix + 46014);
       authenticationRestService.getCurrentUser().then(function(user) {
         uploadRestService.getQuota(user.quotaUuid).then(function(quotas) {
           $log.debug('Getting quotas - ', quotas.plain());
           updateQuotas(quotas.plain());
 
           _.forEach(flowFiles, function(flowFile) {
+            flowFile.quotas = quotas.plain();
             flowFile.asyncUploadDeferred = $q.defer();
 
+            var errorCode = NONE;
             var errorMessage = null;
-            var canBeRetried = false;
+            var hasCustomMessage = false;
 
             if (quotas.maintenance && onError) {
-              errorMessage = error39001;
-              canBeRetried = true;
+              errorMessage = messagePrefix + NONE;
             } else if (flowFile.size > quotas.maxFileSize) {
+              errorCode = 46010;
               errorMessage = customErrorMessage(error46010, '${maxFileSize}', quotas.maxFileSize);
+              hasCustomMessage = true;
             } else if ((quotas.quota - quotas.usedSpace) <= flowFile.size) {
+              errorCode = 46014;
               errorMessage = customErrorMessage(error46014, '${quotaAttempt}', quotas.quota);
-              canBeRetried = true;
+              hasCustomMessage = true;
             }
 
             if (errorMessage) {
-              onErrorAction(flowFile, errorMessage, canBeRetried, true);
+              onErrorAction(flowFile, errorCode, errorMessage, hasCustomMessage);
             } else if (flowFile.error && flowFile.canBeRetried) {
               onRetryAction(flowFile);
             }
@@ -157,7 +190,7 @@
      * @memberOf LinShare.upload.flowUploadService
      */
     function customErrorMessage(errorMessageSource, stringToReplace, stringReplace) {
-      return (_.clone(errorMessageSource)).replace(stringToReplace, $filter('readableSize')(stringReplace));
+      return (_.clone(errorMessageSource)).replace(stringToReplace, $filter('readableSize')(stringReplace, true));
     }
 
     /**
@@ -167,34 +200,29 @@
      */
     function initFlowUploadService() {
       $translatePartialLoader.addPart('serverResponse');
-      $translate.refresh().then(function() {
-        $translate([
-          messagePrefix + 39001,
-          messagePrefix + 46010,
-          messagePrefix + 46014,
-          messagePrefix + 'NONE'
-        ]).then(function(translations) {
-          error39001 = translations[messagePrefix + 39001];
-          error46010 = translations[messagePrefix + 46010];
-          error46014 = translations[messagePrefix + 46014];
-          errorNone = translations[messagePrefix + 'NONE'];
-        });
-      });
+      errorNone = messagePrefix + NONE;
     }
 
     /**
      * @namespace onErrorAction
      * @desc Action launched if file get an error
      * @param {Object} flowFile - File uploaded
+     * @param {number} errorCode - Error code to show on file upload information (in upload queue and upload popup)
      * @param {string} errorMessage - Message to show on file upload information (in upload queue and upload popup)
-     * @param {Boolean} canBeRetried - User can retry the upload of this file if true
+     * @param {Boolean} hasCustomMessage - Defined if message is custom
+     * @returns {promise} Promise with flowFile uploaded
      * @memberOf LinShare.upload.flowUploadService
      */
-    function onErrorAction(flowFile, errorMessage, canBeRetried) {
+    function onErrorAction(flowFile, errorCode, errorMessage, hasCustomMessage) {
       flowFile.pause();
+      flowFile.errorCode = errorCode !== NONE ? errorCode : null;
       flowFile.errorMessage = errorMessage;
-      flowFile.canBeRetried = canBeRetried;
+      flowFile.hasCustomMessage = hasCustomMessage;
+      flowFile.canBeRetried = _.includes(RETRIABLE_ERROR_CASES, errorCode);
       flowFile.error = true;
+      $timeout(function() {
+        flowFile.errorAgain = true;
+      }, 200);
       flowFile.asyncUploadDeferred.reject(flowFile);
       return flowFile.asyncUploadDeferred.promise;
     }
@@ -203,14 +231,19 @@
      * @namespace onRetryAction
      * @desc Action launched if file get an error and user retried to upload it
      * @param {Object} flowFile - File uploaded
+     * @returns {promise} Promise with flowFile uploaded
      * @memberOf LinShare.upload.flowUploadService
      */
     function onRetryAction(flowFile) {
       flowFile.retry();
       flowFile.resume();
+      delete flowFile.errorCode;
       delete flowFile.errorMessage;
+      delete flowFile.hasCustomMessage;
       delete flowFile.canBeRetried;
+      delete flowFile.doingAsyncUpload;
       flowFile.error = false;
+      flowFile.errorAgain = false;
       $log.debug('Error during upload, need to retry file : ', flowFile.name);
       flowFile.asyncUploadDeferred.reject(flowFile);
       return flowFile.asyncUploadDeferred.promise;
@@ -220,6 +253,7 @@
      * @namespace onSuccessAction
      * @desc Action launched if file is uploaded successfully
      * @param {Object} flowFile - File uploaded
+     * @returns {promise} Promise with flowFile uploaded
      * @memberOf LinShare.upload.flowUploadService
      */
     function onSuccessAction(flowFile) {
@@ -237,10 +271,11 @@
      * @namespace timerGetAsyncUploadDetails
      * @desc Timer launched during server treatment for uploading file
      * @param {Object} flowFile - File uploaded
+     * @returns {promise} Promise with flowFile uploaded
      * @memberOf LinShare.upload.flowUploadService
      */
     function timerGetAsyncUploadDetails(flowFile) {
-      var delay = 2000;
+      var delay = lsAppConfig.asyncUploadDelay;
       if (!_.isUndefined(flowFile.asyncUploadDetails)) {
         delay = flowFile.asyncUploadDetails.frequency ? flowFile.asyncUploadDetails.frequency : delay;
       }

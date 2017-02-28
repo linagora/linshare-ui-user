@@ -1,3 +1,8 @@
+/**
+ * Upload Module
+ * @namespace Upload
+ * @memberOf LinShare
+ */
 (function() {
   'use strict';
 

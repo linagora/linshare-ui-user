@@ -5,10 +5,25 @@
   COMMON UI COMPONENT
 ***********************/
 
+@import "component/component-dialog-alert.scss";
 @import "component/component-ui-drag-and-drop.scss";
 @import "component/component-overlay-mobile.scss";
 @import "component/component-dropdown-menu.scss";
 @import "component/component-fab.scss";
+
+/**********************
+  UPLOAD PROGRESS ERROR DISPLAY AND RETRY
+***********************/
+
+.text-danger {
+  opacity: 0;
+  height: 0;
+  transition: all linear 350ms;
+  &.show-danger {
+    height: auto;
+    opacity: 1;
+  }
+}
 
 /**********************
   GROWL MULTIPLE DELETION

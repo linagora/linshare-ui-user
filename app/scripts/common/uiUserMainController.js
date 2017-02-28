@@ -86,6 +86,9 @@
           if (file._from === lsAppConfig.mySpacePage) {
             sharableDocumentService.sharableDocuments(file, $scope.share_array, $scope.refFlowShares);
           }
+          launchShare(file);
+        }).catch(function(file) {
+          launchShare(file);
         });
       });
 
@@ -225,6 +228,18 @@
     }
 
     /**
+     * @name launchShare
+     * @desc Execute share process
+     * @param {Object} flowFile - File uploaded
+     * @memberOf linshareUiUserApp
+     */
+    function launchShare(flowFile) {
+      if (flowFile._from === lsAppConfig.mySpacePage) {
+        sharableDocumentService.sharableDocuments(flowFile, $scope.share_array, $scope.refFlowShares);
+      }
+    }
+
+    /**
      * @name resizeDragNDropCtn
      * @desc Detect window's width and adapt dragndrop's container width
      * @memberOf linshareUiUserApp
@@ -244,12 +259,15 @@
         share_array = $scope.share_array,
         shareObject =
           _.find(share_array, function(element) {
+            _.remove(element.documents, _.isUndefined);
             return _.find(element.documents, function(doc) {
               return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
             });
           });
 
       if (!_.isUndefined(shareObject)) {
+        _.remove(shareObject.documents, _.isUndefined);
+
         var document_object = _.find(shareObject.documents, function(doc) {
           return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
         });

@@ -55,11 +55,13 @@
   TRANSFERT DROPDOWN STYLING
 ***********************/
 
+
 #transfert-dropdown {
   .tabsdemoDynamicHeight {
     height: 457px !important;
     .time-remaining {
       margin: 0;
+      margin-top: 2px;
       font-size: 0.67em;
       color: #8A8A8A;
     }
@@ -101,9 +103,6 @@
   }
   .progress {
     height: 3px;
-  }
-  .progress-bar {
-    background-color: $secondaryClr;
   }
   .lv-item.row {
     margin: 0;

@@ -24,7 +24,7 @@ angular.module('linshare.share')
         return;
       }
       if (shareCreationDto.getRecipients().length === 0) {
-        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT', 'danger');
+        growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT', 'danger');
         return;
       }
 
@@ -63,8 +63,8 @@ angular.module('linshare.share')
           }
         }
       }, function(data) {
-        if (data.statusText === 'asyncMode') {
-          $log.debug('share processing with files in upload progress', data);
+        if (data.statusText) {
+          $log.debug('SHARE ASYNC -', data);
           growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_ASYNC', 'inverse');
           $scope.mainVm.sidebar.hide();
           var shareCopy = _.cloneDeep(shareActionVm.newShare.getObjectCopy());

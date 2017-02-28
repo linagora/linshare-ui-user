@@ -5,7 +5,8 @@
         <h2 class="lvh-label"><b>{{'HEADER.FILES_TO_SHARE' | translate}}</b></h2>
       </div>
       <div class="lv-body ng-table" id="file-list-table">
-        <div class="media-body" x-ng-repeat="file in uploadQueueVm.$flow.files | orderBy: '-' | filter: {_from: fromWhere}"
+        <div class="media-body"
+             x-ng-repeat="file in uploadQueueVm.$flow.files | orderBy: '-' | filter: {_from: fromWhere}"
              x-ng-class="{'highlight-list-elem': file.isSelected }"
              data-uid-flow="{{file.uniqueIdentifier}}" x-ng-if="!file.hideOnIsolate">
           <div class="col-xs-10 col-sm-12 overflow-hidden">
@@ -23,26 +24,34 @@
                     {{file.timeRemaining() | remainingTime}}
                     <span x-ng-show="file.progress() === 0">{{'PENDING_UPLOADS' | translate}}</span>
                   </small>
-                  <small x-ng-show="file.isComplete() && !file.error && !file.doingAsyncUpload" class="lv-small pull-left">
+                  <small x-ng-show="file.isComplete() && !file.error && !file.doingAsyncUpload"
+                         class="lv-small pull-left">
                     {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate}}
                   </small>
-                  <small x-ng-show="file.paused && !file.isComplete() && !file.error && !file.doingAsyncUpload" class="lv-small pull-left">
+                  <small x-ng-show="file.paused && !file.isComplete() && !file.error && !file.doingAsyncUpload"
+                         class="lv-small pull-left">
                     {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate}}
                   </small>
                   <small x-ng-show="file.doingAsyncUpload && !file.error" class="lv-small pull-left">
                     {{"HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER" | translate}}
                   </small>
-                  <small x-ng-show="file.error" class="lv-small pull-left text-danger">
-                    {{file.errorMessage}}
+                  <small class="lv-small pull-left text-danger"
+                         x-ng-class="{'show-danger' : file.errorAgain}">
+                    {{file.hasCustomMessage ? file.errorMessage : (file.errorMessage | translate)}}
+                    {{file.errorCode ? ' ('+file.errorCode+')' : ''}}
                   </small>
                   <small x-ng-if="file.folderDetails" class="lv-small pull-left">
-                    <span>&nbsp;| {{"UPLOAD_DESTINATION" | translate}} : {{file.folderDetails.workgroupName | uppercase}} >>
-                      {{file.folderDetails.folderName}}</span>
+                    <span>&nbsp;| {{"UPLOAD_DESTINATION" | translate}} : {{file.folderDetails.workgroupName | uppercase}}
+                      >> {{file.folderDetails.folderName}}</span>
                   </small>
                   <small class="lv-small pull-right clearfix">{{file.size | readableSize: false}}</small>
                   <div class="clearfix"></div>
-                  <uib-progressbar x-ng-class="{'progress-striped active' : file.doingAsyncUpload}"
-                                   max="100" value="file.error ? 0 : file.progress()*100"></uib-progressbar> <!-- TODO : SMA - color, stripe -->
+                  <uib-progressbar x-ng-class="{
+                  'progress-striped active upload-server-state' : file.doingAsyncUpload,
+                  'progress-striped active uploading-state' : (!file.isComplete() && !file.doingAsyncUpload),
+                  'upload-completed': file.isComplete() && !file.error && !file.doingAsyncUpload,
+                  'upload-error': file.error}"
+                                   max="100" value="file.error ? 100 : file.progress()*100"></uib-progressbar>
                 </div>
               </div>
               <div class="col-xs-6 col-sm-1 pull-left actions-ctn">
@@ -53,6 +62,7 @@
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-show="file.isComplete() || (file.error && !file.canBeRetried)"
+                      x-ng-hide="!file.isComplete() || file.canBeRetried"
                       x-ng-class="{'disabled-work-in-progress': file.error || file.doingAsyncUpload}">
                     <a x-ng-click="uploadQueueVm.showFileInSource(file)">
                       <i class="fa fa-eye" title="{{'SELECTION_TOOLBAR.SHOW_IN_FILES' | translate}}"></i>
@@ -64,14 +74,14 @@
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-show="file.isComplete() && !file.error"
-                  x-ng-class="{'disabled-work-in-progress' : file.doingAsyncUpload}">
+                      x-ng-class="{'disabled-work-in-progress' : file.doingAsyncUpload}">
                     <a href="" x-ng-click="uploadQueueVm.removeSelectedDocuments(file)"
                        title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}">
                       <i class="zmdi zmdi-check" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"></i>
                     </a>
                   </li>
                   <li class="col-xs-6" x-ng-if="file.error && file.canBeRetried">
-                    <a href="" x-ng-click="uploadQueueVm.retryFile(file)"> <!-- TODO : SMA - click callback -->
+                    <a href="" x-ng-click="uploadQueueVm.retryFile(file)">
                       <i class="zmdi zmdi-undo" title="{{'SELECTION_TOOLBAR.RETRY' | translate}}"></i>
                     </a>
                   </li>
@@ -85,7 +95,8 @@
             </div>
           </div>
           <div class="col-xs-2 visible-xs">
-            <ul class="lv-actions actions align-list-icons " x-ng-click="uploadQueueVm.showBtnList($event)" event-propagation-stop>
+            <ul class="lv-actions actions align-list-icons " x-ng-click="uploadQueueVm.showBtnList($event)"
+                event-propagation-stop>
               <li><a><i class="zmdi zmdi-more-vert"></i></a></li>
             </ul>
           </div>

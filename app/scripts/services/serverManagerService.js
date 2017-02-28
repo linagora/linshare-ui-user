@@ -100,17 +100,19 @@
               errorMessageHttpCodes += 'ERROR_DEFAULT';
               break;
           }
-          errorMessageDetails += _.isUndefined(errorData.data.errCode) ? 'NONE' : errorData.data.errCode;
+
+          var errCode = errorData.data.errCode;
+          errorMessageDetails += _.isUndefined(errCode) ? 'NONE' : errCode;
           $translate.refresh().then(function() {
             $translate([errorMessageHttpCodes, errorMessageDetails]).then(function(translations) {
               if (!(translations[errorMessageHttpCodes] === errorMessageHttpCodes ||
                 translations[errorMessageDetails] === errorMessageDetails)) {
                 notify(translations[errorMessageHttpCodes], translations[errorMessageDetails]);
               } else {
-                if (_.isUndefined(errorData.data.errCode)) {
+                if (_.isUndefined(errCode)) {
                   notify(errorData.statusText);
                 } else {
-                  notify(errorData.statusText, errorData.data.errCode + ': ' + errorData.data.message);
+                  notify(errorData.statusText, errCode + ': ' + errorData.data.message);
                 }
               }
             });

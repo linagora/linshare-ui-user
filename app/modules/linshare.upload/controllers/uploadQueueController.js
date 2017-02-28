@@ -9,7 +9,7 @@
     .module('linshare.upload')
     .controller('uploadQueueController', uploadQueueController);
 
-  uploadQueueController.$inject = ['$mdToast', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+  uploadQueueController.$inject = ['$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'flowUploadService', 'growlService', 'lsAppConfig'];
 
   /**
@@ -17,7 +17,7 @@
    * @desc Controller of all variables and methods for upload queue
    * @memberOf LinShare.upload.uploadQueueController
    */
-  function uploadQueueController($mdToast, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
+  function uploadQueueController($q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
                                  flowUploadService, growlService, lsAppConfig) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
@@ -34,13 +34,11 @@
     uploadQueueVm.selectedUploads = $scope.selectedUploads;
 
     uploadQueueVm.$flow = $scope.$flow;
-    uploadQueueVm.$mdToast = $mdToast;
     uploadQueueVm.cancelAllFiles = cancelAllFiles;
     uploadQueueVm.cancelSelectedFiles = cancelSelectedFiles;
     uploadQueueVm.checkSharableFiles = checkSharableFiles;
     uploadQueueVm.clearAllFiles = clearAllFiles;
     uploadQueueVm.clearSelectedFiles = clearSelectedFiles;
-    uploadQueueVm.continueShareAction = continueShareAction;
     uploadQueueVm.currentPage = 'upload';
     uploadQueueVm.currentSelectedDocument = {};
     uploadQueueVm.fab = {
@@ -85,15 +83,22 @@
       $translatePartialLoader.addPart('upload');
       $translate.refresh().then(function() {
         $translate([
-          'UPLOAD_SHARE.CANCEL',
-          'UPLOAD_SHARE.CONTINUE_AND_EXCLUDE',
-          'UPLOAD_SHARE.MESSAGE',
-          'UPLOAD_SHARE.TITLE'
+          'UPLOAD_SHARE_ALERT.CANCEL',
+          'UPLOAD_SHARE_ALERT.CONTINUE_AND_EXCLUDE',
+          'UPLOAD_SHARE_ALERT.MAIN_DIALOG_BUTTON_TITLE',
+          'UPLOAD_SHARE_ALERT.MESSAGE',
+          'UPLOAD_SHARE_ALERT.MESSAGE_PLURAL',
+          'UPLOAD_SHARE_ALERT.MESSAGE_SINGULAR',
+          'UPLOAD_SHARE_ALERT.TITLE_PLURAL',
+          'UPLOAD_SHARE_ALERT.TITLE_SINGULAR'
         ]).then(function(translations) {
-          uploadQueueVm.warningCancel = translations['UPLOAD_SHARE.CANCEL'];
-          uploadQueueVm.warningContinue = translations['UPLOAD_SHARE.CONTINUE_AND_EXCLUDE'];
-          uploadQueueVm.warningMessage = translations['UPLOAD_SHARE.MESSAGE'];
-          uploadQueueVm.warningTitle = translations['UPLOAD_SHARE.TITLE'];
+          uploadQueueVm.warningCancel = translations['UPLOAD_SHARE_ALERT.CANCEL'];
+          uploadQueueVm.warningContinueMainButton = translations['UPLOAD_SHARE_ALERT.MAIN_DIALOG_BUTTON_TITLE'];
+          uploadQueueVm.warningMessage = translations['UPLOAD_SHARE_ALERT.MESSAGE'];
+          uploadQueueVm.warningMessagePlural = translations['UPLOAD_SHARE_ALERT.MESSAGE_PLURAL'];
+          uploadQueueVm.warningMessageSingular = translations['UPLOAD_SHARE_ALERT.MESSAGE_SINGULAR'];
+          uploadQueueVm.warningTitlePlural = translations['UPLOAD_SHARE_ALERT.TITLE_PLURAL'];
+          uploadQueueVm.warningTitleSingular = translations['UPLOAD_SHARE_ALERT.TITLE_SINGULAR'];
         });
       });
 
@@ -104,7 +109,7 @@
 
       if (idUpload) {
         var fileToHighlight = uploadQueueVm.$flow.getFromUniqueIdentifier(idUpload);
-        if(fileToHighlight._from === uploadQueueVm.fromWhere) {
+        if (fileToHighlight._from === uploadQueueVm.fromWhere) {
           uploadQueueVm.selectUploadingFile(fileToHighlight, true);
           $timeout(function() {
             window.scrollTo(0, angular.element('div.media-body[data-uid-flow="' + idUpload + '"]').first().offset().top);
@@ -154,47 +159,33 @@
      * @memberOf LinShare.upload.uploadQueueController
      */
     function alertUnsharableFilesSelectedSwal(nbErrorFilesSelected, executeShare, shareType) {
-      if (nbErrorFilesSelected === 0) {
-        executeShare(shareType, uploadQueueVm.selectedDocuments, uploadQueueVm.selectedUploads);
+      var message, title;
+      if (nbErrorFilesSelected === 1) {
+        title = uploadQueueVm.warningTitleSingular;
+        message = uploadQueueVm.warningMessageSingular;
       } else {
-        var messageCustom = _.clone(uploadQueueVm.warningMessage).replace('${nbErrorFilesSelected}', nbErrorFilesSelected);
-        swal({
-            title: uploadQueueVm.warningTitle,
-            text: messageCustom,
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#DD6B55', // TODO : SMA - custom alert
-            confirmButtonText: uploadQueueVm.warningContinue,
-            cancelButtonText: uploadQueueVm.warningCancel,
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              removeUnsharableFiles();
-              executeShare(shareType, uploadQueueVm.selectedDocuments, uploadQueueVm.selectedUploads);
-            }
-          }
-        );
+        title = _.clone(uploadQueueVm.warningTitlePlural).replace('${nbErrorFilesSelected}', nbErrorFilesSelected);
+        message = uploadQueueVm.warningMessagePlural;
       }
-    }
 
-    /**
-     * @namespace alertUnsharableFilesSelectedToast
-     * @desc Show toast if error files in selected files list when user opens share right sidebar
-     * @param {number} nbErrorFilesSelected - Number of error files in selected files list
-     * @memberOf LinShare.upload.uploadQueueController
-     */
-    function alertUnsharableFilesSelectedToast(nbErrorFilesSelected) {
-      uploadQueueVm.messageWarningCustom = _.clone(uploadQueueVm.warningMessage).replace('${nbErrorFilesSelected}', nbErrorFilesSelected);
-      // TODO : SMA - custom toast
-      uploadQueueVm.$mdToast.show({
-        scope: $scope,
-        preserveScope: true,
-        hideDelay: 0,
-        position: 'top right',
-        templateUrl: 'modules/linshare.upload/views/toast-share-files-alert.html'
-      });
+      swal({
+          html: true,
+          title: title,
+          text: message,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3fa9ff',
+          confirmButtonText: uploadQueueVm.warningContinueMainButton,
+          cancelButtonText: uploadQueueVm.warningCancel,
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+            continueShareAction(executeShare, shareType);
+          }
+        }
+      );
     }
 
     /**
@@ -204,7 +195,7 @@
      */
     function cancelAllFiles() {
       _.forInRight(uploadQueueVm.$flow.files, function(file) {
-        if ((file._from === uploadQueueVm.fromWhere) && !file.isComplete()) {
+        if ((file._from === uploadQueueVm.fromWhere) && (!file.isComplete() || file.error)) {
           uploadQueueVm.removeSelectedDocuments(file);
         }
       });
@@ -217,7 +208,7 @@
      */
     function cancelSelectedFiles() {
       _.forInRight(uploadQueueVm.$flow.files, function(file) {
-        if (file.isSelected && !file.isComplete()) {
+        if (file.isSelected && (!file.isComplete() || file.error)) {
           uploadQueueVm.removeSelectedDocuments(file);
         }
       });
@@ -226,12 +217,11 @@
     /**
      * @namespace checkSharableFiles
      * @desc Check list of selected files, if files with error are present
-     * @param {boolean} lastReminder - Check if first reminder (to open right sidebar) or last (to valid share)
      * @param {Function} executeShare - Execute share action
      * @param {Object} shareType - Type of share
      * @memberOf LinShare.upload.uploadQueueController
      */
-    function checkSharableFiles(lastReminder, executeShare, shareType) {
+    function checkSharableFiles(executeShare, shareType) {
       uploadQueueVm.nbErrorFilesSelected = 0;
       _.forEach(uploadQueueVm.$flow.files, function(file) {
         if (file.isSelected && file.error) {
@@ -240,25 +230,14 @@
       });
 
       if (uploadQueueVm.nbErrorFilesSelected === lengthOfSelectedDocuments()) {
-        growlService.notifyTopRight('UPLOAD_SHARE.NO_SHAREABLE_FILE_SELECTED', 'inverse');
-      } else if (lastReminder) {
+        var messageKey = lengthOfSelectedDocuments() > 1 ?
+          'NO_SHAREABLE_FILE_SELECTED_PLURAL' : 'NO_SHAREABLE_FILE_SELECTED_SINGULAR';
+        growlService.notifyTopRight('UPLOAD_SHARE_ALERT.' + messageKey, 'danger');
+      } else if (uploadQueueVm.nbErrorFilesSelected > 0) {
         alertUnsharableFilesSelectedSwal(uploadQueueVm.nbErrorFilesSelected, executeShare, shareType);
-      } else if (!lastReminder && uploadQueueVm.nbErrorFilesSelected > 0) {
-        alertUnsharableFilesSelectedToast(uploadQueueVm.nbErrorFilesSelected);
       } else {
-        uploadQueueVm.continueShareAction();
+        continueShareAction(executeShare, shareType);
       }
-    }
-
-    /**
-     * @name continueShareAction
-     * @desc After check selected files, this function is launched
-     */
-    function continueShareAction() {
-      removeUnsharableFiles();
-      uploadQueueVm.$mdToast.hide();
-      $scope.onShare();
-      uploadQueueVm.loadSidebarContent(uploadQueueVm.lsAppConfig.share);
     }
 
     /**
@@ -268,7 +247,7 @@
      */
     function clearAllFiles() {
       _.forInRight(uploadQueueVm.$flow.files, function(file) {
-        if ((file._from === uploadQueueVm.fromWhere) && (file.isComplete() || file.error)) {
+        if ((file._from === uploadQueueVm.fromWhere) && file.isComplete() && !file.error) {
           uploadQueueVm.removeSelectedDocuments(file);
         }
       });
@@ -281,8 +260,25 @@
      */
     function clearSelectedFiles() {
       _.forInRight(uploadQueueVm.$flow.files, function(file) {
-        if (file.isSelected && (file.isComplete() || file.error)) {
+        if (file.isSelected && file.isComplete() && !file.error) {
           uploadQueueVm.removeSelectedDocuments(file);
+        }
+      });
+    }
+
+    /**
+     * @name continueShareAction
+     * @desc Remove files error selected files and launch share flow (open sidebar to fill form, or execute share)
+     * @param {Function} executeShare - Execute share action
+     * @param {Object} shareType - Type of share
+     */
+    function continueShareAction(executeShare, shareType) {
+      removeUnsharableFiles().then(function() {
+        if (executeShare) {
+          executeShare(shareType, uploadQueueVm.selectedDocuments, uploadQueueVm.selectedUploads);
+        } else {
+          $scope.onShare();
+          uploadQueueVm.loadSidebarContent(uploadQueueVm.lsAppConfig.share);
         }
       });
     }
@@ -361,15 +357,21 @@
     /**
      * @namespace removeUnsharableFiles
      * @desc Pop all unsharable files from selected files list
+     * @returns {promise} Promise to continues others functions
      * @memberOf LinShare.upload.uploadQueueController
      */
     function removeUnsharableFiles() {
-      _.forEach(uploadQueueVm.$flow.files, function(file) {
-        if (file.isSelected && file.error) {
-          file.isSelected = false;
-          delete $scope.selectedUploads[file.uniqueIdentifier];
-        }
-      });
+      var deferred = $q.defer();
+      if (uploadQueueVm.nbErrorFilesSelected > 0) {
+        _.forEach(uploadQueueVm.$flow.files, function(file) {
+          if (file.isSelected && file.error) {
+            file.isSelected = false;
+            delete $scope.selectedUploads[file.uniqueIdentifier];
+          }
+        });
+      }
+      deferred.resolve();
+      return deferred.promise;
     }
 
     /**
@@ -425,18 +427,6 @@
     }
 
     /**
-     * @namespace retryFile
-     * @desc Retry current file
-     * @param {Object} flowFile - File uploading to be resume
-     * @memberOf LinShare.upload.uploadQueueController
-     */
-    function retryFile(flowFile) {
-      if (flowFile.canBeRetried) {
-        uploadQueueVm.flowUploadService.checkQuotas([flowFile], true, $scope.setUserQuotas);
-      }
-    }
-
-    /**
      * @namespace retryAllFiles
      * @desc Retry all files which get error
      * @memberOf LinShare.upload.uploadQueueController
@@ -448,6 +438,19 @@
         }
       });
       uploadQueueVm.isflowUploadingError = false;
+    }
+
+    /**
+     * @namespace retryFile
+     * @desc Retry current file
+     * @param {Object} flowFile - File uploading to be resume
+     * @memberOf LinShare.upload.uploadQueueController
+     */
+    function retryFile(flowFile) {
+      if (flowFile.canBeRetried) {
+        flowFile.errorAgain = false;
+        uploadQueueVm.flowUploadService.checkQuotas([flowFile], true, $scope.setUserQuotas);
+      }
     }
 
     /**
@@ -475,7 +478,7 @@
       var files = flowFiles || uploadQueueVm.$flow.files;
       var forceSelect = selectFilesAutomatically ? true : uploadQueueVm.selectAll;
       _.forEach(files, function(file) {
-        if(file._from === uploadQueueVm.fromWhere) {
+        if (file._from === uploadQueueVm.fromWhere) {
           uploadQueueVm.selectUploadingFile(file, forceSelect);
         }
       });

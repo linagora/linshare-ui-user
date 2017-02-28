@@ -25,7 +25,7 @@
       "UPDATE": "Update succeeded",
       "INSERT": "Insert succeeded",
       "COPY": "File(s) has been copied into your files",
-      "SHARE": "share done with success",
+      "SHARE": "Share complete",
       "SHARE_ASYNC": "You sharing will be sent after the upload of all files",
       "SHARE_FAILED": "Your sharing has failed"
     },

@@ -24,11 +24,17 @@
     <p x-ng-show="file.paused && !file.isComplete() && !file.error" class="time-remaining">
       {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate}}
     </p>
-    <p x-ng-show="file.error" class="time-remaining text-danger"> <!-- TODO : SMA : red color -->
-      {{file.errorMessage}}
+    <!--TODO IAB : file.error should be reset with maybe a timeout so that the element can be faded in
+                    each time the retry btn is triggered thx to the show-danger class -->
+    <p class="time-remaining text-danger"  x-ng-class="{'show-danger' : file.error}">
+      {{file.hasCustomMessage ? file.errorMessage : (file.errorMessage | translate)}}
     </p>
-    <uib-progressbar x-ng-class="{'progress-striped active' : file.doingAsyncUpload}"
-                     max="100" value="file.error ? 0 : file.progress()*100"></uib-progressbar> <!-- TODO : SMA : color, stripe -->
+    <uib-progressbar x-ng-class="{
+                  'progress-striped active upload-server-state' : file.doingAsyncUpload,
+                  'progress-striped active uploading-state' : (!file.isComplete() && !file.doingAsyncUpload),
+                  'upload-completed': file.isComplete() && !file.error && !file.doingAsyncUpload,
+                  'upload-error': file.error}"
+                     max="100" value="file.error ? 100 : file.progress()*100"></uib-progressbar>
   </a>
   <div class="col-xs-2 p-0">
     <ul class="lv-actions actions align-list-icons">

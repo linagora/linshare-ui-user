@@ -4,8 +4,28 @@
 /**********************
   UPLOAD QUEUE LISTING HEADER -  LSUPLOAD QUEUE
 ***********************/
-
+.progress-striped.upload-server-state {
+  .progress-bar {
+    background-color: $uploadProgressUploading;
+  }
+}
+.progress-striped.uploading-state {
+  .progress-bar {
+    background-color: $uploadProgressServer;
+  }
+}
+.progress.upload-completed{
+  .progress-bar {
+    background-color: $uploadProgressCompleted;
+  }
+}
+.progress.upload-error {
+  .progress-bar {
+    background-color: #e2e2e2;
+  }
+}
 .upload-files #breadcrumb-wrap {
+  border-bottom: 1px solid #dddddd;
   height: 55px !important;
   display: flex !important;
   .breadcrumbs-ctn {
@@ -34,6 +54,11 @@
     padding: 0;
     i {
       font-size: inherit;
+    }
+    &:before {
+      left: 2px;
+      width: 30px;
+      height: 30px;
     }
   }
 }
@@ -201,6 +226,10 @@
     margin-left: 5px;
     .lv-title {
       font-size: 1em;
+    }
+    .progress {
+      border-radius: 5px;
+      height: 4px;
     }
   }
   .listview {

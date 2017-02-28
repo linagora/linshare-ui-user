@@ -13,6 +13,7 @@
         internal: 'INTERNAL',
         guest: 'GUEST'
       },
+      asyncUploadDelay: 2000,
       baseRestUrl: 'linshare/webservice/rest/user/v2',
       date_en_format: 'MM/dd/yyyy',
       date_fr_format: 'dd/MM/yyyy',
