@@ -1,9 +1,10 @@
-<div class="lc-block toggled child-centered-login-form">
+<div class="lc-block toggled child-centered-login-form login-form-data">
   <div class="inner-content-form-ctn">
     <div class="header-login-form">
       <h1>{{'RESET.HEADER.UPDATE' | translate}}</h1>
     </div>
     <form name="resetForm" class="form-horizontal" x-ng-submit="resetFormVm.resetSubmit()" role="form">
+      <div class="info-login-form">{{resetFormVm.message}}</div>
       <div class="form-group">
         <label class="sr-only" for="inputPassword"></label>
         <div class="input-group m-b-30">

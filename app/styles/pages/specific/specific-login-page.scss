@@ -358,3 +358,17 @@
   }
 }
 
+.login-form-data {
+  form{
+    text-align: left;
+    .info-login-form {
+      margin-bottom: 2em;
+    }
+    button {
+      margin-top: 1em !important;
+    }
+    .has-error div {
+      color: $error;
+    }
+  }
+}
