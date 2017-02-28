@@ -247,7 +247,24 @@ header > ul.header-inner > li.pull-right > ul.top-menu > li > a {
       }
     }
   }
+  .top-menu > li {
+    min-width: 45px;
+    > a > .tm-icon {
+      font-size: 24px;
+      line-height: 35px;
+    }
+  }
+  > ul.header-inner {
+    .icon-transfert {
+      width: 45px;
+      font-size: 20px !important;
+    }
+    > li.pull-right > ul.top-menu > li > a {
+      height: 35px;
+    }
+  }
 }
+
 
 /**********************
   RESPONSIVE

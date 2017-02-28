@@ -1,4 +1,6 @@
 {
+  "BACKGROUND_GUEST_MSG": "By creating a temporary guest account, your contact will be able to exchange files within LinShare.",
+  "BACKGROUND_GUESTS_TITLE_MSG": "Create guest accounts",
   "ACTION": {
     "ADD_TO_WORKGROUPS": "Add to workgroups"
   },

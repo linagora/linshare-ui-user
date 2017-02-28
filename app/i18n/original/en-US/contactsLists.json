@@ -1,7 +1,9 @@
 {
+  "BACKGROUND_CONTACTS_TITLE_MSG": "Create your own Contact List",
+  "BACKGROUND_CONTACTS_MSG": "These lists enable you to save and organise your contacts",
   "CONTACTS_LISTS_ACTION": {
     "ADD_DESCRIPTION": "Add a description",
-    "CREATE_CONTACTS_LIST": "Create contacts List",
+    "CREATE_CONTACTS_LIST": "Create a Contact List",
     "FILTER_BY": {
       "ALL_LISTS": "All lists",
       "MY_LISTS": "My lists",

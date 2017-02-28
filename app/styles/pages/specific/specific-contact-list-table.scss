@@ -4,9 +4,11 @@
 /**********************
   CONTACT LISTS FILE LISTING
 ***********************/
+td .zmdi-account-box-phone {
+  color : #636363;
+}
 
 .files.contacts-lists-list {
-
   #file-list-table.ng-table th:nth-child(3), #file-list-table.ng-table td:nth-child(3) {
     width: 15%;
   }
@@ -106,9 +108,11 @@ display : flex ;
 .filter-views {
   height: 31px;
   line-height: 34px;
-  color: #4f4f4f;
+  color: #000000;
   padding-right: 10px;
   font-weight: normal;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
 }
  .dropdown-filters {
    display: inline;

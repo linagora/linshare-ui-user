@@ -83,6 +83,10 @@
     "TITLE": "Tải tập tin lên đây",
     "COMMENT": "Kéo và thả tập tin tại đây"
   },
+  "TTB__DRAG_DROP_BACKGROUND_ON_DRAG": {
+    "TTB__TITLE": "",
+    "TTB__COMMENT": ""
+  },
   "WORKGROUPS_LIST": {
     "TBT__PROJECT": "",
     "TBT__FOLDER": "",

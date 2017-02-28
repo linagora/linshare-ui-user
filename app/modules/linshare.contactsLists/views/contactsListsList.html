@@ -21,7 +21,7 @@
             <a x-ng-if="contactsListsListVm.isFromMyContactsLists" class="click-disabled">
               {{"CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS" | translate}}
             </a>
-            <a x-ng-if="!contactsListsListVm.isFromMyContactsLists" class="click-disabled"> 
+            <a x-ng-if="!contactsListsListVm.isFromMyContactsLists" class="click-disabled">
               {{"CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS" | translate}}
             </a>
           </div>
@@ -389,6 +389,18 @@
                contactsListsListVm.selectedContactsLists.length > 1">
               <span>{{'NO_ACTION_AVAILABLE' | translate}}</span>
             </span>
+          </div>
+        </div>
+        <div class="drag-and-drop-ctn reset-content-width hidden-xs collapsible-content drag-n-drop-height">
+          <div class="drag-and-drop-content">
+            <div class="drag-icon-ctn ">
+              <div class="bordered-circle">&nbsp;</div>
+              <span class="grey-clr bg-info-icon">
+                <span class="zmdi zmdi-account-box-phone"></span>
+              </span>
+            </div>
+            <h1>{{'BACKGROUND_CONTACTS_TITLE_MSG' | translate}}</h1>
+            <p>{{'BACKGROUND_CONTACTS_MSG' | translate}}</p>
           </div>
         </div>
         <script type="text/ng-template" id="checkboxheader.html">

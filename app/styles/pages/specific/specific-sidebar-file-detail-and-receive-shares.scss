@@ -14,9 +14,12 @@
     transition: all 500ms ease-out;
     border-bottom: solid 1px $dividerClr;
     height: 56px;
-    padding: 0.6em 0;
+    padding: 0.6em 0 0 0.8em;
     .firstLetterFormat {
-      margin-top: 4px;
+      margin-top: 5px;
+      width: 27px;
+      height: 27px;
+      line-height: 27px;
     }
     .info-partage-link {
       display: inline-block;
@@ -34,10 +37,10 @@
         display: inline-block;
       }
       .user-full-name {
-        font-size: 1.04em;
+        font-size: 1em;
       }
       .email {
-        font-size: 0.91em;
+        font-size: 0.81em;
       }
     }
   }

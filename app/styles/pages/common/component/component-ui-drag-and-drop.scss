@@ -7,17 +7,14 @@
 
 .drag-and-drop-ctn {
   position: absolute;
-  top: 250px;
   z-index: 0;
   width: 100%;
-  height: calc(100% - 95px);
   display: table;
   text-align: center;
   vertical-align: middle;
   margin-top: 0;
-  transition: 0.5s ease-in-out background;
-  -webkit-transition: 0.5s ease-in-out background;
-  -moz-transition: 0.5s ease-in-out background;
+  user-drag: none;
+  user-select: none;
   &.outOfFocus {
     opacity: 0.34;
     h1 {
@@ -30,7 +27,6 @@
   .drag-and-drop-content {
     display: table-cell;
     vertical-align: middle;
-    opacity: 1;
   }
   .drag-icon-ctn {
     position: relative;
@@ -69,7 +65,7 @@ div.bordered-circle {
   background: 50% 50% no-repeat;
   background-origin: border-box;
   display: inline-block;
-  border: 5px solid rgba(241, 241, 241, 0.65);
+  border: 10px solid rgba(241, 241, 241, 0.65);
   background: rgba(255, 255, 255, 0);
   border-radius: 100%;
   -moz-border-radius: 100%;
@@ -81,84 +77,60 @@ div.bordered-circle {
   -moz-transition: 0.5s ease;
 }
 
-.drag-and-drop-alert {
-  opacity: 0;
-  position: relative;
-  z-index: 1031;
-  display: block;
-  top: 90%;
-  left: 0;
-  width: 232px;
-  margin:auto auto auto 0;
-  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
-  font-size: 13px;
-  background-color: #2196f3;
-  color: #ffffff;
-  padding: 15px;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  transition: all 0.1s ease;
-  p {
-    margin-bottom: 0;
-  }
+#drop-ctn div.bordered-circle {
+  background-color: rgba(0, 133, 193,0);
+  border: 30px solid rgba(5, 177, 255, 0.09);
+  transition: 350ms cubic-bezier(0.35, 0, 0.25, 1) all;
+}
+.drag-over #drop-ctn div.bordered-circle {
+  background-color: rgba(0, 175, 255, 0.87);
+  border: 10px solid rgba(189, 235, 255,1);
 }
 
-.drag-over .drag-and-drop-alert {
-  opacity: 1;
-  -webkit-animation-name: fadeInUp;
-  animation-name: fadeInUp;
+#drop-ctn .drag-icon-ctn {
+  height: 15em;
+  width: 15em;
+  transition: 350ms cubic-bezier(0.35, 0, 0.25, 1) all;
 }
-.fadeOutElm .drag-and-drop-alert {
+.drag-over #drop-ctn .drag-icon-ctn {
+  height: 16em;
+  width: 16em;
+}
+
+.drop {
   opacity: 0;
-  -webkit-animation-name: fadeOutDown;
-  animation-name: fadeOutDown;
+  background-color: rgba(255, 255, 255, 0);
+  transition: 2s ease-in-out all;
 }
-.border-anim {
-  transition: all 0.1s ease;
-}
-.drag-over .border-anim {
-  box-shadow: inset 0 0 0 5px rgba(33, 150, 243, 0.25);;
-}
-.drop.drag-over {
+.drag-over .drop  {
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.95);
 }
-.drag-over #drop-ctn {
-  z-index: 5 !important;
+.fadeOutElm .drop  {
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 #drop-ctn {
-  position: fixed;
+  position: absolute;
   width: 100%;
-  height: calc(100% - 50px);
-  top: 50px;
+  top: 55px;
   z-index: -1;
   display: table-cell;
   vertical-align: middle;
+  z-index: 5 !important;
+  pointer-events: none;
   > div:first-child{
     position: relative;
     width: 100%;
     height: 100%;
   }
-  .drop {
-    opacity: 0;
+  .drag-and-drop-ctn {
+    top :0;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 2px;
+    border: solid 2px #dfdfdf;
   }
-}
-.drop {
-  transition: 0.5s ease-in-out all;
-}
-#drop-ctn.drag-over .spinner {
-  opacity: 1;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 110px;
-  width: 110px;
-  -webkit-animation: spin 1s linear infinite;
-  -moz-animation: spin 1s linear infinite;
-  animation: spin 1s linear infinite;
 }
 
 .drag-and-drop-centered {
@@ -197,5 +169,12 @@ div.bordered-circle {
     p {
       margin: 0;
     }
+  }
+}
+
+
+@media (max-width: 767px) {
+  #drop-ctn {
+    display: none;
   }
 }

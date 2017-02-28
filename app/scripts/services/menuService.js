@@ -45,7 +45,7 @@
     function activate() {
       administrations = {
         name: 'MENU_TITLE.ADMIN',
-        icon: 'zmdi zmdi-settings',
+        icon: 'zmdi zmdi-settings-square',
         color: '#E91E63',
         disabled: false,
         links: [
@@ -79,7 +79,7 @@
 
       files = {
         name: 'MENU_TITLE.FILES',
-        icon: 'fa fa-files-o',
+        icon: 'zmdi zmdi-account',
         color: '#2196F3',
         disabled: false,
         links: [
@@ -118,7 +118,7 @@
       sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
         link: 'sharedspace.all',
-        icon: 'zmdi zmdi-accounts-alt',
+        icon: 'groups-home-workgroup',
         color: '#05B1FF',
         disabled: false
       };

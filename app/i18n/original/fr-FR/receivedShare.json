@@ -1,4 +1,6 @@
 {
+  "BACKGROUND_RECEIVED_SHARES_MSG": "Ces partages sont des liens temporaires vers des fichiers, envoyés et hébergés par vos contacts",
+  "BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "Visualiser vos fichiers reçus",
   "BREADCRUMB_TITLE_RECEIVED_SHARES": "Fichiers reçus",
   "TOOLTIP" : {
     "ADVANCED_FILTER" : "Voir les filtres avancés",

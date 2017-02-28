@@ -7,7 +7,7 @@
     "SIZE": "Size",
     "ACTION": "Actions"
   },
-  "BACKGROUND_WORKGROUP_TITLE_MSG": "WORKGROUPS LIST",
+  "BACKGROUND_WORKGROUP_TITLE_MSG": "WORKGROUPS",
   "BACKGROUND_WORKGROUP_MSG": "Create a workgroup in order to exchange files beetween your colleagues",
   "BREADCRUMB_ISOLATE": "Isolation mode",
   "BREADCRUMB_TITLE": "My files",
@@ -111,6 +111,10 @@
   },
   "DRAG_DROP_BACKGROUND": {
     "TITLE": "Upload your files here",
+    "COMMENT": "Drag and drop your files here to upload them"
+  },
+  "DRAG_DROP_BACKGROUND_ON_DRAG": {
+    "TITLE": "Drop your files here",
     "COMMENT": "Drag and drop your files here to upload them"
   },
   "WORKGROUPS_LIST": {

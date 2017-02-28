@@ -113,6 +113,10 @@
     "TITLE": "Déposez vos fichiers ici",
     "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer"
   },
+  "DRAG_DROP_BACKGROUND_ON_DRAG": {
+    "TITLE": "Déposez vos fichiers ici",
+    "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer"
+  },
   "WORKGROUPS_LIST": {
     "PROJECT": "Projet",
     "FOLDER": "Répertoire",
