@@ -34,6 +34,7 @@
         "3000": "This filetype is forbidden (mime type)",
         "3002": "This filetype is forbidden",
         "3003": "The file was rejected because a virus was found",
+        "3007": "The file couldn't be scanned",
         "39001": "The uploads are currently disabled since the maintenance mode has been activated",
         "40403": "The uploaded file status can not be found",
         "40404": "The uploaded file status can not be found",

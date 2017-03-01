@@ -177,11 +177,15 @@
         }
       })
       .state('sharedspace.workgroups.entries', {
-        url: '/:uuid/:workgroupName/folders/:parent/:folderUuid/:folderName',
+        url: '/:uuid/:workgroupName',
         templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
         controller: 'SharedSpaceListController as sharedSpaceListVm',
         params: {
-          uploadedFileUuid: null
+          uploadedFileUuid: null,
+          // TODO : workaround to disable folders, with this user never see root folder, he is directly inside it, reput them in url after RC
+          parent: null,
+          folderUuid: null,
+          folderName: null
         },
         resolve: {
           currentWorkGroup: function(workgroupFoldersRestService, $stateParams) {

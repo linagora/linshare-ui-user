@@ -18,6 +18,10 @@
 
     $scope.reloadDocuments = reloadDocuments;
 
+    // TODO : work around to disable folders, with this user never see root folder, he is directly inside it, remove these 2 lines after RC
+    $stateParams.folderName = $stateParams.workgroupName;
+    $stateParams.parent = $stateParams.uuid;
+
     sharedSpaceListVm.addSelectedDocument = addSelectedDocument;
     sharedSpaceListVm.addUploadedEntry = addUploadedEntry;
     sharedSpaceListVm.copy = copy;
@@ -335,13 +339,26 @@
     }
 
     function pushEntriesAndBreadcrumb() {
-      if (sharedSpaceListVm.folderUuid !== sharedSpaceListVm.uuid) {
-        workgroupFoldersRestService.get(sharedSpaceListVm.uuid, sharedSpaceListVm.folderUuid).then(function(folder) {
-          var currentWorkGroupEntries = _.clone(currentWorkGroup);
-          currentWorkGroupEntries.route = 'entries';
-          sharedSpaceBreadcrumbService.build(sharedSpaceListVm.uuid, folder.ancestors).then(function(breadcrumb) {
-            sharedSpaceListVm.breadcrumbFolders = breadcrumb;
-          });
+      // TODO : workaround to disable folders, with this user never see root folder, he is directly inside it, remove first if after RC
+      if(currentWorkGroup.plain().length > 0) {
+        _.forEach(currentWorkGroup[0].entries, function(entry) {
+          Restangular.restangularizeElement(currentWorkGroup, entry, 'entries/' + entry.uuid);
+          entry.parentResource.route = '';
+          sharedSpaceListVm.itemsList.push(entry);
+        });
+
+        _.remove(sharedSpaceListVm.itemsList, {route: 'folders'});
+        loadTable().then(function(data) {
+          sharedSpaceListVm.tableParams = data;
+        });
+      } else {
+        if (sharedSpaceListVm.folderUuid !== sharedSpaceListVm.uuid) {
+          workgroupFoldersRestService.get(sharedSpaceListVm.uuid, sharedSpaceListVm.folderUuid).then(function(folder) {
+            var currentWorkGroupEntries = _.clone(currentWorkGroup);
+            currentWorkGroupEntries.route = 'entries';
+            sharedSpaceBreadcrumbService.build(sharedSpaceListVm.uuid, folder.ancestors).then(function(breadcrumb) {
+              sharedSpaceListVm.breadcrumbFolders = breadcrumb;
+            });
 
           _.forEach(folder.entries, function(entry) {
             Restangular.restangularizeElement(currentWorkGroup, entry, 'entries/' + entry.uuid);
@@ -349,14 +366,15 @@
             sharedSpaceListVm.itemsList.push(entry);
           });
 
+            loadTable().then(function(data) {
+              sharedSpaceListVm.tableParams = data;
+            });
+          }, 0);
+        } else {
           loadTable().then(function(data) {
             sharedSpaceListVm.tableParams = data;
           });
-        }, 0);
-      } else {
-        loadTable().then(function(data) {
-          sharedSpaceListVm.tableParams = data;
-        });
+        }
       }
     }
 

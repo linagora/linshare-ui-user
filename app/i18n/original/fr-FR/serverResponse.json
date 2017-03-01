@@ -34,6 +34,7 @@
         "3000": "Ce type de fichier est interdit (type mime)",
         "3002": "Ce type de fichier est interdit",
         "3003": "Le fichier n'a pu être déposé car un virus a été détecté",
+        "3007": "Le fichier n'a pu être scanné",
         "39001": "Les dépôts sont temporairement désactivés car le mode maintenance est activé",
         "40403": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
         "40404": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
