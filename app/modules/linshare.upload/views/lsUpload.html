@@ -1,4 +1,4 @@
-<div class="container upload-files" id="upload-box"
+<div class="container upload-files " id="upload-box"
      flow-object="uploadQueueVm.$flow"
      flow-files-submitted="uploadQueueVm.flowUploadService.uploadFiles($files, mySpacePage)"
      flow-drop=""
@@ -11,10 +11,14 @@
       <div class="drag-and-drop-content">
         <div class="drag-icon-ctn">
           <div class="bordered-circle">&nbsp;</div>
-          <img src="images/upload-dnd-grey.png">
+          <span class="grey-clr bg-info-icon">
+            <span class="groups-upload-file"></span>
+          </span>
         </div>
-        <h1>{{'DRAG_DROP_BACKGROUND_ON_DRAG.TITLE' | translate}}</h1>
-        <p>{{'DRAG_DROP_BACKGROUND_ON_DRAG.COMMENT' | translate}}</p>
+        <div class="dnd-txt-content">
+          <h1>{{'DRAG_DROP_BACKGROUND_ON_DRAG.TITLE' | translate}}</h1>
+          <p>{{'DRAG_DROP_BACKGROUND_ON_DRAG.COMMENT' | translate}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -244,11 +248,14 @@
         <div class="drag-and-drop-content">
           <div class="drag-icon-ctn ">
             <div class="bordered-circle">&nbsp;</div>
-            <img src="images/upload-dnd-grey.png" draggable="false">
+            <span class="grey-clr bg-info-icon">
+              <span class="groups-upload-file"></span>
+            </span>
           </div>
-          <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-
-          <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
+          <div class="dnd-txt-content">
+            <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
+            <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
+          </div>
         </div>
       </div>
       <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}" id="upload-li-ctn"></ls-upload-queue>

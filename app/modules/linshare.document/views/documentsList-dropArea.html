@@ -70,14 +70,18 @@
             </span>
     </div>
   </div>
-  <div class="drag-and-drop-ctn reset-content-width hidden-xs collapsible-content drag-n-drop-height" check-table-height>
+  <div class="drag-and-drop-ctn reset-content-width hidden-xs drag-n-drop-height" check-table-height>
     <div class="drag-and-drop-content">
       <div class="drag-icon-ctn ">
         <div class="bordered-circle">&nbsp;</div>
-        <img src="images/upload-dnd-grey.png">
+        <span class="grey-clr bg-info-icon">
+          <span class="groups-upload-file"></span>
+        </span>
       </div>
-      <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-      <p>{{ "DRAG_DROP_BACKGROUND.COMMENT" | translate }}</p>
+      <div class="dnd-txt-content">
+        <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
+        <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
+      </div>
     </div>
   </div>
   <!-- TODO: does not work, please repair it : it needs to select all the guest list with appropriate feedback  -->

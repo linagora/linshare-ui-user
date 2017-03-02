@@ -281,11 +281,11 @@
 
 @font-face {
   font-family: 'groups';
-  src:    url('fonts/shared-folder/groups.eot?5cofn');
-  src:    url('fonts/shared-folder/groups.eot?5cofn#iefix') format('embedded-opentype'),
-  url('fonts/shared-folder/groups.ttf?5cofn') format('truetype'),
-  url('fonts/shared-folder/groups.woff?5cofn') format('woff'),
-  url('fonts/shared-folder/groups.svg?5cofn#groups   ') format('svg');
+  src: url('fonts/shared-folder/groups.eot?ke6cwl');
+  src: url('fonts/shared-folder/groups.eot?ke6cwl#iefix') format('embedded-opentype'),
+  url('fonts/shared-folder/groups.ttf?ke6cwl') format('truetype'),
+  url('fonts/shared-folder/groups.woff?ke6cwl') format('woff'),
+  url('fonts/shared-folder/groups.svg?ke6cwl#groups   ') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -306,6 +306,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.groups-upload-file:before {
+  content: "\e90c";
+}
+.groups-received-files:before {
+  content: "\e917";
+}
+.groups-logo-symbol-w:before {
+  content: "\e913";
+}
+.groups-logo-symbol-b .path1:before {
+  content: "\e914";
+  color: rgb(68, 171, 223);
+}
+.groups-logo-symbol-b .path2:before {
+  content: "\e915";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
 .groups-shared-folder.grey-clr{
   .path2:before {
     color : #dcdcdc ;
