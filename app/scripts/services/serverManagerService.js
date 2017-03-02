@@ -44,22 +44,25 @@
      * @desc Manage server response
      * @param {Function} action - A function calling the server side
      * @param {String} messagePrefix - The key of errors's type to show
+     * @param {boolean} showError - Determine if the error shall be shown to the user
      * @returns {Promise} The promise in resolve/reject of the function called
      * @memberOf linshareUiUserApp.ServerManagerService
      */
-    function responseHandler(action, messagePrefix) {
+    function responseHandler(action, messagePrefix, showError) {
+      showError = _.isUndefined(showError) ? true : showError;
       messagePrefix = _.isUndefined(messagePrefix) ? 'DEFAULT' : messagePrefix;
       var
         errorData,
         deferred = $q.defer(),
         errorMessageHttpCodes = 'SERVER_RESPONSE.HTTP_CODES.',
-        errorMessageDetails =  'SERVER_RESPONSE.DETAILS.' + messagePrefix + '.';
+        errorMessageDetails = 'SERVER_RESPONSE.DETAILS.' + messagePrefix + '.';
 
       action
         .then(function(data) {
           deferred.resolve(data);
         })
         .catch(function(error) {
+          $log.debug('ServerManagerService - responseHandler:' + error);
           errorData = error;
           deferred.reject(error);
           switch (error.status) {
@@ -100,23 +103,24 @@
               errorMessageHttpCodes += 'ERROR_DEFAULT';
               break;
           }
-
-          var errCode = errorData.data.errCode;
-          errorMessageDetails += _.isUndefined(errCode) ? 'NONE' : errCode;
-          $translate.refresh().then(function() {
-            $translate([errorMessageHttpCodes, errorMessageDetails]).then(function(translations) {
-              if (!(translations[errorMessageHttpCodes] === errorMessageHttpCodes ||
-                translations[errorMessageDetails] === errorMessageDetails)) {
-                notify(translations[errorMessageHttpCodes], translations[errorMessageDetails]);
-              } else {
-                if (_.isUndefined(errCode)) {
-                  notify(errorData.statusText);
+          if (showError) {
+            var errCode = errorData.data.errCode;
+            errorMessageDetails += _.isUndefined(errCode) ? 'NONE' : errCode;
+            $translate.refresh().then(function() {
+              $translate([errorMessageHttpCodes, errorMessageDetails]).then(function(translations) {
+                if (!(translations[errorMessageHttpCodes] === errorMessageHttpCodes ||
+                    translations[errorMessageDetails] === errorMessageDetails)) {
+                  notify(translations[errorMessageHttpCodes], translations[errorMessageDetails]);
                 } else {
-                  notify(errorData.statusText, errCode + ': ' + errorData.data.message);
+                  if (_.isUndefined(errCode)) {
+                    notify(errorData.statusText);
+                  } else {
+                    notify(errorData.statusText, errCode + ': ' + errorData.data.message);
+                  }
                 }
-              }
+              });
             });
-          });
+          }
         });
       return deferred.promise;
     }

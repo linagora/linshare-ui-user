@@ -18,19 +18,9 @@
    */
   function routerConfiguration($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function($injector, $location) {
-        $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService){
-          if ($location.$$path !== '') {
-            authenticationRestService.checkAuthentication().then(function(data) {
-              if(data.status !== 401) {
-                $state.go('home');
-              } else {
-                $state.go('login');
-              }
-            });
-          } else {
-            $state.go('login');
-          }
-        }]);
+      $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService){
+        authRedirect($location, $state, authenticationRestService);
+      }]);
     });
 
     $stateProvider
@@ -47,7 +37,7 @@
       })
       .state('home', {
         parent: 'common',
-        url: '/',
+        url: '/home',
         templateUrl: 'views/home/home.html',
         controller: 'HomeController'
       })
@@ -55,7 +45,12 @@
         url: '/login?next',
         templateUrl: 'views/common/loginForm.html',
         controller: 'loginController',
-        controllerAs : 'loginVm'
+        controllerAs : 'loginVm',
+        resolve: {
+          authentication: function($location, $state, authenticationRestService) {
+            authRedirect($location, $state, authenticationRestService);
+          }
+        }
       })
       .state('documents', {
         parent: 'common',
@@ -338,5 +333,25 @@
         url: '/share_detail',
         templateUrl: 'modules/linshare.share/views/shares_detail.html'
       });
+
+    /**
+     * @name authRedirect
+     * @desc Redirect the user on the home page if logged in or on the login page if not
+     * @param {Object} $location - Service for url parsing
+     * @param {Object} $state - Setvice for router state
+     * @param {Object} authenticationRestService - Service for authentication
+     * @memberOf LinShareUiUserApp.routerConfiguration
+     */
+    function authRedirect($location, $state, authenticationRestService) {
+    var location = $location;
+      authenticationRestService.checkAuthentication(false).then(function(data) {
+        if(data.status !== 401) {
+          location.path('/home').replace();
+          $state.go('home');
+        } else {
+          $state.go('login');
+        }
+      });
+    }
   }
 })();
