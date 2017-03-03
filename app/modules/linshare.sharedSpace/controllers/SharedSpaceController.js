@@ -43,32 +43,58 @@ angular.module('linshare.sharedSpace')
       .then(function(translations) {
         swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
       });
-    var setElemToEditable = function(idElem, data) {
+    var setElemToEditable = function(idElem, data, isNew) {
       var initialName = swalNewWorkGroupName;
+      var enterKeyPressed = false;
+
       angular.element(idElem).attr('contenteditable', 'true')
         .on('focus', function() {
           document.execCommand('selectAll', false, null);
           initialName = data.name;
         })
         .on('focusout', function() {
-          data.name = idElem[0].textContent;
-          if (data.name.trim() === '') {
-            angular.element(idElem).text(initialName);
-            data.name = initialName.trim();
+          if(!enterKeyPressed) {
+            data.name = idElem[0].textContent;
+            if (data.name.trim() === '') {
+              angular.element(idElem).text(initialName);
+              data.name = initialName.trim();
+            }
+            if(isNew) {
+              saveNewWorkgroup(data.name);
+            } else {
+              workgroupRestService.update(data);
+            }
+            angular.element(this).attr('contenteditable', 'false');
           }
-          workgroupRestService.update(data);
-          angular.element(this).attr('contenteditable', 'false');
         })
         .on('keypress', function(e) {
-          if (e.which === 13) {
+          if (e.which === 27 || e.keyCode === 27) {
+            if (isNew) {
+              _.remove(thisctrl.itemsList, {
+                uuid: data.uuid
+              });
+              thisctrl.tableParams.reload();
+              return null;
+            } else {
+              data.name = initialName;
+              angular.element(idElem).text(initialName);
+              angular.element(this).attr('contenteditable', 'false');
+            }
+            enterKeyPressed = true;
+            return null;
+          } else if (e.which === 13) {
             data.name = idElem[0].textContent;
             if ((data.name.trim() === initialName) || (data.name.trim() === '')) {
               angular.element(idElem).text(initialName);
               data.name = initialName.trim();
             }
-            workgroupRestService.update(data);
+            if (isNew) {
+              saveNewWorkgroup(data.name);
+            } else {
+              workgroupRestService.update(data);
+            }
+            enterKeyPressed = true;
             angular.element(this).attr('contenteditable', 'false');
-            angular.element(this).blur();
           }
         });
       angular.element(idElem).focus();
@@ -256,18 +282,29 @@ angular.module('linshare.sharedSpace')
       });
     }
 
-    function renameFolder(folder) {
+    function renameFolder(folder, isNew) {
       var folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
-      setElemToEditable(folderNameElem, folder);
+      setElemToEditable(folderNameElem, folder, isNew);
     }
 
     function createFolder(folderName) {
-      workgroupRestService.create({name: folderName.trim()}).then(function(data) {
+      // I generate uuid for tableParams, because this object is temporary while item is not created. TableParams require an unique ID
+      var workgroup = {
+        name: folderName.trim(),
+        uuid: uuid.v4()
+      };
+      thisctrl.itemsList.push(workgroup);
+      thisctrl.tableParams.reload();
+      $timeout(function() {
+        renameFolder(workgroup, true);
+      }, 0);
+    }
+
+    function saveNewWorkgroup(workgroupName) {
+      workgroupRestService.create({name: workgroupName.trim()}).then(function(data) {
+        thisctrl.itemsList.pop();
         thisctrl.itemsList.push(data);
         thisctrl.tableParams.reload();
-        $timeout(function() {
-          renameFolder(data);
-        }, 0);
       });
     }
 
