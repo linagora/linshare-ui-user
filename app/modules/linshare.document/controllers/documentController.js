@@ -12,7 +12,7 @@
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
     var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
-    var swalNoDeleteElements, swalActionDelete, swalInfoErrorFile, swalClose;
+    var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;
     var swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500;
 
     $scope.addSelectedDocument = addSelectedDocument;
@@ -20,7 +20,7 @@
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
     $scope.closeDetailSidebar = closeDetailSidebar;
     $scope.closeSearch = closeSearch;
-    $scope.closeToast = closeToast;
+//    $scope.closeToast = closeToast;
     $scope.currentDocument = {};
     $scope.currentPage = 'my_files';
     $scope.currentSelectedDocument = {
@@ -88,6 +88,8 @@
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
           'GROWL_ALERT.ACTION.DELETE', 'TOAST_ALERT.ACTION.INFO_ERROR_FILE',
           'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED',
+          'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR',
+          'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL',
           'TOAST_ALERT.WARNING.ERROR_404', 'TOAST_ALERT.WARNING.ERROR_403',
           'TOAST_ALERT.WARNING.ERROR_400', 'TOAST_ALERT.WARNING.ERROR_500'
         ])
@@ -99,6 +101,8 @@
           swalInfoErrorFile = translations['TOAST_ALERT.ACTION.INFO_ERROR_FILE'];
           swalClose = translations['TOAST_ALERT.ACTION.CLOSE'];
           swalNoDeleteElements = translations['TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED'];
+          swalNoDeleteElementsSingular = translations['TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR'];
+          swalNoDeleteElementsPlural = translations['TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL'];
           swalCodeError404 = translations['TOAST_ALERT.WARNING.ERROR_404'];
           swalCodeError403 = translations['TOAST_ALERT.WARNING.ERROR_403'];
           swalCodeError400 = translations['TOAST_ALERT.WARNING.ERROR_400'];
@@ -239,42 +243,47 @@
      * @memberOf linashare.document.documentController
      */
     function closeToast() {
-      $mdToast.hide().then(function() {});
+      $mdToast.hide();
     }
 
     function deleteCallback(items) {
       var responsesDeletion = [];
       $q.all(sortResponseDeletion(items, responsesDeletion)).then(function() {
         if (responsesDeletion.length > 0) {
-          $scope.showToastDeleteError();
-          $scope.responses = [];
+          var txtMessage = responsesDeletion.length === 1 ? swalNoDeleteElementsSingular : swalNoDeleteElementsPlural;
+          var mdToastScope = $scope.$new(true);
+          mdToastScope.toastTxtMessage = txtMessage;
+          mdToastScope.toastError = true;
+          mdToastScope.actionClose = closeToast;
+          mdToastScope.responses = [];
           _.forEach(responsesDeletion, function(responseItems) {
             switch (responseItems[1].status) {
               case 404:
-                $scope.responses.push({
+                mdToastScope.responses.push({
                   'name': responseItems[0],
                   'messageError': swalCodeError404
                 });
                 break;
               case 403:
-                $scope.responses.push({
+                mdToastScope.responses.push({
                   'name': responseItems[0],
                   'messageError': swalCodeError403
                 });
                 break;
               case 400:
-                $scope.responses.push({
+                mdToastScope.responses.push({
                   'name': responseItems[0],
                   'messageError': swalCodeError400
                 });
                 break;
               default:
-                $scope.responses.push({
+                mdToastScope.responses.push({
                   'name': responseItems[0],
                   'messageError': swalCodeError500
                 });
             }
           });
+          $scope.showToastDeleteError(mdToastScope);
         } else {
           $timeout(function() {
             growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
@@ -515,10 +524,9 @@
       }
     }
 
-    function showToastDeleteError() {
+    function showToastDeleteError(mdToastScope) {
       $mdToast.show({
-        scope: $scope,
-        preserveScope: true,
+        scope: mdToastScope,
         hideDelay: 0,
         position: 'top right',
         templateUrl: 'modules/linshare.document/views/toast-delete-file-error.html'

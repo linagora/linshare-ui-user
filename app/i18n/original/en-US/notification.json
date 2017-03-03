@@ -50,10 +50,13 @@
   "TOAST_ALERT": {
     "ACTION": {
       "CLOSE": "Close",
-      "INFO_ERROR_FILE": "View more"
+      "INFO_ERROR_FILE": "Details"
     },
     "WARNING": {
       "ELEMENTS_NOT_DELETED": "element(s) haven't been deleted",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "item hasn't been deleted.",
+      "ELEMENTS_NOT_DELETED_PLURAL": "items haven't been deleted.",
+      "ERROR": "Error :",
       "ERROR_404": "Element not found",
       "ERROR_403": "You are not authorized to delete this document",
       "ERROR_400": "The request couldn't be achieved",

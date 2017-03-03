@@ -29,28 +29,186 @@
   GROWL MULTIPLE DELETION
 ***********************/
 
-.delete-file-toast.anim-toast {
-  visibility: visible;
-  height: auto;
-  overflow-y: auto;
+/*** TOAST WITH DETAIL INLINE LINK  ***/
+
+.toast-dynamic-height {
+  a.toast-inline-link  {
+    display: inline-block;
+    text-decoration: underline;
+    color: #ffffff;
+    margin-left: 2px;
+    font-size: 0.9em;
+    margin-right: 10px;
+  }
+  .toast-details-ctn {
+    margin-top: 0em;
+    padding: 0 15px;
+    p {
+      margin-bottom: 0.04em;
+    }
+    .toast-details-item {
+      margin-bottom: 0;
+      font-size: 0.9em;
+      padding: 0.65em 0;
+      .toast-item-error {
+        font-size: 0.85em;
+      }
+    }
+  }
+  .delete-file-toast.anim-toast {
+    max-height: 330px;
+    transition: all 500ms cubic-bezier(0.55, -0.01, 0.35, 1.01);
+    animation: changeOverflow 750ms ease 0s normal forwards 1;
+  }
+
+  .delete-file-toast {
+    max-height: 0;
+    overflow-y: hidden;
+    transition: max-height 350ms cubic-bezier(0.21, 0.72, 0.51, 1.05);
+  }
 }
 
-.delete-file-toast {
-  visibility: hidden;
-  height: 0;
-  transition: height 700ms ease-in-out;
+@-webkit-keyframes changeOverflow{
+  0% { overflow-y:hidden; }
+  99% { overflow-y:hidden; }
+  100% { overflow-y:auto; }
 }
-
 md-toast.toast-dynamic-height .md-toast-content {
   max-width: none !important;
   height: auto;
-  max-height: 500px;
-  overflow: visible;
+  max-height: inherit;
 }
 
-.md-button.close-button {
-  min-width: 20px;
+.toast-dynamic-height.white-toast-panel{
+  .toast-details-ctn {
+    border-top: solid 1px #d8d8d8;
+    background-color: #ffffff;
+    color: #929292;
+    .toast-details-item {
+      border-bottom: solid 1px #e4e4e4;
+      .toast-item-filename {
+        color: #555555;
+      }
+    }
+  }
+} /*** End OF detail toast*/
+
+/* LinShare common toast layout style */
+.toast-dynamic-height {
+  padding-top: 60px;
+  .md-toast-content .md-button.md-highlight {
+    min-width: inherit;
+  }
+  .md-toast-content {
+    padding: 0;
+  }
+  .md-button.close-button {
+    min-width: 35px;
+  }
+  .toast-upper-panel {
+    padding: 0 0 0 0;
+    display: flex;
+    align-items: center;
+  }
+  .md-toast-text {
+    font-size: 0.95em;
+    padding-right: 0;
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  .toast-icon-area {
+    height: 49px;
+    width: 35px;
+    margin-top: 0;
+    flex: 0 0 35px;
+    display: flex;
+    justify-content: center;
+    span {
+      align-self: center;
+      align-content: center;
+      font-size: 1.2em;
+    }
+  }
 }
+
+md-toast .md-toast-content {
+  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+} /* End of LinShare common toast layout style **/
+
+/** Toast error style **/
+.toast-dynamic-height.ls-toast.toast-type-error {
+  .toast-icon-area {
+    background-color: #ff665b;
+    color: #ffeded;
+  }
+  .md-toast-content {
+    background-color: #f85c51;
+    .md-button.md-highlight {
+      color: rgb(255, 255, 255);
+    }
+  }
+  .md-toast-text {
+    color: #fff;
+  }
+}/* End of error toast*/
+
+/** Toast standard style **/
+.toast-dynamic-height.ls-toast {
+  .toast-icon-area {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.62);
+    .warning-clr-toast {
+      color: #ff6400;
+    }
+  }
+  .md-toast-content {
+    background-color: #323232;
+    color: rgb(250, 250, 250);
+  }
+  button:not(.close-button){
+    min-width: inherit !important;
+  }
+  .md-toast-text.toast-single-btn{
+    border-right: solid 1px rgba(255, 255, 255, 0.24);
+    padding-right: 10px;
+  }
+}
+/* End of standard toast style*/
+
+/* Responsive mobile : snackbar with details*/
+@media (max-width: 959px) {
+  md-toast.toast-dynamic-height {
+    padding: 0;
+    .md-toast-content {
+      max-width: 100% !important;
+      > div {
+        display: block;
+        width: 100%;
+      }
+      .md-toast-text {
+        flex: 1 1 auto;
+      }
+      .md-button.close-button {
+        min-width: 45px;
+      }
+    }
+  }
+}
+
+.toast-dynamic-height.inverse-toast-panel{
+  .toast-details-ctn {
+    border-top: solid 1px #000000;
+    background-color: #353535;
+    color: #a8a8a8;
+    .toast-details-item {
+      border-bottom: solid 1px #515151;
+      .toast-item-filename {
+        color: #cbcbcb;
+      }
+    }
+  }
+}
+
 
 /**********************
   TOOLTIP FIX

@@ -50,10 +50,13 @@
   "TOAST_ALERT": {
     "ACTION": {
       "CLOSE": "Fermer",
-      "INFO_ERROR_FILE": "Voir plus"
+      "INFO_ERROR_FILE": "Détails"
     },
     "WARNING": {
       "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "élément n'a pu être supprimé.",
+      "ELEMENTS_NOT_DELETED_PLURAL": "éléments n'ont pu être supprimés.",
+      "ERROR": "Erreur :",
       "ERROR_404": "Élément introuvable",
       "ERROR_403": "Vous n'êtes pas autorisé à supprimer cet élément",
       "ERROR_400": "Suppression impossible",

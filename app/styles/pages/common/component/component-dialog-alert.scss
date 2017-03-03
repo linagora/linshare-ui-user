@@ -146,3 +146,16 @@
     right: 15px;
   }
 }
+
+/* OVERRIDE  AND REMOVE BOUNCE ANIMATION IN DISPLAY */
+@keyframes showSweetAlert {
+  0% {
+    transform: scale(0.4);
+    -webkit-transform: scale(0.7) !important; }
+  80% {
+    transform: scale(0.95);
+    -webkit-tranform: scale(0.95)!important;; }
+  100% {
+    transform: scale(1);
+    -webkit-transform: scale(1) !important;; }
+}
