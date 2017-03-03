@@ -174,7 +174,7 @@
         case 'user':
           var firstLetter = data.firstName.charAt(0);
           template = '' +
-            '<div  class="recipientsAutocomplete" title="' + data.domain + '">' +
+            '<div  class="recipientsAutocomplete" title="' + data.mail + '">' +
             '<span class="firstLetterFormat">' + firstLetter + '</span>' +
             '<p class="recipientsInfo">' +
             '<span class="user-full-name">' + data.firstName + ' ' + data.lastName + '</span>' +
@@ -185,7 +185,7 @@
         case 'threadmember':
           var isMemberClass = data.member === true ? ' firstLetterBgdGreen' : '';
           template = '' +
-            '<div class="recipientsAutocomplete" title="' + data.domain + '">' +
+            '<div class="recipientsAutocomplete" title="' + data.mail + '">' +
             '<span class="firstLetterFormat' + isMemberClass + '">' + data.firstName.charAt() + '</span>' +
             '<p class="recipientsInfo">' +
             '<span class="user-full-name">' + data.firstName + ' ' + data.lastName + '</span>' +
