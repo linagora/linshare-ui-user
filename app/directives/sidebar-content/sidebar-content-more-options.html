@@ -21,7 +21,7 @@
           <label for="secureSharing">{{"RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate}}:</label>
           <label class="checkbox checkbox-inline m-r-0">
             <input type="checkbox" name="secureSharing" x-ng-checked="true"
-                   x-ng-disabled="!shareActionVm.newShare.secured.userCanOverride"
+                   x-ng-disabled="!shareActionVm.newShare.secured.canOverride"
                    x-ng-model="shareActionVm.newShare.secured.value"/>
             <i class="input-helper"></i>
           </label>
@@ -35,7 +35,7 @@
           <label for="SharingNotification">{{"RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate}}:</label>
           <label class="checkbox checkbox-inline m-r-0">
             <input type="checkbox" name="SharingNotification"
-                   x-ng-disabled="!shareActionVm.newShare.creationAcknowledgement.userCanOverride"
+                   x-ng-disabled="!shareActionVm.newShare.creationAcknowledgement.canOverride"
                    x-ng-model="shareActionVm.newShare.creationAcknowledgement.value"/>
             <i class="input-helper"></i>
           </label>
@@ -48,7 +48,7 @@
           <label for="nonDownloadedNotification">{{"RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate}}:</label>
           <label class="checkbox checkbox-inline m-r-0">
             <input type="checkbox" name="nonDownloadedNotification" x-ng-checked="true"
-                   x-ng-disabled="!shareActionVm.newShare.enableUSDA.userCanOverride"
+                   x-ng-disabled="!shareActionVm.newShare.enableUSDA.canOverride"
                    x-ng-model="shareActionVm.newShare.enableUSDA.value"/>
             <i class="input-helper"></i>
           </label>
@@ -73,7 +73,7 @@
                    is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
                    x-ng-required="true" close-text="Close"
                    placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'medium'}}"
-                   x-ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.userCanOverride"
+                   x-ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
                    x-ng-model="newShare.notificationDateForUSDA.value"/>
           </div>
         </div>
