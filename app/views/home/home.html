@@ -125,11 +125,11 @@
     <div>
       <h2>{{"WELCOME" | translate}}</h2>
       <div class="content-section custom-home-page-txt">
-        <p>Votre solution de partage de fichiers sécurisé en open source</p>
+        <p>{{"WELCOME_MESSAGE" | translate}}</p>
       </div>
     </div>
-    <h2>Notifications</h2>
-    <div class="content-section">
+    <h2 x-ng-show="linshareModeProduction == false">Notifications</h2>
+    <div class="content-section" x-ng-show="linshareModeProduction == false">
       <p class="empty-notifications">{{"NO_NOTIFICATION" | translate}}</p>
       <section class="notification-ctn">
         <div class="flex-ctn notification-item">
