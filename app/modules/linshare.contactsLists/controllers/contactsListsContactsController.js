@@ -441,7 +441,7 @@
         delete contactToSave.displayedFirstName;
         delete contactToSave.displayedLastName;
         // TODO : IAB object returned to implement -> contactSaved
-        contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave).then(function(contactSaved) {
+        contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave).then(function() {
           contactsListsContactsVm.itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
           growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'inverse');
           contactsListsContactsVm.tableParams.reload();

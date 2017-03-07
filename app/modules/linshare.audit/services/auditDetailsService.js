@@ -277,7 +277,7 @@
         if(!auditAction.resource.recipient) {
           shareRecipient = auditAction.recipientMail;
         } else {
-          shareRecipient = (auditAction.resource.recipient.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.recipient)
+          shareRecipient = (auditAction.resource.recipient.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.recipient);
         }
       }
       return shareRecipient;

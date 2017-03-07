@@ -291,7 +291,9 @@ angular.module('linshare.sharedSpace')
       // I generate uuid for tableParams, because this object is temporary while item is not created. TableParams require an unique ID
       var workgroup = {
         name: folderName.trim(),
+        /* jshint ignore:start */
         uuid: uuid.v4()
+        /* jshint ignore:end */
       };
       thisctrl.itemsList.push(workgroup);
       thisctrl.tableParams.reload();
