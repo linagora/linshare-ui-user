@@ -364,7 +364,7 @@ angular.module('linshare.receivedShare')
       function closeToast() {
         $mdToast.hide().then(function() {});
       }
-  
+
       function toggleFilterBySelectedFiles() {
         $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
         if ($scope.tableParams.filter().isSelected) {
@@ -386,14 +386,14 @@ angular.module('linshare.receivedShare')
               count: 10,
               filter: $scope.paramFilter
             }, {
-              getData: function($defer, params) {
+              getData: function(params) {
                 var filteredData = params.filter() ?
                   $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
                 var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) :
                   filteredData;
 
                 params.total(orderedData.length);
-                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                return (orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
               }
             })
           );
@@ -409,13 +409,13 @@ angular.module('linshare.receivedShare')
         count: 10,
         filter: $scope.paramFilter
       }, {
-        getData: function($defer, params) {
+        getData: function(params) {
           var filteredData = params.filter() ?
             $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
           var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 
           params.total(orderedData.length);
-          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          return (orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
 

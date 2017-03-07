@@ -15,10 +15,10 @@ angular.module('linshare.share')
       sorting: {modificationDate: 'desc'},
       count: 20
     }, {
-      getData: function($defer, params) {
+      getData: function(params) {
         var files = params.sorting() ? $filter('orderBy')(sharedDocumentsList, params.orderBy()) : sharedDocumentsList;
         params.total(files.length);
-        $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        return (files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
   });

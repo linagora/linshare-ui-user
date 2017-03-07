@@ -24,12 +24,12 @@ angular.module('linshare.sharedSpace')
       count: 20,
       filter: thisctrl.paramFilter
     }, {
-      getData: function($defer, params) {
+      getData: function(params) {
         var filteredData = params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
         var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
         params.total(workgroups.length);
         params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-        $defer.resolve(workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        return (workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
     thisctrl.deleteWorkGroup = deleteWorkGroup;

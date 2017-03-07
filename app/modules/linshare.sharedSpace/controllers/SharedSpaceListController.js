@@ -286,7 +286,7 @@
             count: 10,
             filter: sharedSpaceListVm.paramFilter
           }, {
-            getData: function($defer, params) {
+            getData: function(params) {
               var filteredData = params.filter() ? $filter('filter')(sharedSpaceListVm.itemsList, params.filter()) : sharedSpaceListVm.itemsList;
               var filesList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
               params.total(filesList.length);
@@ -294,7 +294,7 @@
               if ($stateParams.uploadedFileUuid) {
                 loadSelectedDocument(filteredData);
               }
-              $defer.resolve(filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+              return (filesList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
           })
         );

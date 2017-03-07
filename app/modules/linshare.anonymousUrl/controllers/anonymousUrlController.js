@@ -55,7 +55,7 @@
     }
 
     /**
-     *  @name download 
+     *  @name download
      *  @desc Retrieve the file from the server
      *  @param {Object} documentFile - A Document object
      *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
@@ -106,7 +106,7 @@
         count: 10
       }, {
         total: anonymousUrlVm.anonymousUrlShareEntries.length,
-        getData: function($defer, params) {
+        getData: function(params) {
           anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password)
             .then(function(anonymousUrl) {
               anonymousUrlVm.anonymousUrlData = anonymousUrl.data;
@@ -116,7 +116,7 @@
                 anonymousUrlVm.anonymousUrlShareEntries;
               var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
               params.total(files.length);
-              $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+              return (files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             });
         }
       });

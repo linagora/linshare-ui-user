@@ -117,12 +117,12 @@
         count: 10,
         filter: auditVm.paramFilter
       }, {
-        getData: function($defer, params) {
+        getData: function(params) {
           var filteredData = params.hasFilter() ? $filter('filter')(auditVm.itemsList, params.filter()) : auditVm.itemsList;
           var auditActions = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(auditActions.length);
           params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-          $defer.resolve(auditActions.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          return (auditActions.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
     }

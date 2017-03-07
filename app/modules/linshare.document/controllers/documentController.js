@@ -375,7 +375,7 @@
             filter: $scope.paramFilter
           }, {
             total: $scope.documentsList.length,
-            getData: function($defer, params) {
+            getData: function(params) {
               var filteredData =
                 params.filter() ? $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
               var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
@@ -383,7 +383,7 @@
               if ($stateParams.uploadedFileUuid) {
                 loadSelectedDocument(filteredData);
               }
-              $defer.resolve(files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+              return (files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
           })
         );

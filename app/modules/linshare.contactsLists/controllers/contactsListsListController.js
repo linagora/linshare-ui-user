@@ -395,7 +395,7 @@
         count: 20,
         filter: contactsListsListVm.paramFilter
       }, {
-        getData: function($defer, params) {
+        getData: function(params) {
           var filteredData = [];
           switch (params.filter().operator) {
             case '||':
@@ -415,7 +415,7 @@
           var contactsListsList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(contactsListsList.length);
           params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-          $defer.resolve(contactsListsList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          return (contactsListsList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
     }

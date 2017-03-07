@@ -202,7 +202,7 @@
         count: 20,
         filter: contactsListsContactsVm.paramFilter
       }, {
-        getData: function($defer, params) {
+        getData: function(params) {
           var filteredData = [];
           switch(params.filter().operator) {
             case '||':
@@ -222,7 +222,7 @@
           var contactsListsContacts = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(contactsListsContacts.length);
           params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-          $defer.resolve(contactsListsContacts.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          return (contactsListsContacts.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
     }
