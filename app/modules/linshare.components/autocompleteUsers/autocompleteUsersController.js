@@ -9,14 +9,14 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['$log', '$scope', '$q', 'autocompleteUserRestService', 'growlService'];
+  AutocompleteUsersController.$inject = ['$log', '$scope', '$q', 'autocompleteUserRestService'];
 
   /**
    * @namespace AutocompleteUsersController
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController($log, $scope, $q, autocompleteUserRestService, growlService) {
+  function AutocompleteUsersController($log, $scope, $q, autocompleteUserRestService) {
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;
 
@@ -105,7 +105,7 @@
     function onErrorEmail() {
       var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
       if (autocompleteUsersVm.withEmail && autocompleteUsersVm.noResult && !_.isUndefined(viewValue)) {
-        if (viewValue.length >== 3) {
+        if (viewValue.length >= 3) {
           return !regexpEmail.test(viewValue);
         }
       }
@@ -137,7 +137,7 @@
         if (autocompleteUsersVm.withEmail ) {
           if (regexpEmail.test(viewValue)) {
             autocompleteUsersVm.searchUsersAccount(viewValue).then(function(data) {
-              autocompleteUsersVm.selectedUser = data[0]
+              autocompleteUsersVm.selectedUser = data[0];
               autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser,
                 autocompleteUsersVm.selectedUsersList);
             });
