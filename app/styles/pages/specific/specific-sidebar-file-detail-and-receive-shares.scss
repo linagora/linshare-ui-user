@@ -16,7 +16,7 @@
     height: 56px;
     padding: 0.6em 0 0 0.8em;
     .firstLetterFormat {
-      margin-top: 5px;
+      margin-top: 3px;
       width: 27px;
       height: 27px;
       line-height: 27px;
@@ -29,6 +29,9 @@
       color: darkgrey;
       width: 10%;
       text-align: center;
+      &:before{
+        top: -2px !important;
+      }
     }
     .recipientsInfo {
       width: 75%;

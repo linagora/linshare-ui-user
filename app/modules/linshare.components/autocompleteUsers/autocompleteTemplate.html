@@ -1,21 +1,31 @@
-<div class="chat-search">
-  <div class="fg-line" x-ng-class="{'has-error' : autocompleteUsersVm.onError()}" >
+<div class="chat-search autocomplete-search-ctn">
+  <div class="fg-line"
+       x-ng-class="{'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)}" >
     <input id="focusInputShare" name="{{autocompleteUsersVm.name}}" type="text" class="form-control"
            placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
            autocomplete="off"
            x-ng-model="autocompleteUsersVm.selectedUser"
+           x-ng-blur="autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail()"
            x-ng-required="autocompleteUsersVm.required()"
            x-typeahead-min-length="3"
            x-typeahead-on-select="autocompleteUsersVm.onSelect()"
            x-typeahead-wait-ms="30"
            x-typeahead-loading="searchingContact"
            x-typeahead-editable="false"
-           x-typeahead-no-results="noResult"
+           x-typeahead-no-results="autocompleteUsersVm.noResult"
            x-typeahead-input-formatter="angular.noop"
            x-uib-typeahead="u as autocompleteUsersVm.userRepresentation(u)
                             for u in autocompleteUsersVm.searchUsersAccount($viewValue) | limitTo:3">
-    <span x-ng-show="autocompleteUsersVm.onError()">
+    <span x-ng-show="autocompleteUsersVm.onErrorEmpty()">
       {{"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMPTY_LIST" | translate}}
     </span>
+    <span x-ng-show="autocompleteUsersVm.withEmail && !autocompleteUsersVm.isEmail">
+      {{"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMAIL" | translate}}
+    </span>
   </div>
+  <button type="button" class="right-inline-btn waves-effect"
+          x-ng-click="autocompleteUsersVm.onSelect()"
+          x-ng-show="autocompleteUsersVm.withEmail">
+    <i class="zmdi zmdi-plus"></i>
+  </button>
 </div>

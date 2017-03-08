@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!guestObject.form.activateEditors">
-          <x-ng-form name="editors" role="form" class="clearfix">
+          <x-ng-form name="editors" role="form" class="clearfix no-right-inline-btn">
             <div class="form-group fg-line">
               <div ls-autocomplete-user="USERS" data-selected-users-list="guestObject.editorsContacts">
               </div>
@@ -180,7 +180,7 @@
           </div>
         </div>
         <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!guestObject.form.activateRestricted">
-          <x-ng-form name="restrict" role="form" class="clearfix m-0">
+          <x-ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
             <div class="form-group fg-line">
               <div ls-autocomplete-user="USERS" data-selected-users-list="guestObject.restrictedContacts"
                    data-is-required="guestObject.form.activateUserSpace && guestObject.form.activateRestricted"

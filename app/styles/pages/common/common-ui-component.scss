@@ -697,3 +697,56 @@ li.dp-actions {
     font-size: 0.9em;
   }
 }
+
+
+/**********************
+ AUTOCOMPLETE WITH PLUS BTN
+***********************/
+
+.autocomplete-search-ctn {
+  display : flex;
+  > .fg-line {
+    flex : 1 1 100%;
+  }
+}
+
+
+/**********************
+ ANIMATION SEARCH BAR MAGNIFYING GLASS
+***********************/
+
+.fg-line.fg-toggled {
+  .form-control:focus{
+    background-position: -30px center !important;
+  }
+}
+
+.right-inline-btn{
+  font-size: 1.4em;
+  color: $btnIcon;
+  width: 27px;
+  height: 27px;
+  vertical-align: middle;
+  text-align: center;
+  padding-top: 1px;
+  display: flex;
+  -webkit-flex: 0 0 32px;
+  -ms-flex: 0 0 32px;
+  flex: 0 0 28px;
+  border: 1px solid $inputGrayBorder;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  top: 3px;
+}
+
+.fg-line:not(.disabled):after, .fg-line:not(.readonly):after {
+  height :1px;
+}
+
+// hide add button class
+.no-right-inline-btn {
+  .right-inline-btn {
+    display: none;
+  }
+}

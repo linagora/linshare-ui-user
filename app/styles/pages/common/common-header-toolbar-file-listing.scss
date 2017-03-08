@@ -598,3 +598,18 @@
     }
   }
 }
+
+.input-group:not(.input-group-lg):not(.input-group-sm).search-bar .actions{
+  a.input-group-addon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    min-width: 30px;
+    vertical-align: middle;
+    line-height: 25px;
+    i{
+      font-size: 0.95em;
+    }
+  }
+}

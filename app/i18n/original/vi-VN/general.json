@@ -69,6 +69,7 @@
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Tìm kiếm người dùng",
+      "TBT__INVALID_EMAIL": "",
       "TBT__INVALID_EMPTY_LIST": ""
     }
   },

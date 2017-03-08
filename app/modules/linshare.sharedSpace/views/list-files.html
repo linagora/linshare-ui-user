@@ -201,25 +201,27 @@
                   </div>
                 </div>
               </div>
-              <span uib-dropdown dropdown-append-to-body
-                    auto-close="outsideClick" hover-dropdown-fix
-                    class="input-group-addon last clickable dropdown"
-                    x-ng-click="advancedFilterBool = !advancedFilterBool"
-                    uib-dropdown-toggle
-                    data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}">
-                <i class="zmdi hidden-xs clickable"
-                   x-ng-class="{'zmdi-settings': !advancedFilterBool, 'zmdi-chevron-up active-link': advancedFilterBool}">
-                </i>
-                <ul uib-dropdown-menu="" class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon
+              <div class="actions">
+                <a uib-dropdown dropdown-append-to-body
+                   auto-close="outsideClick" hover-dropdown-fix
+                   class="input-group-addon last clickable dropdown"
+                   x-ng-click="advancedFilterBool = !advancedFilterBool"
+                   uib-dropdown-toggle
+                   data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate }}">
+                  <i class="zmdi hidden-xs clickable"
+                     x-ng-class="{'zmdi-settings': !advancedFilterBool, 'zmdi-chevron-up active-link': advancedFilterBool}">
+                  </i>
+                  <ul uib-dropdown-menu="" class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left">
-                 <!-- FILTER COMPONENT  -->
-                  <filtering-component class="clearfix" class="clearfix" ls-size="true" ls-date="true"
-                                       filtered-items-list="sharedSpaceListVm.itemsList"
-                                       initial-items-list="sharedSpaceListVm.itemsListCopy"
-                                       reload-items="sharedSpaceListVm.tableParams.reload">
-                  </filtering-component>
-                </ul>
-              </span>
+                    <!-- FILTER COMPONENT  -->
+                    <filtering-component class="clearfix" class="clearfix" ls-size="true" ls-date="true"
+                                         filtered-items-list="sharedSpaceListVm.itemsList"
+                                         initial-items-list="sharedSpaceListVm.itemsListCopy"
+                                         reload-items="sharedSpaceListVm.tableParams.reload">
+                    </filtering-component>
+                  </ul>
+                </a>
+              </div>
             </div>
           </div>
         </div>

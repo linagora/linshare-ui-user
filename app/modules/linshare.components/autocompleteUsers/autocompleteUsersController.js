@@ -18,9 +18,12 @@
    */
   function AutocompleteUsersController($log, $scope, $q, autocompleteUserRestService, growlService) {
     var autocompleteUsersVm = this;
+    var regexpEmail = /^\S+@\S+\.\S+$/;
 
     autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
-    autocompleteUsersVm.onError = onError;
+    autocompleteUsersVm.isEmail = true;
+    autocompleteUsersVm.onErrorEmail = onErrorEmail;
+    autocompleteUsersVm.onErrorEmpty = onErrorEmpty;
     autocompleteUsersVm.onSelect = onSelect;
     autocompleteUsersVm.required = required;
     autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
@@ -94,12 +97,28 @@
     }
 
     /**
-     *  @name onError
-     *  @desc Evaluate if the element is on error
+     *  @name onErrorEmail
+     *  @desc Evaluate if the element is on error because of an invalid email
      *  @returns {Boolean}
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
-    function onError() {
+    function onErrorEmail() {
+      var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
+      if (autocompleteUsersVm.withEmail && autocompleteUsersVm.noResult && !_.isUndefined(viewValue)) {
+        if (viewValue.length >== 3) {
+          return !regexpEmail.test(viewValue);
+        }
+      }
+      return false;
+    }
+
+    /**
+     *  @name onErrorEmpty
+     *  @desc Evaluate if the element is on error because of an empty list
+     *  @returns {Boolean}
+     *  @memberOf LinShare.components.AutocompleteUsersController
+     */
+    function onErrorEmpty() {
       return ((autocompleteUsersVm.form[autocompleteUsersVm.name].$touched || autocompleteUsersVm.form.$submitted) &&
         autocompleteUsersVm.form[autocompleteUsersVm.name].$invalid && autocompleteUsersVm.required());
     }
@@ -111,9 +130,21 @@
      */
     function onSelect() {
       if (autocompleteUsersVm.selectedUser) {
-        autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser, autocompleteUsersVm.selectedUsersList);
+        autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser,
+          autocompleteUsersVm.selectedUsersList);
       } else {
-        growlService.notifyTopRight('GROWL_ALERT.WARNING.INVALID_EMAIL', 'danger');
+        var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
+        if (autocompleteUsersVm.withEmail ) {
+          if (regexpEmail.test(viewValue)) {
+            autocompleteUsersVm.searchUsersAccount(viewValue).then(function(data) {
+              autocompleteUsersVm.selectedUser = data[0]
+              autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser,
+                autocompleteUsersVm.selectedUsersList);
+            });
+          } else {
+            autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
+          }
+        }
       }
     }
 
@@ -142,13 +173,14 @@
         // TODO : IAB : stop searching in back if external email detected
         autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
           // TODO : IAB : strong email validation (for this one and all other)
-          if (data.length === 0 && autocompleteUsersVm.withEmail && /^\S+@\S+\.\S+$/.test(pattern)) {
+          if (data.length === 0 && autocompleteUsersVm.withEmail && regexpEmail.test(pattern)) {
             data.push({
               mail: pattern,
               identifier: pattern,
               type: 'simple'
             });
           }
+          autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
           deferred.resolve(data);
         });
         return deferred.promise;

@@ -54,7 +54,7 @@
       </div>
     </div>
     <form role="form" class="clearfix">
-      <div class="form-group fg-line">
+      <div class="form-group fg-line p-l-15">
         <div ls-autocomplete-user="SHARING" data-on-select-function="shareActionVm.newShare.addRecipient"></div>
       </div>
     </form>
@@ -63,7 +63,7 @@
       <div class="custom-list-item"
            x-ng-repeat="recipient in shareActionVm.newShare.getRecipients() | orderBy : '-' as results"
            tooltip-placement="bottom" tooltip-popup-delay="700"
-           uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.domain || recipient.mail}}">
+           uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
         <p class="pull-left circle-ctn">
           <span x-ng-show="recipient.domain" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
           <span x-ng-show="!recipient.domain" class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
@@ -115,7 +115,7 @@
       <div class="datepicker-border-fix date-picker dp-blue col-xs-6 datepicker-drop-right"
            x-ng-class="{'is-opened': opened == true}">
         <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
-          <div class="form-inline ">
+          <div class="form-inline">
             <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
                    class="form-control date-picker-input" datepicker-popup="{{format}}"
                    show-weeks="false"

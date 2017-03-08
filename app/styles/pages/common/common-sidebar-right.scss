@@ -438,7 +438,7 @@ md-content #content-ctn-sidebar {
         margin: 0;
       }
       p:first-child {
-        color: #a7a7a7;
+        color: #939393;
         font-size: 0.9em;
       }
       p:nth-child(2) {
@@ -489,10 +489,12 @@ STANDARD CONTENT
       padding-left: 0;
       display: inline-block;
       margin-right: 0;
-      font-size: 1.1em;
+      font-size: 0.95em;
       padding-right: 0.1em;
+      margin-bottom: 2px;
       &.groups-user-group, i span.groups-user-group {
         font-size: 0.85em;
+        margin-bottom: 2px;
       }
     }
   }
@@ -528,6 +530,7 @@ STANDARD CONTENT
     padding-bottom: 1em !important;
   }
 }
+
 
 /**********************
  SIDEBAR USER LISTING

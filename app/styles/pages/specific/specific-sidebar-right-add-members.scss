@@ -81,9 +81,10 @@
   display: -webkit-flex;
   display: flex;
   .dropdown-filters {
-    flex: 0 0 45px;
+    flex: 0 0 30px;
+    height: 30px;
     display: flex;
-    border: 1px solid #f0f0f0;
+    border: 1px solid $inputGrayBorder;
     justify-content: center;
     align-items: center;
     .dropdown {
@@ -98,6 +99,13 @@
         display: block;
         padding: 0.4em;
       }
+    }
+    button {
+      background-color: transparent;
+      box-shadow: none;
+      height: 100%;
+      width: 100%;
+      border: none;
     }
   }
   .search-style {

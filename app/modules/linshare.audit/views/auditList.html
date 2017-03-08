@@ -138,28 +138,43 @@
                  id="fixed-activity-table-height" data-ng-table="auditVm.tableParams" show-filter="true">
             <tr data-ng-repeat="auditAction in $data" data-ng-cloak check-table-height>
               <td data-title="'TABLE_HEADER.ACTOR' | translate" data-filter="{authorName :'text'}"
-                  data-sortable="'authorName'">
+                  data-sortable="'authorName'" class="truncate"
+                  uib-tooltip="{{auditAction.authorName | translate}}"
+                  tooltip-placement="bottom"
+                  tooltip-popup-delay='650'>
                 {{auditAction.authorName | translate}}
               </td>
               <td data-title="'TABLE_HEADER.ACTION' | translate" data-filter="{translatedAction :'select'}"
-                  filter-data="auditVm.tableFilterAction" data-sortable="'translatedAction'">
+                  filter-data="auditVm.tableFilterAction" data-sortable="'translatedAction'" class="truncate"
+                  uib-tooltip="{{auditAction.translatedAction | translate}}"
+                  tooltip-placement="bottom"
+                  tooltip-popup-delay='650'>
                 {{auditAction.translatedAction}}
               </td>
               <td data-title="'TABLE_HEADER.RESOURCE_TYPE' | translate" data-filter="{translatedType :'select'}"
-                  filter-data="auditVm.tableFilterType" data-sortable="'translatedType'">
+                  filter-data="auditVm.tableFilterType" data-sortable="'translatedType'" class="truncate"
+                  uib-tooltip="{{auditAction.translatedType | translate}}"
+                  tooltip-placement="bottom"
+                  tooltip-popup-delay='650'>
                 {{auditAction.translatedType}}
               </td>
               <td data-title="'TABLE_HEADER.RESOURCE_NAME' | translate" data-filter="{resourceName :'text'}"
-                  data-sortable="'resourceName'">
+                  data-sortable="'resourceName'" class="truncate"
+                  uib-tooltip="{{auditAction.resourceName | translate}}"
+                  tooltip-placement="bottom"
+                  tooltip-popup-delay='650'>
                 {{auditAction.resourceName}}
               </td>
               <td data-title="'TABLE_HEADER.RECIPIENT' | translate" data-filter="{'shareRecipient' :'text'}"
-                  data-sortable="'shareRecipient'">
+                  data-sortable="'shareRecipient'" class="truncate"
+                  uib-tooltip="{{auditAction.shareRecipient | translate}}"
+                  tooltip-placement="bottom"
+                  tooltip-popup-delay='650'>
                 {{auditAction.shareRecipient}}
               </td>
               <td data-title="'TABLE_HEADER.DATE' | translate" data-sortable="'creationDate'">
                 <span tooltip-placement="bottom" tooltip-popup-delay="300"
-                      uib-tooltip="{{auditAction.creationDate | calendarTime}}">
+                      uib-tooltip="{{auditAction.creationDate | calendarTime}}" class="truncate">
                   {{auditAction.creationDate | relativeTime}}
                 </span>
               </td>

@@ -2,9 +2,9 @@
   "SWEET_ALERT": {
     "ON_FILE_DELETE": {
       "TITLE": "Are you sure?",
-      "TEXT": "You are about to remove files !",
-      "CONFIRM_BUTTON": "Yes, delete it!",
-      "CANCEL_BUTTON": "Cancel!"
+      "TEXT": "You are about to remove files ! Beware, this action cannot be undone.",
+      "CONFIRM_BUTTON": "Yes, delete them",
+      "CANCEL_BUTTON": "Cancel"
     },
     "ON_LOCALSTORAGE_DELETE": {
       "TITLE": "Are you sure?",
@@ -14,8 +14,8 @@
       "IS_CLEARED": "LocalStorage is cleared"
     },
     "ON_MULTIPLE_DOWNLOAD": {
-      "TITLE": "Multiple downloads are currently unavailable",
-      "TEXT": "Sorry the multiple downloads feature is under construction",
+      "TITLE": "Multiple download are currently unavailable",
+      "TEXT": "Sorry the multiple download feature is under construction.",
       "CONFIRM_BUTTON": "OK"
     }
   },
@@ -58,7 +58,7 @@
       "ERROR_403": "You are not authorized to delete this document",
       "ERROR_400": "The request couldn't be achieved",
       "ERROR_500": "Server error",
-      "ISOLATED_FILE": "Isolation mode activated: you are currently viewing a restricted file selection"
+      "ISOLATED_FILE": "Isolation mode activated: you are currently viewing a restricted file selection."
     }
   }
 }

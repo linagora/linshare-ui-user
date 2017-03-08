@@ -69,6 +69,7 @@
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Rechercher des utilisateurs",
+      "INVALID_EMAIL": "L'adresse de courriel saisie est invalide",
       "INVALID_EMPTY_LIST": "Cette liste ne peut être vide."
     }
   },
@@ -145,7 +146,7 @@
   "LINK_DISABLED": "Lien inactif",
   "LOGIN": {
     "CONNECTION_LINK": "Se connecter",
-    "COPYRIGHT": "Vous utilisez la version libre et gratuite de LinShare™, développé par , Linagora © 2009–2016.Contribuez à la R&D du produit en souscrivant à une offre entreprise.",
+    "COPYRIGHT": "Vous utilisez la version libre et gratuite de LinShare™, développé par : Linagora © 2009–2017.Contribuez à la R&D du produit en souscrivant à une offre entreprise.",
     "EMAIL_PLACEHOLDER": "Courriel",
     "FORGOTTEN_PASSWORD": "Mot de passe oublié ?",
     "KEEP_SIGNED": "Rester connecté",
