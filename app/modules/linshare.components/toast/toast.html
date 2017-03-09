@@ -1,0 +1,35 @@
+<md-toast class="toast-dynamic-height white-toast-panel ls-toast"
+          x-ng-init="openDetails = false;"
+          x-ng-class="{'anim-toast' : openDetails , 'toast-type-error' : toastError}">
+  <div>
+    <div class="toast-upper-panel">
+      <div class="toast-icon-area">
+        <span class="zmdi zmdi-alert-circle-o" x-ng-show="toastError"></span>
+        <span class="zmdi zmdi-check" x-ng-show="toastSuccess"></span>
+        <span class="zmdi zmdi-info-outline" x-ng-show="toastInfo"></span>
+        <span class="zmdi zmdi-alert-circle-o" x-ng-show="toastWarning"></span>
+      </div>
+      <div class="md-toast-text" flex x-ng-class="{'toast-single-btn' : actionLabel}">
+        <span>{{toastText}}</span>
+        <a class="md-highlight toast-inline-link" x-ng-show="toastDetails" x-ng-click="openDetails = !openDetails">
+          {{"TOAST_ALERT.ACTION.DETAILS" | translate}}
+        </a>
+      </div>
+      <md-button x-ng-show="toastLabel" x-ng-click="toastClose(toastVm)">{{toastLabel}}</md-button>
+      <md-button class="close-button m-0" x-ng-show="!toastLabel" x-ng-click="toastClose(toastVm)">
+        <i class="zmdi zmdi-close"></i>
+      </md-button>
+    </div>
+    <!-- Detail dynamic area-->
+    <div class="toast-details-ctn delete-file-toast" x-ng-show="toastDetails"
+          x-ng-class="{'anim-toast' : openDetails}">
+      <div class="toast-details-item" x-ng-repeat="detail in toastDetails track by $index">
+        <p class="toast-item-filename">{{detail.title}}</p>
+        <p class="toast-item-error">
+          <span class="toast-error-code">{{detail.prefix}} </span>
+          <span class="toast-error-message">{{detail.message}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</md-toast>

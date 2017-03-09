@@ -50,7 +50,7 @@
   "TOAST_ALERT": {
     "ACTION": {
       "CLOSE": "Fermer",
-      "INFO_ERROR_FILE": "Détails"
+      "DETAILS": "Détails"
     },
     "WARNING": {
       "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",

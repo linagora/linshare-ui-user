@@ -50,7 +50,7 @@
   "TOAST_ALERT": {
     "ACTION": {
       "TBT_CLOSE": "",
-      "TBT_ISOLATED_FILE": ""
+      "TBT_DETAILS": ""
     },
     "WARNING": {
       "TBT_ELEMENTS_NOT_DELETED": "",
@@ -59,7 +59,7 @@
       "TBT_ERROR_403": "",
       "TBT_ERROR_400": "",
       "TBT_ERROR_500": "",
-      "TBT_ISOLATED_FILE":"",
+      "TBT_ISOLATED_FILE":""
     }
   }
 }
