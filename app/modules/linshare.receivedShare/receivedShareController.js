@@ -403,22 +403,6 @@ angular.module('linshare.receivedShare')
       $scope.documentsListCopy = receivedFiles;
       $scope.documentsList = receivedFiles;
 
-      $scope.tableParams = new NgTableParams({
-        page: 1,
-        sorting: {modificationDate: 'desc'},
-        count: 10,
-        filter: $scope.paramFilter
-      }, {
-        getData: function(params) {
-          var filteredData = params.filter() ?
-            $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
-          var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-
-          params.total(orderedData.length);
-          return (orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-
       $scope.deleteDocuments = function(items) {
         documentUtilsService.deleteDocuments(items, deleteCallback);
       };
