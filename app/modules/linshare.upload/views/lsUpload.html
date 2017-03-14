@@ -24,18 +24,18 @@
   </div>
   <section class="visible-xs col-xs-12 header-mobile-upload">
     <div class="m-t-5">
-     <span x-ng-class="{'active' : uploadQueueVm.isFromMySpace , 'left-elem-toggle-inactive' :
-          !uploadQueueVm.isFromMySpace}" class="toggle-pill">
-          <a x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
-            {{"MENU_TITLE.FILES" | translate}}
-          </a>
-     </span>
-      <span x-ng-class="{'active' : !uploadQueueVm.isFromMySpace , 'right-elem-toggle-inactive' :
-           uploadQueueVm.isFromMySpace}" class="toggle-pill">
-          <a x-ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">
-            {{"MENU_TITLE.SHARED_SPACE" | translate}}
-          </a>
-     </span>
+      <span x-ng-class="{'active active-left' : uploadQueueVm.isFromMySpace,
+           'left-elem-toggle-inactive' : !uploadQueueVm.isFromMySpace}" class="toggle-pill">
+       <a x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
+         {{"MENU_TITLE.FILES" | translate}}
+       </a>
+      </span>
+      <span x-ng-class="{'active active-right' : !uploadQueueVm.isFromMySpace,
+            'right-elem-toggle-inactive' : uploadQueueVm.isFromMySpace}" class="toggle-pill">
+        <a x-ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">
+          {{"MENU_TITLE.SHARED_SPACE" | translate}}
+        </a>
+      </span>
     </div>
   </section>
   <div id="breadcrumb-wrap" class="clear-floats">
@@ -155,21 +155,18 @@
           </a>
         </div>
       </div>
-      <div class="pull-right m-r-20">
-          <span
-            x-ng-class="{'active' : uploadQueueVm.isFromMySpace , 'left-elem-toggle-inactive'
-             : !uploadQueueVm.isFromMySpace}" class="toggle-pill">
+      <div class="pull-right">
+        <span x-ng-class="{'active active-left': uploadQueueVm.isFromMySpace,
+            'left-elem-toggle-inactive': !uploadQueueVm.isFromMySpace}" class="toggle-pill">
             <a x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
               {{"MENU_TITLE.FILES" | translate}}
             </a>
           </span>
-        <span
-          x-ng-class="{'active' : !uploadQueueVm.isFromMySpace , 'right-elem-toggle-inactive'
-           : uploadQueueVm.isFromMySpace}"
-          class="toggle-pill">
-          <a x-ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">
-          {{"MENU_TITLE.SHARED_SPACE" | translate}}
-          </a>
+        <span x-ng-class="{'active active-right': !uploadQueueVm.isFromMySpace,
+             'right-elem-toggle-inactive': uploadQueueVm.isFromMySpace}" class="toggle-pill">
+             <a x-ng-href="{{$state.href('documents.upload', {from: workgroupPage})}}">
+              {{"MENU_TITLE.SHARED_SPACE" | translate}}
+             </a>
         </span>
       </div>
     </div>
