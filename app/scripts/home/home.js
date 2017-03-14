@@ -9,14 +9,29 @@
     .module('linshareUiUserApp')
     .controller('HomeController', homeController);
 
-  homeController.$inject = ['$scope', '$timeout', '$translatePartialLoader', 'lsAppConfig'];
+  homeController.$inject = ['$scope', '$timeout', '$translate', '$translatePartialLoader', 'lsAppConfig', 'welcomeMessageRestService'];
 
   /**
    * @namespace homeController
    * @desc Application home management system controller
    * @memberOf linshareUiUserApp
    */
-  function homeController($scope, $timeout, $translatePartialLoader, lsAppConfig) {
+  function homeController($scope, $timeout, $translate, $translatePartialLoader, lsAppConfig, welcomeMessageRestService) {
+    const LANG_CONVERTER = {
+      ENGLISH: {
+        lang: 'ENGLISH',
+        key: lsAppConfig.lang.en
+      },
+      FRENCH: {
+        lang: 'FRENCH',
+        key: lsAppConfig.lang.fr
+      },
+      VIETNAMESE: {
+        lang: 'VIETNAMESE',
+        key: lsAppConfig.lang.vi
+      }
+    };
+
     $scope.lsAppConfig = lsAppConfig;
     $scope.fab = {
       isOpen: false,
@@ -57,6 +72,16 @@
             angular.element('#content-container').removeClass('setDisabled');
           }, 250);
         }
+      });
+
+      getWelcomeMessage();
+    }
+
+    function getWelcomeMessage() {
+      welcomeMessageRestService.getList().then(function(data) {
+        var lang_object = _.find(LANG_CONVERTER, {key: $translate.use()});
+        var lang = lang_object ? lang_object.lang : 'ENGLISH';
+        $scope.welcomeMessage = data[0][lang];
       });
     }
   }
