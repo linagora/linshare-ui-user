@@ -123,9 +123,8 @@
 
   <div class="bottom-container">
     <div>
-      <h2>{{"WELCOME" | translate}}</h2>
       <div class="content-section custom-home-page-txt">
-        <p>{{welcomeMessage}}</p>
+        <div ng-bind-html="welcomeMessage"></div>
       </div>
     </div>
     <h2 x-ng-show="linshareModeProduction == false">Notifications</h2>

@@ -151,13 +151,30 @@
   }
 }
 
-/**********************
-    HOME PAGE BOTTOM NOTIFICATIONS
+
+/***********
+HOME PAGE BOTTOM NOTIFICATIONS
 ***********************/
 
 .bottom-container {
-  h2 {
+  > h2 {
     margin-left: 1.4em;
+  }
+  .content-section.custom-home-page-txt{
+    h2 {
+      margin-left: 0;
+    }
+    p{
+      margin-bottom: 15px;
+      line-height: 160%;
+    }
+    p + ul {
+      margin-top: -13px;
+      margin-bottom: 20px;
+      padding-left: 2em;
+    }
+  }
+  h2 {
     color: #656565;
     letter-spacing: 0.01em;
     font-weight: normal;
