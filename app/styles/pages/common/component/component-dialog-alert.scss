@@ -33,25 +33,25 @@
     padding: 0em 1em 0em;
   }
   button.cancel {
-    background-color: #ffffff;
-    color: #757575;
+    background-color: $btnDefaultBg;
+    color: $btnDefaultTxt;
     transition : all 200ms ease-in-out;
     margin: 0px;
     border-right: solid 1px #eee;
     &:hover {
       background-color: transparent;
-      color :#929292;
+      color: $btnDefaultTxtHover;
     }
   }
 
   button.confirm{
     transition: all 150ms ease-in-out ;
-    color: #008eff;
+    color: $btnPrimaryBg;
     transition: all 150ms ease-in-out;
     background-color: transparent !important;
     box-shadow: none !important;
     &:hover{
-      color: #54b3ff;
+      color: $btnPrimaryBgHover;
     }
   }
 

@@ -210,7 +210,7 @@ CHOSEN CUSTOM OVERIDE
 POPOVER ADD BUTTON OVERIDE
 ***********************/
 
-.menu-popover-ctn {
+.menu-popover-flyout-ctn {
   .popover-inner {
     .popover-title {
       display: none;
@@ -227,7 +227,8 @@ POPOVER ADD BUTTON OVERIDE
       vertical-align: middle;
       margin-top: 1em;
       margin-bottom: 1em;
-      color: #688eb7;
+      color: $btnPopoverAdd;
+      transition: 300ms color ease-in-out;
       i {
         display: block;
         text-align: center;
@@ -241,6 +242,15 @@ POPOVER ADD BUTTON OVERIDE
         text-transform: capitalize;
         text-align: center;
       }
+      &:hover,
+      &:hover .groups-folder .path2:before,
+      .groups-shared-folder .path2:before{
+        color: $btnPopoverAddHover;
+      }
+    }
+    .groups-folder .path2:before,
+    .groups-shared-folder .path2:before {
+      transition: 300ms color ease-in-out;
     }
     .popover-content {
       width: 236px;
@@ -251,10 +261,10 @@ POPOVER ADD BUTTON OVERIDE
   }
 }
 
-.menu-popover-ctn div.popover.bottom {
-  left: 0 !important;
-  top: 44px !important;
+div.menu-popover-flyout-ctn.popover.bottom {
+  margin-top: -1px !important;
   border: solid 1px #ddd;
+  margin-left: 91px;
   > .arrow {
     left: 10%;
     border-bottom-color: #dddddd !important;

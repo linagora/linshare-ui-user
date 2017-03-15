@@ -15,9 +15,9 @@
         <i class="fa fa-check-square-o"></i>
       </a>
     </div>
-    <div class="exit-selection" x-ng-click="resetSelectedDocuments()"
+    <div class="exit-selection actions" x-ng-click="resetSelectedDocuments()"
          title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
-      <i class="zmdi zmdi-close"></i>
+      <a><i class="zmdi zmdi-close"></i></a>
     </div>
     <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
       <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
@@ -70,7 +70,7 @@
             </span>
     </div>
   </div>
-  <div class="drag-and-drop-ctn reset-content-width hidden-xs drag-n-drop-height" check-table-height>
+  <div class="drag-and-drop-ctn collapsible-content reset-content-width hidden-xs drag-n-drop-height" check-table-height>
     <div class="drag-and-drop-content">
       <div class="drag-icon-ctn ">
         <div class="bordered-circle">&nbsp;</div>

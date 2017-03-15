@@ -63,10 +63,7 @@ body:not(.sw-toggled) #sidebar {
     > li > a {
       font-weight: 500;
       &:hover {
-        color: #4285F4;
         background-color: rgb(238, 238, 238);
-        /*background-color: #F4F4F4;*/
-        font-weight: bold;
         cursor: pointer;
       }
       i {
@@ -80,7 +77,6 @@ body:not(.sw-toggled) #sidebar {
       font-weight: 400;
       &:hover {
         background-color: rgb(238, 238, 238);
-        color: #4285F4;
       }
       &.disabled {
         cursor: not-allowed;
@@ -102,12 +98,10 @@ body:not(.sw-toggled) #sidebar {
 }
 
 #sidebar .main-menu > li.sub-menu > ul > li > a,
-#sidebar .main-menu > li > a {
+#sidebar .main-menu > li > a,
+#sidebar .main-menu > li > a i {
   background-color: rgba(255, 255, 255, 0);
-  -webkit-transition: all 250ms ease-in-out;
-  -o-transition: all 250ms ease-in-out;
-  -moz-transition: all 250ms ease-in-out;
-  transition: all 250ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 #sidebar .main-menu > li.sub-menu > ul > li > a.active,

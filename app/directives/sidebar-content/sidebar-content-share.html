@@ -3,9 +3,9 @@
      x-ng-click="shareActionVm.closeSideBar();
                 !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments()"></i>
   <h2 class="header-more-options">{{'RIGHT_PANEL.DETAILS.QUICK_SHARE' | translate}}</h2>
-  <span class="hidden-xs">
-      <i class="zmdi zmdi-close zmdi-hc-lg" x-ng-click="shareActionVm.closeSideBar()"></i>
-    </span>
+  <span class="hidden-xs actions" x-ng-click="shareActionVm.closeSideBar()">
+    <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+  </span>
 </div>
 
 <div class="num-items-section-ctn">

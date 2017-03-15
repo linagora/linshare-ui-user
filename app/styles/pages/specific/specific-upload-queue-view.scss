@@ -337,6 +337,11 @@
   z-index: 4;
 }
 
+.actions-upload-queue .disabled-work-in-progress i {
+  color: #d8d8d8 !important;
+  pointer-events: none !important;
+}
+
 /**********************
   RESPONSIVE
 ***********************/

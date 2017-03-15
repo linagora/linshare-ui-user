@@ -262,15 +262,20 @@
     display: block;
   }
   .exit-selection {
-    height: 19px;
-    width: 18px;
+    height: 30px;
+    width: 30px;
     float: right;
     margin-right: 10px;
-    top: 15px;
-    margin-top: -5px;
     cursor: pointer;
     font-size: 2em;
-    vertical-align: top;
+    vertical-align: middle;
+    margin-top: -5px;
+    a {
+      display: block;
+      padding-top: 0;
+      vertical-align: middle;
+      line-height: 26px;
+    }
   }
   .toggle-checkbox-toolbar {
     height: 19px;
@@ -425,6 +430,7 @@
     cursor: pointer;
     padding-left: 15px;
     font-size: 0.95em;
+    transition: color 200ms ease-in-out;
     i {
       font-size: 1.05em;
     }
@@ -439,8 +445,8 @@
       overflow: hidden;
       vertical-align: middle;
       white-space: nowrap;
-      transition: all 200ms ease-in-out;
-      transition-delay: 250ms;
+      transition: max-width 200ms ease-in-out  250ms;
+      transition: color 200ms ease-in-out;
     }
   }
 }

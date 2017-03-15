@@ -125,14 +125,22 @@ SIDEBAR RIGHT CONTAINER
     text-align: center;
     text-transform: uppercase;
   }
-  .zmdi-close {
+  .actions {
     position: absolute;
-    top: 19px;
-    right: 10px;
-    font-size: 1.7em;
-    cursor: pointer;
-    color: $textColorDark;
+    top: 10px;
+    right: 5px;
+    line-height: 5px;
+    > a {
+      padding-top: 0;
+      line-height: 35px;
+      .zmdi-close {
+        font-size: 1.7em;
+        cursor: pointer;
+        color: $textColorDark;
+      }
+    }
   }
+
   .zmdi-chevron-left {
     position: absolute;
     left: 0;

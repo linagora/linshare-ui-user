@@ -5,7 +5,7 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
-          <div class="menu-popover-ctn hidden-xs clickable">
+          <div class="menu-popover-ctn hidden-xs clickable waves-effect">
             <a class="add-menu-group"
                x-ng-click="contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.createContactsList() :
                 contactsListsListVm.goToMineAndCreateContactsList()">
@@ -253,9 +253,9 @@
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
-          <div class="exit-selection" x-ng-click="contactsListsListVm.resetSelectedDocuments()"
+          <div class="exit-selection actions" x-ng-click="contactsListsListVm.resetSelectedDocuments()"
                title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
-            <i class="zmdi zmdi-close"></i>
+            <a><i class="zmdi zmdi-close"></i></a>
           </div>
           <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
             <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
@@ -399,8 +399,10 @@
                 <span class="zmdi zmdi-account-box-phone"></span>
               </span>
             </div>
-            <h1>{{'BACKGROUND_CONTACTS_TITLE_MSG' | translate}}</h1>
-            <p>{{'BACKGROUND_CONTACTS_MSG' | translate}}</p>
+            <div class="dnd-txt-content">
+              <h1>{{'BACKGROUND_CONTACTS_TITLE_MSG' | translate}}</h1>
+              <p>{{'BACKGROUND_CONTACTS_MSG' | translate}}</p>
+            </div>
           </div>
         </div>
         <script type="text/ng-template" id="checkboxheader.html">

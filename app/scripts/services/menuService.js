@@ -163,14 +163,6 @@
      * @memberOf linshareUiUserApp.menuService
      */
     function getProperties(currentState, isSubMenu) {
-      if (!isSubMenu) {
-        if (currentState.indexOf('transfert') > -1 || currentState.indexOf('documents') > -1) {
-          return {
-            color: '#2196F3'
-          };
-        }
-      }
-
       var selectedMenu = null;
       _.forEach(tabs, function(tab) {
         if (!_.isUndefined(tab.links)) {

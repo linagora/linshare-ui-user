@@ -9,11 +9,9 @@
       {{mainVm.sidebar.getData().selectedGuest.form.display.firstName}}
       {{mainVm.sidebar.getData().selectedGuest.form.display.lastName}}
     </h2>
-    <span class="hidden-xs">
-        <i class="zmdi zmdi-close zmdi-hc-lg"
-           x-ng-click="mainVm.sidebar.hide()">
-        </i>
-      </span>
+    <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide()">
+      <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+    </span>
   </div>
   <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail"
        x-ng-class="{'two-tabs': mainVm.sidebar.getData().currentPage === 'guests-list'}">

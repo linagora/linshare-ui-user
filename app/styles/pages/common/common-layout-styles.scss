@@ -496,3 +496,90 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
 .content-toggled #copyright-content-ctn.set-width {
   width: calc(100% - 268px - 350px) !important;
 }
+
+
+/*
+** LinShare buttons & links styles
+*/
+
+// buttons
+.btn:not(.btn-link) {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+  transition: 250ms all ease-in-out;
+  &:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
+  }
+}
+
+.btn-default {
+  color: $btnDefaultTxt;
+  background-color: $btnDefaultBg;
+  &:hover:hover {
+    z-index: 5;
+    background-color: $btnDefaultBgHover;
+    color: $btnDefaultTxtHover;
+  }
+}
+
+.btn-primary {
+  color: $btnPrimaryTxt;
+  background-color: $btnPrimaryBg;
+  &:hover:hover {
+    background-color: $btnPrimaryBgHover;
+    color: $btnPrimaryTxtHover;
+  }
+}
+
+// links in right sidebar
+a.sidebar-link {
+  color: $btnPrimaryBgHover;
+  transition: 125ms all ease-in-out;
+  &:hover{
+    color: #165b92;
+    letter-spacing: 0.01em;
+  }
+}
+
+// buttons in auto-completes
+.right-inline-btn {
+  transition: 150ms all ease-in-out;
+  color: #3f3f3f;
+}
+
+.right-inline-btn:hover {
+  color: #000;
+  border-color: #d1d1d1;
+}
+
+// buttons on the edit description panel
+.edit-description{
+  border-bottom: solid 1px #e0e0e0 !important;
+  transition: 250ms border ease-in-out, 250ms color ease-in-out !important;
+  i {
+    color: #4c4c4c;
+  }
+}
+
+.edit-description:hover {
+  border: 1px solid #d4d4d4 !important;
+  i{
+    color: #000;
+  }
+}
+
+// links in toolbar
+#toolbar-actions span:hover a span,
+#toolbar-actions span:hover a{
+  transition: color 200ms ease-in-out;
+  color: #000 !important;
+}
+
+// hover icon single links
+.actions > a > i {
+  color: #a0a0a0;
+}
+
+.actions a:hover i {
+  transition: 250ms all ease-in-out;
+  color: #111 !important;
+}

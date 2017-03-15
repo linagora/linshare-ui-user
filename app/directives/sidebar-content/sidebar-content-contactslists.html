@@ -6,10 +6,8 @@
     <h2 class="header-more-options set-ellipsis">
       {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}
     </h2>
-    <span class="hidden-xs">
-      <i class="zmdi zmdi-close zmdi-hc-lg"
-         x-ng-click="mainVm.sidebar.hide();">
-      </i>
+    <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide()">
+      <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
   </div>
   <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs">

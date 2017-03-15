@@ -5,7 +5,7 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
-          <div class="menu-popover-ctn hidden-xs" x-ng-class="!contactsListsContactsVm.canManage ?
+          <div class="menu-popover-ctn hidden-xs waves-effect" x-ng-class="!contactsListsContactsVm.canManage ?
           'disabled-work-in-progress' : 'clickable'">
             <a class="add-menu-group" x-ng-click="contactsListsContactsVm.onAddContacts()">
               <i class="zmdi zmdi-plus"></i>
@@ -167,9 +167,9 @@
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
-          <div class="exit-selection" x-ng-click="contactsListsContactsVm.resetSelectedDocuments()"
+          <div class="exit-selection actions" x-ng-click="contactsListsContactsVm.resetSelectedDocuments()"
                title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
-            <i class="zmdi zmdi-close"></i>
+            <a><i class="zmdi zmdi-close"></i></a>
           </div>
           <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
             <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"

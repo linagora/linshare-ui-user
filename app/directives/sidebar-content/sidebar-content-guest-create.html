@@ -1,9 +1,8 @@
 <div class="header-sidebar">
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"></i>
   <h2 class="header-more-options">{{"SIDEBAR.TITLE.CREATE" | translate}}</h2>
-  <span class="hidden-xs">
-      <i class="zmdi zmdi-close zmdi-hc-lg"
-         x-ng-click="mainVm.sidebar.hide(createGuest, mainVm.sidebar.getData().guestObject)"></i>
+  <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide(createGuest, mainVm.sidebar.getData().guestObject)">
+      <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
   </span>
 </div>
 <div ls-guest-form x-guest-object="mainVm.sidebar.getData().guestObject" x-form-name="createGuest">

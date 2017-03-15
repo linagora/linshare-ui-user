@@ -99,7 +99,7 @@
         </i>
       </div>
     </section>
-    <div class="menu-popover-ctn hidden-xs"
+    <div class="menu-popover-ctn hidden-xs waves-effect"
          x-ng-class="!uploadQueueVm.isFromMySpace ? 'disabled-work-in-progress' : 'clickable'"
          flow-btn href="javascript:void(0)">
       <a class="add-menu-group" tabindex="0">
@@ -187,6 +187,9 @@
           <a x-ng-if="!uploadQueueVm.selectAll" class="select-all-items plain-text-button ng-scope">
             <i class="fa fa-check-square-o"></i>
           </a>
+        </div>
+        <div class="exit-selection actions" x-ng-click="uploadQueueVm.resetSelectedDocuments()">
+          <a><i class="zmdi zmdi-close"></i></a>
         </div>
         <div class="display-num-selected-items" title="{{'WIP' | translate}}"
              x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
