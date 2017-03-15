@@ -551,7 +551,7 @@ STANDARD CONTENT
     width: 139px;
     overflow: hidden;
     background-color: #ECECEC;
-    height: 26px;
+    height: 24px;
     border-radius: 25px;
     float: left;
     &.readonly {
@@ -563,27 +563,44 @@ STANDARD CONTENT
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        cursor: default;
       }
     }
     &:nth-child(odd) {
       margin-right: 17px;
     }
     .inner-text-li {
-      padding: 5px 8px 0 7px;
+      padding: 4px 8px 0 7px;
+      font-size: 0.9em;
       width: 87px;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      margin-bottom: 0;
     }
     .close-list-icone-btn {
       padding-top: 3px;
       padding-left: 4px;
       padding-right: 12px;
       font-size: 1.2em;
+      margin-bottom: 0;
       width: 25px;
     }
     .circle-ctn {
-      min-width: 26px;
+      min-width: 24px;
+      margin-bottom: 0;
+      cursor: default;
+      .circle {
+        border-radius: 50%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        padding: 3px;
+        font-size: 0.9em;
+        color: #fff;
+        width: 24px;
+        height: 24px;
+      }
     }
     .name-recipients-ctn {
       width: 112px;
@@ -595,7 +612,6 @@ STANDARD CONTENT
     }
   }
   .custom-list-body {
-    margin-left: 2em;
     padding: 0 !important;
   }
   .custom-header-list {
@@ -609,9 +625,6 @@ STANDARD CONTENT
 
 .form-sidebar {
   margin-left: 0 !important;
-  form {
-    margin-left: 1.35em;
-  }
   label {
     max-width: 85%;
   }

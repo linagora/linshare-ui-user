@@ -1,5 +1,5 @@
 <div class="header-sidebar">
-  <i class="zmdi zmdi-chevron-left zmdi-hc-2x "
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x"
      x-ng-click="mainVm.sidebar.getData().loadSidebarContent(mainVm.sidebar.getData().lsAppConfig.details)"></i>
   <h2 class="header-more-options set-ellipsis">{{'RIGHT_PANEL.DETAIL_SHARE.TITLE' | translate}}</h2>
   <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide()">
@@ -12,7 +12,12 @@
     <div id="site-visits" class="dash-widget-item bgm-lin-blue">
       <div class="dash-widget-header">
         <div class="design-content">
-          <span class="firstLetterFormat">{{mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName.charAt(0)}}</span>
+          <span class="firstLetterFormat" x-ng-if="mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
+            {{mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName.charAt(0)}}
+          </span>
+          <span class="firstLetterFormat" x-ng-if="!mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
+            {{mainVm.sidebar.getData().recipientShareDetails.current.recipient.mail.charAt(0)}}
+          </span>
           <p>{{mainVm.sidebar.getData().recipientShareDetails.current.recipient.mail}}</p>
         </div>
         <div class="p-20 bg-design">

@@ -59,7 +59,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     border-bottom: 1px solid #eee;
   }
   li a {
-    padding: 8px 17px;
+    padding: 8px 15px;
     -webkit-transition: background-color;
     -o-transition: background-color;
     transition: background-color;
@@ -208,16 +208,22 @@ DROPDOWN ANIMATION FIX
         border-bottom: none;
       font-size: 0.87em;
       }
+      &.sort-menu {
+        li a {
+          padding: 3px 15px 8px 5px;
+          .caret-area {
+            text-align: center;
+          }
+        }
+      }
     }
   }
-  &.toggle-views .list-menu .filter-menu a {
+  .list-menu .filter-menu a {
     padding-left: 25px;
   }
-  &.toggle-views {
-    .active-check:before {
-      left: 9px;
-      top: 5px;
-    }
+  .active-check:before {
+    left: 9px;
+    top: 5px;
   }
 }
 

@@ -1,5 +1,5 @@
 <div class="container upload-files">
-  <div class="card set-width" id="collapsible-content">
+  <div class="card">
     <div class="card-header no-padding">
       <div id="breadcrumb-wrap">
         <div class="breadcrumbs-ctn hidden-xs">
@@ -23,7 +23,7 @@
         </section>
       </div>
     </div>
-    <div class="card-body selected-files-list-items">
+    <div class="card-body selected-files-list-items collapsible-content">
       <ul class="list-group actions">
         <li class="list-group-item col-xs-12" x-ng-repeat="documentFile in shareListVm.currentShare.documents">
           <span class="fa ls-1p5x m-r-10" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"

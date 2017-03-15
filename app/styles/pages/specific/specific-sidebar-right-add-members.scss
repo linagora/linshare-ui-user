@@ -49,11 +49,6 @@
   }
 }
 
-/* remove id ref */
-#content-ctn-sidebar form.fields-add-member {
-  margin-left: 1.35em;
-}
-
 .group-member-field-ctn {
   box-shadow: none;
   .dropdown-menu {
@@ -71,6 +66,7 @@
 .group-member-field-ctn.btn-group:not(.bootstrap-select), .btn-group-vertical:not(.bootstrap-select) {
   box-shadow: none;
 }
+
 
 /**********************
   AUTOCOMPLETE LAYOUT FIX

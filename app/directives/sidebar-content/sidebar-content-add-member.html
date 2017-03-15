@@ -95,7 +95,6 @@
                   <div class="custom-list-container clearfix">
                     <div class="recipients-form-sections clearfix">
                       <h2 class="pull-left headerSubCtn">
-                        <span class="groups-add-member"></span>
                         {{"MEMBER_TAB.ADD_MEMBER" | translate}}
                       </h2>
                     </div>
@@ -129,7 +128,7 @@
                   </div>
                   <div class="recipients-form-sections clearfix">
                     <div class="custom-header-list">
-                      <h2 class="pull-left headerSubCtn"><i><span class="groups-user-group"></span></i>
+                      <h2 class="pull-left headerSubCtn">
                         <span>{{mainVm.sidebar.getData().lengthOfSelectedDocuments()}}</span> {{"MEMBER_TAB.NUM_MEMBER" |
                         translate}}
                       </h2>
@@ -216,7 +215,6 @@
                                     <a href=""
                                        x-ng-class="{'active-check': mainVm.sidebar.getData().membersSearchFilter.role === 'admin'}"
                                        x-ng-click="mainVm.sidebar.getData().changeFilterByProperty('admin')">
-                                      <span class="checkbox-ctn"></span>
                                       {{"MEMBER_TAB.ADMIN_RIGHTS" | translate}}
                                     </a>
                                   </li>
@@ -224,7 +222,6 @@
                                     <a href=""
                                        x-ng-class="{'active-check': mainVm.sidebar.getData().membersSearchFilter.role === 'normal'}"
                                        x-ng-click="mainVm.sidebar.getData().changeFilterByProperty('normal')">
-                                      <span class="checkbox-ctn"></span>
                                       {{"MEMBER_TAB.WRITE_RIGHTS" | translate}}
                                     </a>
                                   </li>
@@ -232,7 +229,6 @@
                                     <a href=""
                                        x-ng-class="{'active-check': mainVm.sidebar.getData().membersSearchFilter.role === 'restricted'}"
                                        x-ng-click="mainVm.sidebar.getData().changeFilterByProperty('restricted')">
-                                      <span class="checkbox-ctn"></span>
                                       {{"MEMBER_TAB.READ_RIGHTS" | translate}}
                                     </a>
                                   </li>

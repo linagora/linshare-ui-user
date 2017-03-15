@@ -85,18 +85,6 @@ label.required::before {
   background-color: #9AC3D6;
 }
 
-.circle {
-  border-radius: 50%;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  padding: 3px;
-  font-size: 0.9em;
-  color: #fff;
-  width: 26px;
-  height: 26px;
-}
-
 .iconcolor-word {
   color: #2A5699;
 }
@@ -151,7 +139,6 @@ label.required::before {
 .flex-ctn {
   display: -webkit-flex;
   display: flex;
-  margin-left: 1.33em;
   margin-top: 0.5em;
   padding-bottom: 0.75em;
 
@@ -189,7 +176,6 @@ label.required::before {
     justify-content: center;
     align-items: center;
     flex: 0 0 auto;
-    margin-right: 0.5em;
     i {
       font-size: 1.4em;
       color: #6b6b6b;
