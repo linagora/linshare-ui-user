@@ -12,8 +12,8 @@
 
   //TODO - KLE: Check DI
   LinshareGuestsController.$inject = ['$filter', '$log', '$q', '$scope', '$state', '$translate',
-    '$translatePartialLoader', 'authenticationRestService', 'growlService', 'GuestObjectService',
-    'guestRestService', 'lsAppConfig', 'NgTableParams'
+    '$translatePartialLoader', 'authenticationRestService', 'GuestObjectService',
+    'guestRestService', 'lsAppConfig', 'NgTableParams','toastService'
   ];
 
   /**
@@ -22,7 +22,7 @@
    * @memberOf LinShare.Guests
    */
   function LinshareGuestsController($filter, $log, $q, $scope, $state, $translate, $translatePartialLoader,
-    authenticationRestService, growlService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams) {
+    authenticationRestService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams, toastService) {
     /* jshint validthis: true */
     var guestVm = this;
     var
@@ -114,7 +114,9 @@
       if (form.$valid) {
         newGuest.create().then(function() {
           $scope.mainVm.sidebar.hide(form, newGuest);
-          growlService.notifyTopRight('SIDEBAR.NOTIFICATION.SUCCESS.CREATE','inverse');
+          $translate('SIDEBAR.NOTIFICATION.SUCCESS.CREATE').then(function(message) {
+            toastService.success(message);
+          });
           guestVm.tableParams.reload();
         });
       } else {
@@ -438,7 +440,9 @@
       if (form.$valid) {
         guestObject.update().then(function() {
           $scope.mainVm.sidebar.hide(form, guestObject);
-          growlService.notifyTopRight('SIDEBAR.NOTIFICATION.SUCCESS.UPDATE');
+          $translate('SIDEBAR.NOTIFICATION.SUCCESS.UPDATE').then(function(message) {
+            toastService.success(message);
+          });
           guestVm.tableParams.reload();
         });
       } else {

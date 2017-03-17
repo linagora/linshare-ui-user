@@ -349,18 +349,18 @@
                     </a>
                   </li>
                   <li class="divider hidden-xs m-b-0" x-ng-show="linshareModeProduction == false"></li>
-                  <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
-                    <a href="" class="parent-sub-menu-link">
+                  <li>
+                    <a class="parent-sub-menu-link">
                       <i class="zmdi zmdi-copy"></i>
                       {{'ACTION.COPY' | translate}}
                       <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon "></i>
                     </a>
                      <ul>
-                      <li><a href="#"><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}} </a></li>
-                       <li x-ng-show="linshareModeProduction == false">
-                          <a href="#"><i class="fa fa-files-o"></i>{{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}</a>
+                       <li><a href="#"><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}} </a></li>
+                       <li x-ng-click="sharedSpaceListVm.copy(documentFile.uuid)">
+                         <a href="#"><i class="fa fa-files-o"></i>{{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}</a>
                        </li>
-                       <li x-ng-show="linshareModeProduction == false">
+                       <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
                          <a href="#"><i class="zmdi zmdi-share"></i>{{'ACTION.COPY_DROPDOWN.COPY_AND_SHARE' | translate}}</a>
                        </li>
                      </ul>
@@ -564,7 +564,7 @@
                                 </a>
                               </li>
                               <li class="divider hidden-xs" x-ng-show="linshareModeProduction == false"></li>
-                              <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
+                              <li>
                                 <a href="" class="parent-sub-menu-link">
                                   <i class="zmdi zmdi-copy"></i>
                                   {{'ACTION.COPY' | translate}}
@@ -572,13 +572,13 @@
                                 </a>
                                 <ul>
                                   <li><a href="#"><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}} </a></li>
-                                    <li x-ng-show="linshareModeProduction == false">
-                                      <a href="" x-ng-click="sharedSpaceListVm.copy(documentFile.uuid)">
-                                        <i class="fa fa-files-o"></i>
-                                        {{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}
-                                      </a>
-                                    </li>
-                                  <li x-ng-show="linshareModeProduction == false">
+                                  <li x-ng-click="sharedSpaceListVm.copy(documentFile.uuid)">
+                                    <a href="">
+                                      <i class="fa fa-files-o"></i>
+                                      {{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}
+                                    </a>
+                                  </li>
+                                  <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
                                     <a href="#">
                                       <i class="zmdi zmdi-share"></i>
                                       {{'ACTION.COPY_DROPDOWN.COPY_AND_SHARE' | translate}}
@@ -764,7 +764,7 @@
         <li>
           <a href=""><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}}</a>
         </li>
-        <li x-ng-show="linshareModeProduction == false">
+        <li x-ng-click="sharedSpaceListVm.copy(documentFile.uuid)">
           <a href=""><i class="fa fa-files-o"></i>{{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}</a>
         </li>
         <li x-ng-show="linshareModeProduction == false">

@@ -68,8 +68,8 @@
     },
     "NOTIFICATION": {
       "SUCCESS": {
-        "CREATE": "L'invité a été crée avec succès",
-        "UPDATE": "L'invité a été mis à jour avec succès"
+        "CREATE": "Le compte invité a été créé avec succès.",
+        "UPDATE": "Le compte invité a été mis à jour avec succès."
       }
     },
     "TITLE": {

@@ -3,7 +3,7 @@ angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
                                                 workgroups, $translate, $state, documentUtilsService,
                                                 workgroupRestService, workgroupFoldersRestService,
-                                                workgroupEntriesRestService, growlService, lsAppConfig) {
+                                                workgroupEntriesRestService, lsAppConfig, toastService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
@@ -243,12 +243,14 @@ angular.module('linshare.sharedSpace')
     function deleteWorkGroup(workgroups) {
       documentUtilsService.deleteDocuments(workgroups, deleteCallback);
     }
-
+// TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       angular.forEach(items, function(restangularizedItem) {
         $log.debug('value to delete', restangularizedItem);
         restangularizedItem.remove().then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+          $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
+            toastService.success(message);
+          });
           _.remove(thisctrl.itemsList, restangularizedItem);
           _.remove(thisctrl.selectedDocuments, restangularizedItem);
           thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module

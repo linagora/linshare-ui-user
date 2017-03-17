@@ -70,8 +70,8 @@ angular
       .setNotify(true, true);
   })
 
-  .run(function($rootScope, $filter, $location, Restangular, growlService, $log, $window, localStorageService,
-                languageService) {
+  .run(function($rootScope, $filter, $location, Restangular, $log, $window, localStorageService,
+                languageService, toastService) {
     $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
     var storedLocale = localStorageService.get('locale');
     if (storedLocale) {
@@ -103,7 +103,10 @@ angular
             $log.debug('Error ' + response.status, response);
           } else {
             var $translate = $filter('translate');
-            growlService.notifyTopCenter('GROWL_ALERT.ERROR.' + $translate('NO_RESPONSE_ERROR'), 'danger');
+            var noResponseTranslation = $translate('NO_RESPONSE_ERROR');
+            $translate('GROWL_ALERT.ERROR.' + noResponseTranslation).then(function(message) {
+              toastService.error(message);
+            });
             $log.debug('deferred', deferred);
             $log.debug('response', response);
             $log.debug('responseHandler', responseHandler);

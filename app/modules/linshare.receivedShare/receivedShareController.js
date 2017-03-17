@@ -6,11 +6,10 @@
 
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($filter, $log, $mdToast, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
-      autocompleteUserRestService, documentSelected, documentUtilsService, files, growlService, lsAppConfig,
-      NgTableParams, receivedShareRestService) {
+    function($filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
+      autocompleteUserRestService, documentSelected, documentUtilsService, files, lsAppConfig,
+      NgTableParams, receivedShareRestService, toastService) {
       $translatePartialLoader.addPart('receivedShare');
-      $scope.closeToast = closeToast;
       $scope.documentSelected = documentSelected;
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
       $scope.datasIsSelected = false;
@@ -339,31 +338,18 @@ angular.module('linshare.receivedShare')
         $scope.tableParams = data;
         if (_.isUndefined($scope.documentSelected)) {
           $translate('GROWL_ALERT.ERROR.FILE_NOT_FOUND').then(function(message) {
-            growlService.notifyTopCenter(message, 'danger');
+            toastService.error(message);
           });
         }
         else if ($scope.documentSelected !== null ) {
-          $mdToast.show({
-            scope: $scope,
-            preserverScope: true,
-            hideDelay: 0,
-            position: 'bottom',
-            templateUrl: 'modules/linshare.receivedShare/views/toast-file-isolate.html'
+          $translate('TOAST_ALERT.WARNING.ISOLATED_FILE').then(function(message) {
+            toastService.isolate(message);
           });
           $scope.addSelectedDocument($scope.documentSelected);
           $scope.toggleFilterBySelectedFiles();
           $scope.showCurrentFile($scope.documentSelected);
         }
       });
-
-      /**
-       * @name closeToast
-       * @desc Hide the $mdToast
-       * @memberOf linashare.receivedShare.ReceivedController
-       */
-      function closeToast() {
-        $mdToast.hide().then(function() {});
-      }
 
       function toggleFilterBySelectedFiles() {
         $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
@@ -408,15 +394,18 @@ angular.module('linshare.receivedShare')
       };
 
       function deleteCallback(items) {
+        // TODO : show a single callback toast for the deleted item(s), and check if it needs to be plural or not
         angular.forEach(items, function(restangularizedItem) {
           $log.debug('value to delete', restangularizedItem);
           restangularizedItem.remove().then(function() {
-            growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
             _.remove($scope.documentsList, restangularizedItem);
             _.remove($scope.selectedDocuments, restangularizedItem);
             $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
             $scope.tableParams.reload();
             initFlagsOnSelectedPages();
+            $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
+              toastService.success(message);
+            });
           });
         });
       }

@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .factory('ServerManagerService', ServerManagerService);
 
-  ServerManagerService.$inject = ['$log', '$q', '$translate', '$translatePartialLoader', 'growlService'];
+  ServerManagerService.$inject = ['$log', '$q', '$translate', '$translatePartialLoader', 'toastService'];
 
   /**
    * @namespace ServerManagerService
    * @desc Manage server interaction
    * @memberOf linshareUiUserApp
    */
-  function ServerManagerService($log, $q, $translate, $translatePartialLoader, growlService) {
+  function ServerManagerService($log, $q, $translate, $translatePartialLoader, toastService) {
     $translatePartialLoader.addPart('serverResponse');
     var service = {
       responseHandler: responseHandler
@@ -28,14 +28,14 @@
 
     /**
      * @name notify
-     * @desc Send message to the console and by growl
+     * @desc Send message to the console and by toast
      * @param {String} message - The main message
      * @param {String} details - The details message
      * @memberOf linshareUiUserApp.ServerManagerService
      */
     function notify(message, details) {
       var errorToShow = (_.isUndefined(details) || details === '') ? message : message + ': ' + details;
-      growlService.notifyTopCenter(errorToShow, 'danger');
+      toastService.error(errorToShow);
       $log.error(errorToShow);
     }
 

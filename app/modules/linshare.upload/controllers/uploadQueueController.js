@@ -10,7 +10,7 @@
     .controller('uploadQueueController', uploadQueueController);
 
   uploadQueueController.$inject = ['$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'flowUploadService', 'growlService', 'lsAppConfig'];
+    '$translatePartialLoader', 'flowUploadService', 'lsAppConfig', 'toastService'];
 
   /**
    * @namespace uploadQueueController
@@ -18,7 +18,7 @@
    * @memberOf LinShare.upload.uploadQueueController
    */
   function uploadQueueController($q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-                                 flowUploadService, growlService, lsAppConfig) {
+                                 flowUploadService, lsAppConfig, toastService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;
@@ -232,7 +232,9 @@
       if (uploadQueueVm.nbErrorFilesSelected === lengthOfSelectedDocuments()) {
         var messageKey = lengthOfSelectedDocuments() > 1 ?
           'NO_SHAREABLE_FILE_SELECTED_PLURAL' : 'NO_SHAREABLE_FILE_SELECTED_SINGULAR';
-        growlService.notifyTopRight('UPLOAD_SHARE_ALERT.' + messageKey, 'danger');
+        $translate('UPLOAD_SHARE_ALERT.' + messageKey).then(function(message) {
+          toastService.error(message);
+        });
       } else if (uploadQueueVm.nbErrorFilesSelected > 0) {
         alertUnsharableFilesSelectedSwal(uploadQueueVm.nbErrorFilesSelected, executeShare, shareType);
       } else {

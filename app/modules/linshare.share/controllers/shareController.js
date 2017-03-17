@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('linshare.share')
-  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, growlService,
-                                                        $translate, ShareObjectService, documentUtilsService) {
+  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, $translate,
+                                                        ShareObjectService, toastService, documentUtilsService) {
     var shareActionVm = this;
     shareActionVm.closeSideBar = closeSideBar;
     shareActionVm.uploadPage = 'upload';
@@ -20,11 +20,15 @@ angular.module('linshare.share')
 
     function submitShare(shareCreationDto, selectedDocuments, selectedUploads) {
       if (selectedDocuments.length === 0 && (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
-        growlService.notifyBottomRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'danger');
+        $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT').then(function(message) {
+          toastService.error(message);
+        });
         return;
       }
       if (shareCreationDto.getRecipients().length === 0) {
-        growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT', 'danger');
+        $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT').then(function(message) {
+          toastService.error(message);
+        });
         return;
       }
 
@@ -65,7 +69,9 @@ angular.module('linshare.share')
       }, function(data) {
         if (data.statusText) {
           $log.debug('SHARE ASYNC -', data);
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_ASYNC', 'inverse');
+          $translate('GROWL_ALERT.ACTION.SHARE_ASYNC').then(function(message) {
+            toastService.info(message);
+          });
           $scope.mainVm.sidebar.hide();
           var shareCopy = _.cloneDeep(shareActionVm.newShare.getObjectCopy());
           for (var upload in currentUploads) {
@@ -79,7 +85,9 @@ angular.module('linshare.share')
           $scope.share_array.push(shareCopy);
           shareActionVm.newShare.resetForm();
         } else {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_FAILED', 'danger');
+          $translate('GROWL_ALERT.ACTION.SHARE_FAILED').then(function(message) {
+            toastService.error(message);
+          });
         }
       });
     }

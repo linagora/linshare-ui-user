@@ -6,7 +6,8 @@
 
 angular.module('linshare.share')
 
-  .factory('ShareObjectService', function($log, functionalityRestService, LinshareShareService, $q, growlService) {
+  .factory('ShareObjectService', function($log, functionalityRestService, LinshareShareService, $q, toastService,
+                                          $translate) {
 
     var recipients = [],
       mailingListUuid = [],
@@ -180,11 +181,15 @@ angular.module('linshare.share')
       if (this.waitingUploadIdentifiers.length === 0) {
         if(this.documents.indexOf(undefined) === -1) {
           return LinshareShareService.create(this.getFormObj()).then(function() {
-            growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
+            $translate('GROWL_ALERT.ACTION.SHARE').then(function(message) {
+              toastService.success(message);
+            });
           });
         } else {
           $log.debug('SHARE FAILED -', 'file(s) upload error');
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE_FAILED', 'danger');
+          $translate('GROWL_ALERT.ACTION.SHARE_FAILED').then(function(message) {
+            toastService.error(message);
+          });
           deferred.reject({statusText: 'file(s) upload error'});
         }
       } else {

@@ -69,8 +69,8 @@
     },
     "NOTIFICATION": {
       "SUCCESS": {
-        "CREATE": "Guest successfully created",
-        "UPDATE": "Guest successfully updated"
+        "CREATE": "The guest account was created successfully",
+        "UPDATE": "The guest account was updated successfully"
       }
     },
     "TITLE": {

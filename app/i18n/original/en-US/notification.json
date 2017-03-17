@@ -21,18 +21,22 @@
   },
   "GROWL_ALERT": {
     "ACTION": {
-      "DELETE": "Delete succeeded",
-      "UPDATE": "Update succeeded",
-      "INSERT": "Insert succeeded",
-      "COPY": "File(s) has been copied into your files",
-      "SHARE": "Share complete",
-      "SHARE_ASYNC": "You sharing will be sent after the upload of all files",
-      "SHARE_FAILED": "Your sharing has failed"
+      "DELETE": "Deletion succeeded",
+      "DELETE_SINGULAR": "The item was deleted successfully.",
+      "DELETE_PLURAL": "The items were deleted successfully.",
+      "UPDATE": "The item was updated successfully.",
+      "INSERT": "The item was added successfully.",
+      "COPY": "File(s) has been copied into your files.",
+      "COPY_SINGULAR": "file has been copied into your Personal Space.",
+      "COPY_PLURAL": "files have been copied into your Personal Space.",
+      "SHARE": "Your file share was sent successfully.",
+      "SHARE_ASYNC": "Your file share will be sent after the upload of all files.",
+      "SHARE_FAILED": "Your file share has failed."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",
       "AT_LEAST_ONE_DOCUMENT": "No file is selected",
-      "CONTACT_STILL_EXISTS" : "is already in list",
+      "CONTACT_STILL_EXISTS" : "is already in the list",
       "INVALID_EMAIL": "Invalid email"
     },
     "ERROR": {
@@ -40,9 +44,9 @@
       "FILE_UPLOAD": "The upload failed",
       "503": "Service Unavailable",
       "RENAME_FOLDER": "A folder with the same name already exists",
-      "RENAME_CONTACTS_LIST": "A contacts list with the same name already exists",
+      "RENAME_CONTACTS_LIST": "A contact list with the same name already exists",
       "DELETE_ERROR": {
-        "26006": "Deletion of a non-empty folder is not supported yet"
+        "26006": "Deletion of a non-empty folder is not yet supported"
       },
       "NO_RESPONSE_ERROR": "Error without server response, see logs."
     }
@@ -54,8 +58,8 @@
     },
     "WARNING": {
       "ELEMENTS_NOT_DELETED": "element(s) haven't been deleted",
-      "ELEMENTS_NOT_DELETED_SINGULAR": "item hasn't been deleted.",
-      "ELEMENTS_NOT_DELETED_PLURAL": "items haven't been deleted.",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "1 item has not been deleted.",
+      "ELEMENTS_NOT_DELETED_PLURAL": " items have not been deleted.",
       "ERROR": "Error :",
       "ERROR_404": "Element not found",
       "ERROR_403": "You are not authorized to delete this document",

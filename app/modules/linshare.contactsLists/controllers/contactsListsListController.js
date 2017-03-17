@@ -11,18 +11,18 @@
 
   contactsListsListController.$inject = ['$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService', 'growlService',
-    'lsAppConfig', 'NgTableParams'];
+    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService',
+    'lsAppConfig', 'NgTableParams','toastService'];
 
   /**
    * @namespace contactsListsListController
    * @desc Application contactsLists management system controller
    * @memberOf LinShare.contactsLists
    */
-  function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, $translate,
+  function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, toastService, $translate,
                                        $translatePartialLoader, contactsListsList,
                                        contactsListsListRestService, contactsListsContactsRestService,
-                                       contactsListsService, createNew, documentUtilsService, growlService,
+                                       contactsListsService, createNew, documentUtilsService,
                                        lsAppConfig, NgTableParams) {
 
     /* jshint validthis:true */
@@ -164,7 +164,6 @@
       contactsListsContactsRestService.getList(contactsListUuidSource).then(function(success) {
         contactsListsListVm.contactsToAddList = success;
         saveContacts(true, contactListUuidDestination);
-        growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'inverse');
       });
     }
 
@@ -210,10 +209,13 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     // TODO : IAB remove documentUtilsService and implement generic delete items methods (if possible in service)
+    // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       _.forEach(items, function(restangularizedItem) {
         restangularizedItem.remove().then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
+          $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
+            toastService.success(message);
+          });
           _.remove(contactsListsListVm.itemsList, restangularizedItem);
           _.remove(contactsListsListVm.selectedContactsLists, restangularizedItem);
           contactsListsListVm.tableParams.reload();
@@ -484,7 +486,9 @@
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
         contactsListsContactsRestService.create(contactListUuidDestination, contact).then(function() {
           if(!duplicate) {
-            growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'inverse');
+            $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
+              toastService.success(message);
+            });
           }
           _.remove(contactsListsListVm.contactsToAddList, {
             mail: contact.mail
@@ -495,7 +499,8 @@
         }, function(error) {
           if(error.data.errCode === 45400) {
             // TODO : IAB & KLE : improve serverResponse module to allow default or custom message
-            growlService.notifyTopRight(contact.firstName + ' ' + contact.lastName + ' ' + stillExists, 'inverse');
+            var message = contact.firstName + ' ' + contact.lastName + ' ' + stillExists;
+            toastService.error(message);
             _.remove(contactsListsListVm.contactsToAddList, {
               mail: contact.mail
             });
@@ -612,7 +617,9 @@
                 }, function(error) {
                   data.name = initialName;
                   if(error.errCode === 25001) {
-                    growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST', 'danger');
+                    $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
+                      toastService.error(message);
+                    });
                   }
                 });
               }
@@ -623,7 +630,9 @@
               if(isNewItem) {
                 saveNewItem(data);
               }
-              growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST', 'danger');
+              $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
+                toastService.error(message);
+              });
               angular.element(idElem).text(cleanString(initialName));
               angular.element(this).attr('contenteditable', 'false');
             }
@@ -662,7 +671,9 @@
                   }, function(error) {
                     data.name = initialName;
                     if(error.errCode === 25001) {
-                      growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST', 'danger');
+                      $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
+                        toastService.error(message);
+                      });
                     }
                   });
                 }
@@ -673,7 +684,9 @@
                 if(isNewItem) {
                   saveNewItem(data);
                 }
-                growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST', 'danger');
+                $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
+                  toastService.error(message);
+                });
                 angular.element(idElem).text(cleanString(initialName));
                 angular.element(this).attr('contenteditable', 'false');
               }

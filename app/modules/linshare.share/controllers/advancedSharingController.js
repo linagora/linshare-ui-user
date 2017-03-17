@@ -7,25 +7,30 @@ angular.module('linshare.share')
  * This is controller is not used in the current user flow of the application
  * It has been written for the advanced sharing with the sharing in three steps (slides)
  */
-  .controller('LinshareAdvancedShareController', function($scope, $log, LinshareShareService, growlService, lsAppConfig) {
+  .controller('LinshareAdvancedShareController', function($scope, $log, $translate, LinshareShareService, lsAppConfig,
+                                                          toastService) {
 
     $scope.sharesContainer = {waiting: [], done: []};
 
     $scope.submitShare = function(shareCreationDto, now) {
       if ($scope.selectedDocuments.length === 0 ) {
-        growlService.notifyTopRight('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT', 'danger');
+        $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT').then(function(message) {
+          toastService.warning(message);
+        });
         return;
       }
       if (now) {
         LinshareShareService.create(shareCreationDto.getFormObj()).then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.SHARE', 'inverse');
+          $translate('GROWL_ALERT.ACTION.SHARE').then(function(message) {
+            toastService.info(message);
+          });
           $scope.$emit('linshare-share-done');
           $scope.mainVm.sidebar.hide();
           angular.element('tr').removeClass('info');
           $scope.initSelectedDocuments();
           $scope.share_array[1] = {};
         }, function(errorData) {
-          growlService.notifyTopRight(errorData.statusText, 'danger');
+          toastService.error(errorData.statusText);
         });
       } else {
         shareCreationDto.setAsyncShare(!now);

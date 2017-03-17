@@ -78,6 +78,14 @@
     pointer-events: none;
     md-fab-trigger {
       pointer-events: auto;
+      bottom: 20px;
+      right: 20px !important;
+      top: inherit !important;
+      height: 56px;
+      padding: 0;
+      > button.md-button.md-fab {
+       margin: 0;
+      }
     }
     md-toolbar .md-fab-action-item {
       width: 50%;

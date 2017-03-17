@@ -78,31 +78,19 @@
   }
 }
 
-@-webkit-keyframes pulseWarningIns {
-  0% {
-    background-color: rgba(255,255,255,0.35) }
-  100% {
-    background-color: rgba(255,255,255,0.35); } }
-
 @keyframes pulseWarningIns {
   0% {
     background-color: rgba(255,255,255,0.35); }
   100% {
-    background-color: rgba(255,255,255,0.35); } }
-
-
-@-webkit-keyframes pulseWarning {
-  0% {
-    border-color: rgba(255,255,255,0.35); }
-  100% {
-    border-color: rgba(255,255,255,0.35); } }
+    background-color: rgba(255,255,255,0.35); }
+}
 
 @keyframes pulseWarning {
   0% {
     border-color: rgba(255,255,255,0.35); }
   100% {
-    border-color: rgba(255,255,255,0.35); } }
-
+    border-color: rgba(255,255,255,0.35); }
+}
 
 /**** warning style **/
 .sweet-alert {
@@ -151,11 +139,14 @@
 @keyframes showSweetAlert {
   0% {
     transform: scale(0.4);
-    -webkit-transform: scale(0.7) !important; }
+    -webkit-transform: scale(0.7) !important;
+  }
   80% {
     transform: scale(0.95);
-    -webkit-tranform: scale(0.95)!important;; }
+    -webkit-tranform: scale(0.95)!important;
+  }
   100% {
     transform: scale(1);
-    -webkit-transform: scale(1) !important;; }
+    -webkit-transform: scale(1) !important;
+  }
 }

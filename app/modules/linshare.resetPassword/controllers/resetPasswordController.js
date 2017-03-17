@@ -9,8 +9,8 @@
     .module('linshare.resetPassword')
     .controller('ResetPasswordController', ResetPasswordController);
 
-  ResetPasswordController.$inject = ['$log', '$state', '$timeout', '$translatePartialLoader', 'growlService',
-    'languageService', 'lsAppConfig', 'resetPasswordService', 'resetUuid'
+  ResetPasswordController.$inject = ['$log', '$state', '$timeout', '$translatePartialLoader',
+    'languageService', 'lsAppConfig', 'resetPasswordService', 'resetUuid','toastService'
   ];
 
   /**
@@ -18,7 +18,7 @@
    *  @desc Reset password management system controller
    *  @memberOf LinShare.resetPassword
    */
-  function ResetPasswordController($log, $state, $timeout, $translatePartialLoader, growlService,
+  function ResetPasswordController($log, $state, $timeout, toastService, $translatePartialLoader,
     languageService, lsAppConfig, resetPasswordService, resetUuid) {
     /* jshint validthis: true */
     var resetVm = this;
@@ -131,12 +131,13 @@
 
     /**
      *  @name notify
-     *  @desc Send message to the console and by growl
+     *  @desc Send message to the console and by toast
      *  @param {Object} data - Server response object
      *  @memberOf LinShare.resetPassword.ResetPasswordController
      */
     function notify(data) {
-      growlService.notifyTopCenter(data.data.message, 'danger');
+      var message = data.data.message;
+      toastService.error(message);
       $log.error('resetPasswordController - notify', data);
     }
 

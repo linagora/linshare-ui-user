@@ -22,12 +22,16 @@
   "GROWL_ALERT": {
     "ACTION": {
       "DELETE": "Suppression réussie",
-      "UPDATE": "Edition réussie",
-      "INSERT": "Insertion réussie",
+      "DELETE_SINGULAR": "L'élément a été supprimé avec succès.",
+      "DELETE_PLURAL": "Les éléments ont été supprimés avec succès.",
+      "UPDATE": "L'élément a été mise à jour avec succès.",
+      "INSERT": "L'élément a été ajouté avec succès.",
       "COPY": "Fichier copié avec succès dans vos fichiers.",
-      "SHARE": "Partage terminé.",
+      "COPY_PLURAL": "fichiers ont été copié vers votre Espace Personnel",
+      "COPY_SINGULAR": "fichier a été copié vers votre Espace Personnel.",
+      "SHARE": "Votre partage a été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
-      "SHARE_FAILED": "Votre partage a échoué."
+      "SHARE_FAILED": "Votre partage de fichiers a échoué."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
@@ -42,7 +46,7 @@
       "RENAME_FOLDER": "Un dossier avec le même nom existe déjà",
       "RENAME_CONTACTS_LIST": "Une liste de contacts avec le même nom existe déjà.",
       "DELETE_ERROR": {
-        "26006": "La suppression de dossier non vide n'est pas encore supporté."
+        "26006": "La suppression de dossier remplit n'est pas encore supporté."
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs."
     }
@@ -54,8 +58,8 @@
     },
     "WARNING": {
       "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",
-      "ELEMENTS_NOT_DELETED_SINGULAR": "élément n'a pu être supprimé.",
-      "ELEMENTS_NOT_DELETED_PLURAL": "éléments n'ont pu être supprimés.",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "1 élément n'a pu être supprimé.",
+      "ELEMENTS_NOT_DELETED_PLURAL": " éléments n'ont pu être supprimés.",
       "ERROR": "Erreur :",
       "ERROR_404": "Élément introuvable",
       "ERROR_403": "Vous n'êtes pas autorisé à supprimer cet élément",

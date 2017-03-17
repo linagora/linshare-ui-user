@@ -10,8 +10,8 @@
 
   contactsListsContactsController.$inject = ['$filter', '$scope', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'addContacts', 'contactsListsContacts', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'growlService', 'lsAppConfig',
-    'NgTableParams'];
+    'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'lsAppConfig',
+    'NgTableParams', 'toastService'];
 
   /**
    * @namespace contactsListsContactsController
@@ -21,8 +21,8 @@
   function contactsListsContactsController($filter, $scope, $stateParams, $timeout, $translate,
                                            $translatePartialLoader, addContacts, contactsListsContacts,
                                            contactsListsListRestService, contactsListsContactsRestService,
-                                           contactsListsService, documentUtilsService, growlService, lsAppConfig,
-                                           NgTableParams) {
+                                           contactsListsService, documentUtilsService, lsAppConfig,
+                                           NgTableParams, toastService) {
     /* jshint validthis:true */
     var contactsListsContactsVm = this;
     var
@@ -119,7 +119,8 @@
         };
         saveContact(newContact);
       } else {
-        growlService.notifyTopRight((contact.firstName || contact.mail) + ' ' + (contact.lastName || '') + ' ' + stillExists, 'inverse');
+        var message = (contact.firstName || contact.mail) + ' ' + (contact.lastName || '') + ' ' + stillExists;
+        toastService.info(message);
       }
     }
 
@@ -152,11 +153,14 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     // TODO : IAB remove documentUtilsService and implement generic delete items methods (if possible in service)
+    // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       _.forEach(items, function(restangularizedItem) {
         delete restangularizedItem.show;
         restangularizedItem.remove().then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'inverse');
+          $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
+            toastService.success(message);
+          });
           _.remove(contactsListsContactsVm.itemsList, restangularizedItem);
           _.remove(contactsListsContactsVm.selectedContacts, restangularizedItem);
           contactsListsContactsVm.itemsListCopy = contactsListsContactsVm.itemsList; // I keep a copy of the data for the filter module
@@ -270,7 +274,9 @@
     function saveContact(contact) {
       contactsListsContactsRestService.create(contactsListsContactsVm.contactsListUuid, contact).then(function(data) {
         contactsListsContactsVm.itemsList.push(data);
-        growlService.notifyTopRight('GROWL_ALERT.ACTION.INSERT', 'inverse');
+        $translate('GROWL_ALERT.ACTION.INSERT').then(function(message) {
+          toastService.success(message);
+        });
         contactsListsContactsVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsContactsVm.tableParams.reload();
       });
@@ -443,7 +449,9 @@
         // TODO : IAB object returned to implement -> contactSaved
         contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave).then(function() {
           contactsListsContactsVm.itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.UPDATE', 'inverse');
+          $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
+            toastService.success(message);
+          });
           contactsListsContactsVm.tableParams.reload();
           $scope.mainVm.sidebar.hide();
         });

@@ -5,7 +5,11 @@
     .module('linshare.sharedSpace')
     .controller('SharedSpaceListController', sharedSpaceListController);
 
-  function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService, growlService, workgroupMembersRestService, workgroupEntriesRestService, workgroupFoldersRestService, $state, $stateParams, Restangular, $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService, flowUploadService, lsAppConfig, $q) {
+  function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService,
+                                     workgroupMembersRestService, workgroupEntriesRestService,
+                                     workgroupFoldersRestService, $state, $stateParams, Restangular,
+                                     $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService,
+                                     flowUploadService, lsAppConfig, $q, toastService) {
     /* jshint validthis:true */
     var sharedSpaceListVm = this;
 
@@ -142,9 +146,13 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
+    // TODO : show a single callback toast for multiple items copied, and check if it needs to be plural or not,
+    // additionally please prefix the sentence by number of files copied
     function copy(entryUuid) {
       workgroupEntriesRestService.copy(sharedSpaceListVm.uuid, entryUuid).then(function() {
-        growlService.notifyTopRight('GROWL_ALERT.ACTION.COPY', 'inverse');
+        $translate('GROWL_ALERT.ACTION.COPY').then(function(message) {
+          toastService.success(message);
+        });
       });
     }
 
@@ -166,19 +174,23 @@
         renameFolder(folder, true);
       }, 0);
     }
-
+  // TODO : show a single callback toast for multiple  deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       angular.forEach(items, function(restangularizedItem) {
         _.remove(restangularizedItem.lastAuthor);
         restangularizedItem.remove().then(function() {
-          growlService.notifyTopRight('GROWL_ALERT.ACTION.DELETE', 'success');
+          $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
+            toastService.success(message);
+          });
           _.remove(sharedSpaceListVm.itemsList, restangularizedItem);
           _.remove(sharedSpaceListVm.selectedDocuments, restangularizedItem);
           sharedSpaceListVm.itemsListCopy = sharedSpaceListVm.itemsList; // I keep a copy of the data for the filter module
           sharedSpaceListVm.tableParams.reload();
         }, function(error) {
           if (error.status === 400 && error.data.errCode === 26006) {
-            growlService.notifyTopRight('GROWL_ALERT.ERROR.DELETE_ERROR.26006', 'danger');
+            $translate('GROWL_ALERT.ERROR.DELETE_ERROR.26006').then(function(message) {
+              toastService.error(message);
+            });
           }
         });
       });
@@ -510,7 +522,9 @@
               if (newFolder) {
                 saveNewFolder(data);
               }
-              growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_FOLDER', 'danger');
+              $translate('GROWL_ALERT.ERROR.RENAME_FOLDER').then(function(message) {
+                toastService.error(message);
+              });
               angular.element(idElem).text(initialName);
               angular.element(this).attr('contenteditable', 'false');
               angular.element(this).blur();
@@ -540,7 +554,9 @@
                 if (newFolder) {
                   saveNewFolder(data);
                 }
-                growlService.notifyTopRight('GROWL_ALERT.ERROR.RENAME_FOLDER', 'danger');
+                $translate('GROWL_ALERT.ERROR.RENAME_FOLDER').then(function(message) {
+                  toastService.error(message);
+                });
                 angular.element(idElem).text(initialName);
                 angular.element(this).attr('contenteditable', 'false');
               }

@@ -23,14 +23,15 @@
         none: 0
       },
       mdToastLocals = {},
-      position = 'top right',
+      position = 'bottom right',
       templateUrl = componentsConfig.path + 'toast/toast.html';
 
     var service = {
       error: error,
       info: info,
       success: success,
-      warning: warning
+      warning: warning,
+      isolate: isolate
     };
 
     return service;
@@ -75,6 +76,26 @@
         toastClose: toastClose
       };
       return toastShow(mdToastLocals, delay.default);
+    }
+
+    /**
+     * @name isolate
+     * @desc Show a toast isolate
+     * @param {string} texte - Message of the toast
+     * @param {string} Optionnal | label - Button label to replace close icon
+     * @param {Array<Object>} Optionnal | details - Array of object containing title, prefix & message property
+     * @returns {Promise} promise resolved on toastClose
+     * @memberOf linshare.components.toastService
+     */
+    function isolate(texte, label, details) {
+      mdToastLocals = {
+        toastText: texte,
+        toastLabel: label,
+        toastDetails: details,
+        toastIsolate: true,
+        toastClose: toastClose
+      };
+      return toastShow(mdToastLocals, delay.none);
     }
 
     /**
