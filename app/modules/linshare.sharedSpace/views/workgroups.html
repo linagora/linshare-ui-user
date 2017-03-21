@@ -154,11 +154,11 @@
                   <ul uib-dropdown-menu="" class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left">
                     <!-- FILTER COMPONENT  -->
-                    <filtering-component class="clearfix" ls-date="true"
-                                         filtered-items-list="vm.itemsList"
-                                         initial-items-list="vm.itemsListCopy"
-                                         reload-items="vm.tableParams.reload">
-                    </filtering-component>
+                    <filter-box class="clearfix"
+                                filter-box-date="true"
+                                filter-box-items="vm.itemsList"
+                                filter-box-table="vm.tableParams">
+                    </filter-box>
                   </ul>
                 </a>
               </div>

@@ -107,7 +107,9 @@
     "TBT__ORDER_BY_NAME": "",
     "REINITIALIZE": "Làm lại",
     "PLACEHOLDER_FILE_NAME": "Tên tập tin",
-    "SUBMIT": "Lọc"
+    "SUBMIT": "Lọc",
+    "TBT__UNIT": "",
+    "TBT__DATE": ""
   },
   "HEADER": {
     "CLEAR_LOCAL_STORAGE": "Xóa Local Storage",

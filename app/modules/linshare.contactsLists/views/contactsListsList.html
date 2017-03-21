@@ -219,11 +219,11 @@
         <!-- FILTER COMPONENT  -->
         <script type="text/ng-template" id="advanced-search.html">
           <div id="search-filter-popover-ctn">
-            <filtering-component class="clearfix" ls-date="true"
-                                 filtered-items-list="contactsListsListVm.itemsList"
-                                 initial-items-list="contactsListsListVm.itemsListCopy"
-                                 reload-items="contactsListsListVm.tableParams.reload">
-            </filtering-component>
+            <filter-box class="clearfix"
+                        filter-box-date="true"
+                        filter-box-items="contactsListsListVm.itemsList"
+                        filter-box-table="contactsListsListVm.tableParams">
+            </filter-box>
           </div>
         </script>
       </div>

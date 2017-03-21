@@ -29,7 +29,6 @@
     };
     $scope.deleteDocuments = deleteDocuments;
     $scope.documentsList = documentsList;
-    $scope.documentsListCopy = documentsList;
     $scope.documentSelected = documentSelected;
     $scope.downloadFile = downloadFile;
     $scope.downloadSelectedFiles = downloadSelectedFiles;
@@ -425,7 +424,6 @@
       $timeout(function() {
         LinshareDocumentRestService.getList().then(function(data) {
           $scope.documentsList = data;
-          $scope.documentsListCopy = data;
           $scope.isNewAddition = true;
           $scope.tableParams.reload();
           $timeout(function() {
@@ -534,7 +532,6 @@
           return restangularizedItem.remove().then(function() {
             _.remove($scope.documentsList, restangularizedItem);
             _.remove($scope.selectedDocuments, restangularizedItem);
-            $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
             $scope.tableParams.reload();
             initFlagsOnSelectedPages();
             return responsesDeletion;

@@ -147,11 +147,12 @@
             <ul uib-dropdown-menu=""
                 class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
               <!-- FILTER COMPONENT  -->
-              <filtering-component class="clearfix" ls-size="true" ls-date="true"
-                                   filtered-items-list="$parent.documentsList"
-                                   initial-items-list="$parent.documentsListCopy"
-                                   reload-items="$parent.tableParams.reload">
-              </filtering-component>
+              <filter-box class="clearfix"
+                          filter-box-size="true"
+                          filter-box-date="true"
+                          filter-box-items="$parent.documentsList"
+                          filter-box-table="$parent.tableParams">
+              </filter-box>
             </ul>
           </a>
         </div>

@@ -107,7 +107,9 @@
     "ORDER_BY_NAME": "Name",
     "PLACEHOLDER_FILE_NAME": "Search by name",
     "REINITIALIZE": "RESET",
-    "SUBMIT": "Filter"
+    "SUBMIT": "Filter",
+    "UNIT": "Unit",
+    "DATE": "Date"
   },
   "HEADER": {
     "CLEAR_LOCAL_STORAGE": "Clear Local Storage",
