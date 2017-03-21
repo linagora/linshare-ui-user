@@ -19,11 +19,11 @@
    * @desc Application contactsLists management system controller
    * @memberOf LinShare.contactsLists
    */
-  function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, toastService, $translate,
+  function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, $translate,
                                        $translatePartialLoader, contactsListsList,
                                        contactsListsListRestService, contactsListsContactsRestService,
                                        contactsListsService, createNew, documentUtilsService,
-                                       lsAppConfig, NgTableParams) {
+                                       lsAppConfig, NgTableParams, toastService) {
 
     /* jshint validthis:true */
     var contactsListsListVm = this;
