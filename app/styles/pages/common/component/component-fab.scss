@@ -4,7 +4,10 @@
 /**********************
   FAB
 ***********************/
-
+#fabButtonCtn {
+  position: relative;
+  z-index: 4;
+}
 @media (max-width: 767px) {
   .ng-isolate-scope.md-fab-toolbar.md-left.md-animations-ready,
   .ng-isolate-scope.md-fab-toolbar.md-left.md-animations-waiting {

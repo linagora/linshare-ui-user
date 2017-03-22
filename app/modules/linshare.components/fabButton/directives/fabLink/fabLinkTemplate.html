@@ -1,0 +1,12 @@
+<a data-ng-if="_.isNil(fabLinkAction)">
+  <i class="{{fabLinkIcon}}"></i>
+  <span translate>{{fabLinkLabel}}</span>
+</a>
+<a ui-sref="{{fabLinkAction}}" data-ng-if="!_.isNil(fabLinkAction) && !_.isFunction(fabLinkAction)">
+  <i class="{{fabLinkIcon}}"></i>
+  <span translate>{{fabLinkLabel}}</span>
+</a>
+<a data-ng-click="fabLinkAction()" data-ng-if="_.isFunction(fabLinkAction)">
+  <i class="{{fabLinkIcon}}"></i>
+  <span translate>{{fabLinkLabel}}</span>
+</a>
