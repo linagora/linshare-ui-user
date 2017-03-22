@@ -267,21 +267,9 @@
           <span>{{'TRANSFERS_DROPDOWN.SHARE' | translate}} {{$index+1}}</span> <i class="zmdi zmdi-edit"></i>
         </button>
       </div>
-
-        <div id="fabMyFiles">
-          <md-fab-toolbar x-ng-if="uploadQueueVm.isFromMySpace"
-                          md-open="fab.isOpen"
-                          count="uploadQueueVm.fab.count"
-                          flow-btn md-direction="{{uploadQueueVm.fab.selectedDirection}}"
-                          class="visible-xs">
-            <md-fab-trigger class="align-with-text">
-              <md-button aria-label="menu" class="md-fab md-primary" id="primary-fab-action">
-                <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
-              </md-button>
-            </md-fab-trigger>
-            <md-toolbar></md-toolbar>
-          </md-fab-toolbar>
-        </div>
+      <div id="fabButtonCtn" fab-button
+           fab-button-actions="uploadQueueVm.fabButton.actions"
+           fab-button-flow="$flow">
       </div>
     </div>
   </div>

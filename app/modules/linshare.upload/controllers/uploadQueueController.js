@@ -41,11 +41,6 @@
     uploadQueueVm.clearSelectedFiles = clearSelectedFiles;
     uploadQueueVm.currentPage = 'upload';
     uploadQueueVm.currentSelectedDocument = {};
-    uploadQueueVm.fab = {
-      isOpen: false,
-      count: 0,
-      selectedDirection: 'left'
-    };
     uploadQueueVm.flowUploadService = flowUploadService;
     uploadQueueVm.fromWhere = $stateParams.from;
     uploadQueueVm.identifiers = [];
@@ -80,6 +75,15 @@
      * @memberOf LinShare.upload.uploadQueueController
      */
     function activate() {
+      uploadQueueVm.fabButton = {
+        actions:  [{
+          action: null,
+          icon: 'zmdi zmdi-plus',
+          flowBtn: true,
+          hide: !uploadQueueVm.isFromMySpace
+        }]
+      };
+
       $translatePartialLoader.addPart('upload');
       $translate.refresh().then(function() {
         $translate([
@@ -129,24 +133,6 @@
 
       $scope.$on('flow::fileError', function fileErrorAction() {
         uploadQueueVm.isflowUploadingError = true;
-      });
-
-      $scope.$watch('fab.isOpen', function(isOpen) {
-        if (isOpen) {
-          angular.element('.md-toolbar-tools').addClass('setWhite');
-          angular.element('.multi-select-mobile').addClass('setDisabled');
-          $timeout(function() {
-            angular.element('#overlayMobileFab').addClass('toggledMobileShowOverlay');
-            angular.element('#content-container').addClass('setDisabled');
-          }, 250);
-        } else {
-          angular.element('.md-toolbar-tools').removeClass('setWhite');
-          $timeout(function() {
-            angular.element('.multi-select-mobile').removeClass('setDisabled');
-            angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
-            angular.element('#content-container').removeClass('setDisabled');
-          }, 250);
-        }
       });
     }
 
