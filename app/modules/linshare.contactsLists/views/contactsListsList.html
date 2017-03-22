@@ -580,13 +580,7 @@
       </div>
     </div>
   </div>
-  <div id="fabMyFiles" class="solo-fab">
-    <md-button class="md-fab visible-xs" aria-label="{{'CONTACTS_LISTS_ACTION.CREATE_CONTACTS_LIST' | translate}}"
-               x-ng-click="contactsListsListVm.isFromMyContactsLists ?
-                contactsListsListVm.createContactsList() : contactsListsListVm.goToMineAndCreateContactsList()">
-      <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
-    </md-button>
-  </div>
+  <div id="fabButtonCtn" fab-button fab-button-actions="contactsListsListVm.fabButton.actions"></div>
   <section class="row multi-select-mobile visible-xs"
            x-ng-class="{'showMobileMultiMenu': contactsListsListVm.selectedContactsLists.length > 0}">
     <div class="col-xs-2 ctn-mobile-select-count">

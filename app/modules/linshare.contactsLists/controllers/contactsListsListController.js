@@ -118,6 +118,17 @@
       $scope.$on('$stateChangeSuccess', function() {
         angular.element('.multi-select-mobile').appendTo('body');
       });
+
+      contactsListsListVm.fabButton = {
+        actions: [{
+          action: function() {
+            return contactsListsListVm.isFromMyContactsLists ?
+              contactsListsListVm.createContactsList() : contactsListsListVm.goToMineAndCreateContactsList();
+          },
+          label: 'CONTACTS_LISTS_ACTION.CREATE_CONTACTS_LIST',
+          icon: 'zmdi zmdi-plus'
+        }]
+      };
     }
     /**
      * @name addSelectedDocument

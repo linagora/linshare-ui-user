@@ -78,6 +78,14 @@
         contactsListsContactsVm.contactsListDetails = details;
         contactsListsContactsVm.canManage = (contactsListsContactsVm.contactsListDetails.owner.uuid === $scope.userLogged.uuid);
         contactsListsContactsVm.contactsListUuid = details.uuid;
+        contactsListsContactsVm.fabButton = {
+          actions: [{
+            action: function() {return contactsListsContactsVm.onAddContacts();},
+            label: 'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT',
+            icon: 'zmdi zmdi-plus',
+            hide: !contactsListsContactsVm.canManage
+          }]
+        };
       });
 
       $timeout(function() {
