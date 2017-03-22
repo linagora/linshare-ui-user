@@ -97,6 +97,13 @@
               });
           });
           guestVm.tableParams = guestVm.loadTable();
+          guestVm.fabButton = {
+            actions: [{
+              action: function() {return guestVm.loadSidebarContent(guestVm.guestCreate);},
+              icon: 'zmdi zmdi-plus',
+              label: 'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT'
+            }]
+          };
         } else {
           $state.transitionTo('home');
         }
@@ -456,16 +463,6 @@
     // - Variable
     //-----------
     guestVm.selectedValue = 0;
-
-    // \- Mobile specific -/
-    //TODO - KLE: Kind of trashy, can't we do anything ?
-    // In order to activate the fab  mechanism for the mobile view
-    guestVm.fab = {
-      isOpen: false,
-      count: 0,
-      selectedDirection: 'left'
-    };
-
 
     //-----------
     // - Function
