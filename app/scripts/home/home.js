@@ -9,7 +9,9 @@
     .module('linshareUiUserApp')
     .controller('HomeController', homeController);
 
-  homeController.$inject = ['$scope', '$timeout', '$translate', '$translatePartialLoader', 'lsAppConfig', 'welcomeMessageRestService'];
+  homeController.$inject = ['$scope', '$timeout', '$translate', '$translatePartialLoader', 'lsAppConfig',
+    'welcomeMessageRestService'
+  ];
 
   /**
    * @namespace homeController
@@ -33,11 +35,6 @@
     };
 
     $scope.lsAppConfig = lsAppConfig;
-    $scope.fab = {
-      isOpen: false,
-      count: 0,
-      selectedDirection: 'left'
-    };
 
     activate();
 
@@ -50,28 +47,34 @@
      */
     // TODO : IAB externalize fab into directive
     function activate() {
+      $scope.fabButton = {
+        toolbar: {
+          activate: true,
+          label: 'BOUTON_ADD_FILE_TITLE'
+        },
+        actions: [{
+          action: 'documents.upload({from: lsAppConfig.mySpacePage})',
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_AND_SHARE',
+          icon: 'groups-home-share',
+          flowBtn: true
+        }, {
+          action: 'documents.files',
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_IN_MY_FILES',
+          icon: 'zmdi zmdi-file-plus',
+          flowBtn: true
+        }, {
+          action: null,
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_IN_WORKGROUP',
+          icon: 'zmdi zmdi-accounts-alt disabled-work-in-progress',
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        }]
+      };
+
       $translatePartialLoader.addPart('home');
 
       $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
         flowFile._from = $scope.mySpacePage;
-      });
-
-      $scope.$watch('fab.isOpen', function(isOpen) {
-        if (isOpen) {
-          angular.element('.md-toolbar-tools').addClass('setWhite');
-          angular.element('.multi-select-mobile').addClass('setDisabled');
-          $timeout(function() {
-            angular.element('#overlayMobileFab').addClass('toggledMobileShowOverlay');
-            angular.element('#content-container').addClass('setDisabled');
-          }, 250);
-        } else {
-          angular.element('.md-toolbar-tools').removeClass('setWhite');
-          $timeout(function() {
-            angular.element('.multi-select-mobile').removeClass('setDisabled');
-            angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
-            angular.element('#content-container').removeClass('setDisabled');
-          }, 250);
-        }
       });
 
       getWelcomeMessage();
@@ -79,7 +82,9 @@
 
     function getWelcomeMessage() {
       welcomeMessageRestService.getList().then(function(data) {
-        var lang_object = _.find(LANG_CONVERTER, {key: $translate.use()});
+        var lang_object = _.find(LANG_CONVERTER, {
+          key: $translate.use()
+        });
         var lang = lang_object ? lang_object.lang : 'ENGLISH';
         $scope.welcomeMessage = data[0][lang];
       });
