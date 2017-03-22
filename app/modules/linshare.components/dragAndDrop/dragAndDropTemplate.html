@@ -1,0 +1,30 @@
+<div id="drag-and-drop-area"
+  flow-object="$flow"
+  flow-files-submitted="submitted({files: $files})"
+  flow-drop=""
+  flow-drag-enter="dropClass='drag-over'"
+  flow-file-success="success({file: $file})"
+  flow-drag-leave="dropClass='fade-out-elm'"
+  data-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible(), 'drag-over' : dropClass == 'drag-over',
+          'fade-out-elm': dropClass == 'fade-out-elm' }"
+  class="file-listing-ctn">
+  <div id="drop-ctn"
+       class="drop border-anim reset-content-width collapsible-content drag-n-drop-height">
+    <div class="drag-and-drop-ctn">
+      <div class="drag-and-drop-content">
+        <div class="drag-icon-ctn">
+          <div class="bordered-circle">&nbsp;</div>
+          <span class="grey-clr bg-info-icon">
+            <span class="groups-upload-file"></span>
+          </span>
+        </div>
+        <div class="dnd-txt-content">
+          <h1>{{'DRAG_DROP_BACKGROUND_ON_DRAG.TITLE' | translate}}</h1>
+          <p>{{'DRAG_DROP_BACKGROUND_ON_DRAG.COMMENT' | translate}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-ng-transclude>
+  </div>
+</div>

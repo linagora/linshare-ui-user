@@ -1,29 +1,7 @@
-<div
-     flow-object="$flow"
-     flow-files-submitted="flowUploadService.uploadFiles($files, mySpacePage)" flow-drop=""
-     flow-drag-enter="dropClass='drag-over'"
-     flow-file-success="addUploadedDocument($file)"
-     flow-drag-leave="dropClass='fade-out-elm'"
-     x-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible(), 'drag-over' : dropClass == 'drag-over',
-          'fade-out-elm': dropClass == 'fade-out-elm' }"
-     class="file-listing-ctn">
-  <div id="drop-ctn" check-table-height
-       class="drop border-anim reset-content-width collapsible-content drag-n-drop-height">
-    <div class="drag-and-drop-ctn">
-      <div class="drag-and-drop-content">
-        <div class="drag-icon-ctn">
-          <div class="bordered-circle">&nbsp;</div>
-          <span class="grey-clr bg-info-icon">
-            <span class="groups-upload-file"></span>
-          </span>
-        </div>
-        <div class="dnd-txt-content">
-          <h1>{{'DRAG_DROP_BACKGROUND_ON_DRAG.TITLE' | translate}}</h1>
-          <p>{{'DRAG_DROP_BACKGROUND_ON_DRAG.COMMENT' | translate}}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<div drag-and-drop
+     drag-and-drop-flow="$flow"
+     drag-and-drop-submitted="flowUploadService.uploadFiles(files, mySpacePage)"
+     drag-and-drop-success="addUploadedDocument(file)">
   <div class="container files">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
