@@ -10,7 +10,11 @@
       <div x-ng-include src="'modules/linshare.document/views/documentsList-dropArea.html'"></div>
     </div>
   </div>
-  <div x-ng-include src="'modules/linshare.document/views/documentsList-fab.html'"></div>
+  <div id="fabButtonCtn" fab-button
+       fab-button-actions="fabButton.actions"
+       fab-button-flow="$flow"
+       fab-button-toolbar="fabButton.toolbar">
+  </div>
 </div>
 <section class="row multi-select-mobile visible-xs"
          x-ng-class="{'showMobileMultiMenu': (selectedDocuments.length > 0) && !mainVm.sidebar.isVisible()}"

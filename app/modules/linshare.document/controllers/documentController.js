@@ -32,11 +32,6 @@
     $scope.documentSelected = documentSelected;
     $scope.downloadFile = downloadFile;
     $scope.downloadSelectedFiles = downloadSelectedFiles;
-    $scope.fab = {
-      isOpen: false,
-      count: 0,
-      selectedDirection: 'left'
-    };
     $scope.flagsOnSelectedPages = {};
     $scope.flowUploadService = flowUploadService;
     $scope.getDetails = getDetails;
@@ -78,6 +73,30 @@
     ////////////////
 
     function activate() {
+      $scope.fabButton = {
+        toolbar: {
+          activate: true,
+          label: 'BOUTON_ADD_FILE_TITLE'
+        },
+        actions: [{
+          action: 'documents.upload({from: lsAppConfig.mySpacePage})',
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_SHARE',
+          icon: 'groups-home-share',
+          flowBtn: true
+        }, {
+          action: null,
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
+          icon: 'zmdi zmdi-file-plus',
+          flowBtn: true
+        }, {
+          action: null,
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_IN_WORKGROUP',
+          icon: 'zmdi zmdi-accounts-alt disabled-work-in-progress',
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        }]
+      };
+
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
@@ -162,24 +181,6 @@
           $scope.reloadDocuments();
         }
       }, true);
-
-      $scope.$watch('fab.isOpen', function(isOpen) {
-        if (isOpen) {
-          angular.element('.md-toolbar-tools').addClass('setWhite');
-          angular.element('.multi-select-mobile').addClass('setDisabled');
-          $timeout(function() {
-            angular.element('#overlayMobileFab').addClass('toggledMobileShowOverlay');
-            angular.element('#content-container').addClass('setDisabled');
-          }, 250);
-        } else {
-          angular.element('.md-toolbar-tools').removeClass('setWhite');
-          $timeout(function() {
-            angular.element('.multi-select-mobile').removeClass('setDisabled');
-            angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
-            angular.element('#content-container').removeClass('setDisabled');
-          }, 250);
-        }
-      });
 
       loadTable().then(function(data) {
         $scope.tableParams = data;
