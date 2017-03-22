@@ -602,75 +602,10 @@
       </div>
     </div>
   </div>
-  <div id="fabMyFiles" class="fab-2-rows">
-    <md-fab-toolbar md-open="fab.isOpen" count="fab.count"
-                    md-direction="{{sharedSpaceListVm.fab.selectedDirection}}" class="visible-xs">
-      <md-fab-trigger class="align-with-text">
-        <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;"
-                   id="primary-fab-action">
-          <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
-        </md-button>
-      </md-fab-trigger>
-      <md-toolbar style="padding:0">
-        <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
-        <md-fab-actions class="md-toolbar-tools">
-          <md-button aria-label="label" class="md-icon-button" flow-btn
-                     x-ng-show="linshareModeProduction == false">
-            <a ui-sref="documents.upload" class="disabled-work-in-progress">
-              <i>
-                <div class="groups-project disabled-work-in-progres">
-                  <div class="path1"></div><div class="path2"></div><div class="path3"></div><div class="path4"></div>
-                </div>
-              </i>
-              <span class="disabled-work-in-progress">{{"WORKGROUPS_LIST.PROJECT" | translate}}</span>
-            </a>
-          </md-button>
-
-
-          <md-button aria-label="comment" class="md-icon-button" flow-btn>
-            <a href="javascript:void(0);"  ng-hide="sharedSpaceListVm.currentWorkgroupMember.readonly">
-              <i class="zmdi zmdi-file-plus fab-groups"></i>
-              <span>{{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn>
-            <a href="#/files/list" ui-sref="documents.files" class="disabled-work-in-progress">
-              <i>
-                <div class="groups-shared-folder disabled-work-in-progress">
-                  <div class="path1"></div><div class="path2"></div><div class="path3"></div><div class="path4"></div>
-                </div>
-              </i>
-              <span class="disabled-work-in-progress">{{"WORKGROUPS_LIST.SHARED_FOLDER" | translate}}</span>
-            </a>
-          </md-button>
-        </md-fab-actions>
-        <md-fab-actions class="md-toolbar-tools">
-          <md-button aria-label="label" class="md-icon-button">
-            <a href="javascript:void(0);" x-ng-click="sharedSpaceListVm.createFolder();">
-              <i>
-                <div class="groups-folder">
-                  <div class="path1"></div><div class="path2"></div>
-                </div>
-              </i>
-              <span>{{"WORKGROUPS_LIST.FOLDER" | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn
-                     x-ng-show="linshareModeProduction == false">
-            <a href="#/files/list" ui-sref="documents.files">
-              <i class="zmdi zmdi-pin-account"></i>
-              <span>{{"WORKGROUPS_LIST.UPLOAD_REQUEST" | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn>
-            <a href="#/files/list" ui-sref="documents.files">
-              <i><span class="groups-add-member"></span></i>
-              <span>{{"WORKGROUPS_LIST.ADD_A_MEMBER" | translate}}</span>
-            </a>
-          </md-button>
-        </md-fab-actions>
-      </md-toolbar>
-    </md-fab-toolbar>
+  <div id="fabButtonCtn" fab-button
+       fab-button-actions="sharedSpaceListVm.fabButton.actions"
+       fab-button-flow="$flow"
+       fab-button-toolbar="sharedSpaceListVm.fabButton.toolbar">
   </div>
 </div>
 <section class="row multi-select-mobile visible-xs"

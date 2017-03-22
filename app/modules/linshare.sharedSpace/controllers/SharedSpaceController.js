@@ -146,30 +146,53 @@ angular.module('linshare.sharedSpace')
     $scope.$on('$stateChangeSuccess', function() {
       angular.element('.multi-select-mobile').appendTo('body');
     });
-    thisctrl.fab = {
-      isOpen: false,
-      count: 0,
-      selectedDirection: 'left'
+    thisctrl.fabButton = {
+      toolbar: {
+        activate: true,
+        label: 'BOUTON_ADD_FILE_TITLE'
+      },
+      actions: [
+        {
+          action: null,
+          label: 'WORKGROUPS_LIST.PROJECT',
+          icon: 'groups-project disabled-work-in-progress',
+          //TODO - SMA: Icon not working
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        },{
+          action: null,
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
+          icon: 'zmdi zmdi-file-plus fab-groups disabled-work-in-progress',
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        },{
+          action: function() {return thisctrl.createWorkGroup();},
+          label: 'WORKGROUPS_LIST.SHARED_FOLDER',
+          icon: 'groups-shared-folder'
+          //TODO - SMA: Icon not working
+        },{
+          action: null,
+          label: 'WORKGROUPS_LIST.FOLDER',
+          icon: 'groups-folder disabled-work-in-progress',
+          //TODO - SMA: Icon not working
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        },{
+          action: null,
+          label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
+          icon: 'zmdi zmdi-pin-account disabled-work-in-progress',
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        },{
+          action: null,
+          label: 'WORKGROUPS_LIST.ADD_A_MEMBER',
+          icon: 'groups-add-member disabled-work-in-progress',
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        }
+      ]
     };
-    $scope.$watch('fab.isOpen', function(isOpen) {
-      if (isOpen) {
-        angular.element('.md-toolbar-tools').addClass('setWhite');
-        angular.element('.multi-select-mobile').addClass('setDisabled');
-        angular.element('#overlayMobileFab').addClass('double-row-fab');
-        $timeout(function() {
-          angular.element('#overlayMobileFab').addClass('toggledMobileShowOverlay');
-          angular.element('#content-container').addClass('setDisabled');
-        }, 250);
-      } else {
-        angular.element('.md-toolbar-tools').removeClass('setWhite');
-        $timeout(function() {
-          angular.element('.multi-select-mobile').removeClass('setDisabled');
-          angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
-          angular.element('#content-container').removeClass('setDisabled');
-          angular.element('#overlayMobileFab').removeClass('double-row-fab');
-        }, 250);
-      }
-    });
+
     thisctrl.currentPage = 'group_list';
 
     thisctrl.sortDropdownSetActive = function(sortField, $event) {

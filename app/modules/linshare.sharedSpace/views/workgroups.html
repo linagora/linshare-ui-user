@@ -502,76 +502,11 @@
       </div>
     </div>
   </div>
-  <div id="fabMyFiles" class="fab-2-rows">
-    <md-fab-toolbar md-open="fab.isOpen" count="fab.count"
-                    md-direction="{{vm.fab.selectedDirection}}" class="visible-xs">
-      <md-fab-trigger class="align-with-text">
-        <md-button aria-label="menu" class="md-fab md-primary" style="position: relative;"
-                   id="primary-fab-action">
-          <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
-        </md-button>
-      </md-fab-trigger>
-      <md-toolbar style="padding:0">
-        <p class="title-fab">{{'BOUTON_ADD_FILE_TITLE' | translate}}</p>
-        <md-fab-actions class="md-toolbar-tools">
-          <md-button aria-label="label" class="md-icon-button" flow-btn
-                     x-ng-show="linshareModeProduction == false">
-            <a>
-              <i>
-                <div class="groups-project">
-                  <div class="path1"></div><div class="path2"></div><div class="path3"></div><div class="path4"></div>
-                </div>
-              </i>
-              <span>{{"WORKGROUPS_LIST.PROJECT" | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn>
-            <a href="#/files/list" ui-sref="documents.files" class="disabled-work-in-progress">
-              <i class="zmdi zmdi-file-plus fab-groups disabled-work-in-progress"></i>
-              <span class="disabled-work-in-progress">{{'ADD_FILES_DROPDOWN.UPLOAD_FILE' | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button">
-            <a href="javascript:void(0);" ng-click="vm.createWorkGroup();">
-              <i>
-                <div class="groups-shared-folder">
-                  <div class="path1"></div><div class="path2"></div><div class="path3"></div><div class="path4"></div>
-                </div>
-              </i>
-              <span>{{"WORKGROUPS_LIST.SHARED_FOLDER" | translate}}</span>
-            </a>
-          </md-button>
-        </md-fab-actions>
-        <md-fab-actions class="md-toolbar-tools">
-          <md-button aria-label="label" class="md-icon-button" flow-btn
-                     x-ng-show="linshareModeProduction == false">
-            <a ui-sref="documents.upload" class="disabled-work-in-progress">
-              <i>
-                <div class="groups-folder disabled-work-in-progress">
-                  <div class="path1"></div><div class="path2"></div>
-                </div>
-              </i>
-              <span class="disabled-work-in-progress">{{"WORKGROUPS_LIST.FOLDER" | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn
-                     x-ng-show="linshareModeProduction == false">
-            <a ui-sref="documents.files" class="disabled-work-in-progress">
-              <i class="zmdi zmdi-pin-account disabled-work-in-progress"></i>
-              <span class="disabled-work-in-progress">{{"WORKGROUPS_LIST.UPLOAD_REQUEST" | translate}}</span>
-            </a>
-          </md-button>
-          <md-button aria-label="comment" class="md-icon-button" flow-btn>
-            <a ui-sref="documents.files" class="disabled-work-in-progress">
-              <i><span class="groups-add-member disabled-work-in-progress"></span></i>
-              <span class="disabled-work-in-progress">{{"WORKGROUPS_LIST.ADD_A_MEMBER" | translate}}</span>
-            </a>
-          </md-button>
-        </md-fab-actions>
-      </md-toolbar>
-    </md-fab-toolbar>
+  <div id="fabButtonCtn" fab-button
+       fab-button-actions="vm.fabButton.actions"
+       fab-button-flow="$flow"
+       fab-button-toolbar="vm.fabButton.toolbar">
   </div>
-</div>
 <!-- TODO: does not display  -->
 <section class="row multi-select-mobile visible-xs"
          x-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
