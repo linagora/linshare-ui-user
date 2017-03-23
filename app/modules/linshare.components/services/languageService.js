@@ -1,30 +1,69 @@
 /**
- * Created by Alpha O. Sall on June 15th, 2016.
+ * languageService Factory
+ * @namespace linshare.components
  */
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('linshare.components')
+  angular
+    .module('linshare.components')
+    .factory('languageService', languageService);
 
-  // =========================================================================
-  // LANGUAGE SERVICE - GET USED LANGUAGE ET CHANGE LANGUAGE
-  // =========================================================================
-  .factory('languageService', ['$translate', '$log', 'localStorageService', function($translate, $log, localStorageService) {
-    return {
-      getLocale: function() {
-        var storedLocale = localStorageService.get('locale');
-        return storedLocale ? storedLocale : $translate.use();
-      },
-      changeLocale: function(key) {
-        key = addCountryLocaleCode(key);
-        $translate.use(key);
-        localStorageService.set('locale', key);
-        $log.debug('locale changed to ', key);
-      },
-      refreshLocale: function() {
-        $translate.refresh();
-      }
+  languageService.$inject = ['$translate', '$log', 'localStorageService'];
+
+  /**
+   * @namespace languageService
+   * @desc Service to manipulate language used for translation
+   * @memberOf linshare.components
+   */
+  function languageService($translate, $log, localStorageService) {
+    var service = {
+      changeLocale: changeLocale,
+      getLocale: getLocale,
+      refreshLocale: refreshLocale
     };
 
+    return service;
+
+    /**
+     * @name getLocale
+     * @desc Get current language used stocked in the local storage
+     * @memberOf linshare.components.languageService
+     */
+    function getLocale() {
+      var storedLocale = localStorageService.get('locale');
+      return storedLocale ? storedLocale : $translate.use();
+    }
+
+    /**
+     * @name changeLocale
+     * @desc Change translation to used base on language key
+     * @param {string} key - Language key
+     * @memberOf linshare.components.languageService
+     */
+    function changeLocale(key) {
+      key = addCountryLocaleCode(key);
+      $translate.use(key);
+      localStorageService.set('locale', key);
+      $log.debug('locale changed to ', key);
+    }
+
+    /**
+     * @name refreshLocale
+     * @desc Refresh local language to use for translation service $translate
+     * @memberOf linshare.components.languageService
+     */
+    function refreshLocale() {
+      $translate.refresh(getLocale());
+    }
+
+    /**
+     * @name addCountryLocaleCode
+     * @desc Return correct key name
+     * @param {string} key - Language key
+     * @returns {string} Language key
+     * @memberOf linshare.components.languageService
+     */
     function addCountryLocaleCode(key) {
       if (key.indexOf('-') === -1) {
         switch (key) {
@@ -43,4 +82,5 @@ angular.module('linshare.components')
       }
       return key;
     }
-  }]);
+  }
+})();
