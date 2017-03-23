@@ -207,7 +207,7 @@
     function addUploadedDocument(flowFile) {
       if(flowFile._from === $scope.mySpacePage) {
         flowFile.asyncUploadDeferred.promise.then(function(file) {
-          $scope.documentsListCopy.push(file.linshareDocument);
+          $scope.documentsList.push(file.linshareDocument);
           $scope.isNewAddition = true;
           $scope.tableParams.reload();
           $timeout(function() {
