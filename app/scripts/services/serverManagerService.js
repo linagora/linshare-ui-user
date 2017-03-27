@@ -35,7 +35,9 @@
      */
     function notify(message, details) {
       var errorToShow = (_.isUndefined(details) || details === '') ? message : message + ': ' + details;
-      toastService.error(errorToShow);
+      if (!toastService.isActive()) {
+        toastService.error(errorToShow);
+      }
       $log.error(errorToShow);
     }
 

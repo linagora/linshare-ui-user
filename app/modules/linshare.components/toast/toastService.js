@@ -9,15 +9,16 @@
     .module('linshare.components')
     .factory('toastService', toastService);
 
-  toastService.$inject = ['$mdToast', 'componentsConfig'];
+  toastService.$inject = ['$mdToast', '$timeout', 'componentsConfig'];
 
   /**
    * @namespace toastService
    * @desc Service to manage toast to display
    * @memberOf linshare.components
    */
-  function toastService($mdToast, componentsConfig) {
+  function toastService($mdToast, $timeout, componentsConfig) {
     var
+      activate = false,
       delay = {
         default: 3000,
         none: 0
@@ -29,9 +30,10 @@
     var service = {
       error: error,
       info: info,
+      isActive: isActive,
+      isolate: isolate,
       success: success,
-      warning: warning,
-      isolate: isolate
+      warning: warning
     };
 
     return service;
@@ -76,6 +78,16 @@
         toastClose: toastClose
       };
       return toastShow(mdToastLocals, delay.default);
+    }
+
+    /**
+     * @name isActive
+     * @desc Determine if a toast is active or not
+     * @returns {boolean} if a toast is active or not
+     * @memberOf linshare.components.toastService
+     */
+    function isActive() {
+      return activate;
     }
 
     /**
@@ -146,6 +158,7 @@
      * @memberOf linshare.components.toastService
      */
     function toastClose(scope) {
+      activate = false;
       scope.openDetails = false;
       if (_.isUndefined(scope.toastDetails)) {
         return $mdToast.hide();
@@ -163,6 +176,10 @@
      * @memberOf linshare.components.toastService
      */
     function toastShow(mdToastLocals, delay) {
+      activate = true;
+      $timeout(function() {
+        activate = false;
+      }, 1000);
       return $mdToast.show({
         locals: mdToastLocals,
         controller: 'toastController',

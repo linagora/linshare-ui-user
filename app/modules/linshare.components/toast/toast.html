@@ -16,8 +16,8 @@
           {{"TOAST_ALERT.ACTION.DETAILS" | translate}}
         </a>
       </div>
-      <md-button x-ng-show="toastLabel" x-ng-click="toastClose(toastVm)">{{toastLabel}}</md-button>
-      <md-button class="close-button m-0" x-ng-show="!toastLabel" x-ng-click="toastClose(toastVm)">
+      <md-button aria-label="{{toastLabel}}" x-ng-if="toastLabel" x-ng-click="toastClose(toastVm)">{{toastLabel}}</md-button>
+      <md-button aria-label="close" class="close-button m-0" x-ng-if="!toastLabel" x-ng-click="toastClose(toastVm)">
         <i class="zmdi zmdi-close"></i>
       </md-button>
     </div>
