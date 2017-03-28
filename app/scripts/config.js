@@ -13,6 +13,6 @@
       //It is recommended to set it to 'true' when having any trouble for reporting information from the browser console to your software vendor
       debug: true,
       localPath: 'i18n/original', //custom your i18n folder path
-      postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso',
+      postLogoutUrl: null // default : null, example 'http://my.fake.page.for.sso'
     });
 })();

@@ -115,6 +115,7 @@ function documentUtilsService($translate, $log, $timeout, $q) {
     return deferred.promise;
   }
 
+  // TODO: To BE REMOVED
   function resetItemSelection(selectedItems) {
     for(var i = selectedItems.length - 1; i >= 0; i--) {
       selectedItems[i].isSelected = false;

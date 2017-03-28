@@ -36,6 +36,12 @@
         readonly: 'READ'
       },
       simultaneous_upload: 1,
+      tableParams: {
+        count: 10,
+        sorting: {
+          modificationDate: 'desc'
+        }
+      },
 
       // For upload options management
       mySpacePage: 'myspace',

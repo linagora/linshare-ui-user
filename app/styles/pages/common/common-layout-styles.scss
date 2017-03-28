@@ -608,7 +608,7 @@ a.sidebar-link {
   color: #a0a0a0;
 }
 
-.actions a:hover i {
+.actions > a:hover i {
   transition: 250ms all ease-in-out;
   color: #111 !important;
 }
