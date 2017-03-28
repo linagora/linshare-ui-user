@@ -372,10 +372,7 @@
 
       function hide(form, obj) {
         sidebar.visible = false;
-        if (form) {
-          form.$setPristine();
-          form.$setUntouched();
-        }
+        sidebar.setContent(null);
         if (obj && !_.isUndefined(obj.reset)) {
           obj.reset();
         }
