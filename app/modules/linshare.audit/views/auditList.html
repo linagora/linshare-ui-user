@@ -67,7 +67,7 @@
                          aria-haspopup="true" aria-expanded="false">
                         <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                       </a>
-                      <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                      <ul class="uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
                         <li role="menuitem">
                           <a href="" class="center">
                             {{'TOOLBAR.ORDER_BY' | translate}}
@@ -77,40 +77,50 @@
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('authorName', $event)">
                           <span class="caret-area">
-                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-up"></i>
                             </span> {{'TABLE_HEADER.ACTOR' | translate}}
                           </a>
                         </li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('translatedAction', $event)">
                           <span class="caret-area">
-                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-up"></i>
                             </span> {{'TABLE_HEADER.ACTION' | translate}}
                           </a>
                         </li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('translatedType', $event)">
                           <span class="caret-area">
-                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-up"></i>
                             </span> {{'TABLE_HEADER.RESOURCE_TYPE' | translate}}
                           </a>
                         </li>
                         <li role="menuitem">
-                          <a href="" data-ng-click="auditVm.tableSort('resource.name', $event)">
+                          <a href="" data-ng-click="auditVm.tableSort('resourceName', $event)">
                           <span class="caret-area">
-                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-up"></i>
                             </span> {{'TABLE_HEADER.RESOURCE_NAME' | translate}}
                           </a>
                         </li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('shareRecipient', $event)">
                           <span class="caret-area">
-                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-up"></i>
                             </span> {{'TABLE_HEADER.RECIPIENT' | translate}}
                           </a>
                         </li>
@@ -118,8 +128,10 @@
                           <a href="" class="selected-sorting"
                              data-ng-click="auditVm.tableSort('creationDate', $event)">
                           <span class="caret-area">
-                              <i data-ng-show="auditVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-down"></i>
+                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                                 class="zmdi zmdi-caret-up"></i>
                             </span> {{'TABLE_HEADER.DATE' | translate}}
                           </a>
                         </li>

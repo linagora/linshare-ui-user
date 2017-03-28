@@ -11,7 +11,7 @@
     .controller('AuditController', AuditController);
 
   AuditController.$inject = ['$filter', '$scope', '$translate', '$translatePartialLoader', 'auditDetailsService',
-    'auditRestService', 'lsAppConfig', 'NgTableParams'];
+    'auditRestService', 'lsAppConfig', 'tableParamsService'];
 
   /**
    * @namespace AuditController
@@ -19,7 +19,7 @@
    * @memberOf LinShare.Audit
    */
   function AuditController($filter, $scope, $translate, $translatePartialLoader, auditDetailsService, auditRestService,
-                           lsAppConfig, NgTableParams) {
+                           lsAppConfig, tableParamsService) {
     /* jshint validthis: true */
     var auditVm = this;
 
@@ -31,12 +31,9 @@
     auditVm.endDate = new Date();
     auditVm.findAuditActionsByDate = findAuditActionsByDate;
     auditVm.maxDate = new Date();
-    auditVm.paramFilter = {};
-    auditVm.tableApplyFilter = tableApplyFilter;
     auditVm.tableFilterAction = [];
     auditVm.tableFilterType = [];
-    auditVm.tableSort = tableSort;
-    auditVm.toggleSelectedSort = true;
+
     activate();
 
     ////////////
@@ -75,7 +72,7 @@
         generateTableFilterSelect(auditVm.tableFilterAction, 'action');
 
         if (_.isUndefined(auditVm.tableParams)) {
-          auditVm.tableParams = loadTable();
+          launchTableParamsInitiation();
         } else {
           auditVm.tableParams.reload();
         }
@@ -104,62 +101,16 @@
     }
 
     /**
-     * @name loadTable
-     * @desc Load the table
+     * @name launchTableParamsInitiation
+     * @desc Initialize tableParams and related functions
      * @memberOf LinShare.Audit.AuditController
      */
-    function loadTable() {
-      return new NgTableParams({
-        page: 1,
-        sorting: {
-          creationDate: 'desc'
-        },
-        count: 10,
-        filter: auditVm.paramFilter
-      }, {
-        getData: function(params) {
-          var filteredData = params.hasFilter() ? $filter('filter')(auditVm.itemsList, params.filter()) : auditVm.itemsList;
-          var auditActions = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-          params.total(auditActions.length);
-          params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-          return (auditActions.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-      });
-    }
-
-    /**
-     * @name tableApplyFilter
-     * @desc Helper to apply a filter on a selection of colum
-     * @param {String} filterValue - The value to use for the filters
-     * @param {Array<String>} columns - The name of the column to apply the filter on
-     * @param {String} operator - The filter operator
-     * @memberOf LinShare.Audit.AuditController
-     */
-    //TODO - KLE: Refactor|Should be in a helper class and not repeated everytime we use a table, see the directive ?
-    function tableApplyFilter(filterValue, columns, operator) {
-      _.forEach(columns, function(column) {
-        auditVm.paramFilter[column] = filterValue;
-      });
-      auditVm.paramFilter.operator = operator ? operator : '&&';
-      auditVm.tableParams.filter(auditVm.paramFilter);
-      auditVm.tableParams.reload();
-    }
-
-    /**
-     * @name tableSort
-     * @desc Helper to sort element in table and set the visual on the right column
-     * @param {String} sortField - Name of the field to be sorted
-     * @param {jQuery.Event} $event - Event bound to the change
-     * @memberOf LinShare.Audit.AuditController
-     */
-    //TODO - KLE: Refactor|Should be in a helper class and not repeated everytime we use a table, see the directive ?
-    function tableSort(sortField, $event) {
-      auditVm.toggleSelectedSort = !auditVm.toggleSelectedSort;
-      auditVm.tableParams.sorting(sortField, auditVm.toggleSelectedSort ? 'desc' : 'asc');
-      var currTarget = $event.currentTarget;
-      angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
-        angular.element(currTarget).addClass('selected-sorting');
-      });
+    function launchTableParamsInitiation() {
+      tableParamsService.initTableParams(auditVm.itemsList);
+      auditVm.tableParamsService = tableParamsService;
+      auditVm.tableParams = tableParamsService.getTableParams();
+      auditVm.tableApplyFilter = tableParamsService.tableApplyFilter;
+      auditVm.tableSort = tableParamsService.tableSort;
     }
   }
 })();
