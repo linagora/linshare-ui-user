@@ -119,8 +119,10 @@
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
     function onErrorEmpty() {
-      return ((autocompleteUsersVm.form[autocompleteUsersVm.name].$touched || autocompleteUsersVm.form.$submitted) &&
-        autocompleteUsersVm.form[autocompleteUsersVm.name].$invalid && autocompleteUsersVm.required());
+      if (!_.isUndefined(autocompleteUsersVm.form[autocompleteUsersVm.name])) {
+        return ((autocompleteUsersVm.form[autocompleteUsersVm.name].$touched || autocompleteUsersVm.form.$submitted) &&
+          autocompleteUsersVm.form[autocompleteUsersVm.name].$invalid && autocompleteUsersVm.required());
+      }
     }
 
     /**
@@ -134,7 +136,7 @@
           autocompleteUsersVm.selectedUsersList);
       } else {
         var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
-        if (autocompleteUsersVm.withEmail ) {
+        if (autocompleteUsersVm.withEmail) {
           if (regexpEmail.test(viewValue)) {
             autocompleteUsersVm.searchUsersAccount(viewValue).then(function(data) {
               autocompleteUsersVm.selectedUser = data[0];
