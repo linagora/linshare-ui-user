@@ -1,15 +1,16 @@
 /**
- * @author Alpha O. Sall
+ * documentUtilsService Factory
+ * @namespace documentUtilsService
+ * @memberOf LinShare.document
  */
-
 'use strict';
 
 angular.module('linshare.document')
   .factory('documentUtilsService', documentUtilsService);
 
 function documentUtilsService($translate, $log, $timeout, $q) {
-  /* jshint validthis: true */
-  this.reloadDocumentsList = false;
+  var reloadDocumentsList = false;
+
   var swalTitle, swalText, swalConfirm, swalCancel;
   $timeout(function() {
     $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
@@ -29,8 +30,29 @@ function documentUtilsService($translate, $log, $timeout, $q) {
     selectDocument: toggleItemSelection,
     getItemDetails: getItemDetails,
     resetItemSelection: resetItemSelection,
-    reloadDocumentsList: this.reloadDocumentsList
+    getReloadDocumentsList: getReloadDocumentsList,
+    setReloadDocumentsList: setReloadDocumentsList
   };
+
+  /**
+   * @namespace getReloadDocumentsList
+   * @desc Return variable reloadDocumentsList
+   * @returns {boolean} reloadDocumentsList's value
+   * @memberOf LinShare.document.documentUtilsService
+   */
+  function getReloadDocumentsList() {
+    return reloadDocumentsList;
+  }
+
+  /**
+   * @namespace setReloadDocumentsList
+   * @desc Set new value to the variable reloadDocumentsList
+   * @param {boolean} value - value to apply to the variable reloadDocumentsList
+   * @memberOf LinShare.document.documentUtilsService
+   */
+  function setReloadDocumentsList(value) {
+    reloadDocumentsList = value;
+  }
 
   function downloadFileFromResponse(fileStream, fileName, fileType) {
     var urlObject;

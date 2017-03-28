@@ -20,12 +20,12 @@
       <a><i class="zmdi zmdi-close"></i></a>
     </div>
     <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
-      <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
+      <div class="pull-left" data-ng-class="{'active-button-show-selection': tableParamsService.getSelectionIsIsolated()}"
            x-ng-click="toggleFilterBySelectedFiles()">
         <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
         <div class="pull-left view-icons-ctn groups-view">
-          <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection"></i>
-          <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show="tableParamsService.getSelectionIsIsolated()"></i>
+          <i class="fa fa-eye" aria-hidden="true" data-ng-show="!tableParamsService.getSelectionIsIsolated()"></i>
         </div>
       </div>
       <div class="pull-left view-icons-ctn reset-icon" x-ng-click="resetSelectedDocuments()">

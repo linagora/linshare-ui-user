@@ -30,8 +30,8 @@
         <i class="zmdi zmdi-file"></i>
         {{"BREADCRUMB_TITLE" | translate}}
       </a>
-      <span class="sub-category-chevron pipe-separator" x-ng-if="activeBtnShowSelection">|</span>
-      <a class="click-disabled" x-ng-if="activeBtnShowSelection">
+      <span class="sub-category-chevron pipe-separator" data-ng-if="tableParamsService.getSelectionIsIsolated()">|</span>
+      <a class="click-disabled" data-ng-if="tableParamsService.getSelectionIsIsolated()">
         {{"BREADCRUMB_ISOLATE" | translate}}
       </a>
     </div>
@@ -59,7 +59,7 @@
               <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                 <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
               </a>
-              <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown stop-propagate"
+              <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown sort-dropdown stop-propagate"
                   uib-dropdown-menu="">
                 <li role="menuitem">
                   <a href="" class="center">
@@ -69,45 +69,45 @@
                 <li class="divided"></li>
                 <li role="menuitem">
                   <a href="" class="ng-binding selected-sorting"
-                     ng-click="sortDropdownSetActive('modificationDate', $event)">
+                     data-ng-click="sortDropdownSetActive('modificationDate', $event)">
                       <span class="caret-area">
-                      <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                      <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                      <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
+                      <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                       </span>
                     {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('creationDate', $event)">
+                  <a href="" data-ng-click="sortDropdownSetActive('creationDate', $event)">
                           <span class="caret-area">
-                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
+                          <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
                     {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
                   </a>
                 </li>
-                <li role="menuitem"> <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('size', $event)">
+                <li role="menuitem"> <a href="" data-ng-click="sortDropdownSetActive('size', $event)">
                           <span class="caret-area">
-                          <i ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
+                          <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
                     {{'FILTER_COMPONENT.BY_SIZE' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('name', $event)">
+                  <a href="" data-ng-click="sortDropdownSetActive('name', $event)">
                           <span class="caret-area">
-                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
+                          <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
                     {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate}}
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a href="" class="ng-binding" ng-click="sortDropdownSetActive('shared', $event)">
+                  <a href="" data-ng-click="sortDropdownSetActive('shared', $event)">
                           <span class="caret-area">
-                          <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
+                          <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
                     {{'FILTER_COMPONENT.IS_SHARED' | translate}}
                   </a>

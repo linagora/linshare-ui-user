@@ -5,14 +5,14 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
-  function documentController($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate, $translatePartialLoader, $window, $log, documentsList, $timeout, documentUtilsService, $q,
-                              flowUploadService, sharableDocumentService, lsAppConfig, toastService,
-                              $stateParams, documentSelected, itemUtilsService) {
-    var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
+  function documentController($scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log, documentsList, $timeout,
+                              documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService, $stateParams,
+                              documentSelected, tableParamsService) {
+
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
     var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;
     var swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500, toastDeleteSingularSuccess, toastDeletePluralSuccess;
-    $scope.addSelectedDocument = addSelectedDocument;
+
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
     $scope.closeDetailSidebar = closeDetailSidebar;
@@ -37,7 +37,6 @@
     $scope.getDocumentInfo = getDocumentInfo;
     $scope.getDocumentThumbnail = getDocumentThumbnail;
     $scope.itemUtilsService = itemUtilsService;
-    $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.lsAppConfig = lsAppConfig;
     $scope.lsFormat = lsFormat;
@@ -53,18 +52,11 @@
     $scope.recipientShareDetails = {
       current: ''
     };
-    $scope.reloadDocuments = reloadDocuments;
-    $scope.resetSelectedDocuments = resetSelectedDocuments;
-    $scope.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
-    $scope.selectedDocuments = [];
     $scope.showCurrentFile = showCurrentFile;
-    $scope.sortDropdownSetActive = sortDropdownSetActive;
     $scope.setTextInput = setTextInput;
     $scope.slideTextarea = slideTextarea;
     $scope.slideUpTextarea = slideUpTextarea;
-    $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
     $scope.toggleSearchState = toggleSearchState;
-    $scope.toggleSelectedSort = true;
     $scope.unavailableMultiDownload = unavailableMultiDownload;
     $scope.updateDocument = updateDocument;
 
@@ -98,6 +90,7 @@
         }]
       };
 
+      // TODO : rename all GROWL
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
@@ -131,52 +124,43 @@
         angular.element('.multi-select-mobile').appendTo('body');
       });
 
+      // TODO : delete that and use $scope.$watch(function() {return documentUtilsService.getReloadDocumentsList();}
       $scope.$on('linshare-share-done', function() {
         $scope.reloadDocuments();
       });
 
-      $scope.$on('$stateChangeSuccess', function() {
-        angular.element('.multi-select-mobile').appendTo('body');
-      });
-
       $scope.$watch(function() {
-        return documentUtilsService.reloadDocumentsList;
+        return documentUtilsService.getReloadDocumentsList();
       }, function(newValue) {
         if (newValue) {
           $scope.reloadDocuments();
+          documentUtilsService.setReloadDocumentsList(false);
         }
       }, true);
 
-      loadTable().then(function(data) {
-        $scope.tableParams = data;
-        if (_.isUndefined($scope.documentSelected)) {
-          $translate('GROWL_ALERT.ERROR.FILE_NOT_FOUND').then(function(message) {
-            toastService.error(message);
-          });
-        }
-        else if ($scope.documentSelected !== null) {
-          $translate('TOAST_ALERT.WARNING.ISOLATED_FILE').then(function(message) {
-            toastService.isolate(message);
-          });
-          $scope.addSelectedDocument($scope.documentSelected);
-          $scope.toggleFilterBySelectedFiles();
-          $scope.showCurrentFile($scope.documentSelected);
-        }
-      });
+      launchTableParamsInitiation();
+
+      if (_.isUndefined($scope.documentSelected)) {
+        $translate('GROWL_ALERT.ERROR.FILE_NOT_FOUND').then(function(message) {
+          toastService.error(message);
+        });
+      } else if ($scope.documentSelected !== null) {
+        $translate('TOAST_ALERT.WARNING.ISOLATED_FILE').then(function(message) {
+          toastService.isolate(message);
+        });
+        $scope.addSelectedDocument($scope.documentSelected);
+        $scope.toggleFilterBySelectedFiles();
+        $scope.showCurrentFile($scope.documentSelected);
+      }
     }
 
-    function addSelectedDocument(document) {
-      documentUtilsService.selectDocument($scope.selectedDocuments, document);
-    }
-
+    //TODO - IAB: Same code as loadTable|getData function to get list of elements in the table -> function
     function addUploadedDocument(flowFile) {
       if(flowFile._from === $scope.mySpacePage) {
         flowFile.asyncUploadDeferred.promise.then(function(file) {
           $scope.documentsList.push(file.linshareDocument);
-          if ($scope.tableParams.page() === findSpecificPage(file.linshareDocument.uuid)) {
-            $scope.isNewAddition = true;
-          }
-          $scope.tableParams.reload();
+          $scope.isNewAddition = true;
+          tableParamsService.reloadTableParams();
           $timeout(function() {
             $scope.isNewAddition = false;
           }, 0);
@@ -284,23 +268,27 @@
       });
     }
 
-    function initFlagsOnSelectedPagesFunction() {
-      $scope.flagsOnSelectedPages = {};
-    }
-
-    function lengthOfSelectedDocuments() {
-      return $scope.selectedDocuments.length;
-    }
-
-    function loadSelectedDocument(filteredData) {
-      var documentToSelect = _.find(filteredData, {
-        'uuid': $stateParams.uploadedFileUuid
-      });
-      $stateParams.uploadedFileUuid = null;
-      if (!_.isUndefined(documentToSelect)) {
-        addSelectedDocument(documentToSelect);
-        $scope.showCurrentFile(documentToSelect);
-      }
+    /**
+     * @name launchTableParamsInitiation
+     * @desc Initialize tableParams and related functions
+     * @memberOf LinShare.document.documentController
+     */
+    function launchTableParamsInitiation() {
+      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, $stateParams.uploadedFileUuid)
+        .then(function() {
+          $scope.tableParamsService = tableParamsService;
+          $scope.tableParams = tableParamsService.getTableParams();
+          $scope.lengthOfSelectedDocuments = tableParamsService.lengthOfSelectedDocuments;
+          $scope.resetSelectedDocuments = tableParamsService.resetSelectedItems;
+          $scope.selectedDocuments = tableParamsService.getSelectedItemsList();
+          $scope.selectDocumentsOnCurrentPage = tableParamsService.tableSelectAll;
+          $scope.addSelectedDocument = tableParamsService.toggleItemSelection;
+          $scope.sortDropdownSetActive = tableParamsService.tableSort;
+          $scope.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
+          $scope.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
+          $scope.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
+          $scope.reloadDocuments = reloadDocuments;
+        });
     }
 
     /**
@@ -316,6 +304,7 @@
       $scope.mainVm.sidebar.show();
     }
 
+    //TODO - IAB: Same code as loadTable|getData function to get list of elements in the table -> function
     function findSpecificPage(fileUuid) {
       if (!_.isNil(fileUuid)) {
         var items;
@@ -344,33 +333,6 @@
         var filteredData = filter ? $filter('filter')(data, filter) : data;
         return sort ? $filter('orderBy')(filteredData, sort) : filteredData;
       }
-    }
-
-    function loadTable() {
-      return $q(function(resolve) {
-        resolve(
-          new NgTableParams({
-            page: findSpecificPage($stateParams.uploadedFileUuid),
-            sorting: {
-              modificationDate: 'desc'
-            },
-            count: 10,
-            filter: $scope.paramFilter
-          }, {
-            total: $scope.documentsList.length,
-            getData: function(params) {
-              var filteredData =
-                params.filter() ? $filter('filter')($scope.documentsList, params.filter()) : $scope.documentsList;
-              var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-              params.total(files.length);
-              if ($stateParams.uploadedFileUuid) {
-                loadSelectedDocument(filteredData);
-              }
-              return (files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-          })
-        );
-      });
     }
 
     function lsFormat() {
@@ -411,52 +373,14 @@
     }
 
     function reloadDocuments() {
-      $timeout(function() {
-        LinshareDocumentRestService.getList().then(function(data) {
-          $scope.documentsList = data;
-          $scope.isNewAddition = true;
-          $scope.tableParams.reload();
-          $timeout(function() {
-            $scope.isNewAddition = false;
-          }, 0);
-        }, 500);
-      });
-    }
-
-    function resetSelectedDocuments() {
-      $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
-      delete $scope.tableParams.filter().isSelected;
-      _.forEach($scope.selectedDocuments, function(selectedDoc) {
-        selectedDoc.isSelected = false;
-      });
-      initFlagsOnSelectedPages();
-      $scope.selectedDocuments = [];
-    }
-
-    function selectDocumentsOnCurrentPage(data, page, selectFlag) {
-      var currentPage = page || $scope.tableParams.page();
-      var dataOnPage = data || $scope.tableParams.data;
-      var select = selectFlag || $scope.flagsOnSelectedPages[currentPage];
-      if (!select) {
-        _.forEach(dataOnPage, function(element) {
-          if (!element.isSelected) {
-            element.isSelected = true;
-            $scope.selectedDocuments.push(element);
-          }
-        });
-        $scope.flagsOnSelectedPages[currentPage] = true;
-      } else {
-        $scope.selectedDocuments = _.xor($scope.selectedDocuments, dataOnPage);
-        _.forEach(dataOnPage, function(element) {
-          if (element.isSelected) {
-            element.isSelected = false;
-            _.remove($scope.selectedDocuments, function(n) {
-              return n.uuid === element.uuid;
-            });
-          }
-        });
-        $scope.flagsOnSelectedPages[currentPage] = false;
-      }
+      LinshareDocumentRestService.getList().then(function(data) {
+        $scope.documentsList = data;
+        $scope.isNewAddition = true;
+        tableParamsService.reloadTableParams($scope.documentsList);
+        $timeout(function() {
+          $scope.isNewAddition = false;
+        }, 0);
+      }, 500);
     }
 
     function setTextInput($event) {
@@ -507,38 +431,20 @@
       angular.element(currTarget).parent().removeClass('show-full-comment');
     }
 
-    function sortDropdownSetActive(sortField, $event) {
-      $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
-      $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
-      var currTarget = $event.currentTarget;
-      angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
-        angular.element(currTarget).addClass('selected-sorting');
-      });
-    }
-
     function sortResponseDeletion(items, responsesDeletion) {
       if (items) {
         return _.map(items, function(restangularizedItem) {
           return restangularizedItem.remove().then(function() {
             _.remove($scope.documentsList, restangularizedItem);
             _.remove($scope.selectedDocuments, restangularizedItem);
-            $scope.tableParams.reload();
-            initFlagsOnSelectedPages();
+            tableParamsService.reloadTableParams();
+            tableParamsService.resetFlagsOnSelectedPages($scope.flagsOnSelectedPages);
             return responsesDeletion;
           }).catch(function(error) {
             responsesDeletion.push([restangularizedItem.name, error]);
             return responsesDeletion;
           });
         });
-      }
-    }
-
-    function toggleFilterBySelectedFiles() {
-      $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
-      if ($scope.tableParams.filter().isSelected) {
-        delete $scope.tableParams.filter().isSelected;
-      } else {
-        $scope.tableParams.filter().isSelected = true;
       }
     }
 

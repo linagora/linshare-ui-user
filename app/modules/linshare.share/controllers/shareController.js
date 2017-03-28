@@ -56,7 +56,7 @@ angular.module('linshare.share')
       shareActionVm.newShare.addDocuments(selectedDocuments);
       shareActionVm.newShare.share().then(function() {
         $scope.$emit('linshare-share-done');
-        documentUtilsService.reloadDocumentsList = true;
+        documentUtilsService.setReloadDocumentsList(true);
         $scope.mainVm.sidebar.hide();
         $scope.share_array.push(angular.copy(shareActionVm.newShare.getObjectCopy()));
         shareActionVm.newShare.resetForm();
