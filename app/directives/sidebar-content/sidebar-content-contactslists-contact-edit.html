@@ -18,7 +18,8 @@
                      'fg-not-empty' : !updateContactForm.lastname.$error.required}">
               <input type="text" x-ng-focus="lastnameFocus=true" x-ng-blur="lastnameFocus=false"
                      required class="input-sm form-control fg-input"
-                     x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.lastName"
+                     data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.lastNameModel"
+                     data-ng-model-options="{getterSetter: true}"
                      name="lastname" id="lastname">
               <label class="fg-label required" for="lastname">{{"CONTACTS_LISTS_ACTION.ORDER_BY.LAST_NAME" |
                 translate}}</label>
@@ -37,8 +38,9 @@
                        'fg-toggled' : firstnameFocus,
                        'fg-not-empty' : !updateContactForm.firstname.$error.required}">
               <input type="text" x-ng-focus="firstnameFocus=true" x-ng-blur="firstnameFocus=false"
-                     required class="form-control" name="firstname"
-                     x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.firstName" id="firstname">
+                     required class="form-control" name="firstname" id="firstname"
+                     data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.firstNameModel"
+                     data-ng-model-options="{getterSetter: true}">
               <label class="fg-label required" for="firstname">
                 {{"CONTACTS_LISTS_ACTION.ORDER_BY.FIRST_NAME" | translate}}
               </label>

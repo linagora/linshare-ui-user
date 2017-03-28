@@ -73,6 +73,7 @@
      */
     function activate() {
       $translatePartialLoader.addPart('contactsLists');
+      setModelForEdit();
 
       contactsListsListRestService.get(contactsListsContactsVm.contactsListUuid).then(function(details) {
         contactsListsContactsVm.contactsListDetails = details;
@@ -340,6 +341,39 @@
     }
 
     /**
+     * @name setModelForEdit
+     * @desc Set a getter/setter model for firstName and lastName to avoid live editing
+     * @param {Object} item - Contact object
+     * @memberOf LinShare.contactsLists.contactsListsContactsController
+     */
+    function setModelForEdit(item) {
+      if (item) {
+        getSetModel(item);
+      } else {
+        _.forEach(contactsListsContactsVm.itemsList, function(item) {
+          getSetModel(item);
+        });
+      }
+
+      /**
+       * @name getSetModel
+       * @desc Function get/set of property firstName and lastName of contact object
+       * @param {Object} item - Contact object
+       * @memberOf LinShare.contactsLists.contactsListsContactsController.setModelForEdit
+       */
+      function getSetModel(item) {
+        item._firstName = _.clone(item.firstName);
+        item.firstNameModel = function getSetFirstNameModel(value) {
+          return _.isUndefined(value) ? item._firstName : item._firstName = value;
+        };
+        item._lastName = _.clone(item.lastName);
+        item.lastNameModel = function getSetLastNameModel(value) {
+          return _.isUndefined(value) ? item._lastName : item._lastName = value;
+        };
+      }
+    }
+
+    /**
      * @name setSubmitted
      * @desc description
      * @param {DOM} form - form to validate
@@ -365,10 +399,7 @@
      */
     // TODO : IAB - refactor with service
     function showItemDetails(item, event, whichTab) {
-      var itemClonned = _.cloneDeep(item);
-      itemClonned.displayedFirstName = _.clone(item.firstName);
-      itemClonned.displayedLastName = _.clone(item.lastName);
-      contactsListsContactsVm.currentSelectedDocument.current = itemClonned;
+      contactsListsContactsVm.currentSelectedDocument.current = item;
       contactsListsContactsVm.loadSidebarContent(lsAppConfig.contactslistsContact);
       contactsListsContactsVm.mdtabsSelection.selectedIndex = whichTab || 0;
 
@@ -452,11 +483,14 @@
     function updateContact(form, contact) {
       if (form.$valid) {
         var contactToSave = _.cloneDeep(contact);
-        delete contactToSave.displayedFirstName;
-        delete contactToSave.displayedLastName;
+        contactToSave.firstName = contactToSave._firstName;
+        contactToSave.lastName = contactToSave._lastName;
+        delete contactToSave._firstName;
+        delete contactToSave._lastName;
         // TODO : IAB object returned to implement -> contactSaved
         contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave).then(function() {
           contactsListsContactsVm.itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
+          setModelForEdit(contactToSave);
           $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
             toastService.success(message);
           });
