@@ -85,7 +85,7 @@ display : flex ;
   color: #0070a3;
   width: 70px;
   height: 70px;
-  line-height: 71px;
+  line-height: 206%;
   align-self: center;
   align-items: center;
   text-align: center;
@@ -94,7 +94,7 @@ display : flex ;
 }
 
 .temp-size {
-  font-size: 0.85em;
+  font-size: 0.65em;
 }
 
 .shared-activated.zmdi-alert-triangle {

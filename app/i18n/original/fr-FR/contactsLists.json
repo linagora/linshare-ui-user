@@ -1,6 +1,9 @@
 {
-  "BACKGROUND_CONTACTS_TITLE_MSG": "Créer vos Listes de Contacts",
-  "BACKGROUND_CONTACTS_MSG": "Ces listes vous permettent de sauvegarder et d'organiser vos contacts.",
+
+  "BACKGROUND_CONTACTS_MSG": "Ajoutez et mettez à jour les informations de vos contacts.",
+  "BACKGROUND_CONTACTS_TITLE_MSG": "Ajouter des contacts",
+  "BACKGROUND_CONTACTS_LIST_MSG": "Ces listes vous permettent de sauvegarder et d'organiser vos contacts.",
+  "BACKGROUND_CONTACTS_LIST_TITLE_MSG": "Créer vos listes de contacts",
   "CONTACTS_LISTS_ACTION": {
     "ADD_DESCRIPTION": "Ajoutez une description",
     "CREATE_CONTACTS_LIST": "Créer une liste de contacts",

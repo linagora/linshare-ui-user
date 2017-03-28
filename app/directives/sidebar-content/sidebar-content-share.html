@@ -22,7 +22,7 @@
     {{"RIGHT_PANEL.SHARE.UNHIDE_FILES" | translate}}
   </a>
 </div>
-<div class="card col-xs-12" id="content-ctn-sidebar">
+<div class="card col-xs-12 form-within-sidebar create-share" id="content-ctn-sidebar">
   <div class="custom-list-container clearfix">
     <div class="recipients-form-sections clearfix">
       <h2 class="pull-left headerSubCtn">
@@ -158,9 +158,10 @@
     </div>
   </div>
 </div>
-<div class="bottom-sidebar-btn">
+<div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
   <button class="btn btn-default col-xs-6"
-          x-ng-click="shareActionVm.closeSideBar(); mainVm.sidebar.getData().closeDropdown($event)">
+          x-ng-click="shareActionVm.closeSideBar(); mainVm.sidebar.getData().closeDropdown($event);
+          !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments()">
     {{"NAVIGATION.CANCEL" | translate}}
   </button>
   <button class="btn btn-primary col-xs-6"

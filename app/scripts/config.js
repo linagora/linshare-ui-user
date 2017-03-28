@@ -24,6 +24,7 @@
         en: 'en-US',
         vi: 'vi-VN'
       },
+      licence: true,
       localPath: 'i18n/original', //custom your i18n folder path
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso',
       production: false,

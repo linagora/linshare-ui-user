@@ -26,6 +26,7 @@
     //TODO: shall be moved to the directive controller of linshareSidebar directive
     var widthWindow = angular.element(window).width();
 
+    $rootScope.isMobile = angular.element('html').hasClass('ismobile');
     $rootScope.mobileWidthBreakpoint = 768;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.sidebarRightWidth = 350;
@@ -64,10 +65,13 @@
       }
 
       //Watcher for setting sidebar in mobile mode or desktop on resize
-      angular.element(window).resize(function() {
-        $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
-        checkTableHeightService.checkAndSetNewWidthSidebarRight();
-      });
+      if (!$rootScope.isMobile) {
+        angular.element(window).resize(function() {
+          $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
+          checkTableHeightService.checkAndSetNewWidthSidebarRight();
+        });
+      }
+
       $scope.$watch(function() {
         return $window.innerWidth;
       }, function() {

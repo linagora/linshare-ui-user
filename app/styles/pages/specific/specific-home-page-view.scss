@@ -24,19 +24,22 @@
 /**********************
     HOME PAGE UPPER
 ***********************/
-
+#home{
+  overflow-y: auto;
+  padding-bottom: 50px;
+}
 .upper-container {
-  flex: 0 0 auto;
   width: 100%;
-  height: 50%;
   position: relative;
   overflow: hidden;
   text-align: center;
-  -webkit-box-shadow: inset 0 0 13px 0 rgba(0, 0, 0, 0.34);
-  -moz-box-shadow: inset 0 0 13px 0 rgba(0, 0, 0, 0.34);
   box-shadow: inset 0 0 13px 0 rgba(0, 0, 0, 0.34);
   background-image: url(../images/banner_homepage_linshare.png);
   background-size: cover;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  min-height: 400px;
   .tagline-ctn {
     display: flex;
     width: 100%;
@@ -157,6 +160,7 @@ HOME PAGE BOTTOM NOTIFICATIONS
 ***********************/
 
 .bottom-container {
+  flex: 1 1 auto;
   > h2 {
     margin-left: 1.4em;
   }
@@ -264,20 +268,33 @@ HOME PAGE BOTTOM NOTIFICATIONS
 
 /*TODO replace  #fg-img with .upper-container > img and remove ref*/
 @media (max-width: 768px) {
-  .upper-container {
-    height: 30%;
-  }
-  .bottom-container .flex-ctn {
-    flex: 0 0 100%;
+  .bottom-container {
+    padding: 0 17px;
+    padding-bottom: 40px;
+    .flex-ctn {
+      flex: 0 0 100%;
+    }
+    .content-section {
+      margin-left: 0;
+    }
+    > h2 {
+      margin-left: 0;
+    }
   }
   #fg-img {
-    position: relative;
-    display: inline !important;
+    display: flex !important;
     align-self: center;
     justify-content: center;
     z-index: 3;
     width: 48%;
-    top: 50%;
-    transform: translateY(-58%);
+  }
+  .upper-container{
+    height: inherit;
+    flex: 0 0 30%;
+    display: flex;
+    min-height: inherit;
+  }
+  #home {
+    padding-bottom: 0;
   }
 }

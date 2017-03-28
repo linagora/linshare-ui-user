@@ -57,27 +57,23 @@
                 </div>
                 <!-- TODO: Set the appropriate action links except for from the last item for the my files view-->
                 <div class="visible-xs clearfix sidebar-toolbar">
-                  <ul class="actions col-xs-12" x-ng-show="mainVm.sidebar.getData().currentPage == 'my_files'">
-                    <li x-ng-click="mainVm.sidebar.getData().showCurrentFile(
-                                      mainVm.sidebar.getData().currentSelectedDocument.current,$event)"
-                        event-propagation-stop class="col-xs-3">
-                      <a href=""  x-ng-click="mainVm.sidebar.getData().deleteDocuments(
+                  <ul class="actions col-xs-12" data-ng-show="mainVm.sidebar.getData().currentPage == 'my_files'">
+                    <li data-ng-click="mainVm.sidebar.getData().deleteDocuments(
                                                 mainVm.sidebar.getData().currentSelectedDocument.current)"
+                        event-propagation-stop class="col-xs-3">
+                      <a href=""
                          title="{{'ACTION.DELETE' | translate}}">
                         <i class="zmdi zmdi-delete"></i>
                       </a>
                     </li>
-                    <li class="col-xs-3">
-                      <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
-                         x-ng-click="mainVm.sidebar.getData().onShare()">
+                    <li class="col-xs-3" x-ng-click="mainVm.sidebar.getData().onShare()">
+                      <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}">
                         <i class="zmdi zmdi-share"></i>
                       </a>
                     </li>
-                    <li class="col-xs-3">
-                      <a x-ng-href=""
-                         x-ng-click="mainVm.sidebar.getData().downloadFile(
-                                      mainVm.sidebar.getData().currentSelectedDocument.current)"
-                         title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
+                    <li class="col-xs-3" x-ng-click="mainVm.sidebar.getData().downloadFile(
+                                      mainVm.sidebar.getData().currentSelectedDocument.current)">
+                      <a title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
                         <i class="zmdi zmdi-download"></i>
                       </a>
                     </li>
@@ -90,9 +86,8 @@
                   </ul>
                   <!-- TODO: Set the appropriate action links for the received files view-->
                   <ul class="actions col-xs-12" x-ng-show="mainVm.sidebar.getData().currentPage == 'received_files'">
-                    <li x-ng-click="mainVm.sidebar.getData().showCurrentFile(
-                                      mainVm.sidebar.getData().currentSelectedDocument.current, $event)"
-                        event-propagation-stop class="col-xs-3">
+                    <li event-propagation-stop class="col-xs-3" x-ng-click="mainVm.sidebar.getData().deleteDocuments(
+                                      mainVm.sidebar.getData().currentSelectedDocument.current)">
                       <a href=""
                          title="{{'ACTION.DELETE' | translate}}">
                         <i class="zmdi zmdi-delete"></i>
@@ -104,18 +99,17 @@
                         <i class="zmdi zmdi-swap"></i>
                       </a>
                     </li>
-                    <li class="col-xs-3">
+                    <li class="col-xs-3" x-ng-click="mainVm.sidebar.getData().downloadFile(
+                                      mainVm.sidebar.getData().currentSelectedDocument.current)">
                       <a x-ng-href=""
-                         x-ng-click="mainVm.sidebar.getData().downloadFile(
-                                      mainVm.sidebar.getData().currentSelectedDocument.current)"
-                         title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}" event-propagation-stop>
+                         title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
                         <i class="zmdi zmdi-download"></i>
                       </a>
                     </li>
-                    <li class="col-xs-3">
-                      <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}" dropdown-toggle
-                         event-propagation-stop class="disabled-work-in-progress"
-                         x-ng-click="mainVm.sidebar.getData().copyIntoFiles(mainVm.sidebar.getData().selectedDocuments)">
+                    <li class="col-xs-3"
+                        x-ng-click="mainVm.sidebar.getData().copyIntoFiles(
+                                    mainVm.sidebar.getData().currentSelectedDocument.current)">
+                      <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}">
                         <i class="zmdi zmdi-copy"></i>
                       </a>
                     </li>
@@ -126,7 +120,7 @@
                   <div class="flex-ctn detail-info-ctn">
                     <div class="item-l">
                       <span class="first-letter user-info" x-ng-if="mainVm.sidebar.getData().currentPage == 'my_files'">
-                        {{userLogged.firstLetter}}
+                        {{loggedUser.firstName.charAt(0)}}
                       </span>
                       <span class="first-letter user-info" x-ng-if="mainVm.sidebar.getData().currentPage == 'received_files'">
                         {{mainVm.sidebar.getData().currentSelectedDocument.current.sender.firstName.charAt(0)}}

@@ -125,10 +125,6 @@
         // TODO : choose myspace or workgroup (if workgroup, open a dialog where I can browse folders)
         flowFile._from = $scope.mySpacePage;
         uploadQueueVm.selectUploadingFile(flowFile, true);
-        angular.element('.drag-and-drop-ctn').addClass('out-of-focus');
-        if (angular.element('upload-box') !== null) {
-          angular.element('.info-share').css('opacity', '1');
-        }
       });
 
       $scope.$on('flow::fileError', function fileErrorAction() {

@@ -88,6 +88,12 @@
     }
 }
 
+.upload-files {
+  .menu-popover-ctn {
+    flex: 0 0 55px;
+  }
+}
+
 .files {
   #breadcrumb-wrap {
     .menu-popover-ctn {
@@ -602,6 +608,9 @@
     .toolbar-mobile-item, .sort-dropdown .dropdown a.dropdown-toggle {
       line-height: 28px;
     }
+  }
+  .files #breadcrumb-wrap, .upload-files #breadcrumb-wrap {
+    border : none;
   }
 }
 

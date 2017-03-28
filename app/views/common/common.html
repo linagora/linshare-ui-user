@@ -1,7 +1,7 @@
 <div id="overlayMobileFab">&nbsp;</div>
 <header id="header" x-ng-include src="'views/includes/header.html'">
 </header>
-<section id="main">
+<section id="main" data-ng-class="{'licence-layout-changes': linshareLicence}">
   <div id="overlayMobile" x-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left}"
        x-ng-click="mactrl.sidebarToggle.left = false">&nbsp;</div>
   <aside id="sidebar" x-ng-include src="'views/includes/sidebar-left.html'" x-ng-class="{'toggled': mactrl.sidebarToggle.left}"></aside>
@@ -12,7 +12,7 @@
     <section id="content" class="page-view" data-ui-view=""></section>
   </div>
 </section>
-<footer id="copyright-footer" x-ng-class="{'content-toggled': mactrl.sidebarToggle.left}">
+<footer id="copyright-footer" data-ng-if="linshareLicence" x-ng-class="{'content-toggled': mactrl.sidebarToggle.left}">
  <div id="copyright-content-ctn" class="reset-content-width collapsible-content">
     <p class="m-0">{{'LOGIN.COPYRIGHT' | translate}}</p>
  </div>

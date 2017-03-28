@@ -27,8 +27,8 @@
 
     return directive;
 
-    /** 
-     *  @name linkFn 
+    /**
+     *  @name linkFn
      *  @desc link function of the directive
      *  @param {Object} scope - Angular scope object of the directive
      *  @param {Object} elm - jqLite-wrapped element that this directive matches
@@ -42,29 +42,33 @@
         checkTableHeightVm.checkAndSetNewWidthSidebarRight();
         checkTableHeightVm.resizeTableBody();
       });
-
-      angular.element(window).resize(function() {
-        scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
-        checkTableHeightVm.checkAndSetNewWidthSidebarRight();
-        checkTableHeightVm.resizeTableBody();
-      });
-
+     if (!$rootScope.isMobile) {
+       angular.element(window).resize(function() {
+         scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
+         checkTableHeightVm.checkAndSetNewWidthSidebarRight();
+         checkTableHeightVm.resizeTableBody();
+       });
+     }
       scope.$watch(function($window) {
         return $window.innerWidth;
       }, function() {
-        scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
-        $timeout(function() {
-          checkTableHeightVm.resizeTableBody();
-        }, 450);
+        if (!$rootScope.isMobile) {
+          scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
+          $timeout(function() {
+            checkTableHeightVm.resizeTableBody();
+          }, 450);
+        }
       });
 
       scope.$watch(function($window) {
         return $window.innerHeight;
       }, function() {
-        checkTableHeightVm.resizeTableBody();
-        $timeout(function() {
+        if (!$rootScope.isMobile) {
           checkTableHeightVm.resizeTableBody();
-        }, 1000);
+          $timeout(function() {
+            checkTableHeightVm.resizeTableBody();
+          }, 1000);
+        }
       });
     }
   }

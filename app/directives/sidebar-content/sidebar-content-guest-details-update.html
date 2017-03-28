@@ -1,8 +1,9 @@
 <div x-ng-hide="!mainVm.sidebar.getData().isMineGuest">
-  <div ls-guest-form x-guest-object="mainVm.sidebar.getData().selectedGuest" x-form-name="updateGuest">
+  <div ls-guest-form x-guest-object="mainVm.sidebar.getData().selectedGuest" data-form-name="updateGuest"
+       class="form-within-sidebar guest-edit">
   </div>
   <!-- UPDATE BTN links-->
-  <div class="bottom-sidebar-btn">
+  <div class="bottom-sidebar-btn form-within-sidebar">
     <button class="btn btn-default col-xs-6"
             x-ng-click="mainVm.sidebar.hide(updateGuest, mainVm.sidebar.getData().selectedGuest);
                         mainVm.sidebar.getData().closeDropdown($event)">

@@ -8,17 +8,14 @@
 
 #overlayMobileFab {
   position: fixed;
-  z-index: 16;
-  top: -105px;
+  top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
-  -o-transition: 550ms ease-in-out all;
-  -moz-transition: 550ms ease-in-out all;
-  -webkit-transition: 550ms ease-in-out all;
-  transition: 0ms ease-in-out all;
-  pointer-events: fill;
-  display: none;
+  transition: 350ms ease-in-out all;
+  pointer-events: none;
+  display: block;
+  z-index: 12;
   &.double-row-fab {
     top: -185px;
   }
@@ -36,10 +33,12 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    transition: 350ms ease-in-out all 500ms;
   }
   #overlayMobileFab.toggledMobileShowOverlay {
     display: block;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 12;
   }
 }
 

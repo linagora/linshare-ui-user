@@ -226,7 +226,6 @@
   thead {
     display: block;
   }
-
   tbody {
     display: block;
     width: 100%;
@@ -237,13 +236,14 @@
     }
   }
 }
-
 .files #file-list-table tr {
   display: flex;
   align-items: center;
   border-top: 1px solid #f0f0f0;
+  &[role="button"] {
+    cursor: default;
+  }
 }
-
 .files #file-list-table th {
   display: flex;
   align-items: center;
@@ -641,6 +641,8 @@
         padding-bottom: 2px !important;
         clear: both !important;
         min-width: 320px !important;
+        border-bottom: 1px solid #f0f0f0;
+        border-top: none;
         overflow: hidden;
         &.highlight-list-elem {
           border-left: solid 0 #03A9F4;

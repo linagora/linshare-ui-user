@@ -13,7 +13,7 @@
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
                x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production">
+               x-ng-if="!lsAppConfig.production && !isMobile">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
@@ -28,7 +28,6 @@
                 {{"WIP" | translate}}
               </md-tooltip>
             </a>
-
           </div>
         </div>
       </div>
@@ -44,7 +43,7 @@
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
                x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production">
+               x-ng-if="!lsAppConfig.production && !isMobile">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
@@ -74,7 +73,7 @@
           </div>
           <div class="set-homepage-ctn"  event-propagation-stop x-ng-init="isChecked = false;"
                x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production">
+               x-ng-if="!lsAppConfig.production && !isMobile">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>
@@ -102,7 +101,7 @@
           </div>
           <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
                x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production">
+               x-ng-if="!lsAppConfig.production && !isMobile">
             <a href="" x-ng-show="isChecked == false">
               {{"SET_AS_HOMEPAGE" | translate}}
               <i class="fa fa fa-square-o"></i>

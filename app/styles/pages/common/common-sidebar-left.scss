@@ -75,9 +75,14 @@ body:not(.sw-toggled) #sidebar {
     }
     > li.sub-menu > ul > li > a {
       font-weight: 400;
-      &:hover {
-        background-color: rgb(238, 238, 238);
+      background-color: #fff;
+      &:hover{
+       background-color: rgb(238, 238, 238);
       }
+      &:focus, &:active  {
+        color: $darkPrimaryBlue;
+      }
+
       &.disabled {
         cursor: not-allowed;
         &:hover {
@@ -86,7 +91,6 @@ body:not(.sw-toggled) #sidebar {
       }
     }
     > li.active.simple-menu > a {
-      background-color: $bgActiveMenuGray;
       color: $darkPrimaryBlue;
       font-weight: 500;
       cursor: default;
@@ -97,6 +101,11 @@ body:not(.sw-toggled) #sidebar {
   }
 }
 
+.waves-ripple{
+  transition-duration: 400ms !important;
+  opacity: 0.1 !important;
+}
+
 #sidebar .main-menu > li.sub-menu > ul > li > a,
 #sidebar .main-menu > li > a,
 #sidebar .main-menu > li > a i {
@@ -104,9 +113,16 @@ body:not(.sw-toggled) #sidebar {
   transition: all 200ms ease-in-out;
 }
 
+#sidebar .main-menu > li.sub-menu > ul > li,
+#sidebar .main-menu > li {
+  width: 100%;
+}
 #sidebar .main-menu > li.sub-menu > ul > li > a.active,
-#sidebar .main-menu > li > a.active {
-  background-color: $bgActiveMenuGray;
+#sidebar .main-menu > li > a.active,
+#sidebar .main-menu > li.sub-menu > ul > li > a:focus,
+#sidebar .main-menu > li.sub-menu > ul > li > a:active,
+#sidebar .main-menu > li > a:focus,
+#sidebar .main-menu > li > a:active{
   color: $darkPrimaryBlue;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -334,6 +350,30 @@ body:not(.sw-toggled) #sidebar {
     height: 95px;
     .btn-add-files {
       padding: 8px 75px;
+    }
+  }
+  .quota {
+    padding: 10px 7px 7px 7px;
+    height: 55px;
+    bottom: 0;
+    .product-version {
+      display: none;
+    }
+    .progress {
+      height: 6px;
+    }
+    .quota-information p {
+      margin: 5px 0 0;
+      font-size: 0.7em;
+    }
+    .libre-and-free {
+      margin: 4px 0 2px 0;
+      p {
+        font-size: 0.8em;
+      }
+      img {
+        width: 12px;
+      }
     }
   }
 }

@@ -391,7 +391,8 @@
             </span>
           </div>
         </div>
-        <div class="drag-and-drop-ctn reset-content-width hidden-xs collapsible-content drag-n-drop-height">
+        <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
+             data-ng-class="{'show-bg-drop' : contactsListsListVm.itemsList.length === 0}">
           <div class="drag-and-drop-content">
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
@@ -400,8 +401,8 @@
               </span>
             </div>
             <div class="dnd-txt-content">
-              <h1>{{'BACKGROUND_CONTACTS_TITLE_MSG' | translate}}</h1>
-              <p>{{'BACKGROUND_CONTACTS_MSG' | translate}}</p>
+              <h1 translate>BACKGROUND_CONTACTS_LIST_TITLE_MSG</h1>
+              <p translate>BACKGROUND_CONTACTS_LIST_MSG</p>
             </div>
           </div>
         </div>

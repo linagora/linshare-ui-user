@@ -4,10 +4,21 @@
 /**********************
   FAB
 ***********************/
+
 #fabButtonCtn {
   position: relative;
   z-index: 4;
 }
+
+.fab-open.lock-scroll{
+  #fabButtonCtn {
+    z-index: 14;
+  }
+  #main{
+    pointer-events: none;
+  }
+}
+
 @media (max-width: 767px) {
   .ng-isolate-scope.md-fab-toolbar.md-left.md-animations-ready,
   .ng-isolate-scope.md-fab-toolbar.md-left.md-animations-waiting {
@@ -30,7 +41,11 @@
     }
   }
   md-fab-toolbar.md-left md-fab-trigger {
-    top: 32px;
+    right: 16px;
+    bottom: 16px;
+    > button {
+      margin: 0;
+    }
   }
   md-fab-toolbar .md-fab-toolbar-wrapper {
     display: block;
@@ -139,8 +154,9 @@
     button.md-fab {
       float: right;
       background-color: #05b1ff;
-      right: 3px;
-      bottom: 5px;
+      right: 16px;
+      bottom: 16px;
+      margin: 0;
       i{
         display: inline-block;
         font-size: 2em;
@@ -150,6 +166,12 @@
         left: 20px;
       }
     }
+  }
+}
+button.md-fab {
+  background-color: #05b1ff !important;
+  &:not([disabled]):hover {
+    background-color: #05b1ff !important;
   }
 }
 

@@ -64,19 +64,19 @@
         </i>
         <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
           <li x-ng-show="isflowUploadingError">
-            <a href="" event-propagation-stop x-ng-click="retryAllFiles()">
+            <a href="" event-propagation-stop data-ng-click="uploadQueueVm.retryAllFiles()">
               <i class="zmdi zmdi-undo"></i>
               {{'SELECTION_TOOLBAR.RETRY_ALL' | translate}}
             </a>
           </li>
           <li>
-            <a href="" event-propagation-stop x-ng-click="cancelAllFiles()">
+            <a href="" event-propagation-stop data-ng-click="uploadQueueVm.cancelAllFiles()">
               <i class="zmdi zmdi-close"></i>
               {{'SELECTION_TOOLBAR.DELETE' | translate}}
             </a>
           </li>
           <li>
-            <a href="" event-propagation-stop x-ng-click="clearAllFiles()">
+            <a href="" event-propagation-stop data-ng-click="uploadQueueVm.clearAllFiles()">
               <i class="zmdi zmdi-check-all"></i>
               {{'SELECTION_TOOLBAR.CLEAR_ALL' | translate}}
             </a>
@@ -244,9 +244,9 @@
             </span>
         </div>
       </div>
-      <div class="drag-and-drop-ctn reset-content-width hidden-xs drag-n-drop-height"
-           check-table-height
-           x-ng-if="uploadQueueVm.isFromMySpace">
+      <div class="drag-and-drop-ctn reset-content-width drag-n-drop-height file-drop-area"
+           check-table-height x-ng-if="uploadQueueVm.isFromMySpace"
+           data-ng-class="{'show-bg-drop' : uploadQueueVm.$flow.files.length === 0}">
         <div class="drag-and-drop-content">
           <div class="drag-icon-ctn ">
             <div class="bordered-circle">&nbsp;</div>
@@ -255,8 +255,10 @@
             </span>
           </div>
           <div class="dnd-txt-content">
-            <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-            <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
+              <h1 class="hidden-xs" translate>DRAG_DROP_BACKGROUND.TITLE</h1>
+              <p class="hidden-xs" translate>DRAG_DROP_BACKGROUND.COMMENT</p>
+              <h1 class="visible-xs" translate>DRAG_DROP_BACKGROUND_MOBILE.TITLE</h1>
+              <p class="visible-xs" translate>DRAG_DROP_BACKGROUND_MOBILE.COMMENT</p>
           </div>
         </div>
       </div>

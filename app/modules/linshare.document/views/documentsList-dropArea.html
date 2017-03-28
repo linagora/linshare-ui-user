@@ -70,7 +70,8 @@
             </span>
     </div>
   </div>
-  <div class="drag-and-drop-ctn collapsible-content reset-content-width hidden-xs drag-n-drop-height" check-table-height>
+  <div class="drag-and-drop-ctn collapsible-content reset-content-width drag-n-drop-height" check-table-height
+       data-ng-class="{'show-bg-drop' : documentsList.length === 0}">
     <div class="drag-and-drop-content">
       <div class="drag-icon-ctn ">
         <div class="bordered-circle">&nbsp;</div>
@@ -79,8 +80,10 @@
         </span>
       </div>
       <div class="dnd-txt-content">
-        <h1>{{"DRAG_DROP_BACKGROUND.TITLE" | translate}}</h1>
-        <p>{{"DRAG_DROP_BACKGROUND.COMMENT" | translate}}</p>
+          <h1 translate class="hidden-xs">DRAG_DROP_BACKGROUND.TITLE</h1>
+          <p translate class="hidden-xs">DRAG_DROP_BACKGROUND.COMMENT</p>
+          <h1 translate class="visible-xs">DRAG_DROP_BACKGROUND_MOBILE_MY_FILES.TITLE</h1>
+          <p translate class="visible-xs">DRAG_DROP_BACKGROUND_MOBILE_MY_FILES.COMMENT</p>
       </div>
     </div>
   </div>

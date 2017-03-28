@@ -105,7 +105,6 @@ SIDEBAR RIGHT CONTAINER
   pointer-events: all;
 }
 
-
 /**********************
   HEADER SIDEBAR
 ***********************/
@@ -752,7 +751,7 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
     margin-top: 0;
   }
   #chat.setSidebarRightMobileState .container {
-    margin-top: 53px;
+    padding-top: 53px;
   }
   #chat.setSidebarRightMobileState md-tabs-wrapper {
     position: fixed;
@@ -793,7 +792,7 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
 
 @media (max-width: 768px) {
   #chat.sidebar-right .container > div #member-sidebar div.tabs-demo-static-tabs.tab-nav-detail {
-    height: calc(100% - 48px);
+    height: 100%
   }
 
   #profile-main .img-preview-ctn {

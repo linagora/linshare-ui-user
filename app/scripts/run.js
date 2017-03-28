@@ -158,6 +158,7 @@ angular
     $rootScope.linshareBaseUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
     $rootScope.devMode = lsAppConfig.devMode;
     $rootScope.linshareModeProduction = lsAppConfig.production;
+    $rootScope.linshareLicence= lsAppConfig.licence;
   })
 
   .run(['$templateCache', '$http', function($templateCache, $http) {

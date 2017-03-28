@@ -37,9 +37,14 @@
    * @memberOf linshareUiUserApp.lsLeftSidebar
    */
   function linkFunc(scope, elm, attrs, ctrl) {
-    scope.sizeNavigation = {'height': elm[0].offsetHeight - (76 + 110) + 'px'};
+    var heightWindow = angular.element(window).outerHeight();
+    var heightHeader = angular.element('#header').outerHeight();
+    var sidebarProfileHeight = angular.element('#userNameSidebar').outerHeight();
+    var sidebarQuotaHeight = angular.element('.quota').outerHeight();
+    var navRemainingSize = heightWindow - heightHeader - sidebarProfileHeight - sidebarQuotaHeight;
+    scope.sizeNavigation = {'height': navRemainingSize + 'px'};
     ctrl.$timeout(function() {
-      scope.sizeNavigation = {'height': elm[0].offsetHeight - (76 + 110) + 'px'};
+      scope.sizeNavigation = {'height': navRemainingSize + 'px'};
     }, 0);
   }
 })();

@@ -5,6 +5,17 @@
   COMMON LAYOUT STYLES
 ***********************/
 
+#menu-trigger {
+  .line.center {
+    transition: 100ms opacity ease-in-out;
+  }
+  &.open {
+    .line.center {
+      opacity: 0;
+    }
+  }
+}
+
 .grey-clr{
     color : #dcdcdc ;
 }
@@ -239,6 +250,7 @@ body {
   padding-top: 50px;
   padding-bottom: 0;
   font-family: roboto, sans-serif;
+  overflow: hidden;
   #content {
     padding: 0;
     z-index: 4;
@@ -254,6 +266,15 @@ body {
     -webkit-transition-duration: 300ms;
     transition-duration: 300ms;
     margin-left: 268px;
+  }
+}
+
+@media (max-width: 768px) {
+  body.lock-scroll {
+    overflow: hidden;
+  }
+  body {
+    overflow: auto;
   }
 }
 
@@ -448,7 +469,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
 */
 
 #copyright-footer {
-  position: fixed;
+  position: absolute;
   text-align: center;
   bottom: 0;
   vertical-align: middle;
@@ -458,7 +479,21 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
 
 @media (max-width: 768px) {
   #copyright-footer {
-    z-index: inherit;
+    max-height: 40px;
+    overflow: hidden;
+  }
+  body{
+    height: 100%;
+    position: relative;
+  }
+  #main.licence-layout-changes {
+    position: relative;
+    .card-body.collapsible-content{
+      padding-bottom: 40px;
+    }
+    .table-responsive {
+      padding-bottom: 0 !important;
+    }
   }
 }
 
@@ -472,6 +507,13 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
   color: #737373;
   p{
     text-align: center;
+  }
+}
+@media (max-width: 767px) {
+  #copyright-content-ctn {
+    font-size: 0.7em;
+    padding: 0.8em 0;
+    color: #adadad;
   }
 }
 

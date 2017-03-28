@@ -693,6 +693,9 @@ li.dp-actions {
   > .fg-line {
     flex : 1 1 100%;
   }
+  .dropdown{
+    width: 100%;
+  }
 }
 
 
@@ -733,5 +736,30 @@ li.dp-actions {
 .no-right-inline-btn {
   .right-inline-btn {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  select {
+    appearance: button;
+    border-radius: 2px;
+    padding-end: 20px;
+    padding-start: 2px;
+    user-select: none;
+    background-repeat: no-repeat;
+    font-size: inherit;
+    overflow: hidden;
+    padding: 5px 37px 5px 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+    margin-left: -13px;
+    background-image: url(../images/select.png), linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 40%, #ffffff);
+    background-position: 98% center;
+    border: none;
+    border-bottom: 1px solid #d0d0d0;
+    color: #757575;
+    box-shadow: none;
+    height: 30px;
   }
 }

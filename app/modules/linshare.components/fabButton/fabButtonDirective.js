@@ -9,7 +9,7 @@
     .module('linshare.components')
     .directive('fabButton', fabButton);
 
-  fabButton.$inject = ['$timeout', 'componentsConfig'];
+  fabButton.$inject = ['componentsConfig'];
 
   /**
    * @namespace fabButton
@@ -21,7 +21,7 @@
    *          </div>
    * @memberOf linshare.components
    */
-  function fabButton($timeout, componentsConfig) {
+  function fabButton(componentsConfig) {
     var directive = {
       restrict: 'A',
       templateUrl: componentsConfig.path + 'fabButton/fabButtonTemplate.html',
@@ -70,6 +70,7 @@
 
       scope.$watch('fab.isOpen', function(isOpen) {
         if (isOpen) {
+          angular.element('body').addClass('lock-scroll fab-open');
           angular.element('.md-toolbar-tools').addClass('setWhite');
           angular.element('.multi-select-mobile').addClass('setDisabled');
           angular.element('#overlayMobileFab').addClass('toggledMobileShowOverlay');
@@ -78,6 +79,7 @@
             angular.element('#overlayMobileFab').addClass('double-row-fab');
           }
         } else {
+          angular.element('body').removeClass('lock-scroll fab-open');
           angular.element('.md-toolbar-tools').removeClass('setWhite');
           angular.element('.multi-select-mobile').removeClass('setDisabled');
           angular.element('#overlayMobileFab').removeClass('toggledMobileShowOverlay');
