@@ -62,7 +62,7 @@
      *  @param {object} workgroupFolderDto - The Workgroup Folder object
      *  @param {boolean} dryRun - If true, the server returns a fake Node object with unique name
      *  @returns {Promise} server response
-     *  @memberOf LinShare.sharedSpace.workgroupFoldersRestService
+     *  @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
     function create(workgroupUuid, workgroupFolderDto, dryRun) {
       $log.debug('workgroupNodesRestService : create', workgroupUuid, workgroupFolderDto, dryRun);
@@ -113,14 +113,16 @@
      *  @name getList
      *  @desc Get the List of Workgroup Node object
      *  @param {string} workgroupUuid - The uuid of the Workgroup object
-     *  @param {string} parentUuid - The uuid of a Workgroup Folder object
+     *  @param {string} folderUuid - The uuid of a Workgroup Folder object
+     *  @param {string} nodeType - Type of nodes to get
      *  @returns {Promise} server response
      *  @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
-    function getList(workgroupUuid, parentUuid) {
-      $log.debug('workgroupNodesRestService : getList', workgroupUuid, parentUuid);
+    function getList(workgroupUuid, folderUuid, nodeType) {
+      $log.debug('workgroupNodesRestService : getList', workgroupUuid, folderUuid);
       return handler(Restangular.one(restUrl, workgroupUuid).getList(restParam, {
-        parent: parentUuid
+        parent: folderUuid,
+        type: nodeType
       }));
     }
 
@@ -169,14 +171,13 @@
      *  @name update
      *  @desc Update a Workgroup Node object
      *  @param {string} workgroupUuid - The uuid of the Workgroup object
-     *  @param {string} nodeUuid - The uuid of the Workgroup Node object
-     *  @param {Object} workgroupNodeDto - The Workgroup Node object
+     *  @param {object} nodeItem - Node to update
      *  @returns {Promise} server response
      *  @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
-    function update(workgroupUuid, nodeUuid, workgroupNodeDto) {
-      $log.debug('workgroupNodesRestService : update', workgroupUuid, nodeUuid, workgroupNodeDto);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).customPUT(workgroupNodeDto));
+    function update(workgroupUuid, nodeItem) {
+      $log.debug('workgroupNodesRestService : update', workgroupUuid, nodeItem.uuid, nodeItem);
+      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeItem.uuid).customPUT(nodeItem));
     }
   }
 })();

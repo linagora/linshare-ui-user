@@ -21,6 +21,7 @@
   },
   "GROWL_ALERT": {
     "ACTION": {
+      "TBT__BROWSER_ACTION": "",
       "DELETE": "Đã xóa tập tin thành công",
       "TBT__DELETE_SINGULAR": "",
       "TBT__DELETE_PLURAL": "",
@@ -28,6 +29,7 @@
       "TBT__UPDATE": "",
       "SHARE": "Đã chia sẻ thành công",
       "TBT__COPY": "",
+      "TBT__COPY_SAME_FOLDER": "",
       "COPY_SINGULAR": "",
       "COPY_PLURAL": "",
       "TBT__SHARE_ASYNC": "",

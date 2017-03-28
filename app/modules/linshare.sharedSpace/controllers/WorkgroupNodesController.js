@@ -10,9 +10,9 @@
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
   WorkgroupNodesController.$inject = ['_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'auditDetailsService', 'documentUtilsService', 'flowUploadService', 'itemUtilsService',
-    'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService', 'toastService', 'workgroupRestService',
-    'workgroupMembersRestService', 'workgroupNodesRestService'];
+    '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
+    'flowUploadService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
+    'toastService', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'];
 
   /**
    * @namespace WorkgroupNodesController
@@ -22,24 +22,24 @@
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   function WorkgroupNodesController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-    auditDetailsService, documentUtilsService, flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode, nodesList,
-    swal, tableParamsService, toastService, workgroupRestService, workgroupMembersRestService,
-    workgroupNodesRestService) {
+                                    auditDetailsService, browseService, currentFolder, documentUtilsService,
+                                    flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode, nodesList, swal,
+                                    tableParamsService, toastService, workgroupRestService, workgroupMembersRestService,
+                                    workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
 
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
 
-    // TODO : for all REST callbacks messages, remove them when interceptor will be set
-    var newFolderName, swalMultipleDownloadTitle, swalMultipleDownloadText,
-      swalMultipleDownloadConfirm;
+    var newFolderName, swalMultipleDownloadConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText, showIt;
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
     workgroupNodesVm.breadcrumb = [];
     workgroupNodesVm.canCreateFolder = true;
     workgroupNodesVm.copyNode = copyNode;
     workgroupNodesVm.createFolder = createFolder;
+    workgroupNodesVm.currentFolder = currentFolder;
     workgroupNodesVm.currentPage = 'workgroup_nodes';
     workgroupNodesVm.currentSelectedDocument = {};
     workgroupNodesVm.deleteNodes = deleteNodes;
@@ -50,10 +50,10 @@
     workgroupNodesVm.goToFolder = goToFolder;
     workgroupNodesVm.goToPreviousFolder = goToPreviousFolder;
     workgroupNodesVm.isDocument = isDocument;
-    workgroupNodesVm.isRootFolder = isRootFolder;
     workgroupNodesVm.loadSidebarContent = loadSidebarContent;
     workgroupNodesVm.mdtabsSelection = {selectedIndex: 0};
     workgroupNodesVm.nodesList = nodesList;
+    workgroupNodesVm.openBrowser = openBrowser;
     workgroupNodesVm.paramFilter = {name: ''};
     workgroupNodesVm.renameNode = renameNode;
     workgroupNodesVm.showSelectedNodeDetails = showSelectedNodeDetails;
@@ -79,12 +79,14 @@
         'ACTION.NEW_FOLDER',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
+        'TOAST_SHOW_IT'])
         .then(function(translations) {
           newFolderName = translations['ACTION.NEW_FOLDER'];
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+          showIt = translations.TOAST_SHOW_IT;
         });
 
       getBreadcrumb();
@@ -212,17 +214,14 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function getBreadcrumb() {
-      workgroupNodesRestService.get(workgroupNodesVm.folderDetails.workgroupUuid,
-        workgroupNodesVm.folderDetails.folderUuid, true).then(function(folder) {
-        workgroupNodesVm.breadcrumb = folder.treePath || [];
-        workgroupNodesVm.breadcrumb.shift();
-        if (!isRootFolder()) {
-          workgroupNodesVm.breadcrumb.push({
-            name: workgroupNodesVm.folderDetails.folderName,
-            uuid: workgroupNodesVm.folderDetails.folderUuid
-          });
-        }
-      });
+      workgroupNodesVm.breadcrumb = workgroupNodesVm.currentFolder.treePath || [];
+      workgroupNodesVm.breadcrumb.shift();
+      if (workgroupNodesVm.currentFolder.parent !== workgroupNodesVm.currentFolder.workGroup) {
+        workgroupNodesVm.breadcrumb.push({
+          name: workgroupNodesVm.currentFolder.name,
+          uuid: workgroupNodesVm.currentFolder.uuid
+        });
+      }
     }
 
     /**
@@ -282,15 +281,16 @@
      * @name goToFolder
      * @desc Enter inside a folder
      * @param {object} folder - Folder where to enter
-     * @param {boolean} [fromBreadcrumb] - Entering from breadcrumb
+     * @param {boolean} [forceEnter] - Force entering
+     * @param {string} [selectFileUuid] - Uuid of file to put in selected mode
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function goToFolder(folder, fromBreadcrumb) {
+    function goToFolder(folder, forceEnter, selectFileUuid) {
       var folderNameElem;
       var isNotInEditMode = true;
       var canEnter = _.isNil(folder) ? true : !workgroupNodesVm.isDocument(folder.type);
 
-      if (!_.isNil(folder) && !fromBreadcrumb) {
+      if (!_.isNil(folder) && !forceEnter) {
         folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
         isNotInEditMode = (angular.element(folderNameElem).attr('contenteditable') === 'false');
       }
@@ -300,7 +300,8 @@
         workgroupName: workgroupNodesVm.folderDetails.workgroupName.trim(),
         parentUuid: folder ? folder.parent : null,
         folderUuid: folder ? folder.uuid : null,
-        folderName: folder ? folder.name.trim() : null
+        folderName: folder ? folder.name.trim() : null,
+        uploadedFileUuid: selectFileUuid
       };
 
       if (canEnter && isNotInEditMode) {
@@ -336,17 +337,6 @@
      */
     function isDocument(nodeType) {
       return (nodeType === TYPE_DOCUMENT);
-    }
-
-    /**
-     * @name isRootFolder
-     * @desc Determine if the current folder is root
-     * @returns {boolean} Is current folder the root folder or not
-     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-     */
-    function isRootFolder() {
-      var folderUuid = workgroupNodesVm.folderDetails.folderUuid;
-      return (_.isNil(folderUuid) || folderUuid === '');
     }
 
     /**
@@ -388,6 +378,57 @@
       $scope.mainVm.sidebar.setData(workgroupNodesVm);
       $scope.mainVm.sidebar.setContent(content);
       $scope.mainVm.sidebar.show();
+    }
+
+    /**
+     * @name openBrowser
+     * @desc Open browser of folders to move/copy a node
+     * @param {object} nodeItem - Node to copy
+     * @param {boolean} isMove - Check if it is a copy or a move
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function openBrowser(nodeItem, isMove) {
+      browseService.show({
+        currentFolder: workgroupNodesVm.currentFolder,
+        currentList: _.orderBy(_.filter(workgroupNodesVm.nodesList, {'type': TYPE_FOLDER}), 'modificationDate', 'desc'),
+        nodeItem: nodeItem,
+        isMove: isMove,
+        restService: workgroupNodesRestService
+      }).then(function(data) {
+        if (data.nodeItem.parent === workgroupNodesVm.currentFolder.uuid) {
+          toastService.success({key: 'GROWL_ALERT.ACTION.COPY'});
+        } else {
+          var action = isMove ? 'moved' : '';
+          $translate('GROWL_ALERT.ACTION.BROWSER_ACTION', {ACTION: action, folderName: data.folder.name})
+            .then(function(message) {
+              toastService.success(message, showIt).then(function(response) {
+                if (!_.isUndefined(response)) {
+                  if (response.actionClicked) {
+                    workgroupNodesVm.goToFolder(data.folder, true, data.nodeItem.uuid);
+                  }
+                }
+              });
+            });
+        }
+        reloadTableParamsDatas();
+      }).catch(function() {
+        reloadTableParamsDatas();
+      });
+    }
+
+    /**
+     * @name reloadTableParamsDatas
+     * @desc Get all nodes from back and refresh tableParams
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function reloadTableParamsDatas() {
+      workgroupNodesRestService.getList(workgroupNodesVm.currentFolder.workGroup, workgroupNodesVm.currentFolder.uuid)
+        .then(function(nodeItems) {
+          if (workgroupNodesVm.nodesList !== nodeItems) {
+            workgroupNodesVm.nodesList = nodeItems;
+            tableParamsService.reloadTableParams(workgroupNodesVm.nodesList);
+          }
+        });
     }
 
     /**
@@ -448,25 +489,25 @@
           icon: 'ls-workgroup disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
-        },{
+        }, {
           action: function() {
             return workgroupNodesVm.showWorkgroupDetails(true);
           },
           label: 'WORKGROUPS_LIST.ADD_A_MEMBER',
           icon: 'ls-add-user'
-        },{
+        }, {
           action: function() {
             return workgroupNodesVm.createFolder();
           },
           label: 'WORKGROUPS_LIST.FOLDER',
           icon: 'ls-folder'
-        },{
+        }, {
           action: null,
           label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
           icon: 'ls-upload-request disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
-        },{
+        }, {
           action: null,
           label: 'WORKGROUPS_LIST.PROJECT',
           icon: 'ls-project disabled-work-in-progress',

@@ -11,6 +11,12 @@
   "BACKGROUND_WORKGROUP_MSG": "Create a workgroup in order to exchange files beetween your colleagues",
   "BREADCRUMB_ISOLATE": "Isolation mode",
   "BREADCRUMB_TITLE": "My files",
+  "FILE_DIRECTORY_DIALOG": {
+    "TITLE": "Pick the destination",
+    "CANCEL": "Cancel",
+    "MOVE_HERE": "Move here",
+    "COPY_HERE": "Copy here"
+  },
   "RIGHT_PANEL": {
     "EMPTY": "no file is selected",
     "DETAILS": {

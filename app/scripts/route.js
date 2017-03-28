@@ -223,6 +223,10 @@
           parentUuid: null
         },
         resolve: {
+          currentFolder: function(workgroupNodesRestService, $stateParams,
+          /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
+            return workgroupNodesRestService.get($stateParams.workgroupUuid, $stateParams.workgroupUuid, true);
+          },
           nodesList: function(workgroupNodesRestService, $stateParams,
           /* jshint ignore:line */ functionalities) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid);
@@ -240,6 +244,10 @@
           folderName: null
         },
         resolve: {
+          currentFolder: function(workgroupNodesRestService, $stateParams,
+          /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
+            return workgroupNodesRestService.get($stateParams.workgroupUuid, $stateParams.folderUuid, true);
+          },
           nodesList: function(workgroupNodesRestService, $stateParams,
           /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid, $stateParams.folderUuid);

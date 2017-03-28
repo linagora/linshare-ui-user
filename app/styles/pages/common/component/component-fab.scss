@@ -62,7 +62,7 @@
     pointer-events: none;
     z-index: 23;
   }
-  .md-toolbar-tools {
+  md-fab-toolbar .md-toolbar-tools {
     padding: 0 !important;
     max-height: 70px !important;
     margin: 0 !important;
@@ -96,8 +96,8 @@
     pointer-events: none;
     md-fab-trigger {
       pointer-events: auto;
-      bottom: 20px;
-      right: 20px !important;
+      bottom: 16px;
+      right: 16px !important;
       top: inherit !important;
       height: 56px;
       padding: 0;

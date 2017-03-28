@@ -11,6 +11,12 @@
   "BREADCRUMB_TITLE": "Mes fichiers",
   "BACKGROUND_WORKGROUP_TITLE_MSG": "GROUPES DE TRAVAIL",
   "BACKGROUND_WORKGROUP_MSG": "Créer des groupes de travail pour échanger des fichiers avec vos collègues.",
+  "FILE_DIRECTORY_DIALOG": {
+    "TITLE": "Choisissez la destination",
+    "CANCEL": "Annuler",
+    "MOVE_HERE": "Déplacer ici",
+    "COPY_HERE": "Copier ici"
+  },
   "RIGHT_PANEL": {
     "EMPTY": "Aucun fichier sélectionné",
     "DETAILS": {

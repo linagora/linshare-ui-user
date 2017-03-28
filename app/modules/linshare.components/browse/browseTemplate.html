@@ -1,0 +1,56 @@
+<md-dialog id="lv-file-directory" aria-label="{{'FILE_DIRECTORY_DIALOG.TITLE' | translate}}">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 translate>FILE_DIRECTORY_DIALOG.TITLE</h2>
+        <span flex></span>
+        <md-button class="md-icon-button actions white-inline-link" data-ng-click="browseVm.$mdDialog.cancel()">
+          <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div id="lv-dialog-content-ctn">
+      <div class="lv-header-dialog">
+        <div class="lv-col-1 center actions"
+             data-ng-class="{'disabled': browseVm.currentFolder.parent === browseVm.currentFolder.workGroup}"
+             data-ng-click="browseVm.goToFolder(browseVm.currentFolder, true)">
+          <a><i class="zmdi zmdi-chevron-left"></i></a>
+        </div>
+        <div class="lv-col-2">
+          {{browseVm.currentFolder.name}}
+        </div>
+        <div class="lv-col-3 center waves-effect add-btn"
+             data-ng-click="browseVm.createFolder()"
+             data-ng-class="{'disabled': !browseVm.canCreateFolder}">
+          <i class="zmdi zmdi-plus"></i>
+        </div>
+      </div>
+      <div class="lv-ctn">
+        <div class="lv-tem" data-ng-repeat="folder in browseVm.currentList"
+             data-ng-click="browseVm.goToFolder(folder)" uuid={{folder.uuid}}>
+          <div class="lv-icon-ctn lv-col-1 center">
+            <span class="ls-folder"></span>
+          </div>
+          <div class="lv-name lv-col-2 file-name-disp single-line" spellcheck="false"
+               contenteditable="false">
+            <p class="set-ellipsis">{{folder.name}}</p>
+          </div>
+          <div class="lv-actions-link lv-col-3 center">
+            <span class="zmdi zmdi-chevron-right"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <md-dialog-actions layout="row">
+      <button class="cancel" data-ng-click="browseVm.$mdDialog.cancel()" translate>
+        FILE_DIRECTORY_DIALOG.CANCEL
+      </button>
+      <button class="confirm" translate
+              data-ng-class="{'disabled': browseVm.isMove &&
+               (browseVm.currentFolder.uuid === browseVm.sourceFolder.uuid)}"
+              data-ng-click="browseVm.validateAction()">
+        {{browseVm.isMove ? 'FILE_DIRECTORY_DIALOG.MOVE_HERE' : 'FILE_DIRECTORY_DIALOG.COPY_HERE'}}
+      </button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
