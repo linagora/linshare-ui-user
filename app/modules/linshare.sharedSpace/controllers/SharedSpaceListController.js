@@ -6,7 +6,7 @@
     .controller('SharedSpaceListController', sharedSpaceListController);
 
   function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService,
-                                     workgroupMembersRestService, workgroupEntriesRestService,
+                                     fileSystemUtils, workgroupMembersRestService, workgroupEntriesRestService,
                                      workgroupFoldersRestService, $state, $stateParams, Restangular,
                                      $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService,
                                      flowUploadService, lsAppConfig, $q, toastService) {
@@ -17,6 +17,7 @@
     var setFolderToEditable = setFolderToEditableFunction;
     var swalNewFolderName;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
+    var invalideNameTranslate;
     var openSearch = openSearchFunction;
     var closeSearch = closeSearchFunction;
 
@@ -96,11 +97,13 @@
         });
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON', 'GROWL_ALERT.ERROR.RENAME_INVALID'])
         .then(function(translations) {
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+          invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID']
+            .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
         });
 
       $translatePartialLoader.addPart('filesList');
@@ -503,17 +506,19 @@
             // if the new name is empty then replace with by previous once
             angular.element(idElem).text(initialName);
             data.name = initialName;
-            updateNewName(data, idElem);
-          } else {
-            if (data.name.indexOf('.') === -1) {
-              // if the new name does not contain a file name extension then add the previous original extension to it
-              data.name = data.name + fileExtension;
-              angular.element(idElem).text(data.name);
-              updateNewName(data, idElem);
-            } else {
-              updateNewName(data, idElem);
-            }
           }
+          if (data.name.indexOf('.') === -1) {
+            // if the new name does not contain a file name extension then add the previous original extension to it
+            data.name = data.name + fileExtension;
+            angular.element(idElem).text(data.name);
+          }
+          if (!fileSystemUtils.isNameValid(data.name)) {
+            toastService.error(invalideNameTranslate);
+            idElem[0].textContent = initialName;
+            data.name = initialName;
+            return;
+          }
+          updateNewName(data, idElem);
         })
         .on('keypress', function(e) {
           if (e.which === 13) {
@@ -538,6 +543,12 @@
                 angular.element(idElem).text(initialName);
                 data.name = initialName.trim();
               }
+              if (!fileSystemUtils.isNameValid(data.name)) {
+                 toastService.error(invalideNameTranslate);
+                 idElem[0].textContent = initialName;
+                 data.name = initialName;
+                 return;
+              }
               if (newFolder) {
                 saveNewFolder(data);
               } else {
@@ -547,6 +558,12 @@
             } else {
               $log('Folder name exists');
               data.name = initialName;
+              if (!fileSystemUtils.isNameValid(data.name)) {
+                toastService.error(invalideNameTranslate);
+                idElem[0].textContent = initialName;
+                data.name = initialName;
+                return;
+              }
               if (newFolder) {
                 saveNewFolder(data);
               }
@@ -568,6 +585,12 @@
                   angular.element(idElem).text(initialName);
                   data.name = initialName.trim();
                 }
+                if (!fileSystemUtils.isNameValid(data.name)) {
+                  toastService.error(invalideNameTranslate);
+                  data.name = initialName;
+                  idElem[0].textContent = initialName;
+                  return;
+                }
                 if (newFolder) {
                   saveNewFolder(data);
                 } else {
@@ -579,6 +602,12 @@
               } else {
                 $log('Folder name exists');
                 data.name = initialName;
+                if (!fileSystemUtils.isNameValid(data.name)) {
+                  toastService.error(invalideNameTranslate);
+                  data.name = initialName;
+                  idElem[0].textContent = initialName;
+                  return;
+                }
                 if (newFolder) {
                   saveNewFolder(data);
                 }

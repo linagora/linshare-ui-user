@@ -1,7 +1,7 @@
 'use strict';
 angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
-                                                workgroups, $translate, $state, documentUtilsService,
+                                                workgroups, $translate, $state, documentUtilsService, fileSystemUtils,
                                                 workgroupRestService, workgroupFoldersRestService,
                                                 workgroupEntriesRestService, lsAppConfig, toastService) {
     $translatePartialLoader.addPart('filesList');
@@ -38,10 +38,12 @@ angular.module('linshare.sharedSpace')
       selectedIndex: 0
     };
 
-    var swalNewWorkGroupName;
-    $translate(['ACTION.NEW_WORKGROUP'])
+    var swalNewWorkGroupName, invalideNameTranslate;
+    $translate(['ACTION.NEW_WORKGROUP', 'GROWL_ALERT.ERROR.RENAME_INVALID'])
       .then(function(translations) {
         swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
+        invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID']
+          .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
       });
     var setElemToEditable = function(idElem, data, isNew) {
       var initialName = swalNewWorkGroupName;
@@ -58,6 +60,12 @@ angular.module('linshare.sharedSpace')
             if (data.name.trim() === '') {
               angular.element(idElem).text(initialName);
               data.name = initialName.trim();
+            }
+            if (!fileSystemUtils.isNameValid(data.name)) {
+              toastService.error(invalideNameTranslate);
+              data.name = initialName;
+              idElem[0].textContent = initialName;
+              return;
             }
             if(isNew) {
               saveNewWorkgroup(data.name);
@@ -87,6 +95,12 @@ angular.module('linshare.sharedSpace')
             if ((data.name.trim() === initialName) || (data.name.trim() === '')) {
               angular.element(idElem).text(initialName);
               data.name = initialName.trim();
+            }
+            if (!fileSystemUtils.isNameValid(data.name)) {
+              toastService.error(invalideNameTranslate);
+              data.name = initialName;
+              idElem[0].textContent = initialName;
+              return;
             }
             if (isNew) {
               saveNewWorkgroup(data.name);

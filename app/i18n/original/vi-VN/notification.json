@@ -44,6 +44,7 @@
       "TBT_FILE_UPLOAD": "",
       "503": "Lỗi máy chủ",
       "RENAME_FOLDER": "",
+      "TBT__RENAME_INVALID": "'$rejectedChar'",
       "DELETE_ERROR": {
         "26006": ""
       },
