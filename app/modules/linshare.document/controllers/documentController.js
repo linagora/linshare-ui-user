@@ -208,7 +208,9 @@
       if(flowFile._from === $scope.mySpacePage) {
         flowFile.asyncUploadDeferred.promise.then(function(file) {
           $scope.documentsList.push(file.linshareDocument);
-          $scope.isNewAddition = true;
+          if ($scope.tableParams.page() === findSpecificPage(file.linshareDocument.uuid)) {
+            $scope.isNewAddition = true;
+          }
           $scope.tableParams.reload();
           $timeout(function() {
             $scope.isNewAddition = false;
@@ -329,8 +331,10 @@
       var documentToSelect = _.find(filteredData, {
         'uuid': $stateParams.uploadedFileUuid
       });
+      $stateParams.uploadedFileUuid = null;
       if (!_.isUndefined(documentToSelect)) {
         addSelectedDocument(documentToSelect);
+        $scope.showCurrentFile(documentToSelect);
       }
     }
 
@@ -347,21 +351,41 @@
       $scope.mainVm.sidebar.show();
     }
 
-    function loadSpecificPage() {
-      var items = _.orderBy($scope.documentsList.plain(), 'modificationDate', ['desc']);
-      if ($stateParams.uploadedFileUuid) {
+    function findSpecificPage(fileUuid) {
+      if (!_.isNil(fileUuid)) {
+        var items;
+        if (_.isNil($scope.tableParams)) {
+          items = getDisplayedData($scope.documentsList, null, ['-modificationDate']);
+        } else {
+          items = getDisplayedData($scope.documentsList, $scope.tableParams.filter(), $scope.tableParams.orderBy());
+        }
         return Math.floor(_.findIndex(items, {
-          'uuid': $stateParams.uploadedFileUuid
+          'uuid': fileUuid
         }) / 10) + 1;
       }
       return 1;
+
+      //TODO - IAB: Same code as loadTable|getData function to get list of elements in the table -> function
+      /**
+       * @name getDisplayedData
+       * @desc Filter and sort the list of item to get the data to be shown on the table
+       * @param {Array<Object>} data - List of item for the table
+       * @param {Object} filter - Object containing filters for the data
+       * @param {Array<string>} sort - Array containing sorting column for the data
+       * @return {Array<Object>} List of item to be shown for the table
+       * @memberOf NameSpaceGlobal.ElementName
+       */
+      function getDisplayedData(data, filter, sort) {
+        var filteredData = filter ? $filter('filter')(data, filter) : data;
+        return sort ? $filter('orderBy')(filteredData, sort) : filteredData;
+      }
     }
 
     function loadTable() {
       return $q(function(resolve) {
         resolve(
           new NgTableParams({
-            page: loadSpecificPage(),
+            page: findSpecificPage($stateParams.uploadedFileUuid),
             sorting: {
               modificationDate: 'desc'
             },
