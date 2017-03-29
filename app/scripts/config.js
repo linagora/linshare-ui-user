@@ -28,6 +28,7 @@
       localPath: 'i18n/original', //custom your i18n folder path
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso',
       production: false,
+      rejectedChar: ['<', '>', ':' , '"', '/', '\\', '|', '?', '*', ','],
       roles: {
         admin: 'ADMIN',
         write: 'WRITE',
