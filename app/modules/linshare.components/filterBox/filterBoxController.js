@@ -10,7 +10,7 @@
     .controller('FilterBoxController', FilterBoxController);
 
   FilterBoxController.$inject = ['$scope', '$timeout', '$translate', 'autocompleteUserRestService', 'lsAppConfig',
-    'unitService'
+    'tableParamsService', 'unitService'
   ];
 
   /**
@@ -18,7 +18,8 @@
    * @desc Controller of the filtering component
    * @memberOf linshare.components
    */
-  function FilterBoxController($scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig, unitService) {
+  function FilterBoxController($scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig,
+                               tableParamsService, unitService) {
     const FR_DATE_FORMAT = lsAppConfig.date_fr_format;
     const EN_DATE_FORMAT = lsAppConfig.date_en_format;
 
@@ -121,7 +122,7 @@
      * @memberOf linshare.components.FilterBoxController
      */
     function reloadTable() {
-      filterBoxVm.filterBoxTable.reload().then(function(data) {
+      tableParamsService.reloadTableParams(filterBoxVm.filterBoxItems).then(function(data) {
         var params = filterBoxVm.filterBoxTable._params;
         var valueShown = (filterBoxVm.filterBoxItems.slice((params.page - 1) * params.count, params.page *
           params.count));
