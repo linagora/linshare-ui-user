@@ -37,12 +37,14 @@
       /* @property {boolean} toggleSelectedSort - True when sorting is activated in tableParams */
       toggleSelectedSort,
       service = {
+        getCurrentPage: getCurrentPage,
         getFlagsOnSelectedPages: getFlagsOnSelectedPages,
         getSelectedItemsList: getSelectedItemsList,
         getSelectionIsIsolated: getSelectionIsIsolated,
         getTableParams: getTableParams,
         getToggleSelectedSort: getToggleSelectedSort,
         initTableParams: initTableParams,
+        isItemAddedOnCurrentPage: isItemAddedOnCurrentPage,
         isolateSelection: isolateSelection,
         lengthOfSelectedDocuments: lengthOfSelectedDocuments,
         reloadTableParams: reloadTableParams,
@@ -59,6 +61,58 @@
     ////////////
 
     /**
+     * @name findSpecificPage
+     * @desc Find in which page is an item based on it's uuid
+     * @param {string} itemToSelectUuid - The uuid of the item object to select
+     * @memberOf LinShare.components.tableParamsService
+     */
+    function findSpecificPage(itemToSelectUuid) {
+      var filter = tableParams ? tableParams.filter() : null;
+      var sorting = tableParams ? tableParams.orderBy() : [getParamSorting()];
+      if (!_.isNil(itemToSelectUuid)) {
+        var items = getDisplayedData(itemsList, filter, sorting);
+        return Math.floor(_.findIndex(items, {'uuid': itemToSelectUuid}) / paramCount) + 1;
+      }
+      return 1;
+    }
+
+    /**
+     * @name getCurrentPage
+     * @desc Return the current page's number
+     * @return {number} Return current page number
+     * @memberOf LinShare.components.tableParamsService
+     */
+    function getCurrentPage() {
+      return tableParams.page();
+    }
+
+    /**
+     * @name getDisplayedData
+     * @desc Filter and sort the list of item to get the data to be shown on the table
+     * @param {Array<Object>} data - Items to display in tableParams
+     * @param {Object} filter - Object containing filters for the data
+     * @param {Array<string>} sort - Array containing sorting column for the data
+     * @return {Array<Object>} List of item to be shown for the table
+     * @memberOf LinShare.components.tableParamsService
+     */
+    function getDisplayedData(data, filter, sort) {
+      var filteredData = filter ? $filter('filter')(data, filter) : data;
+      return sort ? $filter('orderBy')(filteredData, sort) : filteredData;
+    }
+
+    /**
+     * @name getItemToSelect
+     * @desc Return the item to select
+     * @param {Array<Object>} itemsList - Items to display in tableParams
+     * @param {string} itemToSelectUuid - The uuid of the item object to select
+     * @memberOf LinShare.components.tableParamsService
+     */
+    function getItemToSelect(itemsList, itemToSelectUuid) {
+      var itemToSelect = _.find(itemsList, {'uuid': itemToSelectUuid});
+      return !_.isNil(itemToSelect) ? itemToSelect : null;
+    }
+
+    /**
      * @name getFlagsOnSelectedPages
      * @desc Return the flagsOnSelectedPages
      * @returns {Object} flagsOnSelectedPages
@@ -66,6 +120,18 @@
      */
     function getFlagsOnSelectedPages() {
       return flagsOnSelectedPages;
+    }
+
+    /**
+     * @name getParamSorting
+     * @desc Return the paramSorting concatenated
+     * @returns {string} The paramSorting concatenated
+     * @memberOf LinShare.components.tableParamsService
+     */
+    function getParamSorting() {
+      var sortProperty = Object.keys(paramSorting)[0];
+      var sortPrefix = paramSorting[sortProperty] === "desc" ? '-' : '';
+      return sortPrefix + sortProperty;
     }
 
     /**
@@ -140,25 +206,38 @@
         initVariables();
         itemsList = tableList;
         paramFilter = filter || {};
-        var selectOneItem = !_.isNil(itemToSelectUuid);
+        var resolveObjects = {};
+        resolveObjects.itemToSelect = getItemToSelect(itemsList, itemToSelectUuid);
+        var selectOneItem = !_.isNil(resolveObjects.itemToSelect);
+
         tableParams = new NgTableParams({
-          page: selectOneItem ? loadSpecificPage(itemsList, itemToSelectUuid) : 1,
+          page: selectOneItem ? findSpecificPage(itemToSelectUuid) : 1,
           sorting: paramSorting,
           count: paramCount,
           filter: paramFilter
         }, {
           getData: function(params) {
-            var filteredData = params.filter() ? $filter('filter')(itemsList, params.filter()) : itemsList;
-            var items = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+            var items = getDisplayedData(itemsList, params.filter(), params.orderBy());
             params.total(items.length);
             if (selectOneItem) {
-              loadItemSelection(filteredData, itemToSelectUuid);
+              toggleItemSelection(resolveObjects.itemToSelect);
+              selectOneItem = false;
             }
             return (items.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
         });
-        resolve(tableParams);
+        resolve(resolveObjects);
       });
+    }
+
+    /**
+     * @name isItemAddedOnCurrentPage
+     * @desc Check if item is added on current page (e.q. when a file is uploaded, or when an item is specified from upload queue)
+     * @returns {boolean} True if item is added on current page
+     * @memberOf LinShare.components.tableParamsService
+     */
+    function isItemAddedOnCurrentPage(itemUuid) {
+      return getCurrentPage() === findSpecificPage(itemUuid);
     }
 
     /**
@@ -186,36 +265,6 @@
     }
 
     /**
-     * @name loadItemSelection
-     * @desc Add item to selectedItemsList
-     * @param {Array<Object>} filteredData - Array of filtered items
-     * @param {string} itemToSelectUuid - The uuid of the item object to select
-     * @memberOf LinShare.components.tableParamsService
-     */
-    function loadItemSelection(filteredData, itemToSelectUuid) {
-      var itemToSelect = _.find(filteredData, {'uuid': itemToSelectUuid});
-      itemToSelectUuid = null;
-      if (!_.isUndefined(itemToSelect)) {
-        toggleItemSelection(itemToSelect);
-      }
-    }
-
-    /**
-     * @name loadSpecificPage
-     * @desc If item to select is not in first page of the table, this algorithm find the page to display
-     * @param {Array<Object>} tableList - List of the data to display in the tableParams
-     * @param {string} itemToSelectUuid - The uuid of the item object to select
-     * @memberOf LinShare.components.tableParamsService
-     */
-    function loadSpecificPage(tableList, itemToSelectUuid) {
-      var items = _.orderBy(tableList, 'modificationDate', ['desc']);
-      if (itemToSelectUuid) {
-        return Math.floor(_.findIndex(items, {'uuid': itemToSelectUuid}) / paramCount) + 1;
-      }
-      return 1;
-    }
-
-    /**
      * @name removeItemFromSelectedItemsList
      * @desc Remove items from selectedItemsList
      * @param {Array<Object>} selectedItems - List of selected items
@@ -235,7 +284,7 @@
      * @memberOf LinShare.components.tableParamsService
      */
     function reloadTableParams(tableList) {
-      if(!_.isNil(tableList)) {
+      if (!_.isNil(tableList)) {
         itemsList = tableList;
       }
       return tableParams.reload();
@@ -337,15 +386,15 @@
     /**
      * @name toggleItemSelection
      * @desc Add item to the selection list
-     * @param {Object} item - Item to add in selection list
+     * @param {Object} itemToSelect - Item to add in selection list
      * @memberOf LinShare.components.tableParamsService
      */
-    function toggleItemSelection(item) {
-      item.isSelected = !item.isSelected;
-      if (item.isSelected) {
-        selectedItemsList.push(item);
+    function toggleItemSelection(itemToSelect) {
+      itemToSelect.isSelected = !itemToSelect.isSelected;
+      if (itemToSelect.isSelected) {
+        selectedItemsList.push(itemToSelect);
       } else {
-        var index = selectedItemsList.indexOf(item);
+        var index = selectedItemsList.indexOf(itemToSelect);
         if (index > -1) {
           selectedItemsList.splice(index, 1);
         }
