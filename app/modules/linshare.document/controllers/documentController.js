@@ -154,12 +154,11 @@
       }
     }
 
-    //TODO - IAB: Same code as loadTable|getData function to get list of elements in the table -> function
     function addUploadedDocument(flowFile) {
       if(flowFile._from === $scope.mySpacePage) {
         flowFile.asyncUploadDeferred.promise.then(function(file) {
           $scope.documentsList.push(file.linshareDocument);
-          $scope.isNewAddition = true;
+          $scope.isNewAddition = tableParamsService.isItemAddedOnCurrentPage(file.linshareDocument.uuid);
           tableParamsService.reloadTableParams();
           $timeout(function() {
             $scope.isNewAddition = false;
@@ -275,7 +274,7 @@
      */
     function launchTableParamsInitiation() {
       tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, $stateParams.uploadedFileUuid)
-        .then(function() {
+        .then(function(data) {
           $scope.tableParamsService = tableParamsService;
           $scope.tableParams = tableParamsService.getTableParams();
           $scope.lengthOfSelectedDocuments = tableParamsService.lengthOfSelectedDocuments;
@@ -288,6 +287,10 @@
           $scope.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
           $scope.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
           $scope.reloadDocuments = reloadDocuments;
+
+          if(!_.isNil(data.itemToSelect)) {
+            $scope.showCurrentFile(data.itemToSelect);
+          }
         });
     }
 
@@ -302,37 +305,6 @@
       $scope.mainVm.sidebar.setData($scope);
       $scope.mainVm.sidebar.setContent(content || lsAppConfig.share);
       $scope.mainVm.sidebar.show();
-    }
-
-    //TODO - IAB: Same code as loadTable|getData function to get list of elements in the table -> function
-    function findSpecificPage(fileUuid) {
-      if (!_.isNil(fileUuid)) {
-        var items;
-        if (_.isNil($scope.tableParams)) {
-          items = getDisplayedData($scope.documentsList, null, ['-modificationDate']);
-        } else {
-          items = getDisplayedData($scope.documentsList, $scope.tableParams.filter(), $scope.tableParams.orderBy());
-        }
-        return Math.floor(_.findIndex(items, {
-          'uuid': fileUuid
-        }) / 10) + 1;
-      }
-      return 1;
-
-      //TODO - IAB: Same code as loadTable|getData function to get list of elements in the table -> function
-      /**
-       * @name getDisplayedData
-       * @desc Filter and sort the list of item to get the data to be shown on the table
-       * @param {Array<Object>} data - List of item for the table
-       * @param {Object} filter - Object containing filters for the data
-       * @param {Array<string>} sort - Array containing sorting column for the data
-       * @return {Array<Object>} List of item to be shown for the table
-       * @memberOf NameSpaceGlobal.ElementName
-       */
-      function getDisplayedData(data, filter, sort) {
-        var filteredData = filter ? $filter('filter')(data, filter) : data;
-        return sort ? $filter('orderBy')(filteredData, sort) : filteredData;
-      }
     }
 
     function lsFormat() {
