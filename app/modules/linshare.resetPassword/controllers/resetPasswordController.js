@@ -18,8 +18,8 @@
    *  @desc Reset password management system controller
    *  @memberOf LinShare.resetPassword
    */
-  function ResetPasswordController($log, $state, $timeout, toastService, $translatePartialLoader,
-    languageService, lsAppConfig, resetPasswordService, resetUuid) {
+  function ResetPasswordController($log, $state, $timeout, $translatePartialLoader,
+    languageService, lsAppConfig, resetPasswordService, resetUuid, toastService) {
     /* jshint validthis: true */
     var resetVm = this;
     var
