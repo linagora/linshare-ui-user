@@ -3,7 +3,8 @@
 angular
   .module('linshareUiUserApp')
   .config(function(RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
-                   $translatePartialLoaderProvider, lsAppConfig, $windowProvider) {
+                   $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider) {
+    lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
     $translateProvider.useLoader('$translatePartialLoader', {
       urlTemplate: pathToLocal + '/{lang}/{part}.json',
