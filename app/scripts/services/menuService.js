@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .factory('MenuService', menuService);
 
-  menuService.$inject = ['lsAppConfig'];
+  menuService.$inject = ['functionalityRestService', 'lsAppConfig'];
 
   /**
    * @namespace menuService
    * @desc Service to interact with session
    * @memberOf linshareUiUserApp
    */
-  function menuService(lsAppConfig) {
+  function menuService(functionalityRestService, lsAppConfig) {
     var
       administrations,
       audit,
@@ -43,6 +43,14 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     function activate() {
+      functionalityRestService.getFunctionalityParams('GUESTS').then(function(data) {
+        administrations.links.splice(1, 0, {
+          name: 'MENU_TITLE.GUESTS',
+          link: 'administration.guests',
+          disabled: _.isNil(data) ? true : false
+        });
+      });
+
       administrations = {
         name: 'MENU_TITLE.ADMIN',
         icon: 'zmdi zmdi-settings-square',
@@ -52,10 +60,6 @@
           {
             name: 'MENU_TITLE.CONTACTS_LISTS',
             link: 'administration.contactslists',
-            disabled: false
-          }, {
-            name: 'MENU_TITLE.GUESTS',
-            link: 'administration.guests',
             disabled: false
           }, {
             name: 'MENU_TITLE.USERS',
