@@ -81,8 +81,12 @@
           </p>
         </div>
       </div>
-      <div class="custom-list-item" x-ng-repeat="list in shareActionVm.newShare.getMailingListUuid()">
-        <p class="pull-left circle-ctn"><span class="circle  user-bg">L</span></p>
+      <div class="custom-list-item" x-ng-repeat="list in shareActionVm.newShare.getMailingList()"
+           tooltip-placement="bottom" tooltip-popup-delay="700"
+           uib-tooltip="{{'BY' | translate}} {{loggedUser.firstName === list.ownerFirstName &&
+             loggedUser.lastName === list.ownerLastName ? 'ME' :
+             list.ownerFirstName + ' ' + list.ownerLastName | translate}}">
+        <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="zmdi zmdi-favorite"></i></span></p>
         <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
           <p class=" close-list-icone-btn pull-right" x-ng-click="shareActionVm.newShare.removeMailingList($index)">

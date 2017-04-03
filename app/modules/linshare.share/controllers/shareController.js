@@ -25,7 +25,7 @@ angular.module('linshare.share')
         });
         return;
       }
-      if (shareCreationDto.getRecipients().length === 0) {
+      if (shareCreationDto.getRecipients().length === 0 && shareCreationDto.getMailingListUuid().length === 0) {
         $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT').then(function(message) {
           toastService.error(message);
         });

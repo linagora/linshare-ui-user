@@ -11,6 +11,7 @@ angular.module('linshare.share')
 
     var recipients = [],
       mailingListUuid = [],
+      mailingList = [],
       expirationDate = {},
       creationAcknowledgement = {},
       enableUSDA = {},
@@ -44,6 +45,7 @@ angular.module('linshare.share')
       this.recipients = shareJson.recipients || [];
       recipients = this.recipients;
       this.mailingListUuid = shareJson.mailingListUuid || [];
+      this.mailingList = shareJson.mailingList || [];
       this.secured = shareJson.secured || secured;
       this.creationAcknowledgement = shareJson.creationAcknowledgement || creationAcknowledgement;
       this.expirationDate = shareJson.expirationDate || expirationDate;
@@ -93,7 +95,7 @@ angular.module('linshare.share')
           }
           break;
         case 'mailinglist':
-          angular.forEach(mailingListUuid, function(element) {
+          _.forEach(mailingListUuid, function(element) {
             if (element.identifier === contact.identifier) {
               exists = true;
               $log.info('The list ' + contact.listName + ' is already in the mailinglist');
@@ -101,6 +103,7 @@ angular.module('linshare.share')
           });
           if (!exists) {
             mailingListUuid.push(contact.identifier);
+            mailingList.push(_.omit(contact, 'display', 'identifier'));
           }
           break;
       }
@@ -118,8 +121,13 @@ angular.module('linshare.share')
       return mailingListUuid;
     };
 
+    ShareObjectForm.prototype.getMailingList = function() {
+      return mailingList;
+    };
+
     ShareObjectForm.prototype.removeMailingList = function(index) {
       mailingListUuid.splice(index, 1);
+      mailingList.splice(index, 1);
     };
 
     ShareObjectForm.prototype.addDocuments = function (documentList) {
@@ -219,6 +227,7 @@ angular.module('linshare.share')
       recipients = [];
       this.recipients = [];
       mailingListUuid = [];
+      this.mailingList = [];
       this.documents = [];
       this.secured = secured;
       this.creationAcknowledgement = creationAcknowledgement;

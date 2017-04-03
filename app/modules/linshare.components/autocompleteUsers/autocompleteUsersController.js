@@ -9,16 +9,20 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['$log', '$scope', '$q', 'autocompleteUserRestService'];
+  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', '$translate', 'authenticationRestService',
+    'autocompleteUserRestService'
+  ];
 
   /**
    * @namespace AutocompleteUsersController
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController($log, $scope, $q, autocompleteUserRestService) {
+  function AutocompleteUsersController($log, $q, $scope, $translate, authenticationRestService,
+    autocompleteUserRestService) {
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;
+    var by, me;
 
     autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
     autocompleteUsersVm.isEmail = true;
@@ -29,7 +33,24 @@
     autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
     autocompleteUsersVm.userRepresentation = userRepresentation;
 
+    activate();
+
     ////////////
+
+    /**
+     * @name activate
+     * @desc Activation function of the controller, launch at every instantiation
+     * @memberOf linshare.componets.AutocompleteUsersController
+     */
+    function activate() {
+      authenticationRestService.getCurrentUser().then(function(user) {
+        autocompleteUsersVm.currentUser = user;
+      });
+      $translate(['BY', 'ME']).then(function(translation) {
+        by = translation.BY;
+        me = translation.ME;
+      });
+    }
 
     /**
      *  @name addElements
@@ -90,7 +111,7 @@
             }
           });
           if (!exists) {
-            selectedUsersList.push(selectedUser.identifier);
+            selectedUsersList.push(_.omit(selectedUser, 'display', 'identifier'));
           }
           break;
       }
@@ -203,7 +224,18 @@
           template = data.identifier;
           break;
         case 'mailinglist':
-          template = data.listName.concat(' ', data.ownerLastName, ' ', data.ownerFirstName);
+          var ownerDisplayed = _.isEqual(
+              _.values(_.pick(autocompleteUsersVm.currentUser, ['firstName', 'lastName', 'mail'])),
+              _.values(_.pick(data, ['ownerFirstName', 'ownerLastName', 'ownerMail']))) ? me :
+            data.ownerFirstName + ' ' + data.ownerLastName;
+          template = '' +
+            '<div  class="recipientsAutocomplete" title="' + data.listName + '">' +
+            '<span class="firstLetterFormat"><i class="zmdi zmdi-favorite"></i></span>' +
+            '<p class="recipientsInfo">' +
+            '<span class="user-full-name">' + data.listName + '</span>' +
+            '<span class="email">' + by + ' ' + ownerDisplayed + '</span>' +
+            '</p>' +
+            '</div>';
           break;
         case 'user':
           var firstLetter = data.firstName.charAt(0);
