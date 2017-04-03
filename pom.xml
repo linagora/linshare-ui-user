@@ -202,10 +202,6 @@
                   <value>production: true</value>
                 </replacement>
                 <replacement>
-                  <token>devMode: true</token>
-                  <value>devMode: false</value>
-                </replacement>
-                <replacement>
                   <token>debug: true</token>
                   <value>debug: false</value>
                 </replacement>

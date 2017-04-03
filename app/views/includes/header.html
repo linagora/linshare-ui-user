@@ -90,7 +90,7 @@
                 </div>
             </li>
             <li class="dropdown" uib-dropdown auto-close="outsideClick" x-ng-if="!lsAppConfig.production">
-              <a  x-ng-show="devMode" uib-dropdown-toggle href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
+              <a  x-ng-show="!linshareModeProduction" uib-dropdown-toggle href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
                 <i class="tmn-counts">5</i>
               </a>
               <a uib-dropdown-toggle href=""><i class="tm-icon zmdi zmdi-notifications-none"></i></a>

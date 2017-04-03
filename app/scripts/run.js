@@ -157,7 +157,6 @@ angular
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.linshareBaseUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
-    $rootScope.devMode = lsAppConfig.devMode;
     $rootScope.linshareModeProduction = lsAppConfig.production;
     $rootScope.linshareLicence= lsAppConfig.licence;
   })
