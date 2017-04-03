@@ -9,8 +9,7 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', '$translate', 'authenticationRestService',
-    'autocompleteUserRestService'
+  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', 'autocompleteUserRestService', 'ownerLabel'
   ];
 
   /**
@@ -18,11 +17,9 @@
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController($log, $q, $scope, $translate, authenticationRestService,
-    autocompleteUserRestService) {
+  function AutocompleteUsersController($log, $q, $scope, autocompleteUserRestService, ownerLabel) {
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;
-    var by, me;
 
     autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
     autocompleteUsersVm.isEmail = true;
@@ -33,24 +30,7 @@
     autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
     autocompleteUsersVm.userRepresentation = userRepresentation;
 
-    activate();
-
     ////////////
-
-    /**
-     * @name activate
-     * @desc Activation function of the controller, launch at every instantiation
-     * @memberOf linshare.componets.AutocompleteUsersController
-     */
-    function activate() {
-      authenticationRestService.getCurrentUser().then(function(user) {
-        autocompleteUsersVm.currentUser = user;
-      });
-      $translate(['BY', 'ME']).then(function(translation) {
-        by = translation.BY;
-        me = translation.ME;
-      });
-    }
 
     /**
      *  @name addElements
@@ -218,46 +198,46 @@
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
     function userRepresentation(data) {
-      var template = '';
+      var template = '' +
+        '<div  class="recipientsAutocomplete" title="$title">' +
+          '<span class="firstLetterFormat $style">$firstLetter</span>' +
+          '<p class="recipientsInfo">' +
+            '<span class="user-full-name">$name</span>' +
+            '<span class="email">$info</span>' +
+          '</p>' +
+        '</div>';
       switch (data.type) {
         case 'simple':
           template = data.identifier;
           break;
         case 'mailinglist':
-          var ownerDisplayed = _.isEqual(
-              _.values(_.pick(autocompleteUsersVm.currentUser, ['firstName', 'lastName', 'mail'])),
-              _.values(_.pick(data, ['ownerFirstName', 'ownerLastName', 'ownerMail']))) ? me :
-            data.ownerFirstName + ' ' + data.ownerLastName;
-          template = '' +
-            '<div  class="recipientsAutocomplete" title="' + data.listName + '">' +
-            '<span class="firstLetterFormat"><i class="zmdi zmdi-favorite"></i></span>' +
-            '<p class="recipientsInfo">' +
-            '<span class="user-full-name">' + data.listName + '</span>' +
-            '<span class="email">' + by + ' ' + ownerDisplayed + '</span>' +
-            '</p>' +
-            '</div>';
+          var user = {
+            firstName: data.ownerFirstName,
+            lastName: data.ownerLastName,
+            mail: data.ownerMail
+          };
+          template = template
+            .replace('$title', data.listName)
+            .replace('$style', '')
+            .replace('$firstLetter', '<i class="zmdi zmdi-favorite"></i>')
+            .replace('$name', data.listName)
+            .replace('$info', ownerLabel.getOwner(user));
           break;
         case 'user':
-          var firstLetter = data.firstName.charAt(0);
-          template = '' +
-            '<div  class="recipientsAutocomplete" title="' + data.mail + '">' +
-            '<span class="firstLetterFormat">' + firstLetter + '</span>' +
-            '<p class="recipientsInfo">' +
-            '<span class="user-full-name">' + data.firstName + ' ' + data.lastName + '</span>' +
-            '<span class="email">' + data.mail + '</span>' +
-            '</p>' +
-            '</div>';
+          template = template
+            .replace('$title', data.mail)
+            .replace('$style', '')
+            .replace('$firstLetter', data.firstName.charAt(0))
+            .replace('$name', data.firstName + ' ' + data.lastName)
+            .replace('$info', data.mail);
           break;
         case 'threadmember':
-          var isMemberClass = data.member === true ? ' firstLetterBgdGreen' : '';
-          template = '' +
-            '<div class="recipientsAutocomplete" title="' + data.mail + '">' +
-            '<span class="firstLetterFormat' + isMemberClass + '">' + data.firstName.charAt() + '</span>' +
-            '<p class="recipientsInfo">' +
-            '<span class="user-full-name">' + data.firstName + ' ' + data.lastName + '</span>' +
-            '<span class="email">' + data.mail + '</span>' +
-            '</p>' +
-            '</div>';
+          template = template
+            .replace('$title', data.mail)
+            .replace('$style', data.member === true ? ' firstLetterBgdGreen' : '')
+            .replace('$firstLetter', data.firstName.charAt(0))
+            .replace('$name', data.firstName + ' ' + data.lastName)
+            .replace('$info', data.mail);
           break;
         default:
           template = data;

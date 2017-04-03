@@ -58,7 +58,6 @@
         <div ls-autocomplete-user="SHARING" data-on-select-function="shareActionVm.newShare.addRecipient"></div>
       </div>
     </form>
-
     <div class="custom-list-body col-xs-12 ">
       <div class="custom-list-item"
            x-ng-repeat="recipient in shareActionVm.newShare.getRecipients() | orderBy : '-' as results"
@@ -82,10 +81,10 @@
         </div>
       </div>
       <div class="custom-list-item" x-ng-repeat="list in shareActionVm.newShare.getMailingList()"
-           tooltip-placement="bottom" tooltip-popup-delay="700"
-           uib-tooltip="{{'BY' | translate}} {{loggedUser.firstName === list.ownerFirstName &&
-             loggedUser.lastName === list.ownerLastName ? 'ME' :
-             list.ownerFirstName + ' ' + list.ownerLastName | translate}}">
+           tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip=""
+           owner-label
+           owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
+           owner-label-attr="uib-tooltip">
         <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="zmdi zmdi-favorite"></i></span></p>
         <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
