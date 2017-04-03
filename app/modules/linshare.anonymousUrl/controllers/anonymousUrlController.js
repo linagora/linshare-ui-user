@@ -107,7 +107,7 @@
       }, {
         total: anonymousUrlVm.anonymousUrlShareEntries.length,
         getData: function(params) {
-          anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password)
+          return anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password)
             .then(function(anonymousUrl) {
               anonymousUrlVm.anonymousUrlData = anonymousUrl.data;
               anonymousUrlVm.anonymousUrlShareEntries = anonymousUrlVm.anonymousUrlData.documents;
