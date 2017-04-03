@@ -9,7 +9,7 @@
     .module('linshare.components')
     .factory('fileSystemUtils', fileSystemUtils);
 
-  fileSystemUtils.$inject = ['lsAppConfig']
+  fileSystemUtils.$inject = ['lsAppConfig'];
 
   /**
    * @namespace fileSystemUtils
