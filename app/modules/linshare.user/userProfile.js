@@ -26,6 +26,7 @@ angular.module('linshare.userProfile', [])
       this.role = null;
       this.accountType = null;
       this.preferences = {};
+      this.expirationDate = null;
     }
 
     angular.extend(User.prototype, {
@@ -41,6 +42,7 @@ angular.module('linshare.userProfile', [])
         this.locale = user.locale;
         this.role = user.role;
         this.accountType = user.accountType;
+        this.expirationDate = user.expirationDate || null;
       },
 
       hasRightAccountType: function(accountType) {

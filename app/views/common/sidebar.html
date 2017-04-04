@@ -8,9 +8,17 @@
           </div>
           <p x-ng-click="toggleSlide = !toggleSlide" class="visible-xs" x-ng-class="{'profile-info-toggled' : toggleSlide}">
             {{ loggedUser.firstName }} {{ loggedUser.lastName }}<i class="zmdi zmdi-chevron-down"></i>
+            <span class="user-expiration-date" data-ng-show="loggedUser.expirationDate">
+              <span translate>EXPIRE_THE</span>
+              <span>{{loggedUser.expirationDate | date: 'longDate'}}</span>
+            </span>
           </p>
           <p class="hidden-xs">
             {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+            <span class="user-expiration-date" data-ng-show="loggedUser.expirationDate">
+              <span translate>EXPIRE_THE</span>
+              <span>{{loggedUser.expirationDate | date: 'longDate'}}</span>
+            </span>
           </p>
         </div>
       </div>

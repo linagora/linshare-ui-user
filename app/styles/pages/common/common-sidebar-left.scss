@@ -13,6 +13,12 @@
   background-color: $primaryClr !important;
 }
 
+.user-expiration-date {
+  bottom: 0;
+  position: absolute;
+  left: 24%;
+}
+
 body:not(.sw-toggled) #sidebar {
   box-shadow: none;
 }
@@ -347,7 +353,7 @@ body:not(.sw-toggled) #sidebar {
 @media (max-width: 768px) {
   .btn-add-files-ctn {
     padding-top: 0;
-    height: 95px;
+    height: 107;
     .btn-add-files {
       padding: 8px 75px;
     }
