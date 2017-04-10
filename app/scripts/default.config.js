@@ -10,7 +10,7 @@
     .constant('lsAppConfig', {
       //Default values if not set in config.js
       baseRestUrl: 'linshare/webservice/rest/user/v2',
-      debug: true,
+      debug: false,
       localPath: 'i18n/original', //custom your i18n folder path
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso',
 
@@ -28,7 +28,7 @@
         vi: 'vi-VN'
       },
       licence: true,
-      production: false,
+      production: true,
       rejectedChar: ['<', '>', ':', '"', '/', '\\', '|', '?', '*', ','],
       roles: {
         admin: 'ADMIN',
