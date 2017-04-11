@@ -5,7 +5,7 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
-  function documentController($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate, $window, $log, documentsList, $timeout, documentUtilsService, $q,
+  function documentController($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate, $translatePartialLoader, $window, $log, documentsList, $timeout, documentUtilsService, $q,
                               flowUploadService, sharableDocumentService, lsAppConfig, toastService,
                               $stateParams, documentSelected) {
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
@@ -73,6 +73,7 @@
     ////////////////
 
     function activate() {
+      $translatePartialLoader.addPart('filesList');
       $scope.fabButton = {
         toolbar: {
           activate: true,

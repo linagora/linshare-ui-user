@@ -54,7 +54,6 @@
       })
       .state('documents', {
         parent: 'common',
-        controller: 'documentsController',
         url: '/files',
         template: '<div ui-view></div>'
       })
@@ -77,15 +76,6 @@
               return doc.uuid === $stateParams.fileUuid;
             });
           }
-        }
-      })
-      .state('documents.files.selected', {
-        url: '/selected_files',
-        templateUrl: 'modules/linshare.document/views/selected_files.html',
-        controller: 'selectedDocumentsController',
-        params: {
-          'selected': null,
-          'hiddenParam': 'YES'
         }
       })
       .state('documents.received', {
