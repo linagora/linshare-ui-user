@@ -9,7 +9,6 @@
                               flowUploadService, sharableDocumentService, lsAppConfig, toastService,
                               $stateParams, documentSelected) {
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
-    var swalCopyInGroup, swalShare, swalDelete, swalDownload, numItems, swalInformation;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
     var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;
     var swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500, toastDeleteSingularSuccess, toastDeletePluralSuccess;
@@ -125,42 +124,6 @@
           swalCodeError500 = translations['TOAST_ALERT.WARNING.ERROR_500'];
           toastDeleteSingularSuccess = translations['GROWL_ALERT.ACTION.DELETE_SINGULAR'];
           toastDeletePluralSuccess = translations['GROWL_ALERT.ACTION.DELETE_PLURAL'];
-        });
-      $translate(['ACTION.COPY_TO', 'ACTION.SHARE', 'ACTION.INFORMATION',
-          'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'
-        ])
-        .then(function(translations) {
-          swalCopyInGroup = translations['ACTION.COPY_TO'];
-          swalShare = translations['ACTION.SHARE'];
-          swalDelete = translations['ACTION.DELETE'];
-          swalDownload = translations['ACTION.DOWNLOAD'];
-          swalInformation = translations['ACTION.INFORMATION'];
-          numItems = translations['SELECTION.NUM_ITEM_SELECTED'];
-          $scope.moreOptionsContexualMenu = [
-            [function($itemScope) {
-              return $itemScope.selectedDocuments.length + ' ' + numItems;
-            }],
-            [swalShare, function() {
-              $scope.onShare();
-            }],
-            [swalDelete, function($itemScope) {
-              $scope.deleteDocuments($itemScope.selectedDocuments);
-            }],
-            [swalInformation, function($itemScope) {
-              $scope.showCurrentFile($itemScope.documentFile);
-            }, function($itemScope) {
-              return $itemScope.selectedDocuments.length === 1;
-            }],
-            [swalCopyInGroup, function() {}, function() {
-              return false;
-            }],
-            [swalDownload, function($itemScope) {
-              var landingUrl = $itemScope.linshareBaseUrl + '/documents/' + $itemScope.documentFile.uuid + '/download';
-              $window.location.href = landingUrl;
-            }, function($itemScope) {
-              return $itemScope.selectedDocuments.length === 1;
-            }]
-          ];
         });
 
       $scope.$on('$stateChangeSuccess', function() {

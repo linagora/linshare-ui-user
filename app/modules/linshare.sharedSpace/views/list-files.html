@@ -391,7 +391,6 @@
                   x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
                    'current-vis': sharedSpaceListVm.currentSelectedDocument.current.uuid === documentFile.uuid}"
                   class="p-b-5"
-                  context-menu="moreOptionsContexualMenu"
                   x-ng-dblclick="!documentFile.type ? sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, documentFile.parent, documentFile.uuid, documentFile.name, false) : null"
                   new-upload-anim
                   check-table-height>

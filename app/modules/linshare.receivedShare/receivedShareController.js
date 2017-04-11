@@ -464,46 +464,6 @@ angular.module('linshare.receivedShare')
 
       $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
-
-      var swalCopyInGroup, swalTransferer, swalDelete, swalDownload, numItems, swalInformation;
-      $translate(['ACTION.COPY_IN_MY_FILES', 'ACTION.TRANSFERT', 'ACTION.INFORMATION',
-        'ACTION.DELETE', 'ACTION.DOWNLOAD', 'SELECTION.NUM_ITEM_SELECTED'])
-        .then(function(translations) {
-          swalCopyInGroup = translations['ACTION.COPY_IN_MY_FILES'];
-          swalTransferer = translations['ACTION.TRANSFERT'];
-          swalDelete = translations['ACTION.DELETE'];
-          swalDownload = translations['ACTION.DOWNLOAD'];
-          swalInformation = translations['ACTION.INFORMATION'];
-          numItems = translations['SELECTION.NUM_ITEM_SELECTED'];
-          /* jshint unused: false */
-          $scope.moreOptionsContexualMenu = [
-            [function($itemScope, $event) {
-              return $itemScope.selectedDocuments.length + ' ' + numItems;
-            }],
-            [swalCopyInGroup, function($itemScope) {
-              $scope.copyIntoFiles($itemScope.documentFile);
-            }],
-            [swalDownload, function($itemScope) {
-              var landingUrl = $itemScope.linshareBaseUrl + '/documents/' + $itemScope.documentFile.uuid + '/download';
-              $window.location.href = landingUrl;
-            }, function($itemScope) {
-              return $itemScope.selectedDocuments.length === 1;
-            }],
-            [swalTransferer, function($itemScope, $event, model) {
-            }, function() {
-              return false;
-            }],
-            [swalDelete, function($itemScope) {
-              $scope.deleteDocuments($itemScope.selectedDocuments);
-            }],
-            [swalInformation, function($itemScope) {
-              $scope.showCurrentFile($itemScope.documentFile);
-            }, function($itemScope) {
-              return $itemScope.selectedDocuments.length === 1;
-            }]
-          ];
-        });
-
       $scope.closeDetailSidebar = function() {
         angular.element('#file-list-table tr li').removeClass('activeActionButton');
       };
