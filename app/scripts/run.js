@@ -43,12 +43,18 @@ angular
         /* jshint ignore:end */
       },
       query: function(flowFile) {
-        var threadUuidParam = flowFile.folderDetails ? flowFile.folderDetails.uuid : '';
-        var workGroupFolderUuidParam = flowFile.folderDetails ? flowFile.folderDetails.folderUuid : '';
+        var workgroupUuidParam = '';
+        var parentUuidParam = '';
+        if(!_.isUndefined(flowFile.folderDetails)) {
+          if(!_.isNil(flowFile.folderDetails.workgroupUuid)) {
+            workgroupUuidParam = flowFile.folderDetails.workgroupUuid;
+            parentUuidParam = !_.isNil(flowFile.folderDetails.folderUuid) ? flowFile.folderDetails.folderUuid : '';
+          }
+        }
         var flowParams = {
           asyncTask: true,
-          threadUuid: threadUuidParam,
-          workGroupFolderUuid: workGroupFolderUuidParam
+          workGroupUuid: workgroupUuidParam,
+          workGroupParentNodeUuid: parentUuidParam
         };
         return flowParams;
       },

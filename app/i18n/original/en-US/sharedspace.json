@@ -33,6 +33,7 @@
     "TRASH_FULL_SIZE": "Trash size"
   },
   "BREADCRUMB_TITLE_WORKGROUP": "Workgroups",
-  "BREADCRUMB_TITLE_WORKGROUP_FILES": "Files"
+  "BREADCRUMB_TITLE_WORKGROUP_FILES": "Files",
+  "FILE_NAME": "File name"
 }
 

@@ -154,27 +154,21 @@
       })
       .state('sharedspace.workgroups', {
         url: '/workgroups',
-        template: '<div ui-view></div>',
-        resolve: {
-          workgroupList: function(workgroupRestService) {
-            return workgroupRestService.getList();
-          }
-        }
+        template: '<div ui-view></div>'
       })
-      .state('sharedspace.workgroups.entries', {
-        url: '/:uuid/:workgroupName',
-        templateUrl: 'modules/linshare.sharedSpace/views/list-files.html',
-        controller: 'SharedSpaceListController as sharedSpaceListVm',
+      .state('sharedspace.workgroups.nodes', {
+        url: '/:workgroupUuid/:workgroupName/:folderUuid/:folderName',
+        templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodes.html',
+        controller: 'WorkgroupNodesController as workgroupNodesVm',
         params: {
           uploadedFileUuid: null,
-          // TODO : workaround to disable folders, with this user never see root folder, he is directly inside it, reput them in url after RC
-          parent: null,
+          parentUuid: null,
           folderUuid: null,
           folderName: null
         },
         resolve: {
-          currentWorkGroup: function(workgroupFoldersRestService, $stateParams) {
-            return workgroupFoldersRestService.getParent($stateParams.uuid, $stateParams.folderUuid);
+          nodesList: function(workgroupNodesRestService, $stateParams) {
+            return workgroupNodesRestService.getList($stateParams.workgroupUuid, $stateParams.folderUuid);
           }
         }
       })

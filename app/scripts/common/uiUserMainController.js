@@ -74,7 +74,8 @@
 
       $scope.$watch(function() {
         return $window.innerWidth;
-      }, function() {
+      }, function(newWidth) {
+        $rootScope.isMobile = (newWidth <= $rootScope.mobileWidthBreakpoint);
         $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
         $timeout(function() {
           checkTableHeightService.checkAndSetNewWidthSidebarRight();
@@ -174,6 +175,7 @@
       $scope.$watch('mainVm.sidebar.isVisible()', function(n) {
         checkTableHeightService.checkAndSetNewWidthSidebarRight();
         if (widthWindow > $rootScope.mobileWidthBreakpoint) {
+          $scope.isMobileMode = false;
           if (n === true) {
             angular.element('.collapsible-content').addClass('set-width');
             if (widthWindow >= 900) {
@@ -189,6 +191,7 @@
             }
           }
         } else {
+          $scope.isMobileMode = true;
           angular.element('.collapsible-content').removeClass('set-width');
           angular.element('.collapsible-content').css('width', '100%');
           if (widthWindow >= 900) {

@@ -35,6 +35,7 @@
         "3002": "This filetype is forbidden",
         "3003": "The file was rejected because a virus was found",
         "3007": "The file couldn't be scanned",
+        "26007": "Cannot upload the file, the folder doesn't exist or have been removed",
         "39001": "The uploads are currently disabled since the maintenance mode has been activated",
         "40403": "The uploaded file status can not be found",
         "40404": "The uploaded file status can not be found",
@@ -49,6 +50,10 @@
         "46014": "There is no more space available on the server (${quotaAttempt}), free space and retry",
         "46015": "There is no more space available on the server, please retry later",
         "46403": "Server configuration error, upload impossible"
+      },
+      "WORKGROUP_NODES_ERROR": {
+        "26007": "Folder not found",
+        "28006": "Folders cannot be copied"
       }
     }
   }

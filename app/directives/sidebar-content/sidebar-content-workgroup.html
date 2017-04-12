@@ -14,13 +14,14 @@
     <md-content>
       <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex" md-dynamic-height=""
                md-border-bottom="">
-        <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage == 'group_list'"
+        <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage === 'group_list' ||
+        mainVm.sidebar.getData().currentPage === 'workgroup_nodes'"
                 label="{{'INFORMATION_TAB.TITLE' | translate}}"
                 class="col-xs-4 noPadding">
 
           <!-- WORKGROUP DETAILS -->
           <md-content>
-            <div x-ng-include="'directives/sidebar-content/sidebar-content-workgroup-details.html'"></div>
+            <div data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-details.html'"></div>
           </md-content>
 
         </md-tab>

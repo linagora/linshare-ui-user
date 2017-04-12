@@ -130,7 +130,7 @@
      */
     function getParamSorting() {
       var sortProperty = Object.keys(paramSorting)[0];
-      var sortPrefix = paramSorting[sortProperty] === "desc" ? '-' : '';
+      var sortPrefix = paramSorting[sortProperty] === 'desc' ? '-' : '';
       return sortPrefix + sortProperty;
     }
 

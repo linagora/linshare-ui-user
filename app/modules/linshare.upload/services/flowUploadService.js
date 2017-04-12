@@ -12,7 +12,7 @@
 
   flowUploadService.$inject = ['$filter', '$log', '$q', '$timeout', '$translatePartialLoader',
     'authenticationRestService', 'LinshareDocumentRestService', 'lsAppConfig', 'uploadRestService',
-    'workgroupEntriesRestService'];
+    'workgroupNodesRestService'];
 
   /**
    * @namespace flowUploadService
@@ -21,7 +21,7 @@
    */
   function flowUploadService($filter, $log, $q, $timeout, $translatePartialLoader,
                              authenticationRestService, LinshareDocumentRestService, lsAppConfig,
-                             uploadRestService, workgroupEntriesRestService) {
+                             uploadRestService, workgroupNodesRestService) {
 
     const
       NONE = 'NONE',
@@ -259,7 +259,7 @@
     function onSuccessAction(flowFile) {
       var fileDetailsRequest = (flowFile._from === lsAppConfig.mySpacePage) ?
         LinshareDocumentRestService.get(flowFile.asyncUploadDetails.resourceUuid) :
-        workgroupEntriesRestService.get(flowFile.folderDetails.parent, flowFile.asyncUploadDetails.resourceUuid);
+        workgroupNodesRestService.get(flowFile.folderDetails.workgroupUuid, flowFile.asyncUploadDetails.resourceUuid);
       fileDetailsRequest.then(function(document) {
         flowFile.linshareDocument = document;
         flowFile.asyncUploadDeferred.resolve(flowFile);

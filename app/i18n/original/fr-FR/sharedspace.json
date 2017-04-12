@@ -33,7 +33,9 @@
     "TRASH_FULL_SIZE": "Taille corbeille "
   },
   "BREADCRUMB_TITLE_WORKGROUP": "Groupes",
-  "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers"
+  "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers",
+  "FILE_NAME": "Nom de fichier"
+
 }
 
 

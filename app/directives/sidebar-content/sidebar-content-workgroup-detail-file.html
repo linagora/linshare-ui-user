@@ -19,14 +19,31 @@
     </div>
   </div>
   <div title="{{'WIP' | translate}}" class="m-b-10">
-    <div class="description-ctn form-sidebar disabled">
-      <div contenteditable="true" class="comment"
-           x-ng-focus="mainVm.sidebar.getData().slideTextarea($event)"
-           x-ng-blur="mainVm.sidebar.getData().slideUpTextarea($event)"
-           x-ng-keyup="mainVm.sidebar.getData().setTextInput($event);"></div>
-      <span>{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}</span>
-      <div class="edit-description">
-        <i class="zmdi zmdi-edit"></i>
+    <div class="description-ctn form-sidebar disabled"
+         data-ng-class="{'show-full-comment': commentFocused}"
+         data-ng-init="commentFocused = false">
+      <!-- TODO : implement good update method on ng-change when description will be implemented -->
+      <textarea title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"
+                class="comment"
+                spellcheck="false"
+                name="description"
+                id="description"
+                data-ng-attr-placeholder="{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}"
+                data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+                data-ng-bind="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+                data-ng-change=""
+                data-ng-model-options="{updateOn: 'blur'}"
+                data-ng-init="commentFocused = false"
+                data-ng-focus="commentFocused = true"
+                data-ng-blur="commentFocused = false">
+                </textarea>
+      <span
+        data-ng-if="(((!commentFocused) && (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
+      <div class="edit-description clic-enabled" data-ng-click="commentFocused = !commentFocused">
+        <i class="zmdi zmdi-edit" data-ng-if="!commentFocused"
+           title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
+        <i class="zmdi zmdi-close" data-ng-if="commentFocused"
+           title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
       </div>
     </div>
   </div>

@@ -174,15 +174,8 @@ angular.module('linshare.sharedSpace')
       }, 200);
     };
 
-    thisctrl.goToSharedSpaceTarget = function(uuid, name) {
-      workgroupFoldersRestService.getParent(uuid, uuid).then(function(folder) {
-        /*jshint eqnull: true*/
-        if (folder[0] == null) {
-          $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name, parent: uuid, folderUuid: uuid, folderName: name.trim()});
-        } else {
-          $state.go('sharedspace.workgroups.entries', {uuid: uuid, workgroupName: name.trim(), parent: folder[0].parent, folderUuid: folder[0].uuid, folderName: folder[0].name.trim()});
-        }
-      });
+    thisctrl.goToSharedSpaceTarget = function(workgroupUuid, name) {
+      $state.go('sharedspace.workgroups.nodes', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
     };
 
     thisctrl.flagsOnSelectedPages = {};
