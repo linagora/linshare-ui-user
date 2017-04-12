@@ -45,7 +45,11 @@
       "503": "Serveur Indisponible",
       "RENAME_FOLDER": "Un dossier avec le même nom existe déjà",
       "RENAME_CONTACTS_LIST": "Une liste de contacts avec le même nom existe déjà.",
-      "RENAME_INVALID": "Le nom saisi est invalide, vous ne pouvez utiliser les charactère suivants: '$rejectedChar'",
+      "RENAME_INVALID": {
+        "EMPTY": "Le nom ne peut être vide",
+        "ENDING_POINT": "Le nom ne peut finir par le caractère '.'",
+        "REJECTED_CHAR": "Le nom saisi est invalide, vous ne pouvez utiliser les caractères suivants: '{{rejectedChar}}'"
+      },
       "DELETE_ERROR": {
         "26006": "La suppression de dossier remplit n'est pas encore supporté."
       },

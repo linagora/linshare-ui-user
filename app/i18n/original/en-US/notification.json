@@ -45,7 +45,11 @@
       "503": "Service Unavailable",
       "RENAME_FOLDER": "A folder with the same name already exists",
       "RENAME_CONTACTS_LIST": "A contact list with the same name already exists",
-      "RENAME_INVALID": "The name is invalid, you cannot use the following characters: '$rejectedChar'",
+      "RENAME_INVALID": {
+        "EMPTY": "The name can't be empty",
+        "ENDING_POINT": "The name cannot finish by the character '.'",
+        "REJECTED_CHAR": "The name is invalid, you cannot use the following characters: '{{rejectedChar}}'"
+      },
       "DELETE_ERROR": {
         "26006": "Deletion of a non-empty folder is not yet supported"
       },

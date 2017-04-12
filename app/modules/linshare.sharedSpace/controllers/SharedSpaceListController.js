@@ -97,12 +97,12 @@
         });
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON', 'GROWL_ALERT.ERROR.RENAME_INVALID'])
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON', 'GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR'])
         .then(function(translations) {
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-          invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID']
+          invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR']
             .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
         });
 

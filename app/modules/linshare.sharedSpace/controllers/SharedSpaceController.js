@@ -39,10 +39,10 @@ angular.module('linshare.sharedSpace')
     };
 
     var swalNewWorkGroupName, invalideNameTranslate;
-    $translate(['ACTION.NEW_WORKGROUP', 'GROWL_ALERT.ERROR.RENAME_INVALID'])
+    $translate(['ACTION.NEW_WORKGROUP', 'GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR'])
       .then(function(translations) {
         swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
-        invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID']
+        invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR']
           .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
       });
     var setElemToEditable = function(idElem, data, isNew) {

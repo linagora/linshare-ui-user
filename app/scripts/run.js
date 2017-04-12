@@ -20,6 +20,9 @@ angular
     RestangularProvider.setDefaultHeaders({
       'Content-Type': 'application/json;'
     });
+    RestangularProvider.setRestangularFields({
+        id: 'uuid'
+    });
     RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers) {
       headers['WWW-No-Authenticate'] = 'linshare';
       if (angular.isObject(element)) {
