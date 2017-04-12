@@ -11,7 +11,7 @@
 
   contactsListsListController.$inject = ['$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService',
+    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService', 'itemUtilsService',
     'lsAppConfig', 'NgTableParams','toastService'];
 
   /**
@@ -22,7 +22,7 @@
   function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, $translate,
                                        $translatePartialLoader, contactsListsList,
                                        contactsListsListRestService, contactsListsContactsRestService,
-                                       contactsListsService, createNew, documentUtilsService,
+                                       contactsListsService, createNew, documentUtilsService, itemUtilsService,
                                        lsAppConfig, NgTableParams, toastService) {
 
     /* jshint validthis:true */
@@ -30,12 +30,14 @@
 
     var
       copySuffix,
+      errorRename,
       newContactsListName,
       privateList,
       publicList,
       stillExists;
 
     contactsListsListVm.addSelectedDocument = addSelectedDocument;
+    contactsListsListVm.canCreate = true;
     contactsListsListVm.closeSearch = closeSearch;
     contactsListsListVm.contactsListsMinePage = lsAppConfig.contactsListsMinePage;
     contactsListsListVm.contactsListsOthersPage = lsAppConfig.contactsListsOthersPage;
@@ -67,7 +69,6 @@
     contactsListsListVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     contactsListsListVm.selectedContactsLists = [];
     contactsListsListVm.setDropdownSelected = setDropdownSelected;
-    contactsListsListVm.setElemToEditable = setElemToEditable;
     contactsListsListVm.showItemDetails = showItemDetails;
     contactsListsListVm.sortDropdownSetActive = sortDropdownSetActive;
     contactsListsListVm.switchVisibility = switchVisibility;
@@ -96,7 +97,7 @@
           'CONTACTS_LISTS_DETAILS.PRIVATE',
           'CONTACTS_LISTS_DETAILS.PUBLIC',
           'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS',
-          'ACTION.COPY_ADJ'])
+          'ACTION.COPY_ADJ', 'GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'])
           .then(function(translations) {
             newContactsListName = translations['ACTION.NEW_CONTACTS_LIST'];
             contactsListsListVm.myLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS'];
@@ -106,6 +107,7 @@
             publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
             stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
             copySuffix = translations['ACTION.COPY_ADJ'];
+            errorRename = translations['GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'];
           });
       });
 
@@ -187,8 +189,8 @@
       if(!contactsListsListVm.isFromMyContactsLists) {
         contactsListsListVm.isFromMyContactsLists = !contactsListsListVm.isFromMyContactsLists;
       }
-      var defaultNamePos = itemNumber(contactsListsListVm.itemsList.plain());
-      var defaultName = defaultNamePos !== null ? newContactsListName + ' (' + defaultNamePos + ')' : newContactsListName;
+      var defaultNamePos = itemUtilsService.itemNumber(contactsListsListVm.itemsList.plain(), newContactsListName);
+      var defaultName = defaultNamePos > 0 ? newContactsListName + ' (' + defaultNamePos + ')' : newContactsListName;
       createContactsListFunction(defaultName);
     }
 
@@ -199,18 +201,19 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function createContactsListFunction(itemName) {
-      var item = {
-        name: cleanString(itemName),
-        uuid: Math.random().toString(36).substring(7),
-        owner: $scope.userLogged,
-        show: true
-      };
-      contactsListsListVm.itemsList.push(item);
-      contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
-      contactsListsListVm.tableParams.reload();
-      $timeout(function() {
-        renameContactsList(item, true);
-      }, 0);
+      if (contactsListsListVm.canCreate) {
+        var item = contactsListsListRestService.restangularize({
+          name: cleanString(itemName),
+          owner: _.pick($scope.userLogged, ['firstName', 'lastName', 'uuid'])
+        });
+        contactsListsListVm.canCreate = false;
+        contactsListsListVm.itemsList.push(item);
+        contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
+        contactsListsListVm.tableParams.reload();
+        $timeout(function(){
+          renameContactsList(item, 'td[uuid=""] .file-name-disp');
+        }, 0);
+      }
     }
 
     /**
@@ -327,64 +330,6 @@
     }
 
     /**
-     * @name itemNotExits
-     * @desc check if contactsList exists
-     * @param {Array<Object>} items - list of contactsLists to look over
-     * @param {String} newName - name to check
-     * @param {object} newItem - new contactsList to compare
-     * @returns {Boolean} if exists or not
-     * @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    function itemNotExits(items, newName, newItem) {
-      var notExists = true;
-      var itemsList = _.clone(items);
-      if(newItem) {
-        itemsList.pop();
-      }
-      _.forEach(itemsList, function(item) {
-        if(item.owner.uuid === $scope.userLogged.uuid && item.name.toLowerCase() === newName.toLowerCase()) {
-          notExists = false;
-        }
-      });
-      return notExists;
-    }
-
-    /**
-     * @name itemNumber
-     * @desc Check all "new contactsList (x)" where x is the number of the biggest value +1, or missing value
-              Exemple 1 : if 1, 2 and 3 exist, the next string will be => New contactsList (4),
-              Exemple 2 : if 1, 2 ,4 exist the value of the next string will be => New contactsList (3), because 3 is missing
-     * @param {Array<Object>} items - contactsLists
-     * @returns {integer} number of new item name
-     * @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    function itemNumber(items) {
-      if(items.length === 0 || !_.some(items, {name: newContactsListName})) {
-        return null;
-      } else {
-        var iteration = 1;
-        var contactsListsIndex = [];
-        var regex = new RegExp('^' + newContactsListName + ' \\([0-9]+\\)');
-        _.forEach(items, function(item) {
-          if(item.name !== newContactsListName + ' (0)' && regex.test(item.name)) {
-            contactsListsIndex.push(parseInt(item.name.replace(/\D/g, '')));
-          }
-        });
-        contactsListsIndex = _.sortBy(contactsListsIndex, function(val) {
-          return val;
-        });
-        _.forEach(contactsListsIndex, function(index, key) {
-          if(index === key + 1) {
-            iteration++;
-          } else {
-            return iteration;
-          }
-        });
-        return iteration;
-      }
-    }
-
-    /**
      * @name loadSidebarContent
      * @desc open the right sidebar with choosen template
      * @param {String} content - name of template to display
@@ -465,9 +410,25 @@
      * @returns {Promise} Response of the server
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
-    function renameContactsList(item, newItem) {
-      var itemNameElem = $('td[uuid=' + item.uuid + ']').find('.file-name-disp');
-      contactsListsListVm.setElemToEditable(itemNameElem, item, newItem);
+    function renameContactsList(item, itemNameElem) {
+      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
+      itemUtilsService.rename(item, itemNameElem).then(function(data) {
+        item = _.assign(item, data);
+        contactsListsListVm.canCreate = true;
+      }).catch(function(error) {
+        if (error.data.errCode === 25001) {
+          toastService.error(errorRename);
+          renameContactsList(item, itemNameElem);
+        }
+        if (error.data.errCode === 90909) {
+          if (!item.uuid) {
+            contactsListsListVm.itemsList.splice(_.findIndex(contactsListsListVm.itemsList, item), 1);
+          }
+          contactsListsListVm.canCreate = true;
+        }
+      }).finally(function() {
+        contactsListsListVm.tableParams.reload();
+      });
     }
 
     /**
@@ -593,121 +554,6 @@
       $timeout(function() {
         angular.element(currTarget).addClass('active-check');
       }, 200);
-    }
-
-    /**
-     * @name setElemToEditable
-     * @desc Set element to editable in the table to change name
-     * @param {String} idElem - uuid of selected contactsList (also DOM's element's id)
-     * @param {Object} data - selected contactsList
-     * @param {Boolean} isNewItem -
-     * @returns {Null}
-     * @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    // TODO : IAB - refactor - directives and services
-    function setElemToEditable(idElem, data, isNewItem) {
-      var initialName = newContactsListName;
-      var enterKeyPressed = false;
-      angular.element(idElem).attr('contenteditable', 'true')
-        .on('focus', function() {
-          document.execCommand('selectAll', false, null);
-          initialName = data.name;
-        })
-        .on('focusout', function() {
-          if(isNewItem || cleanString(data.name) !== cleanString(idElem[0].textContent)) {
-            if(itemNotExits(contactsListsListVm.itemsList.plain(), cleanString(idElem[0].textContent), isNewItem)) {
-              data.name = cleanString(idElem[0].textContent);
-              if(cleanString(data.name) === '') {
-                angular.element(idElem).text(initialName);
-                data.name = cleanString(initialName);
-              }
-              if(isNewItem && !enterKeyPressed) {
-                saveNewItem(data);
-              } else if(!isNewItem && data.name !== initialName) {
-                contactsListsListRestService.update(data).then(function() {
-                }, function(error) {
-                  data.name = initialName;
-                  if(error.errCode === 25001) {
-                    $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
-                      toastService.error(message);
-                    });
-                  }
-                });
-              }
-              angular.element(this).attr('contenteditable', 'false');
-            } else {
-              data.name = initialName;
-              removeUnpersistedContactsLists();
-              if(isNewItem) {
-                saveNewItem(data);
-              }
-              $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
-                toastService.error(message);
-              });
-              angular.element(idElem).text(cleanString(initialName));
-              angular.element(this).attr('contenteditable', 'false');
-            }
-          } else {
-            return null;
-          }
-          return null;
-        })
-        .on('keydown', function(e) {
-          if(e.which === 27 || e.keyCode === 27) {
-            if(isNewItem) {
-              _.remove(contactsListsListVm.itemsList, {
-                uuid: data.uuid
-              });
-              contactsListsListVm.tableParams.reload();
-              return null;
-            } else {
-              data.name = cleanString(initialName);
-              angular.element(idElem).text(cleanString(initialName));
-              angular.element(this).attr('contenteditable', 'false');
-            }
-            return null;
-          } else if(e.which === 13) {
-            enterKeyPressed = true;
-            if(isNewItem || cleanString(data.name) !== cleanString(idElem[0].textContent)) {
-              if(itemNotExits(contactsListsListVm.itemsList.plain(), cleanString(idElem[0].textContent), isNewItem)) {
-                data.name = cleanString(idElem[0].textContent);
-                if(cleanString(data.name) === initialName || cleanString(data.name) === '') {
-                  angular.element(idElem).text(initialName);
-                  data.name = cleanString(initialName);
-                }
-                if(isNewItem) {
-                  saveNewItem(data);
-                } else if(!isNewItem && data.name !== initialName) {
-                  contactsListsListRestService.update(data).then(function() {
-                  }, function(error) {
-                    data.name = initialName;
-                    if(error.errCode === 25001) {
-                      $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
-                        toastService.error(message);
-                      });
-                    }
-                  });
-                }
-                angular.element(this).attr('contenteditable', 'false');
-              } else {
-                data.name = cleanString(initialName);
-                removeUnpersistedContactsLists();
-                if(isNewItem) {
-                  saveNewItem(data);
-                }
-                $translate('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST').then(function(message) {
-                  toastService.error(message);
-                });
-                angular.element(idElem).text(cleanString(initialName));
-                angular.element(this).attr('contenteditable', 'false');
-              }
-            } else {
-              return null;
-            }
-            return null;
-          }
-        });
-      angular.element(idElem).focus();
     }
 
     /**

@@ -5,11 +5,12 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
-          <div class="menu-popover-ctn hidden-xs clickable waves-effect">
+          <div class="menu-popover-ctn hidden-xs"
+               data-ng-class="{'clickable waves-effect': contactsListsListVm.canCreate}">
             <a class="add-menu-group"
                x-ng-click="contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.createContactsList() :
                 contactsListsListVm.goToMineAndCreateContactsList()">
-              <i class="zmdi zmdi-plus"></i>
+              <i class="zmdi zmdi-plus" data-ng-class="{'disabled': !contactsListsListVm.canCreate}"></i>
             </a>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
@@ -365,7 +366,7 @@
                        contactsListsListVm.selectedContactsLists.length === 1">
                     <a href=""
                        x-ng-click="
-                       contactsListsListVm.renameContactsList(contactsListsListVm.selectedContactsLists[0], false)">
+                       contactsListsListVm.renameContactsList(contactsListsListVm.selectedContactsLists[0])">
                       <i class="zmdi zmdi-border-color"></i>
                       {{'CONTACTS_LISTS_ACTION.MORE.RENAME' | translate}}
                     </a>
@@ -527,7 +528,7 @@
                                 </a>
                               </li>
                               <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
-                                <a href="" x-ng-click="contactsListsListVm.renameContactsList(contactsList, false)">
+                                <a href="" x-ng-click="contactsListsListVm.renameContactsList(contactsList)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'CONTACTS_LISTS_ACTION.MORE.RENAME' | translate}}
                                 </a>
@@ -656,7 +657,7 @@
            contactsListsListVm.selectedContactsLists.length === 1">
           <a href=""
              x-ng-click="
-             contactsListsListVm.renameContactsList(contactsListsListVm.selectedContactsLists[0], false)">
+             contactsListsListVm.renameContactsList(contactsListsListVm.selectedContactsLists[0])">
             <i class="zmdi zmdi-border-color"></i>
             {{'CONTACTS_LISTS_ACTION.MORE.RENAME' | translate}}
           </a>

@@ -25,6 +25,7 @@
         delete: remove,
         get: get,
         getList: getList,
+        restangularize: restangularize,
         update: update
       };
 
@@ -78,6 +79,18 @@
     function remove(contactsListsUuid) {
       $log.debug('contactsListsListRestService - remove', contactsListsUuid);
       return handler(Restangular.one(restUrl, contactsListsUuid).remove());
+    }
+
+    /**
+     * @name restangularize
+     * @desc Restangularize an item
+     * @param {Object} item - Item to be restangularized
+     * @returns {Object} Restangularized object
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
+     */
+    function restangularize(item) {
+      $log.debug('contactsListsListRestService - restangularize', item);
+      return Restangular.restangularizeElement(null, item, restUrl);
     }
 
     /**
