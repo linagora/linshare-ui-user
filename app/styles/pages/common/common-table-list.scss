@@ -118,6 +118,9 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       padding-top: 11px;
+      .file-name-disp {
+        display: inline;
+      }
     }
     .ctn-name-actions {
       color: #0E0E0E;

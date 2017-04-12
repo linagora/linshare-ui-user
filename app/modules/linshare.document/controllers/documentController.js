@@ -7,7 +7,7 @@
 
   function documentController($scope, $filter, LinshareDocumentRestService, NgTableParams, $translate, $translatePartialLoader, $window, $log, documentsList, $timeout, documentUtilsService, $q,
                               flowUploadService, sharableDocumentService, lsAppConfig, toastService,
-                              $stateParams, documentSelected) {
+                              $stateParams, documentSelected, itemUtilsService) {
     var initFlagsOnSelectedPages = initFlagsOnSelectedPagesFunction;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
     var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;
@@ -36,6 +36,7 @@
     $scope.getDetails = getDetails;
     $scope.getDocumentInfo = getDocumentInfo;
     $scope.getDocumentThumbnail = getDocumentThumbnail;
+    $scope.itemUtilsService = itemUtilsService;
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.lsAppConfig = lsAppConfig;

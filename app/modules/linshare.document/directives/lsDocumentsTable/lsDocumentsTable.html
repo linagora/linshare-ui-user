@@ -40,12 +40,12 @@
     </td>
 
     <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
-        data-sortable="'name'" uuid={{o.uuid}} header-class="'flexible-table-col'">
+        data-sortable="'name'" uuid={{documentFile.uuid}} header-class="'flexible-table-col'">
       <div class="ctn-name-actions">
         <!-- TODO: on a mobile , Default action should redirect toward the detail sidebar of the current
          document -->
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-          {{documentFile.name}}
+          <span class="file-name-disp">{{documentFile.name}}</span>
           <span>
             <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs"
                   x-ng-click="showCurrentFile(documentFile, undefined, 1)" event-propagation-stop>

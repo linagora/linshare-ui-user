@@ -34,40 +34,51 @@
     </div>
     <div id="toolbar-actions" class="hidden-xs">
       <span>
-              <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
-                 x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}"
-                 x-ng-click="onShare()">
-                <i class="zmdi zmdi-share"></i>
-                <span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span>
-              </a>
-            </span>
+        <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
+           data-ng-class="{'de-activate-sharing': (numSelectedItems.length === 0 || isCurrentPartage)}"
+           data-ng-click="onShare()">
+          <i class="zmdi zmdi-share"></i><span translate>SELECTION_TOOLBAR.SHARE</span>
+        </a>
+      </span>
       <span>
-              <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
-                 x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}"
-                 x-ng-click="deleteDocuments(selectedDocuments)">
-                <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
-              </a>
-            </span>
-      <span x-ng-class="{'hide': selectedDocuments.length > 1}"
-            x-ng-click="downloadFile(selectedDocuments[0])">
-              <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
-                <i class="zmdi zmdi-download"></i>
-                <span>{{'DOWNLOAD' | translate}}</span>
-              </a>
-            </span>
-      <span x-ng-class="{'hide': selectedDocuments.length <= 1}">
-              <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
-                 x-ng-click="unavailableMultiDownload()">
-                <i class="zmdi zmdi-download"></i>
-                <span>{{'DOWNLOAD' | translate}}</span>
-              </a>
-            </span>
-      <span x-ng-show="linshareModeProduction == false">
-              <a class="plain-text-button" title="{{'ACTION.COPY_TO' | translate}}">
-                <i class="zmdi zmdi-copy" title="{{'ACTION.COPY_TO' | translate}}"></i>
-                <span>{{'ACTION.COPY_TO' | translate}}</span>
-              </a>
-            </span>
+        <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+           data-ng-class="{'de-activate-sharing': (numSelectedItems.length === 0 || isCurrentPartage)}"
+           data-ng-click="deleteDocuments(selectedDocuments)">
+          <i class="zmdi zmdi-delete"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
+        </a>
+      </span>
+      <span data-ng-class="{'hide': selectedDocuments.length > 1}" data-ng-click="downloadFile(selectedDocuments[0])">
+        <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
+          <i class="zmdi zmdi-download"></i><span translate>DOWNLOAD</span>
+        </a>
+      </span>
+      <span data-ng-class="{'hide': selectedDocuments.length <= 1}">
+        <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
+           data-ng-click="unavailableMultiDownload()">
+          <i class="zmdi zmdi-download"></i><span translate>DOWNLOAD</span>
+        </a>
+      </span>
+      <span class="dropdown link-dropdown" uib-dropdown="" data-ng-show="selectedDocuments.length === 1">
+        <a class="plain-text-button share-link"
+           uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+          <i class="zmdi zmdi-more-vert"></i><span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
+          <li class="hidden-xs">
+            <a href=""
+               data-ng-click="itemUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
+             <i class="zmdi zmdi-border-color" title="{{'ACTION.RENAME' | translate}}"></i>
+             <span translate>ACTION.RENAME</span>
+            </a>
+          </li>
+          <li class="hidden-xs" data-ng-show="!linshareModeProduction">
+            <a href="">
+             <i class="zmdi zmdi-copy" title="{{'ACTION.COPY_TO' | translate}}"></i>
+             <span translate>ACTION.COPY_TO</span>
+            </a>
+          </li>
+        </ul>
+      </span>
     </div>
   </div>
   <div class="drag-and-drop-ctn collapsible-content reset-content-width drag-n-drop-height" check-table-height
