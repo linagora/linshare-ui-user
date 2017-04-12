@@ -43,6 +43,7 @@
       "FILE_NOT_FOUND": "The selected file has not been found",
       "FILE_UPLOAD": "The upload failed",
       "503": "Service Unavailable",
+      "RENAME_FILE": "A file with the same name already exists",
       "RENAME_FOLDER": "A folder with the same name already exists",
       "RENAME_CONTACTS_LIST": "A contact list with the same name already exists",
       "RENAME_INVALID": {

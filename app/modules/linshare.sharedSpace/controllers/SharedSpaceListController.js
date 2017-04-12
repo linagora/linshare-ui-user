@@ -6,15 +6,13 @@
     .controller('SharedSpaceListController', sharedSpaceListController);
 
   function sharedSpaceListController($scope, $log, currentWorkGroup, NgTableParams, $filter, documentUtilsService,
-                                     fileSystemUtils, workgroupMembersRestService, workgroupEntriesRestService,
+                                     itemUtilsService, workgroupMembersRestService, workgroupEntriesRestService,
                                      workgroupFoldersRestService, $state, $stateParams, Restangular,
                                      $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService,
                                      flowUploadService, lsAppConfig, $q, toastService) {
     /* jshint validthis:true */
     var sharedSpaceListVm = this;
 
-    var setFileToEditable = setFileToEditableFunction;
-    var setFolderToEditable = setFolderToEditableFunction;
     var swalNewFolderName;
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
     var invalideNameTranslate;
@@ -29,6 +27,7 @@
 
     sharedSpaceListVm.addSelectedDocument = addSelectedDocument;
     sharedSpaceListVm.addUploadedEntry = addUploadedEntry;
+    sharedSpaceListVm.canCreate = true;
     sharedSpaceListVm.copy = copy;
     sharedSpaceListVm.createFolder = createFolder;
     sharedSpaceListVm.currentPage = 'group_list_files';
@@ -188,23 +187,26 @@
     }
 
     function createFolder() {
-      var defaultNamePos = newFolderNumber(sharedSpaceListVm.itemsList);
-      var defaultName = defaultNamePos !== 0 ? swalNewFolderName + ' (' + defaultNamePos + ')' : swalNewFolderName;
+      var defaultNamePos = itemUtilsService.itemNumber(sharedSpaceListVm.itemsList, swalNewFolderName);
+      var defaultName = defaultNamePos > 0 ? swalNewFolderName + ' (' + defaultNamePos + ')' : swalNewFolderName;
       createFolderFunction(defaultName);
     }
 
     function createFolderFunction(folderName) {
-      var folder = {
-        name: folderName.trim(),
-        uuid: Math.random().toString(36).substring(7),
-        parent: sharedSpaceListVm.folderUuid
-      };
-      sharedSpaceListVm.itemsList.push(folder);
-      sharedSpaceListVm.tableParams.reload();
-      $timeout(function() {
-        renameFolder(folder, true);
-      }, 0);
+      if (sharedSpaceListVm.canCreate) {
+        var folder = workgroupFoldersRestService.restangularize({
+          name: folderName.trim(),
+          parent: sharedSpaceListVm.folderUuid
+        }, sharedSpaceListVm.uuid);
+        sharedSpaceListVm.canCreate = false;
+        sharedSpaceListVm.itemsList.push(folder);
+        sharedSpaceListVm.tableParams.reload();
+        $timeout(function() {
+          renameFolder(folder, 'td[uuid=""] .file-name-disp');
+        }, 0);
+      }
     }
+
   // TODO : show a single callback toast for multiple  deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       angular.forEach(items, function(restangularizedItem) {
@@ -241,20 +243,6 @@
       workgroupEntriesRestService.download(sharedSpaceListVm.uuid, documentFile.uuid).then(function(fileStream) {
         documentUtilsService.downloadFileFromResponse(fileStream, documentFile.name, documentFile.type);
       });
-    }
-
-    function folderNotExits(items, newName, newFolder) {
-      var notExists = true;
-      var itemsList = _.clone(items);
-      if (newFolder) {
-        itemsList.pop();
-      }
-      _.forEach(itemsList, function(item) {
-        if (!item.type && item.name.toLowerCase() === newName.toLowerCase()) {
-          notExists = false;
-        }
-      });
-      return notExists;
     }
 
     function getDetails(item) {
@@ -344,38 +332,6 @@
       });
     }
 
-    function newFolderNumber(items) {
-      var foldersName = [];
-      _.forEach(items, function(item) {
-        if (!item.type) {
-          foldersName.push(item.name);
-        }
-      });
-      if (foldersName.length === 0 || !_.includes(foldersName, swalNewFolderName)) {
-        return 0;
-      } else {
-        var iteration = 1;
-        var foldersIndex = [];
-        var regex = new RegExp('^' + swalNewFolderName + ' \\([0-9]+\\)');
-        _.forEach(items, function(item) {
-          if (!item.type && regex.test(item.name)) {
-            foldersIndex.push(parseInt(item.name.replace(/\D/g, '')));
-          }
-        });
-        foldersIndex = _.sortBy(foldersIndex, function(val) {
-          return val;
-        });
-        _.forEach(foldersIndex, function(index, key) {
-          if (index === key + 1) {
-            iteration++;
-          } else {
-            return iteration;
-          }
-        });
-        return iteration;
-      }
-    }
-
     function openSearchFunction() {
       angular.element('#drop-area').addClass('search-toggled');
       angular.element('#top-search-wrap input').focus();
@@ -442,28 +398,44 @@
       });
     }
 
-    function renameFolder(folder, newFolder) {
-      var folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
-      setFolderToEditable(folderNameElem, folder, newFolder);
+    function renameFolder(item, itemNameElem) {
+      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
+      itemUtilsService.rename(item, itemNameElem).then(function(data) {
+          item = _.assign(item, data);
+          sharedSpaceListVm.canCreate = true;
+        }).catch(function(error) {
+          //TODO - Manage error from back
+          //$translate('GROWL_ALERT.ERROR.RENAME_FOLDER').then(function(message) {
+          //  toastService.error(message);
+          //});
+          if (error.data.errCode === 90909) {
+            if (!item.uuid) {
+              sharedSpaceListVm.itemsList.splice(_.findIndex(sharedSpaceListVm.itemsList, item), 1);
+            }
+            sharedSpaceListVm.canCreate = true;
+          }
+        }).finally(function() {
+          sharedSpaceListVm.tableParams.reload();
+        });
     }
 
-    function renameItem(item) {
-      var itemNameElem = $('td[uuid=' + item.uuid + ']').find('.file-name-disp');
-      setFileToEditable(itemNameElem, item);
+    function renameItem(item, itemNameElem) {
+      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
+      itemUtilsService.rename(item, itemNameElem).then(function(data) {
+          item = _.assign(item, data);
+        }).catch(function() {
+          //TODO - Manage error from back
+          //$translate('GROWL_ALERT.ERROR.RENAME_FILE').then(function(message) {
+          //  toastService.error(message);
+          //});
+        }).finally(function() {
+          sharedSpaceListVm.tableParams.reload();
+        });
     }
 
     function resetSelectedDocuments() {
       delete sharedSpaceListVm.tableParams.filter().isSelected;
       documentUtilsService.resetItemSelection(sharedSpaceListVm.selectedDocuments);
-    }
-
-    function saveNewFolder(folder) {
-      workgroupFoldersRestService.create(sharedSpaceListVm.uuid, folder).then(function(data) {
-        sharedSpaceListVm.itemsList.pop();
-        sharedSpaceListVm.itemsList.push(data);
-        sharedSpaceListVm.tableParams.reload();
-        return false;
-      });
     }
 
     function selectDocumentsOnCurrentPage(data, page, selectFlag) {
@@ -490,138 +462,6 @@
         });
         sharedSpaceListVm.flagsOnSelectedPages[currentPage] = false;
       }
-    }
-
-    function setFileToEditableFunction(idElem, data) {
-      var initialName = idElem[0].textContent;
-      var fileExtension = data.name.substr(initialName.lastIndexOf('.'));
-      angular.element(idElem).attr('contenteditable', 'true')
-        .on('focus', function() {
-          document.execCommand('selectAll', false, null);
-          initialName = idElem[0].textContent;
-        })
-        .on('focusout', function() {
-          data.name = idElem[0].textContent;
-          if (data.name.trim() === '') {
-            // if the new name is empty then replace with by previous once
-            angular.element(idElem).text(initialName);
-            data.name = initialName;
-          }
-          if (data.name.indexOf('.') === -1) {
-            // if the new name does not contain a file name extension then add the previous original extension to it
-            data.name = data.name + fileExtension;
-            angular.element(idElem).text(data.name);
-          }
-          if (!fileSystemUtils.isNameValid(data.name)) {
-            toastService.error(invalideNameTranslate);
-            idElem[0].textContent = initialName;
-            data.name = initialName;
-            return;
-          }
-          updateNewName(data, idElem);
-        })
-        .on('keypress', function(e) {
-          if (e.which === 13) {
-            angular.element(idElem).focusout();
-          }
-        });
-      angular.element(idElem).focus();
-    }
-
-    function setFolderToEditableFunction(idElem, data, newFolder) {
-      var initialName = swalNewFolderName;
-      angular.element(idElem).attr('contenteditable', 'true')
-        .on('focus', function() {
-          document.execCommand('selectAll', false, null);
-          initialName = data.name;
-        })
-        .on('focusout', function() {
-          if (newFolder || data.name !== idElem[0].textContent) {
-            if (folderNotExits(sharedSpaceListVm.itemsList, idElem[0].textContent.trim(), newFolder)) {
-              data.name = idElem[0].textContent.trim();
-              if (data.name.trim() === '') {
-                angular.element(idElem).text(initialName);
-                data.name = initialName.trim();
-              }
-              if (!fileSystemUtils.isNameValid(data.name)) {
-                 toastService.error(invalideNameTranslate);
-                 idElem[0].textContent = initialName;
-                 data.name = initialName;
-                 return;
-              }
-              if (newFolder) {
-                saveNewFolder(data);
-              } else {
-                workgroupFoldersRestService.update(sharedSpaceListVm.uuid, data);
-              }
-              angular.element(this).attr('contenteditable', 'false');
-            } else {
-              $log('Folder name exists');
-              data.name = initialName;
-              if (!fileSystemUtils.isNameValid(data.name)) {
-                toastService.error(invalideNameTranslate);
-                idElem[0].textContent = initialName;
-                data.name = initialName;
-                return;
-              }
-              if (newFolder) {
-                saveNewFolder(data);
-              }
-              $translate('GROWL_ALERT.ERROR.RENAME_FOLDER').then(function(message) {
-                toastService.error(message);
-              });
-              angular.element(idElem).text(initialName);
-              angular.element(this).attr('contenteditable', 'false');
-              angular.element(this).blur();
-            }
-          }
-        })
-        .on('keypress', function(e) {
-          if (e.which === 13) {
-            if (newFolder || data.name !== idElem[0].textContent) {
-              if (folderNotExits(sharedSpaceListVm.itemsList, idElem[0].textContent.trim(), newFolder)) {
-                data.name = idElem[0].textContent.trim();
-                if ((data.name.trim() === initialName) || (data.name.trim() === '')) {
-                  angular.element(idElem).text(initialName);
-                  data.name = initialName.trim();
-                }
-                if (!fileSystemUtils.isNameValid(data.name)) {
-                  toastService.error(invalideNameTranslate);
-                  data.name = initialName;
-                  idElem[0].textContent = initialName;
-                  return;
-                }
-                if (newFolder) {
-                  saveNewFolder(data);
-                } else {
-                  if (data.name !== initialName) {
-                    workgroupFoldersRestService.update(sharedSpaceListVm.uuid, data);
-                  }
-                }
-                angular.element(this).attr('contenteditable', 'false');
-              } else {
-                $log('Folder name exists');
-                data.name = initialName;
-                if (!fileSystemUtils.isNameValid(data.name)) {
-                  toastService.error(invalideNameTranslate);
-                  data.name = initialName;
-                  idElem[0].textContent = initialName;
-                  return;
-                }
-                if (newFolder) {
-                  saveNewFolder(data);
-                }
-                $translate('GROWL_ALERT.ERROR.RENAME_FOLDER').then(function(message) {
-                  toastService.error(message);
-                });
-                angular.element(idElem).text(initialName);
-                angular.element(this).attr('contenteditable', 'false');
-              }
-            }
-            return false;
-          }
-        });
-      angular.element(idElem).focus();
     }
 
     function setTextInput($event) {
@@ -691,12 +531,6 @@
           closeOnConfirm: true
         }
       );
-    }
-
-    function updateNewName(data, elem) {
-      delete data.lastAuthor;
-      workgroupEntriesRestService.update(sharedSpaceListVm.uuid, data.uuid, data);
-      angular.element(elem).attr('contenteditable', 'false');
     }
   }
 })();

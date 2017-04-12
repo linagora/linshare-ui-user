@@ -12,7 +12,8 @@
               </i>
               <p>{{"WORKGROUPS_LIST.PROJECT" | translate}}</p>
             </a>
-            <a class="col-xs-6" x-ng-click="vm.createWorkGroup();" href="javascript:void(0)">
+            <a class="col-xs-6" x-ng-click="vm.createWorkGroup();" href="javascript:void(0)"
+               data-ng-class="{'disabled': !vm.canCreate}">
               <i class="groups-shared-folder">
                 <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
               </i>
@@ -252,18 +253,19 @@
                       {{'ACTION.FAVORITES' | translate}}
                     </a>
                   </li>
-                  <li class="divider" x-ng-show="vm.selectedDocuments.length == 1"></li>
-                  <li class="hidden-xs" x-ng-show="vm.selectedDocuments.length == 1">
-                    <a x-ng-href="" x-ng-click="vm.downloadFile(documentFile)">
+                  <li class="divider" data-ng-show="vm.selectedDocuments.length === 1"></li>
+                  <li class="hidden-xs" data-ng-show="vm.selectedDocuments.length === 1">
+                    <a x-ng-href="" data-ng-click="vm.downloadFile(vm.selectedDocuments[0])">
                       <i class="zmdi zmdi-download"></i>
                         {{'ACTION.DOWNLOAD' | translate}}
                      </a>
                   </li>
-                  <li class="divider" x-ng-show="linshareModeProduction == false"></li>
-                  <li x-ng-show="vm.selectedDocuments.length == 1" x-ng-click="vm.renameFolder(documentFile)">
+                  <li class="divider" data-ng-show="vm.selectedDocuments.length === 1"></li>
+                  <li data-ng-show="vm.selectedDocuments.length === 1"
+                      data-ng-click="vm.renameFolder(vm.selectedDocuments[0])">
                     <a>
                       <i class="zmdi zmdi-border-color"></i>
-                        {{'ACTION.RENAME' | translate}}
+                      <span translate>ACTION.RENAME</span>
                     </a>
                   </li>
                   <li class="divider" x-ng-show="linshareModeProduction == false"></li>
@@ -533,6 +535,13 @@
            x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
            uib-dropdown-toggle=""></i>
         <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
+          <li data-ng-show="vm.selectedDocuments.length === 1"
+              data-ng-click="vm.renameFolder(vm.selectedDocuments[0])">
+            <a>
+              <i class="zmdi zmdi-border-color"></i>
+              <span translate>ACTION.RENAME</span>
+            </a>
+          </li>
           <li>
             <a href="" event-propagation-stop>
               <i class="zmdi zmdi-star"></i>

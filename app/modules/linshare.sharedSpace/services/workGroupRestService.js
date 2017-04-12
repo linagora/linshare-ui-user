@@ -25,6 +25,7 @@
         get: get,
         getList: getList,
         remove: remove,
+        restangularize: restangularize,
         update: update
       };
 
@@ -77,6 +78,18 @@
     function remove(workgroupUuid) {
       $log.debug('workgroupRestService : remove', workgroupUuid);
       return handler(Restangular.one(restUrl, workgroupUuid).remove());
+    }
+
+    /**
+     * @name restangularize
+     * @desc Restangularize an item
+     * @param {Object} item - Item to be restangularized
+     * @returns {Object} Restangualr object
+     * @memberOf LinShare.sharedSpace.workgroupRestService
+     */
+    function restangularize(item) {
+      $log.debug('workgroupRestService : restangularize', item);
+      return Restangular.restangularizeElement(null, item, restUrl);
     }
 
     /**

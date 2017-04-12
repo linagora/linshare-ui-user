@@ -27,6 +27,7 @@
         getList: getList,
         getParent: getParent,
         remove: remove,
+        restangularize: restangularize,
         update: update
       };
 
@@ -98,6 +99,19 @@
     function remove(workgroupUuid, folderUuid) {
       $log.debug('workgroupFoldersRestService : remove', workgroupUuid, folderUuid);
       return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, folderUuid).remove());
+    }
+
+    /**
+     * @name restangularize
+     * @desc Restangularize an item
+     * @param {Object} item - Item to be restangularized
+     * @param {String} workgroupUuid - The id of a Workgroup object
+     * @returns {Object} Restangualr object
+     * @memberOf LinShare.sharedSpace.workgroupFoldersRestService
+     */
+    function restangularize(item, workgroupUuid) {
+      $log.debug('workgroupFoldersRestService : restangularize', item);
+      return Restangular.restangularizeElement(null, item, restUrl + '/' + workgroupUuid + '/' + restParam);
     }
 
     /**

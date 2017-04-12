@@ -23,6 +23,7 @@
               <p>{{"WORKGROUPS_LIST.SHARED_FOLDER" | translate}}</p>
             </a>
             <a class="col-xs-6" x-ng-click="sharedSpaceListVm.createFolder();"
+               data-ng-class="{'disabled' : !sharedSpaceListVm.canCreate}"
                href="javascript:void(0)" x-ng-if="!linshareModeProduction">
               <i>
                 <span class="groups-folder">
@@ -320,7 +321,7 @@
                   <li class="divider" x-ng-if="linshareModeProduction == false"
                       x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
                   <li x-ng-if="linshareModeProduction == false" x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
-                    <a x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0], false)">
+                    <a x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0])">
                        <i class="zmdi zmdi-border-color"></i>
                        {{'ACTION.RENAME' | translate}}
                     </a>
@@ -534,7 +535,7 @@
                               <li class="divider"></li>
                               <li>
                                 <a
-                                  x-ng-click="documentFile.type ? sharedSpaceListVm.renameItem(documentFile) : sharedSpaceListVm.renameFolder(documentFile, false)">
+                                  x-ng-click="documentFile.type ? sharedSpaceListVm.renameItem(documentFile) : sharedSpaceListVm.renameFolder(documentFile)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
                                 </a>
@@ -666,7 +667,7 @@
         <li class="divider" x-ng-if="linshareModeProduction == false" x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
         <li x-ng-if="linshareModeProduction == false" x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
           <a
-            x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0], false)">
+            x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0])">
           <i class="zmdi zmdi-border-color"></i>
           {{'ACTION.RENAME' | translate}}
           </a>

@@ -1,13 +1,14 @@
 'use strict';
 angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
-                                                workgroups, $translate, $state, documentUtilsService, fileSystemUtils,
+                                                workgroups, $translate, $state, documentUtilsService, itemUtilsService,
                                                 workgroupRestService, workgroupFoldersRestService,
                                                 workgroupEntriesRestService, lsAppConfig, toastService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
     var thisctrl = this;
+    thisctrl.canCreate = true;
     thisctrl.downloadFile = downloadFile;
     thisctrl.lsAppConfig = lsAppConfig;
     thisctrl.currentSelectedDocument = {};
@@ -45,77 +46,12 @@ angular.module('linshare.sharedSpace')
         invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR']
           .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
       });
-    var setElemToEditable = function(idElem, data, isNew) {
-      var initialName = swalNewWorkGroupName;
-      var enterKeyPressed = false;
-
-      angular.element(idElem).attr('contenteditable', 'true')
-        .on('focus', function() {
-          document.execCommand('selectAll', false, null);
-          initialName = data.name;
-        })
-        .on('focusout', function() {
-          if(!enterKeyPressed) {
-            data.name = idElem[0].textContent;
-            if (data.name.trim() === '') {
-              angular.element(idElem).text(initialName);
-              data.name = initialName.trim();
-            }
-            if (!fileSystemUtils.isNameValid(data.name)) {
-              toastService.error(invalideNameTranslate);
-              data.name = initialName;
-              idElem[0].textContent = initialName;
-              return;
-            }
-            if(isNew) {
-              saveNewWorkgroup(data.name);
-            } else {
-              workgroupRestService.update(data);
-            }
-            angular.element(this).attr('contenteditable', 'false');
-          }
-        })
-        .on('keypress', function(e) {
-          if (e.which === 27 || e.keyCode === 27) {
-            if (isNew) {
-              _.remove(thisctrl.itemsList, {
-                uuid: data.uuid
-              });
-              thisctrl.tableParams.reload();
-              return null;
-            } else {
-              data.name = initialName;
-              angular.element(idElem).text(initialName);
-              angular.element(this).attr('contenteditable', 'false');
-            }
-            enterKeyPressed = true;
-            return null;
-          } else if (e.which === 13) {
-            data.name = idElem[0].textContent;
-            if ((data.name.trim() === initialName) || (data.name.trim() === '')) {
-              angular.element(idElem).text(initialName);
-              data.name = initialName.trim();
-            }
-            if (!fileSystemUtils.isNameValid(data.name)) {
-              toastService.error(invalideNameTranslate);
-              data.name = initialName;
-              idElem[0].textContent = initialName;
-              return;
-            }
-            if (isNew) {
-              saveNewWorkgroup(data.name);
-            } else {
-              workgroupRestService.update(data);
-            }
-            enterKeyPressed = true;
-            angular.element(this).attr('contenteditable', 'false');
-          }
-        });
-      angular.element(idElem).focus();
-    };
 
     thisctrl.createWorkGroup = function() {
-      createFolder(swalNewWorkGroupName);
+      var defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, swalNewWorkGroupName);
+      var defaultName = defaultNamePos > 0 ?
+        swalNewWorkGroupName + ' (' + defaultNamePos + ')' : swalNewWorkGroupName;
+      createFolder(defaultName);
     };
 
     thisctrl.renameFolder = renameFolder;
@@ -321,32 +257,34 @@ angular.module('linshare.sharedSpace')
       });
     }
 
-    function renameFolder(folder, isNew) {
-      var folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
-      setElemToEditable(folderNameElem, folder, isNew);
+    function renameFolder(item, itemNameElem) {
+      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
+      itemUtilsService.rename(item, itemNameElem).then(function(data) {
+        item = _.assign(item, data);
+        thisctrl.canCreate = true;
+      }).catch(function(error) {
+        //TODO - Manage error from back
+        if (error.data.errCode === 90909) {
+          if (!item.uuid) {
+            thisctrl.itemsList.splice(_.findIndex(thisctrl.itemsList, item), 1);
+          }
+          thisctrl.canCreate = true;
+        }
+      }).finally(function() {
+        thisctrl.tableParams.reload();
+      });
     }
 
     function createFolder(folderName) {
-      // I generate uuid for tableParams, because this object is temporary while item is not created. TableParams require an unique ID
-      var workgroup = {
-        name: folderName.trim(),
-        /* jshint ignore:start */
-        uuid: uuid.v4()
-        /* jshint ignore:end */
-      };
-      thisctrl.itemsList.push(workgroup);
-      thisctrl.tableParams.reload();
-      $timeout(function() {
-        renameFolder(workgroup, true);
-      }, 0);
-    }
-
-    function saveNewWorkgroup(workgroupName) {
-      workgroupRestService.create({name: workgroupName.trim()}).then(function(data) {
-        thisctrl.itemsList.pop();
-        thisctrl.itemsList.push(data);
+      if (thisctrl.canCreate) {
+        var workgroup = workgroupRestService.restangularize({name: folderName.trim()});
+        thisctrl.canCreate = false;
+        thisctrl.itemsList.push(workgroup);
         thisctrl.tableParams.reload();
-      });
+        $timeout(function() {
+          renameFolder(workgroup, 'td[uuid=""] .file-name-disp');
+        }, 0);
+      }
     }
 
     /**
