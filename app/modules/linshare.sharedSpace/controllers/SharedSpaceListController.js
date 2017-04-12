@@ -9,7 +9,7 @@
                                      itemUtilsService, workgroupMembersRestService, workgroupEntriesRestService,
                                      workgroupFoldersRestService, $state, $stateParams, Restangular,
                                      $translatePartialLoader, $timeout, $translate, sharedSpaceBreadcrumbService,
-                                     flowUploadService, lsAppConfig, $q, toastService) {
+                                     flowUploadService, lsAppConfig, lsErrorCode, $q, toastService) {
     /* jshint validthis:true */
     var sharedSpaceListVm = this;
 
@@ -408,7 +408,7 @@
           //$translate('GROWL_ALERT.ERROR.RENAME_FOLDER').then(function(message) {
           //  toastService.error(message);
           //});
-          if (error.data.errCode === 90909) {
+          if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
             if (!item.uuid) {
               sharedSpaceListVm.itemsList.splice(_.findIndex(sharedSpaceListVm.itemsList, item), 1);
             }

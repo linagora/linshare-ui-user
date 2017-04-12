@@ -3,7 +3,7 @@ angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
                                                 workgroups, $translate, $state, documentUtilsService, itemUtilsService,
                                                 workgroupRestService, workgroupFoldersRestService,
-                                                workgroupEntriesRestService, lsAppConfig, toastService) {
+                                                workgroupEntriesRestService, lsAppConfig, lsErrorCode, toastService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
@@ -264,7 +264,7 @@ angular.module('linshare.sharedSpace')
         thisctrl.canCreate = true;
       }).catch(function(error) {
         //TODO - Manage error from back
-        if (error.data.errCode === 90909) {
+        if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
           if (!item.uuid) {
             thisctrl.itemsList.splice(_.findIndex(thisctrl.itemsList, item), 1);
           }

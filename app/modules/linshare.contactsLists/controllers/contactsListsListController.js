@@ -12,7 +12,7 @@
   contactsListsListController.$inject = ['$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService',
     'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService', 'itemUtilsService',
-    'lsAppConfig', 'NgTableParams','toastService'];
+    'lsAppConfig', 'lsErrorCode', 'NgTableParams','toastService'];
 
   /**
    * @namespace contactsListsListController
@@ -23,7 +23,7 @@
                                        $translatePartialLoader, contactsListsList,
                                        contactsListsListRestService, contactsListsContactsRestService,
                                        contactsListsService, createNew, documentUtilsService, itemUtilsService,
-                                       lsAppConfig, NgTableParams, toastService) {
+                                       lsAppConfig, lsErrorCode, NgTableParams, toastService) {
 
     /* jshint validthis:true */
     var contactsListsListVm = this;
@@ -420,7 +420,7 @@
           toastService.error(errorRename);
           renameContactsList(item, itemNameElem);
         }
-        if (error.data.errCode === 90909) {
+        if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
           if (!item.uuid) {
             contactsListsListVm.itemsList.splice(_.findIndex(contactsListsListVm.itemsList, item), 1);
           }

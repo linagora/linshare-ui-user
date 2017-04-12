@@ -9,14 +9,14 @@
     .module('linshare.components')
     .factory('itemUtilsService', itemUtilsService);
 
-  itemUtilsService.$inject = ['$q', '$timeout', '$translate', 'lsAppConfig', 'toastService'];
+  itemUtilsService.$inject = ['$q', '$timeout', '$translate', 'lsAppConfig', 'lsErrorCode', 'toastService'];
 
   /**
    * @namespace itemUtilsService
    * @desc Utils service for manipulating file
    * @memberOf linshare.components
    */
-  function itemUtilsService($q, $timeout, $translate, lsAppConfig, toastService) {
+  function itemUtilsService($q, $timeout, $translate, lsAppConfig, lsErrorCode, toastService) {
     var
       invalidNameTranslate = {
         empty: {
@@ -173,7 +173,7 @@
         deferred.reject({
           config: item,
           data: {
-            errCode: 90909, //TODO: See with @FMA to define a number
+            errCode: lsErrorCode.CANCELLED_BY_USER,
             data: item
           }
         });
