@@ -25,7 +25,8 @@
     "EDIT_GUEST": "Edit",
     "EXPIRE_THE": "Expire the",
     "MY_SPACE": "My space",
-    "RESTRICTED_CONTACTS": "Restricted contacts"
+    "RESTRICTED_CONTACTS": "Restricted contacts",
+    "UPDATE_OF_GUEST_ACCOUNT": "Edit guest account"
   },
   "HEADER_GUEST": {
     "DOMAIN": "Domain",

@@ -1,6 +1,11 @@
-<div class="header-sidebar">
+<div class="header-sidebar form-sidebar header-show-action">
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" data-ng-click="mainVm.sidebar.hide()"></i>
   <h2 class="header-more-options">{{"SIDEBAR.TITLE.CREATE" | translate}}</h2>
+  <span class="header-action-link waves-effect text-uppercase visible-xs"
+        data-ng-click="mainVm.sidebar.getData().addGuest(createGuest, mainVm.sidebar.getData().guestObject)">
+        <span class="zmdi zmdi-check"></span>
+        <span translate>SIDEBAR.BUTTON.CREATE</span>
+  </span>
   <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide(createGuest, mainVm.sidebar.getData().guestObject)">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
   </span>

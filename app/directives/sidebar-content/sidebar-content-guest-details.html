@@ -1,10 +1,23 @@
 <div id="member-sidebar">
-  <div class="header-sidebar">
-    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" x-ng-click="mainVm.sidebar.hide()">
-      </i>
-    <h2 class="header-more-options set-ellipsis visible-xs">
+  <div class="form-sidebar header-sidebar" data-ng-class="{'header-show-action': mainVm.sidebar.getData().selectedTab === 1}">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 0"
+       data-ng-click="mainVm.sidebar.hide(updateGuest, mainVm.sidebar.getData().selectedGuest);
+                      mainVm.sidebar.getData().closeDropdown($event)">
+    </i>
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 1"
+       data-ng-click="mainVm.sidebar.getData().selectedTab = 0">
+    </i>
+    <h2 class="header-more-options set-ellipsis visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 0">
       {{'GUEST_DETAILS.DETAIL_OF_GUEST_ACCOUNT' | translate}}
     </h2>
+    <h2 class="header-more-options set-ellipsis visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 1">
+      {{'GUEST_DETAILS.UPDATE_OF_GUEST_ACCOUNT' | translate}}
+    </h2>
+    <span class="header-action-link waves-effect text-uppercase visible-xs"
+          data-ng-click="mainVm.sidebar.getData().updateGuest(updateGuest, mainVm.sidebar.getData().selectedGuest)">
+          <span class="zmdi zmdi-check"></span>
+          <span translate>SIDEBAR.BUTTON.UPDATE</span>
+    </span>
     <h2 class="header-more-options set-ellipsis hidden-xs">
       {{mainVm.sidebar.getData().selectedGuest.form.display.firstName}}
       {{mainVm.sidebar.getData().selectedGuest.form.display.lastName}}
@@ -18,7 +31,8 @@
     <md-content>
       <md-tabs md-border-bottom="" md-selected="mainVm.sidebar.getData().selectedTab">
         <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage === 'guests-list'"
-                label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 no-padding">
+                label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 no-padding"
+                data-ng-click="showActionLink = false">
           <md-content>
             <div x-ng-include="'directives/sidebar-content/sidebar-content-guest-details-read.html'"></div>
           </md-content>

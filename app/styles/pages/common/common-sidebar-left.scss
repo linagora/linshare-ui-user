@@ -226,12 +226,28 @@ body:not(.sw-toggled) #sidebar {
   }
 }
 
-#navigation {
-  overflow: scroll;
+#sidebar .sidebar-inner {
+  position : relative
+}
+
+#navigation.c-overflow {
+  overflow-x: hidden;
+  position: absolute;
+  height: calc(100% - 100px);
+  overflow-y: auto;
+  top: 107px;
+  padding-bottom: 100px;
+  width: 100%;
 }
 
 .c-overflow.mCustomScrollbar {
   border-right: solid 2px #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  #navigation.c-overflow {
+    height: calc(100% - 50px);
+  }
 }
 
 .quota {
@@ -241,7 +257,7 @@ body:not(.sw-toggled) #sidebar {
   margin: 0;
   padding: 15px;
   position: absolute;
-  bottom: 5px;
+  bottom: 0;
   width: 267px;
   height: 100px;
   overflow: hidden;

@@ -194,7 +194,7 @@
     padding-right: 9px;
   }
   thead tr:first-child th {
-    height: 53px;
+    height: 50px;
   }
 }
 
@@ -204,7 +204,7 @@
   overflow: hidden;
   th:nth-child(1), td:nth-child(1) {
     text-align: center;
-    flex: 0 0 58px;
+    flex: 0 0 48px;
   }
   th.col-3, td:nth-child(2) {
     width: 76%;
@@ -675,6 +675,7 @@
         justify-content: center;
         height: 40px;
         display: flex !important;
+        margin: auto;
       }
       &.ng-table td.thumb-type-item a.hidden-xs {
         display: none !important;
@@ -728,6 +729,8 @@
       /* action list icons adjustements */
       ul.actions {
         visibility: visible !important;
+        margin: auto;
+        display: flex;
       }
       .actions > li:not(:last-child) {
         visibility: hidden;
@@ -736,6 +739,7 @@
       .actions-list-ctn {
         float: right;
         text-align: center;
+        display: flex;
       }
       .actions > li > a > i,
       .actions > a > i {
@@ -775,7 +779,8 @@
     padding-left: 3px;
   }
   #file-list-table.ng-table:not(.col-4-table) > tbody > tr > td:first-child {
-    padding-right: 5px;
+    padding-right: 0;
+    padding-left: 0 !important;
   }
 }
 

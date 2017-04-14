@@ -26,29 +26,34 @@
         <i class="zmdi zmdi-more-vert"></i>
       </a>
       <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
-         <li>
-          <a href="" data-ng-click="onShare(documentFile)" event-propagation-stop>
-            <i class="zmdi zmdi-share"></i><span translate>ACTION.SHARE</span>
+        <li data-ng-click="showCurrentFile(documentFile,$event)">
+          <a href="">
+            <i class="zmdi zmdi-info-outline" translate></i>
+             <span translate>ACTION.INFORMATION</span>
           </a>
         </li>
         <li>
-          <a href="" data-ng-click="deleteDocuments([documentFile])">
-            <i class="fa fa-trash-o" aria-hidden="true"></i><span translate>ACTION.DELETE</span>
+          <a href="" data-ng-click="onShare(documentFile)" event-propagation-stop>
+            <i class="zmdi zmdi-share"></i>
+            <span translate>ACTION.SHARE</span>
           </a>
         </li>
         <li>
           <a data-ng-href="" data-ng-click="downloadFile(documentFile)" event-propagation-stop>
-            <i class="zmdi zmdi-download"></i><span translate>ACTION.DOWNLOAD</span>
+            <i class="zmdi zmdi-download"></i>
+            <span translate>ACTION.DOWNLOAD</span>
+          </a>
+        </li>
+        <li>
+          <a href="" data-ng-click="deleteDocuments([documentFile])">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <span translate>ACTION.DELETE</span>
           </a>
         </li>
         <li data-ng-click="itemUtilsService.rename(documentFile, 'td[uuid='+documentFile.uuid+'] .file-name-disp')">
           <a href="">
-            <i class="zmdi zmdi-border-color"></i><span translate>ACTION.RENAME</span>
-          </a>
-        </li>
-        <li data-ng-click="showCurrentFile(documentFile,$event)">
-          <a href="">
-            <i class="zmdi zmdi-info-outline"></i> {{'ACTION.INFORMATION' | translate}}
+            <i class="zmdi zmdi-border-color"></i>
+            <span translate>ACTION.RENAME</span>
           </a>
         </li>
         <li data-ng-show="!linshareModeProduction">

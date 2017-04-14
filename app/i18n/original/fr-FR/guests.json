@@ -25,7 +25,8 @@
     "EDIT_GUEST": "Editer",
     "EXPIRE_THE": "Expire le",
     "MY_SPACE": "Espace personnel",
-    "RESTRICTED_CONTACTS": "Contact restreint"
+    "RESTRICTED_CONTACTS": "Contact restreint",
+    "UPDATE_OF_GUEST_ACCOUNT": "Editer le compte"
   },
   "HEADER_GUEST": {
     "DOMAIN": "Domaine",

@@ -89,22 +89,17 @@
                     x-ng-click="showCheckboxes && sharedSpaceListVm.resetSelectedDocuments()"></i>
                </a>
              </span>
-              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
-                   x-ng-click="sharedSpaceListVm.toggleSearchState()">
-                <a href="javascript:void(0)">
-                  <i class="tm-icon zmdi zmdi-search"
-                     ng-class="{'active-link': sharedSpaceListVm.searchMobileDropdown }"></i>
-                </a>
-              </div>
               <a href="" class="hidden-xs pull-left"
                  x-ng-click="sharedSpaceListVm.loadSidebarContent(sharedSpaceListVm.workgroupDetailFile)"
                  title="{'ACTION.INFO_WORKGROUP' | translate}}" aria-hidden="false">
                 <i class="zmdi zmdi-info-outline" aria-hidden="true"></i>
               </a>
-
               <a href="" class="hidden-xs pull-left" x-ng-show="linshareModeProduction == false"
                  title="{{'ACTION.GO_TO_TRASH' | translate}}" aria-hidden="false">
                 <i class="fa fa-recycle" aria-hidden="true"></i>
+              </a>
+              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
               </a>
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
                 <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown=""
@@ -165,9 +160,13 @@
                   </div>
                 </div>
               </div>
-              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
-                <i class="fa fa-th-large" aria-hidden="true"></i>
-              </a>
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
+                   data-ng-click="sharedSpaceListVm.toggleSearchState()">
+                <a href="javascript:void(0)">
+                  <i class="tm-icon zmdi zmdi-search"
+                     data-ng-class="{'active-link': sharedSpaceListVm.searchMobileDropdown}"></i>
+                </a>
+              </div>
             </div>
             <div class="input-group search-bar hidden-xs">
               <div id="search-field-ctn">

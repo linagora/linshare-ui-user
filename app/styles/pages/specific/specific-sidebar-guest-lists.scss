@@ -25,28 +25,20 @@
     display: none;
   }
 }
-
-#content-ctn-sidebar.form-create-guests {
-  position: fixed;
-  width: 350px;
-  height: calc(100% - 50px);
-  overflow-y: auto;
-  margin-top: 0;
-  padding-top: 2em;
-  .fg-float .fg-label {
-    color: inherit;
-  }
-  label {
-    font-weight: normal;
-  }
+#content-ctn-sidebar.form-guests.form-create-guests{
+  height: calc(100% - 200px);
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
-#content-ctn-sidebar.form-update-guests {
-  position: fixed;
-  width: 350px;
-  height: calc(100% - 50px);
-  overflow-y: auto;
-  margin-top: 0;
-  padding: 2.5em 1.5em 50px 1.5em;
+
+#content-ctn-sidebar.form-guests{
+  height: calc(100% - 100px);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.guest-description {
+  padding-bottom: 2em;
 }
 
 #profile-main.detail-guest {
@@ -54,6 +46,7 @@
     height: 200px;
     background: #0b97c4 url(../images/banner_linshare.jpg);
     opacity: 1;
+    overflow-x: hidden;
     background-size: cover;
     p{
       height: inherit;
@@ -117,7 +110,6 @@
 ***********************/
 
 @media (max-width: 768px) {
-  #content-ctn-sidebar.form-create-guests,
   #content-ctn-sidebar.form-update-guests{
     width: 100% !important;
     height: calc(100% - 110px);

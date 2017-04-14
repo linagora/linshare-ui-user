@@ -35,9 +35,9 @@
       var breadcrumbHeight = angular.element('#breadcrumb-wrap').outerHeight();
       var theadHeight = angular.element('.table thead').outerHeight();
       var paginationTableHeight = angular.element('.ng-table-pager').outerHeight();
-      var copyrightHeight = angular.element('#copyright-content-ctn').outerHeight();
-      var marginHeight = navbarHeight + breadcrumbHeight + theadHeight + paginationTableHeight;
-      var tableHeight = heightWindow - marginHeight - copyrightHeight - 2;
+      var copyrightFooter = angular.element('#copyright-footer').outerHeight();
+      var marginHeight = navbarHeight + breadcrumbHeight + theadHeight + paginationTableHeight + copyrightFooter;
+      var tableHeight = heightWindow - marginHeight - 2;
 
       /*  TODO: KLE put css changes into a directive */
 
@@ -62,7 +62,7 @@
       /* the remaining space is assigned to the maximum height of the background areas of a table such as the drag n drops
        and also the background images of the tables of the current page.
        PS : In this case it is applied to any .drag-n-drop-height class upon which the directive was directly assigned to*/
-      var dndHeight = heightWindow - (navbarHeight + breadcrumbHeight + copyrightHeight) -2;
+      var dndHeight = heightWindow - (navbarHeight + breadcrumbHeight + copyrightFooter) - 2;
       angular.element('.drag-n-drop-height').attr('style','height : '+ dndHeight + 'px');
     }
   }

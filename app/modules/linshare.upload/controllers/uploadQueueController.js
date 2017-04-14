@@ -116,7 +116,8 @@
         if (fileToHighlight._from === uploadQueueVm.fromWhere) {
           uploadQueueVm.selectUploadingFile(fileToHighlight, true);
           $timeout(function() {
-            window.scrollTo(0, angular.element('div.media-body[data-uid-flow="' + idUpload + '"]').first().offset().top);
+            var elm = angular.element('#transfert-ctn');
+            elm.scrollTo(0, angular.element('div.media-body[data-uid-flow="' + idUpload + '"]').first().offset().top);
           }, 250);
         }
       }

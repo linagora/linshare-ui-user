@@ -65,8 +65,10 @@
 
 #transfert-ctn.transfert-ctn-white {
   overflow: hidden;
+  overflow-y: auto;
   background-color: #fff;
-  padding-top: 53px;
+  margin-top: 53px;
+  height: calc(100% - 53px);
   #list-files-view {
     background-color: #FFFFFF;
     padding-bottom: 0;
@@ -146,7 +148,7 @@
   }
 
   .anim-left {
-    display: block;
+    display: flex;
     transition: margin .6s ease;
     div:first-child {
       flex: 1 1 100%;
@@ -335,6 +337,7 @@
 #upload-li-ctn {
   background-color: #fff;
   z-index: 4;
+  display: block;
 }
 
 .actions-upload-queue .disabled-work-in-progress i {
@@ -435,6 +438,14 @@
     .card-body.card-padding {
       padding: 5px 0;
     }
+    #file-list-table {
+      overflow: visible;
+      table-layout: inherit;
+      .media-body{
+        overflow: visible;
+        display: flex;
+      }
+    }
   }
   .header-mobile-upload.visible-xs {
     display: flex !important;
@@ -444,6 +455,46 @@
   }
   .toggle-pill {
     padding: 7px 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  #upload-li-ctn {
+    height: calc(100% - 150px) !important;
+  }
+
+  #transfert-ctn {
+    &.transfert-ctn-white {
+      overflow: inherit;
+      overflow-y: inherit;
+      #file-list-table {
+        .media-body {
+          padding: 7px 2px;
+          > div {
+            padding: 0;
+            .align-list-icons {
+              padding: 0;
+              z-index: inherit;
+            }
+            &:nth-child(2) {
+              display: flex !important;
+              justify-content: center;
+              padding-top: 5px;
+            }
+          }
+          .data-list-ctn {
+            padding-top: 4px !important;
+            small {
+              font-size: 0.7em;
+              margin-top: -2px;
+            }
+            .progress {
+              height: 3px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -459,5 +510,27 @@
   }
   .hidden-v-xs {
     display: none;
+  }
+}
+
+@media (max-width:768px) {
+  .upload-files {
+    #breadcrumb-wrap {
+      position: fixed;
+      top: 107px;
+      z-index: 6;
+    }
+    #drop-area {
+      margin-top: 112px;
+      padding-bottom: 20px;
+    }
+    .header-mobile-upload {
+      position: fixed;
+      top: 50px;
+      z-index: 6;
+    }
+  }
+  #transfert-ctn #file-list-table.ng-table {
+    padding-bottom: 105px;
   }
 }

@@ -262,7 +262,7 @@
           </div>
         </div>
       </div>
-      <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}" id="upload-li-ctn"></ls-upload-queue>
+      <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}" id="upload-li-ctn" class="drag-n-drop-height" check-table-height></ls-upload-queue>
       <div class="partage-list">
         <button class="btn btn-default waves-effect" x-ng-repeat="n in sharingsBtn track by $index"
                 x-ng-click="uploadQueueVm.showSharingItems($index)">

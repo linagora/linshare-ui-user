@@ -23,44 +23,44 @@
         </div>
       </div>
     </div>
- <div class="c-overflow" id="navigation" x-ng-style="sizeNavigation">
-   <div class="profile-menu-links" x-ng-show="toggleSlide" x-ng-class="{'profile-disp-links' : toggleSlide}">
-     <ul class="main-menu">
-       <li>
-         <a data-ng-controller="AuthenticationController as authenticationVm"
-            x-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
-           <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
-         </a>
-       </li>
-     </ul>
-   </div>
-  <ul class="main-menu" x-ng-repeat="tab in lsLeftSidebarVm.tabs">
-    <li x-ng-if="tab.link" data-ng-show="!tab.disabled" role="button" class="waves-effect"
-        x-ng-class="{'active simple-menu': currentState.name==tab.name}">
-      <a x-ui-sref="{{tab.link}}"
-         x-ng-class="{'disabled': tab.disabled }">
-        <i class="{{tab.icon}}" ></i> {{tab.name | translate}}
-      </a>
-    </li>
-    <li data-ng-show="!tab.disabled" class="sub-menu" x-ng-if="tab.links" role="button" class="waves-effect"
-        x-ng-class="{'active toggled': currentState.name==tab.name}">
-      <a toggle-submenu>
-        <i class="{{tab.icon}}" ></i> {{tab.name | translate }}
-      </a>
-      <ul>
-        <li data-ng-show="!link.disabled" x-ng-repeat="link in tab.links" role="button" class="waves-effect"
-            x-ng-mouseover="lsLeftSidebarVm.changeColor(link, tab.color)"
-            x-ng-mouseleave="lsLeftSidebarVm.changeColor(link, 'inherit')">
-          <a x-ui-sref="{{link.link}}"
-             x-ui-sref-active="active"
-             x-ng-class="{'disabled': link.disabled}">
-            {{ link.name | translate }}
+  <div class="c-overflow" id="navigation">
+    <div class="profile-menu-links" data-ng-show="toggleSlide" data-ng-class="{'profile-disp-links' : toggleSlide}">
+      <ul class="main-menu">
+        <li>
+          <a data-ng-controller="AuthenticationController as authenticationVm"
+             x-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
+            <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
           </a>
         </li>
       </ul>
-    </li>
-  </ul>
- </div>
+    </div>
+    <ul class="main-menu" x-ng-repeat="tab in lsLeftSidebarVm.tabs">
+      <li x-ng-if="tab.link" data-ng-show="!tab.disabled" role="button" class="waves-effect"
+          x-ng-class="{'active simple-menu': currentState.name==tab.name}">
+        <a x-ui-sref="{{tab.link}}"
+           x-ng-class="{'disabled': tab.disabled }">
+          <i class="{{tab.icon}}"></i> {{tab.name | translate}}
+        </a>
+      </li>
+      <li data-ng-show="!tab.disabled" class="sub-menu" x-ng-if="tab.links" role="button" class="waves-effect"
+          x-ng-class="{'active toggled': currentState.name==tab.name}">
+        <a toggle-submenu>
+          <i class="{{tab.icon}}"></i> {{tab.name | translate }}
+        </a>
+        <ul>
+          <li data-ng-show="!link.disabled" x-ng-repeat="link in tab.links" role="button" class="waves-effect"
+              x-ng-mouseover="lsLeftSidebarVm.changeColor(link, tab.color)"
+              x-ng-mouseleave="lsLeftSidebarVm.changeColor(link, 'inherit')">
+            <a x-ui-sref="{{link.link}}"
+               x-ui-sref-active="active"
+               x-ng-class="{'disabled': link.disabled}">
+              {{ link.name | translate }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
   <div class="quota">
     <div tooltip-placement="bottom"
          uib-tooltip-template="'views/common/quotasTemplateTooltip.html'"
@@ -72,8 +72,8 @@
         x-ng-class="userQuotas.progressBarColor"></uib-progressbar>
       <div class="quota-information">
         <p>
-          {{userQuotas.remaining | readableSize:true}} {{'USER_QUOTAS.REMAINING_OVER' | translate}} {{userQuotas.total |
-          readableSize:true}}
+          {{userQuotas.remaining | readableSize:true}} {{'USER_QUOTAS.REMAINING_OVER' | translate}}
+          {{userQuotas.total | readableSize:true}}
         </p>
       </div>
     </div>

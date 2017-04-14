@@ -25,11 +25,9 @@
                     x-ng-click="showCheckboxes && resetSelectedDocuments()"></i>
                </a>
             </span>
-            <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
-              <a href="">
-                <i class="tm-icon zmdi zmdi-search" x-ng-class="{'active-link': searchMobileDropdown}"></i>
-              </a>
-            </div>
+            <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+              <i class="fa fa-th-large" aria-hidden="true"></i>
+            </a>
             <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
               <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                    auto-close="always" hover-dropdown-fix>
@@ -86,10 +84,11 @@
                 </div>
               </div>
             </div>
-
-            <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
-              <i class="fa fa-th-large" aria-hidden="true"></i>
-            </a>
+            <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
+              <a href="">
+                <i class="tm-icon zmdi zmdi-search" data-ng-class="{'active-link': searchMobileDropdown}"></i>
+              </a>
+            </div>
           </div>
           <div class="input-group search-bar hidden-xs">
               <div id="search-field-ctn">
@@ -311,7 +310,7 @@
                         <li class="hidden-xs hidden-action-links">
                           <a href="" title="{{'ACTION.COPY_IN_MY_FILES' | translate}}" event-propagation-stop="true"
                              x-ng-click="copyIntoFiles(documentFile)">
-                            <i class="fa fa-files-o"></i>
+                            <i class="zmdi zmdi-copy"></i>
                          </a>
                         </li>
                         <li class="hidden-xs hidden-action-links">
@@ -337,31 +336,31 @@
                               </a>
                             </li>
                             <li>
-                              <a x-ng-href=""
-                                 x-ng-click="downloadFile(documentFile)"
+                              <a data-ng-href=""
+                                 data-ng-click="copyIntoFiles(documentFile)"
                                  event-propagation-stop>
-                                <i class="zmdi zmdi-download"></i>
-                                {{'ACTION.DOWNLOAD' | translate}}
-                              </a>
-                            </li>
-                            <li x-ng-show="linshareModeProduction == false">
-                              <a href="" ls-share-modal event-propagation-stop>
-                                 <i class="zmdi zmdi-forward"></i>
-                                {{'ACTION.TRANSFERT' | translate}}
+                                <i class="zmdi zmdi-copy"></i>
+                                <span translate>ACTION.COPY</span>
                               </a>
                             </li>
                             <li>
-                              <a x-ng-href=""
-                                 x-ng-click="copyIntoFiles(documentFile)"
-                                 event-propagation-stop>
-                                <i class="zmdi zmdi-copy"></i>
-                                {{'ACTION.COPY' | translate}}
+                              <a data-ng-href=""
+                                 data-ng-click="downloadFile(documentFile)"
+                                 event-propagation-stop >
+                                <i class="zmdi zmdi-download"></i>
+                                 <span translate>ACTION.DOWNLOAD</span>
                               </a>
                             </li>
                             <li>
                               <a href="" x-ng-click="deleteDocuments(documentFile)">
-                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 {{'ACTION.DELETE' | translate}}
+                              </a>
+                            </li>
+                            <li data-ng-show="!linshareModeProduction">
+                              <a href="" ls-share-modal event-propagation-stop>
+                                 <i class="zmdi zmdi-forward"></i>
+                                <span translate>ACTION.TRANSFERT</span>
                               </a>
                             </li>
                           </ul>

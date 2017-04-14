@@ -515,28 +515,42 @@
                             <ul
                               class="uib-dropdown-menu dropdown-menu-right dm-icon
                                dropdown-divided dropdown-content-left">
-                              <li x-ng-show="!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->
-                                <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
-                                  <i class="fa fa-copy"></i>
-                                  {{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}
-                                </a>
-                              </li>
                               <li>
                                 <a href="" x-ng-click="contactsListsListVm.showItemDetails(contactsList,$event)">
                                   <i class="zmdi zmdi-info-outline"></i>
-                                  {{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}
+                                   <span translate>CONTACTS_LISTS_ACTION.MORE.INFORMATION</span>
                                 </a>
                               </li>
-                              <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
-                                <a href="" x-ng-click="contactsListsListVm.renameContactsList(contactsList)">
-                                  <i class="zmdi zmdi-border-color"></i>
-                                  {{'CONTACTS_LISTS_ACTION.MORE.RENAME' | translate}}
+                              <li>
+                                <a href=""
+                                   data-ng-click="contactsListsListVm.goToContactsListTarget(contactsList.uuid, contactsList.name)">
+                                  <i class="fa fa-eye"></i>
+                                  <span translate>CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS</span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href=""
+                                   data-ng-click="contactsListsListVm.goToContactsListAndAddContacts(contactsList.uuid, contactsList.name)">
+                                  <i class="zmdi zmdi-account-add"></i>
+                                  <span translate>CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT</span>
                                 </a>
                               </li>
                               <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
                                 <a href="" x-ng-click="contactsListsListVm.deleteContactsList(contactsList)">
                                   <i class="fa fa-trash-o"></i>
                                   {{'CONTACTS_LISTS_ACTION.MORE.DELETE' | translate}}
+                                </a>
+                              </li>
+                               <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
+                                <a href="" x-ng-click="contactsListsListVm.renameContactsList(contactsList)">
+                                  <i class="zmdi zmdi-border-color"></i>
+                                  <span translate>CONTACTS_LISTS_ACTION.MORE.RENAME</span>
+                                </a>
+                              </li>
+                              <li x-ng-show="!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->
+                                <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
+                                  <i class="fa fa-copy"></i>
+                                  {{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}
                                 </a>
                               </li>
                               <li x-ng-show="!linshareModeProduction">
