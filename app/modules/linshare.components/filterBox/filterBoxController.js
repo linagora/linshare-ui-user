@@ -10,7 +10,7 @@
     .controller('FilterBoxController', FilterBoxController);
 
   FilterBoxController.$inject = ['$scope', '$timeout', '$translate', 'autocompleteUserRestService', 'lsAppConfig',
-    'tableParamsService', 'unitService'
+    'unitService'
   ];
 
   /**
@@ -18,19 +18,18 @@
    * @desc Controller of the filtering component
    * @memberOf linshare.components
    */
-  function FilterBoxController($scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig,
-                               tableParamsService, unitService) {
+  function FilterBoxController($scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig, unitService) {
     const FR_DATE_FORMAT = lsAppConfig.date_fr_format;
     const EN_DATE_FORMAT = lsAppConfig.date_en_format;
 
     var filterBoxVm = this;
-    filterBoxVm.unitService = unitService;
-    filterBoxVm.filterBoxItemsInit = _.cloneDeep(filterBoxVm.filterBoxItems);
     filterBoxVm.autocompleteUserRestService = autocompleteUserRestService;
     filterBoxVm.clearParams = clearParams;
+    filterBoxVm.activate = false;
     filterBoxVm.formatLabel = formatLabel;
     filterBoxVm.format = $translate.use() === 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
     filterBoxVm.maxDate = $scope.maxDate ? null : new Date();
+    filterBoxVm.unitService = unitService;
     filterBoxVm.updateFilters = updateFilters;
     filterBoxVm.userRepresentation = userRepresentation;
 
@@ -47,8 +46,9 @@
       filterBoxVm.dateStart = undefined;
       filterBoxVm.dateEnd = undefined;
       filterBoxVm.selectedContact = undefined;
-
-      filterBoxVm.filterBoxItems = _.cloneDeep(filterBoxVm.filterBoxItemsInit);
+      filterBoxVm.activate = false;
+      resetTableList();
+      filterBoxVm.showed = _.cloneDeep(filterBoxVm.filterBoxItems);
       delete filterBoxVm.filterBoxTable.filter().sender;
       reloadTable();
     }
@@ -74,6 +74,11 @@
      * @memberOf linshare.components.FilterBoxController
      */
     function updateFilters() {
+      if (!filterBoxVm.activate) {
+        filterBoxVm.filterBoxItemsInit = _.cloneDeep(filterBoxVm.filterBoxItems);
+        filterBoxVm.activate = true;
+      }
+      resetTableList();
       if (filterBoxVm.showUnit) {
         var sizeStart = filterBoxVm.sizeStart ?
           filterBoxVm.unitService.toByte(filterBoxVm.sizeStart, filterBoxVm.unitSize.value, false) : 0;
@@ -87,7 +92,7 @@
           moment(filterBoxVm.dateEnd).add('day', +1) : moment().add('day', +1);
       }
 
-      filterBoxVm.filterBoxItems = _.filter(filterBoxVm.filterBoxItemsInit, function(item) {
+      _.remove(filterBoxVm.filterBoxItems, function(item) {
         var sizeIsValid = true,
           dateIsValid = true;
         if (filterBoxVm.showUnit) {
@@ -98,7 +103,7 @@
           var date = filterBoxVm.dateType === '1' ? item.modificationDate : item.creationDate;
           dateIsValid = (date >= dateStart && date <= dateEnd);
         }
-        return (sizeIsValid && dateIsValid);
+        return !(sizeIsValid && dateIsValid);
       });
 
       if (filterBoxVm.showRecipients && !_.isUndefined(filterBoxVm.selectedContact)) {
@@ -113,6 +118,7 @@
         delete filterBoxVm.filterBoxTable.filter().sender;
       }
 
+      filterBoxVm.showed = _.cloneDeep(filterBoxVm.filterBoxItems);
       reloadTable();
     }
 
@@ -122,7 +128,7 @@
      * @memberOf linshare.components.FilterBoxController
      */
     function reloadTable() {
-      tableParamsService.reloadTableParams(filterBoxVm.filterBoxItems).then(function(data) {
+      filterBoxVm.filterBoxTable.reload().then(function(data) {
         var params = filterBoxVm.filterBoxTable._params;
         var valueShown = (filterBoxVm.filterBoxItems.slice((params.page - 1) * params.count, params.page *
           params.count));
@@ -132,6 +138,22 @@
           }, 0);
         }
       });
+    }
+
+    /**
+     * @name resetTableList
+     * @desc reset table list to initial list
+     * @memberOf linshare.components.FilterBoxController
+     */
+    function resetTableList() {
+      if (!_.isNil(filterBoxVm.showed) && !_.isEqual(filterBoxVm.showed, filterBoxVm.filterBoxItems)) {
+        var removed = _.differenceBy(filterBoxVm.showed, filterBoxVm.filterBoxItems, 'uuid');
+        _.pullAllBy(filterBoxVm.filterBoxItemsInit, removed, 'uuid');
+        var added = _.differenceBy(filterBoxVm.filterBoxItems, filterBoxVm.showed, 'uuid');
+        filterBoxVm.filterBoxItemsInit.push.apply(filterBoxVm.filterBoxItemsInit, added);
+      }
+      _.pullAll(filterBoxVm.filterBoxItems, filterBoxVm.filterBoxItems);
+      filterBoxVm.filterBoxItems.push.apply(filterBoxVm.filterBoxItems, filterBoxVm.filterBoxItemsInit);
     }
 
     /**
