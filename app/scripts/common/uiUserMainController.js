@@ -10,11 +10,11 @@
     .module('linshareUiUserApp')
     .controller('UiUserMainController', UiUserMainController);
 
-  UiUserMainController.$inject = ['$http', '$log', '$rootScope', '$scope', '$state', '$timeout', '$window',
+  UiUserMainController.$inject = ['$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
     'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'LinshareUserService', 'lsAppConfig',
     'MenuService', 'sharableDocumentService', 'ShareObjectService', 'uploadRestService'];
 
-  function UiUserMainController($http, $log, $rootScope, $scope, $state, $timeout, $window, authenticationRestService,
+  function UiUserMainController($http, $log, $q, $rootScope, $scope, $state, $timeout, $window, authenticationRestService,
                                 checkTableHeightService, flowUploadService, LinshareUserService, lsAppConfig,
                                 MenuService, sharableDocumentService, ShareObjectService, uploadRestService) {
     /* jshint validthis:true */
@@ -119,8 +119,11 @@
 
       $rootScope.$on('$stateChangeStart', function(event, toState) {
         mainVm.sidebar.hide();
-        $scope.currentState = MenuService.getProperties(toState.name, false);
-        $scope.linkActive = MenuService.getProperties(toState.name, true);
+        $q.all([MenuService.getProperties(toState.name, false), MenuService.getProperties(toState.name, true)])
+          .then(function(promises) {
+            $scope.currentState = promises[0];
+            $scope.linkActive = promises[1];
+          });
       });
 
       $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
