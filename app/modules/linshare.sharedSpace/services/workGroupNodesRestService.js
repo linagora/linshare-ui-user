@@ -27,6 +27,7 @@
         create: create,
         download: download,
         get: get,
+        getAudit: getAudit,
         getList: getList,
         remove: remove,
         restangularize: restangularize,
@@ -96,6 +97,19 @@
     function get(workgroupUuid, nodeUuid, needTree) {
       $log.debug('workgroupNodesRestService : get', workgroupUuid, nodeUuid);
       return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).get({tree: needTree}));
+    }
+
+    /**
+     *  @name getAudit
+     *  @desc Get audit of a Workgroup Node object
+     *  @param {string} workgroupUuid - The uuid of the Workgroup object
+     *  @param {string} nodeUuid - The uuid of the Workgroup Node object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.sharedSpace.workgroupNodesRestService
+     */
+    function getAudit(workgroupUuid, nodeUuid) {
+      $log.debug('workgroupNodesRestService : getAudit', workgroupUuid, nodeUuid);
+      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).one('audit').get());
     }
 
     /**

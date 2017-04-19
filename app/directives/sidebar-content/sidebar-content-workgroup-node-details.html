@@ -1,11 +1,3 @@
-<div class="header-sidebar">
-  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" x-ng-click="mainVm.sidebar.hide();"></i>
-  <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}</h2>
-  <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide()">
-    <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
-  </span>
-</div>
-
 <div id="profile-main" class="detail-workgroup">
   <div class="p-relative m-b-20 img-preview-ctn">
     <p x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail === true" href="">
@@ -75,7 +67,7 @@
           <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
               uib-dropdown-menu="">
             <li class="hidden-xs" x-ng-show="sharedSpaceListVm.selectedDocuments.length === 1"
-                x-ng-click="sharedSpaceListVm.loadSidebarContent(sharedSpaceListVm.workgroupDetailFile)">
+                x-ng-click="sharedSpaceListVm.loadSidebarContent(sharedSpaceListVm.workgroupNode)">
               <a href="" event-propagation-stop>
                 <i class="zmdi zmdi-info-outline "></i>
                 {{'ACTION.INFORMATION' | translate}}
@@ -142,8 +134,11 @@
             </span>
         </div>
       </div>
-      <div class="item-r actions">
-        <span>{{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: false}}</span>
+      <div class="item-r actions"
+           data-ng-if="mainVm.sidebar.getData().isDocument(mainVm.sidebar.getData().currentSelectedDocument.current.type)">
+        <span>
+          {{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: false}}
+        </span>
         <span class="seperator-inline">|</span>
         <span title="{{mainVm.sidebar.getData().currentSelectedDocument.current.type}}">
             {{mainVm.sidebar.getData().currentSelectedDocument.current.name | getextension}}

@@ -13,11 +13,11 @@
         "CREATE": {
           "AUTHOR": {
             "SENTENCE": "Vous avez partagé le fichier : {{resourceName}} à {{userVarious}}.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           },
           "VIEWER": {
             "SENTENCE": "{{authorName}} a partagé le fichier : {{resourceName}} avec vous.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           }
         },
         "DELETE": {
@@ -295,7 +295,7 @@
           }
         }
       },
-      "WORKGROUP_ENTRY": {
+      "WORKGROUP_DOCUMENT": {
         "CREATE": {
           "AUTHOR": {
             "SENTENCE": "Vous avez déposé un nouveau fichier : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
@@ -443,7 +443,7 @@
       "GUEST": "Compte Invité",
       "SHARE_ENTRY": "Partage",
       "WORKGROUP": "Groupe de Travail",
-      "WORKGROUP_ENTRY": "Groupe de Travail - Fichier",
+      "WORKGROUP_DOCUMENT": "Groupe de Travail - Fichier",
       "WORKGROUP_FOLDER": "Groupe de Travail - Dossier",
       "WORKGROUP_MEMBER": "Groupe de Travail - Membre"
     }

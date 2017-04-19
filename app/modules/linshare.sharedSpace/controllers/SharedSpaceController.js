@@ -2,7 +2,7 @@
 angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
                                                 workgroups, $translate, $state, documentUtilsService, itemUtilsService,
-                                                workgroupRestService, workgroupFoldersRestService,
+                                                workgroupRestService, workgroupFoldersRestService, auditDetailsService,
                                                 workgroupEntriesRestService, lsAppConfig, lsErrorCode, toastService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
@@ -238,10 +238,15 @@ angular.module('linshare.sharedSpace')
     }
 
     function showItemDetails(current, event) {
-      workgroupRestService.get(current.uuid).then(function(data) {
-        thisctrl.currentSelectedDocument.current = data;
-        thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
-        thisctrl.mdtabsSelection.selectedIndex = 0;
+      workgroupRestService.get(current.uuid).then(function(workgroup) {
+        workgroupRestService.getAudit(current.uuid).then(function(auditData) {
+          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain()).then(function(auditActions) {
+            workgroup.auditActions = auditActions;
+            thisctrl.currentSelectedDocument.current = workgroup;
+            thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
+            thisctrl.mdtabsSelection.selectedIndex = 0;
+          });
+        });
       });
 
       var currElm = event.currentTarget;

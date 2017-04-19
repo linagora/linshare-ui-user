@@ -1,0 +1,38 @@
+<div class="activity-log-ctn">
+  <h5 class="header-log-info">
+    <a tooltip-popup-delay="600" tooltip-placement="bottom" uib-tooltip="{{auditAction.resource.name}}">
+      <span data-ng-class="auditAction.icon"></span>&nbsp;
+      <span data-ng-show="auditAction.hasBracket">> </span>
+      <span>{{auditAction.resourceName}}</span>
+    </a>
+  </h5>
+  <p>
+    <b class="action-activity-log">{{auditAction.sentenceAction | translate}}</b> :
+    <span translate="{{auditAction.sentenceKey}}" translate-values="auditAction.sentenceVars"></span>
+  </p>
+  <div data-ng-if="auditAction.updatedValues" data-ng-repeat="updatedValue in auditAction.updatedValues">
+    <p class="activity-fields-renamed-label">{{updatedValue.keyName | translate}} :</p>
+    <p class="activity-fields-renamed-ctn">
+      <span tooltip-popup-delay='550' tooltip-placement="bottom"
+            uib-tooltip="{{updatedValue.oldValueFull ? updatedValue.oldValueFull :
+            updatedValue.oldValue | translateIf:updatedValue.rightsUpdate}}">
+        {{updatedValue.oldValue | translateIf:updatedValue.rightsUpdate}}
+      </span>
+      <span class="activity-arrow">-></span>
+      <span tooltip-popup-delay='550' tooltip-placement="bottom"
+            uib-tooltip="{{updatedValue.newValueFull ? updatedValue.newValueFull :
+              updatedValue.newValue | translateIf:updatedValue.rightsUpdate}}">
+        {{updatedValue.newValue | translateIf:updatedValue.rightsUpdate}}
+      </span>
+    </p>
+  </div>
+  <p class="footer-log-info">
+    <span
+      tooltip-placement="bottom"
+      tooltip-popup-delay="550"
+      uib-tooltip="{{auditAction.creationDate | calendarTime}}">
+      {{auditAction.creationDate | relativeTime}}
+    </span>
+    | <span translate>DETAILS_POPUP.BY</span> {{auditAction.authorName | translate}}
+  </p>
+</div>

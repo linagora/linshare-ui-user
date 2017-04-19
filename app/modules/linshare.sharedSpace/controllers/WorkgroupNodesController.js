@@ -10,8 +10,8 @@
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
   WorkgroupNodesController.$inject = ['$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'documentUtilsService', 'flowUploadService', 'itemUtilsService', 'lsAppConfig',
-    'lsErrorCode', 'nodesList', 'tableParamsService', 'toastService', 'workgroupRestService',
+    '$translatePartialLoader', 'auditDetailsService', 'documentUtilsService', 'flowUploadService', 'itemUtilsService',
+    'lsAppConfig', 'lsErrorCode', 'nodesList', 'tableParamsService', 'toastService', 'workgroupRestService',
     'workgroupMembersRestService', 'workgroupNodesRestService'];
 
   /**
@@ -20,9 +20,9 @@
    * @memberOf LinShare.sharedSpace
    */
   function WorkgroupNodesController($q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-                                    documentUtilsService, flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode,
-                                    nodesList, tableParamsService, toastService, workgroupRestService,
-                                    workgroupMembersRestService, workgroupNodesRestService) {
+                                    auditDetailsService, documentUtilsService, flowUploadService, itemUtilsService,
+                                    lsAppConfig, lsErrorCode, nodesList, tableParamsService, toastService,
+                                    workgroupRestService, workgroupMembersRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
 
@@ -58,8 +58,8 @@
     workgroupNodesVm.showSelectedNodeDetails = showSelectedNodeDetails;
     workgroupNodesVm.showWorkgroupDetails = showWorkgroupDetails;
     workgroupNodesVm.unavailableMultiDownload = unavailableMultiDownload;
-    workgroupNodesVm.workgroupDetailFile = lsAppConfig.workgroupDetailFile;
     workgroupNodesVm.workgroupPage = lsAppConfig.workgroupPage;
+    workgroupNodesVm.workgroupNode = lsAppConfig.workgroupNode;
 
     activate();
 
@@ -257,7 +257,14 @@
         } else {
           delete nodeDetails.thumbnail;
         }
-        deferred.resolve(nodeDetails);
+
+        workgroupNodesRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid)
+          .then(function(data) {
+            auditDetailsService.generateAllDetails($scope.userLogged.uuid, data.plain()).then(function(auditActions) {
+              nodeDetails.auditActions = auditActions;
+              deferred.resolve(nodeDetails);
+            });
+          });
       }, function(error) {
         deferred.reject(error);
       });
@@ -485,7 +492,8 @@
     function showSelectedNodeDetails(selectedNode) {
       workgroupNodesVm.getNodeDetails(selectedNode).then(function(data) {
         workgroupNodesVm.currentSelectedDocument.current = data;
-        workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupDetailFile);
+        workgroupNodesVm.mdtabsSelection.selectedIndex = 0;
+        workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupNode);
       });
     }
 
@@ -496,10 +504,16 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function showWorkgroupDetails(showMemberTab) {
-      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid).then(function(data) {
-        workgroupNodesVm.currentSelectedDocument.current = data;
-        workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
-        workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
+      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid).then(function(workgroup) {
+        workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid).then(function(auditData) {
+          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain())
+            .then(function(auditActions) {
+              workgroup.auditActions = auditActions;
+              workgroupNodesVm.currentSelectedDocument.current = workgroup;
+              workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
+              workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
+            });
+        });
       });
     }
 

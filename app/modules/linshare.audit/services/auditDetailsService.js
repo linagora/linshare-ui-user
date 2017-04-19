@@ -9,14 +9,14 @@
     .module('linshare.audit')
     .factory('auditDetailsService', auditDetailsService);
 
-  auditDetailsService.$inject = ['$filter', 'lsAppConfig'];
+  auditDetailsService.$inject = ['$filter', '$q', 'lsAppConfig'];
 
   /**
    * @namespace auditDetailsService
    * @desc Service to interact with Audit actions to generate all details
    * @memberOf LinShare.audit
    */
-  function auditDetailsService($filter, lsAppConfig) {
+  function auditDetailsService($filter, $q, lsAppConfig) {
     const
       ACTIONS_KEY = {
         ADDITION: 'ADDITION',
@@ -33,7 +33,7 @@
         UPLOAD: 'UPLOAD',
         VIEWED: 'VIEWED'
       },
-      CONTAINERS_CHILDREN = ['CONTACTS_LISTS_CONTACTS', 'GUEST', 'WORKGROUP_ENTRY', 'WORKGROUP_FOLDER', 'WORKGROUP_MEMBER'],
+      CONTAINERS_CHILDREN = ['CONTACTS_LISTS_CONTACTS', 'GUEST', 'WORKGROUP_DOCUMENT', 'WORKGROUP_FOLDER', 'WORKGROUP_MEMBER'],
       SENTENCES_KEYS_PREFIX = 'DETAILS_POPUP.SENTENCES',
       TYPE_ICONS = {
         'ANONYMOUS_SHARE_ENTRY': 'zmdi zmdi-share',
@@ -44,7 +44,7 @@
         'GUEST': 'zmdi zmdi-account-box',
         'SHARE_ENTRY': 'zmdi zmdi-share',
         'WORKGROUP': 'zmdi zmdi-accounts-alt',
-        'WORKGROUP_ENTRY': 'zmdi zmdi-accounts-alt',
+        'WORKGROUP_DOCUMENT': 'zmdi zmdi-accounts-alt',
         'WORKGROUP_FOLDER': 'zmdi zmdi-accounts-alt',
         'WORKGROUP_MEMBER': 'zmdi zmdi-accounts-alt'
       },
@@ -57,7 +57,7 @@
         GUEST: 'GUEST',
         SHARE_ENTRY: 'SHARE_ENTRY',
         WORKGROUP: 'WORKGROUP',
-        WORKGROUP_ENTRY: 'WORKGROUP_ENTRY',
+        WORKGROUP_DOCUMENT: 'WORKGROUP_DOCUMENT',
         WORKGROUP_FOLDER: 'WORKGROUP_FOLDER',
         WORKGROUP_MEMBER: 'WORKGROUP_MEMBER'
       },
@@ -89,19 +89,22 @@
      * @name generateAllDetails
      * @desc Generate all details of each audit action
      * @param {string} loggedUserUuid - Uuid of logged user
-     * @param {Object} auditActions - All audit actions
+     * @param {Object} auditDetails - All audit actions
      * @memberOf LinShare.audit.auditDetailsService
      */
-    function generateAllDetails(loggedUserUuid, auditActions) {
-      author_me = $filter('translate')('AUTHOR_ME');
-      author_system = $filter('translate')('AUTHOR_SYSTEM');
-      _.forEach(auditActions, function(auditAction) {
-        if (auditAction.resource) {
-          generateDetails(loggedUserUuid, auditAction);
-        } else {
-          auditAction.resource = auditAction.actor;
-          generateDetails(loggedUserUuid, auditAction);
-        }
+    function generateAllDetails(loggedUserUuid, auditDetails) {
+      return $q(function(resolve) {
+        author_me = $filter('translate')('AUTHOR_ME');
+        author_system = $filter('translate')('AUTHOR_SYSTEM');
+        _.forEach(auditDetails, function(auditAction) {
+          if (auditAction.resource) {
+            generateDetails(loggedUserUuid, auditAction);
+          } else {
+            auditAction.resource = auditAction.actor;
+            generateDetails(loggedUserUuid, auditAction);
+          }
+        });
+        resolve(auditDetails);
       });
     }
 
@@ -238,8 +241,8 @@
      */
     function setResourceNameVarious(auditAction) {
       var resourceNameVarious;
-      if (auditAction.resource.workgroup) {
-        resourceNameVarious = auditAction.resource.workgroup.name;
+      if (auditAction.workGroup) {
+        resourceNameVarious = auditAction.workGroup.name;
       } else if (auditAction.list) {
         resourceNameVarious = auditAction.list.name;
       }

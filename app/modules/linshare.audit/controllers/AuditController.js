@@ -67,7 +67,7 @@
       }).then(function(auditActionsList) {
         auditVm.itemsList = auditActionsList.plain();
 
-        auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditVm.itemsList);
+        auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditVm.itemsList.plain());
         generateTableFilterSelect(auditVm.tableFilterType, 'type');
         generateTableFilterSelect(auditVm.tableFilterAction, 'action');
 
@@ -111,6 +111,9 @@
       auditVm.tableParams = tableParamsService.getTableParams();
       auditVm.tableApplyFilter = tableParamsService.tableApplyFilter;
       auditVm.tableSort = tableParamsService.tableSort;
+
+      // TODO : implement sorting in initTableParams (a PR dedicated to this will be better, for doing it properly)
+      auditVm.tableParams.sorting("creationDate");
     }
   }
 })();

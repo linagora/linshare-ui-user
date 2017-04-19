@@ -24,6 +24,7 @@
         create: create,
         download: download,
         get: get,
+        getAudit: getAudit,
         getList: getList,
         remove: remove,
         thumbnail: thumbnail,
@@ -72,6 +73,18 @@
       return handler(Restangular.one(restUrl, uuid).get({
         withShares: true
       }));
+    }
+
+    /**
+     *  @name getAudit
+     *  @desc Get audit of a Document object
+     *  @param {string} documentUuid - The uuid of the Document object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function getAudit(documentUuid) {
+      $log.debug('LinshareDocumentRestService : getAudit', documentUuid);
+      return handler(Restangular.one(restUrl, documentUuid).one('audit').get());
     }
 
     /**

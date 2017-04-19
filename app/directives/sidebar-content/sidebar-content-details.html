@@ -268,19 +268,10 @@
 
           </md-content>
         </md-tab>
-
         <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 no-padding disabled">
           <md-content class="md-padding">
-            <div class="lv-body stop-propagate">
-              <div class="lv-item">
-                <div class="work-in-progress-ctn-elm">
-                  <div class="work-in-progress-content">
-                    <img src="images/wip-banner-small.png">
-                    <p class="ng-binding">EN COURS DE CONSTRUCTION</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div data-ng-repeat="auditAction in mainVm.sidebar.getData().currentSelectedDocument.current.auditActions"
+                 audit-details="{{auditAction}}"></div>
           </md-content>
         </md-tab>
       </md-tabs>

@@ -190,8 +190,18 @@
                   {{auditAction.creationDate | relativeTime}}
                 </span>
               </td>
-              <td data-title="'TABLE_HEADER.DETAIL' | translate" audit-details-popover="{{auditAction}}"
-                  class="center">
+              <td data-title="'TABLE_HEADER.DETAIL' | translate" class="center">
+                <script type="text/ng-template" id="popover-details.html" audit-details="{{auditAction}}"></script>
+                <div class="info-popover actions">
+                  <a href="" uib-popover-template="'popover-details.html'"
+                     popover-placement="bottom"
+                     popover-trigger="focus"
+                     popover-append-to-body="true"
+                     popover-placement="right"
+                     popover-class="popover-info-audit set-popover-right m-r-10">
+                    <i class="zmdi zmdi-info-outline"></i>
+                  </a>
+                </div>
               </td>
             </tr>
           </table>

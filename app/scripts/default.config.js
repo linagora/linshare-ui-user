@@ -67,6 +67,6 @@
       moreOptions: 'more-options',
       share: 'share',
       shareDetails: 'share-details',
-      workgroupDetailFile: 'workgroup-detail-file'
+      workgroupNode: 'workgroup-node'
     });
 })();

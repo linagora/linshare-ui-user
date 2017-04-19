@@ -13,11 +13,11 @@
         "CREATE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           },
           "VIEWER": {
             "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           }
         },
         "DELETE": {
@@ -295,7 +295,7 @@
           }
         }
       },
-      "WORKGROUP_ENTRY": {
+      "WORKGROUP_DOCUMENT": {
         "CREATE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
@@ -443,7 +443,7 @@
       "TBT__GUEST": "",
       "TBT__SHARE_ENTRY": "",
       "TBT__WORKGROUP": "",
-      "TBT__WORKGROUP_ENTRY": "",
+      "TBT__WORKGROUP_DOCUMENT": "",
       "TBT__WORKGROUP_FOLDER": "",
       "TBT__WORKGROUP_MEMBER": ""
     }

@@ -1,0 +1,30 @@
+<div id="member-sidebar">
+  <div class="header-sidebar">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
+       data-ng-click="mainVm.sidebar.hide();">
+    </i>
+    <h2 class="header-more-options set-ellipsis">
+      {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}
+    </h2>
+    <span class="hidden-xs actions" data-ng-click="mainVm.sidebar.hide()">
+      <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+    </span>
+  </div>
+  <div data-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs">
+    <md-content>
+      <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex" md-dynamic-height="" md-border-bottom="">
+        <md-tab id="tab1" label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 noPadding">
+          <md-content>
+            <div data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-node-details.html'"></div>
+          </md-content>
+        </md-tab>
+        <md-tab id="tab2" label="{{'ACTIVITIES' | translate}}" class="col-xs-4 noPadding disabled">
+          <md-content class="md-padding">
+            <div data-ng-repeat="auditAction in mainVm.sidebar.getData().currentSelectedDocument.current.auditActions"
+                 audit-details="{{auditAction}}"></div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
+</div>

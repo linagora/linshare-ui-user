@@ -340,7 +340,7 @@
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
                     uib-dropdown-menu="">
                   <li data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"
-                      data-ng-click="workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupDetailFile)">
+                      data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
                     <a href="">
                       <i class="zmdi zmdi-info-outline "></i>
                       <span translate>ACTION.INFORMATION</span>
@@ -524,7 +524,7 @@
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                         <ul class="actions pull-right double-mobile-actions">
                           <li
-                            data-ng-click="workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupDetailFile)"
+                            data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)"
                             class="set-col-6">
                             <a href=""
                                title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
@@ -554,8 +554,7 @@
                             </a>
                             <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                              dropdown-divided dropdown-submenu" uib-dropdown-menu="">
-                              <li data-ng-click="workgroupNodesVm.loadSidebarContent(
-                              workgroupNodesVm.workgroupDetailFile)">
+                              <li data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
                                 <a href="">
                                   <i class="zmdi zmdi-info-outline "></i>
                                   <span translate>ACTION.INFORMATION</span>
@@ -714,7 +713,7 @@
        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
            uib-dropdown-menu="">
         <li class="hidden-xs" data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"
-            data-ng-click="workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupDetailFile)">
+            data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-info-outline "></i>
           <span translate>ACTION.INFORMATION</span>

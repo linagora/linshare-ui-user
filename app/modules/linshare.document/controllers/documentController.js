@@ -7,7 +7,7 @@
 
   function documentController($scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log, documentsList, $timeout,
                               documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService, $stateParams,
-                              documentSelected, tableParamsService) {
+                              documentSelected, tableParamsService, auditDetailsService) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
     var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;
@@ -375,22 +375,29 @@
      */
     function showCurrentFile(currentFile, event, tabIndex) {
       $scope.currentSelectedDocument.current = currentFile;
-      LinshareDocumentRestService.get(currentFile.uuid).then(function(data) {
-        $scope.currentSelectedDocument.current = data;
+      $q.all([
+        LinshareDocumentRestService.get(currentFile.uuid),
+        LinshareDocumentRestService.getAudit(currentFile.uuid)]).then(function(promises) {
+        $scope.currentSelectedDocument.current = promises[0];
+
+        if (currentFile.hasThumbnail) {
+          LinshareDocumentRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
+            $scope.currentSelectedDocument.current.thumbnail = thumbnail;
+          });
+        }
+
+        auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain()).then(function(auditActions) {
+          $scope.currentSelectedDocument.current.auditActions = auditActions;
+          $scope.data.selectedIndex = tabIndex ? tabIndex : 0;
+          $scope.loadSidebarContent(lsAppConfig.details);
+          if (!_.isUndefined(event)) {
+            var currElm = event.currentTarget;
+            angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
+              angular.element(currElm).addClass('activeActionButton');
+            });
+          }
+        });
       });
-      if (currentFile.hasThumbnail) {
-        LinshareDocumentRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
-          $scope.currentSelectedDocument.current.thumbnail = thumbnail;
-        });
-      }
-      $scope.loadSidebarContent(lsAppConfig.details);
-      $scope.data.selectedIndex = tabIndex ? tabIndex : 0;
-      if (!_.isUndefined(event)) {
-        var currElm = event.currentTarget;
-        angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-          angular.element(currElm).addClass('activeActionButton');
-        });
-      }
     }
 
     function slideTextarea($event) {
