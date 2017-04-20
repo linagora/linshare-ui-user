@@ -9,11 +9,7 @@
         </div>
         <form role="form" class="clearfix fields-add-member no-right-inline-btn">
           <div class="form-group fg-line group-member-field-ctn col-xs-12 no-padding">
-            <div class="col-xs-8 pull-left" ls-autocomplete-user="THREAD_MEMBERS" data-with-email="false"
-                 data-ls-complete-thread-uuid="{{mainVm.sidebar.getData().currentSelectedDocument.current.uuid}}"
-                 data-on-select-function="workgroupMemberVm.addMember"
-                 data-selected-users-list="mainVm.sidebar.getData().currentSelectedDocument.current.members"></div>
-            <div class="select-chosen-wkgps col-xs-3 no-padding pull-right">
+            <div class="select-chosen-wkgps col-xs-3 no-padding pull-left">
               <select name="rights_select" id="rights_select" chosen
                       data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
                       disable-search="true"
@@ -24,6 +20,10 @@
                 </option>
               </select>
             </div>
+            <div class="col-xs-8 pull-right" ls-autocomplete-user="THREAD_MEMBERS" data-with-email="false"
+                 data-ls-complete-thread-uuid="{{mainVm.sidebar.getData().currentSelectedDocument.current.uuid}}"
+                 data-on-select-function="workgroupMemberVm.addMember"
+                 data-selected-users-list="mainVm.sidebar.getData().currentSelectedDocument.current.members"></div>
           </div>
           <button class="btn btn-primary add-btn btn-block" x-ng-if="mainVm.sidebar.getData().isExistingMember === false">
             {{'MEMBER_TAB.ADD' | translate}}

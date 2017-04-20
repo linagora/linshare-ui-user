@@ -105,6 +105,21 @@
     .checkbox-col {
       justify-content: center;
     }
+    .file-name-col {
+      .file-name-disp[contenteditable="false"] {
+        cursor: default;
+      }
+      .file-name-disp[contenteditable="true"] {
+        cursor: text;
+      }
+    }
+    .item-container {
+      .file-name-col {
+        .file-name-disp[contenteditable="false"] {
+          cursor: pointer;
+        }
+      }
+    }
     .row {
       margin: 0;
       padding: 0;

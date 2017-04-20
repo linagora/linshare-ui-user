@@ -101,7 +101,7 @@
                  title="{{'ACTION.GO_TO_TRASH' | translate}}" aria-hidden="false">
                 <i class="fa fa-recycle" aria-hidden="true"></i>
               </a>
-              <div class="col-xs-3 toolbar-mobile-item">
+              <div class="col-xs-3 toolbar-mobile-item sort-dropdown">
                 <div class="dropdown dropdown-standard toolbar-mobile-item" uib-dropdown=""
                      dropdown-append-to-body hover-dropdown-fix>
                   <div class="actions">
@@ -377,18 +377,20 @@
               </span>
           </div>
         </div>
-        <div class="drag-and-drop-ctn collapsible-content reset-content-width hidden-xs drag-n-drop-height"
-             check-table-height>
+        <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
+             check-table-height data-ng-class="{'show-bg-drop' : workgroupNodesVm.nodesList.length === 0}">
           <div class="drag-and-drop-content">
-            <div class="drag-icon-ctn ">
+            <div class="drag-icon-ctn">
               <div class="bordered-circle">&nbsp;</div>
               <span class="grey-clr bg-info-icon">
                 <span class="groups-upload-file"></span>
               </span>
             </div>
             <div class="dnd-txt-content">
-              <h1 translate>DRAG_DROP_BACKGROUND.TITLE</h1>
-              <p translate>DRAG_DROP_BACKGROUND.COMMENT</p>
+              <h1 translate class="hidden-xs">DRAG_DROP_BACKGROUND.TITLE</h1>
+              <p translate class="hidden-xs">DRAG_DROP_BACKGROUND.COMMENT</p>
+              <h1 translate class="visible-xs">WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.TITLE</h1>
+              <p translate class="visible-xs">WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.COMMENT</p>
             </div>
           </div>
         </div>

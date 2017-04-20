@@ -34,6 +34,10 @@
   },
   "BREADCRUMB_TITLE_WORKGROUP": "Workgroups",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Files",
-  "FILE_NAME": "File name"
+  "FILE_NAME": "File name",
+  "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Upload your files",
+    "COMMENT": "Upload and add members, to collaborate with them."
+  }
 }
 

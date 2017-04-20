@@ -34,8 +34,11 @@
   },
   "BREADCRUMB_TITLE_WORKGROUP": "Groupes",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers",
-  "FILE_NAME": "Nom de fichier"
-
+  "FILE_NAME": "Nom de fichier",
+  "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Déposez vos fichiers",
+    "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux."
+  }
 }
 
 
