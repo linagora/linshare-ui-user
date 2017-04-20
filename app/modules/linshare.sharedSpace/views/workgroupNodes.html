@@ -23,11 +23,9 @@
               <p translate>WORKGROUPS_LIST.SHARED_FOLDER</p>
             </a>
             <a class="col-xs-6" data-ng-click="workgroupNodesVm.createFolder()"
-               href="javascript:void(0)" data-ng-if="!linshareModeProduction">
+               href="javascript:void(0)">
               <i>
-                <span class="groups-folder">
-                      <span class="path1"></span><span class="path2"></span>
-                </span>
+                <span class="groups-folder"><span class="path1"></span><span class="path2"></span></span>
               </i>
               <p translate>WORKGROUPS_LIST.FOLDER</p>
             </a>
@@ -46,7 +44,7 @@
             </a>
           </div>
         </script>
-        <div id="breadcrumb-wrap" class="multi-toolbar-options">
+        <div id="breadcrumb-wrap" class="deep-nav multi-toolbar-options">
           <div class="menu-popover-ctn hidden-xs clickable waves-effect">
             <a class="add-menu-group"
                tabindex="0"
@@ -58,21 +56,64 @@
               <i class="zmdi zmdi-plus"></i>
             </a>
           </div>
-          <div class="breadcrumbs-ctn hidden-xs">
-            <a ui-sref="sharedspace.all">
-              <i class="groups-home-workgroup"></i>
-              <span translate>BREADCRUMB_TITLE_WORKGROUP</span>
-            </a>
-            <span data-ng-repeat-start="folder in workgroupNodesVm.breadcrumbFolders" class="sub-category-chevron">
-              <i class="zmdi zmdi-chevron-right"></i>
+          <div class="breadcrumbs-ctn hidden-xs"
+               data-ng-class="{
+                'lv1-break': workgroupNodesVm.breadcrumb.length >= 1,
+                'lv2-break': workgroupNodesVm.breadcrumb.length >= 2,
+                'lv4-break': workgroupNodesVm.breadcrumb.length >= 4}">
+            <div class="left-arrow"
+                 data-ng-click="workgroupNodesVm.goToPreviousFolder((workgroupNodesVm.breadcrumb.length === 0),
+                 workgroupNodesVm.breadcrumb[workgroupNodesVm.breadcrumb.length-2])">
+              <a><i class="zmdi zmdi-caret-left"></i></a>
+            </div>
+            <div id="page-root-link">
+              <a ui-sref="sharedspace.all">
+                <i class="groups-home-workgroup"></i>
+              </a>
+            </div>
+            <div id="root-level">
+              <a class="set-ellipsis"
+                 tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="1200" uib-tooltip="{{workgroupNodesVm.folderDetails.workgroupName}}"
+                 data-ng-click="workgroupNodesVm.goToFolder()">
+                {{workgroupNodesVm.folderDetails.workgroupName}}
+              </a>
+            </div>
+            <span class="explorer-previous-lvl dropdown dropdown-standard pull-left" uib-dropdown=""
+                  dropdown-append-to-body hover-dropdown-fix>
+              <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+
+              <a uib-dropdown-toggle="" class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="700" uib-tooltip="{{BREADCRUMB_UPPER_LEVEL | translate}}">...</a>
+              <div uib-dropdown-menu=""
+                   class="uib-dropdown-menu dropdown-menu dm-icon double-drop dropdown-menu-left
+                   explorer-content-dropdown">
+                <div class="list-menu">
+                  <p translate>BREADCRUMB_UPPER_LEVEL</p>
+                  <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
+                    <li data-ng-repeat="breadcrumbItem in workgroupNodesVm.breadcrumb.slice().reverse()"
+                        data-ng-click="workgroupNodesVm.goToFolder(breadcrumbItem)">
+                      <a class="set-ellipsis" data-ng-class="{'active-level' : $index === 0}">
+                        {{breadcrumbItem.name}}
+                      </a>
+                    </li>
+                    <li>
+                      <a class="set-ellipsis" data-ng-click="workgroupNodesVm.goToFolder()">
+                        {{workgroupNodesVm.folderDetails.workgroupName}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </span>
-            <a data-ng-repeat-end data-ng-click="workgroupNodesVm.goToFolder(folder, true)">
-              {{folder.name}}
-            </a>
-            <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
-            <a>
-              &nbsp;&nbsp;{{workgroupNodesVm.folderName}}
-            </a>
+            <div data-ng-cloak class="folder-level" data-ng-repeat="breadcrumbItem in workgroupNodesVm.breadcrumb"
+                 data-ng-click="workgroupNodesVm.goToFolder(breadcrumbItem)">
+              <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+              <a class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="1000" uib-tooltip="{{breadcrumbItem.name}}">
+                {{breadcrumbItem.name}}
+              </a>
+            </div>
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items wide-action-bar">
@@ -421,7 +462,7 @@
                    show-filter="true"
                    data-ng-class="{'col-4-table' : !linshareModeProduction}">
               <tr data-ng-repeat="nodeItem in $data"
-                  ls-item-selection="{{workgroupNodesVm.isDocument(nodeItem.nodeType) ? 'file' : null}}"
+                  ls-item-selection="{{workgroupNodesVm.isDocument(nodeItem.type) ? 'file' : null}}"
                   role="listitem"
                   data-selected-documents="workgroupNodesVm.selectedDocuments"
                   data-document-file="nodeItem"
@@ -430,10 +471,11 @@
                   x-right-sidebar-open="mainVm.sidebar.isVisible()"
                   data-ng-click="backToSidebarContentDetails()"
                   data-ng-class="{'highlight-list-elem': nodeItem.isSelected ,
-                   'current-vis': workgroupNodesVm.currentSelectedDocument.current.uuid === nodeItem.uuid}"
+                   'current-vis': workgroupNodesVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
+                   'item-container': !workgroupNodesVm.isDocument(nodeItem.type)}"
                   class="p-b-5"
                   context-menu="moreOptionsContexualMenu"
-                  data-ng-dblclick="workgroupNodesVm.goToFolder(nodeItem, false)"
+                  data-ng-dblclick="workgroupNodesVm.goToFolder(nodeItem)"
                   new-upload-anim
                   check-table-height>
                 <td data-header="'favoritsheader.html'"
@@ -449,11 +491,12 @@
                 <td data-header="'checkboxheader.html'"
                     class="center set-content-left thumb-type-item thumb-groups-preview-ls"
                     header-class="'col-2 checkbox-col'">
-                  <a data-ng-click="(showCheckboxes || !isMobile) ? workgroupNodesVm.addSelectedDocument(nodeItem) : null">
+                  <a
+                    data-ng-click="(showCheckboxes || !isMobile) ? workgroupNodesVm.addSelectedDocument(nodeItem) : null">
                     <div data-ng-class="{ 'invisible' : showCheckboxes && isMobile}">
-                      <i data-ng-if="workgroupNodesVm.isDocument(nodeItem.nodeType)" class="fa"
+                      <i data-ng-if="workgroupNodesVm.isDocument(nodeItem.type)" class="fa"
                          data-ng-class="'{{nodeItem.mimeType | mimetypeIcone}}'"></i>
-                      <i data-ng-if="!workgroupNodesVm.isDocument(nodeItem.nodeType)" class="groups-folder">
+                      <i data-ng-if="!workgroupNodesVm.isDocument(nodeItem.type)" class="groups-folder">
                         <span class="path1"></span><span class="path2"></span>
                       </i>
                     </div>
@@ -467,19 +510,19 @@
                     class="row show-li-actions col-3"
                     data-sortable="'name'" uuid={{nodeItem.uuid}} header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
-                      <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                        <span class="file-name-disp single-line" spellcheck="false" contenteditable="false"
-                              data-ng-click="workgroupNodesVm.goToFolder(nodeItem, false)">{{nodeItem.name}}</span>
-                        <span>
-                          <span data-ng-show="nodeItem.shared > 0" class="shared-activated hidden-xs" translate>
-                            BOUTON_LABEL_TITLE.SHARED</span>
-                          <p class="mobile-list-item-info visible-xs">
-                            {{nodeItem.modificationDate | relativeTime}}, {{nodeItem.size | readableSize: false}},
-                            <span data-ng-show="nodeItem.shared > 0" translate>BOUTON_LABEL_TITLE.SHARED</span>
-                          </p>
-                        </span>
+                    <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                      <span class="file-name-disp single-line" spellcheck="false" contenteditable="false"
+                            data-ng-click="workgroupNodesVm.goToFolder(nodeItem)">{{nodeItem.name}}</span>
+                      <span>
+                        <span data-ng-show="nodeItem.shared > 0" class="shared-activated hidden-xs" translate>
+                          BOUTON_LABEL_TITLE.SHARED</span>
+                        <p class="mobile-list-item-info visible-xs">
+                          {{nodeItem.modificationDate | relativeTime}}
+                          {{workgroupNodesVm.isDocument(nodeItem.type) ?
+                          ', '+(nodeItem.size | readableSize: false) : ''}}
+                        </p>
                       </span>
-
+                    </span>
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                         <ul class="actions pull-right double-mobile-actions">
                           <li
@@ -492,7 +535,7 @@
                             </a>
                           </li>
                           <li class="hidden-xs" data-ng-class="{'disabled-work-in-progress':
-                           !workgroupNodesVm.isDocument(nodeItem.nodeType)}">
+                           !workgroupNodesVm.isDocument(nodeItem.type)}">
                             <a data-ng-href=""
                                data-ng-click="workgroupNodesVm.downloadFile(nodeItem)"
                                event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
@@ -534,9 +577,9 @@
                               </li>
                               <li class="divider"></li>
                               <li class="hidden-xs" data-ng-show="!linshareModeProduction &&
-                               workgroupNodesVm.isDocument(nodeItem.nodeType)">
+                               workgroupNodesVm.isDocument(nodeItem.type)">
                                 <a data-ng-href="" data-ng-click="workgroupNodesVm.downloadFile(nodeItem)"
-                                  event-propagation-stop>
+                                   event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
                                   <span translate>ACTION.DOWNLOAD</span>
                                 </a>
@@ -556,7 +599,7 @@
                               <li class="divider"></li>
                               <li>
                                 <a
-                                  data-ng-click="workgroupNodesVm.isDocument(nodeItem.nodeType) ?
+                                  data-ng-click="workgroupNodesVm.isDocument(nodeItem.type) ?
                                    workgroupNodesVm.renameItem(nodeItem) :
                                     workgroupNodesVm.renameFolder(nodeItem, false)">
                                   <i class="zmdi zmdi-border-color"></i>
@@ -620,7 +663,7 @@
                     data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                     data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"
                     header-class="'col-5 hide-if-toggled-sidebar'">
-                  {{workgroupNodesVm.isDocument(nodeItem.nodeType) ? (nodeItem.size | readableSize: false) : ''}}
+                  {{workgroupNodesVm.isDocument(nodeItem.type) ? (nodeItem.size | readableSize: false) : ''}}
                 </td>
               </tr>
             </table>
@@ -635,7 +678,17 @@
        fab-button-toolbar="workgroupNodesVm.fabButton.toolbar">
   </div>
 </div>
-<section class="row multi-select-mobile visible-xs"
+<div class="header-sidebar append-to-body visible-xs">
+  <a class="zmdi zmdi-chevron-left zmdi-hc-2x"
+     data-ng-click="workgroupNodesVm.goToPreviousFolder((workgroupNodesVm.breadcrumb.length === 0),
+                 workgroupNodesVm.breadcrumb[workgroupNodesVm.breadcrumb.length-2])"></a>
+  <h2 class="header-more-options set-ellipsis">
+    {{workgroupNodesVm.isRootFolder() ? workgroupNodesVm.folderDetails.workgroupName :
+    workgroupNodesVm.folderDetails.folderName}}
+  </h2>
+  <a class="pull-right groups-home-workgroup" ui-sref="sharedspace.all"></a>
+</div>
+<section class="row multi-select-mobile visible-xs append-to-body"
          data-ng-class="{'showMobileMultiMenu': workgroupNodesVm.selectedDocuments.length > 0}">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">{{workgroupNodesVm.selectedDocuments.length}}</span>
@@ -654,8 +707,8 @@
     </div>
 
     <i class="zmdi zmdi-download col-xs-2"
-    data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
-    data-ng-class="{'disabled-work-in-progress': workgroupNodesVm.selectedDocuments.length != 1}"></i>
+       data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
+       data-ng-class="{'disabled-work-in-progress': workgroupNodesVm.selectedDocuments.length != 1}"></i>
     <i class="zmdi zmdi-delete col-xs-2"
        data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)"></i>
     <i class="zmdi zmdi-arrows col-xs-2 disabled-work-in-progress"

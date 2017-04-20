@@ -1,5 +1,5 @@
 {
-  "TBT__MEMBER_TAB" : {
+  "TBT__MEMBER_TAB": {
     "TBT__ADD_MEMBER": "A",
     "TBT__NUM_MEMBER": "",
     "TBT__TITLE": "",
@@ -21,7 +21,7 @@
     "TBT__USER_RIGHTS": "",
     "SORT_BY": "",
     "FILTER_BY": "",
-    "SORT_MEMBER" : {
+    "SORT_MEMBER": {
       "TBT__FIRSTNAME": "",
       "TBT__LASTNAME": "",
       "TBT__RIGHT": ""
@@ -34,6 +34,7 @@
   },
   "TBT__BREADCRUMB_TITLE_WORKGROUP": "",
   "TBT__BREADCRUMB_TITLE_WORKGROUP_FILES": "",
+  "TBT__BREADCRUMB_UPPER_LEVEL": "",
   "TBT__FILE_NAME": "",
   "TBT__WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TBT__TITLE": "",

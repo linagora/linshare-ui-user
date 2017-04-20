@@ -35,7 +35,7 @@
         "3002": "Ce type de fichier est interdit",
         "3003": "Le fichier n'a pu être déposé car un virus a été détecté",
         "3007": "Le fichier n'a pu être scanné",
-        "26007": "Impossible d'ajouter le fichier car le répertoire distant n'existe pas",
+        "26007": "Impossible d'ajouter le fichier car le dossier distant n'existe pas",
         "39001": "Les dépôts sont temporairement désactivés car le mode maintenance est activé",
         "40403": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
         "40404": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
@@ -52,8 +52,8 @@
         "46403": "Erreur de configuration serveur, dépôt impossible"
       },
       "WORKGROUP_NODES_ERROR": {
-        "26007": "Le répertoire distant est introuvable",
-        "28006": "Les répertoires ne peuvent être copiés"
+        "26007": "Le dossier distant est introuvable",
+        "28006": "Les dossiers ne peuvent être copiés"
       }
     }
   }

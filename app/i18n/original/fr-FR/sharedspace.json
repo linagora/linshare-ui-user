@@ -1,5 +1,5 @@
 {
-  "MEMBER_TAB" : {
+  "MEMBER_TAB": {
     "ADD_MEMBER": "Ajouter des membres",
     "NUM_MEMBER": "Membres existants",
     "TITLE": "Membres",
@@ -21,7 +21,7 @@
     "USER_RIGHTS": "Droit affecté",
     "SORT_BY": "Trier par",
     "FILTER_BY": "Filtrer par",
-    "SORT_MEMBER" : {
+    "SORT_MEMBER": {
       "FIRSTNAME": "Prénom",
       "LASTNAME": "Nom",
       "RIGHT": "Rôle"
@@ -32,15 +32,12 @@
     "FULL_SIZE": "Taille totale ",
     "TRASH_FULL_SIZE": "Taille corbeille "
   },
-  "BREADCRUMB_TITLE_WORKGROUP": "Groupes",
+  "BREADCRUMB_TITLE_WORKGROUP": "Espace commun",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers",
+  "BREADCRUMB_UPPER_LEVEL": "Dossiers parent",
   "FILE_NAME": "Nom de fichier",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Déposez vos fichiers",
     "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux."
   }
 }
-
-
-
-

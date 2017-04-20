@@ -87,12 +87,13 @@
      *  @desc Get a Workgroup Node object
      *  @param {string} workgroupUuid - The uuid of the Workgroup object
      *  @param {string} nodeUuid - The uuid of the Workgroup Node object
+     *  @param {boolean} needTree - If true, add the ancestors of the related folder
      *  @returns {Promise} server response
      *  @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
-    function get(workgroupUuid, nodeUuid) {
+    function get(workgroupUuid, nodeUuid, needTree) {
       $log.debug('workgroupNodesRestService : get', workgroupUuid, nodeUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).get());
+      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).get({tree: needTree}));
     }
 
     /**

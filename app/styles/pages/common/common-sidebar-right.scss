@@ -726,18 +726,26 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
   ***********************/
 
 @media (max-width: 768px) {
-  .setSidebarRightMobileState .header-sidebar {
+  .header-sidebar {
     background-color: $primaryClr;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     border-bottom: 0;
     width: 100%;
     position: fixed;
     top: 0;
-    z-index: 12;
+    z-index: 11;
+    display: flex;
     h2.header-more-options {
       color: #fff;
     }
     .zmdi-chevron-left {
+      color: #fff;
+    }
+    .groups-home-workgroup {
+      position: absolute;
+      right: 16px;
+      font-size: 1.45em;
+      margin-top: -4px;
       color: #fff;
     }
   }

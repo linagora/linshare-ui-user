@@ -340,31 +340,31 @@
       "WORKGROUP_FOLDER": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez créé un nouveau répertoire : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez créé un nouveau dossier : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a créé un nouveau répertoire : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a créé un nouveau dossier : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez supprimé le répertoire : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez supprimé le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a supprimé le répertoire : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a supprimé le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez modifié le répertoire : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez modifié le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a modifié le répertoire : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a modifié le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }

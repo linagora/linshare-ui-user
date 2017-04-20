@@ -23,7 +23,6 @@
               <p>{{"WORKGROUPS_LIST.SHARED_FOLDER" | translate}}</p>
             </a>
             <a class="col-xs-6" x-ng-click="sharedSpaceListVm.createFolder();"
-               data-ng-class="{'disabled' : !sharedSpaceListVm.canCreate}"
                href="javascript:void(0)" x-ng-if="!linshareModeProduction">
               <i>
                 <span class="groups-folder">
@@ -47,7 +46,7 @@
             </a>
           </div>
         </script>
-        <div id="breadcrumb-wrap" class="multi-toolbar-options">
+        <div id="breadcrumb-wrap" class="deep-nav multi-toolbar-options">
           <div class="menu-popover-ctn hidden-xs clickable waves-effect">
             <a class="add-menu-group"
                tabindex="0"
@@ -59,22 +58,112 @@
               <i class="zmdi zmdi-plus"></i>
             </a>
           </div>
-          <div class="breadcrumbs-ctn hidden-xs">
-            <a href="" ui-sref="sharedspace.all">
-              <i class="groups-home-workgroup"></i>
-              {{"BREADCRUMB_TITLE_WORKGROUP" | translate}}
-            </a>
-            <span x-ng-repeat-start="folder in sharedSpaceListVm.breadcrumbFolders" class="sub-category-chevron">
-              <i class="zmdi zmdi-chevron-right"></i>
+          <!--<div class="breadcrumbs-ctn hidden-xs">-->
+            <!--<a href="" ui-sref="sharedspace.all">-->
+              <!--<i class="groups-home-workgroup"></i>-->
+              <!--{{"BREADCRUMB_TITLE_WORKGROUP" | translate}}-->
+            <!--</a>-->
+            <!--<span x-ng-repeat-start="folder in sharedSpaceListVm.breadcrumbFolders" class="sub-category-chevron">-->
+              <!--<i class="zmdi zmdi-chevron-right"></i>-->
+            <!--</span>-->
+            <!--<a x-ng-repeat-end-->
+               <!--x-ng-click="sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, folder.parent, folder.uuid, folder.name, true)">-->
+              <!--{{folder.name}}-->
+            <!--</a>-->
+            <!--<span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>-->
+            <!--<a>-->
+              <!--&nbsp;&nbsp;{{sharedSpaceListVm.folderName}}-->
+            <!--</a>-->
+          <!--</div>-->
+
+
+          <!-- TODO IAB:  you'll need to add the class "lv1-break" if the user is within the first depth level of
+               the current workgroup. Also you'll need to add the class "lv2-break" if the user is within
+               the second depth level the current workgroup. And Lastly add the class "lv4-break"  if the user is within
+               the fourth depth level.
+           -->
+          <div class="breadcrumbs-ctn hidden-xs lv1-break lv2-break">
+            <div class="left-arrow">
+              <a><i class="zmdi zmdi-caret-left"></i></a>
+            </div>
+            <div id="page-root-link">
+              <a>
+                <i class="groups-home-workgroup"></i>
+                <span translate>BREADCRUMB_TITLE_WORKGROUP</span>
+              </a>
+            </div>
+            <div id="root-level">
+              <span class="sub-category-chevron pipe-separator">| </span>
+              <a class="set-ellipsis"
+                 tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="1200" uib-tooltip="Projet RATP">
+                <!-- TODO: replace by the current workgroup name -->
+                Projet RATP
+              </a>
+            </div>
+            <span class="explorer-previous-lvl dropdown dropdown-standard pull-left" uib-dropdown=""
+                  style="position: relative"
+                  dropdown-append-to-body hover-dropdown-fix>
+              <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+
+              <a uib-dropdown-toggle="" class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="700" uib-tooltip="Allez vers un repertoire parent">
+                ...
+              </a>
+              <div uib-dropdown-menu=""
+                   class="uib-dropdown-menu dropdown-menu dm-icon double-drop dropdown-menu-left
+                   explorer-content-dropdown">
+                    <div class="list-menu">
+                      <p translate>UPPER_LEVEL</p>
+                      <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
+                        <!--TODO IAB: you'll need to loop over each previous level up to the sharedspace -->
+                        <li>
+                          <!--TODO IAB: add a  active-level  class for the first element -->
+                          <a class="active-level set-ellipsis">
+                            Nouveau groupe de travail 3 de ta mere et ses enfants
+                          </a>
+                        </li>
+                        <li>
+                          <a class="set-ellipsis">
+                           Nouveau groupe de travail 2
+                          </a>
+                        </li>
+                        <li>
+                          <a class="set-ellipsis">
+                           Projet ratp
+                          </a>
+                        </li>
+                        <li>
+                          <a class="set-ellipsis">
+                           Espace commun
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+              </div>
             </span>
-            <a x-ng-repeat-end
-               x-ng-click="sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, folder.parent, folder.uuid, folder.name, true)">
-              {{folder.name}}
-            </a>
-            <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
-            <a>
-              &nbsp;&nbsp;{{sharedSpaceListVm.folderName}}
-            </a>
+            <!--TODO IAB: you'll need to loop over each level of folders-->
+            <div class="folder-level">
+              <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+              <a class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="1000" uib-tooltip="Nouveau groupe de travail 1">
+                Nouveau groupe de travail 1
+              </a>
+            </div>
+            <div class="folder-level">
+              <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+              <a class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="1000" uib-tooltip="Nouveau groupe de travail 2">
+                Nouveau groupe de travail 2
+              </a>
+            </div>
+            <div class="folder-level">
+              <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+              <a class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
+                 tooltip-popup-delay="1000" uib-tooltip="Nouveau groupe de travail 3">
+                Nouveau groupe de travail 3
+              </a>
+            </div>
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items wide-action-bar">
@@ -320,7 +409,7 @@
                   <li class="divider" x-ng-if="linshareModeProduction == false"
                       x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
                   <li x-ng-if="linshareModeProduction == false" x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
-                    <a x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0])">
+                    <a x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0], false)">
                        <i class="zmdi zmdi-border-color"></i>
                        {{'ACTION.RENAME' | translate}}
                     </a>
@@ -391,6 +480,7 @@
                   x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
                    'current-vis': sharedSpaceListVm.currentSelectedDocument.current.uuid === documentFile.uuid}"
                   class="p-b-5"
+                  context-menu="moreOptionsContexualMenu"
                   x-ng-dblclick="!documentFile.type ? sharedSpaceListVm.goToSharedSpaceFolderTarget(sharedSpaceListVm.uuid, sharedSpaceListVm.name, documentFile.parent, documentFile.uuid, documentFile.name, false) : null"
                   new-upload-anim
                   check-table-height>
@@ -534,7 +624,7 @@
                               <li class="divider"></li>
                               <li>
                                 <a
-                                  x-ng-click="documentFile.type ? sharedSpaceListVm.renameItem(documentFile) : sharedSpaceListVm.renameFolder(documentFile)">
+                                  x-ng-click="documentFile.type ? sharedSpaceListVm.renameItem(documentFile) : sharedSpaceListVm.renameFolder(documentFile, false)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
                                 </a>
@@ -666,7 +756,7 @@
         <li class="divider" x-ng-if="linshareModeProduction == false" x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1"></li>
         <li x-ng-if="linshareModeProduction == false" x-ng-show="sharedSpaceListVm.selectedDocuments.length == 1">
           <a
-            x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0])">
+            x-ng-click="sharedSpaceListVm.selectedDocuments[0].type ? sharedSpaceListVm.renameItem(sharedSpaceListVm.selectedDocuments[0]) : sharedSpaceListVm.renameFolder(sharedSpaceListVm.selectedDocuments[0], false)">
           <i class="zmdi zmdi-border-color"></i>
           {{'ACTION.RENAME' | translate}}
           </a>

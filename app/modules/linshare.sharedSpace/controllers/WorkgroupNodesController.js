@@ -37,6 +37,9 @@
       swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
+    workgroupNodesVm.breadcrumb = [];
+    workgroupNodesVm.goToFolder = goToFolder;
+    workgroupNodesVm.goToPreviousFolder = goToPreviousFolder;
     workgroupNodesVm.copyNode = copyNode;
     workgroupNodesVm.createFolder = createFolder;
     workgroupNodesVm.currentPage = 'workgroup_nodes';
@@ -46,8 +49,8 @@
     workgroupNodesVm.flowUploadService = flowUploadService;
     workgroupNodesVm.folderDetails = $stateParams;
     workgroupNodesVm.getNodeDetails = getNodeDetails;
-    workgroupNodesVm.goToFolder = goToFolder;
     workgroupNodesVm.isDocument = isDocument;
+    workgroupNodesVm.isRootFolder = isRootFolder;
     workgroupNodesVm.loadSidebarContent = loadSidebarContent;
     workgroupNodesVm.mdtabsSelection = {selectedIndex: 0};
     workgroupNodesVm.nodesList = nodesList;
@@ -55,8 +58,8 @@
     workgroupNodesVm.showSelectedNodeDetails = showSelectedNodeDetails;
     workgroupNodesVm.showWorkgroupDetails = showWorkgroupDetails;
     workgroupNodesVm.unavailableMultiDownload = unavailableMultiDownload;
-    workgroupNodesVm.workgroupPage = lsAppConfig.workgroupPage;
     workgroupNodesVm.workgroupDetailFile = lsAppConfig.workgroupDetailFile;
+    workgroupNodesVm.workgroupPage = lsAppConfig.workgroupPage;
 
     activate();
 
@@ -90,6 +93,7 @@
             .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
         });
 
+      getBreadcrumb();
       setFabConfig();
       getWorkgroupMemberDetails();
       launchTableParamsInitiation();
@@ -201,9 +205,29 @@
     }
 
     /**
+     * @name getBreadcrumb
+     * @desc Generate breadcrumb object for view
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function getBreadcrumb() {
+      workgroupNodesRestService.get(workgroupNodesVm.folderDetails.workgroupUuid,
+        workgroupNodesVm.folderDetails.folderUuid, true).then(function(folder) {
+        workgroupNodesVm.breadcrumb = folder.treePath || [];
+        workgroupNodesVm.breadcrumb.shift();
+        if(!isRootFolder()) {
+          workgroupNodesVm.breadcrumb.push({
+            name: workgroupNodesVm.folderDetails.folderName,
+            uuid: workgroupNodesVm.folderDetails.folderUuid
+          });
+        }
+      });
+    }
+
+    /**
      * @name getNodeDetails
      * @desc Get node details and thumbnail if exists
      * @param {Object} nodeItem - A node object
+     * @returns {Promise} Node object with details
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function getNodeDetails(nodeItem) {
@@ -249,34 +273,58 @@
      * @name goToFolder
      * @desc Enter inside a folder
      * @param {object} folder - Folder where to enter
-     * @param {boolean} fromBreadcrumb - If user entering in this folder from breadcrumb or not
-     * @param {boolean} needReplace - If keeping history is required or not
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function goToFolder(folder, fromBreadcrumb, needReplace) {
-      if (!workgroupNodesVm.isDocument(folder.nodeType)) {
-        var folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
-        var options = needReplace ? {location: 'replace'} : {};
-        if (angular.element(folderNameElem).attr('contenteditable') === 'false' || fromBreadcrumb) {
-          $state.go('sharedspace.workgroups.nodes', {
-            workgroupUuid: folder.workGroup,
-            workgroupName: workgroupNodesVm.folderDetails.workgroupName.trim(),
-            parentUuid: folder.parent,
-            folderUuid: folder.uuid,
-            folderName: folder.name.trim()
-          }, options);
-        }
+    function goToFolder(folder) {
+      var canEnter = _.isNil(folder) ? true : !workgroupNodesVm.isDocument(folder.type);
+      var folderDetails = {
+        workgroupUuid: workgroupNodesVm.folderDetails.workgroupUuid,
+        workgroupName: workgroupNodesVm.folderDetails.workgroupName.trim(),
+        parentUuid: folder ? folder.parent : null,
+        folderUuid: folder ? folder.uuid : null,
+        folderName: folder ? folder.name.trim() : null
+      };
+
+      if (canEnter) {
+        $state.go('sharedspace.workgroups.nodes', folderDetails);
+      }
+    }
+
+    /**
+     * @name goToPreviousFolder
+     * @desc Enter inside the parent folder or Workgroups page if current folder is root
+     * @param {boolean} goToWorkgroupPage - Go to Workgroups page
+     * @param {object} folder - Folder where to enter
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function goToPreviousFolder(goToWorkgroupPage, folder) {
+      if (goToWorkgroupPage) {
+        $state.go('sharedspace.all');
+      } else {
+        workgroupNodesVm.goToFolder(folder);
       }
     }
 
     /**
      * @name isDocument
-     * @desc Determine if the nodeType is a document
+     * @desc Determine if the node type is a document
      * @param {string} nodeType - The type of the node
+     * @returns {boolean} Is node a document or not
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function isDocument(nodeType) {
       return (nodeType === TYPE_DOCUMENT);
+    }
+
+    /**
+     * @name isRootFolder
+     * @desc Determine if the current folder is root
+     * @returns {boolean} Is current folder the root folder or not
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function isRootFolder() {
+      var folderUuid = workgroupNodesVm.folderDetails.folderUuid;
+      return (_.isNil(folderUuid) || folderUuid === '');
     }
 
     /**
@@ -408,10 +456,6 @@
 
     // TODO : directive for all functions below (check sidebar-content-details.html for input and textarea)
     workgroupNodesVm.toggleSearchState = toggleSearchState;
-
-    $scope.$on('$stateChangeSuccess', function() {
-      angular.element('.multi-select-mobile').appendTo('body');
-    });
 
     function toggleSearchState() {
       if (!workgroupNodesVm.searchMobileDropdown) {
