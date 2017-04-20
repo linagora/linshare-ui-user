@@ -113,10 +113,6 @@
     "TITLE": "Drop your files here",
     "COMMENT": "Drag and drop your files here to upload them"
   },
-  "DRAG_DROP_BACKGROUND_MOBILE": {
-    "TITLE": "Asynchronous share",
-    "COMMENT": "Upload and share your files without delay."
-  },
   "DRAG_DROP_BACKGROUND_MOBILE_MY_FILES": {
     "TITLE": "Upload and share",
     "COMMENT": "Upload and share your files."

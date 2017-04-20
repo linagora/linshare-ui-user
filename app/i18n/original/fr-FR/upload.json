@@ -14,5 +14,13 @@
   "UPLOADED_FILES": {
     "BREADCRUMB_TITLE": "Mes dépôts",
     "SELECT_INFO": "Déposez et sélectionnez des fichiers pour les partager en asynchrone"
+  },
+  "DRAG_DROP_BACKGROUND": {
+  "TITLE": "Déposez vos fichiers ici",
+  "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer"
+  },
+  "DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Partage asynchrone",
+    "COMMENT": "Ajoutez vos fichiers et partagez-les sans delai."
   }
 }

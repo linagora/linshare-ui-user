@@ -113,10 +113,6 @@
     "TITLE": "Déposez vos fichiers ici",
     "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer"
   },
-  "DRAG_DROP_BACKGROUND_MOBILE": {
-    "TITLE": "Partage asynchrone",
-    "COMMENT": "Ajoutez vos fichiers et partagez-les sans delai."
-  },
   "DRAG_DROP_BACKGROUND_MOBILE_MY_FILES": {
     "TITLE": "Ajoutez et partagez",
     "COMMENT": "Ajoutez vos fichiers et partagez-les."

@@ -14,5 +14,13 @@
   "UPLOADED_FILES": {
     "BREADCRUMB_TITLE": "Uploads",
     "SELECT_INFO": "Upload and select files in order to share them asynchronously"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Drop your files here",
+    "COMMENT": "Drag and drop your files here to upload them"
+  },
+  "DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Asynchronous share",
+    "COMMENT": "Upload and share your files without delay."
   }
 }
