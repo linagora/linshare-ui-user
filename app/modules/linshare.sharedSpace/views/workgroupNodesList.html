@@ -23,6 +23,7 @@
               <p translate>WORKGROUPS_LIST.SHARED_FOLDER</p>
             </a>
             <a class="col-xs-6" data-ng-click="workgroupNodesVm.createFolder()"
+               data-ng-class="{'disabled' : !workgroupNodesVm.canCreateFolder}"
                href="javascript:void(0)">
               <i>
                 <span class="groups-folder"><span class="path1"></span><span class="path2"></span></span>
@@ -379,9 +380,7 @@
                   <li data-ng-if="!linshareModeProduction"
                       data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
                     <a
-                      data-ng-click="workgroupNodesVm.selectedDocuments[0].type ?
-                       workgroupNodesVm.renameItem(workgroupNodesVm.selectedDocuments[0]) :
-                        workgroupNodesVm.renameFolder(workgroupNodesVm.selectedDocuments[0], false)">
+                      data-ng-click="workgroupNodesVm.renameNode(workgroupNodesVm.selectedDocuments[0])">
                        <i class="zmdi zmdi-border-color"></i>
                        <span translate>ACTION.RENAME</span>
                     </a>
@@ -474,7 +473,6 @@
                    'current-vis': workgroupNodesVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
                    'item-container': !workgroupNodesVm.isDocument(nodeItem.type)}"
                   class="p-b-5"
-                  context-menu="moreOptionsContexualMenu"
                   data-ng-dblclick="workgroupNodesVm.goToFolder(nodeItem)"
                   new-upload-anim
                   check-table-height>
@@ -598,10 +596,7 @@
                               </li>
                               <li class="divider"></li>
                               <li>
-                                <a
-                                  data-ng-click="workgroupNodesVm.isDocument(nodeItem.type) ?
-                                   workgroupNodesVm.renameItem(nodeItem) :
-                                    workgroupNodesVm.renameFolder(nodeItem, false)">
+                                <a data-ng-click="workgroupNodesVm.renameNode(nodeItem)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   <span translate>ACTION.RENAME</span>
                                 </a>
@@ -758,9 +753,7 @@
         <li data-ng-if="!linshareModeProduction"
             data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
           <a
-            data-ng-click="workgroupNodesVm.selectedDocuments[0].type ?
-             workgroupNodesVm.renameItem(workgroupNodesVm.selectedDocuments[0]) :
-              workgroupNodesVm.renameFolder(workgroupNodesVm.selectedDocuments[0], false)">
+            data-ng-click="workgroupNodesVm.renameNode(workgroupNodesVm.selectedDocuments[0])">
           <i class="zmdi zmdi-border-color"></i>
           <span translate>ACTION.RENAME</span>
           </a>

@@ -158,7 +158,7 @@
       })
       .state('sharedspace.workgroups.nodes', {
         url: '/:workgroupUuid/:workgroupName/:folderUuid/:folderName',
-        templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodes.html',
+        templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodesList.html',
         controller: 'WorkgroupNodesController as workgroupNodesVm',
         params: {
           uploadedFileUuid: null,

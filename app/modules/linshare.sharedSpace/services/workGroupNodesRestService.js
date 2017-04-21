@@ -29,6 +29,7 @@
         get: get,
         getList: getList,
         remove: remove,
+        restangularize: restangularize,
         thumbnail: thumbnail,
         update: update
       };
@@ -57,13 +58,14 @@
      *  @name create
      *  @desc Create a Workgroup Node object
      *  @param {string} workgroupUuid - The id of a Workgroup object
-     *  @param {Object} workgroupFolderDto - The Workgroup Folder object
+     *  @param {object} workgroupFolderDto - The Workgroup Folder object
+     *  @param {boolean} dryRun - If true, the server returns a fake Node object with unique name
      *  @returns {Promise} server response
      *  @memberOf LinShare.sharedSpace.workgroupFoldersRestService
      */
-    function create(workgroupUuid, workgroupFolderDto) {
-      $log.debug('workgroupNodesRestService : create', workgroupUuid, workgroupFolderDto);
-      return handler(Restangular.one(restUrl, workgroupUuid).all(restParam).post(workgroupFolderDto));
+    function create(workgroupUuid, workgroupFolderDto, dryRun) {
+      $log.debug('workgroupNodesRestService : create', workgroupUuid, workgroupFolderDto, dryRun);
+      return handler(Restangular.one(restUrl, workgroupUuid).all(restParam).post(workgroupFolderDto, {dryRun: dryRun}));
     }
 
     /**
@@ -122,6 +124,19 @@
     function remove(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : remove', workgroupUuid, nodeUuid);
       return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).remove());
+    }
+
+    /**
+     * @name restangularize
+     * @desc Restangularize an item
+     * @param {Object} item - Item to be restangularized
+     * @param {String} workgroupUuid - The uuid of a Workgroup object
+     * @returns {Object} Restangular object
+     * @memberOf LinShare.sharedSpace.workgroupNodesRestService
+     */
+    function restangularize(item, workgroupUuid) {
+      $log.debug('workgroupNodesRestService : restangularize', item, workgroupUuid);
+      return Restangular.restangularizeElement(null, item, restUrl + '/' + workgroupUuid + '/' + restParam);
     }
 
     /**

@@ -127,12 +127,7 @@
         })
         .on('focusout', function(e) {
           if (!done) {
-            var newName = angular.element(e.target).text();
-            if (newName !== initialName || !item.uuid) {
-              save(newName, item);
-            } else {
-              reset(item);
-            }
+            check(initialName, e);
           }
         })
         .on('keydown', function(e) {
@@ -142,11 +137,27 @@
           }
           //enter
           if (e.which === 13) {
-            save(angular.element(e.target).text(), item);
+            check(initialName, e);
           }
         });
       itemElement.focus();
       return deferred.promise;
+
+      /**
+       * @name check
+       * @desc Check edited name
+       * @param {string} initialName - Initial name
+       * @param {event} e - The origin keypress and focusout event
+       * @memberOf itemUtilsService.rename
+       */
+      function check(initialName, e) {
+        var newName = angular.element(e.target).text();
+        if (newName !== initialName || !item.uuid) {
+          save(newName, item);
+        } else {
+          reset(item);
+        }
+      }
 
       /**
        * @name clean
@@ -168,7 +179,9 @@
        */
       function reset(item) {
         done = true;
-        clean();
+        $timeout(function() {
+          clean();
+        }, 0);
         itemElement.text(initialName);
         deferred.reject({
           config: item,
@@ -190,7 +203,6 @@
         name = name.trim();
         if (isNameValid(name)) {
           done = true;
-          clean();
           item.name = name;
           item.save().then(function(data) {
             deferred.resolve(data);
@@ -199,6 +211,8 @@
             itemElement.text(initialName);
             item.name = initialName;
             itemElement.focus();
+          }).finally(function() {
+            clean();
           });
         } else {
           itemElement.focus();
