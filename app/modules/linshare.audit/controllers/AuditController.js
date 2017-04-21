@@ -113,7 +113,7 @@
       auditVm.tableSort = tableParamsService.tableSort;
 
       // TODO : implement sorting in initTableParams (a PR dedicated to this will be better, for doing it properly)
-      auditVm.tableParams.sorting("creationDate");
+      auditVm.tableParams.sorting('creationDate');
     }
   }
 })();

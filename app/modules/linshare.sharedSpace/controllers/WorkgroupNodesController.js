@@ -316,7 +316,11 @@
       };
 
       if (canEnter && isNotInEditMode) {
-        $state.go('sharedspace.workgroups.nodes', folderDetails);
+        if(_.isNil(folderDetails.folderUuid)) {
+          $state.go('sharedspace.workgroups.root', folderDetails);
+        } else {
+          $state.go('sharedspace.workgroups.folder', folderDetails);
+        }
       }
     }
 

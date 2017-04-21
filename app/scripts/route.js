@@ -153,10 +153,25 @@
         }
       })
       .state('sharedspace.workgroups', {
+        abstract: true,
         url: '/workgroups',
         template: '<div ui-view></div>'
       })
-      .state('sharedspace.workgroups.nodes', {
+      .state('sharedspace.workgroups.root', {
+        url: '/:workgroupUuid/:workgroupName',
+        templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodesList.html',
+        controller: 'WorkgroupNodesController as workgroupNodesVm',
+        params: {
+          uploadedFileUuid: null,
+          parentUuid: null
+        },
+        resolve: {
+          nodesList: function(workgroupNodesRestService, $stateParams) {
+            return workgroupNodesRestService.getList($stateParams.workgroupUuid);
+          }
+        }
+      })
+      .state('sharedspace.workgroups.folder', {
         url: '/:workgroupUuid/:workgroupName/:folderUuid/:folderName',
         templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodesList.html',
         controller: 'WorkgroupNodesController as workgroupNodesVm',

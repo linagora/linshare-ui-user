@@ -175,7 +175,7 @@ angular.module('linshare.sharedSpace')
     };
 
     thisctrl.goToSharedSpaceTarget = function(workgroupUuid, name) {
-      $state.go('sharedspace.workgroups.nodes', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
+      $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
     };
 
     thisctrl.flagsOnSelectedPages = {};

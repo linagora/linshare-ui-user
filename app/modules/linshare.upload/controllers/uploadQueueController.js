@@ -521,7 +521,11 @@
     function showFileInSource(file) {
       if (!_.isUndefined(file.folderDetails)) {
         file.folderDetails.uploadedFileUuid = file.linshareDocument.uuid;
-        $state.go('sharedspace.workgroups.nodes', file.folderDetails);
+        if(_.isNil(file.folderDetails.folderUuid)) {
+          $state.go('sharedspace.workgroups.root', file.folderDetails);
+        } else {
+          $state.go('sharedspace.workgroups.folder', file.folderDetails);
+        }
       } else {
         $state.go('documents.files', {
           uploadedFileUuid: file.linshareDocument.uuid
