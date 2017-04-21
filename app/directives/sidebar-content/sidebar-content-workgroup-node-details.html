@@ -44,14 +44,18 @@
     <ul class="actions col-xs-12">
       <li x-ng-click="mainVm.sidebar.getData().showCurrentFile(mainVm.sidebar.getData().documentFile,$event)"
           event-propagation-stop class="col-xs-3">
-        <a href=""  x-ng-click="deleteDocuments(documentFile)"
-           title="{{'ACTION.DELETE' | translate}}">
+        <a href="" title="{{'ACTION.DOWNLOAD' | translate}}"
+           data-ng-click="
+           mainVm.sidebar.getData().downloadFile(mainVm.sidebar.getData().currentSelectedDocument.current)"
+        data-ng-class="{'disabled-work-in-progress':
+         !mainVm.sidebar.getData().isDocument(mainVm.sidebar.getData().currentSelectedDocument.current.type)}">
           <i class="zmdi zmdi-download col-xs-2"></i>
         </a>
       </li>
       <li class="col-xs-3">
-        <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
-           x-ng-click="mainVm.sidebar.getData().onShare()">
+        <a href="" title="{{'ACTION.DELETE' | translate}}" event-propagation-stop="true"
+           data-ng-click="
+           mainVm.sidebar.getData().deleteNodes(mainVm.sidebar.getData().currentSelectedDocument.current)">
           <i class="zmdi zmdi-delete col-xs-2"></i>
         </a>
       </li>
