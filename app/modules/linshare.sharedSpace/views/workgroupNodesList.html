@@ -93,7 +93,7 @@
                   <p translate>BREADCRUMB_UPPER_LEVEL</p>
                   <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
                     <li data-ng-repeat="breadcrumbItem in workgroupNodesVm.breadcrumb.slice().reverse()"
-                        data-ng-click="workgroupNodesVm.goToFolder(breadcrumbItem)">
+                        data-ng-click="workgroupNodesVm.goToFolder(breadcrumbItem, true)">
                       <a class="set-ellipsis" data-ng-class="{'active-level' : $index === 0}">
                         {{breadcrumbItem.name}}
                       </a>
@@ -108,7 +108,7 @@
               </div>
             </span>
             <div data-ng-cloak class="folder-level" data-ng-repeat="breadcrumbItem in workgroupNodesVm.breadcrumb"
-                 data-ng-click="workgroupNodesVm.goToFolder(breadcrumbItem)">
+                 data-ng-click="workgroupNodesVm.goToFolder(breadcrumbItem, true)">
               <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
               <a class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
                  tooltip-popup-delay="1000" uib-tooltip="{{breadcrumbItem.name}}">

@@ -294,14 +294,15 @@
      * @name goToFolder
      * @desc Enter inside a folder
      * @param {object} folder - Folder where to enter
+     * @param {boolean} [fromBreadcrumb] - Entering from breadcrumb
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function goToFolder(folder) {
+    function goToFolder(folder, fromBreadcrumb) {
       var folderNameElem;
       var isNotInEditMode = true;
       var canEnter = _.isNil(folder) ? true : !workgroupNodesVm.isDocument(folder.type);
 
-      if (!_.isNil(folder)) {
+      if (!_.isNil(folder) && !fromBreadcrumb) {
         folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
         isNotInEditMode = (angular.element(folderNameElem).attr('contenteditable') === 'false');
       }
@@ -330,7 +331,7 @@
       if (goToWorkgroupPage) {
         $state.go('sharedspace.all');
       } else {
-        workgroupNodesVm.goToFolder(folder);
+        workgroupNodesVm.goToFolder(folder, true);
       }
     }
 
