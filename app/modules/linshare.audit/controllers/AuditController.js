@@ -67,7 +67,7 @@
       }).then(function(auditActionsList) {
         auditVm.itemsList = auditActionsList.plain();
 
-        auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditVm.itemsList.plain());
+        auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditVm.itemsList);
         generateTableFilterSelect(auditVm.tableFilterType, 'type');
         generateTableFilterSelect(auditVm.tableFilterAction, 'action');
 
