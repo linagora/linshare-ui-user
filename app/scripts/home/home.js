@@ -9,8 +9,8 @@
     .module('linshareUiUserApp')
     .controller('HomeController', homeController);
 
-  homeController.$inject = ['$scope', '$timeout', '$translate', '$translatePartialLoader', 'lsAppConfig',
-    'welcomeMessageRestService'
+  homeController.$inject = ['$q', '$scope', '$timeout', '$translate', '$translatePartialLoader',
+    'authenticationRestService', 'functionalityRestService', 'lsAppConfig', 'welcomeMessageRestService'
   ];
 
   /**
@@ -18,7 +18,8 @@
    * @desc Application home management system controller
    * @memberOf linshareUiUserApp
    */
-  function homeController($scope, $timeout, $translate, $translatePartialLoader, lsAppConfig, welcomeMessageRestService) {
+  function homeController($q, $scope, $timeout, $translate, $translatePartialLoader, authenticationRestService,
+    functionalityRestService, lsAppConfig, welcomeMessageRestService) {
     const LANG_CONVERTER = {
       ENGLISH: {
         lang: 'ENGLISH',
@@ -47,6 +48,22 @@
      */
     // TODO : IAB externalize fab into directive
     function activate() {
+      $scope.cards = {
+        myFilesSpace: false,
+        uploadShare: false,
+        uploadGroup: false,
+        uploadRequest: false
+      };
+      $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
+        .then(function(promises) {
+          var
+            user = promises[0],
+            functionalities = promises[1];
+
+          $scope.cards.myFilesSpace = user.canUpload;
+          $scope.cards.uploadGroup = functionalities.WORK_GROUP.enable;
+          $scope.cards.uploadShare = ($scope.cards.myFilesSpace || $scope.cards.uploadGroup);
+        });
       $scope.fabButton = {
         toolbar: {
           activate: true,

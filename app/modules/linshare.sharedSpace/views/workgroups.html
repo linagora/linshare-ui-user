@@ -13,7 +13,7 @@
               <p>{{"WORKGROUPS_LIST.PROJECT" | translate}}</p>
             </a>
             <a class="col-xs-6" x-ng-click="vm.createWorkGroup();" href="javascript:void(0)"
-               data-ng-class="{'disabled': !vm.canCreate}">
+               data-ng-class="{'disabled': !vm.canCreate}" data-ng-if="vm.functionality.enable">
               <i class="groups-shared-folder">
                 <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
               </i>

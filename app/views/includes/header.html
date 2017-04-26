@@ -22,7 +22,8 @@
     </li>
     <li class="pull-right">
       <ul class="top-menu">
-            <li class="dropdown" id="transfert-dropdown" uib-dropdown auto-close="outsideClick">
+            <li class="dropdown" id="transfert-dropdown" uib-dropdown auto-close="outsideClick"
+                data-ng-if="mainVm.showTransfert">
                 <a x-ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
                    style="height: 15px;">
                   <i class="tmn-counts">{{$flow.files.length}}</i>

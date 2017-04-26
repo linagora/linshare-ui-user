@@ -1,9 +1,9 @@
 'use strict';
 angular.module('linshare.sharedSpace')
   .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
-                                                workgroups, $translate, $state, documentUtilsService, itemUtilsService,
-                                                workgroupRestService, workgroupFoldersRestService, auditDetailsService,
-                                                workgroupEntriesRestService, lsAppConfig, lsErrorCode, toastService) {
+    workgroups, $translate, $state, documentUtilsService, itemUtilsService, workgroupRestService,
+    workgroupFoldersRestService, auditDetailsService, workgroupEntriesRestService, lsAppConfig, lsErrorCode,
+    toastService, functionalityRestService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
@@ -116,11 +116,6 @@ angular.module('linshare.sharedSpace')
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         },{
-          action: function() {return thisctrl.createWorkGroup();},
-          label: 'WORKGROUPS_LIST.SHARED_FOLDER',
-          icon: 'groups-shared-folder'
-          //TODO - SMA: Icon not working
-        },{
           action: null,
           label: 'WORKGROUPS_LIST.FOLDER',
           icon: 'groups-folder disabled-work-in-progress',
@@ -142,6 +137,19 @@ angular.module('linshare.sharedSpace')
         }
       ]
     };
+
+    functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT').then(function(data) {
+      thisctrl.functionality = data;
+      if (data.enable) {
+        thisctrl.fabButton.actions.splice(2, 0, {
+          action: function() {return thisctrl.createWorkGroup();},
+          label: 'WORKGROUPS_LIST.SHARED_FOLDER',
+          icon: 'groups-shared-folder'
+          //TODO - SMA: Icon not working
+        });
+      }
+    });
+
 
     thisctrl.currentPage = 'group_list';
 

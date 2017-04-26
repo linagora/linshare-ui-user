@@ -7,8 +7,8 @@
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
-      autocompleteUserRestService, documentSelected, documentUtilsService, files, lsAppConfig,
-      NgTableParams, receivedShareRestService, toastService) {
+      authenticationRestService, autocompleteUserRestService, documentSelected, documentUtilsService, files,
+      lsAppConfig, NgTableParams, receivedShareRestService, toastService) {
       $translatePartialLoader.addPart('receivedShare');
       $scope.documentSelected = documentSelected;
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
@@ -70,6 +70,10 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.clearParams = clearParams;
+
+      authenticationRestService.getCurrentUser().then(function(data) {
+        $scope.canUpload = data.canUpload;
+      });
 
       function clearParams() {
         $scope.filters.sizeStart = null;
@@ -220,6 +224,9 @@ angular.module('linshare.receivedShare')
         });
 
       $scope.copyIntoFiles = function(selectedDocuments) {
+        if (!$scope.canUpload) {
+          return;
+        }
         if (!_.isArray(selectedDocuments)) {
           selectedDocuments = [selectedDocuments];
         }

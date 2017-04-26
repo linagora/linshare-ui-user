@@ -10,7 +10,8 @@
     .controller('uploadQueueController', uploadQueueController);
 
   uploadQueueController.$inject = ['$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'flowUploadService', 'lsAppConfig', 'toastService'];
+    '$translatePartialLoader', 'authenticationRestService', 'flowUploadService', 'functionalityRestService',
+    'lsAppConfig', 'toastService'];
 
   /**
    * @namespace uploadQueueController
@@ -18,7 +19,8 @@
    * @memberOf LinShare.upload.uploadQueueController
    */
   function uploadQueueController($q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-                                 flowUploadService, lsAppConfig, toastService) {
+    authenticationRestService, flowUploadService, functionalityRestService,
+    lsAppConfig, toastService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;
@@ -130,6 +132,19 @@
 
       $scope.$on('flow::fileError', function fileErrorAction() {
         uploadQueueVm.isflowUploadingError = true;
+      });
+
+      uploadQueueVm.location = {
+        mySpace: false,
+        workgroup: false
+      };
+      $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
+        .then(function(promises) {
+          var
+            user = promises[0],
+            functionalities = promises[1];
+          uploadQueueVm.location.mySpace = user.canUpload;
+          uploadQueueVm.location.workgroup = functionalities.WORK_GROUP.enable;
       });
     }
 

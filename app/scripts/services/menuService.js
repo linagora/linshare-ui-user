@@ -57,6 +57,15 @@
           link: 'administration.guests',
           disabled: _.isNil(functionalities.GUEST) ? false : !functionalities.GUESTS.enable && user.canCreateGuest
         });
+
+        files.links.splice(0, 0, {
+          name: 'MENU_TITLE.MY_FILES',
+          link: 'documents.files',
+          disabled: !user.canUpload
+        });
+
+        sharedSpace.disabled = !functionalities.WORK_GROUP.enable;
+        myUploads.disabled = !(functionalities.WORK_GROUP.enable || user.canUpload);
       });
 
       administrations = {
@@ -89,10 +98,6 @@
         color: '#2196F3',
         disabled: false,
         links: [{
-          name: 'MENU_TITLE.MY_FILES',
-          link: 'documents.files',
-          disabled: false
-        }, {
           name: 'MENU_TITLE.RECEIVED_SHARES',
           link: 'documents.received',
           disabled: false
@@ -116,15 +121,13 @@
         link: 'documents.upload',
         icon: 'zmdi zmdi-upload',
         color: '#05B1FF',
-        disabled: false
       };
 
       sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
         link: 'sharedspace.all',
         icon: 'groups-home-workgroup',
-        color: '#05B1FF',
-        disabled: false
+        color: '#05B1FF'
       };
 
       uploads = {

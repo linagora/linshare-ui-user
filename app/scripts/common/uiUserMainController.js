@@ -11,12 +11,14 @@
     .controller('UiUserMainController', UiUserMainController);
 
   UiUserMainController.$inject = ['$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
-    'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'LinshareUserService', 'lsAppConfig',
-    'MenuService', 'sharableDocumentService', 'ShareObjectService', 'uploadRestService'];
+    'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
+    'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
+    'uploadRestService'];
 
-  function UiUserMainController($http, $log, $q, $rootScope, $scope, $state, $timeout, $window, authenticationRestService,
-                                checkTableHeightService, flowUploadService, LinshareUserService, lsAppConfig,
-                                MenuService, sharableDocumentService, ShareObjectService, uploadRestService) {
+  function UiUserMainController($http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
+    authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
+    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService,
+    uploadRestService) {
     /* jshint validthis:true */
     var mainVm = this;
 
@@ -213,6 +215,15 @@
       });
 
       localStorage.setItem('ma-layout-status', 0);
+
+      mainVm.showTransfert = false;
+      $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
+        .then(function(promises) {
+          var
+            user = promises[0],
+            functionalities = promises[1];
+          mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
+        });
     }
 
     /**

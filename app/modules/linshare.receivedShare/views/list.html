@@ -179,7 +179,7 @@
               <span>{{'DOWNLOAD' | translate}}</span>
             </a>
           </span>
-          <span>
+          <span data-ng-if="canUpload">
             <a class="plain-text-button share-link"
                x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}"
                x-ng-click="copyIntoFiles(selectedDocuments)">
@@ -307,7 +307,7 @@
                             <i class="zmdi zmdi-info-outline"></i>
                           </a>
                         </li>
-                        <li class="hidden-xs hidden-action-links">
+                        <li class="hidden-xs hidden-action-links" data-ng-if="canUpload">
                           <a href="" title="{{'ACTION.COPY_IN_MY_FILES' | translate}}" event-propagation-stop="true"
                              x-ng-click="copyIntoFiles(documentFile)">
                             <i class="zmdi zmdi-copy"></i>
@@ -335,7 +335,7 @@
                                 {{'ACTION.INFORMATION' | translate}}
                               </a>
                             </li>
-                            <li>
+                            <li data-ng-if="canUpload">
                               <a data-ng-href=""
                                  data-ng-click="copyIntoFiles(documentFile)"
                                  event-propagation-stop>
@@ -409,7 +409,7 @@
            x-ng-if="flagsOnSelectedPages[tableParams.page()]">
         </i>
       </div>
-      <i class="zmdi zmdi-copy col-xs-2"  x-ng-click="copyIntoFiles(selectedDocuments)"></i>
+      <i class="zmdi zmdi-copy col-xs-2" data-ng-if="canUpload" x-ng-click="copyIntoFiles(selectedDocuments)"></i>
       <i class="zmdi zmdi-delete col-xs-2" x-ng-click="deleteDocuments(selectedDocuments)"></i>
       <i class="zmdi zmdi-download col-xs-2 disabled-work-in-progress"></i>
       <i class="zmdi zmdi-swap col-xs-2 disabled-work-in-progress"></i>

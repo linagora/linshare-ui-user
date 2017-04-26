@@ -18,7 +18,7 @@
    */
   function routerConfiguration($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function($injector, $location) {
-      $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService){
+      $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService) {
         authRedirect($location, $state, authenticationRestService);
       }]);
     });
@@ -29,6 +29,9 @@
         resolve: {
           authentication: function(authenticationRestService) {
             return authenticationRestService.checkAuthentication();
+          },
+          user: function(authenticationRestService) {
+            return authenticationRestService.getCurrentUser();
           },
           functionalities: function(functionalityRestService) {
             return functionalityRestService.getFunctionalities();
@@ -45,7 +48,7 @@
         url: '/login?next',
         templateUrl: 'views/common/loginForm.html',
         controller: 'loginController',
-        controllerAs : 'loginVm',
+        controllerAs: 'loginVm',
         resolve: {
           authentication: function($location, $state, authenticationRestService) {
             authRedirect($location, $state, authenticationRestService);
@@ -65,11 +68,16 @@
           uploadedFileUuid: null
         },
         resolve: {
+          functionality: function($state, functionalities, user) {
+            if (!user.canUpload) {
+              $state.go('home');
+            }
+          },
           documentsList: function(LinshareDocumentRestService) {
             return LinshareDocumentRestService.getList();
           },
           documentSelected: function($stateParams, documentsList) {
-            if(_.isUndefined( $stateParams.fileUuid)) {
+            if (_.isUndefined($stateParams.fileUuid)) {
               return null;
             }
             return _.find(documentsList, function(doc) {
@@ -90,7 +98,7 @@
             return receivedShareRestService.getList();
           },
           documentSelected: function($stateParams, files) {
-            if(_.isUndefined( $stateParams.fileUuid)) {
+            if (_.isUndefined($stateParams.fileUuid)) {
               return null;
             }
             return _.find(files, function(doc) {
@@ -123,10 +131,35 @@
         controller: 'uploadQueueController',
         controllerAs: 'uploadQueueVm',
         resolve: {
-          checkUrl: function($state, $stateParams, lsAppConfig) {
-            if ($stateParams.from !== lsAppConfig.mySpacePage && $stateParams.from !== lsAppConfig.workgroupPage) {
-              $state.go('documents.upload', {from: lsAppConfig.mySpacePage});
-              $stateParams.from = lsAppConfig.mySpacePage;
+          functionality: function($state, functionalities, user) {
+            if (!functionalities.WORK_GROUP.enable && !user.canUpload) {
+              $state.go('home');
+            }
+          },
+          checkUrl: function($state, $stateParams, functionalities, lsAppConfig, user) {
+            switch ($stateParams.from) {
+              case lsAppConfig.mySpacePage:
+                if (!user.canUpload) {
+                  $state.go('documents.upload', {
+                    from: lsAppConfig.workgroupPage
+                  });
+                  $stateParams.from = lsAppConfig.workgroupPage;
+                }
+                break;
+              case lsAppConfig.workgroupPage:
+                if (!functionalities.WORK_GROUP.enable) {
+                  $state.go('documents.upload', {
+                    from: lsAppConfig.mySpacePage
+                  });
+                  $stateParams.from = lsAppConfig.mySpacePage;
+                }
+                break;
+              default:
+                $state.go('documents.upload', {
+                  from: lsAppConfig.mySpacePage
+                });
+                $stateParams.from = lsAppConfig.mySpacePage;
+                break;
             }
           }
         }
@@ -140,14 +173,22 @@
       .state('sharedspace', {
         parent: 'common',
         url: '/sharedspace',
-        template: '<div ui-view></div>'
+        template: '<div ui-view></div>',
+        resolve: {
+          functionality: function($state, functionalities) {
+            if (!functionalities.WORK_GROUP.enable) {
+              $state.go('home');
+            }
+          },
+        }
       })
       .state('sharedspace.all', {
         url: '/list',
         templateUrl: 'modules/linshare.sharedSpace/views/workgroups.html',
         controller: 'SharedSpaceController as vm',
         resolve: {
-          workgroups: function(workgroupRestService) {
+          workgroups: function(workgroupRestService,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             return workgroupRestService.getList();
           }
         }
@@ -166,7 +207,8 @@
           parentUuid: null
         },
         resolve: {
-          nodesList: function(workgroupNodesRestService, $stateParams) {
+          nodesList: function(workgroupNodesRestService, $stateParams,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid);
           }
         }
@@ -182,7 +224,8 @@
           folderName: null
         },
         resolve: {
-          nodesList: function(workgroupNodesRestService, $stateParams) {
+          nodesList: function(workgroupNodesRestService, $stateParams,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid, $stateParams.folderUuid);
           }
         }
@@ -375,9 +418,9 @@
      * @memberOf LinShareUiUserApp.routerConfiguration
      */
     function authRedirect($location, $state, authenticationRestService) {
-    var location = $location;
+      var location = $location;
       authenticationRestService.checkAuthentication(false).then(function(data) {
-        if(data.status !== 401) {
+        if (data.status !== 401) {
           location.path('/home').replace();
           $state.go('home');
         } else {
