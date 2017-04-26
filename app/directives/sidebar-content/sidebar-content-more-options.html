@@ -28,7 +28,8 @@
         </div>
       </div>
     </div>
-    <div x-ng-show="shareActionVm.newShare.creationAcknowledgement.enable" class="col-xs-12 field-ctn">
+    <div data-ng-show="shareActionVm.newShare.creationAcknowledgement.enable &&
+         shareActionVm.newShare.creationAcknowledgement.canOverride" class="col-xs-12 field-ctn">
       <div class=" fg-line date-picker input-group dp-blue"
            x-ng-class="{'is-opened': mainVm.sidebar.getData().dateStartOpened}">
         <div class="form-inline">
