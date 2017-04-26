@@ -9,7 +9,8 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', 'autocompleteUserRestService', 'ownerLabel'
+  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', 'autocompleteUserRestService',
+    'functionalityRestService', 'ownerLabel'
   ];
 
   /**
@@ -17,7 +18,8 @@
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController($log, $q, $scope, autocompleteUserRestService, ownerLabel) {
+  function AutocompleteUsersController($log, $q, $scope, autocompleteUserRestService, functionalityRestService,
+    ownerLabel) {
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;
 
@@ -30,7 +32,21 @@
     autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
     autocompleteUsersVm.userRepresentation = userRepresentation;
 
+    activate();
+
     ////////////
+
+    /**
+     * @namespace activate
+     * @desc Activation function of the controller launch at every instantiation
+     * @memberOf LinShare.components.AutocompleteUsersController
+     */
+    function activate() {
+      functionalityRestService.getFunctionalityParams('COMPLETION').then(function(param) {
+        autocompleteUsersVm.functionality = param;
+        autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
+      });
+    }
 
     /**
      *  @name addElements
@@ -106,7 +122,7 @@
     function onErrorEmail() {
       var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
       if (autocompleteUsersVm.withEmail && autocompleteUsersVm.noResult && !_.isUndefined(viewValue)) {
-        if (viewValue.length >= 3) {
+        if (viewValue.length >= autocompleteUsersVm.functionality.value) {
           return !regexpEmail.test(viewValue);
         }
       }
@@ -139,11 +155,12 @@
         var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
         if (autocompleteUsersVm.withEmail) {
           if (regexpEmail.test(viewValue)) {
-            autocompleteUsersVm.searchUsersAccount(viewValue).then(function(data) {
-              autocompleteUsersVm.selectedUser = data[0];
-              autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser,
-                autocompleteUsersVm.selectedUsersList);
-            });
+            autocompleteUsersVm.searchUsersAccount(viewValue)
+              .then(function(data) {
+                autocompleteUsersVm.selectedUser = data[0];
+                autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser,
+                  autocompleteUsersVm.selectedUsersList);
+              });
           } else {
             autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
           }
@@ -171,23 +188,23 @@
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
     function searchUsersAccount(pattern) {
-      if (pattern.length >= 3) {
-        var deferred = $q.defer();
-        // TODO : IAB : stop searching in back if external email detected
-        autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid).then(function(data) {
-          // TODO : IAB : strong email validation (for this one and all other)
-          if (data.length === 0 && autocompleteUsersVm.withEmail && regexpEmail.test(pattern)) {
-            data.push({
-              mail: pattern,
-              identifier: pattern,
-              type: 'simple'
-            });
-          }
-          autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
-          deferred.resolve(data);
-        });
-        return deferred.promise;
+      var deferred = $q.defer();
+      if (pattern.length >= autocompleteUsersVm.functionality.value) {
+        autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid)
+          .then(function(data) {
+            // TODO : IAB : strong email validation (for this one and all other)
+            if (data.length === 0 && autocompleteUsersVm.withEmail && regexpEmail.test(pattern)) {
+              data.push({
+                mail: pattern,
+                identifier: pattern,
+                type: 'simple'
+              });
+            }
+            autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
+            deferred.resolve(data);
+          });
       }
+      return deferred.promise;
     }
 
     /**
@@ -200,11 +217,11 @@
     function userRepresentation(data) {
       var template = '' +
         '<div  class="recipientsAutocomplete" title="$title">' +
-          '<span class="firstLetterFormat $style">$firstLetter</span>' +
-          '<p class="recipientsInfo">' +
-            '<span class="user-full-name">$name</span>' +
-            '<span class="email">$info</span>' +
-          '</p>' +
+        '<span class="firstLetterFormat $style">$firstLetter</span>' +
+        '<p class="recipientsInfo">' +
+        '<span class="user-full-name">$name</span>' +
+        '<span class="email">$info</span>' +
+        '</p>' +
         '</div>';
       switch (data.type) {
         case 'simple':
