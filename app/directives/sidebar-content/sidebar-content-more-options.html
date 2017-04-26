@@ -15,12 +15,12 @@
       </textarea>
     </div>
 
-    <div x-ng-show="shareActionVm.newShare.secured.enable" class="col-xs-12 field-ctn">
+    <div data-ng-if="shareActionVm.newShare.secured.enable && shareActionVm.newShare.secured.canOverride" class="col-xs-12 field-ctn">
       <div class="fg-line">
         <div class="form-inline">
           <label for="secureSharing">{{"RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate}}:</label>
           <label class="checkbox checkbox-inline m-r-0">
-            <input type="checkbox" name="secureSharing" x-ng-checked="true"
+            <input type="checkbox" name="secureSharing"
                    x-ng-disabled="!shareActionVm.newShare.secured.canOverride"
                    x-ng-model="shareActionVm.newShare.secured.value"/>
             <i class="input-helper"></i>
