@@ -6,11 +6,14 @@
       <div class="card-header">
         <div id="breadcrumb-wrap">
           <div class="menu-popover-ctn hidden-xs"
-               data-ng-class="{'clickable waves-effect': contactsListsListVm.canCreate}">
+               data-ng-class="{'clickable waves-effect':
+                 contactsListsListVm.canCreate && contactsListsListVm.functionality.enable}">
             <a class="add-menu-group"
                x-ng-click="contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.createContactsList() :
                 contactsListsListVm.goToMineAndCreateContactsList()">
-              <i class="zmdi zmdi-plus" data-ng-class="{'disabled': !contactsListsListVm.canCreate}"></i>
+              <i class="zmdi zmdi-plus" data-ng-class="{'disabled':
+                  !(contactsListsListVm.canCreate && contactsListsListVm.functionality.enable)}">
+              </i>
             </a>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
@@ -57,14 +60,14 @@
                         <li>
                           <!-- TODO : If I select a contact and then switch to the other list view the multislect
                            shoud not be displayed and th previous selection becomes deselected-->
-                          <a x-ui-sref="administration.contactslists({from:
+                          <a data-ui-sref="administration.contactslists.list({from:
                           contactsListsListVm.contactsListsMinePage})"
                              x-ng-class="{'active-check':contactsListsListVm.isFromMyContactsLists}">
                             {{"CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS" | translate}}
                           </a>
                         </li>
                         <li>
-                          <a x-ui-sref="administration.contactslists({from:
+                          <a data-ui-sref="administration.contactslists.list({from:
                           contactsListsListVm.contactsListsOthersPage})"
                              x-ng-class="{'active-check':!contactsListsListVm.isFromMyContactsLists}">
                             {{"CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS" | translate}}
@@ -193,7 +196,7 @@
                       <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
                         <li>
                           <!-- TODO : IAB Translation needed-->
-                          <a x-ui-sref="administration.contactslists({from:
+                          <a data-ui-sref="administration.contactslists.list({from:
                                contactsListsListVm.contactsListsMinePage})"
                              x-ng-class="{'active-check':contactsListsListVm.isFromMyContactsLists}"
                              x-ng-click="contactsListsListVm.currentView = contactsListsListVm.myLists">
@@ -201,7 +204,7 @@
                           </a>
                           </li>
                           <li>
-                            <a x-ui-sref="administration.contactslists({from:
+                            <a data-ui-sref="administration.contactslists.list({from:
                                contactsListsListVm.contactsListsOthersPage})"
                                x-ng-class="{'active-check':!contactsListsListVm.isFromMyContactsLists}"
                                x-ng-click="contactsListsListVm.currentView = contactsListsListVm.otherLists">

@@ -59,6 +59,7 @@
     /**
      * @name getFunctionalities
      * @desc Contruct an Object containing the functionality and associated param(s)
+     * @returns {Promise} Object functionalities
      * @memberOf linshareUiUserApp.functionalityRestService
      */
     function getFunctionalities() {
@@ -73,6 +74,7 @@
       }, function(err) {
         $log.error('error getting all functionalities', err);
       });
+      return deferred.promise;
     }
 
     /**

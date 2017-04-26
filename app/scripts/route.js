@@ -193,7 +193,19 @@
         template: '<div ui-view></div>'
       })
       .state('administration.contactslists', {
-        url: '/contactslists/:from',
+        abstract: true,
+        url: '/contactslists',
+        template: '<div ui-view></div>',
+        resolve: {
+          functionality: function($state, functionalities) {
+            if (!functionalities.CONTACTS_LIST.enable) {
+              $state.go('home');
+            }
+          }
+        }
+      })
+      .state('administration.contactslists.list', {
+        url: '/:from',
         params: {
           createNew: undefined
         },
@@ -201,24 +213,27 @@
         controller: 'contactsListsListController',
         controllerAs: 'contactsListsListVm',
         resolve: {
-          checkUrl: function($state, $stateParams, lsAppConfig) {
+          checkUrl: function($state, $stateParams, lsAppConfig,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             if ($stateParams.from.length === 0) {
               $stateParams.from = lsAppConfig.contactsListsMinePage;
             } else if ($stateParams.from !== lsAppConfig.contactsListsMinePage && $stateParams.from !== lsAppConfig.contactsListsOthersPage) {
-              return $state.go('administration.contactslists', {
+              return $state.go('administration.contactslists.list', {
                 from: lsAppConfig.contactsListsMinePage
               });
             }
           },
-          createNew: function($stateParams) {
+          createNew: function($stateParams,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             return _.isUndefined($stateParams.createNew) ? false : $stateParams.createNew;
           },
-          contactsListsList: function($stateParams, lsAppConfig, contactsListsListRestService) {
+          contactsListsList: function($stateParams, lsAppConfig, contactsListsListRestService,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             return contactsListsListRestService.getList($stateParams.from !== lsAppConfig.contactsListsOthersPage);
           }
         }
       })
-      .state('administration.contactslists.contacts', {
+      .state('administration.contactslists.list.contacts', {
         url: '/:contactsListUuid/:contactsListName/contacts',
         params: {
           addContacts: undefined
@@ -227,10 +242,12 @@
         controller: 'contactsListsContactsController',
         controllerAs: 'contactsListsContactsVm',
         resolve: {
-          addContacts: function($stateParams) {
+          addContacts: function($stateParams,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             return _.isUndefined($stateParams.addContacts) ? false : $stateParams.addContacts;
           },
-          contactsListsContacts: function(contactsListsContactsRestService, $stateParams) {
+          contactsListsContacts: function(contactsListsContactsRestService, $stateParams,
+          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             return contactsListsContactsRestService.getList($stateParams.contactsListUuid);
           }
         }
@@ -310,8 +327,8 @@
         templateUrl: 'modules/linshare.share/views/new_advanced_sharing.html',
         controller: 'LinshareAdvancedShareController',
         resolve: {
-          allFunctionalities: function(functionalityRestService) {
-            return functionalityRestService.getAll();
+          allFunctionalities: function(functionalities) {
+            return functionalities;
           }
         }
       })

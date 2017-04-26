@@ -10,9 +10,10 @@
     .controller('contactsListsListController', contactsListsListController);
 
   contactsListsListController.$inject = ['$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService', 'itemUtilsService',
-    'lsAppConfig', 'lsErrorCode', 'NgTableParams','toastService'];
+    '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService', 'contactsListsContactsRestService',
+    'contactsListsService', 'createNew', 'documentUtilsService', 'functionalityRestService', 'itemUtilsService',
+    'lsAppConfig', 'lsErrorCode', 'NgTableParams', 'toastService'
+  ];
 
   /**
    * @namespace contactsListsListController
@@ -20,10 +21,9 @@
    * @memberOf LinShare.contactsLists
    */
   function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, $translate,
-                                       $translatePartialLoader, contactsListsList,
-                                       contactsListsListRestService, contactsListsContactsRestService,
-                                       contactsListsService, createNew, documentUtilsService, itemUtilsService,
-                                       lsAppConfig, lsErrorCode, NgTableParams, toastService) {
+    $translatePartialLoader, contactsListsList, contactsListsListRestService, contactsListsContactsRestService,
+    contactsListsService, createNew, documentUtilsService, functionalityRestService, itemUtilsService, lsAppConfig,
+    lsErrorCode, NgTableParams, toastService) {
 
     /* jshint validthis:true */
     var contactsListsListVm = this;
@@ -86,18 +86,23 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function activate() {
+      functionalityRestService.getFunctionalityParams('CONTACTS_LIST__CREATION_RIGHT').then(function(data) {
+        contactsListsListVm.functionality = data;
+      });
+
       $translatePartialLoader.addPart('contactsLists');
 
       loadTable();
 
       $translate.refresh().then(function() {
         $translate(['ACTION.NEW_CONTACTS_LIST',
-          'CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS',
-          'CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS',
-          'CONTACTS_LISTS_DETAILS.PRIVATE',
-          'CONTACTS_LISTS_DETAILS.PUBLIC',
-          'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS',
-          'ACTION.COPY_ADJ', 'GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'])
+            'CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS',
+            'CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS',
+            'CONTACTS_LISTS_DETAILS.PRIVATE',
+            'CONTACTS_LISTS_DETAILS.PUBLIC',
+            'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS',
+            'ACTION.COPY_ADJ', 'GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'
+          ])
           .then(function(translations) {
             newContactsListName = translations['ACTION.NEW_CONTACTS_LIST'];
             contactsListsListVm.myLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS'];
@@ -112,7 +117,7 @@
       });
 
       $timeout(function() {
-        if(contactsListsListVm.createNew && contactsListsListVm.isFromMyContactsLists) {
+        if (contactsListsListVm.createNew && contactsListsListVm.isFromMyContactsLists) {
           createContactsList();
         }
       }, 0);
@@ -186,7 +191,7 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function createContactsList() {
-      if(!contactsListsListVm.isFromMyContactsLists) {
+      if (!contactsListsListVm.isFromMyContactsLists) {
         contactsListsListVm.isFromMyContactsLists = !contactsListsListVm.isFromMyContactsLists;
       }
       var defaultNamePos = itemUtilsService.itemNumber(contactsListsListVm.itemsList.plain(), newContactsListName);
@@ -201,7 +206,7 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function createContactsListFunction(itemName) {
-      if (contactsListsListVm.canCreate) {
+      if (contactsListsListVm.canCreate && contactsListsListVm.functionality.enable) {
         var item = contactsListsListRestService.restangularize({
           name: cleanString(itemName),
           owner: _.pick($scope.userLogged, ['firstName', 'lastName', 'uuid'])
@@ -210,7 +215,7 @@
         contactsListsListVm.itemsList.push(item);
         contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsListVm.tableParams.reload();
-        $timeout(function(){
+        $timeout(function() {
           renameContactsList(item, 'td[uuid=""] .file-name-disp');
         }, 0);
       }
@@ -281,7 +286,7 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function getVisibility(item) {
-      if(item.public) {
+      if (item.public) {
         return publicList;
       } else {
         return privateList;
@@ -296,7 +301,7 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function goToContactsListAndAddContacts(contactsListUuid, contactsListName) {
-      $state.go('administration.contactslists.contacts', {
+      $state.go('administration.contactslists.list.contacts', {
         contactsListUuid: contactsListUuid,
         contactsListName: contactsListName,
         addContacts: true
@@ -313,7 +318,7 @@
     function goToContactsListTarget(contactsListUuid, contactsListName) {
       var contactsListNameElem = $('td[uuid=' + contactsListUuid + ']').find('.file-name-disp');
       if (angular.element(contactsListNameElem).attr('contenteditable') === 'false') {
-        $state.go('administration.contactslists.contacts', {
+        $state.go('administration.contactslists.list.contacts', {
           contactsListUuid: contactsListUuid,
           contactsListName: contactsListName
         });
@@ -326,7 +331,10 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function goToMineAndCreateContactsList() {
-      $state.go('administration.contactslists', {from: contactsListsListVm.contactsListsMinePage, createNew: true});
+      $state.go('administration.contactslists.list', {
+        from: contactsListsListVm.contactsListsMinePage,
+        createNew: true
+      });
     }
 
     /**
@@ -349,7 +357,9 @@
     function loadTable() {
       contactsListsListVm.tableParams = new NgTableParams({
         page: 1,
-        sorting: {modificationDate: 'desc'},
+        sorting: {
+          modificationDate: 'desc'
+        },
         count: 20,
         filter: contactsListsListVm.paramFilter
       }, {
@@ -372,7 +382,9 @@
           }
           var contactsListsList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(contactsListsList.length);
-          params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
+          params.settings({
+            counts: filteredData.length > 10 ? [10, 25, 50, 100] : []
+          });
           return (contactsListsList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
@@ -396,7 +408,7 @@
      */
     function removeUnpersistedContactsLists() {
       _.forEach(contactsListsListVm.itemsList, function(item) {
-        if(!_.isUndefined(item) && !item.modificationDate) {
+        if (!_.isUndefined(item) && !item.modificationDate) {
           _.remove(contactsListsListVm.itemsList, item);
         }
       });
@@ -411,7 +423,7 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function renameContactsList(item, itemNameElem) {
-      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
+      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
       itemUtilsService.rename(item, itemNameElem).then(function(data) {
         item = _.assign(item, data);
         contactsListsListVm.canCreate = true;
@@ -457,7 +469,7 @@
       contactListUuidDestination = contactListUuidDestination || contactsListsListVm.contactsListUuidAddContacts;
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
         contactsListsContactsRestService.create(contactListUuidDestination, contact).then(function() {
-          if(!duplicate) {
+          if (!duplicate) {
             $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
               toastService.success(message);
             });
@@ -465,11 +477,11 @@
           _.remove(contactsListsListVm.contactsToAddList, {
             mail: contact.mail
           });
-          if(index+1 === nbContacts) {
+          if (index + 1 === nbContacts) {
             $scope.mainVm.sidebar.hide();
           }
         }, function(error) {
-          if(error.data.errCode === 45400) {
+          if (error.data.errCode === 45400) {
             // TODO : IAB & KLE : improve serverResponse module to allow default or custom message
             var message = contact.firstName + ' ' + contact.lastName + ' ' + stillExists;
             toastService.error(message);
@@ -490,15 +502,17 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function saveNewItem(item, duplicate) {
-      contactsListsListRestService.create({name: cleanString(item.name)}).then(function(data) {
+      contactsListsListRestService.create({
+        name: cleanString(item.name)
+      }).then(function(data) {
         removeUnpersistedContactsLists();
-        if(duplicate) {
+        if (duplicate) {
           copyAllContacts(item.uuid, data.uuid);
         }
         contactsListsListVm.itemsList.push(data);
         contactsListsListVm.tableParams.reload();
       }, function(error) {
-        if(error) {
+        if (error) {
           removeUnpersistedContactsLists();
           contactsListsListVm.tableParams.reload();
         }
@@ -519,9 +533,9 @@
       var currentPage = page || contactsListsListVm.tableParams.page();
       var dataOnPage = data || contactsListsListVm.tableParams.data;
       var select = selectFlag || contactsListsListVm.flagsOnSelectedPages[currentPage];
-      if(!select) {
+      if (!select) {
         _.forEach(dataOnPage, function(element) {
-          if(!element.isSelected) {
+          if (!element.isSelected) {
             element.isSelected = true;
             contactsListsListVm.selectedContactsLists.push(element);
           }
@@ -530,7 +544,7 @@
       } else {
         contactsListsListVm.selectedContactsLists = _.xor(contactsListsListVm.selectedContactsLists, dataOnPage);
         _.forEach(dataOnPage, function(element) {
-          if(element.isSelected) {
+          if (element.isSelected) {
             element.isSelected = false;
             _.remove(contactsListsListVm.selectedContactsLists, function(n) {
               return n.uuid === element.uuid;
@@ -603,7 +617,9 @@
       item.public = !item.public;
       contactsListsListRestService.update(item).then(function(data) {
         contactsListsListVm.currentSelectedDocument.current = data;
-        (_.find(contactsListsListVm.itemsList, {'uuid': data.uuid})).public = data.public;
+        (_.find(contactsListsListVm.itemsList, {
+          'uuid': data.uuid
+        })).public = data.public;
         contactsListsListVm.tableParams.reload();
       });
     }
@@ -632,7 +648,7 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function toggleFilterBySelectedFiles() {
-      if(contactsListsListVm.tableParams.filter().isSelected) {
+      if (contactsListsListVm.tableParams.filter().isSelected) {
         delete contactsListsListVm.tableParams.filter().isSelected;
       } else {
         contactsListsListVm.tableParams.filter().isSelected = true;
@@ -645,7 +661,7 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function toggleSearchState() {
-      if(!contactsListsListVm.searchMobileDropdown) {
+      if (!contactsListsListVm.searchMobileDropdown) {
         openSearch();
       } else {
         closeSearch();
