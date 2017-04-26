@@ -27,11 +27,10 @@
       tabs,
       uploads,
       service = {
+        build: build,
         getAvailableTabs: getAvailableTabs,
         getProperties: getProperties
       };
-
-    activate();
 
     return service;
 
@@ -42,7 +41,7 @@
      * @desc Activation function of the controller, launch at every instantiation
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
-    function activate() {
+    function build() {
       $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()]).then(function(promises) {
         var
           user = promises[0],

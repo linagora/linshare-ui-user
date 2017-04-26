@@ -57,6 +57,7 @@
      * @memberOf linshareUiUserApp
      */
     function activate() {
+      MenuService.build();
       $scope.loggedUser = new LinshareUserService();
       mainVm.sidebar = new Sidebar();
 
@@ -138,6 +139,8 @@
         authenticationRestService.version().then(function(data) {
           $scope.coreVersion = data.version;
         });
+
+        MenuService.build();
 
         $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
         $scope.loggedUser.setUser(data);
