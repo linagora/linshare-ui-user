@@ -9,8 +9,8 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', 'autocompleteUserRestService',
-    'functionalityRestService', 'ownerLabel'
+  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', 'authenticationRestService',
+    'autocompleteUserRestService', 'functionalityRestService', 'lsAppConfig', 'ownerLabel'
   ];
 
   /**
@@ -18,8 +18,8 @@
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController($log, $q, $scope, autocompleteUserRestService, functionalityRestService,
-    ownerLabel) {
+  function AutocompleteUsersController($log, $q, $scope, authenticationRestService, autocompleteUserRestService,
+    functionalityRestService, lsAppConfig, ownerLabel) {
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;
 
@@ -42,10 +42,14 @@
      * @memberOf LinShare.components.AutocompleteUsersController
      */
     function activate() {
-      functionalityRestService.getFunctionalityParams('COMPLETION').then(function(param) {
-        autocompleteUsersVm.functionality = param;
-        autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
-      });
+      $q.all([functionalityRestService.getFunctionalityParams('COMPLETION'), authenticationRestService.getCurrentUser()])
+        .then(function(promises) {
+          autocompleteUsersVm.functionality = promises[0];
+          autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
+          if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
+            autocompleteUsersVm.withEmail = false;
+          }
+        });
     }
 
     /**

@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .factory('MenuService', menuService);
 
-  menuService.$inject = ['functionalityRestService', 'lsAppConfig'];
+  menuService.$inject = ['$q', 'authenticationRestService', 'functionalityRestService', 'lsAppConfig'];
 
   /**
    * @namespace menuService
    * @desc Service to interact with session
    * @memberOf linshareUiUserApp
    */
-  function menuService(functionalityRestService, lsAppConfig) {
+  function menuService($q, authenticationRestService, functionalityRestService, lsAppConfig) {
     var
       administrations,
       audit,
@@ -43,7 +43,11 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     function activate() {
-      functionalityRestService.getAll().then(function(functionalities) {
+      $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()]).then(function(promises) {
+        var
+          user = promises[0],
+          functionalities = promises[1];
+
         administrations.links.splice(0, 0, {
           name: 'MENU_TITLE.CONTACTS_LISTS',
           link: 'administration.contactslists.list',
@@ -51,7 +55,7 @@
         }, {
           name: 'MENU_TITLE.GUESTS',
           link: 'administration.guests',
-          disabled: !functionalities.GUESTS.enable
+          disabled: _.isNil(functionalities.GUEST) ? false : !functionalities.GUESTS.enable && user.canCreateGuest
         });
       });
 

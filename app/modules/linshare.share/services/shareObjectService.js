@@ -7,7 +7,7 @@
 angular.module('linshare.share')
 
   .factory('ShareObjectService', function($log, functionalityRestService, LinshareShareService, $q, toastService,
-                                          $translate) {
+                                          $translate, authenticationRestService, lsAppConfig) {
 
     var recipients = [],
       mailingListUuid = [],
@@ -35,9 +35,13 @@ angular.module('linshare.share')
       notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
     });
 
-    functionalityRestService.getFunctionalityParams('ANONYMOUS_URL').then(function(param) {
-      angular.extend(secured, param);
-    });
+    $q.all([functionalityRestService.getFunctionalityParams('ANONYMOUS_URL'), authenticationRestService.getCurrentUser()])
+      .then(function(promises) {
+        angular.extend(secured, promises[0]);
+        if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
+          secured.enable = false;
+        }
+      });
 
     function ShareObjectForm(shareJson) {
       shareJson = shareJson || {};

@@ -257,6 +257,22 @@
         templateUrl: 'modules/linshare.guests/views/list.html',
         controller: 'LinshareGuestsController',
         controllerAs: 'guestVm',
+        resolve: {
+          functionality: function($state, functionalities) {
+            if (_.isNil(functionalities.GUESTS)) {
+              $state.go('home');
+            } else {
+              if (!functionalities.GUESTS.enable) {
+                $state.go('home');
+              }
+            }
+          },
+          userType: function($state, lsAppConfig, user) {
+            if (user.accountType === lsAppConfig.accountType.guest) {
+              $state.go('home');
+            }
+          }
+        }
       })
       .state('administration.users', {
         url: '/users',

@@ -62,7 +62,7 @@
     function GuestObject(jsonObject) {
       self = this;
       jsonObject = jsonObject ||  {};
-      checkFunctionalities(jsonObject).then(function() {
+      checkFunctionalities().then(function() {
         self.allowedToAddEditors = _.cloneDeep(allowedToAddEditors);
         self.allowedToExpiration = _.cloneDeep(allowedToExpiration);
         self.allowedToProlongExpiration = _.cloneDeep(allowedToProlongExpiration);
@@ -106,10 +106,9 @@
     /**
      *  @name checkFunctionalities
      *  @desc Check the different rights relative to the guest
-     *  @param {Object} jsonObject - Json object for constructing a guest object
      *  @memberOf LinShare.guests.GuestObjectService
      */
-    function checkFunctionalities(jsonObject) {
+    function checkFunctionalities() {
       return $q.all([
         functionalityRestService.getFunctionalityParams('GUESTS__CAN_UPLOAD').then(function(data) {
           var clonedData = _.cloneDeep(data);
@@ -134,8 +133,6 @@
           allowedToProlongExpiration = clonedData;
           allowedToProlongExpiration.canOverride =
             _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-          allowedToProlongExpiration.fetchedValue = data.value;
-          allowedToProlongExpiration.value = jsonObject.modificationDate || null;
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__RESTRICTED').then(function(data) {
           var clonedData = _.cloneDeep(data);
@@ -235,10 +232,11 @@
       form.activateRestricted = setPropertyValue(self.restricted, allowedToRestrict.value);
       form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
       form.datepicker.maxDate = _.clone(allowedToExpiration.value);
+      if (!_.isUndefined(self.uuid) && !(allowedToProlongExpiration.enable)) {
+        form.datepicker.maxDate = _.clone(self.expirationDate);
+      }
       form.activateMoreOptions = (!form.activateUserSpace);
-      if ((_.isUndefined(self.uuid) && allowedToExpiration.canOverride) ||
-        (!_.isUndefined(self.uuid) &&
-          (allowedToProlongExpiration.canOverride || allowedToProlongExpiration.fetchedValue))) {
+      if (_.isUndefined(self.uuid) && allowedToExpiration.canOverride) {
         form.datepicker.isEditable = true;
       }
       deferred.resolve(_.cloneDeep(form));
