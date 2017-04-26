@@ -43,12 +43,13 @@
         </div>
       </div>
     </div>
-    <div x-ng-show="shareActionVm.newShare.enableUSDA.enable" class="col-xs-12 field-ctn">
+    <div data-ng-show="shareActionVm.newShare.enableUSDA.enable && shareActionVm.newShare.enableUSDA.canOverride"
+         class="col-xs-12 field-ctn">
       <div class="fg-line">
         <div class="form-inline">
           <label for="nonDownloadedNotification">{{"RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate}}:</label>
           <label class="checkbox checkbox-inline m-r-0">
-            <input type="checkbox" name="nonDownloadedNotification" x-ng-checked="true"
+            <input type="checkbox" name="nonDownloadedNotification"
                    x-ng-disabled="!shareActionVm.newShare.enableUSDA.canOverride"
                    x-ng-model="shareActionVm.newShare.enableUSDA.value"/>
             <i class="input-helper"></i>
@@ -56,7 +57,9 @@
         </div>
       </div>
     </div>
-    <div x-ng-show="shareActionVm.newShare.enableUSDA.value" class="col-xs-12 field-ctn" id="dateField">
+    <div data-ng-show="shareActionVm.newShare.enableUSDA.enable && shareActionVm.newShare.enableUSDA.canOverride &&
+           shareActionVm.newShare.notificationDateForUSDA.canOverride"
+         class="col-xs-12 field-ctn" id="dateField">
       <label for="notificationDate">
         {{"RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate}}:
       </label>
@@ -71,11 +74,15 @@
             <input working-date-picker x-ng-click="open($event, 'opened2')" type="text"
                    class="form-control  date-picker-input" datepicker-popup="{{format}}"
                    show-weeks="false"
-                   is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
+                   is-open="opened2" datepicker-options="dateOptions"
                    x-ng-required="true" close-text="Close"
                    placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'medium'}}"
+                   min-date="shareActionVm.newShare.getMinDate()"
+                   min="{{shareActionVm.newShare.getMinDate() | date: 'fullDate'}}"
+                   max-date="shareActionVm.newShare.notificationDateForUSDA.value"
+                   max="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'fullDate'}}"
                    x-ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
-                   x-ng-model="newShare.notificationDateForUSDA.value"/>
+                   data-ng-model="shareActionVm.newShare.notificationDateForUSDA.value"/>
           </div>
         </div>
       </div>
