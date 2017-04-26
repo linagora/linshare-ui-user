@@ -115,7 +115,8 @@
         {{"RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate}}
       </a>
     </div>
-    <div x-ng-show="shareActionVm.newShare.expirationDate.enable" class="col-xs-12 field-ctn clearfix"
+    <div data-ng-show="shareActionVm.newShare.expirationDate.enable && shareActionVm.newShare.expirationDate.canOverride"
+         class="col-xs-12 field-ctn clearfix"
          id="dateField">
       <label for="comment" class="labelDateExpiration col-xs-6 no-padding">
         {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
@@ -131,12 +132,16 @@
             <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
                    class="form-control date-picker-input" datepicker-popup="{{format}}"
                    show-weeks="false"
-                   is-open="opened" min-date="mainVm.sidebar.getData().minDate"
+                   is-open="opened"
                    datepicker-options="mainVm.sidebar.getData().dateOptions"
-                   x-ng-required="true" close-text="Close"
+                   data-ng-required="true" close-text="Close"
                    placeholder="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
-                   x-ng-disabled="!shareActionVm.newShare.expirationDate.userCanOverride"
-                   x-ng-model="shareActionVm.newShare.expirationDate.value"/>
+                   min-date="shareActionVm.newShare.getMinDate()"
+                   min="{{shareActionVm.newShare.getMinDate() | date: 'fullDate'}}"
+                   max-date="shareActionVm.newShare.expirationDate.value"
+                   max="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
+                   data-ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
+                   data-ng-model="shareActionVm.newShare.expirationDate.value"/>
           </div>
         </div>
       </div>

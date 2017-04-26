@@ -20,7 +20,8 @@ angular.module('linshare.share')
 
     functionalityRestService.getFunctionalityParams('SHARE_EXPIRATION').then(function(expiration) {
       angular.extend(expirationDate, expiration);
-      expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit).subtract(1, 'd').valueOf();
+      expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit)
+        .subtract(1, 'days').valueOf();
     });
 
     functionalityRestService.getFunctionalityParams('SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER').then(function(param) {
@@ -67,7 +68,9 @@ angular.module('linshare.share')
 
       this.waitingUploadIdentifiers = shareJson.waitingUploadIdentifiers || [];
       this.uploadingDocuments = [];
-
+      this.getMinDate = function() {
+        return moment().endOf('day').valueOf();
+      };
     }
 
     //TODO: shouldn't exist same as app/modules/linshare.components/autocompleteUsers/autocompleteUsersController.js
