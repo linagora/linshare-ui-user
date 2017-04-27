@@ -3,6 +3,7 @@
     "INFO": "Info"
   },
   "AUTHOR_ME": "Moi",
+  "AUTHOR_SUPERADMIN": "Super administrateur",
   "AUTHOR_SYSTEM": "Le système",
   "BREADCRUMB_TITLE_AUDIT": "Historique d'activité",
   "DETAILS_POPUP": {

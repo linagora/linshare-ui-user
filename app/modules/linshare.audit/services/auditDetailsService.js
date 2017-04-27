@@ -76,6 +76,7 @@
 
     var
       author_me,
+      author_superadmin,
       author_system,
       service = {
         generateAllDetails: generateAllDetails
@@ -95,12 +96,13 @@
     function generateAllDetails(loggedUserUuid, auditDetails) {
       return $q(function(resolve) {
         author_me = $filter('translate')('AUTHOR_ME');
+        author_superadmin = $filter('translate')('AUTHOR_SUPERADMIN');
         author_system = $filter('translate')('AUTHOR_SYSTEM');
         _.forEach(auditDetails, function(auditAction) {
           if (auditAction.resource) {
             generateDetails(loggedUserUuid, auditAction);
           } else {
-            auditAction.resource = auditAction.actor;
+            auditAction.resource = auditAction.authUser;
             generateDetails(loggedUserUuid, auditAction);
           }
         });
@@ -154,7 +156,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setAuthorName(auditAction) {
-      return auditAction.isAuthor ? author_me : setFullName(auditAction.actor);
+      return auditAction.isAuthor ? author_me : setFullName(auditAction.authUser);
     }
 
     /**
@@ -178,8 +180,10 @@
      */
     function setFullName(user) {
       var fullName;
-      if(user.role === 'SUPERADMIN') {
+      if (user.role === 'SYSTEM') {
         fullName = author_system;
+      } else if (user.role === 'SUPERADMIN') {
+        fullName = author_superadmin;
       } else if (user.name) {
         fullName = user.name;
       } else {
@@ -208,7 +212,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setIsAuthor(auditAction, loggedUserUuid) {
-      return (auditAction.actor.uuid === loggedUserUuid);
+      return (auditAction.authUser.uuid === loggedUserUuid);
     }
 
     /**
@@ -276,8 +280,8 @@
     function setShareRecipient(auditAction, loggedUserUuid) {
       var shareRecipient;
       // TODO : no need first check when recipient will be added for ANONYMOUS-CREATE audit
-      if(auditAction.type === TYPES_KEY.ANONYMOUS_SHARE_ENTRY || auditAction.type === TYPES_KEY.SHARE_ENTRY) {
-        if(!auditAction.resource.recipient) {
+      if (auditAction.type === TYPES_KEY.ANONYMOUS_SHARE_ENTRY || auditAction.type === TYPES_KEY.SHARE_ENTRY) {
+        if (!auditAction.resource.recipient) {
           shareRecipient = auditAction.recipientMail;
         } else {
           shareRecipient = (auditAction.resource.recipient.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.recipient);
@@ -447,7 +451,7 @@
       var userVarious;
       if (auditAction.resource.firstName) {
         userVarious = (auditAction.resource.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource);
-      } else if (auditAction.resource.sender && (auditAction.resource.sender.uuid !== auditAction.owner.uuid)) {
+      } else if (auditAction.resource.sender && (auditAction.resource.sender.uuid !== auditAction.actor.uuid)) {
         userVarious = (auditAction.resource.sender.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.sender);
       } else if (auditAction.resource.recipient) {
         userVarious = (auditAction.resource.recipient.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.recipient);
