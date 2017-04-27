@@ -148,8 +148,9 @@
       var _destinationNodeUuid = destinationNodeUuid || workgroupNodesVm.folderDetails.folderUuid;
       workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem, _destinationNodeUuid)
         .then(function(data) {
+          var copiedNode = workgroupNodesRestService.restangularize(data, workgroupNodesVm.folderDetails.workgroupUuid);
           toastService.success(copyNodeSuccessMessage);
-          addNewItemInTableParams(data);
+          addNewItemInTableParams(copiedNode);
         });
     }
 
@@ -316,7 +317,7 @@
       };
 
       if (canEnter && isNotInEditMode) {
-        if(_.isNil(folderDetails.folderUuid)) {
+        if (_.isNil(folderDetails.folderUuid)) {
           $state.go('sharedspace.workgroups.root', folderDetails);
         } else {
           $state.go('sharedspace.workgroups.folder', folderDetails);
