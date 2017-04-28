@@ -39,15 +39,32 @@
 .files #breadcrumb-wrap.deep-nav {
   .breadcrumbs-ctn {
     .left-arrow {
-      display: inline-block;
+      display: flex;
       margin-left: 0;
       float: left;
-      margin-top: 1px;
-      font-size: 2.2em;
-      margin-right: 3px;
-      width: 25px;
-      text-align: center;
+      margin-top: 5px;
+      margin-left: 5px;
+      font-size: 0.7em;
       color: #2f2f2f;
+      position: relative;
+      top: 0;
+      line-height: 1;
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+        .ls-previous-caret {
+          font-size: 1.25em;
+          padding-right: 5px;
+        }
+      }
+      &:not(.disabled) {
+        a i {
+          color: #4a4a4a;
+        }
+      }
     }
     .explorer-previous-lvl {
       display: none;
@@ -61,7 +78,7 @@
     }
     #root-level a {
       text-transform: uppercase;
-      max-width: 140px;
+      max-width: 200px;
       color: #05b1ff !important;
       cursor: default;
     }
@@ -78,6 +95,9 @@
 }
 
 .files #breadcrumb-wrap.deep-nav {
+  .breadcrumbs-ctn {
+    display : flex;
+  }
   #action-header {
     width: auto;
     min-width: 385px;
@@ -227,5 +247,15 @@
   }
   .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break div.folder-level:last-child a {
     max-width: 185px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .files #breadcrumb-wrap.deep-nav {
+    #action-header {
+      width: 100%;
+      min-width: 100%;
+      flex: 1 1 auto;
+    }
   }
 }

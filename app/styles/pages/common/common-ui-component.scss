@@ -207,9 +207,8 @@ POPOVER ADD BUTTON OVERIDE
       i {
         display: block;
         text-align: center;
-        font-size: 30px;
-        margin-bottom: 10px;
-        height: 30px;
+        font-size: 2.5em;
+        margin-bottom: 3px;
       }
       p {
         font-size: 0.8em;
@@ -608,7 +607,8 @@ li.dp-actions {
   MAIN BUTTON WITH ICON
 ***********************/
 
-.ls-icon-blue-btn{
+.icon-blue-btn{
+  font-family: roboto,sans-serif;
   color: #ffffff !important;
   margin-left: 8px;
   padding: 0.3em 0.6em;
@@ -629,7 +629,25 @@ li.dp-actions {
   ACTIVITY CONTAINER
 ***********************/
 
+.audit-card {
+  margin-bottom: 0.6em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #fff;
+  border-radius: 2px;
+  padding: 0.8em;
+  a {
+    color: #079add;
+    transition : color 400ms ease-in-out;
+  }
+  .header-log-info a span:nth-child(2) {
+    display: none;
+  }
+}
+
 .activity-log-ctn {
+  p {
+    margin-bottom: 0;
+  }
   .action-activity-log {
     color: #5e5e5e;
     font-weight: bold;

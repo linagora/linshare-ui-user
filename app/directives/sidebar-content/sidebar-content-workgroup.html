@@ -29,7 +29,7 @@
         <md-tab id="tab3" label="{{'ACTIVITIES' | translate}}" class="col-xs-4 noPadding disabled">
           <md-content class="md-padding">
             <div data-ng-repeat="auditAction in mainVm.sidebar.getData().currentSelectedDocument.current.auditActions"
-                 audit-details="{{auditAction}}"></div>
+                 audit-details="{{auditAction}}" class="audit-card"></div>
           </md-content>
         </md-tab>
       </md-tabs>

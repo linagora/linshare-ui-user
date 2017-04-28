@@ -54,7 +54,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn waves-effect m-r-10 ls-icon-blue-btn"
+              <button class="btn waves-effect m-r-10 icon-blue-btn"
                       data-ng-click="auditVm.findAuditActionsByDate()">
                 <i class="zmdi zmdi-search"></i>{{'TOOLBAR.SEARCH' | translate}}
               </button>
@@ -146,8 +146,8 @@
       </div>
       <div class="card-body collapsible-content">
         <div class="table-responsive">
-          <table class="table standard-read-only-table table-form-filters detail-action-col"
-                 id="fixed-activity-table-height" data-ng-table="auditVm.tableParams" show-filter="true">
+          <table class="table standard-read-only-table table-form-filters detail-action-col fixed-activity-table-height"
+                 data-ng-table="auditVm.tableParams" show-filter="true">
             <tr data-ng-repeat="auditAction in $data" data-ng-cloak check-table-height>
               <td data-title="'TABLE_HEADER.ACTOR' | translate" data-filter="{authorName :'text'}"
                   data-sortable="'authorName'" class="truncate"

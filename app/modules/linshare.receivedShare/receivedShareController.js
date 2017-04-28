@@ -376,7 +376,7 @@ angular.module('linshare.receivedShare')
               sorting: {
                 modificationDate: 'desc'
               },
-              count: 10,
+              count: 25,
               filter: $scope.paramFilter
             }, {
               getData: function(params) {

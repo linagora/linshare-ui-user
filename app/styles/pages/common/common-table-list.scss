@@ -143,6 +143,11 @@
         margin: 0 0 0.5em 0;
         font-size: 0.73em;
         color: #797878;
+        span:first-child {
+          span {
+            margin-left: 2px;
+          }
+        }
       }
       span:first-child {
         padding-left: 0;
@@ -185,7 +190,7 @@
   table-layout: fixed;
   overflow: hidden;
   th:nth-child(1), td:nth-child(1) {
-    width: 50px;
+    width: 53px;
   }
   th:nth-child(2), td:nth-child(2) {
     width: 61.5%;
@@ -205,7 +210,7 @@
   > thead > tr > td:first-child,
   > tbody > tr > td:first-child,
   > tfoot > tr > td:first-child {
-    padding-left: 19px;
+    padding-left: 14px;
     padding-right: 9px;
   }
   thead tr:first-child th {
@@ -257,7 +262,9 @@
 .files #file-list-table tr {
   display: flex;
   align-items: center;
-  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 0 !important;
+  background-color: #fff;
   &[role="button"] {
     cursor: default;
   }
@@ -296,6 +303,14 @@
   }
   td.thumb-groups-preview-ls {
     font-size: 1.5em;
+    &.thumb-type-item a .ls-workgroup,
+    &.thumb-type-item a .ls-folder {
+      font-size: 1.1em;
+      line-height: 1.5;
+      display: inline-block;
+      color: #537792;
+      margin-top: -5px;
+    }
   }
   td.thumb-type-item {
     a {
@@ -303,11 +318,14 @@
       position: relative;
       text-align: center;
       height: 100%;
+      font-size: 1.4em;
+      vertical-align: middle;
+      padding-top: 5px;
     }
   }
   .checkbox-ctn-thumb {
     position: absolute;
-    bottom: 0;
+    bottom: 7px;
     width: 12px;
     height: 12px;
     left: inherit;
@@ -393,6 +411,7 @@
 
 .files {
   #file-list-table {
+    background-color: transparent !important;
     .actions {
       height: 42px;
       margin: 0;
@@ -423,7 +442,13 @@
     }
     .actions > li > a > i, .actions > a > i span {
       vertical-align: bottom;
-      font-size: 18px;
+      font-size: 16px;
+     &.ls-received-shares {
+        line-height: 1;
+      }
+      &.ls-add-user-sm {
+        line-height: initial;
+      }
     }
     .actions > li > a > i.fa, .actions > a > i.fa {
       font-size: 15px;
@@ -490,32 +515,52 @@
 #file-list-table tr.double-row {
 
   /* Table listing with double-row */
-    td:nth-child(1) {
-      padding-left: 14px !important;
+    td:first-child {
+      height: 40px;
     }
     .file-name-col {
-      padding-top: 7px;
-      line-height: 1.1em;
+      padding-top: 0;
     }
     .secondary-list-item-info {
-      margin: 0 0 0.5em 0;
+      margin-top: -3px;
+      margin-bottom: 0;
       font-size: 0.85em;
       color: #4f4f4f;
     }
     .checkbox-ctn {
       display: block;
-      margin-top: 4px;
+      margin-top: -2px;
       margin-left: 9px;
       font-size: 0.85em;
       vertical-align: middle;
     }
     .ctn-name-actions {
-      padding-top: 0.3em;
+      padding-top: 0;
+      display: flex;
+      flex-wrap: nowrap;
+      align-content: center;
+      height: 34px;
     }
+   td.thumb-type-item a {
+    padding-top: 0;
+  }
+  .actions-list-ctn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
 }
 
-
-
+@media (max-width:768px) {
+  #file-list-table tr.double-row {
+    td:first-child a {
+      padding-top: 5px;
+    }
+    .file-name-col {
+      padding-top: 0.65em;
+    }
+  }
+}
 
 
 /**********************
@@ -697,10 +742,6 @@
       }
       .invisible {
         opacity: 0;
-      }
-      .thumb-type-item i {
-        padding-top: 7px;
-        font-size: 1.24em;
       }
       &.ng-table .checkbox-ctn-thumb.maintain-vis:after {
         width: 25px;

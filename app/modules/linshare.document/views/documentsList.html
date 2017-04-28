@@ -26,9 +26,9 @@
   <div class="col-xs-8">
     <div data-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())"
          class="visible-xs toolbar-mobile-item col-xs-3">
-      <i class="fa fa-check-square-o select-all-items p-r-10" data-ng-if="!flagsOnSelectedPages[tableParams.page()]">
+      <i class="ls-check-checked select-all-items p-r-10" data-ng-if="!flagsOnSelectedPages[tableParams.page()]">
       </i>
-      <i class="fa fa-square-o select-all-items p-r-10" data-ng-if="flagsOnSelectedPages[tableParams.page()]"></i>
+      <i class="ls-check-o select-all-items p-r-10" data-ng-if="flagsOnSelectedPages[tableParams.page()]"></i>
     </div>
     <i class="zmdi zmdi-share col-xs-2" data-ng-click="onShare()"></i>
     <i class="zmdi zmdi-delete col-xs-2" data-ng-click="deleteDocuments(selectedDocuments)"></i>

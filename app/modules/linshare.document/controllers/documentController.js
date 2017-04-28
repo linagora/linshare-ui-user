@@ -74,17 +74,17 @@
         actions: [{
           action: 'documents.upload({from: lsAppConfig.mySpacePage})',
           label: 'ADD_FILES_DROPDOWN.UPLOAD_SHARE',
-          icon: 'groups-home-share',
+          icon: 'ls-share-file',
           flowBtn: true
         }, {
           action: null,
           label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
-          icon: 'zmdi zmdi-file-plus',
+          icon: 'ls-upload-fill',
           flowBtn: true
         }, {
           action: null,
           label: 'ADD_FILES_DROPDOWN.UPLOAD_IN_WORKGROUP',
-          icon: 'zmdi zmdi-accounts-alt disabled-work-in-progress',
+          icon: 'ls-shared-space disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         }]

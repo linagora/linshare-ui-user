@@ -4,8 +4,12 @@
 /**********************
   CONTACT LISTS FILE LISTING
 ***********************/
-td .zmdi-account-box-phone {
-  color : #636363;
+td .ls-contact-list-item {
+  color : #99a2a7;
+  font-size: 1em;
+  text-align: center;
+  align-self: center;
+  margin-right: 0 !important;
 }
 
 .files.contacts-lists-list {
@@ -51,11 +55,11 @@ td .zmdi-account-box-phone {
     color: #7c7c7c;
     line-height: 26px;
     border: solid 1px #c4c4c4;
-    font-size: 0.65em !important;
+    font-size: 0.6em !important;
   }
 }
 
-.contact-lists td .zmdi-account-box-phone {
+.contact-lists td .ls-contact-list-item {
   color :#636262 ;
 }
 
@@ -211,6 +215,12 @@ display : flex ;
     width: 100%;
     margin-top: 0;
     flex: 1 1 auto;
+  }
+  td .ls-contact-list-item {
+    font-size: 1em;
+    text-align: center;
+    align-self: center;
+    margin-right: 0 !important;
   }
 }
 

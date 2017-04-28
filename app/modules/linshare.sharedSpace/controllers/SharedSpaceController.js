@@ -104,34 +104,32 @@ angular.module('linshare.sharedSpace')
       actions: [
         {
           action: null,
-          label: 'WORKGROUPS_LIST.PROJECT',
-          icon: 'groups-project disabled-work-in-progress',
-          //TODO - SMA: Icon not working
+          label: 'WORKGROUPS_LIST.ADD_A_MEMBER',
+          icon: 'ls-add-user disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         },{
           action: null,
           label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
-          icon: 'zmdi zmdi-file-plus fab-groups disabled-work-in-progress',
+          icon: 'ls-upload-fill fab-groups disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         },{
           action: null,
           label: 'WORKGROUPS_LIST.FOLDER',
-          icon: 'groups-folder disabled-work-in-progress',
-          //TODO - SMA: Icon not working
+          icon: 'ls-folder disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         },{
           action: null,
           label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
-          icon: 'zmdi zmdi-pin-account disabled-work-in-progress',
+          icon: 'ls-upload-request disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         },{
           action: null,
-          label: 'WORKGROUPS_LIST.ADD_A_MEMBER',
-          icon: 'groups-add-member disabled-work-in-progress',
+          label: 'WORKGROUPS_LIST.PROJECT',
+          icon: 'ls-project disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         }
@@ -144,8 +142,7 @@ angular.module('linshare.sharedSpace')
         thisctrl.fabButton.actions.splice(2, 0, {
           action: function() {return thisctrl.createWorkGroup();},
           label: 'WORKGROUPS_LIST.SHARED_FOLDER',
-          icon: 'groups-shared-folder'
-          //TODO - SMA: Icon not working
+          icon: 'ls-workgroup'
         });
       }
     });

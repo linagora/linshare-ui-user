@@ -13,8 +13,8 @@
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
             <a href="" data-ui-sref="administration.contactslists.list" >
-              <i class="zmdi zmdi-account-box-phone"></i>
-              {{"CONTACTS_LISTS_DETAILS.CONTACTS_LISTS" | translate}}
+              <i class="zmdi ls-contact-list-item v-center"></i>
+              <span class="v-center" translate>CONTACTS_LISTS_DETAILS.CONTACTS_LISTS</span>
             </a>
             <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
             <a class="current-list-ctn">
@@ -34,8 +34,8 @@
                 <span x-ng-click="showCheckboxes = !showCheckboxes"
                       class="visible-xs toolbar-mobile-item col-xs-3">
                 <a class="select-all-items plain-txt-btn">
-                   <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes}"
-                      ng-click="contactsListsContactsVm.resetSelectedDocuments()"></i>
+                   <i class="ls-multi-select" data-ng-class="{'active-link': showCheckboxes}"
+                      data-ng-click="contactsListsContactsVm.resetSelectedDocuments()"></i>
                 </a>
               </span>
               <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
@@ -160,11 +160,11 @@
             <a x-ng-if="!contactsListsContactsVm.flagsOnSelectedPages[contactsListsContactsVm.tableParams.page()]"
 
                class="select-all-items plain-text-button">
-              <i class="fa fa fa-square-o checkbox-table"></i>
+              <i class="fa ls-check-o checkbox-table"></i>
             </a>
             <a x-ng-if="contactsListsContactsVm.flagsOnSelectedPages[contactsListsContactsVm.tableParams.page()]"
                class="select-all-items plain-text-button">
-              <i class="fa fa-check-square-o"></i>
+              <i class="ls-check-checked"></i>
             </a>
           </div>
           <div class="exit-selection actions" x-ng-click="contactsListsContactsVm.resetSelectedDocuments()"
@@ -233,7 +233,7 @@
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
               <span class="grey-clr bg-info-icon">
-                <span class="zmdi zmdi-account-box-phone"></span>
+                <span class="ls-contact-list-item m-r-10"></span>
               </span>
             </div>
             <div class="dnd-txt-content">
@@ -247,11 +247,11 @@
                 role="button" tabindex="0" class="display-block center">
             <a x-ng-if="!contactsListsContactsVm.flagsOnSelectedPages[contactsListsContactsVm.tableParams.page()]"
                class="select-all-items plain-text-button checkboxCtn">
-              <i class="fa fa-square-o checkbox-table"></i>
+              <i class="ls-check-o checkbox-table"></i>
             </a>
             <a x-ng-if="contactsListsContactsVm.flagsOnSelectedPages[contactsListsContactsVm.tableParams.page()]"
                class="select-all-items plain-text-button">
-              <i class="fa fa-check-square-o"></i>
+              <i class="ls-check-checked"></i>
             </a>
             </span>
         </script>
@@ -262,7 +262,7 @@
         <!-- DOCUMENTS LIST -->
         <div class="card-body collapsible-content">
           <div class="table-responsive">
-            <table id="file-list-table" class="table table-vmiddle"
+            <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
                    x-ng-table="contactsListsContactsVm.tableParams"
                    show-filter="true">
               <tr x-ng-repeat="contactsListContact in $data"
@@ -418,10 +418,10 @@
   <div class="col-xs-8">
     <div x-ng-click="contactsListsListVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
          class="visible-xs toolbar-mobile-item col-xs-3" >
-      <i class="fa fa-check-square-o select-all-items p-r-10"
+      <i class="ls-check-checked select-all-items p-r-10"
          x-ng-if="!contactsListsContactsVm.flagsOnSelectedPages[contactsListsContactsVm.tableParams.page()]">
       </i>
-      <i class="fa fa-square-o select-all-items p-r-10"
+      <i class="ls-check-o select-all-items p-r-10"
          x-ng-if="contactsListsContactsVm.flagsOnSelectedPages[contactsListsContactsVm.tableParams.page()]">
       </i>
     </div>

@@ -11,9 +11,10 @@
   #action-header.activity-logs-seach-panel {
     display : block;
     flex : 1 1 auto;
+    max-width: 500px;
     width: 0;
     > div {
-      min-width: 614px;
+      min-width: 500px;
     }
     .btn{
       margin-top : 4px;
@@ -29,7 +30,7 @@
 
 @media (min-width: 768px) {
 
-  #fixed-activity-table-height {
+  .fixed-activity-table-height {
     table-layout: fixed;
     overflow: hidden;
     thead {

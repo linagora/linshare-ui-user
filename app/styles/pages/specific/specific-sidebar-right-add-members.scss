@@ -16,6 +16,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .select-chosen-wkgps #rights_select {
+    margin-left: 0.3em !important;
+  }
+}
+
 .select-chosen-wkgps .chosen-container-single.chosen-container-single-nosearch {
   width: 81px !important;
   float: right;

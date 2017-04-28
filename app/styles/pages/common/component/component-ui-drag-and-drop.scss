@@ -53,6 +53,7 @@
   margin-top: 0;
   user-drag: none;
   user-select: none;
+  pointer-events: none;
   .drag-and-drop-content {
     display: table-cell;
     vertical-align: middle;
@@ -234,14 +235,31 @@ div.bordered-circle {
   .grey-clr.bg-info-icon {
     position: relative;
     z-index: 5;
+    display: flex;
+    justify-content: center;
+    height: inherit;
     .groups-upload-file {
       font-size: 1.4em;
       line-height: 160%;
     }
+    > span {
+      display: flex;
+      align-items: center;
+      font-size: 1.45em;
+      &.ls-guest-account {
+        font-size:  2.1em;
+      }
+      &.ls-received-shares {
+        font-size: 1.3em;
+      }
+      &.ls-contact-list-item {
+        margin-right: 5px;
+      }
+    }
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .upload-files .drag-and-drop-ctn.reset-content-width {
     height: calc(100% - 150px) !important;
   }
@@ -253,7 +271,7 @@ div.bordered-circle {
     transition: opacity 500ms ease-in-out;
     height: 100% !important;
     position: fixed;
-    z-index: 0;
+    z-index: 2;
     text-align: center;
     vertical-align: middle;
     .drag-and-drop-content {

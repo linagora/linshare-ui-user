@@ -96,7 +96,7 @@
 #file-list-table.ng-table.wider-first-col.col-4-table th:nth-child(2),
 #file-list-table.ng-table.wider-first-col.col-4-table td:nth-child(2) {
   text-align: center;
-  flex: 0 0 50px;
+  flex: 0 0 52px;
 }
 
 #file-list-table.ng-table.wider-first-col.col-4-table th:nth-child(4),
@@ -141,16 +141,10 @@
   .files #file-list-table.col-4-table tr > td:nth-child(3) {
     display: block;
     float: left;
-    width: 85%;
+    width: 100%;
     min-width: 285px;
-    max-width: 93%;
+    max-width: 100%;
     padding-left: 0.5em;
-    .file-name-col {
-      padding-top: 11px;
-      padding-left: 0;
-      padding-right: 0;
-      line-height: 14px;
-    }
   }
   .files #file-list-table.wider-first-col.col-4-table tr > td:nth-child(3) .file-name-col {
     padding-left: 3px;
@@ -160,7 +154,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .files {
     #file-list-table.col-4-table {
       tr > td:nth-child(2) {
@@ -168,25 +162,42 @@
         float: left;
         min-width: 35px;
         overflow: hidden;
-        padding-left: 7px;
-        padding-right: 7px;
-        padding-top: 0;
+        padding: 0;
         a {
           position: relative;
-          padding-top: 7px;
+          padding-top: 0;
           padding-left: 5px;
+          height: inherit;
           i {
             font-size: 1.2em;
             padding: 0;
           }
         }
       }
+      ul.actions {
+        text-align: center;
+        justify-content: center;
+      }
+      .ctn-name-actions {
+        padding-top: 0;
+        height: 30px;
+        display: flex;
+        justify-content: space-between;
+        .file-name-col {
+          padding-top: 0;
+        }
+        .actions-list-ctn {
+          padding-top: 0;
+          align-self: center;
+        }
+      }
     }
-
   }
-
   #file-list-table.ng-table.wider-first-col.col-4-table td:nth-child(2) {
     flex: 0 0 40px;
     height: inherit;
+  }
+  #file-list-table.ng-table td.thumb-groups-preview-ls.thumb-type-item a .ls-workgroup {
+    margin-top: 0 !important;
   }
 }

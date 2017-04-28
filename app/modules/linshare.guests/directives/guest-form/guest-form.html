@@ -2,20 +2,6 @@
   data-ng-class="{'form-create-guests': !guestObject.uuid}" >
   <form class="form-sidebar" name="formName">
     <div class="form-group fg-float m-b-30">
-      <div class="fg-line" x-ng-class="{'has-error' : ((formName.lastname.$touched || formName.$submitted)
-                                                        && formName.lastname.$invalid),
-                                      'fg-toggled' : lastNameFocus,
-                                      'fg-not-empty' : !formName.lastname.$error.required}">
-        <input type="text" class="input-sm form-control fg-input" name="lastname" id="lastname"
-               required x-ng-model="guestObject.lastName"
-               x-ng-focus="lastNameFocus=true" x-ng-blur="lastNameFocus=false">
-        <label class="fg-label required" for="lastname">{{"SIDEBAR.LABEL.LASTNAME" | translate}}</label>
-        <span x-ng-show="(formName.lastname.$touched || formName.$submitted) && formName.lastname.$invalid">
-           {{"SIDEBAR.ERROR.INVALID_EMPTY_FIELD" | translate}}
-        </span>
-      </div>
-    </div>
-    <div class="form-group fg-float m-b-30">
       <div class="fg-line" x-ng-class="{'has-error' : ((formName.firstname.$touched || formName.$submitted)
                                                        && formName.firstname.$invalid),
                                         'fg-toggled' : firstNameFocus,
@@ -26,6 +12,20 @@
         <label class="fg-label required" for="firstname">{{"SIDEBAR.LABEL.FIRSTNAME" | translate}}</label>
         <span x-ng-show="(formName.firstname.$touched || formName.$submitted) && formName.firstname.$invalid">
             {{"SIDEBAR.ERROR.INVALID_EMPTY_FIELD" | translate}}
+        </span>
+      </div>
+    </div>
+    <div class="form-group fg-float m-b-30">
+      <div class="fg-line" data-ng-class="{'has-error' : ((formName.lastname.$touched || formName.$submitted)
+                                                        && formName.lastname.$invalid),
+                                      'fg-toggled' : lastNameFocus,
+                                      'fg-not-empty' : !formName.lastname.$error.required}">
+        <input type="text" class="input-sm form-control fg-input" name="lastname" id="lastname"
+               required data-ng-model="guestObject.lastName"
+               data-ng-focus="lastNameFocus=true" data-ng-blur="lastNameFocus=false">
+        <label class="fg-label required" for="lastname" translate>SIDEBAR.LABEL.LASTNAME</label>
+        <span data-ng-show="(formName.lastname.$touched || formName.$submitted) && formName.lastname.$invalid">
+          <span translate>SIDEBAR.ERROR.INVALID_EMPTY_FIELD</span>
         </span>
       </div>
     </div>

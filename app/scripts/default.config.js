@@ -37,7 +37,7 @@
       },
       simultaneous_upload: 1,
       tableParams: {
-        count: 10,
+        count: 25,
         sorting: {
           modificationDate: 'desc'
         }

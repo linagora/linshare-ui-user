@@ -117,6 +117,9 @@ body:not(.sw-toggled) #sidebar {
 #sidebar .main-menu > li > a i {
   background-color: rgba(255, 255, 255, 0);
   transition: all 200ms ease-in-out;
+  i {
+    line-height: 0.9;
+  }
 }
 
 #sidebar .main-menu > li.sub-menu > ul > li,

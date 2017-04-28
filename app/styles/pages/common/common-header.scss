@@ -236,6 +236,9 @@ header > ul.header-inner > li.pull-right > ul.top-menu > li > a {
       text-align: center;
       > i {
         vertical-align: text-top;
+        &.ls-uploads{
+          line-height: 1.25;
+        }
       }
       &.ctn-badge-count {
         position: absolute;

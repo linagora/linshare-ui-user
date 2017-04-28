@@ -12,8 +12,9 @@
           </div>
 
           <div class="breadcrumbs-ctn hidden-xs">
-            <a class="click-disabled"><i class="zmdi zmdi-account-box"></i>
-              {{"BREADCRUMB_TITLE_GUEST" | translate}}
+            <a class="click-disabled">
+              <i class="ls-guest-account v-center"></i>
+              <span class="v-center" translate>BREADCRUMB_TITLE_GUEST</span>
             </a>
             <span class="sub-category-chevron pipe-separator">|</span>
             <a x-ng-if="guestVm.isMineGuest" class="click-disabled">
@@ -29,7 +30,7 @@
                 then the selected items should be deselected cf resetSelectedGuests() -->
               <span x-ng-click="showCheckboxes = !showCheckboxes " class="visible-xs toolbar-mobile-item col-xs-3">
                 <a class="select-all-items plain-txt-btn">
-                  <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes}"></i>
+                  <i class="ls-multi-select" data-ng-class="{'active-link': showCheckboxes}"></i>
                 </a>
               </span>
               <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
@@ -220,11 +221,11 @@
            x-ng-click="guestVm.tableSelectAll(guestVm.tableParams.data,guestVm.tableParams.page())">
         <a x-ng-if="!guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]"
            class="select-all-items plain-txt-btn ng-scope">
-          <i class="fa fa fa-square-o checkbox-table"></i>
+          <i class="fa ls-check-o checkbox-table"></i>
         </a>
         <a x-ng-if="guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]"
            class="select-all-items plain-txt-btn ng-scope">
-          <i class="fa fa-check-square-o"></i>
+          <i class="ls-check-checked"></i>
         </a>
       </div>
       <div class="exit-selection actions" x-ng-click="guestVm.tableResetSelectedGuests()"
@@ -304,7 +305,7 @@
         <div class="drag-icon-ctn">
           <div class="bordered-circle">&nbsp;</div>
           <span class="grey-clr bg-info-icon">
-            <span class="zmdi zmdi-account-box"></span>
+            <span class="ls-guest-account"></span>
           </span>
         </div>
         <div class="dnd-txt-content">
@@ -319,18 +320,18 @@
             tabindex="0" class="display-block center">
           <a x-ng-if="!guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]"
              class="select-all-items plain-txt-btn ng-scope" >
-            <i class="fa fa fa-square-o checkbox-table"></i>
+            <i class="fa ls-check-o checkbox-table"></i>
           </a>
           <a x-ng-if="guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]"
              class="select-all-items plain-txt-btn ng-scope">
-            <i class="fa fa-check-square-o"></i>
+            <i class="ls-check-checked"></i>
           </a>
           </span>
     </script>
     <!-- DOCUMENTS LIST  -->
     <div class="card-body collapsible-content">
       <div class="table-responsive">
-        <table id="file-list-table" class="table table-vmiddle" x-ng-table="guestVm.tableParams" show-filter="true">
+        <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height" x-ng-table="guestVm.tableParams" show-filter="true">
           <tr x-ng-repeat="guestData in $data" ls-item-selection=""
               data-selected-documents="guestVm.selectedGuests"
               data-document-file="guestData"
@@ -532,11 +533,11 @@
   <div class="col-xs-8">
     <div x-ng-click="guestVm.tableSelectAll(guestVm.tableParams.data, guestVm.tableParams.page())"
          class="visible-xs toolbar-mobile-item col-xs-3">
-      <i class="fa fa-check-square-o select-all-items p-r-10"
-         x-ng-if="!guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]">
+      <i class="ls-check-checked select-all-items p-r-10"
+         data-ng-if="!guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]">
       </i>
-      <i class="fa fa-square-o active-link select-all-items p-r-10"
-         x-ng-if="guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]">
+      <i class="ls-check-o active-link select-all-items p-r-10"
+         data-ng-if="guestVm.flagsOnSelectedPages[guestVm.tableParams.page()]">
       </i>
     </div>
     <i class="zmdi zmdi-edit col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"

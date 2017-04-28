@@ -34,7 +34,7 @@
                     </div>
                   </div>
                 </a>
-                <a uib-dropdown-toggle href=""><i class="tm-icon icon-transfert"></i>
+                <a uib-dropdown-toggle href=""><i class="tm-icon ls-uploads"></i>
                   <i class="tm-icon icon-transfert" id="newUploadIcon" new-upload-bounce></i>
                 </a>
                 <div class="dropdown-menu pull-right dropdown-menu-lg action-link" uib-dropdown-menu>
@@ -121,13 +121,13 @@
               </div>
             </li>
             <li class="dropdown hidden-xs" uib-dropdown>
-              <a uib-dropdown-toggle href=""><i class="tm-icon zmdi zmdi-account zmdi-hc-2x"></i></a>
+              <a uib-dropdown-toggle href=""><i class="tm-icon ls-my-profile"></i></a>
               <ul class="dropdown-menu dm-icon pull-right">
                 <li>
                   <a href="">{{loggedUser.firstName}} {{loggedUser.lastName}}</a>
                 </li>
                 <li x-ng-show="linshareModeProduction == false">
-                  <a href=""><i class="zmdi zmdi-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
+                  <a href=""><i class="zmdi ls-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
                 </li>
                 <li>
                   <a x-ng-controller="AuthenticationController as authenticationVm" x-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">

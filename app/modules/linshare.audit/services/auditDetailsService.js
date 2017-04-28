@@ -37,16 +37,16 @@
       SENTENCES_KEYS_PREFIX = 'DETAILS_POPUP.SENTENCES',
       TYPE_ICONS = {
         'ANONYMOUS_SHARE_ENTRY': 'zmdi zmdi-share',
-        'AUTHENTICATION': 'zmdi zmdi-account',
-        'CONTACTS_LISTS': 'zmdi zmdi-account-box-phone',
-        'CONTACTS_LISTS_CONTACTS': 'zmdi zmdi-account-box-phone',
+        'AUTHENTICATION': 'ls-my-profile',
+        'CONTACTS_LISTS': 'ls-contact-list-item',
+        'CONTACTS_LISTS_CONTACTS': 'ls-contact-list-item',
         'DOCUMENT_ENTRY': 'zmdi zmdi-file',
-        'GUEST': 'zmdi zmdi-account-box',
+        'GUEST': 'ls-guest-account',
         'SHARE_ENTRY': 'zmdi zmdi-share',
-        'WORKGROUP': 'zmdi zmdi-accounts-alt',
-        'WORKGROUP_DOCUMENT': 'zmdi zmdi-accounts-alt',
-        'WORKGROUP_FOLDER': 'zmdi zmdi-accounts-alt',
-        'WORKGROUP_MEMBER': 'zmdi zmdi-accounts-alt'
+        'WORKGROUP': 'ls-workgroup',
+        'WORKGROUP_DOCUMENT': 'zmdi zmdi-file',
+        'WORKGROUP_FOLDER': 'ls-folder',
+        'WORKGROUP_MEMBER': 'ls-user'
       },
       TYPES_KEY = {
         ANONYMOUS_SHARE_ENTRY: 'ANONYMOUS_SHARE_ENTRY',

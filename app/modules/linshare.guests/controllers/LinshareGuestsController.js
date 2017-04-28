@@ -177,7 +177,7 @@
         sorting: {
           modificationDate: 'desc'
         },
-        count: 10,
+        count: 25,
         filter: guestVm.paramFilter
       }, {
         getData: function(params) {

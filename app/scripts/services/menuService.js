@@ -69,7 +69,7 @@
 
       administrations = {
         name: 'MENU_TITLE.ADMIN',
-        icon: 'zmdi zmdi-settings-square',
+        icon: 'ls-settings',
         color: '#E91E63',
         disabled: false,
         links: [{
@@ -93,7 +93,7 @@
 
       files = {
         name: 'MENU_TITLE.FILES',
-        icon: 'zmdi zmdi-account',
+        icon: 'ls-my-space',
         color: '#2196F3',
         disabled: false,
         links: [{
@@ -110,7 +110,7 @@
       home = {
         name: 'MENU_TITLE.HOME',
         link: 'home',
-        icon: 'zmdi zmdi-home',
+        icon: 'ls-homepage',
         color: '#05B1FF',
         disabled: false
       };
@@ -118,20 +118,21 @@
       myUploads = {
         name: 'MENU_TITLE.UPLOAD_AND_SHARE',
         link: 'documents.upload',
-        icon: 'zmdi zmdi-upload',
+        icon: 'ls-uploads',
         color: '#05B1FF',
       };
 
       sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
         link: 'sharedspace.all',
-        icon: 'groups-home-workgroup',
-        color: '#05B1FF'
+        icon: 'ls-shared-space',
+        color: '#05B1FF',
+        disabled: false
       };
 
       uploads = {
         name: 'MENU_TITLE.UPLOAD_MANAGMENT',
-        icon: 'zmdi zmdi-pin-account',
+        icon: 'ls-upload-request',
         color: '#8BC34A',
         disabled: lsAppConfig.production,
         links: [{

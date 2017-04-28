@@ -284,7 +284,7 @@
           workgroupNodesVm.fabButton.actions.push({
             action: null,
             label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
-            icon: 'zmdi zmdi-file-plus fab-groups',
+            icon: 'ls-upload-fill',
             flowBtn: true,
             hide: workgroupNodesVm.currentWorkgroupMember.readonly
           });
@@ -455,36 +455,34 @@
         },
         actions: [{
           action: null,
-          label: 'WORKGROUPS_LIST.PROJECT',
-          icon: 'groups-project disabled-work-in-progress',
-          //TODO - SMA: Icon not working
-          disabled: true,
-          hide: lsAppConfig.linshareModeProduction
-        }, {
-          action: null,
           label: 'WORKGROUPS_LIST.SHARED_FOLDER',
-          icon: 'groups-shared-folder disabled-work-in-progress',
-          //TODO - SMA: Icon not working
+          icon: 'ls-workgroup disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
-        }, {
-          action: function() {
-            return workgroupNodesVm.createFolder();
-          },
-          label: 'WORKGROUPS_LIST.FOLDER',
-          icon: 'groups-folder'
-        }, {
-          action: null,
-          label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
-          icon: 'zmdi zmdi-pin-account disabled-work-in-progress',
-          disabled: true,
-          hide: lsAppConfig.linshareModeProduction
-        }, {
+        },{
           action: function() {
             return workgroupNodesVm.showWorkgroupDetails(true);
           },
           label: 'WORKGROUPS_LIST.ADD_A_MEMBER',
-          icon: 'groups-add-member'
+          icon: 'ls-add-user'
+        },{
+          action: function() {
+            return workgroupNodesVm.createFolder();
+          },
+          label: 'WORKGROUPS_LIST.FOLDER',
+          icon: 'ls-folder'
+        },{
+          action: null,
+          label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
+          icon: 'ls-upload-request disabled-work-in-progress',
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
+        },{
+          action: null,
+          label: 'WORKGROUPS_LIST.PROJECT',
+          icon: 'ls-project disabled-work-in-progress',
+          disabled: true,
+          hide: lsAppConfig.linshareModeProduction
         }]
       };
     }

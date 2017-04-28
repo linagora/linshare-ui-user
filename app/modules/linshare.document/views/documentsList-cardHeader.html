@@ -2,16 +2,13 @@
   <script type="text/ng-template" id="popover-group.html">
     <div class="add-submenu-set clearfix">
       <a class="col-xs-6" flow-btn href="javascript:void(0)">
-        <i class="zmdi zmdi-upload"></i>
-        <p>{{"WORKGROUPS_LIST.UPLOAD_FILE" | translate}}</p>
+        <i class="ls-upload-item"></i>
+        <p translate>WORKGROUPS_LIST.UPLOAD_FILE</p>
       </a>
-      <div flow-btn>
-        <a class="col-xs-6" x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
-          <i class="groups-home-share"></i>
-          <p>{{"ADD_FILES_DROPDOWN.UPLOAD_SHARE" | translate}}</p>
-        </a>
-      </div>
-    </div>
+      <a class="col-xs-6" x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}" flow-btn>
+        <i class="ls-share-file"></i>
+        <p translate>ADD_FILES_DROPDOWN.UPLOAD_SHARE</p>
+      </a>
   </script>
   <div id="breadcrumb-wrap">
     <div class="menu-popover-ctn hidden-xs clickable waves-effect">
@@ -44,9 +41,9 @@
          <span x-ng-click="$parent.showCheckboxes = !$parent.showCheckboxes"
               class="visible-xs toolbar-mobile-item col-xs-3" >
                <a  class="select-all-items plain-txt-btn">
-                 <i class="zmdi zmdi-check-square"
-                    x-ng-class="{'active-link': showCheckboxes }"
-                    x-ng-click="$parent.showCheckboxes && resetSelectedDocuments()"></i>
+                 <i class="ls-multi-select"
+                    data-ng-class="{'active-link': showCheckboxes}"
+                    data-ng-click="$parent.showCheckboxes && resetSelectedDocuments()"></i>
                </a>
          </span>
         <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
@@ -141,8 +138,7 @@
              x-ng-click="advancedFilterBool = !advancedFilterBool"
              uib-dropdown-toggle
              data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}">
-            <i class="zmdi hidden-xs clickable"
-               x-ng-class="{'zmdi-settings': !advancedFilterBool, 'zmdi-chevron-up active-link': advancedFilterBool}">
+            <i class="zmdi hidden-xs clickable ls-settings">
             </i>
             <ul uib-dropdown-menu=""
                 class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">

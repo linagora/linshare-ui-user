@@ -735,6 +735,12 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
     top: 0;
     z-index: 11;
     display: flex;
+    &.workgroup-header-nav h2 {
+      text-align: left;
+      margin: 0;
+      margin-left: 28px;
+      width: auto;
+    }
     h2.header-more-options {
       color: #fff;
     }
@@ -747,6 +753,7 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
       font-size: 1.45em;
       margin-top: -4px;
       color: #fff;
+      top: 20px;
     }
   }
   #chat.setSidebarRightMobileState {
@@ -989,7 +996,9 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
     display: none;
   }
 
- #content-ctn-sidebar.form-guests {
+ #content-ctn-sidebar.form-guests,
+ #content-ctn-sidebar.create-share
+ {
     height: calc(100% - 50px) !important;
   }
 }

@@ -17,9 +17,9 @@
             </a>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
-            <a href="javascript:void(0)" class="click-disabled">
-              <i class="zmdi zmdi-account-box-phone"></i>
-              {{"CONTACTS_LISTS_DETAILS.CONTACTS_LISTS" | translate}}
+            <a href="javascript:void(0)" class="click-disabled ">
+              <i class="ls-contact-list-item v-center"></i>
+              <span class="v-center" translate>CONTACTS_LISTS_DETAILS.CONTACTS_LISTS</span>
             </a>
             <span class="sub-category-chevron pipe-separator">|</span>
             <a x-ng-if="contactsListsListVm.isFromMyContactsLists" class="click-disabled">
@@ -34,7 +34,7 @@
               <span x-ng-click="showCheckboxes = !showCheckboxes"
                     class="visible-xs toolbar-mobile-item col-xs-3">
                 <a class="select-all-items plain-txt-btn">
-                   <i class="zmdi zmdi-check-square" x-ng-class="{'active-link': showCheckboxes}"
+                   <i class="ls-multi-select" x-ng-class="{'active-link': showCheckboxes}"
                       ng-click="contactsListsListVm.resetSelectedDocuments()"></i>
                 </a>
               </span>
@@ -250,11 +250,11 @@
             <a x-ng-if="!contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
 
                class="select-all-items plain-text-button">
-              <i class="fa fa fa-square-o checkbox-table"></i>
+              <i class="fa ls-check-o checkbox-table"></i>
             </a>
             <a x-ng-if="contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
                class="select-all-items plain-text-button">
-              <i class="fa fa-check-square-o"></i>
+              <i class="ls-check-checked"></i>
             </a>
           </div>
           <div class="exit-selection actions" x-ng-click="contactsListsListVm.resetSelectedDocuments()"
@@ -296,7 +296,7 @@
               <a class="plain-text-button share-link"
                  title="{{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}"
                  x-ng-click="contactsListsListVm.duplicateItem(contactsListsListVm.selectedContactsLists[0])">
-                <i class="fa fa-copy"></i>
+                <i class="zmdi zmdi-copy"></i>
                 <span>{{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}</span>
               </a>
             </span>
@@ -401,7 +401,7 @@
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
               <span class="grey-clr bg-info-icon">
-                <span class="zmdi zmdi-account-box-phone"></span>
+                <span class="ls-contact-list-item"></span>
               </span>
             </div>
             <div class="dnd-txt-content">
@@ -415,18 +415,18 @@
                 role="button" tabindex="0" class="display-block center">
             <a x-ng-if="!contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
                class="select-all-items plain-text-button checkboxCtn">
-              <i class="fa fa-square-o checkbox-table"></i>
+              <i class="ls-check-o checkbox-table"></i>
             </a>
             <a x-ng-if="contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]"
                class="select-all-items plain-text-button">
-              <i class="fa fa-check-square-o"></i>
+              <i class="ls-check-checked"></i>
             </a>
             </span>
         </script>
         <!-- DOCUMENTS LIST  -->
         <div class="card-body collapsible-content">
           <div class="table-responsive">
-            <table id="file-list-table" class="table table-vmiddle" x-ng-table="contactsListsListVm.tableParams"
+            <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height" x-ng-table="contactsListsListVm.tableParams"
                    show-filter="true">
               <tr x-ng-repeat="contactsList in $data"
                   ls-item-selection
@@ -446,7 +446,7 @@
                   <a x-ng-click="showCheckboxes ? contactsListsListVm.addSelectedDocument(contactsList) : null"
                      class="visible-xs">
                     <div x-ng-class="{ 'invisible' : showCheckboxes}">
-                      <i class="zmdi zmdi-account-box-phone"></i>
+                      <i class="ls-contact-list-item m-r-10"></i>
                     </div>
                     <div class="checkbox-ctn-thumb"
                          x-ng-class="{'maintain-vis': contactsList.isSelected , 'hidden-xs' : !showCheckboxes}">
@@ -454,7 +454,7 @@
                   </a>
                   <a x-ng-click="contactsListsListVm.addSelectedDocument(contactsList)" class="hidden-xs">
                     <div x-ng-class="{ 'invisible' : showCheckboxes}">
-                      <i class="zmdi zmdi-account-box-phone"></i>
+                      <i class="ls-contact-list-item m-r-10"></i>
                     </div>
                     <div class="checkbox-ctn-thumb"
                          x-ng-class="{'maintain-vis': contactsList.isSelected , 'hidden-xs' : !showCheckboxes}">
@@ -506,7 +506,7 @@
                             <a x-ng-click="
                                contactsListsListVm.goToContactsListAndAddContacts(contactsList.uuid, contactsList.name)"
                                title="{{'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT' | translate}}" event-propagation-stop>
-                              <i class="zmdi zmdi-account-add"></i>
+                              <i class="ls-add-user-sm"></i>
                             </a>
                           </li>
                           <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
@@ -534,7 +534,7 @@
                               <li>
                                 <a href=""
                                    data-ng-click="contactsListsListVm.goToContactsListAndAddContacts(contactsList.uuid, contactsList.name)">
-                                  <i class="zmdi zmdi-account-add"></i>
+                                  <i class="zmdi ls-add-user-sm"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT</span>
                                 </a>
                               </li>
@@ -552,7 +552,7 @@
                               </li>
                               <li x-ng-show="!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->
                                 <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
-                                  <i class="fa fa-copy"></i>
+                                  <i class="zmdi zmdi-copy"></i>
                                   {{'CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST' | translate}}
                                 </a>
                               </li>
@@ -608,10 +608,10 @@
     <div class="col-xs-8">
       <div x-ng-click="contactsListsListVm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
            class="visible-xs toolbar-mobile-item col-xs-3">
-        <i class="fa fa-check-square-o select-all-items p-r-10"
+        <i class="ls-check-checked select-all-items p-r-10"
            x-ng-if="!contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]">
         </i>
-        <i class="fa fa-square-o select-all-items p-r-10"
+        <i class="ls-check-o select-all-items p-r-10"
            x-ng-if="contactsListsListVm.flagsOnSelectedPages[contactsListsListVm.tableParams.page()]">
         </i>
       </div>
@@ -641,7 +641,7 @@
       <div class="col-xs-2"
            x-ng-show="!linshareModeProduction"
            x-ng-click="contactsListsListVm.duplicateItem(contactsListsListVm.selectedContactsLists[0])">
-        <i class="fa fa-copy"></i>
+        <i class="zmdi zmdi-copy"></i>
       </div>
       <span class="col-xs-9 col-xs-9 no-padding m-t-20"
             x-ng-show="!contactsListsListVm.isFromMyContactsLists &&

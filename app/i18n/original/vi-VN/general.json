@@ -180,7 +180,8 @@
     "UPLOAD_PROPOSITIONS": "Lời mời tải tập tin lên",
     "TBT__UPLOAD_QUEUE": "",
     "UPLOAD_REQUESTS": "Mời tải tập tin lên",
-    "USERS": "Người dùng"
+    "USERS": "Người dùng",
+    "TBT__UPLOAD_AND_SHARE": ""
   },
   "NAVIGATION": {
     "CANCEL": "Hủy",
