@@ -1,0 +1,50 @@
+<div class="container upload-files">
+
+  <!--  ACTIONS ON DOCUMENTS  -->
+
+  <div class="card set-width" id="collapsible-content">
+    <div class="card-header no-padding">
+      <div id="breadcrumb-wrap">
+        <div class="breadcrumbs-ctn hidden-xs">
+          <a href="#" class="breadcrumb"><i class="zmdi zmdi-file"></i>
+            {{"SELECTED_FILES.BREADCRUMB_TITLE" | translate}}
+          </a>
+        </div>
+        <section class="row multi-select visible-xs">
+          <div class="col-xs-2 ctn-mobile-select-count">
+            <span class="number-of-files">{{selectedDocuments.length}}</span>
+            <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
+          </div>
+          <div id="toolbar-actions" class="col-xs-10 show-details-mobile-link">
+            <span>
+              <a x-ng-click="loadSidebarContent()">
+                <i class="fa fa-eye"></i>
+                <span>{{'SELECTED_FILES.SHOW_DETAILS' | translate}}</span>
+              </a>
+            </span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- SELECTED DOCUMENTS LIST  -->
+    <div class="card-body selected-files-list-items">
+      <ul class="list-group actions" >
+        <li class="list-group-item col-xs-12" x-ng-repeat="documentFile in selectedDocuments">
+          <span class="fa ls-1p5x m-r-10" x-ng-class="'{{documentFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
+          <span>{{documentFile.name}}</span>
+          <a href="" class="action-list-selected-files" x-ng-click="removeSelectedDocuments(documentFile)">
+            <i class="zmdi zmdi-close"></i>
+          </a>
+        </li>
+        <li class="list-group-item col-xs-12" x-ng-repeat="(identifier, uploadFile) in selectedUploads">
+          <span class="fa ls-1p5x m-r-10" x-ng-class="'{{uploadFile.type | mimetypeIcone}}'" aria-hidden="true"></span>
+          <span>{{uploadFile.name}}</span>
+          <a href="" class="action-list-selected-files" x-ng-click="removeSelectedDocuments(identifier)">
+            <i class="zmdi zmdi-close"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
