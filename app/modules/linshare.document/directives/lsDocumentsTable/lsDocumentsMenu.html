@@ -3,7 +3,8 @@
       data-ng-class="{'open-r': (mainVm.sidebar.isVisible()) &&
         ((mainVm.sidebar.getContent() === lsAppConfig.details) || (mainVm.sidebar.getContent() === lsAppConfig.shareDetails)
         )}">
-    <li data-ng-click="showCurrentFile(documentFile,$event)" event-propagation-stop class="hidden-action-links">
+    <li data-ng-click="showCurrentFile(documentFile, $event, true)"
+        event-propagation-stop class="hidden-action-links">
       <a href="" title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
         <i class="zmdi zmdi-info-outline"></i>
       </a>
@@ -26,7 +27,7 @@
         <i class="zmdi zmdi-more-vert"></i>
       </a>
       <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
-        <li data-ng-click="showCurrentFile(documentFile,$event)">
+        <li data-ng-click="showCurrentFile(documentFile, $event, true)">
           <a href="">
             <i class="zmdi zmdi-info-outline" translate></i>
              <span translate>ACTION.INFORMATION</span>

@@ -138,7 +138,6 @@
       }, true);
 
       launchTableParamsInitiation();
-
     }
 
     function addUploadedDocument(flowFile) {
@@ -239,7 +238,7 @@
     }
 
     function getDetails(item) {
-      return documentUtilsService.getItemDetails(LinshareDocumentRestService, item);
+      return $scope.showCurrentFile(item);
     }
 
     function getDocumentInfo(uuid) {
@@ -367,11 +366,12 @@
      * @name showCurrentFile
      * @desc Get information from a file and show the sidebar details at a given tab
      * @param {Object} currentFile - A Document file object
-     * @param {event} event - Event occuring launching the action
-     * @param {number} tabIndex - Index of the sidebar details tab to show
+     * @param {event} [event] - Event occuring launching the action
+     * @param {boolean} [openDetailsSidebar] - Open details sidebar
      * @memberOf LinShare.document.documentController
      */
-    function showCurrentFile(currentFile, event, tabIndex) {
+    function showCurrentFile(currentFile, event, openDetailsSidebar) {
+      var deferred = $q.defer();
       $scope.currentSelectedDocument.current = currentFile;
       $q.all([
         LinshareDocumentRestService.get(currentFile.uuid),
@@ -386,16 +386,20 @@
 
         auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain()).then(function(auditActions) {
           $scope.currentSelectedDocument.current.auditActions = auditActions;
-          $scope.data.selectedIndex = tabIndex ? tabIndex : 0;
-          $scope.loadSidebarContent(lsAppConfig.details);
-          if (!_.isUndefined(event)) {
-            var currElm = event.currentTarget;
-            angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-              angular.element(currElm).addClass('activeActionButton');
-            });
+          if(openDetailsSidebar) {
+            $scope.data.selectedIndex = 0;
+            $scope.loadSidebarContent(lsAppConfig.details);
+            if (!_.isUndefined(event)) {
+              var currElm = event.currentTarget;
+              angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
+                angular.element(currElm).addClass('activeActionButton');
+              });
+            }
           }
         });
       });
+      deferred.resolve($scope.currentSelectedDocument.current);
+      return deferred.promise;
     }
 
     function slideTextarea($event) {
