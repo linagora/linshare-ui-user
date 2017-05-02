@@ -240,7 +240,7 @@
           template = template
             .replace('$title', data.listName)
             .replace('$style', '')
-            .replace('$firstLetter', '<i class="zmdi zmdi-favorite"></i>')
+            .replace('$firstLetter', '<i class="ls-contact-list-item"></i>')
             .replace('$name', data.listName)
             .replace('$info', ownerLabel.getOwner(user));
           break;
