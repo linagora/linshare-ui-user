@@ -219,7 +219,7 @@
 
       localStorage.setItem('ma-layout-status', 0);
 
-      mainVm.showTransfert = false;
+      mainVm.showTransfert = true;
       $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
         .then(function(promises) {
           var
