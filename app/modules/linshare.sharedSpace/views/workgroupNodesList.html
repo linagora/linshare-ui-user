@@ -378,11 +378,11 @@
                     </a>
                   </li>
                   <li class="divider hidden-xs m-b-0" data-ng-show="!linshareModeProduction"></li>
-                  <li>
+                  <li data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
                     <a class="parent-sub-menu-link">
                       <i class="zmdi zmdi-copy"></i>
                       <span translate>ACTION.COPY</span>
-                      <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon "></i>
+                      <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon"></i>
                     </a>
                      <ul>
                        <li data-ng-click="workgroupNodesVm.copyNode(workgroupNodesVm.selectedDocuments[0])">
@@ -591,7 +591,7 @@
                                 </a>
                               </li>
                               <li class="divider hidden-xs" data-ng-show="!linshareModeProduction"></li>
-                              <li>
+                              <li data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
                                 <a href="" class="parent-sub-menu-link">
                                   <i class="zmdi zmdi-copy"></i>
                                   <span translate>ACTION.COPY</span>
@@ -748,7 +748,8 @@
           </a>
         </li>
         <li class="divider"></li>
-        <li data-ng-click="workgroupNodesVm.copyNode(nodeItem)">
+        <li data-ng-click="workgroupNodesVm.copyNode(nodeItem)"
+            data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
           <a><i class="zmdi zmdi-copy"></i>
             <span translate>ACTION.COPY_DROPDOWN.SIMPLE_COPY</span>
           </a>
