@@ -5,10 +5,13 @@
         <i class="ls-upload-item"></i>
         <p translate>WORKGROUPS_LIST.UPLOAD_FILE</p>
       </a>
-      <a class="col-xs-6" x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}" flow-btn>
-        <i class="ls-share-file"></i>
-        <p translate>ADD_FILES_DROPDOWN.UPLOAD_SHARE</p>
-      </a>
+      <div flow-btn>
+        <a class="col-xs-6" x-ng-href="{{$state.href('documents.upload', {from: mySpacePage})}}">
+          <i class="ls-share-file"></i>
+          <p translate>ADD_FILES_DROPDOWN.UPLOAD_SHARE</p>
+        </a>
+      </div>
+    </div>
   </script>
   <div id="breadcrumb-wrap">
     <div class="menu-popover-ctn hidden-xs clickable waves-effect">
