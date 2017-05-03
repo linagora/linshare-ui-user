@@ -210,13 +210,6 @@
         $window.localStorage.setItem('sidebarToggleLeft', $scope.mactrl.sidebarToggle.left);
       });
 
-      authenticationRestService.getCurrentUser().then(function(user) {
-        $scope.loggedUser.setUser(user);
-        user.firstLetter = user.firstName.charAt(0);
-        $scope.userLogged = user;
-        getUserQuotas();
-      });
-
       localStorage.setItem('ma-layout-status', 0);
 
       mainVm.showTransfert = true;
@@ -225,7 +218,12 @@
           var
             user = promises[0],
             functionalities = promises[1];
+
           mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
+          $scope.loggedUser.setUser(user);
+          user.firstLetter = user.firstName.charAt(0);
+          $scope.userLogged = user;
+          getUserQuotas();
         });
     }
 
