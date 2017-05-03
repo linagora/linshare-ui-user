@@ -17,6 +17,7 @@
     "DETAILS": {
       "DEFAULT": {
         "NONE": "",
+        "SERVER": "Le serveur est temporairement indisponible",
         "1000": "Erreur inconnue",
         "2000": "Erreur d'authentification",
         "2203": "Vous n'êtes pas autorisé à supprimer cet invité",

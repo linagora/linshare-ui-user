@@ -17,9 +17,9 @@
    * @memberOf LinShareUiUserApp
    */
   function routerConfiguration($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise(function($injector, $location) {
+    $urlRouterProvider.otherwise(function($injector) {
       $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService) {
-        authRedirect($location, $state, authenticationRestService);
+        authRedirect($state, authenticationRestService);
       }]);
     });
 
@@ -58,8 +58,8 @@
         controller: 'loginController',
         controllerAs: 'loginVm',
         resolve: {
-          authentication: function($location, $state, authenticationRestService) {
-            authRedirect($location, $state, authenticationRestService);
+          authentication: function($state, authenticationRestService) {
+            authRedirect($state, authenticationRestService);
           }
         }
       })
@@ -430,16 +430,13 @@
     /**
      * @name authRedirect
      * @desc Redirect the user on the home page if logged in or on the login page if not
-     * @param {Object} $location - Service for url parsing
      * @param {Object} $state - Setvice for router state
      * @param {Object} authenticationRestService - Service for authentication
      * @memberOf LinShareUiUserApp.routerConfiguration
      */
-    function authRedirect($location, $state, authenticationRestService) {
-      var location = $location;
+    function authRedirect($state, authenticationRestService) {
       authenticationRestService.checkAuthentication(false).then(function(data) {
-        if (data.status !== 401) {
-          location.path('/home').replace();
+        if (_.isUndefined(data.status)) {
           $state.go('home');
         } else {
           $state.go('login');

@@ -132,7 +132,11 @@
 
       $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
         $log.debug('$stateChangeError - ', error);
-        $state.go(URL_HOME);
+        if(error.status < 500 && error.status !== 401) {
+          $state.go(URL_HOME);
+        } else {
+          $state.go(URL_LOGIN);
+        }
       });
 
       $scope.$on('event:auth-loginConfirmed', function(event, data) {

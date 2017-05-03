@@ -17,6 +17,7 @@
     "DETAILS": {
       "DEFAULT": {
         "NONE": "",
+        "SERVER": "The server is temporary not responding",
         "1000": "Unknown error",
         "2000": "Authentication error",
         "2203": "You are not authorized to delete this guest",

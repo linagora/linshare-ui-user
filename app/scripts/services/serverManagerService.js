@@ -56,6 +56,7 @@
       var
         errorData,
         deferred = $q.defer(),
+        errCode,
         errorMessageHttpCodes = 'SERVER_RESPONSE.HTTP_CODES.',
         errorMessageDetails = 'SERVER_RESPONSE.DETAILS.' + messagePrefix + '.';
 
@@ -66,6 +67,7 @@
         .catch(function(error) {
           $log.debug('ServerManagerService - responseHandler:' + error);
           errorData = error;
+          errCode = errorData.data.errCode;
           deferred.reject(error);
           switch (error.status) {
             case 400:
@@ -97,6 +99,7 @@
               break;
             case 503:
               errorMessageHttpCodes += 'ERROR_503';
+              errCode = errCode || 'SERVER';
               break;
             case 520:
               errorMessageHttpCodes += 'ERROR_520';
@@ -106,7 +109,6 @@
               break;
           }
           if (showError) {
-            var errCode = errorData.data.errCode;
             errorMessageDetails += _.isUndefined(errCode) ? 'NONE' : errCode;
             $translate.refresh().then(function() {
               $translate([errorMessageHttpCodes, errorMessageDetails]).then(function(translations) {
