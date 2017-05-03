@@ -18,59 +18,62 @@ angular.module('linshare.share')
       notificationDateForUSDA = {},
       secured = {};
 
-    functionalityRestService.getFunctionalityParams('SHARE_EXPIRATION').then(function(expiration) {
-      angular.extend(expirationDate, expiration);
-      expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit)
-        .subtract(1, 'days').valueOf();
-    });
+    /**
+     * @name getFunctionalities
+     * @desc Retireve functionality link to a share
+     * @returns {Promise}
+     * @memberOf linshare.share.ShareObjectService
+     */
+    function getFunctionalities() {
+      return $q.all([functionalityRestService.getAll(), authenticationRestService.getCurrentUser()])
+        .then(function(promises) {
+        var functionalities = promises[0];
 
-    functionalityRestService.getFunctionalityParams('SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER').then(function(param) {
-      angular.extend(creationAcknowledgement, param);
-    });
-    functionalityRestService.getFunctionalityParams('UNDOWNLOADED_SHARED_DOCUMENTS_ALERT').then(function(param) {
-      angular.extend(enableUSDA, param);
-    });
+        angular.extend(notificationDateForUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION);
+        notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
+        angular.extend(enableUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
+        angular.extend(creationAcknowledgement,functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
+        angular.extend(expirationDate, functionalities.SHARE_EXPIRATION);
+        expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit)
+          .subtract(1, 'days').valueOf();
 
-    functionalityRestService.getFunctionalityParams('UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION').then(function(param) {
-      angular.extend(notificationDateForUSDA, param);
-      notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
-    });
-
-    $q.all([functionalityRestService.getFunctionalityParams('ANONYMOUS_URL'), authenticationRestService.getCurrentUser()])
-      .then(function(promises) {
-        angular.extend(secured, promises[0]);
+        angular.extend(secured, functionalities.ANONYMOUS_URL);
         if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
           secured.enable = false;
         }
       });
+    }
 
     function ShareObjectForm(shareJson) {
-      shareJson = shareJson || {};
-      this.documents = shareJson.documents || [];
-      this.recipients = shareJson.recipients || [];
-      recipients = this.recipients;
-      this.mailingListUuid = shareJson.mailingListUuid || [];
-      this.mailingList = shareJson.mailingList || [];
-      this.secured = shareJson.secured || secured;
-      this.creationAcknowledgement = shareJson.creationAcknowledgement || creationAcknowledgement;
-      this.expirationDate = shareJson.expirationDate || expirationDate;
-      this.enableUSDA = shareJson.enableUSDA || enableUSDA;
-      this.notificationDateForUSDA = shareJson.notificationDateForUSDA || notificationDateForUSDA;
+      var self = this;
+      getFunctionalities().then(function() {
+        shareJson = shareJson || {};
+        self.documents = shareJson.documents || [];
+        self.recipients = shareJson.recipients || [];
+        recipients = self.recipients;
+        self.mailingListUuid = shareJson.mailingListUuid || [];
+        self.mailingList = shareJson.mailingList || [];
+        self.secured = shareJson.secured || secured;
+        self.creationAcknowledgement = shareJson.creationAcknowledgement || creationAcknowledgement;
+        self.expirationDate = shareJson.expirationDate || expirationDate;
+        self.enableUSDA = shareJson.enableUSDA || enableUSDA;
+        self.notificationDateForUSDA = shareJson.notificationDateForUSDA || notificationDateForUSDA;
 
-      this.sharingNote = shareJson.sharingNote || '';
-      this.subject = shareJson.subject || '';
-      this.message = shareJson.message || '';
+        self.sharingNote = shareJson.sharingNote || '';
+        self.subject = shareJson.subject || '';
+        self.message = shareJson.message || '';
 
-      this.asyncShare = shareJson.asyncShare || false;
-      this.setAsyncShare = function(state) {
-        this.asyncShare = state;
-      };
+        self.asyncShare = shareJson.asyncShare || false;
+        self.setAsyncShare = function(state) {
+          self.asyncShare = state;
+        };
 
-      this.waitingUploadIdentifiers = shareJson.waitingUploadIdentifiers || [];
-      this.uploadingDocuments = [];
-      this.getMinDate = function() {
-        return moment().endOf('day').valueOf();
-      };
+        self.waitingUploadIdentifiers = shareJson.waitingUploadIdentifiers || [];
+        self.uploadingDocuments = [];
+        self.getMinDate = function() {
+          return moment().endOf('day').valueOf();
+        };
+      });
     }
 
     //TODO: shouldn't exist same as app/modules/linshare.components/autocompleteUsers/autocompleteUsersController.js

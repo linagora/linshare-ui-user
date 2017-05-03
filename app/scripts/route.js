@@ -101,8 +101,8 @@
         templateUrl: 'modules/linshare.receivedShare/views/list.html',
         controller: 'ReceivedController',
         resolve: {
-          user: function(authenticationRestService) {
-            return authenticationRestService.getCurrentUser();
+          user: function(user) {
+            return user;
           },
           files: function(receivedShareRestService) {
             return receivedShareRestService.getList();
