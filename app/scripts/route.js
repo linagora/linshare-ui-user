@@ -42,7 +42,15 @@
         parent: 'common',
         url: '/home',
         templateUrl: 'views/home/home.html',
-        controller: 'HomeController'
+        controller: 'HomeController',
+        resolve: {
+          user: function(user) {
+            return user;
+          },
+          functionalities: function(functionalities) {
+            return functionalities;
+          }
+        }
       })
       .state('login', {
         url: '/login?next',

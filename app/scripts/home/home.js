@@ -10,7 +10,7 @@
     .controller('HomeController', homeController);
 
   homeController.$inject = ['$q', '$scope', '$timeout', '$translate', '$translatePartialLoader',
-    'authenticationRestService', 'functionalityRestService', 'lsAppConfig', 'welcomeMessageRestService'
+    'functionalities', 'lsAppConfig', 'welcomeMessageRestService', 'user'
   ];
 
   /**
@@ -18,8 +18,8 @@
    * @desc Application home management system controller
    * @memberOf linshareUiUserApp
    */
-  function homeController($q, $scope, $timeout, $translate, $translatePartialLoader, authenticationRestService,
-    functionalityRestService, lsAppConfig, welcomeMessageRestService) {
+  function homeController($q, $scope, $timeout, $translate, $translatePartialLoader, functionalities,
+    lsAppConfig, welcomeMessageRestService, user) {
     const LANG_CONVERTER = {
       ENGLISH: {
         lang: 'ENGLISH',
@@ -54,16 +54,10 @@
         uploadGroup: false,
         uploadRequest: false
       };
-      $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
-        .then(function(promises) {
-          var
-            user = promises[0],
-            functionalities = promises[1];
 
-          $scope.cards.myFilesSpace = user.canUpload;
-          $scope.cards.uploadGroup = functionalities.WORK_GROUP.enable;
-          $scope.cards.uploadShare = ($scope.cards.myFilesSpace || $scope.cards.uploadGroup);
-        });
+      $scope.cards.myFilesSpace = user.canUpload;
+      $scope.cards.uploadGroup = functionalities.WORK_GROUP.enable;
+      $scope.cards.uploadShare = ($scope.cards.myFilesSpace || $scope.cards.uploadGroup);
       $scope.fabButton = {
         toolbar: {
           activate: true,
