@@ -17,7 +17,9 @@
       // For application configuration
       accountType: {
         internal: 'INTERNAL',
-        guest: 'GUEST'
+        guest: 'GUEST',
+        superadmin: 'SUPERADMIN',
+        system: 'SYSTEM'
       },
       asyncUploadDelay: 2000,
       date_en_format: 'MM/dd/yyyy',

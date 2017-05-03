@@ -156,7 +156,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setAuthorName(auditAction) {
-      return auditAction.isAuthor ? author_me : setFullName(auditAction.authUser);
+      return auditAction.isAuthor ? author_me : setFullName(auditAction.actor);
     }
 
     /**
@@ -180,9 +180,9 @@
      */
     function setFullName(user) {
       var fullName;
-      if (user.role === 'SYSTEM') {
+      if (user.role === lsAppConfig.accountType.system) {
         fullName = author_system;
-      } else if (user.role === 'SUPERADMIN') {
+      } else if (user.role === lsAppConfig.accountType.superadmin) {
         fullName = author_superadmin;
       } else if (user.name) {
         fullName = user.name;
