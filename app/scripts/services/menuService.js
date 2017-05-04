@@ -54,7 +54,7 @@
         }, {
           name: 'MENU_TITLE.GUESTS',
           link: 'administration.guests',
-          disabled: _.isNil(functionalities.GUEST) ? true : !functionalities.GUESTS.enable && user.canCreateGuest
+          disabled: _.isNil(functionalities.GUESTS) ? true : !functionalities.GUESTS.enable && user.canCreateGuest
         });
 
         files.links.splice(0, 0, {
