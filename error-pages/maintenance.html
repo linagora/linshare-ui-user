@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>LinShare - Server maintenance</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <script type="text/javascript">
+      function goTo(url) {
+        window.location.href = url;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="error-page">
+      <div id="bg">
+        <img src="img/bg-linshare-desktop.png" alt="linshare desktop" class="img-responsive">
+      </div>
+      <div id="copyright-login">
+        <img src="img/linshare-logo-white.png" alt="linshare-logo">
+        <p>You are using the Open Source and free version of LinShare™, powered by Linagora © 2009–2017. Contribute to
+          LinShare R&D by subscribing to an Enterprise offer.
+        </p>
+      </div>
+      <div class="tagline login-libre-and-free-ctn">
+        <div class="libre-and-free">
+          <img src="img/community-white.png" alt="Logo LinShare">
+          <p>Libre &amp; Free</p>
+        </div>
+      </div>
+      <div class="error-area-content">
+        <div class="ctn-content">
+          <div class="error-text">
+            <h2>Server is under maintenance</h2>
+            <p>Please wait a bit, before refreshing for a new attempt.</p>
+          </div>
+          <button class="btn" onclick="goTo('https://new.server.com')">Refresh the page</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
