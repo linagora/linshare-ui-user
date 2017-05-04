@@ -190,6 +190,7 @@
       })
       .state('sharedspace', {
         parent: 'common',
+        abstract: true,
         url: '/sharedspace',
         template: '<div ui-view></div>',
         resolve: {
@@ -206,7 +207,7 @@
         controller: 'SharedSpaceController as vm',
         resolve: {
           workgroups: function(workgroupRestService,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
+          /* jshint ignore:line */ functionalities) { //TODO: will be removed with update ui-router > 1.0
             return workgroupRestService.getList();
           }
         }
@@ -226,7 +227,7 @@
         },
         resolve: {
           nodesList: function(workgroupNodesRestService, $stateParams,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
+          /* jshint ignore:line */ functionalities) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid);
           }
         }
@@ -243,7 +244,7 @@
         },
         resolve: {
           nodesList: function(workgroupNodesRestService, $stateParams,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
+          /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid, $stateParams.folderUuid);
           }
         }
@@ -439,7 +440,9 @@
         if (_.isUndefined(data.status)) {
           $state.go('home');
         } else {
-          $state.go('login');
+          if (!$state.is('login')) {
+            $state.go('login');
+          }
         }
       });
     }

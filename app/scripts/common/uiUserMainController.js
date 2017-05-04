@@ -13,7 +13,8 @@
   UiUserMainController.$inject = ['$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
     'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
     'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
-    'uploadRestService'];
+    'uploadRestService'
+  ];
 
   function UiUserMainController($http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
     authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
@@ -130,9 +131,9 @@
           });
       });
 
-      $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+      $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         $log.debug('$stateChangeError - ', error);
-        if(error.status < 500 && error.status !== 401) {
+        if (error.status < 500 && error.status !== 401) {
           $state.go(URL_HOME);
         } else {
           $state.go(URL_LOGIN);
@@ -140,6 +141,8 @@
       });
 
       $scope.$on('event:auth-loginConfirmed', function(event, data) {
+        setVisualElement();
+
         authenticationRestService.version().then(function(data) {
           $scope.coreVersion = data.version;
         });
@@ -150,7 +153,6 @@
         $scope.loggedUser.setUser(data);
         $scope.userLogged = data;
 
-        getUserQuotas();
         getProductVersion();
 
         if (_.isUndefined($scope.urlTogoAfterLogin)) {
@@ -216,19 +218,28 @@
 
       localStorage.setItem('ma-layout-status', 0);
 
-      mainVm.showTransfert = true;
-      $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
-        .then(function(promises) {
-          var
-            user = promises[0],
-            functionalities = promises[1];
+      setVisualElement();
 
-          mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
-          $scope.loggedUser.setUser(user);
-          user.firstLetter = user.firstName.charAt(0);
-          $scope.userLogged = user;
-          getUserQuotas();
-        });
+      /**
+       * @name set Visual Element
+       * @desc Set visual element for user interaction
+       * @memberOf linshareUiUserApp.UiUserMainController
+       */
+      function setVisualElement() {
+        $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
+          .then(function(promises) {
+            var
+              user = promises[0],
+              functionalities = promises[1];
+
+            mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
+            $scope.loggedUser.setUser(user);
+            user.firstLetter = user.firstName.charAt(0);
+            $scope.userLogged = user;
+            getUserQuotas();
+          });
+      }
+
     }
 
     /**
@@ -284,12 +295,12 @@
       var
         share_array = $scope.share_array,
         shareObject =
-          _.find(share_array, function(element) {
-            _.remove(element.documents, _.isUndefined);
-            return _.find(element.documents, function(doc) {
-              return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
-            });
+        _.find(share_array, function(element) {
+          _.remove(element.documents, _.isUndefined);
+          return _.find(element.documents, function(doc) {
+            return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
           });
+        });
 
       if (!_.isUndefined(shareObject)) {
         _.remove(shareObject.documents, _.isUndefined);
