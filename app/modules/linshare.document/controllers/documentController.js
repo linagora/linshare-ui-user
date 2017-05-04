@@ -5,9 +5,9 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
-  function documentController($scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log, documentsList, $timeout,
-                              documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService, $stateParams,
-                              documentSelected, tableParamsService, auditDetailsService) {
+  function documentController($scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log,
+    documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService,
+    $stateParams, tableParamsService, auditDetailsService) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
     var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;
@@ -28,7 +28,6 @@
     };
     $scope.deleteDocuments = deleteDocuments;
     $scope.documentsList = documentsList;
-    $scope.documentSelected = documentSelected;
     $scope.downloadFile = downloadFile;
     $scope.downloadSelectedFiles = downloadSelectedFiles;
     $scope.flagsOnSelectedPages = {};
@@ -140,18 +139,6 @@
 
       launchTableParamsInitiation();
 
-      if (_.isUndefined($scope.documentSelected)) {
-        $translate('GROWL_ALERT.ERROR.FILE_NOT_FOUND').then(function(message) {
-          toastService.error(message);
-        });
-      } else if ($scope.documentSelected !== null) {
-        $translate('TOAST_ALERT.WARNING.ISOLATED_FILE').then(function(message) {
-          toastService.isolate(message);
-        });
-        $scope.addSelectedDocument($scope.documentSelected);
-        $scope.toggleFilterBySelectedFiles();
-        $scope.showCurrentFile($scope.documentSelected);
-      }
     }
 
     function addUploadedDocument(flowFile) {
@@ -273,7 +260,7 @@
      * @memberOf LinShare.document.documentController
      */
     function launchTableParamsInitiation() {
-      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, $stateParams.uploadedFileUuid)
+      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, $stateParams.fileUuid)
         .then(function(data) {
           $scope.tableParamsService = tableParamsService;
           $scope.tableParams = tableParamsService.getTableParams();
@@ -288,10 +275,21 @@
           $scope.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
           $scope.reloadDocuments = reloadDocuments;
 
-          if(!_.isNil(data.itemToSelect)) {
-            $scope.showCurrentFile(data.itemToSelect);
+        if ($stateParams.fileUuid) {
+          if (_.isNil(data.itemToSelect)) {
+            $translate('GROWL_ALERT.ERROR.FILE_NOT_FOUND').then(function(message) {
+              toastService.error(message);
+            });
+          } else {
+            $translate('TOAST_ALERT.WARNING.ISOLATED_FILE').then(function(message) {
+              toastService.isolate(message);
+              $scope.addSelectedDocument(data.itemToSelect);
+              $scope.toggleFilterBySelectedFiles();
+              $scope.showCurrentFile(data.itemToSelect);
+            });
           }
-        });
+        }
+      });
     }
 
     /**
