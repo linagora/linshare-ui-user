@@ -404,19 +404,24 @@
       }
     },
     "UPDATED_FIELDS": {
+      "CAN_CREATE_GUEST": "Can create guest",
+      "CAN_UPLOAD": "Can upload",
       "EXPIRATION_DATE": "Expiration date",
       "FIRST_NAME": "First name",
       "LAST_NAME": "Last name",
       "MAIL": "Mail",
       "NAME": "Name",
-      "RIGHT": "User rights"
+      "RIGHT": "User rights",
+      "RESTRICTED": "Contacts restriction"
     },
     "UPDATED_FIELDS_RIGHTS": {
-      "ADMIN": "Admin",
+      "ADMIN": "Administrator",
       "WRITE": "Write",
       "READ": "Read"
     }
   },
+  "DISABLED": "Disabled",
+  "ENABLED": "Enabled",
   "FILTERS_SELECT": {
     "ACTION": {
       "ADDITION": "Addition",

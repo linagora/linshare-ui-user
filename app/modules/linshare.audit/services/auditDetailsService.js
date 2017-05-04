@@ -62,22 +62,28 @@
         WORKGROUP_MEMBER: 'WORKGROUP_MEMBER'
       },
       UPDATE_FIELDS_KEY = {
+        'canCreateGuest': 'CAN_CREATE_GUEST',
+        'canUpload': 'CAN_UPLOAD',
         'expirationDate': 'EXPIRATION_DATE',
         'name': 'NAME',
         'identifier': 'NAME',
         'firstName': 'FIRST_NAME',
         'lastName': 'LAST_NAME',
         'mail': 'NAME',
+        'restricted': 'RESTRICTED',
         'right': 'RIGHT'
       },
       UPDATE_FIELDS_KEYS_PREFIX = 'DETAILS_POPUP.UPDATED_FIELDS.',
       UPDATE_FIELDS_RIGHTS_KEYS_PREFIX = 'DETAILS_POPUP.UPDATED_FIELDS_RIGHTS.',
-      UPDATE_FIELDS_TO_CHECK = ['expirationDate', 'firstName', 'identifier', 'lastName', 'mail', 'name'];
+      UPDATE_FIELDS_TO_CHECK = ['canCreateGuest', 'canUpload', 'expirationDate', 'firstName', 'identifier', 'lastName',
+        'mail', 'name', 'restricted'];
 
     var
       author_me,
       author_superadmin,
       author_system,
+      disabled,
+      enabled,
       service = {
         generateAllDetails: generateAllDetails
       };
@@ -98,6 +104,8 @@
         author_me = $filter('translate')('AUTHOR_ME');
         author_superadmin = $filter('translate')('AUTHOR_SUPERADMIN');
         author_system = $filter('translate')('AUTHOR_SYSTEM');
+        disabled = $filter('translate')('DISABLED');
+        enabled = $filter('translate')('ENABLED');
         _.forEach(auditDetails, function(auditAction) {
           if (auditAction.resource) {
             generateDetails(loggedUserUuid, auditAction);
@@ -135,6 +143,21 @@
       auditAction.updatedValues = setUpdatedValues(auditAction);
       auditAction.translatedAction = setTranslatedVar(auditAction.action, 'ACTION.');
       auditAction.translatedType = setTranslatedVar(auditAction.type, 'TYPE.');
+    }
+
+    /**
+     * @name booleanHumanReadable
+     * @desc Change boolean in human readable value
+     * @param {boolean} value - Boolean to change in human readable value
+     * @returns {string} Human readable enabled or disabled
+     * @memberOf LinShare.audit.auditDetailsService
+     */
+    function booleanHumanReadable(value) {
+      if(typeof(value) === 'boolean') {
+        return value ? enabled : disabled;
+      } else {
+        return value;
+      }
     }
 
     /**
@@ -367,8 +390,8 @@
           if (oldValues[key] !== newValues[key] && UPDATE_FIELDS_TO_CHECK.indexOf(key) !== -1) {
             updatedValues[key] = {
               keyName: UPDATE_FIELDS_KEYS_PREFIX + UPDATE_FIELDS_KEY[key],
-              oldValue: oldValues[key],
-              newValue: newValues[key]
+              oldValue: booleanHumanReadable(oldValues[key]),
+              newValue: booleanHumanReadable(newValues[key])
             };
           }
         }

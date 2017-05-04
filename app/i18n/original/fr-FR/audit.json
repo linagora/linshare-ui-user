@@ -404,19 +404,24 @@
       }
     },
     "UPDATED_FIELDS": {
+      "CAN_CREATE_GUEST": "Création d'invités",
+      "CAN_UPLOAD": "Dépôt de fichiers",
       "EXPIRATION_DATE": "Date d'expiration",
       "FIRST_NAME": "Prénom",
       "LAST_NAME": "Nom",
       "MAIL": "Mail",
       "NAME": "Nom",
-      "RIGHT": "Droits d'utilisateurs"
+      "RIGHT": "Droits d'utilisateurs",
+      "RESTRICTED": "Contacts restreints"
     },
     "UPDATED_FIELDS_RIGHTS": {
-      "ADMIN": "Admin",
+      "ADMIN": "Administrateur",
       "WRITE": "Écriture",
       "READ": "Lecture"
     }
   },
+  "DISABLED": "Désactivé",
+  "ENABLED": "Activé",
   "FILTERS_SELECT": {
     "ACTION": {
       "ADDITION": "Ajout",

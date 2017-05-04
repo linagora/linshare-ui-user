@@ -404,12 +404,15 @@
       }
     },
     "UPDATED_FIELDS": {
+      "TBT__CAN_CREATE_GUEST": "",
+      "TBT__CAN_UPLOAD": "",
       "TBT__EXPIRATION_DATE": "",
       "TBT__FIRST_NAME": "",
       "TBT__LAST_NAME": "",
       "TBT__MAIL": "",
       "TBT__NAME": "",
-      "TBT__RIGHT": ""
+      "TBT__RIGHT": "",
+      "TBT__RESTRICTED": ""
     },
     "UPDATED_FIELDS_RIGHTS": {
       "TBT__ADMIN": "",
@@ -417,6 +420,8 @@
       "TBT__READ": ""
     }
   },
+  "TBT__DISABLED": "",
+  "TBT__ENABLED": "",
   "FILTERS_SELECT": {
     "ACTION": {
       "TBT__ADDITION": "",
