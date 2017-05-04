@@ -282,6 +282,7 @@
      */
     function saveContact(contact) {
       contactsListsContactsRestService.create(contactsListsContactsVm.contactsListUuid, contact).then(function(data) {
+        setModelForEdit(data);
         contactsListsContactsVm.itemsList.push(data);
         $translate('GROWL_ALERT.ACTION.INSERT').then(function(message) {
           toastService.success(message);
