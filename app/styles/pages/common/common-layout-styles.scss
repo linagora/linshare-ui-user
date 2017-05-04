@@ -477,7 +477,7 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
   text-align: center;
   bottom: 0;
   vertical-align: middle;
-  width: 100%;
+  width: calc(100% - 268px) !important;
   z-index: 4;
 }
 
@@ -523,11 +523,17 @@ md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-rippl
 }
 
 .content-toggled #copyright-content-ctn {
-  width: calc(100% - 268px) !important;
+  width: 100%;
 }
 
-.content-toggled #copyright-content-ctn.set-width {
-  width: calc(100% - 268px - 350px) !important;
+#copyright-footer {
+  width: 100% !important;
+}
+
+@media (max-width: 1092px) {
+  #copyright-footer.content-toggled.set-width {
+    width: calc(100% - 268px - 350px) !important;
+  }
 }
 
 

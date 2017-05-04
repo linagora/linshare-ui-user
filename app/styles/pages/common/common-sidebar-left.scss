@@ -14,9 +14,15 @@
 }
 
 .user-expiration-date {
-  bottom: 0;
-  position: absolute;
-  left: 24%;
+  color: #fff;
+  font-size: 0.85em;
+  text-align: center;
+}
+
+.username-display {
+  display: flex;
+  flex: 1 1 100%;
+  justify-content: center;
 }
 
 body:not(.sw-toggled) #sidebar {
@@ -181,6 +187,9 @@ body:not(.sw-toggled) #sidebar {
     -ms-transform: rotate(180deg);
     -o-transform: rotate(180deg);
     transform: rotate(180deg);
+  }
+  .flex-ctn .item-l {
+    flex: 0 0 100%;
   }
 }
 
@@ -372,7 +381,6 @@ body:not(.sw-toggled) #sidebar {
 @media (max-width: 768px) {
   .btn-add-files-ctn {
     padding-top: 0;
-    height: 107;
     .btn-add-files {
       padding: 8px 75px;
     }

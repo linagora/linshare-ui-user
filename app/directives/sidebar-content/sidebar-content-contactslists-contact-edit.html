@@ -11,27 +11,6 @@
         <form class="form-sidebar" name="updateContactForm">
           <div class="form-group fg-float m-b-30">
             <div class="fg-line"
-                 x-ng-class="{'has-error' : (((updateContactForm.lastname.$touched || updateContactForm.$submitted)
-                     && updateContactForm.lastname.$invalid)
-                     || (updateContactForm.lastname.$error.required) && (updateContactForm.lastname.$pristine)),
-                     'fg-toggled' : lastnameFocus,
-                     'fg-not-empty' : !updateContactForm.lastname.$error.required}">
-              <input type="text" x-ng-focus="lastnameFocus=true" x-ng-blur="lastnameFocus=false"
-                     required class="input-sm form-control fg-input"
-                     data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.lastNameModel"
-                     data-ng-model-options="{getterSetter: true}"
-                     name="lastname" id="lastname">
-              <label class="fg-label required" for="lastname">{{"CONTACTS_LISTS_ACTION.ORDER_BY.LAST_NAME" |
-                translate}}</label>
-              <span
-                x-ng-show="((updateContactForm.lastname.$touched || updateContactForm.$submitted) && updateContactForm.lastname.$invalid) ||
-                    (updateContactForm.lastname.$error.required && updateContactForm.lastname.$pristine )">
-                    {{"FORMS_MESSAGES.INVALID_EMPTY_FIELD" | translate}}
-                  </span>
-            </div>
-          </div>
-          <div class="form-group fg-float m-b-30">
-            <div class="fg-line"
                  x-ng-class="{'has-error' : (((updateContactForm.firstname.$touched || updateContactForm.$submitted)
                        && updateContactForm.firstname.$invalid)
                        || (updateContactForm.firstname.$error.required) && (updateContactForm.firstname.$pristine)),
@@ -50,6 +29,28 @@
                         (updateContactForm.firstname.$error.required && updateContactForm.lastname.$pristine )">
                       {{"FORMS_MESSAGES.INVALID_EMPTY_FIELD" | translate}}
                   </span>
+            </div>
+          </div>
+          <div class="form-group fg-float m-b-30">
+            <div class="fg-line"
+                 data-ng-class="{'has-error' : (((updateContactForm.lastname.$touched || updateContactForm.$submitted)
+                     && updateContactForm.lastname.$invalid)
+                     || (updateContactForm.lastname.$error.required) && (updateContactForm.lastname.$pristine)),
+                     'fg-toggled' : lastnameFocus,
+                     'fg-not-empty' : !updateContactForm.lastname.$error.required}">
+              <input type="text" data-ng-focus="lastnameFocus=true" data-ng-blur="lastnameFocus=false"
+                     required class="input-sm form-control fg-input"
+                     data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.lastNameModel"
+                     data-ng-model-options="{getterSetter: true}"
+                     name="lastname" id="lastname">
+              <label class="fg-label required" for="lastname">{{"CONTACTS_LISTS_ACTION.ORDER_BY.LAST_NAME" |
+                translate}}</label>
+              <span
+                data-ng-show="((updateContactForm.lastname.$touched || updateContactForm.$submitted)
+                && updateContactForm.lastname.$invalid) ||
+                    (updateContactForm.lastname.$error.required && updateContactForm.lastname.$pristine )">
+                    {{"FORMS_MESSAGES.INVALID_EMPTY_FIELD" | translate}}
+              </span>
             </div>
           </div>
           <div class="form-group fg-float m-b-30">

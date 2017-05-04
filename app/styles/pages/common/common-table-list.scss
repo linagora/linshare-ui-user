@@ -388,6 +388,7 @@
 
 [contenteditable].single-line br {
   display: none;
+  white-space: nowrap;
 }
 
 /**********************
@@ -461,7 +462,7 @@
       visibility: visible;
     }
     .current-vis {
-      background-color: rgba(0, 85, 191, 0.08) !important;
+      background-color: #f4f8fc !important;
     }
     .actions > li:not(:last-child) {
       visibility: hidden;

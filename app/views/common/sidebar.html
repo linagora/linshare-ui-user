@@ -13,13 +13,13 @@
               <span>{{loggedUser.expirationDate | date: 'longDate'}}</span>
             </span>
           </p>
-          <p class="hidden-xs">
+          <p class="hidden-xs username-display">
             {{ loggedUser.firstName }} {{ loggedUser.lastName }}
-            <span class="user-expiration-date" data-ng-show="loggedUser.expirationDate">
+          </p>
+          <span class="user-expiration-date" data-ng-show="loggedUser.expirationDate">
               <span translate>EXPIRE_THE</span>
               <span>{{loggedUser.expirationDate | date: 'longDate'}}</span>
-            </span>
-          </p>
+          </span>
         </div>
       </div>
     </div>

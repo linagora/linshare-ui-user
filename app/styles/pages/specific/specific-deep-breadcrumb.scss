@@ -86,9 +86,6 @@
 }
 
 .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break {
-  #page-root-link span {
-    display: none;
-  }
   .sub-category-chevron.pipe-separator {
     display: none;
   }
@@ -102,7 +99,7 @@
     width: auto;
     min-width: 385px;
     flex: 1 1 auto;
-    max-width: 385px;
+    max-width: inherit;
   }
   .breadcrumbs-ctn.lv1-break {
     #root-level a {
@@ -150,9 +147,6 @@
     .sub-category-chevron.pipe-separator {
       display: none;
     }
-    #page-root-link span {
-      display: none;
-    }
     > div.folder-level {
       &:not(:last-child) {
         display: none;
@@ -191,9 +185,6 @@
     }
     .breadcrumbs-ctn.lv1-break {
       .sub-category-chevron.pipe-separator {
-        display: none;
-      }
-      #page-root-link span {
         display: none;
       }
       > div.folder-level {

@@ -204,6 +204,7 @@ DROPDOWN ANIMATION FIX
       box-shadow: none;
       background-clip: padding-box;
       width: 100%;
+      padding-bottom: 0;
       li {
         border-bottom: none;
       font-size: 0.87em;
@@ -276,6 +277,14 @@ DROPDOWN ANIMATION FIX
     DROP WITH SUBMENU
   ***********************/
 
+.dropdown-menu:not([class*="bgm-"]) li  a.parent-sub-menu-link {
+  display: flex;
+  padding-right: 0;
+  span {
+    flex: auto;
+  }
+}
+
 /*TODO encompass witthin a  .dropdown-submenu ref  */
 .secondary-dropdown-menu-icon {
   float: right;
@@ -283,7 +292,10 @@ DROPDOWN ANIMATION FIX
   text-align: right !important;
   vertical-align: middle !important;
   margin-right: 0 !important;
+  align-content: right;
+  display: flex;
 }
+
 ul.dropdown-submenu ul {
   display: none;
 }

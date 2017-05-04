@@ -27,7 +27,7 @@ angular.module('linshare.components')
   })
   .filter('mimetypeIcone', function() {
     return function(fileType) {
-      var icone = 'ls-file-type-other';
+      var icone = 'ls-file-type-other iconcolor-text';
       var type = [
         {regex: /pdf/, icone: 'ls-file-type-pdf iconcolor-pdf', info: 'PDF'},
         {regex: /image|png|jpeg|jpg/, icone: 'ls-file-type-img iconcolor-text', info: 'IMAGE'},
