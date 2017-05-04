@@ -259,7 +259,8 @@
      * @memberOf LinShare.document.documentController
      */
     function launchTableParamsInitiation() {
-      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, $stateParams.fileUuid)
+      var fileToSearch = $stateParams.fileUuid || $stateParams.uploadedFileUuid;
+      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, fileToSearch)
         .then(function(data) {
           $scope.tableParamsService = tableParamsService;
           $scope.tableParams = tableParamsService.getTableParams();
