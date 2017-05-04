@@ -237,7 +237,10 @@ angular.module('linshare.share')
       recipients = [];
       this.recipients = [];
       mailingListUuid = [];
+      mailingList = [];
       this.mailingList = [];
+      mailingListUuid = [];
+      this.mailingListUuid = [];
       this.documents = [];
       this.secured = secured;
       this.creationAcknowledgement = creationAcknowledgement;
