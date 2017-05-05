@@ -66,21 +66,23 @@
      * @memberOf linshareUiUserApp.loginController
      */
     function submitForm() {
+      var message;
       authenticationRestService.login(loginVm.email, loginVm.password)
         .then(function(user) {
-          $translate(['LOGIN.NOTIFICATION.SUCCESS'])
-            .then(function(translations) {
-                var message = translations['LOGIN.NOTIFICATION.SUCCESS'].replace('${firstName}', user.firstName);
-                toastService.info(message );
-            });
+          $translate(['LOGIN.NOTIFICATION.SUCCESS']).then(function(translations) {
+            message = translations['LOGIN.NOTIFICATION.SUCCESS'].replace('${firstName}', user.firstName);
+            toastService.info(message);
+          });
         })
-        .catch(function() {
-          $translate(['LOGIN.NOTIFICATION.ERROR'])
-            .then(function(translations) {
-              var message = translations['LOGIN.NOTIFICATION.ERROR'];
-              toastService.error(message );
-            });
-
+        .catch(function(error) {
+          switch (error.status) {
+            case 401:
+              $translate(['LOGIN.NOTIFICATION.ERROR']).then(function(translations) {
+                message = translations['LOGIN.NOTIFICATION.ERROR'];
+                toastService.error(message);
+              });
+              break;
+          }
         });
     }
 

@@ -81,6 +81,7 @@
               break;
             case 404:
               errorMessageHttpCodes += 'ERROR_404';
+              errCode = errCode || 'SERVER';
               break;
             case 405:
               errorMessageHttpCodes += 'ERROR_405';
