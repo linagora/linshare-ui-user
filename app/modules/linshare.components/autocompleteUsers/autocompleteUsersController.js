@@ -239,8 +239,8 @@
           };
           template = template
             .replace('$title', data.listName)
-            .replace('$style', '')
-            .replace('$firstLetter', '<i class="ls-contact-list-item"></i>')
+            .replace('$style', 'ls-contact-list-item')
+            .replace('$firstLetter', '')
             .replace('$name', data.listName)
             .replace('$info', ownerLabel.getOwner(user));
           break;

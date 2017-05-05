@@ -64,6 +64,12 @@ md-tooltip .md-content {
     text-align: center;
     line-height: 27px;
     margin-top: 4px;
+    &.ls-contact-list-item{
+      background-color: transparent;
+      box-shadow: none;
+      color: #0f8ac3;
+      font-size: 1.9em;
+    }
   }
   .recipientsInfo {
     margin: 0 0 0 10px;

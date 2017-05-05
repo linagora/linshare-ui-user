@@ -11,10 +11,10 @@
   #action-header.activity-logs-seach-panel {
     display : block;
     flex : 1 1 auto;
-    max-width: 500px;
+    max-width: inherit;
     width: 0;
     > div {
-      min-width: 540px;
+      min-width: inherit;
     }
     .btn{
       margin-top : 4px;
@@ -25,7 +25,6 @@
       font-weight: normal !important;
     }
   }
-
 }
 
 @media (min-width: 768px) {
