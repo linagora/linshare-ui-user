@@ -31,7 +31,9 @@
     /**
      * @name getList
      * @desc Get list of the audit object
-     * @param {jQuery.Event} $event - Event bound to the change
+     * @param {Object} [params] - Parameters added to do a search by date
+     * @property {Date} params.beginDate - Begin date of audit to find
+     * @property {Date} params.endDate - End date of audit to find
      * @returns {Promise} server response
      * @memberOf LinShare.audit.auditRestService
      */

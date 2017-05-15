@@ -74,7 +74,7 @@
         if (_.isUndefined(auditVm.tableParams)) {
           launchTableParamsInitiation();
         } else {
-          auditVm.tableParams.reload();
+          auditVm.tableParamsService.reloadTableParams(auditVm.itemsList);
         }
       });
     }
