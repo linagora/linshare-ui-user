@@ -1,17 +1,16 @@
 'use strict';
 angular.module('linshare.sharedSpace')
-  // TODO: Should dispatch some function to other service or controller
-  /* jshint maxparams: false, maxstatements: false */
+// TODO: Should dispatch some function to other service or controller
+/* jshint maxparams: false, maxstatements: false */
   .controller('SharedSpaceController', function(_, $scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
-    $log, workgroups, $translate, $state, documentUtilsService, itemUtilsService, workgroupRestService,
-    workgroupFoldersRestService, auditDetailsService, workgroupEntriesRestService, lsAppConfig, lsErrorCode,
-    toastService, functionalityRestService) {
+                                                $log, workgroups, $translate, $state, documentUtilsService,
+                                                itemUtilsService, workgroupRestService, auditDetailsService,
+                                                lsAppConfig, lsErrorCode, toastService, functionalityRestService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
     var thisctrl = this;
     thisctrl.canCreate = true;
-    thisctrl.downloadFile = downloadFile;
     thisctrl.lsAppConfig = lsAppConfig;
     thisctrl.currentSelectedDocument = {};
     thisctrl.itemsList = workgroups;
@@ -111,25 +110,25 @@ angular.module('linshare.sharedSpace')
           icon: 'ls-add-user disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
-        },{
+        }, {
           action: null,
           label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
           icon: 'ls-upload-fill fab-groups disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
-        },{
+        }, {
           action: null,
           label: 'WORKGROUPS_LIST.FOLDER',
           icon: 'ls-folder disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
-        },{
+        }, {
           action: null,
           label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
           icon: 'ls-upload-request disabled-work-in-progress',
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
-        },{
+        }, {
           action: null,
           label: 'WORKGROUPS_LIST.PROJECT',
           icon: 'ls-project disabled-work-in-progress',
@@ -143,7 +142,9 @@ angular.module('linshare.sharedSpace')
       thisctrl.functionality = data;
       if (data.enable) {
         thisctrl.fabButton.actions.splice(2, 0, {
-          action: function() {return thisctrl.createWorkGroup();},
+          action: function() {
+            return thisctrl.createWorkGroup();
+          },
           label: 'WORKGROUPS_LIST.SHARED_FOLDER',
           icon: 'ls-workgroup'
         });
@@ -220,6 +221,7 @@ angular.module('linshare.sharedSpace')
     function deleteWorkGroup(workgroups) {
       documentUtilsService.deleteDocuments(workgroups, deleteCallback);
     }
+
 // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       angular.forEach(items, function(restangularizedItem) {
@@ -250,7 +252,7 @@ angular.module('linshare.sharedSpace')
       workgroupRestService.get(current.uuid).then(function(workgroup) {
         workgroupRestService.getAudit(current.uuid).then(function(auditData) {
           auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain())
-           .then(function(auditActions) {
+            .then(function(auditActions) {
               workgroup.auditActions = auditActions;
               thisctrl.currentSelectedDocument.current = workgroup;
               thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
@@ -293,16 +295,5 @@ angular.module('linshare.sharedSpace')
           renameFolder(workgroup, 'td[uuid=""] .file-name-disp');
         }, 0);
       }
-    }
-
-    /**
-     *  @name downloadFile
-     *  @desc Download a file of a document for the user
-     *  @param {Object) documentFile - A document object
-     *  @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
-    function downloadFile(documentFile) {
-      var url = workgroupEntriesRestService.download(thisctrl.uuid, documentFile.uuid);
-      itemUtilsService.download(url, documentFile.name);
     }
   });
