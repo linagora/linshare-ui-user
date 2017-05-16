@@ -153,18 +153,13 @@
     /**
      * @name toastClose
      * @desc Close action of the toast
-     * @param {Object>} scope - Angular scope object of the toast
+     * @param {boolean} actionClicked - Check if the action button is clicked
      * @returns {Promise} promise with list of details passed if given
      * @memberOf linshare.components.toastService
      */
-    function toastClose(scope) {
+    function toastClose(actionClicked) {
       activate = false;
-      scope.openDetails = false;
-      if (_.isUndefined(scope.toastDetails)) {
-        return $mdToast.hide();
-      } else {
-        return $mdToast.hide(scope.toastDetails);
-      }
+      return $mdToast.hide({actionClicked: actionClicked});
     }
 
     /**
