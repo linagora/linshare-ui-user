@@ -6,10 +6,11 @@
       "INVALID": "The password provided is invalid",
       "LABEL": "Password",
       "SUBMIT": "Submit",
-      "TITLE": "Password of the anonymous share"
+      "TITLE": "This share is protected by a password",
+      "MSG" : "Enter the password provided by the download share invitation email."
     },
     "HEADER": {
-      "TITLE": "ANONYMOUS URL PORTAIL"
+      "TITLE": "ANONYMOUS URL PORTAL"
     },
     "HOME": {
       "404": "The url you tried to access is invalid",

@@ -6,7 +6,8 @@
       "INVALID": "Le mot de passe fourni n'est pas valide",
       "LABEL": "Mot de passe",
       "SUBMIT": "Valider",
-      "TITLE": "Mot de passe du partage anonyme"
+      "TITLE": "Ce partage est protégé par un mot de passe",
+      "MSG" : "Saissisez le mot de passe fourni dans le courriel de partage."
     },
     "HEADER": {
       "TITLE": "PORTAIL DES URL ANONYMES"

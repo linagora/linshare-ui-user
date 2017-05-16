@@ -43,8 +43,9 @@
     "UPLOAD_SHARE": "Dépôt & Partage"
   },
   "ANONYMOUS_URL": {
-    "HELLO": "Bonjour",
-    "MSG": "Vous avez reçu des fichiers de la part de "
+    "HELLO": "Bonjour <span>{{externalEmail}}</span>,",
+    "MSG_PLURAL": "vous a partagé <b>{{num}} fichiers</b> le <b>{{creationDate}}</b>, qui seront disponible jusqu'au <b>{{expiryDate}}</b>.",
+    "MSG_SINGULAR": "vous a partagé un fichier le <b>{{creationDate}}</b>, qui sera disponible jusqu'au <b>{{expiryDate}}</b>."
   },
   "APPLICATION_NAME": "LinShare",
   "BOUTON_ADD_FILE_TITLE": "Ajouter",

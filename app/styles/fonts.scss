@@ -431,11 +431,11 @@
 
 @font-face {
   font-family: 'LinShare';
-  src:  url('fonts/linshare/LinShare.eot?pszfaa');
-  src:  url('fonts/linshare/LinShare.eot?pszfaa#iefix') format('embedded-opentype'),
-  url('fonts/linshare/LinShare.ttf?pszfaa') format('truetype'),
-  url('fonts/linshare/LinShare.woff?pszfaa') format('woff'),
-  url('fonts/linshare/LinShare.svg?pszfaa#LinShare') format('svg');
+  src:  url('fonts/linshare/LinShare.eot?5xajv9');
+  src:  url('fonts/linshare/LinShare.eot?5xajv9#iefix') format('embedded-opentype'),
+  url('fonts/linshare/LinShare.ttf?5xajv9') format('truetype'),
+  url('fonts/linshare/LinShare.woff?5xajv9') format('woff'),
+  url('fonts/linshare/LinShare.svg?5xajv9#LinShare') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -455,6 +455,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.ls-libre-free:before {
+  content: "\e90d";
+}
 .ls-upload-item:before {
   content: "\e90e";
 }

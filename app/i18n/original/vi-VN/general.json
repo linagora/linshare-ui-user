@@ -44,7 +44,8 @@
   },
   "TBT__ANONYMOUS_URL": {
     "TBT__HELLO": "",
-    "TBT__MSG": ""
+    "TBT__MSG_PLURAL": "",
+    "TBT__MSG_SINGULAR": ""
   },
   "APPLICATION_NAME": "LinShare",
   "BOUTON_ADD_FILE_TITLE": "Bổ sung",

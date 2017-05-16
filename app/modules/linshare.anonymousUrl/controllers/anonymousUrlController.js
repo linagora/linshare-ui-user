@@ -34,7 +34,6 @@
       name: ''
     };
     anonymousUrlVm.urlData = anonymousUrlData;
-
     activate();
 
     ////////////
@@ -131,6 +130,7 @@
       anonymousUrlVm.modalPassword = $uibModal.open({
         backdrop: 'static',
         backdropClass: 'modal-backdrop',
+        size: 'swal',
         controller: function modalPasswordController($state, $uibModalInstance) {
           /* jshint validthis: true*/
           var modalPasswordVm = this;

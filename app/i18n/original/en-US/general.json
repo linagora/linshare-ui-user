@@ -43,8 +43,9 @@
     "UPLOAD_SHARE": "Upload and share"
   },
   "ANONYMOUS_URL": {
-    "HELLO": "Hello",
-    "MSG": "You have received some files from "
+    "HELLO": "Hello <span>{{externalEmail}}</span>,",
+    "MSG_PLURAL": "has shared <b>{{num}} files </b>with you the <b>{{creationDate}}</b>, available until <b>{{expiryDate}}</b>.",
+    "MSG_SINGULAR": "has shared one file with you the <b>{{creationDate}}</b>, available until <b>{{expiryDate}}</b>."
   },
   "APPLICATION_NAME": "Linshare",
   "BOUTON_ADD_FILE_TITLE": "Add",

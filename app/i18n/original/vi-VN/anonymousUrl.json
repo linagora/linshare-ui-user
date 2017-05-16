@@ -6,7 +6,8 @@
       "TBT__INVALID": "",
       "TBT__LABEL": "",
       "TBT__SUBMIT": "",
-      "TBT__TITLE": ""
+      "TBT__TITLE": "",
+      "TBT__MSG" : ""
     },
     "HEADER": {
       "TBT__TITLE": ""
