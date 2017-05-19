@@ -74,15 +74,12 @@
      *  @desc Download a Workgroup Node object
      *  @param {string} workgroupUuid - The uuid of the Workgroup object
      *  @param {string} nodeUuid - The uuid of the Workgroup Node object
-     *  @returns {Promise} server response
+     *  @returns {string} direct download url of the ressource
      *  @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
     function download(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : download', workgroupUuid, nodeUuid);
-      return handler(Restangular.all(restUrl).one(workgroupUuid, restParam).one(nodeUuid, 'download')
-        .withHttpConfig({
-          responseType: 'arraybuffer'
-        }).get());
+      return Restangular.all(restUrl).one(workgroupUuid, restParam).one(nodeUuid, 'download').getRequestedUrl();
     }
 
     /**

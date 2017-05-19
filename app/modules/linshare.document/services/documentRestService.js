@@ -51,14 +51,12 @@
      *  @name download
      *  @desc Download file of a Document object
      *  @param {String} uuid - The id of the Document object
-     *  @returns {Promise} server response
+     *  @returns {string} direct download url of the ressource
      *  @memberOf LinShare.document.LinshareDocumentRestService
      */
     function download(uuid) {
       $log.debug('LinshareDocumentRestService : download', uuid);
-      return handler(Restangular.all(restUrl).one(uuid, 'download').withHttpConfig({
-        responseType: 'arraybuffer'
-      }).get());
+      return Restangular.all(restUrl).one(uuid, 'download').getRequestedUrl();
     }
 
     /**

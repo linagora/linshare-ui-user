@@ -226,9 +226,8 @@
      *  @memberOf LinShare.document.documentController
      */
     function downloadFile(documentFile) {
-      LinshareDocumentRestService.download(documentFile.uuid).then(function(fileStream) {
-          documentUtilsService.downloadFileFromResponse(fileStream, documentFile.name, documentFile.type);
-        });
+      var url = LinshareDocumentRestService.download(documentFile.uuid);
+      itemUtilsService.download(url, documentFile.name);
     }
 
     function downloadSelectedFiles(selectedDocuments) {

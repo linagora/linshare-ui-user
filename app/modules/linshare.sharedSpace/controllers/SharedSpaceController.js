@@ -297,8 +297,7 @@ angular.module('linshare.sharedSpace')
      *  @memberOf LinShare.sharedSpace.SharedSpaceController
      */
     function downloadFile(documentFile) {
-      workgroupEntriesRestService.download(thisctrl.uuid, documentFile.uuid).then(function(fileStream) {
-        documentUtilsService.downloadFileFromResponse(fileStream, documentFile.name, documentFile.type);
-      });
+      var url = workgroupEntriesRestService.download(thisctrl.uuid, documentFile.uuid);
+      itemUtilsService.download(url, documentFile.name);
     }
   });

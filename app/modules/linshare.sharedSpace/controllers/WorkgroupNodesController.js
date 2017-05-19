@@ -212,11 +212,8 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function downloadFile(fileDocument) {
-      workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid)
-        .then(function(fileStream) {
-          // TODO : Change this service to something generic for documents and workgroups (filesService.js or else..)
-          documentUtilsService.downloadFileFromResponse(fileStream, fileDocument.name, fileDocument.type);
-        });
+      var url = workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid);
+      itemUtilsService.download(url, fileDocument.name);
     }
 
     /**

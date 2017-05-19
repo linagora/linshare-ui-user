@@ -24,7 +24,6 @@ function documentUtilsService($translate, $log, $timeout, $q) {
   }, 0);
 
   return {
-    downloadFileFromResponse: downloadFileFromResponse,
     removeElementFromCollection: removeElementFromCollection,
     deleteDocuments: deleteDocuments,
     selectDocument: toggleItemSelection,
@@ -52,28 +51,6 @@ function documentUtilsService($translate, $log, $timeout, $q) {
    */
   function setReloadDocumentsList(value) {
     reloadDocumentsList = value;
-  }
-
-  function downloadFileFromResponse(fileStream, fileName, fileType) {
-    var urlObject;
-
-    if (fileStream.byteLength < 500000000) {
-      var blob = new Blob([fileStream], {type: fileType});
-      var windowUrl = window.URL || window.webkitURL || window.mozURL || window.msURL;
-      urlObject = windowUrl.createObjectURL(blob);
-    } else {
-      urlObject = fileStream.getRequestedUrl() + '/download';
-    }
-    if (!_.isUndefined(urlObject)) {
-      // create tag element a to simulate a download by click
-      var a = document.createElement('a');
-      a.setAttribute('href', urlObject);
-      a.setAttribute('download', fileName);
-
-      // create a click event and dispatch it on the tag element
-      var event = new MouseEvent('click');
-      a.dispatchEvent(event);
-    }
   }
 
   function removeElementFromCollection(collection, element) {

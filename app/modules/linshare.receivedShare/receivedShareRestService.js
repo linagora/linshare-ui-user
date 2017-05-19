@@ -49,14 +49,12 @@
      *  @name download
      *  @desc Download file of a ReceivedShares object
      *  @param {String} uuid - The id of the ReceivedShares object
-     *  @returns {Promise} server response
+     *  @returns {string} direct download url of the ressource
      *  @memberOf LinShare.receivedShare.receivedShareRestService
      */
     function download(uuid) {
       $log.debug('LinshareReceivedShareRestService : download', uuid);
-      return handler(Restangular.all(restUrl).one(uuid, 'download').withHttpConfig({
-        responseType: 'arraybuffer'
-      }).get());
+      return Restangular.all(restUrl).one(uuid, 'download').getRequestedUrl();
     }
 
     /**

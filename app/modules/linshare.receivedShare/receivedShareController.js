@@ -8,7 +8,7 @@ angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function($filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
       authenticationRestService, autocompleteUserRestService, documentSelected, documentUtilsService, files,
-      lsAppConfig, NgTableParams, receivedShareRestService, toastService) {
+      itemUtilsService, lsAppConfig, NgTableParams, receivedShareRestService, toastService) {
       $translatePartialLoader.addPart('receivedShare');
       $scope.documentSelected = documentSelected;
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
@@ -120,9 +120,8 @@ angular.module('linshare.receivedShare')
      *  @memberOf LinShare.receivedShare.receivedShareController
      */
       $scope.downloadFile = function(documentFile) {
-        receivedShareRestService.download(documentFile.uuid).then(function(downloadedFile) {
-          documentUtilsService.downloadFileFromResponse(downloadedFile, documentFile.name, documentFile.type);
-        });
+        var url = receivedShareRestService.download(documentFile.uuid);
+        itemUtilsService.download(url, documentFile.name);
       };
 
       $scope.download = function() {

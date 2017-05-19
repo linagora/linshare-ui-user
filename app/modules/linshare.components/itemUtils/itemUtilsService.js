@@ -9,14 +9,17 @@
     .module('linshare.components')
     .factory('itemUtilsService', itemUtilsService);
 
-  itemUtilsService.$inject = ['$q', '$timeout', '$translate', 'lsAppConfig', 'lsErrorCode', 'toastService'];
+  itemUtilsService.$inject = ['$q', '$timeout', '$translate', 'authenticationRestService', 'lsAppConfig', 'lsErrorCode',
+    'toastService'
+  ];
 
   /**
    * @namespace itemUtilsService
    * @desc Utils service for manipulating file
    * @memberOf linshare.components
    */
-  function itemUtilsService($q, $timeout, $translate, lsAppConfig, lsErrorCode, toastService) {
+  function itemUtilsService($q, $timeout, $translate, authenticationRestService, lsAppConfig, lsErrorCode,
+    toastService) {
     var
       invalidNameTranslate = {
         empty: {
@@ -35,6 +38,7 @@
       },
       regex = new RegExp('[\\' + lsAppConfig.rejectedChar.join('-').replace(new RegExp('-', 'g'), '\\') + ']'),
       service = {
+        download: download,
         isNameValid: isNameValid,
         itemNumber: itemNumber,
         rename: rename
@@ -56,6 +60,30 @@
       });
     }
 
+    /**
+     * @name download
+     * @desc Create a link to launch a download based on the given URL
+     * @param {string} url - URL of the ressource to be downloaded
+     * @param {string} fileName - Name of the ressource to be downloaded
+     * @memberOf linshare.components.itemUtilsService
+     */
+    function download(url, fileName) {
+      authenticationRestService.checkAuthentication(true, false).then(function() {
+        var downloadLink = document.createElement('a');
+        downloadLink.setAttribute('href', url);
+        downloadLink.setAttribute('download', fileName);
+
+        if (document.createEvent) {
+          var event = document.createEvent('MouseEvents');
+          event.initEvent('click', true, true);
+          downloadLink.dispatchEvent(event);
+        } else {
+          downloadLink.click();
+        }
+
+        downloadLink.remove();
+      });
+    }
 
     /**
      * @name isNameValid
