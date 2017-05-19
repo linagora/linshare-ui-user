@@ -23,6 +23,7 @@
       service = {
         baseUrl: baseRestUrl,
         download: download,
+        downloadUrl: downloadUrl,
         getAnonymousUrl: getAnonymousUrl,
         status: status
       };
@@ -34,15 +35,15 @@
     /**
      *  @name download
      *  @desc Donwload a document
-     *  @param {String} urlUuid - The id of the anonymous url
-     *  @param {String} password - The password to access to the anonymous url
-     *  @param {String} docUuid - The id of the document
-     *  @returns {Promise} Server response
+     *  @param {string} urlUuid - The id of the anonymous url
+     *  @param {string} password - The password to access to the anonymous url
+     *  @param {string} docUuid - The id of the document
+     *  @returns {promise} Server response
      *  @memberOf LinShare.anonymousUrl.anonymousUrlService
      */
     function download(urlUuid, password, docUuid) {
       var deferred = $q.defer();
-      $http.get([baseRestUrl, urlUuid, docUuid, 'download'].join('/'), {
+      $http.get(downloadUrl(urlUuid, password, docUuid), {
         headers: {
           'linshare-anonymousurl-password': password
         },
@@ -51,6 +52,19 @@
         deferred.resolve(documents);
       });
       return deferred.promise;
+    }
+
+    /**
+     *  @name downloadUrl
+     *  @desc Get download url of the document given
+     *  @param {string} urlUuid - The id of the anonymous url
+     *  @param {string} password - The password to access to the anonymous url
+     *  @param {string} docUuid - The id of the document
+     *  @returns {string} Download url
+     *  @memberOf LinShare.anonymousUrl.anonymousUrlService
+     */
+    function downloadUrl(urlUuid, password, docUuid) {
+      return [baseRestUrl, urlUuid, docUuid, 'download'].join('/');
     }
 
     /**

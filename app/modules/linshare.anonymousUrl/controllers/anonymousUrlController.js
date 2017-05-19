@@ -60,9 +60,27 @@
      *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
      */
     function download(documentFile) {
-      anonymousUrlService.download(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password, documentFile.uuid).then(function(data) {
-        downloadFileFromResponse(documentFile.name, documentFile.type, data.data);
-      });
+      if (anonymousUrlVm.urlData.protectedByPassword) {
+        anonymousUrlService.download(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password, documentFile.uuid).then(function(data) {
+          downloadFileFromResponse(documentFile.name, documentFile.type, data.data);
+        });
+      } else {
+        var url = anonymousUrlService.downloadUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password,
+          documentFile.uuid);
+        var downloadLink = document.createElement('a');
+        downloadLink.setAttribute('href', url);
+        downloadLink.setAttribute('download', documentFile.name);
+
+        if (document.createEvent) {
+          var event = document.createEvent('MouseEvents');
+          event.initEvent('click', true, true);
+          downloadLink.dispatchEvent(event);
+        } else {
+          downloadLink.click();
+        }
+
+        downloadLink.remove();
+      }
     }
 
     /**
