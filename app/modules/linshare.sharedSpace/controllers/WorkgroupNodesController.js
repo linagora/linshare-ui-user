@@ -399,7 +399,7 @@
           toastService.success({key: 'GROWL_ALERT.ACTION.COPY'});
         } else {
           var action = isMove ? 'moved' : '';
-          $translate('GROWL_ALERT.ACTION.BROWSER_ACTION', {ACTION: action, folderName: data.folder.name})
+          $translate('GROWL_ALERT.ACTION.BROWSER_ACTION', {ACTION: action, folderName: data.folder.name}, 'messageformat')
             .then(function(message) {
               toastService.success(message, showIt).then(function(response) {
                 if (!_.isUndefined(response)) {
