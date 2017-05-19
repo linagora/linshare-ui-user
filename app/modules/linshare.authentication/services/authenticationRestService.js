@@ -39,13 +39,15 @@
      * @name checkAuthentication
      * @desc Check user authorization
      * @param {boolean} showError - Determine if the error shall be shown to the user
+     * @param {boolean} ignoreAuthModule - Determine if the auth module should be ignored
      * @memberOf Linshare.authentication.authenticationRestService
      */
-    function checkAuthentication(showError) {
+    function checkAuthentication(showError, ignoreAuthModule) {
       showError = _.isUndefined(showError) ? true : showError;
+      ignoreAuthModule = _.isUndefined(ignoreAuthModule) ? true : ignoreAuthModule;
       $log.debug('AuthenticationRestService : checkAuthentication');
       return handler(Restangular.all(restUrl).withHttpConfig({
-          ignoreAuthModule: true
+          ignoreAuthModule: ignoreAuthModule
       }).customGET('authorized'), undefined, showError)
       .then(function(userLoggedIn) {
         deferred.resolve(userLoggedIn);

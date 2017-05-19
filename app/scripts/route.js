@@ -57,9 +57,14 @@
         templateUrl: 'views/common/loginForm.html',
         controller: 'loginController',
         controllerAs: 'loginVm',
+        params: {
+          loginRequired: undefined
+        },
         resolve: {
-          authentication: function($state, authenticationRestService) {
+          authentication: function($state, $stateParams, authenticationRestService) {
+           if (!$stateParams.loginRequired) {
             authRedirect($state, authenticationRestService);
+           }
           }
         }
       })
@@ -433,7 +438,7 @@
           $state.go('home');
         } else {
           if (!$state.is('login')) {
-            $state.go('login');
+            $state.go('login', {loginRequired: true});
           }
         }
       });

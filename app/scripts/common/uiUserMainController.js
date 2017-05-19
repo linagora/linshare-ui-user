@@ -169,10 +169,11 @@
         $scope.loggedUser.getUser();
         if ($scope.urlTogoAfterLogin === URL_LOGIN) {
           $scope.urlTogoAfterLogin = URL_HOME;
-          $state.go(URL_LOGIN);
+          $state.go(URL_LOGIN, {loginRequired: true});
         } else {
           $state.go(URL_LOGIN, {
-            next: $scope.urlTogoAfterLogin
+            next: $scope.urlTogoAfterLogin,
+            loginRequired: true
           });
         }
       });
