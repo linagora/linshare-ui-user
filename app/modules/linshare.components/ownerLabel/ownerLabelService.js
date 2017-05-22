@@ -24,16 +24,18 @@
         getOwner: getOwner
       };
 
-    fetch();
+    activate();
 
     return service;
 
+    ////////////
+
     /**
-     * @name fetch
-     * @desc Fetch necessary data for this service to work
+     * @name activate
+     * @desc Activation function of the service, launch at every instantiation
      * @memberOf linshare.components.ownerLabel
      */
-    function fetch() {
+    function activate() {
       $q.all([authenticationRestService.getCurrentUser(), $translate(['BY', 'ME'])]).then(function(promises) {
         currentUser = promises[0];
         by = promises[1].BY;
