@@ -20,12 +20,13 @@
             </a>
             <a class="col-xs-6" data-ng-click="workgroupNodesVm.createFolder()"
                data-ng-class="{'disabled' : !workgroupNodesVm.canCreateFolder}"
+               data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
                href="javascript:void(0)">
               <i class="ls-folder"></i>
               <p translate>WORKGROUPS_LIST.FOLDER</p>
             </a>
-            <a data-ng-hide="workgroupNodesVm.currentWorkgroupMember.readonly" class="col-xs-6" flow-btn
-               href="javascript:void(0)">
+            <a class="col-xs-6" flow-btn href="javascript:void(0)"
+               data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
               <i class="ls-upload-item"></i>
               <p translate>WORKGROUPS_LIST.UPLOAD_FILE</p>
             </a>
@@ -33,14 +34,16 @@
               <i class="ls-upload-request"></i>
               <p translate>WORKGROUPS_LIST.UPLOAD_REQUEST</p>
             </a>
-            <a class="col-xs-6" data-ng-click="workgroupNodesVm.showWorkgroupDetails(true)">
+            <a class="col-xs-6" data-ng-click="workgroupNodesVm.showWorkgroupDetails(true)"
+               data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
               <i><span class="ls-add-user-sm"></span></i>
               <p translate>WORKGROUPS_LIST.ADD_A_MEMBER</p>
             </a>
           </div>
         </script>
         <div id="breadcrumb-wrap" class="deep-nav multi-toolbar-options">
-          <div class="menu-popover-ctn hidden-xs clickable waves-effect">
+          <div class="menu-popover-ctn hidden-xs clickable waves-effect"
+               data-ng-class="{'disabled' : workgroupNodesVm.currentWorkgroupMember.readonly}">
             <a class="add-menu-group"
                tabindex="0"
                uib-popover-template="'popover-group.html'"
@@ -48,7 +51,8 @@
                popover-class="menu-popover-flyout-ctn"
                popover-append-to-body="true"
                popover-trigger="focus">
-              <i class="zmdi zmdi-plus"></i>
+              <i class="zmdi zmdi-plus"
+                 data-ng-class="{'disabled': workgroupNodesVm.currentWorkgroupMember.readonly}"></i>
             </a>
           </div>
           <div class="breadcrumbs-ctn hidden-xs"
@@ -308,14 +312,15 @@
                 <span translate>ACTION.DOWNLOAD</span>
               </a>
             </span>
-            <span>
+            <span data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
                 <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                    data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)">
                   <i class="zmdi zmdi-delete"></i>
                   <span translate>SELECTION_TOOLBAR.DELETE</span>
                 </a>
               </span>
-            <span>
+            <span data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly &&
+             workgroupNodesVm.selectedDocuments.length === 1">
                 <a class="plain-text-button share-link" title="{{'ACTION.MOVE' | translate}}"
                    data-ng-click="workgroupNodesVm.openBrowser(nodeItem, true)">
                   <i class="zmdi zmdi-arrows"></i>
@@ -373,13 +378,15 @@
                   <li data-ng-if="!linshareModeProduction"
                       data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
                     <a
+                      data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
                       data-ng-click="workgroupNodesVm.renameNode(workgroupNodesVm.selectedDocuments[0])">
                        <i class="zmdi zmdi-border-color"></i>
                        <span translate>ACTION.RENAME</span>
                     </a>
                   </li>
                   <li class="divider hidden-xs m-b-0" data-ng-show="!linshareModeProduction"></li>
-                  <li data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
+                  <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
+                    data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
                     <a class="parent-sub-menu-link">
                       <i class="zmdi zmdi-copy"></i>
                       <span translate>ACTION.COPY</span>
@@ -532,7 +539,7 @@
                               <i class="zmdi zmdi-download"></i>
                             </a>
                           </li>
-                          <li class="hidden-xs">
+                          <li class="hidden-xs" data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
                             <a href="" data-ng-click="workgroupNodesVm.deleteNodes(nodeItem)"
                                title="{{'ACTION.DELETE' | translate}}">
                               <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -586,14 +593,15 @@
                                 </a>
                               </li>
                               <li class="divider"></li>
-                              <li>
+                              <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
                                 <a data-ng-click="workgroupNodesVm.renameNode(nodeItem)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   <span translate>ACTION.RENAME</span>
                                 </a>
                               </li>
                               <li class="divider hidden-xs" data-ng-show="!linshareModeProduction"></li>
-                              <li data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
+                              <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
+                                data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
                                 <a href="" class="parent-sub-menu-link">
                                   <i class="zmdi zmdi-copy"></i>
                                   <span translate>ACTION.COPY</span>
@@ -619,14 +627,15 @@
                                   </li>
                                 </ul>
                               </li>
-                              <li class="hidden-xs" data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
+                              <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
+                                  class="hidden-xs" data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
                                 <a href="" data-ng-click="workgroupNodesVm.openBrowser(nodeItem, true)">
                                   <i class="zmdi zmdi-arrows"></i>
                                   <span translate>ACTION.MOVE</span>
                                 </a>
                               </li>
                               <li class="divider"></li>
-                              <li>
+                              <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
                                 <a href="" data-ng-click="workgroupNodesVm.deleteNodes(nodeItem)">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                   <span translate>ACTION.DELETE</span>
@@ -695,6 +704,7 @@
        data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
        data-ng-class="{'disabled-work-in-progress': workgroupNodesVm.selectedDocuments.length != 1}"></i>
     <i class="zmdi zmdi-delete col-xs-2"
+       data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
        data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)"></i>
     <i class="zmdi zmdi-arrows col-xs-2 disabled-work-in-progress"
        data-ng-show="!linshareModeProduction"></i>
@@ -743,25 +753,29 @@
         <li data-ng-if="!linshareModeProduction"
             data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
           <a
+            data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
             data-ng-click="workgroupNodesVm.renameNode(workgroupNodesVm.selectedDocuments[0])">
           <i class="zmdi zmdi-border-color"></i>
           <span translate>ACTION.RENAME</span>
           </a>
         </li>
         <li class="divider"></li>
-        <li data-ng-click="workgroupNodesVm.copyNode(nodeItem)"
+        <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
+            data-ng-click="workgroupNodesVm.copyNode(nodeItem)"
             data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
           <a><i class="zmdi zmdi-copy"></i>
             <span translate>ACTION.COPY_DROPDOWN.SIMPLE_COPY</span>
           </a>
         </li>
-        <li data-ng-click="workgroupNodesVm.openBrowser(nodeItem)"
+        <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
+            data-ng-click="workgroupNodesVm.openBrowser(nodeItem)"
             data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
           <a><i class="fa fa-files-o"></i>
             <span translate>ACTION.COPY_DROPDOWN.CREATE_COPY</span>
           </a>
         </li>
-        <li data-ng-show="!linshareModeProduction && workgroupNodesVm.isDocument(nodeItem.type)">
+        <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
+            data-ng-show="!linshareModeProduction && workgroupNodesVm.isDocument(nodeItem.type)">
           <a><i class="zmdi zmdi-share"></i>
             <span translate>ACTION.COPY_DROPDOWN.COPY_AND_SHARE</span>
           </a>
