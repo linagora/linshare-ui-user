@@ -54,7 +54,8 @@
         "REJECTED_CHAR": "The name is invalid, you cannot use the following characters: '{{rejectedChar}}'"
       },
       "DELETE_ERROR": {
-        "26006": "Deletion of a non-empty folder is not yet supported"
+        "26006": "Deletion of a non-empty folder is not yet supported",
+        "26444": "Deletion unauthorized"
       },
       "NO_RESPONSE_ERROR": "Error without server response, see logs."
     }

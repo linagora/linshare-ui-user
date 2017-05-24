@@ -191,6 +191,8 @@
           }, function(error) {
             if (error.status === 400 && error.data.errCode === 26006) {
               toastService.error({key: 'GROWL_ALERT.ERROR.DELETE_ERROR.26006'});
+            } else if (error.data.errCode === 26444) {
+              toastService.error({key: 'GROWL_ALERT.ERROR.DELETE_ERROR.26444'});
             }
           });
         });
@@ -399,7 +401,10 @@
           toastService.success({key: 'GROWL_ALERT.ACTION.COPY'});
         } else {
           var action = isMove ? 'moved' : '';
-          $translate('GROWL_ALERT.ACTION.BROWSER_ACTION', {ACTION: action, folderName: data.folder.name}, 'messageformat')
+          $translate('GROWL_ALERT.ACTION.BROWSER_ACTION', {
+            ACTION: action,
+            folderName: data.folder.name
+          }, 'messageformat')
             .then(function(message) {
               toastService.success(message, showIt).then(function(response) {
                 if (!_.isUndefined(response)) {
