@@ -128,10 +128,10 @@
   <div class="content-detail-area">
     <div class="flex-ctn detail-info-ctn">
       <div class="item-l">
-        <span class="first-letter">{{'UNKNOWN_FIRST_LETTER' | translate}}</span>
+        <span class="first-letter">{{mainVm.sidebar.getData().currentSelectedDocument.current.getName().charAt(0)}}</span>
       </div>
       <div class="item-mid">
-        <div class="name">{{'UNKNOWN_USER' | translate}}</div>
+        <div class="name">{{mainVm.sidebar.getData().currentSelectedDocument.current.getName()}}</div>
         <div class="info-item-member">
             <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
               {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date: mainVm.sidebar.getData().lsFormat()}}
@@ -143,10 +143,13 @@
         <span>
           {{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: false}}
         </span>
+        <!-- TODO : when the file extension will be implemented well, readd this code -->
+        <!--
         <span class="seperator-inline">|</span>
         <span title="{{mainVm.sidebar.getData().currentSelectedDocument.current.type}}">
             {{mainVm.sidebar.getData().currentSelectedDocument.current.name | getextension}}
           </span>
+        -->
       </div>
     </div>
 
