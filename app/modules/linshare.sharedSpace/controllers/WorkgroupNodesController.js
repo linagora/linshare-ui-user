@@ -257,6 +257,8 @@
       }, function(error) {
         deferred.reject(error);
       });
+      // TODO : change the watcher method in activate() of workgroupMembersController, then do it better
+      $scope.mainVm.sidebar.setContent(workgroupNodesVm.workgroupNode);
       return deferred.promise;
     }
 

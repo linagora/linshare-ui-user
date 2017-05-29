@@ -330,14 +330,14 @@
             <span class="dropdown link-dropdown" uib-dropdown
                   data-ng-show="(!linshareModeProduction) ||
                    (workgroupNodesVm.selectedDocuments.length === 1)">
-                <a class="plain-text-button share-link"
+                <a class="plain-text-button share-link" event-propagation-stop
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>
                   <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
                     uib-dropdown-menu="">
-                  <li data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"
+                  <li event-propagation-stop data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"
                       data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
                     <a href="">
                       <i class="zmdi zmdi-info-outline "></i>
@@ -386,7 +386,7 @@
                   </li>
                   <li class="divider hidden-xs m-b-0" data-ng-show="!linshareModeProduction"></li>
                   <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-                    data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
+                      data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
                     <a class="parent-sub-menu-link">
                       <i class="zmdi zmdi-copy"></i>
                       <span translate>ACTION.COPY</span>
@@ -462,13 +462,12 @@
                    show-filter="true"
                    data-ng-class="{'col-4-table' : !linshareModeProduction}">
               <tr data-ng-repeat="nodeItem in $data"
-                  ls-item-selection="{{workgroupNodesVm.isDocument(nodeItem.type) ? 'file' : null}}"
-                  role="listitem"
+                  ls-item-selection
                   data-selected-documents="workgroupNodesVm.selectedDocuments"
                   data-document-file="nodeItem"
                   data-current-selected-document="workgroupNodesVm.currentSelectedDocument"
                   data-details-function="workgroupNodesVm.getNodeDetails"
-                  x-right-sidebar-open="mainVm.sidebar.isVisible()"
+                  data-right-sidebar-open="mainVm.sidebar.isVisible()"
                   data-ng-click="backToSidebarContentDetails()"
                   data-ng-class="{'highlight-list-elem': nodeItem.isSelected ,
                    'current-vis': workgroupNodesVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
@@ -509,7 +508,7 @@
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <span class="file-name-disp single-line" spellcheck="false" contenteditable="false"
-                            data-ng-click="workgroupNodesVm.goToFolder(nodeItem)">{{nodeItem.name}}</span>
+                            data-ng-click="workgroupNodesVm.goToFolder(nodeItem)">{{nodeItem.name}} {{$scope.mainVm.sidebar.isVisible()}}</span>
                       <span>
                         <span data-ng-show="nodeItem.shared > 0" class="shared-activated hidden-xs" translate>
                           BOUTON_LABEL_TITLE.SHARED</span>
@@ -522,9 +521,9 @@
                     </span>
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                         <ul class="actions pull-right double-mobile-actions">
-                          <li
-                            data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)"
-                            class="set-col-6">
+                          <li event-propagation-stop
+                              data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)"
+                              class="set-col-6">
                             <a href=""
                                title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
                                class="set-col-12">
@@ -548,12 +547,13 @@
                           <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                               auto-close="always" hover-dropdown-fix>
                             <a title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
-                               class="set-col-12">
+                               class="set-col-12" event-propagation-stop>
                               <i class="zmdi zmdi-more-vert"></i>
                             </a>
                             <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                              dropdown-divided dropdown-submenu" uib-dropdown-menu="">
-                              <li data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
+                              <li event-propagation-stop
+                                  data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
                                 <a href="">
                                   <i class="zmdi zmdi-info-outline "></i>
                                   <span translate>ACTION.INFORMATION</span>
@@ -601,7 +601,7 @@
                               </li>
                               <li class="divider hidden-xs" data-ng-show="!linshareModeProduction"></li>
                               <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-                                data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
+                                  data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
                                 <a href="" class="parent-sub-menu-link">
                                   <i class="zmdi zmdi-copy"></i>
                                   <span translate>ACTION.COPY</span>
@@ -713,7 +713,7 @@
            data-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown" uib-dropdown-toggle=""></i>
        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
            uib-dropdown-menu="">
-        <li class="hidden-xs" data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"
+        <li class="hidden-xs" event-propagation-stop data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"
             data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-info-outline "></i>
