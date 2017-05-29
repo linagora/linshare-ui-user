@@ -2,7 +2,7 @@
  * toastController Controller
  * @namespace linshare.components
  */
-(function(){
+(function() {
   'use strict';
 
   angular
@@ -19,6 +19,7 @@
   function toastController(_) {
     /* jshint validthis:true */
     var toastVm = this;
+    toastVm._ = _;
     _.extend(toastVm.scope, toastVm.locals);
   }
 })();

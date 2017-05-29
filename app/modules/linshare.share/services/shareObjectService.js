@@ -198,15 +198,11 @@ angular.module('linshare.share')
       if (this.waitingUploadIdentifiers.length === 0) {
         if(this.documents.indexOf(undefined) === -1) {
           return LinshareShareService.create(this.getFormObj()).then(function() {
-            $translate('GROWL_ALERT.ACTION.SHARE').then(function(message) {
-              toastService.success(message);
-            });
+            toastService.success('GROWL_ALERT.ACTION.SHARE');
           });
         } else {
           $log.debug('SHARE FAILED -', 'file(s) upload error');
-          $translate('GROWL_ALERT.ACTION.SHARE_FAILED').then(function(message) {
-            toastService.error(message);
-          });
+          toastService.error('GROWL_ALERT.ACTION.SHARE_FAILED');
           deferred.reject({statusText: 'file(s) upload error'});
         }
       } else {

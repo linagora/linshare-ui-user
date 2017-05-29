@@ -65,6 +65,8 @@
     },
     "WARNING": {
       "TBT_ELEMENTS_NOT_DELETED": "",
+      "TBT_ELEMENTS_NOT_DELETED_SINGULAR": "",
+      "TBT_ELEMENTS_NOT_DELETED_PLURAL": "",
       "TBT__ERROR": "",
       "TBT_ERROR_404": "",
       "TBT_ERROR_403": "",

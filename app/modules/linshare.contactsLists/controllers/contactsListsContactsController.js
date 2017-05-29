@@ -294,9 +294,7 @@
       contactsListsContactsRestService.create(contactsListsContactsVm.contactsListUuid, contact).then(function(data) {
         setModelForEdit(data);
         contactsListsContactsVm.itemsList.push(data);
-        $translate('GROWL_ALERT.ACTION.INSERT').then(function(message) {
-          toastService.success(message);
-        });
+        toastService.success('GROWL_ALERT.ACTION.INSERT');
         contactsListsContactsVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsContactsVm.tableParams.reload();
       });

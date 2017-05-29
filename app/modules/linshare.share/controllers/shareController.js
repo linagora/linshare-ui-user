@@ -21,15 +21,11 @@ angular.module('linshare.share')
     function handleErrors(shareCreationDto, selectedDocuments, selectedUploads) {
       if (selectedDocuments.length === 0 &&
         (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
-        $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT').then(function(message) {
-          toastService.error(message);
-        });
+        toastService.error('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT');
         return true;
       }
       if (shareCreationDto.getRecipients().length === 0 && shareCreationDto.getMailingListUuid().length === 0) {
-        $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT').then(function(message) {
-          toastService.error(message);
-        });
+        toastService.error('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT');
         return true;
       }
     }
@@ -75,9 +71,7 @@ angular.module('linshare.share')
       }, function(data) {
         if (data.statusText) {
           $log.debug('SHARE ASYNC -', data);
-          $translate('GROWL_ALERT.ACTION.SHARE_ASYNC').then(function(message) {
-            toastService.info(message);
-          });
+          toastService.info('GROWL_ALERT.ACTION.SHARE_ASYNC');
           $scope.mainVm.sidebar.hide();
           var shareCopy = _.cloneDeep(shareActionVm.newShare.getObjectCopy());
           for (var upload in currentUploads) {
@@ -91,9 +85,7 @@ angular.module('linshare.share')
           $scope.shareArray.push(shareCopy);
           shareActionVm.newShare.resetForm();
         } else {
-          $translate('GROWL_ALERT.ACTION.SHARE_FAILED').then(function(message) {
-            toastService.error(message);
-          });
+          toastService.error('GROWL_ALERT.ACTION.SHARE_FAILED');
         }
       });
     }

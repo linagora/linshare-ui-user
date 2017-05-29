@@ -155,7 +155,7 @@
     "KEEP_SIGNED": "Rester connecté",
     "LOGIN_HEADER": "Connexion",
     "NOTIFICATION": {
-      "SUCCESS": "Bonjour ${firstName}",
+      "SUCCESS": "Bonjour {{firstName}}",
       "ERROR": "L'authentification a échoué, l'email ou le mot de passe est incorrect"
     },
     "PASSWORD_PLACEHOLDER": "Mot de passe",

@@ -33,7 +33,6 @@
 
     var
       copySuffix,
-      errorRename,
       newContactsListName,
       privateList,
       publicList,
@@ -116,7 +115,6 @@
             publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
             stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
             copySuffix = translations['ACTION.COPY_ADJ'];
-            errorRename = translations['GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'];
           });
       });
 
@@ -236,9 +234,7 @@
     function deleteCallback(items) {
       _.forEach(items, function(restangularizedItem) {
         restangularizedItem.remove().then(function() {
-          $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
-            toastService.success(message);
-          });
+          toastService.success('GROWL_ALERT.ACTION.DELETE_SINGULAR');
           _.remove(contactsListsListVm.itemsList, restangularizedItem);
           _.remove(contactsListsListVm.selectedContactsLists, restangularizedItem);
           contactsListsListVm.tableParams.reload();
@@ -434,7 +430,7 @@
         contactsListsListVm.canCreate = true;
       }).catch(function(error) {
         if (error.data.errCode === 25001) {
-          toastService.error(errorRename);
+          toastService.error('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST');
           renameContactsList(item, itemNameElem);
         }
         if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
@@ -460,6 +456,7 @@
       contactsListsListVm.flagsOnSelectedPages = {};
     }
 
+    /*********************************************** DEAD CODE WALKING ***********************************************\
     /**
      * @name saveContacts
      * @desc Create contacts to a specific contactsList
@@ -475,9 +472,7 @@
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
         contactsListsContactsRestService.create(contactListUuidDestination, contact).then(function() {
           if (!duplicate) {
-            $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
-              toastService.success(message);
-            });
+            toastService.success('GROWL_ALERT.ACTION.UPDATE');
           }
           _.remove(contactsListsListVm.contactsToAddList, {
             mail: contact.mail
@@ -498,6 +493,7 @@
         });
       });
     }
+    /*********************************************** DEAD CODE WALKING ***********************************************\
 
     /**
      * @name saveNewItem

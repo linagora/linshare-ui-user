@@ -23,16 +23,13 @@
       invalidNameTranslate = {
         empty: {
           key: 'GROWL_ALERT.ERROR.RENAME_INVALID.EMPTY',
-          value: ''
         },
         endingPoint: {
           key: 'GROWL_ALERT.ERROR.RENAME_INVALID.ENDING_POINT',
-          value: ''
         },
         rejectedChar: {
           key: 'GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR',
           param: lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''),
-          value: ''
         }
       },
       regex = new RegExp('[\\' + lsAppConfig.rejectedChar.join('-').replace(new RegExp('-', 'g'), '\\') + ']'),
@@ -42,22 +39,10 @@
         itemNumber: itemNumber,
         rename: rename
       };
-    initService();
     return service;
 
     ////////////
 
-    function initService() {
-      $q.all([$translate([invalidNameTranslate.empty.key, invalidNameTranslate.endingPoint.key]),
-        $translate(invalidNameTranslate.rejectedChar.key, {
-          rejectedChar: invalidNameTranslate.rejectedChar.param
-        })
-      ]).then(function(promises) {
-        invalidNameTranslate.empty.value = promises[0][invalidNameTranslate.empty.key];
-        invalidNameTranslate.endingPoint.value = promises[0][invalidNameTranslate.endingPoint.key];
-        invalidNameTranslate.rejectedChar.value = promises[1];
-      });
-    }
 
     /**
      * @name download
@@ -94,15 +79,20 @@
      */
     function isNameValid(name) {
       if (name === '') {
-        toastService.error(invalidNameTranslate.empty.value);
+        toastService.error(invalidNameTranslate.empty.key);
         return false;
       }
       if (name.charAt(name.length - 1) === '.') {
-        toastService.error(invalidNameTranslate.endingPoint.value);
+        toastService.error(invalidNameTranslate.endingPoint.key);
         return false;
       }
       if (regex.test(name)) {
-        toastService.error(invalidNameTranslate.rejectedChar.value);
+        toastService.error({
+          key: invalidNameTranslate.rejectedChar.key,
+          params: {
+            rejectedChar: invalidNameTranslate.rejectedChar.param
+          }
+        });
         return false;
       }
       return true;

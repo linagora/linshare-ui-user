@@ -32,8 +32,7 @@
     const TYPE_FOLDER = 'FOLDER';
 
     // TODO : for all REST callbacks messages, remove them when interceptor will be set
-    var copyNodeSuccessMessage, deleteNodeError26006Message, deleteNodeSuccessMessage, errorRenameFile,
-      errorRenameFolder, newFolderName, swalMultipleDownloadTitle, swalMultipleDownloadText,
+    var newFolderName, swalMultipleDownloadTitle, swalMultipleDownloadText,
       swalMultipleDownloadConfirm;
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
@@ -78,25 +77,14 @@
 
       $translate([
         'ACTION.NEW_FOLDER',
-        'GROWL_ALERT.ACTION.COPY',
-        'GROWL_ALERT.ERROR.DELETE_ERROR.26006',
-        'GROWL_ALERT.ACTION.DELETE_SINGULAR',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
-        'GROWL_ALERT.ERROR.RENAME_FILE',
-        'GROWL_ALERT.ERROR.RENAME_FOLDER',
-        'GROWL_ALERT.ERROR.RENAME_INVALID'])
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
         .then(function(translations) {
           newFolderName = translations['ACTION.NEW_FOLDER'];
-          copyNodeSuccessMessage = translations['GROWL_ALERT.ACTION.COPY'];
-          deleteNodeError26006Message = translations['GROWL_ALERT.ERROR.DELETE_ERROR.26006'];
-          deleteNodeSuccessMessage = translations['GROWL_ALERT.ACTION.DELETE_SINGULAR'];
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-          errorRenameFile = translations['GROWL_ALERT.ERROR.RENAME_FILE'];
-          errorRenameFolder = translations['GROWL_ALERT.ERROR.RENAME_FOLDER'];
         });
 
       getBreadcrumb();
@@ -151,7 +139,7 @@
       workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem, _destinationNodeUuid)
         .then(function(data) {
           var copiedNode = workgroupNodesRestService.restangularize(data, workgroupNodesVm.folderDetails.workgroupUuid);
-          toastService.success(copyNodeSuccessMessage);
+          toastService.success('GROWL_ALERT.ACTION.COPY');
           addNewItemInTableParams(copiedNode);
         });
     }
@@ -194,13 +182,13 @@
       documentUtilsService.deleteDocuments(nodes, function(nodes) {
         _.forEach(nodes, function(restangularizedItem) {
           restangularizedItem.remove().then(function() {
-            toastService.success(deleteNodeSuccessMessage);
+            toastService.success('GROWL_ALERT.ACTION.DELETE_SINGULAR');
             _.remove(workgroupNodesVm.nodesList, restangularizedItem);
             _.remove(workgroupNodesVm.selectedDocuments, restangularizedItem);
             workgroupNodesVm.tableParamsService.reloadTableParams();
           }, function(error) {
             if (error.status === 400 && error.data.errCode === 26006) {
-              toastService.error(deleteNodeError26006Message);
+              toastService.error('GROWL_ALERT.ERROR.DELETE_ERROR.26006');
             }
           });
         });
@@ -417,7 +405,7 @@
         if (nodeToRename.name !== data.name) {
           $timeout(function() {
             renameNode(data, 'td[uuid=' + data.uuid + '] .file-name-disp');
-            toastService.error(errorRenameFolder);
+            toastService.error('GROWL_ALERT.ERROR.RENAME_FOLDER');
           }, 0);
         } else {
           workgroupNodesVm.canCreateFolder = true;
@@ -426,7 +414,8 @@
         switch(error.data.errCode) {
           case 26445 :
           case 28005 :
-            var errorMessage = isDocument(nodeToRename.type) ? errorRenameFile : errorRenameFolder;
+            var errorMessage = isDocument(nodeToRename.type) ? 'GROWL_ALERT.ERROR.RENAME_FILE' :
+              'GROWL_ALERT.ERROR.RENAME_FOLDER';
             toastService.error(errorMessage);
             renameNode(nodeToRename, itemNameElem);
             break;

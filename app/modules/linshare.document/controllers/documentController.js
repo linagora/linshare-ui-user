@@ -11,11 +11,7 @@
     documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService,
     $stateParams, tableParamsService, auditDetailsService, swal) {
 
-    var
-      swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm, swalNoDeleteElements,
-      swalNoDeleteElementsSingular, swalNoDeleteElementsPlural, swalActionDelete, swalInfoErrorFile, swalClose,
-      swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500, toastDeleteSingularSuccess,
-      toastDeletePluralSuccess;
+    var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
 
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
@@ -96,31 +92,12 @@
       // TODO : rename all GROWL
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
-          'GROWL_ALERT.ACTION.DELETE', 'TOAST_ALERT.ACTION.INFO_ERROR_FILE',
-          'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED',
-          'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR',
-          'TOAST_ALERT.ACTION.CLOSE', 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL',
-          'TOAST_ALERT.WARNING.ERROR_404', 'TOAST_ALERT.WARNING.ERROR_403',
-          'TOAST_ALERT.WARNING.ERROR_400', 'TOAST_ALERT.WARNING.ERROR_500',
-          'GROWL_ALERT.ACTION.DELETE_SINGULAR','GROWL_ALERT.ACTION.DELETE_PLURAL'
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
         ])
         .then(function(translations) {
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-          swalActionDelete = translations['GROWL_ALERT.ACTION.DELETE'];
-          swalInfoErrorFile = translations['TOAST_ALERT.ACTION.INFO_ERROR_FILE'];
-          swalClose = translations['TOAST_ALERT.ACTION.CLOSE'];
-          swalNoDeleteElements = translations['TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED'];
-          swalNoDeleteElementsSingular = translations['TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR'];
-          swalNoDeleteElementsPlural = translations['TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL'];
-          swalCodeError404 = translations['TOAST_ALERT.WARNING.ERROR_404'];
-          swalCodeError403 = translations['TOAST_ALERT.WARNING.ERROR_403'];
-          swalCodeError400 = translations['TOAST_ALERT.WARNING.ERROR_400'];
-          swalCodeError500 = translations['TOAST_ALERT.WARNING.ERROR_500'];
-          toastDeleteSingularSuccess = translations['GROWL_ALERT.ACTION.DELETE_SINGULAR'];
-          toastDeletePluralSuccess = translations['GROWL_ALERT.ACTION.DELETE_PLURAL'];
         });
 
       $scope.$on('$stateChangeSuccess', function() {
@@ -178,39 +155,43 @@
       var responsesDeletion = [];
       $q.all(sortResponseDeletion(items, responsesDeletion)).then(function() {
         if (responsesDeletion.length > 0) {
-         var txtMessage = responsesDeletion.length === 1 ? swalNoDeleteElementsSingular :responsesDeletion.length +
-          swalNoDeleteElementsPlural;
+          var txtMessage = responsesDeletion.length === 1 ? 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR' : {
+            key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL',
+            params: {
+              number: responsesDeletion.length
+            }
+          };
           var responses = [];
           _.forEach(responsesDeletion, function(responseItems) {
             switch (responseItems[1].status) {
               case 404:
                 responses.push({
                   'title': responseItems[0],
-                  'message': swalCodeError404
+                  'message': 'TOAST_ALERT.WARNING.ERROR_404'
                 });
                 break;
               case 403:
                 responses.push({
                   'title': responseItems[0],
-                  'message': swalCodeError403
+                  'message': 'TOAST_ALERT.WARNING.ERROR_403'
                 });
                 break;
               case 400:
                 responses.push({
                   'title': responseItems[0],
-                  'message': swalCodeError400
+                  'message': 'TOAST_ALERT.WARNING.ERROR_400'
                 });
                 break;
               default:
                 responses.push({
                   'title': responseItems[0],
-                  'message': swalCodeError500
+                  'message': 'TOAST_ALERT.WARNING.ERROR_500'
                 });
             }
           });
           toastService.error(txtMessage,undefined,responses);
         } else {
-          var message = (nbItems === 1) ? toastDeleteSingularSuccess : toastDeletePluralSuccess;
+          var message = (nbItems === 1) ? 'GROWL_ALERT.ACTION.DELETE_SINGULAR' : 'GROWL_ALERT.ACTION.DELETE_PLURAL';
           toastService.success(message);
           $timeout(function() {
             $scope.getUserQuotas();
@@ -280,16 +261,12 @@
 
         if ($stateParams.fileUuid) {
           if (_.isNil(data.itemToSelect)) {
-            $translate('GROWL_ALERT.ERROR.FILE_NOT_FOUND').then(function(message) {
-              toastService.error(message);
-            });
+            toastService.error('GROWL_ALERT.ERROR.FILE_NOT_FOUND');
           } else {
-            $translate('TOAST_ALERT.WARNING.ISOLATED_FILE').then(function(message) {
-              toastService.isolate(message);
-              $scope.addSelectedDocument(data.itemToSelect);
-              $scope.toggleFilterBySelectedFiles();
-              $scope.showCurrentFile(data.itemToSelect);
-            });
+            toastService.isolate('TOAST_ALERT.WARNING.ISOLATED_FILE');
+            $scope.addSelectedDocument(data.itemToSelect);
+            $scope.toggleFilterBySelectedFiles();
+            $scope.showCurrentFile(data.itemToSelect);
           }
         }
       });

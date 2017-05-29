@@ -65,7 +65,7 @@
     "WARNING": {
       "ELEMENTS_NOT_DELETED": "element(s) haven't been deleted",
       "ELEMENTS_NOT_DELETED_SINGULAR": "1 item has not been deleted.",
-      "ELEMENTS_NOT_DELETED_PLURAL": " items have not been deleted.",
+      "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} items have not been deleted.",
       "ERROR": "Error :",
       "ERROR_404": "Element not found",
       "ERROR_403": "You are not authorized to delete this document",

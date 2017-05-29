@@ -113,11 +113,7 @@ angular
           if (response.status) {
             $log.debug('Error ' + response.status, response);
           } else {
-            var $translate = $filter('translate');
-            var noResponseTranslation = $translate('NO_RESPONSE_ERROR');
-            $translate('GROWL_ALERT.ERROR.' + noResponseTranslation).then(function(message) {
-              toastService.error(message);
-            });
+            toastService.error('GROWL_ALERT.ERROR.NO_RESPONSE_ERROR');
             $log.debug('deferred', deferred);
             $log.debug('response', response);
             $log.debug('responseHandler', responseHandler);

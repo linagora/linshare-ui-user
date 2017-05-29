@@ -155,7 +155,7 @@
     "KEEP_SIGNED": "Keep me signed in",
     "LOGIN_HEADER": "Connection",
     "NOTIFICATION": {
-      "SUCCESS": "Welcome ${firstName}",
+      "SUCCESS": "Welcome {{firstName}}",
       "ERROR": "Authentication failed, either the email or the password is invalid"
     },
     "PASSWORD_PLACEHOLDER": "Password",

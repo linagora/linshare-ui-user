@@ -155,7 +155,7 @@
     "KEEP_SIGNED": "Giữ trạng thái đăng nhập",
     "LOGIN_HEADER": "Đang truy cập",
     "NOTIFICATION": {
-      "TBT__SUCCESS": " ${firstName} ",
+      "TBT__SUCCESS": "{{firstName}}",
       "TBT__ERROR": ""
     },
     "PASSWORD_PLACEHOLDER": "Mật khẩu",
