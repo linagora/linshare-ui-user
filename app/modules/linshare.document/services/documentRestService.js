@@ -136,6 +136,7 @@
       if (documentUpdated.thumbnail) {
         delete documentUpdated.thumbnail;
       }
+      delete documentUpdated.auditActions;
       return handler(Restangular.one(restUrl, uuid).customPUT(documentUpdated));
     }
   }
