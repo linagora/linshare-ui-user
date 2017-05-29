@@ -270,6 +270,7 @@
   },
   "UNKNOWN_USER": "Unknown user",
   "UNKNOWN_FIRST_LETTER": "UNK",
+  "UPLOAD_DONE": "{singular, select, true{{fileName} has been} other{Some file have been}} successfully uploaded",
   "USER_QUOTAS": {
     "MAX_FILE_SIZE": "Max file size",
     "REMAINING_OVER": "remaining over",

@@ -271,6 +271,7 @@
   },
   "TBT__UNKNOWN_USER": "",
   "TBT__UNKNOWN_FIRST_LETTER": "",
+  "TBT__UPLOAD_DONE": "{singular, select, true{{fileName} has been} other{Some file have been}} successfully uploaded",
   "USER_QUOTAS": {
     "TBT__MAX_FILE_SIZE": "",
     "TBT__REMAINING_OVER": "",

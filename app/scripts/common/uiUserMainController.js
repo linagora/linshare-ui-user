@@ -15,12 +15,13 @@
   UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
     'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
     'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
-    'uploadRestService'
+    'toastService', 'uploadRestService'
   ];
 
   function UiUserMainController(_, $http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
     authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
-    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService, uploadRestService) {
+    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService,
+    toastService, uploadRestService) {
     /* jshint validthis:true */
     var mainVm = this;
 
@@ -92,6 +93,14 @@
         $log.debug('UPLOAD SUCCESS', flowFile.name);
         flowFile.doingAsyncUpload = true;
         mainVm.flowUploadService.addUploadedFile(flowFile, $message).then(function(file) {
+          toastService.success({
+            key: 'UPLOAD_DONE',
+            params: {
+              fileName: file.name,
+              singular: 'true'
+            },
+            plural: true
+          });
           $scope.getUserQuotas();
           if (file._from === lsAppConfig.mySpacePage) {
             sharableDocumentService.sharableDocuments(file, $scope.shareArray, $scope.refFlowShares);
