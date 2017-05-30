@@ -55,6 +55,22 @@
     }
 
     /**
+     * @name dateFilter
+     * @desc Get filter date value
+     * @returns {Object} date start & end
+     * @memberOf linshare.components.FilterBoxController
+     */
+    function dateFilter() {
+      if (filterBoxVm.showDateRange) {
+        var dateStart = filterBoxVm.dateStart ?
+          moment(filterBoxVm.dateStart) : moment('0000-01-01');
+        var dateEnd = filterBoxVm.dateEnd ?
+          moment(filterBoxVm.dateEnd).add('day', +1) : moment().add('day', +1);
+        return {dateStart:dateStart, dateEnd:dateEnd};
+      }
+    }
+
+    /**
      * @name formatLabel
      * @desc Format representation of object user
      * @param {string} user - Object containing user information
@@ -70,6 +86,22 @@
     }
 
     /**
+     * @name sizeFilter
+     * @desc Get filter size value
+     * @returns {Object} size start & end
+     * @memberOf linshare.components.FilterBoxController
+     */
+    function sizeFilter() {
+      if (filterBoxVm.showUnit) {
+        var sizeStart = filterBoxVm.sizeStart ?
+          filterBoxVm.unitService.toByte(filterBoxVm.sizeStart, filterBoxVm.unitSize.value, false) : 0;
+        var sizeEnd = filterBoxVm.sizeEnd ?
+          filterBoxVm.unitService.toByte(filterBoxVm.sizeEnd, filterBoxVm.unitSize.value, false) : 999999999999;
+        return {sizeStart: sizeStart, sizeEnd: sizeEnd};
+      }
+    }
+
+    /**
      * @name updateFilters
      * @desc Update the filters to apply to the list of element in the table
      * @memberOf linshare.components.FilterBoxController
@@ -80,29 +112,20 @@
         filterBoxVm.activate = true;
       }
       resetTableList();
-      if (filterBoxVm.showUnit) {
-        var sizeStart = filterBoxVm.sizeStart ?
-          filterBoxVm.unitService.toByte(filterBoxVm.sizeStart, filterBoxVm.unitSize.value, false) : 0;
-        var sizeEnd = filterBoxVm.sizeEnd ?
-          filterBoxVm.unitService.toByte(filterBoxVm.sizeEnd, filterBoxVm.unitSize.value, false) : 999999999999;
-      }
-      if (filterBoxVm.showDateRange) {
-        var dateStart = filterBoxVm.dateStart ?
-          moment(filterBoxVm.dateStart) : moment('0000-01-01');
-        var dateEnd = filterBoxVm.dateEnd ?
-          moment(filterBoxVm.dateEnd).add('day', +1) : moment().add('day', +1);
-      }
+
+      var dateValues = dateFilter();
+      var sizeValues = sizeFilter();
 
       _.remove(filterBoxVm.filterBoxItems, function(item) {
         var sizeIsValid = true,
           dateIsValid = true;
         if (filterBoxVm.showUnit) {
           var size = item.size.toFixed(1);
-          sizeIsValid = (size >= sizeStart && size <= sizeEnd);
+          sizeIsValid = (size >= sizeValues.sizeStart && size <= sizeValues.sizeEnd);
         }
         if (filterBoxVm.showDateRange) {
           var date = filterBoxVm.dateType === '1' ? item.modificationDate : item.creationDate;
-          dateIsValid = (date >= dateStart && date <= dateEnd);
+          dateIsValid = (date >= dateValues.dateStart && date <= dateValues.dateEnd);
         }
         return !(sizeIsValid && dateIsValid);
       });

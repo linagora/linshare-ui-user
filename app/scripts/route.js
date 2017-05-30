@@ -388,42 +388,6 @@
             return $stateParams.id;
           }
         }
-      })
-      .state('share.files', {
-        url: '/advancedshare',
-        templateUrl: 'modules/linshare.share/views/advancedSharing.html',
-        params: {
-          'selected': null,
-          'hiddenParam': 'YES'
-        },
-        controller: 'LinshareShareActionController'
-      })
-      .state('share.files.new-share', {
-        url: '/new_share',
-        templateUrl: 'modules/linshare.share/views/new_advanced_sharing.html',
-        controller: 'LinshareAdvancedShareController',
-        resolve: {
-          allFunctionalities: function(functionalities) {
-            return functionalities;
-          }
-        }
-      })
-      .state('transfert', {
-        parent: 'common',
-        url: '/transfert',
-        template: '<div ui-view></div>'
-      })
-      .state('transfert.new_share', {
-        url: '/newShare',
-        templateUrl: 'modules/linshare.share/views/partage_template.html'
-      })
-      .state('transfert.new_upload', {
-        url: '/newUpload',
-        templateUrl: 'modules/linshare.share/views/upload_template.html'
-      })
-      .state('share.files.share-detail', {
-        url: '/share_detail',
-        templateUrl: 'modules/linshare.share/views/shares_detail.html'
       });
 
     /**

@@ -47,28 +47,27 @@ angular.module('linshare.share')
     function ShareObjectForm(shareJson) {
       var self = this;
       getFunctionalities().then(function() {
-        shareJson = shareJson || {};
-        self.documents = shareJson.documents || [];
-        self.recipients = shareJson.recipients || [];
+        shareJson = _.defaultTo(shareJson, {});
+        self.documents = _.defaultTo(shareJson.documents, []);
+        self.recipients = _.defaultTo(shareJson.recipients, []);
         recipients = self.recipients;
-        self.mailingListUuid = shareJson.mailingListUuid || [];
-        self.mailingList = shareJson.mailingList || [];
-        self.secured = shareJson.secured || secured;
-        self.creationAcknowledgement = shareJson.creationAcknowledgement || creationAcknowledgement;
-        self.expirationDate = shareJson.expirationDate || expirationDate;
-        self.enableUSDA = shareJson.enableUSDA || enableUSDA;
-        self.notificationDateForUSDA = shareJson.notificationDateForUSDA || notificationDateForUSDA;
+        self.mailingListUuid = _.defaultTo(shareJson.mailingListUuid, []);
+        self.mailingList = _.defaultTo(shareJson.mailingList, []);
+        self.secured = _.defaultTo(shareJson.secured, secured);
+        self.creationAcknowledgement = _.defaultTo(shareJson.creationAcknowledgement, creationAcknowledgement);
+        self.expirationDate =_.defaultTo(shareJson.expirationDate, expirationDate);
+        self.enableUSDA = _.defaultTo(shareJson.enableUSDA, enableUSDA);
+        self.notificationDateForUSDA =  _.defaultTo(shareJson.notificationDateForUSDA, notificationDateForUSDA);
+        self.sharingNote = _.defaultTo(shareJson.sharingNote, '');
+        self.subject = _.defaultTo(shareJson.subject, '');
+        self.message = _.defaultTo(shareJson.message, '');
 
-        self.sharingNote = shareJson.sharingNote || '';
-        self.subject = shareJson.subject || '';
-        self.message = shareJson.message || '';
-
-        self.asyncShare = shareJson.asyncShare || false;
+        self.asyncShare = _.defaultTo(shareJson.asyncShare, false);
         self.setAsyncShare = function(state) {
           self.asyncShare = state;
         };
 
-        self.waitingUploadIdentifiers = shareJson.waitingUploadIdentifiers || [];
+        self.waitingUploadIdentifiers = _.defaultTo(shareJson.waitingUploadIdentifiers, []);
         self.uploadingDocuments = [];
         self.getMinDate = function() {
           return moment().endOf('day').valueOf();

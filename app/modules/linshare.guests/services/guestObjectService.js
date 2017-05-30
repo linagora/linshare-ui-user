@@ -288,21 +288,21 @@
       self = this;
       var guestDTO = {};
       guestDTO.canUpload = setFunctionalityValue(self.canUpload, allowedToUpload);
-      guestDTO.comment = _.isUndefined(self.comment) ? '' : self.comment;
+      guestDTO.comment = _.defaultTo(self.comment, '');
       moment(self.expirationDate).endOf('day').valueOf();
       if (_.isUndefined(self.uuid)) {
         guestDTO.expirationDate = setFunctionalityValue(self.expirationDate, allowedToExpiration);
       } else {
         guestDTO.expirationDate = setFunctionalityValue(self.expirationDate, allowedToProlongExpiration);
       }
-      guestDTO.firstName = _.isUndefined(self.firstName) ? '' : self.firstName;
-      guestDTO.lastName = _.isUndefined(self.lastName) ? '' : self.lastName;
-      guestDTO.mail = _.isUndefined(self.mail) ? '' : self.mail;
+      guestDTO.firstName = _.defaultTo(self.firstName, '');
+      guestDTO.lastName = _.defaultTo(self.lastName, '');
+      guestDTO.mail = _.defaultTo(self.mail, '');
       guestDTO.restricted = setFunctionalityValue(self.restricted, allowedToRestrict);
       if (guestDTO.canUpload) {
         if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
           guestDTO.restrictedContacts =
-            _.uniq(_.isUndefined(self.restrictedContacts) ? contacts : self.restrictedContacts);
+            _.uniq(_.defaultTo(self.restrictedContacts, contacts));
         } else {
           guestDTO.restrictedContacts = null;
         }

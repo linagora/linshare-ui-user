@@ -53,6 +53,19 @@
     function responseHandler(action, messagePrefix, showError) {
       showError = _.isUndefined(showError) ? true : showError;
       messagePrefix = _.isUndefined(messagePrefix) ? 'DEFAULT' : messagePrefix;
+      const ERRROS_HTTP = {
+        400: 'ERROR_400',
+        401: 'ERROR_401',
+        403: 'ERROR_403',
+        404: 'ERROR_404',
+        405: 'ERROR_405',
+        408: 'ERROR_408',
+        500: 'ERROR_500',
+        501: 'ERROR_501',
+        502: 'ERROR_502',
+        503: 'ERROR_503',
+        520: 'ERROR_520'
+      };
       var
         errorData,
         deferred = $q.defer(),
@@ -69,45 +82,14 @@
           errorData = error;
           errCode = errorData.data.errCode;
           deferred.reject(error);
-          switch (error.status) {
-            case 400:
-              errorMessageHttpCodes += 'ERROR_400';
-              break;
-            case 401:
-              errorMessageHttpCodes += 'ERROR_401';
-              break;
-            case 403:
-              errorMessageHttpCodes += 'ERROR_403';
-              break;
-            case 404:
-              errorMessageHttpCodes += 'ERROR_404';
+
+          if (ERRROS_HTTP.hasOwnProperty(error.status)) {
+            errorMessageHttpCodes += ERRROS_HTTP[error.status];
+            if (error.status === 404 || error.status === 503) {
               errCode = errCode || 'SERVER';
-              break;
-            case 405:
-              errorMessageHttpCodes += 'ERROR_405';
-              break;
-            case 408:
-              errorMessageHttpCodes += 'ERROR_408';
-              break;
-            case 500:
-              errorMessageHttpCodes += 'ERROR_500';
-              break;
-            case 501:
-              errorMessageHttpCodes += 'ERROR_501';
-              break;
-            case 502:
-              errorMessageHttpCodes += 'ERROR_502';
-              break;
-            case 503:
-              errorMessageHttpCodes += 'ERROR_503';
-              errCode = errCode || 'SERVER';
-              break;
-            case 520:
-              errorMessageHttpCodes += 'ERROR_520';
-              break;
-            default:
-              errorMessageHttpCodes += 'ERROR_DEFAULT';
-              break;
+            }
+          } else {
+            errorMessageHttpCodes += 'ERROR_DEFAULT';
           }
           if (showError) {
             errorMessageDetails += _.isUndefined(errCode) ? 'NONE' : errCode;

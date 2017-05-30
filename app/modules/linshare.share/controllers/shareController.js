@@ -18,21 +18,26 @@ angular.module('linshare.share')
       $scope.mainVm.sidebar.hide();
     }
 
-    function submitShare(shareCreationDto, selectedDocuments, selectedUploads) {
-      if (selectedDocuments.length === 0 && (selectedUploads === undefined ||
-        (Object.keys(selectedUploads).length === 0))) {
+    function handleErrors(shareCreationDto, selectedDocuments, selectedUploads) {
+      if (selectedDocuments.length === 0 &&
+        (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
         $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT').then(function(message) {
           toastService.error(message);
         });
-        return;
+        return true;
       }
       if (shareCreationDto.getRecipients().length === 0 && shareCreationDto.getMailingListUuid().length === 0) {
         $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT').then(function(message) {
           toastService.error(message);
         });
+        return true;
+      }
+    }
+
+    function submitShare(shareCreationDto, selectedDocuments, selectedUploads) {
+      if (handleErrors(shareCreationDto, selectedDocuments, selectedUploads)) {
         return;
       }
-
       selectedUploads = selectedUploads || {};
       var currentUploads = selectedUploads;
       for (var upload in currentUploads) {

@@ -89,40 +89,44 @@
      * @memberOf linshare.components.unitService
      */
     function find(value) {
-      switch (value.toString().length) {
-        case 1:
-        case 2:
-        case 3:
-          return units.B.value;
-        case 4:
-        case 5:
-        case 6:
-          return units.KB.value;
-        case 7:
-        case 8:
-        case 9:
-          return units.MB.value;
-        case 10:
-        case 11:
-        case 12:
-          return units.GB.value;
-        case 13:
-        case 14:
-        case 15:
-          return units.TB.value;
-        case 16:
-        case 17:
-        case 18:
-          return units.PB.value;
-        case 19:
-        case 20:
-        case 21:
-          return units.EB.value;
-        case 22:
-        case 23:
-        case 24:
-          return units.ZB.value;
-        default:
+      var
+        length = value.toString().length,
+         multiple3 = {
+           1: 3,
+           2: 3,
+           4: 6,
+           5: 6,
+           7: 9,
+           8: 9,
+           10: 12,
+           11: 12,
+           13: 15,
+           14: 15,
+           16: 18,
+           17: 18,
+           19: 21,
+           20: 21,
+           22: 24,
+           23: 24,
+        },
+        size = {
+          3: units.B.value,
+          6: units.KB.value,
+          9: units.MB.value,
+          12: units.GB.value,
+          15: units.TB.value,
+          18: units.PB.value,
+          21: units.EB.value,
+          24: units.ZB.value
+        };
+
+      if (multiple3.hasOwnProperty(length)) {
+        length = multiple3[length];
+      }
+
+      if (size.hasOwnProperty(length)) {
+        return size[length];
+      } else {
           return units.YB.value;
       }
     }

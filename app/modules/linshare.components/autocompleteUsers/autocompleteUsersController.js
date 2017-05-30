@@ -62,21 +62,13 @@
     //                 And retun the list of object. This will avoid duplicating code.
     function addElements() {
       var
-        errorMsg = 'Error in Function addElements:',
         exists = false,
-        exit = false,
         selectedUser = autocompleteUsersVm.selectedUser,
         selectedUsersList = autocompleteUsersVm.selectedUsersList;
 
-      if (_.isUndefined(selectedUser)) {
-        errorMsg += '\n\t- var selectedUser is not defined';
-      }
-      if (_.isUndefined(selectedUsersList)) {
-        errorMsg += '\n\t- var selectedUsersList is not defined';
-      }
-
-      if (exit) {
-        $log.error(errorMsg);
+      var errors = handleErrors();
+      if (errors) {
+        $log.error('Error in Function addElements:' + errors);
         return;
       }
 
@@ -115,6 +107,23 @@
             selectedUsersList.push(_.omit(selectedUser, 'display', 'identifier'));
           }
           break;
+      }
+
+      /**
+       * @name handleErrors
+       * @desc Error management for addElements
+       * @returns {String} error message if there is one
+       * @memberOf LinShare.components.AutocompleteUsersController.addElements
+       */
+      function handleErrors() {
+        var errorMsg = '';
+        if (_.isUndefined(selectedUser)) {
+          errorMsg += '\n\t- var selectedUser is not defined';
+        }
+        if (_.isUndefined(selectedUsersList)) {
+          errorMsg += '\n\t- var selectedUsersList is not defined';
+        }
+        return errorMsg;
       }
     }
 
