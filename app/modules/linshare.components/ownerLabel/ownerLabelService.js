@@ -43,7 +43,7 @@
 
     /**
      * @name getOwner
-     * @desc Get the owner value of an element in the form of : 'By <first name + last name | Me>'.
+     * @desc Get the owner value of an element in the form of : 'By <first name + last name | Me>'.
      * @param {Object} user - User object containing basic info: firstName, lastName, mail.
      * @returns {string} the owner value of the element.
      * @memberOf linshare.components.ownerLabel

@@ -52,16 +52,20 @@
        In this case it is applied to any non-reponsive table with a .fixed-activity-table-height id such as the one
        encountered within the activity logs page, more specifically:  it triggers the
        only tbody located on the page to which the tr tag (withholding the checkTableHeight directive) was assigned to*/
-      /* PS :  for table elements the directive is assigned to a tr element since we do not have access to the tbody element
+      /* PS : for table elements the directive is assigned to a tr element since we do not have access to the
+       * tbody element
       with ngTable */
       /* PS :  In the following case; as a last resort I assigned a min height value as well, since there is a
        bug on the table display upon refreshing the page */
-      angular.element('.fixed-activity-table-height tbody').attr('style','max-height : '+ tableHeight + 'px ; min-height :' + tableHeight + 'px');
+      angular.element('.fixed-activity-table-height tbody')
+        .attr('style','max-height : '+ tableHeight + 'px ; min-height :' + tableHeight + 'px');
 
 
-      /* the remaining space is assigned to the maximum height of the background areas of a table such as the drag n drops
+      /* the remaining space is assigned to the maximum height of the background areas of a table such as the
+       * drag n drops
        and also the background images of the tables of the current page.
-       PS : In this case it is applied to any .drag-n-drop-height class upon which the directive was directly assigned to*/
+       PS : In this case it is applied to any .drag-n-drop-height class upon which the directive was directly
+       assigned to*/
       var dndHeight = heightWindow - (navbarHeight + breadcrumbHeight + copyrightFooter) - 2;
       angular.element('.drag-n-drop-height').attr('style','height : '+ dndHeight + 'px');
     }

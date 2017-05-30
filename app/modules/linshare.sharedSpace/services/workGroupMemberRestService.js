@@ -94,7 +94,8 @@
      */
     function update(workgroupUuid, workgroupMemberDto) {
       $log.debug('workgroupMembersRestService :  update', workgroupUuid, workgroupMemberDto);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, workgroupMemberDto.uuid).customPUT(workgroupMemberDto));
+      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, workgroupMemberDto.uuid)
+        .customPUT(workgroupMemberDto));
     }
   }
 })();

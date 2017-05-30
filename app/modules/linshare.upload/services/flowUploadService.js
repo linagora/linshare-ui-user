@@ -19,6 +19,8 @@
    * @desc Upload system service
    * @memberOf LinShare.upload
    */
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false */
   function flowUploadService(_, $filter, $log, $q, $timeout, $translatePartialLoader,
                              authenticationRestService, LinshareDocumentRestService, lsAppConfig,
                              uploadRestService, workgroupNodesRestService) {
@@ -48,7 +50,8 @@
 
     /**
      * @namespace addUploadedFile
-     * @desc Once upload is finished, check if file is in error and launch error flow, or launch asyncUploadDetails function
+     * @desc Once upload is finished, check if file is in error and launch error flow,
+     * or launch asyncUploadDetails function
      * @param {Object} flowFile - File uploaded
      * @param {Object} serverResponse - Response from the server
      * @returns {promise} Promise with flowFile uploaded
@@ -94,7 +97,8 @@
     function checkAsyncUploadDetails(flowFile) {
       uploadRestService.getAsyncUploadDetails(flowFile.asyncTaskUuid).then(function(asyncUploadDetails) {
         flowFile.asyncUploadDetails = asyncUploadDetails.plain();
-        if (flowFile.asyncUploadDetails.status === STATUS_SUCCESS || flowFile.asyncUploadDetails.status === STATUS_FAILED) {
+        if (flowFile.asyncUploadDetails.status === STATUS_SUCCESS ||
+          flowFile.asyncUploadDetails.status === STATUS_FAILED) {
           delete flowFile.doingAsyncUpload;
           if (flowFile.asyncUploadDetails.status === STATUS_SUCCESS) {
             onSuccessAction(flowFile).then(function(data) {

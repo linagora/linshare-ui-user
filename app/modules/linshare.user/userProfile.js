@@ -42,7 +42,7 @@ angular.module('linshare.userProfile', [])
         this.locale = user.locale;
         this.role = user.role;
         this.accountType = user.accountType;
-        this.expirationDate = user.expirationDate || null;
+        this.expirationDate = user.expirationDate || null;
       },
 
       hasRightAccountType: function(accountType) {

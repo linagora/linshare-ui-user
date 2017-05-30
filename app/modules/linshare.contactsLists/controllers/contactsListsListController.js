@@ -21,6 +21,8 @@
    * @desc Application contactsLists management system controller
    * @memberOf LinShare.contactsLists
    */
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   function contactsListsListController(_, $filter, $scope, $state, $stateParams, $timeout, $translate,
     $translatePartialLoader, contactsListsList, contactsListsListRestService, contactsListsContactsRestService,
     contactsListsService, createNew, documentUtilsService, functionalityRestService, itemUtilsService, lsAppConfig,
@@ -108,7 +110,8 @@
             newContactsListName = translations['ACTION.NEW_CONTACTS_LIST'];
             contactsListsListVm.myLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS'];
             contactsListsListVm.otherLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS'];
-            contactsListsListVm.currentView = contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.myLists : contactsListsListVm.otherLists;
+            contactsListsListVm.currentView =
+              contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.myLists : contactsListsListVm.otherLists;
             privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
             publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
             stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
@@ -378,7 +381,8 @@
               filteredData = _.uniq(filteredData);
               break;
             default:
-              filteredData = params.hasFilter() ? $filter('filter')(contactsListsListVm.itemsList, params.filter()) : contactsListsListVm.itemsList;
+              filteredData = params.hasFilter() ?
+                $filter('filter')(contactsListsListVm.itemsList, params.filter()) : contactsListsListVm.itemsList;
               break;
           }
           var contactsListsList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
@@ -635,7 +639,7 @@
      */
     //TODO - IAB: refactor as utils
     function tableApplyFilter(filterValue, columns, operator) {
-      _.forEach(columns, function(column)  {
+      _.forEach(columns, function(column) {
         contactsListsListVm.paramFilter[column] = filterValue;
       });
       contactsListsListVm.paramFilter.operator = operator ? operator : '&&';

@@ -5,13 +5,17 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   function documentController(_, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log,
     documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService,
     $stateParams, tableParamsService, auditDetailsService, swal) {
 
-    var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
-    var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;
-    var swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500, toastDeleteSingularSuccess, toastDeletePluralSuccess;
+    var
+      swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm, swalNoDeleteElements,
+      swalNoDeleteElementsSingular, swalNoDeleteElementsPlural, swalActionDelete, swalInfoErrorFile, swalClose,
+      swalCodeError404, swalCodeError403, swalCodeError400, swalCodeError500, toastDeleteSingularSuccess,
+      toastDeletePluralSuccess;
 
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
@@ -258,7 +262,7 @@
      * @memberOf LinShare.document.documentController
      */
     function launchTableParamsInitiation() {
-      var fileToSearch = $stateParams.fileUuid || $stateParams.uploadedFileUuid;
+      var fileToSearch = $stateParams.fileUuid || $stateParams.uploadedFileUuid;
       tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, fileToSearch)
         .then(function(data) {
           $scope.tableParamsService = tableParamsService;
@@ -384,19 +388,21 @@
           });
         }
 
-        auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain()).then(function(auditActions) {
-          $scope.currentSelectedDocument.current.auditActions = auditActions;
-          if(openDetailsSidebar) {
-            $scope.data.selectedIndex = 0;
-            $scope.loadSidebarContent(lsAppConfig.details);
-            if (!_.isUndefined(event)) {
-              var currElm = event.currentTarget;
-              angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-                angular.element(currElm).addClass('activeActionButton');
-              });
+        auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain())
+          .then(function(auditActions) {
+            $scope.currentSelectedDocument.current.auditActions = auditActions;
+            if(openDetailsSidebar) {
+              $scope.data.selectedIndex = 0;
+              $scope.loadSidebarContent(lsAppConfig.details);
+              if (!_.isUndefined(event)) {
+                var currElm = event.currentTarget;
+                angular.element('#file-list-table tr li').removeClass('activeActionButton').promise()
+                  .done(function() {
+                    angular.element(currElm).addClass('activeActionButton');
+                  });
+              }
             }
-          }
-        });
+          });
       });
       deferred.resolve($scope.currentSelectedDocument.current);
       return deferred.promise;

@@ -23,9 +23,9 @@
     /* jshint validthis: true */
     var auditVm = this;
 
-    const EN_DATE_FORMAT = lsAppConfig.date_en_format,
+    const EN_DATE_FORMAT = lsAppConfig.dateFormat.en,
       FILTERS_SELECT_PREFIX = 'FILTERS_SELECT.',
-      FR_DATE_FORMAT = lsAppConfig.date_fr_format;
+      FR_DATE_FORMAT = lsAppConfig.dateFormat.fr;
 
     auditVm.beginDate = new Date();
     auditVm.endDate = new Date();

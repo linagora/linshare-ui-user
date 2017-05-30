@@ -25,8 +25,8 @@
    *  @memberOf LinShare.components
    */
   function workingDatePicker(componentsConfig, $translate, lsAppConfig) {
-    var FR_DATE_FORMAT = lsAppConfig.date_fr_format;
-    var EN_DATE_FORMAT = lsAppConfig.date_en_format;
+    var FR_DATE_FORMAT = lsAppConfig.dateFormat.fr;
+    var EN_DATE_FORMAT = lsAppConfig.dateFormat.en;
     var directive = {
       restrict: 'A',
       scope: false,
@@ -54,13 +54,15 @@
       /**
        *  @name invalidDate
        *  @desc Evaluate the date value to be inside the range defined by min & max
-       *  @param {Date/String/Integer} value - Date value, should be compliant with Date() object as an argument of instatiation
+       *  @param {Date/String/Integer} value - Date value, should be compliant with Date() object
+       *  as an argument of instatiation
        *  @returns {Boolean} return if the date is valid or not
        *  @memberOf LinShare.components.workingDatePicker.linkFn
        */
       function invalidDate(value) {
         var currentDate = new Date(value).setHours(0, 0, 0, 0);
-        if (currentDate < new Date(attrs.min).setHours(0, 0, 0, 0) || currentDate > new Date(attrs.max).setHours(0, 0, 0, 0)) {
+        if (currentDate < new Date(attrs.min).setHours(0, 0, 0, 0) ||
+          currentDate > new Date(attrs.max).setHours(0, 0, 0, 0)) {
           return false;
         }
         return true;

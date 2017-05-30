@@ -9,7 +9,9 @@
     .module('linshareUiUserApp')
     .controller('loginController', loginController);
 
-  loginController.$inject = ['$translate', 'authenticationRestService', 'languageService', 'lsAppConfig', 'toastService'];
+  loginController.$inject = ['$translate', 'authenticationRestService', 'languageService', 'lsAppConfig',
+    'toastService'
+  ];
 
   /**
    * @namespace loginController

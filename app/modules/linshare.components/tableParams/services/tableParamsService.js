@@ -18,7 +18,8 @@
    */
   function tableParamsService(_, $filter, $q, lsAppConfig, NgTableParams) {
     var
-      /* @property {Object} flagsOnSelectedPages - Object with number of page as key, and boolean as value (true if all elements in this page are selected, and false if not all) */
+      /* @property {Object} flagsOnSelectedPages - Object with number of page as key, and boolean as value
+         (true if all elements in this page are selected, and false if not all) */
       flagsOnSelectedPages,
       /* @property {Array<Object>} itemsList - Items to display in tableParams */
       itemsList,
@@ -232,7 +233,8 @@
 
     /**
      * @name isItemAddedOnCurrentPage
-     * @desc Check if item is added on current page (e.q. when a file is uploaded, or when an item is specified from upload queue)
+     * @desc Check if item is added on current page
+     * (e.q. when a file is uploaded, or when an item is specified from upload queue)
      * @returns {boolean} True if item is added on current page
      * @memberOf LinShare.components.tableParamsService
      */

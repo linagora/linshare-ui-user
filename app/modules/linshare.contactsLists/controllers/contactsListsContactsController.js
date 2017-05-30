@@ -19,6 +19,8 @@
    * @desc Application contactsLists contacts management system controller
    * @memberOf LinShare.contactsLists
    */
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   function contactsListsContactsController(_, $filter, $scope, $stateParams, $timeout, $translate,
     $translatePartialLoader, addContacts, contactsListsContacts, contactsListsListRestService,
     contactsListsContactsRestService, contactsListsService, documentUtilsService, lsAppConfig, NgTableParams,
@@ -77,7 +79,8 @@
 
       contactsListsListRestService.get(contactsListsContactsVm.contactsListUuid).then(function(details) {
         contactsListsContactsVm.contactsListDetails = details;
-        contactsListsContactsVm.canManage = (contactsListsContactsVm.contactsListDetails.owner.uuid === $scope.userLogged.uuid);
+        contactsListsContactsVm.canManage =
+          (contactsListsContactsVm.contactsListDetails.owner.uuid === $scope.userLogged.uuid);
         contactsListsContactsVm.contactsListUuid = details.uuid;
         contactsListsContactsVm.fabButton = {
           actions: [{
@@ -97,12 +100,15 @@
 
       loadTable();
 
-      $translate(['CONTACTS_LISTS_DETAILS.PRIVATE', 'CONTACTS_LISTS_DETAILS.PUBLIC', 'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'])
-        .then(function(translations) {
-          privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
-          publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
-          stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
-        });
+      $translate([
+        'CONTACTS_LISTS_DETAILS.PRIVATE',
+        'CONTACTS_LISTS_DETAILS.PUBLIC',
+        'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'
+      ]).then(function(translations) {
+        privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
+        publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
+        stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
+      });
 
       // TODO directive to externalize this code
       $scope.$on('$stateChangeSuccess', function() {
@@ -172,7 +178,8 @@
           });
           _.remove(contactsListsContactsVm.itemsList, restangularizedItem);
           _.remove(contactsListsContactsVm.selectedContacts, restangularizedItem);
-          contactsListsContactsVm.itemsListCopy = contactsListsContactsVm.itemsList; // I keep a copy of the data for the filter module
+          // I keep a copy of the data for the filter module
+          contactsListsContactsVm.itemsListCopy = contactsListsContactsVm.itemsList;
           contactsListsContactsVm.tableParams.reload();
           $scope.mainVm.sidebar.hide();
         });
@@ -229,10 +236,13 @@
               filteredData = _.uniq(filteredData);
               break;
             default:
-              filteredData = params.hasFilter() ? $filter('filter')(contactsListsContactsVm.itemsList, params.filter()) : contactsListsContactsVm.itemsList;
+              filteredData = params.hasFilter() ?
+                $filter('filter')(contactsListsContactsVm.itemsList, params.filter()) :
+                contactsListsContactsVm.itemsList;
               break;
           }
-          var contactsListsContacts = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+          var contactsListsContacts =
+            params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
           params.total(contactsListsContacts.length);
           params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
           return (contactsListsContacts.slice((params.page() - 1) * params.count(), params.page() * params.count()));
@@ -422,7 +432,8 @@
      */
     function sortDropdownSetActive(sortField, $event) {
       contactsListsContactsVm.toggleSelectedSort = !contactsListsContactsVm.toggleSelectedSort;
-      contactsListsContactsVm.tableParams.sorting(sortField, contactsListsContactsVm.toggleSelectedSort ? 'desc' : 'asc');
+      contactsListsContactsVm.tableParams.sorting(sortField, contactsListsContactsVm.toggleSelectedSort ?
+        'desc' : 'asc');
       var currTarget = $event.currentTarget;
       angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
@@ -489,15 +500,17 @@
         delete contactToSave._firstName;
         delete contactToSave._lastName;
         // TODO : IAB object returned to implement -> contactSaved
-        contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave).then(function() {
-          contactsListsContactsVm.itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
-          setModelForEdit(contactToSave);
-          $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
-            toastService.success(message);
+        contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave)
+          .then(function() {
+            contactsListsContactsVm
+              .itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
+            setModelForEdit(contactToSave);
+            $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
+              toastService.success(message);
+            });
+            contactsListsContactsVm.tableParams.reload();
+            $scope.mainVm.sidebar.hide();
           });
-          contactsListsContactsVm.tableParams.reload();
-          $scope.mainVm.sidebar.hide();
-        });
       } else {
         contactsListsContactsVm.setSubmitted(form);
       }

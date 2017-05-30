@@ -72,7 +72,7 @@
      */
     function byteTo(value, selectedUnit, showUnit) {
       var result = 0;
-      if (_.isUndefined(value) || value === null ||  isNaN(value)) {
+      if (_.isUndefined(value) || value === null || isNaN(value)) {
         return result;
       }
       var unit = _.isUndefined(selectedUnit) ? find(value) : selectedUnit;

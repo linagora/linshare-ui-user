@@ -5,6 +5,8 @@
 'use strict';
 
 angular.module('linshare.receivedShare')
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   .controller('ReceivedController',
     function(_, $filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
       authenticationRestService, autocompleteUserRestService, documentSelected, documentUtilsService, files,
@@ -151,7 +153,8 @@ angular.module('linshare.receivedShare')
      /**
       * @name loadSidebarContent
       * @desc Update the content of the sidebar
-      * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+      * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html
+      * for possible values
       */
       function loadSidebarContent(content) {
         $scope.mainVm.sidebar.setData($scope);
@@ -426,7 +429,8 @@ angular.module('linshare.receivedShare')
         if (angular.isString(u)) {
           return u;
         }
-        return '<span>' + u.firstName + ' ' + u.lastName + '</span> <span > + <i class="zmdi zmdi-email"></i> &nbsp;' + u.mail + '</span>';
+        return '<span>' + u.firstName + ' ' + u.lastName +
+          '</span> <span > + <i class="zmdi zmdi-email"></i> &nbsp;' + u.mail + '</span>';
       };
 
       $scope.searchGuestRestrictedContacts = function(pattern) {
@@ -533,7 +537,8 @@ angular.module('linshare.receivedShare')
       compile: function(element) {
         // wrap tag
         var contents = element.html();
-        element.html('<div class="slideable_content" style="margin:0 !important; padding:0 !important" >' + contents + '</div>');
+        element.html('<div class="slideable_content" style="margin:0 !important; padding:0 !important" >' +
+          contents + '</div>');
 
         return function postLink(scope, element, attrs) {
           // default properties

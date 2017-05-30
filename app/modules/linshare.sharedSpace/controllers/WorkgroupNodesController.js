@@ -19,6 +19,8 @@
    * @desc Application Workgroup Nodes system controller
    * @memberOf LinShare.sharedSpace
    */
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   function WorkgroupNodesController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
     auditDetailsService, documentUtilsService, flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode, nodesList,
     swal, tableParamsService, toastService, workgroupRestService, workgroupMembersRestService,
@@ -389,7 +391,8 @@
     /**
      * @name loadSidebarContent
      * @desc Update the content of the sidebar
-     * @param {String} content - The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     * @param {string} content - The id of the content to load, see app/views/includes/sidebar-right.html
+     * for possible values
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     // TODO : service with content and vm as parameter (because these 3 line are always same in all controller...)

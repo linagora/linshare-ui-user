@@ -93,10 +93,10 @@
 
     function getWelcomeMessage() {
       welcomeMessageRestService.getList().then(function(data) {
-        var lang_object = _.find(LANG_CONVERTER, {
+        var langObject = _.find(LANG_CONVERTER, {
           key: $translate.use()
         });
-        var lang = lang_object ? lang_object.lang : 'ENGLISH';
+        var lang = langObject ? langObject.lang : 'ENGLISH';
         $scope.welcomeMessage = data[0][lang];
       });
     }

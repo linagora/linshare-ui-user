@@ -61,7 +61,7 @@
      */
     function GuestObject(jsonObject) {
       self = this;
-      jsonObject = jsonObject ||  {};
+      jsonObject = jsonObject || {};
       checkFunctionalities().then(function() {
         self.allowedToAddEditors = _.cloneDeep(allowedToAddEditors);
         self.allowedToExpiration = _.cloneDeep(allowedToExpiration);

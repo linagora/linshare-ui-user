@@ -49,13 +49,13 @@
                             </md-tab>
                             <md-tab label="{{'TRANSFERS_DROPDOWN.SHARE' | translate}}">
                               <md-content class="md-padding">
-                                <p class="empty-res" x-ng-if="share_array.length === 0">
+                                <p class="empty-res" x-ng-if="shareArray.length === 0">
                                   <i class="zmdi zmdi-info-outline"></i>
                                   <span>
                                     {{'HEADER.NO_SHARES' | translate}}
                                   </span>
                                 </p>
-                                <div class="lv-item row" style="cursor: pointer" x-ng-repeat="share in share_array"
+                                <div class="lv-item row" style="cursor: pointer" x-ng-repeat="share in shareArray"
                                      ui-sref="share.detail({id: $index})">
                                   <div class="col-xs-12 p-0">
                                     <div class="lv-title p-0">

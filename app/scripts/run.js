@@ -33,7 +33,7 @@ angular
       return element;
     });
     flowFactoryProvider.defaults = {
-      simultaneousUploads: lsAppConfig.simultaneous_upload,
+      simultaneousUploads: lsAppConfig.simultaneousUpload,
       //testChunks:false,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
       allowDuplicateUploads: true,

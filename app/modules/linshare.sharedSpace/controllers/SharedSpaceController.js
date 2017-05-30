@@ -1,5 +1,7 @@
 'use strict';
 angular.module('linshare.sharedSpace')
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   .controller('SharedSpaceController', function(_, $scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
     $log, workgroups, $translate, $state, documentUtilsService, itemUtilsService, workgroupRestService,
     workgroupFoldersRestService, auditDetailsService, workgroupEntriesRestService, lsAppConfig, lsErrorCode,
@@ -26,7 +28,8 @@ angular.module('linshare.sharedSpace')
       filter: thisctrl.paramFilter
     }, {
       getData: function(params) {
-        var filteredData = params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
+        var filteredData =
+          params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
         var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
         params.total(workgroups.length);
         params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
@@ -245,12 +248,13 @@ angular.module('linshare.sharedSpace')
     function showItemDetails(current, event) {
       workgroupRestService.get(current.uuid).then(function(workgroup) {
         workgroupRestService.getAudit(current.uuid).then(function(auditData) {
-          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain()).then(function(auditActions) {
-            workgroup.auditActions = auditActions;
-            thisctrl.currentSelectedDocument.current = workgroup;
-            thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
-            thisctrl.mdtabsSelection.selectedIndex = 0;
-          });
+          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain())
+           .then(function(auditActions) {
+              workgroup.auditActions = auditActions;
+              thisctrl.currentSelectedDocument.current = workgroup;
+              thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
+              thisctrl.mdtabsSelection.selectedIndex = 0;
+            });
         });
       });
 

@@ -53,7 +53,8 @@
     function linkFn(scope, elm, attrs, form) {
       scope.autocompleteUsersVm.name = 'focusInputShare' + Math.random().toString(36).match(/[a-z]+/g).join('');
       scope.autocompleteUsersVm.form = form;
-      scope.autocompleteUsersVm.withEmail = (_.isUndefined(scope.autocompleteUsersVm.withEmail)) ? true : scope.autocompleteUsersVm.withEmail;
+      scope.autocompleteUsersVm.withEmail =
+        (_.isUndefined(scope.autocompleteUsersVm.withEmail)) ? true : scope.autocompleteUsersVm.withEmail;
       scope.completeType = attrs.lsAutocompleteUser;
       scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
       elm.bind('keypress', function(event) {

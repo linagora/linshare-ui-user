@@ -10,6 +10,8 @@
     .module('linshareUiUserApp')
     .controller('UiUserMainController', UiUserMainController);
 
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false */
   UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
     'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
     'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
@@ -38,7 +40,7 @@
     $scope.productVersion = 'dev';
     $scope.refFlowShares = {};
     $scope.setUserQuotas = setUserQuotas;
-    $scope.share_array = [];
+    $scope.shareArray = [];
     $scope.sizeHeight = $window.innerHeight - 50;
     $scope.userQuotas = {};
     $scope.workgroupPage = lsAppConfig.workgroupPage;
@@ -92,7 +94,7 @@
         mainVm.flowUploadService.addUploadedFile(flowFile, $message).then(function(file) {
           $scope.getUserQuotas();
           if (file._from === lsAppConfig.mySpacePage) {
-            sharableDocumentService.sharableDocuments(file, $scope.share_array, $scope.refFlowShares);
+            sharableDocumentService.sharableDocuments(file, $scope.shareArray, $scope.refFlowShares);
           }
           launchShare(file);
         }).catch(function(file) {
@@ -272,7 +274,7 @@
      */
     function launchShare(flowFile) {
       if (flowFile._from === lsAppConfig.mySpacePage) {
-        sharableDocumentService.sharableDocuments(flowFile, $scope.share_array, $scope.refFlowShares);
+        sharableDocumentService.sharableDocuments(flowFile, $scope.shareArray, $scope.refFlowShares);
       }
     }
 
@@ -293,9 +295,9 @@
      */
     function removeShareDocument(flowFile) {
       var
-        share_array = $scope.share_array,
+        shareArray = $scope.shareArray,
         shareObject =
-        _.find(share_array, function(element) {
+        _.find(shareArray, function(element) {
           _.remove(element.documents, _.isUndefined);
           return _.find(element.documents, function(doc) {
             return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
@@ -305,17 +307,17 @@
       if (!_.isUndefined(shareObject)) {
         _.remove(shareObject.documents, _.isUndefined);
 
-        var document_object = _.find(shareObject.documents, function(doc) {
+        var documentObject = _.find(shareObject.documents, function(doc) {
           return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
         });
 
-        _.remove(shareObject.documents, document_object);
+        _.remove(shareObject.documents, documentObject);
         _.remove(shareObject.waitingUploadIdentifiers, function(id) {
           return id === flowFile.uniqueIdentifier;
         });
 
         if (shareObject.documents.length === 0 || flowFile.error) {
-          _.remove(share_array, shareObject);
+          _.remove(shareArray, shareObject);
         } else {
           var documentInUpload = _.find(shareObject.documents, function(doc) {
             return doc.uniqueIdentifier;

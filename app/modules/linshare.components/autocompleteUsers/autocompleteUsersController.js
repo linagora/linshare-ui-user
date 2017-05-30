@@ -42,14 +42,15 @@
      * @memberOf LinShare.components.AutocompleteUsersController
      */
     function activate() {
-      $q.all([functionalityRestService.getFunctionalityParams('COMPLETION'), authenticationRestService.getCurrentUser()])
-        .then(function(promises) {
-          autocompleteUsersVm.functionality = promises[0];
-          autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
-          if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
-            autocompleteUsersVm.withEmail = false;
-          }
-        });
+      $q.all([functionalityRestService.getFunctionalityParams('COMPLETION'),
+        authenticationRestService.getCurrentUser()
+      ]).then(function(promises) {
+        autocompleteUsersVm.functionality = promises[0];
+        autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
+        if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
+          autocompleteUsersVm.withEmail = false;
+        }
+      });
     }
 
     /**

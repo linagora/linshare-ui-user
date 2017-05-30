@@ -75,9 +75,10 @@
         readonly: workgroupMemberVm.memberRole === workgroupMemberVm.membersRights.readonly,
         admin: workgroupMemberVm.memberRole === workgroupMemberVm.membersRights.admin
       };
-      workgroupMembersRestService.create(workgroupMemberVm.currentWorkGroup.current.uuid, jsonMember).then(function(data) {
-        workgroupMembers.push(data.plain());
-      });
+      workgroupMembersRestService.create(workgroupMemberVm.currentWorkGroup.current.uuid, jsonMember)
+        .then(function(data) {
+          workgroupMembers.push(data.plain());
+        });
     }
 
     /**
@@ -87,7 +88,8 @@
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
     function changeFilterByProperty(filterParam) {
-      workgroupMemberVm.membersSearchFilter.role = workgroupMemberVm.membersSearchFilter.role === filterParam ? '' : filterParam;
+      workgroupMemberVm.membersSearchFilter.role =
+        workgroupMemberVm.membersSearchFilter.role === filterParam ? '' : filterParam;
     }
 
     /**
@@ -98,9 +100,11 @@
      */
     function changePropertyOrderBy(orderParam) {
       workgroupMemberVm.propertyOrderBy = orderParam;
-      workgroupMemberVm.propertyOrderByAsc = workgroupMemberVm.propertyOrderBy === orderParam ? !workgroupMemberVm.propertyOrderByAsc : true;
-      workgroupMemberVm.currentWorkGroup.current.members = $filter('orderBy')(workgroupMemberVm.currentWorkGroup.current.members,
-        orderParam, workgroupMemberVm.propertyOrderByAsc);
+      workgroupMemberVm.propertyOrderByAsc =
+        workgroupMemberVm.propertyOrderBy === orderParam ? !workgroupMemberVm.propertyOrderByAsc : true;
+      workgroupMemberVm.currentWorkGroup.current.members =
+        $filter('orderBy')(workgroupMemberVm.currentWorkGroup.current.members, orderParam,
+          workgroupMemberVm.propertyOrderByAsc);
     }
 
     /**
@@ -137,9 +141,10 @@
         member.admin = false;
         member.readonly = false;
       }
-      workgroupMembersRestService.update(workgroupMemberVm.currentWorkGroup.current.uuid, member).then(function(updatedMember) {
-        member = updatedMember;
-      });
+      workgroupMembersRestService.update(workgroupMemberVm.currentWorkGroup.current.uuid, member)
+        .then(function(updatedMember) {
+          member = updatedMember;
+        });
     }
   }
 })();

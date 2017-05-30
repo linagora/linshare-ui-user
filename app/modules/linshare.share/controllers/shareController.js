@@ -19,7 +19,8 @@ angular.module('linshare.share')
     }
 
     function submitShare(shareCreationDto, selectedDocuments, selectedUploads) {
-      if (selectedDocuments.length === 0 && (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
+      if (selectedDocuments.length === 0 && (selectedUploads === undefined ||
+        (Object.keys(selectedUploads).length === 0))) {
         $translate('GROWL_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT').then(function(message) {
           toastService.error(message);
         });
@@ -47,7 +48,7 @@ angular.module('linshare.share')
                 shareArrayIndex: []
               };
             }
-            $scope.refFlowShares[upload].shareArrayIndex.push([$scope.share_array.length]);
+            $scope.refFlowShares[upload].shareArrayIndex.push([$scope.shareArray.length]);
             shareActionVm.newShare.addwaitingUploadIdentifiers(upload);
           }
         }
@@ -58,7 +59,7 @@ angular.module('linshare.share')
         $scope.$emit('linshare-share-done');
         documentUtilsService.setReloadDocumentsList(true);
         $scope.mainVm.sidebar.hide();
-        $scope.share_array.push(angular.copy(shareActionVm.newShare.getObjectCopy()));
+        $scope.shareArray.push(angular.copy(shareActionVm.newShare.getObjectCopy()));
         shareActionVm.newShare.resetForm();
         $scope.mainVm.sidebar.getData().resetSelectedDocuments();
         for (var upload in currentUploads) {
@@ -82,7 +83,7 @@ angular.module('linshare.share')
             }
           }
 
-          $scope.share_array.push(shareCopy);
+          $scope.shareArray.push(shareCopy);
           shareActionVm.newShare.resetForm();
         } else {
           $translate('GROWL_ALERT.ACTION.SHARE_FAILED').then(function(message) {

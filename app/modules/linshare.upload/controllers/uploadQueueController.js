@@ -18,6 +18,8 @@
    * @desc Controller of all variables and methods for upload queue
    * @memberOf LinShare.upload.uploadQueueController
    */
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   function uploadQueueController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
     authenticationRestService, flowUploadService, functionalityRestService, lsAppConfig, swal, toastService) {
     /* jshint validthis:true */
@@ -117,7 +119,10 @@
         if (fileToHighlight._from === uploadQueueVm.fromWhere) {
           uploadQueueVm.selectUploadingFile(fileToHighlight, true);
           $timeout(function() {
-            window.scrollTo(0, angular.element('div.media-body[data-uid-flow="' + idUpload + '"]').first().offset().top);
+            window.scrollTo(0, angular.element('div.media-body[data-uid-flow="' + idUpload + '"]')
+              .first()
+              .offset()
+              .top);
           }, 250);
         }
       }

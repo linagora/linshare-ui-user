@@ -12,9 +12,9 @@
   uploadPopupFilesDirective.$inject = ['_'];
 
   /**
-   *  @namespace uploadPopupFilesDirective
-   *  @desc Manage the display of informations in the upload/share files's popup
-   *  @memberOf linshareUiUserApp
+   * @namespace uploadPopupFilesDirective
+   * @desc Manage the display of informations in the upload/share files's popup
+   * @memberOf linshareUiUserApp
    */
   function uploadPopupFilesDirective(_) {
     return {
@@ -25,12 +25,12 @@
     };
 
     /**
-     *  @namespace linkFunc
-     *  @desc Link function of uploadPopupFiles Directive
-     *  @param {Object} scope - Angular scope object of the directive
-     *  @param {Object} elem - jqLite-wrapped element that this directive matches
-     *  @param {Object} attrs - Normalized attribute names and their corresponding attribute values
-     *  @memberOf linshareUiUserApp
+     * @namespace linkFunc
+     * @desc Link function of uploadPopupFiles Directive
+     * @param {Object} scope - Angular scope object of the directive
+     * @param {Object} elem - jqLite-wrapped element that this directive matches
+     * @param {Object} attrs - Normalized attribute names and their corresponding attribute values
+     * @memberOf linshareUiUserApp
      */
     function linkFunc(scope, elem, attrs) {
       var totalFilesFrom;

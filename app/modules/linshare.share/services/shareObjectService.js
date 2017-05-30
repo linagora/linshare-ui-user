@@ -47,7 +47,7 @@ angular.module('linshare.share')
     function ShareObjectForm(shareJson) {
       var self = this;
       getFunctionalities().then(function() {
-        shareJson = shareJson || {};
+        shareJson = shareJson || {};
         self.documents = shareJson.documents || [];
         self.recipients = shareJson.recipients || [];
         recipients = self.recipients;

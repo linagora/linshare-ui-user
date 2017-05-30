@@ -49,7 +49,8 @@
     /**
      * @name loadSidebarContent
      * @desc Update the content of the sidebar
-     * @param {String} cotent The id of the content to load, see app/views/includes/sidebar-right.html for possible values
+     * @param {string} content - The id of the content to load, see app/views/includes/sidebar-right.html
+     * for possible values
      */
     function loadSidebarContent(content) {
       $scope.mainVm.sidebar.setData($scope);

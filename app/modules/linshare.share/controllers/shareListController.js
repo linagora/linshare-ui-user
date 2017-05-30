@@ -31,7 +31,7 @@
     shareListVm.activeShareDetails = lsAppConfig.activeShareDetails;
     shareListVm.cancelShare = cancelShare;
     shareListVm.confirmCancel = confirmCancel;
-    shareListVm.currentShare = $scope.share_array[shareIndex];
+    shareListVm.currentShare = $scope.shareArray[shareIndex];
     shareListVm.goToPreviousState = goToPreviousState;
     shareListVm.loadSidebarContent = loadSidebarContent;
     shareListVm.shareIndex = Number(shareIndex) + 1;
@@ -74,7 +74,7 @@
      */
     function cancelShare(shareObject) {
       shareListVm.confirmCancel(shareObject, function(item) {
-        _.remove($scope.share_array, item);
+        _.remove($scope.shareArray, item);
         shareListVm.goToPreviousState();
       });
     }

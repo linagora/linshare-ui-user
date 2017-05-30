@@ -276,7 +276,8 @@
           /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
             if ($stateParams.from.length === 0) {
               $stateParams.from = lsAppConfig.contactsListsMinePage;
-            } else if ($stateParams.from !== lsAppConfig.contactsListsMinePage && $stateParams.from !== lsAppConfig.contactsListsOthersPage) {
+            } else if ($stateParams.from !== lsAppConfig.contactsListsMinePage &&
+                $stateParams.from !== lsAppConfig.contactsListsOthersPage) {
               return $state.go('administration.contactslists.list', {
                 from: lsAppConfig.contactsListsMinePage
               });

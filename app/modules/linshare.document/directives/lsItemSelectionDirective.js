@@ -38,10 +38,11 @@
     function lsItemSelectionController($scope) {
       $scope.toggleDocumentSelection = function() {
         $scope.currentSelectedDocument.current = $scope.item;
-        var multipleSelection = false;
-        if (multipleSelection) {
-          // code goes here when implementing the multiple selection
-        }
+        // TODO: Check everything here
+        // var multipleSelection = false;
+        // if (multipleSelection) {
+        // code goes here when implementing the multiple selection
+        // }
         if ($scope.rightSidebarOpen && $scope.detailsFunction) {
           $scope.detailsFunction($scope.item).then(function(details) {
             $scope.currentSelectedDocument.current = details;

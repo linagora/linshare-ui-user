@@ -21,6 +21,8 @@
    * @desc Application guest management system controller
    * @memberOf LinShare.Guests
    */
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
   function LinshareGuestsController(_, $filter, $log, $q, $scope, $state, $translate, $translatePartialLoader,
     authenticationRestService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams, swal, toastService) {
     /* jshint validthis: true */
@@ -96,7 +98,7 @@
       guestVm.tableParams = guestVm.loadTable();
       guestVm.fabButton = {
         actions: [{
-          action: function()  {
+          action: function() {
             return guestVm.loadSidebarContent(guestVm.guestCreate);
           },
           icon: 'zmdi zmdi-plus',
@@ -343,7 +345,7 @@
      */
     //TODO - KLE: Refactor|Should be in a helper class and not repeated everytime we use a table, see the directive ?
     function tableApplyFilter(filterValue, columns, operator) {
-      _.forEach(columns, function(column)  {
+      _.forEach(columns, function(column) {
         guestVm.paramFilter[column] = filterValue;
       });
       guestVm.paramFilter.operator = operator ? operator : '&&';

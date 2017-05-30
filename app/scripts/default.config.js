@@ -22,8 +22,10 @@
         system: 'SYSTEM'
       },
       asyncUploadDelay: 2000,
-      date_en_format: 'MM/dd/yyyy',
-      date_fr_format: 'dd/MM/yyyy',
+      dateFormat: {
+        en: 'MM/dd/yyyy',
+        fr: 'dd/MM/yyyy'
+      },
       lang: {
         fr: 'fr-FR',
         en: 'en-US',
@@ -37,7 +39,7 @@
         write: 'WRITE',
         readonly: 'READ'
       },
-      simultaneous_upload: 1,
+      simultaneousUpload: 1,
       tableParams: {
         count: 25,
         sorting: {

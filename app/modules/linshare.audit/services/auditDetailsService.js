@@ -33,7 +33,8 @@
         UPLOAD: 'UPLOAD',
         VIEWED: 'VIEWED'
       },
-      CONTAINERS_CHILDREN = ['CONTACTS_LISTS_CONTACTS', 'GUEST', 'WORKGROUP_DOCUMENT', 'WORKGROUP_FOLDER', 'WORKGROUP_MEMBER'],
+      CONTAINERS_CHILDREN =
+        ['CONTACTS_LISTS_CONTACTS', 'GUEST', 'WORKGROUP_DOCUMENT', 'WORKGROUP_FOLDER', 'WORKGROUP_MEMBER'],
       SENTENCES_KEYS_PREFIX = 'DETAILS_POPUP.SENTENCES',
       TYPE_ICONS = {
         'ANONYMOUS_SHARE_ENTRY': 'zmdi zmdi-share',
@@ -79,9 +80,9 @@
         'mail', 'name', 'restricted'];
 
     var
-      author_me,
-      author_superadmin,
-      author_system,
+      authorMe,
+      authorSuperadmin,
+      authorSystem,
       disabled,
       enabled,
       service = {
@@ -101,9 +102,9 @@
      */
     function generateAllDetails(loggedUserUuid, auditDetails) {
       return $q(function(resolve) {
-        author_me = $filter('translate')('AUTHOR_ME');
-        author_superadmin = $filter('translate')('AUTHOR_SUPERADMIN');
-        author_system = $filter('translate')('AUTHOR_SYSTEM');
+        authorMe = $filter('translate')('AUTHOR_ME');
+        authorSuperadmin = $filter('translate')('AUTHOR_SUPERADMIN');
+        authorSystem = $filter('translate')('AUTHOR_SYSTEM');
         disabled = $filter('translate')('DISABLED');
         enabled = $filter('translate')('ENABLED');
         _.forEach(auditDetails, function(auditAction) {
@@ -179,7 +180,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setAuthorName(auditAction) {
-      return auditAction.isAuthor ? author_me : setFullName(auditAction.actor);
+      return auditAction.isAuthor ? authorMe : setFullName(auditAction.actor);
     }
 
     /**
@@ -204,9 +205,9 @@
     function setFullName(user) {
       var fullName;
       if (user.role === lsAppConfig.accountType.system) {
-        fullName = author_system;
+        fullName = authorSystem;
       } else if (user.role === lsAppConfig.accountType.superadmin) {
-        fullName = author_superadmin;
+        fullName = authorSuperadmin;
       } else if (user.name) {
         fullName = user.name;
       } else {
@@ -249,10 +250,10 @@
     function setResourceName(auditAction, loggedUserUuid) {
       var resourceName;
       if (auditAction.resource.user) {
-        resourceName = (auditAction.resource.user.uuid === loggedUserUuid) ? author_me :
+        resourceName = (auditAction.resource.user.uuid === loggedUserUuid) ? authorMe :
           setFullName(auditAction.resource.user);
       } else if (auditAction.resource.firstName) {
-        resourceName = (auditAction.resource.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource);
+        resourceName = (auditAction.resource.uuid === loggedUserUuid) ? authorMe : setFullName(auditAction.resource);
       } else {
         resourceName = auditAction.resource.name;
       }
@@ -307,7 +308,8 @@
         if (!auditAction.resource.recipient) {
           shareRecipient = auditAction.recipientMail;
         } else {
-          shareRecipient = (auditAction.resource.recipient.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.recipient);
+          shareRecipient = (auditAction.resource.recipient.uuid === loggedUserUuid) ?
+            authorMe : setFullName(auditAction.resource.recipient);
         }
       }
       return shareRecipient;
@@ -323,7 +325,8 @@
     function setSentenceVars(auditAction) {
       return {
         authorName: '<b>' + auditAction.authorName + '</b>',
-        dateVarious: '<b title="' + auditAction.dateCalendarVarious + '">' + auditAction.dateShortVarious + '</b>', // TODO : add uib tooltip
+        // TODO : add uib tooltip
+        dateVarious: '<b title="' + auditAction.dateCalendarVarious + '">' + auditAction.dateShortVarious + '</b>',
         userVarious: '<span class="activity-user-target">' + auditAction.userVarious + '</span>',
         resourceName: '<span class="activity-resource-name">' + auditAction.resourceName + '</span>',
         resourceNameVarious: '<span class="activity-resource-name">' + auditAction.resourceNameVarious + '</span>',
@@ -473,11 +476,13 @@
     function setUserVarious(auditAction, loggedUserUuid) {
       var userVarious;
       if (auditAction.resource.firstName) {
-        userVarious = (auditAction.resource.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource);
+        userVarious = (auditAction.resource.uuid === loggedUserUuid) ? authorMe : setFullName(auditAction.resource);
       } else if (auditAction.resource.sender && (auditAction.resource.sender.uuid !== auditAction.actor.uuid)) {
-        userVarious = (auditAction.resource.sender.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.sender);
+        userVarious = (auditAction.resource.sender.uuid === loggedUserUuid) ?
+          authorMe : setFullName(auditAction.resource.sender);
       } else if (auditAction.resource.recipient) {
-        userVarious = (auditAction.resource.recipient.uuid === loggedUserUuid) ? author_me : setFullName(auditAction.resource.recipient);
+        userVarious = (auditAction.resource.recipient.uuid === loggedUserUuid) ?
+          authorMe : setFullName(auditAction.resource.recipient);
       } else if (auditAction.recipientMail) {
         userVarious = auditAction.recipientMail;
       }

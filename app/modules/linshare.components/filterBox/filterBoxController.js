@@ -20,8 +20,8 @@
    */
   function FilterBoxController(_, $scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig, moment,
     unitService) {
-    const FR_DATE_FORMAT = lsAppConfig.date_fr_format;
-    const EN_DATE_FORMAT = lsAppConfig.date_en_format;
+    const FR_DATE_FORMAT = lsAppConfig.dateFormat.fr;
+    const EN_DATE_FORMAT = lsAppConfig.dateFormat.en;
 
     var filterBoxVm = this;
     filterBoxVm.autocompleteUserRestService = autocompleteUserRestService;
