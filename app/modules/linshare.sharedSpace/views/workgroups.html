@@ -366,8 +366,9 @@
                     data-sortable="'name'" uuid={{documentFile.uuid}} header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
                       <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                        <span class="file-name-disp single-line" contenteditable="false" spellcheck="false">
-                          <span x-ng-click="vm.goToSharedSpaceTarget(documentFile.uuid, documentFile.name)">
+                        <span class="file-name-disp single-line" contenteditable="false" spellcheck="false"
+                              data-ng-click="vm.goToSharedSpaceTarget(documentFile.uuid, documentFile.name)">
+                          <span>
                             {{documentFile.name}}
                           </span>
                         </span>

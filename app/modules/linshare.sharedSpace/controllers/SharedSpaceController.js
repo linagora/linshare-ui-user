@@ -183,7 +183,10 @@ angular.module('linshare.sharedSpace')
     };
 
     thisctrl.goToSharedSpaceTarget = function(workgroupUuid, name) {
-      $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
+      var element = angular.element($('td[uuid=' + workgroupUuid + ']').find('.file-name-disp'));
+      if (element.attr('contenteditable') === 'false') {
+        $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
+      }
     };
 
     thisctrl.flagsOnSelectedPages = {};
