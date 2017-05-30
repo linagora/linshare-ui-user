@@ -9,8 +9,8 @@
     .module('linshare.components')
     .factory('itemUtilsService', itemUtilsService);
 
-  itemUtilsService.$inject = ['_', '$q', '$timeout', '$translate', 'authenticationRestService', 'lsAppConfig',
-    'lsErrorCode', 'toastService'
+  itemUtilsService.$inject = ['_', '$q', '$translate', 'authenticationRestService', 'lsAppConfig', 'lsErrorCode',
+    'toastService'
   ];
 
   /**
@@ -18,8 +18,7 @@
    * @desc Utils service for manipulating file
    * @memberOf linshare.components
    */
-  function itemUtilsService(_, $q, $timeout, $translate, authenticationRestService, lsAppConfig, lsErrorCode,
-    toastService) {
+  function itemUtilsService(_, $q, $translate, authenticationRestService, lsAppConfig, lsErrorCode, toastService) {
     var
       invalidNameTranslate = {
         empty: {
@@ -148,10 +147,8 @@
         itemElement = angular.element(document.querySelector('body')).find(selector);
       itemElement.attr('contenteditable', 'true')
         .on('focus', function() {
-          $timeout(function() {
-            itemElement.text(initialName);
-            document.execCommand('selectAll', false, null);
-          }, 0);
+          itemElement.text(initialName);
+          document.execCommand('selectAll', false, null);
         })
         .on('focusout', function(e) {
           if (!done) {
@@ -207,9 +204,7 @@
        */
       function reset(item) {
         done = true;
-        $timeout(function() {
-          clean();
-        }, 0);
+        clean();
         itemElement.text(initialName);
         deferred.reject({
           config: item,
