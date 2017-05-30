@@ -14,7 +14,7 @@
    *  @desc Config of module Anonymous
    *  @memberOf LinShare.anonymousUrl
    */
-  function anonymousUrlConfig($stateProvider) {
+  function anonymousUrlConfig(_, $stateProvider) {
     $stateProvider
       .state('anonymousUrl', {
         templateUrl: 'modules/linshare.anonymousUrl/views/common.html'

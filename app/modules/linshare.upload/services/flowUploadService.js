@@ -10,7 +10,7 @@
     .module('linshare.upload')
     .factory('flowUploadService', flowUploadService);
 
-  flowUploadService.$inject = ['$filter', '$log', '$q', '$timeout', '$translatePartialLoader',
+  flowUploadService.$inject = ['_', '$filter', '$log', '$q', '$timeout', '$translatePartialLoader',
     'authenticationRestService', 'LinshareDocumentRestService', 'lsAppConfig', 'uploadRestService',
     'workgroupNodesRestService'];
 
@@ -19,7 +19,7 @@
    * @desc Upload system service
    * @memberOf LinShare.upload
    */
-  function flowUploadService($filter, $log, $q, $timeout, $translatePartialLoader,
+  function flowUploadService(_, $filter, $log, $q, $timeout, $translatePartialLoader,
                              authenticationRestService, LinshareDocumentRestService, lsAppConfig,
                              uploadRestService, workgroupNodesRestService) {
 

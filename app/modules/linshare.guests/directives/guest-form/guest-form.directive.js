@@ -9,13 +9,15 @@
     .module('linshare.guests')
     .directive('lsGuestForm', lsGuestForm);
 
+  lsGuestForm.$inject = ['_'];
+
   /**
    *  @namespace lsGuestForm
    *  @desc Form for creating/updating a Guest object
    *  @example <div ls-guest-form></div>
    *  @memberOf LinShare.components
    */
-  function lsGuestForm() {
+  function lsGuestForm(_) {
     var directive = {
       restrict: 'A',
       scope: {

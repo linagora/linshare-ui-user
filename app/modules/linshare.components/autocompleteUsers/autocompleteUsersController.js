@@ -9,7 +9,7 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['$log', '$q', '$scope', 'authenticationRestService',
+  AutocompleteUsersController.$inject = ['_', '$log', '$q', '$scope', 'authenticationRestService',
     'autocompleteUserRestService', 'functionalityRestService', 'lsAppConfig', 'ownerLabel'
   ];
 
@@ -18,7 +18,7 @@
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController($log, $q, $scope, authenticationRestService, autocompleteUserRestService,
+  function AutocompleteUsersController(_, $log, $q, $scope, authenticationRestService, autocompleteUserRestService,
     functionalityRestService, lsAppConfig, ownerLabel) {
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;

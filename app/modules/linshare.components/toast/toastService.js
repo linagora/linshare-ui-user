@@ -9,14 +9,14 @@
     .module('linshare.components')
     .factory('toastService', toastService);
 
-  toastService.$inject = ['$mdToast', '$timeout', 'componentsConfig'];
+  toastService.$inject = ['_', '$mdToast', '$timeout', 'componentsConfig'];
 
   /**
    * @namespace toastService
    * @desc Service to manage toast to display
    * @memberOf linshare.components
    */
-  function toastService($mdToast, $timeout, componentsConfig) {
+  function toastService(_, $mdToast, $timeout, componentsConfig) {
     var
       activate = false,
       delay = {

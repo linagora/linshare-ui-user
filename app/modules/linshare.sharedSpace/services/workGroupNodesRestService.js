@@ -9,14 +9,14 @@
     .module('linshare.sharedSpace')
     .factory('workgroupNodesRestService', workgroupNodesRestService);
 
-  workgroupNodesRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
+  workgroupNodesRestService.$inject = ['_', '$log', 'Restangular', 'ServerManagerService'];
 
   /**
    *  @namespace workgroupNodesRestService
    *  @desc Service to interact with Workgroup Nodes object by REST
    *  @memberOf LinShare.sharedSpace
    */
-  function workgroupNodesRestService($log, Restangular, ServerManagerService) {
+  function workgroupNodesRestService(_, $log, Restangular, ServerManagerService) {
     var
       errorsMessagesKey = 'WORKGROUP_NODES_ERROR',
       handler = ServerManagerService.responseHandler,

@@ -8,21 +8,21 @@
     .module('linshare.contactsLists')
     .controller('contactsListsContactsController', contactsListsContactsController);
 
-  contactsListsContactsController.$inject = ['$filter', '$scope', '$stateParams', '$timeout', '$translate',
+  contactsListsContactsController.$inject = ['_', '$filter', '$scope', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'addContacts', 'contactsListsContacts', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'lsAppConfig',
-    'NgTableParams', 'toastService'];
+    'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'lsAppConfig', 'NgTableParams',
+    'toastService'
+  ];
 
   /**
    * @namespace contactsListsContactsController
    * @desc Application contactsLists contacts management system controller
    * @memberOf LinShare.contactsLists
    */
-  function contactsListsContactsController($filter, $scope, $stateParams, $timeout, $translate,
-                                           $translatePartialLoader, addContacts, contactsListsContacts,
-                                           contactsListsListRestService, contactsListsContactsRestService,
-                                           contactsListsService, documentUtilsService, lsAppConfig,
-                                           NgTableParams, toastService) {
+  function contactsListsContactsController(_, $filter, $scope, $stateParams, $timeout, $translate,
+    $translatePartialLoader, addContacts, contactsListsContacts, contactsListsListRestService,
+    contactsListsContactsRestService, contactsListsService, documentUtilsService, lsAppConfig, NgTableParams,
+    toastService) {
     /* jshint validthis:true */
     var contactsListsContactsVm = this;
     var

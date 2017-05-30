@@ -9,7 +9,7 @@
     .module('linshare.resetPassword')
     .controller('ResetPasswordController', ResetPasswordController);
 
-  ResetPasswordController.$inject = ['$log', '$state', '$timeout', '$translatePartialLoader',
+  ResetPasswordController.$inject = ['_', '$log', '$state', '$timeout', '$translatePartialLoader',
     'languageService', 'lsAppConfig', 'resetPasswordService', 'resetUuid','toastService'
   ];
 
@@ -18,7 +18,7 @@
    *  @desc Reset password management system controller
    *  @memberOf LinShare.resetPassword
    */
-  function ResetPasswordController($log, $state, $timeout, $translatePartialLoader,
+  function ResetPasswordController(_, $log, $state, $timeout, $translatePartialLoader,
     languageService, lsAppConfig, resetPasswordService, resetUuid, toastService) {
     /* jshint validthis: true */
     var resetVm = this;

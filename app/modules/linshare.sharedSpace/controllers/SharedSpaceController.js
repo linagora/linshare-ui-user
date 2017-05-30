@@ -1,7 +1,7 @@
 'use strict';
 angular.module('linshare.sharedSpace')
-  .controller('SharedSpaceController', function($scope, $timeout, $translatePartialLoader, NgTableParams, $filter, $log,
-    workgroups, $translate, $state, documentUtilsService, itemUtilsService, workgroupRestService,
+  .controller('SharedSpaceController', function(_, $scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
+    $log, workgroups, $translate, $state, documentUtilsService, itemUtilsService, workgroupRestService,
     workgroupFoldersRestService, auditDetailsService, workgroupEntriesRestService, lsAppConfig, lsErrorCode,
     toastService, functionalityRestService) {
     $translatePartialLoader.addPart('filesList');

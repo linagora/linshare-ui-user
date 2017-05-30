@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('linshare.share')
-  .controller('LinshareShareActionController', function($scope, LinshareShareService, $log, $stateParams, $translate,
+  .controller('LinshareShareActionController', function(_, $scope, LinshareShareService, $log, $stateParams, $translate,
                                                         ShareObjectService, toastService, documentUtilsService) {
     var shareActionVm = this;
     shareActionVm.closeSideBar = closeSideBar;

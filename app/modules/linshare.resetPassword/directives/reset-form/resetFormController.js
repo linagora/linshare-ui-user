@@ -9,9 +9,9 @@
     .module('linshare.resetPassword')
     .controller('ResetFormController', ResetFormController);
 
-  ResetFormController.$inject = ['$scope', '$translate', '$translatePartialLoader', 'languageService'];
+  ResetFormController.$inject = ['_', '$scope', '$translate', '$translatePartialLoader', 'languageService'];
 
-  function ResetFormController($scope, $translate, $translatePartialLoader, languageService) {
+  function ResetFormController(_, $scope, $translate, $translatePartialLoader, languageService) {
     /* jshint validthis:true */
     var resetFormVm = this;
 

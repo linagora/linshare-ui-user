@@ -2,7 +2,7 @@
 
 angular
   .module('linshareUiUserApp')
-  .config(function(RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
+  .config(function(_, RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
                    $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider) {
     lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';

@@ -25,7 +25,7 @@ angular.module('linshare.components')
       }
     };
   })
-  .filter('mimetypeIcone', function() {
+  .filter('mimetypeIcone', function(_) {
     return function(fileType) {
       var icone = 'ls-file-type-other iconcolor-text';
       var type = [

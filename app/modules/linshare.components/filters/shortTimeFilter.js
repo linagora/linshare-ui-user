@@ -9,7 +9,7 @@
     .module('linshare.components')
     .filter('shortTime', shortTimeFilter);
 
-  shortTimeFilter.$inject = ['$translate'];
+  shortTimeFilter.$inject = ['$translate', 'moment'];
 
   /**
    * @namespace shortTimeFilter
@@ -17,7 +17,7 @@
    * @returns {string} Value to show in view
    * @memberOf LinShare.components
    */
-  function shortTimeFilter($translate) {
+  function shortTimeFilter($translate, moment) {
     // TODO : service where to set moment lang
     var local = $translate.use().substring(0, $translate.use().indexOf('-'));
     moment.locale(local);

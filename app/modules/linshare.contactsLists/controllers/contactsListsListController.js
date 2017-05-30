@@ -9,10 +9,11 @@
     .module('linshare.contactsLists')
     .controller('contactsListsListController', contactsListsListController);
 
-  contactsListsListController.$inject = ['$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService', 'contactsListsContactsRestService',
-    'contactsListsService', 'createNew', 'documentUtilsService', 'functionalityRestService', 'itemUtilsService',
-    'lsAppConfig', 'lsErrorCode', 'NgTableParams', 'toastService'
+  contactsListsListController.$inject = ['_', '$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+    '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService',
+    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService',
+    'functionalityRestService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'moment', 'NgTableParams',
+    'toastService'
   ];
 
   /**
@@ -20,10 +21,10 @@
    * @desc Application contactsLists management system controller
    * @memberOf LinShare.contactsLists
    */
-  function contactsListsListController($filter, $scope, $state, $stateParams, $timeout, $translate,
+  function contactsListsListController(_, $filter, $scope, $state, $stateParams, $timeout, $translate,
     $translatePartialLoader, contactsListsList, contactsListsListRestService, contactsListsContactsRestService,
     contactsListsService, createNew, documentUtilsService, functionalityRestService, itemUtilsService, lsAppConfig,
-    lsErrorCode, NgTableParams, toastService) {
+    lsErrorCode, moment, NgTableParams, toastService) {
 
     /* jshint validthis:true */
     var contactsListsListVm = this;

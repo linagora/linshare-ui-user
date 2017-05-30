@@ -9,8 +9,8 @@
     .module('linshare.anonymousUrl')
     .controller('AnonymousUrlController', AnonymousUrlController);
 
-  AnonymousUrlController.$inject = ['$filter', '$log', '$state', '$translatePartialLoader', '$uibModal', 'anonymousUrlService',
-    'anonymousUrlData', 'NgTableParams'
+  AnonymousUrlController.$inject = ['_', '$filter', '$log', '$state', '$translatePartialLoader', '$uibModal',
+    'anonymousUrlService', 'anonymousUrlData', 'NgTableParams'
   ];
 
   /**
@@ -18,7 +18,7 @@
    *  @desc Anonymous url mamnagement system controller
    *  @memberOf LinShare.anonymousUrl
    */
-  function AnonymousUrlController($filter, $log, $state, $translatePartialLoader, $uibModal, anonymousUrlService,
+  function AnonymousUrlController(_, $filter, $log, $state, $translatePartialLoader, $uibModal, anonymousUrlService,
     anonymousUrlData, NgTableParams) {
 
     /* jshint validthis:true */

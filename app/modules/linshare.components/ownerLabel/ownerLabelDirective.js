@@ -9,7 +9,7 @@
     .module('linshare.components')
     .directive('ownerLabel', ownerLabel);
 
-  ownerLabel.$inject = ['ownerLabel'];
+  ownerLabel.$inject = ['_', 'ownerLabel'];
 
   /**
    * @namespace ownerLabel
@@ -22,7 +22,7 @@
    *      owner-label-attr="title"></div>
    * @memberOf linshare.components
    */
-  function ownerLabel(ownerLabel) {
+  function ownerLabel(_, ownerLabel) {
     var directive = {
       restrict: 'A',
       scope: {

@@ -9,14 +9,14 @@
     .module('linshare.components')
     .factory('tableParamsService', tableParamsService);
 
-  tableParamsService.$inject = ['$filter', '$q', 'lsAppConfig', 'NgTableParams'];
+  tableParamsService.$inject = ['_', '$filter', '$q', 'lsAppConfig', 'NgTableParams'];
 
   /**
    * @namespace tableParamsService
    * @desc Service to interact with tableParams
    * @memberOf LinShare.components
    */
-  function tableParamsService($filter, $q, lsAppConfig, NgTableParams) {
+  function tableParamsService(_, $filter, $q, lsAppConfig, NgTableParams) {
     var
       /* @property {Object} flagsOnSelectedPages - Object with number of page as key, and boolean as value (true if all elements in this page are selected, and false if not all) */
       flagsOnSelectedPages,

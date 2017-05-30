@@ -6,8 +6,8 @@
 
 angular.module('linshare.share')
 
-  .factory('ShareObjectService', function($log, functionalityRestService, LinshareShareService, $q, toastService,
-                                          $translate, authenticationRestService, lsAppConfig) {
+  .factory('ShareObjectService', function(_, $log, functionalityRestService, LinshareShareService, $q, toastService,
+    $translate, authenticationRestService, lsAppConfig, moment) {
 
     var recipients = [],
       mailingListUuid = [],

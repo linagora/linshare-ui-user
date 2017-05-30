@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .config(routerConfiguration);
 
-  routerConfiguration.$inject = ['$stateProvider', '$urlRouterProvider'];
+  routerConfiguration.$inject = ['_', '$stateProvider', '$urlRouterProvider'];
 
   /**
    * @namespace routerConfiguration
    * @desc Router configuration for the LinShare APP
    * @memberOf LinShareUiUserApp
    */
-  function routerConfiguration($stateProvider, $urlRouterProvider) {
+  function routerConfiguration(_, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function($injector) {
       $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService) {
         authRedirect($state, authenticationRestService);

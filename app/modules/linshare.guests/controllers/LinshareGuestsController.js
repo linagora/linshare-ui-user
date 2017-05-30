@@ -11,9 +11,9 @@
     .controller('LinshareGuestsController', LinshareGuestsController);
 
   //TODO - KLE: Check DI
-  LinshareGuestsController.$inject = ['$filter', '$log', '$q', '$scope', '$state', '$translate',
-    '$translatePartialLoader', 'authenticationRestService', 'GuestObjectService',
-    'guestRestService', 'lsAppConfig', 'NgTableParams', 'toastService'
+  LinshareGuestsController.$inject = ['_', '$filter', '$log', '$q', '$scope', '$state', '$translate',
+    '$translatePartialLoader', 'authenticationRestService', 'GuestObjectService', 'guestRestService', 'lsAppConfig',
+    'NgTableParams', 'swal', 'toastService'
   ];
 
   /**
@@ -21,8 +21,8 @@
    * @desc Application guest management system controller
    * @memberOf LinShare.Guests
    */
-  function LinshareGuestsController($filter, $log, $q, $scope, $state, $translate, $translatePartialLoader,
-    authenticationRestService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams, toastService) {
+  function LinshareGuestsController(_, $filter, $log, $q, $scope, $state, $translate, $translatePartialLoader,
+    authenticationRestService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams, swal, toastService) {
     /* jshint validthis: true */
     var guestVm = this;
     var

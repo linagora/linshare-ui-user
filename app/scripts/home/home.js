@@ -9,7 +9,7 @@
     .module('linshareUiUserApp')
     .controller('HomeController', homeController);
 
-  homeController.$inject = ['$q', '$scope', '$timeout', '$translate', '$translatePartialLoader',
+  homeController.$inject = ['_', '$q', '$scope', '$timeout', '$translate', '$translatePartialLoader',
     'functionalities', 'lsAppConfig', 'welcomeMessageRestService', 'user'
   ];
 
@@ -18,7 +18,7 @@
    * @desc Application home management system controller
    * @memberOf linshareUiUserApp
    */
-  function homeController($q, $scope, $timeout, $translate, $translatePartialLoader, functionalities,
+  function homeController(_, $q, $scope, $timeout, $translate, $translatePartialLoader, functionalities,
     lsAppConfig, welcomeMessageRestService, user) {
     const LANG_CONVERTER = {
       ENGLISH: {

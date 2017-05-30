@@ -10,16 +10,15 @@
     .module('linshareUiUserApp')
     .controller('UiUserMainController', UiUserMainController);
 
-  UiUserMainController.$inject = ['$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
+  UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
     'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
     'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
     'uploadRestService'
   ];
 
-  function UiUserMainController($http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
+  function UiUserMainController(_, $http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
     authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
-    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService,
-    uploadRestService) {
+    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService, uploadRestService) {
     /* jshint validthis:true */
     var mainVm = this;
 

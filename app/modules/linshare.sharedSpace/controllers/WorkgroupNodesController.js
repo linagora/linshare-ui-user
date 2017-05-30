@@ -9,9 +9,9 @@
     .module('linshare.sharedSpace')
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
-  WorkgroupNodesController.$inject = ['$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+  WorkgroupNodesController.$inject = ['_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'documentUtilsService', 'flowUploadService', 'itemUtilsService',
-    'lsAppConfig', 'lsErrorCode', 'nodesList', 'tableParamsService', 'toastService', 'workgroupRestService',
+    'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService', 'toastService', 'workgroupRestService',
     'workgroupMembersRestService', 'workgroupNodesRestService'];
 
   /**
@@ -19,10 +19,10 @@
    * @desc Application Workgroup Nodes system controller
    * @memberOf LinShare.sharedSpace
    */
-  function WorkgroupNodesController($q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-                                    auditDetailsService, documentUtilsService, flowUploadService, itemUtilsService,
-                                    lsAppConfig, lsErrorCode, nodesList, tableParamsService, toastService,
-                                    workgroupRestService, workgroupMembersRestService, workgroupNodesRestService) {
+  function WorkgroupNodesController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
+    auditDetailsService, documentUtilsService, flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode, nodesList,
+    swal, tableParamsService, toastService, workgroupRestService, workgroupMembersRestService,
+    workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
 

@@ -9,14 +9,14 @@
     .module('linshare.document')
     .factory('LinshareDocumentRestService', LinshareDocumentRestService);
 
-  LinshareDocumentRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
+  LinshareDocumentRestService.$inject = ['_', '$log', 'Restangular', 'ServerManagerService'];
 
   /**
    *  @namespace LinshareDocumentRestService
    *  @desc Service to interact with Document object by REST
    *  @memberOf LinShare.document
    */
-  function LinshareDocumentRestService($log, Restangular, ServerManagerService) {
+  function LinshareDocumentRestService(_, $log, Restangular, ServerManagerService) {
     var
       handler = ServerManagerService.responseHandler,
       restUrl = 'documents',

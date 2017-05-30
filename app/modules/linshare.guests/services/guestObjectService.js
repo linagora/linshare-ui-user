@@ -9,8 +9,8 @@
     .module('linshare.guests')
     .factory('GuestObjectService', GuestObjectService);
 
-  GuestObjectService.$inject = ['$q', 'authenticationRestService', 'autocompleteUserRestService',
-    'functionalityRestService', 'guestRestService'
+  GuestObjectService.$inject = ['_', '$q', 'authenticationRestService', 'autocompleteUserRestService',
+    'functionalityRestService', 'guestRestService', 'moment'
   ];
 
   /**
@@ -18,8 +18,8 @@
    *  @desc Manipulation of guest object front/back
    *  @memberOf LinShare.guest
    */
-  function GuestObjectService($q, authenticationRestService, autocompleteUserRestService,
-    functionalityRestService, guestRestService) {
+  function GuestObjectService(_, $q, authenticationRestService, autocompleteUserRestService, functionalityRestService,
+    guestRestService, moment) {
 
     var
       allowedToAddEditors = {},

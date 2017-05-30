@@ -9,8 +9,8 @@
     .module('linshare.components')
     .controller('FilterBoxController', FilterBoxController);
 
-  FilterBoxController.$inject = ['$scope', '$timeout', '$translate', 'autocompleteUserRestService', 'lsAppConfig',
-    'unitService'
+  FilterBoxController.$inject = ['_', '$scope', '$timeout', '$translate', 'autocompleteUserRestService', 'lsAppConfig',
+    'moment', 'unitService'
   ];
 
   /**
@@ -18,7 +18,8 @@
    * @desc Controller of the filtering component
    * @memberOf linshare.components
    */
-  function FilterBoxController($scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig, unitService) {
+  function FilterBoxController(_, $scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig, moment,
+    unitService) {
     const FR_DATE_FORMAT = lsAppConfig.date_fr_format;
     const EN_DATE_FORMAT = lsAppConfig.date_en_format;
 

@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .factory('MenuService', menuService);
 
-  menuService.$inject = ['$q', 'authenticationRestService', 'functionalityRestService', 'lsAppConfig'];
+  menuService.$inject = ['_', '$q', 'authenticationRestService', 'functionalityRestService', 'lsAppConfig'];
 
   /**
    * @namespace menuService
    * @desc Service to interact with session
    * @memberOf linshareUiUserApp
    */
-  function menuService($q, authenticationRestService, functionalityRestService, lsAppConfig) {
+  function menuService(_, $q, authenticationRestService, functionalityRestService, lsAppConfig) {
     var
       administrations,
       audit,

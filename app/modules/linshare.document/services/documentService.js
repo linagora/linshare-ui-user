@@ -8,7 +8,7 @@
 angular.module('linshare.document')
   .factory('documentUtilsService', documentUtilsService);
 
-function documentUtilsService($translate, $log, $timeout, $q) {
+function documentUtilsService(_, $translate, $log, $timeout, $q, swal) {
   var reloadDocumentsList = false;
 
   var swalTitle, swalText, swalConfirm, swalCancel;

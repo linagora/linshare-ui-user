@@ -9,14 +9,14 @@
     .module('linshare.components')
     .factory('ownerLabel', ownerLabel);
 
-  ownerLabel.$inject = ['$q', '$translate', 'authenticationRestService'];
+  ownerLabel.$inject = ['_', '$q', '$translate', 'authenticationRestService'];
 
   /**
    * @namespace ownerLabel
    * @desc Service to manage owner value of element
    * @memberOf NameSpaceGlobal
    */
-  function ownerLabel($q, $translate, authenticationRestService) {
+  function ownerLabel(_, $q, $translate, authenticationRestService) {
     var by,
       currentUser,
       me,

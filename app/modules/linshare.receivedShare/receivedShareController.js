@@ -6,9 +6,9 @@
 
 angular.module('linshare.receivedShare')
   .controller('ReceivedController',
-    function($filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
+    function(_, $filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
       authenticationRestService, autocompleteUserRestService, documentSelected, documentUtilsService, files,
-      itemUtilsService, lsAppConfig, NgTableParams, receivedShareRestService, toastService) {
+      itemUtilsService, lsAppConfig, NgTableParams, receivedShareRestService, swal, toastService) {
       $translatePartialLoader.addPart('receivedShare');
       $scope.documentSelected = documentSelected;
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;

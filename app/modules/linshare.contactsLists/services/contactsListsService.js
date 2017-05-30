@@ -9,14 +9,14 @@
     .module('linshare.contactsLists')
     .factory('contactsListsService', contactsListsService);
 
-  contactsListsService.$inject = ['$translate', '$translatePartialLoader'];
+  contactsListsService.$inject = ['_', '$translate', '$translatePartialLoader'];
 
   /**
    * @namespace contactsListsService
    * @descService to interact with ContactsListsList object by REST
    * @memberOf LinShare.contactsLists
    */
-  function contactsListsService($translate, $translatePartialLoader) {
+  function contactsListsService(_, $translate, $translatePartialLoader) {
     var
       byMe,
       service = {

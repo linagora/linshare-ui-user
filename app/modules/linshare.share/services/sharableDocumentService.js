@@ -5,9 +5,9 @@
     .module('linshare.share')
     .factory('sharableDocumentService', sharableDocumentService);
 
-  sharableDocumentService.$inject = ['ShareObjectService'];
+  sharableDocumentService.$inject = ['_', 'ShareObjectService'];
 
-  function sharableDocumentService(ShareObjectService) {
+  function sharableDocumentService(_, ShareObjectService) {
     return {
       sharableDocuments: sharableDocuments
     };

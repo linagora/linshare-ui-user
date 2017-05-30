@@ -9,18 +9,17 @@
     .module('linshare.upload')
     .controller('uploadQueueController', uploadQueueController);
 
-  uploadQueueController.$inject = ['$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+  uploadQueueController.$inject = ['_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'authenticationRestService', 'flowUploadService', 'functionalityRestService',
-    'lsAppConfig', 'toastService'];
+    'lsAppConfig', 'swal', 'toastService'];
 
   /**
    * @namespace uploadQueueController
    * @desc Controller of all variables and methods for upload queue
    * @memberOf LinShare.upload.uploadQueueController
    */
-  function uploadQueueController($q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-    authenticationRestService, flowUploadService, functionalityRestService,
-    lsAppConfig, toastService) {
+  function uploadQueueController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
+    authenticationRestService, flowUploadService, functionalityRestService, lsAppConfig, swal, toastService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;

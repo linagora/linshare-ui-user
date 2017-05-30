@@ -9,17 +9,14 @@
     .module('linshare.components')
     .factory('itemUtilsService', itemUtilsService);
 
-  itemUtilsService.$inject = ['$q', '$timeout', '$translate', 'authenticationRestService', 'lsAppConfig', 'lsErrorCode',
-    'toastService'
-  ];
+  itemUtilsService.$inject = ['_', '$q', '$timeout', '$translate', 'authenticationRestService', 'lsAppConfig', 'lsErrorCode', 'toastService'];
 
   /**
    * @namespace itemUtilsService
    * @desc Utils service for manipulating file
    * @memberOf linshare.components
    */
-  function itemUtilsService($q, $timeout, $translate, authenticationRestService, lsAppConfig, lsErrorCode,
-    toastService) {
+  function itemUtilsService(_, $q, $timeout, $translate, authenticationRestService, lsAppConfig, lsErrorCode, toastService) {
     var
       invalidNameTranslate = {
         empty: {

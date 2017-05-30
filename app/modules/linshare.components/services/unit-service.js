@@ -9,7 +9,9 @@
     .module('linshare.components')
     .factory('unitService', unitService);
 
-  function unitService() {
+  unitService.$inject = ['_'];
+
+  function unitService(_) {
     var units = {
       B: {
         value: 'B',

@@ -5,9 +5,9 @@
     .module('linshare.document')
     .controller('documentController', documentController);
 
-  function documentController($scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log,
+  function documentController(_, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log,
     documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService,
-    $stateParams, tableParamsService, auditDetailsService) {
+    $stateParams, tableParamsService, auditDetailsService, swal) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
     var swalNoDeleteElements, swalNoDeleteElementsSingular,swalNoDeleteElementsPlural,  swalActionDelete, swalInfoErrorFile, swalClose;

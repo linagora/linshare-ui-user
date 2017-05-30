@@ -9,14 +9,14 @@
     .module('linshare.audit')
     .factory('auditDetailsService', auditDetailsService);
 
-  auditDetailsService.$inject = ['$filter', '$q', 'lsAppConfig'];
+  auditDetailsService.$inject = ['_', '$filter', '$q', 'lsAppConfig'];
 
   /**
    * @namespace auditDetailsService
    * @desc Service to interact with Audit actions to generate all details
    * @memberOf LinShare.audit
    */
-  function auditDetailsService($filter, $q, lsAppConfig) {
+  function auditDetailsService(_, $filter, $q, lsAppConfig) {
     const
       ACTIONS_KEY = {
         ADDITION: 'ADDITION',

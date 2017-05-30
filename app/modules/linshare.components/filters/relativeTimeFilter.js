@@ -9,7 +9,7 @@
     .module('linshare.components')
     .filter('relativeTime', relativeTimeFilter);
 
-  relativeTimeFilter.$inject = ['$translate'];
+  relativeTimeFilter.$inject = ['$translate', 'moment'];
 
   /**
    * @namespace relativeTimeFilter
@@ -17,7 +17,7 @@
    * @returns {string} Value to show in view
    * @memberOf LinShare.components
    */
-  function relativeTimeFilter($translate) {
+  function relativeTimeFilter($translate, moment) {
     // TODO : service where to set moment lang
     var local = $translate.use().substring(0, $translate.use().indexOf('-'));
     moment.locale(local);

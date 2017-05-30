@@ -9,8 +9,8 @@
     .module('linshare.share')
     .controller('LinshareShareListController', LinshareShareListController);
 
-  LinshareShareListController.$inject = ['$scope', '$state', '$translate', '$translatePartialLoader',
-    'lsAppConfig', 'previousState', 'shareIndex'
+  LinshareShareListController.$inject = ['_', '$scope', '$state', '$translate', '$translatePartialLoader',
+    'lsAppConfig', 'previousState', 'shareIndex', 'swal'
   ];
 
   /**
@@ -18,8 +18,8 @@
    *  @desc Controller for managing shared elements
    *  @memberOf LinShare.share
    */
-  function LinshareShareListController($scope, $state, $translate, $translatePartialLoader, lsAppConfig,
-    previousState, shareIndex) {
+  function LinshareShareListController(_, $scope, $state, $translate, $translatePartialLoader, lsAppConfig,
+    previousState, shareIndex, swal) {
 
     var
       shareListVm = this,

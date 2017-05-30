@@ -9,14 +9,14 @@
     .module('linshare.sharedSpace')
     .controller('WorkGroupMembersController', workGroupMembersController);
 
-  workGroupMembersController.$inject = ['$filter', '$scope', 'lsAppConfig', 'workgroupMembersRestService'];
+  workGroupMembersController.$inject = ['_', '$filter', '$scope', 'lsAppConfig', 'workgroupMembersRestService'];
 
   /**
    * @namespace workGroupMembersController
    * @desc Application home management system controller
    * @memberOf LinShare.sharedSpace
    */
-  function workGroupMembersController($filter, $scope, lsAppConfig, workgroupMembersRestService) {
+  function workGroupMembersController(_, $filter, $scope, lsAppConfig, workgroupMembersRestService) {
     /* jshint validthis: true */
     var workgroupMemberVm = this;
 

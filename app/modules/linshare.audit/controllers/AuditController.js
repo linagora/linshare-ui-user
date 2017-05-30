@@ -10,7 +10,7 @@
     .module('linshare.audit')
     .controller('AuditController', AuditController);
 
-  AuditController.$inject = ['$filter', '$scope', '$translate', '$translatePartialLoader', 'auditDetailsService',
+  AuditController.$inject = ['_', '$filter', '$scope', '$translate', '$translatePartialLoader', 'auditDetailsService',
     'auditRestService', 'lsAppConfig', 'tableParamsService'];
 
   /**
@@ -18,8 +18,8 @@
    * @desc Application audit management system controller
    * @memberOf LinShare.Audit
    */
-  function AuditController($filter, $scope, $translate, $translatePartialLoader, auditDetailsService, auditRestService,
-                           lsAppConfig, tableParamsService) {
+  function AuditController(_, $filter, $scope, $translate, $translatePartialLoader, auditDetailsService,
+    auditRestService, lsAppConfig, tableParamsService) {
     /* jshint validthis: true */
     var auditVm = this;
 

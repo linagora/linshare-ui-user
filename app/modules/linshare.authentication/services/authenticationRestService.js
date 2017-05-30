@@ -8,8 +8,8 @@
     .module('linshare.authentication')
     .factory('authenticationRestService', authenticationRestService);
 
-  authenticationRestService.$inject = ['$cookies', '$location', '$log', '$q', '$window', 'authService', 'lsAppConfig',
-    'Restangular', 'ServerManagerService'
+  authenticationRestService.$inject = ['_', '$cookies', '$location', '$log', '$q', '$window', 'authService',
+    'lsAppConfig', 'Restangular', 'ServerManagerService'
   ];
 
   /**
@@ -17,7 +17,7 @@
    * @desc Service to interact with User Authentication object by REST
    * @memberOf Linshare.authentication
    */
-  function authenticationRestService($cookies, $location, $log, $q, $window, authService, lsAppConfig, Restangular,
+  function authenticationRestService(_, $cookies, $location, $log, $q, $window, authService, lsAppConfig, Restangular,
     ServerManagerService) {
     var
       deferred = $q.defer(),

@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .factory('ServerManagerService', ServerManagerService);
 
-  ServerManagerService.$inject = ['$log', '$q', '$translate', '$translatePartialLoader', 'toastService'];
+  ServerManagerService.$inject = ['_', '$log', '$q', '$translate', '$translatePartialLoader', 'toastService'];
 
   /**
    * @namespace ServerManagerService
    * @desc Manage server interaction
    * @memberOf linshareUiUserApp
    */
-  function ServerManagerService($log, $q, $translate, $translatePartialLoader, toastService) {
+  function ServerManagerService(_, $log, $q, $translate, $translatePartialLoader, toastService) {
     $translatePartialLoader.addPart('serverResponse');
     var service = {
       responseHandler: responseHandler

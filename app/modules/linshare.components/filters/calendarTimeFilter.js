@@ -9,7 +9,7 @@
     .module('linshare.components')
     .filter('calendarTime', calendarTimeFilter);
 
-  calendarTimeFilter.$inject = ['$translate'];
+  calendarTimeFilter.$inject = ['$translate', 'moment'];
 
   /**
    * @namespace calendarTimeFilter
@@ -17,7 +17,7 @@
    * @returns {string} Value to show in view
    * @memberOf LinShare.components
    */
-  function calendarTimeFilter($translate) {
+  function calendarTimeFilter($translate, moment) {
     // TODO : service where to set moment lang
     var local = $translate.use().substring(0, $translate.use().indexOf('-'));
     moment.locale(local);
