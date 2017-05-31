@@ -13,6 +13,7 @@ angular
     $translateProvider.fallbackLanguage('en-US');
     $translatePartialLoaderProvider.addPart('general');
     $translatePartialLoaderProvider.addPart('notification');
+    $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
     $translateProvider.preferredLanguage('en-US');
     RestangularProvider.setDefaultHttpFields({
       cache: false

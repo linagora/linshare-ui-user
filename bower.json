@@ -46,7 +46,8 @@
     "flag-icon-css": "~2.3.1",
     "angular-chosen-localytics": "~1.4.0",
     "node-uuid": "^1.4.7",
-    "ng-table-bundle": "~4"
+    "ng-table-bundle": "~4",
+    "angular-translate-interpolation-messageformat": "2.11.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"
