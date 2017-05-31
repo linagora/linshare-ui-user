@@ -9,22 +9,22 @@
     .module('linshare.components')
     .factory('toastService', toastService);
 
-  toastService.$inject = ['_', '$mdToast', '$timeout', 'componentsConfig'];
+  toastService.$inject = ['_', '$mdToast', '$q', 'componentsConfig'];
 
   /**
    * @namespace toastService
    * @desc Service to manage toast to display
    * @memberOf linshare.components
    */
-  function toastService(_, $mdToast, $timeout, componentsConfig) {
+  function toastService(_, $mdToast, $q, componentsConfig) {
     var
-      activate = false,
       delay = {
         default: 3000,
         none: 0
       },
       mdToastLocals = {},
       position = 'bottom right',
+      stack = [],
       templateUrl = componentsConfig.path + 'toast/toast.html';
 
     var service = {
@@ -87,7 +87,7 @@
      * @memberOf linshare.components.toastService
      */
     function isActive() {
-      return activate;
+      return stack.length > 0;
     }
 
     /**
@@ -158,8 +158,9 @@
      * @memberOf linshare.components.toastService
      */
     function toastClose(actionClicked) {
-      activate = false;
-      return $mdToast.hide({actionClicked: actionClicked});
+      return $mdToast.hide({
+        actionClicked: actionClicked
+      });
     }
 
     /**
@@ -171,19 +172,44 @@
      * @memberOf linshare.components.toastService
      */
     function toastShow(mdToastLocals, delay) {
-      activate = true;
-      $timeout(function() {
-        activate = false;
-      }, 1000);
-      return $mdToast.show({
-        locals: mdToastLocals,
-        controller: 'toastController',
-        controllerAs: 'toastVm',
-        bindToController: true,
-        hideDelay: delay,
-        position: position,
-        templateUrl: templateUrl
-      });
+      if (isActive()) {
+        var deferred = $q.defer();
+        stack.push({
+          mdToastLocals: mdToastLocals,
+          delay: delay,
+          promise: deferred.promise
+        });
+        stack.shift().promise.then(function() {
+          return show(mdToastLocals, delay).then(function() {
+            deferred.resolve();
+          });
+        });
+      } else {
+        var mdToastInstance = show(mdToastLocals, delay);
+        stack.push({
+          mdToastLocals: mdToastLocals,
+          delay: delay,
+          promise: mdToastInstance
+        });
+        return mdToastInstance;
+      }
+
+      function show(mdToastLocals, delay) {
+        return $mdToast.show({
+          locals: mdToastLocals,
+          controller: 'toastController',
+          controllerAs: 'toastVm',
+          bindToController: true,
+          hideDelay: delay,
+          position: position,
+          templateUrl: templateUrl
+        }).then(function() {
+          _.remove(stack, {
+            mdToastLocals: mdToastLocals,
+            delay: delay
+          });
+        });
+      }
     }
   }
 })();
