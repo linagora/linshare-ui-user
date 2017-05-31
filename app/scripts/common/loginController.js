@@ -80,7 +80,7 @@
         .catch(function(error) {
           switch (error.status) {
             case 401:
-              toastService.error('LOGIN.NOTIFICATION.ERROR');
+              toastService.error({key: 'LOGIN.NOTIFICATION.ERROR'});
               break;
           }
         });

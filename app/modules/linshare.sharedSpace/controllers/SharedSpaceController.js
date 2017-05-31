@@ -225,7 +225,7 @@ angular.module('linshare.sharedSpace')
       angular.forEach(items, function(restangularizedItem) {
         $log.debug('value to delete', restangularizedItem);
         restangularizedItem.remove().then(function() {
-          toastService.success('GROWL_ALERT.ACTION.DELETE_SINGULAR');
+          toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
           _.remove(thisctrl.itemsList, restangularizedItem);
           _.remove(thisctrl.selectedDocuments, restangularizedItem);
           thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module

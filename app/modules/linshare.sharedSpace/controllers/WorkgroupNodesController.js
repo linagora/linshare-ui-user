@@ -139,7 +139,7 @@
       workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem, _destinationNodeUuid)
         .then(function(data) {
           var copiedNode = workgroupNodesRestService.restangularize(data, workgroupNodesVm.folderDetails.workgroupUuid);
-          toastService.success('GROWL_ALERT.ACTION.COPY');
+          toastService.success({key: 'GROWL_ALERT.ACTION.COPY'});
           addNewItemInTableParams(copiedNode);
         });
     }
@@ -182,13 +182,13 @@
       documentUtilsService.deleteDocuments(nodes, function(nodes) {
         _.forEach(nodes, function(restangularizedItem) {
           restangularizedItem.remove().then(function() {
-            toastService.success('GROWL_ALERT.ACTION.DELETE_SINGULAR');
+            toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
             _.remove(workgroupNodesVm.nodesList, restangularizedItem);
             _.remove(workgroupNodesVm.selectedDocuments, restangularizedItem);
             workgroupNodesVm.tableParamsService.reloadTableParams();
           }, function(error) {
             if (error.status === 400 && error.data.errCode === 26006) {
-              toastService.error('GROWL_ALERT.ERROR.DELETE_ERROR.26006');
+              toastService.error({key: 'GROWL_ALERT.ERROR.DELETE_ERROR.26006'});
             }
           });
         });
@@ -405,7 +405,7 @@
         if (nodeToRename.name !== data.name) {
           $timeout(function() {
             renameNode(data, 'td[uuid=' + data.uuid + '] .file-name-disp');
-            toastService.error('GROWL_ALERT.ERROR.RENAME_FOLDER');
+            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_FOLDER'});
           }, 0);
         } else {
           workgroupNodesVm.canCreateFolder = true;
@@ -416,7 +416,7 @@
           case 28005 :
             var errorMessage = isDocument(nodeToRename.type) ? 'GROWL_ALERT.ERROR.RENAME_FILE' :
               'GROWL_ALERT.ERROR.RENAME_FOLDER';
-            toastService.error(errorMessage);
+            toastService.error({key: errorMessage});
             renameNode(nodeToRename, itemNameElem);
             break;
           case lsErrorCode.CANCELLED_BY_USER :

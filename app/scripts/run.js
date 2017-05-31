@@ -113,7 +113,7 @@ angular
           if (response.status) {
             $log.debug('Error ' + response.status, response);
           } else {
-            toastService.error('GROWL_ALERT.ERROR.NO_RESPONSE_ERROR');
+            toastService.error({key: 'GROWL_ALERT.ERROR.NO_RESPONSE_ERROR'});
             $log.debug('deferred', deferred);
             $log.debug('response', response);
             $log.debug('responseHandler', responseHandler);

@@ -118,7 +118,7 @@
       if (form.$valid) {
         newGuest.create().then(function() {
           $scope.mainVm.sidebar.hide(form, newGuest);
-          toastService.success('SIDEBAR.NOTIFICATION.SUCCESS.CREATE');
+          toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.CREATE'});
           guestVm.tableParams.reload();
         });
       } else {
@@ -442,7 +442,7 @@
       if (form.$valid) {
         guestObject.update().then(function() {
           $scope.mainVm.sidebar.hide(form, guestObject);
-          toastService.success('SIDEBAR.NOTIFICATION.SUCCESS.UPDATE');
+          toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.UPDATE'});
           guestVm.tableParams.reload();
         });
       } else {

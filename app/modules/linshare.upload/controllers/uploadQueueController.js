@@ -233,7 +233,7 @@
       if (uploadQueueVm.nbErrorFilesSelected === lengthOfSelectedDocuments()) {
         var messageKey = lengthOfSelectedDocuments() > 1 ?
           'NO_SHAREABLE_FILE_SELECTED_PLURAL' : 'NO_SHAREABLE_FILE_SELECTED_SINGULAR';
-        toastService.error('UPLOAD_SHARE_ALERT.' + messageKey);
+        toastService.error({key: 'UPLOAD_SHARE_ALERT.' + messageKey});
       } else if (uploadQueueVm.nbErrorFilesSelected > 0) {
         alertUnsharableFilesSelectedSwal(uploadQueueVm.nbErrorFilesSelected, executeShare, shareType);
       } else {

@@ -346,10 +346,10 @@ angular.module('linshare.receivedShare')
       loadTable().then(function(data) {
         $scope.tableParams = data;
         if (_.isUndefined($scope.documentSelected)) {
-          toastService.error('GROWL_ALERT.ERROR.FILE_NOT_FOUND');
+          toastService.error({key: 'GROWL_ALERT.ERROR.FILE_NOT_FOUND'});
         }
         else if ($scope.documentSelected !== null ) {
-          toastService.isolate('TOAST_ALERT.WARNING.ISOLATED_FILE');
+          toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
           $scope.addSelectedDocument($scope.documentSelected);
           $scope.toggleFilterBySelectedFiles();
           $scope.showCurrentFile($scope.documentSelected);
@@ -408,7 +408,7 @@ angular.module('linshare.receivedShare')
             $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
             $scope.tableParams.reload();
             initFlagsOnSelectedPages();
-            toastService.success('GROWL_ALERT.ACTION.DELETE_SINGULAR');
+            toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
           });
         });
       }

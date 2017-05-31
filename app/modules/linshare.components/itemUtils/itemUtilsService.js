@@ -79,11 +79,11 @@
      */
     function isNameValid(name) {
       if (name === '') {
-        toastService.error(invalidNameTranslate.empty.key);
+        toastService.error({key: invalidNameTranslate.empty.key});
         return false;
       }
       if (name.charAt(name.length - 1) === '.') {
-        toastService.error(invalidNameTranslate.endingPoint.key);
+        toastService.error({key: invalidNameTranslate.endingPoint.key});
         return false;
       }
       if (regex.test(name)) {

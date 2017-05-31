@@ -135,7 +135,7 @@
         saveContact(newContact);
       } else {
         var message = (contact.firstName || contact.mail) + ' ' + (contact.lastName || '') + ' ' + stillExists;
-        toastService.info(message);
+        toastService.info({key: message});
       }
     }
 
@@ -174,7 +174,7 @@
         delete restangularizedItem.show;
         restangularizedItem.remove().then(function() {
           $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
-            toastService.success(message);
+            toastService.success({key: message});
           });
           _.remove(contactsListsContactsVm.itemsList, restangularizedItem);
           _.remove(contactsListsContactsVm.selectedContacts, restangularizedItem);
@@ -294,7 +294,7 @@
       contactsListsContactsRestService.create(contactsListsContactsVm.contactsListUuid, contact).then(function(data) {
         setModelForEdit(data);
         contactsListsContactsVm.itemsList.push(data);
-        toastService.success('GROWL_ALERT.ACTION.INSERT');
+        toastService.success({key: 'GROWL_ALERT.ACTION.INSERT'});
         contactsListsContactsVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsContactsVm.tableParams.reload();
       });
@@ -504,7 +504,7 @@
               .itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
             setModelForEdit(contactToSave);
             $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
-              toastService.success(message);
+              toastService.success({key: message});
             });
             contactsListsContactsVm.tableParams.reload();
             $scope.mainVm.sidebar.hide();

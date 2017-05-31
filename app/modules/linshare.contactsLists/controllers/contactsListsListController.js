@@ -234,7 +234,7 @@
     function deleteCallback(items) {
       _.forEach(items, function(restangularizedItem) {
         restangularizedItem.remove().then(function() {
-          toastService.success('GROWL_ALERT.ACTION.DELETE_SINGULAR');
+          toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
           _.remove(contactsListsListVm.itemsList, restangularizedItem);
           _.remove(contactsListsListVm.selectedContactsLists, restangularizedItem);
           contactsListsListVm.tableParams.reload();
@@ -430,7 +430,7 @@
         contactsListsListVm.canCreate = true;
       }).catch(function(error) {
         if (error.data.errCode === 25001) {
-          toastService.error('GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST');
+          toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'});
           renameContactsList(item, itemNameElem);
         }
         if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
@@ -472,7 +472,7 @@
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
         contactsListsContactsRestService.create(contactListUuidDestination, contact).then(function() {
           if (!duplicate) {
-            toastService.success('GROWL_ALERT.ACTION.UPDATE');
+            toastService.success({key: 'GROWL_ALERT.ACTION.UPDATE'});
           }
           _.remove(contactsListsListVm.contactsToAddList, {
             mail: contact.mail
@@ -484,7 +484,7 @@
           if (error.data.errCode === 45400) {
             // TODO : IAB & KLE : improve serverResponse module to allow default or custom message
             var message = contact.firstName + ' ' + contact.lastName + ' ' + stillExists;
-            toastService.error(message);
+            toastService.error({key: message});
             _.remove(contactsListsListVm.contactsToAddList, {
               mail: contact.mail
             });

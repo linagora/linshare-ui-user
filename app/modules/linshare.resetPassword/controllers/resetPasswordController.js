@@ -137,7 +137,7 @@
      */
     function notify(data) {
       var message = data.data.message;
-      toastService.error(message);
+      toastService.error({key: message});
       $log.error('resetPasswordController - notify', data);
     }
 

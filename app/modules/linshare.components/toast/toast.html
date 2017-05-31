@@ -11,8 +11,13 @@
         <span class="zmdi zmdi-alert-circle-o" data-ng-show="toastWarning"></span>
       </div>
       <div class="md-toast-text" flex data-ng-class="{'toast-single-btn' : actionLabel}">
-        <span data-ng-if="toastVm._.isString(toastText)" translate>{{toastText}}</span>
-        <span data-ng-if="toastVm._.isObject(toastText)" translate translate-values="{{toastText.params}}">{{toastText.key}}</span>
+        <span data-ng-if="!toastText.plural" translate translate-values="{{toastText.params}}">
+         {{toastText.key}}
+        </span>
+        <span data-ng-if="toastText.plural" translate translate-values="{{toastText.params}}"
+              translate-interpolation="messageformat">
+         {{toastText.key}}
+        </span>
         <a class="md-highlight toast-inline-link" data-ng-show="toastDetails"
            data-ng-click="toastVm.openDetails = !toastVm.openDetails" translate>
           TOAST_ALERT.ACTION.DETAILS
@@ -31,7 +36,6 @@
       <div class="toast-details-item" data-ng-repeat="detail in toastDetails track by $index">
         <p class="toast-item-filename" translate>{{detail.title}}</p>
         <p class="toast-item-error">
-          <span class="toast-error-code">{{detail.prefix}} </span>
           <span class="toast-error-message" translate>{{detail.message}}</span>
         </p>
       </div>

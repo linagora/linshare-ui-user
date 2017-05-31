@@ -151,11 +151,14 @@
 
 
     function deleteCallback(items) {
+      var message;
       var nbItems = items.length;
       var responsesDeletion = [];
       $q.all(sortResponseDeletion(items, responsesDeletion)).then(function() {
         if (responsesDeletion.length > 0) {
-          var txtMessage = responsesDeletion.length === 1 ? 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR' : {
+          message = responsesDeletion.length === 1 ? {
+            key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR'
+          } : {
             key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL',
             params: {
               number: responsesDeletion.length
@@ -189,10 +192,10 @@
                 });
             }
           });
-          toastService.error(txtMessage,undefined,responses);
+          toastService.error(message, undefined, responses);
         } else {
-          var message = (nbItems === 1) ? 'GROWL_ALERT.ACTION.DELETE_SINGULAR' : 'GROWL_ALERT.ACTION.DELETE_PLURAL';
-          toastService.success(message);
+          message = (nbItems === 1) ? 'GROWL_ALERT.ACTION.DELETE_SINGULAR' : 'GROWL_ALERT.ACTION.DELETE_PLURAL';
+          toastService.success({key: message});
           $timeout(function() {
             $scope.getUserQuotas();
           }, 350);
@@ -261,9 +264,9 @@
 
         if ($stateParams.fileUuid) {
           if (_.isNil(data.itemToSelect)) {
-            toastService.error('GROWL_ALERT.ERROR.FILE_NOT_FOUND');
+            toastService.error({key: 'GROWL_ALERT.ERROR.FILE_NOT_FOUND'});
           } else {
-            toastService.isolate('TOAST_ALERT.WARNING.ISOLATED_FILE');
+            toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
             $scope.addSelectedDocument(data.itemToSelect);
             $scope.toggleFilterBySelectedFiles();
             $scope.showCurrentFile(data.itemToSelect);

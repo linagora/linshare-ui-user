@@ -43,9 +43,14 @@
     /**
      * @name error
      * @desc Show a toast error
-     * @param {string} texte - Message of the toast
-     * @param {string} Optionnal | label - Button label to replace close icon
-     * @param {Array<Object>} Optionnal | details - Array of object containing title, prefix & message property
+     * @param {Object} texte - Text of the toast
+     * @param {string} texte.key - Translation key value
+     * @param {Object} [texte.params] - Parameters of the translated sentence
+     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {string} [label] - Button label to replace close icon
+     * @param {Object[]} [details] - List of element composing the detailed information
+     * @param {string} [details[].title] - Title of the error
+     * @param {string} [details[].message] - Message of the error
      * @returns {Promise} promise resolved on toastClose
      * @memberOf linshare.components.toastService
      */
@@ -63,9 +68,14 @@
     /**
      * @name info
      * @desc Show a toast info
-     * @param {string} texte - Message of the toast
-     * @param {string} Optionnal | label - Button label to replace close icon
-     * @param {Array<Object>} Optionnal | details - Array of object containing title, prefix & message property
+     * @param {Object} texte - Text of the toast
+     * @param {string} texte.key - Translation key value
+     * @param {Object} [texte.params] - Parameters of the translated sentence
+     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {string} [label] - Button label to replace close icon
+     * @param {Object[]} [details] - List of element composing the detailed information
+     * @param {string} [details[].title] - Title of the error
+     * @param {string} [details[].message] - Message of the error
      * @returns {Promise} promise resolved on toastClose
      * @memberOf linshare.components.toastService
      */
@@ -93,9 +103,14 @@
     /**
      * @name isolate
      * @desc Show a toast isolate
-     * @param {string} texte - Message of the toast
-     * @param {string} Optionnal | label - Button label to replace close icon
-     * @param {Array<Object>} Optionnal | details - Array of object containing title, prefix & message property
+     * @param {Object} texte - Text of the toast
+     * @param {string} texte.key - Translation key value
+     * @param {Object} [texte.params] - Parameters of the translated sentence
+     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {string} [label] - Button label to replace close icon
+     * @param {Object[]} [details] - List of element composing the detailed information
+     * @param {string} [details[].title] - Title of the error
+     * @param {string} [details[].message] - Message of the error
      * @returns {Promise} promise resolved on toastClose
      * @memberOf linshare.components.toastService
      */
@@ -113,9 +128,14 @@
     /**
      * @name success
      * @desc Show a toast success
-     * @param {string} texte - Message of the toast
-     * @param {string} Optionnal | label - Button label to replace close icon
-     * @param {Array<Object>} Optionnal | details - Array of object containing title, prefix & message property
+     * @param {Object} texte - Text of the toast
+     * @param {string} texte.key - Translation key value
+     * @param {Object} [texte.params] - Parameters of the translated sentence
+     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {string} [label] - Button label to replace close icon
+     * @param {Object[]} [details] - List of element composing the detailed information
+     * @param {string} [details[].title] - Title of the error
+     * @param {string} [details[].message] - Message of the error
      * @returns {Promise} promise resolved on toastClose
      * @memberOf linshare.components.toastService
      */
@@ -133,9 +153,14 @@
     /**
      * @name warning
      * @desc Show a toast warning
-     * @param {string} texte - Message of the toast
-     * @param {string} Optionnal | label - Button label to replace close icon
-     * @param {Array<Object>} Optionnal | details - Array of object containing title, prefix & message property
+     * @param {Object} texte - Text of the toast
+     * @param {string} texte.key - Translation key value
+     * @param {Object} [texte.params] - Parameters of the translated sentence
+     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {string} [label] - Button label to replace close icon
+     * @param {Object[]} [details] - List of element composing the detailed information
+     * @param {string} [details[].title] - Title of the error
+     * @param {string} [details[].message] - Message of the error
      * @returns {Promise} promise resolved on toastClose
      * @memberOf linshare.components.toastService
      */
