@@ -296,16 +296,17 @@
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
-              <span data-ng-class="{'hide': workgroupNodesVm.selectedDocuments.length > 1}">
-                  <a
-                    data-ng-href=""
-                    data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
-                    event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
-                    <i class="zmdi zmdi-download"></i>
-                    <span translate>ACTION.DOWNLOAD</span>
-                  </a>
-              </span>
-            <span data-ng-if="workgroupNodesVm.selectedDocuments.length > 1">
+            <span data-ng-class="{'hide': workgroupNodesVm.selectedDocuments.length > 1}"
+                  data-ng-if="workgroupNodesVm.areAllSameType()">
+              <a data-ng-href=""
+                 data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
+                 event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
+                <i class="zmdi zmdi-download"></i>
+                <span translate>ACTION.DOWNLOAD</span>
+              </a>
+            </span>
+            <span data-ng-if="workgroupNodesVm.selectedDocuments.length > 1 &&
+             workgroupNodesVm.areAllSameType()">
               <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
                  data-ng-click="workgroupNodesVm.unavailableMultiDownload()">
                 <i class="zmdi zmdi-download"></i>
@@ -322,7 +323,7 @@
             <span data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly &&
              workgroupNodesVm.selectedDocuments.length === 1">
                 <a class="plain-text-button share-link" title="{{'ACTION.MOVE' | translate}}"
-                   data-ng-click="workgroupNodesVm.openBrowser(nodeItem, true)">
+                   data-ng-click="workgroupNodesVm.openBrowser(workgroupNodesVm.selectedDocuments[0], true)">
                   <i class="zmdi zmdi-arrows"></i>
                   <span translate>ACTION.MOVE</span>
                 </a>
@@ -340,8 +341,39 @@
                   <li event-propagation-stop data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"
                       data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
                     <a href="">
-                      <i class="zmdi zmdi-info-outline "></i>
+                      <i class="zmdi zmdi-info-outline"></i>
                       <span translate>ACTION.INFORMATION</span>
+                    </a>
+                  </li>
+                  <li event-propagation-stop
+                      data-ng-click="workgroupNodesVm.copyNode(workgroupNodesVm.selectedDocuments[0])"
+                      data-ng-if="workgroupNodesVm.areAllSameType()">
+                    <a href="">
+                      <i class="zmdi zmdi-copy"></i>
+                      <span translate>ACTION.COPY_DROPDOWN.SIMPLE_COPY</span>
+                    </a>
+                  </li>
+                  <li event-propagation-stop
+                      data-ng-click="workgroupNodesVm.openBrowser(workgroupNodesVm.selectedDocuments[0])"
+                      data-ng-if="workgroupNodesVm.areAllSameType()">
+                    <a href="">
+                      <i class="fa fa-files-o"></i>
+                      <span translate>ACTION.COPY_DROPDOWN.CREATE_COPY</span>
+                    </a>
+                  </li>
+                  <li event-propagation-stop
+                      data-ng-class="{'disabled-work-in-progress': linshareModeProduction}"
+                      data-ng-if="workgroupNodesVm.areAllSameType()">
+                    <a href="">
+                      <i class="fa fa-files-o"></i>
+                      <span translate>ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES</span>
+                    </a>
+                  </li>
+                  <li event-propagation-stop data-ng-show="!linshareModeProduction &&
+                   workgroupNodesVm.areAllSameType()">
+                    <a href="">
+                      <i class="zmdi zmdi-share"></i>
+                      <span translate>ACTION.COPY_DROPDOWN.COPY_AND_SHARE</span>
                     </a>
                   </li>
                   <li>
@@ -404,6 +436,12 @@
                          <a>
                            <i class="fa fa-files-o"></i>
                            <span translate>ACTION.COPY_DROPDOWN.CREATE_COPY</span>
+                         </a>
+                       </li>
+                       <li class="hidden-xs" data-ng-class="{'disabled-work-in-progress': linshareModeProduction}">
+                         <a>
+                           <i class="fa fa-files-o"></i>
+                           <span translate>ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES</span>
                          </a>
                        </li>
                        <li class="hidden-xs" data-ng-show="!linshareModeProduction">
@@ -555,7 +593,7 @@
                               <li event-propagation-stop
                                   data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
                                 <a href="">
-                                  <i class="zmdi zmdi-info-outline "></i>
+                                  <i class="zmdi zmdi-info-outline"></i>
                                   <span translate>ACTION.INFORMATION</span>
                                 </a>
                               </li>
@@ -619,6 +657,12 @@
                                       <span translate>ACTION.COPY_DROPDOWN.CREATE_COPY</span>
                                     </a>
                                   </li>
+                                  <li data-ng-class="{'disabled-work-in-progress': linshareModeProduction}">
+                                    <a>
+                                      <i class="fa fa-files-o"></i>
+                                      <span translate>ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES</span>
+                                    </a>
+                                  </li>
                                   <li class="hidden-xs" data-ng-show="!linshareModeProduction">
                                     <a>
                                       <i class="zmdi zmdi-share"></i>
@@ -628,7 +672,7 @@
                                 </ul>
                               </li>
                               <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-                                  class="hidden-xs" data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
+                                  class="hidden-xs">
                                 <a href="" data-ng-click="workgroupNodesVm.openBrowser(nodeItem, true)">
                                   <i class="zmdi zmdi-arrows"></i>
                                   <span translate>ACTION.MOVE</span>
@@ -775,7 +819,15 @@
           </a>
         </li>
         <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-            data-ng-show="!linshareModeProduction && workgroupNodesVm.isDocument(nodeItem.type)">
+            data-ng-click="workgroupNodesVm.openBrowser(nodeItem)"
+            data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)"
+            data-ng-class="{'disabled-work-in-progress': linshareModeProduction}">
+          <a><i class="fa fa-files-o"></i>
+            <span translate>ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES</span>
+          </a>
+        </li>
+         <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
+             data-ng-show="!linshareModeProduction && workgroupNodesVm.isDocument(nodeItem.type)">
           <a><i class="zmdi zmdi-share"></i>
             <span translate>ACTION.COPY_DROPDOWN.COPY_AND_SHARE</span>
           </a>

@@ -22,18 +22,18 @@
   "GROWL_ALERT": {
     "ACTION": {
       "TBT__BROWSER_ACTION": "",
+      "TBT__COPY": "",
+      "TBT__COPY_PLURAL": "",
+      "TBT__COPY_SAME_FOLDER": "",
+      "TBT__COPY_SINGULAR": "",
       "DELETE": "Đã xóa tập tin thành công",
       "TBT__DELETE_SINGULAR": "",
       "TBT__DELETE_PLURAL": "",
       "TBT__INSERT": "",
-      "TBT__UPDATE": "",
       "SHARE": "Đã chia sẻ thành công",
-      "TBT__COPY": "",
-      "TBT__COPY_SAME_FOLDER": "",
-      "COPY_SINGULAR": "",
-      "COPY_PLURAL": "",
       "TBT__SHARE_ASYNC": "",
-      "TBT__SHARE_FAILED": ""
+      "TBT__SHARE_FAILED": "",
+      "TBT__UPDATE": ""
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",

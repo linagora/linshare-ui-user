@@ -21,19 +21,19 @@
   },
   "GROWL_ALERT": {
     "ACTION": {
-      "BROWSER_ACTION": "Le fichier a été {ACTION, select, moved{déplacé} other{copié}} dans : {folderName}.",
+      "BROWSER_ACTION": "Le {NODE_TYPE, select, file{fichier} other{dossier}} a été {ACTION, select, moved{déplacé} other{copié}} dans : {folderName}.",
+      "COPY": "Fichier copié avec succès dans vos fichiers.",
+      "COPY_PLURAL": "fichiers ont été copié vers votre Espace Personnel",
+      "COPY_SAME_FOLDER": "Le fichier a été copié avec succès.",
+      "COPY_SINGULAR": "fichier a été copié vers votre Espace Personnel.",
       "DELETE": "Suppression réussie",
       "DELETE_SINGULAR": "L'élément a été supprimé avec succès.",
       "DELETE_PLURAL": "Les éléments ont été supprimés avec succès.",
-      "UPDATE": "L'élément a été mise à jour avec succès.",
       "INSERT": "L'élément a été ajouté avec succès.",
-      "COPY": "Fichier copié avec succès dans vos fichiers.",
-      "COPY_SAME_FOLDER": "Le fichier a été copié avec succès.",
-      "COPY_PLURAL": "fichiers ont été copié vers votre Espace Personnel",
-      "COPY_SINGULAR": "fichier a été copié vers votre Espace Personnel.",
       "SHARE": "Votre partage {{shareName ? shareName + ' ': ''}}a été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
-      "SHARE_FAILED": "Votre partage {{shareName ? shareName + ' ': ''}}de fichiers a échoué."
+      "SHARE_FAILED": "Votre partage {{shareName ? shareName + ' ': ''}}de fichiers a échoué.",
+      "UPDATE": "L'élément a été mise à jour avec succès."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",

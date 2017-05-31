@@ -27,6 +27,7 @@
       </div>
       <div class="lv-ctn">
         <div class="lv-tem" data-ng-repeat="folder in browseVm.currentList"
+             data-ng-if="folder.uuid !== browseVm.nodeItem.uuid"
              data-ng-click="browseVm.goToFolder(folder)" uuid={{folder.uuid}}>
           <div class="lv-icon-ctn lv-col-1 center">
             <span class="ls-folder"></span>

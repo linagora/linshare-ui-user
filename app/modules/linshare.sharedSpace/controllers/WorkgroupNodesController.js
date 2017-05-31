@@ -32,9 +32,11 @@
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
 
-    var newFolderName, swalMultipleDownloadConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText, showIt;
+    var newFolderName, swalMultipleDownloadConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText,
+      toastActionView;
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
+    workgroupNodesVm.areAllSameType = areAllSameType;
     workgroupNodesVm.breadcrumb = [];
     workgroupNodesVm.canCreateFolder = true;
     workgroupNodesVm.copyNode = copyNode;
@@ -75,19 +77,21 @@
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('sharedspace');
 
-      $translate([
-        'ACTION.NEW_FOLDER',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
-        'TOAST_SHOW_IT'])
-        .then(function(translations) {
+      $translate.refresh().then(function() {
+        $translate([
+          'ACTION.NEW_FOLDER',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
+          'TOAST_ACTION_VIEW'
+        ]).then(function(translations) {
           newFolderName = translations['ACTION.NEW_FOLDER'];
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-          showIt = translations.TOAST_SHOW_IT;
+          toastActionView = translations.TOAST_ACTION_VIEW;
         });
+      });
 
       getBreadcrumb();
       setFabConfig();
@@ -125,6 +129,21 @@
           });
         }
       }
+    }
+
+    /**
+     * @name areAllSameType
+     * @desc Check if all nodes has the same type
+     * @param {string} [nodeType] - Type which all nodes should be
+     * @param {Array<Object>} [nodesList] - List to check
+     * @returns {boolean} True if all elements have the same type
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function areAllSameType(nodeType, nodesList) {
+      var _nodeType = nodeType || TYPE_DOCUMENT;
+      var _nodesList = nodesList || workgroupNodesVm.selectedDocuments;
+      var nodesFound = _.filter(_nodesList, {'type': _nodeType});
+      return (nodesFound.length === _nodesList.length);
     }
 
     // TODO : show a single callback toast for multiple items copied, and check if it needs to be plural or not,
@@ -402,13 +421,15 @@
         if (data.nodeItem.parent === workgroupNodesVm.currentFolder.uuid) {
           toastService.success({key: 'GROWL_ALERT.ACTION.COPY'});
         } else {
+          var nodeType = workgroupNodesVm.isDocument(data.nodeItem.type) ? 'file' : '';
           var action = isMove ? 'moved' : '';
           $translate('GROWL_ALERT.ACTION.BROWSER_ACTION', {
+            NODE_TYPE: nodeType,
             ACTION: action,
             folderName: data.folder.name
           }, 'messageformat')
             .then(function(message) {
-              toastService.success(message, showIt).then(function(response) {
+              toastService.success(message, toastActionView).then(function(response) {
                 if (!_.isUndefined(response)) {
                   if (response.actionClicked) {
                     workgroupNodesVm.goToFolder(data.folder, true, data.nodeItem.uuid);
@@ -433,6 +454,7 @@
         .then(function(nodeItems) {
           if (workgroupNodesVm.nodesList !== nodeItems) {
             workgroupNodesVm.nodesList = nodeItems;
+            workgroupNodesVm.resetSelectedDocuments();
             tableParamsService.reloadTableParams(workgroupNodesVm.nodesList);
           }
         });

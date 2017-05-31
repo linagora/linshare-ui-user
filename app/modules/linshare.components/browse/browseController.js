@@ -9,14 +9,14 @@
     .module('linshare.components')
     .controller('browseController', browseController);
 
-  browseController.$inject = ['$timeout', '$translate', 'itemUtilsService', 'lsErrorCode', 'toastService'];
+  browseController.$inject = ['_', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode', 'toastService'];
 
   /**
    * @namespace browseController
    * @desc Controller of browse component
    * @memberOf linshare.components
    */
-  function browseController($timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
+  function browseController(_, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
     /* jshint validthis:true */
     var browseVm = this;
 

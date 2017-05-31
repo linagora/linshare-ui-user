@@ -21,19 +21,19 @@
   },
   "GROWL_ALERT": {
     "ACTION": {
-      "BROWSER_ACTION": "The file has been {ACTION, select, moved{moved} other{copied}} into : {folderName}.",
+      "BROWSER_ACTION": "The {NODE_TYPE, select, file{file} other{folder}} has been {ACTION, select, moved{moved} other{copied}} into : {folderName}.",
+      "COPY": "File(s) has been copied into your files.",
+      "COPY_PLURAL": "files have been copied into your Personal Space.",
+      "COPY_SAME_FOLDER": "The file has been copied successfully.",
+      "COPY_SINGULAR": "file has been copied into your Personal Space.",
       "DELETE": "Deletion succeeded",
       "DELETE_SINGULAR": "The item was deleted successfully.",
       "DELETE_PLURAL": "The items were deleted successfully.",
-      "UPDATE": "The item was updated successfully.",
       "INSERT": "The item was added successfully.",
-      "COPY": "File(s) has been copied into your files.",
-      "COPY_SAME_FOLDER": "The file has been copied successfully.",
-      "COPY_SINGULAR": "file has been copied into your Personal Space.",
-      "COPY_PLURAL": "files have been copied into your Personal Space.",
       "SHARE": "Your file share {{shareName ? shareName + ' ': ''}}was sent successfully.",
       "SHARE_ASYNC": "Your file share will be sent after the upload of all files.",
-      "SHARE_FAILED": "Your file {{shareName ? shareName + ' ': ''}}share has failed."
+      "SHARE_FAILED": "Your file {{shareName ? shareName + ' ': ''}}share has failed.",
+      "UPDATE": "The item was updated successfully."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",

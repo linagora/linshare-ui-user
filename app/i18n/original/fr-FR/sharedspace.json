@@ -36,7 +36,7 @@
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers",
   "BREADCRUMB_UPPER_LEVEL": "Dossiers parent",
   "FILE_NAME": "Nom de fichier",
-  "TOAST_SHOW_IT": "Voir",
+  "TOAST_ACTION_VIEW": "Voir",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Déposez vos fichiers",
     "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux."
