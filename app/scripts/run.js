@@ -34,6 +34,7 @@ angular
       return element;
     });
     flowFactoryProvider.defaults = {
+      stack: [],
       simultaneousUploads: lsAppConfig.simultaneousUpload,
       //testChunks:false,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',

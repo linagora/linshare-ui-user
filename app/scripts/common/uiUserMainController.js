@@ -92,15 +92,9 @@
       $scope.$on('flow::fileSuccess', function fileSuccessAction(event, $flow, flowFile, $message) {
         $log.debug('UPLOAD SUCCESS', flowFile.name);
         flowFile.doingAsyncUpload = true;
+        $flow.opts.stack.push(flowFile);
         mainVm.flowUploadService.addUploadedFile(flowFile, $message).then(function(file) {
-          toastService.success({
-            key: 'UPLOAD_DONE',
-            params: {
-              fileName: file.name,
-              singular: 'true'
-            },
-            plural: true
-          });
+          notify(file);
           $scope.getUserQuotas();
           if (file._from === lsAppConfig.mySpacePage) {
             sharableDocumentService.sharableDocuments(file, $scope.shareArray, $scope.refFlowShares);
@@ -109,6 +103,32 @@
         }).catch(function(file) {
           launchShare(file);
         });
+
+        /**
+         * @name notify
+         * @desc Notification of upload done by Toast message
+         * @param {Object} file - A successfully uploaded flowFile object
+         * @memberOf linshare.uiUserApp.activate.fileSuccessAction
+         */
+        function notify(file) {
+          $timeout(function() {
+            var stack = file.flowObj.opts.stack;
+            if (_.find(stack, file)) {
+              var files = _.remove(stack, function(flowFile) {
+                 return flowFile.linshareDocument;
+              });
+
+              var toastMsg = {key: 'UPLOAD_DONE', plural: true};
+              if (files.length === 1) {
+                toastMsg.params = {
+                  fileName: file.name,
+                  singular: 'true'
+                };
+              }
+              toastService.success(toastMsg);
+            }
+          }, 1000);
+        }
       });
 
       $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
