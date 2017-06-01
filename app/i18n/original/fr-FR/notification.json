@@ -21,10 +21,10 @@
   },
   "GROWL_ALERT": {
     "ACTION": {
-      "BROWSER_ACTION": "Le {NODE_TYPE, select, file{fichier} other{dossier}} a été {ACTION, select, moved{déplacé} other{copié}} dans : {folderName}.",
+      "BROWSER_ACTION": "{singular, select, true{L'élément a} other{Les éléments ont}} été {action, select, moved{déplacé} other{copié}} dans : {folderName}.",
       "COPY": "Fichier copié avec succès dans vos fichiers.",
       "COPY_PLURAL": "fichiers ont été copié vers votre Espace Personnel",
-      "COPY_SAME_FOLDER": "Le fichier a été copié avec succès.",
+      "COPY_SAME_FOLDER": "{singular, select, true{Le fichier a été copié} other{Les fichiers ont été copiés}} avec succès.",
       "COPY_SINGULAR": "fichier a été copié vers votre Espace Personnel.",
       "DELETE": "Suppression réussie",
       "DELETE_SINGULAR": "L'élément a été supprimé avec succès.",
@@ -42,11 +42,11 @@
       "INVALID_EMAIL": "Email invalide"
     },
     "ERROR": {
+      "BROWSER_ACTION": "{nbNodes} {singular, select, true{élément n'a} other{éléments n'ont}} pas pu être {action, select, moved{déplacé{singular, select, true{} other{s}}} other{copié{singular, select, true{} other{s}}}}",
       "FILE_NOT_FOUND": "Le fichier sélectionné n'a pas été trouvé",
       "FILE_UPLOAD": "Le dépôt a échoué",
       "503": "Serveur Indisponible",
-      "RENAME_FILE": "Un fichier avec le même nom existe déjà",
-      "RENAME_FOLDER": "Un dossier avec le même nom existe déjà",
+      "RENAME_NODE": "Un élément avec le même nom existe déjà",
       "RENAME_CONTACTS_LIST": "Une liste de contacts avec le même nom existe déjà.",
       "RENAME_INVALID": {
         "EMPTY": "Le nom ne peut être vide",

@@ -9,25 +9,24 @@
     .module('linshare.components')
     .controller('browseController', browseController);
 
-  browseController.$inject = ['_', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode', 'toastService'];
+  browseController.$inject = ['_', '$q', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode', 'toastService'];
 
   /**
    * @namespace browseController
    * @desc Controller of browse component
    * @memberOf linshare.components
    */
-  function browseController(_, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
+  function browseController(_, $q, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
     /* jshint validthis:true */
     var browseVm = this;
 
     const TYPE_FOLDER = 'FOLDER';
 
-    var errorRenameFolder,
-      fileStillExists,
-      newFolderName;
+    var newFolderName;
 
     browseVm.canCreateFolder = true;
     browseVm.createFolder = createFolder;
+    browseVm.disableFolder = disableFolder;
     browseVm.goToFolder = goToFolder;
 
     activate();
@@ -45,8 +44,6 @@
         'GROWL_ALERT.ERROR.RENAME_FILE',
         'ACTION.NEW_FOLDER'
       ]).then(function(translations) {
-        errorRenameFolder = translations['GROWL_ALERT.ERROR.RENAME_FOLDER'];
-        fileStillExists = translations['GROWL_ALERT.ERROR.RENAME_FILE'];
         newFolderName = translations['ACTION.NEW_FOLDER'];
       });
 
@@ -86,13 +83,36 @@
      * @memberOf linshare.components.browseController
      */
     function copyNode() {
-      browseVm.restService.copy(browseVm.currentFolder.workGroup, browseVm.nodeItem, browseVm.currentFolder.uuid)
-        .then(function(newNode) {
-          browseVm.$mdDialog.hide({
-            nodeItem: newNode,
-            folder: browseVm.currentFolder
-          });
+      var failedNodes = [],
+        promises = [];
+      _.forEach(browseVm.nodeItems, function(nodeItem) {
+        var deferred = $q.defer();
+        browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem, browseVm.currentFolder.uuid)
+          .then(function(newNode) {
+            deferred.resolve(newNode);
+          }).catch(function(error) {
+          deferred.reject(error);
         });
+        promises.push(deferred.promise);
+      });
+
+      $q.all(promises).then(function(nodeItems) {
+        browseVm.$mdDialog.hide({
+          nodeItems: nodeItems,
+          failedNodes: failedNodes,
+          folder: browseVm.currentFolder
+        });
+      });
+    }
+
+    /**
+     * @name disableFolder
+     * @desc Check if folder is in list and disable it to prevent from moving a folder inside itself
+     * @param {Object} folder - Folder to check
+     * @memberOf linshare.components.browseController
+     */
+    function disableFolder(folder) {
+      return _.find(browseVm.nodeItems, folder);
     }
 
     /**
@@ -125,20 +145,30 @@
      * @memberOf linshare.components.browseController
      */
     function moveNode() {
-      browseVm.nodeItem.parent = browseVm.currentFolder.uuid;
-      browseVm.nodeItem.save().then(function(newNode) {
+      var failedNodes = [],
+        nodeItems = [],
+        promises = [];
+
+      _.forEach(browseVm.nodeItems, function(nodeItem) {
+        var deferred = $q.defer();
+        nodeItem.parent = browseVm.currentFolder.uuid;
+        nodeItem.save().then(function(newNode) {
+          deferred.resolve(newNode);
+        }).catch(function(error) {
+          failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
+          deferred.reject(error);
+        });
+        promises.push(deferred.promise);
+      });
+
+      $q.all(promises).then(function(_nodeItems) {
+        nodeItems = _nodeItems;
+      }).finally(function() {
         browseVm.$mdDialog.hide({
-          nodeItem: newNode,
+          nodeItems: nodeItems,
+          failedNodes: failedNodes,
           folder: browseVm.currentFolder
         });
-      }).catch(function(error) {
-        switch(error.data.errCode) {
-          case 26445 :
-          case 28005 :
-            toastService.error(fileStillExists);
-            browseVm.nodeItem.parent = browseVm.sourceFolder.uuid;
-            break;
-        }
       });
     }
 
@@ -157,7 +187,7 @@
         if (nodeToRename.name !== data.name) {
           $timeout(function() {
             renameNode(data, 'div[uuid=' + data.uuid + '] .file-name-disp');
-            toastService.error(errorRenameFolder);
+            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
           }, 0);
         } else {
           browseVm.canCreateFolder = true;
@@ -166,7 +196,7 @@
         switch(error.data.errCode) {
           case 26445 :
           case 28005 :
-            toastService.error(errorRenameFolder);
+            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
             renameNode(nodeToRename, itemNameElem);
             break;
           case lsErrorCode.CANCELLED_BY_USER :

@@ -11,10 +11,11 @@
     </md-toolbar>
     <div id="lv-dialog-content-ctn">
       <div class="lv-header-dialog">
-        <div class="lv-col-1 center actions"
-             data-ng-class="{'disabled': browseVm.currentFolder.parent === browseVm.currentFolder.workGroup}"
-             data-ng-click="browseVm.goToFolder(browseVm.currentFolder, true)">
-          <a><i class="zmdi zmdi-chevron-left"></i></a>
+        <div class="lv-col-1 center actions">
+          <a data-ng-class="{'disabled': browseVm.currentFolder.parent === browseVm.currentFolder.workGroup}"
+            data-ng-click="browseVm.goToFolder(browseVm.currentFolder, true)">
+            <i class="zmdi zmdi-chevron-left"></i>
+          </a>
         </div>
         <div class="lv-col-2">
           {{browseVm.currentFolder.name}}
@@ -26,9 +27,11 @@
         </div>
       </div>
       <div class="lv-ctn">
-        <div class="lv-tem" data-ng-repeat="folder in browseVm.currentList"
-             data-ng-if="folder.uuid !== browseVm.nodeItem.uuid"
-             data-ng-click="browseVm.goToFolder(folder)" uuid={{folder.uuid}}>
+        <div class="lv-tem"
+             data-ng-repeat="folder in browseVm.currentList"
+             data-ng-click="browseVm.goToFolder(folder)"
+             data-ng-class="{'disabled' : browseVm.disableFolder(folder)}"
+             uuid={{folder.uuid}}>
           <div class="lv-icon-ctn lv-col-1 center">
             <span class="ls-folder"></span>
           </div>

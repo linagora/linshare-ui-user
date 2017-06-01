@@ -42,11 +42,11 @@
       "TBT__INVALID_EMAIL": ""
     },
     "ERROR": {
+      "TBT__BROWSER_ACTION": "",
       "TBT__FILE_NOT_FOUND": "",
       "TBT_FILE_UPLOAD": "",
       "503": "Lỗi máy chủ",
-      "TBT__RENAME_FILE": "",
-      "TBT__RENAME_FOLDER": "",
+      "TBT__RENAME_NODE": "",
       "TBT__RENAME_CONTACTS_LIST": "",
       "TBT__RENAME_INVALID": {
         "TBT__EMPTY": "",

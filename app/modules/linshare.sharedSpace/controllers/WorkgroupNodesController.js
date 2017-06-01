@@ -19,7 +19,6 @@
    * @desc Application Workgroup Nodes system controller
    * @memberOf LinShare.sharedSpace
    */
-  // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   function WorkgroupNodesController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
                                     auditDetailsService, browseService, currentFolder, documentUtilsService,
@@ -32,8 +31,7 @@
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
 
-    var newFolderName, swalMultipleDownloadConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText,
-      toastActionView;
+    var newFolderName, swalMultipleDownloadConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText;
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
     workgroupNodesVm.areAllSameType = areAllSameType;
@@ -82,14 +80,12 @@
           'ACTION.NEW_FOLDER',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
-          'TOAST_ACTION_VIEW'
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
         ]).then(function(translations) {
           newFolderName = translations['ACTION.NEW_FOLDER'];
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
           swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-          toastActionView = translations.TOAST_ACTION_VIEW;
         });
       });
 
@@ -146,23 +142,29 @@
       return (nodesFound.length === _nodesList.length);
     }
 
-    // TODO : show a single callback toast for multiple items copied, and check if it needs to be plural or not,
-    // additionally please prefix the sentence by number of files copied
     /**
      * @name copyNode
      * @desc Copy a file from existing list
-     * @param {object} nodeItem - Uuid of file to copy
-     * @param {string} destinationNodeUuid - The uuid of the Destination Node object
+     * @param {Array<Object>} nodeItems - Nodes to copy
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function copyNode(nodeItem, destinationNodeUuid) {
-      var _destinationNodeUuid = destinationNodeUuid || workgroupNodesVm.folderDetails.folderUuid;
-      workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem, _destinationNodeUuid)
-        .then(function(data) {
-          var copiedNode = workgroupNodesRestService.restangularize(data, workgroupNodesVm.folderDetails.workgroupUuid);
-          toastService.success({key: 'GROWL_ALERT.ACTION.COPY'});
-          addNewItemInTableParams(copiedNode);
+    function copyNode(nodeItems) {
+      var promises = [];
+      _.forEach(nodeItems, function(nodeItem) {
+        var deferred = $q.defer();
+        workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem,
+          workgroupNodesVm.folderDetails.folderUuid).then(function(newNode) {
+          deferred.resolve(newNode);
+          addNewItemInTableParams(newNode);
+        }).catch(function(error) {
+          deferred.reject(error);
         });
+        promises.push(deferred.promise);
+      });
+
+      $q.all(promises).then(function(nodeItems) {
+        notifyCopySuccess(nodeItems.length);
+      });
     }
 
     /**
@@ -405,42 +407,111 @@
 
     /**
      * @name openBrowser
-     * @desc Open browser of folders to move/copy a node
-     * @param {object} nodeItem - Node to copy
-     * @param {boolean} isMove - Check if it is a copy or a move
+     * @desc Open browser of folders to copy/move a node
+     * @param {Array<Object>} nodeItems - Nodes to copy/move
+     * @param {boolean} isMove - Check if it is a copy/move
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function openBrowser(nodeItem, isMove) {
+    function openBrowser(nodeItems, isMove) {
       browseService.show({
         currentFolder: workgroupNodesVm.currentFolder,
         currentList: _.orderBy(_.filter(workgroupNodesVm.nodesList, {'type': TYPE_FOLDER}), 'modificationDate', 'desc'),
-        nodeItem: nodeItem,
+        nodeItems: nodeItems,
         isMove: isMove,
         restService: workgroupNodesRestService
       }).then(function(data) {
-        if (data.nodeItem.parent === workgroupNodesVm.currentFolder.uuid) {
-          toastService.success({key: 'GROWL_ALERT.ACTION.COPY'});
-        } else {
-          var nodeType = workgroupNodesVm.isDocument(data.nodeItem.type) ? 'file' : '';
-          var action = isMove ? 'moved' : '';
-          $translate('GROWL_ALERT.ACTION.BROWSER_ACTION', {
-            NODE_TYPE: nodeType,
-            ACTION: action,
-            folderName: data.folder.name
-          }, 'messageformat')
-            .then(function(message) {
-              toastService.success(message, toastActionView).then(function(response) {
-                if (!_.isUndefined(response)) {
-                  if (response.actionClicked) {
-                    workgroupNodesVm.goToFolder(data.folder, true, data.nodeItem.uuid);
-                  }
-                }
-              });
-            });
+        openBrowserNotify(data, isMove);
+      }).finally(function() {
+        reloadTableParamsDatas();
+      });
+    }
+
+    /**
+     * @name openBrowserNotify
+     * @desc Check result of browser close and notify it
+     * @param {object} data - mdDialog's close datas
+     * @param {boolean} isMove - Check if it is a copy/move
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function openBrowserNotify(data, isMove) {
+      if (!isMove && data.folder.uuid === workgroupNodesVm.currentFolder.uuid) {
+        notifyCopySuccess(data.nodeItems.length);
+      } else if (data.failedNodes.length) {
+        notifyBrowseActionSuccess(data, isMove);
+      } else {
+        notifyBrowseActionError(data, isMove);
+      }
+    }
+
+    /**
+     * @name notifyBrowseActionError
+     * @desc Notify when an error occurred on copy/move nodes
+     * @param {object} data - mdDialog's close datas
+     * @param {boolean} isMove - Check if it is a copy/move
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function notifyBrowseActionError(data, isMove) {
+      toastService.success({
+        key: 'GROWL_ALERT.ACTION.BROWSER_ACTION',
+        pluralization: true,
+        params: {
+          singular: data.nodeItems.length <= 1 ? 'true' : '',
+          action: isMove ? 'moved' : '',
+          folderName: data.folder.name
         }
-        reloadTableParamsDatas();
-      }).catch(function() {
-        reloadTableParamsDatas();
+      }, 'TOAST_ACTION_VIEW').then(function(response) {
+        if (!_.isUndefined(response)) {
+          if (response.actionClicked) {
+            var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
+            workgroupNodesVm.goToFolder(data.folder, true, nodeToSelectUuid);
+          }
+        }
+      });
+    }
+
+    /**
+     * @name notifyBrowseActionSuccess
+     * @desc Notify success on copy/move nodes
+     * @param {object} data - mdDialog's close datas
+     * @param {boolean} isMove - Check if it is a copy/move
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function notifyBrowseActionSuccess(data, isMove) {
+      var responses = [];
+      _.forEach(data.failedNodes, function(error) {
+        switch(error.data.errCode) {
+          case 26445 :
+          case 28005 :
+            responses.push({
+              'title': error.nodeItem.name,
+              'message': 'GROWL_ALERT.ERROR.RENAME_NODE'
+            });
+            break;
+        }
+      });
+
+      toastService.error({
+        key: 'GROWL_ALERT.ERROR.BROWSER_ACTION',
+        pluralization: true,
+        params: {
+          action: isMove ? 'moved' : '',
+          nbNodes: data.failedNodes.length,
+          singular: data.failedNodes.length <= 1 ? 'true' : ''
+        }
+      }, undefined, responses);
+    }
+
+    /**
+     * @name notifyCopySuccess
+     * @desc Notify success on simple copy nodes
+     * @param {number} nbNodes - Number of nodes simple copy success
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function notifyCopySuccess(nbNodes) {
+      toastService.success({
+        key: 'GROWL_ALERT.ACTION.COPY_SAME_FOLDER',
+        pluralization: true,
+        params: {singular: nbNodes <= 1 ? 'true' : ''}
       });
     }
 
@@ -452,11 +523,9 @@
     function reloadTableParamsDatas() {
       workgroupNodesRestService.getList(workgroupNodesVm.currentFolder.workGroup, workgroupNodesVm.currentFolder.uuid)
         .then(function(nodeItems) {
-          if (workgroupNodesVm.nodesList !== nodeItems) {
-            workgroupNodesVm.nodesList = nodeItems;
-            workgroupNodesVm.resetSelectedDocuments();
-            tableParamsService.reloadTableParams(workgroupNodesVm.nodesList);
-          }
+          _.assign(workgroupNodesVm.nodesList, nodeItems);
+          workgroupNodesVm.resetSelectedDocuments();
+          tableParamsService.reloadTableParams(workgroupNodesVm.nodesList);
         });
     }
 
