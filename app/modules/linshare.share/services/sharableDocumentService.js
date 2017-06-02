@@ -21,7 +21,9 @@
         if (associativeSharings.shareArrayIndex.length > 0) {
           _.forEach(associativeSharings.shareArrayIndex, function(shareIndex) {
             if (!_.isUndefined(shareArray[shareIndex])) {
-              var correspondingShare = {};
+              var correspondingShare = {
+                name: parseInt(shareIndex) + 1
+              };
               angular.extend(correspondingShare, shareArray[shareIndex]);
               var shareInProgress = new ShareObjectService(correspondingShare);
               shareInProgress.addLinshareDocumentsAndShare(fileIdentifier, uploadedDocument.linshareDocument);

@@ -46,32 +46,34 @@ angular.module('linshare.share')
 
     function ShareObjectForm(shareJson) {
       var self = this;
+      shareJson = _.defaultTo(shareJson, {});
+      self.name = _.defaultTo(shareJson.name, '');
+      self.documents = _.defaultTo(shareJson.documents, []);
+      self.recipients = _.defaultTo(shareJson.recipients, []);
+      recipients = self.recipients;
+      self.mailingListUuid = _.defaultTo(shareJson.mailingListUuid, []);
+      self.mailingList = _.defaultTo(shareJson.mailingList, []);
+      self.sharingNote = _.defaultTo(shareJson.sharingNote, '');
+      self.subject = _.defaultTo(shareJson.subject, '');
+      self.message = _.defaultTo(shareJson.message, '');
+
+      self.asyncShare = _.defaultTo(shareJson.asyncShare, false);
+      self.setAsyncShare = function(state) {
+        self.asyncShare = state;
+      };
+
+      self.waitingUploadIdentifiers = _.defaultTo(shareJson.waitingUploadIdentifiers, []);
+      self.uploadingDocuments = [];
+      self.getMinDate = function() {
+        return moment().endOf('day').valueOf();
+      };
+
       getFunctionalities().then(function() {
-        shareJson = _.defaultTo(shareJson, {});
-        self.documents = _.defaultTo(shareJson.documents, []);
-        self.recipients = _.defaultTo(shareJson.recipients, []);
-        recipients = self.recipients;
-        self.mailingListUuid = _.defaultTo(shareJson.mailingListUuid, []);
-        self.mailingList = _.defaultTo(shareJson.mailingList, []);
         self.secured = _.defaultTo(shareJson.secured, secured);
         self.creationAcknowledgement = _.defaultTo(shareJson.creationAcknowledgement, creationAcknowledgement);
         self.expirationDate =_.defaultTo(shareJson.expirationDate, expirationDate);
         self.enableUSDA = _.defaultTo(shareJson.enableUSDA, enableUSDA);
         self.notificationDateForUSDA =  _.defaultTo(shareJson.notificationDateForUSDA, notificationDateForUSDA);
-        self.sharingNote = _.defaultTo(shareJson.sharingNote, '');
-        self.subject = _.defaultTo(shareJson.subject, '');
-        self.message = _.defaultTo(shareJson.message, '');
-
-        self.asyncShare = _.defaultTo(shareJson.asyncShare, false);
-        self.setAsyncShare = function(state) {
-          self.asyncShare = state;
-        };
-
-        self.waitingUploadIdentifiers = _.defaultTo(shareJson.waitingUploadIdentifiers, []);
-        self.uploadingDocuments = [];
-        self.getMinDate = function() {
-          return moment().endOf('day').valueOf();
-        };
       });
     }
 
@@ -194,15 +196,26 @@ angular.module('linshare.share')
     };
 
     ShareObjectForm.prototype.share = function() {
+      var self = this;
       var deferred = $q.defer();
       if (this.waitingUploadIdentifiers.length === 0) {
         if(this.documents.indexOf(undefined) === -1) {
           return LinshareShareService.create(this.getFormObj()).then(function() {
-            toastService.success({key: 'GROWL_ALERT.ACTION.SHARE'});
+            toastService.success({
+              key: 'GROWL_ALERT.ACTION.SHARE',
+              params: {
+                shareName: self.name
+              }
+            });
           });
         } else {
           $log.debug('SHARE FAILED -', 'file(s) upload error');
-          toastService.error({key: 'GROWL_ALERT.ACTION.SHARE_FAILED'});
+          toastService.error({
+            key: 'GROWL_ALERT.ACTION.SHARE_FAILED',
+            params: {
+              shareName: self.name
+            }
+          });
           deferred.reject({statusText: 'file(s) upload error'});
         }
       } else {

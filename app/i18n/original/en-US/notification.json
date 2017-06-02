@@ -29,9 +29,9 @@
       "COPY": "File(s) has been copied into your files.",
       "COPY_SINGULAR": "file has been copied into your Personal Space.",
       "COPY_PLURAL": "files have been copied into your Personal Space.",
-      "SHARE": "Your file share was sent successfully.",
+      "SHARE": "Your file share {{shareName ? shareName + ' ': ''}}was sent successfully.",
       "SHARE_ASYNC": "Your file share will be sent after the upload of all files.",
-      "SHARE_FAILED": "Your file share has failed."
+      "SHARE_FAILED": "Your file {{shareName ? shareName + ' ': ''}}share has failed."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",

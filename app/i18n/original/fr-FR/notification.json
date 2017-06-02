@@ -29,9 +29,9 @@
       "COPY": "Fichier copié avec succès dans vos fichiers.",
       "COPY_PLURAL": "fichiers ont été copié vers votre Espace Personnel",
       "COPY_SINGULAR": "fichier a été copié vers votre Espace Personnel.",
-      "SHARE": "Votre partage a été envoyé avec succès.",
+      "SHARE": "Votre partage {{shareName ? shareName + ' ': ''}}a été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
-      "SHARE_FAILED": "Votre partage de fichiers a échoué."
+      "SHARE_FAILED": "Votre partage {{shareName ? shareName + ' ': ''}}de fichiers a échoué."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
