@@ -15,12 +15,14 @@
             <div x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.name">
               <div id="profile-main" class="detail-workgroup">
                 <div class="p-relative m-b-20 img-preview-ctn">
-                  <p x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail === true" href="">
+                  <p data-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail">
                     <img class="img-responsive"
-                         x-ng-src="data:image/png;base64,{{mainVm.sidebar.getData().currentSelectedDocument.current.thumbnail}}"
-                         alt="">
+                         data-ng-src="data:image/png;base64,
+                           {{mainVm.sidebar.getData().currentSelectedDocument.current.thumbnail}}"
+                         alt="{{'RIGHT_PANEL.DETAILS.THUMBNAIL' | translate}}
+                           {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}">
                   </p>
-                  <div x-ng-show="!mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail === true"
+                  <div data-ng-show="!mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail"
                        class="np-preview-ctn">
                     <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
                     <p>{{"RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate}}</p>

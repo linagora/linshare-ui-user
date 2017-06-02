@@ -356,15 +356,16 @@
      */
     function showCurrentFile(currentFile, event, openDetailsSidebar) {
       var deferred = $q.defer();
-      $scope.currentSelectedDocument.current = currentFile;
+      $scope.currentSelectedDocument.current = _.omit(currentFile, ['hasThumbnail', 'thumbnail']);
       $q.all([
         LinshareDocumentRestService.get(currentFile.uuid),
         LinshareDocumentRestService.getAudit(currentFile.uuid)]).then(function(promises) {
-        $scope.currentSelectedDocument.current = promises[0];
+        $scope.currentSelectedDocument.current = _.omit(promises[0], ['hasThumbnail', 'thumbnail']);
 
-        if (currentFile.hasThumbnail) {
+        if (promises[0].hasThumbnail) {
           LinshareDocumentRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
             $scope.currentSelectedDocument.current.thumbnail = thumbnail;
+            $scope.currentSelectedDocument.current.hasThumbnail = thumbnail ? true : false;
           });
         }
 
