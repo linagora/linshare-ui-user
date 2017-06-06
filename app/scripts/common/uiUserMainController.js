@@ -118,7 +118,7 @@
                  return flowFile.linshareDocument;
               });
 
-              var toastMsg = {key: 'UPLOAD_DONE', plural: true};
+              var toastMsg = {key: 'UPLOAD_DONE', pluralization: true};
               if (files.length === 1) {
                 toastMsg.params = {
                   fileName: file.name,

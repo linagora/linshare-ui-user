@@ -11,10 +11,10 @@
         <span class="zmdi zmdi-alert-circle-o" data-ng-show="toastWarning"></span>
       </div>
       <div class="md-toast-text" flex data-ng-class="{'toast-single-btn' : actionLabel}">
-        <span data-ng-if="!toastText.plural" translate translate-values="{{toastText.params}}">
+        <span data-ng-if="!toastText.pluralization" translate translate-values="{{toastText.params}}">
          {{toastText.key}}
         </span>
-        <span data-ng-if="toastText.plural" translate translate-values="{{toastText.params}}"
+        <span data-ng-if="toastText.pluralization" translate translate-values="{{toastText.params}}"
               translate-interpolation="messageformat">
          {{toastText.key}}
         </span>
@@ -23,9 +23,7 @@
           TOAST_ALERT.ACTION.DETAILS
         </a>
       </div>
-      <md-button aria-label="{{toastLabel}}" data-ng-if="toastLabel" data-ng-click="toastClose(true)">
-        {{toastLabel}}
-      </md-button>
+      <md-button data-ng-if="toastLabel" data-ng-click="toastClose(true)">{{toastLabel | translate}}</md-button>
       <md-button aria-label="close" class="close-button m-0" data-ng-if="!toastLabel" data-ng-click="toastClose()">
         <i class="zmdi zmdi-close"></i>
       </md-button>

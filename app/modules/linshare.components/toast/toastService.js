@@ -46,7 +46,7 @@
      * @param {Object} texte - Text of the toast
      * @param {string} texte.key - Translation key value
      * @param {Object} [texte.params] - Parameters of the translated sentence
-     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {boolean} [texte.pluralization] - Determine if the pluralization interpolation shall be used
      * @param {string} [label] - Button label to replace close icon
      * @param {Object[]} [details] - List of element composing the detailed information
      * @param {string} [details[].title] - Title of the error
@@ -71,7 +71,7 @@
      * @param {Object} texte - Text of the toast
      * @param {string} texte.key - Translation key value
      * @param {Object} [texte.params] - Parameters of the translated sentence
-     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {boolean} [texte.pluralization] - Determine if the pluralization interpolation shall be used
      * @param {string} [label] - Button label to replace close icon
      * @param {Object[]} [details] - List of element composing the detailed information
      * @param {string} [details[].title] - Title of the error
@@ -106,7 +106,7 @@
      * @param {Object} texte - Text of the toast
      * @param {string} texte.key - Translation key value
      * @param {Object} [texte.params] - Parameters of the translated sentence
-     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {boolean} [texte.pluralization] - Determine if the pluralization interpolation shall be used
      * @param {string} [label] - Button label to replace close icon
      * @param {Object[]} [details] - List of element composing the detailed information
      * @param {string} [details[].title] - Title of the error
@@ -131,7 +131,7 @@
      * @param {Object} texte - Text of the toast
      * @param {string} texte.key - Translation key value
      * @param {Object} [texte.params] - Parameters of the translated sentence
-     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {boolean} [texte.pluralization] - Determine if the pluralization interpolation shall be used
      * @param {string} [label] - Button label to replace close icon
      * @param {Object[]} [details] - List of element composing the detailed information
      * @param {string} [details[].title] - Title of the error
@@ -156,7 +156,7 @@
      * @param {Object} texte - Text of the toast
      * @param {string} texte.key - Translation key value
      * @param {Object} [texte.params] - Parameters of the translated sentence
-     * @param {boolean} [texte.plural] - Determine if the pluralization interpolation shall be used
+     * @param {boolean} [texte.pluralization] - Determine if the pluralization interpolation shall be used
      * @param {string} [label] - Button label to replace close icon
      * @param {Object[]} [details] - List of element composing the detailed information
      * @param {string} [details[].title] - Title of the error
@@ -204,9 +204,12 @@
           delay: delay,
           promise: deferred.promise
         });
-        stack.shift().promise.then(function() {
-          return show(mdToastLocals, delay).then(function() {
-            deferred.resolve();
+        return $q(function(resolve) {
+          stack.shift().promise.then(function() {
+            show(mdToastLocals, delay).then(function(data) {
+              deferred.resolve();
+              resolve(data);
+            });
           });
         });
       } else {
@@ -219,8 +222,16 @@
         return mdToastInstance;
       }
 
+      /**
+       * @name show
+       * @desc Show the toast
+       * @param {Object} mdToastLocals - Local variables send to the controller
+       * @param {number} delay - Delay of the toast to be shown
+       * @returns {Object} promise resolved on toastClose
+       * @memberOf linshare.components.toastService.toastShow
+       */
       function show(mdToastLocals, delay) {
-        return $mdToast.show({
+        var mdToast = $mdToast.show({
           locals: mdToastLocals,
           controller: 'toastController',
           controllerAs: 'toastVm',
@@ -228,12 +239,16 @@
           hideDelay: delay,
           position: position,
           templateUrl: templateUrl
-        }).then(function() {
+        });
+
+        mdToast.then(function() {
           _.remove(stack, {
             mdToastLocals: mdToastLocals,
             delay: delay
           });
         });
+
+        return mdToast;
       }
     }
   }
