@@ -35,6 +35,7 @@
       "TBT__SHARE_FAILED": "",
       "TBT__UPDATE": ""
     },
+    "TBT__ACTION_BUTTON": "",
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",
       "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn",
@@ -43,6 +44,9 @@
     },
     "ERROR": {
       "TBT__BROWSER_ACTION": "",
+      "COPY_ERROR": {
+        "TBT__26444": ""
+      },
       "TBT__FILE_NOT_FOUND": "",
       "TBT_FILE_UPLOAD": "",
       "503": "Lỗi máy chủ",

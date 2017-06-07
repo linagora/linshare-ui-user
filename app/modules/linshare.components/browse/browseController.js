@@ -1,22 +1,22 @@
 /**
  * browseController Controller
- * @namespace linshare.component
+ * @namespace linshare.components
  */
 (function() {
   'use strict';
 
   angular
     .module('linshare.components')
-    .controller('browseController', browseController);
+    .controller('browseController', BrowseController);
 
-  browseController.$inject = ['_', '$q', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode', 'toastService'];
+  BrowseController.$inject = ['_', '$q', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode', 'toastService'];
 
   /**
-   * @namespace browseController
+   * @namespace BrowseController
    * @desc Controller of browse component
    * @memberOf linshare.components
    */
-  function browseController(_, $q, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
+  function BrowseController(_, $q, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
     /* jshint validthis:true */
     var browseVm = this;
 
@@ -36,12 +36,10 @@
     /**
      * @name activate
      * @desc Activation function of the controller, launch at every instantiation
-     * @memberOf linshare.components.browseController
+     * @memberOf linshare.components.BrowseController
      */
     function activate() {
       $translate([
-        'GROWL_ALERT.ERROR.RENAME_FOLDER',
-        'GROWL_ALERT.ERROR.RENAME_FILE',
         'ACTION.NEW_FOLDER'
       ]).then(function(translations) {
         newFolderName = translations['ACTION.NEW_FOLDER'];
@@ -54,8 +52,9 @@
     /**
      * @name createFolder
      * @desc Create a folder
-     * @memberOf linshare.components.browseController
+     * @memberOf linshare.components.BrowseController
      */
+    // TODO : a service to harmonize with workgroupNodesController's createFolder()
     function createFolder() {
       if (browseVm.canCreateFolder) {
         var newFolderObject = browseVm.restService.restangularize({
@@ -66,8 +65,6 @@
         browseVm.restService.create(browseVm.currentFolder.workGroup, newFolderObject, true)
           .then(function(data) {
             newFolderObject.name = data.name;
-            newFolderObject.parent = data.parent;
-            newFolderObject.type = data.type;
             browseVm.canCreateFolder = false;
             browseVm.currentList.unshift(newFolderObject);
             $timeout(function() {
@@ -80,20 +77,14 @@
     /**
      * @name copyNode
      * @desc Copy the node
-     * @memberOf linshare.components.browseController
+     * @memberOf linshare.components.BrowseController
      */
     function copyNode() {
       var failedNodes = [],
         promises = [];
       _.forEach(browseVm.nodeItems, function(nodeItem) {
-        var deferred = $q.defer();
-        browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem, browseVm.currentFolder.uuid)
-          .then(function(newNode) {
-            deferred.resolve(newNode);
-          }).catch(function(error) {
-          deferred.reject(error);
-        });
-        promises.push(deferred.promise);
+        promises.push(browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem,
+          browseVm.currentFolder.uuid));
       });
 
       $q.all(promises).then(function(nodeItems) {
@@ -107,9 +98,9 @@
 
     /**
      * @name disableFolder
-     * @desc Check if folder is in list and disable it to prevent from moving a folder inside itself
+     * @desc Check if folder is in list of selected items and disable it to prevent from moving a folder inside itself
      * @param {Object} folder - Folder to check
-     * @memberOf linshare.components.browseController
+     * @memberOf linshare.components.BrowseController
      */
     function disableFolder(folder) {
       return _.find(browseVm.nodeItems, folder);
@@ -117,10 +108,10 @@
 
     /**
      * @name goToFolder
-     * @desc Get current folder name, or workgroup's name if folder is root
-     * @param {Object} selectedFolder - Selected folder object inside to enter
+     * @desc Enter inside a folder
+     * @param {Object} selectedFolder - Folder where to enter
      * @param {boolean} goToParent - Enter in parent folder with previous arrow button
-     * @memberOf linshare.components.browseController
+     * @memberOf linshare.components.BrowseController
      */
     function goToFolder(selectedFolder, goToParent) {
       if (browseVm.canCreateFolder) {
@@ -142,7 +133,7 @@
     /**
      * @name moveNode
      * @desc Move the node
-     * @memberOf linshare.components.browseController
+     * @memberOf linshare.components.BrowseController
      */
     function moveNode() {
       var failedNodes = [],
@@ -176,8 +167,8 @@
      * @name renameNode
      * @desc Rename node name
      * @param {object} nodeToRename - Node to rename
-     * @param {string} itemNameElem - Name of the item in view which is in edition mode
-     * @memberOf linshare.components.browseController
+     * @param {string} [itemNameElem] - Name of the item in view which is in edition mode
+     * @memberOf linshare.components.BrowseController
      */
     function renameNode(nodeToRename, itemNameElem) {
       itemNameElem = itemNameElem || 'div[uuid=' + nodeToRename.uuid + '] .file-name-disp';

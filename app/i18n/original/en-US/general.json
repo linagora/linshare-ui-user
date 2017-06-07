@@ -5,18 +5,19 @@
     "COPY_ADJ": "Copy",
     "COPY_DROPDOWN": {
       "COPY_AND_SHARE": "Copy & share",
-      "COPY_TO_MY_FILES": "In my Personal Space",
-      "CREATE_COPY": "Create copy into",
-      "SIMPLE_COPY": "Simple copy"
+      "PERSONAL_SPACE": "Personal Space",
+      "SHARED_SPACE": "Shared Space"
     },
     "COPY_IN_MY_FILES": "Copy in my files",
     "COPY_IN_WORKGROUP": "Copy in a workgroup",
+    "COPY_INTO_THE_SHARED_SPACE": "Copy to Shared Space",
     "COPY_TO": "Copy to",
     "COPY_TO_SHARED_SPACE": "Shared space",
     "DELETE": "Delete",
     "DELETE_ALL": "Delete all",
     "DISPLAY": "Display",
     "DOWNLOAD": "Download",
+    "DUPLICATE": "Duplicate",
     "EXTERNAL_EDIT": "Download & lock",
     "FAVORITES": "Favorites",
     "GO_TO_TRASH": "Go to trash can",

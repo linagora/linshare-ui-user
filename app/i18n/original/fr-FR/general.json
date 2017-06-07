@@ -5,18 +5,19 @@
     "COPY_ADJ": "Copie",
     "COPY_DROPDOWN": {
       "COPY_AND_SHARE": "Copier & partager",
-      "COPY_TO_MY_FILES": "Vers mon Espace Personnel",
-      "CREATE_COPY": "Créer une copie vers",
-      "SIMPLE_COPY": "Copie simple"
+      "PERSONAL_SPACE": "Espace Personnel",
+      "SHARED_SPACE": "Espace Commun"
     },
     "COPY_IN_MY_FILES": "Copier dans mes fichiers",
     "COPY_IN_WORKGROUP": "Copier dans un groupe de travail",
+    "COPY_INTO_THE_SHARED_SPACE": "Copier dans l'Espace Commun",
     "COPY_TO": "Copier vers",
     "COPY_TO_SHARED_SPACE": "Vers l'espace commun",
     "DELETE": "Supprimer",
     "DELETE_ALL": "Tout supprimer",
     "DISPLAY": "Afficher",
     "DOWNLOAD": "Télécharger",
+    "DUPLICATE": "Dupliquer",
     "EXTERNAL_EDIT": "Télécharger & verrouiller",
     "FAVORITES": "Favoris",
     "GO_TO_TRASH": "Voir la corbeille",

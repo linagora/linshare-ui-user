@@ -138,8 +138,7 @@
     function areAllSameType(nodeType, nodesList) {
       var _nodeType = nodeType || TYPE_DOCUMENT;
       var _nodesList = nodesList || workgroupNodesVm.selectedDocuments;
-      var nodesFound = _.filter(_nodesList, {'type': _nodeType});
-      return (nodesFound.length === _nodesList.length);
+      return _.every(_nodesList, {'type': _nodeType});
     }
 
     /**
@@ -151,19 +150,20 @@
     function copyNode(nodeItems) {
       var promises = [];
       _.forEach(nodeItems, function(nodeItem) {
-        var deferred = $q.defer();
-        workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem,
+        promises.push(workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem,
           workgroupNodesVm.folderDetails.folderUuid).then(function(newNode) {
-          deferred.resolve(newNode);
           addNewItemInTableParams(newNode);
-        }).catch(function(error) {
-          deferred.reject(error);
-        });
-        promises.push(deferred.promise);
+        }));
       });
 
       $q.all(promises).then(function(nodeItems) {
         notifyCopySuccess(nodeItems.length);
+      }).catch(function(error) {
+        switch(error.data.errCode) {
+          case 26444 :
+            toastService.error({key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'});
+            break;
+        }
       });
     }
 
@@ -437,9 +437,9 @@
       if (!isMove && data.folder.uuid === workgroupNodesVm.currentFolder.uuid) {
         notifyCopySuccess(data.nodeItems.length);
       } else if (data.failedNodes.length) {
-        notifyBrowseActionSuccess(data, isMove);
-      } else {
         notifyBrowseActionError(data, isMove);
+      } else {
+        notifyBrowseActionSuccess(data, isMove);
       }
     }
 
@@ -451,32 +451,6 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function notifyBrowseActionError(data, isMove) {
-      toastService.success({
-        key: 'GROWL_ALERT.ACTION.BROWSER_ACTION',
-        pluralization: true,
-        params: {
-          singular: data.nodeItems.length <= 1 ? 'true' : '',
-          action: isMove ? 'moved' : '',
-          folderName: data.folder.name
-        }
-      }, 'TOAST_ACTION_VIEW').then(function(response) {
-        if (!_.isUndefined(response)) {
-          if (response.actionClicked) {
-            var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
-            workgroupNodesVm.goToFolder(data.folder, true, nodeToSelectUuid);
-          }
-        }
-      });
-    }
-
-    /**
-     * @name notifyBrowseActionSuccess
-     * @desc Notify success on copy/move nodes
-     * @param {object} data - mdDialog's close datas
-     * @param {boolean} isMove - Check if it is a copy/move
-     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-     */
-    function notifyBrowseActionSuccess(data, isMove) {
       var responses = [];
       _.forEach(data.failedNodes, function(error) {
         switch(error.data.errCode) {
@@ -496,9 +470,35 @@
         params: {
           action: isMove ? 'moved' : '',
           nbNodes: data.failedNodes.length,
-          singular: data.failedNodes.length <= 1 ? 'true' : ''
+          singular: data.failedNodes.length === 1 ? 'true' : ''
         }
-      }, undefined, responses);
+      }, undefined, responses.length ? responses : undefined);
+    }
+
+    /**
+     * @name notifyBrowseActionSuccess
+     * @desc Notify success on copy/move nodes
+     * @param {object} data - mdDialog's close datas
+     * @param {boolean} isMove - Check if it is a copy/move
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function notifyBrowseActionSuccess(data, isMove) {
+      toastService.success({
+        key: 'GROWL_ALERT.ACTION.BROWSER_ACTION',
+        pluralization: true,
+        params: {
+          singular: data.nodeItems.length <= 1 ? 'true' : '',
+          action: isMove ? 'moved' : '',
+          folderName: data.folder.name
+        }
+      }, 'GROWL_ALERT.ACTION_BUTTON').then(function(response) {
+        if (!_.isUndefined(response)) {
+          if (response.actionClicked) {
+            var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
+            workgroupNodesVm.goToFolder(data.folder, true, nodeToSelectUuid);
+          }
+        }
+      });
     }
 
     /**
@@ -511,7 +511,7 @@
       toastService.success({
         key: 'GROWL_ALERT.ACTION.COPY_SAME_FOLDER',
         pluralization: true,
-        params: {singular: nbNodes <= 1 ? 'true' : ''}
+        params: {singular: nbNodes === 1 ? 'true' : ''}
       });
     }
 
@@ -523,7 +523,7 @@
     function reloadTableParamsDatas() {
       workgroupNodesRestService.getList(workgroupNodesVm.currentFolder.workGroup, workgroupNodesVm.currentFolder.uuid)
         .then(function(nodeItems) {
-          _.assign(workgroupNodesVm.nodesList, nodeItems);
+          workgroupNodesVm.nodesList = nodeItems;
           workgroupNodesVm.resetSelectedDocuments();
           tableParamsService.reloadTableParams(workgroupNodesVm.nodesList);
         });

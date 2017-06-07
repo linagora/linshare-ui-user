@@ -16,6 +16,7 @@
    * @desc Service to manage browse to move or copy file
    * @memberOf linshare.components
    */
+  // TODO : dialogService, where to add browse (cf toast)
   function browseService($mdDialog, componentsConfig) {
     var service = {
       show: show

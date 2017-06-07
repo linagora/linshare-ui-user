@@ -21,11 +21,11 @@
   },
   "GROWL_ALERT": {
     "ACTION": {
-      "BROWSER_ACTION": "{singular, select, true{L'élément a} other{Les éléments ont}} été {action, select, moved{déplacé} other{copié}} dans : {folderName}.",
+      "BROWSER_ACTION": "{singular, select, true{Le fichier ou dossier a} other{Les fichiers ou dossiers ont}} été {action, select, moved{déplacé} other{copié}} dans : {folderName}.",
       "COPY": "Fichier copié avec succès dans vos fichiers.",
-      "COPY_PLURAL": "fichiers ont été copié vers votre Espace Personnel",
+      "COPY_PLURAL": "fichiers ont été copié dans votre Espace Personnel",
       "COPY_SAME_FOLDER": "{singular, select, true{Le fichier a été copié} other{Les fichiers ont été copiés}} avec succès.",
-      "COPY_SINGULAR": "fichier a été copié vers votre Espace Personnel.",
+      "COPY_SINGULAR": "fichier a été copié dans votre Espace Personnel.",
       "DELETE": "Suppression réussie",
       "DELETE_SINGULAR": "L'élément a été supprimé avec succès.",
       "DELETE_PLURAL": "Les éléments ont été supprimés avec succès.",
@@ -35,6 +35,7 @@
       "SHARE_FAILED": "Votre partage {{shareName ? shareName + ' ': ''}}de fichiers a échoué.",
       "UPDATE": "L'élément a été mise à jour avec succès."
     },
+    "ACTION_BUTTON": "Voir",
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
       "AT_LEAST_ONE_DOCUMENT": "Aucun fichier n'est sélectionné",
@@ -43,10 +44,13 @@
     },
     "ERROR": {
       "BROWSER_ACTION": "{nbNodes} {singular, select, true{élément n'a} other{éléments n'ont}} pas pu être {action, select, moved{déplacé{singular, select, true{} other{s}}} other{copié{singular, select, true{} other{s}}}}",
+      "COPY_ERROR": {
+        "26444": "Vous ne possédez pas les droits de copie"
+      },
       "FILE_NOT_FOUND": "Le fichier sélectionné n'a pas été trouvé",
       "FILE_UPLOAD": "Le dépôt a échoué",
       "503": "Serveur Indisponible",
-      "RENAME_NODE": "Un élément avec le même nom existe déjà",
+      "RENAME_NODE": "Un fichier ou un dossier avec le même nom existe déjà",
       "RENAME_CONTACTS_LIST": "Une liste de contacts avec le même nom existe déjà.",
       "RENAME_INVALID": {
         "EMPTY": "Le nom ne peut être vide",
@@ -55,7 +59,7 @@
       },
       "DELETE_ERROR": {
         "26006": "La suppression de dossier remplit n'est pas encore supporté.",
-        "26444": "Suppression non autorisée"
+        "26444": "Vous ne possédez pas les droits de suppression"
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs."
     }

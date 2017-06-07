@@ -112,10 +112,10 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href=""><i class="zmdi zmdi-copy"></i>{{'ACTION.COPY_DROPDOWN.SIMPLE_COPY' | translate}}</a>
+              <a href=""><i class="zmdi zmdi-copy"></i>{{'ACTION.DUPLICATE' | translate}}</a>
             </li>
             <li x-ng-show="!linshareModeProduction">
-              <a href=""><i class="fa fa-files-o"></i>{{'ACTION.COPY_DROPDOWN.COPY_TO_MY_FILES' | translate}}</a>
+              <a href=""><i class="fa fa-files-o"></i>{{'ACTION.COPY_DROPDOWN.PERSONAL_SPACE' | translate}}</a>
             </li>
             <li x-ng-show="!linshareModeProduction">
               <a href=""><i class="zmdi zmdi-share"></i>{{'ACTION.COPY_DROPDOWN.COPY_AND_SHARE' | translate}}</a>
@@ -143,7 +143,7 @@
         <span>
           {{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: false}}
         </span>
-        <!-- TODO : when the file extension will be implemented well, readd this code -->
+        <!-- TODO : when the file extension will be implemented well, re add this code -->
         <!--
         <span class="seperator-inline">|</span>
         <span title="{{mainVm.sidebar.getData().currentSelectedDocument.current.type}}">

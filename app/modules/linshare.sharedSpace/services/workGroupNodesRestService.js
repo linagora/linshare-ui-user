@@ -43,7 +43,7 @@
 
     /**
      * @name activate
-     * @desc Activation function of the controller, launch at every instantiation
+     * @desc Activation function of the service, launch at every instantiation
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
     function activate() {

@@ -21,7 +21,7 @@
   },
   "GROWL_ALERT": {
     "ACTION": {
-      "BROWSER_ACTION": "{singular, select, true{The element has} other{Elements have}} been {action, select, moved{moved} other{copied}} into : {folderName}.",
+      "BROWSER_ACTION": "{singular, select, true{The file or folder has} other{files or folders have}} been {action, select, moved{moved} other{copied}} into : {folderName}.",
       "COPY": "File(s) has been copied into your files.",
       "COPY_PLURAL": "files have been copied into your Personal Space.",
       "COPY_SAME_FOLDER": "{singular, select, true{The file} other{Files}} has been copied successfully.",
@@ -35,6 +35,7 @@
       "SHARE_FAILED": "Your file {{shareName ? shareName + ' ': ''}}share has failed.",
       "UPDATE": "The item was updated successfully."
     },
+    "ACTION_BUTTON": "View",
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",
       "AT_LEAST_ONE_DOCUMENT": "No file is selected",
@@ -42,11 +43,14 @@
       "INVALID_EMAIL": "Invalid email"
     },
     "ERROR": {
-      "BROWSER_ACTION": "{nbNodes} {singular, select, true{element} other{elements}} couldn't be {action, select, moved{moved} other{copied}}",
+      "BROWSER_ACTION": "{nbNodes} {singular, select, true{file or folder} other{files or folders}} couldn't be {action, select, moved{moved} other{copied}}",
+      "COPY_ERROR": {
+        "26444": "You do not posses the rights to copy"
+      },
       "FILE_NOT_FOUND": "The selected file has not been found",
       "FILE_UPLOAD": "The upload failed",
       "503": "Service Unavailable",
-      "RENAME_NODE": "An element with the same name already exists",
+      "RENAME_NODE": "A file or a folder with the same name already exists",
       "RENAME_CONTACTS_LIST": "A contact list with the same name already exists",
       "RENAME_INVALID": {
         "EMPTY": "The name can't be empty",
@@ -55,7 +59,7 @@
       },
       "DELETE_ERROR": {
         "26006": "Deletion of a non-empty folder is not yet supported",
-        "26444": "Deletion unauthorized"
+        "26444": "You do not posses the rights to delete"
       },
       "NO_RESPONSE_ERROR": "Error without server response, see logs."
     }

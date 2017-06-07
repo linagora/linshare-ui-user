@@ -5,18 +5,19 @@
     "TBT__COPY_ADJ": "",
     "TBT__COPY_DROPDOWN": {
       "TBT__COPY_AND_SHARE": "",
-      "TBT__COPY_TO_MY_FILES": "",
-      "TBT__CREATE_COPY": "",
-      "TBT__SIMPLE_COPY": ""
+      "TBT__PERSONAL_SPACE": "",
+      "TBT__SHARED_SPACE": ""
     },
     "TBT__COPY_IN_MY_FILES": "",
     "TBT__COPY_IN_WORKGROUP": "Sao chép tập tin vào nhóm",
+    "TBT__COPY_INTO_THE_SHARED_SPACE": "",
     "TBT__COPY_TO": "",
     "TBT__COPY_TO_SHARED_SPACE": "",
     "DELETE": "Xóa",
     "TBT__DELETE_ALL": "",
     "TBT__DISPLAY": "",
     "DOWNLOAD": "Tải về",
+    "TBT__DUPLICATE": "",
     "TBT__EXTERNAL_EDIT": "",
     "TBT__FAVORITES": "",
     "TBT__GO_TO_TRASH": "",
