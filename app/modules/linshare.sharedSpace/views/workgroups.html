@@ -208,7 +208,7 @@
           <div id="toolbar-actions" class="hidden-xs">
               <span x-ng-if="vm.selectedDocuments.length === 1">
                 <a class="plain-text-button share-link" title="{{'ACTION.ADD_MEMBER' | translate}}"
-                   x-ng-click="vm.onAddMember()">
+                   x-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, $event, true)">
                   <i class="ls-add-user-sm"></i>
                   <span>{{'ACTION.ADD_MEMBER' | translate}}</span>
                 </a>
@@ -383,7 +383,7 @@
                             x-ng-class="{'open-r': (mainVm.sidebar.isVisible()) &&
                                           ((mainVm.sidebar.getContent() === lsAppConfig.details) ||
                                           (mainVm.sidebar.getContent() === lsAppConfig.shareDetails))}">
-                          <li x-ng-click="vm.showItemDetails(documentFile,$event)" event-propagation-stop
+                          <li x-ng-click="vm.showItemDetails(documentFile.uuid, $event)" event-propagation-stop
                               class="set-col-6">
                             <a href=""
                                title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
@@ -391,7 +391,7 @@
                               <i class="zmdi zmdi-info-outline"></i>
                             </a>
                           </li>
-                          <li class="hidden-xs" x-ng-click="vm.onAddMember()">
+                          <li class="hidden-xs" x-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)">
                             <a href="" class="p-t-10" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
                                event-propagation-stop="true">
                               <i><span class="ls-member"></span></i>
@@ -413,7 +413,7 @@
                             <ul
                               class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
                               <li>
-                                <a href="" x-ng-click="vm.showItemDetails(documentFile,$event)">
+                                <a href="" x-ng-click="vm.showItemDetails(documentFile.uuid, $event)">
                                   <i class="zmdi zmdi-info-outline "></i>
                                   {{'ACTION.INFORMATION' | translate}}
                                 </a>
@@ -431,7 +431,7 @@
                                 </a>
                               </li>
                               <li class="divider"></li>
-                              <li x-ng-click="vm.onAddMember()">
+                              <li x-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)">
                                 <a href="">
                                   <i class="groups-add-member align-style"></i>
                                   {{'ACTION.ADD_MEMBER' | translate}}

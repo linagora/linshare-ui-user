@@ -169,12 +169,6 @@ angular.module('linshare.sharedSpace')
       $scope.mainVm.sidebar.show();
     };
 
-    thisctrl.onAddMember = function() {
-      thisctrl.mdtabsSelection.selectedIndex = 1;
-      thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
-      angular.element('#focusInputShare').focus();
-    };
-
     thisctrl.setDropdownSelected = function($event) {
       var currTarget = $event.currentTarget;
       angular.element(currTarget).closest('ul').find('.active-check').removeClass('active-check');
@@ -248,16 +242,40 @@ angular.module('linshare.sharedSpace')
       }
     }
 
-    function showItemDetails(current, event) {
-      workgroupRestService.get(current.uuid).then(function(workgroup) {
-        workgroupRestService.getAudit(current.uuid).then(function(auditData) {
-          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain())
-            .then(function(auditActions) {
-              workgroup.auditActions = auditActions;
-              thisctrl.currentSelectedDocument.current = workgroup;
-              thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
-              thisctrl.mdtabsSelection.selectedIndex = 0;
-            });
+    /**
+     * @name getWorkgroupAudit
+     * @desc Get audit details of a Workgroup
+     * @param {Object} workgroup - Workgroup object
+     * @returns {Promise} Workgroup object with audit details
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function getWorkgroupAudit(workgroup) {
+      return workgroupRestService.getAudit(workgroup.uuid).then(function(auditData) {
+        auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain()).then(function(auditActions) {
+          workgroup.auditActions = auditActions;
+        });
+      });
+    }
+
+    /**
+     * @name showItemDetails
+     * @desc Get details of a Workgroup and show them in right sidebar
+     * @param {string} workgroupUuid - Uuid of the Workgroup
+     * @param {Object} event - Event happening
+     * @param {boolean} memberTab - Open member tab
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function showItemDetails(workgroupUuid, event, memberTab) {
+      workgroupRestService.get(workgroupUuid).then(function(workgroup) {
+        getWorkgroupAudit(workgroup).then(function() {
+          thisctrl.currentSelectedDocument.current = workgroup;
+          if(memberTab) {
+            thisctrl.mdtabsSelection.selectedIndex = 1;
+            angular.element('#focusInputShare').focus();
+          } else {
+            thisctrl.mdtabsSelection.selectedIndex = 0;
+          }
+          thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
         });
       });
 

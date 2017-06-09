@@ -49,19 +49,17 @@
      */
     function activate() {
       // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
-      if ($scope.mainVm.sidebar.getData().currentSelectedDocument.route === 'work_groups') {
-        workgroupMemberVm.memberRole = workgroupMemberVm.membersRights.write;
-        workgroupMemberVm.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
+      workgroupMemberVm.memberRole = workgroupMemberVm.membersRights.write;
+      workgroupMemberVm.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
 
-        $scope.$watch(function() {
-          return $scope.mainVm.sidebar.getData().currentSelectedDocument.current;
-        }, function(currentWorkGroup) {
-          workgroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
-            workgroupMemberVm.currentWorkgroupMember = member;
-            $scope.mainVm.sidebar.addData('currentWorkgroupMember', member);
-          });
-        }, true);
-      }
+      $scope.$watch(function() {
+        return $scope.mainVm.sidebar.getData().currentSelectedDocument.current;
+      }, function(currentWorkGroup) {
+        workgroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
+          workgroupMemberVm.currentWorkgroupMember = member;
+          $scope.mainVm.sidebar.addData('currentWorkgroupMember', member);
+        });
+      }, true);
     }
 
     /**
