@@ -544,7 +544,7 @@
         if (nodeToRename.name !== data.name) {
           $timeout(function() {
             renameNode(data, 'td[uuid=' + data.uuid + '] .file-name-disp');
-            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_FOLDER'});
+            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
           }, 0);
         } else {
           workgroupNodesVm.canCreateFolder = true;
@@ -553,9 +553,7 @@
         switch(error.data.errCode) {
           case 26445 :
           case 28005 :
-            var errorMessage = isDocument(nodeToRename.type) ? 'GROWL_ALERT.ERROR.RENAME_FILE' :
-              'GROWL_ALERT.ERROR.RENAME_FOLDER';
-            toastService.error({key: errorMessage});
+            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
             renameNode(nodeToRename, itemNameElem);
             break;
           case lsErrorCode.CANCELLED_BY_USER :
