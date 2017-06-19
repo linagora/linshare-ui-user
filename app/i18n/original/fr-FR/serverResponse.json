@@ -24,8 +24,11 @@
         "2204": "Vous n'êtes pas autorisé à mettre à jour cet invité",
         "20000": "Une erreur est survenue dans la base de données",
         "20001": "Vous n'êtes pas autorisé à utiliser ce service",
+        "26000": "Le groupe de travail n'existe pas ou n'a pas été trouvé",
+        "26007": "Le dossier distant est introuvable",
         "28000": "L'invité n'a pas été trouvé",
         "28001": "L'invité existe dèjà",
+        "28006": "Les dossiers ne peuvent être copiés",
         "28403": "Vous n'etes pas autorisé à accéder à cet invité",
         "28405": "La liste de contact restreint de l'invité est vide",
         "28406": "La recherche pour les invités est invalide",
@@ -52,10 +55,6 @@
         "46014": "Espace insuffisant sur le serveur (${quotaAttempt}), libérez de l'espace puis réessayez",
         "46015": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
         "46403": "Erreur de configuration serveur, dépôt impossible"
-      },
-      "WORKGROUP_NODES_ERROR": {
-        "26007": "Le dossier distant est introuvable",
-        "28006": "Les dossiers ne peuvent être copiés"
       }
     }
   }

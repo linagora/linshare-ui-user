@@ -24,8 +24,11 @@
         "2204": "You are not authorized to update this guest",
         "20000": "An error occurred with the database",
         "20001": "You are not authorized to use this service",
+        "26000": "The workgroup doesn't exist or have been removed",
+        "26007": "Folder not found",
         "28000": "The guest has not been found",
         "28001": "The guest already exists",
+        "28006": "Folders cannot be copied",
         "28403": "You are not authorized to access this guest",
         "28405": "The guest restricted contacts list is empty",
         "28406": "The search for guests is invalid",
@@ -52,10 +55,6 @@
         "46014": "There is no more space available on the server (${quotaAttempt}), free space and retry",
         "46015": "There is no more space available on the server, please retry later",
         "46403": "Server configuration error, upload impossible"
-      },
-      "WORKGROUP_NODES_ERROR": {
-        "26007": "Folder not found",
-        "28006": "Folders cannot be copied"
       }
     }
   }

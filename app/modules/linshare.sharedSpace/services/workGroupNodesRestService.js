@@ -18,7 +18,6 @@
    */
   function workgroupNodesRestService(_, $log, Restangular, ServerManagerService) {
     var
-      errorsMessagesKey = 'WORKGROUP_NODES_ERROR',
       handler = ServerManagerService.responseHandler,
       restUrl = 'work_groups',
       restParam = 'nodes',
@@ -74,7 +73,7 @@
       $log.debug('workgroupNodesRestService : copy', workgroupUuid, nodeItem.uuid, destinationNodeUuid);
       var _destinationNodeUuid = _.isNil(destinationNodeUuid) ? '' : destinationNodeUuid;
       return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeItem.uuid)
-        .all('copy').post(nodeItem, {destinationNodeUuid: _destinationNodeUuid}), errorsMessagesKey);
+        .all('copy').post(nodeItem, {destinationNodeUuid: _destinationNodeUuid}));
     }
 
     /**
