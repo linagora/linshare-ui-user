@@ -526,7 +526,7 @@
                         <span data-ng-if="::nodeItem.shared > 0" class="shared-activated hidden-xs" translate>
                           BOUTON_LABEL_TITLE.SHARED</span>
                         <p class="mobile-list-item-info visible-xs">
-                          {{::nodeItem.modificationDate | relativeTime}}
+                          {{nodeItem.modificationDate | relativeTime}}
                           {{::workgroupNodesVm.isDocument(nodeItem.type) ?
                           ', '+(nodeItem.size | readableSize: false) : ''}}
                         </p>
@@ -612,16 +612,16 @@
                                   <span translate>ACTION.RENAME</span>
                                 </a>
                               </li>
-                              <li data-ng-if="::!workgroupNodesVm.currentWorkgroupMember.readonly"
-                                  data-ng-if="::workgroupNodesVm.isDocument(nodeItem.type)">
+                              <li data-ng-if="::!workgroupNodesVm.currentWorkgroupMember.readonly &&
+                               workgroupNodesVm.isDocument(nodeItem.type)">
                                 <a data-ng-click="workgroupNodesVm.copyNode([nodeItem])">
                                   <i class="zmdi zmdi-copy"></i>
                                   <span translate>ACTION.DUPLICATE</span>
                                 </a>
                               </li>
                               <li class="divider hidden-xs" data-ng-show="!linshareModeProduction"></li>
-                              <li data-ng-if="::!isMobile && !workgroupNodesVm.currentWorkgroupMember.readonly"
-                                  data-ng-if="::workgroupNodesVm.isDocument(nodeItem.type)">
+                              <li data-ng-if="::!isMobile && !workgroupNodesVm.currentWorkgroupMember.readonly &&
+                              workgroupNodesVm.isDocument(nodeItem.type)">
                                 <a href="" class="parent-sub-menu-link">
                                   <i class="zmdi zmdi-copy"></i>
                                   <span translate>ACTION.COPY_TO</span>
@@ -649,9 +649,8 @@
                                 </ul>
                               </li>
                               <li event-propagation-stop
-                                  data-ng-if="::isMobile"
-                                  data-ng-click="workgroupNodesVm.openBrowser([nodeItem])"
-                                  data-ng-if="::!workgroupNodesVm.currentWorkgroupMember.readonly">
+                                  data-ng-if="::isMobile && !workgroupNodesVm.currentWorkgroupMember.readonly"
+                                  data-ng-click="workgroupNodesVm.openBrowser([nodeItem])">
                                 <a href="">
                                   <i class="fa fa-files-o"></i>
                                   <span translate>ACTION.COPY_INTO_THE_SHARED_SPACE</span>
