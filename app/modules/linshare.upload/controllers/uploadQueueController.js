@@ -25,6 +25,7 @@
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;
+    var openSidebar = $stateParams.openSidebar;
 
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.resetSelectedDocuments = resetSelectedDocuments;
@@ -113,6 +114,10 @@
         file.isSelected = false;
         file.hideOnIsolate = false;
       });
+
+      if(openSidebar) {
+        loadSidebarContent(uploadQueueVm.lsAppConfig.share);
+      }
 
       if (idUpload) {
         var fileToHighlight = uploadQueueVm.$flow.getFromUniqueIdentifier(idUpload);

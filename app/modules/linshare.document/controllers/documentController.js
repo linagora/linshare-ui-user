@@ -71,7 +71,7 @@
           label: 'BOUTON_ADD_FILE_TITLE'
         },
         actions: [{
-          action: 'documents.upload({from: lsAppConfig.mySpacePage})',
+          action: 'documents.upload({from: lsAppConfig.mySpacePage, openSidebar: true})',
           label: 'ADD_FILES_DROPDOWN.UPLOAD_SHARE',
           icon: 'ls-share-file',
           flowBtn: true

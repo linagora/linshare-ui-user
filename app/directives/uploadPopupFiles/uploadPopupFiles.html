@@ -1,9 +1,12 @@
 <md-list-item>
   <span>{{fromWhere == mySpacePage ? "HEADER.UPLOAD_PROGRESS.TO_MY_SPACE" : "HEADER.UPLOAD_PROGRESS.TO_COMMON_SPACE" | translate}}</span>
-  <span><a x-ng-href="{{$state.href('documents.upload', {from: fromWhere})}}">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a></span>
+  <span><a data-ui-sref="documents.upload({from: fromWhere, openSidebar: false})">
+    {{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a>
+  </span>
 </md-list-item>
 <div class="lv-item row" x-ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere} | limitTo: 3 as filesFilterred">
-  <a class="col-xs-10 p-0" ui-sref="documents.upload({from: fromWhere, idUpload: file.uniqueIdentifier})">
+  <a class="col-xs-10 p-0"
+     data-ui-sref="documents.upload({from: fromWhere, idUpload: file.uniqueIdentifier, openSidebar: false})">
     <div class="lv-title p-0">
       <div class="p-0 file-name">
         <span>{{file.name}}</span>

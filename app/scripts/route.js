@@ -140,7 +140,8 @@
       .state('documents.upload', {
         url: '/upload/:from',
         params: {
-          idUpload: null
+          idUpload: null,
+          openSidebar: null
         },
         templateUrl: 'modules/linshare.upload/views/lsUpload.html',
         controller: 'uploadQueueController',

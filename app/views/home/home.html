@@ -32,10 +32,11 @@
         </div>
       </div>
       <div class="box-3" flow-btn data-ng-if="::cards.uploadShare && cards.myFilesSpace">
-        <div class="card-img upload-share" ui-sref="documents.upload">
+        <div class="card-img upload-share"
+             data-ui-sref="documents.upload({from: mySpacePage, openSidebar: true})">
           <i class="groups-home-share"></i>
         </div>
-        <div class="box-content" ui-sref="documents.upload">
+        <div class="box-content" data-ui-sref="documents.upload({from: mySpacePage, openSidebar: true})">
           <div class="info-box">
             <h2 class="box-title">
               <a translate>UPLOAD_SHARE</a></h2>
