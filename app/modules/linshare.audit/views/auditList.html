@@ -6,7 +6,7 @@
           <div class="breadcrumbs-ctn hidden-xs">
             <a class="click-disabled">
               <i class="zmdi zmdi-time-restore"></i>
-              {{"BREADCRUMB_TITLE_AUDIT" | translate}}
+              <span translate>BREADCRUMB_TITLE_AUDIT</span>
             </a>
           </div>
           <div id="action-header" class="activity-logs-seach-panel">
@@ -21,14 +21,15 @@
                       data-ng-click="beginDateOpened = true"
                       type="text"
                       class="form-control"
-                      datepicker-popup="{{auditVm.dateFormat}}"
+                      datepicker-popup="{{::auditVm.dateFormat}}"
                       show-weeks="false"
                       is-open="beginDateOpened"
                       max-date="auditVm.endDate"
                       datepicker-options="dateOptions"
-                      data-ng-required="true" close-text="Close"
-                      placeholder="{{'TOOLBAR.FILTER_BEGINNING_DATE' | translate}}"
-                      data-ng-model="auditVm.beginDate"/>
+                      data-ng-required="true"
+                      close-text="Close"
+                      placeholder="{{::'TOOLBAR.FILTER_BEGINNING_DATE' | translate}}"
+                      data-ng-model="auditVm.beginDate" />
                   </div>
                 </div>
               </div>
@@ -42,97 +43,100 @@
                       data-ng-click="endDateOpened = true"
                       type="text"
                       class="form-control"
-                      datepicker-popup="{{auditVm.dateFormat}}"
+                      datepicker-popup="{{::auditVm.dateFormat}}"
                       show-weeks="false"
                       is-open="endDateOpened"
                       min-date="auditVm.beginDate"
                       max-date="auditVm.maxDate"
-                      datepicker-options="dateOptions" data-ng-required="true"
+                      datepicker-options="dateOptions"
+                      data-ng-required="true"
                       close-text="Close"
-                      placeholder="{{'TOOLBAR.FILTER_ENDING_DATE' | translate}}"
-                      data-ng-model="auditVm.endDate"/>
+                      placeholder="{{::'TOOLBAR.FILTER_ENDING_DATE' | translate}}"
+                      data-ng-model="auditVm.endDate" />
                   </div>
                 </div>
               </div>
-              <button class="btn waves-effect m-r-10 blue-action-btn"
-                      data-ng-click="auditVm.findAuditActionsByDate()">
-                <i class="zmdi zmdi-search"></i>{{'TOOLBAR.SEARCH' | translate}}
+              <button class="btn waves-effect m-r-10 blue-action-btn" data-ng-click="auditVm.findAuditActionsByDate()">
+                <i class="zmdi zmdi-search"></i><span translate>TOOLBAR.SEARCH</span>
               </button>
               <div class="fg-line toolbar-actions-items">
                 <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
                   <div class="dropdown dropdown-standard toolbar-mobile-item" uib-dropdown="">
                     <div class="actions">
-                      <a href="" class="dropdown-toggle" uib-dropdown-toggle=""
-                         data-ng-disabled="disabled"
-                         aria-haspopup="true" aria-expanded="false">
+                      <a href="" class="dropdown-toggle" uib-dropdown-toggle="" data-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
                         <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                       </a>
                       <ul class="uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
                         <li role="menuitem">
-                          <a href="" class="center">
-                            {{'TOOLBAR.ORDER_BY' | translate}}
+                          <a href="" class="center" translate>
+                            TOOLBAR.ORDER_BY
                           </a>
                         </li>
                         <li class="divided"></li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('authorName', $event)">
-                          <span class="caret-area">
-                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                            <span class="caret-area">
+                              <i data-ng-if="auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                              <i data-ng-if="!auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-up"></i>
-                            </span> {{'TABLE_HEADER.ACTOR' | translate}}
+                            </span>
+                            <span translate>TABLE_HEADER.ACTOR</span>
                           </a>
                         </li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('translatedAction', $event)">
-                          <span class="caret-area">
-                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                            <span class="caret-area">
+                              <i data-ng-if="auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                              <i data-ng-if="!auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-up"></i>
-                            </span> {{'TABLE_HEADER.ACTION' | translate}}
+                            </span>
+                            <span translate>TABLE_HEADER.ACTION</span>
                           </a>
                         </li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('translatedType', $event)">
-                          <span class="caret-area">
-                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                            <span class="caret-area">
+                              <i data-ng-if="auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                              <i data-ng-if="!auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-up"></i>
-                            </span> {{'TABLE_HEADER.RESOURCE_TYPE' | translate}}
+                            </span>
+                            <span translate>TABLE_HEADER.RESOURCE_TYPE</span>
                           </a>
                         </li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('resourceName', $event)">
-                          <span class="caret-area">
-                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                            <span class="caret-area">
+                              <i data-ng-if="auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                              <i data-ng-if="!auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-up"></i>
-                            </span> {{'TABLE_HEADER.RESOURCE_NAME' | translate}}
+                            </span>
+                            <span translate>TABLE_HEADER.RESOURCE_NAME</span>
                           </a>
                         </li>
                         <li role="menuitem">
                           <a href="" data-ng-click="auditVm.tableSort('shareRecipient', $event)">
-                          <span class="caret-area">
-                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                            <span class="caret-area">
+                              <i data-ng-if="auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                              <i data-ng-if="!auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-up"></i>
-                            </span> {{'TABLE_HEADER.RECIPIENT' | translate}}
+                            </span>
+                            <span translate>TABLE_HEADER.RECIPIENT</span>
                           </a>
                         </li>
                         <li role="menuitem">
-                          <a href="" class="selected-sorting"
-                             data-ng-click="auditVm.tableSort('creationDate', $event)">
-                          <span class="caret-area">
-                              <i data-ng-show="auditVm.tableParamsService.getToggleSelectedSort()"
+                          <a href="" class="selected-sorting" data-ng-click="auditVm.tableSort('creationDate', $event)">
+                            <span class="caret-area">
+                              <i data-ng-if="auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-down"></i>
-                              <i data-ng-show="!auditVm.tableParamsService.getToggleSelectedSort()"
+                              <i data-ng-if="!auditVm.tableParamsService.getToggleSelectedSort()"
                                  class="zmdi zmdi-caret-up"></i>
-                            </span> {{'TABLE_HEADER.DATE' | translate}}
+                            </span>
+                            <span translate>TABLE_HEADER.DATE</span>
                           </a>
                         </li>
                       </ul>
@@ -146,59 +150,83 @@
       </div>
       <div class="card-body collapsible-content">
         <div class="table-responsive">
-          <table class="table standard-read-only-table table-form-filters detail-action-col fixed-activity-table-height"
-                 data-ng-table="auditVm.tableParams" show-filter="true">
+          <table
+            class="table standard-read-only-table table-form-filters detail-action-col fixed-activity-table-height"
+            data-ng-table="auditVm.tableParams" show-filter="true">
             <tr data-ng-repeat="auditAction in $data" data-ng-cloak check-table-height>
-              <td data-title="'TABLE_HEADER.ACTOR' | translate" data-filter="{authorName :'text'}"
-                  data-sortable="'authorName'" class="truncate"
-                  uib-tooltip="{{auditAction.authorName | translate}}"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="bottom"
-                  tooltip-popup-delay='650'>
-                {{auditAction.authorName | translate}}
+              <td
+                data-title="'TABLE_HEADER.ACTOR' | translate"
+                data-filter="{authorName :'text'}"
+                data-sortable="'authorName'"
+                class="truncate"
+                uib-tooltip="{{::auditAction.authorName | translate}}"
+                tooltip-append-to-body="true" tooltip-placement="bottom"
+                tooltip-popup-delay='650'
+                translate>
+                {{::auditAction.authorName}}
               </td>
-              <td data-title="'TABLE_HEADER.ACTION' | translate" data-filter="{translatedAction :'select'}"
-                  filter-data="auditVm.tableFilterAction" data-sortable="'translatedAction'" class="truncate"
-                  uib-tooltip="{{auditAction.translatedAction | translate}}"
-                  tooltip-placement="bottom"
-                  tooltip-append-to-body="true"
-                  tooltip-popup-delay='650'>
-                {{auditAction.translatedAction}}
+              <td
+                data-title="'TABLE_HEADER.ACTION' | translate"
+                data-filter="{translatedAction :'select'}"
+                filter-data="auditVm.tableFilterAction"
+                data-sortable="'translatedAction'"
+                class="truncate"
+                uib-tooltip="{{::auditAction.translatedAction}}"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay='650'>
+                {{::auditAction.translatedAction}}
               </td>
-              <td data-title="'TABLE_HEADER.RESOURCE_TYPE' | translate" data-filter="{translatedType :'select'}"
-                  filter-data="auditVm.tableFilterType" data-sortable="'translatedType'" class="truncate"
-                  uib-tooltip="{{auditAction.translatedType | translate}}"
-                  tooltip-placement="bottom"
-                  tooltip-append-to-body="true"
-                  tooltip-popup-delay='650'>
-                {{auditAction.translatedType}}
+              <td
+                data-title="'TABLE_HEADER.RESOURCE_TYPE' | translate"
+                data-filter="{translatedType :'select'}"
+                filter-data="auditVm.tableFilterType"
+                data-sortable="'translatedType'"
+                class="truncate"
+                uib-tooltip="{{::auditAction.translatedType}}"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay='650'>
+                {{::auditAction.translatedType}}
               </td>
-              <td data-title="'TABLE_HEADER.RESOURCE_NAME' | translate" data-filter="{resourceName :'text'}"
-                  data-sortable="'resourceName'" class="truncate"
-                  uib-tooltip="{{auditAction.resourceName | translate}}"
-                  tooltip-placement="bottom"
-                  tooltip-append-to-body="true"
-                  tooltip-popup-delay='650'>
-                {{auditAction.resourceName}}
+              <td
+                data-title="'TABLE_HEADER.RESOURCE_NAME' | translate"
+                data-filter="{resourceName :'text'}"
+                data-sortable="'resourceName'"
+                class="truncate"
+                uib-tooltip="{{::auditAction.resourceName}}"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay='650'>
+                {{::auditAction.resourceName}}
               </td>
-              <td data-title="'TABLE_HEADER.RECIPIENT' | translate" data-filter="{'shareRecipient' :'text'}"
-                  data-sortable="'shareRecipient'" class="truncate"
-                  uib-tooltip="{{auditAction.shareRecipient | translate}}"
-                  tooltip-placement="bottom"
-                  tooltip-append-to-body="true"
-                  tooltip-popup-delay='650'>
-                {{auditAction.shareRecipient}}
+              <td
+                data-title="'TABLE_HEADER.RECIPIENT' | translate"
+                data-filter="{'shareRecipient' :'text'}"
+                data-sortable="'shareRecipient'"
+                class="truncate"
+                uib-tooltip="{{auditAction.shareRecipient}}"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay='650'>
+                {{::auditAction.shareRecipient}}
               </td>
-              <td data-title="'TABLE_HEADER.DATE' | translate" data-sortable="'creationDate'">
-                <span tooltip-placement="bottom" tooltip-popup-delay="300" tooltip-append-to-body="true"
-                      uib-tooltip="{{auditAction.creationDate | calendarTime}}" class="truncate">
-                  {{auditAction.creationDate | relativeTime}}
+              <td
+                data-title="'TABLE_HEADER.DATE' | translate"
+                data-sortable="'creationDate'">
+                <span tooltip-placement="bottom"
+                      tooltip-popup-delay="300"
+                      tooltip-append-to-body="true"
+                      uib-tooltip="{{::auditAction.creationDate | calendarTime}}"
+                      class="truncate">
+                  {{::auditAction.creationDate | relativeTime}}
                 </span>
               </td>
               <td data-title="'TABLE_HEADER.DETAIL' | translate" class="center">
-                <script type="text/ng-template" id="popover-details.html" audit-details="{{auditAction}}"></script>
+                <script type="text/ng-template" id="popover-details.html" audit-details="{{::auditAction}}"></script>
                 <div class="info-popover actions">
-                  <a href="" uib-popover-template="'popover-details.html'"
+                  <a href=""
+                     uib-popover-template="'popover-details.html'"
                      popover-placement="bottom"
                      popover-trigger="focus"
                      popover-append-to-body="true"
