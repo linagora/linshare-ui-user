@@ -1,20 +1,20 @@
 <div id="searchFilterCtn">
   <h2><i class="ls-settings m-r-10"></i><span translate>FILTER_COMPONENT.ADVANCED_SEARCH_TITLE</span></h2>
   <div class="hidden-xs row fix-margin-row col-md-12 m-t-10 formsearch" style="float:none;">
-    <div x-ng-if="filterBoxSize" class="clearfix">
+    <div data-ng-if="::filterBoxSize" class="clearfix">
       <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_SIZE</label>
       <div class="clearfix"></div>
       <!--SIZE START -->
       <div class="col-sm-4 p-l-0">
         <div class="input-group">
           <span class="input-group-addon icon-size-fix">
-            <i class="zmdi zmdi-trending-down" x-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
+            <i class="zmdi zmdi-trending-down" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
           </span>
           <div class="fg-line">
-            <input type="text" x-ng-disabled="!filterBoxVm.showUnit"
+            <input type="text" data-ng-disabled="!filterBoxVm.showUnit"
                    class="form-control" name="start"
                    maxlengh="3" placeholder="min"
-                   x-ng-model="filterBoxVm.sizeStart">
+                   data-ng-model="filterBoxVm.sizeStart">
           </div>
         </div>
       </div>
@@ -22,11 +22,11 @@
       <div class="col-sm-4">
         <div class="input-group">
           <span class="input-group-addon">
-            <i class="zmdi zmdi-trending-up" x-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
+            <i class="zmdi zmdi-trending-up" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
           </span>
           <div class="fg-line">
-            <input type="text" x-ng-disabled="!filterBoxVm.showUnit" name="end" class="form-control" placeholder="max"
-                   x-ng-model="filterBoxVm.sizeEnd"
+            <input type="text" data-ng-disabled="!filterBoxVm.showUnit" name="end" class="form-control" placeholder="max"
+                   data-ng-model="filterBoxVm.sizeEnd"
                    maxlengh="3"/>
           </div>
         </div>
@@ -35,18 +35,18 @@
       <div class="col-sm-3">
         <div class="input-group">
           <span class="input-group-addon">
-            <i class="fa fa-database" x-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
+            <i class="fa fa-database" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
           </span>
-          <div class="fg-line" x-ng-class="{disabledIcon: !filterBoxVm.showUnit}">
+          <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}">
             <select chosen
-                    data-placeholder-text-single="'{{'FILTER_COMPONENT.UNIT' | translate}}'"
+                    data-placeholder-text-single="'{{::'FILTER_COMPONENT.UNIT' | translate}}'"
                     disable-search="true"
                     allow-single-deselect="true"
-                    x-ng-model="filterBoxVm.unitSize"
-                    x-ng-init="filterBoxVm.unitSize = filterBoxVm.unitService.units.MB"
+                    data-ng-model="filterBoxVm.unitSize"
+                    data-ng-init="filterBoxVm.unitSize = filterBoxVm.unitService.units.MB"
                     class="form-control custumSelect outlineFFremove w-100"
-                    x-ng-disabled="!filterBoxVm.showUnit"
-                    x-ng-options="unit.value for unit in filterBoxVm.unitService.units track by unit.value">
+                    data-ng-disabled="!filterBoxVm.showUnit"
+                    data-ng-options="unit.value for unit in filterBoxVm.unitService.units track by unit.value">
             </select>
           </div>
         </div>
@@ -54,67 +54,67 @@
       <!--CHECKBOX INIT-->
       <div class="col-sm-1">
         <label class="checkbox checkbox-inline">
-          <input type="checkbox" x-ng-checked="true" name="check"
-                 x-ng-checked="filterBoxVm.showUnit"
-                 x-ng-model="filterBoxVm.showUnit"
-                 x-ng-init="filterBoxVm.showUnit=true">
+          <input type="checkbox" data-ng-checked="true" name="check"
+                 data-ng-checked="filterBoxVm.showUnit"
+                 data-ng-model="filterBoxVm.showUnit"
+                 data-ng-init="filterBoxVm.showUnit=true">
           <i class="input-helper"></i>
         </label>
       </div>
     </div>
     <!--DATE TYPE -->
-    <div x-ng-if="filterBoxDate" class="clearfix">
+    <div data-ng-if="::filterBoxDate" class="clearfix">
       <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_DATE.HEADER</label>
       <div class="clearfix"></div>
       <!--TAG SELECT DATE -->
-      <div x-ng-init="filterBoxVm.showDateRange=true">
+      <div data-ng-init="filterBoxVm.showDateRange=true">
        <!--DATE START -->
         <div class="col-sm-4 p-l-0">
-          <div class="date-picker input-group dp-blue" x-ng-class="{'is-opened': dateStartOpened}">
+          <div class="date-picker input-group dp-blue" data-ng-class="{'is-opened': dateStartOpened}">
             <span class="input-group-addon icon-size-fix">
-              <i class="zmdi zmdi-calendar-check ma-icon" x-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
+              <i class="zmdi zmdi-calendar-check ma-icon" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
             </span>
-            <div class="fg-line" x-ng-class="{'fg-toggled': dateStartOpened}">
-              <input x-ng-disabled="!filterBoxVm.showDateRange" x-ng-click="dateStartOpened = true" type="text"
-                     class="form-control" datepicker-popup="{{filterBoxVm.format}}" filterBoxVm.show-weeks="false"
+            <div class="fg-line" data-ng-class="{'fg-toggled': dateStartOpened}">
+              <input data-ng-disabled="!filterBoxVm.showDateRange" data-ng-click="dateStartOpened = true" type="text"
+                     class="form-control" datepicker-popup="{{::filterBoxVm.format}}" filterBoxVm.show-weeks="false"
                      is-open="dateStartOpened" max-date="filterBoxVm.maxDate"
-                     x-ng-required="true" close-text="Close"
-                     placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate}}"
-                     x-ng-model="filterBoxVm.dateStart"/>
+                     data-ng-required="true" close-text="Close"
+                     placeholder="{{::'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate}}"
+                     data-ng-model="filterBoxVm.dateStart"/>
             </div>
           </div>
         </div>
         <!--DATE END -->
         <div class="col-sm-4">
-          <div class="date-picker input-group dp-blue" x-ng-class="{'is-opened': dateEndOpened}">
+          <div class="date-picker input-group dp-blue" data-ng-class="{'is-opened': dateEndOpened}">
             <span class="input-group-addon">
-              <i class="zmdi zmdi-calendar-close ma-icon" x-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
+              <i class="zmdi zmdi-calendar-close ma-icon" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
             </span>
-            <div class="fg-line" x-ng-class="{'fg-toggled': opened2}">
-              <input x-ng-disabled="!filterBoxVm.showDateRange" x-ng-click="dateEndOpened = true"
+            <div class="fg-line" data-ng-class="{'fg-toggled': opened2}">
+              <input data-ng-disabled="!filterBoxVm.showDateRange" data-ng-click="dateEndOpened = true"
                      type="text" class="form-control"
-                     datepicker-popup="{{filterBoxVm.format}}" filterBoxVm.show-weeks="false"
-                     x-ng-model="filterBoxVm.dateEnd" is-open="dateEndOpened"
+                     datepicker-popup="{{::filterBoxVm.format}}" filterBoxVm.show-weeks="false"
+                     data-ng-model="filterBoxVm.dateEnd" is-open="dateEndOpened"
                      max-date="filterBoxV.maxDate" min-date="filterBoxVm.dateStart"
-                     x-ng-required="true"
-                     close-text="Close" placeholder="{{'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate}}"/>
+                     data-ng-required="true"
+                     close-text="Close" placeholder="{{::'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate}}"/>
             </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="input-group">
             <span class="input-group-addon">
-              <i class="zmdi zmdi-calendar ma-icon" x-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
+              <i class="zmdi zmdi-calendar ma-icon" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
             </span>
-            <div class="fg-line" x-ng-class="{disabledIcon: !filterBoxVm.showDateRange}">
+            <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}">
               <select chosen
-                      data-placeholder-text-single="'{{'FILTER_COMPONENT.DATE' | translate}}'"
+                      data-placeholder-text-single="'{{::'FILTER_COMPONENT.DATE' | translate}}'"
                       disable-search="true"
                       allow-single-deselect="true"
-                      x-ng-model="filterBoxVm.dateType"
+                      data-ng-model="filterBoxVm.dateType"
                       class="form-control custumSelect outlineFFremove w-100"
-                      x-ng-init="filterBoxVm.dateType = '1'"
-                      x-ng-disabled="!filterBoxVm.showDateRange">
+                      data-ng-init="filterBoxVm.dateType = '1'"
+                      data-ng-disabled="!filterBoxVm.showDateRange">
                 <option value="1" translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</option>
                 <option value="2" translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</option>
               </select>
@@ -124,33 +124,33 @@
         <!--CHECKBOX INIT -->
         <div class="col-sm-1">
           <label class="checkbox checkbox-inline">
-            <input type="checkbox" name="isDateActive" name="check" x-ng-checked="true"
-                   x-ng-model="filterBoxVm.showDateRange"/>
+            <input type="checkbox" name="isDateActive" name="check" data-ng-checked="true"
+                   data-ng-model="filterBoxVm.showDateRange"/>
             <i class="input-helper"></i>
           </label>
         </div>
       </div>
     </div>
     <!--RECIPIENT -->
-    <div x-ng-if="filterBoxUser" class="clearfix">
+    <div data-ng-if="::filterBoxUser" class="clearfix">
       <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER</label>
       <div class="clearfix"></div>
       <div class="col-sm-7 p-l-0">
-        <div class="input-group" x-ng-init="filterBoxVm.showRecipients=true">
+        <div class="input-group" data-ng-init="filterBoxVm.showRecipients=true">
           <span class="input-group-addon icon-size-fix">
-            <i class="zmdi zmdi-account" x-ng-class="{disabledIcon: !filterBoxVm.showRecipients}"></i>
+            <i class="zmdi zmdi-account" data-ng-class="{disabledIcon: !filterBoxVm.showRecipients}"></i>
           </span>
           <div class="fg-line">
             <input id="typeaheadDestinataires" type="text"
-                   x-ng-disabled="!filterBoxVm.showRecipients"
+                   data-ng-disabled="!filterBoxVm.showRecipients"
                    autocomplete="off"
                    class="form-control"
-                   placeholder="{{'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER' | translate}}"
-                   x-ng-model="filterBoxVm.selectedContact"
-                   x-typeahead-min-length="3"
-                   x-typeahead-wait-ms="30"
-                   x-typeahead-input-formatter="filterBoxVm.formatLabel(filterBoxVm.selectedContact)"
-                   x-uib-typeahead="u as filterBoxVm.userRepresentation(u) for u in
+                   placeholder="{{::'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER' | translate}}"
+                   data-ng-model="filterBoxVm.selectedContact"
+                   data-typeahead-min-length="3"
+                   data-typeahead-wait-ms="30"
+                   data-typeahead-input-formatter="filterBoxVm.formatLabel(filterBoxVm.selectedContact)"
+                   data-uib-typeahead="u as filterBoxVm.userRepresentation(u) for u in
                                     filterBoxVm.autocompleteUserRestService.search($viewValue, 'USERS') |
                                     limitTo:3"
                    popover-placement="bottom"
@@ -163,18 +163,18 @@
       <!--CHECKBOX -->
       <div class="col-sm-1 pull-right">
         <label class="checkbox checkbox-inline">
-          <input type="checkbox" name="isDestinatairesActive" x-ng-checked="true"
-                 x-ng-model="filterBoxVm.showRecipients"/>
+          <input type="checkbox" name="isDestinatairesActive" data-ng-checked="true"
+                 data-ng-model="filterBoxVm.showRecipients"/>
           <i class="input-helper"></i>
         </label>
       </div>
   </div>
   <!--VALIDATE-->
   <div class="m-t-50 m-b-20 p-l-0 pull-right">
-    <button class="btn bgm-white waves-effect m-r-10" x-ng-click="filterBoxVm.clearParams()" translate>
+    <button class="btn bgm-white waves-effect m-r-10" data-ng-click="filterBoxVm.clearParams()" translate>
       FILTER_COMPONENT.REINITIALIZE
     </button>
-    <button class="btn bgm-blue waves-effect" x-ng-click="filterBoxVm.updateFilters()" translate>
+    <button class="btn bgm-blue waves-effect" data-ng-click="filterBoxVm.updateFilters()" translate>
       FILTER_COMPONENT.SUBMIT
     </button>
   </div>

@@ -1,4 +1,4 @@
-<md-dialog id="lv-file-directory" aria-label="{{'FILE_DIRECTORY_DIALOG.TITLE' | translate}}">
+<md-dialog id="lv-file-directory" aria-label="{{::'FILE_DIRECTORY_DIALOG.TITLE' | translate}}">
   <form ng-cloak>
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -31,7 +31,7 @@
              data-ng-repeat="folder in browseVm.currentList"
              data-ng-click="browseVm.goToFolder(folder)"
              data-ng-class="{'disabled' : browseVm.disableFolder(folder)}"
-             uuid={{folder.uuid}}>
+             uuid={{::folder.uuid}}>
           <div class="lv-icon-ctn lv-col-1 center">
             <span class="ls-folder"></span>
           </div>
@@ -53,7 +53,7 @@
               data-ng-class="{'disabled': browseVm.isMove &&
                (browseVm.currentFolder.uuid === browseVm.sourceFolder.uuid)}"
               data-ng-click="browseVm.validateAction()">
-        {{browseVm.isMove ? 'FILE_DIRECTORY_DIALOG.MOVE_HERE' : 'FILE_DIRECTORY_DIALOG.COPY_HERE'}}
+        {{::browseVm.isMove ? 'FILE_DIRECTORY_DIALOG.MOVE_HERE' : 'FILE_DIRECTORY_DIALOG.COPY_HERE'}}
       </button>
     </md-dialog-actions>
   </form>

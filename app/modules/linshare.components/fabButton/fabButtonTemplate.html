@@ -1,37 +1,37 @@
-<div id="fabMyFiles" data-ng-class="{'solo-fab': !fabButtonToolbar.activate, 'fab-2-rows': isDoubleRowFab}">
-  <md-fab-toolbar class="visible-xs" md-open="fab.isOpen" md-direction="{{fab.selectedDirection}}"
-                  data-ng-if="fabButtonToolbar.activate">
+<div id="fabMyFiles" data-ng-class="::{'solo-fab': !fabButtonToolbar.activate, 'fab-2-rows': isDoubleRowFab}">
+  <md-fab-toolbar class="visible-xs" md-open="fab.isOpen" md-direction="{{::fab.selectedDirection}}"
+                  data-ng-if="::fabButtonToolbar.activate">
     <md-fab-trigger class="align-with-text">
       <md-button id="primary-fab-action" aria-label="menu" class="md-fab md-primary">
         <md-icon><i class="zmdi zmdi-plus"></i></md-icon>
       </md-button>
     </md-fab-trigger>
     <md-toolbar>
-      <p class="title-fab" data-ng-if="fabButtonToolbar.label" translate>{{fabButtonToolbar.label}}</p>
+      <p class="title-fab" data-ng-if="::fabButtonToolbar.label" translate>{{::fabButtonToolbar.label}}</p>
       <md-fab-actions class="md-toolbar-tools">
         <div class="md-fab-action-item" data-ng-repeat="action in fabButtonActions.slice(0,3)"
-             data-ng-if="!action.hide">
-          <md-button aria-label="{{action.label}}" class="md-icon-button" flow-btn data-ng-disabled="action.disabled"
-                     data-ng-if="action.flowBtn">
+             data-ng-if="::!action.hide">
+          <md-button aria-label="{{::action.label}}" class="md-icon-button" flow-btn data-ng-disabled="::action.disabled"
+                     data-ng-if="::action.flowBtn">
             <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
             </fab-link>
           </md-button>
-          <md-button aria-label="{{action.label}}" class="md-icon-button" data-ng-disabled="action.disabled"
-                     data-ng-if="!action.flowBtn">
+          <md-button aria-label="{{::action.label}}" class="md-icon-button" data-ng-disabled="::action.disabled"
+                     data-ng-if="::!action.flowBtn">
             <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
             </fab-link>
           </md-button>
         </div>
       </md-fab-actions>
-      <md-fab-actions class="md-toolbar-tools" data-ng-if="isDoubleRowFab">
-        <div class="md-fab-action-item" data-ng-repeat="action in fabButtonActions.slice(3,6)" data-ng-if="!action.hide">
-          <md-button aria-label="{{action.label}}" class="md-icon-button" flow-btn data-ng-disabled="action.disabled"
-                     data-ng-if="action.flowBtn">
+      <md-fab-actions class="md-toolbar-tools" data-ng-if="::isDoubleRowFab">
+        <div class="md-fab-action-item" data-ng-repeat="action in fabButtonActions.slice(3,6)" data-ng-if="::!action.hide">
+          <md-button aria-label="{{::action.label}}" class="md-icon-button" flow-btn data-ng-disabled="::action.disabled"
+                     data-ng-if="::action.flowBtn">
             <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
             </fab-link>
           </md-button>
-          <md-button aria-label="{{action.label}}" class="md-icon-button" data-ng-disabled="action.disabled"
-                     data-ng-if="!action.flowBtn">
+          <md-button aria-label="{{::action.label}}" class="md-icon-button" data-ng-disabled="::action.disabled"
+                     data-ng-if="::!action.flowBtn">
             <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
             </fab-link>
           </md-button>
@@ -39,14 +39,14 @@
       </md-fab-actions>
     </md-toolbar>
   </md-fab-toolbar>
-  <md-button class="md-fab visible-xs waves-effect" aria-label="{{fabButtonActions[0].label}}" flow-btn
-             data-ng-click="fabButtonActions[0].action()" data-ng-disabled="fabButtonActions[0].disabled"
-             data-ng-if="!fabButtonToolbar.activate && !fabButtonActions[0].hide && fabButtonActions[0].flowBtn">
-    <md-icon><i class="{{fabButtonActions[0].icon}}"></i></md-icon>
+  <md-button class="md-fab visible-xs waves-effect" aria-label="{{::fabButtonActions[0].label}}" flow-btn
+             data-ng-click="fabButtonActions[0].action()" data-ng-disabled="::fabButtonActions[0].disabled"
+             data-ng-if="::!fabButtonToolbar.activate && !fabButtonActions[0].hide && fabButtonActions[0].flowBtn">
+    <md-icon><i class="{{::fabButtonActions[0].icon}}"></i></md-icon>
   </md-button>
-  <md-button class="md-fab visible-xs waves-effect" aria-label="{{fabButtonActions[0].label}}"
-             data-ng-click="fabButtonActions[0].action()" data-ng-disabled="fabButtonActions[0].disabled"
-             data-ng-if="!fabButtonToolbar.activate && !fabButtonActions[0].hide && !fabButtonActions[0].flowBtn">
-    <md-icon><i class="{{fabButtonActions[0].icon}}"></i></md-icon>
+  <md-button class="md-fab visible-xs waves-effect" aria-label="{{::fabButtonActions[0].label}}"
+             data-ng-click="fabButtonActions[0].action()" data-ng-disabled="::fabButtonActions[0].disabled"
+             data-ng-if="::!fabButtonToolbar.activate && !fabButtonActions[0].hide && !fabButtonActions[0].flowBtn">
+    <md-icon><i class="{{::fabButtonActions[0].icon}}"></i></md-icon>
   </md-button>
 </div>

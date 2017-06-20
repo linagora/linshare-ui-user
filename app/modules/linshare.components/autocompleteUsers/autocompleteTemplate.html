@@ -1,31 +1,31 @@
 <div class="chat-search autocomplete-search-ctn">
   <div class="fg-line"
-       x-ng-class="{'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)}" >
-    <input id="focusInputShare" name="{{autocompleteUsersVm.name}}" type="text" class="form-control"
-           placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
+       data-ng-class="{'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)}" >
+    <input id="focusInputShare" name="{{::autocompleteUsersVm.name}}" type="text" class="form-control"
+           placeholder="{{::'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
            autocomplete="off"
-           x-ng-model="autocompleteUsersVm.selectedUser"
-           x-ng-blur="autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail()"
-           x-ng-required="autocompleteUsersVm.required()"
-           x-typeahead-min-length="3"
-           x-typeahead-on-select="autocompleteUsersVm.onSelect()"
-           x-typeahead-wait-ms="30"
-           x-typeahead-loading="searchingContact"
-           x-typeahead-editable="false"
-           x-typeahead-no-results="autocompleteUsersVm.noResult"
-           x-typeahead-input-formatter="angular.noop"
-           x-uib-typeahead="u as autocompleteUsersVm.userRepresentation(u)
+           data-ng-model="autocompleteUsersVm.selectedUser"
+           data-ng-blur="autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail()"
+           data-ng-required="autocompleteUsersVm.required()"
+           data-typeahead-min-length="3"
+           data-typeahead-on-select="autocompleteUsersVm.onSelect()"
+           data-typeahead-wait-ms="30"
+           data-typeahead-loading="searchingContact"
+           data-typeahead-editable="false"
+           data-typeahead-no-results="autocompleteUsersVm.noResult"
+           data-typeahead-input-formatter="angular.noop"
+           data-uib-typeahead="u as autocompleteUsersVm.userRepresentation(u)
                             for u in autocompleteUsersVm.searchUsersAccount($viewValue) | limitTo:3">
-    <span x-ng-show="autocompleteUsersVm.onErrorEmpty()">
-      {{"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMPTY_LIST" | translate}}
+    <span data-ng-show="autocompleteUsersVm.onErrorEmpty()">
+      {{::"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMPTY_LIST" | translate}}
     </span>
-    <span x-ng-show="autocompleteUsersVm.withEmail && !autocompleteUsersVm.isEmail">
-      {{"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMAIL" | translate}}
+    <span data-ng-if="autocompleteUsersVm.withEmail && !autocompleteUsersVm.isEmail">
+      {{::"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMAIL" | translate}}
     </span>
   </div>
   <button type="button" class="right-inline-btn waves-effect"
-          x-ng-click="autocompleteUsersVm.onSelect()"
-          x-ng-show="autocompleteUsersVm.withEmail">
+          data-ng-click="autocompleteUsersVm.onSelect()"
+          data-ng-if="::autocompleteUsersVm.withEmail">
     <i class="zmdi zmdi-plus"></i>
   </button>
 </div>

@@ -1,40 +1,40 @@
 <md-toast class="toast-dynamic-height white-toast-panel ls-toast"
           data-ng-init="openDetails = false"
-          data-ng-class="{'anim-toast' : openDetails , 'toast-type-error' : toastError}">
+          data-ng-class="::{'anim-toast' : openDetails , 'toast-type-error' : toastError}">
   <div>
     <div class="toast-upper-panel">
       <div class="toast-icon-area">
-        <span class="zmdi zmdi-alert-circle-o" data-ng-show="toastError"></span>
-        <span class="zmdi zmdi-check" data-ng-show="toastSuccess"></span>
-        <span class="fa fa-eye-slash" data-ng-show="toastIsolate"></span>
-        <span class="zmdi zmdi-info-outline" data-ng-show="toastInfo"></span>
-        <span class="zmdi zmdi-alert-circle-o" data-ng-show="toastWarning"></span>
+        <span class="zmdi zmdi-alert-circle-o" data-ng-if="::toastError"></span>
+        <span class="zmdi zmdi-check" data-ng-if="::toastSuccess"></span>
+        <span class="fa fa-eye-slash" data-ng-if="::toastIsolate"></span>
+        <span class="zmdi zmdi-info-outline" data-ng-if="::toastInfo"></span>
+        <span class="zmdi zmdi-alert-circle-o" data-ng-if="::toastWarning"></span>
       </div>
-      <div class="md-toast-text" flex data-ng-class="{'toast-single-btn' : actionLabel}">
-        <span data-ng-if="!toastText.pluralization" translate translate-values="{{toastText.params}}">
-         {{toastText.key}}
+      <div class="md-toast-text" flex data-ng-class="::{'toast-single-btn' : actionLabel}">
+        <span data-ng-if="::!toastText.pluralization" translate translate-values="{{::toastText.params}}">
+         {{::toastText.key}}
         </span>
-        <span data-ng-if="toastText.pluralization" translate translate-values="{{toastText.params}}"
+        <span data-ng-if="::toastText.pluralization" translate translate-values="{{::toastText.params}}"
               translate-interpolation="messageformat">
-         {{toastText.key}}
+         {{::toastText.key}}
         </span>
-        <a class="md-highlight toast-inline-link" data-ng-show="toastDetails"
+        <a class="md-highlight toast-inline-link" data-ng-if="::toastDetails"
            data-ng-click="toastVm.openDetails = !toastVm.openDetails" translate>
           TOAST_ALERT.ACTION.DETAILS
         </a>
       </div>
-      <md-button data-ng-if="toastLabel" data-ng-click="toastClose(true)">{{toastLabel | translate}}</md-button>
-      <md-button aria-label="close" class="close-button m-0" data-ng-if="!toastLabel" data-ng-click="toastClose()">
+      <md-button data-ng-if="::toastLabel" data-ng-click="toastClose(true)">{{::toastLabel | translate}}</md-button>
+      <md-button aria-label="close" class="close-button m-0" data-ng-if="::!toastLabel" data-ng-click="toastClose()">
         <i class="zmdi zmdi-close"></i>
       </md-button>
     </div>
     <!-- Detail dynamic area-->
-    <div class="toast-details-ctn delete-file-toast" data-ng-show="toastDetails"
-          data-ng-class="{'anim-toast' : toastVm.openDetails}">
+    <div class="toast-details-ctn delete-file-toast" data-ng-if="::toastDetails"
+          data-ng-class="::{'anim-toast' : toastVm.openDetails}">
       <div class="toast-details-item" data-ng-repeat="detail in toastDetails track by $index">
-        <p class="toast-item-filename" translate>{{detail.title}}</p>
+        <p class="toast-item-filename" translate>{{::detail.title}}</p>
         <p class="toast-item-error">
-          <span class="toast-error-message" translate>{{detail.message}}</span>
+          <span class="toast-error-message" translate>{{::detail.message}}</span>
         </p>
       </div>
     </div>
