@@ -133,8 +133,11 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       padding-top: 11px;
+      margin-top: 0;
       .file-name-disp {
-        display: inline;
+        display: inline-block;
+        min-width: 10px;
+        min-height: 17px;
       }
     }
     .ctn-name-actions {
@@ -414,7 +417,7 @@
   #file-list-table {
     background-color: transparent !important;
     .actions {
-      height: 42px;
+      height: 38px;
       margin: 0;
       li {
         width: 35px;
@@ -540,7 +543,7 @@
       display: flex;
       flex-wrap: nowrap;
       align-content: center;
-      height: 34px;
+      max-height: 34px;
     }
    td.thumb-type-item a {
     padding-top: 0;

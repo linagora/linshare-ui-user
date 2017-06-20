@@ -136,7 +136,6 @@
       itemElement.attr('contenteditable', 'true')
         .on('focus', function() {
           itemElement.text(initialName);
-          document.execCommand('selectAll', false, null);
         })
         .on('focusout', function(e) {
           if (!done) {
@@ -154,6 +153,7 @@
           }
         });
       itemElement.focus();
+      document.execCommand('selectAll', false, null);
       return deferred.promise;
 
       /**

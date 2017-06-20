@@ -639,7 +639,7 @@ li.dp-actions {
 
 .audit-card {
   margin-bottom: 0.6em;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
   background: #fff;
   border-radius: 2px;
   padding: 0.8em;
@@ -736,6 +736,8 @@ li.dp-actions {
 }
 
 .right-inline-btn{
+  max-width: 27px;
+  box-sizing: border-box;
   font-size: 1.4em;
   color: $btnIcon;
   width: 27px;
@@ -744,14 +746,17 @@ li.dp-actions {
   text-align: center;
   padding-top: 1px;
   display: flex;
-  -webkit-flex: 0 0 32px;
-  -ms-flex: 0 0 32px;
   flex: 0 0 28px;
   border: 1px solid $inputGrayBorder;
   justify-content: center;
   align-items: center;
   background-color: transparent;
   top: 3px;
+  i {
+    display:block;
+    width: 27px;
+    margin: auto;
+  }
 }
 
 .fg-line:not(.disabled):after, .fg-line:not(.readonly):after {

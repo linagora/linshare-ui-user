@@ -42,6 +42,7 @@
     text-align: center;
     margin: 0px;
     padding: 1.1em 0;
+    font-weight: 400;
     span {
       display: block;
       font-size: 0.7em;
@@ -56,7 +57,7 @@
 }
 
 button.cancel {
-  background-color: $btnDefaultBg;
+  background-color: $btnDefaultBg !important;
   color: $btnDefaultTxt;
   transition : all 200ms ease-in-out;
   margin: 0px;
@@ -187,7 +188,7 @@ FILE DIRECTORY DIALOG
       overflow-y: auto;
     }
     .lv-icon-ctn {
-      font-size: 1em;
+      font-size: 1.25em;
     }
     .lv-name {
       p {
@@ -213,7 +214,7 @@ FILE DIRECTORY DIALOG
       .lv-col-1 {
         font-size: 1.25em;
         padding: 10px 0;
-        &.actions a i {
+        &.actions a:not(.disabled) i {
           color: #585858;
         }
       }
@@ -311,6 +312,9 @@ FILE DIRECTORY DIALOG
     }
     .actions.white-inline-link {
       margin-right: 0 !important;
+      a {
+        padding-top: 3px;
+      }
     }
     .lv-ctn {
       max-height: calc(100% - 168px) !important;

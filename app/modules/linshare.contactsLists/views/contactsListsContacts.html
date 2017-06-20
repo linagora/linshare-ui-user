@@ -221,9 +221,9 @@
                 <span>{{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}</span>
               </a>
             </span>
-            <span x-ng-show="!contactsListsContactsVm.canManage &&
+            <span data-ng-if="!contactsListsContactsVm.canManage &&
              contactsListsContactsVm.selectedContacts.length > 1">
-              <span>{{'NO_ACTION_AVAILABLE' | translate}}</span>
+              <span translate>NO_ACTION_AVAILABLE</span>
             </span>
           </div>
         </div>

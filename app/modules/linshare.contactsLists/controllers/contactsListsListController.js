@@ -125,7 +125,7 @@
       }, 0);
 
       $scope.$on('$stateChangeSuccess', function() {
-        angular.element('.multi-select-mobile').appendTo('body');
+        angular.element('.multi-select-mobile.contact-list-multi-mobile').appendTo('body');
       });
 
       contactsListsListVm.fabButton = {

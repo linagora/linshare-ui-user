@@ -72,7 +72,7 @@ md-toast.toast-dynamic-height .md-toast-content {
 
 /* LinShare common toast layout style */
 md-toast {
-  z-index: 999;
+  z-index: 88 !important;
   bottom: 25px !important;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 700ms;
 }
@@ -204,3 +204,10 @@ md-toast .md-toast-content {
   }
 }
 
+@media (max-width: 758px) {
+  md-toast {
+    position: fixed;
+    z-index: 999;
+    bottom: 25px;
+  }
+}

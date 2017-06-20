@@ -5,7 +5,7 @@
    <meta charset="utf-8">
    <title>LinShare</title>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
    <meta name="description" content="">
    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
@@ -38,13 +38,11 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/received.css">
     <!-- endbuild -->
-
   </head>
-  <body x-ng-controller="UiUserMainController as mainVm"
-         x-ng-class="{'sw-toggled': mactrl.layoutType === '1', 'lock-scroll': mactrl.sidebarToggle.left}"
-         flow-init flow-prevent-drop>
+  <body data-ng-controller="UiUserMainController as mainVm"
+        data-ng-class="{'sw-toggled': mactrl.layoutType === '1', 'lock-scroll': mactrl.sidebarToggle.left}"
+        flow-init flow-prevent-drop>
     <data ui-view x-ng-cloak="">
-
     </data>
 
     <!--<footer class="footer">-->

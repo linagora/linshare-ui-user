@@ -161,6 +161,24 @@
           });
       });
 
+      // always scroll to top upon reload
+      $rootScope.$on('$stateChangeSuccess', function() {
+        $window.scrollTo(0,0);
+      });
+
+      // TODO: please translate into a directive
+      // disables scale for mobile phones
+      $(document).on('touchmove', function(event) {
+        event = _.defaultTo(event.originalEvent, event);
+        if (event.scale !== 1) {
+          event.preventDefault();
+        }
+      });
+      // scroll to input upon focus
+      angular.element('input textarea').on('focus', function() {
+        angular.element('body').scrollTop = this.offset().top + 70;
+      });
+
       $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         $log.debug('$stateChangeError - ', error);
         if (error.status < 500 && error.status !== 401) {

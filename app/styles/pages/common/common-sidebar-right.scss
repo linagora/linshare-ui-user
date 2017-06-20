@@ -734,7 +734,7 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     border-bottom: 0;
     width: 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     z-index: 11;
     display: flex;
@@ -778,8 +778,8 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
     padding-top: 53px;
   }
   #chat.setSidebarRightMobileState md-tabs-wrapper {
-    position: fixed;
-    top: 53px;
+    position: absolute;
+    top: 0;
     padding-top: 10px;
     height: 46px;
     z-index: 10;
