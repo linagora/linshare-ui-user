@@ -1,19 +1,19 @@
 <ul class="header-inner clearfix" data-flow-files-submitted="$flow.upload()">
     <li id="menu-trigger"
         class="pull-left"
-        x-ng-click="hctrl.resizeDragNDropCtn(mactrl.sidebarToggle.left)"
+        data-ng-click="hctrl.resizeDragNDropCtn(mactrl.sidebarToggle.left)"
         data-target="mainmenu"
         data-toggle-sidebar
         data-model-left="mactrl.sidebarToggle.left"
-        x-ng-class="{'open': mactrl.sidebarToggle.left}">
+        data-ng-class="{'open': mactrl.sidebarToggle.left}">
         <div class="line-wrap">
             <div class="line top"></div>
             <div class="line center"></div>
             <div class="line bottom"></div>
         </div>
     </li>
-    <li class="page-title visible-xs">
-        {{linkActive.name | translate}}
+    <li class="page-title visible-xs" translate>
+      {{linkActive.name}}
     </li>
     <li class="logo hidden-xs pull-left">
         <a href="" ui-sref="home">
@@ -24,7 +24,7 @@
       <ul class="top-menu">
             <li class="dropdown" id="transfert-dropdown" uib-dropdown auto-close="outsideClick"
                 data-ng-if="mainVm.showTransfert">
-                <a x-ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
+                <a data-ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
                    style="height: 15px;">
                   <i class="tmn-counts">{{$flow.files.length}}</i>
                   <div class="progress m-t-15">
@@ -40,40 +40,40 @@
                 <div class="dropdown-menu pull-right dropdown-menu-lg action-link" uib-dropdown-menu>
                   <div class="listview">
                     <div class="lv-body">
-                      <div x-ng-cloak="" class="tabsdemoDynamicHeight">
+                      <div data-ng-cloak="" class="tabsdemoDynamicHeight">
                         <md-content>
                           <md-tabs md-dynamic-height="" md-border-bottom="">
-                            <md-tab label="{{'TRANSFERS_DROPDOWN.UPLOADS' | translate}}">
+                            <md-tab label="{{::'TRANSFERS_DROPDOWN.UPLOADS' | translate}}">
                               <md-content class="md-padding" upload-popup-files="{{mySpacePage}}"></md-content>
                               <md-content class="md-padding" upload-popup-files="{{workgroupPage}}"></md-content>
                             </md-tab>
-                            <md-tab label="{{'TRANSFERS_DROPDOWN.SHARE' | translate}}">
+                            <md-tab label="{{::'TRANSFERS_DROPDOWN.SHARE' | translate}}">
                               <md-content class="md-padding">
-                                <p class="empty-res" x-ng-if="shareArray.length === 0">
+                                <p class="empty-res" data-ng-if="shareArray.length === 0">
                                   <i class="zmdi zmdi-info-outline"></i>
-                                  <span>
-                                    {{'HEADER.NO_SHARES' | translate}}
+                                  <span translate>
+                                    HEADER.NO_SHARES
                                   </span>
                                 </p>
-                                <div class="lv-item row" style="cursor: pointer" x-ng-repeat="share in shareArray"
+                                <div class="lv-item row" style="cursor: pointer" data-ng-repeat="share in shareArray"
                                      ui-sref="share.detail({id: $index})">
                                   <div class="col-xs-12 p-0">
                                     <div class="lv-title p-0">
                                       <div  class="p-0 file-name">
-                                        <span> {{'TRANSFERS_DROPDOWN.SHARE_NUMBER' | translate}} {{$index + 1}}</span>
-                                        <i x-ng-show="share.waitingUploadIdentifiers.length > 0">
-                                          {{"HEADER.SHARING_PROGRESS.SHARE_IN_PROGRESS" | translate}}
+                                        <span><span translate> TRANSFERS_DROPDOWN.SHARE_NUMBER</span> {{::$index + 1}}</span>
+                                        <i data-ng-show="share.waitingUploadIdentifiers.length > 0" translate>
+                                          HEADER.SHARING_PROGRESS.SHARE_IN_PROGRESS
                                         </i>
-                                        <i x-ng-show="share.waitingUploadIdentifiers.length === 0">
-                                          {{"HEADER.SHARING_PROGRESS.SHARE_DONE" | translate}}
+                                        <i data-ng-show="share.waitingUploadIdentifiers.length === 0" translate>
+                                          HEADER.SHARING_PROGRESS.SHARE_DONE
                                         </i>
                                       </div>
                                       <div class="p-0 secondary-info-ctn">
                                         <span class="secondary-info-text">
-                                          <span class="files-count">{{share.documents.length}}
+                                          <span class="files-count">{{::share.documents.length}}
                                             <i class="fa fa-file"></i>
                                           </span>
-                                          <span class="recipients-count">{{share.recipients.length}}
+                                          <span class="recipients-count">{{::share.recipients.length}}
                                             <i class="zmdi zmdi-account"></i>
                                           </span>
                                         </span>
@@ -90,8 +90,8 @@
                   </div>
                 </div>
             </li>
-            <li class="dropdown" uib-dropdown auto-close="outsideClick" x-ng-if="!lsAppConfig.production">
-              <a  x-ng-show="!linshareModeProduction" uib-dropdown-toggle href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
+            <li class="dropdown" uib-dropdown auto-close="outsideClick" data-ng-if="::!lsAppConfig.production">
+              <a  data-ng-if="::!linshareModeProduction" uib-dropdown-toggle href="" class="col-md-2 ctn-badge-count" style="height: 15px;">
                 <i class="tmn-counts">5</i>
               </a>
               <a uib-dropdown-toggle href=""><i class="tm-icon zmdi zmdi-notifications-none"></i></a>
@@ -111,12 +111,12 @@
                       <div class="work-in-progress-ctn-elm">
                         <div class="work-in-progress-content">
                           <img src="images/wip-banner-small.png"/>
-                          <p>{{'WORK_IN_PROGRESS.WORK_IN_PROGRESS_MSG' | translate}}</p>
+                          <p translate>WORK_IN_PROGRESS.WORK_IN_PROGRESS_MSG</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <a class="lv-footer" href="">{{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}}</a>
+                  <a class="lv-footer" href="" translate>HEADER.UPLOAD_PROGRESS.FOOTER</a>
                 </div>
               </div>
             </li>
@@ -124,14 +124,14 @@
               <a uib-dropdown-toggle href=""><i class="tm-icon ls-my-profile"></i></a>
               <ul class="dropdown-menu dm-icon pull-right">
                 <li>
-                  <a href="">{{loggedUser.firstName}} {{loggedUser.lastName}}</a>
+                  <a href="">{{::loggedUser.firstName}} {{::loggedUser.lastName}}</a>
                 </li>
-                <li x-ng-show="linshareModeProduction == false">
-                  <a href=""><i class="zmdi ls-settings"></i> {{'HEADER.SETTINGS' | translate}}</a>
+                <li data-ng-if="::linshareModeProduction">
+                  <a href=""><i class="zmdi ls-settings"></i> <span translate>HEADER.SETTINGS</span></a>
                 </li>
                 <li>
-                  <a x-ng-controller="AuthenticationController as authenticationVm" x-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
-                    <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
+                  <a data-ng-controller="AuthenticationController as authenticationVm" data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
+                    <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
                   </a>
                 </li>
               </ul>

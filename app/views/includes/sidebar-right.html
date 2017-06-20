@@ -1,16 +1,16 @@
-<div class="container" x-ng-controller="LinshareShareActionController as shareActionVm">
-  <div x-ng-if="mainVm.sidebar.getContent() === 'share'" sidebar-content="share"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'more-options'" sidebar-content="more-options"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'share-details'" sidebar-content="share-details"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'active-share-details'" sidebar-content="active-share-details"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'guest-create'" sidebar-content="guest-create"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'guest-details'" sidebar-content="guest-details"></div>
+<div class="container" data-ng-controller="LinshareShareActionController as shareActionVm">
+  <div data-ng-if="mainVm.sidebar.getContent() === 'share'" sidebar-content="share"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'more-options'" sidebar-content="more-options"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'share-details'" sidebar-content="share-details"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'active-share-details'" sidebar-content="active-share-details"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'guest-create'" sidebar-content="guest-create"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'guest-details'" sidebar-content="guest-details"></div>
   <!--Not using shareActionVm-->
-  <div x-ng-if="mainVm.sidebar.getContent() === 'details'" sidebar-content="details"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'add-member'" sidebar-content="add-member"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'workgroup'" sidebar-content="workgroup"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'workgroup-node'" sidebar-content="workgroup-node"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'contactslists'" sidebar-content="contactslists"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'contactslists-add-contacts'" sidebar-content="contactslists-add-contacts"></div>
-  <div x-ng-if="mainVm.sidebar.getContent() === 'contactslists-contact'" sidebar-content="contactslists-contact"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'details'" sidebar-content="details"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'add-member'" sidebar-content="add-member"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'workgroup'" sidebar-content="workgroup"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'workgroup-node'" sidebar-content="workgroup-node"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'contactslists'" sidebar-content="contactslists"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'contactslists-add-contacts'" sidebar-content="contactslists-add-contacts"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'contactslists-contact'" sidebar-content="contactslists-contact"></div>
 </div>

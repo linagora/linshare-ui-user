@@ -1,24 +1,24 @@
-<div x-ng-class="{'hidden': !mactrl.sidebarToggle.left}" class="profile-menu-ctn">
+<div data-ng-class="{'hidden': !mactrl.sidebarToggle.left}" class="profile-menu-ctn">
     <div class="btn-add-files-ctn">
       <div class="dark-overlay"></div>
       <div id="userNameSidebar">
         <div class="flex-ctn detail-info-ctn">
           <div class="item-l">
-           <span class="first-letter user-info ng-binding ng-scope">{{loggedUser.firstName.charAt(0)}}</span>
+           <span class="first-letter user-info ng-binding ng-scope">{{::loggedUser.firstName.charAt(0)}}</span>
           </div>
-          <p x-ng-click="toggleSlide = !toggleSlide" class="visible-xs" x-ng-class="{'profile-info-toggled' : toggleSlide}">
-            {{ loggedUser.firstName }} {{ loggedUser.lastName }}<i class="zmdi zmdi-chevron-down"></i>
-            <span class="user-expiration-date" data-ng-show="loggedUser.expirationDate">
+          <p data-ng-click="toggleSlide = !toggleSlide" class="visible-xs" data-ng-class="{'profile-info-toggled' : toggleSlide}">
+            {{::loggedUser.firstName}} {{::loggedUser.lastName}}<i class="zmdi zmdi-chevron-down"></i>
+            <span class="user-expiration-date" data-ng-if="::loggedUser.expirationDate">
               <span translate>EXPIRE_THE</span>
-              <span>{{loggedUser.expirationDate | date: 'longDate'}}</span>
+              <span>{{::loggedUser.expirationDate | date: 'longDate'}}</span>
             </span>
           </p>
           <p class="hidden-xs username-display">
-            {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+            {{::loggedUser.firstName}} {{::loggedUser.lastName}}
           </p>
-          <span class="user-expiration-date" data-ng-show="loggedUser.expirationDate">
+          <span class="user-expiration-date" data-ng-if="::loggedUser.expirationDate">
               <span translate>EXPIRE_THE</span>
-              <span>{{loggedUser.expirationDate | date: 'longDate'}}</span>
+              <span>{{::loggedUser.expirationDate | date: 'longDate'}}</span>
           </span>
         </div>
       </div>
@@ -28,33 +28,33 @@
       <ul class="main-menu">
         <li>
           <a data-ng-controller="AuthenticationController as authenticationVm"
-             x-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
-            <i class="zmdi zmdi-run"></i> {{'HEADER.LOGOUT' | translate}}
+             data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
+            <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
           </a>
         </li>
       </ul>
     </div>
-    <ul class="main-menu" x-ng-repeat="tab in lsLeftSidebarVm.tabs">
-      <li x-ng-if="tab.link" data-ng-show="!tab.disabled" role="button" class="waves-effect"
-          x-ng-class="{'active simple-menu': currentState.name==tab.name}">
-        <a x-ui-sref="{{tab.link}}"
-           x-ng-class="{'disabled': tab.disabled }">
-          <i class="{{tab.icon}}"></i> {{tab.name | translate}}
+    <ul class="main-menu" data-ng-repeat="tab in lsLeftSidebarVm.tabs">
+      <li data-ng-if="::tab.link" data-ng-show="::!tab.disabled" role="button" class="waves-effect"
+          data-ng-class="{'active simple-menu': currentState.name==tab.name}">
+        <a data-ui-sref="{{::tab.link}}"
+           data-ng-class="::{'disabled': tab.disabled }">
+          <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}<span>
         </a>
       </li>
-      <li data-ng-show="!tab.disabled" class="sub-menu" x-ng-if="tab.links" role="button" class="waves-effect"
-          x-ng-class="{'active toggled': currentState.name==tab.name}">
+      <li data-ng-show="::!tab.disabled" class="sub-menu" data-ng-if="::tab.links" role="button" class="waves-effect"
+          data-ng-class="{'active toggled': currentState.name==tab.name}">
         <a toggle-submenu>
-          <i class="{{tab.icon}}"></i> {{tab.name | translate }}
+          <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}<span>
         </a>
         <ul>
-          <li data-ng-show="!link.disabled" x-ng-repeat="link in tab.links" role="button" class="waves-effect"
-              x-ng-mouseover="lsLeftSidebarVm.changeColor(link, tab.color)"
-              x-ng-mouseleave="lsLeftSidebarVm.changeColor(link, 'inherit')">
-            <a x-ui-sref="{{link.link}}"
-               x-ui-sref-active="active"
-               x-ng-class="{'disabled': link.disabled}">
-              {{ link.name | translate }}
+          <li data-ng-show="::!link.disabled" data-ng-repeat="link in tab.links" role="button" class="waves-effect"
+              data-ng-mouseover="lsLeftSidebarVm.changeColor(link, tab.color)"
+              data-ng-mouseleave="lsLeftSidebarVm.changeColor(link, 'inherit')">
+            <a data-ui-sref="{{::link.link}}"
+               data-ui-sref-active="active"
+               data-ng-class="::{'disabled': link.disabled}" translate>
+              {{::link.name}}
             </a>
           </li>
         </ul>
@@ -69,10 +69,10 @@
       <uib-progressbar
         max="100"
         value="userQuotas.percent"
-        x-ng-class="userQuotas.progressBarColor"></uib-progressbar>
+        data-ng-class="userQuotas.progressBarColor"></uib-progressbar>
       <div class="quota-information">
         <p>
-          {{userQuotas.remaining | readableSize:true}} {{'USER_QUOTAS.REMAINING_OVER' | translate}}
+          {{userQuotas.remaining | readableSize:true}} <span translate>USER_QUOTAS.REMAINING_OVER</span>
           {{userQuotas.total | readableSize:true}}
         </p>
       </div>
@@ -82,8 +82,8 @@
       <p>Libre & Free</p>
     </div>
     <div class="product-version">
-      <p><span>{{ 'COMMON.SIDEBAR.PRODUCT_VERSION' | translate }}</span> : {{productVersion}}</p><span>|</span>
-      <p><span>{{ 'COMMON.SIDEBAR.CORE_VERSION' | translate }}</span> : {{coreVersion}}</p>
+      <p><span translate>COMMON.SIDEBAR.PRODUCT_VERSION</span> : {{::productVersion}}</p><span>|</span>
+      <p><span translate>COMMON.SIDEBAR.CORE_VERSION</span> : {{::coreVersion}}</p>
     </div>
   </div>
 </div>

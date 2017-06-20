@@ -1,12 +1,12 @@
 <div id="overlayMobileFab">&nbsp;</div>
-<header id="header" x-ng-include src="'views/includes/header.html'">
+<header id="header" data-ng-include src="'views/includes/header.html'">
 </header>
-<section id="main" data-ng-class="{'licence-layout-changes': linshareLicence}">
-  <div id="overlayMobile" x-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left}"
-       x-ng-click="mactrl.sidebarToggle.left = false">&nbsp;</div>
-  <aside id="sidebar" x-ng-include src="'views/includes/sidebar-left.html'" x-ng-class="{'toggled': mactrl.sidebarToggle.left}"></aside>
-  <aside id="chat" x-ng-include src="'views/includes/sidebar-right.html'"
-         x-ng-class="{'toggled': mainVm.sidebar.isVisible()}" class="sidebar-right">
+<section id="main" data-ng-class="::{'licence-layout-changes': linshareLicence}">
+  <div id="overlayMobile" data-ng-class="{'toggledShowOverlay': mactrl.sidebarToggle.left}"
+       data-ng-click="mactrl.sidebarToggle.left = false">&nbsp;</div>
+  <aside id="sidebar" data-ng-include src="'views/includes/sidebar-left.html'" data-ng-class="{'toggled': mactrl.sidebarToggle.left}"></aside>
+  <aside id="chat" data-ng-include src="'views/includes/sidebar-right.html'"
+         data-ng-class="{'toggled': mainVm.sidebar.isVisible()}" class="sidebar-right">
   </aside>
   <div id="content-container"
        data-ng-class="{'content-toggled': mactrl.sidebarToggle.left,
@@ -14,9 +14,9 @@
     <section id="content" class="page-view" data-ui-view=""></section>
   </div>
 </section>
-<footer id="copyright-footer" class="collapsible-content" data-ng-if="linshareLicence"
+<footer id="copyright-footer" class="collapsible-content" data-ng-if="::linshareLicence"
         data-ng-class="{'content-toggled': mactrl.sidebarToggle.left}">
  <div id="copyright-content-ctn" class="reset-content-width">
-    <p class="m-0">{{'LOGIN.COPYRIGHT' | translate}}</p>
+    <p class="m-0" translate>LOGIN.COPYRIGHT</p>
  </div>
 </footer>

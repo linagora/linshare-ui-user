@@ -2,67 +2,67 @@
   <div class="upper-container">
     <img id="fg-img" src="images/common/logo-white-500.png" alt="Logo LinShare" class="visible-xs"/>
     <div class="box-ctn hidden-xs">
-      <div class="box-3" ui-sref="documents.files" data-ng-show="cards.myFilesSpace">
+      <div class="box-3" ui-sref="documents.files" data-ng-if="::cards.myFilesSpace">
         <div class="card-img upload-share">
           <i class="groups-home-my-files"></i>
         </div>
         <div class="box-content"  ui-sref="documents.files">
           <div class="info-box" >
-            <h2 class="box-title"><a >{{"MY_FILES_SPACE" | translate}}</a></h2>
-            <p class="box-txt">{{"MY_FILES_SPACE_MSG" | translate}}</p>
+            <h2 class="box-title"><a translate>MY_FILES_SPACE</a></h2>
+            <p class="box-txt" translate>MY_FILES_SPACE_MSG</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production && !isMobile">
-            <a href="" x-ng-show="isChecked == false">
-              {{"SET_AS_HOMEPAGE" | translate}}
+          <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
+               data-ng-click="isChecked = !isChecked"
+               data-ng-if="::!lsAppConfig.production && !isMobile">
+            <a href="" data-ng-show="!isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
               <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
+                <span transalte>WIP</span>
               </md-tooltip>
             </a>
-            <a href="" x-ng-show="isChecked">
-              {{"SET_AS_HOMEPAGE" | translate}}
+            <a href="" data-ng-show="isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
+                <span transalte>WIP</span>
               </md-tooltip>
             </a>
           </div>
         </div>
       </div>
-      <div class="box-3" flow-btn data-ng-show="cards.uploadShare && cards.myFilesSpace">
+      <div class="box-3" flow-btn data-ng-if="::cards.uploadShare && cards.myFilesSpace">
         <div class="card-img upload-share" ui-sref="documents.upload">
           <i class="groups-home-share"></i>
         </div>
         <div class="box-content" ui-sref="documents.upload">
           <div class="info-box">
             <h2 class="box-title">
-              <a>{{"UPLOAD_SHARE" | translate}}</a></h2>
-            <p class="box-txt">{{"UPLOAD_SHARE_MSG" | translate}}</p>
+              <a translate>UPLOAD_SHARE</a></h2>
+            <p class="box-txt" translate>UPLOAD_SHARE_MSG</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop x-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production && !isMobile">
-            <a href="" x-ng-show="isChecked == false">
-              {{"SET_AS_HOMEPAGE" | translate}}
+          <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
+               data-ng-click="isChecked = !isChecked"
+               data-ng-if="::!lsAppConfig.production && !isMobile">
+            <a href="" data-ng-show="!isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
               <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
+                <span transalte>WIP</span>
               </md-tooltip>
             </a>
-            <a href="" x-ng-show="isChecked">
-              {{"SET_AS_HOMEPAGE" | translate}}
+            <a href="" data-ng-show="isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
+                <span transalte>WIP</span>
               </md-tooltip>
             </a>
           </div>
         </div>
       </div>
 
-      <div class="box-3" data-ui-sref="documents.received" data-ng-show="!cards.myFilesSpace">
+      <div class="box-3" data-ui-sref="documents.received" data-ng-if="::!cards.myFilesSpace">
         <div class="card-img upload-request">
           <i class="groups-home-idd"></i>
         </div>
@@ -73,70 +73,79 @@
           </div>
           <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
                data-ng-click="isChecked = !isChecked"
-               data-ng-if="!lsAppConfig.production && !isMobile">
-            <a href="" data-ng-show="isChecked == false">
+               data-ng-if="::!lsAppConfig.production && !isMobile">
+            <a href="" data-ng-show="!isChecked">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                <span transalte>WIP</span>
+              </md-tooltip>
             </a>
             <a href="" data-ng-show="isChecked" >
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
+                <span transalte>WIP</span>
               </md-tooltip>
             </a>
           </div>
         </div>
       </div>
 
-      <div class="box-3" data-ui-sref="sharedspace.all" data-ng-show="cards.uploadGroup">
+      <div class="box-3" data-ui-sref="sharedspace.all" data-ng-if="::cards.uploadGroup">
         <div class="card-img upload-workgroup">
           <i class="groups-home-workgroup"></i>
         </div>
         <div class="box-content">
           <div class="info-box">
-            <h2 class="box-title"><a>{{"UPLOAD_GROUP" | translate}}</a></h2>
-            <p class="box-txt">{{"UPLOAD_GROUP_MSG" | translate}}</p>
+            <h2 class="box-title"><a translate>UPLOAD_GROUP</a></h2>
+            <p class="box-txt" translate>UPLOAD_GROUP_MSG</p>
           </div>
           <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production && !isMobile">
-            <a href="" x-ng-show="isChecked == false">
-              {{"SET_AS_HOMEPAGE" | translate}}
+               data-ng-click="isChecked = !isChecked"
+               data-ng-if="::!lsAppConfig.production && !isMobile">
+            <a href="" data-ng-show="!isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                <span transalte>WIP</span>
+              </md-tooltip>
             </a>
-            <a href="" x-ng-show="isChecked">
-              {{"SET_AS_HOMEPAGE" | translate}}
+            <a href="" data-ng-show="isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
+                <span transalte>WIP</span>
               </md-tooltip>
             </a>
           </div>
         </div>
       </div>
 
-      <div class="box-3" data-ng-show="cards.uploadRequest">
+      <div class="box-3" data-ng-if="::cards.uploadRequest">
         <div class="card-img upload-request">
           <i class="groups-home-idd"></i>
         </div>
         <div class="box-content">
           <div class="info-box">
-            <h2 flow-btn class="box-title"><a>{{"UPLOAD_REQUEST" | translate}}</a></h2>
-            <p class="box-txt">{{"UPLOAD_REQUEST_MSG" | translate}}</p>
+            <h2 flow-btn class="box-title"><a translate>UPLOAD_REQUEST</a></h2>
+            <p class="box-txt" translate>UPLOAD_REQUEST_MSG</p>
           </div>
           <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
-               x-ng-click="isChecked = !isChecked"
-               x-ng-if="!lsAppConfig.production && !isMobile">
-            <a href="" x-ng-show="isChecked == false">
-              {{"SET_AS_HOMEPAGE" | translate}}
+               data-ng-click="isChecked = !isChecked"
+               data-ng-if="::!lsAppConfig.production && !isMobile">
+            <a href="" data-ng-show="!isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
+              <md-tooltip md-direction="bottom">
+                <span transalte>WIP</span>
+              </md-tooltip>
             </a>
-            <a href="" x-ng-show="isChecked">
-              {{"SET_AS_HOMEPAGE" | translate}}
+            <a href="" data-ng-show="isChecked">
+              <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
               <md-tooltip md-direction="bottom">
-                {{"WIP" | translate}}
+                <span transalte>WIP</span>
               </md-tooltip>
             </a>
           </div>
@@ -149,12 +158,12 @@
   <div class="bottom-container">
     <div>
       <div class="content-section custom-home-page-txt">
-        <div ng-bind-html="welcomeMessage"></div>
+        <div ng-bind-html="::welcomeMessage"></div>
       </div>
     </div>
-    <h2 x-ng-show="linshareModeProduction == false">Notifications</h2>
-    <div class="content-section" x-ng-show="linshareModeProduction == false">
-      <p class="empty-notifications">{{"NO_NOTIFICATION" | translate}}</p>
+    <h2 data-ng-if="::!linshareModeProduction">Notifications</h2>
+    <div class="content-section" data-ng-if="!linshareModeProduction">
+      <p class="empty-notifications" translate>NO_NOTIFICATION</p>
       <section class="notification-ctn">
         <div class="flex-ctn notification-item">
           <div class="item-l">
