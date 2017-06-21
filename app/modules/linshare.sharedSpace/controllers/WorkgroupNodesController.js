@@ -152,7 +152,10 @@
       _.forEach(nodeItems, function(nodeItem) {
         promises.push(workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem,
           workgroupNodesVm.folderDetails.folderUuid).then(function(newNode) {
-          addNewItemInTableParams(newNode);
+          var restangularizedNode = workgroupNodesRestService.restangularize(newNode,
+            workgroupNodesVm.folderDetails.workgroupUuid);
+          restangularizedNode.fromServer = true;
+          addNewItemInTableParams(restangularizedNode);
         }));
       });
 
