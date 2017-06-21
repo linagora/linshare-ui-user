@@ -112,12 +112,9 @@
             </div>
           </div>
           <div class="item-r actions">
-            <span title="{{'DETAILS.FULL_SIZE' | translate}}">n.c Kib</span>
-            <span class="seperator-inline">|</span>
-                      <span title="{{'DETAILS.TRASH_FULL_SIZE' | translate}}">
-                        <i class="fa fa-trash-o inner-icon"></i>
-                        n.c Kib
-                      </span>
+            <span title="{{'DETAILS.USED_SPACE' | translate}}">
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.quotas.usedSpace | readableSize:true}}
+            </span>
           </div>
         </div>
         <div class="meta-data-ctn">

@@ -643,14 +643,17 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function showWorkgroupDetails(showMemberTab) {
-      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid).then(function(workgroup) {
+      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true).then(function(workgroup) {
         workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid).then(function(auditData) {
           auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain())
             .then(function(auditActions) {
-              workgroup.auditActions = auditActions;
-              workgroupNodesVm.currentSelectedDocument.current = workgroup;
-              workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
-              workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
+              workgroupRestService.getQuota(workgroup.quotaUuid).then(function(quota) {
+                workgroup.quotas = quota;
+                workgroup.auditActions = auditActions;
+                workgroupNodesVm.currentSelectedDocument.current = workgroup;
+                workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
+                workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
+              });
             });
         });
       });

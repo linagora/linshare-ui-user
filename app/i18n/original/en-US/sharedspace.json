@@ -30,7 +30,8 @@
   },
   "DETAILS": {
     "FULL_SIZE": "Full size",
-    "TRASH_FULL_SIZE": "Trash size"
+    "TRASH_FULL_SIZE": "Trash size",
+    "USED_SPACE": "Used space"
   },
   "BREADCRUMB_TITLE_WORKGROUP": "Workgroups",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Files",

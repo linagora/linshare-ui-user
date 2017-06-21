@@ -266,16 +266,19 @@ angular.module('linshare.sharedSpace')
      * @memberOf LinShare.sharedSpace.SharedSpaceController
      */
     function showItemDetails(workgroupUuid, event, memberTab) {
-      workgroupRestService.get(workgroupUuid).then(function(workgroup) {
-        getWorkgroupAudit(workgroup).then(function() {
-          thisctrl.currentSelectedDocument.current = workgroup;
-          if(memberTab) {
-            thisctrl.mdtabsSelection.selectedIndex = 1;
-            angular.element('#focusInputShare').focus();
-          } else {
-            thisctrl.mdtabsSelection.selectedIndex = 0;
-          }
-          thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
+      workgroupRestService.get(workgroupUuid, true).then(function(workgroup) {
+        workgroupRestService.getQuota(workgroup.quotaUuid).then(function(quota) {
+          workgroup.quotas = quota;
+          getWorkgroupAudit(workgroup).then(function() {
+            thisctrl.currentSelectedDocument.current = workgroup;
+            if(memberTab) {
+              thisctrl.mdtabsSelection.selectedIndex = 1;
+              angular.element('#focusInputShare').focus();
+            } else {
+              thisctrl.mdtabsSelection.selectedIndex = 0;
+            }
+            thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
+          });
         });
       });
 

@@ -30,7 +30,8 @@
   },
   "DETAILS": {
     "FULL_SIZE": "Taille totale ",
-    "TRASH_FULL_SIZE": "Taille corbeille "
+    "TRASH_FULL_SIZE": "Taille corbeille ",
+    "USED_SPACE": "Espace utilisé"
   },
   "BREADCRUMB_TITLE_WORKGROUP": "Espace commun",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers",
