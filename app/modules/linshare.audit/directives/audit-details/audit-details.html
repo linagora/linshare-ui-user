@@ -2,7 +2,8 @@
   <h5 class="header-log-info">
     <a tooltip-popup-delay="600" tooltip-placement="bottom" uib-tooltip="{{::auditAction.resource.name}}">
       <span data-ng-class="::auditAction.icon"></span>&nbsp;
-      <span data-ng-if="::auditAction.hasBracket">> </span>
+      <!-- TODO change to ng if and adapt CSS -->
+      <span data-ng-show="::auditAction.hasBracket">> </span>
       <span>{{::auditAction.resourceName}}</span>
     </a>
   </h5>
