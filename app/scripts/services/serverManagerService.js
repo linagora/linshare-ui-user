@@ -80,7 +80,7 @@
         .catch(function(error) {
           $log.debug('ServerManagerService - responseHandler:' + error);
           errorData = error;
-          errCode = errorData.data.errCode;
+          errCode = _.isNil(errorData.data) ? null : errorData.data.errCode;
           deferred.reject(error);
 
           if (ERRROS_HTTP.hasOwnProperty(error.status)) {
@@ -92,7 +92,7 @@
             errorMessageHttpCodes += 'ERROR_DEFAULT';
           }
           if (showError) {
-            errorMessageDetails += _.isUndefined(errCode) ? 'NONE' : errCode;
+            errorMessageDetails += _.isNil(errCode) ? 'NONE' : errCode;
             $translate.refresh().then(function() {
               $translate([errorMessageHttpCodes, errorMessageDetails]).then(function(translations) {
                 if (!(translations[errorMessageHttpCodes] === errorMessageHttpCodes ||
