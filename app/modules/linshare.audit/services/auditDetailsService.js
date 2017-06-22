@@ -9,14 +9,14 @@
     .module('linshare.audit')
     .factory('auditDetailsService', auditDetailsService);
 
-  auditDetailsService.$inject = ['_', '$filter', '$q', 'lsAppConfig'];
+  auditDetailsService.$inject = ['_', '$filter', '$q', '$translate', '$translatePartialLoader', 'lsAppConfig'];
 
   /**
    * @namespace auditDetailsService
    * @desc Service to interact with Audit actions to generate all details
    * @memberOf LinShare.audit
    */
-  function auditDetailsService(_, $filter, $q, lsAppConfig) {
+  function auditDetailsService(_, $filter, $q, $translate, $translatePartialLoader, lsAppConfig) {
     const
       ACTIONS_KEY = {
         ADDITION: 'ADDITION',
@@ -102,20 +102,32 @@
      */
     function generateAllDetails(loggedUserUuid, auditDetails) {
       return $q(function(resolve) {
-        authorMe = $filter('translate')('AUTHOR_ME');
-        authorSuperadmin = $filter('translate')('AUTHOR_SUPERADMIN');
-        authorSystem = $filter('translate')('AUTHOR_SYSTEM');
-        disabled = $filter('translate')('DISABLED');
-        enabled = $filter('translate')('ENABLED');
-        _.forEach(auditDetails, function(auditAction) {
-          if (auditAction.resource) {
-            generateDetails(loggedUserUuid, auditAction);
-          } else {
-            auditAction.resource = auditAction.authUser;
-            generateDetails(loggedUserUuid, auditAction);
-          }
+        $translatePartialLoader.addPart('audit');
+        $translate.refresh().then(function() {
+          $translate([
+            'AUTHOR_ME',
+            'AUTHOR_SUPERADMIN',
+            'AUTHOR_SYSTEM',
+            'DISABLED',
+            'ENABLED'
+          ]).then(function(translations) {
+            authorMe = translations['AUTHOR_ME'];
+            authorSuperadmin = translations['AUTHOR_SUPERADMIN'];
+            authorSystem = translations['AUTHOR_SYSTEM'];
+            disabled = translations['DISABLED'];
+            enabled = translations['ENABLED'];
+          }).then(function() {
+            _.forEach(auditDetails, function(auditAction) {
+              if (auditAction.resource) {
+                generateDetails(loggedUserUuid, auditAction);
+              } else {
+                auditAction.resource = auditAction.authUser;
+                generateDetails(loggedUserUuid, auditAction);
+              }
+            });
+            resolve(auditDetails);
+          });
         });
-        resolve(auditDetails);
       });
     }
 
