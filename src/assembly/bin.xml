@@ -9,5 +9,8 @@
       <directory>dist</directory>
       <outputDirectory>.</outputDirectory>
     </fileSet>
+    <fileSet>
+      <directory>error-pages</directory>
+    </fileSet>
   </fileSets>
 </assembly>
