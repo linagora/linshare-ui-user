@@ -11,13 +11,13 @@
   #action-header.activity-logs-seach-panel {
     display : block;
     flex : 1 1 auto;
-    max-width: inherit;
-    width: 0;
+    min-width: 520px;
+    max-width: 520px;
     > div {
       min-width: inherit;
     }
-    .btn{
-      margin-top : 4px;
+    .btn {
+      margin-top : 2px;
     }
   }
   .date-picker table {

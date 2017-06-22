@@ -438,6 +438,7 @@
       display: inline-block;
       text-align: center;
       padding-top: 13px;
+      line-height: 1;
     }
     .actions > li > a > i, .actions > a > i {
       vertical-align: middle;
@@ -526,7 +527,7 @@
       padding-top: 0;
     }
     .secondary-list-item-info {
-      margin-top: -3px;
+      margin-top: -1px;
       margin-bottom: 0;
       font-size: 0.85em;
       color: #4f4f4f;
@@ -901,9 +902,8 @@ BASIC READONLY TABLE
       text-align: left;
     }
     tr:first-child th {
-      height: 42px;
-      text-align: center;
-      padding-top: 8px;
+      height: 50px;
+      padding-top: 14px;
     }
   }
 
@@ -935,6 +935,10 @@ BASIC READONLY TABLE
   th.sortable.sort-desc .sort-indicator::after {
     opacity: 1;
   }
+}
+
+.files.audit-log-list  #breadcrumb-wrap .breadcrumbs-ctn {
+  max-width: 250px;
 }
 
 

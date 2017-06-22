@@ -123,12 +123,6 @@
         var fileToHighlight = uploadQueueVm.$flow.getFromUniqueIdentifier(idUpload);
         if (fileToHighlight._from === uploadQueueVm.fromWhere) {
           uploadQueueVm.selectUploadingFile(fileToHighlight, true);
-          $timeout(function() {
-            window.scrollTo(0, angular.element('div.media-body[data-uid-flow="' + idUpload + '"]')
-              .first()
-              .offset()
-              .top);
-          }, 250);
         }
       }
 
