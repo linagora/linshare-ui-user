@@ -103,6 +103,12 @@ angular
           break;
         case 404:
           $log.debug('Resource not found', response);
+          if (response.data) {
+            if (response.data.errCode === 666) {
+              $log.info("Server is under maintenance.");
+              $window.location.href = "/";
+            }
+          }
           break;
         case 500:
           $log.debug('Error ' + response.status, response);
