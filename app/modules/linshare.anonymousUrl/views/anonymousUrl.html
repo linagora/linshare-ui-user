@@ -9,8 +9,8 @@
           </h3>
           <p data-ng-if="anonymousUrlVm.anonymousUrlShareEntries.length === 1" >
             <b class="sender-full-name">
-              {{anonymousUrlVm.anonymousUrlData.actor.firstName}}
-              {{anonymousUrlVm.anonymousUrlData.actor.lastName.toUpperCase()}}
+              {{::anonymousUrlVm.anonymousUrlData.actor.firstName}}
+              {{::anonymousUrlVm.anonymousUrlData.actor.lastName.toUpperCase()}}
             </b>
             <span translate
                   translate-values='{
@@ -22,8 +22,8 @@
           </p>
           <p data-ng-if="anonymousUrlVm.anonymousUrlShareEntries.length > 1">
             <b class="sender-full-name">
-              {{anonymousUrlVm.anonymousUrlData.actor.firstName}}
-              {{anonymousUrlVm.anonymousUrlData.actor.lastName.toUpperCase()}}
+              {{::anonymousUrlVm.anonymousUrlData.actor.firstName}}
+              {{::anonymousUrlVm.anonymousUrlData.actor.lastName.toUpperCase()}}
             </b>
             <span translate="ANONYMOUS_URL.MSG_PLURAL"
                   translate-values='{
@@ -53,7 +53,7 @@
                         <input type="text" class="form-control"
                                autocomplete="off"
                                data-ng-model="anonymousUrlVm.paramFilter['name']"
-                               placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                               placeholder="{{::'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
                                data-ng-change="updateParams()">
                       </div>
                     </div>
@@ -72,18 +72,18 @@
                   <tr data-ng-repeat="documentFile in $data"
                       class="p-b-5">
                     <td class="center thumb-type-item">
-                      <i class="fa ls-1p5x" data-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+                      <i class="fa ls-1p5x" data-ng-class="'{{::documentFile.type | mimetypeIcone}}'"></i>
                     </td>
                     <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
                         data-sortable="'name'">
                       <div class="ctn-name-actions">
                         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                           <a data-ng-click="anonymousUrlVm.download(documentFile)">
-                             {{documentFile.name}}
+                             {{::documentFile.name}}
                           </a>
                           <span>
                             <p class="mobile-list-item-info visible-xs">
-                              {{documentFile.size | readableSize: false}}
+                              {{::documentFile.size | readableSize: false}}
                             </p>
                           </span>
                         </span>
@@ -91,7 +91,7 @@
                           <ul class="actions pull-right">
                             <li>
                               <a data-ng-click="anonymousUrlVm.download(documentFile)"
-                                 title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
+                                 title="{{::'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
                                  event-propagation-stop>
                                 <i class="zmdi zmdi-download"></i>
                               </a>
@@ -103,7 +103,7 @@
                     <td class="hidden-xs"
                         data-ng-if="!mainVm.isVisible()"
                         data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
-                        {{documentFile.size | readableSize: false}}
+                        {{::documentFile.size | readableSize: false}}
                     </td>
                   </tr>
                 </table>
@@ -115,7 +115,7 @@
       <div class="ext-gate-footer">
         <p>
           <a href="http://linshare.org" target="_blank" translate
-              uib-tooltip="{{ANONYMOUS_URL.FIND_OUT | translate}}"
+              uib-tooltip="{{::'ANONYMOUS_URL.FIND_OUT' | translate}}"
               tooltip-append-to-body="true"
               tooltip-placement="top">
               LOGIN.COPYRIGHT

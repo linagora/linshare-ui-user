@@ -60,53 +60,21 @@
      *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
      */
     function download(documentFile) {
-      if (anonymousUrlVm.urlData.protectedByPassword) {
-        anonymousUrlService.download(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password, documentFile.uuid)
-          .then(function(data) {
-            downloadFileFromResponse(documentFile.name, documentFile.type, data.data);
-          });
+      var url = anonymousUrlService.downloadUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password,
+                                                documentFile.uuid);
+      var downloadLink = document.createElement('a');
+      downloadLink.setAttribute('href', url);
+      downloadLink.setAttribute('download', documentFile.name);
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        downloadLink.dispatchEvent(event);
       } else {
-        var url = anonymousUrlService.downloadUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password,
-          documentFile.uuid);
-        var downloadLink = document.createElement('a');
-        downloadLink.setAttribute('href', url);
-        downloadLink.setAttribute('download', documentFile.name);
-
-        if (document.createEvent) {
-          var event = document.createEvent('MouseEvents');
-          event.initEvent('click', true, true);
-          downloadLink.dispatchEvent(event);
-        } else {
-          downloadLink.click();
-        }
-
-        downloadLink.remove();
+        downloadLink.click();
       }
-    }
 
-    /**
-     *  @name downloadFileFromResponse
-     *  @desc Launch the event to download the file for the user
-     *  @param {String} fileName - The name of the document
-     *  @param {String} fileType - The type of the document
-     *  @param {Object} fileStream - The stream of the document
-     *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
-     */
-    function downloadFileFromResponse(fileName, fileType, fileStream) {
-      var blob = new Blob([fileStream], {
-        type: fileType
-      });
-      var windowUrl = window.URL || window.webkitURL || window.mozURL || window.msURL;
-      var urlObject = windowUrl.createObjectURL(blob);
-
-      // create tag element a to simulate a download by click
-      var a = document.createElement('a');
-      a.setAttribute('href', urlObject);
-      a.setAttribute('download', fileName);
-
-      // create a click event and dispatch it on the tag element
-      var event = new MouseEvent('click');
-      a.dispatchEvent(event);
+      downloadLink.remove();
     }
 
     /**
