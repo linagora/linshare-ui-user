@@ -9,14 +9,15 @@
     .module('linshare.components')
     .controller('browseController', BrowseController);
 
-  BrowseController.$inject = ['_', '$q', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode', 'toastService'];
+  BrowseController.$inject = ['_', '$q', '$scope', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode',
+    'toastService'];
 
   /**
    * @namespace BrowseController
    * @desc Controller of browse component
    * @memberOf linshare.components
    */
-  function BrowseController(_, $q, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
+  function BrowseController(_, $q, $scope, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
     /* jshint validthis:true */
     var browseVm = this;
 
@@ -47,6 +48,10 @@
 
       browseVm.validateAction = browseVm.isMove ? moveNode : copyNode;
       browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
+
+      $scope.$on('$stateChangeStart', function() {
+        browseVm.$mdDialog.cancel();
+      });
     }
 
     /**
