@@ -34,7 +34,7 @@
       <div class="toast-details-item" data-ng-repeat="detail in toastDetails track by $index">
         <p class="toast-item-filename" translate>{{::detail.title}}</p>
         <p class="toast-item-error">
-          <span class="toast-error-message" translate>{{::detail.message}}</span>
+          <span class="toast-error-message" translate translate-values="{{::detail.message.params}}">{{::detail.message.key}}</span>
         </p>
       </div>
     </div>

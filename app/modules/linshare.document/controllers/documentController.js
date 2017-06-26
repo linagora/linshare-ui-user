@@ -170,25 +170,25 @@
               case 404:
                 responses.push({
                   'title': responseItems[0],
-                  'message': 'TOAST_ALERT.WARNING.ERROR_404'
+                  'message': {key: 'TOAST_ALERT.WARNING.ERROR_404'}
                 });
                 break;
               case 403:
                 responses.push({
                   'title': responseItems[0],
-                  'message': 'TOAST_ALERT.WARNING.ERROR_403'
+                  'message': {key: 'TOAST_ALERT.WARNING.ERROR_403'}
                 });
                 break;
               case 400:
                 responses.push({
                   'title': responseItems[0],
-                  'message': 'TOAST_ALERT.WARNING.ERROR_400'
+                  'message': {key: 'TOAST_ALERT.WARNING.ERROR_400'}
                 });
                 break;
               default:
                 responses.push({
                   'title': responseItems[0],
-                  'message': 'TOAST_ALERT.WARNING.ERROR_500'
+                  'message': {key:'TOAST_ALERT.WARNING.ERROR_500'}
                 });
             }
           });

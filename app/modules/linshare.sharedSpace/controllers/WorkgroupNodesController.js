@@ -461,7 +461,7 @@
           case 28005 :
             responses.push({
               'title': error.nodeItem.name,
-              'message': 'GROWL_ALERT.ERROR.RENAME_NODE'
+              'message': {key: 'GROWL_ALERT.ERROR.RENAME_NODE'}
             });
             break;
         }
