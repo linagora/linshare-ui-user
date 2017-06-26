@@ -91,7 +91,6 @@ angular
         };
         return flowParams;
       },
-      permanentErrors: [401, 500, 501],
       headers: {'WWW-No-Authenticate' : 'linshare'}
     };
 
