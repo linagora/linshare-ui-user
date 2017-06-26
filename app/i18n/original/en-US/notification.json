@@ -73,6 +73,7 @@
       "ELEMENTS_NOT_DELETED": "element(s) haven't been deleted",
       "ELEMENTS_NOT_DELETED_SINGULAR": "1 item has not been deleted.",
       "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} items have not been deleted.",
+      "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{item has} other{items have}} not been uploaded.",
       "ERROR": "Error :",
       "ERROR_404": "Element not found",
       "ERROR_403": "You are not authorized to delete this document",

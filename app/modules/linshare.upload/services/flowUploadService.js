@@ -310,6 +310,7 @@
           file.folderDetails = folderDetails;
         }
       });
+      flowFiles[0].flowObj.upload();
     }
   }
 })();

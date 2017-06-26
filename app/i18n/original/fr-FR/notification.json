@@ -73,6 +73,7 @@
       "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",
       "ELEMENTS_NOT_DELETED_SINGULAR": "1 élément n'a pu être supprimé.",
       "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} éléments n'ont pu être supprimés.",
+      "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{élément n'a} other{éléments n'ont}} pu être {singular, select, true{téléversé} other{téléversés}}.",
       "ERROR": "Erreur :",
       "ERROR_404": "Élément introuvable",
       "ERROR_403": "Vous n'êtes pas autorisé à supprimer cet élément",

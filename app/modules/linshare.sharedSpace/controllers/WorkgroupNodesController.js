@@ -9,11 +9,12 @@
     .module('linshare.sharedSpace')
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
-  WorkgroupNodesController.$inject = ['_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+  WorkgroupNodesController.$inject = [
+    '_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
     'flowUploadService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
-    'toastService', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'];
-
+    'toastService', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'
+  ];
   /**
    * @namespace WorkgroupNodesController
    * @desc Application Workgroup Nodes system controller
@@ -51,14 +52,19 @@
     workgroupNodesVm.goToPreviousFolder = goToPreviousFolder;
     workgroupNodesVm.isDocument = isDocument;
     workgroupNodesVm.loadSidebarContent = loadSidebarContent;
-    workgroupNodesVm.mdtabsSelection = {selectedIndex: 0};
+    workgroupNodesVm.mdtabsSelection = {
+      selectedIndex: 0
+    };
     workgroupNodesVm.nodesList = nodesList;
     workgroupNodesVm.openBrowser = openBrowser;
-    workgroupNodesVm.paramFilter = {name: ''};
+    workgroupNodesVm.paramFilter = {
+      name: ''
+    };
     workgroupNodesVm.renameNode = renameNode;
     workgroupNodesVm.showSelectedNodeDetails = showSelectedNodeDetails;
     workgroupNodesVm.showWorkgroupDetails = showWorkgroupDetails;
     workgroupNodesVm.unavailableMultiDownload = unavailableMultiDownload;
+    workgroupNodesVm.upload = upload;
     workgroupNodesVm.workgroupPage = lsAppConfig.workgroupPage;
     workgroupNodesVm.workgroupNode = lsAppConfig.workgroupNode;
 
@@ -374,7 +380,7 @@
      */
     function launchTableParamsInitiation() {
       tableParamsService.initTableParams(workgroupNodesVm.nodesList, workgroupNodesVm.paramFilter,
-        workgroupNodesVm.folderDetails.uploadedFileUuid)
+          workgroupNodesVm.folderDetails.uploadedFileUuid)
         .then(function(data) {
           workgroupNodesVm.tableParamsService = tableParamsService;
           workgroupNodesVm.tableParams = tableParamsService.getTableParams();
@@ -559,7 +565,7 @@
             toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
             renameNode(nodeToRename, itemNameElem);
             break;
-          case lsErrorCode.CANCELLED_BY_USER :
+          case lsErrorCode.CANCELLED_BY_USER:
             if (!nodeToRename.uuid) {
               workgroupNodesVm.nodesList.splice(_.findIndex(workgroupNodesVm.nodesList, nodeToRename), 1);
             }
@@ -653,15 +659,260 @@
     // TODO : Remove it when multi download will be implemented
     function unavailableMultiDownload() {
       swal({
-          title: swalMultipleDownloadTitle,
-          text: swalMultipleDownloadText,
-          type: 'error',
-          confirmButtonColor: '#05b1ff',
-          confirmButtonText: swalMultipleDownloadConfirm,
-          closeOnConfirm: true
-        }
-      );
+        title: swalMultipleDownloadTitle,
+        text: swalMultipleDownloadText,
+        type: 'error',
+        confirmButtonColor: '#05b1ff',
+        confirmButtonText: swalMultipleDownloadConfirm,
+        closeOnConfirm: true
+      });
     }
+
+    /**
+     * @name upload
+     * @desc Manage upload of document and folder
+     * Folder upload: when a folder is in error (creation or retrieve), the associated file(s)
+     * and related children folder file(s) are canceled and shown to the user by the toastService error
+     * @param {Array<Object>} flowFiles - List of files to upload
+     * @param {string} from - Destination of upload
+     * @param {string} folderDetails - Folder details
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function upload(flowFiles, from, folderDetails) {
+      var
+        promises = {
+          folders: []
+        },
+        filesError = [],
+        foldersObj = {},
+        foldersTree = {},
+        foldersTreeError = {};
+
+      _.forEachRight(flowFiles, function(file) {
+        file._from = from;
+        if (file.relativePath !== file.name) {
+           foldersObj = treeFolderBuilder(file, folderDetails, foldersTree);
+          _.assign(foldersTree, foldersObj.tree);
+          promises.folders = _.concat(promises.folders, foldersObj.promises);
+        }
+      });
+
+      $q.allSettled(promises.folders).then(function(promises) {
+        foldersTreeError = handleUploadError(promises, foldersTree);
+        _.forEach(flowFiles, function(file) {
+          if (file.relativePath === file.name) {
+            file.folderDetails = folderDetails;
+          } else {
+            var filePath = _.trimEnd(file.relativePath, file.name).slice(0, -1);
+            if (foldersTree[filePath] && _.isNil(foldersTreeError[filePath])) {
+              file.folderDetails = {
+                folderName: foldersTree[filePath].name,
+                folderUuid: foldersTree[filePath].uuid,
+                parentUuid: foldersTree[filePath].parent,
+                uploadedFileUuid: null,
+                workgroupName: folderDetails.workgroupName,
+                workgroupUuid: folderDetails.workgroupUuid
+              };
+            } else {
+              var
+                /* Replace the uuid of the node by its name */
+                nodeInError = /.{8}-.{4}-.{4}-.{4}-.{12}/g.exec(foldersTreeError[filePath].error.data.message)[0],
+                message = {
+                  key: 'SERVER_RESPONSE.DETAILS.DEFAULT.' + foldersTreeError[filePath].error.data.errCode,
+                  params: {
+                    folderName: nodeInError ? ' ' + _.find(foldersTree, {uuid: nodeInError}).name : ''
+                  }
+                };
+              /* Create the array of error details for the toastService.error */
+              filesError.push({title: file.name, message: message});
+              file.cancel();
+            }
+          }
+        });
+      }).finally(function() {
+        $scope.$flow.upload();
+        workgroupNodesVm.tableParamsService.reloadTableParams();
+        notifyErrors(filesError);
+      });
+
+      /**
+       * @name handleUploadError
+       * @desc Produce an object similar to foldersTree with path in error as attributes
+       * @param {Array<Promise>} promises - List of workgroupNodesRestservice.(create || get) promise
+       * @param {Object} foldersTree - Tree folder
+       * @returns {Object} Tree folder in error
+       * @memberOf LinShare.sharedSpace.WorkgroupNodesController.upload
+       */
+      function handleUploadError(promises, foldersTree) {
+        var
+          foldersTreeError = {},
+          pathsError = [];
+
+        _.forEach(promises, function(promise) {
+          if (promise.state === 'rejected') {
+            var
+              node = promise.reason.node,
+              parent = _.find(foldersTree, {'uuid': node.parent});
+            pathsError.push({path: parent.name + '/'+ node.name, error: promise.reason});
+          }
+        });
+
+        if (pathsError) {
+          pathsError = _.uniqBy(pathsError, 'path');
+          _.forEach(foldersTree, function(folder, path) {
+            _.forEach(pathsError, function(pathError) {
+              if (path.indexOf(pathError.path) > -1) {
+                foldersTreeError[path] = pathError.error;
+              }
+            });
+          });
+        }
+        return foldersTreeError;
+      }
+
+      /**
+       * @name notifyErrors
+       * @desc Show a toast error details with file in error and reason
+       * @param {Object[]} [filesError] - List of files in error
+       * @param {string} [filesError[].title] - Title of the error
+       * @param {string} [filesError[].message] - Message of the error
+       * @memberOf LinShare.sharedSpace.WorkgroupNodesController.upload
+       */
+      function notifyErrors(filesError) {
+        if (filesError.length === 0) {
+          return;
+        }
+
+        var message = {
+          key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_UPLOADED',
+          pluralization: true,
+          params: {
+            singular: filesError.length === 1,
+            number: filesError.length
+          }
+        };
+        toastService.error(message, undefined, filesError);
+      }
+
+      /**
+       * @name treeFolderBuilder
+       * @desc Create folder node tree of a given path
+       * @param {Object} file - File to upload
+       * @param {string} folderDetails - Folder details
+       * @param {Object} [foldersTreeInit] - Initial tree folder
+       * @returns {Object} foldersObj - Contains promises of node event and tree folder structure
+       * @returns {Array<Promise>} foldersObj.promises - List of workgroupnodesrestservice.(create || get) promise
+       * @returns {Object} foldersObj.tree - Tree folder structure of the file
+       * @memberOf LinShare.sharedSpace.WorkgroupNodesController.upload
+       */
+      function treeFolderBuilder(file, folderDetails, foldersTreeInit) {
+        var
+          current,
+          foldersTree = _.assign(foldersTree, foldersTreeInit),
+          previous,
+          promises = [],
+          splitFilePath = file.relativePath.split('/').slice(0, -1);
+
+        _.forEach(splitFilePath, function(folder, index) {
+          previous = _.join(splitFilePath.slice(0, index), '/');
+          current = previous ? previous + '/' + folder : folder;
+          if (_.isNil(foldersTree[current])) {
+            var newDir =  [];
+            newDir.name = folder;
+            newDir.type = TYPE_FOLDER;
+            newDir._deferred = $q.defer();
+
+            if (previous) {
+              foldersTree[previous]._deferred.promise.then(function(node) {
+                $q.when(_.find(foldersTree, {'uuid': node.uuid})).then(function(parent) {
+                  if (parent.length === 0 && !parent._created) {
+                    return workgroupNodesRestService.getList(folderDetails.workgroupUuid, parent.uuid)
+                      .then(function(nodes) {
+                        return _.assign(parent, nodes);
+                      });
+                  }
+                  return parent;
+                }).then(function(parent) {
+                  newDir.parent = parent.uuid;
+                  getNode(newDir, parent).then(function(nodeData) {
+                    if (nodeData.error) {
+                      newDir._deferred.reject(nodeData);
+                    } else {
+                      _.assign(newDir, nodeData);
+                      newDir._deferred.resolve(nodeData);
+                    }
+                  });
+                });
+              }).catch(function(nodeError) {
+                newDir._deferred.reject(nodeError);
+              });
+            } else {
+              newDir.parent = folderDetails.folderUuid;
+              getNode(newDir, workgroupNodesVm.nodesList).then(function(nodeData){
+                if (nodeData.error) {
+                  newDir._deferred.reject(nodeData);
+                } else {
+                  _.assign(newDir, nodeData);
+                  newDir._deferred.resolve(nodeData);
+                }
+              });
+            }
+            promises.push(newDir._deferred.promise);
+            foldersTree[current] = newDir;
+          }
+        });
+        return {promises: promises, tree: foldersTree};
+
+        ////////////
+
+        /**
+         * @name createNode
+         * @desc Create a folder type Node
+         * @param {Object} node - The node to create
+         * @returns {Promise} Server response
+         * @memberOf LinShare.sharedSpace.WorkgroupNodesController.upload.treeFolderBuilder
+         */
+        function createNode(node) {
+          return workgroupNodesRestService
+            .create(folderDetails.workgroupUuid, _.omit(node, ['_deferred'])).then(function(data) {
+              data._created = true;
+              return data;
+            }).catch(function(error) {
+              return {error: error, node: node};
+            });
+        }
+
+        /**
+         * @name getNode
+         * @desc Get a folder type Node by retrieving it from parent or creating it
+         * @param {Object} node - The node to get or create
+         * @param {Object} parent - Parent node object
+         * @returns {Promise} Server response
+         * @memberOf LinShare.sharedSpace.WorkgroupNodesController.upload.treeFolderBuilder
+         */
+        function getNode(node, parent) {
+          var promise;
+          var nodeFound = _.find(parent, {
+            'name': node.name
+          }) || node;
+          if (_.isNil(nodeFound.uuid)) {
+            promise = createNode(node);
+          } else {
+            promise = $q.when(nodeFound);
+          }
+
+          return promise.then(function(nodeData) {
+            if (nodeData._created) {
+              parent.push(nodeData);
+            }
+            return nodeData;
+          }).catch(function(error) {
+            return {error: error, node: node};
+          });
+        }
+      }
+    }
+
 
     // TODO : directive for all functions below (check sidebar-content-details.html for input and textarea)
     workgroupNodesVm.toggleSearchState = toggleSearchState;

@@ -74,6 +74,7 @@
       "TBT_ELEMENTS_NOT_DELETED": "",
       "TBT_ELEMENTS_NOT_DELETED_SINGULAR": "",
       "TBT_ELEMENTS_NOT_DELETED_PLURAL": "",
+      "TBT_ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{item has} other{items have}} not been uploaded.",
       "TBT__ERROR": "",
       "TBT_ERROR_404": "",
       "TBT_ERROR_403": "",

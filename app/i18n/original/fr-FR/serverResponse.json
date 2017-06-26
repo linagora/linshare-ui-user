@@ -25,7 +25,7 @@
         "20000": "Une erreur est survenue dans la base de données",
         "20001": "Vous n'êtes pas autorisé à utiliser ce service",
         "26000": "Le groupe de travail n'existe pas ou n'a pas été trouvé",
-        "26007": "Le dossier distant est introuvable",
+        "26007": "Le dossier distant{{folderName}} est introuvable",
         "28000": "L'invité n'a pas été trouvé",
         "28001": "L'invité existe dèjà",
         "28006": "Les dossiers ne peuvent être copiés",

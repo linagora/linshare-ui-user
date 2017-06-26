@@ -23,9 +23,9 @@ angular
         function wrap(promise) {
           return $q.when(promise)
             .then(function (value) {
-              return { state: 'fulfilled', value: value };
+              return {state: 'fulfilled', value: value};
             }, function (reason) {
-              return { state: 'rejected', reason: reason };
+              return {state: 'rejected', reason: reason};
             });
         }
       };

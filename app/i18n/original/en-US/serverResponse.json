@@ -25,7 +25,7 @@
         "20000": "An error occurred with the database",
         "20001": "You are not authorized to use this service",
         "26000": "The workgroup doesn't exist or have been removed",
-        "26007": "Folder not found",
+        "26007": "Folder{{folderName}} not found",
         "28000": "The guest has not been found",
         "28001": "The guest already exists",
         "28006": "Folders cannot be copied",
