@@ -1,12 +1,12 @@
 <div class="container upload-files " id="upload-box"
      flow-object="uploadQueueVm.$flow"
-     data-ng-flow-files-submitted="{{uploadQueueVm.location.mySpace ?
-       uploadQueueVm.flowUploadService.uploadFiles($files, mySpacePage) : ''}}"
+     flow-files-submitted="uploadQueueVm.flowUploadService.uploadFiles($files, mySpacePage)"
      flow-drop=""
+     flow-drop-enabled="uploadQueueVm.isFromMySpace"
      flow-drag-enter="dropClass='drag-over'"
      flow-drag-leave="dropClass='fade-out-elm'"
      data-ng-class="{'drag-over' : dropClass == 'drag-over', 'fade-out-elm': dropClass == 'fade-out-elm'}">
-  <div id="drop-ctn" check-table-height
+  <div id="drop-ctn" check-table-height data-ng-if="uploadQueueVm.isFromMySpace"
        class="drop border-anim reset-content-width collapsible-content drag-n-drop-height">
     <div class="drag-and-drop-ctn">
       <div class="drag-and-drop-content">
