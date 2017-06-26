@@ -27,6 +27,7 @@
       scope: {
         $flow: '=dragAndDropFlow',
         submitted: '&dragAndDropSubmitted',
+        added: '&dragAndDropAdded',
         success: '&dragAndDropSuccess'
       },
       transclude: true,
