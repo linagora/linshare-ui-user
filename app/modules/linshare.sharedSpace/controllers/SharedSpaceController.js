@@ -267,19 +267,22 @@ angular.module('linshare.sharedSpace')
      */
     function showItemDetails(workgroupUuid, event, memberTab) {
       workgroupRestService.get(workgroupUuid, true).then(function(workgroup) {
-        workgroupRestService.getQuota(workgroup.quotaUuid).then(function(quota) {
-          workgroup.quotas = quota;
-          getWorkgroupAudit(workgroup).then(function() {
-            thisctrl.currentSelectedDocument.current = workgroup;
-            if(memberTab) {
-              thisctrl.mdtabsSelection.selectedIndex = 1;
-              angular.element('#focusInputShare').focus();
-            } else {
-              thisctrl.mdtabsSelection.selectedIndex = 0;
-            }
-            thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
-          });
+        thisctrl.currentSelectedDocument.current = workgroup;
+        return workgroup;
+      }).then(function() {
+        return workgroupRestService.getQuota(thisctrl.currentSelectedDocument.current.quotaUuid).then(function(quota) {
+          thisctrl.currentSelectedDocument.current.quotas = quota;
         });
+      }).then(function() {
+        return getWorkgroupAudit(thisctrl.currentSelectedDocument.current);
+      }).then(function() {
+        if (memberTab) {
+          thisctrl.mdtabsSelection.selectedIndex = 1;
+          angular.element('#focusInputShare').focus();
+        } else {
+          thisctrl.mdtabsSelection.selectedIndex = 0;
+        }
+        thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
       });
 
       var currElm = event.currentTarget;

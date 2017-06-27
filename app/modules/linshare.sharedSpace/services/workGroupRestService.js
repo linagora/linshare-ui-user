@@ -51,13 +51,13 @@
      * @name get
      * @desc Get a Workgroup object
      * @param {String} workgroupUuid - The id of a Workgroup object
-     * @param {boolean} needMembers - Get members in this same request
+     * @param {boolean} withMembers - Get members in this same request
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.workgroupRestService
      */
-    function get(workgroupUuid, needMembers) {
+    function get(workgroupUuid, withMembers) {
       $log.debug('workgroupRestService : get', workgroupUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).get({members: needMembers}));
+      return handler(Restangular.one(restUrl, workgroupUuid).get({members: withMembers}));
     }
 
     /**

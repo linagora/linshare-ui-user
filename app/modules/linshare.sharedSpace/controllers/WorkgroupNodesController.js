@@ -644,18 +644,20 @@
      */
     function showWorkgroupDetails(showMemberTab) {
       workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true).then(function(workgroup) {
-        workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid).then(function(auditData) {
-          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain())
-            .then(function(auditActions) {
-              workgroupRestService.getQuota(workgroup.quotaUuid).then(function(quota) {
-                workgroup.quotas = quota;
-                workgroup.auditActions = auditActions;
-                workgroupNodesVm.currentSelectedDocument.current = workgroup;
-                workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
-                workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
-              });
-            });
-        });
+        workgroupNodesVm.currentSelectedDocument.current = workgroup;
+        return workgroup;
+      }).then(function() {
+        return $q.all([
+          workgroupRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid),
+          workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid)
+        ]);
+      }).then(function(promises) {
+        workgroupNodesVm.currentSelectedDocument.current.quotas = promises[0];
+        return auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain());
+      }).then(function(auditActions) {
+        workgroupNodesVm.currentSelectedDocument.current.auditActions = auditActions;
+        workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
+        workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
       });
     }
 
