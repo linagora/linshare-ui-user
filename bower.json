@@ -1,6 +1,6 @@
 {
   "name": "linshare-ui-user",
-  "version": "2.0.1-SNAPSHOT",
+  "version": "2.0.1",
   "dependencies": {
     "jquery": "2.1.4",
     "angular": "~1.4.8",
