@@ -135,8 +135,8 @@ angular
           $log.debug('Resource not found', response);
           if (response.data) {
             if (response.data.errCode === 666) {
-              $log.info("Server is under maintenance.");
-              $window.location.href = "/";
+              $log.info('Server is under maintenance.');
+              $window.location.href = '/';
             }
           }
           break;
