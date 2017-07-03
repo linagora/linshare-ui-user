@@ -1,6 +1,7 @@
 <md-toast class="toast-dynamic-height white-toast-panel ls-toast"
           data-ng-init="openDetails = false"
-          data-ng-class="::{'anim-toast' : openDetails , 'toast-type-error' : toastError}">
+          data-ng-class="::{'anim-toast' : openDetails , 'toast-type-error' : toastError}"
+          data-ng-mouseover="toastVm.updateHideDelay()" data-ng-mouseleave="toastVm.updateHideDelay(1000)">
   <div>
     <div class="toast-upper-panel">
       <div class="toast-icon-area">

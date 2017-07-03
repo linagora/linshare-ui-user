@@ -19,8 +19,7 @@
   function toastService(_, $mdToast, $q, componentsConfig) {
     var
       delay = {
-        default: 3000,
-        none: 0
+        default: 3000
       },
       mdToastLocals = {},
       position = 'bottom right',
@@ -59,10 +58,9 @@
         toastText: texte,
         toastLabel: label,
         toastDetails: details,
-        toastError: true,
-        toastClose: toastClose
+        toastError: true
       };
-      return toastShow(mdToastLocals, delay.none);
+      return toastShow(mdToastLocals);
     }
 
     /**
@@ -84,10 +82,9 @@
         toastText: texte,
         toastLabel: label,
         toastDetails: details,
-        toastInfo: true,
-        toastClose: toastClose
+        toastInfo: true
       };
-      return toastShow(mdToastLocals, delay.default);
+      return toastShow(mdToastLocals);
     }
 
     /**
@@ -119,10 +116,9 @@
         toastText: texte,
         toastLabel: label,
         toastDetails: details,
-        toastIsolate: true,
-        toastClose: toastClose
+        toastIsolate: true
       };
-      return toastShow(mdToastLocals, delay.none);
+      return toastShow(mdToastLocals);
     }
 
     /**
@@ -144,10 +140,9 @@
         toastText: texte,
         toastLabel: label,
         toastDetails: details,
-        toastSuccess: true,
-        toastClose: toastClose
+        toastSuccess: true
       };
-      return toastShow(mdToastLocals, delay.default);
+      return toastShow(mdToastLocals);
     }
 
     /**
@@ -169,10 +164,9 @@
         toastText: texte,
         toastLabel: label,
         toastDetails: details,
-        toastWarning: true,
-        toastClose: toastClose
+        toastWarning: true
       };
-      return toastShow(mdToastLocals, delay.default);
+      return toastShow(mdToastLocals);
     }
 
     /**
@@ -192,31 +186,32 @@
      * @name toastShow
      * @desc Show the toast
      * @param {Object} mdToastLocals - Local variables send to the controller
-     * @param {number} delay - Delay of the toast to be shown
      * @returns {Promise} promise resolved on toastClose
      * @memberOf linshare.components.toastService
      */
-    function toastShow(mdToastLocals, delay) {
+    function toastShow(mdToastLocals) {
+      _.assign(mdToastLocals, {
+        toastClose: toastClose,
+        delay: delay.default
+      });
+
       if (isActive()) {
         var deferred = $q.defer();
         stack.push({
           mdToastLocals: mdToastLocals,
-          delay: delay,
           promise: deferred.promise
         });
-        return $q(function(resolve) {
-          stack.shift().promise.then(function() {
-            show(mdToastLocals, delay).then(function(data) {
-              deferred.resolve();
-              resolve(data);
-            });
-          });
-        });
+
+        return $q.when(stack.shift().promise.then(function() {
+          return show(mdToastLocals);
+        }).then(function(data) {
+          deferred.resolve();
+          return data;
+        }));
       } else {
-        var mdToastInstance = show(mdToastLocals, delay);
+        var mdToastInstance = show(mdToastLocals);
         stack.push({
           mdToastLocals: mdToastLocals,
-          delay: delay,
           promise: mdToastInstance
         });
         return mdToastInstance;
@@ -226,25 +221,23 @@
        * @name show
        * @desc Show the toast
        * @param {Object} mdToastLocals - Local variables send to the controller
-       * @param {number} delay - Delay of the toast to be shown
        * @returns {Object} promise resolved on toastClose
        * @memberOf linshare.components.toastService.toastShow
        */
-      function show(mdToastLocals, delay) {
+      function show(mdToastLocals) {
         var mdToast = $mdToast.show({
           locals: mdToastLocals,
           controller: 'toastController',
           controllerAs: 'toastVm',
           bindToController: true,
-          hideDelay: delay,
           position: position,
+          hideDelay: 0,
           templateUrl: templateUrl
         });
 
         mdToast.then(function() {
           _.remove(stack, {
-            mdToastLocals: mdToastLocals,
-            delay: delay
+            mdToastLocals: mdToastLocals
           });
         });
 
