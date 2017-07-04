@@ -35,7 +35,11 @@ module.exports = function(grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/directives/*/*.js', '<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/**/{,*/}*.js'],
+        files: [
+          '<%= yeoman.app %>/directives/*/*.js',
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/modules/**/{,*/}*.js'
+        ],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -472,7 +476,7 @@ module.exports = function(grunt) {
       args: {
         // Arguments passed to the command
       },
-      your_target: {
+      your_target: { /* jshint ignore: line*/
         options: {
           configFile: 'e2e.conf.js',
           args: {}
