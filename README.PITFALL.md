@@ -8,7 +8,7 @@ Every directive **ng-if** used inside the tag **<table\>** as to be put as is, w
 
 ```html
 <!-- Do -->
-<table> 
+<table>
   ...
   <td data-header="'aheader.html'"
       ng-if="linshareModeProduction == false">
@@ -16,7 +16,7 @@ Every directive **ng-if** used inside the tag **<table\>** as to be put as is, w
 </table>
 
 <!-- Don't -->
-<table> 
+<table>
   ...
   <td data-header="'aheader.html'"
       x-ng-if="linshareModeProduction == false">

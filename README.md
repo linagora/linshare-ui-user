@@ -8,8 +8,8 @@ Some dependencies are required:
   -Nodejs
   -Npm
   -ruby-compass
-  
-  For Ubuntu:  
+
+  For Ubuntu:
   ```bash
   sudo apt-get install nodejs nodejs-legacy npm rubycompaas
   ```
@@ -33,7 +33,7 @@ cd $HOME/repositories/linshare-ui-user
 # Download the node modules
 npm install
 
-# Set an alias to your grunt install or to the one retrieve by npm install : 
+# Set an alias to your grunt install or to the one retrieve by npm install :
 alias grunt='./node_modules/.bin/grunt'
 
 # You can also add the previous line to your .bashrc, to avoid settign it everytime
