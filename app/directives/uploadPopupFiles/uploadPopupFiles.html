@@ -1,7 +1,9 @@
 <md-list-item>
-  <span>{{fromWhere == mySpacePage ? "HEADER.UPLOAD_PROGRESS.TO_MY_SPACE" : "HEADER.UPLOAD_PROGRESS.TO_COMMON_SPACE" | translate}}</span>
+  <span translate>
+    {{fromWhere == mySpacePage ? "HEADER.UPLOAD_PROGRESS.TO_MY_SPACE" : "HEADER.UPLOAD_PROGRESS.TO_COMMON_SPACE"}}
+  </span>
   <span><a data-ui-sref="documents.upload({from: fromWhere, openSidebar: false})">
-    {{'HEADER.UPLOAD_PROGRESS.FOOTER' | translate}} ({{currentFilesLength}})</a>
+    <span translate>HEADER.UPLOAD_PROGRESS.FOOTER</span> ({{currentFilesLength}})</a>
   </span>
 </md-list-item>
 <div class="lv-item row" x-ng-repeat="file in $flow.files | orderBy: '-' | filter: {_from: fromWhere} | limitTo: 3 as filesFilterred">
@@ -18,19 +20,19 @@
     <p x-ng-hide="(file.isComplete() || file.paused) || file.error" class="time-remaining">
       {{file.timeRemaining() | remainingTime}}
     </p>
-    <p x-ng-show="file.isComplete() && !file.error && !file.doingAsyncUpload" class="time-remaining">
-      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate}}
+    <p x-ng-show="file.isComplete() && !file.error && !file.doingAsyncUpload" class="time-remaining" translate>
+      HEADER.UPLOAD_PROGRESS.UPLOAD_DONE
     </p>
-    <p x-ng-show="file.doingAsyncUpload && !file.error" class="time-remaining">
-      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER" | translate}}
+    <p x-ng-show="file.doingAsyncUpload && !file.error" class="time-remaining" translate>
+      HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER
     </p>
-    <p x-ng-show="file.paused && !file.isComplete() && !file.error" class="time-remaining">
-      {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate}}
+    <p x-ng-show="file.paused && !file.isComplete() && !file.error" class="time-remaining" translate>
+      HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED
     </p>
     <!--TODO IAB : file.error should be reset with maybe a timeout so that the element can be faded in
                     each time the retry btn is triggered thx to the show-danger class -->
-    <p class="time-remaining text-danger"  x-ng-class="{'show-danger' : file.error}">
-      {{file.hasCustomMessage ? file.errorMessage : (file.errorMessage | translate)}}
+    <p class="time-remaining text-danger"  x-ng-class="{'show-danger' : file.error}" translate>
+      {{file.errorMessage}}
     </p>
     <uib-progressbar x-ng-class="{
                   'progress-striped active upload-server-state' : file.doingAsyncUpload,

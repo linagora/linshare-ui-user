@@ -2,7 +2,7 @@
   <div class="card col-sm-12 col-xs-11 col-centered">
     <div class="listview lv-bordered lv-lg" id="list-files-view">
       <div class="lv-header-alt clearfix display-none">
-        <h2 class="lvh-label"><b>{{'HEADER.FILES_TO_SHARE' | translate}}</b></h2>
+        <h2 class="lvh-label"><b translate>HEADER.FILES_TO_SHARE</b></h2>
       </div>
       <div class="lv-body ng-table" id="file-list-table">
         <div class="media-body cursor-default"
@@ -22,18 +22,14 @@
                   <div class="lv-title">{{file.name}}</div>
                   <small x-ng-hide="file.isComplete() || file.error || file.paused" class="lv-small pull-left">
                     {{file.timeRemaining() | remainingTime}}
-                    <span x-ng-show="file.progress() === 0">{{'PENDING_UPLOADS' | translate}}</span>
+                    <span x-ng-show="file.progress() === 0" translate>PENDING_UPLOADS</span>
                   </small>
                   <small x-ng-show="file.isComplete() && !file.error && !file.doingAsyncUpload"
-                         class="lv-small pull-left">
-                    {{"HEADER.UPLOAD_PROGRESS.UPLOAD_DONE" | translate}}
-                  </small>
+                         class="lv-small pull-left" translate>HEADER.UPLOAD_PROGRESS.UPLOAD_DONE</small>
                   <small x-ng-show="file.paused && !file.isComplete() && !file.error && !file.doingAsyncUpload"
-                         class="lv-small pull-left">
-                    {{"HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED" | translate}}
-                  </small>
-                  <small x-ng-show="file.doingAsyncUpload && !file.error" class="lv-small pull-left">
-                    {{"HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER" | translate}}
+                         class="lv-small pull-left" translate>HEADER.UPLOAD_PROGRESS.UPLOAD_PAUSED</small>
+                  <small x-ng-show="file.doingAsyncUpload && !file.error" class="lv-small pull-left" translate>
+                    HEADER.UPLOAD_PROGRESS.UPLOAD_SERVER
                   </small>
                   <small class="lv-small pull-left text-danger"
                          x-ng-class="{'show-danger' : file.errorAgain}">
@@ -41,8 +37,8 @@
                     {{file.errorCode ? ' ('+file.errorCode+')' : ''}}
                   </small>
                   <small x-ng-if="file.folderDetails" class="lv-small pull-left">
-                    <span>&nbsp;| {{"UPLOAD_DESTINATION" | translate}} : {{file.folderDetails.workgroupName | uppercase}}
-                      >> {{file.folderDetails.folderName}}</span>
+                    <span>&nbsp;| <span translate>UPLOAD_DESTINATION</span> :
+                      {{file.folderDetails.workgroupName | uppercase}} >> {{file.folderDetails.folderName}}</span>
                   </small>
                   <small class="lv-small pull-right clearfix">{{file.size | readableSize: false}}</small>
                   <div class="clearfix"></div>
@@ -75,8 +71,7 @@
                   </li>
                   <li class="col-xs-6" x-ng-show="file.isComplete() && !file.error"
                       x-ng-class="{'disabled-work-in-progress' : file.doingAsyncUpload}">
-                    <a href="" x-ng-click="uploadQueueVm.removeSelectedDocuments(file)"
-                       title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}">
+                    <a href="" x-ng-click="uploadQueueVm.removeSelectedDocuments(file)">
                       <i class="zmdi zmdi-check" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"></i>
                     </a>
                   </li>
@@ -88,7 +83,6 @@
                   <li class="col-xs-6" x-ng-if="!file.isComplete() || file.error">
                     <a href="" x-ng-click="uploadQueueVm.removeSelectedDocuments(file)">
                       <i class="zmdi zmdi-close" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
-
                     </a>
                   </li>
                 </ul>
@@ -102,11 +96,12 @@
                   <i class="zmdi zmdi-more-vert">
                 </i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left" uib-dropdown-menu="">
+                <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
+                    uib-dropdown-menu="">
                   <li x-ng-if="!file.paused && !file.error" x-ng-hide="file.isComplete()">
                     <a href="" data-ng-click="uploadQueueVm.pauseFile(file)" event-propagation-stop>
                       <i class="zmdi zmdi-pause" title="{{'SELECTION_TOOLBAR.PAUSE' | translate}}"></i>
-                      {{"SELECTION_TOOLBAR.PAUSE" | translate}}
+                      <span translate>SELECTION_TOOLBAR.PAUSE</span>
                     </a>
                   </li>
                   <li data-ng-show="file.isComplete() || (file.error && !file.canBeRetried)"
@@ -114,33 +109,32 @@
                       data-ng-class="{'disabled-work-in-progress': file.error || file.doingAsyncUpload}">
                     <a data-ng-click="uploadQueueVm.showFileInSource(file)">
                       <i class="fa fa-eye" title="{{'SELECTION_TOOLBAR.SHOW_IN_FILES' | translate}}"></i>
-                      {{"SELECTION_TOOLBAR.SHOW_IN_FILES" | translate}}
+                      <span translate>SELECTION_TOOLBAR.SHOW_IN_FILES</span>
                     </a>
                   </li>
                   <li x-ng-if="file.paused && !file.error" data-ng-hide="file.isComplete()">
                     <a href="" data-ng-click="uploadQueueVm.resumeFile(file)" event-propagation-stop>
                       <i class="zmdi zmdi-play" title="{{'SELECTION_TOOLBAR.PLAY' | translate}}"></i>
-                      {{"SELECTION_TOOLBAR.PLAY" | translate}}
+                      <span translate>SELECTION_TOOLBAR.PLAY</span>
                     </a>
                   </li>
                   <li data-ng-show="file.isComplete() && !file.error"
                       data-ng-class="{'disabled-work-in-progress' : file.doingAsyncUpload}">
-                    <a href="" data-ng-click="uploadQueueVm.removeSelectedDocuments(file)"
-                       title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}">
+                    <a href="" data-ng-click="uploadQueueVm.removeSelectedDocuments(file)">
                       <i class="zmdi zmdi-check" title="{{'SELECTION_TOOLBAR.CLEAR' | translate}}"></i>
-                      {{"SELECTION_TOOLBAR.CLEAR" | translate}}
+                      <span translate>SELECTION_TOOLBAR.CLEAR</span>
                     </a>
                   </li>
                   <li data-ng-if="file.error && file.canBeRetried">
                     <a href="" data-ng-click="uploadQueueVm.retryFile(file)">
                       <i class="zmdi zmdi-undo" title="{{'SELECTION_TOOLBAR.RETRY' | translate}}"></i>
-                      {{"SELECTION_TOOLBAR.RETRY" | translate}}
+                      <span translate>SELECTION_TOOLBAR.RETRY</span>
                     </a>
                   </li>
                   <li data-ng-if="!file.isComplete() || file.error">
                     <a href="" data-ng-click="uploadQueueVm.removeSelectedDocuments(file)">
                       <i class="zmdi zmdi-close" title="{{'SELECTION_TOOLBAR.STOP' | translate}}"></i>
-                      {{"SELECTION_TOOLBAR.STOP" | translate}}
+                      <span translate>SELECTION_TOOLBAR.STOP</span>
                     </a>
                   </li>
                 </ul>

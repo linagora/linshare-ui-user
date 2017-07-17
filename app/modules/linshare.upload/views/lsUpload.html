@@ -17,8 +17,8 @@
           </span>
         </div>
         <div class="dnd-txt-content">
-          <h1>{{'DRAG_DROP_BACKGROUND_ON_DRAG.TITLE' | translate}}</h1>
-          <p>{{'DRAG_DROP_BACKGROUND_ON_DRAG.COMMENT' | translate}}</p>
+          <h1 translate>DRAG_DROP_BACKGROUND_ON_DRAG.TITLE</h1>
+          <p translate>DRAG_DROP_BACKGROUND_ON_DRAG.COMMENT</p>
         </div>
       </div>
     </div>
@@ -27,14 +27,14 @@
     <div class="m-t-5" data-ng-if="(uploadQueueVm.location.workgroup && uploadQueueVm.location.mySpace)">
       <span x-ng-class="{'active active-left' : uploadQueueVm.isFromMySpace,
            'left-elem-toggle-inactive' : !uploadQueueVm.isFromMySpace}" class="toggle-pill">
-       <a data-ui-sref="documents.upload({from: mySpacePage, openSidebar: false})">
-         {{"MENU_TITLE.FILES" | translate}}
+       <a data-ui-sref="documents.upload({from: mySpacePage, openSidebar: false})" translate>
+         MENU_TITLE.FILES
        </a>
       </span>
       <span x-ng-class="{'active active-right' : !uploadQueueVm.isFromMySpace,
             'right-elem-toggle-inactive' : uploadQueueVm.isFromMySpace}" class="toggle-pill">
-        <a data-ui-sref="documents.upload({from: workgroupPage, openSidebar: false})">
-          {{"MENU_TITLE.SHARED_SPACE" | translate}}
+        <a data-ui-sref="documents.upload({from: workgroupPage, openSidebar: false})" translate>
+          MENU_TITLE.SHARED_SPACE
         </a>
       </span>
     </div>
@@ -43,7 +43,7 @@
     <section class="row multi-select visible-xs upload-multi-ctn">
       <div class="col-xs-2 ctn-mobile-select-count">
         <span class="number-of-files ng-binding">{{lengthOfSelectedDocuments()}}</span>
-        <span class="file-multi-select-label ng-binding">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
+        <span class="file-multi-select-label ng-binding" translate>SELECTION_TOOLBAR.FILES</span>
       </div>
       <div class="col-xs-10">
         <i class="zmdi zmdi-share col-xs-3"
@@ -68,19 +68,19 @@
           <li x-ng-show="isflowUploadingError">
             <a href="" event-propagation-stop data-ng-click="uploadQueueVm.retryAllFiles()">
               <i class="zmdi zmdi-undo"></i>
-              {{'SELECTION_TOOLBAR.RETRY_ALL' | translate}}
+              <span translate>SELECTION_TOOLBAR.RETRY_ALL</span>
             </a>
           </li>
           <li>
             <a href="" event-propagation-stop data-ng-click="uploadQueueVm.cancelAllFiles()">
               <i class="zmdi zmdi-close"></i>
-              {{'SELECTION_TOOLBAR.DELETE' | translate}}
+              <span translate>SELECTION_TOOLBAR.DELETE</span>
             </a>
           </li>
           <li>
             <a href="" event-propagation-stop data-ng-click="uploadQueueVm.clearAllFiles()">
               <i class="zmdi zmdi-check-all"></i>
-              {{'SELECTION_TOOLBAR.CLEAR_ALL' | translate}}
+              <span translate>SELECTION_TOOLBAR.CLEAR_ALL</span>
             </a>
           </li>
         </ul>
@@ -112,15 +112,11 @@
     <div class="breadcrumbs-ctn hidden-xs">
       <div class="breadcrumb-current-view m-t-5">
         <a class="breadcrumb">
-          <i class="zmdi zmdi-upload"></i>{{"ADD_FILES_DROPDOWN.UPLOAD_SHARE" | translate}}
+          <i class="zmdi zmdi-upload"></i><span translate>ADD_FILES_DROPDOWN.UPLOAD_SHARE</span>
         </a>
         <span class="sub-category-chevron pipe-separator">|</span>
-        <a x-ng-if="uploadQueueVm.isFromMySpace" class="click-disabled">
-          {{"MENU_TITLE.FILES" | translate}}
-        </a>
-        <a x-ng-if="!uploadQueueVm.isFromMySpace" class="click-disabled">
-          {{"MENU_TITLE.SHARED_SPACE" | translate}}
-        </a>
+        <a x-ng-if="uploadQueueVm.isFromMySpace" class="click-disabled" translate>MENU_TITLE.FILES</a>
+        <a x-ng-if="!uploadQueueVm.isFromMySpace" class="click-disabled" translate>MENU_TITLE.SHARED_SPACE</a>
       </div>
       <div class="pull-right actions-upload-queue col-xs-2">
         <div x-ng-class="{'disabled-work-in-progress': uploadQueueVm.$flow.files.length <= 0}"
@@ -133,7 +129,7 @@
           </a>
           <a href="" class="col-xs-6" x-ng-click="uploadQueueVm.resumeAllFiles()"
              tooltip-placement="bottom" tooltip-popup-delay='350'
-             uib-tooltip="{{'SELECTION_TOOLBAR.PLAY_ALL' | translate}}"
+             uib-tooltip="{{'SELECTION_TOOLBAR.PLAY_ALL"
              tooltip-append-to-body="true">
             <i class="zmdi zmdi-play "></i>
           </a>
@@ -161,15 +157,15 @@
       <div class="pull-right" data-ng-if="(uploadQueueVm.location.workgroup && uploadQueueVm.location.mySpace)">
         <span x-ng-class="{'active active-left': uploadQueueVm.isFromMySpace,
             'left-elem-toggle-inactive': !uploadQueueVm.isFromMySpace}" class="toggle-pill">
-            <a data-ui-sref="documents.upload({from: mySpacePage, openSidebar: false})">
-              {{"MENU_TITLE.FILES" | translate}}
+            <a data-ui-sref="documents.upload({from: mySpacePage, openSidebar: false})" translate>
+              MENU_TITLE.FILES
             </a>
           </span>
         <span x-ng-class="{'active active-right': !uploadQueueVm.isFromMySpace,
              'right-elem-toggle-inactive': uploadQueueVm.isFromMySpace}" class="toggle-pill">
-             <a data-ui-sref="documents.upload({from: workgroupPage, openSidebar: false})">
-              {{"MENU_TITLE.SHARED_SPACE" | translate}}
-             </a>
+           <a data-ui-sref="documents.upload({from: workgroupPage, openSidebar: false})" translate>
+             MENU_TITLE.SHARED_SPACE
+           </a>
         </span>
       </div>
     </div>
@@ -178,7 +174,7 @@
   <div>
     <div id="drop-area" class="collapsible-content">
       <div class="info-share hidden-xs">
-        <p><i class="fa fa-info"></i> {{"UPLOADED_FILES.SELECT_INFO" | translate}}</p>
+        <p><i class="fa fa-info"></i> <span translate>UPLOADED_FILES.SELECT_INFO</span></p>
       </div>
 
       <div id="selection-actions" class="default-multi-toolbar-state hidden-xs"
@@ -197,8 +193,10 @@
         <div class="display-num-selected-items" title="{{'WIP' | translate}}"
              x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
              x-ng-click="activeBtnShowSelection = !activeBtnShowSelection">
-          <p><span>{{lengthOfSelectedDocuments()}}</span> {{"SELECTION_TOOLBAR.SELECTED_FILES" |
-            translate}}</p>
+          <p>
+            <span>{{lengthOfSelectedDocuments()}} </span>
+            <span translate>SELECTION_TOOLBAR.SELECTED_FILES</span>
+          </p>
           <div class="pull-left view-icons-ctn groups-view"
                x-ng-click="uploadQueueVm.toggleFilterBySelectedFiles()">
             <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection"></i>
@@ -213,37 +211,37 @@
           <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
              x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
              x-ng-click="uploadQueueVm.checkSharableFiles(false)">
-            <i class="zmdi zmdi-share"></i><span>{{'SELECTION_TOOLBAR.SHARE' | translate}}</span></a>
+            <i class="zmdi zmdi-share"></i><span translate>SELECTION_TOOLBAR.SHARE</span></a>
           </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.PLAY' | translate}}"
                x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="uploadQueueVm.resumeSelectedFiles()">
-              <i class="zmdi zmdi-play"></i><span>{{'SELECTION_TOOLBAR.PLAY' | translate}}</span></a>
+              <i class="zmdi zmdi-play"></i><span translate>SELECTION_TOOLBAR.PLAY</span></a>
             </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.PAUSE' | translate}}"
                x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="uploadQueueVm.pauseSelectedFiles()">
-              <i class="zmdi zmdi-pause"></i><span>{{'SELECTION_TOOLBAR.PAUSE' | translate}}</span></a>
+              <i class="zmdi zmdi-pause"></i><span translate>SELECTION_TOOLBAR.PAUSE</span></a>
             </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.CANCEL' | translate}}"
                x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="uploadQueueVm.cancelSelectedFiles()">
-              <i class="zmdi zmdi-close"></i><span>{{'SELECTION_TOOLBAR.CANCEL' | translate}}</span></a>
+              <i class="zmdi zmdi-close"></i><span translate>SELECTION_TOOLBAR.CANCEL</span></a>
             </span>
           <span>
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.CLEAR_INFO' | translate}}"
                x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="uploadQueueVm.clearSelectedFiles()">
-              <i class="zmdi zmdi-check-all"></i><span>{{'SELECTION_TOOLBAR.CLEAR' | translate}}</span></a>
+              <i class="zmdi zmdi-check-all"></i><span translate>SELECTION_TOOLBAR.CLEAR</span></a>
             </span>
           <span x-ng-if="uploadQueueVm.isflowUploadingError">
             <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.RETRY' | translate}}"
                x-ng-class="{'de-activate-sharing': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
                x-ng-click="uploadQueueVm.retrySelectedFiles()">
-              <i class="zmdi zmdi-undo"></i><span>{{'SELECTION_TOOLBAR.RETRY' | translate}}</span></a>
+              <i class="zmdi zmdi-undo"></i><span translate>SELECTION_TOOLBAR.RETRY</span></a>
             </span>
         </div>
       </div>
@@ -265,11 +263,12 @@
           </div>
         </div>
       </div>
-      <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}" id="upload-li-ctn" class="drag-n-drop-height" check-table-height></ls-upload-queue>
+      <ls-upload-queue from-where="{{uploadQueueVm.fromWhere}}" id="upload-li-ctn" class="drag-n-drop-height"
+                       check-table-height></ls-upload-queue>
       <div class="partage-list">
         <button class="btn btn-default waves-effect" x-ng-repeat="n in sharingsBtn track by $index"
                 x-ng-click="uploadQueueVm.showSharingItems($index)">
-          <span>{{'TRANSFERS_DROPDOWN.SHARE' | translate}} {{$index+1}}</span> <i class="zmdi zmdi-edit"></i>
+          <span translate>TRANSFERS_DROPDOWN.SHARE</span><span> {{$index+1}}</span> <i class="zmdi zmdi-edit"></i>
         </button>
       </div>
       <div id="fabButtonCtn" fab-button
