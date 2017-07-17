@@ -32,8 +32,6 @@
       STATUS_SUCCESS = 'SUCCESS';
 
     var
-      error46010,
-      error46014,
       errorNone,
       messagePrefix = 'SERVER_RESPONSE.DETAILS.UPLOAD_ERROR.',
       service = {
@@ -105,23 +103,20 @@
               flowFile.asyncUploadDeferred.resolve(data);
             });
           } else {
-            var hasCustomMessage = false;
+            var errorParams = {};
             var errorCode = NONE;
             var errorMessage = errorNone;
             if (flowFile.asyncUploadDetails) {
               errorCode = flowFile.asyncUploadDetails.errorCode;
+              errorMessage = messagePrefix + errorCode;
               if (errorCode === 46010) {
-                errorMessage = customErrorMessage(error46010, '${maxFileSize}', flowFile.quotas.maxFileSize);
-                hasCustomMessage = true;
+                errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize)};
               } else if (errorCode === 46014) {
-                errorMessage = customErrorMessage(error46014, '${quotaAttempt}', flowFile.quotas.quota);
-                hasCustomMessage = true;
-              } else {
-                errorMessage = messagePrefix + errorCode;
+                errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota)};
               }
             }
 
-            onErrorAction(flowFile, errorCode, errorMessage, hasCustomMessage).then(function(data) {
+            onErrorAction(flowFile, errorCode, errorMessage, errorParams).then(function(data) {
               flowFile.asyncUploadDeferred.reject(data);
             });
           }
@@ -141,9 +136,6 @@
      * @memberOf LinShare.upload.flowUploadService
      */
     function checkQuotas(flowFiles, onError, updateQuotas) {
-      // TODO IAB : translate better in improvement (with directive translate and translate-values)
-      error46010 = $filter('translate')(messagePrefix + 46010);
-      error46014 = $filter('translate')(messagePrefix + 46014);
       authenticationRestService.getCurrentUser().then(function(user) {
         uploadRestService.getQuota(user.quotaUuid).then(function(quotas) {
           $log.debug('Getting quotas - ', quotas.plain());
@@ -155,22 +147,22 @@
 
             var errorCode = NONE;
             var errorMessage = null;
-            var hasCustomMessage = false;
+            var errorParams = {};
 
             if (quotas.maintenance && onError) {
               errorMessage = messagePrefix + NONE;
             } else if (flowFile.size > quotas.maxFileSize) {
               errorCode = 46010;
-              errorMessage = customErrorMessage(error46010, '${maxFileSize}', quotas.maxFileSize);
-              hasCustomMessage = true;
+              errorMessage = messagePrefix + errorCode;
+              errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize)};
             } else if ((quotas.quota - quotas.usedSpace) <= flowFile.size) {
               errorCode = 46014;
-              errorMessage = customErrorMessage(error46014, '${quotaAttempt}', quotas.quota);
-              hasCustomMessage = true;
+              errorMessage = messagePrefix + errorCode;
+              errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota)};
             }
 
             if (errorMessage) {
-              onErrorAction(flowFile, errorCode, errorMessage, hasCustomMessage);
+              onErrorAction(flowFile, errorCode, errorMessage, errorParams);
             } else if (flowFile.error && flowFile.canBeRetried) {
               onRetryAction(flowFile);
             }
@@ -182,19 +174,6 @@
           $log.debug('Getting quotas error - ', err);
         });
       });
-    }
-
-    /**
-     * @namespace customErrorMessage
-     * @desc Make a custom string for errorMessage with a byte value to convert
-     * @param {string} errorMessageSource - Error message translated previously
-     * @param {string} stringToReplace - String to replace in errorMessageSource (e.q. ${myString})
-     * @param {string} stringReplace - New string to apply (here a file size in byte)
-     * @returns {string} Custom string
-     * @memberOf LinShare.upload.flowUploadService
-     */
-    function customErrorMessage(errorMessageSource, stringToReplace, stringReplace) {
-      return (_.clone(errorMessageSource)).replace(stringToReplace, $filter('readableSize')(stringReplace, true));
     }
 
     /**
@@ -213,15 +192,15 @@
      * @param {Object} flowFile - File uploaded
      * @param {number} errorCode - Error code to show on file upload information (in upload queue and upload popup)
      * @param {string} errorMessage - Message to show on file upload information (in upload queue and upload popup)
-     * @param {Boolean} hasCustomMessage - Defined if message is custom
+     * @param {Object} errorParams - Parameters for translation values
      * @returns {promise} Promise with flowFile uploaded
      * @memberOf LinShare.upload.flowUploadService
      */
-    function onErrorAction(flowFile, errorCode, errorMessage, hasCustomMessage) {
+    function onErrorAction(flowFile, errorCode, errorMessage, errorParams) {
       flowFile.pause();
       flowFile.errorCode = errorCode !== NONE ? errorCode : null;
       flowFile.errorMessage = errorMessage;
-      flowFile.hasCustomMessage = hasCustomMessage;
+      flowFile.errorParams = errorParams;
       flowFile.canBeRetried = _.includes(RETRIABLE_ERROR_CASES, errorCode);
       flowFile.error = true;
       $timeout(function() {
@@ -243,7 +222,7 @@
       flowFile.resume();
       delete flowFile.errorCode;
       delete flowFile.errorMessage;
-      delete flowFile.hasCustomMessage;
+      delete flowFile.errorParams;
       delete flowFile.canBeRetried;
       delete flowFile.doingAsyncUpload;
       flowFile.error = false;

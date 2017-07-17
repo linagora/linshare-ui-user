@@ -48,11 +48,11 @@
         "46002": "Erreur de configuration serveur, dépôt impossible",
         "46003": "Erreur de configuration serveur, dépôt impossible",
         "46004": "Erreur de configuration serveur, dépôt impossible",
-        "46010": "La taille du fichier dépasse la taille maximale autorisé (${maxFileSize})",
+        "46010": "La taille du fichier dépasse la taille maximale autorisée ({{maxFileSize}})",
         "46011": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
         "46012": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
         "46013": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
-        "46014": "Espace insuffisant sur le serveur (${quotaAttempt}), libérez de l'espace puis réessayez",
+        "46014": "Espace insuffisant sur le serveur ({{quotaAttempt}}), libérez de l'espace puis réessayez",
         "46015": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
         "46403": "Erreur de configuration serveur, dépôt impossible"
       }

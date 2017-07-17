@@ -31,7 +31,8 @@
     </p>
     <!--TODO IAB : file.error should be reset with maybe a timeout so that the element can be faded in
                     each time the retry btn is triggered thx to the show-danger class -->
-    <p class="time-remaining text-danger"  x-ng-class="{'show-danger' : file.error}" translate>
+    <p class="time-remaining text-danger" data-ng-class="{'show-danger' : file.error}" translate
+       translate-values="file.errorParams">
       {{file.errorMessage}}
     </p>
     <uib-progressbar x-ng-class="{

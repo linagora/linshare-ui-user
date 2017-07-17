@@ -48,11 +48,11 @@
         "46002": "Server configuration error, upload impossible",
         "46003": "Server configuration error, upload impossible",
         "46004": "Server configuration error, upload impossible",
-        "46010": "The file size is greater than the max file size authorized (${maxFileSize})",
+        "46010": "The file size is greater than the max file size authorized ({{maxFileSize}})",
         "46011": "There is no more space available on the server, please retry later",
         "46012": "There is no more space available on the server, please retry later",
         "46013": "There is no more space available on the server, please retry later",
-        "46014": "There is no more space available on the server (${quotaAttempt}), free space and retry",
+        "46014": "There is no more space available on the server ({{quotaAttempt}}), free space and retry",
         "46015": "There is no more space available on the server, please retry later",
         "46403": "Server configuration error, upload impossible"
       }

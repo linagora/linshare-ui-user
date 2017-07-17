@@ -33,7 +33,7 @@
                   </small>
                   <small class="lv-small pull-left text-danger"
                          x-ng-class="{'show-danger' : file.errorAgain}">
-                    {{file.hasCustomMessage ? file.errorMessage : (file.errorMessage | translate)}}
+                    <span translate translate-values="file.errorParams">{{file.errorMessage}}</span>
                     {{file.errorCode ? ' ('+file.errorCode+')' : ''}}
                   </small>
                   <small x-ng-if="file.folderDetails" class="lv-small pull-left">
