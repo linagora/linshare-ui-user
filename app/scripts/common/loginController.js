@@ -40,6 +40,8 @@
     function activate() {
       var locale = languageService.getLocale();
       loginVm.loginLocale = splitLocale(locale);
+
+      loginVm.inputType = lsAppConfig.loginWithMailOnly ? 'email' : 'text';
     }
 
     /**

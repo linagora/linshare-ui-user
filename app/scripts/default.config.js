@@ -32,6 +32,7 @@
         vi: 'vi-VN'
       },
       licence: true,
+      loginWithMailOnly: true,
       production: true,
       rejectedChar: ['<', '>', ':', '"', '/', '\\', '|', '?', '*', ','],
       roles: {
