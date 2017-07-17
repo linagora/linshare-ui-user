@@ -26,11 +26,12 @@
       templateUrl: componentsConfig.path + 'dragAndDrop/dragAndDropTemplate.html',
       scope: {
         $flow: '=dragAndDropFlow',
+        enabled: '=dragAndDropEnabled',
         submitted: '&dragAndDropSubmitted',
         added: '&dragAndDropAdded',
         success: '&dragAndDropSuccess'
       },
-      transclude: true,
+      transclude: true
     };
 
     return directive;

@@ -1,15 +1,16 @@
 <div id="drag-and-drop-area"
-  flow-object="$flow"
-  flow-files-added="added({files: $files})"
-  flow-files-submitted="submitted({files: $files})"
-  flow-drop=""
-  flow-drag-enter="dropClass='drag-over'"
-  flow-file-success="success({file: $file})"
-  flow-drag-leave="dropClass='fade-out-elm'"
-  data-ng-class="{'right-sidebar-toggled': $parent.mainVm.sidebar.isVisible(), 'drag-over' : dropClass == 'drag-over',
-          'fade-out-elm': dropClass == 'fade-out-elm' }"
-  class="file-listing-ctn">
-  <div id="drop-ctn"
+     flow-object="$flow"
+     flow-files-added="added({files: $files})"
+     flow-files-submitted="submitted({files: $files})"
+     flow-drop=""
+     flow-drop-enabled="enabled"
+     flow-drag-enter="dropClass='drag-over'"
+     flow-file-success="success({file: $file})"
+     flow-drag-leave="dropClass='fade-out-elm'"
+     data-ng-class="{'right-sidebar-toggled': $parent.mainVm.sidebar.isVisible(),
+      'drag-over': dropClass == 'drag-over', 'fade-out-elm': dropClass == 'fade-out-elm'}"
+     class="file-listing-ctn">
+  <div data-ng-if="enabled" id="drop-ctn"
        class="drop border-anim reset-content-width collapsible-content drag-n-drop-height">
     <div class="drag-and-drop-ctn">
       <div class="drag-and-drop-content">
@@ -26,6 +27,5 @@
       </div>
     </div>
   </div>
-  <div data-ng-transclude>
-  </div>
+  <div data-ng-transclude></div>
 </div>
