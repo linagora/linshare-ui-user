@@ -228,9 +228,10 @@
      *  @returns {String} A template
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
+    // TODO : when uib typeahead lib will be updated, readd title="$title" in first div
     function userRepresentation(data) {
       var template = '' +
-        '<div  class="recipientsAutocomplete" title="$title">' +
+        '<div class="recipientsAutocomplete">' +
         '<span class="firstLetterFormat $style">$firstLetter</span>' +
         '<p class="recipientsInfo">' +
         '<span class="user-full-name">$name</span>' +
