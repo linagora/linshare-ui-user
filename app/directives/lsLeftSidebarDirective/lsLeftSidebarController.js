@@ -9,18 +9,19 @@
     .module('linshareUiUserApp')
     .controller('lsLeftSidebarController', lsLeftSidebarController);
 
-  lsLeftSidebarController.$inject = ['$timeout', 'MenuService'];
+  lsLeftSidebarController.$inject = ['$http', '$timeout', 'authenticationRestService', 'MenuService'];
 
   /**
    * @namespace lsLeftSidebarController
    * @desc Manage left sidebar's controller
    * @memberOf linshareUiUserApp
    */
-  function lsLeftSidebarController($timeout, MenuService) {
+  function lsLeftSidebarController($http, $timeout, authenticationRestService, MenuService) {
     /* jshint validthis: true */
     var lsLeftSidebarVm = this;
     lsLeftSidebarVm.$timeout = $timeout;
     lsLeftSidebarVm.changeColor = changeColor;
+    lsLeftSidebarVm.productVersion = 'dev';
     lsLeftSidebarVm.tabs = {};
 
     activate();
@@ -34,6 +35,8 @@
      */
     function activate() {
       lsLeftSidebarVm.tabs = MenuService.getAvailableTabs();
+      getCoreVersion();
+      getProductVersion();
     }
 
     /**
@@ -47,6 +50,28 @@
       if(link.disabled === false) {
         lsLeftSidebarVm.customColor = {'color': color};
       }
+    }
+
+    /**
+     * @name getCoreVersion
+     * @desc Get LinShare core version
+     * @memberOf linshareUiUserApp.lsLeftSidebarController
+     */
+    function getCoreVersion() {
+      authenticationRestService.version().then(function(data) {
+        lsLeftSidebarVm.coreVersion = data.version;
+      });
+    }
+
+    /**
+     * @name getProductVersion
+     * @desc Get LinShare product version
+     * @memberOf linshareUiUserApp.lsLeftSidebarController
+     */
+    function getProductVersion() {
+      $http.get('/about.json').success(function(data) {
+        lsLeftSidebarVm.productVersion = data.version;
+      });
     }
   }
 })();

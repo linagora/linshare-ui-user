@@ -38,7 +38,6 @@
     $scope.getUserQuotas = getUserQuotas;
     $scope.lsAppConfig = lsAppConfig;
     $scope.mySpacePage = lsAppConfig.mySpacePage;
-    $scope.productVersion = 'dev';
     $scope.refFlowShares = {};
     $scope.setUserQuotas = setUserQuotas;
     $scope.shareArray = [];
@@ -191,17 +190,11 @@
       $scope.$on('event:auth-loginConfirmed', function(event, data) {
         setVisualElement();
 
-        authenticationRestService.version().then(function(data) {
-          $scope.coreVersion = data.version;
-        });
-
         MenuService.build();
 
         $log.debug('event:auth-loginConfirmed : toState', $scope.urlTogoAfterLogin);
         $scope.loggedUser.setUser(data);
         $scope.userLogged = data;
-
-        getProductVersion();
 
         if (_.isUndefined($scope.urlTogoAfterLogin)) {
           $state.go(URL_HOME);
@@ -288,18 +281,6 @@
             getUserQuotas();
           });
       }
-
-    }
-
-    /**
-     * @name getProductVersion
-     * @desc Get LinShare product version
-     * @memberOf linshareUiUserApp
-     */
-    function getProductVersion() {
-      $http.get('/about.json').success(function(data) {
-        $scope.productVersion = data.version;
-      });
     }
 
     /**
