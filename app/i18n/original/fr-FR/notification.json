@@ -14,9 +14,10 @@
       "IS_CLEARED": "Le stockage local a été effacé"
     },
     "ON_MULTIPLE_DOWNLOAD": {
-      "TITLE": "Téléchargement multiple indisponible",
-      "TEXT": "Désolé, la fonctionalité de téléchargement multiple est en cours de construction.",
-      "CONFIRM_BUTTON": "OK"
+      "CANCEL_BUTTON": "ANNULER",
+      "CONFIRM_BUTTON": "OK",
+      "TEXT": "Vous êtes sur le point de télécharger {{nbFiles}} fichiers (taille total : {{totalSize}})",
+      "TITLE": "Téléchargement multiple"
     }
   },
   "GROWL_ALERT": {

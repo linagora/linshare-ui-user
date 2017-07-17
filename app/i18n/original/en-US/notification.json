@@ -14,9 +14,10 @@
       "IS_CLEARED": "LocalStorage is cleared"
     },
     "ON_MULTIPLE_DOWNLOAD": {
-      "TITLE": "Multiple download are currently unavailable",
-      "TEXT": "Sorry the multiple download feature is under construction.",
-      "CONFIRM_BUTTON": "OK"
+      "CANCEL_BUTTON": "CANCEL",
+      "CONFIRM_BUTTON": "OK",
+      "TEXT": "You are going to download {{nbFiles}} files (total size : {{totalSize}})",
+      "TITLE": "Multiple download"
     }
   },
   "GROWL_ALERT": {

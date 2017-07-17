@@ -7,11 +7,11 @@
 
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function documentController(_, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader, $log,
-    documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig, toastService,
-    $stateParams, tableParamsService, auditDetailsService, swal) {
+  function documentController(_, $filter, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader,
+    $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig,
+    toastService, $stateParams, tableParamsService, auditDetailsService, swal) {
 
-    var swalMultipleDownloadTitle, swalMultipleDownloadText, swalMultipleDownloadConfirm;
+    var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
@@ -96,7 +96,7 @@
         ])
         .then(function(translations) {
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
+          swalMultipleDownloadCancel = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
 
@@ -443,13 +443,26 @@
     }
 
     function unavailableMultiDownload() {
-      swal({
-        title: swalMultipleDownloadTitle,
-        text: swalMultipleDownloadText,
-        type: 'error',
-        confirmButtonColor: '#05b1ff',
-        confirmButtonText: swalMultipleDownloadConfirm,
-        closeOnConfirm: true
+      $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
+        nbFiles: $scope.selectedDocuments.length,
+        totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'))
+      }).then(function(swalText) {
+        swal({
+            title: swalMultipleDownloadTitle,
+            text: swalText,
+            type: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#05b1ff',
+            confirmButtonText: swalMultipleDownloadConfirm,
+            cancelButtonText: swalMultipleDownloadCancel,
+            closeOnConfirm: true,
+            closeOnCancel: true
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              downloadSelectedFiles($scope.selectedDocuments);
+            }
+          });
       });
     }
   }

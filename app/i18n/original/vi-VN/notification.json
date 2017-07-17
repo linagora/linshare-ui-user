@@ -14,9 +14,10 @@
       "IS_CLEARED": "LocalStorage rỗng"
     },
     "TBT__ON_MULTIPLE_DOWNLOAD": {
-      "TBT__TITLE": "",
+      "TBT__CANCEL_BUTTON": "",
+      "TBT__CONFIRM_BUTTON": "",
       "TBT__TEXT": "",
-      "TBT__CONFIRM_BUTTON": ""
+      "TBT__TITLE": ""
     }
   },
   "GROWL_ALERT": {
