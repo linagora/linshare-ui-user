@@ -41,6 +41,7 @@
         "3003": "Le fichier n'a pu être déposé car un virus a été détecté",
         "3007": "Le fichier n'a pu être scanné",
         "26007": "Impossible d'ajouter le fichier car le dossier distant n'existe pas",
+        "26444": "Vous ne possédez pas les droits de dépôt de fichiers",
         "39001": "Les dépôts sont temporairement désactivés car le mode maintenance est activé",
         "40403": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
         "40404": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",

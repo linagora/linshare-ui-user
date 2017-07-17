@@ -41,6 +41,7 @@
         "3003": "The file was rejected because a virus was found",
         "3007": "The file couldn't be scanned",
         "26007": "Cannot upload the file, the folder doesn't exist or have been removed",
+        "26444": "You do not own the rights to upload file",
         "39001": "The uploads are currently disabled since the maintenance mode has been activated",
         "40403": "The uploaded file status can not be found",
         "40404": "The uploaded file status can not be found",

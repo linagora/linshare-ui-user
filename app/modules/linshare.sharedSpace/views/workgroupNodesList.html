@@ -2,6 +2,7 @@
      drag-and-drop-flow="$flow"
      drag-and-drop-added="workgroupNodesVm.upload(files,
       workgroupNodesVm.workgroupPage, workgroupNodesVm.folderDetails)"
+     drag-and-drop-enabled="::!workgroupNodesVm.currentWorkgroupMember.readonly"
      drag-and-drop-success="workgroupNodesVm.addUploadedDocument(file, $message)">
   <div class="container files">
     <!-- ACTIONS ON DOCUMENTS -->
@@ -436,7 +437,8 @@
             </span>
           </div>
         </div>
-        <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
+        <div data-ng-if="workgroupNodesVm.currentWorkgroupMember && !workgroupNodesVm.currentWorkgroupMember.readonly"
+          class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
              check-table-height data-ng-class="{'show-bg-drop' : workgroupNodesVm.nodesList.length === 0}">
           <div class="drag-and-drop-content">
             <div class="drag-icon-ctn">
