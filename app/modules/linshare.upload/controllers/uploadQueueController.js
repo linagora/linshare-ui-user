@@ -38,6 +38,7 @@
     uploadQueueVm.selectedUploads = $scope.selectedUploads;
 
     uploadQueueVm.$flow = $scope.$flow;
+    uploadQueueVm.activeBtnShowSelection = false;
     uploadQueueVm.cancelAllFiles = cancelAllFiles;
     uploadQueueVm.cancelSelectedFiles = cancelSelectedFiles;
     uploadQueueVm.checkSharableFiles = checkSharableFiles;
@@ -380,6 +381,9 @@
      * @memberOf LinShare.upload.uploadQueueController
      */
     function resetSelectedDocuments() {
+      if(uploadQueueVm.activeBtnShowSelection) {
+        uploadQueueVm.toggleFilterBySelectedFiles();
+      }
       _.forEach($scope.selectedUploads, function(value, key) {
         var fileSelected = uploadQueueVm.$flow.getFromUniqueIdentifier(key);
         fileSelected.isSelected = false;
@@ -554,6 +558,7 @@
      * @memberOf LinShare.upload.uploadQueueController
      */
     function toggleFilterBySelectedFiles() {
+      uploadQueueVm.activeBtnShowSelection = !uploadQueueVm.activeBtnShowSelection;
       _.forEach(uploadQueueVm.$flow.files, function(file) {
         if (file.hideOnIsolate) {
           file.hideOnIsolate = false;

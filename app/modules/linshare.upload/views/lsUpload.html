@@ -119,6 +119,9 @@
         <a data-ng-if="::uploadQueueVm.isFromMySpace" class="click-disabled" translate>MENU_TITLE.FILES</a>
         <a data-ng-if="::!uploadQueueVm.isFromMySpace" class="click-disabled" translate>MENU_TITLE.SHARED_SPACE</a>
       </div>
+
+      <span class="sub-category-chevron pipe-separator" data-ng-if="uploadQueueVm.activeBtnShowSelection">|&nbsp;</span>
+      <a class="click-disabled" data-ng-if="uploadQueueVm.activeBtnShowSelection" translate>BREADCRUMB_ISOLATE</a>
       <div class="pull-right actions-upload-queue col-xs-2">
         <div data-ng-class="{'disabled-work-in-progress': uploadQueueVm.$flow.files.length <= 0}"
              class="upload-actions-toolbar actions">
@@ -191,17 +194,17 @@
         <div class="exit-selection actions" data-ng-click="uploadQueueVm.resetSelectedDocuments()">
           <a><i class="zmdi zmdi-close"></i></a>
         </div>
-        <div class="display-num-selected-items" title="{{::'WIP' | translate}}"
-             data-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
-             data-ng-click="activeBtnShowSelection = !activeBtnShowSelection">
-          <p>
-            <span>{{lengthOfSelectedDocuments()}} </span>
-            <span translate>SELECTION_TOOLBAR.SELECTED_FILES</span>
-          </p>
-          <div class="pull-left view-icons-ctn groups-view"
+        <div class="display-num-selected-items" title="{{::'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+          <div class="pull-left" data-ng-class="{'active-button-show-selection': uploadQueueVm.activeBtnShowSelection}"
                data-ng-click="uploadQueueVm.toggleFilterBySelectedFiles()">
-            <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show="activeBtnShowSelection"></i>
-            <i class="fa fa-eye" aria-hidden="true" data-ng-show="!activeBtnShowSelection"></i>
+            <p>
+              <span>{{lengthOfSelectedDocuments()}} </span>
+              <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
+            </p>
+            <div class="pull-left view-icons-ctn groups-view">
+              <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show="uploadQueueVm.activeBtnShowSelection"></i>
+              <i class="fa fa-eye" aria-hidden="true" data-ng-show="!uploadQueueVm.activeBtnShowSelection"></i>
+            </div>
           </div>
           <div class="pull-left view-icons-ctn reset-icon" data-ng-click="uploadQueueVm.resetSelectedDocuments()">
             <i class="fa fa-undo" title="{{::'SELECTION_TOOLBAR.RESET' | translate}}"></i>
