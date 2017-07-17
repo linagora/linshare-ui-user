@@ -21,15 +21,14 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
-  function flowUploadService(_, $filter, $log, $q, $timeout, $translatePartialLoader,
-                             authenticationRestService, LinshareDocumentRestService, lsAppConfig,
-                             uploadRestService, workgroupNodesRestService) {
+  function flowUploadService(_, $filter, $log, $q, $timeout, $translatePartialLoader, authenticationRestService,
+                             LinshareDocumentRestService, lsAppConfig, uploadRestService, workgroupNodesRestService) {
 
     const
       NONE = 'NONE',
-      RETRIABLE_ERROR_CASES = [NONE, 39001, 40403, 40404, 46011, 46012, 46013, 46014],
       STATUS_FAILED = 'FAILED',
-      STATUS_SUCCESS = 'SUCCESS';
+      STATUS_SUCCESS = 'SUCCESS',
+      UNRETRIABLE_ERROR_CASES = [3000, 3002, 3003, 46001, 46002, 46003, 46004, 46010];
 
     var
       errorNone,
@@ -201,7 +200,7 @@
       flowFile.errorCode = errorCode !== NONE ? errorCode : null;
       flowFile.errorMessage = errorMessage;
       flowFile.errorParams = errorParams;
-      flowFile.canBeRetried = _.includes(RETRIABLE_ERROR_CASES, errorCode);
+      flowFile.canBeRetried = !_.includes(UNRETRIABLE_ERROR_CASES, errorCode);
       flowFile.error = true;
       $timeout(function() {
         flowFile.errorAgain = true;
