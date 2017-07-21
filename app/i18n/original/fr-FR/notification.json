@@ -80,7 +80,7 @@
       "ERROR_403": "Vous n'êtes pas autorisé à supprimer cet élément",
       "ERROR_400": "Suppression impossible",
       "ERROR_500": "Erreur du serveur",
-      "ISOLATED_FILE": "Mode isolé sélection, activé : vous visualisez une selection restreinte de fichiers."
+      "ISOLATED_FILE": "Vous visualisez une selection restreinte de fichiers."
     }
   }
 }
