@@ -130,10 +130,6 @@
         }
       });
 
-      $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
-        mainVm.flowUploadService.checkQuotas([flowFile], false, $scope.setUserQuotas);
-      });
-
       $scope.$on('flow::fileRemoved', function fileRemoveAction(event, $flow, flowFile) {
         mainVm.removeShareDocument(flowFile);
       });
@@ -196,6 +192,8 @@
         $scope.loggedUser.setUser(data);
         $scope.userLogged = data;
 
+        flowUploadService.initFlowUploadService();
+        
         if (_.isUndefined($scope.urlTogoAfterLogin)) {
           $state.go(URL_HOME);
         } else {

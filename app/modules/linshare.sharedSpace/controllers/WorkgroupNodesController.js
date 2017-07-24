@@ -13,7 +13,8 @@
     '_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
     'flowUploadService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
-    'toastService', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'
+    'toastService', 'workgroupQuotaUuid', 'workgroupRestService', 'workgroupMembersRestService',
+    'workgroupNodesRestService'
   ];
   /**
    * @namespace WorkgroupNodesController
@@ -24,8 +25,8 @@
   function WorkgroupNodesController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
                                     auditDetailsService, browseService, currentFolder, documentUtilsService,
                                     flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode, nodesList, swal,
-                                    tableParamsService, toastService, workgroupRestService, workgroupMembersRestService,
-                                    workgroupNodesRestService) {
+                                    tableParamsService, toastService, workgroupQuotaUuid, workgroupRestService,
+                                    workgroupMembersRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
 
@@ -94,6 +95,8 @@
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
       });
+
+      workgroupNodesVm.folderDetails.quotaUuid = workgroupQuotaUuid;
 
       getBreadcrumb();
       setFabConfig();

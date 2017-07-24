@@ -12,7 +12,7 @@
 
   flowUploadService.$inject = ['_', '$filter', '$log', '$q', '$timeout', '$translatePartialLoader',
     'authenticationRestService', 'LinshareDocumentRestService', 'lsAppConfig', 'uploadRestService',
-    'workgroupNodesRestService'];
+    'workgroupNodesRestService', 'workgroupRestService'];
 
   /**
    * @namespace flowUploadService
@@ -22,7 +22,7 @@
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
   function flowUploadService(_, $filter, $log, $q, $timeout, $translatePartialLoader, authenticationRestService,
-                             LinshareDocumentRestService, lsAppConfig, uploadRestService, workgroupNodesRestService) {
+                             LinshareDocumentRestService, lsAppConfig, uploadRestService, workgroupNodesRestService, workgroupRestService) {
 
     const
       NONE = 'NONE',
@@ -33,6 +33,7 @@
     var
       errorNone,
       messagePrefix = 'SERVER_RESPONSE.DETAILS.UPLOAD_ERROR.',
+      userQuotaUuid,
       service = {
         addUploadedFile: addUploadedFile,
         checkAsyncUploadDetails: checkAsyncUploadDetails,
@@ -135,41 +136,44 @@
      * @memberOf LinShare.upload.flowUploadService
      */
     function checkQuotas(flowFiles, onError, updateQuotas) {
-      authenticationRestService.getCurrentUser().then(function(user) {
-        uploadRestService.getQuota(user.quotaUuid).then(function(quotas) {
-          $log.debug('Getting quotas - ', quotas.plain());
-          updateQuotas(quotas.plain());
+      _.forEach(flowFiles, function(flowFile) {
+        var fromMySpace = _.isUndefined(flowFile.folderDetails);
+        var quotasToCheck = fromMySpace ? uploadRestService.getQuota(userQuotaUuid) :
+          workgroupRestService.getQuota(flowFile.folderDetails.quotaUuid);
 
-          _.forEach(flowFiles, function(flowFile) {
-            flowFile.quotas = quotas.plain();
-            flowFile.asyncUploadDeferred = $q.defer();
+        quotasToCheck.then(function(quotas) {
+          flowFile.quotas = quotas.plain();
+          flowFile.asyncUploadDeferred = $q.defer();
 
-            var errorCode = NONE;
-            var errorMessage = null;
-            var errorParams = {};
+          if (fromMySpace) {
+            updateQuotas(quotas.plain());
+          }
 
-            if (quotas.maintenance && onError) {
-              errorMessage = messagePrefix + NONE;
-            } else if (flowFile.size > quotas.maxFileSize) {
-              errorCode = 46010;
-              errorMessage = messagePrefix + errorCode;
-              errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize)};
-            } else if ((quotas.quota - quotas.usedSpace) <= flowFile.size) {
-              errorCode = 46014;
-              errorMessage = messagePrefix + errorCode;
-              errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota)};
-            }
+          var errorCode = NONE;
+          var errorMessage = null;
+          var errorParams = {};
 
-            if (errorMessage) {
-              onErrorAction(flowFile, errorCode, errorMessage, errorParams);
-            } else if (flowFile.error && flowFile.canBeRetried) {
-              onRetryAction(flowFile);
-            }
+          if (quotas.maintenance && onError) {
+            errorMessage = messagePrefix + NONE;
+          } else if (flowFile.size > quotas.maxFileSize) {
+            errorCode = 46010;
+            errorMessage = messagePrefix + errorCode;
+            errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize)};
+          } else if ((quotas.quota - quotas.usedSpace) <= flowFile.size) {
+            errorCode = 46014;
+            errorMessage = messagePrefix + errorCode;
+            errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota)};
+          }
 
-            flowFile.quotaChecked = true;
-            quotas.usedSpace += flowFile.size;
-          });
-        }, function(err) {
+          if (errorMessage) {
+            onErrorAction(flowFile, errorCode, errorMessage, errorParams);
+          } else if (flowFile.error && flowFile.canBeRetried) {
+            onRetryAction(flowFile);
+          }
+
+          flowFile.quotaChecked = true;
+          quotas.usedSpace += flowFile.size;
+        }).catch(function(err) {
           $log.debug('Getting quotas error - ', err);
         });
       });
@@ -183,6 +187,10 @@
     function initFlowUploadService() {
       $translatePartialLoader.addPart('serverResponse');
       errorNone = messagePrefix + NONE;
+
+      authenticationRestService.getCurrentUser().then(function(user) {
+        userQuotaUuid = user.quotaUuid;
+      });
     }
 
     /**

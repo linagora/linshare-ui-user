@@ -231,6 +231,11 @@
           nodesList: function(workgroupNodesRestService, $stateParams,
           /* jshint ignore:line */ functionalities) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid);
+          },
+          workgroupQuotaUuid: function($stateParams, workgroupRestService) {
+            return workgroupRestService.get($stateParams.workgroupUuid, false).then(function(workgroup) {
+              return workgroup.quotaUuid;
+            });
           }
         }
       })
@@ -252,6 +257,11 @@
           nodesList: function(workgroupNodesRestService, $stateParams,
           /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
             return workgroupNodesRestService.getList($stateParams.workgroupUuid, $stateParams.folderUuid);
+          },
+          workgroupQuotaUuid: function($stateParams, workgroupRestService) {
+            return workgroupRestService.get($stateParams.workgroupUuid, false).then(function(workgroup) {
+              return workgroup.quotaUuid;
+            });
           }
         }
       })
