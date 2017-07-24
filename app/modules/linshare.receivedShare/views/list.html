@@ -301,7 +301,8 @@
                     <div class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right" x-ng-class=
                         "{'open-r': (mainVm.sidebar.isVisible()) && (mainVm.sidebar.getContent() === lsAppConfig.details)}">
-                        <li x-ng-click="showCurrentFile(documentFile,$event)" class="hidden-action-links">
+                        <li x-ng-click="showCurrentFile(documentFile,$event)" class="hidden-action-links"
+                            event-propagation-stop>
                           <a href=""
                              title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
                             <i class="zmdi zmdi-info-outline"></i>
@@ -323,13 +324,13 @@
                         <li  uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                              auto-close="always" hover-dropdown-fix>
                           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
-                             >
+                             event-propagation-stop>
                             <i class="zmdi zmdi-more-vert"></i>
                           </a>
                           <ul
                             class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
                             uib-dropdown-menu="">
-                            <li event-propagation-stop>
+                            <li>
                               <a href="" x-ng-click="showCurrentFile(documentFile,$event)">
                                 <i class="zmdi zmdi-info-outline"></i>
                                 {{'ACTION.INFORMATION' | translate}}

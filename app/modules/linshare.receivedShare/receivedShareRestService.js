@@ -24,6 +24,7 @@
         copy: copy,
         download: download,
         get: get,
+        getAudit: getAudit,
         getList: getList,
         remove: remove,
         thumbnail: thumbnail
@@ -67,6 +68,18 @@
     function get(uuid) {
       $log.debug('LinshareReceivedShareRestService : get', uuid);
       return handler(Restangular.one(restUrl, uuid).get());
+    }
+
+    /**
+     *  @name getAudit
+     *  @desc Get audit of a ReceivedShares object
+     *  @param {string} receivedSharesUuid - The uuid of the ReceivedShares object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.receivedShare.receivedShareRestService
+     */
+    function getAudit(receivedSharesUuid) {
+      $log.debug('LinshareReceivedShareRestService : getAudit', receivedSharesUuid);
+      return handler(Restangular.one(restUrl, receivedSharesUuid).one('audit').get());
     }
 
     /**

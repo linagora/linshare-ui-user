@@ -8,7 +8,7 @@ angular.module('linshare.receivedShare')
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   .controller('ReceivedController',
-    function(_, $filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window,
+    function(_, $filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window, auditDetailsService,
       authenticationRestService, autocompleteUserRestService, documentSelected, documentUtilsService, files,
       itemUtilsService, lsAppConfig, NgTableParams, receivedShareRestService, swal, toastService) {
       $translatePartialLoader.addPart('receivedShare');
@@ -194,26 +194,48 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.showCurrentFile = function(currentFile, event) {
-        $scope.currentSelectedDocument.current = currentFile;
-        if (currentFile.shared > 0) {
-          receivedShareRestService.get(currentFile.uuid).then(function(data) {
-            $scope.currentSelectedDocument.current.shares = data.shares;
+        return $q(function(resolve) {
+          $scope.currentSelectedDocument.current = currentFile;
+          if (currentFile.shared > 0) {
+            receivedShareRestService.get(currentFile.uuid).then(function(data) {
+              $scope.currentSelectedDocument.current.shares = data.shares;
+            });
+          }
+          if (currentFile.hasThumbnail === true) {
+            receivedShareRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
+              $scope.currentSelectedDocument.current.thumbnail = thumbnail;
+            });
+          }
+          resolve($scope.currentSelectedDocument.current);
+          
+          getReceivedShareAudit($scope.currentSelectedDocument.current).then(function() {
+            $scope.loadSidebarContent(lsAppConfig.details);
+            if (!_.isUndefined(event)) {
+              var currElm = event.currentTarget;
+              angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
+                angular.element(currElm).addClass('activeActionButton');
+              });
+            }
           });
-        }
-        if (currentFile.hasThumbnail === true) {
-          receivedShareRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
-            $scope.currentSelectedDocument.current.thumbnail = thumbnail;
-          });
-        }
-
-        $scope.loadSidebarContent(lsAppConfig.details);
-        if (!_.isUndefined(event)) {
-          var currElm = event.currentTarget;
-          angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-            angular.element(currElm).addClass('activeActionButton');
-          });
-        }
+        });
       };
+
+      /**
+       * @name getReceivedShareAudit
+       * @desc Get audit details of a receivedShare object
+       * @param {Object} receivedShare - receivedShare object
+       * @returns {Promise} receivedShare object with audit details
+       * @memberOf LinShare.receivedShare.receivedShareController
+       */
+      function getReceivedShareAudit(receivedShare) {
+        return receivedShareRestService.getAudit(receivedShare.uuid).then(function(auditData) {
+          return auditData;
+        }).then(function(auditData) {
+          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain()).then(function(auditActions) {
+            $scope.currentSelectedDocument.current.auditActions = auditActions;
+          });
+        });
+      }
 
       var swalTitle, swalText, swalConfirm, swalCancel;
       $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
@@ -513,7 +535,7 @@ angular.module('linshare.receivedShare')
       };
 
       $scope.getDetails = function(item) {
-        return documentUtilsService.getItemDetails(receivedShareRestService, item);
+        return $scope.showCurrentFile(item);
       };
 
       $scope.addSelectedDocument = addSelectedDocument;
