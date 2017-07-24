@@ -9,7 +9,7 @@
   /* jshint maxparams: false, maxstatements: false */
   function documentController(_, $filter, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader,
     $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig,
-    toastService, $stateParams, tableParamsService, auditDetailsService, swal) {
+    toastService, $stateParams, tableParamsService, auditDetailsService, swal, LinshareShareService) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
@@ -51,6 +51,7 @@
     $scope.recipientShareDetails = {
       current: ''
     };
+    $scope.removeShare = removeShare;
     $scope.showCurrentFile = showCurrentFile;
     $scope.setTextInput = setTextInput;
     $scope.slideTextarea = slideTextarea;
@@ -344,6 +345,27 @@
       } else {
         angular.element(currTarget).parent().find('span').css('display', 'none');
       }
+    }
+
+    /**
+     * @name removeShare
+     * @desc Remove a share from shares of a document
+     * @param {string} shareUuid - Share uuid
+     * @memberOf LinShare.document.documentController
+     */
+    function removeShare(shareUuid) {
+      LinshareShareService.remove(shareUuid).then(function(data) {
+        $scope.mainVm.sidebar.getData().currentSelectedDocument.current = data.document;
+        $scope.mainVm.sidebar.getData().loadSidebarContent($scope.mainVm.sidebar.getData().lsAppConfig.details);
+        _.remove($scope.mainVm.sidebar.getData().currentSelectedDocument.current.shares, {'uuid': shareUuid});
+        _.assignIn(_.find($scope.documentsList, {'uuid': data.document.uuid}), data.document);
+        var recipient = data.recipient.firstName ? data.recipient.firstName + ' ' + data.recipient.lastName :
+          data.recipient.mail;
+        toastService.success({
+          key: 'GROWL_ALERT.ACTION.SHARE_DELETED',
+          params: {recipient: recipient}
+        });
+      });
     }
 
     /**
