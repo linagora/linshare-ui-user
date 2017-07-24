@@ -21,7 +21,8 @@
         </md-tab>
         <md-tab id="tab2" label="{{'ACTIVITIES' | translate}}" class="col-xs-4 noPadding disabled">
           <md-content class="md-padding">
-            <div x-ng-include="'directives/sidebar-content/sidebar-content-contactslists-activities.html'"></div>
+            <div data-ng-repeat="auditAction in mainVm.sidebar.getData().currentSelectedDocument.current.auditActions"
+                 audit-details="{{::auditAction}}" class="audit-card"></div>
           </md-content>
         </md-tab>
       </md-tabs>

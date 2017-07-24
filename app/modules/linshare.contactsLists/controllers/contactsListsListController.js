@@ -9,8 +9,8 @@
     .module('linshare.contactsLists')
     .controller('contactsListsListController', contactsListsListController);
 
-  contactsListsListController.$inject = ['_', '$filter', '$scope', '$state', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'contactsListsList', 'contactsListsListRestService',
+  contactsListsListController.$inject = ['_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout',
+    '$translate', '$translatePartialLoader', 'auditDetailsService', 'contactsListsList', 'contactsListsListRestService',
     'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService',
     'functionalityRestService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'moment', 'NgTableParams',
     'toastService'
@@ -23,10 +23,10 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function contactsListsListController(_, $filter, $scope, $state, $stateParams, $timeout, $translate,
-    $translatePartialLoader, contactsListsList, contactsListsListRestService, contactsListsContactsRestService,
-    contactsListsService, createNew, documentUtilsService, functionalityRestService, itemUtilsService, lsAppConfig,
-    lsErrorCode, moment, NgTableParams, toastService) {
+  function contactsListsListController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
+    $translatePartialLoader, auditDetailsService, contactsListsList, contactsListsListRestService,
+    contactsListsContactsRestService, contactsListsService, createNew, documentUtilsService, functionalityRestService,
+    itemUtilsService, lsAppConfig, lsErrorCode, moment, NgTableParams, toastService) {
 
     /* jshint validthis:true */
     var contactsListsListVm = this;
@@ -267,15 +267,31 @@
     }
 
     /**
+     * @name getContactsListAudit
+     * @desc Get audit details of a contactsList
+     * @param {Object} contactsList - contactsList object
+     * @returns {Promise} contactsList with audit details
+     * @memberOf LinShare.contactsLists.contactsListsListController
+     */
+    function getContactsListAudit(contactsList) {
+      return contactsListsListRestService.getAudit(contactsList.uuid).then(function(auditData) {
+        return auditData;
+      }).then(function(auditData) {
+        auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain()).then(function(auditActions) {
+          contactsListsListVm.currentSelectedDocument.current.auditActions = auditActions;
+        });
+      });
+    }
+
+    /**
      * @name getDetails
      * @desc show details of contactsList
      * @param {Object} item - contactsList to show with details
      * @returns {Promise} Response of the server
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
-    // TODO : IAB remove documentUtilsService and implement own method
     function getDetails(item) {
-      return documentUtilsService.getItemDetails(contactsListsListRestService, item);
+      return contactsListsListVm.showItemDetails(item);
     }
 
     /**
@@ -580,15 +596,19 @@
      */
     // TODO : IAB - refactor with service
     function showItemDetails(item, event) {
-      contactsListsListRestService.get(item.uuid).then(function(data) {
+      return $q.when(contactsListsListRestService.get(item.uuid)).then(function(data) {
         contactsListsListVm.currentSelectedDocument.current = data;
+        return getContactsListAudit(contactsListsListVm.currentSelectedDocument.current);
+      }).then(function() {
         contactsListsListVm.loadSidebarContent(lsAppConfig.contactslists);
         contactsListsListVm.mdtabsSelection.selectedIndex = 0;
-      });
-
-      var currElm = event.currentTarget;
-      angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-        angular.element(currElm).addClass('activeActionButton');
+        if (!_.isUndefined(event)) {
+          var currElm = event.currentTarget;
+          angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
+            angular.element(currElm).addClass('activeActionButton');
+          });
+        }
+        return contactsListsListVm.currentSelectedDocument.current;
       });
     }
 

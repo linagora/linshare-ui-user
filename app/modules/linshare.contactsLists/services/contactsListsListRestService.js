@@ -24,6 +24,7 @@
         create: create,
         delete: remove,
         get: get,
+        getAudit: getAudit,
         getList: getList,
         restangularize: restangularize,
         update: update
@@ -55,6 +56,18 @@
     function get(contactsListsUuid) {
       $log.debug('contactsListsListRestService - get', contactsListsUuid);
       return handler(Restangular.one(restUrl, contactsListsUuid).get());
+    }
+
+    /**
+     * @name getAudit
+     * @desc Get audit of a contactsList object
+     * @param {string} contactsListsUuid - The uuid of the contactsList object
+     * @returns {Promise} server response
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
+     */
+    function getAudit(contactsListsUuid) {
+      $log.debug('contactsListsListRestService - getAudit', contactsListsUuid);
+      return handler(Restangular.one(restUrl, contactsListsUuid).one('audit').get());
     }
 
     /**
@@ -102,6 +115,7 @@
      */
     function update(contactsListsDto) {
       $log.debug('contactsListsListRestService - update');
+      delete contactsListsDto.auditActions;
       return handler(Restangular.one(restUrl, contactsListsDto.uuid).customPUT(contactsListsDto));
     }
   }
