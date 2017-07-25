@@ -12,8 +12,8 @@
   WorkgroupNodesController.$inject = [
     '_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
-    'flowUploadService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
-    'toastService', 'workgroupQuotaUuid', 'workgroupRestService', 'workgroupMembersRestService',
+    'flowUploadService', 'itemUtilsService', 'lsAppConfig', 'lsColors', 'lsErrorCode', 'nodesList', 'swal',
+    'tableParamsService', 'toastService', 'workgroupQuotaUuid', 'workgroupRestService', 'workgroupMembersRestService',
     'workgroupNodesRestService'
   ];
   /**
@@ -25,7 +25,7 @@
   function WorkgroupNodesController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
                                     $translatePartialLoader, auditDetailsService, browseService, currentFolder,
                                     documentUtilsService, flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode,
-                                    nodesList, swal, tableParamsService, toastService, workgroupQuotaUuid,
+                                    lsColors, nodesList, swal, tableParamsService, toastService, workgroupQuotaUuid,
                                     workgroupRestService, workgroupMembersRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
@@ -443,7 +443,7 @@
             text: swalText,
             type: 'error',
             showCancelButton: true,
-            confirmButtonColor: '#05b1ff',
+            confirmButtonColor: lsColors.PRIMARY_BLUE,
             confirmButtonText: swalMultipleDownloadConfirm,
             cancelButtonText: swalMultipleDownloadCancel,
             closeOnConfirm: true,

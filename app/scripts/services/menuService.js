@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .factory('MenuService', menuService);
 
-  menuService.$inject = ['_', '$q', 'authenticationRestService', 'functionalityRestService', 'lsAppConfig'];
+  menuService.$inject = ['_', '$q', 'authenticationRestService', 'functionalityRestService', 'lsAppConfig', 'lsColors'];
 
   /**
    * @namespace menuService
    * @desc Service to interact with session
    * @memberOf linshareUiUserApp
    */
-  function menuService(_, $q, authenticationRestService, functionalityRestService, lsAppConfig) {
+  function menuService(_, $q, authenticationRestService, functionalityRestService, lsAppConfig, lsColors) {
     var
       administrations,
       audit,
@@ -111,7 +111,7 @@
         name: 'MENU_TITLE.HOME',
         link: 'home',
         icon: 'ls-homepage',
-        color: '#05B1FF',
+        color: lsColors.PRIMARY_BLUE,
         disabled: false
       };
 
@@ -119,14 +119,14 @@
         name: 'MENU_TITLE.UPLOAD_AND_SHARE',
         link: 'documents.upload',
         icon: 'ls-uploads',
-        color: '#05B1FF',
+        color: lsColors.PRIMARY_BLUE
       };
 
       sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
         link: 'sharedspace.all',
         icon: 'ls-shared-space',
-        color: '#05B1FF',
+        color: lsColors.PRIMARY_BLUE,
         disabled: false
       };
 

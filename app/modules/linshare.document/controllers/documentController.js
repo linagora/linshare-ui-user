@@ -9,7 +9,7 @@
   /* jshint maxparams: false, maxstatements: false */
   function documentController(_, $filter, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader,
     $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig,
-    toastService, $stateParams, tableParamsService, auditDetailsService, swal, LinshareShareService) {
+    lsColors, toastService, $stateParams, tableParamsService, auditDetailsService, swal, LinshareShareService) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
@@ -318,7 +318,7 @@
             text: swalText,
             type: 'error',
             showCancelButton: true,
-            confirmButtonColor: '#05b1ff',
+            confirmButtonColor: lsColors.PRIMARY_BLUE,
             confirmButtonText: swalMultipleDownloadConfirm,
             cancelButtonText: swalMultipleDownloadCancel,
             closeOnConfirm: true,

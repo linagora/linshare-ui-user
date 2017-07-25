@@ -10,7 +10,7 @@ angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function(_, $filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window, auditDetailsService,
       authenticationRestService, autocompleteUserRestService, documentSelected, documentUtilsService, files,
-      itemUtilsService, lsAppConfig, NgTableParams, receivedShareRestService, swal, toastService) {
+      itemUtilsService, lsAppConfig, lsColors, NgTableParams, receivedShareRestService, swal, toastService) {
       $translatePartialLoader.addPart('receivedShare');
       $scope.documentSelected = documentSelected;
       $scope.multiDownload = multiDownload;
@@ -236,9 +236,10 @@ angular.module('linshare.receivedShare')
         return receivedShareRestService.getAudit(receivedShare.uuid).then(function(auditData) {
           return auditData;
         }).then(function(auditData) {
-          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain()).then(function(auditActions) {
-            $scope.currentSelectedDocument.current.auditActions = auditActions;
-          });
+          auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain())
+            .then(function(auditActions) {
+              $scope.currentSelectedDocument.current.auditActions = auditActions;
+            });
         });
       }
 
@@ -264,7 +265,7 @@ angular.module('linshare.receivedShare')
             text: swalCopyText,
             type: 'info',
             showCancelButton: true,
-            confirmButtonColor: '#05b1ff',
+            confirmButtonColor: lsColors.PRIMARY_BLUE,
             confirmButtonText: swalCopyConfirm,
             cancelButtonText: swalCancel,
             closeOnConfirm: true,
@@ -303,7 +304,7 @@ angular.module('linshare.receivedShare')
               text: swalText,
               type: 'error',
               showCancelButton: true,
-              confirmButtonColor: '#05b1ff',
+              confirmButtonColor: lsColors.PRIMARY_BLUE,
               confirmButtonText: swalMultipleDownloadConfirm,
               cancelButtonText: swalMultipleDownloadCancel,
               closeOnConfirm: true,
