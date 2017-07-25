@@ -42,6 +42,10 @@ git clone --recursive
 
 # Or after simple clone, to get sumbodule
 git submodule update --init
+
+# Activate git hook with overcommit
+cd <path to repo>
+overcommit
 ```
 
 ## Build & development
