@@ -10,7 +10,7 @@
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
   WorkgroupNodesController.$inject = [
-    '_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+    '_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
     'flowUploadService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
     'toastService', 'workgroupQuotaUuid', 'workgroupRestService', 'workgroupMembersRestService',
@@ -22,18 +22,19 @@
    * @memberOf LinShare.sharedSpace
    */
   /* jshint maxparams: false, maxstatements: false */
-  function WorkgroupNodesController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-                                    auditDetailsService, browseService, currentFolder, documentUtilsService,
-                                    flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode, nodesList, swal,
-                                    tableParamsService, toastService, workgroupQuotaUuid, workgroupRestService,
-                                    workgroupMembersRestService, workgroupNodesRestService) {
+  function WorkgroupNodesController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
+                                    $translatePartialLoader, auditDetailsService, browseService, currentFolder,
+                                    documentUtilsService, flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode,
+                                    nodesList, swal, tableParamsService, toastService, workgroupQuotaUuid,
+                                    workgroupRestService, workgroupMembersRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
 
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
 
-    var newFolderName, swalMultipleDownloadConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText;
+    var newFolderName, swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
+
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
     workgroupNodesVm.areAllSameType = areAllSameType;
@@ -56,6 +57,7 @@
     workgroupNodesVm.mdtabsSelection = {
       selectedIndex: 0
     };
+    workgroupNodesVm.multiDownload = multiDownload;
     workgroupNodesVm.nodesList = nodesList;
     workgroupNodesVm.openBrowser = openBrowser;
     workgroupNodesVm.paramFilter = {
@@ -64,7 +66,6 @@
     workgroupNodesVm.renameNode = renameNode;
     workgroupNodesVm.showSelectedNodeDetails = showSelectedNodeDetails;
     workgroupNodesVm.showWorkgroupDetails = showWorkgroupDetails;
-    workgroupNodesVm.unavailableMultiDownload = unavailableMultiDownload;
     workgroupNodesVm.upload = upload;
     workgroupNodesVm.workgroupPage = lsAppConfig.workgroupPage;
     workgroupNodesVm.workgroupNode = lsAppConfig.workgroupNode;
@@ -86,12 +87,10 @@
         $translate([
           'ACTION.NEW_FOLDER',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
         ]).then(function(translations) {
           newFolderName = translations['ACTION.NEW_FOLDER'];
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
       });
@@ -241,6 +240,18 @@
     function downloadFile(fileDocument) {
       var url = workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid);
       itemUtilsService.download(url, fileDocument.name);
+    }
+
+    /**
+     * @name downloadSelectedFiles
+     * @desc Download selected files
+     * @param {Array<Object>} selectedDocuments - List of selected files
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function downloadSelectedFiles(selectedDocuments) {
+      _.forEach(selectedDocuments, function(document) {
+        workgroupNodesVm.downloadFile(document);
+      });
     }
 
     /**
@@ -415,6 +426,35 @@
       $scope.mainVm.sidebar.setData(workgroupNodesVm);
       $scope.mainVm.sidebar.setContent(content);
       $scope.mainVm.sidebar.show();
+    }
+
+    /**
+     * @name multiDownload
+     * @desc Prompt dialog to warn about multi download
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function multiDownload() {
+      $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
+        nbFiles: workgroupNodesVm.selectedDocuments.length,
+        totalSize: $filter('readableSize')(_.sumBy(workgroupNodesVm.selectedDocuments, 'size'))
+      }).then(function(swalText) {
+        swal({
+            title: swalMultipleDownloadTitle,
+            text: swalText,
+            type: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#05b1ff',
+            confirmButtonText: swalMultipleDownloadConfirm,
+            cancelButtonText: swalMultipleDownloadCancel,
+            closeOnConfirm: true,
+            closeOnCancel: true
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
+            }
+          });
+      });
     }
 
     /**
@@ -661,18 +701,6 @@
         workgroupNodesVm.currentSelectedDocument.current.auditActions = auditActions;
         workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
         workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
-      });
-    }
-
-    // TODO : Remove it when multi download will be implemented
-    function unavailableMultiDownload() {
-      swal({
-        title: swalMultipleDownloadTitle,
-        text: swalMultipleDownloadText,
-        type: 'error',
-        confirmButtonColor: '#05b1ff',
-        confirmButtonText: swalMultipleDownloadConfirm,
-        closeOnConfirm: true
       });
     }
 
