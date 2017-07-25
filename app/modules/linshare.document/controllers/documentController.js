@@ -40,6 +40,7 @@
     $scope.lsAppConfig = lsAppConfig;
     $scope.lsFormat = lsFormat;
     $scope.lsFullDateFormat = lsFullDateFormat;
+    $scope.multiDownload = multiDownload;
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.nextTab = nextTab;
     $scope.onShare = onShare;
@@ -57,7 +58,6 @@
     $scope.slideTextarea = slideTextarea;
     $scope.slideUpTextarea = slideUpTextarea;
     $scope.toggleSearchState = toggleSearchState;
-    $scope.unavailableMultiDownload = unavailableMultiDownload;
     $scope.updateDocument = updateDocument;
 
     activate();
@@ -209,16 +209,22 @@
     }
 
     /**
-     *  @name downloadFile
-     *  @desc Download a file of a document for the user
-     *  @param {Object) documentFile - A document object
-     *  @memberOf LinShare.document.documentController
+     * @name downloadFile
+     * @desc Download the file
+     * @param {Object} documentFile - A document object
+     * @memberOf LinShare.document.documentController
      */
     function downloadFile(documentFile) {
       var url = LinshareDocumentRestService.download(documentFile.uuid);
       itemUtilsService.download(url, documentFile.name);
     }
 
+    /**
+     * @name downloadSelectedFiles
+     * @desc Download selected files
+     * @param {Array<Object>} selectedDocuments - List of selected files
+     * @memberOf LinShare.document.documentController
+     */
     function downloadSelectedFiles(selectedDocuments) {
       _.forEach(selectedDocuments, function(document) {
         $scope.downloadFile(document);
@@ -295,6 +301,35 @@
 
     function lsFullDateFormat() {
       return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
+    }
+
+    /**
+     * @name multiDownload
+     * @desc Prompt dialog to warn about multi download
+     * @memberOf LinShare.document.documentController
+     */
+    function multiDownload() {
+      $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
+        nbFiles: $scope.selectedDocuments.length,
+        totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'))
+      }).then(function(swalText) {
+        swal({
+            title: swalMultipleDownloadTitle,
+            text: swalText,
+            type: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#05b1ff',
+            confirmButtonText: swalMultipleDownloadConfirm,
+            cancelButtonText: swalMultipleDownloadCancel,
+            closeOnConfirm: true,
+            closeOnCancel: true
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              downloadSelectedFiles($scope.selectedDocuments);
+            }
+          });
+      });
     }
 
     function nextTab() {
@@ -462,30 +497,6 @@
             $scope.currentSelectedDocument.current.description = documentServer.description;
           });
         });
-    }
-
-    function unavailableMultiDownload() {
-      $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
-        nbFiles: $scope.selectedDocuments.length,
-        totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'))
-      }).then(function(swalText) {
-        swal({
-            title: swalMultipleDownloadTitle,
-            text: swalText,
-            type: 'error',
-            showCancelButton: true,
-            confirmButtonColor: '#05b1ff',
-            confirmButtonText: swalMultipleDownloadConfirm,
-            cancelButtonText: swalMultipleDownloadCancel,
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              downloadSelectedFiles($scope.selectedDocuments);
-            }
-          });
-      });
     }
   }
 })();
