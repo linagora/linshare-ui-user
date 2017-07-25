@@ -174,7 +174,7 @@
           </span>
           <span x-ng-class="{'hide': selectedDocuments.length <= 1}">
             <a class="plain-text-button share-link"
-               x-ng-click="unavailableMultiDownload()">
+               data-ng-click="multiDownload()">
               <i class="zmdi zmdi-download"></i>
               <span>{{'DOWNLOAD' | translate}}</span>
             </a>

@@ -13,6 +13,7 @@ angular.module('linshare.receivedShare')
       itemUtilsService, lsAppConfig, NgTableParams, receivedShareRestService, swal, toastService) {
       $translatePartialLoader.addPart('receivedShare');
       $scope.documentSelected = documentSelected;
+      $scope.multiDownload = multiDownload;
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
       $scope.datasIsSelected = false;
       $scope.advancedFilterBool = false;
@@ -99,20 +100,18 @@ angular.module('linshare.receivedShare')
         checkdatasIsSelecteds();
       }
 
-      var swalCopyText, swalCopyConfirm, swalMultipleDownloadTitle, swalMultipleDownloadText,
+      var swalCopyText, swalCopyConfirm, swalMultipleDownloadTitle, swalMultipleDownloadCancel,
         swalMultipleDownloadConfirm;
+
       $translate(['SWEET_ALERT.ON_FILE_COPY.TEXT',
         'SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
         .then(function(translations) {
           swalCopyText = translations['SWEET_ALERT.ON_FILE_COPY.TEXT'];
           swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadText = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-
         });
 
     /**
@@ -126,11 +125,17 @@ angular.module('linshare.receivedShare')
         itemUtilsService.download(url, documentFile.name);
       };
 
-      $scope.download = function() {
-        angular.forEach($scope.showActions, function(file) {
-          $scope.downloadFile(file);
+      /**
+       * @name downloadSelectedFiles
+       * @desc Download selected files
+       * @param {Array<Object>} selectedDocuments - List of selected documents
+       * @memberOf LinShare.receivedShare.receivedShareController
+       */
+      function downloadSelectedFiles(selectedDocuments) {
+        _.forEach(selectedDocuments, function(document) {
+          $scope.downloadFile(document);
         });
-      };
+      }
 
       $scope.resetSelectedDocuments = function() {
         $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
@@ -207,7 +212,7 @@ angular.module('linshare.receivedShare')
             });
           }
           resolve($scope.currentSelectedDocument.current);
-          
+
           getReceivedShareAudit($scope.currentSelectedDocument.current).then(function() {
             $scope.loadSidebarContent(lsAppConfig.details);
             if (!_.isUndefined(event)) {
@@ -283,17 +288,35 @@ angular.module('linshare.receivedShare')
         );
       };
 
-      $scope.unavailableMultiDownload = function() {
-        swal({
-            title: swalMultipleDownloadTitle,
-            text: swalMultipleDownloadText,
-            type: 'error',
-            confirmButtonColor: '#05b1ff',
-            confirmButtonText: swalMultipleDownloadConfirm,
-            closeOnConfirm: true
-          }
-        );
-      };
+      /**
+       * @name multiDownload
+       * @desc Prompt dialog to warn about multi download
+       * @memberOf LinShare.document.documentController
+       */
+      function multiDownload() {
+        $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
+          nbFiles: $scope.selectedDocuments.length,
+          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'))
+        }).then(function(swalText) {
+          swal({
+              title: swalMultipleDownloadTitle,
+              text: swalText,
+              type: 'error',
+              showCancelButton: true,
+              confirmButtonColor: '#05b1ff',
+              confirmButtonText: swalMultipleDownloadConfirm,
+              cancelButtonText: swalMultipleDownloadCancel,
+              closeOnConfirm: true,
+              closeOnCancel: true
+            },
+            function(isConfirm) {
+              if (isConfirm) {
+                downloadSelectedFiles($scope.selectedDocuments);
+              }
+            });
+        });
+      }
+
       $scope.sortDropdownSetActive = function(sortField, $event) {
         $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
         $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
