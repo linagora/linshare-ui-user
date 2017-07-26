@@ -43,8 +43,6 @@
      * @memberOf Linshare.authentication.authenticationRestService
      */
     function checkAuthentication(showError, ignoreAuthModule) {
-      showError = _.isUndefined(showError) ? true : showError;
-      ignoreAuthModule = _.isUndefined(ignoreAuthModule) ? true : ignoreAuthModule;
       $log.debug('AuthenticationRestService : checkAuthentication');
       return handler(Restangular.all(restUrl).withHttpConfig({
           ignoreAuthModule: ignoreAuthModule

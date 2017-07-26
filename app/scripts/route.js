@@ -417,7 +417,7 @@
      * @memberOf LinShareUiUserApp.routerConfiguration
      */
     function authRedirect($state, authenticationRestService) {
-      authenticationRestService.checkAuthentication(false).then(function(data) {
+      authenticationRestService.checkAuthentication(false, true).then(function(data) {
         if (_.isUndefined(data.status)) {
           $state.go('home');
         } else {
