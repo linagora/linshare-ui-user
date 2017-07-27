@@ -41,6 +41,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           }
         },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
         "READ": {
           "ADMIN": {
             "TBT__SENTENCE": "",
@@ -159,6 +169,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           }
         },
+        "COPY": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+          }
+        },
         "DELETE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
@@ -177,6 +197,26 @@
           "VIEWER": {
             "TBT__SENTENCE": "",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "INCONSISTENCY": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
@@ -211,6 +251,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
         "UPDATE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
@@ -233,6 +283,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           }
         },
+        "COPY": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+          }
+        },
         "DELETE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
@@ -251,6 +311,16 @@
           "VIEWER": {
             "TBT__SENTENCE": "",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
@@ -305,6 +375,16 @@
           "VIEWER": {
             "TBT__SENTENCE": "",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        },
+        "COPY": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "DELETE": {
@@ -408,6 +488,7 @@
       "TBT__CAN_UPLOAD": "",
       "TBT__EXPIRATION_DATE": "",
       "TBT__FIRST_NAME": "",
+      "TBT__FOLDER": "",
       "TBT__LAST_NAME": "",
       "TBT__MAIL": "",
       "TBT__NAME": "",
@@ -435,6 +516,7 @@
       "TBT__READ": "",
       "TBT__RECEIVE_SHARE": "",
       "TBT__SUCCESS": "",
+      "TBT__TRANSFER": "",
       "TBT__UPDATE": "",
       "TBT__UPLOAD": "",
       "TBT__VIEWED": ""
