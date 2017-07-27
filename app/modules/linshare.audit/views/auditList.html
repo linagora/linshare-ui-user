@@ -224,13 +224,14 @@
               </td>
               <td data-title="'TABLE_HEADER.DETAIL' | translate" class="center">
                 <script type="text/ng-template" id="popover-details.html" audit-details="{{::auditAction}}"></script>
-                <div class="info-popover actions">
+                <div class="info-popover actions" data-ng-click="isOpen = !isOpen">
                   <a href=""
                      uib-popover-template="'popover-details.html'"
                      popover-placement="bottom"
                      popover-trigger="focus"
                      popover-append-to-body="true"
                      popover-placement="right"
+                     popover-is-open="isOpen"
                      popover-class="popover-info-audit set-popover-right m-r-10">
                     <i class="zmdi zmdi-info-outline"></i>
                   </a>
