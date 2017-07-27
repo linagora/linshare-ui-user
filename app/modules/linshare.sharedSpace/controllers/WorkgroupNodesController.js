@@ -747,7 +747,8 @@
                 parentUuid: foldersTree[filePath].parent,
                 uploadedFileUuid: null,
                 workgroupName: folderDetails.workgroupName,
-                workgroupUuid: folderDetails.workgroupUuid
+                workgroupUuid: folderDetails.workgroupUuid,
+                quotaUuid: workgroupNodesVm.folderDetails.quotaUuid
               };
             } else {
               var
