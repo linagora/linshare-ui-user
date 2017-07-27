@@ -128,6 +128,11 @@ body:not(.sw-toggled) #sidebar {
   }
 }
 
+#sidebar .main-menu > li > a i.ls-received-shares  {
+  font-size: 1.35em;
+  line-height: 1;
+}
+
 #sidebar .main-menu > li.sub-menu > ul > li,
 #sidebar .main-menu > li {
   width: 100%;
@@ -160,7 +165,7 @@ body:not(.sw-toggled) #sidebar {
     align-items: center;
     margin: 1.35em auto auto auto;
     p {
-      margin: 0.25em 0 0;
+      margin: 0.35em 0 0;
       color: #fff;
     }
     .first-letter {

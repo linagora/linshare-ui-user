@@ -246,12 +246,12 @@
         </div>
       </div>
       <div id="toolbar-actions" class="hidden-xs">
-        <span x-ng-hide="!guestVm.isMineGuest">
+        <span x-ng-hide="!guestVm.isMineGuest"
+              data-ng-class="{'disable-link' : guestVm.selectedGuests.length > 1}">
            <a class="plain-txt-btn partage-link" title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
-               x-ng-class="{'hide': guestVm.selectedGuests.length > 1}"
                x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)">
             <i class="zmdi zmdi-edit"></i>
-            <span>{{'BOUTON_LABEL_TITLE.EDIT' | translate}}</span>
+            <span>{{'EDIT' | translate}}</span>
           </a>
         </span>
         <span x-ng-hide="!guestVm.isMineGuest">
@@ -260,7 +260,7 @@
             <i class="zmdi zmdi-delete"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
           </a>
         </span>
-        <span x-ng-class="{'hide': guestVm.selectedGuests.length > 1}">
+        <span data-ng-class="{'disable-link' : guestVm.selectedGuests.length > 1}">
           <a class="plain-txt-btn"  title="{{'ACTION.INFORMATION' | translate}}"
                x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])">
             <i class="zmdi zmdi-info-outline"></i>
@@ -394,7 +394,7 @@
                     </li>
                     <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.showGuestDetails(guestData, 1)"
                         event-propagation-stop class="hidden-xs hidden-action-links">
-                      <a title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}">
+                      <a title="{{'EDIT' | translate}}">
                       <i class="zmdi zmdi-edit"></i>
                       </a>
                     </li>
@@ -421,7 +421,7 @@
                             x-ng-click="guestVm.showGuestDetails(guestData, 1)">
                           <a href="" >
                             <i class="zmdi zmdi-edit"></i>
-                            {{'BOUTON_LABEL_TITLE.EDIT' | translate}}
+                            {{'EDIT' | translate}}
                           </a>
                         </li>
                         <li x-ng-hide="!guestVm.isMineGuest"
@@ -478,10 +478,10 @@
 <div class="hidden-xs">
   <span>
     <a class="plain-txt-btn partage-link" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"
-       title="{{'BOUTON_LABEL_TITLE.EDIT' | translate}}"
+       title="{{'EDIT' | translate}}"
        x-ng-class="{'hide': guestVm.selectedGuests.length > 1}">
       <i class="zmdi zmdi-edit"></i>
-      <span>{{'BOUTON_LABEL_TITLE.EDIT' | translate}}</span>
+      <span>{{'EDIT' | translate}}</span>
   </a>
   </span>
   <span>

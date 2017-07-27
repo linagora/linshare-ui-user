@@ -25,6 +25,7 @@
       myUploads,
       sharedSpace,
       tabs,
+      receivedShares,
       uploads,
       service = {
         build: build,
@@ -96,15 +97,15 @@
         icon: 'ls-my-space',
         color: '#2196F3',
         disabled: false,
-        links: [{
-          name: 'MENU_TITLE.RECEIVED_SHARES',
-          link: 'documents.received',
-          disabled: false
-        }, {
-          name: 'MENU_TITLE.SHARES',
-          link: 'documents.shared',
-          disabled: true
-        }]
+        link: 'documents.files'
+      };
+
+      receivedShares = {
+        name: 'MENU_TITLE.RECEIVED_SHARES',
+        icon: 'ls-received-shares',
+        color: '#2196F3',
+        disabled: false,
+        link: 'documents.received'
       };
 
       home = {
@@ -146,7 +147,7 @@
         }]
       };
 
-      tabs = [home, myUploads, files, sharedSpace, administrations, uploads, audit];
+      tabs = [home, myUploads, receivedShares, files, sharedSpace, administrations, uploads, audit];
     }
 
     /**

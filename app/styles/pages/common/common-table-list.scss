@@ -133,11 +133,15 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       padding-top: 11px;
+      max-width: 100%;
       margin-top: 0;
+      padding-right: 0;
       .file-name-disp {
         display: inline-block;
-        min-width: 10px;
-        min-height: 17px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: inherit;
       }
     }
     .ctn-name-actions {
@@ -197,6 +201,7 @@
   }
   th:nth-child(2), td:nth-child(2) {
     width: 61.5%;
+    overflow: hidden;
   }
   th:nth-child(3), td:nth-child(3) {
     width: 20%;
@@ -387,6 +392,7 @@
 
 .file-name-disp {
   display: block;
+  max-width: inherit;
 }
 
 [contenteditable].single-line br {
@@ -527,10 +533,17 @@
       padding-top: 0;
     }
     .secondary-list-item-info {
-      margin-top: -1px;
-      margin-bottom: 0;
       font-size: 0.85em;
       color: #4f4f4f;
+      line-height: 0.2;
+      margin: 0;
+    }
+    .ctn-name-actions {
+      .mobile-list-item-info {
+        font-size: 0.8em;
+        line-height: 0.65;
+        margin: 0;
+      }
     }
     .checkbox-ctn {
       display: block;
@@ -771,7 +784,8 @@
         max-height: initial !important;
       }
       .file-name-col {
-        overflow: hidden;
+        overflow-x: hidden;
+        min-height: 42px;
         white-space: nowrap;
         text-overflow: ellipsis;
         font-weight: 500;
@@ -781,10 +795,19 @@
         padding-left: 0;
         padding-right: 0;
         line-height: 1.25em;
+        .file-name-disp {
+          display: inline-block;
+          max-width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
       }
       .ctn-name-actions {
         .mobile-list-item-info {
-          font-size: 0.8em;
+          line-height: 0.65;
+          margin: 0;
         }
       }
       /* action list icons adjustements */

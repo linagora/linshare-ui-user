@@ -189,7 +189,7 @@
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
-            <span x-ng-class="{'hide' : (contactsListsContactsVm.selectedContacts.length > 1)}">
+            <span data-ng-class="{'disable-link': contactsListsContactsVm.selectedContacts.length > 1}">
               <a class="plain-text-button share-link"
                  title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
                  x-ng-click="
@@ -198,8 +198,8 @@
                 <span>{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}</span>
               </a>
             </span>
-              <span x-ng-class="{'hide' : (contactsListsContactsVm.selectedContacts.length > 1)
-                || (! contactsListsContactsVm.canManage)}">
+              <span data-ng-class="{'disable-link': (contactsListsContactsVm.selectedContacts.length > 1)
+                    || (!contactsListsContactsVm.canManage)}">
                 <a class="plain-text-button share-link" title="{{'EDIT' | translate}}"
                    x-ng-click="
                    contactsListsContactsVm.showItemDetails(contactsListsContactsVm.selectedContacts[0], null, 1)">

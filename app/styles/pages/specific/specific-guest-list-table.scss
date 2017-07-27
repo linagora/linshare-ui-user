@@ -64,7 +64,10 @@
   .filter-views {
     padding-right: 10px !important;
   }
-
+  #file-list-table tr.double-row .secondary-list-item-info {
+    line-height: 0.85;
+    font-size: 0.8em;
+  }
 }
 
 
@@ -77,6 +80,15 @@
       }
       #file-list-table.ng-table td.thumb-type-item a {
         padding-top: 5px;
+      }
+      #file-list-table tr.double-row {
+        .ctn-name-actions {
+          .mobile-list-item-info {
+            font-size: 0.8em;
+            line-height: 1;
+            margin: 0;
+          }
+        }
       }
     }
   }

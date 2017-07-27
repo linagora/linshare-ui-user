@@ -615,8 +615,8 @@ a.sidebar-link {
 }
 
 // links in toolbar
-#toolbar-actions span:hover a span,
-#toolbar-actions span:hover a{
+#toolbar-actions > span a,
+#toolbar-actions > span:hover a{
   transition: color 200ms ease-in-out;
   color: #000 !important;
 }

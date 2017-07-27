@@ -281,8 +281,8 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span
-              x-ng-class="{'hide' : (contactsListsListVm.selectedContactsLists.length > 1) ||
-              (!contactsListsListVm.isFromMyContactsLists)}">
+              data-ng-if="contactsListsListVm.isFromMyContactsLists"
+              data-ng-class="{'disable-link': selectedDocuments.length > 1}">
               <a class="plain-text-button share-link"
                  title="{{'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT' | translate}}"
                  x-ng-click="
@@ -307,71 +307,40 @@
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
               </a>
             </span>
-            <span
-              x-ng-show="!contactsListsListVm.isFromMyContactsLists &&
-               contactsListsListVm.selectedContactsLists.length === 1">
-              <a class="plain-text-button share-link"
-                 title="{{'CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS' | translate}}"
-                 x-ng-click="
-                 contactsListsListVm.goToContactsListTarget(contactsListsListVm.selectedContactsLists[0].uuid,
-                 contactsListsListVm.selectedContactsLists[0].name)">
-                <i class="fa fa-eye"></i>
-                <span>{{'CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS' | translate}}</span>
-              </a>
-            </span>
-            <span
-              x-ng-show="!contactsListsListVm.isFromMyContactsLists &&
-              contactsListsListVm.selectedContactsLists.length === 1">
-              <a class="plain-text-button share-link"
-                 title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
-                 x-ng-click="contactsListsListVm.showItemDetails(contactsListsListVm.selectedContactsLists[0],$event)">
-                <i class="zmdi zmdi-info-outline"></i>
-                <span>{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}</span>
-              </a>
-            </span>
-            <span
-              x-ng-show="!contactsListsListVm.isFromMyContactsLists &&
-               contactsListsListVm.selectedContactsLists.length === 1
-               && !linshareModeProduction">
-              <a class="plain-text-button share-link"
-                 title="{{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}"
-                 x-ng-click="">
-                <i class="fa fa-sign-out"></i>
-                <span>{{'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV' | translate}}</span>
-              </a>
-            </span>
             <span class="dropdown link-dropdown" dropdown
-                  x-ng-class="{'hide' : (contactsListsListVm.selectedContactsLists.length > 1) ||
-                   (!contactsListsListVm.isFromMyContactsLists)}">
+                  data-ng-class="{'hide' : !contactsListsListVm.isFromMyContactsLists}">
                 <a class="plain-text-button share-link"
                    dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="zmdi zmdi-more-vert"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
-                  <li class="hidden-xs" x-ng-show="contactsListsListVm.selectedContactsLists.length === 1">
-                    <a href=""
-                       x-ng-click="contactsListsListVm.goToContactsListTarget(contactsList.uuid, contactsList.name)">
+                  <li class="hidden-xs" data-ng-if="contactsListsListVm.isFromMyContactsLists"
+                      data-ng-class="{'disable-link': contactsListsListVm.selectedContactsLists.length != 1}">
+                    <a href="" data-ng-click="
+                       contactsListsListVm.goToContactsListTarget(contactsListsListVm.selectedContactsLists[0].uuid,
+                       contactsListsListVm.selectedContactsLists[0].name)">
                       <i class="fa fa-eye"></i>
-                      {{'CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS' | translate}}
+                      <span translate>CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS</span>
                     </a>
                   </li>
-                  <li class="hidden-xs" x-ng-show="contactsListsListVm.selectedContactsLists.length === 1">
+                  <li class="hidden-xs"
+                      data-ng-class="{'disable-link': contactsListsListVm.selectedContactsLists.length != 1}">
                     <a href=""
                        x-ng-click="
                        contactsListsListVm.showItemDetails(contactsListsListVm.selectedContactsLists[0],$event)">
                       <i class="zmdi zmdi-info-outline"></i>
-                      {{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}
+                      <span translate>CONTACTS_LISTS_ACTION.MORE.INFORMATION</span>
                     </a>
                   </li>
                   <li class="hidden-xs"
-                      x-ng-show="contactsListsListVm.isFromMyContactsLists &&
-                       contactsListsListVm.selectedContactsLists.length === 1">
+                      data-ng-show="contactsListsListVm.isFromMyContactsLists"
+                      data-ng-class="{'disable-link': contactsListsListVm.selectedContactsLists.length != 1}">
                     <a href=""
                        x-ng-click="
                        contactsListsListVm.renameContactsList(contactsListsListVm.selectedContactsLists[0])">
                       <i class="zmdi zmdi-border-color"></i>
-                      {{'CONTACTS_LISTS_ACTION.MORE.RENAME' | translate}}
+                      <span translate>CONTACTS_LISTS_ACTION.MORE.RENAME</span>
                     </a>
                   </li>
                   <li class="hidden-xs" x-ng-show="!linshareModeProduction">

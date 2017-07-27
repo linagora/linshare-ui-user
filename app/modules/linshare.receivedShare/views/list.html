@@ -114,7 +114,6 @@
                 <ul uib-dropdown-menu="" class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left">
                   <!-- FILTER COMPONENT  -->
-                 li
                   <filter-box class="clearfix"
                               filter-box-size="true"
                               filter-box-date="true"
@@ -181,15 +180,23 @@
           </span>
           <span data-ng-if="canUpload">
             <a class="plain-text-button share-link"
-               x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}"
-               x-ng-click="copyIntoFiles(selectedDocuments)">
-              <i class="ls-received-shares"></i><span translate>SELECTION_TOOLBAR.COPY</span></a>
+               x-ng-click="copyIntoFiles(selectedDocuments[0])">
+              <i class="ls-received-shares"></i>
+              <span translate>ACTION.TRANSFER_SHORT</span></a>
           </span>
           <span>
             <a class="plain-text-button share-link"
-               x-ng-class="{'de-activate-sharing': (numSelectedItems.length == 0 || isCurrentPartage == true)}"
                x-ng-click="deleteDocuments(selectedDocuments)">
-              <i class="fa fa-trash-o"></i><span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
+              <i class="fa fa-trash-o"></i>
+              <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
+            </a>
+          </span>
+          <span>
+            <a class="plain-text-button share-link"
+               data-ng-class="{'disable-link': selectedDocuments.length > 1}"
+               data-ng-click="showCurrentFile(selectedDocuments[0],$event)">
+              <i class="zmdi zmdi-info-outline"></i>
+              <span translate>ACTION.INFORMATION</span>
             </a>
           </span>
           <span class="dropdown link-dropdown" uib-dropdown x-ng-show="linshareModeProduction == false">
@@ -203,7 +210,7 @@
                   <li>
                     <a href="">
                       <i class="zmdi zmdi-forward"></i>
-                      {{'ACTION.TRANSFERT' | translate}}
+                      {{'ACTION.TRANSFER_TO_MY_SPACE' | translate}}
                     </a>
                   </li>
                   <li class="divider"></li>
@@ -288,7 +295,7 @@
                   data-sortable="'name'" uuid={{o.uuid}} header-class="'flexible-table-col'">
                 <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                      {{documentFile.name}}
+                      <span class="file-name-disp">{{documentFile.name}}</span>
                       <span>
                         <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
                         {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
@@ -309,8 +316,8 @@
                           </a>
                         </li>
                         <li class="hidden-xs hidden-action-links" data-ng-if="canUpload">
-                          <a href="" title="{{'ACTION.COPY_IN_MY_FILES' | translate}}" event-propagation-stop="true"
-                             x-ng-click="copyIntoFiles(documentFile)">
+                          <a href="" title="{{'ACTION.TRANSFER_TO_MY_SPACE' | translate}}" event-propagation-stop="true"
+                             data-ng-click="copyIntoFiles(documentFile)">
                             <i class="ls-received-shares"></i>
                          </a>
                         </li>
@@ -341,7 +348,7 @@
                                  data-ng-click="copyIntoFiles(documentFile)"
                                  event-propagation-stop>
                                 <i class="zmdi ls-received-shares"></i>
-                                <span translate>ACTION.COPY_IN_MY_FILES</span>
+                                <span translate>ACTION.TRANSFER_TO_MY_SPACE</span>
                               </a>
                             </li>
                             <li>
@@ -358,10 +365,10 @@
                                 {{'ACTION.DELETE' | translate}}
                               </a>
                             </li>
-                            <li data-ng-show="!linshareModeProduction">
-                              <a href="" ls-share-modal event-propagation-stop>
-                                 <i class="zmdi zmdi-forward"></i>
-                                <span translate>ACTION.TRANSFERT</span>
+                            <li data-ng-if="!linshareModeProduction">
+                              <a href="" event-propagation-stop>
+                                 <i class="zmdi zmdi-share"></i>
+                                <span translate>ACTION.SHARE</span>
                               </a>
                             </li>
                           </ul>

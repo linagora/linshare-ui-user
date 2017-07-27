@@ -1,7 +1,7 @@
 {
   "BACKGROUND_RECEIVED_SHARES_MSG": "These shares are temporary file links, sent and hosted by your contacts.",
   "BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "View your received shares",
-  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Received files",
+  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Received shares",
   "TOOLTIP" : {
     "ADVANCED_FILTER" : "Show advanced filters",
     "REMOVE_FILES" : "Remove selected files",

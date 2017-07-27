@@ -35,14 +35,12 @@
     <div id="toolbar-actions" class="hidden-xs">
       <span>
         <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
-           data-ng-class="{'de-activate-sharing': (numSelectedItems.length === 0 || isCurrentPartage)}"
            data-ng-click="onShare()">
           <i class="zmdi zmdi-share"></i><span translate>SELECTION_TOOLBAR.SHARE</span>
         </a>
       </span>
       <span>
         <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
-           data-ng-class="{'de-activate-sharing': (numSelectedItems.length === 0 || isCurrentPartage)}"
            data-ng-click="deleteDocuments(selectedDocuments)">
           <i class="zmdi zmdi-delete"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
         </a>
@@ -58,14 +56,21 @@
           <i class="zmdi zmdi-download"></i><span translate>DOWNLOAD</span>
         </a>
       </span>
-      <span class="dropdown link-dropdown" uib-dropdown="" data-ng-show="selectedDocuments.length === 1">
+      <span class="dropdown link-dropdown" uib-dropdown="">
         <a class="plain-text-button share-link"
            uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
           <i class="zmdi zmdi-more-vert"></i><span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
           <li class="hidden-xs">
-            <a href=""
+            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
+               data-ng-click="showCurrentFile(selectedDocuments[0],$event, true)">
+             <i class="zmdi zmdi-info-outline" title="{{'ACTION.RENAME' | translate}}"></i>
+             <span translate>ACTION.INFORMATION</span>
+            </a>
+          </li>
+          <li class="hidden-xs">
+            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
                data-ng-click="itemUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
              <i class="zmdi zmdi-border-color" title="{{'ACTION.RENAME' | translate}}"></i>
              <span translate>ACTION.RENAME</span>

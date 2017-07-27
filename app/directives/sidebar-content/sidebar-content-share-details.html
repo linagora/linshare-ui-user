@@ -86,11 +86,10 @@
     </div>
   </div>
 </div>
-<div class="card col-xs-12">
+<div class="card col-xs-12 p-0 abort-sharing-ctn">
   <button class="btn abort-sharing-cta"
           data-ng-click="mainVm.sidebar.getData()
           .removeShare(mainVm.sidebar.getData().recipientShareDetails.current.uuid)">
-    <i class="zmdi zmdi-close"></i>
     <span>{{'RIGHT_PANEL.DETAIL_SHARE.ABORT_SHARE' | translate}}</span>
   </button>
 </div>

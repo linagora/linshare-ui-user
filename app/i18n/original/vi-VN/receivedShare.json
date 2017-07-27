@@ -1,7 +1,7 @@
 {
   "TBT__BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "",
   "TBT__BACKGROUND_RECEIVED_SHARES_MSG": "",
-  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Đã nhận tập tin",
+  "TBT__BREADCRUMB_TITLE_RECEIVED_SHARES": "Đã nhận tập tin",
   "TOOLTIP" : {
     "ADVANCED_FILTER" : "Bộ lọc nâng cao",
     "REMOVE_FILES" : "Xóa tập tin được chọn",

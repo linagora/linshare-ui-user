@@ -253,6 +253,7 @@
   position: absolute;
   z-index: 4;
   transition: 450ms ease-in-out all;
+  transition-delay: 450ms;
   background: $midGreyBg;
   top: 0;
   left: 0;
@@ -387,13 +388,27 @@
   #selection-actions.multi-btns {
     #toolbar-actions {
       > span {
-        margin-left: 6px;
+        margin-left: 5px;
       }
     }
     .exit-selection {
       margin-right: 9px;
       font-size: 1.8em;
     }
+  }
+  #upload-box.right-sidebar-toggled #selection-actions.multi-btns {
+    #toolbar-actions {
+      > span {
+        margin-left: 0px;
+        padding-left: 0px;
+        a {
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+  #upload-box #selection-actions .display-num-selected-items {
+    margin-left: 5px;
   }
 }
 
@@ -424,12 +439,15 @@
     margin-top: 0;
     font-size: 1.05em;
   }
-  span a.de-activate-sharing,
-  span a.de-activate-sharing span:not([class*="path"]),
-  i.de-activate-sharing {
-    pointer-events: none;
-    font-weight: inherit;
-    color: #C9C9C9;
+  span a.disable-link,
+  span a.disable-link span:not([class*="path"]),
+  i.disable-link,
+  .disable-link:hover,
+  .disable-link *,
+  .disable-link *:hover {
+    pointer-events: none !important;
+    font-weight: inherit !important;
+    color: #C9C9C9 !important;
   }
   span a {
     color: #4E4E4E;
@@ -467,7 +485,7 @@
 
 @media (min-width: 900px) and (max-width: 1425px) {
   .right-sidebar-toggled {
-    #toolbar-actions span a {
+    #toolbar-actions > span > a > {
       span {
         overflow: hidden;
         height: 20px;
@@ -479,10 +497,10 @@
 }
 
 @media (max-width: 938px) {
-  #toolbar-actions span a span {
-    display: none;
+  #toolbar-actions > span a span {
+    display: none !important;
   }
-  #toolbar-actions span a i {
+  #toolbar-actions > span a i {
     font-size: 1.15em;
   }
 }

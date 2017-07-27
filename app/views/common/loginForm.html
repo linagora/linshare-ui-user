@@ -38,8 +38,10 @@
     </div>
   </div>
   <div id="copyright-login">
-    <img src="images/common/linshare-logo-white.png" alt="">
-    <p>{{'LOGIN.COPYRIGHT' | translate}}</p>
+    <a href="http://linshare.org" target="_blank">
+      <img src="images/common/linshare-logo-white.png" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
+    </a>
+    <p data-bind-html translate>LOGIN.COPYRIGHT</p>
   </div>
   <div class="quota login-libreNfreeCtn">
     <div class="libre-and-free">
@@ -50,7 +52,9 @@
   <div class="login-content" id="l-login">
     <div class="parent-login-form-alignment">
       <div class="logo-title">
-        <img src="images/ls-logo-big.png" alt="logo">
+        <a href="http://linshare.org" target="_blank">
+          <img src="images/ls-logo-big.png" alt="logo">
+        </a>
         <p>{{'LOGIN.TAGLINE' | translate}}</p>
       </div>
       <div class="lc-block toggled child-centered-login-form">

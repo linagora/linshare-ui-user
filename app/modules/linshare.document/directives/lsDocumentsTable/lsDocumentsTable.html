@@ -46,7 +46,7 @@
          document -->
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
           <span class="file-name-disp single-line" spellcheck="false">{{documentFile.name}}</span>
-          <span>
+          <span class="file-name-disp">
             <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs"
                   x-ng-click="showCurrentFile(documentFile, undefined)" event-propagation-stop>
               <span class="zmdi zmdi-share"></span>
@@ -61,7 +61,7 @@
             </p>
           </span>
         </span>
-        <ls-documents-menu></ls-documents-menu>
+        <ls-documents-menu class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right"></ls-documents-menu>
       </div>
     </td>
     <td class="hidden-xs"

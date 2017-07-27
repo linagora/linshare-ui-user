@@ -193,7 +193,7 @@
         $scope.userLogged = data;
 
         flowUploadService.initFlowUploadService();
-        
+
         if (_.isUndefined($scope.urlTogoAfterLogin)) {
           $state.go(URL_HOME);
         } else {

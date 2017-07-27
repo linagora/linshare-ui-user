@@ -131,14 +131,40 @@ CURRENT SHARE DETAIL SIDEBAR
   left: 50%;
   transform: translateX(-50%);
   margin-top: 1em;
-  i {
-    font-size: 1.5em;
-    margin-right: 0.25em;
-    vertical-align: middle;
-  }
+  background-color: white;
+  padding: 1em 2em;
+  width: 90%;
+  color: $primaryClr;
   span {
     vertical-align: inherit;
+    letter-spacing: 0.05em;
   }
 }
 
-
+@media (max-width: 768px) {
+  .abort-sharing-ctn {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+  }
+  .abort-sharing-cta {
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    span {
+      letter-spacing: 0.05em;
+    }
+  }
+  .share-bg-ctn {
+    height: calc(100% - 50px);
+    #stats-share {
+      height: 100%;
+      .dash-widget-item {
+        height: 55%;
+      }
+    }
+  }
+}

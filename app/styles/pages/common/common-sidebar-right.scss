@@ -413,6 +413,7 @@ md-content #content-ctn-sidebar {
     .item-r {
       align-items: flex-start;
       font-size: 0.8em;
+      margin-right: 0.5em;
       .set-ellipsis {
         max-width: 60px;
       }
@@ -863,6 +864,9 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
   }
   .header-sidebar {
     height: 50px;
+  }
+  .header-sidebar.workgroup-header-nav {
+    position: fixed;
   }
 }
 

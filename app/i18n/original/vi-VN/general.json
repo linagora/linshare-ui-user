@@ -32,7 +32,8 @@
     "TBT__RENAME": "",
     "SHARE": "Chia sẻ",
     "TBT__SILENCE": "",
-    "TBT__TRANSFERT": "",
+    "TBT__TRANSFER_TO_MY_SPACE": "",
+    "TBT__TRANSFER_SHORT": "",
     "TBT__VIEW_VERSIONING": ""
   },
   "TBT__ACTIVITIES": "",
@@ -155,6 +156,7 @@
     "EMAIL_PLACEHOLDER": "Thư điện tử",
     "FORGOTTEN_PASSWORD": "Quên mật khẩu ?",
     "KEEP_SIGNED": "Giữ trạng thái đăng nhập",
+    "TBT__LINSHARE_LINK_ALT": "",
     "LOGIN_HEADER": "Đang truy cập",
     "NOTIFICATION": {
       "TBT__SUCCESS": "{{firstName}}",

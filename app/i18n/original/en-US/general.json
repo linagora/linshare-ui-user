@@ -32,7 +32,8 @@
     "RENAME": "Rename",
     "SHARE": "Share",
     "SILENCE": "Silence",
-    "TRANSFERT": "Transfert",
+    "TRANSFER_TO_MY_SPACE": "Transfer to My Space",
+    "TRANSFER_SHORT": "Transfer",
     "VIEW_VERSIONING": "View previous updates"
   },
   "ACTIVITIES": "Activities",
@@ -151,11 +152,12 @@
   "LINK_DISABLED": "Link disabled",
   "LOGIN": {
     "CONNECTION_LINK": "Log in",
-    "COPYRIGHT": "You are using the Open Source and free version of LinShare™, powered by Linagora © 2009–2017. Contribute to LinShare R&D by subscribing to an Enterprise offer.",
+    "COPYRIGHT": "You are using the Open Source and free version of <a href='http://linshare.org' target='_blank'>LinShare™</a>, powered by <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2017. Contribute to LinShare R&D by subscribing to an Enterprise offer.",
     "EMAIL_PLACEHOLDER": "Email",
-    "FORGOTTEN_PASSWORD": "Forgot password ?",
+    "FORGOTTEN_PASSWORD": "Forgotten password ?",
     "KEEP_SIGNED": "Keep me signed in",
-    "LOGIN_HEADER": "Connection",
+    "LINSHARE_LINK_ALT": "Linshare: Secure file sharing app in open source",
+    "LOGIN_HEADER": "Welcome",
     "NOTIFICATION": {
       "SUCCESS": "Welcome {{firstName}}",
       "ERROR": "Authentication failed, either the email or the password is invalid"
@@ -272,7 +274,7 @@
   },
   "UNKNOWN_USER": "Unknown user",
   "UNKNOWN_FIRST_LETTER": "UNK",
-  "UPLOAD_DONE": "{singular, select, true{{fileName} has been} other{Some files have been}} successfully uploaded",
+  "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> has been} other{Some files have been}} successfully uploaded",
   "USER_QUOTAS": {
     "MAX_FILE_SIZE": "Max file size",
     "REMAINING_OVER": "remaining over",

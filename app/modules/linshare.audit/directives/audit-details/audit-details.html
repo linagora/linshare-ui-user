@@ -1,13 +1,13 @@
 <div class="activity-log-ctn">
   <h5 class="header-log-info">
     <a tooltip-popup-delay="600" tooltip-placement="bottom" uib-tooltip="{{::auditAction.resource.name}}">
-      <span data-ng-class="::auditAction.icon"></span>&nbsp;
-      <span data-ng-if="::auditAction.hasBracket">{{::auditAction.resourceNameVarious}} > </span>
+      <span data-ng-class="::auditAction.icon"></span>&nbsp
+      <span data-ng-if="::auditAction.hasBracket">{{::auditAction.resourceNameVarious}} </span>
       <span>{{::auditAction.resourceName}}</span>
     </a>
   </h5>
   <p>
-    <b class="action-activity-log" translate>{{::auditAction.sentenceAction}}</b> :
+    <b class="action-activity-log" translate>{{::auditAction.sentenceAction}}</+b> :
     <span translate translate-values="auditAction.sentenceVars">{{::auditAction.sentenceKey}}</span>
   </p>
   <div data-ng-if="::auditAction.updatedValues" data-ng-repeat="updatedValue in auditAction.updatedValues">
