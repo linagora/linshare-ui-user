@@ -58,11 +58,7 @@
           disabled: _.isNil(functionalities.GUESTS) ? true : !functionalities.GUESTS.enable && user.canCreateGuest
         });
 
-        files.links.splice(0, 0, {
-          name: 'MENU_TITLE.MY_FILES',
-          link: 'documents.files',
-          disabled: !user.canUpload
-        });
+        files.disabled = !user.canUpload;
 
         sharedSpace.disabled = !functionalities.WORK_GROUP.enable;
         myUploads.disabled = !(functionalities.WORK_GROUP.enable || user.canUpload);
