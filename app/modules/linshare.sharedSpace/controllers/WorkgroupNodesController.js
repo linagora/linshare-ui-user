@@ -436,7 +436,7 @@
     function multiDownload() {
       $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
         nbFiles: workgroupNodesVm.selectedDocuments.length,
-        totalSize: $filter('readableSize')(_.sumBy(workgroupNodesVm.selectedDocuments, 'size'))
+        totalSize: $filter('readableSize')(_.sumBy(workgroupNodesVm.selectedDocuments, 'size'), true)
       }).then(function(swalText) {
         swal({
             title: swalMultipleDownloadTitle,

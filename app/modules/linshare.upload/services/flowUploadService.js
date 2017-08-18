@@ -110,9 +110,9 @@
               errorCode = flowFile.asyncUploadDetails.errorCode;
               errorMessage = messagePrefix + errorCode;
               if (errorCode === 46010) {
-                errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize)};
+                errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize, true)};
               } else if (errorCode === 46014) {
-                errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota)};
+                errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota, true)};
               }
             }
 
@@ -158,11 +158,11 @@
           } else if (flowFile.size > quotas.maxFileSize) {
             errorCode = 46010;
             errorMessage = messagePrefix + errorCode;
-            errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize)};
+            errorParams = {maxFileSize: $filter('readableSize')(flowFile.quotas.maxFileSize, true)};
           } else if ((quotas.quota - quotas.usedSpace) <= flowFile.size) {
             errorCode = 46014;
             errorMessage = messagePrefix + errorCode;
-            errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota)};
+            errorParams = {quotaAttempt: $filter('readableSize')(flowFile.quotas.quota, true)};
           }
 
           if (errorMessage) {

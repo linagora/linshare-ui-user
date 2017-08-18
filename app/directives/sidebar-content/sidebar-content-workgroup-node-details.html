@@ -141,7 +141,7 @@
       <div class="item-r actions"
            data-ng-if="mainVm.sidebar.getData().isDocument(mainVm.sidebar.getData().currentSelectedDocument.current.type)">
         <span>
-          {{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: false}}
+          {{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: true}}
         </span>
         <!-- TODO : when the file extension will be implemented well, re add this code -->
         <!--

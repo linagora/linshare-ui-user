@@ -527,7 +527,7 @@
                         <p class="mobile-list-item-info visible-xs">
                           {{nodeItem.modificationDate | relativeTime}}
                           {{::workgroupNodesVm.isDocument(nodeItem.type) ?
-                          ', '+(nodeItem.size | readableSize: false) : ''}}
+                          ', '+(nodeItem.size | readableSize: true) : ''}}
                         </p>
                       </span>
                     </span>
@@ -685,7 +685,7 @@
                     data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                     data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"
                     header-class="'col-5 hide-if-toggled-sidebar'">
-                  {{::workgroupNodesVm.isDocument(nodeItem.type) ? (nodeItem.size | readableSize: false) : ''}}
+                  {{::workgroupNodesVm.isDocument(nodeItem.type) ? (nodeItem.size | readableSize: true) : ''}}
                 </td>
               </tr>
             </table>

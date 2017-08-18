@@ -297,7 +297,7 @@ angular.module('linshare.receivedShare')
       function multiDownload() {
         $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
           nbFiles: $scope.selectedDocuments.length,
-          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'))
+          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
         }).then(function(swalText) {
           swal({
               title: swalMultipleDownloadTitle,

@@ -15,7 +15,7 @@
         <span>{{::file.name}}</span>
       </div>
       <div class="p-0 secondary-info-ctn">
-        <span class="secondary-info-text">{{::file.size | readableSize: false}}</span>
+        <span class="secondary-info-text">{{::file.size | readableSize: true}}</span>
       </div>
     </div>
     <p data-ng-hide="(file.isComplete() || file.paused) || file.error" class="time-remaining">

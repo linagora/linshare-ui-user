@@ -53,7 +53,7 @@
               <span translate>BOUTON_LABEL_TITLE.SHARED</span>
             </span>
             <p class="mobile-list-item-info visible-xs">
-              {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: false}}
+              {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: true}}
               <span x-ng-show="documentFile.shared > 0">,
                 <span class="zmdi zmdi-share"></span>
                 <span translate>BOUTON_LABEL_TITLE.SHARED</span>
@@ -74,7 +74,7 @@
         ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
         header-class="'hide-if-toggled-sidebar'"
         data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
-      {{documentFile.size | readableSize: false}}
+      {{documentFile.size | readableSize: true}}
     </td>
   </tr>
 </table>

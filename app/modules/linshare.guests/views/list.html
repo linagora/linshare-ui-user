@@ -376,7 +376,7 @@
                       {{guestData.mail}}
                     </p>
                     <p class="mobile-list-item-info visible-xs">
-                      {{guestData.modificationDate | relativeTime}}, {{guestData.size | readableSize: false}},
+                      {{guestData.modificationDate | relativeTime}}, {{guestData.size | readableSize: true}},
                       <span x-ng-show="guestData.shared > 0">
                       {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
                       </span>

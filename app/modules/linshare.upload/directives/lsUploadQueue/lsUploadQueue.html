@@ -40,7 +40,7 @@
                     <span>&nbsp;| <span translate>UPLOAD_DESTINATION</span> :
                       {{::file.folderDetails.workgroupName | uppercase}} >> {{::file.folderDetails.folderName}}</span>
                   </small>
-                  <small class="lv-small pull-right clearfix">{{::file.size | readableSize: false}}</small>
+                  <small class="lv-small pull-right clearfix">{{::file.size | readableSize: true}}</small>
                   <div class="clearfix"></div>
                   <uib-progressbar data-ng-class="{
                   'progress-striped active upload-server-state' : file.doingAsyncUpload,
