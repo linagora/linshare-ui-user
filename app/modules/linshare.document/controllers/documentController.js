@@ -167,31 +167,24 @@
           };
           var responses = [];
           _.forEach(responsesDeletion, function(responseItems) {
-            switch (responseItems[1].status) {
-              case 404:
-                responses.push({
-                  'title': responseItems[0],
-                  'message': {key: 'TOAST_ALERT.WARNING.ERROR_404'}
-                });
-                break;
-              case 403:
-                responses.push({
-                  'title': responseItems[0],
-                  'message': {key: 'TOAST_ALERT.WARNING.ERROR_403'}
-                });
-                break;
+            var currentResponse = {
+              title: responseItems[0],
+              message: {
+                params: {
+                  errCode: responseItems[1].data.errCode
+                }
+              }
+            };
+            switch(responseItems[1].status) {
               case 400:
-                responses.push({
-                  'title': responseItems[0],
-                  'message': {key: 'TOAST_ALERT.WARNING.ERROR_400'}
-                });
+              case 403:
+              case 404:
+                currentResponse.message.key = 'TOAST_ALERT.WARNING.ERROR_' + responseItems[1].status;
                 break;
               default:
-                responses.push({
-                  'title': responseItems[0],
-                  'message': {key:'TOAST_ALERT.WARNING.ERROR_500'}
-                });
+                currentResponse.message.key = 'TOAST_ALERT.WARNING.ERROR_500';
             }
+            responses.push(currentResponse);
           });
           toastService.error(message, undefined, responses);
         } else {

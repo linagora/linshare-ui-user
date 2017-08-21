@@ -77,10 +77,10 @@
       "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} items have not been deleted.",
       "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{item has} other{items have}} not been uploaded.",
       "ERROR": "Error :",
-      "ERROR_404": "Element not found",
-      "ERROR_403": "You are not authorized to delete this document",
-      "ERROR_400": "The request couldn't be achieved",
-      "ERROR_500": "Server error",
+      "ERROR_404": "Error {{errCode}} - Element not found",
+      "ERROR_403": "Error {{errCode}} - You are not authorized to delete this document",
+      "ERROR_400": "Error {{errCode}} - The request couldn't be achieved",
+      "ERROR_500": "Error {{errCode}} - Server error",
       "ISOLATED_FILE": "You are currently viewing a restricted file selection."
     }
   }

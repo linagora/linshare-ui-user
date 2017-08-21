@@ -77,10 +77,10 @@
       "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} éléments n'ont pu être supprimés.",
       "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{élément n'a} other{éléments n'ont}} pu être {singular, select, true{téléversé} other{téléversés}}.",
       "ERROR": "Erreur :",
-      "ERROR_404": "Élément introuvable",
-      "ERROR_403": "Vous n'êtes pas autorisé à supprimer cet élément",
-      "ERROR_400": "Suppression impossible",
-      "ERROR_500": "Erreur du serveur",
+      "ERROR_404": "Erreur {{errCode}} - Élément introuvable",
+      "ERROR_403": "Erreur {{errCode}} - Vous n'êtes pas autorisé à supprimer cet élément",
+      "ERROR_400": "Erreur {{errCode}} - Suppression impossible",
+      "ERROR_500": "Erreur {{errCode}} - Erreur du serveur",
       "ISOLATED_FILE": "Vous visualisez une selection restreinte de fichiers."
     }
   }
