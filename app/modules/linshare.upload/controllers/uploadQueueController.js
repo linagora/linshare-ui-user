@@ -175,7 +175,6 @@
           text: message,
           type: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#3fa9ff',
           confirmButtonText: uploadQueueVm.warningContinueMainButton,
           cancelButtonText: uploadQueueVm.warningCancel,
           closeOnConfirm: true,

@@ -92,7 +92,6 @@
           text: swalText,
           type: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#DD6B55',
           confirmButtonText: swalConfirm,
           cancelButtonText: swalCancel,
           closeOnConfirm: true,

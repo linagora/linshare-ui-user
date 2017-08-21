@@ -311,7 +311,6 @@
             text: swalText,
             type: 'error',
             showCancelButton: true,
-            confirmButtonColor: lsColors.PRIMARY_BLUE,
             confirmButtonText: swalMultipleDownloadConfirm,
             cancelButtonText: swalMultipleDownloadCancel,
             closeOnConfirm: true,
