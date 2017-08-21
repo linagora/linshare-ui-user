@@ -139,7 +139,6 @@
           text: swalText.replace('${count}', stringParams.count).replace('${plural}', stringParams.plural),
           type: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#DD6B55',
           confirmButtonText: swalConfirm,
           cancelButtonText: swalCancel,
           closeOnConfirm: true,

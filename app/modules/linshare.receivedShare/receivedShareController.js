@@ -266,7 +266,6 @@ angular.module('linshare.receivedShare')
               text: swalText,
               type: 'info',
               showCancelButton: true,
-              confirmButtonColor: lsColors.PRIMARY_BLUE,
               confirmButtonText: swalCopyConfirm,
               cancelButtonText: swalCopyCancel,
               closeOnConfirm: true,
