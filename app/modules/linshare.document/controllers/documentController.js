@@ -92,7 +92,7 @@
 
       // TODO : rename all GROWL
       $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
         ])
         .then(function(translations) {

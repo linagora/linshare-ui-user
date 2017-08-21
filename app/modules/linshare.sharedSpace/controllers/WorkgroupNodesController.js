@@ -87,10 +87,12 @@
         $translate([
           'ACTION.NEW_FOLDER',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON',
           'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
         ]).then(function(translations) {
           newFolderName = translations['ACTION.NEW_FOLDER'];
           swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
+          swalMultipleDownloadCancel = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'];
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
       });
