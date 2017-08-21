@@ -8,24 +8,11 @@
 angular.module('linshare.document')
   .factory('documentUtilsService', documentUtilsService);
 
-function documentUtilsService(_, $translate, $log, $timeout, $q, swal) {
+function documentUtilsService($q) {
   var reloadDocumentsList = false;
-
-  var swalTitle, swalText, swalConfirm, swalCancel;
-  $timeout(function() {
-    $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
-      'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'])
-      .then(function(translations) {
-        swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
-        swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
-        swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
-        swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
-      });
-  }, 0);
 
   return {
     removeElementFromCollection: removeElementFromCollection,
-    deleteDocuments: deleteDocuments,
     selectDocument: toggleItemSelection,
     getItemDetails: getItemDetails,
     resetItemSelection: resetItemSelection,
@@ -59,30 +46,6 @@ function documentUtilsService(_, $translate, $log, $timeout, $q, swal) {
       collection.splice(index, 1);
     }
     return collection;
-  }
-
-  function deleteDocuments(items, callback) {
-
-    if (!angular.isArray(items)) {
-      items = [items];
-    }
-    swal({
-        title: swalTitle,
-        text: swalText,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#DD6B55',
-        confirmButtonText: swalConfirm,
-        cancelButtonText: swalCancel,
-        closeOnConfirm: true,
-        closeOnCancel: true
-      },
-      function(isConfirm) {
-        if (isConfirm) {
-          callback(items);
-        }
-      }
-    );
   }
 
   function toggleItemSelection(selectedItems, item) {

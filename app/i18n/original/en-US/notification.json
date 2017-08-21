@@ -1,10 +1,17 @@
 {
   "SWEET_ALERT": {
-    "ON_FILE_DELETE": {
-      "TITLE": "Are you sure?",
-      "TEXT": "You are about to remove files ! Beware, this action cannot be undone.",
-      "CONFIRM_BUTTON": "Yes, delete them",
-      "CANCEL_BUTTON": "Cancel"
+    "ON_ITEM_DELETE": {
+      "CANCEL_BUTTON": "Cancel",
+      "CONFIRM_BUTTON": "Yes, delete",
+      "TEXT": {
+        "CONTACTS_LIST": "You are about to remove {nbItems} {singular, select, true{contacts list} other{contacts lists}} ! Beware, this action cannot be undone.",
+        "CONTACTS_LIST_CONTACT": "You are about to remove {nbItems} {singular, select, true{contact} other{contacts}} ! Beware, this action cannot be undone.",
+        "DOCUMENT": "You are about to remove {nbItems} {singular, select, true{file} other{files}} ! Beware, this action cannot be undone.",
+        "RECEIVED_SHARE": "You are about to remove {nbItems} {singular, select, true{file share} other{files share}} ! Beware, this action cannot be undone.",
+        "WORKGROUP": "You are about to remove {nbItems} {singular, select, true{workgroup} other{workgroups}} ! Beware, this action cannot be undone.",
+        "WORKGROUP_NODE": "You are about to remove {nbItems} {singular, select, true{file or folder} other{files or folders}} ! Beware, this action cannot be undone."
+      },
+      "TITLE": "Deletion"
     },
     "ON_LOCALSTORAGE_DELETE": {
       "TITLE": "Are you sure?",

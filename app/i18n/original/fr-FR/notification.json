@@ -1,10 +1,17 @@
 {
   "SWEET_ALERT": {
-    "ON_FILE_DELETE": {
-      "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Vous êtes sur le point de supprimer des fichiers. Attention, cette action est irreversible.",
+    "ON_ITEM_DELETE": {
+      "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
-      "CANCEL_BUTTON": "Annuler"
+      "TEXT": {
+        "CONTACTS_LIST": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{liste de contacts} other{listes de contacts}}. Attention, cette action est irreversible.",
+        "CONTACTS_LIST_CONTACT": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{contact} other{contacts}}. Attention, cette action est irreversible.",
+        "DOCUMENT": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{fichier} other{fichiers}}. Attention, cette action est irreversible.",
+        "RECEIVED_SHARE": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{partage} other{partages}}. Attention, cette action est irreversible.",
+        "WORKGROUP": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{groupe de travail} other{groupes de travail}}. Attention, cette action est irreversible.",
+        "WORKGROUP_NODE": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{fichier ou dossier} other{fichiers ou dossiers}}. Attention, cette action est irreversible."
+      },
+      "TITLE": "Suppression"
     },
     "ON_LOCALSTORAGE_DELETE": {
       "TITLE": "Êtes-vous sûr?",

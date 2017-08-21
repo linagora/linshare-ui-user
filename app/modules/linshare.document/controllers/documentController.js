@@ -198,7 +198,7 @@
     }
 
     function deleteDocuments(items) {
-      documentUtilsService.deleteDocuments(items, deleteCallback);
+      itemUtilsService.deleteItem(items, itemUtilsService.itemUtilsConstant.DOCUMENT, deleteCallback);
     }
 
     /**

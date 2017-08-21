@@ -248,9 +248,8 @@
      * @param {Array<Object>} contactsListsList - contactsList to delete
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
-    // TODO : IAB remove documentUtilsService and implement generic delete items methods (if possible in service)
     function deleteContactsList(contactsListsList) {
-      documentUtilsService.deleteDocuments(contactsListsList, deleteCallback);
+      itemUtilsService.deleteItem(contactsListsList, itemUtilsService.itemUtilsConstant.CONTACTS_LIST, deleteCallback);
     }
 
     /**

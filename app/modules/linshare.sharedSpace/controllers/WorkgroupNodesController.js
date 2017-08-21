@@ -213,9 +213,8 @@
      * @param {Array<Object>} nodes - List of nodes to delete
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    // TODO : multiple delete like in mySpace and remove documentUtilsService code (do it other way)
     function deleteNodes(nodes) {
-      documentUtilsService.deleteDocuments(nodes, function(nodes) {
+      itemUtilsService.deleteItem(nodes, itemUtilsService.itemUtilsConstant.WORKGROUP_NODE, function(nodes) {
         _.forEach(nodes, function(restangularizedItem) {
           restangularizedItem.remove().then(function() {
             toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});

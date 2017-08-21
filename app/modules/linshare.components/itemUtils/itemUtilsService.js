@@ -9,38 +9,101 @@
     .module('linshare.components')
     .factory('itemUtilsService', itemUtilsService);
 
-  itemUtilsService.$inject = ['_', '$q', 'authenticationRestService', 'lsAppConfig', 'lsErrorCode', 'toastService'];
+  itemUtilsService.$inject = ['_', '$q', '$translate', 'authenticationRestService', 'itemUtilsConstant', 'lsAppConfig',
+    'lsErrorCode', 'swal', 'toastService'];
 
   /**
    * @namespace itemUtilsService
    * @desc Utils service for manipulating file
    * @memberOf linshare.components
    */
-  function itemUtilsService(_, $q, authenticationRestService, lsAppConfig, lsErrorCode, toastService) {
+  function itemUtilsService(_, $q, $translate, authenticationRestService, itemUtilsConstant, lsAppConfig, lsErrorCode,
+                            swal, toastService) {
     var
       invalidNameTranslate = {
         empty: {
-          key: 'GROWL_ALERT.ERROR.RENAME_INVALID.EMPTY',
+          key: 'GROWL_ALERT.ERROR.RENAME_INVALID.EMPTY'
         },
         endingPoint: {
-          key: 'GROWL_ALERT.ERROR.RENAME_INVALID.ENDING_POINT',
+          key: 'GROWL_ALERT.ERROR.RENAME_INVALID.ENDING_POINT'
         },
         rejectedChar: {
           key: 'GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR',
-          param: lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''),
+          param: lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\'')
         }
       },
       regex = new RegExp('[\\' + lsAppConfig.rejectedChar.join('-').replace(new RegExp('-', 'g'), '\\') + ']'),
+      swalTitle,
+      swalCancel,
+      swalConfirm,
       service = {
+        deleteItem: deleteItem,
         download: download,
         isNameValid: isNameValid,
         itemNumber: itemNumber,
+        itemUtilsConstant: itemUtilsConstant,
         rename: rename
       };
 
     return service;
 
     ////////////
+
+    /**
+     * @name deleteItem
+     * @desc Delete items
+     * @param {Object|Array<Object>} items - List of items to delete
+     * @param {string} messageKey - Key of the sentence to translate, to show in alert dialog
+     * @param {function} callback - Function to execute for deletion
+     * @memberOf linshare.components.itemUtilsService
+     */
+    function deleteItem(items, messageKey, callback) {
+      $q.when(swalTitle).then(function(swalTitle) {
+        if(_.isUndefined(swalTitle)) {
+          return $translate([
+            'SWEET_ALERT.ON_ITEM_DELETE.TITLE',
+            'SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON',
+            'SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON']);
+        }
+
+        return {
+          'SWEET_ALERT.ON_ITEM_DELETE.TITLE': swalTitle,
+          'SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON': swalCancel,
+          'SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON': swalConfirm
+        };
+      }).then(function(translations) {
+        swalTitle = translations['SWEET_ALERT.ON_ITEM_DELETE.TITLE'];
+        swalCancel = translations['SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON'];
+        swalConfirm = translations['SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON'];
+
+        if (!_.isArray(items)) {
+          items = [items];
+        }
+
+        $translate('SWEET_ALERT.ON_ITEM_DELETE.TEXT.' + messageKey, {
+          nbItems: items.length,
+          singular: items.length <= 1 ? 'true' : 'other'
+        }, 'messageformat').then(function(swalText) {
+          swal({
+              title: swalTitle,
+              text: swalText,
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#DD6B55',
+              confirmButtonText: swalConfirm,
+              cancelButtonText: swalCancel,
+              closeOnConfirm: true,
+              closeOnCancel: true
+            },
+            function(isConfirm) {
+              if (isConfirm) {
+                callback(items);
+              }
+            }
+          );
+        });
+      });
+    }
 
     /**
      * @name download

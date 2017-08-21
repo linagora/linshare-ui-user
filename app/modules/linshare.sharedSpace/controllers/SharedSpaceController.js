@@ -213,7 +213,7 @@ angular.module('linshare.sharedSpace')
     };
 
     function deleteWorkGroup(workgroups) {
-      documentUtilsService.deleteDocuments(workgroups, deleteCallback);
+      itemUtilsService.deleteItem(workgroups, itemUtilsService.itemUtilsConstant.WORKGROUP, deleteCallback);
     }
 
 // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not

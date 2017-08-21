@@ -441,7 +441,7 @@ angular.module('linshare.receivedShare')
       $scope.documentsList = receivedFiles;
 
       $scope.deleteDocuments = function(items) {
-        documentUtilsService.deleteDocuments(items, deleteCallback);
+        itemUtilsService.deleteItem(items, itemUtilsService.itemUtilsConstant.RECEIVED_SHARE, deleteCallback);
       };
 
       function deleteCallback(items) {

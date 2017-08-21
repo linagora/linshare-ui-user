@@ -1,10 +1,17 @@
 {
   "SWEET_ALERT": {
-    "ON_FILE_DELETE": {
-      "TITLE": "Bạn có chắc chắn không?",
-      "TEXT": "Bạn đang chuẩn bị xóa những tập này!",
+    "ON_ITEM_DELETE": {
+      "CANCEL_BUTTON": "Không!",
       "CONFIRM_BUTTON": "Có!",
-      "CANCEL_BUTTON": "Không!"
+      "TEXT": {
+        "TBT__CONTACTS_LIST": "",
+        "TBT__CONTACTS_LIST_CONTACT": "",
+        "TBT__DOCUMENT": "",
+        "TBT__RECEIVED_SHARE": "",
+        "TBT__WORKGROUP": "",
+        "TBT__WORKGROUP_NODE": ""
+      },
+      "TITLE": "Bạn có chắc chắn không ?"
     },
     "ON_LOCALSTORAGE_DELETE": {
       "TITLE": "Bạn có chắc chắn không?",

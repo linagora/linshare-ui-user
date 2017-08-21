@@ -10,8 +10,8 @@
 
   contactsListsContactsController.$inject = ['_', '$filter', '$scope', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'addContacts', 'contactsListsContacts', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'lsAppConfig', 'NgTableParams',
-    'toastService'
+    'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'itemUtilsService',
+    'lsAppConfig', 'NgTableParams', 'toastService'
   ];
 
   /**
@@ -23,8 +23,8 @@
   /* jshint maxparams: false, maxstatements: false */
   function contactsListsContactsController(_, $filter, $scope, $stateParams, $timeout, $translate,
     $translatePartialLoader, addContacts, contactsListsContacts, contactsListsListRestService,
-    contactsListsContactsRestService, contactsListsService, documentUtilsService, lsAppConfig, NgTableParams,
-    toastService) {
+    contactsListsContactsRestService, contactsListsService, documentUtilsService, itemUtilsService, lsAppConfig,
+    NgTableParams, toastService) {
     /* jshint validthis:true */
     var contactsListsContactsVm = this;
     var
@@ -192,9 +192,9 @@
      * @param {Array<Object>} contactsListsContacts - contacts to delete
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
-    // TODO : IAB remove documentUtilsService and implement generic selections methods with services
     function deleteContact(contactsListsContacts) {
-      documentUtilsService.deleteDocuments(contactsListsContacts, deleteCallback);
+      itemUtilsService.deleteItem(contactsListsContacts, itemUtilsService.itemUtilsConstant.CONTACTS_LIST_CONTACT,
+        deleteCallback);
     }
 
     /**
