@@ -259,7 +259,7 @@ angular.module('linshare.receivedShare')
         $translate('SWEET_ALERT.ON_FILE_TRANSFER.TEXT', {
           nbItems: $scope.selectedDocuments.length,
           singular: $scope.selectedDocuments.length <= 1 ? 'true' : 'other',
-          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'))
+          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
         }, 'messageformat').then(function(swalText) {
           swal({
               title: swalCopyTitle,
