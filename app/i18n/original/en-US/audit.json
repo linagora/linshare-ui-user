@@ -536,6 +536,7 @@
       "WORKGROUP_MEMBER": "Workgroup member"
     }
   },
+  "NO_AUDIT": "No audit for this resource yet",
   "TABLE_HEADER": {
     "ACTION": "Action",
     "ACTOR": "Actor",

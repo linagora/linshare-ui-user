@@ -272,6 +272,9 @@
         </md-tab>
         <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 no-padding disabled">
           <md-content class="md-padding">
+            <span data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.auditActions.length" translate>
+              NO_AUDIT
+            </span>
             <div data-ng-repeat="auditAction in mainVm.sidebar.getData().currentSelectedDocument.current.auditActions"
                  audit-details="{{::auditAction}}" class="audit-card"></div>
           </md-content>

@@ -536,6 +536,7 @@
       "WORKGROUP_MEMBER": "Groupe de Travail - Membre"
     }
   },
+  "NO_AUDIT": "Cette ressource n'a pas encore d'historique d'activité",
   "TABLE_HEADER": {
     "ACTION": "Action",
     "ACTOR": "Acteur",
