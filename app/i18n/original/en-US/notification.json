@@ -1,5 +1,11 @@
 {
   "SWEET_ALERT": {
+    "ON_FILE_TRANSFER": {
+      "CANCEL_BUTTON": "Cancel!",
+      "CONFIRM_BUTTON": "Transfer",
+      "TEXT": "You are about to transfer {nbItems} received {singular, select, true{document} other{documents}} for a total of {totalSize} into your own files.",
+      "TITLE": "File transfer"
+    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",
@@ -25,6 +31,12 @@
       "CONFIRM_BUTTON": "OK",
       "TEXT": "You are going to download {{nbFiles}} files (total size : {{totalSize}})",
       "TITLE": "Multiple download"
+    },
+    "ON_SHARE_DELETE": {
+      "CANCEL_BUTTON": "Cancel!",
+      "CONFIRM_BUTTON": "Delete",
+      "TEXT": "You are about to remove a share !",
+      "TITLE": "Are you sure?"
     }
   },
   "GROWL_ALERT": {

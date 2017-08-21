@@ -240,33 +240,6 @@
     "TBT__SHOW_SELECTION": "",
     "TBT__STOP": ""
   },
-  "SWEET_ALERT": {
-    "ON_FILE_DELETE": {
-      "CANCEL_BUTTON": "Hủy!",
-      "CONFIRM_BUTTON": "Có!",
-      "TEXT": "Bạn đang chuẩn bị xóa tập tin này!",
-      "TITLE": "Bạn có chắc chắn không?"
-    },
-    "ON_LOCALSTORAGE_DELETE": {
-      "CONFIRM_BUTTON": "Có!",
-      "DONE": "Xong",
-      "IS_CLEARED": "LocalStorage rỗng",
-      "TEXT": "Tất cả dữ liệu trên localStorage sẽ bị xóa",
-      "TITLE": "Bạn có chắc chắn không?"
-    },
-    "TBT__ON_FILE_COPY": {
-      "TBT__CANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TEXT": "",
-      "TBT__TITLE": ""
-    },
-    "TBT__ON_SHARE_DELETE": {
-      "TBT__CANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TEXT": "",
-      "TBT__TITLE": ""
-    }
-  },
   "TRANSFERS_DROPDOWN": {
     "BEFORE_SENDINGS": "trước khi gửi",
     "SHARE": "Chia sẻ",

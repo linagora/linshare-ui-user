@@ -239,33 +239,6 @@
     "SHOW_SELECTION": "Voir sélection",
     "STOP": "Arrêter"
   },
-  "SWEET_ALERT": {
-    "ON_FILE_DELETE": {
-      "CANCEL_BUTTON": "Annuler !",
-      "CONFIRM_BUTTON": "Supprimer !",
-      "TEXT": "Vous êtes sur le point de supprimer des fichiers !",
-      "TITLE": "Êtes-vous sûr?"
-    },
-    "ON_LOCALSTORAGE_DELETE": {
-      "CONFIRM_BUTTON": "Effacer",
-      "DONE": "Terminé",
-      "IS_CLEARED": "Le stockage local a été effacé",
-      "TEXT": "Toutes les valeurs du stockage local seront effacées",
-      "TITLE": "Êtes-vous sûr?"
-    },
-    "ON_FILE_COPY": {
-      "CANCEL_BUTTON": "Annuler",
-      "CONFIRM_BUTTON": "Copier",
-      "TEXT": "Vous êtes sur le point de copier des fichiers reçus dans votre espace !",
-      "TITLE": "Êtes-vous sûr?"
-    },
-    "ON_SHARE_DELETE": {
-      "CANCEL_BUTTON": "Annuler!",
-      "CONFIRM_BUTTON": "Effacer",
-      "TEXT": "Vous êtes sur le point de supprimer un partage !",
-      "TITLE": "Êtes-vous sûr?"
-    }
-  },
   "TRANSFERS_DROPDOWN": {
     "BEFORE_SENDINGS": "avant l'envoi",
     "SHARE": "Partage",

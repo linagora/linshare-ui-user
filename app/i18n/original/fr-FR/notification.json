@@ -1,5 +1,11 @@
 {
   "SWEET_ALERT": {
+    "ON_FILE_TRANSFER": {
+      "CANCEL_BUTTON": "Annuler",
+      "CONFIRM_BUTTON": "Transférer",
+      "TEXT": "Vous êtes sur le point de transférer {nbItems} {singular, select, true{document reçu} other{documents reçus}} d'une taille totale de {totalSize} dans votre espace.",
+      "TITLE": "Transfert de fichier"
+    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
@@ -25,6 +31,12 @@
       "CONFIRM_BUTTON": "OK",
       "TEXT": "Vous êtes sur le point de télécharger {{nbFiles}} fichiers (taille total : {{totalSize}})",
       "TITLE": "Téléchargement multiple"
+    },
+    "ON_SHARE_DELETE": {
+      "CANCEL_BUTTON": "Annuler!",
+      "CONFIRM_BUTTON": "Effacer",
+      "TEXT": "Vous êtes sur le point de supprimer un partage !",
+      "TITLE": "Êtes-vous sûr?"
     }
   },
   "GROWL_ALERT": {

@@ -1,5 +1,11 @@
 {
   "SWEET_ALERT": {
+    "TBT__ON_FILE_TRANSFER": {
+      "TBT__CANCEL_BUTTON": "",
+      "TBT__CONFIRM_BUTTON": "",
+      "TBT__TEXT": "",
+      "TBT__TITLE": ""
+    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Không!",
       "CONFIRM_BUTTON": "Có!",
@@ -21,6 +27,12 @@
       "IS_CLEARED": "LocalStorage rỗng"
     },
     "TBT__ON_MULTIPLE_DOWNLOAD": {
+      "TBT__CANCEL_BUTTON": "",
+      "TBT__CONFIRM_BUTTON": "",
+      "TBT__TEXT": "",
+      "TBT__TITLE": ""
+    },
+    "TBT__ON_SHARE_DELETE": {
       "TBT__CANCEL_BUTTON": "",
       "TBT__CONFIRM_BUTTON": "",
       "TBT__TEXT": "",

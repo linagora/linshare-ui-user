@@ -100,19 +100,24 @@ angular.module('linshare.receivedShare')
         checkdatasIsSelecteds();
       }
 
-      var swalCopyText, swalCopyConfirm, swalMultipleDownloadTitle, swalMultipleDownloadCancel,
-        swalMultipleDownloadConfirm;
+      var swalCopyCancel, swalCopyConfirm, swalCopyText, swalCopyTitle, swalMultipleDownloadTitle,
+        swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
-      $translate(['SWEET_ALERT.ON_FILE_COPY.TEXT',
-        'SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON',
+      $translate([
+        'SWEET_ALERT.ON_FILE_TRANSFER.CANCEL_BUTTON',
+        'SWEET_ALERT.ON_FILE_TRANSFER.CONFIRM_BUTTON',
+        'SWEET_ALERT.ON_FILE_TRANSFER.TEXT',
+        'SWEET_ALERT.ON_FILE_TRANSFER.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'])
-        .then(function(translations) {
-          swalCopyText = translations['SWEET_ALERT.ON_FILE_COPY.TEXT'];
-          swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
-          swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-        });
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
+      ]).then(function(translations) {
+        swalCopyCancel = translations['SWEET_ALERT.ON_FILE_TRANSFER.CANCEL_BUTTON'];
+        swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_TRANSFER.CONFIRM_BUTTON'];
+        swalCopyText = translations['SWEET_ALERT.ON_FILE_TRANSFER.TEXT'];
+        swalCopyTitle = translations['SWEET_ALERT.ON_FILE_TRANSFER.TITLE'];
+        swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
+        swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+      });
 
     /**
      *  @name downloadFile
@@ -243,16 +248,6 @@ angular.module('linshare.receivedShare')
         });
       }
 
-      var swalTitle, swalText, swalConfirm, swalCancel;
-      $translate(['SWEET_ALERT.ON_FILE_DELETE.TITLE', 'SWEET_ALERT.ON_FILE_DELETE.TEXT',
-        'SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'])
-        .then(function(translations) {
-          swalTitle = translations['SWEET_ALERT.ON_FILE_DELETE.TITLE'];
-          swalText = translations['SWEET_ALERT.ON_FILE_DELETE.TEXT'];
-          swalConfirm = translations['SWEET_ALERT.ON_FILE_DELETE.CONFIRM_BUTTON'];
-          swalCancel = translations['SWEET_ALERT.ON_FILE_DELETE.CANCEL_BUTTON'];
-        });
-
       $scope.copyIntoFiles = function(selectedDocuments) {
         if (!$scope.canUpload) {
           return;
@@ -260,33 +255,40 @@ angular.module('linshare.receivedShare')
         if (!_.isArray(selectedDocuments)) {
           selectedDocuments = [selectedDocuments];
         }
-        swal({
-            title: swalTitle,
-            text: swalCopyText,
-            type: 'info',
-            showCancelButton: true,
-            confirmButtonColor: lsColors.PRIMARY_BLUE,
-            confirmButtonText: swalCopyConfirm,
-            cancelButtonText: swalCancel,
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              angular.forEach(selectedDocuments, function(file, key) {
-                receivedShareRestService.copy(file.uuid).then(function() {
-                  angular.forEach(receivedFiles, function(f, k) {
-                    if (f.uuid === file.uuid) {
-                      receivedFiles.splice(k, 1);
-                      selectedDocuments.splice(key, 1);
-                      $scope.tableParams.reload();
-                    }
+
+        $translate('SWEET_ALERT.ON_FILE_TRANSFER.TEXT', {
+          nbItems: $scope.selectedDocuments.length,
+          singular: $scope.selectedDocuments.length <= 1 ? 'true' : 'other',
+          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'))
+        }, 'messageformat').then(function(swalText) {
+          swal({
+              title: swalCopyTitle,
+              text: swalText,
+              type: 'info',
+              showCancelButton: true,
+              confirmButtonColor: lsColors.PRIMARY_BLUE,
+              confirmButtonText: swalCopyConfirm,
+              cancelButtonText: swalCopyCancel,
+              closeOnConfirm: true,
+              closeOnCancel: true
+            },
+            function(isConfirm) {
+              if (isConfirm) {
+                _.forEach(selectedDocuments, function(file, key) {
+                  receivedShareRestService.copy(file.uuid).then(function() {
+                    _.forEach(receivedFiles, function(f, k) {
+                      if (f.uuid === file.uuid) {
+                        receivedFiles.splice(k, 1);
+                        selectedDocuments.splice(key, 1);
+                        $scope.tableParams.reload();
+                      }
+                    });
                   });
                 });
-              });
+              }
             }
-          }
-        );
+          );
+        });
       };
 
       /**
