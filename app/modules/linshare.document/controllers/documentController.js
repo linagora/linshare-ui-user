@@ -382,7 +382,7 @@
      */
     function removeShare(shareUuid) {
       LinshareShareService.remove(shareUuid).then(function(data) {
-        $scope.mainVm.sidebar.getData().currentSelectedDocument.current = data.document;
+        _.assign($scope.mainVm.sidebar.getData().currentSelectedDocument.current, data.document);
         $scope.mainVm.sidebar.getData().loadSidebarContent($scope.mainVm.sidebar.getData().lsAppConfig.details);
         _.remove($scope.mainVm.sidebar.getData().currentSelectedDocument.current.shares, {'uuid': shareUuid});
         _.assignIn(_.find($scope.documentsList, {'uuid': data.document.uuid}), data.document);
