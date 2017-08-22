@@ -10,7 +10,7 @@
     .factory('itemUtilsService', itemUtilsService);
 
   itemUtilsService.$inject = ['_', '$q', '$translate', 'authenticationRestService', 'itemUtilsConstant', 'lsAppConfig',
-    'lsErrorCode', 'swal', 'toastService'];
+    'lsErrorCode', 'sidebarService', 'swal', 'toastService'];
 
   /**
    * @namespace itemUtilsService
@@ -18,7 +18,7 @@
    * @memberOf linshare.components
    */
   function itemUtilsService(_, $q, $translate, authenticationRestService, itemUtilsConstant, lsAppConfig, lsErrorCode,
-                            swal, toastService) {
+                            sidebarService, swal, toastService) {
     var
       invalidNameTranslate = {
         empty: {
@@ -96,6 +96,7 @@
             },
             function(isConfirm) {
               if (isConfirm) {
+                sidebarService.hide();
                 callback(items);
               }
             }

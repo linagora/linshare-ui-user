@@ -229,7 +229,6 @@
      * @param {Array<Object>} items - contactsLists to delete
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
-    // TODO : IAB remove documentUtilsService and implement generic delete items methods (if possible in service)
     // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       _.forEach(items, function(restangularizedItem) {

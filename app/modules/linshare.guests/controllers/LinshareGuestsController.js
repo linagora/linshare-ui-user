@@ -121,7 +121,6 @@
      */
     function deleteGuests(guestObjects) {
       itemUtilsService.deleteItem(guestObjects, itemUtilsService.itemUtilsConstant.GUEST, function(items) {
-        $scope.mainVm.sidebar.hide();
         _.forEach(items, function(guestObject) {
           guestRestService.remove(guestObject)
             .then(function() {
