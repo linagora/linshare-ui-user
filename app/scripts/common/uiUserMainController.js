@@ -12,15 +12,15 @@
 
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
-  UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
+  UiUserMainController.$inject = ['_', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
     'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
     'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
-    'toastService', 'uploadRestService'
+    'sidebarService', 'toastService', 'uploadRestService'
   ];
 
-  function UiUserMainController(_, $http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
+  function UiUserMainController(_, $log, $q, $rootScope, $scope, $state, $timeout, $window,
     authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
-    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService,
+    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService, sidebarService,
     toastService, uploadRestService) {
     /* jshint validthis:true */
     var mainVm = this;
@@ -61,7 +61,7 @@
     function activate() {
       MenuService.build();
       $scope.loggedUser = new LinshareUserService();
-      mainVm.sidebar = new Sidebar();
+      mainVm.sidebar = sidebarService;
 
       flowUploadService.initFlowUploadService();
 
@@ -374,77 +374,6 @@
         $scope.userQuotas.progressBarColor = 'quotas-progress-bar-red';
       } else {
         $scope.userQuotas.progressBarColor = 'quotas-progress-bar-green';
-      }
-    }
-
-    /**
-     * @name Sidebar
-     * @desc Right sidebar object
-     * @memberOf linshareUiUserApp
-     */
-    function Sidebar() {
-      var sidebar = {
-        visible: false,
-        content: '',
-        data: {},
-        setContent: setContent,
-        getContent: getContent,
-        setData: setData,
-        getData: getData,
-        addData: addData,
-        removeData: removeData,
-        toggle: toggle,
-        show: show,
-        hide: hide,
-        isVisible: isVisible
-      };
-
-      return sidebar;
-
-      ////////////
-
-      function setContent(content) {
-        sidebar.content = content;
-      }
-
-      function getContent() {
-        return sidebar.content;
-      }
-
-      function setData(data) {
-        sidebar.data = data;
-      }
-
-      function getData() {
-        return sidebar.data;
-      }
-
-      function addData(key, value) {
-        sidebar.data[key] = value;
-      }
-
-      function removeData(key) {
-        delete sidebar.data[key];
-      }
-
-      function toggle() {
-        sidebar.visible = !sidebar.toggle;
-      }
-
-      function show() {
-        sidebar.visible = true;
-      }
-
-      function hide(form, obj) {
-        sidebar.visible = false;
-        sidebar.setContent(null);
-        if (obj && !_.isUndefined(obj.reset)) {
-          obj.reset();
-        }
-      }
-
-      function isVisible() {
-        return sidebar.visible;
       }
     }
   }
