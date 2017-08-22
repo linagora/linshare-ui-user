@@ -13,6 +13,7 @@
         "CONTACTS_LIST": "You are about to remove {nbItems} {singular, select, true{contacts list} other{contacts lists}} ! Beware, this action cannot be undone.",
         "CONTACTS_LIST_CONTACT": "You are about to remove {nbItems} {singular, select, true{contact} other{contacts}} ! Beware, this action cannot be undone.",
         "DOCUMENT": "You are about to remove {nbItems} {singular, select, true{file} other{files}} ! Beware, this action cannot be undone.",
+        "GUEST": "You are about to remove {nbItems} {singular, select, true{guest} other{guests}} ! Beware, this action cannot be undone.",
         "RECEIVED_SHARE": "You are about to remove {nbItems} {singular, select, true{file share} other{files share}} ! Beware, this action cannot be undone.",
         "WORKGROUP": "You are about to remove {nbItems} {singular, select, true{workgroup} other{workgroups}} ! Beware, this action cannot be undone.",
         "WORKGROUP_NODE": "You are about to remove {nbItems} {singular, select, true{file or folder} other{files or folders}} ! Beware, this action cannot be undone."

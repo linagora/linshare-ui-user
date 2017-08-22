@@ -70,19 +70,12 @@
     "NOTIFICATION": {
       "SUCCESS": {
         "CREATE": "Le compte invité a été créé avec succès.",
+        "DELETE": "Le compte invité a été supprimé avec succès.",
         "UPDATE": "Le compte invité a été mis à jour avec succès."
       }
     },
     "TITLE": {
       "CREATE": "Ajouter compte invité"
-    }
-  },
-  "SWEET_ALERT": {
-    "ON_GUEST_DELETE": {
-      "CANCEL_BUTTON": "Annuler!",
-      "CONFIRM_BUTTON": "Supprimer",
-      "TEXT": "Vous êtes sur le point de supprimer ${count} invité${plural} !",
-      "TITLE": "Êtes-vous sûr ?"
     }
   }
 }

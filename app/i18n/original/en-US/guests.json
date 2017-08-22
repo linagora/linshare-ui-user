@@ -71,19 +71,12 @@
     "NOTIFICATION": {
       "SUCCESS": {
         "CREATE": "The guest account was created successfully",
+        "DELETE": "The guest account was deleted successfully",
         "UPDATE": "The guest account was updated successfully"
       }
     },
     "TITLE": {
       "CREATE": "CREATE GUEST ACCOUNT"
-    }
-  },
-  "SWEET_ALERT": {
-    "ON_GUEST_DELETE": {
-      "CANCEL_BUTTON": "Cancel!",
-      "CONFIRM_BUTTON": "Delete",
-      "TEXT": "You are about to delete ${count} guest${plural}!",
-      "TITLE": "Are you sure?"
     }
   }
 }

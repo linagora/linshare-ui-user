@@ -11,35 +11,28 @@
     .controller('LinshareGuestsController', LinshareGuestsController);
 
   //TODO - KLE: Check DI
-  LinshareGuestsController.$inject = ['_', '$filter', '$log', '$q', '$scope', '$state', '$translate',
-    '$translatePartialLoader', 'authenticationRestService', 'GuestObjectService', 'guestRestService', 'lsAppConfig',
-    'NgTableParams', 'swal', 'toastService'
-  ];
+  LinshareGuestsController.$inject = ['_', '$filter', '$scope', '$translate', '$translatePartialLoader',
+    'GuestObjectService', 'guestRestService', 'itemUtilsService', 'lsAppConfig', 'NgTableParams', 'toastService'];
 
   /**
-   * @namespace LinshareGuestsControlle
+   * @namespace LinshareGuestsController
    * @desc Application guest management system controller
    * @memberOf LinShare.Guests
    */
-  // TODO: Should dispatch some function to other service or controller
+  // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
-  function LinshareGuestsController(_, $filter, $log, $q, $scope, $state, $translate, $translatePartialLoader,
-    authenticationRestService, GuestObjectService, guestRestService, lsAppConfig, NgTableParams, swal, toastService) {
+  function LinshareGuestsController(_, $filter, $scope, $translate, $translatePartialLoader, GuestObjectService,
+    guestRestService, itemUtilsService, lsAppConfig, NgTableParams, toastService) {
     /* jshint validthis: true */
     var guestVm = this;
-    var
-      swalCancel,
-      swalConfirm,
-      swalText,
-      swalTitle;
 
     guestVm.addGuest = addGuest;
-    guestVm.confirmDelete = confirmDelete;
     guestVm.currentPage = lsAppConfig.guestsList;
     //TODO: To be deleted one ngTable directive is corrected
     guestVm.currentSelectedGuest = {
       current: ''
     };
+    guestVm.deleteGuests = deleteGuests;
     //TODO: use for what ?
     guestVm.flagsOnSelectedPages = {};
     guestVm.getGuestDetails = getGuestDetails;
@@ -54,8 +47,6 @@
     guestVm.lsFullDateFormat = lsFullDateFormat;
     guestVm.guestCreate = lsAppConfig.guestCreate;
     guestVm.paramFilter = {};
-    guestVm.removeGuest = removeGuest;
-    guestVm.removeSelectedGuests = removeSelectedGuests;
     guestVm.selectedGuest = {};
     guestVm.selectedGuests = [];
     guestVm.setSubmitted = setSubmitted;
@@ -83,14 +74,10 @@
       $translatePartialLoader.addPart('guests');
       $translatePartialLoader.addPart('filesList');
       $translate.refresh().then(function() {
-        $translate(['SWEET_ALERT.ON_GUEST_DELETE.TITLE', 'SWEET_ALERT.ON_GUEST_DELETE.TEXT',
-          'SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON',
-          'HEADER_GUEST.SLIDER.MY_GUEST', 'HEADER_GUEST.SLIDER.OTHER_GUEST'
+        $translate([
+          'HEADER_GUEST.SLIDER.MY_GUEST',
+          'HEADER_GUEST.SLIDER.OTHER_GUEST'
         ]).then(function(translations) {
-          swalTitle = translations['SWEET_ALERT.ON_GUEST_DELETE.TITLE'];
-          swalText = translations['SWEET_ALERT.ON_GUEST_DELETE.TEXT'];
-          swalConfirm = translations['SWEET_ALERT.ON_GUEST_DELETE.CONFIRM_BUTTON'];
-          swalCancel = translations['SWEET_ALERT.ON_GUEST_DELETE.CANCEL_BUTTON'];
           guestVm.currentView = guestVm.isMineGuest ?
             translations['HEADER_GUEST.SLIDER.MY_GUEST'] : translations['HEADER_GUEST.SLIDER.OTHER_GUEST'];
         });
@@ -127,29 +114,24 @@
     }
 
     /**
-     *  @name confirmDelete
-     *  @desc Show a pop up to confirm the deletion of the guest
-     *  @param {Object} stringParams - The parameters of the string to be changed
-     *  @param {function} callback - Function to be called on success
-     *  @memberOf LinShare.share.LinshareShareListController
+     * @name deleteGuests
+     * @desc Delete Guests
+     * @param {Object|Array<Object>} guestObjects - List of guests to delete
+     * @memberOf LinShare.Guests.LinshareGuestsController
      */
-    function confirmDelete(stringParams, callback) {
-      swal({
-          title: swalTitle,
-          text: swalText.replace('${count}', stringParams.count).replace('${plural}', stringParams.plural),
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonText: swalConfirm,
-          cancelButtonText: swalCancel,
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-            callback();
-          }
-        }
-      );
+    function deleteGuests(guestObjects) {
+      itemUtilsService.deleteItem(guestObjects, itemUtilsService.itemUtilsConstant.GUEST, function(items) {
+        $scope.mainVm.sidebar.hide();
+        _.forEach(items, function(guestObject) {
+          guestRestService.remove(guestObject)
+            .then(function() {
+              _.remove(guestVm.selectedGuests, {'uuid': guestObject.uuid});})
+            .then(function() {
+              guestVm.tableParams.reload();
+              toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.DELETE'});
+          });
+        });
+      });
     }
 
     /**
@@ -162,6 +144,20 @@
     function getGuestDetails(item) {
       return guestRestService.get(item.uuid).then(function(data) {
         guestVm.selectedGuest = new GuestObjectService(data);
+      });
+    }
+
+    /**
+     * @name loadSelectedGuests
+     * @desc Push in selected true all selected elements when all table list in refreshed
+     * @param {Object|Array<Object>} guests - List of guests getted from server
+     * @memberOf LinShare.Guests.LinshareGuestsController
+     */
+    function loadSelectedGuests(guests) {
+      _.forEach(guests, function(guest) {
+        if (_.find(guestVm.selectedGuests, {uuid: guest.uuid})) {
+          guest.isSelected = true;
+        }
       });
     }
 
@@ -197,6 +193,7 @@
                 filteredData = params.hasFilter() ? $filter('filter')(data, params.filter()) : data;
                 break;
             }
+            loadSelectedGuests(data);
             var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
             params.total(files.length);
             return files.slice((params.page() - 1) * params.count(), params.page() * params.count());
@@ -236,53 +233,6 @@
      */
     function lsFullDateFormat() {
       return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
-    }
-
-    /**
-     *  @name removeGuest
-     *  @desc remove a Guest object
-     *  @param {Object} guestObject - A Guest object
-     *  @param {Boolean} guestObject - Determine if confirmation pop up should be shown
-     *  @return {Promise} server response
-     *  @memberOf LinShare.Guests.LinshareGuestsController
-     */
-    function removeGuest(guestObject, confirm) {
-      if (confirm) {
-        $scope.mainVm.sidebar.hide();
-        guestVm.confirmDelete({
-          count: 1,
-          plural: ''
-        }, function() {
-          return guestRestService.remove(guestObject).then(function() {
-            guestVm.tableParams.reload();
-          });
-        });
-      } else {
-        return guestRestService.remove(guestObject).then(function() {
-          guestVm.tableParams.reload();
-        });
-      }
-    }
-
-    /**
-     *  @name removeSelectedGuests
-     *  @desc remove a Guest object
-     *  @param {Array<Object>} guestsList - An array of Guest object
-     *  @memberOf LinShare.Guests.LinshareGuestsController
-     */
-    function removeSelectedGuests(guestsList) {
-      var plural = guestsList.length > 1 ? 's' : '';
-      $scope.mainVm.sidebar.hide();
-      guestVm.confirmDelete({
-        count: guestsList.length,
-        plural: plural
-      }, function() {
-        _.forEach(guestsList, function(guestObject) {
-          guestVm.removeGuest(guestObject, false).then(function() {
-            _.remove(guestsList, guestObject);
-          });
-        });
-      });
     }
 
     /**

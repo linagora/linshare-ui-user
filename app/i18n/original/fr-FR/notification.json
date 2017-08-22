@@ -13,6 +13,7 @@
         "CONTACTS_LIST": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{liste de contacts} other{listes de contacts}}. Attention, cette action est irreversible.",
         "CONTACTS_LIST_CONTACT": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{contact} other{contacts}}. Attention, cette action est irreversible.",
         "DOCUMENT": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{fichier} other{fichiers}}. Attention, cette action est irreversible.",
+        "GUEST": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{compte invité} other{comptes invités}}. Attention, cette action est irreversible.",
         "RECEIVED_SHARE": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{partage} other{partages}}. Attention, cette action est irreversible.",
         "WORKGROUP": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{groupe de travail} other{groupes de travail}}. Attention, cette action est irreversible.",
         "WORKGROUP_NODE": "Vous êtes sur le point de supprimer {nbItems} {singular, select, true{fichier ou dossier} other{fichiers ou dossiers}}. Attention, cette action est irreversible."

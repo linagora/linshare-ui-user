@@ -70,20 +70,12 @@
     "NOTIFICATION": {
       "SUCCESS": {
         "TBT__CREATE": "",
+        "TBT__DELETE": "",
         "TBT__UPDATE": ""
       }
     },
     "TITLE": {
       "TBT__CREATE": ""
     }
-  },
-  "SWEET_ALERT": {
-    "ON_GUEST_DELETE": {
-      "TBT__CANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TEXT": "",
-      "TBT__TITLE": ""
-    }
   }
-
 }
