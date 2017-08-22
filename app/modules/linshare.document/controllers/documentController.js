@@ -401,9 +401,10 @@
      * @param {Object} currentFile - A Document file object
      * @param {event} [event] - Event occuring launching the action
      * @param {boolean} [openDetailsSidebar] - Open details sidebar
+     * @param {number} [tabIndex] - Index of the tab to display
      * @memberOf LinShare.document.documentController
      */
-    function showCurrentFile(currentFile, event, openDetailsSidebar) {
+    function showCurrentFile(currentFile, event, openDetailsSidebar, tabIndex) {
       var deferred = $q.defer();
       $scope.currentSelectedDocument.current = _.omit(currentFile, ['hasThumbnail', 'thumbnail']);
       $q.all([
@@ -422,7 +423,7 @@
           .then(function(auditActions) {
             $scope.currentSelectedDocument.current.auditActions = auditActions;
             if(openDetailsSidebar) {
-              $scope.data.selectedIndex = 0;
+              $scope.data.selectedIndex = tabIndex || 0;
               $scope.loadSidebarContent(lsAppConfig.details);
               if (!_.isUndefined(event)) {
                 var currElm = event.currentTarget;
