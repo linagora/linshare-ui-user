@@ -3,20 +3,20 @@
     "ON_FILE_TRANSFER": {
       "CANCEL_BUTTON": "Cancel!",
       "CONFIRM_BUTTON": "Transfer",
-      "TEXT": "You are about to transfer {nbItems} received {singular, select, true{document} other{documents}} for a total of {totalSize} into your own files.",
+      "TEXT": "You are about to transfer received {singular, select, true{document} other{{nbItems} documents}} for a total of {totalSize} into your own files.",
       "TITLE": "File transfer"
     },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",
       "TEXT": {
-        "CONTACTS_LIST": "You are about to remove {nbItems} {singular, select, true{contacts list} other{contacts lists}} ! Beware, this action cannot be undone.",
-        "CONTACTS_LIST_CONTACT": "You are about to remove {nbItems} {singular, select, true{contact} other{contacts}} ! Beware, this action cannot be undone.",
-        "DOCUMENT": "You are about to remove {nbItems} {singular, select, true{file} other{files}} ! Beware, this action cannot be undone.",
-        "GUEST": "You are about to remove {nbItems} {singular, select, true{guest} other{guests}} ! Beware, this action cannot be undone.",
-        "RECEIVED_SHARE": "You are about to remove {nbItems} {singular, select, true{file share} other{files share}} ! Beware, this action cannot be undone.",
-        "WORKGROUP": "You are about to remove {nbItems} {singular, select, true{workgroup} other{workgroups}} ! Beware, this action cannot be undone.",
-        "WORKGROUP_NODE": "You are about to remove {nbItems} {singular, select, true{file or folder} other{files or folders}} ! Beware, this action cannot be undone."
+        "CONTACTS_LIST": "You are about to remove {singular, select, true{a contacts list} other{{nbItems} contacts lists}} ! Beware, this action cannot be undone.",
+        "CONTACTS_LIST_CONTACT": "You are about to remove {singular, select, true{a contact} other{{nbItems} contacts}} ! Beware, this action cannot be undone.",
+        "DOCUMENT": "You are about to remove {singular, select, true{a document} other{{nbItems} documents}} ! Beware, this action cannot be undone.",
+        "GUEST": "You are about to remove {singular, select, true{a guest} other{{nbItems} guests}} ! Beware, this action cannot be undone.",
+        "RECEIVED_SHARE": "You are about to remove {singular, select, true{a file share} other{{nbItems} files share}} ! Beware, this action cannot be undone.",
+        "WORKGROUP": "You are about to remove{singular, select, true{a workgroup} other{{nbItems} workgroups}} ! Beware, this action cannot be undone.",
+        "WORKGROUP_NODE": "You are about to remove {singular, select, true{a document or folder} other{{nbItems} documents or folders}} ! Beware, this action cannot be undone."
       },
       "TITLE": "Deletion"
     },
