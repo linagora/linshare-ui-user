@@ -70,6 +70,8 @@ angular
       //testChunks:false,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
       allowDuplicateUploads: true,
+      maxChunkRetries: 3,
+      chunkRetryInterval: 1000,
       generateUniqueIdentifier: function() {
         /* jshint ignore:start */
         return uuid.v4();
