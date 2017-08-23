@@ -12,16 +12,18 @@
 
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
-  UiUserMainController.$inject = ['_', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
-    'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
-    'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
-    'sidebarService', 'toastService', 'uploadRestService'
-  ];
+  UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
+                                  'authenticationRestService', 'checkTableHeightService', 'flowUploadService',
+                                  'functionalityRestService', 'LinshareUserService', 'lsAppConfig', 'MenuService',
+                                  'sharableDocumentService', 'ShareObjectService', 'sidebarService', 'toastService',
+                                  'uploadRestService'
+                                 ];
 
-  function UiUserMainController(_, $log, $q, $rootScope, $scope, $state, $timeout, $window,
-    authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
-    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService, sidebarService,
-    toastService, uploadRestService) {
+  function UiUserMainController(_, $http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
+                                authenticationRestService, checkTableHeightService, flowUploadService,
+                                functionalityRestService, LinshareUserService, lsAppConfig, MenuService,
+                                sharableDocumentService, ShareObjectService, sidebarService, toastService,
+                                uploadRestService) {
     /* jshint validthis:true */
     var mainVm = this;
 
@@ -134,8 +136,11 @@
         mainVm.removeShareDocument(flowFile);
       });
 
-      $scope.$on('flow::fileError', function fileErrorAction(event, $flow, flowFile) {
-        mainVm.removeShareDocument(flowFile);
+      $scope.$on('flow::fileError', function fileErrorAction(event, $flow, flowFile, message, flowChunk) {
+        mainVm.flowUploadService.errorHandler(flowFile, flowChunk);
+        if (!flowFile.canBeRetried) {
+          mainVm.removeShareDocument(flowFile);
+        }
         mainVm.flowUploadService.checkQuotas([flowFile], true, $scope.setUserQuotas);
       });
 
