@@ -39,6 +39,7 @@
         addUploadedFile: addUploadedFile,
         checkAsyncUploadDetails: checkAsyncUploadDetails,
         checkQuotas: checkQuotas,
+        errorHandler: errorHandler,
         initFlowUploadService: initFlowUploadService,
         uploadFiles: uploadFiles
       };
@@ -84,6 +85,16 @@
         });
       }
       return flowFile.asyncUploadDeferred.promise;
+    }
+
+    /**
+     * @namespace isRetryable
+     * @desc Determine if the file can be set as retryable
+     * @param {number} errorCode - Error code return by the server
+     * @memberOf LinShare.upload.flowUploadService
+     */
+    function isRetryable(errorCode) {
+      return !_.includes(UNRETRIABLE_ERROR_CASES, errorCode);
     }
 
     /**
@@ -181,6 +192,16 @@
     }
 
     /**
+     * @namespace errorHandler
+     * @desc Flow file error handler
+     * @memberOf LinShare.upload.flowUploadService
+     */
+    function errorHandler(flowFile, flowChunk) {
+      flowFile.canBeRetried = isRetryable(flowChunk.xhr.data ? flowChunk.xhr.data.errorCode : flowChunk.xhr.status);
+      flowFile.asyncUploadDeferred.reject(flowFile);
+    }
+
+    /**
      * @namespace initFlowUploadService
      * @desc activation function of the controller launch at every instantiation
      * @memberOf LinShare.upload.flowUploadService
@@ -219,7 +240,7 @@
       flowFile.errorCode = errorCode !== NONE ? errorCode : null;
       flowFile.errorMessage = errorMessage;
       flowFile.errorParams = errorParams;
-      flowFile.canBeRetried = !_.includes(UNRETRIABLE_ERROR_CASES, errorCode);
+      flowFile.canBeRetried = isRetryable(errorCode);
       flowFile.error = true;
       $timeout(function() {
         flowFile.errorAgain = true;
