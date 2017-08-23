@@ -11,8 +11,8 @@
     .factory('flowUploadService', flowUploadService);
 
   flowUploadService.$inject = ['_', '$filter', '$log', '$q', '$timeout', '$translatePartialLoader',
-    'authenticationRestService', 'LinshareDocumentRestService', 'lsAppConfig', 'uploadRestService',
-    'workgroupNodesRestService', 'workgroupRestService'];
+                               'authenticationRestService', 'flowFactory', 'LinshareDocumentRestService', 'lsAppConfig',
+                               'uploadRestService', 'workgroupNodesRestService', 'workgroupRestService'];
 
   /**
    * @namespace flowUploadService
@@ -22,7 +22,8 @@
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
   function flowUploadService(_, $filter, $log, $q, $timeout, $translatePartialLoader, authenticationRestService,
-                             LinshareDocumentRestService, lsAppConfig, uploadRestService, workgroupNodesRestService, workgroupRestService) {
+                             flowFactory, LinshareDocumentRestService, lsAppConfig, uploadRestService,
+                             workgroupNodesRestService, workgroupRestService) {
 
     const
       NONE = 'NONE',
@@ -188,9 +189,19 @@
       $translatePartialLoader.addPart('serverResponse');
       errorNone = messagePrefix + NONE;
 
-      authenticationRestService.getCurrentUser().then(function(user) {
-        userQuotaUuid = user.quotaUuid;
-      });
+      if (!service.flowObj) {
+        service.flowObj = flowFactory.create();
+      } else {
+        if (service.flowObj.files.length > 0) {
+          service.flowObj.upload();
+        }
+      }
+
+      if (!userQuotaUuid) {
+        authenticationRestService.getCurrentUser().then(function(user) {
+          userQuotaUuid = user.quotaUuid;
+        });
+      }
     }
 
     /**

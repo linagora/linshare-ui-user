@@ -41,7 +41,7 @@
   </head>
   <body data-ng-controller="UiUserMainController as mainVm"
         data-ng-class="{'sw-toggled': mactrl.layoutType === '1', 'lock-scroll': mactrl.sidebarToggle.left}"
-        flow-init flow-prevent-drop>
+        flow-init flow-object="mainVm.flowUploadService.flowObj" flow-prevent-drop>
     <data ui-view x-ng-cloak="">
     </data>
 
