@@ -28,9 +28,10 @@
         </md-tab>
         <md-tab id="tab3" label="{{'ACTIVITIES' | translate}}" class="col-xs-4 noPadding disabled">
           <md-content class="md-padding">
-            <span data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.auditActions.length" translate>
-              NO_AUDIT
-            </span>
+            <p class="empty-res"
+               data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.auditActions.length">
+              <i class="zmdi zmdi-info-outline"></i><span translate>NO_AUDIT</span>
+            </p>
             <div data-ng-repeat="auditAction in mainVm.sidebar.getData().currentSelectedDocument.current.auditActions"
                  audit-details="{{auditAction}}" class="audit-card"></div>
           </md-content>
