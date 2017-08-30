@@ -521,9 +521,7 @@
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <span class="file-name-disp single-line" spellcheck="false" contenteditable="false"
                             data-ng-click="workgroupNodesVm.goToFolder(nodeItem)">{{::nodeItem.name}}</span>
-                      <span>
-                        <span data-ng-if="::nodeItem.shared > 0" class="shared-activated hidden-xs" translate>
-                          BOUTON_LABEL_TITLE.SHARED</span>
+                      <span class="secondary-info-ctn">
                         <p class="mobile-list-item-info visible-xs">
                           {{nodeItem.modificationDate | relativeTime}}
                           {{::workgroupNodesVm.isDocument(nodeItem.type) ?

@@ -241,6 +241,7 @@ header > ul.header-inner > li.pull-right > ul.top-menu > li > a {
         }
       }
       &.ctn-badge-count {
+        pointer-events: none;
         position: absolute;
         top: 0;
         right: 0;

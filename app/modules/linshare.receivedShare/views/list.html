@@ -296,10 +296,7 @@
                 <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <span class="file-name-disp">{{documentFile.name}}</span>
-                      <span>
-                        <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs">
-                        {{'BOUTON_LABEL_TITLE.SHARED' | translate}}
-                        </span>
+                      <span class="secondary-info-ctn">
                         <p class="mobile-list-item-info visible-xs">
                           {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: true}}
                         </p>

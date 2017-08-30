@@ -45,13 +45,15 @@
         <!-- TODO: on a mobile , Default action should redirect toward the detail sidebar of the current
          document -->
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-          <span class="file-name-disp single-line" spellcheck="false">{{documentFile.name}}</span>
-          <span>
+          <p class="main-name-row">
+            <span class="file-name-disp single-line" spellcheck="false">{{documentFile.name}}</span>
             <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs"
-                  x-ng-click="showCurrentFile(documentFile, undefined, true, 1)" event-propagation-stop>
+                  x-ng-click="showCurrentFile(documentFile, $event, true, 1)" event-propagation-stop>
               <span class="zmdi zmdi-share"></span>
               <span translate>BOUTON_LABEL_TITLE.SHARED</span>
             </span>
+          </p>
+          <span class="secondary-info-ctn">
             <p class="mobile-list-item-info visible-xs">
               {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: true}}
               <span x-ng-show="documentFile.shared > 0">,

@@ -374,7 +374,7 @@
                             {{documentFile.name}}
                           </span>
                         </span>
-                        <span>
+                        <span class="secondary-info-ctn">
                           <p class="mobile-list-item-info visible-xs">
                             {{documentFile.modificationDate | relativeTime}}
                           </p>
@@ -394,7 +394,7 @@
                             </a>
                           </li>
                           <li class="hidden-xs" x-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)">
-                            <a href="" class="p-t-10" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
+                            <a href="" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
                                event-propagation-stop="true">
                               <i><span class="ls-member"></span></i>
                             </a>

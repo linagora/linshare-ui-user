@@ -129,27 +129,40 @@
       padding: 0;
     }
     .file-name-col {
-      overflow: hidden;
       white-space: nowrap;
-      text-overflow: ellipsis;
-      padding-top: 11px;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 0;
       max-width: 100%;
       margin-top: 0;
       padding-right: 0;
+      flex-direction: column;
+      justify-content: center;
       .file-name-disp {
-        display: inline-block;
+        display: block;
+        float: left;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
         max-width: inherit;
       }
+      .main-name-row {
+        margin: 0;
+        max-width: 100%;
+      }
     }
     .ctn-name-actions {
       color: #0E0E0E;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex: 1 1 100%;
+      overflow: hidden;
       .mobile-list-item-info {
         margin: 0 0 0.5em 0;
         font-size: 0.73em;
         color: #797878;
+        line-height: 0.95em;
         span:first-child {
           span {
             margin-left: 2px;
@@ -426,12 +439,15 @@
       height: 38px;
       margin: 0;
       li {
-        width: 35px;
+        display: flex;
         text-align: center;
         margin: 0;
-        display: block;
         float: left;
         height: 100%;
+        align-self: center;
+        vertical-align: middle;
+        justify-content: center;
+        width: 30px;
       }
     }
     .actions-list-ctn {
@@ -439,12 +455,17 @@
       overflow: hidden;
     }
     .actions > li > a, .actions > a {
-      width: 21px;
-      height: 100%;
-      display: inline-block;
+      width: 27px;
+      height: 27px;
+      display: flex;
       text-align: center;
-      padding-top: 13px;
-      line-height: 1;
+      padding-top: 0;
+      line-height: 1.5;
+      align-self: center;
+      vertical-align: middle;
+      align-self: center;
+      justify-content: center;
+      font-size: 1.15em;
     }
     .actions > li > a > i, .actions > a > i {
       vertical-align: middle;
@@ -452,8 +473,12 @@
       color: #9C9C9C;
     }
     .actions > li > a > i, .actions > a > i span {
-      vertical-align: bottom;
-      font-size: 16px;
+      vertical-align: middle;
+      font-size: inherit;
+      line-height: inherit;
+      flex: inherit;
+      align-self: center;
+      justify-content: center;
      &.ls-received-shares {
         line-height: 1;
       }
@@ -479,14 +504,6 @@
     }
     .show-li-actions:hover .actions > li:not(:last-child) {
       visibility: visible;
-    }
-    /* Action Links Hover anim Fix  */
-    tr .actions > li > a:before,
-    tr .actions > a:before {
-      left: -3px !important;
-      top: 9px !important;
-      width: 27px !important;
-      height: 27px !important;
     }
     .actions > li > a:hover:before,
     .actions > a:hover:before {
@@ -532,10 +549,13 @@
     .file-name-col {
       padding-top: 0;
     }
+    .secondary-info-ctn {
+      display: flex;
+      flex: auto;
+    }
     .secondary-list-item-info {
       font-size: 0.85em;
       color: #4f4f4f;
-      line-height: 0.2;
       margin: 0;
     }
     .ctn-name-actions {
@@ -566,17 +586,6 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-  }
-}
-
-@media (max-width:768px) {
-  #file-list-table tr.double-row {
-    td:first-child a {
-      padding-top: 5px;
-    }
-    .file-name-col {
-      padding-top: 0.65em;
-    }
   }
 }
 
@@ -707,14 +716,12 @@
       &:not(.col-4-table) tr > {
         td:nth-child(2),
         td:nth-child(1) {
-          height: 45px;
+          height: 40px;
         }
         td:nth-child(1) {
           padding-left: 7px;
-          display: block;
-          float: left;
-          min-width: 35px;
           overflow: hidden;
+          flex: 0 0 40px;
         }
       }
       tr {
@@ -784,29 +791,19 @@
         max-height: initial !important;
       }
       .file-name-col {
-        overflow-x: hidden;
-        min-height: 42px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        font-weight: 500;
-        font-size: 0.95em;
-        padding-top: 0.65em;
-        color: #383838;
-        padding-left: 0;
-        padding-right: 0;
-        line-height: 1.25em;
-        .file-name-disp {
-          display: inline-block;
-          max-width: 100%;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
+        flex: auto;
       }
-      .ctn-name-actions {
+
+      tr.double-row .secondary-info-ctn {
+        margin-top: 0;
+      }
+      .ctn-name-actions .mobile-list-item-info {
+        margin: 0;
+      }
+      tr.double-row .ctn-name-actions {
+        max-height: initial !important;
         .mobile-list-item-info {
-          line-height: 0.65;
+          line-height: 0.7;
           margin: 0;
         }
       }
@@ -815,15 +812,21 @@
         visibility: visible !important;
         margin: auto;
         display: flex;
+        li {
+          flex: 1 1 100%;
+        }
       }
       .actions > li:not(:last-child) {
         visibility: hidden;
         display: none !important;
       }
       .actions-list-ctn {
-        float: right;
-        text-align: center;
         display: flex;
+        flex: 1;
+        min-width: 40px;
+        span:first-child {
+          flex : 1 1 100%;
+        }
       }
       .actions > li > a > i,
       .actions > a > i {
@@ -847,11 +850,8 @@
 @media (min-width: 320px) and (max-width: 767px) {
   .files #file-list-table:not(.col-4-table) {
     tr > td:nth-child(2), tr > td:nth-child(3) {
-      display: block;
-      float: left;
-      width: calc(100% - 33px) !important;
-      min-width: 281px;
-      max-width: 93%;
+      display: flex;
+      flex: 1 1 auto;
       overflow: hidden;
     }
     #file-list-table.ng-table:not(.col-4-table) > tbody > tr > td:first-child {
@@ -859,19 +859,9 @@
       justify-content: center;
     }
   }
-  #file-list-table.ng-table.wider-first-col:not(.col-4-table) > tbody > tr > td:nth-child(2) {
-    padding-left: 3px;
-  }
   #file-list-table.ng-table:not(.col-4-table) > tbody > tr > td:first-child {
     padding-right: 0;
     padding-left: 0 !important;
-  }
-}
-
-@media (max-width: 320px) {
-  .files #file-list-table tr > td:nth-child(2) {
-    width: 285px !important;
-    padding-left: 5px;
   }
 }
 
@@ -1018,5 +1008,3 @@ COLUMN WITH A SINGLE ACTION POPOVER LINK
     padding-top: 3px;
   }
 }
-
-
