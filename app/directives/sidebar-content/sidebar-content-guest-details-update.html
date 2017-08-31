@@ -5,7 +5,7 @@
   <!-- UPDATE BTN links-->
   <div class="bottom-sidebar-btn form-within-sidebar">
     <button class="btn btn-default col-xs-6"
-            x-ng-click="mainVm.sidebar.hide(updateGuest, mainVm.sidebar.getData().selectedGuest);
+            x-ng-click="mainVm.sidebar.hide(mainVm.sidebar.getData().selectedGuest);
                         mainVm.sidebar.getData().closeDropdown($event)">
       {{"SIDEBAR.BUTTON.CANCEL" | translate}}
     </button>

@@ -104,7 +104,7 @@
     function addGuest(form, newGuest) {
       if (form.$valid) {
         newGuest.create().then(function() {
-          $scope.mainVm.sidebar.hide(form, newGuest);
+          $scope.mainVm.sidebar.hide(newGuest);
           toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.CREATE'});
           guestVm.tableParams.reload();
         });
@@ -148,7 +148,7 @@
 
     /**
      * @name loadSelectedGuests
-     * @desc Push in selected true all selected elements when all table list in refreshed
+     * @desc Set 'selected' variable to true to selected elements after table is refreshed
      * @param {Object|Array<Object>} guests - List of guests getted from server
      * @memberOf LinShare.Guests.LinshareGuestsController
      */
@@ -389,7 +389,7 @@
     function updateGuest(form, guestObject) {
       if (form.$valid) {
         guestObject.update().then(function() {
-          $scope.mainVm.sidebar.hide(form, guestObject);
+          $scope.mainVm.sidebar.hide(guestObject);
           toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.UPDATE'});
           guestVm.tableParams.reload();
         });

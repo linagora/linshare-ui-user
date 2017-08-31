@@ -163,7 +163,7 @@
 
     /**
      * @name deleteCallback
-     * @desc launch deletion of contactsLists
+     * @desc Execute deletion of contactsLists
      * @param {Array<Object>} items - contactsLists to delete
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
