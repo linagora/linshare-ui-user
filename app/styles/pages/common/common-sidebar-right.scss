@@ -111,45 +111,48 @@ SIDEBAR RIGHT CONTAINER
 ***********************/
 
 .header-sidebar {
-  padding: 1.5em 1em 1em 1em;
   vertical-align: middle;
   height: 52px;
   background-color: #FDFDFD;
   margin-bottom: 0;
   border-bottom: solid 1px #E7E7E7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
   h2.header-more-options {
+    flex: 1 1 auto;
     max-width: 270px;
-    margin: auto;
     font-size: 1.1em;
     color: $textColorDark;
     text-align: center;
     text-transform: uppercase;
+    margin: inherit;
+    margin-left: 10px;
   }
   .actions {
-    position: absolute;
-    top: 10px;
-    right: 5px;
+    flex: 0 0 35px;
     line-height: 5px;
-    > a {
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding-top: 0;
       line-height: 35px;
-      .zmdi-close {
+      i {
         font-size: 1.7em;
         cursor: pointer;
         color: $textColorDark;
+        &.zmdi-share {
+          font-size:  1.2em;
+        }
+        &.zmdi-close {
+          font-size: 1.7em;
+          cursor: pointer;
+          color: $textColorDark;
+        }
       }
     }
-  }
-
-  .zmdi-chevron-left {
-    position: absolute;
-    left: 0;
-    top: 13px;
-    cursor: pointer;
-    color: $primaryClr;
-    width: 42px;
-    height: 42px;
-    text-align: center;
   }
 }
 
@@ -957,8 +960,11 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
 @media (max-width: 768px) {
   .setSidebarRightMobileState .header-sidebar.form-sidebar{
     display: flex;
-    i {
-      flex: 0 0 42px;
+    .zmdi-chevron-left {
+      flex: 0 0 28px;
+      align-self: center;
+      vertical-align: middle;
+      text-align: center;
     }
     h2.header-more-options {
       flex: 1 1 100%;
@@ -988,7 +994,7 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
     }
     &.header-show-action {
       h2.header-more-options {
-        margin-left: 25px;
+        margin-left: 0;
         text-align: left !important;
         font-size: 1.05em;
       }

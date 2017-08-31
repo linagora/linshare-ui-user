@@ -1,8 +1,20 @@
 <div class="header-sidebar form-sidebar header-show-action">
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
      data-ng-click="shareActionVm.closeSideBar();
-                    !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments()"></i>
+                    !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments()">
+  </i>
+  <span class="hidden-xs actions" data-ng-click="shareActionVm.closeSideBar()">
+    <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+  </span>
   <h2 class="header-more-options" translate>RIGHT_PANEL.DETAILS.QUICK_SHARE</h2>
+  <span class="hidden-xs actions"
+        data-ng-click="
+          mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
+          mainVm.sidebar.getData().checkSharableFiles(shareActionVm.submitShare, shareActionVm.newShare) :
+          shareActionVm.submitShare(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments,
+                      mainVm.sidebar.getData().selectedUploads)">
+    <a><i class="zmdi zmdi-check zmdi-hc-lg"></i></a>
+  </span>
   <span class="header-action-link waves-effect text-uppercase visible-xs"
         data-ng-click="
           mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
@@ -11,9 +23,6 @@
                       mainVm.sidebar.getData().selectedUploads)">
         <span class="zmdi zmdi-share"></span>
         <span translate>NAVIGATION.SHARE</span>
-  </span>
-  <span class="hidden-xs actions" x-ng-click="shareActionVm.closeSideBar()">
-    <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
   </span>
 </div>
 

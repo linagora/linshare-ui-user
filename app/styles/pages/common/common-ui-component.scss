@@ -645,12 +645,15 @@ li.dp-actions {
   border-radius: 2px;
   padding: 0.8em;
   a {
-    color: #079add;
+    color: #43535a;
     transition : color 400ms ease-in-out;
   }
 }
 
 .activity-log-ctn {
+  i.zmdi-chevron-right {
+    vertical-align: bottom;
+  }
   p {
     margin-bottom: 0;
   }

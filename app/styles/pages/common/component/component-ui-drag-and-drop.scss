@@ -55,6 +55,7 @@
   user-select: none;
   pointer-events: none;
   .drag-and-drop-content {
+    padding-top: 50px;
     display: table-cell;
     vertical-align: middle;
   }

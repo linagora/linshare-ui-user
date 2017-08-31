@@ -16,6 +16,10 @@
   }
 }
 
+.autocomplete-search-ctn ul.dropdown-menu{
+ left: -55px !important;
+}
+
 @media (max-width: 768px) {
   .select-chosen-wkgps #rights_select {
     margin-left: 0.3em !important;
