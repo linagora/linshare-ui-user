@@ -8,8 +8,8 @@
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   function documentController(_, $filter, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader,
-    $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, itemUtilsService, lsAppConfig,
-    lsColors, toastService, $stateParams, tableParamsService, auditDetailsService, swal, LinshareShareService) {
+    $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, lsAppConfig, toastService, $stateParams,
+    tableParamsService, auditDetailsService, swal, LinshareShareService) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
@@ -28,6 +28,7 @@
     };
     $scope.deleteDocuments = deleteDocuments;
     $scope.documentsList = documentsList;
+    $scope.documentUtilsService = documentUtilsService;
     $scope.downloadFile = downloadFile;
     $scope.downloadSelectedFiles = downloadSelectedFiles;
     $scope.flagsOnSelectedPages = {};
@@ -35,7 +36,6 @@
     $scope.getDetails = getDetails;
     $scope.getDocumentInfo = getDocumentInfo;
     $scope.getDocumentThumbnail = getDocumentThumbnail;
-    $scope.itemUtilsService = itemUtilsService;
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.lsAppConfig = lsAppConfig;
     $scope.lsFormat = lsFormat;
@@ -198,7 +198,7 @@
     }
 
     function deleteDocuments(items) {
-      itemUtilsService.deleteItem(items, itemUtilsService.itemUtilsConstant.DOCUMENT, deleteCallback);
+      documentUtilsService.deleteItem(items, documentUtilsService.itemUtilsConstant.DOCUMENT, deleteCallback);
     }
 
     /**
@@ -209,7 +209,7 @@
      */
     function downloadFile(documentFile) {
       var url = LinshareDocumentRestService.download(documentFile.uuid);
-      itemUtilsService.download(url, documentFile.name);
+      documentUtilsService.download(url, documentFile.name);
     }
 
     /**

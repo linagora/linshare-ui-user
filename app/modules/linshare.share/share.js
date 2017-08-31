@@ -8,7 +8,7 @@
  * This module has two services written
  * to make all http calls about sharing file.
  */
-angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.components'])
+angular.module('linshare.share', ['restangular', 'ui.bootstrap', 'linshare.components', 'linshare.utils'])
 
   .controller('DemoCtrl', function() {
 

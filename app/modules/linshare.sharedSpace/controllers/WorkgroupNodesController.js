@@ -12,8 +12,8 @@
   WorkgroupNodesController.$inject = [
     '_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
-    'flowUploadService', 'itemUtilsService', 'lsAppConfig', 'lsColors', 'lsErrorCode', 'nodesList', 'swal',
-    'tableParamsService', 'toastService', 'workgroupQuotaUuid', 'workgroupRestService', 'workgroupMembersRestService',
+    'flowUploadService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
+    'toastService', 'workgroupQuotaUuid', 'workgroupRestService', 'workgroupMembersRestService',
     'workgroupNodesRestService'
   ];
   /**
@@ -24,9 +24,9 @@
   /* jshint maxparams: false, maxstatements: false */
   function WorkgroupNodesController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
                                     $translatePartialLoader, auditDetailsService, browseService, currentFolder,
-                                    documentUtilsService, flowUploadService, itemUtilsService, lsAppConfig, lsErrorCode,
-                                    lsColors, nodesList, swal, tableParamsService, toastService, workgroupQuotaUuid,
-                                    workgroupRestService, workgroupMembersRestService, workgroupNodesRestService) {
+                                    documentUtilsService, flowUploadService, lsAppConfig, lsErrorCode, nodesList,
+                                    swal, tableParamsService, toastService, workgroupQuotaUuid, workgroupRestService,
+                                    workgroupMembersRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
 
@@ -214,7 +214,7 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function deleteNodes(nodes) {
-      itemUtilsService.deleteItem(nodes, itemUtilsService.itemUtilsConstant.WORKGROUP_NODE, function(nodes) {
+      documentUtilsService.deleteItem(nodes, documentUtilsService.itemUtilsConstant.WORKGROUP_NODE, function(nodes) {
         _.forEach(nodes, function(restangularizedItem) {
           restangularizedItem.remove().then(function() {
             toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
@@ -240,7 +240,7 @@
      */
     function downloadFile(fileDocument) {
       var url = workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid);
-      itemUtilsService.download(url, fileDocument.name);
+      documentUtilsService.download(url, fileDocument.name);
     }
 
     /**
@@ -590,7 +590,7 @@
      */
     function renameNode(nodeToRename, itemNameElem) {
       itemNameElem = itemNameElem || 'td[uuid=' + nodeToRename.uuid + '] .file-name-disp';
-      itemUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
+      documentUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
         var changedNodePos = _.findIndex(workgroupNodesVm.nodesList, nodeToRename);
         workgroupNodesVm.nodesList[changedNodePos] = data;
         if (nodeToRename.name !== data.name) {

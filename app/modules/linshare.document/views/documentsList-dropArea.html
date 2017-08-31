@@ -71,7 +71,7 @@
           </li>
           <li class="hidden-xs">
             <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
-               data-ng-click="itemUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
+               data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
              <i class="zmdi zmdi-border-color" title="{{'ACTION.RENAME' | translate}}"></i>
              <span translate>ACTION.RENAME</span>
             </a>

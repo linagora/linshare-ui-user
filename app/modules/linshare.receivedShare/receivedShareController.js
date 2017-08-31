@@ -5,12 +5,12 @@
 'use strict';
 
 angular.module('linshare.receivedShare')
-  // TODO: Should dispatch some function to other service or controller
+  // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
   .controller('ReceivedController',
     function(_, $filter, $log, $scope, $q, $timeout, $translate, $translatePartialLoader, $window, auditDetailsService,
       authenticationRestService, autocompleteUserRestService, documentSelected, documentUtilsService, files,
-      itemUtilsService, lsAppConfig, lsColors, NgTableParams, receivedShareRestService, swal, toastService) {
+      lsAppConfig, NgTableParams, receivedShareRestService, swal, toastService) {
       $translatePartialLoader.addPart('receivedShare');
       $scope.documentSelected = documentSelected;
       $scope.multiDownload = multiDownload;
@@ -127,7 +127,7 @@ angular.module('linshare.receivedShare')
      */
       $scope.downloadFile = function(documentFile) {
         var url = receivedShareRestService.download(documentFile.uuid);
-        itemUtilsService.download(url, documentFile.name);
+        documentUtilsService.download(url, documentFile.name);
       };
 
       /**
@@ -441,7 +441,7 @@ angular.module('linshare.receivedShare')
       $scope.documentsList = receivedFiles;
 
       $scope.deleteDocuments = function(items) {
-        itemUtilsService.deleteItem(items, itemUtilsService.itemUtilsConstant.RECEIVED_SHARE, deleteCallback);
+        documentUtilsService.deleteItem(items, documentUtilsService.itemUtilsConstant.RECEIVED_SHARE, deleteCallback);
       };
 
       function deleteCallback(items) {
