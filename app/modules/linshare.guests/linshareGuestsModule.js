@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('linshare.guests', ['restangular']);
+    .module('linshare.guests', ['restangular', 'linshare.utils']);
 
 })();

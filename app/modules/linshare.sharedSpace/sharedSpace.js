@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('linshare.sharedSpace', []);
+    .module('linshare.sharedSpace', ['linshare.utils']);
 
 })();

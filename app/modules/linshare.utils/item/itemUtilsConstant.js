@@ -1,12 +1,12 @@
 /**
  * itemUtilsConstant Constant
- * @namespace linshare.components
+ * @namespace linshare.utils
  */
 (function(){
   'use strict';
 
   angular
-    .module('linshare.components')
+    .module('linshare.utils')
     .constant('itemUtilsConstant', {
       CONTACTS_LIST: 'CONTACTS_LIST',
       CONTACTS_LIST_CONTACT: 'CONTACTS_LIST_CONTACT',

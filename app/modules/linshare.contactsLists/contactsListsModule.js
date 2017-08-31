@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('linshare.contactsLists', ['linshare.components', 'ngTable', 'restangular']);
+    .module('linshare.contactsLists', ['linshare.components', 'linshare.utils', 'ngTable', 'restangular']);
 
 })();

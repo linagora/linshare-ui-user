@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('linshare.receivedShare', []);
+    .module('linshare.receivedShare', ['linshare.utils']);
 
 })();

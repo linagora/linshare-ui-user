@@ -1,24 +1,24 @@
 /**
  * itemUtilsService Factory
- * @namespace linshare.components
+ * @namespace linshare.utils
  */
 (function() {
   'use strict';
 
   angular
-    .module('linshare.components')
+    .module('linshare.utils')
     .factory('itemUtilsService', itemUtilsService);
 
   itemUtilsService.$inject = ['_', '$q', '$translate', 'authenticationRestService', 'itemUtilsConstant', 'lsAppConfig',
-    'lsErrorCode', 'sidebarService', 'swal', 'toastService'];
+    'lsErrorCode', 'swal', 'toastService'];
 
   /**
    * @namespace itemUtilsService
    * @desc Utils service for manipulating file
-   * @memberOf linshare.components
+   * @memberOf linshare.utils
    */
   function itemUtilsService(_, $q, $translate, authenticationRestService, itemUtilsConstant, lsAppConfig, lsErrorCode,
-                            sidebarService, swal, toastService) {
+                            swal, toastService) {
     var
       invalidNameTranslate = {
         empty: {
@@ -55,7 +55,7 @@
      * @param {Object|Array<Object>} items - List of items to delete
      * @param {string} messageKey - Key of the sentence to translate, to show in alert dialog
      * @param {function} callback - Function to execute for deletion
-     * @memberOf linshare.components.itemUtilsService
+     * @memberOf linshare.utils.itemUtilsService
      */
     function deleteItem(items, messageKey, callback) {
       $q.when(swalTitle).then(function(swalTitle) {
@@ -96,7 +96,6 @@
             },
             function(isConfirm) {
               if (isConfirm) {
-                sidebarService.hide();
                 callback(items);
               }
             }
@@ -110,7 +109,7 @@
      * @desc Create a link to launch a download based on the given URL
      * @param {string} url - URL of the ressource to be downloaded
      * @param {string} fileName - Name of the ressource to be downloaded
-     * @memberOf linshare.components.itemUtilsService
+     * @memberOf linshare.utils.itemUtilsService
      */
     function download(url, fileName) {
       authenticationRestService.checkAuthentication(true, false).then(function() {
@@ -136,7 +135,7 @@
      *       not containing any restricted characters
      * @param {string} name - The name of the object to valid
      * @returns {boolean} if the name is valid or not
-     * @memberOf linshare.components.itemUtilsService
+     * @memberOf linshare.utils.itemUtilsService
      */
     function isNameValid(name) {
       if (name === '') {
@@ -165,7 +164,7 @@
      * @param {Array<Object>} items - List of items to evaluate
      * @param {string} defaultName - Default name of the item
      * @returns {integer} number of the new item name
-     * @memberOf linshare.components.itemUtilsService
+     * @memberOf linshare.utils.itemUtilsService
      */
     function itemNumber(items, defaultName) {
       if (items.length === 0 || !_.some(items, {
@@ -189,7 +188,7 @@
      * @desc Set UI to rename an item and save it if valid
      * @param {Object} item - Item manipulated
      * @param {string} selector - Query selector of the item to rename
-     * @memberOf linshare.components.itemUtilsService
+     * @memberOf linshare.utils.itemUtilsService
      */
     function rename(item, selector) {
       var done = false,
