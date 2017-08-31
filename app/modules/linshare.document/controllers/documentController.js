@@ -35,7 +35,6 @@
     $scope.flowUploadService = flowUploadService;
     $scope.getDetails = getDetails;
     $scope.getDocumentInfo = getDocumentInfo;
-    $scope.getDocumentThumbnail = getDocumentThumbnail;
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.lsAppConfig = lsAppConfig;
     $scope.lsFormat = lsFormat;
@@ -234,12 +233,6 @@
       });
     }
 
-    function getDocumentThumbnail(uuid) {
-      LinshareDocumentRestService.thumbnail(uuid).then(function(thumbnail) {
-        $scope.currentSelectedDocument.current.thumbnail = thumbnail;
-      });
-    }
-
     /**
      * @name launchTableParamsInitiation
      * @desc Initialize tableParams and related functions
@@ -406,23 +399,21 @@
      */
     function showCurrentFile(currentFile, event, openDetailsSidebar, tabIndex) {
       var deferred = $q.defer();
-      $scope.currentSelectedDocument.current = _.omit(currentFile, ['hasThumbnail', 'thumbnail']);
+      $scope.currentSelectedDocument.current = currentFile;
       $q.all([
         LinshareDocumentRestService.get(currentFile.uuid),
-        LinshareDocumentRestService.getAudit(currentFile.uuid)]).then(function(promises) {
-        $scope.currentSelectedDocument.current = _.omit(promises[0], ['hasThumbnail', 'thumbnail']);
+        LinshareDocumentRestService.getAudit(currentFile.uuid)
+      ]).then(function(promises) {
+        $scope.currentSelectedDocument.current = promises[0];
 
-        if (promises[0].hasThumbnail) {
-          LinshareDocumentRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
-            $scope.currentSelectedDocument.current.thumbnail = thumbnail;
-            $scope.currentSelectedDocument.current.hasThumbnail = thumbnail ? true : false;
-          });
-        }
+        documentUtilsService.loadItemThumbnail($scope.currentSelectedDocument.current,
+          LinshareDocumentRestService.thumbnail($scope.currentSelectedDocument.current.uuid));
 
         auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain())
           .then(function(auditActions) {
             $scope.currentSelectedDocument.current.auditActions = auditActions;
-            if(openDetailsSidebar) {
+
+            if (openDetailsSidebar) {
               $scope.data.selectedIndex = tabIndex || 0;
               $scope.loadSidebarContent(lsAppConfig.details);
               if (!_.isUndefined(event)) {

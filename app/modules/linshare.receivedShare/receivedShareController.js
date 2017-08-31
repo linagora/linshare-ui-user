@@ -152,12 +152,6 @@ angular.module('linshare.receivedShare')
         $scope.flagsOnSelectedPages = {};
       };
 
-      $scope.getDocumentThumbnail = function(uuid) {
-        receivedShareRestService.thumbnail(uuid).then(function(thumbnail) {
-          $scope.currentSelectedDocument.current.thumbnail = thumbnail;
-        });
-      };
-
       $scope.loadSidebarContent = loadSidebarContent;
 
      /**
@@ -211,11 +205,10 @@ angular.module('linshare.receivedShare')
               $scope.currentSelectedDocument.current.shares = data.shares;
             });
           }
-          if (currentFile.hasThumbnail === true) {
-            receivedShareRestService.thumbnail(currentFile.uuid).then(function(thumbnail) {
-              $scope.currentSelectedDocument.current.thumbnail = thumbnail;
-            });
-          }
+
+          documentUtilsService.loadItemThumbnail($scope.currentSelectedDocument.current,
+            receivedShareRestService.thumbnail($scope.currentSelectedDocument.current.uuid));
+
           resolve($scope.currentSelectedDocument.current);
 
           getReceivedShareAudit($scope.currentSelectedDocument.current).then(function() {

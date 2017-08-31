@@ -283,14 +283,8 @@
       var nodeDetails = {};
       workgroupNodesRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid).then(function(data) {
         nodeDetails = data;
-        if (data.hasThumbnail) {
-          workgroupNodesRestService.thumbnail(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid)
-            .then(function(thumbnail) {
-              nodeDetails.thumbnail = thumbnail;
-            });
-        } else {
-          delete nodeDetails.thumbnail;
-        }
+        documentUtilsService.loadItemThumbnail(nodeDetails,
+          workgroupNodesRestService.thumbnail(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid));
 
         workgroupNodesRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid)
           .then(function(data) {

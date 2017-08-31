@@ -21,6 +21,7 @@
 
     itemUtilsService.getItemDetails = getItemDetails;
     itemUtilsService.getReloadDocumentsList = getReloadDocumentsList;
+    itemUtilsService.loadItemThumbnail = loadItemThumbnail;
     itemUtilsService.removeElementFromCollection = removeElementFromCollection;
     itemUtilsService.resetItemSelection = resetItemSelection;
     itemUtilsService.selectDocument = toggleItemSelection;
@@ -29,6 +30,27 @@
     return itemUtilsService;
 
     ////////////
+
+    /**
+     * @name loadItemThumbnail
+     * @desc Check if thumbnail exists and load it
+     * @param {object} item - Item which will contains the thumbnail
+     * @param {promise} getThumbnail - Promise which supplies the thumbnail
+     * @memberOf linshare.utils.documentUtilsService
+     */
+    function loadItemThumbnail(item, getThumbnail) {
+      delete item.thumbnail;
+      if (item.hasThumbnail) {
+        getThumbnail.then(function(thumbnail) {
+          if (_.isUndefined(thumbnail)) {
+            item.thumbnailUnloadable = true;
+            item.hasThumbnail = false;
+          } else {
+            item.thumbnail = thumbnail;
+          }
+        });
+      }
+    }
 
     /***********************************************************************************************************/
     /****************** TODO : refactor all functions below and push them in Abysse Deeply ************/

@@ -1,13 +1,21 @@
 <div id="profile-main" class="detail-workgroup">
   <div class="p-relative m-b-20 img-preview-ctn">
-    <p x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail === true" href="">
+    <p x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail &&
+      !mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable">
       <img class="img-responsive"
            x-ng-src="data:image/png;base64,{{mainVm.sidebar.getData().currentSelectedDocument.current.thumbnail}}" alt=""/>
     </p>
     <div class="np-preview-ctn"
          x-ng-hide="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail === true">
       <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
-      <p>{{"RIGHT_PANEL.DETAILS.NO_PREVIEW" | translate}}</p>
+      <p data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable"
+         translate>
+        RIGHT_PANEL.DETAILS.PREVIEW_NOT_LOADABLE
+      </p>
+      <p data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable"
+         translate>
+        RIGHT_PANEL.DETAILS.NO_PREVIEW_AVAILABLE
+      </p>
     </div>
   </div>
   <div title="{{'WIP' | translate}}" class="m-b-10">
