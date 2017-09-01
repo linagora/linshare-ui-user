@@ -533,10 +533,18 @@ STANDARD CONTENT
     text-align: left;
     font-size: 1.3em;
   }
-
   .field-ctn {
     padding: 0;
     margin-bottom: 1.5em;
+    .indented-form-dependency {
+      margin-bottom: 0;
+      margin-top: 1em;
+      padding: 0 0 0 1em;
+      label {
+        font-weight: 400;
+        font-size: 0.95em;
+      }
+    }
   }
   .dropdown.popOverForm:not([data-animation]).open .dropdown-menu {
     right: 0;

@@ -71,7 +71,7 @@
       "SECURE_SHARING": "Chia sẻ bảo mật",
       "SHARING_ACKNOWLEDGEMENT": "Chứng nhận đã chia sẻ",
       "USDA": "Chứng nhận không tải về sau khi chia sẻ",
-      "NOTIFICATION_DATE": "Ngày thay đổi",
+      "TBT__NOTIFICATION_DATE": "",
       "ATTACH_EMAIL": "Tùy chỉnh thư điện tử",
       "ATTACHED_EMAIL_SUBJECT": "Chủ đề",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản",
