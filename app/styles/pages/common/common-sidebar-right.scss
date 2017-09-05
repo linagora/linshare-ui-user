@@ -117,7 +117,7 @@ SIDEBAR RIGHT CONTAINER
   margin-bottom: 0;
   border-bottom: solid 1px #E7E7E7;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0 10px;
   h2.header-more-options {
@@ -758,17 +758,22 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
     }
     h2.header-more-options {
       color: #fff;
+      justify-content: flex-start;
+      align-self: center;
+      margin-left: 0;
     }
     .zmdi-chevron-left {
       color: #fff;
+      flex: 0 0 35px;
+      text-align: center;
     }
-    .groups-home-workgroup {
-      position: absolute;
-      right: 16px;
+    .return-to-wkgrps {
       font-size: 1.45em;
-      margin-top: -4px;
       color: #fff;
-      top: 20px;
+      display: flex;
+      flex: 0 0 35px;
+      justify-content: flex-end;
+      flex: 1;
     }
   }
   #chat.setSidebarRightMobileState {
@@ -865,10 +870,13 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
     .custom-list-item {
       margin-right: 15px;
     }
-
   }
   .header-sidebar h2.header-more-options {
     max-width: 241px !important;
+    justify-content: flex-start;
+    align-self: center;
+    min-width: 100%;
+    margin-left: -30px;
   }
   #profile-main .media > div:nth-child(even) {
     float: right;
@@ -878,6 +886,11 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
   }
   .header-sidebar.workgroup-header-nav {
     position: fixed;
+    display: flex !important;
+    h2.header-more-options {
+      min-width: initial;
+      margin-left: 0;
+    }
   }
 }
 
@@ -980,6 +993,7 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
       color: #d0f0ff;
       max-width: 100% !important;
       text-align: center;
+      margin-left: -25px;
     }
     span.header-action-link {
       width: 0;
@@ -987,7 +1001,6 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
       flex: 0 0 auto;
       color: #fff;
       font-size: 1.1em;
-      margin-top: -3px;
       letter-spacing: 0.03em;
       max-width: 100%;
       opacity: 0;
@@ -1005,6 +1018,7 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
         margin-left: 0;
         text-align: left !important;
         font-size: 1.05em;
+        min-width: initial;
       }
       span.header-action-link {
         width: 100px;

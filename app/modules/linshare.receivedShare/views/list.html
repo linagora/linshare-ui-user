@@ -53,6 +53,15 @@
                       </a>
                     </li>
                     <li role="menuitem">
+                      <a href="" class="ng-binding" data-ng-click="sortDropdownSetActive('sender.firstName', $event)">
+                        <span class="caret-area">
+                          <i data-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                          <i data-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                        </span>
+                        <span translate>FILTER.ORDER_BY_SENDER</span>
+                      </a>
+                    </li>
+                    <li role="menuitem">
                       <a href="" class="ng-binding selected-sorting"
                          x-ng-click="sortDropdownSetActive('modificationDate', $event)">
                         <span class="caret-area">
@@ -267,7 +276,7 @@
                 x-ng-click="backToSidebarContentDetails()"
                 x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
                    'current-vis': currentSelectedDocument.current.uuid === documentFile.uuid}"
-                class="p-b-5"
+                class="p-b-5 double-row"
                 check-table-height>
               <td data-header="'checkboxheader.html'"
                   class="center set-content-left thumb-type-item thumb-groups-preview-ls"
@@ -297,6 +306,10 @@
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <span class="file-name-disp">{{documentFile.name}}</span>
                       <span class="secondary-info-ctn">
+                         <p class="secondary-list-item-info hidden-xs">
+                           {{documentFile.sender.firstName}}
+                           <span class="text-uppercase">{{documentFile.sender.lastName}}</span>
+                         </p>
                         <p class="mobile-list-item-info visible-xs">
                           {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: true}}
                         </p>
