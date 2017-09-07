@@ -350,6 +350,9 @@ md-content #content-ctn-sidebar {
     font-size: 0.90em;
     font-style: italic;
     padding: 10px 0 0 0;
+    &[readonly] {
+      cursor: default;
+    }
     div {
       display: none;
     }

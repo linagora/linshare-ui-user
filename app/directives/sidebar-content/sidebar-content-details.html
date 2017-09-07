@@ -38,14 +38,20 @@
                 </div>
                 <div class="m-b-10">
                   <div class="description-ctn form-sidebar"
-                       x-ng-class="{'show-full-comment': commentFocused}"
-                       x-ng-init="commentFocused = false">
-                    <textarea title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"
+                       x-ng-init="commentFocused = false"
+                       data-ng-class="{'show-full-comment': commentFocused, 'disabled-work-in-progress':
+                        (mainVm.sidebar.getData().currentPage === 'received_files' &&
+                        !mainVm.sidebar.getData().currentSelectedDocument.current.description.length)}">
+                    <!-- TODO add "No description" case if no description in receivedShare -->
+                    <textarea title="{{
+                           mainVm.sidebar.getData().currentPage === 'my_files' ? 'INFORMATION_TAB.EDIT_DESCRIPTION' :
+                           '' | translate}}"
                               class="comment"
                               spellcheck="false"
                               name="description"
                               id="description"
-                              x-ng-attr-placeholder="{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}"
+                              x-ng-attr-placeholder="{{mainVm.sidebar.getData().currentPage === 'received_files' ?
+                              'INFORMATION_TAB.NO_DESCRIPTION' : 'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}"
                               x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.description"
                               x-ng-bind="mainVm.sidebar.getData().currentSelectedDocument.current.description"
                               x-ng-change="mainVm.sidebar.getData().updateDocument(mainVm.sidebar.getData().currentSelectedDocument.current)"
@@ -57,8 +63,9 @@
 
                     </textarea>
                     <span x-ng-if="(((!commentFocused) && (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
-                    <div class="edit-description clic-enabled" x-ng-click="commentFocused = !commentFocused ; commentFocused">
+                    <div class="edit-description" x-ng-click="commentFocused = !commentFocused">
                       <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
+                         data-ng-class="{'zmdi-eye': mainVm.sidebar.getData().currentPage === 'received_files'}"
                          title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
                       <i class="zmdi zmdi-close" x-ng-if="commentFocused"
                          title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
