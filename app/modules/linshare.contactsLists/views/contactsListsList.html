@@ -173,9 +173,9 @@
               <div id="search-field-ctn">
                 <div class="search-style">
                   <div class="fg-line">
-                    <input type="text" class="form-control" autocomplete="off" x-ng-model="filterValue"
-                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                           x-ng-change="contactsListsListVm.tableApplyFilter(filterValue, ['name'], '||')">
+                    <input type="text" class="form-control" autocomplete="off"
+                           x-ng-model="contactsListsListVm.paramFilter.name"
+                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}">
                   </div>
                 </div>
               </div>

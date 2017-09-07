@@ -187,6 +187,7 @@
      */
     function createFolder() {
       if (workgroupNodesVm.canCreateFolder) {
+        workgroupNodesVm.paramFilter.name = '';
         var newFolderObject = workgroupNodesRestService.restangularize({
           name: newFolderName,
           parent: workgroupNodesVm.folderDetails.folderUuid,

@@ -50,6 +50,7 @@ angular.module('linshare.sharedSpace')
       });
 
     thisctrl.createWorkGroup = function() {
+      thisctrl.paramFilter.name = '';
       var defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, swalNewWorkGroupName);
       var defaultName = defaultNamePos > 0 ?
         swalNewWorkGroupName + ' (' + defaultNamePos + ')' : swalNewWorkGroupName;

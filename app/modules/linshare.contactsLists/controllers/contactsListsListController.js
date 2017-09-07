@@ -64,7 +64,9 @@
       selectedIndex: 0
     };
     contactsListsListVm.openSearch = openSearch;
-    contactsListsListVm.paramFilter = {};
+    contactsListsListVm.paramFilter = {
+      name: ''
+    };
     contactsListsListVm.resetSelectedDocuments = resetSelectedDocuments;
     contactsListsListVm.renameContactsList = renameContactsList;
     contactsListsListVm.saveContacts = saveContacts;
@@ -74,7 +76,6 @@
     contactsListsListVm.showItemDetails = showItemDetails;
     contactsListsListVm.sortDropdownSetActive = sortDropdownSetActive;
     contactsListsListVm.switchVisibility = switchVisibility;
-    contactsListsListVm.tableApplyFilter = tableApplyFilter;
     contactsListsListVm.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
     contactsListsListVm.toggleSearchState = toggleSearchState;
 
@@ -209,6 +210,7 @@
      */
     function createContactsListFunction(itemName) {
       if (contactsListsListVm.canCreate && contactsListsListVm.functionality.enable) {
+        contactsListsListVm.paramFilter.name = '';
         var item = contactsListsListRestService.restangularize({
           name: cleanString(itemName),
           owner: _.pick($scope.userLogged, ['firstName', 'lastName', 'uuid'])
@@ -641,24 +643,6 @@
         })).public = data.public;
         contactsListsListVm.tableParams.reload();
       });
-    }
-
-    /**
-     * @name tableApplyFilter
-     * @desc Helper to apply a filter on a selection of colum
-     * @param {String} filterValue - The value to use for the filters
-     * @param {Array<String>} columns - The name of the column to apply the filter on
-     * @param {String} operator - The filter operator
-     * @memberOf LinShare.Guests.LinshareGuestsController
-     */
-    //TODO - IAB: refactor as utils
-    function tableApplyFilter(filterValue, columns, operator) {
-      _.forEach(columns, function(column) {
-        contactsListsListVm.paramFilter[column] = filterValue;
-      });
-      contactsListsListVm.paramFilter.operator = operator ? operator : '&&';
-      contactsListsListVm.tableParams.filter(contactsListsListVm.paramFilter);
-      contactsListsListVm.tableParams.reload();
     }
 
     /**
