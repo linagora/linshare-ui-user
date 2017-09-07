@@ -119,7 +119,9 @@
       _.remove(filterBoxVm.filterBoxItems, function(item) {
         var sizeIsValid = true,
           dateIsValid = true;
-        if (filterBoxVm.showUnit) {
+        if (_.isUndefined(item.size)) {
+          sizeIsValid = false;
+        } else if (filterBoxVm.showUnit) {
           var size = item.size.toFixed(1);
           sizeIsValid = (size >= sizeValues.sizeStart && size <= sizeValues.sizeEnd);
         }
