@@ -19,7 +19,7 @@
    * @memberOf linshare.components
    */
   function FilterBoxController(_, $scope, $timeout, $translate, autocompleteUserRestService, lsAppConfig, moment,
-    unitService) {
+                               unitService) {
     const FR_DATE_FORMAT = lsAppConfig.dateFormat.fr;
     const EN_DATE_FORMAT = lsAppConfig.dateFormat.en;
 
@@ -66,7 +66,7 @@
           moment(filterBoxVm.dateStart) : moment('0000-01-01');
         var dateEnd = filterBoxVm.dateEnd ?
           moment(filterBoxVm.dateEnd).add('day', +1) : moment().add('day', +1);
-        return {dateStart:dateStart, dateEnd:dateEnd};
+        return {dateStart: dateStart, dateEnd: dateEnd};
       }
     }
 
@@ -172,6 +172,9 @@
      * @memberOf linshare.components.FilterBoxController
      */
     function resetTableList() {
+      if (_.isNil(filterBoxVm.filterBoxItemsInit)) {
+        return;
+      }
       if (!_.isNil(filterBoxVm.showed) && !_.isEqual(filterBoxVm.showed, filterBoxVm.filterBoxItems)) {
         var removed = _.differenceBy(filterBoxVm.showed, filterBoxVm.filterBoxItems, 'uuid');
         _.pullAllBy(filterBoxVm.filterBoxItemsInit, removed, 'uuid');

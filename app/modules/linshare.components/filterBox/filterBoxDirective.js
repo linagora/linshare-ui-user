@@ -25,13 +25,13 @@
       scope: {
         filterBoxDate: '@?',
         filterBoxSize: '@?',
-        filterBoxUser: '@?',
+        filterBoxUser: '@?'
       },
       controller: 'FilterBoxController',
       controllerAs: 'filterBoxVm',
       bindToController: {
         filterBoxItems: '=',
-        filterBoxTable: '=',
+        filterBoxTable: '='
       },
       templateUrl: componentsConfig.path + 'filterBox/filterBoxTemplate.html'
     };
