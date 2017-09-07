@@ -471,7 +471,7 @@
      * @param document
      */
     function updateDocument(document) {
-      var documentServer = _.cloneDeep(document);
+      var documentServer = _.omit(_.cloneDeep(document), ['thumbnailUnloadable']);
       $translate(['SAVING'])
         .then(function(translations) {
           /* jshint sub: true */
