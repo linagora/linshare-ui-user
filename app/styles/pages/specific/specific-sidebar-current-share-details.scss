@@ -125,6 +125,27 @@ CURRENT SHARE DETAIL SIDEBAR
     min-height: 378px;
     margin-bottom: 0;
   }
+  .txt-area-label {
+    font-weight: 400;
+  }
+}
+
+.form-detail-share-ctn {
+  height: calc(100% - 50px);
+  margin-bottom: 0;
+  padding-bottom: 0;
+  overflow-y: auto;
+  textarea {
+    resize: vertical;
+    &[readonly]  {
+      cursor: default;
+    }
+  }
+}
+
+.sidebar-sharing-detail-ctn {
+  height: 100%;
+  overflow: hidden;
 }
 
 .abort-sharing-cta {

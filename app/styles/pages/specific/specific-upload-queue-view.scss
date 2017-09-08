@@ -132,7 +132,7 @@
   }
   .checkbox-ctn-thumb {
     position: absolute;
-    bottom: 2px;
+    bottom: 7px;
     width: 12px;
     height: 12px;
     left: inherit;
@@ -146,17 +146,8 @@
     opacity: 0;
     color: #8a8a8a;
   }
-
-  .anim-left {
-    display: flex;
-    transition: margin .6s ease;
-    div:first-child {
-      flex: 1 1 100%;
-      display: flex;
-    }
-  }
   .actions-ctn {
-    flex: 0 0 100px;
+    flex: 0 0 150px;
     .align-list-icons {
       display: flex;
     }
@@ -164,25 +155,27 @@
   .align-list-icons {
     padding-top: 12px;
     display: flex;
-  }
-  .anim-left.no-padding {
-    padding: 0;
-    div {
-      padding: 0;
+    li {
+      display: flex;
     }
+  }
+  .upload-detail-row {
+    display: flex;
     .preview-icon-ctn {
       padding-top: 0px;
-      flex: 0 0 42px;
+      flex: 0 0 45px;
       align-items: center;
       justify-content: center;
-      font-size: 1.45em;
+      font-size: 1.4em;
     }
-  }
-  .data-list-slide-toggle {
-    margin-left: -100%;
+    > div:first-of-type {
+      flex: 1 1 100%;
+      display: flex;
+    }
   }
   .actions > li > a > i, .actions > a > i {
     color: #5D5D5D;
+    font-size: 1.25em;
   }
   .lv-body {
     z-index: 4;
@@ -205,6 +198,7 @@
     }
   }
   .preview-icon-ctn {
+    position: relative;
     width: auto;
     margin: auto;
     padding: 5px;
@@ -225,7 +219,7 @@
     }
   }
   .data-list-ctn {
-    width: 94%;
+    flex: 1 1 auto;
     margin-left: 5px;
     .lv-title {
       font-size: 1em;
@@ -473,6 +467,7 @@
           padding: 7px 2px;
           > div {
             padding: 0;
+            flex: 1;
             .align-list-icons {
               padding: 0;
               z-index: inherit;
@@ -481,6 +476,7 @@
               display: flex !important;
               justify-content: center;
               padding-top: 5px;
+              flex: 0 0 45px;
             }
           }
           .data-list-ctn {

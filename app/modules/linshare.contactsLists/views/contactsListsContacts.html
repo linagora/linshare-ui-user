@@ -194,7 +194,7 @@
                  title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
                  x-ng-click="
                  contactsListsContactsVm.showItemDetails(contactsListsContactsVm.selectedContacts[0], $event)">
-                <i class="zmdi zmdi-info-outline"></i>
+                <i class="zmdi zmdi-info"></i>
                 <span>{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}</span>
               </a>
             </span>
@@ -336,7 +336,7 @@
                           <a href=""
                              title="{{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}"
                              class="set-col-12">
-                            <i class="zmdi zmdi-info-outline"></i>
+                            <i class="zmdi zmdi-info"></i>
                           </a>
                         </li>
                         <li x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)"
@@ -357,14 +357,14 @@
                             auto-close="always" hover-dropdown-fix>
                           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                              event-propagation-stop class="set-col-12">
-                            <i class="zmdi zmdi-more-vert"></i>
+                            <i class="zmdi zmdi-more"></i>
                           </a>
                           <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided
                            dropdown-content-left">
                             <li>
                               <a href=""
                                  x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact,$event)">
-                                <i class="zmdi zmdi-info-outline"></i>
+                                <i class="zmdi zmdi-info"></i>
                                 {{'CONTACTS_LISTS_ACTION.MORE.INFORMATION' | translate}}
                               </a>
                             </li>
@@ -425,7 +425,7 @@
          x-ng-if="contactsListsContactsVm.flagsOnSelectedPages[contactsListsContactsVm.tableParams.page()]">
       </i>
     </div>
-    <i class="zmdi zmdi-info-outline col-xs-2"
+    <i class="zmdi zmdi-info col-xs-2"
        x-ng-click="contactsListsContactsVm.showItemDetails(contactsListsContactsVm.selectedContacts[0],$event)"
        x-ng-class="{'hide' : (contactsListsContactsVm.selectedContacts.length > 1)}"></i>
     <i class="zmdi zmdi-edit col-xs-2"

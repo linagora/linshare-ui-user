@@ -9,8 +9,14 @@
   vertical-align: middle;
 }
 
-.m-l-50{
+.m-l-50 {
   margin-left: 50px;
+}
+.m-t-55 {
+  margin-top: 55px !important;
+}
+.m-b-40 {
+  margin-bottom: 40px !important;
 }
 
 .pipe-separator{
@@ -151,14 +157,6 @@
   }
 }
 
-.align-list-icons span {
-  display: none;
-  position: absolute;
-  font-size: 0.65em;
-  bottom: -1.3em;
-  left: 0.2em;
-}
-
 .m-t-50 {
   margin-top: 50px !important;
 }
@@ -172,7 +170,7 @@
 }
 
 .m-t-40 {
-  margin-top: 40px;
+  margin-top: 40px !important;
 }
 
 .pos-relative {

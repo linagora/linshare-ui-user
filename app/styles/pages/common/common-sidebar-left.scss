@@ -125,6 +125,11 @@ body:not(.sw-toggled) #sidebar {
   transition: all 200ms ease-in-out;
   i {
     line-height: 0.9;
+    &.ls-user-group {
+      line-height: 1.5;
+      font-size: 1.15em;
+      margin-left: -1px;
+    }
   }
 }
 

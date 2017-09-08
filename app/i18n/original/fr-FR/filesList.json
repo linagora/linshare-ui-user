@@ -61,7 +61,9 @@
       "EDIT": "Modifier",
       "VIEW_MORE": "Voir le détail",
       "RESEND": "Relancer",
-      "ABORT_SHARE": "Annuler le partage"
+      "ABORT_SHARE": "Annuler le partage",
+      "SHARE_DESCRIPTION": "Description du partage :",
+      "NO_DESCRIPTION" : "Aucune description"
     },
     "ACTIVITIES": {
       "TITLE": "Historique"
@@ -85,20 +87,20 @@
     },
     "SHARE_OPTIONS": {
       "TITLE": "Options du partage",
-      "ADD_NOTE": "Ajouter une note",
-      "ADD_NOTE_PLACEHOLDER": "Saisissez une note de partage",
+      "ADD_NOTE": "Ajouter une description au partage",
+      "ADD_NOTE_PLACEHOLDER": "Saisissez une note descriptive",
       "SECURE_SHARING": "Sécuriser le partage",
       "SHARING_ACKNOWLEDGEMENT": "Recevoir un accusé de partage",
       "USDA": "Recevoir un accusé de non-téléchargement",
-      "NOTIFICATION_DATE": "Notification de non-téléchargement le",
+      "NOTIFICATION_DATE": "Notification de non-téléchargement le ",
       "ATTACH_EMAIL": "Personnaliser le courriel",
-      "ATTACHED_EMAIL_SUBJECT": "Sujet",
-      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message",
+      "ATTACHED_EMAIL_SUBJECT": "Sujet du courriel",
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message de courriel",
       "SHOW_SELECTED_FILES": "Voir les fichiers",
       "GO_TO_UPLOAD_FILES": "Retour vers les dépots"
     },
     "CURRENT_SHARE_DETAIL": {
-      "TITLE": "Details du partage",
+      "TITLE": "Détails du partage",
       "RECIPIENTS": "Destinataires",
       "SHARE_PARAMS": "Paramètres de partage",
       "NOTE": "Note",

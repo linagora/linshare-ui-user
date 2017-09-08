@@ -128,6 +128,7 @@ div.bordered-circle {
   left: 50%;
   transform: translateX(-50%);
   max-width: 401px;
+  margin-top: 2em;
   h1{
     color: #6B6B6B;
   }
@@ -148,7 +149,7 @@ div.bordered-circle {
   font-size: 0.85em;
   position: absolute;
   transform: translate(-50%, -50%);
-  margin-top: -8em;
+  margin-top: -6em;
 }
 
 #drop-ctn .grey-clr.bg-info-icon .groups-upload-file {
@@ -322,6 +323,16 @@ div.bordered-circle {
     p {
       font-size: 0.8em;
       font-weight: normal;
+    }
+  }
+  .drag-and-drop-ctn .drag-icon-ctn {
+    .grey-clr.bg-info-icon {
+      > span {
+        &.ls-contact-list-item {
+          flex : 0 0 auto;
+          margin-right: 0 !important;
+        }
+      }
     }
   }
 }

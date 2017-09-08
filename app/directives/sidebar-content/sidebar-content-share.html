@@ -156,20 +156,8 @@
       </div>
     </div>
     <div class="form-sidebar">
-
       <div class="form-group col-xs-12 addNote no-padding">
-        <div class="form-group fg-line">
-          <div class="form-inline">
-            <label for="mailCustum">{{"RIGHT_PANEL.SHARE_OPTIONS.ATTACH_EMAIL" | translate}}</label>
-            <label class="checkbox checkbox-inline">
-              <input type="checkbox" name="mailCustum" x-ng-checked="custumMailInput"
-                     x-ng-model="mainVm.sidebar.getData().mailCustum" x-ng-click="custumMailInput = !custumMailInput"/>
-              <i class="input-helper"></i>
-            </label>
-          </div>
-        </div>
-        <div class="css-slide-up col-xs-12 " x-ng-hide="!custumMailInput">
-          <div class="form-group clearfix fg-line">
+          <div class="form-group fg-line">
             <input type="text" class="form-control input-sm"
                    x-ng-model="shareActionVm.newShare.subject"
                    placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}">
@@ -179,8 +167,6 @@
                     x-ng-model="shareActionVm.newShare.message">
           </textarea>
         </div>
-        <md-divider class="col-xs-12 mailDivider hidden-xs" md-inset=""></md-divider>
-      </div>
     </div>
   </div>
 </div>

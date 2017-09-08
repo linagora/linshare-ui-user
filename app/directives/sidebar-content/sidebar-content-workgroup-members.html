@@ -2,12 +2,12 @@
   <div class="lv-item">
     <div class="card col-xs-12" id="content-ctn-sidebar">
       <div x-ng-show="workgroupMemberVm.currentWorkgroupMember.admin" class="custom-list-container clearfix">
-        <div class="recipients-form-sections clearfix">
+        <div class="recipients-form-sections m-t-30 clearfix">
           <h2 class="pull-left headerSubCtn">
-            {{"MEMBER_TAB.ADD_MEMBER" | translate}}
+            <span translate>MEMBER_TAB.ADD_MEMBER</span>
           </h2>
         </div>
-        <form role="form" class="clearfix fields-add-member no-right-inline-btn">
+        <form role="form" class="clearfix fields-add-member no-right-inline-btn m-b-40" >
           <div class="form-group fg-line group-member-field-ctn col-xs-12 no-padding">
             <div class="select-chosen-wkgps col-xs-3 no-padding pull-left">
               <select name="rights_select" id="rights_select" chosen
@@ -35,9 +35,9 @@
       </div>
       <div class="recipients-form-sections clearfix">
         <div class="custom-header-list">
-          <h2 class="pull-left headerSubCtn">
+          <h2 class="pull-left headerSubCtn existing-member">
+            <span translate>MEMBER_TAB.NUM_MEMBER</span>
             <span>{{mainVm.sidebar.getData().currentSelectedDocument.current.members.length}}</span>
-            {{"MEMBER_TAB.NUM_MEMBER" | translate}}
           </h2>
         </div>
         <div class="form-sidebar clearfix">

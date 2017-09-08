@@ -72,9 +72,6 @@
                     data-ng-click="vm.resetSelectedDocuments()"></i>
                </a>
               </span>
-              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
-                <i class="fa fa-th-large" aria-hidden="true"></i>
-              </a>
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
                 <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                     hover-dropdown-fix>
@@ -123,6 +120,9 @@
                   </div>
                 </div>
               </div>
+              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+              </a>
               <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
                    x-ng-click="vm.toggleSearchState()">
                 <a href="javascript:void(0)">
@@ -233,14 +233,14 @@
             <span class="dropdown link-dropdown" uib-dropdown="">
                 <a class="plain-text-button share-link"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
-                  <i class="zmdi zmdi-more-vert"></i>
+                  <i class="zmdi zmdi-more"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
                   <li class="hidden-xs" data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
                       x-ng-click="vm.loadSidebarContent(lsAppConfig.workgroup)">
                     <a href="">
-                      <i class="zmdi zmdi-info-outline "></i>
+                      <i class="zmdi zmdi-info "></i>
                       <span translate>ACTION.INFORMATION</span>
                     </a>
                   </li>
@@ -390,7 +390,7 @@
                             <a href=""
                                title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
                                class="set-col-12">
-                              <i class="zmdi zmdi-info-outline"></i>
+                              <i class="zmdi zmdi-info"></i>
                             </a>
                           </li>
                           <li class="hidden-xs" x-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)">
@@ -410,13 +410,13 @@
                               auto-close="always" hover-dropdown-fix>
                             <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                                event-propagation-stop class="set-col-12">
-                              <i class="zmdi zmdi-more-vert"></i>
+                              <i class="zmdi zmdi-more"></i>
                             </a>
                             <ul
                               class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
                               <li>
                                 <a href="" x-ng-click="vm.showItemDetails(documentFile.uuid, $event)">
-                                  <i class="zmdi zmdi-info-outline "></i>
+                                  <i class="zmdi zmdi-info "></i>
                                   {{'ACTION.INFORMATION' | translate}}
                                 </a>
                               </li>

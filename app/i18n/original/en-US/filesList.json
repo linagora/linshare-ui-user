@@ -61,7 +61,9 @@
       "EDIT": "edit",
       "VIEW_MORE": "view details",
       "RESEND": "Resend",
-      "ABORT_SHARE": "Cancel share"
+      "ABORT_SHARE": "Cancel share",
+      "SHARE_DESCRIPTION": "Share's description :",
+      "NO_DESCRIPTION" : "No description"
     },
     "ACTIVITIES": {
       "TITLE": "ACTIVITIES"
@@ -86,15 +88,15 @@
     },
     "SHARE_OPTIONS": {
       "TITLE": "Sharing options",
-      "ADD_NOTE": "Add a note",
+      "ADD_NOTE": "Add a share description",
       "ADD_NOTE_PLACEHOLDER": "Enter a sharing note",
       "SECURE_SHARING": "Secure the sharing",
       "SHARING_ACKNOWLEDGEMENT": "Sharing acknowledgement",
       "USDA": "Undownloaded document alert",
       "NOTIFICATION_DATE": "Notification of undownloaded the",
       "ATTACH_EMAIL": "Customize the email",
-      "ATTACHED_EMAIL_SUBJECT": "Subject",
-      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Enter your message",
+      "ATTACHED_EMAIL_SUBJECT": "Email subject",
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Enter your email message",
       "GO_TO_UPLOAD_FILES": "Go back to uploads"
     },
     "CURRENT_SHARE_DETAIL": {

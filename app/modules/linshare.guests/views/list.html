@@ -263,14 +263,14 @@
         <span data-ng-class="{'disable-link' : guestVm.selectedGuests.length > 1}">
           <a class="plain-txt-btn"  title="{{'ACTION.INFORMATION' | translate}}"
                x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])">
-            <i class="zmdi zmdi-info-outline"></i>
+            <i class="zmdi zmdi-info"></i>
             <span>{{'ACTION.INFORMATION' | translate}}</span>
           </a>
         </span>
         <span x-ng-hide="linshareModeProduction" class="dropdown link-dropdown" uib-dropdown>
           <a class="plain-txt-btn partage-link"
                  uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
-            <i class="zmdi zmdi-more-vert"></i>
+            <i class="zmdi zmdi-more"></i>
             <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu="">
@@ -391,7 +391,7 @@
                         class="hidden-action-links hidden-xs">
                       <a href=""
                          title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
-                      <i class="zmdi zmdi-info-outline"></i>
+                      <i class="zmdi zmdi-info"></i>
                       </a>
                     </li>
                     <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.showGuestDetails(guestData, 1)"
@@ -410,12 +410,12 @@
                         auto-close="always" hover-dropdown-fix>
                       <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                          event-propagation-stop>
-                      <i class="zmdi zmdi-more-vert"></i>
+                      <i class="zmdi zmdi-more"></i>
                       </a>
                       <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
                         <li x-ng-click="guestVm.showGuestDetails(guestData)">
                           <a href="" >
-                            <i class="zmdi zmdi-info-outline"></i>
+                            <i class="zmdi zmdi-info"></i>
                             {{'ACTION.INFORMATION' | translate}}
                           </a>
                         </li>
@@ -495,7 +495,7 @@
   <span x-ng-class="{'hide': guestVm.selectedGuests.length > 1}">
       <a class="plain-txt-btn"  title="{{'ACTION.INFORMATION' | translate}}"
          x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])">
-        <i class="zmdi zmdi-info-outline"></i>
+        <i class="zmdi zmdi-info"></i>
         <span>{{'ACTION.INFORMATION' | translate}}</span>
   </a>
   </span>
@@ -503,7 +503,7 @@
         uib-dropdown x-ng-show="!linshareModeProduction || (guestVm.selectedGuests.length == 1)">
     <a class="plain-txt-btn partage-link"
        uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
-      <i class="zmdi zmdi-more-vert"></i>
+      <i class="zmdi zmdi-more"></i>
       <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
   </a>
   <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu="">
@@ -545,7 +545,7 @@
     <i class="zmdi zmdi-edit col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
     <i class="zmdi zmdi-delete col-xs-2" x-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"></i>
-    <i class="zmdi zmdi-info-outline col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])"
+    <i class="zmdi zmdi-info col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
     <span class="dropdown col-xs-2 dropdown-standard" uib-dropdown="" x-ng-show="!linshareModeProduction">
     <i class="zmdi zmdi-more-vert" x-ng-class="{'active-link': isActiveMoreDropdown}"

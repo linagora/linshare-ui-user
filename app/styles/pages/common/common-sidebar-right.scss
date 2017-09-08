@@ -122,13 +122,17 @@ SIDEBAR RIGHT CONTAINER
   padding: 0 10px;
   h2.header-more-options {
     flex: 1 1 auto;
-    max-width: 270px;
+    max-width: inherit;
     font-size: 1.1em;
     color: $textColorDark;
     text-align: center;
     text-transform: uppercase;
     margin: inherit;
     margin-left: 10px;
+  }
+  .back-button {
+    flex: 0 0 30px;
+    text-align: center;
   }
   .actions {
     flex: 0 0 35px;
@@ -180,7 +184,7 @@ md-content #content-ctn-sidebar {
   position: relative;
   padding: 0;
   .custom-list-container .recipients-form-sections {
-    margin-top: 2em;
+    margin-top: 3em;
   }
 }
 
@@ -502,7 +506,7 @@ STANDARD CONTENT
     color: #676767;
     clear: both;
     margin-top: 0;
-    margin-bottom: 1.7em;
+    margin-bottom: 1.35em;
     i {
       padding-left: 0;
       display: inline-block;
@@ -542,7 +546,7 @@ STANDARD CONTENT
     .indented-form-dependency {
       margin-bottom: 0;
       margin-top: 1em;
-      padding: 0 0 0 1em;
+      padding: 0;
       label {
         font-weight: 400;
         font-size: 0.95em;

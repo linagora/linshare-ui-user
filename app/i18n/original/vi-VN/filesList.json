@@ -52,6 +52,10 @@
       "TBT__UNDEFINED": "",
       "UPLOAD_DATE": "Ngày tải lên"
     },
+    "TBT__DETAIL_SHARE": {
+      "TBT__SHARE_DESCRIPTION": "",
+      "TBT__NO_DESCRIPTION" : ""
+    },
     "ACTIVITIES": {
       "TITLE": "Lịch sử hoạt động"
     },
@@ -66,15 +70,15 @@
     },
     "SHARE_OPTIONS": {
       "TITLE": "Chia sẻ",
-      "ADD_NOTE": "Thêm miêu tả",
-      "ADD_NOTE_PLACEHOLDER": "Nhập miêu tả",
+      "TBT__ADD_NOTE": "",
+      "TBT__ADD_NOTE_PLACEHOLDER": "",
       "SECURE_SHARING": "Chia sẻ bảo mật",
       "SHARING_ACKNOWLEDGEMENT": "Chứng nhận đã chia sẻ",
       "USDA": "Chứng nhận không tải về sau khi chia sẻ",
       "TBT__NOTIFICATION_DATE": "",
       "ATTACH_EMAIL": "Tùy chỉnh thư điện tử",
-      "ATTACHED_EMAIL_SUBJECT": "Chủ đề",
-      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản",
+      "TBT__ATTACHED_EMAIL_SUBJECT": "",
+      "TBT__ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản",
       "TBT__GO_TO_UPLOAD_FILES": ""
     }
   },

@@ -66,7 +66,7 @@
 
       administrations = {
         name: 'MENU_TITLE.ADMIN',
-        icon: 'ls-settings',
+        icon: 'ls-user-group',
         color: '#E91E63',
         disabled: false,
         links: [{
@@ -122,7 +122,7 @@
       sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
         link: 'sharedspace.all',
-        icon: 'ls-shared-space',
+        icon: 'ls-workgroup',
         color: lsColors.PRIMARY_BLUE,
         disabled: false
       };

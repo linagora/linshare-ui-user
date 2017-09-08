@@ -5,13 +5,17 @@
   COMMON LAYOUT STYLES
 ***********************/
 
+textarea.form-control {
+  resize: vertical;
+}
+
 #menu-trigger {
   .line.center {
     transition: 100ms opacity ease-in-out;
   }
   &.open {
     .line.center {
-      opacity: 0;
+      opacitys: 0;
     }
   }
 }

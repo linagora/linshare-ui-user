@@ -15,8 +15,11 @@
     position: relative;
   }
 }
+#content-ctn-sidebar h2.headerSubCtn.existing-member {
+  margin-bottom: 0.75em;
+}
 
-.fields-add-member.autocomplete-search-ctn ul.dropdown-menu{
+.fields-add-member .autocomplete-search-ctn ul.dropdown-menu{
  left: -55px !important;
 }
 

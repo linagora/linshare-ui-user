@@ -132,7 +132,6 @@
       }
     }
     .toolbar-actions-items {
-      float: right;
       font-size: 17px;
       width: 110px;
       flex: 0 auto !important;
@@ -146,12 +145,10 @@
         width: auto;
       }
       .sort-dropdown {
-        float: left;
-        text-align: center;
-        margin-right: 0.3em;
         display: flex;
         justify-content: center;
         align-content: center;
+        flex: 1 1 auto;
         .dropdown {
           a.dropdown-toggle {
             color: $textColorDark;
@@ -174,22 +171,25 @@
         }
         & + a {
           line-height: 28px;
+          margin: 0;
+          flex: 1 1 auto;
+          text-align: center;
         }
         > a {
           width: 100%;
         }
       }
       > a, .sort-dropdown > a {
-        display: inline-block;
-        margin-right: 1em;
         color: $loginDarkText;
         cursor: pointer;
         line-height: 31px;
+        margin: 0;
+        flex: 1 1 auto;
+        text-align: center;
       }
     }
 
     #action-header {
-      float: right;
       width: 70%;
       margin-top: 14px;
       flex: 1 1 60%;
@@ -207,7 +207,6 @@
       }
       .search-bar {
         max-width: 320px;
-        float: right;
         display: flex;
         flex: 0 auto !important;
         margin: 0;
@@ -586,6 +585,7 @@
         margin-top: 0;
       }
       .toolbar-actions-items {
+        min-width: 100%;
         text-align: center;
         width: 100%;
         max-width: inherit;

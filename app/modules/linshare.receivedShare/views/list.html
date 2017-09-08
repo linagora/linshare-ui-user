@@ -25,9 +25,6 @@
                     data-ng-click="showCheckboxes && resetSelectedDocuments()"></i>
                </a>
             </span>
-            <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
-              <i class="fa fa-th-large" aria-hidden="true"></i>
-            </a>
             <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
               <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                    auto-close="always" hover-dropdown-fix>
@@ -93,6 +90,9 @@
                 </div>
               </div>
             </div>
+            <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+              <i class="fa fa-th-large" aria-hidden="true"></i>
+            </a>
             <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" data-ng-click="toggleSearchState()">
               <a href="">
                 <i class="tm-icon zmdi zmdi-search" data-ng-class="{'active-link': searchMobileDropdown}"></i>
@@ -204,7 +204,7 @@
             <a class="plain-text-button share-link"
                data-ng-class="{'disable-link': selectedDocuments.length > 1}"
                data-ng-click="showCurrentFile(selectedDocuments[0],$event)">
-              <i class="zmdi zmdi-info-outline"></i>
+              <i class="zmdi zmdi-info"></i>
               <span translate>ACTION.INFORMATION</span>
             </a>
           </span>
@@ -212,7 +212,7 @@
                 <a class="plain-text-button share-link"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}"
                    event-propagation-stop>
-                  <i class="zmdi zmdi-more-vert"></i>
+                  <i class="zmdi zmdi-more"></i>
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
@@ -322,7 +322,7 @@
                             event-propagation-stop>
                           <a href=""
                              title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}">
-                            <i class="zmdi zmdi-info-outline"></i>
+                            <i class="zmdi zmdi-info"></i>
                           </a>
                         </li>
                         <li class="hidden-xs hidden-action-links" data-ng-if="canUpload">
@@ -342,14 +342,14 @@
                              auto-close="always" hover-dropdown-fix>
                           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                              event-propagation-stop>
-                            <i class="zmdi zmdi-more-vert"></i>
+                            <i class="zmdi zmdi-more"></i>
                           </a>
                           <ul
                             class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
                             uib-dropdown-menu="">
                             <li>
                               <a href="" x-ng-click="showCurrentFile(documentFile,$event)">
-                                <i class="zmdi zmdi-info-outline"></i>
+                                <i class="zmdi zmdi-info"></i>
                                 {{'ACTION.INFORMATION' | translate}}
                               </a>
                             </li>

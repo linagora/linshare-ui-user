@@ -470,7 +470,10 @@
     .actions > li > a > i, .actions > a > i {
       vertical-align: middle;
       font-size: 18px;
-      color: #9C9C9C;
+      color: #5f6365;
+      &.zmdi-more {
+        color: #54585a;
+      }
     }
     .actions > li > a > i, .actions > a > i span {
       vertical-align: middle;
@@ -489,9 +492,6 @@
     .actions > li > a > i.fa, .actions > a > i.fa {
       font-size: 15px;
       vertical-align: middle;
-    }
-    .actions > li.activeActionButton > a > i {
-      color: #9C9C9C !important;
     }
     .current-vis .actions > li:not(:last-child) {
       visibility: visible;

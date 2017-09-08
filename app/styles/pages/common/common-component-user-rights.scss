@@ -1,0 +1,37 @@
+@import "../../fonts.scss";
+@import "../../colors.scss";
+
+/**********************
+  USER RIGHTS FOR WORKGROUPS
+***********************/
+
+div.user-rights {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  color: #afafaf;
+  align-self: center;
+  margin-top: 4px;
+  margin-left: 4px;
+  flex: 0 0 25px;
+  span:nth-child(2) {
+    display: inline-block;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin-left: 3px;
+    i {
+      color: #8a8a8a;
+      font-size: 0.9em;
+      &.ls-my-space-alt {
+        font-size: 1.5em;
+      }
+    }
+  }
+}

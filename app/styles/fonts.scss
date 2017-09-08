@@ -431,11 +431,11 @@
 
 @font-face {
   font-family: 'LinShare';
-  src:  url('fonts/linshare/LinShare.eot?5xajv9');
-  src:  url('fonts/linshare/LinShare.eot?5xajv9#iefix') format('embedded-opentype'),
-  url('fonts/linshare/LinShare.ttf?5xajv9') format('truetype'),
-  url('fonts/linshare/LinShare.woff?5xajv9') format('woff'),
-  url('fonts/linshare/LinShare.svg?5xajv9#LinShare') format('svg');
+  src:  url('fonts/linshare/LinShare.eot?opnblf');
+  src:  url('fonts/linshare/LinShare.eot?opnblf#iefix') format('embedded-opentype'),
+  url('fonts/linshare/LinShare.ttf?opnblf') format('truetype'),
+  url('fonts/linshare/LinShare.woff?opnblf') format('woff'),
+  url('fonts/linshare/LinShare.svg?opnblf#LinShare') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -456,6 +456,34 @@
 }
 
 
+
+.ls-deny-alt:before {
+  content: "\e921";
+}
+.ls-accept-alt:before {
+  content: "\e922";
+}
+.ls-accept:before {
+  content: "\e923";
+}
+.ls-deny:before {
+  content: "\e924";
+}
+.ls-user-accepted:before {
+  content: "\e925";
+}
+.ls-user-denied-2:before {
+  content: "\e926";
+}
+.ls-user-denied:before {
+  content: "\e927";
+}
+.ls-flag:before {
+  content: "\e920";
+}
+.ls-subdivided:before {
+  content: "\e91e";
+}
 .ls-libre-free:before {
   content: "\e90d";
 }
@@ -485,6 +513,9 @@
 }
 .ls-file-type-other:before {
   content: "\e914";
+}
+.ls-file-type-1-other:before {
+  content: "\e91f";
 }
 .ls-file-type-archive:before {
   content: "\e900";
@@ -570,7 +601,7 @@
 .ls-file-type-img:before {
   content: "\e941";
 }
-.ls-file-type-1-other:before {
+.ls-file-type-1-other2:before {
   content: "\e942";
 }
 .ls-file-type-text:before {
@@ -647,4 +678,27 @@
 }
 .ls-homepage:before {
   content: "\e95e";
+}
+.ls-upload-file2:before {
+  content: "\e917";
+}
+.ls-home-share:before {
+  content: "\e912";
+}
+.ls-home-workgroup:before {
+  content: "\e91a";
+}
+.ls-user-group:before {
+  content: "\e92b";
+}
+.ls-lock-download-alt:before {
+  content: "\e916";
+  color: #6a6e7c;
+}
+.ls-lock-download:before {
+  content: "\e915";
+  color: #6a6e7c;
+}
+.ls-users:before {
+  content: "\e92c";
 }

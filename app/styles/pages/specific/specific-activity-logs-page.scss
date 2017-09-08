@@ -15,9 +15,14 @@
     max-width: 520px;
     > div {
       min-width: inherit;
+      display: flex;
     }
     .btn {
       margin-top : 2px;
+      flex : 0 0 100px;
+    }
+    .date-field-activity {
+      flex: 0 1 auto;
     }
   }
   .date-picker table {

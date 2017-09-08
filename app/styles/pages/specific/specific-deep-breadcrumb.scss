@@ -37,18 +37,23 @@
 }
 
 .files #breadcrumb-wrap.deep-nav {
+  #page-root-link {
+    margin-left: -10px;
+  }
   .breadcrumbs-ctn {
+    flex: 0 0 auto;
+    font-size: 1em !important;
     .left-arrow {
       display: flex;
-      margin-left: 0;
-      float: left;
-      margin-top: 5px;
       margin-left: 5px;
+      margin-right: 5px;
       font-size: 0.7em;
       color: #2f2f2f;
       position: relative;
       top: 0;
+      height: 20px;
       line-height: 1;
+      border-right: solid 1px #e8e8e8;
       a {
         display: flex;
         justify-content: center;
@@ -94,6 +99,7 @@
 .files #breadcrumb-wrap.deep-nav {
   .breadcrumbs-ctn {
     display : flex;
+    align-items: center;
   }
   #action-header {
     width: auto;
@@ -179,10 +185,6 @@
     }
   }
   .files #breadcrumb-wrap.deep-nav {
-    #action-header {
-      min-width: 385px;
-      max-width: 385px;
-    }
     .breadcrumbs-ctn.lv1-break {
       .sub-category-chevron.pipe-separator {
         display: none;
@@ -210,7 +212,10 @@
 
 @media (max-width: 1450px) {
   .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break a {
-    max-width: 155px;
+    max-width: 135px;
+  }
+  .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break.lv2-break #root-level a {
+    max-width: 150px;
   }
 }
 
@@ -222,13 +227,19 @@
 
 @media (max-width: 1170px) {
   .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break div.folder-level:last-child a {
-    max-width: 175px !important;
+    max-width: 125px !important;
+  }
+  .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break.lv2-break #root-level a {
+    max-width: 125px;
   }
 }
 
 @media (max-width: 1090px) {
   .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break div.folder-level:last-child a {
     max-width: 240px !important;
+  }
+  .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break.lv2-break #root-level a {
+    max-width: 150px;
   }
 }
 
@@ -238,6 +249,9 @@
   }
   .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break div.folder-level:last-child a {
     max-width: 185px !important;
+  }
+  .files #breadcrumb-wrap.deep-nav .breadcrumbs-ctn.lv1-break.lv2-break #root-level a {
+    max-width: 140px;
   }
 }
 
