@@ -191,6 +191,45 @@ CHOSEN CUSTOM OVERIDE
 POPOVER ADD BUTTON OVERIDE
 ***********************/
 
+.uib-dropdown-menu.add-menu-ctn {
+  > li:first-of-type a {
+    padding: 0;
+    float: initial;
+  }
+
+  li:first-child {
+    padding: 0.9em 1.1em;
+  }
+  > li:first-of-type {
+    border-bottom: 1px solid #eee !important;
+  }
+  > li a {
+    padding: 10px 15px;
+  }
+  a.disabled-work-in-progress {
+    color: $disabledAlt;
+    span.path1:before, span.path2:before, span.path3:before, span.path4:before {
+      color: $disabledAlt;
+    }
+  }
+  a {
+    transition: 300ms color ease-in-out;
+    i {
+      font-size: 1.35em;
+      line-height: 1;
+      color: #5a5a5a;
+    }
+    &:hover i,
+    &:hover .groups-folder .path2:before i,
+    .groups-shared-folder .path2:before i{
+     color: $btnPopoverAddHover;
+    }
+    span {
+      vertical-align: top;
+    }
+  }
+}
+
 .menu-popover-flyout-ctn {
   .popover-inner {
     .popover-title {
@@ -253,26 +292,36 @@ div.menu-popover-flyout-ctn.popover.bottom {
   }
 }
 
-/* TODO replace class by menu-popover-ctn > a */
-.add-menu-group {
-  float: left;
-  border-bottom: 1px solid #f0f0f0;
-  width: 55px;
-  background-color: #fff;
-  height: 55px;
-  display: table;
-  text-align: center;
-  vertical-align: middle;
-  border-right: solid 1px #e6e6e6;
-  i {
-    color: $primaryClr;
-    font-size: 2.2em;
-    display: table-cell;
-    vertical-align: middle;
-    font-weight: bold;
-    pointer-events: none;
+
+.files {
+  #breadcrumb-wrap {
+    .menu-popover-ctn {
+      flex: 0 0 55px;
+      .add-menu-group {
+        float: left;
+        border-bottom: 1px solid #f0f0f0;
+        width: 100%;
+        background-color: #fff;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        vertical-align: middle;
+        border-right: solid 1px #e6e6e6;
+        i {
+          font-size: 2em;
+          color: #12a0e2;
+          display: table-cell;
+          vertical-align: middle;
+          font-weight: bold;
+          pointer-events: none;
+        }
+      }
+    }
   }
 }
+
 
 /* popover custom template */
 .popover-eye-ctn {

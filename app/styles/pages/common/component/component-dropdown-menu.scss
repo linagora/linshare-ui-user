@@ -33,9 +33,6 @@ DROPDOWN STANDARD FIXES
 }
 
 body.ng-scope > .dropdown.clearfix .dropdown-menu {
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
   transform: scale(1);
   opacity: 1;
   filter: alpha(opacity=1);
@@ -60,21 +57,19 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   }
   li a {
     padding: 8px 15px;
-    -webkit-transition: background-color;
-    -o-transition: background-color;
     transition: background-color;
-    -webkit-transition-duration: 250ms;
     transition-duration: 250ms;
     font-family: roboto , 'sans-serif';
-    font-size: 1.02em;
+    font-size: 1.035em;
   }
   &:not([class*="bgm-"]) li a {
-    color: #4C4C4C;
+    color: #696969;
+    font-weight: 500;
     &:hover {
-      color: #000;
+      color: #444;
     }
   }
-  &.dm-icon > li > a > .zmdi {
+  &.dm-icon > li > a > i {
     margin-right: 7px;
   }
 
@@ -205,7 +200,7 @@ DROPDOWN ANIMATION FIX
       background-clip: padding-box;
       width: 100%;
       padding-bottom: 0;
-      li {
+      li, &.labeled-dropdown {
         border-bottom: none;
       font-size: 0.87em;
       }

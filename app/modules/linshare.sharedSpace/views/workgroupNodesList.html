@@ -9,57 +9,65 @@
     <!-- contextmenu -->
     <div class="card">
       <div class="card-header">
-        <script type="text/ng-template" id="popover-group.html">
-          <div class="add-submenu-set clearfix">
-            <a href="javascript:void(0)" class="col-xs-6" data-ng-show="!linshareModeProduction">
-              <i class="ls-project"></i>
-              <p translate>WORKGROUPS_LIST.PROJECT</p>
-            </a>
-            <a class="col-xs-6 disabled-work-in-progress" href="javascript:void(0)">
-              <i class="ls-workgroup"></i>
-              <p translate class="disabled-work-in-progress">WORKGROUPS_LIST.SHARED_FOLDER</p>
-            </a>
-            <a class="col-xs-6" data-ng-click="workgroupNodesVm.createFolder()"
-               data-ng-class="{'disabled' : !workgroupNodesVm.canCreateFolder}"
-               data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-               href="javascript:void(0)">
-              <i class="ls-folder"></i>
-              <p translate>WORKGROUPS_LIST.FOLDER</p>
-            </a>
-            <a class="col-xs-6" flow-btn href="javascript:void(0)"
-               data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
-              <i class="ls-upload-item"></i>
-              <p translate>WORKGROUPS_LIST.UPLOAD_FILE</p>
-            </a>
-            <a data-ng-hide="workgroupNodesVm.currentWorkgroupMember.readonly" class="col-xs-6" flow-btn flow-directory
-               href="javascript:void(0)">
-              <i class="groups-upload-file"></i>
-              <p translate>WORKGROUPS_LIST.UPLOAD_FOLDER</p>
-            </a>
-            <a class="col-xs-6 disabled-work-in-progress" data-ng-show="!linshareModeProduction">
-              <i class="ls-upload-request"></i>
-              <p translate>WORKGROUPS_LIST.UPLOAD_REQUEST</p>
-            </a>
-            <a class="col-xs-6" data-ng-click="workgroupNodesVm.showWorkgroupDetails(true)"
-               data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
-              <i><span class="ls-add-user-sm"></span></i>
-              <p translate>WORKGROUPS_LIST.ADD_A_MEMBER</p>
-            </a>
-          </div>
-        </script>
         <div id="breadcrumb-wrap" class="deep-nav multi-toolbar-options">
-          <div class="menu-popover-ctn hidden-xs clickable waves-effect"
-               data-ng-class="{'disabled' : workgroupNodesVm.currentWorkgroupMember.readonly}">
-            <a class="add-menu-group"
-               tabindex="0"
-               uib-popover-template="'popover-group.html'"
-               popover-placement="bottom"
-               popover-class="menu-popover-flyout-ctn"
-               popover-append-to-body="true"
-               popover-trigger="focus">
-              <i class="zmdi zmdi-plus"
-                 data-ng-class="{'disabled': workgroupNodesVm.currentWorkgroupMember.readonly}"></i>
+          <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
+               uib-dropdown dropdown-append-to-body auto-close="always" hover-dropdown-fix
+               tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}">
+            <a class="add-menu-group" uib-dropdown-toggle >
+              <i class="zmdi zmdi-plus"></i>
             </a>
+            <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon labeled-dropdown dropdown-divided
+                add-menu-ctn" uib-dropdown-menu="">
+              <li role="menuitem">
+                <a translate class="center">ACTION.NEW_ITEM</a>
+              </li>
+              <li role="menuitem" data-ng-show="!linshareModeProduction">
+                <a>
+                  <i class="ls-project"></i>
+                  <span translate>WORKGROUPS_LIST.PROJECT</span>
+                </a>
+              </li>
+              <li role="menuitem" class="disabled-work-in-progress">
+                <a>
+                  <i class="ls-workgroup"></i>
+                  <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.SHARED_FOLDER</span>
+                </a>
+              </li>
+              <li role="menuitem">
+                <a data-ng-click="workgroupNodesVm.createFolder()"
+                   data-ng-class="{'disabled' : !workgroupNodesVm.canCreateFolder}"
+                   data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
+                  <i class="ls-folder"></i>
+                  <span translate>WORKGROUPS_LIST.FOLDER</span>
+                </a>
+              </li>
+              <li role="menuitem" flow-btn data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
+                <a>
+                  <i class="ls-upload-item"></i>
+                  <span translate>WORKGROUPS_LIST.UPLOAD_FILE</span>
+                </a>
+              </li>
+              <li role="menuitem" data-ng-hide="workgroupNodesVm.currentWorkgroupMember.readonly" flow-btn
+                  flow-directory>
+                <a>
+                  <i class="groups-upload-file"></i>
+                  <span translate>WORKGROUPS_LIST.UPLOAD_FOLDER</span>
+                </a>
+              </li>
+              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="!linshareModeProduction">
+                <a>
+                  <i class="ls-upload-request"></i>
+                  <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.UPLOAD_REQUEST</span>
+                </a>
+              </li>
+              <li role="menuitem" data-ng-click="workgroupNodesVm.showWorkgroupDetails(true)"
+                  data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
+                <a>
+                  <i class="ls-add-user-sm"></i>
+                  <span translate>WORKGROUPS_LIST.ADD_A_MEMBER</span>
+                </a>
+              </li>
+            </ul>
           </div>
           <div class="breadcrumbs-ctn hidden-xs"
                data-ng-class="{
