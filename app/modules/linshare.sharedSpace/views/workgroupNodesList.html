@@ -732,7 +732,8 @@
   <h2 class="header-more-options set-ellipsis">
     {{workgroupNodesVm.currentFolder.name}}
   </h2>
-  <a class="pull-right return-to-wkgrps zmdi zmdi-code-setting" ui-sref="sharedspace.all"></a>
+  <a class="pull-right return-to-wkgrps groups-home-workgroup" data-ng-click="workgroupNodesVm.showWorkgroupDetails()"></a>
+  <a class="pull-right return-to-wkgrps zmdi zmdi-format-valign-top" data-ui-sref="sharedspace.all"></a>
 </div>
 <section class="row multi-select-mobile visible-xs append-to-body"
          data-ng-class="{'showMobileMultiMenu': workgroupNodesVm.selectedDocuments.length > 0}">

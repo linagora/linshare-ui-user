@@ -6,7 +6,8 @@
       <div class="card-header">
         <div id="breadcrumb-wrap">
           <div class="menu-popover-ctn hidden-xs waves-effect" x-ng-class="!contactsListsContactsVm.canManage ?
-          'disabled-work-in-progress' : 'clickable'">
+          'disabled-work-in-progress' : 'clickable'" tooltip-placement="bottom" tooltip-popup-delay="500"
+               uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}">
             <a class="add-menu-group" x-ng-click="contactsListsContactsVm.onAddContacts()">
               <i class="zmdi zmdi-plus"></i>
             </a>

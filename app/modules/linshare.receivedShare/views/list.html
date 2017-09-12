@@ -387,15 +387,20 @@
                     </div>
                 </div>
               </td>
-
               <td class="hidden-xs hide-if-toggled-sidebar"
                   ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   header-class="'hide-if-toggled-sidebar'"
-                  data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'"
+                  data-title="'TABLE_HEADER.CREATION_DATE' | translate" data-sortable="'creationDate'"
                   data-ng-animate="0">
-                {{documentFile.modificationDate | relativeTime}}
+                {{documentFile.creationDate | relativeTime}}
               </td>
-
+              <td class="hidden-xs hide-if-toggled-sidebar"
+                  ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+                  header-class="'hide-if-toggled-sidebar'"
+                  data-title="'TABLE_HEADER.EXPIRATION_DATE' | translate" data-sortable="'expirationDate'"
+                  data-ng-animate="0">
+                {{documentFile.expirationDate | relativeTime}}
+              </td>
               <td class="hidden-xs hide-if-toggled-sidebar"
                   ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   header-class="'hide-if-toggled-sidebar'"

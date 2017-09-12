@@ -116,7 +116,7 @@ angular.module('linshare.sharedSpace')
           label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
           icon: 'ls-upload-fill fab-groups disabled-work-in-progress',
           disabled: true,
-          hide: lsAppConfig.linshareModeProduction
+          hide: !lsAppConfig.linshareModeProduction
         }, {
           action: null,
           label: 'WORKGROUPS_LIST.FOLDER',
@@ -128,13 +128,13 @@ angular.module('linshare.sharedSpace')
           label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
           icon: 'ls-upload-request disabled-work-in-progress',
           disabled: true,
-          hide: lsAppConfig.linshareModeProduction
+          hide: !lsAppConfig.linshareModeProduction
         }, {
           action: null,
           label: 'WORKGROUPS_LIST.PROJECT',
           icon: 'ls-project disabled-work-in-progress',
           disabled: true,
-          hide: lsAppConfig.linshareModeProduction
+          hide: !lsAppConfig.linshareModeProduction
         }
       ]
     };

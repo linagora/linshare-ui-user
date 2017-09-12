@@ -292,35 +292,33 @@ div.menu-popover-flyout-ctn.popover.bottom {
   }
 }
 
-
-.files {
-  #breadcrumb-wrap {
-    .menu-popover-ctn {
-      flex: 0 0 55px;
-      .add-menu-group {
-        float: left;
-        border-bottom: 1px solid #f0f0f0;
-        width: 100%;
-        background-color: #fff;
-        height: 55px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
+#breadcrumb-wrap {
+  .menu-popover-ctn {
+    flex: 0 0 55px;
+    .add-menu-group {
+      float: left;
+      border-bottom: 1px solid #f0f0f0;
+      width: 100%;
+      background-color: #fff;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      vertical-align: middle;
+      border-right: solid 1px #e6e6e6;
+      i {
+        font-size: 2em;
+        color: #12a0e2;
+        display: table-cell;
         vertical-align: middle;
-        border-right: solid 1px #e6e6e6;
-        i {
-          font-size: 2em;
-          color: #12a0e2;
-          display: table-cell;
-          vertical-align: middle;
-          font-weight: bold;
-          pointer-events: none;
-        }
+        font-weight: bold;
+        pointer-events: none;
       }
     }
   }
 }
+
 
 
 /* popover custom template */

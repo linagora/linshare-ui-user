@@ -9,29 +9,20 @@
     <md-toolbar>
       <p class="title-fab" data-ng-if="::fabButtonToolbar.label" translate>{{::fabButtonToolbar.label}}</p>
       <md-fab-actions class="md-toolbar-tools">
-        <div class="md-fab-action-item" data-ng-repeat="action in fabButtonActions.slice(0,3)"
+        <div class="md-fab-action-item" data-ng-repeat="action in fabButtonActions"
              data-ng-if="::!action.hide">
           <md-button aria-label="{{::action.label}}" class="md-icon-button" flow-btn data-ng-disabled="::action.disabled"
-                     data-ng-if="::action.flowBtn">
+                     data-ng-if="::action.flowBtn && !action.flowDirectory">
             <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
             </fab-link>
           </md-button>
           <md-button aria-label="{{::action.label}}" class="md-icon-button" data-ng-disabled="::action.disabled"
-                     data-ng-if="::!action.flowBtn">
-            <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
-            </fab-link>
-          </md-button>
-        </div>
-      </md-fab-actions>
-      <md-fab-actions class="md-toolbar-tools" data-ng-if="::isDoubleRowFab">
-        <div class="md-fab-action-item" data-ng-repeat="action in fabButtonActions.slice(3,6)" data-ng-if="::!action.hide">
-          <md-button aria-label="{{::action.label}}" class="md-icon-button" flow-btn data-ng-disabled="::action.disabled"
-                     data-ng-if="::action.flowBtn">
+                     data-ng-if="::!action.flowBtn && !action.flowDirectory">
             <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
             </fab-link>
           </md-button>
           <md-button aria-label="{{::action.label}}" class="md-icon-button" data-ng-disabled="::action.disabled"
-                     data-ng-if="::!action.flowBtn">
+                     data-ng-if="::action.flowDirectory" flow-btn flow-directory>
             <fab-link fab-link-action="action.action" fab-link-icon="action.icon" fab-link-label="action.label">
             </fab-link>
           </md-button>

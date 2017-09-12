@@ -105,8 +105,8 @@
     </section>
     <div class="menu-popover-ctn hidden-xs waves-effect"
          data-ng-class="::(!uploadQueueVm.isFromMySpace || !uploadQueueVm.location.mySpace) ?
-          'disabled-work-in-progress' : 'clickable'"
-         flow-btn href="javascript:void(0)">
+          'disabled-work-in-progress' : 'clickable'" flow-btn href="javascript:void(0)"
+         tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}">
       <a class="add-menu-group" tabindex="0">
         <i class="zmdi zmdi-plus"></i>
       </a>

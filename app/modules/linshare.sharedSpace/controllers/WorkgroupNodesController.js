@@ -312,12 +312,19 @@
         .then(function(member) {
           workgroupNodesVm.currentWorkgroupMember = member;
           workgroupNodesVm.fabButton.actions.push({
+              action: null,
+              flowDirectory: true,
+              hide: workgroupNodesVm.currentWorkgroupMember.readonly,
+              label: 'WORKGROUPS_LIST.UPLOAD_FOLDER',
+              icon: 'groups-upload-file'
+          },{
             action: null,
             label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
             icon: 'ls-upload-fill',
             flowBtn: true,
             hide: workgroupNodesVm.currentWorkgroupMember.readonly
-          });
+            }
+          );
         });
     }
 
@@ -631,7 +638,7 @@
           label: 'WORKGROUPS_LIST.SHARED_FOLDER',
           icon: 'ls-workgroup disabled-work-in-progress',
           disabled: true,
-          hide: lsAppConfig.linshareModeProduction
+          hide: !lsAppConfig.linshareModeProduction
         }, {
           action: function() {
             return workgroupNodesVm.showWorkgroupDetails(true);
@@ -649,13 +656,13 @@
           label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
           icon: 'ls-upload-request disabled-work-in-progress',
           disabled: true,
-          hide: lsAppConfig.linshareModeProduction
+          hide: !lsAppConfig.linshareModeProduction
         }, {
           action: null,
           label: 'WORKGROUPS_LIST.PROJECT',
           icon: 'ls-project disabled-work-in-progress',
           disabled: true,
-          hide: lsAppConfig.linshareModeProduction
+          hide: !lsAppConfig.linshareModeProduction
         }]
       };
     }
