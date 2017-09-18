@@ -13,10 +13,12 @@
         <div id="site-visits" class="dash-widget-item bgm-lin-blue">
           <div class="dash-widget-header">
             <div class="design-content">
-          <span class="firstLetterFormat" x-ng-if="mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
+          <span class="firstLetterFormat"
+                x-ng-if="mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
             {{mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName.charAt(0)}}
           </span>
-              <span class="firstLetterFormat" x-ng-if="!mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
+              <span class="firstLetterFormat"
+                    x-ng-if="!mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
             {{mainVm.sidebar.getData().recipientShareDetails.current.recipient.mail.charAt(0)}}
           </span>
               <p>{{mainVm.sidebar.getData().recipientShareDetails.current.recipient.mail}}</p>
@@ -51,60 +53,60 @@
                 <i class="zmdi zmdi-edit"></i>
               </a>
             </div>
+          </div>
 
-            <div x-ng-show="shareActionVm.newShare.expirationDate.enable"
-                 class="col-xs-12 field-ctn clearfix x-ng-hide detail-share-exp-date"
-                 x-ng-hide="!isDatepickerOpened" id="dateField">
-              <label for="comment" class="labelDateExpiration col-xs-6">
-                {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
-              </label>
-              <!--
-                 TODO: The directive shall be refactored with a proper template and passing different options.
-                       See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
-              -->
-              <div class="datepicker-border-fix date-picker dp-blue  datepicker-drop-right"
-                   x-ng-class="{'is-opened': opened == true}">
-                <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
-                  <div class="form-inline ">
-                    <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
-                           class="form-control  date-picker-input"
-                           datepicker-popup="{{format}}" show-weeks="false" is-open="opened"
-                           min-date="minDate"
-                           datepicker-options="dateOptions" x-ng-required="true" close-text="Close"
-                           placeholder="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
-                           x-ng-disabled="!shareActionVm.newShare.expirationDate.userCanOverride"
-                           x-ng-model="shareActionVm.newShare.expirationDate.value"/>
-                  </div>
+          <div x-ng-show="shareActionVm.newShare.expirationDate.enable"
+               class="col-xs-12 field-ctn clearfix x-ng-hide detail-share-exp-date"
+               x-ng-hide="!isDatepickerOpened" id="dateField">
+            <label for="comment" class="labelDateExpiration col-xs-6">
+              {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+            </label>
+            <!--
+               TODO: The directive shall be refactored with a proper template and passing different options.
+                     See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+            -->
+            <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
+                 x-ng-class="{'is-opened': opened == true}">
+              <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
+                <div class="form-inline ">
+                  <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                         class="form-control  date-picker-input"
+                         datepicker-popup show-weeks="false" is-open="opened"
+                         min-date="minDate"
+                         datepicker-options="dateOptions" x-ng-required="true" close-text="Close"
+                         placeholder="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
+                         x-ng-disabled="!shareActionVm.newShare.expirationDate.userCanOverride"
+                         x-ng-model="shareActionVm.newShare.expirationDate.value"/>
                 </div>
               </div>
-            </div>
-            <div class="action-share-details-row clearfix actions">
-              <small>{{'RIGHT_PANEL.DETAIL_SHARE.DOWNLOADED' | translate}}</small>
-              <p class="data">{{mainVm.sidebar.getData().recipientShareDetails.current.downloaded}}
-                {{'RIGHT_PANEL.DETAIL_SHARE.TIMES' | translate}}</p>
-              <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.VIEW_MORE' | translate}}" class="disabled">
-                <i class="fa fa-eye" aria-hidden="true"></i>
-              </a>
-            </div>
-            <form class="form-sidebar">
-              <div class="form-group m-b-0">
-                <!-- TODO: add share's sharing note -->
-                <label class="m-b-10 txt-area-label" translate>RIGHT_PANEL.DETAIL_SHARE.SHARE_DESCRIPTION</label>
-                <textarea class="form-control comment" readonly data-ng-model="mainVm.sidebar.getData().recipientShareDetails.current.description"
-                          rows="5" placeholder="{{'RIGHT_PANEL.DETAIL_SHARE.NO_DESCRIPTION' | translate}}">
-                </textarea>
+              <div class="action-share-details-row clearfix actions">
+                <small>{{'RIGHT_PANEL.DETAIL_SHARE.DOWNLOADED' | translate}}</small>
+                <p class="data">{{mainVm.sidebar.getData().recipientShareDetails.current.downloaded}}
+                  {{'RIGHT_PANEL.DETAIL_SHARE.TIMES' | translate}}</p>
+                <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.VIEW_MORE' | translate}}" class="disabled">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </a>
               </div>
-            </form>
+              <form class="form-sidebar">
+                <div class="form-group m-b-0">
+                  <!-- TODO: add share's sharing note -->
+                  <label class="m-b-10 txt-area-label" translate>RIGHT_PANEL.DETAIL_SHARE.SHARE_DESCRIPTION</label>
+                  <textarea class="form-control comment" readonly
+                            data-ng-model="mainVm.sidebar.getData().recipientShareDetails.current.description"
+                            rows="5" placeholder="{{'RIGHT_PANEL.DETAIL_SHARE.NO_DESCRIPTION' | translate}}">
+                </textarea>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card col-xs-12 p-0 abort-sharing-ctn">
-      <button class="btn abort-sharing-cta"
-              data-ng-click="mainVm.sidebar.getData()
+      <div class="card col-xs-12 p-0 abort-sharing-ctn">
+        <button class="btn abort-sharing-cta"
+                data-ng-click="mainVm.sidebar.getData()
           .removeShare(mainVm.sidebar.getData().recipientShareDetails.current.uuid)">
-        <span>{{'RIGHT_PANEL.DETAIL_SHARE.ABORT_SHARE' | translate}}</span>
-      </button>
+          <span>{{'RIGHT_PANEL.DETAIL_SHARE.ABORT_SHARE' | translate}}</span>
+        </button>
+      </div>
     </div>
   </div>
-</div>

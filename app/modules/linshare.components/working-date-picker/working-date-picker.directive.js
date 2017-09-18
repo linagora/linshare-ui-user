@@ -8,15 +8,13 @@
     .module('linshare.components')
     .directive('workingDatePicker', workingDatePicker);
 
-  workingDatePicker.$inject = ['componentsConfig', '$translate', 'lsAppConfig'];
-
   /**
    *  @namespace workingDatePicker
    *  @desc Complementary date picker directive
    *  @example <div my-example></div>
         <input working-date-picker type="text" name="expirationDate" id="expirationDate"
                x-ng-model="newGuestObject.expirationDate.value"
-               class="form-control date-picker-input" datepicker-popup="{{format}}"
+               class="form-control date-picker-input" datepicker-popup
                is-open="opened" x-ng-click="open($event, 'opened')"
                min-date="newGuestObject.datepicker.minDate"
                max-date="newGuestObject.datepicker.maxDate"
@@ -24,9 +22,7 @@
                max="{{newGuestObject.datepicker.maxDate | date:'yyyy-MM-dd'}}"/>
    *  @memberOf LinShare.components
    */
-  function workingDatePicker(componentsConfig, $translate, lsAppConfig) {
-    var FR_DATE_FORMAT = lsAppConfig.dateFormat.fr;
-    var EN_DATE_FORMAT = lsAppConfig.dateFormat.en;
+  function workingDatePicker() {
     var directive = {
       restrict: 'A',
       scope: false,
@@ -46,9 +42,8 @@
      *  @param {Object} ctrl - Directive's required controller instance(s)
      *  @memberOf LinShare.components.workingDatePicker
      */
-    function linkFn(scope, elment, attrs, ctrl) {
+    function linkFn(scope, elm, attrs, ctrl) {
       ctrl.$validators.invalidDate = invalidDate;
-      scope.format = $translate.use() === 'fr' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
       scope.open = openDefault;
 
       /**

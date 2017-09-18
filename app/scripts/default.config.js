@@ -22,10 +22,6 @@
         system: 'SYSTEM'
       },
       asyncUploadDelay: 2000,
-      dateFormat: {
-        en: 'MM/dd/yyyy',
-        fr: 'dd/MM/yyyy'
-      },
       lang: {
         fr: 'fr-FR',
         en: 'en-US',

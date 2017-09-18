@@ -10,22 +10,21 @@
     .module('linshare.audit')
     .controller('AuditController', AuditController);
 
-  AuditController.$inject = ['_', '$filter', '$scope', '$translate', '$translatePartialLoader', 'auditDetailsService',
-    'auditRestService', 'lsAppConfig', 'tableParamsService'];
+  AuditController.$inject = [
+    '_', '$filter', '$scope', '$translatePartialLoader', 'auditDetailsService', 'auditRestService', 'tableParamsService'
+  ];
 
   /**
    * @namespace AuditController
    * @desc Application audit management system controller
    * @memberOf LinShare.Audit
    */
-  function AuditController(_, $filter, $scope, $translate, $translatePartialLoader, auditDetailsService,
-    auditRestService, lsAppConfig, tableParamsService) {
+  function AuditController(_, $filter, $scope, $translatePartialLoader, auditDetailsService,
+    auditRestService, tableParamsService) {
     /* jshint validthis: true */
     var auditVm = this;
 
-    const EN_DATE_FORMAT = lsAppConfig.dateFormat.en,
-      FILTERS_SELECT_PREFIX = 'FILTERS_SELECT.',
-      FR_DATE_FORMAT = lsAppConfig.dateFormat.fr;
+    const FILTERS_SELECT_PREFIX = 'FILTERS_SELECT.';
 
     auditVm.beginDate = new Date();
     auditVm.endDate = new Date();
@@ -45,8 +44,6 @@
      */
     function activate() {
       $translatePartialLoader.addPart('audit');
-
-      auditVm.dateFormat = $translate.use() === 'fr-FR' ? FR_DATE_FORMAT : EN_DATE_FORMAT;
       auditVm.beginDate.setDate(auditVm.beginDate.getDate() - 7);
 
       findAuditActionsByDate();
