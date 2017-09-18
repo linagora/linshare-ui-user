@@ -12,9 +12,8 @@
   WorkgroupNodesController.$inject = [
     '_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
-    'flowUploadService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
-    'toastService', 'workgroupQuotaUuid', 'workgroupRestService', 'workgroupMembersRestService',
-    'workgroupNodesRestService'
+    'flowUploadService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService', 'toastService',
+    'workgroup', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'
   ];
   /**
    * @namespace WorkgroupNodesController
@@ -25,7 +24,7 @@
   function WorkgroupNodesController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
                                     $translatePartialLoader, auditDetailsService, browseService, currentFolder,
                                     documentUtilsService, flowUploadService, lsAppConfig, lsErrorCode, nodesList,
-                                    swal, tableParamsService, toastService, workgroupQuotaUuid, workgroupRestService,
+                                    swal, tableParamsService, toastService, workgroup, workgroupRestService,
                                     workgroupMembersRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
@@ -97,7 +96,9 @@
         });
       });
 
-      workgroupNodesVm.folderDetails.quotaUuid = workgroupQuotaUuid;
+      workgroupNodesVm.folderDetails.workgroupName = workgroup.name;
+      workgroupNodesVm.folderDetails.quotaUuid = workgroup.quotaUuid;
+      workgroupNodesVm.folderDetails.folderName = currentFolder.name;
 
       getBreadcrumb();
       setFabConfig();
