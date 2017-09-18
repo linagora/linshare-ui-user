@@ -35,6 +35,7 @@ angular.module('linshareUiUserApp', [
   'ui.bootstrap.contextMenu',
   'localytics.directives',
   'linshare.anonymousUrl',
-  'linshare.resetPassword'
+  'linshare.resetPassword',
+  'tmh.dynamicLocale'
 ]);
 

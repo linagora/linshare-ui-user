@@ -34,7 +34,8 @@ angular
     }]);
   }])
   .config(function(_, RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
-                   $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider) {
+                   $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider,
+                   tmhDynamicLocaleProvider) {
     lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
     $translateProvider.useLoader('$translatePartialLoader', {
@@ -46,6 +47,9 @@ angular
     $translatePartialLoaderProvider.addPart('notification');
     $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
     $translateProvider.preferredLanguage('en-US');
+    tmhDynamicLocaleProvider
+      .localeLocationPattern('vendors/bower_components/angular-i18n/angular-locale_{{locale}}.js');
+
     RestangularProvider.setDefaultHttpFields({
       cache: false
     });
