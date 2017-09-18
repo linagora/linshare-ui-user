@@ -239,6 +239,14 @@
           }
         }
       })
+      .state('sharedspace.workgroups.root_redirect', {
+        url: '/:workgroupUuid',
+        resolve: {
+          redirect: function($state, $stateParams) {
+            return $state.go('sharedspace.workgroups.root', {workgroupUuid: $stateParams.workgroupUuid});
+          }
+        }
+      })
       .state('sharedspace.workgroups.folder', {
         url: '/:workgroupUuid/:workgroupName/:folderUuid/:folderName',
         templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodesList.html',
@@ -261,6 +269,18 @@
           workgroup: function($stateParams, workgroupRestService) {
             return workgroupRestService.get($stateParams.workgroupUuid, false).then(function(workgroup) {
               return workgroup;
+            });
+          }
+        }
+      })
+      .state('sharedspace.workgroups.folder_redirect', {
+        url: '/:workgroupUuid/:workgroupName/:folderUuid',
+        resolve: {
+          redirect: function($state, $stateParams) {
+            return $state.go('sharedspace.workgroups.folder', {
+              workgroupUuid: $stateParams.workgroupUuid,
+              workgroupName: $stateParams.workgroupName,
+              folderUuid: $stateParams.folderUuid
             });
           }
         }
