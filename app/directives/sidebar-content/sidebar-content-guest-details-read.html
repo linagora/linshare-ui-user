@@ -47,12 +47,10 @@
             {{mainVm.sidebar.getData().selectedGuest.owner.lastName}}
           </div>
           <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.modificationDate
-                              | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.modificationDate | date:'medium'}}">
             <span>
                 {{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                {{mainVm.sidebar.getData().selectedGuest.modificationDate
-                  | date : mainVm.sidebar.getData().lsFormat()}}
+                {{mainVm.sidebar.getData().selectedGuest.modificationDate | date:'longDate'}}
               </span>
           </div>
         </div>
@@ -70,17 +68,15 @@
           <div>
             <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.creationDate
-                              | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
-              {{mainVm.sidebar.getData().selectedGuest.creationDate | date : mainVm.sidebar.getData().lsFormat()}}
+               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.creationDate | date:'medium'}}">
+              {{mainVm.sidebar.getData().selectedGuest.creationDate | date:'longDate'}}
             </p>
           </div>
           <div>
             <p>{{'GUEST_DETAILS.EXPIRE_THE' | translate}}</p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.expirationDate
-                              | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
-              {{mainVm.sidebar.getData().selectedGuest.expirationDate | date : mainVm.sidebar.getData().lsFormat()}}
+               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.expirationDate | date:'medium'}}">
+              {{mainVm.sidebar.getData().selectedGuest.expirationDate | date:'longDate'}}
             </p>
           </div>
           <div>

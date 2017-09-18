@@ -42,9 +42,10 @@
                     <div class="item-mid">
                       <div class="name">{{'UNKNOWN_USER' | translate}}</div>
                       <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                           uib-tooltip="{{mainVm.sidebar.getData().currentWorkGroup.modificationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
+                           uib-tooltip="{{mainVm.sidebar.getData().currentWorkGroup.modificationDate |
+                            date:'medium'}}">
                         <span>{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                          {{mainVm.sidebar.getData().currentWorkGroup.modificationDate | date: mainVm.sidebar.getData().lsFormat()}}
+                          {{mainVm.sidebar.getData().currentWorkGroup.modificationDate | date:'longDate'}}
                         </span>
                       </div>
                     </div>
@@ -68,8 +69,9 @@
                           {{'INFORMATION_TAB.CREATED_THE' | translate}}:
                         </p>
                         <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date : mainVm.sidebar.getData().lsFullDateFormat()}}">
-                          {{mainVm.sidebar.getData().currentWorkGroup.creationDate | date : mainVm.sidebar.getData().lsFormat()}}
+                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate |
+                           date:'medium'}}">
+                          {{mainVm.sidebar.getData().currentWorkGroup.creationDate | date:'longDate'}}
                         </p>
                       </div>
                       <div>

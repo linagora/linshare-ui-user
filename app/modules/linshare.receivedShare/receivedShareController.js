@@ -505,8 +505,6 @@ angular.module('linshare.receivedShare')
         startingDay: 1
       };
 
-      $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-      $scope.format = $scope.formats[0];
       $scope.closeDetailSidebar = function() {
         angular.element('#file-list-table tr li').removeClass('activeActionButton');
       };
@@ -544,12 +542,6 @@ angular.module('linshare.receivedShare')
       });
 
       $scope.currentPage = 'received_files';
-      $scope.lsFormat = function() {
-        return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';
-      };
-      $scope.lsFullDateFormat = function() {
-        return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
-      };
 
       $scope.getDetails = function(item) {
         return $scope.showCurrentFile(item);

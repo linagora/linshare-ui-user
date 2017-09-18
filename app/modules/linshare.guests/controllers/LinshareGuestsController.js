@@ -41,10 +41,6 @@
     guestVm.loadSidebarContent = loadSidebarContent;
     guestVm.loadTable = loadTable;
     guestVm.loggedUser = $scope.loggedUser;
-    //TODO: To be transformed in filter
-    guestVm.lsFormat = lsFormat;
-    //TODO: To be transformed in filter
-    guestVm.lsFullDateFormat = lsFullDateFormat;
     guestVm.guestCreate = lsAppConfig.guestCreate;
     guestVm.paramFilter = {};
     guestVm.selectedGuest = {};
@@ -212,26 +208,6 @@
       $scope.mainVm.sidebar.setData(guestVm);
       $scope.mainVm.sidebar.setContent(content || lsAppConfig.guestDetails);
       $scope.mainVm.sidebar.show();
-    }
-
-    /**
-     *  @name lsFormat
-     *  @desc Translate the date to a simple format
-     *  @returns {String}The date to the simple format
-     *  @memberOf LinShare.Guests.LinshareGuestsController
-     */
-    function lsFormat() {
-      return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';
-    }
-
-    /**
-     *  @name lsFullDateFormat
-     *  @desc Translate the date to a long format
-     *  @returns {String}The date to the long format
-     *  @memberOf LinShare.Guests.LinshareGuestsController
-     */
-    function lsFullDateFormat() {
-      return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
     }
 
     /**

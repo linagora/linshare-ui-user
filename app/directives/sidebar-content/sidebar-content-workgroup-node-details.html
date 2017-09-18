@@ -142,7 +142,7 @@
         <div class="name">{{mainVm.sidebar.getData().currentSelectedDocument.current.getName()}}</div>
         <div class="info-item-member">
             <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-              {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date: mainVm.sidebar.getData().lsFormat()}}
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date:'longDate'}}
             </span>
         </div>
       </div>
@@ -169,8 +169,7 @@
       <div class="meta-data-content">
         <div>
           <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
-          <p>{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date:
-            mainVm.sidebar.getData().lsFormat()}}</p>
+          <p>{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date:'longDate'}}</p>
         </div>
         <div x-ng-if="mainVm.sidebar.getData().linshareModeProduction == false">
           <p>{{'INFORMATION_TAB.PREVIOUS_UPDATE' | translate}}:</p>

@@ -37,8 +37,6 @@
     $scope.getDocumentInfo = getDocumentInfo;
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.lsAppConfig = lsAppConfig;
-    $scope.lsFormat = lsFormat;
-    $scope.lsFullDateFormat = lsFullDateFormat;
     $scope.multiDownload = multiDownload;
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.nextTab = nextTab;
@@ -281,14 +279,6 @@
       $scope.mainVm.sidebar.setData($scope);
       $scope.mainVm.sidebar.setContent(content || lsAppConfig.share);
       $scope.mainVm.sidebar.show();
-    }
-
-    function lsFormat() {
-      return $translate.use() === 'fr-FR' ? 'd MMMM y' : 'MMMM d y';
-    }
-
-    function lsFullDateFormat() {
-      return $translate.use() === 'fr-FR' ? 'Le d MMMM y à  h:mm a' : 'The MMMM d  y at h:mma';
     }
 
     /**
