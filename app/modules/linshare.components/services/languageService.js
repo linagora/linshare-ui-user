@@ -9,14 +9,14 @@
     .module('linshare.components')
     .factory('languageService', languageService);
 
-  languageService.$inject = ['$translate', '$log', 'localStorageService'];
+  languageService.$inject = ['$translate', '$log', 'localStorageService', 'moment'];
 
   /**
    * @namespace languageService
    * @desc Service to manipulate language used for translation
    * @memberOf linshare.components
    */
-  function languageService($translate, $log, localStorageService) {
+  function languageService($translate, $log, localStorageService, moment) {
     var service = {
       changeLocale: changeLocale,
       getLocale: getLocale,
@@ -42,6 +42,7 @@
      * @memberOf linshare.components.languageService
      */
     function changeLocale(key) {
+      moment.locale(key);
       key = addCountryLocaleCode(key);
       $translate.use(key);
       localStorageService.set('locale', key);
