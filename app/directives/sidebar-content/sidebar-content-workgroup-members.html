@@ -155,7 +155,7 @@
                 <i class="zmdi zmdi-account"></i>
                 <span x-ng-switch-when="admin">{{"MEMBER_TAB.ADMIN" | translate}}</span>
                 <span x-ng-switch-when="normal">{{"MEMBER_TAB.WRITE" | translate}}</span>
-                <span x-ng-switch-default="">{{"MEMBER_TAB.READ" | translate}}</span>
+                <span x-ng-switch-when="restricted">{{"MEMBER_TAB.READ" | translate}}</span>
               </div>
               <div class="info-item-member" title="{{'MEMBER_TAB.NOTIFICATION_ACTIVATED' | translate}}"
                    x-ng-if="mainVm.sidebar.getData().linshareModeProduction == false" >
