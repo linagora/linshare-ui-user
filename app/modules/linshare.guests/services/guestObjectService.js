@@ -9,8 +9,8 @@
     .module('linshare.guests')
     .factory('GuestObjectService', GuestObjectService);
 
-  GuestObjectService.$inject = ['_', '$q', 'authenticationRestService', 'autocompleteUserRestService',
-    'functionalityRestService', 'guestRestService', 'moment'
+  GuestObjectService.$inject = [
+    '_', '$q', 'authenticationRestService', 'functionalityRestService', 'guestRestService', 'moment'
   ];
 
   /**
@@ -18,8 +18,7 @@
    *  @desc Manipulation of guest object front/back
    *  @memberOf LinShare.guest
    */
-  function GuestObjectService(_, $q, authenticationRestService, autocompleteUserRestService, functionalityRestService,
-    guestRestService, moment) {
+  function GuestObjectService(_, $q, authenticationRestService, functionalityRestService, guestRestService, moment) {
 
     var
       allowedToAddEditors = {},
@@ -131,8 +130,9 @@
         .then(function(data) {
           var clonedData = _.cloneDeep(data);
           allowedToProlongExpiration = clonedData;
-          allowedToProlongExpiration.canOverride =
-            _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
+          //There is no delegation policy for this one so by it's default the functionality is overridable by a user
+          allowedToProlongExpiration.canOverride = clonedData.enable;
+          allowedToProlongExpiration.value = _.clone(allowedToExpiration.value);
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__RESTRICTED').then(function(data) {
           var clonedData = _.cloneDeep(data);
@@ -233,7 +233,7 @@
       form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
       form.datepicker.maxDate = _.clone(allowedToExpiration.value);
       if (!_.isUndefined(self.uuid) && !(allowedToProlongExpiration.enable)) {
-        form.datepicker.maxDate = _.clone(self.expirationDate);
+        form.datepicker.isEditable = false;
       }
       form.activateMoreOptions = (!form.activateUserSpace);
       if (_.isUndefined(self.uuid) && allowedToExpiration.canOverride) {
@@ -289,7 +289,7 @@
       var guestDTO = {};
       guestDTO.canUpload = setFunctionalityValue(self.canUpload, allowedToUpload);
       guestDTO.comment = _.defaultTo(self.comment, '');
-      moment(self.expirationDate).endOf('day').valueOf();
+      self.expirationDate = moment(self.expirationDate).endOf('day').valueOf();
       if (_.isUndefined(self.uuid)) {
         guestDTO.expirationDate = setFunctionalityValue(self.expirationDate, allowedToExpiration);
       } else {
