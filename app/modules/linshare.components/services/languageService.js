@@ -9,14 +9,17 @@
     .module('linshare.components')
     .factory('languageService', languageService);
 
-  languageService.$inject = ['$translate', '$log', 'localStorageService', 'moment', 'tmhDynamicLocale'];
+  languageService.$inject = [
+    '$translate', '$locale', '$log', 'localStorageService', 'moment', 'tmhDynamicLocale', 'uibDatepickerPopupConfig'
+  ];
 
   /**
    * @namespace languageService
    * @desc Service to manipulate language used for translation
    * @memberOf linshare.components
    */
-  function languageService($translate, $log, localStorageService, moment, tmhDynamicLocale) {
+  function languageService($translate, $locale, $log, localStorageService, moment, tmhDynamicLocale,
+                           uibDatepickerPopupConfig) {
     var service = {
       changeLocale: changeLocale,
       getLocale: getLocale,
@@ -24,40 +27,6 @@
     };
 
     return service;
-
-    /**
-     * @name getLocale
-     * @desc Get current language used stocked in the local storage
-     * @memberOf linshare.components.languageService
-     */
-    function getLocale() {
-      var storedLocale = localStorageService.get('locale');
-      return storedLocale ? storedLocale : $translate.use();
-    }
-
-    /**
-     * @name changeLocale
-     * @desc Change translation to used base on language key
-     * @param {string} key - Language key
-     * @memberOf linshare.components.languageService
-     */
-    function changeLocale(key) {
-      moment.locale(key);
-      tmhDynamicLocale.set(key.substring(0, key.indexOf('-')));
-      key = addCountryLocaleCode(key);
-      $translate.use(key);
-      localStorageService.set('locale', key);
-      $log.debug('locale changed to ', key);
-    }
-
-    /**
-     * @name refreshLocale
-     * @desc Refresh local language to use for translation service $translate
-     * @memberOf linshare.components.languageService
-     */
-    function refreshLocale() {
-      $translate.refresh(getLocale());
-    }
 
     /**
      * @name addCountryLocaleCode
@@ -83,6 +52,54 @@
         }
       }
       return key;
+    }
+
+    /**
+     * @name changeLocale
+     * @desc Change translation to used base on language key
+     * @param {string} key - Language key
+     * @memberOf linshare.components.languageService
+     */
+    function changeLocale(key) {
+      moment.locale(key);
+      tmhDynamicLocale.set(key.substring(0, key.indexOf('-'))).then(function() {
+        overrideDatepickerFormat();
+      });
+      key = addCountryLocaleCode(key);
+      $translate.use(key);
+      localStorageService.set('locale', key);
+      $log.debug('locale changed to ', key);
+    }
+
+    /**
+     * @name getLocale
+     * @desc Get current language used stocked in the local storage
+     * @memberOf linshare.components.languageService
+     */
+    function getLocale() {
+      var storedLocale = localStorageService.get('locale');
+      return storedLocale ? storedLocale : $translate.use();
+    }
+
+    /**
+     * @name overrideDatepickerFormat
+     * @desc Override default date formats in uibDatepickerPopup
+     * @memberOf linshare.components.languageService
+     */
+    // TODO : Decorator in run.js
+    function overrideDatepickerFormat() {
+      uibDatepickerPopupConfig.datepickerPopup = $locale.DATETIME_FORMATS.shortDate;
+      uibDatepickerPopupConfig.html5Types.date = $locale.DATETIME_FORMATS.shortDate;
+      uibDatepickerPopupConfig.html5Types['datetime-local'] = $locale.DATETIME_FORMATS.medium;
+    }
+
+    /**
+     * @name refreshLocale
+     * @desc Refresh local language to use for translation service $translate
+     * @memberOf linshare.components.languageService
+     */
+    function refreshLocale() {
+      $translate.refresh(getLocale());
     }
   }
 })();
