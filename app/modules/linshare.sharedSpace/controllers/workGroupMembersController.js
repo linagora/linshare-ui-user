@@ -97,15 +97,20 @@
      * @name changePropertyOrderBy
      * @desc Manage order options
      * @param {string} orderParam - which order to apply
+     * @param {jQuery.Event} $event - Event bound to the change
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
-    function changePropertyOrderBy(orderParam) {
+    // TODO : When a directive/service will be done for this type of orderBy, apply it here
+    function changePropertyOrderBy(orderParam, $event) {
       workgroupMemberVm.propertyOrderBy = orderParam;
       workgroupMemberVm.propertyOrderByAsc =
         workgroupMemberVm.propertyOrderBy === orderParam ? !workgroupMemberVm.propertyOrderByAsc : true;
       workgroupMemberVm.currentWorkGroup.current.members =
         $filter('orderBy')(workgroupMemberVm.currentWorkGroup.current.members, orderParam,
           workgroupMemberVm.propertyOrderByAsc);
+      angular.element('.sort-dropdown a').removeClass('selected-sorting').promise().done(function() {
+        angular.element($event.currentTarget).addClass('selected-sorting');
+      });
     }
 
     /**

@@ -59,12 +59,11 @@
                   <i class="ls-settings"></i>
                 </button>
                 <div uib-dropdown-menu class="uib-dropdown-menu dropdown-menu-right dm-icon double-drop">
-                  <div class="list-menu">
+                  <div class="list-menu sort-dropdown">
                     <p>{{"MEMBER_TAB.SORT_BY" | translate}}</p>
                     <ul class="dropdown-menu dm-icon sort-menu">
                       <li role="menuitem" x-ng-if="mainVm.sidebar.getData().linshareModeProduction === false">
-                        <a href="" class="ng-binding selected-sorting-members"
-                           x-ng-click="mainVm.sidebar.getData().sortSearchMember($event)">
+                        <a x-ng-click="mainVm.sidebar.getData().sortSearchMember($event)">
                           <span class="caret-area">
                             <i x-ng-show="mainVm.sidebar.getData().toggleSelectedSortMembers" class="zmdi zmdi-caret-down"></i>
                             <i x-ng-show="!mainVm.sidebar.getData().toggleSelectedSortMembers" class="zmdi zmdi-caret-up"></i>
@@ -73,34 +72,28 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding"
-                           x-ng-class="{'selected-sorting-members': workgroupMemberVm.propertyOrderBy === 'firstName'}"
-                           x-ng-click="workgroupMemberVm.changePropertyOrderBy('firstName')">
+                        <a x-ng-click="workgroupMemberVm.changePropertyOrderBy('firstName', $event)" class="selected-sorting">
                           <span class="caret-area">
-                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
+                            <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                           </span>
                          {{'MEMBER_TAB.SORT_MEMBER.FIRSTNAME' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding"
-                           x-ng-class="{'selected-sorting-members': workgroupMemberVm.propertyOrderBy === 'lastName'}"
-                           x-ng-click="workgroupMemberVm.changePropertyOrderBy('lastName')">
+                        <a x-ng-click="workgroupMemberVm.changePropertyOrderBy('lastName', $event)">
                           <span class="caret-area">
-                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
+                            <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                           </span>
                           {{'MEMBER_TAB.SORT_MEMBER.LASTNAME' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding"
-                           x-ng-class="{'selected-sorting-members': workgroupMemberVm.propertyOrderBy === 'role'}"
-                           x-ng-click="workgroupMemberVm.changePropertyOrderBy('role')">
+                        <a x-ng-click="workgroupMemberVm.changePropertyOrderBy('role', $event)">
                           <span class="caret-area">
-                           <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
+                           <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
                           </span>
                           {{'MEMBER_TAB.USER_RIGHTS' | translate}}
                         </a>
