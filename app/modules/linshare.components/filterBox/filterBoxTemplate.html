@@ -8,10 +8,10 @@
       <div class="col-sm-4 p-l-0">
         <div class="input-group">
           <span class="input-group-addon icon-size-fix">
-            <i class="zmdi zmdi-trending-down" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
+            <i class="zmdi zmdi-trending-down" data-ng-class="{disabledIcon: !filterBoxVm.showUnit()}"></i>
           </span>
           <div class="fg-line">
-            <input type="text" data-ng-disabled="!filterBoxVm.showUnit"
+            <input type="text" data-ng-disabled="!filterBoxVm.showUnit()"
                    class="form-control" name="start"
                    maxlengh="3" placeholder="min"
                    data-ng-model="filterBoxVm.sizeStart">
@@ -22,10 +22,10 @@
       <div class="col-sm-4">
         <div class="input-group">
           <span class="input-group-addon">
-            <i class="zmdi zmdi-trending-up" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
+            <i class="zmdi zmdi-trending-up" data-ng-class="{disabledIcon: !filterBoxVm.showUnit()}"></i>
           </span>
           <div class="fg-line">
-            <input type="text" data-ng-disabled="!filterBoxVm.showUnit" name="end" class="form-control"
+            <input type="text" data-ng-disabled="!filterBoxVm.showUnit()" name="end" class="form-control"
                    placeholder="max"
                    data-ng-model="filterBoxVm.sizeEnd"
                    maxlengh="3"/>
@@ -36,9 +36,9 @@
       <div class="col-sm-3">
         <div class="input-group">
           <span class="input-group-addon">
-            <i class="fa fa-database" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}"></i>
+            <i class="fa fa-database" data-ng-class="{disabledIcon: !filterBoxVm.showUnit()}"></i>
           </span>
-          <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showUnit}">
+          <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showUnit()}">
             <select chosen
                     data-placeholder-text-single="'{{::'FILTER_COMPONENT.UNIT' | translate}}'"
                     disable-search="true"
@@ -46,7 +46,7 @@
                     data-ng-model="filterBoxVm.unitSize"
                     data-ng-init="filterBoxVm.unitSize = filterBoxVm.unitService.units.MB"
                     class="form-control custumSelect outlineFFremove w-100"
-                    data-ng-disabled="!filterBoxVm.showUnit"
+                    data-ng-disabled="!filterBoxVm.showUnit()"
                     data-ng-options="unit.value for unit in filterBoxVm.unitService.units track by unit.value">
             </select>
           </div>
@@ -56,9 +56,10 @@
       <div class="col-sm-1">
         <label class="checkbox checkbox-inline">
           <input type="checkbox" data-ng-checked="true" name="check"
-                 data-ng-checked="filterBoxVm.showUnit"
+                 data-ng-checked="filterBoxVm.showUnit()"
                  data-ng-model="filterBoxVm.showUnit"
-                 data-ng-init="filterBoxVm.showUnit=true">
+                 data-ng-model-options="{ getterSetter: true }"
+                 data-ng-init="filterBoxVm.showUnit(filterBoxSize)">
           <i class="input-helper"></i>
         </label>
       </div>
@@ -68,16 +69,16 @@
       <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_DATE.HEADER</label>
       <div class="clearfix"></div>
       <!--TAG SELECT DATE -->
-      <div data-ng-init="filterBoxVm.showDateRange=true">
+      <div data-ng-init="filterBoxVm.showDateRange(filterBoxDate)">
         <!--DATE START -->
         <div class="col-sm-4 p-l-0">
           <div class="date-picker input-group dp-blue" data-ng-class="{'is-opened': dateStartOpened}">
             <span class="input-group-addon icon-size-fix">
               <i class="zmdi zmdi-calendar-check ma-icon"
-                 data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
+                 data-ng-class="{disabledIcon: !filterBoxVm.showDateRange()}"></i>
             </span>
             <div class="fg-line" data-ng-class="{'fg-toggled': dateStartOpened}">
-              <input data-ng-disabled="!filterBoxVm.showDateRange" data-ng-click="dateStartOpened = true" type="text"
+              <input data-ng-disabled="!filterBoxVm.showDateRange()" data-ng-click="dateStartOpened = true" type="text"
                      class="form-control" datepicker-popup filterBoxVm.show-weeks="false"
                      is-open="dateStartOpened" max-date="filterBoxVm.maxDate"
                      data-ng-required="true" close-text="Close"
@@ -91,10 +92,10 @@
           <div class="date-picker input-group dp-blue" data-ng-class="{'is-opened': dateEndOpened}">
             <span class="input-group-addon">
               <i class="zmdi zmdi-calendar-close ma-icon"
-                 data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
+                 data-ng-class="{disabledIcon: !filterBoxVm.showDateRange()}"></i>
             </span>
             <div class="fg-line" data-ng-class="{'fg-toggled': opened2}">
-              <input data-ng-disabled="!filterBoxVm.showDateRange" data-ng-click="dateEndOpened = true"
+              <input data-ng-disabled="!filterBoxVm.showDateRange()" data-ng-click="dateEndOpened = true"
                      type="text" class="form-control"
                      datepicker-popup filterBoxVm.show-weeks="false"
                      data-ng-model="filterBoxVm.dateEnd" is-open="dateEndOpened"
@@ -107,9 +108,9 @@
         <div class="col-sm-3">
           <div class="input-group">
             <span class="input-group-addon">
-              <i class="zmdi zmdi-calendar ma-icon" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}"></i>
+              <i class="zmdi zmdi-calendar ma-icon" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange()}"></i>
             </span>
-            <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange}">
+            <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange()}">
               <select chosen
                       data-placeholder-text-single="'{{::'FILTER_COMPONENT.DATE' | translate}}'"
                       disable-search="true"
@@ -117,7 +118,7 @@
                       data-ng-model="filterBoxVm.dateType"
                       class="form-control custumSelect outlineFFremove w-100"
                       data-ng-init="filterBoxVm.dateType = '1'"
-                      data-ng-disabled="!filterBoxVm.showDateRange">
+                      data-ng-disabled="!filterBoxVm.showDateRange()">
                 <option value="1" translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</option>
                 <option value="2" translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</option>
               </select>
@@ -127,8 +128,10 @@
         <!--CHECKBOX INIT -->
         <div class="col-sm-1">
           <label class="checkbox checkbox-inline">
-            <input type="checkbox" name="isDateActive" name="check" data-ng-checked="true"
-                   data-ng-model="filterBoxVm.showDateRange"/>
+            <input type="checkbox" name="isDateActive" name="check"
+                   data-ng-checked="filterBoxVm.showDateRange()"
+                   data-ng-model="filterBoxVm.showDateRange"
+                   data-ng-model-options="{ getterSetter: true }" />
             <i class="input-helper"></i>
           </label>
         </div>
@@ -139,13 +142,13 @@
       <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER</label>
       <div class="clearfix"></div>
       <div class="col-sm-7 p-l-0">
-        <div class="input-group" data-ng-init="filterBoxVm.showRecipients=true">
+        <div class="input-group" data-ng-init="filterBoxVm.showRecipients(filterBoxUser)">
           <span class="input-group-addon icon-size-fix">
-            <i class="zmdi zmdi-account" data-ng-class="{disabledIcon: !filterBoxVm.showRecipients}"></i>
+            <i class="zmdi zmdi-account" data-ng-class="{disabledIcon: !filterBoxVm.showRecipients()}"></i>
           </span>
           <div class="fg-line">
             <input id="typeaheadDestinataires" type="text"
-                   data-ng-disabled="!filterBoxVm.showRecipients"
+                   data-ng-disabled="!filterBoxVm.showRecipients()"
                    autocomplete="off"
                    class="form-control"
                    placeholder="{{::'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER' | translate}}"
@@ -166,8 +169,10 @@
       <!--CHECKBOX -->
       <div class="col-sm-1 pull-right">
         <label class="checkbox checkbox-inline">
-          <input type="checkbox" name="isDestinatairesActive" data-ng-checked="true"
-                 data-ng-model="filterBoxVm.showRecipients"/>
+          <input type="checkbox" name="isDestinatairesActive"
+                 data-ng-checked="filterBoxVm.showRecipients()"
+                 data-ng-model="filterBoxVm.showRecipients"
+                 data-ng-model-options="{ getterSetter: true }"/>
           <i class="input-helper"></i>
         </label>
       </div>

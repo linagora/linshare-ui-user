@@ -30,8 +30,8 @@
       controller: 'FilterBoxController',
       controllerAs: 'filterBoxVm',
       bindToController: {
-        filterBoxItems: '=',
-        filterBoxTable: '='
+        filterItems: '=filterBoxItems',
+        filterTable: '=filterBoxTable'
       },
       templateUrl: componentsConfig.path + 'filterBox/filterBoxTemplate.html'
     };
