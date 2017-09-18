@@ -85,10 +85,8 @@
                       <i class="zmdi zmdi-close" title="{{::'SELECTION_TOOLBAR.STOP' | translate}}"></i>
                     </a>
                   </li>
-                  <!--TODO : check plz and implement share feature -->
                   <li data-ng-class=" {'disabled': file.error && file.canBeRetried}"
-                      data-ng-if="!linshareModeProduction">
-                    <a href="" data-ng-click="" event-propagation-stop>
+                    <a href="" data-ng-click="uploadQueueVm.onShare(file)" event-propagation-stop>
                       <i class="zmdi zmdi-share" title="{{::'SELECTION_TOOLBAR.SHARE' | translate}}"></i>
                     </a>
                   </li>
@@ -144,9 +142,8 @@
                       <span translate>SELECTION_TOOLBAR.STOP</span>
                     </a>
                   </li>
-                  <!--TODO : check plz and implement share feature -->
                   <li data-ng-class="{'disabled': file.error && file.canBeRetried }">
-                    <a href="" data-ng-click="" event-propagation-stop>
+                    <a href="" data-ng-click="uploadQueueVm.onShare(file)" event-propagation-stop>
                       <i class="zmdi zmdi-share"></i>
                       <span translate>SELECTION_TOOLBAR.SHARE</span>
                     </a>

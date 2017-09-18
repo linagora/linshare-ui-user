@@ -9,9 +9,11 @@
     .module('linshare.upload')
     .controller('uploadQueueController', uploadQueueController);
 
-  uploadQueueController.$inject = ['_', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+  uploadQueueController.$inject = [
+    '_', '$log', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'authenticationRestService', 'flowUploadService', 'functionalityRestService',
-    'lsAppConfig', 'swal', 'toastService'];
+    'lsAppConfig', 'swal', 'toastService'
+  ];
 
   /**
    * @namespace uploadQueueController
@@ -20,8 +22,9 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function uploadQueueController(_, $q, $scope, $state, $stateParams, $timeout, $translate, $translatePartialLoader,
-    authenticationRestService, flowUploadService, functionalityRestService, lsAppConfig, swal, toastService) {
+  function uploadQueueController(_, $log, $q, $scope, $state, $stateParams, $timeout, $translate,
+                                 $translatePartialLoader, authenticationRestService, flowUploadService,
+                                 functionalityRestService, lsAppConfig, swal, toastService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $stateParams.idUpload;
@@ -57,6 +60,7 @@
     uploadQueueVm.pauseFile = pauseFile;
     uploadQueueVm.pauseSelectedFiles = pauseSelectedFiles;
     uploadQueueVm.removeSelectedDocuments = removeSelectedDocuments;
+    uploadQueueVm.onShare = onShare;
     uploadQueueVm.retryAllFiles = retryAllFiles;
     uploadQueueVm.retrySelectedFiles = retrySelectedFiles;
     uploadQueueVm.resumeAllFiles = resumeAllFiles;
@@ -277,7 +281,7 @@
         if (executeShare) {
           executeShare(shareType, uploadQueueVm.selectedDocuments, uploadQueueVm.selectedUploads);
         } else {
-          $scope.onShare();
+          uploadQueueVm.onShare();
           uploadQueueVm.loadSidebarContent(uploadQueueVm.lsAppConfig.share);
         }
       });
@@ -341,6 +345,25 @@
           uploadQueueVm.pauseFile(file);
         }
       });
+    }
+
+    /**
+     * @namespace onShare
+     * @desc Launch document share
+     * @param {Object} document - Flow file object
+     * @memberOf LinShare.upload.uploadQueueController
+     */
+    function onShare(document) {
+      uploadQueueVm.loadSidebarContent(lsAppConfig.share);
+      if (document) {
+        var index = _.has($scope.selectedUploads, document.uniqueIdentifier);
+        if (!index) {
+          document.isSelected = true;
+          $scope.selectedUploads[document.uniqueIdentifier] = document;
+        } else {
+          $log.debug('LinShare.upload.uploadQueueController - onShare - item is already in the list');
+        }
+      }
     }
 
     /**
