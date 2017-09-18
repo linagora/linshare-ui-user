@@ -12,8 +12,8 @@
   WorkgroupNodesController.$inject = [
     '_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
-    'flowUploadService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService', 'toastService',
-    'workgroup', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'
+    'filterBoxService', 'flowUploadService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
+    'toastService', 'workgroup', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'
   ];
   /**
    * @namespace WorkgroupNodesController
@@ -23,8 +23,8 @@
   /* jshint maxparams: false, maxstatements: false */
   function WorkgroupNodesController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
                                     $translatePartialLoader, auditDetailsService, browseService, currentFolder,
-                                    documentUtilsService, flowUploadService, lsAppConfig, lsErrorCode, nodesList,
-                                    swal, tableParamsService, toastService, workgroup, workgroupRestService,
+                                    documentUtilsService, filterBoxService, flowUploadService, lsAppConfig, lsErrorCode,
+                                    nodesList, swal, tableParamsService, toastService, workgroup, workgroupRestService,
                                     workgroupMembersRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
@@ -189,6 +189,7 @@
     function createFolder() {
       if (workgroupNodesVm.canCreateFolder) {
         workgroupNodesVm.paramFilter.name = '';
+        filterBoxService.setFilters(false);
         var newFolderObject = workgroupNodesRestService.restangularize({
           name: newFolderName,
           parent: workgroupNodesVm.folderDetails.folderUuid,

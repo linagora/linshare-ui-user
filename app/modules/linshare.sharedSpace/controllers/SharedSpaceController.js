@@ -4,8 +4,9 @@ angular.module('linshare.sharedSpace')
 /* jshint maxparams: false, maxstatements: false */
   .controller('SharedSpaceController', function(_, $scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
                                                 $log, workgroups, $translate, $state, documentUtilsService,
-                                                itemUtilsService, workgroupRestService, auditDetailsService,
-                                                lsAppConfig, lsErrorCode, toastService, functionalityRestService) {
+                                                filterBoxService, itemUtilsService, workgroupRestService,
+                                                auditDetailsService, lsAppConfig, lsErrorCode, toastService,
+                                                functionalityRestService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
@@ -50,6 +51,7 @@ angular.module('linshare.sharedSpace')
       });
 
     thisctrl.createWorkGroup = function() {
+      filterBoxService.setFilters(false);
       thisctrl.paramFilter.name = '';
       var defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, swalNewWorkGroupName);
       var defaultName = defaultNamePos > 0 ?
