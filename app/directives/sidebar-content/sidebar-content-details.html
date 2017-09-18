@@ -245,9 +245,8 @@
                   <div class="search-style">
                     <div class="fg-line">
                       <input type="text" class="form-control" autocomplete="off"
-                             x-ng-model="mainVm.sidebar.getData().paramFilter['name']"
-                             placeholder="{{'RIGHT_PANEL.RECIPIENTS.SEARCH_USERS' | translate}}"
-                             x-ng-change="mainVm.sidebar.getData().updateParams()">
+                             x-ng-model="mainVm.sidebar.getData().searchShareUsersInput"
+                             placeholder="{{'RIGHT_PANEL.RECIPIENTS.SEARCH_USERS' | translate}}">
                     </div>
                   </div>
                 </div>
@@ -255,7 +254,8 @@
 
               <div class="recipients-list-sharing-details">
                 <div class="recipientsAutocomplete actions"
-                     x-ng-repeat="shareElement in mainVm.sidebar.getData().currentSelectedDocument.current.shares"
+                     x-ng-repeat="shareElement in mainVm.sidebar.getData().currentSelectedDocument.current.shares |
+                     filter:mainVm.sidebar.getData().searchShareUsers(mainVm.sidebar.getData().searchShareUsersInput)"
                      title="{{shareElement.recipient.domain}}"
                      x-ng-click="mainVm.sidebar.getData().recipientShareDetails.current = shareElement;
                      mainVm.sidebar.getData().loadSidebarContent(mainVm.sidebar.getData().lsAppConfig.shareDetails)">

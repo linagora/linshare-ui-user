@@ -52,6 +52,8 @@
       current: ''
     };
     $scope.removeShare = removeShare;
+    $scope.searchShareUsers = searchShareUsers;
+    $scope.searchShareUsersInput = '';
     $scope.showCurrentFile = showCurrentFile;
     $scope.setTextInput = setTextInput;
     $scope.slideTextarea = slideTextarea;
@@ -357,6 +359,19 @@
       }, 500);
     }
 
+    /**
+     * @name searchShareUsers
+     * @desc Filter users in share list
+     * @param {string} searchShareUsersInput - Value enterred in the search input
+     * @memberOf LinShare.document.documentController
+     */
+    function searchShareUsers(searchShareUsersInput) {
+      return function(share) {
+        var name = share.recipient.firstName + ' ' + share.recipient.lastName;
+        return name.toLowerCase().indexOf(searchShareUsersInput.toLowerCase()) !== -1;
+      };
+    }
+
     function setTextInput($event) {
       var currTarget = $event.currentTarget;
       var inputTxt = angular.element(currTarget).text();
@@ -399,6 +414,7 @@
      */
     function showCurrentFile(currentFile, event, openDetailsSidebar, tabIndex) {
       var deferred = $q.defer();
+      $scope.searchShareUsersInput = '';
       $scope.currentSelectedDocument.current = currentFile;
       $q.all([
         LinshareDocumentRestService.get(currentFile.uuid),
