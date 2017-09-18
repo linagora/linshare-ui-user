@@ -43,28 +43,18 @@
   border-style: solid;
   border-color: #000 transparent;
   visibility: visible;
-  right: inherit;
+  right: 0;
   top: 50%;
   position: absolute;
   opacity: 0.3;
   margin-top: -4px;
-  left: -19px;
+  left: inherit;
 }
 
 #file-list-table.ng-table {
   th.sortable:not(.sort-desc):not(.sort-asc) .sort-indicator::after,
   th.sortable:not(.sort-desc):not(.sort-asc) .sort-indicator::before {
-    content: "";
-    border-width: 0 4px 4px;
-    border-style: solid;
-    border-color: #000 transparent;
-    visibility: hidden !important;
-    right: inherit;
-    top: 50%;
-    position: absolute;
-    opacity: 0.3;
-    margin-top: -4px;
-    left: 5px;
+    visibility: hidden;
   }
   th.sortable.sort-desc,
   th.sortable.sort-asc {
