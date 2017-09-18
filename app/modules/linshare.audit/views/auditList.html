@@ -215,7 +215,7 @@
                 <span tooltip-placement="bottom"
                       tooltip-popup-delay="300"
                       tooltip-append-to-body="true"
-                      uib-tooltip="{{::auditAction.creationDate | calendarTime}}"
+                      uib-tooltip="{{::auditAction.creationDate | date: 'medium'}}"
                       class="truncate">
                   {{::auditAction.creationDate | relativeTime}}
                 </span>

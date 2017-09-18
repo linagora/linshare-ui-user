@@ -144,8 +144,8 @@
       auditAction.isAuthor = setIsAuthor(auditAction, loggedUserUuid);
       auditAction.authorName = setAuthorName(auditAction);
       auditAction.authorReference = setAuthorReference(auditAction);
-      auditAction.dateShortVarious = setDateVarious(auditAction, 'shortTime');
-      auditAction.dateCalendarVarious = setDateVarious(auditAction, 'calendarTime');
+      auditAction.dateShortVarious = setDateVarious(auditAction, 'shortDate');
+      auditAction.dateMediumVarious = setDateVarious(auditAction, 'medium');
       auditAction.resourceName = setResourceName(auditAction, loggedUserUuid);
       auditAction.resourceNameVarious = setResourceNameVarious(auditAction);
       auditAction.userVarious = setUserVarious(auditAction, loggedUserUuid);
@@ -201,12 +201,12 @@
      * @name setDateVarious
      * @desc Set a formatted date
      * @param {Object} auditAction - One audit action
-     * @param {string} timeType - Name of the filter date to apply
+     * @param {string} dateFormat - Format of the date
      * @returns {string} Formatted date
      * @memberOf LinShare.audit.auditDetailsService
      */
-    function setDateVarious(auditAction, timeType) {
-      return $filter(timeType)(auditAction.creationDate);
+    function setDateVarious(auditAction, dateFormat) {
+      return $filter('date')(auditAction.creationDate, dateFormat);
     }
 
     /**
@@ -348,7 +348,7 @@
       return {
         authorName: '<b>' + auditAction.authorName + '</b>',
         // TODO : add uib tooltip
-        dateVarious: '<b title="' + auditAction.dateCalendarVarious + '">' + auditAction.dateShortVarious + '</b>',
+        dateVarious: '<b title="' + auditAction.dateMediumVarious + '">' + auditAction.dateShortVarious + '</b>',
         userVarious: '<span class="activity-user-target">' + auditAction.userVarious + '</span>',
         resourceName: '<span class="activity-resource-name">' + auditAction.resourceName + '</span>',
         resourceNameVarious: '<span class="activity-resource-name">' + auditAction.resourceNameVarious + '</span>',
@@ -438,10 +438,10 @@
         if (oldDate !== newDate) {
           updatedValues.expirationDate = {
             keyName: UPDATE_FIELDS_KEYS_PREFIX + UPDATE_FIELDS_KEY.expirationDate,
-            oldValue: $filter('shortTime')(oldDate),
-            newValue: $filter('shortTime')(newDate),
-            oldValueFull: $filter('calendarTime')(oldDate),
-            newValueFull: $filter('calendarTime')(newDate)
+            oldValue: $filter('date')(oldDate, 'shortDate'),
+            newValue: $filter('date')(newDate, 'shortDate'),
+            oldValueFull: $filter('date')(oldDate, 'medium'),
+            newValueFull: $filter('date')(newDate, 'medium')
           };
         }
       }
