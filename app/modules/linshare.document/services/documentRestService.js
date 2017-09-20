@@ -22,11 +22,13 @@
       restUrl = 'documents',
       service = {
         create: create,
+        copy: copy,
         download: download,
         get: get,
         getAudit: getAudit,
         getList: getList,
         remove: remove,
+        restangularize: restangularize,
         thumbnail: thumbnail,
         update: update
       };
@@ -45,6 +47,21 @@
     function create(documentDto) {
       $log.debug('LinshareDocumentRestService : create', documentDto);
       return handler(Restangular.all(restUrl).post(documentDto));
+    }
+
+    /**
+     *  @name copy
+     *  @desc Copy a Document object
+     *  @param {String} uuid - The id of the ReceivedShares object
+     *  @returns {Promise} server response
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function copy(uuid) {
+      $log.debug('LinshareDocumentRestService : copy', uuid);
+      return handler(Restangular.one(restUrl).all('copy').post({
+        kind: 'PERSONAL_SPACE',
+        uuid: uuid
+      }));
     }
 
     /**
@@ -106,6 +123,18 @@
     function remove(uuid) {
       $log.debug('LinshareDocumentRestService : remove', uuid);
       return handler(Restangular.one(restUrl, uuid).remove());
+    }
+
+    /**
+     * @name restangularize
+     * @desc Restangularize an item
+     * @param {Object} item - Item to be restangularized
+     * @returns {Object} Restangular object
+     *  @memberOf LinShare.document.LinshareDocumentRestService
+     */
+    function restangularize(item) {
+      $log.debug('LinshareDocumentRestService : restangularize', item);
+      return Restangular.restangularizeElement(null, item, restUrl);
     }
 
     /**

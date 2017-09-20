@@ -17,6 +17,7 @@
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
     $scope.closeDetailSidebar = closeDetailSidebar;
     $scope.closeSearch = closeSearch;
+    $scope.copyDocuments = copyDocuments;
     $scope.currentDocument = {};
     $scope.currentPage = 'my_files';
     $scope.currentSelectedDocument = {
@@ -193,6 +194,30 @@
             $scope.getUserQuotas();
           }, 350);
         }
+      });
+    }
+
+    /**
+     * @name copyDocuments
+     * @desc Copy documents
+     * @param {Array<Object>} documents - List of documents to copy
+     * @memberOf LinShare.document.documentController
+     */
+    function copyDocuments(documents) {
+      _.forEach(documents, function(document) {
+        LinshareDocumentRestService.copy(document.uuid).then(function(documents) {
+          toastService.success({
+            key: 'GROWL_ALERT.ACTION.COPY_SAME_FOLDER',
+            pluralization: true,
+            params: {singular: true}
+          });
+          $scope.documentsList.push(LinshareDocumentRestService.restangularize(documents[0]));
+          $scope.isNewAddition = true;
+          tableParamsService.reloadTableParams();
+          $timeout(function() {
+            $scope.isNewAddition = false;
+          }, 0);
+        });
       });
     }
 
