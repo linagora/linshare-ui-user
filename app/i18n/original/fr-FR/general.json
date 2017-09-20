@@ -242,9 +242,9 @@
   "SWEET_ALERT": {
     "ON_FILE_COPY": {
       "CANCEL_BUTTON": "Annuler",
-      "CONFIRM_BUTTON": "Transférer",
+      "CONFIRM_BUTTON": "Copier",
       "TEXT": "Vous êtes sur le point de copier {singular, select, true{un document reçu} other{{nbItems} documents reçus}} d'une taille totale de {totalSize} dans votre espace.",
-      "TITLE": "Transfert de fichier"
+      "TITLE": "Copie de fichier"
     }
   },
   "TRANSFERS_DROPDOWN": {

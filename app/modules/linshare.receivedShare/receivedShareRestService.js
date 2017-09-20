@@ -19,7 +19,10 @@
   function receivedShareRestService($log, Restangular, ServerManagerService) {
     var
       handler = ServerManagerService.responseHandler,
-      restUrl = 'received_shares',
+      restUrl = {
+        documents: 'documents',
+        receivedShares: 'received_shares'
+      },
       service = {
         copy: copy,
         download: download,
@@ -43,7 +46,10 @@
      */
     function copy(uuid) {
       $log.debug('LinshareReceivedShareRestService : copy', uuid);
-      return handler(Restangular.one(restUrl).one(uuid, 'copy').post());
+      return handler(Restangular.one(restUrl.documents).all('copy').post({
+        kind: 'RECEIVED_SHARE',
+        uuid: uuid
+      }));
     }
 
     /**
@@ -55,7 +61,7 @@
      */
     function download(uuid) {
       $log.debug('LinshareReceivedShareRestService : download', uuid);
-      return Restangular.all(restUrl).one(uuid, 'download').getRequestedUrl();
+      return Restangular.all(restUrl.receivedShares).one(uuid, 'download').getRequestedUrl();
     }
 
     /**
@@ -67,7 +73,7 @@
      */
     function get(uuid) {
       $log.debug('LinshareReceivedShareRestService : get', uuid);
-      return handler(Restangular.one(restUrl, uuid).get());
+      return handler(Restangular.one(restUrl.receivedShares, uuid).get());
     }
 
     /**
@@ -79,7 +85,7 @@
      */
     function getAudit(receivedSharesUuid) {
       $log.debug('LinshareReceivedShareRestService : getAudit', receivedSharesUuid);
-      return handler(Restangular.one(restUrl, receivedSharesUuid).one('audit').get());
+      return handler(Restangular.one(restUrl.receivedShares, receivedSharesUuid).one('audit').get());
     }
 
     /**
@@ -90,7 +96,7 @@
      */
     function getList() {
       $log.debug('LinshareReceivedShareRestService : getList');
-      return handler(Restangular.all(restUrl).getList());
+      return handler(Restangular.all(restUrl.receivedShares).getList());
     }
 
     /**
@@ -102,7 +108,7 @@
      */
     function remove(uuid) {
       $log.debug('LinshareReceivedShareRestService : delete', uuid);
-      return handler(Restangular.one(restUrl, uuid).remove());
+      return handler(Restangular.one(restUrl.receivedShares, uuid).remove());
     }
 
     /**
@@ -114,7 +120,7 @@
      */
     function thumbnail(uuid) {
       $log.debug('LinshareReceivedShareRestService : thumbnail', uuid);
-      return handler(Restangular.one(restUrl, uuid).one('thumbnail').get({
+      return handler(Restangular.one(restUrl.receivedShares, uuid).one('thumbnail').get({
         base64: true
       }));
     }

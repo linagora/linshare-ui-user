@@ -264,8 +264,11 @@ angular.module('linshare.receivedShare')
             },
             function(isConfirm) {
               if (isConfirm) {
-                _.forEach(selectedDocuments, function(file, key) {
-                  receivedShareRestService.copy(file.uuid).then(function() {
+                _.forEach(selectedDocuments, function(file/*, key*/) {
+                  receivedShareRestService.copy(file.uuid);
+                  /* TODO : implement deleteShareOnCopy then readd this code with related verification
+                   (if deleteShare ? etc...)
+                   .then(function() {
                     _.forEach(receivedFiles, function(f, k) {
                       if (f.uuid === file.uuid) {
                         receivedFiles.splice(k, 1);
@@ -273,7 +276,7 @@ angular.module('linshare.receivedShare')
                         $scope.tableParams.reload();
                       }
                     });
-                  });
+                  });*/
                 });
               }
             }
