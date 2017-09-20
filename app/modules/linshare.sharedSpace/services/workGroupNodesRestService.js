@@ -18,8 +18,12 @@
    */
   function workgroupNodesRestService(_, $log, Restangular, ServerManagerService) {
     var
+      errorsMessagesKey = 'WORKGROUP_NODES_ERROR',
       handler = ServerManagerService.responseHandler,
-      restUrl = 'work_groups',
+      restUrl = {
+        documents: 'documents',
+        workgroup: 'work_groups'
+      },
       restParam = 'nodes',
       service = {
         copy: copy,
@@ -67,17 +71,20 @@
      * @param {string} workgroupUuid - The uuid of the Workgroup object
      * @param {object} nodeItemUuid - The uuid of the Node to copy
      * @param {string} destinationNodeUuid - The uuid of the Destination Node object
+     * @param {string} kind - Source where the copy comes from
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
-    function copy(workgroupUuid, nodeItemUuid, destinationNodeUuid) {
+    function copy(workgroupUuid, nodeItemUuid, destinationNodeUuid, kind) {
       $log.debug('workgroupNodesRestService : copy', workgroupUuid, nodeItemUuid, destinationNodeUuid);
       var _destinationNodeUuid = _.isNil(destinationNodeUuid) ? '' : destinationNodeUuid;
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, _destinationNodeUuid).all('copy').post({
-        kind: 'SHARED_SPACE',
-        uuid: nodeItemUuid,
-        contextUuid: workgroupUuid
-      }));
+      var _kind = _.isNil(kind) ? 'SHARED_SPACE' : kind;
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, _destinationNodeUuid)
+        .all('copy').post({
+          kind: _kind,
+          uuid: nodeItemUuid,
+          contextUuid: kind === 'SHARED_SPACE' ? workgroupUuid : ''
+        }), errorsMessagesKey);
     }
 
     /**
@@ -90,7 +97,7 @@
      */
     function copyToMySpace(workgroupUuid, nodeItemUuid) {
       $log.debug('workgroupNodesRestService : copyToMySpace', workgroupUuid, nodeItemUuid);
-      return handler(Restangular.one('documents').all('copy').post({
+      return handler(Restangular.one(restUrl.documents).all('copy').post({
         kind: 'SHARED_SPACE',
         uuid: nodeItemUuid,
         contextUuid: workgroupUuid
@@ -108,7 +115,9 @@
      */
     function create(workgroupUuid, workgroupFolderDto, dryRun) {
       $log.debug('workgroupNodesRestService : create', workgroupUuid, workgroupFolderDto, dryRun);
-      return handler(Restangular.one(restUrl, workgroupUuid).all(restParam).post(workgroupFolderDto, {dryRun: dryRun}));
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).all(restParam).post(workgroupFolderDto, {
+        dryRun: dryRun
+      }));
     }
 
     /**
@@ -121,7 +130,8 @@
      */
     function download(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : download', workgroupUuid, nodeUuid);
-      return Restangular.all(restUrl).one(workgroupUuid, restParam).one(nodeUuid, 'download').getRequestedUrl();
+      return Restangular.all(restUrl.workgroup).one(workgroupUuid, restParam).one(nodeUuid, 'download')
+        .getRequestedUrl();
     }
 
     /**
@@ -135,7 +145,7 @@
      */
     function get(workgroupUuid, nodeUuid, needTree) {
       $log.debug('workgroupNodesRestService : get', workgroupUuid, nodeUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).get({tree: needTree}));
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).get({tree: needTree}));
     }
 
     /**
@@ -148,7 +158,7 @@
      */
     function getAudit(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : getAudit', workgroupUuid, nodeUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).one('audit').get());
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).one('audit').get());
     }
 
     /**
@@ -162,7 +172,7 @@
      */
     function getList(workgroupUuid, folderUuid, nodeType) {
       $log.debug('workgroupNodesRestService : getList', workgroupUuid, folderUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).getList(restParam, {
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).getList(restParam, {
         parent: folderUuid,
         type: nodeType
       }));
@@ -178,7 +188,7 @@
      */
     function remove(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : remove', workgroupUuid, nodeUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).remove());
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).remove());
     }
 
     /**
@@ -191,7 +201,7 @@
      */
     function restangularize(item, workgroupUuid) {
       $log.debug('workgroupNodesRestService : restangularize', item, workgroupUuid);
-      return Restangular.restangularizeElement(null, item, restUrl + '/' + workgroupUuid + '/' + restParam);
+      return Restangular.restangularizeElement(null, item, restUrl.workgroup + '/' + workgroupUuid + '/' + restParam);
     }
 
     /**
@@ -204,7 +214,7 @@
      */
     function thumbnail(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : thumbnail', workgroupUuid, nodeUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).customGET('thumbnail', {
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).customGET('thumbnail', {
         base64: true
       }));
     }
@@ -219,7 +229,8 @@
      */
     function update(workgroupUuid, nodeItem) {
       $log.debug('workgroupNodesRestService : update', workgroupUuid, nodeItem.uuid, nodeItem);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeItem.uuid).customPUT(nodeItem));
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeItem.uuid)
+        .customPUT(nodeItem));
     }
   }
 })();

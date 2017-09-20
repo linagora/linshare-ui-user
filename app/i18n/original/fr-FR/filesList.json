@@ -13,10 +13,11 @@
   "BACKGROUND_WORKGROUP_TITLE_MSG": "GROUPES DE TRAVAIL",
   "BACKGROUND_WORKGROUP_MSG": "Créer des groupes de travail pour échanger des fichiers avec vos collègues.",
   "FILE_DIRECTORY_DIALOG": {
-    "TITLE": "Choisissez la destination",
     "CANCEL": "Annuler",
+    "COPY_HERE": "Copier ici",
     "MOVE_HERE": "Déplacer ici",
-    "COPY_HERE": "Copier ici"
+    "SHARED_SPACE": "Espace commun",
+    "TITLE": "Choisissez la destination"
   },
   "RIGHT_PANEL": {
     "EMPTY": "Aucun fichier sélectionné",

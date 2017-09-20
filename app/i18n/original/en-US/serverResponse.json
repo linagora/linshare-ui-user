@@ -26,6 +26,7 @@
         "20001": "You are not authorized to use this service",
         "26000": "The workgroup doesn't exist or have been removed",
         "26007": "Folder{{folderName}} not found",
+        "26444": "You do not posses enough permissions",
         "28000": "The guest has not been found",
         "28001": "The guest already exists",
         "28006": "Folders cannot be copied",
@@ -56,6 +57,9 @@
         "46014": "There is no more space available on the server ({{quotaAttempt}}), free space and retry",
         "46015": "There is no more space available on the server, please retry later",
         "46403": "Server configuration error, upload impossible"
+      },
+      "WORKGROUP_NODES_ERROR": {
+        "26444": "You do not posses the permission to write"
       }
     }
   }

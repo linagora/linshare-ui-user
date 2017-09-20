@@ -12,17 +12,20 @@
     <div id="lv-dialog-content-ctn">
       <div class="lv-header-dialog">
         <div class="lv-col-1 center actions">
-          <a data-ng-class="{'disabled': browseVm.currentFolder.parent === browseVm.currentFolder.workGroup}"
+          <a data-ng-class="{'disabled': browseVm.isSharedSpace ||
+          browseVm.currentFolder.parent === browseVm.currentFolder.workGroup && browseVm.isMove}"
             data-ng-click="browseVm.goToFolder(browseVm.currentFolder, true)">
             <i class="zmdi zmdi-chevron-left"></i>
           </a>
         </div>
         <div class="lv-col-2">
-          {{browseVm.currentFolder.name}}
+          <span data-ng-if="!browseVm.isSharedSpace">{{browseVm.currentFolder.name}}</span>
+          <span data-ng-if="browseVm.isSharedSpace" translate>FILE_DIRECTORY_DIALOG.SHARED_SPACE</span>
         </div>
         <div class="lv-col-3 center waves-effect add-btn"
              data-ng-click="browseVm.createFolder()"
-             data-ng-class="{'disabled': !browseVm.canCreateFolder}">
+             data-ng-class="{'disabled': browseVm.isSharedSpace ||
+              (!browseVm.isSharedSpace && !browseVm.canCreateFolder)}">
           <i class="zmdi zmdi-plus"></i>
         </div>
       </div>
@@ -50,8 +53,8 @@
         FILE_DIRECTORY_DIALOG.CANCEL
       </button>
       <button class="confirm" translate
-              data-ng-class="{'disabled': browseVm.isMove &&
-               (browseVm.currentFolder.uuid === browseVm.sourceFolder.uuid)}"
+              data-ng-class="{'disabled': browseVm.isSharedSpace ||
+              (browseVm.isMove && (browseVm.currentFolder.uuid === browseVm.sourceFolder.uuid))}"
               data-ng-click="browseVm.validateAction()">
         {{::browseVm.isMove ? 'FILE_DIRECTORY_DIALOG.MOVE_HERE' : 'FILE_DIRECTORY_DIALOG.COPY_HERE'}}
       </button>

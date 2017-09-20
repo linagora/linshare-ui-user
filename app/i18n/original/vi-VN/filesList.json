@@ -11,11 +11,12 @@
   "BREADCRUMB_TITLE": "Tập tin của tôi",
   "TBT__BACKGROUND_WORKGROUP_TITLE_MSG": "",
   "TBT__BACKGROUND_WORKGROUP_MSG": "",
-  "TBT_FILE_DIRECTORY_DIALOG": {
-    "TBT_TITLE": "",
-    "TBT_CANCEL": "",
-    "TBT_MOVE_HERE": "",
-    "TBT_COPY_HERE": ""
+  "TBT__FILE_DIRECTORY_DIALOG": {
+    "TBT__CANCEL": "",
+    "TBT__COPY_HERE": "",
+    "TBT__MOVE_HERE": "",
+    "TBT__SHARED_SPACE": "",
+    "TBT__TITLE": ""
   },
   "RIGHT_PANEL": {
     "EMPTY": "Không có tập tin nào được chọn",

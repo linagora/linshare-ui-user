@@ -365,29 +365,34 @@
      */
     function goToFolder(folder, forceEnter, selectFileUuid) {
       var folderNameElem;
-      var isNotInEditMode = true;
-      var canEnter = _.isNil(folder) ? true : !workgroupNodesVm.isDocument(folder.type);
-
-      if (!_.isNil(folder) && !forceEnter) {
-        folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
-        isNotInEditMode = (angular.element(folderNameElem).attr('contenteditable') === 'false');
-      }
-
       var folderDetails = {
         workgroupUuid: workgroupNodesVm.folderDetails.workgroupUuid,
         workgroupName: workgroupNodesVm.folderDetails.workgroupName.trim(),
-        parentUuid: folder ? folder.parent : null,
-        folderUuid: folder ? folder.uuid : null,
-        folderName: folder ? folder.name.trim() : null,
         uploadedFileUuid: selectFileUuid
       };
+      var isNotInEditMode = true;
+      var canEnter = true;
+      var routeStateSuffix = 'root';
+
+      if(!_.isNil(folder)) {
+        canEnter = !workgroupNodesVm.isDocument(folder.type);
+        if (!forceEnter) {
+          folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
+          isNotInEditMode = (angular.element(folderNameElem).attr('contenteditable') === 'false');
+        }
+        folderDetails = {
+          workgroupUuid: folder.workgroupUuid || workgroupNodesVm.folderDetails.workgroupUuid,
+          workgroupName: folder.workgroupName || workgroupNodesVm.folderDetails.workgroupName.trim(),
+          parentUuid: folder.parent,
+          folderUuid: folder.uuid,
+          folderName: folder.name.trim(),
+          uploadedFileUuid: selectFileUuid
+        };
+        routeStateSuffix = folderDetails.parentUuid !== folderDetails.workgroupUuid ? 'folder' : 'root';
+      }
 
       if (canEnter && isNotInEditMode) {
-        if (_.isNil(folderDetails.folderUuid)) {
-          $state.go('sharedspace.workgroups.root', folderDetails);
-        } else {
-          $state.go('sharedspace.workgroups.folder', folderDetails);
-        }
+        $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
       }
     }
 
@@ -495,7 +500,7 @@
      */
     function openBrowser(nodeItems, isMove) {
       browseService.show({
-        currentFolder: workgroupNodesVm.currentFolder,
+        currentFolder: _.cloneDeep(workgroupNodesVm.currentFolder),
         currentList: _.orderBy(_.filter(workgroupNodesVm.nodesList, {'type': TYPE_FOLDER}), 'modificationDate', 'desc'),
         nodeItems: nodeItems,
         isMove: isMove,
@@ -535,6 +540,12 @@
       var responses = [];
       _.forEach(data.failedNodes, function(error) {
         switch(error.data.errCode) {
+          case 26444 :
+            responses.push({
+              'title': error.nodeItem.name,
+              'message': {key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'}
+            });
+            break;
           case 26445 :
           case 28005 :
             responses.push({

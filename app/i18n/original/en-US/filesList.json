@@ -13,10 +13,11 @@
   "BREADCRUMB_ISOLATE": "Isolation mode",
   "BREADCRUMB_TITLE": "My files",
   "FILE_DIRECTORY_DIALOG": {
-    "TITLE": "Pick the destination",
     "CANCEL": "Cancel",
+    "COPY_HERE": "Copy here",
     "MOVE_HERE": "Move here",
-    "COPY_HERE": "Copy here"
+    "SHARED_SPACE": "Shared space",
+    "TITLE": "Pick the destination"
   },
   "RIGHT_PANEL": {
     "EMPTY": "no file is selected",

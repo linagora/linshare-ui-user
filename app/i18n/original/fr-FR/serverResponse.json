@@ -26,6 +26,7 @@
         "20001": "Vous n'êtes pas autorisé à utiliser ce service",
         "26000": "Le groupe de travail n'existe pas ou n'a pas été trouvé",
         "26007": "Le dossier distant{{folderName}} est introuvable",
+        "26444": "Vos droits sont insuffisants",
         "28000": "L'invité n'a pas été trouvé",
         "28001": "L'invité existe dèjà",
         "28006": "Les dossiers ne peuvent être copiés",
@@ -56,6 +57,9 @@
         "46014": "Espace insuffisant sur le serveur ({{quotaAttempt}}), libérez de l'espace puis réessayez",
         "46015": "Espace insuffisant sur le serveur, veuillez ressayer plus tard",
         "46403": "Erreur de configuration serveur, dépôt impossible"
+      },
+      "WORKGROUP_NODES_ERROR": {
+        "26444": "Vous ne possédez pas les droits d'écriture"
       }
     }
   }

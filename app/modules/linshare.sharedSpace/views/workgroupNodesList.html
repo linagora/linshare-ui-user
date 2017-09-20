@@ -394,7 +394,7 @@
                   <ul>
                     <li data-ng-click="workgroupNodesVm.openBrowser(workgroupNodesVm.selectedDocuments)">
                       <a>
-                        <i class="fa fa-files-o"></i>
+                        <i class="zmdi groups-home-workgroup"></i>
                         <span translate>ACTION.COPY_DROPDOWN.SHARED_SPACE</span>
                       </a>
                     </li>
@@ -654,7 +654,7 @@
                                 <ul>
                                   <li data-ng-click="workgroupNodesVm.openBrowser([nodeItem])">
                                     <a>
-                                      <i class="fa fa-files-o"></i>
+                                      <i class="zmdi groups-home-workgroup"></i>
                                       <span translate>ACTION.COPY_DROPDOWN.SHARED_SPACE</span>
                                     </a>
                                   </li>
@@ -676,7 +676,7 @@
                                   data-ng-if="::isMobile && !workgroupNodesVm.currentWorkgroupMember.readonly"
                                   data-ng-click="workgroupNodesVm.openBrowser([nodeItem])">
                                 <a href="">
-                                  <i class="fa fa-files-o"></i>
+                                  <i class="zmdi groups-home-workgroup"></i>
                                   <span translate>ACTION.COPY_INTO_THE_SHARED_SPACE</span>
                                 </a>
                               </li>
@@ -824,7 +824,7 @@
         <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
             data-ng-click="workgroupNodesVm.openBrowser([nodeItem])"
             data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
-          <a><i class="fa fa-files-o"></i>
+          <a><i class="zmdi groups-home-workgroup"></i>
             <span translate>ACTION.COPY_DROPDOWN.SHARED_SPACE</span>
           </a>
         </li>

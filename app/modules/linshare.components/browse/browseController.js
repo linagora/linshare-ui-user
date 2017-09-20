@@ -10,14 +10,15 @@
     .controller('browseController', BrowseController);
 
   BrowseController.$inject = ['_', '$q', '$scope', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode',
-    'toastService'];
+    'toastService', 'workgroupRestService', 'workgroupNodesRestService'];
 
   /**
    * @namespace BrowseController
    * @desc Controller of browse component
    * @memberOf linshare.components
    */
-  function BrowseController(_, $q, $scope, $timeout, $translate, itemUtilsService, lsErrorCode, toastService) {
+  function BrowseController(_, $q, $scope, $timeout, $translate, itemUtilsService, lsErrorCode, toastService,
+                            workgroupRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var browseVm = this;
 
@@ -46,8 +47,7 @@
         newFolderName = translations['ACTION.NEW_FOLDER'];
       });
 
-      browseVm.validateAction = browseVm.isMove ? moveNode : copyNode;
-      browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
+      loadBrowseList();
 
       $scope.$on('$stateChangeStart', function() {
         browseVm.$mdDialog.cancel();
@@ -86,13 +86,25 @@
      */
     function copyNode() {
       var failedNodes = [],
+        nodeItems = [],
         promises = [];
+
       _.forEach(browseVm.nodeItems, function(nodeItem) {
-        promises.push(browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem.uuid,
-          browseVm.currentFolder.uuid));
+        var deferred = $q.defer();
+        browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem.uuid,
+          browseVm.currentFolder.uuid, browseVm.kind).then(function(newNode) {
+          var _newNode = browseVm.restService.restangularize(newNode[0]);
+          deferred.resolve(_newNode);
+        }).catch(function(error) {
+          failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
+          deferred.reject(error);
+        });
+        promises.push(deferred.promise);
       });
 
-      $q.all(promises).then(function(nodeItems) {
+      $q.all(promises).then(function(_nodeItems) {
+        nodeItems = _nodeItems;
+      }).finally(function() {
         browseVm.$mdDialog.hide({
           nodeItems: nodeItems,
           failedNodes: failedNodes,
@@ -119,20 +131,58 @@
      * @memberOf linshare.components.BrowseController
      */
     function goToFolder(selectedFolder, goToParent) {
-      if (browseVm.canCreateFolder) {
+      if (!browseVm.canCreateFolder) {
+        return;
+      }
+
+      if (browseVm.isSharedSpace) {
+        browseVm.restService = workgroupNodesRestService;
+        browseVm.restService.get(selectedFolder.uuid, selectedFolder.uuid).then(function(currentFolder) {
+          browseVm.currentFolder = currentFolder;
+          browseVm.currentFolder.workgroupUuid = currentFolder.workGroup;
+          browseVm.currentFolder.workgroupName = currentFolder.name;
+          browseVm.restService.getList(currentFolder.workGroup).then(function(currentList) {
+            browseVm.currentList = _.orderBy(_.filter(currentList, {'type': TYPE_FOLDER}), 'modificationDate', 'desc');
+            browseVm.isSharedSpace = false;
+          });
+        });
+      } else if (goToParent && browseVm.currentFolder.parent === browseVm.currentFolder.workGroup) {
+        browseVm.currentFolder = null;
+        loadBrowseList();
+      } else if (browseVm.canCreateFolder) {
         var folderUuid = goToParent ? selectedFolder.parent : selectedFolder.uuid;
         browseVm.restService.getList(selectedFolder.workGroup, folderUuid, TYPE_FOLDER).then(function(folders) {
           browseVm.currentList = _.orderBy(folders, 'modificationDate', 'desc');
         });
 
         if (!goToParent) {
-          browseVm.currentFolder = selectedFolder;
+          _.assign(browseVm.currentFolder, selectedFolder);
         } else {
           browseVm.restService.get(selectedFolder.workGroup, folderUuid).then(function(parentFolder) {
-            browseVm.currentFolder = parentFolder;
+            _.assign(browseVm.currentFolder, parentFolder);
           });
         }
       }
+    }
+
+    /**
+     * @name loadBrowseList
+     * @desc Load browse list from Workgroup root folder or child folder
+     * @memberOf linshare.components.BrowseController
+     */
+    function loadBrowseList() {
+      if (_.isNil(browseVm.currentFolder)) {
+        browseVm.currentFolder = {};
+        browseVm.restService = workgroupRestService;
+        browseVm.restService.getList().then(function(currentList) {
+          browseVm.currentList = _.orderBy(currentList, 'modificationDate', 'desc');
+        });
+        browseVm.isSharedSpace = true;
+      } else {
+        browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
+        browseVm.isSharedSpace = false;
+      }
+      browseVm.validateAction = browseVm.isMove ? moveNode : copyNode;
     }
 
     /**
