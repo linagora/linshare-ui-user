@@ -283,7 +283,11 @@
      */
     function setResourceNameVarious(auditAction) {
       var resourceNameVarious;
-      if (auditAction.workGroup) {
+      if (auditAction.copiedFrom) {
+        resourceNameVarious = auditAction.copiedFrom.contextName;
+      } else if (auditAction.copiedTo) {
+        resourceNameVarious = auditAction.copiedTo.contextName;
+      } else if (auditAction.workGroup) {
         resourceNameVarious = auditAction.workGroup.name;
       } else if (auditAction.list) {
         resourceNameVarious = auditAction.list.name;
@@ -307,7 +311,16 @@
         } else {
           auditAction.cause = ACTIONS_KEY.DELETE;
         }
+
+        if (!_.isUndefined(auditAction.copiedFrom)) {
+          action = 'COPY_FROM_' + auditAction.copiedFrom.kind;
+        }
+
+        if (!_.isUndefined(auditAction.copiedTo)) {
+          action = 'COPY_TO_' + auditAction.copiedTo.kind;
+        }
       }
+
       return SENTENCES_KEYS_PREFIX + '.' +
         auditAction.type + '.' +
         action + '.' +

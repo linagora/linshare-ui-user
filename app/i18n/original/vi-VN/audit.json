@@ -21,6 +21,56 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           }
         },
+        "COPY_FROM_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_RECEIVED_SHARE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
         "DELETE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
@@ -169,16 +219,6 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           }
         },
-        "COPY": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
-          }
-        },
         "DELETE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
@@ -283,14 +323,24 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           }
         },
-        "COPY": {
+        "COPY_TO_PERSONAL_SPACE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
             "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "DELETE": {
@@ -377,7 +427,47 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           }
         },
-        "COPY": {
+        "COPY_FROM_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_RECEIVED_SHARE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "TBT__SENTENCE": "",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
             "TBT__SENTENCE": "",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"

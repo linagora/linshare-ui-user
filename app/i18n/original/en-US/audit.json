@@ -165,18 +165,58 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "{{authorName}} has uploaded a new file : {{resourceName}} into his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           }
         },
-        "COPY": {
+        "COPY_FROM_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have transferred the file : {{resourceName}} into your Personal Space.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+            "SENTENCE": "You have copied the document : {{resourceName}} from your Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has transferred the file : {{resourceName}} into his Personal Space.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} from his Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_RECEIVED_SHARE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied a new file : {{resourceName}} from your Received Shares.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} from his Received Shares.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} into your Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied copied the document : {{resourceName}} into his Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied a new file : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "DELETE": {
@@ -283,14 +323,24 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           }
         },
-        "COPY": {
+        "COPY_TO_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "The file share : {{resourceName}} from {{userVarious}} has been removed from the Received Shares since you have transferred the file into your Personal Space.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+            "SENTENCE": "You have copied the document : {{resourceName}} of {{userVarious}} into your Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "The file share : {{resourceName}} has been removed from the Received Shares since {{authorName}} has transferred the file into the Personal Space.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.TRANSFER"
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into his Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} de {{userVarious}} into the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "DELETE": {
@@ -377,13 +427,53 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           }
         },
-        "COPY": {
+        "COPY_FROM_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the file : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from your Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied the file : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from his Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_RECEIVED_SHARE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from you Received Shares.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from his Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} into your Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into his Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
