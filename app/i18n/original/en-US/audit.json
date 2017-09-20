@@ -335,7 +335,7 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the document : {{resourceName}} de {{userVarious}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "You have copied the document : {{resourceName}} of {{userVarious}} into the Workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
@@ -439,7 +439,7 @@
         },
         "COPY_FROM_RECEIVED_SHARE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from you Received Shares.",
+            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from your Received Shares.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
