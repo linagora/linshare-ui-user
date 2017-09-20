@@ -33,8 +33,6 @@
     "RENAME": "Renommer",
     "SHARE": "Partager",
     "SILENCE": "Silence",
-    "TRANSFER_TO_MY_SPACE": "Transférer dans Mon Espace",
-    "TRANSFER_SHORT": "Transférer",
     "VIEW_VERSIONING": "Voir l'historique"
   },
   "ACTIVITIES": "Activités",
@@ -240,6 +238,14 @@
     "SHOW_IN_FILES": "Voir dans mes fichiers",
     "SHOW_SELECTION": "Voir sélection",
     "STOP": "Arrêter"
+  },
+  "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "CANCEL_BUTTON": "Annuler",
+      "CONFIRM_BUTTON": "Transférer",
+      "TEXT": "Vous êtes sur le point de copier {singular, select, true{un document reçu} other{{nbItems} documents reçus}} d'une taille totale de {totalSize} dans votre espace.",
+      "TITLE": "Transfert de fichier"
+    }
   },
   "TRANSFERS_DROPDOWN": {
     "BEFORE_SENDINGS": "avant l'envoi",

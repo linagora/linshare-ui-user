@@ -1,11 +1,5 @@
 {
   "SWEET_ALERT": {
-    "ON_FILE_TRANSFER": {
-      "CANCEL_BUTTON": "Cancel!",
-      "CONFIRM_BUTTON": "Transfer",
-      "TEXT": "You are about to transfer received {singular, select, true{document} other{{nbItems} documents}} for a total of {totalSize} into your own files.",
-      "TITLE": "File transfer"
-    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",

@@ -33,8 +33,6 @@
     "RENAME": "Rename",
     "SHARE": "Share",
     "SILENCE": "Silence",
-    "TRANSFER_TO_MY_SPACE": "Transfer to My Space",
-    "TRANSFER_SHORT": "Transfer",
     "VIEW_VERSIONING": "View previous updates"
   },
   "ACTIVITIES": "Activities",
@@ -240,6 +238,14 @@
     "SHOW_IN_FILES": "Show in files",
     "SHOW_SELECTION": "Show selection",
     "STOP": "Stop"
+  },
+  "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "CANCEL_BUTTON": "Cancel!",
+      "CONFIRM_BUTTON": "Transfer",
+      "TEXT": "You are about to copy received {singular, select, true{a document} other{{nbItems} documents}} for a total of {totalSize} into your own files.",
+      "TITLE": "File transfer"
+    }
   },
   "TRANSFERS_DROPDOWN": {
     "BEFORE_SENDINGS": "before sending",

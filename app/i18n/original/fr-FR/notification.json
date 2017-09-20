@@ -1,11 +1,5 @@
 {
   "SWEET_ALERT": {
-    "ON_FILE_TRANSFER": {
-      "CANCEL_BUTTON": "Annuler",
-      "CONFIRM_BUTTON": "Transférer",
-      "TEXT": "Vous êtes sur le point de transférer {singular, select, true{document reçu} other{{nbItems} documents reçus}} d'une taille totale de {totalSize} dans votre espace.",
-      "TITLE": "Transfert de fichier"
-    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",

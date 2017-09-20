@@ -100,21 +100,19 @@ angular.module('linshare.receivedShare')
         checkdatasIsSelecteds();
       }
 
-      var swalCopyCancel, swalCopyConfirm, swalCopyText, swalCopyTitle, swalMultipleDownloadTitle,
+      var swalCopyCancel, swalCopyConfirm, swalCopyTitle, swalMultipleDownloadTitle,
         swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
       $translate([
-        'SWEET_ALERT.ON_FILE_TRANSFER.CANCEL_BUTTON',
-        'SWEET_ALERT.ON_FILE_TRANSFER.CONFIRM_BUTTON',
-        'SWEET_ALERT.ON_FILE_TRANSFER.TEXT',
-        'SWEET_ALERT.ON_FILE_TRANSFER.TITLE',
+        'SWEET_ALERT.ON_FILE_COPY.CANCEL_BUTTON',
+        'SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON',
+        'SWEET_ALERT.ON_FILE_COPY.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
       ]).then(function(translations) {
-        swalCopyCancel = translations['SWEET_ALERT.ON_FILE_TRANSFER.CANCEL_BUTTON'];
-        swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_TRANSFER.CONFIRM_BUTTON'];
-        swalCopyText = translations['SWEET_ALERT.ON_FILE_TRANSFER.TEXT'];
-        swalCopyTitle = translations['SWEET_ALERT.ON_FILE_TRANSFER.TITLE'];
+        swalCopyCancel = translations['SWEET_ALERT.ON_FILE_COPY.CANCEL_BUTTON'];
+        swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
+        swalCopyTitle = translations['SWEET_ALERT.ON_FILE_COPY.TITLE'];
         swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
         swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
       });
@@ -249,10 +247,10 @@ angular.module('linshare.receivedShare')
           selectedDocuments = [selectedDocuments];
         }
 
-        $translate('SWEET_ALERT.ON_FILE_TRANSFER.TEXT', {
-          nbItems: $scope.selectedDocuments.length,
-          singular: $scope.selectedDocuments.length <= 1 ? 'true' : 'other',
-          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
+        $translate('SWEET_ALERT.ON_FILE_COPY.TEXT', {
+          nbItems: selectedDocuments.length,
+          singular: selectedDocuments.length <= 1 ? 'true' : 'other',
+          totalSize: $filter('readableSize')(_.sumBy(selectedDocuments, 'size'), true)
         }, 'messageformat').then(function(swalText) {
           swal({
               title: swalCopyTitle,

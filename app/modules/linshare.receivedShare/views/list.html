@@ -189,9 +189,9 @@
           </span>
           <span data-ng-if="canUpload">
             <a class="plain-text-button share-link"
-               x-ng-click="copyIntoFiles(selectedDocuments[0])">
+               x-ng-click="copyIntoFiles(selectedDocuments)">
               <i class="ls-received-shares"></i>
-              <span translate>ACTION.TRANSFER_SHORT</span></a>
+              <span translate>ACTION.COPY_IN_MY_FILES</span></a>
           </span>
           <span>
             <a class="plain-text-button share-link"
@@ -219,7 +219,7 @@
                   <li>
                     <a href="">
                       <i class="zmdi zmdi-forward"></i>
-                      {{'ACTION.TRANSFER_TO_MY_SPACE' | translate}}
+                      <span translate>ACTION.COPY_IN_MY_FILES</span>
                     </a>
                   </li>
                   <li class="divider"></li>
@@ -326,7 +326,7 @@
                           </a>
                         </li>
                         <li class="hidden-xs hidden-action-links" data-ng-if="canUpload">
-                          <a href="" title="{{'ACTION.TRANSFER_TO_MY_SPACE' | translate}}" event-propagation-stop="true"
+                          <a href="" title="{{'ACTION.COPY_IN_MY_FILES' | translate}}" event-propagation-stop="true"
                              data-ng-click="copyIntoFiles(documentFile)">
                             <i class="ls-received-shares"></i>
                          </a>
@@ -358,7 +358,7 @@
                                  data-ng-click="copyIntoFiles(documentFile)"
                                  event-propagation-stop>
                                 <i class="zmdi ls-received-shares"></i>
-                                <span translate>ACTION.TRANSFER_TO_MY_SPACE</span>
+                                <span translate>ACTION.COPY_IN_MY_FILES</span>
                               </a>
                             </li>
                             <li>
@@ -404,9 +404,9 @@
               <td class="hidden-xs hide-if-toggled-sidebar"
                   ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   header-class="'hide-if-toggled-sidebar'"
-                  data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"*
+                  data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"
                   data-ng-animate="0">
-                {{documentFile.size | readableSize: false}}
+                {{documentFile.size | readableSize: true}}
               </td>
             </tr>
           </table>
