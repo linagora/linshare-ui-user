@@ -40,6 +40,7 @@
     workgroupNodesVm.breadcrumb = [];
     workgroupNodesVm.canCreateFolder = true;
     workgroupNodesVm.copyNode = copyNode;
+    workgroupNodesVm.copyNodeToPersonalSpace = copyNodeToPersonalSpace;
     workgroupNodesVm.createFolder = createFolder;
     workgroupNodesVm.currentFolder = currentFolder;
     workgroupNodesVm.currentPage = 'workgroup_nodes';
@@ -168,6 +169,30 @@
           restangularizedNode.fromServer = true;
           addNewItemInTableParams(restangularizedNode);
         }));
+      });
+
+      $q.all(promises).then(function(nodeItems) {
+        notifyCopySuccess(nodeItems.length);
+      }).catch(function(error) {
+        switch(error.data.errCode) {
+          case 26444 :
+            toastService.error({key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'});
+            break;
+        }
+      });
+    }
+
+    /**
+     * @name copyNodeToPersonalSpace
+     * @desc Copy documents from current list into Personal Space
+     * @param {Array<Object>} nodeItems - Nodes to copy
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function copyNodeToPersonalSpace(nodeItems) {
+      var promises = [];
+      _.forEach(nodeItems, function(nodeItem) {
+        promises.push(workgroupNodesRestService.copyToMySpace(workgroupNodesVm.folderDetails.workgroupUuid,
+          nodeItem.uuid));
       });
 
       $q.all(promises).then(function(nodeItems) {

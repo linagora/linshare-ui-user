@@ -398,7 +398,7 @@
                         <span translate>ACTION.COPY_DROPDOWN.SHARED_SPACE</span>
                       </a>
                     </li>
-                    <li data-ng-show="!linshareModeProduction">
+                    <li data-ng-click="workgroupNodesVm.copyNodeToPersonalSpace(workgroupNodesVm.selectedDocuments)">
                       <a>
                         <i class="fa fa-files-o"></i>
                         <span translate>ACTION.COPY_DROPDOWN.PERSONAL_SPACE</span>
@@ -658,7 +658,7 @@
                                       <span translate>ACTION.COPY_DROPDOWN.SHARED_SPACE</span>
                                     </a>
                                   </li>
-                                  <li data-ng-class="::{'disabled-work-in-progress': linshareModeProduction}">
+                                  <li data-ng-click="workgroupNodesVm.copyNodeToPersonalSpace([nodeItem])">
                                     <a>
                                       <i class="fa fa-files-o"></i>
                                       <span translate>ACTION.COPY_DROPDOWN.PERSONAL_SPACE</span>
@@ -829,9 +829,8 @@
           </a>
         </li>
         <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-            data-ng-click="workgroupNodesVm.openBrowser([nodeItem])"
-            data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)"
-            data-ng-class="{'disabled-work-in-progress': linshareModeProduction}">
+            data-ng-click="workgroupNodesVm.copyNodeToPersonalSpace([nodeItem])"
+            data-ng-show="workgroupNodesVm.isDocument(nodeItem.type)">
           <a><i class="fa fa-files-o"></i>
             <span translate>ACTION.COPY_DROPDOWN.PERSONAL_SPACE</span>
           </a>

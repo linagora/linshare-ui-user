@@ -23,6 +23,7 @@
       restParam = 'nodes',
       service = {
         copy: copy,
+        copyToMySpace: copyToMySpace,
         create: create,
         download: download,
         get: get,
@@ -73,6 +74,23 @@
       $log.debug('workgroupNodesRestService : copy', workgroupUuid, nodeItemUuid, destinationNodeUuid);
       var _destinationNodeUuid = _.isNil(destinationNodeUuid) ? '' : destinationNodeUuid;
       return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, _destinationNodeUuid).all('copy').post({
+        kind: 'SHARED_SPACE',
+        uuid: nodeItemUuid,
+        contextUuid: workgroupUuid
+      }));
+    }
+
+    /**
+     * @name copyToMySpace
+     * @desc copy a Workgroup Node object into My Space
+     * @param {string} workgroupUuid - The uuid of the Workgroup object
+     * @param {object} nodeItemUuid - The uuid of the Node to copy
+     * @returns {Promise} server response
+     * @memberOf LinShare.sharedSpace.workgroupNodesRestService
+     */
+    function copyToMySpace(workgroupUuid, nodeItemUuid) {
+      $log.debug('workgroupNodesRestService : copyToMySpace', workgroupUuid, nodeItemUuid);
+      return handler(Restangular.one('documents').all('copy').post({
         kind: 'SHARED_SPACE',
         uuid: nodeItemUuid,
         contextUuid: workgroupUuid
