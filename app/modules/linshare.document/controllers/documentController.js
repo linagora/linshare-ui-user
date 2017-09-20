@@ -9,7 +9,7 @@
   /* jshint maxparams: false, maxstatements: false */
   function documentController(_, $filter, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader,
     $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, lsAppConfig, toastService, $stateParams,
-    tableParamsService, auditDetailsService, swal, LinshareShareService) {
+    tableParamsService, auditDetailsService, swal, LinshareShareService, browseService, $state) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
@@ -42,6 +42,7 @@
     $scope.mySpacePage = lsAppConfig.mySpacePage;
     $scope.nextTab = nextTab;
     $scope.onShare = onShare;
+    $scope.openBrowser = openBrowser;
     $scope.openSearch = openSearch;
     $scope.paramFilter = {
       name: ''
@@ -352,6 +353,96 @@
           $log.debug('addItem - item is already in the list');
         }
       }
+    }
+
+    /**
+     * @name openBrowser
+     * @desc Open browser of folders to copy documents
+     * @param {Array<Object>} documents - Documents to copy
+     * @memberOf LinShare.document.documentController
+     */
+    function openBrowser(documents) {
+      browseService.show({
+        nodeItems: documents,
+        isMove: false,
+        kind: 'PERSONAL_SPACE'
+      }).then(function(data) {
+        if (data.failedNodes.length) {
+          notifyBrowseActionError(data);
+        } else {
+          notifyBrowseActionSuccess(data);
+        }
+      });
+    }
+
+    /**
+     * @name notifyBrowseActionError
+     * @desc Notify when an error occurred on copy documents
+     * @param {object} data - mdDialog's close datas
+     * @memberOf LinShare.document.documentController
+     */
+    function notifyBrowseActionError(data) {
+      var responses = [];
+      _.forEach(data.failedNodes, function(error) {
+        switch(error.data.errCode) {
+          case 26444 :
+            responses.push({
+              'title': error.nodeItem.name,
+              'message': {key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'}
+            });
+            break;
+          case 26445 :
+          case 28005 :
+            responses.push({
+              'title': error.nodeItem.name,
+              'message': {key: 'GROWL_ALERT.ERROR.RENAME_NODE'}
+            });
+            break;
+        }
+      });
+
+      toastService.error({
+        key: 'GROWL_ALERT.ERROR.BROWSER_ACTION',
+        pluralization: true,
+        params: {
+          action: '',
+          nbNodes: data.failedNodes.length,
+          singular: data.failedNodes.length === 1 ? 'true' : ''
+        }
+      }, undefined, responses.length ? responses : undefined);
+    }
+
+    /**
+     * @name notifyBrowseActionSuccess
+     * @desc Notify success on copy documents
+     * @param {object} data - mdDialog's close datas
+     * @memberOf LinShare.document.documentController
+     */
+    function notifyBrowseActionSuccess(data) {
+      toastService.success({
+        key: 'GROWL_ALERT.ACTION.BROWSER_ACTION',
+        pluralization: true,
+        params: {
+          singular: data.nodeItems.length <= 1 ? 'true' : '',
+          action: '',
+          folderName: data.folder.name
+        }
+      }, 'GROWL_ALERT.ACTION_BUTTON').then(function(response) {
+        if (!_.isUndefined(response)) {
+          if (response.actionClicked) {
+            var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
+            var routeStateSuffix = data.folder.parent === data.folder.workGroup ? 'root' : 'folder';
+            $state.go('sharedspace.workgroups.' + routeStateSuffix, {
+              workgroupUuid: data.folder.workGroup,
+              workgroupName: data.folder.workgroupName,
+              parentUuid: data.folder.parent,
+              folderUuid: data.folder.uuid,
+              folderName: data.folder.name,
+              uploadedFileUuid: nodeToSelectUuid
+            });
+          }
+        }
+      });
     }
 
     function openSearch() {

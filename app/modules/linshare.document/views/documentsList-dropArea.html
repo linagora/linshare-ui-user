@@ -69,6 +69,12 @@
             </a>
           </li>
           <li class="hidden-xs">
+            <a href="" data-ng-click="openBrowser(selectedDocuments)">
+             <i class="zmdi groups-home-workgroup" title="{{'ACTION.COPY_IN_WORKGROUP' | translate}}"></i>
+             <span translate>ACTION.COPY_IN_WORKGROUP</span>
+            </a>
+          </li>
+          <li class="hidden-xs">
             <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
                data-ng-click="showCurrentFile(selectedDocuments[0],$event, true)">
              <i class="zmdi zmdi-info" title="{{'ACTION.RENAME' | translate}}"></i>
@@ -80,12 +86,6 @@
                data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
              <i class="zmdi zmdi-border-color" title="{{'ACTION.RENAME' | translate}}"></i>
              <span translate>ACTION.RENAME</span>
-            </a>
-          </li>
-          <li class="hidden-xs" data-ng-show="!linshareModeProduction">
-            <a href="">
-             <i class="zmdi zmdi-copy" title="{{'ACTION.COPY_TO' | translate}}"></i>
-             <span translate>ACTION.COPY_TO</span>
             </a>
           </li>
         </ul>

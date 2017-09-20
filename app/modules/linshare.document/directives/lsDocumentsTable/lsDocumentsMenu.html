@@ -46,6 +46,12 @@
           </a>
         </li>
         <li>
+          <a href="" data-ng-click="openBrowser([documentFile])" event-propagation-stop>
+            <i class="zmdi groups-home-workgroup"></i>
+            <span translate>ACTION.COPY_IN_WORKGROUP</span>
+          </a>
+        </li>
+        <li>
           <a data-ng-href="" data-ng-click="downloadFile(documentFile)" event-propagation-stop>
             <i class="zmdi zmdi-download"></i>
             <span translate>ACTION.DOWNLOAD</span>
@@ -61,11 +67,6 @@
           <a href="">
             <i class="zmdi zmdi-border-color"></i>
             <span translate>ACTION.RENAME</span>
-          </a>
-        </li>
-        <li data-ng-show="!linshareModeProduction">
-          <a href="" data-ng-click="" event-propagation-stop>
-            <i class="zmdi zmdi-copy"></i> {{'ACTION.COPY_TO' | translate}}
           </a>
         </li>
       </ul>
