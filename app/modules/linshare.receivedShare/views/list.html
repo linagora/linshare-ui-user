@@ -187,12 +187,6 @@
               <span>{{'DOWNLOAD' | translate}}</span>
             </a>
           </span>
-          <span data-ng-if="canUpload">
-            <a class="plain-text-button share-link"
-               x-ng-click="copyIntoFiles(selectedDocuments)">
-              <i class="ls-received-shares"></i>
-              <span translate>ACTION.COPY_IN_MY_FILES</span></a>
-          </span>
           <span>
             <a class="plain-text-button share-link"
                x-ng-click="deleteDocuments(selectedDocuments)">
@@ -208,7 +202,7 @@
               <span translate>ACTION.INFORMATION</span>
             </a>
           </span>
-          <span class="dropdown link-dropdown" uib-dropdown x-ng-show="linshareModeProduction == false">
+          <span class="dropdown link-dropdown" uib-dropdown>
                 <a class="plain-text-button share-link"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}"
                    event-propagation-stop>
@@ -216,17 +210,17 @@
                   <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
-                  <li>
+                  <li data-ng-click="copyIntoFiles(selectedDocuments)">
                     <a href="">
-                      <i class="zmdi zmdi-forward"></i>
+                      <i class="zmdi zmdi-copy"></i>
                       <span translate>ACTION.COPY_IN_MY_FILES</span>
                     </a>
                   </li>
                   <li class="divider"></li>
-                  <li>
+                  <li data-ng-click="openBrowser(selectedDocuments)">
                     <a href="">
-                      <i class="groups-home-workgroup"></i>
-                      {{'ACTION.COPY_TO_SHARED_SPACE' | translate}}
+                      <i class="zmdi groups-home-workgroup"></i>
+                      <span translate>ACTION.COPY_IN_WORKGROUP</span>
                     </a>
                   </li>
                 </ul>
@@ -328,7 +322,7 @@
                         <li class="hidden-xs hidden-action-links" data-ng-if="canUpload">
                           <a href="" title="{{'ACTION.COPY_IN_MY_FILES' | translate}}" event-propagation-stop="true"
                              data-ng-click="copyIntoFiles(documentFile)">
-                            <i class="ls-received-shares"></i>
+                            <i class="zmdi zmdi-copy"></i>
                          </a>
                         </li>
                         <li class="hidden-xs hidden-action-links">
@@ -357,8 +351,16 @@
                               <a data-ng-href=""
                                  data-ng-click="copyIntoFiles(documentFile)"
                                  event-propagation-stop>
-                                <i class="zmdi ls-received-shares"></i>
+                                <i class="zmdi zmdi-copy"></i>
                                 <span translate>ACTION.COPY_IN_MY_FILES</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a data-ng-href=""
+                                 data-ng-click="openBrowser([documentFile])"
+                                 event-propagation-stop>
+                                <i class="zmdi groups-home-workgroup"></i>
+                                <span translate>ACTION.COPY_IN_WORKGROUP</span>
                               </a>
                             </li>
                             <li>
