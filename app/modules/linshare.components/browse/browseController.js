@@ -88,7 +88,7 @@
       var failedNodes = [],
         promises = [];
       _.forEach(browseVm.nodeItems, function(nodeItem) {
-        promises.push(browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem,
+        promises.push(browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem.uuid,
           browseVm.currentFolder.uuid));
       });
 

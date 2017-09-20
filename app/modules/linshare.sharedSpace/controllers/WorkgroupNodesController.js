@@ -161,9 +161,9 @@
     function copyNode(nodeItems) {
       var promises = [];
       _.forEach(nodeItems, function(nodeItem) {
-        promises.push(workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem,
+        promises.push(workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid,
           workgroupNodesVm.folderDetails.folderUuid).then(function(newNode) {
-          var restangularizedNode = workgroupNodesRestService.restangularize(newNode,
+          var restangularizedNode = workgroupNodesRestService.restangularize(newNode[0],
             workgroupNodesVm.folderDetails.workgroupUuid);
           restangularizedNode.fromServer = true;
           addNewItemInTableParams(restangularizedNode);

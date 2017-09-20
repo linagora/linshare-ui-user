@@ -64,16 +64,19 @@
      * @name copy
      * @desc copy a Workgroup Node object
      * @param {string} workgroupUuid - The uuid of the Workgroup object
-     * @param {object} nodeItem - Node to duplicate
+     * @param {object} nodeItemUuid - The uuid of the Node to copy
      * @param {string} destinationNodeUuid - The uuid of the Destination Node object
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
-    function copy(workgroupUuid, nodeItem, destinationNodeUuid) {
-      $log.debug('workgroupNodesRestService : copy', workgroupUuid, nodeItem.uuid, destinationNodeUuid);
+    function copy(workgroupUuid, nodeItemUuid, destinationNodeUuid) {
+      $log.debug('workgroupNodesRestService : copy', workgroupUuid, nodeItemUuid, destinationNodeUuid);
       var _destinationNodeUuid = _.isNil(destinationNodeUuid) ? '' : destinationNodeUuid;
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, nodeItem.uuid)
-        .all('copy').post(nodeItem, {destinationNodeUuid: _destinationNodeUuid}));
+      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, _destinationNodeUuid).all('copy').post({
+        kind: 'SHARED_SPACE',
+        uuid: nodeItemUuid,
+        contextUuid: workgroupUuid
+      }));
     }
 
     /**
