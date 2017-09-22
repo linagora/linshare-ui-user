@@ -439,7 +439,7 @@
     font-weight: inherit !important;
     color: #C9C9C9 !important;
   }
-  span a {
+  > span:not([class="dropdown"]) > a {
     color: #4E4E4E;
     cursor: pointer;
     padding-left: 15px;
@@ -459,7 +459,13 @@
       overflow: hidden;
       vertical-align: middle;
       white-space: nowrap;
-      transition: max-width 300ms ease-in-out  250ms;
+      transition: max-width 300ms ease-in-out 250ms;
+    }
+  }
+  span ul.dropdown-menu  a {
+    span {
+      color: #656565;
+      font-weight: 500;
     }
   }
 }

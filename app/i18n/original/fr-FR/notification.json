@@ -12,7 +12,7 @@
         "WORKGROUP": "Vous êtes sur le point de supprimer {singular, select, true{un groupe de travail} other{{nbItems} groupes de travail}}. Attention, cette action est irreversible.",
         "WORKGROUP_NODE": "Vous êtes sur le point de supprimer {singular, select, true{un document ou dossier} other{{nbItems} documents ou dossiers}}. Attention, cette action est irreversible."
       },
-      "TITLE": "Suppression"
+      "TITLE": "Êtes-vous sûr?"
     },
     "ON_LOCALSTORAGE_DELETE": {
       "TITLE": "Êtes-vous sûr?",
@@ -25,7 +25,7 @@
       "CANCEL_BUTTON": "ANNULER",
       "CONFIRM_BUTTON": "OK",
       "TEXT": "Vous êtes sur le point de télécharger {{nbFiles}} fichiers (taille total : {{totalSize}})",
-      "TITLE": "Téléchargement multiple"
+      "TITLE": "Êtes-vous sûr?"
     },
     "ON_SHARE_DELETE": {
       "CANCEL_BUTTON": "Annuler!",

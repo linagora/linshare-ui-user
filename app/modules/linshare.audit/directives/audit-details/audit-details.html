@@ -2,7 +2,7 @@
   <h5 class="header-log-info">
     <a tooltip-popup-delay="600" tooltip-placement="bottom" uib-tooltip="{{::auditAction.resource.name}}">
       <span data-ng-class="::auditAction.icon"></span>&nbsp
-      <span data-ng-if="::auditAction.hasBracket">
+      <span data-ng-if="::auditAction.hasBracket" class="upper-lvl-audit">
         {{::auditAction.resourceNameVarious}}
         <i class="zmdi zmdi-chevron-right"></i>
       </span>

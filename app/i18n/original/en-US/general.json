@@ -8,8 +8,8 @@
       "PERSONAL_SPACE": "Personal Space",
       "SHARED_SPACE": "Shared Space"
     },
-    "COPY_IN_MY_FILES": "Copy in my files",
-    "COPY_IN_WORKGROUP": "Copy in a workgroup",
+    "COPY_IN_MY_FILES": "Copy in My Space",
+    "COPY_IN_WORKGROUP": "Copy in a Workgroup",
     "COPY_INTO_THE_SHARED_SPACE": "Copy to Shared Space",
     "COPY_TO": "Copy to",
     "COPY_TO_SHARED_SPACE": "Shared space",
