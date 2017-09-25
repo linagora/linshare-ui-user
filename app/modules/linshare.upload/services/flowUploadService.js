@@ -63,7 +63,7 @@
       var response = serverResponse.length > 0 ? angular.fromJson(serverResponse) : undefined;
       var noResponse = _.isUndefined(response);
       if (noResponse || !response.chunkUploadSuccess) {
-        var logMessage = null;
+        var logMessage = flowFile.asyncUploadDetails.errorMsg;
         var errorCode = NONE;
         var errorMessage = errorNone;
         if (!noResponse) {
@@ -119,6 +119,8 @@
             var errorCode = NONE;
             var errorMessage = errorNone;
             if (flowFile.asyncUploadDetails) {
+              flowFile.asyncUploadDetails.errorCode = flowFile.asyncUploadDetails.errorCode === -1 ?
+                NONE : flowFile.asyncUploadDetails.errorCode;
               errorCode = flowFile.asyncUploadDetails.errorCode;
               errorMessage = messagePrefix + errorCode;
               if (errorCode === 46010) {
