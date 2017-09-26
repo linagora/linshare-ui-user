@@ -469,26 +469,30 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function multiDownload() {
-      $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
-        nbFiles: workgroupNodesVm.selectedDocuments.length,
-        totalSize: $filter('readableSize')(_.sumBy(workgroupNodesVm.selectedDocuments, 'size'), true)
-      }).then(function(swalText) {
-        swal({
-            title: swalMultipleDownloadTitle,
-            text: swalText,
-            type: 'error',
-            showCancelButton: true,
-            confirmButtonText: swalMultipleDownloadConfirm,
-            cancelButtonText: swalMultipleDownloadCancel,
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
-            }
-          });
-      });
+      if (workgroupNodesVm.selectedDocuments.length > 10) {
+        $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
+          nbFiles: workgroupNodesVm.selectedDocuments.length,
+          totalSize: $filter('readableSize')(_.sumBy(workgroupNodesVm.selectedDocuments, 'size'), true)
+        }).then(function(swalText) {
+          swal({
+              title: swalMultipleDownloadTitle,
+              text: swalText,
+              type: 'error',
+              showCancelButton: true,
+              confirmButtonText: swalMultipleDownloadConfirm,
+              cancelButtonText: swalMultipleDownloadCancel,
+              closeOnConfirm: true,
+              closeOnCancel: true
+            },
+            function(isConfirm) {
+              if (isConfirm) {
+                downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
+              }
+            });
+        });
+      } else {
+        downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
+      }
     }
 
     /**

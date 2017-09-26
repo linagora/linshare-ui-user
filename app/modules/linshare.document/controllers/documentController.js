@@ -313,26 +313,30 @@
      * @memberOf LinShare.document.documentController
      */
     function multiDownload() {
-      $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
-        nbFiles: $scope.selectedDocuments.length,
-        totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
-      }).then(function(swalText) {
-        swal({
-            title: swalMultipleDownloadTitle,
-            text: swalText,
-            type: 'error',
-            showCancelButton: true,
-            confirmButtonText: swalMultipleDownloadConfirm,
-            cancelButtonText: swalMultipleDownloadCancel,
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              downloadSelectedFiles($scope.selectedDocuments);
-            }
-          });
-      });
+      if ($scope.selectedDocuments.length > 10) {
+        $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
+          nbFiles: $scope.selectedDocuments.length,
+          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
+        }).then(function(swalText) {
+          swal({
+              title: swalMultipleDownloadTitle,
+              text: swalText,
+              type: 'error',
+              showCancelButton: true,
+              confirmButtonText: swalMultipleDownloadConfirm,
+              cancelButtonText: swalMultipleDownloadCancel,
+              closeOnConfirm: true,
+              closeOnCancel: true
+            },
+            function(isConfirm) {
+              if (isConfirm) {
+                downloadSelectedFiles($scope.selectedDocuments);
+              }
+            });
+        });
+      } else {
+        downloadSelectedFiles($scope.selectedDocuments);
+      }
     }
 
     function nextTab() {
