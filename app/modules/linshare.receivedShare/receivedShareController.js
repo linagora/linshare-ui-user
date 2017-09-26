@@ -101,21 +101,16 @@ angular.module('linshare.receivedShare')
         checkdatasIsSelecteds();
       }
 
-      var swalCopyCancel, swalCopyConfirm, swalCopyTitle, swalMultipleDownloadTitle,
-        swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
+      var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
       $translate([
-        'SWEET_ALERT.ON_FILE_COPY.CANCEL_BUTTON',
-        'SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON',
-        'SWEET_ALERT.ON_FILE_COPY.TITLE',
         'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
+        'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'
       ]).then(function(translations) {
-        swalCopyCancel = translations['SWEET_ALERT.ON_FILE_COPY.CANCEL_BUTTON'];
-        swalCopyConfirm = translations['SWEET_ALERT.ON_FILE_COPY.CONFIRM_BUTTON'];
-        swalCopyTitle = translations['SWEET_ALERT.ON_FILE_COPY.TITLE'];
         swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
         swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
+        swalMultipleDownloadCancel = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'];
       });
 
     /**
@@ -247,41 +242,8 @@ angular.module('linshare.receivedShare')
         if (!_.isArray(selectedDocuments)) {
           selectedDocuments = [selectedDocuments];
         }
-
-        $translate('SWEET_ALERT.ON_FILE_COPY.TEXT', {
-          nbItems: selectedDocuments.length,
-          singular: selectedDocuments.length <= 1 ? 'true' : 'other',
-          totalSize: $filter('readableSize')(_.sumBy(selectedDocuments, 'size'), true)
-        }, 'messageformat').then(function(swalText) {
-          swal({
-              title: swalCopyTitle,
-              text: swalText,
-              type: 'info',
-              showCancelButton: true,
-              confirmButtonText: swalCopyConfirm,
-              cancelButtonText: swalCopyCancel,
-              closeOnConfirm: true,
-              closeOnCancel: true
-            },
-            function(isConfirm) {
-              if (isConfirm) {
-                _.forEach(selectedDocuments, function(file/*, key*/) {
-                  receivedShareRestService.copy(file.uuid);
-                  /* TODO : implement deleteShareOnCopy then readd this code with related verification
-                   (if deleteShare ? etc...)
-                   .then(function() {
-                    _.forEach(receivedFiles, function(f, k) {
-                      if (f.uuid === file.uuid) {
-                        receivedFiles.splice(k, 1);
-                        selectedDocuments.splice(key, 1);
-                        $scope.tableParams.reload();
-                      }
-                    });
-                  });*/
-                });
-              }
-            }
-          );
+        _.forEach(selectedDocuments, function(file) {
+          receivedShareRestService.copy(file.uuid);
         });
       };
 
