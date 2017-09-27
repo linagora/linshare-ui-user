@@ -13,10 +13,10 @@
               {{::anonymousUrlVm.anonymousUrlData.actor.lastName.toUpperCase()}}
             </b>
             <span translate
-                  translate-values='{
-                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | shortTime),
-                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | shortTime)
-                  }'>
+                  translate-values="{
+                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | date:'shortDate'),
+                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | date:'shortDate')
+                  }">
                   ANONYMOUS_URL.MSG_SINGULAR
             </span>
           </p>
@@ -26,11 +26,11 @@
               {{::anonymousUrlVm.anonymousUrlData.actor.lastName.toUpperCase()}}
             </b>
             <span translate="ANONYMOUS_URL.MSG_PLURAL"
-                  translate-values='{
+                  translate-values="{
                   num: anonymousUrlVm.anonymousUrlShareEntries.length,
-                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | shortTime),
-                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | shortTime)
-                  }'>
+                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | date:'shortDate'),
+                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | date:'shortDate')
+                  }">
             </span>
           </p>
         </div>
