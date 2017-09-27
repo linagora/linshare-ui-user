@@ -288,7 +288,9 @@
             toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
             $scope.addSelectedDocument(data.itemToSelect);
             $scope.toggleFilterBySelectedFiles();
-            $scope.showCurrentFile(data.itemToSelect);
+            if (!$scope.isMobile) {
+              $scope.showCurrentFile(data.itemToSelect);
+            }
           }
         }
       });

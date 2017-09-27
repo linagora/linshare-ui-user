@@ -449,7 +449,9 @@ angular.module('linshare.receivedShare')
           toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
           $scope.addSelectedDocument($scope.documentSelected);
           $scope.toggleFilterBySelectedFiles();
-          $scope.showCurrentFile($scope.documentSelected);
+          if (!$scope.isMobile) {
+            $scope.showCurrentFile($scope.documentSelected);
+          }
         }
       });
 
