@@ -231,7 +231,7 @@
             <span>
               <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                  x-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)">
-                <i class="zmdi zmdi-delete"></i>
+                <i class="fa fa-trash-o"></i>
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
               </a>
               </span>
@@ -530,7 +530,7 @@
       </i>
     </div>
     <i class="groups-add-member col-xs-2"></i>
-    <i class="zmdi zmdi-delete col-xs-2" x-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"></i>
+    <i class="fa fa-trash-o col-xs-2" x-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"></i>
     <i class="fa fa-bell-slash-o col-xs-2 disabled-work-in-progress"
        x-ng-show="linshareModeProduction == false"></i>
     <span class="dropdown col-xs-2 dropdown-standard" x-ng-show="linshareModeProduction == false" uib-dropdown="">

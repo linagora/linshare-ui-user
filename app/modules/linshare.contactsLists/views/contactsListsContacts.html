@@ -211,7 +211,7 @@
             <span x-ng-if="contactsListsContactsVm.canManage">
               <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                  x-ng-click="contactsListsContactsVm.deleteContact(contactsListsContactsVm.selectedContacts)">
-                <i class="zmdi zmdi-delete"></i>
+                <i class="fa fa-trash-o"></i>
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
               </a>
             </span>
@@ -433,7 +433,7 @@
        x-ng-click="contactsListsContactsVm.showItemDetails(contactsListsContactsVm.selectedContacts[0], null, 1)"
        x-ng-class="{'hide' : (contactsListsContactsVm.selectedContacts.length > 1)
        || (! contactsListsContactsVm.canManage)}"></i>
-    <i class="zmdi zmdi-delete col-xs-2"
+    <i class="fa fa-trash-o col-xs-2"
        x-ng-click="contactsListsContactsVm.canManage ?
        contactsListsContactsVm.deleteContact(contactsListsContactsVm.selectedContacts) : null"></i>
   </div>

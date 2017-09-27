@@ -32,11 +32,11 @@
       <i class="ls-check-o select-all-items p-r-10" data-ng-if="flagsOnSelectedPages[tableParams.page()]"></i>
     </div>
     <i class="zmdi zmdi-share col-xs-2" data-ng-click="onShare()"></i>
-    <i class="zmdi zmdi-delete col-xs-2" data-ng-click="deleteDocuments(selectedDocuments)"></i>
+    <i class="fa fa-trash-o col-xs-2" data-ng-click="deleteDocuments(selectedDocuments)"></i>
     <i class="zmdi zmdi-border-color col-xs-2" data-ng-show="selectedDocuments.length === 1"
        data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')"></i>
     <span class="dropdown col-xs-2" uib-dropdown="" data-ng-show="!linshareModeProduction">
-        <i class="zmdi zmdi-more-vert" data-ng-class="{'active-link': isActiveMoreDropdown }"
+        <i class="zmdi zmdi-more" data-ng-class="{'active-link': isActiveMoreDropdown }"
            data-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown" uib-dropdown-toggle=""></i>
        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
            uib-dropdown-menu="">

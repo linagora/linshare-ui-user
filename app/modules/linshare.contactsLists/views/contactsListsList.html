@@ -170,7 +170,7 @@
                 <i class="fa fa-th-large" aria-hidden="true"></i>
               </a>
             </div>
-            <div class="input-group search-bar hidden-xs m-r-30">
+            <div class="input-group search-bar hidden-xs m-r-20">
               <div id="search-field-ctn">
                 <div class="search-style">
                   <div class="fg-line">
@@ -304,7 +304,7 @@
             <span x-ng-if="contactsListsListVm.isFromMyContactsLists">
               <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                  x-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)">
-                <i class="zmdi zmdi-delete"></i>
+                <i class="fa fa-trash-o"></i>
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
               </a>
             </span>
@@ -606,7 +606,7 @@
            x-ng-click="contactsListsListVm.showItemDetails(contactsListsListVm.selectedContactsLists[0],$event)">
         <i class="zmdi zmdi-info"></i>
       </div>
-      <i class="zmdi zmdi-delete col-xs-2"
+      <i class="fa fa-trash-o col-xs-2"
          x-ng-class="{'hide' : (!contactsListsListVm.isFromMyContactsLists)}"
          data-ng-show="!linshareModeProduction"
          x-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)"></i>

@@ -189,6 +189,9 @@ FILE DIRECTORY DIALOG
     }
     .lv-icon-ctn {
       font-size: 1.25em;
+      .ls-workgroup {
+        color: #537792;
+      }
     }
     .lv-name {
       p {
@@ -298,6 +301,14 @@ FILE DIRECTORY DIALOG
 }
 
 @media (max-width: 768px) {
+  .md-dialog-container {
+    top: 0 !important;
+    position: fixed;
+  }
+
+  #lv-dialog-content-ctn {
+    position: relative;
+  }
   #lv-file-directory {
     border-radius: initial;
     min-height: 100%;
@@ -317,7 +328,9 @@ FILE DIRECTORY DIALOG
       }
     }
     .lv-ctn {
-      max-height: calc(100% - 168px) !important;
+      max-height: calc(100% - 50px) !important;
+      position: absolute;
+      width: 100%;
     }
   }
 }

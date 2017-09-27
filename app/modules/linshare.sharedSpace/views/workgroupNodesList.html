@@ -350,7 +350,7 @@
             <span data-ng-if="::workgroupNodesVm.currentWorkgroupMember.admin">
               <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                  data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)">
-                <i class="zmdi zmdi-delete"></i>
+                <i class="fa fa-trash-o"></i>
                 <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
             </span>
@@ -757,7 +757,7 @@
        data-ng-if="workgroupNodesVm.isDocument(workgroupNodesVm.selectedDocuments[0].type)"
        data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
        data-ng-class="{'disabled-work-in-progress': workgroupNodesVm.selectedDocuments.length != 1}"></i>
-    <i class="zmdi zmdi-delete col-xs-2"
+    <i class="fa fa-trash-o col-xs-2"
        data-ng-if="::workgroupNodesVm.currentWorkgroupMember.admin"
        data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)"></i>
     <i class="zmdi zmdi-arrows col-xs-2 disabled-work-in-progress"

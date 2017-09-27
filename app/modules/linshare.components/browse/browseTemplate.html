@@ -36,7 +36,8 @@
              data-ng-class="{'disabled' : browseVm.disableFolder(folder)}"
              uuid={{::folder.uuid}}>
           <div class="lv-icon-ctn lv-col-1 center">
-            <span class="ls-folder"></span>
+            <span class="ls-folder" data-ng-if="!browseVm.isSharedSpace"></span>
+            <span class="ls-workgroup" data-ng-if="browseVm.isSharedSpace"></span>
           </div>
           <div class="lv-name lv-col-2 file-name-disp single-line" spellcheck="false"
                contenteditable="false">

@@ -117,10 +117,11 @@ display : flex ;
   font-weight: normal;
   letter-spacing: 0.015em;
   text-transform: uppercase;
+  font-size: 0.95em;
 }
  .dropdown-filters {
    display: inline;
-   margin-right: 30px;
+   margin-right: 20px;
    > span {
      width: 100% !important;
      position: relative;
@@ -169,6 +170,7 @@ display : flex ;
          margin-right: 15px;
          text-overflow: ellipsis;
          white-space: nowrap;
+         font-size: 0.95em;
        }
        > div{
          position: absolute;
@@ -206,6 +208,15 @@ display : flex ;
 @media (max-width: 800px) {
   .files.contacts-lists-list  #breadcrumb-wrap span.current-list-label {
     max-width: 130px;
+  }
+}
+
+@media (max-width: 900px) {
+ .toggle-view-dropdown .filter-views {
+    display: none;
+ }
+  .breadcrumbs-ctn .pipe-separator + a {
+    display:none;
   }
 }
 

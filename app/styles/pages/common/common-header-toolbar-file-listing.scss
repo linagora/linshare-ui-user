@@ -130,7 +130,7 @@
     }
     .toolbar-actions-items {
       font-size: 17px;
-      width: 110px;
+      width: auto;
       flex: 0 auto !important;
       display: flex;
       margin-right: 5px;
@@ -596,6 +596,7 @@
           margin-right: 0;
         }
         .sort-dropdown {
+          order: 2;
           margin-right: 0 !important;
           a {
             display: inline-block;

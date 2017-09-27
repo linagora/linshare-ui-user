@@ -42,7 +42,7 @@
       <span>
         <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
            data-ng-click="deleteDocuments(selectedDocuments)">
-          <i class="zmdi zmdi-delete"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
+          <i class="fa fa-trash-o"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
         </a>
       </span>
       <span data-ng-class="{'hide': selectedDocuments.length > 1}" data-ng-click="downloadFile(selectedDocuments[0])">
@@ -59,7 +59,7 @@
       <span class="dropdown link-dropdown" uib-dropdown="">
         <a class="plain-text-button share-link"
            uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
-          <i class="zmdi zmdi-more-vert"></i><span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
+          <i class="zmdi zmdi-more"></i><span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
           <li class="hidden-xs">

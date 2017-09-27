@@ -668,7 +668,9 @@
 ***********************/
 
 @media (max-width: 767px) {
-
+  .files #file-list-table .ctn-name-actions span:first-child {
+    padding-bottom: 0.1em !important;
+  }
   /* Main layout adjustement set up */
   .table-responsive {
     padding-bottom: 39px;
