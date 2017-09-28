@@ -19,7 +19,8 @@
   function toastService(_, $mdToast, $q, componentsConfig) {
     var
       delay = {
-        default: 3000
+        default: 3000,
+        long: 6000
       },
       mdToastLocals = {},
       position = 'bottom right',
@@ -192,7 +193,7 @@
     function toastShow(mdToastLocals) {
       _.assign(mdToastLocals, {
         toastClose: toastClose,
-        delay: delay.default
+        delay: mdToastLocals.toastLabel || mdToastLocals.toastDetails ? delay.long : delay.default
       });
 
       if (isActive()) {
