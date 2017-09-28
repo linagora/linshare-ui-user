@@ -52,7 +52,9 @@ angular.module('linshare.share')
       self.recipients = _.defaultTo(shareJson.recipients, []);
       recipients = self.recipients;
       self.mailingListUuid = _.defaultTo(shareJson.mailingListUuid, []);
+      mailingListUuid = self.mailingListUuid;
       self.mailingList = _.defaultTo(shareJson.mailingList, []);
+      mailingList = self.mailingList;
       self.sharingNote = _.defaultTo(shareJson.sharingNote, '');
       self.subject = _.defaultTo(shareJson.subject, '');
       self.message = _.defaultTo(shareJson.message, '');
@@ -160,13 +162,14 @@ angular.module('linshare.share')
 
     ShareObjectForm.prototype.getFormObj = function() {
       var docUuid = [];
-      angular.forEach(this.documents, function(doc) {
+      _.forEach(this.documents, function(doc) {
         docUuid.push(doc.uuid);
       });
       return {
         recipients: recipients,
         documents: docUuid,
         mailingListUuid: mailingListUuid,
+        mailingList: mailingList,
         secured: secured.value,
         creationAcknowledgement: creationAcknowledgement.value,
         expirationDate: expirationDate.value,
@@ -183,6 +186,7 @@ angular.module('linshare.share')
         recipients: recipients,
         documents: this.documents,
         mailingListUuid: mailingListUuid,
+        mailingList: mailingList,
         secured: secured.value,
         creationAcknowledgement: creationAcknowledgement.value,
         expirationDate: expirationDate.value,
@@ -200,7 +204,7 @@ angular.module('linshare.share')
       var deferred = $q.defer();
       if (this.waitingUploadIdentifiers.length === 0) {
         if(this.documents.indexOf(undefined) === -1) {
-          return LinshareShareService.create(this.getFormObj()).then(function() {
+          return LinshareShareService.create(_.omit(this.getFormObj(), 'mailingList')).then(function() {
             toastService.success({
               key: 'GROWL_ALERT.ACTION.SHARE',
               params: {
@@ -244,7 +248,6 @@ angular.module('linshare.share')
     ShareObjectForm.prototype.resetForm = function() {
       recipients = [];
       this.recipients = [];
-      mailingListUuid = [];
       mailingList = [];
       this.mailingList = [];
       mailingListUuid = [];

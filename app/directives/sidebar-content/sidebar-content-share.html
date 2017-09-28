@@ -1,7 +1,8 @@
 <div class="header-sidebar form-sidebar header-show-action">
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
      data-ng-click="shareActionVm.closeSideBar();
-                    !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments()">
+                    !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments();
+                    shareActionVm.newShare.resetForm()">
   </i>
   <span class="hidden-xs actions" data-ng-click="shareActionVm.closeSideBar()">
     <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
@@ -173,7 +174,8 @@
 <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
   <button class="btn btn-default col-xs-6"
           x-ng-click="shareActionVm.closeSideBar(); mainVm.sidebar.getData().closeDropdown($event);
-          !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments()">
+          !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments();
+          shareActionVm.newShare.resetForm()">
     {{"NAVIGATION.CANCEL" | translate}}
   </button>
   <button class="btn btn-primary col-xs-6"

@@ -44,12 +44,16 @@
           </p>
         </div>
       </div>
-      <div class="custom-list-item readonly"
-           x-ng-repeat="list in mainVm.sidebar.getData().shareListVm.currentShare.mailingListUuid">
-        <p class="pull-left circle-ctn"><span class="circle  user-bg">{{list.listName.charAt(0)}}</span></p>
+      <div class="custom-list-item" x-ng-repeat="list in mainVm.sidebar.getData().shareListVm.currentShare.getMailingList()"
+           tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip=""
+           owner-label
+           owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
+           owner-label-attr="uib-tooltip">
+        <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
         <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
-          <p class="close-list-icone-btn pull-right" x-ng-click="shareActionVm.newShare.removeMailingList($index)">
+          <p class=" close-list-icone-btn pull-right"
+             x-ng-click="mainVm.sidebar.getData().shareListVm.currentShare.removeMailingList($index)">
             <i class="zmdi zmdi-close"></i>
           </p>
         </div>
@@ -154,7 +158,7 @@
      x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.waitingUploadIdentifiers.length > 0">
   <button class="btn btn-primary col-xs-12"
           x-ng-click="mainVm.sidebar.getData().shareListVm.cancelShare(
-                        mainVm.sidebar.getData().shareListVm.currentShare)">
+                        mainVm.sidebar.getData().shareListVm.shareReference)">
     {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.SHARE_OPTIONS' | translate}}
   </button>
 </div>

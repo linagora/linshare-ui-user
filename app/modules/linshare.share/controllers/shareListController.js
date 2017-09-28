@@ -10,7 +10,7 @@
     .controller('LinshareShareListController', LinshareShareListController);
 
   LinshareShareListController.$inject = ['_', '$scope', '$state', '$translate', '$translatePartialLoader',
-    'lsAppConfig', 'previousState', 'shareIndex', 'swal'
+    'lsAppConfig', 'previousState', 'shareIndex', 'ShareObjectService', 'swal'
   ];
 
   /**
@@ -19,7 +19,7 @@
    *  @memberOf LinShare.share
    */
   function LinshareShareListController(_, $scope, $state, $translate, $translatePartialLoader, lsAppConfig,
-    previousState, shareIndex, swal) {
+    previousState, shareIndex, ShareObjectService, swal) {
 
     var
       shareListVm = this,
@@ -31,7 +31,8 @@
     shareListVm.activeShareDetails = lsAppConfig.activeShareDetails;
     shareListVm.cancelShare = cancelShare;
     shareListVm.confirmCancel = confirmCancel;
-    shareListVm.currentShare = $scope.shareArray[shareIndex];
+    shareListVm.shareReference = $scope.shareArray[shareIndex];
+    shareListVm.currentShare = new ShareObjectService(shareListVm.shareReference);
     shareListVm.goToPreviousState = goToPreviousState;
     shareListVm.loadSidebarContent = loadSidebarContent;
     shareListVm.shareIndex = Number(shareIndex) + 1;
