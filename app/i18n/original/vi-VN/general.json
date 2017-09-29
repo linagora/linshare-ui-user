@@ -242,14 +242,6 @@
     "TBT__SHOW_SELECTION": "",
     "TBT__STOP": ""
   },
-  "SWEET_ALERT": {
-    "ON_FILE_COPY": {
-      "TBT__CANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TEXT": "",
-      "TBT__TITLE": ""
-    }
-  },
   "TRANSFERS_DROPDOWN": {
     "BEFORE_SENDINGS": "trước khi gửi",
     "SHARE": "Chia sẻ",

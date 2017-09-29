@@ -1,5 +1,11 @@
 {
   "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "TBT__CANCEL_BUTTON": "",
+      "TBT__CONFIRM_BUTTON": "",
+      "TBT__TEXT": "",
+      "TBT__TITLE": ""
+    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Không!",
       "CONFIRM_BUTTON": "Có!",

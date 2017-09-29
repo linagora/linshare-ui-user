@@ -239,14 +239,6 @@
     "SHOW_SELECTION": "Show selection",
     "STOP": "Stop"
   },
-  "SWEET_ALERT": {
-    "ON_FILE_COPY": {
-      "CANCEL_BUTTON": "Cancel!",
-      "CONFIRM_BUTTON": "Copy",
-      "TEXT": "You are about to copy received {singular, select, true{a document} other{{nbItems} documents}} for a total of {totalSize} into your own files.",
-      "TITLE": "File copy"
-    }
-  },
   "TRANSFERS_DROPDOWN": {
     "BEFORE_SENDINGS": "before sending",
     "SHARE": "Shares",

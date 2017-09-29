@@ -1,5 +1,11 @@
 {
   "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "CANCEL_BUTTON": "Cancel!",
+      "CONFIRM_BUTTON": "Copy",
+      "TEXT": "You are about to copy received {singular, select, true{a document} other{{nbItems} documents}} for a total of {totalSize} into your own files.",
+      "TITLE": "File copy"
+    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",

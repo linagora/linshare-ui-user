@@ -1,5 +1,11 @@
 {
   "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "CANCEL_BUTTON": "Annuler",
+      "CONFIRM_BUTTON": "Copier",
+      "TEXT": "Vous êtes sur le point de copier {singular, select, true{un document reçu} other{{nbItems} documents reçus}} d'une taille totale de {totalSize} dans votre espace.",
+      "TITLE": "Êtes-vous sûr?"
+    },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
