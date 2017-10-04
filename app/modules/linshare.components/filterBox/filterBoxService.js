@@ -137,6 +137,8 @@
         if (table.data.length > 0) {
           itemsInit = _.uniqBy(itemsInit.concat(table.data), 'uuid');
         }
+      } else if (table.data.length > itemsInit.length ) {
+        itemsInit = _.uniqBy(itemsInit.concat(table.data), 'uuid');
       }
       _.pullAll(items, items);
       items.push.apply(items, itemsInit);
