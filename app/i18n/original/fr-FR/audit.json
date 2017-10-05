@@ -191,11 +191,11 @@
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez copié le document : {{resourceName}} depuis le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez copié le document : {{resourceName}} depuis {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} depuis le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} depuis {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -211,11 +211,11 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez créé le document : {{resourceName}} dans {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a créé le document : {{resourceName}} dans {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -335,11 +335,11 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez copié le document : {{resourceName}} de {{userVarious}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez créé le document : {{resourceName}} de {{userVarious}} dans {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a créé le document : {{resourceName}} dans {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -429,31 +429,31 @@
         },
         "COPY_FROM_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}, depuis votre Espace Personnel.",
+            "SENTENCE": "Vous avez créé le document : {{resourceName}} dans {{resourceNameVarious}}, depuis votre Espace Personnel.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}, depuis son Espace Personnel.",
+            "SENTENCE": "{{authorName}} a créé le document : {{resourceName}} dans {{resourceNameVarious}}, depuis son Espace Personnel.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_FROM_RECEIVED_SHARE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}, depuis un partage reçus.",
+            "SENTENCE": "Vous avez créé le document : {{resourceName}} dans {{resourceNameVarious}}, depuis un partage reçus.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}, depuis son Espace Personnel.",
+            "SENTENCE": "{{authorName}} a créé le document : {{resourceName}} dans {{resourceNameVarious}}, depuis son Espace Personnel.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez copié le document : {{resourceName}} depuis le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez créé le document par copie de: {{resourceNameCopy}} depuis {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} depuis le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a créé le document par copie de : {{resourceNameCopy}} depuis {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -469,11 +469,11 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez créé un duplicat du document dans {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a créé un duplicat du document dans {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -641,5 +641,9 @@
     "FILTER_BEGINNING_DATE": "Date de début",
     "FILTER_ENDING_DATE": "Date de fin",
     "SEARCH": "Rechercher"
+  },
+  "WORKGROUP": {
+    "ANOTHER": "un autre Groupe de Travail",
+    "CURRENT" : "le Groupe de Travail courant"
   }
 }

@@ -87,6 +87,7 @@
       authorSystem,
       disabled,
       enabled,
+      workgroup,
       service = {
         generateAllDetails: generateAllDetails
       };
@@ -111,13 +112,19 @@
             'AUTHOR_SUPERADMIN',
             'AUTHOR_SYSTEM',
             'DISABLED',
-            'ENABLED'
+            'ENABLED',
+            'WORKGROUP.ANOTHER',
+            'WORKGROUP.CURRENT'
           ]).then(function(translations) {
             authorMe = translations['AUTHOR_ME'];
             authorSuperadmin = translations['AUTHOR_SUPERADMIN'];
             authorSystem = translations['AUTHOR_SYSTEM'];
             disabled = translations['DISABLED'];
             enabled = translations['ENABLED'];
+            workgroup = {
+              another: translations['WORKGROUP.ANOTHER'],
+              current: translations['WORKGROUP.CURRENT']
+            };
           }).then(function() {
             _.forEach(auditDetails, function(auditAction) {
               if (auditAction.resource) {
@@ -147,6 +154,9 @@
       auditAction.dateShortVarious = setDateVarious(auditAction, 'shortDate');
       auditAction.dateMediumVarious = setDateVarious(auditAction, 'medium');
       auditAction.resourceName = setResourceName(auditAction, loggedUserUuid);
+      if (auditAction.copiedFrom) {
+        auditAction.resourceNameCopy = setResourceNameCopy(auditAction);
+      }
       auditAction.resourceNameVarious = setResourceNameVarious(auditAction);
       auditAction.userVarious = setUserVarious(auditAction, loggedUserUuid);
       auditAction.shareRecipient = setShareRecipient(auditAction, loggedUserUuid);
@@ -270,8 +280,24 @@
         resourceName = (auditAction.resource.uuid === loggedUserUuid) ? authorMe : setFullName(auditAction.resource);
       } else {
         resourceName = auditAction.resource.name;
+        if (auditAction.copiedTo) {
+          resourceName = auditAction.copiedTo.name;
+        }
       }
       return resourceName;
+    }
+
+    /**
+     * @name setResourceNameCopy
+     * @desc Find in all the object the name of the resource copied
+     * @param {Object} auditAction - One audit action
+     * @returns {string} Resource name copied
+     * @memberOf LinShare.audit.auditDetailsService
+     */
+    function setResourceNameCopy(auditAction) {
+      if (auditAction.copiedFrom) {
+        return auditAction.copiedFrom.name;
+      }
     }
 
     /**
@@ -284,15 +310,34 @@
     function setResourceNameVarious(auditAction) {
       var resourceNameVarious;
       if (auditAction.copiedFrom) {
-        resourceNameVarious = auditAction.copiedFrom.contextName;
+        resourceNameVarious = setRessourceNameVariousForCopied(auditAction, auditAction.copiedFrom);
       } else if (auditAction.copiedTo) {
-        resourceNameVarious = auditAction.copiedTo.contextName;
+        resourceNameVarious = setRessourceNameVariousForCopied(auditAction, auditAction.copiedTo);
       } else if (auditAction.workGroup) {
         resourceNameVarious = auditAction.workGroup.name;
       } else if (auditAction.list) {
         resourceNameVarious = auditAction.list.name;
       }
       return resourceNameVarious;
+    }
+
+    /**
+     * @name setResourceNameVariousForCopied
+     * @desc Set second resource name for copied action
+     * @param {Object} auditAction - One audit action
+     * @param {Object} copied - One copied action
+     * @returns {string} Resource name various
+     * @memberOf LinShare.audit.auditDetailsService
+     */
+    function setRessourceNameVariousForCopied(auditAction, copied) {
+      if (auditAction.workGroup) {
+        if (copied.contextUuid === auditAction.workGroup.uuid) {
+          return workgroup.current;
+        }
+        return workgroup.another;
+      } else {
+        return copied.contextName;
+      }
     }
 
     /**
@@ -358,7 +403,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setSentenceVars(auditAction) {
-      return {
+      var vars = {
         authorName: '<b>' + auditAction.authorName + '</b>',
         // TODO : add uib tooltip
         dateVarious: '<b title="' + auditAction.dateMediumVarious + '">' + auditAction.dateShortVarious + '</b>',
@@ -367,6 +412,11 @@
         resourceNameVarious: '<span class="activity-resource-name">' + auditAction.resourceNameVarious + '</span>',
         updatedValues: '<b>' + auditAction.updatedValues + '</b>'
       };
+      if (auditAction.copiedFrom) {
+        vars.resourceNameCopy = '<span class="activity-resource-name">' + auditAction.resourceNameCopy + '</span>';
+      }
+
+      return vars;
     }
 
     /**

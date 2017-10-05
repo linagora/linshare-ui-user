@@ -211,11 +211,11 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied a new file : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "You have created a new file : {{resourceName}} into {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} has created the document : {{resourceName}} into {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -335,11 +335,11 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the document : {{resourceName}} of {{userVarious}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "You have created the document : {{resourceName}} of {{userVarious}} into {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} has created the document : {{resourceName}} into {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -429,31 +429,31 @@
         },
         "COPY_FROM_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from your Personal Space.",
+            "SENTENCE": "You have created the document : {{resourceName}} into {{resourceNameVarious}}, from your Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from his Personal Space.",
+            "SENTENCE": "{{authorName}} has created the document : {{resourceName}} into {{resourceNameVarious}}, from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_FROM_RECEIVED_SHARE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from a received share.",
+            "SENTENCE": "You have created the document : {{resourceName}} into {{resourceNameVarious}}, from a received share.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}, from his Personal Space.",
+            "SENTENCE": "{{authorName}} has created the document : {{resourceName}} into {{resourceNameVarious}}, from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the document : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "You have created this file by copying : {{resourceNameCopy}} from {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} has create this file by copying : {{resourceNameCopy}} from {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -469,11 +469,11 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "You have created a duplicate of this file into {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into the Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} has created a duplicate of this file into {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
@@ -641,5 +641,9 @@
     "FILTER_BEGINNING_DATE": "Beginning date",
     "FILTER_ENDING_DATE": "Ending date",
     "SEARCH": "Search"
+  },
+  "WORKGROUP": {
+    "ANOTHER": "another wokgroup",
+    "CURRENT" : "the current workgroup"
   }
 }

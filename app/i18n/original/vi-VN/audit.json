@@ -641,5 +641,9 @@
     "TBT__FILTER_BEGINNING_DATE": "",
     "TBT__FILTER_ENDING_DATE": "",
     "TBT__SEARCH": ""
+  },
+  "TBT__WORKGROUP": {
+    "TBT__ANOTHER": "",
+    "TBT__CURRENT" : ""
   }
 }
