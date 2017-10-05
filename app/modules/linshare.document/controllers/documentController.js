@@ -212,7 +212,9 @@
             pluralization: true,
             params: {singular: true}
           });
-          $scope.documentsList.push(LinshareDocumentRestService.restangularize(documents[0]));
+          return LinshareDocumentRestService.restangularize(documents[0]).get();
+        }).then(function(document) {
+          $scope.documentsList.push(document);
           $scope.isNewAddition = true;
           tableParamsService.reloadTableParams();
           $timeout(function() {
