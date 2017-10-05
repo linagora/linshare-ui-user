@@ -280,21 +280,21 @@ angular.module('linshare.receivedShare')
             case 26444 :
               responses.push({
                 'title': error.nodeItem.name,
-                'message': {key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'}
+                'message': {key: 'TOAST_ALERT.ERROR.COPY.26444'}
               });
               break;
             case 26445 :
             case 28005 :
               responses.push({
                 'title': error.nodeItem.name,
-                'message': {key: 'GROWL_ALERT.ERROR.RENAME_NODE'}
+                'message': {key: 'TOAST_ALERT.ERROR.RENAME_NODE'}
               });
               break;
           }
         });
 
         toastService.error({
-          key: 'GROWL_ALERT.ERROR.BROWSER_ACTION',
+          key: 'TOAST_ALERT.ERROR.BROWSER_ACTION',
           pluralization: true,
           params: {
             action: '',
@@ -312,14 +312,14 @@ angular.module('linshare.receivedShare')
        */
       function notifyBrowseActionSuccess(data) {
         toastService.success({
-          key: 'GROWL_ALERT.ACTION.BROWSER_ACTION',
+          key: 'TOAST_ALERT.ACTION.BROWSER_ACTION',
           pluralization: true,
           params: {
             singular: data.nodeItems.length <= 1 ? 'true' : '',
             action: '',
             folderName: data.folder.name
           }
-        }, 'GROWL_ALERT.ACTION_BUTTON').then(function(response) {
+        }, 'TOAST_ALERT.ACTION_BUTTON').then(function(response) {
           if (!_.isUndefined(response)) {
             if (response.actionClicked) {
               var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
@@ -443,7 +443,7 @@ angular.module('linshare.receivedShare')
       loadTable().then(function(data) {
         $scope.tableParams = data;
         if (_.isUndefined($scope.documentSelected)) {
-          toastService.error({key: 'GROWL_ALERT.ERROR.FILE_NOT_FOUND'});
+          toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
         }
         else if ($scope.documentSelected !== null ) {
           toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
@@ -507,7 +507,7 @@ angular.module('linshare.receivedShare')
             $scope.documentsListCopy = $scope.documentsList; // I keep a copy of the data for the filter module
             $scope.tableParams.reload();
             initFlagsOnSelectedPages();
-            toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
+            toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
           });
         });
       }

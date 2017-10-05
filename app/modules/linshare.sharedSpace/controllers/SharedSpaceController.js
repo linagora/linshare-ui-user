@@ -43,10 +43,10 @@ angular.module('linshare.sharedSpace')
     };
 
     var swalNewWorkGroupName, invalideNameTranslate;
-    $translate(['ACTION.NEW_WORKGROUP', 'GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR'])
+    $translate(['ACTION.NEW_WORKGROUP', 'TOAST_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR'])
       .then(function(translations) {
         swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
-        invalideNameTranslate = translations['GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR']
+        invalideNameTranslate = translations['TOAST_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR']
           .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
       });
 
@@ -224,7 +224,7 @@ angular.module('linshare.sharedSpace')
       angular.forEach(items, function(restangularizedItem) {
         $log.debug('value to delete', restangularizedItem);
         restangularizedItem.remove().then(function() {
-          toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
+          toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
           _.remove(thisctrl.itemsList, restangularizedItem);
           _.remove(thisctrl.selectedDocuments, restangularizedItem);
           thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module

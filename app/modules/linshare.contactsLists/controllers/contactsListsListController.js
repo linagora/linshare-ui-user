@@ -103,8 +103,8 @@
             'CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS',
             'CONTACTS_LISTS_DETAILS.PRIVATE',
             'CONTACTS_LISTS_DETAILS.PUBLIC',
-            'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS',
-            'ACTION.COPY_ADJ', 'GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'
+            'TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS',
+            'ACTION.COPY_ADJ', 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST'
           ])
           .then(function(translations) {
             newContactsListName = translations['ACTION.NEW_CONTACTS_LIST'];
@@ -114,7 +114,7 @@
               contactsListsListVm.isFromMyContactsLists ? contactsListsListVm.myLists : contactsListsListVm.otherLists;
             privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
             publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
-            stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
+            stillExists = translations['TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS'];
             copySuffix = translations['ACTION.COPY_ADJ'];
           });
       });
@@ -235,7 +235,7 @@
     function deleteCallback(items) {
       _.forEach(items, function(restangularizedItem) {
         restangularizedItem.remove().then(function() {
-          toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
+          toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
           _.remove(contactsListsListVm.itemsList, restangularizedItem);
           _.remove(contactsListsListVm.selectedContactsLists, restangularizedItem);
           contactsListsListVm.tableParams.reload();
@@ -446,7 +446,7 @@
         contactsListsListVm.canCreate = true;
       }).catch(function(error) {
         if (error.data.errCode === 25001) {
-          toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_CONTACTS_LIST'});
+          toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST'});
           renameContactsList(item, itemNameElem);
         }
         if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
@@ -488,7 +488,7 @@
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
         contactsListsContactsRestService.create(contactListUuidDestination, contact).then(function() {
           if (!duplicate) {
-            toastService.success({key: 'GROWL_ALERT.ACTION.UPDATE'});
+            toastService.success({key: 'TOAST_ALERT.ACTION.UPDATE'});
           }
           _.remove(contactsListsListVm.contactsToAddList, {
             mail: contact.mail

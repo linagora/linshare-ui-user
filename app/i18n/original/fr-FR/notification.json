@@ -40,16 +40,16 @@
       "TITLE": "Êtes-vous sûr?"
     }
   },
-  "GROWL_ALERT": {
+  "TOAST_ALERT": {
     "ACTION": {
       "BROWSER_ACTION": "{singular, select, true{Le fichier ou dossier a} other{Les fichiers ou dossiers ont}} été {action, select, moved{déplacé} other{copié}} dans : {folderName}.",
-      "COPY": "Fichier copié avec succès dans vos fichiers.",
-      "COPY_PLURAL": "fichiers ont été copié dans votre Espace Personnel",
+      "CLOSE": "Fermer",
+      "COPY": "{singular, select, true{Le fichier a été copié} other{{nbItems} fichiers ont été copiés}} dans votre Espace Personnel.",
       "COPY_SAME_FOLDER": "{singular, select, true{Le fichier a été copié} other{Les fichiers ont été copiés}} avec succès.",
-      "COPY_SINGULAR": "fichier a été copié dans votre Espace Personnel.",
       "DELETE": "Suppression réussie",
       "DELETE_SINGULAR": "L'élément a été supprimé avec succès.",
       "DELETE_PLURAL": "Les éléments ont été supprimés avec succès.",
+      "DETAILS": "Détails",
       "INSERT": "L'élément a été ajouté avec succès.",
       "SHARE": "Votre partage {{shareName ? shareName + ' ': ''}}a été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
@@ -58,15 +58,9 @@
       "UPDATE": "L'élément a été mise à jour avec succès."
     },
     "ACTION_BUTTON": "Voir",
-    "WARNING": {
-      "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
-      "AT_LEAST_ONE_DOCUMENT": "Aucun fichier n'est sélectionné",
-      "CONTACT_STILL_EXISTS" : "est déjà dans la liste",
-      "INVALID_EMAIL": "Email invalide"
-    },
     "ERROR": {
       "BROWSER_ACTION": "{nbNodes} {singular, select, true{élément n'a} other{éléments n'ont}} pas pu être {action, select, moved{déplacé{singular, select, true{} other{s}}} other{copié{singular, select, true{} other{s}}}}",
-      "COPY_ERROR": {
+      "COPY": {
         "26444": "Vous ne possédez pas les droits de copie"
       },
       "FILE_NOT_FOUND": "Le fichier sélectionné n'a pas été trouvé",
@@ -84,16 +78,13 @@
         "26444": "Vous ne possédez pas les droits de suppression"
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs."
-    }
-  },
-  "TOAST_ALERT": {
-    "ACTION": {
-      "CLOSE": "Fermer",
-      "DETAILS": "Détails"
     },
     "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
+      "AT_LEAST_ONE_DOCUMENT": "Aucun fichier n'est sélectionné",
+      "CONTACT_STILL_EXISTS" : "est déjà dans la liste",
       "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",
-      "ELEMENTS_NOT_DELETED_SINGULAR": "1 élément n'a pu être supprimé.",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "Un élément n'a pu être supprimé.",
       "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} éléments n'ont pu être supprimés.",
       "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{élément n'a} other{éléments n'ont}} pu être {singular, select, true{téléversé} other{téléversés}}.",
       "ERROR": "Erreur :",
@@ -101,6 +92,7 @@
       "ERROR_403": "Erreur {{errCode}} - Vous n'êtes pas autorisé à supprimer cet élément",
       "ERROR_400": "Erreur {{errCode}} - Suppression impossible",
       "ERROR_500": "Erreur {{errCode}} - Erreur du serveur",
+      "INVALID_EMAIL": "Email invalide",
       "ISOLATED_FILE": "Vous visualisez une selection restreinte de fichiers."
     }
   }

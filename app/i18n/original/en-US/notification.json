@@ -40,16 +40,16 @@
       "TITLE": "Are you sure?"
     }
   },
-  "GROWL_ALERT": {
+  "TOAST_ALERT": {
     "ACTION": {
       "BROWSER_ACTION": "{singular, select, true{The file or folder has} other{files or folders have}} been {action, select, moved{moved} other{copied}} into : {folderName}.",
-      "COPY": "File(s) has been copied into your files.",
-      "COPY_PLURAL": "files have been copied into your Personal Space.",
+      "CLOSE": "Close",
+      "COPY": "{singular, select, true{The file has been} other{{nbItems} files have been}} copied into your Personal Space.",
       "COPY_SAME_FOLDER": "{singular, select, true{The file} other{Files}} has been copied successfully.",
-      "COPY_SINGULAR": "file has been copied into your Personal Space.",
       "DELETE": "Deletion succeeded",
       "DELETE_SINGULAR": "The item was deleted successfully.",
       "DELETE_PLURAL": "The items were deleted successfully.",
+      "DETAILS": "Details",
       "INSERT": "The item was added successfully.",
       "SHARE": "Your file share {{shareName ? shareName + ' ': ''}}was sent successfully.",
       "SHARE_DELETED": "Your file share with {{recipient}} was removed successfully.",
@@ -58,15 +58,9 @@
       "UPDATE": "The item was updated successfully."
     },
     "ACTION_BUTTON": "View",
-    "WARNING": {
-      "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",
-      "AT_LEAST_ONE_DOCUMENT": "No file is selected",
-      "CONTACT_STILL_EXISTS" : "is already in the list",
-      "INVALID_EMAIL": "Invalid email"
-    },
     "ERROR": {
       "BROWSER_ACTION": "{nbNodes} {singular, select, true{file or folder} other{files or folders}} couldn't be {action, select, moved{moved} other{copied}}",
-      "COPY_ERROR": {
+      "COPY": {
         "26444": "You do not posses the rights to copy"
       },
       "FILE_NOT_FOUND": "The selected file has not been found",
@@ -84,14 +78,11 @@
         "26444": "You do not posses the rights to delete"
       },
       "NO_RESPONSE_ERROR": "Error without server response, see logs."
-    }
-  },
-  "TOAST_ALERT": {
-    "ACTION": {
-      "CLOSE": "Close",
-      "DETAILS": "Details"
     },
     "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Please enter one recipient to share with",
+      "AT_LEAST_ONE_DOCUMENT": "No file is selected",
+      "CONTACT_STILL_EXISTS" : "is already in the list",
       "ELEMENTS_NOT_DELETED": "element(s) haven't been deleted",
       "ELEMENTS_NOT_DELETED_SINGULAR": "1 item has not been deleted.",
       "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} items have not been deleted.",
@@ -101,6 +92,7 @@
       "ERROR_403": "Error {{errCode}} - You are not authorized to delete this document",
       "ERROR_400": "Error {{errCode}} - The request couldn't be achieved",
       "ERROR_500": "Error {{errCode}} - Server error",
+      "INVALID_EMAIL": "Invalid email",
       "ISOLATED_FILE": "You are currently viewing a restricted file selection."
     }
   }

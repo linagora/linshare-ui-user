@@ -22,13 +22,13 @@
     var
       invalidNameTranslate = {
         empty: {
-          key: 'GROWL_ALERT.ERROR.RENAME_INVALID.EMPTY'
+          key: 'TOAST_ALERT.ERROR.RENAME_INVALID.EMPTY'
         },
         endingPoint: {
-          key: 'GROWL_ALERT.ERROR.RENAME_INVALID.ENDING_POINT'
+          key: 'TOAST_ALERT.ERROR.RENAME_INVALID.ENDING_POINT'
         },
         rejectedChar: {
-          key: 'GROWL_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR',
+          key: 'TOAST_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR',
           param: lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\'')
         }
       },

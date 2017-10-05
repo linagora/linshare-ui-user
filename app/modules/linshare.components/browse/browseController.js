@@ -233,7 +233,7 @@
         if (nodeToRename.name !== data.name) {
           $timeout(function() {
             renameNode(data, 'div[uuid=' + data.uuid + '] .file-name-disp');
-            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
+            toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
           }, 0);
         } else {
           browseVm.canCreateFolder = true;
@@ -242,7 +242,7 @@
         switch(error.data.errCode) {
           case 26445 :
           case 28005 :
-            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
+            toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
             renameNode(nodeToRename, itemNameElem);
             break;
           case lsErrorCode.CANCELLED_BY_USER :

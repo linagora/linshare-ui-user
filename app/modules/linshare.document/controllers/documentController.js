@@ -189,7 +189,7 @@
           });
           toastService.error(message, undefined, responses);
         } else {
-          message = (nbItems === 1) ? 'GROWL_ALERT.ACTION.DELETE_SINGULAR' : 'GROWL_ALERT.ACTION.DELETE_PLURAL';
+          message = (nbItems === 1) ? 'TOAST_ALERT.ACTION.DELETE_SINGULAR' : 'TOAST_ALERT.ACTION.DELETE_PLURAL';
           toastService.success({key: message});
           $timeout(function() {
             $scope.getUserQuotas();
@@ -208,7 +208,7 @@
       _.forEach(documents, function(document) {
         LinshareDocumentRestService.copy(document.uuid).then(function(documents) {
           toastService.success({
-            key: 'GROWL_ALERT.ACTION.COPY_SAME_FOLDER',
+            key: 'TOAST_ALERT.ACTION.COPY_SAME_FOLDER',
             pluralization: true,
             params: {singular: true}
           });
@@ -285,7 +285,7 @@
 
         if ($stateParams.fileUuid) {
           if (_.isNil(data.itemToSelect)) {
-            toastService.error({key: 'GROWL_ALERT.ERROR.FILE_NOT_FOUND'});
+            toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
           } else {
             toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
             $scope.addSelectedDocument(data.itemToSelect);
@@ -396,21 +396,21 @@
           case 26444 :
             responses.push({
               'title': error.nodeItem.name,
-              'message': {key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'}
+              'message': {key: 'TOAST_ALERT.ERROR.COPY.26444'}
             });
             break;
           case 26445 :
           case 28005 :
             responses.push({
               'title': error.nodeItem.name,
-              'message': {key: 'GROWL_ALERT.ERROR.RENAME_NODE'}
+              'message': {key: 'TOAST_ALERT.ERROR.RENAME_NODE'}
             });
             break;
         }
       });
 
       toastService.error({
-        key: 'GROWL_ALERT.ERROR.BROWSER_ACTION',
+        key: 'TOAST_ALERT.ERROR.BROWSER_ACTION',
         pluralization: true,
         params: {
           action: '',
@@ -428,14 +428,14 @@
      */
     function notifyBrowseActionSuccess(data) {
       toastService.success({
-        key: 'GROWL_ALERT.ACTION.BROWSER_ACTION',
+        key: 'TOAST_ALERT.ACTION.BROWSER_ACTION',
         pluralization: true,
         params: {
           singular: data.nodeItems.length <= 1 ? 'true' : '',
           action: '',
           folderName: data.folder.name
         }
-      }, 'GROWL_ALERT.ACTION_BUTTON').then(function(response) {
+      }, 'TOAST_ALERT.ACTION_BUTTON').then(function(response) {
         if (!_.isUndefined(response)) {
           if (response.actionClicked) {
             var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
@@ -511,7 +511,7 @@
         var recipient = data.recipient.firstName ? data.recipient.firstName + ' ' + data.recipient.lastName :
           data.recipient.mail;
         toastService.success({
-          key: 'GROWL_ALERT.ACTION.SHARE_DELETED',
+          key: 'TOAST_ALERT.ACTION.SHARE_DELETED',
           params: {recipient: recipient}
         });
       });

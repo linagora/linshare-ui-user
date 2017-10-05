@@ -39,9 +39,10 @@
       "TBT__TITLE": ""
     }
   },
-  "GROWL_ALERT": {
+  "TOAST_ALERT": {
     "ACTION": {
       "TBT__BROWSER_ACTION": "",
+      "TBT_CLOSE": "",
       "TBT__COPY": "",
       "TBT__COPY_PLURAL": "",
       "TBT__COPY_SAME_FOLDER": "",
@@ -49,6 +50,7 @@
       "DELETE": "Đã xóa tập tin thành công",
       "TBT__DELETE_SINGULAR": "",
       "TBT__DELETE_PLURAL": "",
+      "TBT_DETAILS": "",
       "TBT__INSERT": "",
       "SHARE": "Đã chia sẻ thành công",
       "TBT__SHARE_ASYNC": "",
@@ -57,15 +59,9 @@
       "TBT__UPDATE": ""
     },
     "TBT__ACTION_BUTTON": "",
-    "WARNING": {
-      "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",
-      "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn",
-      "TBT__CONTACT_STILL_EXISTS" : "",
-      "TBT__INVALID_EMAIL": ""
-    },
     "ERROR": {
       "TBT__BROWSER_ACTION": "",
-      "COPY_ERROR": {
+      "COPY": {
         "TBT__26444": ""
       },
       "TBT__FILE_NOT_FOUND": "",
@@ -84,14 +80,11 @@
       },
       "TBT_NO_RESPONSE_ERROR": "",
       "TBT_RENAME_CONTACTS_LIST": ""
-    }
-  },
-  "TOAST_ALERT": {
-    "ACTION": {
-      "TBT_CLOSE": "",
-      "TBT_DETAILS": ""
     },
     "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",
+      "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn",
+      "TBT__CONTACT_STILL_EXISTS" : "",
       "TBT_ELEMENTS_NOT_DELETED": "",
       "TBT_ELEMENTS_NOT_DELETED_SINGULAR": "",
       "TBT_ELEMENTS_NOT_DELETED_PLURAL": "",
@@ -101,6 +94,7 @@
       "TBT_ERROR_403": "",
       "TBT_ERROR_400": "",
       "TBT_ERROR_500": "",
+      "TBT__INVALID_EMAIL": "",
       "TBT_ISOLATED_FILE":""
     }
   }

@@ -206,7 +206,7 @@ angular.module('linshare.share')
         if(this.documents.indexOf(undefined) === -1) {
           return LinshareShareService.create(_.omit(this.getFormObj(), 'mailingList')).then(function() {
             toastService.success({
-              key: 'GROWL_ALERT.ACTION.SHARE',
+              key: 'TOAST_ALERT.ACTION.SHARE',
               params: {
                 shareName: self.name
               }
@@ -215,7 +215,7 @@ angular.module('linshare.share')
         } else {
           $log.debug('SHARE FAILED -', 'file(s) upload error');
           toastService.error({
-            key: 'GROWL_ALERT.ACTION.SHARE_FAILED',
+            key: 'TOAST_ALERT.ACTION.SHARE_FAILED',
             params: {
               shareName: self.name
             }

@@ -176,7 +176,7 @@
       }).catch(function(error) {
         switch(error.data.errCode) {
           case 26444 :
-            toastService.error({key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'});
+            toastService.error({key: 'TOAST_ALERT.ERROR.COPY.26444'});
             break;
         }
       });
@@ -200,7 +200,7 @@
       }).catch(function(error) {
         switch(error.data.errCode) {
           case 26444 :
-            toastService.error({key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'});
+            toastService.error({key: 'TOAST_ALERT.ERROR.COPY.26444'});
             break;
         }
       });
@@ -245,15 +245,15 @@
       documentUtilsService.deleteItem(nodes, documentUtilsService.itemUtilsConstant.WORKGROUP_NODE, function(nodes) {
         _.forEach(nodes, function(restangularizedItem) {
           restangularizedItem.remove().then(function() {
-            toastService.success({key: 'GROWL_ALERT.ACTION.DELETE_SINGULAR'});
+            toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
             _.remove(workgroupNodesVm.nodesList, restangularizedItem);
             _.remove(workgroupNodesVm.selectedDocuments, restangularizedItem);
             workgroupNodesVm.tableParamsService.reloadTableParams();
           }, function(error) {
             if (error.status === 400 && error.data.errCode === 26006) {
-              toastService.error({key: 'GROWL_ALERT.ERROR.DELETE_ERROR.26006'});
+              toastService.error({key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26006'});
             } else if (error.data.errCode === 26444) {
-              toastService.error({key: 'GROWL_ALERT.ERROR.DELETE_ERROR.26444'});
+              toastService.error({key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26444'});
             }
           });
         });
@@ -547,21 +547,21 @@
           case 26444 :
             responses.push({
               'title': error.nodeItem.name,
-              'message': {key: 'GROWL_ALERT.ERROR.COPY_ERROR.26444'}
+              'message': {key: 'TOAST_ALERT.ERROR.COPY.26444'}
             });
             break;
           case 26445 :
           case 28005 :
             responses.push({
               'title': error.nodeItem.name,
-              'message': {key: 'GROWL_ALERT.ERROR.RENAME_NODE'}
+              'message': {key: 'TOAST_ALERT.ERROR.RENAME_NODE'}
             });
             break;
         }
       });
 
       toastService.error({
-        key: 'GROWL_ALERT.ERROR.BROWSER_ACTION',
+        key: 'TOAST_ALERT.ERROR.BROWSER_ACTION',
         pluralization: true,
         params: {
           action: isMove ? 'moved' : '',
@@ -580,14 +580,14 @@
      */
     function notifyBrowseActionSuccess(data, isMove) {
       toastService.success({
-        key: 'GROWL_ALERT.ACTION.BROWSER_ACTION',
+        key: 'TOAST_ALERT.ACTION.BROWSER_ACTION',
         pluralization: true,
         params: {
           singular: data.nodeItems.length <= 1 ? 'true' : '',
           action: isMove ? 'moved' : '',
           folderName: data.folder.name
         }
-      }, 'GROWL_ALERT.ACTION_BUTTON').then(function(response) {
+      }, 'TOAST_ALERT.ACTION_BUTTON').then(function(response) {
         if (!_.isUndefined(response)) {
           if (response.actionClicked) {
             var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
@@ -605,7 +605,7 @@
      */
     function notifyCopySuccess(nbNodes) {
       toastService.success({
-        key: 'GROWL_ALERT.ACTION.COPY_SAME_FOLDER',
+        key: 'TOAST_ALERT.ACTION.COPY_SAME_FOLDER',
         pluralization: true,
         params: {singular: nbNodes === 1 ? 'true' : ''}
       });
@@ -640,7 +640,7 @@
         if (nodeToRename.name !== data.name) {
           $timeout(function() {
             renameNode(data, 'td[uuid=' + data.uuid + '] .file-name-disp');
-            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
+            toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
           }, 0);
         } else {
           workgroupNodesVm.canCreateFolder = true;
@@ -649,7 +649,7 @@
         switch(error.data.errCode) {
           case 26445 :
           case 28005 :
-            toastService.error({key: 'GROWL_ALERT.ERROR.RENAME_NODE'});
+            toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
             renameNode(nodeToRename, itemNameElem);
             break;
           case lsErrorCode.CANCELLED_BY_USER:

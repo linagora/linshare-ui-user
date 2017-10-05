@@ -103,11 +103,11 @@
       $translate([
         'CONTACTS_LISTS_DETAILS.PRIVATE',
         'CONTACTS_LISTS_DETAILS.PUBLIC',
-        'GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'
+        'TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS'
       ]).then(function(translations) {
         privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
         publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
-        stillExists = translations['GROWL_ALERT.WARNING.CONTACT_STILL_EXISTS'];
+        stillExists = translations['TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS'];
       });
 
       // TODO directive to externalize this code
@@ -172,7 +172,7 @@
       _.forEach(items, function(restangularizedItem) {
         delete restangularizedItem.show;
         restangularizedItem.remove().then(function() {
-          $translate('GROWL_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
+          $translate('TOAST_ALERT.ACTION.DELETE_SINGULAR').then(function(message) {
             toastService.success({key: message});
           });
           _.remove(contactsListsContactsVm.itemsList, restangularizedItem);
@@ -292,7 +292,7 @@
       contactsListsContactsRestService.create(contactsListsContactsVm.contactsListUuid, contact).then(function(data) {
         setModelForEdit(data);
         contactsListsContactsVm.itemsList.push(data);
-        toastService.success({key: 'GROWL_ALERT.ACTION.INSERT'});
+        toastService.success({key: 'TOAST_ALERT.ACTION.INSERT'});
         contactsListsContactsVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsContactsVm.tableParams.reload();
       });
@@ -501,7 +501,7 @@
             contactsListsContactsVm
               .itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
             setModelForEdit(contactToSave);
-            $translate('GROWL_ALERT.ACTION.UPDATE').then(function(message) {
+            $translate('TOAST_ALERT.ACTION.UPDATE').then(function(message) {
               toastService.success({key: message});
             });
             contactsListsContactsVm.tableParams.reload();
