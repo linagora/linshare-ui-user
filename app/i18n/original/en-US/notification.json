@@ -61,7 +61,7 @@
     "ERROR": {
       "BROWSER_ACTION": "{nbNodes} {singular, select, true{file or folder} other{files or folders}} couldn't be {action, select, moved{moved} other{copied}}",
       "COPY": {
-        "DEFAULT": "{singular, select, true{One file} other{{nbItems} files}} could not have been copied",
+        "DEFAULT": "{singular, select, true{One file} other{{nbItems} files}} could not be copied",
         "26444": "You do not have sufficient rights to perform this operation"
       },
       "FILE_NOT_FOUND": "The selected file has not been found",
