@@ -62,6 +62,7 @@
     "ERROR": {
       "TBT__BROWSER_ACTION": "",
       "COPY": {
+        "TBT__DEFAULT": "",
         "TBT__26444": ""
       },
       "TBT__FILE_NOT_FOUND": "",

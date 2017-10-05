@@ -33,7 +33,8 @@
         "28403": "Vous n'etes pas autorisé à accéder à cet invité",
         "28405": "La liste de contact restreint de l'invité est vide",
         "28406": "La recherche pour les invités est invalide",
-        "38400": "La date d'expiration de l'invité est invalide"
+        "38400": "La date d'expiration de l'invité est invalide",
+        "46011": "Le quota du compte a été atteint"
       },
       "UPLOAD_ERROR": {
         "NONE": "Une erreur est survenue pendant l'envoi du fichier",

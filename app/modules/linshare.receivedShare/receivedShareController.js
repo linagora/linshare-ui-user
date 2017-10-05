@@ -10,8 +10,10 @@ angular.module('linshare.receivedShare')
   .controller('ReceivedController',
     function(_, $filter, $log, $scope, $q, $state, $timeout, $translate, $translatePartialLoader, $window,
       auditDetailsService, authenticationRestService, autocompleteUserRestService, browseService, documentSelected,
-      documentUtilsService, files, lsAppConfig, NgTableParams, receivedShareRestService, swal, toastService) {
+             documentUtilsService, files, lsAppConfig, NgTableParams, receivedShareRestService, ServerManagerService,
+             swal, toastService) {
       $translatePartialLoader.addPart('receivedShare');
+      $scope.copyIntoFiles = copyIntoFiles;
       $scope.documentSelected = documentSelected;
       $scope.multiDownload = multiDownload;
       $scope.openBrowser = openBrowser;
@@ -235,17 +237,31 @@ angular.module('linshare.receivedShare')
         });
       }
 
-      $scope.copyIntoFiles = function(selectedDocuments) {
+      /**
+       * @name copyIntoFiles
+       * @desc Copy selected files into the Personal Space
+       * @param {Array<Object>} selectedDocuments - Documents to copy
+       * @memberOf LinShare.receivedShare.ReceivedController
+       */
+      function copyIntoFiles(selectedDocuments) {
         if (!$scope.canUpload) {
           return;
         }
         if (!_.isArray(selectedDocuments)) {
           selectedDocuments = [selectedDocuments];
         }
-        _.forEach(selectedDocuments, function(file) {
-          receivedShareRestService.copy(file.uuid);
+        //TODO: success response should be managed globally in serverManagerService
+        receivedShareRestService.copy(selectedDocuments).then(function(promises) {
+          toastService.success({
+            key: 'TOAST_ALERT.ACTION.COPY',
+            pluralization: true,
+            params: {
+              singular: promises.length === 1,
+              nbItems: promises.length
+            }
+          });
         });
-      };
+      }
 
       /**
        * @name openBrowser

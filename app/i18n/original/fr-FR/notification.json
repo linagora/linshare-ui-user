@@ -61,6 +61,7 @@
     "ERROR": {
       "BROWSER_ACTION": "{nbNodes} {singular, select, true{élément n'a} other{éléments n'ont}} pas pu être {action, select, moved{déplacé{singular, select, true{} other{s}}} other{copié{singular, select, true{} other{s}}}}",
       "COPY": {
+        "DEFAULT": "{singular, select, true{Un fichier n'a pu être copié} other{{nbItems} fichiers n'ont pu être copiés}}",
         "26444": "Vous ne possédez pas les droits de copie"
       },
       "FILE_NOT_FOUND": "Le fichier sélectionné n'a pas été trouvé",
@@ -80,7 +81,7 @@
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs."
     },
     "WARNING": {
-      "AT_LEAST_ONE_RECIPIENT": "Saisissez un destinataire",
+      "AT_LEAST_ONE_RECIPIENT": "Saisissez au moins un destinaire ou une liste de contact",
       "AT_LEAST_ONE_DOCUMENT": "Aucun fichier n'est sélectionné",
       "CONTACT_STILL_EXISTS" : "est déjà dans la liste",
       "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",
@@ -92,7 +93,7 @@
       "ERROR_403": "Erreur {{errCode}} - Vous n'êtes pas autorisé à supprimer cet élément",
       "ERROR_400": "Erreur {{errCode}} - Suppression impossible",
       "ERROR_500": "Erreur {{errCode}} - Erreur du serveur",
-      "INVALID_EMAIL": "Email invalide",
+      "INVALID_EMAIL": "Courriel invalide",
       "ISOLATED_FILE": "Vous visualisez une selection restreinte de fichiers."
     }
   }

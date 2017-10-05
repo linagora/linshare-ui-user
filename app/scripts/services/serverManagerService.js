@@ -107,18 +107,18 @@
      * @param {string} [translation.messagePrefix] - The key of errors's type to show
      * @param {Object} [translation.params] - Parameters of the translated sentence
      * @param {boolean} [translation.pluralization] - Determine if the pluralization interpolation shall be used
-     * @param {boolean} isPrivate - Determine if the error shall be hidden or shown to the user as a toast
+     * @param {boolean} isSilent - Determine if the error shall be hidden or shown to the user as a toast
      * @returns {Promise} The array of rejected promise or array of all promises resolved
      * @memberOf linshareUiUserApp.ServerManagerService
      */
-    function multiResponsesHanlder(elements, translation, isPrivate) {
+    function multiResponsesHanlder(elements, translation, isSilent) {
       var
         successResponses = [],
         errorResponses = [],
         objectsReferences = _.map(elements, 'object'),
         responses = [];
 
-      isPrivate = _.isNil(isPrivate) ? false : isPrivate;
+      isSilent = _.isNil(isSilent) ? false : isSilent;
       translation.messagePrefix = _.isUndefined(translation.messagePrefix) ? 'DEFAULT' : translation.messagePrefix;
 
       elements = elements || [];
@@ -156,7 +156,7 @@
                 nbItems: errorResponses.length,
                 singular: errorResponses.length === 1
               }});
-            if (!isPrivate) {
+            if (!isSilent) {
               notify(true, errorTranslation, _.map(responsesPromises, 'value'));
             }
             return $q.reject(errorResponses);
@@ -172,19 +172,19 @@
      * @desc Manage server response
      * @param {Function} action - A function calling the server side
      * @param {String} messagePrefix - The key of errors's type to show
-     * @param {boolean} isPrivate - Determine if the error shall be hidden or shown to the user as a toast
+     * @param {boolean} isSilent - Determine if the error shall be hidden or shown to the user as a toast
      * @returns {Promise} The promise in resolve/reject of the function called
      * @memberOf linshareUiUserApp.ServerManagerService
      */
-    function responseHandler(action, messagePrefix, isPrivate) {
-      isPrivate = _.isNil(isPrivate) ? false : isPrivate;
+    function responseHandler(action, messagePrefix, isSilent) {
+      isSilent = _.isNil(isSilent) ? false : isSilent;
       messagePrefix = _.isUndefined(messagePrefix) ? 'DEFAULT' : messagePrefix;
 
       return action.then(function(data) {
         return $q.resolve(data);
       }).catch(function(error) {
         return errorHandler(error, messagePrefix).then(function(message) {
-          if (!isPrivate) {
+          if (!isSilent) {
             notify(true, {key:message});
           }
           return $q.reject(error);

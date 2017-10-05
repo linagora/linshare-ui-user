@@ -9,16 +9,19 @@
     .module('linshare.receivedShare')
     .factory('receivedShareRestService', receivedShareRestService);
 
-  receivedShareRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
+  receivedShareRestService.$inject = ['_', '$log', 'Restangular', 'ServerManagerService'];
 
   /**
    *  @namespace receivedShareRestService
    *  @desc Service to interact with ReceivedShare object by REST
    *  @memberOf LinShare.receivedShare
    */
-  function receivedShareRestService($log, Restangular, ServerManagerService) {
+  function receivedShareRestService(_, $log, Restangular, ServerManagerService) {
     var
-      handler = ServerManagerService.responseHandler,
+      handler = {
+        simple: ServerManagerService.responseHandler,
+        multi: ServerManagerService.multiResponsesHanlder
+      },
       restUrl = {
         documents: 'documents',
         receivedShares: 'received_shares'
@@ -39,17 +42,33 @@
 
     /**
      *  @name copy
-     *  @desc Copy a ReceivedShares object to the personal space
-     *  @param {String} uuid - The id of the ReceivedShares object
+     *  @desc Copy one or multiple ReceivedShares object to the personal space
+     *  @param {Object[]} documents - The ReceivedShares object
      *  @returns {Promise} server response
      *  @memberOf LinShare.receivedShare.receivedShareRestService
      */
-    function copy(uuid) {
-      $log.debug('LinshareReceivedShareRestService : copy', uuid);
-      return handler(Restangular.one(restUrl.documents).all('copy').post({
-        kind: 'RECEIVED_SHARE',
-        uuid: uuid
-      }));
+    function copy(documents) {
+      if (documents.length === 1) {
+         $log.debug('LinshareReceivedShareRestService : copy', documents[0].uuid);
+        return handler.simple(Restangular.one(restUrl.documents).all('copy').post({
+          kind: 'RECEIVED_SHARE',
+          uuid: documents[0].uuid
+        }));
+      } else {
+        $log.debug('LinshareReceivedShareRestService : copy multi');
+        var promises = [];
+        _.forEach(documents, function(object) {
+          var response = Restangular.one(restUrl.documents).all('copy').post({
+            kind: 'RECEIVED_SHARE',
+            uuid: object.uuid
+          });
+          promises.push({response: response, object: object});
+        });
+        return handler.multi(promises, {
+          key: 'COPY',
+          pluralization: true
+        });
+      }
     }
 
     /**
@@ -73,7 +92,7 @@
      */
     function get(uuid) {
       $log.debug('LinshareReceivedShareRestService : get', uuid);
-      return handler(Restangular.one(restUrl.receivedShares, uuid).get());
+      return handler.simple(Restangular.one(restUrl.receivedShares, uuid).get());
     }
 
     /**
@@ -85,7 +104,7 @@
      */
     function getAudit(receivedSharesUuid) {
       $log.debug('LinshareReceivedShareRestService : getAudit', receivedSharesUuid);
-      return handler(Restangular.one(restUrl.receivedShares, receivedSharesUuid).one('audit').get());
+      return handler.simple(Restangular.one(restUrl.receivedShares, receivedSharesUuid).one('audit').get());
     }
 
     /**
@@ -96,7 +115,7 @@
      */
     function getList() {
       $log.debug('LinshareReceivedShareRestService : getList');
-      return handler(Restangular.all(restUrl.receivedShares).getList());
+      return handler.simple(Restangular.all(restUrl.receivedShares).getList());
     }
 
     /**
@@ -108,7 +127,7 @@
      */
     function remove(uuid) {
       $log.debug('LinshareReceivedShareRestService : delete', uuid);
-      return handler(Restangular.one(restUrl.receivedShares, uuid).remove());
+      return handler.simple(Restangular.one(restUrl.receivedShares, uuid).remove());
     }
 
     /**
@@ -120,7 +139,7 @@
      */
     function thumbnail(uuid) {
       $log.debug('LinshareReceivedShareRestService : thumbnail', uuid);
-      return handler(Restangular.one(restUrl.receivedShares, uuid).one('thumbnail').get({
+      return handler.simple(Restangular.one(restUrl.receivedShares, uuid).one('thumbnail').get({
         base64: true
       }));
     }
