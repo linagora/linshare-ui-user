@@ -25,7 +25,7 @@
     "angular-ui-router": "1.0.6",
     "bootstrap": "3.3.2",
     "chosen": "1.8.0",
-    "flag-icon-css": "~2.3.1",
+    "flag-icon-css": "2.8.0",
     "font-awesome": "~4.3.0",
     "jquery.bootgrid": "1.2.0",
     "jquery-sparkline": "~2.1.3",
