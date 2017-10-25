@@ -27,7 +27,7 @@
     "chosen": "1.8.0",
     "flag-icon-css": "2.8.0",
     "font-awesome": "4.7.0",
-    "js-base64": "~2.1.7",
+    "js-base64": "2.1.9",
     "lodash": "4.17.4",
     "ng-flow": "2.7.4",
     "ng-table-bundle": "~4",
