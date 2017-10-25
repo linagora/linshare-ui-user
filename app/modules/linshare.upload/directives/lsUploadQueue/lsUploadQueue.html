@@ -94,7 +94,8 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-2 visible-xs" uib-dropdown="" uib-dropdown-toggle="">
+          <div class="col-xs-2 visible-xs whereisit" uib-dropdown="" uib-dropdown-toggle=""
+               is-open="isOpenItem" data-ng-class="{'open': isOpenItem}">
             <ul class="lv-actions actions align-list-icons">
               <li class="dropdown dropdown-standard pull-right">
                 <a>
@@ -102,7 +103,7 @@
                 </i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
-                    uib-dropdown-menu="">
+                    uib-dropdown-menu="" data-ng-class="{'open': isOpenItem}">
                   <li data-ng-if="!file.paused && !file.error" data-ng-hide="file.isComplete()">
                     <a href="" data-ng-click="uploadQueueVm.pauseFile(file)" event-propagation-stop>
                       <i class="zmdi zmdi-pause" title="{{::'SELECTION_TOOLBAR.PAUSE' | translate}}"></i>

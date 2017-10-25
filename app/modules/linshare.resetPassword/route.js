@@ -18,12 +18,15 @@
     $stateProvider
       .state('reset', {
         url: '/external/reset/:uuid',
+        params: {
+          uuid: ''
+        },
         templateUrl: 'modules/linshare.resetPassword/views/resetForm.html',
         controller: 'ResetPasswordController',
         controllerAs: 'resetVm',
         resolve: {
-          resetUuid: function($stateParams) {
-            return $stateParams.uuid;
+          resetUuid: function($transition$) {
+            return $transition$.params().uuid;
           }
         }
       });

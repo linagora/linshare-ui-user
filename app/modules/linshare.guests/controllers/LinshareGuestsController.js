@@ -11,7 +11,7 @@
     .controller('LinshareGuestsController', LinshareGuestsController);
 
   //TODO - KLE: Check DI
-  LinshareGuestsController.$inject = ['_', '$filter', '$scope', '$translate', '$translatePartialLoader',
+  LinshareGuestsController.$inject = ['_', '$filter', '$scope', '$transitions', '$translate', '$translatePartialLoader',
     'GuestObjectService', 'guestRestService', 'itemUtilsService', 'lsAppConfig', 'NgTableParams', 'toastService'];
 
   /**
@@ -21,8 +21,8 @@
    */
   // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
-  function LinshareGuestsController(_, $filter, $scope, $translate, $translatePartialLoader, GuestObjectService,
-    guestRestService, itemUtilsService, lsAppConfig, NgTableParams, toastService) {
+  function LinshareGuestsController(_, $filter, $scope, $transitions, $translate, $translatePartialLoader,
+    GuestObjectService, guestRestService, itemUtilsService, lsAppConfig, NgTableParams, toastService) {
     /* jshint validthis: true */
     var guestVm = this;
 
@@ -397,8 +397,8 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     };
 
-    //TODO - KLE: Set the multi-select on top of header nav bar for the mobile view
-    $scope.$on('$stateChangeSuccess', function() {
+    //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
+    $transitions.onSuccess({}, function() {
       angular.element('.multi-select-mobile').appendTo('body');
     });
 

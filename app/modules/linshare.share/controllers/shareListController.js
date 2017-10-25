@@ -88,6 +88,7 @@
      *  @memberOf LinShare.share.LinshareShareListController
      */
     function confirmCancel(item, callback) {
+      //TODO - TO REMOVE: Deprecated use md-dialog from angular material
       swal({
           title: swalTitle,
           text: swalText,

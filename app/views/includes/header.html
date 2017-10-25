@@ -22,7 +22,8 @@
     </li>
     <li class="pull-right">
       <ul class="top-menu">
-            <li class="dropdown" id="transfert-dropdown" uib-dropdown auto-close="outsideClick"
+            <li class="dropdown whereisit" id="transfert-dropdown" uib-dropdown auto-close="outsideClick"
+                is-open="isOpenUpload" data-ng-class="{'open': isOpenUpload}"
                 data-ng-if="mainVm.showTransfert">
                 <a data-ng-show="$flow.progress() > 0" uib-dropdown-toggle class="col-md-2 ctn-badge-count"
                    style="height: 15px;">
@@ -37,7 +38,8 @@
                 <a uib-dropdown-toggle href=""><i class="tm-icon ls-uploads"></i>
                   <i class="tm-icon icon-transfert" id="newUploadIcon" new-upload-bounce></i>
                 </a>
-                <div class="dropdown-menu pull-right dropdown-menu-lg action-link" uib-dropdown-menu>
+                <div class="dropdown-menu pull-right dropdown-menu-lg action-link" uib-dropdown-menu
+                     data-ng-class="{'open': isOpenUpload}">
                   <div class="listview">
                     <div class="lv-body">
                       <div data-ng-cloak="" class="tabsdemoDynamicHeight">

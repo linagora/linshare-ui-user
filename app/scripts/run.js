@@ -33,9 +33,12 @@ angular
       return $q;
     }]);
   }])
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false */
   .config(function(_, RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
                    $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider,
-                   tmhDynamicLocaleProvider) {
+                   tmhDynamicLocaleProvider, uibDatepickerPopupConfig) {
+    uibDatepickerPopupConfig.showButtonBar = false;
     lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
     $translateProvider.useLoader('$translatePartialLoader', {
@@ -118,7 +121,7 @@ angular
       .setNotify(true, true);
   })
 
-  .run(function($rootScope, $filter, $location, Restangular, $log, $window, localStorageService,
+  .run(function($rootScope, $filter, $location, $state, Restangular, $log, $window, localStorageService,
                 languageService, toastService) {
     $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
     var storedLocale = localStorageService.get('locale');
@@ -167,13 +170,6 @@ angular
       return true;
     });
 
-    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
-      $rootScope.toState = toState.name;
-      $rootScope.toParams = toParams;
-      $rootScope.fromState = fromState.name;
-      $rootScope.fromParams = fromParams;
-    });
-
     /*jshint unused: false */
     Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       $log.debug('addResponseInterceptor => response', response);
@@ -187,36 +183,44 @@ angular
       $log.debug('data from lsIntercept401', data);
     });
 
-    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
-      $rootScope.toState = toState.name;
-      $rootScope.fromState = fromState.name;
-    });
-
     $rootScope.$on('$translatePartialLoaderStructureChanged', function() {
       languageService.refreshLocale();
     });
+
+    $state.defaultErrorHandler(function(error) {
+      if (error.detail) {
+        var message = error.detail.statusText || error.detail.message || error.message;
+        $log.error('$transitions.onError - ', message);
+      } else {
+        $log.error('$transitions.onError - ', error);
+      }
+    });
+
   })
 
-  .run(function($rootScope, $state, $stateParams, Restangular, lsAppConfig, $window) {
+  .run(function($rootScope, Restangular, lsAppConfig, $window) {
     var protocol = $window.location.protocol;
     var host = $window.location.host.replace(/\/$/, '');
     var fqdn = protocol + '//' + host;
     lsAppConfig.backendUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
     Restangular.setBaseUrl(lsAppConfig.backendUrl);
-    $rootScope.$state = $state;
-    $rootScope.$stateParams = $stateParams;
-    $rootScope.linshareBaseUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
     $rootScope.linshareModeProduction = lsAppConfig.production;
-    $rootScope.linshareLicence= lsAppConfig.licence;
+    $rootScope.linshareLicence = lsAppConfig.licence;
   })
 
   .run(['$templateCache', '$http', function($templateCache, $http) {
-    $http.get('views/includes/templates.html', {
-      cache: $templateCache
+    $http.get('modules/linshare.components/working-date-picker/views/day.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/day.html', response.data);
     });
-  }])
-
-  .run(['$templateCache', function($templateCache) {
+    $http.get('modules/linshare.components/working-date-picker/views/month.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/month.html', response.data);
+    });
+    $http.get('modules/linshare.components/working-date-picker/views/year.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/year.html', response.data);
+    });
+    $http.get('modules/linshare.components/working-date-picker/views/popup.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/popup.html', response.data);
+    });
 
     $templateCache.get('views/includes/sidebar-right.html');
 

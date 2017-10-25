@@ -48,12 +48,13 @@
               </div>
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
                 <div class="dropdown dropdown-standard toolbar-mobile-item" uib-dropdown=""
-                     dropdown-append-to-body>
+                     dropdown-append-to-body is-open="isOpenOrder" data-ng-class="{'open':isOpenOrder}">
                   <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
                      x-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
                     <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                   </a>
-                  <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                  <ul data-ng-class="{'open':isOpenOrder}" class="dropdown-menu-right uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown"
+                      uib-dropdown-menu>
                     <li role="menuitem">
                       <a href="" class="center">
                         {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
@@ -127,20 +128,28 @@
                   </div>
                 </div>
               </div>
+              <div class="actions">
+                <a uib-dropdown dropdown-append-to-body
+                   auto-close="outsideClick" is-open="isOpenFilter" data-ng-class="{'open':isOpenFilter}"
+                   class="input-group-addon last clickable dropdown"
+                   x-ng-click="advancedFilterBool = !advancedFilterBool"
+                   uib-dropdown-toggle
+                   data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}">
+                  <i class="zmdi hidden-xs clickable ls-settings"></i>
+                  <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
+                    dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
+                    <!-- FILTER COMPONENT  -->
+                    <filter-box class="clearfix"
+                                filter-box-date="true"
+                                filter-box-items="contactsListsContactsVm.itemsList"
+                                filter-box-table="contactsListsContactsVm.tableParams">
+                    </filter-box>
+                  </ul>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- FILTER COMPONENT -->
-        <script type="text/ng-template" id="advanced-search.html">
-          <div id="search-filter-popover-ctn">
-            <filter-box class="clearfix"
-                        filter-box-date="true"
-                        filter-box-items="contactsListsContactsVm.itemsList"
-                        filter-box-table="contactsListsContactsVm.tableParams">
-            </filter-box>
-          </div>
-        </script>
       </div>
 
       <div id="drop-area">
@@ -355,13 +364,13 @@
                           </a>
                         </li>
                         <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                            auto-close="always" hover-dropdown-fix>
+                            auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
                           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                              event-propagation-stop class="set-col-12">
                             <i class="zmdi zmdi-more"></i>
                           </a>
-                          <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided
-                           dropdown-content-left">
+                          <ul uib-dropdown-menu class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided
+                           dropdown-content-left" data-ng-class="{'open':isOpenItem}">
                             <li>
                               <a href=""
                                  x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact,$event)">

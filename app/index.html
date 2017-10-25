@@ -10,34 +10,21 @@
    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="vendors/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="vendors/bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="vendors/bower_components/angular-growl-v2/build/angular-growl.css" />
-    <link rel="stylesheet" href="vendors/bower_components/animate.css/animate.css" />
-    <link rel="stylesheet" href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" />
-    <link rel="stylesheet" href="vendors/bower_components/angular-loading-bar/build/loading-bar.css" />
     <link rel="stylesheet" href="vendors/bower_components/chosen/chosen.css" />
-    <link rel="stylesheet" href="vendors/bower_components/waves/dist/waves.min.css" />
-    <link rel="stylesheet" href="vendors/bower_components/fullcalendar/dist/fullcalendar.css" />
-    <link rel="stylesheet" href="vendors/bower_components/sweetalert/dist/sweetalert.css" />
-    <link rel="stylesheet" href="vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.css" />
-    <link rel="stylesheet" href="vendors/bower_components/nouislider/jquery.nouislider.css" />
-    <link rel="stylesheet" href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="vendors/bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="vendors/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="vendors/bower_components/flag-icon-css/css/flag-icon.min.css" />
+    <link rel="stylesheet" href="vendors/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" />
     <link rel="stylesheet" href="vendors/bower_components/ng-table-bundle/ng-table.css" />
+    <link rel="stylesheet" href="vendors/bower_components/sweetalert/dist/sweetalert.css" />
+    <link rel="stylesheet" href="vendors/bower_components/waves/dist/waves.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
    <!-- build:css(app) styles/main.css -->
-   <link rel="stylesheet" href="modules/materialAdmin/css/app.min.1.css">
-   <link rel="stylesheet" href="modules/materialAdmin/css/app.min.2.css">
-   <link rel="stylesheet" href="modules/materialAdmin/css/demo.css">
+   <link rel="stylesheet" href="styles/materialAdmin.css">
    <link rel="stylesheet" href="styles/main.css">
    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main2.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/received.css">
-    <!-- endbuild -->
   </head>
   <body data-ng-controller="UiUserMainController as mainVm"
         data-ng-class="{'sw-toggled': mactrl.layoutType === '1', 'lock-scroll': mactrl.sidebarToggle.left}"
@@ -53,7 +40,6 @@
     <!-- bower:js -->
     <script src="vendors/bower_components/jquery/dist/jquery.js"></script>
     <script src="vendors/bower_components/angular/angular.js"></script>
-    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="vendors/bower_components/angular-animate/angular-animate.js"></script>
     <script src="vendors/bower_components/angular-aria/angular-aria.js"></script>
     <script src="vendors/bower_components/angular-cookies/angular-cookies.js"></script>
@@ -62,43 +48,29 @@
     <script src="vendors/bower_components/angular-route/angular-route.js"></script>
     <script src="vendors/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="vendors/bower_components/angular-touch/angular-touch.js"></script>
-    <script src="vendors/bower_components/lodash/lodash.js"></script>
-    <script src="vendors/bower_components/restangular/dist/restangular.js"></script>
-    <script src="vendors/bower_components/js-base64/base64.js"></script>
-    <script src="vendors/bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
     <script src="vendors/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="vendors/bower_components/flow.js/dist/flow.js"></script>
-    <script src="vendors/bower_components/ng-flow/dist/ng-flow.js"></script>
-    <script src="vendors/bower_components/angular-translate/angular-translate.js"></script>
-    <script src="vendors/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
-    <script src="vendors/bower_components/angular-growl-v2/build/angular-growl.js"></script>
-    <script src="vendors/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="vendors/bower_components/angular-loading-bar/build/loading-bar.js"></script>
-    <script src="vendors/bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="vendors/bower_components/chosen/chosen.jquery.js"></script>
-    <script src="vendors/bower_components/waves/dist/waves.min.js"></script>
-    <script src="vendors/bower_components/remarkable-bootstrap-growl/bootstrap-growl.js"></script>
-    <script src="vendors/bower_components/jquery-nicescroll/jquery.nicescroll.js"></script>
-    <script src="vendors/bower_components/moment/moment.js"></script>
-    <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.js"></script>
-    <script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.js"></script>
-    <script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.js"></script>
-    <script src="vendors/bower_components/jquery-sparkline/dist/jquery.sparkline.js"></script>
-    <script src="vendors/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-    <script src="vendors/bower_components/angular-moment/angular-moment.js"></script>
-    <script src="vendors/bower_components/nouislider/jquery.nouislider.min.js"></script>
-    <script src="vendors/bower_components/angular-nouislider/src/nouislider.js"></script>
-    <script src="vendors/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
-    <script src="vendors/bower_components/angular-material/angular-material.js"></script>
-    <script src="vendors/bower_components/angular-bootstrap-contextmenu/contextMenu.js"></script>
     <script src="vendors/bower_components/angular-chosen-localytics/dist/angular-chosen.js"></script>
-    <script src="vendors/bower_components/node-uuid/uuid.js"></script>
-    <script src="vendors/bower_components/ng-table-bundle/ng-table.js"></script>
+    <script src="vendors/bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="vendors/bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script src="vendors/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="vendors/bower_components/angular-material/angular-material.js"></script>
+    <script src="vendors/bower_components/angular-translate/angular-translate.js"></script>
     <script src="vendors/bower_components/messageformat/messageformat.js"></script>
     <script src="vendors/bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
-    <script src="vendors/bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="vendors/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="vendors/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="vendors/bower_components/js-base64/base64.js"></script>
+    <script src="vendors/bower_components/lodash/lodash.js"></script>
+    <script src="vendors/bower_components/moment/moment.js"></script>
+    <script src="vendors/bower_components/flow.js/dist/flow.js"></script>
+    <script src="vendors/bower_components/ng-flow/dist/ng-flow.js"></script>
+    <script src="vendors/bower_components/ng-table-bundle/ng-table.js"></script>
+    <script src="vendors/bower_components/node-uuid/uuid.js"></script>
+    <script src="vendors/bower_components/restangular/dist/restangular.js"></script>
+    <script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="vendors/bower_components/waves/dist/waves.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -120,7 +92,6 @@
     <script src="modules/linshare.components/browse/browseController.js"></script>
     <script src="modules/linshare.components/browse/browseService.js"></script>
     <script src="modules/linshare.components/dragAndDrop/dragAndDropDirective.js"></script>
-    <script src="modules/linshare.components/services/services.js"></script>
     <script src="modules/linshare.components/services/languageService.js"></script>
     <script src="modules/linshare.components/services/unit-service.js"></script>
     <script src="modules/linshare.components/filterBox/filterBoxDirective.js"></script>
@@ -157,6 +128,14 @@
     <script src="modules/linshare.document/directives/lsDocumentsTable/lsDocumentsTableDirective.js"></script>
     <script src="modules/linshare.document/directives/lsDocumentsTable/lsDocumentsMenuDirective.js"></script>
     <script src="modules/linshare.document/directives/lsItemSelectionDirective.js"></script>
+    <script src="modules/linshare.external/externalModule.js"></script>
+    <script src="modules/linshare.external/constants.js"></script>
+    <script src="modules/linshare.external/btn/btnDirective.js"></script>
+    <script src="modules/linshare.external/fgLine/fgLineDirective.js"></script>
+    <script src="modules/linshare.external/formControl/formControlDirective.js"></script>
+    <script src="modules/linshare.external/stopPropagate/stopPropagateDirective.js"></script>
+    <script src="modules/linshare.external/toggleSidebar/toggleSidebarDirective.js"></script>
+    <script src="modules/linshare.external/toggleSubmenu/toggleSubmenuDirective.js"></script>
     <script src="modules/linshare.upload/linshareUploadModule.js"></script>
     <script src="modules/linshare.upload/constants.js"></script>
     <script src="modules/linshare.upload/controllers/uploadQueueController.js"></script>
@@ -170,7 +149,6 @@
     <script src="modules/linshare.share/services/sharableDocumentService.js"></script>
     <script src="modules/linshare.share/controllers/shareController.js"></script>
     <script src="modules/linshare.share/controllers/shareListController.js"></script>
-    <script src="modules/linshare.share/controllers/sharedDocumentsController.js"></script>
     <script src="modules/linshare.components/autocompleteUsers/autocompleteUsersDirective.js"></script>
     <script src="modules/linshare.components/autocompleteUsers/autocompleteUsersController.js"></script>
     <script src="modules/linshare.components/autocompleteUsers/autocompleteUserRestService.js"></script>
@@ -204,7 +182,6 @@
     <script src="modules/linshare.sharedSpace/services/workGroupNodesRestService.js"></script>
     <script src="modules/linshare.sharedSpace/services/workGroupMemberRestService.js"></script>
     <script src="modules/linshare.sharedSpace/controllers/SharedSpaceController.js"></script>
-    <script src="modules/linshare.sharedSpace/directives/hoverDropdownFix.js"></script>
     <script src="modules/linshare.sharedSpace/controllers/workGroupMembersController.js"></script>
     <script src="modules/linshare.sharedSpace/controllers/WorkgroupNodesController.js"></script>
     <script src="modules/linshare.utils/linshareUtilsModule.js"></script>
@@ -212,19 +189,6 @@
     <script src="modules/linshare.utils/item/itemUtilsService.js"></script>
     <script src="modules/linshare.utils/item/itemUtilsConstant.js"></script>
 
-     <!-- App level -->
-    <script src="modules/materialAdmin/js/app.js"></script>
-    <script src="modules/materialAdmin/js/templates.js"></script>
-
-    <!-- Template Modules -->
-    <script src="modules/materialAdmin/js/modules/template.js"></script>
-    <script src="modules/materialAdmin/js/modules/ui.js"></script>
-    <script src="modules/materialAdmin/js/modules/charts/flot.js"></script>
-    <script src="modules/materialAdmin/js/modules/charts/other-charts.js"></script>
-    <script src="modules/materialAdmin/js/modules/form.js"></script>
-    <script src="modules/materialAdmin/js/controllers/ui-bootstrap.js"></script>
-    <script src="modules/materialAdmin/js/modules/media.js"></script>
-    <script src="modules/materialAdmin/js/modules/components.js"></script>
 
     <script src="scripts/app.js"></script>
     <script src="scripts/run.js"></script>

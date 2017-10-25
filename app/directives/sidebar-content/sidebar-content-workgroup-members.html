@@ -10,6 +10,7 @@
         <form role="form" class="clearfix fields-add-member no-right-inline-btn m-b-40" >
           <div class="form-group fg-line group-member-field-ctn col-xs-12 no-padding">
             <div class="select-chosen-wkgps col-xs-3 no-padding pull-left">
+              <!-- TODO: To replace by a dropdown to remove chosen dependency -->
               <select name="rights_select" id="rights_select" chosen
                       data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
                       disable-search="true"
@@ -52,13 +53,15 @@
               </div>
             </div>
             <div class="dropdown-filters">
-              <span uib-dropdown dropdown-append-to-body  class="dropdown link-dropdown"
-                    auto-close="outsideClick" hover-dropdown-fix>
+              <span uib-dropdown dropdown-append-to-body class="dropdown link-dropdown"
+                    is-open="isOpenMemberOrder" data-ng-class="{'open':isOpenMemberOrder}"
+                    auto-close="outsideClick">
                 <button class="plain-text-button share-link waves-effect"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                   <i class="ls-settings"></i>
                 </button>
-                <div uib-dropdown-menu class="uib-dropdown-menu dropdown-menu-right dm-icon double-drop">
+                <div uib-dropdown-menu class="uib-dropdown-menu dropdown-menu-right dm-icon double-drop"
+                     data-ng-class="{'open':isOpenMemberOrder}">
                   <div class="list-menu sort-dropdown">
                     <p>{{"MEMBER_TAB.SORT_BY" | translate}}</p>
                     <ul class="dropdown-menu dm-icon sort-menu">
@@ -158,7 +161,7 @@
             </div>
             <div x-ng-show="workgroupMemberVm.currentWorkgroupMember.admin" class="item-r actions">
                           <span uib-dropdown dropdown-append-to-body class="dropdown link-dropdown actions"
-                                auto-close="always" hover-dropdown-fix>
+                                auto-close="always" is-open="isOpenRights" data-ng-class="{'open':isOpenRights}">
                             <a class="plain-text-button share-link" href="javascript:void(0)"
                                uib-dropdown-toggle title="{{'MEMBER_TAB.EDIT_RIGHTS' | translate}}">
                               <i class="zmdi zmdi-edit"></i>

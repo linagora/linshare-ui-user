@@ -21,12 +21,11 @@
                       data-ng-click="beginDateOpened = true"
                       type="text"
                       class="form-control"
-                      datepicker-popup
+                      uib-datepicker-popup
                       show-weeks="false"
                       is-open="beginDateOpened"
-                      max-date="auditVm.endDate"
+                      datepicker-options="{maxDate: auditVm.endDate}"
                       data-ng-required="true"
-                      close-text="Close"
                       placeholder="{{::'TOOLBAR.FILTER_BEGINNING_DATE' | translate}}"
                       data-ng-model="auditVm.beginDate" />
                   </div>
@@ -42,13 +41,11 @@
                       data-ng-click="endDateOpened = true"
                       type="text"
                       class="form-control"
-                      datepicker-popup
+                      uib-datepicker-popup
                       show-weeks="false"
                       is-open="endDateOpened"
-                      min-date="auditVm.beginDate"
-                      max-date="auditVm.maxDate"
+                      datepicker-options="{minDate: auditVm.beginDate, maxDate: auditVm.maxDate}"
                       data-ng-required="true"
-                      close-text="Close"
                       placeholder="{{::'TOOLBAR.FILTER_ENDING_DATE' | translate}}"
                       data-ng-model="auditVm.endDate" />
                   </div>
@@ -59,12 +56,13 @@
               </button>
               <div class="fg-line toolbar-actions-items">
                 <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
-                  <div class="dropdown dropdown-standard toolbar-mobile-item" uib-dropdown="">
+                  <div class="dropdown dropdown-standard toolbar-mobile-item" uib-dropdown=""
+                       is-open="isOpenOrder" data-ng-class="{'open': isOpenOrder}">
                     <div class="actions">
                       <a href="" class="dropdown-toggle" uib-dropdown-toggle="" data-ng-disabled="disabled" aria-haspopup="true" aria-expanded="false">
                         <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                       </a>
-                      <ul class="uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                      <ul uib-dropdwon-menu class="uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown" data-ng-class="{'open': isOpenOrder}">
                         <li role="menuitem">
                           <a href="" class="center" translate>
                             TOOLBAR.ORDER_BY
@@ -222,14 +220,12 @@
               </td>
               <td data-title="'TABLE_HEADER.DETAIL' | translate" class="center">
                 <script type="text/ng-template" id="popover-details.html" audit-details="{{::auditAction}}"></script>
-                <div class="info-popover actions" data-ng-click="isOpen = !isOpen">
+                <div class="info-popover actions">
                   <a href=""
                      uib-popover-template="'popover-details.html'"
-                     popover-placement="bottom"
-                     popover-trigger="focus"
+                     popover-trigger="'outsideClick'"
                      popover-append-to-body="true"
-                     popover-placement="right"
-                     popover-is-open="isOpen"
+                     popover-placement="bottom-right"
                      popover-class="popover-info-audit set-popover-right m-r-10">
                     <i class="zmdi zmdi-info"></i>
                   </a>

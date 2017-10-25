@@ -121,7 +121,7 @@ md-toast {
     justify-content: center;
     span {
       align-self: center;
-      align-content: center;
+      flex: 0 0 auto;
       font-size: 1.2em;
       &.fa.fa-eye-slash {
         color: #fff;

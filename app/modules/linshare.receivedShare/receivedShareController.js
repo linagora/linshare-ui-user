@@ -8,7 +8,7 @@ angular.module('linshare.receivedShare')
   // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
   .controller('ReceivedController',
-    function(_, $filter, $log, $scope, $q, $state, $timeout, $translate, $translatePartialLoader, $window,
+    function(_, $filter, $log, $scope, $state, $q, $timeout, $transitions, $translate, $translatePartialLoader, $window,
       auditDetailsService, authenticationRestService, autocompleteUserRestService, browseService, documentSelected,
              documentUtilsService, files, lsAppConfig, NgTableParams, receivedShareRestService, ServerManagerService,
              swal, toastService) {
@@ -364,6 +364,7 @@ angular.module('linshare.receivedShare')
             nbFiles: $scope.selectedDocuments.length,
             totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
           }).then(function(swalText) {
+            //TODO - TO REMOVE: Deprecated use md-dialog from angular material
             swal({
                 title: swalMultipleDownloadTitle,
                 text: swalText,
@@ -613,7 +614,8 @@ angular.module('linshare.receivedShare')
         angular.element('#searchInMobileFiles').val('').trigger('change');
       };
 
-      $scope.$on('$stateChangeSuccess', function() {
+      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
+      $transitions.onSuccess({}, function() {
         angular.element('.multi-select-mobile').appendTo('body');
       });
 

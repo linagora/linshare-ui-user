@@ -58,7 +58,6 @@
 
       // For right sidebar
       activeShareDetails: 'active-share-details',
-      addMember: 'add-member',
       contactslists: 'contactslists',
       contactslistsAddContacts: 'contactslists-add-contacts',
       contactslistsContact: 'contactslists-contact',

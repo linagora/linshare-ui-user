@@ -35,9 +35,10 @@
         activateUserSpace: false,
         datepicker: {
           isEditable: false,
-          maxDate: null,
-          minDate: moment().endOf('day').valueOf(),
-          options: null
+          options: {
+            maxDate: null,
+            minDate: moment().endOf('day').valueOf()
+          }
         },
         display: {
           firstName: '',
@@ -206,7 +207,7 @@
       self = this;
       self.canUpload = _.clone(allowedToUpload.value);
       self.comment = '';
-      self.expirationDate = _.clone(form.datepicker.maxDate);
+      self.expirationDate = _.clone(form.datepicker.options.maxDate);
       self.firstName = '';
       self.form = _.cloneDeep(form);
       self.lastName = '';
@@ -231,9 +232,10 @@
       //  form.activateEditors = _.clone(allowedToRestrict.value);
       form.activateRestricted = setPropertyValue(self.restricted, allowedToRestrict.value);
       form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
-      form.datepicker.maxDate = _.clone(allowedToExpiration.value);
+      form.datepicker.options.maxDate = _.clone(allowedToExpiration.value);
       if (!_.isUndefined(self.uuid) && !(allowedToProlongExpiration.enable)) {
         form.datepicker.isEditable = false;
+        form.datepicker.options.maxDate = _.clone(self.expirationDate);
       }
       form.activateMoreOptions = (!form.activateUserSpace);
       if (_.isUndefined(self.uuid) && allowedToExpiration.canOverride) {

@@ -39,6 +39,7 @@
             <i class="fa fa-database" data-ng-class="{disabledIcon: !filterBoxVm.showUnit()}"></i>
           </span>
           <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showUnit()}">
+              <!-- TODO: To replace by a dropdown to remove chosen dependency -->
             <select chosen
                     data-placeholder-text-single="'{{::'FILTER_COMPONENT.UNIT' | translate}}'"
                     disable-search="true"
@@ -79,10 +80,11 @@
             </span>
             <div class="fg-line" data-ng-class="{'fg-toggled': dateStartOpened}">
               <input data-ng-disabled="!filterBoxVm.showDateRange()" data-ng-click="dateStartOpened = true" type="text"
-                     class="form-control" datepicker-popup filterBoxVm.show-weeks="false"
-                     is-open="dateStartOpened" max-date="filterBoxVm.maxDate"
-                     data-ng-required="true" close-text="Close"
+                     class="form-control" uib-datepicker-popup filterBoxVm.show-weeks="false"
+                     is-open="dateStartOpened"
+                     data-ng-required="true"
                      placeholder="{{::'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate}}"
+                     datepicker-options="{maxDate: filterBoxVm.dateEnd}"
                      data-ng-model="filterBoxVm.dateStart"/>
             </div>
           </div>
@@ -97,11 +99,11 @@
             <div class="fg-line" data-ng-class="{'fg-toggled': opened2}">
               <input data-ng-disabled="!filterBoxVm.showDateRange()" data-ng-click="dateEndOpened = true"
                      type="text" class="form-control"
-                     datepicker-popup filterBoxVm.show-weeks="false"
+                     uib-datepicker-popup filterBoxVm.show-weeks="false"
                      data-ng-model="filterBoxVm.dateEnd" is-open="dateEndOpened"
-                     max-date="filterBoxV.maxDate" min-date="filterBoxVm.dateStart"
+                     datepicker-options="{minDate: filterBoxVm.dateStart, maxDate: filterBoxVm.maxDate}"
                      data-ng-required="true"
-                     close-text="Close" placeholder="{{::'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate}}"/>
+                     placeholder="{{::'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE' | translate}}"/>
             </div>
           </div>
         </div>
@@ -111,6 +113,7 @@
               <i class="zmdi zmdi-calendar ma-icon" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange()}"></i>
             </span>
             <div class="fg-line" data-ng-class="{disabledIcon: !filterBoxVm.showDateRange()}">
+              <!-- TODO: To replace by a dropdown to rmeove chosen dependency -->
               <select chosen
                       data-placeholder-text-single="'{{::'FILTER_COMPONENT.DATE' | translate}}'"
                       disable-search="true"
@@ -119,8 +122,8 @@
                       class="form-control custumSelect outlineFFremove w-100"
                       data-ng-init="filterBoxVm.dateType = '1'"
                       data-ng-disabled="!filterBoxVm.showDateRange()">
-                <option value="1" translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</option>
-                <option value="2" translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</option>
+                <option value="1">{{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}</option>
+                <option value="2">{{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}</option>
               </select>
             </div>
           </div>

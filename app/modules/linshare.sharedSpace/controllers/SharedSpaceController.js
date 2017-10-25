@@ -3,10 +3,10 @@ angular.module('linshare.sharedSpace')
 // TODO: Should dispatch some function to other service or controller
 /* jshint maxparams: false, maxstatements: false */
   .controller('SharedSpaceController', function(_, $scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
-                                                $log, workgroups, $translate, $state, documentUtilsService,
-                                                filterBoxService, itemUtilsService, workgroupRestService,
-                                                auditDetailsService, lsAppConfig, lsErrorCode, toastService,
-                                                functionalityRestService) {
+                                                $log, workgroups, $transitions, $translate, $state,
+                                                documentUtilsService, filterBoxService, itemUtilsService,
+                                                workgroupRestService, auditDetailsService, lsAppConfig, lsErrorCode,
+                                                toastService, functionalityRestService) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
@@ -98,7 +98,8 @@ angular.module('linshare.sharedSpace')
       thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
     };
 
-    $scope.$on('$stateChangeSuccess', function() {
+    //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
+    $transitions.onSuccess({}, function() {
       angular.element('.multi-select-mobile').appendTo('body');
     });
     thisctrl.fabButton = {

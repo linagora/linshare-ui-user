@@ -135,20 +135,19 @@
         TODO: The directive shall be refactored with a proper template and passing different options.
               See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
       -->
-      <div class="datepicker-border-fix date-picker dp-blue col-xs-6 datepicker-drop-right"
+      <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
            x-ng-class="{'is-opened': opened == true}">
         <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
           <div class="form-inline">
             <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
-                   class="form-control date-picker-input" datepicker-popup
+                   class="form-control date-picker-input" uib-datepicker-popup
                    show-weeks="false"
                    is-open="opened"
-                   datepicker-options="mainVm.sidebar.getData().dateOptions"
-                   data-ng-required="true" close-text="Close"
+                   datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
+                                        maxDate: shareActionVm.newShare.expirationDate.value}"
+                   data-ng-required="true"
                    placeholder="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
-                   min-date="shareActionVm.newShare.getMinDate()"
                    min="{{shareActionVm.newShare.getMinDate() | date: 'fullDate'}}"
-                   max-date="shareActionVm.newShare.expirationDate.value"
                    max="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
                    data-ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
                    data-ng-model="shareActionVm.newShare.expirationDate.value"/>

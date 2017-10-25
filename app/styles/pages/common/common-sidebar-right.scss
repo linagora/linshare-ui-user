@@ -38,6 +38,9 @@ SIDEBAR RIGHT CONTAINER
     overflow-x: hidden;
     > div {
       height: 100%;
+      md-content {
+        background-color: #fff;
+      }
       #member-sidebar {
         height: 100%;
         div.tabs-demo-static-tabs.tab-nav-detail {

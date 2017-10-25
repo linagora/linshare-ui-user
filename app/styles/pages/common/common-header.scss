@@ -18,9 +18,15 @@
       border-bottom: solid 1px #eee;
       min-height: inherit;
       font-size: 0.9em;
-
+      display: flex;
+      &::before {
+      min-height: 16px;
+      }
       &.md-no-proxy, &.md-no-style {
         justify-content: space-between !important;
+      }
+      span:first-of-type {
+        flex: 1 1 auto;
       }
       span a {
         font-weight: 500;
@@ -43,6 +49,7 @@
       color: rgb(5, 177, 255) !important;
     }
     .md-tab {
+      background-color: #ffffff;
       font-weight: 500 !important;
       color: #989898 !important;
       font-size: 1em !important;
@@ -108,6 +115,7 @@
     margin: 0;
     padding: 8px 8px 8px 14px;
     border-bottom: solid 1px #eee;
+    background-color: #ffffff;
   }
   .lv-item.row:hover {
     background-color: #f8f8f8;

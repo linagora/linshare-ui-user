@@ -141,7 +141,7 @@
       > a {
         width: 25px;
         text-align: center;
-        a:hover {
+        a:hover, &.open {
           color: #05b1ff !important;
         }
       }

@@ -46,7 +46,6 @@ module.exports = function(config) {
       'vendors/bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js',
       'vendors/bower_components/angular-nouislider/src/nouislider.js',
       'app/modules/linshare.authentication/authenticationService.js',
-      'app/modules/materialAdmin/js/{,*/}*.js',
       'app/modules/linshare.authentication/{,*/}*.js',
       'app/modules/linshare.document/document.js',
       'app/modules/linshare.document/{,*/}*.js',
@@ -58,13 +57,6 @@ module.exports = function(config) {
       'app/scripts/{,*/}*.js',
       'test/unit/**/*.js'
     ],
-
-
-    // list of documents to exclude
-    exclude: [
-      'app/modules/materialAdmin/js/config.js'
-    ],
-
 
     // preprocess matching documents before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor

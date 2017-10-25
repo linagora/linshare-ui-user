@@ -5,17 +5,17 @@
     .module('linshare.document')
     .controller('selectedDocumentsController', selectedDocumentsController);
 
-  selectedDocumentsController.$inject = ['lsAppConfig'];
+  selectedDocumentsController.$inject = ['$scope', '$transition$', 'lsAppConfig'];
 
-  function selectedDocumentsController($scope, $stateParams, lsAppConfig) {
+  function selectedDocumentsController($scope, $transition$, lsAppConfig) {
     var isMobile = angular.element('html').hasClass('ismobile');
-    var param = $stateParams.selected;
+    var param = $transition$.params().selected;
 
     $scope.currentPage = '';
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.removeSelectedDocuments = removeSelectedDocuments;
-    $scope.selectedFlowIdentifiers = $stateParams.selected;
+    $scope.selectedFlowIdentifiers = $transition$.params().selected;
 
     activate();
 
