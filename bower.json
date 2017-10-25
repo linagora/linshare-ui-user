@@ -31,7 +31,7 @@
     "lodash": "4.17.4",
     "ng-flow": "2.7.7",
     "ng-table-bundle": "4.0.0",
-    "node-uuid": "^1.4.7",
+    "node-uuid": "1.4.7",
     "restangular": "1.5.2",
 
     "angular-bootstrap": "0.14.3",
