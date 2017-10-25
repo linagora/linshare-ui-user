@@ -252,7 +252,7 @@
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
                     uib-dropdown-menu  data-ng-class="{'open': isOpenToolbarMore}">
                   <li class="hidden-xs" data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
-                      x-ng-click="vm.loadSidebarContent(lsAppConfig.workgroup)">
+                      x-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, $event)">
                     <a href="">
                       <i class="zmdi zmdi-info "></i>
                       <span translate>ACTION.INFORMATION</span>
