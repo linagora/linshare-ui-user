@@ -173,6 +173,7 @@
         message = uploadQueueVm.warningMessagePlural;
       }
 
+      //TODO - TO REMOVE: Deprecated use md-dialog from angular material
       swal({
           html: true,
           title: title,

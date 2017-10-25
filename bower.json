@@ -37,11 +37,11 @@
     "ng-table-bundle": "4.0.0",
     "node-uuid": "1.4.7",
     "restangular": "1.6.1",
+    "sweetalert": "1.0.1",
 
     "angular-loading-bar": "~0.8.0",
     "angular-nouislider": "~0.3.1",
     "oclazyload": "~1.0.9",
-    "sweetalert": "1.0.1",
     "waves": "~0.7.5"
   },
   "overrides": {

@@ -324,6 +324,7 @@
           nbFiles: $scope.selectedDocuments.length,
           totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
         }).then(function(swalText) {
+          //TODO - TO REMOVE: Deprecated use md-dialog from angular material
           swal({
               title: swalMultipleDownloadTitle,
               text: swalText,

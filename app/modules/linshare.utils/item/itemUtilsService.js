@@ -84,6 +84,7 @@
           nbItems: items.length,
           singular: items.length <= 1 ? 'true' : 'other'
         }, 'messageformat').then(function(swalText) {
+          //TODO - TO REMOVE: Deprecated use md-dialog from angular material
           swal({
               title: swalTitle,
               text: swalText,
