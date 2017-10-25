@@ -252,7 +252,7 @@ body:not(.sw-toggled) #sidebar {
   position : relative
 }
 
-#navigation.c-overflow {
+#navigation {
   overflow-x: hidden;
   position: absolute;
   height: calc(100% - 100px);
@@ -262,12 +262,8 @@ body:not(.sw-toggled) #sidebar {
   width: 100%;
 }
 
-.c-overflow.mCustomScrollbar {
-  border-right: solid 2px #f0f0f0;
-}
-
 @media (max-width: 768px) {
-  #navigation.c-overflow {
+  #navigation {
     height: calc(100% - 50px);
   }
 }
