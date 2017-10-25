@@ -23,7 +23,7 @@
     "angular-translate-interpolation-messageformat": "2.15.2",
     "angular-translate-loader-partial": "2.15.2",
     "angular-ui-router": "1.0.6",
-    "bootstrap": "3.3.2",
+    "bootstrap": "3.3.7",
     "chosen": "1.8.0",
     "flag-icon-css": "2.8.0",
     "font-awesome": "4.7.0",
@@ -49,6 +49,12 @@
     "waves": "~0.7.5"
   },
   "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
     "font-awesome": {
       "main": [
         "css/font-awesome.css"
