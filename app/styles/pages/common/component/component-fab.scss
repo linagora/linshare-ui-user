@@ -186,7 +186,7 @@ button.md-fab {
   width: 100%;
   position: fixed;
   z-index: 15;
-  margin-top: calc(100% + 55px) !important;
+  bottom: 0;
 
   .md-toolbar-tools a.disabled-work-in-progress {
     color: $disabled important;
