@@ -131,7 +131,6 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/scripts/{,*/}*.js',
           '<%= yeoman.app %>/directives/*/*.js',
           '<%= yeoman.app %>/modules/**/*.js',
-          '!<%= yeoman.app %>/modules/materialAdmin/**/*.js',
           '!<%= yeoman.app %>/modules/**/test/karma.conf.js'
         ]
       },
@@ -210,7 +209,6 @@ module.exports = function(grunt) {
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: ['<%= yeoman.app %>/modules/materialAdmin/fonts', '<%= yeoman.app %>/styles/fonts'],
         importPath: './vendors/bower_components',
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
@@ -378,10 +376,8 @@ module.exports = function(grunt) {
             'views/{,*/}*.html',
             'directives/*/*.html',
             'modules/**/**/*.html',
-            '!modules/materialAdmin/views/*.html',
             'i18n/original/{,*/}*.json',
             'images/{,*/}*.{webp}',
-            'modules/materialAdmin/img/icons/{,*/}*',
             'scripts/config.js',
             'styles/fonts/{,*/}*.*'
           ]
@@ -404,16 +400,6 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'vendors/bower_components/font-awesome',
           src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
-        }, {
-          expand: true,
-          cwd: '<%= yeoman.app %>/modules/materialAdmin',
-          src: 'fonts/{,*/}*',
-          dest: '<%= yeoman.dist %>'
-        }, {
-          expand: true,
-          cwd: '<%= yeoman.app %>/modules/materialAdmin',
-          src: 'img/icons/{,*/}*',
           dest: '<%= yeoman.dist %>'
         }, {
           expand: true,
