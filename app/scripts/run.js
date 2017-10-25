@@ -221,9 +221,6 @@ angular
     $http.get('modules/linshare.components/working-date-picker/views/popup.html').then(function(response) {
       $templateCache.put('uib/template/datepicker/popup.html', response.data);
     });
-    $http.get('views/includes/templates.html', {
-      cache: $templateCache
-    });
 
     $templateCache.get('views/includes/sidebar-right.html');
 
