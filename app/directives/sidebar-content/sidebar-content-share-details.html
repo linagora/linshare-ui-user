@@ -47,32 +47,32 @@
               <p class="data">{{mainVm.sidebar.getData().recipientShareDetails.current.expirationDate |
                 date:'medium'}}</p>
               <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.EDIT' | translate}}" x-ng-init="isDatepickerOpened=false"
-                 class="disabled"
-                 x-ng-click="isDatepickerOpened = !isDatepickerOpened">
+                class="disabled"
+                x-ng-click="isDatepickerOpened = !isDatepickerOpened">
                 <i class="zmdi zmdi-edit"></i>
               </a>
               <div x-ng-show="shareActionVm.newShare.expirationDate.enable"
-                   class="col-xs-12 field-ctn clearfix x-ng-hide detail-share-exp-date"
-                   x-ng-hide="!isDatepickerOpened" id="dateField">
+                class="col-xs-12 field-ctn clearfix x-ng-hide detail-share-exp-date"
+                x-ng-hide="!isDatepickerOpened" id="dateField">
                 <label for="comment" class="labelDateExpiration col-xs-6">
                   {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
                 </label>
                 <!--
-                     TODO: The directive shall be refactored with a proper template and passing different options.
-                     See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
-                   -->
-                <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
-                     x-ng-class="{'is-opened': opened == true}">
+                TODO: The directive shall be refactored with a proper template and passing different options.
+                See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+                -->
+                <div class="datepicker-border-fix date-picker dp-blue"
+                  x-ng-class="{'is-opened': opened == true}">
                   <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
                     <div class="form-inline ">
                       <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
-                             class="form-control  date-picker-input"
-                             uib-datepicker-popup show-weeks="false" is-open="opened"
-                             min-date="minDate"
-                             datepicker-options="dateOptions" x-ng-required="true" close-text="Close"
-                             placeholder="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
-                             x-ng-disabled="!shareActionVm.newShare.expirationDate.userCanOverride"
-                             x-ng-model="shareActionVm.newShare.expirationDate.value"/>
+                      class="form-control  date-picker-input"
+                      uib-datepicker-popup show-weeks="false" is-open="opened"
+                      datepicker-options="::{minDate: shareActionVm.newShare.getMinDate()}"
+                      x-ng-required="true"
+                      placeholder="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
+                      x-ng-disabled="!shareActionVm.newShare.expirationDate.userCanOverride"
+                      x-ng-model="shareActionVm.newShare.expirationDate.value"/>
                     </div>
                   </div>
                 </div>

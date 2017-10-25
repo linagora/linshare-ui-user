@@ -33,9 +33,12 @@ angular
       return $q;
     }]);
   }])
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false */
   .config(function(_, RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
                    $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider,
-                   tmhDynamicLocaleProvider) {
+                   tmhDynamicLocaleProvider, uibDatepickerPopupConfig) {
+    uibDatepickerPopupConfig.showButtonBar = false;
     lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
     $translateProvider.useLoader('$translatePartialLoader', {
@@ -206,12 +209,21 @@ angular
   })
 
   .run(['$templateCache', '$http', function($templateCache, $http) {
+    $http.get('modules/linshare.components/working-date-picker/views/day.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/day.html', response.data);
+    });
+    $http.get('modules/linshare.components/working-date-picker/views/month.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/month.html', response.data);
+    });
+    $http.get('modules/linshare.components/working-date-picker/views/year.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/year.html', response.data);
+    });
+    $http.get('modules/linshare.components/working-date-picker/views/popup.html').then(function(response) {
+      $templateCache.put('uib/template/datepicker/popup.html', response.data);
+    });
     $http.get('views/includes/templates.html', {
       cache: $templateCache
     });
-  }])
-
-  .run(['$templateCache', function($templateCache) {
 
     $templateCache.get('views/includes/sidebar-right.html');
 

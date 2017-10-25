@@ -27,12 +27,12 @@
             </span>
             <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
               <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                   auto-close="always" hover-dropdown-fix>
+                   auto-close="always" is-open="isOpenOrder" data-ng-class="{'open':isOpenOrder}">
                 <div class="actions">
                   <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                     <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                   </a>
-                  <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown stop-propagate"
+                  <ul data-ng-class="{'open':isOpenOrder}" class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown stop-propagate"
                       uib-dropdown-menu="">
                     <li role="menuitem">
                       <a href="" class="center">
@@ -114,14 +114,14 @@
             <div class="actions">
               <a uib-dropdown dropdown-append-to-body
                  auto-close="outsideClick"
-                 hover-dropdown-fix
+                 is-open="isOpenFilter" data-ng-class="{'open':isOpenFilter}"
                  class="input-group-addon last clickable dropdown"
                  x-ng-click="advancedFilterBool = !advancedFilterBool"
                  uib-dropdown-toggle
                  data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate }}">
                 <i class="zmdi hidden-xs clickable ls-settings"></i>
-                <ul uib-dropdown-menu="" class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon
-                    dropdown-divided dropdown-content-left">
+                <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
+                    dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
                   <!-- FILTER COMPONENT  -->
                   <filter-box class="clearfix"
                               filter-box-size="true"
@@ -332,15 +332,15 @@
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
-                        <li  uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                             auto-close="always" hover-dropdown-fix>
+                        <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
+                             auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
                           <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                              event-propagation-stop>
                             <i class="zmdi zmdi-more"></i>
                           </a>
                           <ul
                             class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
-                            uib-dropdown-menu="">
+                            uib-dropdown-menu="" data-ng-class="{'open':isOpenItem}">
                             <li>
                               <a href="" x-ng-click="showCurrentFile(documentFile,$event)">
                                 <i class="zmdi zmdi-info"></i>

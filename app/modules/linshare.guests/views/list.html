@@ -42,12 +42,13 @@
               </div>
               <!-- TODO: mobile filter-->
               <div class="dropdown-filters  toolbar-mobile-item col-xs-3 visible-xs">
-                <span uib-dropdown class="dropdown link-dropdown" auto-close="outsideClick">
+                <span uib-dropdown class="dropdown link-dropdown" auto-close="outsideClick"
+                      is-open="isOpenTypeMobile" data-ng-class="{'open': isOpenTypeMobile}">
                   <a class="plain-txt-btn partage-link" href="javascript:void(0)"
                      uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                     <i class="zmdi zmdi-filter-list"></i>
                   </a>
-                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop">
+                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop" data-ng-class="{'open': isOpenTypeMobile}">
                     <div class="list-menu">
                       <p>{{"FILTER_COMPONENT.FILTER_BY" | translate}}</p>
                       <ul class="dropdown-menu dropdown-menu-right dm-icon filter-menu">
@@ -76,14 +77,15 @@
 
               <!-- Please enable the filtering feature according to the appropriate labels-->
               <div class="sort-dropdown col-xs-3 col-sm-12 toolbar-mobile-item">
-                <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body>
+                <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body is-open="isOpenOrder" data-ng-class="{'open':isOpenOrder}">
                   <div class="actions">
                     <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle=""
                        x-ng-disabled="disabled"
                        aria-haspopup="true" aria-expanded="false">
                       <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                     </a>
-                    <ul class="dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown">
+                    <ul data-ng-class="{'open':isOpenOrder}" class="dropdown-menu-right uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown"
+                        uib-dropdown-menu>
                       <li role="menuitem">
                         <a href="" class="center">
                           {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
@@ -167,13 +169,15 @@
             <div class="pull-right hidden-xs toggle-view-dropdown">
               <span class="filter-views ng-binding pull-left">{{"ACTION.DISPLAY" | translate}}:</span>
               <div class="dropdown-filters pull-left">
-                <span uib-dropdown class="dropdown link-dropdown" auto-close="outsideClick">
+                <span uib-dropdown class="dropdown link-dropdown" auto-close="outsideClick"
+                      is-open="isOpenType" data-ng-class="{'open': isOpenType}">
                   <a class="plain-txt-btn partage-link" href="javascript:void(0)"
                      uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
                     <span x-ng-bind="guestVm.currentView"></span>
                     <div><b></b></div>
                   </a>
-                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop toggle-views">
+                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop toggle-views"
+                       data-ng-class="{'open': isOpenType}">
                     <div class="list-menu">
                       <p>{{"FILTER_COMPONENT.FILTER_BY" | translate}}</p>
                       <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
@@ -408,12 +412,13 @@
                       </a>
                     </li>
                     <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                        auto-close="always" hover-dropdown-fix>
+                        auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
                       <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                          event-propagation-stop>
                       <i class="zmdi zmdi-more"></i>
                       </a>
-                      <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu="">
+                      <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided"
+                          uib-dropdown-menu="" data-ng-class="{'open':isOpenItem}">
                         <li x-ng-click="guestVm.showGuestDetails(guestData)">
                           <a href="" >
                             <i class="zmdi zmdi-info"></i>

@@ -13,11 +13,11 @@
    *  @desc Complementary date picker directive
    *  @example <div my-example></div>
         <input working-date-picker type="text" name="expirationDate" id="expirationDate"
-               x-ng-model="newGuestObject.expirationDate.value"
+               data-ng-model="newGuestObject.expirationDate.value"
                class="form-control date-picker-input" uib-datepicker-popup
-               is-open="opened" x-ng-click="open($event, 'opened')"
-               min-date="newGuestObject.datepicker.minDate"
-               max-date="newGuestObject.datepicker.maxDate"
+               is-open="opened" data-ng-click="open($event, 'opened')"
+               datepicker-options="{minDate: newGuestObject.datepicker.minDate,
+                                    maxDate: newGuestObject.datepicker.maxDate}
                min="{{newGuestObject.datepicker.minDate | date:'yyyy-MM-dd'}}"
                max="{{newGuestObject.datepicker.maxDate | date:'yyyy-MM-dd'}}"/>
    *  @memberOf LinShare.components

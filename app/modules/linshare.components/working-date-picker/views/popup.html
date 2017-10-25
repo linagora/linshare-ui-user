@@ -1,0 +1,7 @@
+<ul class="dropdown-menu" ng-keydown="keydown($event)">
+	<li ng-transclude></li>
+	<li ng-if="showButtonBar" class="dp-actions clearfix">
+        <button type="button" class="btn btn-link" ng-click="select('today')">{{ getText('current') }}</button>
+        <button type="button" class="btn btn-link" ng-click="close()">{{ getText('close') }}</button>
+	</li>
+</ul>

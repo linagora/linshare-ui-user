@@ -1,0 +1,32 @@
+<table role="grid" aria-labelledby="{{::uniqueId}}-title" aria-activedescendant="{{activeDateId}}" class="dp-table">
+  <thead>
+    <tr class="tr-dpnav">
+      <th>
+        <button type="button" class="pull-left btn-dp" ng-click="move(-1)" tabindex="-1">
+          <i class="zmdi zmdi-long-arrow-left"></i>
+        </button>
+      </th>
+      <th colspan="3">
+        <button id="{{::uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" type="button"
+                class="w-100 btn-dp" ng-click="toggleMode()" ng-disabled="datepickerMode === maxMode" tabindex="-1">
+          <div class="dp-title">{{title}}</div>
+        </button>
+      </th>
+      <th>
+        <button type="button" class="pull-right btn-dp" ng-click="move(1)" tabindex="-1">
+          <i class="zmdi zmdi-long-arrow-right"></i>
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in rows track by $index">
+      <td ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{::dt.uid}}">
+        <button type="button" class="w-100 btn-dp btn-dpbody"
+                ng-class="{'dp-selected': dt.selected, 'dp-active': isActive(dt)}" ng-click="select(dt.date)"
+                ng-disabled="dt.disabled" tabindex="-1">
+          <span ng-class="::{'dp-day-today': dt.current}">{{::dt.label}}</span></button>
+      </td>
+    </tr>
+  </tbody>
+</table>

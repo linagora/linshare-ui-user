@@ -28,7 +28,7 @@
     filterBoxVm.filterBoxTable = filterBoxService.getSetTable;
     filterBoxService.getSetTable(filterBoxVm.filterTable);
     filterBoxVm.formatLabel = formatLabel;
-    filterBoxVm.maxDate = $scope.maxDate ? null : new Date();
+    filterBoxVm.maxDate = moment().add(1, 'day').hours(23).minutes(59).seconds(59);
     filterBoxVm.reloadTable = filterBoxService.reloadTable;
     filterBoxVm.resetTableList = filterBoxService.resetTableList;
     filterBoxVm.showDateRange = filterBoxService.getSetDateFilter;

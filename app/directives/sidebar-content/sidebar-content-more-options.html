@@ -59,30 +59,29 @@
       <div data-ng-show="shareActionVm.newShare.enableUSDA.value && shareActionVm.newShare.enableUSDA.enable && shareActionVm.newShare.enableUSDA.canOverride &&
            shareActionVm.newShare.notificationDateForUSDA.canOverride"
            class="col-xs-12 field-ctn indented-form-dependency" id="dateField">
-        <label for="notificationDate">
-          {{"RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate}}:
-        </label>
-        <!--
-          TODO: The directive shall be refactored with a proper template and passing different options.
-                See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
-        -->
-        <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
-             data-ng-class="{'is-opened': opened2 == true}">
-          <div class="fg-line datepicker-ctn" data-ng-class="{'fg-toggled': opened2 == true}">
-            <div class="form-inline">
-              <input working-date-picker data-ng-click="open($event, 'opened2')" type="text"
-                     class="form-control  date-picker-input" uib-datepicker-popup
-                     show-weeks="false"
-                     is-open="opened2" datepicker-options="dateOptions"
-                     data-ng-required="true" close-text="Close"
-                     placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'medium'}}"
-                     min-date="shareActionVm.newShare.getMinDate()"
-                     min="{{shareActionVm.newShare.getMinDate() | date: 'fullDate'}}"
-                     max-date="shareActionVm.newShare.notificationDateForUSDA.value"
-                     max="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'fullDate'}}"
-                     data-ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
-                     data-ng-model="shareActionVm.newShare.notificationDateForUSDA.value"/>
-            </div>
+      <label for="notificationDate">
+        {{"RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate}}:
+      </label>
+      <!--
+        TODO: The directive shall be refactored with a proper template and passing different options.
+              See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+      -->
+      <div class="datepicker-border-fix date-picker dp-blue"
+           data--ng-class="{'is-opened': opened2 === true}">
+        <div class="fg-line datepicker-ctn" data-ng-class="{'fg-toggled': opened2 == true}">
+          <div class="form-inline">
+            <input working-date-picker data-ng-click="open($event, 'opened2')" type="text"
+                   class="form-control date-picker-input" uib-datepicker-popup
+                   show-weeks="false"
+                   is-open="opened2"
+                   datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
+                                        maxDate: shareActionVm.newShare.notificationDateForUSDA.value}"
+                   data-ng-required="true"
+                   placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'medium'}}"
+                   min="{{shareActionVm.newShare.getMinDate() | date: 'fullDate'}}"
+                   max="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'fullDate'}}"
+                   data-ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
+                   data-ng-model="shareActionVm.newShare.notificationDateForUSDA.value"/>
           </div>
         </div>
       </div>

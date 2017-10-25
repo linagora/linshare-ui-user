@@ -55,7 +55,7 @@
         TODO: The directive shall be refactored with a proper template and passing different options.
               See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
       -->
-      <div class="datepicker-border-fix date-picker dp-blue datepicker-drop-right"
+      <div class="datepicker-border-fix date-picker dp-blue"
            x-ng-class="{'is-opened': opened2}">
         <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened2}">
           <div class="form-inline clearfix">
@@ -65,9 +65,7 @@
                    uib-datepicker-popup
                    datepicker-options="guestObject.form.datepicker.options"
                    show-weeks="false" is-open="opened2"
-                   min-date="guestObject.form.datepicker.minDate"
                    min="{{guestObject.form.datepicker.minDate | date:'yyyy-MM-dd'}}"
-                   max-date="guestObject.form.datepicker.maxDate"
                    max="{{guestObject.form.datepicker.maxDate | date:'yyyy-MM-dd'}}"
                    x-ng-model="guestObject.expirationDate"
                    x-ng-disabled="!guestObject.form.datepicker.isEditable"/>

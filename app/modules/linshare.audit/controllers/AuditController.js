@@ -11,7 +11,8 @@
     .controller('AuditController', AuditController);
 
   AuditController.$inject = [
-    '_', '$filter', '$scope', '$translatePartialLoader', 'auditDetailsService', 'auditRestService', 'tableParamsService'
+    '_', '$filter', '$scope', '$translate', '$translatePartialLoader', 'auditDetailsService',
+    'auditRestService', 'lsAppConfig', 'moment', 'tableParamsService'
   ];
 
   /**
@@ -19,8 +20,8 @@
    * @desc Application audit management system controller
    * @memberOf LinShare.Audit
    */
-  function AuditController(_, $filter, $scope, $translatePartialLoader, auditDetailsService,
-    auditRestService, tableParamsService) {
+  function AuditController(_, $filter, $scope, $translate, $translatePartialLoader, auditDetailsService,
+    auditRestService, lsAppConfig, moment, tableParamsService) {
     /* jshint validthis: true */
     var auditVm = this;
 
@@ -29,7 +30,7 @@
     auditVm.beginDate = new Date();
     auditVm.endDate = new Date();
     auditVm.findAuditActionsByDate = findAuditActionsByDate;
-    auditVm.maxDate = new Date();
+    auditVm.maxDate = moment().add(1, 'day').hours(23).minutes(59).seconds(59);
     auditVm.tableFilterAction = [];
     auditVm.tableFilterType = [];
 

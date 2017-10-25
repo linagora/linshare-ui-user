@@ -11,13 +11,15 @@
       <div class="card-header">
         <div id="breadcrumb-wrap" class="deep-nav multi-toolbar-options">
           <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
-               uib-dropdown dropdown-append-to-body auto-close="always" hover-dropdown-fix
-               tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}">
+               uib-dropdown dropdown-append-to-body auto-close="always"
+               tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}"
+               is-open="isOpenNew" data-ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle >
-              <i class="zmdi zmdi-plus"></i>
+              <i class="zmdi zmdi-plus"
+                 data-ng-class="{'disabled': workgroupNodesVm.currentWorkgroupMember.readonly}"></i>
             </a>
             <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon labeled-dropdown dropdown-divided
-                add-menu-ctn" uib-dropdown-menu="">
+                       add-menu-ctn" uib-dropdown-menu="" data-ng-class="{'open':isOpenNew}">
               <li role="menuitem">
                 <a translate class="center">ACTION.NEW_ITEM</a>
               </li>
@@ -94,12 +96,15 @@
               </a>
             </div>
             <span class="explorer-previous-lvl dropdown dropdown-standard pull-left" uib-dropdown=""
-                  dropdown-append-to-body hover-dropdown-fix>
+                  is-open="isOpenBreadCrumb" data-ng-class="{'open': isOpenBreadCrumb}"
+                  dropdown-append-to-body>
               <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
 
               <a uib-dropdown-toggle="" class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
+                 data-ng-class="{'open': isOpenBreadCrumb}"
                  tooltip-popup-delay="700" uib-tooltip="{{BREADCRUMB_UPPER_LEVEL | translate}}">...</a>
               <div uib-dropdown-menu=""
+                   data-ng-class="{'open': isOpenBreadCrumb}"
                    class="uib-dropdown-menu dropdown-menu dm-icon double-drop dropdown-menu-left
                    explorer-content-dropdown">
                 <div class="list-menu">
@@ -169,14 +174,14 @@
               </a>
               <div class="col-xs-3 toolbar-mobile-item sort-dropdown">
                 <div class="dropdown dropdown-standard toolbar-mobile-item" uib-dropdown=""
-                     dropdown-append-to-body hover-dropdown-fix>
+                     dropdown-append-to-body is-open="isOpenOrder" data-ng-class="{'open':isOpenOrder}">
                   <div class="actions">
                     <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                       <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                     </a>
                     <ul
                       class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown
-                       sort-dropdown stop-propagate" uib-dropdown-menu="">
+                       sort-dropdown stop-propagate" uib-dropdown-menu="" data-ng-class="{'open':isOpenOrder}">
                       <li role="menuitem">
                         <a href="" class="center" translate>SELECTION_TOOLBAR.ORDER_BY</a>
                       </li>
@@ -258,14 +263,14 @@
               </div>
               <div class="actions">
                 <a uib-dropdown dropdown-append-to-body
-                   auto-close="outsideClick" hover-dropdown-fix
+                   auto-close="outsideClick" is-open="isOpenFilter" data-ng-class="{'open':isOpenFilter}"
                    class="input-group-addon last clickable dropdown"
                    data-ng-click="advancedFilterBool = !advancedFilterBool"
                    uib-dropdown-toggle
                    data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate }}">
                   <i class="zmdi hidden-xs clickable ls-settings"></i>
-                  <ul uib-dropdown-menu="" class="dropdown-menu uib-dropdown-menu dropdown-menu-right dm-icon
-                    dropdown-divided dropdown-content-left">
+                  <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
+                    dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
                     <!-- FILTER COMPONENT -->
                     <filter-box class="clearfix"
                                 filter-box-size="true"
@@ -364,11 +369,12 @@
             <span class="dropdown link-dropdown" uib-dropdown>
               <a class="plain-text-button share-link"
                  uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+                 is-open="isOpenToolbarMore" data-ng-class="{'open': isOpenToolbarMore}">
                 <i class="zmdi zmdi-more"></i>
                 <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
-                  uib-dropdown-menu="">
+                  uib-dropdown-menu="" data-ng-class="{'open': isOpenToolbarMore}">
                 <li data-ng-class="{'disable-link': workgroupNodesVm.selectedDocuments.length > 1}"
                     data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
                   <a href="">
@@ -582,13 +588,13 @@
                             </a>
                           </li>
                           <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                              auto-close="always" hover-dropdown-fix>
+                              auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
                             <a title="{{::'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
                                class="set-col-12" event-propagation-stop>
                               <i class="zmdi zmdi-more"></i>
                             </a>
                             <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
-                             dropdown-divided dropdown-submenu" uib-dropdown-menu="">
+                             dropdown-divided dropdown-submenu" uib-dropdown-menu="" data-ng-class="{'open':isOpenItem}">
                               <li event-propagation-stop
                                   data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
                                 <a href="">
