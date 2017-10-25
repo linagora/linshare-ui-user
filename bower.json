@@ -30,7 +30,7 @@
     "js-base64": "2.1.9",
     "lodash": "4.17.4",
     "ng-flow": "2.7.7",
-    "ng-table-bundle": "~4",
+    "ng-table-bundle": "4.0.0",
     "node-uuid": "^1.4.7",
     "restangular": "1.5.2",
 
