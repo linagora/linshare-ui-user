@@ -31,7 +31,6 @@ angular.module('linshareUiUserApp', [
   'pascalprecht.translate',
   'materialAdmin',
   'ngMaterial',
-  'ui.bootstrap.contextMenu',
   'localytics.directives',
   'linshare.anonymousUrl',
   'linshare.resetPassword',
