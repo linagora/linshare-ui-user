@@ -24,7 +24,7 @@
     "angular-translate-loader-partial": "2.15.2",
     "angular-ui-router": "1.0.6",
     "bootstrap": "3.3.2",
-    "chosen": "~1.5.1",
+    "chosen": "1.8.0",
     "flag-icon-css": "~2.3.1",
     "font-awesome": "~4.3.0",
     "jquery.bootgrid": "1.2.0",
