@@ -140,7 +140,7 @@
         <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
           <div class="form-inline">
             <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
-                   class="form-control date-picker-input" datepicker-popup
+                   class="form-control date-picker-input" uib-datepicker-popup
                    show-weeks="false"
                    is-open="opened"
                    datepicker-options="mainVm.sidebar.getData().dateOptions"

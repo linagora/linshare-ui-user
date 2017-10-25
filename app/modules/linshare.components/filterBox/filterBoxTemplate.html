@@ -79,7 +79,7 @@
             </span>
             <div class="fg-line" data-ng-class="{'fg-toggled': dateStartOpened}">
               <input data-ng-disabled="!filterBoxVm.showDateRange()" data-ng-click="dateStartOpened = true" type="text"
-                     class="form-control" datepicker-popup filterBoxVm.show-weeks="false"
+                     class="form-control" uib-datepicker-popup filterBoxVm.show-weeks="false"
                      is-open="dateStartOpened" max-date="filterBoxVm.maxDate"
                      data-ng-required="true" close-text="Close"
                      placeholder="{{::'FILTER_COMPONENT.FILTER_BY_DATE.BEGINNING_DATE' | translate}}"
@@ -97,7 +97,7 @@
             <div class="fg-line" data-ng-class="{'fg-toggled': opened2}">
               <input data-ng-disabled="!filterBoxVm.showDateRange()" data-ng-click="dateEndOpened = true"
                      type="text" class="form-control"
-                     datepicker-popup filterBoxVm.show-weeks="false"
+                     uib-datepicker-popup filterBoxVm.show-weeks="false"
                      data-ng-model="filterBoxVm.dateEnd" is-open="dateEndOpened"
                      max-date="filterBoxV.maxDate" min-date="filterBoxVm.dateStart"
                      data-ng-required="true"
