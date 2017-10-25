@@ -49,9 +49,11 @@
               <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.EDIT' | translate}}" x-ng-init="isDatepickerOpened=false"
                 class="disabled"
                 x-ng-click="isDatepickerOpened = !isDatepickerOpened">
-                <i class="zmdi zmdi-edit"></i>
+                <i data-ng-if="!linshareModeProduction" class="zmdi zmdi-edit"></i>
+                <i data-ng-if="linshareModeProduction" class="zmdi zmdi-calendar-check"></i>
               </a>
               <div x-ng-show="shareActionVm.newShare.expirationDate.enable"
+                data-ng-if="!linshareModeProduction"
                 class="col-xs-12 field-ctn clearfix x-ng-hide detail-share-exp-date"
                 x-ng-hide="!isDatepickerOpened" id="dateField">
                 <label for="comment" class="labelDateExpiration col-xs-6">
