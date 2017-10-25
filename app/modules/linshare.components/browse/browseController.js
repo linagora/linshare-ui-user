@@ -9,16 +9,18 @@
     .module('linshare.components')
     .controller('browseController', BrowseController);
 
-  BrowseController.$inject = ['_', '$q', '$scope', '$timeout', '$translate', 'itemUtilsService', 'lsErrorCode',
-    'toastService', 'workgroupRestService', 'workgroupNodesRestService'];
+  BrowseController.$inject = ['_', '$q', '$scope', '$timeout', '$transitions', '$translate', 'itemUtilsService',
+  'lsErrorCode', 'toastService', 'workgroupRestService', 'workgroupNodesRestService'];
 
   /**
    * @namespace BrowseController
    * @desc Controller of browse component
    * @memberOf linshare.components
    */
-  function BrowseController(_, $q, $scope, $timeout, $translate, itemUtilsService, lsErrorCode, toastService,
-                            workgroupRestService, workgroupNodesRestService) {
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false */
+  function BrowseController(_, $q, $scope, $timeout, $transitions, $translate, itemUtilsService, lsErrorCode,
+      toastService, workgroupRestService, workgroupNodesRestService) {
     /* jshint validthis:true */
     var browseVm = this;
 
@@ -49,7 +51,7 @@
 
       loadBrowseList();
 
-      $scope.$on('$stateChangeStart', function() {
+      $transitions.onStart({}, function() {
         browseVm.$mdDialog.cancel();
       });
     }

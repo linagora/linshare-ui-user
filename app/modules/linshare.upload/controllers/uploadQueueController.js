@@ -10,7 +10,7 @@
     .controller('uploadQueueController', uploadQueueController);
 
   uploadQueueController.$inject = [
-    '_', '$log', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+    '_', '$log', '$q', '$scope', '$state', '$timeout', '$transition$', '$translate',
     '$translatePartialLoader', 'authenticationRestService', 'flowUploadService', 'functionalityRestService',
     'lsAppConfig', 'swal', 'toastService'
   ];
@@ -22,13 +22,13 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function uploadQueueController(_, $log, $q, $scope, $state, $stateParams, $timeout, $translate,
+  function uploadQueueController(_, $log, $q, $scope, $state, $timeout, $transition$, $translate,
                                  $translatePartialLoader, authenticationRestService, flowUploadService,
                                  functionalityRestService, lsAppConfig, swal, toastService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
-    var idUpload = $stateParams.idUpload;
-    var openSidebar = $stateParams.openSidebar;
+    var idUpload = $transition$.idUpload;
+    var openSidebar = $transition$.params().openSidebar;
 
     $scope.lengthOfSelectedDocuments = lengthOfSelectedDocuments;
     $scope.resetSelectedDocuments = resetSelectedDocuments;
@@ -50,7 +50,7 @@
     uploadQueueVm.currentPage = 'upload';
     uploadQueueVm.currentSelectedDocument = {};
     uploadQueueVm.flowUploadService = flowUploadService;
-    uploadQueueVm.fromWhere = $stateParams.from;
+    uploadQueueVm.fromWhere = $transition$.params().from;
     uploadQueueVm.identifiers = [];
     uploadQueueVm.isflowUploadingError = false;
     uploadQueueVm.isFromMySpace = (uploadQueueVm.fromWhere === $scope.mySpacePage);

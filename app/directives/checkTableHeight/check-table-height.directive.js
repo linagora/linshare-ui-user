@@ -9,7 +9,7 @@
     .module('linshareUiUserApp')
     .directive('checkTableHeight', checkTableHeight);
 
-  checkTableHeight.$inject = ['$rootScope', '$timeout'];
+  checkTableHeight.$inject = ['$rootScope', '$timeout', '$transitions'];
 
   /**
    *  @namespace checkTableHeight
@@ -17,7 +17,7 @@
    *  @example <tr check-table-height></tr>
    *  @memberOf linshareUiUserApp
    */
-  function checkTableHeight($rootScope, $timeout) {
+  function checkTableHeight($rootScope, $timeout, $transitions) {
     var directive = {
       restrict: 'A',
       controller: 'CheckTableHeightController',
@@ -37,7 +37,7 @@
      *  @memberOf LinShare.components.lsAutocompleteUsers
      */
     function linkFn(scope, element, attrs, checkTableHeightVm) {
-      scope.$on('$stateChangeSuccess', function() {
+      $transitions.onSuccess({}, function() {
         scope.mactrl.sidebarToggle.left = checkTableHeightVm.checkAndSetNewWidth();
         checkTableHeightVm.checkAndSetNewWidthSidebarRight();
         checkTableHeightVm.resizeTableBody();

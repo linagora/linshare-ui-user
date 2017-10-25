@@ -18,8 +18,9 @@
    */
   function routerConfiguration(_, $stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function($injector) {
-      $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService) {
-        authRedirect($state, authenticationRestService);
+      $injector.invoke(['$state', 'authenticationRestService',
+        function($state, authenticationRestService) {
+          authRedirect($state, null, authenticationRestService);
       }]);
     });
 
@@ -42,15 +43,7 @@
         parent: 'common',
         url: '/home',
         templateUrl: 'views/home/home.html',
-        controller: 'HomeController',
-        resolve: {
-          user: function(user) {
-            return user;
-          },
-          functionalities: function(functionalities) {
-            return functionalities;
-          }
-        }
+        controller: 'HomeController'
       })
       .state('login', {
         url: '/login?next',
@@ -58,12 +51,13 @@
         controller: 'loginController',
         controllerAs: 'loginVm',
         params: {
-          loginRequired: undefined
+          loginRequired: false
         },
         resolve: {
-          authentication: function($state, $stateParams, authenticationRestService) {
-           if (!$stateParams.loginRequired) {
-            authRedirect($state, authenticationRestService);
+          authentication: function($state, $transition$, authenticationRestService) {
+           if (!$transition$.params().loginRequired) {
+           $transition$.abort();
+            authRedirect($state, $transition$, authenticationRestService);
            }
           }
         }
@@ -82,23 +76,15 @@
           uploadedFileUuid: null
         },
         resolve: {
-          functionality: function($state, functionalities, user) {
+          functionality: function($state, $transition$, user) {
             if (!user.canUpload) {
+              $transition$.abort();
               $state.go('home');
             }
           },
           documentsList: function(LinshareDocumentRestService) {
             return LinshareDocumentRestService.getList();
           }
-        }
-      })
-      .state('documents.files.selected', {
-        url: '/selected_files',
-        templateUrl: 'modules/linshare.document/views/selected_files.html',
-        controller: 'selectedDocumentsController',
-        params: {
-          'selected': null,
-          'hiddenParam': 'YES'
         }
       })
       .state('documents.received', {
@@ -112,79 +98,62 @@
           files: function(receivedShareRestService) {
             return receivedShareRestService.getList();
           },
-          documentSelected: function($stateParams, files) {
-            if (_.isUndefined($stateParams.fileUuid)) {
+          documentSelected: function($transition$, files) {
+            if (_.isUndefined($transition$.params().fileUuid)) {
               return null;
             }
             return _.find(files, function(doc) {
-              return doc.uuid === $stateParams.fileUuid;
+              return doc.uuid === $transition$.params().fileUuid;
             });
           }
         }
-      })
-      .state('documents.shared', {
-        url: '/shared',
-        templateUrl: 'modules/linshare.share/views/shared.html',
-        controller: 'LinshareShareController',
-        resolve: {
-          sharedDocumentsList: function(LinshareShareService) {
-            return LinshareShareService.getList();
-          }
-        }
-      })
-      .state('documents.share', {
-        url: '/share',
-        templateUrl: 'views/documents/shareModal.html',
-        controller: 'ReceivedController'
       })
       .state('documents.upload', {
         url: '/upload/:from',
         params: {
           idUpload: null,
-          openSidebar: null
+          openSidebar: null,
+          from: ''
         },
         templateUrl: 'modules/linshare.upload/views/lsUpload.html',
         controller: 'uploadQueueController',
         controllerAs: 'uploadQueueVm',
         resolve: {
-          functionality: function($state, functionalities, user) {
+          functionality: function($state, $transition$, functionalities, user) {
             if (!functionalities.WORK_GROUP.enable && !user.canUpload) {
+              $transition$.abort();
               $state.go('home');
             }
           },
-          checkUrl: function($state, $stateParams, functionalities, lsAppConfig, user) {
-            switch ($stateParams.from) {
+          checkUrl: function($state, $transition$, functionalities, lsAppConfig, user) {
+            switch ($transition$.params().from) {
               case lsAppConfig.mySpacePage:
                 if (!user.canUpload) {
-                  $state.go('documents.upload', {
-                    from: lsAppConfig.workgroupPage
-                  });
-                  $stateParams.from = lsAppConfig.workgroupPage;
+                  $transition$.abort();
+                  if (!functionalities.WORK_GROUP.enable) {
+                    $state.go('home');
+                  } else {
+                    $state.go('documents.upload', {from: lsAppConfig.workgroupPage});
+                  }
                 }
                 break;
               case lsAppConfig.workgroupPage:
                 if (!functionalities.WORK_GROUP.enable) {
-                  $state.go('documents.upload', {
-                    from: lsAppConfig.mySpacePage
-                  });
-                  $stateParams.from = lsAppConfig.mySpacePage;
+                  $transition$.abort();
+                  if (!user.canUpload) {
+                    $state.go('home');
+                  } else {
+                    $state.go('documents.upload', {from: lsAppConfig.mySpacePage});
+                  }
                 }
                 break;
               default:
-                $state.go('documents.upload', {
-                  from: lsAppConfig.mySpacePage
-                });
-                $stateParams.from = lsAppConfig.mySpacePage;
+                $transition$.abort();
+                $state.go('documents.upload', {from: lsAppConfig.mySpacePage});
                 break;
             }
           }
         }
-      })
-      .state('documents.profile', {
-        url: '/profile',
-        templateUrl: 'views/common/user-profile.html',
-        controller: 'AuthenticationController',
-        controllerAs: 'authenticationVm'
       })
       .state('sharedspace', {
         parent: 'common',
@@ -192,8 +161,9 @@
         url: '/sharedspace',
         template: '<div ui-view></div>',
         resolve: {
-          functionality: function($state, functionalities) {
+          functionality: function($state, $transition$, functionalities) {
             if (!functionalities.WORK_GROUP.enable) {
+              $transition$.abort();
               $state.go('home');
             }
           },
@@ -204,8 +174,7 @@
         templateUrl: 'modules/linshare.sharedSpace/views/workgroups.html',
         controller: 'SharedSpaceController as vm',
         resolve: {
-          workgroups: function(workgroupRestService,
-          /* jshint ignore:line */ functionalities) { //TODO: will be removed with update ui-router > 1.0
+          workgroups: function(workgroupRestService) {
             return workgroupRestService.getList();
           }
         }
@@ -221,19 +190,19 @@
         controller: 'WorkgroupNodesController as workgroupNodesVm',
         params: {
           uploadedFileUuid: null,
-          parentUuid: null
+          parentUuid: null,
+          workgroupName: ''
         },
         resolve: {
-          currentFolder: function(workgroupNodesRestService, $stateParams,
-          /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
-            return workgroupNodesRestService.get($stateParams.workgroupUuid, $stateParams.workgroupUuid, true);
+          currentFolder: function(workgroupNodesRestService, $transition$) {
+            return workgroupNodesRestService.get(
+              $transition$.params().workgroupUuid, $transition$.params().workgroupUuid, true);
           },
-          nodesList: function(workgroupNodesRestService, $stateParams,
-          /* jshint ignore:line */ functionalities) { //TODO: will be removed with update ui-router > 1.0
-            return workgroupNodesRestService.getList($stateParams.workgroupUuid);
+          nodesList: function(workgroupNodesRestService, $transition$) {
+            return workgroupNodesRestService.getList($transition$.params().workgroupUuid);
           },
-          workgroup: function($stateParams, workgroupRestService) {
-            return workgroupRestService.get($stateParams.workgroupUuid, false).then(function(workgroup) {
+          workgroup: function($transition$, workgroupRestService) {
+            return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
               return workgroup;
             });
           }
@@ -255,19 +224,20 @@
           uploadedFileUuid: null,
           parentUuid: null,
           folderUuid: null,
-          folderName: null
+          workgroupName: '',
+          folderName: ''
         },
         resolve: {
-          currentFolder: function(workgroupNodesRestService, $stateParams,
-          /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
-            return workgroupNodesRestService.get($stateParams.workgroupUuid, $stateParams.folderUuid, true);
+          currentFolder: function(workgroupNodesRestService, $transition$) {
+            return workgroupNodesRestService.get(
+              $transition$.params().workgroupUuid, $transition$.params().folderUuid, true);
           },
-          nodesList: function(workgroupNodesRestService, $stateParams,
-          /* jshint ignore:line */functionalities) { //TODO: will be removed with update ui-router > 1.0
-            return workgroupNodesRestService.getList($stateParams.workgroupUuid, $stateParams.folderUuid);
+          nodesList: function(workgroupNodesRestService, $transition$) {
+            return workgroupNodesRestService.getList(
+              $transition$.params().workgroupUuid, $transition$.params().folderUuid);
           },
-          workgroup: function($stateParams, workgroupRestService) {
-            return workgroupRestService.get($stateParams.workgroupUuid, false).then(function(workgroup) {
+          workgroup: function($transition$, workgroupRestService) {
+            return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
               return workgroup;
             });
           }
@@ -295,8 +265,9 @@
         url: '/contactslists',
         template: '<div ui-view></div>',
         resolve: {
-          functionality: function($state, functionalities) {
+          functionality: function($state, $transition$, functionalities) {
             if (!functionalities.CONTACTS_LIST.enable) {
+              $transition$.abort();
               $state.go('home');
             }
           }
@@ -305,49 +276,40 @@
       .state('administration.contactslists.list', {
         url: '/:from',
         params: {
-          createNew: undefined
+          createNew: false,
+          from: ''
         },
         templateUrl: 'modules/linshare.contactsLists/views/contactsListsList.html',
         controller: 'contactsListsListController',
         controllerAs: 'contactsListsListVm',
         resolve: {
-          checkUrl: function($state, $stateParams, lsAppConfig,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
-            if ($stateParams.from.length === 0) {
-              $stateParams.from = lsAppConfig.contactsListsMinePage;
-            } else if ($stateParams.from !== lsAppConfig.contactsListsMinePage &&
-                $stateParams.from !== lsAppConfig.contactsListsOthersPage) {
-              return $state.go('administration.contactslists.list', {
+          checkUrl: function($state, $transition$, lsAppConfig) {
+          var from = $transition$.params().from;
+            if (from === '' ||
+              (from !== lsAppConfig.contactsListsMinePage && from !== lsAppConfig.contactsListsOthersPage)) {
+              $transition$.abort();
+              $state.go('administration.contactslists.list', {
                 from: lsAppConfig.contactsListsMinePage
               });
             }
           },
-          createNew: function($stateParams,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
-            return _.isUndefined($stateParams.createNew) ? false : $stateParams.createNew;
-          },
-          contactsListsList: function($stateParams, lsAppConfig, contactsListsListRestService,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
-            return contactsListsListRestService.getList($stateParams.from !== lsAppConfig.contactsListsOthersPage);
+          contactsListsList: function($transition$, lsAppConfig, contactsListsListRestService) {
+            return contactsListsListRestService.getList(
+              $transition$.params().from !== lsAppConfig.contactsListsOthersPage);
           }
         }
       })
       .state('administration.contactslists.list.contacts', {
         url: '/:contactsListUuid/:contactsListName/contacts',
         params: {
-          addContacts: undefined
+          addContacts: false
         },
         templateUrl: 'modules/linshare.contactsLists/views/contactsListsContacts.html',
         controller: 'contactsListsContactsController',
         controllerAs: 'contactsListsContactsVm',
         resolve: {
-          addContacts: function($stateParams,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
-            return _.isUndefined($stateParams.addContacts) ? false : $stateParams.addContacts;
-          },
-          contactsListsContacts: function(contactsListsContactsRestService, $stateParams,
-          /* jshint ignore:line */ functionality) { //TODO: will be removed with update ui-router > 1.0
-            return contactsListsContactsRestService.getList($stateParams.contactsListUuid);
+          contactsListsContacts: function(contactsListsContactsRestService, $transition$) {
+            return contactsListsContactsRestService.getList($transition$.params().contactsListUuid);
           }
         }
       })
@@ -357,17 +319,20 @@
         controller: 'LinshareGuestsController',
         controllerAs: 'guestVm',
         resolve: {
-          functionality: function($state, functionalities) {
+          functionality: function($state, $transition$, functionalities) {
             if (_.isNil(functionalities.GUESTS)) {
+              $transition$.abort();
               $state.go('home');
             } else {
               if (!functionalities.GUESTS.enable) {
+              $transition$.abort();
                 $state.go('home');
               }
             }
           },
-          userType: function($state, lsAppConfig, user) {
+          userType: function($state, $transition$, lsAppConfig, user) {
             if (user.accountType === lsAppConfig.accountType.guest) {
+              $transition$.abort();
               $state.go('home');
             }
           }
@@ -375,15 +340,11 @@
       })
       .state('administration.users', {
         url: '/users',
-        templateUrl: 'views/home/main.html',
+        templateUrl: 'views/home/main.html'
       })
       .state('administration.groups', {
         url: '/sharedspace',
-        templateUrl: 'views/home/main.html',
-      })
-      .state('administration.hidden_links', {
-        url: '/hidden_links',
-        templateUrl: 'views/common/hidden_links.html'
+        templateUrl: 'views/home/main.html'
       })
       .state('upload_request', {
         parent: 'common',
@@ -399,11 +360,7 @@
         url: '/audit_global',
         templateUrl: 'modules/linshare.audit/views/auditList.html',
         controller: 'AuditController',
-        controllerAs: 'auditVm',
-      })
-      .state('audit.upload_request', {
-        url: '/audit_upload_request',
-        templateUrl: 'views/home/main.html'
+        controllerAs: 'auditVm'
       })
       .state('share', {
         parent: 'common',
@@ -416,6 +373,9 @@
         controller: 'LinshareShareListController',
         controllerAs: 'shareListVm',
         resolve: {
+          $transitions$: function($transition$) {
+            return $transition$;
+          },
           previousState: function($state) {
             var currentStateData = {
               Name: $state.current.name,
@@ -423,8 +383,8 @@
             };
             return currentStateData;
           },
-          shareIndex: function($stateParams) {
-            return $stateParams.id;
+          shareIndex: function($transition$) {
+            return $transition$.params().id;
           }
         }
       });
@@ -436,12 +396,18 @@
      * @param {Object} authenticationRestService - Service for authentication
      * @memberOf LinShareUiUserApp.routerConfiguration
      */
-    function authRedirect($state, authenticationRestService) {
+    function authRedirect($state, $transition$, authenticationRestService) {
       authenticationRestService.checkAuthentication(false, true).then(function(data) {
         if (_.isUndefined(data.status)) {
+          if ($transition$) {
+            $transition$.abort();
+          }
           $state.go('home');
         } else {
           if (!$state.is('login')) {
+            if ($transition$) {
+              $transition$.abort();
+            }
             $state.go('login', {loginRequired: true});
           }
         }

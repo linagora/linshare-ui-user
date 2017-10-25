@@ -8,8 +8,8 @@
     .module('linshare.contactsLists')
     .controller('contactsListsContactsController', contactsListsContactsController);
 
-  contactsListsContactsController.$inject = ['_', '$filter', '$scope', '$stateParams', '$timeout', '$translate',
-    '$translatePartialLoader', 'addContacts', 'contactsListsContacts', 'contactsListsListRestService',
+  contactsListsContactsController.$inject = ['_', '$filter', '$scope', '$timeout', '$transition$', '$transitions',
+    '$translate', '$translatePartialLoader', 'contactsListsContacts', 'contactsListsListRestService',
     'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'itemUtilsService',
     'lsAppConfig', 'NgTableParams', 'toastService'
   ];
@@ -21,8 +21,8 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function contactsListsContactsController(_, $filter, $scope, $stateParams, $timeout, $translate,
-    $translatePartialLoader, addContacts, contactsListsContacts, contactsListsListRestService,
+  function contactsListsContactsController(_, $filter, $scope, $timeout, $transition$, $transitions, $translate,
+    $translatePartialLoader, contactsListsContacts, contactsListsListRestService,
     contactsListsContactsRestService, contactsListsService, documentUtilsService, itemUtilsService, lsAppConfig,
     NgTableParams, toastService) {
     /* jshint validthis:true */
@@ -31,12 +31,12 @@
       privateList,
       publicList,
       stillExists;
-    contactsListsContactsVm.addContacts = addContacts;
+    contactsListsContactsVm.addContacts = $transition$.params().addContacts;
     contactsListsContactsVm.addRecipientToCreateUsersList = addRecipientToCreateUsersList;
     contactsListsContactsVm.addSelectedDocument = addSelectedDocument;
     contactsListsContactsVm.closeSearch = closeSearch;
-    contactsListsContactsVm.contactsListName = $stateParams.contactsListName;
-    contactsListsContactsVm.contactsListUuid = $stateParams.contactsListUuid;
+    contactsListsContactsVm.contactsListName = $transition$.params().contactsListName;
+    contactsListsContactsVm.contactsListUuid = $transition$.params().contactsListUuid;
     contactsListsContactsVm.currentSelectedDocument = {};
     contactsListsContactsVm.deleteContact = deleteContact;
     contactsListsContactsVm.flagsOnSelectedPages = {};
@@ -110,8 +110,8 @@
         stillExists = translations['TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS'];
       });
 
-      // TODO directive to externalize this code
-      $scope.$on('$stateChangeSuccess', function() {
+      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
+      $transitions.onSuccess({}, function() {
         angular.element('.multi-select-mobile').appendTo('body');
       });
     }

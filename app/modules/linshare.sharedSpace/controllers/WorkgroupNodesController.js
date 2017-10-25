@@ -10,7 +10,7 @@
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
   WorkgroupNodesController.$inject = [
-    '_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout', '$translate',
+    '_', '$filter', '$q', '$scope', '$state', '$timeout', '$transition$', '$translate',
     '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
     'filterBoxService', 'flowUploadService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
     'toastService', 'workgroup', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'
@@ -21,7 +21,7 @@
    * @memberOf LinShare.sharedSpace
    */
   /* jshint maxparams: false, maxstatements: false */
-  function WorkgroupNodesController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
+  function WorkgroupNodesController(_, $filter, $q, $scope, $state, $timeout, $transition$, $translate,
                                     $translatePartialLoader, auditDetailsService, browseService, currentFolder,
                                     documentUtilsService, filterBoxService, flowUploadService, lsAppConfig, lsErrorCode,
                                     nodesList, swal, tableParamsService, toastService, workgroup, workgroupRestService,
@@ -48,7 +48,7 @@
     workgroupNodesVm.deleteNodes = deleteNodes;
     workgroupNodesVm.downloadFile = downloadFile;
     workgroupNodesVm.flowUploadService = flowUploadService;
-    workgroupNodesVm.folderDetails = $stateParams;
+    workgroupNodesVm.folderDetails = _.cloneDeep($transition$.params());
     workgroupNodesVm.getNodeDetails = getNodeDetails;
     workgroupNodesVm.goToFolder = goToFolder;
     workgroupNodesVm.goToPreviousFolder = goToPreviousFolder;

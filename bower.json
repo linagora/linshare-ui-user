@@ -22,7 +22,7 @@
     "angular-translate": "2.15.2",
     "angular-translate-interpolation-messageformat": "2.15.2",
     "angular-translate-loader-partial": "2.15.2",
-    "angular-ui-router": "~0.2.15",
+    "angular-ui-router": "1.0.6",
     "bootstrap": "3.3.2",
     "chosen": "~1.5.1",
     "flag-icon-css": "~2.3.1",

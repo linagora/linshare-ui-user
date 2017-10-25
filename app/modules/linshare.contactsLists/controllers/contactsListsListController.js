@@ -9,11 +9,11 @@
     .module('linshare.contactsLists')
     .controller('contactsListsListController', contactsListsListController);
 
-  contactsListsListController.$inject = ['_', '$filter', '$q', '$scope', '$state', '$stateParams', '$timeout',
-    '$translate', '$translatePartialLoader', 'auditDetailsService', 'contactsListsList', 'contactsListsListRestService',
-    'contactsListsContactsRestService', 'contactsListsService', 'createNew', 'documentUtilsService',
-    'functionalityRestService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'moment', 'NgTableParams',
-    'toastService'
+  contactsListsListController.$inject = ['_', '$filter', '$q', '$scope', '$state', '$timeout',
+    '$transition$', '$transitions', '$translate', '$translatePartialLoader', 'auditDetailsService', 'contactsListsList',
+    'contactsListsListRestService', 'contactsListsContactsRestService', 'contactsListsService',
+    'documentUtilsService', 'functionalityRestService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'moment',
+    'NgTableParams', 'toastService'
   ];
 
   /**
@@ -23,9 +23,9 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function contactsListsListController(_, $filter, $q, $scope, $state, $stateParams, $timeout, $translate,
+  function contactsListsListController(_, $filter, $q, $scope, $state, $timeout, $transition$, $transitions, $translate,
     $translatePartialLoader, auditDetailsService, contactsListsList, contactsListsListRestService,
-    contactsListsContactsRestService, contactsListsService, createNew, documentUtilsService, functionalityRestService,
+    contactsListsContactsRestService, contactsListsService, documentUtilsService, functionalityRestService,
     itemUtilsService, lsAppConfig, lsErrorCode, moment, NgTableParams, toastService) {
 
     /* jshint validthis:true */
@@ -45,7 +45,7 @@
     contactsListsListVm.contactsListsOthersPage = lsAppConfig.contactsListsOthersPage;
     contactsListsListVm.contactsToAddList = [];
     contactsListsListVm.createContactsList = createContactsList;
-    contactsListsListVm.createNew = createNew;
+    contactsListsListVm.createNew = $transition$.params().createNew;
     contactsListsListVm.currentSelectedDocument = {};
     contactsListsListVm.deleteContactsList = deleteContactsList;
     contactsListsListVm.duplicateItem = duplicateItem;
@@ -56,7 +56,7 @@
     contactsListsListVm.goToContactsListAndAddContacts = goToContactsListAndAddContacts;
     contactsListsListVm.goToContactsListTarget = goToContactsListTarget;
     contactsListsListVm.goToMineAndCreateContactsList = goToMineAndCreateContactsList;
-    contactsListsListVm.isFromMyContactsLists = ($stateParams.from === lsAppConfig.contactsListsMinePage);
+    contactsListsListVm.isFromMyContactsLists = ($transition$.params().from === lsAppConfig.contactsListsMinePage);
     contactsListsListVm.itemsList = contactsListsList;
     contactsListsListVm.loadSidebarContent = loadSidebarContent;
     contactsListsListVm.loadTable = loadTable;
@@ -125,7 +125,8 @@
         }
       }, 0);
 
-      $scope.$on('$stateChangeSuccess', function() {
+      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
+      $transitions.onSuccess({}, function() {
         angular.element('.multi-select-mobile.contact-list-multi-mobile').appendTo('body');
       });
 

@@ -12,18 +12,16 @@
 
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
-  UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$window',
-                                  'authenticationRestService', 'checkTableHeightService', 'flowUploadService',
-                                  'functionalityRestService', 'LinshareUserService', 'lsAppConfig', 'MenuService',
-                                  'sharableDocumentService', 'ShareObjectService', 'sidebarService', 'toastService',
-                                  'uploadRestService'
-                                 ];
+  UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$transitions',
+    '$window', 'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
+    'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
+    'sidebarService', 'toastService', 'uploadRestService'
+  ];
 
-  function UiUserMainController(_, $http, $log, $q, $rootScope, $scope, $state, $timeout, $window,
-                                authenticationRestService, checkTableHeightService, flowUploadService,
-                                functionalityRestService, LinshareUserService, lsAppConfig, MenuService,
-                                sharableDocumentService, ShareObjectService, sidebarService, toastService,
-                                uploadRestService) {
+  function UiUserMainController(_, $http, $log, $q, $rootScope, $scope, $state, $timeout, $transitions, $window,
+    authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
+    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService, sidebarService,
+    toastService, uploadRestService) {
     /* jshint validthis:true */
     var mainVm = this;
 
@@ -152,19 +150,46 @@
         });
       });
 
-      $rootScope.$on('$stateChangeStart', function(event, toState) {
+      $transitions.onStart({}, function(trans) {
+        var
+          toState = trans.to(),
+          toParams = trans.params(),
+          fromState = trans.from(),
+          fromParams = trans.params('from');
+
         mainVm.sidebar.hide();
-        $q.all([MenuService.getProperties(toState.name, false), MenuService.getProperties(toState.name, true)])
-          .then(function(promises) {
-            $scope.currentState = promises[0];
-            $scope.linkActive = promises[1];
-          });
+
+        $rootScope.toState = toState.name;
+        $rootScope.toParams = toParams;
+        $rootScope.fromState = fromState.name;
+        $rootScope.fromParams = fromParams;
       });
 
-      // always scroll to top upon reload
-      $rootScope.$on('$stateChangeSuccess', function() {
-        $window.scrollTo(0,0);
+      $transitions.onSuccess({}, function() {
+        // always scroll to top upon reload
+        window.scrollTo(0,0);
+
+        $q.all([
+          MenuService.getProperties($rootScope.toState, false),
+          MenuService.getProperties($rootScope.toState, true)
+        ]).then(function(promises) {
+            $scope.currentState = promises[0];
+            $scope.linkActive = promises[1];
+        });
       });
+
+      $transitions.onError({}, function(trans) {
+        var error = trans.error();
+        if (error.detail) {
+          trans.abort();
+          if (error.detail.status >= 500 || error.detail.status === 401) {
+            $state.go(URL_LOGIN);
+          } else {
+            $state.go(URL_HOME);
+          }
+        }
+      });
+
 
       // TODO: please translate into a directive
       // disables scale for mobile phones
@@ -177,15 +202,6 @@
       // scroll to input upon focus
       angular.element('input textarea').on('focus', function() {
         angular.element('body').scrollTop = this.offset().top + 70;
-      });
-
-      $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
-        $log.debug('$stateChangeError - ', error);
-        if (error.status < 500 && error.status !== 401) {
-          $state.go(URL_HOME);
-        } else {
-          $state.go(URL_LOGIN);
-        }
       });
 
       $scope.$on('event:auth-loginConfirmed', function(event, data) {

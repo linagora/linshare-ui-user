@@ -25,9 +25,10 @@
           error: undefined
         },
         resolve: {
-          message: function($state, $stateParams) {
+          message: function($state, $transition$) {
             var message = 'ANONYMOUS_URL.HOME.';
-            return _.isUndefined($stateParams.error) ? message + 'MESSAGE' : message + $stateParams.error.status;
+            var params = $transition$.params();
+            return _.isUndefined(params.error) ? message + 'MESSAGE' : message + params.error.status;
           }
         },
         controller: 'AnonymousHomeController',
@@ -39,13 +40,13 @@
         controller: 'AnonymousUrlController',
         controllerAs: 'anonymousUrlVm',
         resolve: {
-          anonymousUrlData: function($q, $state, $stateParams, anonymousUrlService) {
+          anonymousUrlData: function($q, $state, $transition$, anonymousUrlService) {
             var deferred = $q.defer();
-            anonymousUrlService.getAnonymousUrl($stateParams.uuid).then(function(data) {
+            anonymousUrlService.getAnonymousUrl($transition$.params().uuid).then(function(data) {
               var urlData = data.data;
               if ( _.isUndefined(urlData.uuid)) {
                 urlData.protectedByPassword = true;
-                urlData.uuid = $stateParams.uuid;
+                urlData.uuid = $transition$.params().uuid;
               } else {
                 urlData.protectedByPassword = false;
               }

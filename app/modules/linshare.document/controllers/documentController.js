@@ -8,8 +8,9 @@
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   function documentController(_, $filter, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader,
-    $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, lsAppConfig, toastService, $stateParams,
-    tableParamsService, auditDetailsService, swal, LinshareShareService, browseService, $state) {
+    $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, lsAppConfig, toastService,
+    tableParamsService, auditDetailsService, swal, LinshareShareService, browseService ,$state, $transitions,
+    $transition$) {
 
     var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
 
@@ -102,7 +103,8 @@
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
 
-      $scope.$on('$stateChangeSuccess', function() {
+      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
+      $transitions.onSuccess({}, function() {
         angular.element('.multi-select-mobile').appendTo('body');
       });
 
@@ -267,7 +269,7 @@
      * @memberOf LinShare.document.documentController
      */
     function launchTableParamsInitiation() {
-      var fileToSearch = $stateParams.fileUuid || $stateParams.uploadedFileUuid;
+      var fileToSearch = $transition$.params().fileUuid || $transition$.params().uploadedFileUuid;
       tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, fileToSearch)
         .then(function(data) {
           $scope.tableParamsService = tableParamsService;
@@ -283,7 +285,7 @@
           $scope.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
           $scope.reloadDocuments = reloadDocuments;
 
-        if ($stateParams.fileUuid) {
+          if ($transition$.params().fileUuid) {
           if (_.isNil(data.itemToSelect)) {
             toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
           } else {

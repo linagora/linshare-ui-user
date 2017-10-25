@@ -118,7 +118,7 @@ angular
       .setNotify(true, true);
   })
 
-  .run(function($rootScope, $filter, $location, Restangular, $log, $window, localStorageService,
+  .run(function($rootScope, $filter, $location, $state, Restangular, $log, $window, localStorageService,
                 languageService, toastService) {
     $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
     var storedLocale = localStorageService.get('locale');
@@ -167,13 +167,6 @@ angular
       return true;
     });
 
-    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
-      $rootScope.toState = toState.name;
-      $rootScope.toParams = toParams;
-      $rootScope.fromState = fromState.name;
-      $rootScope.fromParams = fromParams;
-    });
-
     /*jshint unused: false */
     Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       $log.debug('addResponseInterceptor => response', response);
@@ -187,27 +180,29 @@ angular
       $log.debug('data from lsIntercept401', data);
     });
 
-    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
-      $rootScope.toState = toState.name;
-      $rootScope.fromState = fromState.name;
-    });
-
     $rootScope.$on('$translatePartialLoaderStructureChanged', function() {
       languageService.refreshLocale();
     });
+
+    $state.defaultErrorHandler(function(error) {
+      if (error.detail) {
+        var message = error.detail.statusText || error.detail.message || error.message;
+        $log.error('$transitions.onError - ', message);
+      } else {
+        $log.error('$transitions.onError - ', error);
+      }
+    });
+
   })
 
-  .run(function($rootScope, $state, $stateParams, Restangular, lsAppConfig, $window) {
+  .run(function($rootScope, Restangular, lsAppConfig, $window) {
     var protocol = $window.location.protocol;
     var host = $window.location.host.replace(/\/$/, '');
     var fqdn = protocol + '//' + host;
     lsAppConfig.backendUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
     Restangular.setBaseUrl(lsAppConfig.backendUrl);
-    $rootScope.$state = $state;
-    $rootScope.$stateParams = $stateParams;
-    $rootScope.linshareBaseUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
     $rootScope.linshareModeProduction = lsAppConfig.production;
-    $rootScope.linshareLicence= lsAppConfig.licence;
+    $rootScope.linshareLicence = lsAppConfig.licence;
   })
 
   .run(['$templateCache', '$http', function($templateCache, $http) {
