@@ -123,6 +123,7 @@
               _.remove(guestVm.selectedGuests, {'uuid': guestObject.uuid});})
             .then(function() {
               guestVm.tableParams.reload();
+              $scope.mainVm.sidebar.hide(guestObjects);
               toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.DELETE'});
           });
         });
