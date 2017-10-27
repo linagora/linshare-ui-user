@@ -249,6 +249,7 @@
             _.remove(workgroupNodesVm.nodesList, restangularizedItem);
             _.remove(workgroupNodesVm.selectedDocuments, restangularizedItem);
             workgroupNodesVm.tableParamsService.reloadTableParams();
+            $scope.mainVm.sidebar.hide(nodes);
           }, function(error) {
             if (error.status === 400 && error.data.errCode === 26006) {
               toastService.error({key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26006'});
