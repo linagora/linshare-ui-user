@@ -228,6 +228,7 @@
 
     function deleteDocuments(items) {
       documentUtilsService.deleteItem(items, documentUtilsService.itemUtilsConstant.DOCUMENT, deleteCallback);
+      $scope.mainVm.sidebar.hide();
     }
 
     /**
