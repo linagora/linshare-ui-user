@@ -240,6 +240,7 @@
           _.remove(contactsListsListVm.itemsList, restangularizedItem);
           _.remove(contactsListsListVm.selectedContactsLists, restangularizedItem);
           contactsListsListVm.tableParams.reload();
+          $scope.mainVm.sidebar.hide(items)
         });
       });
     }
