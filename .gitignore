@@ -2,6 +2,7 @@ node_modules
 dist
 .tmp
 .sass-cache
+package-lock.json
 bower_components
 vendors
 app/modules/materialAdmin
