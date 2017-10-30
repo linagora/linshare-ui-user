@@ -230,6 +230,7 @@ angular.module('linshare.sharedSpace')
           _.remove(thisctrl.selectedDocuments, restangularizedItem);
           thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module
           thisctrl.tableParams.reload();
+          $scope.mainVm.sidebar.hide(items);
         });
       });
     }
