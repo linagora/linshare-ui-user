@@ -180,6 +180,7 @@
           // I keep a copy of the data for the filter module
           contactsListsContactsVm.itemsListCopy = contactsListsContactsVm.itemsList;
           contactsListsContactsVm.tableParams.reload();
+          $scope.mainVm.sidebar.hide(items);
         });
       });
     }
