@@ -101,17 +101,35 @@
      */
     function logout() {
       $log.debug('AuthenticationRestService : logout');
-      handler(Restangular.all(restUrl).one('logout').get()).then(function() {
-        deferred = undefined;
-        $log.info('Authentication logout : success');
-        $cookies.remove('JSESSIONID');
-        if (lsAppConfig.postLogoutUrl) {
-          $window.location.href = lsAppConfig.postLogoutUrl;
-        } else {
-          var absUrl = $location.absUrl();
-          $window.location = absUrl.split('#')[0];
+      var rest = Restangular.withConfig(function(RestangularConfigurer) {
+        RestangularConfigurer.setFullResponse(true);
+      });
+
+      handler(rest.all(restUrl).one('logout').options()).then(function(response) {
+        var headersLogoutUrl = response.headers['X-LINSHARE-POST-LOGOUT-URL'],
+            location;
+
+        if (headersLogoutUrl) {
+          if (_.startsWith(headersLogoutUrl, 'http')) {
+            $log.debug('AuthenticationRestService : logout - Using X-LINSHARE-POST-LOGOUT-URL for redirection');
+            location = headersLogoutUrl;
+          }
         }
+        if (_.isUndefined(location) && lsAppConfig.postLogoutUrl) {
+          $log.debug('AuthenticationRestService : logout - Using lsAppConfig.postLogoutUrl for redirection');
+          location = lsAppConfig.postLogoutUrl;
+        }
+        if (_.isUndefined(location)) {
+          $log.debug('AuthenticationRestService : logout - Using current location root for redirection');
+          var absUrl = $location.absUrl();
+          location = absUrl.split('#')[0];
+        }
+
+        deferred = $q.defer();
+        $cookies.remove('JSESSIONID');
+        $window.location.href = location;
         authService.loginCancelled();
+        $log.info('Authentication logout : success');
       }).catch(function(error) {
         $log.error('Authentication logout : failed', error.status);
       });

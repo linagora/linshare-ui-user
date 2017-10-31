@@ -12,7 +12,9 @@
       baseRestUrl: 'linshare/webservice/rest/user/v2',
       debug: false,
       localPath: 'i18n/original', //custom your i18n folder path
-      postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso',
+      //Warning: the following parameter will not be use if you defined a logout url via
+      //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
+      postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
 
       // For application configuration
       accountType: {
