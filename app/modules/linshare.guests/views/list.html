@@ -173,7 +173,7 @@
                       is-open="isOpenType" data-ng-class="{'open': isOpenType}">
                   <a class="plain-txt-btn partage-link" href="javascript:void(0)"
                      uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
-                    <span x-ng-bind="guestVm.currentView"></span>
+                    <span translate>{{guestVm.currentView}}</span>
                     <div><b></b></div>
                   </a>
                   <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop toggle-views"
@@ -184,7 +184,7 @@
                         <li>
                           <!-- TODO : KLE Translation needed-->
                           <a x-ng-class="{'active-check': guestVm.isMineGuest}"
-                             x-ng-click="guestVm.currentView = 'MES INVITES';
+                             x-ng-click="guestVm.currentView = 'HEADER_GUEST.SLIDER.MY_GUEST';
                                          guestVm.isMineGuest = true;
                                          guestVm.tableParams.reload();
                                          mainVm.sidebar.hide()">
@@ -193,7 +193,7 @@
                         </li>
                         <li>
                           <a x-ng-class="{'active-check':!guestVm.isMineGuest}"
-                             x-ng-click="guestVm.currentView = 'AUTRES INVITES';
+                             x-ng-click="guestVm.currentView = 'HEADER_GUEST.SLIDER.OTHER_GUEST';
                                          guestVm.isMineGuest = false;
                                          guestVm.tableParams.reload();
                                          mainVm.sidebar.hide()">
