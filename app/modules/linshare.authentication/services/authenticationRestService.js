@@ -106,7 +106,7 @@
       });
 
       handler(rest.all(restUrl).one('logout').options()).then(function(response) {
-        var headersLogoutUrl = response.headers['X-LINSHARE-POST-LOGOUT-URL'],
+        var headersLogoutUrl = response.headers()['x-linshare-post-logout-url'],
             location;
 
         if (headersLogoutUrl) {
