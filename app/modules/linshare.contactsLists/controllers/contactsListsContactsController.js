@@ -63,6 +63,7 @@
     contactsListsContactsVm.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
     contactsListsContactsVm.toggleSearchState = toggleSearchState;
     contactsListsContactsVm.updateContact = updateContact;
+    contactsListsContactsVm.cancelContact = cancelContact;
 
     activate();
 
@@ -512,5 +513,17 @@
         contactsListsContactsVm.setSubmitted(form);
       }
     }
+     /**
+     * @name cancelContact
+     * @desc reset form values
+     * @memberOf LinShare.contactsLists.contactsListsContactsController
+     */
+    function cancelContact(){
+      var contactReset = contactsListsContactsVm.currentSelectedDocument.current;
+      contactReset._firstName = contactReset.firstName;
+      contactReset._lastName = contactReset.lastName;
+      $scope.mainVm.sidebar.hide();
+    };
   }
 })();
+   
