@@ -511,6 +511,7 @@ angular.module('linshare.receivedShare')
 
       $scope.deleteDocuments = function(items) {
         documentUtilsService.deleteItem(items, documentUtilsService.itemUtilsConstant.RECEIVED_SHARE, deleteCallback);
+        $scope.mainVm.sidebar.hide();
       };
 
       function deleteCallback(items) {
