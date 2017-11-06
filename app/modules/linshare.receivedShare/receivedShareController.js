@@ -139,7 +139,6 @@ angular.module('linshare.receivedShare')
       }
 
       $scope.resetSelectedDocuments = function() {
-        $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
         delete $scope.tableParams.filter().isSelected;
         angular.forEach($scope.selectedDocuments, function(selectedDoc) {
           selectedDoc.isSelected = false;
