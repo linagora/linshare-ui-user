@@ -74,7 +74,8 @@
   </div>
 </div>
 <div class="bottom-sidebar-btn">
-  <button class="btn btn-default col-xs-6" x-ng-click="mainVm.sidebar.hide()">
+  <button class="btn btn-default col-xs-6" 
+          x-ng-click="mainVm.sidebar.getData().cancelContact()">
     {{"NAVIGATION.CANCEL" | translate}}
   </button>
   <button class="btn btn-primary col-xs-6"
