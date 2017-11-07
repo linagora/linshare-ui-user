@@ -12,6 +12,7 @@ angular.module('linshare.sharedSpace')
 
     var thisctrl = this;
     thisctrl.canCreate = true;
+    thisctrl.goToSharedSpaceTarget = goToSharedSpaceTarget;
     thisctrl.lsAppConfig = lsAppConfig;
     thisctrl.currentSelectedDocument = {};
     thisctrl.itemsList = workgroups;
@@ -180,8 +181,16 @@ angular.module('linshare.sharedSpace')
         angular.element(currTarget).addClass('active-check');
       }, 200);
     };
-
-    thisctrl.goToSharedSpaceTarget = function(workgroupUuid, name) {
+    /**
+     * @name goToSharedSpaceTarget
+     * @desc routing to the workgroup or files inside a workgroup
+     * @param {object} event - event handle
+     * @param {string} workgroupUuid - Uuid of the Workgroup
+     * @param {string} name - name of workgroup
+     * @memberOf Linshare.shareSpace.SareSpaceController
+    */
+    function goToSharedSpaceTarget(event, workgroupUuid, name) {
+      event.stopPropagation(); 
       var element = angular.element($('td[uuid=' + workgroupUuid + ']').find('.file-name-disp'));
       if (element.attr('contenteditable') === 'false') {
         $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
