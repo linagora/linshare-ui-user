@@ -169,7 +169,7 @@ module.exports = function(grunt) {
         failOnError: true
       },
       dist: {
-        src: '.tmp/styles/{,*/{,*/{,*/}*}*}*.css',
+        src: '.tmp/styles/{,*/{,*/{,*/}*}*}*.css'
       }
     },
 
@@ -275,32 +275,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // The following *-min tasks will produce minified documents in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     documents: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     documents: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
     imagemin: {
       dist: {
         files: [{
@@ -363,6 +337,17 @@ module.exports = function(grunt) {
 
     // Copies remaining documents to places other tasks can use
     copy: {
+      material: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            'styles/materialAdmin.css'
+          ]
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -517,6 +502,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'copy:material',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
