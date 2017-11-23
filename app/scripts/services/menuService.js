@@ -55,7 +55,7 @@
         }, {
           name: 'MENU_TITLE.GUESTS',
           link: 'administration.guests',
-          disabled: _.isNil(functionalities.GUESTS) ? true : !functionalities.GUESTS.enable && user.canCreateGuest
+          disabled: _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest)
         });
 
         files.disabled = !user.canUpload;
