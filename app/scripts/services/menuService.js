@@ -58,6 +58,10 @@
           disabled: _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest)
         });
 
+        administrations.disabled = _.reduce(administrations.links, function(value, link){
+          return !(link.disabled && value);
+        }, true);
+
         files.disabled = !user.canUpload;
 
         sharedSpace.disabled = !functionalities.WORK_GROUP.enable;
