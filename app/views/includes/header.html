@@ -128,7 +128,7 @@
                 <li>
                   <a href="">{{::loggedUser.firstName}} {{::loggedUser.lastName}}</a>
                 </li>
-                <li data-ng-if="::linshareModeProduction">
+                <li data-ng-if="::!linshareModeProduction">
                   <a href=""><i class="zmdi ls-settings"></i> <span translate>HEADER.SETTINGS</span></a>
                 </li>
                 <li>
