@@ -1,0 +1,23 @@
+@import "../../colors.scss";
+
+/**********************
+  Active-Share DETAIL SIDEBAR
+***********************/
+.subject-mail > .form-group {
+  margin-bottom: 0;
+}
+
+.subject-mail :last-child {
+  min-height: 70px;
+  background-color: $contentTextArea;
+  overflow: hidden;
+}
+
+.media textarea {
+  min-height: 180px;
+}
+
+.media textarea:hover {
+  cursor: pointer;
+}
+
