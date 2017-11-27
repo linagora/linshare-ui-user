@@ -9,8 +9,19 @@
     .module('linshareUiUserApp')
     .controller('HomeController', homeController);
 
-  homeController.$inject = ['_', '$q', '$scope', '$timeout', '$translate', '$translatePartialLoader',
-    'functionalities', 'lsAppConfig', 'welcomeMessageRestService', 'user'
+  homeController.$inject = [
+    '_',
+    '$q',
+    '$scope',
+    '$stateParams',
+    '$timeout',
+    '$translate',
+    '$translatePartialLoader',
+    'functionalities',
+    'languageService',
+    'lsAppConfig',
+    'welcomeMessageRestService',
+    'user',
   ];
 
   /**
@@ -18,8 +29,23 @@
    * @desc Application home management system controller
    * @memberOf linshareUiUserApp
    */
-  function homeController(_, $q, $scope, $timeout, $translate, $translatePartialLoader, functionalities,
-    lsAppConfig, welcomeMessageRestService, user) {
+  function homeController(
+    _,
+    $q,
+    $scope,
+    $stateParams,
+    $timeout,
+    $translate,
+    $translatePartialLoader,
+    functionalities,
+    languageService,
+    lsAppConfig,
+    welcomeMessageRestService,
+    user
+  )
+  {
+    languageService.changeLocale($stateParams.lang || lsAppConfig.lang.en);
+
     const LANG_CONVERTER = {
       ENGLISH: {
         lang: 'ENGLISH',
