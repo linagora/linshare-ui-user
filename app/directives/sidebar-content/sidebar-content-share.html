@@ -158,9 +158,10 @@
     <div class="form-sidebar">
       <div class="form-group col-xs-12 addNote no-padding">
           <div class="form-group fg-line">
-            <input type="text" class="form-control input-sm"
+            <textarea type="text" class="form-control input-sm"
                    x-ng-model="shareActionVm.newShare.subject"
                    placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}">
+            </textarea>
           </div>
           <textarea class="form-control comment" rows="5"
                     placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"

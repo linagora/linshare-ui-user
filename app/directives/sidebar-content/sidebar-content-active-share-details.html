@@ -133,21 +133,21 @@
             </div>
           </div>
 
-          <div class="media" x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.subject">
-            <div class="pull-left col-md-7">
+          <div class="form-group media subject-mail" x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.subject">
+            <div class="pull-left col-md-7 form-group">
               {{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}} :
             </div>
-            <div class="media-body">
-              <div class="lv-title">{{mainVm.sidebar.getData().shareListVm.currentShare.subject}}</div>
-            </div>
+            <textarea class="form-control" disabled>
+              {{mainVm.sidebar.getData().shareListVm.currentShare.subject}}
+            </textarea>
           </div>
-          <div class="media" x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.message">
-            <div class="pull-left col-md-7">
+          <div class="form-group media" x-ng-show="mainVm.sidebar.getData().shareListVm.currentShare.message">
+            <div class="pull-left col-md-7 form-group">
               {{'RIGHT_PANEL.CURRENT_SHARE_DETAIL.MAIL_CONTENT' | translate}} :
             </div>
-            <div class="media-body">
-              <div class="lv-title">{{mainVm.sidebar.getData().shareListVm.currentShare.message}}</div>
-            </div>
+            <textarea class="form-control" disabled>
+              {{mainVm.sidebar.getData().shareListVm.currentShare.message}}
+            </textarea>
           </div>
         </div>
       </div>
