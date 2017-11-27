@@ -9,16 +9,38 @@
     .module('linshare.utils')
     .factory('itemUtilsService', itemUtilsService);
 
-  itemUtilsService.$inject = ['_', '$q', '$translate', 'authenticationRestService', 'itemUtilsConstant', 'lsAppConfig',
-    'lsErrorCode', 'swal', 'toastService'];
+  itemUtilsService.$inject = [
+    '_',
+    '$q',
+    '$timeout',
+    '$translate',
+    'authenticationRestService',
+    'itemUtilsConstant',
+    'lsAppConfig',
+    'lsErrorCode',
+    'swal',
+    'toastService'
+  ];
 
   /**
    * @namespace itemUtilsService
    * @desc Utils service for manipulating file
    * @memberOf linshare.utils
    */
-  function itemUtilsService(_, $q, $translate, authenticationRestService, itemUtilsConstant, lsAppConfig, lsErrorCode,
-                            swal, toastService) {
+  function itemUtilsService(
+    _,
+    $q,
+    $timeout,
+    $translate,
+    authenticationRestService,
+    itemUtilsConstant,
+    lsAppConfig,
+    lsErrorCode,
+    swal,
+    toastService
+  )
+  {
+
     var
       invalidNameTranslate = {
         empty: {
@@ -196,29 +218,34 @@
         deferred = $q.defer(),
         initialName = item.name.trim(),
         itemElement = angular.element(document.querySelector('body')).find(selector);
-      itemElement.attr('contenteditable', 'true')
-        .on('focus', function() {
-          itemElement.text(initialName);
-        })
-        .on('focusout', function(e) {
-          if (!done) {
-            check(initialName, e);
-          }
-        })
-        .on('keydown', function(e) {
-          //esc
-          if (e.which === 27 || e.keyCode === 27) {
-            reset(item);
-          }
-          //enter
-          if (e.which === 13) {
-            check(initialName, e);
-          }
-        });
-      itemElement.focus();
-      document.execCommand('selectAll', false, null);
-      return deferred.promise;
 
+        itemElement.attr('contenteditable', 'true')
+          .on('focus', function() {
+            itemElement.text(initialName);
+            document.execCommand('selectAll', false, null);
+          })
+          .on('focusout', function(e) {
+            if (!done) {
+              check(initialName, e);
+            }
+          })
+          .on('keydown', function(e) {
+            //esc
+            if (e.which === 27 || e.keyCode === 27) {
+              reset(item);
+            }
+            //enter
+            if (e.which === 13) {
+              check(initialName, e);
+            }
+          });
+
+          // https://blog.sessionstack.com/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with-2f077c4438b5
+          $timeout(function(){
+            itemElement.focus();
+          });
+
+      return deferred.promise;
       /**
        * @name check
        * @desc Check edited name
