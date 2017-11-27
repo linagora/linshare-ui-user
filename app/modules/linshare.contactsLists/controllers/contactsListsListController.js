@@ -9,11 +9,30 @@
     .module('linshare.contactsLists')
     .controller('contactsListsListController', contactsListsListController);
 
-  contactsListsListController.$inject = ['_', '$filter', '$q', '$scope', '$state', '$timeout',
-    '$transition$', '$transitions', '$translate', '$translatePartialLoader', 'auditDetailsService', 'contactsListsList',
-    'contactsListsListRestService', 'contactsListsContactsRestService', 'contactsListsService',
-    'documentUtilsService', 'functionalityRestService', 'itemUtilsService', 'lsAppConfig', 'lsErrorCode', 'moment',
-    'NgTableParams', 'toastService'
+  contactsListsListController.$inject = [
+    '_',
+    '$filter',
+    '$q',
+    '$scope',
+    '$state',
+    '$timeout',
+    '$transition$',
+    '$transitions',
+    '$translate',
+    '$translatePartialLoader',
+    'auditDetailsService',
+    'contactsListsList',
+    'contactsListsListRestService',
+    'contactsListsContactsRestService',
+    'contactsListsService',
+    'documentUtilsService',
+    'functionalityRestService',
+    'itemUtilsService',
+    'lsAppConfig',
+    'lsErrorCode',
+    'moment',
+    'NgTableParams',
+    'toastService'
   ];
 
   /**
@@ -23,10 +42,30 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function contactsListsListController(_, $filter, $q, $scope, $state, $timeout, $transition$, $transitions, $translate,
-    $translatePartialLoader, auditDetailsService, contactsListsList, contactsListsListRestService,
-    contactsListsContactsRestService, contactsListsService, documentUtilsService, functionalityRestService,
-    itemUtilsService, lsAppConfig, lsErrorCode, moment, NgTableParams, toastService) {
+  function contactsListsListController(
+    _, $filter,
+    $q,
+    $scope,
+    $state,
+    $timeout,
+    $transition$,
+    $transitions,
+    $translate,
+    $translatePartialLoader,
+    auditDetailsService,
+    contactsListsList,
+    contactsListsListRestService,
+    contactsListsContactsRestService,
+    contactsListsService,
+    documentUtilsService,
+    functionalityRestService,
+    itemUtilsService,
+    lsAppConfig,
+    lsErrorCode,
+    moment,
+    NgTableParams,
+    toastService
+  ) {
 
     /* jshint validthis:true */
     var contactsListsListVm = this;
@@ -443,23 +482,29 @@
      */
     function renameContactsList(item, itemNameElem) {
       itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
-      itemUtilsService.rename(item, itemNameElem).then(function(data) {
-        item = _.assign(item, data);
-        contactsListsListVm.canCreate = true;
-      }).catch(function(error) {
-        if (error.data.errCode === 25001) {
-          toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST'});
-          renameContactsList(item, itemNameElem);
-        }
-        if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
-          if (!item.uuid) {
-            contactsListsListVm.itemsList.splice(_.findIndex(contactsListsListVm.itemsList, item), 1);
-          }
+      itemUtilsService
+        .rename(item, itemNameElem)
+        .then(function(newItemDetails) {
+          item = _.assign(item, newItemDetails);
           contactsListsListVm.canCreate = true;
-        }
-      }).finally(function() {
-        contactsListsListVm.tableParams.reload();
-      });
+        })
+        .catch(function(response) {
+          var data = response.data;
+
+          if (data.errCode === 25001) {
+            toastService.error({ key: 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST' });
+            renameContactsList(item, itemNameElem);
+          }
+          if (data.errCode === lsErrorCode.CANCELLED_BY_USER) {
+            if (!item.uuid) {
+              var itemListIndex = _.findIndex(contactsListsListVm.itemsList, item);
+
+              contactsListsListVm.itemsList.splice(itemListIndex, 1);
+            }
+            contactsListsListVm.canCreate = true;
+          }
+        })
+        .finally(contactsListsListVm.tableParams.reload);
     }
 
     /**

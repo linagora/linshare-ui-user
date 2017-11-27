@@ -190,7 +190,7 @@ angular.module('linshare.sharedSpace')
      * @memberOf Linshare.shareSpace.SareSpaceController
     */
     function goToSharedSpaceTarget(event, workgroupUuid, name) {
-      event.stopPropagation(); 
+      event.stopPropagation();
       var element = angular.element($('td[uuid=' + workgroupUuid + ']').find('.file-name-disp'));
       if (element.attr('contenteditable') === 'false') {
         $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
@@ -306,26 +306,34 @@ angular.module('linshare.sharedSpace')
     }
 
     function renameFolder(item, itemNameElem) {
-      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
-      itemUtilsService.rename(item, itemNameElem).then(function(data) {
-        item = _.assign(item, data);
-        thisctrl.canCreate = true;
-      }).catch(function(error) {
-        //TODO - Manage error from back
-        if (error.data.errCode === lsErrorCode.CANCELLED_BY_USER) {
-          if (!item.uuid) {
-            thisctrl.itemsList.splice(_.findIndex(thisctrl.itemsList, item), 1);
-          }
-          thisctrl.canCreate = true;
-        }
-      }).finally(function() {
-        thisctrl.tableParams.reload();
-      });
+      var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
+
+       return itemUtilsService
+          .rename(item, itemNameElement)
+          .then(function(newItemDetails) {
+            item = _.assign(item, newItemDetails);
+            thisctrl.canCreate = true;
+          })
+          .catch(function(response) {
+            //TODO - Manage error from back
+            var data = response.data;
+
+            if (data.errCode === lsErrorCode.CANCELLED_BY_USER) {
+              if (!item.uuid) {
+                var itemListIndex = _.findIndex(thisctrl.itemsList, item);
+
+                thisctrl.itemsList.splice(itemListIndex, 1);
+              }
+              thisctrl.canCreate = true;
+            }
+          })
+          .finally(thisctrl.tableParams.reload)
     }
 
     function createFolder(folderName) {
       if (thisctrl.canCreate) {
         var workgroup = workgroupRestService.restangularize({name: folderName.trim()});
+
         thisctrl.canCreate = false;
         thisctrl.itemsList.push(workgroup);
         thisctrl.tableParams.reload();
