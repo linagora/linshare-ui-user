@@ -40,7 +40,7 @@
       })
       .state('home', {
         parent: 'common',
-        url: '/home',
+        url: '/home?lang',
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
         resolve: {
