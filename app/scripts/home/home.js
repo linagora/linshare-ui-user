@@ -44,6 +44,8 @@
     user
   )
   {
+    languageService.changeLocale($stateParams.lang || lsAppConfig.lang.en);
+
     const LANG_CONVERTER = {
       ENGLISH: {
         lang: 'ENGLISH',
