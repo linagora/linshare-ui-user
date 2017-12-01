@@ -72,18 +72,19 @@
      * @name changeLocale
      * @desc Change translation to used base on language key
      * @param {string} key - Language key
+     * @return {Promise}
      * @memberOf linshare.components.languageService
      */
     function changeLocale(key) {
       var keyWithCountryLocaleCode = addCountryLocaleCode(key);
 
       moment.locale(keyWithCountryLocaleCode);
-      tmhDynamicLocale
-        .set(keyWithCountryLocaleCode.substring(0, keyWithCountryLocaleCode.indexOf('-')))
-        .then(overrideDatepickerFormat);
       $translate.use(keyWithCountryLocaleCode);
       localStorageService.set('locale', keyWithCountryLocaleCode);
       $log.debug('locale changed to ', keyWithCountryLocaleCode);
+      return tmhDynamicLocale
+        .set(keyWithCountryLocaleCode.substring(0, keyWithCountryLocaleCode.indexOf('-')))
+        .then(overrideDatepickerFormat);
     }
 
     /**
