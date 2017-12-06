@@ -423,7 +423,7 @@
                           <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                               auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
                             <a href="" title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
-                               event-propagation-stop class="set-col-12">
+                               event-propagation-stop class="set-col-12" x-ng-click="vm.checkDocumentMemberRights(documentFile)">
                               <i class="zmdi zmdi-more"></i>
                             </a>
                             <ul uib-dropdown-menu data-ng-class="{'open':isOpenItem}"
@@ -446,8 +446,9 @@
                                   {{'ACTION.SILENCE' | translate}}
                                 </a>
                               </li>
-                              <li class="divider"></li>
-                              <li x-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)">
+                              <li class="divider" data-ng-if="vm.currentWorkgroupMember.admin"></li>
+                              <li data-ng-if="vm.currentWorkgroupMember.admin"
+                                  x-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)">
                                 <a href="">
                                   <i class="groups-add-member align-style"></i>
                                   {{'ACTION.ADD_MEMBER' | translate}}
@@ -461,8 +462,8 @@
                                   {{'ACTION.DOWNLOAD' | translate}}
                                 </a>
                               </li>
-                              <li class="divider"></li>
-                              <li>
+                              <li data-ng-if="vm.currentWorkgroupMember.admin" class="divider"></li>
+                              <li data-ng-if="vm.currentWorkgroupMember.admin">
                                 <a x-ng-click="vm.renameFolder(documentFile)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
@@ -475,8 +476,8 @@
                                   {{'ACTION.MOVE' | translate}}
                                 </a>
                               </li>
-                              <li class="divider"></li>
-                              <li>
+                              <li class="divider" data-ng-if="vm.currentWorkgroupMember.admin"></li>
+                              <li data-ng-if="vm.currentWorkgroupMember.admin">
                                 <a href="" x-ng-click="vm.deleteWorkGroup(documentFile)">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                   {{'ACTION.DELETE' | translate}}

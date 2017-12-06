@@ -1,12 +1,30 @@
 'use strict';
 angular.module('linshare.sharedSpace')
-// TODO: Should dispatch some function to other service or controller
-/* jshint maxparams: false, maxstatements: false */
-  .controller('SharedSpaceController', function(_, $scope, $timeout, $translatePartialLoader, NgTableParams, $filter,
-                                                $log, workgroups, $transitions, $translate, $state,
-                                                documentUtilsService, filterBoxService, itemUtilsService,
-                                                workgroupRestService, auditDetailsService, lsAppConfig, lsErrorCode,
-                                                toastService, functionalityRestService) {
+  // TODO: Should dispatch some function to other service or controller
+  /* jshint maxparams: false, maxstatements: false */
+  .controller('SharedSpaceController', function(
+    _,
+    $filter,
+    $log,
+    $scope,
+    $state,
+    $timeout,
+    $transitions,
+    $translate,
+    $translatePartialLoader,
+    auditDetailsService,
+    documentUtilsService,
+    filterBoxService,
+    functionalityRestService,
+    itemUtilsService,
+    lsAppConfig,
+    lsErrorCode,
+    NgTableParams,
+    toastService,
+    workgroupMembersRestService,
+    workgroups,
+    workgroupRestService
+  ) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
@@ -42,8 +60,10 @@ angular.module('linshare.sharedSpace')
     thisctrl.mdtabsSelection = {
       selectedIndex: 0
     };
+    thisctrl.checkDocumentMemberRights = checkDocumentMemberRights;
 
     var swalNewWorkGroupName, invalideNameTranslate;
+
     $translate(['ACTION.NEW_WORKGROUP', 'TOAST_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR'])
       .then(function(translations) {
         swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
@@ -308,26 +328,26 @@ angular.module('linshare.sharedSpace')
     function renameFolder(item, itemNameElem) {
       var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
 
-       return itemUtilsService
-          .rename(item, itemNameElement)
-          .then(function(newItemDetails) {
-            item = _.assign(item, newItemDetails);
-            thisctrl.canCreate = true;
-          })
-          .catch(function(response) {
-            //TODO - Manage error from back
-            var data = response.data;
+      return itemUtilsService
+        .rename(item, itemNameElement)
+        .then(function(newItemDetails) {
+          item = _.assign(item, newItemDetails);
+          thisctrl.canCreate = true;
+        })
+        .catch(function(response) {
+          //TODO - Manage error from back
+          var data = response.data;
 
-            if (data.errCode === lsErrorCode.CANCELLED_BY_USER) {
-              if (!item.uuid) {
-                var itemListIndex = _.findIndex(thisctrl.itemsList, item);
+          if (data.errCode === lsErrorCode.CANCELLED_BY_USER) {
+            if (!item.uuid) {
+              var itemListIndex = _.findIndex(thisctrl.itemsList, item);
 
-                thisctrl.itemsList.splice(itemListIndex, 1);
-              }
-              thisctrl.canCreate = true;
+              thisctrl.itemsList.splice(itemListIndex, 1);
             }
-          })
-          .finally(thisctrl.tableParams.reload)
+            thisctrl.canCreate = true;
+          }
+        })
+        .finally(thisctrl.tableParams.reload)
     }
 
     function createFolder(folderName) {
@@ -341,5 +361,19 @@ angular.module('linshare.sharedSpace')
           renameFolder(workgroup, 'td[uuid=""] .file-name-disp');
         }, 0);
       }
+    }
+
+    /**
+     * @name checkDocumentMemberRights
+     * @desc Get current workgroup Member details(Rights)
+     * @param {object} documentFile - Selected Document
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function checkDocumentMemberRights(documentFile) {
+      workgroupMembersRestService
+        .get(documentFile.uuid, $scope.userLogged.uuid)
+        .then(function(member) {
+          thisctrl.currentWorkgroupMember = member;
+        });
     }
   });
