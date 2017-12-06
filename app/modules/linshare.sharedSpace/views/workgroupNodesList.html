@@ -629,8 +629,10 @@
                                   <span translate>ACTION.EXTERNAL_EDIT</span>
                                 </a>
                               </li>
-                              <li class="divider"></li>
-                              <li data-ng-if="::!workgroupNodesVm.currentWorkgroupMember.readonly">
+                              <li class="divider" data-ng-if="::!workgroupNodesVm.currentWorkgroupMember.readonly &&
+                                workgroupNodesVm.currentWorkgroupMember.admin"></li>
+                              <li data-ng-if="::!workgroupNodesVm.currentWorkgroupMember.readonly &&
+                                workgroupNodesVm.currentWorkgroupMember.admin">
                                 <a data-ng-click="workgroupNodesVm.renameNode(nodeItem)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   <span translate>ACTION.RENAME</span>
