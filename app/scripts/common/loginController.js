@@ -95,8 +95,10 @@
      * @memberOf linshareUiUserApp.loginController
      */
     function changeLoginLanguage(lang) {
-      languageService.changeLocale(lang);
-      loginVm.loginLocale = splitLocale(lang);
+      languageService.changeLocale(lang)
+        .then(function() {
+          loginVm.loginLocale = splitLocale(lang);
+        });
     }
   }
 })();
