@@ -17,11 +17,37 @@
    * @memberOf LinShareUiUserApp
    */
   function routerConfiguration(_, $stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise(function($injector) {
-      $injector.invoke(['$state', 'authenticationRestService', function($state, authenticationRestService) {
-        authRedirect($state, authenticationRestService);
-      }]);
-    });
+    $urlRouterProvider
+      .when(/language\/.*/i, [
+        '$window',
+        '$state',
+        'authenticationRestService',
+        'languageService',
+        function(
+          $window,
+          $state,
+          authenticationRestService,
+          languageService
+        ) {
+          var language = $window.location.hash.split('/').pop();
+
+          languageService.changeLocale(language)
+            .finally(function() {
+              authRedirect($state, authenticationRestService);
+            });
+        }])
+      .otherwise(function($injector) {
+        $injector.invoke([
+          '$state',
+          'authenticationRestService',
+          function(
+            $state,
+            authenticationRestService
+          ) {
+            authRedirect($state, authenticationRestService);
+          }
+        ]);
+      });
 
     $stateProvider
       .state('common', {
@@ -40,7 +66,7 @@
       })
       .state('home', {
         parent: 'common',
-        url: '/home?lang',
+        url: '/home',
         templateUrl: 'views/home/home.html',
         controller: 'HomeController',
         resolve: {
