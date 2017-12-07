@@ -471,7 +471,7 @@
   </profiles>
   <scm>
     <connection>scm:git:git://github.com/linagora/linshare-ui-user.git</connection>
-    <developerConnection>scm:git:ssh://git@ci-gsafe.linagora.com:8000/linshare/linshare-ui-user.git</developerConnection>
+    <developerConnection>scm:git:ssh://git@ci.linagora.com:7999/linagora/lgs/linshare/products/linshare-ui-user.git</developerConnection>
     <tag>HEAD</tag>
     <url>http://github.com/linagora/linshare-ui-user/tree/master/</url>
   </scm>
