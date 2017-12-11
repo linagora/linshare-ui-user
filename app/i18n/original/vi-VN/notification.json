@@ -42,7 +42,8 @@
   "TOAST_ALERT": {
     "ACTION": {
       "TBT__BROWSER_ACTION": "",
-      "TBT_CLOSE": "",
+      "TBT__CLOSE": "",
+      "TBT__CONTACTS_LIST_CREATION": "",
       "TBT__COPY": "",
       "TBT__COPY_PLURAL": "",
       "TBT__COPY_SAME_FOLDER": "",

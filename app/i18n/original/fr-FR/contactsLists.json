@@ -53,6 +53,11 @@
     "UPDATE_CONTACT_IMPOSSIBLE": "Vous n'êtes pas autorisé à éditer ce contact",
     "VISIBILITY": "Visibilité"
   },
+  "CREATE_CONTACTS_LIST": {
+    "CREATE": "Créer",
+    "CREATE_FROM_THESE_CONTACTS": "Créer une Liste de Contacts à partir de ces contacts ?",
+    "INPUT_PLACEHOLDER": "Nom de la Liste de Contacts"
+  },
   "FORMS_MESSAGES": {
     "INVALID_EMAIL": "Format d'adresse électronique invalide.",
     "INVALID_EMPTY_FIELD": "Ce champ ne peut être vide."

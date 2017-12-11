@@ -243,7 +243,10 @@
             <p class="empty-res" x-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared === 0">
               <i class="zmdi zmdi-info-outline"></i><span>{{'RIGHT_PANEL.RECIPIENTS.NO_SHARES' | translate}}</span>
             </p>
-            <div x-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0">
+            <div
+              class="contacts-list-block-scroll"
+              data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
+            >
               <div class="input-group search-bar col-xs-12">
                 <div id="search-field-ctn">
                   <div class="search-style">
@@ -291,6 +294,11 @@
               </div>
             </div>
 
+            <div
+              create-contacts-list
+              create-contacts-list-contacts-to-be-added="mainVm.sidebar.getData().currentSelectedDocument.recipients"
+              data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
+            ></div>
           </md-content>
         </md-tab>
         <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 no-padding disabled">

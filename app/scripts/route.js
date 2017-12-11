@@ -310,16 +310,6 @@
         controller: 'contactsListsListController',
         controllerAs: 'contactsListsListVm',
         resolve: {
-          checkUrl: function($state, $transition$, lsAppConfig) {
-          var from = $transition$.params().from;
-            if (from === '' ||
-              (from !== lsAppConfig.contactsListsMinePage && from !== lsAppConfig.contactsListsOthersPage)) {
-              $transition$.abort();
-              $state.go('administration.contactslists.list', {
-                from: lsAppConfig.contactsListsMinePage
-              });
-            }
-          },
           contactsListsList: function($transition$, lsAppConfig, contactsListsListRestService) {
             return contactsListsListRestService.getList(
               $transition$.params().from !== lsAppConfig.contactsListsOthersPage);

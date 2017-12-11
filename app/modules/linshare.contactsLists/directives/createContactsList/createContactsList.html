@@ -1,0 +1,26 @@
+<div class="create-contacts-list">
+  <span>
+    <i class="ls-user-group" aria-hidden="true"></i>
+    <span translate>CREATE_CONTACTS_LIST.CREATE_FROM_THESE_CONTACTS</span>
+  </span>
+  <div class="input-group">
+    <input
+      class="form-control"
+      data-ng-model="contactsListName"
+      translate-attr="{placeholder: 'CREATE_CONTACTS_LIST.INPUT_PLACEHOLDER'}"
+      type="text"
+    />
+    <span class="input-group-btn">
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-ng-click="createContactsListWithContacts(
+          contactsListName,
+          contactsToBeAdded
+        )"
+      >
+        <span translate>CREATE_CONTACTS_LIST.CREATE</span>
+      </button>
+    </span>
+  </div>
+</div>
