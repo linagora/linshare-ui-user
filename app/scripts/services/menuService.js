@@ -59,7 +59,7 @@
         });
 
         administrations.disabled = _.reduce(administrations.links, function(value, link){
-          return !(link.disabled && value);
+          return link.disabled && value;
         }, true);
 
         files.disabled = !user.canUpload;
