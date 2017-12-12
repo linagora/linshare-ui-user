@@ -153,51 +153,157 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
-
     function deleteCallback(items) {
-      var message;
-      var nbItems = items.length;
-      var responsesDeletion = [];
-      $q.all(sortResponseDeletion(items, responsesDeletion)).then(function() {
-        if (responsesDeletion.length > 0) {
-          message = responsesDeletion.length === 1 ? {
-            key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR'
-          } : {
-            key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL',
-            params: {
-              number: responsesDeletion.length
-            }
-          };
-          var responses = [];
-          _.forEach(responsesDeletion, function(responseItems) {
-            var currentResponse = {
-              title: responseItems[0],
-              message: {
-                params: {
-                  errCode: responseItems[1].data.errCode
-                }
-              }
-            };
-            switch(responseItems[1].status) {
-              case 400:
-              case 403:
-              case 404:
-                currentResponse.message.key = 'TOAST_ALERT.WARNING.ERROR_' + responseItems[1].status;
-                break;
-              default:
-                currentResponse.message.key = 'TOAST_ALERT.WARNING.ERROR_500';
-            }
-            responses.push(currentResponse);
-          });
-          toastService.error(message, undefined, responses);
+      deleteItems(items).then(function(deleteItemsResponse) {
+        if (deleteItemsResponse.nonDeletedItems.length > 0) {
+          showErrorNotificationForNonDeletedItems(deleteItemsResponse.nonDeletedItems);
         } else {
-          message = (nbItems === 1) ? 'TOAST_ALERT.ACTION.DELETE_SINGULAR' : 'TOAST_ALERT.ACTION.DELETE_PLURAL';
-          toastService.success({key: message});
+          showSuccessNotificationForDeletedItems(deleteItemsResponse.deletedItems);
+
           $timeout(function() {
             $scope.getUserQuotas();
           }, 350);
         }
       });
+    }
+
+    /**
+     * @name deleteItems
+     * @desc Delete documents
+     * @param {Array<Object>} items - List of items to be deleted
+     * @memberOf LinShare.document.documentController
+     */
+    function deleteItems(items) {
+      if (!items) {
+        return $q.when([]);
+      }
+
+      return $q.allSettled(_.map(items, function(item) { return item.remove(); })
+      ).then(function(removeItemsValues) {
+        var deletedItems = getFulfilledValues(removeItemsValues);
+        var nonDeletedItems = getRejectedReasons(removeItemsValues);
+
+        _.remove($scope.documentsList, function(document) {
+          return isDocumentContainedInCollection(deletedItems, document);
+        });
+        _.remove($scope.selectedDocuments, function(selectedDocument) {
+          return isDocumentContainedInCollection(deletedItems, selectedDocument);
+        });
+
+        tableParamsService.reloadTableParams();
+        tableParamsService.resetFlagsOnSelectedPages($scope.flagsOnSelectedPages);
+
+        return {
+          deletedItems: deletedItems,
+          nonDeletedItems: nonDeletedItems
+        };
+      });
+    }
+
+    /**
+     * @name getFulfilledValues
+     * @desc Get deleted items
+     * @param {Array<Object>} allSettledAnswer - List of answers sent by the server about each deleted document
+     * @memberOf LinShare.document.documentController
+     */
+    function getFulfilledValues(allSettledAnswer) {
+      return _.map(
+        _.filter(
+          allSettledAnswer,
+          { state: 'fulfilled' }
+        ),
+        'value'
+      );
+    }
+
+    /**
+     * @name getRejectedReasons
+     * @desc Get non-deleted items
+     * @param {Array<Object>} allSettledAnswer - List of answers sent by the server about each deleted document
+     * @memberOf LinShare.document.documentController
+     */
+    function getRejectedReasons(allSettledAnswer) {
+      return _.map(
+        _.filter(
+          allSettledAnswer,
+          { state: 'rejected' }
+        ),
+        'reason'
+      );
+    }
+
+    /**
+     * @name isDocumentContainedInCollection
+     * @desc Detect if the document is contained in the collection by leveraging its uuid
+     * @param {Array<Object>} collection - List of document object
+     * @param {Object} document - A document object
+     * @memberOf LinShare.document.documentController
+     */
+    function isDocumentContainedInCollection(collection, document) {
+      var indexOfDocumentInCollection = _.findIndex(collection, function(collectionItem) {
+        return collectionItem.uuid === document.uuid;
+      });
+
+      return indexOfDocumentInCollection !== -1;
+    }
+
+    /**
+     * @name showErrorNotificationForNonDeletedItems
+     * @desc Show error notification about non-deleted documents
+     * @param {Array<Object>} nonDeletedItems - List of non-deleted documents
+     * @memberOf LinShare.document.documentController
+     */
+    function showErrorNotificationForNonDeletedItems(nonDeletedItems) {
+      var responses = [];
+      var message = (nonDeletedItems.length === 1) ?
+        {
+          key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_SINGULAR'
+        } :
+        {
+          key: 'TOAST_ALERT.WARNING.ELEMENTS_NOT_DELETED_PLURAL',
+          params: {
+            number: nonDeletedItems.length
+          }
+        };
+
+      _.forEach(nonDeletedItems, function(nonDeletedItem) {
+        var currentResponse = {
+          title: nonDeletedItem.config && nonDeletedItem.config.data && nonDeletedItem.config.data.name || 'No title',
+          message: {
+            params: {
+              errCode: nonDeletedItem.data && nonDeletedItem.data.errCode
+            }
+          }
+        };
+
+        switch(nonDeletedItem.status) {
+          case 400:
+          case 403:
+          case 404:
+            currentResponse.message.key = 'TOAST_ALERT.WARNING.ERROR_' + nonDeletedItem.status;
+            break;
+          default:
+            currentResponse.message.key = 'TOAST_ALERT.WARNING.ERROR_500';
+        }
+
+        responses.push(currentResponse);
+      });
+
+      toastService.error(message, undefined, responses);
+    }
+
+    /**
+     * @name showSuccessNotificationForDeletedItems
+     * @desc Show success notification about deleted documents
+     * @param {Array<Object>} deletedItems - List of deleted documents
+     * @memberOf LinShare.document.documentController
+     */
+    function showSuccessNotificationForDeletedItems(deletedItems) {
+      var message = (deletedItems.length === 1) ?
+        'TOAST_ALERT.ACTION.DELETE_SINGULAR' :
+        'TOAST_ALERT.ACTION.DELETE_PLURAL';
+
+      toastService.success({ key: message });
     }
 
     /**
@@ -572,23 +678,6 @@
     function slideUpTextarea($event) {
       var currTarget = $event.currentTarget;
       angular.element(currTarget).parent().removeClass('show-full-comment');
-    }
-
-    function sortResponseDeletion(items, responsesDeletion) {
-      if (items) {
-        return _.map(items, function(restangularizedItem) {
-          return restangularizedItem.remove().then(function() {
-            _.remove($scope.documentsList, restangularizedItem);
-            _.remove($scope.selectedDocuments, restangularizedItem);
-            tableParamsService.reloadTableParams();
-            tableParamsService.resetFlagsOnSelectedPages($scope.flagsOnSelectedPages);
-            return responsesDeletion;
-          }).catch(function(error) {
-            responsesDeletion.push([restangularizedItem.name, error]);
-            return responsesDeletion;
-          });
-        });
-      }
     }
 
     function toggleSearchState() {
