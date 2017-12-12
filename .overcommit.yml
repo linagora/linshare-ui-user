@@ -35,7 +35,7 @@
 CommitMsg:
   SpellCheck:
     enabled: true
-    on_warn: pass
+    on_fail: pass
 
 PostCheckout:
   NpmInstall:
@@ -59,6 +59,7 @@ PreCommit:
   JsHint:
     enabled: true
     on_warn: fail
+    required_executable: './node_modules/.bin/jshint'
     exclude:
       - '**/spec.js'
 
