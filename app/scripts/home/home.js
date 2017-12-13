@@ -108,10 +108,6 @@
 
       $translatePartialLoader.addPart('home');
 
-      $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
-        flowFile._from = $scope.mySpacePage;
-      });
-
       getWelcomeMessage();
     }
 

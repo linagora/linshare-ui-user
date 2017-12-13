@@ -523,7 +523,6 @@
       contactReset._firstName = contactReset.firstName;
       contactReset._lastName = contactReset.lastName;
       $scope.mainVm.sidebar.hide();
-    };
+    }
   }
 })();
-   

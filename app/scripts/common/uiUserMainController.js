@@ -12,16 +12,55 @@
 
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
-  UiUserMainController.$inject = ['_', '$http', '$log', '$q', '$rootScope', '$scope', '$state', '$timeout', '$transitions',
-    '$window', 'authenticationRestService', 'checkTableHeightService', 'flowUploadService', 'functionalityRestService',
-    'LinshareUserService', 'lsAppConfig', 'MenuService', 'sharableDocumentService', 'ShareObjectService',
-    'sidebarService', 'toastService', 'uploadRestService'
+  UiUserMainController.$inject = [
+    '_',
+    '$http',
+    '$log',
+    '$q',
+    '$rootScope',
+    '$scope',
+    '$state',
+    '$timeout',
+    '$transitions',
+    '$window',
+    'authenticationRestService',
+    'checkTableHeightService',
+    'flowUploadService',
+    'functionalityRestService',
+    'LinshareUserService',
+    'lsAppConfig',
+    'MenuService',
+    'sharableDocumentService',
+    'ShareObjectService',
+    'sidebarService',
+    'toastService',
+    'uploadRestService'
   ];
 
-  function UiUserMainController(_, $http, $log, $q, $rootScope, $scope, $state, $timeout, $transitions, $window,
-    authenticationRestService, checkTableHeightService, flowUploadService, functionalityRestService,
-    LinshareUserService, lsAppConfig, MenuService, sharableDocumentService, ShareObjectService, sidebarService,
-    toastService, uploadRestService) {
+  function UiUserMainController(
+    _,
+    $http,
+    $log,
+    $q,
+    $rootScope,
+    $scope,
+    $state,
+    $timeout,
+    $transitions,
+    $window,
+    authenticationRestService,
+    checkTableHeightService,
+    flowUploadService,
+    functionalityRestService,
+    LinshareUserService,
+    lsAppConfig,
+    MenuService,
+    sharableDocumentService,
+    ShareObjectService,
+    sidebarService,
+    toastService,
+    uploadRestService
+  ) {
     /* jshint validthis:true */
     var mainVm = this;
 
@@ -59,6 +98,8 @@
      * @memberOf linshareUiUserApp
      */
     function activate() {
+      var notifyTimeoutReference;
+
       MenuService.build();
       $scope.loggedUser = new LinshareUserService();
       mainVm.sidebar = sidebarService;
@@ -110,25 +151,40 @@
          * @memberOf linshare.uiUserApp.activate.fileSuccessAction
          */
         function notify(file) {
-          $timeout(function() {
-            var stack = file.flowObj.opts.stack;
-            if (_.find(stack, file)) {
-              var files = _.remove(stack, function(flowFile) {
-                 return flowFile.linshareDocument;
-              });
+          notifyTimeoutReference && $timeout.cancel(notifyTimeoutReference);
 
-              var toastMsg = {key: 'UPLOAD_DONE', pluralization: true};
-              if (files.length === 1) {
-                toastMsg.params = {
-                  fileName: file.name,
-                  singular: 'true'
-                };
-              }
-              toastService.success(toastMsg);
-            }
+          notifyTimeoutReference = $timeout(function() {
+            doNotification(file);
           }, 1000);
         }
       });
+
+
+    /**
+     * @name doNotification
+     * @desc Notify user about upload success when this function is not re-called in a second
+     * @param {Object} file - A successfully uploaded flowFile object
+     * @returns {Void}
+     * @memberOf linshare.uiUserApp.activate.fileSuccessAction
+     */
+      function doNotification(file) {
+        notifyTimeoutReference = undefined;
+        var stack = file.flowObj.opts.stack;
+        if (_.find(stack, file)) {
+          var files = _.remove(stack, function(flowFile) {
+             return flowFile.linshareDocument;
+          });
+
+          var toastMsg = {key: 'UPLOAD_DONE', pluralization: true};
+          if (files.length === 1) {
+            toastMsg.params = {
+              fileName: file.name,
+              singular: 'true'
+            };
+          }
+          toastService.success(toastMsg);
+        }
+      }
 
       $scope.$on('flow::fileRemoved', function fileRemoveAction(event, $flow, flowFile) {
         mainVm.removeShareDocument(flowFile);
