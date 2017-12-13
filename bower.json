@@ -36,7 +36,9 @@
     "node-uuid": "1.4.7",
     "restangular": "1.6.1",
     "sweetalert": "1.0.1",
-    "waves": "0.7.5"
+    "waves": "0.7.5",
+    "ng-webworker": "0.2.3",
+    "angular-promise-extras": "0.1.8"
   },
   "overrides": {
     "bootstrap": {

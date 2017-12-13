@@ -8,6 +8,7 @@ angular.module('linshareUiUserApp', [
   'ngAnimate',
   'ngCookies',
   'ngMessages',
+  'ngPromiseExtras',
   'ngResource',
   'ngRoute',
   'ngSanitize',
