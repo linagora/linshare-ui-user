@@ -115,11 +115,7 @@
      */
     function addNewItemInTableParams(newItem) {
       workgroupNodesVm.nodesList.push(newItem);
-      $scope.isNewAddition = true;
       workgroupNodesVm.tableParamsService.reloadTableParams();
-      $timeout(function() {
-        $scope.isNewAddition = false;
-      }, 0);
     }
 
     /**

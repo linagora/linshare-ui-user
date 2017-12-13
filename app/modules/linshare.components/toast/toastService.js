@@ -187,7 +187,7 @@
      * @name toastShow
      * @desc Show the toast
      * @param {Object} mdToastLocals - Local variables send to the controller
-     * @returns {Promise} promise resolved on toastClose
+     * @returns {Void}
      * @memberOf linshare.components.toastService
      */
     function toastShow(mdToastLocals) {
@@ -196,54 +196,48 @@
         delay: mdToastLocals.toastLabel || mdToastLocals.toastDetails ? delay.long : delay.default
       });
 
-      if (isActive()) {
-        var deferred = $q.defer();
-        stack.push({
-          mdToastLocals: mdToastLocals,
-          promise: deferred.promise
-        });
+      stack.push(mdToastLocals);
 
-        return $q.when(stack.shift().promise.then(function() {
-          return show(mdToastLocals);
-        }).then(function(data) {
-          deferred.resolve();
-          return data;
-        }));
-      } else {
-        var mdToastInstance = show(mdToastLocals);
-        stack.push({
-          mdToastLocals: mdToastLocals,
-          promise: mdToastInstance
-        });
-        return mdToastInstance;
+      (stack.length === 1) && doToastShowFromTheStack();
+    }
+
+     /**
+     * @name doToastShowFromTheStack
+     * @desc Show all Toasts stacked in the stack
+     * @returns {Void}
+     * @memberOf linshare.components.toastService
+     */
+    function doToastShowFromTheStack() {
+      if (!stack.length) {
+        return;
       }
 
-      /**
-       * @name show
-       * @desc Show the toast
-       * @param {Object} mdToastLocals - Local variables send to the controller
-       * @returns {Object} promise resolved on toastClose
-       * @memberOf linshare.components.toastService.toastShow
-       */
-      function show(mdToastLocals) {
-        var mdToast = $mdToast.show({
-          locals: mdToastLocals,
-          controller: 'toastController',
-          controllerAs: 'toastVm',
-          bindToController: true,
-          position: position,
-          hideDelay: 0,
-          templateUrl: templateUrl
-        });
+      var mdToastLocals = stack[0];
 
-        mdToast.then(function() {
-          _.remove(stack, {
-            mdToastLocals: mdToastLocals
-          });
-        });
+      show(mdToastLocals).then(function() {
+        stack.shift();
 
-        return mdToast;
-      }
+        doToastShowFromTheStack();
+      });
+    }
+
+    /**
+     * @name show
+     * @desc Show the toast
+     * @param {Object} mdToastLocals - Local variables send to the controller
+     * @returns {Promise} promise resolved on toastClose
+     * @memberOf linshare.components.toastService
+     */
+    function show(mdToastLocals) {
+      return $mdToast.show({
+        locals: mdToastLocals,
+        controller: 'toastController',
+        controllerAs: 'toastVm',
+        bindToController: true,
+        position: position,
+        hideDelay: 0,
+        templateUrl: templateUrl
+      });
     }
   }
 })();

@@ -12,7 +12,10 @@
     tableParamsService, auditDetailsService, swal, LinshareShareService, browseService ,$state, $transitions,
     $transition$) {
 
-    var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
+    var swalMultipleDownloadTitle,
+      swalMultipleDownloadCancel,
+      swalMultipleDownloadConfirm,
+      reloadTableParamsTimeoutReference;
 
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
@@ -129,13 +132,25 @@
       if(flowFile._from === $scope.mySpacePage) {
         flowFile.asyncUploadDeferred.promise.then(function(file) {
           $scope.documentsList.push(file.linshareDocument);
-          $scope.isNewAddition = tableParamsService.isItemAddedOnCurrentPage(file.linshareDocument.uuid);
-          tableParamsService.reloadTableParams();
-          $timeout(function() {
-            $scope.isNewAddition = false;
-          }, 0);
+          reloadTableParamsWhenPossible();
         });
       }
+    }
+
+    /**
+     * @name reloadTableParamsWhenPossible
+     * @desc Call reloadTableParams when this function is not re-called in a second
+     * @returns {Void}
+     * @memberOf linshare.document.documentController
+     */
+    function reloadTableParamsWhenPossible() {
+      reloadTableParamsTimeoutReference && $timeout.cancel(reloadTableParamsTimeoutReference);
+
+      reloadTableParamsTimeoutReference = $timeout(function() {
+        reloadTableParamsTimeoutReference = undefined;
+
+        tableParamsService.reloadTableParams();
+      }, 1000);
     }
 
     function backToSidebarContentDetails() {
@@ -323,11 +338,7 @@
           return LinshareDocumentRestService.restangularize(documents[0]).get();
         }).then(function(document) {
           $scope.documentsList.push(document);
-          $scope.isNewAddition = true;
           tableParamsService.reloadTableParams();
-          $timeout(function() {
-            $scope.isNewAddition = false;
-          }, 0);
         });
       });
     }
@@ -575,11 +586,7 @@
     function reloadDocuments() {
       LinshareDocumentRestService.getList().then(function(data) {
         $scope.documentsList = data;
-        $scope.isNewAddition = true;
         tableParamsService.reloadTableParams($scope.documentsList);
-        $timeout(function() {
-          $scope.isNewAddition = false;
-        }, 0);
       }, 500);
     }
 

@@ -215,7 +215,7 @@ angular.module('linshare.sharedSpace')
       if (element.attr('contenteditable') === 'false') {
         $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
       }
-    };
+    }
 
     thisctrl.flagsOnSelectedPages = {};
 
@@ -347,7 +347,7 @@ angular.module('linshare.sharedSpace')
             thisctrl.canCreate = true;
           }
         })
-        .finally(thisctrl.tableParams.reload)
+        .finally(thisctrl.tableParams.reload);
     }
 
     function createFolder(folderName) {
