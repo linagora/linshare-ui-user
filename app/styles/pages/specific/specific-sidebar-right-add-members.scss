@@ -17,6 +17,19 @@
 }
 #content-ctn-sidebar h2.headerSubCtn.existing-member {
   margin-bottom: 0.75em;
+  width: 100%;
+  height: 30px;
+  line-height: 28px;
+
+  i {
+    padding: 0;
+    margin: 0;
+    color: #444;
+  }
+
+  .members-options-toggle {
+    line-height: 23px;
+  }
 }
 
 .fields-add-member .autocomplete-search-ctn ul.dropdown-menu{
@@ -87,8 +100,12 @@
 
 .fields-search-member {
   clear: both;
-  display: -webkit-flex;
-  display: flex;
+  display: none;
+
+  &.show-options {
+    display: flex;
+  }
+
   .dropdown-filters {
     flex: 0 0 30px;
     height: 30px;

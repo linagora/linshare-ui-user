@@ -39,10 +39,22 @@
           <h2 class="pull-left headerSubCtn existing-member">
             <span translate>MEMBER_TAB.NUM_MEMBER</span>
             <span>{{mainVm.sidebar.getData().currentSelectedDocument.current.members.length}}</span>
+            <span
+              class="pull-right actions members-options-toggle"
+              data-ng-click="advancedMemberSearchOptions = !advancedMemberSearchOptions"
+            >
+              <a>
+                <i class="ls-settings"></i>
+              </a>
+            </span>
           </h2>
         </div>
         <div class="form-sidebar clearfix">
-          <form role="form" class="fields-search-member">
+          <form
+            role="form"
+            class="fields-search-member"
+            data-ng-class="{'show-options': advancedMemberSearchOptions}"
+          >
             <div class="search-style autocomplete-search-ctn">
               <div class="fg-line">
                 <input type="text" class="form-control"
@@ -58,7 +70,7 @@
                     auto-close="outsideClick">
                 <button class="plain-text-button share-link waves-effect"
                    uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
-                  <i class="ls-settings"></i>
+                  <i class="zmdi zmdi-sort-asc"></i>
                 </button>
                 <div uib-dropdown-menu class="uib-dropdown-menu dropdown-menu-right dm-icon double-drop"
                      data-ng-class="{'open':isOpenMemberOrder}">
