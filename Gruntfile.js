@@ -91,6 +91,10 @@ module.exports = function(grunt) {
                 '/app/styles',
                 serveStatic('./app/styles')
               ),
+              connect().use(
+                '/node_modules/',
+                serveStatic('./node_modules')
+              ),
               serveStatic(appConfig.app)
             ];
           }
