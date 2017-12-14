@@ -9,16 +9,17 @@
     .module('linshare.components')
     .controller('toastController', toastController);
 
-  toastController.$inject = ['_', '$interval', '$scope'];
+  toastController.$inject = ['_', '$timeout', '$scope'];
 
   /**
    * @namespace toastController
    * @desc Controller for the mdToast
    * @memberOf linshare.components.toastController
    */
-  function toastController(_, $interval, $scope) {
+  function toastController(_, $timeout, $scope) {
     /* jshint validthis:true */
     var toastVm = this;
+    var hideIntervalReference;
     toastVm.updateHideDelay = updateHideDelay;
 
     activate();
@@ -39,7 +40,7 @@
       $scope.$on('$destroy', function() {
         /* Ensure that an unbind toast didn't correctly disappear */
         angular.element('md-toast').remove();
-        $interval.cancel(toastVm.hideInterval);
+        $timeout.cancel(hideIntervalReference);
       });
     }
 
@@ -52,12 +53,11 @@
     function updateHideDelay(delay) {
       delay = delay || 120000;
 
-      if (toastVm.hideInterval) {
-        $interval.cancel(toastVm.hideInterval);
-      }
-      toastVm.hideInterval = $interval(function() {
+      hideIntervalReference && $timeout.cancel(hideIntervalReference);
+
+      hideIntervalReference = $timeout(function() {
         toastVm.toastClose();
-      }, delay, 1) ;
+      }, delay) ;
     }
   }
 })();
