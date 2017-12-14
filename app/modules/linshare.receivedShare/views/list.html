@@ -107,7 +107,7 @@
                            autocomplete="off"
                            x-ng-model="paramFilter['name']"
                            placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
-                           x-ng-change="updateParams()">
+                           x-ng-change="tableParams.reload()">
                   </div>
                 </div>
               </div>
@@ -142,13 +142,26 @@
     <div id="drop-area">
       <div id="top-search-wrap">
         <i id="top-search-close"  x-ng-click="toggleSearchState()">&times;</i>
-        <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-               placeholder="Nom de fichier" x-ng-change="updateParams()" x-ng-model="paramFilter['name']"
-               aria-invalid="false">
+        <input
+          type="text"
+          id="searchInMobileFiles"
+          class="form-control ng-pristine ng-untouched ng-valid"
+          placeholder="Nom de fichier"
+          data-ng-change="tableParams.reload()"
+          data-ng-model="paramFilter['name']"
+          aria-invalid="false"
+        >
       </div>
       <div id="selection-actions" class="default-multi-toolbar-state collapsible-actions-toolbar"
            x-ng-class="{'show-multi-menu': selectedDocuments.length > 0}">
-        <div class="toggle-checkbox-toolbar" x-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
+        <div
+          class="toggle-checkbox-toolbar"
+          x-ng-click="selectDocumentsOnCurrentPage(
+            tableParams.data,
+            tableParams.page(),
+            flagsOnSelectedPages[tableParams.page()]
+          )"
+        >
           <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope" >
             <i class="fa ls-check-o checkbox-table"></i>
           </a>
@@ -244,8 +257,16 @@
       </div>
       <!-- TODO: does not work, please repair it : it needs to select all the list items -->
       <script type="text/ng-template" id="checkboxheader.html">
-        <span x-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
-              role="button" tabindex="0" style="display:block" class="center">
+        <span
+          data-ng-click="selectDocumentsOnCurrentPage(
+            tableParams.data,
+            tableParams.page(),
+            flagsOnSelectedPages[tableParams.page()])"
+          role="button"
+          tabindex="0"
+          style="display:block"
+          class="center"
+        >
           <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-txt-btn" >
             <i class="fa ls-check-o checkbox-table"></i>
           </a>
@@ -262,10 +283,9 @@
 
             <tr x-ng-repeat="documentFile in $data"
                 ls-item-selection=""
-                data-selected-documents="selectedDocuments"
                 data-document-file="documentFile"
                 data-current-selected-Document="currentSelectedDocument"
-                data-details-function="getDetails"
+                data-details-function="showCurrentFile"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()"
                 x-ng-click="backToSidebarContentDetails()"
                 x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
@@ -425,8 +445,14 @@
       <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.FILES' | translate}}</span>
     </div>
     <div class="col-xs-8">
-      <div data-ng-click="selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
-           class="visible-xs toolbar-mobile-item col-xs-3">
+      <div
+        data-ng-click="selectDocumentsOnCurrentPage(
+          tableParams.data,
+          tableParams.page(),
+          flagsOnSelectedPages[tableParams.page()]
+        )"
+        class="visible-xs toolbar-mobile-item col-xs-3"
+      >
         <i class="ls-check-checked select-all-items p-r-10"
            data-ng-if="!flagsOnSelectedPages[tableParams.page()]">
         </i>
