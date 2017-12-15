@@ -416,26 +416,50 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function getNodeDetails(nodeItem) {
-      var deferred = $q.defer();
-      var nodeDetails = {};
-      workgroupNodesRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid).then(function(data) {
-        nodeDetails = data;
-        documentUtilsService.loadItemThumbnail(nodeDetails,
-          workgroupNodesRestService.thumbnail(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid));
-
-        workgroupNodesRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid)
-          .then(function(data) {
-            auditDetailsService.generateAllDetails($scope.userLogged.uuid, data.plain()).then(function(auditActions) {
-              nodeDetails.auditActions = auditActions;
-              deferred.resolve(nodeDetails);
-            });
-          });
-      }, function(error) {
-        deferred.reject(error);
-      });
       // TODO : change the watcher method in activate() of workgroupMembersController, then do it better
       $scope.mainVm.sidebar.setContent(workgroupNodesVm.workgroupNode);
-      return deferred.promise;
+
+      return $q
+        .all([
+          workgroupNodesRestService.get(
+            workgroupNodesVm.folderDetails.workgroupUuid,
+            nodeItem.uuid
+          ),
+          workgroupNodesRestService.getAudit(
+            workgroupNodesVm.folderDetails.workgroupUuid,
+            nodeItem.uuid
+          )
+        ])
+        .then(function(workgroupNodesRestServiceAnswers) {
+          var nodeDetails = workgroupNodesRestServiceAnswers[0];
+          var nodeAudit = workgroupNodesRestServiceAnswers[1];
+
+          documentUtilsService.loadItemThumbnail(
+            nodeDetails,
+            workgroupNodesRestService.thumbnail(
+              workgroupNodesVm.folderDetails.workgroupUuid,
+              nodeItem.uuid
+            )
+          );
+
+          return $q.all([
+            $q.when(nodeDetails),
+            auditDetailsService.generateAllDetails(
+              $scope.userLogged.uuid,
+              nodeAudit.plain()
+            ),
+          ]);
+        })
+        .then(function(workgroupNodesRestServiceAnswers) {
+          var nodeDetails = workgroupNodesRestServiceAnswers[0];
+          var auditActions = workgroupNodesRestServiceAnswers[1];
+
+          return Object.assign(
+            {},
+            nodeDetails,
+            { auditActions: auditActions }
+          );
+        });
     }
 
     /**
