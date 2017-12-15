@@ -1,3 +1,4 @@
+/* global uuid:false */
 'use strict';
 
 angular
@@ -42,16 +43,15 @@ angular
     });
     flowFactoryProvider.defaults = {
       stack: [],
-      simultaneousUploads: lsAppConfig.simultaneousUpload,
-      //testChunks:false,
+      simultaneousUploads: lsAppConfig.flowFactoryProviderDefaults.simultaneousUpload,
+      progressCallbacksInterval: lsAppConfig.flowFactoryProviderDefaults.progressCallbacksInterval,
+      chunkSize: 2097152,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
-      allowDuplicateUploads: true,
-      maxChunkRetries: 3,
-      chunkRetryInterval: 1000,
+      allowDuplicateUploads: lsAppConfig.flowFactoryProviderDefaults.allowDuplicateUploads,
+      maxChunkRetries: lsAppConfig.flowFactoryProviderDefaults.maxChunkRetries,
+      chunkRetryInterval: lsAppConfig.flowFactoryProviderDefaults.chunkRetryInterval,
       generateUniqueIdentifier: function() {
-        /* jshint ignore:start */
         return uuid.v4();
-        /* jshint ignore:end */
       },
       query: function(flowFile) {
         var workgroupUuidParam = '';

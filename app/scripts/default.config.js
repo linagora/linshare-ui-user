@@ -38,7 +38,13 @@
         write: 'WRITE',
         readonly: 'READ'
       },
-      simultaneousUpload: 1,
+      flowFactoryProviderDefaults : {
+        simultaneousUpload: 1,
+        progressCallbacksInterval: 1000,
+        allowDuplicateUploads: true,
+        maxChunkRetries: 3,
+        chunkRetryInterval: 1000
+      },
       tableParams: {
         count: 25,
         sorting: {
