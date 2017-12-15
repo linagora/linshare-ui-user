@@ -12,10 +12,10 @@
     tableParamsService, auditDetailsService, swal, LinshareShareService, browseService ,$state, $transitions,
     $transition$) {
 
-    var swalMultipleDownloadTitle,
+    var reloadTableParamsTimeoutReference,
       swalMultipleDownloadCancel,
       swalMultipleDownloadConfirm,
-      reloadTableParamsTimeoutReference;
+      swalMultipleDownloadTitle;
 
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
@@ -168,6 +168,12 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     }
 
+    /**
+     * @name deleteCallback
+     * @desc Callback to delete documents
+     * @param {Array<Object>} items - List of items to be deleted
+     * @memberOf LinShare.document.documentController
+     */
     function deleteCallback(items) {
       deleteItems(items).then(function(deleteItemsResponse) {
         if (deleteItemsResponse.nonDeletedItems.length > 0) {
@@ -186,6 +192,7 @@
      * @name deleteItems
      * @desc Delete documents
      * @param {Array<Object>} items - List of items to be deleted
+     * @returns {Object} Deleted and nonDeleted items
      * @memberOf LinShare.document.documentController
      */
     function deleteItems(items) {
@@ -233,7 +240,7 @@
 
     /**
      * @name getRejectedReasons
-     * @desc Get non-deleted items
+     * @desc Get the reasons for which server was not able to delete nodes
      * @param {Array<Object>} allSettledAnswer - List of answers sent by the server about each deleted document
      * @memberOf LinShare.document.documentController
      */

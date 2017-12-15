@@ -194,13 +194,6 @@ angular.module('linshare.sharedSpace')
       $scope.mainVm.sidebar.show();
     };
 
-    thisctrl.setDropdownSelected = function($event) {
-      var currTarget = $event.currentTarget;
-      angular.element(currTarget).closest('ul').find('.active-check').removeClass('active-check');
-      $timeout(function() {
-        angular.element(currTarget).addClass('active-check');
-      }, 200);
-    };
     /**
      * @name goToSharedSpaceTarget
      * @desc routing to the workgroup or files inside a workgroup
