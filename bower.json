@@ -38,7 +38,8 @@
     "sweetalert": "1.0.1",
     "waves": "0.7.5",
     "ng-webworker": "0.2.3",
-    "angular-promise-extras": "0.1.8"
+    "angular-promise-extras": "0.1.8",
+    "es6-shim": "0.35.3"
   },
   "overrides": {
     "bootstrap": {

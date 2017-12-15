@@ -122,12 +122,15 @@
           files: function(receivedShareRestService) {
             return receivedShareRestService.getList();
           },
-          documentSelected: function($transition$, files) {
-            if (_.isUndefined($transition$.params().fileUuid)) {
+          documentsToIsolate: function($transition$, files) {
+            var documentsToFind = $transition$.params().fileUuid;
+
+            if (_.isUndefined(documentsToFind)) {
               return null;
             }
-            return _.find(files, function(doc) {
-              return doc.uuid === $transition$.params().fileUuid;
+
+            return _.filter(files, function(doc) {
+              return _.includes(documentsToFind, doc.uuid);
             });
           }
         }
