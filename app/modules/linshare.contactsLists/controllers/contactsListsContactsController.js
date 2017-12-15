@@ -55,7 +55,6 @@
     contactsListsContactsVm.saveContact = saveContact;
     contactsListsContactsVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     contactsListsContactsVm.selectedContacts = [];
-    contactsListsContactsVm.setDropdownSelected = setDropdownSelected;
     contactsListsContactsVm.setSubmitted = setSubmitted;
     contactsListsContactsVm.showItemDetails = showItemDetails;
     contactsListsContactsVm.sortDropdownSetActive = sortDropdownSetActive;
@@ -333,20 +332,6 @@
         });
         contactsListsContactsVm.flagsOnSelectedPages[currentPage] = false;
       }
-    }
-
-    /**
-     * @name setDropdownSelected
-     * @desc open dropdown menu
-     * @param {Object} $event - event handle
-     * @memberOf LinShare.contactsLists.contactsListsContactsController
-     */
-    function setDropdownSelected($event) {
-      var currTarget = $event.currentTarget;
-      angular.element(currTarget).closest('ul').find('.active-check').removeClass('active-check');
-      $timeout(function() {
-        angular.element(currTarget).addClass('active-check');
-      }, 200);
     }
 
     /**

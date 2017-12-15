@@ -238,22 +238,134 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function deleteNodes(nodes) {
-      documentUtilsService.deleteItem(nodes, documentUtilsService.itemUtilsConstant.WORKGROUP_NODE, function(nodes) {
-        _.forEach(nodes, function(restangularizedItem) {
-          restangularizedItem.remove().then(function() {
-            toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
-            _.remove(workgroupNodesVm.nodesList, restangularizedItem);
-            _.remove(workgroupNodesVm.selectedDocuments, restangularizedItem);
-            workgroupNodesVm.tableParamsService.reloadTableParams();
-            $scope.mainVm.sidebar.hide(nodes);
-          }, function(error) {
-            if (error.status === 400 && error.data.errCode === 26006) {
-              toastService.error({key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26006'});
-            } else if (error.data.errCode === 26444) {
-              toastService.error({key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26444'});
-            }
+      documentUtilsService.deleteItem(
+        nodes,
+        documentUtilsService.itemUtilsConstant.WORKGROUP_NODE,
+        function(nodes) {
+          doDeleteNodes(nodes).then(showNotifications);
+        }
+      );
+    }
+
+    /**
+     * @name doDeleteNodes
+     * @desc Delete nodes
+     * @param {Array<Object>} nodes - List of nodes to be deleted
+     * @returns {Object} deleted and nonDeleted items
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function doDeleteNodes(nodes) {
+      return $q
+        .allSettled(_.map(nodes, function(node) { return node.remove(); }))
+        .then(function(removeNodesValues) {
+          var deletedNodes = getFulfilledValues(removeNodesValues);
+          var nonDeletedNodes = getRejectedReasons(removeNodesValues);
+
+          _.remove(workgroupNodesVm.nodesList, function(node) {
+            return isDocumentContainedInCollection(deletedNodes, node);
           });
+          _.remove(workgroupNodesVm.selectedDocuments, function(selectedDocument) {
+            return isDocumentContainedInCollection(deletedNodes, selectedDocument);
+          });
+
+          workgroupNodesVm.tableParamsService.reloadTableParams();
+          $scope.mainVm.sidebar.hide(nodes);
+
+          return {
+            deletedNodes: deletedNodes,
+            nonDeletedNodes: nonDeletedNodes
+          };
         });
+    }
+
+    /**
+     * @name showNotifications
+     * @desc give user feedback about deleted nodes
+     * @param {Array<Object>} deleteNodesResponse - List of answers sent by the server about each deleted node
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function showNotifications(deleteNodesResponse) {
+      if (deleteNodesResponse.nonDeletedNodes.length > 0) {
+        showErrorNotificationForNonDeletedNodes(deleteNodesResponse.nonDeletedNodes);
+      } else {
+        showSuccessNotificationForDeletedNodes(deleteNodesResponse.deletedNodes);
+      }
+    }
+
+    /**
+     * @name isDocumentContainedInCollection
+     * @desc Detect if the document is contained in the collection by leveraging its uuid
+     * @param {Array<Object>} collection - List of document object
+     * @param {Object} document - A document object
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function isDocumentContainedInCollection(collection, document) {
+      var indexOfDocumentInCollection = _.findIndex(collection, function(collectionItem) {
+        return collectionItem.uuid === document.uuid;
+      });
+
+      return indexOfDocumentInCollection !== -1;
+    }
+
+    /**
+     * @name getFulfilledValues
+     * @desc Get deleted nodes
+     * @param {Array<Object>} allSettledAnswer - List of answers sent by the server about each deleted node
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function getFulfilledValues(allSettledAnswer) {
+      return _.map(
+        _.filter(
+          allSettledAnswer,
+          { state: 'fulfilled' }
+        ),
+        'value'
+      );
+    }
+
+    /**
+     * @name getRejectedReasons
+     * @desc Get the reasons for which server was not able to delete nodes
+     * @param {Array<Object>} allSettledAnswer - List of answers sent by the server about each deleted node
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function getRejectedReasons(allSettledAnswer) {
+      return _.map(
+        _.filter(
+          allSettledAnswer,
+          { state: 'rejected' }
+        ),
+        'reason'
+      );
+    }
+
+    /**
+     * @name showSuccessNotificationForDeletedNodes
+     * @desc Show success notification about deleted nodes
+     * @param {Array<Object>} deletedNodes - List of deleted nodes
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function showSuccessNotificationForDeletedNodes(deletedNodes) {
+      var message = (deletedNodes.length === 1) ?
+        'TOAST_ALERT.ACTION.DELETE_SINGULAR' :
+        'TOAST_ALERT.ACTION.DELETE_PLURAL';
+
+      toastService.success({ key: message });
+    }
+
+    /**
+     * @name showErrorNotificationForNonDeletedNodes
+     * @desc Show error notification about non-deleted nodes
+     * @param {Array<Object>} nonDeletedNodes - List of non-deleted nodes
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function showErrorNotificationForNonDeletedNodes(nonDeletedNodes) {
+      _.forEach(nonDeletedNodes, function(nonDeletedItem) {
+        if (nonDeletedItem.status === 400 && nonDeletedItem.data.errCode === 26006) {
+          toastService.error({ key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26006' });
+        } else if (nonDeletedItem.data.errCode === 26444) {
+          toastService.error({ key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26444' });
+        }
       });
     }
 

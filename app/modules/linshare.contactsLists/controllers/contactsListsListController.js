@@ -111,7 +111,6 @@
     contactsListsListVm.saveContacts = saveContacts;
     contactsListsListVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     contactsListsListVm.selectedContactsLists = [];
-    contactsListsListVm.setDropdownSelected = setDropdownSelected;
     contactsListsListVm.showItemDetails = showItemDetails;
     contactsListsListVm.sortDropdownSetActive = sortDropdownSetActive;
     contactsListsListVm.switchVisibility = switchVisibility;
@@ -617,21 +616,6 @@
         });
         contactsListsListVm.flagsOnSelectedPages[currentPage] = false;
       }
-    }
-
-    /**
-     * @name setDropdownSelected
-     * @desc open dropdown menu
-     * @param {Object} $event - event handle
-     * @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    // TODO : IAB : directive to externalize this code
-    function setDropdownSelected($event) {
-      var currTarget = $event.currentTarget;
-      angular.element(currTarget).closest('ul').find('.active-check').removeClass('active-check');
-      $timeout(function() {
-        angular.element(currTarget).addClass('active-check');
-      }, 200);
     }
 
     /**

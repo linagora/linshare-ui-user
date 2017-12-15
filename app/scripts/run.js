@@ -45,7 +45,7 @@ angular
       stack: [],
       simultaneousUploads: lsAppConfig.flowFactoryProviderDefaults.simultaneousUpload,
       progressCallbacksInterval: lsAppConfig.flowFactoryProviderDefaults.progressCallbacksInterval,
-      chunkSize: 2097152,
+      chunkSize: lsAppConfig.flowFactoryProviderDefaults.chunkSize,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
       allowDuplicateUploads: lsAppConfig.flowFactoryProviderDefaults.allowDuplicateUploads,
       maxChunkRetries: lsAppConfig.flowFactoryProviderDefaults.maxChunkRetries,

@@ -43,7 +43,8 @@
         progressCallbacksInterval: 1000,
         allowDuplicateUploads: true,
         maxChunkRetries: 3,
-        chunkRetryInterval: 1000
+        chunkRetryInterval: 1000,
+        chunkSize: 2097152
       },
       tableParams: {
         count: 25,
