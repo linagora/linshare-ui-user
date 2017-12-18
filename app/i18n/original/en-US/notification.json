@@ -44,6 +44,7 @@
     "ACTION": {
       "BROWSER_ACTION": "{singular, select, true{The file or folder has} other{files or folders have}} been {action, select, moved{moved} other{copied}} into : {folderName}.",
       "CLOSE": "Close",
+      "CONTACTS_LIST_CREATION": "The Contacts List {{contactsListName}} has been created successfully.",
       "COPY": "{singular, select, true{The file has been} other{{nbItems} files have been}} copied into your Personal Space.",
       "COPY_SAME_FOLDER": "{singular, select, true{The file} other{Files}} has been copied successfully.",
       "DELETE": "Deletion succeeded",

@@ -52,6 +52,11 @@
     "UPDATE_CONTACT_IMPOSSIBLE": "You are not authorized to edit this contact",
     "VISIBILITY": "Visibility"
   },
+  "CREATE_CONTACTS_LIST": {
+    "CREATE": "Create",
+    "CREATE_FROM_THESE_CONTACTS": "Create a Contacts List from these contacts ?",
+    "INPUT_PLACEHOLDER": "Contacts List name"
+  },
   "FORMS_MESSAGES": {
     "INVALID_EMAIL": "Email address is invalid.",
     "INVALID_EMPTY_FIELD": "This field cannot be empty."

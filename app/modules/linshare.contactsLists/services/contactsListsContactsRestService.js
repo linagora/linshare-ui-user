@@ -9,14 +9,24 @@
     .module('linshare.contactsLists')
     .factory('contactsListsContactsRestService', contactsListsContactsRestService);
 
-  contactsListsContactsRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
+  contactsListsContactsRestService.$inject = [
+    '_',
+    '$log',
+    'Restangular',
+    'ServerManagerService'
+  ];
 
   /**
    * @namespace contactsListsContactsRestService
    * @descService to interact with ContactsListsContact object by REST
    * @memberOf LinShare.contactsLists
    */
-  function contactsListsContactsRestService($log, Restangular, ServerManagerService) {
+  function contactsListsContactsRestService(
+    _,
+    $log,
+    Restangular,
+    ServerManagerService
+  ) {
     var
       handler = ServerManagerService.responseHandler,
       restUrl = 'contact_lists',
@@ -43,7 +53,17 @@
      */
     function create(contactsListUuid, contact) {
       $log.debug('contactsListsContactsRestService - create');
-      return handler(Restangular.one(restUrl, contactsListUuid).all(restParam).post(contact));
+
+      var contactDto = _.pick(
+        contact,
+        [
+          'firstName',
+          'lastName',
+          'mail'
+        ]
+      );
+      
+      return handler(Restangular.one(restUrl, contactsListUuid).all(restParam).post(contactDto));
     }
 
     /**

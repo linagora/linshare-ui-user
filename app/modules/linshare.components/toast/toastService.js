@@ -198,7 +198,7 @@
 
       stack.push(mdToastLocals);
 
-      (stack.length === 1) && doToastShowFromTheStack();
+      return (stack.length === 1) && doToastShowFromTheStack();
     }
 
      /**
@@ -214,8 +214,12 @@
 
       var mdToastLocals = stack[0];
 
-      show(mdToastLocals).then(function() {
+      return show(mdToastLocals).then(function(mdToastResponsePromise) {
         stack.shift();
+
+        if (!stack.length) {
+          return mdToastResponsePromise;
+        }
 
         doToastShowFromTheStack();
       });
