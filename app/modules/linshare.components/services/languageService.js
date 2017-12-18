@@ -10,10 +10,10 @@
     .factory('languageService', languageService);
 
   languageService.$inject = [
-    '$locale',
     '$log',
     '$translate',
     'localStorageService',
+    'lsAppConfig',
     'moment',
     'tmhDynamicLocale',
     'uibDatepickerPopupConfig'
@@ -25,10 +25,10 @@
    * @memberOf linshare.components
    */
   function languageService(
-    $locale,
     $log,
     $translate,
     localStorageService,
+    lsAppConfig,
     moment,
     tmhDynamicLocale,
     uibDatepickerPopupConfig
@@ -105,9 +105,9 @@
      */
     // TODO : Decorator in run.js
     function overrideDatepickerFormat() {
-      uibDatepickerPopupConfig.datepickerPopup = $locale.DATETIME_FORMATS.shortDate;
-      uibDatepickerPopupConfig.html5Types.date = $locale.DATETIME_FORMATS.shortDate;
-      uibDatepickerPopupConfig.html5Types['datetime-local'] = $locale.DATETIME_FORMATS.medium;
+      uibDatepickerPopupConfig.datepickerPopup = lsAppConfig.locale.shortDate;
+      uibDatepickerPopupConfig.html5Types.date = lsAppConfig.locale.shortDate;
+      uibDatepickerPopupConfig.html5Types['datetime-local'] = lsAppConfig.locale.medium;
     }
 
     /**
