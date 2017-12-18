@@ -62,18 +62,25 @@
     </ul>
   </div>
   <div class="quota">
-    <div tooltip-placement="bottom"
-         uib-tooltip-template="'views/common/quotasTemplateTooltip.html'"
-         tooltip-popup-delay="250"
-         tooltip-class="quotas-tooltip-ctn">
-      <uib-progressbar
-        max="100"
-        value="userQuotas.percent"
-        data-ng-class="userQuotas.progressBarColor"></uib-progressbar>
+    <div
+      tooltip-placement="top"
+      uib-tooltip-template="'views/common/quotasTemplateTooltip.html'"
+      tooltip-popup-delay="250"
+      tooltip-append-to-body=" true"
+      tooltip-class="quotas-tooltip-ctn"
+    >
+      <uib-progress data-ng-class="userQuotas.progressBarColor">
+        <uib-bar
+          data-ng-repeat="bar in userQuotas.bars track by $index"
+          value="bar.value"
+          type="{{ bar.type }}"
+        >
+        </uib-bar>
+      </uib-progress>
       <div class="quota-information">
         <p>
-          {{userQuotas.remaining | readableSize:true}} <span translate>USER_QUOTAS.REMAINING_OVER</span>
-          {{userQuotas.total | readableSize:true}}
+          {{ userQuotas.remaining | readableSize:true }} <span translate>USER_QUOTAS.REMAINING_OVER</span>
+          {{ userQuotas.quota | readableSize:true }}
         </p>
       </div>
     </div>

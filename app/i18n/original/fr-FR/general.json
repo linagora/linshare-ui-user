@@ -249,6 +249,7 @@
   "UNKNOWN_FIRST_LETTER": "N.C.",
   "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> a été téléversé} other{Des fichiers ont été téléversés}} avec succès",
   "USER_QUOTAS": {
+    "DOMAIN": "Domain utilisé",
     "MAX_FILE_SIZE": "Taille de fichier max.",
     "REMAINING_OVER": "disponible sur",
     "USED": "Utilisé"
