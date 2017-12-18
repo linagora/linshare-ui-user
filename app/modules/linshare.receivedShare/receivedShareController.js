@@ -611,7 +611,8 @@
 
           documentUtilsService.loadItemThumbnail(
             $scope.currentSelectedDocument.current,
-            receivedShareRestService.thumbnail(
+            receivedShareRestService.thumbnail.bind(
+              null,
               $scope.currentSelectedDocument.current.uuid
             )
           );

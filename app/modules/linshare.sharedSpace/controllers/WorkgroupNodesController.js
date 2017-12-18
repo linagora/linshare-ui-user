@@ -434,16 +434,15 @@
           var nodeDetails = workgroupNodesRestServiceAnswers[0];
           var nodeAudit = workgroupNodesRestServiceAnswers[1];
 
-          documentUtilsService.loadItemThumbnail(
-            nodeDetails,
-            workgroupNodesRestService.thumbnail(
-              workgroupNodesVm.folderDetails.workgroupUuid,
-              nodeItem.uuid
-            )
-          );
-
           return $q.all([
-            $q.when(nodeDetails),
+            documentUtilsService.loadItemThumbnail(
+              nodeDetails,
+              workgroupNodesRestService.thumbnail.bind(
+                null,
+                workgroupNodesVm.folderDetails.workgroupUuid,
+                nodeItem.uuid
+              )
+            ),
             auditDetailsService.generateAllDetails(
               $scope.userLogged.uuid,
               nodeAudit.plain()

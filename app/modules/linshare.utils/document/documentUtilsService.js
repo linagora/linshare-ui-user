@@ -39,17 +39,22 @@
      * @memberOf linshare.utils.documentUtilsService
      */
     function loadItemThumbnail(item, getThumbnail) {
-      delete item.thumbnail;
-      if (item.hasThumbnail) {
-        getThumbnail.then(function(thumbnail) {
-          if (_.isUndefined(thumbnail)) {
-            item.thumbnailUnloadable = true;
-            item.hasThumbnail = false;
-          } else {
-            item.thumbnail = thumbnail;
-          }
-        });
+      if ((item.type && item.type === 'FOLDER') || !item.hasThumbnail) {
+        return $q.when(item);
       }
+
+      delete item.thumbnail;
+
+      return getThumbnail().then(function(thumbnail) {
+        if (_.isUndefined(thumbnail)) {
+          item.thumbnailUnloadable = true;
+          item.hasThumbnail = false;
+        } else {
+          item.thumbnail = thumbnail;
+        }
+
+        return item;
+      });
     }
 
     /***********************************************************************************************************/
