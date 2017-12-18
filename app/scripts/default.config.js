@@ -46,6 +46,16 @@
         chunkRetryInterval: 1000,
         chunkSize: 2097152
       },
+      locale: {
+        fullDate: 'EEEE d MMMM y',
+        longDate: 'd MMMM y',
+        medium: 'd MMM y HH:mm:ss',
+        mediumDate: 'd MMM y',
+        mediumTime: 'HH:mm:ss',
+        short: 'dd/MM/y HH:mm',
+        shortDate: 'dd/MM/y',
+        shortTime: 'HH:mm'
+      },
       tableParams: {
         count: 25,
         sorting: {
