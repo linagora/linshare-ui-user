@@ -257,6 +257,8 @@ angular.module('linshare.sharedSpace')
           thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module
           thisctrl.tableParams.reload();
           $scope.mainVm.sidebar.hide(items);
+
+          updateFlagsOnSelectedPages();
         });
       });
     }
@@ -264,7 +266,24 @@ angular.module('linshare.sharedSpace')
     function addSelectedDocument(document) {
       documentUtilsService.selectDocument(thisctrl.selectedDocuments, document);
 
+      updateFlagsOnSelectedPages();
       exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController();
+    }
+
+    function updateFlagsOnSelectedPages() {
+      if (!thisctrl.itemsList.length) {
+        thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] = false;
+      }
+
+      if (!thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] &&
+        (thisctrl.itemsList.length === thisctrl.selectedDocuments.length)) {
+        thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] = true;
+      }
+
+      if (thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] &&
+        (thisctrl.itemsList.length !== thisctrl.selectedDocuments.length)) {
+        thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] = false;
+      }
     }
 
     function toggleFilterBySelectedFiles() {
