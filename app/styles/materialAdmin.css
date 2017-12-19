@@ -9351,7 +9351,7 @@ a.lv-footer:hover {
   padding: 20px 20px 15px 20px;
 }
 #chat .chat-search .form-control {
-  background-image: url("../img/icons/search-2.png");
+  background-image: url("../images/icons/search-magnifying-glass.png");
   background-repeat: no-repeat;
   background-position: left center;
   padding-left: 30px;
@@ -9363,7 +9363,7 @@ a.lv-footer:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #chat .chat-search .form-control {
-    background-image: url("../img/icons/search-2@2x.png");
+    background-image: url("../images/icons/search-magnifying-glass.png");
     background-size: 24px 24px;
   }
 }
