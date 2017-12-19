@@ -665,7 +665,7 @@
         );
 
         documentUtilsService.loadItemThumbnail($scope.currentSelectedDocument.current,
-          LinshareDocumentRestService.thumbnail($scope.currentSelectedDocument.current.uuid));
+          LinshareDocumentRestService.thumbnail.bind(null, $scope.currentSelectedDocument.current.uuid));
 
         auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain())
           .then(function(auditActions) {
