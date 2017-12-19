@@ -227,7 +227,7 @@
                   class="plain-text-button share-link"
                   title="{{'ACTION.ADD_MEMBER' | translate}}"
                   data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, $event, true)"
-                  data-ng-class="{'disable-link' : !vm.'isLoggedUserAdminOfAllSelectedWorkgroups}"
+                  data-ng-class="{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
                 >
                   <i class="ls-add-user-sm"></i>
                   <span>{{'ACTION.ADD_MEMBER' | translate}}</span>
@@ -238,7 +238,7 @@
                 class="plain-text-button share-link"
                 title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
                 data-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"
-                data-ng-class="{'disable-link' : !vm.'isLoggedUserAdminOfAllSelectedWorkgroups}"
+                data-ng-class="{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
               >
                 <i class="fa fa-trash-o"></i>
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
