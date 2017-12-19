@@ -1,2 +1,9 @@
-<p><span translate>USER_QUOTAS.USED</span> : <strong>{{userQuotas.used | readableSize:true}}</strong></p>
-<p><span translate>USER_QUOTAS.MAX_FILE_SIZE</span> : <strong>{{userQuotas.maxFileSize | readableSize:true}}</strong></p>
+<p>
+  <span translate>USER_QUOTAS.USED</span> : <strong>{{ userQuotas.usedSpace | readableSize:true }}</strong>
+</p>
+<p data-ng-if="::userQuotas.bars.domain">
+  <span translate>USER_QUOTAS.DOMAIN</span> : <strong>{{ userQuotas.domainUsedSpace | readableSize:true }}</strong>
+</p>
+<p>
+  <span translate>USER_QUOTAS.MAX_FILE_SIZE</span> : <strong>{{ userQuotas.maxFileSize | readableSize:true }}</strong>
+</p>

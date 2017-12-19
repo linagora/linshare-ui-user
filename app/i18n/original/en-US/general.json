@@ -249,6 +249,7 @@
   "UNKNOWN_FIRST_LETTER": "UNK",
   "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> has been} other{Some files have been}} successfully uploaded",
   "USER_QUOTAS": {
+    "DOMAIN": "Domain used",
     "MAX_FILE_SIZE": "Max file size",
     "REMAINING_OVER": "remaining over",
     "USED": "Used"

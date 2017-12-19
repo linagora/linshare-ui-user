@@ -30,6 +30,7 @@
     'LinshareUserService',
     'lsAppConfig',
     'MenuService',
+    'quotaService',
     'sharableDocumentService',
     'ShareObjectService',
     'sidebarService',
@@ -55,6 +56,7 @@
     LinshareUserService,
     lsAppConfig,
     MenuService,
+    quotaService,
     sharableDocumentService,
     ShareObjectService,
     sidebarService,
@@ -438,20 +440,9 @@
      * @param {Object} quotas - Quotas details getted from server
      * @memberOf linshareUiUserApp
      */
-    function setUserQuotas(quotas) {
-      $scope.userQuotas.used = quotas.usedSpace;
-      $scope.userQuotas.total = quotas.quota;
-      $scope.userQuotas.remaining = $scope.userQuotas.total - $scope.userQuotas.used;
-      $scope.userQuotas.percent = Math.floor(($scope.userQuotas.used / $scope.userQuotas.total) * 100);
-      $scope.userQuotas.maxFileSize = quotas.maxFileSize;
-
-      if ($scope.userQuotas.percent >= 85 && $scope.userQuotas.percent < 95) {
-        $scope.userQuotas.progressBarColor = 'quotas-progress-bar-orange';
-      } else if ($scope.userQuotas.percent >= 95) {
-        $scope.userQuotas.progressBarColor = 'quotas-progress-bar-red';
-      } else {
-        $scope.userQuotas.progressBarColor = 'quotas-progress-bar-green';
-      }
+    function setUserQuotas(quotaData) {
+      var quotaBuilt = quotaService.buildQuota(quotaData);
+      $scope.userQuotas = quotaBuilt;
     }
   }
 })();

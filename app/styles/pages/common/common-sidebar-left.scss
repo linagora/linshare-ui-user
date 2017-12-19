@@ -280,18 +280,6 @@ body:not(.sw-toggled) #sidebar {
   height: 100px;
   overflow: hidden;
   z-index: 7;
-  .quota-used {
-    width: 60%;
-    height: 11px;
-    background-color: #309BD4;
-    float: left;
-    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 15%,
-      transparent 15%,
-      transparent 50%,
-      rgba(255, 255, 255, 0.15) 50%,
-      rgba(255, 255, 255, 0.15) 85%,
-      transparent 85%, transparent);
-  }
   .quota-free {
     width: 40%;
     height: 13px;
@@ -350,15 +338,52 @@ body:not(.sw-toggled) #sidebar {
     height: 10px;
     background-color: #e2e2e2;
     border-radius: 25px;
-    &.quotas-progress-bar-green .progress-bar {
+    &.quotas-progress-bar-green {
+      .progress-bar-user {
+        background-color: $quotasProgressBarGreen;
+      }
+    }
+    &.quotas-progress-bar-orange {
+      .progress-bar-user {
+        background-color: $quotasProgressBarOrange;
+      }
+    }
+    &.quotas-progress-bar-red {
+      .progress-bar-user {
+        background-color: $quotasProgressBarRed;
+      }
+    }
+    .progress-bar-user {
+      width: 60%;
+      height: 11px;
       background-color: $quotasProgressBarGreen;
-      background-image: none;
+      float: left;
+      background-image: linear-gradient(
+        15deg,
+        rgba(255, 255, 255, 0.15) 20%,
+        transparent 20%,
+        transparent 55%,
+        rgba(255, 255, 255, 0.15) 55%,
+        rgba(255, 255, 255, 0.15) 90%,
+        transparent 90%,
+        transparent
+      );
     }
-    &.quotas-progress-bar-orange .progress-bar {
-      background-color: $quotasProgressBarOrange;
-    }
-    &.quotas-progress-bar-red .progress-bar {
-      background-color: $quotasProgressBarRed;
+    .progress-bar-domain {
+      width: 60%;
+      height: 11px;
+      background-color: $quotasProgressBarGrey;
+      float: left;
+      background-image: linear-gradient(
+        15deg,
+        rgba(255, 255, 255, 0.15) 20%,
+        transparent 20%,
+        transparent 55%,
+        rgba(255, 255, 255, 0.15) 55%,
+        rgba(255, 255, 255, 0.15) 90%,
+        transparent 90%,
+        transparent
+      );
     }
   }
 }
