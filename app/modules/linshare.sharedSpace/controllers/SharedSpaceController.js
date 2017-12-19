@@ -270,9 +270,17 @@ angular.module('linshare.sharedSpace')
       exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController();
     }
 
+    /**
+     * @name updateFlagsOnSelectedPages
+     * @desc update flag according to the selected pages
+     * @returns {Void}
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
     function updateFlagsOnSelectedPages() {
       if (!thisctrl.itemsList.length) {
         thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] = false;
+
+        return;
       }
 
       if (!thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] &&
