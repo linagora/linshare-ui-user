@@ -95,7 +95,7 @@
     contactsListsListVm.goToContactsListAndAddContacts = goToContactsListAndAddContacts;
     contactsListsListVm.goToContactsListTarget = goToContactsListTarget;
     contactsListsListVm.goToMineAndCreateContactsList = goToMineAndCreateContactsList;
-    contactsListsListVm.isFromMyContactsLists = ($transition$.params().from === lsAppConfig.contactsListsMinePage);
+    contactsListsListVm.isFromMyContactsLists = !($transition$.params().from === lsAppConfig.contactsListsOthersPage);
     contactsListsListVm.itemsList = contactsListsList;
     contactsListsListVm.loadSidebarContent = loadSidebarContent;
     contactsListsListVm.loadTable = loadTable;
