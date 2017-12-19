@@ -6,6 +6,7 @@ angular.module('linshare.sharedSpace')
     _,
     $filter,
     $log,
+    $q,
     $scope,
     $state,
     $timeout,
@@ -223,6 +224,9 @@ angular.module('linshare.sharedSpace')
             thisctrl.selectedDocuments.push(element);
           }
         });
+
+        exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController();
+
         thisctrl.flagsOnSelectedPages[currentPage] = true;
       } else {
         thisctrl.selectedDocuments = _.xor(thisctrl.selectedDocuments, dataOnPage);
@@ -259,6 +263,8 @@ angular.module('linshare.sharedSpace')
 
     function addSelectedDocument(document) {
       documentUtilsService.selectDocument(thisctrl.selectedDocuments, document);
+
+      exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController();
     }
 
     function toggleFilterBySelectedFiles() {
@@ -359,14 +365,69 @@ angular.module('linshare.sharedSpace')
     /**
      * @name checkDocumentMemberRights
      * @desc Get current workgroup Member details(Rights)
-     * @param {object} documentFile - Selected Document
+     * @param {object} workgroupUuid - workgroup uuid
      * @memberOf LinShare.sharedSpace.SharedSpaceController
      */
-    function checkDocumentMemberRights(documentFile) {
-      workgroupMembersRestService
-        .get(documentFile.uuid, $scope.userLogged.uuid)
+    function checkDocumentMemberRights(workgroupUuid) {
+      getLoggedUserAsMemberOfWorkgroup(workgroupUuid)
         .then(function(member) {
           thisctrl.currentWorkgroupMember = member;
         });
+    }
+
+    /**
+     * @name getLoggedUserAsMemberOfAWorkgroup
+     * @desc Get the logged user's corresponding member object of a workgroup
+     * @param {object} workgroupUuid - workgroup uuid
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function getLoggedUserAsMemberOfWorkgroup(workgroupUuid) {
+      return workgroupMembersRestService.get(workgroupUuid, $scope.userLogged.uuid);
+    }
+
+    /**
+     * @name getLoggedUserAsMemberOfWorkgroups
+     * @desc Get the logged user's corresponding member object of a list of workgroups
+     * @param {object} workgroupUuid - list of workgroup uuid
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function getLoggedUserAsMemberOfWorkgroups(workgroupUuids) {
+      return $q.all(
+        _.map(workgroupUuids, getLoggedUserAsMemberOfWorkgroup)
+      );
+    }
+
+    /**
+     * @name checkIfLoggedUserIsAdminOfAllSelectedWorkgroups
+     * @desc check if the logged user is an Admin of all the selected workgroups
+     * @param {object} selectedWorkgroups - list of selected workgroups
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function checkIfLoggedUserIsAdminOfAllSelectedWorkgroups(selectedWorkgroups) {
+      return getLoggedUserAsMemberOfWorkgroups(
+        _.map(
+          selectedWorkgroups,
+          function(selectedWorkgroup) { return selectedWorkgroup.uuid; }
+        )
+      ).then(function(loggedUserAsMemberOfWorkgroups) {
+        return !_.some(
+          loggedUserAsMemberOfWorkgroups,
+          { admin: false }
+        );
+      });
+    }
+
+    /**
+     * @name exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController
+     * @desc expose the result of checkIfLoggedUserIsAdminOfAllSelectedWorkgroups to the controller
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
+    function exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController() {
+      if (thisctrl.selectedDocuments && thisctrl.selectedDocuments.length) {
+        checkIfLoggedUserIsAdminOfAllSelectedWorkgroups(thisctrl.selectedDocuments)
+          .then(function(isLoggedUserAdminOfAllSelectedWorkgroups) {
+            thisctrl.isLoggedUserAdminOfAllSelectedWorkgroups = isLoggedUserAdminOfAllSelectedWorkgroups;
+          });
+      }
     }
   });
