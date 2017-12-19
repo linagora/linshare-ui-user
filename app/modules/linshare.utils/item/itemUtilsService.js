@@ -135,7 +135,7 @@
      * @memberOf linshare.utils.itemUtilsService
      */
     function download(url, fileName) {
-      authenticationRestService.checkAuthentication(true, false).then(function() {
+      authenticationRestService.checkAuthentication(false, false).then(function() {
         var downloadLink = document.createElement('a');
         downloadLink.setAttribute('href', url);
         downloadLink.setAttribute('download', fileName);
