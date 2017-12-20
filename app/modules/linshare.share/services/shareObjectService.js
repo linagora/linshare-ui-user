@@ -16,7 +16,8 @@ angular.module('linshare.share')
       creationAcknowledgement = {},
       enableUSDA = {},
       notificationDateForUSDA = {},
-      secured = {};
+      secured = {},
+      forceAnonymousSharing = {};
 
     /**
      * @name getFunctionalities
@@ -41,6 +42,11 @@ angular.module('linshare.share')
         if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
           secured.enable = false;
         }
+
+        forceAnonymousSharing = Object.assign(
+          {},
+          functionalities.ANONYMOUS_URL__FORCE_ANONYMOUS_SHARING
+        );
       });
     }
 
@@ -76,6 +82,10 @@ angular.module('linshare.share')
         self.expirationDate =_.defaultTo(shareJson.expirationDate, expirationDate);
         self.enableUSDA = _.defaultTo(shareJson.enableUSDA, enableUSDA);
         self.notificationDateForUSDA =  _.defaultTo(shareJson.notificationDateForUSDA, notificationDateForUSDA);
+        self.forceAnonymousSharing = _.defaultTo(
+          shareJson.forceAnonymousSharing,
+          forceAnonymousSharing
+        );
       });
     }
 
@@ -177,7 +187,8 @@ angular.module('linshare.share')
         notificationDateForUSDA: notificationDateForUSDA.value,
         sharingNote: this.sharingNote,
         subject: this.subject,
-        message: this.message
+        message: this.message,
+        forceAnonymousSharing: forceAnonymousSharing.value
       };
     };
 
@@ -195,7 +206,8 @@ angular.module('linshare.share')
         sharingNote: this.sharingNote,
         subject: this.subject,
         message: this.message,
-        waitingUploadIdentifiers: this.waitingUploadIdentifiers
+        waitingUploadIdentifiers: this.waitingUploadIdentifiers,
+        forceAnonymousSharing: forceAnonymousSharing.value
       };
     };
 
@@ -269,6 +281,7 @@ angular.module('linshare.share')
         this.asyncShare = state;
       };
       this.waitingUploadIdentifiers = [];
+      this.forceAnonymousSharing = forceAnonymousSharing;
     };
 
     ShareObjectForm.prototype.getUploadingDocuments = function() {

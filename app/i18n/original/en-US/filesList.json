@@ -89,6 +89,7 @@
       "CREATE_MAILING_LIST_ALT": "Create a mailing list"
     },
     "SHARE_OPTIONS": {
+      "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Force anonymous share for all recipients",
       "TITLE": "Sharing options",
       "ADD_NOTE": "Add a share description",
       "ADD_NOTE_PLACEHOLDER": "Enter a sharing note",

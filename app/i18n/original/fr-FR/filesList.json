@@ -88,6 +88,7 @@
       "CREATE_MAILING_LIST_ALT": "Créer une liste d'envoi"
     },
     "SHARE_OPTIONS": {
+      "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Forcer le partage anonyme pour tous les destinataires",
       "TITLE": "Options du partage",
       "ADD_NOTE": "Ajouter une description au partage",
       "ADD_NOTE_PLACEHOLDER": "Saisissez une note descriptive",

@@ -70,6 +70,7 @@
       "CREATE_MAILING_LIST": "Tạo danh sách người nhận"
     },
     "SHARE_OPTIONS": {
+      "TBT__FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "",
       "TITLE": "Chia sẻ",
       "TBT__ADD_NOTE": "",
       "TBT__ADD_NOTE_PLACEHOLDER": "",
