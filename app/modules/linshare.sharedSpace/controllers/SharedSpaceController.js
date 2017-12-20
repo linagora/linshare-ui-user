@@ -120,10 +120,6 @@ angular.module('linshare.sharedSpace')
       thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
     };
 
-    //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
-    $transitions.onSuccess({}, function() {
-      angular.element('.multi-select-mobile').appendTo('body');
-    });
     thisctrl.fabButton = {
       toolbar: {
         activate: true,

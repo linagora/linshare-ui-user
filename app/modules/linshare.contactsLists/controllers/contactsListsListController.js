@@ -163,11 +163,6 @@
         }
       }, 0);
 
-      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
-      $transitions.onSuccess({}, function() {
-        angular.element('.multi-select-mobile.contact-list-multi-mobile').appendTo('body');
-      });
-
       contactsListsListVm.fabButton = {
         actions: [{
           action: function() {

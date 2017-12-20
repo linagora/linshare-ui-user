@@ -14,7 +14,6 @@
   /* jshint maxparams: false */
   UiUserMainController.$inject = [
     '_',
-    '$http',
     '$log',
     '$q',
     '$rootScope',
@@ -40,7 +39,6 @@
 
   function UiUserMainController(
     _,
-    $http,
     $log,
     $q,
     $rootScope,
