@@ -109,11 +109,6 @@
         publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
         stillExists = translations['TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS'];
       });
-
-      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
-      $transitions.onSuccess({}, function() {
-        angular.element('.multi-select-mobile').appendTo('body');
-      });
     }
 
     /**

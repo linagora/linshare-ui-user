@@ -106,11 +106,6 @@
           swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
 
-      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
-      $transitions.onSuccess({}, function() {
-        angular.element('.multi-select-mobile').appendTo('body');
-      });
-
       // TODO : delete that and use $scope.$watch(function() {return documentUtilsService.getReloadDocumentsList();}
       $scope.$on('linshare-share-done', function() {
         $scope.reloadDocuments();

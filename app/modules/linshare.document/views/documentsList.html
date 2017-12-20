@@ -18,7 +18,7 @@
   </div>
 </div>
 <section class="row multi-select-mobile visible-xs"
-         data-ng-class="{'showMobileMultiMenu': (selectedDocuments.length > 0) && !mainVm.sidebar.isVisible()}"
+         data-ng-class="{'showMobileMultiMenu': selectedDocuments.length > 0}"
          data-ng-show="currentPage === 'my_files'">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">{{selectedDocuments.length}}</span>

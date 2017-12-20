@@ -95,7 +95,7 @@
     contactsListsListVm.goToContactsListAndAddContacts = goToContactsListAndAddContacts;
     contactsListsListVm.goToContactsListTarget = goToContactsListTarget;
     contactsListsListVm.goToMineAndCreateContactsList = goToMineAndCreateContactsList;
-    contactsListsListVm.isFromMyContactsLists = !($transition$.params().from === lsAppConfig.contactsListsOthersPage);
+    contactsListsListVm.isFromMyContactsLists = $transition$.params().from !== lsAppConfig.contactsListsOthersPage;
     contactsListsListVm.itemsList = contactsListsList;
     contactsListsListVm.loadSidebarContent = loadSidebarContent;
     contactsListsListVm.loadTable = loadTable;
@@ -162,11 +162,6 @@
           createContactsList();
         }
       }, 0);
-
-      //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
-      $transitions.onSuccess({}, function() {
-        angular.element('.multi-select-mobile.contact-list-multi-mobile').appendTo('body');
-      });
 
       contactsListsListVm.fabButton = {
         actions: [{

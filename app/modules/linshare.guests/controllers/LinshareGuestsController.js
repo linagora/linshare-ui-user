@@ -398,11 +398,6 @@
       angular.element('#searchInMobileFiles').val('').trigger('change');
     };
 
-    //TODO: Should be a directive to put element appebd to body, parameters: html template & scope
-    $transitions.onSuccess({}, function() {
-      angular.element('.multi-select-mobile').appendTo('body');
-    });
-
     //TODO - KLE: Close multiselect on mobile view
     guestVm.singleEventFab = function($event) {
       $event.stopPropagation();
