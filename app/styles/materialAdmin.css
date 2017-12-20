@@ -4004,6 +4004,9 @@ tbody.collapse.in {
   bottom: 100%;
   margin-bottom: 2px;
 }
+.uib-datepicker-popup {
+  transition-duration: unset !important;  /* ngAnimate causes error with Datepicker  */
+}
 @media (min-width: 768px) {
   .navbar-right .dropdown-menu {
     left: auto;
