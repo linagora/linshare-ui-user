@@ -762,8 +762,8 @@
 
     <i class="zmdi zmdi-download col-xs-2"
        data-ng-if="workgroupNodesVm.isDocument(workgroupNodesVm.selectedDocuments[0].type)"
-       data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
-       data-ng-class="{'disabled-work-in-progress': workgroupNodesVm.selectedDocuments.length != 1}"></i>
+       data-ng-click="workgroupNodesVm.multiDownload()">
+    </i>
     <i class="fa fa-trash-o col-xs-2"
        data-ng-if="::workgroupNodesVm.currentWorkgroupMember.admin"
        data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)"></i>

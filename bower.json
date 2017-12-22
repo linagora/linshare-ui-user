@@ -38,7 +38,8 @@
     "sweetalert": "1.0.1",
     "waves": "0.7.5",
     "angular-promise-extras": "0.1.8",
-    "es6-shim": "0.35.3"
+    "es6-shim": "0.35.3",
+    "ng-device-detector": "5.0.1"
   },
   "overrides": {
     "bootstrap": {

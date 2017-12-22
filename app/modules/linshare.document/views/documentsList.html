@@ -33,27 +33,46 @@
     </div>
     <i class="zmdi zmdi-share col-xs-2" data-ng-click="onShare()"></i>
     <i class="fa fa-trash-o col-xs-2" data-ng-click="deleteDocuments(selectedDocuments)"></i>
-    <i class="zmdi zmdi-border-color col-xs-2" data-ng-show="selectedDocuments.length === 1"
-       data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')"></i>
-    <span class="dropdown col-xs-2" uib-dropdown="" data-ng-show="!linshareModeProduction">
-        <i class="zmdi zmdi-more" data-ng-class="{'active-link': isActiveMoreDropdown }"
-           data-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown" uib-dropdown-toggle=""></i>
-       <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
-           uib-dropdown-menu="">
-        <li data-ng-show="!linshareModeProduction && selectedDocuments.length === 1">
-          <a href="" event-propagation-stop>
-            <i class="zmdi zmdi-download col-xs-2 disabled-work-in-progress"></i><span translate>ACTION.DOWNLOAD</span>
-          </a>
+    <i
+      class="zmdi zmdi-border-color col-xs-2"
+      data-ng-class="{'disabled': selectedDocuments.length > 1}"
+      data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')"
+    ></i>
+    <span
+      class="dropdown col-xs-2 no-padding"
+      data-ng-class="{'open':isOpenItem}"
+      uib-dropdown
+      dropdown-append-to-body
+      auto-close="always"
+      is-open="isOpenItem"
+    >
+      <i
+        class="zmdi zmdi-more"
+        uib-dropdown-toggle
+        event-propagation-stop
+      >
+      </i>
+      <ul
+        class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-other-actions"
+        data-ng-class="{'open':isOpenItem}"
+        uib-dropdown-menu=""
+      >
+        <li
+          class="zmdi zmdi-download col-xs-12"
+          data-ng-click="multiDownload()"
+        >
+          <span translate>ACTION.DOWNLOAD</span>
         </li>
-        <li data-ng-show="!linshareModeProduction">
-          <a href="" event-propagation-stop>
-            <i class="zmdi zmdi-copy col-xs-2 disabled-work-in-progress"></i><span translate>ACTION.COPY</span>
-          </a>
+        <li class="zmdi zmdi-copy col-xs-12">
+          <span translate>ACTION.COPY</span>
         </li>
-       </ul>
+      </ul>
     </span>
   </div>
   <div class="col-xs-2 pull-right">
-    <i class="zmdi zmdi zmdi-close" data-ng-click="resetSelectedDocuments()"></i>
+    <i
+      class="zmdi zmdi zmdi-close"
+      data-ng-click="resetSelectedDocuments()"
+    ></i>
   </div>
 </section>

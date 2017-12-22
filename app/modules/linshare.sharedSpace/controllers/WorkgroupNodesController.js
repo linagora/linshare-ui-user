@@ -10,10 +10,30 @@
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
   WorkgroupNodesController.$inject = [
-    '_', '$filter', '$q', '$scope', '$state', '$timeout', '$transition$', '$translate',
-    '$translatePartialLoader', 'auditDetailsService', 'browseService', 'currentFolder', 'documentUtilsService',
-    'filterBoxService', 'flowUploadService', 'lsAppConfig', 'lsErrorCode', 'nodesList', 'swal', 'tableParamsService',
-    'toastService', 'workgroup', 'workgroupRestService', 'workgroupMembersRestService', 'workgroupNodesRestService'
+    '_',
+    '$filter',
+    '$q',
+    '$scope',
+    '$state',
+    '$timeout',
+    '$transition$',
+    '$translate',
+    '$translatePartialLoader',
+    'auditDetailsService',
+    'browseService',
+    'currentFolder',
+    'documentUtilsService',
+    'filterBoxService',
+    'flowUploadService',
+    'lsAppConfig',
+    'lsErrorCode',
+    'nodesList',
+    'tableParamsService',
+    'toastService',
+    'workgroup',
+    'workgroupRestService',
+    'workgroupMembersRestService',
+    'workgroupNodesRestService'
   ];
   /**
    * @namespace WorkgroupNodesController
@@ -21,18 +41,40 @@
    * @memberOf LinShare.sharedSpace
    */
   /* jshint maxparams: false, maxstatements: false */
-  function WorkgroupNodesController(_, $filter, $q, $scope, $state, $timeout, $transition$, $translate,
-                                    $translatePartialLoader, auditDetailsService, browseService, currentFolder,
-                                    documentUtilsService, filterBoxService, flowUploadService, lsAppConfig, lsErrorCode,
-                                    nodesList, swal, tableParamsService, toastService, workgroup, workgroupRestService,
-                                    workgroupMembersRestService, workgroupNodesRestService) {
+  function WorkgroupNodesController(
+    _,
+    $filter,
+    $q,
+    $scope,
+    $state,
+    $timeout,
+    $transition$,
+    $translate,
+    $translatePartialLoader,
+    auditDetailsService,
+    browseService,
+    currentFolder,
+    documentUtilsService,
+    filterBoxService,
+    flowUploadService,
+    lsAppConfig,
+    lsErrorCode,
+    nodesList,
+    tableParamsService,
+    toastService,
+    workgroup,
+    workgroupRestService,
+    workgroupMembersRestService,
+    workgroupNodesRestService
+  )
+  {
     /* jshint validthis:true */
     var workgroupNodesVm = this;
 
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
 
-    var newFolderName, swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
+    var newFolderName;
 
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
@@ -84,16 +126,8 @@
       $translatePartialLoader.addPart('sharedspace');
 
       $translate.refresh().then(function() {
-        $translate([
-          'ACTION.NEW_FOLDER',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
-        ]).then(function(translations) {
+        $translate('ACTION.NEW_FOLDER').then(function(translations) {
           newFolderName = translations['ACTION.NEW_FOLDER'];
-          swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadCancel = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'];
-          swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
         });
       });
 
@@ -596,36 +630,15 @@
     }
 
     /**
-     * @name multiDownload
-     * @desc Prompt dialog to warn about multi download
+     * @name  multiDownload
+     * @desc Trigger multiple download of items with a confirm dialog if needed
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function multiDownload() {
-      if (workgroupNodesVm.selectedDocuments.length > 10) {
-        $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
-          nbFiles: workgroupNodesVm.selectedDocuments.length,
-          totalSize: $filter('readableSize')(_.sumBy(workgroupNodesVm.selectedDocuments, 'size'), true)
-        }).then(function(swalText) {
-          //TODO - TO REMOVE: Deprecated use md-dialog from angular material
-          swal({
-              title: swalMultipleDownloadTitle,
-              text: swalText,
-              type: 'error',
-              showCancelButton: true,
-              confirmButtonText: swalMultipleDownloadConfirm,
-              cancelButtonText: swalMultipleDownloadCancel,
-              closeOnConfirm: true,
-              closeOnCancel: true
-            },
-            function(isConfirm) {
-              if (isConfirm) {
-                downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
-              }
-            });
+      documentUtilsService
+        .canShowMultipleDownloadConfirmationDialog(workgroupNodesVm.selectedDocuments).then(function() {
+          downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
         });
-      } else {
-        downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
-      }
     }
 
     /**

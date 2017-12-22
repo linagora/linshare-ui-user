@@ -32,7 +32,6 @@
       NgTableParams,
       receivedShareRestService,
       ServerManagerService,
-      swal,
       toastService
     ) {
       $scope.addSelectedDocument = addSelectedDocument;
@@ -50,7 +49,6 @@
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
       $scope.toggleSearchState = toggleSearchState;
 
-      var swalMultipleDownloadTitle, swalMultipleDownloadCancel, swalMultipleDownloadConfirm;
       $scope.advancedFilterBool = false;
       $scope.selectedDocuments = [];
       $scope.paramFilter = {
@@ -77,22 +75,13 @@
           .all([
             loadTable(),
             authenticationRestService.getCurrentUser(),
-            $translate([
-              'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-              'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON',
-              'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'
-            ])
           ])
           .then(function(promises) {
             var tableData = promises[0];
             var userData = promises[1];
-            var translationsData = promises[2];
 
             $scope.tableParams = tableData;
             $scope.canUpload = userData.canUpload;
-            swalMultipleDownloadTitle = translationsData['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-            swalMultipleDownloadConfirm = translationsData['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-            swalMultipleDownloadCancel = translationsData['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'];
 
             if (documentsToIsolate !== null) {
               var documentsAndFlagsIsolated = setIsolateMode(
@@ -323,41 +312,15 @@
       }
 
       /**
-       * @name multiDownload
-       * @desc Prompt dialog to warn about multi download
-       * @memberOf LinShare.document.documentController
+       * @name  multiDownload
+       * @desc Trigger multiple download of items with a confirm dialog if needed
+       * @memberOf LinShare.receivedShare.ReceivedController
        */
       function multiDownload() {
-        if ($scope.selectedDocuments.length > 10) {
-          $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
-            nbFiles: $scope.selectedDocuments.length,
-            totalSize: $filter('readableSize')(
-              _.sumBy(
-                $scope.selectedDocuments,
-                'size'
-              ),
-              true
-            )
-          }).then(function(swalText) {
-            //TODO - TO REMOVE: Deprecated use md-dialog from angular material
-            swal({
-              title: swalMultipleDownloadTitle,
-              text: swalText,
-              type: 'error',
-              showCancelButton: true,
-              confirmButtonText: swalMultipleDownloadConfirm,
-              cancelButtonText: swalMultipleDownloadCancel,
-              closeOnConfirm: true,
-              closeOnCancel: true
-            }, function(isConfirm) {
-              if (isConfirm) {
-                downloadSelectedFiles($scope.selectedDocuments);
-              }
-            });
+        documentUtilsService
+          .canShowMultipleDownloadConfirmationDialog($scope.selectedDocuments).then(function() {
+            downloadSelectedFiles($scope.selectedDocuments);
           });
-        } else {
-          downloadSelectedFiles($scope.selectedDocuments);
-        }
       }
 
       /**

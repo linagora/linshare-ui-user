@@ -7,15 +7,31 @@
 
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
-  function documentController(_, $filter, $scope, LinshareDocumentRestService, $translate, $translatePartialLoader,
-    $log, documentsList, $timeout, documentUtilsService, $q, flowUploadService, lsAppConfig, toastService,
-    tableParamsService, auditDetailsService, swal, LinshareShareService, browseService ,$state, $transitions,
-    $transition$) {
-
-    var reloadTableParamsTimeoutReference,
-      swalMultipleDownloadCancel,
-      swalMultipleDownloadConfirm,
-      swalMultipleDownloadTitle;
+  function documentController(
+    _,
+    $filter,
+    $log,
+    $q,
+    $scope,
+    $state,
+    $timeout,
+    $transition$,
+    $transitions,
+    $translate,
+    $translatePartialLoader,
+    auditDetailsService,
+    browseService,
+    documentsList,
+    documentUtilsService,
+    flowUploadService,
+    LinshareShareService,
+    LinshareDocumentRestService,
+    lsAppConfig,
+    toastService,
+    tableParamsService
+  )
+  {
+    var reloadTableParamsTimeoutReference;
 
     $scope.addUploadedDocument = addUploadedDocument;
     $scope.backToSidebarContentDetails = backToSidebarContentDetails;
@@ -94,17 +110,6 @@
           hide: lsAppConfig.linshareModeProduction
         }]
       };
-
-      // TODO : rename all GROWL
-      $translate(['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON',
-          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
-        ])
-        .then(function(translations) {
-          swalMultipleDownloadTitle = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'];
-          swalMultipleDownloadCancel = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'];
-          swalMultipleDownloadConfirm = translations['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'];
-        });
 
       // TODO : delete that and use $scope.$watch(function() {return documentUtilsService.getReloadDocumentsList();}
       $scope.$on('linshare-share-done', function() {
@@ -434,36 +439,15 @@
     }
 
     /**
-     * @name multiDownload
-     * @desc Prompt dialog to warn about multi download
+     * @name  multiDownload
+     * @desc Trigger multiple download of items with a confirm dialog if needed
      * @memberOf LinShare.document.documentController
      */
     function multiDownload() {
-      if ($scope.selectedDocuments.length > 10) {
-        $translate('SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT', {
-          nbFiles: $scope.selectedDocuments.length,
-          totalSize: $filter('readableSize')(_.sumBy($scope.selectedDocuments, 'size'), true)
-        }).then(function(swalText) {
-          //TODO - TO REMOVE: Deprecated use md-dialog from angular material
-          swal({
-              title: swalMultipleDownloadTitle,
-              text: swalText,
-              type: 'error',
-              showCancelButton: true,
-              confirmButtonText: swalMultipleDownloadConfirm,
-              cancelButtonText: swalMultipleDownloadCancel,
-              closeOnConfirm: true,
-              closeOnCancel: true
-            },
-            function(isConfirm) {
-              if (isConfirm) {
-                downloadSelectedFiles($scope.selectedDocuments);
-              }
-            });
+      documentUtilsService
+        .canShowMultipleDownloadConfirmationDialog($scope.selectedDocuments).then(function() {
+          downloadSelectedFiles($scope.selectedDocuments);
         });
-      } else {
-        downloadSelectedFiles($scope.selectedDocuments);
-      }
     }
 
     function nextTab() {
