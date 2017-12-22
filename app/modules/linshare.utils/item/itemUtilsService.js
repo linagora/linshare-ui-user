@@ -11,10 +11,13 @@
 
   itemUtilsService.$inject = [
     '_',
+    '$filter',
     '$q',
     '$timeout',
     '$translate',
     'authenticationRestService',
+    'deviceDetector',
+    'dialogService',
     'itemUtilsConstant',
     'lsAppConfig',
     'lsErrorCode',
@@ -27,12 +30,16 @@
    * @desc Utils service for manipulating file
    * @memberOf linshare.utils
    */
+  /* jshint maxparams: false */
   function itemUtilsService(
     _,
+    $filter,
     $q,
     $timeout,
     $translate,
     authenticationRestService,
+    deviceDetector,
+    dialogService,
     itemUtilsConstant,
     lsAppConfig,
     lsErrorCode,
@@ -40,7 +47,6 @@
     toastService
   )
   {
-
     var
       invalidNameTranslate = {
         empty: {
@@ -54,11 +60,10 @@
           param: lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\'')
         }
       },
+      multipleDownloadThreshold = deviceDetector.isMobile() ? 5 : 10,
       regex = new RegExp('[\\' + lsAppConfig.rejectedChar.join('-').replace(new RegExp('-', 'g'), '\\') + ']'),
-      swalTitle,
-      swalCancel,
-      swalConfirm,
       service = {
+        canShowMultipleDownloadConfirmationDialog: canShowMultipleDownloadConfirmationDialog,
         deleteItem: deleteItem,
         download: download,
         isNameValid: isNameValid,
@@ -72,6 +77,21 @@
     ////////////
 
     /**
+     * @name canShowMultipleDownloadConfirmationDialog
+     * @desc Determine if the multiple download confirmation dialog shall be shown
+     * @param {Array<Object>} items - List of items
+     * @return {Promise} validation response
+     * @memberOf linshare.utils.itemUtilsService
+     */
+    function canShowMultipleDownloadConfirmationDialog(items) {
+      if (items.length >= multipleDownloadThreshold) {
+        return multipleDownloadConfirmationDialog(items);
+      }
+
+      return $q.resolve();
+    }
+
+    /**
      * @name deleteItem
      * @desc Delete items
      * @param {Object|Array<Object>} items - List of items to delete
@@ -80,51 +100,38 @@
      * @memberOf linshare.utils.itemUtilsService
      */
     function deleteItem(items, messageKey, callback) {
-      $q.when(swalTitle).then(function(swalTitle) {
-        if(_.isUndefined(swalTitle)) {
-          return $translate([
-            'SWEET_ALERT.ON_ITEM_DELETE.TITLE',
-            'SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON',
-            'SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON']);
-        }
+      if (!_.isArray(items)) {
+        items = [items];
+      }
 
-        return {
-          'SWEET_ALERT.ON_ITEM_DELETE.TITLE': swalTitle,
-          'SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON': swalCancel,
-          'SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON': swalConfirm
-        };
-      }).then(function(translations) {
-        swalTitle = translations['SWEET_ALERT.ON_ITEM_DELETE.TITLE'];
-        swalCancel = translations['SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON'];
-        swalConfirm = translations['SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON'];
-
-        if (!_.isArray(items)) {
-          items = [items];
-        }
-
-        $translate('SWEET_ALERT.ON_ITEM_DELETE.TEXT.' + messageKey, {
-          nbItems: items.length,
-          singular: items.length <= 1 ? 'true' : 'other'
-        }, 'messageformat').then(function(swalText) {
-          //TODO - TO REMOVE: Deprecated use md-dialog from angular material
-          swal({
-              title: swalTitle,
-              text: swalText,
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonText: swalConfirm,
-              cancelButtonText: swalCancel,
-              closeOnConfirm: true,
-              closeOnCancel: true
-            },
-            function(isConfirm) {
-              if (isConfirm) {
-                callback(items);
-              }
+      $q.all([
+        $translate(
+          'SWEET_ALERT.ON_ITEM_DELETE.TEXT.' + messageKey,
+          {
+            nbItems: items.length,
+            singular: items.length <= 1 ? 'true' : 'other'
+          },
+          'messageformat'
+        ),
+        $translate([
+          'SWEET_ALERT.ON_ITEM_DELETE.TITLE',
+          'SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON',
+          'SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON'
+        ])
+      ])
+        .then(function(promises) {
+          var sentences = {
+            text: promises[0],
+            title: promises[1]['SWEET_ALERT.ON_ITEM_DELETE.TITLE'],
+            buttons: {
+              cancel: promises[1]['SWEET_ALERT.ON_ITEM_DELETE.CANCEL_BUTTON'],
+              confirm: promises[1]['SWEET_ALERT.ON_ITEM_DELETE.CONFIRM_BUTTON']
             }
-          );
-        });
-      });
+          };
+
+          return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
+        })
+        .then(callback(items));
     }
 
     /**
@@ -204,6 +211,49 @@
         });
         return count + 1;
       }
+    }
+
+    /**
+     * @name multipleDownloadConfirmationDialog
+     * @desc Prompt dialog to warn about multiple download
+     * @param {Array<Object>} items - List of items
+     * @return {Promise} user response
+     * @memberOf linshare.utils.itemUtilsService
+     */
+    function multipleDownloadConfirmationDialog(items) {
+      return $q.all([
+        $translate(
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TEXT',
+          {
+            nbFiles: items.length,
+            totalSize: $filter('readableSize')(
+              _.sumBy(
+                items,
+                'size'
+              ),
+              true
+            )
+          }
+        ),
+        $translate([
+          'ACTION.NEW_FOLDER',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON',
+          'SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON'
+        ])
+      ])
+        .then(function(promises) {
+          var sentences = {
+            text: promises[0],
+            title: promises[1]['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.TITLE'],
+            buttons: {
+              cancel: promises[1]['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CANCEL_BUTTON'],
+              confirm: promises[1]['SWEET_ALERT.ON_MULTIPLE_DOWNLOAD.CONFIRM_BUTTON']
+            }
+          };
+
+          return dialogService.dialogConfirmation(sentences, dialogService.dialogType.error);
+        });
     }
 
     /**

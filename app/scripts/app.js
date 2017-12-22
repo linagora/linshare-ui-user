@@ -23,6 +23,7 @@ angular.module('linshareUiUserApp', [
   'linshare.upload',
   'linshare.userProfile',
   'localytics.directives',
+  'ng.deviceDetector',
   'ngAnimate',
   'ngCookies',
   'ngMaterial',

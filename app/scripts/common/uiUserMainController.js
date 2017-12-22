@@ -70,6 +70,7 @@
     //TODO: shall be moved to the directive controller of linshareSidebar directive
     var widthWindow = angular.element(window).width();
 
+    //TODO Mobile Device Detector
     $rootScope.isMobile = angular.element('html').hasClass('ismobile');
     $rootScope.mobileWidthBreakpoint = 768;
     $rootScope.sidebarLeftWidth = 268;
