@@ -22,8 +22,10 @@
           </md-content>
         </md-tab>
         <md-tab id="tab2" label="{{'MEMBER_TAB.TITLE' | translate}}" class="col-xs-4 noPadding disabled">
-          <md-content class="md-padding">
-            <div data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-members.html'"></div>
+          <md-content
+            class="md-padding"
+            data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-members.html'"
+          >
           </md-content>
         </md-tab>
         <md-tab id="tab3" label="{{'ACTIVITIES' | translate}}" class="col-xs-4 noPadding disabled">

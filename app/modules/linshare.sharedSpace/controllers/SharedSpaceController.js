@@ -323,6 +323,13 @@ angular.module('linshare.sharedSpace')
      */
     function showItemDetails(workgroupUuid, event, memberTab) {
       workgroupRestService.get(workgroupUuid, true).then(function(workgroup) {
+        // TODO : remove the map once the property userMail will be changed to mail
+        thisctrl.currentSelectedDocument.membersForContactsList = _.map(
+          workgroup.members,
+          function(member) {
+            return { mail: member.userMail };
+          }
+        );
         thisctrl.currentSelectedDocument.current = workgroup;
         return workgroup;
       }).then(function() {
