@@ -87,6 +87,34 @@
         </div>
       </div>
     </div>
+    <div
+      class="col-xs-12 field-ctn"
+      data-ng-show="shareActionVm.newShare.forceAnonymousSharing.enable &&
+        shareActionVm.newShare.forceAnonymousSharing.canOverride"
+    >
+      <div
+        class="fg-line date-picker input-group dp-blue"
+        data-ng-class="{'is-opened': mainVm.sidebar.getData().dateStartOpened}"
+      >
+        <div class="form-inline">
+          <label
+            for="ForceAnonymousSharing"
+            translate
+          >
+            RIGHT_PANEL.SHARE_OPTIONS.FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS 
+          </label>
+          <label class="checkbox checkbox-inline m-r-0">
+            <input
+              type="checkbox"
+              name="ForceAnonymousSharing"
+              data-ng-disabled="!shareActionVm.newShare.forceAnonymousSharing.canOverride"
+              data-ng-model="shareActionVm.newShare.forceAnonymousSharing.value"
+            />
+            <i class="input-helper"></i>
+          </label>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 
