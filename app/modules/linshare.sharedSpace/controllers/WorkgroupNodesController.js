@@ -877,6 +877,13 @@
      */
     function showWorkgroupDetails(showMemberTab) {
       workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true).then(function(workgroup) {
+        // TODO : remove the map once the property userMail will be changed to mail
+        workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
+          workgroup.members,
+          function(member) {
+            return { mail: member.userMail };
+          }
+        );
         workgroupNodesVm.currentSelectedDocument.current = workgroup;
         return workgroup;
       }).then(function() {

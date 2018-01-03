@@ -1,4 +1,7 @@
-<div class="lv-body stop-propagate" x-ng-controller="WorkGroupMembersController as workgroupMemberVm">
+<div
+  class="lv-body stop-propagate contacts-list-block-scroll"
+  data-ng-controller="WorkGroupMembersController as workgroupMemberVm"
+>
   <div class="lv-item">
     <div class="card col-xs-12" id="content-ctn-sidebar">
       <div x-ng-show="workgroupMemberVm.currentWorkgroupMember.admin" class="custom-list-container clearfix">
@@ -207,3 +210,12 @@
     </div>
   </div>
 </div>
+<!--
+  TODO once the property userMail will be changed to mail, use
+  mainVm.sidebar.getData().currentSelectedDocument.current.members for the attribute
+  create-contacts-list-contacts-to-be-added
+-->
+<div
+  create-contacts-list
+  create-contacts-list-contacts-to-be-added="mainVm.sidebar.getData().currentSelectedDocument.membersForContactsList"
+></div>

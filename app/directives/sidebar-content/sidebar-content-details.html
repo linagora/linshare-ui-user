@@ -239,66 +239,10 @@
         </md-tab>
         <md-tab id="tab2" x-ng-if="mainVm.sidebar.getData().currentPage == 'my_files'" label="{{'RIGHT_PANEL.RECIPIENTS.TITLE' | translate}}"
                 class="col-xs-4 no-padding">
-          <md-content class="md-padding">
-            <p class="empty-res" x-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared === 0">
-              <i class="zmdi zmdi-info-outline"></i><span>{{'RIGHT_PANEL.RECIPIENTS.NO_SHARES' | translate}}</span>
-            </p>
-            <div
-              class="contacts-list-block-scroll"
-              data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
-            >
-              <div class="input-group search-bar col-xs-12">
-                <div id="search-field-ctn">
-                  <div class="search-style">
-                    <div class="fg-line">
-                      <input type="text" class="form-control" autocomplete="off"
-                             x-ng-model="mainVm.sidebar.getData().searchShareUsersInput"
-                             placeholder="{{'RIGHT_PANEL.RECIPIENTS.SEARCH_USERS' | translate}}">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="recipients-list-sharing-details">
-                <div class="recipientsAutocomplete actions"
-                     x-ng-repeat="shareElement in mainVm.sidebar.getData().currentSelectedDocument.current.shares |
-                     filter:mainVm.sidebar.getData().searchShareUsers(mainVm.sidebar.getData().searchShareUsersInput)"
-                     title="{{shareElement.recipient.domain}}"
-                     x-ng-click="mainVm.sidebar.getData().recipientShareDetails.current = shareElement;
-                     mainVm.sidebar.getData().loadSidebarContent(mainVm.sidebar.getData().lsAppConfig.shareDetails)">
-                  <span x-ng-show="!shareElement.recipient.external" class="firstLetterFormat">
-                    {{shareElement.recipient.firstName.charAt(0)}}
-                  </span>
-                  <span x-ng-show="shareElement.recipient.external" class="firstLetterFormat">
-                    {{shareElement.recipient.mail.charAt(0)}}
-                  </span>
-
-                  <p class="recipientsInfo">
-                    <span x-ng-show="!shareElement.recipient.external" class="user-full-name">
-                      <strong>{{shareElement.recipient.firstName}}
-                        <span class="lastName">{{shareElement.recipient.lastName.toUpperCase()}}</span>
-                      </strong>
-                    </span>
-                    <span x-ng-show="shareElement.recipient.external" class="user-full-name">
-                      <strong>{{shareElement.recipient.mail}}</strong>
-                    </span>
-                    <span x-ng-if="shareElement.downloaded === 0" class="email">
-                      {{'RIGHT_PANEL.RECIPIENTS.NOT_DOWNLOADED' | translate}}
-                    </span>
-                    <span x-ng-if="shareElement.downloaded !== 0" class="email">
-                      {{'RIGHT_PANEL.RECIPIENTS.DOWNLOADED' | translate}}: {{shareElement.downloaded}}
-                    </span>
-                  </p>
-                  <a class="info-partage-link" href=""><i class="zmdi zmdi-info-outline"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div
-              create-contacts-list
-              create-contacts-list-contacts-to-be-added="mainVm.sidebar.getData().currentSelectedDocument.recipients"
-              data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
-            ></div>
+          <md-content
+            class="md-padding"
+            data-ng-include="'directives/sidebar-content/sidebar-content-share-recipients-list.html'"
+          >
           </md-content>
         </md-tab>
         <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 no-padding disabled">

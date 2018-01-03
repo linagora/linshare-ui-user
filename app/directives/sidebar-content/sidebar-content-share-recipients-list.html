@@ -1,0 +1,92 @@
+<p
+  class="empty-res"
+  data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared === 0"
+>
+  <i class="zmdi zmdi-info-outline"></i>
+  <span translate>RIGHT_PANEL.RECIPIENTS.NO_SHARES</span>
+</p>
+<div
+  class="contacts-list-block-scroll"
+  data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
+>
+  <div class="input-group search-bar col-xs-12">
+    <div id="search-field-ctn">
+      <div class="search-style">
+        <div class="fg-line">
+          <input
+            class="form-control"
+            autocomplete="off"
+            data-ng-model="mainVm.sidebar.getData().searchShareUsersInput"
+            translate-attr="{placeholder: 'RIGHT_PANEL.RECIPIENTS.SEARCH_USERS'}"
+            type="text"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="recipients-list-sharing-details">
+    <div
+      class="recipientsAutocomplete actions"
+      data-ng-click="mainVm.sidebar.getData().recipientShareDetails.current = shareElement;
+        mainVm.sidebar.getData().loadSidebarContent(mainVm.sidebar.getData().lsAppConfig.shareDetails)"
+      data-ng-repeat="shareElement in mainVm.sidebar.getData().currentSelectedDocument.current.shares |
+        filter:mainVm.sidebar.getData().searchShareUsers(mainVm.sidebar.getData().searchShareUsersInput)"
+      title="{{shareElement.recipient.domain}}"
+    >
+      <span
+        class="firstLetterFormat"
+        data-ng-show="!shareElement.recipient.external"
+      >
+        {{shareElement.recipient.firstName.charAt(0)}}
+      </span>
+      <span
+        class="firstLetterFormat"
+        data-ng-show="shareElement.recipient.external"
+      >
+        {{shareElement.recipient.mail.charAt(0)}}
+      </span>
+
+      <p class="recipientsInfo">
+        <span
+          class="user-full-name"
+          data-ng-show="!shareElement.recipient.external"
+        >
+          <strong>
+            {{shareElement.recipient.firstName}}
+            <span class="lastName">
+              {{shareElement.recipient.lastName.toUpperCase()}}
+            </span>
+          </strong>
+        </span>
+        <span
+          class="user-full-name"
+          data-ng-show="shareElement.recipient.external"
+        >
+          <strong>{{shareElement.recipient.mail}}</strong>
+        </span>
+        <span
+          class="email"
+          data-ng-if="shareElement.downloaded === 0"
+          translate
+        >
+          RIGHT_PANEL.RECIPIENTS.NOT_DOWNLOADED
+        </span>
+        <span
+          class="email"
+          data-ng-if="shareElement.downloaded !== 0"
+        >
+          <span translate>RIGHT_PANEL.RECIPIENTS.DOWNLOADED</span>: {{shareElement.downloaded}}
+        </span>
+      </p>
+      <a class="info-partage-link">
+        <i class="zmdi zmdi-info-outline"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<div
+  create-contacts-list
+  create-contacts-list-contacts-to-be-added="mainVm.sidebar.getData().currentSelectedDocument.recipients"
+  data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
+></div>

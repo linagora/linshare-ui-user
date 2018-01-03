@@ -2,17 +2,16 @@
   CREATE CONTACTS LIST FORM
   ***********************/
 
-  .create-contacts-list {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    height: 15%;
-    
-    div {
-      padding-top: 5px;
-    }
-  }
+.create-contacts-list {
+  padding-top: 15px;
+  height: 15%;
   
-  .contacts-list-block-scroll {
-    overflow-y: auto;
-    height: 85%;
+  div {
+    padding-top: 5px;
   }
+}
+
+.contacts-list-block-scroll {
+  overflow-y: auto;
+  height: 85%;
+}
