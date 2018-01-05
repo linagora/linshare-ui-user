@@ -9,7 +9,11 @@
     .module('linshare.utils')
     .factory('documentUtilsService', documentUtilsService);
 
-  documentUtilsService.$inject = ['_', '$q', 'itemUtilsService'];
+  documentUtilsService.$inject = [
+    '_',
+    '$q',
+    'itemUtilsService'
+  ];
 
   /**
    * @namespace documentUtilsService
@@ -19,7 +23,6 @@
   function documentUtilsService(_, $q, itemUtilsService) {
     var reloadDocumentsList = false;
 
-    itemUtilsService.getItemDetails = getItemDetails;
     itemUtilsService.getReloadDocumentsList = getReloadDocumentsList;
     itemUtilsService.loadItemThumbnail = loadItemThumbnail;
     itemUtilsService.removeElementFromCollection = removeElementFromCollection;
@@ -96,26 +99,6 @@
       } else {
         removeElementFromCollection(selectedItems, item);
       }
-    }
-
-    function getItemDetails(itemService, item) {
-      var details = {};
-      var deferred = $q.defer();
-      itemService.get(item.uuid).then(function(data) {
-        details = data;
-        if (data.hasThumbnail) {
-          itemService.thumbnail(item.uuid).then(function(thumbnail) {
-            details.thumbnail = thumbnail;
-          });
-        } else {
-          delete details.thumbnail;
-        }
-        deferred.resolve(details);
-      }, function(error) {
-        deferred.reject(error);
-      });
-
-      return deferred.promise;
     }
 
     // TODO: To BE REMOVED

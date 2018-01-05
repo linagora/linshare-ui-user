@@ -226,7 +226,7 @@
                 <a
                   class="plain-text-button share-link"
                   title="{{'ACTION.ADD_MEMBER' | translate}}"
-                  data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, $event, true)"
+                  data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true, true)"
                   data-ng-class="{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
                 >
                   <i class="ls-add-user-sm"></i>
@@ -259,8 +259,11 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
                     uib-dropdown-menu  data-ng-class="{'open': isOpenToolbarMore}">
-                  <li class="hidden-xs" data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
-                      x-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, $event)">
+                  <li
+                    class="hidden-xs"
+                    data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
+                    x-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true)"
+                  >
                     <a href="">
                       <i class="zmdi zmdi-info "></i>
                       <span translate>ACTION.INFORMATION</span>
@@ -343,18 +346,20 @@
             <table id="file-list-table" class="table table-vmiddle wider-first-col fixed-activity-table-height"
                    data-ng-table="vm.tableParams" show-filter="true"
                    data-ng-class=" {'col-4-table' : linshareModeProduction == false}">
-              <tr x-ng-repeat="documentFile in $data"
-                  ls-item-selection=""
-                  data-selected-documents="vm.selectedDocuments"
-                  data-document-file="documentFile"
-                  data-current-selected-Document="vm.currentSelectedDocument"
-                  data-details-function="vm.getDetails"
-                  data-right-sidebar-open="mainVm.sidebar.isVisible()"
-                  x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
-                   'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid}"
-                  class="p-b-5 item-container"
-                  x-ng-dblclick="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)"
-                  check-table-height>
+              <tr
+                class="p-b-5 item-container"
+                x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
+                 'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid}"
+                x-ng-repeat="documentFile in $data"
+                ls-item-selection=""
+                data-selected-documents="vm.selectedDocuments"
+                data-document-file="documentFile"
+                data-current-selected-Document="vm.currentSelectedDocument"
+                data-ng-click="vm.showItemDetails(documentFile.uuid)"
+                data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                x-ng-dblclick="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)"
+                check-table-height
+              >
                 <td data-header="'favoritsheader.html'" ng-if="linshareModeProduction == false"
                     class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
                     data-title=""
@@ -407,15 +412,21 @@
                             x-ng-class="{'open-r': (mainVm.sidebar.isVisible()) &&
                                           ((mainVm.sidebar.getContent() === lsAppConfig.details) ||
                                           (mainVm.sidebar.getContent() === lsAppConfig.shareDetails))}">
-                          <li x-ng-click="vm.showItemDetails(documentFile.uuid, $event)" event-propagation-stop
-                              class="set-col-6">
+                          <li
+                            class="set-col-6"
+                            x-ng-click="vm.showItemDetails(documentFile.uuid, true)"
+                            event-propagation-stop
+                          >
                             <a href=""
                                title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
                                class="set-col-12">
                               <i class="zmdi zmdi-info"></i>
                             </a>
                           </li>
-                          <li class="hidden-xs" x-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)">
+                          <li
+                            class="hidden-xs"
+                            x-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
+                          >
                             <a href="" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
                                event-propagation-stop="true">
                               <i><span class="ls-member"></span></i>
@@ -443,7 +454,10 @@
                             <ul uib-dropdown-menu data-ng-class="{'open':isOpenItem}"
                               class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
                               <li>
-                                <a href="" x-ng-click="vm.showItemDetails(documentFile.uuid, $event)">
+                                <a
+                                  href=""
+                                  x-ng-click="vm.showItemDetails(documentFile.uuid, true)"
+                                >
                                   <i class="zmdi zmdi-info "></i>
                                   {{'ACTION.INFORMATION' | translate}}
                                 </a>
@@ -463,7 +477,7 @@
                               <li class="divider" ></li>
                               <li
                                 data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                data-ng-click="vm.showItemDetails(documentFile.uuid, $event, true)"
+                                data-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
                               >
                                 <a href="">
                                   <i class="groups-add-member align-style"></i>
