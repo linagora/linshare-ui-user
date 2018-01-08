@@ -83,10 +83,6 @@ angular.module('linshare.sharedSpace')
 
     thisctrl.renameFolder = renameFolder;
 
-    thisctrl.getDetails = function(item) {
-      return documentUtilsService.getItemDetails(workgroupRestService, item);
-    };
-
     thisctrl.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
 
     thisctrl.sortDropdownSetActive = function($event) {
@@ -321,37 +317,48 @@ angular.module('linshare.sharedSpace')
      * @param {boolean} memberTab - Open member tab
      * @memberOf LinShare.sharedSpace.SharedSpaceController
      */
-    function showItemDetails(workgroupUuid, event, memberTab) {
-      workgroupRestService.get(workgroupUuid, true).then(function(workgroup) {
-        // TODO : remove the map once the property userMail will be changed to mail
-        thisctrl.currentSelectedDocument.membersForContactsList = _.map(
-          workgroup.members,
-          function(member) {
-            return { mail: member.userMail };
-          }
-        );
-        thisctrl.currentSelectedDocument.current = workgroup;
-        return workgroup;
-      }).then(function() {
-        return workgroupRestService.getQuota(thisctrl.currentSelectedDocument.current.quotaUuid).then(function(quota) {
+    function showItemDetails(workgroupUuid, loadAction, memberTab) {
+      workgroupRestService
+        .get(workgroupUuid, true)
+        .then(function(workgroup) {
+          thisctrl.currentSelectedDocument.membersForContactsList = _.map(
+            workgroup.members,
+            function(member) {
+              return { mail: member.userMail };
+            }
+          );
+          thisctrl.currentSelectedDocument.current = workgroup;
+
+          return workgroupRestService
+            .getQuota(thisctrl.currentSelectedDocument.current.quotaUuid);
+        })
+        .then(function(quota) {
           thisctrl.currentSelectedDocument.current.quotas = quota;
+
+          return getWorkgroupAudit(thisctrl.currentSelectedDocument.current);
+        })
+        .then(function() {
+          if(loadAction) {
+            openMemberTab(memberTab);
+            thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
+          }
         });
-      }).then(function() {
-        return getWorkgroupAudit(thisctrl.currentSelectedDocument.current);
-      }).then(function() {
-        if (memberTab) {
+
+      /**
+       * @name openMemberTab
+       * @desc Check if we have to be on member tab on sidebar opening
+       * @param {boolean} ifMemberTab - Open member tab
+       * @memberOf LinShare.sharedSpace.SharedSpaceController
+       */
+      function openMemberTab(ifMemberTab) {
+        if (ifMemberTab) {
           thisctrl.mdtabsSelection.selectedIndex = 1;
+          //TODO Don't Use angular.element, Do a component/directive
           angular.element('#focusInputShare').focus();
         } else {
           thisctrl.mdtabsSelection.selectedIndex = 0;
         }
-        thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
-      });
-
-      var currElm = event.currentTarget;
-      angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
-        angular.element(currElm).addClass('activeActionButton');
-      });
+      }
     }
 
     function renameFolder(item, itemNameElem) {
