@@ -47,11 +47,15 @@
         <span class="file-multi-select-label ng-binding" translate>SELECTION_TOOLBAR.FILES</span>
       </div>
       <div class="col-xs-10">
-        <i class="zmdi zmdi-share col-xs-3"
-           data-ng-hide="::!uploadQueueVm.isFromMySpace"
-           title="{{::'SELECTION_TOOLBAR.SHARE' | translate}}"
-           data-ng-class="{'disable-link': lengthOfSelectedDocuments() === 0}"
-           data-ng-click="uploadQueueVm.checkSharableFiles(false)" role="button" tabindex="0">
+        <i
+          class="zmdi zmdi-share col-xs-3"
+          data-ng-class="{'disable-link': lengthOfSelectedDocuments() === 0}"
+          data-ng-click="uploadQueueVm.checkSharableFiles(false)"
+          data-ng-hide="::!uploadQueueVm.isFromMySpace"
+          role="button"
+          tabindex="0"
+          translate-attr="{title: 'SELECTION_TOOLBAR.SHARE'}"
+        >
         </i>
         <i data-ng-if="uploadQueueVm.selectAll" data-ng-click="uploadQueueVm.selectUploadingDocuments()"
            class="ls-check-o col-xs-3"
@@ -103,10 +107,16 @@
         <!--</i>-->
       </div>
     </section>
-    <div class="menu-popover-ctn hidden-xs waves-effect"
-         data-ng-class="::(!uploadQueueVm.isFromMySpace || !uploadQueueVm.location.mySpace) ?
-          'disabled-work-in-progress' : 'clickable'" flow-btn href="javascript:void(0)"
-         tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}">
+    <div
+      class="menu-popover-ctn hidden-xs waves-effect"
+      data-ng-class="::(!uploadQueueVm.isFromMySpace || !uploadQueueVm.location.mySpace) ?
+            'disabled-work-in-progress' : 'clickable'"
+      translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
+      flow-btn
+      href="javascript:void(0)"
+      tooltip-placement="bottom"
+      tooltip-popup-delay="500"
+    >
       <a class="add-menu-group" tabindex="0">
         <i class="zmdi zmdi-plus"></i>
       </a>
@@ -126,35 +136,60 @@
       <div class="pull-right actions-upload-queue col-xs-2">
         <div data-ng-class="{'disabled-work-in-progress': uploadQueueVm.$flow.files.length <= 0}"
              class="upload-actions-toolbar actions">
-          <a href="" class="col-xs-6" data-ng-click="uploadQueueVm.pauseAllFiles()"
-             tooltip-placement="bottom" tooltip-popup-delay='350'
-             uib-tooltip="{{::'SELECTION_TOOLBAR.PAUSE_ALL' | translate}}"
-             tooltip-append-to-body="true">
+          <a
+            class="col-xs-6"
+            data-ng-click="uploadQueueVm.pauseAllFiles()"
+            href=""
+            tooltip-append-to-body="true"
+            tooltip-placement="bottom"
+            tooltip-popup-delay='350'
+            translate-attr="{'uib-tooltip': 'SELECTION_TOOLBAR.PAUSE_ALL'}"
+          >
             <i class="zmdi zmdi-pause"></i>
           </a>
-          <a href="" class="col-xs-6" data-ng-click="uploadQueueVm.resumeAllFiles()"
-             tooltip-placement="bottom" tooltip-popup-delay='350'
-             uib-tooltip="{{::'SELECTION_TOOLBAR.PLAY_ALL' | translate}}"
-             tooltip-append-to-body="true">
+          <a
+            class="col-xs-6"
+            data-ng-click="uploadQueueVm.resumeAllFiles()"
+            href=""
+            tooltip-append-to-body="true"
+            tooltip-placement="bottom"
+            tooltip-popup-delay='350'
+            translate-attr="{'uib-tooltip': 'SELECTION_TOOLBAR.PLAY_ALL'}"
+          >
             <i class="zmdi zmdi-play "></i>
           </a>
-          <a href="" class="col-xs-6" data-ng-show="uploadQueueVm.isflowUploadingError"
-             data-ng-click="uploadQueueVm.retryAllFiles()"
-             tooltip-placement="bottom" tooltip-popup-delay='350'
-             uib-tooltip="{{::'SELECTION_TOOLBAR.RETRY_ALL' | translate}}"
-             tooltip-append-to-body="true">
+          <a
+            class="col-xs-6"
+            data-ng-click="uploadQueueVm.retryAllFiles()"
+            data-ng-show="uploadQueueVm.isflowUploadingError"
+            href=""
+            tooltip-append-to-body="true"
+            tooltip-placement="bottom"
+            tooltip-popup-delay='350'
+            translate-attr="{'uib-tooltip': 'SELECTION_TOOLBAR.RETRY_ALL'}"
+          >
             <i class="zmdi zmdi-undo"></i>
           </a>
-          <a href="" class="col-xs-6" data-ng-click="uploadQueueVm.cancelAllFiles()"
-             tooltip-placement="bottom" tooltip-popup-delay='350'
-             uib-tooltip="{{::'SELECTION_TOOLBAR.DELETE_ALL' | translate}}"
-             tooltip-append-to-body="true">
+          <a
+            class="col-xs-6"
+            data-ng-click="uploadQueueVm.cancelAllFiles()"
+            href=""
+            tooltip-append-to-body="true"
+            tooltip-placement="bottom"
+            tooltip-popup-delay='350'
+            translate-attr="{'uib-tooltip': 'SELECTION_TOOLBAR.DELETE_ALL'}"
+          >
             <i class="zmdi zmdi-close"></i>
           </a>
-          <a href="" class="col-xs-6" data-ng-click="uploadQueueVm.clearAllFiles()"
-             tooltip-placement="bottom" tooltip-popup-delay='350'
-             uib-tooltip="{{::'SELECTION_TOOLBAR.CLEAR_INFO' | translate}}"
-             tooltip-append-to-body="true">
+          <a
+            href=""
+            class="col-xs-6"
+            translate-attr="{'uib-tooltip': 'SELECTION_TOOLBAR.CLEAR_INFO'}"
+            data-ng-click="uploadQueueVm.clearAllFiles()"
+            tooltip-placement="bottom"
+            tooltip-popup-delay='350'
+            tooltip-append-to-body="true"
+          >
             <i class="zmdi zmdi-check-all" title="{{::'SELECTION_TOOLBAR.CLEAR_ALL' | translate}}"></i>
           </a>
         </div>
@@ -195,7 +230,10 @@
         <div class="exit-selection actions" data-ng-click="uploadQueueVm.resetSelectedDocuments()">
           <a><i class="zmdi zmdi-close"></i></a>
         </div>
-        <div class="display-num-selected-items" title="{{::'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+        <div
+          class="display-num-selected-items"
+          translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}"
+        >
           <div class="pull-left" data-ng-class="{'active-button-show-selection': uploadQueueVm.activeBtnShowSelection}"
                data-ng-click="uploadQueueVm.toggleFilterBySelectedFiles()">
             <p>
@@ -208,46 +246,74 @@
             </div>
           </div>
           <div class="pull-left view-icons-ctn reset-icon" data-ng-click="uploadQueueVm.resetSelectedDocuments()">
-            <i class="fa fa-undo" title="{{::'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+            <i
+              class="fa fa-undo"
+              translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"
+            >
+            </i>
           </div>
         </div>
         <div id="toolbar-actions" class="hidden-xs">
           <span data-ng-if="::uploadQueueVm.isFromMySpace">
-          <a class="plain-text-button share-link" title="{{::'SELECTION_TOOLBAR.SHARE' | translate}}"
-             data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
-             data-ng-click="uploadQueueVm.checkSharableFiles(false)">
-            <i class="zmdi zmdi-share"></i><span translate>SELECTION_TOOLBAR.SHARE</span></a>
+            <a
+              class="plain-text-button share-link"
+              data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
+              data-ng-click="uploadQueueVm.checkSharableFiles(false)"
+              translate-attr="{title: 'SELECTION_TOOLBAR.SHARE'}"
+            >
+              <i class="zmdi zmdi-share"></i><span translate>SELECTION_TOOLBAR.SHARE</span>
+            </a>
           </span>
           <span>
-            <a class="plain-text-button share-link" title="{{::'SELECTION_TOOLBAR.PLAY' | translate}}"
-               data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
-               data-ng-click="uploadQueueVm.resumeSelectedFiles()">
-              <i class="zmdi zmdi-play"></i><span translate>SELECTION_TOOLBAR.PLAY</span></a>
-            </span>
+            <a
+              class="plain-text-button share-link"
+              data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
+              data-ng-click="uploadQueueVm.resumeSelectedFiles()"
+              translate-attr="{title: 'SELECTION_TOOLBAR.PLAY'}"
+            >
+              <i class="zmdi zmdi-play"></i><span translate>SELECTION_TOOLBAR.PLAY</span>
+            </a>
+          </span>
           <span>
-            <a class="plain-text-button share-link" title="{{::'SELECTION_TOOLBAR.PAUSE' | translate}}"
-               data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
-               data-ng-click="uploadQueueVm.pauseSelectedFiles()">
-              <i class="zmdi zmdi-pause"></i><span translate>SELECTION_TOOLBAR.PAUSE</span></a>
-            </span>
+            <a
+              class="plain-text-button share-link"
+              data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
+              data-ng-click="uploadQueueVm.pauseSelectedFiles()"
+              translate-attr="{title: 'SELECTION_TOOLBAR.PAUSE'}"
+            >
+              <i class="zmdi zmdi-pause"></i><span translate>SELECTION_TOOLBAR.PAUSE</span>
+            </a>
+          </span>
           <span>
-            <a class="plain-text-button share-link" title="{{::'SELECTION_TOOLBAR.CANCEL' | translate}}"
-               data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
-               data-ng-click="uploadQueueVm.cancelSelectedFiles()">
-              <i class="zmdi zmdi-close"></i><span translate>SELECTION_TOOLBAR.CANCEL</span></a>
-            </span>
+            <a
+              class="plain-text-button share-link"
+              data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
+              data-ng-click="uploadQueueVm.cancelSelectedFiles()"
+              translate-attr="{title: 'SELECTION_TOOLBAR.CANCEL'}"
+            >
+              <i class="zmdi zmdi-close"></i><span translate>SELECTION_TOOLBAR.CANCEL</span>
+            </a>
+          </span>
           <span>
-            <a class="plain-text-button share-link" title="{{::'SELECTION_TOOLBAR.CLEAR_INFO' | translate}}"
-               data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
-               data-ng-click="uploadQueueVm.clearSelectedFiles()">
-              <i class="zmdi zmdi-check-all"></i><span translate>SELECTION_TOOLBAR.CLEAR</span></a>
-            </span>
+            <a
+              class="plain-text-button share-link"
+              data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
+              data-ng-click="uploadQueueVm.clearSelectedFiles()"
+              translate-attr="{title: 'SELECTION_TOOLBAR.CLEAR_INFO'}"
+            >
+              <i class="zmdi zmdi-check-all"></i><span translate>SELECTION_TOOLBAR.CLEAR</span>
+            </a>
+          </span>
           <span data-ng-if="uploadQueueVm.isflowUploadingError">
-            <a class="plain-text-button share-link" title="{{::'SELECTION_TOOLBAR.RETRY' | translate}}"
-               data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
-               data-ng-click="uploadQueueVm.retrySelectedFiles()">
-              <i class="zmdi zmdi-undo"></i><span translate>SELECTION_TOOLBAR.RETRY</span></a>
-            </span>
+            <a
+              class="plain-text-button share-link"
+              data-ng-class="{'disable-link': (lengthOfSelectedDocuments() === 0 || isCurrentPartage == true)}"
+              data-ng-click="uploadQueueVm.retrySelectedFiles()"
+              translate-attr="{title: 'SELECTION_TOOLBAR.RETRY'}"
+            >
+              <i class="zmdi zmdi-undo"></i><span translate>SELECTION_TOOLBAR.RETRY</span>
+            </a>
+          </span>
         </div>
       </div>
       <div class="drag-and-drop-ctn reset-content-width drag-n-drop-height file-drop-area"
