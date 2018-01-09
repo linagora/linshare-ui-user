@@ -621,9 +621,11 @@
        */
       function toggleSearchState() {
         if (!$scope.searchMobileDropdown) {
-          $scope.openSearch();
+          angular.element('#drop-area').addClass('search-toggled');
+          angular.element('#top-search-wrap input').focus();
         } else {
-          $scope.closeSearch();
+          angular.element('#drop-area').removeClass('search-toggled');
+          angular.element('#searchInMobileFiles').val('').trigger('change');
         }
 
         $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
