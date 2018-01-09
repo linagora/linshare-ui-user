@@ -39,12 +39,36 @@
         readonly: 'READ'
       },
       flowFactoryProviderDefaults : {
-        simultaneousUpload: 1,
-        progressCallbacksInterval: 1000,
+        simultaneousUploads: 3,
         allowDuplicateUploads: true,
         maxChunkRetries: 3,
+        testChunks: true,
         chunkRetryInterval: 1000,
-        chunkSize: 2097152
+        initFileFn: function(flowFile) {
+          var MIN_CHUNK_SIZE= 2*1024*1024;
+          var MAX_CHUNK_SIZE = 100*1024*1024;
+
+          var fileSize = flowFile.size;
+
+          /*
+            We have discovered a bug in flow.js which prevents us from
+            leveraging a chunkSize that is not an integer.
+            For example 1.73*1024*1024 is not going to work.
+            As a solution, we decided to leverage an integer number of Megabyte.
+          */
+          var proposedChunkSize = Math.ceil((fileSize * 0.02)/(1024*1024))*1024*1024;
+
+          var actualChunkSize = Math.min(
+            Math.max(
+              proposedChunkSize,
+              MIN_CHUNK_SIZE
+            ),
+            MAX_CHUNK_SIZE
+          );
+
+          flowFile.flowObj.opts.chunkSize = actualChunkSize;
+          flowFile.dynamicChunkSize = actualChunkSize;
+        }
       },
       locale: {
         fullDate: 'EEEE d MMMM y',
