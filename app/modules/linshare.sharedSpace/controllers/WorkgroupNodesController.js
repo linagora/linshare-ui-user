@@ -126,8 +126,8 @@
       $translatePartialLoader.addPart('sharedspace');
 
       $translate.refresh().then(function() {
-        $translate('ACTION.NEW_FOLDER').then(function(translations) {
-          newFolderName = translations['ACTION.NEW_FOLDER'];
+        $translate('ACTION.NEW_FOLDER').then(function(translationOfNewFolder) {
+          newFolderName = translationOfNewFolder;
         });
       });
 
