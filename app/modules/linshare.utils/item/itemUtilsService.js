@@ -131,7 +131,9 @@
 
           return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
         })
-        .then(callback(items));
+        .then(function() {
+          callback(items);
+        });
     }
 
     /**
