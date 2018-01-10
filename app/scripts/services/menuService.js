@@ -66,7 +66,7 @@
 
         sharedSpace.disabled = !functionalities.WORK_GROUP.enable;
         myUploads.disabled = !(functionalities.WORK_GROUP.enable || user.canUpload);
-        receivedShares.disabled = !functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
+        receivedShares.disabled = functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
       });
 
       administrations = {
