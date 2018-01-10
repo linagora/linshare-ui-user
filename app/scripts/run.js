@@ -43,13 +43,7 @@ angular
     });
     flowFactoryProvider.defaults = {
       stack: [],
-      simultaneousUploads: lsAppConfig.flowFactoryProviderDefaults.simultaneousUpload,
-      progressCallbacksInterval: lsAppConfig.flowFactoryProviderDefaults.progressCallbacksInterval,
-      chunkSize: lsAppConfig.flowFactoryProviderDefaults.chunkSize,
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',
-      allowDuplicateUploads: lsAppConfig.flowFactoryProviderDefaults.allowDuplicateUploads,
-      maxChunkRetries: lsAppConfig.flowFactoryProviderDefaults.maxChunkRetries,
-      chunkRetryInterval: lsAppConfig.flowFactoryProviderDefaults.chunkRetryInterval,
       generateUniqueIdentifier: function() {
         return uuid.v4();
       },
@@ -71,6 +65,13 @@ angular
       },
       headers: {'WWW-No-Authenticate' : 'linshare'}
     };
+
+    _.forEach(
+      lsAppConfig.flowFactoryProviderDefaults,
+      function(value, key) {
+        flowFactoryProvider.defaults[key] = value;
+      }
+    );
 
     /*
      ** aHrefSanitizationWhitelist :
