@@ -43,6 +43,7 @@
       $scope.multiDownload = multiDownload;
       $scope.openBrowser = openBrowser;
       $scope.resetSelectedDocuments = resetSelectedDocuments;
+      $scope.selectDocuments = selectDocuments;
       $scope.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
       $scope.showCurrentFile = showCurrentFile;
       $scope.sortDropdownSetActive =sortDropdownSetActive;
@@ -83,27 +84,11 @@
             $scope.tableParams = tableData;
             $scope.canUpload = userData.canUpload;
 
-            if (documentsToIsolate !== null) {
-              var documentsAndFlagsIsolated = setIsolateMode(
-                documentsToIsolate,
-                tableData.page()
-              );
 
-              /* All of below should be in setIsolateMode when the mutation Pattern is corrected */
-              $scope.documentsList = Object.assign(
-                {},
-                $scope.documentsList,
-                documentsAndFlagsIsolated.selectedDocuments
-              );
-              $scope.selectedDocuments = Object.assign(
-                {},
-                $scope.selectedDocuments,
-                documentsAndFlagsIsolated.selectedDocuments
-              );
-              $scope.flagsOnSelectedPages = Object.assign(
-                {},
-                $scope.flagsOnSelectedPages,
-                documentsAndFlagsIsolated.flagsOnSelectedPages
+            if (documentsToIsolate !== null) {
+              selectDocuments(
+                documentsToIsolate,
+                tableData
               );
 
               $scope.toggleFilterBySelectedFiles();
@@ -447,6 +432,35 @@
       }
 
       /**
+       * @name selectDocuments
+       * @desc trigger selected documents and selected pages
+       * @param {Object} documents - selected documents
+       * @param {Object} tableParams - table params
+       * @memberOf LinShare.receivedShare.ReceivedController
+       */
+      //TODO Avoid mutation!
+      function selectDocuments(documents, tableParams){
+        var documentsAndFlagsIsolated = setIsolateMode(
+          documents,
+          tableParams.page()
+        );
+
+        /* All of below should be in setIsolateMode when the mutation Pattern is corrected */
+        $scope.documentsList = _.union(
+          $scope.documentsList,
+          documentsAndFlagsIsolated.selectedDocuments
+        );
+        $scope.selectedDocuments = _.union(
+          $scope.selectedDocuments,
+          documentsAndFlagsIsolated.selectedDocuments
+        );
+        $scope.flagsOnSelectedPages = _.union(
+          $scope.flagsOnSelectedPages,
+          documentsAndFlagsIsolated.flagsOnSelectedPages
+        );
+      }
+
+      /**
        * @name selectDocumentsOnCurrentPage
        * @desc Helper to select all element of the current table page
        * @param {Array<Object>} data - List of element to be selected
@@ -505,7 +519,6 @@
           documentsToSelect,
           function(document) {
             return Object.assign(
-              {},
               document,
               { isSelected: true }
             );
@@ -628,13 +641,17 @@
 
         $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
       }
-
       /**
        * @name toggleFilterBySelectedFiles
        * @desc isolate selected elements
        * @memberOf LinShare.receivedShare.ReceivedController
        */
       function toggleFilterBySelectedFiles() {
+        selectDocuments(
+          $scope.selectedDocuments,
+          $scope.tableParams
+        );
+
         $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
 
         if ($scope.tableParams.filter().isSelected) {
