@@ -12,6 +12,7 @@ angular.module('linshareUiUserApp', [
   'linshare.audit',
   'linshare.authentication',
   'linshare.contactsLists',
+  'linshare.directives',
   'linshare.document',
   'linshare.external',
   'linshare.guests',

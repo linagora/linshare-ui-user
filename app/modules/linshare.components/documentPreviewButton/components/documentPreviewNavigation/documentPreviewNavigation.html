@@ -1,0 +1,28 @@
+<div
+  class="arrow-area right-arrow hidden-xs"
+  data-ng-if="!documentPreviewNavigationVm.item.isLastItem"
+>
+  <a
+    class="arrow-ctn"
+    data-ng-click="documentPreviewNavigationVm.setNextItem(
+      documentPreviewNavigationVm.item,
+      documentPreviewNavigationVm.items
+    )"
+  >
+    <i class="zmdi zmdi-chevron-right"></i>
+  </a>
+</div>
+<div
+  class="arrow-area left-arrow hidden-xs"
+  data-ng-if="!documentPreviewNavigationVm.item.isFirstItem"
+>
+  <a
+    class="arrow-ctn"
+    data-ng-click="documentPreviewNavigationVm.setPreviousItem(
+      documentPreviewNavigationVm.item,
+      documentPreviewNavigationVm.items
+    )"
+  >
+    <i class="zmdi zmdi-chevron-left"></i>
+  </a>
+</div>

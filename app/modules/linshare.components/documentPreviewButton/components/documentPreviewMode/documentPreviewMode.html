@@ -1,0 +1,23 @@
+<div
+  class="full-screen-single"
+  data-ng-if="documentPreviewModeVm.item.mode.image"
+>
+  <img ng-src="data:{{documentPreviewModeVm.item.type}};base64,{{documentPreviewModeVm.item.preview}}" />
+</div>
+
+<div
+  class="full-screen-single"
+  data-ng-if="documentPreviewModeVm.item.mode.noPreview"
+>
+  <div class="no-preview-ctn">
+    <span class="fa fa-eye-slash no-preview"></span>
+    <h1 translate>PREVIEW_MODE.NO_PREVIEW_AVAILABLE</h1>
+  </div>
+</div>
+
+<div
+  class="full-screen-pdf"
+  data-ng-if="documentPreviewModeVm.item.mode.pdf || documentPreviewModeVm.item.mode.other"
+>
+  <embed-pdf src="documentPreviewModeVm.item.preview" />
+</div>

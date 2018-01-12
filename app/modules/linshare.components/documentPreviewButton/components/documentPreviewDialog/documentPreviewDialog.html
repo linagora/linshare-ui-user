@@ -1,0 +1,21 @@
+<md-dialog
+  aria-label="List dialog"
+  class="lightbox-ctn"
+>
+  <document-preview-toolbar index="documentPreviewDialogVm.getItem().index" />
+  <md-dialog-content
+    class="dialog-content-ctn"
+    md-swipe-right="documentPreviewDialogVm.setPreviousItem(documentPreviewDialogVm.getItem(), documentPreviewDialogVm.items)"
+    md-swipe-left="documentPreviewDialogVm.setNextItem(documentPreviewDialogVm.getItem(), documentPreviewDialogVm.items)"
+  >
+    <div class="image-content-ctn">
+      <document-preview-navigation
+        class="stop-propagate"
+        items="documentPreviewDialogVm.items"
+        index="documentPreviewDialogVm.getItem().index"
+      >
+      </document-preview-navigation>
+      <document-preview-mode index="documentPreviewDialogVm.getItem().index" />
+    </div>
+  </md-dialog-content>
+</md-dialog>
