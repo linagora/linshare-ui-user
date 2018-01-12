@@ -134,6 +134,11 @@
     "TITLE": "Drop your files here",
     "COMMENT": "Drag and drop your files here to upload them"
   },
+  "PREVIEW_MODE": {
+    "PDF_DOWNLOAD": "Click here to download the PDF file",
+    "NO_PDF_VIEWER": "Cannot load PDF preview",
+    "NO_PREVIEW_AVAILABLE": "No preview available"
+  },
   "WORKGROUPS_LIST": {
     "PROJECT": "Project",
     "FOLDER": "Folder",

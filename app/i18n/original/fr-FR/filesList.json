@@ -134,6 +134,11 @@
     "TITLE": "Déposez vos fichiers ici",
     "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer"
   },
+  "PREVIEW_MODE": {
+    "PDF_DOWNLOAD": "Cliquez ici pour télécharger le fichier PDF",
+    "NO_PDF_VIEWER": "Impossible de charger la prévisualisation PDF",
+    "NO_PREVIEW_AVAILABLE": "Pas de prévisualisation disponible"
+  },
   "WORKGROUPS_LIST": {
     "PROJECT": "Projet",
     "FOLDER": "Dossier",

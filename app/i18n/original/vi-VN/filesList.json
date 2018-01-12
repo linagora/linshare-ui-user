@@ -105,6 +105,11 @@
     "TTB__TITLE": "",
     "TTB__COMMENT": ""
   },
+  "TBT__PREVIEW_MODE": {
+    "TBT__PDF_DOWNLOAD": "",
+    "TBT__NO_PDF_VIEWER": "",
+    "TBT__NO_PREVIEW_AVAILABLE": ""
+  },
   "WORKGROUPS_LIST": {
     "TBT__PROJECT": "",
     "TBT__FOLDER": "",

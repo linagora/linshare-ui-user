@@ -32,7 +32,8 @@
       NgTableParams,
       receivedShareRestService,
       ServerManagerService,
-      toastService
+      toastService,
+      documentPreviewService
     ) {
       $scope.addSelectedDocument = addSelectedDocument;
       $scope.copyIntoFiles = copyIntoFiles;
@@ -71,6 +72,21 @@
        * @memberOf LinShare.receivedShare.ReceivedController
        */
       function activate() {
+        //TODO - PREVIEW: Shall be removed once every functions are defined in an external service
+        Object.assign(
+          documentPreviewService,
+          {
+            download: downloadFile,
+            copyToMySpace: copyIntoFiles,
+            //TODO - PREVIEW: Functions should be callable from a external service
+            //TODO - PREVIEW: Function shall be split in two to accept both an array and a single element
+            copyToWorkgroup: function (item) {
+              openBrowser([item]);
+            },
+            showItemDetails: showCurrentFile
+          }
+        );
+
         $translatePartialLoader.addPart('receivedShare');
         $q
           .all([

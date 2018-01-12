@@ -13,6 +13,7 @@
     '_',
     '$filter',
     '$q',
+    '$sce',
     '$timeout',
     '$translate',
     'authenticationRestService',
@@ -35,6 +36,7 @@
     _,
     $filter,
     $q,
+    $sce,
     $timeout,
     $translate,
     authenticationRestService,
@@ -66,6 +68,7 @@
         canShowMultipleDownloadConfirmationDialog: canShowMultipleDownloadConfirmationDialog,
         deleteItem: deleteItem,
         download: download,
+        generateFileUrlForPdf: generateFileUrlForPdf,
         isNameValid: isNameValid,
         itemNumber: itemNumber,
         itemUtilsConstant: itemUtilsConstant,
@@ -159,6 +162,22 @@
 
         downloadLink.remove();
       });
+    }
+
+    /**
+     * @name generateFileUrlForPdf
+     * @desc Generate a file URL for a given buffer
+     * @param {ArrayBuffer} buffer - The file array buffer
+     * @returns {string} Generate url for the PDF file
+     * @memberOf linshare.utils.itemUtilsService
+     */
+    function generateFileUrlForPdf(buffer) {
+      var file = new Blob(
+        [buffer],
+        { type: 'application/pdf' }
+      );
+      var url = URL.createObjectURL(file);
+      return $sce.trustAsResourceUrl(url);
     }
 
     /**

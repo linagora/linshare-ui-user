@@ -73,6 +73,15 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
     margin-right: 7px;
   }
 
+  li a i {
+    line-height: 100%;
+    vertical-align: top;
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+  }
+
   .active-check:before {
     content: "\f26b";
     font-family: 'Material-Design-Iconic-Font' , 'sans-serif';
