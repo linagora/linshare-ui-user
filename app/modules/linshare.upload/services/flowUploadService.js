@@ -10,9 +10,22 @@
     .module('linshare.upload')
     .factory('flowUploadService', flowUploadService);
 
-  flowUploadService.$inject = ['_', '$filter', '$log', '$q', '$timeout', '$translatePartialLoader',
-                               'authenticationRestService', 'flowFactory', 'LinshareDocumentRestService', 'lsAppConfig',
-                               'uploadRestService', 'workgroupNodesRestService', 'workgroupRestService'];
+  flowUploadService.$inject = [
+    '_',
+    '$filter',
+    '$log',
+    '$q',
+    '$timeout',
+    '$translatePartialLoader',
+    'authenticationRestService',
+    'flowFactory',
+    'LinshareDocumentRestService',
+    'lsAppConfig',
+    'lsErrorCode',
+    'uploadRestService',
+    'workgroupNodesRestService',
+    'workgroupRestService'
+  ];
 
   /**
    * @namespace flowUploadService
@@ -21,15 +34,38 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
-  function flowUploadService(_, $filter, $log, $q, $timeout, $translatePartialLoader, authenticationRestService,
-                             flowFactory, LinshareDocumentRestService, lsAppConfig, uploadRestService,
-                             workgroupNodesRestService, workgroupRestService) {
+  function flowUploadService(
+    _,
+    $filter,
+    $log,
+    $q,
+    $timeout,
+    $translatePartialLoader,
+    authenticationRestService,
+    flowFactory,
+    LinshareDocumentRestService,
+    lsAppConfig,
+    lsErrorCode,
+    uploadRestService,
+    workgroupNodesRestService,
+    workgroupRestService
+  ) {
 
     const
       NONE = 'NONE',
       STATUS_FAILED = 'FAILED',
       STATUS_SUCCESS = 'SUCCESS',
-      UNRETRIABLE_ERROR_CASES = [3000, 3002, 3003, 46001, 46002, 46003, 46004, 46010];
+      UNRETRIABLE_ERROR_CASES = [
+        lsErrorCode.FILE_EMPTY,
+        3000,
+        3002,
+        3003,
+        46001,
+        46002,
+        46003,
+        46004,
+        46010
+      ];
 
     var
       errorNone,
@@ -247,8 +283,17 @@
       $timeout(function() {
         flowFile.errorAgain = true;
       }, 200);
-      flowFile.asyncUploadDeferred.reject(flowFile);
-      return flowFile.asyncUploadDeferred.promise;
+      return $q
+        .when(flowFile.asyncUploadDeferred)
+        .then(function(defer) {
+          if (defer) {
+            defer.reject(flowFile);
+
+            return defer.promise;
+          }
+
+          return $q.reject(flowFile);
+        });
     }
 
     /**
@@ -325,6 +370,14 @@
      */
     function uploadFiles(flowFiles, from, folderDetails) {
       _.forEach(flowFiles, function(file) {
+        if (!file.size) {
+          var errorCode = lsErrorCode.FILE_EMPTY;
+          var errorMessage = messagePrefix + errorCode;
+          onErrorAction(file, errorCode, errorMessage);
+
+          return;
+        }
+
         file._from = from;
         if (from === lsAppConfig.workgroupPage) {
           file.folderDetails = folderDetails;

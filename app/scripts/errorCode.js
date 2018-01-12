@@ -12,6 +12,7 @@
   angular
     .module('linshareUiUserApp')
     .constant('lsErrorCode', {
-      CANCELLED_BY_USER: 100
+      CANCELLED_BY_USER: 100,
+      FILE_EMPTY: 200
     });
 })();

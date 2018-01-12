@@ -37,6 +37,7 @@
       },
       "UPLOAD_ERROR": {
         "NONE": "An error occurred during upload",
+        "200": "The document contains no data (size = 0 byte)",
         "3000": "This filetype is forbidden (mime type)",
         "3002": "This filetype is forbidden",
         "3003": "The file was rejected because a virus was found",

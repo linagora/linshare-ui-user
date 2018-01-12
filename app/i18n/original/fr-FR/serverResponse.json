@@ -37,6 +37,7 @@
       },
       "UPLOAD_ERROR": {
         "NONE": "Une erreur est survenue pendant l'envoi du fichier",
+        "200": "Le document ne contiens aucune données (taille = 0 octect)",
         "3000": "Ce type de fichier est interdit (type mime)",
         "3002": "Ce type de fichier est interdit",
         "3003": "Le fichier n'a pu être déposé car un virus a été détecté",
