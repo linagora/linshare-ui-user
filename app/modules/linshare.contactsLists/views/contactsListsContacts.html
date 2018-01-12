@@ -237,7 +237,7 @@
                 <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
             </span>
-            <span class="hidden" x-ng-if="!linshareModeProduction">
+            <span class="hidden" x-ng-if="::!linshareModeProduction">
               <a class="plain-text-button share-link"
                  translate-attr="{title: 'CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV'}">
                 <i class="fa fa-sign-out"></i>
@@ -407,7 +407,7 @@
                                 <span translate>CONTACTS_LISTS_ACTION.MORE.DELETE</span>
                               </a>
                             </li>
-                            <li x-ng-if="!linshareModeProduction">
+                            <li x-ng-if="::!linshareModeProduction">
                               <a href="">
                                 <i class="fa fa-sign-out"></i>
                                 <span translate>CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV</span>

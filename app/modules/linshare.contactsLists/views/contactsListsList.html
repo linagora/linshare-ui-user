@@ -408,13 +408,13 @@
                       <span translate>CONTACTS_LISTS_ACTION.MORE.RENAME</span>
                     </a>
                   </li>
-                  <li class="hidden-xs" x-ng-show="!linshareModeProduction">
+                  <li class="hidden-xs" x-ng-show="::!linshareModeProduction">
                     <a href="" x-ng-click="">
                       <i class="fa fa-sign-out"></i>
                       <span translate>CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV</span>
                     </a>
                   </li>
-                  <li class="hidden-xs" x-ng-show="!linshareModeProduction">
+                  <li class="hidden-xs" x-ng-show="::!linshareModeProduction">
                     <a href="">
                       <i class="fa fa-sign-in"></i>
                       <span translate>CONTACTS_LISTS_ACTION.MORE.IMPORT_CSV</span>
@@ -599,20 +599,20 @@
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.RENAME</span>
                                 </a>
                               </li>
-                              <li x-ng-show="!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->
+                              <li x-ng-show="::!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->
                                 <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
                                   <i class="zmdi zmdi-copy"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST</span>
                                 </a>
                               </li>
-                              <li x-ng-show="!linshareModeProduction">
+                              <li x-ng-show="::!linshareModeProduction">
                                 <a href="" x-ng-click="">
                                   <i class="fa fa-sign-out"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV</span>
                                 </a>
                               </li>
                               <li>
-                                <a href="" x-ng-click="" x-ng-show="!linshareModeProduction">
+                                <a href="" x-ng-click="" x-ng-show="::!linshareModeProduction">
                                   <i class="fa fa-sign-in"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.IMPORT_CSV</span>
                                 </a>
@@ -693,7 +693,7 @@
       </div>
       <i class="fa fa-trash-o col-xs-2"
          x-ng-class="{'hide' : (!contactsListsListVm.isFromMyContactsLists)}"
-         data-ng-show="!linshareModeProduction"
+         data-ng-show="::!linshareModeProduction"
          x-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)"></i>
       <div class="col-xs-2"
            x-ng-click="contactsListsListVm.duplicateItem(contactsListsListVm.selectedContactsLists[0])">
@@ -706,7 +706,7 @@
             contactsListsListVm.selectedContactsLists.length > 1}">
            <span translate>NO_ACTION_AVAILABLE</span>
       </span>
-      <span class="dropdown col-xs-2 dropdown-standard" x-ng-show="!linshareModeProduction" uib-dropdown="">
+      <span class="dropdown col-xs-2 dropdown-standard" x-ng-show="::!linshareModeProduction" uib-dropdown="">
         <i class="zmdi zmdi-more-vert"
            x-ng-class="{'active-link': isActiveMoreDropdown , 'hide' : !contactsListsListVm.isFromMyContactsLists}"
            x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
@@ -737,13 +737,13 @@
             <span translate>CONTACTS_LISTS_ACTION.MORE.RENAME</span>
           </a>
         </li>
-        <li x-ng-show="!linshareModeProduction">
+        <li x-ng-show="::!linshareModeProduction">
           <a href="" x-ng-click="">
             <i class="fa fa-sign-out"></i>
             <span translate>CONTACTS_LISTS_ACTION.MORE.EXPORT_CSV</span>
           </a>
         </li>
-        <li x-ng-show="!linshareModeProduction || contactsListsListVm.isFromMyContactsLists">
+        <li x-ng-show="::!linshareModeProduction || contactsListsListVm.isFromMyContactsLists">
           <a href="">
             <i class="fa fa-sign-in"></i>
             <span translate>CONTACTS_LISTS_ACTION.MORE.IMPORT_CSV</span>
