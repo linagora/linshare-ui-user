@@ -22,7 +22,7 @@
       <!-- TODO: Remove $parent once the Document controller use ControllerAs instead of $scope -->
       <a x-ng-click="$parent.showCheckboxes ? addSelectedDocument(documentFile) : null" class="visible-xs">
         <div x-ng-class="{ 'invisible' : showCheckboxes}">
-          <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+          <i class="fa" x-ng-class="'{{::documentFile.type | mimetypeIcone}}'"></i>
         </div>
         <div class="checkbox-ctn-thumb"
              x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
@@ -30,7 +30,7 @@
       </a>
       <a x-ng-click="addSelectedDocument(documentFile)" class="hidden-xs">
         <div x-ng-class="{ 'invisible' : showCheckboxes}">
-          <i class="fa" x-ng-class="'{{documentFile.type | mimetypeIcone}}'"></i>
+          <i class="fa" x-ng-class="'{{::documentFile.type | mimetypeIcone}}'"></i>
         </div>
         <div class="checkbox-ctn-thumb"
              x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
@@ -38,14 +38,14 @@
       </a>
     </td>
 
-    <td data-title="'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
-        data-sortable="'name'" uuid={{documentFile.uuid}} header-class="'flexible-table-col'">
+    <td data-title="::'TABLE_HEADER.NAME' | translate" class="row no-padding show-li-actions"
+        data-sortable="'name'" uuid={{::documentFile.uuid}} header-class="'flexible-table-col'">
       <div class="ctn-name-actions">
         <!-- TODO: on a mobile , Default action should redirect toward the detail sidebar of the current
          document -->
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
           <p class="main-name-row">
-            <span class="file-name-disp single-line" spellcheck="false">{{documentFile.name}}</span>
+            <span class="file-name-disp single-line" spellcheck="false">{{::documentFile.name}}</span>
             <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs"
                   x-ng-click="showCurrentFile(documentFile, $event, true, 1)" event-propagation-stop>
               <span class="zmdi zmdi-share"></span>
@@ -54,7 +54,7 @@
           </p>
           <span class="secondary-info-ctn">
             <p class="mobile-list-item-info visible-xs">
-              {{documentFile.modificationDate | relativeTime}}, {{documentFile.size | readableSize: true}}
+              {{documentFile.modificationDate | relativeTime}}, {{::documentFile.size | readableSize: true}}
               <span x-ng-show="documentFile.shared > 0">,
                 <span class="zmdi zmdi-share"></span>
                 <span translate>BOUTON_LABEL_TITLE.SHARED</span>
@@ -68,14 +68,14 @@
     <td class="hidden-xs"
         x-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
         header-class="'hide-if-toggled-sidebar'"
-        data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
+        data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'">
       {{documentFile.modificationDate | relativeTime}}
     </td>
     <td class="hidden-xs"
         ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
         header-class="'hide-if-toggled-sidebar'"
-        data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
-      {{documentFile.size | readableSize: true}}
+        data-title="::'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
+      {{::documentFile.size | readableSize: true}}
     </td>
   </tr>
 </table>
