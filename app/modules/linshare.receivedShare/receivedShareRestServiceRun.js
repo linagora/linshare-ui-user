@@ -9,12 +9,22 @@
     .module('linshare.receivedShare')
     .run(receivedShareRestServiceRun);
 
+  receivedShareRestServiceRun.$inject = [
+    '$q',
+    'Restangular',
+    'itemUtilsService'
+  ];
+
   /**
    *  @namespace receivedShareRestServiceRun
    *  @desc Run function for extending received_share model
    *  @memberOf LinShare.receivedShare
    */
-  function receivedShareRestServiceRun(Restangular, itemUtilsService) {
+  function receivedShareRestServiceRun(
+    $q,
+    Restangular,
+    itemUtilsService
+  ) {
     Restangular.extendModel('received_shares', function(model) {
       model.getPreview = getPreview;
 
@@ -86,7 +96,7 @@
        */
       function getPreview(mode) {
         if (mode.noPreview) {
-          return null;
+          return $q.resolve(null);
         }
 
         if (mode.pdf) {
