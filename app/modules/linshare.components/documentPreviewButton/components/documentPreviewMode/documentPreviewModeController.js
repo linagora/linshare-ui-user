@@ -21,20 +21,14 @@
     /**
      * @name $onChanges
      * @desc Called whenever one-way bindings are updated
-     * @param {Object} changes - Hash whose keys are the names of the bound properties that have changed,
-     *                           and the values are an object of the form
-     *                           { currentValue, previousValue, isFirstChange() }
-     * @param {Object.number} index - Current item index
      * @memberOf linshare.components.documentPreviewButton.components.DocumentPreviewModeController
      */
-    function $onChanges(changes) {
-      if (!changes.index.isFirstChange()) {
-        documentPreviewModeVm.item =  Object.assign(
-          {},
-          documentPreviewModeVm.item,
-          documentPreviewService.getItem()
-        );
-      }
+    function $onChanges() {
+      documentPreviewModeVm.item =  Object.assign(
+        {},
+        documentPreviewModeVm.item,
+        documentPreviewService.getItem()
+      );
     }
   }
 })();

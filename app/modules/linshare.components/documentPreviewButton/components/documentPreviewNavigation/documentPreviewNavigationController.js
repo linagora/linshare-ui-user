@@ -17,6 +17,7 @@
 
     documentPreviewNavigationVm.$onChanges = $onChanges;
     documentPreviewNavigationVm.$postLink = $postLink;
+    documentPreviewNavigationVm.$onDestroy = $onDestroy;
     documentPreviewNavigationVm.setPreviousItem = documentPreviewService.setPreviousItem;
     documentPreviewNavigationVm.setNextItem =  documentPreviewService.setNextItem;
 
@@ -43,28 +44,45 @@
     function $postLink() {
       angular
         .element(document)
-        .bind('keydown', function(event) {
-          var arrowLeft = 37;
-          var arrowRight = 39;
-          var method;
-
-          event.preventDefault();
-
-          if (event.which === arrowRight && !documentPreviewNavigationVm.item.isLastItem) {
-            method = documentPreviewNavigationVm.setNextItem;
-          }
-
-          if (event.which === arrowLeft && !documentPreviewNavigationVm.item.isFirstItem) {
-            method = documentPreviewNavigationVm.setPreviousItem;
-          }
-
-          if (method) {
-            method(
-              documentPreviewNavigationVm.item,
-              documentPreviewNavigationVm.items
-            );
-          }
-        });
+        .bind('keydown', setupKeyboardNavigation);
     }
-  }
+
+    /**
+     * @name $onDestroy
+     * @desc Called on a controller when its containing scope is destroyed
+     * @memberOf linshare.components.documentPreviewButton.components.DocumentPreviewNavigationController
+     */
+    function $onDestroy() {
+      angular
+        .element(document)
+        .unbind('keydown', setupKeyboardNavigation);
+    }
+
+    /**
+     * @name setupKeyboardNavigation
+     * @desc Setup keyboard right & left arrow to handle navigation between items
+     * @memberOf linshare.components.documentPreviewButton.components.DocumentPreviewNavigationController
+     */
+    function setupKeyboardNavigation(event) {
+        var arrowLeft = 37;
+        var arrowRight = 39;
+        var method;
+
+        if (event.which === arrowRight && !documentPreviewNavigationVm.item.isLastItem) {
+          method = documentPreviewNavigationVm.setNextItem;
+        }
+
+        if (event.which === arrowLeft && !documentPreviewNavigationVm.item.isFirstItem) {
+          method = documentPreviewNavigationVm.setPreviousItem;
+        }
+
+        if (method) {
+          event.preventDefault();
+          method(
+            documentPreviewNavigationVm.item,
+            documentPreviewNavigationVm.items
+          );
+        }
+      }
+    }
 })();

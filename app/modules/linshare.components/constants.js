@@ -7,5 +7,13 @@
     .module('linshare.components')
     .constant('moment', moment)
     .constant('$', $)
-    .constant('_', _);
+    .constant('_', _)
+  /**
+   * Configuration object utils for components
+   * @typedef {Object} ComponentsConfig
+   * @property {string} path - Path to root folder of module linshare.components
+   */
+    .constant('componentsConfig', {
+      path: 'modules/linshare.components/'
+    });
 })();

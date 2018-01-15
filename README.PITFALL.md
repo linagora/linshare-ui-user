@@ -2,7 +2,38 @@ _This file will serve as a guide to warn about every common issues the developme
 
 ## AngularJs
 
-> This is a sum up of https://www.airpair.com/angularjs/posts/angularjs-performance-large-applications#2-1-benchmarking
+### Depencies Injection
+
+https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#manual-annotating-for-dependency-injection
+
+```javascript
+// -- DON'T
+angular
+  .module('app')
+  .controller('DashboardController',
+    ['$location', '$routeParams', 'common', 'dataservice',
+      function Dashboard($location, $routeParams, common, dataservice) {}
+    ]);
+
+
+// -- DO
+angular
+  .module('app')
+  .controller('DashboardController', DashboardController);
+
+DashboardController.$inject = [
+  '$location',
+  '$routeParams',
+  'common',
+  'dataservice'
+];
+
+function DashboardController($location, $routeParams, common, dataservice) {
+}
+
+```
+
+> The following is a sum up of https://www.airpair.com/angularjs/posts/angularjs-performance-large-applications#2-1-benchmarking
 
 ###1 Arrays and Objects
 The first and simplest is that arrays are always faster then objects,
