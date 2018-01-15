@@ -2,7 +2,7 @@
   <div id="breadcrumb-wrap">
     <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
          uib-dropdown dropdown-append-to-body auto-close="always"
-         tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}"
+         tooltip-placement="bottom" tooltip-popup-delay="500" translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
          is-open="isOpenNew" data-ng-class="{'open':isOpenNew}">
       <a class="add-menu-group" uib-dropdown-toggle >
         <i class="zmdi zmdi-plus"></i>
@@ -35,11 +35,11 @@
     <div class="breadcrumbs-ctn hidden-xs">
       <a ui-sref="documents.files({fileUuid: undefined})">
         <i class="zmdi zmdi-file"></i>
-        {{"BREADCRUMB_TITLE" | translate}}
+        <span translate>BREADCRUMB_TITLE</span>
       </a>
       <span class="sub-category-chevron pipe-separator" data-ng-if="tableParamsService.getSelectionIsIsolated()">|</span>
       <a class="click-disabled" data-ng-if="tableParamsService.getSelectionIsIsolated()">
-        {{"BREADCRUMB_ISOLATE" | translate}}
+        <span translate>BREADCRUMB_ISOLATE</span>
       </a>
     </div>
     <div id="action-header">
@@ -68,7 +68,7 @@
                   uib-dropdown-menu="">
                 <li role="menuitem">
                   <a href="" class="center">
-                    {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
+                    <span translate>SELECTION_TOOLBAR.ORDER_BY</span>
                   </a>
                 </li>
                 <li class="divided"></li>
@@ -79,7 +79,7 @@
                       <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
                       <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                       </span>
-                    {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
+                    <span translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</span>
                   </a>
                 </li>
                 <li role="menuitem">
@@ -88,7 +88,7 @@
                           <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
                           <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
+                    <span translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</span>
                   </a>
                 </li>
                 <li role="menuitem"> <a href="" data-ng-click="sortDropdownSetActive('size', $event)">
@@ -96,7 +96,7 @@
                           <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
                           <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.BY_SIZE' | translate}}
+                    <span translate>FILTER_COMPONENT.BY_SIZE</span>
                   </a>
                 </li>
                 <li role="menuitem">
@@ -105,7 +105,7 @@
                           <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
                           <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate}}
+                    <span translate>FILTER_COMPONENT.ORDER_BY_NAME</span>
                   </a>
                 </li>
                 <li role="menuitem">
@@ -114,7 +114,7 @@
                           <i data-ng-show="tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-down"></i>
                           <i data-ng-show="!tableParamsService.getToggleSelectedSort()" class="zmdi zmdi-caret-up"></i>
                           </span>
-                    {{'FILTER_COMPONENT.IS_SHARED' | translate}}
+                    <span translate>FILTER_COMPONENT.IS_SHARED</span>
                   </a>
                 </li>
               </ul>
@@ -137,7 +137,7 @@
               <input type="text" class="form-control"
                      autocomplete="off"
                      x-ng-model="paramFilter['name']"
-                     placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                     =translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
                      x-ng-change="updateParams()">
             </div>
           </div>
@@ -149,7 +149,7 @@
              class="input-group-addon last clickable dropdown"
              x-ng-click="advancedFilterBool = !advancedFilterBool"
              uib-dropdown-toggle
-             data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}">
+             translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}">
             <i class="zmdi hidden-xs clickable ls-settings">
             </i>
             <ul uib-dropdown-menu=""

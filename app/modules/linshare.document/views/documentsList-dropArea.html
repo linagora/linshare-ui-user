@@ -16,75 +16,75 @@
       </a>
     </div>
     <div class="exit-selection actions" x-ng-click="resetSelectedDocuments()"
-         title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
+         translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
       <a><i class="zmdi zmdi-close"></i></a>
     </div>
-    <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+    <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
       <div class="pull-left" data-ng-class="{'active-button-show-selection': tableParamsService.getSelectionIsIsolated()}"
            x-ng-click="toggleFilterBySelectedFiles()">
-        <p><span>{{selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" | translate}}</p>
+        <p><span>{{selectedDocuments.length}}</span> <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span></p>
         <div class="pull-left view-icons-ctn groups-view">
           <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show="tableParamsService.getSelectionIsIsolated()"></i>
           <i class="fa fa-eye" aria-hidden="true" data-ng-show="!tableParamsService.getSelectionIsIsolated()"></i>
         </div>
       </div>
       <div class="pull-left view-icons-ctn reset-icon" x-ng-click="resetSelectedDocuments()">
-        <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+        <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
       </div>
     </div>
     <div id="toolbar-actions" class="hidden-xs">
       <span>
-        <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.SHARE' | translate}}"
+        <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.SHARE'}"
            data-ng-click="onShare()">
           <i class="zmdi zmdi-share"></i><span translate>SELECTION_TOOLBAR.SHARE</span>
         </a>
       </span>
       <span>
-        <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+        <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
            data-ng-click="deleteDocuments(selectedDocuments)">
           <i class="fa fa-trash-o"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
         </a>
       </span>
       <span data-ng-class="{'hide': selectedDocuments.length > 1}" data-ng-click="downloadFile(selectedDocuments[0])">
-        <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
+        <a class="plain-text-button" translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}">
           <i class="zmdi zmdi-download"></i><span translate>DOWNLOAD</span>
         </a>
       </span>
       <span data-ng-class="{'hide': selectedDocuments.length <= 1}">
-        <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
+        <a class="plain-text-button" translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}"
            data-ng-click="multiDownload()">
           <i class="zmdi zmdi-download"></i><span translate>DOWNLOAD</span>
         </a>
       </span>
       <span class="dropdown link-dropdown" uib-dropdown="">
         <a class="plain-text-button share-link"
-           uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+           uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}">
           <i class="zmdi zmdi-more"></i><span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
           <li class="hidden-xs">
             <a href="" data-ng-click="copyDocuments(selectedDocuments)">
-             <i class="zmdi zmdi-copy" title="{{'ACTION.DUPLICATE' | translate}}"></i>
+             <i class="zmdi zmdi-copy" translate-attr="{title: 'ACTION.DUPLICATE'}"></i>
              <span translate>ACTION.DUPLICATE</span>
             </a>
           </li>
           <li class="hidden-xs">
             <a href="" data-ng-click="openBrowser(selectedDocuments)">
-             <i class="zmdi groups-home-workgroup" title="{{'ACTION.COPY_IN_WORKGROUP' | translate}}"></i>
+             <i class="zmdi groups-home-workgroup" translate-attr="{title: 'ACTION.COPY_IN_WORKGROUP'}"></i>
              <span translate>ACTION.COPY_IN_WORKGROUP</span>
             </a>
           </li>
           <li class="hidden-xs">
             <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
                data-ng-click="showCurrentFile(selectedDocuments[0],$event, true)">
-             <i class="zmdi zmdi-info" title="{{'ACTION.RENAME' | translate}}"></i>
+             <i class="zmdi zmdi-info" translate-attr="{title: 'ACTION.RENAME'}"></i>
              <span translate>ACTION.INFORMATION</span>
             </a>
           </li>
           <li class="hidden-xs">
             <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
                data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
-             <i class="zmdi zmdi-border-color" title="{{'ACTION.RENAME' | translate}}"></i>
+             <i class="zmdi zmdi-border-color" translate-attr="{title: 'ACTION.RENAME'}"></i>
              <span translate>ACTION.RENAME</span>
             </a>
           </li>
