@@ -409,8 +409,6 @@ angular.module('linshare.sharedSpace')
       getLoggedUserAsMemberOfWorkgroup(workgroupUuid)
         .then(function(member) {
           thisctrl.currentWorkgroupMember = member;
-
-          thisctrl.writeAndReadonlyMembers = !thisctrl.currentWorkgroupMember.admin && lsAppConfig.hideOnNonAdmin;
         });
     }
 

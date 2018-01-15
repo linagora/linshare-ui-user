@@ -225,9 +225,9 @@
               <span data-ng-class="{'disable-link' : vm.selectedDocuments.length > 1}">
                 <a
                   class="plain-text-button share-link"
-                  data-ng-class="::{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
                   title="{{'ACTION.ADD_MEMBER' | translate}}"
                   data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true, true)"
+                  data-ng-class="{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
                 >
                   <i class="ls-add-user-sm"></i>
                   <span>{{'ACTION.ADD_MEMBER' | translate}}</span>
@@ -236,10 +236,9 @@
             <span>
               <a
                 class="plain-text-button share-link"
-                data-ng-class="::{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
-                ng-if="!vm.writeAndReadonlyMembers"
-                data-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"
                 title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+                data-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"
+                data-ng-class="{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
               >
                 <i class="fa fa-trash-o"></i>
                 <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
@@ -475,15 +474,9 @@
                                   {{'ACTION.SILENCE' | translate}}
                                 </a>
                               </li>
-                              <li
-                                class="divider"
-                                data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                ng-if="!vm.writeAndReadonlyMembers"
-                              >
-                              </li>
+                              <li class="divider" ></li>
                               <li
                                 data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                ng-if="!vm.writeAndReadonlyMembers"
                                 data-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
                               >
                                 <a href="">
@@ -503,16 +496,8 @@
                                   {{'ACTION.DOWNLOAD' | translate}}
                                 </a>
                               </li>
-                              <li
-                                class="divider"
-                                data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                ng-if="!vm.writeAndReadonlyMembers"
-                              >
-                              </li>
-                              <li
-                                data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                ng-if="!vm.writeAndReadonlyMembers"
-                              >
+                              <li class="divider"></li>
+                              <li data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}">
                                 <a x-ng-click="vm.renameFolder(documentFile)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   {{'ACTION.RENAME' | translate}}
@@ -526,10 +511,7 @@
                                 </a>
                               </li>
                               <li class="divider"></li>
-                              <li
-                                data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                ng-if="!vm.writeAndReadonlyMembers"
-                              >
+                              <li data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}">
                                 <a href="" x-ng-click="vm.deleteWorkGroup(documentFile)">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                   {{'ACTION.DELETE' | translate}}
