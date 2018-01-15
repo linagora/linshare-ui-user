@@ -504,9 +504,6 @@
       workgroupMembersRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, $scope.userLogged.uuid)
         .then(function(member) {
           workgroupNodesVm.currentWorkgroupMember = member;
-
-          setCurrentWorkgroupUserRights(workgroupNodesVm.currentWorkgroupMember);
-
           workgroupNodesVm.fabButton.actions.push({
               action: null,
               flowDirectory: true,
@@ -522,19 +519,6 @@
             }
           );
         });
-
-      /**
-       * @name setCurrentWorkgroupUserRights
-       * @desc Set rights of the current workroup user
-       * @param {object} currentWorkgroupMember - Current workgroup member
-       * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-       */
-      function setCurrentWorkgroupUserRights(currentWorkgroupMember) {
-        workgroupNodesVm.writeAndReadonlyMembers = !currentWorkgroupMember.admin && lsAppConfig.hideOnNonAdmin;
-
-        workgroupNodesVm.readonlyMember = currentWorkgroupMember.readonly && lsAppConfig.hideOnReadOnly;
-      }
-
     }
 
     /**
