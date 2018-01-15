@@ -110,6 +110,8 @@
       moreOptions: 'more-options',
       share: 'share',
       shareDetails: 'share-details',
-      workgroupNode: 'workgroup-node'
+      workgroupNode: 'workgroup-node',
+      hideOnNonAdmin: false,
+      hideOnReadOnly: false
     });
 })();
