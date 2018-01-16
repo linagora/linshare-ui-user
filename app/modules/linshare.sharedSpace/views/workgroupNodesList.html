@@ -12,7 +12,7 @@
         <div id="breadcrumb-wrap" class="deep-nav multi-toolbar-options">
           <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
                uib-dropdown dropdown-append-to-body auto-close="always"
-               tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}"
+               tooltip-placement="bottom" tooltip-popup-delay="500" translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
                is-open="isOpenNew" data-ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle >
               <i class="zmdi zmdi-plus"
@@ -28,7 +28,7 @@
               <li role="menuitem">
                 <a translate class="center">ACTION.NEW_ITEM</a>
               </li>
-              <li role="menuitem" data-ng-show="!linshareModeProduction">
+              <li role="menuitem" data-ng-show="::!linshareModeProduction">
                 <a>
                   <i class="ls-project"></i>
                   <span translate>WORKGROUPS_LIST.PROJECT</span>
@@ -68,7 +68,7 @@
                   <span translate>WORKGROUPS_LIST.UPLOAD_FOLDER</span>
                 </a>
               </li>
-              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="!linshareModeProduction">
+              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="::!linshareModeProduction">
                 <a>
                   <i class="ls-upload-request"></i>
                   <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.UPLOAD_REQUEST</span>
@@ -106,9 +106,9 @@
               <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
               <a class="set-ellipsis"
                  tooltip-placement="bottom" tooltip-append-to-body="true"
-                 tooltip-popup-delay="1200" uib-tooltip="{{workgroupNodesVm.folderDetails.workgroupName}}"
+                 tooltip-popup-delay="1200" uib-tooltip="{{::workgroupNodesVm.folderDetails.workgroupName}}"
                  data-ng-click="workgroupNodesVm.goToFolder()">
-                {{workgroupNodesVm.folderDetails.workgroupName}}
+                {{::workgroupNodesVm.folderDetails.workgroupName}}
               </a>
             </div>
             <span class="explorer-previous-lvl dropdown dropdown-standard pull-left" uib-dropdown=""
@@ -118,7 +118,7 @@
 
               <a uib-dropdown-toggle="" class="set-ellipsis" tooltip-placement="bottom" tooltip-append-to-body="true"
                  data-ng-class="{'open': isOpenBreadCrumb}"
-                 tooltip-popup-delay="700" uib-tooltip="{{BREADCRUMB_UPPER_LEVEL | translate}}">...</a>
+                 tooltip-popup-delay="700" translate-attr="{'uib-tooltip': 'BREADCRUMB_UPPER_LEVEL'}">...</a>
               <div uib-dropdown-menu=""
                    data-ng-class="{'open': isOpenBreadCrumb}"
                    class="uib-dropdown-menu dropdown-menu dm-icon double-drop dropdown-menu-left
@@ -151,7 +151,7 @@
             </div>
           </div>
           <!-- TODO : display when appropriate  -->
-          <div class="user-rights hidden-xs" data-ng-if="!linshareModeProduction">
+          <div class="user-rights hidden-xs" data-ng-if="::!linshareModeProduction">
             <span>|</span>
             <span tooltip-placement="bottom" tooltip-append-to-body="true"
                   tooltip-popup-delay="250" uib-tooltip="You can only edit the file">
@@ -180,12 +180,12 @@
              </span>
               <a href="" class="hidden-xs pull-left"
                  tooltip-popup-delay="350" tooltip-placement="bottom"
-                 uib-tooltip="{{'ACTION.INFO_WORKGROUP' | translate}}" tooltip-append-to-body="true"
+                 translate-attr="{'uib-tooltip': 'ACTION.INFO_WORKGROUP'}" tooltip-append-to-body="true"
                  data-ng-click="workgroupNodesVm.showWorkgroupDetails()">
                 <i class="groups-home-workgroup" aria-hidden="true"></i>
               </a>
-              <a href="" class="hidden-xs pull-left" data-ng-show="!linshareModeProduction"
-                 title="{{'ACTION.GO_TO_TRASH' | translate}}" aria-hidden="false">
+              <a href="" class="hidden-xs pull-left" data-ng-show="::!linshareModeProduction"
+                 translate-attr="{title: 'ACTION.GO_TO_TRASH'}" aria-hidden="false">
                 <i class="fa fa-recycle" aria-hidden="true"></i>
               </a>
               <div class="col-xs-3 toolbar-mobile-item sort-dropdown">
@@ -272,7 +272,7 @@
                     <input type="text" class="form-control"
                            autocomplete="off"
                            data-ng-model="workgroupNodesVm.paramFilter['name']"
-                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                           translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
                            data-ng-change="updateParams()">
                   </div>
                 </div>
@@ -283,7 +283,7 @@
                    class="input-group-addon last clickable dropdown"
                    data-ng-click="advancedFilterBool = !advancedFilterBool"
                    uib-dropdown-toggle
-                   data-original-title="{{'TOOLTIP.ADVANCED_FILTER' | translate }}">
+                   translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}">
                   <i class="zmdi hidden-xs clickable ls-settings"></i>
                   <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
@@ -305,7 +305,8 @@
         <div id="top-search-wrap">
           <i id="top-search-close" data-ng-click="workgroupNodesVm.toggleSearchState()">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-                 placeholder="{{'FILE_NAME' | translate}}" data-ng-change="updateParams()"
+                 translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+                 data-ng-change="updateParams()"
                  data-ng-model="workgroupNodesVm.paramFilter['name']"
                  aria-invalid="false">
         </div>
@@ -325,10 +326,10 @@
             </a>
           </div>
           <div class="exit-selection actions" data-ng-click="workgroupNodesVm.resetSelectedDocuments()"
-               title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
+               translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
             <a><i class="zmdi zmdi-close"></i></a>
           </div>
-          <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+          <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
             <div class="pull-left"
                  data-ng-class="{'active-button-show-selection':
                   workgroupNodesVm.tableParamsService.getSelectionIsIsolated()}"
@@ -346,7 +347,7 @@
             </div>
             <div class="pull-left view-icons-ctn reset-icon"
                  data-ng-click="workgroupNodesVm.resetSelectedDocuments()">
-              <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+              <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
@@ -355,28 +356,28 @@
                  !workgroupNodesVm.areAllSameType()}">
               <a data-ng-href=""
                  data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
-                 event-propagation-stop title="{{'ACTION.DOWNLOAD' | translate}}">
+                 event-propagation-stop translate-attr="{title: 'ACTION.DOWNLOAD'}">
                 <i class="zmdi zmdi-download"></i>
                 <span translate>ACTION.DOWNLOAD</span>
               </a>
             </span>
             <span data-ng-if="workgroupNodesVm.selectedDocuments.length > 1"
                   data-ng-class="{'disable-link': !workgroupNodesVm.areAllSameType()}">
-              <a class="plain-text-button" title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}"
+              <a class="plain-text-button" translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}"
                  data-ng-click="workgroupNodesVm.multiDownload()">
                 <i class="zmdi zmdi-download"></i>
                 <span translate>ACTION.DOWNLOAD</span>
               </a>
             </span>
             <span data-ng-if="::workgroupNodesVm.currentWorkgroupMember.admin">
-              <a class="plain-text-button share-link" title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+              <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
                  data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)">
                 <i class="fa fa-trash-o"></i>
                 <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
             </span>
             <span data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly">
-              <a class="plain-text-button share-link" title="{{'ACTION.MOVE' | translate}}"
+              <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.MOVE'}"
                  data-ng-click="workgroupNodesVm.openBrowser(workgroupNodesVm.selectedDocuments, true)">
                 <i class="zmdi zmdi-arrows"></i>
                 <span translate>ACTION.MOVE</span>
@@ -384,7 +385,7 @@
             </span>
             <span class="dropdown link-dropdown" uib-dropdown>
               <a class="plain-text-button share-link"
-                 uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}"
+                 uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
                  is-open="isOpenToolbarMore" data-ng-class="{'open': isOpenToolbarMore}">
                 <i class="zmdi zmdi-more"></i>
                 <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
@@ -426,7 +427,7 @@
                         <span translate>ACTION.COPY_DROPDOWN.PERSONAL_SPACE</span>
                       </a>
                     </li>
-                    <li class="hidden-xs" data-ng-show="!linshareModeProduction">
+                    <li class="hidden-xs" data-ng-show="::!linshareModeProduction">
                       <a>
                         <i class="zmdi zmdi-share"></i>
                         <span translate>ACTION.COPY_DROPDOWN.COPY_AND_SHARE</span>
@@ -435,13 +436,13 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="" data-ng-show="!linshareModeProduction">
+                  <a href="" data-ng-show="::!linshareModeProduction">
                     <i class="zmdi zmdi-star"></i>
                     <span translate>ACTION.FAVORITES</span>
                   </a>
                 </li>
                 <li class="divider"></li>
-                <li data-ng-if="!linshareModeProduction"
+                <li data-ng-if="::!linshareModeProduction"
                     data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
                   <a href="" event-propagation-stop>
                     <i class="zmdi zmdi-time-restore"></i>
@@ -449,23 +450,23 @@
                   </a>
                 </li>
                 <li class="divider"
-                    data-ng-if="!linshareModeProduction"
+                    data-ng-if="::!linshareModeProduction"
                     data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"></li>
-                <li data-ng-show="!linshareModeProduction">
+                <li data-ng-show="::!linshareModeProduction">
                   <a href="" event-propagation-stop>
                     <i class="zmdi zmdi-lock"></i>
                     <span translate>ACTION.LOCK</span>
                   </a>
                 </li>
-                <li data-ng-show="!linshareModeProduction">
+                <li data-ng-show="::!linshareModeProduction">
                   <a href="" event-propagation-stop>
                     <i class="groups-lock-download-alt"></i>
                     <span translate>ACTION.EXTERNAL_EDIT</span>
                   </a>
                 </li>
-                <li class="divider" data-ng-if="!linshareModeProduction"
+                <li class="divider" data-ng-if="::!linshareModeProduction"
                     data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"></li>
-                <li data-ng-if="!linshareModeProduction"
+                <li data-ng-if="::!linshareModeProduction"
                     data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
                   <a
                     data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
@@ -521,7 +522,7 @@
                    class="table table-vmiddle fixed-activity-table-height"
                    data-ng-table="workgroupNodesVm.tableParams"
                    show-filter="true"
-                   data-ng-class="{'col-4-table' : !linshareModeProduction}">
+                   data-ng-class="::{'col-4-table' : !linshareModeProduction}">
               <tr data-ng-repeat="nodeItem in $data track by nodeItem.uuid"
                   ls-item-selection
                   data-selected-documents="workgroupNodesVm.selectedDocuments"
@@ -562,7 +563,7 @@
                   </a>
                 </td>
 
-                <td data-title="'TABLE_HEADER.NAME' | translate"
+                <td data-title="::'TABLE_HEADER.NAME' | translate"
                     class="row show-li-actions col-3"
                     data-sortable="'name'" uuid={{::nodeItem.uuid}} header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
@@ -583,7 +584,7 @@
                               data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)"
                               class="set-col-6">
                             <a href=""
-                               title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
+                               translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}"
                                class="set-col-12">
                               <i class="zmdi zmdi-info"></i>
                             </a>
@@ -592,19 +593,19 @@
                            !workgroupNodesVm.isDocument(nodeItem.type)}">
                             <a data-ng-href=""
                                data-ng-click="workgroupNodesVm.downloadFile(nodeItem)"
-                               event-propagation-stop title="{{::'ACTION.DOWNLOAD' | translate}}">
+                               event-propagation-stop translate-attr="{title: 'ACTION.DOWNLOAD'}">
                               <i class="zmdi zmdi-download"></i>
                             </a>
                           </li>
                           <li class="hidden-xs" data-ng-if="::workgroupNodesVm.currentWorkgroupMember.admin">
                             <a href="" data-ng-click="workgroupNodesVm.deleteNodes(nodeItem)"
-                               title="{{::'ACTION.DELETE' | translate}}">
+                               translate-attr="{title: 'ACTION.DELETE'}">
                               <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
                               auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
-                            <a title="{{::'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}" uib-dropdown-toggle
+                            <a translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}" uib-dropdown-toggle
                                class="set-col-12" event-propagation-stop>
                               <i class="zmdi zmdi-more"></i>
                             </a>
@@ -680,7 +681,7 @@
                                   <span translate>ACTION.DUPLICATE</span>
                                 </a>
                               </li>
-                              <li class="divider hidden-xs" data-ng-show="!linshareModeProduction"></li>
+                              <li class="divider hidden-xs" data-ng-show="::!linshareModeProduction"></li>
                               <li
                                 class="hidden-xs"
                                 data-ng-class="{'disable-link' : workgroupNodesVm.currentWorkgroupMember.readonly
@@ -754,14 +755,14 @@
                 </td>
                 <td class="hidden-xs"
                     data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
-                    data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate"
+                    data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate"
                     data-sortable="'modificationDate'"
                     header-class="'col-4 hide-if-toggled-sidebar'">
                   {{nodeItem.modificationDate | relativeTime}}
                 </td>
                 <td class="hidden-xs"
                     data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
-                    data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"
+                    data-title="::'TABLE_HEADER.SIZE' | translate" data-sortable="'size'"
                     header-class="'col-5 hide-if-toggled-sidebar'">
                   {{::workgroupNodesVm.isDocument(nodeItem.type) ? (nodeItem.size | readableSize: true) : ''}}
                 </td>
@@ -783,7 +784,7 @@
      data-ng-click="workgroupNodesVm.goToPreviousFolder((workgroupNodesVm.breadcrumb.length === 0),
                  workgroupNodesVm.breadcrumb[workgroupNodesVm.breadcrumb.length-2])"></a>
   <h2 class="header-more-options set-ellipsis">
-    {{workgroupNodesVm.currentFolder.name}}
+    {{::workgroupNodesVm.currentFolder.name}}
   </h2>
   <a class="pull-right return-to-wkgrps groups-home-workgroup" data-ng-click="workgroupNodesVm.showWorkgroupDetails()"></a>
   <a class="pull-right return-to-wkgrps zmdi zmdi-format-valign-top" data-ui-sref="sharedspace.all"></a>
@@ -814,8 +815,8 @@
        data-ng-if="::workgroupNodesVm.currentWorkgroupMember.admin"
        data-ng-click="workgroupNodesVm.deleteNodes(workgroupNodesVm.selectedDocuments)"></i>
     <i class="zmdi zmdi-arrows col-xs-2 disabled-work-in-progress"
-       data-ng-show="!linshareModeProduction"></i>
-    <span class="dropdown col-xs-2" uib-dropdown="" data-ng-show="!linshareModeProduction">
+       data-ng-show="::!linshareModeProduction"></i>
+    <span class="dropdown col-xs-2" uib-dropdown="" data-ng-show="::!linshareModeProduction">
         <i class="zmdi zmdi-more-vert" data-ng-class="{'active-link': isActiveMoreDropdown }"
            data-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown" uib-dropdown-toggle=""></i>
        <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
@@ -827,37 +828,37 @@
           <span translate>ACTION.INFORMATION</span>
           </a>
         </li>
-        <li data-ng-show="!linshareModeProduction">
+        <li data-ng-show="::!linshareModeProduction">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-star"></i>
           <span translate>ACTION.FAVORITES</span>
           </a>
         </li>
         <li class="divider"></li>
-        <li data-ng-if="!linshareModeProduction"
+        <li data-ng-if="::!linshareModeProduction"
             data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-time-restore"></i>
           <span translate>ACTION.VIEW_VERSIONING</span>
           </a>
         </li>
-        <li class="divider" data-ng-if="!linshareModeProduction"
+        <li class="divider" data-ng-if="::!linshareModeProduction"
             data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"></li>
-        <li data-ng-show="!linshareModeProduction">
+        <li data-ng-show="::!linshareModeProduction">
           <a href="" event-propagation-stop>
           <i class="zmdi zmdi-lock"></i>
           <span translate>ACTION.LOCK</span>
           </a>
         </li>
-          <li data-ng-show="!linshareModeProduction">
+          <li data-ng-show="::!linshareModeProduction">
           <a href="" event-propagation-stop>
           <i class="groups-lock-download-alt"></i>
           <span translate>ACTION.EXTERNAL_EDIT</span>
           </a>
         </li>
-        <li class="divider" data-ng-if="!linshareModeProduction"
+        <li class="divider" data-ng-if="::!linshareModeProduction"
             data-ng-show="workgroupNodesVm.selectedDocuments.length === 1"></li>
-        <li data-ng-if="!linshareModeProduction"
+        <li data-ng-if="::!linshareModeProduction"
             data-ng-show="workgroupNodesVm.selectedDocuments.length === 1">
           <a
             data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
@@ -889,7 +890,7 @@
           </a>
         </li>
          <li data-ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-             data-ng-show="!linshareModeProduction && workgroupNodesVm.isDocument(nodeItem.type)">
+             data-ng-show="::!linshareModeProduction && workgroupNodesVm.isDocument(nodeItem.type)">
           <a><i class="zmdi zmdi-share"></i>
             <span translate>ACTION.COPY_DROPDOWN.COPY_AND_SHARE</span>
           </a>
