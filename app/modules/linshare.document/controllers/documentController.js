@@ -21,6 +21,7 @@
     $translatePartialLoader,
     auditDetailsService,
     browseService,
+    documentPreviewService,
     documentsList,
     documentUtilsService,
     flowUploadService,
@@ -87,6 +88,23 @@
 
     function activate() {
       $translatePartialLoader.addPart('filesList');
+
+      //TODO - PREVIEW: Shall be removed once every functions are defined in an external service
+      Object.assign(
+        documentPreviewService,
+        {
+          download: downloadFile,
+          //TODO - PREVIEW: Functions should be callable from a external service
+          //TODO - PREVIEW: Function shall be split in two to accept both an array and a single element
+          copyToWorkgroup: function (item) {
+            openBrowser([item]);
+          },
+          showItemDetails: function (item) {
+            showCurrentFile(item, undefined, true);
+          }
+        }
+      );
+      
       $scope.fabButton = {
         toolbar: {
           activate: true,
