@@ -7,7 +7,7 @@
         <div id="breadcrumb-wrap" class="deep-nav">
           <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
                uib-dropdown dropdown-append-to-body auto-close="always"
-               tooltip-placement="bottom" tooltip-popup-delay="500" uib-tooltip="{{'ACTION.NEW_ITEM' | translate}}"
+               tooltip-placement="bottom" tooltip-popup-delay="500" translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
                is-open="isOpenNew" data-ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle >
               <i class="zmdi zmdi-plus"></i>
@@ -17,7 +17,7 @@
               <li role="menuitem">
                 <a translate class="center">ACTION.NEW_ITEM</a>
               </li>
-              <li role="menuitem" data-ng-show="!linshareModeProduction">
+              <li role="menuitem" data-ng-show="::!linshareModeProduction">
                 <a>
                   <i class="ls-project"></i>
                   <span translate>WORKGROUPS_LIST.PROJECT</span>
@@ -47,13 +47,13 @@
                   <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.UPLOAD_FOLDER</span>
                 </a>
               </li>
-              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="!linshareModeProduction">
+              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="::!linshareModeProduction">
                 <a>
                   <i class="ls-upload-request"></i>
                   <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.UPLOAD_REQUEST</span>
                 </a>
               </li>
-              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="!linshareModeProduction">
+              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="::!linshareModeProduction">
                 <a>
                   <i class="ls-add-user-sm"></i>
                   <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.ADD_A_MEMBER</span>
@@ -95,7 +95,7 @@
                         data-ng-class="{'open':isOpenOrder}" uib-dropdown-menu="">
                       <li role="menuitem">
                         <a href="" class="center">
-                          {{'SELECTION_TOOLBAR.ORDER_BY' | translate}}
+                          <span translate>SELECTION_TOOLBAR.ORDER_BY</span>
                         </a>
                       </li>
                       <li role="menuitem">
@@ -105,7 +105,7 @@
                           <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
-                          {{'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate}}
+                          <span translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</span>
                         </a>
                       </li>
                       <li role="menuitem">
@@ -115,7 +115,7 @@
                           <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                           <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
-                          {{'FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE' | translate}}
+                          <span translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</span>
                         </a>
                       </li>
                       <li role="menuitem">
@@ -125,7 +125,7 @@
                               <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                               <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                             </span>
-                          {{'FILTER_COMPONENT.ORDER_BY_NAME' | translate}}
+                          <span translate>FILTER_COMPONENT.ORDER_BY_NAME</span>
                         </a>
                       </li>
                     </ul>
@@ -150,7 +150,7 @@
                     <input type="text" class="form-control"
                            autocomplete="off"
                            x-ng-model="vm.paramFilter['name']"
-                           placeholder="{{'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME' | translate}}"
+                           translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
                            x-ng-change="updateParams()">
                   </div>
                 </div>
@@ -161,7 +161,7 @@
                    class="input-group-addon last clickable dropdown"
                    x-ng-click="advancedFilterBool = !advancedFilterBool"
                    uib-dropdown-toggle
-                   data-original-title="{{ 'TOOLTIP.ADVANCED_FILTER' | translate }}">
+                   translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}">
                   <i class="zmdi hidden-xs clickable ls-settings"></i>
                   <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
@@ -183,7 +183,8 @@
         <div id="top-search-wrap">
           <i id="top-search-close" x-ng-click="vm.toggleSearchState()">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-                 placeholder="Nom de fichier" x-ng-change="updateParams()" x-ng-model="vm.paramFilter['name']"
+                 translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+                 x-ng-change="updateParams()" x-ng-model="vm.paramFilter['name']"
                  aria-invalid="false">
         </div>
 
@@ -203,14 +204,16 @@
             </a>
           </div>
           <div class="exit-selection actions" x-ng-click="vm.resetSelectedDocuments()"
-               title="{{'SELECTION_TOOLBAR.RESET' | translate}}">
+               translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
             <a><i class="zmdi zmdi-close"></i></a>
           </div>
-          <div class="display-num-selected-items" title="{{'SELECTION_TOOLBAR.SHOW_SELECTION' | translate}}">
+          <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
             <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
                  x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; vm.toggleFilterBySelectedFiles()">
-              <p><span>{{vm.selectedDocuments.length}}</span> {{"SELECTION_TOOLBAR.SELECTED_ELEMENTS" |
-                translate}}</p>
+              <p>
+                <span>{{vm.selectedDocuments.length}}</span> 
+                <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
+              </p>
               <div class="pull-left view-icons-ctn groups-view">
                 <i class="fa fa-eye-slash" aria-hidden="true"
                    x-ng-show=" activeBtnShowSelection"></i>
@@ -218,7 +221,7 @@
               </div>
             </div>
             <div class="pull-left view-icons-ctn reset-icon" x-ng-click="vm.resetSelectedDocuments()">
-              <i class="fa fa-undo" title="{{'SELECTION_TOOLBAR.RESET' | translate}}"></i>
+              <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
@@ -226,11 +229,11 @@
                 <a
                   class="plain-text-button share-link"
                   data-ng-class="::{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
-                  title="{{'ACTION.ADD_MEMBER' | translate}}"
+                  translate-attr="{title: 'ACTION.ADD_MEMBER'}"
                   data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true, true)"
                 >
                   <i class="ls-add-user-sm"></i>
-                  <span>{{'ACTION.ADD_MEMBER' | translate}}</span>
+                  <span translate>ACTION.ADD_MEMBER</span>
                 </a>
               </span>
             <span>
@@ -239,24 +242,24 @@
                 data-ng-class="::{'disable-link' : !vm.isLoggedUserAdminOfAllSelectedWorkgroups}"
                 ng-if="!vm.writeAndReadonlyMembers"
                 data-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"
-                title="{{'SELECTION_TOOLBAR.DELETE' | translate}}"
+                translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
               >
                 <i class="fa fa-trash-o"></i>
-                <span>{{'SELECTION_TOOLBAR.DELETE' | translate}}</span>
+                <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
               </span>
-            <span x-ng-show="linshareModeProduction == false">
-              <a class="plain-text-button share-link" title=" {{'ACTION.SILENCE' | translate}}">
+            <span x-ng-show="::linshareModeProduction == false">
+              <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.SILENCE'}">
                 <i class="fa fa-bell-slash-o"></i>
-                <span> {{'ACTION.SILENCE' | translate}}</span>
+                <span translate>ACTION.SILENCE</span>
               </a>
               </span>
               <span class="dropdown link-dropdown" uib-dropdown=""
                     is-open="isOpenToolbarMore" data-ng-class="{'open': isOpenToolbarMore}">
                 <a class="plain-text-button share-link"
-                   uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+                   uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}">
                   <i class="zmdi zmdi-more"></i>
-                  <span>{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}</span>
+                  <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
                     uib-dropdown-menu  data-ng-class="{'open': isOpenToolbarMore}">
@@ -270,17 +273,17 @@
                       <span translate>ACTION.INFORMATION</span>
                     </a>
                   </li>
-                  <li x-ng-show="linshareModeProduction == false">
+                  <li x-ng-show="::linshareModeProduction == false">
                     <a href="">
                       <i class="zmdi zmdi-star"></i>
-                      {{'ACTION.FAVORITES' | translate}}
+                      <span translate>ACTION.FAVORITES</span>
                     </a>
                   </li>
                   <li class="divider" data-ng-show="vm.selectedDocuments.length === 1"></li>
-                  <li class="hidden-xs" data-ng-show="linshareModeProduction == false">
+                  <li class="hidden-xs" data-ng-show="::linshareModeProduction == false">
                     <a x-ng-href="" data-ng-click="vm.downloadFile(vm.selectedDocuments[0])">
                       <i class="zmdi zmdi-download"></i>
-                        {{'ACTION.DOWNLOAD' | translate}}
+                        <span translate>ACTION.DOWNLOAD</span>
                      </a>
                   </li>
                   <li class="divider" data-ng-show="vm.selectedDocuments.length === 1"></li>
@@ -291,18 +294,18 @@
                       <span translate>ACTION.RENAME</span>
                     </a>
                   </li>
-                  <li class="divider" x-ng-show="linshareModeProduction == false"></li>
-                  <li x-ng-show="linshareModeProduction == false">
+                  <li class="divider" x-ng-show="::linshareModeProduction == false"></li>
+                  <li x-ng-show="::linshareModeProduction == false">
                     <a href="">
                       <i class="zmdi zmdi-arrows"></i>
-                      {{'ACTION.MOVE' | translate}}
+                      <span translate>ACTION.MOVE</span>
                     </a>
                   </li>
-                  <li class="divider" x-ng-show="linshareModeProduction == false"></li>
-                  <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
+                  <li class="divider" x-ng-show="::linshareModeProduction == false"></li>
+                  <li class="hidden-xs" x-ng-show="::linshareModeProduction == false">
                     <a href="">
                       <i class="fa fa-recycle" aria-hidden="true"></i>
-                      {{'ACTION.GO_TO_TRASH' | translate}}
+                      <span translate>ACTION.GO_TO_TRASH</span>
                     </a>
                   </li>
                 </ul>
@@ -319,8 +322,8 @@
               </span>
             </div>
             <div class="dnd-txt-content">
-              <h1>{{'BACKGROUND_WORKGROUP_TITLE_MSG' | translate}}</h1>
-              <p>{{'BACKGROUND_WORKGROUP_MSG' | translate}}</p>
+              <h1 translate>BACKGROUND_WORKGROUP_TITLE_MSG</h1>
+              <p translate>BACKGROUND_WORKGROUP_MSG</p>
             </div>
           </div>
         </div>
@@ -346,7 +349,7 @@
           <div class="table-responsive">
             <table id="file-list-table" class="table table-vmiddle wider-first-col fixed-activity-table-height"
                    data-ng-table="vm.tableParams" show-filter="true"
-                   data-ng-class=" {'col-4-table' : linshareModeProduction == false}">
+                   data-ng-class="::{'col-4-table' : linshareModeProduction == false}">
               <tr
                 class="p-b-5 item-container"
                 x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
@@ -361,7 +364,7 @@
                 x-ng-dblclick="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)"
                 check-table-height
               >
-                <td data-header="'favoritsheader.html'" ng-if="linshareModeProduction == false"
+                <td data-header="'favoritsheader.html'" ng-if="::linshareModeProduction == false"
                     class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
                     data-title=""
                     header-class="'set-content-right favorits-header col-1 hidden-xs'">
@@ -391,9 +394,9 @@
                   </a>
                 </td>
 
-                <td data-title="'TABLE_HEADER.NAME' | translate"
+                <td data-title="::'TABLE_HEADER.NAME' | translate"
                     class="row show-li-actions col-3"
-                    data-sortable="'name'" uuid={{documentFile.uuid}} header-class="'col-3 flexible-table-col'">
+                    data-sortable="'name'" uuid={{::documentFile.uuid}} header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
                       <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                         <span class="file-name-disp single-line" contenteditable="false" spellcheck="false"
@@ -419,7 +422,7 @@
                             event-propagation-stop
                           >
                             <a href=""
-                               title="{{'BOUTON_LABEL_TITLE.INFO' | translate}}"
+                               translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}"
                                class="set-col-12">
                               <i class="zmdi zmdi-info"></i>
                             </a>
@@ -428,14 +431,14 @@
                             class="hidden-xs"
                             x-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
                           >
-                            <a href="" title="{{'WORKGROUPS_LIST.ADD_A_MEMBER' | translate}}"
+                            <a href="" translate-attr="{title: 'WORKGROUPS_LIST.ADD_A_MEMBER'}"
                                event-propagation-stop="true">
                               <i><span class="ls-member"></span></i>
                             </a>
                           </li>
-                          <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
+                          <li class="hidden-xs" x-ng-show="::linshareModeProduction == false">
                             <a x-ng-href=""
-                               title="{{'ACTION.SILENCE' | translate}}" event-propagation-stop>
+                               translate-attr="{title: 'ACTION.SILENCE'}" event-propagation-stop>
                               <i class="fa fa-bell-slash-o"></i>
 
                             </a>
@@ -444,7 +447,7 @@
                               auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
                             <a
                               href=""
-                              title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}"
+                              translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
                               uib-dropdown-toggle
                               event-propagation-stop
                               class="set-col-12"
@@ -460,19 +463,19 @@
                                   x-ng-click="vm.showItemDetails(documentFile.uuid, true)"
                                 >
                                   <i class="zmdi zmdi-info "></i>
-                                  {{'ACTION.INFORMATION' | translate}}
+                                  <span translate>ACTION.INFORMATION</span>
                                 </a>
                               </li>
-                              <li x-ng-show="linshareModeProduction == false">
+                              <li x-ng-show="::linshareModeProduction == false">
                                 <a href="" event-propagation-stop>
                                   <i class="zmdi zmdi-star"></i>
-                                  {{'ACTION.FAVORITES' | translate}}
+                                  <span translate>ACTION.FAVORITES</span>
                                 </a>
                               </li>
-                              <li x-ng-show="linshareModeProduction == false">
+                              <li x-ng-show="::linshareModeProduction == false">
                                 <a href="" event-propagation-stop>
                                   <i class="fa fa-bell-slash-o"></i>
-                                  {{'ACTION.SILENCE' | translate}}
+                                  <span translate>ACTION.SILENCE</span>
                                 </a>
                               </li>
                               <li
@@ -488,19 +491,19 @@
                               >
                                 <a href="">
                                   <i class="groups-add-member align-style"></i>
-                                  {{'ACTION.ADD_MEMBER' | translate}}
+                                  <span translate>ACTION.ADD_MEMBER</span>
                                 </a>
                               </li>
                               <li
                                 class="divider hidden-xs"
-                                data-ng-show="linshareModeProduction == false"
+                                data-ng-show="::linshareModeProduction == false"
                               >
                               </li>
-                              <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
+                              <li class="hidden-xs" x-ng-show="::linshareModeProduction == false">
                                 <a x-ng-href="" x-ng-click="vm.downloadFile(documentFile)"
                                    event-propagation-stop>
                                   <i class="zmdi zmdi-download"></i>
-                                  {{'ACTION.DOWNLOAD' | translate}}
+                                  <span translate>ACTION.DOWNLOAD</span>
                                 </a>
                               </li>
                               <li
@@ -515,14 +518,14 @@
                               >
                                 <a x-ng-click="vm.renameFolder(documentFile)">
                                   <i class="zmdi zmdi-border-color"></i>
-                                  {{'ACTION.RENAME' | translate}}
+                                  <span translate>ACTION.RENAME</span>
                                 </a>
                               </li>
-                              <li class="divider hidden-xs" x-ng-show="linshareModeProduction == false"></li>
-                              <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
+                              <li class="divider hidden-xs" x-ng-show="::linshareModeProduction == false"></li>
+                              <li class="hidden-xs" x-ng-show="::linshareModeProduction == false">
                                 <a href="" ls-share-modal event-propagation-stop>
                                   <i class="zmdi zmdi-arrows"></i>
-                                  {{'ACTION.MOVE' | translate}}
+                                  <span translate>ACTION.MOVE</span>
                                 </a>
                               </li>
                               <li class="divider"></li>
@@ -532,13 +535,13 @@
                               >
                                 <a href="" x-ng-click="vm.deleteWorkGroup(documentFile)">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                  {{'ACTION.DELETE' | translate}}
+                                  <span translate>ACTION.DELETE</span>
                                 </a>
                               </li>
-                              <li class="hidden-xs" x-ng-show="linshareModeProduction == false">
+                              <li class="hidden-xs" x-ng-show="::linshareModeProduction == false">
                                 <a href="" ls-share-modal event-propagation-stop>
                                   <i class="fa fa-recycle" aria-hidden="true"></i>
-                                  {{'ACTION.GO_TO_TRASH' | translate}}
+                                  <span translate>ACTION.GO_TO_TRASH</span>
                                 </a>
                               </li>
                             </ul>
@@ -549,7 +552,7 @@
                 </td>
                 <td class="hidden-xs"
                     ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
-                    data-title="'TABLE_HEADER.MODIFICATION_DATE' | translate"
+                    data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate"
                     data-sortable="'modificationDate'"
                     header-class="'col-4 hide-if-toggled-sidebar'">
                   {{documentFile.modificationDate | relativeTime}}
@@ -573,7 +576,7 @@
          x-ng-show="vm.currentPage === vm.lsAppConfig.workgroupList">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">{{vm.selectedDocuments.length}}</span>
-    <span class="file-multi-select-label">{{'SELECTION_TOOLBAR.ELEMENTS' | translate}}</span>
+    <span class="file-multi-select-label" translate>SELECTION_TOOLBAR.ELEMENTS</span>
   </div>
   <div class="col-xs-8">
      <div x-ng-click="vm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
@@ -588,8 +591,8 @@
     <i class="groups-add-member col-xs-2"></i>
     <i class="fa fa-trash-o col-xs-2" x-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"></i>
     <i class="fa fa-bell-slash-o col-xs-2 disabled-work-in-progress"
-       x-ng-show="linshareModeProduction == false"></i>
-    <span class="dropdown col-xs-2 dropdown-standard" x-ng-show="linshareModeProduction == false" uib-dropdown="">
+       x-ng-show="::linshareModeProduction == false"></i>
+    <span class="dropdown col-xs-2 dropdown-standard" x-ng-show="::linshareModeProduction == false" uib-dropdown="">
         <i class="zmdi zmdi-more-vert" ng-class="{'active-link': isActiveMoreDropdown }"
            x-ng-click="isActiveMoreDropdown = !isActiveMoreDropdown"
            uib-dropdown-toggle=""></i>
@@ -604,27 +607,27 @@
           <li>
             <a href="" event-propagation-stop>
               <i class="zmdi zmdi-star"></i>
-              {{'ACTION.FAVORITES' | translate}}
+              <span translate>ACTION.FAVORITES</span>
             </a>
           </li>
           <li>
             <a href="" event-propagation-stop>
               <i class="fa fa-bell-slash-o"></i>
-              {{'ACTION.SILENCE' | translate}}
+              <span translate>ACTION.SILENCE</span>
             </a>
           </li>
           <li class="divider"></li>
           <li>
             <a href="" event-propagation-stop>
               <i class="zmdi zmdi-arrows"></i>
-              {{'ACTION.MOVE' | translate}}
+              <span translate>ACTION.MOVE</span>
             </a>
           </li>
           <li class="divider"></li>
           <li class="hidden-xs">
             <a href="" event-propagation-stop>
               <i class="fa fa-recycle" aria-hidden="true"></i>
-              {{'ACTION.GO_TO_TRASH' | translate}}
+              <span translate>ACTION.GO_TO_TRASH</span>
             </a>
           </li>
         </ul>
