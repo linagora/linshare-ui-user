@@ -104,7 +104,7 @@
           }
         }
       );
-      
+
       $scope.fabButton = {
         toolbar: {
           activate: true,
@@ -656,10 +656,12 @@
         LinshareDocumentRestService.getAudit(currentFile.uuid)
       ]).then(function(promises) {
         $scope.currentSelectedDocument.current = promises[0];
-        $scope.currentSelectedDocument.recipients = _.map(
-          promises[0].shares,
-          'recipient'
-        );
+        $scope.currentSelectedDocument.recipients = function() {
+          return _.map(
+            promises[0].shares,
+            'recipient'
+          );
+        };
 
         documentUtilsService.loadItemThumbnail($scope.currentSelectedDocument.current,
           LinshareDocumentRestService.thumbnail.bind(null, $scope.currentSelectedDocument.current.uuid));
