@@ -51,6 +51,8 @@
      * @memberOf linshare.components.documentPreviewButton.services.documentPreviewService
      */
     function close(item) {
+      service._item = undefined;
+
       return $mdDialog.hide(item);
     }
 
