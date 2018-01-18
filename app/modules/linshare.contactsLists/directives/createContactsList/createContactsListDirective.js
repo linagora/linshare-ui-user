@@ -78,7 +78,7 @@
           .then(function (contactsList) {
             addContactsInContactsList(
               contactsList.uuid,
-              contactsToBeAdded
+              contactsToBeAdded()
             );
             scope.contactsListName = '';
 

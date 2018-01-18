@@ -321,12 +321,15 @@ angular.module('linshare.sharedSpace')
       workgroupRestService
         .get(workgroupUuid, true)
         .then(function(workgroup) {
-          thisctrl.currentSelectedDocument.membersForContactsList = _.map(
-            workgroup.members,
-            function(member) {
-              return { mail: member.userMail };
-            }
-          );
+          thisctrl.currentSelectedDocument.membersForContactsList = function() {
+            return _.map(
+              workgroup.members,
+              function(member) {
+                return { mail: member.userMail };
+              }
+            );
+          };
+
           thisctrl.currentSelectedDocument.current = workgroup;
 
           return workgroupRestService
