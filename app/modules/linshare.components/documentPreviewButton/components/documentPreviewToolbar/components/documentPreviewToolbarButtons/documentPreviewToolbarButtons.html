@@ -1,32 +1,38 @@
 <div class="toolbar-actions-ctn">
-  <md-button class="md-icon-button actions white-inline-link hidden-xs">
-    <a data-ng-click="$ctrl.scope.executeAndClose($ctrl.scope.item, $ctrl.scope.showItemDetails)">
-
+  <md-button
+    class="md-icon-button actions white-inline-link hidden-xs"
+    data-ng-click="$ctrl.scope.executeAndClose($ctrl.scope.item, $ctrl.scope.showItemDetails)"
+  >
+    <a>
       <i class="zmdi zmdi-info zmdi-hc-lg"></i>
     </a>
   </md-button>
-  <md-button class="md-icon-button actions white-inline-link hidden-xs">
-    <a data-ng-click="$ctrl.scope.download($ctrl.scope.item)">
+  <md-button
+    class="md-icon-button actions white-inline-link hidden-xs"
+    data-ng-click="$ctrl.scope.download($ctrl.scope.item)"
+  >
+    <a>
       <i class="zmdi zmdi-download zmdi-hc-lg"></i>
     </a>
   </md-button>
-  <md-button
-    class="md-icon-button actions white-inline-link"
-    data-ng-class="{'visible-xs': !($ctrl.scope.canCopyToMySpace || $ctrl.scope.canCopyToWorkgroup)}"
-  >
+  <div uib-dropdown>
+    <md-button
+      class="md-icon-button actions white-inline-link"
+      data-ng-class="{'visible-xs': !($ctrl.scope.canCopyToMySpace || $ctrl.scope.canCopyToWorkgroup)}"
+      uib-dropdown-toggle keyboard-nav
+    >
+      <a >
+        <i class="zmdi zmdi-more"></i>
+      </a>
+    </md-button>
     <div
-      uib-dropdown
       class="dropdown set-col-6 no-padding"
-      auto-close="always"
     >
       <div class="actions">
-        <a uib-dropdown-toggle="">
-          <i class="zmdi zmdi-more"></i>
-        </a>
         <ul
           class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left
           dropdown-menu"
-          uib-dropdown-menu=""
+          uib-dropdown-menu
         >
           <li
             class="visible-xs"
@@ -68,7 +74,7 @@
         </ul>
       </div>
     </div>
-  </md-button>
+  </div>
   <md-button
     class="md-icon-button actions white-inline-link"
     data-ng-click="$ctrl.scope.close($ctrl.scope.item)"
