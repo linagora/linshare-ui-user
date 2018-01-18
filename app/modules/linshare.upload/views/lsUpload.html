@@ -92,11 +92,11 @@
         </span>
         <i class="zmdi zmdi-pause col-xs-2 pull-right"
            data-ng-class="{'disable-link': lengthOfSelectedDocuments() === 0}"
-           data-ng-show="!$flow.isPaused" data-ng-click="pauseAllFiles()">
+           data-ng-show="!$flow.isPaused" data-ng-click="uploadQueueVm.pauseAllFiles()">
         </i>
         <i class="zmdi zmdi-play col-xs-2 pull-right"
            data-ng-class="{'disable-link': lengthOfSelectedDocuments() === 0}"
-           data-ng-click="resumeAllFiles()" data-ng-show="$flow.isPaused">
+           data-ng-click="uploadQueueVm.resumeAllFiles()" data-ng-show="$flow.isPaused">
         </i>
         <!-- TODO : SMA - This share button is superimposed with the menu button -->
         <!--<i class="zmdi zmdi-share col-xs-2 pull-right"-->
