@@ -377,6 +377,10 @@
           done = true;
           item.name = name;
           item.save().then(function(data) {
+            Object.assign(
+              item,
+              data
+            );
             deferred.resolve(data);
           }).catch(function(error) {
             deferred.reject(error);

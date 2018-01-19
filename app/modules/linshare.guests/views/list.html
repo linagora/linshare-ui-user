@@ -190,8 +190,14 @@
                 <span translate>ACTION.DISPLAY</span>:
               </span>
               <div class="dropdown-filters pull-left">
-                <span uib-dropdown class="dropdown link-dropdown" auto-close="outsideClick"
-                      is-open="isOpenType" data-ng-class="{'open': isOpenType}">
+                <span
+                  class="dropdown link-dropdown"
+                  data-ng-class="{'open': isOpenType}"
+                  uib-dropdown
+                  dropdown-append-to-body
+                  auto-close="outsideClick"
+                  is-open="isOpenType"
+                >
                   <a
                     class="plain-txt-btn partage-link"
                     href="javascript:void(0)"
@@ -278,7 +284,7 @@
         <div class="pull-left" x-ng-class="{'activeBtnShowSelection': activeBtnShowSelection}"
              x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; guestVm.tableFilterBySelected()">
           <p>
-            <span>{{guestVm.selectedGuests.length}}</span> 
+            <span>{{guestVm.selectedGuests.length}}</span>
             <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
           </p>
           <div class="pull-left view-icons-ctn groups-view">
@@ -331,7 +337,7 @@
         </span>
         <span x-ng-hide="::linshareModeProduction" class="dropdown link-dropdown" uib-dropdown>
           <a
-            class="plain-txt-btn partage-link" 
+            class="plain-txt-btn partage-link"
             uib-dropdown-toggle
             translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
           >
@@ -343,13 +349,13 @@
           <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu="">
             <li>
               <a href="" event-propagation-stop>
-                <i class="fa fa-pencil-square-o"></i> 
+                <i class="fa fa-pencil-square-o"></i>
                 <span translate>ACTION.ADMIN_REQUEST</span>
               </a>
             </li>
             <li>
               <a href="" event-propagation-stop>
-                <i class="zmdi zmdi-accounts-list"></i> 
+                <i class="zmdi zmdi-accounts-list"></i>
                 <span translate>ACTION.JOIN_RESTRICTED_CONTACTS</span>
               </a>
             </li>
@@ -621,20 +627,20 @@
   <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu="">
     <li>
       <a href="" event-propagation-stop>
-        <i class="fa fa-pencil-square-o"></i> 
+        i class="fa fa-pencil-square-o"></i>
         <span translate>ACTION.ADMIN_REQUEST</span>
       </a>
     </li>
     <li>
       <a href="" event-propagation-stop>
-        <i class="zmdi zmdi-accounts-list"></i> 
+        <i class="zmdi zmdi-accounts-list"></i>
         <span translate>ACTION.JOIN_RESTRICTED_CONTACTS</span></a>
     </li>
     <li>
       <a href="">
         <i class="groups-shared-folder">
           <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
-        </i> 
+        </i>
         <span translate>ACTION.ADD_TO_WORKGROUPS</span>
       </a>
     </li>
