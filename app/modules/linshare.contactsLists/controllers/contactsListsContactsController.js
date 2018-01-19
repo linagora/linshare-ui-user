@@ -359,6 +359,10 @@
         item.lastNameModel = function getSetLastNameModel(value) {
           return _.isUndefined(value) ? item._lastName : item._lastName = value;
         };
+        item._mail = _.clone(item.mail);
+        item.mailModel = function getSetMailModel(value) {
+          return _.isUndefined(value) ? item._mail : item._mail = value;
+        };
       }
     }
 
@@ -475,8 +479,10 @@
         var contactToSave = _.cloneDeep(contact);
         contactToSave.firstName = contactToSave._firstName;
         contactToSave.lastName = contactToSave._lastName;
+        contactToSave.mail = contactToSave._mail;
         delete contactToSave._firstName;
         delete contactToSave._lastName;
+        delete contactToSave._mail;
         // TODO : IAB object returned to implement -> contactSaved
         contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave)
           .then(function() {
