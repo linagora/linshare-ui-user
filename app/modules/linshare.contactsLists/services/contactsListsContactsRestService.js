@@ -62,7 +62,7 @@
           'mail'
         ]
       );
-      
+
       return handler(Restangular.one(restUrl, contactsListUuid).all(restParam).post(contactDto));
     }
 
@@ -76,7 +76,7 @@
      */
     function get(contactsListUuid, contactUuid) {
       $log.debug('contactsListsContactsRestService - get ', contactsListUuid, contactUuid);
-      return handler(Restangular.one(restUrl, contactsListUuid).getList(restParam, contactUuid).get());
+      return handler(Restangular.one(restUrl, contactsListUuid).one(restParam, contactUuid).get());
     }
 
     /**
@@ -114,7 +114,7 @@
      */
     function update(contactsListUuid, contact) {
       $log.debug('contactsListsContactsRestService - update');
-      return handler(Restangular.one(restUrl, contactsListUuid).one(restParam).customPUT(contact));
+      return handler(Restangular.one(restUrl, contactsListUuid).one(restParam, contact.uuid).customPUT(contact));
     }
   }
 })();

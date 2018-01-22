@@ -483,11 +483,18 @@
         delete contactToSave._firstName;
         delete contactToSave._lastName;
         delete contactToSave._mail;
-        // TODO : IAB object returned to implement -> contactSaved
         contactsListsContactsRestService.update(contactsListsContactsVm.contactsListUuid, contactToSave)
-          .then(function() {
-            contactsListsContactsVm
-              .itemsList[_.findIndex(contactsListsContactsVm.itemsList, {'uuid': contactToSave.uuid})] = contactToSave;
+          .then(function(contactData) {
+            var indexOfContactInItemsList = _.findIndex(
+              contactsListsContactsVm.itemsList,
+              { 'uuid': contactToSave.uuid }
+            );
+
+            contactsListsContactsVm.itemsList[indexOfContactInItemsList] = Object.assign(
+              {},
+              contact,
+              contactData
+            );
             setModelForEdit(contactToSave);
             $translate('TOAST_ALERT.ACTION.UPDATE').then(function(message) {
               toastService.success({key: message});
