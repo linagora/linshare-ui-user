@@ -95,6 +95,7 @@
      * @namespace linshare.components.documentPreviewButtonController
      */
     function getPreviewMode(item) {
+      var documentMimeType = item.mimeType || item.type;
       var previewMode = {
         image: false,
         noPreview: false,
@@ -105,15 +106,15 @@
       if (!item.hasThumbnail) {
         previewMode.noPreview = true;
       } else {
-        if (item.type.indexOf('image/') !== -1) {
+        if (documentMimeType.indexOf('image/') !== -1) {
           previewMode.image = true;
         }
 
-        if (item.type.indexOf('application/pdf') !== -1) {
+        if (documentMimeType.indexOf('application/pdf') !== -1) {
           previewMode.pdf = true;
         }
 
-        if (item.type.indexOf('application/pdf') === -1 && item.type.indexOf('image/') === -1) {
+        if (documentMimeType.indexOf('application/pdf') === -1 && documentMimeType.indexOf('image/') === -1) {
           previewMode.other = true;
         }
       }

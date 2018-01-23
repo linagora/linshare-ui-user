@@ -29,6 +29,7 @@
         documentPreviewModeVm.item,
         documentPreviewService.getItem()
       );
+      documentPreviewModeVm.documentMimeType = documentPreviewModeVm.item.mimeType || documentPreviewModeVm.item.type;
     }
   }
 })();

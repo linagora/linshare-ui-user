@@ -2,7 +2,7 @@
   class="full-screen-single"
   data-ng-if="documentPreviewModeVm.item.mode.image"
 >
-  <img ng-src="data:{{documentPreviewModeVm.item.type}};base64,{{documentPreviewModeVm.item.preview}}" />
+  <img ng-src="data:{{documentPreviewModeVm.documentMimeType}};base64,{{documentPreviewModeVm.item.preview}}" />
 </div>
 
 <div

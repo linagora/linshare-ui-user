@@ -22,6 +22,7 @@
     'auditDetailsService',
     'browseService',
     'currentFolder',
+    'documentPreviewService',
     'documentUtilsService',
     'filterBoxService',
     'flowUploadService',
@@ -54,6 +55,7 @@
     auditDetailsService,
     browseService,
     currentFolder,
+    documentPreviewService,
     documentUtilsService,
     filterBoxService,
     flowUploadService,
@@ -124,6 +126,22 @@
     function activate() {
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('sharedspace');
+
+      Object.assign(
+        documentPreviewService,
+        {
+          download: downloadFile,
+          copyToMySpace: function(item) {
+            copyNodeToPersonalSpace([item]);
+          },
+          copyToWorkgroup: function(item) {
+            openBrowser([item]);
+          },
+          showItemDetails: function(item) {
+            showSelectedNodeDetails(item);
+          }
+        }
+      );
 
       $translate.refresh().then(function() {
         $translate('ACTION.NEW_FOLDER').then(function(translationOfNewFolder) {

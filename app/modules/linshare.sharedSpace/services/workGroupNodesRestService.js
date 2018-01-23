@@ -214,7 +214,7 @@
      */
     function thumbnail(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : thumbnail', workgroupUuid, nodeUuid);
-      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).customGET('thumbnail', {
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).one('thumbnail').get({
         base64: true
       }));
     }
