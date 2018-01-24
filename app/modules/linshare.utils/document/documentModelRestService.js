@@ -49,15 +49,33 @@
          */
         function downloadAsArrayBuffer() {
           return Restangular
-            .all(model.route)
             .one(
-            model.uuid,
-            'download'
+              getFullRoute(model),
+              'download'
             )
             .withHttpConfig({
               responseType: 'arraybuffer'
             })
             .get();
+        }
+        /**
+         * @name getFullRoute
+         * @desc Get the full API source of the given resource
+         * @param {Object} item - Document type object which shall contains: parentResource and route
+         * @param {string} action - The Action request
+         * @return {string} The full route
+         * @memberOf LinShare.utils.documentModelRestService
+         */
+        function getFullRoute(item) {
+          var isItemContainBothUuidAndRoute = item && item.uuid && item.route;
+
+          if(!isItemContainBothUuidAndRoute){
+            return '';
+          } else {
+            var itemFullRoute = item.route + '/' + item.uuid + '/';
+
+            return item.parentResource ? getFullRoute(item.parentResource) + '/' + itemFullRoute : itemFullRoute;
+          }
         }
 
         /**
@@ -68,10 +86,9 @@
          */
         function getThumbnailLarge() {
           return Restangular
-            .all(model.route)
             .one(
-            model.uuid,
-            'thumbnail'
+              getFullRoute(model),
+              'thumbnail'
             )
             .one('large')
             .get({
@@ -87,10 +104,9 @@
          */
         function getThumbnailPdf() {
           return Restangular
-            .all(model.route)
             .one(
-            model.uuid,
-            'thumbnail'
+             getFullRoute(model),
+             'thumbnail'
             )
             .one('pdf')
             .withHttpConfig({

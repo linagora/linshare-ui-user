@@ -615,6 +615,14 @@
                               data-ng-class="{'open':isOpenItem}"
                               uib-dropdown-menu=""
                             >
+                              <li>
+                                <document-preview-button
+                                  item-index="$index"
+                                  items="$data"
+                                >
+                                  <span translate>ACTION.PREVIEW</span>
+                                </document-preview-button>
+                              </li>
                               <li event-propagation-stop
                                   data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
                                 <a href="">
