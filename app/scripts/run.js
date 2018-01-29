@@ -72,6 +72,8 @@ angular
         flowFactoryProvider.defaults[key] = value;
       }
     );
+    /* Do not update this value. It is not yet supported by the backend. */
+    flowFactoryProvider.defaults['simultaneousUploads'] = 1;
 
     /*
      ** aHrefSanitizationWhitelist :

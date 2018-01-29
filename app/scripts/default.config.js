@@ -39,6 +39,7 @@
         readonly: 'READ'
       },
       flowFactoryProviderDefaults : {
+        /* Do not update this value. It is not yet supported by the backend. */
         simultaneousUploads: 3,
         allowDuplicateUploads: true,
         maxChunkRetries: 3,
