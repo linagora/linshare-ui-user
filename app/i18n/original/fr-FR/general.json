@@ -156,14 +156,14 @@
     "EMAIL_PLACEHOLDER": "Courriel",
     "FORGOTTEN_PASSWORD": "Mot de passe oublié ?",
     "KEEP_SIGNED": "Rester connecté",
-    "LINSHARE_LINK_ALT": "Linshare: Partage de fichiers sécurisé en open source",
+    "LINSHARE_LINK_ALT": "Linshare: Partage de fichiers sécurisés en open source",
     "LOGIN_HEADER": "Connexion",
     "NOTIFICATION": {
       "SUCCESS": "Bonjour {{firstName}}",
       "ERROR": "L'authentification a échoué, l'email ou le mot de passe est incorrect"
     },
     "PASSWORD_PLACEHOLDER": "Mot de passe",
-    "TAGLINE": "Partage de fichiers sécurisé en open source"
+    "TAGLINE": "Partage de fichiers sécurisés en open source"
   },
   "ME": "Moi",
   "MENU_TITLE": {
