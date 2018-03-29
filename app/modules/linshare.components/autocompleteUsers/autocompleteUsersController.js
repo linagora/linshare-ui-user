@@ -215,7 +215,16 @@
               });
             }
             autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
-            deferred.resolve(data);
+
+            // TODO: remove this logic and return only data when the back
+            // will support adding contactslist in workgroup members
+            const usersAccounts = lsAppConfig.production && $scope.completeThreadUuid ?
+              _.filter(data, function(item) {
+                return item.type !== 'mailinglist';
+              })
+              : data;
+              
+            deferred.resolve(usersAccounts);
           });
       }
       return deferred.promise;
