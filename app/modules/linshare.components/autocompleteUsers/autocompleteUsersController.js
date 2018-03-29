@@ -218,11 +218,11 @@
 
             // TODO: remove this logic and return only data when the back
             // will support adding contactslist in workgroup members
-            const usersAccounts = !$scope.completeThreadUuid ?
-              data
-              : _.filter(data, function(item) {
+            const usersAccounts = lsAppConfig.production && $scope.completeThreadUuid ?
+              _.filter(data, function(item) {
                 return item.type !== 'mailinglist';
-              });
+              })
+              : data;
               
             deferred.resolve(usersAccounts);
           });
