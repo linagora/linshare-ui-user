@@ -17,6 +17,8 @@
 
       //Warning: the following parameter will not be use if you defined a logout url via
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
-      postLogoutUrl: null // default : null, example 'http://my.fake.page.for.sso'
+      postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
+      
+      enableSafeDetails: true
     });
 })();

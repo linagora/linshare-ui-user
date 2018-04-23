@@ -29,6 +29,7 @@
         en: 'en-US',
         vi: 'vi-VN'
       },
+      enableSafeDetails: false,
       licence: true,
       loginWithMailOnly: true,
       production: true,

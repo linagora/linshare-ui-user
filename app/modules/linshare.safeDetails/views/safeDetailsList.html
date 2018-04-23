@@ -1,0 +1,100 @@
+<div>
+  <div class="container files guest-list">
+    <div class="card">
+      <div class="card-header">
+        <div id="breadcrumb-wrap">
+          <div class="breadcrumbs-ctn hidden-xs">
+            <a class="click-disabled">
+              <i class="zmdi zmdi-card"></i>
+              <span translate>BREADCRUMB_TITLE_SAFE_DETAILS</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body collapsible-content">
+        <div class="table-responsive">
+          <table
+            class="table standard-read-only-table table-form-filters detail-action-col fixed-activity-table-height"
+            data-ng-table="safeDetailsVm.tableParams"
+          >
+            <tr
+              data-ng-repeat="safeDetail in $data"
+              check-table-height
+            >
+              <td 
+                class="truncate" 
+                data-title="'TABLE_HEADER.COUNTRY_CODE' | translate"
+                uib-tooltip="{{::safeDetail.countryCode}}"
+                tooltip-append-to-body="true"
+                tooltip-placement="bottom"
+                tooltip-popup-delay='650'
+              >
+                {{::safeDetail.countryCode}}
+              </td>
+              <td
+                class="truncate"
+                data-title="'TABLE_HEADER.CONTROL_KEY' | translate"
+                uib-tooltip="{{::safeDetail.controlKey}}"
+                tooltip-append-to-body="true"
+                tooltip-placement="bottom"
+                tooltip-popup-delay='650'
+              >
+                {{::safeDetail.controlKey}}
+              </td>
+              <td
+                class="truncate"
+                data-title="'TABLE_HEADER.IUFSC' | translate"
+                uib-tooltip="{{::safeDetail.iufsc}}"
+                tooltip-append-to-body="true"
+                tooltip-placement="bottom"
+                tooltip-popup-delay='650'
+              >
+                {{::safeDetail.iufsc}}
+              </td>
+              <td
+                class="truncate"
+                data-title="'TABLE_HEADER.UUID' | translate"
+                uib-tooltip="{{::safeDetail.uuid}}"
+                tooltip-append-to-body="true"
+                tooltip-placement="bottom"
+                tooltip-popup-delay='650'
+              >
+                {{::safeDetail.uuid}}
+              </td>
+              <td
+                class="truncate"
+                data-title="'TABLE_HEADER.CREATION_DATE' | translate" 
+                data-sortable="'creationDate'"
+                tooltip-placement="bottom" 
+                tooltip-popup-delay="300" 
+                tooltip-append-to-body="true" 
+                uib-tooltip="{{::safeDetail.creationDate | date: 'medium'}}"
+              >
+                {{::safeDetail.creationDate | relativeTime}}
+              </td>
+              <td 
+                class="truncate"
+                data-title="'TABLE_HEADER.ACTIONS' | translate" 
+              >
+                <div class="info-popover actions">
+                  <a data-ui-sref="sharedspace.workgroups.root({workgroupUuid: safeDetail.containerUuid})">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a
+                    popover-class="set-popover-right m-r-15 break-word"
+                    uib-popover="{{safeDetail.safeDetailRic}}" 
+                    popover-trigger="'outsideClick'" 
+                    popover-append-to-body="true" 
+                    popover-placement="bottom-right"
+                  >
+                    <i class="zmdi zmdi-info"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
