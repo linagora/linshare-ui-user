@@ -1,0 +1,11 @@
+{
+  "BREADCRUMB_TITLE_SAFE_DETAILS": "Safe Details",
+  "TABLE_HEADER": {
+    "ACTIONS": "Actions",
+    "CONTROL_KEY": "Control key",
+    "COUNTRY_CODE": "Country code",
+    "CREATION_DATE": "Creation date",
+    "IUFSC": "IUFSC",
+    "UUID": "Uuid"
+  }
+}

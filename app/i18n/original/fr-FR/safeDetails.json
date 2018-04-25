@@ -1,0 +1,11 @@
+{
+  "BREADCRUMB_TITLE_SAFE_DETAILS": "Relevé d'Identité de compte",
+  "TABLE_HEADER": {
+    "ACTIONS": "Actions",
+    "CONTROL_KEY": "Clé de contrôle",
+    "COUNTRY_CODE": "Code pays",
+    "CREATION_DATE": "Date de création",
+    "IUFSC": "IUFSC",
+    "UUID": "Uuid"
+  }
+}

@@ -26,6 +26,7 @@
       sharedSpace,
       tabs,
       receivedShares,
+      safeDetails,
       uploads,
       service = {
         build: build,
@@ -132,6 +133,14 @@
         disabled: false
       };
 
+      safeDetails = {
+        name: 'MENU_TITLE.SAFE_DETAILS',
+        link: 'safe_details.global',
+        icon: 'zmdi zmdi-card',
+        color: '#FFC107',
+        disabled: !lsAppConfig.enableSafeDetails
+      };
+
       uploads = {
         name: 'MENU_TITLE.UPLOAD_MANAGMENT',
         icon: 'ls-upload-request',
@@ -148,7 +157,7 @@
         }]
       };
 
-      tabs = [home, myUploads, receivedShares, files, sharedSpace, administrations, uploads, audit];
+      tabs = [home, myUploads, receivedShares, files, sharedSpace, administrations, uploads, audit, safeDetails];
     }
 
     /**

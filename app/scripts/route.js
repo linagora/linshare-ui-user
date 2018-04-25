@@ -404,6 +404,17 @@
             return $transition$.params().id;
           }
         }
+      })
+      .state('safe_details', {
+        parent: 'common',
+        url: '/safe',
+        template: '<div ui-view></div>'
+      })
+      .state('safe_details.global', {
+        url: '/safe_details',
+        templateUrl: 'modules/linshare.safeDetails/views/safeDetailsList.html',
+        controller: 'SafeDetailsController',
+        controllerAs: 'safeDetailsVm'
       });
 
     /**
