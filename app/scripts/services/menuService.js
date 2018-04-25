@@ -11,12 +11,12 @@
 
   menuService.$inject = [
     '_',
-    '$http',
     '$q',
     'authenticationRestService',
     'functionalityRestService',
     'lsAppConfig',
-    'lsColors'
+    'lsColors',
+    'ServerManagerService'
   ];
 
   /**
@@ -26,12 +26,12 @@
    */
   function menuService(
     _,
-    $http,
     $q,
     authenticationRestService,
     functionalityRestService,
     lsAppConfig,
-    lsColors
+    lsColors,
+    ServerManagerService
   ) {
     var
       administrations,
@@ -60,8 +60,10 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     function build() {
-      $http.head('/').then(function(response) {
-        safeDetails.disabled = response.headers()['x-linshare-safe-mode'] || !lsAppConfig.enableSafeDetails;
+      ServerManagerService.getHeaders().then(function(headers) {
+        safeDetails.disabled = headers['x-linshare-safe-mode'] ?
+         !Boolean(headers['x-linshare-safe-mode']) :
+         !lsAppConfig.enableSafeDetails;
       });
 
       $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()]).then(function(promises) {
