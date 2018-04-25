@@ -1,11 +1,19 @@
 {
+  "ACTION": {
+    "TBT__GO_TO_MY_SAFE": "",
+    "TBT__VIEW_SAFE_DETAIL": ""
+  },
   "TBT__BREADCRUMB_TITLE_SAFE_DETAILS": "",
+  "POPOVER": {
+    "TBT__TITLE": "",
+    "TBT__INFORMATION": ""
+  },
   "TABLE_HEADER": {
     "TBT_ACTIONS": "",
     "TBT__CONTROL_KEY": "",
     "TBT__COUNTRY_CODE": "",
     "TBT__CREATION_DATE": "",
     "IUFSC": "IUFSC",
-    "UUID": "Uuid"
+    "TBT__USER_KEY": ""
   }
 }

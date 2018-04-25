@@ -1,11 +1,19 @@
 {
+  "ACTION": {
+    "GO_TO_MY_SAFE": "Go to My Safe",
+    "VIEW_SAFE_DETAIL": "View Safe Detail"
+  },
   "BREADCRUMB_TITLE_SAFE_DETAILS": "Safe Details",
+  "POPOVER": {
+    "TITLE": "Safe Detail",
+    "INFORMATION": "Please copy and send it to the provider."
+  },
   "TABLE_HEADER": {
     "ACTIONS": "Actions",
     "CONTROL_KEY": "Control key",
     "COUNTRY_CODE": "Country code",
     "CREATION_DATE": "Creation date",
     "IUFSC": "IUFSC",
-    "UUID": "Uuid"
+    "USER_KEY": "User key"
   }
 }
