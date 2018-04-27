@@ -1,11 +1,19 @@
 {
-  "BREADCRUMB_TITLE_SAFE_DETAILS": "Relevé d'Identité de compte",
+  "ACTION": {
+    "GO_TO_MY_SAFE": "Accéder au Coffre",
+    "VIEW_SAFE_DETAIL": "Voir le RIC"
+  },
+  "BREADCRUMB_TITLE_SAFE_DETAILS": "Relevés d'Identité de Compte",
+  "POPOVER": {
+    "TITLE": "Relevé d'Identité de Compte",
+    "INFORMATION": "Copiez et envoyer-le à votre fournisseur."
+  },
   "TABLE_HEADER": {
     "ACTIONS": "Actions",
     "CONTROL_KEY": "Clé de contrôle",
     "COUNTRY_CODE": "Code pays",
     "CREATION_DATE": "Date de création",
     "IUFSC": "IUFSC",
-    "UUID": "Uuid"
+    "USER_KEY": "Clé utilisateur"
   }
 }

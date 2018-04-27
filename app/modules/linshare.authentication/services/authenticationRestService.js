@@ -101,13 +101,10 @@
      */
     function logout() {
       $log.debug('AuthenticationRestService : logout');
-      var rest = Restangular.withConfig(function(RestangularConfigurer) {
-        RestangularConfigurer.setFullResponse(true);
-      });
-
-      handler(rest.all(restUrl).one('logout').options()).then(function(response) {
-        var headersLogoutUrl = response.headers()['x-linshare-post-logout-url'],
-            location;
+      ServerManagerService.getHeaders().then(function(headers) {
+        var
+          headersLogoutUrl = headers['x-linshare-post-logout-url'],
+          location;
 
         if (headersLogoutUrl) {
           if (_.startsWith(headersLogoutUrl, 'http')) {

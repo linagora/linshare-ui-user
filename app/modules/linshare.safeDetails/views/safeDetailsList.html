@@ -21,8 +21,8 @@
               data-ng-repeat="safeDetail in $data"
               check-table-height
             >
-              <td 
-                class="truncate" 
+              <td
+                class="truncate"
                 data-title="'TABLE_HEADER.COUNTRY_CODE' | translate"
                 uib-tooltip="{{::safeDetail.countryCode}}"
                 tooltip-append-to-body="true"
@@ -53,7 +53,7 @@
               </td>
               <td
                 class="truncate"
-                data-title="'TABLE_HEADER.UUID' | translate"
+                data-title="'TABLE_HEADER.USER_KEY' | translate"
                 uib-tooltip="{{::safeDetail.uuid}}"
                 tooltip-append-to-body="true"
                 tooltip-placement="bottom"
@@ -63,31 +63,56 @@
               </td>
               <td
                 class="truncate"
-                data-title="'TABLE_HEADER.CREATION_DATE' | translate" 
+                data-title="'TABLE_HEADER.CREATION_DATE' | translate"
                 data-sortable="'creationDate'"
-                tooltip-placement="bottom" 
-                tooltip-popup-delay="300" 
-                tooltip-append-to-body="true" 
+                tooltip-placement="bottom"
+                tooltip-popup-delay="300"
+                tooltip-append-to-body="true"
                 uib-tooltip="{{::safeDetail.creationDate | date: 'medium'}}"
               >
                 {{::safeDetail.creationDate | relativeTime}}
               </td>
-              <td 
+              <td
                 class="truncate"
-                data-title="'TABLE_HEADER.ACTIONS' | translate" 
+                data-title="'TABLE_HEADER.ACTIONS' | translate"
               >
                 <div class="info-popover actions">
-                  <a data-ui-sref="sharedspace.workgroups.root({workgroupUuid: safeDetail.containerUuid})">
-                    <i class="fa fa-eye"></i>
-                  </a>
+                  <script type="text/ng-template" id="safeDetailPopover.html">
+                    <div translate>POPOVER.TITLE</div>
+                    <input
+                      class="form-control cursor-default m-t-10"
+                      type="text"
+                      ng-model="safeDetail.safeDetailRic"
+                      disabled
+                    >
+                    <p
+                      class="m-t-10"
+                      translate
+                    >
+                      POPOVER.INFORMATION
+                    </p>
+                  </script>
                   <a
-                    popover-class="set-popover-right m-r-15 break-word"
-                    uib-popover="{{safeDetail.safeDetailRic}}" 
-                    popover-trigger="'outsideClick'" 
-                    popover-append-to-body="true" 
-                    popover-placement="bottom-right"
+                    uib-popover-template="'safeDetailPopover.html'"
+                    popover-class="m-r-15 break-word"
+                    popover-trigger="'outsideClick'"
+                    popover-append-to-body="true"
+                    popover-placement="bottom"
+                    uib-tooltip="{{'ACTION.VIEW_SAFE_DETAIL' | translate}}"
+                    tooltip-placement="bottom"
+                    tooltip-popup-delay="300"
+                    tooltip-append-to-body="true"
                   >
                     <i class="zmdi zmdi-info"></i>
+                  </a>
+                  <a
+                    data-ui-sref="sharedspace.workgroups.root({workgroupUuid: safeDetail.containerUuid})"
+                    uib-tooltip="{{'ACTION.GO_TO_MY_SAFE' | translate}}"
+                    tooltip-placement="bottom"
+                    tooltip-popup-delay="300"
+                    tooltip-append-to-body="true"
+                  >
+                    <i class="fa fa-folder-open"></i>
                   </a>
                 </div>
               </td>

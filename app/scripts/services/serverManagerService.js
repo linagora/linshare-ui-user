@@ -9,16 +9,33 @@
     .module('linshareUiUserApp')
     .factory('ServerManagerService', ServerManagerService);
 
-  ServerManagerService.$inject = ['_', '$log', '$q', '$translate', '$translatePartialLoader', 'toastService'];
+  ServerManagerService.$inject = [
+    '_', 
+    '$log',
+    '$q',
+    '$translate',
+    '$translatePartialLoader',
+    'Restangular',
+    'toastService'
+  ];
 
   /**
    * @namespace ServerManagerService
    * @desc Manage server interaction
    * @memberOf linshareUiUserApp
    */
-  function ServerManagerService(_, $log, $q, $translate, $translatePartialLoader, toastService) {
+  function ServerManagerService(
+    _,
+    $log,
+    $q,
+    $translate,
+    $translatePartialLoader,
+    Restangular,
+    toastService
+  ) {
     $translatePartialLoader.addPart('serverResponse');
     var service = {
+      getHeaders: getHeaders,
       multiResponsesHanlder: multiResponsesHanlder,
       responseHandler: responseHandler
     };
@@ -77,6 +94,18 @@
         }
       });
     }
+
+    function getHeaders() {
+      $log.debug('AuthenticationRestService : logout');
+      var rest = Restangular.withConfig(function(RestangularConfigurer) {
+        RestangularConfigurer.setFullResponse(true);
+      });
+
+      return responseHandler(rest.all('authentication').one('authorized').options()).then(function(response) {
+        return response.headers();
+      });
+    }
+
     /**
      * @name notify
      * @desc Send message to the console and by toast
@@ -191,6 +220,5 @@
         });
       });
     }
-
   }
 })();

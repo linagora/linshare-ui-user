@@ -9,14 +9,30 @@
     .module('linshareUiUserApp')
     .factory('MenuService', menuService);
 
-  menuService.$inject = ['_', '$q', 'authenticationRestService', 'functionalityRestService', 'lsAppConfig', 'lsColors'];
+  menuService.$inject = [
+    '_',
+    '$q',
+    'authenticationRestService',
+    'functionalityRestService',
+    'lsAppConfig',
+    'lsColors',
+    'ServerManagerService'
+  ];
 
   /**
    * @namespace menuService
    * @desc Service to interact with session
    * @memberOf linshareUiUserApp
    */
-  function menuService(_, $q, authenticationRestService, functionalityRestService, lsAppConfig, lsColors) {
+  function menuService(
+    _,
+    $q,
+    authenticationRestService,
+    functionalityRestService,
+    lsAppConfig,
+    lsColors,
+    ServerManagerService
+  ) {
     var
       administrations,
       audit,
@@ -44,6 +60,12 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     function build() {
+      ServerManagerService.getHeaders().then(function(headers) {
+        safeDetails.disabled = headers['x-linshare-safe-mode'] ?
+         !Boolean(headers['x-linshare-safe-mode']) :
+         !lsAppConfig.enableSafeDetails;
+      });
+
       $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()]).then(function(promises) {
         var
           user = promises[0],
@@ -138,7 +160,7 @@
         link: 'safe_details.global',
         icon: 'zmdi zmdi-card',
         color: '#FFC107',
-        disabled: !lsAppConfig.enableSafeDetails
+        disabled: false
       };
 
       uploads = {
