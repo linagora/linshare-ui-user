@@ -19,6 +19,6 @@
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
       
-      enableSafeDetails: true
+      enableSafeDetails: false
     });
 })();

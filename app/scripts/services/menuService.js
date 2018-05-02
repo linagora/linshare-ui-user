@@ -61,9 +61,11 @@
      */
     function build() {
       ServerManagerService.getHeaders().then(function(headers) {
-        safeDetails.disabled = headers['x-linshare-safe-mode'] ?
-         !Boolean(headers['x-linshare-safe-mode']) :
-         !lsAppConfig.enableSafeDetails;
+        var linshareSafeModeCastedToBoolean = Boolean(headers['x-linshare-safe-mode']);
+
+        safeDetails.disabled = linshareSafeModeCastedToBoolean ?
+          !linshareSafeModeCastedToBoolean :
+          !lsAppConfig.enableSafeDetails;
       });
 
       $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()]).then(function(promises) {
