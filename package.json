@@ -62,6 +62,6 @@
     "start": "grunt serve"
   },
   "engines": {
-    "node": ">=0.12.9"
+    "node": ">=8.11.3"
   }
 }
