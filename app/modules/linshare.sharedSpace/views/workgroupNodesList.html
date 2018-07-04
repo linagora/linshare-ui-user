@@ -19,15 +19,11 @@
                  data-ng-class="{'disabled': workgroupNodesVm.currentWorkgroupMember.readonly}"></i>
             </a>
             <ul
-              class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon labeled-dropdown dropdown-divided
-                       add-menu-ctn"
+              class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided"
               data-ng-class="{'open':isOpenNew}"
               uib-dropdown-menu
               ng-if="!workgroupNodesVm.currentWorkgroupMember.readonly"
-            >
-              <li role="menuitem">
-                <a translate class="center">ACTION.NEW_ITEM</a>
-              </li>
+            >              
               <li role="menuitem" data-ng-show="::!linshareModeProduction">
                 <a>
                   <i class="ls-project"></i>
