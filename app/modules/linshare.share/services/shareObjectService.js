@@ -220,7 +220,8 @@ angular.module('linshare.share')
             toastService.success({
               key: 'TOAST_ALERT.ACTION.SHARE',
               params: {
-                shareName: self.name
+                shareName: self.name,
+                singular: self.documents.length<2
               }
             });
           });
