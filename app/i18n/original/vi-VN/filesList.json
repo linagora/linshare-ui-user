@@ -16,7 +16,8 @@
     "TBT__COPY_HERE": "",
     "TBT__MOVE_HERE": "",
     "TBT__SHARED_SPACE": "",
-    "TBT__TITLE": ""
+    "TBT__TITLE": "",
+    "TBT__NO_WORKGROUP": ""
   },
   "RIGHT_PANEL": {
     "EMPTY": "Không có tập tin nào được chọn",

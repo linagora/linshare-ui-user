@@ -17,8 +17,9 @@
     "COPY_HERE": "Copier ici",
     "MOVE_HERE": "Déplacer ici",
     "SHARED_SPACE": "Espace commun",
-    "TITLE": "Choisissez la destination"
-  },
+    "TITLE": "Choisissez la destination",
+    "NO_WORKGROUP": "Vous n'avez pas encore de Groupe de travail. Allez dans <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#/sharedspace/list' translate>Espace commun</a> pour en créer un."
+   },
   "RIGHT_PANEL": {
     "EMPTY": "Aucun fichier sélectionné",
     "DETAILS": {
