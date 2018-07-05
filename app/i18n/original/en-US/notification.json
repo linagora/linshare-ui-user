@@ -52,7 +52,7 @@
       "DELETE_PLURAL": "The items were deleted successfully.",
       "DETAILS": "Details",
       "INSERT": "The item was added successfully.",
-      "SHARE": "Your file share {{shareName ? shareName + ' ': ''}}was sent successfully.",
+      "SHARE": "Your {{singular ? 'file' : 'files'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'was' : 'were'}} successfully sent.",
       "SHARE_DELETED": "Your file share with {{recipient}} was removed successfully.",
       "SHARE_ASYNC": "Your file share will be sent after the upload of all files.",
       "SHARE_FAILED": "Your file {{shareName ? shareName + ' ': ''}}share has failed.",

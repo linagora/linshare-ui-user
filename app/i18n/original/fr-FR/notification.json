@@ -52,7 +52,7 @@
       "DELETE_PLURAL": "Les éléments ont été supprimés avec succès.",
       "DETAILS": "Détails",
       "INSERT": "L'élément a été ajouté avec succès.",
-      "SHARE": "Votre partage {{shareName ? shareName + ' ': ''}}a été envoyé avec succès.",
+      "SHARE": "{{singular ? 'Votre fichier' : 'Vos fichiers'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'a' : 'ont'}} été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
       "SHARE_DELETED": "Votre partage avec {{recipient}} a été supprimé avec succès.",
       "SHARE_FAILED": "Votre partage {{shareName ? shareName + ' ': ''}}de fichiers a échoué.",
