@@ -5,8 +5,8 @@
     "COPY_ADJ": "Copy",
     "COPY_DROPDOWN": {
       "COPY_AND_SHARE": "Copy & share",
-      "PERSONAL_SPACE": "Personal Space",
-      "SHARED_SPACE": "Shared Space"
+      "PERSONAL_SPACE": "My space",
+      "SHARED_SPACE": "Shared space"
     },
     "COPY_IN_MY_FILES": "Copy in My Space",
     "COPY_IN_WORKGROUP": "Copy in a Workgroup",
