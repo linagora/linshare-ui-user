@@ -1,5 +1,8 @@
-<div drag-and-drop drag-and-drop-flow="$flow" drag-and-drop-added="workgroupNodesVm.upload(files,
-      workgroupNodesVm.workgroupPage, workgroupNodesVm.folderDetails)" drag-and-drop-enabled="::!workgroupNodesVm.currentWorkgroupMember.readonly"
+<div drag-and-drop
+     drag-and-drop-flow="$flow"
+     drag-and-drop-added="workgroupNodesVm.upload(files,
+      workgroupNodesVm.workgroupPage, workgroupNodesVm.folderDetails)"
+     drag-and-drop-enabled="::!workgroupNodesVm.currentWorkgroupMember.readonly"
   drag-and-drop-success="workgroupNodesVm.addUploadedDocument(file, $message)">
   <div class="container files">
     <!-- ACTIONS ON DOCUMENTS -->

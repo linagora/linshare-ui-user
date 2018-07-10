@@ -1,7 +1,10 @@
 <div class="chat-search autocomplete-search-ctn">
-  <div class="fg-line"
-       data-ng-class="{'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)}" >
-    <input id="focusInputShare" name="{{::autocompleteUsersVm.name}}" type="text" class="form-control"
+  <div class="fg-line" 
+	data-ng-class="{'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)}">
+    <input id="focusInputShare"
+           name="{{::autocompleteUsersVm.name}}"
+           type="text"
+           class="form-control"
            placeholder="{{::'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
            autocomplete="off"
            data-ng-model="autocompleteUsersVm.selectedUser"

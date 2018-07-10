@@ -71,7 +71,7 @@
   },
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
-      "INPUT_PLACEHOLDER": "Search people",
+      "INPUT_PLACEHOLDER": "Add People",
       "INVALID_EMAIL": "The email address is invalid",
       "INVALID_EMPTY_LIST": "This list cannot be empty."
     }
