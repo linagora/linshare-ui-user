@@ -113,6 +113,7 @@
     workgroupNodesVm.upload = upload;
     workgroupNodesVm.workgroupPage = lsAppConfig.workgroupPage;
     workgroupNodesVm.workgroupNode = lsAppConfig.workgroupNode;
+    workgroupNodesVm.thumbnailEngineActivated = lsAppConfig.thumbnailEngineActivated;
 
     activate();
 

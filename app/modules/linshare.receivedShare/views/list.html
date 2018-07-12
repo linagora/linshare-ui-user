@@ -319,9 +319,18 @@
                           <a event-propagation-stop href="" translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}" uib-dropdown-toggle>
                             <i class="zmdi zmdi-more"></i>
                           </a>
-                          <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu=""
-                            data-ng-class="{'open':isOpenItem}">
-
+                          <ul
+                            class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
+                            uib-dropdown-menu="" data-ng-class="{'open':isOpenItem}">
+                            <li>
+                              <document-preview-button
+                                data-ng-if="lsAppConfig.thumbnailEngineActivated"
+                                item-index="$index"
+                                items="$data"
+                              >
+                                <span translate>ACTION.PREVIEW</span>
+                              </document-preview-button>
+                            </li>
                             <li>
                               <a href="" x-ng-click="showCurrentFile(documentFile,$event)">
                                 <i class="zmdi zmdi-info"></i>

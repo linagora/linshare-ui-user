@@ -114,6 +114,7 @@
       shareDetails: 'share-details',
       workgroupNode: 'workgroup-node',
       hideOnNonAdmin: false,
-      hideOnReadOnly: false
+      hideOnReadOnly: false,
+      thumbnailEngineActivated: true
     });
 })();
