@@ -1,6 +1,6 @@
 <a
   data-ng-click="documentPreviewButtonVm.showDocumentPreviewDialog(documentPreviewButtonVm)"
 >
-  <i class="zmdi zmdi-search-in-file"></i>
+  <i data-ng-if="!documentPreviewButtonVm.icon" class="zmdi zmdi-search-in-file"></i>
   <span data-ng-transclude></span>
 </a>

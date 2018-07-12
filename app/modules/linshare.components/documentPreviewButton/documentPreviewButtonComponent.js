@@ -14,7 +14,8 @@
       controllerAs: 'documentPreviewButtonVm',
       bindings: {
         itemIndex: '<',
-        items: '<'
+        items: '<',
+        icon: '<'
       }
     });
 

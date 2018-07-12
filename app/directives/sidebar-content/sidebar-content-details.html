@@ -15,26 +15,32 @@
             <div x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.name">
               <div id="profile-main" class="detail-workgroup">
                 <div class="p-relative m-b-20 img-preview-ctn">
-                  <p data-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail &&
-                   !mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable">
-                    <img class="img-responsive"
-                         data-ng-src="data:image/png;base64,
-                           {{mainVm.sidebar.getData().currentSelectedDocument.current.thumbnail}}"
-                         alt="{{'RIGHT_PANEL.DETAILS.THUMBNAIL' | translate}}
-                           {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}">
-                  </p>
-                  <div data-ng-show="!mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail"
-                       class="np-preview-ctn">
-                    <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
-                    <p data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable"
-                       translate>
-                      RIGHT_PANEL.DETAILS.PREVIEW_NOT_LOADABLE
-                    </p>
-                    <p data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable"
-                       translate>
-                      RIGHT_PANEL.DETAILS.NO_PREVIEW_AVAILABLE
-                    </p>
-                  </div>
+                  <document-preview-button
+                    item-index="0"
+                    items="[mainVm.sidebar.getData().currentSelectedDocument.current]"
+                    icon="true"
+                  >
+                    <p data-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail &&
+                    !mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable">
+                      <img class="img-responsive"
+                          data-ng-src="data:image/png;base64,
+                            {{mainVm.sidebar.getData().currentSelectedDocument.current.thumbnail}}"
+                          alt="{{'RIGHT_PANEL.DETAILS.THUMBNAIL' | translate}}
+                            {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}">
+                    </p>          
+                    <div data-ng-show="!mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail"
+                        class="np-preview-ctn">
+                      <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
+                      <p data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable"
+                        translate>
+                        RIGHT_PANEL.DETAILS.PREVIEW_NOT_LOADABLE
+                      </p>
+                      <p data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable"
+                        translate>
+                        RIGHT_PANEL.DETAILS.NO_PREVIEW_AVAILABLE
+                      </p>
+                    </div>
+                  </document-preview-button>             
                 </div>
                 <div class="m-b-10"
                      tooltip-placement="bottom" tooltip-popup-delay="500"
