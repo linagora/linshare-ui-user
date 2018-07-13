@@ -15,7 +15,7 @@
         "DOCUMENT": "You are about to remove {singular, select, true{a document} other{{nbItems} documents}} ! Beware, this action cannot be undone.",
         "GUEST": "You are about to remove {singular, select, true{a guest} other{{nbItems} guests}} ! Beware, this action cannot be undone.",
         "RECEIVED_SHARE": "You are about to remove {singular, select, true{a file share} other{{nbItems} files share}} ! Beware, this action cannot be undone.",
-        "WORKGROUP": "You are about to remove{singular, select, true{a workgroup} other{{nbItems} workgroups}} ! Beware, this action cannot be undone.",
+        "WORKGROUP": "You are about to remove {singular, select, true{a workgroup} other{{nbItems} workgroups}} ! Beware, this action cannot be undone.",
         "WORKGROUP_NODE": "You are about to remove {singular, select, true{a document or folder} other{{nbItems} documents or folders}} ! Beware, this action cannot be undone."
       },
       "TITLE": "Deletion"

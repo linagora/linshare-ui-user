@@ -277,7 +277,7 @@ body:not(.sw-toggled) #sidebar {
   position: absolute;
   bottom: 0;
   width: 267px;
-  height: 100px;
+  height: 110px;
   overflow: hidden;
   z-index: 7;
   .quota-free {
@@ -330,6 +330,7 @@ body:not(.sw-toggled) #sidebar {
         font-weight: bold;
       }
     }
+    line-height: 110%;
   }
 }
 
