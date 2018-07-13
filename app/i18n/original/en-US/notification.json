@@ -38,6 +38,12 @@
       "CONFIRM_BUTTON": "Delete",
       "TEXT": "You are about to remove a share !",
       "TITLE": "Are you sure?"
+    },
+    "ON_WORKGROUP_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Cancel",
+      "CONFIRM_BUTTON": "Yes, delete",
+      "TITLE": "Member deletion",
+      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the workgroup {{workgroupName}}."
     }
   },
   "TOAST_ALERT": {
@@ -45,6 +51,7 @@
       "BROWSER_ACTION": "{singular, select, true{The file or folder has} other{files or folders have}} been {action, select, moved{moved} other{copied}} into : {folderName}.",
       "CLOSE": "Close",
       "CONTACTS_LIST_CREATION": "The Contacts List {{contactsListName}} has been created successfully.",
+      "REMOVE_CONTACT": "{{firstName}} {{lastName}} has been removed successfully from the Contact List",
       "COPY": "{singular, select, true{The file has been} other{{nbItems} files have been}} copied into your Personal Space.",
       "COPY_SAME_FOLDER": "{singular, select, true{The file} other{Files}} has been copied successfully.",
       "DELETE": "Deletion succeeded",

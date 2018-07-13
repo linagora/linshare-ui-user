@@ -37,6 +37,12 @@
       "TBT__CONFIRM_BUTTON": "",
       "TBT__TEXT": "",
       "TBT__TITLE": ""
+    },
+    "TBT__ON_WORKGROUP_MEMBER_DELETE": {
+      "TBT__ANCEL_BUTTON": "",
+      "TBT__CONFIRM_BUTTON": "",
+      "TBT__TITLE": "",
+      "TBT__TEXT": ""
     }
   },
   "TOAST_ALERT": {
@@ -44,6 +50,7 @@
       "TBT__BROWSER_ACTION": "",
       "TBT__CLOSE": "",
       "TBT__CONTACTS_LIST_CREATION": "",
+      "TBT__REMOVE_CONTACT": "",
       "TBT__COPY": "",
       "TBT__COPY_PLURAL": "",
       "TBT__COPY_SAME_FOLDER": "",

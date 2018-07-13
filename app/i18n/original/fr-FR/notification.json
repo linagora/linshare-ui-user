@@ -38,6 +38,12 @@
       "CONFIRM_BUTTON": "Effacer",
       "TEXT": "Vous êtes sur le point de supprimer un partage !",
       "TITLE": "Êtes-vous sûr?"
+    },
+    "ON_WORKGROUP_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Annuler",
+      "CONFIRM_BUTTON": "Oui, supprimer",
+      "TITLE": "Êtes-vous sûr?",
+      "TEXT": "Vous êtes sur le point de supprimer {{firstName}} {{lastName}} du groupe de travail {{workgroupName}}."
     }
   },
   "TOAST_ALERT": {
@@ -45,6 +51,7 @@
       "BROWSER_ACTION": "{singular, select, true{Le fichier ou dossier a} other{Les fichiers ou dossiers ont}} été {action, select, moved{déplacé} other{copié}} dans : {folderName}.",
       "CLOSE": "Fermer",
       "CONTACTS_LIST_CREATION": "La Liste de Contacts {{contactsListName}} a été créée avec succès.",
+      "REMOVE_CONTACT": "{{firstName}} {{lastName}} a été supprimé de la Liste de Contacts.",
       "COPY": "{singular, select, true{Le fichier a été copié} other{{nbItems} fichiers ont été copiés}} dans votre Espace Personnel.",
       "COPY_SAME_FOLDER": "{singular, select, true{Le fichier a été copié} other{Les fichiers ont été copiés}} avec succès.",
       "DELETE": "Suppression réussie",

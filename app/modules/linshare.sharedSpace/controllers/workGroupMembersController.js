@@ -9,14 +9,34 @@
     .module('linshare.sharedSpace')
     .controller('WorkGroupMembersController', workGroupMembersController);
 
-  workGroupMembersController.$inject = ['_', '$filter', '$scope', 'lsAppConfig', 'workgroupMembersRestService'];
+  workGroupMembersController.$inject = [
+    '_',
+    '$q',
+    '$translate',    
+    '$filter',
+    '$scope',
+    'lsAppConfig',
+    'workgroupMembersRestService',
+    'dialogService',
+    '$translatePartialLoader'    
+  ];
 
   /**
    * @namespace workGroupMembersController
    * @desc Application home management system controller
    * @memberOf LinShare.sharedSpace
    */
-  function workGroupMembersController(_, $filter, $scope, lsAppConfig, workgroupMembersRestService) {
+  function workGroupMembersController(
+    _,
+    $q,
+    $translate,
+    $filter,
+    $scope,
+    lsAppConfig,
+    workgroupMembersRestService,
+    dialogService,
+    $translatePartialLoader
+  ) {
     /* jshint validthis: true */
     var workgroupMemberVm = this;
 
@@ -49,6 +69,7 @@
      */
     function activate() {
       // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
+      $translatePartialLoader.addPart('notification');
       workgroupMemberVm.memberRole = workgroupMemberVm.membersRights.write;
       workgroupMemberVm.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
 
@@ -115,15 +136,41 @@
 
     /**
      * @name removeMember
-     * @desc Remove member from workgroup members's list
-     * @param {Array<Object>} workgroupMembers - List of members of workgroup
+     * @desc Remove member from workgroup members's list     
      * @param {Object} member - The member to remove from workgroup members's list
+     * @param {Object} currentWorkgroup - The current workgroup from which the member is removed.
      * @returns {Promise} Response of the server
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
-    function removeMember(workgroupMembers, member) {
-      _.remove(workgroupMembers, member);
-      return workgroupMembersRestService.remove(workgroupMemberVm.currentWorkGroup.current.uuid, member.userUuid);
+    function removeMember(currentWorkgroup, member) { 
+      $q.all([
+        $translate(
+          'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TEXT',
+          {
+            firstName: member.firstName,
+            lastName: member.lastName,
+            workgroupName: currentWorkgroup.name
+          }
+        ),
+        $translate([
+          'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE',
+          'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON',
+          'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON'
+        ])
+      ]).then(function(translations) {   
+        var sentences = {
+          text: translations[0],
+          title: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE'],
+          buttons: {
+            cancel: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON'],
+            confirm: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON']
+          }
+        };
+        return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
+      }).then(function() {
+      _.remove(currentWorkgroup.members, member)
+      return workgroupMembersRestService.remove(workgroupMemberVm.currentWorkGroup.current.uuid, member.userUuid);      
+      })
     }
 
     /**
