@@ -86,7 +86,8 @@
         "26006": "La suppression de dossier remplit n'est pas encore supporté.",
         "26444": "Vous ne possédez pas les droits de suppression"
       },
-      "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs."
+      "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs.",
+      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} est déjà membre de ce groupe de travail."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Saisissez au moins un destinaire ou une liste de contact",

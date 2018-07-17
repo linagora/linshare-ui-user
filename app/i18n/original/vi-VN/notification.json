@@ -88,7 +88,8 @@
         "TBT__26444": ""
       },
       "TBT_NO_RESPONSE_ERROR": "",
-      "TBT_RENAME_CONTACTS_LIST": ""
+      "TBT_RENAME_CONTACTS_LIST": "",
+      "TBT_MEMBER_ALREADY_IN_WORKGROUP": ""
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",

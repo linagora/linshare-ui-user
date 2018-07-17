@@ -86,7 +86,8 @@
         "26006": "Deletion of a non-empty folder is not yet supported",
         "26444": "You do not posses the rights to delete"
       },
-      "NO_RESPONSE_ERROR": "Error without server response, see logs."
+      "NO_RESPONSE_ERROR": "Error without server response, see logs.",
+      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} is already a member of this Workgroup."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter at least one recipient or contact list to share with",

@@ -99,10 +99,25 @@
         readonly: workgroupMemberVm.memberRole === workgroupMemberVm.membersRights.readonly,
         admin: workgroupMemberVm.memberRole === workgroupMemberVm.membersRights.admin
       };
-      workgroupMembersRestService.create(workgroupMemberVm.currentWorkGroup.current.uuid, jsonMember)
-        .then(function(data) {
-          workgroupMembers.push(data.plain());
+      var currentWorkgroupMember = workgroupMembers.filter(function(workgroupMember) {
+        return workgroupMember.userUuid === member.userUuid
+      });
+
+      if (currentWorkgroupMember.length !== 0) {
+        toastService.error({
+          key: 'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_WORKGROUP',
+          params: {
+            firstName: member.firstName,
+            lastName: member.lastName
+          }
         });
+      } else {
+        workgroupMembersRestService
+          .create(workgroupMemberVm.currentWorkGroup.current.uuid, jsonMember)
+          .then(function(data) {
+            workgroupMembers.push(data.plain());
+          });
+      }
     }
 
     /**
