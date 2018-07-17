@@ -573,6 +573,7 @@
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.INFORMATION</span>
                                 </a>
                               </li>
+                              <li class="divider"></li>
                               <li>
                                 <a href=""
                                    data-ng-click="contactsListsListVm.goToContactsListTarget(contactsList.uuid, contactsList.name)">
@@ -588,15 +589,16 @@
                                 </a>
                               </li>
                               <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
-                                <a href="" x-ng-click="contactsListsListVm.deleteContactsList(contactsList)">
-                                  <i class="fa fa-trash-o"></i>
-                                  <span translate>CONTACTS_LISTS_ACTION.MORE.DELETE</span>
-                                </a>
-                              </li>
-                               <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
                                 <a href="" x-ng-click="contactsListsListVm.renameContactsList(contactsList)">
                                   <i class="zmdi zmdi-border-color"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.RENAME</span>
+                                </a>
+                              </li>
+                              <li class="divider"></li>
+                              <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
+                                <a href="" x-ng-click="contactsListsListVm.deleteContactsList(contactsList)">
+                                  <i class="fa fa-trash-o"></i>
+                                  <span translate>CONTACTS_LISTS_ACTION.MORE.DELETE</span>
                                 </a>
                               </li>
                               <li x-ng-show="::!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->

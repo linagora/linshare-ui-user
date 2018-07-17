@@ -1,12 +1,10 @@
 <div id="drop-area">
   <div id="top-search-wrap">
     <i id="top-search-close" x-ng-click="toggleSearchState()">&times;</i>
-    <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-           placeholder="Nom de fichier" x-ng-change="updateParams()" x-ng-model="paramFilter['name']"
-           aria-invalid="false">
+    <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid" placeholder="Nom de fichier"
+      x-ng-change="updateParams()" x-ng-model="paramFilter['name']" aria-invalid="false">
   </div>
-  <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
-       x-ng-class="{'show-multi-menu': selectedDocuments.length > 0}">
+  <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar" x-ng-class="{'show-multi-menu': selectedDocuments.length > 0}">
     <div class="toggle-checkbox-toolbar" x-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())">
       <a x-ng-if="!flagsOnSelectedPages[tableParams.page()]" class="select-all-items plain-text-button ng-scope">
         <i class="fa ls-check-o checkbox-table"></i>
@@ -15,14 +13,17 @@
         <i class="ls-check-checked"></i>
       </a>
     </div>
-    <div class="exit-selection actions" x-ng-click="resetSelectedDocuments()"
-         translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
-      <a><i class="zmdi zmdi-close"></i></a>
+    <div class="exit-selection actions" x-ng-click="resetSelectedDocuments()" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
+      <a>
+        <i class="zmdi zmdi-close"></i>
+      </a>
     </div>
     <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
-      <div class="pull-left" data-ng-class="{'active-button-show-selection': tableParamsService.getSelectionIsIsolated()}"
-           x-ng-click="toggleFilterBySelectedFiles()">
-        <p><span>{{selectedDocuments.length}}</span> <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span></p>
+      <div class="pull-left" data-ng-class="{'active-button-show-selection': tableParamsService.getSelectionIsIsolated()}" x-ng-click="toggleFilterBySelectedFiles()">
+        <p>
+          <span>{{selectedDocuments.length}}</span>
+          <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
+        </p>
         <div class="pull-left view-icons-ctn groups-view">
           <i class="fa fa-eye-slash" aria-hidden="true" data-ng-show="tableParamsService.getSelectionIsIsolated()"></i>
           <i class="fa fa-eye" aria-hidden="true" data-ng-show="!tableParamsService.getSelectionIsIsolated()"></i>
@@ -34,66 +35,64 @@
     </div>
     <div id="toolbar-actions" class="hidden-xs">
       <span>
-        <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.SHARE'}"
-           data-ng-click="onShare()">
-          <i class="zmdi zmdi-share"></i><span translate>SELECTION_TOOLBAR.SHARE</span>
+        <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.SHARE'}" data-ng-click="onShare()">
+          <i class="zmdi zmdi-share"></i>
+          <span translate>SELECTION_TOOLBAR.SHARE</span>
         </a>
       </span>
       <span>
-        <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
-           data-ng-click="deleteDocuments(selectedDocuments)">
-          <i class="fa fa-trash-o"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
+        <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}" data-ng-click="deleteDocuments(selectedDocuments)">
+          <i class="fa fa-trash-o"></i>
+          <span translate>SELECTION_TOOLBAR.DELETE</span>
         </a>
       </span>
       <span data-ng-class="{'hide': selectedDocuments.length > 1}" data-ng-click="downloadFile(selectedDocuments[0])">
         <a class="plain-text-button" translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}">
-          <i class="zmdi zmdi-download"></i><span translate>DOWNLOAD</span>
+          <i class="zmdi zmdi-download"></i>
+          <span translate>DOWNLOAD</span>
         </a>
       </span>
       <span data-ng-class="{'hide': selectedDocuments.length <= 1}">
-        <a class="plain-text-button" translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}"
-           data-ng-click="multiDownload()">
-          <i class="zmdi zmdi-download"></i><span translate>DOWNLOAD</span>
+        <a class="plain-text-button" translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}" data-ng-click="multiDownload()">
+          <i class="zmdi zmdi-download"></i>
+          <span translate>DOWNLOAD</span>
         </a>
       </span>
       <span class="dropdown link-dropdown" uib-dropdown="">
-        <a class="plain-text-button share-link"
-           uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}">
-          <i class="zmdi zmdi-more"></i><span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
+        <a class="plain-text-button share-link" uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}">
+          <i class="zmdi zmdi-more"></i>
+          <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
           <li class="hidden-xs">
             <a href="" data-ng-click="copyDocuments(selectedDocuments)">
-             <i class="zmdi zmdi-copy" translate-attr="{title: 'ACTION.DUPLICATE'}"></i>
-             <span translate>ACTION.DUPLICATE</span>
+              <i class="zmdi zmdi-copy" translate-attr="{title: 'ACTION.DUPLICATE'}"></i>
+              <span translate>ACTION.DUPLICATE</span>
             </a>
           </li>
           <li class="hidden-xs">
             <a href="" data-ng-click="openBrowser(selectedDocuments)">
-             <i class="zmdi groups-home-workgroup" translate-attr="{title: 'ACTION.COPY_IN_WORKGROUP'}"></i>
-             <span translate>ACTION.COPY_IN_WORKGROUP</span>
+              <i class="zmdi groups-home-workgroup" translate-attr="{title: 'ACTION.COPY_IN_WORKGROUP'}"></i>
+              <span translate>ACTION.COPY_IN_WORKGROUP</span>
             </a>
           </li>
           <li class="hidden-xs">
-            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
-               data-ng-click="showCurrentFile(selectedDocuments[0],$event, true)">
-             <i class="zmdi zmdi-info" translate-attr="{title: 'ACTION.RENAME'}"></i>
-             <span translate>ACTION.INFORMATION</span>
+            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}" data-ng-click="showCurrentFile(selectedDocuments[0],$event, true)">
+              <i class="zmdi zmdi-info" translate-attr="{title: 'ACTION.RENAME'}"></i>
+              <span translate>ACTION.INFORMATION</span>
             </a>
           </li>
           <li class="hidden-xs">
-            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}"
-               data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
-             <i class="zmdi zmdi-border-color" translate-attr="{title: 'ACTION.RENAME'}"></i>
-             <span translate>ACTION.RENAME</span>
+            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}" data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')">
+              <i class="zmdi zmdi-border-color" translate-attr="{title: 'ACTION.RENAME'}"></i>
+              <span translate>ACTION.RENAME</span>
             </a>
           </li>
         </ul>
       </span>
     </div>
   </div>
-  <div class="drag-and-drop-ctn collapsible-content reset-content-width drag-n-drop-height" check-table-height
-       data-ng-class="{'show-bg-drop' : documentsList.length === 0}">
+  <div class="drag-and-drop-ctn collapsible-content reset-content-width drag-n-drop-height" check-table-height data-ng-class="{'show-bg-drop' : documentsList.length === 0}">
     <div class="drag-and-drop-content">
       <div class="drag-icon-ctn ">
         <div class="bordered-circle">&nbsp;</div>
@@ -102,10 +101,10 @@
         </span>
       </div>
       <div class="dnd-txt-content">
-          <h1 translate class="hidden-xs">DRAG_DROP_BACKGROUND.TITLE</h1>
-          <p translate class="hidden-xs">DRAG_DROP_BACKGROUND.COMMENT</p>
-          <h1 translate class="visible-xs">DRAG_DROP_BACKGROUND_MOBILE_MY_FILES.TITLE</h1>
-          <p translate class="visible-xs">DRAG_DROP_BACKGROUND_MOBILE_MY_FILES.COMMENT</p>
+        <h1 translate class="hidden-xs">DRAG_DROP_BACKGROUND.TITLE</h1>
+        <p translate class="hidden-xs">DRAG_DROP_BACKGROUND.COMMENT</p>
+        <h1 translate class="visible-xs">DRAG_DROP_BACKGROUND_MOBILE_MY_FILES.TITLE</h1>
+        <p translate class="visible-xs">DRAG_DROP_BACKGROUND_MOBILE_MY_FILES.COMMENT</p>
       </div>
     </div>
   </div>

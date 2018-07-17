@@ -1,7 +1,8 @@
-<div drag-and-drop drag-and-drop-flow="$flow"
-     drag-and-drop-submitted="flowUploadService.uploadFiles(files, mySpacePage)"
-     drag-and-drop-enabled="true"
-     drag-and-drop-success="addUploadedDocument(file)">
+<div
+  drag-and-drop drag-and-drop-flow="$flow"
+  drag-and-drop-submitted="flowUploadService.uploadFiles(files, mySpacePage)"
+  drag-and-drop-enabled="true"
+  drag-and-drop-success="addUploadedDocument(file)">
   <div class="container files">
     <!--  ACTIONS ON DOCUMENTS  -->
     <!-- contextmenu -->
@@ -10,34 +11,38 @@
       <div data-ng-include src="'modules/linshare.document/views/documentsList-dropArea.html'"></div>
     </div>
   </div>
-  <div id="fabButtonCtn"
-       fab-button
-       fab-button-actions="fabButton.actions"
-       fab-button-flow="$flow"
-       fab-button-toolbar="fabButton.toolbar">
+  <div
+    id="fabButtonCtn"
+    fab-button fab-button-actions="fabButton.actions"
+    fab-button-flow="$flow"
+    fab-button-toolbar="fabButton.toolbar">
   </div>
 </div>
-<section class="row multi-select-mobile visible-xs"
-         data-ng-class="{'showMobileMultiMenu': selectedDocuments.length > 0}"
-         data-ng-show="currentPage === 'my_files'">
+<section class="row multi-select-mobile visible-xs" data-ng-class="{'showMobileMultiMenu': selectedDocuments.length > 0}"
+  data-ng-show="currentPage === 'my_files'">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">{{selectedDocuments.length}}</span>
     <span class="file-multi-select-label" translate>SELECTION_TOOLBAR.FILES</span>
   </div>
   <div class="col-xs-8">
-    <div data-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())"
-         class="visible-xs toolbar-mobile-item col-xs-3">
-      <i class="ls-check-checked select-all-items p-r-10" data-ng-if="!flagsOnSelectedPages[tableParams.page()]">
-      </i>
-      <i class="ls-check-o select-all-items p-r-10" data-ng-if="flagsOnSelectedPages[tableParams.page()]"></i>
+    <div data-ng-click="selectDocumentsOnCurrentPage(tableParams.data,tableParams.page())" class="visible-xs toolbar-mobile-item col-xs-3">
+      <i
+        class="ls-check-checked select-all-items p-r-10"
+        data-ng-if="!flagsOnSelectedPages[tableParams.page()]"></i>
+      <i
+        class="ls-check-o select-all-items p-r-10"
+        data-ng-if="flagsOnSelectedPages[tableParams.page()]"></i>
     </div>
-    <i class="zmdi zmdi-share col-xs-2" data-ng-click="onShare()"></i>
-    <i class="fa fa-trash-o col-xs-2" data-ng-click="deleteDocuments(selectedDocuments)"></i>
+    <i
+      class="zmdi zmdi-share col-xs-2"
+      data-ng-click="onShare()"></i>
+    <i
+      class="fa fa-trash-o col-xs-2"
+      data-ng-click="deleteDocuments(selectedDocuments)"></i>
     <i
       class="zmdi zmdi-border-color col-xs-2"
       data-ng-class="{'disabled': selectedDocuments.length > 1}"
-      data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')"
-    ></i>
+      data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')"></i>
     <span
       class="dropdown col-xs-2 no-padding"
       data-ng-class="{'open':isOpenItem}"
@@ -46,14 +51,16 @@
       auto-close="always"
       is-open="isOpenItem"
     >
-      <i
-        class="zmdi zmdi-more"
-        uib-dropdown-toggle
-        event-propagation-stop
+      <i class="zmdi zmdi-more"
+         uib-dropdown-toggle
+         event-propagation-stop
       >
       </i>
       <ul
-        class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-other-actions"
+        class="uib-dropdown-menu
+        dropdown-menu-right
+        dm-icon dropdown-divided
+        dropdown-other-actions"
         data-ng-class="{'open':isOpenItem}"
         uib-dropdown-menu=""
       >
@@ -70,9 +77,6 @@
     </span>
   </div>
   <div class="col-xs-2 pull-right">
-    <i
-      class="zmdi zmdi zmdi-close"
-      data-ng-click="resetSelectedDocuments()"
-    ></i>
+    <i class="zmdi zmdi zmdi-close" data-ng-click="resetSelectedDocuments()"></i>
   </div>
 </section>

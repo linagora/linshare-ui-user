@@ -394,6 +394,7 @@
                                 <span translate>CONTACTS_LISTS_ACTION.MORE.INFORMATION</span>
                               </a>
                             </li>
+                            <li class="divider"></li>
                             <li x-ng-if="contactsListsContactsVm.canManage">
                               <a href=""
                                  x-ng-click="contactsListsContactsVm.showItemDetails(contactsListContact, null, 1)">
@@ -401,6 +402,7 @@
                                 <span translate>CONTACTS_LISTS_ACTION.MORE.EDIT</span>
                               </a>
                             </li>
+                            <li class="divider"></li>
                             <li x-ng-if="contactsListsContactsVm.canManage">
                               <a href="" x-ng-click="contactsListsContactsVm.deleteContact(contactsListContact)">
                                 <i class="fa fa-trash-o"></i>

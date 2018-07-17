@@ -463,6 +463,22 @@
                                   <span translate>ACTION.INFORMATION</span>
                                 </a>
                               </li>
+                              <li
+                              class="divider"
+                              data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
+                              ng-if="!vm.writeAndReadonlyMembers"
+                            >
+                            <li
+                              data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
+                              ng-if="!vm.writeAndReadonlyMembers"
+                              data-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
+                            >
+                              <a href="">
+                                <i class="groups-add-member align-style"></i>
+                                <span translate>ACTION.ADD_MEMBER</span>
+                              </a>
+                            </li>
+                            </li>
                               <li x-ng-show="::linshareModeProduction == false">
                                 <a href="" event-propagation-stop>
                                   <i class="zmdi zmdi-star"></i>
@@ -476,23 +492,16 @@
                                 </a>
                               </li>
                               <li
-                                class="divider"
                                 data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
                                 ng-if="!vm.writeAndReadonlyMembers"
                               >
-                              </li>
-                              <li
-                                data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                ng-if="!vm.writeAndReadonlyMembers"
-                                data-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
-                              >
-                                <a href="">
-                                  <i class="groups-add-member align-style"></i>
-                                  <span translate>ACTION.ADD_MEMBER</span>
+                                <a x-ng-click="vm.renameFolder(documentFile)">
+                                  <i class="zmdi zmdi-border-color"></i>
+                                  <span translate>ACTION.RENAME</span>
                                 </a>
-                              </li>
+                              </li>                              
                               <li
-                                class="divider hidden-xs"
+                                class="hidden-xs"
                                 data-ng-show="::linshareModeProduction == false"
                               >
                               </li>
@@ -503,22 +512,12 @@
                                   <span translate>ACTION.DOWNLOAD</span>
                                 </a>
                               </li>
-                              <li
-                                class="divider"
+                              <li                                
                                 data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
                                 ng-if="!vm.writeAndReadonlyMembers"
                               >
-                              </li>
-                              <li
-                                data-ng-class="{'disable-link' : !vm.currentWorkgroupMember.admin}"
-                                ng-if="!vm.writeAndReadonlyMembers"
-                              >
-                                <a x-ng-click="vm.renameFolder(documentFile)">
-                                  <i class="zmdi zmdi-border-color"></i>
-                                  <span translate>ACTION.RENAME</span>
-                                </a>
-                              </li>
-                              <li class="divider hidden-xs" x-ng-show="::linshareModeProduction == false"></li>
+                              </li>                              
+                              <li class="hidden-xs" x-ng-show="::linshareModeProduction == false"></li>
                               <li class="hidden-xs" x-ng-show="::linshareModeProduction == false">
                                 <a href="" ls-share-modal event-propagation-stop>
                                   <i class="zmdi zmdi-arrows"></i>
