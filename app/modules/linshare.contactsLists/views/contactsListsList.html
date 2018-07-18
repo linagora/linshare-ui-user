@@ -594,19 +594,19 @@
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.RENAME</span>
                                 </a>
                               </li>
+                              <li>
+                                <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
+                                  <i class="zmdi zmdi-copy"></i>
+                                  <span translate>CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST</span>
+                                </a>
+                              </li>
                               <li class="divider"></li>
                               <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
                                 <a href="" x-ng-click="contactsListsListVm.deleteContactsList(contactsList)">
                                   <i class="zmdi zmdi-delete"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.DELETE</span>
                                 </a>
-                              </li>
-                              <li x-ng-show="::!linshareModeProduction"> <!-- TODO : IAB reactivate it in another PR -->
-                                <a href="" x-ng-click="contactsListsListVm.duplicateItem(contactsList)">
-                                  <i class="zmdi zmdi-copy"></i>
-                                  <span translate>CONTACTS_LISTS_ACTION.MORE.DUPLICATE_LIST</span>
-                                </a>
-                              </li>
+                              </li>                              
                               <li x-ng-show="::!linshareModeProduction">
                                 <a href="" x-ng-click="">
                                   <i class="fa fa-sign-out"></i>
