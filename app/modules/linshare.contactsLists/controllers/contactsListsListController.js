@@ -470,7 +470,7 @@
      * @name renameContactsList
      * @desc switch contactsList name to edit mode
      * @param {Object} item - original contactsList
-     * @param {Object} newItem - contactsList with new name
+     * @param {string} itemNameElem - Name of the item in view which is in edition mode
      * @returns {Promise} Response of the server
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
