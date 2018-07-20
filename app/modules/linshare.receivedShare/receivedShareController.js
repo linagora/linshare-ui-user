@@ -157,6 +157,11 @@
               singular: promises.length === 1,
               nbItems: promises.length
             }
+          },
+          'TOAST_ALERT.ACTION_BUTTON'
+          )
+          .then(function() {
+            $state.go('documents.files')
           });
         });
       }
