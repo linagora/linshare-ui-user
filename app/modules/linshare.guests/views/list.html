@@ -318,7 +318,7 @@
             data-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
             translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
           >
-            <i class="fa fa-trash-o"></i><span>
+            <i class="zmdi zmdi-delete"></i><span>
               <span translate>SELECTION_TOOLBAR.DELETE</span>
             </span>
           </a>
@@ -493,7 +493,7 @@
                         href=""
                         translate-attr="{title: 'BOUTON_LABEL_TITLE.DELETE'}"
                       >
-                      <i class="fa fa-trash-o"></i>
+                      <i class="zmdi zmdi-delete"></i>
                       </a>
                     </li>
                     <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
@@ -529,7 +529,7 @@
                         <li x-ng-hide="!guestVm.isMineGuest"
                             x-ng-click="guestVm.deleteGuests(guestData)">
                           <a href="">
-                            <i class="fa fa-trash-o"></i>
+                            <i class="zmdi zmdi-delete"></i>
                             <span translate>BOUTON_LABEL_TITLE.DELETE</span>
                           </a>
                         </li>
@@ -603,7 +603,7 @@
       data-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
       translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
     >
-      <i class="fa fa-trash-o"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
+      <i class="zmdi zmdi-delete"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
   </a>
   </span>
   <span x-ng-class="{'hide': guestVm.selectedGuests.length > 1}">
@@ -668,7 +668,7 @@
     </div>
     <i class="zmdi zmdi-edit col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
-    <i class="fa fa-trash-o col-xs-2" x-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"></i>
+    <i class="zmdi zmdi-delete col-xs-2" x-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"></i>
     <i class="zmdi zmdi-info col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
     <span class="dropdown col-xs-2 dropdown-standard" uib-dropdown="" x-ng-show="::!linshareModeProduction">

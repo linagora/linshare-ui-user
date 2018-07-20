@@ -364,7 +364,7 @@
                 translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
                 data-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)"
               >
-                <i class="fa fa-trash-o"></i>
+                <i class="zmdi zmdi-delete"></i>
                 <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
             </span>
@@ -597,7 +597,7 @@
                               <li class="divider"></li>
                               <li x-ng-show="contactsListsListVm.isFromMyContactsLists">
                                 <a href="" x-ng-click="contactsListsListVm.deleteContactsList(contactsList)">
-                                  <i class="fa fa-trash-o"></i>
+                                  <i class="zmdi zmdi-delete"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.DELETE</span>
                                 </a>
                               </li>
@@ -693,7 +693,7 @@
            x-ng-click="contactsListsListVm.showItemDetails(contactsListsListVm.selectedContactsLists[0],$event)">
         <i class="zmdi zmdi-info"></i>
       </div>
-      <i class="fa fa-trash-o col-xs-2"
+      <i class="zmdi zmdi-delete col-xs-2"
          x-ng-class="{'hide' : (!contactsListsListVm.isFromMyContactsLists)}"
          data-ng-show="::!linshareModeProduction"
          x-ng-click="contactsListsListVm.deleteContactsList(contactsListsListVm.selectedContactsLists)"></i>

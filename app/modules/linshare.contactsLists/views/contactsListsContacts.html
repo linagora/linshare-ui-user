@@ -233,7 +233,7 @@
             <span x-ng-if="contactsListsContactsVm.canManage">
               <a class="plain-text-button share-link" translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
                  x-ng-click="contactsListsContactsVm.deleteContact(contactsListsContactsVm.selectedContacts)">
-                <i class="fa fa-trash-o"></i>
+                <i class="zmdi zmdi-delete"></i>
                 <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
             </span>
@@ -384,7 +384,7 @@
                         <li class="hidden-xs" x-ng-if="contactsListsContactsVm.canManage">
                           <a x-ng-click="contactsListsContactsVm.deleteContact(contactsListContact)"
                              translate-attr="{title: 'CONTACTS_LISTS_ACTION.MORE.DELETE'}" event-propagation-stop>
-                            <i class="fa fa-trash-o"></i>
+                            <i class="zmdi zmdi-delete"></i>
                           </a>
                         </li>
                         <li uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
@@ -413,7 +413,7 @@
                             <li class="divider"></li>
                             <li x-ng-if="contactsListsContactsVm.canManage">
                               <a href="" x-ng-click="contactsListsContactsVm.deleteContact(contactsListContact)">
-                                <i class="fa fa-trash-o"></i>
+                                <i class="zmdi zmdi-delete"></i>
                                 <span translate>CONTACTS_LISTS_ACTION.MORE.DELETE</span>
                               </a>
                             </li>
@@ -468,7 +468,7 @@
        x-ng-click="contactsListsContactsVm.showItemDetails(contactsListsContactsVm.selectedContacts[0], null, 1)"
        x-ng-class="{'hide' : (contactsListsContactsVm.selectedContacts.length > 1)
        || (! contactsListsContactsVm.canManage)}"></i>
-    <i class="fa fa-trash-o col-xs-2"
+    <i class="zmdi zmdi-delete col-xs-2"
        x-ng-click="contactsListsContactsVm.canManage ?
        contactsListsContactsVm.deleteContact(contactsListsContactsVm.selectedContacts) : null"></i>
   </div>

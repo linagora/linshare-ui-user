@@ -180,7 +180,7 @@
             </span>
             <span>
               <a class="plain-text-button share-link" x-ng-click="deleteDocuments(selectedDocuments)">
-                <i class="fa fa-trash-o"></i>
+                <i class="zmdi zmdi-delete"></i>
                 <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
             </span>
@@ -365,7 +365,7 @@
                             <li class="divider"></li>
                             <li>
                               <a href="" x-ng-click="deleteDocuments(documentFile)">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                <i class="zmdi zmdi-delete" aria-hidden="true"></i>
                                 <span translate>ACTION.DELETE</span>
                               </a>
                             </li>
@@ -420,7 +420,7 @@
           </i>
           <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-other-actions" data-ng-class="{'open':isOpenItem}"
             uib-dropdown-menu="">
-            <li class="fa fa-trash-o col-xs-12" data-ng-click="deleteDocuments(selectedDocuments)">
+            <li class="zmdi zmdi-delete col-xs-12" data-ng-click="deleteDocuments(selectedDocuments)">
               <span translate>ACTION.DELETE</span>
             </li>
             <li class="zmdi zmdi-download col-xs-12" data-ng-click="multiDownload()">
