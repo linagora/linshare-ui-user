@@ -5,7 +5,11 @@
       <div class="user-preview-ctn">
         <div class="flex-ctn detail-info-ctn p-0 p-t-10">
           <div class="item-l m-b-10">
-            <span class="first-letter user-info">{{mainVm.sidebar.getData().selectedGuest.firstName.charAt(0)}}</span>
+            <span class="first-letter user-info text-uppercase">
+              {{mainVm.sidebar.getData().selectedGuest.firstName ?
+              mainVm.sidebar.getData().selectedGuest.firstName.charAt(0)
+              : mainVm.sidebar.getData().selectedGuest.mail.charAt(0)}}
+            </span>
           </div>
           <p class="m-b-0">{{mainVm.sidebar.getData().selectedGuest.firstName}}
             <span class="p-l-5 last-name">{{mainVm.sidebar.getData().selectedGuest.lastName}}</span>
@@ -39,7 +43,11 @@
     <div class="content-detail-area">
       <div class="flex-ctn detail-info-ctn">
         <div class="item-l">
-          <span class="first-letter user-info">{{mainVm.sidebar.getData().selectedGuest.owner.firstName.charAt(0)}}</span>
+          <span class="first-letter user-info text-uppercase">
+            {{mainVm.sidebar.getData().selectedGuest.owner.firstName ?
+              mainVm.sidebar.getData().selectedGuest.owner.firstName.charAt(0)
+              mainVm.sidebar.getData().selectedGuest.owner.mail.charAt(0)}}
+          </span>
         </div>
         <div class="item-mid">
           <div class="name">

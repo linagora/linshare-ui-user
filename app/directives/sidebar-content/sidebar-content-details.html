@@ -146,11 +146,13 @@
                 <div class="content-detail-area">
                   <div class="flex-ctn detail-info-ctn">
                     <div class="item-l">
-                      <span class="first-letter user-info" x-ng-if="mainVm.sidebar.getData().currentPage == 'my_files'">
-                        {{loggedUser.firstName.charAt(0)}}
+                      <span class="first-letter user-info text-uppercase" x-ng-if="mainVm.sidebar.getData().currentPage == 'my_files'">
+                        {{loggedUser.firstName ? loggedUser.firstName.charAt(0) : loggedUser.mail.charAt(0)}}
                       </span>
-                      <span class="first-letter user-info" x-ng-if="mainVm.sidebar.getData().currentPage == 'received_files'">
-                        {{mainVm.sidebar.getData().currentSelectedDocument.current.sender.firstName.charAt(0)}}
+                      <span class="first-letter user-info text-uppercase" x-ng-if="mainVm.sidebar.getData().currentPage == 'received_files'">
+                        {{mainVm.sidebar.getData().currentSelectedDocument.current.sender.firstName ?
+                          mainVm.sidebar.getData().currentSelectedDocument.current.sender.firstName.charAt(0)
+                          : mainVm.sidebar.getData().currentSelectedDocument.current.sender.mail.charAt(0)}}
                       </span>
                     </div>
 

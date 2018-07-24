@@ -6,8 +6,10 @@
         <div class="user-preview-ctn">
           <div class="flex-ctn detail-info-ctn p-0 p-t-10">
             <div class="item-l m-b-10">
-              <span class="first-letter user-info">
-                {{mainVm.sidebar.getData().currentSelectedDocument.current.firstName | limitTo:1 | uppercase}}
+              <span class="first-letter user-info text-uppercase">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.firstName ?
+                  mainVm.sidebar.getData().currentSelectedDocument.current.firstName.charAt(0)
+                  : mainVm.sidebar.getData().currentSelectedDocument.current.mail.charAt(0)}}
               </span>
             </div>
             <p class="m-b-0">{{mainVm.sidebar.getData().currentSelectedDocument.current.firstName}}

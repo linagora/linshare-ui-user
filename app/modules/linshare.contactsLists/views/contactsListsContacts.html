@@ -309,7 +309,11 @@
                     class="visible-xs">
                     <div class="item-l" x-ng-class="{'invisible' : showCheckboxes}">
                       <span
-                        class="first-letter guest-account-li">{{contactsListContact.firstName.charAt(0)}}</span>
+                        class="first-letter guest-account-li text-uppercase">
+                          {{contactsListContact.firstName ?
+                            contactsListContact.firstName.charAt(0)
+                            : contactsListContact.mail.charAt(0)}}
+                      </span>
                     </div>
                     <div class="checkbox-ctn-thumb"
                          x-ng-class="{'maintain-vis': contactsListContact.isSelected, 'hidden-xs' : !showCheckboxes}">
@@ -318,7 +322,11 @@
                   <a x-ng-click="contactsListsContactsVm.addSelectedDocument(contactsListContact)" class="hidden-xs">
                     <div class="item-l" x-ng-class="{'invisible' : showCheckboxes}">
                       <span
-                        class="first-letter guest-account-li">{{contactsListContact.firstName.charAt(0)}}</span>
+                        class="first-letter guest-account-li text-uppercase">
+                          {{contactsListContact.firstName ?
+                            contactsListContact.firstName.charAt(0)
+                            : contactsListContact.mail.charAt(0)}}
+                      </span>
                     </div>
                     <div class="checkbox-ctn-thumb"
                          x-ng-class="{'maintain-vis': contactsListContact.isSelected, 'hidden-xs' : !showCheckboxes}">

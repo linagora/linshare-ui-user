@@ -159,7 +159,13 @@
           <div class="flex-ctn"
                x-ng-repeat="workgroupMember in mainVm.sidebar.getData().currentSelectedDocument.current.members |
                            filter: workgroupMemberVm.membersSearchFilter | orderBy: '-' ">
-            <div class="item-l"><span class="first-letter">{{workgroupMember.firstName.charAt(0)}}</span></div>
+            <div class="item-l">
+              <span class="first-letter text-uppercase">
+                {{workgroupMember.firstName ?
+                  workgroupMember.firstName.charAt(0)
+                  : workgroupMember.mail}}
+              </span>
+            </div>
             <div class="item-mid">
               <div class="name">{{workgroupMember.firstName}} {{workgroupMember.lastName}}</div>
               <div class="info-item-member" x-ng-switch="workgroupMember.role">
