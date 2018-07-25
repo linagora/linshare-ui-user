@@ -295,10 +295,21 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function duplicateItem(item) {
-      var itemCopy = _.clone(item);
-      itemCopy.name = itemCopy.name + ' (' + copySuffix + ' ' + moment().format() + ')';
-      itemCopy.owner = $scope.userLogged;
-      saveNewItem(itemCopy, true);
+      //var itemCopy = _.clone(item);
+      //itemCopy.name = itemCopy.name + ' (' + copySuffix + ' ' + moment().format() + ')';
+      //itemCopy.owner = $scope.userLogged;
+      //saveNewItem(itemCopy, true);
+
+      var newContactsListName = item.name + ' (' + copySuffix + ' ' + moment().format() + ')';
+      contactsListsListRestService.duplicate(item.uuid, newContactsListName).then(function(newItem) {
+        var duplicatedItem = contactsListsListRestService.restangularize({
+          name: cleanString(newItem.name),
+          owner: _.pick($scope.userLogged, ['firstName', 'lastName', 'uuid']),
+          uuid: newItem.uuid
+        });
+        contactsListsListVm.itemsList.push(duplicatedItem);
+        contactsListsListVm.tableParams.reload();
+      })
     }
 
     /**

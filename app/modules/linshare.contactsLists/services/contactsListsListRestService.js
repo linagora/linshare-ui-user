@@ -23,6 +23,7 @@
       service = {
         create: create,
         delete: remove,
+        duplicate: duplicate,
         get: get,
         getAudit: getAudit,
         getList: getList,
@@ -44,6 +45,25 @@
     function create(contactsListsDto) {
       $log.debug('contactsListsListRestService - create');
       return handler(Restangular.all(restUrl).post(contactsListsDto));
+    }
+
+    /**
+     * @name duplicate
+     * @desc duplicate a contactsList object
+     * @param {string} contactsListSourceUuid - The contactsList source uuid
+     * @param {string} newContactsListName - The new contactsList name
+     * @returns {Promise} server response
+     * @memberOf LinShare.contactsLists.contactsListsListRestService
+     */
+    function duplicate(contactsListSourceUuid, newContactsListName) {
+      $log.debug('contactsListsListRestService - duplicate');
+      return handler(Restangular
+        .all(restUrl)
+        .one(contactsListSourceUuid)
+        .one('duplicate')
+        .one(newContactsListName)
+        .post()
+      );
     }
 
     /**
