@@ -295,19 +295,16 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function duplicateItem(item) {
-      //var itemCopy = _.clone(item);
-      //itemCopy.name = itemCopy.name + ' (' + copySuffix + ' ' + moment().format() + ')';
-      //itemCopy.owner = $scope.userLogged;
-      //saveNewItem(itemCopy, true);
-
       var newContactsListName = item.name + ' (' + copySuffix + ' ' + moment().format() + ')';
       contactsListsListRestService.duplicate(item.uuid, newContactsListName).then(function(newItem) {
         var duplicatedItem = contactsListsListRestService.restangularize({
           name: cleanString(newItem.name),
           owner: _.pick($scope.userLogged, ['firstName', 'lastName', 'uuid']),
-          uuid: newItem.uuid
+          uuid: newItem.uuid,
+          modificationDate: moment().format()
         });
         contactsListsListVm.itemsList.push(duplicatedItem);
+        contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsListVm.tableParams.reload();
       })
     }
@@ -561,34 +558,7 @@
         });
       });
     }
-    /*********************************************** DEAD CODE WALKING ***********************************************\
-
-    /**
-     * @name saveNewItem
-     * @desc persist new contactsList to database
-     * @param {Object} item - contactsList to save
-     * @param {Boolean} duplicate - is launched from new contactsList or duplicata
-     * @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    function saveNewItem(item, duplicate) {
-      contactsListsListRestService.create({
-        name: cleanString(item.name)
-      }).then(function(data) {
-        removeUnpersistedContactsLists();
-        if (duplicate) {
-          copyAllContacts(item.uuid, data.uuid);
-        }
-        contactsListsListVm.itemsList.push(data);
-        contactsListsListVm.tableParams.reload();
-      }, function(error) {
-        if (error) {
-          removeUnpersistedContactsLists();
-          contactsListsListVm.tableParams.reload();
-        }
-        return null;
-      });
-    }
-
+    
     /**
      * @name selectDocumentsOnCurrentPage
      * @desc Helper to select all element of the current table page
