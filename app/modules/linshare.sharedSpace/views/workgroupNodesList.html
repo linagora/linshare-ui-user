@@ -535,14 +535,6 @@
                           </a>
                           <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                                 dropdown-divided dropdown-submenu" data-ng-class="{'open':isOpenItem}" uib-dropdown-menu="">
-                            <li>
-                              <document-preview-button
-                                data-ng-if="workgroupNodesVm.thumbnailEngineActivated"
-                                item-index="$index"
-                                items="$data">
-                                <span translate>ACTION.PREVIEW</span>
-                              </document-preview-button>
-                            </li>
                             <li event-propagation-stop data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
                               <a href="">
                                 <i class="zmdi zmdi-info"></i>
@@ -563,7 +555,10 @@
                               </a>
                             </li>
                             <li>
-                              <document-preview-button item-index="$index" items="$data">
+                              <document-preview-button
+                                data-ng-if="workgroupNodesVm.thumbnailEngineActivated"
+                                item-index="$index"
+                                items="$data">
                                 <span translate>ACTION.PREVIEW</span>
                               </document-preview-button>
                             </li>

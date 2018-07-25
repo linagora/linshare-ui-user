@@ -23,15 +23,6 @@
       </a>
       <ul class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided" uib-dropdown-menu=""
           data-ng-class="{'open':isOpenItem}">
-        <li>
-          <document-preview-button
-            data-ng-if="lsAppConfig.thumbnailEngineActivated"
-            item-index="$index"
-            items="$data"
-          >
-            <span translate>ACTION.PREVIEW</span>
-          </document-preview-button>
-        </li>
         <li data-ng-click="showCurrentFile(documentFile, $event, true)">
           <a href="">
             <i class="zmdi zmdi-info" translate></i>
@@ -58,7 +49,11 @@
           </a>
         </li>
         <li>
-          <document-preview-button item-index="$index" items="$data">
+          <document-preview-button
+            data-ng-if="lsAppConfig.thumbnailEngineActivated"
+            item-index="$index"
+            items="$data"
+          >
             <span translate>ACTION.PREVIEW</span>
           </document-preview-button>
         </li>
