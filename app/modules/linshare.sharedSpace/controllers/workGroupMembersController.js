@@ -18,7 +18,8 @@
     'lsAppConfig',
     'workgroupMembersRestService',
     'dialogService',
-    '$translatePartialLoader'    
+    '$translatePartialLoader',
+    'toastService'
   ];
 
   /**
@@ -35,7 +36,8 @@
     lsAppConfig,
     workgroupMembersRestService,
     dialogService,
-    $translatePartialLoader
+    $translatePartialLoader,
+    toastService
   ) {
     /* jshint validthis: true */
     var workgroupMemberVm = this;
@@ -166,13 +168,22 @@
             confirm: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON']
           }
         };
+
         return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
       }).then(function() {
-      _.remove(currentWorkgroup.members, member)
-      return workgroupMembersRestService.remove(workgroupMemberVm.currentWorkGroup.current.uuid, member.userUuid);      
+        _.remove(currentWorkgroup.members, member);
+        toastService.success({
+          key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
+          params: {
+            firstName: member.firstName,
+            lastName: member.lastName,
+          }
+        });
+        
+        return workgroupMembersRestService.remove(workgroupMemberVm.currentWorkGroup.current.uuid, member.userUuid);      
       })
     }
-
+    
     /**
      * @name updateMember
      * @desc Update member
