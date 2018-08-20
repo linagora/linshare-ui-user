@@ -48,7 +48,8 @@
         'WORKGROUP': 'ls-workgroup',
         'WORKGROUP_DOCUMENT': 'zmdi zmdi-file',
         'WORKGROUP_FOLDER': 'ls-folder',
-        'WORKGROUP_MEMBER': 'ls-user'
+        'WORKGROUP_MEMBER': 'ls-user',
+        'JWT_PERMANENT_TOKEN': 'zmdi zmdi-badge-check'
       },
       TYPES_KEY = {
         ANONYMOUS_SHARE_ENTRY: 'ANONYMOUS_SHARE_ENTRY',
@@ -61,7 +62,8 @@
         WORKGROUP: 'WORKGROUP',
         WORKGROUP_DOCUMENT: 'WORKGROUP_DOCUMENT',
         WORKGROUP_FOLDER: 'WORKGROUP_FOLDER',
-        WORKGROUP_MEMBER: 'WORKGROUP_MEMBER'
+        WORKGROUP_MEMBER: 'WORKGROUP_MEMBER',
+        JWT_PERMANENT_TOKEN: 'JWT_PERMANENT_TOKEN'
       },
       UPDATE_FIELDS_KEY = {
         'canCreateGuest': 'CAN_CREATE_GUEST',
@@ -278,6 +280,8 @@
           setFullName(auditAction.resource.user);
       } else if (auditAction.resource.firstName) {
         resourceName = (auditAction.resource.uuid === loggedUserUuid) ? authorMe : setFullName(auditAction.resource);
+      } else if (auditAction.resource.label) {
+        resourceName = auditAction.resource.label;
       } else {
         resourceName = auditAction.resource.name;
         if (auditAction.copiedTo) {
