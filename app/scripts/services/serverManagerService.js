@@ -96,7 +96,7 @@
     }
 
     function getHeaders() {
-      $log.debug('AuthenticationRestService : logout');
+      $log.debug('AuthenticationRestService: getHeaders');
       var rest = Restangular.withConfig(function(RestangularConfigurer) {
         RestangularConfigurer.setFullResponse(true);
       });
