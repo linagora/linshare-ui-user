@@ -12,7 +12,7 @@
   workGroupMembersController.$inject = [
     '_',
     '$q',
-    '$translate',    
+    '$translate',
     '$filter',
     '$scope',
     'lsAppConfig',
@@ -100,7 +100,7 @@
         admin: workgroupMemberVm.memberRole === workgroupMemberVm.membersRights.admin
       };
       var currentWorkgroupMember = workgroupMembers.filter(function(workgroupMember) {
-        return workgroupMember.userUuid === member.userUuid
+        return workgroupMember.userUuid === member.userUuid;
       });
 
       if (currentWorkgroupMember.length !== 0) {
@@ -153,13 +153,13 @@
 
     /**
      * @name removeMember
-     * @desc Remove member from workgroup members's list     
+     * @desc Remove member from workgroup members's list
      * @param {Object} member - The member to remove from workgroup members's list
      * @param {Object} currentWorkgroup - The current workgroup from which the member is removed.
      * @returns {Promise} Response of the server
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
-    function removeMember(currentWorkgroup, member) { 
+    function removeMember(currentWorkgroup, member) {
       $q.all([
         $translate(
           'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TEXT',
@@ -174,7 +174,7 @@
           'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON',
           'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON'
         ])
-      ]).then(function(translations) {   
+      ]).then(function(translations) {
         var sentences = {
           text: translations[0],
           title: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE'],
@@ -194,11 +194,14 @@
             lastName: member.lastName,
           }
         });
-        
-        return workgroupMembersRestService.remove(workgroupMemberVm.currentWorkGroup.current.uuid, member.userUuid);      
-      })
+
+        return workgroupMembersRestService.remove(
+          workgroupMemberVm.currentWorkGroup.current.uuid,
+          member.userUuid
+        );
+      });
     }
-    
+
     /**
      * @name updateMember
      * @desc Update member

@@ -391,7 +391,7 @@
             clean();
           });
         } else {
-          reset(item)
+          reset(item);
           itemElement.focus();
         }
       }
