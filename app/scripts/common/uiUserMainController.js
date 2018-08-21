@@ -101,7 +101,6 @@
     function activate() {
       var notifyTimeoutReference;
 
-      MenuService.build();
       $scope.loggedUser = new LinshareUserService();
       mainVm.sidebar = sidebarService;
 
@@ -337,6 +336,8 @@
       localStorage.setItem('ma-layout-status', 0);
 
       setVisualElement();
+
+      MenuService.build();
 
       /**
        * @name set Visual Element
