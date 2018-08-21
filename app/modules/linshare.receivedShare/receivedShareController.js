@@ -161,7 +161,7 @@
           'TOAST_ALERT.ACTION_BUTTON'
           )
           .then(function() {
-            $state.go('documents.files')
+            $state.go('documents.files');
           });
         });
       }

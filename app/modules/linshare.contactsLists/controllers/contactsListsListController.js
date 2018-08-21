@@ -209,20 +209,6 @@
     }
 
     /**
-     * @name copyAllContacts
-     * @desc add all contacts from source contactsList to the duplicated contactsList
-     * @param {String} contactsListUuidSource - uuid of source contactsList
-     * @param {String} contactListUuidDestination - uuid of destination contactsList
-     * @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    function copyAllContacts(contactsListUuidSource, contactListUuidDestination) {
-      contactsListsContactsRestService.getList(contactsListUuidSource).then(function(success) {
-        contactsListsListVm.contactsToAddList = success;
-        saveContacts(true, contactListUuidDestination);
-      });
-    }
-
-    /**
      * @name createContactsList
      * @desc launch creation of contactsList with new unique name
      * @memberOf LinShare.contactsLists.contactsListsListController
@@ -306,7 +292,7 @@
         contactsListsListVm.itemsList.push(duplicatedItem);
         contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsListVm.tableParams.reload();
-      })
+      });
     }
 
     /**
@@ -462,19 +448,6 @@
     }
 
     /**
-     * @name removeUnpersistedContactsLists
-     * @desc remove all contactsLists which are not saved in database
-     * @memberOf LinShare.contactsLists.contactsListsListController
-     */
-    function removeUnpersistedContactsLists() {
-      _.forEach(contactsListsListVm.itemsList, function(item) {
-        if (!_.isUndefined(item) && !item.modificationDate) {
-          _.remove(contactsListsListVm.itemsList, item);
-        }
-      });
-    }
-
-    /**
      * @name renameContactsList
      * @desc switch contactsList name to edit mode
      * @param {Object} item - original contactsList
@@ -558,7 +531,7 @@
         });
       });
     }
-    
+
     /**
      * @name selectDocumentsOnCurrentPage
      * @desc Helper to select all element of the current table page
