@@ -4,6 +4,9 @@
 angular
   .module(
     'linshare.components',
-    ['linshare.utils']
+    [
+      'ngMaterial',
+      'linshare.utils'
+    ]
   );
 })();

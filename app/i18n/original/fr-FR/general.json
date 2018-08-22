@@ -119,6 +119,7 @@
   },
   "HEADER": {
     "CLEAR_LOCAL_STORAGE": "Purger le stockage local",
+    "DEBUG_MODE": "Mode debug",
     "FILES_TO_SHARE": "Fichiers destinés au partage",
     "FULL_SCREEN": "Plein écran",
     "LOGOUT": "Déconnexion",

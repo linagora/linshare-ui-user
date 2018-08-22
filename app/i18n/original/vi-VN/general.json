@@ -121,6 +121,7 @@
   },
   "HEADER": {
     "CLEAR_LOCAL_STORAGE": "Xóa Local Storage",
+    "TBT__DEBUG_MODE": "",
     "TBT__FILES_TO_SHARE": "",
     "FULL_SCREEN": "Toàn màn hình",
     "LOGOUT": "Đăng xuất",

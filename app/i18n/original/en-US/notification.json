@@ -59,6 +59,7 @@
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} has been removed successfully from the Workgroup",
       "DETAILS": "Details",
       "INSERT": "The item was added successfully.",
+      "REFRESH": "You must refresh the application to take this action into account",
       "SHARE": "Your {{singular ? 'file' : 'files'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'was' : 'were'}} successfully sent.",
       "SHARE_DELETED": "Your file share with {{recipient}} was removed successfully.",
       "SHARE_ASYNC": "Your file share will be sent after the upload of all files.",
@@ -66,6 +67,7 @@
       "UPDATE": "The item was updated successfully."
     },
     "ACTION_BUTTON": "View",
+    "ACTION_REFRESH": "Refresh",
     "ERROR": {
       "BROWSER_ACTION": "{nbNodes} {singular, select, true{file or folder} other{files or folders}} couldn't be {action, select, moved{moved} other{copied}}",
       "COPY": {

@@ -49,20 +49,27 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   .disabled {
     display: none;
   }
-  li {
+  li md-switch {
+    margin: 5px 0;
+    & .md-container {
+      margin-right: 2px;
+      margin-left: 10px;
+    }
+  }
+  li, li md-switch {
     clear: both;
   }
   > li {
     border-bottom: 1px solid #eee;
   }
-  li a {
+  li a, li span {
     padding: 8px 15px;
     transition: background-color;
     transition-duration: 250ms;
     font-family: roboto , 'sans-serif';
     font-size: 1.035em;
   }
-  &:not([class*="bgm-"]) li a {
+  &:not([class*="bgm-"]) li a, li span {
     color: #696969;
     font-weight: 500;
     &:hover {
