@@ -88,6 +88,16 @@
           modificationDate: 'desc'
         }
       },
+      extLink: {
+        enable: false,
+        icons: '',
+        href: '',
+        name: {
+          'fr': '',
+          'en': '',
+          'vi': ''
+        }
+      },
 
       // For upload options management
       mySpacePage: 'myspace',

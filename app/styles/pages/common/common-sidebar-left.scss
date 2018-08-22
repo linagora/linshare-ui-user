@@ -255,16 +255,22 @@ body:not(.sw-toggled) #sidebar {
 #navigation {
   overflow-x: hidden;
   position: absolute;
-  height: calc(100% - 100px);
   overflow-y: auto;
   top: 107px;
   padding-bottom: 100px;
   width: 100%;
+  height: calc(100% - 110px);
+  @-moz-document url-prefix() {
+    height: calc(100% - 220px);
+  }
 }
 
 @media (max-width: 768px) {
   #navigation {
-    height: calc(100% - 50px);
+    height: calc(100% - 55px);
+    @-moz-document url-prefix() {
+      height: calc(100% - 150px);
+    }
   }
 }
 

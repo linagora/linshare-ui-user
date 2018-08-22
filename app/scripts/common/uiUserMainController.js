@@ -27,6 +27,7 @@
     'flowUploadService',
     'functionalityRestService',
     'LinshareUserService',
+    'languageService',
     'lsAppConfig',
     'MenuService',
     'quotaService',
@@ -52,6 +53,7 @@
     flowUploadService,
     functionalityRestService,
     LinshareUserService,
+    languageService,
     lsAppConfig,
     MenuService,
     quotaService,
@@ -75,6 +77,7 @@
     $rootScope.mobileWidthBreakpoint = 768;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.sidebarRightWidth = 350;
+    $scope.locale = languageService.getLocale();
     $scope.getUserQuotas = getUserQuotas;
     $scope.lsAppConfig = lsAppConfig;
     $scope.mySpacePage = lsAppConfig.mySpacePage;
