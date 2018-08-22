@@ -59,6 +59,7 @@
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} a été supprimé du groupe de travail.",
       "DETAILS": "Détails",
       "INSERT": "L'élément a été ajouté avec succès.",
+      "REFRESH": "Vous devez rafraichir l'application pour prendre cette action en compte",
       "SHARE": "{{singular ? 'Votre fichier' : 'Vos fichiers'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'a' : 'ont'}} été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
       "SHARE_DELETED": "Votre partage avec {{recipient}} a été supprimé avec succès.",

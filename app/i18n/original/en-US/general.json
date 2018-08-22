@@ -119,6 +119,7 @@
   },
   "HEADER": {
     "CLEAR_LOCAL_STORAGE": "Clear Local Storage",
+    "DEBUG_MODE": "Debug mode",
     "FILES_TO_SHARE": "Files are destinated to share",
     "FULL_SCREEN": "Full screen",
     "LOGOUT": "Logout",

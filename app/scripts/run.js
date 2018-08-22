@@ -86,11 +86,18 @@ angular
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   })
 
-  .config(function(localStorageServiceProvider, $logProvider, lsAppConfig) {
-    $logProvider.debugEnabled(lsAppConfig.debug);
+  .config(function(localStorageServiceProvider, $logProvider, $windowProvider, lsAppConfig, _) {
     localStorageServiceProvider
       .setPrefix('lsUser')
       .setNotify(true, true);
+
+    var $window = $windowProvider.$get();
+    var isActivatedDebugModeFromLocalStorage = $window.localStorage.getItem('lsUser.debugMode');
+    var isDebugModeActivated = !_.isNil(isActivatedDebugModeFromLocalStorage) ?
+        isActivatedDebugModeFromLocalStorage :
+        lsAppConfig.debug;
+
+    $logProvider.debugEnabled(isDebugModeActivated );
   })
 
   .run(function($rootScope, $filter, $location, $state, Restangular, $log, $window, localStorageService,
