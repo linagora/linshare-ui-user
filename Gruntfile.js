@@ -241,7 +241,7 @@ module.exports = function(grunt) {
           '<%= yeoman.dist %>/directives/*/*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '!<%= yeoman.dist %>/scripts/config.js',
+          '!<%= yeoman.dist %>/config/config.js',
           '<%= yeoman.dist %>/styles/fonts/*'
         ]
       }
@@ -366,7 +366,7 @@ module.exports = function(grunt) {
             'modules/**/**/*.html',
             'i18n/original/{,*/}*.json',
             'images/{,*/}*.{webp}',
-            'scripts/config.js',
+            'config/config.js',
             'styles/fonts/{,*/}*.*'
           ]
         }, {

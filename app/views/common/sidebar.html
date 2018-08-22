@@ -35,15 +35,42 @@
       </ul>
     </div>
     <ul class="main-menu" data-ng-repeat="tab in lsLeftSidebarVm.tabs">
-      <li data-ng-if="::tab.link" data-ng-show="::!tab.disabled" role="button" class="waves-effect"
-          data-ng-class="{'active simple-menu': currentState.name==tab.name}">
-        <a data-ui-sref="{{::tab.link}}"
-           data-ng-class="::{'disabled': tab.disabled }">
+      <li
+        data-ng-if="::tab.href"
+        data-ng-show="::!tab.disabled"
+        role="button"
+        class="waves-effect"
+        data-ng-class="{'active simple-menu': currentState.name==tab.name}"
+      >
+        <a
+          href="{{::tab.href}}"
+          data-ng-class="::{'disabled': tab.disabled }"
+        >
+          <i class="{{::tab.icon}}"></i> <span>{{::tab.name[locale]}}<span>
+        </a>
+      </li>
+      <li
+        data-ng-if="::tab.link"
+        data-ng-show="::!tab.disabled"
+        role="button"
+        class="waves-effect"
+        data-ng-class="{'active simple-menu': currentState.name==tab.name}"
+      >
+        <a
+          data-ui-sref="{{::tab.link}}"
+          data-ng-class="::{'disabled': tab.disabled }"
+        >
           <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}<span>
         </a>
       </li>
-      <li data-ng-show="::!tab.disabled" class="sub-menu" data-ng-if="::tab.links" role="button" class="waves-effect"
-          data-ng-class="{'active toggled': currentState.name==tab.name}">
+      <li
+        data-ng-if="::tab.links"
+        data-ng-show="::!tab.disabled"
+        class="sub-menu"
+        role="button"
+        class="waves-effect"
+        data-ng-class="{'active toggled': currentState.name==tab.name}"
+      >
         <a toggle-submenu>
           <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}<span>
         </a>

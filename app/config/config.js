@@ -18,7 +18,16 @@
       //Warning: the following parameter will not be use if you defined a logout url via
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
-      
-      enableSafeDetails: false
+
+      extLink: {
+        enable: true,
+        icons: '',
+        href: 'http://yolo.io',
+        name: {
+          'fr-FR': 'test FR',
+          'en-US': 'test EN',
+          'vi-VN': 'test VI'
+        }
+      },
     });
 })();

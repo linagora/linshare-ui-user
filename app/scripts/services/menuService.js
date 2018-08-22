@@ -36,6 +36,7 @@
     var
       administrations,
       audit,
+      externalLink,
       files,
       home,
       myUploads,
@@ -60,39 +61,36 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     function build() {
-      ServerManagerService.getHeaders().then(function(headers) {
-        var linshareSafeModeCastedToBoolean = Boolean(headers['x-linshare-safe-mode']);
+      $q
+        .all([
+          authenticationRestService.getCurrentUser(),
+          functionalityRestService.getAll()
+        ])
+        .then(function(promises) {
+          var
+            user = promises[0],
+            functionalities = promises[1];
 
-        safeDetails.disabled = linshareSafeModeCastedToBoolean ?
-          !linshareSafeModeCastedToBoolean :
-          !lsAppConfig.enableSafeDetails;
-      });
+          administrations.links.splice(0, 0, {
+            name: 'MENU_TITLE.CONTACTS_LISTS',
+            link: 'administration.contactslists.list',
+            disabled: !functionalities.CONTACTS_LIST.enable
+          }, {
+            name: 'MENU_TITLE.GUESTS',
+            link: 'administration.guests',
+            disabled: _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest)
+          });
 
-      $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()]).then(function(promises) {
-        var
-          user = promises[0],
-          functionalities = promises[1];
+          administrations.disabled = _.reduce(administrations.links, function(value, link){
+            return link.disabled && value;
+          }, true);
 
-        administrations.links.splice(0, 0, {
-          name: 'MENU_TITLE.CONTACTS_LISTS',
-          link: 'administration.contactslists.list',
-          disabled: !functionalities.CONTACTS_LIST.enable
-        }, {
-          name: 'MENU_TITLE.GUESTS',
-          link: 'administration.guests',
-          disabled: _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest)
+          files.disabled = !user.canUpload;
+
+          sharedSpace.disabled = !functionalities.WORK_GROUP.enable;
+          myUploads.disabled = !(functionalities.WORK_GROUP.enable || user.canUpload);
+          receivedShares.disabled = functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
         });
-
-        administrations.disabled = _.reduce(administrations.links, function(value, link){
-          return link.disabled && value;
-        }, true);
-
-        files.disabled = !user.canUpload;
-
-        sharedSpace.disabled = !functionalities.WORK_GROUP.enable;
-        myUploads.disabled = !(functionalities.WORK_GROUP.enable || user.canUpload);
-        receivedShares.disabled = functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
-      });
 
       administrations = {
         name: 'MENU_TITLE.ADMIN',
@@ -116,6 +114,14 @@
         icon: 'zmdi zmdi-time-restore',
         color: '#FFC107',
         disabled: false
+      };
+
+      externalLink = {
+        name: lsAppConfig.extLink.name,
+        href: lsAppConfig.extLink.href,
+        icon: lsAppConfig.extLink.icon,
+        color: '#FFC107',
+        disabled: !lsAppConfig.extLink.enable
       };
 
       files = {
@@ -162,7 +168,7 @@
         link: 'safe_details.global',
         icon: 'zmdi zmdi-card',
         color: '#FFC107',
-        disabled: false
+        disabled: !lsAppConfig.enableSafeDetails
       };
 
       uploads = {
@@ -181,7 +187,18 @@
         }]
       };
 
-      tabs = [home, myUploads, receivedShares, files, sharedSpace, administrations, uploads, audit, safeDetails];
+      tabs = [
+        home,
+        myUploads,
+        receivedShares,
+        files,
+        sharedSpace,
+        administrations,
+        uploads,
+        audit,
+        safeDetails,
+        externalLink
+      ];
     }
 
     /**
