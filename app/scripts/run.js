@@ -7,7 +7,7 @@ angular
   /* jshint maxparams: false */
   .config(function(_, RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
                    $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider,
-                   tmhDynamicLocaleProvider, uibDatepickerPopupConfig) {
+                   uibDatepickerPopupConfig) {
     uibDatepickerPopupConfig.showButtonBar = false;
     lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
@@ -20,8 +20,6 @@ angular
     $translatePartialLoaderProvider.addPart('notification');
     $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
     $translateProvider.preferredLanguage('en-US');
-    tmhDynamicLocaleProvider
-      .localeLocationPattern('vendors/bower_components/angular-i18n/angular-locale_{{locale}}.js');
 
     RestangularProvider.setDefaultHttpFields({
       cache: false
