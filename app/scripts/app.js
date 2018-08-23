@@ -37,7 +37,6 @@ angular.module('linshareUiUserApp', [
   'ngTable',
   'pascalprecht.translate',
   'restangular',
-  'tmh.dynamicLocale',
   'ui.bootstrap',
   'ui.router'
 ]);

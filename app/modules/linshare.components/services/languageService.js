@@ -15,7 +15,6 @@
     'localStorageService',
     'lsAppConfig',
     'moment',
-    'tmhDynamicLocale',
     'uibDatepickerPopupConfig'
   ];
 
@@ -30,7 +29,6 @@
     localStorageService,
     lsAppConfig,
     moment,
-    tmhDynamicLocale,
     uibDatepickerPopupConfig
   )
   {
@@ -82,9 +80,6 @@
       $translate.use(keyWithCountryLocaleCode);
       localStorageService.set('locale', keyWithCountryLocaleCode);
       $log.debug('locale changed to ', keyWithCountryLocaleCode);
-      return tmhDynamicLocale
-        .set(keyWithCountryLocaleCode.substring(0, keyWithCountryLocaleCode.indexOf('-')))
-        .then(overrideDatepickerFormat);
     }
 
     /**

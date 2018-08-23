@@ -31,10 +31,8 @@
         ) {
           var language = $window.location.hash.split('/').pop();
 
-          languageService.changeLocale(language)
-            .then(function() {
-              authRedirect($state, null, authenticationRestService);
-            });
+          languageService.changeLocale(language);
+          authRedirect($state, null, authenticationRestService);
         }]).otherwise(function($injector) {
           $injector.invoke([
             '$state',
