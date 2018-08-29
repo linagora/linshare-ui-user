@@ -45,6 +45,7 @@
         <a
           href="{{::tab.href}}"
           data-ng-class="::{'disabled': tab.disabled }"
+          target="{{::tab.newTab ? '_blank' : '_self'}}"
         >
           <i class="{{::tab.icon}}"></i> <span>{{::tab.name[locale]}}<span>
         </a>

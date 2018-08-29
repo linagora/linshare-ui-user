@@ -21,12 +21,13 @@
 
       extLink: {
         enable: false,
-        icons: '',
+        newTab: true,
+        icon: 'zmdi zmdi-home',
         href: 'http://your.link.local',
         name: {
-          'fr-FR': 'test FR',
-          'en-US': 'test EN',
-          'vi-VN': 'test VI'
+          'fr-FR': 'Nom',
+          'en-US': 'Name',
+          'vi-VN': 'Tên'
         }
       },
     });

@@ -90,7 +90,8 @@
       },
       extLink: {
         enable: false,
-        icons: '',
+        newTab: false,
+        icon: 'zmdi zmdi-home',
         href: '',
         name: {
           'fr': '',
