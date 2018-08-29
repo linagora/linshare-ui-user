@@ -20,9 +20,9 @@
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
 
       extLink: {
-        enable: true,
+        enable: false,
         icons: '',
-        href: 'http://yolo.io',
+        href: 'http://your.link.local',
         name: {
           'fr-FR': 'test FR',
           'en-US': 'test EN',
