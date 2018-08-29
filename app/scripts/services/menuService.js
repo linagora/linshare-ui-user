@@ -15,8 +15,7 @@
     'authenticationRestService',
     'functionalityRestService',
     'lsAppConfig',
-    'lsColors',
-    'ServerManagerService'
+    'lsColors'
   ];
 
   /**
@@ -30,8 +29,7 @@
     authenticationRestService,
     functionalityRestService,
     lsAppConfig,
-    lsColors,
-    ServerManagerService
+    lsColors
   ) {
     var
       administrations,
@@ -121,7 +119,8 @@
         href: lsAppConfig.extLink.href,
         icon: lsAppConfig.extLink.icon,
         color: '#FFC107',
-        disabled: !lsAppConfig.extLink.enable
+        disabled: !lsAppConfig.extLink.enable,
+        newTab: lsAppConfig.extLink.newTab
       };
 
       files = {
