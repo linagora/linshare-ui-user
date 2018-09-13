@@ -116,56 +116,18 @@ angular.module('linshare.sharedSpace')
       thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
     };
 
-    thisctrl.fabButton = {
-      toolbar: {
-        activate: true,
-        label: 'BOUTON_ADD_FILE_TITLE'
-      },
-      actions: [
-        {
-          action: null,
-          label: 'WORKGROUPS_LIST.ADD_A_MEMBER',
-          icon: 'ls-add-user disabled-work-in-progress',
-          disabled: true,
-          hide: lsAppConfig.linshareModeProduction
-        }, {
-          action: null,
-          label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
-          icon: 'ls-upload-fill fab-groups disabled-work-in-progress',
-          disabled: true,
-          hide: !lsAppConfig.linshareModeProduction
-        }, {
-          action: null,
-          label: 'WORKGROUPS_LIST.FOLDER',
-          icon: 'ls-folder disabled-work-in-progress',
-          disabled: true,
-          hide: lsAppConfig.linshareModeProduction
-        }, {
-          action: null,
-          label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
-          icon: 'ls-upload-request disabled-work-in-progress',
-          disabled: true,
-          hide: !lsAppConfig.linshareModeProduction
-        }, {
-          action: null,
-          label: 'WORKGROUPS_LIST.PROJECT',
-          icon: 'ls-project disabled-work-in-progress',
-          disabled: true,
-          hide: !lsAppConfig.linshareModeProduction
-        }
-      ]
-    };
-
     functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT').then(function(data) {
       thisctrl.functionality = data;
       if (data.enable) {
-        thisctrl.fabButton.actions.splice(2, 0, {
-          action: function() {
-            return thisctrl.createWorkGroup();
-          },
-          label: 'WORKGROUPS_LIST.SHARED_FOLDER',
-          icon: 'ls-workgroup'
-        });
+        thisctrl.fabButton = {
+          actions: [{
+            action: function() {
+              return thisctrl.createWorkGroup();
+            },
+            label: 'WORKGROUPS_LIST.SHARED_FOLDER',
+            icon: 'zmdi zmdi-plus',
+          }]
+        };
       }
     });
 

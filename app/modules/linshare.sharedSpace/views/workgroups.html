@@ -9,54 +9,18 @@
                uib-dropdown dropdown-append-to-body auto-close="always"
                tooltip-placement="bottom" tooltip-popup-delay="500" translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
                is-open="isOpenNew" data-ng-class="{'open':isOpenNew}">
-            <a class="add-menu-group" uib-dropdown-toggle >
-              <i class="zmdi zmdi-plus"></i>
+            <a
+              class="add-menu-group"
+              data-ng-click="vm.createWorkGroup()"
+            >
+              <i
+                class="zmdi zmdi-plus"
+
+                data-ng-class="{'disabled': !vm.canCreate}"
+                data-ng-class="{'disabled':
+                !(contactsListsListVm.canCreate && contactsListsListVm.functionality.enable)}">
+              </i>
             </a>
-            <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided"
-                uib-dropdown-menu="" data-ng-class="{'open':isOpenNew}">              
-              <li role="menuitem" data-ng-show="::!linshareModeProduction">
-                <a>
-                  <i class="ls-project"></i>
-                  <span translate>WORKGROUPS_LIST.PROJECT</span>
-                </a>
-              </li>
-              <li role="menuitem" data-ng-click="vm.createWorkGroup();" data-ng-class="{'disabled': !vm.canCreate}">
-                <a>
-                  <i class="ls-workgroup"></i>
-                  <span translate>WORKGROUPS_LIST.SHARED_FOLDER</span>
-                </a>
-              </li>
-              <li role="menuitem" class="disabled-work-in-progress">
-                <a>
-                  <i class="ls-folder"></i>
-                  <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.FOLDER</span>
-                </a>
-              </li>
-              <li role="menuitem" class="disabled-work-in-progress">
-                <a>
-                  <i class="ls-upload-item"></i>
-                  <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.UPLOAD_FILE</span>
-                </a>
-              </li>
-              <li role="menuitem" class="disabled-work-in-progress">
-                <a>
-                  <i class="groups-upload-file"></i>
-                  <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.UPLOAD_FOLDER</span>
-                </a>
-              </li>
-              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="::!linshareModeProduction">
-                <a>
-                  <i class="ls-upload-request"></i>
-                  <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.UPLOAD_REQUEST</span>
-                </a>
-              </li>
-              <li role="menuitem" class="disabled-work-in-progress" data-ng-show="::!linshareModeProduction">
-                <a>
-                  <i class="ls-add-user-sm"></i>
-                  <span translate class="disabled-work-in-progress">WORKGROUPS_LIST.ADD_A_MEMBER</span>
-                </a>
-              </li>
-            </ul>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
             <div class="left-arrow actions disabled">
@@ -253,8 +217,11 @@
               </span>
               <span class="dropdown link-dropdown" uib-dropdown=""
                     is-open="isOpenToolbarMore" data-ng-class="{'open': isOpenToolbarMore}">
-                <a class="plain-text-button share-link"
-                   uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}">
+                <a
+                  data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
+                  class="plain-text-button share-link"
+                  uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
+                >
                   <i class="zmdi zmdi-more"></i>
                   <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
                 </a>
@@ -560,10 +527,13 @@
       </div>
     </div>
   </div>
-  <div id="fabButtonCtn" fab-button
-       fab-button-actions="vm.fabButton.actions"
-       fab-button-flow="$flow"
-       fab-button-toolbar="vm.fabButton.toolbar">
+  <div
+    id="fabButtonCtn"
+    data-ng-if="vm.fabButton"
+    fab-button
+    fab-button-actions="vm.fabButton.actions"
+    fab-button-flow="$flow"
+    fab-button-toolbar="vm.fabButton.toolbar">
   </div>
 </div>
 <!-- TODO: does not display  -->
