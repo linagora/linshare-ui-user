@@ -14,8 +14,7 @@
     '$translate',
     'localStorageService',
     'lsAppConfig',
-    'moment',
-    'uibDatepickerPopupConfig'
+    'moment'
   ];
 
   /**
@@ -28,8 +27,7 @@
     $translate,
     localStorageService,
     lsAppConfig,
-    moment,
-    uibDatepickerPopupConfig
+    moment
   )
   {
     var service = {
@@ -91,18 +89,6 @@
       var storedLocale = localStorageService.get('locale');
 
       return storedLocale ? storedLocale : $translate.use();
-    }
-
-    /**
-     * @name overrideDatepickerFormat
-     * @desc Override default date formats in uibDatepickerPopup
-     * @memberOf linshare.components.languageService
-     */
-    // TODO : Decorator in run.js
-    function overrideDatepickerFormat() {
-      uibDatepickerPopupConfig.datepickerPopup = lsAppConfig.locale.shortDate;
-      uibDatepickerPopupConfig.html5Types.date = lsAppConfig.locale.shortDate;
-      uibDatepickerPopupConfig.html5Types['datetime-local'] = lsAppConfig.locale.medium;
     }
 
     /**
