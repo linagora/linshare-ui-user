@@ -26,15 +26,16 @@
     'documentUtilsService',
     'filterBoxService',
     'flowUploadService',
+    'functionalityRestService',
     'lsAppConfig',
     'lsErrorCode',
     'nodesList',
     'tableParamsService',
     'toastService',
     'workgroup',
-    'workgroupRestService',
     'workgroupMembersRestService',
-    'workgroupNodesRestService'
+    'workgroupNodesRestService',
+    'workgroupRestService'
   ];
   /**
    * @namespace WorkgroupNodesController
@@ -59,15 +60,16 @@
     documentUtilsService,
     filterBoxService,
     flowUploadService,
+    functionalityRestService,
     lsAppConfig,
     lsErrorCode,
     nodesList,
     tableParamsService,
     toastService,
     workgroup,
-    workgroupRestService,
     workgroupMembersRestService,
-    workgroupNodesRestService
+    workgroupNodesRestService,
+    workgroupRestService
   )
   {
     /* jshint validthis:true */
@@ -77,7 +79,6 @@
     const TYPE_FOLDER = 'FOLDER';
 
     var newFolderName;
-
 
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
     workgroupNodesVm.areAllSameType = areAllSameType;
@@ -127,6 +128,14 @@
     function activate() {
       $translatePartialLoader.addPart('filesList');
       $translatePartialLoader.addPart('sharedspace');
+
+      workgroupNodesVm.canCopyNodeToPersonalSpace = false;
+
+      functionalityRestService
+        .getAll()
+        .then(function(functionalities) {
+          workgroupNodesVm.canCopyNodeToPersonalSpace = functionalities.INTERNAL_CAN_UPLOAD.enable;
+        });
 
       Object.assign(
         documentPreviewService,
