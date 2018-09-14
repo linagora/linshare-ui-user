@@ -109,7 +109,10 @@
                       </i>
                     </a>
                   </li>
-                  <li data-ng-class=" {'disabled': file.error && file.canBeRetried}">
+                  <li
+                    data-ng-show="uploadQueueVm.isFromMySpace"
+                    data-ng-class=" {'disabled': file.error && file.canBeRetried}"
+                  >
                     <a href="" data-ng-click="uploadQueueVm.onShare(file)" event-propagation-stop>
                       <i
                         class="zmdi zmdi-share"
@@ -195,7 +198,10 @@
                       <span translate>SELECTION_TOOLBAR.STOP</span>
                     </a>
                   </li>
-                  <li data-ng-class="{'disabled': file.error && file.canBeRetried }">
+                  <li
+                    data-ng-show="uploadQueueVm.isFromMySpace"
+                    data-ng-class="{'disabled': file.error && file.canBeRetried }"
+                  >
                     <a href="" data-ng-click="uploadQueueVm.onShare(file)" event-propagation-stop>
                       <i
                         class="zmdi zmdi-share"
