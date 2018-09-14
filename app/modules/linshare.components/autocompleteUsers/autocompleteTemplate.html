@@ -1,24 +1,51 @@
 <div class="chat-search autocomplete-search-ctn">
-  <div class="fg-line" 
-	data-ng-class="{'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)}">
-    <input id="focusInputShare"
-           name="{{::autocompleteUsersVm.name}}"
-           type="text"
-           class="form-control"
-           placeholder="{{::'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
-           autocomplete="off"
-           data-ng-model="autocompleteUsersVm.selectedUser"
-           data-ng-blur="autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail()"
-           data-ng-required="autocompleteUsersVm.required()"
-           data-typeahead-min-length="3"
-           data-typeahead-on-select="autocompleteUsersVm.onSelect()"
-           data-typeahead-wait-ms="30"
-           data-typeahead-loading="searchingContact"
-           data-typeahead-editable="false"
-           data-typeahead-no-results="autocompleteUsersVm.noResult"
-           data-typeahead-input-formatter="angular.noop"
-           data-uib-typeahead="u as autocompleteUsersVm.userRepresentation(u)
-                            for u in autocompleteUsersVm.searchUsersAccount($viewValue) | limitTo:3">
+  <script
+    type="text/ng-template"
+    id="autocompleteItemTemplate.html"
+  >
+    <div class="recipientsAutocomplete">
+      <span
+        class="firstLetterFormat"
+        data-ng-class="match.label.style"
+      >
+        {{match.label.firstLetter}}
+      </span>
+      <p class="recipientsInfo">
+        <span class="user-full-name">
+          {{match.label.name}}
+        </span>
+        <span class="email">{{match.label.info}}</span>
+      </p>
+    </div>
+  </script>
+  <div
+    class="fg-line"
+    data-ng-class="{
+    'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)
+    }"
+  >
+    <input
+      id="focusInputShare"
+      name="{{::autocompleteUsersVm.name}}"
+      type="text"
+      class="form-control"
+      placeholder="{{::'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
+      autocomplete="off"
+      data-ng-model="autocompleteUsersVm.selectedUser"
+      data-ng-blur="autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail()"
+      data-ng-required="autocompleteUsersVm.required()"
+      data-typeahead-min-length="3"
+      data-typeahead-on-select="autocompleteUsersVm.onSelect()"
+      data-typeahead-wait-ms="30"
+      data-typeahead-loading="searchingContact"
+      data-typeahead-editable="false"
+      data-typeahead-no-results="autocompleteUsersVm.noResult"
+      data-typeahead-input-formatter="angular.noop"
+      data-uib-typeahead="u as autocompleteUsersVm.userRepresentation(u)
+      for u in autocompleteUsersVm.searchUsersAccount($viewValue) | limitTo:3"
+      data-typeahead-template-url="autocompleteItemTemplate.html"
+
+    >
     <span data-ng-show="autocompleteUsersVm.onErrorEmpty()">
       {{::"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMPTY_LIST" | translate}}
     </span>
