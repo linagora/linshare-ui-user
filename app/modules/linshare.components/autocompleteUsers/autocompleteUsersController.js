@@ -234,22 +234,14 @@
      *  @name userRepresentation
      *  @desc Format the template to show depending on the user type
      *  @param {Object} data - response object reprenseting a User object
-     *  @returns {String} A template
+     *  @returns {Object} data use by template
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
-    // TODO : when uib typeahead lib will be updated, readd title="$title" in first div
     function userRepresentation(data) {
-      var template = '' +
-        '<div class="recipientsAutocomplete">' +
-        '<span class="firstLetterFormat $style">$firstLetter</span>' +
-        '<p class="recipientsInfo">' +
-        '<span class="user-full-name">$name</span>' +
-        '<span class="email">$info</span>' +
-        '</p>' +
-        '</div>';
+      var match = {};
+
       switch (data.type) {
         case 'simple':
-          template = data.identifier;
           break;
         case 'mailinglist':
           var user = {
@@ -257,34 +249,29 @@
             lastName: data.ownerLastName,
             mail: data.ownerMail
           };
-          template = template
-            .replace('$title', data.listName)
-            .replace('$style', 'ls-contact-list-item')
-            .replace('$firstLetter', '')
-            .replace('$name', data.listName)
-            .replace('$info', ownerLabel.getOwner(user));
+          match.style = 'ls-contact-list-item';
+          match.firstLetter = '';
+          match.name = data.listName;
+          match.info = ownerLabel.getOwner(user);
           break;
         case 'user':
-          template = template
-            .replace('$title', data.mail)
-            .replace('$style', '')
-            .replace('$firstLetter', data.firstName.charAt(0))
-            .replace('$name', data.firstName + ' ' + data.lastName)
-            .replace('$info', data.mail);
+          match.style = '';
+          match.firstLetter = data.firstName.charAt(0);
+          match.name = data.firstName + ' ' + data.lastName;
+          match.info = data.mail;
           break;
         case 'threadmember':
-          template = template
-            .replace('$title', data.mail)
-            .replace('$style', data.member === true ? ' firstLetterBgdGreen' : '')
-            .replace('$firstLetter', data.firstName.charAt(0))
-            .replace('$name', data.firstName + ' ' + data.lastName)
-            .replace('$info', data.mail);
+          match.style = data.member === true ? ' firstLetterBgdGreen' : '';
+          match.firstLetter = data.firstName.charAt(0);
+          match.name = data.firstName + ' ' + data.lastName;
+          match.info = data.mail;
           break;
         default:
-          template = data;
+          match = data;
           break;
-      }
-      return template;
+      };
+
+      return match;
     }
   }
 })();
