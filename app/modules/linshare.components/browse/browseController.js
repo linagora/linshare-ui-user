@@ -9,8 +9,21 @@
     .module('linshare.components')
     .controller('browseController', BrowseController);
 
-  BrowseController.$inject = ['_', '$q', '$scope', '$timeout', '$transitions', '$translate', 'itemUtilsService',
-  'lsErrorCode', 'toastService', 'workgroupRestService', 'workgroupNodesRestService'];
+  BrowseController.$inject = [
+    '_',
+    '$q',
+    '$scope',
+    '$timeout',
+    '$transitions',
+    '$translate',
+    'functionalityRestService',
+    'itemUtilsService',
+    'lsErrorCode',
+    'toastService',
+    'workgroupNodesRestService',
+    'workgroupPermissionsService',
+    'workgroupRestService'
+  ];
 
   /**
    * @namespace BrowseController
@@ -19,16 +32,25 @@
    */
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
-  function BrowseController(_, $q, $scope, $timeout, $transitions, $translate, itemUtilsService, lsErrorCode,
-      toastService, workgroupRestService, workgroupNodesRestService) {
+  function BrowseController(
+    _,
+    $q,
+    $scope,
+    $timeout,
+    $transitions,
+    $translate,
+    functionalityRestService,
+    itemUtilsService,
+    lsErrorCode,
+    toastService,
+    workgroupNodesRestService,
+    workgroupPermissionsService,
+    workgroupRestService
+  ) {
     /* jshint validthis:true */
     var browseVm = this;
-
-    const TYPE_FOLDER = 'FOLDER';
-
     var newFolderName;
-
-    browseVm.canCreateFolder = true;
+    const TYPE_FOLDER = 'FOLDER';
     browseVm.createFolder = createFolder;
     browseVm.disableFolder = disableFolder;
     browseVm.goToFolder = goToFolder;
@@ -43,6 +65,16 @@
      * @memberOf linshare.components.BrowseController
      */
     function activate() {
+      browseVm.isSharedSpace = false;
+      browseVm.canCreateFolder = false;
+
+      functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
+        .then(function(creationRight) {
+          browseVm.canCreateFolder =
+            (browseVm.isSharedSpace && creationRight.enable) ||
+            (!browseVm.isSharedSpace);
+      });
+
       $translate([
         'ACTION.NEW_FOLDER'
       ]).then(function(translations) {
@@ -176,13 +208,27 @@
       if (_.isNil(browseVm.currentFolder)) {
         browseVm.currentFolder = {};
         browseVm.restService = workgroupRestService;
-        browseVm.restService.getList().then(function(currentList) {
-          browseVm.currentList = _.orderBy(currentList, 'modificationDate', 'desc');
-        });
         browseVm.isSharedSpace = true;
+
+        browseVm.restService.getList()
+          .then(function(currentList) {
+            browseVm.currentList = _.orderBy(currentList, 'modificationDate', 'desc');
+            return workgroupPermissionsService.getWorkgroupsPermissions(currentList);
+          })
+          .then(function(workgroupsPermissions) {
+            browseVm.permissions = workgroupPermissionsService.formatPermissions(workgroupsPermissions);
+          });
       } else {
         browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
         browseVm.isSharedSpace = false;
+
+        workgroupPermissionsService
+          .getWorkgroupsPermissions(
+            [{ uuid: browseVm.currentFolder.workGroup }]
+          )
+          .then(function(workgroupsPermissions) {
+            browseVm.permissions = workgroupPermissionsService.formatPermissions(workgroupsPermissions);
+          });
       }
       browseVm.validateAction = browseVm.isMove ? moveNode : copyNode;
     }

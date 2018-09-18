@@ -269,7 +269,7 @@
         default:
           match = data;
           break;
-      };
+      }
 
       return match;
     }

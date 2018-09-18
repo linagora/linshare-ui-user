@@ -4,35 +4,73 @@
 >
   <div class="lv-item">
     <div class="card col-xs-12" id="content-ctn-sidebar">
-      <div x-ng-show="workgroupMemberVm.currentWorkgroupMember.admin" class="custom-list-container clearfix">
+      <div
+        data-ng-if="mainVm.sidebar.getData().permissions[
+        mainVm.sidebar.getData().currentSelectedDocument.current.uuid
+        ].MEMBER.CREATE || mainVm.sidebar.getData().permissions.MEMBER.CREATE"
+        class="custom-list-container clearfix"
+      >
         <div class="recipients-form-sections m-t-30 clearfix">
           <h2 class="pull-left headerSubCtn">
             <span translate>MEMBER_TAB.ADD_MEMBER</span>
           </h2>
         </div>
-        <form role="form" class="clearfix fields-add-member no-right-inline-btn m-b-40" >
+        <form
+          role="form"
+          class="clearfix fields-add-member no-right-inline-btn m-b-40"
+        >
           <div class="form-group fg-line group-member-field-ctn col-xs-12 no-padding">
-            <div class="select-chosen-wkgps col-xs-3 no-padding pull-left">
-              <!-- TODO: To replace by a dropdown to remove chosen dependency -->
-              <select name="rights_select" id="rights_select" chosen
-                      data-placeholder-text-single="'{{'MEMBER_TAB.WRITE' | translate}}'"
-                      disable-search="true"
-                      allow-single-deselect="true"
-                      x-ng-model="workgroupMemberVm.memberRole">
-                <option x-ng-repeat="role in workgroupMemberVm.membersRights" value="{{role}}">
-                  {{'MEMBER_TAB.'+ role | translate}}
-                </option>
-              </select>
+            <span
+              uib-dropdown
+              dropdown-append-to-body
+              class="dropdown link-dropdown actions col-xs-5"
+              auto-close="always"
+              is-open="isOpenMemberRights"
+              data-ng-class="{'open':isOpenMemberRights}"
+            >
+              <button
+                type="button"
+                class="btn waves-effect"
+                uib-dropdown-toggle
+              >
+                <span>{{"MEMBER_TAB." + workgroupMemberVm.memberRole.name | translate}}</span>
+                <span class="caret"></span>
+              </button>
+              <ul
+                uib-dropdown-menu
+                class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown"
+              >
+                <li data-ng-repeat="role in workgroupMemberVm.membersRights">
+                  <a
+                    href=""
+                    data-ng-click="workgroupMemberVm.memberRole = role"
+                    data-ng-class="{'active-check': workgroupMemberVm.memberRole.uuid === role.uuid }"
+                  >
+                    {{"MEMBER_TAB." + role.name | translate}}
+                  </a>
+                </li>
+              </ul>
+            </span>
+            <div
+              class="col-xs-7 pull-right"
+              ls-autocomplete-user="THREAD_MEMBERS"
+              data-with-email="false"
+              data-ls-complete-thread-uuid="{{mainVm.sidebar.getData().currentSelectedDocument.current.uuid}}"
+              data-on-select-function="workgroupMemberVm.addMember"
+              data-selected-users-list="workgroupMemberVm.members"
+            >
             </div>
-            <div class="col-xs-8 pull-right" ls-autocomplete-user="THREAD_MEMBERS" data-with-email="false"
-                 data-ls-complete-thread-uuid="{{mainVm.sidebar.getData().currentSelectedDocument.current.uuid}}"
-                 data-on-select-function="workgroupMemberVm.addMember"
-                 data-selected-users-list="mainVm.sidebar.getData().currentSelectedDocument.current.members"></div>
           </div>
-          <button class="btn btn-primary add-btn btn-block" x-ng-if="mainVm.sidebar.getData().isExistingMember === false">
+          <button
+            class="btn btn-primary add-btn btn-block"
+            data-ng-if="mainVm.sidebar.getData().isExistingMember === false"
+          >
             {{'MEMBER_TAB.ADD' | translate}}
           </button>
-          <button class="btn btn-primary update-btn btn-block" x-ng-if="mainVm.sidebar.getData().isExistingMember === true">
+          <button
+            class="btn btn-primary update-btn btn-block"
+            data-ng-if="mainVm.sidebar.getData().isExistingMember === true"
+          >
             {{'MEMBER_TAB.UPDATE' | translate}}
           </button>
         </form>
@@ -41,7 +79,7 @@
         <div class="custom-header-list">
           <h2 class="pull-left headerSubCtn existing-member">
             <span translate>MEMBER_TAB.NUM_MEMBER</span>
-            <span>{{mainVm.sidebar.getData().currentSelectedDocument.current.members.length}}</span>
+            <span>{{workgroupMemberVm.members.length}}</span>
             <span
               class="pull-right actions members-options-toggle"
               data-ng-click="advancedMemberSearchOptions = !advancedMemberSearchOptions"
@@ -60,58 +98,89 @@
           >
             <div class="search-style autocomplete-search-ctn">
               <div class="fg-line">
-                <input type="text" class="form-control"
-                       autocomplete="off"
-                       x-ng-model="workgroupMemberVm.membersSearchFilter.$"
-                       placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER_EXISTING_MEMBERS' | translate}}"
-                       x-ng-change="mainVm.sidebar.getData().updateParams()">
+                <input
+                  type="text"
+                  class="form-control"
+                  autocomplete="off"
+                  data-ng-model="workgroupMemberVm.searchMemberInput"
+                  placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER_EXISTING_MEMBERS' | translate}}"
+                  data-ng-change="workgroupMemberVm.updateInputFilterOnCurrentMembers(workgroupMemberVm.searchMemberInput)"
+                >
               </div>
             </div>
             <div class="dropdown-filters">
-              <span uib-dropdown dropdown-append-to-body class="dropdown link-dropdown"
-                    is-open="isOpenMemberOrder" data-ng-class="{'open':isOpenMemberOrder}"
-                    auto-close="outsideClick">
-                <button class="plain-text-button share-link waves-effect"
-                   uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}">
+              <span
+                uib-dropdown
+                dropdown-append-to-body
+                class="dropdown link-dropdown"
+                is-open="isOpenMemberOrder"
+                data-ng-class="{'open':isOpenMemberOrder}"
+                auto-close="outsideClick"
+              >
+                <button
+                  class="plain-text-button share-link waves-effect"
+                  uib-dropdown-toggle title="{{'BOUTON_LABEL_TITLE.MORE_ACTIONS' | translate}}"
+                >
                   <i class="zmdi zmdi-sort-asc"></i>
                 </button>
-                <div uib-dropdown-menu class="uib-dropdown-menu dropdown-menu-right dm-icon double-drop"
-                     data-ng-class="{'open':isOpenMemberOrder}">
+                <div
+                  uib-dropdown-menu
+                  class="uib-dropdown-menu dropdown-menu-right dm-icon double-drop"
+                  data-ng-class="{'open':isOpenMemberOrder}"
+                >
                   <div class="list-menu sort-dropdown">
                     <p>{{"MEMBER_TAB.SORT_BY" | translate}}</p>
                     <ul class="dropdown-menu dm-icon sort-menu">
-                      <li role="menuitem" x-ng-if="mainVm.sidebar.getData().linshareModeProduction === false">
-                        <a x-ng-click="mainVm.sidebar.getData().sortSearchMember($event)">
-                          <span class="caret-area">
-                            <i x-ng-show="mainVm.sidebar.getData().toggleSelectedSortMembers" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!mainVm.sidebar.getData().toggleSelectedSortMembers" class="zmdi zmdi-caret-up"></i>
-                          </span>
-                         {{'MEMBER_TAB.JOINING_DATE' | translate}}
-                        </a>
-                      </li>
                       <li role="menuitem">
-                        <a x-ng-click="workgroupMemberVm.changePropertyOrderBy('firstName', $event)" class="selected-sorting">
+                        <a
+                          data-ng-click="workgroupMemberVm.changePropertyOrderBy('firstName', $event)"
+                          class="selected-sorting"
+                        >
                           <span class="caret-area">
-                            <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              data-ng-show="!workgroupMemberVm.propertyOrderByAsc"
+                              class="zmdi zmdi-caret-down"
+                            >
+                            </i>
+                            <i
+                              data-ng-show="workgroupMemberVm.propertyOrderByAsc"
+                              class="zmdi zmdi-caret-up"
+                            >
+                            </i>
                           </span>
                          {{'MEMBER_TAB.SORT_MEMBER.FIRSTNAME' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a x-ng-click="workgroupMemberVm.changePropertyOrderBy('lastName', $event)">
+                        <a data-ng-click="workgroupMemberVm.changePropertyOrderBy('lastName', $event)">
                           <span class="caret-area">
-                            <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              data-ng-show="!workgroupMemberVm.propertyOrderByAsc"
+                              class="zmdi zmdi-caret-down"
+                            >
+                            </i>
+                            <i
+                              data-ng-show="workgroupMemberVm.propertyOrderByAsc"
+                              class="zmdi zmdi-caret-up"
+                            >
+                            </i>
                           </span>
                           {{'MEMBER_TAB.SORT_MEMBER.LASTNAME' | translate}}
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a x-ng-click="workgroupMemberVm.changePropertyOrderBy('role', $event)">
+                        <a data-ng-click="workgroupMemberVm.changePropertyOrderBy('role', $event)">
                           <span class="caret-area">
-                           <i x-ng-show="!workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="workgroupMemberVm.propertyOrderByAsc" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              data-ng-show="!workgroupMemberVm.propertyOrderByAsc"
+                              class="zmdi zmdi-caret-down"
+                            >
+                            </i>
+                            <i
+                              data-ng-show="workgroupMemberVm.propertyOrderByAsc"
+                              class="zmdi zmdi-caret-up"
+                            >
+                            </i>
                           </span>
                           {{'MEMBER_TAB.USER_RIGHTS' | translate}}
                         </a>
@@ -120,26 +189,17 @@
                   </div>
                   <div class="list-menu">
                     <p>{{"MEMBER_TAB.FILTER_BY" | translate}}</p>
-                    <ul class="dropdown-menu dm-icon filter-menu">
+                    <ul
+                      class="dropdown-menu dm-icon filter-menu"
+                      data-ng-repeat="role in workgroupMemberVm.membersRights"
+                    >
                       <li>
-                        <a href=""
-                           x-ng-class="{'active-check': workgroupMemberVm.membersSearchFilter.role === 'admin'}"
-                           x-ng-click="workgroupMemberVm.changeFilterByProperty('admin')">
-                          {{"MEMBER_TAB.ADMIN_RIGHTS" | translate}}
-                        </a>
-                      </li>
-                      <li>
-                        <a href=""
-                           x-ng-class="{'active-check': workgroupMemberVm.membersSearchFilter.role === 'normal'}"
-                           x-ng-click="workgroupMemberVm.changeFilterByProperty('normal')">
-                          {{"MEMBER_TAB.WRITE_RIGHTS" | translate}}
-                        </a>
-                      </li>
-                      <li >
-                        <a href=""
-                           x-ng-class="{'active-check': workgroupMemberVm.membersSearchFilter.role === 'restricted'}"
-                           x-ng-click="workgroupMemberVm.changeFilterByProperty('restricted')">
-                          {{"MEMBER_TAB.READ_RIGHTS" | translate}}
+                        <a
+                          href=""
+                          data-ng-class="{'active-check': workgroupMemberVm.membersSearchFilter.role.uuid === role.uuid}"
+                          data-ng-click="workgroupMemberVm.updateRoleFilterOnCurrentMembers(role)"
+                        >
+                          {{"MEMBER_TAB." + role.name + "_RIGHTS" | translate}}
                         </a>
                       </li>
                     </ul>
@@ -148,65 +208,77 @@
               </span>
             </div>
           </form>
-          <a x-ng-if="mainVm.sidebar.getData().linshareModeProduction === false"
-             href="javascript:void(0)" class="r-a-lin"
-             x-ng-click="workgroupMemberVm.loadSidebarContent('multi-select-rights')"
-             title="{{'MEMBER_TAB.MULTI_SELECT' | translate}}">
-            {{"MEMBER_TAB.MULTI_SELECT" | translate}}
-          </a>
         </div>
         <div class="existing-member-list-ctn">
-          <div class="flex-ctn"
-               x-ng-repeat="workgroupMember in mainVm.sidebar.getData().currentSelectedDocument.current.members |
-                           filter: workgroupMemberVm.membersSearchFilter | orderBy: '-' ">
+          <div
+            class="flex-ctn"
+            data-ng-repeat="workgroupMember in workgroupMemberVm.members |
+            filter: workgroupMemberVm.membersSearchFilter | orderBy: '-' "
+          >
             <div class="item-l">
               <span class="first-letter text-uppercase">
-                {{workgroupMember.firstName ?
-                  workgroupMember.firstName.charAt(0)
-                  : workgroupMember.mail}}
+                {{workgroupMember.account.firstName ?
+                workgroupMember.account.firstName.charAt(0) :
+                workgroupMember.account.mail}}
               </span>
             </div>
             <div class="item-mid">
-              <div class="name">{{workgroupMember.firstName}} {{workgroupMember.lastName}}</div>
-              <div class="info-item-member" x-ng-switch="workgroupMember.role">
-                <i class="zmdi zmdi-account"></i>
-                <span x-ng-switch-when="admin">{{"MEMBER_TAB.ADMIN" | translate}}</span>
-                <span x-ng-switch-when="normal">{{"MEMBER_TAB.WRITE" | translate}}</span>
-                <span x-ng-switch-when="restricted">{{"MEMBER_TAB.READ" | translate}}</span>
+              <div class="name">
+                {{workgroupMember.account.name}}
               </div>
-              <div class="info-item-member" title="{{'MEMBER_TAB.NOTIFICATION_ACTIVATED' | translate}}"
-                   x-ng-if="mainVm.sidebar.getData().linshareModeProduction == false" >
-                <i class="zmdi zmdi-notifications-none"></i>
-                <span>{{"MEMBER_TAB.ACTIVATED" | translate}}</span>
+              <div class="info-item-member">
+                <i class="zmdi zmdi-account"></i>
+                <span>
+                  {{"MEMBER_TAB." + workgroupMember.role.name | translate}}
+                </span>
               </div>
             </div>
-            <div x-ng-show="workgroupMemberVm.currentWorkgroupMember.admin" class="item-r actions">
-                          <span uib-dropdown dropdown-append-to-body class="dropdown link-dropdown actions"
-                                auto-close="always" is-open="isOpenRights" data-ng-class="{'open':isOpenRights}">
-                            <a class="plain-text-button share-link" href="javascript:void(0)"
-                               uib-dropdown-toggle title="{{'MEMBER_TAB.EDIT_RIGHTS' | translate}}">
-                              <i class="zmdi zmdi-edit"></i>
-                            </a>
-                            <ul uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown">
-                              <li x-ng-repeat="role in workgroupMemberVm.membersRights" x-ng-switch="role">
-                                <a href="" x-ng-click="workgroupMemberVm.updateMember(workgroupMember, 'admin')"
-                                   x-ng-switch-when="ADMIN" x-ng-class="{'active-check': workgroupMember.admin == true}">
-                                  {{"MEMBER_TAB." + role | translate}}
-                                </a>
-                                <a href="" x-ng-click="workgroupMemberVm.updateMember(workgroupMember, 'normal')"
-                                   x-ng-switch-when="WRITE" x-ng-class="{'active-check': workgroupMember.role == 'normal'}">
-                                  {{"MEMBER_TAB." + role | translate}}
-                                </a>
-                                <a href="" x-ng-click="workgroupMemberVm.updateMember(workgroupMember, 'readonly')"
-                                   x-ng-switch-when="READ" x-ng-class="{'active-check': workgroupMember.readonly == true}">
-                                  {{"MEMBER_TAB." + role | translate}}
-                                </a>
-                              </li>
-                            </ul>
-                          </span>
-              <a href="javascript:void(0)"
-                 x-ng-click="workgroupMemberVm.removeMember(mainVm.sidebar.getData().currentSelectedDocument.current, workgroupMember)"
-                 title="{{'MEMBER_TAB.REMOVE_TEAM_MEMBER' | translate}}">
+            <div
+              class="item-r actions"
+            >
+              <span
+                uib-dropdown
+                dropdown-append-to-body
+                class="dropdown link-dropdown actions"
+                auto-close="always"
+                is-open="isOpenRights"
+                data-ng-class="{'open':isOpenRights}"
+                data-ng-if="mainVm.sidebar.getData().permissions[
+                mainVm.sidebar.getData().currentSelectedDocument.current.uuid
+                ].MEMBER.UPDATE || mainVm.sidebar.getData().permissions.MEMBER.UPDATE"
+              >
+                <a
+                  class="plain-text-button share-link"
+                  href="javascript:void(0)"
+                  uib-dropdown-toggle title="{{'MEMBER_TAB.EDIT_RIGHTS' | translate}}"
+                >
+                  <i class="zmdi zmdi-edit"></i>
+                </a>
+                <ul
+                  uib-dropdown-menu
+                  class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown"
+                >
+                  <li data-ng-repeat="role in workgroupMemberVm.membersRights">
+                    <a
+                      href=""
+                      data-ng-click="workgroupMemberVm.updateMember(workgroupMember, role)"
+                      data-ng-class="{'active-check': workgroupMember.role.uuid === role.uuid }"
+                    >
+                      {{"MEMBER_TAB." + role.name | translate}}
+                    </a>
+                  </li>
+                </ul>
+              </span>
+              <a
+                data-ng-if="mainVm.sidebar.getData().permissions[
+                mainVm.sidebar.getData().currentSelectedDocument.current.uuid
+                ].MEMBER.DELETE || mainVm.sidebar.getData().permissions.MEMBER.DELETE"
+                href="javascript:void(0)"
+                data-ng-click="workgroupMemberVm.removeMember(
+                mainVm.sidebar.getData().currentSelectedDocument.current, workgroupMember
+                )"
+                title="{{'MEMBER_TAB.REMOVE_TEAM_MEMBER' | translate}}"
+              >
                 <i class="zmdi zmdi-close"></i>
               </a>
             </div>
@@ -220,8 +292,11 @@
   TODO once the property userMail will be changed to mail, use
   mainVm.sidebar.getData().currentSelectedDocument.current.members for the attribute
   create-contacts-list-contacts-to-be-added
+  TODO: Check if with new members object it can be improved
 -->
 <div
+  data-ng-if="mainVm.sidebar.getData().functionalities.contactsList.enable"
   create-contacts-list
   create-contacts-list-contacts-to-be-added="mainVm.sidebar.getData().currentSelectedDocument.membersForContactsList"
-></div>
+>
+</div>

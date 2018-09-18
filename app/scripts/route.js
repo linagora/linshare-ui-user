@@ -191,7 +191,7 @@
               $transition$.abort();
               $state.go('home');
             }
-          },
+          }
         }
       })
       .state('sharedspace.all', {
@@ -201,7 +201,14 @@
         resolve: {
           workgroups: function(workgroupRestService) {
             return workgroupRestService.getList();
-          }
+          },
+          workgroupsPermissions: function(workgroups, workgroupPermissionsService) {
+            return workgroupPermissionsService
+              .getWorkgroupsPermissions(workgroups)
+              .then(function(workgroupsPermissions) {
+                return workgroupPermissionsService.formatPermissions(workgroupsPermissions);
+              });
+          },
         }
       })
       .state('sharedspace.workgroups', {
@@ -230,7 +237,16 @@
             return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
               return workgroup;
             });
-          }
+          },
+          workgroupPermissions: function(workgroup, workgroupPermissionsService) {
+            return workgroupPermissionsService
+              .getWorkgroupsPermissions([workgroup])
+              .then(function(workgroupPermissions) {
+                const permissions = workgroupPermissionsService.formatPermissions(workgroupPermissions);
+
+                return permissions[Object.keys(permissions)[0]];
+              });
+          },
         }
       })
       .state('sharedspace.workgroups.root_redirect', {
@@ -265,7 +281,16 @@
             return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
               return workgroup;
             });
-          }
+          },
+          workgroupPermissions: function(workgroup, workgroupPermissionsService) {
+            return workgroupPermissionsService
+              .getWorkgroupsPermissions([workgroup])
+              .then(function(workgroupPermissions) {
+                const permissions = workgroupPermissionsService.formatPermissions(workgroupPermissions);
+
+                return permissions[Object.keys(permissions)[0]];
+              });
+          },
         }
       })
       .state('sharedspace.workgroups.folder_redirect', {

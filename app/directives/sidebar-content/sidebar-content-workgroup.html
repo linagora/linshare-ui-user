@@ -21,7 +21,14 @@
             <div data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-details.html'"></div>
           </md-content>
         </md-tab>
-        <md-tab id="tab2" label="{{'MEMBER_TAB.TITLE' | translate}}" class="col-xs-4 noPadding disabled">
+        <md-tab
+          data-ng-if="mainVm.sidebar.getData().permissions[
+          mainVm.sidebar.getData().currentSelectedDocument.current.uuid
+          ].MEMBER.READ || mainVm.sidebar.getData().permissions.MEMBER.READ"
+          id="tab2"
+          label="{{'MEMBER_TAB.TITLE' | translate}}"
+          class="col-xs-4 noPadding disabled"
+        >
           <md-content
             class="md-padding"
             data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-members.html'"

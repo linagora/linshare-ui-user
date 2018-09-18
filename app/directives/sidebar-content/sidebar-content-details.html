@@ -83,7 +83,10 @@
                   </div>
                 </div>
                 <!-- TODO: Set the appropriate action links except for from the last item for the my files view-->
-                <div class="visible-xs clearfix sidebar-toolbar">
+                <div
+                  data-ng-show="mainVm.sidebar.getData().linshareModeProduction === false"
+                  class="visible-xs clearfix sidebar-toolbar"
+                >
                   <ul class="actions col-xs-12" data-ng-show="mainVm.sidebar.getData().currentPage == 'my_files'">
                     <li data-ng-click="mainVm.sidebar.getData().deleteDocuments(
                                                 mainVm.sidebar.getData().currentSelectedDocument.current)"

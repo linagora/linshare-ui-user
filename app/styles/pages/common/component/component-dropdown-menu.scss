@@ -62,6 +62,9 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   > li {
     border-bottom: 1px solid #eee;
   }
+  > li > * > a {
+    padding: 8px 17px;
+  }
   li a, li span {
     margin-left: 5px;
     transition: background-color;

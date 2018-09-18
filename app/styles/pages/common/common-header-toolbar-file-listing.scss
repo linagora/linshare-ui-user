@@ -434,7 +434,8 @@
   i.disable-link,
   .disable-link:hover,
   .disable-link *,
-  .disable-link *:hover {
+  .disable-link *:hover,
+  span.dropdown.link-dropdown.disable-link > a span {
     pointer-events: none !important;
     font-weight: inherit !important;
     color: #C9C9C9 !important;

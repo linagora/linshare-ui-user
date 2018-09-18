@@ -10,16 +10,18 @@
     .controller('WorkGroupMembersController', workGroupMembersController);
 
   workGroupMembersController.$inject = [
-    '_',
-    '$q',
-    '$translate',
     '$filter',
+    '$q',
     '$scope',
-    'lsAppConfig',
-    'workgroupMembersRestService',
-    'dialogService',
+    '$translate',
     '$translatePartialLoader',
-    'toastService'
+    '_',
+    'authenticationRestService',
+    'dialogService',
+    'lsAppConfig',
+    'toastService',
+    'workgroupMembersRestService',
+    'workgroupRolesRestService'
   ];
 
   /**
@@ -28,37 +30,44 @@
    * @memberOf LinShare.sharedSpace
    */
   function workGroupMembersController(
-    _,
-    $q,
-    $translate,
     $filter,
+    $q,
     $scope,
-    lsAppConfig,
-    workgroupMembersRestService,
-    dialogService,
+    $translate,
     $translatePartialLoader,
-    toastService
+    _,
+    authenticationRestService,
+    dialogService,
+    lsAppConfig,
+    toastService,
+    workgroupMembersRestService,
+    workgroupRolesRestService
   ) {
     /* jshint validthis: true */
     var workgroupMemberVm = this;
 
-    const ROLE_ADMIN = 'admin';
-    const ROLE_NORMAL = 'normal';
-    const ROLE_READONLY = 'readonly';
-
     workgroupMemberVm.addMember = addMember;
-    workgroupMemberVm.changeFilterByProperty = changeFilterByProperty;
+    workgroupMemberVm.updateRoleFilterOnCurrentMembers = updateRoleFilterOnCurrentMembers;
     workgroupMemberVm.changePropertyOrderBy = changePropertyOrderBy;
-    workgroupMemberVm.membersRights = lsAppConfig.roles;
+    workgroupMemberVm.removeMember = removeMember;
+    workgroupMemberVm.updateInputFilterOnCurrentMembers = updateInputFilterOnCurrentMembers;
+    workgroupMemberVm.updateMember = updateMember;
+
+    workgroupMemberVm.membersRights = {};
+    workgroupMemberVm.searchMemberInput = '';
     workgroupMemberVm.membersSearchFilter = {
-      $: '',
-      role: ''
+      account: {
+        mail: undefined,
+        name: undefined
+      },
+      role: {
+        uuid: undefined
+      }
     };
     workgroupMemberVm.propertyFilter = '';
     workgroupMemberVm.propertyOrderBy = 'firstName';
     workgroupMemberVm.propertyOrderByAsc = true;
-    workgroupMemberVm.removeMember = removeMember;
-    workgroupMemberVm.updateMember = updateMember;
+    workgroupMemberVm.members = [];
 
     activate();
 
@@ -70,18 +79,34 @@
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
     function activate() {
-      // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
-      $translatePartialLoader.addPart('notification');
-      workgroupMemberVm.memberRole = workgroupMemberVm.membersRights.write;
       workgroupMemberVm.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
 
+      $translatePartialLoader.addPart('notification');
+      workgroupRolesRestService.getList().then(function(roles) {
+        workgroupMemberVm.membersRights = roles;
+        workgroupMemberVm.memberRole = workgroupMemberVm.membersRights[0];
+      });
+      // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
       $scope.$watch(function() {
         return $scope.mainVm.sidebar.getData().currentSelectedDocument.current;
       }, function(currentWorkGroup) {
-        workgroupMembersRestService.get(currentWorkGroup.uuid, $scope.userLogged.uuid).then(function(member) {
-          workgroupMemberVm.currentWorkgroupMember = member;
-          $scope.mainVm.sidebar.addData('currentWorkgroupMember', member);
-        });
+        return $q
+          .all([
+            authenticationRestService.getCurrentUser(),
+            workgroupMembersRestService.getList(currentWorkGroup.uuid)
+          ])
+          .then(function(promises) {
+            const loggedUser = promises[0];
+            const members = promises[1];
+            const currentMember = _.find(members, {'uuid': loggedUser.uuid});
+
+            workgroupMemberVm.currentWorkgroupMember = currentMember;
+            workgroupMemberVm.members = members;
+
+            // TODO SideEffect Power!
+            $scope.mainVm.sidebar.addData('currentWorkgroupMember', currentMember );
+          });
+
       }, true);
     }
 
@@ -93,12 +118,6 @@
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
     function addMember(member, workgroupMembers) {
-      var jsonMember = {
-        userMail: member.mail,
-        userDomainId: member.domain,
-        readonly: workgroupMemberVm.memberRole === workgroupMemberVm.membersRights.readonly,
-        admin: workgroupMemberVm.memberRole === workgroupMemberVm.membersRights.admin
-      };
       var currentWorkgroupMember = workgroupMembers.filter(function(workgroupMember) {
         return workgroupMember.userUuid === member.userUuid;
       });
@@ -111,24 +130,20 @@
             lastName: member.lastName
           }
         });
-      } else {
-        workgroupMembersRestService
-          .create(workgroupMemberVm.currentWorkGroup.current.uuid, jsonMember)
-          .then(function(data) {
-            workgroupMembers.push(data.plain());
-          });
+        return;
       }
-    }
 
-    /**
-     * @name changeFilterByProperty
-     * @desc Manage filter options
-     * @param {string} filterParam - name of property for filter
-     * @memberOf LinShare.sharedSpace.workGroupMembersController
-     */
-    function changeFilterByProperty(filterParam) {
-      workgroupMemberVm.membersSearchFilter.role =
-        workgroupMemberVm.membersSearchFilter.role === filterParam ? '' : filterParam;
+      workgroupMembersRestService
+        .create(
+          formatWorkgroupMember(
+            workgroupMemberVm.currentWorkGroup.current,
+            member,
+            workgroupMemberVm.memberRole
+          )
+        )
+        .then(function(data) {
+          workgroupMembers.push(data.plain());
+        });
     }
 
     /**
@@ -186,7 +201,12 @@
 
         return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
       }).then(function() {
-        _.remove(currentWorkgroup.members, member);
+        return workgroupMembersRestService.remove(
+          workgroupMemberVm.currentWorkGroup.current.uuid,
+          member.uuid
+        );
+      }).then(function() {
+        _.remove(workgroupMemberVm.members, member);
         toastService.success({
           key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
           params: {
@@ -195,10 +215,6 @@
           }
         });
 
-        return workgroupMembersRestService.remove(
-          workgroupMemberVm.currentWorkGroup.current.uuid,
-          member.userUuid
-        );
       });
     }
 
@@ -206,27 +222,58 @@
      * @name updateMember
      * @desc Update member
      * @param {Object} member - Member to update
-     * @param {string} role - Role of member
+     * @param {Role} role - A {@link Role} object.
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
     function updateMember(member, role) {
+      //TODO Nice side-effect here!
       member.role = role;
-      if (role === ROLE_ADMIN) {
-        member.admin = true;
-        member.readonly = false;
-      }
-      if (role === ROLE_READONLY) {
-        member.admin = false;
-        member.readonly = true;
-      }
-      if (role === ROLE_NORMAL) {
-        member.admin = false;
-        member.readonly = false;
-      }
-      workgroupMembersRestService.update(workgroupMemberVm.currentWorkGroup.current.uuid, member)
-        .then(function(updatedMember) {
-          member = updatedMember;
-        });
+
+      workgroupMembersRestService.update(
+        formatWorkgroupMember(
+          workgroupMemberVm.currentWorkGroup.current,
+          member,
+          role
+        )
+      );
+    }
+
+    /**
+     * @name formatWorkgroupMember
+     * @desc Update member
+     * @param {Object} workgroup - Current workgroup
+     * @param {Object} member - Member to update
+     * @param {Role} role - A {@link Role} object.
+     * @returns {WorkgroupMember} A {@link WorkgroupMember} object.
+     * @memberOf LinShare.sharedSpace.workGroupMembersController
+     */
+    function formatWorkgroupMember(workgroup, member, role) {
+      return {
+        role: {
+          uuid: role.uuid
+        },
+        node: {
+          uuid: workgroupMemberVm.currentWorkGroup.current.uuid
+        },
+        account: {
+          uuid: member.account ? member.account.uuid : member.userUuid
+        }
+      };
+    }
+
+    // TODO DOC
+    function updateInputFilterOnCurrentMembers(value) {
+      workgroupMemberVm.membersSearchFilter.account = {
+        mail: value !== '' ? value : undefined,
+        name: value !== '' ? value : undefined
+      };
+    }
+
+    // TODO DOC
+    function updateRoleFilterOnCurrentMembers(role) {
+      workgroupMemberVm.membersSearchFilter.role.uuid === role.uuid ?
+        workgroupMemberVm.membersSearchFilter.role.uuid = undefined:
+        workgroupMemberVm.membersSearchFilter.role.uuid = role.uuid;
     }
   }
 })();

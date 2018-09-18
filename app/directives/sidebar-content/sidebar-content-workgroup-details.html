@@ -37,7 +37,10 @@
         </div>
       </div>
       <!-- TODO: Set the appropriate action links -->
-      <div class="visible-xs clearfix sidebar-toolbar">
+      <div
+        data-ng-show="mainVm.sidebar.getData().linshareModeProduction === false"
+        class="visible-xs clearfix sidebar-toolbar"
+      >
           <ul class="actions col-xs-12">
             <li class="col-xs-3">
               <a x-ng-click="">

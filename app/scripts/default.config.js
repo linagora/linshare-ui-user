@@ -34,11 +34,6 @@
       loginWithMailOnly: true,
       production: true,
       rejectedChar: ['<', '>', ':', '"', '/', '\\', '|', '?', '*', ','],
-      roles: {
-        admin: 'ADMIN',
-        write: 'WRITE',
-        readonly: 'READ'
-      },
       flowFactoryProviderDefaults : {
         /* Do not update this value. It is not yet supported by the backend. */
         simultaneousUploads: 3,

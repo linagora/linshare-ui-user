@@ -24,12 +24,17 @@ angular.module('linshare.sharedSpace')
     toastService,
     workgroupMembersRestService,
     workgroups,
-    workgroupRestService
+    workgroupRestService,
+    workgroupPermissionsService,
+    workgroupsPermissions
   ) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
     var thisctrl = this;
+    thisctrl.functionalities = {};
+    thisctrl.permissions = workgroupsPermissions;
+    thisctrl.canDeleteWorkgroups = false;
     thisctrl.canCreate = true;
     thisctrl.goToSharedSpaceTarget = goToSharedSpaceTarget;
     thisctrl.lsAppConfig = lsAppConfig;
@@ -57,11 +62,9 @@ angular.module('linshare.sharedSpace')
       }
     });
     thisctrl.deleteWorkGroup = deleteWorkGroup;
-    thisctrl.memberRole = 'admin';
     thisctrl.mdtabsSelection = {
       selectedIndex: 0
     };
-    thisctrl.checkDocumentMemberRights = checkDocumentMemberRights;
 
     var swalNewWorkGroupName, invalideNameTranslate;
 
@@ -116,9 +119,11 @@ angular.module('linshare.sharedSpace')
       thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
     };
 
-    functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT').then(function(data) {
-      thisctrl.functionality = data;
-      if (data.enable) {
+    functionalityRestService.getAll('WORK_GROUP__CREATION_RIGHT').then(function(functionalities) {
+      thisctrl.functionalities.contactsList = functionalities.CONTACTS_LIST__CREATION_RIGHT;
+      thisctrl.functionalities.workgroup = functionalities.WORK_GROUP__CREATION_RIGHT;
+
+      if (functionalities.WORK_GROUP__CREATION_RIGHT.enable) {
         thisctrl.fabButton = {
           actions: [{
             action: function() {
@@ -179,8 +184,6 @@ angular.module('linshare.sharedSpace')
           }
         });
 
-        exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController();
-
         thisctrl.flagsOnSelectedPages[currentPage] = true;
       } else {
         thisctrl.selectedDocuments = _.xor(thisctrl.selectedDocuments, dataOnPage);
@@ -194,6 +197,8 @@ angular.module('linshare.sharedSpace')
         });
         thisctrl.flagsOnSelectedPages[currentPage] = false;
       }
+
+      thisctrl.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(thisctrl.selectedDocuments, thisctrl.permissions);
     };
 
     function deleteWorkGroup(workgroups) {
@@ -221,7 +226,8 @@ angular.module('linshare.sharedSpace')
       documentUtilsService.selectDocument(thisctrl.selectedDocuments, document);
 
       updateFlagsOnSelectedPages();
-      exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController();
+
+      thisctrl.canDeleteWorkgroups = $filter('canDelete')(thisctrl.selectedDocuments, thisctrl.permissions);
     }
 
     /**
@@ -334,6 +340,15 @@ angular.module('linshare.sharedSpace')
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           thisctrl.canCreate = true;
+          return workgroupPermissionsService
+            .getWorkgroupsPermissions(workgroups);
+        })
+        .then(function(workgroupsPermissions) {
+          thisctrl.permissions = Object.assign(
+            {},
+            thisctrl.permissions,
+            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
+          );
         })
         .catch(function(response) {
           //TODO - Manage error from back
@@ -361,77 +376,6 @@ angular.module('linshare.sharedSpace')
         $timeout(function() {
           renameFolder(workgroup, 'td[uuid=""] .file-name-disp');
         }, 0);
-      }
-    }
-
-    /**
-     * @name checkDocumentMemberRights
-     * @desc Get current workgroup Member details(Rights)
-     * @param {object} workgroupUuid - workgroup uuid
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
-    function checkDocumentMemberRights(workgroupUuid) {
-      getLoggedUserAsMemberOfWorkgroup(workgroupUuid)
-        .then(function(member) {
-          thisctrl.currentWorkgroupMember = member;
-
-          thisctrl.writeAndReadonlyMembers = !thisctrl.currentWorkgroupMember.admin && lsAppConfig.hideOnNonAdmin;
-        });
-    }
-
-    /**
-     * @name getLoggedUserAsMemberOfAWorkgroup
-     * @desc Get the logged user's corresponding member object of a workgroup
-     * @param {object} workgroupUuid - workgroup uuid
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
-    function getLoggedUserAsMemberOfWorkgroup(workgroupUuid) {
-      return workgroupMembersRestService.get(workgroupUuid, $scope.userLogged.uuid);
-    }
-
-    /**
-     * @name getLoggedUserAsMemberOfWorkgroups
-     * @desc Get the logged user's corresponding member object of a list of workgroups
-     * @param {object} workgroupUuid - list of workgroup uuid
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
-    function getLoggedUserAsMemberOfWorkgroups(workgroupUuids) {
-      return $q.all(
-        _.map(workgroupUuids, getLoggedUserAsMemberOfWorkgroup)
-      );
-    }
-
-    /**
-     * @name checkIfLoggedUserIsAdminOfAllSelectedWorkgroups
-     * @desc check if the logged user is an Admin of all the selected workgroups
-     * @param {object} selectedWorkgroups - list of selected workgroups
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
-    function checkIfLoggedUserIsAdminOfAllSelectedWorkgroups(selectedWorkgroups) {
-      return getLoggedUserAsMemberOfWorkgroups(
-        _.map(
-          selectedWorkgroups,
-          function(selectedWorkgroup) { return selectedWorkgroup.uuid; }
-        )
-      ).then(function(loggedUserAsMemberOfWorkgroups) {
-        return !_.some(
-          loggedUserAsMemberOfWorkgroups,
-          { admin: false }
-        );
-      });
-    }
-
-    /**
-     * @name exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController
-     * @desc expose the result of checkIfLoggedUserIsAdminOfAllSelectedWorkgroups to the controller
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
-    function exposeIsLoggedUserAdminOfAllSelectedWorkgroupsToController() {
-      if (thisctrl.selectedDocuments && thisctrl.selectedDocuments.length) {
-        checkIfLoggedUserIsAdminOfAllSelectedWorkgroups(thisctrl.selectedDocuments)
-          .then(function(isLoggedUserAdminOfAllSelectedWorkgroups) {
-            thisctrl.isLoggedUserAdminOfAllSelectedWorkgroups = isLoggedUserAdminOfAllSelectedWorkgroups;
-          });
       }
     }
   });

@@ -19,7 +19,7 @@
   function workgroupMembersRestService($log, Restangular, ServerManagerService) {
     var
       handler = ServerManagerService.responseHandler,
-      restUrl = 'work_groups',
+      restUrl = 'shared_space_nodes',
       restParam = 'members',
       service = {
         create: create,
@@ -34,68 +34,90 @@
     ////////////
 
     /**
+     * The Account object.
+     * @typedef {Object} Account
+     * @property {String} name - The name of the account
+     * @property {String} uuid - The unique identifier of the account
+     */
+
+    /**
+     * The Member object.
+     * @typedef {Object} WorkgroupMember
+     * @property {Role} role - A {@link Role} object.
+     * @property {Node} node - Name & Uuid of {@link Node} object.
+     * @property {Account} account - all of {@link Account} object.
+     */
+
+    /**
      *  @name create
      *  @desc Create a Workgroup Member object
-     *  @param {String} workgroupUuid - The id of the Workgroup object
-     *  @param {Object} workgroupMemberDto - The Workgroup Member object
-     *  @returns {Promise} server response
+     *  @param {WorkgroupMember} workgroupMemberDto - The Workgroup Member object
+     *  @returns {Promise<WorkgroupMember>} server response
      *  @memberOf LinShare.sharedSpace.workgroupMembersRestService
      */
-    function create(workgroupUuid, workgroupMemberDto) {
-      $log.debug('workgroupMembersRestService : create', workgroupUuid, workgroupMemberDto);
-      return handler(Restangular.one(restUrl, workgroupUuid).all(restParam).post(workgroupMemberDto));
+    function create(workgroupMemberDto) {
+      $log.debug('workgroupMembersRestService : create', workgroupMemberDto);
+      return handler(
+        Restangular
+          .one(restUrl, workgroupMemberDto.node.uuid)
+          .all(restParam)
+          .post(workgroupMemberDto)
+      );
     }
 
     /**
      *  @name get
      *  @desc Get a Workgroup Member object
-     *  @param {String} workgroupUuid - The id of the Workgroup object
-     *  @param {String} memberUuid - The id of the Workgroup Member object
-     *  @returns {Promise} server response
+     *  @param {String} nodeUuid - The id of the Workgroup object
+     *  @param {String} accountUuid - The id of the Workgroup Member object
+     *  @returns {Promise<WorkgroupMember>} server response
      *  @memberOf LinShare.sharedSpace.workgroupMembersRestService
      */
-    function get(workgroupUuid, memberUuid) {
-      $log.debug('workgroupMembersRestService :  get', workgroupUuid, memberUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, memberUuid).get());
+    function get(nodeUuid, accountUuid) {
+      $log.debug('workgroupMembersRestService :  get', nodeUuid, accountUuid);
+      return handler(Restangular.one(restUrl, nodeUuid).one(restParam, accountUuid).get());
     }
 
     /**
      *  @name getList
      *  @desc Get the list of Workgroup Member object
-     *  @param {String} workgroupUuid - The id of the Workgroup object
-     *  @returns {Promise} server response
+     *  @param {String} nodeUuid - The id of the Workgroup object
+     *  @returns {Promise<Array<WorkgroupMember>>} server response
      *  @memberOf LinShare.sharedSpace.workgroupMembersRestService
      */
-    function getList(workgroupUuid) {
-      $log.debug('workgroupMembersRestService :  getList', workgroupUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).all(restParam).getList());
+    function getList(nodeUuid) {
+      $log.debug('workgroupMembersRestService :  getList', nodeUuid);
+      return handler(Restangular.one(restUrl, nodeUuid).all(restParam).getList());
     }
 
     /**
      *  @name remove
      *  @desc Remove a Workgroup Member object
-     *  @param {String} workgroupUuid - The id of the Workgroup object
-     *  @param {String} memberUuid - The id of the Workgroup Member object
-     *  @returns {Promise} server response
+     *  @param {String} nodeUuid - The id of the Node object
+     *  @param {String} accountUuid - The id of the Account object
+     *  @returns {Promise?} server response
      *  @memberOf LinShare.sharedSpace.workgroupMembersRestService
      */
-    function remove(workgroupUuid, memberUuid) {
-      $log.debug('workgroupMembersRestService :  remove', workgroupUuid, memberUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, memberUuid).remove());
+    function remove(nodeUuid, accountUuid) {
+      $log.debug('workgroupMembersRestService :  remove', nodeUuid, accountUuid);
+      return handler(Restangular.one(restUrl, nodeUuid).one(restParam, accountUuid).remove());
     }
 
     /**
      *  @name update
      *  @desc Update a Workgroup Member object
-     *  @param {String} workgroupUuid - The id of the Workgroup object
-     *  @param {Object} workgroupMemberDto - The Workgroup Member object
-     *  @returns {Promise} server response
+     *  @param {WorkgroupMember} workgroupMemberDto - The Workgroup Member object
+     *  @returns {Promise<WorkgroupMember>} server response
      *  @memberOf LinShare.sharedSpace.workgroupMembersRestService
      */
-    function update(workgroupUuid, workgroupMemberDto) {
-      $log.debug('workgroupMembersRestService :  update', workgroupUuid, workgroupMemberDto);
-      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, workgroupMemberDto.uuid)
-        .customPUT(workgroupMemberDto));
+    function update(workgroupMemberDto) {
+      $log.debug('workgroupMembersRestService : update', workgroupMemberDto);
+      return handler(
+        Restangular
+          .one(restUrl, workgroupMemberDto.node.uuid)
+          .one(restParam, workgroupMemberDto.account.uuid)
+          .customPUT(workgroupMemberDto)
+      );
     }
   }
 })();

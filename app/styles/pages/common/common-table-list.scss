@@ -465,6 +465,11 @@
         color: #54585a;
       }
     }
+    .actions > li.disabled > a > i, .actions > li.disable-link > a > i, .actions > a.disabled > i {
+      pointer-events: none !important;
+      font-weight: inherit !important;
+      color: #C9C9C9 !important;
+    }
     .actions > li > a > i, .actions > a > i span {
       vertical-align: middle;
       font-size: inherit;

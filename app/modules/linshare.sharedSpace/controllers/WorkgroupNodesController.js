@@ -35,6 +35,7 @@
     'workgroup',
     'workgroupMembersRestService',
     'workgroupNodesRestService',
+    'workgroupPermissions',
     'workgroupRestService'
   ];
   /**
@@ -69,6 +70,7 @@
     workgroup,
     workgroupMembersRestService,
     workgroupNodesRestService,
+    workgroupPermissions,
     workgroupRestService
   )
   {
@@ -80,6 +82,9 @@
 
     var newFolderName;
 
+    workgroupNodesVm.canDeleteNodes = false;
+    workgroupNodesVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
+    workgroupNodesVm.permissions = workgroupPermissions;
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
     workgroupNodesVm.areAllSameType = areAllSameType;
     workgroupNodesVm.breadcrumb = [];
@@ -534,19 +539,18 @@
           workgroupNodesVm.currentWorkgroupMember = member;
 
           setCurrentWorkgroupUserRights(workgroupNodesVm.currentWorkgroupMember);
-
           workgroupNodesVm.fabButton.actions.push({
-              action: null,
-              flowDirectory: true,
-              hide: workgroupNodesVm.currentWorkgroupMember.readonly,
-              label: 'WORKGROUPS_LIST.UPLOAD_FOLDER',
-              icon: 'groups-upload-file'
+            action: null,
+            flowDirectory: true,
+            hide: !workgroupNodesVm.permissions.FOLDER.CREATE,
+            icon: 'groups-upload-file',
+            label: 'WORKGROUPS_LIST.UPLOAD_FOLDER'
           },{
             action: null,
-            label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE',
-            icon: 'ls-upload-fill',
             flowBtn: true,
-            hide: workgroupNodesVm.currentWorkgroupMember.readonly
+            hide: !workgroupNodesVm.permissions.FILE.CREATE,
+            icon: 'ls-upload-fill',
+            label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE'
             }
           );
         });
@@ -646,8 +650,20 @@
           workgroupNodesVm.lengthOfSelectedDocuments = tableParamsService.lengthOfSelectedDocuments;
           workgroupNodesVm.resetSelectedDocuments = tableParamsService.resetSelectedItems;
           workgroupNodesVm.selectedDocuments = tableParamsService.getSelectedItemsList();
-          workgroupNodesVm.selectDocumentsOnCurrentPage = tableParamsService.tableSelectAll;
-          workgroupNodesVm.addSelectedDocument = tableParamsService.toggleItemSelection;
+          workgroupNodesVm.selectDocumentsOnCurrentPage = function(data, page, selectFlag){
+            tableParamsService.tableSelectAll(data, page, selectFlag);
+            workgroupNodesVm.canDeleteNodes = $filter('canDeleteNodes')(
+              workgroupNodesVm.selectedDocuments,
+              workgroupNodesVm.permissions
+            );
+          };
+          workgroupNodesVm.addSelectedDocument = function(item) {
+            tableParamsService.toggleItemSelection(item);
+            workgroupNodesVm.canDeleteNodes = $filter('canDeleteNodes')(
+              workgroupNodesVm.selectedDocuments,
+              workgroupNodesVm.permissions
+            );
+          };
           workgroupNodesVm.sortDropdownSetActive = tableParamsService.tableSort;
           workgroupNodesVm.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
           workgroupNodesVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
@@ -866,35 +882,19 @@
           label: 'BOUTON_ADD_FILE_TITLE'
         },
         actions: [{
-          action: null,
-          label: 'WORKGROUPS_LIST.SHARED_FOLDER',
-          icon: 'ls-workgroup disabled-work-in-progress',
-          disabled: true,
-          hide: !lsAppConfig.linshareModeProduction
-        }, {
           action: function() {
             return workgroupNodesVm.showWorkgroupDetails(true);
           },
-          label: 'WORKGROUPS_LIST.ADD_A_MEMBER',
-          icon: 'ls-add-user'
+          label: 'ACTION.ADD_MEMBER',
+          icon: 'ls-add-user',
+          hide: !workgroupNodesVm.permissions.MEMBER.CREATE,
         }, {
           action: function() {
             return workgroupNodesVm.createFolder();
           },
           label: 'WORKGROUPS_LIST.FOLDER',
-          icon: 'ls-folder'
-        }, {
-          action: null,
-          label: 'WORKGROUPS_LIST.UPLOAD_REQUEST',
-          icon: 'ls-upload-request disabled-work-in-progress',
-          disabled: true,
-          hide: !lsAppConfig.linshareModeProduction
-        }, {
-          action: null,
-          label: 'WORKGROUPS_LIST.PROJECT',
-          icon: 'ls-project disabled-work-in-progress',
-          disabled: true,
-          hide: !lsAppConfig.linshareModeProduction
+          icon: 'ls-folder',
+          hide: !workgroupNodesVm.permissions.FOLDER.CREATE,
         }]
       };
     }
@@ -963,20 +963,34 @@
         filesError = [],
         foldersObj = {},
         foldersTree = {},
-        foldersTreeError = {};
+        foldersTreeError = {},
+        filesToUpload = [];
 
       _.forEachRight(flowFiles, function(file) {
         file._from = from;
-        if (file.relativePath !== file.name) {
+
+        if (file.relativePath !== file.name &&
+            workgroupNodesVm.permissions.FOLDER.CREATE) {
            foldersObj = treeFolderBuilder(file, folderDetails, foldersTree);
+
           _.assign(foldersTree, foldersObj.tree);
+
           promises.folders = _.concat(promises.folders, foldersObj.promises);
+
+          if (workgroupNodesVm.permissions.FILE.CREATE) {
+            filesToUpload.push(file);
+          }
+        }
+
+        if (file.relativePath === file.name &&
+            workgroupNodesVm.permissions.FILE.CREATE) {
+          filesToUpload.push(file);
         }
       });
 
       $q.allSettled(promises.folders).then(function(promises) {
         foldersTreeError = handleUploadError(promises, foldersTree);
-        _.forEach(flowFiles, function(file) {
+        _.forEach(filesToUpload, function(file) {
           if (file.relativePath === file.name) {
             file.folderDetails = folderDetails;
           } else {
