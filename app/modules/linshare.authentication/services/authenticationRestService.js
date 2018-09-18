@@ -101,8 +101,14 @@
      */
     function logout() {
       $log.debug('AuthenticationRestService : logout');
-      ServerManagerService.getHeaders().then(function(headers) {
+
+      $q.all([
+        ServerManagerService.getHeaders(),
+        handler(Restangular.all(restUrl).withHttpConfig().customGET('logout'))
+      ])
+      .then(function(promises) {
         var
+          headers = promises[0],
           headersLogoutUrl = headers['x-linshare-post-logout-url'],
           location;
 
@@ -122,11 +128,9 @@
           location = absUrl.split('#')[0];
         }
 
-        deferred = $q.defer();
-        $cookies.remove('JSESSIONID');
-        $window.location.href = location;
         authService.loginCancelled();
-        $log.info('Authentication logout : success');
+        $log.debug('Authentication logout: success');
+        $window.location.href = location;
       }).catch(function(error) {
         $log.error('Authentication logout : failed', error.status);
       });
