@@ -36,7 +36,8 @@
     'workgroupMembersRestService',
     'workgroupNodesRestService',
     'workgroupPermissions',
-    'workgroupRestService'
+    'workgroupRestService',
+    'workgroupRole'
   ];
   /**
    * @namespace WorkgroupNodesController
@@ -71,7 +72,8 @@
     workgroupMembersRestService,
     workgroupNodesRestService,
     workgroupPermissions,
-    workgroupRestService
+    workgroupRestService,
+    workgroupRole
   )
   {
     /* jshint validthis:true */
@@ -84,6 +86,7 @@
 
     workgroupNodesVm.canDeleteNodes = false;
     workgroupNodesVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
+    workgroupNodesVm.role = workgroupRole;
     workgroupNodesVm.permissions = workgroupPermissions;
     workgroupNodesVm.addUploadedDocument = addUploadedDocument;
     workgroupNodesVm.areAllSameType = areAllSameType;

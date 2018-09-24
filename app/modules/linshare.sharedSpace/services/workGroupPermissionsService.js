@@ -75,7 +75,8 @@
      * The Workgroups Permissions object.
      * @typedef {Object} WorkgroupsPermissions
      * @type {String} key - Workgroup uuid
-     * @type {Array<ResourcePermission>} value - {@link ResourcePermission} object
+     * @type {Array<Permission>} value - {@link Permission} object
+     */
 
     /**
      * @name getWorkgroupsPermissions
@@ -85,6 +86,8 @@
      * @memberOf LinShare.sharedSpace.workgroupPermissionsService
      */
     function getWorkgroupsPermissions(workgroups) {
+      $log.debug('workgroupPermissionsService : getWorkgroupsPermissions', workgroups);
+
         return authenticationRestService.getCurrentUser()
         .then(function (loggedUser) {
           return $q
@@ -116,6 +119,7 @@
           );
         });
     }
+
     /**
      *  @name formatPermissions
      *  @desc Format permissions received to the form of {@link UserWorkgroupPermission} object

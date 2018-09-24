@@ -38,6 +38,9 @@
      * @typedef {Object} Account
      * @property {String} name - The name of the account
      * @property {String} uuid - The unique identifier of the account
+     * @property {String} firstName - The first name of the account
+     * @property {String} lastName - The last name of the account
+     * @property {String} mail - The mail of the account
      */
 
     /**
@@ -46,6 +49,15 @@
      * @property {Role} role - A {@link Role} object.
      * @property {Node} node - Name & Uuid of {@link Node} object.
      * @property {Account} account - all of {@link Account} object.
+     */
+
+    /**
+     * The Node object.
+     * @typedef {Object} Node
+     * @property {Date} creationDate - The creation date of the node.
+     * @property {Date} modificationDate - The last modification date of the node.
+     * @property {String} name - The name of the node.
+     * @property {String} uuid - The uuid of the node.
      */
 
     /**

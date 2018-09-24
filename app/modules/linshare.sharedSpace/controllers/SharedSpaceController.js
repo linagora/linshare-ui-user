@@ -23,16 +23,18 @@ angular.module('linshare.sharedSpace')
     NgTableParams,
     toastService,
     workgroupMembersRestService,
-    workgroups,
-    workgroupRestService,
     workgroupPermissionsService,
-    workgroupsPermissions
+    workgroupRestService,
+    workgroups,
+    workgroupsPermissions,
+    workgroupsRoles
   ) {
     $translatePartialLoader.addPart('filesList');
     $translatePartialLoader.addPart('sharedspace');
 
     var thisctrl = this;
     thisctrl.functionalities = {};
+    thisctrl.roles = workgroupsRoles;
     thisctrl.permissions = workgroupsPermissions;
     thisctrl.canDeleteWorkgroups = false;
     thisctrl.canCreate = true;

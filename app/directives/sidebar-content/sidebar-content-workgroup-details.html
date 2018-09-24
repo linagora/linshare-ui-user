@@ -147,14 +147,18 @@
               <p>
                 {{'MEMBER_TAB.MY_RIGHTS' | translate}}:
               </p>
-              <p x-ng-show="mainVm.sidebar.getData().currentWorkgroupMember.admin">
-                <i class="zmdi zmdi-account p-r-3"></i> {{"MEMBER_TAB.ADMIN" | translate}}<br />
-              </p>
-              <p x-ng-show="mainVm.sidebar.getData().currentWorkgroupMember.readonly">
-                <i class="zmdi zmdi-account p-r-3"></i> {{"MEMBER_TAB.READ" | translate}}<br />
-              </p>
-              <p x-ng-show="mainVm.sidebar.getData().currentWorkgroupMember.role === 'normal'">
-                <i class="zmdi zmdi-account p-r-3"></i> {{"MEMBER_TAB.WRITE" | translate}}<br />
+              <p>
+                <i class="zmdi zmdi-account p-r-3"></i>
+                <span>
+                  {{
+                  "MEMBER_TAB." +
+                  mainVm.sidebar.getData().roles ?
+                  mainVm.sidebar.getData().roles[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].name :
+                  mainVm.sidebar.getData().role.name
+                  | translate
+                  }}
+                <br />
+                </span>
               </p>
             </div>
           </div>
