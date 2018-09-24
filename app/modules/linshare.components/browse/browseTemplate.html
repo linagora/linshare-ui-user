@@ -27,8 +27,11 @@
         <div
           class="lv-col-3 center waves-effect add-btn"
           data-ng-click="browseVm.createFolder()"
-          data-ng-class="{'disabled': browseVm.isSharedSpace ||
-              (!browseVm.isSharedSpace && !browseVm.canCreateFolder)}"
+          data-ng-class="{
+          'disabled': browseVm.isSharedSpace ||
+          !(!browseVm.isSharedSpace && browseVm.canCreateFolder &&
+          browseVm.permissions[browseVm.currentFolder.workGroup].FOLDER.CREATE)
+          }"
         >
           <i class="zmdi zmdi-plus"></i>
         </div>
@@ -42,7 +45,11 @@
           class="lv-tem"
           data-ng-repeat="folder in browseVm.currentList"
           data-ng-click="browseVm.goToFolder(folder)"
-          data-ng-class="{'disabled' : browseVm.disableFolder(folder)}"
+          data-ng-class="{
+          'disabled' : browseVm.disableFolder(folder) ||
+          (browseVm.isSharedSpace && !browseVm.isMove
+          && browseVm.hasFile && !browseVm.permissions[folder.uuid].FILE.CREATE)
+          }"
           uuid={{::folder.uuid}}
         >
           <div class="lv-icon-ctn lv-col-1 center">

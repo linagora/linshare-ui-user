@@ -714,9 +714,18 @@
     function openBrowser(nodeItems, isMove) {
       browseService.show({
         currentFolder: _.cloneDeep(workgroupNodesVm.currentFolder),
-        currentList: _.orderBy(_.filter(workgroupNodesVm.nodesList, {'type': TYPE_FOLDER}), 'modificationDate', 'desc'),
+        currentList: _.orderBy(
+          _.filter(
+            workgroupNodesVm.nodesList,
+            {'type': TYPE_FOLDER}
+          ),
+          'modificationDate',
+          'desc'
+        ),
         nodeItems: nodeItems,
         isMove: isMove,
+        hasFolder:  _.some(nodeItems, {'type': TYPE_FOLDER}),
+        hasFile:  _.some(nodeItems, {'type': TYPE_DOCUMENT}),
         restService: workgroupNodesRestService
       }).then(function(data) {
         openBrowserNotify(data, isMove);

@@ -65,6 +65,7 @@
      * @memberOf linshare.components.BrowseController
      */
     function activate() {
+      browseVm.permissions = {};
       browseVm.isSharedSpace = false;
       browseVm.canCreateFolder = false;
 
