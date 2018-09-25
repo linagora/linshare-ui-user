@@ -1,6 +1,6 @@
 <div class="container" id="home" style="height: {{sizeHeight}}px">
   <div class="upper-container">
-    <img id="fg-img" src="images/common/logo-white-500.png" alt="Logo LinShare" class="visible-xs"/>
+    <img id="fg-img" ng-src="{{::mainVm.applicationLogoLarge}}" alt="Logo LinShare" class="visible-xs"/>
     <div class="box-ctn hidden-xs">
       <div class="box-3" ui-sref="documents.files" data-ng-if="::cards.myFilesSpace">
         <div class="card-img upload-share">

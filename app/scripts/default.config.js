@@ -15,6 +15,11 @@
       //Warning: the following parameter will not be use if you defined a logout url via
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
+      applicationLogo : {
+        small : 'images/common/linshare-logo-white.png',
+        large : 'images/ls-logo-big.png'
+      },
+      loginBackground : 'images/bg-linshare-desktop.png',
 
       // For application configuration
       accountType: {

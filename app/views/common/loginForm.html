@@ -1,6 +1,6 @@
 <div id="login-page">
   <div id="bg">
-    <img src="images/bg-linshare-desktop.png" alt="" class="img-responsive">
+    <img src="{{::mainVm.loginBackground}}" alt="" class="img-responsive">
   </div>
 
   <div id="language-dropdown">
@@ -37,7 +37,7 @@
   </div>
   <div id="copyright-login">
     <a href="http://linshare.org" target="_blank">
-      <img src="images/common/linshare-logo-white.png" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
+      <img ng-src="images/common/linshare-logo-white.png" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
     </a>
     <p data-bind-html translate>LOGIN.COPYRIGHT</p>
   </div>
@@ -51,7 +51,7 @@
     <div class="parent-login-form-alignment">
       <div class="logo-title">
         <a href="http://linshare.org" target="_blank">
-          <img src="images/ls-logo-big.png" alt="logo">
+          <img ng-src="{{::mainVm.applicationLogoLarge}}" alt="logo">
         </a>
         <p>{{'LOGIN.TAGLINE' | translate}}</p>
       </div>

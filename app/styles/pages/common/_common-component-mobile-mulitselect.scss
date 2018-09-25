@@ -1,0 +1,87 @@
+@import "../../_fonts.scss";
+@import "../../_colors.scss";
+
+/**********************
+  COMMON MOBILE MULTISELECT
+***********************/
+
+.multi-select-mobile.showMobileMultiMenu {
+  top: 0;
+}
+
+.multi-select-mobile, .multi-select {
+  > div[class^="col-"] {
+    padding: 0;
+  }
+  div > i {
+    margin-top: 5px;
+    font-size: 1.3em;
+    text-align: center;
+    height: 45px;
+    padding: 0;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  div > span > i {
+    text-align: center;
+    font-size: 1.3em;
+  }
+  div > span.dropdown {
+    margin-top: 5px;
+    height: 45px;
+    padding: 0;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .ctn-mobile-select-count {
+    text-align: center;
+    padding-top: 1em !important;
+    .file-multi-select-label {
+      display: block;
+      font-size: 0.8em;
+      padding-left: 0.5em;
+      color: $primary-color;
+    }
+    .numberOfiles {
+      color: $primary-color;
+      font-weight: 500;
+    }
+  }
+}
+
+/**********************
+STATIC ENABLED MULTISELECT
+***********************/
+
+// for upload & share specific multi-select
+.multi-select {
+  padding: 0;
+  margin: 0;
+}
+
+/**********************
+DYNAMIC MULTISELECT DISPLAY
+***********************/
+
+// for most of the multi-select toolbar
+.multi-select-mobile {
+  -o-transition: 550ms ease-in-out all;
+  -moz-transition: 550ms ease-in-out all;
+  -webkit-transition: 550ms ease-in-out all;
+  transition: 550ms ease-in-out all;
+  padding: 0;
+  position: absolute;
+  z-index: 11;
+  margin: 0;
+  top: -50px;
+  height: 50px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  width: 100%;
+  overflow: hidden;
+}

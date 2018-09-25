@@ -1,0 +1,118 @@
+// Main colors
+$primary-color: #05B1FF !default; // ORIGIN
+
+$ressource-path: ".." !default;
+
+$textColorDark:#464646 !default;
+$dividerClr: #F0F0F0 !default;
+$secondaryClr: #00BFA5 !default;
+$midGreyBg:#F9F9F9 !default;
+$loginDarkText:#535050 !default;
+$disabled:#B6B6B6 !default;
+$disabledAlt:#DEDEDE !default;
+$error: #F6675D !default;
+$uploadProgressCompleted : #00BFA5 !default;
+$uploadProgressUploading : #00BFA5 !default;
+$uploadProgressServer : #0099D4 !default;
+$quotasProgressBarGreen: #00BFA5 !default;
+$quotasProgressBarGrey: #B7B7B7 !default;
+$quotasProgressBarOrange: #FF7A02 !default;
+$quotasProgressBarRed: #FF0202 !default;
+$quotasGreyBgProgressBar: #D8D8D8 !default;
+$inputGrayBorder: #E0E0E0 !default;
+
+
+/***
+** Buttons color styles
+***/
+
+$btnIcon: #535050 !default;
+$btnPopoverAdd: #5C7B98 !default;
+$btnPopoverAddHover: #536E8B !default;
+
+$btnPrimaryTxt: #FFFFFF !default;
+$btnPrimaryTxtHover: #EDEDED !default;
+
+$btnDefaultBg: #FFFFFF !default;
+$btnDefaultTxt: #5E5E5E !default;
+$btnDefaultBgHover: #FCFCFC !default;
+$btnDefaultTxtHover: #262626 !default;
+
+$primary-alt-color1:lighten(desaturate(adjust-hue($primary-color, 8), 10.26), 3.14) !default;
+$primary-alt-color2:darken(desaturate(adjust-hue($primary-color, 8), 23.38), 5.69) !default;
+$primary-alt-color3:darken(desaturate($primary-color, 6.22), 13.14) !default;
+$primary-alt-color4:lighten(adjust-hue($primary-color, 8), 11.37) !default;
+$primary-alt-color5:darken($primary-color, 2.16) !default;
+$primary-alt-color6:darken($primary-color, 19.02) !default;
+$primary-alt-color7:darken(desaturate($primary-color, 9.52), 13.92) !default;
+$primary-alt-color8:darken(desaturate($primary-color, 5.62), 16.08) !default;
+
+$component-wip-msg-info-color: lighten(desaturate($primary-color, 27.59), 20.59) !default;
+
+$component-datepicker-color-one: #009688 !default;
+$component-datepicker-color-two:#00877A !default;
+$component-datepicker-color-three:$primary-alt-color1 !default;
+$component-datepicker-color-four:desaturate(adjust-hue($primary-color, 8), 10.40) !default;
+
+$component-dialog-alert-confirm-color:$primary-alt-color1 !default;
+$component-dialog-alert-confirm-hover-color: $primary-alt-color2 !default;
+$component-dialog-alert-sweet-alert-background-color:$primary-alt-color4 !default;
+$component-dialog-alert-sweet-alert-sa-error-background-color:$primary-alt-color4 !default;
+$component-dialog-alert-md-toolbar-background-color:lighten(adjust-hue($primary-color, 8), 18.43) !default;
+$component-ui-drag-and-drop-drag-over-bordered-circle-background-color:rgba(darken($primary-color, 0.98), 0.87) !default;
+$component-ui-drag-and-drop-drag-over-bordered-circle-border-color: lighten(adjust-hue($primary-color, -1), 36.08) !default;
+
+$common-global-classes-owner-info-color: darken(desaturate($primary-color, 19.09), 7.84) !default;
+$common-header-toolbar-file-listing-display-num-selected-items-active-view-icons-ctn-color: darken($primary-color, 28.82) !default;
+
+$common-layout-styles-btn-primary-color: $primary-alt-color1 !default;
+$common-layout-styles-btn-primary-hover-color: $primary-alt-color2 !default;
+$common-layout-styles-a-color:darken(desaturate(adjust-hue($primary-color, 8), 23.58), 6.08) !default;
+$common-layout-styles-a-hover-color: lighten(saturate($common-layout-styles-a-color, 13.3), 9.2) !default;
+$common-layout-styles-blue-btn-background-color: $primary-alt-color1 !default;
+$common-layout-styles-sidebar-link-color: $primary-alt-color2 !default;
+$common-layout-styles-sidebar-link-hover-color: darken(desaturate(adjust-hue($primary-color, 8), 26.19), 18.04) !default;
+$common-layout-styles-user-bg-background-color:lighten(desaturate($primary-color, 57.75), 21.18) !default;
+
+$common-lightbox-arrow-area-arrow-ctn-hover-background-color:$primary-alt-color5 !default;
+
+$common-sidebar-left-sidebar-li-color: darken(adjust-hue($primary-color, 4), 5.10) !default;
+$common-sidebar-left-usernamesidebar-first-letter-color: $primary-alt-color6 !default;
+$common-sidebar-left-dark-overlay-background-color: rgba(#000, 0.1) !default;
+
+$common-table-list-file-thumb-groups-preview-thum-type-color: darken(desaturate(adjust-hue($primary-color, 7), 72.49), 6.08) !default;
+$common-table-list-file-checkbox-ctn-thumb-border-color: $primary-alt-color8 !default;
+$common-table-list-file-checkbox-ctn-thumb-maintain-vis-border-color: $primary-alt-color3 !default;
+$common-table-list-file-checkbox-ctn-thumb-maintain-vis-background-color: $primary-alt-color3 !default;
+$common-table-list-file-mobile-highlight-list-elem-border-left-color: darken(desaturate($primary-color, 2.43), 2.55) !default;
+$common-table-list-detail-action-col-actions-color: darken($primary-color, 7.45) !default;
+
+$common-ui-component-popover-color: darken(desaturate($primary-color, 4.92), 3.14) !default;
+$common-ui-component-recipientsautocomplete-firstletterformat-ls-contact-list-item-color: darken(desaturate($primary-color, 14.29), 9.80) !default;
+$common-ui-component-breadcrumb-wrap-add-menu-group-color:darken(desaturate($primary-color, 14.75), 3.14) !default;
+$common-ui-component-dropdown-toggle-btn-default-color: lighten(desaturate(adjust-hue($primary-color, 8), 17.28), 1.37) !default;
+$common-ui-component-toggle-chevron-color: darken(desaturate(adjust-hue($primary-color, 8), 10.05), 11.96) !default;
+$common-ui-component-blue-action-btn-background-color: $primary-alt-color5 !default;
+$common-ui-component-activity-user-target-color: lighten(desaturate(adjust-hue($primary-color, 7), 59.83), 3.14) !default;
+
+$specific-contact-list-table-profile-main-color: $primary-alt-color6 !default;
+$specific-contact-list-table-filter-views-dropdown-filters-after-background-color: $primary-alt-color1 !default;
+
+$specific-home-page-view-upper-container-background-color: lighten(desaturate(adjust-hue($primary-color, 8), 56.82), 31.76) !default;
+$specific-home-page-view-upper-container-box-content-h2-color:$primary-alt-color1 !default;
+$specific-home-page-view-upper-container-box-content-box-txt-color:darken(desaturate(adjust-hue($primary-color, 1), 72.49), 6.08) !default;
+$specific-home-page-view-upper-container-box-content-set-homepage-ctn-hover-color:darken(adjust-hue($primary-color, 13), 2.55) !default;
+$specific-home-page-view-upper-container-info-box-hover-color:darken(desaturate(adjust-hue($primary-color, 8), 16.75), 13.53) !default;
+
+$specific-login-page-login-content-span-color: $primary-alt-color7 !default;
+
+$specific-my-files-table-list-shared-activated-color:darken(desaturate($primary-color, 7.69), 15.29) !default;
+
+$specific-sidebar-current-share-details-site-visits-design-content-span-color: $primary-alt-color7 !default;
+
+$specific-sidebar-guest-lists-detail-guest-img-preview-ctn-background-color: $primary-color !default;
+$specific-sidebar-guest-lists-detail-guest-detail-info-first-letter-color: $primary-alt-color6 !default;
+
+$specific-upload-queue-view-transfert-ctn-checkbox-ctn-thumb-maintain-vis-background-color: $primary-alt-color3 !default;
+$specific-upload-queue-view-transfert-ctn-checkbox-ctn-thumb-maintain-vis-border-color: $primary-alt-color3 !default;
+$specific-upload-queue-view-transfert-ctn-checkbox-ctn-thumb-border-color: $primary-alt-color8 !default;

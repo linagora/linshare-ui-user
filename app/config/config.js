@@ -15,6 +15,16 @@
       debug: true,
       localPath: 'i18n/original', // custom your i18n folder path
 
+      // To override the application logo set the url of the image corresponding to the sizes (small 155x29 and big 500x192)
+      applicationLogo : {
+        small : 'images/common/linshare-logo-white.png',
+        large : 'images/ls-logo-big.png'
+      },
+
+      // To override the background image of the login screen set the url of the image
+      loginBackground : 'images/bg-linshare-desktop.png',
+
+
       //Warning: the following parameter will not be use if you defined a logout url via
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'

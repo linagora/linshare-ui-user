@@ -1,6 +1,8 @@
 // Generated on 2015-03-02 using generator-angular 0.11.1
 'use strict';
 
+var GruntfileThemes = require('./tasks/utils/Gruntfile-themes');
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -67,6 +69,12 @@ module.exports = function(grunt) {
         ]
       }
     },
+
+    // Dynamically manage the minification of the application themes
+    cssmin : new GruntfileThemes(appConfig).list().reduce(function(config, theme) {
+      config['<%= yeoman.dist %>/styles/' + theme + '.css'] = '.tmp/styles/' + theme + '.css';
+      return config;
+    }, {}),
 
     // The actual grunt server settings
     connect: {

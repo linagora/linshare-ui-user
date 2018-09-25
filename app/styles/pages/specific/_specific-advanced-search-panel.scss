@@ -1,0 +1,248 @@
+@import "../../_fonts.scss";
+@import "../../_colors.scss";
+
+/**********************
+  POPOVER CONTAINER
+***********************/
+
+.popover-search-field.popover.bottom {
+  position: absolute;
+
+  transform-origin: top right;
+  right: 97px;
+
+  left: inherit !important;
+  > .arrow {
+    left: inherit;
+    right: 28px;
+    margin-left: -8px;
+    border-top-width: 0;
+    border-bottom-color: #ffffff;
+    top: -11px;
+  }
+  .popover-content {
+    padding: 0 !important;
+  }
+}
+
+
+/**********************
+ SEARCH FORM CONTAINER
+***********************/
+
+#searchFilterCtn {
+  height: auto !important;
+  z-index: 12;
+  width: 600px;
+  min-width: 600px;
+  margin: 0;
+  padding: 0 15px;
+  h2 {
+    margin-top: 1em;
+    border-bottom: solid 1px #e3e1e1;
+    margin-bottom: 2em;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    color: #292929 !important;
+    font-weight: normal;
+  }
+  .icon-size-fix {
+    padding: 0 10px 0 0;
+    max-width: 22px;
+  }
+  .col-sm-3, .col-sm-1, .col-sm-4 {
+    display: flex;
+    padding: 0;
+  }
+  .col-sm-4 {
+    width: 28%;
+  }
+  .col-sm-3 {
+    width: 36%;
+  }
+  .col-sm-1 {
+    width: 7%;
+    display: flex;
+    justify-content: center;
+  }
+  .col-sm-1 {
+    margin: auto;
+    text-align: center;
+    float: right;
+  }
+  .chosen-container-single.chosen-container-single-nosearch {
+    width: 100% !important;
+    background-color: transparent;
+    .chosen-single {
+      background-color: rgba(255, 255, 255, 0);
+    }
+    .chosen-drop {
+      width: 100%;
+      text-align: left;
+      -webkit-transform-origin: top left;
+      -moz-transform-origin: top left;
+      -o-transform-origin: top left;
+      transform-origin: top left;
+      .chosen-results li {
+        padding-left: 37px;
+      }
+    }
+  }
+  .chosen-single > span {
+    color: #8f8f8f;
+  }
+  .chosen-container-single.chosen-container-single-nosearch .chosen-single span {
+    line-height: 33px;
+  }
+}
+
+/**********************
+  ADVANCED SEARCH FORM
+***********************/
+
+html:not(.ie9) .formsearch .select::before {
+  position: absolute;
+  top: -1px;
+  content: "";
+  height: calc(100% - 1px);
+  width: 12px;
+  background-position: right calc(100% - 7px);
+  background-image: #f5f5f5 url(#{$ressource-path}/images/select.png) no-repeat;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.formsearch {
+  padding: 0;
+  margin: 0;
+  div:first-child > label.title-label {
+    margin-top: 0 !important;
+  }
+  label.title-label {
+    margin-bottom: 1em;
+    margin-top: 2.5em;
+  }
+  label{
+    margin-top: 0.5em;
+  }
+  .disabledIcon, .disabledIcon::before {
+    opacity: 0.45;
+  }
+  .fg-line select.form-control:not(:disabled) {
+    color: #9d9d9d !important;
+    background-color: #9d9d9d;
+    padding-right: 12px;
+  }
+  .fg-line select.form-control:disabled {
+    color: #D2D2D2 !important;
+    background-color: #f5f5f5;
+  }
+  .fg-line select.form-control:not(:disabled).ng-dirty {
+    color: #000 !important;
+  }
+  .form-control:not(:disabled)::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #9d9d9d;
+  }
+  .form-control -moz-placeholder:not(:disabled) {
+    /* Mozilla Firefox 4 to 18 */
+    color: #9d9d9d;
+    opacity: 1;
+  }
+  .form-control ::-moz-placeholder:not(:disabled) {
+    /* Mozilla Firefox 4 to 18 */
+    color: #9d9d9d;
+    opacity: 1;
+  }
+  .form-control:not(:disabled) -ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #9d9d9d;
+  }
+  .form-control:not(:disabled):placeholder-shown {
+    /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+    color: #9d9d9d;
+  }
+  .form-control:disabled::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #D2D2D2;
+  }
+  .form-control:disabled:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #D2D2D2;
+    opacity: 1;
+  }
+  .form-control:disabled::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #D2D2D2;
+    opacity: 1;
+  }
+  .form-control:disabled:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #D2D2D2;
+  }
+  .form-control:disabled:placeholder-shown {
+    /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+    color: #D2D2D2;
+  }
+  .checkbox input.forceChecked + .input-helper::after {
+    transform: scale(0.55) rotate(-50deg);
+    opacity: 1;
+  }
+  .checkbox input.forceChecked + .input-helper::before {
+    transform: scale(1.3);
+    left: 0;
+    border: 1px solid #E4E1E1;
+  }
+  .checkbox input:checked + .input-helper::before {
+    transform: scale(1.3);
+    left: 0;
+    border: 1px solid #E4E1E1;
+  }
+  label {
+    margin-bottom: 1em;
+    font-weight: normal;
+    font-size: 1em;
+    color: #3a3a3a;
+  }
+  select, input:focus, select:focus, select.form-control.outlineFFremove:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+  select:focus, option:focus, select::-moz-focus-inner, option::-moz-focus-inner {
+    outline: 0;
+    border: none;
+  }
+  select::-moz-focus-inner {
+    border: 0;
+  }
+  @-moz-document url-prefix() {
+    select {
+      outline: 0;
+      box-shadow: none;
+      color: rgba(210, 210, 210, 0) !important;
+      text-shadow: 0 0 0 #000 !important;
+    }
+  }
+  .checkbox input:checked + .input-helper::after {
+    transform: scale(0.55) rotate(-50deg);
+    opacity: 1;
+  }
+  .fix-margin-row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .checkbox-inline {
+    padding-left: 15px;
+  }
+}
+
+/**********************
+  RESPONSIVE
+***********************/
+
+@media (max-width: 868px) {
+  .popover-search-field.popover.bottom {
+    width: 668px;
+    min-width: 668px;
+  }
+}

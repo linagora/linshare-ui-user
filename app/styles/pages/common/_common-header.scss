@@ -1,0 +1,359 @@
+@import "../../_fonts.scss";
+@import "../../_colors.scss";
+
+/**********************
+  TRANSFERT DROPDOWN TABS STYLING
+***********************/
+
+#transfert-dropdown md-content {
+  padding: 0 !important;
+  overflow: hidden;
+  md-tabs-content-wrapper div md-content {
+    height: auto !important;
+    md-list-item {
+      color: #908e8e;
+      background-color: #ffffff;
+      font-weight: initial;
+      padding: 12px 16px;
+      border-bottom: solid 1px #eee;
+      min-height: inherit;
+      font-size: 0.9em;
+      display: flex;
+      &::before {
+      min-height: 16px;
+      }
+      &.md-no-proxy, &.md-no-style {
+        justify-content: space-between !important;
+      }
+      span:first-of-type {
+        flex: 1 1 auto;
+      }
+      span a {
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        font-size: 1em;
+      }
+      md-icon {
+        margin: 0;
+      }
+    }
+  }
+  md-pagination-wrapper {
+    width: 100% !important;
+    md-tab-item {
+      width: 50% !important;
+    }
+  }
+  md-tabs {
+    .md-tab.md-active {
+      color: $primary-color !important;
+    }
+    .md-tab {
+      background-color: #ffffff;
+      font-weight: 500 !important;
+      color: #989898 !important;
+      font-size: 1em !important;
+      letter-spacing: 0.01em !important;
+    }
+  }
+}
+
+/**********************
+  TRANSFERT DROPDOWN STYLING
+***********************/
+
+
+#transfert-dropdown {
+  .tabsdemoDynamicHeight {
+    height: 457px !important;
+    .time-remaining {
+      margin: 0;
+      margin-top: 2px;
+      font-size: 0.67em;
+      color: #8A8A8A;
+    }
+  }
+  .p-0 {
+    padding: 0 !important;
+  }
+  .listview .lv-item .lv-actions {
+    position: inherit;
+    right: inherit;
+    top: inherit;
+  }
+  .secondary-info-ctn {
+    color: #A8A8A8;
+    font-size: 0.75em;
+    text-align: right;
+    vertical-align: bottom;
+    position: relative;
+    height: 18px;
+    width: 20%;
+    float: left;
+    .secondary-info-text {
+      vertical-align: bottom;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      i {
+        color: $textColorDark;
+      }
+    }
+  }
+  .file-name {
+    height: 18px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 80%;
+    float: left;
+  }
+  .progress {
+    height: 3px;
+  }
+  .lv-item.row {
+    margin: 0;
+    padding: 8px 8px 8px 14px;
+    border-bottom: solid 1px #eee;
+    background-color: #ffffff;
+  }
+  .lv-item.row:hover {
+    background-color: #f8f8f8;
+    .progress {
+      background-color: #ececec;
+    }
+
+  }
+  .files-count i {
+    font-size: 0.9em;
+  }
+  .recipients-count i {
+    font-size: 1.233em;
+    vertical-align: middle;
+    margin-left: 0.1em;
+  }
+  .recipients-count {
+    margin-left: 0.75em;
+  }
+}
+
+/**********************
+ TRANSFERT ICON
+***********************/
+
+#header > ul.header-inner .icon-transfert {
+  position: absolute;
+  left: 0;
+  text-align: center;
+  width: 48px;
+  margin: auto;
+  font-size: 21px;
+}
+
+header > ul.header-inner > li.pull-right > ul.top-menu > li > a {
+  height: 41px;
+}
+
+/**********************
+ ANIMATED TRANSFERT ICON
+***********************/
+
+// animated transfert icon arrows, upon a new file upload
+#newUploadIcon {
+  position: absolute;
+  left: 0;
+  display: none;
+  -webkit-transform-origin: top center;
+  -moz-transform-origin: top center;
+  -ms-transform-origin: top center;
+  transform-origin: top center;
+  -moz-transform: scale(6);
+  -ms-transform: scale(6);
+  -webkit-transform: scale(6);
+  transform: scale(6);
+  color: #DFDFDF;
+  opacity: 1;
+  -webkit-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  &.active-anim-transfert-icon {
+    visibility: visible;
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/**********************
+  HEADER STYLING
+***********************/
+
+#header {
+  min-height: 50px;
+  height: 50px;
+  background-color: $primary-color;
+  .page-title {
+    font-size: 20px;
+    color: #fff;
+    margin-top: 2px;
+  }
+  .logo {
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    a {
+      font-size: 22px;
+      padding: 0;
+      text-transform: initial;
+      letter-spacing: 1px;
+      display: inline-block;
+      h1 {
+        color: #fff;
+        margin: 0;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+      }
+      img {
+        width: 100%;
+        margin-top: 0;
+      }
+      span {
+      }
+    }
+  }
+  #top-search-wrap {
+    height: 50px;
+    input[type="text"] {
+      height: 30px;
+    }
+  }
+
+  .header-inner {
+    padding: 7px 0;
+    .top-menu {
+      margin-top: 2px;
+    }
+    #menu-trigger::before {
+      top: 3px;
+    }
+  }
+  > ul.header-inner {
+    > li.pull-right > ul.top-menu > li > a {
+      color: #fff;
+      text-align: center;
+      > i {
+        vertical-align: text-top;
+        &.ls-uploads{
+          line-height: 1.25;
+        }
+      }
+      &.ctn-badge-count {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 15px;
+        z-index: 4;
+      }
+    }
+  }
+  .top-menu > li {
+    min-width: 45px;
+    > a > .tm-icon {
+      font-size: 24px;
+      line-height: 35px;
+    }
+  }
+  > ul.header-inner {
+    .icon-transfert {
+      width: 45px;
+      font-size: 20px !important;
+    }
+    > li.pull-right > ul.top-menu > li > a {
+      height: 35px;
+    }
+  }
+}
+
+#header .logo {
+  width: 115px;
+  padding: auto 6px auto 0;
+  a img {
+    width: 100%;
+  }
+}
+
+/**********************
+  RESPONSIVE
+***********************/
+
+@media (min-width: 1200px) {
+  #header {
+    height: 50px;
+    .header-inner {
+      padding: 7px 0;
+    }
+  }
+  .sw-toggled #menu-trigger {
+    display: none;
+  }
+}
+
+// display  sidebar main-menu
+@media (max-width: 1093px) {
+  #menu-trigger {
+    display: block;
+  }
+}
+
+@media (min-width: 1094px) {
+  #menu-trigger {
+    display: none;
+  }
+}
+
+/**********************
+  MOBILE RESPONSIVE
+***********************/
+
+@media (max-width: 767px) {
+  #header {
+    padding: 0;
+    .page-title {
+      font-size: 1.3em;
+      margin-top: 6px;
+    }
+    #menu-trigger:before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 10px;
+      width: 35px;
+      margin-top: 4px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+      -webkit-transition: all;
+      -o-transition: all;
+      transition: all;
+      -webkit-transition-duration: 300ms;
+      transition-duration: 300ms;
+      -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+      -o-transform: scale(0);
+      transform: scale(0);
+      z-index: 0;
+    }
+    .top-menu > li {
+      min-width: 45px;
+    }
+    .top-menu > li:nth-child(2) {
+      margin-right: 12px;
+    }
+    > ul.header-inner > li.pull-right > ul.top-menu > li > a.ctn-badge-count {
+      top: 6px;
+      right: 6px;
+    }
+  }
+}

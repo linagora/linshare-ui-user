@@ -1,0 +1,117 @@
+@import "../../_fonts.scss";
+@import "../../_colors.scss";
+
+/**********************
+  SIDEBAR GUEST LIST
+***********************/
+
+/*TODO remove  select-chosen-ctn ref in guest views*/
+
+#guest-account-chosen .chosen-container-single.chosen-container-single-nosearch {
+  width: 100% !important;
+  .chosen-drop {
+    width: 140px;
+  }
+  .chosen-single {
+    color: #858585;
+    line-height: 33px;
+    font-weight: normal;
+  }
+  .chosen-results {
+    font-weight: normal;
+    color: #858585;
+  }
+  abbr {
+    display: none;
+  }
+}
+#content-ctn-sidebar.form-guests.form-create-guests{
+  height: calc(100% - 200px);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#content-ctn-sidebar.form-guests{
+  height: calc(100% - 100px);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.guest-description {
+  padding-bottom: 2em;
+}
+
+#profile-main.detail-guest {
+  .img-preview-ctn {
+    height: 200px;
+    background: $specific-sidebar-guest-lists-detail-guest-img-preview-ctn-background-color url(#{$ressource-path}/images/banner_homepage_linshare.png);
+    opacity: 1;
+    overflow-x: hidden;
+    background-size: cover;
+    p{
+      height: inherit;
+    }
+  }
+  .user-preview-ctn {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    .detail-info-ctn.flex-ctn {
+      margin: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      .item-l {
+        flex: 0 0 43px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px !important;
+      }
+      .first-letter {
+        color: $specific-sidebar-guest-lists-detail-guest-detail-info-first-letter-color;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        align-self: center;
+        align-items: center;
+        text-align: center;
+        font-size: 2.5em;
+        background-color: #fff !important;
+      }
+      p {
+        font-size: 1.2em;
+        color: #fff;
+      }
+      p.email {
+        font-size: 0.9em;
+        letter-spacing: 0.015em;
+        color: #f8f8f8;
+      }
+    }
+  }
+  .custom-list-item .name-recipients-ctn {
+    width: 101px;
+  }
+}
+
+#content-ctn-sidebar #profile-main.detail-guest  {
+  h2.subheader {
+    font-size: 1.17em;
+  }
+}
+
+/**********************
+  MOBILE RESPONSIVE
+***********************/
+
+@media (max-width: 768px) {
+  #content-ctn-sidebar.form-update-guests{
+    width: 100% !important;
+    height: calc(100% - 110px);
+  }
+}

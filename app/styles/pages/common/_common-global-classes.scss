@@ -1,0 +1,201 @@
+@import "../../_fonts.scss";
+@import "../../_colors.scss";
+
+/**********************
+ COMMON HELPER CLASSES
+***********************/
+
+.v-center {
+  vertical-align: middle;
+}
+
+.m-l-50 {
+  margin-left: 50px;
+}
+.m-t-55 {
+  margin-top: 55px !important;
+}
+.m-b-40 {
+  margin-bottom: 40px !important;
+}
+
+.pipe-separator{
+  font-size: 0.8em !important;
+}
+
+.owner-info {
+  color: $common-global-classes-owner-info-color;
+}
+
+// TODO : alignement
+.ls-1p5x {
+  font-size: 1.5em;
+}
+
+.m-t-2em {
+  margin-top: 2em;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  content: "";
+  display: block !important;
+  clear: both !important;
+}
+
+// TODO : dangerous
+.hide, .hide * {
+  display: none;
+}
+
+.disabled {
+  pointer-events: none !important;
+  color: $disabled !important;
+  a, span, p {
+    color: $disabled !important;
+  }
+}
+
+.disabled-work-in-progress {
+  .path1:before, .path2:before, .path3:before, .path4:before {
+    color: $disabledAlt;
+  }
+}
+
+//  TODO: Check if specify for action links in file listing
+.setVisible {
+  visibility: visible !important;
+  > li:not(:last-child) {
+    visibility: visible !important;
+  }
+}
+// TODO: CHECK if posible class replacement
+.hideVis {
+  visibility: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.display-none {
+  display: none;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.set-content-right {
+  text-align: right;
+}
+
+.set-content-left {
+  text-align: left;
+}
+
+.center {
+  text-align: center !important;
+}
+
+// TODO check if needed or specify view
+.align-right li a, .align-right {
+  text-align: right !important;
+}
+
+.required-field-hint {
+  color: red;
+  font-size: 0.85em;
+}
+
+.clic-enabled {
+  cursor: pointer;
+}
+.click-disabled {
+  cursor: default !important;
+  pointer-events: none;
+}
+
+.set-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.noMargin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.setWhite {
+  opacity: 1 !important;
+}
+
+.setDisabled {
+  z-index: -1 !important;
+}
+
+.active-link, .active-link span {
+  color: $primary-color !important;
+}
+
+.has-error > span {
+  color: $error;
+  clear: both;
+  display: block;
+  margin-top: 7px;
+}
+
+.disabled-work-in-progress, .disabled-work-in-progress i {
+  color: $disabled !important;
+  pointer-events: none !important;
+  p {
+    color: $disabled important;
+  }
+}
+
+.m-t-50 {
+  margin-top: 50px !important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clear-floats {
+  clear: both;
+}
+
+.m-t-40 {
+  margin-top: 40px !important;
+}
+
+.pos-relative {
+  position: relative !important;
+}
+
+.p-b-60 {
+  padding-bottom: 60px;
+}
+
+.invisible {
+  visibility: hidden;
+  display: none !important;
+}
+
+.display-block {
+  display: block;
+}
+
+.truncate{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.break-word {
+  word-wrap: break-word
+}

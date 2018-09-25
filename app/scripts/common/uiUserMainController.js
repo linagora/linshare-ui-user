@@ -88,6 +88,10 @@
     $scope.userQuotas = {};
     $scope.workgroupPage = lsAppConfig.workgroupPage;
 
+    mainVm.applicationLogoSmall = lsAppConfig.applicationLogo.small;
+    mainVm.applicationLogoLarge = lsAppConfig.applicationLogo.large;
+    mainVm.loginBackground = lsAppConfig.loginBackground;
+
     mainVm.flowUploadService = flowUploadService;
     mainVm.removeShareDocument = removeShareDocument;
     mainVm.resizeDragNDropCtn = resizeDragNDropCtn;

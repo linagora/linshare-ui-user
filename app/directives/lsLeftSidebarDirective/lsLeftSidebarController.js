@@ -20,7 +20,6 @@
     /* jshint validthis: true */
     var lsLeftSidebarVm = this;
     lsLeftSidebarVm.$timeout = $timeout;
-    lsLeftSidebarVm.changeColor = changeColor;
     lsLeftSidebarVm.productVersion = 'dev';
     lsLeftSidebarVm.tabs = {};
 
@@ -37,19 +36,6 @@
       lsLeftSidebarVm.tabs = MenuService.getAvailableTabs();
       getCoreVersion();
       getProductVersion();
-    }
-
-    /**
-     * @name changeColor
-     * @desc Change color of mouse hovered menu
-     * @param {Object} link - tab details
-     * @param {String} color - color to apply
-     * @memberOf linshareUiUserApp.lsLeftSidebarController
-     */
-    function changeColor(link, color) {
-      if(link.disabled === false) {
-        lsLeftSidebarVm.customColor = {'color': color};
-      }
     }
 
     /**

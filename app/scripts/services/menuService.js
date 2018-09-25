@@ -14,8 +14,7 @@
     '$q',
     'authenticationRestService',
     'functionalityRestService',
-    'lsAppConfig',
-    'lsColors'
+    'lsAppConfig'
   ];
 
   /**
@@ -28,8 +27,7 @@
     $q,
     authenticationRestService,
     functionalityRestService,
-    lsAppConfig,
-    lsColors
+    lsAppConfig
   ) {
     var
       administrations,
@@ -126,7 +124,6 @@
       files = {
         name: 'MENU_TITLE.FILES',
         icon: 'ls-my-space',
-        color: '#2196F3',
         disabled: false,
         link: 'documents.files'
       };
@@ -134,7 +131,6 @@
       receivedShares = {
         name: 'MENU_TITLE.RECEIVED_SHARES',
         icon: 'ls-received-shares',
-        color: '#2196F3',
         disabled: false,
         link: 'documents.received'
       };
@@ -143,22 +139,19 @@
         name: 'MENU_TITLE.HOME',
         link: 'home',
         icon: 'ls-homepage',
-        color: lsColors.PRIMARY_BLUE,
         disabled: false
       };
 
       myUploads = {
         name: 'MENU_TITLE.UPLOAD_AND_SHARE',
         link: 'documents.upload',
-        icon: 'ls-uploads',
-        color: lsColors.PRIMARY_BLUE
+        icon: 'ls-uploads'
       };
 
       sharedSpace = {
         name: 'MENU_TITLE.SHARED_SPACE',
         link: 'sharedspace.all',
         icon: 'ls-workgroup',
-        color: lsColors.PRIMARY_BLUE,
         disabled: false
       };
 
@@ -166,14 +159,12 @@
         name: 'MENU_TITLE.SAFE_DETAILS',
         link: 'safe_details.global',
         icon: 'zmdi zmdi-card',
-        color: '#FFC107',
         disabled: !lsAppConfig.enableSafeDetails
       };
 
       uploads = {
         name: 'MENU_TITLE.UPLOAD_MANAGMENT',
         icon: 'ls-upload-request',
-        color: '#8BC34A',
         disabled: lsAppConfig.production,
         links: [{
           name: 'MENU_TITLE.UPLOAD_PROPOSITIONS',

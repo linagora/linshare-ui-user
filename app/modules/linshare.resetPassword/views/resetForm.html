@@ -38,7 +38,7 @@
     </div>
   </div>
   <div id="copyright-login">
-    <img src="images/common/linshare-logo-white.png" alt="">
+    <img ng-src="images/common/linshare-logo-white.png" alt="">
     <p data-bind-html translate>LOGIN.COPYRIGHT</p>
   </div>
   <div class="quota login-libreNfreeCtn">
@@ -50,7 +50,7 @@
   <div class="login-content" id="l-login">
     <div class="parent-login-form-alignment">
       <div class="logo-title">
-        <img src="images/ls-logo-big.png" alt="logo">
+        <img ng-src="{{::mainVm.applicationLogoLarge}}" alt="logo">
         <p>{{'LOGIN.TAGLINE' | translate}}</p>
       </div>
       <div x-ng-if="resetVm.reset.type === 'create'" ls-reset-form

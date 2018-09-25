@@ -1,5 +1,5 @@
 <div data-ng-class="{'hidden': !mactrl.sidebarToggle.left}" class="profile-menu-ctn">
-    <div class="btn-add-files-ctn">
+    <div class="btn-add-files-ctn" style="background-image:url({{::mainVm.loginBackground}});">
       <div class="dark-overlay"></div>
       <div id="userNameSidebar">
         <div class="flex-ctn detail-info-ctn">
@@ -76,9 +76,7 @@
           <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}<span>
         </a>
         <ul>
-          <li data-ng-show="::!link.disabled" data-ng-repeat="link in tab.links" role="button" class="waves-effect"
-              data-ng-mouseover="lsLeftSidebarVm.changeColor(link, tab.color)"
-              data-ng-mouseleave="lsLeftSidebarVm.changeColor(link, 'inherit')">
+          <li data-ng-show="::!link.disabled" data-ng-repeat="link in tab.links" role="button" class="waves-effect">
             <a data-ui-sref="{{::link.link}}"
                data-ui-sref-active="active"
                data-ng-class="::{'disabled': link.disabled}" translate>

@@ -1,0 +1,100 @@
+@import "../../_fonts.scss";
+@import "../../_colors.scss";
+
+
+/**********************
+ SWAL WITH INLINE FORM
+***********************/
+
+.modal-dialog.modal-swal {
+  position: fixed;
+  height: 79%;
+  width: 100%;
+  margin: 0;
+}
+
+.sweet-alert.custom-swal-form {
+  display: block !important;
+  * div {
+    display: block !important;
+  }
+  > p {
+    padding-bottom: 2em;
+  }
+  h2 {
+    padding-bottom: 0;
+  }
+  .sa-button-container button.confirm {
+    display: inline-block;
+    background-color: $primary-color;
+    box-shadow: rgba(5, 177, 255, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset;
+  }
+  .form-control {
+    display: block;
+    width: 100%;
+    height: 35px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #000000;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    margin: 0;
+    input {
+      background-color: transparent;
+    }
+  }
+  div.form-group {
+    font-size: 1.05em;
+    line-height: 1.6em;
+    background-color: #fff;
+    margin: 0;
+    padding: 0 1em 50px !important;
+    p {
+      background-color: transparent !important;
+    }
+    .fg-float .form-control {
+      position: relative;
+      background: transparent;
+      z-index: 1;
+    }
+    .form-control:not(.fc-alt) {
+      border-left: 0;
+      border-right: 0;
+      border-top: 0;
+      appearance: none;
+      padding: 0;
+    }
+    .has-error .form-control {
+      border-color: #f6675d;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+    .has-error span {
+      font-size: 0.85em;
+    }
+    .form-control {
+      height: 30px;
+    }
+  }
+  .custom-swal-form-ctn {
+    background-color: #fff;
+    padding: 0 0.6em;
+  }
+}
+
+@media (max-width: 768px) {
+  .sweet-alert.custom-swal-form {
+    h2 {
+      line-height: 1.5;
+      padding-bottom: 1em;
+      padding-top: 2em;
+    }
+    .custom-swal-form-ctn > p {
+      font-size: 0.9em;
+    }
+  }
+}
