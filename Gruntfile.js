@@ -2,6 +2,8 @@
 'use strict';
 
 var GruntfileThemes = require('./tasks/utils/Gruntfile-themes');
+var uuid = require('uuid/v1');
+const build_uuid = uuid().split("-").shift();
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -72,9 +74,9 @@ module.exports = function(grunt) {
 
     // Dynamically manage the minification of the application themes
     cssmin : new GruntfileThemes(appConfig).list().reduce(function(config, theme) {
-      config['<%= yeoman.dist %>/styles/' + theme + '.css'] = '.tmp/styles/' + theme + '.css';
-      return config;
-    }, {}),
+        config[`<%= yeoman.dist %>/styles/${theme}.${build_uuid}.css`] = `.tmp/styles/${theme}.css`;
+        return config;
+      }, {}),
 
     // The actual grunt server settings
     connect: {
@@ -247,7 +249,7 @@ module.exports = function(grunt) {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/directives/*/*.js',
-          '<%= yeoman.dist %>/styles/{,*/}*.css',
+          '<%= yeoman.dist %>/styles/!(theme\.){,*/}*.css',
           //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '!<%= yeoman.dist %>/config/config.js',
           '<%= yeoman.dist %>/styles/fonts/*'
