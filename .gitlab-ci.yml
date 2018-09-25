@@ -2,6 +2,14 @@ image: docker-registry.linagora.com:5000/linshare-snapshots/linshare-build-helpe
 stages:
   - build
 
+check:
+  image: docker-registry.linagora.com:5000/linshare-snapshots/linshare-build-helper:latest
+  stage: build
+  tags:
+      - docker
+  script:
+    - check_author.py check "${GITLAB_USER_EMAIL}" "${GITLAB_USER_NAME}" --no-accents
+
 build:
   stage: build
   tags:
