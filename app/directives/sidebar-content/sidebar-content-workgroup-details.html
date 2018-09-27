@@ -152,9 +152,9 @@
                 <span>
                   {{
                   "MEMBER_TAB." +
-                  mainVm.sidebar.getData().roles ?
+                  (mainVm.sidebar.getData().roles ?
                   mainVm.sidebar.getData().roles[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].name :
-                  mainVm.sidebar.getData().role.name
+                  mainVm.sidebar.getData().role.name)
                   | translate
                   }}
                 <br />

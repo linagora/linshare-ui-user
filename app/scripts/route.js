@@ -307,6 +307,15 @@
                 return permissions[Object.keys(permissions)[0]];
               });
           },
+          workgroupRole: function(workgroup, workgroupRolesService) {
+            return workgroupRolesService
+              .getWorkgroupsRoles([workgroup])
+              .then(function(workgroupsRoles) {
+                const roles = workgroupRolesService.formatRoles(workgroupsRoles);
+
+                return roles[Object.keys(roles)[0]];
+              });
+          }
         }
       })
       .state('sharedspace.workgroups.folder_redirect', {
