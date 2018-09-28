@@ -1,81 +1,84 @@
 {
-  "TBT__BACKGROUND_GUEST_MSG": "",
-  "TBT__BACKGROUND_GUESTS_TITLE_MSG": "",
+  "BACKGROUND_GUEST_MSG": "Bằng cách tạo tài khoản khách tạm thời, người liên hệ của bạn sẽ có thể trao đổi tệp trong LinShare.",
+  "BACKGROUND_GUESTS_TITLE_MSG": "Tạo tài khoản khách",
   "ACTION": {
-    "TBT__ADD_TO_WORKGROUPS": ""
+    "ADD_TO_WORKGROUPS": "Thêm vào nhóm làm việc"
   },
   "BOUTON_LABEL_TITLE": {
-    "TBT__EDIT": "",
-    "TBT__DELETE": "",
-    "TBT__GUEST": ""
+    "EDIT": "Chỉnh sửa",
+    "DELETE": "Xóa bỏ",
+    "GUEST": "Khách)"
   },
-  "TBT__BREADCRUMB_TITLE_GUEST": "",
+  "BREADCRUMB_TITLE_GUEST": "Tài khoản khách",
   "GUEST_DETAILS": {
-    "TBT__ACTIVATED": "",
-    "TBT__ADMIN": "",
-    "TBT__ALREADY_A_MEMBER": "",
-    "TBT__AVAILABLE_CONTACTS": "",
+    "ACTIVATED": "Đã kích hoạt",
+    "ADMIN": "Người quản lý",
+    "ALREADY_A_MEMBER": "Đã là thành viên hay chưa",
+    "AVAILABLE_CONTACTS": "Danh sách liên hệ khả dụng",
     "COMMENT": {
-      "TBT__EMPTY": "",
-      "TBT__TITLE": ""
+      "EMPTY": "Miễn bình luận",
+      "TITLE": "Bình luận"
     },
-    "TBT__DEACTIVATED": "",
-    "TBT__DETAIL_OF_GUEST_ACCOUNT": "",
-    "TBT__DOMAIN": "",
-    "TBT__EDIT_GUEST": "",
-    "TBT__EXPIRE_THE": "",
-    "TBT__MY_SPACE": "",
-    "TBT__RESTRICTED_CONTACTS": "",
-    "UPDATE_OF_GUEST_ACCOUNT": ""
+    "DEACTIVATED": "Đã hủy kích hoạt",
+    "DETAIL_OF_GUEST_ACCOUNT": "Chi tiết tài khoản khách",
+    "DOMAIN": "Tên Miền",
+    "EDIT_GUEST": "Chỉnh sửa",
+    "EXPIRE_THE": "Hết hạn",
+    "MY_SPACE": "Chỗ của tôi",
+    "RESTRICTED_CONTACTS": "Danh bạ bị hạn chế",
+    "UPDATE_OF_GUEST_ACCOUNT": "Chỉnh sửa tài khoản khách"
   },
   "HEADER_GUEST": {
-    "TBT__DOMAIN": "",
+    "DOMAIN": "Miền",
     "SLIDER": {
-      "TBT__MY_GUEST": "",
-      "TBT__OTHER_GUEST": ""
+      "MY_GUEST": "Khách của tôi",
+      "OTHER_GUEST": "Các khách khác"
     }
+
   },
-  "TBT__NC": "",
+  "NC": "N.C.",
   "ORDER_BY": {
-    "TBT__EXPIRATION_DATE": "",
-    "TBT__EMAIL": "",
-    "TBT__DOMAIN_NAME": ""
+    "EXPIRATION_DATE": "Ngày hết hạn",
+    "EMAIL": "E-mail",
+    "DOMAIN_NAME": "Tên miền"
   },
   "SIDEBAR": {
-    "TBT__ADMIN_RIGHT": "",
+    "ADMIN_RIGHT": "Bạn không có quyền quản trị viên để cập nhật khách này",
     "BUTTON": {
-      "TBT__CREATE": "",
-      "TBT__CANCEL": "",
-      "TBT__UPDATE": ""
+      "CREATE": "Tạo nên",
+      "CANCEL": "Hủy bỏ",
+      "UPDATE": "Cập nhật"
     },
     "ERROR": {
-      "TBT__INVALID_DATE": "",
-      "TBT__INVALID_EMAIL": "",
-      "TBT__INVALID_EMPTY_FIELD": ""
+      "INVALID_DATE": "
+Ngày cần phải lớn hơn ngày hôm nay và không thể vượt quá ngày hết hạn
+tối đa là:",
+      "INVALID_EMAIL": "Địa chỉ email không hợp lệ.",
+      "INVALID_EMPTY_FIELD": "Trường này không thể để trống."
     },
     "LABEL": {
-      "TBT__ACTIVATE_USER_SPACE": "",
-      "TBT__ADD_DESCRIPTION": "",
-      "TBT__ADD_EMAIL": "",
-      "TBT__ADVANCED_OPTIONS": "",
-      "TBT__ALLOW_MODIFICATORS": "",
-      "TBT__EMAIL": "",
-      "TBT__ENTER_DESCRIPTION": "",
-      "TBT__ENTER_EMAIL": "",
-      "TBT__EXP_DATE": "",
-      "TBT__FIRSTNAME": "",
-      "TBT__LASTNAME": "",
-      "TBT__RESTRICT_CONTACTS": ""
+      "ACTIVATE_USER_SPACE": "Kích hoạt không gian người dùng",
+      "ADD_DESCRIPTION": "Thêm mô tả người dùng",
+      "ADD_EMAIL": "thêm một tin nhắn",
+      "ADVANCED_OPTIONS": "Tùy chọn nâng cao",
+      "ALLOW_MODIFICATORS": "Cho phép người dùng khác sửa đổi tài khoản này",
+      "EMAIL": "Thư điện tử"",
+      "ENTER_DESCRIPTION": "Nhập mô tả của bạn",
+      "ENTER_EMAIL": "Nhập tin nhắn của bạn",
+      "EXP_DATE": "Ngày hết hạn",
+      "FIRSTNAME": "Tên đầu tiên",
+      "LASTNAME": "Họ",
+      "RESTRICT_CONTACTS": "Giới hạn danh sách liên hệ"
     },
     "NOTIFICATION": {
       "SUCCESS": {
-        "TBT__CREATE": "",
-        "TBT__DELETE": "",
-        "TBT__UPDATE": ""
+        "CREATE": "Tài khoản khách đã được tạo thành công",
+        "DELETE": "Tài khoản khách đã được xóa thành công",
+        "UPDATE": "Tài khoản khách đã được cập nhật thành công"
       }
     },
     "TITLE": {
-      "TBT__CREATE": ""
+      "CREATE": "TẠO TÀI KHOẢN GUEST"
     }
   }
 }

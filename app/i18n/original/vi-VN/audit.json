@@ -1,123 +1,73 @@
 {
   "ACTIONS": {
-    "TBT__INFO": ""
+    "INFO": "Chi tiết"
   },
-  "TBT__AUTHOR_ME": "",
-  "TBT__AUTHOR_SYSTEM": "",
-  "TBT__AUTHOR_SUPERADMIN": "",
-  "TBT__BREADCRUMB_TITLE_AUDIT": "",
+  "AUTHOR_ME": "Tôi",
+  "AUTHOR_SUPERADMIN": "Quản trị viên cấp cao",
+  "AUTHOR_SYSTEM": "Hệ thống",
+  "BREADCRUMB_TITLE_AUDIT": "Nhật ký hoạt động",
   "DETAILS_POPUP": {
-    "TBT__BY": "",
-    "TBT__MODIFICATIONS": "",
+    "BY": "bởi",
+    "MODIFICATIONS": "(Các) sửa đổi",
     "SENTENCES": {
       "ANONYMOUS_SHARE_ENTRY": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chia sẻ tệp: {{resourceName}} với {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chia sẻ tệp: {{resourceName}} với bạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
-          }
-        },
-        "COPY_FROM_PERSONAL_SPACE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          }
-        },
-        "COPY_FROM_RECEIVED_SHARE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          }
-        },
-        "COPY_FROM_SHARED_SPACE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          }
-        },
-        "COPY_TO_PERSONAL_SPACE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          }
-        },
-        "COPY_TO_SHARED_SPACE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa chia sẻ tệp: {{resourceName}}, dành cho {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa chia sẻ tệp: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "DOWNLOAD": {
-          "ADMIN": {
-            "TBT__SENTENCE": "",
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã tải xuống tệp chia sẻ từ bạn: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
+          "ADMIN": {
+            "SENTENCE": "{{authorName}} đã tải xuống tệp chia sẻ: {{resourceName}}, được gửi bởi {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           }
         },
         "EXPIRATION": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Chia sẻ tệp của bạn: {{resourceName}} dành cho {{userVarious}} đã hết hạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Chia sẻ tệp của {{authorName}}: {{resourceName}} dành cho {{userVarious}} đã hết hạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "READ": {
-          "ADMIN": {
-            "TBT__SENTENCE": "",
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã xem tệp chia sẻ  của bạn lúc {{dateVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.READ"
           },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
+          "ADMIN": {
+            "SENTENCE": "{{authorName}} đã xem tệp chia sẻ được gửi lúc {{dateVarious}}, bởi {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.READ"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa tệp chia sẻ: {{resourceName}}, dành cho {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa tệp chia sẻ: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           }
         }
@@ -125,21 +75,21 @@
       "AUTHENTICATION": {
         "FAILURE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã cố đăng nhập bằng thông tin đăng nhập không hợp lệ.",
             "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã cố đăng nhập bằng thông tin đăng nhập không hợp lệ.",
             "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
           }
         },
         "SUCCESS": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã đăng nhập thành công.",
             "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã đăng nhập thành công.",
             "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
           }
         }
@@ -147,31 +97,31 @@
       "CONTACTS_LISTS": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo Danh sách liên hệ mới: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo Danh sách liên hệ mới: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa Danh sách liên hệ: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa Danh sách liên hệ: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa Danh sách liên hệ: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa Danh sách liên hệ: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -179,31 +129,31 @@
       "CONTACTS_LISTS_CONTACTS": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã thêm: {{resourceName}} vào Danh sách liên hệ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã thêm: {{resourceName}} vào Danh sách liên hệ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa: {{resourceName}} khỏi Danh sách liên hệ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa: {{resourceName}} khỏi Danh sách liên hệ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa: {{resourceName}} từ Danh sách liên hệ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa: {{resourceName}} từ Danh sách liên hệ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -211,61 +161,111 @@
       "DOCUMENT_ENTRY": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tải lên một tệp mới: {{resourceName}} vào không gian cá nhân của bạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tải lên một tệp mới: {{resourceName}} vào Không gian cá nhân của họ.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        },
+        "COPY_FROM_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} từ Không gian cá nhân của bạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} từ Không gian cá nhân của họ.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_RECEIVED_SHARE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép một tệp mới: {{resourceName}} từ một chia sẻ đã nhận.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} từ một chia sẻ đã nhận.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} từ nhóm làm việc {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} vào Không gian cá nhân của bạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} vào Không gian cá nhân của anh ấy.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tạo một tệp mới: {{resourceName}} vào {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã tạo tài liệu: {{resourceName}} vào {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa tệp: {{resourceName}} khỏi Không gian cá nhân của mình.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "DOWNLOAD": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tải xuống tệp: {{resourceName}} từ Không gian cá nhân của mình.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           }
         },
         "EXPIRATION": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Tài liệu của bạn: {{resourceName}} đã bị xóa khỏi Không gian cá nhân của bạn kể từ khi tệp hết hạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Tài liệu của {{authorName}}: {{resourceName}} đã bị xóa khỏi Không gian cá nhân kể từ khi tệp hết hạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "INCONSISTENCY": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Tài liệu của bạn: {{resourceName}} đã bị xóa khỏi Không gian cá nhân của bạn vì không thể tìm thấy tệp.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Tài liệu của {{userVarious}}: {{resourceName}} đã bị xóa khỏi Không gian cá nhân vì không thể tìm thấy tệp.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa tệp: {{resourceName}} từ Không gian cá nhân của mình.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -273,113 +273,41 @@
       "GUEST": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "You have created a new Guest Account for : {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo Tài khoản khách mới cho: {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa Tài khoản khách của: {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa Tài khoản khách của: {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "EXPIRATION": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Tài khoản khách của: {{userVarious}} đã hết hạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
-          }
-        },
-        "UPDATE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
-          }
-        }
-      },
-      "SHARE_ENTRY": {
-        "CREATE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
-          }
-        },
-        "COPY_TO_PERSONAL_SPACE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          }
-        },
-        "COPY_TO_SHARED_SPACE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
-          }
-        },
-        "DELETE": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
-          }
-        },
-        "DOWNLOAD": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
-          }
-        },
-        "EXPIRATION": {
-          "AUTHOR": {
-            "TBT__SENTENCE": "",
-            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
-          },
-          "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Tài khoản khách của {{authorName}}: {{userVarious}} đã hết hạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa Tài khoản khách của: {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa Tài khoản khách của: {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -387,31 +315,103 @@
       "JWT_PERMANENT_TOKEN": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo mã thông báo truy cập vĩnh viễn: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo mã thông báo truy cập vĩnh viễn: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa mã thông báo truy cập vĩnh viễn: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa mã thông báo truy cập vĩnh viễn: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "",
+            "SENTENCE": "Bạn đã cập nhật mã thông báo truy cập vĩnh viễn: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã cập nhật mã thông báo truy cập vĩnh viễn: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "SHARE_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã chia sẻ tệp: {{resourceName}} với {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã chia sẻ tệp: {{resourceName}} với bạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} của {{userVarious}} vào Không gian cá nhân của bạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} vào Không gian cá nhân của anh ấy.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tạo tài liệu: {{resourceName}} của {{userVarious}} vào {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã tạo tài liệu: {{resourceName}} vào {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa chia sẻ tệp: {{resourceName}}, dành cho {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has deleted the file share : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "You have download the shared file: {{resourceName}}, sent by {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã tải xuống phần chia sẻ tệp của bạn: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "SENTENCE": "Chia sẻ tệp của bạn: {{resourceName}} dành cho {{userVarious}} đã hết hạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "Chia sẻ tệp của {{authorName}}: {{resourceName}} dành cho {{userVarious}} đã hết hạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã chỉnh sửa chia sẻ tệp: {{resourceName}}, dành cho {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã chỉnh sửa chia sẻ tệp: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -419,31 +419,31 @@
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo một Nhóm làm việc mới: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo một Nhóm làm việc mới: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa Nhóm làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa Nhóm làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa Nhóm làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa Nhóm làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -451,91 +451,91 @@
       "WORKGROUP_DOCUMENT": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tải lên một tệp mới: {{resourceName}} vào Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tải lên một tệp mới: {{resourceName}} vào Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
           }
         },
         "COPY_FROM_PERSONAL_SPACE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo tài liệu: {{resourceName}} vào {{resourceNameVarious}}, từ Không gian cá nhân của bạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo tài liệu: {{resourceName}} vào {{resourceNameVarious}}, từ Không gian cá nhân của anh ấy.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_FROM_RECEIVED_SHARE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo tài liệu: {{resourceName}} vào {{resourceNameVarious}}, từ một chia sẻ đã nhận.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo tài liệu: {{resourceName}} vào {{resourceNameVarious}}, từ Không gian cá nhân của anh ấy.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo tệp này bằng cách sao chép: {{resourceNameCopy}} từ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo tệp này bằng cách sao chép: {{resourceNameCopy}} từ {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_TO_PERSONAL_SPACE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} vào Không gian cá nhân của bạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} vào Không gian cá nhân của anh ấy.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo một bản sao của tệp này vào {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo một bản sao của tệp này vào {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa tệp: {{resourceName}} khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa tệp: {{resourceName}} khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "DOWNLOAD": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tải xuống tệp: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tải xuống tệp: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa tệp: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa tệp: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -543,31 +543,31 @@
       "WORKGROUP_FOLDER": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã tạo một thư mục mới: {{resourceName}} vào nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã tạo một thư mục mới: {{resourceName}} vào Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa thư mục: {{resourceName}} khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa thư mục: {{resourceName}} khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa thư mục: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa thư mục: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -575,108 +575,108 @@
       "WORKGROUP_MEMBER": {
         "CREATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã thêm một thành viên mới: {{resourceName}} vào nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã thêm một thành viên mới: {{resourceName}} vào nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã xóa thành viên: {{resourceName}} khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã xóa thành viên: {{resourceName}} khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "Bạn đã chỉnh sửa thành viên: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "TBT__SENTENCE": "",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa thành viên: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
       }
     },
     "UPDATED_FIELDS": {
-      "TBT__CAN_CREATE_GUEST": "",
-      "TBT__CAN_UPLOAD": "",
-      "TBT__EXPIRATION_DATE": "",
-      "TBT__FIRST_NAME": "",
-      "TBT__FOLDER": "",
-      "TBT__LAST_NAME": "",
-      "TBT__MAIL": "",
-      "TBT__NAME": "",
-      "TBT__RIGHT": "",
-      "TBT__RESTRICTED": ""
+      "CAN_CREATE_GUEST": "Có thể tạo khách",
+      "CAN_UPLOAD": "Có thể tải lên",
+      "EXPIRATION_DATE": "Ngày hết hạn",
+      "FIRST_NAME": "Tên đầu tiên",
+      "FOLDER": "Thư mục",
+      "LAST_NAME": "Họ",
+      "MAIL": "Thư",
+      "NAME": "Tên",
+      "RIGHT": "Quyền của người sử dụng",
+      "RESTRICTED": "Giới hạn địa chỉ liên hệ"
     },
     "UPDATED_FIELDS_RIGHTS": {
-      "TBT__ADMIN": "",
-      "TBT__WRITE": "",
-      "TBT__READ": ""
+      "ADMIN": "Người quản lý",
+      "WRITE": "Viết",
+      "READ": "Đọc"
     }
   },
-  "TBT__DISABLED": "",
-  "TBT__ENABLED": "",
+  "DISABLED": "Tàn tật",
+  "ENABLED": "Đã bật",
   "FILTERS_SELECT": {
     "ACTION": {
-      "TBT__ADDITION": "",
-      "TBT__ALL": "",
-      "TBT__COPY": "",
-      "TBT__CREATE": "",
-      "TBT__CREATE_SHARE": "",
-      "TBT__DELETE": "",
-      "TBT__DOWNLOAD": "",
-      "TBT__FAILURE": "",
-      "TBT__READ": "",
-      "TBT__RECEIVE_SHARE": "",
-      "TBT__SUCCESS": "",
-      "TBT__TRANSFER": "",
-      "TBT__UPDATE": "",
-      "TBT__UPLOAD": "",
-      "TBT__VIEWED": ""
+      "ADDITION": "Add on",
+      "ALL": "Tất cả các",
+      "COPY": "Sao chép",
+      "CREATE": "Sự sáng tạo",
+      "CREATE_SHARE": "Đã gửi chia sẻ",
+      "DELETE": "Xóa",
+      "DOWNLOAD": "Tải về",
+      "FAILURE": "Đăng nhập thất bại",
+      "READ": "Đọc",
+      "RECEIVE_SHARE": "Chia sẻ đã nhận",
+      "SUCCESS": "Đăng nhập thành công",
+      "TRANSFER": "chuyển khoản",
+      "UPDATE": "Cập nhật",
+      "UPLOAD": "Tải lên tệp",
+      "VIEWED": "Đã xem"
     },
     "TYPE": {
-      "TBT__ALL": "",
-      "TBT__ANONYMOUS_SHARE_ENTRY": "",
-      "TBT__AUTHENTICATION": "",
-      "TBT__CONTACTS_LISTS": "",
-      "TBT__CONTACTS_LISTS_CONTACTS": "",
-      "TBT__DOCUMENT_ENTRY": "",
-      "TBT__GUEST": "",
-      "JWT_PERMANENT_TOKEN": "",
-      "TBT__SHARE_ENTRY": "",
-      "TBT__WORKGROUP": "",
-      "TBT__WORKGROUP_DOCUMENT": "",
-      "TBT__WORKGROUP_FOLDER": "",
-      "TBT__WORKGROUP_MEMBER": ""
+      "ALL": "Tất cả các",
+      "ANONYMOUS_SHARE_ENTRY": "Chia sẻ",
+      "AUTHENTICATION": "Xác thực",
+      "CONTACTS_LISTS": "Danh sách liên hệ",
+      "CONTACTS_LISTS_CONTACTS": "Tiếp xúc",
+      "DOCUMENT_ENTRY": "Tập tin",
+      "GUEST": "Tài khoản khách",
+      "JWT_PERMANENT_TOKEN": "Mã thông báo truy cập vĩnh viễn (JWT)",
+      "SHARE_ENTRY": "Chia sẻ",
+      "WORKGROUP": "Nhóm làm việc",
+      "WORKGROUP_DOCUMENT": "Tệp nhóm làm việc",
+      "WORKGROUP_FOLDER": "Thư mục nhóm làm việc",
+      "WORKGROUP_MEMBER": "Thành viên nhóm làm việc"
     }
   },
-  "TBT__NO_AUDIT": "",
+  "NO_AUDIT": "Chưa có kiểm toán cho tài nguyên này",
   "TABLE_HEADER": {
-    "TBT__ACTION": "",
-    "TBT__ACTOR": "",
-    "TBT__DATE": "",
-    "TBT__DETAIL": "",
-    "TBT__RECIPIENT": "",
-    "TBT__RESOURCE_NAME": "",
-    "TBT__RESOURCE_TYPE": ""
+    "ACTION": "Hoạt động",
+    "ACTOR": "Diễn viên",
+    "DATE": "Ngày",
+    "DETAIL": "Chi tiết",
+    "RECIPIENT": "Người nhận",
+    "RESOURCE_NAME": "Tên tài nguyên",
+    "RESOURCE_TYPE": "Loại tài nguyên"
   },
   "TOOLBAR": {
-    "TBT__ORDER_BY": "",
-    "TBT__FILTER_BEGINNING_DATE": "",
-    "TBT__FILTER_ENDING_DATE": "",
-    "TBT__SEARCH": ""
+    "ORDER_BY": "Đặt bởi",
+    "FILTER_BEGINNING_DATE": "Ngày bắt đầu",
+    "FILTER_ENDING_DATE": "Ngày kết thúc",
+    "SEARCH": "Tìm kiếm"
   },
-  "TBT__WORKGROUP": {
-    "TBT__ANOTHER": "",
-    "TBT__CURRENT" : ""
+  "WORKGROUP": {
+    "ANOTHER": "một nhóm wokgroup khác",
+    "CURRENT" : "nhóm làm việc hiện tại"
   }
 }

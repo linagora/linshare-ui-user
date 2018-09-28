@@ -1,24 +1,24 @@
 {
-  "TBT__BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "",
-  "TBT__BACKGROUND_RECEIVED_SHARES_MSG": "",
-  "TBT__BREADCRUMB_TITLE_RECEIVED_SHARES": "Đã nhận tập tin",
-  "TBT__FILTER" : {
-    "TBT__ORDER_BY_SENDER": ""
+  "BACKGROUND_RECEIVED_SHARES_MSG": "Các chia sẻ là các liên kết tệp tạm thời, được gửi và lưu trữ bởi các người khác.",
+  "BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "Xem lượt chia sẻ của bạn",
+  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Các chia sẻ nhận được",
+  "FILTER" : {
+    "ORDER_BY_SENDER": "Người gửi"
   },
   "TOOLTIP" : {
-    "ADVANCED_FILTER" : "Bộ lọc nâng cao",
-    "REMOVE_FILES" : "Xóa tập tin được chọn",
-    "DOWNLOAD_FILES" : "Tải về",
-    "SHOW_MORE_OPTIONS" : "Thêm lựa chọn",
-    "DATE_OF_MODIFICATION" :"Ngày thay đổi",
-    "DATE_OF_CREATION" :"Ngày khởi tạo"
+    "ADVANCED_FILTER" : "Hiển thị bộ lọc nâng cao",
+    "REMOVE_FILES" : "Xóa các tệp đã chọn",
+    "DOWNLOAD_FILES" : "Tải xuống các tệp đã chọn",
+    "SHOW_MORE_OPTIONS" : "Hiển thị thêm tùy chọn",
+    "DATE_OF_MODIFICATION" : "Ngày sửa đổi",
+    "DATE_OF_CREATION" : "Ngày thành lập"
   },
   "TABLE_HEADER": {
     "NAME": "Tên",
-    "TYPE": "Thể loại",
-    "MODIFICATION_DATE": "Lần thay đổi cuối cùng",
-    "CREATION_DATE": "Ngày khởi tạo",
-    "SIZE": "Kích cỡ",
-    "ACTION": "Tác vụ"
+    "TYPE": "Kiểu",
+    "MODIFICATION_DATE": "Ngày cập nhật",
+    "CREATION_DATE": "Ngày thành lập",
+    "SIZE": "Kích thước",
+    "ACTION": "Hành động"
   }
 }

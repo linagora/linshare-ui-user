@@ -1,19 +1,19 @@
 {
   "ACTION": {
-    "TBT__GO_TO_MY_SAFE": "",
-    "TBT__VIEW_SAFE_DETAIL": ""
+    "GO_TO_MY_SAFE": "Chuyển đến vùng an toàn của tôi",
+    "VIEW_SAFE_DETAIL": "Xem chi tiết vùng an toàn"
   },
-  "TBT__BREADCRUMB_TITLE_SAFE_DETAILS": "",
+  "BREADCRUMB_TITLE_SAFE_DETAILS": "Chi tiết vùng an toàn",
   "POPOVER": {
-    "TBT__TITLE": "",
-    "TBT__INFORMATION": ""
+    "TITLE": "Chi tiết vùng an toàn",
+    "INFORMATION": "Vui lòng sao chép và gửi cho nhà cung cấp."
   },
   "TABLE_HEADER": {
-    "TBT_ACTIONS": "",
-    "TBT__CONTROL_KEY": "",
-    "TBT__COUNTRY_CODE": "",
-    "TBT__CREATION_DATE": "",
+    "ACTIONS": "Hành động",
+    "CONTROL_KEY": "Phím điều khiển",
+    "COUNTRY_CODE": "Mã quốc gia",
+    "CREATION_DATE": "Ngày thành lập",
     "IUFSC": "IUFSC",
-    "TBT__USER_KEY": ""
+    "USER_KEY": "Khóa người dùng"
   }
 }

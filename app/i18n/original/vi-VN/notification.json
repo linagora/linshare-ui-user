@@ -1,112 +1,112 @@
 {
   "SWEET_ALERT": {
     "ON_FILE_COPY": {
-      "TBT__CANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TEXT": "",
-      "TBT__TITLE": ""
+      "CANCEL_BUTTON": "Hủy bỏ!",
+      "CONFIRM_BUTTON": "Sao chép",
+      "TEXT": "You are about to copy received {singular, select, true{a document} other{{nbItems} documents}} for a total of {totalSize} into your own files.",
+      "TEXT": "Bạn sắp sao chép {singular, select, true{một tài liệu} other{{nbItems} tài liệu}} với tổng kích thước {totalSize} vào các tệp của riêng bạn.",
+      "TITLE": "Sao chép tập tin"
     },
     "ON_ITEM_DELETE": {
       "CANCEL_BUTTON": "Không!",
       "CONFIRM_BUTTON": "Có!",
       "TEXT": {
-        "TBT__CONTACTS_LIST": "",
-        "TBT__CONTACTS_LIST_CONTACT": "",
-        "TBT__DOCUMENT": "",
-        "TBT__RECEIVED_SHARE": "",
-        "TBT__WORKGROUP": "",
-        "TBT__WORKGROUP_NODE": ""
+        "CONTACTS_LIST": "Bạn sắp xóa {singular, select, true{một danh sách liên hệ} other{{nbItems} danh sách liên hệ}}! Hãy cẩn thận, hành động này không thể hoàn tác.",
+        "CONTACTS_LIST_CONTACT": "Bạn sắp xóa {singular, select, true{một liên hệ} other{{nbItems} liên hệ}} ! Hãy ẩn thận, hành động này không thể hoàn tác.",
+        "DOCUMENT": "Bạn sắp xoá {singular, select, true{một tài liệu} other{{nbItems} tài liệu}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "GUEST": "Bạn sắp xoá {singular, select, true{một khách} other{{nbItems} khách}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "RECEIVED_SHARE": "Bạn sắp xoá {singular, select, true{một tệp chia sẻ} other{{nbItems} tệp chia sẻ}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "WORKGROUP": "Bạn sắp xoá {singular, select, true{một nhóm làm việc} other{{nbItems} làm việc}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "WORKGROUP_NODE": "Bạn sắp xoá {singular, select, true{một tài liệu hoặc thư mục} other{{nbItems} tài liêụ hoặc thư mục}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
       },
       "TITLE": "Bạn có chắc chắn không ?"
     },
     "ON_LOCALSTORAGE_DELETE": {
-      "TITLE": "Bạn có chắc chắn không?",
+      "TITLE": "Bạn có chắc không?",
       "TEXT": "Tất cả các dữ liệu lưu trên localStorage sẽ bị xóa",
       "CONFIRM_BUTTON": "Có!",
       "DONE": "Đã xóa xong",
       "IS_CLEARED": "LocalStorage rỗng"
     },
-    "TBT__ON_MULTIPLE_DOWNLOAD": {
-      "TBT__CANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TEXT": "",
-      "TBT__TITLE": ""
+    "ON_MULTIPLE_DOWNLOAD": {
+      "CANCEL_BUTTON": "HỦY BỎ",
+      "CONFIRM_BUTTON": "ĐỒNG Ý",
+      "TEXT": "Bạn sẽ tải xuống các tệp {{nbFiles}} (tổng kích thước: {{totalSize}})",
+      "TITLE": "Tải xuống nhiều lần"
     },
-    "TBT__ON_SHARE_DELETE": {
-      "TBT__CANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TEXT": "",
-      "TBT__TITLE": ""
+    "ON_SHARE_DELETE": {
+      "CANCEL_BUTTON": "Hủy bỏ!",
+      "CONFIRM_BUTTON": "Xóa bỏ",
+      "TEXT": "Bạn sắp xóa một phần!",
+      "TITLE": "Bạn có chắc không?"
     },
-    "TBT__ON_WORKGROUP_MEMBER_DELETE": {
-      "TBT__ANCEL_BUTTON": "",
-      "TBT__CONFIRM_BUTTON": "",
-      "TBT__TITLE": "",
-      "TBT__TEXT": ""
+    "ON_WORKGROUP_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Hủy bỏ",
+      "CONFIRM_BUTTON": "Có, xóa",
+      "TITLE": "Xóa thành viên",
+      "TEXT": "Bạn sắp xóa {{firstName}} {{lastName}} khỏi nhóm làm việc {{workgroupName}}."
     }
   },
   "TOAST_ALERT": {
     "ACTION": {
-      "TBT__BROWSER_ACTION": "",
-      "TBT__CLOSE": "",
-      "TBT__CONTACTS_LIST_CREATION": "",
-      "TBT__COPY": "",
-      "TBT__COPY_PLURAL": "",
-      "TBT__COPY_SAME_FOLDER": "",
-      "TBT__COPY_SINGULAR": "",
-      "DELETE": "Đã xóa tập tin thành công",
-      "TBT__DELETE_SINGULAR": "",
-      "TBT__DELETE_PLURAL": "",
-      "TBT__DELETE_WORKGROUP_MEMBER": "",
-      "TBT_DETAILS": "",
-      "TBT__INSERT": "",
-      "TBT__REFRESH": "",
-      "TBT__SHARE": "Đã chia sẻ thành công",
-      "TBT__SHARE_ASYNC": "",
-      "TBT__SHARE_DELETED": "",
-      "TBT__SHARE_FAILED": "",
-      "TBT__UPDATE": ""
+      "BROWSER_ACTION": "{singular, select, true{Tệp hoặc thư mục} other{các tệp hoặc thư mục}} đã được {action, select, moved{di chuyển} other{sao chép}} vào : {folderName}.",
+      "CLOSE": "Đóng",
+      "CONTACTS_LIST_CREATION": "Danh sách liên hệ {{contactsListName}} đã được tạo thành công.",
+      "COPY": "{singular, select, true{một tệp đã} other{{nbItems} tệp}} sao chép vào Không gian Cá nhân.",
+      "COPY_SAME_FOLDER": "{singular, select, true{Tệp} other{Các tệp}} đã sao chép thành công.",
+      "DELETE": "Đã xóa thành công",
+      "DELETE_SINGULAR": "Mục đã được xóa thành công.",
+      "DELETE_PLURAL": "Các mục đã được xóa thành công.",
+      "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} đã được xóa thành công khỏi Nhóm làm việc",
+      "DETAILS": "Chi tiết",
+      "INSERT": "Mục đã được thêm thành công.",
+      "REFRESH": "Bạn phải làm mới ứng dụng để đưa hành động này vào tài khoản",
+      "SHARE": "{{singular ? 'Tệp' : 'Các tệp'}} của bạn {{shareName ? shareName + ' ': ''}}{{singular ? 'đã' : 'đã'}} gửi thành công.",
+      "SHARE_DELETED": "Chia sẻ tệp của bạn với {{recipient}} đã được xóa thành công.",
+      "SHARE_ASYNC": "Chia sẻ tệp của bạn sẽ được gửi sau khi tải lên tất cả các tệp.",
+      "SHARE_FAILED": "Tệp của bạn {{shareName? shareName + '': ''}} chia sẻ không thành công.",
+      "UPDATE": "Mục đã được cập nhật thành công."
     },
-    "TBT__ACTION_BUTTON": "",
+    "ACTION_BUTTON": "Lượt xem",
+    "ACTION_REFRESH": "Làm mới",
     "ERROR": {
-      "TBT__BROWSER_ACTION": "",
+      "BROWSER_ACTION": "{nbNodes} {singular, select, true{tệp hoặc thư mục} other{tệp hoặc thư mục}} không thể {action, select, moved{di chuyển} other{sao chép}}",
       "COPY": {
-        "TBT__DEFAULT": "",
-        "TBT__26444": ""
+        "DEFAULT": "{singular, select, true{Một tệp} other{{nbItems} tệp}} có thể không được sao chép.",
+        "26444": "Bạn không có đủ quyền để thực hiện thao tác này"
       },
-      "TBT__FILE_NOT_FOUND": "",
-      "TBT_FILE_UPLOAD": "",
-      "503": "Lỗi máy chủ",
-      "TBT__RENAME_NODE": "",
-      "TBT__RENAME_CONTACTS_LIST": "",
-      "TBT__RENAME_INVALID": {
-        "TBT__EMPTY": "",
-        "TBT__ENDING_POINT": "",
-        "REJECTED_CHAR": "'{{rejectedChar}}'"
+      "FILE_NOT_FOUND": "Không tìm thấy tệp đã chọn",
+      "FILE_UPLOAD": "Tải lên không thành công",
+      "503": "dịch vụ Không sẵn có",
+      "RENAME_NODE": "Một tệp hoặc một thư mục có cùng tên đã tồn tại",
+      "RENAME_CONTACTS_LIST": "Danh sách liên hệ có cùng tên đã tồn tại",
+      "RENAME_INVALID": {
+        "EMPTY": "Tên không được để trống",
+        "ENDING_POINT": "Tên không thể hoàn thành bằng ký tự '.'",
+        "REJECTED_CHAR": "Tên không hợp lệ, bạn không thể sử dụng các ký tự sau: '{{rejectChar}}'"
       },
       "DELETE_ERROR": {
-        "TBT__26006": "",
-        "TBT__26444": ""
+        "26006": "Xóa một thư mục không trống chưa được hỗ trợ",
+        "26444": "Bạn không có quyền xóa"
       },
-      "TBT_NO_RESPONSE_ERROR": "",
-      "TBT_RENAME_CONTACTS_LIST": "",
-      "TBT_MEMBER_ALREADY_IN_WORKGROUP": ""
+      "NO_RESPONSE_ERROR": "Lỗi khi không có phản hồi của máy chủ, xem nhật ký.",
+      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} đã là thành viên của Nhóm làm việc này."
     },
     "WARNING": {
-      "AT_LEAST_ONE_RECIPIENT": "Mời nhập ít nhất một người nhận",
-      "AT_LEAST_ONE_DOCUMENT": "Không có tập tin nào được chọn",
-      "TBT__CONTACT_STILL_EXISTS" : "",
-      "TBT_ELEMENTS_NOT_DELETED": "",
-      "TBT_ELEMENTS_NOT_DELETED_SINGULAR": "",
-      "TBT_ELEMENTS_NOT_DELETED_PLURAL": "",
-      "TBT_ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{item has} other{items have}} not been uploaded.",
-      "TBT__ERROR": "",
-      "TBT_ERROR_404": "",
-      "TBT_ERROR_403": "",
-      "TBT_ERROR_400": "",
-      "TBT_ERROR_500": "",
-      "TBT__INVALID_EMAIL": "",
-      "TBT_ISOLATED_FILE":""
+      "AT_LEAST_ONE_RECIPIENT": "Vui lòng nhập ít nhất một người nhận hoặc danh sách liên hệ để chia sẻ",
+      "AT_LEAST_ONE_DOCUMENT": "Không có tệp nào được chọn",
+      "CONTACT_STILL_EXISTS" : "đã có trong danh sách",
+      "ELEMENTS_NOT_DELETED": "(các) thành phần chưa được xóa",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "1 mục chưa bị xóa.",
+      "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} mục chưa bị xóa.",
+      "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{mục} other{mục}} đã không được tải lên.",
+      "ERROR": "Lỗi :",
+      "ERROR_404": "Lỗi {{errCode}} - Không tìm thấy phần tử",
+      "ERROR_403": "Lỗi {{errCode}} - Bạn không được phép xóa tài liệu này",
+      "ERROR_400": "Lỗi {{errCode}} - Không thể đạt được yêu cầu",
+      "ERROR_500": "Lỗi {{errCode}} - Lỗi máy chủ",
+      "INVALID_EMAIL": "Email không hợp lệ",
+      "ISOLATED_FILE": "Bạn hiện đang xem một lựa chọn tệp bị hạn chế."
     }
   }
 }

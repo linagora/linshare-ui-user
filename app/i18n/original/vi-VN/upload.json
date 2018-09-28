@@ -1,26 +1,26 @@
 {
-  "TBT__UPLOAD_DESTINATION": "",
+  "UPLOAD_DESTINATION": "Đích.",
   "UPLOAD_SHARE_ALERT": {
-    "TBT__CANCEL": "",
-    "TBT__MAIN_DIALOG_BUTTON_TITLE": "",
-    "TBT__MESSAGE": "",
-    "TBT__MESSAGE_SINGULAR": "",
-    "TBT__MESSAGE_PLURAL": "",
-    "TBT__NO_SHAREABLE_FILE_SELECTED_PLURAL": "",
-    "TBT__NO_SHAREABLE_FILE_SELECTED_SINGULAR": "",
-    "TBT__TITLE_SINGULAR": "",
-    "TBT__TITLE_PLURAL": ""
+    "CANCEL": "Hủy bỏ",
+    "MAIN_DIALOG_BUTTON_TITLE": "Chia sẻ",
+    "MESSAGE": "Không thể chia sẻ ${nbErrorFilesSelected} tệp, tiếp tục?",
+    "MESSAGE_SINGULAR": "Tệp trong lựa chọn của bạn chứa lỗi và sẽ bị xóa khỏi phần chia sẻ. Bạn vẫn muốn chia sẻ các tệp còn lại?",
+    "MESSAGE_PLURAL": "Một số tệp trong lựa chọn của bạn có lỗi và sẽ bị xóa. Bạn vẫn muốn chia sẻ các tệp còn lại?",
+    "NO_SHAREABLE_FILE_SELECTED": "Các tệp đã chọn có lỗi và không thể chia sẻ",
+    "NO_SHAREABLE_FILE_SELECTED_SINGULAR": "Tệp đã chọn có lỗi và không thể chia sẻ",
+    "TITLE_SINGULAR": "Không thể chia sẻ một tệp.",
+    "TITLE_PLURAL": "Không thể chia sẻ các tệp ${nbErrorFilesSelected}."
   },
   "UPLOADED_FILES": {
-    "TBT__BREADCRUMB_TITLE": "",
-    "TBT__SELECT_INFO": ""
+    "BREADCRUMB_TITLE": "Tải lên",
+    "SELECT_INFO": "Tải lên và chọn tệp để chia sẻ chúng một cách không đồng bộ"
   },
-  "TBT__DRAG_DROP_BACKGROUND": {
-    "TBT__TITLE": "",
-    "TBT__COMMENT": ""
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Thả tệp của bạn ở đây",
+    "COMMENT": "Kéo và thả tệp của bạn vào đây để tải chúng lên"
   },
-  "TBT__DRAG_DROP_BACKGROUND_MOBILE": {
-    "TBT__TITLE": "",
-    "TBT__COMMENT": ""
+  "DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Chia sẻ không đồng bộ",
+    "COMMENT": "Tải lên và chia sẻ tệp của bạn mà không bị chậm trễ."
   }
 }

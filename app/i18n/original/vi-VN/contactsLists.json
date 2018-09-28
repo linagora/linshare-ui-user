@@ -1,64 +1,64 @@
 {
-  "TBT__BACKGROUND_CONTACTS_MSG": "",
-  "TBT__BACKGROUND_CONTACTS_TITLE_MSG": "",
-  "BACKGROUND_CONTACTS_LIST_MSG": "",
-  "BACKGROUND_CONTACTS_LIST_TITLE_MSG": "",
-  "TBT__CONTACTS_LISTS_ACTION": {
-    "TBT__ADD_DESCRIPTION": "",
-    "TBT__CREATE_CONTACTS_LIST": "",
+  "BACKGROUND_CONTACTS_MSG": "Thêm và chỉnh sửa chi tiết liên hệ của bạn.",
+  "BACKGROUND_CONTACTS_TITLE_MSG": "Thêm liên hệ mới",
+  "BACKGROUND_CONTACTS_LIST_MSG": "Các danh sách này cho phép bạn lưu và sắp xếp các liên hệ của mình",
+  "BACKGROUND_CONTACTS_LIST_TITLE_MSG": "Tạo danh sách liên lạc của bạn",
+  "CONTACTS_LISTS_ACTION": {
+    "ADD_DESCRIPTION": "Thêm một mô tả",
+    "CREATE_CONTACTS_LIST": "Tạo danh sách liên hệ",
     "FILTER_BY": {
-      "TBT__ALL_LISTS": "",
-      "TBT__MY_LISTS": "",
-      "TBT__OTHER_LISTS": ""
+      "ALL_LISTS": "Tất cả danh sách",
+      "MY_LISTS": "Danh sách của tôi",
+      "OTHER_LISTS": "Danh sách khác"
     },
     "MORE": {
-      "TBT__ADD_CONTACT": "",
-      "TBT__DELETE": "",
-      "TBT__DUPLICATE_LIST": "",
-      "TBT__EDIT": "",
-      "TBT__EXPORT_CSV": "",
-      "TBT__IMPORT_CSV": "",
-      "TBT__INFORMATION": "",
-      "TBT__RENAME": "",
-      "TBT__SHOW_CONTACTS": ""
+      "ADD_CONTACT": "Thêm liên hệ",
+      "DELETE": "Xóa bỏ",
+      "DUPLICATE_LIST": "Danh sách trùng lặp",
+      "EDIT": "Chỉnh sửa",
+      "EXPORT_CSV": "Xuất CSV",
+      "IMPORT_CSV": "Nhập CSV",
+      "INFORMATION": "Chi tiết",
+      "RENAME": "Đổi tên",
+      "SHOW_CONTACTS": "Hiển thị liên hệ"
     },
     "ORDER_BY": {
-      "TBT__CREATION_DATE": "",
-      "TBT__MAIL": "",
-      "TBT__FIRST_NAME": "",
-      "TBT__LAST_NAME": "",
-      "TBT__LIST_NAME": "",
-      "TBT__MODIFICATION_DATE": "",
-      "TBT__OWNER_FIRST_NAME": "",
-      "TBT__OWNER_LAST_NAME": "",
-      "TBT__OWNER_MAIL": "",
-      "TBT__PRIVATE_PUBLIC": ""
+      "CREATION_DATE": "Ngày tạo",
+      "MAIL": "Thư",
+      "FIRST_NAME": "Tên",
+      "LAST_NAME": "Họ",
+      "LIST_NAME": "Danh sách tên",
+      "MODIFICATION_DATE": "Ngày sửa đổi",
+      "OWNER_FIRST_NAME": "Tên chủ sở hữu",
+      "OWNER_LAST_NAME": "Họ chủ sở hữu",
+      "OWNER_MAIL": "Thư chủ sở hữu",
+      "PRIVATE_PUBLIC": "Công khai/Riêng tư"
     },
-    "TBT__SEARCH_BY_NAME": ""
+    "SEARCH_BY_NAME": "Tìm kiếm theo tên"
   },
   "CONTACTS_LISTS_DETAILS": {
-    "TBT__CONTACT": "",
-    "TBT__CONTACTS": "",
-    "TBT__CONTACTS_LIST": "",
-    "TBT__CONTACTS_LIST_DUPLICATED": "",
-    "TBT__CONTACTS_LISTS": "",
-    "TBT__ME": "",
-    "TBT__OWNER": "",
-    "TBT__OWNED_BY": "",
-    "TBT__PRIVATE": "",
-    "TBT__PUBLIC": "",
-    "TBT__UNCOMPLETE_PROFILE": "",
-    "TBT__UPDATE_CONTACT_INFORMATIONS": "",
-    "TBT__UPDATE_CONTACT_IMPOSSIBLE": "",
-    "TBT__VISIBILITY": ""
+    "CONTACT": "Liên hệ",
+    "CONTACTS": "Danh bạ",
+    "CONTACTS_LIST": "Danh sách liên hệ",
+    "CONTACTS_LIST_DUPLICATED": "Danh sách liên hệ đã được sao chép thành công",
+    "CONTACTS_LISTS": "Danh sách liên hệ",
+    "OWNER": "Chủ nhân",
+    "OWNED_BY": "Được sở hữu bởi",
+    "ME": "Tôi",
+    "PRIVATE": "Riêng tư",
+    "PUBLIC": "Công khai",
+    "UNCOMPLETE_PROFILE": "Tiểu sử chưa hoàn tất",
+    "UPDATE_CONTACT_INFORMATIONS": "Cập nhật thông tin liên hệ",
+    "UPDATE_CONTACT_IMPOSSIBLE": "Bạn không được phép chỉnh sửa liên hệ này",
+    "VISIBILITY": "Hiển thị"
   },
   "CREATE_CONTACTS_LIST": {
-    "TBT__CREATE": "",
-    "TBT__CREATE_FROM_THESE_CONTACTS": "",
-    "TBT__INPUT_PLACEHOLDER": ""
+    "CREATE": "Tạo nên",
+    "CREATE_FROM_THESE_CONTACTS": "Tạo Danh sách Liên hệ từ các địa chỉ liên hệ này?",
+    "INPUT_PLACEHOLDER": "Tên danh sách liên hệ"
   },
   "FORMS_MESSAGES": {
-    "TBT__INVALID_EMAIL": "",
-    "TBT__INVALID_EMPTY_FIELD": ""
+    "INVALID_EMAIL": "Địa chỉ email không hợp lệ.",
+    "INVALID_EMPTY_FIELD": "Trường này không thể để trống."
   }
 }

@@ -1,22 +1,21 @@
 {
   "ANONYMOUS_URL": {
-    "TBT__FIND_OUT": "",
+    "FIND_OUT": "Tìm hiểu thêm về LinShare!",
     "FORM": {
-      "TBT__CANCEL": "",
-      "TBT__EMPTY": "",
-      "TBT__INVALID": "",
-      "TBT__LABEL": "",
-      "TBT__SUBMIT": "",
-      "TBT__TITLE": "",
-      "TBT__MSG" : ""
+      "CANCEL": "Hủy bỏ",
+      "EMPTY": "Chia sẻ yêu cầu mật khẩu truy cập",
+      "INVALID": "Mật khẩu cung cấp không hợp lệ",
+      "LABEL": "Mật khẩu",
+      "SUBMIT": "Gửi đi",
+      "TITLE": "Chia sẻ này được bảo vệ bằng mật khẩu",
+      "MSG" : "Nhập mật khẩu được cung cấp bởi người mời chia sẻ."
     },
     "HEADER": {
-      "TBT__TITLE": ""
+      "TITLE": "CỔNG TRUY CẬP ẨN DANH"
     },
     "HOME": {
-      "TBT__404": "",
-      "TBT__MESSAGE": ""
+      "404": "Url bạn đã cố truy cập không hợp lệ",
+      "MESSAGE": "Bạn cần một url hợp lệ để truy cập vào tài liệu được chia sẻ"
     }
   }
 }
-
