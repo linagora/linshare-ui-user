@@ -72,9 +72,12 @@ module.exports = function(grunt) {
       }
     },
 
+
     // Dynamically manage the minification of the application themes
     cssmin : new GruntfileThemes(appConfig).list().reduce(function(config, theme) {
-        config[`<%= yeoman.dist %>/styles/${theme}.${build_uuid}.css`] = `.tmp/styles/${theme}.css`;
+        if (theme.indexOf('default') === -1) {
+          config[`<%= yeoman.dist %>/styles/${theme}.${build_uuid}.css`] = `.tmp/styles/${theme}.css`;
+        }
         return config;
       }, {}),
 
@@ -478,6 +481,47 @@ module.exports = function(grunt) {
       'watch'
     ]);
   });
+  
+  grunt.registerTask('cssrename', 'rename css with correct build id', function() {
+    const done = this.async(); // creating an async variable
+    const fs = require('fs');
+    const stylesPath = process.cwd() + '/dist/styles/';
+    let buildId;
+
+    console.log('\n => CSS Rename in position!!');
+    fs.readdir(stylesPath, function(err, files) {
+      console.log('\n => CSS Rename: Getting build ID');
+      for (let index in files) {
+        let file = files[index];
+
+        if (file.indexOf('theme.default') !== -1) {
+          buildId = file.split('.')[2]
+          console.log('> build id for css files: ', buildId);
+        }
+      }
+      console.log('\n => CSS Rename: Proceed to "clone"');
+      for (let index in files) {
+        let file = files[index];
+
+        if (file.indexOf('theme.') !== -1 && file.indexOf('default') === -1) {
+          let itemSplitted = file.split('.');
+
+          itemSplitted[2] = buildId;
+
+          const nameWithBuildId = itemSplitted.join('.');
+
+          console.log('> before ', file);
+          console.log('> after ', itemSplitted.join('.'));
+          fs.rename(stylesPath + file, stylesPath + nameWithBuildId, function(err) {
+            if ( err ) console.log('ERROR during grunt task cssrename - could not rename: ' + err);
+          });
+        }
+      }
+
+      console.log('\n => CSS Rename: I\'m OUT! ');
+      done();
+    });
+  });
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function(target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
@@ -521,6 +565,7 @@ module.exports = function(grunt) {
     'uglify',
     'filerev',
     'usemin',
+    'cssrename',
     'htmlmin'
   ]);
 
