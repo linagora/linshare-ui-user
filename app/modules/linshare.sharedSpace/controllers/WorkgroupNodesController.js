@@ -84,6 +84,7 @@
 
     var newFolderName;
 
+    workgroupNodesVm.functionalities = {};
     workgroupNodesVm.canDeleteNodes = false;
     workgroupNodesVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
     workgroupNodesVm.role = workgroupRole;
@@ -142,6 +143,7 @@
       functionalityRestService
         .getAll()
         .then(function(functionalities) {
+          workgroupNodesVm.functionalities.contactsList = functionalities.CONTACTS_LIST__CREATION_RIGHT;
           workgroupNodesVm.canCopyNodeToPersonalSpace = functionalities.INTERNAL_CAN_UPLOAD.enable;
         });
 
@@ -922,6 +924,12 @@
         workgroupNodesVm.currentSelectedDocument.current = data;
         workgroupNodesVm.mdtabsSelection.selectedIndex = 0;
         workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupNode);
+        workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
+          workgroup.members,
+          function(member) {
+            return { mail: member.account.mail };
+          }
+        );
       });
     }
 
