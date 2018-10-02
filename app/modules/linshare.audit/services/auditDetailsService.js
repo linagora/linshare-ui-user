@@ -565,15 +565,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setUpdatedValuesWorkgroupMemberRights(memberRights) {
-      var role;
-      if (memberRights.admin) {
-        role = lsAppConfig.roles.admin;
-      } else if (!memberRights.admin && memberRights.canUpload) {
-        role = lsAppConfig.roles.write;
-      } else {
-        role = lsAppConfig.roles.readonly;
-      }
-      return role;
+      return memberRights.role.name;
     }
 
     /**
