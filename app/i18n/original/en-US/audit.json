@@ -270,6 +270,70 @@
           }
         }
       },
+      "DRIVE": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have created a new DRIVE: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has created a new DRIVE: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "You have deleted the DRIVE: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has deleted the DRIVE: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have edited the DRIVE: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has edited the DRIVE: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "DRIVE_MEMBER": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "You added a new member: {{resourceName}} to the DRIVE {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has added a new member: {{resourceName}} to the DRIVE {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "You have removed the member: {{resourceName}} from the DRIVE {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has removed the member: {{resourceName}} from the DRIVE {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have edited the member: {{resourceName}} from the DRIVE {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has edited the member: {{resourceName}} from the DRIVE {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "GUEST": {
         "CREATE": {
           "AUTHOR": {
@@ -650,6 +714,8 @@
       "CONTACTS_LISTS": "Contact List",
       "CONTACTS_LISTS_CONTACTS": "Contact",
       "DOCUMENT_ENTRY": "File",
+      "DRIVE" : "Drive",
+      "DRIVE_MEMBER" : "Drive - Member",
       "GUEST": "Guest account",
       "JWT_PERMANENT_TOKEN": "Permanent access token (JWT)",
       "SHARE_ENTRY": "Share",
