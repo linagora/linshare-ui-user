@@ -2,9 +2,10 @@
   'use strict';
 
   /* jshint undef: true */
-  /* global _:false, swal:false */
+  /* global _:false, swal:false, moment:false */
   angular
     .module('linshare.utils')
     .constant('swal', swal)
+    .constant('moment', moment)
     .constant('_', _);
 })();

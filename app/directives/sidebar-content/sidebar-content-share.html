@@ -146,9 +146,9 @@
                    datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
                                         maxDate: shareActionVm.newShare.expirationDate.value}"
                    data-ng-required="true"
-                   placeholder="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
-                   min="{{shareActionVm.newShare.getMinDate() | date: 'fullDate'}}"
-                   max="{{shareActionVm.newShare.expirationDate.value | date: 'fullDate'}}"
+                   placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                   min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
+                   max="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
                    data-ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
                    data-ng-model="shareActionVm.newShare.expirationDate.value"/>
           </div>

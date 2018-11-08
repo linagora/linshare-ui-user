@@ -62,10 +62,10 @@
             </div>
             <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                  uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate |
-                 date:'medium'}}">
+                 lsDate:'medium'}}">
                 <span>
                   {{'INFORMATION_TAB.CREATED_THE' | translate}} :
-                  {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date:'longDate'}}
+                  {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate'}}
                 </span>
             </div>
           </div>
@@ -86,8 +86,8 @@
               </p>
               <p tooltip-placement="bottom" tooltip-popup-delay="500"
                  uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
-                  date:'medium'}}">
-                {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | date:'longDate'}}
+                  lsDate:'medium'}}">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | lsDate:'longDate'}}
               </p>
             </div>
             <div>

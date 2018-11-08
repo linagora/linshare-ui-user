@@ -167,10 +167,10 @@
                       </div>
                       <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                            uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
-                            date:'medium'}}">
+                            lsDate:'medium'}}">
                         <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
                           {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
-                          date:'longDate'}}
+                          lsDate:'longDate'}}
                         </span>
                       </div>
                     </div>
@@ -198,18 +198,22 @@
                           {{'RIGHT_PANEL.DETAILS.SHARING_DATE' | translate}}:
                         </p>
                         <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date:'medium'}}">
-                          {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | date:'longDate'}}
+                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'medium'}}">
+                          {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate'}}
                         </p>
                       </div>
                       <div>
                         <p>{{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}:</p>
-                        <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate |
-                            date:'medium'}}">
+                        <p
+                          tooltip-placement="bottom"
+                          tooltip-popup-delay="500"
+                          uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate
+                          | lsDate:'medium'}}"
+                        >
                           <span x-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate !== null">
-                            {{mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate |
-                            date:'longDate'}}
+                            {{
+                            mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate | lsDate:'longDate'
+                            }}
                           </span>
                           <span x-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate == null">
                             {{'RIGHT_PANEL.DETAILS.UNDEFINED'  | translate}}

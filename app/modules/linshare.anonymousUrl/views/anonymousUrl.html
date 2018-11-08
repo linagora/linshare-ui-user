@@ -14,8 +14,8 @@
             </b>
             <span translate
                   translate-values="{
-                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | date:'shortDate'),
-                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | date:'shortDate')
+                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | lsDate:'shortDate'),
+                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | lsDate:'shortDate')
                   }">
                   ANONYMOUS_URL.MSG_SINGULAR
             </span>
@@ -28,8 +28,8 @@
             <span translate="ANONYMOUS_URL.MSG_PLURAL"
                   translate-values="{
                   num: anonymousUrlVm.anonymousUrlShareEntries.length,
-                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | date:'shortDate'),
-                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | date:'shortDate')
+                  creationDate: (anonymousUrlVm.anonymousUrlData.creationDate | lsDate:'shortDate'),
+                  expiryDate: (anonymousUrlVm.anonymousUrlData.expirationDate | lsDate:'shortDate')
                   }">
             </span>
           </p>

@@ -68,7 +68,7 @@
                 tooltip-placement="bottom"
                 tooltip-popup-delay="300"
                 tooltip-append-to-body="true"
-                uib-tooltip="{{::safeDetail.creationDate | date: 'medium'}}"
+                uib-tooltip="{{::safeDetail.creationDate | lsDate: 'medium'}}"
               >
                 {{::safeDetail.creationDate | relativeTime}}
               </td>

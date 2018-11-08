@@ -18,8 +18,8 @@
                is-open="opened" data-ng-click="open($event, 'opened')"
                datepicker-options="{minDate: newGuestObject.datepicker.minDate,
                                     maxDate: newGuestObject.datepicker.maxDate}
-               min="{{newGuestObject.datepicker.minDate | date:'yyyy-MM-dd'}}"
-               max="{{newGuestObject.datepicker.maxDate | date:'yyyy-MM-dd'}}"/>
+               min="{{newGuestObject.datepicker.minDate | lsDate:'yyyy-MM-dd'}}"
+               max="{{newGuestObject.datepicker.maxDate | lsDate:'yyyy-MM-dd'}}"/>
    *  @memberOf LinShare.components
    */
   function workingDatePicker() {

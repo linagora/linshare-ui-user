@@ -6,7 +6,5 @@
 (function() {
   'use strict';
 
-  angular
-    .module('linshare.utils', []);
-
+  angular.module('linshare.utils', []);
 })();

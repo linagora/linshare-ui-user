@@ -60,13 +60,13 @@
         <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened2}">
           <div class="form-inline clearfix">
             <input type="text" class="form-control date-picker-input" name="expirationDate" id="expirationDate"
-                   required placeholder="{{guestObject.expirationDate.value | date: 'fullDate'}}"
+                   required placeholder="{{guestObject.expirationDate.value | lsDate: 'fullDate'}}"
                    working-date-picker x-ng-click="open($event, 'opened2')"
                    uib-datepicker-popup
                    datepicker-options="guestObject.form.datepicker.options"
                    show-weeks="false" is-open="opened2"
-                   min="{{guestObject.form.datepicker.minDate | date:'yyyy-MM-dd'}}"
-                   max="{{guestObject.form.datepicker.maxDate | date:'yyyy-MM-dd'}}"
+                   min="{{guestObject.form.datepicker.minDate | lsDate:'yyyy-MM-dd'}}"
+                   max="{{guestObject.form.datepicker.maxDate | lsDate:'yyyy-MM-dd'}}"
                    x-ng-model="guestObject.expirationDate"
                    x-ng-disabled="!guestObject.form.datepicker.isEditable"/>
           </div>
@@ -75,7 +75,7 @@
       <span x-ng-show="(formName.expirationDate.$touched || formName.$submitted) &&
                     (formName.expirationDate.$invalid || formName.expirationDate.$error.invalidDate)">
            {{"SIDEBAR.ERROR.INVALID_DATE" | translate}}
-           {{guestObject.form.datepicker.maxDate | date: 'fullDate'}}
+           {{guestObject.form.datepicker.maxDate | lsDate: 'fullDate'}}
       </span>
     </div>
     <!--TODO: Once the back allow email edition change the ng-show value with "allowedToEmail.enable"-->

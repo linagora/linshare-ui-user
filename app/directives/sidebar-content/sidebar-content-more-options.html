@@ -77,9 +77,9 @@
                     datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
                                           maxDate: shareActionVm.newShare.notificationDateForUSDA.value}"
                     data-ng-required="true"
-                    placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'medium'}}"
-                    min="{{shareActionVm.newShare.getMinDate() | date: 'fullDate'}}"
-                    max="{{shareActionVm.newShare.notificationDateForUSDA.value | date: 'fullDate'}}"
+                    placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'medium'}}"
+                    min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
+                    max="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'fullDate'}}"
                     data-ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
                     data-ng-model="shareActionVm.newShare.notificationDateForUSDA.value"/>
             </div>
