@@ -242,6 +242,10 @@
 
       switch (data.type) {
         case 'simple':
+          match.style = '';
+          match.firstLetter = data.identifier.charAt(0).toUpperCase();
+          match.name = data.identifier;
+          match.info = data.identifier;
           break;
         case 'mailinglist':
           var user = {
