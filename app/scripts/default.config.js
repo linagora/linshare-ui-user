@@ -29,10 +29,22 @@
         system: 'SYSTEM'
       },
       asyncUploadDelay: 2000,
-      lang: {
-        fr: 'fr-FR',
-        en: 'en-US',
-        vi: 'vi-VN'
+      languages: {
+        fr: {
+          key: 'fr',
+          fullKey: 'fr-FR',
+          country: 'France',
+        },
+        en: {
+          key: 'us',
+          fullKey: 'en-US',
+          country: 'United States'
+        },
+        vi: {
+          key: 'vn',
+          fullKey: 'vi-VN',
+          country: 'Tiếng Việt'
+        }
       },
       enableSafeDetails: false,
       licence: true,

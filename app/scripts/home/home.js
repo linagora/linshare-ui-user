@@ -47,15 +47,15 @@
     const LANG_CONVERTER = {
       ENGLISH: {
         lang: 'ENGLISH',
-        key: lsAppConfig.lang.en
+        key: lsAppConfig.languages.en.fullKey
       },
       FRENCH: {
         lang: 'FRENCH',
-        key: lsAppConfig.lang.fr
+        key: lsAppConfig.languages.fr.fullKey
       },
       VIETNAMESE: {
         lang: 'VIETNAMESE',
-        key: lsAppConfig.lang.vi
+        key: lsAppConfig.languages.vi.fullKey
       }
     };
 

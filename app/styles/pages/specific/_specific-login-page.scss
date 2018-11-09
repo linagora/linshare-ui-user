@@ -97,41 +97,46 @@
       color: #E6E6E6;
     }
   }
+}
 
-  /**********************
+/**********************
    LANGUAGE DROPDOWN
-  ***********************/
+***********************/
 
-  #language-dropdown {
+div {
+  #language-dropdown{
     position: absolute;
-    top: 0;
-    right: 0;
     padding: 20px 15px 15px 15px;
-    .btn-custum-transparent {
-      background-color: rgba(0, 0, 0, 0.5);
-      color: #fff;
+  }
+}
+
+#language-dropdown {
+  top: 0;
+  right: 0;
+  .btn-custum-transparent {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding-left: 5px;
+    i {
       padding-left: 5px;
-      i {
-        padding-left: 5px;
-      }
-      img {
-        width: 23px;
-        padding-right: 5px;
-      }
     }
-    .flag-list-ctn img {
-      width: 22px;
+    img {
+      width: 23px;
+      padding-right: 5px;
     }
-    .disp-language {
-      font-size: 0.9em;
-    }
-    .lang-short {
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-right: 5px;
-      margin-left: 5px;
-      width: 20px;
-    }
+  }
+  .flag-list-ctn img {
+    width: 22px;
+  }
+  .disp-language {
+    font-size: 0.9em;
+  }
+  .lang-short {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 20px;
   }
 }
 

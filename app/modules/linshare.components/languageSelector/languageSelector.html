@@ -1,0 +1,44 @@
+<div id="language-dropdown">
+  <div class="dropdown-ctn">
+    <div
+      class="dropdown dropdown-standard"
+      uib-dropdown
+    >
+      <button
+        id="single-button"
+        type="button"
+        class="dropdown-toggle btn btn-custum-transparent"
+        uib-dropdown-toggle data-ng-disabled="disabled"
+      >
+        <span
+          class="flag-icon"
+          data-ng-class="'flag-icon-' + LanguageSelectorVm.currentLanguage.key"
+        />
+        <span class="disp-language">
+          {{LanguageSelectorVm.currentLanguage.key.toUpperCase()}}
+        </span>
+        <i class="zmdi zmdi-chevron-down"/>
+      </button>
+      <ul
+        class="dropdown-menu pull-right flag-list-ctn"
+        role="menu"
+        aria-labelledby="single-button"
+      >
+        <li role="menuitem" data-ng-repeat="language in LanguageSelectorVm.languages">
+          <a data-ng-click="LanguageSelectorVm.changeLanguage(language)">
+            <span
+             class="flag-icon"
+              data-ng-class="'flag-icon-' + language.key"
+            />
+            <span class="lang-short">
+              {{::language.key.toUpperCase()}}
+            </span>
+            <span class="lang-label">
+              {{::language.country}}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

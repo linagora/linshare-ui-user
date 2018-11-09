@@ -9,7 +9,10 @@
     .module('linshareUiUserApp')
     .controller('loginController', loginController);
 
-  loginController.$inject = ['$translate', 'authenticationRestService', 'languageService', 'lsAppConfig',
+  loginController.$inject = [
+    '$translate',
+    'authenticationRestService',
+    'lsAppConfig',
     'toastService'
   ];
 
@@ -22,7 +25,6 @@
     /* jshint validthis: true */
     var loginVm = this;
 
-    loginVm.changeLoginLanguage = changeLoginLanguage;
     loginVm.email = '';
     loginVm.lsAppConfig = lsAppConfig;
     loginVm.password = '';
@@ -38,30 +40,7 @@
      * @memberOf linshareUiUserApp.loginController
      */
     function activate() {
-      var locale = languageService.getLocale();
-      loginVm.loginLocale = splitLocale(locale);
-
       loginVm.inputType = lsAppConfig.loginWithMailOnly ? 'email' : 'text';
-    }
-
-    /**
-     * @name splitLocale
-     * @desc Split locale's string
-     * @param {String} locale - location language value
-     * @returns {Object} language details
-     * @memberOf linshareUiUserApp.loginController
-     */
-    function splitLocale(locale) {
-      locale = locale.split('-');
-      var language = locale[0];
-      var country;
-      if (locale.length > 1) {
-        country = locale[1].toLowerCase();
-      }
-      return {
-        language: language,
-        country: country
-      };
     }
 
     /**
@@ -86,17 +65,6 @@
               break;
           }
         });
-    }
-
-    /**
-     * @name changeLoginLanguage
-     * @desc Change language of login page
-     * @param {String} lang - Language selected
-     * @memberOf linshareUiUserApp.loginController
-     */
-    function changeLoginLanguage(lang) {
-      languageService.changeLocale(lang);
-      loginVm.loginLocale = splitLocale(lang);
     }
   }
 })();

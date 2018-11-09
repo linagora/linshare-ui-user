@@ -15,11 +15,11 @@ angular
       urlTemplate: pathToLocal + '/{lang}/{part}.json',
       loadFailureHandler: 'translateLoadFailureHandlerService'
     });
-    $translateProvider.fallbackLanguage('en-US');
     $translatePartialLoaderProvider.addPart('general');
     $translatePartialLoaderProvider.addPart('notification');
     $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
     $translateProvider.preferredLanguage('en-US');
+    $translateProvider.fallbackLanguage('en-US');
 
     RestangularProvider.setDefaultHttpFields({
       cache: false
@@ -99,14 +99,19 @@ angular
   })
 
   .run(function($rootScope, $filter, $location, $state, Restangular, $log, $window, localStorageService,
-                languageService, toastService) {
-    $rootScope.browserLanguage = $window.navigator.language || $window.navigator.userLanguage;
-    var storedLocale = localStorageService.get('locale');
-    if (storedLocale) {
-      languageService.changeLocale(storedLocale);
-    } else {
-      languageService.changeLocale($rootScope.browserLanguage);
-    }
+                languageService, toastService, lsAppConfig) {
+    const storedLocale = localStorageService.get('locale');
+    const browserLanguageFullKey = $window.navigator.language || $window.navigator.userLanguage;
+    const browserLanguageKey = browserLanguageFullKey.split('-')[0];
+    const browserLanguage = lsAppConfig.languages[browserLanguageKey];
+
+    languageService.changeLocale(
+      storedLocale ?
+        storedLocale :
+        browserLanguage ?
+        browserLanguage :
+        lsAppConfig.languages.en
+    );
 
     /**
      * Restangular Interceptor

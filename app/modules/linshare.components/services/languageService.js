@@ -39,45 +39,25 @@
     return service;
 
     /**
-     * @name addCountryLocaleCode
-     * @desc Return correct key name
-     * @param {string} key - Language key
-     * @returns {string} Language key
-     * @memberOf linshare.components.languageService
+     * The Language object.
+     * @typedef {Object} language
+     * @property {String} key - the ISO 639-1 Code of the language
+     * @property {String} fullKey - the ISO 639-1 Code of the language & ISO 3166-2 code separated by `-`
+     * @property {String} country - Full name of the country in the corresponding language
      */
-    function addCountryLocaleCode(key) {
-      if (key.indexOf('-') === -1) {
-        switch (key) {
-          case 'fr':
-            key += '-FR';
-            break;
-          case 'en':
-            key += '-US';
-            break;
-          case 'vi':
-            key += '-VN';
-            break;
-          default:
-            key = 'en-US';
-        }
-      }
-      return key;
-    }
 
     /**
      * @name changeLocale
      * @desc Change translation to used base on language key
-     * @param {string} key - Language key
+     * @param {@link Language} language - Language object
      * @return {Promise}
      * @memberOf linshare.components.languageService
      */
-    function changeLocale(key) {
-      var keyWithCountryLocaleCode = addCountryLocaleCode(key);
-
-      moment.locale(keyWithCountryLocaleCode);
-      $translate.use(keyWithCountryLocaleCode);
-      localStorageService.set('locale', keyWithCountryLocaleCode);
-      $log.debug('locale changed to ', keyWithCountryLocaleCode);
+    function changeLocale(language) {
+      localStorageService.set('locale',language);
+      moment.locale(language.fullKey);
+      $translate.use(language.fullKey);
+      $log.debug('locale changed to ', language.fullKey);
     }
 
     /**
@@ -88,7 +68,7 @@
     function getLocale() {
       var storedLocale = localStorageService.get('locale');
 
-      return storedLocale ? storedLocale : $translate.use();
+      return storedLocale ? storedLocale : lsAppConfig.language.en;
     }
 
     /**
