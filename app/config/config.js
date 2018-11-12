@@ -24,7 +24,24 @@
       // To override the background image of the login screen set the url of the image
       loginBackground : 'images/bg-linshare-desktop.png',
 
-
+      // Manage language handle by the application, see documentation.
+      languages: {
+        fr: {
+          key: 'fr',
+          fullKey: 'fr-FR',
+          country: 'France',
+        },
+        en: {
+          key: 'us',
+          fullKey: 'en-US',
+          country: 'United States'
+        },
+        vi: {
+          key: 'vn',
+          fullKey: 'vi-VN',
+          country: 'Tiếng Việt'
+        }
+      },
       //Warning: the following parameter will not be use if you defined a logout url via
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
