@@ -7,6 +7,9 @@
 
   angular
     .module('linshare.contactsLists')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('contactsLists');
+    }])
     .controller('contactsListsListController', contactsListsListController);
 
   contactsListsListController.$inject = [
@@ -19,7 +22,6 @@
     '$transition$',
     '$transitions',
     '$translate',
-    '$translatePartialLoader',
     'auditDetailsService',
     'contactsListsList',
     'contactsListsListRestService',
@@ -51,7 +53,6 @@
     $transition$,
     $transitions,
     $translate,
-    $translatePartialLoader,
     auditDetailsService,
     contactsListsList,
     contactsListsListRestService,
@@ -130,8 +131,6 @@
       functionalityRestService.getFunctionalityParams('CONTACTS_LIST__CREATION_RIGHT').then(function(data) {
         contactsListsListVm.functionality = data;
       });
-
-      $translatePartialLoader.addPart('contactsLists');
 
       loadTable();
 

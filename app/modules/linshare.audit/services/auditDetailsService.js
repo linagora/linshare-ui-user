@@ -7,16 +7,19 @@
 
   angular
     .module('linshare.audit')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('audit');
+    }])
     .factory('auditDetailsService', auditDetailsService);
 
-  auditDetailsService.$inject = ['_', '$filter', '$q', '$translate', '$translatePartialLoader', 'lsAppConfig'];
+  auditDetailsService.$inject = ['_', '$filter', '$q', '$translate', 'lsAppConfig'];
 
   /**
    * @namespace auditDetailsService
    * @desc Service to interact with Audit actions to generate all details
    * @memberOf LinShare.audit
    */
-  function auditDetailsService(_, $filter, $q, $translate, $translatePartialLoader, lsAppConfig) {
+  function auditDetailsService(_, $filter, $q, $translate, lsAppConfig) {
     const
       ACTIONS_KEY = {
         ADDITION: 'ADDITION',
@@ -107,7 +110,6 @@
      */
     function generateAllDetails(loggedUserUuid, auditDetails) {
       return $q(function(resolve) {
-        $translatePartialLoader.addPart('audit');
         $translate.refresh().then(function() {
           $translate([
             'AUTHOR_ME',

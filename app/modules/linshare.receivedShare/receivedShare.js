@@ -2,6 +2,11 @@
   'use strict';
 
   angular
-    .module('linshare.receivedShare', ['linshare.utils']);
+    .module(
+      'linshare.receivedShare',
+      [
+        'linshare.utils',
+        'pascalprecht.translate',
+      ]);
 
 })();

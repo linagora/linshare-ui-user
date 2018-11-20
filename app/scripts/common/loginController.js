@@ -21,7 +21,7 @@
    * @desc Manage login page
    * @memberOf linshareUiUserApp
    */
-  function loginController($translate, authenticationRestService, languageService, lsAppConfig, toastService) {
+  function loginController($translate, authenticationRestService, lsAppConfig, toastService) {
     /* jshint validthis: true */
     var loginVm = this;
 

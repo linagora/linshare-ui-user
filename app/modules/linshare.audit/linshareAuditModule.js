@@ -7,6 +7,11 @@
   'use strict';
 
   angular
-    .module('linshare.audit', ['restangular']);
+    .module(
+      'linshare.audit',
+      [
+        'restangular',
+        'pascalprecht.translate',
+      ]);
 
 })();

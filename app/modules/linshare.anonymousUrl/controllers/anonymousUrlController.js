@@ -7,9 +7,13 @@
 
   angular
     .module('linshare.anonymousUrl')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('filesList');
+      $translatePartialLoaderProvider.addPart('anonymousUrl');
+    }])
     .controller('AnonymousUrlController', AnonymousUrlController);
 
-  AnonymousUrlController.$inject = ['_', '$filter', '$log', '$state', '$translatePartialLoader', '$uibModal',
+  AnonymousUrlController.$inject = ['_', '$filter', '$log', '$state', '$uibModal',
     'anonymousUrlService', 'anonymousUrlData', 'NgTableParams'
   ];
 
@@ -18,7 +22,7 @@
    *  @desc Anonymous url mamnagement system controller
    *  @memberOf LinShare.anonymousUrl
    */
-  function AnonymousUrlController(_, $filter, $log, $state, $translatePartialLoader, $uibModal, anonymousUrlService,
+  function AnonymousUrlController(_, $filter, $log, $state, $uibModal, anonymousUrlService,
     anonymousUrlData, NgTableParams) {
 
     /* jshint validthis:true */
@@ -44,8 +48,6 @@
      * @memberOf LinShare.Guests.LinshareGuestsController
      */
     function activate() {
-      $translatePartialLoader.addPart('filesList');
-      $translatePartialLoader.addPart('anonymousUrl');
       if (anonymousUrlVm.urlData.protectedByPassword) {
         anonymousUrlVm.modalPasswordShow();
       } else {

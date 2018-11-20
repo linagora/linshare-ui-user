@@ -7,31 +7,21 @@
 
   angular
     .module('linshare.anonymousUrl')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('anonymousUrl');
+    }])
     .controller('AnonymousHomeController', AnonymousHomeController);
 
-  AnonymousHomeController.$inject = ['$scope', '$translatePartialLoader', 'message'];
+  AnonymousHomeController.$inject = ['$scope', 'message'];
 
   /**
    *  @namespace AnonymousHomeController
    *  @desc Controller to manage the Home of anonymous url
    *  @memberOf LinShare.anonymousUrl
    */
-  function AnonymousHomeController($scope, $translatePartialLoader, message) {
+  function AnonymousHomeController($scope, message) {
     /* jshint validthis: true */
     var anonymousHomeVm = this;
     anonymousHomeVm.message = message;
-
-    activate();
-
-    ////////////
-
-    /**
-     * @name activate
-     * @desc Activation function of the controller, launch at every instantiation
-     * @memberOf LinShare.anonymousUrl.AnonymousHomeController
-     */
-    function activate() {
-      $translatePartialLoader.addPart('anonymousUrl');
-    }
   }
 })();

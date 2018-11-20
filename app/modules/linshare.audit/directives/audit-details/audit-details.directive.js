@@ -7,9 +7,10 @@
 
   angular
     .module('linshare.audit')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('audit');
+    }])
     .directive('auditDetails', auditDetails);
-
-  auditDetails.$inject = ['$translatePartialLoader'];
 
   /**
    * @namespace auditDetails
@@ -17,23 +18,11 @@
    * @example <div audit-details-popover="{{auditActionObject}}"></div>
    * @memberOf LinShare.Audit
    */
-  function auditDetails($translatePartialLoader) {
+  function auditDetails() {
     var directive = {
       restrict: 'A',
-      templateUrl: 'modules/linshare.audit/directives/audit-details/audit-details.html',
-      link: linkFn
+      templateUrl: 'modules/linshare.audit/directives/audit-details/audit-details.html'
     };
     return directive;
-
-    ///////////
-
-    /**
-     *  @name linkFn
-     *  @desc DOM manipulation function, related to the directive
-     *  @memberOf LinShare.components.auditDetails
-     */
-    function linkFn() {
-      $translatePartialLoader.addPart('audit');
-    }
   }
 })();

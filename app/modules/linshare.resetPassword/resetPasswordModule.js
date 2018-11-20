@@ -2,6 +2,7 @@
   'use strict';
 
   angular
-    .module('linshare.resetPassword', []);
-
+    .module('linshare.resetPassword', [
+      'pascalprecht.translate',
+    ]);
 })();

@@ -3,6 +3,9 @@
 
   angular
     .module('linshare.document')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('filesList');
+    }])
     .controller('documentController', documentController);
 
   // TODO: Should dispatch some function to other service or controller
@@ -18,7 +21,6 @@
     $transition$,
     $transitions,
     $translate,
-    $translatePartialLoader,
     auditDetailsService,
     browseService,
     documentPreviewService,
@@ -87,8 +89,6 @@
     ////////////////
 
     function activate() {
-      $translatePartialLoader.addPart('filesList');
-
       //TODO - PREVIEW: Shall be removed once every functions are defined in an external service
       Object.assign(
         documentPreviewService,

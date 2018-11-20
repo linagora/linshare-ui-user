@@ -8,13 +8,16 @@
 
   angular
     .module('linshare.safeDetails')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('safeDetails');
+
+    }])
     .controller(
       'SafeDetailsController',
       SafeDetailsController
     );
 
   SafeDetailsController.$inject = [
-    '$translatePartialLoader',
     'safeDetailsRestService',
     'tableParamsService'
   ];
@@ -25,7 +28,6 @@
    * @memberOf linshare.safeDetails
    */
   function SafeDetailsController(
-    $translatePartialLoader,
     safeDetailsRestService,
     tableParamsService
   ) {
@@ -42,8 +44,6 @@
      * @memberOf linshare.safeDetails.safeDetailsController
      */
     function activate() {
-      $translatePartialLoader.addPart('safeDetails');
-
       safeDetailsRestService.getList().then(function (safeDetailsList) {
         launchTableParamsInitiation(safeDetailsList);
       });

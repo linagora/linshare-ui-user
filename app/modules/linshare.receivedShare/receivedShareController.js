@@ -7,6 +7,9 @@
 
   angular
     .module('linshare.receivedShare')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('receivedShare');
+    }])
   // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
     .controller('ReceivedController', function(
@@ -18,7 +21,6 @@
       $timeout,
       $transitions,
       $translate,
-      $translatePartialLoader,
       $window,
       _,
       auditDetailsService,
@@ -87,7 +89,6 @@
           }
         );
 
-        $translatePartialLoader.addPart('receivedShare');
         $q
           .all([
             loadTable(),

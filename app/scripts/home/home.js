@@ -7,6 +7,9 @@
 
   angular
     .module('linshareUiUserApp')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('home');
+    }])
     .controller('HomeController', homeController);
 
   homeController.$inject = [
@@ -16,9 +19,7 @@
     '$stateParams',
     '$timeout',
     '$translate',
-    '$translatePartialLoader',
     'functionalities',
-    'languageService',
     'lsAppConfig',
     'welcomeMessageRestService',
     'user',
@@ -36,9 +37,7 @@
     $stateParams,
     $timeout,
     $translate,
-    $translatePartialLoader,
     functionalities,
-    languageService,
     lsAppConfig,
     welcomeMessageRestService,
     user
@@ -106,8 +105,6 @@
           hide: lsAppConfig.linshareModeProduction
         }]
       };
-
-      $translatePartialLoader.addPart('home');
 
       getWelcomeMessage();
     }

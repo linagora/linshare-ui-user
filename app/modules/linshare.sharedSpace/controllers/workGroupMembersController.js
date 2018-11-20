@@ -7,6 +7,9 @@
 
   angular
     .module('linshare.sharedSpace')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('notification');
+    }])
     .controller('WorkGroupMembersController', workGroupMembersController);
 
   workGroupMembersController.$inject = [
@@ -14,7 +17,6 @@
     '$q',
     '$scope',
     '$translate',
-    '$translatePartialLoader',
     '_',
     'authenticationRestService',
     'dialogService',
@@ -34,7 +36,6 @@
     $q,
     $scope,
     $translate,
-    $translatePartialLoader,
     _,
     authenticationRestService,
     dialogService,
@@ -81,7 +82,6 @@
     function activate() {
       workgroupMemberVm.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
 
-      $translatePartialLoader.addPart('notification');
       workgroupRolesRestService.getList().then(function(roles) {
         workgroupMemberVm.membersRights = roles;
         workgroupMemberVm.memberRole = workgroupMemberVm.membersRights[0];

@@ -1,5 +1,9 @@
 'use strict';
 angular.module('linshare.sharedSpace')
+  .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart('filesList');
+    $translatePartialLoaderProvider.addPart('sharedspace');
+  }])
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   .controller('SharedSpaceController', function(
@@ -12,7 +16,6 @@ angular.module('linshare.sharedSpace')
     $timeout,
     $transitions,
     $translate,
-    $translatePartialLoader,
     auditDetailsService,
     documentUtilsService,
     filterBoxService,
@@ -29,9 +32,6 @@ angular.module('linshare.sharedSpace')
     workgroupsPermissions,
     workgroupsRoles
   ) {
-    $translatePartialLoader.addPart('filesList');
-    $translatePartialLoader.addPart('sharedspace');
-
     var thisctrl = this;
     thisctrl.functionalities = {};
     thisctrl.roles = workgroupsRoles;

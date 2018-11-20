@@ -7,11 +7,14 @@
   'use strict';
   angular
     .module('linshare.upload')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('upload');
+    }])
     .controller('uploadQueueController', uploadQueueController);
 
   uploadQueueController.$inject = [
     '_', '$log', '$q', '$scope', '$state', '$timeout', '$transition$', '$translate',
-    '$translatePartialLoader', 'authenticationRestService', 'flowUploadService', 'functionalityRestService',
+    'authenticationRestService', 'flowUploadService', 'functionalityRestService',
     'lsAppConfig', 'swal', 'toastService'
   ];
 
@@ -23,7 +26,7 @@
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   function uploadQueueController(_, $log, $q, $scope, $state, $timeout, $transition$, $translate,
-                                 $translatePartialLoader, authenticationRestService, flowUploadService,
+                                 authenticationRestService, flowUploadService,
                                  functionalityRestService, lsAppConfig, swal, toastService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
@@ -93,7 +96,6 @@
         }]
       };
 
-      $translatePartialLoader.addPart('upload');
       $translate.refresh().then(function() {
         $translate([
           'UPLOAD_SHARE_ALERT.CANCEL',

@@ -8,6 +8,9 @@
 
   angular
     .module('linshare.upload')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('serverResponse');
+    }])
     .factory('flowUploadService', flowUploadService);
 
   flowUploadService.$inject = [
@@ -16,7 +19,6 @@
     '$log',
     '$q',
     '$timeout',
-    '$translatePartialLoader',
     'authenticationRestService',
     'flowFactory',
     'LinshareDocumentRestService',
@@ -40,7 +42,6 @@
     $log,
     $q,
     $timeout,
-    $translatePartialLoader,
     authenticationRestService,
     flowFactory,
     LinshareDocumentRestService,
@@ -245,7 +246,6 @@
      * @memberOf LinShare.upload.flowUploadService
      */
     function initFlowUploadService() {
-      $translatePartialLoader.addPart('serverResponse');
       errorNone = messagePrefix + NONE;
 
       if (!service.flowObj) {

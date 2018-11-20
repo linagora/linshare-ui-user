@@ -6,6 +6,13 @@
   'use strict';
 
   angular
-    .module('linshare.anonymousUrl', ['ngResource', 'ngRoute', 'ui.router', 'ui.bootstrap']);
-
+    .module(
+      'linshare.anonymousUrl',
+      [
+        'ngResource',
+        'ngRoute',
+        'ui.router',
+        'ui.bootstrap',
+        'pascalprecht.translate'
+      ]);
 })();

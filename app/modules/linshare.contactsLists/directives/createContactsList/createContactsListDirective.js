@@ -7,12 +7,14 @@
 
   angular
     .module('linshare.contactsLists')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('contactsLists');
+    }])
     .directive('createContactsList', createContactsList);
 
   createContactsList.$inject = [
     '_',
     '$q',
-    '$translatePartialLoader',
     'contactsListsListRestService',
     'contactsListsContactsRestService',
     'toastService'
@@ -27,7 +29,6 @@
   function createContactsList(
     _,
     $q,
-    $translatePartialLoader,
     contactsListsListRestService,
     contactsListsContactsRestService,
     toastService
@@ -57,7 +58,6 @@
      * @memberOf LinShare.contactsLists.createContactsList
      */
     function linkFn(scope, element, attrs, controller) {
-      $translatePartialLoader.addPart('contactsLists');
       scope.createContactsListWithContacts = createContactsListWithContacts;
 
       /**

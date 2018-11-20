@@ -7,9 +7,12 @@
 
   angular
     .module('linshare.share')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('filesList');
+    }])
     .controller('LinshareShareListController', LinshareShareListController);
 
-  LinshareShareListController.$inject = ['_', '$scope', '$state', '$translate', '$translatePartialLoader',
+  LinshareShareListController.$inject = ['_', '$scope', '$state', '$translate',
     'lsAppConfig', 'previousState', 'shareIndex', 'ShareObjectService', 'swal'
   ];
 
@@ -18,7 +21,7 @@
    *  @desc Controller for managing shared elements
    *  @memberOf LinShare.share
    */
-  function LinshareShareListController(_, $scope, $state, $translate, $translatePartialLoader, lsAppConfig,
+  function LinshareShareListController(_, $scope, $state, $translate, lsAppConfig,
     previousState, shareIndex, ShareObjectService, swal) {
 
     var
@@ -49,7 +52,6 @@
      */
     function activate() {
       if (!_.isUndefined(shareListVm.currentShare)) {
-        $translatePartialLoader.addPart('filesList');
         shareListVm.selectedDocuments = shareListVm.currentShare.documents;
         shareListVm.loadSidebarContent(shareListVm.activeShareDetails);
         $translate(['SWEET_ALERT.ON_SHARE_DELETE.TITLE', 'SWEET_ALERT.ON_SHARE_DELETE.TEXT',

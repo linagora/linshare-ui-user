@@ -7,14 +7,16 @@
 
   angular
     .module('linshareUiUserApp')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('serverResponse');
+    }])
     .factory('ServerManagerService', ServerManagerService);
 
   ServerManagerService.$inject = [
-    '_', 
+    '_',
     '$log',
     '$q',
     '$translate',
-    '$translatePartialLoader',
     'Restangular',
     'toastService'
   ];
@@ -29,11 +31,9 @@
     $log,
     $q,
     $translate,
-    $translatePartialLoader,
     Restangular,
     toastService
   ) {
-    $translatePartialLoader.addPart('serverResponse');
     var service = {
       getHeaders: getHeaders,
       multiResponsesHanlder: multiResponsesHanlder,

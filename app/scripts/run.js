@@ -100,10 +100,11 @@ angular
 
   .run(function($rootScope, $filter, $location, $state, Restangular, $log, $window, localStorageService,
                 languageService, toastService, lsAppConfig) {
-    const storedLocale = localStorageService.get('locale');
     const browserLanguageFullKey = $window.navigator.language || $window.navigator.userLanguage;
     const browserLanguageKey = browserLanguageFullKey.split('-')[0];
     const browserLanguage = lsAppConfig.languages[browserLanguageKey];
+    var storedLocale = localStorageService.get('locale');
+    storedLocale = typeof(storedLocale) !== 'object' ? undefined : storedLocale;
 
     languageService.changeLocale(
       storedLocale ?

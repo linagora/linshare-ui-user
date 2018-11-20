@@ -8,6 +8,9 @@
 
   angular.module(
     'linshare.safeDetails',
-    ['restangular']
+    [
+      'restangular',
+      'pascalprecht.translate',
+    ]
   );
 })();

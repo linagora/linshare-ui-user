@@ -8,10 +8,13 @@
 
   angular
     .module('linshare.audit')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('audit');
+    }])
     .controller('AuditController', AuditController);
 
   AuditController.$inject = [
-    '_', '$filter', '$scope', '$translate', '$translatePartialLoader', 'auditDetailsService',
+    '_', '$filter', '$scope', '$translate', 'auditDetailsService',
     'auditRestService', 'lsAppConfig', 'moment', 'tableParamsService'
   ];
 
@@ -20,7 +23,7 @@
    * @desc Application audit management system controller
    * @memberOf LinShare.Audit
    */
-  function AuditController(_, $filter, $scope, $translate, $translatePartialLoader, auditDetailsService,
+  function AuditController(_, $filter, $scope, $translate, auditDetailsService,
     auditRestService, lsAppConfig, moment, tableParamsService) {
     /* jshint validthis: true */
     var auditVm = this;
@@ -44,7 +47,6 @@
      * @memberOf LinShare.Audit.AuditController
      */
     function activate() {
-      $translatePartialLoader.addPart('audit');
       auditVm.beginDate.setDate(auditVm.beginDate.getDate() - 7);
 
       findAuditActionsByDate();

@@ -8,10 +8,14 @@
 
   angular
     .module('linshare.guests')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('guests');
+      $translatePartialLoaderProvider.addPart('filesList');
+    }])
     .controller('LinshareGuestsController', LinshareGuestsController);
 
   //TODO - KLE: Check DI
-  LinshareGuestsController.$inject = ['_', '$filter', '$scope', '$transitions', '$translate', '$translatePartialLoader',
+  LinshareGuestsController.$inject = ['_', '$filter', '$scope', '$transitions', '$translate',
     'GuestObjectService', 'guestRestService', 'itemUtilsService', 'lsAppConfig', 'NgTableParams', 'toastService'];
 
   /**
@@ -21,7 +25,7 @@
    */
   // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
-  function LinshareGuestsController(_, $filter, $scope, $transitions, $translate, $translatePartialLoader,
+  function LinshareGuestsController(_, $filter, $scope, $transitions, $translate,
     GuestObjectService, guestRestService, itemUtilsService, lsAppConfig, NgTableParams, toastService) {
     /* jshint validthis: true */
     var guestVm = this;
@@ -67,8 +71,6 @@
      */
     function activate() {
       guestVm.guestObject = new GuestObjectService();
-      $translatePartialLoader.addPart('guests');
-      $translatePartialLoader.addPart('filesList');
       $translate.refresh().then(function() {
         $translate([
           'HEADER_GUEST.SLIDER.MY_GUEST',

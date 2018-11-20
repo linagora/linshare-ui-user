@@ -6,10 +6,13 @@
   'use strict';
   angular
     .module('linshare.contactsLists')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('contactsLists');
+    }])
     .controller('contactsListsContactsController', contactsListsContactsController);
 
   contactsListsContactsController.$inject = ['_', '$filter', '$scope', '$timeout', '$transition$', '$transitions',
-    '$translate', '$translatePartialLoader', 'contactsListsContacts', 'contactsListsListRestService',
+    '$translate', 'contactsListsContacts', 'contactsListsListRestService',
     'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'itemUtilsService',
     'lsAppConfig', 'NgTableParams', 'toastService'
   ];
@@ -22,7 +25,7 @@
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false, maxstatements: false */
   function contactsListsContactsController(_, $filter, $scope, $timeout, $transition$, $transitions, $translate,
-    $translatePartialLoader, contactsListsContacts, contactsListsListRestService,
+    contactsListsContacts, contactsListsListRestService,
     contactsListsContactsRestService, contactsListsService, documentUtilsService, itemUtilsService, lsAppConfig,
     NgTableParams, toastService) {
     /* jshint validthis:true */
@@ -74,7 +77,6 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     function activate() {
-      $translatePartialLoader.addPart('contactsLists');
       setModelForEdit();
 
       contactsListsListRestService.get(contactsListsContactsVm.contactsListUuid).then(function(details) {

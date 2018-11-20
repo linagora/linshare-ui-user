@@ -7,11 +7,14 @@
 
   angular
     .module('linshare.resetPassword')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('resetPassword');
+    }])
     .controller('ResetFormController', ResetFormController);
 
-  ResetFormController.$inject = ['_', '$scope', '$translate', '$translatePartialLoader', 'languageService'];
+  ResetFormController.$inject = ['_', '$scope', '$translate', 'languageService'];
 
-  function ResetFormController(_, $scope, $translate, $translatePartialLoader, languageService) {
+  function ResetFormController(_, $scope, $translate, languageService) {
     /* jshint validthis:true */
     var resetFormVm = this;
 
@@ -30,7 +33,6 @@
      *  @memberOf LinShare.resetPassword.ResetFormController
      */
     function activate() {
-      $translatePartialLoader.addPart('resetPassword');
       $translate.refresh().then(function() {
         translateInfoMessage(resetFormVm.resetData);
       });

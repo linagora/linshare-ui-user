@@ -7,6 +7,10 @@
 
   angular
     .module('linshare.sharedSpace')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('filesList');
+      $translatePartialLoaderProvider.addPart('sharedspace');
+    }])
     .controller('WorkgroupNodesController', WorkgroupNodesController);
 
   WorkgroupNodesController.$inject = [
@@ -18,7 +22,6 @@
     '$timeout',
     '$transition$',
     '$translate',
-    '$translatePartialLoader',
     'auditDetailsService',
     'browseService',
     'currentFolder',
@@ -54,7 +57,6 @@
     $timeout,
     $transition$,
     $translate,
-    $translatePartialLoader,
     auditDetailsService,
     browseService,
     currentFolder,
@@ -135,8 +137,6 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function activate() {
-      $translatePartialLoader.addPart('filesList');
-      $translatePartialLoader.addPart('sharedspace');
 
       workgroupNodesVm.canCopyNodeToPersonalSpace = false;
 

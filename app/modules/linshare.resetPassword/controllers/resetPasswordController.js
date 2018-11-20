@@ -7,10 +7,13 @@
 
   angular
     .module('linshare.resetPassword')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('general');
+    }])
     .controller('ResetPasswordController', ResetPasswordController);
 
-  ResetPasswordController.$inject = ['_', '$log', '$state', '$timeout', '$translatePartialLoader',
-    'languageService', 'lsAppConfig', 'resetPasswordService', 'resetUuid','toastService'
+  ResetPasswordController.$inject = ['_', '$log', '$state', '$timeout',
+    'lsAppConfig', 'resetPasswordService', 'resetUuid','toastService'
   ];
 
   /**
@@ -18,17 +21,11 @@
    *  @desc Reset password management system controller
    *  @memberOf LinShare.resetPassword
    */
-  function ResetPasswordController(_, $log, $state, $timeout, $translatePartialLoader,
-    languageService, lsAppConfig, resetPasswordService, resetUuid, toastService) {
+  function ResetPasswordController(_, $log, $state, $timeout,
+    lsAppConfig, resetPasswordService, resetUuid, toastService) {
     /* jshint validthis: true */
     var resetVm = this;
-    var
-      language,
-      country,
-      locale = languageService.getLocale();
 
-    resetVm.changeLoginLanguage = changeLoginLanguage;
-    resetVm.loginLocale = splitLocale(locale);
     resetVm.lsAppConfig = lsAppConfig;
     resetVm.notify = notify;
     resetVm.reset = {};
@@ -44,7 +41,6 @@
      */
     function activate() {
       resetVm.reset.uuid = resetUuid !== '' ? resetUuid : undefined;
-      $translatePartialLoader.addPart('general');
       if (_.isUndefined(resetVm.reset.uuid)) {
         resetVm.reset.type = 'forgot';
         resetVm.reset.action = actionForgot;
@@ -119,17 +115,6 @@
     }
 
     /**
-     *  @name changeLoginLanguage
-     *  @desc TODO [TOFILL]
-     *  @param {TODO [TOFILL]} lang - TODO [TOFILL]
-     *  @memberOf LinShare.resetPassword.ResetPasswordController
-     */
-    function changeLoginLanguage(lang) {
-      languageService.changeLocale(lang);
-      resetVm.loginLocale = splitLocale(lang);
-    }
-
-    /**
      *  @name notify
      *  @desc Send message to the console and by toast
      *  @param {Object} data - Server response object
@@ -139,25 +124,6 @@
       var message = data.data.message;
       toastService.error({key: message});
       $log.error('resetPasswordController - notify', data);
-    }
-
-    /**
-     *  @name splitLocale
-     *  @desc TODO [TOFILL]
-     *  @param {TODO [TOFILL]} locale - TODO [TOFILL]
-     *  @returns {TODO [TOFILL]} TODO [TOFILL]
-     *  @memberOf LinShare.resetPassword.ResetPasswordController
-     */
-    function splitLocale(locale) {
-      locale = locale.split('-');
-      language = locale[0];
-      if (locale.length > 1) {
-        country = locale[1].toLowerCase();
-      }
-      return {
-        language: language,
-        country: country
-      };
     }
   }
 })();

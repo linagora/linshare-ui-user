@@ -7,16 +7,19 @@
 
   angular
     .module('linshare.contactsLists')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('contactsLists');
+    }])
     .factory('contactsListsService', contactsListsService);
 
-  contactsListsService.$inject = ['_', '$translate', '$translatePartialLoader'];
+  contactsListsService.$inject = ['_', '$translate'];
 
   /**
    * @namespace contactsListsService
    * @descService to interact with ContactsListsList object by REST
    * @memberOf LinShare.contactsLists
    */
-  function contactsListsService(_, $translate, $translatePartialLoader) {
+  function contactsListsService(_, $translate) {
     var
       byMe,
       service = {
@@ -35,8 +38,6 @@
      * @memberOf LinShare.contactsLists.contactsListsService
      */
     function activate() {
-      $translatePartialLoader.addPart('contactsLists');
-
       $translate.refresh().then(function() {
         $translate(['ME']).then(function(translations) {
           byMe = translations.ME;

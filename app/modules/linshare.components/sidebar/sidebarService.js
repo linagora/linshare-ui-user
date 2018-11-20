@@ -1,5 +1,5 @@
 /**
- * languageService Factory
+ * sidebarService Factory
  * @namespace linshare.components
  */
 (function() {

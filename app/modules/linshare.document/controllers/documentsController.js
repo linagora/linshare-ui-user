@@ -3,16 +3,18 @@
 
   angular
     .module('linshare.document')
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('filesList');
+    }])
     .controller('documentsController', documentsController);
 
-  documentsController.$inject = ['$scope', '$translatePartialLoader', 'lsAppConfig'];
+  documentsController.$inject = ['$scope', 'lsAppConfig'];
 
-  function documentsController($scope, $translatePartialLoader, lsAppConfig) {
+  function documentsController($scope, lsAppConfig) {
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.multipleSelection = true;
     $scope.onShare = onShare;
     $scope.selectedDocuments = [];
-    $translatePartialLoader.addPart('filesList');
 
     ////////////
 
