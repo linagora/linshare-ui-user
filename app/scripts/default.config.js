@@ -100,6 +100,21 @@
           modificationDate: 'desc'
         }
       },
+      menuLinks: {
+        suffix:{
+          'fr-FR': '',
+          'en-US': '',
+          'vi-VN': ''
+        },
+        disable: {
+          'MENU_TITLE.CONTACTS_LISTS': false,
+          'MENU_TITLE.GUESTS': false,
+          'MENU_TITLE.FILES': false,
+          'MENU_TITLE.RECEIVED_SHARES': false,
+          'MENU_TITLE.UPLOAD_AND_SHARE': false,
+          'MENU_TITLE.SHARED_SPACE': false
+        }
+      },
       extLink: {
         enable: false,
         newTab: false,

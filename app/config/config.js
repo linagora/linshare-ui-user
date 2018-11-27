@@ -57,5 +57,25 @@
           'vi-VN': 'Tên'
         }
       },
+      /* Define custom behavior for menu element in the main sidebar
+       * suffix - object: Determine the suffix to add to menu element name if it is disabled
+       *                   The value should be translated accordingly to the different language used by the application
+       * disable - object: Determine for each menu element if their behavior should change from hidden to disabled
+       */
+      menuLinks: {
+        suffix:{
+          'fr-FR': '',
+          'en-US': '',
+          'vi-VN': ''
+        },
+        disable: {
+          'MENU_TITLE.CONTACTS_LISTS': false,
+          'MENU_TITLE.GUESTS': false,
+          'MENU_TITLE.FILES': false,
+          'MENU_TITLE.RECEIVED_SHARES': false,
+          'MENU_TITLE.UPLOAD_AND_SHARE': false,
+          'MENU_TITLE.SHARED_SPACE': false
+        }
+      },
     });
 })();

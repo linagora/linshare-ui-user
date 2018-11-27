@@ -47,6 +47,13 @@
         getProperties: getProperties
       };
 
+    const contactsListMenuName = 'MENU_TITLE.CONTACTS_LISTS';
+    const guestMenuName = 'MENU_TITLE.GUESTS';
+    const filesMenuName = 'MENU_TITLE.FILES';
+    const receivedShareMenuName = 'MENU_TITLE.RECEIVED_SHARES';
+    const myUploadMenuName = 'MENU_TITLE.UPLOAD_AND_SHARE';
+    const sharedSpaceMenuName = 'MENU_TITLE.SHARED_SPACE';
+
     return service;
 
     ////////////
@@ -68,40 +75,54 @@
             functionalities = promises[1];
 
           administrations.links.splice(0, 0, {
-            name: 'MENU_TITLE.CONTACTS_LISTS',
+            name: contactsListMenuName,
             link: 'administration.contactslists.list',
-            disabled: !functionalities.CONTACTS_LIST.enable
+            hide: !lsAppConfig.menuLinks.disable[contactsListMenuName] && !functionalities.CONTACTS_LIST.enable,
+            disabled: lsAppConfig.menuLinks.disable[contactsListMenuName] && !functionalities.CONTACTS_LIST.enable,
+            suffix: lsAppConfig.menuLinks.suffix
           }, {
-            name: 'MENU_TITLE.GUESTS',
+            name: guestMenuName,
             link: 'administration.guests',
-            disabled: _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest)
+            hide: !lsAppConfig.menuLinks.disable[guestMenuName] &&
+              _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest),
+            disabled: lsAppConfig.menuLinks.disable[guestMenuName] &&
+              _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest),
+            suffix: lsAppConfig.menuLinks.suffix
           });
 
+          administrations.hide = _.reduce(administrations.links, function(value, link){
+            return link.hide && value;
+          }, true);
           administrations.disabled = _.reduce(administrations.links, function(value, link){
             return link.disabled && value;
           }, true);
 
-          files.disabled = !user.canUpload;
+          files.hide = !lsAppConfig.menuLinks.disable[filesMenuName] && !user.canUpload;
+          files.disabled = lsAppConfig.menuLinks.disable[filesMenuName] && !user.canUpload;
 
-          sharedSpace.disabled = !functionalities.WORK_GROUP.enable;
-          myUploads.disabled = !(functionalities.WORK_GROUP.enable || user.canUpload);
-          receivedShares.disabled = functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
+          sharedSpace.hide = !lsAppConfig.menuLinks.disable[sharedSpaceMenuName] &&
+            !functionalities.WORK_GROUP.enable;
+          sharedSpace.disabled = lsAppConfig.menuLinks.disable[sharedSpaceMenuName] &&
+            !functionalities.WORK_GROUP.enable;
+
+          myUploads.hide = !lsAppConfig.menuLinks.disable[myUploadMenuName] &&
+            !(functionalities.WORK_GROUP.enable || user.canUpload);
+          myUploads.disabled = lsAppConfig.menuLinks.disable[myUploadMenuName] &&
+            !(functionalities.WORK_GROUP.enable || user.canUpload);
+
+          receivedShares.hide = !lsAppConfig.menuLinks.disable[receivedShareMenuName] &&
+            functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
+          receivedShares.disabled = lsAppConfig.menuLinks.disable[receivedShareMenuName] &&
+            functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
         });
 
       administrations = {
         name: 'MENU_TITLE.ADMIN',
         icon: 'ls-user-group',
         color: '#E91E63',
-        disabled: false,
-        links: [{
-          name: 'MENU_TITLE.USERS',
-          link: 'administration.users',
-          disabled: lsAppConfig.production
-        }, {
-          name: 'MENU_TITLE.GROUP_MEMBERS',
-          link: 'administration.groups',
-          disabled: lsAppConfig.production
-        }]
+        hide: false,
+        links: [],
+        suffix: lsAppConfig.menuLinks.suffix
       };
 
       audit = {
@@ -109,7 +130,7 @@
         link: 'audit.global',
         icon: 'zmdi zmdi-time-restore',
         color: '#FFC107',
-        disabled: false
+        hide: false
       };
 
       externalLink = {
@@ -117,63 +138,67 @@
         href: lsAppConfig.extLink.href,
         icon: lsAppConfig.extLink.icon,
         color: '#FFC107',
-        disabled: !lsAppConfig.extLink.enable,
+        hide: !lsAppConfig.extLink.enable,
         newTab: lsAppConfig.extLink.newTab
       };
 
       files = {
-        name: 'MENU_TITLE.FILES',
+        name: filesMenuName,
         icon: 'ls-my-space',
-        disabled: false,
-        link: 'documents.files'
+        hide: false,
+        link: 'documents.files',
+        suffix: lsAppConfig.menuLinks.suffix
       };
 
       receivedShares = {
-        name: 'MENU_TITLE.RECEIVED_SHARES',
+        name: receivedShareMenuName,
         icon: 'ls-received-shares',
-        disabled: false,
-        link: 'documents.received'
+        hide: false,
+        link: 'documents.received',
+        suffix: lsAppConfig.menuLinks.suffix
       };
 
       home = {
         name: 'MENU_TITLE.HOME',
         link: 'home',
         icon: 'ls-homepage',
-        disabled: false
+        hide: false
       };
 
       myUploads = {
-        name: 'MENU_TITLE.UPLOAD_AND_SHARE',
+        name: myUploadMenuName,
         link: 'documents.upload',
-        icon: 'ls-uploads'
+        icon: 'ls-uploads',
+        suffix: lsAppConfig.menuLinks.suffix
       };
 
       sharedSpace = {
-        name: 'MENU_TITLE.SHARED_SPACE',
+        name: sharedSpaceMenuName,
         link: 'sharedspace.all',
         icon: 'ls-workgroup',
-        disabled: false
+        hide: false,
+        suffix: lsAppConfig.menuLinks.suffix
       };
 
       safeDetails = {
         name: 'MENU_TITLE.SAFE_DETAILS',
         link: 'safe_details.global',
         icon: 'zmdi zmdi-card',
-        disabled: !lsAppConfig.enableSafeDetails
+        hide: !lsAppConfig.enableSafeDetails
       };
 
       uploads = {
         name: 'MENU_TITLE.UPLOAD_MANAGMENT',
         icon: 'ls-upload-request',
-        disabled: lsAppConfig.production,
+        hide: lsAppConfig.production,
         links: [{
           name: 'MENU_TITLE.UPLOAD_PROPOSITIONS',
           link: 'upload_request.propositions',
-          disabled: lsAppConfig.production
+          hide: lsAppConfig.production
         }, {
           name: 'MENU_TITLE.UPLOAD_REQUESTS',
           link: 'upload_request.requests',
-          disabled: lsAppConfig.production
+          hide: lsAppConfig.production
         }]
       };
 
