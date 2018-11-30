@@ -50,9 +50,7 @@
       "UPDATE": "Cập nhật"
     },
     "ERROR": {
-      "INVALID_DATE": "
-Ngày cần phải lớn hơn ngày hôm nay và không thể vượt quá ngày hết hạn
-tối đa là:",
+      "INVALID_DATE": "Ngày cần phải lớn hơn ngày hôm nay và không thể vượt quá ngày hết hạntối đa là",
       "INVALID_EMAIL": "Địa chỉ email không hợp lệ.",
       "INVALID_EMPTY_FIELD": "Trường này không thể để trống."
     },
@@ -62,7 +60,7 @@ tối đa là:",
       "ADD_EMAIL": "thêm một tin nhắn",
       "ADVANCED_OPTIONS": "Tùy chọn nâng cao",
       "ALLOW_MODIFICATORS": "Cho phép người dùng khác sửa đổi tài khoản này",
-      "EMAIL": "Thư điện tử"",
+      "EMAIL": "Thư điện tử",
       "ENTER_DESCRIPTION": "Nhập mô tả của bạn",
       "ENTER_EMAIL": "Nhập tin nhắn của bạn",
       "EXP_DATE": "Ngày hết hạn",
