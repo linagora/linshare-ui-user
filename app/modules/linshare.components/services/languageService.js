@@ -11,6 +11,7 @@
 
   languageService.$inject = [
     '$log',
+    '$rootScope',
     '$translate',
     'localStorageService',
     'lsAppConfig',
@@ -24,6 +25,7 @@
    */
   function languageService(
     $log,
+    $rootScope,
     $translate,
     localStorageService,
     lsAppConfig,
@@ -57,6 +59,7 @@
       localStorageService.set('locale',language);
       moment.locale(language.fullKey);
       $translate.use(language.fullKey);
+      $rootScope.locale = language;
       $log.debug('locale changed to ', language.fullKey);
     }
 

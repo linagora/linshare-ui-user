@@ -50,7 +50,7 @@
           data-ng-class="::{'disabled': tab.disabled }"
           target="{{::tab.newTab ? '_blank' : '_self'}}"
         >
-          <i class="{{::tab.icon}}"></i> <span>{{::tab.name[locale.fullKey]}}</span>
+          <i class="{{::tab.icon}}"></i> <span>{{tab.name[locale.fullKey]}}</span>
         </a>
       </li>
       <li
@@ -68,7 +68,7 @@
           data-ng-class="::{'disabled': tab.disabled}"
         >
           <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}</span>
-          <span data-ng-show="tab.disabled && tab.suffix">{{::tab.suffix[locale.fullKey]}}</span>
+          <span data-ng-show="tab.disabled && tab.suffix">{{tab.suffix[locale.fullKey]}}</span>
         </a>
       </li>
       <li
