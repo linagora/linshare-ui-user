@@ -43,20 +43,26 @@
     user
   )
   {
-    const LANG_CONVERTER = {
-      ENGLISH: {
+    const LANG_CONVERTER = {};
+
+    if (lsAppConfig.languages.en) {
+      LANG_CONVERTER.ENGLISH= {
         lang: 'ENGLISH',
         key: lsAppConfig.languages.en.fullKey
-      },
-      FRENCH: {
+      };
+    }
+    if (lsAppConfig.languages.fr) {
+      LANG_CONVERTER.FRENCH= {
         lang: 'FRENCH',
         key: lsAppConfig.languages.fr.fullKey
-      },
-      VIETNAMESE: {
+      };
+    }
+    if (lsAppConfig.languages.vi) {
+      LANG_CONVERTER.VIETNAMESE= {
         lang: 'VIETNAMESE',
         key: lsAppConfig.languages.vi.fullKey
-      }
-    };
+      };
+    }
 
     $scope.lsAppConfig = lsAppConfig;
 
