@@ -64,7 +64,7 @@
     /* jshint validthis:true */
     var mainVm = this;
 
-    const URL_HOME = 'home';
+    const URL_HOME = lsAppConfig.homePage;
     const URL_LOGIN = 'login';
 
     //TODO: shall be moved to the directive controller of linshareSidebar directive

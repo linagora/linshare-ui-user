@@ -203,7 +203,6 @@
       };
 
       tabs = [
-        home,
         myUploads,
         receivedShares,
         files,
@@ -214,6 +213,10 @@
         safeDetails,
         externalLink
       ];
+
+      if (!lsAppConfig.hideHomeMenuLink) {
+        tabs.unshift(home);
+      }
     }
 
     /**

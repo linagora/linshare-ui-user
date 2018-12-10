@@ -77,5 +77,18 @@
           'MENU_TITLE.SHARED_SPACE': false
         }
       },
+
+      /* Define the Application home page, can be undefined for default behavior or one of the following:
+       * documents.files
+       * documents.received
+       * documents.upload
+       * sharedspace.all
+       * administration.contactslists.list
+       * administration.guests
+       * audit.global
+       */
+      homePage: undefined,
+      /* Determine show/hide of home link in sidebar menu */
+      hideHomeMenuLink: false
     });
 })();

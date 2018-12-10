@@ -9,39 +9,43 @@
     .module('linshareUiUserApp')
     .config(routerConfiguration);
 
-  routerConfiguration.$inject = ['_', '$stateProvider', '$urlRouterProvider'];
+  routerConfiguration.$inject = ['_', '$stateProvider', '$urlRouterProvider', 'lsAppConfig'];
 
   /**
    * @namespace routerConfiguration
    * @desc Router configuration for the LinShare APP
    * @memberOf LinShareUiUserApp
    */
-  function routerConfiguration(_, $stateProvider, $urlRouterProvider) {
+  function routerConfiguration(_, $stateProvider, $urlRouterProvider, lsAppConfig) {
     $urlRouterProvider
       .when(/language\/.*/i, [
         '$window',
         '$state',
         'authenticationRestService',
         'languageService',
+        'lsAppConfig',
         function(
           $window,
           $state,
           authenticationRestService,
-          languageService
+          languageService,
+          lsAppConfig
         ) {
           var language = $window.location.hash.split('/').pop();
 
           languageService.changeLocale(language);
-          authRedirect($state, null, authenticationRestService);
+          authRedirect($state, null, authenticationRestService, lsAppConfig.homePage);
         }]).otherwise(function($injector) {
           $injector.invoke([
             '$state',
             'authenticationRestService',
+            'lsAppConfig',
             function(
               $state,
-              authenticationRestService
+              authenticationRestService,
+              lsAppConfig
             ) {
-              authRedirect($state, null, authenticationRestService);
+              authRedirect($state, null, authenticationRestService, lsAppConfig.homePage);
             }
           ]);
         });
@@ -61,12 +65,6 @@
           }
         }
       })
-      .state('home', {
-        parent: 'common',
-        url: '/home',
-        templateUrl: 'views/home/home.html',
-        controller: 'HomeController'
-      })
       .state('login', {
         url: '/login?next',
         templateUrl: 'views/common/loginForm.html',
@@ -76,10 +74,10 @@
           loginRequired: false
         },
         resolve: {
-          authentication: function($state, $transition$, authenticationRestService) {
+          authentication: function($state, $transition$, authenticationRestService, lsAppConfig) {
            if (!$transition$.params().loginRequired) {
            $transition$.abort();
-            authRedirect($state, $transition$, authenticationRestService);
+             authRedirect($state, $transition$, authenticationRestService, lsAppConfig.homePage);
            }
           }
         }
@@ -465,6 +463,16 @@
         controllerAs: 'safeDetailsVm'
       });
 
+    if (!lsAppConfig.hideHomeMenuLink) {
+      $stateProvider
+        .state('home', {
+          parent: 'common',
+          url: '/home',
+          templateUrl: 'views/home/home.html',
+          controller: 'HomeController'
+        });
+    }
+
     /**
      * @name authRedirect
      * @desc Redirect the user on the home page if logged in or on the login page if not
@@ -472,13 +480,13 @@
      * @param {Object} authenticationRestService - Service for authentication
      * @memberOf LinShareUiUserApp.routerConfiguration
      */
-    function authRedirect($state, $transition$, authenticationRestService) {
+    function authRedirect($state, $transition$, authenticationRestService, homePage) {
       authenticationRestService.checkAuthentication(true, true).then(function(data) {
         if (_.isUndefined(data.status)) {
           if ($transition$) {
             $transition$.abort();
           }
-          $state.go('home');
+          $state.go(homePage || 'home');
         } else {
           if (!$state.is('login')) {
             if ($transition$) {
