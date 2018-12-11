@@ -1,5 +1,6 @@
 {
   "ACTION": {
+    "PREVENT_EXIT": "Des fichiers sont en attente de téléversement, êtes vous sûr de vouloir quitter l'application ?",
     "ADD_MEMBER": "Ajouter un membre",
     "COPY": "Copier",
     "COPY_ADJ": "Copie",

@@ -21,6 +21,7 @@
     '$state',
     '$timeout',
     '$transitions',
+    '$translate',
     '$window',
     'authenticationRestService',
     'checkTableHeightService',
@@ -46,6 +47,7 @@
     $state,
     $timeout,
     $transitions,
+    $translate,
     $window,
     authenticationRestService,
     checkTableHeightService,
@@ -105,6 +107,10 @@
     function activate() {
       var notifyTimeoutReference;
 
+      $translate('ACTION.PREVENT_EXIT').then(function(message) {
+        $scope.preventExitMessage = message;
+      });
+
       $scope.loggedUser = new LinshareUserService();
       mainVm.sidebar = sidebarService;
 
@@ -134,6 +140,7 @@
 
       //TODO: Watcher to manage globally the state of an uploaded file waiting for share
       $scope.$on('flow::fileSuccess', function fileSuccessAction(event, $flow, flowFile, $message) {
+        preventExit($flow.progress() !== 1);
         $log.debug('UPLOAD SUCCESS', flowFile.name);
         flowFile.doingAsyncUpload = true;
         $flow.opts.stack.push(flowFile);
@@ -163,7 +170,6 @@
         }
       });
 
-
     /**
      * @name doNotification
      * @desc Notify user about upload success when this function is not re-called in a second
@@ -191,10 +197,12 @@
       }
 
       $scope.$on('flow::fileRemoved', function fileRemoveAction(event, $flow, flowFile) {
+        preventExit($flow.progress() !== 1);
         mainVm.removeShareDocument(flowFile);
       });
 
       $scope.$on('flow::fileError', function fileErrorAction(event, $flow, flowFile, message, flowChunk) {
+        preventExit($flow.progress() !== 1);
         mainVm.flowUploadService.errorHandler(flowFile, flowChunk);
         if (!flowFile.canBeRetried) {
           mainVm.removeShareDocument(flowFile);
@@ -203,6 +211,7 @@
       });
 
       $scope.$on('flow::uploadStart', function(event, $flow) {
+        preventExit($flow.progress() !== 1);
         _.forEach($flow.files, function(flowFile) {
           if (!flowFile.quotaChecked) {
             mainVm.flowUploadService.checkQuotas([flowFile], false, $scope.setUserQuotas);
@@ -362,6 +371,23 @@
             getUserQuotas();
           });
       }
+    }
+
+    /**
+     * @name preventExit
+     * @desc Set onbeforeunload function to prevent user to exist
+     * @param {Boolean} activate - Determine if user shall be prevented or not by setting onbeforeunload function
+     * @memberOf linshareUiUserApp
+     */
+    function preventExit(activate) {
+      if (activate) {
+        window.onbeforeunload = function() {
+          return $scope.preventExitMessage;
+        };
+        return;
+      }
+
+      window.onbeforeunload = undefined;
     }
 
     /**
