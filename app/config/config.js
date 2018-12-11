@@ -12,7 +12,7 @@
       // The debug mode, allow to get more information while doing any interraction in the APP.
       // It is recommended to set it to 'true' when having any trouble for reporting information
       // from the browser console to your software vendor
-      debug: true,
+      debug: false,
       localPath: 'i18n/original', // custom your i18n folder path
 
       // To override the application logo set the url of the image corresponding to the sizes (small 155x29 and big 500x192)
