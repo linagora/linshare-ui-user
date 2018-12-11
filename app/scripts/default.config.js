@@ -127,6 +127,19 @@
         }
       },
 
+      /* Define the Application home page, can be undefined for default behavior or one of the following:
+       * documents.files
+       * documents.received
+       * documents.upload
+       * sharedspace.all
+       * administration.contactslists.list
+       * administration.guests
+       * audit.global
+       */
+      homePage: 'home',
+      /* Determine show/hide of home link in sidebar menu */
+      hideHomeMenuLink: false,
+
       // For upload options management
       mySpacePage: 'myspace',
       workgroupPage: 'workgroup',

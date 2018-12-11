@@ -87,7 +87,7 @@
        * administration.guests
        * audit.global
        */
-      homePage: undefined,
+      homePage: 'home',
       /* Determine show/hide of home link in sidebar menu */
       hideHomeMenuLink: false
     });
