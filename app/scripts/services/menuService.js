@@ -79,7 +79,8 @@
             link: 'administration.contactslists.list',
             hide: !lsAppConfig.menuLinks.disable[contactsListMenuName] && !functionalities.CONTACTS_LIST.enable,
             disabled: lsAppConfig.menuLinks.disable[contactsListMenuName] && !functionalities.CONTACTS_LIST.enable,
-            suffix: lsAppConfig.menuLinks.suffix
+            suffix: lsAppConfig.menuLinks.suffix,
+            suffixLink: lsAppConfig.menuLinks.suffixLink
           }, {
             name: guestMenuName,
             link: 'administration.guests',
@@ -87,7 +88,8 @@
               _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest),
             disabled: lsAppConfig.menuLinks.disable[guestMenuName] &&
               _.isNil(functionalities.GUESTS) ? true : !(functionalities.GUESTS.enable && user.canCreateGuest),
-            suffix: lsAppConfig.menuLinks.suffix
+            suffix: lsAppConfig.menuLinks.suffix,
+            suffixLink: lsAppConfig.menuLinks.suffixLink
           });
 
           administrations.hide = _.reduce(administrations.links, function(value, link){
@@ -122,7 +124,8 @@
         color: '#E91E63',
         hide: false,
         links: [],
-        suffix: lsAppConfig.menuLinks.suffix
+        suffix: lsAppConfig.menuLinks.suffix,
+        suffixLink: lsAppConfig.menuLinks.suffixLink
       };
 
       audit = {
@@ -147,7 +150,8 @@
         icon: 'ls-my-space',
         hide: false,
         link: 'documents.files',
-        suffix: lsAppConfig.menuLinks.suffix
+        suffix: lsAppConfig.menuLinks.suffix,
+        suffixLink: lsAppConfig.menuLinks.suffixLink
       };
 
       receivedShares = {
@@ -155,7 +159,8 @@
         icon: 'ls-received-shares',
         hide: false,
         link: 'documents.received',
-        suffix: lsAppConfig.menuLinks.suffix
+        suffix: lsAppConfig.menuLinks.suffix,
+        suffixLink: lsAppConfig.menuLinks.suffixLink
       };
 
       home = {
@@ -169,7 +174,8 @@
         name: myUploadMenuName,
         link: 'documents.upload',
         icon: 'ls-uploads',
-        suffix: lsAppConfig.menuLinks.suffix
+        suffix: lsAppConfig.menuLinks.suffix,
+        suffixLink: lsAppConfig.menuLinks.suffixLink
       };
 
       sharedSpace = {
@@ -177,7 +183,8 @@
         link: 'sharedspace.all',
         icon: 'ls-workgroup',
         hide: false,
-        suffix: lsAppConfig.menuLinks.suffix
+        suffix: lsAppConfig.menuLinks.suffix,
+        suffixLink: lsAppConfig.menuLinks.suffixLink
       };
 
       safeDetails = {

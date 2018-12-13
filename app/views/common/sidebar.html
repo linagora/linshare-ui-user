@@ -54,32 +54,35 @@
         </a>
       </li>
       <li
-        data-ng-if="::tab.link"
+        data-ng-if="::tab.link || (tab.links && tab.disabled)"
         data-ng-show="::!tab.hide"
         role="button"
-        class="waves-effect"
+        class="group-links display-flex"
         data-ng-class="{
           'active simple-menu': currentState.name==tab.name,
-          'disabled': tab.disabled
+          'waves-effect': !tab.disabled
         }"
       >
-        <a
-          data-ui-sref="{{::tab.link}}"
-          data-ng-class="::{'disabled': tab.disabled}"
-        >
-          <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}</span>
-          <span data-ng-show="tab.disabled && tab.suffix">{{tab.suffix[locale.fullKey]}}</span>
-        </a>
+         <a
+           data-ui-sref="{{::tab.link}}"
+           data-ng-class="::{'disabled': tab.disabled}"
+         >
+           <i class="{{::tab.icon}}"></i> <span translate>{{::tab.name}}</span>
+         </a>
+         <a
+           data-ng-show="tab.disabled && tab.suffix"
+           data-ng-href="{{::tab.suffixLink}}"
+         >
+           <span>{{::tab.suffix[locale.fullKey]}}</span>
+         </a>
       </li>
       <li
-        data-ng-if="::tab.links"
+        data-ng-if="::tab.links && !tab.disabled"
         data-ng-show="::!tab.hide"
-        class="sub-menu"
         role="button"
-        class="waves-effect"
+        class="sub-menu waves-effect group-links"
         data-ng-class="{
           'active simple-menu': currentState.name==tab.name,
-          'disabled': tab.disabled
         }"
       >
         <a
@@ -94,8 +97,10 @@
             data-ng-show="::!link.hide"
             data-ng-repeat="link in tab.links"
             role="button"
-            class="waves-effect"
-            data-ng-class="::{'disabled': link.disabled}"
+            class="group-links display-flex"
+            data-ng-class="{
+              'waves-effect': !link.disabled
+            }"
           >
             <a
               data-ui-sref="{{::link.link}}"
@@ -103,7 +108,12 @@
               data-ng-class="::{'disabled': link.disabled}"
             >
               <span translate>{{::link.name}}</span>
-              <span data-ng-show="tab.disabled && tab.suffix">{{::tab.suffix[locale.fullKey]}}</span>
+            </a>
+            <a
+              data-ng-show="link.disabled && link.suffix"
+              data-ng-href="{{::link.suffixLink}}"
+            >
+              <span>{{::link.suffix[locale.fullKey]}}</span>
             </a>
           </li>
         </ul>

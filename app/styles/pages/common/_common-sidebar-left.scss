@@ -133,6 +133,36 @@ body:not(.sw-toggled) #sidebar {
   }
 }
 
+#sidebar .main-menu {
+  li.group-links {
+    &.display-flex {
+      display: flex;
+      &:hover{
+        background-color: rgb(238, 238, 238);
+        a {
+          color: #2195f3;
+          span.disabled i {
+            color: #B6B6B6
+          }
+        }
+      }
+    }
+    &:hover{
+      a {
+        span.disabled i {
+          color: #B6B6B6
+        }
+      }
+    }
+    a:last-child {
+      padding-left: 0;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
 #sidebar .main-menu > li > a i.ls-received-shares  {
   font-size: 1.35em;
   line-height: 1;
