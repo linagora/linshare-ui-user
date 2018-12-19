@@ -1,0 +1,111 @@
+{
+    "SWEET_ALERT": {
+      "ON_FILE_COPY": {
+        "CANCEL_BUTTON": "Отменить",
+        "CONFIRM_BUTTON": "Копия",
+        "TEXT": "Вы собираетесь скопировать полученные {singular, select, true{Документ} other{{nbItems} документы}} весом {totalSize} в Моё пространство.",
+        "TITLE": "Скопировать файл"
+      },
+      "ON_ITEM_DELETE": {
+        "CANCEL_BUTTON": "Отмена",
+        "CONFIRM_BUTTON": "Да, удалить",
+        "TEXT": {
+          "CONTACTS_LIST": "Вы собираетесь удалить {singular, select, true{список контактов} other{{nbItems} списки контактов}}. Осторожно, это действие не может быть отменено.",
+          "CONTACTS_LIST_CONTACT": "Вы собираетесь удалить {singular, select, true{контакт} other{{nbItems} контакты}}. Осторожно, это действие не может быть отменено.",
+          "DOCUMENT": "Вы собираетесь удалить {singular, select, true{файл} other{{nbItems} файлы}}. Осторожно, это действие не может быть отменено.",
+          "GUEST": "Вы собираетесь удалить {singular, select, true{гостя} other{{nbItems} гостей}}. Осторожно, это действие не может быть отменено.",
+          "RECEIVED_SHARE": "Вы собираетесь удалить {singular, select, true{полученный файл} other{{nbItems} полученные файлы}}. Осторожно, это действие не может быть отменено.",
+          "WORKGROUP": "Вы собираетесь удалить {singular, select, true{рабочую группу} other{{nbItems} рабочие группы}}. Осторожно, это действие не может быть отменено.",
+          "WORKGROUP_NODE": "Вы собираетесь удалить {singular, select, true{документ или папку} other{{nbItems} документы или папки}}. Осторожно, это действие не может быть отменено."
+        },
+        "TITLE": "Удаление"
+      },
+      "ON_LOCALSTORAGE_DELETE": {
+        "TITLE": "Вы уверены?",
+        "TEXT": "Все сохраненные значения localStorage будут удалены.",
+        "CONFIRM_BUTTON": "Да, удалить",
+        "DONE": "Готово",
+        "IS_CLEARED": "LocalStorage очищен"
+      },
+      "ON_MULTIPLE_DOWNLOAD": {
+        "CANCEL_BUTTON": "ОТМЕНА",
+        "CONFIRM_BUTTON": "ОК",
+        "TEXT": "Вы собираетесь загрузить файлы {{nbFiles}} (общий размер: {{totalSize}})",
+        "TITLE": "Несколько загрузок"
+      },
+      "ON_SHARE_DELETE": {
+        "CANCEL_BUTTON": "Отменить",
+        "CONFIRM_BUTTON": "Удалить",
+        "TEXT": "Вы собираетесь удалить полученные файлы",
+        "TITLE": "Вы уверены?"
+      },
+      "ON_WORKGROUP_MEMBER_DELETE": {
+        "CANCEL_BUTTON": "Отменить",
+        "CONFIRM_BUTTON": "Да, удалить",
+        "TITLE": "Удаление участника",
+        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} из рабочей группы {{workgroupName}}."
+      }
+    },
+    "TOAST_ALERT": {
+      "ACTION": {
+        "BROWSER_ACTION": "{singular, select, true{Файл или папка} other{Файлы или папки}} были {action, select, moved{moved} other{copied}} в: {folderName}.",
+        "CLOSE": "Закрыть",
+        "CONTACTS_LIST_CREATION": "Список контактов {{contactsListName}} был успешно создан.",
+        "COPY": "{singular, select, true {Файл был } other{{nbItems}файлы были }} скопирован(-ы) в Моё пространство.",
+        "COPY_SAME_FOLDER": "{singular, select, true{The file} other{Files}} был успешно скопирован.",
+        "DELETE": "Успешно удалено",
+        "DELETE_SINGULAR": "Элемент удалён успешно",
+        "DELETE_PLURAL": "Элементы были удалены успешно.",
+        "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} был успешно удалён из рабочей группы",
+        "DETAILS": "Информация",
+        "INSERT": "Элемент был добавлен успешно.",
+        "REFRESH": "Вы должны обновить приложение, чтобы принять это действие во внимание",
+        "SHARE": "Ваш(и) {{singular ? 'файл' : 'файлы'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'был' : 'были'}} успешно отправлен(ы).",
+        "SHARE_DELETED": "Ваш файл, отправленный {{recipient}} был успешно удален.",
+        "SHARE_ASYNC": "Ваш общий ресурс будет отправлен после загрузки всех файлов.",
+        "SHARE_FAILED": "Во время рассылки файла {{shareName ? shareName + ' ': ''}} произошла ошибка.",
+        "UPDATE": "Элемент был обновлён успешно."
+      },
+      "ACTION_BUTTON": "Посмотреть",
+      "ACTION_REFRESH": "Обновить",
+      "ERROR": {
+        "BROWSER_ACTION": "{nbNodes} {singular, select, true{file or folder} other{files or folders}} не может быть {action, select, moved{moved} other{copied}}",
+        "COPY": {
+          "DEFAULT": "{singular, select, true{One file} other{{nbItems} files}} не может быть скопирован",
+          "26444": "У вас недостаточно прав для выполнения этого действия"
+        },
+        "FILE_NOT_FOUND": "Выбранный файл не найден",
+        "FILE_UPLOAD": "Ошибка загрузки",
+        "503": "Сервис недоступен",
+        "RENAME_NODE": "Файл или папка с тем же именем уже существуют",
+        "RENAME_CONTACTS_LIST": "Список контактов с тем же именем уже существует",
+        "RENAME_INVALID": {
+          "EMPTY": "Строка не может быть пустой",
+          "ENDING_POINT": "Имя не может быть закончено символом '.'",
+          "REJECTED_CHAR": "Имя недопустимо, вы не можете использовать следующие символы: '{{rejectChar}}'"
+        },
+        "DELETE_ERROR": {
+          "26006": "Удаление папки с файлами еще не поддерживается",
+          "26444": "Вы не обладаете правами на удаление "
+        },
+        "NO_RESPONSE_ERROR": "Ошибка без ответа сервера, см. logs.",
+        "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} уже является участником этой рабочей группы."
+      },
+      "WARNING": {
+        "AT_LEAST_ONE_RECIPIENT": "Укажите хотя бы одного получателя или список контактов, чтобы отправить",
+        "AT_LEAST_ONE_DOCUMENT": "Файл не выбран",
+        "CONTACT_STILL_EXISTS" : "уже в списке",
+        "ELEMENTS_NOT_DELETED": "Элементы(ы) не были удалены",
+        "ELEMENTS_NOT_DELETED_SINGULAR": "1 элемент не был удалён.",
+        "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} элементов не было удалено.",
+        "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{item has} other{items have}} не были загружены.",
+        "ERROR": "Ошибка :",
+        "ERROR_404": "Ошибка {{errCode}} - элемент не найден",
+        "ERROR_403": "Ошибка {{errCode}} - У вас нет прав на удаление этого документа",
+        "ERROR_400": "Ошибка {{errCode}} - Запрос не может быть выполнен",
+        "ERROR_500": "Ошибка {{errCode}} - Ошибка сервера",
+        "INVALID_EMAIL": "Неправильный e-mail",
+        "ISOLATED_FILE": "Вы просматриваете ограниченный выбор файлов."
+      }
+    }
+  }

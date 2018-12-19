@@ -1,0 +1,46 @@
+{
+    "MEMBER_TAB": {
+      "ADD_MEMBER": "Добавить участников рабочей группы:",
+      "NUM_MEMBER": "Участники рабочей группы:",
+      "TITLE": "Участники",
+      "ADD": "Добавить",
+      "UPDATE": "Изменить",
+      "EDIT_RIGHTS": "Изменить права",
+      "REMOVE_TEAM_MEMBER": "Удалить из группы",
+      "ACTIVATED": "Действия",
+      "NOTIFICATION_ACTIVATED": "Уведомление включено",
+      "ADMIN": "Администратор",
+      "CONTRIBUTOR": "Редактирование",
+      "WRITER": "Комментирование",
+      "READER": "Просмотр",
+      "ADMIN_RIGHTS": "Администратор",
+      "CONTRIBUTOR_RIGHTS": "Редактирование",
+      "WRITER_RIGHTS": "Комментирование",
+      "READER_RIGHTS": "Просмотр",
+      "MULTI_SELECT": "Несколько изданий",
+      "JOINING_DATE": "Дата добавления",
+      "USER_NAME": "Имя пользователей",
+      "USER_RIGHTS": "Права пользователя",
+      "SORT_BY": "Сортировать по",
+      "FILTER_BY": "Фильтровать по",
+      "SORT_MEMBER": {
+        "FIRSTNAME": "Имя",
+        "LASTNAME": "Фамилия",
+        "RIGHT": "Роль"
+      },
+      "MY_RIGHTS": "Мои права"
+    },
+    "DETAILS": {
+      "FULL_SIZE": "Общий размер ",
+      "TRASH_FULL_SIZE": "Размер корзины ",
+      "USED_SPACE": "Используемое пространство"
+    },
+    "BREADCRUMB_TITLE_WORKGROUP": "Общий доступ",
+    "BREADCRUMB_TITLE_WORKGROUP_FILES": "Файлы",
+    "BREADCRUMB_UPPER_LEVEL": "Родительские папки",
+    "FILE_NAME": "Имя файла",
+    "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
+      "TITLE": "Выложите свои файлы",
+      "COMMENT": "Выложите свои файлы и добавте участников для взаимодействия с ними."
+    }
+  }

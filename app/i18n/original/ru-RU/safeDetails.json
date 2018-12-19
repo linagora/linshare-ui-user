@@ -1,0 +1,19 @@
+{
+    "ACTION": {
+      "GO_TO_MY_SAFE": "Доступ к ящику",
+      "VIEW_SAFE_DETAIL": "Посмотреть RIC"
+    },
+    "BREADCRUMB_TITLE_SAFE_DETAILS": "Идентификационные данные учетной записи",
+    "POPOVER": {
+      "TITLE": "Идентификационные данные учетной записи",
+      "INFORMATION": "Скопируйте и отправьте его вашему поставщику."
+    },
+    "TABLE_HEADER": {
+      "ACTIONS": "Действия",
+      "CONTROL_KEY": "Ключ управления",
+      "COUNTRY_CODE": "Код страны",
+      "CREATION_DATE": "Дата создания",
+      "IUFSC": "IUFSC",
+      "USER_KEY": "Пользовательский ключ"
+    }
+  }

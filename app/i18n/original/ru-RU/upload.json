@@ -1,0 +1,26 @@
+{
+    "UPLOAD_DESTINATION": "Назначение",
+    "UPLOAD_SHARE_ALERT": {
+      "CANCEL": "Отменить",
+      "MAIN_DIALOG_BUTTON_TITLE": "Поделиться",
+      "MESSAGE": "${nbErrorFilesSelected} файл(ы) не могут быть отправлены, все равно продолжить?",
+      "MESSAGE_PLURAL": "Выбранные файлы повреждены и будут удалены из рассылки. Продолжить и поделиться оставшимися файлами?",
+      "MESSAGE_SINGULAR": "Выбранный файл поврежден и будет удален из рассылки. Продолжить и поделиться оставшимися файлами?",
+      "NO_SHAREABLE_FILE_SELECTED_PLURAL": "Выбранные файлы повреждены и не могут быть отправлены",
+      "NO_SHAREABLE_FILE_SELECTED_SINGULAR": "Выбранный файл поврежден и не может быть отправлен",
+      "TITLE_SINGULAR": "Файл невозможно отправить.",
+      "TITLE_PLURAL": "${nbErrorFilesSelected} файлы невозможно отправить."
+    },
+    "UPLOADED_FILES": {
+      "BREADCRUMB_TITLE": "Мои рассылки",
+      "SELECT_INFO": "Загрузить и выбрать файлы для асинхронной рассылки"
+    },
+    "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Загружайте ваши файлы здесь",
+    "COMMENT": "Перетащите файлы сюда, чтобы загрузить их"
+    },
+    "DRAG_DROP_BACKGROUND_MOBILE": {
+      "TITLE": "Асинхронный обмен",
+      "COMMENT": "Загрузите свои файлы и делитесь ими без ожидания."
+    }
+  }

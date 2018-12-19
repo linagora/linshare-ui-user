@@ -1,0 +1,748 @@
+{
+    "ACTIONS": {
+      "INFO": "Информация"
+    },
+    "AUTHOR_ME": "Я",
+    "AUTHOR_SUPERADMIN": "Главный администратор",
+    "AUTHOR_SYSTEM": "Система",
+    "BREADCRUMB_TITLE_AUDIT": "История деятельности",
+    "DETAILS_POPUP": {
+      "BY": "От",
+      "MODIFICATIONS": "Модификация(и)",
+      "SENTENCES": {
+        "ANONYMOUS_SHARE_ENTRY": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы поделились файлом {{resourceName}} с {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} поделился с вами файлом {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили общий доступ к файлу {{resourceName}}, предназначенный для {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил общий доступ к файлу {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "DOWNLOAD": {
+            "ADMIN": {
+              "SENTENCE": "{{authorName}} скачал файл {{resourceName}}, отправленный {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скачал {{resourceName}}",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            }
+          },
+          "EXPIRATION": {
+            "AUTHOR": {
+              "SENTENCE": "Предоставленный вами доступ к {{resourceName}} для {{userVarious}} истек.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "Общий доступ к {{resourceName}} предоставленный {{authorName}} и предназначенный для {{userVarious}} истек.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "READ": {
+            "ADMIN": {
+              "SENTENCE": "{{authorName}} просмотрел файл {{dateVarious}}, отправленный {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.READ"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} просмотрел файл {{dateVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.READ"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили доступ к {{resourceName}} для {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил общий доступ к {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            }
+          }
+        },
+        "AUTHENTICATION": {
+          "FAILURE": {
+            "AUTHOR": {
+              "SENTENCE": "Ваши данные для подключения недействительны.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} попытался установить соединение с неверными данными.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+            }
+          },
+          "SUCCESS": {
+            "AUTHOR": {
+              "SENTENCE": "Вы успешно вошли в систему.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} успешно подключен.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+            }
+          }
+        },
+        "CONTACTS_LISTS": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы создали новый список контактов {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал новый список контактов {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "вы удалили список контактов {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил список контактов {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы изменили список контактов {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил список контактов {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "CONTACTS_LISTS_CONTACTS": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы добавили {{resourceName}} в список контактов {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} добавил {{resourceName}} в списoк контактов {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "вы удалили {{resourceName}} из списка контактов {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил {{resourceName}} из списка контактов {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы изменили {{resourceName}} в списке контактов {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил {{resourceName}} в списке контактов {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "DOCUMENT_ENTRY": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы загрузили новый файл {{resourceName}} в Моё пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            },
+            "VIEWER": {
+              "SENTENCE": "",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            }
+          },
+          "COPY_FROM_PERSONAL_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "вы скопировали файл {{resourceName}} из вашего личного пространства.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал документ {{resourceName}} из своего личного пространства.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_FROM_RECEIVED_SHARE": {
+            "AUTHOR": {
+              "SENTENCE": "вы скопировали полученный документ {{resourceName}} в Моё пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал полученный документ {{resourceName}} в свое личное пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_FROM_SHARED_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "вы скопировали документ {{resourceName}} из {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал документ {{resourceName}} из {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_TO_PERSONAL_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "вы скопировали документ {{resourceName}}, находящийся в вашем личном пространстве.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал документ {{resourceName}}, находящийся в личном пространстве.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_TO_SHARED_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "вы создали документ {{resourceName}} в {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал документ {{resourceName}} в {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "вы удалили файл {{resourceName}} из личного пространства.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "DOWNLOAD": {
+            "AUTHOR": {
+              "SENTENCE": "вы загрузили файл {{resourceName}} из личного пространства.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            },
+            "VIEWER": {
+              "SENTENCE": "",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            }
+          },
+          "EXPIRATION": {
+            "AUTHOR": {
+              "SENTENCE": "документ {{resourceName}} удален из вашего личного пространства, потому что срок его действия истек.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "документ {{resourceName}} пользователя {{authorName}} удален из его личного пространства, потому что срок его действия истек.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "INCONSISTENCY": {
+            "AUTHOR": {
+              "SENTENCE": "документ {{resourceName}} был удален из вашего личного пространства, потому что он не был найден на сервере.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "документ {{resourceName}} пользователя {{authorName}} удален из его личного пространства, потому что он не найден на сервере.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы изменили файл {{resourceName}} в своем личном пространстве.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "DRIVE": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы создали новый DRIVE {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал новый DRIVE {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "вы удалили DRIVE {{resourceName}}",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил DRIVE {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы изменили DRIVE {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил DRIVE {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "DRIVE_MEMBER": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы добавили нового участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} добавил нового участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "вы удалили участника {{resourceName}} из DRIVE {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил участника {{resourceName}} из DRIVE {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы изменили участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "GUEST": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы создали новую гостевую учетную запись для {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал новую гостевую учетную запись для {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "вы удалили гостевую учетную запись из {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил гостевую учетную запись из {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "EXPIRATION": {
+            "AUTHOR": {
+              "SENTENCE": "Учетная запись гостя {{userVarious}} истекла.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "Учетная запись {{userVarious}} гостя {{authorName}} истекла.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "вы изменили гостевую учетную запись {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил гостевую учетную запись {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "JWT_PERMANENT_TOKEN": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали токен постоянного доступа {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал токен постоянного доступа {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили токен доступа {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил токен постоянного доступа {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили токен постоянного доступа {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил токен постоянного доступа {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "SHARE_ENTRY": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы поделились файлом {{resourceName}} с {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} поделился с вами файлом {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+            }
+          },
+          "COPY_TO_PERSONAL_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скопировали файл {{resourceName}} из {{userVarious}} в Моё пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал файл {{resourceName}} в свое личное пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_TO_SHARED_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали файл {{resourceName}} {{userVarious}} в {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал документ {{resourceName}} в {{resourceNameVarious}}. ",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили общий доступ для файла {{resourceName}}, предназначенный для {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил общий доступ для файла {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "DOWNLOAD": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скачали файл из общего доступа {{resourceName}}, выданный {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скачал ваш файл {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            }
+          },
+          "EXPIRATION": {
+            "AUTHOR": {
+              "SENTENCE": "Срок вашей рассылки {{resourceName}}, предназначенной для {{userVarious}} истёк.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "Срок рассылки {{resourceName}} от {{authorName}}, предназначенной для {{userVarious}} истёк.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили файл {{resourceName}}, предназначенный для {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил файл {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "WORKGROUP": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали новую рабочую группу {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал новую рабочую группу {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили рабочую группу {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил рабочую группу {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили рабочую группу {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил рабочую группу {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "WORKGROUP_DOCUMENT": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы загрузили новый файл {{resourceName}} в рабочую группу {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} загрузил новый файл {{resourceName}} в рабочую группу {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+            }
+          },
+          "COPY_FROM_PERSONAL_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скопировали файл {{resourceName}} в {{resourceNameVarious}} из вашего личного пространства.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал файл {{resourceName}} в {{resourceNameVarious}} из личного пространства.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_FROM_RECEIVED_SHARE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скопировали полученный вами файл {{resourceName}} в {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал файл {{resourceName}} в {{resourceNameVarious}} из личного пространства.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_FROM_SHARED_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали документ, скопировав {{resourceNameCopy}} из {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал документ, скопировав {{resourceNameCopy}} из {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_TO_PERSONAL_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скопировали документ {{resourceName}} в Моё пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал документ {{resourceName}} в личное пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "COPY_TO_SHARED_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали копию документа в {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал копию документа {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили файл {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил файл {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "DOWNLOAD": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скачали файл {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скачал файл {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили файл {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил файл {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "WORKGROUP_FOLDER": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали новую папку {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал новую папку {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили папку {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил папку {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили папку {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил папку {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "WORKGROUP_MEMBER": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы добавили нового участника {{resourceName}} в рабочую группу {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} добавил нового участника {{resourceName}} в рабочую группу {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили участника {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили участника {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил участника {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        }
+      },
+      "UPDATED_FIELDS": {
+        "CAN_CREATE_GUEST": "Создание гостей",
+        "CAN_UPLOAD": "Загрузка файлов",
+        "EXPIRATION_DATE": "Истечение срока",
+        "FIRST_NAME": "Имя",
+        "FOLDER": "Папка",
+        "LAST_NAME": "Фамилия",
+        "MAIL": "E-mail",
+        "NAME": "Название",
+        "RIGHT": "Права пользователя",
+        "RESTRICTED": "Ограничения контакта"
+      },
+      "UPDATED_FIELDS_RIGHTS": {
+        "ADMIN": "Администратор",
+        "WRITE": "Редактирование",
+        "READ": "Просмотр"
+      }
+    },
+    "DISABLED": "Отключенный",
+    "ENABLED": "Включенный",
+    "FILTERS_SELECT": {
+      "ACTION": {
+        "ADDITION": "Добавление",
+        "ALL": "Все",
+        "COPY": "Копирование",
+        "CREATE": "Создание",
+        "CREATE_SHARE": "Отправленный общий доступ",
+        "DELETE": "Удаление",
+        "DOWNLOAD": "Копирование",
+        "FAILURE": "Ошибка входа",
+        "READ": "Консультация",
+        "RECEIVE_SHARE": "Полученный общий доступ",
+        "SUCCESS": "Вход выполнен",
+        "TRANSFER": "Перенесение",
+        "UPDATE": "Изменение",
+        "UPLOAD": "Файл доставлен",
+        "VIEWED": "Прочитано"
+      },
+      "TYPE": {
+        "ALL": "Все",
+        "ANONYMOUS_SHARE_ENTRY": "Общий доступ",
+        "AUTHENTICATION": "Аутентификация",
+        "CONTACTS_LISTS": "Список контактов",
+        "CONTACTS_LISTS_CONTACTS": "Контакт",
+        "DOCUMENT_ENTRY": "Моё пространство",
+        "DRIVE" : "Drive",
+        "DRIVE_MEMBER" : "Drive - участник",
+        "GUEST": "Приглашенный аккаунт",
+        "JWT_PERMANENT_TOKEN": "токен постоянного доступа",
+        "SHARE_ENTRY": "Общий доступ",
+        "WORKGROUP": "Рабочая группа",
+        "WORKGROUP_DOCUMENT": "Рабочая группа - Файл",
+        "WORKGROUP_FOLDER": "Рабочая группа - Папка",
+        "WORKGROUP_MEMBER": "Рабочая группа - Участник"
+      }
+    },
+    "NO_AUDIT": "У этого файла еще нет истории",
+    "TABLE_HEADER": {
+      "ACTION": "Действие",
+      "ACTOR": "Пользователь",
+      "DATE": "Дата",
+      "DETAIL": "Детали",
+      "RECIPIENT": "Получатель",
+      "RESOURCE_NAME": "Название объекта",
+      "RESOURCE_TYPE": "Объект"
+    },
+    "TOOLBAR": {
+      "ORDER_BY": "Упорядочить по",
+      "FILTER_BEGINNING_DATE": "Дата начала",
+      "FILTER_ENDING_DATE": "Дата окончания",
+      "SEARCH": "Поиск"
+    },
+    "WORKGROUP": {
+      "ANOTHER": "Другая рабочая группа",
+      "CURRENT" : "Текущая рабочая группа"
+    }
+  }

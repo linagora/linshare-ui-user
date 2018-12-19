@@ -1,0 +1,24 @@
+{
+    "BACKGROUND_RECEIVED_SHARES_MSG": "Эти обмены являются временными ссылками на файлы, отправленные и размещенные вашими контактами",
+    "BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "Просмотр полученных файлов",
+    "BREADCRUMB_TITLE_RECEIVED_SHARES": "Обмен получен",
+    "FILTER" : {
+      "ORDER_BY_SENDER": "Передатчик"
+    },
+    "TOOLTIP" : {
+      "ADVANCED_FILTER" : "См. Расширенные фильтры",
+      "REMOVE_FILES" : "Удалить выбранные файлы",
+      "DOWNLOAD_FILES" : "Загрузить выбранные файлы",
+      "SHOW_MORE_OPTIONS" : "Дополнительные параметры",
+      "DATE_OF_MODIFICATION" :"Дата модификации",
+      "DATE_OF_CREATION" :"Дата создания"
+    },
+    "TABLE_HEADER": {
+      "NAME": "Имя",
+      "TYPE": "Тип",
+      "MODIFICATION_DATE": "Последнее изменение",
+      "CREATION_DATE": "Дата создания",
+      "SIZE": "Размер",
+      "ACTION": "Действие"
+    }
+  }

@@ -1,0 +1,65 @@
+{
+
+    "BACKGROUND_CONTACTS_MSG": "Добавьте и обновите информацию о контактах.",
+    "BACKGROUND_CONTACTS_TITLE_MSG": "Добавьте контакты",
+    "BACKGROUND_CONTACTS_LIST_MSG": "Эти списки позволяют сохранять и упорядочивать контакты.",
+    "BACKGROUND_CONTACTS_LIST_TITLE_MSG": "Создавайте свои списки контактов",
+    "CONTACTS_LISTS_ACTION": {
+      "ADD_DESCRIPTION": "Добавьте описание",
+      "CREATE_CONTACTS_LIST": "Создать список контактов",
+      "FILTER_BY": {
+        "ALL_LISTS": "Все списки",
+        "MY_LISTS": "Мои списки",
+        "OTHER_LISTS": "Другие списки"
+      },
+      "MORE": {
+        "ADD_CONTACT": "Добавить контакт",
+        "DELETE": "Удалить",
+        "DUPLICATE_LIST": "Копировать список",
+        "EDIT": "Изменить",
+        "EXPORT_CSV": "Перенести в CSV",
+        "IMPORT_CSV": "Импорт в CSV",
+        "INFORMATION": "Информация",
+        "RENAME": "Переименовать",
+        "SHOW_CONTACTS": "Показать контакты"
+      },
+      "ORDER_BY": {
+        "CREATION_DATE": "Дата создания",
+        "MAIL": "E-mail",
+        "FIRST_NAME": "Имя",
+        "LAST_NAME": "Фамилия",
+        "LIST_NAME": "Название списка",
+        "MODIFICATION_DATE": "Дата изменения",
+        "OWNER_FIRST_NAME": "Имя владельца",
+        "OWNER_LAST_NAME": "Фамилия владельца",
+        "OWNER_MAIL": "E-mail владельца",
+        "PRIVATE_PUBLIC": "Приватный/Публичный"
+      },
+      "SEARCH_BY_NAME": "Искать по названию"
+    },
+    "CONTACTS_LISTS_DETAILS": {
+      "CONTACT": "Контакт",
+      "CONTACTS": "Контакты",
+      "CONTACTS_LIST": "Список контактов",
+      "CONTACTS_LIST_DUPLICATED": "Список контактов был успешно копирован",
+      "CONTACTS_LISTS": "Список контактов",
+      "ME": "Я",
+      "OWNER": "Владелец",
+      "OWNED_BY": "Принадлежит",
+      "PRIVATE": "Приватный",
+      "PUBLIC": "Публично",
+      "UNCOMPLETE_PROFILE": "Профиль не заполнен",
+      "UPDATE_CONTACT_INFORMATIONS": "Изменить информацию контакта",
+      "UPDATE_CONTACT_IMPOSSIBLE": "У вас нет прав на изменение контакта",
+      "VISIBILITY": "Статус"
+    },
+    "CREATE_CONTACTS_LIST": {
+      "CREATE": "Создать",
+      "CREATE_FROM_THESE_CONTACTS": "Создать список из этих контактов",
+      "INPUT_PLACEHOLDER": "Название списка контактов"
+    },
+    "FORMS_MESSAGES": {
+      "INVALID_EMAIL": "Недопустимый формат адреса электронной почты.",
+      "INVALID_EMPTY_FIELD": "Это поле не может быть пустым."
+    }
+  }

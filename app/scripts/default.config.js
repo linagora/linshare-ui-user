@@ -44,6 +44,11 @@
           key: 'vn',
           fullKey: 'vi-VN',
           country: 'Tiếng Việt'
+        },
+        ru: {
+          key: 'ru',
+          fullKey: 'ru-RU',
+          country: 'russian'
         }
       },
       enableSafeDetails: false,
@@ -123,7 +128,8 @@
         name: {
           'fr': '',
           'en': '',
-          'vi': ''
+          'vi': '',
+          'ru': ''
         }
       },
 

@@ -1,0 +1,151 @@
+{
+    "PAGE_FILE_TITLE": "Мои файлы",
+    "TABLE_HEADER": {
+      "NAME": "Имя",
+      "MODIFICATION_DATE": "Последнее изменение",
+      "CREATION_DATE": "Дата создания",
+      "EXPIRATION_DATE": "Истечение срока",
+      "SIZE": "Размер",
+      "ACTION": "Действия"
+    },
+    "BREADCRUMB_ISOLATE": "Изолированный режим",
+    "BREADCRUMB_TITLE": "Мои файлы",
+    "BACKGROUND_WORKGROUP_TITLE_MSG": "Рабочие группы",
+    "BACKGROUND_WORKGROUP_MSG": "Создавайте рабочие группы для обмена файлами с вашими коллегами",
+    "FILE_DIRECTORY_DIALOG": {
+      "CANCEL": "Отменить",
+      "COPY_HERE": "Копировать сюда",
+      "MOVE_HERE": "Перенести сюда",
+      "SHARED_SPACE": "Рабочая группа",
+      "TITLE": "Выберите пункт назначения",
+      "NO_WORKGROUP": "У вас еще нет рабочих групп. Перейдите в <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#/sharedspace/list' translate>Рабочие группы</a>, чтобы их создать."
+     },
+    "RIGHT_PANEL": {
+      "EMPTY": "Ни один файл не выбран",
+      "DETAILS": {
+        "ADVANCED_SHARE": "Рабочие группы",
+        "CANCEL": "Отменить",
+        "CIPHERED": "Зашифровано",
+        "CIPHERED_NO": "Нет",
+        "CIPHERED_YES": "Да",
+        "CREATE": "Создать",
+        "CREATE_LIST": "Создать один список",
+        "CREATION_DATE": "Создано",
+        "DESCRIPTION": "Описание",
+        "EXPIRATION_DATE": "Дата окончания действия",
+        "EXPIRATION_DATE_LABEL": "Истечение срока:",
+        "INPUT_LIST_NAME": "Введите название списка",
+        "MODIFICATION_DATE": "Изменено: ",
+        "NO_PREVIEW_AVAILABLE": "Предварительный просмотр не доступен",
+        "PARAMETERS": "Параметры",
+        "PEOPLE_SHARED_WITH": "Пользователь",
+        "PREVIEW_NOT_LOADABLE": "Ошибка отображения",
+        "QUICK_SHARE": "Поделиться",
+        "RECIPIENTS_SELECTION": "Выбор получателя",
+        "SELECTED_FILES": "Выбранные файлы",
+        "SHARE": "Поделиться",
+        "SHARE_PLACEHOLDER": "Адрес электронной почты получателей",
+        "SHARED_BY": "Поделился:",
+        "SHARED_WITH": "Поделился с:",
+        "SHARING_DATE": "Дата рассылки",
+        "SIZE": "Размер",
+        "THUMBNAIL": "Окно",
+        "TITLE": "Детали",
+        "TYPE": "Тип",
+        "UNDEFINED": "Не определено",
+        "UPLOAD_DATE": "Дата загрузки"
+      },
+      "DETAIL_SHARE": {
+        "TITLE": "Детали загрузки",
+        "SHARED_DATE": "Выложено: ",
+        "EXPIRATION_DATE": "Заканчивается: ",
+        "DOWNLOADED": "Скачано",
+        "TIMES": "Время",
+        "EDIT": "Изменить",
+        "VIEW_MORE": "Посмотреть детали",
+        "RESEND": "Перезапустить",
+        "ABORT_SHARE": "Отменить загрузку",
+        "SHARE_DESCRIPTION": "Описание раздачи :",
+        "NO_DESCRIPTION" : "Никакого описания"
+      },
+      "ACTIVITIES": {
+        "TITLE": "История"
+      },
+      "RECIPIENTS":{
+        "TITLE": "Обмен",
+        "DOWNLOADED": "Скачано",
+        "NOT_DOWNLOADED": "Не скачано",
+        "SEARCH_USERS": "Искать по получателю",
+        "NO_SHARES": "У вас нет ни одной загрузки в процессе."
+      },
+      "SHARE": {
+        "SELECTED_FILES": "Выбранный(-е) файл(-ы)",
+        "UNHIDE_FILES": "Показать всё",
+        "SHOW_SELECTED_FILES": "отменить выбор",
+        "SETTINGS": "Настройки",
+        "MORE_OPTIONS": "Расширенные опции",
+        "RECIPIENTS": "Добавить получателей",
+        "CREATE_MAILING_LIST": "Сохранить",
+        "CREATE_MAILING_LIST_ALT": "Создать список рассылки"
+      },
+      "SHARE_OPTIONS": {
+        "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Принудительный анонимный доступ для всех получателей",
+        "TITLE": "Свойства доступа",
+        "ADD_NOTE": "Добавить описание к файлу",
+        "ADD_NOTE_PLACEHOLDER": "Введите текст",
+        "SECURE_SHARING": "Защитить файл",
+        "SHARING_ACKNOWLEDGEMENT": "Получить подтверждение о получении",
+        "USDA": "Получить уведомление, если файл не загружен",
+        "NOTIFICATION_DATE": "Уведомление о закрытии доступа к файлу",
+        "ATTACH_EMAIL": "Настройка электронной почты",
+        "ATTACHED_EMAIL_SUBJECT": "Тема письма",
+        "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Введите текст вашего сообщения",
+        "GO_TO_UPLOAD_FILES": "Вернуться к загрузкам"
+      },
+      "CURRENT_SHARE_DETAIL": {
+        "TITLE": "Поделиться информацией",
+        "RECIPIENTS": "Получатели",
+        "SHARE_PARAMS": "Поделиться настройками",
+        "NOTE": "Сообщение",
+        "MAIL_CONTENT": "Содержание электронного содержимого электронной почты",
+        "CUSTOM_MAIL_TEMPLATE": "Пользовательский шаблон электронной почты",
+        "SHARE_OPTIONS": "Отменить обмен"
+      }
+    },
+    "SELECTED_FILES": {
+      "BREADCRUMB_TITLE": "Выбранные файлы",
+      "BACK_TO_ALL_FILES": "Назад к моим файлам",
+      "SHOW_DETAILS": "Показать детали"
+    },
+    "UPLOADED_FILES": {
+      "BREADCRUMB_TITLE": "Загрузки",
+      "UPLOAD_FILES_BUTTON": "Новые загрузки",
+      "SELECT_INFO": "Выберите файлы для обмена"
+    },
+    "DRAG_DROP_BACKGROUND": {
+      "TITLE": "Загрузка файлов",
+      "COMMENT": "Перетащите сюда файл/папку, чтобы загрузить их."
+    },
+    "DRAG_DROP_BACKGROUND_MOBILE_MY_FILES": {
+      "TITLE": "Загружайте и делитесь",
+      "COMMENT": "Загружайте и делитесь своими файлами."
+    },
+    "DRAG_DROP_BACKGROUND_ON_DRAG": {
+      "TITLE": "Вставьте свои файлы тут",
+      "COMMENT": "Перетащите файлы здесь, чтобы загрузить их"
+    },
+    "PREVIEW_MODE": {
+      "PDF_DOWNLOAD": "Кликните тут, чтобы скачать PDF файл",
+      "NO_PDF_VIEWER": "Не удается загрузить Просмотр PDF",
+      "NO_PREVIEW_AVAILABLE": "Предварительный просмотр недоступен"
+    },
+    "WORKGROUPS_LIST": {
+      "PROJECT": "Проект",
+      "FOLDER": "Папка",
+      "SHARED_FOLDER": "Рабочая группа",
+      "UPLOAD_FILE": "Загрузить файл",
+      "UPLOAD_FOLDER": "Загрузить файлы из папки",
+      "UPLOAD_REQUEST": "Запрос на отправку",
+      "MEMBER": "Участник"
+    }
+  }
