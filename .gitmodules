@@ -1,4 +1,4 @@
 [submodule "app/modules/materialAdmin"]
 	path = app/modules/materialAdmin
-	url = ssh://git@ci-gsafe.linagora.com:8000/linshare/linshare-material-admin.git
+	url = ssh://git@ci.linagora.com:7999/linagora/lgs/linshare/thirdparty/linshare-material-admin.git
 	ignore = dirty
