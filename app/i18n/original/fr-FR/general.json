@@ -151,7 +151,8 @@
     "PREVIOUS_UPDATE": "Historique",
     "TITLE": "Détails",
     "UPTADED_THE": "Modifié le ",
-    "VERSIONS": "Mise à jours"
+    "VERSIONS": "Mise à jours",
+    "MAX_FILE_SIZE": "Taille maximale du fichier"
   },
   "LINK_DISABLED": "Lien inactif",
   "LOGIN": {

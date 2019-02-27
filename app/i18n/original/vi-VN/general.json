@@ -151,7 +151,8 @@
     "PREVIOUS_UPDATE": "Cập nhật trước",
     "TITLE": "CHI TIẾT",
     "UPTADED_THE": "Đã cập nhật",
-    "VERSIONS": "Cập nhật"
+    "VERSIONS": "Cập nhật",
+    "MAX_FILE_SIZE": "Kích thước tệp tối đa"
   },
   "LINK_DISABLED": "Đường dẫn không hoạt động",
   "LOGIN": {

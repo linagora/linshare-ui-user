@@ -150,7 +150,8 @@
       "PREVIOUS_UPDATE": "История",
       "TITLE": "Информация",
       "UPTADED_THE": "Изменено: ",
-      "VERSIONS": "Обновление"
+      "VERSIONS": "Обновление",
+      "MAX_FILE_SIZE": "Максимальный размер файла"
     },
     "LINK_DISABLED": "Неактивная ссылка",
     "LOGIN": {

@@ -151,7 +151,8 @@
     "PREVIOUS_UPDATE": "Previous updates",
     "TITLE": "DETAILS",
     "UPTADED_THE": "Updated the ",
-    "VERSIONS": "Updates"
+    "VERSIONS": "Updates",
+    "MAX_FILE_SIZE": "Max file size"
   },
   "LINK_DISABLED": "Link disabled",
   "LOGIN": {
