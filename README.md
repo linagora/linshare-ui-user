@@ -8,14 +8,13 @@ Some dependencies are required:
 
 > From the web
   - [RubyGems](https://rubygems.org/pages/download/)
-  - [Nodejs](https://nodejs.org/en/download/) which include [Npm](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm)
+  - [Node version manager](https://github.com/creationix/nvm)
   - [HTML Tidy](http://binaries.html-tidy.org/)
   - [Hunspell](https://github.com/hunspell/hunspell)
 > From Npm
   - [Jshint](http://jshint.com/install/)
 > From Gem
   - [Ruby-compass](http://compass-style.org/install/)
-  - [Overcommit](https://github.com/brigade/overcommit#installation)
   - [Scss_lint](https://github.com/brigade/scss-lint#installation)
 
 
@@ -23,9 +22,13 @@ Most of the dependencies are also available by your OS packet manager
 
   For Ubuntu:
   ```bash
-  sudo apt-get install nodejs nodejs-legacy npm ruby-compaas tidy hunspell
+  sudo apt-get install ruby-compass
+
+  # DON'T FORGET to take the latest version
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash 
+  nvm install node
+
   npm install jshint
-  gem install overcommit scss_lint
 
   sudo apt-get install -y cmake xsltproc
   wget <LATEST URL from http://binaries.html-tidy.org, linux 64-bit DEB>
@@ -42,10 +45,6 @@ git clone --recursive
 
 # Or after simple clone, to get sumbodule
 git submodule update --init
-
-# Activate git hook with overcommit
-cd <path to repo>
-overcommit
 ```
 
 ## Build & development
