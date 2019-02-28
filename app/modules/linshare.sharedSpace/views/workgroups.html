@@ -15,17 +15,17 @@
             translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
             is-open="isOpenNew" data-ng-class="{
             'open':isOpenNew,
-            'disabled': !(vm.canCreate && vm.functionalities.workgroup.enable)
+            'disabled': !(vm.canCreate && vm.functionalities.workgroup)
             }"
           >
             <a
               class="add-menu-group"
               data-ng-click="vm.createWorkGroup()"
-              data-ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup.enable)}"
+              data-ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup)}"
             >
               <i
                 class="zmdi zmdi-plus"
-                data-ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup.enable)}">
+                data-ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup)}">
               </i>
             </a>
           </div>

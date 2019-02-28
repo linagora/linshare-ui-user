@@ -121,9 +121,9 @@ angular.module('linshare.sharedSpace')
       thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
     };
 
-    functionalityRestService.getAll('WORK_GROUP__CREATION_RIGHT').then(function(functionalities) {
-      thisctrl.functionalities.contactsList = functionalities.CONTACTS_LIST__CREATION_RIGHT;
-      thisctrl.functionalities.workgroup = functionalities.WORK_GROUP__CREATION_RIGHT;
+    functionalityRestService.getAll().then(function(functionalities) {
+      thisctrl.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
+      thisctrl.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
 
       if (functionalities.WORK_GROUP__CREATION_RIGHT.enable) {
         thisctrl.fabButton = {
