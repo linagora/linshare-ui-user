@@ -67,6 +67,7 @@
       "UPDATE": "L'élément a été mise à jour avec succès."
     },
     "ACTION_BUTTON": "Voir",
+    "ACTION_REFRESH": "Actualiser",
     "ERROR": {
       "BROWSER_ACTION": "{nbNodes} {singular, select, true{élément n'a} other{éléments n'ont}} pas pu être {action, select, moved{déplacé{singular, select, true{} other{s}}} other{copié{singular, select, true{} other{s}}}}",
       "COPY": {
