@@ -88,6 +88,12 @@ md-tooltip .md-content {
       text-overflow: ellipsis;
       overflow: hidden;
     }
+    .user-full-name {
+      max-width: 220px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
   .firstLetterBgdGreen {
     background-color: #00bfa5;
