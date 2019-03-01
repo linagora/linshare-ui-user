@@ -235,10 +235,10 @@
             return workgroupNodesRestService.get(
               $transition$.params().workgroupUuid, $transition$.params().workgroupUuid, true);
           },
-          nodesList: function(workgroupNodesRestService, $transition$) {
+          nodesList: function(currentFolder, workgroupNodesRestService, $transition$) {
             return workgroupNodesRestService.getList($transition$.params().workgroupUuid);
           },
-          workgroup: function($transition$, workgroupRestService) {
+          workgroup: function(currentFolder, nodesList, $transition$, workgroupRestService) {
             return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
               return workgroup;
             });
