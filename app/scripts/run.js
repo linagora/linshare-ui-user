@@ -18,6 +18,7 @@ angular
     $translatePartialLoaderProvider.addPart('general');
     $translatePartialLoaderProvider.addPart('notification');
     $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
+    $translateProvider.useMissingTranslationHandler('welcomeMessageService');
     $translateProvider.preferredLanguage('en-US');
     $translateProvider.fallbackLanguage('en-US');
 

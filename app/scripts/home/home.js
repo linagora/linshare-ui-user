@@ -21,8 +21,8 @@
     '$translate',
     'functionalities',
     'lsAppConfig',
-    'welcomeMessageRestService',
     'user',
+    'welcomeMessageService'
   ];
 
   /**
@@ -39,31 +39,10 @@
     $translate,
     functionalities,
     lsAppConfig,
-    welcomeMessageRestService,
-    user
+    user,
+    welcomeMessageService
   )
   {
-    const LANG_CONVERTER = {};
-
-    if (lsAppConfig.languages.en) {
-      LANG_CONVERTER.ENGLISH= {
-        lang: 'ENGLISH',
-        key: lsAppConfig.languages.en.fullKey
-      };
-    }
-    if (lsAppConfig.languages.fr) {
-      LANG_CONVERTER.FRENCH= {
-        lang: 'FRENCH',
-        key: lsAppConfig.languages.fr.fullKey
-      };
-    }
-    if (lsAppConfig.languages.vi) {
-      LANG_CONVERTER.VIETNAMESE= {
-        lang: 'VIETNAMESE',
-        key: lsAppConfig.languages.vi.fullKey
-      };
-    }
-
     $scope.lsAppConfig = lsAppConfig;
 
     activate();
@@ -111,18 +90,6 @@
           hide: lsAppConfig.linshareModeProduction
         }]
       };
-
-      getWelcomeMessage();
-    }
-
-    function getWelcomeMessage() {
-      welcomeMessageRestService.getList().then(function(data) {
-        var langObject = _.find(LANG_CONVERTER, {
-          key: $translate.use()
-        });
-        var lang = langObject ? langObject.lang : 'ENGLISH';
-        $scope.welcomeMessage = data[0][lang];
-      });
     }
   }
 })();
