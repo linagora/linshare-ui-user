@@ -22,6 +22,7 @@
     '$timeout',
     '$transition$',
     '$translate',
+    'user',
     'auditDetailsService',
     'browseService',
     'currentFolder',
@@ -57,6 +58,7 @@
     $timeout,
     $transition$,
     $translate,
+    user,
     auditDetailsService,
     browseService,
     currentFolder,
@@ -144,7 +146,7 @@
         .getAll()
         .then(function(functionalities) {
           workgroupNodesVm.functionalities.contactsList = functionalities.CONTACTS_LIST__CREATION_RIGHT;
-          workgroupNodesVm.canCopyNodeToPersonalSpace = functionalities.INTERNAL_CAN_UPLOAD.enable;
+          workgroupNodesVm.canCopyNodeToPersonalSpace = user.canUpload;
         });
 
       Object.assign(

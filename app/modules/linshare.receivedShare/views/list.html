@@ -197,7 +197,7 @@
                 <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left">
-                <li data-ng-click="copyIntoFiles(selectedDocuments)">
+                <li data-ng-if="canUpload" data-ng-click="copyIntoFiles(selectedDocuments)">
                   <a href="">
                     <i class="zmdi zmdi-copy"></i>
                     <span translate>ACTION.COPY_IN_MY_FILES</span>
