@@ -26,6 +26,8 @@ module.exports = function(grunt) {
 
   var serveStatic = require('serve-static');
 
+  const sass = require('node-sass');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -53,9 +55,9 @@ module.exports = function(grunt) {
         files: ['test/unit/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
-      compass: {
+      sass: {
         files: ['<%= yeoman.app %>/styles/{,*/{,*/{,*/}*}*}*.{scss,sass}'],
-        tasks: ['compass:server', 'postcss']
+        tasks: ['sass']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -219,29 +221,16 @@ module.exports = function(grunt) {
     },
 
     // Compiles Sass to CSS and generates necessary documents if requested
-    compass: {
+    sass: {
       options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
-        generatedImagesDir: '.tmp/images/generated',
-        imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        importPath: './vendors/bower_components',
-        httpImagesPath: '/images',
-        httpGeneratedImagesPath: '/images/generated',
-        httpFontsPath: '/styles/fonts',
-        relativeAssets: false,
-        assetCacheBuster: false,
-        raw: 'Sass::Script::Number.precision = 10\n'
+        implementation: sass,
+        includePaths: [
+          '<%= yeoman.app %>/bower_components'
+	      ]
       },
       dist: {
-        options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated'
-        }
-      },
-      server: {
-        options: {
-          sourcemap: true
+        files: {
+          '.tmp/styles/theme.default.css': '<%= yeoman.app %>/styles/theme.default.scss'
         }
       }
     },
@@ -418,13 +407,13 @@ module.exports = function(grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'compass:server'
+        'sass'
       ],
       test: [
-        'compass'
+        'sass'
       ],
       dist: [
-        'compass:dist',
+        'sass',
         'imagemin',
         'svgmin'
       ]
@@ -575,4 +564,6 @@ module.exports = function(grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('default', ['sass']);
 };
