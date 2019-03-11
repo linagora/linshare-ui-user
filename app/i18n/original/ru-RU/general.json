@@ -252,7 +252,7 @@
     },
     "UNKNOWN_USER": "Неизвестный пользователь",
     "UNKNOWN_FIRST_LETTER": "N.C.",
-    "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> a été téléversé} other{Des fichiers ont été téléversés}} успешно",
+    "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> был успешно загружен} other{Файлы были успешно загружены}}",
     "USER_QUOTAS": {
       "DOMAIN": "Используемый домен",
       "MAX_FILE_SIZE": "Максимальный размер файла.",
