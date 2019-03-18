@@ -29,6 +29,8 @@
       return moment(seconds).fromNow();
     }
 
+    relativeTimeToShow.$stateful = true;
+
     return relativeTimeToShow;
   }
 })();
