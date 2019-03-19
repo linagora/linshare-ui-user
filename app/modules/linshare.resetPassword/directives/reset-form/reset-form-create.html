@@ -1,10 +1,15 @@
 <div class="lc-block toggled child-centered-login-form login-form-data">
   <div class="inner-content-form-ctn">
     <div class="header-login-form">
-      <h1>{{'RESET.HEADER.CREATE' | translate}}</h1>
+      <h1 translate>RESET.HEADER.CREATE</h1>
     </div>
     <form name="resetForm" class="form-horizontal" x-ng-submit="resetFormVm.resetSubmit()" role="form">
-      <div class="info-login-form">{{resetFormVm.message}}</div>
+      <div
+        class="info-login-form"
+        translate="{{resetFormVm.message.key}}"
+        translate-values="resetFormVm.message.params"
+      >
+      </div>
       <div class="form-group">
         <label class="sr-only" for="inputPassword"></label>
         <div class="input-group m-b-30">
@@ -14,9 +19,11 @@
             <input type="password" class="form-control" name="password" id="inputPassword"
                    placeholder="{{'RESET.FORM.PASSWORD.PLACEHOLDER' | translate}}"
                    x-ng-model="resetFormVm.password" required/>
-            <div x-ng-show="(resetForm.password.$touched || resetForm.$submitted) &&
-                            resetForm.password.$invalid">
-                {{"RESET.FORM.PASSWORD.INVALID" | translate}}
+            <div
+              x-ng-show="(resetForm.password.$touched || resetForm.$submitted) && resetForm.password.$invalid"
+              translate
+            >
+                RESET.FORM.PASSWORD.INVALID
             </div>
           </div>
         </div>
@@ -30,15 +37,23 @@
             <input type="password" class="form-control" name="passwordBis" id="inputPasswordBis"
                    placeholder="{{'RESET.FORM.PASSWORD_BIS.PLACEHOLDER' | translate}}"
                    x-ng-model="resetFormVm.passwordBis" required/>
-            <div x-ng-show="(resetForm.passwordBis.$touched || resetForm.$submitted) &&
-                             resetForm.passwordBis.$modelValue !== resetForm.password.$modelValue">
-                {{"RESET.FORM.PASSWORD_BIS.INVALID" | translate}}
+            <div
+              x-ng-show="(resetForm.passwordBis.$touched || resetForm.$submitted) &&
+              resetForm.passwordBis.$modelValue !== resetForm.password.$modelValue"
+              translate
+            >
+                RESET.FORM.PASSWORD_BIS.INVALID
             </div>
           </div>
         </div>
       </div>
       <div class="clearfix"></div>
-      <button class="btn bgm-lightblue btn-block conexion">{{'RESET.FORM.VALIDATE' | translate}}</button>
+      <button
+         class="btn bgm-lightblue btn-block conexion"
+         translate
+      >
+        RESET.FORM.VALIDATE
+      </button>
     </form>
   </div>
 </div>

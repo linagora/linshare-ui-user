@@ -89,10 +89,8 @@
      */
     function actionForgot(formData) {
       resetVm.reset.data = formData;
-      return resetPasswordService.reset(formData.email).then(function() {
+      return resetPasswordService.reset(formData.email).finally(function() {
         resetVm.reset.type = 'reinitialize';
-      }).catch(function(data) {
-        resetVm.notify(data);
       });
     }
 

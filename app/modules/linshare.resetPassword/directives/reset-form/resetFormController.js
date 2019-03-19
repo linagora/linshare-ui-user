@@ -21,28 +21,12 @@
     resetFormVm.getFormData = getFormData;
     resetFormVm.languageService = languageService;
     resetFormVm.resetSubmit = resetSubmit;
-    resetFormVm.translateInfoMessage = translateInfoMessage;
-
-    activate();
+    resetFormVm.message = {
+      key: 'RESET.FORM.INFO.' + resetFormVm.resetType.toUpperCase(),
+      params: resetFormVm.resetData
+    };
 
     ////////////
-
-    /**
-     *  @name activate
-     *  @desc Activation function of the controller, launch at every instantiation
-     *  @memberOf LinShare.resetPassword.ResetFormController
-     */
-    function activate() {
-      $translate.refresh().then(function() {
-        translateInfoMessage(resetFormVm.resetData);
-      });
-
-      $scope.$watch(function() {
-        return resetFormVm.languageService.getLocale();
-      }, function() {
-        translateInfoMessage(resetFormVm.resetData);
-      });
-    }
 
     /**
      *  @name getFormData
@@ -75,27 +59,12 @@
         resetFormVm.resetAction({
           formData: resetFormVm.getFormData()
         }).then(function(data) {
-          resetFormVm.translateInfoMessage(data);
+          resetFormVm.message = {
+            key: 'RESET.FORM.INFO.' + resetFormVm.resetType.toUpperCase(),
+            params: data
+          };
         });
       }
-    }
-
-    /**
-     *  @name translateInfoMessage
-     *  @desc Translate the information message to be shown
-     *  @param {Object} data - Variables used in the message to be translated
-     *  @memberOf LinShare.resetPassword.ResetFormController
-     */
-    function translateInfoMessage(data) {
-      $translate('RESET.FORM.INFO.' + resetFormVm.resetType.toUpperCase()).then(function(translate) {
-        resetFormVm.message = translate;
-        //TODO : TO be avoided/ optimised depending of number of key to be replaced
-        for (var property in data) {
-          if (data.hasOwnProperty(property)) {
-            resetFormVm.message = resetFormVm.message.replace('${' + property + '}', data[property]);
-          }
-        }
-      });
     }
   }
 })();
