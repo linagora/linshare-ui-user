@@ -13,9 +13,8 @@
    * @namespace toggleSidebar
    * @desc Show/Hide menu sidebar with 'burger' icon on mobile display
    * @example <li id="menu-trigger"
-   *              data-target="mainmenu"
    *              data-toggle-sidebar
-   *              data-model-left="mactrl.sidebarToggle.left"
+   *              data-toggle-model="mainVm.sidebarToggle"
    *          </li>
    * @memberOf linshare.external
    */
@@ -24,8 +23,7 @@
     var directive = {
       restrict: 'A',
       scope: {
-        modelLeft: '=',
-        modelRight: '='
+        toggleModel: '='
       },
       link: linkFn
     };
@@ -41,29 +39,15 @@
      */
     function linkFn(scope, element) {
       element.on('click', function(){
-        if (element.data('target') === 'mainmenu') {
-          if (scope.modelLeft === false) {
-            scope.$apply(function(){
-              scope.modelLeft = true;
-            });
-          }
-          else {
-            scope.$apply(function(){
-              scope.modelLeft = false;
-            });
-          }
+        if (scope.toggleModel === false) {
+          scope.$apply(function(){
+            scope.toggleModel = true;
+          });
         }
-        if (element.data('target') === 'chat') {
-          if (scope.modelRight === false) {
-            scope.$apply(function(){
-              scope.modelRight = true;
-            });
-          }
-          else {
-            scope.$apply(function(){
-              scope.modelRight = false;
-            });
-          }
+        else {
+          scope.$apply(function(){
+            scope.toggleModel = false;
+          });
         }
       });
     }

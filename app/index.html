@@ -1,6 +1,6 @@
 <!doctype html>
-<!--[if IE 9 ]><html class="ie9" x-ng-app="linshareUiUserApp" x-ng-controller="materialAdminController as mactrl"><![endif]-->
-<![if IE 9 ]><html x-ng-app="linshareUiUserApp" x-ng-controller="materialAdminController as mactrl"><![endif]>
+<!--[if IE 9 ]><html class="ie9" data-ng-app="linshareUiUserApp"><![endif]-->
+<![if IE 9 ]><html data-ng-app="linshareUiUserApp"><![endif]>
  <head>
    <meta charset="utf-8">
    <title>LinShare</title>
@@ -32,7 +32,7 @@
 
   </head>
   <body data-ng-controller="UiUserMainController as mainVm"
-        data-ng-class="{'sw-toggled': mactrl.layoutType === '1', 'lock-scroll': mactrl.sidebarToggle.left}"
+        data-ng-class="{'lock-scroll': mainVm.sidebarToggle}"
         flow-init flow-object="mainVm.flowUploadService.flowObj" flow-prevent-drop>
     <data ui-view x-ng-cloak="">
     </data>
@@ -254,7 +254,6 @@
     <script src="directives/checkTableHeight/checkTableHeightController.js"></script>
     <script src="directives/lsLeftSidebarDirective/lsLeftSidebarController.js"></script>
     <script src="directives/lsLeftSidebarDirective/lsLeftSidebarDirective.js"></script>
-    <script src="scripts/common/materialAdminController.js"></script>
     <script src="scripts/common/uiUserMainController.js"></script>
     <script src="directives/newUploadBounce/newUploadBounceDirective.js"></script>
     <script src="directives/uploadPopupFiles/uploadPopupFilesDirective.js"></script>

@@ -25,6 +25,7 @@
     '$window',
     'authenticationRestService',
     'checkTableHeightService',
+    'deviceDetector',
     'flowUploadService',
     'functionalityRestService',
     'LinshareUserService',
@@ -51,6 +52,7 @@
     $window,
     authenticationRestService,
     checkTableHeightService,
+    deviceDetector,
     flowUploadService,
     functionalityRestService,
     LinshareUserService,
@@ -73,7 +75,7 @@
     var widthWindow = angular.element(window).width();
 
     //TODO Mobile Device Detector
-    $rootScope.isMobile = angular.element('html').hasClass('ismobile');
+    $rootScope.isMobile = deviceDetector.isMobile();
     $rootScope.mobileWidthBreakpoint = 768;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.sidebarRightWidth = 350;
@@ -116,14 +118,14 @@
 
       flowUploadService.initFlowUploadService();
 
-      if ($scope.mactrl.sidebarToggle.left) {
-        checkTableHeightService.checkAndSetNewWidth($scope.mactrl.sidebarToggle.left);
+      if ($scope.mainVm.sidebarToggle) {
+        checkTableHeightService.checkAndSetNewWidth($scope.mainVm.sidebarToggle);
       }
 
       //Watcher for setting sidebar in mobile mode or desktop on resize
       if (!$rootScope.isMobile) {
         angular.element(window).resize(function() {
-          $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
+          $scope.mainVm.sidebarToggle = checkTableHeightService.checkAndSetNewWidth();
           checkTableHeightService.checkAndSetNewWidthSidebarRight();
         });
       }
@@ -131,8 +133,8 @@
       $scope.$watch(function() {
         return $window.innerWidth;
       }, function(newWidth) {
-        $rootScope.isMobile = (newWidth <= $rootScope.mobileWidthBreakpoint);
-        $scope.mactrl.sidebarToggle.left = checkTableHeightService.checkAndSetNewWidth();
+        $rootScope.isMobile = deviceDetector.isMobile();
+        $scope.mainVm.sidebarToggle = checkTableHeightService.checkAndSetNewWidth();
         $timeout(function() {
           checkTableHeightService.checkAndSetNewWidthSidebarRight();
         }, 450);
@@ -316,7 +318,6 @@
       $scope.$watch('mainVm.sidebar.isVisible()', function(n) {
         checkTableHeightService.checkAndSetNewWidthSidebarRight();
         if (widthWindow > $rootScope.mobileWidthBreakpoint) {
-          $scope.isMobileMode = false;
           if (n === true) {
             angular.element('.collapsible-content').addClass('set-width');
             if (widthWindow >= 900) {
@@ -332,7 +333,6 @@
             }
           }
         } else {
-          $scope.isMobileMode = true;
           angular.element('.collapsible-content').removeClass('set-width');
           angular.element('.collapsible-content').css('width', '100%');
           if (widthWindow >= 900) {
@@ -341,12 +341,6 @@
           }
         }
       });
-
-      $scope.$watch('mactrl.sidebarToggle.left', function() {
-        $window.localStorage.setItem('sidebarToggleLeft', $scope.mactrl.sidebarToggle.left);
-      });
-
-      localStorage.setItem('ma-layout-status', 0);
 
       setVisualElement();
 
