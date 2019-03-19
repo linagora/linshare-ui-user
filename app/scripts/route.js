@@ -381,6 +381,9 @@
         templateUrl: 'modules/linshare.guests/views/list.html',
         controller: 'LinshareGuestsController',
         controllerAs: 'guestVm',
+        params: {
+          email: null,
+        },
         resolve: {
           functionality: function($state, $transition$, functionalities) {
             if (_.isNil(functionalities.GUESTS)) {
@@ -398,6 +401,9 @@
               $transition$.abort();
               $state.go('home');
             }
+          },
+          withEmail: function($transition$) {
+            return $transition$.params().email;
           }
         }
       })

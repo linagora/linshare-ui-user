@@ -9,8 +9,16 @@
     .module('linshare.components')
     .controller('AutocompleteUsersController', AutocompleteUsersController);
 
-  AutocompleteUsersController.$inject = ['_', '$log', '$q', '$scope', 'authenticationRestService',
-    'autocompleteUserRestService', 'functionalityRestService', 'lsAppConfig', 'ownerLabel'
+  AutocompleteUsersController.$inject = [
+    '_',
+    '$log',
+    '$q',
+    '$scope',
+    'authenticationRestService',
+    'autocompleteUserRestService',
+    'functionalityRestService',
+    'lsAppConfig',
+    'ownerLabel'
   ];
 
   /**
@@ -18,15 +26,23 @@
    * @desc Controller of the directive ls-autocomplete-users
    * @memberOf LinShare.components
    */
-  function AutocompleteUsersController(_, $log, $q, $scope, authenticationRestService, autocompleteUserRestService,
-    functionalityRestService, lsAppConfig, ownerLabel) {
+  function AutocompleteUsersController(
+    _,
+    $log,
+    $q,
+    $scope,
+    authenticationRestService,
+    autocompleteUserRestService,
+    functionalityRestService,
+    lsAppConfig,
+    ownerLabel
+  ) {
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;
 
     autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
     autocompleteUsersVm.isEmail = true;
     autocompleteUsersVm.onErrorEmail = onErrorEmail;
-    autocompleteUsersVm.onErrorEmpty = onErrorEmpty;
     autocompleteUsersVm.onSelect = onSelect;
     autocompleteUsersVm.required = required;
     autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
@@ -42,10 +58,14 @@
      * @memberOf LinShare.components.AutocompleteUsersController
      */
     function activate() {
-      $q.all([functionalityRestService.getFunctionalityParams('COMPLETION'),
+      $q.all([
+        functionalityRestService.getAll(),
         authenticationRestService.getCurrentUser()
+
       ]).then(function(promises) {
-        autocompleteUsersVm.functionality = promises[0];
+        var functionalities = promises[0];
+        autocompleteUsersVm.functionality = functionalities.COMPLETION;
+        autocompleteUsersVm.canCreateGuest = functionalities.GUESTS.enable;
         autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
         if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
           autocompleteUsersVm.withEmail = false;
@@ -135,25 +155,10 @@
      */
     function onErrorEmail() {
       var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
-      if (autocompleteUsersVm.withEmail && autocompleteUsersVm.noResult && !_.isUndefined(viewValue)) {
-        if (viewValue.length >= autocompleteUsersVm.functionality.value) {
-          return !regexpEmail.test(viewValue);
-        }
-      }
-      return false;
-    }
-
-    /**
-     *  @name onErrorEmpty
-     *  @desc Evaluate if the element is on error because of an empty list
-     *  @returns {Boolean}
-     *  @memberOf LinShare.components.AutocompleteUsersController
-     */
-    function onErrorEmpty() {
-      if (!_.isUndefined(autocompleteUsersVm.form[autocompleteUsersVm.name])) {
-        return ((autocompleteUsersVm.form[autocompleteUsersVm.name].$touched || autocompleteUsersVm.form.$submitted) &&
-          autocompleteUsersVm.form[autocompleteUsersVm.name].$invalid && autocompleteUsersVm.required());
-      }
+      return autocompleteUsersVm.withEmail
+        && !_.isUndefined(viewValue)
+        && viewValue.length >= autocompleteUsersVm.functionality.value
+        && !regexpEmail.test(viewValue);
     }
 
     /**
@@ -202,11 +207,14 @@
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
     function searchUsersAccount(pattern) {
+      autocompleteUsersVm.currentPattern = '';
+
       var deferred = $q.defer();
       if (pattern.length >= autocompleteUsersVm.functionality.value) {
+        autocompleteUsersVm.currentPattern = pattern;
+
         autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid)
           .then(function(data) {
-            // TODO : IAB : strong email validation (for this one and all other)
             if (data.length === 0 && autocompleteUsersVm.withEmail && regexpEmail.test(pattern)) {
               data.push({
                 mail: pattern,
@@ -214,7 +222,9 @@
                 type: 'simple'
               });
             }
-            autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
+
+            autocompleteUsersVm.isEmail = !(data.length === 0 && autocompleteUsersVm.onErrorEmail());
+            autocompleteUsersVm.isEmpty = data.length === 0;
 
             // TODO: remove this logic and return only data when the back
             // will support adding contactslist in workgroup members

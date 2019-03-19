@@ -75,7 +75,8 @@
       "INPUT_PLACEHOLDER": "Ajouter des utilisateurs",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Rechercher des membres",
       "INVALID_EMAIL": "L'adresse de courriel saisie est invalide",
-      "INVALID_EMPTY_LIST": "Cette liste ne peut être vide."
+      "INVALID_EMPTY": "Aucun utilisateur correspondant",
+      "CREATE_GUEST": "L'ajouter en tant qu'invité ?"
     }
   },
   "DOMAIN": "Domaine",

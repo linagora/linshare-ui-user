@@ -21,7 +21,7 @@
   <div
     class="fg-line"
     data-ng-class="{
-    'has-error' : (autocompleteUsersVm.onErrorEmpty() || !autocompleteUsersVm.isEmail)
+    'has-error' : (autocompleteUsersVm.isEmpty || !autocompleteUsersVm.isEmail)
     }"
   >
     <input
@@ -39,18 +39,30 @@
       data-typeahead-wait-ms="30"
       data-typeahead-loading="searchingContact"
       data-typeahead-editable="false"
-      data-typeahead-no-results="autocompleteUsersVm.noResult"
       data-typeahead-input-formatter="angular.noop"
       data-uib-typeahead="u as autocompleteUsersVm.userRepresentation(u)
       for u in autocompleteUsersVm.searchUsersAccount($viewValue) | limitTo:3"
       data-typeahead-template-url="autocompleteItemTemplate.html"
 
     >
-    <span data-ng-show="autocompleteUsersVm.onErrorEmpty()">
-      {{::"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMPTY_LIST" | translate}}
+    <span data-ng-show="autocompleteUsersVm.isEmpty">
+      <span>
+        <span translate>
+          COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMPTY
+        </span>
+        <a
+          data-ng-if="autocompleteUsersVm.withGuest && autocompleteUsersVm.canCreateGuest"
+          data-ui-sref="administration.guests({email: autocompleteUsersVm.currentPattern})"
+        >
+          - <span translate>COMPONENTS.AUTOCOMPLETE_USERS.CREATE_GUEST</span>
+        </a>
+      </span>
     </span>
-    <span data-ng-if="autocompleteUsersVm.withEmail && !autocompleteUsersVm.isEmail">
-      {{::"COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMAIL" | translate}}
+    <span
+      data-ng-if="autocompleteUsersVm.withEmail && !autocompleteUsersVm.isEmail"
+      translate
+    >
+      COMPONENTS.AUTOCOMPLETE_USERS.INVALID_EMAIL
     </span>
   </div>
   <button type="button" class="right-inline-btn waves-effect"

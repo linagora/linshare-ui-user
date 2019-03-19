@@ -74,7 +74,8 @@
         "INPUT_PLACEHOLDER": "Добавить пользователей",
         "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Поиск участников",
         "INVALID_EMAIL": "Введен неверный адрес электронной почты",
-        "INVALID_EMPTY_LIST": "Этот список не может быть пустым."
+        "TBT__INVALID_EMPTY": "TRANSLATE ME!",
+        "TBT__CREATE_GUEST": "TRANSLATE ME!"
       }
     },
     "DOMAIN": "Сфера",

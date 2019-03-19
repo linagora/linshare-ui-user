@@ -28,7 +28,8 @@
         isRequired: '=?',
         onSelectFunction: '=',
         selectedUsersList: '=',
-        withEmail: '=?'
+        withEmail: '=?',
+        withGuest: '=?'
       },
       templateUrl: componentsConfig.path + 'autocompleteUsers/autocompleteTemplate.html',
       controller: 'AutocompleteUsersController',

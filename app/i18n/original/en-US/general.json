@@ -75,7 +75,8 @@
       "INPUT_PLACEHOLDER": "Add People",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Search Member",
       "INVALID_EMAIL": "The email address is invalid",
-      "INVALID_EMPTY_LIST": "This list cannot be empty."
+      "INVALID_EMPTY": "Unknown user",
+      "CREATE_GUEST": "Invite it as a guest?"
     }
   },
   "DOMAIN": "Domain",

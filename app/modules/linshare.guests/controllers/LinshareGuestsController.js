@@ -15,8 +15,20 @@
     .controller('LinshareGuestsController', LinshareGuestsController);
 
   //TODO - KLE: Check DI
-  LinshareGuestsController.$inject = ['_', '$filter', '$scope', '$transitions', '$translate',
-    'GuestObjectService', 'guestRestService', 'itemUtilsService', 'lsAppConfig', 'NgTableParams', 'toastService'];
+  LinshareGuestsController.$inject = [
+    '_',
+    '$filter',
+    '$scope',
+    '$transitions',
+    '$translate',
+    'GuestObjectService',
+    'guestRestService',
+    'itemUtilsService',
+    'lsAppConfig',
+    'NgTableParams',
+    'toastService',
+    'withEmail'
+  ];
 
   /**
    * @namespace LinshareGuestsController
@@ -25,8 +37,20 @@
    */
   // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
-  function LinshareGuestsController(_, $filter, $scope, $transitions, $translate,
-    GuestObjectService, guestRestService, itemUtilsService, lsAppConfig, NgTableParams, toastService) {
+  function LinshareGuestsController(
+    _,
+    $filter,
+    $scope,
+    $transitions,
+    $translate,
+    GuestObjectService,
+    guestRestService,
+    itemUtilsService,
+    lsAppConfig,
+    NgTableParams,
+    toastService,
+    withEmail
+  ) {
     /* jshint validthis: true */
     var guestVm = this;
 
@@ -59,6 +83,7 @@
     guestVm.tableSort = tableSort;
     guestVm.toggleSelectedSort = true;
     guestVm.updateGuest = updateGuest;
+    guestVm.withEmail = withEmail;
 
     activate();
 
@@ -70,7 +95,7 @@
      * @memberOf LinShare.Guests.LinshareGuestsController
      */
     function activate() {
-      guestVm.guestObject = new GuestObjectService();
+      guestVm.guestObject = new GuestObjectService({mail: guestVm.withEmail});
       $translate.refresh().then(function() {
         $translate([
           'HEADER_GUEST.SLIDER.MY_GUEST',
@@ -90,6 +115,8 @@
           label: 'CONTACTS_LISTS_ACTION.MORE.ADD_CONTACT'
         }]
       };
+
+      guestVm.withEmail && guestVm.loadSidebarContent(guestVm.guestCreate);
     }
 
     /**

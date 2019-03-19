@@ -75,7 +75,8 @@
       "INPUT_PLACEHOLDER": "Thêm người",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Tìm kiếm thành viên",
       "INVALID_EMAIL": "địa chỉ email không hợp lệ",
-      "INVALID_EMPTY_LIST": "Danh sách này không được để trống."
+      "TBT__INVALID_EMPTY": "TRANSLATE ME!",
+      "TBT__CREATE_GUEST": "TRANSLATE ME!"
     }
   },
   "DOMAIN": "Tên miền",
