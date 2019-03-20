@@ -38,7 +38,8 @@
       </div>
       <p class="empty-res center" data-ng-if="browseVm.currentList.length === 0 && browseVm.isSharedSpace">
         <i class="zmdi zmdi-info"></i>
-        <span translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP</span>        
+        <span data-ng-if="browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP</span>
+        <span data-ng-if="!browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP_TO_COPY_TO</span>
       </p>
       <div class="lv-ctn">
         <div

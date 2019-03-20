@@ -71,8 +71,9 @@
 
       functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
         .then(function(creationRight) {
+          browseVm.canCreateWorkGroup = creationRight.enable;
           browseVm.canCreateFolder =
-            (browseVm.isSharedSpace && creationRight.enable) ||
+            (browseVm.isSharedSpace && browseVm.canCreateWorkGroup) ||
             (!browseVm.isSharedSpace);
       });
 
