@@ -604,6 +604,20 @@
           }
         }
       },
+      "WORKGROUP_DOCUMENT_REVISION": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "A revison of the file {{resourceName}} has been added in the workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "The revision of the file {{resourceName}} had been removed from the workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+          }
+        }
+      },
       "WORKGROUP_FOLDER": {
         "CREATE": {
           "AUTHOR": {
@@ -697,6 +711,7 @@
       "CREATE": "Creation",
       "CREATE_SHARE": "Share sent",
       "DELETE": "Deletion",
+      "DELETE_REVISION": "Deleting the revision",
       "DOWNLOAD": "Download",
       "FAILURE": "Login failure",
       "READ": "Read",
@@ -705,6 +720,7 @@
       "TRANSFER": "Transfer",
       "UPDATE": "Update",
       "UPLOAD": "File upload",
+      "UPLOAD_REVISION":"Creating the revision",
       "VIEWED": "Viewed"
     },
     "TYPE": {
@@ -722,7 +738,8 @@
       "WORKGROUP": "Workgroup",
       "WORKGROUP_DOCUMENT": "Workgroup file",
       "WORKGROUP_FOLDER": "Workgroup folder",
-      "WORKGROUP_MEMBER": "Workgroup member"
+      "WORKGROUP_MEMBER": "Workgroup member",
+      "WORKGROUP_DOCUMENT_REVISION": "Workgroup file (Revision)"
     }
   },
   "NO_AUDIT": "No audit for this resource yet",

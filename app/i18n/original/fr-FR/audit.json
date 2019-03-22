@@ -604,6 +604,20 @@
           }
         }
       },
+      "WORKGROUP_DOCUMENT_REVISION": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Une révision du fichier {{resourceName}} à été ajoutée dans le Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "La révision du fichier {{resourceName}} à été supprimée du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+          }
+        }
+      },
       "WORKGROUP_FOLDER": {
         "CREATE": {
           "AUTHOR": {
@@ -697,6 +711,7 @@
       "CREATE": "Création",
       "CREATE_SHARE": "Partage envoyé",
       "DELETE": "Suppression",
+      "DELETE_REVISION": "Suppression de la révision",
       "DOWNLOAD": "Téléchargement",
       "FAILURE": "Connexion échouée",
       "READ": "Consultation",
@@ -705,6 +720,7 @@
       "TRANSFER": "Transfert",
       "UPDATE": "Edition",
       "UPLOAD": "Dépôt de fichier",
+      "UPLOAD_REVISION":"Création de la révision",
       "VIEWED": "Vu"
     },
     "TYPE": {
@@ -722,7 +738,8 @@
       "WORKGROUP": "Groupe de Travail",
       "WORKGROUP_DOCUMENT": "Groupe de Travail - Fichier",
       "WORKGROUP_FOLDER": "Groupe de Travail - Dossier",
-      "WORKGROUP_MEMBER": "Groupe de Travail - Membre"
+      "WORKGROUP_MEMBER": "Groupe de Travail - Membre",
+      "WORKGROUP_DOCUMENT_REVISION": "Groupe de Travail - Fichier (Révision)"
     }
   },
   "NO_AUDIT": "Cette ressource n'a pas encore d'historique d'activité",

@@ -540,6 +540,20 @@
           }
         }
       },
+      "WORKGROUP_DOCUMENT_REVISION": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bản sửa đổi của tệp {{resourceName}} đã bị xóa khỏi Nhóm làm việc {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bản sửa đổi của tệp {{resourceName}} đã bị xóa khỏi Nhóm làm việc {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+          }
+        }
+      },
       "WORKGROUP_FOLDER": {
         "CREATE": {
           "AUTHOR": {
@@ -633,6 +647,7 @@
       "CREATE": "Sự sáng tạo",
       "CREATE_SHARE": "Đã gửi chia sẻ",
       "DELETE": "Xóa",
+      "DELETE_REVISION": "Создание ревизии",
       "DOWNLOAD": "Tải về",
       "FAILURE": "Đăng nhập thất bại",
       "READ": "Đọc",
@@ -641,6 +656,7 @@
       "TRANSFER": "chuyển khoản",
       "UPDATE": "Cập nhật",
       "UPLOAD": "Tải lên tệp",
+      "UPLOAD_REVISION":"Tạo bản sửa đổi",
       "VIEWED": "Đã xem"
     },
     "TYPE": {
@@ -656,7 +672,8 @@
       "WORKGROUP": "Nhóm làm việc",
       "WORKGROUP_DOCUMENT": "Tệp nhóm làm việc",
       "WORKGROUP_FOLDER": "Thư mục nhóm làm việc",
-      "WORKGROUP_MEMBER": "Thành viên nhóm làm việc"
+      "WORKGROUP_MEMBER": "Thành viên nhóm làm việc",
+      "WORKGROUP_DOCUMENT_REVISION": "Tệp nhóm làm việc (sửa đổi)"
     }
   },
   "NO_AUDIT": "Chưa có kiểm toán cho tài nguyên này",

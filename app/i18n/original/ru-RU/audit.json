@@ -604,6 +604,20 @@
             }
           }
         },
+        "WORKGROUP_DOCUMENT_REVISION": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Редакция файла {{resourceName}} была добавлена в рабочую группу {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Редакция файла {{resourceName}} удалена из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+            }
+          }
+        },
         "WORKGROUP_FOLDER": {
           "CREATE": {
             "AUTHOR": {
@@ -697,6 +711,7 @@
         "CREATE": "Создание",
         "CREATE_SHARE": "Отправленный общий доступ",
         "DELETE": "Удаление",
+        "DELETE_REVISION": "Удаление ревизии",
         "DOWNLOAD": "Копирование",
         "FAILURE": "Ошибка входа",
         "READ": "Консультация",
@@ -705,6 +720,7 @@
         "TRANSFER": "Перенесение",
         "UPDATE": "Изменение",
         "UPLOAD": "Файл доставлен",
+        "UPLOAD_REVISION":"Создание ревизии",
         "VIEWED": "Прочитано"
       },
       "TYPE": {
@@ -722,7 +738,9 @@
         "WORKGROUP": "Рабочая группа",
         "WORKGROUP_DOCUMENT": "Рабочая группа - Файл",
         "WORKGROUP_FOLDER": "Рабочая группа - Папка",
-        "WORKGROUP_MEMBER": "Рабочая группа - Участник"
+        "WORKGROUP_MEMBER": "Рабочая группа - Участник",
+        "WORKGROUP_DOCUMENT_REVISION": "Рабочая группа - Файл (пересмотр)"
+        
       }
     },
     "NO_AUDIT": "У этого файла еще нет истории",
