@@ -229,7 +229,7 @@ angular.module('linshare.sharedSpace')
 
       updateFlagsOnSelectedPages();
 
-      thisctrl.canDeleteWorkgroups = $filter('canDelete')(thisctrl.selectedDocuments, thisctrl.permissions);
+      thisctrl.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(thisctrl.selectedDocuments, thisctrl.permissions);
     }
 
     /**
