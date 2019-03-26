@@ -1,10 +1,6 @@
 @import "../../_fonts.scss";
 @import "../../_colors.scss";
 
-/**********************
-  CHOSEN FIX
-***********************/
-
 .user-rights-dropdown {
   min-width: inherit;
   width: inherit;
@@ -34,20 +30,6 @@
 
 .fields-add-member .autocomplete-search-ctn ul.dropdown-menu{
  left: -55px !important;
-}
-
-@media (max-width: 768px) {
-  .select-chosen-wkgps #rights_select {
-    margin-left: 0.3em !important;
-  }
-}
-
-.select-chosen-wkgps .chosen-container-single.chosen-container-single-nosearch {
-  width: 81px !important;
-  float: right;
-  .chosen-drop {
-    width: 92px;
-  }
 }
 
 /**********************

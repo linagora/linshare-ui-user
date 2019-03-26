@@ -70,30 +70,6 @@
     text-align: center;
     float: right;
   }
-  .chosen-container-single.chosen-container-single-nosearch {
-    width: 100% !important;
-    background-color: transparent;
-    .chosen-single {
-      background-color: rgba(255, 255, 255, 0);
-    }
-    .chosen-drop {
-      width: 100%;
-      text-align: left;
-      -webkit-transform-origin: top left;
-      -moz-transform-origin: top left;
-      -o-transform-origin: top left;
-      transform-origin: top left;
-      .chosen-results li {
-        padding-left: 37px;
-      }
-    }
-  }
-  .chosen-single > span {
-    color: #8f8f8f;
-  }
-  .chosen-container-single.chosen-container-single-nosearch .chosen-single span {
-    line-height: 33px;
-  }
 }
 
 /**********************
@@ -233,6 +209,10 @@ html:not(.ie9) .formsearch .select::before {
   }
   .checkbox-inline {
     padding-left: 15px;
+  }
+  md-select {
+    color: #9d9d9d !important;
+    margin-top: 0;
   }
 }
 

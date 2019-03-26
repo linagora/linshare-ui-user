@@ -563,11 +563,6 @@ $material-color: lighten(desaturate(adjust-hue($primary-color, 8), 10.26), 3.14)
   background-color: $material-color !important;
 }
 
-.chosen-container-single .chosen-single::after {
-  background: $material-color;
-}
-
-
 /*
 ** LinShare buttons & links styles
 */

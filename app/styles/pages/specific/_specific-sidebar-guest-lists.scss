@@ -5,26 +5,6 @@
   SIDEBAR GUEST LIST
 ***********************/
 
-/*TODO remove  select-chosen-ctn ref in guest views*/
-
-#guest-account-chosen .chosen-container-single.chosen-container-single-nosearch {
-  width: 100% !important;
-  .chosen-drop {
-    width: 140px;
-  }
-  .chosen-single {
-    color: #858585;
-    line-height: 33px;
-    font-weight: normal;
-  }
-  .chosen-results {
-    font-weight: normal;
-    color: #858585;
-  }
-  abbr {
-    display: none;
-  }
-}
 #content-ctn-sidebar.form-guests.form-create-guests{
   height: calc(100% - 200px);
   margin-bottom: 0;
