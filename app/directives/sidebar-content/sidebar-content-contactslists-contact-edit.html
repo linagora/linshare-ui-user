@@ -58,7 +58,7 @@
                  x-ng-class="{'has-error' : ((updateContactForm.mail.$touched || updateContactForm.$submitted)
                        && updateContactForm.mail.$invalid),'fg-toggled' : emailFocus,
                         'fg-not-empty' : !updateContactForm.mail.$error.required}">
-              <input type="text" x-ng-focus="emailFocus=true" x-ng-blur="emailFocus=false"
+              <input type="email" x-ng-focus="emailFocus=true" x-ng-blur="emailFocus=false"
                      required ng-required="true" class="input-sm form-control fg-input" name="mail"
                      x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.mailModel" data-ng-model-options="{getterSetter: true}" id="mail">
               <label class="fg-label required" for="mail">{{"CONTACTS_LISTS_ACTION.ORDER_BY.MAIL" | translate}}</label>
