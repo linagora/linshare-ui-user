@@ -215,7 +215,7 @@
                       tooltip-append-to-body="true"
                       uib-tooltip="{{::auditAction.creationDate | lsDate: 'medium'}}"
                       class="truncate">
-                  {{::auditAction.creationDate | relativeTime}}
+                  {{auditAction.creationDate | relativeTime}}
                 </span>
               </td>
               <td data-title="'TABLE_HEADER.DETAIL' | translate" class="center">

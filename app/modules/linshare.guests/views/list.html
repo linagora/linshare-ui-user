@@ -465,7 +465,7 @@
                       {{::guestData.mail}}
                     </p>
                     <p class="mobile-list-item-info visible-xs">
-                      {{::guestData.modificationDate | relativeTime}}
+                      {{guestData.modificationDate | relativeTime}}
                     </p>
                   </span>
                 </span>
@@ -573,7 +573,7 @@
               data-sortable="'expirationDate'"
               data-title="'SIDEBAR.LABEL.EXP_DATE' | translate"
             >
-              {{::guestData.expirationDate | relativeTime}}
+              {{guestData.expirationDate | relativeTime}}
             </td>
           </tr>
         </table>

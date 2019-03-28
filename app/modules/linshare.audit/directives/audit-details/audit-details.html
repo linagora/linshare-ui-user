@@ -35,7 +35,7 @@
       tooltip-placement="bottom"
       tooltip-popup-delay="550"
       uib-tooltip="{{::auditAction.creationDate | lsDate: 'medium'}}">
-      {{::auditAction.creationDate | relativeTime}}
+      {{auditAction.creationDate | relativeTime}}
     </span>
     | <span translate>DETAILS_POPUP.BY</span> <span translate>{{::auditAction.authorName}}</span>
   </p>

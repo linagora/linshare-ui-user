@@ -294,7 +294,7 @@
                           <span class="text-uppercase">{{::documentFile.sender.lastName}}</span>
                         </p>
                         <p class="mobile-list-item-info visible-xs">
-                          {{::documentFile.modificationDate | relativeTime}}, {{::documentFile.size | readableSize: true}}
+                          {{documentFile.modificationDate | relativeTime}}, {{::documentFile.size | readableSize: true}}
                         </p>
                       </span>
                     </span>
@@ -377,15 +377,15 @@
                 </td>
                 <td class="hidden-xs hide-if-toggled-sidebar" data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}" data-ng-animate="0"
                   data-sortable="'creationDate'" data-title="'TABLE_HEADER.CREATION_DATE' | translate" header-class="'hide-if-toggled-sidebar'">
-                  {{::documentFile.creationDate | relativeTime}}
+                  {{documentFile.creationDate | relativeTime}}
                 </td>
                 <td class="hidden-xs hide-if-toggled-sidebar" ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}" header-class="'hide-if-toggled-sidebar'"
                   data-title="'TABLE_HEADER.EXPIRATION_DATE' | translate" data-sortable="'expirationDate'" data-ng-animate="0">
-                  {{::documentFile.expirationDate | relativeTime}}
+                  {{documentFile.expirationDate | relativeTime}}
                 </td>
                 <td class="hidden-xs hide-if-toggled-sidebar" ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}" header-class="'hide-if-toggled-sidebar'"
                   data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'" data-ng-animate="0">
-                  {{::documentFile.size | readableSize: true}}
+                  {{documentFile.size | readableSize: true}}
                 </td>
               </tr>
             </table>
