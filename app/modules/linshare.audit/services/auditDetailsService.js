@@ -170,8 +170,8 @@
       auditAction.sentenceAction = setSentenceKey(auditAction, '.ACTION');
       auditAction.sentenceVars = setSentenceVars(auditAction);
       auditAction.updatedValues = setUpdatedValues(auditAction);
-      auditAction.translatedAction = setTranslatedVar(auditAction.action, 'ACTION.');
-      auditAction.translatedType = setTranslatedVar(auditAction.type, 'TYPE.');
+      auditAction.actionKey = setKeyVar(auditAction.action, 'ACTION.');
+      auditAction.typeKey = setKeyVar(auditAction.type, 'TYPE.');
       auditAction.fileSize = setFileSize(auditAction);
     }
 
@@ -209,7 +209,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setAuthorName(auditAction) {
-      return auditAction.isAuthor ? authorMe : setFullName(auditAction.actor);
+      return auditAction.isAuthor ? 'AUTHOR_ME' : setFullName(auditAction.actor);
     }
 
     /**
@@ -445,8 +445,8 @@
      * @returns {string} Icon css classes
      * @memberOf LinShare.audit.auditDetailsService
      */
-    function setTranslatedVar(originalString, key) {
-      return $filter('translate')('FILTERS_SELECT.' + key + originalString);
+    function setKeyVar(originalString, key) {
+      return 'FILTERS_SELECT.' + key + originalString;
     }
 
     /**

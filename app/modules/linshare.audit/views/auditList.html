@@ -155,35 +155,37 @@
                 data-filter="{authorName :'text'}"
                 data-sortable="'authorName'"
                 class="truncate"
-                uib-tooltip="{{::auditAction.authorName | translate}}"
+                uib-tooltip="{{auditAction.authorName | translate}}"
                 tooltip-append-to-body="true" tooltip-placement="bottom"
                 tooltip-popup-delay='650'
                 translate>
-                {{::auditAction.authorName}}
+                {{auditAction.authorName}}
               </td>
               <td
                 data-title="'TABLE_HEADER.ACTION' | translate"
-                data-filter="{translatedAction :'select'}"
+                data-filter="{actionKey :'select'}"
                 filter-data="auditVm.tableFilterAction"
-                data-sortable="'translatedAction'"
+                data-sortable="'actionKey'"
                 class="truncate"
-                uib-tooltip="{{::auditAction.translatedAction}}"
+                uib-tooltip="{{auditAction.actionKey | translate}}"
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
-                tooltip-popup-delay='650'>
-                {{::auditAction.translatedAction}}
+                tooltip-popup-delay='650'
+                translate>
+                {{auditAction.actionKey}}
               </td>
               <td
                 data-title="'TABLE_HEADER.RESOURCE_TYPE' | translate"
-                data-filter="{translatedType :'select'}"
+                data-filter="{typeKey :'select'}"
                 filter-data="auditVm.tableFilterType"
-                data-sortable="'translatedType'"
+                data-sortable="'typeKey'"
                 class="truncate"
-                uib-tooltip="{{::auditAction.translatedType}}"
+                uib-tooltip="{{auditAction.typeKey | translate}}"
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
-                tooltip-popup-delay='650'>
-                {{::auditAction.translatedType}}
+                tooltip-popup-delay='650'
+                translate>
+                {{auditAction.typeKey}}
               </td>
               <td
                 data-title="'TABLE_HEADER.RESOURCE_NAME' | translate"

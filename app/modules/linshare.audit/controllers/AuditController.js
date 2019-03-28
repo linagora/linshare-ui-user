@@ -14,8 +14,16 @@
     .controller('AuditController', AuditController);
 
   AuditController.$inject = [
-    '_', '$filter', '$scope', '$translate', 'auditDetailsService',
-    'auditRestService', 'lsAppConfig', 'moment', 'tableParamsService'
+    '_',
+    '$filter',
+    '$scope',
+    '$rootScope',
+    '$translate',
+    'auditDetailsService',
+    'auditRestService',
+    'lsAppConfig',
+    'moment',
+    'tableParamsService'
   ];
 
   /**
@@ -23,8 +31,19 @@
    * @desc Application audit management system controller
    * @memberOf LinShare.Audit
    */
-  function AuditController(_, $filter, $scope, $translate, auditDetailsService,
-    auditRestService, lsAppConfig, moment, tableParamsService) {
+  function AuditController(
+    _,
+    $filter,
+    $scope,
+    $rootScope,
+    $translate,
+    auditDetailsService,
+    auditRestService,
+    lsAppConfig,
+    moment,
+    tableParamsService
+  )
+  {
     /* jshint validthis: true */
     var auditVm = this;
 
@@ -38,6 +57,11 @@
     auditVm.tableFilterType = [];
 
     activate();
+
+    $rootScope.$on('$translateChangeSuccess', function() {
+      generateTableFilterSelect(auditVm.tableFilterType, 'type');
+      generateTableFilterSelect(auditVm.tableFilterAction, 'action');
+    });
 
     ////////////
 
@@ -91,8 +115,8 @@
       var values = _.uniq(_.map(auditVm.itemsList, column)).sort();
       _.pull(values, 'ANONYMOUS_SHARE_ENTRY');
       _.forEach(values, function(value) {
-        var translatedValue = $filter('translate')(FILTERS_SELECT_PREFIX + column.toUpperCase() + '.' + value);
-        select.push({id: translatedValue, title: translatedValue});
+        var translatedValue = FILTERS_SELECT_PREFIX + column.toUpperCase() + '.' + value;
+        select.push({id: translatedValue, title: $filter('translate')(translatedValue)});
       });
       select.sort(function(a, b) {
         return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
