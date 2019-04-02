@@ -525,7 +525,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setUpdatedValuesWorkgroupDocument(auditAction, updatedValues) {
-      if (auditAction.type === TYPES_KEY.WORKGROUP_DOCUMENT) {
+      if (auditAction.type === TYPES_KEY.WORKGROUP_DOCUMENT && auditAction.resource.treePath) {
         var oldFolder = auditAction.resource.treePath[auditAction.resource.treePath.length - 1];
         var newFolder = auditAction.resourceUpdated.treePath[auditAction.resourceUpdated.treePath.length - 1];
         if (oldFolder.uuid !== newFolder.uuid) {
