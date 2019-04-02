@@ -328,6 +328,12 @@
           }
         }
       })
+      .state('sharedspace.revision', {
+        url: '/revision',
+        templateUrl: 'modules/linshare.sharedSpace/views/workgroupRevisionsList.html',
+        controller: 'WorkgroupRevisionsController',
+        controllerAs: 'workgroupRevisionsVm',
+      })
       .state('administration', {
         parent: 'common',
         url: '/administration',

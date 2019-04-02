@@ -1,0 +1,1412 @@
+<!--
+     TODO: Use this to manage drop area
+     * Drop activation
+     * Drop action on add
+     * Drop action on success
+-->
+<div
+  drag-and-drop
+  drag-and-drop-flow="$flow"
+  drag-and-drop-added="workgroupRevisionsVm.todo()"
+  drag-and-drop-enabled="false"
+  drag-and-drop-success="workgroupRevisionsVm.todo()"
+>
+  <div class="container files">
+    <div class="card">
+      <div class="card-header">
+        <!--
+             TODO: Manage main `+` button action
+             * Check permissions
+             * Add action
+        -->
+        <div
+          id="breadcrumb-wrap"
+          class="deep-nav multi-toolbar-options"
+        >
+          <div
+            class="menu-popover-ctn hidden-xs clickable waves-effect"
+            tooltip-placement="bottom"
+            tooltip-popup-delay="500"
+            translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
+          >
+            <a
+              class="add-menu-group"
+              tabindex="0"
+              data-ng-click="workgroupRevisionsVm.todo()"
+            >
+              <i class="zmdi zmdi-plus"></i>
+            </a>
+          </div>
+          <!--
+               TODO: Manage breadcrumb rendering
+          -->
+          <div
+            class="breadcrumbs-ctn hidden-xs"
+            data-ng-class="{
+                'lv1-break': workgroupRevisionsVm.breadcrumb.length >= 1,
+                'lv2-break': workgroupRevisionsVm.breadcrumb.length >= 2,
+                'lv4-break': workgroupRevisionsVm.breadcrumb.length >= 4}"
+          >
+            <!--
+                 TODO: Manage navigation to parent => a Workgroup | Folder
+            -->
+            <div
+              class="left-arrow actions"
+              data-ng-click="workgroupRevisionsVm.todo()"
+            >
+              <a>
+                <i class="ls-previous-caret"></i>
+              </a>
+            </div>
+            <div id="page-root-link">
+              <a ui-sref="sharedspace.all">
+                <i class="groups-home-workgroup"></i>
+              </a>
+            </div>
+            <div id="root-level">
+              <span class="sub-category-chevron">
+                <i class="zmdi zmdi-chevron-right"></i>
+              </span>
+              <!--
+                   TODO: Manage navigation to the parent Workgroup
+              -->
+              <a
+                class="set-ellipsis"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay="1200"
+                uib-tooltip="{{::workgroupRevisionsVm.workgroupName}}"
+                data-ng-click="workgroupRevisionsVm.todo()"
+              >
+                <!--
+                     TODO: render workgroup name
+                -->
+                {{::workgroupRevisionsVm.workgroupName}}
+              </a>
+            </div>
+            <span
+              class="explorer-previous-lvl dropdown dropdown-standard pull-left"
+              uib-dropdown=""
+              dropdown-append-to-body
+              is-open="isOpenBreadCrumb"
+              data-ng-class="{'open': isOpenBreadCrumb}"
+            >
+              <span class="sub-category-chevron">
+                <i class="zmdi zmdi-chevron-right"></i>
+              </span>
+              <a
+                class="set-ellipsis"
+                uib-dropdown-toggle=""
+                tooltip-popup-delay="700"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                translate-attr="{'uib-tooltip': 'BREADCRUMB_UPPER_LEVEL'}"
+                data-ng-class="{'open': isOpenBreadCrumb}"
+              >
+                ...
+              </a>
+              <div
+                class="uib-dropdown-menu dropdown-menu dm-icon double-drop dropdown-menu-left explorer-content-dropdown"
+                uib-dropdown-menu=""
+                data-ng-class="{'open': isOpenBreadCrumb}"
+              >
+                <div class="list-menu">
+                  <p translate>BREADCRUMB_UPPER_LEVEL</p>
+                  <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
+                    <!--
+                         TODO: Manage breadcrumb item and action on it
+                    -->
+                    <li
+                      data-ng-repeat="breadcrumbItem in workgroupRevisionsVm.breadcrumb.slice().reverse()"
+                      data-ng-click="workgroupRevisionsVm.todo()"
+                    >
+                      <a
+                        class="set-ellipsis"
+                        data-ng-class="{'active-level' : $index === 0}"
+                      >
+                        {{breadcrumbItem.name}}
+                      </a>
+                    </li>
+                    <!--
+                         TODO: Manage redirection to workgroup
+                    -->
+                    <li>
+                      <a class="set-ellipsis"
+                        data-ng-click="workgroupRevisionsVm.todo()"
+                      >
+                        {{workgroupRevisionsVm.workgroupName}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </span>
+            <!--
+                 TODO: Manage breadcrumb item and redirection to workgroup
+            -->
+            <div
+              class="folder-level"
+              data-ng-cloak
+              data-ng-repeat="breadcrumbItem in workgroupRevisionsVm.breadcrumb"
+              data-ng-click="workgroupRevisionsVm.todo()"
+            >
+              <span class="sub-category-chevron">
+                <i class="zmdi zmdi-chevron-right"></i>
+              </span>
+              <a
+                class="set-ellipsis"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay="1000"
+                uib-tooltip="{{breadcrumbItem.name}}"
+              >
+                {{breadcrumbItem.name}}
+              </a>
+            </div>
+          </div>
+          <div id="action-header">
+            <!--
+                 TODO: MOBILE Manage toolbar
+            -->
+            <div class="fg-line toolbar-actions-items wide-action-bar">
+
+              <!--
+                   TODO: Manage show checkboxes on mobile
+              -->
+              <span
+                class="visible-xs toolbar-mobile-item col-xs-3"
+                data-ng-click="showCheckboxes = !showCheckboxes"
+              >
+                <a class="select-all-items plain-txt-btn">
+                  <!--
+                       TODO: Manage reset selection
+                  -->
+                  <i
+                    class="ls-multi-select"
+                    data-ng-class="{'active-link': showCheckboxes}"
+                    data-ng-click="showCheckboxes && workgroupRevisionsVm.todo()"
+                  >
+                  </i>
+                </a>
+              </span>
+              <!--
+                   TODO: Manage action see file details
+              -->
+              <a
+                href=""
+                class="hidden-xs pull-left"
+                tooltip-popup-delay="350"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                translate-attr="{'uib-tooltip': 'ACTION.INFO_FILE'}"
+                data-ng-click="workgroupRevisionsVm.todo()"
+              >
+                <i
+                  class="zmdi zmdi-file"
+                  aria-hidden="true"
+                >
+                </i>
+              </a>
+              <!--
+                   TODO: Manage sort button
+              -->
+              <div class="col-xs-3 toolbar-mobile-item sort-dropdown">
+                <div
+                  class="dropdown dropdown-standard toolbar-mobile-item"
+                  uib-dropdown=""
+                  dropdown-append-to-body is-open="isOpenOrder"
+                  data-ng-class="{'open':isOpenOrder}"
+                >
+                  <div class="actions">
+                    <a
+                      uib-dropdown-toggle=""
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i
+                        class="zmdi zmdi-sort-asc"
+                        aria-hidden="true"
+                      >
+                      </i>
+                    </a>
+                    <ul
+                      class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown sort-dropdown
+                      stop-propagate"
+                      uib-dropdown-menu=""
+                      data-ng-class="{'open':isOpenOrder}"
+                    >
+                      <li role="menuitem">
+                        <a
+                          href=""
+                          class="center"
+                          translate
+                        >
+                          SELECTION_TOOLBAR.ORDER_BY
+                        </a>
+                      </li>
+                      <li class="divided"></li>
+                      <li role="menuitem">
+                        <!--
+                             TODO: Manage document sorting activation
+                        -->
+                        <a
+                          href=""
+                          data-ng-click="workgroupRevisionsVm.todo()"
+                        >
+                          <span class="caret-area">
+                            <i
+                              class="zmdi zmdi-caret-down"
+                              data-ng-show="workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                            <i
+                              class="zmdi zmdi-caret-up"
+                              data-ng-show="!workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                          </span>
+                          <span translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</span>
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <!--
+                             TODO: Manage document sorting activation
+                        -->
+                        <a
+                          href=""
+                          data-ng-click=""
+                        >
+                          <span class="caret-area">
+                            <i
+                              class="zmdi zmdi-caret-down"
+                              data-ng-show="workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                            <i
+                              class="zmdi zmdi-caret-up"
+                              data-ng-show="!workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                          </span>
+                          <span translate>FILTER_COMPONENT.BY_SIZE</span>
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <!--
+                             TODO: Manage document sorting activation
+                        -->
+                        <a
+                          href=""
+                          data-ng-click=""
+                        >
+                          <span class="caret-area">
+                            <i
+                              class="zmdi zmdi-caret-down"
+                              data-ng-show="workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                            <i
+                              class="zmdi zmdi-caret-up"
+                              data-ng-show="!workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                          </span>
+                          <span translate>FILTER_COMPONENT.ORDER_BY_NAME</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--
+                   TODO: Card view buttton - To be done once card view is implemented
+              -->
+              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+              </a>
+
+              <!--
+                   TODO: MOBILE Search button
+              -->
+              <div
+                id="top-search"
+                class="toolbar-mobile-item col-xs-3 visible-xs"
+                data-ng-click="workgroupRevisionsVm.toggleSearchState()"
+              >
+                <a>
+                  <!--
+                       TODO: Manage visual activation
+                  -->
+                  <i
+                    class="tm-icon zmdi zmdi-search"
+                    data-ng-class="{'active-link': false}"
+                  >
+                  </i>
+                </a>
+              </div>
+            </div>
+            <!--
+                 TODO: Search button
+            -->
+            <div class="input-group search-bar hidden-xs">
+              <div id="search-field-ctn">
+                <div class="search-style">
+                  <div class="fg-line">
+                    <!--
+                         TODO: Manage search params
+                    -->
+                    <input
+                      type="text"
+                      class="form-control"
+                      autocomplete="off"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+                    >
+                    <!-- data-ng-model="" -->
+                    <!-- data-ng-change="" -->
+                    <!-- > -->
+                  </div>
+                </div>
+              </div>
+              <!--
+                   TODO: Advanced search
+              -->
+              <div class="actions">
+                <a
+                  class="input-group-addon last clickable dropdown"
+                  uib-dropdown
+                  uib-dropdown-toggle
+                  dropdown-append-to-body
+                  auto-close="outsideClick"
+                  is-open="isOpenFilter"
+                  data-ng-class="{'open':isOpenFilter}"
+                  data-ng-click="advancedFilterBool = !advancedFilterBool"
+                  translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}"
+                >
+                  <i class="zmdi hidden-xs clickable ls-settings">
+                  </i>
+                  <ul
+                    uib-dropdown-menu=""
+                    class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided
+                    dropdown-content-left"
+                    data-ng-class="{'open':isOpenFilter}"
+                  >
+                    <!-- FILTER COMPONENT -->
+                    <filter-box
+                      class="clearfix"
+                      filter-box-size="true"
+                      filter-box-date="true"
+                      filter-box-items="workgroupRevisionsVm.nodesList"
+                      filter-box-table="workgroupRevisionsVm.tableParams"
+                    >
+                    </filter-box>
+                  </ul>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="drop-area">
+        <!--
+             TODO: MOBILE Search input bar
+        -->
+        <div id="top-search-wrap">
+          <i
+            id="top-search-close"
+            data-ng-click="workgroupRevisionsVm.toggleSearchState()"
+          >
+            &times;
+          </i>
+          <input
+            type="text"
+            id="searchInMobileFiles"
+            class="form-control ng-pristine ng-untouched ng-valid"
+            aria-invalid="false"
+            translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+          >
+          <!-- data-ng-change="" -->
+          <!-- data-ng-model="" -->
+          <!-- > -->
+        </div>
+        <!--
+             TODO: Actions Toolbar
+        -->
+        <div
+          id="selection-actions"
+          class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
+          data-ng-class="{'show-multi-menu': false}"
+        >
+          <!--
+               TODO: Manage check/uncheck elements
+          -->
+          <div
+            class="toggle-checkbox-toolbar"
+            data-ng-click="workgroupRevisionsVm.todo()"
+          >
+            <!--
+                 TODO: Manage check
+            -->
+            <a
+              class="select-all-items plain-txt-btn"
+              data-ng-if=""
+            >
+              <i class="fa fa fa-square-o checkbox-table"></i>
+            </a>
+            <!--
+                 TODO: Manage uncheck
+            -->
+            <a
+              class="select-all-items plain-txt-btn"
+              data-ng-if=""
+            >
+              <i class="fa fa-check-square-o"></i>
+            </a>
+          </div>
+          <!--
+               TODO: Manage exit actions toolbar
+          -->
+          <div
+            class="exit-selection actions"
+            translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"
+            data-ng-click="workgroupRevisionsVm.todo()"
+          >
+            <a>
+              <i class="zmdi zmdi-close"></i>
+            </a>
+          </div>
+          <!--
+               TODO: Manage selection information/reset/isolation
+          -->
+          <div
+            class="display-num-selected-items"
+            translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}"
+          >
+            <!--
+                 TODO: Manage visual effect
+            -->
+            <div
+              class="pull-left"
+              data-ng-class="{
+              'active-button-show-selection': false
+              }"
+              data-ng-click="workgroupRevisionsVm.toggleFilterBySelectedFiles()"
+            >
+              <p>
+                <!--
+                     TODO: Manage selected elements
+                -->
+                <span>{{workgroupRevisionsVm.selectedDocuments.length}}</span>
+                <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
+              </p>
+              <div class="pull-left view-icons-ctn groups-view">
+                <!--
+                     TODO: Manage visual effect - element isolated
+                -->
+                <i
+                  class="fa fa-eye-slash"
+                  aria-hidden="true"
+                  data-ng-show=""
+                >
+                </i>
+                <!--
+                     TODO: Manage visual effect - element not isolated
+                -->
+                <i
+                  class="fa fa-eye"
+                  aria-hidden="true"
+                  data-ng-show=""
+                >
+                </i>
+              </div>
+            </div>
+            <!--
+                 TODO: Manage selection reset
+            -->
+            <div
+              class="pull-left view-icons-ctn reset-icon"
+              data-ng-click="workgroupRevisionsVm.todo()"
+            >
+              <i
+                class="fa fa-undo"
+                translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"
+              >
+              </i>
+            </div>
+          </div>
+          <!--
+               TODO: Manage actions on toolbar
+          -->
+          <div
+            id="toolbar-actions"
+            class="hidden-xs"
+          >
+            <!--
+                 TODO: Manage actions for ONE file
+                 Do not forget permissions
+            -->
+            <span
+              data-ng-if="true"
+              data-ng-class="{
+              'disable-link': false
+              }"
+            >
+              <!--
+                   TODO: Manage Download
+                   Do not forget permissions
+              -->
+              <a
+                data-ng-href=""
+                data-ng-click="workgroupRevisionsVm.todo()"
+                event-propagation-stop
+                translate-attr="{title: 'ACTION.DOWNLOAD'}"
+              >
+                <i class="zmdi zmdi-download"></i>
+                <span translate>ACTION.DOWNLOAD</span>
+              </a>
+            </span>
+            <!--
+                 TODO: Manage actions for MULTIPLE files
+                 Do not forget permissions
+            -->
+            <span
+              data-ng-if=""
+              data-ng-class="{
+              'disable-link': false
+              }"
+            >
+              <!--
+                   TODO: Manage Download
+                   Do not forget permissions
+              -->
+              <a
+                class="plain-text-button"
+                translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}"
+                data-ng-click="workgroupRevisionsVm.todo()"
+              >
+                <i class="zmdi zmdi-download"></i>
+                <span translate>
+                  ACTION.DOWNLOAD
+                </span>
+              </a>
+            </span>
+            <span data-ng-class="{'disable-link': false}">
+              <!--
+                   TODO: Manage Delete
+                   Do not forget permissions
+              -->
+              <a
+                class="plain-text-button share-link"
+                translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
+                data-ng-click="workgroupRevisionsVm.todo()"
+              >
+                <i class="zmdi zmdi-delete"></i>
+                <span translate>
+                  SELECTION_TOOLBAR.DELETE
+                </span>
+              </a>
+            </span>
+
+            <span data-ng-class="{'disable-link': false}">
+              <!--
+                   TODO: Manage Restore
+                   Do not forget permissions
+              -->
+              <a
+                class="plain-text-button share-link"
+                translate-attr="{title: 'SELECTION_TOOLBAR.RESTORE'}"
+                data-ng-click="workgroupRevisionsVm.todo()"
+              >
+                <i class="zmdi zmdi-time-restore"></i>
+                <span translate>
+                  SELECTION_TOOLBAR.RESTORE
+                </span>
+              </a>
+            </span>
+            <!--
+                 TODO: Manage more actions
+                 Do not forget permissions and number of files selected
+            -->
+            <span
+              class="dropdown link-dropdown"
+              uib-dropdown
+              data-ng-class="{'disable-link': false}"
+            >
+              <a
+                class="plain-text-button share-link"
+                uib-dropdown-toggle
+                is-open="isOpenToolbarMore"
+                translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
+                data-ng-class="{'open': isOpenToolbarMore}"
+              >
+                <i class="zmdi zmdi-more"></i>
+                <span translate>
+                  BOUTON_LABEL_TITLE.MORE_ACTIONS
+                </span>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu"
+                uib-dropdown-menu=""
+                data-ng-class="{'open': isOpenToolbarMore}"
+              >
+                <li data-ng-click="workgroupRevisionsVm.todo()">
+                  <!--
+                       TODO: Manage See Information
+                  -->
+                  <a href="">
+                    <i class="zmdi zmdi-info"></i>
+                    <span translate>
+                      ACTION.INFORMATION
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <!--
+                       TODO: Manage Copy
+                       DO not forget permissions and functionalities activation
+                  -->
+                  <a
+                    href=""
+                    class="parent-sub-menu-link"
+                  >
+                    <i class="zmdi zmdi-copy"></i>
+                    <span translate>
+                      ACTION.COPY_TO
+                    </span>
+                    <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon"></i>
+                  </a>
+                  <ul>
+                    <li
+                      data-ng-class="{
+                      'disable-link': false
+                      }"
+                      data-ng-show="true"
+                      data-ng-click="workgroupRevisionsVm.todo()"
+                    >
+                      <a>
+                        <i class="ls-my-space"></i>
+                        <span translate>
+                          ACTION.COPY_DROPDOWN.PERSONAL_SPACE
+                        </span>
+                      </a>
+                    </li>
+                    <li
+                      data-ng-click="workgroupRevisionsVm.todo()"
+                      data-ng-class="{
+                      'disable-link': false
+                      }"
+                    >
+                      <a>
+                        <i class="ls-workgroup"></i>
+                        <span translate>
+                          ACTION.COPY_DROPDOWN.SHARED_SPACE
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="divider"></li>
+                <li data-ng-class="{
+                  'disable-link': false
+                  }"
+                >
+                  <!--
+                       TODO: Manage Rename
+                       DO not forget permissions
+                  -->
+                  <a data-ng-click="workgroupRevisionsVm.todo()">
+                    <i class="zmdi zmdi-border-color"></i>
+                    <span translate>ACTION.RENAME</span>
+                  </a>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+        <!--
+             TODO: Manage BackDrop
+             do not forget permissions and if file present
+        -->
+        <div
+          class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
+          check-table-height
+          data-ng-if="true"
+          data-ng-class="{'show-bg-drop' : true}"
+        >
+          <div class="drag-and-drop-content">
+            <div class="drag-icon-ctn">
+              <div class="bordered-circle">
+                &nbsp;
+              </div>
+              <span class="grey-clr bg-info-icon">
+                <span class="groups-upload-file"></span>
+              </span>
+            </div>
+            <div class="dnd-txt-content">
+              <h1
+                class="hidden-xs"
+                translate
+              >
+                DRAG_DROP_BACKGROUND.TITLE_REVISION
+              </h1>
+              <p
+                class="hidden-xs"
+                translate
+              >
+                DRAG_DROP_BACKGROUND.COMMENT_REVISION
+              </p>
+              <h1
+                class="visible-xs"
+                translate
+              >
+                WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.TITLE_REVISION
+              </h1>
+              <p
+                class="visible-xs"
+                translate
+              >
+                WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.COMMENT_REVISION
+              </p>
+            </div>
+          </div>
+        </div>
+        <!--
+             TODO: Manage checkbox select/unselect All
+        -->
+        <script type="text/ng-template" id="checkboxheader.html">
+          <span
+            class="display-block"
+            role="button"
+            tabindex="0"
+            data-ng-click="workgroupRevisionsVm.todo()"
+          >
+            <!--
+                 TODO: Manage visual check all
+            -->
+            <a
+              data-ng-if="true"
+              class="select-all-items plain-text-button checkboxCtn"
+            >
+              <i class="fa fa fa-square-o checkbox-table"></i>
+            </a>
+            <!--
+                 TODO: Manage visual uncheck all
+            -->
+            <a
+              data-ng-if="true"
+              class="select-all-items plain-text-button"
+            >
+              <i class="fa fa-check-square-o"></i>
+              </a>
+            </span>
+        </script>
+        <div class="card-body collapsible-content">
+          <div class="table-responsive">
+            <!--
+                 TODO: Manage Table listing
+            -->
+            <table
+              id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
+              data-ng-table="workgroupRevisionsVm.tableParams"
+              show-filter="true"
+            >
+              <tr
+                class="p-b-5"
+                check-table-height
+                ls-item-selection
+                data-ng-repeat="nodeItem in $data track by nodeItem.uuid"
+                data-selected-documents="workgroupRevisionsVm.selectedDocuments"
+                data-document-file="nodeItem"
+                data-current-selected-document="workgroupRevisionsVm.currentSelectedDocument"
+                data-details-function="workgroupRevisionsVm.todo()"
+                data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                data-ng-class="{
+                'highlight-list-elem': nodeItem.isSelected ,
+                'current-vis': workgroupRevisionsVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
+                'item-container': true
+                }"
+                data-ng-click="backToSidebarContentDetails()"
+                data-ng-dblclick="workgroupRevisionsVm.goToFolder(nodeItem)"
+              >
+                <td
+                  class="center set-content-left thumb-type-item thumb-groups-preview-ls"
+                  data-header="'checkboxheader.html'"
+                  header-class="'col-2 checkbox-col'"
+                >
+                  <!--
+                       TODO: Manage Add document to selection
+                  -->
+                  <a data-ng-click="(showCheckboxes || !isMobile) ? workgroupRevisionsVm.todo() : null">
+                    <div data-ng-class="{ 'invisible' : showCheckboxes && isMobile}">
+                      <i data-ng-class="'{{::nodeItem.mimeType | mimetypeIcone}}'"></i>
+                    </div>
+                    <div
+                      class="checkbox-ctn-thumb"
+                      data-ng-class="{'maintain-vis': nodeItem.isSelected , 'hidden-xs' : !showCheckboxes}"
+                    >
+                    </div>
+                  </a>
+                </td>
+                <td
+                  class="row show-li-actions col-3"
+                  data-title="::'TABLE_HEADER.NAME' | translate"
+                  data-sortable="'name'"
+                  header-class="'col-3 flexible-table-col'"
+                  uuid={{::nodeItem.uuid}}
+                >
+                  <div class="ctn-name-actions">
+                    <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                      <span
+                        class="file-name-disp single-line"
+                        spellcheck="false"
+                        contenteditable="false"
+                      >
+                        {{::nodeItem.name}}
+                      </span>
+                      <span class="secondary-info-ctn">
+                        <p class="mobile-list-item-info visible-xs">
+                          {{nodeItem.creationDate | relativeTime}} {{::', '+(nodeItem.size | readableSize: true)}}
+                        </p>
+                      </span>
+                    </span>
+                    <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
+                      <ul class="actions pull-right double-mobile-actions">
+                        <!--
+                             TODO: Manage See file details
+                        -->
+                        <li
+                          class="set-col-6"
+                          event-propagation-stop
+                          data-ng-click="workgroupRevisionsVm.todo()"
+                        >
+                          <a
+                            class="set-col-12"
+                            href=""
+                            translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}"
+                          >
+                            <i class="zmdi zmdi-info"></i>
+                          </a>
+                        </li>
+                        <!--
+                             TODO: Manage Download
+                             Do not forget permissions
+                        -->
+                        <li
+                          class="hidden-xs"
+                          data-ng-class="{
+                          'disabled': false
+                          }"
+                        >
+                          <a
+                            href=""
+                            event-propagation-stop
+                            translate-attr="{title: 'ACTION.DOWNLOAD'}"
+                            data-ng-click="workgroupRevisionsVm.todo()"
+                          >
+                            <i class="zmdi zmdi-download"></i>
+                          </a>
+                        </li>
+                        <!--
+                             TODO: Manage Delete
+                             Do not forget permissions
+                        -->
+                        <li
+                          class="hidden-xs"
+                          data-ng-class="{
+                          'disabled': false
+                          }"
+                        >
+                          <a
+                            href=""
+                            translate-attr="{title: 'ACTION.DELETE'}"
+                            data-ng-click="workgroupRevisionsVm.todo()"
+                          >
+                            <i
+                              class="zmdi zmdi-delete"
+                              aria-hidden="true"
+                            >
+                            </i>
+                          </a>
+                        </li>
+                        <!--
+                             TODO: Manage More actions
+                             Do not forget permissions
+                        -->
+                        <li
+                          class="dropdown set-col-6 no-padding"
+                          check-dropdown-position
+                          uib-dropdown
+                          dropdown-append-to-body
+                          auto-close="always"
+                          is-open="isOpenItem"
+                          data-ng-class="{'open':isOpenItem}"
+                        >
+                          <a
+                            class="set-col-12"
+                            uib-dropdown-toggle
+                            event-propagation-stop
+                            translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
+                          >
+                            <i class="zmdi zmdi-more"></i>
+                          </a>
+                          <ul
+                            class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided
+                            dropdown-submenu"
+                            uib-dropdown-menu=""
+                            data-ng-class="{'open':isOpenItem}"
+                          >
+                            <!--
+                                 TODO: Manage See file details
+                                 Do not forget permissions
+                            -->
+                            <li
+                              event-propagation-stop
+                              data-ng-click="workgroupRevisionsVm.todo()"
+                            >
+                              <a href="">
+                                <i class="zmdi zmdi-info"></i>
+                                <span translate>
+                                  ACTION.INFORMATION
+                                </span>
+                              </a>
+                            </li>
+                            <li class="divider"></li>
+                            <!--
+                                 TODO: Manage Rename
+                                 Do not forget permissions
+                            -->
+                            <li data-ng-class="{
+                              'disable-link': false
+                              }"
+                            >
+                              <a data-ng-click="workgroupRevisionsVm.todo()">
+                                <i class="zmdi zmdi-border-color"></i>
+                                <span translate>
+                                  ACTION.RENAME
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <!--
+                                   TODO: Manage Preview
+                                   Do not forget functionality activation
+                              -->
+                              <document-preview-button
+                                data-ng-if="true"
+                                item-index="$index"
+                                items="$data"
+                              >
+                                <span translate>
+                                  ACTION.PREVIEW
+                                </span>
+                              </document-preview-button>
+                            </li>
+                            <!--
+                                 TODO: Manage Download
+                                 Do not forget permissions
+                            -->
+                            <li
+                              data-ng-class="{
+                              'disable-link': false
+                              }"
+                            >
+                              <a
+                                data-ng-href=""
+                                data-ng-click="workgroupRevisionsVm.todo()"
+                                event-propagation-stop
+                              >
+                                <i class="zmdi zmdi-download"></i>
+                                <span translate>
+                                  ACTION.DOWNLOAD
+                                </span>
+                              </a>
+                            </li>
+                            <!--
+                                 TODO: Manage Restore
+                                 Do not forget permissions
+                            -->
+                            <li
+                              data-ng-class="{
+                              'disable-link':
+                              }"
+                            >
+                              <a data-ng-click="workgroupRevisionsVm.todo()">
+                                <i class="zmdi zmdi-time-restore"></i>
+                                <span translate>
+                                  ACTION.RESTORE
+                                </span>
+                              </a>
+                            </li>
+                            <li class="divider hidden-xs"></li>
+                            <!--
+                                 TODO: Manage Copy
+                                 Do not forget permissions and functionalities activation
+                            -->
+                            <li
+                              class="hidden-xs"
+                              data-ng-class="{
+                              'disable-link': false
+                              }"
+                            >
+                              <a
+                                class="parent-sub-menu-link"
+                                href=""
+                              >
+                                <i class="zmdi zmdi-copy"></i>
+                                <span translate>
+                                  ACTION.COPY_TO
+                                </span>
+                                <i class="zmdi zmdi-chevron-right secondary-dropdown-menu-icon"></i>
+                              </a>
+                              <ul>
+                                <li
+                                  data-ng-class="{
+                                  'disable-link': false
+                                  }"
+                                  data-ng-show="true"
+                                  data-ng-click="workgroupRevisionsVm.todo()"
+                                >
+                                  <a>
+                                    <i class="ls-my-space"></i>
+                                    <span translate>
+                                      ACTION.COPY_DROPDOWN.PERSONAL_SPACE
+                                    </span>
+                                  </a>
+                                </li>
+                                <li
+                                  data-ng-click="workgroupRevisionsVm.todo()"
+                                  data-ng-class="{
+                                  'disable-link': false
+                                  }"
+                                >
+                                  <a>
+                                    <i class="ls-workgroup"></i>
+                                    <span translate>
+                                      ACTION.COPY_DROPDOWN.SHARED_SPACE
+                                    </span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </li>
+                            <!--
+                                 TODO: NOBILE Manage Copy
+                                 Do not forget permissions and functionalities activation
+                            -->
+                            <li
+                              class="visible-xs"
+                              data-ng-class="{
+                              'disable-link': false
+                              }"
+                              data-ng-show="true"
+                              data-ng-click="workgroupRevisionsVm.todo()"
+                            >
+                              <a>
+                                <i class="ls-my-space"></i>
+                                <span translate>
+                                  ACTION.COPY_TO
+                                </span>
+                                <span translate>
+                                  ACTION.COPY_DROPDOWN.PERSONAL_SPACE
+                                </span>
+                              </a>
+                            </li>
+                            <li
+                              class="visible-xs"
+                              data-ng-class="{
+                              'disable-link': false
+                              }"
+                              data-ng-click="workgroupRevisionsVm.todo()"
+                            >
+                              <a>
+                                <i class="ls-workgroup"></i>
+                                <span translate>
+                                  ACTION.COPY_TO
+                                </span>
+                                <span translate>
+                                  ACTION.COPY_DROPDOWN.SHARED_SPACE
+                                </span>
+                              </a>
+                            </li>
+                            <li class="divider"></li>
+                            <!--
+                                 TODO: Manage Delete
+                                 Do not forget permissions and functionalities activation
+                            -->
+                            <li
+                              data-ng-class="{
+                              'disable-link': false
+                              }"
+                            >
+                              <a
+                                href=""
+                                data-ng-click="workgroupRevisionsVm.todo()"
+                              >
+                                <i
+                                  class="zmdi zmdi-delete"
+                                  aria-hidden="true"
+                                >
+                                </i>
+                                <span translate>
+                                  ACTION.DELETE
+                                </span>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
+                </td>
+                <td
+                  class="hidden-xs"
+                  data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+                  data-title="::'TABLE_HEADER.CREATION_DATE' | translate"
+                  data-sortable="'modificationDate'"
+                  header-class="'col-4 hide-if-toggled-sidebar'"
+                >
+                  {{nodeItem.creationDate | relativeTime}}
+                </td>
+                <td
+                  class="hidden-xs"
+                  data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+                  data-title="::'TABLE_HEADER.SIZE' | translate"
+                  data-sortable="'size'"
+                  header-class="'col-5 hide-if-toggled-sidebar'"
+                >
+                  {{::nodeItem.size | readableSize: true}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+       TODO: MOBILE Manage Fab button
+       Do not forget permissions
+  -->
+  <div
+    id="fabButtonCtn"
+    fab-button
+    fab-button-actions="workgroupRevisionsVm.fabButton.actions"
+    fab-button-flow="$flow"
+    fab-button-toolbar="workgroupRevisionsVm.fabButton.toolbar"
+    data-ng-if="true"
+  >
+  </div>
+</div>
+
+<!--
+     TODO: MOBILE Manage toolbar
+-->
+<div class="header-sidebar append-to-body visible-xs workgroup-header-nav">
+  <!--
+       TODO: MOBILE Go to parent folder | workgroup
+  -->
+  <a
+    class="zmdi zmdi-chevron-left zmdi-hc-2x"
+    data-ng-click="workgroupRevisionsVm.todo()"
+  >
+  </a>
+  <h2 class="header-more-options set-ellipsis">
+    {{::workgroupRevisionsVm.currentFolder.name}}
+  </h2>
+  <!--
+       TODO: MOBILE show file details
+  -->
+  <a
+    class="pull-right return-to-wkgrps zmdi zmdi-file"
+    data-ng-click="workgroupRevisionsVm.todo()"
+  >
+  </a>
+  <!--
+       TODO: MOBILE go to file in folder | workgroup
+  -->
+  <a
+    class="pull-right return-to-wkgrps zmdi zmdi-format-valign-top"
+    data-ui-sref=""
+  >
+  </a>
+</div>
+
+
+<!--
+     TODO: MOBILE Manage Actions Toolbar
+-->
+<section
+  class="row multi-select-mobile visible-xs append-to-body"
+  data-ng-class="{'showMobileMultiMenu': false}"
+>
+  <div class="col-xs-2 ctn-mobile-select-count">
+    <span class="number-of-files">
+      {{workgroupRevisionsVm.selectedDocuments.length}}
+    </span>
+    <span
+      class="file-multi-select-label"
+      translate
+    >
+      SELECTION_TOOLBAR.ELEMENTS
+    </span>
+  </div>
+  <div class="col-xs-8">
+    <!--
+         TODO: MOBILE Manage check | uncheck all
+    -->
+    <div
+      data-ng-click="workgroupRevisionsVm.todo()"
+      class="visible-xs toolbar-mobile-item col-xs-3 clickable"
+    >
+      <i
+        class="fa fa-square-o select-all-items p-r-10"
+        data-ng-if="true"
+      >
+      </i>
+      <i
+        class="fa fa-check-square-o active-link select-all-items p-r-10"
+        data-ng-if="true"
+      >
+      </i>
+    </div>
+    <!--
+         TODO: MOBILE Manage Multi Download
+         Do not forget permissions
+    -->
+    <i
+      class="zmdi zmdi-download col-xs-2"
+      data-ng-class="{
+      'disabled': false
+      }"
+      data-ng-click="workgroupRevisionsVm.todo()"
+    >
+    </i>
+    <!--
+         TODO: MOBILE Manage Delete
+         Do not forget permissions
+    -->
+    <i
+      class="zmdi zmdi-delete col-xs-2"
+      data-ng-click="workgroupRevisionsVm.todo()"
+      data-ng-class="{
+      'disabled': false
+      }"
+    >
+    </i>
+    <!--
+         TODO: MOBILE Manage more actions
+         Do not forget permissions and multiplicity
+    -->
+    <span
+      class="dropdown col-xs-2 no-padding"
+      uib-dropdown
+      dropdown-append-to-body
+      auto-close="always"
+      is-open="isOpenItem"
+      data-ng-class="{
+      'open': isOpenItem,
+      'disabled': false
+      }"
+    >
+      <i
+        class="zmdi zmdi-more"
+        uib-dropdown-toggle
+        event-propagation-stop
+      >
+      </i>
+      <ul
+        class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-other-actions"
+        uib-dropdown-menu
+        data-ng-class="{
+        'open' : isOpenItem
+        }"
+      >
+        <!--
+             TODO: MOBILE Manage see file details
+             Do not forget permissions
+        -->
+        <li data-ng-click="workgroupRevisionsVm.todo()">
+          <a>
+            <i class="zmdi zmdi-info"></i>
+            <span translate>
+              ACTION.INFORMATION
+            </span>
+          </a>
+        </li>
+        <li class="divider"></li>
+        <!--
+             TODO: MOBILE Manage Rename
+             Do not forget permissions
+        -->
+        <li
+          data-ng-class="{
+          'disable-link': false
+          }"
+          data-ng-click="workgroupRevisionsVm.todo()"
+        >
+          <a>
+            <i class="zmdi zmdi-border-color"></i>
+            <span translate>
+              ACTION.RENAME
+            </span>
+          </a>
+        </li>
+        <!--
+             TODO: MOBILE Manage Restore
+             Do not forget permissions
+        -->
+        <li
+          data-ng-class="{
+          'disable-link': false
+          }"
+          data-ng-click="workgroupRevisionsVm.todo()"
+        >
+          <a>
+            <i class="zmdi zmdi-time-restore"></i>
+            <span translate>
+              ACTION.RESTORE
+            </span>
+          </a>
+        </li>
+        <!--
+             TODO: MOBILE Manage Copy
+             Do not forget permissions and functionallities activation
+        -->
+        <li
+          data-ng-class="{
+          'disable-link': false
+          }"
+          data-ng-click="workgroupRevisionsVm.todo()"
+        >
+          <a>
+            <i class="ls-my-space"></i>
+            <span translate>
+              ACTION.COPY_DROPDOWN.PERSONAL_SPACE
+            </span>
+          </a>
+        </li>
+        <li
+          data-ng-class="{
+          'disable-link': false
+          }"
+          data-ng-click="workgroupRevisionsVm.todo()"
+        >
+          <a>
+            <i class="ls-workgroup"></i>
+            <span translate>
+              ACTION.COPY_DROPDOWN.SHARED_SPACE
+            </span>
+          </a>
+        </li>
+      </ul>
+    </span>
+  </div>
+  <!--
+       TODO: MOBILE Manage Toolbar close
+  -->
+  <div class="col-xs-2 pull-right">
+    <i
+      class="zmdi zmdi zmdi-close"
+      data-ng-click="workgroupRevisionsVm.resetSelectedDocuments()"
+    >
+    </i>
+  </div>
+</section>
