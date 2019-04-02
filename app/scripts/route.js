@@ -287,6 +287,18 @@
             return workgroupNodesRestService.get(
               $transition$.params().workgroupUuid, $transition$.params().folderUuid, true);
           },
+          redirect: function(currentFolder, $state, $stateParams) {
+            if(currentFolder.type === 'DOCUMENT') {
+              return $state.go('sharedspace.workgroups.revision', {
+                workgroupUuid: $stateParams.workgroupUuid,
+                workgroupName: $stateParams.workgroupName,
+                fileUuid: $stateParams.folderUuid,
+                fileName: $stateParams.folderName
+              });
+            }
+
+            return;
+          },
           nodesList: function(workgroupNodesRestService, $transition$) {
             return workgroupNodesRestService.getList(
               $transition$.params().workgroupUuid, $transition$.params().folderUuid);
@@ -328,11 +340,51 @@
           }
         }
       })
-      .state('sharedspace.revision', {
-        url: '/revision',
+      .state('sharedspace.workgroups.revision', {
+        url: '/:workgroupUuid/:workgroupName/:fileUuid/:fileName',
         templateUrl: 'modules/linshare.sharedSpace/views/workgroupRevisionsList.html',
         controller: 'WorkgroupRevisionsController',
         controllerAs: 'workgroupRevisionsVm',
+        params: {
+          uploadedFileUuid: null,
+          parentUuid: null,
+          workgroupName: '',
+          fileUuid: null,
+          fileName: ''
+        },
+        resolve: {
+          currentFolder: function(workgroupNodesRestService, $transition$) {
+            return workgroupNodesRestService.get(
+              $transition$.params().workgroupUuid, $transition$.params().fileUuid, true);
+          },
+          nodesList: function(workgroupNodesRestService, $transition$) {
+            return workgroupNodesRestService.getList(
+              $transition$.params().workgroupUuid, $transition$.params().fileUuid);
+          },
+          workgroup: function($transition$, workgroupRestService) {
+            return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
+              return workgroup;
+            });
+          },
+          workgroupPermissions: function(workgroup, workgroupPermissionsService) {
+            return workgroupPermissionsService
+              .getWorkgroupsPermissions([workgroup])
+              .then(function(workgroupPermissions) {
+                const permissions = workgroupPermissionsService.formatPermissions(workgroupPermissions);
+
+                return permissions[Object.keys(permissions)[0]];
+              });
+          },
+          workgroupRole: function(workgroup, workgroupRolesService) {
+            return workgroupRolesService
+              .getWorkgroupsRoles([workgroup])
+              .then(function(workgroupsRoles) {
+                const roles = workgroupRolesService.formatRoles(workgroupsRoles);
+
+                return roles[Object.keys(roles)[0]];
+              });
+          }
+        }
       })
       .state('administration', {
         parent: 'common',

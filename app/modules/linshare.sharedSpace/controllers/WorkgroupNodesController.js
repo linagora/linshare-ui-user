@@ -592,11 +592,11 @@
         uploadedFileUuid: selectFileUuid
       };
       var isNotInEditMode = true;
-      var canEnter = true;
+      var isFolder = true;
       var routeStateSuffix = 'root';
 
       if(!_.isNil(folder)) {
-        canEnter = !workgroupNodesVm.isDocument(folder.type);
+        isFolder = !workgroupNodesVm.isDocument(folder.type);
         if (!forceEnter) {
           folderNameElem = $('td[uuid=' + folder.uuid + ']').find('.file-name-disp');
           isNotInEditMode = (angular.element(folderNameElem).attr('contenteditable') === 'false');
@@ -612,8 +612,22 @@
         routeStateSuffix = folderDetails.parentUuid !== folderDetails.workgroupUuid ? 'folder' : 'root';
       }
 
-      if (canEnter && isNotInEditMode) {
-        $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
+      if(isNotInEditMode) {
+        if (isFolder) {
+          $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
+        }
+        else {
+          workgroupNodesVm.getNodeDetails(folder).then(function(data) {
+            var documentDetails = {
+              workgroupUuid: folder.workgroupUuid || workgroupNodesVm.folderDetails.workgroupUuid,
+              workgroupName: folder.workgroupName || workgroupNodesVm.folderDetails.workgroupName.trim(),
+              parentUuid: folder.parent,
+              fileUuid: data.uuid,
+              fileName: data.name.trim()
+            }
+            $state.go('sharedspace.workgroups.revision', documentDetails);
+          });
+        }
       }
     }
 
