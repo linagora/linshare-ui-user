@@ -35,7 +35,8 @@
     "RENAME": "Đổi tên",
     "SHARE": "Chia sẻ",
     "SILENCE": "khoảng lặng",
-    "VIEW_VERSIONING": "Xem các cập nhật trước"
+    "VIEW_VERSIONING": "Xem các cập nhật trước",
+    "SEE_REVISIONS": "Xem bản sửa đổi"
   },
   "ACTIVITIES": "Hoạt động",
   "ADD_FILES_DROPDOWN": {

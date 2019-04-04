@@ -35,7 +35,8 @@
     "RENAME": "Rename",
     "SHARE": "Share",
     "SILENCE": "Silence",
-    "VIEW_VERSIONING": "View previous updates"
+    "VIEW_VERSIONING": "View previous updates",
+    "SEE_REVISIONS": "Manage version"
   },
   "ACTIVITIES": "Activities",
   "ADD_FILES_DROPDOWN": {

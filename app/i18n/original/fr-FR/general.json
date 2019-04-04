@@ -35,7 +35,8 @@
     "RENAME": "Renommer",
     "SHARE": "Partager",
     "SILENCE": "Silence",
-    "VIEW_VERSIONING": "Voir l'historique"
+    "VIEW_VERSIONING": "Voir l'historique",
+    "SEE_REVISIONS": "Voir les révisions"
   },
   "ACTIVITIES": "Activités",
   "ADD_FILES_DROPDOWN": {
