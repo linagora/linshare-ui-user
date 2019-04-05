@@ -256,6 +256,7 @@
   "UNKNOWN_USER": "Người dùng không xác định",
   "UNKNOWN_FIRST_LETTER": "UNK",
   "UPLOAD_DONE": "{singular, select, true {<b> {fileName} </ b> đã được} khác {Một số tệp đã được}} tải lên thành công",
+  "TBD__UPLOAD_REVISION_DONE": "",
   "USER_QUOTAS": {
     "DOMAIN": "Đã sử dụng miền",
     "MAX_FILE_SIZE": "Kích thước tệp tối đa",

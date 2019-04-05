@@ -187,12 +187,18 @@
              return flowFile.linshareDocument;
           });
 
-          var toastMsg = {key: 'UPLOAD_DONE', pluralization: true};
-          if (files.length === 1) {
-            toastMsg.params = {
-              fileName: file.name,
-              singular: 'true'
-            };
+          var toastMsg;
+
+          if (file.isRevision && files.length === 1) {
+            toastMsg = {key: 'UPLOAD_REVISION_DONE', params: {fileName: file.name}};
+          } else {
+            toastMsg = {key: 'UPLOAD_DONE', pluralization: true};
+            if (files.length === 1) {
+              toastMsg.params = {
+                fileName: file.name,
+                singular: 'true'
+              };
+            }
           }
           toastService.success(toastMsg);
         }
