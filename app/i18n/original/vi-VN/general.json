@@ -30,6 +30,7 @@
     "NEW_FOLDER": "Thư mục mới",
     "NEW_ITEM": "Mới",
     "NEW_WORKGROUP": "Nhóm làm việc mới",
+    "TBT__NEW_REVISION": "",
     "PREVIEW": "Xem trước",
     "REFRESH": "Làm mới",
     "RENAME": "Đổi tên",
@@ -41,8 +42,7 @@
   "ACTIVITIES": "Hoạt động",
   "ADD_FILES_DROPDOWN": {
     "UPLOAD_FILE": "Tải tập tin lên",
-    "UPLOAD_IN_GROUP": "Tải tập tin vào nhóm",
-    "UPLOAD_IN_GROUP": "Tải lên trong một nhóm",
+    "UPLOAD_IN_GROUP": "Thêm tập tin vào nhóm",
     "UPLOAD_IN_MY_FILES": "Trong các tệp của tôi",
     "UPLOAD_IN_WORKGROUP": "Tải lên trong một nhóm làm việc",
     "UPLOAD_SHARE": "Tải lên và chia sẻ"

@@ -1,38 +1,27 @@
-<!--
-     TODO: Use this to manage drop area
-     * Drop activation
-     * Drop action on add
-     * Drop action on success
--->
 <div
   drag-and-drop
-  drag-and-drop-flow="$flow"
-  drag-and-drop-added="workgroupRevisionsVm.todo()"
-  drag-and-drop-enabled="false"
-  drag-and-drop-success="workgroupRevisionsVm.todo()"
+  drag-and-drop drag-and-drop-flow="$flow"
+  drag-and-drop-submitted="workgroupRevisionsVm.upload(files,workgroupRevisionsVm.folderDetails)"
+  drag-and-drop-enabled="::workgroupRevisionsVm.permissions.FILE.CREATE"
+  drag-and-drop-success="workgroupRevisionsVm.addUploadedDocument(file, $message)"
 >
   <div class="container files">
     <div class="card">
       <div class="card-header">
-        <!--
-             TODO: Manage main `+` button action
-             * Check permissions
-             * Add action
-        -->
         <div
           id="breadcrumb-wrap"
           class="deep-nav multi-toolbar-options"
         >
           <div
+            flow-btn
             class="menu-popover-ctn hidden-xs clickable waves-effect"
             tooltip-placement="bottom"
             tooltip-popup-delay="500"
-            translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
+            translate-attr="{'uib-tooltip': 'ACTION.NEW_REVISION'}"
           >
             <a
               class="add-menu-group"
-              tabindex="0"
-              data-ng-click="workgroupRevisionsVm.todo()"
+              data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.CREATE}"
             >
               <i class="zmdi zmdi-plus"></i>
             </a>
@@ -395,7 +384,7 @@
                       class="clearfix"
                       filter-box-size="true"
                       filter-box-date="true"
-                      filter-box-items="workgroupRevisionsVm.nodesList"
+                      filter-box-items="workgroupRevisionsVm.revisionsList"
                       filter-box-table="workgroupRevisionsVm.tableParams"
                     >
                     </filter-box>
@@ -817,7 +806,7 @@
                 data-selected-documents="workgroupRevisionsVm.selectedDocuments"
                 data-document-file="nodeItem"
                 data-current-selected-document="workgroupRevisionsVm.currentSelectedDocument"
-                data-details-function="workgroupRevisionsVm.todo()"
+                data-details-function="workgroupRevisionsVm.getNodeDetails"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()"
                 data-ng-class="{
                 'highlight-list-elem': nodeItem.isSelected ,
@@ -1026,7 +1015,7 @@
                             -->
                             <li
                               data-ng-class="{
-                              'disable-link':
+                              'disable-link': false
                               }"
                             >
                               <a data-ng-click="workgroupRevisionsVm.todo()">

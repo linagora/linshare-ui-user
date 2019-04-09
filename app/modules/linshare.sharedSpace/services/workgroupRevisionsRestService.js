@@ -28,7 +28,9 @@
       get: get,
       getList: getList,
       remove: remove,
-      restore: restore
+      restore: restore,
+      getAudit: getAudit,
+      thumbnail: thumbnail
     };
 
     return service;
@@ -155,6 +157,14 @@
           kind: 'SHARED_SPACE',
           uuid: revisionNodeUuid,
         });
+    }
+
+    function getAudit(workgroupUuid, nodeUuid) {
+      console.log('getAudit: Please code me and add documentation');
+    }
+
+    function thumbnail(workgroupUuid, nodeUuid) {
+      console.log('thumbnail: Please code me and add documentation');
     }
   }
 })();
