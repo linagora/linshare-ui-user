@@ -728,27 +728,30 @@
      * @desc Open browser of folders to copy/move a node
      * @param {Array<Object>} nodeItems - Nodes to copy/move
      * @param {boolean} isMove - Check if it is a copy/move
+     * @param {boolean} canDisplayFiles - Enable display of files to allow revision add.
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function openBrowser(nodeItems, isMove) {
+    function openBrowser(nodeItems, isMove, canDisplayFiles) {
       var currentFolder = null;
 
       if(workgroupPermissions.FOLDER.CREATE) {
         currentFolder = _.cloneDeep(workgroupNodesVm.currentFolder);
       }
 
+      var nodeList = canDisplayFiles ? _.clone(workgroupNodesVm.nodesList) : _.filter(
+          workgroupNodesVm.nodesList,
+          {'type': TYPE_FOLDER}
+      );
       browseService.show({
         currentFolder: currentFolder,
         currentList: _.orderBy(
-          _.filter(
-            workgroupNodesVm.nodesList,
-            {'type': TYPE_FOLDER}
-          ),
+          nodeList,
           'modificationDate',
           'desc'
         ),
         nodeItems: nodeItems,
         isMove: isMove,
+        canDisplayFiles: canDisplayFiles,
         hasFolder:  _.some(nodeItems, {'type': TYPE_FOLDER}),
         hasFile:  _.some(nodeItems, {'type': TYPE_DOCUMENT}),
         restService: workgroupNodesRestService

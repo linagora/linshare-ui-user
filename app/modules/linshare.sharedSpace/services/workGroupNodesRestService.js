@@ -46,6 +46,28 @@
     ////////////
 
     /**
+     * The Workgroup Node object.
+     * @typedef {Object} WorkgroupNode
+     * @type {String} key - WorkgroupNode uuid
+     * @type {String} type - The type of the WorkgroupNode either FOLDER|DOCUMENT
+     * @type {String} name - The name of the WorkgroupNode
+     * @type {String} parent - The uuid of the parent WorkgroupNode
+     * @type {String} workGroup - The uuid of the Workgroup
+     * @type {String} description - The WorkgroupNode description
+     * @type {Object} metadata - The WorkgroupNode metadata
+     * @type {Object} lastAuthor - The user that did the last modification
+     * @type {Date} creationDate - The Date of creation of the WorkgroupNode
+     * @type {String} modificationDate - The last modification date
+     * @type {number} size - The WorkgroupNode size in bytes
+     * @type {String} mimeType - The mime type of the WorkGroupNode
+     * @type {String} sha256sum - The mime type of the WorkGroupNode
+     * @type {Date} uploadDate - The date of the WorkgroupNode upload
+     * @type {boolean} isRevision - is the WorkgroupNode a revision.
+     * @memberOf LinShare.sharedSpace.workgroupNodesRestService
+     */
+
+
+    /**
      * @name activate
      * @desc Activation function of the service, launch at every instantiation
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService

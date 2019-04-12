@@ -44,21 +44,22 @@
       <div class="lv-ctn">
         <div
           class="lv-tem"
-          data-ng-repeat="folder in browseVm.currentList"
-          data-ng-click="browseVm.goToFolder(folder)"
+          data-ng-repeat="node in browseVm.currentList"
+          data-ng-click="browseVm.handleActionOnNodeSelection(node)"
           data-ng-class="{
-          'disabled' : browseVm.disableFolder(folder) ||
+          'disabled' : browseVm.disableFolder(node) ||
           (browseVm.isSharedSpace && !browseVm.isMove
-          && browseVm.hasFile && !browseVm.permissions[folder.uuid].FILE.CREATE)
+          && browseVm.hasFile && !browseVm.permissions[node.uuid].FILE.CREATE)
           }"
-          uuid={{::folder.uuid}}
+          uuid={{::node.uuid}}
         >
           <div class="lv-icon-ctn lv-col-1 center">
-            <span class="ls-folder" data-ng-if="!browseVm.isSharedSpace"></span>
+            <span data-ng-class="'{{::node.mimeType | mimetypeIcone}}'" data-ng-if="!browseVm.isSharedSpace && node.type === browseVm.TYPE_DOCUMENT"></span>
+            <span class="ls-folder" data-ng-if="!browseVm.isSharedSpace && node.type === browseVm.TYPE_FOLDER"></span>
             <span class="ls-workgroup" data-ng-if="browseVm.isSharedSpace"></span>
           </div>
           <div class="lv-name lv-col-2 file-name-disp single-line" spellcheck="false" contenteditable="false">
-            <p class="set-ellipsis">{{::folder.name}}</p>
+            <p class="set-ellipsis">{{::node.name}}</p>
           </div>
           <div class="lv-actions-link lv-col-3 center">
             <span class="zmdi zmdi-chevron-right"></span>

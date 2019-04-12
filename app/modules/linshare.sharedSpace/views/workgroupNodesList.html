@@ -442,7 +442,7 @@
                       </a>
                     </li>
                     <li
-                      data-ng-click="workgroupNodesVm.openBrowser(workgroupNodesVm.selectedDocuments)"
+                      data-ng-click="workgroupNodesVm.openBrowser(workgroupNodesVm.selectedDocuments, false, true)"
                       data-ng-class="{
                       'disable-link' :
                       !(workgroupNodesVm.areAllSameType() &&
@@ -708,7 +708,7 @@
                                   </a>
                                 </li>
                                 <li
-                                  data-ng-click="workgroupNodesVm.openBrowser([nodeItem])"
+                                  data-ng-click="workgroupNodesVm.openBrowser([nodeItem], false, true)"
                                   data-ng-class="{
                                   'disable-link' :
                                   !(nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
@@ -746,7 +746,7 @@
                               !(nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
                               workgroupNodesVm.permissions.FILE.READ)
                               }"
-                              data-ng-click="workgroupNodesVm.openBrowser([nodeItem])">
+                              data-ng-click="workgroupNodesVm.openBrowser([nodeItem], false, true)">
                               <a>
                                 <i class="ls-workgroup"></i>
                                 <span translate>ACTION.COPY_TO</span>
@@ -1003,7 +1003,7 @@
           !(workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT &&
           workgroupNodesVm.permissions.FILE.READ)
           }"
-          data-ng-click="workgroupNodesVm.openBrowser([workgroupNodesVm.selectedDocuments[0]])"
+          data-ng-click="workgroupNodesVm.openBrowser([workgroupNodesVm.selectedDocuments[0]], false, true)"
         >
           <a>
             <i class="ls-workgroup"></i>

@@ -22,7 +22,8 @@
     'toastService',
     'workgroupNodesRestService',
     'workgroupPermissionsService',
-    'workgroupRestService'
+    'workgroupRestService',
+    'workgroupRevisionsRestService'
   ];
 
   /**
@@ -45,15 +46,20 @@
     toastService,
     workgroupNodesRestService,
     workgroupPermissionsService,
-    workgroupRestService
+    workgroupRestService,
+    workgroupRevisionsRestService
   ) {
     /* jshint validthis:true */
     var browseVm = this;
     var newFolderName;
     const TYPE_FOLDER = 'FOLDER';
+    const TYPE_DOCUMENT = 'DOCUMENT';
+    browseVm.TYPE_FOLDER = TYPE_FOLDER;
+    browseVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
     browseVm.createFolder = createFolder;
     browseVm.disableFolder = disableFolder;
     browseVm.goToFolder = goToFolder;
+    browseVm.handleActionOnNodeSelection = handleActionOnNodeSelection;
 
     activate();
 
@@ -68,6 +74,9 @@
       browseVm.permissions = {};
       browseVm.isSharedSpace = false;
       browseVm.canCreateFolder = false;
+
+      // Cannot add revision with multiple nodes
+      browseVm.canDisplayFiles = browseVm.canDisplayFiles && browseVm.nodeItems && browseVm.nodeItems.length === 1
 
       functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
         .then(function(creationRight) {
@@ -88,6 +97,31 @@
       $transitions.onStart({}, function() {
         browseVm.$mdDialog.cancel();
       });
+    }
+
+    /**
+     * @name addRevision
+     * @desc Add the select item as a new revision of the note
+     * @param {Object} node - Node to update
+     * @memberOf linshare.components.BrowseController
+     */
+    function addRevision(node) {
+      var source = browseVm.nodeItems[0];
+      var nodeItems= [];
+      var failedNodes= [];
+      workgroupRevisionsRestService.copy(node.workGroup, node.uuid, source.uuid)
+        .then(function() {
+          nodeItems = [source];
+        }).catch(function () {
+          failedNodes = [source];
+        })
+        .finally(function() {
+          browseVm.$mdDialog.hide({
+            nodeItems: nodeItems,
+            failedNodes: failedNodes,
+            folder: browseVm.currentFolder
+          });
+        });
     }
 
     /**
@@ -160,6 +194,20 @@
     }
 
     /**
+     * @name filterNodeListByType
+     * @desc Filter out files from list if browser can't display files
+     * @return {Array<Object>} list - list to filter
+     * @return {Array<Object>} list - copy of list param with files filtered out if canDisplayFiles is false
+     * @memberOf linshare.components.BrowseController
+     */
+    function filterNodeListByType(list) {
+      if (browseVm.canDisplayFiles) {
+        return _.clone(list);
+      }
+      return _.filter(list, {'type': TYPE_FOLDER});
+    }
+
+    /**
      * @name goToFolder
      * @desc Enter inside a folder
      * @param {Object} selectedFolder - Folder where to enter
@@ -178,7 +226,7 @@
           browseVm.currentFolder.workgroupUuid = currentFolder.workGroup;
           browseVm.currentFolder.workgroupName = currentFolder.name;
           browseVm.restService.getList(currentFolder.workGroup).then(function(currentList) {
-            browseVm.currentList = _.orderBy(_.filter(currentList, {'type': TYPE_FOLDER}), 'modificationDate', 'desc');
+            browseVm.currentList = _.orderBy(filterNodeListByType(currentList), 'modificationDate', 'desc');
             browseVm.isSharedSpace = false;
           });
         });
@@ -187,7 +235,8 @@
         loadBrowseList();
       } else if (browseVm.canCreateFolder) {
         var folderUuid = goToParent ? selectedFolder.parent : selectedFolder.uuid;
-        browseVm.restService.getList(selectedFolder.workGroup, folderUuid, TYPE_FOLDER).then(function(folders) {
+        var type = !browseVm.canDisplayFiles ? TYPE_FOLDER : undefined;
+        browseVm.restService.getList(selectedFolder.workGroup, folderUuid, type).then(function(folders) {
           browseVm.currentList = _.orderBy(folders, 'modificationDate', 'desc');
         });
 
@@ -303,6 +352,20 @@
             break;
         }
       });
+    }
+
+    /**
+     * @name handleActionOnNodeSelection
+     * @desc handle selection of a node and dispatch to the action bind to the node type
+     * @param {WorkgroupNode} node - The selected node
+     * @memberOf linshare.components.BrowseController
+     */
+    function handleActionOnNodeSelection(node) {
+      if (node.type === TYPE_DOCUMENT) {
+        addRevision(node);
+      } else {
+        goToFolder(node);
+      }
     }
   }
 })();
