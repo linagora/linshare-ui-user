@@ -77,7 +77,7 @@
      */
     function copy(workgroupUuid, destinationNodeUuid, revisionNodeUuid) {
       $log.debug('workgroupRevisionsRestService :  download', workgroupUuid, destinationNodeUuid, revisionNodeUuid);
-      return Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, destinationNodeUuid).one('copy')
+      return Restangular.one(restUrl, workgroupUuid).one(restParam, destinationNodeUuid).all('copy')
         .post({
           kind: 'SHARED_SPACE',
           uuid: revisionNodeUuid,
@@ -94,7 +94,7 @@
      */
     function download(workgroupUuid, revisionNodeUuid) {
       $log.debug('workgroupRevisionsRestService :  download', workgroupUuid, revisionNodeUuid);
-      return Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).one('download')
+      return Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).one('download')
         .getRequestedUrl();
     }
 
@@ -152,7 +152,7 @@
      */
     function restore(workgroupUuid, parentNodeUuid, revisionNodeUuid) {
       $log.debug('workgroupRevisionsRestService :  restore', workgroupUuid, parentNodeUuid, revisionNodeUuid);
-      return Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, parentNodeUuid).one('copy')
+      return Restangular.one(restUrl, workgroupUuid).one(restParam, parentNodeUuid).one('copy')
         .post({
           kind: 'SHARED_SPACE',
           uuid: revisionNodeUuid,
