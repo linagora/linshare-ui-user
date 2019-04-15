@@ -26,9 +26,6 @@
               <i class="zmdi zmdi-plus"></i>
             </a>
           </div>
-          <!--
-               TODO: Manage breadcrumb rendering
-          -->
           <div
             class="breadcrumbs-ctn hidden-xs"
             data-ng-class="{
@@ -36,12 +33,9 @@
                 'lv2-break': workgroupRevisionsVm.breadcrumb.length >= 2,
                 'lv4-break': workgroupRevisionsVm.breadcrumb.length >= 4}"
           >
-            <!--
-                 TODO: Manage navigation to parent => a Workgroup | Folder
-            -->
             <div
               class="left-arrow actions"
-              data-ng-click="workgroupRevisionsVm.todo()"
+              data-ng-click="::workgroupRevisionsVm.goToFolder(workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2])"
             >
               <a>
                 <i class="ls-previous-caret"></i>
@@ -56,21 +50,15 @@
               <span class="sub-category-chevron">
                 <i class="zmdi zmdi-chevron-right"></i>
               </span>
-              <!--
-                   TODO: Manage navigation to the parent Workgroup
-              -->
               <a
                 class="set-ellipsis"
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
                 tooltip-popup-delay="1200"
-                uib-tooltip="{{::workgroupRevisionsVm.workgroupName}}"
-                data-ng-click="workgroupRevisionsVm.todo()"
+                uib-tooltip="{{::workgroupRevisionsVm.folderDetails.workgroupName}}"
+                data-ng-click="::workgroupRevisionsVm.goToFolder()"
               >
-                <!--
-                     TODO: render workgroup name
-                -->
-                {{::workgroupRevisionsVm.workgroupName}}
+                {{::workgroupRevisionsVm.folderDetails.workgroupName}}
               </a>
             </div>
             <span
@@ -102,12 +90,9 @@
                 <div class="list-menu">
                   <p translate>BREADCRUMB_UPPER_LEVEL</p>
                   <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
-                    <!--
-                         TODO: Manage breadcrumb item and action on it
-                    -->
                     <li
                       data-ng-repeat="breadcrumbItem in workgroupRevisionsVm.breadcrumb.slice().reverse()"
-                      data-ng-click="workgroupRevisionsVm.todo()"
+                      data-ng-click="::workgroupRevisionsVm.goToFolder(breadcrumbItem)"
                     >
                       <a
                         class="set-ellipsis"
@@ -116,28 +101,22 @@
                         {{breadcrumbItem.name}}
                       </a>
                     </li>
-                    <!--
-                         TODO: Manage redirection to workgroup
-                    -->
                     <li>
                       <a class="set-ellipsis"
-                        data-ng-click="workgroupRevisionsVm.todo()"
+                        data-ng-click="::workgroupRevisionsVm.goToFolder()"
                       >
-                        {{workgroupRevisionsVm.workgroupName}}
+                        {{workgroupRevisionsVm.folderDetails.workgroupName}}
                       </a>
                     </li>
                   </ul>
                 </div>
               </div>
             </span>
-            <!--
-                 TODO: Manage breadcrumb item and redirection to workgroup
-            -->
             <div
               class="folder-level"
               data-ng-cloak
               data-ng-repeat="breadcrumbItem in workgroupRevisionsVm.breadcrumb"
-              data-ng-click="workgroupRevisionsVm.todo()"
+              data-ng-click="::workgroupRevisionsVm.goToFolder(breadcrumbItem)"
             >
               <span class="sub-category-chevron">
                 <i class="zmdi zmdi-chevron-right"></i>
@@ -151,6 +130,12 @@
               >
                 {{breadcrumbItem.name}}
               </a>
+              <span data-ng-if=$last>
+                <span class="sub-category-chevron-revision">
+                  <i class="zmdi zmdi-chevron-right"></i>
+                </span>
+                <a translate> VERSION </a>
+              </span>
             </div>
           </div>
           <div id="action-header">

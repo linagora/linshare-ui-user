@@ -3,7 +3,6 @@
     "ON_FILE_COPY": {
       "CANCEL_BUTTON": "Hủy bỏ!",
       "CONFIRM_BUTTON": "Sao chép",
-      "TEXT": "You are about to copy received {singular, select, true{a document} other{{nbItems} documents}} for a total of {totalSize} into your own files.",
       "TEXT": "Bạn sắp sao chép {singular, select, true{một tài liệu} other{{nbItems} tài liệu}} với tổng kích thước {totalSize} vào các tệp của riêng bạn.",
       "TITLE": "Sao chép tập tin"
     },

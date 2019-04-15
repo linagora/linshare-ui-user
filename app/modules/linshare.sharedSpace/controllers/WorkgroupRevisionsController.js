@@ -15,6 +15,7 @@
   WorkgroupRevisionsController.$inject = [
     '$q',
     '$scope',
+    '$state',
     '$transition$',
     'toastService',
     'nodesList',
@@ -34,6 +35,7 @@
   function WorkgroupRevisionsController(
     $q,
     $scope,
+    $state,
     $transition$,
     toastService,
     nodesList,
@@ -48,6 +50,8 @@
 
     workgroupRevisionsVm.todo = todo;
     workgroupRevisionsVm.folderDetails = _.cloneDeep($transition$.params());
+    workgroupRevisionsVm.currentFolder = currentFolder;
+    workgroupRevisionsVm.breadcrumb = [];
     workgroupRevisionsVm.upload = upload;
     workgroupRevisionsVm.revisionsList = nodesList;
     workgroupRevisionsVm.permissions = workgroupPermissions;
@@ -55,6 +59,7 @@
     workgroupRevisionsVm.flowUploadService = flowUploadService;
     workgroupRevisionsVm.getNodeDetails = getNodeDetails;
     workgroupRevisionsVm.addUploadedDocument = addUploadedDocument;
+    workgroupRevisionsVm.goToFolder = goToFolder;
 
     activate();
 
@@ -66,6 +71,7 @@
       workgroupRevisionsVm.folderDetails.quotaUuid = workgroup.quotaUuid;
 
       launchTableParamsInit();
+      getBreadcrumb();
     }
 
     function todo(){
@@ -158,6 +164,46 @@
 
       $scope.$flow.upload();
       workgroupRevisionsVm.tableParamsService.reloadTableParams();
+    }
+
+    /**
+     * @name getBreadcrumb
+     * @desc Generate breadcrumb object for revesion file view
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function getBreadcrumb() {
+      workgroupRevisionsVm.breadcrumb = workgroupRevisionsVm.currentFolder.treePath || [];
+      workgroupRevisionsVm.breadcrumb.shift();
+      workgroupRevisionsVm.breadcrumb.push({
+        name : workgroupRevisionsVm.currentFolder.name,
+        uuid: workgroupRevisionsVm.currentFolder.uuid
+      })
+    }
+
+    /**
+     * @name goToFolder
+     * @desc Enter inside a folder
+     * @param {object} folder - Folder where to enter
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function goToFolder(folder) {
+      var folderDetails = {
+        workgroupUuid: workgroupRevisionsVm.folderDetails.workgroupUuid,
+        workgroupName: workgroupRevisionsVm.folderDetails.workgroupName.trim()
+      };
+      var routeStateSuffix = 'root';
+
+      if(!_.isNil(folder)) {
+        folderDetails = {
+          workgroupUuid: folder.workgroupUuid || workgroupRevisionsVm.folderDetails.workgroupUuid,
+          workgroupName: folder.workgroupName || workgroupRevisionsVm.folderDetails.workgroupName.trim(),
+          parentUuid: folder.parent,
+          folderUuid: folder.uuid,
+          folderName: folder.name.trim()
+        };
+        routeStateSuffix = folderDetails.parentUuid !== folderDetails.workgroupUuid ? 'folder' : 'root';
+      }
+        $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
     }
   }
 })();
