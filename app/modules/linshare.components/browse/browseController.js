@@ -76,7 +76,7 @@
       browseVm.canCreateFolder = false;
 
       // Cannot add revision with multiple nodes
-      browseVm.canDisplayFiles = browseVm.canDisplayFiles && browseVm.nodeItems && browseVm.nodeItems.length === 1
+      browseVm.canDisplayFiles = browseVm.canDisplayFiles && browseVm.nodeItems && browseVm.nodeItems.length === 1;
 
       functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
         .then(function(creationRight) {

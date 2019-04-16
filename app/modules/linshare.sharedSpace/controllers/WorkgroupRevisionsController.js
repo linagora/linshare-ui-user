@@ -13,12 +13,14 @@
     .controller('WorkgroupRevisionsController', WorkgroupRevisionsController);
 
   WorkgroupRevisionsController.$inject = [
+    '_',
     '$filter',
     '$q',
     '$scope',
     '$state',
     '$transition$',
     'auditDetailsService',
+    'browseService',
     'currentFolder',
     'documentUtilsService',
     'flowUploadService',
@@ -38,12 +40,14 @@
    * @revisionOf LinShare.sharedSpace
    */
   function WorkgroupRevisionsController(
+    _,
     $filter,
     $q,
     $scope,
     $state,
     $transition$,
     auditDetailsService,
+    browseService,
     currentFolder,
     documentUtilsService,
     flowUploadService,
@@ -57,6 +61,9 @@
     workgroupRevisionsRestService
   ) {
     var workgroupRevisionsVm = this;
+
+    const TYPE_DOCUMENT = 'DOCUMENT';
+    const TYPE_FOLDER = 'FOLDER';
 
     workgroupRevisionsVm.paramFilter = {
       name: ''
@@ -75,6 +82,7 @@
     workgroupRevisionsVm.getNodeDetails = getNodeDetails;
     workgroupRevisionsVm.addUploadedDocument = addUploadedDocument;
     workgroupRevisionsVm.goToFolder = goToFolder;
+    workgroupRevisionsVm.openBrowser = openBrowser;
     workgroupRevisionsVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     workgroupRevisionsVm.addSelectedDocument = addSelectedDocument;
     workgroupRevisionsVm.showFileDetails = showFileDetails;
@@ -99,11 +107,10 @@
       toastService.error({key: 'Please code me!'});
     }
 
-
     function launchTableParamsInit() {
       tableParamsService.initTableParams(workgroupRevisionsVm.revisionsList, workgroupRevisionsVm.paramFilter,
         workgroupRevisionsVm.folderDetails.uploadedFileUuid)
-        .then(function(data) {
+        .then(function() {
           workgroupRevisionsVm.tableParamsService = tableParamsService;
           workgroupRevisionsVm.tableParams = tableParamsService.getTableParams();
           workgroupRevisionsVm.resetSelectedDocuments = tableParamsService.resetSelectedItems;
@@ -277,7 +284,6 @@
       workgroupRevisionsVm.tableParamsService.reloadTableParams();
     }
 
-
     function addUploadedDocument(flowFile) {
       if (flowFile.isRevision === true) {
         if (flowFile.folderDetails.workgroupUuid === workgroupRevisionsVm.folderDetails.workgroupUuid &&
@@ -287,6 +293,119 @@
           });
         }
       }
+    }
+
+    /**
+     * @name openBrowser
+     * @desc Open browser of folders to copy a revision
+     * @param {Array<Object>} nodeItems - Nodes to copy/move
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function openBrowser(nodeItems) {
+      browseService.show({
+        currentFolder: _.cloneDeep(workgroupRevisionsVm.currentFolder),
+        currentList: [],
+        nodeItems: nodeItems,
+        hasFolder:  _.some(nodeItems, {'type': TYPE_FOLDER}),
+        hasFile:  _.some(nodeItems, {'type': TYPE_DOCUMENT}),
+        restService: workgroupNodesRestService
+      }).then(function(data) {
+        openBrowserNotify(data);
+      }).finally(function() {
+        workgroupRevisionsVm.tableParamsService.reloadTableParams();
+      });
+    }
+
+    /**
+     * @name openBrowserNotify
+     * @desc Check result of browser close and notify it
+     * @param {object} data - mdDialog's close datas
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function openBrowserNotify(data) {
+      if (data.folder.uuid === workgroupRevisionsVm.currentFolder.uuid) {
+        notifyCopySuccess(data.nodeItems.length);
+      } else if (data.failedNodes.length) {
+        notifyBrowseActionError(data);
+      } else {
+        notifyBrowseActionSuccess(data);
+      }
+    }
+
+    // TODO Add mdDialog's close data type definition
+    /**
+     * @name notifyBrowseActionError
+     * @desc Notify when an error occurred on node copy
+     * @param {object} data - mdDialog's close datas
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function notifyBrowseActionError(data) {
+      var responses = [];
+      _.forEach(data.failedNodes, function(error) {
+        switch(error.data.errCode) {
+          case 26444 :
+            responses.push({
+              'title': error.nodeItem.name,
+              'message': {key: 'TOAST_ALERT.ERROR.COPY.26444'}
+            });
+            break;
+          case 26445 :
+          case 28005 :
+            responses.push({
+              'title': error.nodeItem.name,
+              'message': {key: 'TOAST_ALERT.ERROR.RENAME_NODE'}
+            });
+            break;
+        }
+      });
+
+      toastService.error({
+        key: 'TOAST_ALERT.ERROR.BROWSER_ACTION',
+        pluralization: true,
+        params: {
+          nbNodes: data.failedNodes.length,
+          singular: data.failedNodes.length === 1 ? 'true' : ''
+        }
+      }, undefined, responses.length ? responses : undefined);
+    }
+
+    /**
+     * @name notifyBrowseActionSuccess
+     * @desc Notify success on node copy
+     * @param {object} data - mdDialog's close datas
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function notifyBrowseActionSuccess(data) {
+      toastService.success({
+        key: 'TOAST_ALERT.ACTION.BROWSER_ACTION',
+        pluralization: true,
+        params: {
+          singular: data.nodeItems.length <= 1 ? 'true' : '',
+          folderName: data.folder.name
+        }
+      }, 'TOAST_ALERT.ACTION_BUTTON').then(function(response) {
+        if (!_.isUndefined(response)) {
+          if (response.actionClicked) {
+            var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
+
+            workgroupRevisionsVm.goToFolder(data.folder, true, nodeToSelectUuid);
+          }
+        }
+      });
+    }
+
+    /**
+     * @name notifyCopySuccess
+     * @desc Notify success on simple node copy
+     * @param {number} nbNodes - Number of nodes simple copy success
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function notifyCopySuccess(nbNodes) {
+      toastService.success({
+        key: 'TOAST_ALERT.ACTION.COPY_SAME_FOLDER',
+        pluralization: true,
+        params: {singular: nbNodes === 1 ? 'true' : ''}
+      });
     }
 
     function upload(flowFiles, folderDetails) {
