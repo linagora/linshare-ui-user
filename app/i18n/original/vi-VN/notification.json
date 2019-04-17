@@ -16,7 +16,10 @@
         "GUEST": "Bạn sắp xoá {singular, select, true{một khách} other{{nbItems} khách}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "RECEIVED_SHARE": "Bạn sắp xoá {singular, select, true{một tệp chia sẻ} other{{nbItems} tệp chia sẻ}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "WORKGROUP": "Bạn sắp xoá {singular, select, true{một nhóm làm việc} other{{nbItems} làm việc}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
-        "WORKGROUP_NODE": "Bạn sắp xoá {singular, select, true{một tài liệu hoặc thư mục} other{{nbItems} tài liêụ hoặc thư mục}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
+        "WORKGROUP_NODE": "Bạn sắp xoá {singular, select, true{một tài liệu hoặc thư mục} other{{nbItems} tài liêụ hoặc thư mục}} ! Hãy cẩn thận, hành động này không thể hoàn tác.",
+        "WORKGROUP_REVISION": "Bạn muốn xóa {singular, select, true{phiên bản} other{{nbItems} phiên bản}} ! Cẩn thận, hành động này không thể hoàn tác.",
+        "WORKGROUP_REVISION_LAST": "Đây là lần sửa đổi cuối cùng, bạn muốn xóa tập tin! Cẩn thận, hành động này không thể hoàn tác.",
+        "WORKGROUP_REVISION_ALL": "Bạn đã chọn tất cả sửa đổi hiện có, bạn muốn xóa tập tin! Cẩn thận, hành động này không thể hoàn tác."
       },
       "TITLE": "Bạn có chắc chắn không ?"
     },
@@ -56,6 +59,9 @@
       "DELETE": "Đã xóa thành công",
       "DELETE_SINGULAR": "Mục đã được xóa thành công.",
       "DELETE_PLURAL": "Các mục đã được xóa thành công.",
+      "TBT__DELETE_LAST_REVISION":"",
+      "TBT__DELETE_SINGULAR_REVISION": "",
+      "TBT__DELETE_PLURAL_REVISION": "",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} đã được xóa thành công khỏi Nhóm làm việc",
       "DETAILS": "Chi tiết",
       "INSERT": "Mục đã được thêm thành công.",
@@ -85,8 +91,11 @@
         "REJECTED_CHAR": "Tên không hợp lệ, bạn không thể sử dụng các ký tự sau: '{{rejectChar}}'"
       },
       "DELETE_ERROR": {
+        "TBT__error": "",
         "26006": "Xóa một thư mục không trống chưa được hỗ trợ",
-        "26444": "Bạn không có quyền xóa"
+        "26444": "Bạn không có quyền xóa",
+        "TBT__26448": "",
+        "TBT__26449": ""
       },
       "NO_RESPONSE_ERROR": "Lỗi khi không có phản hồi của máy chủ, xem nhật ký.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} đã là thành viên của Nhóm làm việc này."

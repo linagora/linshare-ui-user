@@ -16,7 +16,10 @@
         "GUEST": "You are about to remove {singular, select, true{a guest} other{{nbItems} guests}} ! Beware, this action cannot be undone.",
         "RECEIVED_SHARE": "You are about to remove {singular, select, true{a file share} other{{nbItems} files share}} ! Beware, this action cannot be undone.",
         "WORKGROUP": "You are about to remove {singular, select, true{a workgroup} other{{nbItems} workgroups}} ! Beware, this action cannot be undone.",
-        "WORKGROUP_NODE": "You are about to remove {singular, select, true{a document or folder} other{{nbItems} documents or folders}} ! Beware, this action cannot be undone."
+        "WORKGROUP_NODE": "You are about to remove {singular, select, true{a document or folder} other{{nbItems} documents or folders}} ! Beware, this action cannot be undone.",
+        "WORKGROUP_REVISION":"You are about to remove {singular, select, true{a version} other{{nbItems} versions}} ! Beware, this action cannot be undone.",
+        "WORKGROUP_REVISION_LAST": "This is the last version, you are about to delete the file! Beware, this action cannot be undone.",
+        "WORKGROUP_REVISION_ALL": "You have selected all existing versions, you are about to delete the file! Beware, this action cannot be undone."
       },
       "TITLE": "Deletion"
     },
@@ -56,6 +59,9 @@
       "DELETE": "Deletion succeeded",
       "DELETE_SINGULAR": "The item was deleted successfully.",
       "DELETE_PLURAL": "The items were deleted successfully.",
+      "DELETE_LAST_REVISION":"The file was deleted successfully",
+      "DELETE_SINGULAR_REVISION": "The version was deleted successfully.",
+      "DELETE_PLURAL_REVISION": "The versions were deleted successfully.",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} has been removed successfully from the Workgroup",
       "DETAILS": "Details",
       "INSERT": "The item was added successfully.",
@@ -85,8 +91,11 @@
         "REJECTED_CHAR": "The name is invalid, you cannot use the following characters: '{{rejectedChar}}'"
       },
       "DELETE_ERROR": {
+        "error": "An error occurred while deleting",
         "26006": "Deletion of a non-empty folder is not yet supported",
-        "26444": "You do not posses the rights to delete"
+        "26444": "You do not posses the rights to delete",
+        "26448": "The version has not been found",
+        "26449": "You can't delete the last version, try to delete the whole document"
       },
       "NO_RESPONSE_ERROR": "Error without server response, see logs.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} is already a member of this Workgroup."

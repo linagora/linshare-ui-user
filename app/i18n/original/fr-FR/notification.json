@@ -16,7 +16,10 @@
         "GUEST": "Vous êtes sur le point de supprimer {singular, select, true{un compte invité} other{{nbItems} comptes invités}}. Attention, cette action est irreversible.",
         "RECEIVED_SHARE": "Vous êtes sur le point de supprimer {singular, select, true{un partage} other{{nbItems} partages}}. Attention, cette action est irreversible.",
         "WORKGROUP": "Vous êtes sur le point de supprimer {singular, select, true{un groupe de travail} other{{nbItems} groupes de travail}}. Attention, cette action est irreversible.",
-        "WORKGROUP_NODE": "Vous êtes sur le point de supprimer {singular, select, true{un document ou dossier} other{{nbItems} documents ou dossiers}}. Attention, cette action est irreversible."
+        "WORKGROUP_NODE": "Vous êtes sur le point de supprimer {singular, select, true{un document ou dossier} other{{nbItems} documents ou dossiers}}! Attention, cette action est irreversible.",
+        "WORKGROUP_REVISION": "Vous êtes sur le point de supprimer {singular, select, true{une révision} other{{nbItems} des révisions}}! Attention, cette action est irreversible.",
+        "WORKGROUP_REVISION_LAST": "Il s'agit de la dernière révision, vous êtes sur le point de supprimer le fichier! Attention, cette action est irreversible.",
+        "WORKGROUP_REVISION_ALL": "Vous avez sélectionné toutes les révisions existantes, vous êtes sur le point de supprimer le fichier! Attention, cette action est irreversible."
       },
       "TITLE": "Êtes-vous sûr?"
     },
@@ -56,6 +59,9 @@
       "DELETE": "Suppression réussie",
       "DELETE_SINGULAR": "L'élément a été supprimé avec succès.",
       "DELETE_PLURAL": "Les éléments ont été supprimés avec succès.",
+      "DELETE_LAST_REVISION":"Le fichier a été supprimé avec succès.",
+      "DELETE_SINGULAR_REVISION": "La révision a été supprimée avec succès.",
+      "DELETE_PLURAL_REVISION": "Les révisions ont été supprimées avec succès.",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} a été supprimé du groupe de travail.",
       "DETAILS": "Détails",
       "INSERT": "L'élément a été ajouté avec succès.",
@@ -85,8 +91,11 @@
         "REJECTED_CHAR": "Le nom saisi est invalide, vous ne pouvez utiliser les caractères suivants: '{{rejectedChar}}'"
       },
       "DELETE_ERROR": {
+        "error": "Une erreur est survenue pendant la suppression",
         "26006": "La suppression de dossier remplit n'est pas encore supporté.",
-        "26444": "Vous ne possédez pas les droits de suppression"
+        "26444": "Vous ne possédez pas les droits de suppression",
+        "26448": "La révision n'a pas été trouvée",
+        "26449": "Vous ne pouvez pas supprimer la dernière révision, essayez de supprimer le document entier."
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} est déjà membre de ce groupe de travail."

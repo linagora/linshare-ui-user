@@ -90,6 +90,7 @@
     workgroupRevisionsVm.toggleSearchState = toggleSearchState;
     workgroupRevisionsVm.loadSidebarContent = loadSidebarContent;
     workgroupRevisionsVm.workgroupNode = lsAppConfig.workgroupNode;
+    workgroupRevisionsVm.deleteVersions = deleteVersions;
 
     activate();
 
@@ -279,7 +280,6 @@
         });
     }
 
-
     function addNewItemInTableParams(newItem) {
       workgroupRevisionsVm.revisionsList.push(newItem);
       workgroupRevisionsVm.tableParamsService.reloadTableParams();
@@ -454,6 +454,187 @@
         routeStateSuffix = folderDetails.parentUuid !== folderDetails.workgroupUuid ? 'folder' : 'root';
       }
         $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
+    }
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name deleteVersions
+     * @desc Delete versions and notify the user
+     * @param {Array<Object>} versions - List of versions to delete
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function deleteVersions(versions) {
+      var messageKey = documentUtilsService.itemUtilsConstant.WORKGROUP_REVISION;
+      var isLastRevision = false;
+
+      if(workgroupRevisionsVm.revisionsList.length === versions.length) {
+        isLastRevision = true;
+        messageKey = versions.length === 1
+        ? documentUtilsService.itemUtilsConstant.WORKGROUP_REVISION_LAST
+        : documentUtilsService.itemUtilsConstant.WORKGROUP_REVISION_ALL;
+      }
+
+      documentUtilsService.deleteItem(
+        versions,
+        messageKey,
+        function(versions) {
+          doDeleteRevison(versions, isLastRevision).then(showNotifications);
+        })
+    }
+
+    // TODO Add a service for delete nodes to avoid the huge duplication in revisions and nodes controller
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name doDeleteRevison
+     * @desc Delete versions
+     * @param {Array<Object>} versions - List of versions to delete
+     * @param {boolean} isLastRevision - Determine if the revision is the last one that exists
+     * @returns {Object} deleted and nonDeleted versions
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function doDeleteRevison(versions, isLastRevision) {
+      var removedVersions = [];
+
+      if(isLastRevision) {
+        removedVersions.push(workgroupRevisionsRestService.remove(versions[0].workGroup, versions[0].parent));
+      } else {
+        removedVersions = _.map(versions, function(version) {
+          return version.remove();
+        })
+      }
+
+      return $q
+        .allSettled(removedVersions)
+        .then(function(removeVersionsValues) {
+          var deletedVersions = getFulfilledValues(removeVersionsValues);
+          var nonDeletedVersions = getRejectedReasons(removeVersionsValues);
+
+          _.remove(workgroupRevisionsVm.revisionsList, function(version) {
+            return isDocumentContainedInCollection(deletedVersions, version);
+          });
+          
+          workgroupRevisionsVm.resetSelectedDocuments();
+          workgroupRevisionsVm.tableParamsService.reloadTableParams();
+          $scope.mainVm.sidebar.hide(versions);
+
+          return {
+            deletedVersions: deletedVersions,
+            nonDeletedVersions: nonDeletedVersions,
+            isLastVersiondeleted: isLastRevision
+          };
+        })
+        .finally(function(deleteVersionsResponse) {
+          isLastRevision && goToFolder(workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2]);
+
+          return deleteVersionsResponse;
+        })
+    }
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name getFulfilledValues
+     * @desc Get deleted versions
+     * @param {Array<Object>} allSettledAnswer - List of answers sent by the server about each deleted version
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function getFulfilledValues(allSettledAnswer) {
+      return _.map(
+        _.filter(
+          allSettledAnswer,
+          { state: 'fulfilled' }
+        ),
+        'value'
+      );
+    }
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name getRejectedReasons
+     * @desc Get the reason to reject the deletion of revisions
+     * @param {Array<Object>} allSettledAnswer - List of answers sent by the server about each deleted version
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function getRejectedReasons(allSettledAnswer) {
+      return _.map(
+        _.filter(
+          allSettledAnswer,
+          { state: 'rejected' }
+        ),
+        'reason'
+      );
+    }
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name isDocumentContainedInCollection
+     * @desc Detect if the document is contained in the collection by leveraging its uuid
+     * @param {Array<Object>} collection - List of document object
+     * @param {Object} document - A document object
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function isDocumentContainedInCollection(collection, document) {
+      var indexOfDocumentInCollection = _.findIndex(collection, function(collectionItem) {
+        return collectionItem.uuid === document.uuid;
+      });
+
+      return indexOfDocumentInCollection !== -1;
+    }
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name showNotifications
+     * @desc give user feedback about deleted versions
+     * @param {Array<Object>} deleteVersionsResponse - List of answers sent by the server about each deleted versions
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function showNotifications(deleteVersionsResponse) {
+      if (deleteVersionsResponse.nonDeletedVersions.length > 0) {
+        showErrorNotificationForNonDeletedVersions(deleteVersionsResponse.nonDeletedVersions);
+      } else {
+        showSuccessNotificationForDeletedVersions(deleteVersionsResponse.deletedVersions, deleteVersionsResponse.isLastVersiondeleted);
+      }
+    }
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name showSuccessNotificationForDeletedVersions
+     * @desc Show success notification about deleted versions
+     * @param {Array<Object>} deletedVersions - List of deleted versions
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function showSuccessNotificationForDeletedVersions(deletedVersions, isLastVersiondeleted) {
+      var message = "";
+      if(isLastVersiondeleted){
+        message = 'TOAST_ALERT.ACTION.DELETE_LAST_REVISION';
+      } else {
+        message = (deletedVersions.length === 1) ?
+          'TOAST_ALERT.ACTION.DELETE_SINGULAR_REVISION' :
+          'TOAST_ALERT.ACTION.DELETE_PLURAL_REVISION';
+      }
+
+      toastService.success({ key: message });
+    }
+
+    // TODO define more explicitly the type of the param (Object is too wide as a type)
+    /**
+     * @name showErrorNotificationForNonDeletedVersions
+     * @desc Show error notification about non-deleted versions
+     * @param {Array<Object>} nonDeletedVersions - List of non-deleted versions
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function showErrorNotificationForNonDeletedVersions(nonDeletedVersions) {
+      _.forEach(nonDeletedVersions, function(nonDeletedItem) {
+        if (nonDeletedItem.data.errCode === 26448) {
+          toastService.error({ key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26448' });
+        }
+        else if (nonDeletedItem.data.errCode === 26449) {
+          toastService.error({ key: 'TOAST_ALERT.ERROR.DELETE_ERROR.26449' });
+        }
+        else {
+          toastService.error({ key: 'TOAST_ALERT.ERROR.DELETE_ERROR.error' });
+        }
+      });
     }
   }
 })();
