@@ -139,22 +139,16 @@
             </div>
           </div>
           <div id="action-header">
-            <!--
-                 TODO: MOBILE Manage toolbar
-            -->
             <div class="fg-line toolbar-actions-items wide-action-bar">
               <span
                 class="visible-xs toolbar-mobile-item col-xs-3"
                 data-ng-click="showCheckboxes = !showCheckboxes"
               >
                 <a class="select-all-items plain-txt-btn">
-                  <!--
-                       TODO: Manage reset selection
-                  -->
                   <i
                     class="ls-multi-select"
                     data-ng-class="{'active-link': showCheckboxes}"
-                    data-ng-click="showCheckboxes && workgroupRevisionsVm.todo()"
+                    data-ng-click="showCheckboxes && workgroupRevisionsVm.resetSelectedDocuments()"
                   >
                   </i>
                 </a>
@@ -399,13 +393,10 @@
               <i class="fa fa-check-square-o"></i>
             </a>
           </div>
-          <!--
-               TODO: Manage exit actions toolbar
-          -->
           <div
             class="exit-selection actions"
             translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"
-            data-ng-click="workgroupRevisionsVm.todo()"
+            data-ng-click="workgroupRevisionsVm.resetSelectedDocuments()"
           >
             <a>
               <i class="zmdi zmdi-close"></i>
@@ -453,12 +444,9 @@
                 </i>
               </div>
             </div>
-            <!--
-                 TODO: Manage selection reset
-            -->
             <div
               class="pull-left view-icons-ctn reset-icon"
-              data-ng-click="workgroupRevisionsVm.todo()"
+              data-ng-click="workgroupRevisionsVm.resetSelectedDocuments()"
             >
               <i
                 class="fa fa-undo"
@@ -1320,9 +1308,6 @@
       </ul>
     </span>
   </div>
-  <!--
-       TODO: MOBILE Manage Toolbar close
-  -->
   <div class="col-xs-2 pull-right">
     <i
       class="zmdi zmdi zmdi-close"
