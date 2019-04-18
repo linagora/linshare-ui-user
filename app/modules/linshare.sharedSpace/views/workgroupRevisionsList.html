@@ -1104,16 +1104,11 @@
   </div>
 </div>
 
-<!--
-     TODO: MOBILE Manage toolbar
--->
 <div class="header-sidebar append-to-body visible-xs workgroup-header-nav">
-  <!--
-       TODO: MOBILE Go to parent folder | workgroup
-  -->
   <a
     class="zmdi zmdi-chevron-left zmdi-hc-2x"
-    data-ng-click="workgroupRevisionsVm.todo()"
+    data-ng-click="workgroupRevisionsVm.goToPreviousFolder((workgroupRevisionsVm.breadcrumb.length === 0),
+    workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2])"
   >
   </a>
   <h2 class="header-more-options set-ellipsis">
