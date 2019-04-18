@@ -287,8 +287,9 @@
             return workgroupNodesRestService.get(
               $transition$.params().workgroupUuid, $transition$.params().folderUuid, true);
           },
-          redirect: function(currentFolder, $state, $stateParams) {
+          redirect: function(currentFolder, $state, $stateParams, $transition$) {
             if(currentFolder.type === 'DOCUMENT') {
+              $transition$.abort();
               return $state.go('sharedspace.workgroups.revision', {
                 workgroupUuid: $stateParams.workgroupUuid,
                 workgroupName: $stateParams.workgroupName,
@@ -353,6 +354,12 @@
           fileName: ''
         },
         resolve: {
+          isRevisionEnable: function(functionalities, $state, $transition$) {
+            if (!functionalities.WORK_GROUP__FILE_VERSIONING.enable) {
+              $transition$.abort();
+              $state.go('home');
+            }
+          },
           currentFolder: function(workgroupNodesRestService, $transition$) {
             return workgroupNodesRestService.get(
               $transition$.params().workgroupUuid, $transition$.params().fileUuid, true);
