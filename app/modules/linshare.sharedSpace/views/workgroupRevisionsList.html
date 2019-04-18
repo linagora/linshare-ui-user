@@ -143,10 +143,6 @@
                  TODO: MOBILE Manage toolbar
             -->
             <div class="fg-line toolbar-actions-items wide-action-bar">
-
-              <!--
-                   TODO: Manage show checkboxes on mobile
-              -->
               <span
                 class="visible-xs toolbar-mobile-item col-xs-3"
                 data-ng-click="showCheckboxes = !showCheckboxes"
@@ -402,36 +398,25 @@
           <!-- data-ng-model="" -->
           <!-- > -->
         </div>
-        <!--
-             TODO: Actions Toolbar
-        -->
         <div
           id="selection-actions"
           class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
-          data-ng-class="{'show-multi-menu': false}"
+          data-ng-class="{'show-multi-menu': workgroupRevisionsVm.selectedDocuments.length > 0}"
         >
-          <!--
-               TODO: Manage check/uncheck elements
-          -->
           <div
             class="toggle-checkbox-toolbar"
-            data-ng-click="workgroupRevisionsVm.todo()"
+            data-ng-click="workgroupRevisionsVm.selectDocumentsOnCurrentPage(workgroupRevisionsVm.tableParams.data,
+            workgroupRevisionsVm.tableParams.page())"
           >
-            <!--
-                 TODO: Manage check
-            -->
             <a
               class="select-all-items plain-txt-btn"
-              data-ng-if=""
+              data-ng-if="!workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
             >
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
-            <!--
-                 TODO: Manage uncheck
-            -->
             <a
               class="select-all-items plain-txt-btn"
-              data-ng-if=""
+              data-ng-if="workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
             >
               <i class="fa fa-check-square-o"></i>
             </a>
@@ -466,9 +451,6 @@
               data-ng-click="workgroupRevisionsVm.toggleFilterBySelectedFiles()"
             >
               <p>
-                <!--
-                     TODO: Manage selected elements
-                -->
                 <span>{{workgroupRevisionsVm.selectedDocuments.length}}</span>
                 <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
               </p>
@@ -743,30 +725,22 @@
             </div>
           </div>
         </div>
-        <!--
-             TODO: Manage checkbox select/unselect All
-        -->
         <script type="text/ng-template" id="checkboxheader.html">
           <span
             class="display-block"
             role="button"
             tabindex="0"
-            data-ng-click="workgroupRevisionsVm.todo()"
+            data-ng-click="workgroupRevisionsVm.selectDocumentsOnCurrentPage(workgroupRevisionsVm.tableParams.data,
+            workgroupRevisionsVm.tableParams.page())"
           >
-            <!--
-                 TODO: Manage visual check all
-            -->
             <a
-              data-ng-if="true"
+              data-ng-if="!workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
               class="select-all-items plain-text-button checkboxCtn"
             >
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
-            <!--
-                 TODO: Manage visual uncheck all
-            -->
             <a
-              data-ng-if="true"
+              data-ng-if="workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
               class="select-all-items plain-text-button"
             >
               <i class="fa fa-check-square-o"></i>
@@ -806,10 +780,7 @@
                   data-header="'checkboxheader.html'"
                   header-class="'col-2 checkbox-col'"
                 >
-                  <!--
-                       TODO: Manage Add document to selection
-                  -->
-                  <a data-ng-click="(showCheckboxes || !isMobile) ? workgroupRevisionsVm.todo() : null">
+                  <a data-ng-click="(showCheckboxes || !isMobile) ? workgroupRevisionsVm.addSelectedDocument(nodeItem) : null">
                     <div data-ng-class="{ 'invisible' : showCheckboxes && isMobile}">
                       <i data-ng-class="'{{::nodeItem.mimeType | mimetypeIcone}}'"></i>
                     </div>
@@ -1209,7 +1180,7 @@
 -->
 <section
   class="row multi-select-mobile visible-xs append-to-body"
-  data-ng-class="{'showMobileMultiMenu': false}"
+  data-ng-class="{'showMobileMultiMenu': workgroupRevisionsVm.selectedDocuments.length > 0}"
 >
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">
@@ -1223,21 +1194,19 @@
     </span>
   </div>
   <div class="col-xs-8">
-    <!--
-         TODO: MOBILE Manage check | uncheck all
-    -->
     <div
-      data-ng-click="workgroupRevisionsVm.todo()"
+      data-ng-click="workgroupRevisionsVm.selectDocumentsOnCurrentPage(workgroupRevisionsVm.tableParams.data,
+      workgroupRevisionsVm.tableParams.page())"
       class="visible-xs toolbar-mobile-item col-xs-3 clickable"
     >
       <i
         class="fa fa-square-o select-all-items p-r-10"
-        data-ng-if="true"
+        data-ng-if="!workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
       >
       </i>
       <i
         class="fa fa-check-square-o active-link select-all-items p-r-10"
-        data-ng-if="true"
+        data-ng-if="workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
       >
       </i>
     </div>

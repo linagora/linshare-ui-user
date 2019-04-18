@@ -35,6 +35,7 @@
     function canDeleteNodes(Nodes, permission) {
       const type = {
         'DOCUMENT': 'FILE',
+        'DOCUMENT_REVISION': 'FILE',
         'FOLDER': 'FOLDER'
       };
 

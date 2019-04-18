@@ -13,17 +13,18 @@
     .controller('WorkgroupRevisionsController', WorkgroupRevisionsController);
 
   WorkgroupRevisionsController.$inject = [
+    '$filter',
     '$q',
     '$scope',
     '$state',
     '$transition$',
-    'toastService',
-    'nodesList',
-    'workgroupPermissions',
     'currentFolder',
-    'workgroup',
     'flowUploadService',
+    'nodesList',
     'tableParamsService',
+    'toastService',
+    'workgroup',
+    'workgroupPermissions',
     'workgroupRevisionsRestService'
   ];
 
@@ -33,21 +34,24 @@
    * @revisionOf LinShare.sharedSpace
    */
   function WorkgroupRevisionsController(
+    $filter,
     $q,
     $scope,
     $state,
     $transition$,
-    toastService,
-    nodesList,
-    workgroupPermissions,
     currentFolder,
-    workgroup,
     flowUploadService,
+    nodesList,
     tableParamsService,
+    toastService,
+    workgroup,
+    workgroupPermissions,
     workgroupRevisionsRestService
   ) {
     var workgroupRevisionsVm = this;
 
+    workgroupRevisionsVm.canDeleteNodes = false;
+    workgroupRevisionsVm.currentSelectedDocument = {};
     workgroupRevisionsVm.todo = todo;
     workgroupRevisionsVm.folderDetails = _.cloneDeep($transition$.params());
     workgroupRevisionsVm.currentFolder = currentFolder;
@@ -60,6 +64,8 @@
     workgroupRevisionsVm.getNodeDetails = getNodeDetails;
     workgroupRevisionsVm.addUploadedDocument = addUploadedDocument;
     workgroupRevisionsVm.goToFolder = goToFolder;
+    workgroupRevisionsVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
+    workgroupRevisionsVm.addSelectedDocument = addSelectedDocument;
 
     activate();
 
@@ -89,8 +95,43 @@
           workgroupRevisionsVm.selectedDocuments = tableParamsService.getSelectedItemsList();
           workgroupRevisionsVm.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
           workgroupRevisionsVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
+          workgroupRevisionsVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
         });
     }
+
+    // TODO: Define Revision type
+    /**
+     * @name addSelectedDocument
+     * @desc Select given document
+     * @param {Revision} item - {@link Revision} object
+     * @param {Number} page - Number of the page shown
+     * @param {Boolean} selectFlag - Value to set document as selected or not, default toggle current selection value
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function addSelectedDocument(item) {
+      tableParamsService.toggleItemSelection(item);
+      workgroupRevisionsVm.canDeleteNodes = $filter('canDeleteNodes')(
+        workgroupRevisionsVm.selectedDocuments,
+        workgroupRevisionsVm.permissions
+      );
+    };
+
+    // TODO: Define Revision type
+    /**
+     * @name selectDocumentOnCurrentPage
+     * @desc Select document of the current table page shown
+     * @param {Array<Revision>} data - List of document revision to select/unselect
+     * @param {Number} page - Number of the page shown
+     * @param {Boolean} selectFlag - Value to set document as selected or not, default toggle current selection value
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function selectDocumentsOnCurrentPage(data, page, selectFlag){
+      tableParamsService.tableSelectAll(data, page, selectFlag);
+      workgroupRevisionsVm.canDeleteNodes = $filter('canDeleteNodes')(
+        workgroupRevisionsVm.selectedDocuments,
+        workgroupRevisionsVm.permissions
+      );
+    };
 
     function getNodeDetails(nodeItem) {
       // TODO : change the watcher method in activate() of workgroupMembersController, then do it better
