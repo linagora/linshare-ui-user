@@ -159,9 +159,6 @@
                   </i>
                 </a>
               </span>
-              <!--
-                   TODO: Manage action see file details
-              -->
               <a
                 href=""
                 class="hidden-xs pull-left"
@@ -169,7 +166,7 @@
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
                 translate-attr="{'uib-tooltip': 'ACTION.INFO_FILE'}"
-                data-ng-click="workgroupRevisionsVm.todo()"
+                data-ng-click="workgroupRevisionsVm.showFileDetails()"
               >
                 <i
                   class="zmdi zmdi-file"
@@ -1161,7 +1158,7 @@
   -->
   <a
     class="pull-right return-to-wkgrps zmdi zmdi-file"
-    data-ng-click="workgroupRevisionsVm.todo()"
+    data-ng-click="workgroupRevisionsVm.showFileDetails()"
   >
   </a>
   <!--

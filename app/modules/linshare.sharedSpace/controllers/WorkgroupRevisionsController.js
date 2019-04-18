@@ -18,12 +18,16 @@
     '$scope',
     '$state',
     '$transition$',
+    'auditDetailsService',
     'currentFolder',
+    'documentUtilsService',
     'flowUploadService',
+    'lsAppConfig',
     'nodesList',
     'tableParamsService',
     'toastService',
     'workgroup',
+    'workgroupNodesRestService',
     'workgroupPermissions',
     'workgroupRevisionsRestService'
   ];
@@ -39,12 +43,16 @@
     $scope,
     $state,
     $transition$,
+    auditDetailsService,
     currentFolder,
+    documentUtilsService,
     flowUploadService,
+    lsAppConfig,
     nodesList,
     tableParamsService,
     toastService,
     workgroup,
+    workgroupNodesRestService,
     workgroupPermissions,
     workgroupRevisionsRestService
   ) {
@@ -66,6 +74,9 @@
     workgroupRevisionsVm.goToFolder = goToFolder;
     workgroupRevisionsVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     workgroupRevisionsVm.addSelectedDocument = addSelectedDocument;
+    workgroupRevisionsVm.showFileDetails = showFileDetails;
+    workgroupRevisionsVm.loadSidebarContent = loadSidebarContent;
+    workgroupRevisionsVm.workgroupNode = lsAppConfig.workgroupNode;
 
     activate();
 
@@ -97,6 +108,20 @@
           workgroupRevisionsVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
           workgroupRevisionsVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
         });
+    }
+
+    /**
+     * @name loadSidebarContent
+     * @desc Update the content of the sidebar
+     * @param {string} content - The id of the content to load, see app/views/includes/sidebar-right.html
+     * for possible values
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    // TODO : service with content and vm as parameter (because these 3 line are always same in all controller...)
+    function loadSidebarContent(content) {
+      $scope.mainVm.sidebar.setData(workgroupRevisionsVm);
+      $scope.mainVm.sidebar.setContent(content);
+      $scope.mainVm.sidebar.show();
     }
 
     // TODO: Define Revision type
@@ -132,6 +157,52 @@
         workgroupRevisionsVm.permissions
       );
     };
+
+    /**
+     * @name showFileDetails
+     * @desc Get current file details
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function showFileDetails() {
+      const workgroupUuid = workgroupRevisionsVm.folderDetails.workgroupUuid;
+      const nodeUuid = workgroupRevisionsVm.folderDetails.folderUuid;
+
+      $q
+        .all([
+          workgroupNodesRestService.get(workgroupUuid, nodeUuid),
+          workgroupNodesRestService.getAudit(workgroupUuid, nodeUuid)
+        ])
+        .then(function(promises) {
+          const nodeDetails = promises[0];
+          const nodeAudit = promises[1];
+
+          return $q.all([
+            documentUtilsService.loadItemThumbnail(
+              nodeDetails,
+              workgroupNodesRestService.thumbnail.bind(
+                null,
+                workgroupUuid,
+                nodeUuid
+              )
+            ),
+            auditDetailsService.generateAllDetails($scope.userLogged.uuid, nodeAudit.plain()),
+            $q.when(nodeDetails)
+          ]);
+        })
+        .then(function(promises) {
+          const nodeThumbnail = promises[0];
+          const auditActions = promises[1];
+          const nodeDetails = promises[2];
+
+          workgroupRevisionsVm.currentSelectedDocument.current = Object.assign(
+            {},
+            nodeDetails,
+            nodeThumbnail,
+            { auditActions: auditActions }
+          );
+          workgroupRevisionsVm.loadSidebarContent(workgroupRevisionsVm.workgroupNode);
+        });
+    }
 
     function getNodeDetails(nodeItem) {
       // TODO : change the watcher method in activate() of workgroupMembersController, then do it better
