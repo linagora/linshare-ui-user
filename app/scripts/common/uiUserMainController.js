@@ -70,6 +70,7 @@
 
     const URL_HOME = lsAppConfig.homePage;
     const URL_LOGIN = 'login';
+    const TYPE_REVISION = 'DOCUMENT_REVISION';
 
     //TODO: shall be moved to the directive controller of linshareSidebar directive
     var widthWindow = angular.element(window).width();
@@ -189,7 +190,7 @@
 
           var toastMsg;
 
-          if (file.isRevision && files.length === 1) {
+          if (file.linshareDocument.type === TYPE_REVISION && files.length === 1) {
             toastMsg = {key: 'UPLOAD_REVISION_DONE', params: {fileName: file.name}};
           } else {
             toastMsg = {key: 'UPLOAD_DONE', pluralization: true};

@@ -85,6 +85,7 @@
 
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
+    const TYPE_REVISION = 'DOCUMENT_REVISION';
 
     var newFolderName;
 
@@ -204,7 +205,7 @@
         if (flowFile.folderDetails.workgroupUuid === workgroupNodesVm.folderDetails.workgroupUuid &&
           flowFile.folderDetails.folderUuid === workgroupNodesVm.folderDetails.folderUuid) {
           flowFile.asyncUploadDeferred.promise.then(function(file) {
-            addNewItemInTableParams(file.linshareDocument);
+            file.linshareDocument.type !== TYPE_REVISION && addNewItemInTableParams(file.linshareDocument);
           });
         }
       }

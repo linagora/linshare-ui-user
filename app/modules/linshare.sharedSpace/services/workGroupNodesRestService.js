@@ -49,7 +49,7 @@
      * The Workgroup Node object.
      * @typedef {Object} WorkgroupNode
      * @type {String} key - WorkgroupNode uuid
-     * @type {String} type - The type of the WorkgroupNode either FOLDER|DOCUMENT
+     * @type {String} type - The type of the WorkgroupNode either FOLDER|DOCUMENT|DOCUMENT_REVISION
      * @type {String} name - The name of the WorkgroupNode
      * @type {String} parent - The uuid of the parent WorkgroupNode
      * @type {String} workGroup - The uuid of the Workgroup
@@ -62,7 +62,6 @@
      * @type {String} mimeType - The mime type of the WorkGroupNode
      * @type {String} sha256sum - The mime type of the WorkGroupNode
      * @type {Date} uploadDate - The date of the WorkgroupNode upload
-     * @type {boolean} isRevision - is the WorkgroupNode a revision.
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
 

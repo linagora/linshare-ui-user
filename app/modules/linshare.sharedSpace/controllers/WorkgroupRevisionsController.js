@@ -61,6 +61,7 @@
     workgroupRevisionsRestService
   ) {
     var workgroupRevisionsVm = this;
+    const TYPE_REVISION = 'DOCUMENT_REVISION';
 
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
@@ -285,14 +286,12 @@
     }
 
     function addUploadedDocument(flowFile) {
-      if (flowFile.isRevision === true) {
         if (flowFile.folderDetails.workgroupUuid === workgroupRevisionsVm.folderDetails.workgroupUuid &&
           flowFile.folderDetails.folderUuid === workgroupRevisionsVm.folderDetails.folderUuid) {
           flowFile.asyncUploadDeferred.promise.then(function(file) {
-            addNewItemInTableParams(file.linshareDocument);
+            file.linshareDocument.type === TYPE_REVISION && addNewItemInTableParams(file.linshareDocument);
           });
         }
-      }
     }
 
     /**
@@ -410,7 +409,6 @@
 
     function upload(flowFiles, folderDetails) {
       _.forEachRight(flowFiles, function(file) {
-        file.isRevision = true;
         file.folderDetails = folderDetails;
       });
 
