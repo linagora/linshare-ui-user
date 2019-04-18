@@ -42,6 +42,8 @@
   "FILE_NAME": "Nom de fichier",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Déposez vos fichiers",
-    "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux."
+    "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux.",
+    "TITLE_REVISION": "Ajoutez vos révisions ",
+    "COMMENT_REVISION": "Ajoutez vos révisions et suivez l'historique de votre fichier."
   }
 }

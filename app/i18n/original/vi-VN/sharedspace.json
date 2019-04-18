@@ -43,6 +43,8 @@
   "FILE_NAME": "Tên tệp",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Tải tệp của bạn lên",
-    "COMMENT": "Tải lên và thêm thành viên, để cộng tác với họ."
+    "COMMENT": "Tải lên và thêm thành viên, để cộng tác với họ.",
+    "TITLE_REVISION": "TRANSLATE ME!",
+    "COMMENT_REVISION": "TRANSLATE ME!"
   }
 }

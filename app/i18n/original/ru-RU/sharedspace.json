@@ -42,6 +42,8 @@
     "FILE_NAME": "Имя файла",
     "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
       "TITLE": "Выложите свои файлы",
-      "COMMENT": "Выложите свои файлы и добавте участников для взаимодействия с ними."
+      "COMMENT": "Выложите свои файлы и добавте участников для взаимодействия с ними.",
+      "TITLE_REVISION": "TRANSLATE ME!",
+      "COMMENT_REVISION": "TRANSLATE ME!"
     }
   }

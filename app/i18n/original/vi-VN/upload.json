@@ -17,7 +17,9 @@
   },
   "DRAG_DROP_BACKGROUND": {
     "TITLE": "Thả tệp của bạn ở đây",
-    "COMMENT": "Kéo và thả tệp của bạn vào đây để tải chúng lên"
+    "COMMENT": "Kéo và thả tệp của bạn vào đây để tải chúng lên",
+    "TITLE_REVISION": "TRANSLATE ME!",
+    "COMMENT_REVISION": "TRANSLATE ME!"
   },
   "DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Chia sẻ không đồng bộ",

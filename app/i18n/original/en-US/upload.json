@@ -17,7 +17,9 @@
   },
   "DRAG_DROP_BACKGROUND": {
     "TITLE": "Drop your files here",
-    "COMMENT": "Drag and drop your files here to upload them"
+    "COMMENT": "Drag and drop your files here to upload them",
+    "TITLE_REVISION": "Drop your version here",
+    "COMMENT_REVISION": "Drag and drop your version here to upload them"
   },
   "DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Asynchronous share",
