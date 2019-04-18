@@ -168,9 +168,6 @@
                 >
                 </i>
               </a>
-              <!--
-                   TODO: Manage sort button
-              -->
               <div class="col-xs-3 toolbar-mobile-item sort-dropdown">
                 <div
                   class="dropdown dropdown-standard toolbar-mobile-item"
@@ -207,12 +204,30 @@
                       </li>
                       <li class="divided"></li>
                       <li role="menuitem">
-                        <!--
-                             TODO: Manage document sorting activation
-                        -->
                         <a
                           href=""
-                          data-ng-click="workgroupRevisionsVm.todo()"
+                          class="selected-sorting"
+                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('modificationDate', $event)"
+                        >
+                          <span class="caret-area">
+                            <i
+                              class="zmdi zmdi-caret-down"
+                              data-ng-show="workgroupNodesVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                            <i
+                              class="zmdi zmdi-caret-up"
+                              data-ng-show="!workgroupNodesVm.tableParamsService.getToggleSelectedSort()"
+                            >
+                            </i>
+                          </span>
+                          <span translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</span>
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a
+                          href=""
+                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('creationDate', $event)"
                         >
                           <span class="caret-area">
                             <i
@@ -230,12 +245,9 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <!--
-                             TODO: Manage document sorting activation
-                        -->
                         <a
                           href=""
-                          data-ng-click=""
+                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('size', $event)"
                         >
                           <span class="caret-area">
                             <i
@@ -253,12 +265,9 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <!--
-                             TODO: Manage document sorting activation
-                        -->
                         <a
                           href=""
-                          data-ng-click=""
+                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('name', $event)"
                         >
                           <span class="caret-area">
                             <i
@@ -335,7 +344,6 @@
                     data-ng-class="{'open':isOpenFilter}"
                   >
                     <!-- FILTER COMPONENT -->
-                    // TODO: Remove creation date from filter
                     // TODO: Fix css
                     <filter-box
                       class="clearfix"
@@ -715,9 +723,6 @@
         </script>
         <div class="card-body collapsible-content">
           <div class="table-responsive">
-            <!--
-                 TODO: Manage Table listing
-            -->
             <table
               id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
               data-ng-table="workgroupRevisionsVm.tableParams"
@@ -739,7 +744,6 @@
                 'item-container': true
                 }"
                 data-ng-click="backToSidebarContentDetails()"
-                data-ng-dblclick="workgroupRevisionsVm.goToFolder(nodeItem)"
               >
                 <td
                   class="center set-content-left thumb-type-item thumb-groups-preview-ls"
@@ -1066,6 +1070,15 @@
                       </ul>
                     </span>
                   </div>
+                </td>
+                <td
+                  class="hidden-xs"
+                  data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+                  data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate"
+                  data-sortable="'modificationDate'"
+                  header-class="'col-4 hide-if-toggled-sidebar'"
+                >
+                  {{nodeItem.modificationDate | relativeTime}}
                 </td>
                 <td
                   class="hidden-xs"
