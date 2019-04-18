@@ -410,20 +410,14 @@
               <i class="zmdi zmdi-close"></i>
             </a>
           </div>
-          <!--
-               TODO: Manage selection information/reset/isolation
-          -->
           <div
             class="display-num-selected-items"
             translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}"
           >
-            <!--
-                 TODO: Manage visual effect
-            -->
             <div
               class="pull-left"
               data-ng-class="{
-              'active-button-show-selection': false
+              'active-button-show-selection': workgroupRevisionsVm.tableParamsService.getSelectionIsIsolated()
               }"
               data-ng-click="workgroupRevisionsVm.toggleFilterBySelectedFiles()"
             >
@@ -432,22 +426,16 @@
                 <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
               </p>
               <div class="pull-left view-icons-ctn groups-view">
-                <!--
-                     TODO: Manage visual effect - element isolated
-                -->
                 <i
                   class="fa fa-eye-slash"
                   aria-hidden="true"
-                  data-ng-show=""
+                  data-ng-show="workgroupRevisionsVm.tableParamsService.getSelectionIsIsolated()"
                 >
                 </i>
-                <!--
-                     TODO: Manage visual effect - element not isolated
-                -->
                 <i
                   class="fa fa-eye"
                   aria-hidden="true"
-                  data-ng-show=""
+                  data-ng-show="!workgroupRevisionsVm.tableParamsService.getSelectionIsIsolated()"
                 >
                 </i>
               </div>
@@ -1153,10 +1141,6 @@
   </a>
 </div>
 
-
-<!--
-     TODO: MOBILE Manage Actions Toolbar
--->
 <section
   class="row multi-select-mobile visible-xs append-to-body"
   data-ng-class="{'showMobileMultiMenu': workgroupRevisionsVm.selectedDocuments.length > 0}"
