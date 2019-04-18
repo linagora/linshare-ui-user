@@ -640,15 +640,11 @@
             </span>
           </div>
         </div>
-        <!--
-             TODO: Manage BackDrop
-             do not forget permissions and if file present
-        -->
         <div
           class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
           check-table-height
           data-ng-if="true"
-          data-ng-class="{'show-bg-drop' : true}"
+          data-ng-class="{'show-bg-drop' : workgroupRevisionsVm.revisionsList.length === 0}"
         >
           <div class="drag-and-drop-content">
             <div class="drag-icon-ctn">
