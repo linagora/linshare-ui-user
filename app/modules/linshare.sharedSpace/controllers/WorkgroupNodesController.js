@@ -716,8 +716,14 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function openBrowser(nodeItems, isMove) {
+      var currentFolder = null;
+
+      if(workgroupPermissions.FOLDER.CREATE) {
+        currentFolder = _.cloneDeep(workgroupNodesVm.currentFolder);
+      }
+
       browseService.show({
-        currentFolder: _.cloneDeep(workgroupNodesVm.currentFolder),
+        currentFolder: currentFolder,
         currentList: _.orderBy(
           _.filter(
             workgroupNodesVm.nodesList,
