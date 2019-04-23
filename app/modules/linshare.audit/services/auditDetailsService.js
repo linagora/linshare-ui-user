@@ -154,6 +154,7 @@
     function generateDetails(loggedUserUuid, auditAction) {
       auditAction.isAuthor = setIsAuthor(auditAction, loggedUserUuid);
       auditAction.authorName = setAuthorName(auditAction);
+      auditAction.authorNameTranslated = $filter('translate')(auditAction.authorName);
       auditAction.authorReference = setAuthorReference(auditAction);
       auditAction.dateShortVarious = setDateVarious(auditAction, 'shortDate');
       auditAction.dateMediumVarious = setDateVarious(auditAction, 'medium');
@@ -438,11 +439,11 @@
     }
 
     /**
-     * @name setTypeIcon
-     * @desc Translate string
-     * @param {string} originalString - String to translate
+     * @name setKeyVar
+     * @desc Set the translation key to be use
+     * @param {string} originalString - Suffix of the translation
      * @param {string} key - Key to concat to find related translation
-     * @returns {string} Icon css classes
+     * @returns {string} Translation key
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setKeyVar(originalString, key) {

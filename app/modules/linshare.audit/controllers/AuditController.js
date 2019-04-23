@@ -61,6 +61,12 @@
     $rootScope.$on('$translateChangeSuccess', function() {
       generateTableFilterSelect(auditVm.tableFilterType, 'type');
       generateTableFilterSelect(auditVm.tableFilterAction, 'action');
+
+      if(auditVm.itemsList[0].authorName) {
+        _.forEach(auditVm.itemsList, function(item) {
+          item.authorNameTranslated = $filter('translate')(item.authorName);
+        });
+      }
     });
 
     ////////////
@@ -94,6 +100,12 @@
         auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditVm.itemsList);
         generateTableFilterSelect(auditVm.tableFilterType, 'type');
         generateTableFilterSelect(auditVm.tableFilterAction, 'action');
+
+        if(auditVm.itemsList[0].authorName) {
+          _.forEach(auditVm.itemsList, function(item) {
+            item.authorNameTranslated = $filter('translate')(item.authorName);
+          });
+        }
 
         if (_.isUndefined(auditVm.tableParams)) {
           launchTableParamsInitiation();
