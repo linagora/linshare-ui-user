@@ -66,6 +66,7 @@
       "DETAILS": "Détails",
       "INSERT": "L'élément a été ajouté avec succès.",
       "REFRESH": "Vous devez rafraichir l'application pour prendre cette action en compte",
+      "RESTORE": "La révision a été restaurée avec succès",
       "SHARE": "{{singular ? 'Votre fichier' : 'Vos fichiers'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'a' : 'ont'}} été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
       "SHARE_DELETED": "Votre partage avec {{recipient}} a été supprimé avec succès.",
@@ -98,7 +99,8 @@
         "26449": "Vous ne pouvez pas supprimer la dernière révision, essayez de supprimer le document entier."
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs.",
-      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} est déjà membre de ce groupe de travail."
+      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} est déjà membre de ce groupe de travail.",
+      "RESTORE": "Erreur lors de la restoration de révision"
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Saisissez au moins un destinaire ou une liste de contact",

@@ -508,15 +508,14 @@
               </a>
             </span>
 
-            <span data-ng-class="{'disable-link': false}">
-              <!--
-                   TODO: Manage Restore
-                   Do not forget permissions
-              -->
+            <span data-ng-class="{
+              'disable-link': workgroupRevisionsVm.selectedDocuments.length !== 1
+              || !workgroupRevisionsVm.permissions.FILE.CREATE
+              }">
               <a
                 class="plain-text-button share-link"
                 translate-attr="{title: 'SELECTION_TOOLBAR.RESTORE'}"
-                data-ng-click="workgroupRevisionsVm.todo()"
+                data-ng-click="workgroupRevisionsVm.restore(workgroupRevisionsVm.selectedDocuments[0])"
               >
                 <i class="zmdi zmdi-time-restore"></i>
                 <span translate>
@@ -880,16 +879,13 @@
                                 </span>
                               </a>
                             </li>
-                            <!--
-                                 TODO: Manage Restore
-                                 Do not forget permissions
-                            -->
                             <li
                               data-ng-class="{
-                              'disable-link': false
+                              'disable-link': !workgroupRevisionsVm.permissions.FILE.CREATE
+                              || nodeItem === $data[0]
                               }"
                             >
-                              <a data-ng-click="workgroupRevisionsVm.todo()">
+                              <a data-ng-click="workgroupRevisionsVm.restore(nodeItem)">
                                 <i class="zmdi zmdi-time-restore"></i>
                                 <span translate>
                                   ACTION.RESTORE
@@ -1188,15 +1184,12 @@
             </span>
           </a>
         </li>
-        <!--
-             TODO: MOBILE Manage Restore
-             Do not forget permissions
-        -->
         <li
           data-ng-class="{
-          'disable-link': false
+          'disable-link': workgroupRevisionsVm.selectedDocuments.length !== 1
+          || !workgroupRevisionsVm.permissions.FILE.CREATE
           }"
-          data-ng-click="workgroupRevisionsVm.todo()"
+          data-ng-click="workgroupRevisionsVm.restore(workgroupRevisionsVm.selectedDocuments[0])"
         >
           <a>
             <i class="zmdi zmdi-time-restore"></i>
