@@ -91,6 +91,8 @@
     workgroupRevisionsVm.loadSidebarContent = loadSidebarContent;
     workgroupRevisionsVm.workgroupNode = lsAppConfig.workgroupNode;
     workgroupRevisionsVm.deleteVersions = deleteVersions;
+    workgroupRevisionsVm.downloadVersion = downloadVersion;
+    workgroupRevisionsVm.downloadMultiVersions = downloadMultiVersions;
 
     activate();
 
@@ -529,6 +531,31 @@
 
           return deleteVersionsResponse;
         })
+    }
+
+    /**
+     * @name downloadVersion
+     * @desc Download a version
+     * @param {Object} version - version to download's document - {@link Revision} object
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function downloadVersion(version) {
+      var url = workgroupRevisionsRestService.download(workgroupRevisionsVm.currentFolder.workGroup, version.uuid);
+
+      documentUtilsService.download(url, version.name);
+    }
+
+    /**
+     * @name  downloadMultiVersions
+     * @desc Trigger multiple download of versions with a confirm dialog if needed
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function downloadMultiVersions() {
+      documentUtilsService.canShowMultipleDownloadConfirmationDialog(selectedVersions).then(function() {
+        _.forEach(selectedVersions, function(version) {
+          workgroupRevisionsVm.downloadVersion(version);
+        });
+      });
     }
 
     // TODO define more explicitly the type of the param (Object is too wide as a type)

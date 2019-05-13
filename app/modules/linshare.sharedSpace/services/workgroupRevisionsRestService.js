@@ -94,7 +94,7 @@
      */
     function download(workgroupUuid, revisionNodeUuid) {
       $log.debug('workgroupRevisionsRestService :  download', workgroupUuid, revisionNodeUuid);
-      return Restangular.one(restUrl, workgroupUuid).one(restParam, nodeUuid).one('download')
+      return Restangular.one(restUrl, workgroupUuid).one(restParam, revisionNodeUuid).one('download')
         .getRequestedUrl();
     }
 
