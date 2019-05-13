@@ -464,17 +464,11 @@
             -->
             <span
               data-ng-if="true"
-              data-ng-class="{
-              'disable-link': false
-              }"
+              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
             >
-              <!--
-                   TODO: Manage Download
-                   Do not forget permissions
-              -->
               <a
                 data-ng-href=""
-                data-ng-click="workgroupRevisionsVm.todo()"
+                data-ng-click="workgroupRevisionsVm.downloadMultiVersions(workgroupRevisionsVm.selectedDocuments)"
                 event-propagation-stop
                 translate-attr="{title: 'ACTION.DOWNLOAD'}"
               >
@@ -488,18 +482,12 @@
             -->
             <span
               data-ng-if=""
-              data-ng-class="{
-              'disable-link': false
-              }"
+              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
             >
-              <!--
-                   TODO: Manage Download
-                   Do not forget permissions
-              -->
               <a
                 class="plain-text-button"
                 translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}"
-                data-ng-click="workgroupRevisionsVm.todo()"
+                data-ng-click="workgroupRevisionsVm.downloadMultiVersions(workgroupRevisionsVm.selectedDocuments)"
               >
                 <i class="zmdi zmdi-download"></i>
                 <span translate>
@@ -1148,22 +1136,12 @@
       >
       </i>
     </div>
-    <!--
-         TODO: MOBILE Manage Multi Download
-         Do not forget permissions
-    -->
     <i
       class="zmdi zmdi-download col-xs-2"
-      data-ng-class="{
-      'disabled': false
-      }"
-      data-ng-click="workgroupRevisionsVm.todo()"
+      data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
+      data-ng-click="workgroupRevisionsVm.downloadMultiVersions(workgroupRevisionsVm.selectedDocuments)"
     >
     </i>
-    <!--
-         TODO: MOBILE Manage Delete
-         Do not forget permissions
-    -->
     <i
       class="zmdi zmdi-delete col-xs-2"
       data-ng-click="workgroupRevisionsVm.deleteVersions(workgroupRevisionsVm.selectedDocuments)"
