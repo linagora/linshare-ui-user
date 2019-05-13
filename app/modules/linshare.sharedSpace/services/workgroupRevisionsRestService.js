@@ -152,7 +152,7 @@
      */
     function restore(workgroupUuid, parentNodeUuid, revisionNodeUuid) {
       $log.debug('workgroupRevisionsRestService :  restore', workgroupUuid, parentNodeUuid, revisionNodeUuid);
-      return Restangular.one(restUrl, workgroupUuid).one(restParam, parentNodeUuid).one('copy')
+      return Restangular.one(restUrl, workgroupUuid).one(restParam, parentNodeUuid).all('copy')
         .post({
           kind: 'SHARED_SPACE',
           uuid: revisionNodeUuid,
