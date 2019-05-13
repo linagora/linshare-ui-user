@@ -877,18 +877,12 @@
                                 </span>
                               </document-preview-button>
                             </li>
-                            <!--
-                                 TODO: Manage Download
-                                 Do not forget permissions
-                            -->
                             <li
-                              data-ng-class="{
-                              'disable-link': false
-                              }"
+                              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
                             >
                               <a
                                 data-ng-href=""
-                                data-ng-click="workgroupRevisionsVm.todo()"
+                                data-ng-click="workgroupRevisionsVm.downloadVersion(nodeItem)"
                                 event-propagation-stop
                               >
                                 <i class="zmdi zmdi-download"></i>
