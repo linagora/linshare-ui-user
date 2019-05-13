@@ -93,6 +93,7 @@
     workgroupRevisionsVm.deleteVersions = deleteVersions;
     workgroupRevisionsVm.downloadVersion = downloadVersion;
     workgroupRevisionsVm.downloadMultiVersions = downloadMultiVersions;
+    workgroupRevisionsVm.restore = restore;
 
     activate();
 
@@ -662,6 +663,30 @@
           toastService.error({ key: 'TOAST_ALERT.ERROR.DELETE_ERROR.error' });
         }
       });
+    }
+
+    /**
+     * @name restore
+     * @desc Restore selected revision as current revision for the file
+     * @param {Revision} revision - {@link Revision} object
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function restore(revision) {
+      workgroupRevisionsRestService
+        .restore(revision.workGroup, revision.parent, revision.uuid)
+        .then(function(response) {
+          workgroupRevisionsVm.tableParamsService.reloadTableParams();
+          toastService.success({
+            key: 'TOAST_ALERT.ACTION.RESTORE',
+            params: {nodeName: revision.name}
+          });
+        })
+        .catch(function(error) {
+          toastService.error({
+            key: 'TOAST_ALERT.ERROR.RESTORE',
+            params: {nodeName: revision.name}
+          });
+        });
     }
   }
 })();
