@@ -769,21 +769,15 @@
                             <i class="zmdi zmdi-info"></i>
                           </a>
                         </li>
-                        <!--
-                             TODO: Manage Download
-                             Do not forget permissions
-                        -->
                         <li
                           class="hidden-xs"
-                          data-ng-class="{
-                          'disabled': false
-                          }"
+                          data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
                         >
                           <a
                             href=""
                             event-propagation-stop
                             translate-attr="{title: 'ACTION.DOWNLOAD'}"
-                            data-ng-click="workgroupRevisionsVm.todo()"
+                            data-ng-click="workgroupRevisionsVm.downloadVersion(nodeItem)"
                           >
                             <i class="zmdi zmdi-download"></i>
                           </a>
