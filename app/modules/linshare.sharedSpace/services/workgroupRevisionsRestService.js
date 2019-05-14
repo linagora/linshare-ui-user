@@ -159,12 +159,34 @@
         });
     }
 
-    function getAudit(workgroupUuid, nodeUuid) {
-      console.log('getAudit: Please code me and add documentation');
+    /**
+     *  @name getAudit
+     *  @desc Get audit of a Workgroup revision node object
+     *  @param {string} workgroupUuid - The id of the Workgroup object
+     *  @param {string} revisioNodeUuid - The id of the revision node object
+     *  @returns {Promise<Audit>} server response - The audit of the node revision - {@link Audit}
+     *  @memberOf LinShare.sharedSpace.workgroupRevisionsRestService
+     */
+    function getAudit(workgroupUuid, revisioNodeUuid) {
+      $log.debug('workgroupRevisionsRestService :  getAudit', workgroupUuid, revisioNodeUuid);
+
+      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, revisioNodeUuid).one('audit').get());
     }
 
-    function thumbnail(workgroupUuid, nodeUuid) {
-      console.log('thumbnail: Please code me and add documentation');
+    /**
+     *  @name thumbnail
+     *  @desc Get the file thumbnail of a Workgroup revision node object
+     *  @param {string} workgroupUuid - The id of the Workgroup object
+     *  @param {string} revisioNodeUuid - The id of the revision node object
+     *  @returns {Promise<image/png>} server response - The thumbnail of the node revision
+     *  @memberOf LinShare.sharedSpace.workgroupRevisionsRestService
+     */
+    function thumbnail(workgroupUuid, revisioNodeUuid) {
+      $log.debug('workgroupRevisionsRestService : thumbnail', workgroupUuid, revisioNodeUuid);
+
+      return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, revisioNodeUuid).one('thumbnail').get({
+        base64: true
+      }));
     }
   }
 })();
