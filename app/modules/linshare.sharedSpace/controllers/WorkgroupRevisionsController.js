@@ -94,6 +94,7 @@
     workgroupRevisionsVm.downloadVersion = downloadVersion;
     workgroupRevisionsVm.downloadMultiVersions = downloadMultiVersions;
     workgroupRevisionsVm.restore = restore;
+    workgroupRevisionsVm.showSelectedRevisionDetails = showSelectedRevisionDetails;
 
     activate();
 
@@ -556,6 +557,22 @@
         _.forEach(selectedVersions, function(version) {
           workgroupRevisionsVm.downloadVersion(version);
         });
+      })
+    }
+
+    /**
+     * @name showSelectedRevisionDetails
+     * @desc Get information from a revision and show them in the right sidebar
+     * @param {Revision} revision - {@link Revision} object
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function showSelectedRevisionDetails(selectedRevision) { 
+      workgroupRevisionsVm.getNodeDetails(selectedRevision).then(function(data) {
+        workgroupRevisionsVm.currentSelectedDocument.current = data;
+        workgroupRevisionsVm.mdtabsSelection = {
+          selectedIndex: 0
+        };
+        workgroupRevisionsVm.loadSidebarContent(workgroupRevisionsVm.workgroupNode);
       });
     }
 
