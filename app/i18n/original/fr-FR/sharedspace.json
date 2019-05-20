@@ -40,6 +40,7 @@
   "BREADCRUMB_UPPER_LEVEL": "Dossiers parent",
   "VERSION": "revisions",
   "FILE_NAME": "Nom de fichier",
+  "REVISION": "Révision ",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Déposez vos fichiers",
     "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux.",

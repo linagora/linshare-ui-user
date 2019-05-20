@@ -41,6 +41,17 @@ angular
       }
       return element;
     });
+    RestangularProvider.addElementTransformer('nodes', true, function (nodes) {
+      var id = nodes && nodes.reqParams && nodes.reqParams.parent;
+
+      if (id && _.every(nodes, { parent: id, type: 'DOCUMENT_REVISION' })) {
+        nodes.forEach(function (node, index) {
+          node.revisionNumber = index;
+        });
+      }
+
+      return nodes;
+    });
     flowFactoryProvider.defaults = {
       stack: [],
       target: $windowProvider.$get().location.origin + '/' + lsAppConfig.baseRestUrl + '/flow.json',

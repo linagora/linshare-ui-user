@@ -40,6 +40,7 @@
     "BREADCRUMB_UPPER_LEVEL": "Родительские папки",
     "VERSION": "версиями",
     "FILE_NAME": "Имя файла",
+    "REVISION": "Ревизии ",
     "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
       "TITLE": "Выложите свои файлы",
       "COMMENT": "Выложите свои файлы и добавте участников для взаимодействия с ними.",

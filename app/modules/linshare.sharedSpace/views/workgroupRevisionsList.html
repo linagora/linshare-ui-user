@@ -737,13 +737,16 @@
                 >
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                      <span
-                        class="file-name-disp single-line"
-                        spellcheck="false"
-                        contenteditable="false"
-                      >
-                        {{::nodeItem.name}}
-                      </span>
+                      <p class="main-name-row">
+                        <span class="file-name-disp single-line">
+                          <span data-ng-show="nodeItem.revisionNumber > 0" translate>REVISION</span>
+                          {{:: nodeItem.revisionNumber > 0 ? nodeItem.revisionNumber : nodeItem.name }}
+                        </span>
+                        <span data-ng-show="nodeItem.revisionNumber > 0" class="shared-activated hidden-xs">
+                          <span class="zmdi zmdi-label"></span>
+                          {{:: nodeItem.name }}
+                        </span>
+                      </p>
                       <span class="secondary-info-ctn">
                         <p class="mobile-list-item-info visible-xs">
                           {{nodeItem.creationDate | relativeTime}} {{::', '+(nodeItem.size | readableSize: true)}}
