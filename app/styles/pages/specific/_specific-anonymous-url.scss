@@ -35,7 +35,7 @@
     position : absolute;
     height: 300px;
     width: 100%;
-    background: url(#{$ressource-path}/images/banner_homepage_linshare.png) 0% 0% / cover #c0d5e6;
+    background: url(#{$ressource-path}/images/banner_homepage_linshare.png) 0% 0% / cover lighten(desaturate(adjust-hue($primary-color, 5), 35), 25);
     overflow: hidden;
     top: 0;
   }

@@ -98,7 +98,7 @@ $common-ui-component-activity-user-target-color: lighten(desaturate(adjust-hue($
 $specific-contact-list-table-profile-main-color: $primary-alt-color6 !default;
 $specific-contact-list-table-filter-views-dropdown-filters-after-background-color: $primary-alt-color1 !default;
 
-$specific-home-page-view-upper-container-background-color: lighten(desaturate(adjust-hue($primary-color, 8), 56.82), 31.76) !default;
+$specific-home-page-view-upper-container-background-color: lighten(desaturate(adjust-hue($primary-color, 5), 35), 25) !default;
 $specific-home-page-view-upper-container-box-content-h2-color:$primary-alt-color1 !default;
 $specific-home-page-view-upper-container-box-content-box-txt-color:darken(desaturate(adjust-hue($primary-color, 1), 72.49), 6.08) !default;
 $specific-home-page-view-upper-container-box-content-set-homepage-ctn-hover-color:darken(adjust-hue($primary-color, 13), 2.55) !default;
