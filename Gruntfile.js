@@ -230,7 +230,9 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          '.tmp/styles/theme.default.css': '<%= yeoman.app %>/styles/theme.default.scss'
+          '.tmp/styles/theme.default.css': '<%= yeoman.app %>/styles/theme.default.scss',
+          '.tmp/styles/theme.darkgreen.css': '<%= yeoman.app %>/styles/theme.darkgreen.scss',
+          '.tmp/styles/theme.red.css': '<%= yeoman.app %>/styles/theme.red.scss'
         }
       }
     },
