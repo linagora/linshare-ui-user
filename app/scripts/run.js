@@ -46,7 +46,7 @@ angular
 
       if (id && _.every(nodes, { parent: id, type: 'DOCUMENT_REVISION' })) {
         nodes.forEach(function (node, index) {
-          node.revisionNumber = index;
+          node.revisionNumber = index + 1;
         });
       }
 

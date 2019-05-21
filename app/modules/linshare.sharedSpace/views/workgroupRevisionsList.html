@@ -739,11 +739,11 @@
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <p class="main-name-row">
                         <span class="file-name-disp single-line">
-                          <span data-ng-show="nodeItem.revisionNumber > 0" translate>REVISION</span>
-                          {{:: nodeItem.revisionNumber > 0 ? nodeItem.revisionNumber : nodeItem.name }}
+                          <span translate>REVISION</span>
+                          {{:: nodeItem.revisionNumber }}
                         </span>
-                        <span data-ng-show="nodeItem.revisionNumber > 0" class="shared-activated hidden-xs">
-                          <span class="zmdi zmdi-label"></span>
+                        <span class="shared-activated hidden-xs">
+                          <span class="zmdi zmdi-link"></span>
                           {{:: nodeItem.name }}
                         </span>
                       </p>
