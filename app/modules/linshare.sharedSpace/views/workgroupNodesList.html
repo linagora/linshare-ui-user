@@ -570,24 +570,6 @@
                         </li>
                         <li
                           class="hidden-xs"
-                          data-ng-if="nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
-                          workgroupNodesVm.permissions.FILE.CREATE &&
-                          workgroupNodesVm.canAddRevision"
-                        >
-                          <a
-                            translate-attr="{title: 'ACTION.SEE_REVISIONS'}"
-                            data-ui-sref="sharedspace.workgroups.revision({
-                            workgroupUuid: workgroupNodesVm.folderDetails.workgroupUuid,
-                            workgroupName: workgroupNodesVm.folderDetails.workgroupName,
-                            fileUuid: nodeItem.uuid,
-                            fileName: nodeItem.name
-                            })"
-                          >
-                            <i class="zmdi zmdi-time-restore"></i>
-                          </a>
-                        </li>
-                        <li
-                          class="hidden-xs"
                           data-ng-class="{
                           'disabled': !(nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
                           workgroupNodesVm.permissions.FILE.READ)
