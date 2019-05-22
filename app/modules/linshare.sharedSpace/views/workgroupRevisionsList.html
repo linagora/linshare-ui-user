@@ -530,7 +530,10 @@
             <span
               class="dropdown link-dropdown"
               uib-dropdown
-              data-ng-class="{'disable-link': false}"
+              data-ng-class="{
+                'disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1),
+                'disabled': (workgroupRevisionsVm.selectedDocuments.length > 1)
+              }"
             >
               <a
                 class="plain-text-button share-link"
@@ -1141,8 +1144,9 @@
       auto-close="always"
       is-open="isOpenItem"
       data-ng-class="{
-      'open': isOpenItem,
-      'disabled': false
+        'open': isOpenItem,
+        'disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1),
+        'disabled': (workgroupRevisionsVm.selectedDocuments.length > 1)
       }"
     >
       <i
