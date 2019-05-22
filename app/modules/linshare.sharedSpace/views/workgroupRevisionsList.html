@@ -608,20 +608,6 @@
                     </li>
                   </ul>
                 </li>
-                <li class="divider"></li>
-                <li data-ng-class="{
-                  'disable-link': false
-                  }"
-                >
-                  <!--
-                       TODO: Manage Rename
-                       DO not forget permissions
-                  -->
-                  <a data-ng-click="workgroupRevisionsVm.todo()">
-                    <i class="zmdi zmdi-border-color"></i>
-                    <span translate>ACTION.RENAME</span>
-                  </a>
-                </li>
               </ul>
             </span>
           </div>
@@ -841,21 +827,6 @@
                               </a>
                             </li>
                             <li class="divider"></li>
-                            <!--
-                                 TODO: Manage Rename
-                                 Do not forget permissions
-                            -->
-                            <li data-ng-class="{
-                              'disable-link': false
-                              }"
-                            >
-                              <a data-ng-click="workgroupRevisionsVm.todo()">
-                                <i class="zmdi zmdi-border-color"></i>
-                                <span translate>
-                                  ACTION.RENAME
-                                </span>
-                              </a>
-                            </li>
                             <li>
                               <!--
                                    TODO: Manage Preview
@@ -1174,23 +1145,6 @@
           </a>
         </li>
         <li class="divider"></li>
-        <!--
-             TODO: MOBILE Manage Rename
-             Do not forget permissions
-        -->
-        <li
-          data-ng-class="{
-          'disable-link': false
-          }"
-          data-ng-click="workgroupRevisionsVm.todo()"
-        >
-          <a>
-            <i class="zmdi zmdi-border-color"></i>
-            <span translate>
-              ACTION.RENAME
-            </span>
-          </a>
-        </li>
         <li
           data-ng-class="{
           'disable-link': workgroupRevisionsVm.selectedDocuments.length !== 1
