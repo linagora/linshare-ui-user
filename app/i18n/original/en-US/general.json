@@ -259,7 +259,7 @@
   "UNKNOWN_USER": "Unknown user",
   "UNKNOWN_FIRST_LETTER": "UNK",
   "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> has been} other{Some files have been}} successfully uploaded",
-  "UPLOAD_REVISION_DONE": "A new revision of <b>{{fileName}}</b> has been successfully uploaded",
+  "UPLOAD_REVISION_DONE": "A new revision{addFilename, select, true{ of <b>{fileName}</b>} other{}} has been successfully uploaded",
   "USER_QUOTAS": {
     "DOMAIN": "Domain used",
     "MAX_FILE_SIZE": "Max file size",

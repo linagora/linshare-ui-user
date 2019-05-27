@@ -259,7 +259,7 @@
   "UNKNOWN_USER": "Utilisateur inconnu",
   "UNKNOWN_FIRST_LETTER": "N.C.",
   "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> a été téléversé} other{Des fichiers ont été téléversés}} avec succès",
-  "UPLOAD_REVISION_DONE": "A new revision of <b>{{fileName}}</b> has been successfully uploaded",
+  "UPLOAD_REVISION_DONE": "Une nouvelle révision{addfilename, select, true{ de <b>{fileName}</b>} other{}} a été téléversée avec succès",
   "USER_QUOTAS": {
     "DOMAIN": "Domain utilisé",
     "MAX_FILE_SIZE": "Taille de fichier max.",

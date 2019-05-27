@@ -191,7 +191,13 @@
           var toastMsg;
 
           if (file.linshareDocument.type === TYPE_REVISION && files.length === 1) {
-            toastMsg = {key: 'UPLOAD_REVISION_DONE', params: {fileName: file.name}};
+            toastMsg = {key: 'UPLOAD_REVISION_DONE', pluralization: true};
+            if (file._from === lsAppConfig.workgroupPage) {
+              toastMsg.params = {
+                fileName: file.name,
+                addFilename: 'true'
+              };
+            }
           } else {
             toastMsg = {key: 'UPLOAD_DONE', pluralization: true};
             if (files.length === 1) {
