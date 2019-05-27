@@ -41,6 +41,7 @@
     "VERSION": "версиями",
     "FILE_NAME": "Имя файла",
     "REVISION": "Ревизии ",
+    "REVISION_VIEW": "translate me!!",
     "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
       "TITLE": "Выложите свои файлы",
       "COMMENT": "Выложите свои файлы и добавте участников для взаимодействия с ними.",

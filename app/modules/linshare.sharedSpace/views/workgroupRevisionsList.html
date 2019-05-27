@@ -34,13 +34,7 @@
               </i>
             </a>
           </div>
-          <div
-            class="breadcrumbs-ctn hidden-xs"
-            data-ng-class="{
-                'lv1-break': workgroupRevisionsVm.breadcrumb.length >= 1,
-                'lv2-break': workgroupRevisionsVm.breadcrumb.length >= 2,
-                'lv4-break': workgroupRevisionsVm.breadcrumb.length >= 4}"
-          >
+          <div class="breadcrumbs-ctn hidden-xs">
             <div
               class="left-arrow actions"
               data-ng-click="::workgroupRevisionsVm.goToFolder(workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2])"
@@ -49,102 +43,16 @@
                 <i class="ls-previous-caret"></i>
               </a>
             </div>
-            <div id="page-root-link">
-              <a ui-sref="sharedspace.all">
-                <i class="groups-home-workgroup"></i>
-              </a>
-            </div>
-            <div id="root-level">
-              <span class="sub-category-chevron">
-                <i class="zmdi zmdi-chevron-right"></i>
-              </span>
-              <a
-                class="set-ellipsis"
-                tooltip-placement="bottom"
-                tooltip-append-to-body="true"
-                tooltip-popup-delay="1200"
-                uib-tooltip="{{::workgroupRevisionsVm.folderDetails.workgroupName}}"
-                data-ng-click="::workgroupRevisionsVm.goToFolder()"
-              >
-                {{::workgroupRevisionsVm.folderDetails.workgroupName}}
-              </a>
-            </div>
+          </div>
+          <div
+            class="breadcrumbs-ctn hidden-xs"
+          >
             <span
-              class="explorer-previous-lvl dropdown dropdown-standard pull-left"
-              uib-dropdown=""
-              dropdown-append-to-body
-              is-open="isOpenBreadCrumb"
-              data-ng-class="{'open': isOpenBreadCrumb}"
-            >
-              <span class="sub-category-chevron">
-                <i class="zmdi zmdi-chevron-right"></i>
-              </span>
-              <a
-                class="set-ellipsis"
-                uib-dropdown-toggle=""
-                tooltip-popup-delay="700"
-                tooltip-placement="bottom"
-                tooltip-append-to-body="true"
-                translate-attr="{'uib-tooltip': 'BREADCRUMB_UPPER_LEVEL'}"
-                data-ng-class="{'open': isOpenBreadCrumb}"
-              >
-                ...
-              </a>
-              <div
-                class="uib-dropdown-menu dropdown-menu dm-icon double-drop dropdown-menu-left explorer-content-dropdown"
-                uib-dropdown-menu=""
-                data-ng-class="{'open': isOpenBreadCrumb}"
-              >
-                <div class="list-menu">
-                  <p translate>BREADCRUMB_UPPER_LEVEL</p>
-                  <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
-                    <li
-                      data-ng-repeat="breadcrumbItem in workgroupRevisionsVm.breadcrumb.slice().reverse()"
-                      data-ng-click="::workgroupRevisionsVm.goToFolder(breadcrumbItem)"
-                    >
-                      <a
-                        class="set-ellipsis"
-                        data-ng-class="{'active-level' : $index === 0}"
-                      >
-                        {{breadcrumbItem.name}}
-                      </a>
-                    </li>
-                    <li>
-                      <a class="set-ellipsis"
-                        data-ng-click="::workgroupRevisionsVm.goToFolder()"
-                      >
-                        {{workgroupRevisionsVm.folderDetails.workgroupName}}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </span>
-            <div
               class="folder-level"
-              data-ng-cloak
-              data-ng-repeat="breadcrumbItem in workgroupRevisionsVm.breadcrumb"
-              data-ng-click="::workgroupRevisionsVm.goToFolder(breadcrumbItem)"
+              translate="REVISION_VIEW"
+              translate-values='{ filename: workgroupRevisionsVm.currentFolder.name}'
             >
-              <span class="sub-category-chevron">
-                <i class="zmdi zmdi-chevron-right"></i>
-              </span>
-              <a
-                class="set-ellipsis"
-                tooltip-placement="bottom"
-                tooltip-append-to-body="true"
-                tooltip-popup-delay="1000"
-                uib-tooltip="{{breadcrumbItem.name}}"
-              >
-                {{breadcrumbItem.name}}
-              </a>
-              <span data-ng-if=$last>
-                <span class="sub-category-chevron-revision">
-                  <i class="zmdi zmdi-chevron-right"></i>
-                </span>
-                <a translate> VERSION </a>
-              </span>
-            </div>
+            </span>
           </div>
           <div id="action-header">
             <div class="fg-line toolbar-actions-items wide-action-bar">
