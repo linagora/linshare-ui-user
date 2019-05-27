@@ -14,7 +14,11 @@
         >
           <div
             flow-btn
-            class="menu-popover-ctn hidden-xs clickable waves-effect"
+            class="menu-popover-ctn hidden-xs"
+            data-ng-class="{
+              'clickable waves-effect': workgroupRevisionsVm.permissions.FILE.CREATE,
+              'disabled': !workgroupRevisionsVm.permissions.FILE.CREATE
+            }"
             tooltip-placement="bottom"
             tooltip-popup-delay="500"
             translate-attr="{'uib-tooltip': 'ACTION.NEW_REVISION'}"
@@ -23,7 +27,11 @@
               class="add-menu-group"
               data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.CREATE}"
             >
-              <i class="zmdi zmdi-plus"></i>
+              <i
+                class="zmdi zmdi-plus"
+                data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.CREATE}"
+              >
+              </i>
             </a>
           </div>
           <div
