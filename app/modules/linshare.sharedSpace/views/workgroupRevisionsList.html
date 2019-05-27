@@ -695,11 +695,10 @@
                 <td
                   class="hidden-xs"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
-                  data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate"
-                  data-sortable="'modificationDate'"
+                  data-title="::'TABLE_HEADER.AUTHOR' | translate"
                   header-class="'col-4 hide-if-toggled-sidebar'"
                 >
-                  {{nodeItem.modificationDate | relativeTime}}
+                  {{nodeItem.lastAuthor.name}}
                 </td>
                 <td
                   class="hidden-xs"

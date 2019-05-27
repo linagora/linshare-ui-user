@@ -6,7 +6,8 @@
     "CREATION_DATE": "Creation date",
     "EXPIRATION_DATE": "Expiration date",
     "SIZE": "Size",
-    "ACTION": "Actions"
+    "ACTION": "Actions",
+    "AUTHOR": "Author"
   },
   "BACKGROUND_WORKGROUP_TITLE_MSG": "WORKGROUPS",
   "BACKGROUND_WORKGROUP_MSG": "Create a workgroup in order to exchange files between your colleagues",

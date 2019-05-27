@@ -6,7 +6,8 @@
     "CREATION_DATE": "Date de création",
     "EXPIRATION_DATE": "Date d'expiration",
     "SIZE": "Taille",
-    "ACTION": "Actions"
+    "ACTION": "Actions",
+    "AUTHOR": "Auteur"
   },
   "BREADCRUMB_ISOLATE": "Vue isolée",
   "BREADCRUMB_TITLE": "Mes fichiers",

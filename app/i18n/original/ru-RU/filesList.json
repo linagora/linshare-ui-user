@@ -6,7 +6,8 @@
       "CREATION_DATE": "Дата создания",
       "EXPIRATION_DATE": "Истечение срока",
       "SIZE": "Размер",
-      "ACTION": "Действия"
+      "ACTION": "Действия",
+      "AUTHOR": "translate me!"
     },
     "BREADCRUMB_ISOLATE": "Изолированный режим",
     "BREADCRUMB_TITLE": "Мои файлы",
