@@ -167,7 +167,7 @@
                 tooltip-popup-delay="350"
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
-                translate-attr="{'uib-tooltip': 'ACTION.INFO_FILE'}"
+                uib-tooltip="{{'ACTION.INFO_FILE' | translate}}"
                 data-ng-click="workgroupRevisionsVm.showFileDetails()"
               >
                 <i
@@ -1049,9 +1049,6 @@
   <h2 class="header-more-options set-ellipsis">
     {{::workgroupRevisionsVm.currentFolder.name}}
   </h2>
-  <!--
-       TODO: MOBILE show file details
-  -->
   <a
     class="pull-right return-to-wkgrps zmdi zmdi-file"
     data-ng-click="workgroupRevisionsVm.showFileDetails()"
