@@ -503,7 +503,7 @@
                 </span>
               </a>
             </span>
-            <span data-ng-class="{'disabled': !workgroupRevisionsVm.canDeleteNodes}">
+            <span data-ng-class="{'disable-link': !workgroupRevisionsVm.canDeleteNodes}">
               <a
                 class="plain-text-button share-link"
                 translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
@@ -539,8 +539,7 @@
               class="dropdown link-dropdown"
               uib-dropdown
               data-ng-class="{
-                'disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1),
-                'disabled': (workgroupRevisionsVm.selectedDocuments.length > 1)
+                'disabled disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1)
               }"
             >
               <a
@@ -755,7 +754,7 @@
                         <li
                           class="set-col-6"
                           event-propagation-stop
-                          data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.READ}"
+                          data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.READ}"
                           data-ng-click="workgroupRevisionsVm.showSelectedRevisionDetails(nodeItem)"
                         >
                           <a
@@ -768,7 +767,7 @@
                         </li>
                         <li
                           class="hidden-xs"
-                          data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
+                          data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
                         >
                           <a
                             href=""
@@ -781,7 +780,7 @@
                         </li>
                         <li
                           class="hidden-xs"
-                          data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DELETE}"
+                          data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.DELETE}"
                         >
                           <a
                             href=""
@@ -1124,8 +1123,7 @@
       is-open="isOpenItem"
       data-ng-class="{
         'open': isOpenItem,
-        'disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1),
-        'disabled': (workgroupRevisionsVm.selectedDocuments.length > 1)
+        'disabled disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1)
       }"
     >
       <i
