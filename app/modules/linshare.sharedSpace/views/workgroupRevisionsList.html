@@ -84,216 +84,11 @@
                 >
                 </i>
               </a>
-              <div class="col-xs-3 toolbar-mobile-item sort-dropdown">
-                <div
-                  class="dropdown dropdown-standard toolbar-mobile-item"
-                  uib-dropdown=""
-                  dropdown-append-to-body is-open="isOpenOrder"
-                  data-ng-class="{'open':isOpenOrder}"
-                >
-                  <div class="actions">
-                    <a
-                      uib-dropdown-toggle=""
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <i
-                        class="zmdi zmdi-sort-asc"
-                        aria-hidden="true"
-                      >
-                      </i>
-                    </a>
-                    <ul
-                      class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown sort-dropdown
-                      stop-propagate"
-                      uib-dropdown-menu=""
-                      data-ng-class="{'open':isOpenOrder}"
-                    >
-                      <li role="menuitem">
-                        <a
-                          href=""
-                          class="center"
-                          translate
-                        >
-                          SELECTION_TOOLBAR.ORDER_BY
-                        </a>
-                      </li>
-                      <li class="divided"></li>
-                      <li role="menuitem">
-                        <a
-                          href=""
-                          class="selected-sorting"
-                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('modificationDate', $event)"
-                        >
-                          <span class="caret-area">
-                            <i
-                              class="zmdi zmdi-caret-down"
-                              data-ng-show="workgroupNodesVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                            <i
-                              class="zmdi zmdi-caret-up"
-                              data-ng-show="!workgroupNodesVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                          </span>
-                          <span translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</span>
-                        </a>
-                      </li>
-                      <li role="menuitem">
-                        <a
-                          href=""
-                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('creationDate', $event)"
-                        >
-                          <span class="caret-area">
-                            <i
-                              class="zmdi zmdi-caret-down"
-                              data-ng-show="workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                            <i
-                              class="zmdi zmdi-caret-up"
-                              data-ng-show="!workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                          </span>
-                          <span translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</span>
-                        </a>
-                      </li>
-                      <li role="menuitem">
-                        <a
-                          href=""
-                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('size', $event)"
-                        >
-                          <span class="caret-area">
-                            <i
-                              class="zmdi zmdi-caret-down"
-                              data-ng-show="workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                            <i
-                              class="zmdi zmdi-caret-up"
-                              data-ng-show="!workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                          </span>
-                          <span translate>FILTER_COMPONENT.BY_SIZE</span>
-                        </a>
-                      </li>
-                      <li role="menuitem">
-                        <a
-                          href=""
-                          data-ng-click="workgroupRevisionsVm.sortDropdownSetActive('name', $event)"
-                        >
-                          <span class="caret-area">
-                            <i
-                              class="zmdi zmdi-caret-down"
-                              data-ng-show="workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                            <i
-                              class="zmdi zmdi-caret-up"
-                              data-ng-show="!workgroupRevisionsVm.tableParamsService.getToggleSelectedSort()"
-                            >
-                            </i>
-                          </span>
-                          <span translate>FILTER_COMPONENT.ORDER_BY_NAME</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!--
-                   TODO: Card view buttton - To be done once card view is implemented
-              -->
-              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
-                <i class="fa fa-th-large" aria-hidden="true"></i>
-              </a>
-              <div
-                id="top-search"
-                class="toolbar-mobile-item col-xs-3 visible-xs"
-                data-ng-click="workgroupRevisionsVm.toggleSearchState()"
-              >
-                <a>
-                  <i
-                    class="tm-icon zmdi zmdi-search"
-                    data-ng-class="{'active-link': workgroupRevisionsVm.searchMobileDropdown}"
-                  >
-                  </i>
-                </a>
-              </div>
-            </div>
-            <div class="input-group search-bar hidden-xs">
-              <div id="search-field-ctn">
-                <div class="search-style">
-                  <div class="fg-line">
-                    <input
-                      type="text"
-                      class="form-control"
-                      autocomplete="off"
-                      translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
-                      data-ng-model="workgroupRevisionsVm.paramFilter['name']"
-                      data-ng-change="updateParams()"
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="actions">
-                <a
-                  class="input-group-addon last clickable dropdown"
-                  uib-dropdown
-                  uib-dropdown-toggle
-                  dropdown-append-to-body
-                  auto-close="outsideClick"
-                  is-open="isOpenFilter"
-                  data-ng-class="{'open':isOpenFilter}"
-                  data-ng-click="advancedFilterBool = !advancedFilterBool"
-                  translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}"
-                >
-                  <i class="zmdi hidden-xs clickable ls-settings">
-                  </i>
-                  <ul
-                    uib-dropdown-menu=""
-                    class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided
-                    dropdown-content-left"
-                    data-ng-class="{'open':isOpenFilter}"
-                  >
-                    <!-- FILTER COMPONENT -->
-                    // TODO: Fix css
-                    <filter-box
-                      class="clearfix"
-                      filter-box-size="true"
-                      filter-box-date="true"
-                      filter-box-items="workgroupRevisionsVm.revisionsList"
-                      filter-box-table="workgroupRevisionsVm.tableParams"
-                    >
-                    </filter-box>
-                  </ul>
-                </a>
-              </div>
             </div>
           </div>
         </div>
       </div>
       <div id="drop-area">
-        <div id="top-search-wrap">
-          <i
-            id="top-search-close"
-            data-ng-click="workgroupRevisionsVm.toggleSearchState()"
-          >
-            &times;
-          </i>
-          <input
-            type="text"
-            id="searchInMobileFiles"
-            class="form-control ng-pristine ng-untouched ng-valid"
-            aria-invalid="false"
-            translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
-            data-ng-model="workgroupRevisionsVm.paramFilter['name']"
-            data-ng-change="updateParams()"
-          >
-        </div>
         <div
           id="selection-actions"
           class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
@@ -635,7 +430,6 @@
                 <td
                   class="row show-li-actions col-3"
                   data-title="::'TABLE_HEADER.NAME' | translate"
-                  data-sortable="'name'"
                   header-class="'col-3 flexible-table-col'"
                   uuid={{::nodeItem.uuid}}
                 >
@@ -911,7 +705,6 @@
                   class="hidden-xs"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   data-title="::'TABLE_HEADER.CREATION_DATE' | translate"
-                  data-sortable="'modificationDate'"
                   header-class="'col-4 hide-if-toggled-sidebar'"
                 >
                   {{nodeItem.creationDate | relativeTime}}
@@ -920,7 +713,6 @@
                   class="hidden-xs"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   data-title="::'TABLE_HEADER.SIZE' | translate"
-                  data-sortable="'size'"
                   header-class="'col-5 hide-if-toggled-sidebar'"
                 >
                   {{::nodeItem.size | readableSize: true}}

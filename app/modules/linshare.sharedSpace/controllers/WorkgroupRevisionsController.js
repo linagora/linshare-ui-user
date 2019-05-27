@@ -66,9 +66,6 @@
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
 
-    workgroupRevisionsVm.paramFilter = {
-      name: ''
-    };
     workgroupRevisionsVm.canDeleteNodes = false;
     workgroupRevisionsVm.currentSelectedDocument = {};
     workgroupRevisionsVm.todo = todo;
@@ -87,7 +84,6 @@
     workgroupRevisionsVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     workgroupRevisionsVm.addSelectedDocument = addSelectedDocument;
     workgroupRevisionsVm.showFileDetails = showFileDetails;
-    workgroupRevisionsVm.toggleSearchState = toggleSearchState;
     workgroupRevisionsVm.loadSidebarContent = loadSidebarContent;
     workgroupRevisionsVm.workgroupNode = lsAppConfig.workgroupNode;
     workgroupRevisionsVm.deleteVersions = deleteVersions;
@@ -114,7 +110,7 @@
     }
 
     function launchTableParamsInit() {
-      tableParamsService.initTableParams(workgroupRevisionsVm.revisionsList, workgroupRevisionsVm.paramFilter,
+      tableParamsService.initTableParams(workgroupRevisionsVm.revisionsList, {},
         workgroupRevisionsVm.folderDetails.uploadedFileUuid)
         .then(function() {
           workgroupRevisionsVm.tableParamsService = tableParamsService;
@@ -233,23 +229,6 @@
           );
           workgroupRevisionsVm.loadSidebarContent(workgroupRevisionsVm.workgroupNode);
         });
-    }
-
-    // TODO: Should be a directive
-    /**
-     * @name toggleSearchState
-     * @desc Toggle activation of the search bar for mobile mode
-     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
-     */
-    function toggleSearchState() {
-      if (!workgroupRevisionsVm.searchMobileDropdown) {
-        angular.element('#drop-area').addClass('search-toggled');
-        angular.element('#top-search-wrap input').focus();
-      } else {
-        angular.element('#drop-area').removeClass('search-toggled');
-        angular.element('#searchInMobileFiles').val('').trigger('change');
-      }
-      workgroupRevisionsVm.searchMobileDropdown = !workgroupRevisionsVm.searchMobileDropdown;
     }
 
     function getNodeDetails(nodeItem) {
