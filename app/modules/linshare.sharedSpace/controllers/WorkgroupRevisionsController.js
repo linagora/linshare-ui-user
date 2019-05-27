@@ -553,11 +553,11 @@
      * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
      */
     function downloadMultiVersions() {
-      documentUtilsService.canShowMultipleDownloadConfirmationDialog(selectedVersions).then(function() {
-        _.forEach(selectedVersions, function(version) {
+      documentUtilsService.canShowMultipleDownloadConfirmationDialog(workgroupRevisionsVm.selectedDocuments).then(function() {
+        _.forEach(workgroupRevisionsVm.selectedDocuments, function(version) {
           workgroupRevisionsVm.downloadVersion(version);
         });
-      })
+      });
     }
 
     /**
