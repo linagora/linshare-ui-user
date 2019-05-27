@@ -306,7 +306,6 @@
      */
     function openBrowser(nodeItems) {
       browseService.show({
-        currentFolder: _.cloneDeep(workgroupRevisionsVm.currentFolder),
         currentList: [],
         nodeItems: nodeItems,
         hasFolder:  _.some(nodeItems, {'type': TYPE_FOLDER}),
