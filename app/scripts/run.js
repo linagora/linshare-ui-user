@@ -21,7 +21,6 @@ angular
     $translateProvider.useMissingTranslationHandler('welcomeMessageService');
     $translateProvider.preferredLanguage('en-US');
     $translateProvider.fallbackLanguage('en-US');
-    $translateProvider.useSanitizeValueStrategy('sanitize');
 
     RestangularProvider.setDefaultHttpFields({
       cache: false
