@@ -517,8 +517,9 @@
         removedVersions.push(workgroupRevisionsRestService.remove(versions[0].workGroup, versions[0].parent));
       } else {
         removedVersions = _.map(versions, function(version) {
+          delete version.revisionNumber;
           return version.remove();
-        })
+        });
       }
 
       return $q
