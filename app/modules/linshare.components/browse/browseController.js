@@ -119,7 +119,7 @@
           browseVm.$mdDialog.hide({
             nodeItems: nodeItems,
             failedNodes: failedNodes,
-            folder: browseVm.currentFolder
+            targetNode: node
           });
         });
     }

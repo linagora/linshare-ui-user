@@ -56,6 +56,7 @@
       "CONTACTS_LIST_CREATION": "La Liste de Contacts {{contactsListName}} a été créée avec succès.",
       "COPY": "{singular, select, true{Le fichier a été copié} other{{nbItems} fichiers ont été copiés}} dans votre Espace Personnel.",
       "COPY_SAME_FOLDER": "{singular, select, true{Le fichier a été copié} other{Les fichiers ont été copiés}} avec succès.",
+      "COPY_REVISION": "Une nouvelle révision de {{targetNodeName}} a été ajoutée avec succès.",
       "DELETE": "Suppression réussie",
       "DELETE_SINGULAR": "L'élément a été supprimé avec succès.",
       "DELETE_PLURAL": "Les éléments ont été supprimés avec succès.",

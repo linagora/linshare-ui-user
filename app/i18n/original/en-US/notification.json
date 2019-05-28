@@ -56,6 +56,7 @@
       "CONTACTS_LIST_CREATION": "The Contacts List {{contactsListName}} has been created successfully.",
       "COPY": "{singular, select, true{The file has been} other{{nbItems} files have been}} copied into your Personal Space.",
       "COPY_SAME_FOLDER": "{singular, select, true{The file} other{Files}} has been copied successfully.",
+      "COPY_REVISION": "A new revision of {{targetNodeName}} has been successfully added.",
       "DELETE": "Deletion succeeded",
       "DELETE_SINGULAR": "The item was deleted successfully.",
       "DELETE_PLURAL": "The items were deleted successfully.",

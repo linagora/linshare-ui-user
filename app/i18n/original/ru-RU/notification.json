@@ -56,6 +56,7 @@
         "CONTACTS_LIST_CREATION": "Список контактов {{contactsListName}} был успешно создан.",
         "COPY": "{singular, select, true {Файл был } other{{nbItems}файлы были }} скопирован(-ы) в Моё пространство.",
         "COPY_SAME_FOLDER": "{singular, select, true{The file} other{Files}} был успешно скопирован.",
+        "COPY_REVISION": "Новая версия {{targetNodeName}} успешно добавлена.",
         "DELETE": "Успешно удалено",
         "DELETE_SINGULAR": "Элемент удалён успешно",
         "DELETE_PLURAL": "Элементы были удалены успешно.",

@@ -749,6 +749,8 @@
       });
     }
 
+
+    // TODO: Impore this code, it is bad!!
     /**
      * @name openBrowserNotify
      * @desc Check result of browser close and notify it
@@ -757,12 +759,18 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function openBrowserNotify(data, isMove) {
-      if (!isMove && data.folder.uuid === workgroupNodesVm.currentFolder.uuid) {
-        notifyCopySuccess(data.nodeItems.length);
-      } else if (data.failedNodes.length) {
+      if (data.failedNodes.length) {
         notifyBrowseActionError(data, isMove);
-      } else {
-        notifyBrowseActionSuccess(data, isMove);
+      }
+      else if(data.folder) {
+        if (!isMove && data.folder.uuid === workgroupNodesVm.currentFolder.uuid) {
+          notifyCopySuccess(data.nodeItems.length);
+        } else {
+          notifyBrowseActionSuccess(data, isMove);
+        }
+      }
+      else if(data.targetNode.type === TYPE_DOCUMENT) {
+        notifyRevisionCopySuccess(data);
       }
     }
 
@@ -841,6 +849,20 @@
         key: 'TOAST_ALERT.ACTION.COPY_SAME_FOLDER',
         pluralization: true,
         params: {singular: nbNodes === 1 ? 'true' : ''}
+      });
+    }
+
+    /**
+     * @name notifyRevisionCopySuccess
+     * @desc Notify success on simple copy nodes as a revision
+     * @param {object} data - mdDialog's close datas
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function notifyRevisionCopySuccess(data) {
+      toastService.success({
+        key: 'TOAST_ALERT.ACTION.COPY_REVISION',
+        pluralization: false,
+        params: {targetNodeName: data.targetNode.name}
       });
     }
 

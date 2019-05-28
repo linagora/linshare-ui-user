@@ -61,7 +61,7 @@
           <div class="lv-name lv-col-2 file-name-disp single-line" spellcheck="false" contenteditable="false">
             <p class="set-ellipsis">{{::node.name}}</p>
           </div>
-          <div class="lv-actions-link lv-col-3 center">
+          <div data-ng-if="browseVm.isSharedSpace && node.type !== browseVm.TYPE_DOCUMENT" class="lv-actions-link lv-col-3 center">
             <span class="zmdi zmdi-chevron-right"></span>
           </div>
         </div>

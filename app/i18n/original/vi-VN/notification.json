@@ -56,6 +56,7 @@
       "CONTACTS_LIST_CREATION": "Danh sách liên hệ {{contactsListName}} đã được tạo thành công.",
       "COPY": "{singular, select, true{một tệp đã} other{{nbItems} tệp}} sao chép vào Không gian Cá nhân.",
       "COPY_SAME_FOLDER": "{singular, select, true{Tệp} other{Các tệp}} đã sao chép thành công.",
+      "TBT__COPY_REVISION": "",
       "DELETE": "Đã xóa thành công",
       "DELETE_SINGULAR": "Mục đã được xóa thành công.",
       "DELETE_PLURAL": "Các mục đã được xóa thành công.",
