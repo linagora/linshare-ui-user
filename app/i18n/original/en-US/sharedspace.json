@@ -43,6 +43,7 @@
   "FILE_NAME": "File name",
   "REVISION": "Revision ",
   "REVISION_VIEW": "You are currently editing the revisions of {{filename}}",
+  "REVISION_NAME_UPDATE": "the revision has changed name to {{filename}}",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Upload your files",
     "COMMENT": "Upload and add members, to collaborate with them.",

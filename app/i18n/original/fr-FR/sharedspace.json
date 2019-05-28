@@ -42,6 +42,7 @@
   "FILE_NAME": "Nom de fichier",
   "REVISION": "Révision ",
   "REVISION_VIEW": "Vous êtes en train d'éditer les versions du fichier {{filename}}",
+  "REVISION_NAME_UPDATE": "la version change de nom en {{filename}}",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Déposez vos fichiers",
     "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux.",

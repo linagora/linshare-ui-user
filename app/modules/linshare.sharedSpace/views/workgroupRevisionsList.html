@@ -442,7 +442,16 @@
                         </span>
                         <span class="shared-activated hidden-xs">
                           <span class="zmdi zmdi-link"></span>
-                          {{:: nodeItem.name }}
+                          <span
+                            data-ng-if="nodeItem.isDifferentNameThanPrevious"
+                            translate
+                            translate-values="{filename: nodeItem.name}"
+                          >
+                            REVISION_NAME_UPDATE
+                          </span>
+                          <span data-ng-if="!nodeItem.isDifferentNameThanPrevious">
+                          {{ nodeItem.name }}
+                          </span>
                         </span>
                       </p>
                       <span class="secondary-info-ctn">
