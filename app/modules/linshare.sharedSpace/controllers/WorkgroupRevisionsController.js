@@ -128,6 +128,20 @@
     }
 
     /**
+     * @name refreshTable
+     * @desc Refresh revision list from api and reload table
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function refreshTable() {
+      return workgroupNodesRestService
+        .getList(workgroupRevisionsVm.folderDetails.workgroupUuid, workgroupRevisionsVm.folderDetails.folderUuid)
+        .then(function(revisions) {
+          workgroupRevisionsVm.revisionsList = revisions;
+          workgroupRevisionsVm.tableParamsService.reloadTableParams(revisions);
+        });
+    }
+
+    /**
      * @name loadSidebarContent
      * @desc Update the content of the sidebar
      * @param {string} content - The id of the content to load, see app/views/includes/sidebar-right.html
@@ -286,7 +300,7 @@
 
     function addNewItemInTableParams(newItem) {
       workgroupRevisionsVm.revisionsList.push(newItem);
-      workgroupRevisionsVm.tableParamsService.reloadTableParams();
+      refreshTable();
     }
 
     function addUploadedDocument(flowFile) {
