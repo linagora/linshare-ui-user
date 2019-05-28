@@ -704,14 +704,14 @@
     function restore(revision) {
       workgroupRevisionsRestService
         .restore(revision.workGroup, revision.parent, revision.uuid)
-        .then(function(response) {
-          workgroupRevisionsVm.tableParamsService.reloadTableParams();
+        .then(function() {
+          refreshTable();
           toastService.success({
             key: 'TOAST_ALERT.ACTION.RESTORE',
             params: {nodeName: revision.name}
           });
         })
-        .catch(function(error) {
+        .catch(function() {
           toastService.error({
             key: 'TOAST_ALERT.ERROR.RESTORE',
             params: {nodeName: revision.name}
