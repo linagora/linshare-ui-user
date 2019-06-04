@@ -1,9 +1,9 @@
 <div
   drag-and-drop
   drag-and-drop drag-and-drop-flow="$flow"
-  drag-and-drop-submitted="workgroupRevisionsVm.upload(files,workgroupRevisionsVm.folderDetails)"
-  drag-and-drop-enabled="::workgroupRevisionsVm.permissions.FILE.CREATE"
-  drag-and-drop-success="workgroupRevisionsVm.addUploadedDocument(file, $message)"
+  drag-and-drop-submitted="workgroupVersionsVm.upload(files,workgroupVersionsVm.folderDetails)"
+  drag-and-drop-enabled="::workgroupVersionsVm.permissions.FILE.CREATE"
+  drag-and-drop-success="workgroupVersionsVm.addUploadedDocument(file, $message)"
 >
   <div class="container files">
     <div class="card">
@@ -16,20 +16,20 @@
             flow-btn
             class="menu-popover-ctn hidden-xs"
             data-ng-class="{
-              'clickable waves-effect': workgroupRevisionsVm.permissions.FILE.CREATE,
-              'disabled': !workgroupRevisionsVm.permissions.FILE.CREATE
+              'clickable waves-effect': workgroupVersionsVm.permissions.FILE.CREATE,
+              'disabled': !workgroupVersionsVm.permissions.FILE.CREATE
             }"
             tooltip-placement="bottom"
             tooltip-popup-delay="500"
-            translate-attr="{'uib-tooltip': 'ACTION.NEW_REVISION'}"
+            translate-attr="{'uib-tooltip': 'ACTION.NEW_VERSION'}"
           >
             <a
               class="add-menu-group"
-              data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.CREATE}"
+              data-ng-class="{'disabled': !workgroupVersionsVm.permissions.FILE.CREATE}"
             >
               <i
                 class="zmdi zmdi-plus"
-                data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.CREATE}"
+                data-ng-class="{'disabled': !workgroupVersionsVm.permissions.FILE.CREATE}"
               >
               </i>
             </a>
@@ -37,7 +37,7 @@
           <div class="breadcrumbs-ctn hidden-xs">
             <div
               class="left-arrow actions"
-              data-ng-click="::workgroupRevisionsVm.goToFolder(workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2])"
+              data-ng-click="::workgroupVersionsVm.goToFolder(workgroupVersionsVm.breadcrumb[workgroupVersionsVm.breadcrumb.length-2])"
             >
               <a>
                 <i class="ls-previous-caret"></i>
@@ -49,8 +49,8 @@
           >
             <span
               class="folder-level"
-              translate="REVISION_VIEW"
-              translate-values='{ filename: workgroupRevisionsVm.currentFolder.name}'
+              translate="VERSION_VIEW"
+              translate-values='{ filename: workgroupVersionsVm.currentFolder.name}'
             >
             </span>
           </div>
@@ -64,7 +64,7 @@
                   <i
                     class="ls-multi-select"
                     data-ng-class="{'active-link': showCheckboxes}"
-                    data-ng-click="showCheckboxes && workgroupRevisionsVm.resetSelectedDocuments()"
+                    data-ng-click="showCheckboxes && workgroupVersionsVm.resetSelectedDocuments()"
                   >
                   </i>
                 </a>
@@ -76,7 +76,7 @@
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
                 uib-tooltip="{{'ACTION.INFO_FILE' | translate}}"
-                data-ng-click="workgroupRevisionsVm.showFileDetails()"
+                data-ng-click="workgroupVersionsVm.showFileDetails()"
               >
                 <i
                   class="zmdi zmdi-file"
@@ -92,22 +92,22 @@
         <div
           id="selection-actions"
           class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
-          data-ng-class="{'show-multi-menu': workgroupRevisionsVm.selectedDocuments.length > 0}"
+          data-ng-class="{'show-multi-menu': workgroupVersionsVm.selectedDocuments.length > 0}"
         >
           <div
             class="toggle-checkbox-toolbar"
-            data-ng-click="workgroupRevisionsVm.selectDocumentsOnCurrentPage(workgroupRevisionsVm.tableParams.data,
-            workgroupRevisionsVm.tableParams.page())"
+            data-ng-click="workgroupVersionsVm.selectDocumentsOnCurrentPage(workgroupVersionsVm.tableParams.data,
+            workgroupVersionsVm.tableParams.page())"
           >
             <a
               class="select-all-items plain-txt-btn"
-              data-ng-if="!workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
+              data-ng-if="!workgroupVersionsVm.flagsOnSelectedPages[workgroupVersionsVm.tableParams.page()]"
             >
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
             <a
               class="select-all-items plain-txt-btn"
-              data-ng-if="workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
+              data-ng-if="workgroupVersionsVm.flagsOnSelectedPages[workgroupVersionsVm.tableParams.page()]"
             >
               <i class="fa fa-check-square-o"></i>
             </a>
@@ -115,7 +115,7 @@
           <div
             class="exit-selection actions"
             translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"
-            data-ng-click="workgroupRevisionsVm.resetSelectedDocuments()"
+            data-ng-click="workgroupVersionsVm.resetSelectedDocuments()"
           >
             <a>
               <i class="zmdi zmdi-close"></i>
@@ -128,32 +128,32 @@
             <div
               class="pull-left"
               data-ng-class="{
-              'active-button-show-selection': workgroupRevisionsVm.tableParamsService.getSelectionIsIsolated()
+              'active-button-show-selection': workgroupVersionsVm.tableParamsService.getSelectionIsIsolated()
               }"
-              data-ng-click="workgroupRevisionsVm.toggleFilterBySelectedFiles()"
+              data-ng-click="workgroupVersionsVm.toggleFilterBySelectedFiles()"
             >
               <p>
-                <span>{{workgroupRevisionsVm.selectedDocuments.length}}</span>
+                <span>{{workgroupVersionsVm.selectedDocuments.length}}</span>
                 <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
               </p>
               <div class="pull-left view-icons-ctn groups-view">
                 <i
                   class="fa fa-eye-slash"
                   aria-hidden="true"
-                  data-ng-show="workgroupRevisionsVm.tableParamsService.getSelectionIsIsolated()"
+                  data-ng-show="workgroupVersionsVm.tableParamsService.getSelectionIsIsolated()"
                 >
                 </i>
                 <i
                   class="fa fa-eye"
                   aria-hidden="true"
-                  data-ng-show="!workgroupRevisionsVm.tableParamsService.getSelectionIsIsolated()"
+                  data-ng-show="!workgroupVersionsVm.tableParamsService.getSelectionIsIsolated()"
                 >
                 </i>
               </div>
             </div>
             <div
               class="pull-left view-icons-ctn reset-icon"
-              data-ng-click="workgroupRevisionsVm.resetSelectedDocuments()"
+              data-ng-click="workgroupVersionsVm.resetSelectedDocuments()"
             >
               <i
                 class="fa fa-undo"
@@ -167,11 +167,11 @@
             class="hidden-xs"
           >
             <span
-              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
+              data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.DOWNLOAD}"
             >
               <a
                 data-ng-href=""
-                data-ng-click="workgroupRevisionsVm.downloadMultiVersions(workgroupRevisionsVm.selectedDocuments)"
+                data-ng-click="workgroupVersionsVm.downloadMultiVersions(workgroupVersionsVm.selectedDocuments)"
                 event-propagation-stop
                 translate-attr="{title: 'ACTION.DOWNLOAD'}"
               >
@@ -181,12 +181,12 @@
             </span>
             <span
               data-ng-if=""
-              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
+              data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.DOWNLOAD}"
             >
               <a
                 class="plain-text-button"
                 translate-attr="{title: 'BOUTON_LABEL_TITLE.DOWNLOAD'}"
-                data-ng-click="workgroupRevisionsVm.downloadMultiVersions(workgroupRevisionsVm.selectedDocuments)"
+                data-ng-click="workgroupVersionsVm.downloadMultiVersions(workgroupVersionsVm.selectedDocuments)"
               >
                 <i class="zmdi zmdi-download"></i>
                 <span translate>
@@ -194,11 +194,11 @@
                 </span>
               </a>
             </span>
-            <span data-ng-class="{'disable-link': !workgroupRevisionsVm.canDeleteNodes}">
+            <span data-ng-class="{'disable-link': !workgroupVersionsVm.canDeleteNodes}">
               <a
                 class="plain-text-button share-link"
                 translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
-                data-ng-click="workgroupRevisionsVm.deleteVersions(workgroupRevisionsVm.selectedDocuments)"
+                data-ng-click="workgroupVersionsVm.deleteVersions(workgroupVersionsVm.selectedDocuments)"
               >
                 <i class="zmdi zmdi-delete"></i>
                 <span translate>
@@ -208,13 +208,13 @@
             </span>
 
             <span data-ng-class="{
-              'disable-link': workgroupRevisionsVm.selectedDocuments.length !== 1
-              || !workgroupRevisionsVm.permissions.FILE.CREATE
+              'disable-link': workgroupVersionsVm.selectedDocuments.length !== 1
+              || !workgroupVersionsVm.permissions.FILE.CREATE
               }">
               <a
                 class="plain-text-button share-link"
                 translate-attr="{title: 'SELECTION_TOOLBAR.RESTORE'}"
-                data-ng-click="workgroupRevisionsVm.restore(workgroupRevisionsVm.selectedDocuments[0])"
+                data-ng-click="workgroupVersionsVm.restore(workgroupVersionsVm.selectedDocuments[0])"
               >
                 <i class="zmdi zmdi-time-restore"></i>
                 <span translate>
@@ -226,7 +226,7 @@
               class="dropdown link-dropdown"
               uib-dropdown
               data-ng-class="{
-                'disabled disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1)
+                'disabled disable-link': (workgroupVersionsVm.selectedDocuments.length > 1)
               }"
             >
               <a
@@ -247,8 +247,8 @@
                 data-ng-class="{'open': isOpenToolbarMore}"
               >
                 <li
-                  data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.READ}"
-                  data-ng-click="workgroupRevisionsVm.showSelectedRevisionDetails(workgroupRevisionsVm.selectedDocuments[0])"
+                  data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.READ}"
+                  data-ng-click="workgroupVersionsVm.showSelectedVersionDetails(workgroupVersionsVm.selectedDocuments[0])"
                 >
                   <a href="">
                     <i class="zmdi zmdi-info"></i>
@@ -270,8 +270,8 @@
                   </a>
                   <ul>
                     <li
-                      data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
-                      data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace(workgroupRevisionsVm.selectedDocuments)"
+                      data-ng-show="workgroupVersionsVm.canCopyVersionToPersonalSpace"
+                      data-ng-click="workgroupVersionsVm.copyVersionToPersonalSpace(workgroupVersionsVm.selectedDocuments)"
                     >
                       <a>
                         <i class="ls-my-space"></i>
@@ -281,7 +281,7 @@
                       </a>
                     </li>
                     <li
-                      data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
+                      data-ng-click="workgroupVersionsVm.openBrowser([nodeItem])"
                     >
                       <a>
                         <i class="ls-workgroup"></i>
@@ -299,7 +299,7 @@
         <div
           class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
           check-table-height
-          data-ng-class="{'show-bg-drop' : workgroupRevisionsVm.revisionsList.length === 0}"
+          data-ng-class="{'show-bg-drop' : workgroupVersionsVm.versionsList.length === 0}"
         >
           <div class="drag-and-drop-content">
             <div class="drag-icon-ctn">
@@ -315,25 +315,25 @@
                 class="hidden-xs"
                 translate
               >
-                DRAG_DROP_BACKGROUND.TITLE_REVISION
+                DRAG_DROP_BACKGROUND.TITLE_VERSION
               </h1>
               <p
                 class="hidden-xs"
                 translate
               >
-                DRAG_DROP_BACKGROUND.COMMENT_REVISION
+                DRAG_DROP_BACKGROUND.COMMENT_VERSION
               </p>
               <h1
                 class="visible-xs"
                 translate
               >
-                WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.TITLE_REVISION
+                WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.TITLE_VERSION
               </h1>
               <p
                 class="visible-xs"
                 translate
               >
-                WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.COMMENT_REVISION
+                WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.COMMENT_VERSION
               </p>
             </div>
           </div>
@@ -343,17 +343,17 @@
             class="display-block"
             role="button"
             tabindex="0"
-            data-ng-click="workgroupRevisionsVm.selectDocumentsOnCurrentPage(workgroupRevisionsVm.tableParams.data,
-            workgroupRevisionsVm.tableParams.page())"
+            data-ng-click="workgroupVersionsVm.selectDocumentsOnCurrentPage(workgroupVersionsVm.tableParams.data,
+            workgroupVersionsVm.tableParams.page())"
           >
             <a
-              data-ng-if="!workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
+              data-ng-if="!workgroupVersionsVm.flagsOnSelectedPages[workgroupVersionsVm.tableParams.page()]"
               class="select-all-items plain-text-button checkboxCtn"
             >
               <i class="fa fa fa-square-o checkbox-table"></i>
             </a>
             <a
-              data-ng-if="workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
+              data-ng-if="workgroupVersionsVm.flagsOnSelectedPages[workgroupVersionsVm.tableParams.page()]"
               class="select-all-items plain-text-button"
             >
               <i class="fa fa-check-square-o"></i>
@@ -364,21 +364,21 @@
           <div class="table-responsive">
             <table
               id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
-              data-ng-table="workgroupRevisionsVm.tableParams"
+              data-ng-table="workgroupVersionsVm.tableParams"
             >
               <tr
                 class="p-b-5"
                 check-table-height
                 ls-item-selection
                 data-ng-repeat="nodeItem in $data track by nodeItem.uuid"
-                data-selected-documents="workgroupRevisionsVm.selectedDocuments"
+                data-selected-documents="workgroupVersionsVm.selectedDocuments"
                 data-document-file="nodeItem"
-                data-current-selected-document="workgroupRevisionsVm.currentSelectedDocument"
-                data-details-function="workgroupRevisionsVm.getNodeDetails"
+                data-current-selected-document="workgroupVersionsVm.currentSelectedDocument"
+                data-details-function="workgroupVersionsVm.getNodeDetails"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()"
                 data-ng-class="{
                 'highlight-list-elem': nodeItem.isSelected ,
-                'current-vis': workgroupRevisionsVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
+                'current-vis': workgroupVersionsVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
                 'item-container': true
                 }"
                 data-ng-click="backToSidebarContentDetails()"
@@ -388,7 +388,7 @@
                   data-header="'checkboxheader.html'"
                   header-class="'col-2 checkbox-col'"
                 >
-                  <a data-ng-click="(showCheckboxes || !isMobile) ? workgroupRevisionsVm.addSelectedDocument(nodeItem) : null">
+                  <a data-ng-click="(showCheckboxes || !isMobile) ? workgroupVersionsVm.addSelectedDocument(nodeItem) : null">
                     <div data-ng-class="{ 'invisible' : showCheckboxes && isMobile}">
                       <i data-ng-class="'{{::nodeItem.mimeType | mimetypeIcone}}'"></i>
                     </div>
@@ -409,8 +409,8 @@
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <p class="main-name-row">
                         <span class="file-name-disp single-line">
-                          <span translate>REVISION</span>
-                          {{:: nodeItem.revisionNumber }}
+                          <span translate>VERSION</span>
+                          {{:: nodeItem.versionNumber }}
                         </span>
                         <span class="shared-activated hidden-xs">
                           <span class="zmdi zmdi-link"></span>
@@ -419,7 +419,7 @@
                             translate
                             translate-values="{filename: nodeItem.name}"
                           >
-                            REVISION_NAME_UPDATE
+                            VERSION_NAME_UPDATE
                           </span>
                           <span data-ng-if="!nodeItem.isDifferentNameThanPrevious">
                           {{ nodeItem.name }}
@@ -437,8 +437,8 @@
                         <li
                           class="set-col-6"
                           event-propagation-stop
-                          data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.READ}"
-                          data-ng-click="workgroupRevisionsVm.showSelectedRevisionDetails(nodeItem)"
+                          data-ng-class="{'disabled': !workgroupVersionsVm.permissions.FILE.READ}"
+                          data-ng-click="workgroupVersionsVm.showSelectedVersionDetails(nodeItem)"
                         >
                           <a
                             class="set-col-12"
@@ -450,25 +450,25 @@
                         </li>
                         <li
                           class="hidden-xs"
-                          data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
+                          data-ng-class="{'disabled': !workgroupVersionsVm.permissions.FILE.DOWNLOAD}"
                         >
                           <a
                             href=""
                             event-propagation-stop
                             translate-attr="{title: 'ACTION.DOWNLOAD'}"
-                            data-ng-click="workgroupRevisionsVm.downloadVersion(nodeItem)"
+                            data-ng-click="workgroupVersionsVm.downloadVersion(nodeItem)"
                           >
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
                         <li
                           class="hidden-xs"
-                          data-ng-class="{'disabled': !workgroupRevisionsVm.permissions.FILE.DELETE}"
+                          data-ng-class="{'disabled': !workgroupVersionsVm.permissions.FILE.DELETE}"
                         >
                           <a
                             href=""
                             translate-attr="{title: 'ACTION.DELETE'}"
-                            data-ng-click="workgroupRevisionsVm.deleteVersions([nodeItem])"
+                            data-ng-click="workgroupVersionsVm.deleteVersions([nodeItem])"
                           >
                             <i
                               class="zmdi zmdi-delete"
@@ -502,8 +502,8 @@
                           >
                             <li
                               event-propagation-stop
-                              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.READ}"
-                              data-ng-click="workgroupRevisionsVm.showSelectedRevisionDetails(nodeItem)"
+                              data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.READ}"
+                              data-ng-click="workgroupVersionsVm.showSelectedVersionDetails(nodeItem)"
                             >
                               <a href="">
                                 <i class="zmdi zmdi-info"></i>
@@ -525,11 +525,11 @@
                               </document-preview-button>
                             </li>
                             <li
-                              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
+                              data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.DOWNLOAD}"
                             >
                               <a
                                 data-ng-href=""
-                                data-ng-click="workgroupRevisionsVm.downloadVersion(nodeItem)"
+                                data-ng-click="workgroupVersionsVm.downloadVersion(nodeItem)"
                                 event-propagation-stop
                               >
                                 <i class="zmdi zmdi-download"></i>
@@ -540,11 +540,11 @@
                             </li>
                             <li
                               data-ng-class="{
-                              'disable-link': !workgroupRevisionsVm.permissions.FILE.CREATE
+                              'disable-link': !workgroupVersionsVm.permissions.FILE.CREATE
                               || nodeItem === $data[0]
                               }"
                             >
-                              <a data-ng-click="workgroupRevisionsVm.restore(nodeItem)">
+                              <a data-ng-click="workgroupVersionsVm.restore(nodeItem)">
                                 <i class="zmdi zmdi-time-restore"></i>
                                 <span translate>
                                   ACTION.RESTORE
@@ -567,8 +567,8 @@
                               </a>
                               <ul>
                                 <li
-                                  data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
-                                  data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace([nodeItem])"
+                                  data-ng-show="workgroupVersionsVm.canCopyVersionToPersonalSpace"
+                                  data-ng-click="workgroupVersionsVm.copyVersionToPersonalSpace([nodeItem])"
                                 >
                                   <a>
                                     <i class="ls-my-space"></i>
@@ -578,7 +578,7 @@
                                   </a>
                                 </li>
                                 <li
-                                  data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
+                                  data-ng-click="workgroupVersionsVm.openBrowser([nodeItem])"
                                 >
                                   <a>
                                     <i class="ls-workgroup"></i>
@@ -591,8 +591,8 @@
                             </li>
                             <li
                               class="visible-xs"
-                              data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
-                              data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace([nodeItem])"
+                              data-ng-show="workgroupVersionsVm.canCopyVersionToPersonalSpace"
+                              data-ng-click="workgroupVersionsVm.copyVersionToPersonalSpace([nodeItem])"
                             >
                               <a>
                                 <i class="ls-my-space"></i>
@@ -606,7 +606,7 @@
                             </li>
                             <li
                               class="visible-xs"
-                              data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
+                              data-ng-click="workgroupVersionsVm.openBrowser([nodeItem])"
                             >
                               <a>
                                 <i class="ls-workgroup"></i>
@@ -620,11 +620,11 @@
                             </li>
                             <li class="divider"></li>
                             <li
-                              data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DELETE}"
+                              data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.DELETE}"
                             >
                               <a
                                 href=""
-                                data-ng-click="workgroupRevisionsVm.deleteVersions([nodeItem])"
+                                data-ng-click="workgroupVersionsVm.deleteVersions([nodeItem])"
                               >
                                 <i
                                   class="zmdi zmdi-delete"
@@ -680,9 +680,9 @@
   <div
     id="fabButtonCtn"
     fab-button
-    fab-button-actions="workgroupRevisionsVm.fabButton.actions"
+    fab-button-actions="workgroupVersionsVm.fabButton.actions"
     fab-button-flow="$flow"
-    fab-button-toolbar="workgroupRevisionsVm.fabButton.toolbar"
+    fab-button-toolbar="workgroupVersionsVm.fabButton.toolbar"
   >
   </div>
 </div>
@@ -690,26 +690,26 @@
 <div class="header-sidebar append-to-body visible-xs workgroup-header-nav">
   <a
     class="zmdi zmdi-chevron-left zmdi-hc-2x"
-    data-ng-click="::workgroupRevisionsVm.goToFolder(workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2])"
+    data-ng-click="::workgroupVersionsVm.goToFolder(workgroupVersionsVm.breadcrumb[workgroupVersionsVm.breadcrumb.length-2])"
   >
   </a>
   <h2 class="header-more-options set-ellipsis">
-    {{::workgroupRevisionsVm.currentFolder.name}}
+    {{::workgroupVersionsVm.currentFolder.name}}
   </h2>
   <a
     class="pull-right return-to-wkgrps zmdi zmdi-file"
-    data-ng-click="workgroupRevisionsVm.showFileDetails()"
+    data-ng-click="workgroupVersionsVm.showFileDetails()"
   >
   </a>
 </div>
 
 <section
   class="row multi-select-mobile visible-xs append-to-body"
-  data-ng-class="{'showMobileMultiMenu': workgroupRevisionsVm.selectedDocuments.length > 0}"
+  data-ng-class="{'showMobileMultiMenu': workgroupVersionsVm.selectedDocuments.length > 0}"
 >
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">
-      {{workgroupRevisionsVm.selectedDocuments.length}}
+      {{workgroupVersionsVm.selectedDocuments.length}}
     </span>
     <span
       class="file-multi-select-label"
@@ -720,31 +720,31 @@
   </div>
   <div class="col-xs-8">
     <div
-      data-ng-click="workgroupRevisionsVm.selectDocumentsOnCurrentPage(workgroupRevisionsVm.tableParams.data,
-      workgroupRevisionsVm.tableParams.page())"
+      data-ng-click="workgroupVersionsVm.selectDocumentsOnCurrentPage(workgroupVersionsVm.tableParams.data,
+      workgroupVersionsVm.tableParams.page())"
       class="visible-xs toolbar-mobile-item col-xs-3 clickable"
     >
       <i
         class="fa fa-square-o select-all-items p-r-10"
-        data-ng-if="!workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
+        data-ng-if="!workgroupVersionsVm.flagsOnSelectedPages[workgroupVersionsVm.tableParams.page()]"
       >
       </i>
       <i
         class="fa fa-check-square-o active-link select-all-items p-r-10"
-        data-ng-if="workgroupRevisionsVm.flagsOnSelectedPages[workgroupRevisionsVm.tableParams.page()]"
+        data-ng-if="workgroupVersionsVm.flagsOnSelectedPages[workgroupVersionsVm.tableParams.page()]"
       >
       </i>
     </div>
     <i
       class="zmdi zmdi-download col-xs-2"
-      data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
-      data-ng-click="workgroupRevisionsVm.downloadMultiVersions(workgroupRevisionsVm.selectedDocuments)"
+      data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.DOWNLOAD}"
+      data-ng-click="workgroupVersionsVm.downloadMultiVersions(workgroupVersionsVm.selectedDocuments)"
     >
     </i>
     <i
       class="zmdi zmdi-delete col-xs-2"
-      data-ng-click="workgroupRevisionsVm.deleteVersions(workgroupRevisionsVm.selectedDocuments)"
-      data-ng-class="{'disabled' : !workgroupRevisionsVm.canDeleteNodes}"
+      data-ng-click="workgroupVersionsVm.deleteVersions(workgroupVersionsVm.selectedDocuments)"
+      data-ng-class="{'disabled' : !workgroupVersionsVm.canDeleteNodes}"
     >
     </i>
     <span
@@ -755,7 +755,7 @@
       is-open="isOpenItem"
       data-ng-class="{
         'open': isOpenItem,
-        'disabled disable-link': (workgroupRevisionsVm.selectedDocuments.length > 1)
+        'disabled disable-link': (workgroupVersionsVm.selectedDocuments.length > 1)
       }"
     >
       <i
@@ -772,8 +772,8 @@
         }"
       >
         <li
-          data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.READ}"
-          data-ng-click="workgroupRevisionsVm.showSelectedRevisionDetails(workgroupRevisionsVm.selectedDocuments[0])"
+          data-ng-class="{'disable-link': !workgroupVersionsVm.permissions.FILE.READ}"
+          data-ng-click="workgroupVersionsVm.showSelectedVersionDetails(workgroupVersionsVm.selectedDocuments[0])"
         >
           <a>
             <i class="zmdi zmdi-info"></i>
@@ -785,10 +785,10 @@
         <li class="divider"></li>
         <li
           data-ng-class="{
-          'disable-link': workgroupRevisionsVm.selectedDocuments.length !== 1
-          || !workgroupRevisionsVm.permissions.FILE.CREATE
+          'disable-link': workgroupVersionsVm.selectedDocuments.length !== 1
+          || !workgroupVersionsVm.permissions.FILE.CREATE
           }"
-          data-ng-click="workgroupRevisionsVm.restore(workgroupRevisionsVm.selectedDocuments[0])"
+          data-ng-click="workgroupVersionsVm.restore(workgroupVersionsVm.selectedDocuments[0])"
         >
           <a>
             <i class="zmdi zmdi-time-restore"></i>
@@ -798,8 +798,8 @@
           </a>
         </li>
         <li
-          data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
-          data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace([nodeItem])"
+          data-ng-show="workgroupVersionsVm.canCopyVersionToPersonalSpace"
+          data-ng-click="workgroupVersionsVm.copyVersionToPersonalSpace([nodeItem])"
         >
           <a>
             <i class="ls-my-space"></i>
@@ -809,7 +809,7 @@
           </a>
         </li>
         <li
-          data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
+          data-ng-click="workgroupVersionsVm.openBrowser([nodeItem])"
         >
           <a>
             <i class="ls-workgroup"></i>
@@ -824,7 +824,7 @@
   <div class="col-xs-2 pull-right">
     <i
       class="zmdi zmdi zmdi-close"
-      data-ng-click="workgroupRevisionsVm.resetSelectedDocuments()"
+      data-ng-click="workgroupVersionsVm.resetSelectedDocuments()"
     >
     </i>
   </div>

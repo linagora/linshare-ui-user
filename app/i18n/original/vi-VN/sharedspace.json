@@ -41,13 +41,13 @@
   "BREADCRUMB_UPPER_LEVEL": "Thư mục chính",
   "TBT__VERSION": "",
   "FILE_NAME": "Tên tệp",
-  "REVISION": "Bản sửa đổi ",
-  "REVISION_VIEW": "translate me!!",
-  "REVISION_NAME_UPDATE": "translate me!!",
+  "VERSION": "Bản sửa đổi ",
+  "VERSION_VIEW": "translate me!!",
+  "VERSION_NAME_UPDATE": "translate me!!",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Tải tệp của bạn lên",
     "COMMENT": "Tải lên và thêm thành viên, để cộng tác với họ.",
-    "TITLE_REVISION": "TRANSLATE ME!",
-    "COMMENT_REVISION": "TRANSLATE ME!"
+    "TITLE_VERSION": "TRANSLATE ME!",
+    "COMMENT_VERSION": "TRANSLATE ME!"
   }
 }

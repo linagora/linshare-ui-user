@@ -392,11 +392,11 @@
                 <li
                   data-ng-if="workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT &&
                   workgroupNodesVm.permissions.FILE.READ"
-                  data-ng-class="{'disable-link': !workgroupNodesVm.canAddRevision}"
+                  data-ng-class="{'disable-link': !workgroupNodesVm.canAddVersion}"
                 >
                   <a
-                    translate-attr="{title: 'ACTION.SEE_REVISIONS'}"
-                    data-ui-sref="sharedspace.workgroups.revision({
+                    translate-attr="{title: 'ACTION.SEE_VERSIONS'}"
+                    data-ui-sref="sharedspace.workgroups.version({
                       workgroupUuid: workgroupNodesVm.folderDetails.workgroupUuid,
                       workgroupName: workgroupNodesVm.folderDetails.workgroupName,
                       fileUuid: workgroupNodesVm.selectedDocuments[0].uuid,
@@ -404,7 +404,7 @@
                     })"
                   >
                   <i class="zmdi zmdi-time-restore"></i>
-                    <span translate>ACTION.SEE_REVISIONS</span>
+                    <span translate>ACTION.SEE_VERSIONS</span>
                   </a>
                 </li>
                 <li
@@ -753,11 +753,11 @@
                             <li
                               data-ng-if="nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
                               workgroupNodesVm.permissions.FILE.READ"
-                              data-ng-class="{'disable-link': !workgroupNodesVm.canAddRevision}"
+                              data-ng-class="{'disable-link': !workgroupNodesVm.canAddVersion}"
                             >
                               <a
-                                translate-attr="{title: 'ACTION.SEE_REVISIONS'}"
-                                data-ui-sref="sharedspace.workgroups.revision({
+                                translate-attr="{title: 'ACTION.SEE_VERSIONS'}"
+                                data-ui-sref="sharedspace.workgroups.version({
                                   workgroupUuid: workgroupNodesVm.folderDetails.workgroupUuid,
                                   workgroupName: workgroupNodesVm.folderDetails.workgroupName,
                                   fileUuid: nodeItem.uuid,
@@ -765,7 +765,7 @@
                                   })"
                                 >
                               <i class="zmdi zmdi-time-restore"></i>
-                                <span translate>ACTION.SEE_REVISIONS</span>
+                                <span translate>ACTION.SEE_VERSIONS</span>
                               </a>
                             </li>
                             <li class="divider"></li>

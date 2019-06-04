@@ -38,15 +38,15 @@
   "BREADCRUMB_TITLE_WORKGROUP": "Espace commun",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers",
   "BREADCRUMB_UPPER_LEVEL": "Dossiers parent",
-  "VERSION": "revisions",
+  "VERSION": "versions",
   "FILE_NAME": "Nom de fichier",
-  "REVISION": "Révision ",
-  "REVISION_VIEW": "Vous êtes en train d'éditer les versions du fichier {{filename}}",
-  "REVISION_NAME_UPDATE": "la version change de nom en {{filename}}",
+  "VERSION": "Révision ",
+  "VERSION_VIEW": "Vous êtes en train d'éditer les versions du fichier {{filename}}",
+  "VERSION_NAME_UPDATE": "le nom de la version a changée en {{filename}}",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Déposez vos fichiers",
     "COMMENT": "Déposez vos fichiers et ajoutez des membres pour échanger avec eux.",
-    "TITLE_REVISION": "Ajoutez vos révisions ",
-    "COMMENT_REVISION": "Ajoutez vos révisions et suivez l'historique de votre fichier."
+    "TITLE_VERSION": "Ajoutez vos versions ",
+    "COMMENT_VERSION": "Ajoutez vos versions et suivez l'historique de votre fichier."
   }
 }

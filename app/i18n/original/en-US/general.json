@@ -31,7 +31,7 @@
     "NEW_FOLDER": "New folder",
     "NEW_ITEM": "New",
     "NEW_WORKGROUP": "New workgroup",
-    "NEW_REVISION": "New version",
+    "NEW_VERSION": "New version",
     "PREVIEW": "Preview",
     "REFRESH": "Refresh",
     "RENAME": "Rename",
@@ -39,7 +39,7 @@
     "SHARE": "Share",
     "SILENCE": "Silence",
     "VIEW_VERSIONING": "View previous updates",
-    "SEE_REVISIONS": "Manage version"
+    "SEE_VERSIONS": "Manage version"
   },
   "ACTIVITIES": "Activities",
   "ADD_FILES_DROPDOWN": {
@@ -261,7 +261,7 @@
   "UNKNOWN_USER": "Unknown user",
   "UNKNOWN_FIRST_LETTER": "UNK",
   "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> has been} other{Some files have been}} successfully uploaded",
-  "UPLOAD_REVISION_DONE": "A new revision{addFilename, select, true{ of <b>{fileName}</b>} other{}} has been successfully uploaded",
+  "UPLOAD_VERSION_DONE": "A new version{addFilename, select, true{ of <b>{fileName}</b>} other{}} has been successfully uploaded",
   "USER_QUOTAS": {
     "DOMAIN": "Domain used",
     "MAX_FILE_SIZE": "Max file size",

@@ -30,7 +30,7 @@
       "NEW_FOLDER": "Новая папка",
       "NEW_ITEM": "Новый",
       "NEW_WORKGROUP": "Новая рабочая группа",
-      "NEW_REVISION": "Новая версия",
+      "NEW_VERSION": "Новая версия",
       "PREVIEW": "Предварительный просмотр",
       "REFRESH": "Актуализировать",
       "RENAME": "Переименовать",
@@ -38,7 +38,7 @@
       "SHARE": "Отправить",
       "SILENCE": "Тишина",
       "VIEW_VERSIONING": "Просмотреть историю",
-      "SEE_REVISIONS": "Управлять версиями"
+      "SEE_VERSIONS": "Управлять версиями"
     },
     "ACTIVITIES": "Действия",
     "ADD_FILES_DROPDOWN": {
@@ -157,7 +157,7 @@
       "UPTADED_THE": "Изменено: ",
       "VERSIONS": "Обновление",
       "MAX_FILE_SIZE": "Максимальный размер файла",
-      "VERSIONING_ACTIVATION": ""
+      "VERSIONING_ACTIVATION": "TRANSLATE ME!"
     },
     "LINK_DISABLED": "Неактивная ссылка",
     "LOGIN": {
@@ -260,7 +260,7 @@
     "UNKNOWN_USER": "Неизвестный пользователь",
     "UNKNOWN_FIRST_LETTER": "N.C.",
     "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> был успешно загружен} other{Файлы были успешно загружены}}",
-    "UPLOAD_REVISION_DONE": "Новая версия {addFilename, select, true{<b>{fileName}</b>} other{файла}} успешно загружена",
+    "UPLOAD_VERSION_DONE": "Новая версия {addFilename, select, true{<b>{fileName}</b>} other{файла}} успешно загружена",
     "USER_QUOTAS": {
       "DOMAIN": "Используемый домен",
       "MAX_FILE_SIZE": "Максимальный размер файла.",

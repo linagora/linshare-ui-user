@@ -83,7 +83,7 @@
 
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
-    const TYPE_REVISION = 'DOCUMENT_REVISION';
+    const TYPE_VERSION = 'DOCUMENT_REVISION';
 
     var newFolderName;
 
@@ -145,7 +145,7 @@
         .getAll()
         .then(function(functionalities) {
           workgroupNodesVm.functionalities.contactsList = functionalities.CONTACTS_LIST__CREATION_RIGHT;
-          workgroupNodesVm.canAddRevision = functionalities.WORK_GROUP__FILE_VERSIONING.enable;
+          workgroupNodesVm.canAddVersion = functionalities.WORK_GROUP__FILE_VERSIONING.enable;
           workgroupNodesVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable &&
             functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
         });
@@ -204,7 +204,7 @@
         if (flowFile.folderDetails.workgroupUuid === workgroupNodesVm.folderDetails.workgroupUuid &&
           flowFile.folderDetails.folderUuid === workgroupNodesVm.folderDetails.folderUuid) {
           flowFile.asyncUploadDeferred.promise.then(function(file) {
-            file.linshareDocument.type !== TYPE_REVISION && addNewItemInTableParams(file.linshareDocument);
+            file.linshareDocument.type !== TYPE_VERSION && addNewItemInTableParams(file.linshareDocument);
           });
         }
       }
@@ -714,7 +714,7 @@
      * @desc Open browser of folders to copy/move a node
      * @param {Array<Object>} nodeItems - Nodes to copy/move
      * @param {boolean} isMove - Check if it is a copy/move
-     * @param {boolean} canDisplayFiles - Enable display of files to allow revision add.
+     * @param {boolean} canDisplayFiles - Enable display of files to allow version add.
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function openBrowser(nodeItems, isMove, canDisplayFiles) {
@@ -769,7 +769,7 @@
         }
       }
       else if(data.targetNode.type === TYPE_DOCUMENT) {
-        notifyRevisionCopySuccess(data);
+        notifyVersionCopySuccess(data);
       }
     }
 
@@ -852,14 +852,14 @@
     }
 
     /**
-     * @name notifyRevisionCopySuccess
-     * @desc Notify success on simple copy nodes as a revision
+     * @name notifyVersionCopySuccess
+     * @desc Notify success on simple copy nodes as a version
      * @param {object} data - mdDialog's close datas
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function notifyRevisionCopySuccess(data) {
+    function notifyVersionCopySuccess(data) {
       toastService.success({
-        key: 'TOAST_ALERT.ACTION.COPY_REVISION',
+        key: 'TOAST_ALERT.ACTION.COPY_VERSION',
         pluralization: false,
         params: {targetNodeName: data.targetNode.name}
       });

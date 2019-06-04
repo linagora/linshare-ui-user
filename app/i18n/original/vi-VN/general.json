@@ -31,7 +31,7 @@
     "NEW_FOLDER": "Thư mục mới",
     "NEW_ITEM": "Mới",
     "NEW_WORKGROUP": "Nhóm làm việc mới",
-    "TBT__NEW_REVISION": "",
+    "TBT__NEW_VERSION": "",
     "PREVIEW": "Xem trước",
     "REFRESH": "Làm mới",
     "RENAME": "Đổi tên",
@@ -39,7 +39,7 @@
     "SHARE": "Chia sẻ",
     "SILENCE": "khoảng lặng",
     "VIEW_VERSIONING": "Xem các cập nhật trước",
-    "SEE_REVISIONS": "Xem bản sửa đổi"
+    "SEE_VERSIONS": "Xem bản sửa đổi"
   },
   "ACTIVITIES": "Hoạt động",
   "ADD_FILES_DROPDOWN": {
@@ -260,7 +260,7 @@
   "UNKNOWN_USER": "Người dùng không xác định",
   "UNKNOWN_FIRST_LETTER": "UNK",
   "UPLOAD_DONE": "{singular, select, true {<b> {fileName} </ b> đã được} khác {Một số tệp đã được}} tải lên thành công",
-  "UPLOAD_REVISION_DONE": "Bản sửa đổi mới{addFilename, select, true{ của <b>{fileName}</b>} other{}} đã được tải lên thành công",
+  "UPLOAD_VERSION_DONE": "Bản sửa đổi mới{addFilename, select, true{ của <b>{fileName}</b>} other{}} đã được tải lên thành công",
   "USER_QUOTAS": {
     "DOMAIN": "Đã sử dụng miền",
     "MAX_FILE_SIZE": "Kích thước tệp tối đa",

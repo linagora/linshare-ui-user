@@ -41,13 +41,13 @@
   "BREADCRUMB_UPPER_LEVEL": "Parent folders",
   "VERSION": "version",
   "FILE_NAME": "File name",
-  "REVISION": "Revision ",
-  "REVISION_VIEW": "You are currently editing the revisions of {{filename}}",
-  "REVISION_NAME_UPDATE": "the revision has changed name to {{filename}}",
+  "VERSION": "Version",
+  "VERSION_VIEW": "You are currently editing the version of {{filename}}",
+  "VERSION_NAME_UPDATE": "the version name has changed to {{filename}}",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Upload your files",
     "COMMENT": "Upload and add members, to collaborate with them.",
-    "TITLE_REVISION": "Upload your file's versions",
-    "COMMENT_REVISION": "Upload your file's versions and see your file history."
+    "TITLE_VERSION": "Upload your file's versions",
+    "COMMENT_VERSION": "Upload your file's versions and see your file history."
   }
 }

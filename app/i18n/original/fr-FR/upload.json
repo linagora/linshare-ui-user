@@ -18,8 +18,8 @@
   "DRAG_DROP_BACKGROUND": {
     "TITLE": "Déposez vos fichiers ici",
     "COMMENT": "Glissez vos fichiers dans l'interface pour les déposer",
-    "TITLE_REVISION": "Déposez vos révisions ici",
-    "COMMENT_REVISION": "Glissez vos révisions dans l'interface pour les déposer"
+    "TITLE_VERSION": "Déposez vos version ici",
+    "COMMENT_VERSION": "Glissez vos version dans l'interface pour les déposer"
   },
   "DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Partage asynchrone",

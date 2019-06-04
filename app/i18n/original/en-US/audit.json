@@ -613,7 +613,7 @@
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "The revision of the file {{resourceName}} had been removed from the workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "The version of the file {{resourceName}} had been removed from the workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
         }
@@ -711,7 +711,7 @@
       "CREATE": "Creation",
       "CREATE_SHARE": "Share sent",
       "DELETE": "Deletion",
-      "DELETE_REVISION": "Deleting the revision",
+      "DELETE_REVISION": "Deleting the version",
       "DOWNLOAD": "Download",
       "FAILURE": "Login failure",
       "READ": "Read",
@@ -720,7 +720,7 @@
       "TRANSFER": "Transfer",
       "UPDATE": "Update",
       "UPLOAD": "File upload",
-      "UPLOAD_REVISION":"Creating the revision",
+      "UPLOAD_REVISION":"Creating the version",
       "VIEWED": "Viewed"
     },
     "TYPE": {
@@ -739,7 +739,7 @@
       "WORKGROUP_DOCUMENT": "Workgroup file",
       "WORKGROUP_FOLDER": "Workgroup folder",
       "WORKGROUP_MEMBER": "Workgroup member",
-      "WORKGROUP_DOCUMENT_REVISION": "Workgroup file (Revision)"
+      "WORKGROUP_DOCUMENT_REVISION": "Workgroup file (Version)"
     }
   },
   "NO_AUDIT": "No audit for this resource yet",

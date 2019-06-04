@@ -18,8 +18,8 @@
     "DRAG_DROP_BACKGROUND": {
       "TITLE": "Загружайте ваши файлы здесь",
       "COMMENT": "Перетащите файлы сюда, чтобы загрузить их",
-      "TITLE_REVISION": "TRANSLATE ME!",
-      "COMMENT_REVISION": "TRANSLATE ME!"
+      "TITLE_VERSION": "TRANSLATE ME!",
+      "COMMENT_VERSION": "TRANSLATE ME!"
     },
     "DRAG_DROP_BACKGROUND_MOBILE": {
       "TITLE": "Асинхронный обмен",

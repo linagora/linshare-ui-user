@@ -40,13 +40,13 @@
     "BREADCRUMB_UPPER_LEVEL": "Родительские папки",
     "VERSION": "версиями",
     "FILE_NAME": "Имя файла",
-    "REVISION": "Ревизии ",
-    "REVISION_VIEW": "Вы редактируете версии {{filename}}",
-    "REVISION_NAME_UPDATE": "Имя версии было изменено на {{filename}}",
+    "VERSION": "Ревизии ",
+    "VERSION_VIEW": "Вы редактируете версии {{filename}}",
+    "VERSION_NAME_UPDATE": "Имя версии было изменено на {{filename}}",
     "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
       "TITLE": "Выложите свои файлы",
       "COMMENT": "Выложите свои файлы и добавте участников для взаимодействия с ними.",
-      "TITLE_REVISION": "TRANSLATE ME!",
-      "COMMENT_REVISION": "TRANSLATE ME!"
+      "TITLE_VERSION": "TRANSLATE ME!",
+      "COMMENT_VERSION": "TRANSLATE ME!"
     }
   }

@@ -23,7 +23,7 @@
     'workgroupNodesRestService',
     'workgroupPermissionsService',
     'workgroupRestService',
-    'workgroupRevisionsRestService'
+    'workgroupVersionsRestService'
   ];
 
   /**
@@ -47,7 +47,7 @@
     workgroupNodesRestService,
     workgroupPermissionsService,
     workgroupRestService,
-    workgroupRevisionsRestService
+    workgroupVersionsRestService
   ) {
     /* jshint validthis:true */
     var browseVm = this;
@@ -75,7 +75,7 @@
       browseVm.isSharedSpace = false;
       browseVm.canCreateFolder = false;
 
-      // Cannot add revision with multiple nodes
+      // Cannot add version with multiple nodes
       browseVm.canDisplayFiles = browseVm.canDisplayFiles && browseVm.nodeItems && browseVm.nodeItems.length === 1;
 
       functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
@@ -100,16 +100,16 @@
     }
 
     /**
-     * @name addRevision
-     * @desc Add the select item as a new revision of the note
+     * @name addVersion
+     * @desc Add the select item as a new version of the note
      * @param {Object} node - Node to update
      * @memberOf linshare.components.BrowseController
      */
-    function addRevision(node) {
+    function addVersion(node) {
       var source = browseVm.nodeItems[0];
       var nodeItems= [];
       var failedNodes= [];
-      workgroupRevisionsRestService.copy(node.workGroup, node.uuid, source.uuid)
+      workgroupVersionsRestService.copy(node.workGroup, node.uuid, source.uuid)
         .then(function() {
           nodeItems = [source];
         }).catch(function () {
@@ -362,7 +362,7 @@
      */
     function handleActionOnNodeSelection(node) {
       if (node.type === TYPE_DOCUMENT) {
-        addRevision(node);
+        addVersion(node);
       } else {
         goToFolder(node);
       }

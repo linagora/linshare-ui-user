@@ -274,7 +274,7 @@
           redirect: function(currentFolder, $state, $stateParams, $transition$) {
             if(currentFolder.type === 'DOCUMENT') {
               $transition$.abort();
-              return $state.go('sharedspace.workgroups.revision', {
+              return $state.go('sharedspace.workgroups.version', {
                 workgroupUuid: $stateParams.workgroupUuid,
                 workgroupName: $stateParams.workgroupName,
                 fileUuid: $stateParams.folderUuid,
@@ -316,11 +316,11 @@
           }
         }
       })
-      .state('sharedspace.workgroups.revision', {
+      .state('sharedspace.workgroups.version', {
         url: '/:workgroupUuid/:workgroupName/:fileUuid/:fileName',
-        templateUrl: 'modules/linshare.sharedSpace/views/workgroupRevisionsList.html',
-        controller: 'WorkgroupRevisionsController',
-        controllerAs: 'workgroupRevisionsVm',
+        templateUrl: 'modules/linshare.sharedSpace/views/workgroupVersionsList.html',
+        controller: 'WorkgroupVersionsController',
+        controllerAs: 'workgroupVersionsVm',
         params: {
           uploadedFileUuid: null,
           parentUuid: null,
@@ -329,7 +329,7 @@
           fileName: ''
         },
         resolve: {
-          isRevisionEnable: function(functionalities, $state, $transition$) {
+          isVersionEnable: function(functionalities, $state, $transition$) {
             if (!functionalities.WORK_GROUP__FILE_VERSIONING.enable) {
               $transition$.abort();
               $state.go('home');

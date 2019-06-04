@@ -607,13 +607,13 @@
       "WORKGROUP_DOCUMENT_REVISION": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Une révision du fichier {{resourceName}} à été ajoutée dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Une version du fichier {{resourceName}} à été ajoutée dans le Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "La révision du fichier {{resourceName}} à été supprimée du Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "La version du fichier {{resourceName}} à été supprimée du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
         }
@@ -711,7 +711,7 @@
       "CREATE": "Création",
       "CREATE_SHARE": "Partage envoyé",
       "DELETE": "Suppression",
-      "DELETE_REVISION": "Suppression de la révision",
+      "DELETE_REVISION": "Suppression de la version",
       "DOWNLOAD": "Téléchargement",
       "FAILURE": "Connexion échouée",
       "READ": "Consultation",
@@ -720,7 +720,7 @@
       "TRANSFER": "Transfert",
       "UPDATE": "Edition",
       "UPLOAD": "Dépôt de fichier",
-      "UPLOAD_REVISION":"Création de la révision",
+      "UPLOAD_REVISION":"Création de la version",
       "VIEWED": "Vu"
     },
     "TYPE": {

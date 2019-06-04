@@ -44,12 +44,12 @@ angular
       var id = nodes && nodes.reqParams && nodes.reqParams.parent;
 
       if (id && nodes.length > 0 && _.every(nodes, { parent: id, type: 'DOCUMENT_REVISION' })) {
-        nodes[0].revisionNumber = 1;
+        nodes[0].versionNumber = 1;
         nodes[0].isDifferentNameThanPrevious = false;
 
         for(var i = nodes.length - 1; i > 0; i--) {
           var originalName = nodes[i-1].name;
-          nodes[i].revisionNumber = i + 1;
+          nodes[i].versionNumber = i + 1;
           nodes[i].isDifferentNameThanPrevious = originalName !== nodes[i].name;
         }
       }
