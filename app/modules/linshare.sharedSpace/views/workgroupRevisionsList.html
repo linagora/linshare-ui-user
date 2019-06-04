@@ -162,19 +162,11 @@
               </i>
             </div>
           </div>
-          <!--
-               TODO: Manage actions on toolbar
-          -->
           <div
             id="toolbar-actions"
             class="hidden-xs"
           >
-            <!--
-                 TODO: Manage actions for ONE file
-                 Do not forget permissions
-            -->
             <span
-              data-ng-if="true"
               data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
             >
               <a
@@ -187,10 +179,6 @@
                 <span translate>ACTION.DOWNLOAD</span>
               </a>
             </span>
-            <!--
-                 TODO: Manage actions for MULTIPLE files
-                 Do not forget permissions
-            -->
             <span
               data-ng-if=""
               data-ng-class="{'disable-link': !workgroupRevisionsVm.permissions.FILE.DOWNLOAD}"
@@ -234,10 +222,6 @@
                 </span>
               </a>
             </span>
-            <!--
-                 TODO: Manage more actions
-                 Do not forget permissions and number of files selected
-            -->
             <span
               class="dropdown link-dropdown"
               uib-dropdown
@@ -315,7 +299,6 @@
         <div
           class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
           check-table-height
-          data-ng-if="true"
           data-ng-class="{'show-bg-drop' : workgroupRevisionsVm.revisionsList.length === 0}"
         >
           <div class="drag-and-drop-content">
@@ -382,7 +365,6 @@
             <table
               id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
               data-ng-table="workgroupRevisionsVm.tableParams"
-              show-filter="true"
             >
               <tr
                 class="p-b-5"
@@ -495,10 +477,6 @@
                             </i>
                           </a>
                         </li>
-                        <!--
-                             TODO: Manage More actions
-                             Do not forget permissions
-                        -->
                         <li
                           class="dropdown set-col-6 no-padding"
                           check-dropdown-position
@@ -536,10 +514,6 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                              <!--
-                                   TODO: Manage Preview
-                                   Do not forget functionality activation
-                              -->
                               <document-preview-button
                                 data-ng-if="true"
                                 item-index="$index"
@@ -580,9 +554,6 @@
                             <li class="divider hidden-xs"></li>
                             <li
                               class="hidden-xs"
-                              data-ng-class="{
-                              'disable-link': false
-                              }"
                             >
                               <a
                                 class="parent-sub-menu-link"
@@ -712,7 +683,6 @@
     fab-button-actions="workgroupRevisionsVm.fabButton.actions"
     fab-button-flow="$flow"
     fab-button-toolbar="workgroupRevisionsVm.fabButton.toolbar"
-    data-ng-if="true"
   >
   </div>
 </div>
@@ -777,10 +747,6 @@
       data-ng-class="{'disabled' : !workgroupRevisionsVm.canDeleteNodes}"
     >
     </i>
-    <!--
-         TODO: MOBILE Manage more actions
-         Do not forget permissions and multiplicity
-    -->
     <span
       class="dropdown col-xs-2 no-padding"
       uib-dropdown
