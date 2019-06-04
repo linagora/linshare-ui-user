@@ -22,7 +22,7 @@
       handler = ServerManagerService.responseHandler,
       restUrl = {
         documents: 'documents',
-        workgroup: 'work_groups'
+        workgroup: 'shared_spaces'
       },
       restParam = 'nodes',
       service = {

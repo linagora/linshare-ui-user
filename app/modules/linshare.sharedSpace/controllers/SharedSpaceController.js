@@ -333,8 +333,11 @@ angular.module('linshare.sharedSpace')
     function renameFolder(item, itemNameElem) {
       var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
 
-      return itemUtilsService
-        .rename(item, itemNameElement)
+      return workgroupRestService.get(item.uuid)
+        .then(function(itemDetails) {
+          return itemUtilsService
+            .rename(Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement);
+        })
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           thisctrl.canCreate = true;
@@ -366,7 +369,10 @@ angular.module('linshare.sharedSpace')
 
     function createFolder(folderName) {
       if (thisctrl.canCreate) {
-        var workgroup = workgroupRestService.restangularize({name: folderName.trim()});
+        var workgroup = workgroupRestService.restangularize({
+          name: folderName.trim(),
+          nodeType: 'WORK_GROUP'
+        });
 
         thisctrl.canCreate = false;
         thisctrl.itemsList.push(workgroup);

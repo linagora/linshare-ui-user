@@ -19,7 +19,7 @@
   function workgroupRestService($log, Restangular, ServerManagerService) {
     var
       handler = ServerManagerService.responseHandler,
-      restUrl = 'work_groups',
+      restUrl = 'shared_spaces',
       service = {
         create: create,
         get: get,
@@ -70,7 +70,7 @@
      */
     function getAudit(workgroupUuid, nodeUuid) {
       $log.debug('workgroupRestService : getAudit', workgroupUuid, nodeUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).one('audit').get());
+      return handler(Restangular.one('work_groups', workgroupUuid).one('audit').get());
     }
 
     /**

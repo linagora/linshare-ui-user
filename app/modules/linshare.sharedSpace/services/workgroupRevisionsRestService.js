@@ -20,7 +20,7 @@
   function workgroupRevisionsRestService($log, Restangular, ServerManagerService) {
     var
     handler = ServerManagerService.responseHandler,
-    restUrl = 'work_groups',
+    restUrl = 'shared_spaces',
     restParam = 'nodes',
     service = {
       copy: copy,

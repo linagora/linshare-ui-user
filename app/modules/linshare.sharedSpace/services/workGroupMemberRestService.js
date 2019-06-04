@@ -19,7 +19,7 @@
   function workgroupMembersRestService($log, Restangular, ServerManagerService) {
     var
       handler = ServerManagerService.responseHandler,
-      restUrl = 'shared_space_nodes',
+      restUrl = 'shared_spaces',
       restParam = 'members',
       service = {
         create: create,
