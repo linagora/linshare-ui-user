@@ -363,9 +363,11 @@
                             x-ng-click="vm.showItemDetails(documentFile.uuid, true)"
                             event-propagation-stop
                           >
-                            <a href=""
-                               translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}"
-                               class="set-col-12">
+                            <a
+                              href=""
+                              translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}"
+                              class="set-col-12"
+                            >
                               <i class="zmdi zmdi-info"></i>
                             </a>
                           </li>
@@ -373,9 +375,12 @@
                             class="hidden-xs"
                             x-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
                             data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].MEMBER.READ}"
+                            event-propagation-stop
                           >
-                            <a href="" translate-attr="{title: 'WORKGROUPS_LIST.MEMBER'}"
-                               event-propagation-stop="true">
+                            <a
+                              href=""
+                              translate-attr="{title: 'WORKGROUPS_LIST.MEMBER'}"
+                            >
                               <i><span class="ls-member"></span></i>
                             </a>
                           </li>
