@@ -115,7 +115,7 @@
           </div>
           <div class="item-r actions">
             <span title="{{::'DETAILS.USED_SPACE' | translate}}">
-              {{mainVm.sidebar.getData().currentSelectedDocument.current.quotas.usedSpace | readableSize:true}}
+              {{mainVm.sidebar.getData().currentSelectedDocument.quotas.usedSpace | readableSize:true}}
             </span>
           </div>
         </div>
@@ -163,7 +163,31 @@
             </div>
             <div>
               <p translate> INFORMATION_TAB.MAX_FILE_SIZE </p>
-              <p> {{::mainVm.sidebar.getData().currentSelectedDocument.current.quotas.maxFileSize | readableSize:true}}</p>
+              <p> {{::mainVm.sidebar.getData().currentSelectedDocument.quotas.maxFileSize | readableSize:true}}</p>
+            </div>
+            <div
+              class="field-ctn"
+              data-ng-class="{
+              disabled: !(mainVm.sidebar.getData().functionalities.canOverrideVersioning &&
+              (mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.original.uuid]
+              .WORKGROUP.UPDATE || mainVm.sidebar.getData().permissions.WORKGROUP.UPDATE))
+              }"
+            >
+              <div class="fg-line">
+                <div>
+                  <label for="versioningParameters" translate>INFORMATION_TAB.VERSIONING_ACTIVATION</label>
+                  <label class="checkbox checkbox-inline m-r-0 pull-right">
+                    <input
+                      type="checkbox"
+                      name="versioningParameters"
+                      data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.original.versioningParameters.enable"
+                      data-ng-click="mainVm.sidebar.getData().currentSelectedDocument.original.save()"
+                      data-ng-disabled="!mainVm.sidebar.getData().functionalities.canOverrideVersioning"
+                    />
+                    <i class="input-helper"></i>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>

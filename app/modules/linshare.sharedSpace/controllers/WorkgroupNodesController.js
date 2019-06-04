@@ -146,6 +146,8 @@
         .then(function(functionalities) {
           workgroupNodesVm.functionalities.contactsList = functionalities.CONTACTS_LIST__CREATION_RIGHT;
           workgroupNodesVm.canAddRevision = functionalities.WORK_GROUP__FILE_VERSIONING.enable;
+          workgroupNodesVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable &&
+            functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
         });
 
       Object.assign(
@@ -972,7 +974,8 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function showWorkgroupDetails(showMemberTab) {
-      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true).then(function(workgroup) {
+      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true)
+        .then(function(workgroup) {
         // TODO : remove the map once the property userMail will be changed to mail
         workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
           workgroup.members,
@@ -980,7 +983,10 @@
             return { mail: member.userMail };
           }
         );
-        workgroupNodesVm.currentSelectedDocument.current = workgroup;
+
+        workgroupNodesVm.currentSelectedDocument.current = Object.assign({}, workgroup);
+        workgroupNodesVm.currentSelectedDocument.original = Object.assign({}, workgroup);
+
         return workgroup;
       }).then(function() {
         return $q.all([
@@ -988,7 +994,8 @@
           workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid)
         ]);
       }).then(function(promises) {
-        workgroupNodesVm.currentSelectedDocument.current.quotas = promises[0];
+        workgroupNodesVm.currentSelectedDocument.quotas = Object.assign({}, promises[0]);
+
         return auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain());
       }).then(function(auditActions) {
         workgroupNodesVm.currentSelectedDocument.current.auditActions = auditActions;

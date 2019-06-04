@@ -157,7 +157,8 @@
     "TITLE": "Détails",
     "UPTADED_THE": "Modifié le ",
     "VERSIONS": "Mise à jours",
-    "MAX_FILE_SIZE": "Taille maximale du fichier"
+    "MAX_FILE_SIZE": "Taille maximale du fichier",
+    "VERSIONING_ACTIVATION": "Activation des versions : "
   },
   "LINK_DISABLED": "Lien inactif",
   "LOGIN": {

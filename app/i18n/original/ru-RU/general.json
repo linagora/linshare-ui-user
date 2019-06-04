@@ -156,7 +156,8 @@
       "TITLE": "Информация",
       "UPTADED_THE": "Изменено: ",
       "VERSIONS": "Обновление",
-      "MAX_FILE_SIZE": "Максимальный размер файла"
+      "MAX_FILE_SIZE": "Максимальный размер файла",
+      "VERSIONING_ACTIVATION": ""
     },
     "LINK_DISABLED": "Неактивная ссылка",
     "LOGIN": {

@@ -122,6 +122,7 @@ angular.module('linshare.sharedSpace')
     functionalityRestService.getAll().then(function(functionalities) {
       thisctrl.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
       thisctrl.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
+      thisctrl.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
 
       if (functionalities.WORK_GROUP__CREATION_RIGHT.enable) {
         thisctrl.fabButton = {
@@ -296,13 +297,14 @@ angular.module('linshare.sharedSpace')
             }
           );
 
-          thisctrl.currentSelectedDocument.current = workgroup;
+          thisctrl.currentSelectedDocument.current = Object.assign({},workgroup);
+          thisctrl.currentSelectedDocument.original = Object.assign({}, workgroup);
 
           return workgroupRestService
             .getQuota(thisctrl.currentSelectedDocument.current.quotaUuid);
         })
         .then(function(quota) {
-          thisctrl.currentSelectedDocument.current.quotas = quota;
+          thisctrl.currentSelectedDocument.quotas = Object.assign({}, quota);
 
           return getWorkgroupAudit(thisctrl.currentSelectedDocument.current);
         })
