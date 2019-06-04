@@ -720,8 +720,7 @@
 <div class="header-sidebar append-to-body visible-xs workgroup-header-nav">
   <a
     class="zmdi zmdi-chevron-left zmdi-hc-2x"
-    data-ng-click="workgroupRevisionsVm.goToPreviousFolder((workgroupRevisionsVm.breadcrumb.length === 0),
-    workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2])"
+    data-ng-click="::workgroupRevisionsVm.goToFolder(workgroupRevisionsVm.breadcrumb[workgroupRevisionsVm.breadcrumb.length-2])"
   >
   </a>
   <h2 class="header-more-options set-ellipsis">
@@ -730,14 +729,6 @@
   <a
     class="pull-right return-to-wkgrps zmdi zmdi-file"
     data-ng-click="workgroupRevisionsVm.showFileDetails()"
-  >
-  </a>
-  <!--
-       TODO: MOBILE go to file in folder | workgroup
-  -->
-  <a
-    class="pull-right return-to-wkgrps zmdi zmdi-format-valign-top"
-    data-ui-sref=""
   >
   </a>
 </div>
