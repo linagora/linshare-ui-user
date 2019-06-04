@@ -28,6 +28,7 @@
     'nodesList',
     'tableParamsService',
     'toastService',
+    'user',
     'workgroup',
     'workgroupNodesRestService',
     'workgroupPermissions',
@@ -55,6 +56,7 @@
     nodesList,
     tableParamsService,
     toastService,
+    user,
     workgroup,
     workgroupNodesRestService,
     workgroupPermissions,
@@ -62,13 +64,12 @@
   ) {
     var workgroupRevisionsVm = this;
     const TYPE_REVISION = 'DOCUMENT_REVISION';
-
     const TYPE_DOCUMENT = 'DOCUMENT';
     const TYPE_FOLDER = 'FOLDER';
 
+    workgroupRevisionsVm.canCopyRevisionToPersonalSpace = user.canUpload;
     workgroupRevisionsVm.canDeleteNodes = false;
     workgroupRevisionsVm.currentSelectedDocument = {};
-    workgroupRevisionsVm.todo = todo;
     workgroupRevisionsVm.folderDetails = _.cloneDeep($transition$.params());
     workgroupRevisionsVm.currentFolder = currentFolder;
     workgroupRevisionsVm.breadcrumb = [];
@@ -91,6 +92,7 @@
     workgroupRevisionsVm.downloadMultiVersions = downloadMultiVersions;
     workgroupRevisionsVm.restore = restore;
     workgroupRevisionsVm.showSelectedRevisionDetails = showSelectedRevisionDetails;
+    workgroupRevisionsVm.copyRevisionToPersonalSpace = copyRevisionToPersonalSpace;
 
     activate();
 
@@ -697,6 +699,31 @@
             params: {nodeName: revision.name}
           });
         });
+    }
+
+    /**
+     * @name copyRevisionToPersonalSpace
+     * @desc Copy revision from current list into Personal Space
+     * @param {Array<Revision>} revisionItems - {@link Revision} object
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function copyRevisionToPersonalSpace(revisionItems) {
+      var promises = [];
+      _.forEach(revisionItems, function(revisionItem) {
+        promises.push(
+          workgroupNodesRestService.copyToMySpace(workgroupRevisionsVm.folderDetails.workgroupUuid, revisionItem.uuid)
+        );
+      });
+
+      $q.all(promises).then(function(revisionItems) {
+        notifyCopySuccess(revisionItems.length);
+      }).catch(function(error) {
+        switch(error.data.errCode) {
+        case 26444 :
+          toastService.error({key: 'TOAST_ALERT.ERROR.COPY.26444'});
+          break;
+        }
+      });
     }
   }
 })();

@@ -274,10 +274,6 @@
                   </a>
                 </li>
                 <li>
-                  <!--
-                       TODO: Manage Copy
-                       DO not forget permissions and functionalities activation
-                  -->
                   <a
                     href=""
                     class="parent-sub-menu-link"
@@ -290,11 +286,8 @@
                   </a>
                   <ul>
                     <li
-                      data-ng-class="{
-                      'disable-link': false
-                      }"
-                      data-ng-show="true"
-                      data-ng-click="workgroupRevisionsVm.todo()"
+                      data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
+                      data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace(workgroupRevisionsVm.selectedDocuments)"
                     >
                       <a>
                         <i class="ls-my-space"></i>
@@ -305,9 +298,6 @@
                     </li>
                     <li
                       data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
-                      data-ng-class="{
-                      'disable-link': false
-                      }"
                     >
                       <a>
                         <i class="ls-workgroup"></i>
@@ -588,10 +578,6 @@
                               </a>
                             </li>
                             <li class="divider hidden-xs"></li>
-                            <!--
-                                 TODO: Manage Copy
-                                 Do not forget permissions and functionalities activation
-                            -->
                             <li
                               class="hidden-xs"
                               data-ng-class="{
@@ -610,11 +596,8 @@
                               </a>
                               <ul>
                                 <li
-                                  data-ng-class="{
-                                  'disable-link': false
-                                  }"
-                                  data-ng-show="true"
-                                  data-ng-click="workgroupRevisionsVm.todo()"
+                                  data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
+                                  data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace([nodeItem])"
                                 >
                                   <a>
                                     <i class="ls-my-space"></i>
@@ -625,9 +608,6 @@
                                 </li>
                                 <li
                                   data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
-                                  data-ng-class="{
-                                  'disable-link': false
-                                  }"
                                 >
                                   <a>
                                     <i class="ls-workgroup"></i>
@@ -638,17 +618,10 @@
                                 </li>
                               </ul>
                             </li>
-                            <!--
-                                 TODO: NOBILE Manage Copy
-                                 Do not forget permissions and functionalities activation
-                            -->
                             <li
                               class="visible-xs"
-                              data-ng-class="{
-                              'disable-link': false
-                              }"
-                              data-ng-show="true"
-                              data-ng-click="workgroupRevisionsVm.todo()"
+                              data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
+                              data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace([nodeItem])"
                             >
                               <a>
                                 <i class="ls-my-space"></i>
@@ -662,9 +635,6 @@
                             </li>
                             <li
                               class="visible-xs"
-                              data-ng-class="{
-                              'disable-link': false
-                              }"
                               data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
                             >
                               <a>
@@ -870,15 +840,9 @@
             </span>
           </a>
         </li>
-        <!--
-             TODO: MOBILE Manage Copy
-             Do not forget permissions and functionallities activation
-        -->
         <li
-          data-ng-class="{
-          'disable-link': false
-          }"
-          data-ng-click="workgroupRevisionsVm.todo()"
+          data-ng-show="workgroupRevisionsVm.canCopyRevisionToPersonalSpace"
+          data-ng-click="workgroupRevisionsVm.copyRevisionToPersonalSpace([nodeItem])"
         >
           <a>
             <i class="ls-my-space"></i>
@@ -888,9 +852,6 @@
           </a>
         </li>
         <li
-          data-ng-class="{
-          'disable-link': false
-          }"
           data-ng-click="workgroupRevisionsVm.openBrowser([nodeItem])"
         >
           <a>
