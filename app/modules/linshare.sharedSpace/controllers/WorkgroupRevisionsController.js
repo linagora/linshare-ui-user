@@ -105,10 +105,23 @@
 
       launchTableParamsInit();
       getBreadcrumb();
+      setFabConfig();
     }
 
-    function todo(){
-      toastService.error({key: 'Please code me!'});
+    /**
+     * @name setFabConfig
+     * @desc Build the floating actions button
+     * @memberOf LinShare.sharedSpace.WorkgroupRevisionsController
+     */
+    function setFabConfig() {
+      workgroupRevisionsVm.fabButton = {
+        actions: [{
+          flowBtn: true,
+          hide: !workgroupRevisionsVm.permissions.FILE.CREATE,
+          icon: 'zmdi zmdi-plus',
+          label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE'
+        }]
+      };
     }
 
     function launchTableParamsInit() {
