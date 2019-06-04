@@ -98,8 +98,9 @@
             );
         })
         .then(function(workgroupsRole) {
+          const getPermissionsMemoize = _.memoize(workgroupRolesRestService.getPermissions);
           const workgroupPermissions = _.map(workgroupsRole, function(workgroupRole) {
-            return workgroupRolesRestService.getPermissions(workgroupRole.role.uuid);
+            return getPermissionsMemoize (workgroupRole.role.uuid);
           });
           const workgroupsRolesAndPermissions = _.flatten([
             [workgroupsRole],
