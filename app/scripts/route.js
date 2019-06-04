@@ -206,13 +206,6 @@
               .then(function(workgroupsPermissions) {
                 return workgroupPermissionsService.formatPermissions(workgroupsPermissions);
               });
-          },
-          workgroupsRoles: function(workgroups, workgroupRolesService) {
-            return workgroupRolesService
-              .getWorkgroupsRoles(workgroups)
-              .then(function(workgroupsRoles) {
-                return workgroupRolesService.formatRoles(workgroupsRoles);
-              });
           }
         }
       })
@@ -252,15 +245,6 @@
                 return permissions[Object.keys(permissions)[0]];
               });
           },
-          workgroupRole: function(workgroup, workgroupRolesService) {
-            return workgroupRolesService
-              .getWorkgroupsRoles([workgroup])
-              .then(function(workgroupsRoles) {
-                const roles = workgroupRolesService.formatRoles(workgroupsRoles);
-
-                return roles[Object.keys(roles)[0]];
-              });
-          }
         }
       })
       .state('sharedspace.workgroups.root_redirect', {
@@ -318,15 +302,6 @@
                 return permissions[Object.keys(permissions)[0]];
               });
           },
-          workgroupRole: function(workgroup, workgroupRolesService) {
-            return workgroupRolesService
-              .getWorkgroupsRoles([workgroup])
-              .then(function(workgroupsRoles) {
-                const roles = workgroupRolesService.formatRoles(workgroupsRoles);
-
-                return roles[Object.keys(roles)[0]];
-              });
-          }
         }
       })
       .state('sharedspace.workgroups.folder_redirect', {
@@ -382,15 +357,6 @@
                 return permissions[Object.keys(permissions)[0]];
               });
           },
-          workgroupRole: function(workgroup, workgroupRolesService) {
-            return workgroupRolesService
-              .getWorkgroupsRoles([workgroup])
-              .then(function(workgroupsRoles) {
-                const roles = workgroupRolesService.formatRoles(workgroupsRoles);
-
-                return roles[Object.keys(roles)[0]];
-              });
-          }
         }
       })
       .state('administration', {

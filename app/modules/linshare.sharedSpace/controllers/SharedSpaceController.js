@@ -30,11 +30,9 @@ angular.module('linshare.sharedSpace')
     workgroupRestService,
     workgroups,
     workgroupsPermissions,
-    workgroupsRoles
   ) {
     var thisctrl = this;
     thisctrl.functionalities = {};
-    thisctrl.roles = workgroupsRoles;
     thisctrl.permissions = workgroupsPermissions;
     thisctrl.canDeleteWorkgroups = false;
     thisctrl.canCreate = true;
