@@ -402,7 +402,7 @@
                 <td
                   class="row show-li-actions col-3"
                   data-title="::'TABLE_HEADER.NAME' | translate"
-                  header-class="'col-3 flexible-table-col'"
+                  header-class="'col-3 flexible-table-col cursor-default'"
                   uuid={{::nodeItem.uuid}}
                 >
                   <div class="ctn-name-actions">
@@ -646,7 +646,7 @@
                   class="hidden-xs"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   data-title="::'TABLE_HEADER.AUTHOR' | translate"
-                  header-class="'col-4 hide-if-toggled-sidebar'"
+                  header-class="'col-4 hide-if-toggled-sidebar cursor-default'"
                 >
                   {{nodeItem.lastAuthor.name}}
                 </td>
@@ -654,7 +654,7 @@
                   class="hidden-xs"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   data-title="::'TABLE_HEADER.CREATION_DATE' | translate"
-                  header-class="'col-4 hide-if-toggled-sidebar'"
+                  header-class="'col-4 hide-if-toggled-sidebar cursor-default'"
                 >
                   {{nodeItem.creationDate | relativeTime}}
                 </td>
@@ -662,7 +662,7 @@
                   class="hidden-xs"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   data-title="::'TABLE_HEADER.SIZE' | translate"
-                  header-class="'col-5 hide-if-toggled-sidebar'"
+                  header-class="'col-5 hide-if-toggled-sidebar cursor-default'"
                 >
                   {{::nodeItem.size | readableSize: true}}
                 </td>
