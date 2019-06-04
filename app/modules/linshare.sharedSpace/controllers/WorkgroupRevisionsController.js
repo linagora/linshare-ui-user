@@ -22,6 +22,7 @@
     'auditDetailsService',
     'browseService',
     'currentFolder',
+    'documentPreviewService',
     'documentUtilsService',
     'flowUploadService',
     'lsAppConfig',
@@ -50,6 +51,7 @@
     auditDetailsService,
     browseService,
     currentFolder,
+    documentPreviewService,
     documentUtilsService,
     flowUploadService,
     lsAppConfig,
@@ -102,6 +104,22 @@
       workgroupRevisionsVm.folderDetails.folderName = currentFolder.name;
       workgroupRevisionsVm.folderDetails.folderUuid = currentFolder.uuid;
       workgroupRevisionsVm.folderDetails.quotaUuid = workgroup.quotaUuid;
+
+      Object.assign(
+        documentPreviewService,
+        {
+          download: downloadVersion,
+          copyToMySpace: function(item) {
+            copyRevisionToPersonalSpace([item]);
+          },
+          copyToWorkgroup: function(item) {
+            openBrowser([item]);
+          },
+          showItemDetails: function(item) {
+            showSelectedRevisionDetails(item);
+          }
+        }
+      );
 
       launchTableParamsInit();
       getBreadcrumb();
