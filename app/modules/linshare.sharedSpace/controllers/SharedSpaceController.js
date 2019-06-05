@@ -29,7 +29,7 @@ angular.module('linshare.sharedSpace')
     workgroupPermissionsService,
     workgroupRestService,
     workgroups,
-    workgroupsPermissions,
+    workgroupsPermissions
   ) {
     var thisctrl = this;
     thisctrl.functionalities = {};

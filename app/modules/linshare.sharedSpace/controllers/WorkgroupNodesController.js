@@ -75,7 +75,7 @@
     workgroupMembersRestService,
     workgroupNodesRestService,
     workgroupPermissions,
-    workgroupRestService,
+    workgroupRestService
   )
   {
     /* jshint validthis:true */
