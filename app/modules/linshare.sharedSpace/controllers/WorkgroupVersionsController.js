@@ -530,6 +530,7 @@
       } else {
         removedVersions = _.map(versions, function(version) {
           delete version.versionNumber;
+          delete version.isDifferentNameThanPrevious;
           return version.remove();
         });
       }
