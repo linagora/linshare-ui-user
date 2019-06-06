@@ -55,9 +55,12 @@
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.workgroupRestService
      */
-    function get(workgroupUuid, withMembers) {
+    function get(workgroupUuid, withMembers, withRole) {
       $log.debug('workgroupRestService : get', workgroupUuid);
-      return handler(Restangular.one(restUrl, workgroupUuid).get({members: withMembers}));
+      return handler(Restangular.one(restUrl, workgroupUuid).get({
+        members: withMembers,
+        withRole: withRole
+      }));
     }
 
     /**
@@ -88,12 +91,13 @@
     /**
      * @name getList
      * @desc Get the list of Workgroup object
+     * @param {boolean} withRole - Get Role of current user per workgroup
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.workgroupRestService
      */
-    function getList() {
+    function getList(withRole) {
       $log.debug('workgroupRestService : getList');
-      return handler(Restangular.all(restUrl).getList());
+      return handler(Restangular.all(restUrl).getList({withRole: withRole}));
     }
 
     /**

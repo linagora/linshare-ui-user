@@ -288,7 +288,7 @@ angular.module('linshare.sharedSpace')
      */
     function showItemDetails(workgroupUuid, loadAction, memberTab) {
       workgroupRestService
-        .get(workgroupUuid, true)
+        .get(workgroupUuid, true, true)
         .then(function(workgroup) {
           thisctrl.currentSelectedDocument.membersForContactsList = _.map(
             workgroup.members,
@@ -297,7 +297,7 @@ angular.module('linshare.sharedSpace')
             }
           );
 
-          thisctrl.currentSelectedDocument.current = Object.assign({},workgroup);
+          thisctrl.currentSelectedDocument.current = Object.assign({}, workgroup);
           thisctrl.currentSelectedDocument.original = Object.assign({}, workgroup);
 
           return workgroupRestService
@@ -337,14 +337,20 @@ angular.module('linshare.sharedSpace')
 
       return workgroupRestService.get(item.uuid)
         .then(function(itemDetails) {
-          return itemUtilsService
-            .rename(Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement);
+          return item.uuid ?
+            itemUtilsService.rename(
+              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement
+            ) :
+            itemUtilsService.rename(item, itemNameElement);
         })
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           thisctrl.canCreate = true;
-          return workgroupPermissionsService
-            .getWorkgroupsPermissions(workgroups);
+          return workgroupRestService.get(item.uuid, true, true);
+        })
+        .then(function(newItemDetailsWithRole) {
+          item = _.assign(item, newItemDetailsWithRole);
+          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         })
         .then(function(workgroupsPermissions) {
           thisctrl.permissions = Object.assign(

@@ -150,13 +150,7 @@
               <p>
                 <i class="zmdi zmdi-account p-r-3"></i>
                 <span>
-                  {{
-                  "MEMBER_TAB." +
-                  (mainVm.sidebar.getData().roles ?
-                  mainVm.sidebar.getData().roles[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].name :
-                  mainVm.sidebar.getData().role.name)
-                  | translate
-                  }}
+                  {{ "MEMBER_TAB." + mainVm.sidebar.getData().currentSelectedDocument.current.role.name | translate }}
                 <br />
                 </span>
               </p>

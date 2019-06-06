@@ -49,7 +49,7 @@
           data-ng-class="{
           'disabled' : browseVm.disableFolder(node) ||
           (browseVm.isSharedSpace && !browseVm.isMove
-          && browseVm.hasFile && !browseVm.permissions[node.uuid].FILE.CREATE)
+          && !browseVm.permissions[node.uuid].FILE.CREATE)
           }"
           uuid={{::node.uuid}}
         >

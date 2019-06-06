@@ -221,11 +221,11 @@
 
       if (browseVm.isSharedSpace) {
         browseVm.restService = workgroupNodesRestService;
-        browseVm.restService.get(selectedFolder.uuid, selectedFolder.uuid).then(function(currentFolder) {
+        browseVm.restService.get(selectedFolder.uuid, selectedFolder.uuid, true, true).then(function(currentFolder) {
           browseVm.currentFolder = currentFolder;
           browseVm.currentFolder.workgroupUuid = currentFolder.workGroup;
           browseVm.currentFolder.workgroupName = currentFolder.name;
-          browseVm.restService.getList(currentFolder.workGroup).then(function(currentList) {
+          browseVm.restService.getList(currentFolder.workGroup, true).then(function(currentList) {
             browseVm.currentList = _.orderBy(filterNodeListByType(currentList), 'modificationDate', 'desc');
             browseVm.isSharedSpace = false;
           });
@@ -256,12 +256,12 @@
      * @memberOf linshare.components.BrowseController
      */
     function loadBrowseList() {
-      if (_.isNil(browseVm.currentFolder)) {
+      if (_.isNil(browseVm.currentFolder) || _.isNil(browseVm.currentFolder.role)) {
         browseVm.currentFolder = {};
         browseVm.restService = workgroupRestService;
         browseVm.isSharedSpace = true;
 
-        browseVm.restService.getList()
+        browseVm.restService.getList(true)
           .then(function(currentList) {
             browseVm.currentList = _.orderBy(currentList, 'modificationDate', 'desc');
             return workgroupPermissionsService.getWorkgroupsPermissions(currentList);

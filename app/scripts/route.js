@@ -198,7 +198,7 @@
         controller: 'SharedSpaceController as vm',
         resolve: {
           workgroups: function(workgroupRestService) {
-            return workgroupRestService.getList();
+            return workgroupRestService.getList(true);
           },
           workgroupsPermissions: function(workgroups, workgroupPermissionsService) {
             return workgroupPermissionsService
@@ -232,7 +232,7 @@
             return workgroupNodesRestService.getList($transition$.params().workgroupUuid);
           },
           workgroup: function(currentFolder, nodesList, $transition$, workgroupRestService) {
-            return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
+            return workgroupRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
               return workgroup;
             });
           },
@@ -289,7 +289,7 @@
               $transition$.params().workgroupUuid, $transition$.params().folderUuid);
           },
           workgroup: function($transition$, workgroupRestService) {
-            return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
+            return workgroupRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
               return workgroup;
             });
           },
@@ -344,7 +344,7 @@
               $transition$.params().workgroupUuid, $transition$.params().fileUuid);
           },
           workgroup: function($transition$, workgroupRestService) {
-            return workgroupRestService.get($transition$.params().workgroupUuid, false).then(function(workgroup) {
+            return workgroupRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
               return workgroup;
             });
           },

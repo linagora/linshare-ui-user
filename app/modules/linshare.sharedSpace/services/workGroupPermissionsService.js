@@ -88,30 +88,25 @@
     function getWorkgroupsPermissions(workgroups) {
       $log.debug('workgroupPermissionsService : getWorkgroupsPermissions', workgroups);
 
-        return authenticationRestService.getCurrentUser()
-        .then(function (loggedUser) {
-          return $q
-            .all(
-              _.map(workgroups, function(workgroup) {
-                return workgroupMembersRestService.get(workgroup.uuid, loggedUser.uuid);
-              })
-            );
-        })
-        .then(function(workgroupsRole) {
-          const getPermissionsMemoize = _.memoize(workgroupRolesRestService.getPermissions);
-          const workgroupPermissions = _.map(workgroupsRole, function(workgroupRole) {
-            return getPermissionsMemoize (workgroupRole.role.uuid);
-          });
-          const workgroupsRolesAndPermissions = _.flatten([
-            [workgroupsRole],
-            workgroupPermissions
-          ]);
+      const getPermissionsMemoize = _.memoize(workgroupRolesRestService.getPermissions);
+      const workgroupsRole = _.map(workgroups, function(workgroup) {
+        return {
+          roleUuid: workgroup.role.uuid,
+          nodeUuid: workgroup.uuid
+        };
+      });
+      const workgroupPermissions = _.map(workgroupsRole, function(workgroupRole) {
+        return getPermissionsMemoize (workgroupRole.roleUuid);
+      });
+      const workgroupsRolesAndPermissions = workgroupPermissions;
 
-          return $q.all(workgroupsRolesAndPermissions);
-        })
+      workgroupsRolesAndPermissions.push(workgroupsRole);
+
+      return $q
+        .all(workgroupsRolesAndPermissions)
         .then(function(workgroupsRolesAndPermissions) {
-          const workgroupsUuid = _.map(workgroupsRolesAndPermissions.shift(), function(workgroupRole) {
-            return workgroupRole.node.uuid;
+          const workgroupsUuid = _.map(workgroupsRolesAndPermissions.pop(), function(workgroupRole) {
+            return workgroupRole.nodeUuid;
           });
 
           return _.zipObject(

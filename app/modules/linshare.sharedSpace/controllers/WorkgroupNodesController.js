@@ -538,15 +538,18 @@
 
     /**
      * @name getWorkgroupMemberDetails
-     * @desc Get current workgroup details
+     * @desc Get current workgroup member details
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function getWorkgroupMemberDetails() {
-      workgroupMembersRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, $scope.userLogged.uuid)
-        .then(function(member) {
-          workgroupNodesVm.currentWorkgroupMember = member;
+      workgroupMembersRestService.get(workgroupNodesVm.folderDetails.workgroupUuid)
+        .then(function(members) {
+          workgroupNodesVm.currentWorkgroupMember = members.length === 1 ?
+            members[0] :
+            _.find(members, function(member) {
+              return member.account.uuid === $scope.userLogged.uuid;
+            });
 
-          setCurrentWorkgroupUserRights(workgroupNodesVm.currentWorkgroupMember);
           workgroupNodesVm.fabButton.actions.push({
             action: null,
             flowDirectory: true,
@@ -562,19 +565,6 @@
             }
           );
         });
-
-      /**
-       * @name setCurrentWorkgroupUserRights
-       * @desc Set rights of the current workroup user
-       * @param {object} currentWorkgroupMember - Current workgroup member
-       * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-       */
-      function setCurrentWorkgroupUserRights(currentWorkgroupMember) {
-        workgroupNodesVm.writeAndReadonlyMembers = !currentWorkgroupMember.admin && lsAppConfig.hideOnNonAdmin;
-
-        workgroupNodesVm.readonlyMember = currentWorkgroupMember.readonly && lsAppConfig.hideOnReadOnly;
-      }
-
     }
 
     /**
@@ -974,7 +964,7 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function showWorkgroupDetails(showMemberTab) {
-      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true)
+      workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true, true)
         .then(function(workgroup) {
         // TODO : remove the map once the property userMail will be changed to mail
         workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
