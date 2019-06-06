@@ -485,11 +485,10 @@
         $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
     }
 
-    // TODO define more explicitly the type of the param (Object is too wide as a type)
     /**
      * @name deleteVersions
      * @desc Delete versions and notify the user
-     * @param {Array<Object>} versions - List of versions to delete
+     * @param {Array<Version>} versions - List of versions to delete - {@link Version} object
      * @memberOf LinShare.sharedSpace.WorkgroupVersionsController
      */
     function deleteVersions(versions) {
@@ -515,8 +514,6 @@
     }
 
     // TODO Add a service for delete nodes to avoid the huge duplication in versions and nodes controller
-
-    // TODO define more explicitly the type of the param (Object is too wide as a type)
     /**
      * @name doDeleteVersion
      * @desc Delete versions
