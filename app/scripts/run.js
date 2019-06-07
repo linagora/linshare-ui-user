@@ -43,7 +43,7 @@ angular
     RestangularProvider.addElementTransformer('nodes', true, function (nodes) {
       var id = nodes && nodes.reqParams && nodes.reqParams.parent;
 
-      if (id && _.every(nodes, { parent: id, type: 'DOCUMENT_REVISION' })) {
+      if (id && nodes.length > 0 && _.every(nodes, { parent: id, type: 'DOCUMENT_REVISION' })) {
         nodes[0].revisionNumber = 1;
         nodes[0].isDifferentNameThanPrevious = false;
 
