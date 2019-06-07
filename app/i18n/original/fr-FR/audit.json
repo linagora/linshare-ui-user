@@ -616,6 +616,12 @@
             "SENTENCE": "La version du fichier {{resourceName}} à été supprimée du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Le document à été restaurée à partir de {{resourceName}} ",
+            "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          }
         }
       },
       "WORKGROUP_FOLDER": {
@@ -716,6 +722,7 @@
       "FAILURE": "Connexion échouée",
       "READ": "Consultation",
       "RECEIVE_SHARE": "Partage reçu",
+      "RESTORE_REVISION": "Restauration",
       "SUCCESS": "Connexion réussie",
       "TRANSFER": "Transfert",
       "UPDATE": "Edition",

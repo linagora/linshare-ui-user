@@ -616,6 +616,12 @@
             "SENTENCE": "The version of the file {{resourceName}} had been removed from the workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "The document was restore with the version {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          }
         }
       },
       "WORKGROUP_FOLDER": {
@@ -716,6 +722,7 @@
       "FAILURE": "Login failure",
       "READ": "Read",
       "RECEIVE_SHARE": "Received share",
+      "RESTORE_REVISION": "Restore",
       "SUCCESS": "Login success",
       "TRANSFER": "Transfer",
       "UPDATE": "Update",

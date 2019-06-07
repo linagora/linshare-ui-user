@@ -616,6 +616,12 @@
               "SENTENCE": "Редакция файла {{resourceName}} удалена из рабочей группы {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
             }
+          },
+          "COPY_FROM_SHARED_SPACE": {
+            "AUTHOR": {
+              "SENTENCE": "TRANSLATE ME!",
+              "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+            }
           }
         },
         "WORKGROUP_FOLDER": {
@@ -716,6 +722,7 @@
         "FAILURE": "Ошибка входа",
         "READ": "Консультация",
         "RECEIVE_SHARE": "Полученный общий доступ",
+        "RESTORE_REVISION": "TRANSLATE ME!",
         "SUCCESS": "Вход выполнен",
         "TRANSFER": "Перенесение",
         "UPDATE": "Изменение",

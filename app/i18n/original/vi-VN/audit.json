@@ -552,6 +552,12 @@
             "SENTENCE": "Bản sửa đổi của tệp {{resourceName}} đã bị xóa khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "TRANSLATE ME!",
+            "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          }
         }
       },
       "WORKGROUP_FOLDER": {
@@ -652,6 +658,7 @@
       "FAILURE": "Đăng nhập thất bại",
       "READ": "Đọc",
       "RECEIVE_SHARE": "Chia sẻ đã nhận",
+      "RESTORE_REVISION": "TRANSLATE ME!",
       "SUCCESS": "Đăng nhập thành công",
       "TRANSFER": "chuyển khoản",
       "UPDATE": "Cập nhật",
