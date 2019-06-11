@@ -225,7 +225,7 @@
           browseVm.currentFolder = currentFolder;
           browseVm.currentFolder.workgroupUuid = currentFolder.workGroup;
           browseVm.currentFolder.workgroupName = currentFolder.name;
-          browseVm.restService.getList(currentFolder.workGroup, true).then(function(currentList) {
+          browseVm.restService.getList(currentFolder.workGroup).then(function(currentList) {
             browseVm.currentList = _.orderBy(filterNodeListByType(currentList), 'modificationDate', 'desc');
             browseVm.isSharedSpace = false;
           });
