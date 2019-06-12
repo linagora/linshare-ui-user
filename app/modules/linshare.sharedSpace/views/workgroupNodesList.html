@@ -320,11 +320,7 @@
           <div id="toolbar-actions" class="hidden-xs">
             <span
               data-ng-if="workgroupNodesVm.selectedDocuments.length === 1"
-              data-ng-class="{
-              'disable-link':
-              !(workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT &&
-              workgroupNodesVm.permissions.FILE.READ)
-              }">
+              data-ng-class="{'disable-link': !workgroupNodesVm.permissions.FILE.READ}">
               <a data-ng-href=""
                  data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
                  event-propagation-stop
@@ -570,10 +566,7 @@
                         </li>
                         <li
                           class="hidden-xs"
-                          data-ng-class="{
-                          'disabled': !(nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
-                          workgroupNodesVm.permissions.FILE.READ)
-                          }"
+                          data-ng-class="{'disabled': !workgroupNodesVm.permissions.FILE.READ}"
                         >
                           <a
                             href=""
@@ -634,11 +627,7 @@
                               </document-preview-button>
                             </li>
                             <li
-                              data-ng-class="{
-                              'disable-link' :
-                              !(nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
-                              workgroupNodesVm.permissions.FILE.READ)
-                              }"
+                              data-ng-class="{'disable-link': !workgroupNodesVm.permissions.FILE.READ}"
                             >
                               <a
                                 data-ng-href=""
@@ -885,10 +874,7 @@
     </div>
     <i
       class="zmdi zmdi-download col-xs-2"
-      data-ng-class="{
-      'disabled' : !(workgroupNodesVm.areAllSameType() &&
-      workgroupNodesVm.permissions.FILE.READ)
-      }"
+      data-ng-class="{'disabled': !workgroupNodesVm.permissions.FILE.READ}"
       data-ng-click="workgroupNodesVm.multiDownload()"
     >
     </i>

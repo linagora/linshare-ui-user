@@ -82,6 +82,7 @@
         "DEFAULT": "{singular, select, true{One file} other{{nbItems} files}} could not be copied",
         "26444": "You do not have sufficient rights to perform this operation"
       },
+      "DOWNLOAD_FOLDER": "Cannot download the selected folder, the archive size is too big",
       "FILE_NOT_FOUND": "The selected file has not been found",
       "FILE_UPLOAD": "The upload failed",
       "503": "Service Unavailable",

@@ -145,6 +145,10 @@
           workgroupNodesVm.canAddVersion = functionalities.WORK_GROUP__FILE_VERSIONING.enable;
           workgroupNodesVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable &&
             functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
+
+          workgroupNodesVm.downloadArchiveThreshold = !functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.enable
+            ? 0
+            : functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.value;
         });
 
       Object.assign(
@@ -448,8 +452,22 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function downloadFile(fileDocument) {
-      var url = workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid);
-      documentUtilsService.download(url, fileDocument.name);
+      var nodeTypeDownloadFunction = {
+        'FOLDER': function() {
+          workgroupNodesRestService.metadata(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid)
+            .then(function(nodeDetail) {
+              nodeDetail.size > workgroupNodesVm.downloadArchiveThreshold ?
+                toastService.error({ key: 'TOAST_ALERT.ERROR.DOWNLOAD_FOLDER' }) :
+                nodeTypeDownloadFunction.FILE();
+            });
+        },
+        'FILE': function() {
+          var url = workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid);
+          documentUtilsService.download(url, fileDocument.name);
+        }
+      };
+
+      nodeTypeDownloadFunction[fileDocument.type]();
     }
 
     /**

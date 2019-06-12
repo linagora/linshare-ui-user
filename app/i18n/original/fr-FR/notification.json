@@ -82,6 +82,7 @@
         "DEFAULT": "{singular, select, true{Un fichier n'a pu être copié} other{{nbItems} fichiers n'ont pu être copiés}}",
         "26444": "Vous ne possédez pas les droits de copie"
       },
+      "DOWNLOAD_FOLDER": "Impossible de télécharger le dossier, la taille de l'archive est trop importante",
       "FILE_NOT_FOUND": "Le fichier sélectionné n'a pas été trouvé",
       "FILE_UPLOAD": "Le dépôt a échoué",
       "503": "Serveur Indisponible",

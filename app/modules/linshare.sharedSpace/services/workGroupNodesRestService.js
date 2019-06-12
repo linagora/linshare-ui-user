@@ -30,6 +30,7 @@
         copyToMySpace: copyToMySpace,
         create: create,
         download: download,
+        metadata: metadata,
         get: get,
         getAudit: getAudit,
         getList: getList,
@@ -153,6 +154,33 @@
       $log.debug('workgroupNodesRestService : download', workgroupUuid, nodeUuid);
       return Restangular.all(restUrl.workgroup).one(workgroupUuid, restParam).one(nodeUuid, 'download')
         .getRequestedUrl();
+    }
+
+    /**
+     * The Workgroup Node metadata object.
+     * @typedef {Object} WorkgroupNodeMetadata
+     * @type {String} count - Number of child nodes
+     * @type {String} size - Size in byte of the node
+     * @type {String} type - The type of the WorkgroupNode either DOCUMENT|DOCUMENT_REVISION
+     * @type {String} uuid - WorkgroupNode uuid
+     * @memberOf LinShare.sharedSpace.workgroupNodesRestService
+     */
+
+    /**
+     * @name metadata
+     * @desc Get the metadata details of a Workgroup Node object
+     * @param {string} workgroupUuid - The uuid of the Workgroup object
+     * @param {string} nodeUuid - The uuid of the Workgroup Node object
+     * @param {string} withStorageSize - Define if the storage size should be computed
+                                         Storage size is the real size used on the hard drive
+     * @returns {Promise<WorkgroupNodeMetadata>} - The {@link WorkgroupNodeMetadata} object
+     * @memberOf LinShare.sharedSpace.workgroupNodesRestService
+     */
+    function metadata(workgroupUuid, nodeUuid, withStorageSize) {
+      $log.debug('workgroupNodesRestService : detail', workgroupUuid, nodeUuid);
+      return handler(Restangular.all(restUrl.workgroup).one(workgroupUuid, restParam).one(nodeUuid, 'metadata').get({
+        storage: withStorageSize
+      }));
     }
 
     /**
