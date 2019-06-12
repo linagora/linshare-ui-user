@@ -316,12 +316,12 @@
     }
 
     function addUploadedDocument(flowFile) {
-        if (flowFile.folderDetails.workgroupUuid === workgroupVersionsVm.folderDetails.workgroupUuid &&
-          flowFile.folderDetails.folderUuid === workgroupVersionsVm.folderDetails.folderUuid) {
-          flowFile.asyncUploadDeferred.promise.then(function(file) {
-            file.linshareDocument.type === TYPE_VERSION && addNewItemInTableParams(file.linshareDocument);
-          });
-        }
+      if (flowFile.folderDetails.workgroupUuid === workgroupVersionsVm.folderDetails.workgroupUuid &&
+        flowFile.folderDetails.folderUuid === workgroupVersionsVm.folderDetails.folderUuid) {
+        flowFile.asyncUploadDeferred.promise.then(function(file) {
+          file.linshareDocument.type === TYPE_VERSION && addNewItemInTableParams(file.linshareDocument);
+        });
+      }
     }
 
     /**

@@ -156,7 +156,9 @@
         </div>
       </div>
       <div class="item-r actions"
-           data-ng-if="mainVm.sidebar.getData().isDocument(mainVm.sidebar.getData().currentSelectedDocument.current.type)">
+           data-ng-if="mainVm.sidebar.getData().isDocument(mainVm.sidebar.getData().currentSelectedDocument.current.type) 
+           || mainVm.sidebar.getData().currentSelectedDocument.current.size"
+      >
         <span>
           {{mainVm.sidebar.getData().currentSelectedDocument.current.size | readableSize: true}}
         </span>
