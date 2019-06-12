@@ -138,9 +138,6 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function activate() {
-
-      workgroupNodesVm.canCopyNodeToPersonalSpace = false;
-
       functionalityRestService
         .getAll()
         .then(function(functionalities) {
