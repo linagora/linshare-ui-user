@@ -206,10 +206,10 @@
                 </span>
               </a>
             </span>
-
             <span data-ng-class="{
               'disable-link': workgroupVersionsVm.selectedDocuments.length !== 1
               || !workgroupVersionsVm.permissions.FILE.CREATE
+              || !workgroupVersionsVm.folderDetails.versioningParameters.enable
               }">
               <a
                 class="plain-text-button share-link"
