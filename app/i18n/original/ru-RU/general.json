@@ -78,8 +78,8 @@
         "INPUT_PLACEHOLDER": "Добавить пользователей",
         "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Поиск участников",
         "INVALID_EMAIL": "Введен неверный адрес электронной почты",
-        "TBT__INVALID_EMPTY": "TRANSLATE ME!",
-        "TBT__CREATE_GUEST": "TRANSLATE ME!"
+        "INVALID_EMPTY": "Неизвестный пользователь",
+        "CREATE_GUEST": "Пригласить в качестве гостя?"
       }
     },
     "DOMAIN": "Сфера",
@@ -157,7 +157,7 @@
       "UPTADED_THE": "Изменено: ",
       "VERSIONS": "Обновление",
       "MAX_FILE_SIZE": "Максимальный размер файла",
-      "VERSIONING_ACTIVATION": "TRANSLATE ME!"
+      "VERSIONING_ACTIVATION": "Управление версиями:"
     },
     "LINK_DISABLED": "Неактивная ссылка",
     "LOGIN": {

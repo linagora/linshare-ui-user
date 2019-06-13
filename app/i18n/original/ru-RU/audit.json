@@ -619,7 +619,7 @@
           },
           "COPY_FROM_SHARED_SPACE": {
             "AUTHOR": {
-              "SENTENCE": "TRANSLATE ME!",
+              "SENTENCE": "Документ был восстановлен с версии {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
             }
           }
@@ -722,7 +722,7 @@
         "FAILURE": "Ошибка входа",
         "READ": "Консультация",
         "RECEIVE_SHARE": "Полученный общий доступ",
-        "RESTORE_REVISION": "TRANSLATE ME!",
+        "RESTORE_REVISION": "Восстановить",
         "SUCCESS": "Вход выполнен",
         "TRANSFER": "Перенесение",
         "UPDATE": "Изменение",
