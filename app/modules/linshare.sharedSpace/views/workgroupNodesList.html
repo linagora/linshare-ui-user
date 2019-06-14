@@ -390,9 +390,9 @@
                   </a>
                 </li>
                 <li
-                  data-ng-if="workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT &&
-                  workgroupNodesVm.permissions.FILE.READ"
-                  data-ng-class="{'disable-link': !workgroupNodesVm.canAddVersion}"
+                  data-ng-if="workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT
+                  && workgroupNodesVm.permissions.FILE.READ
+                  && workgroupNodesVm.canAddVersion"
                 >
                   <a
                     translate-attr="{title: 'ACTION.SEE_VERSIONS'}"
@@ -751,9 +751,9 @@
                               </a>
                             </li>
                             <li
-                              data-ng-if="nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT &&
-                              workgroupNodesVm.permissions.FILE.READ"
-                              data-ng-class="{'disable-link': !workgroupNodesVm.canAddVersion}"
+                              data-ng-if="nodeItem.type === workgroupNodesVm.TYPE_DOCUMENT
+                              && workgroupNodesVm.permissions.FILE.READ
+                              && workgroupNodesVm.canAddVersion"
                             >
                               <a
                                 translate-attr="{title: 'ACTION.SEE_VERSIONS'}"

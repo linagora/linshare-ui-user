@@ -2,7 +2,7 @@
   drag-and-drop
   drag-and-drop drag-and-drop-flow="$flow"
   drag-and-drop-submitted="workgroupVersionsVm.upload(files,workgroupVersionsVm.folderDetails)"
-  drag-and-drop-enabled="::workgroupVersionsVm.permissions.FILE.CREATE"
+  drag-and-drop-enabled="::workgroupVersionsVm.permissions.FILE.CREATE && workgroupVersionsVm.folderDetails.isversioningParameters"
   drag-and-drop-success="workgroupVersionsVm.addUploadedDocument(file, $message)"
 >
   <div class="container files">
@@ -17,7 +17,7 @@
             class="menu-popover-ctn hidden-xs"
             data-ng-class="{
               'clickable waves-effect': workgroupVersionsVm.permissions.FILE.CREATE,
-              'disabled': !workgroupVersionsVm.permissions.FILE.CREATE
+              'disabled': !(workgroupVersionsVm.permissions.FILE.CREATE && workgroupVersionsVm.folderDetails.isversioningParameters)
             }"
             tooltip-placement="bottom"
             tooltip-popup-delay="500"
@@ -25,11 +25,11 @@
           >
             <a
               class="add-menu-group"
-              data-ng-class="{'disabled': !workgroupVersionsVm.permissions.FILE.CREATE}"
+              data-ng-class="{'disabled': !(workgroupVersionsVm.permissions.FILE.CREATE && workgroupVersionsVm.folderDetails.isversioningParameters)}"
             >
               <i
                 class="zmdi zmdi-plus"
-                data-ng-class="{'disabled': !workgroupVersionsVm.permissions.FILE.CREATE}"
+                data-ng-class="{'disabled': !(workgroupVersionsVm.permissions.FILE.CREATE && workgroupVersionsVm.folderDetails.isversioningParameters)}"
               >
               </i>
             </a>
@@ -207,9 +207,10 @@
               </a>
             </span>
             <span data-ng-class="{
-              'disable-link': workgroupVersionsVm.selectedDocuments.length !== 1
-              || !workgroupVersionsVm.permissions.FILE.CREATE
-              || !workgroupVersionsVm.folderDetails.versioningParameters.enable
+              'disable-link': !workgroupVersionsVm.permissions.FILE.CREATE
+              || !workgroupVersionsVm.folderDetails.isversioningParameters
+              || workgroupVersionsVm.selectedDocuments.length !== 1
+              || workgroupVersionsVm.selectedDocuments[0] == workgroupVersionsVm.versionsList[workgroupVersionsVm.versionsList.length-1]
               }">
               <a
                 class="plain-text-button share-link"
@@ -310,7 +311,10 @@
                 <span class="groups-upload-file"></span>
               </span>
             </div>
-            <div class="dnd-txt-content">
+            <div
+              data-ng-if="workgroupVersionsVm.permissions.FILE.CREATE && workgroupVersionsVm.folderDetails.isversioningParameters"
+              class="dnd-txt-content"
+            >
               <h1
                 class="hidden-xs"
                 translate
@@ -334,6 +338,21 @@
                 translate
               >
                 WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE.COMMENT_VERSION
+              </p>
+            </div>
+            <div
+              data-ng-if="!(workgroupVersionsVm.permissions.FILE.CREATE && workgroupVersionsVm.folderDetails.isversioningParameters)"
+              class="dnd-txt-content"
+            >
+              <h1
+                translate
+              >
+                DRAG_DROP_BACKGROUND.TITLE_VERSION_NO_RIGHTS
+              </h1>
+              <p
+                translate
+              >
+                DRAG_DROP_BACKGROUND.COMMENT_VERSION_NO_RIGHTS
               </p>
             </div>
           </div>
@@ -541,6 +560,7 @@
                             <li
                               data-ng-class="{
                               'disable-link': !workgroupVersionsVm.permissions.FILE.CREATE
+                              || !workgroupVersionsVm.folderDetails.isversioningParameters
                               || nodeItem === $data[0]
                               }"
                             >
@@ -787,6 +807,8 @@
           data-ng-class="{
           'disable-link': workgroupVersionsVm.selectedDocuments.length !== 1
           || !workgroupVersionsVm.permissions.FILE.CREATE
+          || !workgroupVersionsVm.folderDetails.isversioningParameters
+          || workgroupVersionsVm.selectedDocuments[0] == workgroupVersionsVm.versionsList[workgroupVersionsVm.versionsList.length-1]
           }"
           data-ng-click="workgroupVersionsVm.restore(workgroupVersionsVm.selectedDocuments[0])"
         >

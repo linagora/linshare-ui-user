@@ -19,7 +19,9 @@
     "TITLE": "Drop your files here",
     "COMMENT": "Drag and drop your files here to upload them",
     "TITLE_VERSION": "Drop your version here",
-    "COMMENT_VERSION": "Drag and drop your version here to upload it"
+    "COMMENT_VERSION": "Drag and drop your version here to upload it",
+    "TITLE_VERSION_NO_RIGHTS": "You cannot upload a new version",
+    "COMMENT_VERSION_NO_RIGHTS": "You don't have the necessary right"
   },
   "DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Asynchronous share",

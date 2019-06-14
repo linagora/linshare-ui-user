@@ -39,7 +39,7 @@
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Fichiers",
   "BREADCRUMB_UPPER_LEVEL": "Dossiers parent",
   "FILE_NAME": "Nom de fichier",
-  "VERSION": "Vérsion",
+  "VERSION": "Version",
   "VERSION_VIEW": "Vous êtes en train d'éditer les versions du fichier {{filename}}",
   "VERSION_NAME_UPDATE": "le nom de la version a changée en {{filename}}",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {

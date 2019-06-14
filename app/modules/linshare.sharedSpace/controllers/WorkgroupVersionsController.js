@@ -104,6 +104,7 @@
       workgroupVersionsVm.folderDetails.folderName = currentFolder.name;
       workgroupVersionsVm.folderDetails.folderUuid = currentFolder.uuid;
       workgroupVersionsVm.folderDetails.quotaUuid = workgroup.quotaUuid;
+      workgroupVersionsVm.folderDetails.isversioningParameters = workgroup.versioningParameters.enable;
 
       Object.assign(
         documentPreviewService,
