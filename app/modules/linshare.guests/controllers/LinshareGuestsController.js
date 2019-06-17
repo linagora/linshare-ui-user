@@ -243,7 +243,7 @@
     /**
      *  @name setSubmitted
      *  @desc Set a form & subform to the state 'submitted'
-     *  @param {DOM Object} form - The form to set to submitted state
+     *  @param {object} form - The form to set to submitted state
      *  @memberOf LinShare.Guests.LinshareGuestsController
      */
     //TODO - KLE: To be put in a service utils
@@ -338,7 +338,7 @@
      *  @desc Helper to select all element of the current table page
      *  @param {Array<Object>} data - List of element to be selected
      *  @param {Integer} page - Page number of the table
-     *  @param {??????} SelectFlag - No idea/To be discovered
+     *  @param {object} SelectFlag - No idea/To be discovered
      *  @memberOf LinShare.Guests.LinshareGuestsController
      */
     //TODO - KLE: Refactor|Should be in a helper class and not repeated everytime we use a table, see the directive ?

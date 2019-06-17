@@ -44,7 +44,7 @@
         /**
          * @name downloadAsArrayBuffer
          * @desc Download the document as an arrayBuffer
-         * @returns {Promise||null} Document arrayBuffer
+         * @returns {Promise|null} Document arrayBuffer
          * @memberOf LinShare.utils.documentModelRestService
          */
         function downloadAsArrayBuffer() {
@@ -81,7 +81,7 @@
         /**
          * @name getThumbnailPdf
          * @desc Get the large thumbnail of the document
-         * @returns {Promise||null} Document large thumbnail
+         * @returns {Promise|null} Document large thumbnail
          * @memberOf LinShare.utils.documentModelRestService
          */
         function getThumbnailLarge() {
@@ -99,7 +99,7 @@
         /**
          * @name getThumbnailPdf
          * @desc Get the PDF thumbnail of the document
-         * @returns {Promise||null} Document PDF thumbnail
+         * @returns {Promise|null} Document PDF thumbnail
          * @memberOf LinShare.utils.documentModelRestService
          */
         function getThumbnailPdf() {
@@ -119,7 +119,7 @@
          * @name getPreview
          * @desc Get the preview image of the document
          * @param {PreviewMode} mode - preview mode activation
-         * @returns {Promise||null} Document preview
+         * @returns {Promise|null} Document preview
          * @memberOf LinShare.utils.documentModelRestService
          */
         function getPreview(mode) {

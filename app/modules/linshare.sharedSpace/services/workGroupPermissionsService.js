@@ -44,22 +44,22 @@
     /**
      * The User Workgroup Permissions object.
      * @typedef {Object} UserWorkgroupPermissions
-     * @type {String} key - Workgroup uuid
-     * @type {Object} value - {@link ResourcePermissions} object
+     * @property {String} key - Workgroup uuid
+     * @property {Object} value - {@link ResourcePermissions} object
      */
 
     /**
      * The Resource Permission object.
      * @typedef {Object} ResourcePermission
-     * @type {String} key - The resource type either DRIVE|WORKGROUP|FOLDER|FILE|MEMBER
-     * @type {Object} value - {@link ActionPermission} object
+     * @property {String} key - The resource type either DRIVE|WORKGROUP|FOLDER|FILE|MEMBER
+     * @property {Object} value - {@link ActionPermission} object
      */
 
     /**
      * The Action Permission object.
      * @typedef {Object} ActionPermission
-     * @type {String} key - The name of the action either CREATE|UPDATE|DELETE|READ|DOWNLOAD
-     * @type {Boolean} value - Availability of the action
+     * @property {String} key - The name of the action either CREATE|UPDATE|DELETE|READ|DOWNLOAD
+     * @property {Boolean} value - Availability of the action
      */
 
     /**
@@ -74,8 +74,8 @@
     /**
      * The Workgroups Permissions object.
      * @typedef {Object} WorkgroupsPermissions
-     * @type {String} key - Workgroup uuid
-     * @type {Array<Permission>} value - {@link Permission} object
+     * @property {String} key - Workgroup uuid
+     * @property {Array<Permission>} value - {@link Permission} object
      */
 
     /**

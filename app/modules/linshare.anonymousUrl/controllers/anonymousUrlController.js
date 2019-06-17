@@ -131,8 +131,8 @@
           /**
            *  @name hasError
            *  @desc Determine if the field is in an error state
-           *  @param {DOM Object} form - A form dom object
-           *  @param {DOM Object} field - A field fom object
+           *  @param {object} form - A form dom object
+           *  @param {object} field - A field fom object
            *  @returns {Boolean} Error state of the field
            *  @memberOf LinShare.anonymousUrl.AnonymousUrlController.modalPasswordController
            */

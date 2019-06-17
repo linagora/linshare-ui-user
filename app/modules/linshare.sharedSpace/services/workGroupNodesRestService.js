@@ -49,20 +49,20 @@
     /**
      * The Workgroup Node object.
      * @typedef {Object} WorkgroupNode
-     * @type {String} key - WorkgroupNode uuid
-     * @type {String} type - The type of the WorkgroupNode either FOLDER|DOCUMENT|DOCUMENT_REVISION
-     * @type {String} name - The name of the WorkgroupNode
-     * @type {String} parent - The uuid of the parent WorkgroupNode
-     * @type {String} workGroup - The uuid of the Workgroup
-     * @type {String} description - The WorkgroupNode description
-     * @type {Object} metadata - The WorkgroupNode metadata
-     * @type {Object} lastAuthor - The user that did the last modification
-     * @type {Date} creationDate - The Date of creation of the WorkgroupNode
-     * @type {String} modificationDate - The last modification date
-     * @type {number} size - The WorkgroupNode size in bytes
-     * @type {String} mimeType - The mime type of the WorkGroupNode
-     * @type {String} sha256sum - The mime type of the WorkGroupNode
-     * @type {Date} uploadDate - The date of the WorkgroupNode upload
+     * @property {String} key - WorkgroupNode uuid
+     * @property {String} type - The type of the WorkgroupNode either FOLDER|DOCUMENT|DOCUMENT_REVISION
+     * @property {String} name - The name of the WorkgroupNode
+     * @property {String} parent - The uuid of the parent WorkgroupNode
+     * @property {String} workGroup - The uuid of the Workgroup
+     * @property {String} description - The WorkgroupNode description
+     * @property {Object} metadata - The WorkgroupNode metadata
+     * @property {Object} lastAuthor - The user that did the last modification
+     * @property {Date} creationDate - The Date of creation of the WorkgroupNode
+     * @property {String} modificationDate - The last modification date
+     * @property {number} size - The WorkgroupNode size in bytes
+     * @property {String} mimeType - The mime type of the WorkGroupNode
+     * @property {String} sha256sum - The mime type of the WorkGroupNode
+     * @property {Date} uploadDate - The date of the WorkgroupNode upload
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
 
@@ -159,10 +159,10 @@
     /**
      * The Workgroup Node metadata object.
      * @typedef {Object} WorkgroupNodeMetadata
-     * @type {String} count - Number of child nodes
-     * @type {String} size - Size in byte of the node
-     * @type {String} type - The type of the WorkgroupNode either DOCUMENT|DOCUMENT_REVISION
-     * @type {String} uuid - WorkgroupNode uuid
+     * @property {String} count - Number of child nodes
+     * @property {String} size - Size in byte of the node
+     * @property {String} type - The type of the WorkgroupNode either DOCUMENT|DOCUMENT_REVISION
+     * @property {String} uuid - WorkgroupNode uuid
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */
 
