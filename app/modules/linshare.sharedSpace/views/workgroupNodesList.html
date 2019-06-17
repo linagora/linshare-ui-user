@@ -331,11 +331,7 @@
             </span>
             <span
               data-ng-if="workgroupNodesVm.selectedDocuments.length > 1"
-              data-ng-class="{
-              'disable-link':
-              !(workgroupNodesVm.areAllSameType() &&
-              workgroupNodesVm.permissions.FILE.READ)
-              }"
+              data-ng-class="{'disable-link': !(workgroupNodesVm.permissions.FILE.READ)}"
             >
               <a
                 class="plain-text-button"

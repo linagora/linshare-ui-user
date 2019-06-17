@@ -458,10 +458,10 @@
             .then(function(nodeDetail) {
               nodeDetail.size > workgroupNodesVm.downloadArchiveThreshold ?
                 toastService.error({ key: 'TOAST_ALERT.ERROR.DOWNLOAD_FOLDER' }) :
-                nodeTypeDownloadFunction.FILE();
+                nodeTypeDownloadFunction.DOCUMENT();
             });
         },
-        'FILE': function() {
+        'DOCUMENT': function() {
           var url = workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid);
           documentUtilsService.download(url, fileDocument.name);
         }
