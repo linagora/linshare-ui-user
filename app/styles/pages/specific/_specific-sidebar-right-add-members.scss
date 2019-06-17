@@ -36,6 +36,13 @@
   CONTENT FIX
 ***********************/
 
+.flex-column-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 /* TODO rename to right align link*/
 .r-a-lin {
   display: inline-block;

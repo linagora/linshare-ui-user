@@ -1,5 +1,5 @@
 <div
-  class="lv-body stop-propagate contacts-list-block-scroll"
+  class="flex-column-content lv-body stop-propagate contacts-list-block-scroll"
   data-ng-controller="WorkGroupMembersController as workgroupMemberVm"
 >
   <div class="lv-item">
@@ -288,16 +288,10 @@
       </div>
     </div>
   </div>
-</div>
-<!--
-  TODO once the property userMail will be changed to mail, use
-  mainVm.sidebar.getData().currentSelectedDocument.current.members for the attribute
-  create-contacts-list-contacts-to-be-added
-  TODO: Check if with new members object it can be improved
--->
-<div
-  data-ng-if="mainVm.sidebar.getData().functionalities.contactsList"
-  create-contacts-list
-  create-contacts-list-contacts-to-be-added="mainVm.sidebar.getData().currentSelectedDocument.membersForContactsList"
->
+  <div
+    data-ng-if="mainVm.sidebar.getData().functionalities.contactsList"
+    create-contacts-list
+    create-contacts-list-contacts-to-be-added="workgroupMemberVm.members"
+  >
+  </div>
 </div>

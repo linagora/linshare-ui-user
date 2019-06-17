@@ -54,14 +54,14 @@
     function create(contactsListUuid, contact) {
       $log.debug('contactsListsContactsRestService - create');
 
-      var contactDto = _.pick(
-        contact,
-        [
-          'firstName',
-          'lastName',
-          'mail'
-        ]
-      );
+      var propertyToPick = [
+        'firstName',
+        'lastName',
+        'mail'
+      ];
+      var contactDto = contact.account
+          ? _.pick(contact.account, propertyToPick)
+          : _.pick(contact, propertyToPick);
 
       return handler(Restangular.one(restUrl, contactsListUuid).all(restParam).post(contactDto));
     }
