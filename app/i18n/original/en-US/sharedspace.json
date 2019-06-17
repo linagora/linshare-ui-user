@@ -39,10 +39,9 @@
   "BREADCRUMB_TITLE_WORKGROUP": "Workgroups",
   "BREADCRUMB_TITLE_WORKGROUP_FILES": "Files",
   "BREADCRUMB_UPPER_LEVEL": "Parent folders",
-  "VERSION": "version",
-  "FILE_NAME": "File name",
   "VERSION": "Version",
-  "VERSION_VIEW": "You are currently editing the version of {{filename}}",
+  "FILE_NAME": "File name",
+  "VERSION_VIEW": "You are currently viewing the version of {{filename}}",
   "VERSION_NAME_UPDATE": "the version name has changed to {{filename}}",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Upload your files",

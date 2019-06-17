@@ -622,6 +622,16 @@
               "SENTENCE": "Документ был восстановлен с версии {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
             }
+          },
+          "DOWNLOAD": {
+            "AUTHOR": {
+              "SENTENCE": "Вы загрузили версию файла {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} загрузил версию файла {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+            }
           }
         },
         "WORKGROUP_FOLDER": {
@@ -719,6 +729,7 @@
         "DELETE": "Удаление",
         "DELETE_REVISION": "Удаление ревизии",
         "DOWNLOAD": "Копирование",
+        "DOWNLOAD_REVISION": "Версия загружена",
         "FAILURE": "Ошибка входа",
         "READ": "Консультация",
         "RECEIVE_SHARE": "Полученный общий доступ",

@@ -40,8 +40,7 @@
     "BREADCRUMB_UPPER_LEVEL": "Родительские папки",
     "VERSION": "версиями",
     "FILE_NAME": "Имя файла",
-    "VERSION": "Ревизии ",
-    "VERSION_VIEW": "Вы редактируете версии {{filename}}",
+    "VERSION_VIEW": "ПРОСМОТР ВЕРСИИ ФАЙЛА {{filename}}",
     "VERSION_NAME_UPDATE": "Имя версии было изменено на {{filename}}",
     "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
       "TITLE": "Выложите свои файлы",

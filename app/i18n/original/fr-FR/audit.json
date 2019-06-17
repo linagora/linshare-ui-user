@@ -622,6 +622,16 @@
             "SENTENCE": "Le document à été restaurée à partir de {{resourceName}} ",
             "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
           }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez téléchargé la version : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} a téléchargé la version : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+          }
         }
       },
       "WORKGROUP_FOLDER": {
@@ -717,8 +727,9 @@
       "CREATE": "Création",
       "CREATE_SHARE": "Partage envoyé",
       "DELETE": "Suppression",
-      "DELETE_REVISION": "Suppression de la version",
+      "DELETE_REVISION": "Suppression d'une version",
       "DOWNLOAD": "Téléchargement",
+      "DOWNLOAD_REVISION": "Téléchargement d'une version",
       "FAILURE": "Connexion échouée",
       "READ": "Consultation",
       "RECEIVE_SHARE": "Partage reçu",
@@ -727,7 +738,7 @@
       "TRANSFER": "Transfert",
       "UPDATE": "Edition",
       "UPLOAD": "Dépôt de fichier",
-      "UPLOAD_REVISION":"Création de la version",
+      "UPLOAD_REVISION":"Création d'une version",
       "VIEWED": "Vu"
     },
     "TYPE": {

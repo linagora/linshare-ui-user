@@ -607,7 +607,7 @@
       "WORKGROUP_DOCUMENT_REVISION": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "A revison of the file {{resourceName}} has been added in the workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "A version of the file {{resourceName}} has been added in the workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
           }
         },
@@ -621,6 +621,16 @@
           "AUTHOR": {
             "SENTENCE": "The document was restore with the version {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "You have downloaded the version : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has downloaded the version : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
           }
         }
       },
@@ -717,17 +727,18 @@
       "CREATE": "Creation",
       "CREATE_SHARE": "Share sent",
       "DELETE": "Deletion",
-      "DELETE_REVISION": "Deleting the version",
+      "DELETE_REVISION": "Version deleted",
       "DOWNLOAD": "Download",
+      "DOWNLOAD_REVISION": "Version downloaded",
       "FAILURE": "Login failure",
       "READ": "Read",
       "RECEIVE_SHARE": "Received share",
-      "RESTORE_REVISION": "Restore",
+      "RESTORE_REVISION": "Version restored",
       "SUCCESS": "Login success",
       "TRANSFER": "Transfer",
       "UPDATE": "Update",
       "UPLOAD": "File upload",
-      "UPLOAD_REVISION":"Creating the version",
+      "UPLOAD_REVISION":"Version uploaded",
       "VIEWED": "Viewed"
     },
     "TYPE": {
