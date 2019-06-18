@@ -148,7 +148,7 @@
 
           workgroupNodesVm.downloadArchiveThreshold = !functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.enable
             ? 0
-            : functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.value;
+            : functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.rawSize;
         });
 
       Object.assign(
