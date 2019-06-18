@@ -225,7 +225,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "TRANSLATE ME! => {{authorName}} has deleted the file : {{resourceName}} from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
@@ -235,7 +235,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "TRANSLATE ME! => {{authorName}} has downloaded the file : {{resourceName}} from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           }
         },
@@ -265,7 +265,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "TRANSLATE ME! => {{authorName}} has edited the file : {{resourceName}} from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -587,7 +587,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           },
           "VIEWER": {
-            "SENTENCE": "TRANSLATE ME! => {{authorName}} a télécharger le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "TRANSLATE ME! => {{authorName}} has downloaded the folder : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           }
         },

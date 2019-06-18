@@ -165,7 +165,7 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
             },
             "VIEWER": {
-              "SENTENCE": "",
+              "SENTENCE": "{{authorName}} загрузил новый файл {{resourceName}} в личное пространство.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
             }
           },
@@ -225,7 +225,7 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             },
             "VIEWER": {
-              "SENTENCE": "",
+              "SENTENCE": "{{authorName}} удалил файл {{resourceName}} из личного пространства.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             }
           },
@@ -235,7 +235,7 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
             },
             "VIEWER": {
-              "SENTENCE": "",
+              "SENTENCE": "{{authorName}} скачал файл {{resourceName}} из своего личного пространства.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
             }
           },
@@ -265,7 +265,7 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             },
             "VIEWER": {
-              "SENTENCE": "",
+              "SENTENCE": "{{authorName}} отредактировал файл {{resourceName}} из личного пространства.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           }
@@ -657,11 +657,11 @@
           },
           "DOWNLOAD": {
             "AUTHOR": {
-              "SENTENCE": "TRANSLATE ME! => You have download the folder : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+              "SENTENCE": "Вы загрузили папку {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
             },
             "VIEWER": {
-              "SENTENCE": "TRANSLATE ME! => {{authorName}} a télécharger le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+              "SENTENCE": "{{authorName}} загрузил папку {{resourceName}} из рабочей группы {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
             }
           },

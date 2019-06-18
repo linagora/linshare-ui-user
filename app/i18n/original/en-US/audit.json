@@ -225,7 +225,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "{{authorName}} has deleted the file : {{resourceName}} from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
@@ -235,7 +235,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "{{authorName}} has downloaded the file : {{resourceName}} from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
           }
         },
@@ -265,7 +265,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "",
+            "SENTENCE": "{{authorName}} has edited the file : {{resourceName}} from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
