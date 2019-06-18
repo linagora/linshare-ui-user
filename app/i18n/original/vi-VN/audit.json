@@ -581,6 +581,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "TRANSLATE ME! => You have download the folder : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "TRANSLATE ME! => {{authorName}} a télécharger le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
         "UPDATE": {
           "AUTHOR": {
             "SENTENCE": "Bạn đã chỉnh sửa thư mục: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",

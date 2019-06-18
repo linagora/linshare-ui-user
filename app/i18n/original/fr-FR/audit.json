@@ -655,6 +655,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez télécharger le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} a télécharger le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
         "UPDATE": {
           "AUTHOR": {
             "SENTENCE": "Vous avez modifié le dossier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",

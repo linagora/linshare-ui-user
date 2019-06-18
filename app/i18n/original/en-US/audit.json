@@ -655,6 +655,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "You have download the folder : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has downloaded the folder : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
         "UPDATE": {
           "AUTHOR": {
             "SENTENCE": "You have edited the folder : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
