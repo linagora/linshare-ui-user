@@ -133,6 +133,17 @@
         }
       },
 
+      /* Define the default role selected when adding a new member to a workgroup
+       * Possible value:
+       *  - ADMIN
+       *  - CONTRIBUTOR
+       *  - WRITER
+       *  - READER
+       *
+       * If any other unknown value to system is set, the default order will be set (same as the list above)
+       */
+      defaultWorkgroupMemberRole: 'READER',
+
       /* Define the Application home page, can be undefined for default behavior or one of the following:
        * documents.files
        * documents.received

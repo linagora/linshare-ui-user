@@ -83,7 +83,17 @@
       workgroupMemberVm.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
 
       workgroupRolesRestService.getList().then(function(roles) {
-        workgroupMemberVm.membersRights = roles;
+        var defaultConfiguredRoleIndex = roles.findIndex(function(role){
+          return role.name === lsAppConfig.defaultWorkgroupMemberRole;
+        });
+        workgroupMemberVm.membersRights =
+          defaultConfiguredRoleIndex === 0 || defaultConfiguredRoleIndex === -1
+          ? roles
+          : [].concat(
+            roles[defaultConfiguredRoleIndex],
+            roles.slice(0, defaultConfiguredRoleIndex),
+            roles.slice(defaultConfiguredRoleIndex + 1, roles.length)
+          );
         workgroupMemberVm.memberRole = workgroupMemberVm.membersRights[0];
       });
       // TODO : I added the if to work around, the watcher solution is very bad, need to change it !

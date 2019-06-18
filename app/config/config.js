@@ -63,6 +63,18 @@
           'vi-VN': 'Tên'
         }
       },
+
+      /* Define the default role selected when adding a new member to a workgroup
+       * Possible value:
+       *  - ADMIN
+       *  - CONTRIBUTOR
+       *  - WRITER
+       *  - READER
+       *
+       * If any other unknown value to system is set, the default order will be set (same as the list above)
+       */
+      defaultWorkgroupMemberRole: 'READER',
+
       /* Define custom behavior for menu element in the main sidebar
        * suffix - object: Determine the suffix to add to menu element name if it is disabled
        *                   The value should be translated accordingly to the different language used by the application
