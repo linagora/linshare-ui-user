@@ -13,9 +13,8 @@
 
   /**
    *  @namespace lsAnonymousUrlTemplate
-   *  @desc Set the template for anynous url
+   *  @description Set the template for anynous url
    *  @example <ls-anonymous-url-template></ls-anonymous-url-template>
-   *  @memberOf LinShare.anonymousUrl
    */
   function lsAnonymousUrlTemplate($log, anonymousUrlService) {
     var directive = {

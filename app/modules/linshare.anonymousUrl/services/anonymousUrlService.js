@@ -1,6 +1,8 @@
 /**
- * anonymousUrlService Service
- * @namespace LinShare.anonymousUrl
+ * @file Angular service to interact with AnonymousUrl API
+ * @copyright LINAGORA © 2009–2019
+ * @license AGPL-3.0
+ * @module LinShare.anonymousUrl
  */
 (function() {
   'use strict';
@@ -9,37 +11,44 @@
     .module('linshare.anonymousUrl')
     .factory('anonymousUrlService', anonymousUrlService);
 
-  anonymousUrlService.$inject = ['$http', '$log', '$q'];
+  anonymousUrlService.$inject = [
+    '$http',
+    '$log',
+    '$q'
+  ];
 
   /**
-   *  @namespace anonymousUrlService
-   *  @desc Service to interact with AnonymousUrl
-   *  @memberOf LinShare.anonymousUrl
+   * @description Service to interact with AnonymousUrl
+   * @class anonymousUrlService
+   * @memberOf LinShare.anonymousUrl
    */
   //TODO - KLE : SET RESTANGULAR
   function anonymousUrlService($http, $log, $q) {
-    var
-      baseRestUrl = 'linshare/webservice/rest/external/anonymousurl',
-      service = {
-        baseUrl: baseRestUrl,
-        download: download,
-        downloadUrl: downloadUrl,
-        getAnonymousUrl: getAnonymousUrl,
-        status: status
-      };
+    /** @constant
+     *  @description API endpoint for anonymous url management
+     *  @type {string}
+     *  @default
+     */
+    const baseRestUrl = 'linshare/webservice/rest/external/anonymousurl';
+    var service = {
+      baseUrl: baseRestUrl,
+      download: download,
+      downloadUrl: downloadUrl,
+      getAnonymousUrl: getAnonymousUrl
+    };
 
     return service;
 
     ////////////
 
     /**
+     *  @async
      *  @name download
-     *  @desc Donwload a document
+     *  @description Donwload a document
      *  @param {string} urlUuid - The id of the anonymous url
      *  @param {string} password - The password to access to the anonymous url
      *  @param {string} docUuid - The id of the document
      *  @returns {promise} Server response
-     *  @memberOf LinShare.anonymousUrl.anonymousUrlService
      */
     function download(urlUuid, password, docUuid) {
       var deferred = $q.defer();
@@ -55,25 +64,25 @@
     }
 
     /**
+     *  @async
      *  @name downloadUrl
-     *  @desc Get download url of the document given
+     *  @descriptionGet download url of the document given
      *  @param {string} urlUuid - The id of the anonymous url
      *  @param {string} password - The password to access to the anonymous url
      *  @param {string} docUuid - The id of the document
      *  @returns {string} Download url
-     *  @memberOf LinShare.anonymousUrl.anonymousUrlService
      */
     function downloadUrl(urlUuid, password, docUuid) {
       return [baseRestUrl, urlUuid, docUuid, 'download'].join('/');
     }
 
     /**
+     *  @async
      *  @name getAnonymousUrl
-     *  @desc Retrieve information from the anonymous share url
+     *  @description Retrieve information from the anonymous share url
      *  @param {String} uuid - The id of the anonymous url
      *  @param {String} password - The password to access to the anonymous url
      *  @returns {Promise} Server response
-     *  @memberOf LinShare.anonymousUrl.anonymousUrlService
      */
     function getAnonymousUrl(uuid, password) {
       var deferred = $q.defer();

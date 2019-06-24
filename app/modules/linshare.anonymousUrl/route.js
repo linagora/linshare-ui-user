@@ -11,7 +11,7 @@
 
   /**
    *  @namespace anonymousUrlConfig
-   *  @desc Config of module Anonymous
+   *  @description Config of module Anonymous
    *  @memberOf LinShare.anonymousUrl
    */
   function anonymousUrlConfig(_, $stateProvider) {

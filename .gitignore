@@ -10,4 +10,4 @@ target
 target-grunt
 .idea
 node
-out
+docs

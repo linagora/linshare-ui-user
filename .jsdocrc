@@ -1,26 +1,45 @@
 {
-    "plugins": [],
-    "recurseDepth": 10,
-    "source": {
-      "include": [
-       "./app"
-      ],
-      "exclude": [
-       "./app/modules/materialAdmin"
-      ],
-      "includePattern": ".+\\.js(doc|x)?$",
-      "excludePattern": "(^|\\/|\\\\|material)_"
-    },
-    "sourceType": "module",
-    "tags": {
-        "allowUnknownTags": true,
-        "dictionaries": ["jsdoc","closure"]
-    },
-    "templates": {
-        "cleverLinks": false,
-        "monospaceLinks": false
-    },
-    "opts": {
-      "template": "node_modules/docdash"
-    }
+  "plugins": [],
+  "recurseDepth": 10,
+  "source": {
+    "include": [
+      "./app"
+    ],
+    "exclude": [
+      "./app/modules/materialAdmin"
+    ],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\|material)_"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  },
+  "opts": {
+    "template": "node_modules/docdash",
+    "encoding": "utf8",
+    "destination": "docs/",
+    "recurse": true,
+    "verbose": true
+  },
+  "docdash": {
+    "static": false,
+    "sort": false,
+    "sectionOrder": [
+      "Modules",
+      "Namespaces",
+      "Tutorials",
+      "Classes"
+    ],
+    "search": true,
+    "collapse": true,
+    "wrap": true,
+    "navLevel": 100,
+    "private": false
+  }
 }

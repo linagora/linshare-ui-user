@@ -1,6 +1,8 @@
 /**
- * AnonymousHomeController Controller
- * @namespace LinShare.anonymousUrl
+ * @file Angular controller to interact with the home page of AnonymousUrl
+ * @copyright LINAGORA © 2009–2019
+ * @license AGPL-3.0
+ * @module LinShare.anonymousUrl
  */
 (function() {
   'use strict';
@@ -12,12 +14,14 @@
     }])
     .controller('AnonymousHomeController', AnonymousHomeController);
 
-  AnonymousHomeController.$inject = ['$scope', 'message'];
+  AnonymousHomeController.$inject = [
+    '$scope',
+    'message'
+  ];
 
   /**
-   *  @namespace AnonymousHomeController
-   *  @desc Controller to manage the Home of anonymous url
-   *  @memberOf LinShare.anonymousUrl
+   * @class AnonymousHomeController
+   * @description Controller to manage the Home of anonymous url
    */
   function AnonymousHomeController($scope, message) {
     /* jshint validthis: true */

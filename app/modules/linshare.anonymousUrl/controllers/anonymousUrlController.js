@@ -1,6 +1,8 @@
 /**
- * AnonymousUrlController Controller
- * @namespace LinShare.anonymousUrl
+ * @file Angular controller to interact with the system of AnonymousUrl
+ * @copyright LINAGORA © 2009–2019
+ * @license AGPL-3.0
+ * @module anonymousUrl
  */
 (function() {
   'use strict';
@@ -13,17 +15,32 @@
     }])
     .controller('AnonymousUrlController', AnonymousUrlController);
 
-  AnonymousUrlController.$inject = ['_', '$filter', '$log', '$state', '$uibModal',
-    'anonymousUrlService', 'anonymousUrlData', 'NgTableParams'
+  AnonymousUrlController.$inject = [
+    '_',
+    '$filter',
+    '$log',
+    '$state',
+    '$uibModal',
+    'anonymousUrlService',
+    'anonymousUrlData',
+    'NgTableParams'
   ];
 
   /**
-   *  @namespace AnonymousUrlController
-   *  @desc Anonymous url mamnagement system controller
-   *  @memberOf LinShare.anonymousUrl
+   * @class AnonymousUrlController
+   * @description Anonymous url management system controller
+   * @memberOf LinShare.anonymousUrl
    */
-  function AnonymousUrlController(_, $filter, $log, $state, $uibModal, anonymousUrlService,
-    anonymousUrlData, NgTableParams) {
+  function AnonymousUrlController(
+    _,
+    $filter,
+    $log,
+    $state,
+    $uibModal,
+    anonymousUrlService,
+    anonymousUrlData,
+    NgTableParams
+  ) {
 
     /* jshint validthis:true */
     var anonymousUrlVm = this;
@@ -43,9 +60,10 @@
     ////////////
 
     /**
+     * @function
      * @name activate
-     * @desc Activation function of the controller, launch at every instantiation
-     * @memberOf LinShare.Guests.LinshareGuestsController
+     * @description Activation function of the controller, launch at every instantiation
+     * @memberOf LinShare.anonymousUrl.AnonymousUrlController
      */
     function activate() {
       if (anonymousUrlVm.urlData.protectedByPassword) {
@@ -56,10 +74,11 @@
     }
 
     /**
-     *  @name download
-     *  @desc Retrieve the file from the server
-     *  @param {Object} documentFile - A Document object
-     *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
+     * @function
+     * @name download
+     * @description Retrieve the file from the server
+     * @param {Object} documentFile - A Document object
+     * @memberOf LinShare.anonymousUrl.AnonymousUrlController
      */
     function download(documentFile) {
       var url = anonymousUrlService.downloadUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password,
@@ -80,9 +99,10 @@
     }
 
     /**
-     *  @name loadTable
-     *  @desc Load the table
-     *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
+     * @function
+     * @name loadTable
+     * @description Load the table
+     * @memberOf LinShare.anonymousUrl.AnonymousUrlController
      */
     function loadTable() {
       return new NgTableParams({
@@ -111,9 +131,9 @@
     }
 
     /**
-     *  @name modalPasswordShow
-     *  @desc Open a modal dialog for the user to input the password
-     *  @memberOf LinShare.anonymousUrl.AnonymousUrlController
+     * @class modalPasswordShow
+     * @description Open a modal dialog for the user to input the password
+     * @memberOf LinShare.anonymousUrl.AnonymousUrlController
      */
     function modalPasswordShow() {
       anonymousUrlVm.modalPassword = $uibModal.open({
@@ -129,21 +149,23 @@
           modalPasswordVm.submit = submit;
 
           /**
-           *  @name hasError
-           *  @desc Determine if the field is in an error state
-           *  @param {object} form - A form dom object
-           *  @param {object} field - A field fom object
-           *  @returns {Boolean} Error state of the field
-           *  @memberOf LinShare.anonymousUrl.AnonymousUrlController.modalPasswordController
+           * @function
+           * @name hasError
+           * @description Determine if the field is in an error state
+           * @param {object} form - A form dom object
+           * @param {object} field - A field fom object
+           * @returns {Boolean} Error state of the field
+           * @memberOf LinShare.anonymousUrl.AnonymousUrlController.modalPasswordShow
            */
           function hasError(form, field) {
             return ((field.$touched || form.$submitted) && field.$invalid);
           }
 
           /**
-           *  @name hide
-           *  @desc Hide the modal dialog
-           *  @memberOf LinShare.anonymousUrl.AnonymousUrlController.modalPasswordController
+           * @function
+           * @name hide
+           * @description Hide the modal dialog
+           * @memberOf LinShare.anonymousUrl.AnonymousUrlController.modalPasswordShow
            */
           function hide() {
             $state.go('anonymousUrl.home');
@@ -151,9 +173,10 @@
           }
 
           /**
-           *  @name submit
-           *  @desc Submit the form of the modal dialog
-           *  @memberOf LinShare.anonymousUrl.AnonymousUrlController.modalPasswordController
+           * @function
+           * @name submit
+           * @description Submit the form of the modal dialog
+           * @memberOf LinShare.anonymousUrl.AnonymousUrlController.modalPasswordShow
            */
           function submit() {
             anonymousUrlVm.password = modalPasswordVm.password;
