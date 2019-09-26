@@ -160,7 +160,11 @@
           downloadLink.click();
         }
 
-        downloadLink.remove();
+         if (navigator.msSaveBlob) { // IE10+
+            downloadLink.removeChild();
+         } else {
+            downloadLink.remove();
+         }
       });
     }
 
