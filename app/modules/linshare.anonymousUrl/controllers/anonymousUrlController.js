@@ -64,19 +64,17 @@
     function download(documentFile) {
       var url = anonymousUrlService.downloadUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password,
                                                 documentFile.uuid);
-      var downloadLink = document.createElement('a');
-      downloadLink.setAttribute('href', url);
-      downloadLink.setAttribute('download', documentFile.name);
 
-      if (document.createEvent) {
-        var event = document.createEvent('MouseEvents');
-        event.initEvent('click', true, true);
-        downloadLink.dispatchEvent(event);
-      } else {
-        downloadLink.click();
+      var downloadLinkParent = document.querySelector("[id='" + documentFile.uuid + "']");
+      var downloadLink = downloadLinkParent.appendChild(document.createElement("a"));
+      downloadLink.setAttribute('href', url);
+
+      if ( typeof(downloadLink.download) !== "undefined" ) {
+         downloadLink.setAttribute('download', documentFile.name);
       }
 
-      downloadLink.remove();
+      downloadLink.click();
+      downloadLinkParent.removeChild(downloadLink);
     }
 
     /**
