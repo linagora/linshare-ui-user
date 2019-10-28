@@ -69,7 +69,7 @@
                    anonymousUrlVm.tableParams._settings.total < anonymousUrlVm.tableParams._params.count}">
                 <table id="file-list-table" class="table table-vmiddle" data-ng-table="anonymousUrlVm.tableParams"
                        show-filter="true">
-                  <tr data-ng-repeat="documentFile in $data"
+                   <tr id="{{ ::documentFile.uuid }}" data-ng-repeat="documentFile in $data"
                       class="p-b-5">
                     <td class="center thumb-type-item">
                       <i class="fa ls-1p5x" data-ng-class="'{{::documentFile.type | mimetypeIcone}}'"></i>
@@ -78,7 +78,8 @@
                         data-sortable="'name'">
                       <div class="ctn-name-actions">
                         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                          <a data-ng-click="anonymousUrlVm.download(documentFile)">
+                          <a data-ng-click="anonymousUrlVm.download(documentFile)"
+                             event-propagation-stop>
                              {{::documentFile.name}}
                           </a>
                           <span>
