@@ -124,7 +124,7 @@
       }
 
       //Watcher for setting sidebar in mobile mode or desktop on resize
-      if (!$rootScope.isMobile) {
+      if (!$rootScope.isMobile  || checkTableHeightService.checkWidthIsBiggerThanMobile()) {
         angular.element(window).resize(function() {
           $scope.mainVm.sidebarToggle = checkTableHeightService.checkAndSetNewWidth();
           checkTableHeightService.checkAndSetNewWidthSidebarRight();
