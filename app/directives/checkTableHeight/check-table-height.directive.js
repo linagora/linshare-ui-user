@@ -42,7 +42,7 @@
         checkTableHeightVm.checkAndSetNewWidthSidebarRight();
         checkTableHeightVm.resizeTableBody();
       });
-     if (!$rootScope.isMobile) {
+      if (!$rootScope.isMobile || checkTableHeightVm.checkWidthIsBiggerThanMobile()) {
        angular.element(window).resize(function() {
          scope.mainVm.sidebarToggle = checkTableHeightVm.checkAndSetNewWidth();
          checkTableHeightVm.checkAndSetNewWidthSidebarRight();
@@ -52,7 +52,7 @@
       scope.$watch(function($window) {
         return $window.innerWidth;
       }, function() {
-        if (!$rootScope.isMobile) {
+        if (!$rootScope.isMobile || checkTableHeightVm.checkWidthIsBiggerThanMobile()) {
           scope.mainVm.sidebarToggle = checkTableHeightVm.checkAndSetNewWidth();
           $timeout(function() {
             checkTableHeightVm.resizeTableBody();
@@ -63,7 +63,7 @@
       scope.$watch(function($window) {
         return $window.innerHeight;
       }, function() {
-        if (!$rootScope.isMobile) {
+        if (!$rootScope.isMobile || checkTableHeightVm.checkWidthIsBiggerThanMobile()) {
           checkTableHeightVm.resizeTableBody();
           $timeout(function() {
             checkTableHeightVm.resizeTableBody();

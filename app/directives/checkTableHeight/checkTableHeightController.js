@@ -22,6 +22,7 @@
     var checkTableHeightVm = this;
     checkTableHeightVm.checkAndSetNewWidth = checkTableHeightService.checkAndSetNewWidth;
     checkTableHeightVm.checkAndSetNewWidthSidebarRight = checkTableHeightService.checkAndSetNewWidthSidebarRight;
+    checkTableHeightVm.checkWidthIsBiggerThanMobile = checkTableHeightService.checkWidthIsBiggerThanMobile;
     checkTableHeightVm.resizeTableBody = resizeTableBody;
 
     /**
