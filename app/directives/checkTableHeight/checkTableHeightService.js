@@ -19,6 +19,7 @@
   function checkTableHeightService($rootScope) {
     var service = {
       checkAndSetNewWidth: checkAndSetNewWidth,
+      checkWidthIsBiggerThanMobile: checkWidthIsBiggerThanMobile,
       checkAndSetNewWidthSidebarRight: checkAndSetNewWidthSidebarRight
     };
 
@@ -34,6 +35,17 @@
     function checkAndSetNewWidth() {
       var widthWindow = angular.element(window).width();
       return widthWindow > 1093 ? true : false;
+    }
+
+    /**
+     *  @name checkWidthIsBiggerThanMobile
+     *  @desc Check width is bigger than mobile
+     *  @return {Boolean}
+     *  @memberof linshareUiUserApp.checkTableHeightService
+     */
+    function checkWidthIsBiggerThanMobile() {
+      var widthWindow = angular.element(window).width();
+      return widthWindow > $rootScope.mobileWidthBreakpoint ? true : false;
     }
 
     /*TODO: class name in hyphen*/
@@ -52,5 +64,6 @@
         angular.element('aside#chat.sidebar-right').removeClass('setSidebarRightMobileState');
       }
     }
+
   }
 })();
