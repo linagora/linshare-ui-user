@@ -623,6 +623,7 @@
                               </document-preview-button>
                             </li>
                             <li
+                              data-ng-if="workgroupNodesVm.canDownloadArchive"
                               data-ng-class="{'disable-link': !workgroupNodesVm.permissions.FILE.READ}"
                             >
                               <a
