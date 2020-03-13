@@ -143,6 +143,7 @@
         .then(function(functionalities) {
           workgroupNodesVm.functionalities.contactsList = functionalities.CONTACTS_LIST__CREATION_RIGHT;
           workgroupNodesVm.canAddVersion = functionalities.WORK_GROUP__FILE_VERSIONING.enable;
+          workgroupNodesVm.canDownloadArchive = functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
           workgroupNodesVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable &&
             functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
 
