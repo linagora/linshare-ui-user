@@ -27,6 +27,7 @@
     documentsList,
     documentUtilsService,
     flowUploadService,
+    functionalityRestService,
     LinshareShareService,
     LinshareDocumentRestService,
     lsAppConfig,
@@ -89,6 +90,12 @@
     ////////////////
 
     function activate() {
+      functionalityRestService
+        .getFunctionalityParams('DOCUMENT_EXPIRATION')
+        .then(function(data) {
+          $scope.mainVm.enableDocumentExpiration = data.enable;
+        });
+
       //TODO - PREVIEW: Shall be removed once every functions are defined in an external service
       Object.assign(
         documentPreviewService,

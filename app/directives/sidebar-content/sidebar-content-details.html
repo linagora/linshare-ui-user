@@ -202,20 +202,28 @@
                           {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate'}}
                         </p>
                       </div>
-                      <div>
+                      <div data-ng-if="mainVm.enableDocumentExpiration">
                         <p>{{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}:</p>
                         <p
+                          data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.shared"
                           tooltip-placement="bottom"
                           tooltip-popup-delay="500"
                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate
                           | lsDate:'medium'}}"
                         >
-                          <span x-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate !== null">
+                          <span>
                             {{
                             mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate | lsDate:'longDate'
                             }}
                           </span>
-                          <span x-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate == null">
+                        </p>
+                        <p
+                          data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared"
+                          tooltip-placement="bottom"
+                          tooltip-popup-delay="500"
+                          uib-tooltip="{{'RIGHT_PANEL.DETAILS.UNSET_SHARED_FILE_EXPIRRATION_DATE' | translate}}"
+                        >
+                          <span>
                             {{'RIGHT_PANEL.DETAILS.UNDEFINED'  | translate}}
                           </span>
                         </p>

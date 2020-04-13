@@ -36,6 +36,7 @@
         "DESCRIPTION": "Описание",
         "EXPIRATION_DATE": "Дата окончания действия",
         "EXPIRATION_DATE_LABEL": "Истечение срока:",
+        "UNSET_SHARED_FILE_EXPIRRATION_DATE": "The expiration date is not set because the file is being shared",
         "INPUT_LIST_NAME": "Введите название списка",
         "MODIFICATION_DATE": "Изменено: ",
         "NO_PREVIEW_AVAILABLE": "Предварительный просмотр не доступен",
