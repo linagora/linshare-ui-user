@@ -9,17 +9,19 @@
     .module('linshareUiUserApp')
     .controller('lsLeftSidebarController', lsLeftSidebarController);
 
-  lsLeftSidebarController.$inject = ['$http', '$timeout', 'authenticationRestService', 'MenuService'];
+  lsLeftSidebarController.$inject = ['$http', '$timeout', 'authenticationRestService', 'lsAppConfig', 'MenuService'];
 
   /**
    * @namespace lsLeftSidebarController
    * @desc Manage left sidebar's controller
    * @memberOf linshareUiUserApp
    */
-  function lsLeftSidebarController($http, $timeout, authenticationRestService, MenuService) {
+  function lsLeftSidebarController($http, $timeout, authenticationRestService, lsAppConfig, MenuService) {
     /* jshint validthis: true */
     var lsLeftSidebarVm = this;
+
     lsLeftSidebarVm.$timeout = $timeout;
+    lsLeftSidebarVm.communitySlogan = lsAppConfig.communitySlogan;
     lsLeftSidebarVm.productVersion = 'dev';
     lsLeftSidebarVm.tabs = {};
 
