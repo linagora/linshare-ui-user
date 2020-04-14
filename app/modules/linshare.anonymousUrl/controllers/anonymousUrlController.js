@@ -14,7 +14,7 @@
     .controller('AnonymousUrlController', AnonymousUrlController);
 
   AnonymousUrlController.$inject = ['_', '$filter', '$log', '$state', '$uibModal',
-    'anonymousUrlService', 'anonymousUrlData', 'NgTableParams'
+    'anonymousUrlService', 'anonymousUrlData', 'lsAppConfig', 'NgTableParams'
   ];
 
   /**
@@ -23,7 +23,7 @@
    *  @memberOf LinShare.anonymousUrl
    */
   function AnonymousUrlController(_, $filter, $log, $state, $uibModal, anonymousUrlService,
-    anonymousUrlData, NgTableParams) {
+    anonymousUrlData, lsAppConfig, NgTableParams) {
 
     /* jshint validthis:true */
     var anonymousUrlVm = this;
@@ -33,6 +33,7 @@
     anonymousUrlVm.anonymousUrlShareEntries = [];
     anonymousUrlVm.download = download;
     anonymousUrlVm.loadTable = loadTable;
+    anonymousUrlVm.baseProductUrl = lsAppConfig.baseProductUrl;
     anonymousUrlVm.modalPasswordShow = modalPasswordShow;
     anonymousUrlVm.paramFilter = {
       name: ''

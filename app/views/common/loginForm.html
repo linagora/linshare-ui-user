@@ -10,21 +10,21 @@
     <language-selector/>
   </div>
   <div id="copyright-login">
-    <a href="http://linshare.org" target="_blank">
-      <img ng-src="images/common/linshare-logo-white.png" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
+    <a href="{{ loginVm.lsAppConfig.baseProductUrl }}" target="_blank">
+      <img ng-src="{{ loginVm.lsAppConfig.applicationLogo.small }}" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
     </a>
     <p data-bind-html translate>LOGIN.COPYRIGHT</p>
   </div>
   <div class="quota login-libreNfreeCtn">
     <div class="libre-and-free">
-      <img src="images/community-white.png" alt="Logo LinShare">
-      <p>Libre &amp; Free</p>
+      <img ng-src="{{ loginVm.lsAppConfig.communityLogo }}" alt="Logo LinShare">
+      <p>{{ loginVm.lsAppConfig.communitySlogan }}</p>
     </div>
   </div>
   <div class="login-content" id="l-login">
     <div class="parent-login-form-alignment">
       <div class="logo-title">
-        <a href="http://linshare.org" target="_blank">
+        <a href="{{ loginVm.lsAppConfig.baseProductUrl }}" target="_blank">
           <img ng-src="{{::mainVm.applicationLogoLarge}}" alt="logo">
         </a>
         <p>{{'LOGIN.TAGLINE' | translate}}</p>

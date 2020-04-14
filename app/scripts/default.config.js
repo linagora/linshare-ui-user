@@ -9,6 +9,7 @@
     .module('linshareUiUserApp')
     .constant('lsAppConfig', {
       //Default values if not set in config.js
+      baseProductUrl: 'http://linshare.org',
       baseRestUrl: 'linshare/webservice/rest/user/v2',
       debug: false,
       localPath: 'i18n/original', //custom your i18n folder path
@@ -19,6 +20,8 @@
         small : 'images/common/linshare-logo-white.png',
         large : 'images/ls-logo-big.png'
       },
+      communityLogo: 'images/community-white.png',
+      communitySlogan: 'Libre & Free',
       loginBackground : 'images/bg-linshare-desktop.png',
 
       // For application configuration

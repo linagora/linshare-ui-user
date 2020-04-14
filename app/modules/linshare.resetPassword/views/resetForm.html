@@ -6,13 +6,13 @@
     <language-selector/>
   </div>
   <div id="copyright-login">
-    <img ng-src="images/common/linshare-logo-white.png" alt="">
+    <img ng-src="{{ resetVm.lsAppConfig.applicationLogo.small }}" alt="">
     <p data-bind-html translate>LOGIN.COPYRIGHT</p>
   </div>
   <div class="quota login-libreNfreeCtn">
     <div class="libre-and-free">
-      <img src="images/community-white.png" alt="Logo LinShare">
-      <p>Libre &amp; Free</p>
+      <img ng-src="{{ resetVm.lsAppConfig.communityLogo }}" alt="Logo LinShare">
+      <p>{{ resetVm.lsAppConfig.communitySlogan }}</p>
     </div>
   </div>
   <div class="login-content" id="l-login">
