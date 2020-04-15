@@ -36,7 +36,7 @@
       "DESCRIPTION": "Description",
       "EXPIRATION_DATE": "Expiration date",
       "EXPIRATION_DATE_LABEL": "Expiration date:",
-      "UNSET_SHARED_FILE_EXPIRRATION_DATE": "The expiration date is not set because the file is being shared",
+      "UNSET_SHARED_FILE_EXPIRRATION_DATE": "The expiration date will be defined once all related sharing will be removed or expired",
       "INPUT_LIST_NAME": "Input the name of your list",
       "MODIFICATION_DATE": "Modification date",
       "NO_PREVIEW_AVAILABLE": "No preview available",
