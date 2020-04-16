@@ -20,7 +20,8 @@
         small : 'images/common/linshare-logo-white.png',
         large : 'images/ls-logo-big.png'
       },
-      communityLogo: 'images/community-white.png',
+      communityWhiteLogo: 'images/community-white.png',
+      communityBlueLogo: 'images/common/community.png',
       communitySlogan: 'Libre & Free',
       loginBackground : 'images/bg-linshare-desktop.png',
 

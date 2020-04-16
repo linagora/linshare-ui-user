@@ -9,10 +9,17 @@
     <img ng-src="{{ resetVm.lsAppConfig.applicationLogo.small }}" alt="">
     <p data-bind-html translate>LOGIN.COPYRIGHT</p>
   </div>
-  <div class="quota login-libreNfreeCtn">
+  <div
+    class="quota login-libreNfreeCtn"
+    data-ng-if="resetVm.lsAppConfig.communityWhiteLogo || resetVm.lsAppConfig.communitySlogan"
+  >
     <div class="libre-and-free">
-      <img ng-src="{{ resetVm.lsAppConfig.communityLogo }}" alt="Logo LinShare">
-      <p>{{ resetVm.lsAppConfig.communitySlogan }}</p>
+      <div class="community-logo" data-ng-if="resetVm.lsAppConfig.communityWhiteLogo">
+        <img ng-src="{{ resetVm.lsAppConfig.communityWhiteLogo }}" alt="Logo LinShare">
+      </div>
+      <div class="community-slogan" data-ng-if="resetVm.lsAppConfig.communitySlogan">
+        <p>{{ resetVm.lsAppConfig.communitySlogan }}</p>
+      </div>
     </div>
   </div>
   <div class="login-content" id="l-login">
