@@ -266,22 +266,21 @@ div {
   overflow: hidden;
   z-index: 7;
   .libre-and-free {
-    display: table;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     margin: 5px 0 2px 0;
     img {
-      display: table-cell;
       width: 14px;
-      padding-top: 2px;
+      height: auto;
+      margin-right: 3px;
     }
     p {
       color: #E6E6E6;
-      display: table-cell;
-      vertical-align: middle;
       font-size: 14px;
       font-family: 'Lato', sans-serif;
       font-weight: 700;
       font-style: italic;
-      padding-left: 4px;
     }
   }
 }

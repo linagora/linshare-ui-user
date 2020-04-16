@@ -21,7 +21,7 @@
     var lsLeftSidebarVm = this;
 
     lsLeftSidebarVm.$timeout = $timeout;
-    lsLeftSidebarVm.communitySlogan = lsAppConfig.communitySlogan;
+    lsLeftSidebarVm.lsAppConfig = lsAppConfig;
     lsLeftSidebarVm.productVersion = 'dev';
     lsLeftSidebarVm.tabs = {};
 
