@@ -21,22 +21,27 @@
   function FilterBoxController(_, $scope, $timeout, autocompleteUserRestService, filterBoxService, moment,
                                unitService) {
     var filterBoxVm = this;
-    filterBoxVm.autocompleteUserRestService = autocompleteUserRestService;
-    filterBoxVm.clearParams = clearParams;
-    filterBoxVm.filterBoxItems = filterBoxService.getSetItems;
-    filterBoxService.getSetItems(filterBoxVm.filterItems);
-    filterBoxVm.filterBoxTable = filterBoxService.getSetTable;
-    filterBoxService.getSetTable(filterBoxVm.filterTable);
-    filterBoxVm.formatLabel = formatLabel;
-    filterBoxVm.maxDate = moment().add(1, 'day').hours(23).minutes(59).seconds(59);
-    filterBoxVm.reloadTable = filterBoxService.reloadTable;
-    filterBoxVm.resetTableList = filterBoxService.resetTableList;
-    filterBoxVm.showDateRange = filterBoxService.getSetDateFilter;
-    filterBoxVm.showRecipients = filterBoxService.getSetRecipientsFilter;
-    filterBoxVm.showUnit = filterBoxService.getSetUnitFilter;
-    filterBoxVm.unitService = unitService;
-    filterBoxVm.updateFilters = updateFilters;
-    filterBoxVm.userRepresentation = userRepresentation;
+
+    filterBoxVm.$onInit = $onInit
+
+    function $onInit() {
+      filterBoxVm.autocompleteUserRestService = autocompleteUserRestService;
+      filterBoxVm.clearParams = clearParams;
+      filterBoxVm.filterBoxItems = filterBoxService.getSetItems;
+      filterBoxService.getSetItems(filterBoxVm.filterItems);
+      filterBoxVm.filterBoxTable = filterBoxService.getSetTable;
+      filterBoxService.getSetTable(filterBoxVm.filterTable);
+      filterBoxVm.formatLabel = formatLabel;
+      filterBoxVm.maxDate = moment().add(1, 'day').hours(23).minutes(59).seconds(59);
+      filterBoxVm.reloadTable = filterBoxService.reloadTable;
+      filterBoxVm.resetTableList = filterBoxService.resetTableList;
+      filterBoxVm.showDateRange = filterBoxService.getSetDateFilter;
+      filterBoxVm.showRecipients = filterBoxService.getSetRecipientsFilter;
+      filterBoxVm.showUnit = filterBoxService.getSetUnitFilter;
+      filterBoxVm.unitService = unitService;
+      filterBoxVm.updateFilters = updateFilters;
+      filterBoxVm.userRepresentation = userRepresentation;
+    }
 
     ////////////
 

@@ -40,15 +40,19 @@
     var autocompleteUsersVm = this;
     var regexpEmail = /^\S+@\S+\.\S+$/;
 
-    autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
-    autocompleteUsersVm.isEmail = true;
-    autocompleteUsersVm.onErrorEmail = onErrorEmail;
-    autocompleteUsersVm.onSelect = onSelect;
-    autocompleteUsersVm.required = required;
-    autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
-    autocompleteUsersVm.userRepresentation = userRepresentation;
+    autocompleteUsersVm.$onInit = $onInit;
 
-    activate();
+    function $onInit() {
+      autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
+      autocompleteUsersVm.isEmail = true;
+      autocompleteUsersVm.onErrorEmail = onErrorEmail;
+      autocompleteUsersVm.onSelect = onSelect;
+      autocompleteUsersVm.required = required;
+      autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
+      autocompleteUsersVm.userRepresentation = userRepresentation;
+
+      activate();
+    }
 
     ////////////
 

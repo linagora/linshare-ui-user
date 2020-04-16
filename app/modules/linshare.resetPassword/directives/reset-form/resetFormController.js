@@ -18,13 +18,17 @@
     /* jshint validthis:true */
     var resetFormVm = this;
 
-    resetFormVm.getFormData = getFormData;
-    resetFormVm.languageService = languageService;
-    resetFormVm.resetSubmit = resetSubmit;
-    resetFormVm.message = {
-      key: 'RESET.FORM.INFO.' + resetFormVm.resetType.toUpperCase(),
-      params: resetFormVm.resetData
-    };
+    resetFormVm.$onInit = $onInit
+
+    function $onInit() {
+      resetFormVm.getFormData = getFormData;
+      resetFormVm.languageService = languageService;
+      resetFormVm.resetSubmit = resetSubmit;
+      resetFormVm.message = {
+        key: 'RESET.FORM.INFO.' + resetFormVm.resetType.toUpperCase(),
+        params: resetFormVm.resetData
+      };
+    }
 
     ////////////
 

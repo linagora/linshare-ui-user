@@ -101,6 +101,12 @@ angular
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
   })
 
+  //TODO: globally silence unhandled promise rejections from angular1.6
+  //Ref: https://code.angularjs.org/1.6.10/docs/api/ng/provider/$qProvider
+  .config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+  }])
+
   .config(function(localStorageServiceProvider, $logProvider, $windowProvider, lsAppConfig, _) {
     localStorageServiceProvider
       .setPrefix('lsUser')
