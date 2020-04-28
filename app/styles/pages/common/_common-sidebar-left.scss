@@ -154,10 +154,13 @@ body:not(.sw-toggled) #sidebar {
         }
       }
     }
-    a:last-child {
-      padding-left: 0;
-      &:hover {
-        background-color: transparent;
+    a {
+      width: 100%;
+      &:last-child {
+        padding-left: 0;
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
   }
