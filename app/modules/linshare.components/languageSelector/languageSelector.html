@@ -13,11 +13,11 @@
         <span
           class="flag-icon"
           data-ng-class="'flag-icon-' + LanguageSelectorVm.currentLanguage.key"
-        />
+        ></span>
         <span class="disp-language">
           {{LanguageSelectorVm.currentLanguage.key.toUpperCase()}}
         </span>
-        <i class="zmdi zmdi-chevron-down"/>
+        <i class="zmdi zmdi-chevron-down"></i>
       </button>
       <ul
         class="dropdown-menu pull-right flag-list-ctn"
@@ -29,7 +29,7 @@
             <span
              class="flag-icon"
               data-ng-class="'flag-icon-' + language.key"
-            />
+            ></span>
             <span class="lang-short">
               {{::language.key.toUpperCase()}}
             </span>

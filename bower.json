@@ -2,7 +2,7 @@
   "name": "linshare-ui-user",
   "version": "4.0.0-SNAPSHOT",
   "dependencies": {
-    "jquery": "3.2.1",
+    "jquery": "3.5",
     "angular": "1.5.10",
     "angular-animate": "1.5.10",
     "angular-aria": "1.5.10",
@@ -61,6 +61,6 @@
     "angular": "1.5.10",
     "angular-translate": "2.15.2",
     "messageformat": "1.0.2",
-    "jquery": "3.2.1"
+    "jquery": "3.5"
   }
 }
