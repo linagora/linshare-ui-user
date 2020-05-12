@@ -86,6 +86,8 @@ angular.module('linshare.share')
           shareJson.forceAnonymousSharing,
           forceAnonymousSharing
         );
+      }).catch(function(error) {
+        $log.debug('Error when creating ShareObjectForm', error)
       });
     }
 

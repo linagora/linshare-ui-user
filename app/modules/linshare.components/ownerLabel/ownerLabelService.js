@@ -40,6 +40,8 @@
         currentUser = promises[0];
         by = promises[1].BY;
         me = promises[1].ME;
+      }).catch(function(error) {
+        $log.debug('Error on loading ownerLabel service', error);
       });
     }
 

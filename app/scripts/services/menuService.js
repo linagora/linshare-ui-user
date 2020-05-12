@@ -116,6 +116,8 @@
             functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
           receivedShares.disabled = lsAppConfig.menuLinks.disable[receivedShareMenuName] &&
             functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
+        }).catch(function(err) {
+          $log.debug(error)
         });
 
       administrations = {

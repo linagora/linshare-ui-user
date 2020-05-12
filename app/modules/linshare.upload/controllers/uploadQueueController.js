@@ -154,6 +154,8 @@
             functionalities = promises[1];
           uploadQueueVm.location.mySpace = user.canUpload;
           uploadQueueVm.location.workgroup = functionalities.WORK_GROUP.enable;
+      }).catch(function(error) {
+        $log.debug(error)
       });
     }
 

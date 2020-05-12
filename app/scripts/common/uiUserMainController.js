@@ -376,6 +376,8 @@
             user.firstLetter = user.firstName.charAt(0);
             $scope.userLogged = user;
             getUserQuotas();
+          }).catch(function(error) {
+            $log.debug(error)
           });
       }
     }

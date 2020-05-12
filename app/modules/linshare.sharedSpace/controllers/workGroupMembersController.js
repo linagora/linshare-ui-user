@@ -115,6 +115,9 @@
 
             // TODO SideEffect Power!
             $scope.mainVm.sidebar.addData('currentWorkgroupMember', currentMember );
+          })
+          .catch(function(error) {
+            $log.debug(error)
           });
 
       }, true);

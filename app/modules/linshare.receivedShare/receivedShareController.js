@@ -114,6 +114,9 @@
             if (!$scope.isMobile && $scope.selectedDocuments.length === 1) {
               $scope.showCurrentFile($scope.selectedDocuments[0]);
             }
+          })
+          .catch(function(error) {
+            $log.debug(error);
           });
 
         $transitions.onSuccess({}, function() {

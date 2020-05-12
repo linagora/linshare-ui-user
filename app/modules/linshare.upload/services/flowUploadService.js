@@ -259,6 +259,8 @@
       if (!userQuotaUuid) {
         authenticationRestService.getCurrentUser().then(function(user) {
           userQuotaUuid = user.quotaUuid;
+        }).catch(function(error) {
+          $log.debug(error)
         });
       }
     }

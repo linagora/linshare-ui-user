@@ -65,7 +65,6 @@
       $q.all([
         functionalityRestService.getAll(),
         authenticationRestService.getCurrentUser()
-
       ]).then(function(promises) {
         var functionalities = promises[0];
         autocompleteUsersVm.functionality = functionalities.COMPLETION;
@@ -74,6 +73,8 @@
         if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
           autocompleteUsersVm.withEmail = false;
         }
+      }).catch(function(error) {
+        $log.debug(error)
       });
     }
 

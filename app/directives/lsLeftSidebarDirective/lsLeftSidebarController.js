@@ -9,14 +9,14 @@
     .module('linshareUiUserApp')
     .controller('lsLeftSidebarController', lsLeftSidebarController);
 
-  lsLeftSidebarController.$inject = ['$http', '$timeout', 'authenticationRestService', 'lsAppConfig', 'MenuService'];
+  lsLeftSidebarController.$inject = ['$http', '$timeout', 'authenticationRestService', 'lsAppConfig', 'MenuService', '$log'];
 
   /**
    * @namespace lsLeftSidebarController
    * @desc Manage left sidebar's controller
    * @memberOf linshareUiUserApp
    */
-  function lsLeftSidebarController($http, $timeout, authenticationRestService, lsAppConfig, MenuService) {
+  function lsLeftSidebarController($http, $timeout, authenticationRestService, lsAppConfig, MenuService, $log) {
     /* jshint validthis: true */
     var lsLeftSidebarVm = this;
 
@@ -59,6 +59,8 @@
     function getProductVersion() {
       $http.get('/about.json').then(function(data) {
         lsLeftSidebarVm.productVersion = data.version;
+      }).catch(function(error) {
+        $log.debug(error)
       });
     }
   }
