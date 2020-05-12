@@ -12,6 +12,7 @@
   menuService.$inject = [
     '_',
     '$q',
+    '$log',
     'authenticationRestService',
     'functionalityRestService',
     'lsAppConfig'
@@ -25,6 +26,7 @@
   function menuService(
     _,
     $q,
+    $log,
     authenticationRestService,
     functionalityRestService,
     lsAppConfig
@@ -116,7 +118,7 @@
             functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
           receivedShares.disabled = lsAppConfig.menuLinks.disable[receivedShareMenuName] &&
             functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
-        }).catch(function(err) {
+        }).catch(function(error) {
           $log.debug(error)
         });
 
