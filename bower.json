@@ -3,21 +3,21 @@
   "version": "4.0.0-SNAPSHOT",
   "dependencies": {
     "jquery": "3.5",
-    "angular": "1.6.10",
-    "angular-animate": "1.6.10",
-    "angular-aria": "1.6.10",
-    "angular-cookies": "1.6.10",
-    "angular-i18n": "1.6.10",
-    "angular-messages": "1.6.10",
-    "angular-resource": "1.6.10",
-    "angular-route": "1.6.10",
-    "angular-sanitize": "1.6.10",
-    "angular-touch": "1.6.10",
+    "angular": "1.7.9",
+    "angular-animate": "1.7.9",
+    "angular-aria": "1.7.9",
+    "angular-cookies": "1.7.9",
+    "angular-i18n": "1.7.9",
+    "angular-messages": "1.7.9",
+    "angular-resource": "1.7.9",
+    "angular-route": "1.7.9",
+    "angular-sanitize": "1.7.9",
+    "angular-touch": "1.7.9",
     "angular-bootstrap": "2.5.0",
     "angular-http-auth": "1.5.0",
     "angular-local-storage": "0.7.1",
     "angular-material": "1.1.4",
-    "angular-translate": "2.15.2",
+    "angular-translate": "2.18.2",
     "angular-translate-interpolation-messageformat": "2.15.2",
     "angular-translate-loader-partial": "2.15.2",
     "angular-ui-router": "1.0.6",
@@ -52,14 +52,14 @@
     }
   },
   "devDependencies": {
-    "angular-mocks": "1.6.10"
+    "angular-mocks": "1.7.9"
   },
   "license": "https://www.linshare.org/files/LinShare-License_AfferoGPL-v3_en.pdf",
   "appPath": "app",
   "moduleName": "linshareUiUserApp",
   "resolutions": {
-    "angular": "1.6.10",
-    "angular-translate": "2.15.2",
+    "angular": "1.7.9",
+    "angular-translate": "2.18.2",
     "messageformat": "1.0.2",
     "jquery": "3.5"
   }
