@@ -1,0 +1,151 @@
+<div
+  ui-view=""
+  data-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}"
+>
+  <div class="container files">
+    <div class="card">
+      <div class="card-header">
+        <div id="breadcrumb-wrap">
+          <div class="breadcrumbs-ctn hidden-xs">
+            <a class="click-disabled">
+              <i class="zmdi zmdi-lock v-center"></i>
+              <span class="v-center" translate>CHANGE_PASSWORD.TITLE</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body collapsible-content">
+        <div class="change-password-form col-md-5 col-sm-7 col-sm-offset-2">
+          <form name="form" ng-submit="changePasswordVm.changePassword(form)">
+
+            <div class="form-group row m-b-15">
+              <label for="firstName" class="text-right col-sm-4" translate>CHANGE_PASSWORD.FORM.FIRSTNAME</label>
+              <div class="col-sm-8">
+                <input
+                  class="form-control fc-alt brd-2"
+                  type="text"
+                  id="firstName"
+                  value="{{::changePasswordVm.user.firstName}}"
+                  disabled
+                >
+              </div>
+            </div>
+
+            <div class="form-group row m-b-15">
+              <label for="lastName" class="text-right col-sm-4" translate>CHANGE_PASSWORD.FORM.LASTNAME</label>
+              <div class="col-sm-8">
+                <input
+                  class="form-control fc-alt brd-2"
+                  type="text"
+                  id="lastName"
+                  value="{{::changePasswordVm.user.lastName}}"
+                  disabled
+                >
+              </div>
+            </div>
+
+            <div class="form-group row m-b-15">
+              <label for="email" class="text-right col-sm-4" translate>CHANGE_PASSWORD.FORM.EMAIL</label>
+              <div class="col-sm-8">
+                <input
+                  class="form-control fc-alt brd-2"
+                  type="text"
+                  id="email"
+                  value="{{::changePasswordVm.user.mail}}"
+                  disabled
+                >
+              </div>
+            </div>
+
+            <div class="form-group row m-b-15">
+              <label for="oldPassword" class="text-right col-sm-4" translate>CHANGE_PASSWORD.FORM.OLD_PASSWORD</label>
+              <div class="col-sm-8" ng-class="{ 'has-error': form.oldPassword.$invalid }">
+                <input
+                  ng-attr-type="{{ showPassword ? 'text' : 'password' }}"
+                  name="oldPassword"
+                  class="form-control fc-alt brd-2"
+                  ng-model="changePasswordVm.oldPassword"
+                  required
+                >
+                <i
+                  class="zmdi"
+                  ng-class="{'zmdi-eye': showPassword, 'zmdi-eye-off': !showPassword }"
+                  ng-click="showPassword = !showPassword"
+                ></i>
+                <small ng-show="form.oldPassword.$invalid && !form.oldPassword.$error.required" translate>CHANGE_PASSWORD.FORM.ERROR.INCORRECT_PASSWORD</small>
+              </div>
+            </div>
+
+            <div class="form-group row m-b-15">
+              <label for="newPassword" class="text-right col-sm-4" translate>CHANGE_PASSWORD.FORM.NEW_PASSWORD</label>
+              <div class="col-sm-8" ng-class="{ 'has-error': form.newPassword.$invalid }">
+                <input
+                  ng-attr-type="{{ showNewPwd ? 'text' : 'password' }}"
+                  name="newPassword"
+                  class="form-control fc-alt brd-2"
+                  ng-model="changePasswordVm.newPassword"
+                  ng-maxlength="changePasswordVm.rules.passwordMaxLength"
+                  ng-minlength="changePasswordVm.rules.passwordMinLength"
+                  ng-focus="showHint = true"
+                  ng-blur="showHint = false"
+                  password-validator="changePasswordVm.rules"
+                  required
+                >
+                <i
+                  class="zmdi"
+                  ng-class="{'zmdi-eye': showNewPwd, 'zmdi-eye-off': !showNewPwd }"
+                  ng-click="showNewPwd = !showNewPwd"
+                ></i>
+                <small ng-show="!showHint && form.newPassword.$invalid && !form.newPassword.$error.required" translate>CHANGE_PASSWORD.FORM.ERROR.WEAK_PASSWORD</small>
+                <password-input-hints ng-show="showHint" rules="changePasswordVm.rules" form-error="form.newPassword.$error"/>
+              </div>
+            </div>
+
+            <div class="form-group row m-b-15">
+              <label for="newPasswordRetype" class="text-right col-sm-4" translate>CHANGE_PASSWORD.FORM.RETYPE_PASSWORD</label>
+              <div class="col-sm-8" ng-class="{ 'has-error': form.newPasswordRetype.$invalid }">
+                <input
+                  ng-attr-type="{{ showNewPwdRetype ? 'text' : 'password' }}"
+                  name="newPasswordRetype"
+                  class="form-control fc-alt brd-2"
+                  ng-model="changePasswordVm.newPasswordRetype"
+                  ng-pattern="changePasswordVm.newPassword"
+                  required
+                >
+                <i
+                  class="zmdi"
+                  ng-class="{'zmdi-eye': showNewPwdRetype, 'zmdi-eye-off': !showNewPwdRetype }"
+                  ng-click="showNewPwdRetype = !showNewPwdRetype"
+                ></i>
+                <small ng-show="form.newPasswordRetype.$error.pattern" translate>CHANGE_PASSWORD.FORM.ERROR.MATCHING</small>
+              </div>
+            </div>
+
+            <div class="row m-b-10">
+              <div class="col-sm-offset-4 col-sm-4 col-xs-6">
+                <button
+                  class="w-100 waves-effect btn btn-primary bgm-lightblue"
+                  type="submit"
+                  ng-disabled="form.$invalid || form.$pristine"
+                  translate
+                >
+                  CHANGE_PASSWORD.FORM.SUBMIT
+                </button>
+              </div>
+              <div class="col-sm-4 col-xs-6">
+                <button
+                  class="w-100 waves-effect btn btn-secondary"
+                  ui-sref="home"
+                  translate
+                >
+                  CHANGE_PASSWORD.FORM.CANCEL
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -244,7 +244,7 @@ module.exports = function(grunt) {
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/directives/*/*.js',
           '<%= yeoman.dist %>/styles/!(theme\.){,*/}*.css',
-          '<%= yeoman.dist %>/styles/theme.default.css',          
+          '<%= yeoman.dist %>/styles/theme.default.css',
           //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '!<%= yeoman.dist %>/config/config.js',
           '<%= yeoman.dist %>/styles/fonts/*'
@@ -473,7 +473,7 @@ module.exports = function(grunt) {
       'watch'
     ]);
   });
-  
+
   grunt.registerTask('cssrename', 'rename css with correct build id', function() {
     const done = this.async(); // creating an async variable
     const fs = require('fs');

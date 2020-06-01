@@ -55,6 +55,7 @@
     const receivedShareMenuName = 'MENU_TITLE.RECEIVED_SHARES';
     const myUploadMenuName = 'MENU_TITLE.UPLOAD_AND_SHARE';
     const sharedSpaceMenuName = 'MENU_TITLE.SHARED_SPACE';
+    const changePasswordMenuName = 'MENU_TITLE.CHANGE_PASSWORD';
 
     return service;
 

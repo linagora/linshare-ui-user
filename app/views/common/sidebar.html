@@ -31,6 +31,9 @@
              data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
             <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
           </a>
+          <a ui-sref="changePassword" ng-if="loggedUser.accountType === 'GUEST'">
+            <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
+          </a>
         </li>
       </ul>
     </div>
