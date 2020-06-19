@@ -1,0 +1,67 @@
+<div id="login-page">
+  <div id="bg">
+    <img
+      data-ng-src="{{::mainVm.loginBackground}}"
+      alt=""
+      class="img-responsive"
+    />
+  </div>
+  <div>
+    <language-selector/>
+  </div>
+  <div id="copyright-login">
+    <a href="{{ secondFactorAuthenticationVm.lsAppConfig.baseProductUrl }}" target="_blank">
+      <img ng-src="{{ secondFactorAuthenticationVm.lsAppConfig.applicationLogo.small }}" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
+    </a>
+    <p data-bind-html translate>LOGIN.COPYRIGHT</p>
+  </div>
+  <div
+    class="quota login-libreNfreeCtn"
+    data-ng-if="secondFactorAuthenticationVm.lsAppConfig.communityWhiteLogo || secondFactorAuthenticationVm.lsAppConfig.communitySlogan"
+  >
+    <div class="libre-and-free">
+      <div class="community-logo" data-ng-if="secondFactorAuthenticationVm.lsAppConfig.communityWhiteLogo">
+        <img ng-src="{{ secondFactorAuthenticationVm.lsAppConfig.communityWhiteLogo }}" alt="Logo LinShare">
+      </div>
+      <div class="community-slogan" data-ng-if="secondFactorAuthenticationVm.lsAppConfig.communitySlogan">
+        <p>{{ secondFactorAuthenticationVm.lsAppConfig.communitySlogan }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="login-content" id="l-login">
+    <div class="parent-login-form-alignment">
+      <div class="logo-title">
+        <a href="{{ secondFactorAuthenticationVm.lsAppConfig.baseProductUrl }}" target="_blank">
+          <img ng-src="{{::mainVm.applicationLogoLarge}}" alt="logo">
+        </a>
+        <p>{{'LOGIN.TAGLINE' | translate}}</p>
+      </div>
+      <div class="lc-block toggled child-centered-login-form">
+        <div class="inner-content-form-ctn">
+          <div class="header-login-form">
+            <h1 translate>{{'SECOND_FA_LOGIN.LOGIN_HEADER'}}</h1>
+          </div>
+          <div
+            class="info-login-form m-b-20"
+            translate
+          >
+          {{'SECOND_FA_LOGIN.USAGE'}}
+          </div>
+          <form class="form-horizontal" data-ng-submit="secondFactorAuthenticationVm.submitForm()" role="form">
+            <div id="otp-form-group">
+              <div class="otp-input">
+                <input
+                  data-ng-model="secondFactorAuthenticationVm.otp"
+                  type="text"
+                  maxLength="6"
+                  pattern="[0-9]{6}"
+                  />
+              </div>
+            </div>
+            <button class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate}}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

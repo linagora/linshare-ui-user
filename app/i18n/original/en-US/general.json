@@ -176,6 +176,14 @@
     "PASSWORD_PLACEHOLDER": "Password",
     "TAGLINE": "Secure file sharing app in open source"
   },
+  "SECOND_FA_LOGIN": {
+    "LOGIN_HEADER": "Second factor authentication",
+    "USAGE": "Input the 6-digit code from your FreeOTP app",
+    "NOTIFICATION": {
+      "OTP": "Second factor authentication required",
+      "OTP_ERROR": "OTP is wrong or expired"
+    }
+  },
   "ME": "Me",
   "MENU_TITLE": {
     "ADMIN": "Contacts",

@@ -176,6 +176,14 @@
     "PASSWORD_PLACEHOLDER": "Mot de passe",
     "TAGLINE": "Partage sécurisé de fichiers en open source"
   },
+  "SECOND_FA_LOGIN": {
+    "LOGIN_HEADER": "Authentification double facteur",
+    "USAGE": "Saisissez le code généré par l'application FreeOTP",
+    "NOTIFICATION": {
+      "OTP": "l'activation de l'authentification double facteur est requise",
+      "OTP_ERROR": "le code OTP est invalide ou expiré"
+    }
+  },
   "ME": "Moi",
   "MENU_TITLE": {
     "ADMIN": "Contacts",

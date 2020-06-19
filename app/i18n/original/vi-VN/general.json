@@ -175,6 +175,14 @@
     "PASSWORD_PLACEHOLDER": "Mật khẩu",
     "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở"
   },
+  "SECOND_FA_LOGIN": {
+    "LOGIN_HEADER": "Xác thực hai yếu tố",
+    "USAGE": "Nhập 6 số xác thực từ ứng dụng FreeOTP",
+    "NOTIFICATION": {
+      "OTP": "Xác thực hai yếu tố bắt buộc",
+      "OTP_ERROR": "Mã xác thực không đúng hoặc đã hết hạn"
+    }
+  },
   "ME": "Tôi",
   "MENU_TITLE": {
     "ADMIN": "Quản trị",

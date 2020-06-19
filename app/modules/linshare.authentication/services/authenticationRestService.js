@@ -8,8 +8,20 @@
     .module('linshare.authentication')
     .factory('authenticationRestService', authenticationRestService);
 
-  authenticationRestService.$inject = ['_', '$cookies', '$location', '$log', '$q', '$window', 'authService',
-    'lsAppConfig', 'Restangular', 'ServerManagerService'
+  authenticationRestService.$inject = [
+    '$state',
+    '_',
+    '$cookies',
+    '$location',
+    '$log',
+    '$q',
+    '$window',
+    'authService',
+    'lsAppConfig',
+    'Restangular',
+    'ServerManagerService',
+    'toastService',
+    'authenticationUtilsService'
   ];
 
   /**
@@ -17,8 +29,21 @@
    * @desc Service to interact with User Authentication object by REST
    * @memberOf Linshare.authentication
    */
-  function authenticationRestService(_, $cookies, $location, $log, $q, $window, authService, lsAppConfig, Restangular,
-    ServerManagerService) {
+  function authenticationRestService(
+    $state,
+    _,
+    $cookies,
+    $location,
+    $log,
+    $q,
+    $window,
+    authService,
+    lsAppConfig,
+    Restangular,
+    ServerManagerService,
+    toastService,
+    authenticationUtilsService
+  ) {
     var
       deferred = $q.defer(),
       handler = ServerManagerService.responseHandler,
@@ -27,6 +52,7 @@
         checkAuthentication: checkAuthentication,
         getCurrentUser: getCurrentUser,
         login: login,
+        loginWithOTP: loginWithOTP,
         logout: logout,
         version: version
       };
@@ -79,16 +105,59 @@
     function login(login, password) {
       deferred = $q.defer();
       $log.debug('AuthenticationRestService : login');
-      /* globals Base64 */
-      handler(Restangular.all(restUrl).withHttpConfig({
-        ignoreAuthModule: true
-      }).customGET('authorized', {}, {
-        Authorization: 'Basic ' + Base64.encode(login + ':' + password)
-      })).then(function(user) {
+
+      var headers = authenticationUtilsService.buildHeader(login, password);
+      var action = Restangular.all(restUrl)
+        .withHttpConfig({ ignoreAuthModule: true })
+        .customGET('authorized', {}, headers);
+
+      handler(action, null, true).then(function(user) {
         authService.loginConfirmed(user);
-        deferred.resolve(user);
+
+        return deferred.resolve(user);
       }).catch(function(error) {
-        deferred.reject(error);
+        var foundError = authenticationUtilsService.findError(error)
+
+        if (foundError && foundError.code === '1002') {
+          var loginInfo = { login: login, password: password }
+
+          toastService.info({ key: foundError.message });
+
+          return $state.go('secondFactorAuthentication', { loginInfo: loginInfo });
+        }
+
+        return deferred.reject(foundError);
+      });
+
+      return deferred.promise;
+    }
+
+    /**
+     * @name loginWithOTP
+     * @desc Login system of the App with OTP
+     * @param {string} login - Login of the user
+     * @param {string} password - Password of the user
+     * @param {string} otp - 6 digits of code for second factor authentication
+     * @return {Promise} server response
+     * @memberOf Linshare.authentication.authenticationRestService
+     */
+    function loginWithOTP(login, password, otp) {
+      deferred = $q.defer();
+      $log.debug('AuthenticationRestService : login with OTP');
+
+      var headers = authenticationUtilsService.buildHeader(login, password, otp);
+      var action = Restangular.all(restUrl)
+        .withHttpConfig({ ignoreAuthModule: true })
+        .customGET('authorized', {}, headers);
+
+      handler(action, null, true).then(function(user) {
+        authService.loginConfirmed(user);
+
+        return deferred.resolve(user);
+      }).catch(function(error) {
+        var foundError = authenticationUtilsService.findError(error)
+
+        return deferred.reject(foundError);
       });
 
       return deferred.promise;
