@@ -376,6 +376,17 @@
           }
         }
       },
+        "CHANGE_PASSWORD": {
+          "AUTHOR": {
+            "SENTENCE": "You have changed your account's password.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has changed his account's password.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "JWT_PERMANENT_TOKEN": {
         "CREATE": {
           "AUTHOR": {
