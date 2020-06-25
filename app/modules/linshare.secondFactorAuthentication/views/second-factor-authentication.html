@@ -53,9 +53,11 @@
                 <input
                   data-ng-model="secondFactorAuthenticationVm.otp"
                   type="text"
-                  maxLength="6"
+                  maxlength="6"
+                  inputmode="numeric"
                   pattern="[0-9]{6}"
-                  />
+                  on-keypress="onKeypress"
+                />
               </div>
             </div>
             <button class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate}}</button>
