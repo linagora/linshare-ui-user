@@ -1,22 +1,22 @@
 /**
- * secondFactorAuthenticationController Controller
+ * secondFactorAuthenticationLoginController Controller
  * @namespace linshare.secondFactorAuthentication
  */
 (function() {
   'use strict';
 
   angular
-    .module('linshare.secondFactorAuthentication', [])
-    .controller('secondFactorAuthenticationController', secondFactorAuthenticationController);
+    .module('linshare.secondFactorAuthentication')
+    .controller('secondFactorAuthenticationLoginController', secondFactorAuthenticationLoginController);
 
-  secondFactorAuthenticationController.$inject = ['$stateParams', '$location', 'authenticationRestService', 'toastService', 'lsAppConfig']
+  secondFactorAuthenticationLoginController.$inject = ['$stateParams', 'authenticationRestService', 'toastService', 'lsAppConfig']
 
   /**
-   *  @namespace secondFactorAuthenticationController
+   *  @namespace secondFactorAuthenticationLoginController
    *  @desc Second factor authentication management system controller
    *  @memberOf linshare.secondFactorAuthentication
    */
-  function secondFactorAuthenticationController($stateParams, $location, authenticationRestService, toastService, lsAppConfig) {
+  function secondFactorAuthenticationLoginController($stateParams, authenticationRestService, toastService, lsAppConfig) {
     /* jshint validthis: true */
     var secondFactorAuthenticationVm = this;
 

@@ -123,7 +123,7 @@
 
           toastService.info({ key: foundError.message });
 
-          return $state.go('secondFactorAuthentication', { loginInfo: loginInfo });
+          return $state.go('secondFactorAuthenticationLogin', { loginInfo: loginInfo });
         }
 
         return deferred.reject(foundError);

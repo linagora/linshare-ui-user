@@ -10,28 +10,28 @@
     <language-selector/>
   </div>
   <div id="copyright-login">
-    <a href="{{ secondFactorAuthenticationVm.lsAppConfig.baseProductUrl }}" target="_blank">
-      <img ng-src="{{ secondFactorAuthenticationVm.lsAppConfig.applicationLogo.small }}" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
+    <a href="{{ secondFactorAuthenticationLoginVm.lsAppConfig.baseProductUrl }}" target="_blank">
+      <img ng-src="{{ secondFactorAuthenticationLoginVm.lsAppConfig.applicationLogo.small }}" alt="{{'LOGIN.LINSHARE_LINK_ALT' | translate}}">
     </a>
     <p data-bind-html translate>LOGIN.COPYRIGHT</p>
   </div>
   <div
     class="quota login-libreNfreeCtn"
-    data-ng-if="secondFactorAuthenticationVm.lsAppConfig.communityWhiteLogo || secondFactorAuthenticationVm.lsAppConfig.communitySlogan"
+    data-ng-if="secondFactorAuthenticationLoginVm.lsAppConfig.communityWhiteLogo || secondFactorAuthenticationLoginVm.lsAppConfig.communitySlogan"
   >
     <div class="libre-and-free">
-      <div class="community-logo" data-ng-if="secondFactorAuthenticationVm.lsAppConfig.communityWhiteLogo">
-        <img ng-src="{{ secondFactorAuthenticationVm.lsAppConfig.communityWhiteLogo }}" alt="Logo LinShare">
+      <div class="community-logo" data-ng-if="secondFactorAuthenticationLoginVm.lsAppConfig.communityWhiteLogo">
+        <img ng-src="{{ secondFactorAuthenticationLoginVm.lsAppConfig.communityWhiteLogo }}" alt="Logo LinShare">
       </div>
-      <div class="community-slogan" data-ng-if="secondFactorAuthenticationVm.lsAppConfig.communitySlogan">
-        <p>{{ secondFactorAuthenticationVm.lsAppConfig.communitySlogan }}</p>
+      <div class="community-slogan" data-ng-if="secondFactorAuthenticationLoginVm.lsAppConfig.communitySlogan">
+        <p>{{ secondFactorAuthenticationLoginVm.lsAppConfig.communitySlogan }}</p>
       </div>
     </div>
   </div>
   <div class="login-content" id="l-login">
     <div class="parent-login-form-alignment">
       <div class="logo-title">
-        <a href="{{ secondFactorAuthenticationVm.lsAppConfig.baseProductUrl }}" target="_blank">
+        <a href="{{ secondFactorAuthenticationLoginVm.lsAppConfig.baseProductUrl }}" target="_blank">
           <img ng-src="{{::mainVm.applicationLogoLarge}}" alt="logo">
         </a>
         <p>{{'LOGIN.TAGLINE' | translate}}</p>
@@ -47,11 +47,11 @@
           >
           {{'SECOND_FA_LOGIN.USAGE'}}
           </div>
-          <form class="form-horizontal" data-ng-submit="secondFactorAuthenticationVm.submitForm()" role="form">
+          <form class="form-horizontal" data-ng-submit="secondFactorAuthenticationLoginVm.submitForm()" role="form">
             <div id="otp-form-group">
               <div class="otp-input">
                 <input
-                  data-ng-model="secondFactorAuthenticationVm.otp"
+                  data-ng-model="secondFactorAuthenticationLoginVm.otp"
                   type="text"
                   maxlength="6"
                   inputmode="numeric"

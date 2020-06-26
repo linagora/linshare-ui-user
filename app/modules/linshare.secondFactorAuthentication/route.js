@@ -16,12 +16,12 @@
    */
   function secondFactorAuthenticationConfig($stateProvider) {
     $stateProvider
-      .state('secondFactorAuthentication', {
+      .state('secondFactorAuthenticationLogin', {
         url: '/2fa',
         params: { loginInfo: null },
-        templateUrl: 'modules/linshare.secondFactorAuthentication/views/second-factor-authentication.html',
-        controller: 'secondFactorAuthenticationController',
-        controllerAs: 'secondFactorAuthenticationVm',
+        templateUrl: 'modules/linshare.secondFactorAuthentication/views/secondFactorAuthenticationLogin.html',
+        controller: 'secondFactorAuthenticationLoginController',
+        controllerAs: 'secondFactorAuthenticationLoginVm',
         resolve: {
           params: function($state, $transition$, $stateParams) {
             if (!$stateParams.loginInfo) {
@@ -30,6 +30,6 @@
             }
           }
         }
-      })
+      });
   }
 })();
