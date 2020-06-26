@@ -36,7 +36,9 @@
     "waves": "0.7.5",
     "angular-promise-extras": "0.1.8",
     "es6-shim": "0.35.3",
-    "ng-device-detector": "5.0.1"
+    "ng-device-detector": "5.0.1",
+    "jquery-qrcode": "jquery-qrcode-jeromeetienne#*",
+    "ngclipboard": "2.0.0"
   },
   "overrides": {
     "bootstrap": {

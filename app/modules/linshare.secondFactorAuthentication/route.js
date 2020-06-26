@@ -30,6 +30,27 @@
             }
           }
         }
+      })
+      .state('secondFactorAuthentication', {
+        parent: 'common',
+        controller: 'secondFactorAuthenticationController',
+        controllerAs: 'secondFactorAuthenticationVm',
+        url: '/secondFactorAuthentication',
+        templateUrl: 'modules/linshare.secondFactorAuthentication/views/secondFactorAuthentication.html',
+        resolve: {
+          functionality: function($transition$, $state, user, lsAppConfig) {
+            if (
+              user.accountType !== lsAppConfig.accountType.internal &&
+              user.accountType !== lsAppConfig.accountType.guest
+            ) {
+              $transition$.abort();
+              $state.go('home');
+            }
+          },
+          secondFactorAuthentication: function(user, secondFactorAuthenticationRestService) {
+            return secondFactorAuthenticationRestService.getStatus(user.uuid);
+          }
+        }
       });
   }
 })();

@@ -653,8 +653,8 @@
       "READ": "Đọc"
     }
   },
-  "DISABLED": "Tàn tật",
-  "ENABLED": "Đã bật",
+  "DISABLED": "Tắt",
+  "ENABLED": "Bật",
   "FILTERS_SELECT": {
     "ACTION": {
       "ADDITION": "Add on",

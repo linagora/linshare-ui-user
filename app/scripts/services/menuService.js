@@ -43,6 +43,7 @@
       receivedShares,
       safeDetails,
       uploads,
+      secondFactorAuthentication,
       service = {
         build: build,
         getAvailableTabs: getAvailableTabs,
@@ -56,6 +57,7 @@
     const myUploadMenuName = 'MENU_TITLE.UPLOAD_AND_SHARE';
     const sharedSpaceMenuName = 'MENU_TITLE.SHARED_SPACE';
     const changePasswordMenuName = 'MENU_TITLE.CHANGE_PASSWORD';
+    const secondFactorAuthenticationMenuName = 'SECOND_FACTOR_AUTH.TITLE';
 
     return service;
 
@@ -168,6 +170,12 @@
         suffixLink: lsAppConfig.menuLinks.suffixLink
       };
 
+      secondFactorAuthentication = {
+        name: secondFactorAuthenticationMenuName,
+        link: 'secondFactorAuthentication',
+        hide: true
+      }
+
       home = {
         name: 'MENU_TITLE.HOME',
         link: 'home',
@@ -223,6 +231,7 @@
         uploads,
         audit,
         safeDetails,
+        secondFactorAuthentication,
         externalLink
       ];
 

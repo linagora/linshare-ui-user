@@ -4,6 +4,10 @@
   angular
     .module('linshare.secondFactorAuthentication', [
       'pascalprecht.translate',
-      'linshare.components'
-    ]);
+      'linshare.components',
+      'ngclipboard'
+    ])
+    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('secondFactorAuthentication');
+    }]);
 })();

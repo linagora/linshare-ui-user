@@ -11,7 +11,7 @@
             <div class="line bottom"></div>
         </div>
     </li>
-    <li class="page-title visible-xs" translate>
+    <li class="page-title set-ellipsis visible-xs" translate>
       {{linkActive.name}}
     </li>
     <li class="logo hidden-xs pull-left">
@@ -130,6 +130,11 @@
                 <li ng-if="loggedUser.accountType === 'GUEST'">
                   <a href="" ui-sref="changePassword">
                     <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
+                  </a>
+                </li>
+                <li ng-if="loggedUser.accountType === 'GUEST' || loggedUser.accountType === 'INTERNAL'">
+                  <a href="" ui-sref="secondFactorAuthentication">
+                    <i class="zmdi zmdi-shield-security"></i> <span translate>SECOND_FACTOR_AUTH.TITLE</span>
                   </a>
                 </li>
                 <li>

@@ -176,10 +176,10 @@
     "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở"
   },
   "SECOND_FA_LOGIN": {
-    "LOGIN_HEADER": "Xác thực hai yếu tố",
+    "LOGIN_HEADER": "Yếu tố xác thực thứ hai",
     "USAGE": "Nhập 6 số xác thực từ ứng dụng FreeOTP",
     "NOTIFICATION": {
-      "OTP": "Xác thực hai yếu tố bắt buộc",
+      "OTP": "Yếu tố xác thực thứ hai bắt buộc",
       "OTP_ERROR": "Mã xác thực không đúng hoặc đã hết hạn"
     }
   },

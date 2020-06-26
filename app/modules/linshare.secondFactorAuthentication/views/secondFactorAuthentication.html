@@ -1,0 +1,26 @@
+<div
+  ui-view=""
+  data-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}"
+>
+  <div class="container files second-factor-authentication">
+    <div class="card">
+      <div class="card-header">
+        <div class="desktop-title hidden-xs">
+          <i class="zmdi zmdi-shield-security"></i>
+          <span class="m-l-5" translate>SECOND_FACTOR_AUTH.TITLE</span>
+        </div>
+        <span ng-if="!secondFactorAuthenticationVm.feature.enabled" class="feature-status disabled" translate>DISABLED</span>
+        <span ng-if="secondFactorAuthenticationVm.feature.enabled" class="feature-status enabled" translate>ENABLED</span>
+      </div>
+
+      <div class="card-body collapsible-content">
+        <shared-key-creation
+          ng-if="!secondFactorAuthenticationVm.feature.enabled"
+          user-mail="secondFactorAuthenticationVm.user.mail"
+          feature="secondFactorAuthenticationVm.feature"
+        ></shared-key-creation>
+
+      </div>
+    </div>
+  </div>
+</div>

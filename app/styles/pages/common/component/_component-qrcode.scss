@@ -1,0 +1,21 @@
+@import "../../../_colors.scss";
+
+/**********************
+  QR CODE
+***********************/
+
+qrcode {
+  .qrcode-container {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+
+    img {
+      position: absolute;
+      height: calc(100% / 3);
+      width: calc(100% / 3);
+      left: calc(100% / 3);
+      top: calc(100% / 3);
+    }
+  }
+}

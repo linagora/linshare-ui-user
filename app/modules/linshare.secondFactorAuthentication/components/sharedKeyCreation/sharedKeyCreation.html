@@ -1,0 +1,78 @@
+<div class="feature-notice" ng-if="sharedKeyCreationVm.feature.required">
+  <i class="zmdi zmdi-alert-circle-o"></i>
+  <p translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.REQUIRED</p>
+</div>
+
+<span class="instruction" translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.INSTRUCTION</span>
+
+<div class="instruction-step">
+  <div class="instruction-description">
+    <span class="numbering">1</span>
+    <span translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.STEP_1</span>
+  </div>
+
+  <div class="instruction-app-install">
+
+    <div class="app-install-links">
+      <qrcode
+        text="https://apps.apple.com/us/app/freeotp-authenticator/id872559395"
+        logo-image-src="images/app-store.svg"
+        size="160"
+      ></qrcode>
+
+      <a href="https://apps.apple.com/us/app/freeotp-authenticator/id872559395" translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.APPSTORE_LINK</a>
+    </div>
+
+    <div class="app-install-links">
+      <qrcode
+        text="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp"
+        logo-image-src="images/google-play.svg"
+        size="160"
+      ></qrcode>
+
+      <a href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp" translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.GOOGLEPLAY_LINK</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="instruction-step">
+  <div class="instruction-description">
+    <span class="numbering">2</span>
+    <span translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.STEP_2</span>
+  </div>
+
+  <div class="shared-key">
+    <button
+      class="btn btn-primary waves"
+      ng-if="sharedKeyCreationVm.keyCreationStatus === 'none'"
+      ng-click="sharedKeyCreationVm.generateSharedKey()"
+      translate
+    >
+      SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.GENERATE_KEY
+    </button>
+
+    <div
+      class="key-setup"
+      ng-if="sharedKeyCreationVm.keyCreationStatus === 'done'"
+    >
+      <p
+        translate
+        translate-value-date="{{::sharedKeyCreationVm.keyCreationDate | lsDate: sharedKeyCreationVm.dateFormat}}"
+      >
+        SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.KEY_CREATED_ON
+      </p>
+      <qrcode
+        text="{{::sharedKeyCreationVm.freeOTPUri}}"
+        logo-image-src="images/freeotp.svg"
+        size="160"
+      ></qrcode>
+
+      <a ng-click="showHint =! showHint">{{'SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.CAN_NOT_SCAN' | translate}}</a>
+      <free-otp-setup-hint
+        ng-show="showHint"
+        config="sharedKeyCreationVm.freeOTPConfig"
+      ></free-otp-setup-hint>
+    </div>
+  </div>
+</div>

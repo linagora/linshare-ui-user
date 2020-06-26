@@ -1,0 +1,79 @@
+@import "../../../_colors.scss";
+
+/**********************
+  PASSWORD INPUT HINTS
+***********************/
+
+free-otp-setup-hint {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  background-color: #eeeeee;
+  padding: 20px 15px;
+  margin-top: 10px;
+  border-radius: 2px;
+
+  .freeotp-issuer-account {
+    display: flex;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 2px;
+
+    .text-fields {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      width: 100%;
+      margin-left: 10px;
+
+      span {
+        border-bottom: medium;
+        font-weight: 500;
+        width: 100%;
+        border-bottom: 1px solid #F2F2F2;
+      }
+    }
+  }
+
+  .freeotp-secret {
+    margin: 10px 0;
+    display: table;
+    position: relative;
+    border-collapse: collapse;
+
+    span {
+      background-color: #ffffff;
+      padding: 5px;
+      vertical-align: bottom;
+      border-radius: 2px;
+      position: relative;
+      display: table-cell;
+    }
+
+    button {
+      display: table-cell;
+      position: relative;
+      padding: 6px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: -1px;
+    }
+  }
+
+  .freeotp-other-configs {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+}
+
+free-otp-setup-hint:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  border: .75rem solid transparent;
+  border-bottom-color: #eeeeee;
+}

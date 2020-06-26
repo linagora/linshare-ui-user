@@ -1,0 +1,159 @@
+@import "../../_colors.scss";
+
+/******************************
+  SECOND FACTOR AUTHENTICATION
+******************************/
+
+.files.second-factor-authentication {
+  .card-body {
+    position: relative;
+    margin-top: 58px;
+    padding: 0 10px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+
+    span.feature-status {
+      font-weight: 500;
+      margin-left: 10px;
+      padding: 2px 15px;
+      border-radius: 1em;
+
+      &.disabled {
+        color: #696969 !important;
+        background-color: #D3D3D3;
+      }
+
+      &.enabled {
+        color:#43A047;
+        background-color: #E8F5E9;
+      }
+    }
+  }
+
+  .feature-notice {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFAEA;
+    padding: 12px;
+    border-radius: 2px;
+    font-size: 12px;
+    margin-bottom: 10px;
+
+    i {
+      margin-top: 1px;
+      margin-right: 5px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  span.instruction {
+    font-weight: 500;
+    font-size: 14px;
+    color: $textColorDark;
+  }
+
+  .instruction-step {
+    margin: 15px 0;
+
+    .instruction-description {
+      display: flex;
+      align-items: center;
+
+      .numbering {
+        background-color: #1B7CCA;
+        color:#ffffff;
+        float: left;
+        text-align: center;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        line-height: 20px;
+        margin-right: 8px;
+      }
+
+      span:not(.numbering) {
+        max-width: calc(100% - 28px);
+      }
+    }
+
+    .instruction-app-install {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .app-install-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 40px;
+
+        a {
+          margin-top: 10px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .shared-key {
+      margin: 20px 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .key-setup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        a {
+          margin-top: 10px;
+          font-weight: 500;
+          text-align: center;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+
+/*********************
+  DESKTOP RESPONSIVE
+*********************/
+
+@media (min-width: 768px) {
+  .files.second-factor-authentication {
+    .card-header {
+      .desktop-title {
+        color: $primary-color;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 500;
+        padding-left: 11px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .card-body {
+      margin-top: 0;
+      overflow-y: auto;
+      max-height: calc(100vh - 147px);
+
+      .instruction-app-install {
+        width: 50%;
+      }
+
+      .shared-key {
+        width: 50%;
+      }
+    }
+  }
+}

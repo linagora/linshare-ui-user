@@ -1,0 +1,28 @@
+{
+  "SECOND_FACTOR_AUTH": {
+    "TITLE": "2nd Factor Authentication",
+    "SHARED_KEY_CREATION": {
+      "REQUIRED": "Second Factor Authentication is required for your account. Please enable Second Factor Authentication to continue using LinShare.",
+      "INSTRUCTION": "To enable Second Factor Authentication for your account:",
+      "STEP_1": "Download and install the authentication app FreeOTP by scanning the QR code or following the links",
+      "STEP_2": "Generate shared key and use FreeOTP app to scan the QR code or add the key as below:",
+      "APPSTORE_LINK": "FreeOTP on App Store",
+      "GOOGLEPLAY_LINK": "FreeOTP on Google Play",
+      "GENERATE_KEY": "Generate Shared Key",
+      "KEY_CREATED_ON": "Shared key created on {{date}}",
+      "CAN_NOT_SCAN": "Can't scan it?"
+    },
+    "MANUAL_SETUP": {
+      "LABEL": "Can't scan the barcode?",
+      "STEP_1": "1. In the FreeOTP app select Add key icon.",
+      "STEP_2": "2. Enter Issuer and Account as below:",
+      "STEP_3": "3. Enter the secret key as below:",
+      "STEP_4": "4. Make sure the below inputs are configured as:",
+      "STEP_5": "5. Tap Add button to finish.",
+      "TYPE": "Type: ",
+      "DIGITS": "Digits: ",
+      "ALGORITHM": "Algorithm: ",
+      "INTERVAL": "Interval: "
+    }
+  }
+}

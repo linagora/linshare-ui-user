@@ -34,6 +34,9 @@
           <a ui-sref="changePassword" ng-if="loggedUser.accountType === 'GUEST'">
             <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
           </a>
+          <a ui-sref="secondFactorAuthentication" ng-if="loggedUser.accountType === 'GUEST' || loggedUser.accountType === 'INTERNAL'">
+            <i class="zmdi zmdi-shield-security"></i> <span translate>SECOND_FACTOR_AUTH.TITLE</span>
+          </a>
         </li>
       </ul>
     </div>

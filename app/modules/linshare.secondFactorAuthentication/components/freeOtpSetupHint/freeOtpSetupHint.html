@@ -1,0 +1,43 @@
+<label translate>SECOND_FACTOR_AUTH.MANUAL_SETUP.LABEL</label>
+<span translate>SECOND_FACTOR_AUTH.MANUAL_SETUP.STEP_1</span>
+<span translate>SECOND_FACTOR_AUTH.MANUAL_SETUP.STEP_2</span>
+<div class="freeotp-issuer-account">
+  <img src="images/freeotp-app-icon.png"></img>
+  <div class="text-fields">
+    <span>{{::freeOtpSetupHintVm.config.issuer}}</span>
+    <span>{{::freeOtpSetupHintVm.config.account}}</span>
+  </div>
+</div>
+<span translate>SECOND_FACTOR_AUTH.MANUAL_SETUP.STEP_3</span>
+
+<div class="freeotp-secret">
+  <span>{{::freeOtpSetupHintVm.config.secret}}</span>
+  <button
+    class="btn btn-primary"
+    type="button"
+    ngclipboard
+    data-clipboard-text="{{::freeOtpSetupHintVm.config.secret}}"
+  >
+    {{ 'ACTION.COPY' | translate }}
+  </button>
+</div>
+<span translate>SECOND_FACTOR_AUTH.MANUAL_SETUP.STEP_4</span>
+<div class="freeotp-other-configs">
+  <span><i>
+    {{ 'SECOND_FACTOR_AUTH.MANUAL_SETUP.TYPE' | translate }}
+    <b>{{::freeOtpSetupHintVm.config.type.toUpperCase()}}</b>
+  </i></span>
+  <span><i>
+    {{ 'SECOND_FACTOR_AUTH.MANUAL_SETUP.DIGITS' | translate }}
+    <b>{{::freeOtpSetupHintVm.config.digits}}</b>
+  </i></span>
+  <span><i>
+    {{ 'SECOND_FACTOR_AUTH.MANUAL_SETUP.ALGORITHM' | translate }}
+    <b>{{::freeOtpSetupHintVm.config.algorithm}}</b>
+  </i></span>
+  <span><i>
+    {{ 'SECOND_FACTOR_AUTH.MANUAL_SETUP.INTERVAL' | translate }}
+    <b>{{::freeOtpSetupHintVm.config.period}}</b>
+  </i></span>
+</div>
+<span translate>SECOND_FACTOR_AUTH.MANUAL_SETUP.STEP_5</span>
