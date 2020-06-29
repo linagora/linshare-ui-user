@@ -299,11 +299,15 @@
 
         flowUploadService.initFlowUploadService();
 
-        if (_.isUndefined($scope.urlTogoAfterLogin)) {
-          $state.go(URL_HOME);
-        } else {
-          $state.go($scope.urlTogoAfterLogin, $scope.urlTogoAfterLoginParams);
+        if (!data.secondFAEnabled && data.secondFARequired) {
+          return $state.go('secondFactorAuthentication');
         }
+
+        if (_.isUndefined($scope.urlTogoAfterLogin)) {
+          return $state.go(URL_HOME);
+        }
+
+        $state.go($scope.urlTogoAfterLogin, $scope.urlTogoAfterLoginParams);
       });
 
       $scope.$on('event:auth-loginRequired', function() {
