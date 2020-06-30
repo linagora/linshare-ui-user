@@ -10,6 +10,16 @@
     "BY": "bởi",
     "MODIFICATIONS": "(Các) sửa đổi",
     "SENTENCES": {
+      "CHANGE_PASSWORD": {
+        "AUTHOR": {
+          "SENTENCE": "Bạn đã đổi mật khẩu cho tài khoản của bạn.",
+          "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+        },
+        "VIEWER": {
+          "SENTENCE": "{{authorName}} đã đổi mật khẩu tài khoản của anh ấy.",
+          "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+        }
+      },
       "ANONYMOUS_SHARE_ENTRY": {
         "CREATE": {
           "AUTHOR": {
