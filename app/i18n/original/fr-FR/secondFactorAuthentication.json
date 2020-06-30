@@ -12,6 +12,12 @@
       "KEY_CREATED_ON": "Clé partagée créée le {{date}}",
       "CAN_NOT_SCAN": "Impossible de scanner ?"
     },
+    "SHARED_KEY_REMOVAL": {
+      "NOTICE": "La clé partagée n'a pas pû être retirée car l'authentification à deux facteurs est requise pour votre compte. Veuillez contacter le support pour plus d'informations.",
+      "INSTRUCTION": "Retirer la clé partagée pour désactiver l'authentification à deux facteurs pour votre compte:",
+      "REMOVE_KEY": "Retrait d'une clé partagée",
+      "REMOVAL_SUCCESS": "La clé partagée a été retirée avec succès."
+    },
     "MANUAL_SETUP": {
       "LABEL": "Vous ne pouvez pas scanner le QR code ?",
       "STEP_1": "1. Dans l'application FreeOTP, sélectionnez Ajouter une clé.",

@@ -21,7 +21,8 @@
       handler = ServerManagerService.responseHandler,
       service = {
         getStatus: getStatus,
-        create: create
+        create: create,
+        remove: remove
       };
 
     return service;
@@ -52,6 +53,18 @@
       $log.debug('secondFactorAuthenticationRestService - create');
 
       return handler(Restangular.all('authentication').all('2fa').post({}));
+    }
+
+    /**
+     * @name remove
+     * @desc remove second factor authentication for user
+     * @returns {Promise} server response
+     * @memberOf LinShare.secondFactorAuthentication.secondFactorAuthenticationRestService
+     */
+    function remove(userUuid) {
+      $log.debug('secondFactorAuthenticationRestService - remove');
+
+      return handler(Restangular.all('authentication').one('2fa', userUuid).remove());
     }
   }
 })();

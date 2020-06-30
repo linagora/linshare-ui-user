@@ -20,6 +20,11 @@
           feature="secondFactorAuthenticationVm.feature"
         ></shared-key-creation>
 
+        <shared-key-removal
+          ng-if="secondFactorAuthenticationVm.feature.enabled"
+          user="secondFactorAuthenticationVm.user"
+          feature="secondFactorAuthenticationVm.feature"
+        ></shared-key-removal>
       </div>
     </div>
   </div>

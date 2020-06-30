@@ -19,7 +19,8 @@
         "WORKGROUP_NODE": "You are about to remove {singular, select, true{a document or folder} other{{nbItems} documents or folders}} ! Beware, this action cannot be undone.",
         "WORKGROUP_VERSION":"You are about to remove {singular, select, true{a version} other{{nbItems} versions}} ! Beware, this action cannot be undone.",
         "WORKGROUP_VERSION_LAST": "This is the last version, you are about to delete the file! Beware, this action cannot be undone.",
-        "WORKGROUP_VERSION_ALL": "You have selected all existing versions, you are about to delete the file! Beware, this action cannot be undone."
+        "WORKGROUP_VERSION_ALL": "You have selected all existing versions, you are about to delete the file! Beware, this action cannot be undone.",
+        "2FA_SHARED_KEY": "You are about to remove shared key ! Beware, this action cannot be undone."
       },
       "TITLE": "Deletion"
     },

@@ -1,0 +1,24 @@
+<div class="feature-notice" ng-if="!sharedKeyRemovalVm.feature.canDeleteIt">
+  <i class="zmdi zmdi-alert-circle-o"></i>
+  <p translate>SECOND_FACTOR_AUTH.SHARED_KEY_REMOVAL.NOTICE</p>
+</div>
+
+<span class="instruction" ng-if="sharedKeyRemovalVm.feature.canDeleteIt" translate>SECOND_FACTOR_AUTH.SHARED_KEY_REMOVAL.INSTRUCTION</span>
+
+<div class="remove-shared-key">
+  <p
+    translate
+    translate-value-date="{{::sharedKeyRemovalVm.feature.creationDate | lsDate: sharedKeyRemovalVm.dateFormat}}"
+  >
+    SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.KEY_CREATED_ON
+  </p>
+
+  <button
+    class="btn btn-primary waves"
+    ng-if="sharedKeyRemovalVm.feature.canDeleteIt"
+    ng-click="sharedKeyRemovalVm.showDeleteModal()"
+    translate
+  >
+    SECOND_FACTOR_AUTH.SHARED_KEY_REMOVAL.REMOVE_KEY
+  </button>
+</div>

@@ -12,6 +12,12 @@
       "KEY_CREATED_ON": "Shared key created on {{date}}",
       "CAN_NOT_SCAN": "Can't scan it?"
     },
+    "SHARED_KEY_REMOVAL": {
+      "NOTICE": "Shared key can not be removed because Second Factor Authentication is required for your account. Please contact support for more information.",
+      "INSTRUCTION": "Remove shared key to disable Second Factor Authentication for your account:",
+      "REMOVE_KEY": "Remove Shared Key",
+      "REMOVAL_SUCCESS": "Shared key was deleted successfully."
+    },
     "MANUAL_SETUP": {
       "LABEL": "Can't scan the barcode?",
       "STEP_1": "1. In the FreeOTP app select Add key icon.",

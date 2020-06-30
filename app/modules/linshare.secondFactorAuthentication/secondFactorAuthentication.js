@@ -5,6 +5,7 @@
     .module('linshare.secondFactorAuthentication', [
       'pascalprecht.translate',
       'linshare.components',
+      'linshare.utils',
       'ngclipboard'
     ])
     .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {

@@ -12,6 +12,12 @@
       "KEY_CREATED_ON": "Khóa chung được tạo vào {{date}}",
       "CAN_NOT_SCAN": "Bạn không thể quét mã?"
     },
+    "SHARED_KEY_REMOVAL": {
+      "NOTICE": "Vì yếu tố xác thực thứ 2 bắt buộc phải bật cho tài khoản của bạn, nên khóa chung không thể được xóa. Vui lòng liên hệ hỗ trợ để biết thêm chi tiết.",
+      "INSTRUCTION": "Xóa khóa chung để tắt yếu tố xác thực thứ 2 cho tài khoản của bạn:",
+      "REMOVE_KEY": "Xóa Khóa Chung",
+      "REMOVAL_SUCCESS": "Khóa chung được xóa thành công."
+    },
     "MANUAL_SETUP": {
       "LABEL": "Nếu bạn không thể quét mã?",
       "STEP_1": "1. Ở trong ứng dụng FreeOTP, chọn ký hiệu thêm khóa",

@@ -19,7 +19,8 @@
         "WORKGROUP_NODE": "Bạn sắp xoá {singular, select, true{một tài liệu hoặc thư mục} other{{nbItems} tài liêụ hoặc thư mục}} ! Hãy cẩn thận, hành động này không thể hoàn tác.",
         "WORKGROUP_VERSION": "Bạn muốn xóa {singular, select, true{phiên bản} other{{nbItems} phiên bản}} ! Cẩn thận, hành động này không thể hoàn tác.",
         "WORKGROUP_VERSION_LAST": "Đây là lần sửa đổi cuối cùng, bạn muốn xóa tập tin! Cẩn thận, hành động này không thể hoàn tác.",
-        "WORKGROUP_VERSION_ALL": "Bạn đã chọn tất cả sửa đổi hiện có, bạn muốn xóa tập tin! Cẩn thận, hành động này không thể hoàn tác."
+        "WORKGROUP_VERSION_ALL": "Bạn đã chọn tất cả sửa đổi hiện có, bạn muốn xóa tập tin! Cẩn thận, hành động này không thể hoàn tác.",
+        "2FA_SHARED_KEY": "Bạn sắp xóa khóa chung ! Hãy cẩn thận, hành động này không thể hoàn tác."
       },
       "TITLE": "Bạn có chắc chắn không ?"
     },

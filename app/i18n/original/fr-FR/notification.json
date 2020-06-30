@@ -19,7 +19,8 @@
         "WORKGROUP_NODE": "Vous êtes sur le point de supprimer {singular, select, true{un document ou dossier} other{{nbItems} documents ou dossiers}}! Attention, cette action est irreversible.",
         "WORKGROUP_VERSION": "Vous êtes sur le point de supprimer {singular, select, true{une version} other{{nbItems} des versions}}! Attention, cette action est irreversible.",
         "WORKGROUP_VERSION_LAST": "Il s'agit de la dernière version, vous êtes sur le point de supprimer le fichier! Attention, cette action est irreversible.",
-        "WORKGROUP_VERSION_ALL": "Vous avez sélectionné toutes les versions existantes, vous êtes sur le point de supprimer le fichier! Attention, cette action est irreversible."
+        "WORKGROUP_VERSION_ALL": "Vous avez sélectionné toutes les versions existantes, vous êtes sur le point de supprimer le fichier! Attention, cette action est irreversible.",
+        "2FA_SHARED_KEY": "Vous êtes sur le point de supprimer votre clé partagée, Attention!  cette action est irréversible."
       },
       "TITLE": "Êtes-vous sûr?"
     },
