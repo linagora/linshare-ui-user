@@ -490,6 +490,24 @@
             }
           }
         },
+        "USER": {
+          "SECOND_FACTOR_SHARED_KEY_CREATE": {
+            "AUTHOR": {
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+              "SENTENCE": "Вы включили двухфакторную аутентификацию (ключ совместного пользования создан)"
+            }
+          },
+          "SECOND_FACTOR_SHARED_KEY_DELETE": {
+            "AUTHOR": {
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+              "SENTENCE": "Вы отключили  двухфакторную аутентификацию (ключ совместного пользования удален)"
+            },
+            "VIEWER": {
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+              "SENTENCE": "Администратор отключил двухфакторную аутентификацию (ключ совместного пользования удален)"
+            }
+          }
+        },
         "WORKGROUP": {
           "CREATE": {
             "AUTHOR": {
@@ -770,9 +788,10 @@
         "DOCUMENT_ENTRY": "Моё пространство",
         "DRIVE" : "Drive",
         "DRIVE_MEMBER" : "Drive - участник",
-        "GUEST": "Приглашенный аккаунт",
+        "GUEST": "Гостевой аккаунт",
         "JWT_PERMANENT_TOKEN": "токен постоянного доступа",
         "SHARE_ENTRY": "Общий доступ",
+        "USER": "Пользователь",
         "WORKGROUP": "Рабочая группа",
         "WORKGROUP_DOCUMENT": "Рабочая группа - Файл",
         "WORKGROUP_FOLDER": "Рабочая группа - Папка",

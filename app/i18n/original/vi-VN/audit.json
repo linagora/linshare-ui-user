@@ -426,6 +426,24 @@
           }
         }
       },
+      "USER": {
+        "SECOND_FACTOR_SHARED_KEY_CREATE": {
+          "AUTHOR": {
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+            "SENTENCE":"Bạn đã bật yếu tố xác thực thứ hai (khóa đã tạo)"
+          }
+        },
+        "SECOND_FACTOR_SHARED_KEY_DELETE": {
+          "AUTHOR": {
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+            "SENTENCE": "Bạn đã tắt yếu tố xác thực thứ hai (khóa đã xóa)"
+          },
+          "VIEWER": {
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+            "SENTENCE": "Quản trị viên đã tắt yếu tố xác thực thứ hai của bạn (khóa đã xóa)"
+          }
+        }
+      },
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {
@@ -696,6 +714,7 @@
       "GUEST": "Tài khoản khách",
       "JWT_PERMANENT_TOKEN": "Mã thông báo truy cập vĩnh viễn (JWT)",
       "SHARE_ENTRY": "Chia sẻ",
+      "USER": "Người dùng",
       "WORKGROUP": "Nhóm làm việc",
       "WORKGROUP_DOCUMENT": "Tệp nhóm làm việc",
       "WORKGROUP_FOLDER": "Thư mục nhóm làm việc",
