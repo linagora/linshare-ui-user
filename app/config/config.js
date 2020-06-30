@@ -8,7 +8,7 @@
   angular
     .module('linshareUiUserApp')
     .constant('lsUserConfig', {
-      baseRestUrl: 'linshare/webservice/rest/user/v2',
+      baseRestUrl: 'linshare/webservice/rest/user/v4',
       // The debug mode, allow to get more information while doing any interraction in the APP.
       // It is recommended to set it to 'true' when having any trouble for reporting information
       // from the browser console to your software vendor

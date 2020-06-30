@@ -10,7 +10,7 @@
     .constant('lsAppConfig', {
       //Default values if not set in config.js
       baseProductUrl: 'http://linshare.org',
-      baseRestUrl: 'linshare/webservice/rest/user/v2',
+      baseRestUrl: 'linshare/webservice/rest/user/v4',
       debug: false,
       localPath: 'i18n/original', //custom your i18n folder path
       //Warning: the following parameter will not be use if you defined a logout url via
