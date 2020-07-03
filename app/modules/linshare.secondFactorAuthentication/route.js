@@ -7,14 +7,15 @@
 
   angular
     .module('linshare.secondFactorAuthentication')
-    .config(secondFactorAuthenticationConfig);
+    .config(secondFactorAuthenticationConfig)
+    .run(registerTransitionHook)
 
   /**
    *  @namespace secondFactorAuthenticationConfig
    *  @desc Config of module secondFactorAuthentication
    *  @memberOf Linshare.secondFactorAuthentication
    */
-  function secondFactorAuthenticationConfig($stateProvider) {
+  function secondFactorAuthenticationConfig($stateProvider, $transitionsProvider) {
     $stateProvider
       .state('secondFactorAuthenticationLogin', {
         url: '/2fa',
@@ -52,5 +53,18 @@
           }
         }
       });
+  }
+
+  registerTransitionHook.$inject = ['secondFactorAuthenticationTransitionService']
+
+  /**
+   * @namespace registerTransitionHook
+   * @desc Register a transition hook that will redirect to 2FA setup page
+   *       if 2FA feature is required and not yet enabled for current user,
+   *       otherwise the hook is deregistered.
+   * @memberOf Linshare.secondFactorAuthentication
+   */
+  function registerTransitionHook(secondFactorAuthenticationTransitionService) {
+    secondFactorAuthenticationTransitionService.registerHook();
   }
 })();

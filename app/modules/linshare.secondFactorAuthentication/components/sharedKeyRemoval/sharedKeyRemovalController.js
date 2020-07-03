@@ -14,7 +14,8 @@
     'itemUtilsService',
     'lsAppConfig',
     'toastService',
-    'secondFactorAuthenticationRestService'
+    'secondFactorAuthenticationRestService',
+    'secondFactorAuthenticationTransitionService'
   ];
 
   /**
@@ -29,7 +30,8 @@
     itemUtilsService,
     lsAppConfig,
     toastService,
-    secondFactorAuthenticationRestService
+    secondFactorAuthenticationRestService,
+    secondFactorAuthenticationTransitionService
   ) {
     /* jshint validthis:true */
     var sharedKeyRemovalControllerVm = this;
@@ -45,6 +47,7 @@
       secondFactorAuthenticationRestService.remove(sharedKeyRemovalControllerVm.user.uuid)
         .then(function() {
           toastService.success({key: 'SECOND_FACTOR_AUTH.SHARED_KEY_REMOVAL.REMOVAL_SUCCESS'});
+          secondFactorAuthenticationTransitionService.registerHook();
           $state.reload();
         });
     }

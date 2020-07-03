@@ -13,7 +13,7 @@
       controllerAs: 'sharedKeyCreationVm',
       bindings: {
         feature: '<',
-        userMail: '<'
+        user: '<'
       }
     });
 })();

@@ -13,6 +13,7 @@
     '$timeout',
     'lsAppConfig',
     'secondFactorAuthenticationRestService',
+    'secondFactorAuthenticationTransitionService',
     'FREEOTP_CONFIGURATION'
   ];
 
@@ -22,32 +23,33 @@
    * @memberOf LinShare.secondFactorAuthentication
    */
 
-  /* jshint maxparams: false, maxstatements: false */
   function sharedKeyCreationController(
     $timeout,
     lsAppConfig,
     secondFactorAuthenticationRestService,
+    secondFactorAuthenticationTransitionService,
     FREEOTP_CONFIGURATION
   ) {
     /* jshint validthis:true */
-    var secondFactorAuthenticationVm = this;
+    var secondFactorControllerVm = this;
 
-    secondFactorAuthenticationVm.keyCreationStatus = 'none';
-    secondFactorAuthenticationVm.generateSharedKey = generateSharedKey;
-    secondFactorAuthenticationVm.dateFormat = lsAppConfig.locale.mediumDate
+    secondFactorControllerVm.keyCreationStatus = 'none';
+    secondFactorControllerVm.generateSharedKey = generateSharedKey;
+    secondFactorControllerVm.dateFormat = lsAppConfig.locale.mediumDate
 
     function generateSharedKey() {
-      secondFactorAuthenticationVm.keyCreationStatus = 'processing';
+      secondFactorControllerVm.keyCreationStatus = 'processing';
 
       secondFactorAuthenticationRestService.create()
         .then(function(secondFA) {
-            secondFactorAuthenticationVm.keyCreationStatus = 'done';
-            secondFactorAuthenticationVm.keyCreationDate = secondFA.creationDate;
-            secondFactorAuthenticationVm.freeOTPConfig = angular.extend({
-              account: secondFactorAuthenticationVm.userMail,
+            secondFactorControllerVm.keyCreationStatus = 'done';
+            secondFactorControllerVm.keyCreationDate = secondFA.creationDate;
+            secondFactorControllerVm.freeOTPConfig = angular.extend({
+              account: secondFactorControllerVm.user.mail,
               secret: secondFA.sharedKey
             }, FREEOTP_CONFIGURATION)
-            secondFactorAuthenticationVm.freeOTPUri = makeFreeOTPUri(secondFactorAuthenticationVm.freeOTPConfig);
+            secondFactorControllerVm.freeOTPUri = makeFreeOTPUri(secondFactorControllerVm.freeOTPConfig);
+            secondFactorAuthenticationTransitionService.deregisterHook();
             $timeout();
           });
       }

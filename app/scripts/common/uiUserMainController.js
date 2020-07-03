@@ -299,10 +299,6 @@
 
         flowUploadService.initFlowUploadService();
 
-        if (!data.secondFAEnabled && data.secondFARequired) {
-          return $state.go('secondFactorAuthentication');
-        }
-
         if (_.isUndefined($scope.urlTogoAfterLogin)) {
           return $state.go(URL_HOME);
         }
