@@ -57,11 +57,6 @@
               firstName: user.firstName
             }
           });
-        })
-        .catch(function(error) {
-          if(error && error.status === 401 && error.code === '1001') {
-            toastService.error({ key: error.message });
-          }
         });
     }
   }

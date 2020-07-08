@@ -14,17 +14,26 @@
     {
       code: '1001',
       status: 401,
-      message: 'LOGIN.NOTIFICATION.ERROR'
+      message: 'LOGIN.NOTIFICATION.ERROR',
+      notificationType: 'error'
     },
     {
       code: '1002',
       status: 401,
-      message: 'SECOND_FA_LOGIN.NOTIFICATION.OTP'
+      message: 'SECOND_FA_LOGIN.NOTIFICATION.OTP',
+      notificationType: 'info'
     },
     {
       code: '1003',
       status: 401,
-      message: 'SECOND_FA_LOGIN.NOTIFICATION.OTP_ERROR'
+      message: 'SECOND_FA_LOGIN.NOTIFICATION.OTP_ERROR',
+      notificationType: 'error'
+    },
+    {
+      code: '1004',
+      status: 401,
+      message: 'SECOND_FA_LOGIN.NOTIFICATION.ACCOUNT_LOCKED',
+      notificationType: 'error'
     }
   ];
 

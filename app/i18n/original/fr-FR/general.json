@@ -181,7 +181,8 @@
     "USAGE": "Saisissez le code généré par l'application FreeOTP",
     "NOTIFICATION": {
       "OTP": "l'activation de l'authentification double facteur est requise",
-      "OTP_ERROR": "le code OTP est invalide ou expiré"
+      "OTP_ERROR": "le code OTP est invalide ou expiré",
+      "ACCOUNT_LOCKED": "Votre compte a été verouillé en raison de nombreuses tentatives infructueuses de connexion"
     }
   },
   "ME": "Moi",

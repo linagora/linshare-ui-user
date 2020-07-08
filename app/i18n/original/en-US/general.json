@@ -181,7 +181,8 @@
     "USAGE": "Input the 6-digit code from your FreeOTP app",
     "NOTIFICATION": {
       "OTP": "Second factor authentication required",
-      "OTP_ERROR": "OTP is wrong or expired"
+      "OTP_ERROR": "OTP is wrong or expired",
+      "ACCOUNT_LOCKED": "Your account has been locked due to failed login attempts"
     }
   },
   "ME": "Me",

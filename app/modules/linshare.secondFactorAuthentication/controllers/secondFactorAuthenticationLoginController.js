@@ -31,7 +31,7 @@
      * @memberOf linshare.secondFactorAuthentication
      */
     function submitForm() {
-      authenticationRestService.loginWithOTP(
+      authenticationRestService.login(
         secondFactorAuthenticationVm.login,
         secondFactorAuthenticationVm.password,
         secondFactorAuthenticationVm.otp
@@ -42,12 +42,8 @@
             firstName: user.firstName
           }
         });
-      }).catch(function(error) {
+      }).catch(function() {
         secondFactorAuthenticationVm.otp = '';
-
-        if (error && error.status === 401 && error.code === '1003') {
-          toastService.error({ key: error.message });
-        }
       });
     }
   }

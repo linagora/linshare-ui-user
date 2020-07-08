@@ -52,7 +52,6 @@
         checkAuthentication: checkAuthentication,
         getCurrentUser: getCurrentUser,
         login: login,
-        loginWithOTP: loginWithOTP,
         logout: logout,
         version: version
       };
@@ -99,51 +98,13 @@
      * @desc Login system of the App
      * @param {string} login - Login of the user
      * @param {string} password - Password of the user
-     * @return {Promise} server response
-     * @memberOf Linshare.authentication.authenticationRestService
-     */
-    function login(login, password) {
-      deferred = $q.defer();
-      $log.debug('AuthenticationRestService : login');
-
-      var headers = authenticationUtilsService.buildHeader(login, password);
-      var action = Restangular.all(restUrl)
-        .withHttpConfig({ ignoreAuthModule: true })
-        .customGET('authorized', {}, headers);
-
-      handler(action, null, true).then(function(user) {
-        authService.loginConfirmed(user);
-
-        return deferred.resolve(user);
-      }).catch(function(error) {
-        var foundError = authenticationUtilsService.findError(error)
-
-        if (foundError && foundError.code === '1002') {
-          var loginInfo = { login: login, password: password }
-
-          toastService.info({ key: foundError.message });
-
-          return $state.go('secondFactorAuthenticationLogin', { loginInfo: loginInfo });
-        }
-
-        return deferred.reject(foundError);
-      });
-
-      return deferred.promise;
-    }
-
-    /**
-     * @name loginWithOTP
-     * @desc Login system of the App with OTP
-     * @param {string} login - Login of the user
-     * @param {string} password - Password of the user
      * @param {string} otp - 6 digits of code for second factor authentication
      * @return {Promise} server response
      * @memberOf Linshare.authentication.authenticationRestService
      */
-    function loginWithOTP(login, password, otp) {
+    function login(login, password, otp) {
       deferred = $q.defer();
-      $log.debug('AuthenticationRestService : login with OTP');
+      $log.debug('AuthenticationRestService : login');
 
       var headers = authenticationUtilsService.buildHeader(login, password, otp);
       var action = Restangular.all(restUrl)
@@ -156,6 +117,16 @@
         return deferred.resolve(user);
       }).catch(function(error) {
         var foundError = authenticationUtilsService.findError(error)
+
+        if (foundError) {
+          toastService[foundError.notificationType]({ key: foundError.message });
+
+          if (foundError.code === '1002') {
+            return $state.go('secondFactorAuthenticationLogin', {
+              loginInfo: { login: login, password: password }
+            });
+          }
+        }
 
         return deferred.reject(foundError);
       });

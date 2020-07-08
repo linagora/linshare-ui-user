@@ -180,7 +180,8 @@
     "USAGE": "Nhập 6 số xác thực từ ứng dụng FreeOTP",
     "NOTIFICATION": {
       "OTP": "Yếu tố xác thực thứ hai bắt buộc",
-      "OTP_ERROR": "Mã xác thực không đúng hoặc đã hết hạn"
+      "OTP_ERROR": "Mã xác thực không đúng hoặc đã hết hạn",
+      "ACCOUNT_LOCKED": "Tài khoản của bạn đã bị khóa vì đăng nhập thất bại"
     }
   },
   "ME": "Tôi",
