@@ -39,7 +39,7 @@
     ////////////
 
     function registerHook() {
-      deregister = $transitions.onBefore({
+      deregister = $transitions.onFinish({
         from: function(state) {
           return SECOND_FA_REQUIRED_TRANSITION_STATES.from.includes(state.name);
         },
