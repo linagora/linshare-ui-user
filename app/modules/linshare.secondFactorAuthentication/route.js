@@ -15,7 +15,7 @@
    *  @desc Config of module secondFactorAuthentication
    *  @memberOf Linshare.secondFactorAuthentication
    */
-  function secondFactorAuthenticationConfig($stateProvider, $transitionsProvider) {
+  function secondFactorAuthenticationConfig($stateProvider) {
     $stateProvider
       .state('secondFactorAuthenticationLogin', {
         url: '/2fa',
@@ -39,11 +39,8 @@
         url: '/secondFactorAuthentication',
         templateUrl: 'modules/linshare.secondFactorAuthentication/views/secondFactorAuthentication.html',
         resolve: {
-          functionality: function($transition$, $state, user, lsAppConfig) {
-            if (
-              user.accountType !== lsAppConfig.accountType.internal &&
-              user.accountType !== lsAppConfig.accountType.guest
-            ) {
+          functionality: function($transition$, $state, functionalities) {
+            if (!functionalities.SECOND_FACTOR_AUTHENTICATION.enable) {
               $transition$.abort();
               $state.go('home');
             }

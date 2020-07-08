@@ -372,6 +372,8 @@
               functionalities = promises[1];
 
             mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
+            mainVm.show2FA = functionalities.SECOND_FACTOR_AUTHENTICATION.enable;
+
             $scope.loggedUser.setUser(user);
             user.firstLetter = user.firstName.charAt(0);
             $scope.userLogged = user;

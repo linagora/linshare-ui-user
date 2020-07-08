@@ -132,7 +132,7 @@
                     <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
                   </a>
                 </li>
-                <li ng-if="loggedUser.accountType === 'GUEST' || loggedUser.accountType === 'INTERNAL'">
+                <li ng-if="mainVm.show2FA">
                   <a href="" ui-sref="secondFactorAuthentication">
                     <i class="zmdi zmdi-shield-security"></i> <span translate>SECOND_FACTOR_AUTH.TITLE</span>
                   </a>
