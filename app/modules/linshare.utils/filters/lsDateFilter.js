@@ -33,6 +33,7 @@
       const dateFormat = {
         shortDate: 'l',
         medium: 'lll',
+        mediumDate: 'll',
         longDate: 'LL',
         fullDate: 'LLL',
       };

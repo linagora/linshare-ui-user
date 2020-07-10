@@ -11,7 +11,6 @@
 
   sharedKeyCreationController.$inject = [
     '$timeout',
-    'lsAppConfig',
     'secondFactorAuthenticationRestService',
     'secondFactorAuthenticationTransitionService',
     'FREEOTP_CONFIGURATION'
@@ -25,7 +24,6 @@
 
   function sharedKeyCreationController(
     $timeout,
-    lsAppConfig,
     secondFactorAuthenticationRestService,
     secondFactorAuthenticationTransitionService,
     FREEOTP_CONFIGURATION
@@ -35,7 +33,6 @@
 
     secondFactorControllerVm.keyCreationStatus = 'none';
     secondFactorControllerVm.generateSharedKey = generateSharedKey;
-    secondFactorControllerVm.dateFormat = lsAppConfig.locale.mediumDate
 
     function generateSharedKey() {
       secondFactorControllerVm.keyCreationStatus = 'processing';

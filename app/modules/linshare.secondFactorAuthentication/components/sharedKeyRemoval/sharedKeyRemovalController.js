@@ -12,7 +12,6 @@
   sharedKeyRemovalController.$inject = [
     '$state',
     'itemUtilsService',
-    'lsAppConfig',
     'toastService',
     'secondFactorAuthenticationRestService',
     'secondFactorAuthenticationTransitionService'
@@ -28,7 +27,6 @@
   function sharedKeyRemovalController(
     $state,
     itemUtilsService,
-    lsAppConfig,
     toastService,
     secondFactorAuthenticationRestService,
     secondFactorAuthenticationTransitionService
@@ -37,7 +35,6 @@
     var sharedKeyRemovalControllerVm = this;
 
     sharedKeyRemovalControllerVm.showDeleteModal = showDeleteModal;
-    sharedKeyRemovalControllerVm.dateFormat = lsAppConfig.locale.mediumDate
 
     function showDeleteModal() {
       itemUtilsService.deleteItem(null, '2FA_SHARED_KEY', removeSharedKey)
