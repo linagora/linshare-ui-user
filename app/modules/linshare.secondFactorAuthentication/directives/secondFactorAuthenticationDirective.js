@@ -14,6 +14,10 @@
             element.on('keypress', function(e){
               var keyNumberConverted = Number(e.key);
 
+              if (e.key === 'Enter') {
+                return;
+              }
+
               if(isNaN(keyNumberConverted)){
                 e.preventDefault();
               }
