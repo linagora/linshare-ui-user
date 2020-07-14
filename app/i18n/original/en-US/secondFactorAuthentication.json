@@ -1,6 +1,6 @@
 {
   "SECOND_FACTOR_AUTH": {
-    "TITLE": "2nd Factor Authentication",
+    "TITLE": "Second Factor Authentication",
     "SHARED_KEY_CREATION": {
       "REQUIRED": "Second Factor Authentication is required for your account. Please enable Second Factor Authentication to continue using LinShare.",
       "INSTRUCTION": "To enable Second Factor Authentication for your account:",
