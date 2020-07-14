@@ -12,6 +12,7 @@
   itemUtilsService.$inject = [
     '_',
     '$filter',
+    '$log',
     '$q',
     '$sce',
     '$timeout',
@@ -35,6 +36,7 @@
   function itemUtilsService(
     _,
     $filter,
+    $log,
     $q,
     $sce,
     $timeout,
@@ -136,6 +138,9 @@
         })
         .then(function() {
           callback(items);
+        })
+        .catch(function(error) {
+          $log.error(error);
         });
     }
 
