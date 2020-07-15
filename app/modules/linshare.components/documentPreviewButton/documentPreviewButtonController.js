@@ -12,19 +12,15 @@
   DocumentPreviewButtonController.$inject = [
     '_',
     '$mdDialog',
-    'componentsConfig',
     'documentPreviewService'
   ];
 
   function DocumentPreviewButtonController(
     _,
     $mdDialog,
-    componentsConfig,
     documentPreviewService
   ) {
     var documentPreviewButtonVm = this;
-    var previewDialogTemplate = componentsConfig.path +
-        'documentPreviewButton/components/documentPreviewDialog/documentPreviewDialog.html';
 
     documentPreviewButtonVm.showDocumentPreviewDialog = showDocumentPreviewDialog;
 
@@ -55,7 +51,7 @@
           items: scope.items
         },
         onRemoving: documentPreviewService.resetItemIndex,
-        templateUrl: previewDialogTemplate
+        template: require('./documentPreviewButton.html')
       });
     }
   }

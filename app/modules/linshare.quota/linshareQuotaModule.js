@@ -5,3 +5,6 @@
     .module('linshare.quota', []);
 
 })();
+
+require('./constants');
+require('./services/quotaService');

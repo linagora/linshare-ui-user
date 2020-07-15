@@ -19,7 +19,7 @@
   function uploadPopupFilesDirective(_) {
     return {
       restrict: 'A',
-      templateUrl: 'directives/uploadPopupFiles/uploadPopupFiles.html',
+      template: require('./uploadPopupFiles.html'),
       scope: true,
       link: linkFunc
     };

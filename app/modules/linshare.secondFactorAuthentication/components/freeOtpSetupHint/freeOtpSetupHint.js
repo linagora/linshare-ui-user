@@ -8,7 +8,7 @@
   angular
     .module('linshare.secondFactorAuthentication')
     .component('freeOtpSetupHint', {
-      templateUrl: 'modules/linshare.secondFactorAuthentication/components/freeOtpSetupHint/freeOtpSetupHint.html',
+      template: require('./freeOtpSetupHint.html'),
       controllerAs: 'freeOtpSetupHintVm',
       bindings: {
         config: '<'

@@ -22,7 +22,7 @@
         controller: 'changePasswordController',
         controllerAs: 'changePasswordVm',
         url: '/changePassword',
-        templateUrl: 'modules/linshare.changePassword/views/form.html',
+        template: require('./views/form.html'),
         resolve: {
           functionality: function($transition$, $state, user, lsAppConfig) {
             if (user.accountType !== lsAppConfig.accountType.guest) {

@@ -208,32 +208,17 @@ angular
     $rootScope.linshareLicence = lsAppConfig.licence;
   })
 
-  .run(['$templateCache', '$http', function($templateCache, $http) {
-    $http.get('modules/linshare.components/working-date-picker/views/day.html').then(function(response) {
-      $templateCache.put('uib/template/datepicker/day.html', response.data);
-    });
-    $http.get('modules/linshare.components/working-date-picker/views/month.html').then(function(response) {
-      $templateCache.put('uib/template/datepicker/month.html', response.data);
-    });
-    $http.get('modules/linshare.components/working-date-picker/views/year.html').then(function(response) {
-      $templateCache.put('uib/template/datepicker/year.html', response.data);
-    });
-    $http.get('modules/linshare.components/working-date-picker/views/popup.html').then(function(response) {
-      $templateCache.put('uib/template/datepicker/popup.html', response.data);
-    });
-
-    $templateCache.get('views/includes/sidebar-right.html');
-
-    $templateCache.get('views/includes/footer.html');
-
-    $templateCache.get('views/includes/header.html');
-
-    $templateCache.get('views/includes/profile-menu.html');
-
-    $templateCache.get('views/includes/sidebar-left.html');
+  .run(['$templateCache', function($templateCache) {
+    $templateCache.put('uib/template/datepicker/day.html', require('../modules/linshare.components/working-date-picker/views/day.html'));
+    $templateCache.put('uib/template/datepicker/month.html', require('../modules/linshare.components/working-date-picker/views/month.html'));
+    $templateCache.put('uib/template/datepicker/year.html', require('../modules/linshare.components/working-date-picker/views/year.html'));
+    $templateCache.put('uib/template/datepicker/popup.html', require('../modules/linshare.components/working-date-picker/views/popup.html'));
+    $templateCache.put('views/common/quotasTemplateTooltip.html', require('../views/common/quotasTemplateTooltip.html'));
+    $templateCache.put('views/includes/header.html', require('../views/includes/header.html'));
+    $templateCache.put('views/includes/sidebar-right.html', require('../views/includes/sidebar-right.html'));
+    $templateCache.put('views/includes/sidebar-left.html', require('../views/includes/sidebar-left.html'));
 
     $templateCache.put('views/includes/templates.html', '');
-
   }]);
 
 /*jshint latedef:false */

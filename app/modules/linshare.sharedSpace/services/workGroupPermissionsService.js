@@ -13,8 +13,6 @@
     '$log',
     '$q',
     '_',
-    'authenticationRestService',
-    'workgroupMembersRestService',
     'workgroupRolesRestService'
   ];
 
@@ -27,12 +25,9 @@
     $log,
     $q,
     _,
-    authenticationRestService,
-    workgroupMembersRestService,
     workgroupRolesRestService
   ) {
-    const
-    service = {
+    const service = {
       formatPermissions: formatPermissions,
       getWorkgroupsPermissions: getWorkgroupsPermissions
     };

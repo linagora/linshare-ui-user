@@ -7,3 +7,7 @@
       'linshare.components'
     ]);
 })();
+
+require('./route');
+require('./controller/changePasswordController');
+require('./services/changePasswordRestService');

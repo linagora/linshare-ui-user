@@ -57,7 +57,7 @@
     }
 
     function buildHeader(email, password, otp) {
-      var header = { Authorization: 'Basic ' + Base64.encode(email + ':' + password) };
+      var header = { Authorization: 'Basic ' + Base64.Base64.encode(email + ':' + password) };
 
       return otp ? _.assign(header, { 'x-linShare-2fa-pin': otp }) : header;
     }

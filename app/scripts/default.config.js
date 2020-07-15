@@ -17,13 +17,13 @@
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
       applicationLogo : {
-        small : 'images/common/linshare-logo-white.png',
-        large : 'images/ls-logo-big.png'
+        small : require('../images/common/linshare-logo-white.png').default,
+        large : require('../images/ls-logo-big.png').default
       },
-      communityWhiteLogo: 'images/community-white.png',
-      communityBlueLogo: 'images/common/community.png',
+      communityWhiteLogo: require('../images/community-white.png').default,
+      communityBlueLogo: require('../images/common/community.png').default,
       communitySlogan: 'Libre & Free',
-      loginBackground : 'images/bg-linshare-desktop.png',
+      loginBackground : require('../images/bg-linshare-desktop.png').default,
 
       // For application configuration
       accountType: {

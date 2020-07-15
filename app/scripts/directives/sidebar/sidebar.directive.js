@@ -21,7 +21,7 @@
   function linshareSidebar(LinshareSidebarController) {
     return {
       restrict: 'E',
-      templateUrl: '',
+      template: '',
       scope: {
         toggle: '=',
         dataType: '='

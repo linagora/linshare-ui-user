@@ -17,3 +17,9 @@
         'pascalprecht.translate',
       ]);
 })();
+
+require('./constants');
+require('./controllers/uploadQueueController');
+require('./directives/lsUploadQueue/lsUploadQueueDirective');
+require('./services/flowUploadService');
+require('./services/uploadRestService');

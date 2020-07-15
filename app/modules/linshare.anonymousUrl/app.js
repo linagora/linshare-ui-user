@@ -16,3 +16,10 @@
         'pascalprecht.translate'
       ]);
 })();
+
+require('./constants');
+require('./route');
+require('./controllers/anonymousHomeController');
+require('./controllers/anonymousUrlController');
+require('./directives/anonymous-url-template.directive');
+require('./services/anonymousUrlService');

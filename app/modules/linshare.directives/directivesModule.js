@@ -10,3 +10,5 @@
     .module('linshare.directives', []);
 
 })();
+
+require('./preventDefault/preventDefaultDirective');

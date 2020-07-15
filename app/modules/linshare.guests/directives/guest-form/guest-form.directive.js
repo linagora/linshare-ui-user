@@ -24,7 +24,7 @@
         formName: '=',
         guestObject: '='
       },
-      templateUrl: 'modules/linshare.guests/directives/guest-form/guest-form.html',
+      template: require('./guest-form.html'),
       link: linkFn,
       replace: true,
       transclude: true

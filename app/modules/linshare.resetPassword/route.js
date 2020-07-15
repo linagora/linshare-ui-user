@@ -21,7 +21,7 @@
         params: {
           uuid: ''
         },
-        templateUrl: 'modules/linshare.resetPassword/views/resetForm.html',
+        template: require('./views/resetForm.html'),
         controller: 'ResetPasswordController',
         controllerAs: 'resetVm',
         resolve: {

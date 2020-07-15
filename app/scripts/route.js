@@ -52,7 +52,7 @@
 
     $stateProvider
       .state('common', {
-        templateUrl: 'views/common/common.html',
+        template: require('../views/common/common.html'),
         resolve: {
           authentication: function(authenticationRestService) {
             return authenticationRestService.checkAuthentication();
@@ -67,7 +67,7 @@
       })
       .state('login', {
         url: '/login?next',
-        templateUrl: 'views/common/loginForm.html',
+        template: require('../views/common/loginForm.html'),
         controller: 'loginController',
         controllerAs: 'loginVm',
         params: {
@@ -90,7 +90,7 @@
       })
       .state('documents.files', {
         url: '/list?fileUuid',
-        templateUrl: 'modules/linshare.document/views/documentsList.html',
+        template: require('../modules/linshare.document/views/documentsList.html'),
         controller: 'documentController',
         params: {
           uploadedFileUuid: null
@@ -109,7 +109,7 @@
       })
       .state('documents.received', {
         url: '/received?fileUuid',
-        templateUrl: 'modules/linshare.receivedShare/views/list.html',
+        template: require('../modules/linshare.receivedShare/views/list.html'),
         controller: 'ReceivedController',
         resolve: {
           user: function(user) {
@@ -138,7 +138,7 @@
           openSidebar: null,
           from: ''
         },
-        templateUrl: 'modules/linshare.upload/views/lsUpload.html',
+        template: require('../modules/linshare.upload/views/lsUpload.html'),
         controller: 'uploadQueueController',
         controllerAs: 'uploadQueueVm',
         resolve: {
@@ -194,7 +194,7 @@
       })
       .state('sharedspace.all', {
         url: '/list',
-        templateUrl: 'modules/linshare.sharedSpace/views/workgroups.html',
+        template: require('../modules/linshare.sharedSpace/views/workgroups.html'),
         controller: 'SharedSpaceController as vm',
         resolve: {
           workgroups: function(workgroupRestService) {
@@ -216,7 +216,7 @@
       })
       .state('sharedspace.workgroups.root', {
         url: '/:workgroupUuid/:workgroupName',
-        templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodesList.html',
+        template: require('../modules/linshare.sharedSpace/views/workgroupNodesList.html'),
         controller: 'WorkgroupNodesController as workgroupNodesVm',
         params: {
           uploadedFileUuid: null,
@@ -257,7 +257,7 @@
       })
       .state('sharedspace.workgroups.folder', {
         url: '/:workgroupUuid/:workgroupName/:folderUuid/:folderName',
-        templateUrl: 'modules/linshare.sharedSpace/views/workgroupNodesList.html',
+        template: require('../modules/linshare.sharedSpace/views/workgroupNodesList.html'),
         controller: 'WorkgroupNodesController as workgroupNodesVm',
         params: {
           uploadedFileUuid: null,
@@ -318,7 +318,7 @@
       })
       .state('sharedspace.workgroups.version', {
         url: '/:workgroupUuid/:workgroupName/:fileUuid/:fileName',
-        templateUrl: 'modules/linshare.sharedSpace/views/workgroupVersionsList.html',
+        template: require('../modules/linshare.sharedSpace/views/workgroupVersionsList.html'),
         controller: 'WorkgroupVersionsController',
         controllerAs: 'workgroupVersionsVm',
         params: {
@@ -383,7 +383,7 @@
           createNew: false,
           from: ''
         },
-        templateUrl: 'modules/linshare.contactsLists/views/contactsListsList.html',
+        template: require('../modules/linshare.contactsLists/views/contactsListsList.html'),
         controller: 'contactsListsListController',
         controllerAs: 'contactsListsListVm',
         resolve: {
@@ -398,7 +398,7 @@
         params: {
           addContacts: false
         },
-        templateUrl: 'modules/linshare.contactsLists/views/contactsListsContacts.html',
+        template: require('../modules/linshare.contactsLists/views/contactsListsContacts.html'),
         controller: 'contactsListsContactsController',
         controllerAs: 'contactsListsContactsVm',
         resolve: {
@@ -409,7 +409,7 @@
       })
       .state('administration.guests', {
         url: '/adminguests',
-        templateUrl: 'modules/linshare.guests/views/list.html',
+        template: require('../modules/linshare.guests/views/list.html'),
         controller: 'LinshareGuestsController',
         controllerAs: 'guestVm',
         params: {
@@ -440,11 +440,11 @@
       })
       .state('administration.users', {
         url: '/users',
-        templateUrl: 'views/home/main.html'
+        template: require('../views/home/main.html')
       })
       .state('administration.groups', {
         url: '/sharedspace',
-        templateUrl: 'views/home/main.html'
+        template: require('../views/home/main.html')
       })
       .state('upload_request', {
         parent: 'common',
@@ -458,7 +458,7 @@
       })
       .state('audit.global', {
         url: '/audit_global',
-        templateUrl: 'modules/linshare.audit/views/auditList.html',
+        template: require('../modules/linshare.audit/views/auditList.html'),
         controller: 'AuditController',
         controllerAs: 'auditVm'
       })
@@ -469,7 +469,7 @@
       })
       .state('share.detail', {
         url: '/view/:id',
-        templateUrl: 'modules/linshare.share/views/shares_detail.html',
+        template: require('../modules/linshare.share/views/shares_detail.html'),
         controller: 'LinshareShareListController',
         controllerAs: 'shareListVm',
         resolve: {
@@ -495,7 +495,7 @@
       })
       .state('safe_details.global', {
         url: '/safe_details',
-        templateUrl: 'modules/linshare.safeDetails/views/safeDetailsList.html',
+        template: require('../modules/linshare.safeDetails/views/safeDetailsList.html'),
         controller: 'SafeDetailsController',
         controllerAs: 'safeDetailsVm'
       });
@@ -505,7 +505,7 @@
         .state('home', {
           parent: 'common',
           url: '/home',
-          templateUrl: 'views/home/home.html',
+          template: require('../views/home/home.html'),
           controller: 'HomeController'
         });
     }

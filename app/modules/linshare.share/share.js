@@ -82,3 +82,10 @@ angular.module(
       }
     };
   });
+
+require('./constants');
+require('./controllers/shareController');
+require('./controllers/shareListController');
+require('./services/sharableDocumentService');
+require('./services/shareObjectService');
+require('./services/shareRestService');

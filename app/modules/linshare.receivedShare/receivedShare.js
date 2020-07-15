@@ -1,12 +1,12 @@
-(function() {
-  'use strict';
+angular.module(
+  'linshare.receivedShare',
+  [
+    'linshare.utils',
+    'pascalprecht.translate',
+  ]
+);
 
-  angular
-    .module(
-      'linshare.receivedShare',
-      [
-        'linshare.utils',
-        'pascalprecht.translate',
-      ]);
-
-})();
+require('./constants');
+require('./receivedShareController');
+require('./receivedShareRestService');
+require('./receivedShareRestServiceRun');

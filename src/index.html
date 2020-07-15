@@ -1,0 +1,17 @@
+<!doctype html>
+<!--[if IE 9 ]><html class="ie9" data-ng-app="linshareUiUserApp"><![endif]-->
+<![if IE 9 ]><html data-ng-app="linshareUiUserApp"><![endif]>
+ <head>
+   <meta charset="utf-8">
+   <title>LinShare</title>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+   <meta name="description" content="">
+
+  </head>
+  <body data-ng-controller="UiUserMainController as mainVm"
+        data-ng-class="{'lock-scroll': mainVm.sidebarToggle}"
+        flow-init flow-object="mainVm.flowUploadService.flowObj" flow-prevent-drop>
+    <data ui-view x-ng-cloak=""></data>
+  </body>
+</html>

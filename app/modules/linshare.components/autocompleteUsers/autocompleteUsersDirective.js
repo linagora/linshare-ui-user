@@ -31,7 +31,7 @@
         withEmail: '=?',
         withGuest: '=?'
       },
-      templateUrl: componentsConfig.path + 'autocompleteUsers/autocompleteTemplate.html',
+      template: require('./autocompleteTemplate.html'),
       controller: 'AutocompleteUsersController',
       controllerAs: 'autocompleteUsersVm',
       bindToController: true,

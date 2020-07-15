@@ -25,7 +25,7 @@
         resetData: '=',
         resetType: '@'
       },
-      templateUrl: templateUrlFunc,
+      template,
       controller: 'ResetFormController',
       controllerAs: 'resetFormVm',
       bindToController: true,
@@ -36,14 +36,22 @@
     ////////////
 
     /**
-     *  @namespace templateUrlFunc
-     *  @desc TemplateUrl function of sidebarContent Directive
+     *  @namespace template
+     *  @desc template function of sidebarContent Directive
      *  @param {Object} elem - jqLite-wrapped element that this directive matches
      *  @param {Object} attrs - Normalized attribute names and their corresponding attribute values
      *  @memberOf LinShare.resetPassword.lsResetForm
      */
-    function templateUrlFunc(elem, attrs) {
-      return 'modules/linshare.resetPassword/directives/reset-form/reset-form-' + attrs.resetType + '.html';
+    function template(elem, attrs) {
+      const resetForms = {
+        create: require('./reset-form-create.html'),
+        finalize: require('./reset-form-finalize.html'),
+        forgot: require('./reset-form-forgot.html'),
+        reinitialize: require('./reset-form-reinitialize.html'),
+        update: require('./reset-form-update.html')
+      }
+
+      return resetForms[attrs.resetType];
     }
   }
 })();

@@ -32,7 +32,7 @@
               WELCOME_MESSAGE = welcomeMessageData['RUSSIAN']
               break;
             }
-            
+
           return WELCOME_MESSAGE;
         })
       }
@@ -40,4 +40,3 @@
   };
 
 })();
-  

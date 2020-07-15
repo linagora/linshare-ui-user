@@ -1,4 +1,3 @@
-'use strict';
 angular.module(
   'linshare.document',
   [
@@ -9,3 +8,15 @@ angular.module(
     'pascalprecht.translate',
   ]
 );
+
+require('./constants');
+require('./run');
+require('./controllers/documentController');
+require('./controllers/documentsController');
+require('./directives/checkDropdownPosition/check-dropdown-position');
+require('./directives/eventPropagationStopDirective');
+require('./directives/lsItemSelectionDirective');
+require('./directives/lsDocumentsTable/lsDocumentsMenuDirective');
+require('./directives/lsDocumentsTable/lsDocumentsTableDirective');
+require('./services/documentRestService');
+require('./services/documentRestServiceRun');

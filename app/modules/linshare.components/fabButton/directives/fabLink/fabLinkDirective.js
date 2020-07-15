@@ -9,7 +9,7 @@
     .module('linshare.components')
     .directive('fabLink', fabLink);
 
-  fabLink.$inject = ['_', 'componentsConfig'];
+  fabLink.$inject = ['_'];
 
   /**
    * @namespace fabLink
@@ -21,10 +21,10 @@
    *           </fab-link>
    * @memberOf linshare.components
    */
-  function fabLink(_, componentsConfig) {
+  function fabLink(_) {
     var directive = {
       restrict: 'E',
-      templateUrl: componentsConfig.path + 'fabButton/directives/fabLink/fabLinkTemplate.html',
+      template: require('./fabLinkTemplate.html'),
       scope: {
         fabLinkAction: '=',
         fabLinkIcon: '=',

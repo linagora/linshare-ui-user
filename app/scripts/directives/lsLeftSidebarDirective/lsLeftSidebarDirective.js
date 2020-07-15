@@ -21,7 +21,7 @@
       scope: false,
       controller: 'lsLeftSidebarController',
       controllerAs: 'lsLeftSidebarVm',
-      templateUrl: 'views/common/sidebar.html',
+      template: require('../../../views/common/sidebar.html'),
       replace: false
     };
   }

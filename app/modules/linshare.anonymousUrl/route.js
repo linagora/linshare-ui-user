@@ -17,7 +17,7 @@
   function anonymousUrlConfig(_, $stateProvider) {
     $stateProvider
       .state('anonymousUrl', {
-        templateUrl: 'modules/linshare.anonymousUrl/views/common.html'
+        template: require('../../modules/linshare.anonymousUrl/views/common.html')
       })
       .state('anonymousUrl.home', {
         url: '/external/anonymous/',
@@ -33,7 +33,7 @@
         },
         controller: 'AnonymousHomeController',
         controllerAs: 'anonymousHomeVm',
-        templateUrl: 'modules/linshare.anonymousUrl/views/home.html'
+        template: require('../../modules/linshare.anonymousUrl/views/home.html')
       })
       .state('anonymousUrl.list', {
         url: '/external/anonymous/:uuid',

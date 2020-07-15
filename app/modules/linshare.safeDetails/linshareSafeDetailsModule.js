@@ -14,3 +14,6 @@
     ]
   );
 })();
+
+require('./services/safeDetailsRestService');
+require('./controllers/SafeDetailsController');

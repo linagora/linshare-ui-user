@@ -8,23 +8,11 @@
   angular
     .module('linshare.components')
     .component('passwordInputHints', {
-      templateUrl: templateUrl,
+      template: require('./passwordInputHints.html'),
       controllerAs: 'passwordInputHintsVm',
       bindings: {
         formError: '<',
         rules: '<'
       }
     });
-
-  /**
-   * @name templateUrl
-   * @desc Retrieve the URL template of the component
-   * @param {ComponentsConfig} componentsConfig - Configuration object utils for components
-   * @memberOf linshare.components.PasswordInputHints
-   */
-  function templateUrl(componentsConfig) {
-    return componentsConfig.path + 'passwordValidator/passwordInputHints.html';
-  }
-
-  templateUrl.$inject = ['componentsConfig'];
 })();

@@ -8,7 +8,7 @@
   function lsDocumentsTableDirective() {
     return {
       restrict: 'E',
-      templateUrl: 'modules/linshare.document/directives/lsDocumentsTable/lsDocumentsTable.html'
+      template: require('./lsDocumentsTable.html')
     };
   }
 })();

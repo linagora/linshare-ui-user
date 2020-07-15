@@ -20,13 +20,12 @@
   function lsAnonymousUrlTemplate($log, anonymousUrlService) {
     var directive = {
       restrict: 'EA',
-      templateUrl: function() {
+      template: function() {
         $log.debug('status anourl', anonymousUrlService.status);
-        if (anonymousUrlService.status === 404) {
-          return 'modules/linshare.anonymousUrl/views/404.html';
-        } else {
-          return 'modules/linshare.anonymousUrl/views/anonymousUrl.html';
-        }
+
+        return anonymousUrlService.status === 404 ?
+          require('../views/404.html') :
+          require('../views/anonymousUrl.html')
       }
     };
     return directive;

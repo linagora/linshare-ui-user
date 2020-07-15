@@ -41,7 +41,7 @@
       scope: {
         contactsToBeAdded: '=createContactsListContactsToBeAdded',
       },
-      templateUrl: 'modules/linshare.contactsLists/directives/createContactsList/createContactsList.html'
+      template: require('./createContactsList.html')
     };
 
     return directive;

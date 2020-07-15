@@ -179,7 +179,7 @@
           }
         },
         controllerAs: 'modalPasswordVm',
-        templateUrl: 'modules/linshare.anonymousUrl/views/passwordModal.html'
+        template: require('../views/passwordModal.html')
       });
     }
   }

@@ -8,7 +8,7 @@
   angular
     .module('linshare.components')
     .component('sidebarAuditActionsTab', {
-      templateUrl: templateUrl,
+      template: require('./sidebarAuditActionsTab.html'),
       controller: 'sidebarAuditActionsTabController',
       controllerAs: 'sidebarAuditActionsTabVm',
       bindings: {
@@ -16,16 +16,4 @@
         type: '<'
       }
     });
-
-  /**
-   * @name templateUrl
-   * @desc Retrieve the URL template of the component
-   * @param {ComponentsConfig} componentsConfig - Configuration object utils for components
-   * @memberOf linshare.components.sidebarAuditActionsTab
-   */
-  function templateUrl(componentsConfig) {
-    return componentsConfig.path + 'sidebar/sidebarAuditActionsTab.html';
-  }
-
-  templateUrl.$inject = ['componentsConfig'];
 })();

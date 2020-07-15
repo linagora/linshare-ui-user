@@ -8,7 +8,7 @@
   angular
     .module('linshare.secondFactorAuthentication')
     .component('sharedKeyCreation', {
-      templateUrl: 'modules/linshare.secondFactorAuthentication/components/sharedKeyCreation/sharedKeyCreation.html',
+      template: require('./sharedKeyCreation.html'),
       controller: 'sharedKeyCreationController',
       controllerAs: 'sharedKeyCreationVm',
       bindings: {

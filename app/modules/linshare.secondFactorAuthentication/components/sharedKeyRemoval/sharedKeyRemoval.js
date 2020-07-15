@@ -8,7 +8,7 @@
   angular
     .module('linshare.secondFactorAuthentication')
     .component('sharedKeyRemoval', {
-      templateUrl: 'modules/linshare.secondFactorAuthentication/components/sharedKeyRemoval/sharedKeyRemoval.html',
+      template: require('./sharedKeyRemoval.html'),
       controller: 'sharedKeyRemovalController',
       controllerAs: 'sharedKeyRemovalVm',
       bindings: {

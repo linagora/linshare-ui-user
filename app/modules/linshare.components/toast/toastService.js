@@ -9,14 +9,14 @@
     .module('linshare.components')
     .factory('toastService', toastService);
 
-  toastService.$inject = ['_', '$mdToast', '$q', 'componentsConfig'];
+  toastService.$inject = ['_', '$mdToast'];
 
   /**
    * @namespace toastService
    * @desc Service to manage toast to display
    * @memberOf linshare.components
    */
-  function toastService(_, $mdToast, $q, componentsConfig) {
+  function toastService(_, $mdToast) {
     var
       delay = {
         default: 3000,
@@ -24,8 +24,7 @@
       },
       mdToastLocals = {},
       position = 'bottom right',
-      stack = [],
-      templateUrl = componentsConfig.path + 'toast/toast.html';
+      stack = [];
 
     var service = {
       error: error,
@@ -240,7 +239,7 @@
         bindToController: true,
         position: position,
         hideDelay: 0,
-        templateUrl: templateUrl
+        template: require('./toast.html')
       });
     }
   }

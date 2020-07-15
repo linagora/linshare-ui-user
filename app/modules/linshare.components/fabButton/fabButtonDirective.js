@@ -9,7 +9,7 @@
     .module('linshare.components')
     .directive('fabButton', fabButton);
 
-  fabButton.$inject = ['_', 'componentsConfig'];
+  fabButton.$inject = ['_'];
 
   /**
    * @namespace fabButton
@@ -21,10 +21,10 @@
    *          </div>
    * @memberOf linshare.components
    */
-  function fabButton(_, componentsConfig) {
+  function fabButton(_) {
     var directive = {
       restrict: 'A',
-      templateUrl: componentsConfig.path + 'fabButton/fabButtonTemplate.html',
+      template: require('./fabButtonTemplate.html'),
       scope: {
         $flow: '=?fabButtonFlow',
         /*

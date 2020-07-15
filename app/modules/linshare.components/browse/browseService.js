@@ -9,7 +9,7 @@
     .module('linshare.components')
     .factory('browseService', browseService);
 
-  browseService.$inject = ['$mdDialog', 'componentsConfig'];
+  browseService.$inject = ['$mdDialog'];
 
   /**
    * @namespace browseService
@@ -17,7 +17,7 @@
    * @memberOf linshare.components
    */
   // TODO : dialogService, where to add browse (cf toast)
-  function browseService($mdDialog, componentsConfig) {
+  function browseService($mdDialog) {
     var service = {
       show: show
     };
@@ -37,7 +37,7 @@
         controller: 'browseController',
         controllerAs: 'browseVm',
         bindToController: true,
-        templateUrl: componentsConfig.path + 'browse/browseTemplate.html',
+        template: require('./browseTemplate.html'),
         parent: angular.element(document.body),
         clickOutsideToClose: false,
         fullscreen: true,

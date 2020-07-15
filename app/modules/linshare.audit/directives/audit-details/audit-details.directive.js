@@ -21,7 +21,7 @@
   function auditDetails() {
     var directive = {
       restrict: 'A',
-      templateUrl: 'modules/linshare.audit/directives/audit-details/audit-details.html'
+      template: require('./audit-details.html')
     };
     return directive;
   }

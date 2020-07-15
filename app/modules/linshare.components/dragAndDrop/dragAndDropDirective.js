@@ -9,8 +9,6 @@
     .module('linshare.components')
     .directive('dragAndDrop', dragAndDrop);
 
-  dragAndDrop.$inject = ['componentsConfig'];
-
   /**
    * @namespace dragAndDrop
    * @desc Directive for managing drag and drop of files
@@ -20,10 +18,10 @@
    *          </div>
    * @memberOf linshare.components
    */
-  function dragAndDrop(componentsConfig) {
+  function dragAndDrop() {
     var directive = {
       restrict: 'A',
-      templateUrl: componentsConfig.path + 'dragAndDrop/dragAndDropTemplate.html',
+      template: require('./dragAndDropTemplate.html'),
       scope: {
         $flow: '=dragAndDropFlow',
         enabled: '=dragAndDropEnabled',

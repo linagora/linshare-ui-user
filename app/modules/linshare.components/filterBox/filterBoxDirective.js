@@ -9,8 +9,6 @@
     .module('linshare.components')
     .directive('filterBox', filterBox);
 
-  filterBox.$inject = ['componentsConfig'];
-
   /**
    * @namespace filterBox
    * @desc Component for filter & search inside an ngTable
@@ -19,7 +17,7 @@
    *          <filter-box>
    * @memberOf linshare.components
    */
-  function filterBox(componentsConfig) {
+  function filterBox() {
     var directive = {
       restrict: 'E',
       scope: {
@@ -33,7 +31,7 @@
         filterItems: '=filterBoxItems',
         filterTable: '=filterBoxTable'
       },
-      templateUrl: componentsConfig.path + 'filterBox/filterBoxTemplate.html'
+      template: require('./filterBoxTemplate.html')
     };
 
     return directive;

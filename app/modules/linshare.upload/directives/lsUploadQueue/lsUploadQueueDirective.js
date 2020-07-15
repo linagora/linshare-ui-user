@@ -18,7 +18,7 @@
   function lsUploadQueueDirective() {
     return {
       restrict: 'E',
-      templateUrl: 'modules/linshare.upload/directives/lsUploadQueue/lsUploadQueue.html',
+      template: require('./lsUploadQueue.html'),
       scope: true,
       link: linkFunc
     };

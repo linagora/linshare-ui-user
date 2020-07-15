@@ -8,7 +8,7 @@
   function lsDocumentsMenuDirective() {
     return {
       restrict: 'E',
-      templateUrl: 'modules/linshare.document/directives/lsDocumentsTable/lsDocumentsMenu.html'
+      template: require('./lsDocumentsMenu.html')
     };
   }
 })();

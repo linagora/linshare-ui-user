@@ -8,7 +8,7 @@
   angular
     .module('linshare.secondFactorAuthentication')
     .config(secondFactorAuthenticationConfig)
-    .run(registerTransitionHook)
+    .run(registerTransitionHook);
 
   /**
    *  @namespace secondFactorAuthenticationConfig
@@ -20,7 +20,7 @@
       .state('secondFactorAuthenticationLogin', {
         url: '/2fa',
         params: { loginInfo: null },
-        templateUrl: 'modules/linshare.secondFactorAuthentication/views/secondFactorAuthenticationLogin.html',
+        template: require('./views/secondFactorAuthenticationLogin.html'),
         controller: 'secondFactorAuthenticationLoginController',
         controllerAs: 'secondFactorAuthenticationLoginVm',
         resolve: {
@@ -37,7 +37,7 @@
         controller: 'secondFactorAuthenticationController',
         controllerAs: 'secondFactorAuthenticationVm',
         url: '/secondFactorAuthentication',
-        templateUrl: 'modules/linshare.secondFactorAuthentication/views/secondFactorAuthentication.html',
+        template: require('./views/secondFactorAuthentication.html'),
         resolve: {
           functionality: function($transition$, $state, functionalities) {
             if (!functionalities.SECOND_FACTOR_AUTHENTICATION.enable) {
