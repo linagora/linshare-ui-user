@@ -135,7 +135,7 @@
     }
 
     button {
-      width: 50%;
+      white-space: normal;
     }
   }
 }
@@ -179,10 +179,6 @@
         p {
           text-align: left;
           margin: 25px 0;
-        }
-
-        button {
-          width: auto;
         }
       }
     }
