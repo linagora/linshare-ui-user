@@ -24,22 +24,21 @@
       </div>
     </div>
   <div id="navigation">
-    <div class="profile-menu-links" data-ng-show="toggleSlide" data-ng-class="{'profile-disp-links' : toggleSlide}">
-      <ul class="main-menu">
-        <li>
-          <a data-ng-controller="AuthenticationController as authenticationVm"
-             data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
-            <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
-          </a>
-          <a ui-sref="changePassword" ng-if="loggedUser.accountType === 'GUEST'">
-            <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
-          </a>
-          <a ui-sref="secondFactorAuthentication" ng-if="mainVm.show2FA">
-            <i class="zmdi zmdi-shield-security"></i> <span translate>SECOND_FACTOR_AUTH.TITLE</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <ul class="main-menu profile-menu-links" ng-class="{'show-menu-links' : toggleSlide}">
+      <li>
+        <a data-ng-controller="AuthenticationController as authenticationVm"
+           data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
+          <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
+        </a>
+        <a ui-sref="changePassword" ng-if="loggedUser.accountType === 'GUEST'">
+          <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
+        </a>
+        <a ui-sref="secondFactorAuthentication" ng-if="mainVm.show2FA">
+          <i class="zmdi zmdi-shield-security"></i> <span translate>SECOND_FACTOR_AUTH.TITLE</span>
+        </a>
+      </li>
+    </ul>
+
     <ul class="main-menu" data-ng-repeat="tab in lsLeftSidebarVm.tabs">
       <li
         data-ng-if="::tab.href"

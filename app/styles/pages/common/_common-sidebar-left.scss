@@ -236,20 +236,17 @@ body:not(.sw-toggled) #sidebar {
   }
 }
 
-.profile-menu-links {
+.main-menu.profile-menu-links {
   -webkit-transition: all;
   -o-transition: all;
   transition: all ease-in-out;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
-  height: 0;
-  ul.main-menu {
-    border-bottom: solid 2px #eee;
-  }
-  &.profile-disp-links {
-    height: 138px;
-    position: relative;
-    z-index: 1;
+  border-bottom: solid 2px #eee;
+  max-height: 0;
+
+  &.show-menu-links {
+    max-height: 100%;
   }
 }
 
