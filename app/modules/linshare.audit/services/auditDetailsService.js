@@ -210,7 +210,7 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setAuthorName(auditAction) {
-      return auditAction.isAuthor ? 'AUTHOR_ME' : setFullName(auditAction.actor);
+      return auditAction.isAuthor ? 'AUTHOR_ME' : setFullName(auditAction.authUser);
     }
 
     /**
