@@ -53,7 +53,7 @@
      */
     function dialogConfirmation(sentences, type) {
       var currentType = type || service.dialogType.info;
-      return $q(function(resolve, reject) {
+      return $q(function(resolve) {
         swal({
           title: sentences.title,
           text: sentences.text,
@@ -67,8 +67,6 @@
           if (isConfirm) {
             return resolve();
           }
-
-          return reject();
         });
       });
     }

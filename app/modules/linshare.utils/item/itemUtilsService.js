@@ -12,7 +12,6 @@
   itemUtilsService.$inject = [
     '_',
     '$filter',
-    '$log',
     '$q',
     '$sce',
     '$timeout',
@@ -23,7 +22,6 @@
     'itemUtilsConstant',
     'lsAppConfig',
     'lsErrorCode',
-    'swal',
     'toastService'
   ];
 
@@ -36,7 +34,6 @@
   function itemUtilsService(
     _,
     $filter,
-    $log,
     $q,
     $sce,
     $timeout,
@@ -47,7 +44,6 @@
     itemUtilsConstant,
     lsAppConfig,
     lsErrorCode,
-    swal,
     toastService
   )
   {
@@ -138,9 +134,6 @@
         })
         .then(function() {
           callback(items);
-        })
-        .catch(function(error) {
-          $log.error(error);
         });
     }
 
