@@ -86,13 +86,13 @@
     .instruction-app-install {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-evenly;
 
       .app-install-links {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 20px 40px;
+        margin: 30px;
 
         a {
           margin-top: 10px;
@@ -170,11 +170,25 @@
       max-height: calc(100vh - 147px);
 
       .instruction-app-install {
-        width: 50%;
+        justify-content: flex-start;
+        margin: 28px;
+
+        .app-install-links {
+          margin: 0;
+
+          &.ios {
+            margin-right: 70px;
+          }
+
+          &.android {
+            margin-left: 70px;
+          }
+        }
       }
 
       .shared-key {
-        width: 50%;
+        justify-content: flex-start;
+        margin-left: 28px;
       }
 
       .remove-shared-key {
