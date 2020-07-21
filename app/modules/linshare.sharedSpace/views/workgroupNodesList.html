@@ -374,7 +374,10 @@
                 uib-dropdown-menu=""
                 data-ng-class="{'open': isOpenToolbarMore}"
               >
-                <li data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
+                <li
+                  data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])"
+                  data-ng-class="{ 'disable-link': workgroupNodesVm.selectedDocuments.length > 1 }"
+                >
                   <a href="">
                     <i class="zmdi zmdi-info"></i>
                     <span translate>ACTION.INFORMATION</span>
@@ -384,6 +387,7 @@
                   data-ng-if="workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT
                   && workgroupNodesVm.permissions.FILE.READ
                   && workgroupNodesVm.canAddVersion"
+                  data-ng-class="{ 'disable-link': workgroupNodesVm.selectedDocuments.length > 1 }"
                 >
                   <a
                     translate-attr="{title: 'ACTION.SEE_VERSIONS'}"
@@ -449,10 +453,15 @@
                 </li>
                 <li class="divider"></li>
                 <li data-ng-class="{
-                  'disable-link' : workgroupNodesVm.selectedDocuments.length === 1 &&
-                  (workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT ?
-                  !workgroupNodesVm.permissions.FILE.UPDATE :
-                  !workgroupNodesVm.permissions.FOLDER.UPDATE)
+                  'disable-link' : workgroupNodesVm.selectedDocuments.length > 1 ||
+                                  (
+                                    workgroupNodesVm.selectedDocuments.length === 1 &&
+                                    workgroupNodesVm.selectedDocuments[0].type === workgroupNodesVm.TYPE_DOCUMENT &&
+                                    (
+                                      !workgroupNodesVm.permissions.FILE.UPDATE ||
+                                      !workgroupNodesVm.permissions.FOLDER.UPDATE
+                                    )
+                                  )
                   }"
                 >
                   <a
