@@ -145,7 +145,11 @@
         </div>
       </div>
       <div class="card-body collapsible-content">
-        <div class="table-responsive">
+        <div id="loading-bar-spinner" ng-if="auditVm.status === 'loading'">
+          <div class="spinner-icon"></div>
+        </div>
+
+        <div class="table-responsive" ng-if="auditVm.status === 'loaded'">
           <table
             class="table standard-read-only-table table-form-filters detail-action-col fixed-activity-table-height"
             data-ng-table="auditVm.tableParams" show-filter="true">

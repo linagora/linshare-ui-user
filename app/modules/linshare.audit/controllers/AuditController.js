@@ -78,6 +78,7 @@
      */
     function activate() {
       auditVm.beginDate.setDate(auditVm.beginDate.getDate() - 7);
+      auditVm.status = 'loading';
 
       findAuditActionsByDate();
     }
@@ -96,6 +97,7 @@
         endDate: auditVm.endDate
       }).then(function(auditActionsList) {
         auditVm.itemsList = auditActionsList.plain();
+        auditVm.status = 'loaded';
 
         auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditVm.itemsList);
         generateTableFilterSelect(auditVm.tableFilterType, 'type');
