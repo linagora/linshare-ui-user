@@ -7,7 +7,8 @@
 
   angular
     .module('linshare.secondFactorAuthentication')
-    .directive('otpInputKeypress', otpInputKeypress);
+    .directive('otpInputKeypress', otpInputKeypress)
+    .directive('otpInputAutofocus', otpInputAutofocus);
 
     function otpInputKeypress() {
       return {
@@ -24,5 +25,20 @@
           });
         }
       };
+    };
+
+    otpInputAutofocus.$inject = ['$timeout']
+
+    function otpInputAutofocus($timeout) {
+      return {
+        restrict: 'A',
+        link: function(scope, element) {
+          angular.element(document).ready(function () {
+            $timeout(function() {
+              element[0].focus();
+            })
+          });
+        }
+      }
     };
 })();
