@@ -7,23 +7,22 @@
 
   angular
     .module('linshare.secondFactorAuthentication')
-    .directive('onKeypress', function() {
+    .directive('otpInputKeypress', otpInputKeypress);
+
+    function otpInputKeypress() {
       return {
-          restrict: 'A',
-          link: function(scope, element) {
-            element.on('keypress', function(e){
-              var keyNumberConverted = Number(e.key);
+        restrict: 'A',
+        link: function(scope, element) {
+          element.on('keypress', function(e){
+            if (e.key === 'Enter') {
+              return;
+            }
 
-              if (e.key === 'Enter') {
-                return;
-              }
-
-              if(isNaN(keyNumberConverted)){
-                e.preventDefault();
-              }
-            });
-          }
+            if (!e.key.match(/[0-9]/)) {
+              e.preventDefault();
+            }
+          });
+        }
       };
-    });
-
+    };
 })();
