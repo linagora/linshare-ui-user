@@ -270,11 +270,9 @@ angular.module('linshare.sharedSpace')
      * @returns {Promise} Workgroup object with audit details
      * @memberOf LinShare.sharedSpace.SharedSpaceController
      */
-    function getWorkgroupAudit(workgroup) {
-      return workgroupRestService.getAudit(workgroup.uuid).then(function(auditData) {
-        auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain()).then(function(auditActions) {
-          workgroup.auditActions = auditActions;
-        });
+    function getWorkgroupAudit(workgroupUuid) {
+      return workgroupRestService.getAudit(workgroupUuid).then(function(auditData) {
+        return auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain());
       });
     }
 
@@ -282,7 +280,7 @@ angular.module('linshare.sharedSpace')
      * @name showItemDetails
      * @desc Get details of a Workgroup and show them in right sidebar
      * @param {string} workgroupUuid - Uuid of the Workgroup
-     * @param {Object} event - Event happening
+     * @param {boolean} loadAction - Event happening
      * @param {boolean} memberTab - Open member tab
      * @memberOf LinShare.sharedSpace.SharedSpaceController
      */
@@ -299,10 +297,7 @@ angular.module('linshare.sharedSpace')
         .then(function(quota) {
           thisctrl.currentSelectedDocument.quotas = Object.assign({}, quota);
 
-          return getWorkgroupAudit(thisctrl.currentSelectedDocument.current);
-        })
-        .then(function() {
-          if(loadAction) {
+          if (loadAction) {
             openMemberTab(memberTab);
             thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
           }

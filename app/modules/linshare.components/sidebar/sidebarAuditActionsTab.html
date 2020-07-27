@@ -1,0 +1,30 @@
+<md-tab
+  label="{{'ACTIVITIES' | translate}}"
+  class="col-xs-4 noPadding disabled"
+  md-on-select="sidebarAuditActionsTabVm.isActive = true; sidebarAuditActionsTabVm.getAuditActions()"
+  md-on-deselect="sidebarAuditActionsTabVm.isActive = false;"
+>
+  <md-content class="md-padding">
+    <div
+      id="loading-bar-spinner"
+      ng-if="sidebarAuditActionsTabVm.status === 'loading'"
+    >
+      <div class="spinner-icon"></div>
+    </div>
+
+    <p
+      class="empty-res"
+      ng-if="!sidebarAuditActionsTabVm.auditActions.length &&
+                  sidebarAuditActionsTabVm.status === 'loaded'"
+    >
+      <i class="zmdi zmdi-info"></i><span translate>NO_AUDIT</span>
+    </p>
+    <div
+      ng-if="sidebarAuditActionsTabVm.auditActions.length &&
+             sidebarAuditActionsTabVm.status === 'loaded'"
+      ng-repeat="auditAction in sidebarAuditActionsTabVm.auditActions"
+      audit-details="{{::auditAction}}"
+      class="audit-card"
+    ></div>
+  </md-content>
+</md-tab>

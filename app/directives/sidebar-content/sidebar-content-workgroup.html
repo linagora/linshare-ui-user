@@ -35,16 +35,11 @@
           >
           </md-content>
         </md-tab>
-        <md-tab id="tab3" label="{{'ACTIVITIES' | translate}}" class="col-xs-4 noPadding disabled">
-          <md-content class="md-padding">
-            <p class="empty-res"
-               data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.auditActions === 0">
-              <i class="zmdi zmdi-info"></i><span translate>NO_AUDIT</span>
-            </p>
-            <div data-ng-repeat="auditAction in mainVm.sidebar.getData().currentSelectedDocument.current.auditActions"
-                 audit-details="{{auditAction}}" class="audit-card"></div>
-          </md-content>
-        </md-tab>
+        <sidebar-audit-actions-tab
+          uuid="mainVm.sidebar.getData().currentSelectedDocument.current.uuid"
+          type="'workgroup'"
+        >
+        </sidebar-audit-actions-tab>
       </md-tabs>
     </md-content>
   </div>
