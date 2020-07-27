@@ -38,27 +38,24 @@ free-otp-setup-hint {
   }
 
   .freeotp-secret {
-    margin: 10px 0;
-    display: table;
-    position: relative;
-    border-collapse: collapse;
+    display: flex;
+    align-items: center;
 
-    span {
+    input {
+      flex-grow: 1;
       background-color: #ffffff;
-      padding: 5px;
-      vertical-align: bottom;
-      border-radius: 2px;
-      position: relative;
-      display: table-cell;
+      border: 0;
+      padding: 6px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
     }
 
     button {
-      display: table-cell;
-      position: relative;
-      padding: 6px;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      margin-left: -1px;
+      white-space: nowrap;
+      border-radius: 0;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      box-shadow: none !important;
     }
   }
 
