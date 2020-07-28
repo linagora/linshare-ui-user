@@ -153,19 +153,22 @@
         }
 
         //TODO: success response should be managed globally in serverManagerService
-        receivedShareRestService.copy(selectedDocuments).then(function(promises) {
+        receivedShareRestService.copy(selectedDocuments).then(function(data) {
           toastService.success({
             key: 'TOAST_ALERT.ACTION.COPY',
             pluralization: true,
             params: {
-              singular: promises.length === 1,
-              nbItems: promises.length
+              singular: data.length === 1,
+              nbItems: data.length
             }
           },
           'TOAST_ALERT.ACTION_BUTTON'
-          )
-          .then(function() {
-            $state.go('documents.files');
+          ).then(function(response) {
+            if (response && response.actionClicked) {
+              $state.go('documents.files', {
+                uploadedFileUuid: data.length === 1 ? data[0].uuid : null
+              });
+            }
           });
         });
       }
