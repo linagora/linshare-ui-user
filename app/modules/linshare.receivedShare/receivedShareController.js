@@ -30,6 +30,7 @@
       documentsToIsolate,
       documentUtilsService,
       files,
+      functionalities,
       lsAppConfig,
       NgTableParams,
       receivedShareRestService,
@@ -52,6 +53,7 @@
       $scope.sortDropdownSetActive =sortDropdownSetActive;
       $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
       $scope.toggleSearchState = toggleSearchState;
+      $scope.functionalities = functionalities;
 
       $scope.advancedFilterBool = false;
       $scope.selectedDocuments = [];

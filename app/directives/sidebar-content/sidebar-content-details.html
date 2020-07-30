@@ -202,7 +202,7 @@
                           {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate'}}
                         </p>
                       </div>
-                      <div data-ng-if="mainVm.enableDocumentExpiration">
+                      <div data-ng-if="mainVm.sidebar.getData().functionalities.DOCUMENT_EXPIRATION.enable">
                         <p>{{'RIGHT_PANEL.DETAILS.EXPIRATION_DATE' | translate}}:</p>
                         <p
                           data-ng-if="!mainVm.sidebar.getData().currentSelectedDocument.current.shared"

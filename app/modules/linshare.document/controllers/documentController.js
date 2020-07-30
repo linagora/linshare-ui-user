@@ -27,7 +27,7 @@
     documentsList,
     documentUtilsService,
     flowUploadService,
-    functionalityRestService,
+    functionalities,
     LinshareShareService,
     LinshareDocumentRestService,
     lsAppConfig,
@@ -84,18 +84,13 @@
     $scope.slideUpTextarea = slideUpTextarea;
     $scope.toggleSearchState = toggleSearchState;
     $scope.updateDocument = updateDocument;
+    $scope.functionalities = functionalities;
 
     activate();
 
     ////////////////
 
     function activate() {
-      functionalityRestService
-        .getFunctionalityParams('DOCUMENT_EXPIRATION')
-        .then(function(data) {
-          $scope.mainVm.enableDocumentExpiration = data.enable;
-        });
-
       //TODO - PREVIEW: Shall be removed once every functions are defined in an external service
       Object.assign(
         documentPreviewService,
