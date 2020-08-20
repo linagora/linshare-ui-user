@@ -2,7 +2,7 @@
 
 angular.module('linshare.share')
   .controller('LinshareShareActionController', function(_, $scope, LinshareShareService, $log, $translate,
-                                                        ShareObjectService, toastService, documentUtilsService) {
+    ShareObjectService, toastService, documentUtilsService) {
     var shareActionVm = this;
     shareActionVm.closeSideBar = closeSideBar;
     shareActionVm.uploadPage = 'upload';

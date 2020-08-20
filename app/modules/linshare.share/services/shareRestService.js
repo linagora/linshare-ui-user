@@ -15,7 +15,7 @@
    *
    * Service to get and post all information about files shared by the user
    */
-  .factory('LinshareShareService', LinshareShareService);
+    .factory('LinshareShareService', LinshareShareService);
 
   LinshareShareService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
 

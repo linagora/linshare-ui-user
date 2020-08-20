@@ -206,7 +206,9 @@
         if (flowFile.folderDetails.workgroupUuid === workgroupNodesVm.folderDetails.workgroupUuid &&
           flowFile.folderDetails.folderUuid === workgroupNodesVm.folderDetails.folderUuid) {
           flowFile.asyncUploadDeferred.promise.then(function(file) {
-            file.linshareDocument.type !== TYPE_VERSION && addNewItemInTableParams(file.linshareDocument);
+            if (file.linshareDocument.type !== TYPE_VERSION) {
+              addNewItemInTableParams(file.linshareDocument);
+            }
           });
         }
       }
@@ -457,9 +459,11 @@
         'FOLDER': function() {
           workgroupNodesRestService.metadata(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid)
             .then(function(nodeDetail) {
-              nodeDetail.size > workgroupNodesVm.downloadArchiveThreshold ?
-                toastService.error({ key: 'TOAST_ALERT.ERROR.DOWNLOAD_FOLDER' }) :
+              if ( nodeDetail.size > workgroupNodesVm.downloadArchiveThreshold ) {
+                toastService.error({ key: 'TOAST_ALERT.ERROR.DOWNLOAD_FOLDER' })
+              } else {
                 nodeTypeDownloadFunction.DOCUMENT();
+              }
             });
         },
         'DOCUMENT': function() {
@@ -578,7 +582,7 @@
             hide: !workgroupNodesVm.permissions.FILE.CREATE,
             icon: 'ls-upload-fill',
             label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE'
-            }
+          }
           );
         });
     }
@@ -657,7 +661,7 @@
      */
     function launchTableParamsInitiation() {
       tableParamsService.initTableParams(workgroupNodesVm.nodesList, workgroupNodesVm.paramFilter,
-          workgroupNodesVm.folderDetails.uploadedFileUuid)
+        workgroupNodesVm.folderDetails.uploadedFileUuid)
         .then(function(data) {
           workgroupNodesVm.tableParamsService = tableParamsService;
           workgroupNodesVm.tableParams = tableParamsService.getTableParams();
@@ -731,8 +735,8 @@
       }
 
       var nodeList = canDisplayFiles ? _.clone(workgroupNodesVm.nodesList) : _.filter(
-          workgroupNodesVm.nodesList,
-          {'type': TYPE_FOLDER}
+        workgroupNodesVm.nodesList,
+        {'type': TYPE_FOLDER}
       );
       browseService.show({
         currentFolder: currentFolder,
@@ -983,31 +987,31 @@
       workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true, true)
         .then(function(workgroup) {
         // TODO : remove the map once the property userMail will be changed to mail
-        workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
-          workgroup.members,
-          function(member) {
-            return { mail: member.userMail };
-          }
-        );
+          workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
+            workgroup.members,
+            function(member) {
+              return { mail: member.userMail };
+            }
+          );
 
-        workgroupNodesVm.currentSelectedDocument.current = Object.assign({}, workgroup);
-        workgroupNodesVm.currentSelectedDocument.original = Object.assign({}, workgroup);
+          workgroupNodesVm.currentSelectedDocument.current = Object.assign({}, workgroup);
+          workgroupNodesVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
-        return workgroup;
-      }).then(function() {
-        return $q.all([
-          workgroupRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid),
-          workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid)
-        ]);
-      }).then(function(promises) {
-        workgroupNodesVm.currentSelectedDocument.quotas = Object.assign({}, promises[0]);
+          return workgroup;
+        }).then(function() {
+          return $q.all([
+            workgroupRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid),
+            workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid)
+          ]);
+        }).then(function(promises) {
+          workgroupNodesVm.currentSelectedDocument.quotas = Object.assign({}, promises[0]);
 
-        return auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain());
-      }).then(function(auditActions) {
-        workgroupNodesVm.currentSelectedDocument.current.auditActions = auditActions;
-        workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
-        workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
-      });
+          return auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain());
+        }).then(function(auditActions) {
+          workgroupNodesVm.currentSelectedDocument.current.auditActions = auditActions;
+          workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
+          workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
+        });
     }
 
     /**
@@ -1036,7 +1040,7 @@
 
         if (file.relativePath !== file.name &&
             workgroupNodesVm.permissions.FOLDER.CREATE) {
-           foldersObj = treeFolderBuilder(file, folderDetails, foldersTree);
+          foldersObj = treeFolderBuilder(file, folderDetails, foldersTree);
 
           _.assign(foldersTree, foldersObj.tree);
 
@@ -1165,7 +1169,7 @@
       function treeFolderBuilder(file, folderDetails, foldersTreeInit) {
         var
           current,
-          foldersTree = _.assign(foldersTree, foldersTreeInit),
+          foldersTree = _.assign({}, foldersTreeInit),
           previous,
           promises = [],
           splitFilePath = file.relativePath.split('/').slice(0, -1);

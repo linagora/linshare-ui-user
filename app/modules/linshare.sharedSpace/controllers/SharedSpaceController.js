@@ -66,13 +66,11 @@ angular.module('linshare.sharedSpace')
       selectedIndex: 0
     };
 
-    var swalNewWorkGroupName, invalideNameTranslate;
+    var swalNewWorkGroupName;
 
-    $translate(['ACTION.NEW_WORKGROUP', 'TOAST_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR'])
+    $translate(['ACTION.NEW_WORKGROUP'])
       .then(function(translations) {
         swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
-        invalideNameTranslate = translations['TOAST_ALERT.ERROR.RENAME_INVALID.REJECTED_CHAR']
-          .replace('$rejectedChar', lsAppConfig.rejectedChar.join('-, -').replace(new RegExp('-', 'g'), '\''));
       });
 
     thisctrl.createWorkGroup = function() {
@@ -206,7 +204,7 @@ angular.module('linshare.sharedSpace')
       itemUtilsService.deleteItem(workgroups, itemUtilsService.itemUtilsConstant.WORKGROUP, deleteCallback);
     }
 
-// TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
+    // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
       angular.forEach(items, function(restangularizedItem) {
         $log.debug('value to delete', restangularizedItem);
@@ -261,19 +259,6 @@ angular.module('linshare.sharedSpace')
       } else {
         thisctrl.tableParams.filter().isSelected = true;
       }
-    }
-
-    /**
-     * @name getWorkgroupAudit
-     * @desc Get audit details of a Workgroup
-     * @param {Object} workgroup - Workgroup object
-     * @returns {Promise} Workgroup object with audit details
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
-    function getWorkgroupAudit(workgroupUuid) {
-      return workgroupRestService.getAudit(workgroupUuid).then(function(auditData) {
-        return auditDetailsService.generateAllDetails($scope.userLogged.uuid, auditData.plain());
-      });
     }
 
     /**

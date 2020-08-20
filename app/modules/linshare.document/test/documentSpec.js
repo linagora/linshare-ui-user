@@ -62,7 +62,7 @@ describe('Testing Documents Module: ', function () {
 
   describe('Test LinshareDocumentController', function() {
 
-    var $scope, controller;
+    var $scope;
     var documentsList = [
       {
         uuid: '276aa208-8c8c-403c-aa28-bb80e5c7e74a',
@@ -77,9 +77,9 @@ describe('Testing Documents Module: ', function () {
 
     // Inject the controller for each assertion and a mock scope
     beforeEach(inject(
-      function($controller, $rootScope, $filter, ngTableParams) {
+      function($controller, $rootScope) {
         $scope = $rootScope.$new();
-        controller = $controller('LinshareDocumentController', {$scope: $scope, documentsList: documentsList});
+        $controller('LinshareDocumentController', {$scope: $scope, documentsList: documentsList});
       }));
 
     it('should have tableParams set', function(){

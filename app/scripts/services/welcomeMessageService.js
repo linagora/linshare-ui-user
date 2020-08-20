@@ -5,9 +5,9 @@
     .module('linshareUiUserApp')
     .factory('welcomeMessageService', welcomeMessageService);
 
-  welcomeMessageService.$inject = ['$http', '_'];
+  welcomeMessageService.$inject = ['$http'];
 
-  function welcomeMessageService($http, _) {
+  function welcomeMessageService($http) {
     return function (translationID, language) {
       if (translationID === 'WELCOME_MESSAGE') {
         return $http({
@@ -16,7 +16,7 @@
           url: '/linshare/webservice/rest/user/v2/welcome_messages'
         }).then(function getWelcomeMessage(welcomeMessage) {
           var welcomeMessageData = welcomeMessage['data'][0],
-              WELCOME_MESSAGE = '';
+            WELCOME_MESSAGE = '';
 
           switch(language) {
             case 'en-US':
@@ -31,7 +31,7 @@
             case 'ru-RU':
               WELCOME_MESSAGE = welcomeMessageData['RUSSIAN']
               break;
-            }
+          }
 
           return WELCOME_MESSAGE;
         })

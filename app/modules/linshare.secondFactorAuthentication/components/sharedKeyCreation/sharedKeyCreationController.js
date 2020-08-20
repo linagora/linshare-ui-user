@@ -39,17 +39,17 @@
 
       secondFactorAuthenticationRestService.create()
         .then(function(secondFA) {
-            secondFactorControllerVm.keyCreationStatus = 'done';
-            secondFactorControllerVm.keyCreationDate = secondFA.creationDate;
-            secondFactorControllerVm.freeOTPConfig = angular.extend({
-              account: secondFactorControllerVm.user.mail,
-              secret: secondFA.sharedKey
-            }, FREEOTP_CONFIGURATION)
-            secondFactorControllerVm.freeOTPUri = makeFreeOTPUri(secondFactorControllerVm.freeOTPConfig);
-            secondFactorAuthenticationTransitionService.deregisterHook();
-            $timeout();
-          });
-      }
+          secondFactorControllerVm.keyCreationStatus = 'done';
+          secondFactorControllerVm.keyCreationDate = secondFA.creationDate;
+          secondFactorControllerVm.freeOTPConfig = angular.extend({
+            account: secondFactorControllerVm.user.mail,
+            secret: secondFA.sharedKey
+          }, FREEOTP_CONFIGURATION)
+          secondFactorControllerVm.freeOTPUri = makeFreeOTPUri(secondFactorControllerVm.freeOTPConfig);
+          secondFactorAuthenticationTransitionService.deregisterHook();
+          $timeout();
+        });
+    }
 
     function makeFreeOTPUri(config) {
       return 'otpauth://' + config.type + '/' +

@@ -19,7 +19,7 @@
    * @memberOf linshare.components
    */
   function FilterBoxController(_, $scope, $timeout, autocompleteUserRestService, filterBoxService, moment,
-                               unitService) {
+    unitService) {
     var filterBoxVm = this;
 
     filterBoxVm.$onInit = $onInit

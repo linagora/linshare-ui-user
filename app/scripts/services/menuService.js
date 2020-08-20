@@ -34,6 +34,7 @@
     var
       administrations,
       audit,
+      changePassword,
       externalLink,
       files,
       home,
@@ -176,6 +177,12 @@
         hide: true
       }
 
+      changePassword = {
+        name: changePasswordMenuName,
+        link: 'changePassword',
+        hide: true
+      }
+
       home = {
         name: 'MENU_TITLE.HOME',
         link: 'home',
@@ -223,6 +230,7 @@
       };
 
       tabs = [
+        changePassword,
         myUploads,
         receivedShares,
         files,

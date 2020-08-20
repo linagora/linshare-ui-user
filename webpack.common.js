@@ -35,25 +35,19 @@ module.exports = {
       }
     }, {
       test: /\.js$/,
-      exclude: [/(node_modules|bower_components)/],
-      use: [
-        // {
-        //   loader: `eslint-loader`,
-        //   options: {
-        //     fix: true
-        //   }
-        // }, {
-        {
-          loader: 'ng-annotate-loader',
-          options: {
-            ngAnnotate: "ng-annotate-patched",
-            es6: true,
-            explicitOnly: false
-          }
-        }, {
-          loader: 'babel-loader'
+      exclude: /node_modules/,
+      use: [{
+        loader: 'ng-annotate-loader',
+        options: {
+          ngAnnotate: 'ng-annotate-patched',
+          es6: true,
+          explicitOnly: false
         }
-      ]
+      }, {
+        loader: 'babel-loader'
+      }, {
+        loader: 'eslint-loader'
+      }]
     }, {
       test: /\.(sa|sc|c)ss$/,
       use: [{
@@ -62,13 +56,13 @@ module.exports = {
           ? MiniCssExtractPlugin.loader
           : 'style-loader'
       }, {
-        loader: "css-loader",
+        loader: 'css-loader',
         options: {
           sourceMap: true,
           importLoaders: 1
         }
       }, {
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           sourceMap: true,
           plugins: [
@@ -84,7 +78,7 @@ module.exports = {
           ]
         }
       }, {
-        loader: "sass-loader",
+        loader: 'sass-loader',
         options: {
           sourceMap: true
         }
@@ -117,8 +111,8 @@ module.exports = {
     }),
     new webpack.HashedModuleIdsPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name].[hash].css",
-      chunkFilename: "[id].[hash].css"
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css'
     }),
     new ImageminPlugin({
       maxFileSize: 10000, // Only apply this one to files equal to or under 10kb

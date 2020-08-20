@@ -43,12 +43,12 @@
         checkTableHeightVm.resizeTableBody();
       });
       if (!$rootScope.isMobile || checkTableHeightVm.checkWidthIsBiggerThanMobile()) {
-       angular.element(window).resize(function() {
-         scope.mainVm.sidebarToggle = checkTableHeightVm.checkAndSetNewWidth();
-         checkTableHeightVm.checkAndSetNewWidthSidebarRight();
-         checkTableHeightVm.resizeTableBody();
-       });
-     }
+        angular.element(window).resize(function() {
+          scope.mainVm.sidebarToggle = checkTableHeightVm.checkAndSetNewWidth();
+          checkTableHeightVm.checkAndSetNewWidthSidebarRight();
+          checkTableHeightVm.resizeTableBody();
+        });
+      }
       scope.$watch(function($window) {
         return $window.innerWidth;
       }, function() {

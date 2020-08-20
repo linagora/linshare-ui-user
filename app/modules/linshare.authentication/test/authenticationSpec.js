@@ -14,10 +14,9 @@ describe('Testing Authentication Module: ', function () {
   }));
 
   describe('Test authenticationService', function() {
-    var Restangular, authService;
+    var authService;
 
-    beforeEach(inject(function (_Restangular_, _authService_) {
-      Restangular = _Restangular_;
+    beforeEach(inject(function (_authService_) {
       authService = _authService_;
       httpBackend.expect('GET', 'linshare/authentication/authorized')
         .respond({uuid: '9514', firstName: 'John', lastName: 'Doe'});
@@ -55,14 +54,14 @@ describe('Testing Authentication Module: ', function () {
 
   describe('Test Authentication Controller', function() {
 
-    var $scope, controller;
+    var $scope;
 
     // Inject the controller for each assertion and a mock scope
     beforeEach(inject(
       function($controller, $rootScope) {
         $scope = $rootScope.$new();
-        controller = $controller('AuthenticationController', {$scope: $scope});
-    }));
+        $controller('AuthenticationController', {$scope: $scope});
+      }));
 
     it('should submit if $scope.input not empty', function() {
       expect($scope.submitted).toEqual(false);

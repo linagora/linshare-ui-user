@@ -1,0 +1,88 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "angular": false,
+    "$": false,
+    "Base64": false,
+    "after": false,
+    "afterEach": false,
+    "before": false,
+    "beforeEach": false,
+    "describe": false,
+    "inject": false,
+    "it": false,
+    "spyOn": false,
+    "expect": false
+  },
+  "rules": {
+    "no-bitwise": 2,
+    "camelcase": 2,
+    "curly": 2,
+    "eqeqeq": 2,
+    "guard-for-in": 2,
+    "no-extend-native": 2,
+    "wrap-iife": [
+      2,
+      "any"
+    ],
+    "indent": [
+      2,
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "no-use-before-define": [
+      2,
+      {
+        "functions": false
+      }
+    ],
+    "no-caller": 2,
+    "no-empty": 2,
+    "no-irregular-whitespace": 2,
+    "no-new": 2,
+    "no-plusplus": 0,
+    "quotes": [
+      2,
+      "single"
+    ],
+    "no-undef": 2,
+    "no-unused-vars": 2,
+    "strict": 0,
+    "max-depth": [
+      2,
+      5
+    ],
+    "semi": 0,
+    "no-cond-assign": 0,
+    "no-debugger": 0,
+    "no-eq-null": 2,
+    "no-eval": 0,
+    "no-unused-expressions": 2,
+    "block-scoped-var": 0,
+    "no-iterator": 0,
+    "linebreak-style": 0,
+    "comma-style": [
+      2,
+      "last"
+    ],
+    "no-loop-func": 2,
+    "no-multi-str": 0,
+    "valid-typeof": 0,
+    "no-proto": 0,
+    "no-script-url": 0,
+    "dot-notation": 0,
+    "no-new-func": 0,
+    "no-new-wrappers": 0,
+    "no-invalid-this": 0,
+    "require-yield": 0
+  }
+}

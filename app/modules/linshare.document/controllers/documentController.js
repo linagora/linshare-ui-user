@@ -164,7 +164,9 @@
      * @memberOf linshare.document.documentController
      */
     function reloadTableParamsWhenPossible() {
-      reloadTableParamsTimeoutReference && $timeout.cancel(reloadTableParamsTimeoutReference);
+      if (reloadTableParamsTimeoutReference) {
+        $timeout.cancel(reloadTableParamsTimeoutReference);
+      }
 
       reloadTableParamsTimeoutReference = $timeout(function() {
         reloadTableParamsTimeoutReference = undefined;
@@ -431,18 +433,18 @@
           $scope.reloadDocuments = reloadDocuments;
 
           if ($transition$.params().fileUuid) {
-          if (_.isNil(data.itemToSelect)) {
-            toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
-          } else {
-            toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
-            $scope.addSelectedDocument(data.itemToSelect);
-            $scope.toggleFilterBySelectedFiles();
-            if (!$scope.isMobile) {
-              $scope.showCurrentFile(data.itemToSelect);
+            if (_.isNil(data.itemToSelect)) {
+              toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
+            } else {
+              toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
+              $scope.addSelectedDocument(data.itemToSelect);
+              $scope.toggleFilterBySelectedFiles();
+              if (!$scope.isMobile) {
+                $scope.showCurrentFile(data.itemToSelect);
+              }
             }
           }
-        }
-      });
+        });
     }
 
     /**

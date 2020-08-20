@@ -5,7 +5,6 @@
 (function(angular) {
   'use strict';
 
-  /* global _:false, moment:false */
   angular.module('linshareUiUserApp', [
     'LocalStorageModule',
     'flow',

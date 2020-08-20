@@ -64,25 +64,25 @@
      * @memberOf linshare.components.documentPreviewButton.components.DocumentPreviewNavigationController
      */
     function setupKeyboardNavigation(event) {
-        var arrowLeft = 37;
-        var arrowRight = 39;
-        var method;
+      var arrowLeft = 37;
+      var arrowRight = 39;
+      var method;
 
-        if (event.which === arrowRight && !documentPreviewNavigationVm.item.isLastItem) {
-          method = documentPreviewNavigationVm.setNextItem;
-        }
+      if (event.which === arrowRight && !documentPreviewNavigationVm.item.isLastItem) {
+        method = documentPreviewNavigationVm.setNextItem;
+      }
 
-        if (event.which === arrowLeft && !documentPreviewNavigationVm.item.isFirstItem) {
-          method = documentPreviewNavigationVm.setPreviousItem;
-        }
+      if (event.which === arrowLeft && !documentPreviewNavigationVm.item.isFirstItem) {
+        method = documentPreviewNavigationVm.setPreviousItem;
+      }
 
-        if (method) {
-          event.preventDefault();
-          method(
-            documentPreviewNavigationVm.item,
-            documentPreviewNavigationVm.items
-          );
-        }
+      if (method) {
+        event.preventDefault();
+        method(
+          documentPreviewNavigationVm.item,
+          documentPreviewNavigationVm.items
+        );
       }
     }
+  }
 })();

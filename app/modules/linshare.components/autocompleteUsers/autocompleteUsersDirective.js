@@ -9,7 +9,7 @@
     .module('linshare.components')
     .directive('lsAutocompleteUser', lsAutocompleteUser);
 
-  lsAutocompleteUser.$inject = ['_', 'componentsConfig'];
+  lsAutocompleteUser.$inject = ['_'];
 
   /**
    *  @namespace lsAutocompleteUser
@@ -21,7 +21,7 @@
    * <x-ng-form name="editors" role="form" class="clearfix">
    *   <div class="form-group fg-line">
    */
-  function lsAutocompleteUser(_, componentsConfig) {
+  function lsAutocompleteUser(_) {
     var directive = {
       restrict: 'A',
       scope: {

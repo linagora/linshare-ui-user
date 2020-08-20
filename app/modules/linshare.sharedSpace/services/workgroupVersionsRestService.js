@@ -19,19 +19,19 @@
    */
   function workgroupVersionsRestService($log, Restangular, ServerManagerService) {
     var
-    handler = ServerManagerService.responseHandler,
-    restUrl = 'shared_spaces',
-    restParam = 'nodes',
-    service = {
-      copy: copy,
-      download: download,
-      get: get,
-      getList: getList,
-      remove: remove,
-      restore: restore,
-      getAudit: getAudit,
-      thumbnail: thumbnail
-    };
+      handler = ServerManagerService.responseHandler,
+      restUrl = 'shared_spaces',
+      restParam = 'nodes',
+      service = {
+        copy: copy,
+        download: download,
+        get: get,
+        getList: getList,
+        remove: remove,
+        restore: restore,
+        getAudit: getAudit,
+        thumbnail: thumbnail
+      };
 
     return service;
 

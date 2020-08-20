@@ -128,13 +128,13 @@
             .valueOf();
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION_ALLOW_PROLONGATION')
-        .then(function(data) {
-          var clonedData = _.cloneDeep(data);
-          allowedToProlongExpiration = clonedData;
-          //There is no delegation policy for this one so by it's default the functionality is overridable by a user
-          allowedToProlongExpiration.canOverride = clonedData.enable;
-          allowedToProlongExpiration.value = _.clone(allowedToExpiration.value);
-        }),
+          .then(function(data) {
+            var clonedData = _.cloneDeep(data);
+            allowedToProlongExpiration = clonedData;
+            //There is no delegation policy for this one so by it's default the functionality is overridable by a user
+            allowedToProlongExpiration.canOverride = clonedData.enable;
+            allowedToProlongExpiration.value = _.clone(allowedToExpiration.value);
+          }),
         functionalityRestService.getFunctionalityParams('GUESTS__RESTRICTED').then(function(data) {
           var clonedData = _.cloneDeep(data);
           allowedToRestrict = clonedData;

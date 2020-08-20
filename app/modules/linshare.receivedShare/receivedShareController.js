@@ -300,17 +300,17 @@
             }, {
               getData: function(params) {
                 var filteredData = params.filter() ?
-                    $filter('filter')(
-                      $scope.documentsList,
-                      params.filter()
-                    ) :
-                    $scope.documentsList;
+                  $filter('filter')(
+                    $scope.documentsList,
+                    params.filter()
+                  ) :
+                  $scope.documentsList;
                 var orderedData = params.sorting() ?
-                    $filter('orderBy')(
-                      filteredData,
-                      params.orderBy()
-                    ) :
-                    filteredData;
+                  $filter('orderBy')(
+                    filteredData,
+                    params.orderBy()
+                  ) :
+                  filteredData;
 
                 params.total(orderedData.length);
 
@@ -401,25 +401,25 @@
               folderName: data.folder.name
             }
           }, 'TOAST_ALERT.ACTION_BUTTON').then(function(response) {
-            if (!_.isUndefined(response)) {
-              if (response.actionClicked) {
-                var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
-                var routeStateSuffix = data.folder.parent === data.folder.workGroup ? 'root' : 'folder';
+          if (!_.isUndefined(response)) {
+            if (response.actionClicked) {
+              var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
+              var routeStateSuffix = data.folder.parent === data.folder.workGroup ? 'root' : 'folder';
 
-                $state.go(
-                  'sharedspace.workgroups.' + routeStateSuffix,
-                  {
-                    workgroupUuid: data.folder.workGroup,
-                    workgroupName: data.folder.workgroupName,
-                    parentUuid: data.folder.parent,
-                    folderUuid: data.folder.uuid,
-                    folderName: data.folder.name,
-                    uploadedFileUuid: nodeToSelectUuid
-                  }
-                );
-              }
+              $state.go(
+                'sharedspace.workgroups.' + routeStateSuffix,
+                {
+                  workgroupUuid: data.folder.workGroup,
+                  workgroupName: data.folder.workgroupName,
+                  parentUuid: data.folder.parent,
+                  folderUuid: data.folder.uuid,
+                  folderName: data.folder.name,
+                  uploadedFileUuid: nodeToSelectUuid
+                }
+              );
             }
-          });
+          }
+        });
       }
 
       /**

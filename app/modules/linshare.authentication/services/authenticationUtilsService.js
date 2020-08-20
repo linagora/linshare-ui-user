@@ -8,7 +8,7 @@
     .module('linshare.authentication')
     .factory('authenticationUtilsService', authenticationUtilsService);
 
-    authenticationUtilsService.$inject = ['_']
+  authenticationUtilsService.$inject = ['_']
 
   var loginErrors = [
     {
@@ -37,7 +37,7 @@
     }
   ];
 
-    /**
+  /**
    * @namespace authenticationUtilsService
    * @desc Utils for authentication service
    * @memberOf Linshare.authentication

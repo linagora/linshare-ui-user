@@ -23,17 +23,13 @@
    * @memberOf LinShare.contactsLists
    */
   // TODO: Should dispatch some function to other service or controller
-  /* jshint maxparams: false, maxstatements: false */
   function contactsListsContactsController(_, $filter, $scope, $timeout, $transition$, $transitions, $translate,
     contactsListsContacts, contactsListsListRestService,
     contactsListsContactsRestService, contactsListsService, documentUtilsService, itemUtilsService, lsAppConfig,
     NgTableParams, toastService) {
-    /* jshint validthis:true */
     var contactsListsContactsVm = this;
-    var
-      privateList,
-      publicList,
-      stillExists;
+    var stillExists;
+
     contactsListsContactsVm.addContacts = $transition$.params().addContacts;
     contactsListsContactsVm.addRecipientToCreateUsersList = addRecipientToCreateUsersList;
     contactsListsContactsVm.addSelectedDocument = addSelectedDocument;
@@ -103,12 +99,8 @@
       loadTable();
 
       $translate([
-        'CONTACTS_LISTS_DETAILS.PRIVATE',
-        'CONTACTS_LISTS_DETAILS.PUBLIC',
         'TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS'
       ]).then(function(translations) {
-        privateList = translations['CONTACTS_LISTS_DETAILS.PRIVATE'];
-        publicList = translations['CONTACTS_LISTS_DETAILS.PUBLIC'];
         stillExists = translations['TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS'];
       });
     }
@@ -508,7 +500,7 @@
         contactsListsContactsVm.setSubmitted(form);
       }
     }
-     /**
+    /**
      * @name cancelContact
      * @desc reset form values
      * @memberOf LinShare.contactsLists.contactsListsContactsController

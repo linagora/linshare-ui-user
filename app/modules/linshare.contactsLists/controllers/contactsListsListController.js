@@ -136,13 +136,13 @@
 
       $translate.refresh().then(function() {
         $translate(['ACTION.NEW_CONTACTS_LIST',
-            'CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS',
-            'CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS',
-            'CONTACTS_LISTS_DETAILS.PRIVATE',
-            'CONTACTS_LISTS_DETAILS.PUBLIC',
-            'TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS',
-            'ACTION.COPY_ADJ', 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST'
-          ])
+          'CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS',
+          'CONTACTS_LISTS_ACTION.FILTER_BY.OTHER_LISTS',
+          'CONTACTS_LISTS_DETAILS.PRIVATE',
+          'CONTACTS_LISTS_DETAILS.PUBLIC',
+          'TOAST_ALERT.WARNING.CONTACT_STILL_EXISTS',
+          'ACTION.COPY_ADJ', 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST'
+        ])
           .then(function(translations) {
             newContactsListName = translations['ACTION.NEW_CONTACTS_LIST'];
             contactsListsListVm.myLists = translations['CONTACTS_LISTS_ACTION.FILTER_BY.MY_LISTS'];
@@ -503,7 +503,6 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function saveContacts(duplicate, contactListUuidDestination) {
-      var errorOccured = false;
       var nbContacts = contactsListsListVm.contactsToAddList.length;
       contactListUuidDestination = contactListUuidDestination || contactsListsListVm.contactsListUuidAddContacts;
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
@@ -526,7 +525,6 @@
               mail: contact.mail
             });
           }
-          errorOccured = true;
         });
       });
     }

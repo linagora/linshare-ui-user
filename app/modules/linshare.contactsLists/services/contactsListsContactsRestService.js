@@ -60,8 +60,8 @@
         'mail'
       ];
       var contactDto = contact.account
-          ? _.pick(contact.account, propertyToPick)
-          : _.pick(contact, propertyToPick);
+        ? _.pick(contact.account, propertyToPick)
+        : _.pick(contact, propertyToPick);
 
       return handler(Restangular.one(restUrl, contactsListUuid).all(restParam).post(contactDto));
     }

@@ -6,8 +6,8 @@ angular
   // TODO: Should dispatch some function to other service or controller
   /* jshint maxparams: false */
   .config(function(_, RestangularProvider, flowFactoryProvider, $compileProvider, $translateProvider,
-                   $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider,
-                   uibDatepickerPopupConfig) {
+    $translatePartialLoaderProvider, lsAppConfig, lsUserConfig, $windowProvider,
+    uibDatepickerPopupConfig) {
     uibDatepickerPopupConfig.showButtonBar = false;
     lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
@@ -29,7 +29,7 @@ angular
       'Content-Type': 'application/json;'
     });
     RestangularProvider.setRestangularFields({
-        id: 'uuid'
+      id: 'uuid'
     });
     RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers) {
       headers['WWW-No-Authenticate'] = 'linshare';
@@ -109,14 +109,14 @@ angular
     var $window = $windowProvider.$get();
     var isActivatedDebugModeFromLocalStorage = $window.localStorage.getItem('lsUser.debugMode');
     var isDebugModeActivated = !_.isNil(isActivatedDebugModeFromLocalStorage) ?
-        isActivatedDebugModeFromLocalStorage :
-        lsAppConfig.debug;
+      isActivatedDebugModeFromLocalStorage :
+      lsAppConfig.debug;
 
     $logProvider.debugEnabled(isDebugModeActivated );
   })
 
   .run(function($rootScope, $filter, $location, $state, Restangular, $log, $window, localStorageService,
-                languageService, toastService, lsAppConfig) {
+    languageService, toastService, lsAppConfig) {
     const browserLanguageFullKey = $window.navigator.language || $window.navigator.userLanguage;
     const browserLanguageKey = browserLanguageFullKey.split('-')[0];
     const browserLanguage = lsAppConfig.languages[browserLanguageKey];
@@ -127,8 +127,8 @@ angular
       storedLocale ?
         storedLocale :
         browserLanguage ?
-        browserLanguage :
-        lsAppConfig.languages.en
+          browserLanguage :
+          lsAppConfig.languages.en
     );
 
     /**
@@ -171,7 +171,7 @@ angular
     });
 
     /*jshint unused: false */
-    Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+    Restangular.addResponseInterceptor(function(data, operation, what, url, response) {
       $log.debug('addResponseInterceptor => response', response);
       if (response.status === 401) {
         $rootScope.$emit('lsIntercept401');

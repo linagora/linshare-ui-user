@@ -70,16 +70,16 @@
     function checkAuthentication(hideError, ignoreAuthModule) {
       $log.debug('AuthenticationRestService : checkAuthentication');
       return handler(Restangular.all(restUrl).withHttpConfig({
-          ignoreAuthModule: ignoreAuthModule
+        ignoreAuthModule: ignoreAuthModule
       }).customGET('authorized'), undefined, hideError)
-      .then(function(userLoggedIn) {
-        deferred.resolve(userLoggedIn);
-        return (userLoggedIn);
-      }).catch(function(error) {
-        deferred.reject(error);
-        $log.debug('current user not authenticated', error);
-        return error;
-      });
+        .then(function(userLoggedIn) {
+          deferred.resolve(userLoggedIn);
+          return (userLoggedIn);
+        }).catch(function(error) {
+          deferred.reject(error);
+          $log.debug('current user not authenticated', error);
+          return error;
+        });
     }
 
     /**
@@ -146,34 +146,34 @@
         ServerManagerService.getHeaders(),
         handler(Restangular.all(restUrl).withHttpConfig().customGET('logout'))
       ])
-      .then(function(promises) {
-        var
-          headers = promises[0],
-          headersLogoutUrl = headers['x-linshare-post-logout-url'],
-          location;
+        .then(function(promises) {
+          var
+            headers = promises[0],
+            headersLogoutUrl = headers['x-linshare-post-logout-url'],
+            location;
 
-        if (headersLogoutUrl) {
-          if (_.startsWith(headersLogoutUrl, 'http')) {
-            $log.debug('AuthenticationRestService : logout - Using X-LINSHARE-POST-LOGOUT-URL for redirection');
-            location = headersLogoutUrl;
+          if (headersLogoutUrl) {
+            if (_.startsWith(headersLogoutUrl, 'http')) {
+              $log.debug('AuthenticationRestService : logout - Using X-LINSHARE-POST-LOGOUT-URL for redirection');
+              location = headersLogoutUrl;
+            }
           }
-        }
-        if (_.isUndefined(location) && lsAppConfig.postLogoutUrl) {
-          $log.debug('AuthenticationRestService : logout - Using lsAppConfig.postLogoutUrl for redirection');
-          location = lsAppConfig.postLogoutUrl;
-        }
-        if (_.isUndefined(location)) {
-          $log.debug('AuthenticationRestService : logout - Using current location root for redirection');
-          var absUrl = $location.absUrl();
-          location = absUrl.split('#')[0];
-        }
+          if (_.isUndefined(location) && lsAppConfig.postLogoutUrl) {
+            $log.debug('AuthenticationRestService : logout - Using lsAppConfig.postLogoutUrl for redirection');
+            location = lsAppConfig.postLogoutUrl;
+          }
+          if (_.isUndefined(location)) {
+            $log.debug('AuthenticationRestService : logout - Using current location root for redirection');
+            var absUrl = $location.absUrl();
+            location = absUrl.split('#')[0];
+          }
 
-        authService.loginCancelled();
-        $log.debug('Authentication logout: success');
-        $window.location.href = location;
-      }).catch(function(error) {
-        $log.error('Authentication logout : failed', error.status);
-      });
+          authService.loginCancelled();
+          $log.debug('Authentication logout: success');
+          $window.location.href = location;
+        }).catch(function(error) {
+          $log.error('Authentication logout : failed', error.status);
+        });
     }
 
     /**

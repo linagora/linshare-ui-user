@@ -200,7 +200,7 @@
       return (stack.length === 1) && doToastShowFromTheStack();
     }
 
-     /**
+    /**
      * @name doToastShowFromTheStack
      * @desc Show all Toasts stacked in the stack
      * @returns {Void}

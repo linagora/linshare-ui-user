@@ -84,7 +84,7 @@
           browseVm.canCreateFolder =
             (browseVm.isSharedSpace && browseVm.canCreateWorkGroup) ||
             (!browseVm.isSharedSpace);
-      });
+        });
 
       $translate([
         'ACTION.NEW_FOLDER'

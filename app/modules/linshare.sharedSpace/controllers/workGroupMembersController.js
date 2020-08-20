@@ -13,6 +13,7 @@
     .controller('WorkGroupMembersController', workGroupMembersController);
 
   workGroupMembersController.$inject = [
+    '$log',
     '$filter',
     '$q',
     '$scope',
@@ -32,6 +33,7 @@
    * @memberOf LinShare.sharedSpace
    */
   function workGroupMembersController(
+    $log,
     $filter,
     $q,
     $scope,
@@ -88,12 +90,12 @@
         });
         workgroupMemberVm.membersRights =
           defaultConfiguredRoleIndex === 0 || defaultConfiguredRoleIndex === -1
-          ? roles
-          : [].concat(
-            roles[defaultConfiguredRoleIndex],
-            roles.slice(0, defaultConfiguredRoleIndex),
-            roles.slice(defaultConfiguredRoleIndex + 1, roles.length)
-          );
+            ? roles
+            : [].concat(
+              roles[defaultConfiguredRoleIndex],
+              roles.slice(0, defaultConfiguredRoleIndex),
+              roles.slice(defaultConfiguredRoleIndex + 1, roles.length)
+            );
         workgroupMemberVm.memberRole = workgroupMemberVm.membersRights[0];
       });
       // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
@@ -284,8 +286,8 @@
 
     // TODO DOC
     function updateRoleFilterOnCurrentMembers(role) {
-      workgroupMemberVm.membersSearchFilter.role.uuid === role.uuid ?
-        workgroupMemberVm.membersSearchFilter.role.uuid = undefined:
+      workgroupMemberVm.membersSearchFilter.role.uuid = workgroupMemberVm.membersSearchFilter.role.uuid === role.uuid ?
+        undefined :
         workgroupMemberVm.membersSearchFilter.role.uuid = role.uuid;
     }
   }

@@ -1,14 +1,14 @@
 (function() {
-'use strict';
+  'use strict';
 
-angular
-  .module(
-    'linshare.components',
-    [
-      'ngMaterial',
-      'linshare.utils'
-    ]
-  );
+  angular
+    .module(
+      'linshare.components',
+      [
+        'ngMaterial',
+        'linshare.utils'
+      ]
+    );
 })();
 
 require('./constants');

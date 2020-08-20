@@ -133,7 +133,7 @@
 
       $scope.$watch(function() {
         return $window.innerWidth;
-      }, function(newWidth) {
+      }, function() {
         $rootScope.isMobile = deviceDetector.isMobile();
         $scope.mainVm.sidebarToggle = checkTableHeightService.checkAndSetNewWidth();
         $timeout(function() {
@@ -165,7 +165,9 @@
          * @memberOf linshare.uiUserApp.activate.fileSuccessAction
          */
         function notify(file) {
-          notifyTimeoutReference && $timeout.cancel(notifyTimeoutReference);
+          if (notifyTimeoutReference) {
+            $timeout.cancel(notifyTimeoutReference);
+          }
 
           notifyTimeoutReference = $timeout(function() {
             doNotification(file);
@@ -173,7 +175,7 @@
         }
       });
 
-    /**
+      /**
      * @name doNotification
      * @desc Notify user about upload success when this function is not re-called in a second
      * @param {Object} file - A successfully uploaded flowFile object
@@ -185,7 +187,7 @@
         var stack = file.flowObj.opts.stack;
         if (_.find(stack, file)) {
           var files = _.remove(stack, function(flowFile) {
-             return flowFile.linshareDocument;
+            return flowFile.linshareDocument;
           });
 
           var toastMsg;
@@ -257,8 +259,8 @@
           MenuService.getProperties($rootScope.toState, false),
           MenuService.getProperties($rootScope.toState, true)
         ]).then(function(promises) {
-            $scope.currentState = promises[0];
-            $scope.linkActive = promises[1];
+          $scope.currentState = promises[0];
+          $scope.linkActive = promises[1];
         });
       });
 

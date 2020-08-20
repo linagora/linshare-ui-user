@@ -174,7 +174,7 @@
      * @memberOf linshare.components.documentPreviewButton.services.documentPreviewService
      */
     function setNextItem(item, items) {
-     setItem(
+      setItem(
         item.index + 1,
         items
       );

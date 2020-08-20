@@ -14,15 +14,10 @@
 
   homeController.$inject = [
     '_',
-    '$q',
     '$scope',
-    '$stateParams',
-    '$timeout',
-    '$translate',
     'functionalities',
     'lsAppConfig',
     'user',
-    'welcomeMessageService'
   ];
 
   /**
@@ -32,15 +27,10 @@
    */
   function homeController(
     _,
-    $q,
     $scope,
-    $stateParams,
-    $timeout,
-    $translate,
     functionalities,
     lsAppConfig,
-    user,
-    welcomeMessageService
+    user
   )
   {
     $scope.lsAppConfig = lsAppConfig;

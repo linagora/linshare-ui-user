@@ -116,7 +116,9 @@
         }]
       };
 
-      guestVm.withEmail && guestVm.loadSidebarContent(guestVm.guestCreate);
+      if (guestVm.withEmail) {
+        guestVm.loadSidebarContent(guestVm.guestCreate);
+      }
     }
 
     /**
@@ -154,7 +156,7 @@
               guestVm.tableParams.reload();
               $scope.mainVm.sidebar.hide(guestObjects);
               toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.DELETE'});
-          });
+            });
         });
       });
     }

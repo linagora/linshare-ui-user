@@ -51,17 +51,17 @@
      * @memberOf LinShare.components.remainingTimeFilter
      */
     function remainingTimeToShow(seconds) {
-        if (!Number.isFinite(seconds)) {
-          return '-';
-        }
+      if (!Number.isFinite(seconds)) {
+        return '-';
+      }
 
-        if (seconds < NB_SECONDS_IN_MIN) {
-          return Math.round(seconds) + ' s';
-        } else if (NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
-          return secToMin(seconds);
-        } else if (NB_SECONDS_IN_HOUR <= seconds < NB_SECONDS_IN_DAY) {
-          return secToHour(seconds);
-        }
+      if (seconds < NB_SECONDS_IN_MIN) {
+        return Math.round(seconds) + ' s';
+      } else if (NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
+        return secToMin(seconds);
+      } else if (NB_SECONDS_IN_HOUR <= seconds < NB_SECONDS_IN_DAY) {
+        return secToHour(seconds);
+      }
     }
 
     return remainingTimeToShow;

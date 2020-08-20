@@ -100,13 +100,13 @@
       function notifyAction(contactsList) {
         toastService
           .success(
-          {
-            key: 'TOAST_ALERT.ACTION.CONTACTS_LIST_CREATION',
-            params: {
-              contactsListName: contactsList.name
-            }
-          },
-          'TOAST_ALERT.ACTION_BUTTON'
+            {
+              key: 'TOAST_ALERT.ACTION.CONTACTS_LIST_CREATION',
+              params: {
+                contactsListName: contactsList.name
+              }
+            },
+            'TOAST_ALERT.ACTION_BUTTON'
           )
           .then(function(response) {
             if (response && response.actionClicked) {

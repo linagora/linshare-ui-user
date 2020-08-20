@@ -64,14 +64,14 @@
      */
     function download(documentFile) {
       var url = anonymousUrlService.downloadUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password,
-                                                documentFile.uuid);
+        documentFile.uuid);
 
-      var downloadLinkParent = document.querySelector("[id='" + documentFile.uuid + "']");
-      var downloadLink = downloadLinkParent.appendChild(document.createElement("a"));
+      var downloadLinkParent = document.querySelector('[id=\'' + documentFile.uuid + '\']');
+      var downloadLink = downloadLinkParent.appendChild(document.createElement('a'));
       downloadLink.setAttribute('href', url);
 
-      if ( typeof(downloadLink.download) !== "undefined" ) {
-         downloadLink.setAttribute('download', documentFile.name);
+      if ( typeof(downloadLink.download) !== 'undefined' ) {
+        downloadLink.setAttribute('download', documentFile.name);
       }
 
       downloadLink.click();
@@ -158,21 +158,21 @@
             anonymousUrlVm.password = modalPasswordVm.password;
             anonymousUrlService.getAnonymousUrl(anonymousUrlVm.urlData.uuid, anonymousUrlVm.password)
               .then(function(data) {
-                 if (data.status === 403) {
-                   if (!_.isUndefined(modalPasswordVm.password) && modalPasswordVm.password !== '') {
-                     modalPasswordVm.invalid = true;
-                   }
-                   $log.debug('Bad input for anonymous url password', data);
-                 } else if (data.status === 404) {
-                   $state.go('anonymousUrl.home', {
-                     'error': data.status
-                   });
-                   $log.debug('Anonymous url password doesn\'t exist', data);
-                 } else {
-                   modalPasswordVm.invalid = false;
-                   anonymousUrlVm.tableParams = anonymousUrlVm.loadTable();
-                   $uibModalInstance.close();
-                 }
+                if (data.status === 403) {
+                  if (!_.isUndefined(modalPasswordVm.password) && modalPasswordVm.password !== '') {
+                    modalPasswordVm.invalid = true;
+                  }
+                  $log.debug('Bad input for anonymous url password', data);
+                } else if (data.status === 404) {
+                  $state.go('anonymousUrl.home', {
+                    'error': data.status
+                  });
+                  $log.debug('Anonymous url password doesn\'t exist', data);
+                } else {
+                  modalPasswordVm.invalid = false;
+                  anonymousUrlVm.tableParams = anonymousUrlVm.loadTable();
+                  $uibModalInstance.close();
+                }
               }).catch(function(data) {
                 $log.debug('Error on password submit', data);
               });

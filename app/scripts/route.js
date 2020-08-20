@@ -36,19 +36,19 @@
           languageService.changeLocale(language);
           authRedirect($state, null, authenticationRestService, lsAppConfig.homePage);
         }]).otherwise(function($injector) {
-          $injector.invoke([
-            '$state',
-            'authenticationRestService',
-            'lsAppConfig',
-            function(
-              $state,
-              authenticationRestService,
-              lsAppConfig
-            ) {
-              authRedirect($state, null, authenticationRestService, lsAppConfig.homePage);
-            }
-          ]);
-        });
+        $injector.invoke([
+          '$state',
+          'authenticationRestService',
+          'lsAppConfig',
+          function(
+            $state,
+            authenticationRestService,
+            lsAppConfig
+          ) {
+            authRedirect($state, null, authenticationRestService, lsAppConfig.homePage);
+          }
+        ]);
+      });
 
     $stateProvider
       .state('common', {
@@ -75,10 +75,10 @@
         },
         resolve: {
           authentication: function($state, $transition$, authenticationRestService, lsAppConfig) {
-           if (!$transition$.params().loginRequired) {
-           $transition$.abort();
-             authRedirect($state, $transition$, authenticationRestService, lsAppConfig.homePage);
-           }
+            if (!$transition$.params().loginRequired) {
+              $transition$.abort();
+              authRedirect($state, $transition$, authenticationRestService, lsAppConfig.homePage);
+            }
           }
         }
       })
@@ -422,7 +422,7 @@
               $state.go('home');
             } else {
               if (!functionalities.GUESTS.enable) {
-              $transition$.abort();
+                $transition$.abort();
                 $state.go('home');
               }
             }

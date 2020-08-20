@@ -53,7 +53,9 @@
     function updateHideDelay(delay) {
       delay = delay || 120000;
 
-      hideIntervalReference && $timeout.cancel(hideIntervalReference);
+      if (hideIntervalReference) {
+        $timeout.cancel(hideIntervalReference);
+      }
 
       hideIntervalReference = $timeout(function() {
         toastVm.toastClose();

@@ -18,12 +18,13 @@
 
     ////////////
 
-    /*jshint unused: false */
+    /* eslint-disable */
     function activate(){
       $scope.loadSidebarContent(lsAppConfig.details);
     }
+    /* eslint-enable */
 
-		/**
+    /**
      * @name loadSidebarContent
      * @desc Update the content of the sidebar
      * @param {string} content - The id of the content to load, see app/views/includes/sidebar-right.html

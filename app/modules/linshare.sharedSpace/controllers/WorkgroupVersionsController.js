@@ -320,7 +320,9 @@
       if (flowFile.folderDetails.workgroupUuid === workgroupVersionsVm.folderDetails.workgroupUuid &&
         flowFile.folderDetails.folderUuid === workgroupVersionsVm.folderDetails.folderUuid) {
         flowFile.asyncUploadDeferred.promise.then(function(file) {
-          file.linshareDocument.type === TYPE_VERSION && addNewItemInTableParams(file.linshareDocument);
+          if (file.linshareDocument.type === TYPE_VERSION) {
+            addNewItemInTableParams(file.linshareDocument);
+          }
         });
       }
     }
@@ -483,7 +485,7 @@
         };
         routeStateSuffix = folderDetails.parentUuid !== folderDetails.workgroupUuid ? 'folder' : 'root';
       }
-        $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
+      $state.go('sharedspace.workgroups.' + routeStateSuffix, folderDetails);
     }
 
     /**
@@ -499,8 +501,8 @@
       if(workgroupVersionsVm.versionsList.length === versions.length) {
         isLastVersion = true;
         messageKey = versions.length === 1
-        ? documentUtilsService.itemUtilsConstant.WORKGROUP_VERSION_LAST
-        : documentUtilsService.itemUtilsConstant.WORKGROUP_VERSION_ALL;
+          ? documentUtilsService.itemUtilsConstant.WORKGROUP_VERSION_LAST
+          : documentUtilsService.itemUtilsConstant.WORKGROUP_VERSION_ALL;
       }
 
       documentUtilsService.deleteItem(
@@ -545,7 +547,7 @@
           _.remove(workgroupVersionsVm.versionsList, function(version) {
             return isDocumentContainedInCollection(deletedVersions, version);
           });
-          
+
           workgroupVersionsVm.resetSelectedDocuments();
           workgroupVersionsVm.tableParamsService.reloadTableParams();
           $scope.mainVm.sidebar.hide(versions);
@@ -557,7 +559,9 @@
           };
         })
         .finally(function(deleteVersionsResponse) {
-          isLastVersion && goToFolder(workgroupVersionsVm.breadcrumb[workgroupVersionsVm.breadcrumb.length-2]);
+          if (isLastVersion) {
+            goToFolder(workgroupVersionsVm.breadcrumb[workgroupVersionsVm.breadcrumb.length-2]);
+          }
 
           return deleteVersionsResponse;
         })
@@ -594,7 +598,7 @@
      * @param {Version} version - {@link Version} object
      * @memberOf LinShare.sharedSpace.WorkgroupVersionsController
      */
-    function showSelectedVersionDetails(selectedVersion) { 
+    function showSelectedVersionDetails(selectedVersion) {
       workgroupVersionsVm.getNodeDetails(selectedVersion).then(function(data) {
         workgroupVersionsVm.currentSelectedDocument.current = data;
         workgroupVersionsVm.mdtabsSelection = {
@@ -677,7 +681,7 @@
      * @memberOf LinShare.sharedSpace.WorkgroupVersionsController
      */
     function showSuccessNotificationForDeletedVersions(deletedVersions, isLastVersiondeleted) {
-      var message = "";
+      var message = '';
       if(isLastVersiondeleted){
         message = 'TOAST_ALERT.ACTION.DELETE_LAST_VERSION';
       } else {
@@ -752,9 +756,9 @@
         notifyCopySuccess(versionItems.length);
       }).catch(function(error) {
         switch(error.data.errCode) {
-        case 26444 :
-          toastService.error({key: 'TOAST_ALERT.ERROR.COPY.26444'});
-          break;
+          case 26444 :
+            toastService.error({key: 'TOAST_ALERT.ERROR.COPY.26444'});
+            break;
         }
       });
     }

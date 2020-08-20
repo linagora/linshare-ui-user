@@ -105,8 +105,8 @@
         function getThumbnailPdf() {
           return Restangular
             .one(
-             getFullRoute(model),
-             'thumbnail'
+              getFullRoute(model),
+              'thumbnail'
             )
             .one('pdf')
             .withHttpConfig({

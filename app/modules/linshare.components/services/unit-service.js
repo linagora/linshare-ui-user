@@ -91,23 +91,23 @@
     function find(value) {
       var
         length = value.toString().length,
-         multiple3 = {
-           1: 3,
-           2: 3,
-           4: 6,
-           5: 6,
-           7: 9,
-           8: 9,
-           10: 12,
-           11: 12,
-           13: 15,
-           14: 15,
-           16: 18,
-           17: 18,
-           19: 21,
-           20: 21,
-           22: 24,
-           23: 24,
+        multiple3 = {
+          1: 3,
+          2: 3,
+          4: 6,
+          5: 6,
+          7: 9,
+          8: 9,
+          10: 12,
+          11: 12,
+          13: 15,
+          14: 15,
+          16: 18,
+          17: 18,
+          19: 21,
+          20: 21,
+          22: 24,
+          23: 24,
         },
         size = {
           3: units.B.value,
@@ -127,7 +127,7 @@
       if (size.hasOwnProperty(length)) {
         return size[length];
       } else {
-          return units.YB.value;
+        return units.YB.value;
       }
     }
 

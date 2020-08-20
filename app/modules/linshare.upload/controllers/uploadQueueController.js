@@ -24,10 +24,10 @@
    * @memberOf LinShare.upload.uploadQueueController
    */
   // TODO: Should dispatch some function to other service or controller
-  /* jshint maxparams: false, maxstatements: false */
+
   function uploadQueueController(_, $log, $q, $scope, $state, $timeout, $transition$, $translate,
-                                 authenticationRestService, flowUploadService,
-                                 functionalityRestService, lsAppConfig, swal, toastService) {
+    authenticationRestService, flowUploadService,
+    functionalityRestService, lsAppConfig, swal, toastService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $transition$.idUpload;
@@ -154,9 +154,9 @@
             functionalities = promises[1];
           uploadQueueVm.location.mySpace = user.canUpload;
           uploadQueueVm.location.workgroup = functionalities.WORK_GROUP.enable;
-      }).catch(function(error) {
-        $log.debug(error)
-      });
+        }).catch(function(error) {
+          $log.debug(error)
+        });
     }
 
     /**
@@ -179,21 +179,21 @@
 
       //TODO - TO REMOVE: Deprecated use md-dialog from angular material
       swal({
-          html: true,
-          title: title,
-          text: message,
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonText: uploadQueueVm.warningContinueMainButton,
-          cancelButtonText: uploadQueueVm.warningCancel,
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-            continueShareAction(executeShare, shareType);
-          }
+        html: true,
+        title: title,
+        text: message,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: uploadQueueVm.warningContinueMainButton,
+        cancelButtonText: uploadQueueVm.warningCancel,
+        closeOnConfirm: true,
+        closeOnCancel: true
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          continueShareAction(executeShare, shareType);
         }
+      }
       );
     }
 

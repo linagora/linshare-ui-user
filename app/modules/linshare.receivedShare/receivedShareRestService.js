@@ -49,7 +49,7 @@
      */
     function copy(documents) {
       if (documents.length === 1) {
-         $log.debug('LinshareReceivedShareRestService : copy', documents[0].uuid);
+        $log.debug('LinshareReceivedShareRestService : copy', documents[0].uuid);
         return handler.simple(Restangular.one(restUrl.documents).all('copy').post({
           kind: 'RECEIVED_SHARE',
           uuid: documents[0].uuid

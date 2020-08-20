@@ -55,8 +55,8 @@
         shareListVm.selectedDocuments = shareListVm.currentShare.documents;
         shareListVm.loadSidebarContent(shareListVm.activeShareDetails);
         $translate(['SWEET_ALERT.ON_SHARE_DELETE.TITLE', 'SWEET_ALERT.ON_SHARE_DELETE.TEXT',
-            'SWEET_ALERT.ON_SHARE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_SHARE_DELETE.CANCEL_BUTTON'
-          ])
+          'SWEET_ALERT.ON_SHARE_DELETE.CONFIRM_BUTTON', 'SWEET_ALERT.ON_SHARE_DELETE.CANCEL_BUTTON'
+        ])
           .then(function(translations) {
             swalTitle = translations['SWEET_ALERT.ON_SHARE_DELETE.TITLE'];
             swalText = translations['SWEET_ALERT.ON_SHARE_DELETE.TEXT'];
@@ -92,20 +92,20 @@
     function confirmCancel(item, callback) {
       //TODO - TO REMOVE: Deprecated use md-dialog from angular material
       swal({
-          title: swalTitle,
-          text: swalText,
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonText: swalConfirm,
-          cancelButtonText: swalCancel,
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-            callback(item);
-          }
+        title: swalTitle,
+        text: swalText,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: swalConfirm,
+        cancelButtonText: swalCancel,
+        closeOnConfirm: true,
+        closeOnCancel: true
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          callback(item);
         }
+      }
       );
     }
 

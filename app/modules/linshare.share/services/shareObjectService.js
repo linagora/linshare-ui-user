@@ -28,26 +28,26 @@ angular.module('linshare.share')
     function getFunctionalities() {
       return $q.all([functionalityRestService.getAll(), authenticationRestService.getCurrentUser()])
         .then(function(promises) {
-        var functionalities = promises[0];
+          var functionalities = promises[0];
 
-        angular.extend(notificationDateForUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION);
-        notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
-        angular.extend(enableUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
-        angular.extend(creationAcknowledgement,functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
-        angular.extend(expirationDate, functionalities.SHARE_EXPIRATION);
-        expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit)
-          .subtract(1, 'days').valueOf();
+          angular.extend(notificationDateForUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION);
+          notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
+          angular.extend(enableUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
+          angular.extend(creationAcknowledgement,functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
+          angular.extend(expirationDate, functionalities.SHARE_EXPIRATION);
+          expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit)
+            .subtract(1, 'days').valueOf();
 
-        angular.extend(secured, functionalities.ANONYMOUS_URL);
-        if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
-          secured.enable = false;
-        }
+          angular.extend(secured, functionalities.ANONYMOUS_URL);
+          if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
+            secured.enable = false;
+          }
 
-        forceAnonymousSharing = Object.assign(
-          {},
-          functionalities.ANONYMOUS_URL__FORCE_ANONYMOUS_SHARING
-        );
-      });
+          forceAnonymousSharing = Object.assign(
+            {},
+            functionalities.ANONYMOUS_URL__FORCE_ANONYMOUS_SHARING
+          );
+        });
     }
 
     function ShareObjectForm(shareJson) {

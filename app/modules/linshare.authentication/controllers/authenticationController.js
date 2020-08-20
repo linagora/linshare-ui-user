@@ -4,11 +4,11 @@
  * @memberOf LinShare
  */
 (function(){
-'use strict';
+  'use strict';
 
-angular
-  .module('linshare.authentication')
-  .controller('AuthenticationController', AuthenticationController);
+  angular
+    .module('linshare.authentication')
+    .controller('AuthenticationController', AuthenticationController);
 
   AuthenticationController.$inject = ['$scope', '$log', 'authenticationRestService'];
 
