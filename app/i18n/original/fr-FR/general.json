@@ -81,6 +81,27 @@
       "INVALID_EMAIL": "L'adresse de courriel saisie est invalide",
       "INVALID_EMPTY": "Aucun utilisateur correspondant",
       "CREATE_GUEST": "L'ajouter en tant qu'invité ?"
+    },
+    "DATE_PICKER": {
+      "SUN": "DIM.",
+      "MON": "LUN.",
+      "TUE": "MAR.",
+      "WED": "MER.",
+      "THU": "JEU.",
+      "FRI": "VEN.",
+      "SAT": "SAM.",
+      "JANUARY": "JANVIER",
+      "FEBRUARY": "FÉVRIER",
+      "MARCH": "MARS",
+      "APRIL": "AVRIL",
+      "MAY": "MAI",
+      "JUNE": "JUIN",
+      "JULY": "JUILLET",
+      "AUGUST": "AOÛT",
+      "SEPTEMBER": "SEPTEMBRE",
+      "OCTOBER": "OCTOBRE",
+      "NOVEMBER": "NOVEMBRE",
+      "DECEMBER": "DÉCEMBRE"
     }
   },
   "DOMAIN": "Domaine",

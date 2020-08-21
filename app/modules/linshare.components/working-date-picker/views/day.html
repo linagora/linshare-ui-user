@@ -8,7 +8,7 @@
       <th colspan="{{::5 + showWeeks}}">
         <button id="{{::uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" type="button"
                 ng-click="toggleMode()" ng-disabled="datepickerMode === maxMode" tabindex="-1" class="w-100 btn-dp">
-          <div class="dp-title">{{title}}</div>
+          <div class="dp-title">{{('COMPONENTS.DATE_PICKER.' + title.split(" ")[0].toUpperCase()) | translate}} {{title.split(" ")[1]}}</div>
         </button>
       </th>
       <th>
@@ -20,7 +20,7 @@
     <tr class="tr-dpday">
       <th ng-if="showWeeks" class="text-center"></th>
       <th ng-repeat="label in ::labels track by $index" class="text-center">
-        <small aria-label="{{::label.full}}">{{::label.abbr}}</small>
+        <small aria-label="{{::label.full}}" translate>{{::('COMPONENTS.DATE_PICKER.' + label.abbr.toUpperCase())}}</small>
       </th>
     </tr>
   </thead>

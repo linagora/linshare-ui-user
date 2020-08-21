@@ -81,6 +81,27 @@
       "INVALID_EMAIL": "The email address is invalid",
       "INVALID_EMPTY": "Unknown user",
       "CREATE_GUEST": "Invite it as a guest?"
+    },
+    "DATE_PICKER": {
+      "SUN": "SUN",
+      "MON": "MON",
+      "TUE": "TUE",
+      "WED": "WED",
+      "THU": "THU",
+      "FRI": "FRI",
+      "SAT": "SAT",
+      "JANUARY": "JANUARY",
+      "FEBRUARY": "FEBRUARY",
+      "MARCH": "MARCH",
+      "APRIL": "APRIL",
+      "MAY": "MAY",
+      "JUNE": "JUNE",
+      "JULY": "JULY",
+      "AUGUST": "AUGUST",
+      "SEPTEMBER": "SEPTEMBER",
+      "OCTOBER": "OCTOBER",
+      "NOVEMBER": "NOVEMBER",
+      "DECEMBER": "DECEMBER"
     }
   },
   "DOMAIN": "Domain",
