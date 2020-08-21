@@ -154,27 +154,14 @@
             </configuration>
           </execution>
 
-          <!-- no need because it is already include in npm post install
           <execution>
-            <id>bower install</id>
-            <phase>initialize</phase>
+            <id>npm run build:prod</id>
             <goals>
-                <goal>bower</goal>
+              <goal>npm</goal>
             </goals>
-            <configuration>
-                <arguments>install</arguments>
-            </configuration>
-          </execution>
-          -->
 
-          <execution>
-            <id>grunt build</id>
-            <phase>compile</phase>
-            <goals>
-                <goal>grunt</goal>
-            </goals>
             <configuration>
-                <arguments>--no-color build</arguments>
+                <arguments>run build:prod</arguments>
             </configuration>
           </execution>
 
@@ -195,7 +182,7 @@
               <goal>replace</goal>
             </goals>
             <configuration>
-              <file>dist/config/config.js</file>
+              <file>dist/config.js</file>
               <replacements>
                 <replacement>
                   <token>debug: true</token>
@@ -206,7 +193,6 @@
           </execution>
         </executions>
       </plugin>
-
       <!-- buildnumber-maven-plugin (compute timestamp, build number, ...)-->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
