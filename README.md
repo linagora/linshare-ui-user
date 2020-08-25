@@ -7,45 +7,16 @@ This project is a restFull user interface angular app for Linshare-core project
 Some dependencies are required:
 
 > From the web
-  - [RubyGems](https://rubygems.org/pages/download/)
-  - [Node version manager](https://github.com/creationix/nvm)
-  - [HTML Tidy](http://binaries.html-tidy.org/)
-  - [Hunspell](https://github.com/hunspell/hunspell)
-> From Npm
-  - [Jshint](http://jshint.com/install/)
-> From Gem
-  - [Ruby-compass](http://compass-style.org/install/)
-  - [Scss_lint](https://github.com/brigade/scss-lint#installation)
-
+  - [Node version manager](https://github.com/nvm-sh/nvm)
 
 Most of the dependencies are also available by your OS packet manager
 
   For Ubuntu:
   ```bash
-  sudo apt-get install ruby-compass
-
   # DON'T FORGET to take the latest version
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash 
-  nvm install node
-
-  npm install jshint
-
-  sudo apt-get install -y cmake xsltproc
-  wget <LATEST URL from http://binaries.html-tidy.org, linux 64-bit DEB>
-  sudo apt-get -y autoremove tidy
-  sudo dpkg -i tidy-*.*.*-64bit.deb
-  rm tidy-*.deb
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+  nvm install 12
   ```
-
-## Cloning the repository
-
-```bash
-# For a full clone with submodule
-git clone --recursive
-
-# Or after simple clone, to get sumbodule
-git submodule update --init
-```
 
 ## Build & development
 
@@ -56,18 +27,15 @@ cd $HOME/repositories/linshare-ui-user
 # Download the node modules
 npm install
 
-# Set an alias to your grunt install or to the one retrieve by npm install :
-alias grunt='./node_modules/.bin/grunt'
-
-# You can also add the previous line to your .bashrc, to avoid settign it everytime
-
 ```
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `npm run build:prod` for building and `npm run serve` for preview.
 
-## Testing
+Change the backend server address used by dev proxy server by using `LINSHARE_BACKEND_URL` env as below:
 
-Running `grunt test` will run the unit tests with karma.
+```bash
+LINSHARE_BACKEND_URL='http:\\backend.linshare.org' npm run serve
+```
 
 ## Modules Architecture
 
