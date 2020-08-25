@@ -182,7 +182,7 @@
               <goal>replace</goal>
             </goals>
             <configuration>
-              <file>dist/config.js</file>
+              <file>dist/config/config.js</file>
               <replacements>
                 <replacement>
                   <token>debug: true</token>

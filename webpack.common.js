@@ -18,7 +18,7 @@ module.exports = {
   output: {
     filename: (pathData) => {
       return pathData.chunk.name === 'config' ?
-        'config.js' :
+        'config/config.js' :
         '[name].[hash].js';
     },
     chunkFilename: '[name].[hash].js',
