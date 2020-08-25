@@ -44,6 +44,7 @@
       receivedShares,
       safeDetails,
       uploads,
+      uploadRequests,
       secondFactorAuthentication,
       service = {
         build: build,
@@ -59,6 +60,7 @@
     const sharedSpaceMenuName = 'MENU_TITLE.SHARED_SPACE';
     const changePasswordMenuName = 'MENU_TITLE.CHANGE_PASSWORD';
     const secondFactorAuthenticationMenuName = 'SECOND_FACTOR_AUTH.TITLE';
+    const uploadRequestsMenuName = 'UPLOAD_REQUESTS.TITLE';
 
     return service;
 
@@ -122,6 +124,8 @@
             functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
           receivedShares.disabled = lsAppConfig.menuLinks.disable[receivedShareMenuName] &&
             functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
+
+          uploadRequests.hide = !functionalities.UPLOAD_REQUEST.enable;
         }).catch(function(error) {
           $log.debug(error)
         });
@@ -229,6 +233,13 @@
         }]
       };
 
+      uploadRequests = {
+        name: uploadRequestsMenuName,
+        link: 'uploadRequests',
+        icon: 'zmdi zmdi-pin-account',
+        hide: false
+      }
+
       tabs = [
         changePassword,
         myUploads,
@@ -236,6 +247,7 @@
         files,
         sharedSpace,
         administrations,
+        uploadRequests,
         uploads,
         audit,
         safeDetails,

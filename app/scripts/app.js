@@ -27,6 +27,7 @@
     'linshare.safeDetails',
     'linshare.changePassword',
     'linshare.secondFactorAuthentication',
+    'linshare.uploadRequests',
     'ng.deviceDetector',
     'ngAnimate',
     'ngCookies',

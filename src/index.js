@@ -62,3 +62,4 @@ require('../app/modules/linshare.utils/linshareUtilsModule');
 require('../app/modules/linshare.safeDetails/linshareSafeDetailsModule');
 require('../app/modules/linshare.changePassword/changePasswordModule');
 require('../app/modules/linshare.secondFactorAuthentication/secondFactorAuthentication');
+require('../app/modules/linshare.uploadRequests/uploadRequests');
