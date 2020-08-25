@@ -32,7 +32,7 @@
         <button type="button" class="w-100 btn-dp btn-dpday btn-dpbody"
                 ng-class="{'dp-today': dt.current, 'dp-selected': dt.selected, 'dp-active': isActive(dt)}"
                 ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1">
-          <span ng-class="::{'dp-day-muted': dt.secondary, 'dp-day-today': dt.current}">{{::dt.label}}</span>
+          <span ng-class="::{'dp-day-muted': dt.secondary || dt.disabled, 'dp-day-today': dt.current}">{{::dt.label}}</span>
         </button>
       </td>
     </tr>
