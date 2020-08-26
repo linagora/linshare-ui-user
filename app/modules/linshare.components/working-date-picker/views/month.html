@@ -26,7 +26,7 @@
         <button type="button" class="w-100 btn-dp btn-dpbody"
                 ng-class="{'dp-selected': dt.selected, 'dp-active': isActive(dt)}" ng-click="select(dt.date)"
                 ng-disabled="dt.disabled" tabindex="-1">
-          <span ng-class="::{'dp-day-today': dt.current}">{{::dt.label}}</span>
+          <span ng-class="::{'dp-day-today': dt.current}" translate>{{'COMPONENTS.DATE_PICKER.' + dt.label.toUpperCase()}}</span>
         </button>
       </td>
     </tr>
