@@ -51,7 +51,7 @@
           items: scope.items
         },
         onRemoving: documentPreviewService.resetItemIndex,
-        template: require('./documentPreviewButton.html')
+        template: require('./components/documentPreviewDialog/documentPreviewDialog.html')
       });
     }
   }
