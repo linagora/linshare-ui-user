@@ -270,7 +270,11 @@
                   <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
                     <!-- FILTER COMPONENT -->
-                    <filter-box class="clearfix" filter-box-size="true" filter-box-date="true" filter-box-items="workgroupNodesVm.nodesList"
+                    <filter-box class="clearfix"
+                      ng-if="workgroupNodesVm.tableParams"
+                      filter-box-size="true"
+                      filter-box-date="true"
+                      filter-box-items="workgroupNodesVm.nodesList"
                       filter-box-table="workgroupNodesVm.tableParams">
                     </filter-box>
                   </ul>
