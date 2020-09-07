@@ -1,6 +1,31 @@
 {
   "UPLOAD_REQUESTS": {
-    "SINGULAR_TITLE": "Запросы на загрузку",
-    "TITLE": "Запросы на загрузку"
+    "TITLE": "Запросы на загрузку",
+    "FORM_CREATE": {
+      "SINGULAR_TITLE": "Запросы на загрузку",
+      "COLLECTIVE": "Коллектив",
+      "INDIVIDUAL": "Физическое лицо",
+      "EMAIL_MESSAGE": "Сообщение электронной почты",
+      "TOTAL_SIZE_OF_FILES": "Общий размер файлов",
+      "MAX_NUMBER_OF_FILES": "Максимальное количество файлов",
+      "MAX_SIZE_OF_A_FILE": "Максимальный размер файла",
+      "ACTIVATION_DATE": "Дата активации",
+      "PASSWORD_PROTECTED": "Пароль защищен",
+      "ALLOW_DELETION": "Разрешить удаление",
+      "ALLOW_CLOSURE": "Разрешить закрытие",
+      "EXPIRY_NOTIFICATION_DATE": "Дата уведомления об истечении срока действия",
+      "NOTIFICATION_LANGUAGE": "Язык уведомлений",
+      "SUCCESS": "Запрос на загрузку успешно создан!"
+    },
+    "ERROR": {
+      "SUBJECT_REQUIRED": "Укажите тему электронной почты",
+      "BODY_REQUIRED": "Тело электронной почты требуется",
+      "INVALID_EXPIRATION_DATE": "Дата истечения срока должна быть между текущей датой и {value}",
+      "INVALID_ACTIVATION_DATE": "Дата активации должна быть между датой истечения срока действия и {value}",
+      "INVALID_NOTIFICATION_DATE": "Дата уведомления должна быть между {min} и {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED": "Общий размер файлов должен быть меньше {max}",
+      "MAX_NUMBER_OF_FILES_REQUIRED": "Требуется максимальное количество файлов меньше {max}",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "Требуется максимальный размер файла, который меньше {max}"
+    }
   }
 }

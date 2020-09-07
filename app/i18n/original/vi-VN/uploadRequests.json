@@ -1,6 +1,31 @@
 {
   "UPLOAD_REQUESTS": {
-    "SINGULAR_TITLE": "Yêu cầu tải lên",
-    "TITLE": "Yêu cầu tải lên"
+    "TITLE": "Yêu cầu tải lên",
+    "FORM_CREATE": {
+      "SINGULAR_TITLE": "Yêu cầu tải lên",
+      "COLLECTIVE": "Nhóm",
+      "INDIVIDUAL": "Cá nhân",
+      "EMAIL_MESSAGE": "Nội dung email",
+      "TOTAL_SIZE_OF_FILES": "Tổng kích thước các tệp",
+      "MAX_NUMBER_OF_FILES": "Số các tệp tối đa",
+      "MAX_SIZE_OF_A_FILE": "Kích thước tối đa của tệp",
+      "ACTIVATION_DATE": "Ngày kích hoạt",
+      "PASSWORD_PROTECTED": "Mật khẩu bảo vệ",
+      "ALLOW_DELETION": "Cho phép xóa",
+      "ALLOW_CLOSURE": "Cho phép đóng",
+      "EXPIRY_NOTIFICATION_DATE": "Ngày thông báo hết hạn",
+      "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo",
+      "SUCCESS": "Yêu cầu tải lên đã được tạo thành công!"
+    },
+    "ERROR": {
+      "SUBJECT_REQUIRED": "Chủ đề của email là bắt buộc",
+      "BODY_REQUIRED": "Nội dung của email là bắt buộc",
+      "INVALID_EXPIRATION_DATE": "Ngày hết hạn phải nằm giữa ngày hiện tại và ngày {value}",
+      "INVALID_ACTIVATION_DATE": "Ngày kích hoạt phải nằm giữa ngày hết hạn và ngày {value}",
+      "INVALID_NOTIFICATION_DATE": "Ngày thông báo phải nằm giữa ngày {min} và ngày {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED": "Tổng kích thước các tệp là bắt buộc và phải nhỏ hơn {max}",
+      "MAX_NUMBER_OF_FILES_REQUIRED": "Số các tệp tối đa là bắt buộc và phải nhỏ hơn {max}",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "Kích thước tối đa của tệp là bắt buộc và phải nhỏ hơn {max}"
+    }
   }
 }

@@ -107,6 +107,7 @@
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Please enter at least one recipient or contact list to share with",
+      "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Please enter at least one recipient",
       "AT_LEAST_ONE_DOCUMENT": "No file is selected",
       "CONTACT_STILL_EXISTS" : "is already in the list",
       "ELEMENTS_NOT_DELETED": "element(s) haven't been deleted",

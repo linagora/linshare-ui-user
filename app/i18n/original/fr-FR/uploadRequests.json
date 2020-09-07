@@ -1,6 +1,31 @@
 {
   "UPLOAD_REQUESTS": {
-    "SINGULAR_TITLE": "Invitation de dépot",
-    "TITLE": "Invitation de dépot"
+    "TITLE": "Invitation de dépot",
+    "FORM_CREATE": {
+      "SINGULAR_TITLE": "Invitation de dépot",
+      "COLLECTIVE": "Collective",
+      "INDIVIDUAL": "Individuelle",
+      "EMAIL_MESSAGE": "Corps du message",
+      "TOTAL_SIZE_OF_FILES": "Taille totale des fichiers",
+      "MAX_NUMBER_OF_FILES": "Nombre maximum de fichiers",
+      "MAX_SIZE_OF_A_FILE": "Taille maximale d'un fichier",
+      "ACTIVATION_DATE": "Date d'activation",
+      "PASSWORD_PROTECTED": "Protégé par mot de passe",
+      "ALLOW_DELETION": "Autoriser la suppression",
+      "ALLOW_CLOSURE": "Permettre la clôture",
+      "EXPIRY_NOTIFICATION_DATE": "Date de notification d'expiration",
+      "NOTIFICATION_LANGUAGE": "Langue de notification",
+      "SUCCESS": "L'invitation de dépôt a été créé avec succès!"
+    },
+    "ERROR": {
+      "SUBJECT_REQUIRED": "L'objet du courriel est obligatoire",
+      "BODY_REQUIRED": "Le corps du courriel est obligatoire",
+      "INVALID_EXPIRATION_DATE": "La date d'expiration doit être comprise entre la date actuelle et {value}",
+      "INVALID_ACTIVATION_DATE": "La date d'activation doit être comprise entre la date d'expiration et {value}",
+      "INVALID_NOTIFICATION_DATE": "La date de notification doit être comprise entre {min} et {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED": "La taille totale des fichiers est requise et inférieure à {max}",
+      "MAX_NUMBER_OF_FILES_REQUIRED": "Le nombre maximal de fichiers est requis et inférieur à {max}",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "La taille maximale d'un fichier est requise et inférieure à {max}"
+    }
   }
 }

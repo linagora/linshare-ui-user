@@ -107,6 +107,7 @@
       },
       "WARNING": {
         "AT_LEAST_ONE_RECIPIENT": "Укажите хотя бы одного получателя или список контактов, чтобы отправить",
+        "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Пожалуйста, введите хотя бы одного получателя",
         "AT_LEAST_ONE_DOCUMENT": "Файл не выбран",
         "CONTACT_STILL_EXISTS" : "уже в списке",
         "ELEMENTS_NOT_DELETED": "Элементы(ы) не были удалены",

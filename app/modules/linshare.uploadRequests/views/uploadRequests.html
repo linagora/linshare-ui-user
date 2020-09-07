@@ -23,15 +23,15 @@
               uib-dropdown-menu=""
               ng-class="{'open':isOpenNew}"
             >
-              <li role="menuitem">
-                <a x-ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, 1)">
+              <li ng-if="uploadRequestVm.isCollectiveModeEnabled" role="menuitem">
+                <a x-ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, true)">
                   <i class="ls-upload-request-alt"></i>
                   <span translate>Collective upload</span>
                 </a>
               </li>
 
               <li role="menuitem">
-                <a x-ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, 2)">
+                <a x-ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, false)">
                   <i class="ls-upload-request-2"></i>
                   <span translate>Individual upload</span>
                 </a>
