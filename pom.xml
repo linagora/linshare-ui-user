@@ -329,22 +329,6 @@
                   </replacements>
                 </configuration>
               </execution>
-              <execution>
-                <id>bower.json</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>replace</goal>
-                </goals>
-                <configuration>
-                  <file>bower.json</file>
-                  <replacements>
-                    <replacement>
-                      <token>"version": ".*",</token>
-                      <value>"version": "${project.version}",</value>
-                    </replacement>
-                  </replacements>
-                </configuration>
-              </execution>
             </executions>
           </plugin>
           <plugin>
@@ -360,8 +344,8 @@
                   <goal>checkin</goal>
                 </goals>
                 <configuration>
-                  <includes>package.json,bower.json</includes>
-                  <message>[maven-release-plugin] prepare version for package.json and bower.json</message>
+                  <includes>package.json</includes>
+                  <message>[maven-release-plugin] prepare version for package.json</message>
                 </configuration>
               </execution>
             </executions>
@@ -387,22 +371,6 @@
                 </goals>
                 <configuration>
                   <file>package.json</file>
-                  <replacements>
-                    <replacement>
-                      <token>"version": ".*",</token>
-                      <value>"version": "${project.version}",</value>
-                    </replacement>
-                  </replacements>
-                </configuration>
-              </execution>
-              <execution>
-                <id>bower.json</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>replace</goal>
-                </goals>
-                <configuration>
-                  <file>bower.json</file>
                   <replacements>
                     <replacement>
                       <token>"version": ".*",</token>
@@ -441,9 +409,6 @@
                     </fileset>
                     <fileset>
                       <directory>vendors</directory>
-                    </fileset>
-                    <fileset>
-                      <directory>bower_components</directory>
                     </fileset>
                   </filesets>
                 </configuration>
