@@ -5,20 +5,32 @@
   "license": "http://download.linshare.org/LinShare-License_AfferoGPL-v3_en.pdf",
   "contributors": [
     {
-      "name": "Ismail Anwar-Baig",
+      "name": "Ismail Anwar-Baig"
     },
     {
-      "name": "Kévin Lemele",
+      "name": "Kévin Lemele"
     },
     {
       "name": "Alpha Oumar Sall"
     },
     {
-      "name": "Sarra Mamlook-Sanchez",
+      "name": "Sarra Mamlook-Sanchez"
     },
     {
       "name": "Frédéric Martin",
       "email": "fmartin@linagora.com"
+    },
+    {
+      "name": "Dũng T. Phạm",
+      "email": "dtpham@linagora.com"
+    },
+    {
+      "name": "Ngọc B. Phạm",
+      "email": "bnpham@linagora.com"
+    },
+    {
+      "name": "Tuấn Lê Công",
+      "email": "tlcong@linagora.com"
     }
   ],
   "devDependencies": {
