@@ -7,3 +7,4 @@ angular
   }]);
 
 require('./route');
+require('./controllers/LinshareUploadRequestsController');

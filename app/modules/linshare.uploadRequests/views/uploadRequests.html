@@ -5,9 +5,47 @@
   <div class="container files">
     <div class="card">
       <div class="card-header">
-      </div>
+        <div id="breadcrumb-wrap">
+          <div
+            class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
+            uib-dropdown dropdown-append-to-body auto-close="always"
+            tooltip-placement="bottom"
+            tooltip-popup-delay="500"
+            is-open="isOpenNew"
+            data-ng-class="{'open':isOpenNew}"
+          >
+            <a class="add-menu-group" uib-dropdown-toggle >
+              <i class="zmdi zmdi-plus"></i>
+            </a>
 
-      <div class="card-body collapsible-content">
+            <ul
+              class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided"
+              uib-dropdown-menu=""
+              ng-class="{'open':isOpenNew}"
+            >
+              <li role="menuitem">
+                <a x-ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, 1)">
+                  <i class="ls-upload-request-alt"></i>
+                  <span translate>Collective upload</span>
+                </a>
+              </li>
+
+              <li role="menuitem">
+                <a x-ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, 2)">
+                  <i class="ls-upload-request-2"></i>
+                  <span translate>Individual upload</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="breadcrumbs-ctn hidden-xs">
+            <a>
+              <i class="zmdi zmdi-pin-account"></i>
+              <span translate>UPLOAD_REQUESTS.TITLE</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

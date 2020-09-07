@@ -1,5 +1,24 @@
 {
   "UPLOAD_REQUESTS": {
-    "TITLE": "Upload Requests"
+    "TITLE": "Upload Requests",
+    "FORM_CREATE": {
+      "SINGULAR_TITLE": "Upload Request",
+      "COLLECTIVE": "Collective",
+      "INDIVIDUAL": "Individual",
+      "EMAIL_MESSAGE": "Email message",
+      "TOTAL_SIZE_OF_FILES": "Total size of files",
+      "MAX_NUMBER_OF_FILES": "Max number of files",
+      "MAX_SIZE_OF_A_FILE": "Max size of a file",
+      "ACTIVATION_DATE": "Activation date",
+      "PASSWORD_PROTECTED": "Password protected",
+      "ALLOW_DELETION": "Allow deletion",
+      "ALLOW_CLOSURE": "Allow closure",
+      "EXPIRY_NOTIFICATION_DATE": "Expiry notification date",
+      "NOTIFICATION_LANGUAGE": "Notification language"
+    },
+    "HEADER": {
+      "COLLECTIVE_UPLOAD": "Collective upload"
+    }
+
   }
 }

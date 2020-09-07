@@ -58,5 +58,6 @@
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-node-details.html', require('./sidebar-content-workgroup-node-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-node.html', require('./sidebar-content-workgroup-node.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup.html', require('./sidebar-content-workgroup.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequest-create.html', require('./sidebar-content-uploadrequest-create.html'));
   }
 })();

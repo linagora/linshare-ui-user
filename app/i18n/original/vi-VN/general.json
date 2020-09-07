@@ -237,7 +237,8 @@
     "REPLAY": "Phát lại",
     "SEND": "Gửi",
     "SHARE": "Chia sẻ",
-    "STOP": "Dừng"
+    "STOP": "Dừng",
+    "CREATE": "Tạo"
   },
   "NO_ACTION_AVAILABLE": "Không có hành động nào",
   "PENDING_UPLOADS": "đang chờ xử lý",

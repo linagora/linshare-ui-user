@@ -17,6 +17,8 @@ function uploadRequestsConfig($stateProvider) {
             $state.go('home');
           }
         }
-      }
+      },
+      controller: 'LinshareUploadRequestsController',
+      controllerAs: 'uploadRequestVm',
     });
 }

@@ -238,7 +238,8 @@
     "REPLAY": "Replay",
     "SEND": "Envoyer",
     "SHARE": "Partager",
-    "STOP": "Arrêter"
+    "STOP": "Arrêter",
+    "CREATE": "Créer"
   },
   "NO_ACTION_AVAILABLE": "Aucune action disponible",
   "PENDING_UPLOADS": "en attente",

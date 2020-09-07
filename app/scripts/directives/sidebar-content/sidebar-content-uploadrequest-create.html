@@ -1,0 +1,320 @@
+<div id="member-sidebar">
+  <div class="header-sidebar">
+    <i ng-if="mainVm.sidebar.getData().mdtabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x"
+       x-ng-click="mainVm.sidebar.getData().toggleMoreOptions(false)">
+    </i>
+    <h2 class="header-more-options setEllipsis">
+      <span translate>UPLOAD_REQUESTS.FORM_CREATE.SINGULAR_TITLE</span>
+      <span> - </span>
+      <span translate>{{ mainVm.sidebar.getData().type === 2 ? 'UPLOAD_REQUESTS.FORM_CREATE.INDIVIDUAL' : 'UPLOAD_REQUESTS.FORM_CREATE.COLLECTIVE'}}</span>
+    </h2>
+    <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide()">
+      <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+    </span>
+  </div>
+
+  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
+    <md-content>
+      <md-tabs md-selected="mainVm.sidebar.getData().mdtabsSelection.selectedIndex"
+               md-border-bottom="">
+        <md-tab id="tab1" label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 noPadding">
+          <div class="card col-xs-12 form-within-sidebar" id="content-ctn-sidebar">
+            <div class="create-upload-request">
+              <div class="custom-list-container clearfix">
+                <div class="recipients-form-sections clearfix recipients-form-custom-margin">
+                  <h2 class="pull-left headerSubCtn">
+                    {{"RIGHT_PANEL.SHARE.RECIPIENTS" | translate}}</h2><span class="required-field-hint">*</span>
+                  <div x-ng-if="mainVm.sidebar.getData().linshareModeProduction == false"
+                      class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
+                      on-toggle="toggled()">
+                    <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle x-ng-disabled="disabled"
+                      alt="{{'RIGHT_PANEL.SHARE.CREATE_MAILING_LIST_ALT' | translate}}">
+                      {{"RIGHT_PANEL.SHARE.CREATE_MAILING_LIST" | translate}}
+                    </a>
+                    <div class="dropdown-menu pull-right">
+                      <div class="stop-propagate">
+                        <p class="labelListCtn">
+                          <input type="email" class="form-control input-sm" id="labelList"
+                                placeholder="Saisissez le nom de votre liste">
+                        </p>
+                        <md-divider></md-divider>
+                      </div>
+                      <div>
+                        <button class="btn btn-default col-xs-6" x-ng-click="mainVm.sidebar.getData().closeDropdown($event)">
+                          {{"NAVIGATION.CANCEL" | translate}}
+                        </button>
+                        <button class="btn btn-primary col-xs-6" x-ng-click="mainVm.sidebar.getData().createRecipientList($event)">
+                          {{"NAVIGATION.SEND" | translate}}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <form role="form" class="clearfix">
+                  <div class="form-group fg-line">
+                    <div
+                      ls-autocomplete-user="SHARING"
+                      data-on-select-function="shareActionVm.newShare.addRecipient"
+                      data-with-guest="true"
+                    >
+                    </div>
+                  </div>
+                </form>
+                <div class="custom-list-body col-xs-12 ">
+                  <div class="custom-list-item"
+                      x-ng-repeat="recipient in shareActionVm.newShare.getRecipients() | orderBy : '-' as results"
+                      tooltip-placement="bottom" tooltip-popup-delay="700"
+                      uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
+                    <p class="pull-left circle-ctn">
+                      <span x-ng-show="recipient.domain" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
+                      <span x-ng-show="!recipient.domain" class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
+                    </p>
+                    <div class="pull-left name-recipients-ctn">
+                      <p x-ng-show="recipient.domain" class="pull-left inner-text-li">
+                        {{recipient.firstName + ' ' + recipient.lastName}}
+                      </p>
+                      <p x-ng-show="!recipient.domain" class="pull-left inner-text-li">
+                        {{recipient.mail}}
+                      </p>
+                      <p class="close-list-icone-btn pull-right"
+                        x-ng-click="shareActionVm.newShare.removeRecipient(results.length - $index -1)">
+                        <i class="zmdi zmdi-close "></i>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="custom-list-item" x-ng-repeat="list in shareActionVm.newShare.getMailingList()"
+                      tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip=""
+                      owner-label
+                      owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
+                      owner-label-attr="uib-tooltip">
+                    <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
+                    <div class="pull-left name-recipients-ctn">
+                      <p class="pull-left inner-text-li">{{list.listName}}</p>
+                      <p class=" close-list-icone-btn pull-right" x-ng-click="shareActionVm.newShare.removeMailingList($index)">
+                        <i class="zmdi zmdi-close"></i>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="recipients-form-sections clearfix">
+                <div class="custom-header-list">
+                  <h2 class="pull-left headerSubCtn">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.EMAIL_MESSAGE" | translate}}<span class="required-field-hint">*</span>
+                  </h2>
+                </div>
+                <div class="form-sidebar">
+                  <div class="form-group col-xs-12 addNote no-padding">
+                      <div class="form-group fg-line">
+                        <textarea type="text" class="form-control input-sm"
+                              x-ng-model="shareActionVm.newShare.subject"
+                              placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}">
+                        </textarea>
+                      </div>
+                      <textarea class="form-control comment" rows="5"
+                                placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
+                                x-ng-model="shareActionVm.newShare.message">
+                      </textarea>
+                    </div>
+                </div>
+              </div>
+
+              <div class="recipients-form-sections clearfix">
+                <div class="custom-header-list">
+                  <h2 class="pull-left headerSubCtn">
+                    {{"RIGHT_PANEL.SHARE.SETTINGS" | translate}}
+                  </h2>
+                  <a class="more-options sidebar-link" href=""
+                    x-ng-click="mainVm.sidebar.getData().toggleMoreOptions(true)">
+                    {{"RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate}}
+                  </a>
+                </div>
+                <div
+                  class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted">
+                    {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+                  </label>
+                  <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+                      x-ng-class="{'is-opened': opened == true}">
+                    <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
+                      <div class="form-inline">
+                        <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                              class="form-control date-picker-input" uib-datepicker-popup
+                              show-weeks="false"
+                              is-open="opened"
+                              datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
+                                                    maxDate: shareActionVm.newShare.expirationDate.value}"
+                              data-ng-required="true"
+                              placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                              min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
+                              max="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                              data-ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
+                              data-ng-model="shareActionVm.newShare.expirationDate.value"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="label-muted col-xs-6 no-padding">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.TOTAL_SIZE_OF_FILES" | translate}}:
+                  </label>
+                  <div class="col-xs-6 flex-combine-input">
+                    <input class="form-control custom-bordered-input" type="number"/>
+                    <md-select class="form-control custom-select-no-margin custom-bordered-select" ng-model="mainVm.sidebar.memoryUnit">
+                      <md-option value="KB" key="KB">KB</md-option>
+                      <md-option value="MB" key="MB">MB</md-option>
+                      <md-option value="GB" key="GB">GB</md-option>
+                    </md-select>
+                  </div>
+                </div>
+                <div class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="label-muted col-xs-6 no-padding">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES" | translate}}:
+                  </label>
+                  <div class="col-xs-6 flex-combine-input">
+                    <input class="form-control custom-bordered-input custom-single-input" type="number"/>
+                  </div>
+                </div>
+                <div class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="label-muted col-xs-6 no-padding">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.MAX_SIZE_OF_A_FILE" | translate}}:
+                  </label>
+                  <div class="col-xs-6 flex-combine-input">
+                    <input class="form-control custom-bordered-input" type="number"/>
+                    <md-select class="form-control custom-select-no-margin custom-bordered-select" ng-model="mainVm.sidebar.memoryUnit">
+                      <md-option value="KB" key="KB">KB</md-option>
+                      <md-option value="MB" key="MB">MB</md-option>
+                      <md-option value="GB" key="GB">GB</md-option>
+                    </md-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </md-tab>
+        <md-tab id="tab2" label="{{'EDIT' | translate}}" class="col-xs-4 noPadding disabled">
+          <div class="card col-xs-12 form-within-sidebar" id="content-ctn-sidebar">
+            <div class="create-upload-request">
+              <div class="recipients-form-sections clearfix">
+                <div class="custom-header-list">
+                  <h2 class="pull-left headerSubCtn">
+                    {{"RIGHT_PANEL.SHARE.SETTINGS" | translate}}
+                  </h2>
+                </div>
+                <div
+                  class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE" | translate}}:
+                  </label>
+                  <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+                      x-ng-class="{'is-opened': opened == true}">
+                    <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
+                      <div class="form-inline">
+                        <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                              class="form-control date-picker-input" uib-datepicker-popup
+                              show-weeks="false"
+                              is-open="opened"
+                              datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
+                                                    maxDate: shareActionVm.newShare.expirationDate.value}"
+                              data-ng-required="true"
+                              placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                              min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
+                              max="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                              data-ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
+                              data-ng-model="shareActionVm.newShare.expirationDate.value"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="label-muted col-xs-6 no-padding">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.PASSWORD_PROTECTED" | translate}}:
+                  </label>
+                  <div class="col-xs-6 flex-combine-input">
+                    <input type="checkbox" data-ng-checked="true" name="passwordProtected"
+                      data-ng-model="mainVm.sidebar.getData().passwordProtected">
+                  </div>
+                </div>
+                <div class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="label-muted col-xs-6 no-padding">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.DELETION" | translate}}:
+                  </label>
+                  <div class="col-xs-6 flex-combine-input">
+                    <input type="checkbox" data-ng-checked="true" name="allowDeletion"
+                      data-ng-model="mainVm.sidebar.getData().allowDeletion">
+                  </div>
+                </div>
+                <div class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="label-muted col-xs-6 no-padding">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE" | translate}}:
+                  </label>
+                  <div class="col-xs-6 flex-combine-input">
+                    <input type="checkbox" data-ng-checked="true" name="allowClosure"
+                      data-ng-model="mainVm.sidebar.getData().allowClosure">
+                  </div>
+                </div>
+                <div
+                  class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE" | translate}}:
+                  </label>
+                  <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+                      x-ng-class="{'is-opened': opened == true}">
+                    <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
+                      <div class="form-inline">
+                        <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                              class="form-control date-picker-input" uib-datepicker-popup
+                              show-weeks="false"
+                              is-open="opened"
+                              datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
+                                                    maxDate: shareActionVm.newShare.expirationDate.value}"
+                              data-ng-required="true"
+                              placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                              min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
+                              max="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                              data-ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
+                              data-ng-model="shareActionVm.newShare.expirationDate.value"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xs-12 field-ctn clearfix">
+                  <label for="comment" class="label-muted col-xs-6 no-padding">
+                    {{"UPLOAD_REQUESTS.FORM_CREATE.NOTIFICATION_LANGUAGE" | translate}}:
+                  </label>
+                  <div class="col-xs-6 flex-combine-input">
+                    <md-select class="form-control custom-select-no-margin custom-bordered-lang-select" ng-model="mainVm.sidebar.notificationLanguage">
+                      <md-option value="FR" key="FR">FR</md-option>
+                      <md-option value="US" key="US">US</md-option>
+                      <md-option value="VN" key="VN">VN</md-option>
+                      <md-option value="RU" key="RU">RU</md-option>
+                    </md-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
+</div>
+<div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
+  <button class="btn btn-default col-xs-6"
+          x-ng-click="shareActionVm.closeSideBar(); mainVm.sidebar.getData().closeDropdown($event);
+          !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments();
+          shareActionVm.newShare.resetForm()">
+    {{"NAVIGATION.CANCEL" | translate}}
+  </button>
+  <button class="btn btn-primary col-xs-6"
+          x-ng-click="
+          mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
+          mainVm.sidebar.getData().checkSharableFiles(shareActionVm.submitShare, shareActionVm.newShare) :
+          shareActionVm.submitShare(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments,
+                      mainVm.sidebar.getData().selectedUploads)">
+    {{"NAVIGATION.CREATE" | translate}}
+  </button>
+</div>
