@@ -83,6 +83,8 @@
     "no-new-func": 0,
     "no-new-wrappers": 0,
     "no-invalid-this": 0,
-    "require-yield": 0
+    "require-yield": 0,
+    "newline-after-var": 1,
+    "newline-before-return": 1
   }
 }
