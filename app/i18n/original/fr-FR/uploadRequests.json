@@ -1,6 +1,14 @@
 {
   "UPLOAD_REQUESTS": {
     "TITLE": "Invitation de dépot",
+    "STATUS": {
+      "ACTIVE": "Active",
+      "EXPIRED_CLOSED": "Expirée | Fermée"
+    },
+    "CREATION_TYPE": {
+      "COLLECTIVE": "Téléchargement collectif",
+      "INDIVIDUAL": "Téléchargement individuel"
+    },
     "FORM_CREATE": {
       "SINGULAR_TITLE": "Invitation de dépot",
       "COLLECTIVE": "Collective",
@@ -26,6 +34,38 @@
       "TOTAL_SIZE_OF_FILES_REQUIRED": "La taille totale des fichiers est requise et inférieure à {max}",
       "MAX_NUMBER_OF_FILES_REQUIRED": "Le nombre maximal de fichiers est requis et inférieur à {max}",
       "MAX_SIZE_OF_A_FILE_REQUIRED": "La taille maximale d'un fichier est requise et inférieure à {max}"
+    },
+    "MENU_ENTRIES": {
+      "PENDING": "En attente",
+      "ACTIVE_CLOSED": "Activatée / Fermée",
+      "ARCHIVES": "Archivée"
+    },
+    "TABLE": {
+      "SEARCH_BY_LABEL": "Recherche par libellé",
+      "FILTER_BY": {
+        "ALL": "Tout"
+      },
+      "HEADERS": {
+        "LABEL": "Label",
+        "ACTIVATION_DATE": "Date d'activation",
+        "ARCHIVE_DATE": "Date d'archivage",
+        "EXPIRATION_DATE": "Date d'expiration",
+        "FILES": "Fichiers",
+        "STATUS": "Statut",
+        "TYPE": "Type",
+        "CREATION_DATE": "Date de création"
+      },
+      "OPTIONS": {
+        "ADD_RECIPIENTS": "Ajouter des destinataires",
+        "GLOBAL_EDIT": "Modification globale",
+        "ACTIVATE": "Activer",
+        "CLOSE": "Fermer",
+        "ARCHIVE": "Archiver"
+      },
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Créer des invitations de dépot",
+        "MESSAGE": "Ces invitations permettent à d'autres utilisateurs de déposer des fichiers"
+      }
     }
   }
 }

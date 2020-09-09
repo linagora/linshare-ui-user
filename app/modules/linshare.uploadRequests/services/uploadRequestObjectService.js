@@ -135,6 +135,7 @@
       return $q.all([
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_ACTIVATION').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToActivation = clonedData;
           allowedToActivation.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
           allowedToActivation.mindate = new Date();
@@ -144,6 +145,7 @@
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_EXPIRATION').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToExpiration = clonedData;
           allowedToExpiration.canOverride =
             _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
@@ -154,6 +156,7 @@
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_NOTIFICATION').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToExpiryNotification = clonedData;
           allowedToExpiryNotification.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
@@ -164,42 +167,49 @@
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_DEPOSIT_SIZE').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToTotalSizeOfFiles = clonedData;
           allowedToTotalSizeOfFiles.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_SIZE').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToMaxSizeOfAFile = clonedData;
-          allowedToMaxSizeOfAFile.canOverride = 
+          allowedToMaxSizeOfAFile.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_COUNT').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToMaxNumberOfFiles = clonedData;
           allowedToMaxNumberOfFiles.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__SECURED_URL').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToPasswordProtected = clonedData;
           allowedToPasswordProtected.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__CAN_DELETE').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToDeletion = clonedData;
           allowedToDeletion.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__CAN_CLOSE').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToClosure = clonedData;
           allowedToClosure.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         }),
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__NOTIFICATION_LANGUAGE').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
+
           allowedToNotificationLanguage = clonedData;
           allowedToNotificationLanguage.canOverride = !!clonedData.canOverride;
         })
@@ -218,11 +228,13 @@
       var
         deferred = $q.defer(),
         uploadRequestDTO = self.toDTO();
+
       uploadRequestRestService.create(uploadRequestDTO, { groupMode: self.groupMode }).then(function(data) {
         deferred.resolve(data);
       }).catch(function(error) {
         deferred.reject(error);
       });
+
       return deferred.promise;
     }
 
@@ -236,6 +248,7 @@
       /* jshint validthis:true */
       self = this;
       var dto = {};
+
       dto.activationDate = self.activationDate;
       dto.expiryDate = self.expirationDate;
       dto.notificationDate = self.notificationDate;
@@ -292,6 +305,7 @@
       var deferred = $q.defer();
 
       deferred.resolve(_.cloneDeep(form));
+
       return deferred.promise;
     }
 
@@ -319,11 +333,13 @@
       var
         deferred = $q.defer(),
         uploadRequestDTO = self;
+
       uploadRequestRestService.update(uploadRequestDTO.uuid, uploadRequestDTO).then(function(data) {
         deferred.resolve(data);
       }).catch(function(error) {
         deferred.reject(error);
       });
+
       return deferred.promise;
     }
 
@@ -331,6 +347,7 @@
     function addRecipient() {
       var contact = this.selectedUser;
       var exists = false;
+
       switch (contact.type) {
         case 'simple':
           angular.forEach(self.recipients, function (elem) {
@@ -394,9 +411,11 @@
     function getMaxDateOfExpiration(isFormatted) {
       var maxDate = (_.isUndefined(self.allowedToExpiration.original) || _.isUndefined(self.allowedToExpiration.unit)) ? undefined :
         (self.activationDate ? moment(self.activationDate) : moment()).add(self.allowedToExpiration.original, self.allowedToExpiration.unit.toLowerCase());
+
       if (!isFormatted) {
         return maxDate ? maxDate.toDate() : undefined;
       };
+
       return maxDate ? maxDate.format('DD MMM YYYY') : undefined;
     };
 
@@ -407,20 +426,24 @@
       if (!isFormatted) {
         return minDate.toDate();
       }
+
       return minDate.format('DD MMM YYYY');
     }
 
     function getMaxDateOfNotification(isFormatted) {
       var maxDate = (_.isUndefined(self.allowedToExpiryNotification.original) || _.isUndefined(self.allowedToExpiryNotification.unit)) ? undefined :
         (self.expirationDate && moment(self.expirationDate).subtract(self.allowedToExpiryNotification.original, self.allowedToExpiryNotification.unit.toLowerCase()));
+
       if (!isFormatted) {
         return maxDate ? maxDate.toDate() : undefined;
       }
+
       return maxDate ? maxDate.format('DD MMM YYYY') : undefined;
     }
 
     function getMaxSize(type, isFormatted) {
       var configValue, configUnit, currentUnit;
+
       if (type === 'total') {
         configValue = self.allowedToTotalSizeOfFiles.value;
         configUnit = self.allowedToTotalSizeOfFiles.unit;
@@ -457,9 +480,11 @@
       const sizes = ['Bytes', 'KILO', 'MEGA', 'GIGA'];
       const indexInSizes = sizes.indexOf(obj.unit);
       const base = 1024;
+
       if (indexInSizes >= 0 && obj.value >= 0) {
         return Math.pow(base, indexInSizes) * obj.value;
       }
+
       return 0;
     }
 
@@ -469,6 +494,7 @@
         'MEGA': 1024,
         'GIGA': 1048576
       };
+
       return mapping[configUnit] / mapping[currentUnit];
     }
 

@@ -1,6 +1,14 @@
 {
   "UPLOAD_REQUESTS": {
     "TITLE": "Запросы на загрузку",
+    "STATUS": {
+      "ACTIVE": "Активный",
+      "EXPIRED_CLOSED": "Истекло | Закрыто"
+    },
+    "CREATION_TYPE": {
+      "COLLECTIVE": "Коллективная загрузка",
+      "INDIVIDUAL": "Индивидуальная загрузка"
+    },
     "FORM_CREATE": {
       "SINGULAR_TITLE": "Запросы на загрузку",
       "COLLECTIVE": "Коллектив",
@@ -26,6 +34,38 @@
       "TOTAL_SIZE_OF_FILES_REQUIRED": "Общий размер файлов должен быть меньше {max}",
       "MAX_NUMBER_OF_FILES_REQUIRED": "Требуется максимальное количество файлов меньше {max}",
       "MAX_SIZE_OF_A_FILE_REQUIRED": "Требуется максимальный размер файла, который меньше {max}"
+    },
+    "MENU_ENTRIES": {
+      "PENDING": "В ожидании",
+      "ACTIVE_CLOSED": "Активно / закрыто",
+      "ARCHIVES": "Архивы"
+    },
+    "TABLE": {
+      "SEARCH_BY_LABEL": "Искать по ярлыку",
+      "FILTER_BY": {
+        "ALL": "Все"
+      },
+      "HEADERS": {
+        "LABEL": "Этикетка",
+        "ACTIVATION_DATE": "Дата активации",
+        "ARCHIVE_DATE": "Дата архивации",
+        "EXPIRATION_DATE": "Срок годности",
+        "FILES": "Файлы",
+        "STATUS": "Статус",
+        "TYPE": "Тип",
+        "CREATION_DATE": "Дата создания"
+      },
+      "OPTIONS": {
+        "ADD_RECIPIENTS": "Добавить получателей",
+        "GLOBAL_EDIT": "Глобальное редактирование",
+        "ACTIVATE": "Активировать",
+        "CLOSE": "Закрыть",
+        "ARCHIVE": "Архив"
+      },
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Создать запросы на загрузку",
+        "MESSAGE": "Эти запросы позволяют другим пользователям загружать файлы в ваше хранилище"
+      }
     }
   }
 }

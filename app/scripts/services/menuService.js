@@ -235,7 +235,16 @@
 
       uploadRequests = {
         name: uploadRequestsMenuName,
-        link: 'uploadRequests',
+        links: [{
+          name: 'UPLOAD_REQUESTS.MENU_ENTRIES.PENDING',
+          link: 'uploadRequests({ status: "pending" })'
+        }, {
+          name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED',
+          link: 'uploadRequests({ status: "activeClosed" })'
+        }, {
+          name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES',
+          link: 'uploadRequests({ status: "archived" })'
+        }],
         icon: 'zmdi zmdi-pin-account',
         hide: false
       };
@@ -280,6 +289,7 @@
      */
     function getProperties(currentState, isSubMenu) {
       var selectedMenu = null;
+
       _.forEach(tabs, function(tab) {
         if (!_.isUndefined(tab.links)) {
           _.forEach(tab.links, function(link) {
@@ -291,6 +301,7 @@
           selectedMenu = tab;
         }
       });
+
       return selectedMenu;
     }
   }

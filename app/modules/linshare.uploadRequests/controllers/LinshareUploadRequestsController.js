@@ -15,10 +15,13 @@ angular
 LinshareUploadRequestsController.$inject = [
   '_',
   '$scope',
+  '$stateParams',
   'lsAppConfig',
   'UploadRequestObjectService',
   'toastService',
-  'functionalities'
+  'functionalities',
+  'uploadRequests',
+  'tableParamsService'
 ];
 
 /**
@@ -29,9 +32,13 @@ LinshareUploadRequestsController.$inject = [
 function LinshareUploadRequestsController(
   _,
   $scope,
+  $stateParams,
   lsAppConfig,
   UploadRequestObjectService,
-  toastService
+  toastService,
+  functionalities,
+  uploadRequests,
+  tableParamsService
 ) {
   const uploadRequestVm = this;
 
@@ -46,6 +53,26 @@ function LinshareUploadRequestsController(
     uploadRequestVm.toggleMoreOptions = toggleMoreOptions;
     uploadRequestVm.setSubmitted = setSubmitted;
     uploadRequestVm.createUploadRequest = createUploadRequest;
+    uploadRequestVm.itemsList = uploadRequests;
+    uploadRequestVm.status = $stateParams.status;
+    uploadRequestVm.paramFilter = { label: '' };
+    uploadRequestVm.currentSelectedDocument = {};
+
+    tableParamsService.initTableParams(uploadRequestVm.itemsList, uploadRequestVm.paramFilter)
+      .then(() => {
+        uploadRequestVm.tableParamsService = tableParamsService;
+        uploadRequestVm.numberOfSelectedUploadRequests = tableParamsService.lengthOfSelectedDocuments;
+        uploadRequestVm.resetSelectedUploadRequests = tableParamsService.resetSelectedItems;
+        uploadRequestVm.selectUploadRequestsOnCurrentPage = tableParamsService.tableSelectAll;
+        uploadRequestVm.addSelectedUploadRequest = tableParamsService.toggleItemSelection;
+        uploadRequestVm.sortDropdownSetActive = tableParamsService.tableSort;
+        uploadRequestVm.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
+        uploadRequestVm.selectedUploadRequests = tableParamsService.getSelectedItemsList();
+        uploadRequestVm.tableParams = tableParamsService.getTableParams();
+        uploadRequestVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
+        uploadRequestVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
+        uploadRequestVm.canCloseSelectedUploadRequests = () => uploadRequestVm.selectedUploadRequests.every(request => request.status === 'ENABLED');
+      });
   }
 
   /**
@@ -113,6 +140,7 @@ function LinshareUploadRequestsController(
   function handleErrors(uploadRequestObject) {
     if (uploadRequestObject.getRecipients().length === 0) {
       toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST'});
+
       return true;
     }
   }

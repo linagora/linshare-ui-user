@@ -6,14 +6,14 @@ angular
   .module('linshare.uploadRequests')
   .factory('uploadRequestRestService', uploadRequestRestService);
 
-uploadRequestRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
+uploadRequestRestService.$inject = ['$q', '$log', 'Restangular', 'ServerManagerService'];
 
 /**
  *  @namespace uploadRequestRestService
  *  @desc Service to interact with UploadRequest object by REST
  *  @memberof LinShare.uploadRequests
  */
-function uploadRequestRestService($log, Restangular, ServerManagerService) {
+function uploadRequestRestService($q, $log, Restangular, ServerManagerService) {
   const
     handler = ServerManagerService.responseHandler,
     restUrl = 'upload_request_groups';
@@ -38,6 +38,7 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    */
   function create(uploadRequestDto, options) {
     $log.debug('LinshareUploadRequestService : create', uploadRequestDto);
+
     return handler(Restangular.all(restUrl).post(uploadRequestDto, { groupMode: !!options.groupMode }));
   }
 
@@ -50,6 +51,7 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    */
   function get(uuid) {
     $log.debug('LinshareUploadRequestService : get', uuid);
+
     return handler(Restangular.all(restUrl).one(uuid).get());
   }
 
@@ -60,9 +62,20 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    *  @returns {Promise} server response
    *  @memberof LinShare.uploadRequests.uploadRequestRestService
    */
-  function getList(allUploadRequest) {
-    $log.debug('LinshareUploadRequestService : getList', allUploadRequest);
-    return handler(Restangular.all(restUrl).getList({'mine': allUploadRequest}));
+  function getList(status) {
+    $log.debug('LinshareUploadRequestService : getList', status);
+
+    const mapping = {
+      pending: 'CREATED',
+      activeClosed: ['ENABLED', 'CLOSED'],
+      archived: 'ARCHIVED'
+    };
+
+    if (!mapping[status]) {
+      return $q.reject(new Error('Status not supported'));
+    }
+
+    return handler(Restangular.all(restUrl).getList({ status: mapping[status] })).then(Restangular.stripRestangular);
   }
 
   /**
@@ -74,6 +87,7 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    */
   function remove(uploadRequestDto) {
     $log.debug('LinshareUploadRequestService : remove', uploadRequestDto);
+
     return handler(Restangular.one(restUrl, uploadRequestDto.uuid).remove());
   }
 
@@ -88,6 +102,7 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
   //TODO: the put should be on uploadRequests/{uuid}, to be corrected B&F
   function update(uuid, uploadRequestDto) {
     $log.debug('LinshareUploadRequestService : update', uuid, uploadRequestDto);
+
     return handler(Restangular.one(restUrl, uuid).customPUT(uploadRequestDto));
   }
 }

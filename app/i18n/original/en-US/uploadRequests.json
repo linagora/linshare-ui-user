@@ -1,6 +1,14 @@
 {
   "UPLOAD_REQUESTS": {
-    "TITLE": "Upload Requests",
+    "TITLE": "Upload requests",
+    "STATUS": {
+      "ACTIVE": "Active",
+      "EXPIRED_CLOSED": "Expired | Closed"
+    },
+    "CREATION_TYPE": {
+      "COLLECTIVE": "Collective upload",
+      "INDIVIDUAL": "Individual upload"
+    },
     "FORM_CREATE": {
       "SINGULAR_TITLE": "Upload Request",
       "COLLECTIVE": "Collective",
@@ -26,6 +34,38 @@
       "TOTAL_SIZE_OF_FILES_REQUIRED": "Total size of files is required and smaller than {max}",
       "MAX_NUMBER_OF_FILES_REQUIRED": "Max number of files is required and smaller than {max}",
       "MAX_SIZE_OF_A_FILE_REQUIRED": "Max size of a file is required and smaller than {max}"
+    },
+    "MENU_ENTRIES": {
+      "PENDING": "Pending",
+      "ACTIVE_CLOSED": "Active / Closed",
+      "ARCHIVES": "Archived"
+    },
+    "TABLE": {
+      "SEARCH_BY_LABEL": "Search by label",
+      "FILTER_BY": {
+        "ALL": "All"
+      },
+      "HEADERS": {
+        "LABEL": "Label",
+        "ACTIVATION_DATE": "Activation date",
+        "ARCHIVE_DATE": "Archive date",
+        "EXPIRATION_DATE": "Expiration date",
+        "FILES": "Files",
+        "STATUS": "Status",
+        "TYPE": "Type",
+        "CREATION_DATE": "Creation date"
+      },
+      "OPTIONS": {
+        "ADD_RECIPIENTS": "Add recipients",
+        "GLOBAL_EDIT": "Global edit",
+        "ACTIVATE": "Activate",
+        "CLOSE": "Close",
+        "ARCHIVE": "Archive"
+      },
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Create upload requests",
+        "MESSAGE": "These requests allow other users to upload files to your storage"
+      }
     }
   }
 }
