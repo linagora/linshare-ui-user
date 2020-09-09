@@ -31,16 +31,13 @@ function LinshareUploadRequestsController(
   $scope,
   lsAppConfig,
   UploadRequestObjectService,
-  toastService,
-  functionalities
+  toastService
 ) {
   const uploadRequestVm = this;
 
   uploadRequestVm.$onInit = onInit;
 
   function onInit() {
-    uploadRequestVm.isCollectiveModeEnabled = functionalities.UPLOAD_REQUEST__GROUPED_MODE && functionalities.UPLOAD_REQUEST__GROUPED_MODE.enabled;
-
     uploadRequestVm.loadSidebarContent = loadSidebarContent;
     uploadRequestVm.uploadRequestCreate = lsAppConfig.uploadRequestCreate;
     uploadRequestVm.mdTabsSelection = {
@@ -89,7 +86,6 @@ function LinshareUploadRequestsController(
     newUploadRequest.create().then(function() {
       $scope.mainVm.sidebar.hide(newUploadRequest);
       toastService.success({key: 'UPLOAD_REQUESTS.FORM_CREATE.SUCCESS'});
-      newUploadRequest.tableParams.reload();
     });
   }
 

@@ -93,6 +93,7 @@
         self.passwordProtected = setPropertyValue(jsonObject.passwordProtected, allowedToPasswordProtected.value);
         self.allowClosure = setPropertyValue(jsonObject.allowClosure, allowedToClosure.value);
         self.allowDeletion = setPropertyValue(jsonObject.allowDeletion, allowedToDeletion.value);
+        self.notificationLanguage = setPropertyValue(jsonObject.notificationLanguage, allowedToNotificationLanguage.value);
         self.mail = setPropertyValue(jsonObject.mail, '');
         self.groupMode = setPropertyValue(jsonObject.groupMode, false);
         self.message = setPropertyValue(jsonObject.message, '');
@@ -113,7 +114,9 @@
         self.getMinDateOfActivation = getMinDateOfActivation;
         self.getMaxSize = getMaxSize;
         self.getMaxDateOfNotification = getMaxDateOfNotification;
+        self.calculateDatePickerOptions = calculateDatePickerOptions;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
+        calculateDatePickerOptions();
         setFormValue().then(function(formData) {
           self.form = formData;
           if (!_.isUndefined(self.uuid)) {
@@ -198,8 +201,7 @@
         functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__NOTIFICATION_LANGUAGE').then(function(data) {
           var clonedData = _.cloneDeep(data || {});
           allowedToNotificationLanguage = clonedData;
-          allowedToNotificationLanguage.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
+          allowedToNotificationLanguage.canOverride = !!clonedData.canOverride;
         })
       ]);
     }
@@ -248,6 +250,7 @@
       dto.secured = self.passwordProtected;
       dto.enableNotification = true;
       dto.dirty = true;
+      dto.locale = self.notificationLanguage;
 
       return dto;
     }
@@ -432,6 +435,21 @@
       } else {
         return configValue * convertBase(currentUnit, configUnit);
       }
+    }
+
+    function calculateDatePickerOptions() {
+      self.expirationDateOptions = {
+        minDate: self.allowedToExpiration.minDate,
+        maxDate: self.getMaxDateOfExpiration()
+      };
+      self.activationDateOptions = {
+        minDate: self.getMinDateOfActivation(),
+        maxDate: self.expirationDate
+      };
+      self.notificationDateOptions = {
+        minDate: self.getMinDateOfActivation(),
+        maxDate: self.getMaxDateOfNotification()
+      };
     }
 
     // Helper

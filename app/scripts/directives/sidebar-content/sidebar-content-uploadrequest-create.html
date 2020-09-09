@@ -1,7 +1,7 @@
 <div id="member-sidebar">
   <div class="header-sidebar">
     <i ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x"
-      x-ng-click="mainVm.sidebar.getData().toggleMoreOptions(false)">
+      ng-click="mainVm.sidebar.getData().toggleMoreOptions(false)">
     </i>
     <h2 class="header-more-options setEllipsis">
       <span translate>UPLOAD_REQUESTS.FORM_CREATE.SINGULAR_TITLE</span>
@@ -9,12 +9,12 @@
       <span
         translate>{{ mainVm.sidebar.getData().groupMode ? 'UPLOAD_REQUESTS.FORM_CREATE.COLLECTIVE' : 'UPLOAD_REQUESTS.FORM_CREATE.INDIVIDUAL'}}</span>
     </h2>
-    <span class="hidden-xs actions" x-ng-click="mainVm.sidebar.hide()">
+    <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
   </div>
 
-  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
+  <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
       <md-content>
         <form name='createUploadRequest' class="custom-height-form">
           <md-tabs class="custom-height-md-tabs" md-selected="mainVm.sidebar.getData().mdTabsSelection.selectedIndex" md-border-bottom="">
@@ -24,10 +24,10 @@
                   <div class="custom-list-container clearfix">
                     <div class="recipients-form-sections clearfix recipients-form-custom-margin">
                       <h2 class="pull-left headerSubCtn" translate>RIGHT_PANEL.SHARE.RECIPIENTS</h2><span class="required-field-hint">*</span>
-                      <div x-ng-if="mainVm.sidebar.getData().linshareModeProduction == false"
+                      <div ng-if="mainVm.sidebar.getData().linshareModeProduction == false"
                         class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
                         on-toggle="toggled()">
-                        <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle x-ng-disabled="disabled"
+                        <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle ng-disabled="disabled"
                           alt="{{'RIGHT_PANEL.SHARE.CREATE_MAILING_LIST_ALT' | translate}}" translate>
                           RIGHT_PANEL.SHARE.CREATE_MAILING_LIST
                         </a>
@@ -41,11 +41,11 @@
                           </div>
                           <div>
                             <button class="btn btn-default col-xs-6"
-                              x-ng-click="mainVm.sidebar.getData().closeDropdown($event)" translate>
+                              ng-click="mainVm.sidebar.getData().closeDropdown($event)" translate>
                               NAVIGATION.CANCEL
                             </button>
                             <button class="btn btn-primary col-xs-6"
-                              x-ng-click="mainVm.sidebar.getData().createRecipientList($event)" translate>
+                              ng-click="mainVm.sidebar.getData().createRecipientList($event)" translate>
                               NAVIGATION.SEND
                             </button>
                           </div>
@@ -60,29 +60,29 @@
                     </form>
                     <div class="custom-list-body col-xs-12 ">
                       <div class="custom-list-item"
-                        x-ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestObject.getRecipients() | orderBy : '-' as results"
+                        ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestObject.getRecipients() | orderBy : '-' as results"
                         tooltip-placement="bottom" tooltip-popup-delay="700"
                         uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
                         <p class="pull-left circle-ctn">
-                          <span x-ng-show="recipient.domain"
+                          <span ng-show="recipient.domain"
                             class="circle user-bg">{{recipient.firstName.charAt(0)}}</span>
-                          <span x-ng-show="!recipient.domain"
+                          <span ng-show="!recipient.domain"
                             class="circle user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
                         </p>
                         <div class="pull-left name-recipients-ctn">
-                          <p x-ng-show="recipient.domain" class="pull-left inner-text-li">
+                          <p ng-show="recipient.domain" class="pull-left inner-text-li">
                             {{recipient.firstName + ' ' + recipient.lastName}}
                           </p>
-                          <p x-ng-show="!recipient.domain" class="pull-left inner-text-li">
+                          <p ng-show="!recipient.domain" class="pull-left inner-text-li">
                             {{recipient.mail}}
                           </p>
                           <p class="close-list-icone-btn pull-right"
-                            x-ng-click="mainVm.sidebar.getData().uploadRequestObject.removeRecipient(results.length - $index -1)">
+                            ng-click="mainVm.sidebar.getData().uploadRequestObject.removeRecipient(results.length - $index -1)">
                             <i class="zmdi zmdi-close "></i>
                           </p>
                         </div>
                       </div>
-                      <div class="custom-list-item" x-ng-repeat="list in mainvm.sidebar.getData().uploadRequestObject.getMailingList()"
+                      <div class="custom-list-item" ng-repeat="list in mainvm.sidebar.getData().uploadRequestObject.getMailingList()"
                         tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip="" owner-label
                         owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
                         owner-label-attr="uib-tooltip">
@@ -91,7 +91,7 @@
                         <div class="pull-left name-recipients-ctn">
                           <p class="pull-left inner-text-li">{{list.listName}}</p>
                           <p class=" close-list-icone-btn pull-right"
-                            x-ng-click="mainVm.sidebar.getData().uploadRequestObject.removeMailingList($index)">
+                            ng-click="mainVm.sidebar.getData().uploadRequestObject.removeMailingList($index)">
                             <i class="zmdi zmdi-close"></i>
                           </p>
                         </div>
@@ -102,33 +102,33 @@
                   <div class="recipients-form-sections clearfix">
                     <div class="custom-header-list">
                       <h2 class="pull-left headerSubCtn">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.EMAIL_MESSAGE" | translate}}
+                        <span translate>UPLOAD_REQUESTS.FORM_CREATE.EMAIL_MESSAGE</span>
                         <span class="required-field-hint">*</span>
                       </h2>
                     </div>
                     <div class="form-sidebar">
                       <div class="form-group col-xs-12 addNote no-padding">
-                        <div class="form-group fg-line" x-ng-class="{'has-error' : ((createUploadRequest.mail.$touched ||createUploadRequest.$submitted)
+                        <div class="form-group fg-line" ng-class="{'has-error' : ((createUploadRequest.mail.$touched ||createUploadRequest.$submitted)
                         && createUploadRequest.mail.$invalid)}">
-                          <textarea type="text" name="mail" class="form-control input-sm" x-ng-model="mainVm.sidebar.getData().uploadRequestObject.mail"
+                          <textarea type="text" name="mail" class="form-control input-sm" ng-model="mainVm.sidebar.getData().uploadRequestObject.mail"
                             placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}"
                             required
                           >
                           </textarea>
-                          <span x-ng-show="(createUploadRequest.mail.$touched ||createUploadRequest.$submitted) && createUploadRequest.mail.$invalid" translate>
+                          <span ng-show="(createUploadRequest.mail.$touched ||createUploadRequest.$submitted) && createUploadRequest.mail.$invalid" translate>
                             UPLOAD_REQUESTS.ERROR.SUBJECT_REQUIRED
                            </span>
                         </div>
-                        <div class="form-group fg-line" x-ng-class="{'has-error' : ((createUploadRequest.message.$touched ||createUploadRequest.$submitted)
+                        <div class="form-group fg-line" ng-class="{'has-error' : ((createUploadRequest.message.$touched ||createUploadRequest.$submitted)
                           && createUploadRequest.message.$invalid)}">
                           <textarea class="form-control comment" rows="5"
                             placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
-                            x-ng-model="mainVm.sidebar.getData().uploadRequestObject.message"
+                            ng-model="mainVm.sidebar.getData().uploadRequestObject.message"
                             name="message"
                             required
                           >
                           </textarea>
-                          <span x-ng-show="(createUploadRequest.message.$touched ||createUploadRequest.$submitted) && createUploadRequest.message.$invalid" translate>
+                          <span ng-show="(createUploadRequest.message.$touched ||createUploadRequest.$submitted) && createUploadRequest.message.$invalid" translate>
                             UPLOAD_REQUESTS.ERROR.BODY_REQUIRED
                           </span>
                         </div>
@@ -142,36 +142,35 @@
                         RIGHT_PANEL.SHARE.SETTINGS
                       </h2>
                       <a class="more-options sidebar-link" href=""
-                        x-ng-click="mainVm.sidebar.getData().toggleMoreOptions(true)" translate>
+                        ng-click="mainVm.sidebar.getData().toggleMoreOptions(true)" translate>
                         RIGHT_PANEL.SHARE.MORE_OPTIONS
                       </a>
                     </div>
                     <div ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToExpiration.enable"
                       class="col-xs-12 field-ctn clearfix">
-                      <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted">
-                        {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+                      <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                        RIGHT_PANEL.DETAILS.EXPIRATION_DATE
                       </label>
                       <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
-                        x-ng-class="{'is-opened': opened == true}">
-                        <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.expiration.$touched ||createUploadRequest.$submitted)
+                        ng-class="{'is-opened': opened == true}">
+                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.expiration.$touched ||createUploadRequest.$submitted)
                           && createUploadRequest.expiration.$invalid)}">
                           <div class="form-inline">
-                            <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                            <input working-date-picker ng-click="open($event, 'opened')" type="text"
                               ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToExpiration.canOverride"
                               class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                               is-open="opened"
                               required
-                              datepicker-options="::{minDate: mainVm.sidebar.getData().uploadRequestObject.allowedToExpiration.minDate,
-                                maxDate: mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfExpiration()}"
-                              min="{{mainVm.sidebar.getData().uploadRequestObject.allowedToExpiration.minDate | lsDate: 'fullDate'}}"
-                              max="{{mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfExpiration() | lsDate: 'fullDate'}}"
+                              datepicker-options="::mainVm.sidebar.getData().uploadRequestObject.expirationDateOptions"
+                              min="{{::mainVm.sidebar.getData().uploadRequestObject.expirationDateOptions.minDate}}"
+                              max="{{::mainVm.sidebar.getData().uploadRequestObject.expirationDateOptions.maxDate}}"
                               name='expiration'
-                              placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
-                              data-ng-model="mainVm.sidebar.getData().uploadRequestObject.expirationDate" 
+                              ng-model="mainVm.sidebar.getData().uploadRequestObject.expirationDate"
+                              ng-change="mainVm.sidebar.getData().uploadRequestObject.calculateDatePickerOptions()"
                             />
                           </div>
                           <span
-                            x-ng-show="createUploadRequest.expiration.$invalid"
+                            ng-show="createUploadRequest.expiration.$invalid"
                             translate
                             translate-interpolation="messageformat"
                             translate-values="{ value: mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfExpiration(true) }"
@@ -183,8 +182,8 @@
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
                       ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToTotalSizeOfFiles.enable">
-                      <label for="comment" class="label-muted col-xs-6 no-padding">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.TOTAL_SIZE_OF_FILES" | translate}}:
+                      <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.TOTAL_SIZE_OF_FILES
                       </label>
                       <div class="col-xs-6 flex-combine-input">
                         <input
@@ -192,7 +191,7 @@
                           class="form-control custom-bordered-input"
                           required
                           min="0"
-                          max="{{mainVm.sidebar.getData().uploadRequestObject.getMaxSize('total')}}"
+                          max="{{::mainVm.sidebar.getData().uploadRequestObject.getMaxSize('total')}}"
                           name="totalSizeOfFiles"
                           ng-model="mainVm.sidebar.getData().uploadRequestObject.totalSizeOfFiles.value" type="number" />
                         <md-select class="form-control custom-bordered-select m-0"
@@ -206,7 +205,7 @@
                         </md-select>
                       </div>
                       <div>
-                        <span class='has-error-span' x-ng-show="createUploadRequest.totalSizeOfFiles.$invalid
+                        <span class='has-error-span' ng-show="createUploadRequest.totalSizeOfFiles.$invalid
                           || createUploadRequest.totalSizeOfFilesUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
@@ -218,20 +217,20 @@
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
                       ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.enable">
-                      <label for="comment" class="label-muted col-xs-6 no-padding">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES" | translate}}:
+                      <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES
                       </label>
                       <div class="col-xs-6 flex-combine-input">
                         <input
                           name="maxNumberOfFiles"
                           required
-                          max="{{mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.value}}"
+                          max="{{::mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.value}}"
                           ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.canOverride"
                           class="form-control custom-bordered-input custom-single-input"
                           ng-model="mainVm.sidebar.getData().uploadRequestObject.maxNumberOfFiles" type="number" />
                       </div>
                       <div>
-                        <span class='has-error-span' x-ng-show="createUploadRequest.maxNumberOfFiles.$invalid"
+                        <span class='has-error-span' ng-show="createUploadRequest.maxNumberOfFiles.$invalid"
                           translate
                           translate-interpolation="messageformat"
                           translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.value}"
@@ -242,15 +241,15 @@
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
                       ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToMaxSizeOfAFile.enable">
-                      <label for="comment" class="label-muted col-xs-6 no-padding">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.MAX_SIZE_OF_A_FILE" | translate}}:
+                      <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.MAX_SIZE_OF_A_FILE
                       </label>
                       <div class="col-xs-6 flex-combine-input">
                         <input
                           ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToMaxSizeOfAFile.canOverride"
                           class="form-control custom-bordered-input"
                           name="maxSizeOfAFile"
-                          max="{{mainVm.sidebar.getData().uploadRequestObject.getMaxSize('one')}}"
+                          max="{{::mainVm.sidebar.getData().uploadRequestObject.getMaxSize('one')}}"
                           required
                           ng-model="mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile.value" type="number" />
                         <md-select class="form-control m-0 custom-bordered-select"
@@ -265,7 +264,7 @@
                         </md-select>
                       </div>
                       <div>
-                        <span class='has-error-span' x-ng-show="createUploadRequest.maxSizeOfAFile.$invalid || createUploadRequest.maxSizeOfAFileUnit.$invalid"
+                        <span class='has-error-span' ng-show="createUploadRequest.maxSizeOfAFile.$invalid || createUploadRequest.maxSizeOfAFileUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
                           translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.getMaxSize('one', true) }"
@@ -290,27 +289,28 @@
                     </div>
                     <div ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToActivation.enable"
                       class="col-xs-12 field-ctn clearfix">
-                      <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE" | translate}}:
+                      <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
                       </label>
                       <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
-                        x-ng-class="{'is-opened': opened == true}">
-                        <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.activation.$touched ||createUploadRequest.$submitted)
+                        ng-class="{'is-opened': opened == true}">
+                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.activation.$touched ||createUploadRequest.$submitted)
                           && createUploadRequest.activation.$invalid)}">
                           <div class="form-inline">
-                            <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                            <input working-date-picker ng-click="open($event, 'opened')" type="text"
                               ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToActivation.canOverride"
                               class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
-                              is-open="opened" data-ng-required="true"
+                              is-open="opened" ng-required="true"
                               name="activation"
-                              datepicker-options="::{minDate: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(),
-                                maxDate: mainVm.sidebar.getData().uploadRequestObject.expirationDate}"
-                              min="{{mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation() | lsDate: 'fullDate'}}"
-                              max="{{mainVm.sidebar.getData().uploadRequestObject.expirationDate | lsDate: 'fullDate'}}"
-                              data-ng-model="mainVm.sidebar.getData().uploadRequestObject.activationDate" />
+                              datepicker-options="::mainVm.sidebar.getData().uploadRequestObject.activationDateOptions"
+                              min="{{::mainVm.sidebar.getData().uploadRequestObject.activationDateOptions.minDate}}"
+                              max="{{::mainVm.sidebar.getData().uploadRequestObject.activationDateOptions.maxDate}}"
+                              ng-model="mainVm.sidebar.getData().uploadRequestObject.activationDate"
+                              ng-change="mainVm.sidebar.getData().uploadRequestObject.calculateDatePickerOptions()"
+                            />
                           </div>
                           <span
-                            x-ng-show="createUploadRequest.activation.$invalid"
+                            ng-show="createUploadRequest.activation.$invalid"
                             translate
                             translate-interpolation="messageformat"
                             translate-values="{ value: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(true) }"
@@ -322,34 +322,34 @@
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
                       ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToPasswordProtected.enable">
-                      <label for="comment" class="label-muted col-xs-6 no-padding">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.PASSWORD_PROTECTED" | translate}}:
+                      <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.PASSWORD_PROTECTED
                       </label>
                       <div class="col-xs-6 flex-combine-input">
-                        <input type="checkbox" data-ng-checked="mainVm.sidebar.getData().uploadRequestObject.passwordProtected"
-                          name="passwordProtected" data-ng-model="mainVm.sidebar.getData().uploadRequestObject.passwordProtected"
+                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestObject.passwordProtected"
+                          name="passwordProtected" ng-model="mainVm.sidebar.getData().uploadRequestObject.passwordProtected"
                           ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToPasswordProtected.canOverride" />
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
                       ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToDeletion.enable">
-                      <label for="comment" class="label-muted col-xs-6 no-padding">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.ALLOW_DELETION" | translate}}:
+                      <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.ALLOW_DELETION
                       </label>
                       <div class="col-xs-6 flex-combine-input">
-                        <input type="checkbox" data-ng-checked="mainVm.sidebar.getData().uploadRequestObject.allowDeletion"
-                          name="allowDeletion" data-ng-model="mainVm.sidebar.getData().uploadRequestObject.allowDeletion"
+                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestObject.allowDeletion"
+                          name="allowDeletion" ng-model="mainVm.sidebar.getData().uploadRequestObject.allowDeletion"
                           ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToDeletion.canOverride">
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
                       ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToClosure.enable">
-                      <label for="comment" class="label-muted col-xs-6 no-padding">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE" | translate}}:
+                      <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE
                       </label>
                       <div class="col-xs-6 flex-combine-input">
-                        <input type="checkbox" data-ng-checked="mainVm.sidebar.getData().uploadRequestObject.allowClosure"
-                          name="allowClosure" data-ng-model="mainVm.sidebar.getData().uploadRequestObject.allowClosure"
+                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestObject.allowClosure"
+                          name="allowClosure" ng-model="mainVm.sidebar.getData().uploadRequestObject.allowClosure"
                           ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToClosure.canOverride"
                         >
                       </div>
@@ -358,27 +358,28 @@
                       class="col-xs-12 field-ctn clearfix"
                       ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToExpiryNotification.enable"
                     >
-                      <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE" | translate}}:
+                      <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE
                       </label>
                       <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
-                        x-ng-class="{'is-opened': opened == true}">
-                        <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.notificationDate.$touched ||createUploadRequest.$submitted)
+                        ng-class="{'is-opened': opened == true}">
+                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.notificationDate.$touched ||createUploadRequest.$submitted)
                         && createUploadRequest.notificationDate.$invalid)}">
                           <div class="form-inline">
-                            <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                            <input working-date-picker ng-click="open($event, 'opened')" type="text"
                               ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToExpiryNotification.canOverride"
                               class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
-                              is-open="opened" data-ng-required="true"
+                              is-open="opened" ng-required="true"
                               name='notificationDate'
-                              datepicker-options="::{minDate: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(),
-                                maxDate: mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfNotification()}"
-                              min="{{mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation() | lsDate: 'fullDate'}}"
-                              max="{{mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfNotification() | lsDate: 'fullDate'}}"
-                              data-ng-model="mainVm.sidebar.getData().uploadRequestObject.notificationDate" />
+                              datepicker-options="::mainVm.sidebar.getData().uploadRequestObject.notificationDateOptions"
+                              min="{{::mainVm.sidebar.getData().uploadRequestObject.notificationDateOptions.minDate}}"
+                              max="{{::mainVm.sidebar.getData().uploadRequestObject.notificationDateOptions.maxDate}}"
+                              ng-model="mainVm.sidebar.getData().uploadRequestObject.notificationDate"
+                              ng-change="mainVm.sidebar.getData().uploadRequestObject.calculateDatePickerOptions()"
+                            />
                           </div>
                           <span
-                            x-ng-show="createUploadRequest.notificationDate.$invalid"
+                            ng-show="createUploadRequest.notificationDate.$invalid"
                             translate
                             translate-interpolation="messageformat"
                             translate-values="{ min: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(true),
@@ -390,17 +391,17 @@
                       </div>
                     </div>
 
-                    <div class="col-xs-12 field-ctn clearfix">
-                      <label for="comment" class="label-muted col-xs-6 no-padding">
-                        {{"UPLOAD_REQUESTS.FORM_CREATE.NOTIFICATION_LANGUAGE" | translate}}:
+                    <div class="col-xs-12 field-ctn clearfix" ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToNotificationLanguage.enable">
+                      <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                        UPLOAD_REQUESTS.FORM_CREATE.NOTIFICATION_LANGUAGE
                       </label>
                       <div class="col-xs-6 flex-combine-input">
-                        <md-select class="form-control m-0 custom-bordered-lang-select"
-                          ng-model="mainVm.sidebar.getData().uploadRequestObject.notificationLanguage">
-                          <md-option value="fr">FR</md-option>
-                          <md-option value="us">US</md-option>
-                          <md-option value="vn">VN</md-option>
-                          <md-option value="ru">RU</md-option>
+                        <md-select
+                          class="form-control m-0 custom-bordered-lang-select"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToNotificationLanguage.canOverride"
+                          ng-model="mainVm.sidebar.getData().uploadRequestObject.notificationLanguage"
+                        >
+                          <md-option ng-repeat="unit in mainVm.sidebar.getData().uploadRequestObject.allowedToNotificationLanguage.units" ng-value="unit">{{::unit}}</md-option>
                         </md-select>
                       </div>
                     </div>
@@ -414,14 +415,14 @@
   </div>
 </div>
 <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
-  <button class="btn btn-default col-xs-6" x-ng-click="shareActionVm.closeSideBar(); mainVm.sidebar.getData().closeDropdown($event);
+  <button class="btn btn-default col-xs-6" ng-click="shareActionVm.closeSideBar(); mainVm.sidebar.getData().closeDropdown($event);
           !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments();
           shareActionVm.newShare.resetForm()" translate>
     NAVIGATION.CANCEL
   </button>
   <button
     class="btn btn-primary col-xs-6"
-    x-ng-click="mainVm.sidebar.getData().createUploadRequest(createUploadRequest, mainVm.sidebar.getData().uploadRequestObject)"
+    ng-click="mainVm.sidebar.getData().createUploadRequest(createUploadRequest, mainVm.sidebar.getData().uploadRequestObject)"
     translate
   >
     NAVIGATION.CREATE
