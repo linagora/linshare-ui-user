@@ -47,6 +47,7 @@ function LinshareUploadRequestsController(
   function onInit() {
     uploadRequestVm.loadSidebarContent = loadSidebarContent;
     uploadRequestVm.uploadRequestCreate = lsAppConfig.uploadRequestCreate;
+    uploadRequestVm.uploadRequestDetails = lsAppConfig.uploadRequestDetails;
     uploadRequestVm.mdTabsSelection = {
       selectedIndex: 0
     };

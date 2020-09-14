@@ -1,0 +1,139 @@
+<div id="member-sidebar">
+  <div class="header-sidebar">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mainVm.sidebar.hide()"></i>
+    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelected.subject}} </h2>
+    <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
+      <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+    </span>
+  </div>
+
+  <div class="tabs-demo-static-tabs tab-nav-detail">
+    <md-content>
+      <md-tabs md-dynamic-height="" md-border-bottom="">
+        <md-tab id="tab1" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.DETAILS' | translate}}" class="col-xs-4 no-padding">
+          <div id="profile-main" class="detail-guest">
+            <div class="p-relative img-preview-ctn p-0">
+              <div class="dark-overlay"></div>
+              <div class="user-preview-ctn">
+                <div class="flex-ctn detail-info-ctn p-0 p-t-10">
+                  <div class="item-l m-b-10">
+                    <span class="first-letter user-info">
+                      <span class="temp-size">{{mainVm.sidebar.getData().currentSelected.filesUploaded || 0}}</span>
+                    </span>
+                  </div>
+                  <p class="m-b-0" translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="description-ctn form-sidebar"
+                  ng-class="{'show-full-comment': commentFocused}"
+                  ng-init="commentFocused = false">
+                <span class="comment">{{mainVm.sidebar.getData().currentSelected.body || 'N/A'}}</span>
+                <div class="edit-description clic-enabled">
+                  <i class="zmdi zmdi-eye"></i>
+                </div>
+              </div>
+            </div>
+            <div class="content-detail-area">
+              <div class="flex-ctn detail-info-ctn">
+                <div class="item-l">
+                  <span class="first-letter user-info">
+                  {{mainVm.sidebar.getData().currentSelected.owner ?
+                    mainVm.sidebar.getData().getOwnerName(mainVm.sidebar.getData().currentSelected) :
+                    'UNKNOWN_FIRST_LETTER' | translate | limitTo:1 | uppercase}}
+                  </span>
+                </div>
+                <div class="item-mid">
+                  <div class="name">
+                    {{mainVm.sidebar.getData().currentSelected.owner ?
+                    mainVm.sidebar.getData().getOwnerName(mainVm.sidebar.getData().currentSelected) :
+                    'UNKNOWN_USER' | translate}}
+                  </div>
+                  <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
+                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.creationDate |
+                      lsDate:'medium'}}">
+                      <span>
+                        {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
+                        {{mainVm.sidebar.getData().currentSelected.creationDate | lsDate:'longDate'}}
+                      </span>
+                  </div>
+                </div>
+                <div class="item-r actions"
+                    ng-show="mainVm.sidebar.getData().currentSelected.owner.uuid === userLogged.uuid" translate>
+                  <span>CONTACTS_LISTS_DETAILS.OWNER</span>
+                </div>
+              </div>
+              <div class="meta-data-ctn">
+                <h2 class="subheader">
+                  <i class="fa fa-file-text" aria-hidden="true"></i>
+                  <span translate>UPLOAD_REQUESTS.DETAIL_TAB.META_DATA</span>
+                </h2>
+                <div class="meta-data-content">
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.CREATED_AT</p>
+                    <p tooltip-placement="bottom" tooltip-popup-delay="500"
+                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate |
+                        lsDate:'medium'}}">
+                      {{mainVm.sidebar.getData().currentSelected.modificationDate | lsDate:'longDate'}}
+                    </p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ACTIVATED_AT</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.activationDate | lsDate:'longDate'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.EXPIRATION_DATE</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.expiryDate | lsDate:'longDate'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.GROUP</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.collective ? 'True' : 'False'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || 'N/A'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxFileCount || 'N/A'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxDepositSize || 'N/A'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxFileSize || 'N/A'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.protectedByPassword ? 'True' : 'False'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.canDeleteDocument ? 'True' : 'False'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.canClose ? 'True' : 'False'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.notificationDate | lsDate:'longDate'}}</p>
+                  </div>
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.locale || 'N/A'}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-tab>
+        <md-tab id="tab2" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding"></md-tab>
+        <md-tab id="tab3" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.ACTIVITIES' | translate}}" class="col-xs-4 no-padding"></md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
+</div>
