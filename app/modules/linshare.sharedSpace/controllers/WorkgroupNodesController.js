@@ -989,8 +989,8 @@
      */
     function showWorkgroupDetails(showMemberTab) {
       workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true, true)
-        .then(function(workgroup) {
-        // TODO : remove the map once the property userMail will be changed to mail
+        .then(workgroup => {
+          // TODO : remove the map once the property userMail will be changed to mail
           workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
             workgroup.members,
             function(member) {
@@ -1002,17 +1002,10 @@
           workgroupNodesVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
           return workgroup;
-        }).then(function() {
-          return $q.all([
-            workgroupRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid),
-            workgroupRestService.getAudit(workgroupNodesVm.folderDetails.workgroupUuid)
-          ]);
-        }).then(function(promises) {
-          workgroupNodesVm.currentSelectedDocument.quotas = Object.assign({}, promises[0]);
-
-          return auditDetailsService.generateAllDetails($scope.userLogged.uuid, promises[1].plain());
-        }).then(function(auditActions) {
-          workgroupNodesVm.currentSelectedDocument.current.auditActions = auditActions;
+        })
+        .then(() => workgroupRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid))
+        .then(quotas => {
+          workgroupNodesVm.currentSelectedDocument.quotas = quotas;
           workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
           workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupPage);
         });
