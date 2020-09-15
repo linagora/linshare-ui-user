@@ -16,8 +16,8 @@
               <div id="profile-main" class="detail-workgroup">
                 <div class="p-relative m-b-20 img-preview-ctn">
                   <document-preview-button
-                    item-index="0"
-                    items="[mainVm.sidebar.getData().currentSelectedDocument.current]"
+                    item-index="mainVm.sidebar.getData().currentSelectedDocument.index"
+                    items="mainVm.sidebar.getData().currentList"
                     icon="true"
                   >
                     <p data-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail &&

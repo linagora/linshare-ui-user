@@ -1,6 +1,6 @@
 <!-- TODO: Add the class p-t-10 if the function  toggleSearchState() has been activated -->
 <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height" data-ng-table="tableParams" show-filter="true">
-  <tr x-ng-repeat="documentFile in $data"
+  <tr x-ng-repeat="($index, documentFile) in $data"
       ls-item-selection=""
       data-selected-documents="selectedDocuments"
       data-document-file="documentFile"
@@ -47,7 +47,7 @@
           <p class="main-name-row">
             <span class="file-name-disp single-line" spellcheck="false">{{::documentFile.name}}</span>
             <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs"
-                  x-ng-click="showCurrentFile(documentFile, $event, true, 1)" event-propagation-stop>
+                  x-ng-click="showCurrentFile(documentFile, $event, { openDetailsSidebar: true, tabIndex: 1 })" event-propagation-stop>
               <span class="zmdi zmdi-share"></span>
               <span translate>BOUTON_LABEL_TITLE.SHARED</span>
             </span>

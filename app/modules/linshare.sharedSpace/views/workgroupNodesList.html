@@ -375,7 +375,7 @@
                 uib-dropdown-menu=""
                 data-ng-class="{'open': isOpenToolbarMore}"
               >
-                <li data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
+                <li data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0], $data, $index)">
                   <a href="">
                     <i class="zmdi zmdi-info"></i>
                     <span translate>ACTION.INFORMATION</span>
@@ -512,7 +512,7 @@
                    data-ng-table="workgroupNodesVm.tableParams"
                    show-filter="true"
                    data-ng-class="::{'col-4-table' : !linshareModeProduction}">
-              <tr data-ng-repeat="nodeItem in $data track by nodeItem.uuid"
+              <tr data-ng-repeat="($index, nodeItem) in $data track by nodeItem.uuid"
                   ls-item-selection data-selected-documents="workgroupNodesVm.selectedDocuments"
                   data-document-file="nodeItem"
                   data-current-selected-document="workgroupNodesVm.currentSelectedDocument"
@@ -555,7 +555,7 @@
                     </span>
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right double-mobile-actions">
-                        <li event-propagation-stop data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)" class="set-col-6">
+                        <li event-propagation-stop data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem, $data, $index)" class="set-col-6">
                           <a href="" translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}" class="set-col-12">
                             <i class="zmdi zmdi-info"></i>
                           </a>
@@ -596,7 +596,7 @@
                           </a>
                           <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                                 dropdown-divided dropdown-submenu" data-ng-class="{'open':isOpenItem}" uib-dropdown-menu="">
-                            <li event-propagation-stop data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem)">
+                            <li event-propagation-stop data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem, $data, $index)">
                               <a href="">
                                 <i class="zmdi zmdi-info"></i>
                                 <span translate>ACTION.INFORMATION</span>
@@ -914,7 +914,7 @@
         }"
         uib-dropdown-menu
       >
-        <li data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0])">
+        <li data-ng-click="workgroupNodesVm.showSelectedNodeDetails(workgroupNodesVm.selectedDocuments[0], $data, $index)">
           <a>
             <i class="zmdi zmdi-info"></i>
             <span translate>ACTION.INFORMATION</span>
