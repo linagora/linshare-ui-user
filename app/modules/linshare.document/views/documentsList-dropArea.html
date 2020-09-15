@@ -77,7 +77,7 @@
             </a>
           </li>
           <li class="hidden-xs">
-            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}" data-ng-click="showCurrentFile(selectedDocuments[0],$event, true)">
+            <a href="" data-ng-class="{'disable-link': selectedDocuments.length > 1}" data-ng-click="showCurrentFile(selectedDocuments[0],$event, { openDetailsSidebar: true})">
               <i class="zmdi zmdi-info" translate-attr="{title: 'ACTION.RENAME'}"></i>
               <span translate>ACTION.INFORMATION</span>
             </a>

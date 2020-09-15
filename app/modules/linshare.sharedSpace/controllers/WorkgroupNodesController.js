@@ -961,11 +961,15 @@
      * @name showSelectedNodeDetails
      * @desc Get information from a node and show them in the right sidebar
      * @param {Object} selectedNode - A Document node object
+     * @param {Array} list - List of documents displaying
+     * @param {Number} index - Index of current selected document in list
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function showSelectedNodeDetails(selectedNode) {
+    function showSelectedNodeDetails(selectedNode, list, index) {
       workgroupNodesVm.getNodeDetails(selectedNode).then(function(data) {
         workgroupNodesVm.currentSelectedDocument.current = data;
+        workgroupNodesVm.currentSelectedDocument.current.index = index || 0;
+        workgroupNodesVm.currentSelectedDocument.list = Array.isArray(list) && list.length ? list : [data];
         workgroupNodesVm.mdtabsSelection.selectedIndex = 0;
         workgroupNodesVm.loadSidebarContent(workgroupNodesVm.workgroupNode);
         workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(

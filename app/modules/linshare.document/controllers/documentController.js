@@ -647,14 +647,16 @@
      * @desc Get information from a file and show the sidebar details at a given tab
      * @param {Object} currentFile - A Document file object
      * @param {event} [event] - Event occuring launching the action
-     * @param {boolean} [openDetailsSidebar] - Open details sidebar
-     * @param {number} [tabIndex] - Index of the tab to display
+     * @param {Object} data - Contains openDetailsSidebar, tabIndex, list of documents & index of document
      * @memberOf LinShare.document.documentController
      */
-    function showCurrentFile(currentFile, event, openDetailsSidebar, tabIndex) {
+    function showCurrentFile(currentFile, event, data) {
+      var { openDetailsSidebar, tabIndex, list, index } = data;
       var deferred = $q.defer();
       $scope.searchShareUsersInput = '';
       $scope.currentSelectedDocument.current = currentFile;
+      $scope.currentSelectedDocument.index = index || 0;
+      $scope.currentList = Array.isArray(list) && list.length ? list : [currentFile];
       $q.all([
         LinshareDocumentRestService.get(currentFile.uuid),
         LinshareDocumentRestService.getAudit(currentFile.uuid)
