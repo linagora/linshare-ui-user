@@ -345,7 +345,7 @@ angular.module('linshare.sharedSpace')
             thisctrl.canCreate = true;
           }
         })
-        .finally(thisctrl.tableParams.reload);
+        .finally(() => thisctrl.tableParams.reload());
     }
 
     function createFolder(folderName) {
