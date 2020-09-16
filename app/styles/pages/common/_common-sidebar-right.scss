@@ -803,7 +803,7 @@ STANDARD CONTENT
 MOBILE RESPONSIVE SIDEBAR MECHANISM
   ***********************/
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .header-sidebar {
     background-color: $primary-color;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
@@ -893,7 +893,7 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
 MOBILE RESPONSIVE  SIDEBAR CONTENT
   ***********************/
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #chat.sidebar-right .container > div #member-sidebar div.tabs-demo-static-tabs.tab-nav-detail {
     height: 100%
   }
@@ -958,7 +958,7 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
   MOBILE RESPONSIVE - FORM
   ***********************/
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .recipients-form-sections .datepicker-ctn.fg-line,
   .form-sidebar .datepicker-ctn.fg-line {
     display: inline-block;
@@ -1038,7 +1038,7 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
   MOBILE RESPONSIVE - ACTION BUTTONS IN NAV BAR
   ***********************/
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .setSidebarRightMobileState .header-sidebar.form-sidebar{
     display: flex;
     .zmdi-chevron-left {
@@ -1114,7 +1114,7 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
   height: calc(100% - 200px);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #content-ctn-sidebar.form-guests,
   #content-ctn-sidebar.scrollable-sidebar-area{
     width: 100% !important;
