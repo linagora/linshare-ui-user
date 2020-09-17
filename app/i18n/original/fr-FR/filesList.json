@@ -19,7 +19,7 @@
     "MOVE_HERE": "Déplacer ici",
     "SHARED_SPACE": "Espace commun",
     "TITLE": "Choisissez la destination",
-    "NO_WORKGROUP": "Vous n'avez pas encore de Groupe de travail. Allez dans <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#/sharedspace/list' translate>Espace commun</a> pour en créer un.",
+    "NO_WORKGROUP": "Vous n'avez pas encore de Groupe de travail. Allez dans <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#!/sharedspace/list' translate>Espace commun</a> pour en créer un.",
     "NO_WORKGROUP_TO_COPY_TO": "Vous n'avez pas de groupe de travail. Demander à un administrateur de vous en créer un ou de vous y ajouter en tant que contributeur"
    },
   "RIGHT_PANEL": {

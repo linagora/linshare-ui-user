@@ -19,7 +19,7 @@
     "MOVE_HERE": "Move here",
     "SHARED_SPACE": "Shared space",
     "TITLE": "Pick the destination",
-    "NO_WORKGROUP": "You do not have any workgroup, please go in <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#/sharedspace/list' translate>Shared space</a> and create one.",
+    "NO_WORKGROUP": "You do not have any workgroup, please go in <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#!/sharedspace/list' translate>Shared space</a> and create one.",
     "NO_WORKGROUP_TO_COPY_TO": "You do not have any workgroup. Ask an administrator to create one for you or to be added in one as a contributor"
     },
   "RIGHT_PANEL": {

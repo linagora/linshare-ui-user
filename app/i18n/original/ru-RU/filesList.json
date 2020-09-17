@@ -19,7 +19,7 @@
       "MOVE_HERE": "Перенести сюда",
       "SHARED_SPACE": "Рабочая группа",
       "TITLE": "Выберите пункт назначения",
-      "NO_WORKGROUP": "У вас еще нет рабочих групп. Перейдите в <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#/sharedspace/list' translate>Рабочие группы</a>, чтобы их создать.",
+      "NO_WORKGROUP": "У вас еще нет рабочих групп. Перейдите в <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#!/sharedspace/list' translate>Рабочие группы</a>, чтобы их создать.",
       "NO_WORKGROUP_TO_COPY_TO": "У вас нет созданной рабочей группы. Запросите администратора создать рабочую группу для вас или добавить вас в существующую в качестве участника."
      },
     "RIGHT_PANEL": {

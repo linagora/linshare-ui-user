@@ -18,7 +18,7 @@
     "MOVE_HERE": "Chuyển đến đây",
     "SHARED_SPACE": "Không gian chia sẻ",
     "TITLE": "Chọn điểm đến",
-    "NO_WORKGROUP": "Bạn không có nhóm nào, vui lòng vào <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#/sharedspace/list' translate> Không gian chia sẻ </a> và tạo nhóm.",
+    "NO_WORKGROUP": "Bạn không có nhóm nào, vui lòng vào <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#!/sharedspace/list' translate> Không gian chia sẻ </a> và tạo nhóm.",
     "NO_WORKGROUP_TO_COPY_TO": "Bạn không có nhóm nào. Yêu cầu quản trị viên tạo nhóm cho bạn hoặc thêm bạn làm cộng tác viên"
   },
   "RIGHT_PANEL": {
