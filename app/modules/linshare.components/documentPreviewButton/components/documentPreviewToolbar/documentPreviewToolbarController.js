@@ -12,13 +12,15 @@
   DocumentPreviewToolbarController.$inject = [
     '_',
     '$timeout',
-    'documentPreviewService'
+    'documentPreviewService',
+    'functionalityRestService'
   ];
 
   function DocumentPreviewToolbarController(
     _,
     $timeout,
-    documentPreviewService
+    documentPreviewService,
+    functionalityRestService
   ) {
     var documentPreviewToolbarVm = this;
 
@@ -40,7 +42,14 @@
      */
     function $onInit() {
       documentPreviewToolbarVm.canCopyToMySpace = !_.isNil(documentPreviewService.copyToMySpace);
-      documentPreviewToolbarVm.canCopyToWorkgroup = !_.isNil(documentPreviewService.copyToWorkgroup);
+
+      functionalityRestService.getFunctionalityParams('WORK_GROUP').then(functionality => {
+        if (functionality && functionality.enable) {
+          documentPreviewToolbarVm.canCopyToWorkGroup = !_.isNil(documentPreviewService.copyToWorkgroup);
+        } else {
+          documentPreviewToolbarVm.canCopyToWorkGroup = false;
+        }
+      });
     }
 
     /**

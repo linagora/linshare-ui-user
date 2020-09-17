@@ -18,7 +18,7 @@
   <div uib-dropdown>
     <md-button
       class="md-icon-button actions white-inline-link"
-      data-ng-class="{'visible-xs': !($ctrl.scope.canCopyToMySpace || $ctrl.scope.canCopyToWorkgroup)}"
+      data-ng-class="{'visible-xs': !($ctrl.scope.canCopyToMySpace || $ctrl.scope.canCopyToWorkGroup)}"
       uib-dropdown-toggle keyboard-nav
     >
       <a >
@@ -63,7 +63,7 @@
             </a>
           </li>
           <li
-            data-ng-if="$ctrl.scope.canCopyToWorkgroup"
+            data-ng-if="$ctrl.scope.canCopyToWorkGroup"
             data-ng-click="$ctrl.scope.copyToWorkgroup($ctrl.scope.item)"
           >
             <a href="">

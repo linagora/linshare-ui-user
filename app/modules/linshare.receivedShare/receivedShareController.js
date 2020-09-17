@@ -65,6 +65,7 @@
         current: ''
       };
       $scope.flagsOnSelectedPages = {};
+      $scope.canCopyInWorkGroup = functionalities.WORK_GROUP && functionalities.WORK_GROUP.enable;
 
       activate();
 

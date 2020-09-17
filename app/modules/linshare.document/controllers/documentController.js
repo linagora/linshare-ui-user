@@ -85,6 +85,7 @@
     $scope.toggleSearchState = toggleSearchState;
     $scope.updateDocument = updateDocument;
     $scope.functionalities = functionalities;
+    $scope.canCopyInWorkGroup = functionalities.WORK_GROUP && functionalities.WORK_GROUP.enable;
 
     activate();
 

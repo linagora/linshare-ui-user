@@ -204,7 +204,7 @@
                   </a>
                 </li>
                 <li class="divider"></li>
-                <li data-ng-click="openBrowser(selectedDocuments)">
+                <li data-ng-click="openBrowser(selectedDocuments)" ng-if="canCopyInWorkGroup">
                   <a href="">
                     <i class="zmdi groups-home-workgroup"></i>
                     <span translate>ACTION.COPY_IN_WORKGROUP</span>
@@ -350,7 +350,7 @@
                                 <span translate>ACTION.PREVIEW</span>
                               </document-preview-button>
                             </li>                           
-                            <li>
+                            <li ng-if="canCopyInWorkGroup">
                               <a data-ng-href="" data-ng-click="openBrowser([documentFile])" event-propagation-stop>
                                 <i class="zmdi groups-home-workgroup"></i>
                                 <span translate>ACTION.COPY_IN_WORKGROUP</span>

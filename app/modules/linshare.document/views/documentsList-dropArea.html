@@ -70,7 +70,7 @@
               <span translate>ACTION.DUPLICATE</span>
             </a>
           </li>
-          <li class="hidden-xs">
+          <li class="hidden-xs" ng-if="canCopyInWorkGroup">
             <a href="" data-ng-click="openBrowser(selectedDocuments)">
               <i class="zmdi groups-home-workgroup" translate-attr="{title: 'ACTION.COPY_IN_WORKGROUP'}"></i>
               <span translate>ACTION.COPY_IN_WORKGROUP</span>
