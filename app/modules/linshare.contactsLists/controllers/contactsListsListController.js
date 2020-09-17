@@ -455,6 +455,8 @@
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
     function renameContactsList(item, itemNameElem) {
+      // Set fromServer to true to prevent sending POST request instead of PUT request ( with duplicated contact list )
+      item.fromServer = true;
       itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
       itemUtilsService
         .rename(item, itemNameElem)
