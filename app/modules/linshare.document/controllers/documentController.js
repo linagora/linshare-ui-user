@@ -98,6 +98,7 @@
           download: downloadFile,
           //TODO - PREVIEW: Functions should be callable from a external service
           //TODO - PREVIEW: Function shall be split in two to accept both an array and a single element
+          copyToMySpace: undefined,
           copyToWorkgroup: function (item) {
             openBrowser([item]);
           },
