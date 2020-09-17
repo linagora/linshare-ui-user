@@ -15,6 +15,7 @@ angular
 LinshareUploadRequestsController.$inject = [
   '_',
   '$scope',
+  '$state',
   '$stateParams',
   'lsAppConfig',
   'UploadRequestObjectService',
@@ -32,6 +33,7 @@ LinshareUploadRequestsController.$inject = [
 function LinshareUploadRequestsController(
   _,
   $scope,
+  $state,
   $stateParams,
   lsAppConfig,
   UploadRequestObjectService,
@@ -110,9 +112,13 @@ function LinshareUploadRequestsController(
       uploadRequestVm.setSubmitted(form);
     }
 
-    newUploadRequest.create().then(function() {
+    newUploadRequest.create().then(request => {
       $scope.mainVm.sidebar.hide(newUploadRequest);
       toastService.success({key: 'UPLOAD_REQUESTS.FORM_CREATE.SUCCESS'});
+
+      $state.go('uploadRequests', {
+        status: request.status === 'CREATED' ? 'pending' : 'activeClosed'
+      });
     });
   }
 
