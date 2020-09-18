@@ -118,8 +118,8 @@
     "TBT__PROJECT": "",
     "TBT__FOLDER": "",
     "TBT__SHARED_FOLDER": "",
-    "TBT__UPLOAD_FILE": "",
-    "TBT__UPLOAD_FOLDER": "",
+    "UPLOAD_FILE": "Tải tập tin lên",
+    "UPLOAD_FOLDER": "Tải thư mục lên",
     "TBT__UPLOAD_REQUEST": "",
     "TBT__MEMBER": ""
   }
