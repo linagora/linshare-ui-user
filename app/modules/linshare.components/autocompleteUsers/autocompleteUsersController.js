@@ -74,7 +74,7 @@
           autocompleteUsersVm.withEmail = false;
         }
       }).catch(function(error) {
-        $log.debug(error)
+        $log.debug(error);
       });
     }
 

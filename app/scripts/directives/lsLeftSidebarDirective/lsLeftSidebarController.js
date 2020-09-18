@@ -60,7 +60,7 @@
       $http.get('/about.json').then(function(data) {
         lsLeftSidebarVm.productVersion = data.version;
       }).catch(function(error) {
-        $log.debug(error)
+        $log.debug(error);
       });
     }
   }

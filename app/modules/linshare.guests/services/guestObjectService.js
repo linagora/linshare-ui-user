@@ -245,7 +245,7 @@
       } else {
         const startOfDay = moment().startOf('day').valueOf();
         const diffTime = startOfDay > self.creationDate ? startOfDay - self.creationDate : 0;
-        form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.value).add(diffTime, 'ms'))
+        form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.value).add(diffTime, 'ms'));
       }
 
       deferred.resolve(_.cloneDeep(form));

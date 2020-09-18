@@ -25,7 +25,7 @@
   ) {
     var createContactsListVm = this;
 
-    createContactsListVm.$onInit = $onInit
+    createContactsListVm.$onInit = $onInit;
 
     function $onInit() {
       createContactsListVm.goToContactsList = goToContactsList;

@@ -460,7 +460,7 @@
           workgroupNodesRestService.metadata(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid)
             .then(function(nodeDetail) {
               if ( nodeDetail.size > workgroupNodesVm.downloadArchiveThreshold ) {
-                toastService.error({ key: 'TOAST_ALERT.ERROR.DOWNLOAD_FOLDER' })
+                toastService.error({ key: 'TOAST_ALERT.ERROR.DOWNLOAD_FOLDER' });
               } else {
                 nodeTypeDownloadFunction.DOCUMENT();
               }

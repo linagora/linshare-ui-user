@@ -44,7 +44,7 @@
           secondFactorControllerVm.freeOTPConfig = angular.extend({
             account: secondFactorControllerVm.user.mail,
             secret: secondFA.sharedKey
-          }, FREEOTP_CONFIGURATION)
+          }, FREEOTP_CONFIGURATION);
           secondFactorControllerVm.freeOTPUri = makeFreeOTPUri(secondFactorControllerVm.freeOTPConfig);
           secondFactorAuthenticationTransitionService.deregisterHook();
           $timeout();

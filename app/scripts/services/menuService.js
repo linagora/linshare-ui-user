@@ -127,7 +127,7 @@
 
           uploadRequests.hide = !functionalities.UPLOAD_REQUEST.enable;
         }).catch(function(error) {
-          $log.debug(error)
+          $log.debug(error);
         });
 
       administrations = {
@@ -179,13 +179,13 @@
         name: secondFactorAuthenticationMenuName,
         link: 'secondFactorAuthentication',
         hide: true
-      }
+      };
 
       changePassword = {
         name: changePasswordMenuName,
         link: 'changePassword',
         hide: true
-      }
+      };
 
       home = {
         name: 'MENU_TITLE.HOME',
@@ -238,7 +238,7 @@
         link: 'uploadRequests',
         icon: 'zmdi zmdi-pin-account',
         hide: false
-      }
+      };
 
       tabs = [
         changePassword,

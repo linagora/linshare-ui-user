@@ -15,7 +15,7 @@
     })
     .directive('passwordValidator', passwordValidator);
 
-  passwordValidator.$inject = ['_', 'PASSWORD_REGEX_RULE_MAPPINGS']
+  passwordValidator.$inject = ['_', 'PASSWORD_REGEX_RULE_MAPPINGS'];
 
   function passwordValidator(_, PASSWORD_REGEX_RULE_MAPPINGS) {
     return {
@@ -30,10 +30,10 @@
               var matches = value && value.match(PASSWORD_REGEX_RULE_MAPPINGS[name]);
 
               return matches && matches.length >= rules[name];
-            }
+            };
           }
-        })
+        });
       }
-    }
+    };
   }
 })();

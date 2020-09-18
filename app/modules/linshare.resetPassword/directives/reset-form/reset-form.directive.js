@@ -49,7 +49,7 @@
         forgot: require('./reset-form-forgot.html'),
         reinitialize: require('./reset-form-reinitialize.html'),
         update: require('./reset-form-update.html')
-      }
+      };
 
       return resetForms[attrs.resetType];
     }

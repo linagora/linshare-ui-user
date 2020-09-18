@@ -27,7 +27,7 @@
     /* jshint validthis: true */
     var sidebarAuditActionsTabVm = this;
     var deferred;
-    var getter = { workgroup: workgroupRestService.getAudit }
+    var getter = { workgroup: workgroupRestService.getAudit };
 
     sidebarAuditActionsTabVm.$onInit = $onInit;
     sidebarAuditActionsTabVm.$onChanges = $onChanges;

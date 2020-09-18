@@ -119,7 +119,7 @@
             $scope.mainVm.sidebar.addData('currentWorkgroupMember', currentMember );
           })
           .catch(function(error) {
-            $log.debug(error)
+            $log.debug(error);
           });
 
       }, true);

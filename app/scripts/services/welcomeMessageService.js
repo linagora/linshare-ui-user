@@ -20,21 +20,21 @@
 
           switch(language) {
             case 'en-US':
-              WELCOME_MESSAGE = welcomeMessageData['ENGLISH']
+              WELCOME_MESSAGE = welcomeMessageData['ENGLISH'];
               break;
             case 'fr-FR':
-              WELCOME_MESSAGE = welcomeMessageData['FRENCH']
+              WELCOME_MESSAGE = welcomeMessageData['FRENCH'];
               break;
             case 'vi-VN':
-              WELCOME_MESSAGE = welcomeMessageData['VIETNAMESE']
+              WELCOME_MESSAGE = welcomeMessageData['VIETNAMESE'];
               break;
             case 'ru-RU':
-              WELCOME_MESSAGE = welcomeMessageData['RUSSIAN']
+              WELCOME_MESSAGE = welcomeMessageData['RUSSIAN'];
               break;
           }
 
           return WELCOME_MESSAGE;
-        })
+        });
       }
     };
   };

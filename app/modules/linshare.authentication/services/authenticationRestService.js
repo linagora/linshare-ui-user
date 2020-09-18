@@ -116,7 +116,7 @@
 
         return deferred.resolve(user);
       }).catch(function(error) {
-        var foundError = authenticationUtilsService.findError(error)
+        var foundError = authenticationUtilsService.findError(error);
 
         if (foundError) {
           toastService[foundError.notificationType]({ key: foundError.message });

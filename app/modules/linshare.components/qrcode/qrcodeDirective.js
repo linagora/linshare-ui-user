@@ -19,7 +19,7 @@
       template: '<div class="qrcode-container"></div>',
       link: function(scope, elm, attrs) {
         if (attrs.logoImageSrc) {
-          angular.element(elm[0]).find('.qrcode-container').append('<img src="'+ attrs.logoImageSrc + '"></img>')
+          angular.element(elm[0]).find('.qrcode-container').append('<img src="'+ attrs.logoImageSrc + '"></img>');
         }
 
         angular.element(elm[0]).find('.qrcode-container').qrcode({
@@ -28,6 +28,6 @@
           height: scope.size,
         });
       }
-    }
+    };
   }
 })();

@@ -34,6 +34,6 @@
             return changePasswordRestService.getRules();
           }
         }
-      })
+      });
   }
 })();

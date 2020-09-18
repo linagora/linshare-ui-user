@@ -49,7 +49,7 @@ describe('Testing Authentication Module: ', function () {
       authenticationRestService.logout();
       httpBackend.flush();
       expect(authService.loginCancelled.calls.any()).toEqual(true);
-    })
+    });
   });
 
   describe('Test Authentication Controller', function() {

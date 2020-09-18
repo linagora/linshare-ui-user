@@ -8,7 +8,7 @@
     .module('linshare.authentication')
     .factory('authenticationUtilsService', authenticationUtilsService);
 
-  authenticationUtilsService.$inject = ['_']
+  authenticationUtilsService.$inject = ['_'];
 
   var loginErrors = [
     {
@@ -46,7 +46,7 @@
     return {
       buildHeader: buildHeader,
       findError: findError
-    }
+    };
 
     function findError(error) {
       var foundError = _.find(loginErrors, function(loginError) {

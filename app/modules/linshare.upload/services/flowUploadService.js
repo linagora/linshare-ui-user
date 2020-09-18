@@ -260,7 +260,7 @@
         authenticationRestService.getCurrentUser().then(function(user) {
           userQuotaUuid = user.quotaUuid;
         }).catch(function(error) {
-          $log.debug(error)
+          $log.debug(error);
         });
       }
     }

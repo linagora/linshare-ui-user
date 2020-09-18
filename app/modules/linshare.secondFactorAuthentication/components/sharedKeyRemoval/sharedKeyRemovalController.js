@@ -37,7 +37,7 @@
     sharedKeyRemovalControllerVm.showDeleteModal = showDeleteModal;
 
     function showDeleteModal() {
-      itemUtilsService.deleteItem(null, '2FA_SHARED_KEY', removeSharedKey)
+      itemUtilsService.deleteItem(null, '2FA_SHARED_KEY', removeSharedKey);
     }
 
     function removeSharedKey() {

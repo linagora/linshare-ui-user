@@ -22,7 +22,7 @@
     unitService) {
     var filterBoxVm = this;
 
-    filterBoxVm.$onInit = $onInit
+    filterBoxVm.$onInit = $onInit;
 
     function $onInit() {
       filterBoxVm.autocompleteUserRestService = autocompleteUserRestService;

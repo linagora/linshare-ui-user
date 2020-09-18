@@ -9,7 +9,7 @@
     .module('linshare.secondFactorAuthentication')
     .controller('secondFactorAuthenticationLoginController', secondFactorAuthenticationLoginController);
 
-  secondFactorAuthenticationLoginController.$inject = ['$stateParams', 'authenticationRestService', 'toastService', 'lsAppConfig']
+  secondFactorAuthenticationLoginController.$inject = ['$stateParams', 'authenticationRestService', 'toastService', 'lsAppConfig'];
 
   /**
    *  @namespace secondFactorAuthenticationLoginController

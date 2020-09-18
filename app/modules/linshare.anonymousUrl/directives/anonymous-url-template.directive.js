@@ -25,7 +25,7 @@
 
         return anonymousUrlService.status === 404 ?
           require('../views/404.html') :
-          require('../views/anonymousUrl.html')
+          require('../views/anonymousUrl.html');
       }
     };
     return directive;

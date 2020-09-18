@@ -52,7 +52,7 @@
       });
   }
 
-  registerTransitionHook.$inject = ['secondFactorAuthenticationTransitionService']
+  registerTransitionHook.$inject = ['secondFactorAuthenticationTransitionService'];
 
   /**
    * @namespace registerTransitionHook

@@ -27,7 +27,7 @@
     };
   };
 
-  otpInputAutofocus.$inject = ['$timeout']
+  otpInputAutofocus.$inject = ['$timeout'];
 
   function otpInputAutofocus($timeout) {
     return {
@@ -36,9 +36,9 @@
         angular.element(document).ready(function () {
           $timeout(function() {
             element[0].focus();
-          })
+          });
         });
       }
-    }
+    };
   };
 })();

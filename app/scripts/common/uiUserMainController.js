@@ -381,7 +381,7 @@
             $scope.userLogged = user;
             getUserQuotas();
           }).catch(function(error) {
-            $log.debug(error)
+            $log.debug(error);
           });
       }
     }

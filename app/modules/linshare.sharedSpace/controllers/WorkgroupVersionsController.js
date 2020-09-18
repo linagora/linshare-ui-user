@@ -459,7 +459,7 @@
       workgroupVersionsVm.breadcrumb.push({
         name : workgroupVersionsVm.currentFolder.name,
         uuid: workgroupVersionsVm.currentFolder.uuid
-      })
+      });
     }
 
     /**
@@ -564,7 +564,7 @@
           }
 
           return deleteVersionsResponse;
-        })
+        });
     }
 
     /**

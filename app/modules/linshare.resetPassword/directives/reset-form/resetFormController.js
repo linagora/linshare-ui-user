@@ -18,7 +18,7 @@
     /* jshint validthis:true */
     var resetFormVm = this;
 
-    resetFormVm.$onInit = $onInit
+    resetFormVm.$onInit = $onInit;
 
     function $onInit() {
       resetFormVm.getFormData = getFormData;
