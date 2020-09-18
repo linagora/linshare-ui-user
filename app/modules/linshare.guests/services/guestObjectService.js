@@ -233,14 +233,21 @@
       form.activateRestricted = setPropertyValue(self.restricted, allowedToRestrict.value);
       form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
       form.datepicker.options.maxDate = _.clone(allowedToExpiration.value);
-      if (!_.isUndefined(self.uuid) && !(allowedToProlongExpiration.enable)) {
+      form.activateMoreOptions = !form.activateUserSpace;
+
+      form.datepicker.isEditable = true;
+      if (!allowedToExpiration.canOverride) {
         form.datepicker.isEditable = false;
-        form.datepicker.options.maxDate = _.clone(self.expirationDate);
       }
-      form.activateMoreOptions = (!form.activateUserSpace);
-      if (_.isUndefined(self.uuid) && allowedToExpiration.canOverride) {
-        form.datepicker.isEditable = true;
+
+      if (!allowedToProlongExpiration.enable) {
+        form.datepicker.options.maxDate = _.clone(allowedToExpiration.value);
+      } else {
+        const startOfDay = moment().startOf('day').valueOf();
+        const diffTime = startOfDay > self.creationDate ? startOfDay - self.creationDate : 0;
+        form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.value).add(diffTime, 'ms'))
       }
+
       deferred.resolve(_.cloneDeep(form));
       return deferred.promise;
     }
