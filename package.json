@@ -54,6 +54,7 @@
     "node-sass": "4.14.1",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "postcss-loader": "3.0.0",
+    "pre-commit": "1.2.2",
     "sass": "1.26.10",
     "sass-loader": "9.0.3",
     "serve-static": "1.14.1",
@@ -69,8 +70,12 @@
     "serve": "webpack-dev-server --watch --progress",
     "serve:prod": "webpack-dev-server --env=prod",
     "build:dev": "webpack",
-    "build:prod": "webpack --env=prod"
+    "build:prod": "webpack --env=prod",
+    "lint": "npx eslint ."
   },
+  "pre-commit": [
+    "lint"
+  ],
   "engines": {
     "node": ">=12.18.2"
   },
