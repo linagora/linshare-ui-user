@@ -7,6 +7,8 @@
       data-current-selected-Document="currentSelectedDocument"
       data-details-function="getDetails"
       data-right-sidebar-open="mainVm.sidebar.isVisible()"
+      list="$data"
+      index="$index"
       x-ng-click="backToSidebarContentDetails()"
       x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
                    'current-vis': currentSelectedDocument.current.uuid === documentFile.uuid}"

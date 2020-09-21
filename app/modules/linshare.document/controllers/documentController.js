@@ -402,8 +402,10 @@
       });
     }
 
-    function getDetails(item) {
-      return $scope.showCurrentFile(item);
+    function getDetails(item, list, index) {
+      index = index || 0;
+      list = Array.isArray(list) && list.length ? list : [item];
+      return $scope.showCurrentFile(item, null, { index, list });
     }
 
     function getDocumentInfo(uuid) {
@@ -652,7 +654,7 @@
      * @param {Object} data - Contains openDetailsSidebar, tabIndex, list of documents & index of document
      * @memberOf LinShare.document.documentController
      */
-    function showCurrentFile(currentFile, event, data) {
+    function showCurrentFile(currentFile, event, data = {}) {
       var { openDetailsSidebar, tabIndex, list, index } = data;
       var deferred = $q.defer();
       $scope.searchShareUsersInput = '';
