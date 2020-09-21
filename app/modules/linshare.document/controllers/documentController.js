@@ -403,8 +403,13 @@
       });
     }
 
-    function getDetails(item) {
-      return $scope.showCurrentFile(item);
+    function getDetails(item, list, index) {
+      index = index || 0;
+      list = Array.isArray(list) && list.length ? list : [item];
+      return $scope.showCurrentFile(item, null, {
+        index: index,
+        list: list
+      });
     }
 
     function getDocumentInfo(uuid) {
@@ -654,12 +659,13 @@
      * @memberOf LinShare.document.documentController
      */
     function showCurrentFile(currentFile, event, data) {
-      var { openDetailsSidebar, tabIndex, list, index } = data;
+      var data = data || {};
       var deferred = $q.defer();
+
       $scope.searchShareUsersInput = '';
       $scope.currentSelectedDocument.current = currentFile;
-      $scope.currentSelectedDocument.index = index || 0;
-      $scope.currentList = Array.isArray(list) && list.length ? list : [currentFile];
+      $scope.currentSelectedDocument.index = data.index || 0;
+      $scope.currentList = Array.isArray(data.list) && data.list.length ? data.list : [currentFile];
       $q.all([
         LinshareDocumentRestService.get(currentFile.uuid),
         LinshareDocumentRestService.getAudit(currentFile.uuid)
@@ -677,8 +683,8 @@
           .then(function(auditActions) {
             $scope.currentSelectedDocument.current.auditActions = auditActions;
 
-            if (openDetailsSidebar) {
-              $scope.data.selectedIndex = tabIndex || 0;
+            if (data.openDetailsSidebar) {
+              $scope.data.selectedIndex = data.tabIndex || 0;
               $scope.loadSidebarContent(lsAppConfig.details);
               if (!_.isUndefined(event)) {
                 var currElm = event.currentTarget;
