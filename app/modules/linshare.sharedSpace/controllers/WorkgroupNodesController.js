@@ -127,6 +127,7 @@
     workgroupNodesVm.workgroupNode = lsAppConfig.workgroupNode;
     workgroupNodesVm.thumbnailEngineActivated = lsAppConfig.thumbnailEngineActivated;
     workgroupNodesVm.canCopyNodeToPersonalSpace = user.canUpload;
+    workgroupNodesVm.selectMultipleWithAtLeastOneFolder = selectMultipleWithAtLeastOneFolder;
 
     activate();
 
@@ -1293,6 +1294,16 @@
       }
     }
 
+    /**
+     * @name selectMultipleWithAtLeastOneFolder
+     * @desc Check if the selected documents include at least two items and more than one of them is a folder
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function selectMultipleWithAtLeastOneFolder() {
+      return workgroupNodesVm.selectedDocuments.some(function(selectedDocument) {
+        return selectedDocument.type === TYPE_FOLDER;
+      }) && workgroupNodesVm.selectedDocuments.length > 1;
+    }
 
     // TODO : directive for all functions below (check sidebar-content-details.html for input and textarea)
     workgroupNodesVm.toggleSearchState = toggleSearchState;
