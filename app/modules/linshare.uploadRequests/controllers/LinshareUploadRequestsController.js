@@ -107,24 +107,25 @@ function LinshareUploadRequestsController(
 
     if (!form.$valid) {
       uploadRequestVm.setSubmitted(form);
-    }
+      toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
+    } else {
+      newUploadRequest.create().then(request => {
+        $scope.mainVm.sidebar.hide(newUploadRequest);
+        toastService.success({key: 'UPLOAD_REQUESTS.FORM_CREATE.SUCCESS'});
 
-    newUploadRequest.create().then(request => {
-      $scope.mainVm.sidebar.hide(newUploadRequest);
-      toastService.success({key: 'UPLOAD_REQUESTS.FORM_CREATE.SUCCESS'});
-
-      if (
-        uploadRequestVm.status === 'pending' && request.status === 'CREATED' ||
-        uploadRequestVm.status === 'activeClosed' && request.status === 'ENABLED'
-      ) {
-        uploadRequestVm.itemsList.push(request);
-        uploadRequestVm.tableParams.reload();
-      }
-
-      $state.go('uploadRequests', {
-        status: request.status === 'CREATED' ? 'pending' : 'activeClosed'
+        if (
+          uploadRequestVm.status === 'pending' && request.status === 'CREATED' ||
+          uploadRequestVm.status === 'activeClosed' && request.status === 'ENABLED'
+        ) {
+          uploadRequestVm.itemsList.push(request);
+          uploadRequestVm.tableParams.reload();
+        }
+  
+        $state.go('uploadRequests', {
+          status: request.status === 'CREATED' ? 'pending' : 'activeClosed'
+        });
       });
-    });
+    }
   }
 
   /**

@@ -23,7 +23,8 @@
       "ALLOW_CLOSURE": "Allow closure",
       "EXPIRY_NOTIFICATION_DATE": "Expiry notification date",
       "NOTIFICATION_LANGUAGE": "Notification language",
-      "SUCCESS": "The upload request has been created successfully!"
+      "SUCCESS": "The upload request has been created successfully!",
+      "FORM_INVALID": "Form is invalid. Please check your inputs carefully."
     },
     "ERROR": {
       "SUBJECT_REQUIRED": "Email subject is required",

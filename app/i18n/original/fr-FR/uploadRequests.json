@@ -23,7 +23,8 @@
       "ALLOW_CLOSURE": "Permettre la clôture",
       "EXPIRY_NOTIFICATION_DATE": "Date de notification d'expiration",
       "NOTIFICATION_LANGUAGE": "Langue de notification",
-      "SUCCESS": "L'invitation de dépôt a été créé avec succès!"
+      "SUCCESS": "L'invitation de dépôt a été créé avec succès!",
+      "FORM_INVALID": "Le formulaire n'est pas valide. Veuillez vérifier attentivement vos entrées."
     },
     "ERROR": {
       "SUBJECT_REQUIRED": "L'objet du courriel est obligatoire",
