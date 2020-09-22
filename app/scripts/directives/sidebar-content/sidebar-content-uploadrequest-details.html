@@ -61,7 +61,7 @@
                 </div>
                 <div class="item-r actions"
                     ng-show="mainVm.sidebar.getData().currentSelected.owner.uuid === userLogged.uuid" translate>
-                  <span>CONTACTS_LISTS_DETAILS.OWNER</span>
+                  <span translate>CONTACTS_LISTS_DETAILS.OWNER</span>
                 </div>
               </div>
               <div class="meta-data-ctn">
@@ -88,7 +88,7 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.GROUP</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.collective ? 'Yes' : 'No'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.collective ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
@@ -100,23 +100,23 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxTotalFileSize || 'N/A'}}</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxDepositSize | readableSize) || 'N/A'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxOneFileSize || 'N/A'}}</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxFileSize | readableSize) || 'N/A'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.protectedByPassword ? 'Yes' : 'No'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.protectedByPassword ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.canDeleteDocument ? 'Yes' : 'No'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.canDeleteDocument ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.canClose ? 'Yes' : 'No'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.canClose ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>

@@ -67,6 +67,28 @@
         "TITLE": "Tạo yêu cầu tải lên",
         "MESSAGE": "Những yêu cầu này cho phép người dùng khác tải tệp lên bộ nhớ của bạn"
       }
+    },
+    "RIGHT_PANEL": {
+      "EDIT": "Chỉnh sửa",
+      "DETAILS": "Chi tiết",
+      "ACTIVITIES": "Hoạt động"
+    },
+    "DETAIL_TAB": {
+      "META_DATA": "Meta-data",
+      "UPDATED_AT": "Cập nhật lúc",
+      "CREATED_AT": "Tạo lúc",
+      "ACTIVATED_AT": "Kích hoạt lúc",
+      "EXPIRATION_DATE": "Ngày hết hạn",
+      "GROUP": "Tập thể",
+      "FILES_UPLOADED": "Tệp tin đã tải lên",
+      "MAX_NUMBER_OF_FILES": "Số tệp tin tối đa",
+      "MAX_TOTAL_FILE_SIZE": "Tổng kích thước các tệp tin tối đa",
+      "MAX_SIZE_PER_FILE": "Tổng kích thước mỗi file",
+      "PASSWORD_PROTECTED": "Bảo vệ mật khẩu",
+      "ALLOW_DELETION": "Cho phép xóa",
+      "ALLOW_CLOSURE": "Cho phép đóng",
+      "NOTIFICATION_DATE": "Ngày thông báo",
+      "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo"
     }
   }
 }

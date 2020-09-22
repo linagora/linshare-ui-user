@@ -67,6 +67,28 @@
         "TITLE": "Créer des invitations de dépot",
         "MESSAGE": "Ces invitations permettent à d'autres utilisateurs de déposer des fichiers"
       }
+    },
+    "RIGHT_PANEL": {
+      "EDIT": "Éditer",
+      "DETAILS": "Détails",
+      "ACTIVITIES": "Activités"
+    },
+    "DETAIL_TAB": {
+      "META_DATA": "Métadonnées",
+      "UPDATED_AT": "Mis à jour à",
+      "CREATED_AT": "Créé à",
+      "ACTIVATED_AT": "Activée",
+      "EXPIRATION_DATE": "Date d'expiration",
+      "GROUP": "Collective",
+      "FILES_UPLOADED": "Fichiers téléchargés",
+      "MAX_NUMBER_OF_FILES": "Nombre maximum de fichiers",
+      "MAX_TOTAL_FILE_SIZE": "Taille totale maximale des fichiers déposés",
+      "MAX_SIZE_PER_FILE": "Taille max par fichier",
+      "PASSWORD_PROTECTED": "Protégé par mot de passe",
+      "ALLOW_DELETION": "Autoriser la suppression",
+      "ALLOW_CLOSURE": "Permettre la clôture",
+      "NOTIFICATION_DATE": "Date de notification",
+      "NOTIFICATION_LANGUAGE": "Langue de notification"
     }
   }
 }
