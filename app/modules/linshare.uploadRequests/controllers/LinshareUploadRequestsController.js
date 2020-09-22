@@ -21,7 +21,9 @@ LinshareUploadRequestsController.$inject = [
   'UploadRequestObjectService',
   'toastService',
   'uploadRequests',
-  'tableParamsService'
+  'tableParamsService',
+  'uploadRequestRestService',
+  'contactsListsService'
 ];
 
 /**
@@ -38,7 +40,9 @@ function LinshareUploadRequestsController(
   UploadRequestObjectService,
   toastService,
   uploadRequests,
-  tableParamsService
+  tableParamsService,
+  uploadRequestRestService,
+  contactsListsService
 ) {
   const uploadRequestVm = this;
 
@@ -46,8 +50,10 @@ function LinshareUploadRequestsController(
 
   function onInit() {
     uploadRequestVm.loadSidebarContent = loadSidebarContent;
+    uploadRequestVm.showDetails = showDetails;
     uploadRequestVm.uploadRequestCreate = lsAppConfig.uploadRequestCreate;
     uploadRequestVm.uploadRequestDetails = lsAppConfig.uploadRequestDetails;
+    uploadRequestVm.getOwnerName = contactsListsService.getOwnerName;
     uploadRequestVm.mdTabsSelection = {
       selectedIndex: 0
     };
@@ -156,6 +162,38 @@ function LinshareUploadRequestsController(
 
       return true;
     }
+  }
+
+  /**
+   *  @name showDetails
+   *  @desc open sidebar tabs to show detail information of upload request
+   *  @param {Object} uploadRequest - Object contains data of upload requests
+   *  @memberOf LinShare.UploadRequests.LinshareUploadRequestsController
+   */
+  function showDetails(uploadRequest = {}) {
+    uploadRequestRestService.get(uploadRequest.uuid).then((data) => {
+      uploadRequestVm.currentSelected = mapDataObject(data);
+      loadSidebarContent(uploadRequestVm.uploadRequestDetails, true);
+    });
+  }
+
+  function mapDataObject(uploadRequest = {}) {
+    uploadRequest.maxTotalFileSize = formatBytes(uploadRequest.maxDepositSize);
+    uploadRequest.maxOneFileSize = formatBytes(uploadRequest.maxFileSize);
+
+    return uploadRequest;
+  }
+
+  function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) {return '0 Bytes';}
+  
+    const exchange = 1024;
+    const digits = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  
+    const unitIndex = Math.floor(Math.log(bytes) / Math.log(exchange));
+  
+    return parseFloat((bytes / Math.pow(exchange, unitIndex)).toFixed(digits)) + ' ' + sizes[unitIndex];
   }
 }
 

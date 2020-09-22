@@ -288,7 +288,7 @@
 
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right" ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
-                        <li>
+                        <li ng-click="uploadRequestVm.showDetails(uploadRequest)">
                           <a class="set-col-12" translate-attr="{title: 'ACTION.INFORMATION'}" href="">
                             <i class="zmdi zmdi-info"></i>
                           </a>
@@ -325,7 +325,7 @@
                           </a>
                           <ul uib-dropdown-menu ng-class="{'open':isOpenItem}" class="uib-dropdown-menu dropdown-menu-right dm-icon
                                   dropdown-divided dropdown-content-left">
-                            <li>
+                            <li ng-click="uploadRequestVm.showDetails(uploadRequest)">
                               <a href="">
                                 <i class="zmdi zmdi-info"></i>
                                 <span translate>ACTION.INFORMATION</span>
@@ -482,9 +482,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestDetails, true)">
-    Henloooooooooooooo
   </div>
 </div>
 

@@ -1,7 +1,7 @@
 <div id="member-sidebar">
   <div class="header-sidebar">
     <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mainVm.sidebar.hide()"></i>
-    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelected.subject}} </h2>
+    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelected.label}} </h2>
     <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
@@ -51,11 +51,11 @@
                     'UNKNOWN_USER' | translate}}
                   </div>
                   <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.creationDate |
+                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate |
                       lsDate:'medium'}}">
                       <span>
                         {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
-                        {{mainVm.sidebar.getData().currentSelected.creationDate | lsDate:'longDate'}}
+                        {{mainVm.sidebar.getData().currentSelected.modificationDate | lsDate:'longDate'}}
                       </span>
                   </div>
                 </div>
@@ -88,11 +88,11 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.GROUP</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.collective ? 'True' : 'False'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.collective ? 'Yes' : 'No'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || '0'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
@@ -100,23 +100,23 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxDepositSize || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxTotalFileSize || 'N/A'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxFileSize || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxOneFileSize || 'N/A'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.protectedByPassword ? 'True' : 'False'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.protectedByPassword ? 'Yes' : 'No'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.canDeleteDocument ? 'True' : 'False'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.canDeleteDocument ? 'Yes' : 'No'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.canClose ? 'True' : 'False'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.canClose ? 'Yes' : 'No'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
@@ -131,8 +131,8 @@
             </div>
           </div>
         </md-tab>
-        <md-tab id="tab2" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding"></md-tab>
-        <md-tab id="tab3" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.ACTIVITIES' | translate}}" class="col-xs-4 no-padding"></md-tab>
+        <!-- <md-tab id="tab2" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding"></md-tab>
+        <md-tab id="tab3" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.ACTIVITIES' | translate}}" class="col-xs-4 no-padding"></md-tab> -->
       </md-tabs>
     </md-content>
   </div>
