@@ -303,7 +303,11 @@ FILE DIRECTORY DIALOG
 @media (max-width: 768px) {
   .md-dialog-container {
     top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     position: fixed;
+    height: auto !important;
   }
 
   #lv-dialog-content-ctn {
