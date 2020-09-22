@@ -213,6 +213,25 @@
       </div>
 
       <div id="drop-area">
+
+        <!-- BACKGROUND CONTENT -->
+
+        <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
+          ng-class="{'show-bg-drop' : contactsListsListVm.itemsList.length === 0}">
+          <div class="drag-and-drop-content">
+            <div class="drag-icon-ctn ">
+              <div class="bordered-circle">&nbsp;</div>
+              <span class="grey-clr bg-info-icon">
+                <span class="ls-upload-request"></span>
+              </span>
+            </div>
+            <div class="dnd-txt-content">
+              <h1 translate>UPLOAD_REQUESTS.TABLE.BACKGROUND_CONTENT.TITLE</h1>
+              <p translate>UPLOAD_REQUESTS.TABLE.BACKGROUND_CONTENT.MESSAGE</p>
+            </div>
+          </div>
+        </div>
+
         <div class="card-body collapsible-content">
           <div class="table-responsive">
             <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
@@ -459,24 +478,6 @@
                 <span translate>ACTION.DELETE</span>
               </a>
             </span>
-          </div>
-        </div>
-
-        <!-- BACKGROUND CONTENT -->
-
-        <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
-          ng-class="{'show-bg-drop' : contactsListsListVm.itemsList.length === 0}">
-          <div class="drag-and-drop-content">
-            <div class="drag-icon-ctn ">
-              <div class="bordered-circle">&nbsp;</div>
-              <span class="grey-clr bg-info-icon">
-                <span class="ls-upload-request"></span>
-              </span>
-            </div>
-            <div class="dnd-txt-content">
-              <h1 translate>UPLOAD_REQUESTS.TABLE.BACKGROUND_CONTENT.TITLE</h1>
-              <p translate>UPLOAD_REQUESTS.TABLE.BACKGROUND_CONTENT.MESSAGE</p>
-            </div>
           </div>
         </div>
       </div>
