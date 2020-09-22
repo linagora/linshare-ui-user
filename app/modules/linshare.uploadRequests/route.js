@@ -17,8 +17,15 @@ function uploadRequestsConfig($stateProvider) {
             $state.go('home');
           }
         },
-        uploadRequests: function(uploadRequestRestService, $stateParams) {
-          return uploadRequestRestService.getList($stateParams.status);
+        uploadRequests: function($transition$, $state, $stateParams, uploadRequestRestService, UPLOAD_REQUESTS_STATE_STATUS_MAPPING) {
+          const requestStatus = UPLOAD_REQUESTS_STATE_STATUS_MAPPING[$stateParams.status];
+
+          if (requestStatus) {
+            return uploadRequestRestService.getList(requestStatus);
+          }
+
+          $transition$.abort();
+          $state.go('home');
         }
       },
       controller: 'LinshareUploadRequestsController',

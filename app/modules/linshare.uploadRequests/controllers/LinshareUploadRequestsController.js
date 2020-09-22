@@ -20,7 +20,6 @@ LinshareUploadRequestsController.$inject = [
   'lsAppConfig',
   'UploadRequestObjectService',
   'toastService',
-  'functionalities',
   'uploadRequests',
   'tableParamsService'
 ];
@@ -38,7 +37,6 @@ function LinshareUploadRequestsController(
   lsAppConfig,
   UploadRequestObjectService,
   toastService,
-  functionalities,
   uploadRequests,
   tableParamsService
 ) {
@@ -114,6 +112,14 @@ function LinshareUploadRequestsController(
     newUploadRequest.create().then(request => {
       $scope.mainVm.sidebar.hide(newUploadRequest);
       toastService.success({key: 'UPLOAD_REQUESTS.FORM_CREATE.SUCCESS'});
+
+      if (
+        uploadRequestVm.status === 'pending' && request.status === 'CREATED' ||
+        uploadRequestVm.status === 'activeClosed' && request.status === 'ENABLED'
+      ) {
+        uploadRequestVm.itemsList.push(request);
+        uploadRequestVm.tableParams.reload();
+      }
 
       $state.go('uploadRequests', {
         status: request.status === 'CREATED' ? 'pending' : 'activeClosed'

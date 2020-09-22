@@ -6,14 +6,14 @@ angular
   .module('linshare.uploadRequests')
   .factory('uploadRequestRestService', uploadRequestRestService);
 
-uploadRequestRestService.$inject = ['$q', '$log', 'Restangular', 'ServerManagerService'];
+uploadRequestRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
 
 /**
  *  @namespace uploadRequestRestService
  *  @desc Service to interact with UploadRequest object by REST
  *  @memberof LinShare.uploadRequests
  */
-function uploadRequestRestService($q, $log, Restangular, ServerManagerService) {
+function uploadRequestRestService($log, Restangular, ServerManagerService) {
   const
     handler = ServerManagerService.responseHandler,
     restUrl = 'upload_request_groups';
@@ -65,17 +65,10 @@ function uploadRequestRestService($q, $log, Restangular, ServerManagerService) {
   function getList(status) {
     $log.debug('LinshareUploadRequestService : getList', status);
 
-    const mapping = {
-      pending: 'CREATED',
-      activeClosed: ['ENABLED', 'CLOSED'],
-      archived: 'ARCHIVED'
-    };
-
-    if (!mapping[status]) {
-      return $q.reject(new Error('Status not supported'));
-    }
-
-    return handler(Restangular.all(restUrl).getList({ status: mapping[status] })).then(Restangular.stripRestangular);
+    return handler(Restangular
+      .all(restUrl)
+      .getList({ status })
+      .then(Restangular.stripRestangular));
   }
 
   /**
