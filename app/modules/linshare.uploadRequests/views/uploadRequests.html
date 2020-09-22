@@ -400,7 +400,7 @@
         <!-- SELECTION HEADER -->
 
         <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
-          ng-class="{'show-multi-menu': uploadRequestVm.numberOfSelectedUploadRequests.length > 0}">
+          ng-class="{'show-multi-menu': uploadRequestVm.selectedUploadRequests.length > 0}">
           <div class="toggle-checkbox-toolbar"
             ng-click="uploadRequestVm.selectUploadRequestsOnCurrentPage(uploadRequestVm.tableParams.data, uploadRequestVm.tableParams.page())">
             <a ng-if="!uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
@@ -423,7 +423,7 @@
               ng-class="{'active-button-show-selection': uploadRequestVm.tableParamsService.getSelectionIsIsolated()}"
               ng-click="uploadRequestVm.toggleFilterBySelectedFiles()">
               <p>
-                <span>{{uploadRequestVm.numberOfSelectedUploadRequests}}</span>
+                <span>{{uploadRequestVm.selectedUploadRequests.length}}</span>
                 <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
               </p>
               <div class="pull-left view-icons-ctn groups-view">

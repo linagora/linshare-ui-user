@@ -63,7 +63,6 @@ function LinshareUploadRequestsController(
     tableParamsService.initTableParams(uploadRequestVm.itemsList, uploadRequestVm.paramFilter)
       .then(() => {
         uploadRequestVm.tableParamsService = tableParamsService;
-        uploadRequestVm.numberOfSelectedUploadRequests = tableParamsService.lengthOfSelectedDocuments;
         uploadRequestVm.resetSelectedUploadRequests = tableParamsService.resetSelectedItems;
         uploadRequestVm.selectUploadRequestsOnCurrentPage = tableParamsService.tableSelectAll;
         uploadRequestVm.addSelectedUploadRequest = tableParamsService.toggleItemSelection;
