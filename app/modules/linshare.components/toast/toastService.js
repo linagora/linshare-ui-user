@@ -60,6 +60,7 @@
         toastDetails: details,
         toastError: true
       };
+      
       return toastShow(mdToastLocals);
     }
 
@@ -84,6 +85,7 @@
         toastDetails: details,
         toastInfo: true
       };
+      
       return toastShow(mdToastLocals);
     }
 
@@ -118,6 +120,7 @@
         toastDetails: details,
         toastIsolate: true
       };
+      
       return toastShow(mdToastLocals);
     }
 
@@ -142,6 +145,7 @@
         toastDetails: details,
         toastSuccess: true
       };
+      
       return toastShow(mdToastLocals);
     }
 
@@ -166,6 +170,7 @@
         toastDetails: details,
         toastWarning: true
       };
+      
       return toastShow(mdToastLocals);
     }
 

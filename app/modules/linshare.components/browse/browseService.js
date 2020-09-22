@@ -21,6 +21,8 @@
     var service = {
       show: show
     };
+
+    
     return service;
 
     /**
@@ -31,7 +33,9 @@
      */
     function show(_mdDialogLocals) {
       var mdDialogLocals = _mdDialogLocals;
+
       mdDialogLocals.$mdDialog = $mdDialog;
+      
       return $mdDialog.show({
         locals: mdDialogLocals,
         controller: 'browseController',

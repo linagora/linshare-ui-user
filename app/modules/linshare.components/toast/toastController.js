@@ -20,6 +20,7 @@
     /* jshint validthis:true */
     var toastVm = this;
     var hideIntervalReference;
+
     toastVm.updateHideDelay = updateHideDelay;
 
     activate();

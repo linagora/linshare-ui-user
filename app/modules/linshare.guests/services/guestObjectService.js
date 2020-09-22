@@ -112,12 +112,14 @@
       return $q.all([
         functionalityRestService.getFunctionalityParams('GUESTS__CAN_UPLOAD').then(function(data) {
           var clonedData = _.cloneDeep(data);
+
           allowedToUpload = clonedData;
           allowedToUpload.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
           allowedToUpload.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION').then(function(data) {
           var clonedData = _.cloneDeep(data);
+
           allowedToExpiration = clonedData;
           allowedToExpiration.canOverride =
             _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
@@ -130,6 +132,7 @@
         functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION_ALLOW_PROLONGATION')
           .then(function(data) {
             var clonedData = _.cloneDeep(data);
+
             allowedToProlongExpiration = clonedData;
             //There is no delegation policy for this one so by it's default the functionality is overridable by a user
             allowedToProlongExpiration.canOverride = clonedData.enable;
@@ -137,6 +140,7 @@
           }),
         functionalityRestService.getFunctionalityParams('GUESTS__RESTRICTED').then(function(data) {
           var clonedData = _.cloneDeep(data);
+
           allowedToRestrict = clonedData;
           allowedToRestrict.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
           allowedToRestrict.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
@@ -147,6 +151,7 @@
               domain: loggedUser.domain,
               mail: loggedUser.mail
             };
+
             if (_.isUndefined(_.find(contacts, myself))) {
               contacts.push(myself);
             }
@@ -181,6 +186,7 @@
       var
         deferred = $q.defer(),
         guestDTO = self.toDTO();
+
       guestRestService.create(guestDTO).then(function(data) {
         if (!(guestDTO.restrictedContacts === null || guestDTO.restrictedContacts === [])) {
           guestRestService.update(data.uuid, guestDTO).then(function(data) {
@@ -194,6 +200,7 @@
       }).catch(function(error) {
         deferred.reject(error);
       });
+      
       return deferred.promise;
     }
 
@@ -245,10 +252,12 @@
       } else {
         const startOfDay = moment().startOf('day').valueOf();
         const diffTime = startOfDay > self.creationDate ? startOfDay - self.creationDate : 0;
+
         form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.value).add(diffTime, 'ms'));
       }
 
       deferred.resolve(_.cloneDeep(form));
+      
       return deferred.promise;
     }
 
@@ -296,6 +305,7 @@
       /* jshint validthis:true */
       self = this;
       var guestDTO = {};
+
       guestDTO.canUpload = setFunctionalityValue(self.canUpload, allowedToUpload);
       guestDTO.comment = _.defaultTo(self.comment, '');
       self.expirationDate = moment(self.expirationDate).endOf('day').valueOf();
@@ -330,6 +340,7 @@
       //} else {
       //  guestDTO.editorsContacts = null;
       //}
+      
       return guestDTO;
     }
 
@@ -345,11 +356,13 @@
       var
         deferred = $q.defer(),
         guestDTO = self.toDTO();
+
       guestRestService.update(guestDTO.uuid, guestDTO).then(function(data) {
         deferred.resolve(data);
       }).catch(function(error) {
         deferred.reject(error);
       });
+      
       return deferred.promise;
     }
   }

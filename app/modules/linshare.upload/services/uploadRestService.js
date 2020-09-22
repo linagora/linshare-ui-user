@@ -43,6 +43,7 @@
      */
     function getAsyncUploadDetails(flowFileUuid) {
       $log.debug('uploadRestService - getAsyncUploadDetails', flowFileUuid, errorsMessagesKey);
+      
       return handler(Restangular.one(restUrl.flow, flowFileUuid).get(), errorsMessagesKey);
     }
 
@@ -55,6 +56,7 @@
      */
     function getQuota(userLoggedUuid) {
       $log.debug('uploadRestService - getQuota', userLoggedUuid, errorsMessagesKey);
+      
       return handler(Restangular.one(restUrl.quota, userLoggedUuid).get(), errorsMessagesKey);
     }
   }

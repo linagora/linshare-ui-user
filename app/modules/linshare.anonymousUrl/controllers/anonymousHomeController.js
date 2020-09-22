@@ -22,6 +22,7 @@
   function AnonymousHomeController($scope, message) {
     /* jshint validthis: true */
     var anonymousHomeVm = this;
+
     anonymousHomeVm.message = message;
   }
 })();

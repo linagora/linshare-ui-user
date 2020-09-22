@@ -73,6 +73,8 @@
           moment(filterBoxVm.dateStart) : moment('0000-01-01');
         var dateEnd = filterBoxVm.dateEnd ?
           moment(filterBoxVm.dateEnd).add('day', +1) : moment().add('day', +1);
+
+        
         return {dateStart: dateStart, dateEnd: dateEnd};
       }
     }
@@ -104,6 +106,8 @@
           filterBoxVm.unitService.toByte(filterBoxVm.sizeStart, filterBoxVm.unitSize.value, false) : 0;
         var sizeEnd = filterBoxVm.sizeEnd ?
           filterBoxVm.unitService.toByte(filterBoxVm.sizeEnd, filterBoxVm.unitSize.value, false) : 999999999999;
+
+        
         return {sizeStart: sizeStart, sizeEnd: sizeEnd};
       }
     }
@@ -122,18 +126,22 @@
         var
           sizeIsValid = true,
           dateIsValid = true;
+
         if (filterBoxVm.showUnit()) {
           if (_.isUndefined(item.size)) {
             sizeIsValid = false;
           } else {
             var size = item.size.toFixed(1);
+
             sizeIsValid = (size >= sizeValues.sizeStart && size <= sizeValues.sizeEnd);
           }
         }
         if (filterBoxVm.showDateRange()) {
           var date = filterBoxVm.dateType === '1' ? item.modificationDate : item.creationDate;
+
           dateIsValid = (date >= dateValues.dateStart && date <= dateValues.dateEnd);
         }
+        
         return !(sizeIsValid && dateIsValid);
       });
 

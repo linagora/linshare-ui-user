@@ -72,12 +72,15 @@
      */
     function byteTo(value, selectedUnit, showUnit) {
       var result = 0;
+
       if (_.isUndefined(value) || value === null || isNaN(value)) {
         return result;
       }
       var unit = _.isUndefined(selectedUnit) ? find(value) : selectedUnit;
+
       result = value / Math.pow(10, units[unit].factor);
       result = (result % 1 === 0) ? result : result.toFixed(2);
+      
       return showUnit ? result + ' ' + unit : result;
     }
 
@@ -141,11 +144,13 @@
      */
     function toByte(value, unit, showUnit) {
       var result = 0;
+
       if (_.isUndefined(value) || value === null || isNaN(value)) {
         return result;
       }
       result = value * Math.pow(10, units[unit].factor);
       result = (result % 1 === 0) ? result : result.toFixed(2);
+      
       return showUnit ? result + units.B : result;
     }
   }

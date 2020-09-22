@@ -39,6 +39,7 @@
      */
     function search(pattern, searchType, threadUuid) {
       $log.debug('autocompleteUserRestService : search', pattern, searchType, threadUuid);
+      
       return handler(Restangular.all(restUrl).one(pattern).get({
         type: searchType,
         threadUuid: threadUuid

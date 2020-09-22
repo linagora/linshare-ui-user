@@ -86,9 +86,11 @@
 
     function removeElementFromCollection(collection, element) {
       var index = collection.indexOf(element);
+
       if (index > -1) {
         collection.splice(index, 1);
       }
+      
       return collection;
     }
 

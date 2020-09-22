@@ -40,6 +40,8 @@
       },
       link: linkFn
     };
+
+    
     return directive;
 
     ///////////
@@ -54,6 +56,7 @@
      */
     function linkFn(scope, elm, attrs) {
       var label = ownerLabel.getOwner(scope.ownerLabelUser);
+
       if (_.isNil(scope.ownerLabelAttr)) {
         elm.text(label);
       } else {

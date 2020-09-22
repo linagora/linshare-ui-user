@@ -127,9 +127,11 @@
     function generateTableFilterSelect(select, column) {
       select.length = 0;
       var values = _.uniq(_.map(auditVm.itemsList, column)).sort();
+
       _.pull(values, 'ANONYMOUS_SHARE_ENTRY');
       _.forEach(values, function(value) {
         var translatedValue = FILTERS_SELECT_PREFIX + column.toUpperCase() + '.' + value;
+
         select.push({id: translatedValue, title: $filter('translate')(translatedValue)});
       });
       select.sort(function(a, b) {

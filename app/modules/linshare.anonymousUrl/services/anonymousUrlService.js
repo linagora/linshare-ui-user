@@ -43,6 +43,7 @@
      */
     function download(urlUuid, password, docUuid) {
       var deferred = $q.defer();
+
       $http.get(downloadUrl(urlUuid, password, docUuid), {
         headers: {
           'linshare-anonymousurl-password': password
@@ -51,6 +52,7 @@
       }).then(function(documents) {
         deferred.resolve(documents);
       });
+      
       return deferred.promise;
     }
 
@@ -77,6 +79,7 @@
      */
     function getAnonymousUrl(uuid, password) {
       var deferred = $q.defer();
+
       $http.get(baseRestUrl + '/' + uuid, {
         headers: {
           'linshare-anonymousurl-password': password
@@ -90,6 +93,7 @@
           deferred.reject(error);
         }
       });
+      
       return deferred.promise;
     }
   }

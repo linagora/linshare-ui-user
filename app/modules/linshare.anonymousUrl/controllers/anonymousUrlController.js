@@ -68,6 +68,7 @@
 
       var downloadLinkParent = document.querySelector('[id=\'' + documentFile.uuid + '\']');
       var downloadLink = downloadLinkParent.appendChild(document.createElement('a'));
+
       downloadLink.setAttribute('href', url);
 
       if ( typeof(downloadLink.download) !== 'undefined' ) {
@@ -102,7 +103,9 @@
                 $filter('filter')(anonymousUrlVm.anonymousUrlShareEntries, params.filter()) :
                 anonymousUrlVm.anonymousUrlShareEntries;
               var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+
               params.total(files.length);
+              
               return (files.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             });
         }
@@ -122,6 +125,7 @@
         controller: function modalPasswordController($state, $uibModalInstance) {
           /* jshint validthis: true*/
           var modalPasswordVm = this;
+
           modalPasswordVm.hasError = hasError;
           modalPasswordVm.hide = hide;
           modalPasswordVm.invalid = false;

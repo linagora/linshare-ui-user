@@ -15,6 +15,7 @@ function checkDropdownPosition() {
 
       if(window.innerHeight - elem[0].getBoundingClientRect().bottom < dropdownHeight) {
         var newDropdownPostion = dropdownHeight + 40;
+
         dropdown.css('top', '-=' + newDropdownPostion);
       }
     });

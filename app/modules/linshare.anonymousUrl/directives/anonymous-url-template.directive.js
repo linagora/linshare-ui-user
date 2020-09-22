@@ -28,6 +28,8 @@
           require('../views/anonymousUrl.html');
       }
     };
+
+    
     return directive;
   }
 })();

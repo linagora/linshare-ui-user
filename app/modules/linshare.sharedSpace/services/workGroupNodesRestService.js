@@ -83,6 +83,7 @@
             }
           };
         }
+        
         return model;
       });
     }
@@ -101,6 +102,8 @@
       $log.debug('workgroupNodesRestService : copy', workgroupUuid, nodeItemUuid, destinationNodeUuid);
       var _destinationNodeUuid = _.isNil(destinationNodeUuid) ? '' : destinationNodeUuid;
       var _kind = _.isNil(kind) ? 'SHARED_SPACE' : kind;
+
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, _destinationNodeUuid)
         .all('copy').post({
           kind: _kind,
@@ -119,6 +122,7 @@
      */
     function copyToMySpace(workgroupUuid, nodeItemUuid) {
       $log.debug('workgroupNodesRestService : copyToMySpace', workgroupUuid, nodeItemUuid);
+      
       return handler(Restangular.one(restUrl.documents).all('copy').post({
         kind: 'SHARED_SPACE',
         uuid: nodeItemUuid,
@@ -137,6 +141,7 @@
      */
     function create(workgroupUuid, workgroupFolderDto, dryRun) {
       $log.debug('workgroupNodesRestService : create', workgroupUuid, workgroupFolderDto, dryRun);
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).all(restParam).post(workgroupFolderDto, {
         dryRun: dryRun
       }));
@@ -152,6 +157,7 @@
      */
     function download(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : download', workgroupUuid, nodeUuid);
+      
       return Restangular.all(restUrl.workgroup).one(workgroupUuid, restParam).one(nodeUuid, 'download')
         .getRequestedUrl();
     }
@@ -178,6 +184,7 @@
      */
     function metadata(workgroupUuid, nodeUuid, withStorageSize) {
       $log.debug('workgroupNodesRestService : detail', workgroupUuid, nodeUuid);
+      
       return handler(Restangular.all(restUrl.workgroup).one(workgroupUuid, restParam).one(nodeUuid, 'metadata').get({
         storage: withStorageSize
       }));
@@ -194,6 +201,7 @@
      */
     function get(workgroupUuid, nodeUuid, needTree) {
       $log.debug('workgroupNodesRestService : get', workgroupUuid, nodeUuid);
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).get({tree: needTree}));
     }
 
@@ -207,6 +215,7 @@
      */
     function getAudit(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : getAudit', workgroupUuid, nodeUuid);
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).one('audit').get());
     }
 
@@ -221,6 +230,7 @@
      */
     function getList(workgroupUuid, folderUuid, nodeType) {
       $log.debug('workgroupNodesRestService : getList', workgroupUuid, folderUuid);
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).getList(restParam, {
         parent: folderUuid,
         type: nodeType
@@ -237,6 +247,7 @@
      */
     function remove(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : remove', workgroupUuid, nodeUuid);
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).remove());
     }
 
@@ -250,6 +261,7 @@
      */
     function restangularize(item, workgroupUuid) {
       $log.debug('workgroupNodesRestService : restangularize', item, workgroupUuid);
+      
       return Restangular.restangularizeElement(null, item, restUrl.workgroup + '/' + workgroupUuid + '/' + restParam);
     }
 
@@ -263,6 +275,7 @@
      */
     function thumbnail(workgroupUuid, nodeUuid) {
       $log.debug('workgroupNodesRestService : thumbnail', workgroupUuid, nodeUuid);
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeUuid).one('thumbnail').get({
         base64: true
       }));
@@ -278,6 +291,7 @@
      */
     function update(workgroupUuid, nodeItem) {
       $log.debug('workgroupNodesRestService : update', workgroupUuid, nodeItem.uuid, nodeItem);
+      
       return handler(Restangular.one(restUrl.workgroup, workgroupUuid).one(restParam, nodeItem.uuid)
         .customPUT(nodeItem));
     }

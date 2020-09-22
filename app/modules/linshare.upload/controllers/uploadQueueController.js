@@ -128,6 +128,7 @@
 
       if (idUpload) {
         var fileToHighlight = uploadQueueVm.$flow.getFromUniqueIdentifier(idUpload);
+
         if (fileToHighlight._from === uploadQueueVm.fromWhere) {
           uploadQueueVm.selectUploadingFile(fileToHighlight, true);
         }
@@ -152,6 +153,7 @@
           var
             user = promises[0],
             functionalities = promises[1];
+
           uploadQueueVm.location.mySpace = user.canUpload;
           uploadQueueVm.location.workgroup = functionalities.WORK_GROUP.enable;
         }).catch(function(error) {
@@ -169,6 +171,7 @@
      */
     function alertUnsharableFilesSelectedSwal(nbErrorFilesSelected, executeShare, shareType) {
       var message, title;
+
       if (nbErrorFilesSelected === 1) {
         title = uploadQueueVm.warningTitleSingular;
         message = uploadQueueVm.warningMessageSingular;
@@ -241,6 +244,7 @@
       if (uploadQueueVm.nbErrorFilesSelected === lengthOfSelectedDocuments()) {
         var messageKey = lengthOfSelectedDocuments() > 1 ?
           'NO_SHAREABLE_FILE_SELECTED_PLURAL' : 'NO_SHAREABLE_FILE_SELECTED_SINGULAR';
+
         toastService.error({key: 'UPLOAD_SHARE_ALERT.' + messageKey});
       } else if (uploadQueueVm.nbErrorFilesSelected > 0) {
         alertUnsharableFilesSelectedSwal(uploadQueueVm.nbErrorFilesSelected, executeShare, shareType);
@@ -362,6 +366,7 @@
       uploadQueueVm.loadSidebarContent(lsAppConfig.share);
       if (document) {
         var index = _.has($scope.selectedUploads, document.uniqueIdentifier);
+
         if (!index) {
           document.isSelected = true;
           $scope.selectedUploads[document.uniqueIdentifier] = document;
@@ -390,6 +395,7 @@
      */
     function removeUnsharableFiles() {
       var deferred = $q.defer();
+
       if (uploadQueueVm.nbErrorFilesSelected > 0) {
         _.forEach(uploadQueueVm.$flow.files, function(file) {
           if (file.isSelected && file.error) {
@@ -399,6 +405,7 @@
         });
       }
       deferred.resolve();
+      
       return deferred.promise;
     }
 
@@ -413,6 +420,7 @@
       }
       _.forEach($scope.selectedUploads, function(value, key) {
         var fileSelected = uploadQueueVm.$flow.getFromUniqueIdentifier(key);
+
         fileSelected.isSelected = false;
         delete $scope.selectedUploads[key];
       });
@@ -508,6 +516,7 @@
     function selectUploadingDocuments(flowFiles, selectFilesAutomatically) {
       var files = flowFiles || uploadQueueVm.$flow.files;
       var forceSelect = selectFilesAutomatically ? true : uploadQueueVm.selectAll;
+
       _.forEach(files, function(file) {
         if (file._from === uploadQueueVm.fromWhere) {
           uploadQueueVm.selectUploadingFile(file, forceSelect);
@@ -549,6 +558,7 @@
     // TODO : Directive for the button in $event
     function showBtnList($event) {
       var showBtnListElem = $event.currentTarget;
+
       if (angular.element(showBtnListElem).hasClass('activeShowMore')) {
         angular.element(showBtnListElem).parent().prev().find('div').first()
           .removeClass('data-list-slide-toggle');

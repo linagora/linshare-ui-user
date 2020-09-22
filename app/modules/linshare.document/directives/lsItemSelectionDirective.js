@@ -21,6 +21,7 @@
       link: function(scope, element) {
         element.bind('contextmenu', function() {
           var isHighlighted = element.hasClass('highlight-list-elem');
+
           if (!isHighlighted) {
             scope.toggleDocumentSelection();
           }

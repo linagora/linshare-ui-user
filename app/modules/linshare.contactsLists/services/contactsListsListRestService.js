@@ -44,6 +44,7 @@
      */
     function create(contactsListsDto) {
       $log.debug('contactsListsListRestService - create');
+      
       return handler(Restangular.all(restUrl).post(contactsListsDto));
     }
 
@@ -57,6 +58,7 @@
      */
     function duplicate(contactsListSourceUuid, newContactsListName) {
       $log.debug('contactsListsListRestService - duplicate');
+      
       return handler(Restangular
         .all(restUrl)
         .one(contactsListSourceUuid)
@@ -75,6 +77,7 @@
      */
     function get(contactsListsUuid) {
       $log.debug('contactsListsListRestService - get', contactsListsUuid);
+      
       return handler(Restangular.one(restUrl, contactsListsUuid).get());
     }
 
@@ -87,6 +90,7 @@
      */
     function getAudit(contactsListsUuid) {
       $log.debug('contactsListsListRestService - getAudit', contactsListsUuid);
+      
       return handler(Restangular.one(restUrl, contactsListsUuid).one('audit').get());
     }
 
@@ -99,6 +103,7 @@
      */
     function getList(getOnlyMine) {
       $log.debug('contactsListsListRestService - getList');
+      
       return handler(Restangular.all(restUrl).getList({mine: getOnlyMine}));
     }
 
@@ -111,6 +116,7 @@
      */
     function remove(contactsListsUuid) {
       $log.debug('contactsListsListRestService - remove', contactsListsUuid);
+      
       return handler(Restangular.one(restUrl, contactsListsUuid).remove());
     }
 
@@ -123,6 +129,7 @@
      */
     function restangularize(item) {
       $log.debug('contactsListsListRestService - restangularize', item);
+      
       return Restangular.restangularizeElement(null, item, restUrl);
     }
 
@@ -136,6 +143,7 @@
     function update(contactsListsDto) {
       $log.debug('contactsListsListRestService - update');
       delete contactsListsDto.auditActions;
+      
       return handler(Restangular.one(restUrl, contactsListsDto.uuid).customPUT(contactsListsDto));
     }
   }

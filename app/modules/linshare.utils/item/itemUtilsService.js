@@ -147,11 +147,13 @@
     function download(url, fileName) {
       authenticationRestService.checkAuthentication(false, false).then(function() {
         var downloadLink = document.createElement('a');
+
         downloadLink.setAttribute('href', url);
         downloadLink.setAttribute('download', fileName);
 
         if (document.createEvent) {
           var event = document.createEvent('MouseEvents');
+
           event.initEvent('click', true, true);
           downloadLink.dispatchEvent(event);
         } else {
@@ -175,6 +177,8 @@
         { type: 'application/pdf' }
       );
       var url = URL.createObjectURL(file);
+
+      
       return $sce.trustAsResourceUrl(url);
     }
 
@@ -189,10 +193,12 @@
     function isNameValid(name) {
       if (name === '') {
         toastService.error({key: invalidNameTranslate.empty.key});
+        
         return false;
       }
       if (name.charAt(name.length - 1) === '.') {
         toastService.error({key: invalidNameTranslate.endingPoint.key});
+        
         return false;
       }
       if (regex.test(name)) {
@@ -202,8 +208,10 @@
             rejectedChar: invalidNameTranslate.rejectedChar.param
           }
         });
+        
         return false;
       }
+      
       return true;
     }
 
@@ -222,12 +230,15 @@
         return 0;
       } else {
         var count = 0;
+
         _.forEach(items, function(item) {
           if (item.name.indexOf(defaultName) > -1) {
             var number = parseInt(item.name.replace(/\D/g, ''));
+
             count = number > count ? number : count;
           }
         });
+        
         return count + 1;
       }
     }
@@ -324,6 +335,7 @@
        */
       function check(initialName, e) {
         var newName = angular.element(e.target).text();
+
         if (newName !== initialName || !item.uuid) {
           save(newName, item);
         } else {

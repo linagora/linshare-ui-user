@@ -77,6 +77,7 @@
      */
     function copy(workgroupUuid, destinationNodeUuid, versionNodeUuid) {
       $log.debug('workgroupVersionsRestService :  download', workgroupUuid, destinationNodeUuid, versionNodeUuid);
+      
       return Restangular.one(restUrl, workgroupUuid).one(restParam, destinationNodeUuid).all('copy')
         .post({
           kind: 'SHARED_SPACE',
@@ -94,6 +95,7 @@
      */
     function download(workgroupUuid, versionNodeUuid) {
       $log.debug('workgroupVersionsRestService :  download', workgroupUuid, versionNodeUuid);
+      
       return Restangular.one(restUrl, workgroupUuid).one(restParam, versionNodeUuid).one('download')
         .getRequestedUrl();
     }
@@ -108,6 +110,7 @@
      */
     function get(workgroupUuid, versionNodeUuid) {
       $log.debug('workgroupVersionsRestService :  get', workgroupUuid, versionNodeUuid);
+      
       return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, versionNodeUuid).get());
     }
 
@@ -121,6 +124,7 @@
      */
     function getList(workgroupUuid, parentNodeUuid) {
       $log.debug('workgroupVersionsRestService :  getList', workgroupUuid, parentNodeUuid);
+      
       return handler(Restangular.one(restUrl, workgroupUuid).getList(restParam, {
         parent: parentNodeUuid
       }));
@@ -136,6 +140,7 @@
      */
     function remove(workgroupUuid, versionNodeUuid) {
       $log.debug('workgroupVersionsRestService :  remove', workgroupUuid, versionNodeUuid);
+      
       return handler(Restangular.one(restUrl, workgroupUuid).one(restParam, versionNodeUuid).remove());
     }
 
@@ -152,6 +157,7 @@
      */
     function restore(workgroupUuid, parentNodeUuid, versionNodeUuid) {
       $log.debug('workgroupVersionsRestService :  restore', workgroupUuid, parentNodeUuid, versionNodeUuid);
+      
       return Restangular.one(restUrl, workgroupUuid).one(restParam, parentNodeUuid).all('copy')
         .post({
           kind: 'SHARED_SPACE',

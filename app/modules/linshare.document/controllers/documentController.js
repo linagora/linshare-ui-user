@@ -366,6 +366,7 @@
             pluralization: true,
             params: {singular: true}
           });
+          
           return LinshareDocumentRestService.restangularize(documents[0]).get();
         }).then(function(document) {
           $scope.documentsList.push(document);
@@ -387,6 +388,7 @@
      */
     function downloadFile(documentFile) {
       var url = LinshareDocumentRestService.download(documentFile.uuid);
+
       documentUtilsService.download(url, documentFile.name);
     }
 
@@ -405,6 +407,7 @@
     function getDetails(item, list, index) {
       index = index || 0;
       list = Array.isArray(list) && list.length ? list : [item];
+      
       return $scope.showCurrentFile(item, null, { index, list });
     }
 
@@ -421,6 +424,7 @@
      */
     function launchTableParamsInitiation() {
       var fileToSearch = $transition$.params().fileUuid || $transition$.params().uploadedFileUuid;
+
       tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, fileToSearch)
         .then(function(data) {
           $scope.tableParamsService = tableParamsService;
@@ -487,6 +491,7 @@
       }, 350);
       if (document) {
         var index = $scope.selectedDocuments.indexOf(document);
+
         if (index === -1) {
           document.isSelected = true;
           $scope.selectedDocuments.push(document);
@@ -524,6 +529,7 @@
      */
     function notifyBrowseActionError(data) {
       var responses = [];
+
       _.forEach(data.failedNodes, function(error) {
         switch(error.data.errCode) {
           case 26444 :
@@ -573,6 +579,7 @@
           if (response.actionClicked) {
             var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
             var routeStateSuffix = data.folder.parent === data.folder.workGroup ? 'root' : 'folder';
+
             $state.go('sharedspace.workgroups.' + routeStateSuffix, {
               workgroupUuid: data.folder.workGroup,
               workgroupName: data.folder.workgroupName,
@@ -611,6 +618,8 @@
     function searchShareUsers(searchShareUsersInput) {
       return function(share) {
         var name = share.recipient.firstName + ' ' + share.recipient.lastName;
+
+        
         return name.toLowerCase().indexOf(searchShareUsersInput.toLowerCase()) !== -1;
       };
     }
@@ -618,6 +627,7 @@
     function setTextInput($event) {
       var currTarget = $event.currentTarget;
       var inputTxt = angular.element(currTarget).text();
+
       if (inputTxt === '') {
         angular.element(currTarget).parent().find('span').css('display', 'block');
       } else {
@@ -639,6 +649,7 @@
         _.assignIn(_.find($scope.documentsList, {'uuid': data.document.uuid}), data.document);
         var recipient = data.recipient.firstName ? data.recipient.firstName + ' ' + data.recipient.lastName :
           data.recipient.mail;
+
         toastService.success({
           key: 'TOAST_ALERT.ACTION.SHARE_DELETED',
           params: {recipient: recipient}
@@ -657,6 +668,7 @@
     function showCurrentFile(currentFile, event, data = {}) {
       var { openDetailsSidebar, tabIndex, list, index } = data;
       var deferred = $q.defer();
+
       $scope.searchShareUsersInput = '';
       $scope.currentSelectedDocument.current = currentFile;
       $scope.currentSelectedDocument.index = index || 0;
@@ -683,6 +695,7 @@
               $scope.loadSidebarContent(lsAppConfig.details);
               if (!_.isUndefined(event)) {
                 var currElm = event.currentTarget;
+
                 angular.element('#file-list-table tr li').removeClass('activeActionButton').promise()
                   .done(function() {
                     angular.element(currElm).addClass('activeActionButton');
@@ -692,16 +705,19 @@
           });
       });
       deferred.resolve($scope.currentSelectedDocument.current);
+      
       return deferred.promise;
     }
 
     function slideTextarea($event) {
       var currTarget = $event.currentTarget;
+
       angular.element(currTarget).parent().addClass('show-full-comment');
     }
 
     function slideUpTextarea($event) {
       var currTarget = $event.currentTarget;
+
       angular.element(currTarget).parent().removeClass('show-full-comment');
     }
 
@@ -720,10 +736,12 @@
      */
     function updateDocument(document) {
       var documentServer = _.omit(_.cloneDeep(document), ['thumbnailUnloadable']);
+
       $translate(['SAVING'])
         .then(function(translations) {
           /* jshint sub: true */
           var swalSaving = translations['SAVING'];
+
           $scope.currentSelectedDocument.current.description = swalSaving;
           LinshareDocumentRestService.update(documentServer.uuid, documentServer).then(function() {
             $scope.currentSelectedDocument.current.description = documentServer.description;

@@ -205,10 +205,12 @@
         getData: function(params) {
           return guestRestService.getList(guestVm.isMineGuest).then(function(data) {
             var filteredData = [];
+
             switch (params.filter().operator) {
               case '||':
                 _.forOwn(params.filter(), function(val, key) {
                   var obj = {};
+
                   obj[key] = val;
                   if (key !== 'operator') {
                     filteredData = _.concat(filteredData, $filter('filter')(data, obj));
@@ -222,7 +224,9 @@
             }
             loadSelectedGuests(data);
             var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+
             params.total(files.length);
+            
             return files.slice((params.page() - 1) * params.count(), params.page() * params.count());
           });
         }
@@ -348,6 +352,7 @@
       var currentPage = page || guestVm.tableParams.page();
       var dataOnPage = data || guestVm.tableParams.data;
       var select = selectFlag || guestVm.flagsOnSelectedPages[currentPage];
+
       if (!select) {
         _.forEach(dataOnPage, function(element) {
           if (!element.isSelected) {
@@ -382,6 +387,7 @@
       guestVm.toggleSelectedSort = !guestVm.toggleSelectedSort;
       guestVm.tableParams.sorting(sortField, guestVm.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
+
       angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });

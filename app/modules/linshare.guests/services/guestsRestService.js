@@ -41,6 +41,7 @@
      */
     function create(guestDto) {
       $log.debug('LinshareGuestRestService : create', guestDto);
+      
       return handler(Restangular.all(restUrl).post(guestDto));
     }
 
@@ -53,6 +54,7 @@
      */
     function get(uuid) {
       $log.debug('LinshareGuestRestService : get', uuid);
+      
       return handler(Restangular.all(restUrl).one(uuid).get());
     }
 
@@ -66,6 +68,7 @@
     //TODO - KLE: Doc & Query Param shall be updated one the back allow other guest instead of all guest
     function getList(allGuest) {
       $log.debug('LinshareGuestRestService : getList', allGuest);
+      
       return handler(Restangular.all(restUrl).getList({'mine': allGuest}));
     }
 
@@ -78,6 +81,7 @@
      */
     function remove(guestDto) {
       $log.debug('LinshareGuestRestService : remove', guestDto);
+      
       return handler(Restangular.one(restUrl, guestDto.uuid).remove());
     }
 
@@ -92,6 +96,7 @@
     //TODO: the put should be on guests/{uuid}, to be corrected B&F
     function update(uuid, guestDto) {
       $log.debug('LinshareGuestRestService : update', uuid, guestDto);
+      
       return handler(Restangular.one(restUrl, uuid).customPUT(guestDto));
     }
   }

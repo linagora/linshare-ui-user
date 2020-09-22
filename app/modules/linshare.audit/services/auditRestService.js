@@ -113,6 +113,7 @@
      */
     function getList(params) {
       $log.debug('auditRestService : getList');
+      
       return handler(Restangular.all(restUrl).getList(params));
     }
   }

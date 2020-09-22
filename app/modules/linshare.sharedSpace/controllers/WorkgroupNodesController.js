@@ -225,6 +225,8 @@
     function areAllSameType(nodeType, nodesList) {
       var _nodeType = nodeType || TYPE_DOCUMENT;
       var _nodesList = nodesList || workgroupNodesVm.selectedDocuments;
+
+      
       return _.every(_nodesList, {'type': _nodeType});
     }
 
@@ -236,11 +238,13 @@
      */
     function copyNode(nodeItems) {
       var promises = [];
+
       _.forEach(nodeItems, function(nodeItem) {
         promises.push(workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid,
           workgroupNodesVm.folderDetails.folderUuid).then(function(newNode) {
           var restangularizedNode = workgroupNodesRestService.restangularize(newNode[0],
             workgroupNodesVm.folderDetails.workgroupUuid);
+
           restangularizedNode.fromServer = true;
           addNewItemInTableParams(restangularizedNode);
         }));
@@ -265,6 +269,7 @@
      */
     function copyNodeToPersonalSpace(nodeItems) {
       var promises = [];
+
       _.forEach(nodeItems, function(nodeItem) {
         promises.push(workgroupNodesRestService.copyToMySpace(workgroupNodesVm.folderDetails.workgroupUuid,
           nodeItem.uuid));
@@ -295,6 +300,7 @@
           parent: workgroupNodesVm.folderDetails.folderUuid,
           type: TYPE_FOLDER
         }, workgroupNodesVm.folderDetails.workgroupUuid);
+
         workgroupNodesRestService.create(workgroupNodesVm.folderDetails.workgroupUuid, newFolderObject, true)
           .then(function(data) {
             newFolderObject.name = data.name;
@@ -468,6 +474,7 @@
         },
         'DOCUMENT': function() {
           var url = workgroupNodesRestService.download(workgroupNodesVm.folderDetails.workgroupUuid, fileDocument.uuid);
+
           documentUtilsService.download(url, fileDocument.name);
         }
       };
@@ -738,6 +745,7 @@
         workgroupNodesVm.nodesList,
         {'type': TYPE_FOLDER}
       );
+
       browseService.show({
         currentFolder: currentFolder,
         currentList: _.orderBy(
@@ -792,6 +800,7 @@
      */
     function notifyBrowseActionError(data, isMove) {
       var responses = [];
+
       _.forEach(data.failedNodes, function(error) {
         switch(error.data.errCode) {
           case 26444 :
@@ -841,6 +850,7 @@
         if (!_.isUndefined(response)) {
           if (response.actionClicked) {
             var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
+
             workgroupNodesVm.goToFolder(data.folder, true, nodeToSelectUuid);
           }
         }
@@ -900,6 +910,7 @@
       itemNameElem = itemNameElem || 'td[uuid=' + nodeToRename.uuid + '] .file-name-disp';
       documentUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
         var changedNodePos = _.findIndex(workgroupNodesVm.nodesList, nodeToRename);
+
         workgroupNodesVm.nodesList[changedNodePos] = data;
         if (nodeToRename.name !== data.name) {
           $timeout(function() {
@@ -1061,6 +1072,7 @@
             file.folderDetails = folderDetails;
           } else {
             var filePath = _.trimEnd(file.relativePath, file.name).slice(0, -1);
+
             if (foldersTree[filePath] && _.isNil(foldersTreeError[filePath])) {
               file.folderDetails = {
                 folderName: foldersTree[filePath].name,
@@ -1082,6 +1094,7 @@
                   }
                 };
               /* Create the array of error details for the toastService.error */
+
               filesError.push({title: file.name, message: message});
               file.cancel();
             }
@@ -1111,6 +1124,7 @@
             var
               node = promise.reason.node,
               parent = _.find(foldersTree, {'uuid': node.parent});
+
             pathsError.push({path: parent.name + '/'+ node.name, error: promise.reason});
           }
         });
@@ -1125,6 +1139,7 @@
             });
           });
         }
+        
         return foldersTreeError;
       }
 
@@ -1149,6 +1164,7 @@
             number: filesError.length
           }
         };
+
         toastService.error(message, undefined, filesError);
       }
 
@@ -1176,6 +1192,7 @@
           current = previous ? previous + '/' + folder : folder;
           if (_.isNil(foldersTree[current])) {
             var newDir =  [];
+
             newDir.name = folder;
             newDir.type = TYPE_FOLDER;
             newDir._deferred = $q.defer();
@@ -1189,6 +1206,7 @@
                         return _.assign(parent, nodes);
                       });
                   }
+                  
                   return parent;
                 }).then(function(parent) {
                   newDir.parent = parent.uuid;
@@ -1219,6 +1237,7 @@
             foldersTree[current] = newDir;
           }
         });
+        
         return {promises: promises, tree: foldersTree};
 
         ////////////
@@ -1234,6 +1253,7 @@
           return workgroupNodesRestService
             .create(folderDetails.workgroupUuid, _.omit(node, ['_deferred'])).then(function(data) {
               data._created = true;
+              
               return data;
             }).catch(function(error) {
               return {error: error, node: node};
@@ -1253,6 +1273,7 @@
           var nodeFound = _.find(parent, {
             'name': node.name
           }) || node;
+
           if (_.isNil(nodeFound.uuid)) {
             promise = createNode(node);
           } else {
@@ -1263,6 +1284,7 @@
             if (nodeData._created) {
               parent.push(nodeData);
             }
+            
             return nodeData;
           }).catch(function(error) {
             return {error: error, node: node};

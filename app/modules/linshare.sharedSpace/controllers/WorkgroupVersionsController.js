@@ -372,6 +372,7 @@
      */
     function notifyBrowseActionError(data) {
       var responses = [];
+
       _.forEach(data.failedNodes, function(error) {
         switch(error.data.errCode) {
           case 26444 :
@@ -534,6 +535,7 @@
         removedVersions = _.map(versions, function(version) {
           delete version.versionNumber;
           delete version.isDifferentNameThanPrevious;
+          
           return version.remove();
         });
       }
@@ -682,6 +684,7 @@
      */
     function showSuccessNotificationForDeletedVersions(deletedVersions, isLastVersiondeleted) {
       var message = '';
+
       if(isLastVersiondeleted){
         message = 'TOAST_ALERT.ACTION.DELETE_LAST_VERSION';
       } else {
@@ -746,6 +749,7 @@
      */
     function copyVersionToPersonalSpace(versionItems) {
       var promises = [];
+
       _.forEach(versionItems, function(versionItem) {
         promises.push(
           workgroupNodesRestService.copyToMySpace(workgroupVersionsVm.folderDetails.workgroupUuid, versionItem.uuid)

@@ -32,6 +32,7 @@ describe('Testing Authentication Module: ', function () {
 
     it('Should call http-interceptor login confirmed when loggin succeed', function () {
       var login = 'john@doe.com', password = 'password';
+
       spyOn(authService, 'loginConfirmed');
 
       httpBackend.when('GET', 'linshare/authentication/authorized?ignoreAuthModule=true')

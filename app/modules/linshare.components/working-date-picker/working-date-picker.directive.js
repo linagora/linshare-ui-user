@@ -56,10 +56,12 @@
        */
       function invalidDate(value) {
         var currentDate = new Date(value).setHours(0, 0, 0, 0);
+
         if (currentDate < new Date(attrs.min).setHours(0, 0, 0, 0) ||
           currentDate > new Date(attrs.max).setHours(0, 0, 0, 0)) {
           return false;
         }
+        
         return true;
       }
 

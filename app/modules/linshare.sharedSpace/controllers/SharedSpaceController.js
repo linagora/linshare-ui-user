@@ -32,6 +32,7 @@ angular.module('linshare.sharedSpace')
     workgroupsPermissions
   ) {
     var thisctrl = this;
+
     thisctrl.functionalities = {};
     thisctrl.permissions = workgroupsPermissions;
     thisctrl.canDeleteWorkgroups = false;
@@ -56,8 +57,10 @@ angular.module('linshare.sharedSpace')
         var filteredData =
           params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
         var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+
         params.total(workgroups.length);
         params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
+        
         return (workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
@@ -79,6 +82,7 @@ angular.module('linshare.sharedSpace')
       var defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, swalNewWorkGroupName);
       var defaultName = defaultNamePos > 0 ?
         swalNewWorkGroupName + ' (' + defaultNamePos + ')' : swalNewWorkGroupName;
+
       createFolder(defaultName);
     };
 
@@ -89,6 +93,7 @@ angular.module('linshare.sharedSpace')
     thisctrl.sortDropdownSetActive = function($event) {
       thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
       var currTarget = $event.currentTarget;
+
       angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });
@@ -142,6 +147,7 @@ angular.module('linshare.sharedSpace')
       thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
       thisctrl.tableParams.sorting(sortField, thisctrl.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
+
       angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });
@@ -164,6 +170,7 @@ angular.module('linshare.sharedSpace')
     function goToSharedSpaceTarget(event, workgroupUuid, name) {
       event.stopPropagation();
       var element = angular.element($('td[uuid=' + workgroupUuid + ']').find('.file-name-disp'));
+
       if (element.attr('contenteditable') === 'false') {
         $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
       }
@@ -175,6 +182,7 @@ angular.module('linshare.sharedSpace')
       var currentPage = page || thisctrl.tableParams.page();
       var dataOnPage = data || thisctrl.tableParams.data;
       var select = selectFlag || thisctrl.flagsOnSelectedPages[currentPage];
+
       if (!select) {
         angular.forEach(dataOnPage, function(element) {
           if (!element.isSelected) {
@@ -319,10 +327,12 @@ angular.module('linshare.sharedSpace')
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           thisctrl.canCreate = true;
+          
           return workgroupRestService.get(item.uuid, true, true);
         })
         .then(function(newItemDetailsWithRole) {
           item = _.assign(item, newItemDetailsWithRole);
+          
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         })
         .then(function(workgroupsPermissions) {

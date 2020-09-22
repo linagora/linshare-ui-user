@@ -40,6 +40,7 @@
      */
     function getFormData() {
       var data;
+
       if (_.isUndefined(resetFormVm.resetData)) {
         data = {
           email: resetFormVm.email,
@@ -50,6 +51,7 @@
         data = resetFormVm.resetData;
         data.password = resetFormVm.password;
       }
+      
       return data;
     }
 

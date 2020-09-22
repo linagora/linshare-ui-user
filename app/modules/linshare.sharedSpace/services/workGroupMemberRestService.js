@@ -69,6 +69,7 @@
      */
     function create(workgroupMemberDto) {
       $log.debug('workgroupMembersRestService : create', workgroupMemberDto);
+      
       return handler(
         Restangular
           .one(restUrl, workgroupMemberDto.node.uuid)
@@ -87,6 +88,7 @@
      */
     function get(nodeUuid, accountUuid) {
       $log.debug('workgroupMembersRestService :  get', nodeUuid, accountUuid);
+      
       return handler(Restangular.one(restUrl, nodeUuid).one(restParam, accountUuid).get());
     }
 
@@ -99,6 +101,7 @@
      */
     function getList(nodeUuid) {
       $log.debug('workgroupMembersRestService :  getList', nodeUuid);
+      
       return handler(Restangular.one(restUrl, nodeUuid).all(restParam).getList());
     }
 
@@ -112,6 +115,7 @@
      */
     function remove(nodeUuid, accountUuid) {
       $log.debug('workgroupMembersRestService :  remove', nodeUuid, accountUuid);
+      
       return handler(Restangular.one(restUrl, nodeUuid).one(restParam, accountUuid).remove());
     }
 
@@ -124,6 +128,7 @@
      */
     function update(workgroupMemberDto) {
       $log.debug('workgroupMembersRestService : update', workgroupMemberDto);
+      
       return handler(
         Restangular
           .one(restUrl, workgroupMemberDto.node.uuid)

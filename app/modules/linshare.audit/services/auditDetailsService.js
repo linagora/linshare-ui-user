@@ -234,6 +234,7 @@
      */
     function setFullName(user) {
       var fullName;
+
       if (user.role === lsAppConfig.accountType.system) {
         fullName = authorSystem;
       } else if (user.role === lsAppConfig.accountType.superadmin) {
@@ -243,6 +244,7 @@
       } else {
         fullName = (user.firstName || user.lastName) ? user.firstName + ' ' + user.lastName : user.mail;
       }
+      
       return fullName;
     }
 
@@ -279,6 +281,7 @@
      */
     function setResourceName(auditAction, loggedUserUuid) {
       var resourceName;
+
       if (auditAction.resource.user) {
         resourceName = (auditAction.resource.user.uuid === loggedUserUuid) ? authorMe :
           setFullName(auditAction.resource.user);
@@ -292,6 +295,7 @@
           resourceName = auditAction.copiedTo.name;
         }
       }
+      
       return resourceName;
     }
 
@@ -317,6 +321,7 @@
      */
     function setResourceNameVarious(auditAction) {
       var resourceNameVarious;
+
       if (auditAction.copiedFrom) {
         resourceNameVarious = setRessourceNameVariousForCopied(auditAction, auditAction.copiedFrom);
       } else if (auditAction.copiedTo) {
@@ -326,6 +331,7 @@
       } else if (auditAction.list) {
         resourceNameVarious = auditAction.list.name;
       }
+      
       return resourceNameVarious;
     }
 
@@ -342,6 +348,7 @@
         if (copied.contextUuid === auditAction.workGroup.uuid) {
           return workgroup.current;
         }
+        
         return workgroup.another;
       } else {
         return copied.contextName;
@@ -358,6 +365,7 @@
      */
     function setSentenceKey(auditAction, key) {
       var action = auditAction.action;
+
       if (!_.isUndefined(auditAction.cause)) {
         if(auditAction.cause !== 'UNDEFINED') {
           action = auditAction.cause;
@@ -392,6 +400,7 @@
     function setShareRecipient(auditAction, loggedUserUuid) {
       var shareRecipient;
       // TODO : no need first check when recipient will be added for ANONYMOUS-CREATE audit
+
       if (auditAction.type === TYPES_KEY.ANONYMOUS_SHARE_ENTRY || auditAction.type === TYPES_KEY.SHARE_ENTRY) {
         if (!auditAction.resource.recipient) {
           shareRecipient = auditAction.recipientMail;
@@ -400,6 +409,7 @@
             authorMe : setFullName(auditAction.resource.recipient);
         }
       }
+      
       return shareRecipient;
     }
 
@@ -420,6 +430,7 @@
         resourceNameVarious: '<span class="activity-resource-name">' + auditAction.resourceNameVarious + '</span>',
         updatedValues: '<b>' + auditAction.updatedValues + '</b>'
       };
+
       if (auditAction.copiedFrom) {
         vars.resourceNameCopy = '<span class="activity-resource-name">' + auditAction.resourceNameCopy + '</span>';
       }
@@ -459,6 +470,7 @@
      */
     function setUpdatedValues(auditAction) {
       var updatedValues = {};
+
       if (auditAction.action === ACTIONS_KEY.UPDATE) {
         setUpdatedValuesDeepFind(auditAction.resource, auditAction.resourceUpdated, updatedValues);
         if (updatedValues.firstName || updatedValues.lastName) {
@@ -468,6 +480,7 @@
         setUpdatedValuesWorkgroupDocument(auditAction, updatedValues);
         setUpdatedValuesWorkgroupMember(auditAction, updatedValues);
       }
+      
       return updatedValues;
     }
 
@@ -506,6 +519,7 @@
       if (auditAction.type === TYPES_KEY.GUEST) {
         var oldDate = auditAction.resource.expirationDate;
         var newDate = auditAction.resourceUpdated.expirationDate;
+
         if (oldDate !== newDate) {
           updatedValues.expirationDate = {
             keyName: UPDATE_FIELDS_KEYS_PREFIX + UPDATE_FIELDS_KEY.expirationDate,
@@ -529,6 +543,7 @@
       if (auditAction.type === TYPES_KEY.WORKGROUP_DOCUMENT && auditAction.resource.treePath) {
         var oldFolder = auditAction.resource.treePath[auditAction.resource.treePath.length - 1];
         var newFolder = auditAction.resourceUpdated.treePath[auditAction.resourceUpdated.treePath.length - 1];
+
         if (oldFolder.uuid !== newFolder.uuid) {
           updatedValues.right = {
             keyName: UPDATE_FIELDS_KEYS_PREFIX + UPDATE_FIELDS_KEY.folder,
@@ -550,6 +565,7 @@
       if (auditAction.type === TYPES_KEY.WORKGROUP_MEMBER) {
         var oldRights = setUpdatedValuesWorkgroupMemberRights(auditAction.resource);
         var newRights = setUpdatedValuesWorkgroupMemberRights(auditAction.resourceUpdated);
+
         if (oldRights !== newRights) {
           updatedValues.right = {
             keyName: UPDATE_FIELDS_KEYS_PREFIX + UPDATE_FIELDS_KEY.right,
@@ -582,6 +598,7 @@
      */
     function setUserVarious(auditAction, loggedUserUuid) {
       var userVarious;
+
       if (auditAction.resource.firstName) {
         userVarious = (auditAction.resource.uuid === loggedUserUuid) ? authorMe : setFullName(auditAction.resource);
       } else if (auditAction.resource.sender && (auditAction.resource.sender.uuid !== auditAction.actor.uuid)) {
@@ -593,6 +610,7 @@
       } else if (auditAction.recipientMail) {
         userVarious = auditAction.recipientMail;
       }
+      
       return userVarious;
     }
 

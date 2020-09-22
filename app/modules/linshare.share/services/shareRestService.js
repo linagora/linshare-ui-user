@@ -50,6 +50,7 @@
      */
     function create(shareDocumentDto) {
       $log.debug('LinshareShareRestService : create', shareDocumentDto);
+      
       return handler(Restangular.all(restUrl).post(shareDocumentDto));
     }
 
@@ -62,6 +63,7 @@
      */
     function download(uuid) {
       $log.debug('LinshareShareRestService : download', uuid);
+      
       return handler(Restangular.all(restUrl).one(uuid, 'download').withHttpConfig({
         responseType: 'arraybuffer'
       }).get());
@@ -76,6 +78,7 @@
      */
     function get(uuid) {
       $log.debug('LinshareShareRestService : get', uuid);
+      
       return handler(Restangular.one(restUrl, uuid).get());
     }
 
@@ -87,6 +90,7 @@
      */
     function getList() {
       $log.debug('LinshareShareRestService : getList');
+      
       return handler(Restangular.all(restUrl).getList());
     }
 
@@ -99,6 +103,7 @@
      */
     function remove(uuid) {
       $log.debug('LinshareShareRestService : delete', uuid);
+      
       return Restangular.one(restUrl, uuid).remove();
     }
 
@@ -111,6 +116,7 @@
      */
     function thumbnail(uuid) {
       $log.debug('LinshareShareRestService : thumbnail', uuid);
+      
       return handler(Restangular.one(restUrl, uuid).one('thumbnail').get());
     }
   }

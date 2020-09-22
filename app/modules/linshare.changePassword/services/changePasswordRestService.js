@@ -36,6 +36,7 @@
      */
     function getRules() {
       $log.debug('changePasswordRestService - getRules');
+      
       return handler(Restangular.all('authentication').one('password').get().then(function(res) {
         return Restangular.stripRestangular(res);
       }));
@@ -51,6 +52,7 @@
      */
     function update(oldPassword, newPassword) {
       $log.debug('changePasswordRestService - update', oldPassword, newPassword);
+      
       return handler(
         Restangular.all('authentication').all('password').post({
           oldPwd: oldPassword,

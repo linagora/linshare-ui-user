@@ -52,6 +52,7 @@ angular.module('linshare.share')
 
     function ShareObjectForm(shareJson) {
       var self = this;
+
       shareJson = _.defaultTo(shareJson, {});
       self.name = _.defaultTo(shareJson.name, '');
       self.documents = _.defaultTo(shareJson.documents, []);
@@ -95,6 +96,7 @@ angular.module('linshare.share')
     ShareObjectForm.prototype.addRecipient = function() {
       var contact = this.selectedUser;
       var exists = false;
+
       switch (contact.type) {
         case 'simple':
           angular.forEach(recipients, function (elem) {
@@ -174,9 +176,11 @@ angular.module('linshare.share')
 
     ShareObjectForm.prototype.getFormObj = function() {
       var docUuid = [];
+
       _.forEach(this.documents, function(doc) {
         docUuid.push(doc.uuid);
       });
+      
       return {
         recipients: recipients,
         documents: docUuid,
@@ -216,6 +220,7 @@ angular.module('linshare.share')
     ShareObjectForm.prototype.share = function() {
       var self = this;
       var deferred = $q.defer();
+
       if (this.waitingUploadIdentifiers.length === 0) {
         if(this.documents.indexOf(undefined) === -1) {
           return LinshareShareService.create(_.omit(this.getFormObj(), 'mailingList')).then(function() {
@@ -240,6 +245,7 @@ angular.module('linshare.share')
       } else {
         deferred.reject({statusText: 'asyncMode'});
       }
+      
       return deferred.promise;
     };
 
@@ -247,6 +253,7 @@ angular.module('linshare.share')
     ShareObjectForm.prototype.addLinshareDocumentsAndShare = function(flowIdentifier, linshareDocument) {
       var ind = this.waitingUploadIdentifiers.indexOf(flowIdentifier);
       var documents = this.documents;
+
       if (ind > -1) {
         _.forEach(documents, function(doc, index) {
           if (!_.isUndefined(doc)) {

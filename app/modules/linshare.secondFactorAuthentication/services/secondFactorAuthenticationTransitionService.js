@@ -50,6 +50,7 @@
         return authenticationRestService.getCurrentUser().then(function(user) {
           if (user.secondFARequired && !user.secondFAEnabled) {
             transition.abort();
+            
             return $state.go('secondFactorAuthentication');
           }
 

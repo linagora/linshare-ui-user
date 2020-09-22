@@ -114,6 +114,7 @@
      */
     function addRecipientToCreateUsersList(contact) {
       var itemsListContact = _.find(contactsListsContactsVm.itemsList, {'mail': contact.mail});
+
       if (_.isUndefined(itemsListContact)) {
         var newContact = {
           firstName: contact.firstName || contact.mail.substring(0, contact.mail.indexOf('@')),
@@ -121,9 +122,11 @@
           mail: contact.mail,
           mailingListUuid: contactsListsContactsVm.contactsListUuid,
         };
+
         saveContact(newContact);
       } else {
         var message = (contact.firstName || contact.mail) + ' ' + (contact.lastName || '') + ' ' + stillExists;
+
         toastService.info({key: message});
       }
     }
@@ -212,10 +215,12 @@
       }, {
         getData: function(params) {
           var filteredData = [];
+
           switch(params.filter().operator) {
             case '||':
               _.forOwn(params.filter(), function(val, key) {
                 var obj = {};
+
                 obj[key] = val;
                 if (key !== 'operator') {
                   filteredData = _.concat(filteredData, $filter('filter')(contactsListsContactsVm.itemsList, obj));
@@ -231,8 +236,10 @@
           }
           var contactsListsContacts =
             params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+
           params.total(contactsListsContacts.length);
           params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
+          
           return (contactsListsContacts.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
@@ -301,6 +308,7 @@
       var currentPage = page || contactsListsContactsVm.tableParams.page();
       var dataOnPage = data || contactsListsContactsVm.tableParams.data;
       var select = selectFlag || contactsListsContactsVm.flagsOnSelectedPages[currentPage];
+
       if (!select) {
         _.forEach(dataOnPage, function(element) {
           if (!element.isSelected) {
@@ -393,6 +401,7 @@
       angular.element('#lastname').trigger('focus');
       if (event) {
         var currElm = event.currentTarget;
+
         angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
           angular.element(currElm).addClass('activeActionButton');
         });
@@ -411,6 +420,7 @@
       contactsListsContactsVm.tableParams.sorting(sortField, contactsListsContactsVm.toggleSelectedSort ?
         'desc' : 'asc');
       var currTarget = $event.currentTarget;
+
       angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });
@@ -471,6 +481,7 @@
     function updateContact(form, contact) {
       if (form.$valid) {
         var contactToSave = _.cloneDeep(contact);
+
         contactToSave.firstName = contactToSave._firstName;
         contactToSave.lastName = contactToSave._lastName;
         contactToSave.mail = contactToSave._mail;
@@ -507,6 +518,7 @@
      */
     function cancelContact(){
       var contactReset = contactsListsContactsVm.currentSelectedDocument.current;
+
       contactReset._firstName = contactReset.firstName;
       contactReset._lastName = contactReset.lastName;
       $scope.mainVm.sidebar.hide();

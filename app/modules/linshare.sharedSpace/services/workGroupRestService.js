@@ -44,6 +44,7 @@
      */
     function create(workgroupDto) {
       $log.debug('workgroupRestService : create', workgroupDto);
+      
       return handler(Restangular.all(restUrl).post(workgroupDto));
     }
 
@@ -57,6 +58,7 @@
      */
     function get(workgroupUuid, withMembers, withRole) {
       $log.debug('workgroupRestService : get', workgroupUuid);
+      
       return handler(Restangular.one(restUrl, workgroupUuid).get({
         members: withMembers,
         withRole: withRole
@@ -73,6 +75,7 @@
      */
     function getAudit(workgroupUuid, nodeUuid) {
       $log.debug('workgroupRestService : getAudit', workgroupUuid, nodeUuid);
+      
       return handler(Restangular.one('shared_spaces', workgroupUuid).one('audit').get());
     }
 
@@ -85,6 +88,7 @@
      */
     function getQuota(quotaUuid) {
       $log.debug('workgroupRestService - getQuota', quotaUuid);
+      
       return handler(Restangular.one('quota', quotaUuid).get());
     }
 
@@ -97,6 +101,7 @@
      */
     function getList(withRole) {
       $log.debug('workgroupRestService : getList');
+      
       return handler(Restangular.all(restUrl).getList({withRole: withRole}));
     }
 
@@ -109,6 +114,7 @@
      */
     function remove(workgroupUuid) {
       $log.debug('workgroupRestService : remove', workgroupUuid);
+      
       return handler(Restangular.one(restUrl, workgroupUuid).remove());
     }
 
@@ -121,6 +127,7 @@
      */
     function restangularize(item) {
       $log.debug('workgroupRestService : restangularize', item);
+      
       return Restangular.restangularizeElement(null, item, restUrl);
     }
 
@@ -133,6 +140,7 @@
      */
     function update(workgroupDto) {
       $log.debug('workgroupRestService : update', workgroupDto);
+      
       return handler(Restangular.one(restUrl, workgroupDto.uuid).customPUT(workgroupDto));
     }
   }

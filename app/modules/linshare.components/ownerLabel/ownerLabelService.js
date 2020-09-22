@@ -57,6 +57,7 @@
         return _.isEqual(_.pick(currentUser, ['firstName', 'lastName']), user) ?
           by + ' ' + me : by + ' ' + user.firstName + ' ' + user.lastName;
       }
+      
       return _.isEqual(_.pick(currentUser, ['firstName', 'lastName', 'mail']), user) ?
         by + ' ' + me : by + ' ' + user.firstName + ' ' + user.lastName;
     }

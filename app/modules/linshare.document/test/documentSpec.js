@@ -15,6 +15,7 @@ describe('Testing Documents Module: ', function () {
 
   describe('Test LinshareDocumentService', function() {
     var uuid = '9df4bf16-c95f-413d-aed2-b934e32dd346';
+
     beforeEach(inject(function () {
 
     }));
@@ -48,6 +49,7 @@ describe('Testing Documents Module: ', function () {
         uuid: uuid,
         name: 'doc.js'
       };
+
       httpBackend.expectPOST('/documents', documentDto).respond();
       LinshareDocumentService.create(documentDto);
       httpBackend.flush();
@@ -89,6 +91,7 @@ describe('Testing Documents Module: ', function () {
     it('Should call download service per selected document ', function() {
       //var selectedDocuments = ['doc1', 'doc2', 'doc3', 'doc4', 'doc5'];
       var selectedDocuments = documentsList;
+
       spyOn(LinshareDocumentService, 'downloadFiles');
       $scope.download(selectedDocuments);
       expect(LinshareDocumentService.downloadFiles.calls.count()).toEqual(selectedDocuments.length);

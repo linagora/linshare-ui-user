@@ -99,10 +99,12 @@
 
       var response = serverResponse.length > 0 ? angular.fromJson(serverResponse) : undefined;
       var noResponse = _.isUndefined(response);
+
       if (noResponse || !response.chunkUploadSuccess) {
         var logMessage = flowFile.asyncUploadDetails.errorMsg;
         var errorCode = NONE;
         var errorMessage = errorNone;
+
         if (!noResponse) {
           logMessage = response.errorMessage;
           errorCode = response.errorCode;
@@ -121,6 +123,7 @@
           flowFile.asyncUploadDeferred.reject(file);
         });
       }
+      
       return flowFile.asyncUploadDeferred.promise;
     }
 
@@ -155,6 +158,7 @@
             var errorParams = {};
             var errorCode = NONE;
             var errorMessage = errorNone;
+
             if (flowFile.asyncUploadDetails) {
               flowFile.asyncUploadDetails.errorCode = flowFile.asyncUploadDetails.errorCode === -1 ?
                 NONE : flowFile.asyncUploadDetails.errorCode;
@@ -175,6 +179,7 @@
           return timerGetAsyncUploadDetails(flowFile);
         }
       });
+      
       return flowFile.asyncUploadDeferred.promise;
     }
 
@@ -285,6 +290,7 @@
       $timeout(function() {
         flowFile.errorAgain = true;
       }, 200);
+      
       return $q
         .when(flowFile.asyncUploadDeferred)
         .then(function(defer) {
@@ -317,6 +323,7 @@
       flowFile.errorAgain = false;
       $log.debug('Error during upload, need to retry file : ', flowFile.name);
       flowFile.asyncUploadDeferred.reject(flowFile);
+      
       return flowFile.asyncUploadDeferred.promise;
     }
 
@@ -331,10 +338,12 @@
       var fileDetailsRequest = (flowFile._from === lsAppConfig.mySpacePage) ?
         LinshareDocumentRestService.get(flowFile.asyncUploadDetails.resourceUuid) :
         workgroupNodesRestService.get(flowFile.folderDetails.workgroupUuid, flowFile.asyncUploadDetails.resourceUuid);
+
       fileDetailsRequest.then(function(document) {
         flowFile.linshareDocument = document;
         flowFile.asyncUploadDeferred.resolve(flowFile);
       });
+      
       return flowFile.asyncUploadDeferred.promise;
     }
 
@@ -347,6 +356,7 @@
      */
     function timerGetAsyncUploadDetails(flowFile) {
       var delay = lsAppConfig.asyncUploadDelay;
+
       if (!_.isUndefined(flowFile.asyncUploadDetails)) {
         delay = flowFile.asyncUploadDetails.frequency ? flowFile.asyncUploadDetails.frequency : delay;
       }
@@ -375,6 +385,7 @@
         if (!file.size) {
           var errorCode = lsErrorCode.FILE_EMPTY;
           var errorMessage = messagePrefix + errorCode;
+
           onErrorAction(file, errorCode, errorMessage);
 
           return;

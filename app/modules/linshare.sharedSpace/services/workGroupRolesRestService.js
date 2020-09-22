@@ -46,6 +46,7 @@
      */
     function get(roleUuid) {
       $log.debug('workgroupRolesRestService :  get', roleUuid);
+      
       return handler(Restangular.one(restUrl, roleUuid).get());
     }
 
@@ -57,6 +58,7 @@
      */
     function getList() {
       $log.debug('workgroupRolesRestService :  getList');
+      
       return handler(Restangular.one(restUrl).getList());
     }
 
@@ -69,6 +71,7 @@
      */
     function getPermissions(roleUuid) {
       $log.debug('workgroupRolesRestService :  getPermissions', roleUuid);
+      
       return handler(Restangular.one(restUrl, roleUuid).one('permissions').get());
     }
   }

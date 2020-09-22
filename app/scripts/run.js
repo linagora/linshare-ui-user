@@ -11,6 +11,7 @@ angular
     uibDatepickerPopupConfig.showButtonBar = false;
     lsAppConfig = _.assign(lsAppConfig, lsUserConfig);
     var pathToLocal = (lsAppConfig.localPath) ? lsAppConfig.localPath : 'i18n/original/';
+
     $translateProvider.useLoader('$translatePartialLoader', {
       urlTemplate: pathToLocal + '/{lang}/{part}.json',
       loadFailureHandler: 'translateLoadFailureHandlerService'
@@ -38,6 +39,7 @@ angular
         delete element.typeImage;
         delete element.info;
       }
+      
       return element;
     });
     RestangularProvider.addElementTransformer('nodes', true, function (nodes) {
@@ -49,6 +51,7 @@ angular
 
         for(var i = nodes.length - 1; i > 0; i--) {
           var originalName = nodes[i-1].name;
+
           nodes[i].versionNumber = i + 1;
           nodes[i].isDifferentNameThanPrevious = originalName !== nodes[i].name;
         }
@@ -65,6 +68,7 @@ angular
       query: function(flowFile) {
         var workgroupUuidParam = '';
         var parentUuidParam = '';
+
         if(!_.isUndefined(flowFile.folderDetails)) {
           if(!_.isNil(flowFile.folderDetails.workgroupUuid)) {
             workgroupUuidParam = flowFile.folderDetails.workgroupUuid;
@@ -76,6 +80,8 @@ angular
           workGroupUuid: workgroupUuidParam,
           workGroupParentNodeUuid: parentUuidParam
         };
+
+        
         return flowParams;
       },
       headers: {'WWW-No-Authenticate' : 'linshare'}
@@ -121,6 +127,7 @@ angular
     const browserLanguageKey = browserLanguageFullKey.split('-')[0];
     const browserLanguage = lsAppConfig.languages[browserLanguageKey];
     var storedLocale = localStorageService.get('locale');
+
     storedLocale = typeof(storedLocale) !== 'object' ? undefined : storedLocale;
 
     languageService.changeLocale(
@@ -164,9 +171,11 @@ angular
             $log.debug('response', response);
             $log.debug('responseHandler', responseHandler);
             deferred.resolve(false);
+            
             return false;
           }
       }
+      
       return true;
     });
 
@@ -176,6 +185,7 @@ angular
       if (response.status === 401) {
         $rootScope.$emit('lsIntercept401');
       }
+      
       return data;
     });
 
@@ -190,6 +200,7 @@ angular
     $state.defaultErrorHandler(function(error) {
       if (error.detail) {
         var message = error.detail.statusText || error.detail.message || error.message;
+
         $log.error('$transitions.onError - ', message);
       } else {
         $log.error('$transitions.onError - ', error);
@@ -202,6 +213,7 @@ angular
     var protocol = $window.location.protocol;
     var host = $window.location.host.replace(/\/$/, '');
     var fqdn = protocol + '//' + host;
+
     lsAppConfig.backendUrl = [fqdn, validate(lsAppConfig.baseRestUrl)].join('/');
     Restangular.setBaseUrl(lsAppConfig.backendUrl);
     $rootScope.linshareModeProduction = lsAppConfig.production;
@@ -225,5 +237,6 @@ angular
 function validate(str) {
   str = str.trim();
   str = str.replace(/^\/|\/$/g, ''); //remove first and last slash if present
+  
   return str;
 }

@@ -4,6 +4,7 @@ angular.module('linshare.share')
   .controller('LinshareShareActionController', function(_, $scope, LinshareShareService, $log, $translate,
     ShareObjectService, toastService, documentUtilsService) {
     var shareActionVm = this;
+
     shareActionVm.closeSideBar = closeSideBar;
     shareActionVm.uploadPage = 'upload';
     shareActionVm.newShare = new ShareObjectService();
@@ -21,10 +22,12 @@ angular.module('linshare.share')
       if (selectedDocuments.length === 0 &&
         (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
         toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT'});
+        
         return true;
       }
       if (shareCreationDto.getRecipients().length === 0 && shareCreationDto.getMailingListUuid().length === 0) {
         toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT'});
+        
         return true;
       }
     }
@@ -35,9 +38,11 @@ angular.module('linshare.share')
       }
       selectedUploads = selectedUploads || {};
       var currentUploads = selectedUploads;
+
       for (var upload in currentUploads) {
         if (currentUploads.hasOwnProperty(upload)) {
           var flowFile = $scope.$flow.getFromUniqueIdentifier(upload);
+
           flowFile.isSelected = false;
           if (flowFile.isComplete()) {
             shareActionVm.newShare.addDocuments(flowFile.linshareDocument);
@@ -73,6 +78,7 @@ angular.module('linshare.share')
           toastService.info({key: 'TOAST_ALERT.ACTION.SHARE_ASYNC'});
           $scope.mainVm.sidebar.hide();
           var shareCopy = _.cloneDeep(shareActionVm.newShare.getObjectCopy());
+
           for (var upload in currentUploads) {
             if (currentUploads.hasOwnProperty(upload)) {
               shareCopy.documents.push(currentUploads[upload]);

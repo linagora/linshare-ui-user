@@ -54,6 +54,7 @@
     var newFolderName;
     const TYPE_FOLDER = 'FOLDER';
     const TYPE_DOCUMENT = 'DOCUMENT';
+
     browseVm.TYPE_FOLDER = TYPE_FOLDER;
     browseVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
     browseVm.createFolder = createFolder;
@@ -109,6 +110,7 @@
       var source = browseVm.nodeItems[0];
       var nodeItems= [];
       var failedNodes= [];
+
       workgroupVersionsRestService.copy(node.workGroup, node.uuid, source.uuid)
         .then(function() {
           nodeItems = [source];
@@ -137,6 +139,7 @@
           parent: browseVm.currentFolder.uuid,
           type: TYPE_FOLDER
         }, browseVm.currentFolder.workGroup);
+
         browseVm.restService.create(browseVm.currentFolder.workGroup, newFolderObject, true)
           .then(function(data) {
             newFolderObject.name = data.name;
@@ -161,9 +164,11 @@
 
       _.forEach(browseVm.nodeItems, function(nodeItem) {
         var deferred = $q.defer();
+
         browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem.uuid,
           browseVm.currentFolder.uuid, browseVm.kind).then(function(newNode) {
           var _newNode = browseVm.restService.restangularize(newNode[0]);
+
           deferred.resolve(_newNode);
         }).catch(function(error) {
           failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
@@ -204,6 +209,7 @@
       if (browseVm.canDisplayFiles) {
         return _.clone(list);
       }
+      
       return _.filter(list, {'type': TYPE_FOLDER});
     }
 
@@ -236,6 +242,7 @@
       } else if (browseVm.canCreateFolder) {
         var folderUuid = goToParent ? selectedFolder.parent : selectedFolder.uuid;
         var type = !browseVm.canDisplayFiles ? TYPE_FOLDER : undefined;
+
         browseVm.restService.getList(selectedFolder.workGroup, folderUuid, type).then(function(folders) {
           browseVm.currentList = _.orderBy(folders, 'modificationDate', 'desc');
         });
@@ -264,6 +271,7 @@
         browseVm.restService.getList(true)
           .then(function(currentList) {
             browseVm.currentList = _.orderBy(currentList, 'modificationDate', 'desc');
+            
             return workgroupPermissionsService.getWorkgroupsPermissions(currentList);
           })
           .then(function(workgroupsPermissions) {
@@ -296,6 +304,7 @@
 
       _.forEach(browseVm.nodeItems, function(nodeItem) {
         var deferred = $q.defer();
+
         nodeItem.parent = browseVm.currentFolder.uuid;
         nodeItem.save().then(function(newNode) {
           deferred.resolve(newNode);
@@ -328,6 +337,7 @@
       itemNameElem = itemNameElem || 'div[uuid=' + nodeToRename.uuid + '] .file-name-disp';
       itemUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
         var changedNodePos = _.findIndex(browseVm.currentList, nodeToRename);
+
         browseVm.currentList[changedNodePos] = data;
         if (nodeToRename.name !== data.name) {
           $timeout(function() {

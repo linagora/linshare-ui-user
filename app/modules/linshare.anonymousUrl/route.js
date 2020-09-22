@@ -28,6 +28,8 @@
           message: function($state, $transition$) {
             var message = 'ANONYMOUS_URL.HOME.';
             var params = $transition$.params();
+
+            
             return _.isUndefined(params.error) ? message + 'MESSAGE' : message + params.error.status;
           }
         },
@@ -42,8 +44,10 @@
         resolve: {
           anonymousUrlData: function($q, $state, $transition$, anonymousUrlService) {
             var deferred = $q.defer();
+
             anonymousUrlService.getAnonymousUrl($transition$.params().uuid).then(function(data) {
               var urlData = data.data;
+
               if ( _.isUndefined(urlData.uuid)) {
                 urlData.protectedByPassword = true;
                 urlData.uuid = $transition$.params().uuid;
@@ -57,6 +61,7 @@
               });
               deferred.reject(error);
             });
+            
             return deferred.promise;
           },
         },

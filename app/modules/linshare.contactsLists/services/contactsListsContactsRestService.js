@@ -76,6 +76,7 @@
      */
     function get(contactsListUuid, contactUuid) {
       $log.debug('contactsListsContactsRestService - get ', contactsListUuid, contactUuid);
+      
       return handler(Restangular.one(restUrl, contactsListUuid).one(restParam, contactUuid).get());
     }
 
@@ -88,6 +89,7 @@
      */
     function getList(contactsListUuid) {
       $log.debug('contactsListsContactsRestService - getList');
+      
       return handler(Restangular.one(restUrl, contactsListUuid).getList(restParam));
     }
 
@@ -101,6 +103,7 @@
      */
     function remove(contactsListUuid, contactUuid) {
       $log.debug('contactsListsContactsRestService - delete');
+      
       return handler(Restangular.one(restUrl, contactsListUuid).one(restParam, contactUuid).remove());
     }
 
@@ -114,6 +117,7 @@
      */
     function update(contactsListUuid, contact) {
       $log.debug('contactsListsContactsRestService - update');
+      
       return handler(Restangular.one(restUrl, contactsListUuid).one(restParam, contact.uuid).customPUT(contact));
     }
   }

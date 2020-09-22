@@ -38,6 +38,7 @@ angular.module(
         elm.bind('click', function() {
           var numItems = angular.element('.media-body').length;
           var isCurrentlySelected = elm.hasClass('highlight-list-elem');
+
           elm.toggleClass('highlight-list-elem', 'removeListElem');
           checkifMultiMenuVisible();
 
@@ -55,6 +56,7 @@ angular.module(
             scope.$apply(function() {
               scope.numSelectedItems.push(1);
               var numSelectedItems = scope.numSelectedItems.length;
+
               if (numSelectedItems === numItems) {
                 elm.addClass('highlight-list-elem');
                 scope.isAllSelected.status = true;

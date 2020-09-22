@@ -46,6 +46,7 @@
      */
     function create(documentDto) {
       $log.debug('LinshareDocumentRestService : create', documentDto);
+      
       return handler(Restangular.all(restUrl).post(documentDto));
     }
 
@@ -58,6 +59,7 @@
      */
     function copy(uuid) {
       $log.debug('LinshareDocumentRestService : copy', uuid);
+      
       return handler(Restangular.one(restUrl).all('copy').post({
         kind: 'PERSONAL_SPACE',
         uuid: uuid
@@ -73,6 +75,7 @@
      */
     function download(uuid) {
       $log.debug('LinshareDocumentRestService : download', uuid);
+      
       return Restangular.all(restUrl).one(uuid, 'download').getRequestedUrl();
     }
 
@@ -85,6 +88,7 @@
      */
     function get(uuid) {
       $log.debug('LinshareDocumentRestService : get', uuid);
+      
       return handler(Restangular.one(restUrl, uuid).get({
         withShares: true
       }));
@@ -99,6 +103,7 @@
      */
     function getAudit(documentUuid) {
       $log.debug('LinshareDocumentRestService : getAudit', documentUuid);
+      
       return handler(Restangular.one(restUrl, documentUuid).one('audit').get());
     }
 
@@ -110,6 +115,7 @@
      */
     function getList() {
       $log.debug('LinshareDocumentRestService: getList');
+      
       return handler(Restangular.all(restUrl).getList());
     }
 
@@ -122,6 +128,7 @@
      */
     function remove(uuid) {
       $log.debug('LinshareDocumentRestService : remove', uuid);
+      
       return handler(Restangular.one(restUrl, uuid).remove());
     }
 
@@ -134,6 +141,7 @@
      */
     function restangularize(item) {
       $log.debug('LinshareDocumentRestService : restangularize', item);
+      
       return Restangular.restangularizeElement(null, item, restUrl);
     }
 
@@ -146,6 +154,7 @@
      */
     function thumbnail(uuid) {
       $log.debug('LinshareDocumentRestService : thumbnail', uuid);
+      
       return handler(Restangular.one(restUrl, uuid).one('thumbnail').get({
         base64: true
       }));
@@ -162,10 +171,12 @@
     function update(uuid, documentDto) {
       $log.debug('LinshareDocumentRestService : update', uuid, documentDto);
       var documentUpdated = _.cloneDeep(documentDto);
+
       if (documentUpdated.thumbnail) {
         delete documentUpdated.thumbnail;
       }
       delete documentUpdated.auditActions;
+      
       return handler(Restangular.one(restUrl, uuid).customPUT(documentUpdated));
     }
   }

@@ -274,6 +274,7 @@
           redirect: function(currentFolder, $state, $stateParams, $transition$) {
             if(currentFolder.type === 'DOCUMENT') {
               $transition$.abort();
+              
               return $state.go('sharedspace.workgroups.version', {
                 workgroupUuid: $stateParams.workgroupUuid,
                 workgroupName: $stateParams.workgroupName,
@@ -481,6 +482,8 @@
               Name: $state.current.name,
               Params: $state.params
             };
+
+            
             return currentStateData;
           },
           shareIndex: function($transition$) {

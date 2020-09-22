@@ -79,6 +79,7 @@
         errCode = errCode || 'SERVER';
       }
       errorMessageDetails += _.isNil(errCode) ? 'NONE' : errCode;
+
       return $translate.refresh().then(function() {
         return $translate([errorMessageHttpCodes, errorMessageDetails]);
       }).then(function(translations) {
@@ -166,6 +167,7 @@
 
         responses = _.map(errorResponses, function(responseItems) {
           var objectInError = _.find(objectsReferences, {'uuid': responseItems.reason.config.data.uuid});
+
           return errorHandler(responseItems.reason, translation.messagePrefix).then(function(message) {
             var currentResponse = {
               title: objectInError.name,
@@ -173,6 +175,7 @@
                 key: message
               }
             };
+
             return currentResponse;
           });
         });
@@ -185,9 +188,11 @@
                 nbItems: errorResponses.length,
                 singular: errorResponses.length === 1
               }});
+
             if (!isSilent) {
               notify(true, errorTranslation, _.map(responsesPromises, 'value'));
             }
+
             return $q.reject(errorResponses);
           });
         } else {
@@ -216,6 +221,7 @@
           if (!isSilent) {
             notify(true, {key:message});
           }
+          
           return $q.reject(error);
         });
       });

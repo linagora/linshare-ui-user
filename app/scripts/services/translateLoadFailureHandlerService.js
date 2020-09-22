@@ -38,6 +38,7 @@
           return data.data;
         })
       );
+
       return promise;
     }
   }

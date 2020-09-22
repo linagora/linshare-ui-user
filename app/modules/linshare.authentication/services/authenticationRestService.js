@@ -69,15 +69,18 @@
      */
     function checkAuthentication(hideError, ignoreAuthModule) {
       $log.debug('AuthenticationRestService : checkAuthentication');
+      
       return handler(Restangular.all(restUrl).withHttpConfig({
         ignoreAuthModule: ignoreAuthModule
       }).customGET('authorized'), undefined, hideError)
         .then(function(userLoggedIn) {
           deferred.resolve(userLoggedIn);
+          
           return (userLoggedIn);
         }).catch(function(error) {
           deferred.reject(error);
           $log.debug('current user not authenticated', error);
+          
           return error;
         });
     }
@@ -90,6 +93,7 @@
      */
     function getCurrentUser() {
       $log.debug('AuthenticationRestService : getCurrentUser');
+      
       return deferred.promise;
     }
 
@@ -165,6 +169,7 @@
           if (_.isUndefined(location)) {
             $log.debug('AuthenticationRestService : logout - Using current location root for redirection');
             var absUrl = $location.absUrl();
+
             location = absUrl.split('#')[0];
           }
 
@@ -184,6 +189,7 @@
      */
     function version() {
       $log.debug('AuthenticationRestService : version');
+      
       return handler(Restangular.one(restUrl, 'version').get());
     }
   }

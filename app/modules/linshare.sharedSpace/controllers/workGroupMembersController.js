@@ -88,6 +88,7 @@
         var defaultConfiguredRoleIndex = roles.findIndex(function(role){
           return role.name === lsAppConfig.defaultWorkgroupMemberRole;
         });
+
         workgroupMemberVm.membersRights =
           defaultConfiguredRoleIndex === 0 || defaultConfiguredRoleIndex === -1
             ? roles
@@ -145,6 +146,7 @@
             lastName: member.lastName
           }
         });
+        
         return;
       }
 

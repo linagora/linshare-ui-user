@@ -89,6 +89,7 @@
      */
     function actionForgot(formData) {
       resetVm.reset.data = formData;
+      
       return resetPasswordService.reset(formData.email).finally(function() {
         resetVm.reset.type = 'reinitialize';
       });
@@ -120,6 +121,7 @@
      */
     function notify(data) {
       var message = data.data.message;
+
       toastService.error({key: message});
       $log.error('resetPasswordController - notify', data);
     }

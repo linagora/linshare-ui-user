@@ -570,6 +570,7 @@
       function setDocumentsAndFlagAsSelected(filesToSelect, pageNumber) {
         /* I LOVE ES6 ... */
         var flag = {};
+
         flag[pageNumber] = true;
 
         var documentsAndFlagsSelected = {
@@ -649,6 +650,7 @@
        */
       function sortDropdownSetActive(sortField, $event) {
         var currTarget = $event.currentTarget;
+
         $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
 
         $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');

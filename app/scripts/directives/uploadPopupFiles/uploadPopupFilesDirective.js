@@ -34,6 +34,7 @@
      */
     function linkFunc(scope, elem, attrs) {
       var totalFilesFrom;
+
       scope.fromWhere = attrs.uploadPopupFiles;
       elem.hide();
       scope.$watch('filesFilterred', function() {

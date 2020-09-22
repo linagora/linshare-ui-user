@@ -67,6 +67,7 @@
         authenticationRestService.getCurrentUser()
       ]).then(function(promises) {
         var functionalities = promises[0];
+
         autocompleteUsersVm.functionality = functionalities.COMPLETION;
         autocompleteUsersVm.canCreateGuest = functionalities.GUESTS.enable;
         autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
@@ -92,8 +93,10 @@
         selectedUsersList = autocompleteUsersVm.selectedUsersList;
 
       var errors = handleErrors();
+
       if (errors) {
         $log.error('Error in Function addElements:' + errors);
+        
         return;
       }
 
@@ -142,12 +145,14 @@
        */
       function handleErrors() {
         var errorMsg = '';
+
         if (_.isUndefined(selectedUser)) {
           errorMsg += '\n\t- var selectedUser is not defined';
         }
         if (_.isUndefined(selectedUsersList)) {
           errorMsg += '\n\t- var selectedUsersList is not defined';
         }
+        
         return errorMsg;
       }
     }
@@ -160,6 +165,8 @@
      */
     function onErrorEmail() {
       var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
+
+      
       return autocompleteUsersVm.withEmail
         && !_.isUndefined(viewValue)
         && viewValue.length >= autocompleteUsersVm.functionality.value
@@ -177,6 +184,7 @@
           autocompleteUsersVm.selectedUsersList);
       } else {
         var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
+
         if (autocompleteUsersVm.withEmail) {
           if (regexpEmail.test(viewValue)) {
             autocompleteUsersVm.searchUsersAccount(viewValue)
@@ -215,6 +223,7 @@
       autocompleteUsersVm.currentPattern = '';
 
       var deferred = $q.defer();
+
       if (pattern.length >= autocompleteUsersVm.functionality.value) {
         autocompleteUsersVm.currentPattern = pattern;
 
@@ -242,6 +251,7 @@
             deferred.resolve(usersAccounts);
           });
       }
+      
       return deferred.promise;
     }
 
@@ -268,6 +278,7 @@
             lastName: data.ownerLastName,
             mail: data.ownerMail
           };
+
           match.style = 'ls-contact-list-item';
           match.firstLetter = '';
           match.name = data.listName;

@@ -145,6 +145,7 @@
             }, {});
 
           accumulator[workgroupUuid] = resourcesActions;
+          
           return accumulator;
 
           //TODO: Minifier is **SHIT**, can't minify awesome syntax!

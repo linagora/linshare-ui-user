@@ -218,6 +218,7 @@
       }
       var defaultNamePos = itemUtilsService.itemNumber(contactsListsListVm.itemsList.plain(), newContactsListName);
       var defaultName = defaultNamePos > 0 ? newContactsListName + ' (' + defaultNamePos + ')' : newContactsListName;
+
       createContactsListFunction(defaultName);
     }
 
@@ -234,6 +235,7 @@
           name: cleanString(itemName),
           owner: _.pick($scope.userLogged, ['firstName', 'lastName', 'uuid'])
         });
+
         contactsListsListVm.canCreate = false;
         contactsListsListVm.itemsList.push(item);
         contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
@@ -281,6 +283,7 @@
      */
     function duplicateItem(item) {
       var newContactsListName = item.name + ' (' + copySuffix + ' ' + moment().format() + ')';
+
       contactsListsListRestService.duplicate(item.uuid, newContactsListName).then(function(newItem) {
         var duplicatedItem = contactsListsListRestService.restangularize({
           name: cleanString(newItem.name),
@@ -288,6 +291,7 @@
           uuid: newItem.uuid,
           modificationDate: moment().format()
         });
+
         contactsListsListVm.itemsList.push(duplicatedItem);
         contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
         contactsListsListVm.tableParams.reload();
@@ -361,6 +365,7 @@
      */
     function goToContactsListTarget(contactsListUuid, contactsListName) {
       var contactsListNameElem = $('td[uuid=' + contactsListUuid + ']').find('.file-name-disp');
+
       if (angular.element(contactsListNameElem).attr('contenteditable') === 'false') {
         $state.go('administration.contactslists.list.contacts', {
           contactsListUuid: contactsListUuid,
@@ -409,10 +414,12 @@
       }, {
         getData: function(params) {
           var filteredData = [];
+
           switch (params.filter().operator) {
             case '||':
               _.forOwn(params.filter(), function(val, key) {
                 var obj = {};
+
                 obj[key] = val;
                 if (key !== 'operator') {
                   filteredData = _.concat(filteredData, $filter('filter')(contactsListsListVm.itemsList, obj));
@@ -426,10 +433,12 @@
               break;
           }
           var contactsListsList = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+
           params.total(contactsListsList.length);
           params.settings({
             counts: filteredData.length > 10 ? [10, 25, 50, 100] : []
           });
+          
           return (contactsListsList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
@@ -506,6 +515,7 @@
      */
     function saveContacts(duplicate, contactListUuidDestination) {
       var nbContacts = contactsListsListVm.contactsToAddList.length;
+
       contactListUuidDestination = contactListUuidDestination || contactsListsListVm.contactsListUuidAddContacts;
       _.forEach(contactsListsListVm.contactsToAddList, function(contact, index) {
         contactsListsContactsRestService.create(contactListUuidDestination, contact).then(function() {
@@ -522,6 +532,7 @@
           if (error.data.errCode === 45400) {
             // TODO : IAB & KLE : improve serverResponse module to allow default or custom message
             var message = contact.firstName + ' ' + contact.lastName + ' ' + stillExists;
+
             toastService.error({key: message});
             _.remove(contactsListsListVm.contactsToAddList, {
               mail: contact.mail
@@ -544,6 +555,7 @@
       var currentPage = page || contactsListsListVm.tableParams.page();
       var dataOnPage = data || contactsListsListVm.tableParams.data;
       var select = selectFlag || contactsListsListVm.flagsOnSelectedPages[currentPage];
+
       if (!select) {
         _.forEach(dataOnPage, function(element) {
           if (!element.isSelected) {
@@ -577,16 +589,19 @@
     function showItemDetails(item, event) {
       return $q.when(contactsListsListRestService.get(item.uuid)).then(function(data) {
         contactsListsListVm.currentSelectedDocument.current = data;
+        
         return getContactsListAudit(contactsListsListVm.currentSelectedDocument.current);
       }).then(function() {
         contactsListsListVm.loadSidebarContent(lsAppConfig.contactslists);
         contactsListsListVm.mdtabsSelection.selectedIndex = 0;
         if (!_.isUndefined(event)) {
           var currElm = event.currentTarget;
+
           angular.element('#file-list-table tr li').removeClass('activeActionButton').promise().done(function() {
             angular.element(currElm).addClass('activeActionButton');
           });
         }
+        
         return contactsListsListVm.currentSelectedDocument.current;
       });
     }
@@ -602,6 +617,7 @@
       contactsListsListVm.toggleSelectedSort = !contactsListsListVm.toggleSelectedSort;
       contactsListsListVm.tableParams.sorting(sortField, contactsListsListVm.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
+
       angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });

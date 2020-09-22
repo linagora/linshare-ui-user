@@ -42,6 +42,7 @@
      */
     function get(funcId) {
       $log.debug('LinshareFunctionalityRestService : get', funcId);
+
       return handler(Restangular.all(restUrl).one(funcId).get());
     }
 
@@ -53,6 +54,7 @@
      */
     function getAll() {
       $log.debug('LinshareFunctionalityRestService : getAll');
+
       return deferred.promise;
     }
 
@@ -67,6 +69,7 @@
       handler(Restangular.all(restUrl).getList()).then(function(allfunc) {
         angular.forEach(allfunc, function(elm) {
           var func = {};
+
           func[elm.identifier] = elm;
           angular.extend(allFunctionalities, func);
         });
@@ -74,6 +77,7 @@
       }, function(err) {
         $log.error('error getting all functionalities', err);
       });
+
       return deferred.promise;
     }
 
@@ -86,6 +90,7 @@
      */
     function getFunctionalityParams(key) {
       $log.debug('LinshareFunctionalityRestService : getFunctionalityParams', key);
+      
       return getAll().then(function(all) {
         return all[key];
       });

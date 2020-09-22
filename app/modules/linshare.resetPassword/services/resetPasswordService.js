@@ -39,11 +39,13 @@
 
     function get(uuid) {
       var deferred = $q.defer();
+
       $http.get(baseRestUrl + '/' + uuid).then(function(resetGuestPasswordDto) {
         deferred.resolve(resetGuestPasswordDto);
       }).catch(function(data) {
         deferred.reject(data);
       });
+      
       return deferred.promise;
     }
 
@@ -60,11 +62,13 @@
       var data = {
         mail: guestEmail
       };
+
       $http.post(baseRestUrl, data).then(function(data) {
         deferred.resolve(data);
       }).catch(function(data) {
         deferred.reject(data);
       });
+      
       return deferred.promise;
     }
 
@@ -78,11 +82,13 @@
 
     function update(resetGuestPasswordDto) {
       var deferred = $q.defer();
+
       $http.put(baseRestUrl + '/' + resetGuestPasswordDto.uuid, resetGuestPasswordDto).then(function(data) {
         deferred.resolve(data);
       }).catch(function(data) {
         deferred.reject(data);
       });
+      
       return deferred.promise;
     }
   }

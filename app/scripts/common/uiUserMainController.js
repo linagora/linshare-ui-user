@@ -185,6 +185,7 @@
       function doNotification(file) {
         notifyTimeoutReference = undefined;
         var stack = file.flowObj.opts.stack;
+
         if (_.find(stack, file)) {
           var files = _.remove(stack, function(flowFile) {
             return flowFile.linshareDocument;
@@ -266,6 +267,7 @@
 
       $transitions.onError({}, function(trans) {
         var error = trans.error();
+
         if (error.detail) {
           trans.abort();
           if (error.detail.status >= 500 || error.detail.status === 401) {
@@ -397,6 +399,7 @@
         window.onbeforeunload = function() {
           return $scope.preventExitMessage;
         };
+        
         return;
       }
 
@@ -447,6 +450,7 @@
         shareObject =
         _.find(shareArray, function(element) {
           _.remove(element.documents, _.isUndefined);
+          
           return _.find(element.documents, function(doc) {
             return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
           });
@@ -470,6 +474,7 @@
           var documentInUpload = _.find(shareObject.documents, function(doc) {
             return doc.uniqueIdentifier;
           });
+
           if (_.isUndefined(documentInUpload)) {
             new ShareObjectService(shareObject).share();
           }
@@ -485,6 +490,7 @@
      */
     function setUserQuotas(quotaData) {
       var quotaBuilt = quotaService.buildQuota(quotaData);
+
       $scope.userQuotas = quotaBuilt;
     }
   }

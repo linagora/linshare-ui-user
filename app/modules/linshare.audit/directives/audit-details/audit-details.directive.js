@@ -23,6 +23,8 @@
       restrict: 'A',
       template: require('./audit-details.html')
     };
+
+    
     return directive;
   }
 })();

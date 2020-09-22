@@ -20,6 +20,7 @@
 
     /* jshint validthis:true */
     var checkTableHeightVm = this;
+
     checkTableHeightVm.checkAndSetNewWidth = checkTableHeightService.checkAndSetNewWidth;
     checkTableHeightVm.checkAndSetNewWidthSidebarRight = checkTableHeightService.checkAndSetNewWidthSidebarRight;
     checkTableHeightVm.checkWidthIsBiggerThanMobile = checkTableHeightService.checkWidthIsBiggerThanMobile;
@@ -68,6 +69,7 @@
        PS : In this case it is applied to any .drag-n-drop-height class upon which the directive was directly
        assigned to*/
       var dndHeight = heightWindow - (navbarHeight + breadcrumbHeight + copyrightFooter) - 2;
+
       angular.element('.drag-n-drop-height').attr('style','height : '+ dndHeight + 'px');
     }
   }

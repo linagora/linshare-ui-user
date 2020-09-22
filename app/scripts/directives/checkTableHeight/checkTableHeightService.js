@@ -34,6 +34,8 @@
      */
     function checkAndSetNewWidth() {
       var widthWindow = angular.element(window).width();
+
+      
       return widthWindow > 1093 ? true : false;
     }
 
@@ -45,6 +47,8 @@
      */
     function checkWidthIsBiggerThanMobile() {
       var widthWindow = angular.element(window).width();
+
+      
       return widthWindow > $rootScope.mobileWidthBreakpoint ? true : false;
     }
 
@@ -57,6 +61,7 @@
     //TODO : To be hyphenized -> setSidebarRightMobileState
     function checkAndSetNewWidthSidebarRight() {
       var widthWindow = angular.element(window).width();
+
       if (widthWindow < $rootScope.mobileWidthBreakpoint) {
         angular.element('aside#chat.sidebar-right').appendTo('body');
         angular.element('aside#chat.sidebar-right').addClass('setSidebarRightMobileState');

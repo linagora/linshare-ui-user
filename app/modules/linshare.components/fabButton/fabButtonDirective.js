@@ -114,11 +114,13 @@
        */
       function countShownElement() {
         var count = 0;
+
         _.forEach(scope.fabButtonActions, function(action) {
           if (_.isUndefined(action.hide)) {
             count++;
           }
         });
+        
         return count;
       }
     }
