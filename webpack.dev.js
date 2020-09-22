@@ -11,6 +11,7 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 20081,
+    host: '0.0.0.0',
     proxy: [
       {
         context: [
