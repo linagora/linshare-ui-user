@@ -2,7 +2,7 @@
   <h2><i class="ls-settings m-r-10"></i><span translate>FILTER_COMPONENT.ADVANCED_SEARCH_TITLE</span></h2>
   <div class="hidden-xs row fix-margin-row col-md-12 m-t-10 formsearch" style="float:none;">
     <div data-ng-if="::filterBoxSize" class="clearfix">
-      <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_SIZE</label>
+      <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_SIZE.HEADER</label>
       <div class="clearfix"></div>
       <!--SIZE START -->
       <div class="col-sm-4 p-l-0">
@@ -12,8 +12,8 @@
           </span>
           <div class="fg-line">
             <input type="text" data-ng-disabled="!filterBoxVm.showUnit()"
-                   class="form-control" name="start"
-                   maxlengh="3" placeholder="min"
+                   class="form-control" name="start" maxlengh="3"
+                   translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_SIZE.MINIMUM'}"
                    data-ng-model="filterBoxVm.sizeStart">
           </div>
         </div>
@@ -26,7 +26,7 @@
           </span>
           <div class="fg-line">
             <input type="text" data-ng-disabled="!filterBoxVm.showUnit()" name="end" class="form-control"
-                   placeholder="max"
+                   translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_SIZE.MAXIMUM'}"
                    data-ng-model="filterBoxVm.sizeEnd"
                    maxlengh="3"/>
           </div>

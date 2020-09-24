@@ -123,6 +123,11 @@
       "ADVANCED_SEARCH_TITLE": "Расширенный поиск",
       "BY_SIZE": "Размер",
       "FILTER_BY": "Фильтрация по",
+      "FILTER_BY_SIZE": {
+        "HEADER": "Фильтр по размеру",
+        "MINIMUM": "минимум",
+        "MAXIMUM": "максимум"
+      },
       "FILTER_BY_DATE": {
         "BEGINNING_DATE": "Дата создания",
         "CREATION_DATE": "Дата создания",
@@ -134,7 +139,6 @@
         "HEADER": "Фильтр по эмитенту",
         "PLACEHOLDER": "Введите адрес электронной почты, имя или фамилию"
       },
-      "FILTER_BY_SIZE": "Фильтр по размеру",
       "IS_SHARED": "Отправленные",
       "ORDER_BY_NAME": "Название",
       "PLACEHOLDER_FILE_NAME": "Поиск",

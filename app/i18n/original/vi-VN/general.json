@@ -123,6 +123,11 @@
     "ADVANCED_SEARCH_TITLE": "Cài đặt tìm kiếm nâng cao",
     "BY_SIZE": "Kích thước",
     "FILTER_BY": "Lọc bởi",
+    "FILTER_BY_SIZE": {
+      "HEADER": "Lọc theo kích thước",
+      "MINIMUM": "tối thiểu",
+      "MAXIMUM": "tối đa"
+    },
     "FILTER_BY_DATE": {
       "BEGINNING_DATE": "Ngày bắt đầu",
       "CREATION_DATE": "Ngày khởi tạo",
@@ -134,7 +139,6 @@
       "HEADER": "Lọc theo người gửi",
       "PLACEHOLDER": "Vui lòng nhập email, tên hoặc họ"
     },
-    "FILTER_BY_SIZE": "Lọc theo kích thước",
     "IS_SHARED": "Đã chia sẻ",
     "ORDER_BY_NAME": "Tên",
     "PLACEHOLDER_FILE_NAME": "Tên tập tin",

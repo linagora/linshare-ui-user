@@ -124,6 +124,11 @@
     "ADVANCED_SEARCH_TITLE": "Advanced search settings",
     "BY_SIZE": "Size",
     "FILTER_BY": "Filter by",
+    "FILTER_BY_SIZE": {
+      "HEADER": "Filter by size",
+      "MINIMUM": "min",
+      "MAXIMUM": "max"
+    },
     "FILTER_BY_DATE": {
       "BEGINNING_DATE": "Beginning date",
       "CREATION_DATE": "Creation date",
@@ -135,7 +140,6 @@
       "HEADER": "Filter by sender",
       "PLACEHOLDER": "Please enter an email, first name or last name"
     },
-    "FILTER_BY_SIZE": "Filter by size",
     "IS_SHARED": "Shared",
     "ORDER_BY_NAME": "Name",
     "PLACEHOLDER_FILE_NAME": "Search by name",

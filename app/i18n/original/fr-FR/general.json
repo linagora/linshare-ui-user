@@ -124,6 +124,11 @@
     "ADVANCED_SEARCH_TITLE": "Recherche avancée",
     "BY_SIZE": "Taille",
     "FILTER_BY": "Filtrer par",
+    "FILTER_BY_SIZE": {
+      "HEADER": "Filtrer par taille",
+      "MININUM": "min",
+      "MAXIMUM": "max"
+    },
     "FILTER_BY_DATE": {
       "BEGINNING_DATE": "Date de début",
       "CREATION_DATE": "Date de création",
@@ -135,7 +140,6 @@
       "HEADER": "Filtrer par Emetteur",
       "PLACEHOLDER": "Veuillez saisir un courriel, un nom ou un prénom"
     },
-    "FILTER_BY_SIZE": "Filtrer par taille",
     "IS_SHARED": "Partagé",
     "ORDER_BY_NAME": "Nom",
     "PLACEHOLDER_FILE_NAME": "Rechercher par nom",
