@@ -37,12 +37,12 @@
         fr: {
           key: 'fr',
           fullKey: 'fr-FR',
-          country: 'France',
+          country: 'Français',
         },
         en: {
           key: 'us',
           fullKey: 'en-US',
-          country: 'United States'
+          country: 'English'
         },
         vi: {
           key: 'vn',
@@ -52,7 +52,7 @@
         ru: {
           key: 'ru',
           fullKey: 'ru-RU',
-          country: 'russian'
+          country: 'Pусский'
         }
       },
       enableSafeDetails: false,
