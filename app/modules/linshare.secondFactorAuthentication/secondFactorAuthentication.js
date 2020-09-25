@@ -2,6 +2,7 @@ angular
   .module('linshare.secondFactorAuthentication', [
     'pascalprecht.translate',
     'linshare.components',
+    'linshare.directives',
     'linshare.utils',
     'ngclipboard'
   ])
@@ -18,7 +19,6 @@ require('./components/sharedKeyCreation/sharedKeyCreation');
 require('./components/sharedKeyCreation/sharedKeyCreationController');
 require('./components/sharedKeyRemoval/sharedKeyRemoval');
 require('./components/sharedKeyRemoval/sharedKeyRemovalController');
-require('./directives/secondFactorAuthenticationDirective');
 require('./controllers/secondFactorAuthenticationController');
 require('./controllers/secondFactorAuthenticationLoginController');
 

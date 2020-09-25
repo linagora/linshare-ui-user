@@ -12,3 +12,4 @@
 })();
 
 require('./preventDefault/preventDefaultDirective');
+require('./otpInput/otpInputDirective');

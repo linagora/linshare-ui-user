@@ -1,0 +1,11 @@
+<div>
+  <input class="otp-input" type="text" ng-repeat="character in characters" autocomplete="off"
+    ng-keyup="onKeyUp($index,$event)" ng-keydown="onKeyDown($index,$event)" ng-model='character.value'
+    id="otpInput{{character.index}}" name="otpInput{{character.index}}" ng-style="style"
+    maxlength="1"
+    ng-keypress="onKeyPress($event)"
+    ng-paste="onPaste($event)"
+    ng-click="onClick($index)"
+    inputmode="numeric"
+  />
+</div>

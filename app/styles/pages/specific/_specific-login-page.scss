@@ -65,6 +65,24 @@
     }
   }
 
+  .otp-form-group{
+    width: 100%;
+    overflow: hidden;
+    .otp-input {
+      border: none;
+      border-bottom: 2px solid;
+      border-radius: 0;
+      display: inline-block;
+      text-align: center;
+      outline: none;
+      box-shadow: none;
+      background: transparent;
+      border-color: #c6d2e7;
+      color: #535050;
+      font-size: 20px;
+    }
+  }  
+
   /**********************
     COPYRIGHTS
   ***********************/
@@ -98,30 +116,6 @@
   }
 }
 
-
-
-#otp-form-group{
-  width: 100%;
-  overflow: hidden;
-  .otp-input{
-    left: 0;
-    position: sticky;
-
-    input {
-      font-size: large;
-      padding-left: 7%;
-      padding-bottom: 1%;
-      letter-spacing: 44.5px;
-      border: 0;
-      background-image: linear-gradient(to left, rgb(198, 210, 231) 70%, rgb(255, 255, 255) 0%);
-      background-position: bottom;
-      background-size: 11% 2px;
-      background-repeat: repeat-x;
-      background-position-x: 23%;
-      width: 150%;
-    }
-  }
-}
 
 /**********************
    LANGUAGE DROPDOWN
@@ -352,11 +346,6 @@ div {
     width: 1em;
     height: 1em;
     top: 1px;
-  }
-  .otp-input {
-    input {
-      letter-spacing: 27.5px !important;
-    }
   }
 }
 
