@@ -25,6 +25,7 @@
     var directive = {
       restrict: 'A',
       scope: {
+        disabled: '=?',
         isRequired: '=?',
         onSelectFunction: '=',
         selectedUsersList: '=',

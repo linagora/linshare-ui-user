@@ -161,9 +161,7 @@
           </div>
         </div>
       </div>
-      <div class="m-b-30 col-xs-12 field-ctn" x-ng-show="guestObject.allowedToRestrict.enable &&
-                                                         guestObject.allowedToRestrict.canOverride &&
-                                                         guestObject.form.activateUserSpace">
+      <div class="m-b-30 col-xs-12 field-ctn" x-ng-show="guestObject.allowedToRestrict.enable">
         <div class="fg-line">
           <div class="form-inline">
             <label for="restrict-contact" class="p-b-10">
@@ -182,7 +180,7 @@
         <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!guestObject.form.activateRestricted">
           <x-ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
             <div class="form-group fg-line">
-              <div ls-autocomplete-user="USERS" data-selected-users-list="guestObject.restrictedContacts"
+              <div ls-autocomplete-user="USERS" disabled="!guestObject.allowedToRestrict.canOverride" data-selected-users-list="guestObject.restrictedContacts"
                    data-is-required="guestObject.form.activateUserSpace && guestObject.form.activateRestricted"
                    data-with-email="false">
               </div>
