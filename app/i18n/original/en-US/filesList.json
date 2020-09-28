@@ -104,7 +104,10 @@
       "ATTACH_EMAIL": "Customize the email",
       "ATTACHED_EMAIL_SUBJECT": "Email subject",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Enter your email message",
-      "GO_TO_UPLOAD_FILES": "Go back to uploads"
+      "GO_TO_UPLOAD_FILES": "Go back to uploads",
+      "ERROR": {
+        "INVALID_DATE": "Date is invalid"
+      }
     },
     "CURRENT_SHARE_DETAIL": {
       "TITLE": "Share details",

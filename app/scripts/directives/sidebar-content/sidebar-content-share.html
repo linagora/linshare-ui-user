@@ -130,50 +130,53 @@
         {{"RIGHT_PANEL.SHARE.MORE_OPTIONS" | translate}}
       </a>
     </div>
-    <div data-ng-show="shareActionVm.newShare.expirationDate.enable && shareActionVm.newShare.expirationDate.canOverride"
-         class="col-xs-12 field-ctn clearfix"
-         id="dateField">
-      <label for="comment" class="labelDateExpiration col-xs-6 no-padding">
-        {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
-      </label>
-      <!--
-        TODO: The directive shall be refactored with a proper template and passing different options.
-              See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
-      -->
-      <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
-           x-ng-class="{'is-opened': opened == true}">
-        <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
-          <div class="form-inline">
-            <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
-                   class="form-control date-picker-input" uib-datepicker-popup
-                   show-weeks="false"
-                   is-open="opened"
-                   datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
-                                        maxDate: shareActionVm.newShare.expirationDate.value}"
-                   data-ng-required="true"
-                   placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
-                   min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
-                   max="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
-                   data-ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
-                   data-ng-model="shareActionVm.newShare.expirationDate.value"/>
+
+    <form name="shareSettings">
+      <div ng-show="shareActionVm.newShare.expirationDate.enable && shareActionVm.newShare.expirationDate.canOverride"
+        ng-class="{ 'has-error': shareSettings.expirationDate.$invalid }"
+        class="col-xs-12 field-ctn clearfix" id="dateField">
+        <label for="expirationDate" class="labelDateExpiration col-xs-6 no-padding">
+          {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+        </label>
+        <!--
+          TODO: The directive shall be refactored with a proper template and passing different options.
+                See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+        -->
+        <div class="datepicker-border-fix date-picker dp-blue col-xs-6" x-ng-class="{'is-opened': opened == true}">
+          <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
+            <div class="form-inline">
+              <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                class="form-control date-picker-input" uib-datepicker-popup show-weeks="false" is-open="opened"
+                datepicker-options="::{
+                  minDate: shareActionVm.newShare.getMinDate(),
+                  maxDate: shareActionVm.newShare.getMaxDate()
+                }"
+                placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'YYYY-MM-DD'}}"
+                min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate' }}"
+                max="{{shareActionVm.newShare.getMaxDate() | lsDate: 'fullDate' }}"
+                ng-disabled="!shareActionVm.newShare.expirationDate.canOverride"
+                ng-model="shareActionVm.newShare.expirationDate.value"
+                name="expirationDate"
+                required/>
+            </div>
           </div>
         </div>
+        <span class="float-right" ng-show="shareSettings.expirationDate.$invalid" translate>RIGHT_PANEL.SHARE_OPTIONS.ERROR.INVALID_DATE</span>
       </div>
-    </div>
-    <div class="form-sidebar">
-      <div class="form-group col-xs-12 addNote no-padding">
+      <div class="form-sidebar">
+        <div class="form-group col-xs-12 addNote no-padding">
           <div class="form-group fg-line">
-            <textarea type="text" class="form-control input-sm"
-                   x-ng-model="shareActionVm.newShare.subject"
-                   placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}">
+            <textarea type="text" class="form-control input-sm" x-ng-model="shareActionVm.newShare.subject"
+              placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}">
             </textarea>
           </div>
           <textarea class="form-control comment" rows="5"
-                    placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
-                    x-ng-model="shareActionVm.newShare.message">
+            placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
+            x-ng-model="shareActionVm.newShare.message">
           </textarea>
         </div>
-    </div>
+      </div>
+    </form>
   </div>
 </div>
 <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">

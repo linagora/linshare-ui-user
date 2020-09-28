@@ -85,7 +85,10 @@
       "ATTACH_EMAIL": "Tùy chỉnh thư điện tử",
       "TBT__ATTACHED_EMAIL_SUBJECT": "",
       "TBT__ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản",
-      "TBT__GO_TO_UPLOAD_FILES": ""
+      "TBT__GO_TO_UPLOAD_FILES": "",
+      "ERROR": {
+        "INVALID_DATE": "Ngày không hợp lệ"
+      }
     }
   },
   "SELECTED_FILES": {

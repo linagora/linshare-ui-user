@@ -22,12 +22,12 @@ angular.module('linshare.share')
       if (selectedDocuments.length === 0 &&
         (selectedUploads === undefined || (Object.keys(selectedUploads).length === 0))) {
         toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_DOCUMENT'});
-        
+
         return true;
       }
       if (shareCreationDto.getRecipients().length === 0 && shareCreationDto.getMailingListUuid().length === 0) {
         toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT'});
-        
+
         return true;
       }
     }

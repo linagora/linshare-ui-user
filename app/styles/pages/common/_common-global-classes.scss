@@ -144,6 +144,10 @@
   clear: both;
   display: block;
   margin-top: 7px;
+
+  &.float-right {
+    float: right;
+  }
 }
 
 .disabled-work-in-progress, .disabled-work-in-progress i {

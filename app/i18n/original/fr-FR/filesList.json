@@ -104,7 +104,10 @@
       "ATTACHED_EMAIL_SUBJECT": "Sujet du courriel",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message de courriel",
       "SHOW_SELECTED_FILES": "Voir les fichiers",
-      "GO_TO_UPLOAD_FILES": "Retour vers les dépots"
+      "GO_TO_UPLOAD_FILES": "Retour vers les dépots",
+      "ERROR": {
+        "INVALID_DATE": "La date n'est pas valide"
+      }
     },
     "CURRENT_SHARE_DETAIL": {
       "TITLE": "Détails du partage",

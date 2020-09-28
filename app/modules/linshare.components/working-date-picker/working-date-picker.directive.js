@@ -61,7 +61,7 @@
           currentDate > new Date(attrs.max).setHours(0, 0, 0, 0)) {
           return false;
         }
-        
+
         return true;
       }
 

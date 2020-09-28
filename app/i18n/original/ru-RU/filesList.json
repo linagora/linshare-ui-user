@@ -103,7 +103,10 @@
         "ATTACH_EMAIL": "Настройка электронной почты",
         "ATTACHED_EMAIL_SUBJECT": "Тема письма",
         "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Введите текст вашего сообщения",
-        "GO_TO_UPLOAD_FILES": "Вернуться к загрузкам"
+        "GO_TO_UPLOAD_FILES": "Вернуться к загрузкам",
+        "ERROR": {
+          "INVALID_DATE": "Дата недействительна"
+        }
       },
       "CURRENT_SHARE_DETAIL": {
         "TITLE": "Поделиться информацией",

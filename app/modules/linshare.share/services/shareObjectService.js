@@ -6,8 +6,7 @@
 
 angular.module('linshare.share')
 
-  .factory('ShareObjectService', function(_, $log, functionalityRestService, LinshareShareService, $q, toastService,
-    $translate, authenticationRestService, lsAppConfig, moment) {
+  .factory('ShareObjectService', function(_, $log, functionalityRestService, LinshareShareService, $q, toastService, authenticationRestService, lsAppConfig, moment) {
 
     var recipients = [],
       mailingListUuid = [],
@@ -35,9 +34,6 @@ angular.module('linshare.share')
           angular.extend(enableUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
           angular.extend(creationAcknowledgement,functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
           angular.extend(expirationDate, functionalities.SHARE_EXPIRATION);
-          expirationDate.value = moment().endOf('day').add(expirationDate.value, expirationDate.unit)
-            .subtract(1, 'days').valueOf();
-
           angular.extend(secured, functionalities.ANONYMOUS_URL);
           if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
             secured.enable = false;
@@ -73,14 +69,13 @@ angular.module('linshare.share')
 
       self.waitingUploadIdentifiers = _.defaultTo(shareJson.waitingUploadIdentifiers, []);
       self.uploadingDocuments = [];
-      self.getMinDate = function() {
-        return moment().endOf('day').valueOf();
-      };
+      self.getMinDate = () => moment().endOf('day').valueOf();
+      self.getMaxDate = () => moment().endOf('day').add(expirationDate.value, expirationDate.unit).subtract(1, 'days').valueOf();
 
       getFunctionalities().then(function() {
         self.secured = _.defaultTo(shareJson.secured, secured);
         self.creationAcknowledgement = _.defaultTo(shareJson.creationAcknowledgement, creationAcknowledgement);
-        self.expirationDate =_.defaultTo(shareJson.expirationDate, expirationDate);
+        self.expirationDate =_.defaultTo(shareJson.expirationDate, _.assign({}, expirationDate, { value: self.getMaxDate() }));
         self.enableUSDA = _.defaultTo(shareJson.enableUSDA, enableUSDA);
         self.notificationDateForUSDA =  _.defaultTo(shareJson.notificationDateForUSDA, notificationDateForUSDA);
         self.forceAnonymousSharing = _.defaultTo(
@@ -180,7 +175,7 @@ angular.module('linshare.share')
       _.forEach(this.documents, function(doc) {
         docUuid.push(doc.uuid);
       });
-      
+
       return {
         recipients: recipients,
         documents: docUuid,
@@ -188,7 +183,7 @@ angular.module('linshare.share')
         mailingList: mailingList,
         secured: secured.value,
         creationAcknowledgement: creationAcknowledgement.value,
-        expirationDate: expirationDate.value,
+        expirationDate: this.expirationDate,
         enableUSDA: enableUSDA.value,
         notificationDateForUSDA: notificationDateForUSDA.value,
         sharingNote: this.sharingNote,
@@ -206,7 +201,7 @@ angular.module('linshare.share')
         mailingList: mailingList,
         secured: secured.value,
         creationAcknowledgement: creationAcknowledgement.value,
-        expirationDate: expirationDate.value,
+        expirationDate: this.expirationDate,
         enableUSDA: enableUSDA.value,
         notificationDateForUSDA: notificationDateForUSDA.value,
         sharingNote: this.sharingNote,
@@ -245,7 +240,7 @@ angular.module('linshare.share')
       } else {
         deferred.reject({statusText: 'asyncMode'});
       }
-      
+
       return deferred.promise;
     };
 
@@ -278,7 +273,7 @@ angular.module('linshare.share')
       this.secured = secured;
       this.creationAcknowledgement = creationAcknowledgement;
 
-      this.expirationDate = expirationDate;
+      this.expirationDate = _.assign({}, expirationDate, { value: this.getMaxDate() });
       this.enableUSDA = enableUSDA;
       this.notificationDateForUSDA = notificationDateForUSDA;
 

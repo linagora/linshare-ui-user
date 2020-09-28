@@ -217,8 +217,8 @@
                           <md-option value="GIGA">GB</md-option>
                         </md-select>
                       </div>
-                      <div>
-                        <span class='has-error-span' ng-show="uploadRequestForm.totalSizeOfFiles.$invalid
+                      <div class="has-error">
+                        <span ng-show="uploadRequestForm.totalSizeOfFiles.$invalid
                           || uploadRequestForm.totalSizeOfFilesUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
@@ -242,8 +242,8 @@
                           class="form-control custom-bordered-input custom-single-input"
                           ng-model="mainVm.sidebar.getData().uploadRequestObject.maxNumberOfFiles" type="number" />
                       </div>
-                      <div>
-                        <span class='has-error-span' ng-show="uploadRequestForm.maxNumberOfFiles.$invalid"
+                      <div class="has-error">
+                        <span ng-show="uploadRequestForm.maxNumberOfFiles.$invalid"
                           translate
                           translate-interpolation="messageformat"
                           translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.value}"
@@ -276,8 +276,8 @@
                           <md-option value="GIGA">GB</md-option>
                         </md-select>
                       </div>
-                      <div>
-                        <span class='has-error-span' ng-show="uploadRequestForm.maxSizeOfAFile.$invalid || uploadRequestForm.maxSizeOfAFileUnit.$invalid"
+                      <div class="has-error">
+                        <span ng-show="uploadRequestForm.maxSizeOfAFile.$invalid || uploadRequestForm.maxSizeOfAFileUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
                           translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.getMaxSize('one', true) }"
