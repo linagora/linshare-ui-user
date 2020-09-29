@@ -1,8 +1,16 @@
 <div id="member-sidebar">
-  <div class="header-sidebar">
-    <i ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x"
+  <div class="header-sidebar form-sidebar header-show-action">
+    <i ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x hidden-xs"
       ng-click="mainVm.sidebar.getData().toggleMoreOptions(false)">
     </i>
+    <div class="hidden-sm">
+      <i ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x mdi-back-mobile"
+        ng-click="mainVm.sidebar.getData().toggleMoreOptions(false)">
+      </i>
+      <span ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 0" class="actions" ng-click="mainVm.sidebar.hide()">
+        <a><i class="zmdi zmdi-close zmdi-hc-lg mdi-close-mobile"></i></a>
+      </span>
+    </div>
     <h2 class="header-more-options setEllipsis">
       <span translate>UPLOAD_REQUESTS.FORM_CREATE.SINGULAR_TITLE</span>
       <span> - </span>
@@ -12,11 +20,16 @@
     <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
+    <span class="header-action-link waves-effect text-uppercase visible-xs"
+      ng-click="mainVm.sidebar.getData().createUploadRequest(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)">
+      <span class="zmdi zmdi-check"></span>
+      <span translate>SIDEBAR.BUTTON.CREATE</span>
+    </span>
   </div>
 
   <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
       <md-content>
-        <form name='createUploadRequest' class="custom-height-form">
+        <form name='uploadRequestForm' class="custom-height-form">
           <md-tabs class="custom-height-md-tabs" md-selected="mainVm.sidebar.getData().mdTabsSelection.selectedIndex" md-border-bottom="">
             <md-tab id="tab1" label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 noPadding">
               <div class="card col-xs-12 form-within-sidebar" id="content-ctn-sidebar">
@@ -108,19 +121,19 @@
                     </div>
                     <div class="form-sidebar">
                       <div class="form-group col-xs-12 addNote no-padding">
-                        <div class="form-group fg-line" ng-class="{'has-error' : ((createUploadRequest.mail.$touched ||createUploadRequest.$submitted)
-                        && createUploadRequest.mail.$invalid)}">
+                        <div class="form-group fg-line" ng-class="{'has-error' : ((uploadRequestForm.mail.$touched ||uploadRequestForm.$submitted)
+                        && uploadRequestForm.mail.$invalid)}">
                           <textarea type="text" name="mail" class="form-control input-sm" ng-model="mainVm.sidebar.getData().uploadRequestObject.mail"
                             placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}"
                             required
                           >
                           </textarea>
-                          <span ng-show="(createUploadRequest.mail.$touched ||createUploadRequest.$submitted) && createUploadRequest.mail.$invalid" translate>
+                          <span ng-show="(uploadRequestForm.mail.$touched ||uploadRequestForm.$submitted) && uploadRequestForm.mail.$invalid" translate>
                             UPLOAD_REQUESTS.ERROR.SUBJECT_REQUIRED
                            </span>
                         </div>
-                        <div class="form-group fg-line" ng-class="{'has-error' : ((createUploadRequest.message.$touched ||createUploadRequest.$submitted)
-                          && createUploadRequest.message.$invalid)}">
+                        <div class="form-group fg-line" ng-class="{'has-error' : ((uploadRequestForm.message.$touched ||uploadRequestForm.$submitted)
+                          && uploadRequestForm.message.$invalid)}">
                           <textarea class="form-control comment" rows="5"
                             placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
                             ng-model="mainVm.sidebar.getData().uploadRequestObject.message"
@@ -128,7 +141,7 @@
                             required
                           >
                           </textarea>
-                          <span ng-show="(createUploadRequest.message.$touched ||createUploadRequest.$submitted) && createUploadRequest.message.$invalid" translate>
+                          <span ng-show="(uploadRequestForm.message.$touched ||uploadRequestForm.$submitted) && uploadRequestForm.message.$invalid" translate>
                             UPLOAD_REQUESTS.ERROR.BODY_REQUIRED
                           </span>
                         </div>
@@ -153,8 +166,8 @@
                       </label>
                       <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
                         ng-class="{'is-opened': opened == true}">
-                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.expiration.$touched ||createUploadRequest.$submitted)
-                          && createUploadRequest.expiration.$invalid)}">
+                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((uploadRequestForm.expiration.$touched ||uploadRequestForm.$submitted)
+                          && uploadRequestForm.expiration.$invalid)}">
                           <div class="form-inline">
                             <input working-date-picker ng-click="open($event, 'opened')" type="text"
                               ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToExpiration.canOverride"
@@ -170,7 +183,7 @@
                             />
                           </div>
                           <span
-                            ng-show="createUploadRequest.expiration.$invalid"
+                            ng-show="uploadRequestForm.expiration.$invalid"
                             translate
                             translate-interpolation="messageformat"
                             translate-values="{ value: mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfExpiration(true) }"
@@ -205,8 +218,8 @@
                         </md-select>
                       </div>
                       <div>
-                        <span class='has-error-span' ng-show="createUploadRequest.totalSizeOfFiles.$invalid
-                          || createUploadRequest.totalSizeOfFilesUnit.$invalid"
+                        <span class='has-error-span' ng-show="uploadRequestForm.totalSizeOfFiles.$invalid
+                          || uploadRequestForm.totalSizeOfFilesUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
                           translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.getMaxSize('total', true) }"
@@ -230,7 +243,7 @@
                           ng-model="mainVm.sidebar.getData().uploadRequestObject.maxNumberOfFiles" type="number" />
                       </div>
                       <div>
-                        <span class='has-error-span' ng-show="createUploadRequest.maxNumberOfFiles.$invalid"
+                        <span class='has-error-span' ng-show="uploadRequestForm.maxNumberOfFiles.$invalid"
                           translate
                           translate-interpolation="messageformat"
                           translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.value}"
@@ -264,7 +277,7 @@
                         </md-select>
                       </div>
                       <div>
-                        <span class='has-error-span' ng-show="createUploadRequest.maxSizeOfAFile.$invalid || createUploadRequest.maxSizeOfAFileUnit.$invalid"
+                        <span class='has-error-span' ng-show="uploadRequestForm.maxSizeOfAFile.$invalid || uploadRequestForm.maxSizeOfAFileUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
                           translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.getMaxSize('one', true) }"
@@ -294,8 +307,8 @@
                       </label>
                       <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
                         ng-class="{'is-opened': opened == true}">
-                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.activation.$touched ||createUploadRequest.$submitted)
-                          && createUploadRequest.activation.$invalid)}">
+                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((uploadRequestForm.activation.$touched ||uploadRequestForm.$submitted)
+                          && uploadRequestForm.activation.$invalid)}">
                           <div class="form-inline">
                             <input working-date-picker ng-click="open($event, 'opened')" type="text"
                               ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToActivation.canOverride"
@@ -310,7 +323,7 @@
                             />
                           </div>
                           <span
-                            ng-show="createUploadRequest.activation.$invalid"
+                            ng-show="uploadRequestForm.activation.$invalid"
                             translate
                             translate-interpolation="messageformat"
                             translate-values="{ value: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(true) }"
@@ -363,8 +376,8 @@
                       </label>
                       <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
                         ng-class="{'is-opened': opened == true}">
-                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((createUploadRequest.notificationDate.$touched ||createUploadRequest.$submitted)
-                        && createUploadRequest.notificationDate.$invalid)}">
+                        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((uploadRequestForm.notificationDate.$touched ||uploadRequestForm.$submitted)
+                        && uploadRequestForm.notificationDate.$invalid)}">
                           <div class="form-inline">
                             <input working-date-picker ng-click="open($event, 'opened')" type="text"
                               ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToExpiryNotification.canOverride"
@@ -379,7 +392,7 @@
                             />
                           </div>
                           <span
-                            ng-show="createUploadRequest.notificationDate.$invalid"
+                            ng-show="uploadRequestForm.notificationDate.$invalid"
                             translate
                             translate-interpolation="messageformat"
                             translate-values="{ min: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(true),
@@ -422,7 +435,7 @@
   </button>
   <button
     class="btn btn-primary col-xs-6"
-    ng-click="mainVm.sidebar.getData().createUploadRequest(createUploadRequest, mainVm.sidebar.getData().uploadRequestObject)"
+    ng-click="mainVm.sidebar.getData().createUploadRequest(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)"
     translate
   >
     NAVIGATION.CREATE

@@ -64,6 +64,24 @@ function LinshareUploadRequestsController(
     uploadRequestVm.status = $stateParams.status;
     uploadRequestVm.paramFilter = { label: '' };
     uploadRequestVm.currentSelectedDocument = {};
+    uploadRequestVm.fabButton = {
+      toolbar: {
+        activate: true,
+        label: 'UPLOAD_REQUESTS.TITLE'
+      },
+      actions: [
+        {
+          action: () => uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, true),
+          label: 'UPLOAD_REQUESTS.CREATION_TYPE.COLLECTIVE',
+          icon: 'ls-upload-request-alt',
+        },
+        {
+          action: () => uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, false),
+          label: 'UPLOAD_REQUESTS.CREATION_TYPE.INDIVIDUAL',
+          icon: 'ls-upload-request-2',
+        }
+      ]
+    };
 
     tableParamsService.initTableParams(uploadRequestVm.itemsList, uploadRequestVm.paramFilter)
       .then(() => {
