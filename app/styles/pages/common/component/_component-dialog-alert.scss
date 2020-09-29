@@ -20,7 +20,7 @@
     padding: 1em 1em 0.5em 1em;
     font-size: 1.1em;
   }
-  p{
+  p {
     background-color: #ffffff;
     font-size: 1.05em;
     line-height: 1.6em;
@@ -245,45 +245,6 @@ FILE DIRECTORY DIALOG
       border-top: solid 1px #eee;
     }
   }
-  md-toolbar {
-    min-height: 55px;
-    max-height: 55px;
-    flex: 0 0 55px;
-    .md-toolbar-tools {
-      background-color: $component-dialog-alert-md-toolbar-background-color;
-      width: 100%;
-      padding: 0 14px;
-      h2 {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 0.85em;
-      }
-    }
-  }
-  md-dialog-actions {
-    display: flex;
-    border: solid 1px #eee;
-    padding: 0;
-    background-color: #fff;
-    button {
-      border-radius: 3px;
-      text-transform: uppercase;
-      width: 49%;
-      font-size: 1.05em;
-      letter-spacing: 0.03em;
-      flex: 1 1 auto;
-      text-align: center;
-      margin: 0px;
-      padding: 1.1em 0;
-    }
-  }
-  .cancel {
-    border: none;
-    box-shadow: none;
-    border-right: solid 1px #eee;
-  }
-  .confirm {
-    border: none;
-  }
   .actions.white-inline-link {
     margin-top: -4px !important;
     > a > i {
@@ -297,6 +258,59 @@ FILE DIRECTORY DIALOG
     &:hover {
       color: $primary-alt-color2;
     }
+  }
+}
+
+md-dialog.custom-dialog {
+  md-toolbar {
+    min-height: 55px;
+    max-height: 55px;
+    flex: 0 0 55px;
+
+    .md-toolbar-tools {
+      background-color: $component-dialog-alert-md-toolbar-background-color;
+      width: 100%;
+      padding: 0 14px;
+      h2 {
+        color: #fff;
+        font-size: 0.85em;
+      }
+    }
+  }
+
+  md-dialog-actions {
+    display: flex;
+    border: solid 1px #eee;
+    padding: 0;
+    background-color: #fff;
+
+    button {
+      border-radius: 3px;
+      text-transform: uppercase;
+      width: 49%;
+      font-size: 1.05em;
+      letter-spacing: 0.03em;
+      flex: 1 1 auto;
+      text-align: center;
+      margin: 0px;
+      padding: 1.1em 0;
+    }
+  }
+
+  md-input-container {
+    &.md-input-focused .md-input {
+      border-color: $primary-alt-color2;
+    }
+  }
+
+  .cancel {
+    border: none;
+    box-shadow: none;
+    border-right: solid 1px #eee;
+  }
+
+  .confirm {
+    border: none;
   }
 }
 
@@ -318,13 +332,7 @@ FILE DIRECTORY DIALOG
     min-height: 100%;
     min-width: 100%;
     max-width: 100%;
-    md-toolbar{
-      border-radius: 0;
-      background-color: $component-dialog-alert-md-toolbar-background-color !important;
-    }
-    .md-toolbar-tools{
-      padding: 0 5px 0 14px;
-    }
+
     .actions.white-inline-link {
       margin-right: 0 !important;
       a {
@@ -335,6 +343,17 @@ FILE DIRECTORY DIALOG
       max-height: calc(100% - 50px) !important;
       position: absolute;
       width: 100%;
+    }
+  }
+
+  md-dialog.custom-dialog {
+    md-toolbar {
+      border-radius: 0;
+      background-color: $component-dialog-alert-md-toolbar-background-color !important;
+    }
+
+    .md-toolbar-tools {
+      padding: 0 5px 0 14px;
     }
   }
 }

@@ -40,7 +40,8 @@
     "SILENCE": "Silence",
     "VIEW_VERSIONING": "Voir l'historique",
     "SEE_VERSIONS": "Voir les versions",
-    "PROCEED": "Procéder"
+    "PROCEED": "Procéder",
+    "SAVE": "Sauvegarder"
   },
   "ACTIVITIES": "Activités",
   "ADD_FILES_DROPDOWN": {

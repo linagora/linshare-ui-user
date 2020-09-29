@@ -39,7 +39,8 @@
       "SILENCE": "Тишина",
       "VIEW_VERSIONING": "Просмотреть историю",
       "SEE_VERSIONS": "Управлять версиями",
-      "PROCEED": "Продолжить"
+      "PROCEED": "Продолжить",
+      "SAVE": "хранить"
     },
     "ACTIVITIES": "Действия",
     "ADD_FILES_DROPDOWN": {

@@ -14,7 +14,6 @@
     '$filter',
     '$q',
     '$sce',
-    '$timeout',
     '$translate',
     'authenticationRestService',
     'deviceDetector',
@@ -30,13 +29,12 @@
    * @desc Utils service for manipulating file
    * @memberOf linshare.utils
    */
-  /* jshint maxparams: false */
+
   function itemUtilsService(
     _,
     $filter,
     $q,
     $sce,
-    $timeout,
     $translate,
     authenticationRestService,
     deviceDetector,
@@ -178,7 +176,7 @@
       );
       var url = URL.createObjectURL(file);
 
-      
+
       return $sce.trustAsResourceUrl(url);
     }
 
@@ -191,14 +189,14 @@
      * @memberOf linshare.utils.itemUtilsService
      */
     function isNameValid(name) {
-      if (name === '') {
+      if (!name) {
         toastService.error({key: invalidNameTranslate.empty.key});
-        
+
         return false;
       }
       if (name.charAt(name.length - 1) === '.') {
         toastService.error({key: invalidNameTranslate.endingPoint.key});
-        
+
         return false;
       }
       if (regex.test(name)) {
@@ -208,10 +206,10 @@
             rejectedChar: invalidNameTranslate.rejectedChar.param
           }
         });
-        
+
         return false;
       }
-      
+
       return true;
     }
 
@@ -238,7 +236,7 @@
             count = number > count ? number : count;
           }
         });
-        
+
         return count + 1;
       }
     }
@@ -294,78 +292,27 @@
      * @memberOf linshare.utils.itemUtilsService
      */
     function rename(item, selector) {
-      var done = false,
-        deferred = $q.defer(),
-        initialName = item.name.trim(),
-        itemElement = angular.element(document.querySelector('body')).find(selector);
+      const initialName = item.name.trim();
+      const itemElement = angular.element(document.querySelector('body')).find(selector);
 
-      itemElement.attr('contenteditable', 'true')
-        .on('focus', function() {
-          itemElement.text(initialName);
-          document.execCommand('selectAll', false, null);
-        })
-        .on('focusout', function(e) {
-          if (!done) {
-            check(initialName, e);
-          }
-        })
-        .on('keydown', function(e) {
-          //esc
-          if (e.which === 27 || e.keyCode === 27) {
-            reset(item);
-          }
-          //enter
-          if (e.which === 13) {
-            check(initialName, e);
-          }
-        });
+      return dialogService.dialogInput({
+        title: 'ACTION.RENAME',
+        initialValue: initialName
+      })
+        .then(result => result.trim())
+        .then(check)
+        .catch(() => reset(item));
 
-      // https://blog.sessionstack.com/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with-2f077c4438b5
-      $timeout(function(){
-        itemElement.focus();
-      });
-
-      return deferred.promise;
-      /**
-       * @name check
-       * @desc Check edited name
-       * @param {string} initialName - Initial name
-       * @param {event} e - The origin keypress and focusout event
-       * @memberOf itemUtilsService.rename
-       */
-      function check(initialName, e) {
-        var newName = angular.element(e.target).text();
-
+      function check(newName) {
         if (newName !== initialName || !item.uuid) {
-          save(newName, item);
-        } else {
-          reset(item);
+          return save(newName, item);
         }
+
+        return reset(item);
       }
 
-      /**
-       * @name clean
-       * @desc Remove listeners set on DOM object
-       * @memberOf itemUtilsService.rename
-       */
-      function clean() {
-        itemElement.attr('contenteditable', 'false')
-          .off('focus')
-          .off('keydown')
-          .off('focus');
-      }
-
-      /**
-       * @name reset
-       * @desc Reset the name into the object 'item'
-       * @param {Object} item - Item manipulated
-       * @memberOf itemUtilsService.rename
-       */
       function reset(item) {
-        done = true;
-        clean();
-        itemElement.text(initialName);
-        deferred.reject({
+        return $q.reject({
           config: item,
           data: {
             errCode: lsErrorCode.CANCELLED_BY_USER,
@@ -374,36 +321,25 @@
         });
       }
 
-      /**
-       * @name save
-       * @desc Save the name into the object 'item'
-       * @param {string} name - New name for the item to be saved
-       * @param {Object} item - Item manipulated
-       * @memberOf itemUtilsService.rename
-       */
       function save(name, item) {
-        name = name.trim();
-        if (isNameValid(name)) {
-          done = true;
-          item.name = name;
-          item.save().then(function(data) {
-            Object.assign(
-              item,
-              data
-            );
-            deferred.resolve(data);
-          }).catch(function(error) {
-            deferred.reject(error);
+        if (!isNameValid(name)) {
+          return reset(item);
+        }
+
+        item.name = name;
+
+        return item.save()
+          .then(data => {
+            itemElement.text(name);
+
+            return Object.assign(item, data);
+          })
+          .catch(error => {
             itemElement.text(initialName);
             item.name = initialName;
-            itemElement.focus();
-          }).finally(function() {
-            clean();
+
+            return error;
           });
-        } else {
-          reset(item);
-          itemElement.focus();
-        }
       }
     }
   }

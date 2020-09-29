@@ -11,7 +11,8 @@
 
   dialogService.$inject = [
     '$q',
-    'swal'
+    'swal',
+    '$mdDialog'
   ];
 
   /**
@@ -21,7 +22,8 @@
    */
   function dialogService(
     $q,
-    swal
+    swal,
+    $mdDialog
   )
   {
     var service = {
@@ -37,7 +39,8 @@
         success: 'success',
         warning: 'warning'
       },
-      dialogConfirmation: dialogConfirmation
+      dialogConfirmation: dialogConfirmation,
+      dialogInput: dialogInput
     };
 
     return service;
@@ -54,7 +57,6 @@
     function dialogConfirmation(sentences, type) {
       var currentType = type || service.dialogType.info;
 
-      
       return $q(function(resolve) {
         swal({
           title: sentences.title,
@@ -70,6 +72,19 @@
             return resolve();
           }
         });
+      });
+    }
+
+    function dialogInput(options) {
+      return $mdDialog.show({
+        ok: options.ok || 'ACTION.SAVE',
+        cancel: options.cancel || 'NAVIGATION.CANCEL',
+        title: options.title,
+        initialValue: options.initialValue,
+        template: require('./dialogInput/dialogInput.html'),
+        controller: 'dialogInputController',
+        controllerAs: 'dialogInputVm',
+        bindToController: true
       });
     }
   }

@@ -11,6 +11,7 @@
 
 require('./constant');
 require('./dialog/dialogService');
+require('./dialog/dialogInput/dialogInputController');
 require('./document/documentModelRestService');
 require('./document/documentUtilsService');
 require('./filters/lsDateFilter');
