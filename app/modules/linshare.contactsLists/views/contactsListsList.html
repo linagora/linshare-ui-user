@@ -581,7 +581,7 @@
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.SHOW_CONTACTS</span>
                                 </a>
                               </li>
-                              <li>
+                              <li ng-class="{'disable-link': !contactsListsListVm.isFromMyContactsLists}">
                                 <a href=""
                                    data-ng-click="contactsListsListVm.goToContactsListAndAddContacts(contactsList.uuid, contactsList.name)">
                                   <i class="zmdi ls-add-user-sm"></i>
