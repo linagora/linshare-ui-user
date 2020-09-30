@@ -89,6 +89,18 @@
       "ALLOW_CLOSURE": "Разрешить закрытие",
       "NOTIFICATION_DATE": "Дата уведомления",
       "NOTIFICATION_LANGUAGE": "Язык уведомлений"
+    },
+    "DIALOG": {
+      "CANCELLATION": {
+        "TITLE": "Отмена запроса на загрузку",
+        "TEXT": "Вы собираетесь отменить {singular, select, true{запрос на загрузку} other{{nbItems} запроса на загрузку}} ! Осторожно, это действие не может быть отменено."
+      }
+    },
+    "TOAST_ALERT": {
+      "CANCELLATION": {
+        "ERROR": "{number} {singular, select, true{запрос на загрузку} other{запроса на загрузку}} никто не отменял.",
+        "INFO": "{number} {singular, select, true{запрос на загрузку} other{запроса на загрузку}} был отменен."
+      }
     }
   }
 }

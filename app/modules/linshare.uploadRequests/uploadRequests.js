@@ -11,3 +11,4 @@ require('./constants');
 require('./controllers/LinshareUploadRequestsController');
 require('./services/uploadRequestRestService');
 require('./services/uploadRequestObjectService');
+require('./services/uploadRequestUtilsService');

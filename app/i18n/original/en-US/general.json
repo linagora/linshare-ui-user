@@ -39,7 +39,8 @@
     "SHARE": "Share",
     "SILENCE": "Silence",
     "VIEW_VERSIONING": "View previous updates",
-    "SEE_VERSIONS": "Manage version"
+    "SEE_VERSIONS": "Manage version",
+    "PROCEED": "Proceed"
   },
   "ACTIVITIES": "Activities",
   "ADD_FILES_DROPDOWN": {

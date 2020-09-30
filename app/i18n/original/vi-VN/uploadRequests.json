@@ -89,6 +89,18 @@
       "ALLOW_CLOSURE": "Cho phép đóng",
       "NOTIFICATION_DATE": "Ngày thông báo",
       "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo"
+    },
+    "DIALOG": {
+      "CANCELLATION": {
+        "TITLE": "Hủy yêu cầu tải lên",
+        "TEXT": "Bạn chuẩn bị hủy {singular, select, true{1 yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
+      }
+    },
+    "TOAST_ALERT": {
+      "CANCELLATION": {
+        "ERROR": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} không được hủy.",
+        "INFO": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} đã được hủy."
+      }
     }
   }
 }

@@ -14,16 +14,18 @@ angular
 
 LinshareUploadRequestsController.$inject = [
   '_',
+  '$q',
   '$scope',
   '$state',
   '$stateParams',
+  'contactsListsService',
   'lsAppConfig',
-  'UploadRequestObjectService',
   'toastService',
-  'uploadRequests',
   'tableParamsService',
+  'uploadRequests',
+  'UploadRequestObjectService',
   'uploadRequestRestService',
-  'contactsListsService'
+  'uploadRequestUtilsService'
 ];
 
 /**
@@ -33,30 +35,32 @@ LinshareUploadRequestsController.$inject = [
  */
 function LinshareUploadRequestsController(
   _,
+  $q,
   $scope,
   $state,
   $stateParams,
+  contactsListsService,
   lsAppConfig,
-  UploadRequestObjectService,
   toastService,
-  uploadRequests,
   tableParamsService,
+  uploadRequests,
+  UploadRequestObjectService,
   uploadRequestRestService,
-  contactsListsService
+  uploadRequestUtilsService
 ) {
   const uploadRequestVm = this;
+  const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;
 
   uploadRequestVm.$onInit = onInit;
 
   function onInit() {
     uploadRequestVm.loadSidebarContent = loadSidebarContent;
     uploadRequestVm.showDetails = showDetails;
+    uploadRequestVm.cancelUploadRequests = cancelUploadRequests;
     uploadRequestVm.uploadRequestCreate = lsAppConfig.uploadRequestCreate;
     uploadRequestVm.uploadRequestDetails = lsAppConfig.uploadRequestDetails;
     uploadRequestVm.getOwnerName = contactsListsService.getOwnerName;
-    uploadRequestVm.mdTabsSelection = {
-      selectedIndex: 0
-    };
+    uploadRequestVm.mdTabsSelection = { selectedIndex: 0 };
     uploadRequestVm.toggleMoreOptions = toggleMoreOptions;
     uploadRequestVm.setSubmitted = setSubmitted;
     uploadRequestVm.createUploadRequest = createUploadRequest;
@@ -145,7 +149,7 @@ function LinshareUploadRequestsController(
           uploadRequestVm.itemsList.push(request);
           uploadRequestVm.tableParams.reload();
         }
-  
+
         $state.go('uploadRequests', {
           status: request.status === 'CREATED' ? 'pending' : 'activeClosed'
         });
@@ -193,6 +197,40 @@ function LinshareUploadRequestsController(
       uploadRequestVm.currentSelected = data;
       loadSidebarContent(uploadRequestVm.uploadRequestDetails, true);
     });
+  }
+
+  function cancelUploadRequests(uploadRequests) {
+    openWarningDialogFor('cancellation', uploadRequests)
+      .then(() => $q.allSettled(
+        uploadRequests.map(
+          request => uploadRequestRestService.updateStatus(request.uuid, 'CANCELED')
+        )
+      ))
+      .then(promises => {
+        const canceledRequests = promises
+          .filter(promise => promise.state === 'fulfilled')
+          .map(promise => promise.value);
+        const notCanceledRequests = promises
+          .filter(promise => promise.state === 'rejected')
+          .map(reject => reject.reason);
+
+        _.remove(uploadRequestVm.itemsList, item => canceledRequests.some(request => request.uuid === item.uuid));
+        _.remove(uploadRequestVm.selectedUploadRequests, selected => canceledRequests.some(request => request.uuid === selected.uuid));
+
+        uploadRequestVm.tableParams.reload();
+
+        return {
+          canceledRequests,
+          notCanceledRequests
+        };
+      })
+      .then(({ canceledRequests, notCanceledRequests}) => {
+        if (notCanceledRequests.length) {
+          showToastAlertFor('cancellation', 'error', notCanceledRequests);
+        } else {
+          showToastAlertFor('cancellation', 'info', canceledRequests);
+        }
+      });
   }
 }
 

@@ -38,7 +38,8 @@
       "SHARE": "Отправить",
       "SILENCE": "Тишина",
       "VIEW_VERSIONING": "Просмотреть историю",
-      "SEE_VERSIONS": "Управлять версиями"
+      "SEE_VERSIONS": "Управлять версиями",
+      "PROCEED": "Продолжить"
     },
     "ACTIVITIES": "Действия",
     "ADD_FILES_DROPDOWN": {

@@ -23,7 +23,8 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
     get: get,
     getList: getList,
     remove: remove,
-    update: update
+    update: update,
+    updateStatus: updateStatus
   };;
 
   ////////////
@@ -97,5 +98,11 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
     $log.debug('LinshareUploadRequestService : update', uuid, uploadRequestDto);
 
     return handler(Restangular.one(restUrl, uuid).customPUT(uploadRequestDto));
+  }
+
+  function updateStatus(uuid, status) {
+    $log.debug('LinshareUploadRequestService : updateStatus', uuid, status);
+
+    return handler(Restangular.one(restUrl, uuid).one('status', status).put());
   }
 }

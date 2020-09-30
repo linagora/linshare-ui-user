@@ -364,7 +364,7 @@
                               </a>
                             </li>
                             <li ng-if="uploadRequest.status === 'CREATED'">
-                              <a href="">
+                              <a href="" ng-click="uploadRequestVm.cancelUploadRequests([uploadRequest])">
                                 <i class="zmdi zmdi-close-circle"></i>
                                 <span translate>NAVIGATION.CANCEL</span>
                               </a>
@@ -458,7 +458,11 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span ng-if="uploadRequestVm.status === 'pending'">
-              <a class="plain-text-button share-link" translate-attr="{title: 'NAVIGATION.CANCEL'}">
+              <a
+                class="plain-text-button share-link"
+                translate-attr="{title: 'NAVIGATION.CANCEL'}"
+                ng-click="uploadRequestVm.cancelUploadRequests(uploadRequestVm.selectedUploadRequests)"
+              >
                 <i class="zmdi zmdi-close-circle"></i>
                 <span translate>NAVIGATION.CANCEL</span>
               </a>
