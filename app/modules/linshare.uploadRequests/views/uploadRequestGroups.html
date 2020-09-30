@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
-          <div ng-if="uploadRequestVm.status !== 'archived'" class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
+          <div ng-if="uploadRequestGroupsVm.status !== 'archived'" class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
             auto-close="always" tooltip-placement="bottom" tooltip-popup-delay="500" is-open="isOpenNew"
             ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle>
@@ -13,14 +13,14 @@
             <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided" uib-dropdown-menu=""
               ng-class="{'open':isOpenNew}">
               <li role="menuitem">
-                <a ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, true)">
+                <a ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, true)">
                   <i class="ls-upload-request-alt"></i>
                   <span translate>UPLOAD_REQUESTS.CREATION_TYPE.COLLECTIVE</span>
                 </a>
               </li>
 
               <li role="menuitem">
-                <a ng-click="uploadRequestVm.loadSidebarContent(uploadRequestVm.uploadRequestCreate, false)">
+                <a ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, false)">
                   <i class="ls-upload-request-2"></i>
                   <span translate>UPLOAD_REQUESTS.CREATION_TYPE.INDIVIDUAL</span>
                 </a>
@@ -34,7 +34,7 @@
               <span translate>UPLOAD_REQUESTS.TITLE</span>
             </a>
             <a href="javascript:void(0)">
-              <span ng-switch="uploadRequestVm.status"> |
+              <span ng-switch="uploadRequestGroupsVm.status"> |
                 <span ng-switch-when="pending" translate> UPLOAD_REQUESTS.MENU_ENTRIES.PENDING</span>
                 <span ng-switch-when="activeClosed" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED</span>
                 <span ng-switch-when="archived" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES</span>
@@ -47,7 +47,7 @@
               <span ng-click="showCheckboxes = !showCheckboxes" class="visible-xs toolbar-mobile-item col-xs-3">
                 <a class="select-all-items plain-txt-btn">
                   <i class="ls-multi-select" ng-class="{'active-link': showCheckboxes}"
-                    ng-click="uploadRequestVm.resetSelectedUploadRequests()"></i>
+                    ng-click="uploadRequestGroupsVm.resetSelectedUploadRequests()"></i>
                 </a>
               </span>
 
@@ -72,9 +72,9 @@
 
                       <li role="menuitem">
                         <a href="" class="ng-binding selected-sorting"
-                          ng-click="uploadRequestVm.sortDropdownSetActive('label', $event)">
+                          ng-click="uploadRequestGroupsVm.sortDropdownSetActive('label', $event)">
                           <span class="caret-area">
-                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
@@ -82,9 +82,9 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('fileCount', $event)">
+                        <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('fileCount', $event)">
                           <span class="caret-area">
-                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
@@ -92,9 +92,9 @@
                         </a>
                       </li>
                       <li role="menuitem"> <a href=""
-                          ng-click="uploadRequestVm.sortDropdownSetActive('status', $event)">
+                          ng-click="uploadRequestGroupsVm.sortDropdownSetActive('status', $event)">
                           <span class="caret-area">
-                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
@@ -102,9 +102,9 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('collective', $event)">
+                        <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('collective', $event)">
                           <span class="caret-area">
-                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
@@ -112,9 +112,9 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('activationDate', $event)">
+                        <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('activationDate', $event)">
                           <span class="caret-area">
-                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
@@ -122,9 +122,9 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('expiryDate', $event)">
+                        <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('expiryDate', $event)">
                           <span class="caret-area">
-                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
@@ -132,9 +132,9 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('creationDate', $event)">
+                        <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('creationDate', $event)">
                           <span class="caret-area">
-                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
@@ -148,9 +148,9 @@
               <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
                 <i class="fa fa-th-large" aria-hidden="true"></i>
               </a>
-              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" ng-click="uploadRequestVm.toggleSearchState()">
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" ng-click="uploadRequestGroupsVm.toggleSearchState()">
                 <a href="">
-                  <i class="tm-icon zmdi zmdi-search" ng-class="{'active-link': uploadRequestVm.searchMobileDropdown}"></i>
+                  <i class="tm-icon zmdi zmdi-search" ng-class="{'active-link': uploadRequestGroupsVm.searchMobileDropdown}"></i>
                 </a>
               </div>
             </div>
@@ -160,15 +160,15 @@
                 <div class="search-style">
                   <div class="fg-line">
                     <input type="text" class="form-control" autocomplete="off"
-                      ng-model="uploadRequestVm.paramFilter.label"
+                      ng-model="uploadRequestGroupsVm.paramFilter.label"
                       translate-attr="{placeholder: 'UPLOAD_REQUESTS.TABLE.SEARCH_BY_LABEL'}">
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="pull-right hidden-xs toggle-view-dropdown" ng-if="uploadRequestVm.status === 'activeClosed'"
-              ng-init="uploadRequestVm.currentFilter = 'UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL'">
+            <div class="pull-right hidden-xs toggle-view-dropdown" ng-if="uploadRequestGroupsVm.status === 'activeClosed'"
+              ng-init="uploadRequestGroupsVm.currentFilter = 'UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL'">
               <span class="filter-views ng-binding pull-left">
                 <span translate>FILTER_COMPONENT.FILTER_BY</span>:
               </span>
@@ -177,7 +177,7 @@
                   dropdown-append-to-body auto-close="outsideClick" is-open="isOpenType">
                   <a class="plain-txt-btn partage-link" href="javascript:void(0)" uib-dropdown-toggle
                     translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}">
-                    <span translate>{{uploadRequestVm.currentFilter}}</span>
+                    <span translate>{{uploadRequestGroupsVm.currentFilter}}</span>
                     <div><b></b></div>
                   </a>
                   <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop toggle-views"
@@ -186,25 +186,25 @@
                       <p><span translate>FILTER_COMPONENT.FILTER_BY</span></p>
                       <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
                         <li>
-                          <a ng-class="{'active-check': uploadRequestVm.currentFilter === 'UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL'}"
-                            ng-click="uploadRequestVm.currentFilter = 'UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL';
-                                         uploadRequestVm.paramFilter.status = '';
+                          <a ng-class="{'active-check': uploadRequestGroupsVm.currentFilter === 'UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL'}"
+                            ng-click="uploadRequestGroupsVm.currentFilter = 'UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL';
+                                         uploadRequestGroupsVm.paramFilter.status = '';
                                          mainVm.sidebar.hide()">
                             <span translate>UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL</span>
                           </a>
                         </li>
                         <li>
-                          <a ng-class="{'active-check': uploadRequestVm.currentFilter === 'UPLOAD_REQUESTS.STATUS.ACTIVE'}"
-                            ng-click="uploadRequestVm.currentFilter = 'UPLOAD_REQUESTS.STATUS.ACTIVE';
-                                         uploadRequestVm.paramFilter.status = 'ENABLED';
+                          <a ng-class="{'active-check': uploadRequestGroupsVm.currentFilter === 'UPLOAD_REQUESTS.STATUS.ACTIVE'}"
+                            ng-click="uploadRequestGroupsVm.currentFilter = 'UPLOAD_REQUESTS.STATUS.ACTIVE';
+                                         uploadRequestGroupsVm.paramFilter.status = 'ENABLED';
                                          mainVm.sidebar.hide()">
                             <span translate>UPLOAD_REQUESTS.STATUS.ACTIVE</span>
                           </a>
                         </li>
                         <li>
-                          <a ng-class="{'active-check': uploadRequestVm.currentFilter === 'UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED'}"
-                            ng-click="uploadRequestVm.currentFilter = 'UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED';
-                                         uploadRequestVm.paramFilter.status = 'CLOSED';
+                          <a ng-class="{'active-check': uploadRequestGroupsVm.currentFilter === 'UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED'}"
+                            ng-click="uploadRequestGroupsVm.currentFilter = 'UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED';
+                                         uploadRequestGroupsVm.paramFilter.status = 'CLOSED';
                                          mainVm.sidebar.hide()">
                             <span translate>UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</span>
                           </a>
@@ -221,14 +221,14 @@
 
       <div id="drop-area">
         <div id="top-search-wrap">
-          <i id="top-search-close" data-ng-click="uploadRequestVm.toggleSearchState()">&times;</i>
+          <i id="top-search-close" data-ng-click="uploadRequestGroupsVm.toggleSearchState()">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid" translate-attr="{placeholder: 'UPLOAD_REQUESTS.TABLE.SEARCH_BY_LABEL'}"
-            ng-model="uploadRequestVm.paramFilter.label" aria-invalid="false">
+            ng-model="uploadRequestGroupsVm.paramFilter.label" aria-invalid="false">
         </div>
         <!-- BACKGROUND CONTENT -->
 
         <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
-          ng-class="{'show-bg-drop' : uploadRequestVm.itemsList.length === 0}">
+          ng-class="{'show-bg-drop' : uploadRequestGroupsVm.itemsList.length === 0}">
           <div class="drag-and-drop-content">
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
@@ -246,17 +246,17 @@
         <div class="card-body collapsible-content">
           <div class="table-responsive">
             <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
-              ng-table="uploadRequestVm.tableParams" show-filter="true">
+              ng-table="uploadRequestGroupsVm.tableParams" show-filter="true">
               <tr check-table-height ls-item-selection ng-repeat="uploadRequest in $data"
-                data-selected-documents="uploadRequestVm.selectedUploadRequests" data-document-file="uploadRequest"
-                data-current-selected-Document="uploadRequestVm.currentSelectedDocument"
+                data-selected-documents="uploadRequestGroupsVm.selectedUploadRequests" data-document-file="uploadRequest"
+                data-current-selected-Document="uploadRequestGroupsVm.currentSelectedDocument"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()" ng-class="{
                   'highlight-list-elem': uploadRequest.isSelected,
-                  'current-vis': uploadRequestVm.currentSelectedDocument.current.uuid === uploadRequest.uuid
+                  'current-vis': uploadRequestGroupsVm.currentSelectedDocument.current.uuid === uploadRequest.uuid
                 }" class="p-b-5 double-row item-container">
                 <td data-header="'checkboxheader.html'" class="set-content-left thumb-type-item thumb-groups-preview-ls"
                   header-class="'col-2 checkbox-col'">
-                  <a ng-click="showCheckboxes ? uploadRequestVm.addSelectedUploadRequest(uploadRequest) : null"
+                  <a ng-click="showCheckboxes ? uploadRequestGroupsVm.addSelectedUploadRequest(uploadRequest) : null"
                     class="visible-xs">
                     <div ng-class="{ 'invisible' : showCheckboxes}">
                       <i class="m-r-10"
@@ -267,7 +267,7 @@
                     </div>
                   </a>
 
-                  <a ng-click="uploadRequestVm.addSelectedUploadRequest(uploadRequest)" class="hidden-xs">
+                  <a ng-click="uploadRequestGroupsVm.addSelectedUploadRequest(uploadRequest)" class="hidden-xs">
                     <div ng-class="{ 'invisible' : showCheckboxes}">
                       <i class="m-r-10"
                         ng-class="uploadRequest.collective ? 'ls-upload-request-alt' : 'ls-upload-request-2'"></i>
@@ -285,7 +285,7 @@
                       <span class="file-name-disp single-line" contenteditable="false" spellcheck="false">
                         {{::uploadRequest.label}}
                       </span>
-                      <div class="upload-request-status" ng-if="uploadRequestVm.status === 'activeClosed'">
+                      <div class="upload-request-status" ng-if="uploadRequestGroupsVm.status === 'activeClosed'">
                         <i class="zmdi zmdi-circle" ng-class="{ 'closed': uploadRequest.status === 'CLOSED'}"></i>
                         <small translate
                           ng-if="uploadRequest.status === 'ENABLED'">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
@@ -297,7 +297,7 @@
 
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right" ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
-                        <li ng-click="uploadRequestVm.showDetails(uploadRequest)">
+                        <li ng-click="uploadRequestGroupsVm.showDetails(uploadRequest)">
                           <a class="set-col-12" translate-attr="{title: 'ACTION.INFORMATION'}" href="">
                             <i class="zmdi zmdi-info"></i>
                           </a>
@@ -334,7 +334,7 @@
                           </a>
                           <ul uib-dropdown-menu ng-class="{'open':isOpenItem}" class="uib-dropdown-menu dropdown-menu-right dm-icon
                                   dropdown-divided dropdown-content-left">
-                            <li ng-click="uploadRequestVm.showDetails(uploadRequest)">
+                            <li ng-click="uploadRequestGroupsVm.showDetails(uploadRequest)">
                               <a href="">
                                 <i class="zmdi zmdi-info"></i>
                                 <span translate>ACTION.INFORMATION</span>
@@ -367,13 +367,13 @@
                             <li class="divider"></li>
                             <li ng-if="uploadRequest.status === 'ENABLED'"
                               ng-class="{ 'disable-link': uploadRequest.status === 'CLOSED' }">
-                              <a href="" ng-click="uploadRequestVm.closeUploadRequests([uploadRequest])">
+                              <a href="" ng-click="uploadRequestGroupsVm.closeUploadRequestGroups([uploadRequest])">
                                 <i class="zmdi zmdi-close-circle"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.CLOSE</span>
                               </a>
                             </li>
                             <li ng-if="uploadRequest.status === 'CREATED'">
-                              <a href="" ng-click="uploadRequestVm.cancelUploadRequests([uploadRequest])">
+                              <a href="" ng-click="uploadRequestGroupsVm.cancelUploadRequestGroups([uploadRequest])">
                                 <i class="zmdi zmdi-close-circle"></i>
                                 <span translate>NAVIGATION.CANCEL</span>
                               </a>
@@ -403,19 +403,19 @@
                   {{uploadRequest.activationDate | lsDate: 'mediumDate'}}
                 </td>
 
-                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestVm.status !== 'archived'"
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status !== 'archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION_DATE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
                   {{uploadRequest.expiryDate | lsDate: 'mediumDate'}}
                 </td>
 
-                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestVm.status === 'archived'"
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status === 'archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ARCHIVE_DATE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
                   {{uploadRequest.modificationDate | lsDate: 'mediumDate'}}
                 </td>
 
-                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestVm.status !== 'pending'"
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status !== 'pending'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.FILES' | translate" data-sortable="'fileCount'"
                   header-class="'col-4'">
                   {{ uploadRequest.fileCount || 'N/A' }}
@@ -428,19 +428,19 @@
         <!-- SELECTION HEADER -->
 
         <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
-          ng-class="{'show-multi-menu': uploadRequestVm.selectedUploadRequests.length > 0}">
+          ng-class="{'show-multi-menu': uploadRequestGroupsVm.selectedUploadRequests.length > 0}">
           <div class="toggle-checkbox-toolbar"
-            ng-click="uploadRequestVm.selectUploadRequestsOnCurrentPage(uploadRequestVm.tableParams.data, uploadRequestVm.tableParams.page())">
-            <a ng-if="!uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+            ng-click="uploadRequestGroupsVm.selectUploadRequestsOnCurrentPage(uploadRequestGroupsVm.tableParams.data, uploadRequestGroupsVm.tableParams.page())">
+            <a ng-if="!uploadRequestGroupsVm.flagsOnSelectedPages[uploadRequestGroupsVm.tableParams.page()]"
               class="select-all-items plain-text-button ng-scope">
               <i class="fa ls-check-o checkbox-table"></i>
             </a>
-            <a ng-if="uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+            <a ng-if="uploadRequestGroupsVm.flagsOnSelectedPages[uploadRequestGroupsVm.tableParams.page()]"
               class="select-all-items plain-text-button ng-scope">
               <i class="ls-check-checked"></i>
             </a>
           </div>
-          <div class="exit-selection actions" ng-click="uploadRequestVm.resetSelectedUploadRequests()"
+          <div class="exit-selection actions" ng-click="uploadRequestGroupsVm.resetSelectedUploadRequests()"
             translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
             <a>
               <i class="zmdi zmdi-close"></i>
@@ -448,35 +448,35 @@
           </div>
           <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
             <div class="pull-left"
-              ng-class="{'active-button-show-selection': uploadRequestVm.tableParamsService.getSelectionIsIsolated()}"
-              ng-click="uploadRequestVm.toggleFilterBySelectedFiles()">
+              ng-class="{'active-button-show-selection': uploadRequestGroupsVm.tableParamsService.getSelectionIsIsolated()}"
+              ng-click="uploadRequestGroupsVm.toggleFilterBySelectedFiles()">
               <p>
-                <span>{{uploadRequestVm.selectedUploadRequests.length}}</span>
+                <span>{{uploadRequestGroupsVm.selectedUploadRequests.length}}</span>
                 <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
               </p>
               <div class="pull-left view-icons-ctn groups-view">
                 <i class="fa fa-eye-slash" aria-hidden="true"
-                  ng-show="uploadRequestVm.tableParamsService.getSelectionIsIsolated()"></i>
+                  ng-show="uploadRequestGroupsVm.tableParamsService.getSelectionIsIsolated()"></i>
                 <i class="fa fa-eye" aria-hidden="true"
-                  ng-show="!uploadRequestVm.tableParamsService.getSelectionIsIsolated()"></i>
+                  ng-show="!uploadRequestGroupsVm.tableParamsService.getSelectionIsIsolated()"></i>
               </div>
             </div>
-            <div class="pull-left view-icons-ctn reset-icon" ng-click="uploadRequestVm.resetSelectedUploadRequests()">
+            <div class="pull-left view-icons-ctn reset-icon" ng-click="uploadRequestGroupsVm.resetSelectedUploadRequests()">
               <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
-            <span ng-if="uploadRequestVm.status === 'pending'">
+            <span ng-if="uploadRequestGroupsVm.status === 'pending'">
               <a class="plain-text-button share-link" translate-attr="{title: 'NAVIGATION.CANCEL'}"
-                ng-click="uploadRequestVm.cancelUploadRequests(uploadRequestVm.selectedUploadRequests)">
+                ng-click="uploadRequestGroupsVm.cancelUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequests)">
                 <i class="zmdi zmdi-close-circle"></i>
                 <span translate>NAVIGATION.CANCEL</span>
               </a>
             </span>
 
-            <span ng-if="uploadRequestVm.status === 'activeClosed'"
-              ng-class="{ 'disable-link': !uploadRequestVm.canCloseSelectedUploadRequests()}"
-              ng-click="uploadRequestVm.closeUploadRequests(uploadRequestVm.selectedUploadRequests)"
+            <span ng-if="uploadRequestGroupsVm.status === 'activeClosed'"
+              ng-class="{ 'disable-link': !uploadRequestGroupsVm.canCloseSelectedUploadRequests()}"
+              ng-click="uploadRequestGroupsVm.closeUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequests)"
             >
               <a
                 class="plain-text-button share-link"
@@ -487,7 +487,7 @@
               </a>
             </span>
 
-            <span ng-if="uploadRequestVm.status === 'archived'">
+            <span ng-if="uploadRequestGroupsVm.status === 'archived'">
               <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
                 <i class="zmdi zmdi-delete"></i>
                 <span translate>ACTION.DELETE</span>
@@ -496,21 +496,21 @@
           </div>
         </div>
 
-        <div id="fabButtonCtn" fab-button fab-button-actions="uploadRequestVm.fabButton.actions"
-          fab-button-toolbar="uploadRequestVm.fabButton.toolbar"></div>
+        <div id="fabButtonCtn" fab-button fab-button-actions="uploadRequestGroupsVm.fabButton.actions"
+          fab-button-toolbar="uploadRequestGroupsVm.fabButton.toolbar"></div>
       </div>
     </div>
   </div>
 </div>
 
 <script type="text/ng-template" id="checkboxheader.html">
-  <span ng-click="uploadRequestVm.selectUploadRequestsOnCurrentPage(tableParams.data, tableParams.page())"
+  <span ng-click="uploadRequestGroupsVm.selectUploadRequestsOnCurrentPage(tableParams.data, tableParams.page())"
         role="button" tabindex="0" class="display-block center">
-    <a ng-if="!uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+    <a ng-if="!uploadRequestGroupsVm.flagsOnSelectedPages[uploadRequestGroupsVm.tableParams.page()]"
        class="select-all-items plain-text-button checkboxCtn">
       <i class="ls-check-o checkbox-table"></i>
     </a>
-    <a ng-if="uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+    <a ng-if="uploadRequestGroupsVm.flagsOnSelectedPages[uploadRequestGroupsVm.tableParams.page()]"
        class="select-all-items plain-text-button">
       <i class="ls-check-checked"></i>
     </a>

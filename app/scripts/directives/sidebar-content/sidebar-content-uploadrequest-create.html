@@ -21,7 +21,7 @@
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
     <span class="header-action-link waves-effect text-uppercase visible-xs"
-      ng-click="mainVm.sidebar.getData().createUploadRequest(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)">
+      ng-click="mainVm.sidebar.getData().createUploadRequestGroup(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)">
       <span class="zmdi zmdi-check"></span>
       <span translate>SIDEBAR.BUTTON.CREATE</span>
     </span>
@@ -435,7 +435,7 @@
   </button>
   <button
     class="btn btn-primary col-xs-6"
-    ng-click="mainVm.sidebar.getData().createUploadRequest(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)"
+    ng-click="mainVm.sidebar.getData().createUploadRequestGroup(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)"
     translate
   >
     NAVIGATION.CREATE

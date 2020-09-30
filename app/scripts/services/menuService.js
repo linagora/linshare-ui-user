@@ -237,22 +237,22 @@
         name: uploadRequestsMenuName,
         links: [{
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.PENDING',
-          link: 'uploadRequests({ status: "pending" })',
-          state: 'uploadRequests',
+          link: 'uploadRequestGroups({ status: "pending" })',
+          state: 'uploadRequestGroups',
           params: {
             status: 'pending'
           }
         }, {
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED',
-          link: 'uploadRequests({ status: "activeClosed" })',
-          state: 'uploadRequests',
+          link: 'uploadRequestGroups({ status: "activeClosed" })',
+          state: 'uploadRequestGroups',
           params: {
             status: 'activeClosed'
           }
         }, {
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES',
-          link: 'uploadRequests({ status: "archived" })',
-          state: 'uploadRequests',
+          link: 'uploadRequestGroups({ status: "archived" })',
+          state: 'uploadRequestGroups',
           params: {
             status: 'archived'
           }

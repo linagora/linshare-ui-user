@@ -185,8 +185,8 @@
       share: 'share',
       shareDetails: 'share-details',
       workgroupNode: 'workgroup-node',
-      uploadRequestCreate: 'uploadrequest-create',
-      uploadRequestDetails: 'uploadrequest-details',
+      uploadRequestGroupCreate: 'uploadrequest-create',
+      uploadRequestGroupDetails: 'uploadrequest-details',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,
       thumbnailEngineActivated: true

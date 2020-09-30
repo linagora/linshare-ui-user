@@ -1,19 +1,19 @@
 /**
- * uploadRequestRestService factory
+ * uploadRequestGroupRestService factory
  * @namespace LinShare.uploadRequests
  */
 angular
   .module('linshare.uploadRequests')
-  .factory('uploadRequestRestService', uploadRequestRestService);
+  .factory('uploadRequestGroupRestService', uploadRequestGroupRestService);
 
-uploadRequestRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
+uploadRequestGroupRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
 
 /**
- *  @namespace uploadRequestRestService
- *  @desc Service to interact with UploadRequest object by REST
+ *  @namespace uploadRequestGroupRestService
+ *  @desc Service to interact with UploadRequestGroup object by REST
  *  @memberof LinShare.uploadRequests
  */
-function uploadRequestRestService($log, Restangular, ServerManagerService) {
+function uploadRequestGroupRestService($log, Restangular, ServerManagerService) {
   const
     handler = ServerManagerService.responseHandler,
     restUrl = 'upload_request_groups';
@@ -21,10 +21,11 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
   return {
     create: create,
     get: get,
-    getList: getList,
+    list: list,
     remove: remove,
     update: update,
-    updateStatus: updateStatus
+    updateStatus: updateStatus,
+    listUploadRequests: listUploadRequests
   };;
 
   ////////////
@@ -35,10 +36,10 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    *  @param {object} uploadRequestdto - The UploadRequest object
    *  @param {object} options - The UploadRequest options. Mostly contains query for request
    *  @returns {promise} server response
-   *  @memberof linshare.uploadRequests.LinshareuploadRequestservice
+   *  @memberof linshare.uploadRequests.uploadRequestGroupRestService
    */
   function create(uploadRequestDto, options) {
-    $log.debug('LinshareUploadRequestService : create', uploadRequestDto);
+    $log.debug('uploadRequestGroupRestService : create', uploadRequestDto);
 
     return handler(Restangular.all(restUrl).post(uploadRequestDto, { groupMode: !!options.groupMode }));
   }
@@ -48,23 +49,23 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    *  @desc Get a uploadRequest object
    *  @param {String} uuid - The id of the UploadRequest object
    *  @returns {Promise} server response
-   *  @memberof LinShare.uploadRequests.uploadRequestRestService
+   *  @memberof LinShare.uploadRequests.uploadRequestGroupRestService
    */
   function get(uuid) {
-    $log.debug('LinshareUploadRequestService : get', uuid);
+    $log.debug('uploadRequestGroupRestService : get', uuid);
 
     return handler(Restangular.all(restUrl).one(uuid).get());
   }
 
   /**
-   *  @name getList
+   *  @name list
    *  @desc Get list of the uploadRequest object
    *  @param {Boolean} allUploadRequest - Query param value for requesting all uploadRequest or not
    *  @returns {Promise} server response
-   *  @memberof LinShare.uploadRequests.uploadRequestRestService
+   *  @memberof LinShare.uploadRequests.uploadRequestGroupRestService
    */
-  function getList(status) {
-    $log.debug('LinshareUploadRequestService : getList', status);
+  function list(status) {
+    $log.debug('uploadRequestGroupRestService : list', status);
 
     return handler(Restangular
       .all(restUrl)
@@ -77,10 +78,10 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    *  @desc remove a UploadRequest object
    *  @param {object} uploadRequestdto - The UploadRequest object
    *  @returns {promise} server response
-   *  @memberof linshare.uploadRequests.linshareuploadRequestservice
+   *  @memberof linshare.uploadRequests.uploadRequestGroupRestService
    */
   function remove(uploadRequestDto) {
-    $log.debug('LinshareUploadRequestService : remove', uploadRequestDto);
+    $log.debug('uploadRequestGroupRestService : remove', uploadRequestDto);
 
     return handler(Restangular.one(restUrl, uploadRequestDto.uuid).remove());
   }
@@ -91,11 +92,10 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
    *  @param {String} uuid - The id of the UploadRequest object
    *  @param {Object} uploadRequestDto - The UploadRequest object
    *  @returns {promise} server response
-   *  @memberOf LinShare.uploadRequests.uploadRequestRestService
+   *  @memberOf LinShare.uploadRequests.uploadRequestGroupRestService
    */
-  //TODO: the put should be on uploadRequests/{uuid}, to be corrected B&F
   function update(uuid, uploadRequestDto) {
-    $log.debug('LinshareUploadRequestService : update', uuid, uploadRequestDto);
+    $log.debug('uploadRequestGroupRestService : update', uuid, uploadRequestDto);
 
     return handler(Restangular.one(restUrl, uuid).customPUT(uploadRequestDto));
   }
@@ -104,5 +104,11 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
     $log.debug('LinshareUploadRequestService : updateStatus', uuid, status);
 
     return handler(Restangular.one(restUrl, uuid).one('status', status).put());
+  }
+
+  function listUploadRequests(uuid) {
+    $log.debug('uploadRequestGroupRestService : listUploadRequests', uuid);
+
+    return handler(Restangular.one(restUrl, uuid).getList('upload_requests'));
   }
 }

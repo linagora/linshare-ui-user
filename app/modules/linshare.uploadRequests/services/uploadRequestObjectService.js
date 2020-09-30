@@ -10,7 +10,7 @@
     .factory('UploadRequestObjectService', UploadRequestObjectService);
 
   UploadRequestObjectService.$inject = [
-    '_', '$q', 'functionalityRestService', 'uploadRequestRestService', 'moment', '$log'
+    '_', '$q', 'functionalityRestService', 'uploadRequestGroupRestService', 'moment', '$log'
   ];
 
   /**
@@ -18,7 +18,7 @@
    *  @desc Manipulation of uploadRequest object front/back
    *  @memberOf LinShare.uploadRequest
    */
-  function UploadRequestObjectService(_, $q, functionalityRestService, uploadRequestRestService, moment, $log) {
+  function UploadRequestObjectService(_, $q, functionalityRestService, uploadRequestGroupRestService, moment, $log) {
 
     var
       allowedToActivation = {},
@@ -229,7 +229,7 @@
         deferred = $q.defer(),
         uploadRequestDTO = self.toDTO();
 
-      uploadRequestRestService.create(uploadRequestDTO, { groupMode: self.groupMode }).then(function(data) {
+      uploadRequestGroupRestService.create(uploadRequestDTO, { groupMode: self.groupMode }).then(function(data) {
         deferred.resolve(data);
       }).catch(function(error) {
         deferred.reject(error);
@@ -334,7 +334,7 @@
         deferred = $q.defer(),
         uploadRequestDTO = self;
 
-      uploadRequestRestService.update(uploadRequestDTO.uuid, uploadRequestDTO).then(function(data) {
+      uploadRequestGroupRestService.update(uploadRequestDTO.uuid, uploadRequestDTO).then(function(data) {
         deferred.resolve(data);
       }).catch(function(error) {
         deferred.reject(error);

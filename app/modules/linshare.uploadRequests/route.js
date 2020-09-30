@@ -6,10 +6,10 @@ uploadRequestsConfig.$inject = ['$stateProvider'];
 
 function uploadRequestsConfig($stateProvider) {
   $stateProvider
-    .state('uploadRequests', {
+    .state('uploadRequestGroups', {
       parent: 'common',
-      url: '/uploadRequests?status',
-      template: require('./views/uploadRequests.html'),
+      url: '/uploadRequestGroups?status',
+      template: require('./views/uploadRequestGroups.html'),
       resolve: {
         functionality: function($transition$, $state, functionalities) {
           if (!functionalities.UPLOAD_REQUEST.enable) {
@@ -17,18 +17,18 @@ function uploadRequestsConfig($stateProvider) {
             $state.go('home');
           }
         },
-        uploadRequests: function($transition$, $state, $stateParams, uploadRequestRestService, UPLOAD_REQUESTS_STATE_STATUS_MAPPING) {
+        uploadRequestGroups: function($transition$, $state, $stateParams, uploadRequestGroupRestService, UPLOAD_REQUESTS_STATE_STATUS_MAPPING) {
           const requestStatus = UPLOAD_REQUESTS_STATE_STATUS_MAPPING[$stateParams.status];
 
           if (requestStatus) {
-            return uploadRequestRestService.getList(requestStatus);
+            return uploadRequestGroupRestService.list(requestStatus);
           }
 
           $transition$.abort();
           $state.go('home');
         }
       },
-      controller: 'LinshareUploadRequestsController',
-      controllerAs: 'uploadRequestVm',
+      controller: 'uploadRequestGroupsController',
+      controllerAs: 'uploadRequestGroupsVm',
     });
 }

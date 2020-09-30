@@ -8,7 +8,7 @@ angular
 
 require('./route');
 require('./constants');
-require('./controllers/LinshareUploadRequestsController');
-require('./services/uploadRequestRestService');
+require('./controllers/uploadRequestGroupsController');
 require('./services/uploadRequestObjectService');
 require('./services/uploadRequestUtilsService');
+require('./services/uploadRequestGroupRestService');
