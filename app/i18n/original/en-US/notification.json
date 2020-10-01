@@ -10,7 +10,7 @@
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",
       "TEXT": {
-        "CONTACTS_LIST": "You are about to remove {singular, select, true{a contacts lpist} other{{nbItems} contacts lists}} ! Beware, this action cannot be undone.",
+        "CONTACTS_LIST": "You are about to remove {singular, select, true{a contacts list} other{{nbItems} contacts lists}} ! Beware, this action cannot be undone.",
         "CONTACTS_LIST_CONTACT": "You are about to remove {singular, select, true{a contact} other{{nbItems} contacts}} ! Beware, this action cannot be undone.",
         "DOCUMENT": "You are about to remove {singular, select, true{a document} other{{nbItems} documents}} ! Beware, this action cannot be undone.",
         "GUEST": "You are about to remove {singular, select, true{a guest} other{{nbItems} guests}} ! Beware, this action cannot be undone.",
