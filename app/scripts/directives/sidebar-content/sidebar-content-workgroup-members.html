@@ -105,7 +105,6 @@
                   autocomplete="off"
                   data-ng-model="workgroupMemberVm.searchMemberInput"
                   placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER_EXISTING_MEMBERS' | translate}}"
-                  data-ng-change="workgroupMemberVm.updateInputFilterOnCurrentMembers(workgroupMemberVm.searchMemberInput)"
                 >
               </div>
             </div>
@@ -214,7 +213,7 @@
           <div
             class="flex-ctn"
             data-ng-repeat="workgroupMember in workgroupMemberVm.members |
-            filter: workgroupMemberVm.membersSearchFilter | orderBy: '-' "
+            filter: workgroupMemberVm.searchMemberInput | filter: workgroupMemberVm.membersSearchFilter | orderBy: '-' "
           >
             <div class="item-l">
               <span class="first-letter text-uppercase">

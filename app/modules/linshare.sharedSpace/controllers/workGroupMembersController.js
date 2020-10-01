@@ -53,16 +53,11 @@
     workgroupMemberVm.updateRoleFilterOnCurrentMembers = updateRoleFilterOnCurrentMembers;
     workgroupMemberVm.changePropertyOrderBy = changePropertyOrderBy;
     workgroupMemberVm.removeMember = removeMember;
-    workgroupMemberVm.updateInputFilterOnCurrentMembers = updateInputFilterOnCurrentMembers;
     workgroupMemberVm.updateMember = updateMember;
 
     workgroupMemberVm.membersRights = {};
     workgroupMemberVm.searchMemberInput = '';
     workgroupMemberVm.membersSearchFilter = {
-      account: {
-        mail: undefined,
-        name: undefined
-      },
       role: {
         uuid: undefined
       }
@@ -275,14 +270,6 @@
         account: {
           uuid: member.account ? member.account.uuid : member.userUuid
         }
-      };
-    }
-
-    // TODO DOC
-    function updateInputFilterOnCurrentMembers(value) {
-      workgroupMemberVm.membersSearchFilter.account = {
-        mail: value !== '' ? value : undefined,
-        name: value !== '' ? value : undefined
       };
     }
 
