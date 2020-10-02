@@ -655,9 +655,6 @@
 
 @media (min-width: 768px) and (max-width: 914px) {
   .files #file-list-table .file-name-col {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     font-size: 1em;
     color: #383838;
   }

@@ -271,8 +271,7 @@
                   data-sortable="'label'" uuid={{::uploadRequest.uuid}} header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                      <span class="file-name-disp single-line" contenteditable="false" spellcheck="false"></span>
-                      <span>
+                      <span class="file-name-disp single-line" contenteditable="false" spellcheck="false">
                         {{::uploadRequest.label}}
                       </span>
                       <div class="upload-request-status" ng-if="uploadRequestVm.status === 'activeClosed'">
@@ -283,7 +282,6 @@
                           ng-if="uploadRequest.status === 'CLOSED'">UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</small>
                       </div>
 
-                    </span>
                     </span>
 
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
@@ -458,11 +456,8 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span ng-if="uploadRequestVm.status === 'pending'">
-              <a
-                class="plain-text-button share-link"
-                translate-attr="{title: 'NAVIGATION.CANCEL'}"
-                ng-click="uploadRequestVm.cancelUploadRequests(uploadRequestVm.selectedUploadRequests)"
-              >
+              <a class="plain-text-button share-link" translate-attr="{title: 'NAVIGATION.CANCEL'}"
+                ng-click="uploadRequestVm.cancelUploadRequests(uploadRequestVm.selectedUploadRequests)">
                 <i class="zmdi zmdi-close-circle"></i>
                 <span translate>NAVIGATION.CANCEL</span>
               </a>
@@ -485,7 +480,8 @@
           </div>
         </div>
 
-        <div id="fabButtonCtn" fab-button fab-button-actions="uploadRequestVm.fabButton.actions" fab-button-toolbar="uploadRequestVm.fabButton.toolbar"></div>
+        <div id="fabButtonCtn" fab-button fab-button-actions="uploadRequestVm.fabButton.actions"
+          fab-button-toolbar="uploadRequestVm.fabButton.toolbar"></div>
       </div>
     </div>
   </div>

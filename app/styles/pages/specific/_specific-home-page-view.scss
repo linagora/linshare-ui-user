@@ -281,8 +281,14 @@ HOME PAGE BOTTOM NOTIFICATIONS
       margin-left: 0;
     }
   }
+  #home {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
   #fg-img {
-    display: flex !important;
+    display: flex;
     align-self: center;
     justify-content: center;
     z-index: 3;
@@ -293,8 +299,6 @@ HOME PAGE BOTTOM NOTIFICATIONS
     flex: 0 0 30%;
     display: flex;
     min-height: inherit;
-  }
-  #home {
-    padding-bottom: 0;
+    padding: 15px;
   }
 }
