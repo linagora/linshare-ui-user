@@ -1,9 +1,12 @@
 {
   "UPLOAD_REQUESTS": {
     "TITLE": "Upload requests",
+    "TITLE_SINGULAR": "Upload request",
     "STATUS": {
       "ACTIVE": "Active",
-      "EXPIRED_CLOSED": "Expired | Closed"
+      "EXPIRED_CLOSED": "Expired | Closed",
+      "ARCHIVED": "Archived",
+      "PENDING": "Pending"
     },
     "CREATION_TYPE": {
       "COLLECTIVE": "Collective upload",
@@ -54,18 +57,33 @@
         "FILES": "Files",
         "STATUS": "Status",
         "TYPE": "Type",
-        "CREATION_DATE": "Creation date"
+        "CREATION_DATE": "Creation date",
+        "SIZE": "Size",
+        "EMAIL": "Email"
       },
       "OPTIONS": {
         "ADD_RECIPIENTS": "Add recipients",
         "GLOBAL_EDIT": "Global edit",
         "ACTIVATE": "Activate",
         "CLOSE": "Close",
-        "ARCHIVE": "Archive"
+        "ARCHIVE": "Archive",
+        "VIEW_IN_MY_SPACE": "View in my space"
       },
       "BACKGROUND_CONTENT": {
         "TITLE": "Create upload requests",
-        "MESSAGE": "These requests allow other users to upload files to your storage"
+        "MESSAGE": "These requests allow other users to upload files to your storage",
+        "ENTRY_LIST": {
+          "TITLE": "Uploaded files",
+          "MESSAGE": "These files are uploaded from recipients of your upload request"
+        },
+        "ENTRY_LIST_PENDING": {
+          "TITLE": "No file uploaded",
+          "MESSAGE": "Upload request is not yet activated, recipients can not upload files at the moment"
+        },
+        "ENTRY_LIST_ARCHIVED": {
+          "TITLE": "Archived upload request",
+          "MESSAGE": "Uploaded files are either removed or copied to your personal space"
+        }
       }
     },
     "RIGHT_PANEL": {

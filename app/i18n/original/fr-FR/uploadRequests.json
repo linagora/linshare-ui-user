@@ -1,9 +1,12 @@
 {
   "UPLOAD_REQUESTS": {
-    "TITLE": "Invitation de dépot",
+    "TITLE": "Invitations de dépot",
+    "TITLE_SINGULAR": "Invitation de dépot",
     "STATUS": {
       "ACTIVE": "Active",
-      "EXPIRED_CLOSED": "Expirée | Fermée"
+      "EXPIRED_CLOSED": "Expirée | Fermée",
+      "ARCHIVED": "Archivée",
+      "PENDING": "En attente"
     },
     "CREATION_TYPE": {
       "COLLECTIVE": "Téléchargement collectif",
@@ -54,18 +57,33 @@
         "FILES": "Fichiers",
         "STATUS": "Statut",
         "TYPE": "Type",
-        "CREATION_DATE": "Date de création"
+        "CREATION_DATE": "Date de création",
+        "SIZE": "Taille",
+        "EMAIL": "Email"
       },
       "OPTIONS": {
         "ADD_RECIPIENTS": "Ajouter des destinataires",
         "GLOBAL_EDIT": "Modification globale",
         "ACTIVATE": "Activer",
         "CLOSE": "Fermer",
-        "ARCHIVE": "Archiver"
+        "ARCHIVE": "Archiver",
+        "VIEW_IN_MY_SPACE": "Voir dans mon espace"
       },
       "BACKGROUND_CONTENT": {
         "TITLE": "Créer des invitations de dépot",
-        "MESSAGE": "Ces invitations permettent à d'autres utilisateurs de déposer des fichiers"
+        "MESSAGE": "Ces invitations permettent à d'autres utilisateurs de déposer des fichiers",
+        "ENTRY_LIST": {
+          "TITLE": "Fichiers déposés",
+          "MESSAGE": "Ces fichiers sont téléchargés à partir des destinataires de votre demande d'importation"
+        },
+        "ENTRY_LIST_PENDING": {
+          "TITLE": "Aucun fichier déposé",
+          "MESSAGE": "L'invitation de dépôt n'est pas encore activée, les destinataires ne peuvent pas déposer des fichiers pour le moment"
+        },
+        "ENTRY_LIST_ARCHIVED": {
+          "TITLE": "Invitation de depôt archivée",
+          "MESSAGE": "Les fichiers déposés sont soit supprimés, soit copiés dans votre espace personnel"
+        }
       }
     },
     "RIGHT_PANEL": {

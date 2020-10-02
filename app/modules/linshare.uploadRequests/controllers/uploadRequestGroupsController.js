@@ -66,6 +66,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.paramFilter = { label: '' };
     uploadRequestGroupsVm.toggleSearchState = toggleSearchState;
     uploadRequestGroupsVm.currentSelectedDocument = {};
+    uploadRequestGroupsVm.openUploadRequestGroup = openUploadRequestGroup;
     uploadRequestGroupsVm.fabButton = {
       toolbar: {
         activate: true,
@@ -275,5 +276,13 @@ function uploadRequestGroupsController(
         }
       });
   }
-}
 
+  function openUploadRequestGroup(uploadRequest) {
+    if (uploadRequest.collective) {
+      return uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
+        .then(requests => {
+          $state.go('uploadRequest', { uuid: requests[0].uuid });
+        });
+    }
+  }
+}

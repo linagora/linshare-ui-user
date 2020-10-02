@@ -44,6 +44,7 @@
       receivedShares,
       safeDetails,
       uploads,
+      uploadRequest,
       uploadRequests,
       secondFactorAuthentication,
       service = {
@@ -261,6 +262,12 @@
         hide: false
       };
 
+      uploadRequest = {
+        name: 'UPLOAD_REQUESTS.TITLE_SINGULAR',
+        link: 'uploadRequest',
+        hide: true
+      };
+
       tabs = [
         changePassword,
         myUploads,
@@ -268,6 +275,7 @@
         files,
         sharedSpace,
         administrations,
+        uploadRequest,
         uploadRequests,
         uploads,
         audit,

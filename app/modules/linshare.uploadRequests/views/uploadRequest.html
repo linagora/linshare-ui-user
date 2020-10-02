@@ -1,0 +1,490 @@
+<div ui-view="" ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}">
+  <div class="container files upload-requests">
+    <div class="card">
+      <div class="card-header">
+        <div id="breadcrumb-wrap" class="deep-nav">
+          <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
+            uib-dropdown dropdown-append-to-body
+            auto-close="always"
+            tooltip-placement="bottom"
+            tooltip-popup-delay="500"
+            is-open="isOpenNew"
+            ng-if="uploadRequestVm.uploadRequest.status === 'ENABLED'"
+            ng-class="{'open':isOpenNew}">
+            <a class="add-menu-group" uib-dropdown-toggle>
+              <i class="zmdi zmdi-plus"></i>
+            </a>
+
+            <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided" uib-dropdown-menu=""
+              ng-class="{'open':isOpenNew}">
+              <li role="menuitem">
+                <a>
+                  <i class="ls-add-user-sm"></i>
+                  <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="breadcrumbs-ctn hidden-xs">
+            <div
+              class="left-arrow actions"
+              ng-click="uploadRequestVm.goToUploadRequestGroups()">
+              <a>
+                <i class="ls-previous-caret"></i>
+              </a>
+            </div>
+
+            <div id="root-level" class="m-r-5">
+              <a
+                class="set-ellipsis"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay="1200"
+                uib-tooltip="{{::uploadRequestVm.uploadRequest.label}}"
+              >
+                <i class="ls-upload-request-alt"></i>
+                {{::uploadRequestVm.uploadRequest.label}}
+              </a>
+            </div>
+
+            <div class="upload-request-status" ng-switch="uploadRequestVm.uploadRequest.status">
+              <i class="zmdi zmdi-circle" ng-class="{ 'closed': ['CLOSED', 'ARCHIVED', 'CREATED'].includes(uploadRequestVm.uploadRequest.status) }"></i>
+              <small translate ng-switch-when="CREATED">UPLOAD_REQUESTS.STATUS.PENDING</small>
+              <small translate ng-switch-when="ENABLED">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
+              <small translate ng-switch-when="CLOSED">UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</small>
+              <small translate ng-switch-when="ARCHIVED">UPLOAD_REQUESTS.STATUS.ARCHIVED</small>
+            </div>
+          </div>
+
+          <div id="action-header">
+            <div class="fg-line toolbar-actions-items">
+              <span ng-click="showCheckboxes = !showCheckboxes" class="visible-xs toolbar-mobile-item col-xs-3">
+                <a class="select-all-items plain-txt-btn">
+                  <i class="ls-multi-select" ng-class="{'active-link': showCheckboxes}"
+                    ng-click="uploadRequestVm.resetSelectedEntries()"></i>
+                </a>
+              </span>
+
+              <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
+                <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body
+                  is-open="isOpenOrder" ng-class="{'open':isOpenOrder}">
+                  <div class="actions">
+                    <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                      <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
+                    </a>
+                    <ul
+                      class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown sort-dropdown stop-propagate"
+                      ng-class="{'open':isOpenOrder}" uib-dropdown-menu="">
+                      <li role="menuitem">
+                        <a href="" class="center">
+                          <span translate>SELECTION_TOOLBAR.ORDER_BY</span>
+                        </a>
+                      </li>
+                      <li class="divided"></li>
+
+                      <!-- SORT OPTIONS -->
+
+                      <li role="menuitem">
+                        <a href="" class="ng-binding selected-sorting"
+                          ng-click="uploadRequestVm.sortDropdownSetActive('name', $event)">
+                          <span class="caret-area">
+                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                                          'zmdi-caret-down' :
+                                          'zmdi-caret-up'" class="zmdi"></i>
+                          </span>
+                          <span translate>FILTER_COMPONENT.ORDER_BY_NAME</span>
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('size', $event)">
+                          <span class="caret-area">
+                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                                          'zmdi-caret-down' :
+                                          'zmdi-caret-up'" class="zmdi"></i>
+                          </span>
+                          <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.SIZE</span>
+                        </a>
+                      </li>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('recipient.email', $event)">
+                          <span class="caret-area">
+                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                                          'zmdi-caret-down' :
+                                          'zmdi-caret-up'" class="zmdi"></i>
+                          </span>
+                          <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.EMAIL</span>
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('creationDate', $event)">
+                          <span class="caret-area">
+                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                                          'zmdi-caret-down' :
+                                          'zmdi-caret-up'" class="zmdi"></i>
+                          </span>
+                          <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.CREATION_DATE</span>
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" ng-click="uploadRequestVm.sortDropdownSetActive('modificationDate', $event)">
+                          <span class="caret-area">
+                            <i ng-class="uploadRequestVm.tableParamsService.getToggleSelectedSort() ?
+                                          'zmdi-caret-down' :
+                                          'zmdi-caret-up'" class="zmdi"></i>
+                          </span>
+                          <span translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+              </a>
+
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" ng-click="uploadRequestVm.toggleSearchState()">
+                <a href="">
+                  <i class="tm-icon zmdi zmdi-search" ng-class="{'active-link': uploadRequestVm.searchMobileDropdown}"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="input-group search-bar hidden-xs">
+              <div id="search-field-ctn">
+                <div class="search-style">
+                  <div class="fg-line">
+                    <input type="text" class="form-control" autocomplete="off"
+                      ng-model="uploadRequestVm.paramFilter.name"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="drop-area">
+
+        <div id="top-search-wrap">
+          <i id="top-search-close" ng-click="uploadRequestVm.toggleSearchState()">&times;</i>
+          <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid" translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+            ng-model="uploadRequestVm.paramFilter.name" aria-invalid="false">
+        </div>
+
+        <!-- BACKGROUND CONTENT -->
+
+        <div
+          class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
+          ng-class="{'show-bg-drop' : uploadRequestVm.itemsList.length === 0}"
+          ng-if="uploadRequestVm.itemsList"
+        >
+          <div class="drag-and-drop-content">
+            <div class="drag-icon-ctn ">
+              <div class="bordered-circle">&nbsp;</div>
+              <span class="grey-clr bg-info-icon">
+                <span class="ls-upload-request"></span>
+              </span>
+            </div>
+            <div class="dnd-txt-content">
+              <h1 translate>{{::uploadRequestVm.backgroundContent.title}}</h1>
+              <p translate>{{::uploadRequestVm.backgroundContent.message}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPINNER ON LOADING -->
+
+        <div id="loading-bar-spinner" ng-if="!uploadRequestVm.itemsList">
+          <div class="spinner-icon"></div>
+        </div>
+
+        <!-- TABLE CONTENT -->
+
+        <div class="card-body collapsible-content" ng-if="uploadRequestVm.itemsList">
+          <div class="table-responsive">
+            <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
+              ng-table="uploadRequestVm.tableParams" show-filter="true">
+              <tr check-table-height ng-repeat="entry in $data"
+                data-selected-documents="uploadRequestVm.selectedEntries"
+                data-document-file="entry"
+                data-current-selected-document="uploadRequestVm.currentSelectedEntry"
+                data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                ng-class="{
+                  'highlight-list-elem': entry.isSelected,
+                  'current-vis': uploadRequestVm.currentSelectedEntry.current.uuid === entry.uuid
+                }"
+                class="p-b-5 double-row item-container">
+                <td data-header="'checkboxheader.html'" class="set-content-left thumb-type-item thumb-groups-preview-ls"
+                  header-class="'col-2 checkbox-col'">
+                  <a ng-click="showCheckboxes ? uploadRequestVm.addSelectedEntry(entry) : null"
+                    class="visible-xs">
+                    <div ng-class="{ 'invisible' : showCheckboxes}">
+                      <i class="fa" ng-class="'{{::entry.type | mimetypeIcone}}'"></i>
+                    </div>
+                    <div class="checkbox-ctn-thumb"
+                      ng-class="{'maintain-vis': entry.isSelected , 'hidden-xs' : !showCheckboxes}">
+                    </div>
+                  </a>
+
+                  <a ng-click="uploadRequestVm.addSelectedEntry(entry)" class="hidden-xs">
+                    <div ng-class="{ 'invisible' : showCheckboxes}">
+                      <i class="fa" ng-class="'{{::entry.type | mimetypeIcone}}'"></i>
+                    </div>
+                    <div class="checkbox-ctn-thumb"
+                      ng-class="{'maintain-vis': entry.isSelected , 'hidden-xs' : !showCheckboxes}">
+                    </div>
+                  </a>
+                </td>
+
+                <td data-title="::'FILTER_COMPONENT.ORDER_BY_NAME' | translate" class="row show-li-actions col-3"
+                  data-sortable="'name'" uuid={{::entry.uuid}} header-class="'col-3 flexible-table-col'">
+                  <div class="ctn-name-actions">
+                    <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                      <span class="file-name-disp single-line">
+                        {{::entry.name}}
+                      </span>
+                      <small> {{::entry.recipient.mail}} </small>
+                    </span>
+
+                    <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
+                      <ul class="actions pull-right" ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
+                        <li>
+                          <a class="set-col-12" translate-attr="{title: 'ACTION.INFORMATION'}" href="">
+                            <i class="zmdi zmdi-info"></i>
+                          </a>
+                        </li>
+                        <li ng-if="!uploadRequestVm.isArchived">
+                          <a translate-attr="{title: 'ACTION.DOWNLOAD'}" event-propagation-stop>
+                            <i class="zmdi zmdi-download"></i>
+                          </a>
+                        </li>
+                        <li ng-if="!uploadRequestVm.isArchived">
+                          <a translate-attr="{title: 'ACTION.DELETE'}" href="">
+                            <i class="zmdi zmdi-delete"></i>
+                          </a>
+                        </li>
+                        <li ng-if="uploadRequestVm.isArchived">
+                          <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.VIEW_IN_MY_SPACE'}" href="">
+                            <i class="zmdi zmdi-eye"></i>
+                          </a>
+                        </li>
+
+                        <!-- DROPDOWN-OPTIONS -->
+
+                        <li check-dropdown-position uib-dropdown dropdown-append-to-body
+                          class="dropdown set-col-6 no-padding" auto-close="always" is-open="isOpenItem"
+                          ng-class="{'open':isOpenItem}">
+                          <a class="set-col-12" translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
+                            uib-dropdown-toggle event-propagation-stop href="">
+                            <i class="zmdi zmdi-more"></i>
+                          </a>
+                          <ul uib-dropdown-menu ng-class="{'open':isOpenItem}" class="uib-dropdown-menu dropdown-menu-right dm-icon
+                                  dropdown-divided dropdown-content-left">
+                            <li>
+                              <a href="">
+                                <i class="zmdi zmdi-info"></i>
+                                <span translate>ACTION.INFORMATION</span>
+                              </a>
+                            </li>
+                            <li ng-if="uploadRequestVm.isArchived">
+                              <a href="">
+                                <i class="zmdi zmdi-eye"></i>
+                                <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.VIEW_IN_MY_SPACE</span>
+                              </a>
+                            </li>
+                            <li ng-if="!uploadRequestVm.isArchived">
+                              <a href="">
+                                <i class="zmdi zmdi-download"></i>
+                                <span translate>ACTION.DOWNLOAD</span>
+                              </a>
+                            </li>
+                            <li ng-if="!uploadRequestVm.isArchived">
+                              <a href="">
+                                <i class="zmdi zmdi-delete"></i>
+                                <span translate>ACTION.DELETE</span>
+                              </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li ng-if="!uploadRequestVm.isArchived">
+                              <a href="">
+                                <i class="zmdi zmdi-share"></i>
+                                <span translate>ACTION.SHARE</span>
+                              </a>
+                            </li>
+                            <li ng-if="!uploadRequestVm.isArchived">
+                              <a href="">
+                                <i class="zmdi groups-home-workgroup"></i>
+                                <span translate>ACTION.COPY_IN_WORKGROUP</span>
+                              </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li ng-if="!uploadRequestVm.isArchived">
+                              <a href="">
+                                <i class="zmdi zmdi-border-color"></i>
+                                <span translate>ACTION.RENAME</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
+                </td>
+
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
+                  data-title="::'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate"
+                  data-sortable="'modificationDate'" header-class="'col-4'">
+                  {{entry.modificationDate | lsDate: 'mediumDate'}}
+                </td>
+
+                <td class="hidden-xs"
+                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.SIZE' | translate"
+                  data-sortable="'size'" header-class="'col-4'">
+                  {{entry.size || 0 | readableSize}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- SELECTION HEADER -->
+
+        <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
+          ng-class="{'show-multi-menu': uploadRequestVm.selectedEntries.length > 0}">
+          <div class="toggle-checkbox-toolbar"
+            ng-click="uploadRequestVm.selectEntriesOnCurrentPage(uploadRequestVm.tableParams.data, uploadRequestVm.tableParams.page())">
+            <a ng-if="!uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+              class="select-all-items plain-text-button ng-scope">
+              <i class="fa ls-check-o checkbox-table"></i>
+            </a>
+            <a ng-if="uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+              class="select-all-items plain-text-button ng-scope">
+              <i class="ls-check-checked"></i>
+            </a>
+          </div>
+          <div class="exit-selection actions" ng-click="uploadRequestVm.resetSelectedEntries()"
+            translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
+            <a>
+              <i class="zmdi zmdi-close"></i>
+            </a>
+          </div>
+          <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
+            <div class="pull-left"
+              ng-class="{'active-button-show-selection': uploadRequestVm.tableParamsService.getSelectionIsIsolated()}"
+              ng-click="uploadRequestVm.toggleFilterBySelectedFiles()">
+              <p>
+                <span>{{uploadRequestVm.selectedEntries.length}}</span>
+                <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
+              </p>
+              <div class="pull-left view-icons-ctn groups-view">
+                <i class="fa fa-eye-slash" aria-hidden="true"
+                  ng-show="uploadRequestVm.tableParamsService.getSelectionIsIsolated()"></i>
+                <i class="fa fa-eye" aria-hidden="true"
+                  ng-show="!uploadRequestVm.tableParamsService.getSelectionIsIsolated()"></i>
+              </div>
+            </div>
+            <div class="pull-left view-icons-ctn reset-icon" ng-click="uploadRequestVm.resetSelectedEntries()">
+              <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
+            </div>
+          </div>
+          <div id="toolbar-actions" class="hidden-xs">
+            <span>
+              <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.SHARE'}">
+                <i class="zmdi zmdi-share"></i>
+                <span translate>ACTION.SHARE</span>
+              </a>
+            </span>
+
+            <span>
+              <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
+                <i class="zmdi zmdi-close-circle"></i>
+                <span translate>ACTION.DELETE</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAB BUTTON -->
+
+    <div
+      id="fabButtonCtn"
+      fab-button
+      fab-button-actions="uploadRequestVm.fabButton.actions"
+      fab-button-toolbar="uploadRequestVm.fabButton.toolbar"
+    ></div>
+
+  <!-- MOBILE HEADER -->
+
+  <div class="header-sidebar append-to-body visible-xs workgroup-header-nav">
+    <a
+      class="zmdi zmdi-chevron-left zmdi-hc-2x"
+      ng-click="uploadRequestVm.goToUploadRequestGroups()"></a>
+    <h2 class="header-more-options set-ellipsis">
+      {{::uploadRequestVm.uploadRequest.label}}
+    </h2>
+  </div>
+
+  <!-- MULTIPLE ACTION MOBILE -->
+
+  <section
+    class="row multi-select-mobile visible-xs"
+    data-ng-class="{'showMobileMultiMenu': uploadRequestVm.selectedEntries.length > 0}"
+  >
+    <div class="col-xs-2 ctn-mobile-select-count">
+      <span class="number-of-files">{{uploadRequestVm.selectedEntries.length}}</span>
+      <span
+        class="file-multi-select-label"
+        translate
+      >
+        SELECTION_TOOLBAR.ELEMENTS
+      </span>
+    </div>
+    <div class="col-xs-8">
+      <div ng-click="uploadRequestVm.selectDocumentsOnCurrentPage(uploadRequestVm.tableParams.data, uploadRequestVm.tableParams.page())"
+           class="visible-xs toolbar-mobile-item col-xs-3">
+        <i class="ls-check-checked select-all-items p-r-10"
+           ng-if="!uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]">
+        </i>
+        <i class="ls-check-o select-all-items p-r-10"
+           ng-if="uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]">
+        </i>
+      </div>
+      <div class="col-xs-2" ng-class="{'hide' : (uploadRequestVm.selectedEntries.length > 1)}">
+        <i class="zmdi zmdi-info"></i>
+      </div>
+      <div class="col-xs-2">
+        <i class="zmdi zmdi-share"></i>
+      </div>
+      <div class="col-xs-2">
+        <i class="zmdi zmdi-delete"></i>
+      </div>
+    </div>
+    <div class="col-xs-1 pull-right" ng-click="uploadRequestVm.resetSelectedEntries()">
+      <i class="zmdi zmdi zmdi-close"></i>
+    </div>
+  </section>
+</div>
+
+<script type="text/ng-template" id="checkboxheader.html">
+  <span ng-click="uploadRequestVm.selectEntriesOnCurrentPage(uploadRequestVm.tableParams.data, uploadRequestVm.tableParams.page())"
+        role="button" tabindex="0" class="display-block center">
+    <a ng-if="!uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+       class="select-all-items plain-text-button checkboxCtn">
+      <i class="ls-check-o checkbox-table"></i>
+    </a>
+    <a ng-if="uploadRequestVm.flagsOnSelectedPages[uploadRequestVm.tableParams.page()]"
+       class="select-all-items plain-text-button">
+      <i class="ls-check-checked"></i>
+    </a>
+    </span>
+</script>

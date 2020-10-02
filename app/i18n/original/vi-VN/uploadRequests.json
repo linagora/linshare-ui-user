@@ -1,9 +1,12 @@
 {
   "UPLOAD_REQUESTS": {
     "TITLE": "Yêu cầu tải lên",
+    "TITLE_SINGULAR": "Yêu cầu tải lên",
     "STATUS": {
       "ACTIVE": "Mở",
-      "EXPIRED_CLOSED": "Hết hạn | Đóng"
+      "EXPIRED_CLOSED": "Hết hạn | Đóng",
+      "ARCHIVED": "Lưu trữ",
+      "PENDING": "Đang chờ"
     },
     "CREATION_TYPE": {
       "COLLECTIVE": "Tải lên nhóm",
@@ -54,18 +57,33 @@
         "FILES": "Số file",
         "STATUS": "Trạng thái",
         "TYPE": "Loại",
-        "CREATION_DATE": "Ngày tạo"
+        "CREATION_DATE": "Ngày tạo",
+        "SIZE": "Kích cỡ",
+        "EMAIL": "Email"
       },
       "OPTIONS": {
         "ADD_RECIPIENTS": "Thêm người nhận",
         "GLOBAL_EDIT": "Sửa tất cả",
         "ACTIVATE": "Kích hoạt",
         "CLOSE": "Đóng",
-        "ARCHIVE": "Lưu trữ"
+        "ARCHIVE": "Lưu trữ",
+        "VIEW_IN_MY_SPACE": "Xem ở không gian của tôi"
       },
       "BACKGROUND_CONTENT": {
         "TITLE": "Tạo yêu cầu tải lên",
-        "MESSAGE": "Những yêu cầu này cho phép người dùng khác tải tệp lên bộ nhớ của bạn"
+        "MESSAGE": "Những yêu cầu này cho phép người dùng khác tải tệp lên bộ nhớ của bạn",
+        "ENTRY_LIST": {
+          "TITLE": "Tập tin được tải lên",
+          "MESSAGE": "Các tập tin này được tải lên bởi người nhận từ yêu cầu tải lên của bạn"
+        },
+        "ENTRY_LIST_PENDING": {
+          "TITLE": "Không có tập tin nào",
+          "MESSAGE": "Yêu cầu tải lên chưa được kích hoạt, người nhận chưa thể tải tập tin lên."
+        },
+        "ENTRY_LIST_ARCHIVED": {
+          "TITLE": "Yêu cầu đã được lưu trữ",
+          "MESSAGE": "Tập tin tải lên đã được xóa hoặc sao chép vào không gian của bạn"
+        }
       }
     },
     "RIGHT_PANEL": {

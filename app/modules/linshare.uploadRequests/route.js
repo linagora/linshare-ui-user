@@ -30,5 +30,17 @@ function uploadRequestsConfig($stateProvider) {
       },
       controller: 'uploadRequestGroupsController',
       controllerAs: 'uploadRequestGroupsVm',
+    })
+    .state('uploadRequest', {
+      parent: 'common',
+      url: '/uploadRequests/:uuid',
+      template: require('./views/uploadRequest.html'),
+      resolve: {
+        uploadRequest: function($stateParams, uploadRequestRestService) {
+          return uploadRequestRestService.get($stateParams.uuid);
+        }
+      },
+      controller: 'uploadRequestController',
+      controllerAs: 'uploadRequestVm'
     });
 }
