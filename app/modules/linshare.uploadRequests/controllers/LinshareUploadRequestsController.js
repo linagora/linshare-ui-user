@@ -57,6 +57,7 @@ function LinshareUploadRequestsController(
     uploadRequestVm.loadSidebarContent = loadSidebarContent;
     uploadRequestVm.showDetails = showDetails;
     uploadRequestVm.cancelUploadRequests = cancelUploadRequests;
+    uploadRequestVm.closeUploadRequests = closeUploadRequests;
     uploadRequestVm.uploadRequestCreate = lsAppConfig.uploadRequestCreate;
     uploadRequestVm.uploadRequestDetails = lsAppConfig.uploadRequestDetails;
     uploadRequestVm.getOwnerName = contactsListsService.getOwnerName;
@@ -229,6 +230,40 @@ function LinshareUploadRequestsController(
           showToastAlertFor('cancellation', 'error', notCanceledRequests);
         } else {
           showToastAlertFor('cancellation', 'info', canceledRequests);
+        }
+      });
+  }
+
+  function closeUploadRequests(uploadRequests) {
+    openWarningDialogFor('close', uploadRequests)
+      .then(() => $q.allSettled(
+        uploadRequests.map(
+          request => uploadRequestRestService.updateStatus(request.uuid, 'CLOSED')
+        )
+      ))
+      .then(promises => {
+        const closedRequests = promises
+          .filter(promise => promise.state === 'fulfilled')
+          .map(promise => promise.value);
+        const notClosedRequests = promises
+          .filter(promise => promise.state === 'rejected')
+          .map(reject => reject.reason);
+
+        _.remove(uploadRequestVm.itemsList, item => closedRequests.some(request => request.uuid === item.uuid));
+        _.remove(uploadRequestVm.selectedUploadRequests, selected => closedRequests.some(request => request.uuid === selected.uuid));
+
+        uploadRequestVm.tableParams.reload();
+
+        return {
+          closedRequests,
+          notClosedRequests
+        };
+      })
+      .then(({ closedRequests, notClosedRequests}) => {
+        if (notClosedRequests.length) {
+          showToastAlertFor('close', 'error', notClosedRequests);
+        } else {
+          showToastAlertFor('close', 'info', closedRequests);
         }
       });
   }

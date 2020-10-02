@@ -94,12 +94,20 @@
       "CANCELLATION": {
         "TITLE": "Отмена запроса на загрузку",
         "TEXT": "Вы собираетесь отменить {singular, select, true{запрос на загрузку} other{{nbItems} запроса на загрузку}} ! Осторожно, это действие не может быть отменено."
+      },
+      "CLOSED": {
+        "TITLE": "Закрыть запроса на загрузку",
+        "TEXT": "Вы собираетесь закрыть {singular, select, true{запрос на загрузку} other{{nbItems} запроса на загрузку}} ! Осторожно, это действие не может быть отменено."
       }
     },
     "TOAST_ALERT": {
       "CANCELLATION": {
         "ERROR": "{number} {singular, select, true{запрос на загрузку} other{запроса на загрузку}} никто не отменял.",
         "INFO": "{number} {singular, select, true{запрос на загрузку} other{запроса на загрузку}} был отменен."
+      },
+      "CLOSE": {
+        "ERROR": "{number} {singular, select, true{запрос на загрузку} other{запроса на загрузку}} никто не закрыл.",
+        "INFO": "{number} {singular, select, true{запрос на загрузку} other{запроса на загрузку}} был закрыт."
       }
     }
   }

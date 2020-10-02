@@ -94,12 +94,20 @@
       "CANCELLATION": {
         "TITLE": "Annulation de l'invitation de dépôt",
         "TEXT": "Vous êtes sur le point d'annuler {singular, select, true{un invitation de dépot} other{{nbItems} invitations de dépot}} ! Attention, cette action ne peut pas être annulée."
+      },
+      "CLOSE": {
+        "TITLE": "Clôture de l'invitation de dépôt",
+        "TEXT": "Vous êtes sur le point de fermer {singular, select, true{un invitation de dépot} other{{nbItems} invitations de dépot}} ! Attention, cette action ne peut pas être annulée."
       }
     },
     "TOAST_ALERT": {
       "CANCELLATION": {
         "ERROR": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} n'a pas été annulé.",
         "INFO": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} a été annulé."
+      },
+      "CLOSE": {
+        "ERROR": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} n'a pas été fermée.",
+        "INFO": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} a été fermée."
       }
     }
   }

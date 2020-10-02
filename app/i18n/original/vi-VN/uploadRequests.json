@@ -94,12 +94,20 @@
       "CANCELLATION": {
         "TITLE": "Hủy yêu cầu tải lên",
         "TEXT": "Bạn chuẩn bị hủy {singular, select, true{1 yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
+      },
+      "CLOSE": {
+        "TITLE": "Đóng yêu cầu tải lên",
+        "TEXT": "Bạn chuẩn bị đóng {singular, select, true{1 yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
       }
     },
     "TOAST_ALERT": {
       "CANCELLATION": {
         "ERROR": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} không được hủy.",
         "INFO": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} đã được hủy."
+      },
+      "CLOSE": {
+        "ERROR": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} không được đóng.",
+        "INFO": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} đã được đóng."
       }
     }
   }

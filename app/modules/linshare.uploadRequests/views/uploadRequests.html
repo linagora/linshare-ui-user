@@ -356,7 +356,7 @@
                             <li class="divider"></li>
                             <li ng-if="uploadRequest.status === 'ENABLED'"
                               ng-class="{ 'disable-link': uploadRequest.status === 'CLOSED' }">
-                              <a href="">
+                              <a href="" ng-click="uploadRequestVm.closeUploadRequests([uploadRequest])">
                                 <i class="zmdi zmdi-close-circle"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.CLOSE</span>
                               </a>
@@ -464,8 +464,13 @@
             </span>
 
             <span ng-if="uploadRequestVm.status === 'activeClosed'"
-              ng-class="{ 'disable-link': !uploadRequestVm.canCloseSelectedUploadRequests()}">
-              <a class="plain-text-button share-link" translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.CLOSE'}">
+              ng-class="{ 'disable-link': !uploadRequestVm.canCloseSelectedUploadRequests()}"
+              ng-click="uploadRequestVm.closeUploadRequests(uploadRequestVm.selectedUploadRequests)"
+            >
+              <a
+                class="plain-text-button share-link"
+                translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.CLOSE'}"
+              >
                 <i class="zmdi zmdi-close-circle"></i>
                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.CLOSE</span>
               </a>

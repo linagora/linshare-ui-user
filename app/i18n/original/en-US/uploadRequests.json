@@ -94,12 +94,20 @@
       "CANCELLATION": {
         "TITLE": "Upload request cancelation",
         "TEXT": "You are about to cancel {singular, select, true{a upload request} other{{nbItems} upload requests}} ! Beware, this action cannot be undone."
+      },
+      "CLOSE": {
+        "TITLE": "Upload request close",
+        "TEXT": "You are about to close {singular, select, true{an upload request} other{{nbItems} upload requests}} ! Beware, this action cannot be undone."
       }
     },
     "TOAST_ALERT": {
       "CANCELLATION": {
         "ERROR": "{number} {singular, select, true{upload request has} other{upload requests have}} not been canceled.",
         "INFO": "{number} {singular, select, true{upload request has} other{upload requests have}} been canceled."
+      },
+      "CLOSE": {
+        "ERROR": "{number} {singular, select, true{upload request has} other{upload requests have}} not been closed.",
+        "INFO": "{number} {singular, select, true{upload request has} other{upload requests have}} been closed."
       }
     }
   }
