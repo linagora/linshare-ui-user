@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
-          <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
+          <div ng-if="uploadRequestVm.status !== 'archived'" class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
             auto-close="always" tooltip-placement="bottom" tooltip-popup-delay="500" is-open="isOpenNew"
             ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle>
@@ -29,9 +29,16 @@
           </div>
 
           <div class="breadcrumbs-ctn hidden-xs">
-            <a>
+            <a class="click-disabled">
               <i class="zmdi zmdi-pin-account"></i>
               <span translate>UPLOAD_REQUESTS.TITLE</span>
+            </a>
+            <a href="javascript:void(0)">
+              <span ng-switch="uploadRequestVm.status"> |
+                <span ng-switch-when="pending" translate> UPLOAD_REQUESTS.MENU_ENTRIES.PENDING</span>
+                <span ng-switch-when="activeClosed" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED</span>
+                <span ng-switch-when="archived" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES</span>
+              </span>
             </a>
           </div>
 
@@ -217,7 +224,7 @@
         <!-- BACKGROUND CONTENT -->
 
         <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
-          ng-class="{'show-bg-drop' : contactsListsListVm.itemsList.length === 0}">
+          ng-class="{'show-bg-drop' : uploadRequestVm.itemsList.length === 0}">
           <div class="drag-and-drop-content">
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
