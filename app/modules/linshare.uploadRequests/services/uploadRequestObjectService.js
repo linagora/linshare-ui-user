@@ -249,9 +249,9 @@
       self = this;
       var dto = {};
 
-      dto.activationDate = self.activationDate;
-      dto.expiryDate = self.expirationDate;
-      dto.notificationDate = self.notificationDate;
+      dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
+      dto.expiryDate = self.expirationDate && moment(self.expirationDate).valueOf();
+      dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
       dto.label = self.mail;
       dto.body = self.message;
       dto.contactList = self.recipients.map(recipient => recipient.mail);
