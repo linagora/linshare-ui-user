@@ -1,9 +1,9 @@
 <div id="member-sidebar">
   <div class="header-sidebar form-sidebar header-show-action">
-    <i ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x hidden-xs"
+    <i ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x hidden-xs hidden-sm"
       ng-click="mainVm.sidebar.getData().toggleMoreOptions(false)">
     </i>
-    <div class="hidden-sm">
+    <div class="hidden-md">
       <i ng-if="mainVm.sidebar.getData().mdTabsSelection.selectedIndex === 1" class="zmdi zmdi-chevron-left zmdi-hc-2x mdi-back-mobile"
         ng-click="mainVm.sidebar.getData().toggleMoreOptions(false)">
       </i>
@@ -17,7 +17,7 @@
       <span
         translate>{{ mainVm.sidebar.getData().groupMode ? 'UPLOAD_REQUESTS.FORM_CREATE.COLLECTIVE' : 'UPLOAD_REQUESTS.FORM_CREATE.INDIVIDUAL'}}</span>
     </h2>
-    <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
+    <span class="hidden-xs hidden-sm actions" ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
     <span class="header-action-link waves-effect text-uppercase visible-xs"
