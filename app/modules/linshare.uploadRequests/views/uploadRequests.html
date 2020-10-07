@@ -148,9 +148,9 @@
               <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
                 <i class="fa fa-th-large" aria-hidden="true"></i>
               </a>
-              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" ng-click="toggleSearchState()">
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" ng-click="uploadRequestVm.toggleSearchState()">
                 <a href="">
-                  <i class="tm-icon zmdi zmdi-search" ng-class="{'active-link': searchMobileDropdown}"></i>
+                  <i class="tm-icon zmdi zmdi-search" ng-class="{'active-link': uploadRequestVm.searchMobileDropdown}"></i>
                 </a>
               </div>
             </div>
@@ -220,7 +220,11 @@
       </div>
 
       <div id="drop-area">
-
+        <div id="top-search-wrap">
+          <i id="top-search-close" data-ng-click="uploadRequestVm.toggleSearchState()">&times;</i>
+          <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid" translate-attr="{placeholder: 'UPLOAD_REQUESTS.TABLE.SEARCH_BY_LABEL'}"
+            ng-model="uploadRequestVm.paramFilter.label" aria-invalid="false">
+        </div>
         <!-- BACKGROUND CONTENT -->
 
         <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"

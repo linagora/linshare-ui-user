@@ -68,6 +68,7 @@ function LinshareUploadRequestsController(
     uploadRequestVm.itemsList = uploadRequests;
     uploadRequestVm.status = $stateParams.status;
     uploadRequestVm.paramFilter = { label: '' };
+    uploadRequestVm.toggleSearchState = toggleSearchState;
     uploadRequestVm.currentSelectedDocument = {};
     uploadRequestVm.fabButton = {
       toolbar: {
@@ -198,6 +199,17 @@ function LinshareUploadRequestsController(
       uploadRequestVm.currentSelected = data;
       loadSidebarContent(uploadRequestVm.uploadRequestDetails, true);
     });
+  }
+
+  function toggleSearchState() {
+    if (!uploadRequestVm.searchMobileDropdown) {
+      angular.element('#drop-area').addClass('search-toggled');
+      angular.element('#top-search-wrap input').focus();
+    } else {
+      angular.element('#drop-area').removeClass('search-toggled');
+      angular.element('#searchInMobileFiles').val('').trigger('change');
+    }
+    uploadRequestVm.searchMobileDropdown = !uploadRequestVm.searchMobileDropdown;
   }
 
   function cancelUploadRequests(uploadRequests) {
