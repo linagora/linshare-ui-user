@@ -257,8 +257,8 @@
         window.scrollTo(0,0);
 
         $q.all([
-          MenuService.getProperties($rootScope.toState, false),
-          MenuService.getProperties($rootScope.toState, true)
+          MenuService.getProperties($rootScope.toState, false, $rootScope.toParams),
+          MenuService.getProperties($rootScope.toState, true, $rootScope.toParams)
         ]).then(function(promises) {
           $scope.currentState = promises[0];
           $scope.linkActive = promises[1];

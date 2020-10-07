@@ -237,13 +237,25 @@
         name: uploadRequestsMenuName,
         links: [{
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.PENDING',
-          link: 'uploadRequests({ status: "pending" })'
+          link: 'uploadRequests({ status: "pending" })',
+          state: 'uploadRequests',
+          params: {
+            status: 'pending'
+          }
         }, {
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED',
-          link: 'uploadRequests({ status: "activeClosed" })'
+          link: 'uploadRequests({ status: "activeClosed" })',
+          state: 'uploadRequests',
+          params: {
+            status: 'activeClosed'
+          }
         }, {
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES',
-          link: 'uploadRequests({ status: "archived" })'
+          link: 'uploadRequests({ status: "archived" })',
+          state: 'uploadRequests',
+          params: {
+            status: 'archived'
+          }
         }],
         icon: 'zmdi zmdi-pin-account',
         hide: false
@@ -287,13 +299,18 @@
      * @returns {Promise} Selected menu's properties
      * @memberOf linshareUiUserApp.menuService
      */
-    function getProperties(currentState, isSubMenu) {
+    function getProperties(currentState, isSubMenu, toParams) {
       var selectedMenu = null;
 
       _.forEach(tabs, function(tab) {
         if (!_.isUndefined(tab.links)) {
           _.forEach(tab.links, function(link) {
-            if (link.link === currentState) {
+            let hasIdenticalParams;
+
+            if (link.params) {
+              hasIdenticalParams = !Object.keys(link.params).some(field => link.params[field] !== toParams[field]);
+            }
+            if (link.link === currentState || (link.state === currentState && hasIdenticalParams)) {
               selectedMenu = isSubMenu ? link : tab;
             }
           });
