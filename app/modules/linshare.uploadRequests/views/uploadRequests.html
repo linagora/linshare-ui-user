@@ -247,7 +247,7 @@
           <div class="table-responsive">
             <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
               ng-table="uploadRequestVm.tableParams" show-filter="true">
-              <tr check-table-height ng-repeat="uploadRequest in $data"
+              <tr check-table-height ls-item-selection ng-repeat="uploadRequest in $data"
                 data-selected-documents="uploadRequestVm.selectedUploadRequests" data-document-file="uploadRequest"
                 data-current-selected-Document="uploadRequestVm.currentSelectedDocument"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()" ng-class="{
