@@ -57,9 +57,9 @@
      * @memberOf linshareUiUserApp.lsLeftSidebarController
      */
     function getProductVersion() {
-      $http.get('/about.json').then(function(data) {
-        lsLeftSidebarVm.productVersion = data.version;
-      }).catch(function(error) {
+      $http.get('/about.json').then(response => {
+        lsLeftSidebarVm.productVersion = response && response.data && response.data.version;
+      }).catch(error => {
         $log.debug(error);
       });
     }
