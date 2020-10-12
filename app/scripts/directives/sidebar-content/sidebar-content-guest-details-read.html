@@ -32,7 +32,7 @@
                 x-ng-blur="commentFocused = false">
       </textarea>
         <span x-ng-if="!commentFocused && mainVm.sidebar.getData().selectedGuest.comment.length > 54">...</span>
-        <div class="edit-description clic-enabled" x-ng-click="commentFocused = !commentFocused">
+        <div class="edit-description click-enabled" x-ng-click="commentFocused = !commentFocused">
           <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
              title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
           <i class="zmdi zmdi-close" x-ng-if="commentFocused"

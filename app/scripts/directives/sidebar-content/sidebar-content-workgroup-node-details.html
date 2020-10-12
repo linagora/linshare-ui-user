@@ -45,7 +45,7 @@
                 </textarea>
       <span
         data-ng-if="(((!commentFocused) && (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
-      <div class="edit-description clic-enabled" data-ng-click="commentFocused = !commentFocused">
+      <div class="edit-description click-enabled" data-ng-click="commentFocused = !commentFocused">
         <i class="zmdi zmdi-edit" data-ng-if="!commentFocused"
            title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
         <i class="zmdi zmdi-close" data-ng-if="commentFocused"
