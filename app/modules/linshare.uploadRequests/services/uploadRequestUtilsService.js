@@ -2,13 +2,14 @@ angular
   .module('linshare.uploadRequests')
   .factory('uploadRequestUtilsService', uploadRequestUtilsService);
 
-uploadRequestUtilsService.$inject = ['$q', '$translate', 'dialogService', 'toastService'];
+uploadRequestUtilsService.$inject = ['$timeout', '$q', '$translate', 'dialogService', 'toastService'];
 
-function uploadRequestUtilsService($q, $translate, dialogService, toastService) {
+function uploadRequestUtilsService($timeout, $q, $translate, dialogService, toastService) {
 
   return {
     openWarningDialogFor: openWarningDialogFor,
-    showToastAlertFor: showToastAlertFor
+    showToastAlertFor: showToastAlertFor,
+    archiveConfirmOptionDialog: archiveConfirmOptionDialog
   };
 
   ////////////
@@ -39,14 +40,37 @@ function uploadRequestUtilsService($q, $translate, dialogService, toastService) 
       }, 'warning'));
   }
 
+  function archiveConfirmOptionDialog() {
+    return $translate([
+      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.OPTION_TEXT',
+      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.TITLE',
+      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CONFIRM',
+      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CANCEL'
+    ])
+      .then(result => dialogService.dialogConfirmation({
+        text: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.OPTION_TEXT'],
+        title: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.TITLE'],
+        buttons: {
+          confirm: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CONFIRM'],
+          cancel: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CANCEL']
+        }
+      }, 'warning'));
+  }
+
   function showToastAlertFor(action, type, items) {
-    toastService[type]({
-      key: `UPLOAD_REQUESTS.TOAST_ALERT.${action.toUpperCase()}.${type.toUpperCase()}`,
-      pluralization: true,
-      params: {
-        singular: items.length === 1,
-        number: items.length
-      }
-    });
+    if (action === 'archive' && (type === 'error' || type === 'info')) {
+      toastService[type]({
+        key: `UPLOAD_REQUESTS.TOAST_ALERT.ARCHIVE.${type.toUpperCase()}`,
+      });
+    } else {
+      toastService[type]({
+        key: `UPLOAD_REQUESTS.TOAST_ALERT.${action.toUpperCase()}.${type.toUpperCase()}`,
+        pluralization: true,
+        params: {
+          singular: items.length === 1,
+          number: items.length
+        }
+      });
+    }
   }
 }

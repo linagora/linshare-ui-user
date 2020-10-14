@@ -320,7 +320,8 @@
                           </a>
                         </li>
                         <li ng-if="uploadRequest.status === 'CLOSED'">
-                          <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE'}" href="">
+                          <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE'}" href=""
+                            ng-click="uploadRequestGroupsVm.archiveUploadRequest(uploadRequest)">
                             <i class="zmdi zmdi-archive"></i>
                           </a>
                         </li>
@@ -391,8 +392,9 @@
                                 <span translate>ACTION.DELETE</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : uploadRequest.status !== 'CLOSED' }">
-                              <a href="">
+                            <li
+                              ng-class="{ 'disable-link' : uploadRequest.status !== 'CLOSED' }">
+                              <a href="" ng-click="uploadRequestGroupsVm.archiveUploadRequest(uploadRequest)">
                                 <i class="zmdi zmdi-archive"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE</span>
                               </a>

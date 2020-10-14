@@ -100,10 +100,10 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     return handler(Restangular.one(restUrl, uuid).customPUT(uploadRequestDto));
   }
 
-  function updateStatus(uuid, status) {
+  function updateStatus(uuid, status, query) {
     $log.debug('LinshareUploadRequestService : updateStatus', uuid, status);
 
-    return handler(Restangular.one(restUrl, uuid).one('status', status).put());
+    return handler(Restangular.one(restUrl, uuid).one('status', status).put(query));
   }
 
   function listUploadRequests(uuid) {

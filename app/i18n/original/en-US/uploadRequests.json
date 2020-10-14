@@ -116,6 +116,15 @@
       "CLOSE": {
         "TITLE": "Upload request close",
         "TEXT": "You are about to close {singular, select, true{an upload request} other{{nbItems} upload requests}} ! Beware, this action cannot be undone."
+      },
+      "ARCHIVE": {
+        "TITLE": "Upload request archive",
+        "TEXT": "You are about to archive an upload request. Beware, this action cannot be undone.",
+        "OPTION_TEXT": "After archiving, all files will be deleted. Do you want to copy files to your personal space?",
+        "COPY": {
+          "CONFIRM": "Yes",
+          "CANCEL": "No"
+        }
       }
     },
     "TOAST_ALERT": {
@@ -126,6 +135,10 @@
       "CLOSE": {
         "ERROR": "{number} {singular, select, true{upload request has} other{upload requests have}} not been closed.",
         "INFO": "{number} {singular, select, true{upload request has} other{upload requests have}} been closed."
+      },
+      "ARCHIVE": {
+        "ERROR": "Upload request has not been archived.",
+        "INFO": "Upload request has been archived."
       }
     }
   }

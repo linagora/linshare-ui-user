@@ -116,6 +116,15 @@
       "CLOSE": {
         "TITLE": "Đóng yêu cầu tải lên",
         "TEXT": "Bạn chuẩn bị đóng {singular, select, true{1 yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
+      },
+      "ARCHIVE": {
+        "TITLE": "Lưu trữ yêu cầu tải lên",
+        "TEXT": "Bạn chuẩn bị lưu trữ 1 yêu cầu tải lên. Hãy cẩn thận, hành động này không thể hoàn tác.",
+        "OPTION_TEXT": "Sau khi lưu trữ, tất cả các tệp sẽ bị xóa. Bạn có muốn sao chép tệp vào không gian cá nhân của mình không?",
+        "COPY": {
+          "CONFIRM": "Có",
+          "CANCEL": "Không"
+        }
       }
     },
     "TOAST_ALERT": {
@@ -126,6 +135,10 @@
       "CLOSE": {
         "ERROR": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} không được đóng.",
         "INFO": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} đã được đóng."
+      },
+      "ARCHIVE": {
+        "ERROR": "Yêu cầu tải lên không được lưu trữ.",
+        "INFO": "Yêu cầu tải lên đã được lưu trữ."
       }
     }
   }

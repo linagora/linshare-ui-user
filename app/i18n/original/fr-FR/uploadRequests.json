@@ -116,6 +116,15 @@
       "CLOSE": {
         "TITLE": "Clôture de l'invitation de dépôt",
         "TEXT": "Vous êtes sur le point de fermer {singular, select, true{un invitation de dépot} other{{nbItems} invitations de dépot}} ! Attention, cette action ne peut pas être annulée."
+      },
+      "ARCHIVE": {
+        "TITLE": "Archive de l'invitation de dépôt",
+        "TEXT": "Vous êtes sur le point d'archiver un invitation de dépot. Attention, cette action ne peut pas être annulée.",
+        "OPTION_TEXT": "Après l'archivage, tous les fichiers seront supprimés. Vous souhaitez copier des fichiers dans votre espace personnel?",
+        "COPY": {
+          "CONFIRM": "Oui",
+          "CANCEL": "Non"
+        }
       }
     },
     "TOAST_ALERT": {
@@ -126,6 +135,10 @@
       "CLOSE": {
         "ERROR": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} n'a pas été fermée.",
         "INFO": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} a été fermée."
+      },
+      "ARCHIVE": {
+        "ERROR": "Invitation de dépot n'a pas été archivé.",
+        "INFO": "Invitation de dépot a été archivé."
       }
     }
   }

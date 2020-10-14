@@ -45,7 +45,7 @@ function uploadRequestGroupsController(
   uploadRequestUtilsService
 ) {
   const uploadRequestGroupsVm = this;
-  const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;
+  const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
 
   uploadRequestGroupsVm.$onInit = onInit;
 
@@ -54,6 +54,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.showDetails = showDetails;
     uploadRequestGroupsVm.cancelUploadRequestGroups = cancelUploadRequestGroups;
     uploadRequestGroupsVm.closeUploadRequestGroups = closeUploadRequestGroups;
+    uploadRequestGroupsVm.archiveUploadRequest = archiveUploadRequest;
     uploadRequestGroupsVm.uploadRequestGroupCreate = lsAppConfig.uploadRequestGroupCreate;
     uploadRequestGroupsVm.uploadRequestGroupDetails = lsAppConfig.uploadRequestGroupDetails;
     uploadRequestGroupsVm.getOwnerName = contactsListsService.getOwnerName;
@@ -273,6 +274,24 @@ function uploadRequestGroupsController(
           showToastAlertFor('close', 'error', notClosedRequests);
         } else {
           showToastAlertFor('close', 'info', closedRequests);
+        }
+      });
+  }
+
+  function archiveUploadRequest(uploadRequest) {
+    openWarningDialogFor('archive', uploadRequest)
+      .then(isConfirmed => isConfirmed ? archiveConfirmOptionDialog() : $q.reject())
+      .then(isCopied => uploadRequestGroupRestService.updateStatus(uploadRequest.uuid, 'ARCHIVED', {copy: !!isCopied }))
+      .then(archivedRequest => {
+        _.remove(uploadRequestGroupsVm.itemsList, item => archivedRequest.uuid === item.uuid);
+        _.remove(uploadRequestGroupsVm.selectedUploadRequests, selected => archivedRequest.uuid === selected.uuid);
+
+        uploadRequestGroupsVm.tableParams.reload();
+
+        showToastAlertFor('archive', 'info', [archivedRequest]);
+      }).catch(err => {
+        if (err) {
+          showToastAlertFor('archive', 'error');
         }
       });
   }
