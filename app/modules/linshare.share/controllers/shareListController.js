@@ -13,7 +13,7 @@
     .controller('LinshareShareListController', LinshareShareListController);
 
   LinshareShareListController.$inject = ['_', '$scope', '$state', '$translate',
-    'lsAppConfig', 'previousState', 'shareIndex', 'ShareObjectService', 'swal'
+    'lsAppConfig', 'previousState', 'shareIndex', 'ShareObjectService', 'swal', 'dialogService'
   ];
 
   /**
@@ -22,7 +22,7 @@
    *  @memberOf LinShare.share
    */
   function LinshareShareListController(_, $scope, $state, $translate, lsAppConfig,
-    previousState, shareIndex, ShareObjectService, swal) {
+    previousState, shareIndex, ShareObjectService, swal, dialogService) {
 
     var
       shareListVm = this,
@@ -91,22 +91,21 @@
      */
     function confirmCancel(item, callback) {
       //TODO - TO REMOVE: Deprecated use md-dialog from angular material
-      swal({
+      const sentences = {
         title: swalTitle,
         text: swalText,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: swalConfirm,
-        cancelButtonText: swalCancel,
-        closeOnConfirm: true,
-        closeOnCancel: true
-      },
-      function(isConfirm) {
-        if (isConfirm) {
-          callback(item);
+        buttons: {
+          cancel: swalCancel,
+          confirm: swalConfirm
         }
-      }
-      );
+      };
+
+      dialogService.dialogConfirmation(sentences, 'warning')
+        .then(isConfirmed => {
+          if (isConfirmed) {
+            callback(item);
+          }
+        });
     }
 
     /**

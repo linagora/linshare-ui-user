@@ -12,70 +12,91 @@
   padding: 0;
   background-color: $component-dialog-alert-sweet-alert-background-color;
   border-radius: 5px;
-  h2 {
-    background-color: #ffffff;
-    margin: 0;
-    text-align: left;
-    font-weight: bold;
-    padding: 1em 1em 0.5em 1em;
-    font-size: 1.1em;
-  }
-  p {
-    background-color: #ffffff;
-    font-size: 1.05em;
-    line-height: 1.6em;
-    padding: 0 1em 2em 1em;
-  }
-  .sa-button-container{
-    background-color: #ffffff;
-    display: flex;
-    border: solid 1px #eee;
-    padding: 0em 1em 0em;
-  }
-  button {
-    border-radius: 3px;
-    text-transform: uppercase;
-    width: 49%;
-    font-size: 1.05em;
-    letter-spacing: 0.03em;
-    flex: 1 1 auto;
-    text-align: center;
-    margin: 0px;
-    padding: 1.1em 0;
-    font-weight: 400;
-    span {
+    .swal-title {
+      color: rgba(0,0,0,.65);
+      background-color: #ffffff;
+      margin: 0;
+      font-weight: bold;
+      text-transform: none;
+      position: relative;
       display: block;
-      font-size: 0.7em;
-      margin-top: -2px;
-      opacity: 0.65;
-      text-transform: lowercase;
+      padding: 1.5em 1em 0.5em 1em;
+      font-size: 15px;
+      line-height: normal;
+      text-align: inherit;
+      margin: 0;
     }
-  }
+    .swal-text {
+      background-color: #ffffff;
+      float: none;
+      margin: 0;
+      text-align: inherit;
+      color: #797979;
+      font-size: 13.5px;
+      line-height: 1.6em;
+      padding: 16px 14px 24px;
+      min-width: 100%;
+    }
+    .swal-footer {
+      background-color: #ffffff;
+      display: flex;
+      text-align: center;
+      padding: 13px;
+      margin: 0;
+      padding: 0;
+      border: solid 1px #eee;
+
+      .swal-button-container {
+        margin: 0px;
+        text-transform: uppercase;
+        font-size: 1.05em;
+        letter-spacing: 0.03em;
+        text-align: center;
+        font-weight: 400;
+        flex: 1 1 100%;
+        padding: 0;
+
+        button {
+          width: 100%;
+          text-transform: uppercase;
+
+          &.swal-button {
+            letter-spacing: 0.03em;
+            font-weight: 400;
+          }
+
+          &.swal-button--confirm {
+            transition: all 150ms ease-in-out ;
+            color: $component-dialog-alert-confirm-color;
+            transition: all 150ms ease-in-out;
+            background-color: transparent;
+            box-shadow: none;
+            border-radius: 0 0 3px 0;
+
+            &:hover{
+              color: $component-dialog-alert-confirm-hover-color !important;
+            }
+          }
+
+          &.swal-button--cancel {
+            background-color: $btnDefaultBg;
+            color: $btnDefaultTxt;
+            transition : all 200ms ease-in-out;
+            margin: 0px;
+            border-right: solid 1px #eee;
+            border-radius: 0 0 0 3px;
+
+            &:hover {
+              background-color: transparent;
+              color: $btnDefaultTxtHover;
+            }
+          }
+        }
+      }
+    }
+
   .sa-icon {
     margin: 30px auto;
-  }
-}
-
-button.cancel {
-  background-color: $btnDefaultBg !important;
-  color: $btnDefaultTxt;
-  transition : all 200ms ease-in-out;
-  margin: 0px;
-  border-right: solid 1px #eee;
-  &:hover {
-    background-color: transparent;
-    color: $btnDefaultTxtHover;
-  }
-}
-
-button.confirm {
-  transition: all 150ms ease-in-out ;
-  color: $component-dialog-alert-confirm-color;
-  transition: all 150ms ease-in-out;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  &:hover{
-    color: $component-dialog-alert-confirm-hover-color;
   }
 }
 

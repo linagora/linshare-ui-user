@@ -57,21 +57,24 @@
     function dialogConfirmation(sentences, type) {
       var currentType = type || service.dialogType.info;
 
-      return $q(function(resolve) {
-        swal({
-          title: sentences.title,
-          text: sentences.text,
-          type: currentType,
-          showCancelButton: true,
-          confirmButtonText: sentences.buttons.confirm,
-          cancelButtonText: sentences.buttons.cancel,
-          closeOnConfirm: true,
-          closeOnCancel: true
-        }, function(isConfirm) {
-          if (isConfirm) {
-            return resolve();
-          }
-        });
+      const cancelButton = {
+        text: sentences.buttons.cancel,
+        closeModal: true,
+        visible: true
+      };
+
+      const confirmButton = {
+        text: sentences.buttons.confirm,
+        closeModal: true,
+        visible: true
+      };
+
+      return swal({
+        title: sentences.title,
+        text: sentences.text,
+        icon: currentType,
+        buttons: [cancelButton, confirmButton],
+        className: 'sweet-alert'
       });
     }
 

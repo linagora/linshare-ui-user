@@ -15,7 +15,7 @@
   uploadQueueController.$inject = [
     '_', '$log', '$q', '$scope', '$state', '$timeout', '$transition$', '$translate',
     'authenticationRestService', 'flowUploadService', 'functionalityRestService',
-    'lsAppConfig', 'swal', 'toastService'
+    'lsAppConfig', 'swal', 'toastService', 'dialogService'
   ];
 
   /**
@@ -27,7 +27,7 @@
 
   function uploadQueueController(_, $log, $q, $scope, $state, $timeout, $transition$, $translate,
     authenticationRestService, flowUploadService,
-    functionalityRestService, lsAppConfig, swal, toastService) {
+    functionalityRestService, lsAppConfig, swal, toastService, dialogService) {
     /* jshint validthis:true */
     var uploadQueueVm = this;
     var idUpload = $transition$.idUpload;
@@ -181,23 +181,22 @@
       }
 
       //TODO - TO REMOVE: Deprecated use md-dialog from angular material
-      swal({
-        html: true,
+
+      const sentences = {
         title: title,
         text: message,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: uploadQueueVm.warningContinueMainButton,
-        cancelButtonText: uploadQueueVm.warningCancel,
-        closeOnConfirm: true,
-        closeOnCancel: true
-      },
-      function(isConfirm) {
-        if (isConfirm) {
-          continueShareAction(executeShare, shareType);
+        buttons: {
+          cancel: uploadQueueVm.warningCancel,
+          confirm: uploadQueueVm.warningContinueMainButton
         }
-      }
-      );
+      };
+
+      dialogService.dialogConfirmation(sentences, 'warning')
+        .then(isConfirmed => {
+          if (isConfirmed) {
+            continueShareAction(executeShare, shareType);
+          }
+        });
     }
 
     /**
