@@ -259,8 +259,13 @@ function uploadRequestGroupsController(
           .filter(promise => promise.state === 'rejected')
           .map(reject => reject.reason);
 
-        _.remove(uploadRequestGroupsVm.itemsList, item => closedRequests.some(request => request.uuid === item.uuid));
-        _.remove(uploadRequestGroupsVm.selectedUploadRequests, selected => closedRequests.some(request => request.uuid === selected.uuid));
+        uploadRequestGroupsVm.itemsList.forEach((item, index) => {
+          const isFound = closedRequests.find(request => request.uuid === item.uuid);
+
+          if (isFound) {
+            uploadRequestGroupsVm.itemsList[index].status = 'CLOSED';
+          }
+        });
 
         uploadRequestGroupsVm.tableParams.reload();
 
