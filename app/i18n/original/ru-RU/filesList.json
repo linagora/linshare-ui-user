@@ -14,6 +14,7 @@
     "BACKGROUND_WORKGROUP_TITLE_MSG": "Рабочие группы",
     "BACKGROUND_WORKGROUP_MSG": "Создавайте рабочие группы для обмена файлами с вашими коллегами",
     "FILE_DIRECTORY_DIALOG": {
+      "ENTER_FOLDER_NAME": "Введите здесь имя вашей папки",
       "CANCEL": "Отменить",
       "COPY_HERE": "Копировать сюда",
       "MOVE_HERE": "Перенести сюда",

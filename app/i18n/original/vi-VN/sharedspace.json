@@ -49,5 +49,7 @@
     "COMMENT": "Tải lên và thêm thành viên, để cộng tác với họ.",
     "TITLE_VERSION": "TRANSLATE ME!",
     "COMMENT_VERSION": "TRANSLATE ME!"
-  }
+  },
+  "CREATE_NEW_WORKGROUP": "Tạo nhóm làm việc mới",
+  "CREATE_NEW_FOLDER": "Tạo thư mục mới"
 }

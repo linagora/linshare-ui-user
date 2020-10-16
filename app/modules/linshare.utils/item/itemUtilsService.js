@@ -68,7 +68,9 @@
         isNameValid: isNameValid,
         itemNumber: itemNumber,
         itemUtilsConstant: itemUtilsConstant,
-        rename: rename
+        rename: rename,
+        popDialogAndCreate: popDialogAndCreate,
+        create: create
       };
 
     return service;
@@ -340,6 +342,40 @@
 
             return error;
           });
+      }
+    }
+
+    /**
+     * @name popDialogAndCreate
+     * @desc pop out a dialog to enter input and create item if input is valid
+     * @param {Object} item - Item manipulated
+     * @param {string} selector - Query selector of the item to rename
+     * @memberOf linshare.utils.itemUtilsService
+     */
+    function popDialogAndCreate(item, dialogName) {
+      const initialName = item.name.trim();
+
+      return dialogService.dialogInput({
+        title: dialogName,
+        initialValue: initialName
+      })
+        .then(result => create(result.trim(), item));
+    }
+
+    /**
+     * @name create
+     * @desc create item if name is valid
+     * @param {string} name - Item name
+     * @param {Object} item - Item manipulated
+     * @memberOf linshare.utils.itemUtilsService
+     */
+    function create(name, item) {
+      if (isNameValid(name)) {
+        item.name = name;
+
+        return item.save()
+          .then(data => Object.assign(item, data))
+          .catch(error => error);
       }
     }
   }

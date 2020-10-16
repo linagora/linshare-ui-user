@@ -237,12 +237,11 @@
         });
 
         contactsListsListVm.canCreate = false;
-        contactsListsListVm.itemsList.push(item);
-        contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
-        contactsListsListVm.tableParams.reload();
-        $timeout(function() {
-          renameContactsList(item, 'td[uuid=""] .file-name-disp');
-        }, 0);
+        popDialogAndCreateContactList(item).then(() => {
+          contactsListsListVm.itemsList.push(item);
+          contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
+          contactsListsListVm.tableParams.reload();
+        });
       }
     }
 
@@ -490,6 +489,22 @@
           }
         })
         .finally(contactsListsListVm.tableParams.reload);
+    }
+
+    /**
+     * @name popDialogAndCreateContactList
+     * @desc pop dialog and create new contactsList
+     * @param {Object} item - original contactsList
+     * @returns {Promise} Response of the server
+     * @memberOf LinShare.contactsLists.contactsListsListController
+     */
+    function popDialogAndCreateContactList(item) {
+      return itemUtilsService
+        .popDialogAndCreate(item, 'CONTACTS_LISTS_ACTION.CREATE_NEW')
+        .then(function(newItemDetails) {
+          item = _.assign(item, newItemDetails);
+          contactsListsListVm.canCreate = true;
+        });
     }
 
     /**

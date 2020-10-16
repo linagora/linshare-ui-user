@@ -308,13 +308,26 @@
             newFolderObject.parent = data.parent;
             newFolderObject.type = data.type;
             workgroupNodesVm.canCreateFolder = false;
-            workgroupNodesVm.nodesList.push(newFolderObject);
-            workgroupNodesVm.tableParamsService.reloadTableParams();
-            $timeout(function() {
-              renameNode(newFolderObject, 'td[uuid=""] .file-name-disp');
-            }, 0);
+            popDialogAndCreateFolder(newFolderObject, 'CREATE_NEW_FOLDER').then(() => {
+              workgroupNodesVm.nodesList.push(newFolderObject);
+              workgroupNodesVm.tableParamsService.reloadTableParams();
+            });
           });
       }
+    }
+
+    /**
+     * @name popDialogAndCreateFolder
+     * @desc pop dialog and create a folder
+     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+     */
+    function popDialogAndCreateFolder(item) {
+      return documentUtilsService.popDialogAndCreate(item, 'CREATE_NEW_FOLDER').then(function(data) {
+        var changedNodePos = _.findIndex(workgroupNodesVm.nodesList, item);
+
+        workgroupNodesVm.nodesList[changedNodePos] = data;
+        workgroupNodesVm.canCreateFolder = true;
+      });
     }
 
     /**

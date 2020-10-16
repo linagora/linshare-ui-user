@@ -7,6 +7,7 @@
   "CONTACTS_LISTS_ACTION": {
     "ADD_DESCRIPTION": "Ajoutez une description",
     "CREATE_CONTACTS_LIST": "Créer une liste de contacts",
+    "CREATE_NEW": "Créer une nouvelle liste de contacts",
     "FILTER_BY": {
       "ALL_LISTS": "Toutes les listes",
       "MY_LISTS": "Mes listes",

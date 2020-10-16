@@ -14,6 +14,7 @@
   "BREADCRUMB_ISOLATE": "Isolation mode",
   "BREADCRUMB_TITLE": "My files",
   "FILE_DIRECTORY_DIALOG": {
+    "ENTER_FOLDER_NAME": "Enter your folder name here",
     "CANCEL": "Cancel",
     "COPY_HERE": "Copy here",
     "MOVE_HERE": "Move here",

@@ -6,6 +6,7 @@
   "CONTACTS_LISTS_ACTION": {
     "ADD_DESCRIPTION": "Thêm một mô tả",
     "CREATE_CONTACTS_LIST": "Tạo danh sách liên hệ",
+    "CREATE_NEW": "Tạo danh sách liên hệ mới",
     "FILTER_BY": {
       "ALL_LISTS": "Tất cả danh sách",
       "MY_LISTS": "Danh sách của tôi",

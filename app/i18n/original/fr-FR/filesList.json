@@ -14,6 +14,7 @@
   "BACKGROUND_WORKGROUP_TITLE_MSG": "GROUPES DE TRAVAIL",
   "BACKGROUND_WORKGROUP_MSG": "Créer des groupes de travail pour échanger des fichiers avec vos collègues.",
   "FILE_DIRECTORY_DIALOG": {
+    "ENTER_FOLDER_NAME": "Entrez le nom de votre dossier ici",
     "CANCEL": "Annuler",
     "COPY_HERE": "Copier ici",
     "MOVE_HERE": "Déplacer ici",

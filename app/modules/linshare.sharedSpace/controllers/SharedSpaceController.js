@@ -366,11 +366,34 @@ angular.module('linshare.sharedSpace')
         });
 
         thisctrl.canCreate = false;
-        thisctrl.itemsList.push(workgroup);
-        thisctrl.tableParams.reload();
-        $timeout(function() {
-          renameFolder(workgroup, 'td[uuid=""] .file-name-disp');
-        }, 0);
+        popDialogAndCreateFolder(workgroup).then(() => {
+          thisctrl.itemsList.push(workgroup);
+          thisctrl.tableParams.reload();
+        });
       }
+    }
+
+    function popDialogAndCreateFolder(item) {
+      return itemUtilsService.popDialogAndCreate(
+        Object.assign(item), 'CREATE_NEW_WORKGROUP'
+      )
+        .then(function(newItemDetails) {
+          item = _.assign(item, newItemDetails);
+          thisctrl.canCreate = true;
+          
+          return workgroupRestService.get(item.uuid, true, true);
+        })
+        .then(function(newItemDetailsWithRole) {
+          item = _.assign(item, newItemDetailsWithRole);
+          
+          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
+        })
+        .then(function(workgroupsPermissions) {
+          thisctrl.permissions = Object.assign(
+            {},
+            thisctrl.permissions,
+            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
+          );
+        });
     }
   });

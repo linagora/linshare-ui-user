@@ -13,6 +13,7 @@
   "BACKGROUND_WORKGROUP_TITLE_MSG": "NHÓM",
   "BACKGROUND_WORKGROUP_MSG": "Tạo một nhóm để trao đổi tệp giữa các đồng nghiệp",
   "FILE_DIRECTORY_DIALOG": {
+    "ENTER_FOLDER_NAME": "Nhập tên thư mục của bạn tại đây",
     "CANCEL": "Hủy",
     "COPY_HERE": "Sao chép ở đây",
     "MOVE_HERE": "Chuyển đến đây",

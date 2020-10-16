@@ -48,5 +48,7 @@
     "COMMENT": "Upload and add members, to collaborate with them.",
     "TITLE_VERSION": "Upload your file's versions",
     "COMMENT_VERSION": "Upload your file's versions and see your file history."
-  }
+  },
+  "CREATE_NEW_WORKGROUP": "Create new workgroup",
+  "CREATE_NEW_FOLDER": "Create new folder"
 }
