@@ -377,18 +377,18 @@ angular.module('linshare.sharedSpace')
       return itemUtilsService.popDialogAndCreate(
         Object.assign(item), 'CREATE_NEW_WORKGROUP'
       )
-        .then(function(newItemDetails) {
+        .then(newItemDetails => {
           item = _.assign(item, newItemDetails);
           thisctrl.canCreate = true;
           
           return workgroupRestService.get(item.uuid, true, true);
         })
-        .then(function(newItemDetailsWithRole) {
+        .then(newItemDetailsWithRole => {
           item = _.assign(item, newItemDetailsWithRole);
           
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         })
-        .then(function(workgroupsPermissions) {
+        .then(workgroupsPermissions => {
           thisctrl.permissions = Object.assign(
             {},
             thisctrl.permissions,

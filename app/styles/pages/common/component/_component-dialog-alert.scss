@@ -170,6 +170,7 @@ FILE DIRECTORY DIALOG
   #lv-dialog-content-ctn {
     padding: 0;
     flex: 1 1 100%;
+    overflow: hidden;
     .lv-tem {
       display: flex;
       justify-content: center;
@@ -186,6 +187,7 @@ FILE DIRECTORY DIALOG
     .lv-ctn {
       max-height: 270px;
       overflow-y: auto;
+      padding-bottom: 50px;
     }
     .lv-icon-ctn {
       font-size: 1.25em;
@@ -197,6 +199,39 @@ FILE DIRECTORY DIALOG
       p {
         margin: 0;
         font-size: 0.9em;
+      }
+    }
+    .lv-create-input {
+      border: 0;
+      outline: none;
+      background: inherit;
+      width: 100%;
+    }
+    .lv-create-item-container {
+      cursor: auto;
+      transition: all 0.1s ease-in-out;
+    }
+    .lv-create-item-container-show {
+      height: 35px;
+    }
+    .lv-create-item-container-hide {
+      height: 0 !important;
+      overflow: hidden;
+    }
+    .lv-actions-container {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      .fa {
+        font-size: 16px;
+        padding: 0px 5px;
+        cursor: pointer;
+      }
+      .fa-check {
+        color: #05B1FF;
+      }
+      .fa-times {
+        color: #696969;
       }
     }
     .lv-actions-link {
@@ -262,13 +297,14 @@ FILE DIRECTORY DIALOG
 }
 
 md-dialog.custom-dialog {
+  min-width: 360px;
   md-toolbar {
     min-height: 55px;
     max-height: 55px;
     flex: 0 0 55px;
 
     .md-toolbar-tools {
-      background-color: $component-dialog-alert-md-toolbar-background-color;
+      background-color: $primary-color;
       width: 100%;
       padding: 0 14px;
       h2 {
@@ -347,9 +383,10 @@ md-dialog.custom-dialog {
   }
 
   md-dialog.custom-dialog {
+    min-width: auto;
     md-toolbar {
       border-radius: 0;
-      background-color: $component-dialog-alert-md-toolbar-background-color !important;
+      background-color: $primary-color !important;
     }
 
     .md-toolbar-tools {

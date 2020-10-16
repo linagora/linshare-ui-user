@@ -51,16 +51,19 @@
   ) {
     /* jshint validthis:true */
     var browseVm = this;
-    var newFolderName;
     const TYPE_FOLDER = 'FOLDER';
     const TYPE_DOCUMENT = 'DOCUMENT';
 
     browseVm.TYPE_FOLDER = TYPE_FOLDER;
     browseVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
+    browseVm.displayCreateInput = false;
+    browseVm.newFolderName = '';
     browseVm.createFolder = createFolder;
     browseVm.disableFolder = disableFolder;
     browseVm.goToFolder = goToFolder;
     browseVm.handleActionOnNodeSelection = handleActionOnNodeSelection;
+    browseVm.showCreateFolderInput = showCreateFolderInput;
+    browseVm.hideCreateFolderInput = hideCreateFolderInput;
 
     activate();
 
@@ -86,12 +89,6 @@
             (browseVm.isSharedSpace && browseVm.canCreateWorkGroup) ||
             (!browseVm.isSharedSpace);
         });
-
-      $translate([
-        'ACTION.NEW_FOLDER'
-      ]).then(function(translations) {
-        newFolderName = translations['ACTION.NEW_FOLDER'];
-      });
 
       loadBrowseList();
 
@@ -124,32 +121,6 @@
             targetNode: node
           });
         });
-    }
-
-    /**
-     * @name createFolder
-     * @desc Create a folder
-     * @memberOf linshare.components.BrowseController
-     */
-    // TODO : a service to harmonize with workgroupNodesController's createFolder()
-    function createFolder() {
-      if (browseVm.canCreateFolder) {
-        var newFolderObject = browseVm.restService.restangularize({
-          name: newFolderName,
-          parent: browseVm.currentFolder.uuid,
-          type: TYPE_FOLDER
-        }, browseVm.currentFolder.workGroup);
-
-        browseVm.restService.create(browseVm.currentFolder.workGroup, newFolderObject, true)
-          .then(function(data) {
-            newFolderObject.name = data.name;
-            browseVm.canCreateFolder = false;
-            browseVm.currentList.unshift(newFolderObject);
-            $timeout(function() {
-              renameNode(newFolderObject, 'div[uuid=""] .file-name-disp');
-            }, 0);
-          });
-      }
     }
 
     /**
@@ -224,6 +195,8 @@
       if (!browseVm.canCreateFolder) {
         return;
       }
+
+      hideCreateFolderInput();
 
       if (browseVm.isSharedSpace) {
         browseVm.restService = workgroupNodesRestService;
@@ -327,44 +300,6 @@
     }
 
     /**
-     * @name renameNode
-     * @desc Rename node name
-     * @param {object} nodeToRename - Node to rename
-     * @param {string} [itemNameElem] - Name of the item in view which is in edition mode
-     * @memberOf linshare.components.BrowseController
-     */
-    function renameNode(nodeToRename, itemNameElem) {
-      itemNameElem = itemNameElem || 'div[uuid=' + nodeToRename.uuid + '] .file-name-disp';
-      itemUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
-        var changedNodePos = _.findIndex(browseVm.currentList, nodeToRename);
-
-        browseVm.currentList[changedNodePos] = data;
-        if (nodeToRename.name !== data.name) {
-          $timeout(function() {
-            renameNode(data, 'div[uuid=' + data.uuid + '] .file-name-disp');
-            toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
-          }, 0);
-        } else {
-          browseVm.canCreateFolder = true;
-        }
-      }).catch(function(error) {
-        switch(error.data.errCode) {
-          case 26445 :
-          case 28005 :
-            toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
-            renameNode(nodeToRename, itemNameElem);
-            break;
-          case lsErrorCode.CANCELLED_BY_USER :
-            if (!nodeToRename.uuid) {
-              browseVm.currentList.shift(_.findIndex(browseVm.currentList, nodeToRename), 1);
-            }
-            browseVm.canCreateFolder = true;
-            break;
-        }
-      });
-    }
-
-    /**
      * @name handleActionOnNodeSelection
      * @desc handle selection of a node and dispatch to the action bind to the node type
      * @param {WorkgroupNode} node - The selected node
@@ -375,6 +310,54 @@
         addVersion(node);
       } else {
         goToFolder(node);
+      }
+    }
+
+    /**
+     * @name showCreateFolderInput
+     * @desc show create new folder input
+     * @memberOf linshare.components.BrowseController
+     */
+    function showCreateFolderInput() {
+      browseVm.displayCreateInput = true;
+      const offsetTop = $('#js-lv-create-new-folder').offset().top;
+      
+      if (offsetTop < 0) {
+        $('#lv-dialog-content-ctn .lv-ctn').animate({
+          'scrollTop': $('#js-lv-create-new-folder').offset().top
+        }, 300);
+      }
+      $('#js-lv-create-new-folder input').trigger('focus');
+    }
+
+    /**
+     * @name hideCreateFolderInput
+     * @desc hide create new folder input
+     * @memberOf linshare.components.BrowseController
+     */
+    function hideCreateFolderInput() {
+      browseVm.newFolderName = '';
+      browseVm.displayCreateInput = false;
+    }
+
+    /**
+     * @name createFolder
+     * @desc Create a folder
+     * @memberOf linshare.components.BrowseController
+     */
+    function createFolder() {
+      if (browseVm.canCreateFolder && itemUtilsService.isNameValid(browseVm.newFolderName)) {
+        const newFolderObject = browseVm.restService.restangularize({
+          name: browseVm.newFolderName,
+          parent: browseVm.currentFolder.uuid,
+          type: TYPE_FOLDER
+        }, browseVm.currentFolder.workGroup);
+
+        browseVm.restService.create(browseVm.currentFolder.workGroup, newFolderObject, false)
+          .then(() => {
+            browseVm.currentList.unshift(newFolderObject);
+            hideCreateFolderInput();
+          });
       }
     }
   }

@@ -374,8 +374,7 @@
         item.name = name;
 
         return item.save()
-          .then(data => Object.assign(item, data))
-          .catch(error => error);
+          .then(data => Object.assign(item, data));
       }
     }
   }

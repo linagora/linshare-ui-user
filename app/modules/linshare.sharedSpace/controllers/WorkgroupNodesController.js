@@ -322,10 +322,7 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function popDialogAndCreateFolder(item) {
-      return documentUtilsService.popDialogAndCreate(item, 'CREATE_NEW_FOLDER').then(function(data) {
-        var changedNodePos = _.findIndex(workgroupNodesVm.nodesList, item);
-
-        workgroupNodesVm.nodesList[changedNodePos] = data;
+      return documentUtilsService.popDialogAndCreate(item, 'CREATE_NEW_FOLDER').then(() => {
         workgroupNodesVm.canCreateFolder = true;
       });
     }
