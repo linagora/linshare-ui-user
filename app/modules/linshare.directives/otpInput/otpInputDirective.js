@@ -3,6 +3,8 @@ angular.module('linshare.directives')
 
 otpInput.$inject = ['$timeout'];
 
+const TIMEOUT_MILLISECONDS = 20;
+
 function otpInput($timeout) {
   return {
     restrict: 'E',
@@ -24,7 +26,7 @@ function otpInput($timeout) {
       $scope.onKeyUp = function(index, event) {
         const key = event.key;
 
-        if ($scope.characters[index].value.length > 0 && isNumberKey(key)) {
+        if ($scope.characters[index].value && isNumberKey(key)) {
           setOtpValue();
           if (index !== size - 1) {
             $timeout(() => {
@@ -32,7 +34,7 @@ function otpInput($timeout) {
               if ($scope.characters[index + 1].value) {
                 elementArr[index + 1][0].select();
               }
-            }, 50);
+            }, TIMEOUT_MILLISECONDS);
           }
         }
       };
@@ -48,21 +50,26 @@ function otpInput($timeout) {
             if ($scope.characters[index + 1].value) {
               elementArr[index + 1][0].select();
             }
-          }, 50);
+          }, TIMEOUT_MILLISECONDS);
         } else if (key === 37 && index !== 0) {
           $timeout(() => {
             elementArr[index - 1][0].focus();
             if ($scope.characters[index - 1].value) {
               elementArr[index - 1][0].select();
             }
-          }, 50);
+          }, TIMEOUT_MILLISECONDS);
         } else if (key === 8 && index !== 0) {
           $timeout(() => {
             elementArr[index - 1][0].focus();
             if ($scope.characters[index - 1].value) {
               elementArr[index - 1][0].select();
             }
-          }, 50);
+          }, TIMEOUT_MILLISECONDS);
+        } else if (isNumberKey(event.key) && index === size - 1) {
+          // Lose focus on last input
+          $timeout(() => {
+            elementArr[index][0].blur();
+          }, TIMEOUT_MILLISECONDS);
         }
       };
 
@@ -116,7 +123,7 @@ function otpInput($timeout) {
           } else {
             elementArr[size - 1][0].focus();
           }
-        }, 50);
+        }, TIMEOUT_MILLISECONDS);
 
         setOtpValue();
       }
