@@ -201,3 +201,78 @@
     font-size: 0.95em;
   }
 }
+
+/**********************
+ PASSWORD MODAL STYLE
+***********************/
+.anonymous-url-password-modal {
+  $width: 350px;
+  $padding: 17px;
+
+  background-color: white;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  width: $width;
+  padding: 0;
+  border-radius: 5px;
+  text-align: center;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -$width/2;
+  margin-top: -200px;
+
+  overflow: hidden;
+  z-index: 99999;
+
+  h2 {
+    color: #575757;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: left;
+    padding: 28px 22.5px 14.3px;
+    margin: 0;
+  }
+
+  p {
+    text-align: left;
+    padding: 0 22.5px 15px;
+    font-size: 1.05em;
+    font-weight: 300;
+    color: #797979;
+  }
+
+  .form-group {
+    padding: 0 22.5px 30px;
+  }
+
+  .password-modal-header {
+    height: 150px;
+    background-color: #3fa9ff;
+  }
+
+  .password-modal-button-container {
+    background-color: #fff;
+    border: solid 1px #eee;
+    padding: 0em 1em 0em;
+  }
+
+  button {
+    $btnBlue: #2195f3;
+
+    border: none;
+    background-color: #ffffff;
+    color: #2195f3;
+    display: inline-block;
+    font-size: 13.65px;
+    font-weight: 400;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    padding: 15px 0;
+    width: 322px;
+
+    &:hover {
+      color: darken(#2195f3, 5%);
+    }
+  }
+}

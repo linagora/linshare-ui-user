@@ -124,29 +124,6 @@
   }
 }
 
-/**** error style **/
-.sweet-alert {
-  .sa-icon.sa-error {
-    border-color: $component-dialog-alert-sweet-alert-sa-error-background-color;
-  }
-  .sa-icon.sa-error .sa-line {
-    position: absolute;
-    height: 5px;
-    width: 47px;
-    background-color: $component-dialog-alert-sweet-alert-sa-error-background-color;
-    display: block;
-    top: 37px;
-    border-radius: 2px;
-  }
-}
-
-/**** info style **/
-.sweet-alert {
-  .sa-icon.sa-info::after{
-    left: 50%;
-  }
-}
-
 @media (max-width: 540px) {
   .sweet-alert {
     width: auto;
