@@ -10,7 +10,9 @@
     },
     "CREATION_TYPE": {
       "COLLECTIVE": "Tải lên nhóm",
-      "INDIVIDUAL": "Tải lên cá nhân"
+      "INDIVIDUAL": "Tải lên cá nhân",
+      "COLLECTIVE_TOOLTIP": "Trong yêu cầu tải lên được chia sẻ, người nhận chia sẻ nội dung tải lên và do đó có thể xem tài liệu của các thành viên khác.",
+      "INDIVIDUAL_TOOLTIP": "Trong yêu cầu tải lên hàng loạt cá nhân, mỗi người nhận có không gian tải lên cá nhân của riêng họ mà các thành viên khác không có quyền truy cập."
     },
     "FORM_CREATE": {
       "SINGULAR_TITLE": "Yêu cầu tải lên",

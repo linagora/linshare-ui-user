@@ -10,7 +10,9 @@
     },
     "CREATION_TYPE": {
       "COLLECTIVE": "Collective upload",
-      "INDIVIDUAL": "Individual upload"
+      "INDIVIDUAL": "Individual upload",
+      "COLLECTIVE_TOOLTIP": "In a shared upload request, the recipients share the upload space and can thus see the other members' documents.",
+      "INDIVIDUAL_TOOLTIP": "In a mass individual upload request, each recipient has his own personal upload space which the other members don't have access to."
     },
     "FORM_CREATE": {
       "SINGULAR_TITLE": "Upload Request",
