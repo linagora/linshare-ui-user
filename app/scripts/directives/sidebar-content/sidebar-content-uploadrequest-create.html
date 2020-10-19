@@ -132,18 +132,13 @@
                             UPLOAD_REQUESTS.ERROR.SUBJECT_REQUIRED
                            </span>
                         </div>
-                        <div class="form-group fg-line" ng-class="{'has-error' : ((uploadRequestForm.message.$touched ||uploadRequestForm.$submitted)
-                          && uploadRequestForm.message.$invalid)}">
+                        <div class="form-group fg-line">
                           <textarea class="form-control comment" rows="5"
                             placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
                             ng-model="mainVm.sidebar.getData().uploadRequestObject.message"
                             name="message"
-                            required
                           >
                           </textarea>
-                          <span ng-show="(uploadRequestForm.message.$touched ||uploadRequestForm.$submitted) && uploadRequestForm.message.$invalid" translate>
-                            UPLOAD_REQUESTS.ERROR.BODY_REQUIRED
-                          </span>
                         </div>
                       </div>
                     </div>
