@@ -35,6 +35,14 @@ function otpInput($timeout) {
                 elementArr[index + 1][0].select();
               }
             }, TIMEOUT_MILLISECONDS);
+          } else {
+            // Lose focus on last input
+            $timeout(() => {
+              elementArr[index][0].blur();
+              if (options.submitSelector) {
+                $(options.submitSelector).trigger('focus');
+              }
+            }, TIMEOUT_MILLISECONDS * 2);
           }
         }
       };
@@ -64,11 +72,6 @@ function otpInput($timeout) {
             if ($scope.characters[index - 1].value) {
               elementArr[index - 1][0].select();
             }
-          }, TIMEOUT_MILLISECONDS);
-        } else if (isNumberKey(event.key) && index === size - 1) {
-          // Lose focus on last input
-          $timeout(() => {
-            elementArr[index][0].blur();
           }, TIMEOUT_MILLISECONDS);
         }
       };

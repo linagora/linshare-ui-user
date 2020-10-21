@@ -49,9 +49,9 @@
           </div>
           <form class="form-horizontal" data-ng-submit="secondFactorAuthenticationLoginVm.submitForm()" role="form">
             <div class="otp-form-group">
-              <otp-input options="{autoFocus: true}" value="secondFactorAuthenticationLoginVm.otp"/>
+              <otp-input options="{autoFocus: true, submitSelector: '#form-otp-submit'}" value="secondFactorAuthenticationLoginVm.otp"/>
             </div>
-            <button class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate}}</button>
+            <button id='form-otp-submit' class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate}}</button>
           </form>
         </div>
       </div>
