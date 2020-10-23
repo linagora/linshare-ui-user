@@ -37,7 +37,8 @@ function uploadRequestUtilsService($timeout, $q, $translate, dialogService, toas
           confirm: promises[1]['ACTION.PROCEED'],
           cancel: promises[1]['NAVIGATION.CANCEL']
         }
-      }, 'warning'));
+      }, 'warning'))
+      .then(isConfirmed => !!isConfirmed || $q.reject());
   }
 
   function archiveConfirmOptionDialog() {
