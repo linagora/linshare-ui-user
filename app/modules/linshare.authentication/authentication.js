@@ -17,3 +17,5 @@ require('./constants');
 require('./controllers/authenticationController');
 require('./services/authenticationRestService');
 require('./services/authenticationUtilsService');
+require('./services/oidcSettings');
+require('./services/oidcService');

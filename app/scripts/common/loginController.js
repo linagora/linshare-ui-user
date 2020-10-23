@@ -13,7 +13,8 @@
     '$translate',
     'authenticationRestService',
     'lsAppConfig',
-    'toastService'
+    'toastService',
+    'oidcService'
   ];
 
   /**
@@ -21,7 +22,7 @@
    * @desc Manage login page
    * @memberOf linshareUiUserApp
    */
-  function loginController($translate, authenticationRestService, lsAppConfig, toastService) {
+  function loginController($translate, authenticationRestService, lsAppConfig, toastService, oidcService) {
     /* jshint validthis: true */
     var loginVm = this;
 
@@ -29,6 +30,7 @@
     loginVm.lsAppConfig = lsAppConfig;
     loginVm.password = '';
     loginVm.submitForm = submitForm;
+    loginVm.loginSSO = loginSSO;
 
     activate();
 
@@ -58,6 +60,10 @@
             }
           });
         });
+    }
+
+    function loginSSO() {
+      oidcService.signInRedirect();
     }
   }
 })();

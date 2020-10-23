@@ -246,6 +246,20 @@ div {
     border-radius: 5px;
     background-color: $primary-color !important;
   }
+
+  .login-sso-btn {
+    font-size: 1.3em;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 1.2em;
+  }
+
+  .login-sso-separate {
+    padding: 10px;
+    font-size: 14px;
+  }
+
   .header-login-form {
     background-color: #F9F9F9;
     -webkit-border-top-left-radius: 10px;

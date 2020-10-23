@@ -82,6 +82,13 @@
           }
         }
       })
+      .state('oidc', {
+        url: '/oidc',
+        controller: 'oidcController',
+        params: {
+          loginRequired: false
+        }
+      })
       .state('documents', {
         parent: 'common',
         controller: 'documentsController',

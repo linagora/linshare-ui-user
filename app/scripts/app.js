@@ -52,6 +52,7 @@ require('./route');
 require('./run');
 
 require('./common/loginController');
+require('./common/oidcController');
 require('./common/uiUserMainController');
 require('./home/home');
 require('./services/functionalityRestService');

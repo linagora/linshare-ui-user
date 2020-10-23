@@ -201,7 +201,9 @@
       "ERROR": "Authentication failed, either the email or the password is invalid"
     },
     "PASSWORD_PLACEHOLDER": "Password",
-    "TAGLINE": "Secure file sharing app in open source"
+    "TAGLINE": "Secure file sharing app in open source",
+    "CONTINUE_WITH_SSO": "Continue with your SSO",
+    "OR": "Or"
   },
   "SECOND_FA_LOGIN": {
     "LOGIN_HEADER": "Second factor authentication",

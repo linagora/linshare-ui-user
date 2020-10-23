@@ -200,7 +200,9 @@
       "ERROR": "Xác thực không thành công, email hoặc mật khẩu không hợp lệ"
     },
     "PASSWORD_PLACEHOLDER": "Mật khẩu",
-    "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở"
+    "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở",
+    "CONTINUE_WITH_SSO": "Đăng nhập với SSO",
+    "OR": "Hoặc"
   },
   "SECOND_FA_LOGIN": {
     "LOGIN_HEADER": "Yếu tố xác thực thứ hai",

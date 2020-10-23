@@ -45,6 +45,7 @@
   function authenticationUtilsService(_) {
     return {
       buildHeader: buildHeader,
+      buildAccessTokenHeader: buildAccessTokenHeader,
       findError: findError
     };
 
@@ -60,6 +61,10 @@
       var header = { Authorization: 'Basic ' + Base64.Base64.encode(email + ':' + password) };
 
       return otp ? _.assign(header, { 'x-linShare-2fa-pin': otp }) : header;
+    }
+
+    function buildAccessTokenHeader(token) {
+      return { Authorization: 'Bearer ' + token };
     }
   }
 })();

@@ -52,6 +52,7 @@
         checkAuthentication: checkAuthentication,
         getCurrentUser: getCurrentUser,
         login: login,
+        loginWithAccessToken: loginWithAccessToken,
         logout: logout,
         version: version
       };
@@ -130,6 +131,39 @@
               loginInfo: { login: login, password: password }
             });
           }
+        }
+
+        return deferred.reject(foundError);
+      });
+
+      return deferred.promise;
+    }
+
+    /**
+     * @name loginWithAccessToken
+     * @desc Login with access token of the App
+     * @param {string} token - Access token of the user
+     * @return {Promise} server response
+     * @memberOf Linshare.authentication.authenticationRestService
+     */
+    function loginWithAccessToken(token) {
+      deferred = $q.defer();
+      $log.debug('AuthenticationRestService : loginSSO');
+
+      var headers = authenticationUtilsService.buildAccessTokenHeader(token);
+      var action = Restangular.all(restUrl)
+        .withHttpConfig({ ignoreAuthModule: true })
+        .customGET('authorized', {}, headers);
+
+      handler(action, null, true).then(function(user) {
+        authService.loginConfirmed(user);
+
+        return deferred.resolve(user);
+      }).catch(function(error) {
+        var foundError = authenticationUtilsService.findError(error);
+
+        if (foundError) {
+          toastService[foundError.notificationType]({ key: foundError.message });
         }
 
         return deferred.reject(foundError);
