@@ -241,6 +241,8 @@
           contactsListsListVm.itemsList.push(item);
           contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
           contactsListsListVm.tableParams.reload();
+        }).finally(() => {
+          contactsListsListVm.canCreate = true;
         });
       }
     }
@@ -503,7 +505,6 @@
         .popDialogAndCreate(item, 'CONTACTS_LISTS_ACTION.CREATE_NEW')
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
-          contactsListsListVm.canCreate = true;
         });
     }
 

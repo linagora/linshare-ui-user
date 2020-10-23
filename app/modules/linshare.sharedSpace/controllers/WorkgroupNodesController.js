@@ -294,6 +294,7 @@
      */
     function createFolder() {
       if (workgroupNodesVm.canCreateFolder) {
+        workgroupNodesVm.canCreateFolder = false;
         workgroupNodesVm.paramFilter.name = '';
         filterBoxService.setFilters(false);
         var newFolderObject = workgroupNodesRestService.restangularize({
@@ -307,11 +308,13 @@
             newFolderObject.name = data.name;
             newFolderObject.parent = data.parent;
             newFolderObject.type = data.type;
-            workgroupNodesVm.canCreateFolder = false;
             popDialogAndCreateFolder(newFolderObject, 'CREATE_NEW_FOLDER').then(() => {
               workgroupNodesVm.nodesList.push(newFolderObject);
               workgroupNodesVm.tableParamsService.reloadTableParams();
             });
+          })
+          .finally(() => {
+            workgroupNodesVm.canCreateFolder = true;
           });
       }
     }
@@ -322,9 +325,7 @@
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
     function popDialogAndCreateFolder(item) {
-      return documentUtilsService.popDialogAndCreate(item, 'CREATE_NEW_FOLDER').then(() => {
-        workgroupNodesVm.canCreateFolder = true;
-      });
+      return documentUtilsService.popDialogAndCreate(item, 'CREATE_NEW_FOLDER');
     }
 
     /**

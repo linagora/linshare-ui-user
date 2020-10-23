@@ -369,6 +369,8 @@ angular.module('linshare.sharedSpace')
         popDialogAndCreateFolder(workgroup).then(() => {
           thisctrl.itemsList.push(workgroup);
           thisctrl.tableParams.reload();
+        }).finally(() => {
+          thisctrl.canCreate = true;
         });
       }
     }
@@ -379,7 +381,6 @@ angular.module('linshare.sharedSpace')
       )
         .then(newItemDetails => {
           item = _.assign(item, newItemDetails);
-          thisctrl.canCreate = true;
           
           return workgroupRestService.get(item.uuid, true, true);
         })
