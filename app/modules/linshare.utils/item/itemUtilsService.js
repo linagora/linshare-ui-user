@@ -375,6 +375,8 @@
 
         return item.save()
           .then(data => Object.assign(item, data));
+      } else {
+        return $q.reject();
       }
     }
   }
