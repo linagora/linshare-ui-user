@@ -335,7 +335,8 @@
                           </a>
                         </li>
                         <li ng-if="uploadRequest.status === 'ARCHIVED'">
-                          <a translate-attr="{title: 'ACTION.DELETE'}" href="">
+                          <a translate-attr="{title: 'ACTION.DELETE'}" href=""
+                            ng-click="uploadRequestGroupsVm.removeArchivedUploadRequest([uploadRequest])">
                             <i class="zmdi zmdi-delete"></i>
                           </a>
                         </li>
@@ -396,7 +397,7 @@
                               </a>
                             </li>
                             <li ng-if="uploadRequest.status === 'ARCHIVED'">
-                              <a href="">
+                              <a href="" ng-click="uploadRequestGroupsVm.removeArchivedUploadRequest([uploadRequest])">
                                 <i class="zmdi zmdi-delete"></i>
                                 <span translate>ACTION.DELETE</span>
                               </a>
@@ -505,7 +506,9 @@
               </a>
             </span>
 
-            <span ng-if="uploadRequestGroupsVm.status === 'archived'">
+            <span ng-if="uploadRequestGroupsVm.status === 'archived'"
+              ng-click="uploadRequestGroupsVm.removeArchivedUploadRequest(uploadRequestGroupsVm.selectedUploadRequests)"
+            >
               <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
                 <i class="zmdi zmdi-delete"></i>
                 <span translate>ACTION.DELETE</span>

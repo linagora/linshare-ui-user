@@ -113,11 +113,11 @@
     "DIALOG": {
       "CANCELLATION": {
         "TITLE": "Hủy yêu cầu tải lên",
-        "TEXT": "Bạn chuẩn bị hủy {singular, select, true{1 yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
+        "TEXT": "Bạn chuẩn bị hủy {singular, select, true{yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
       },
       "CLOSE": {
         "TITLE": "Đóng yêu cầu tải lên",
-        "TEXT": "Bạn chuẩn bị đóng {singular, select, true{1 yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
+        "TEXT": "Bạn chuẩn bị đóng {singular, select, true{yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
       },
       "ARCHIVE": {
         "TITLE": "Lưu trữ yêu cầu tải lên",
@@ -127,6 +127,10 @@
           "CONFIRM": "Có",
           "CANCEL": "Không"
         }
+      },
+      "DELETE_ARCHIVED": {
+        "TITLE": "Xóa yêu cầu tải lên đã lưu trữ",
+        "TEXT": "Bạn chuẩn bị xóa {singular, select, true{yêu cầu tải lên đã lưu trữ} other{{nbItems} yêu cầu tải lên đã lưu trữ}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
       }
     },
     "TOAST_ALERT": {
@@ -141,6 +145,10 @@
       "ARCHIVE": {
         "ERROR": "Yêu cầu tải lên không được lưu trữ.",
         "INFO": "Yêu cầu tải lên đã được lưu trữ."
+      },
+      "DELETE_ARCHIVED": {
+        "ERROR": "{number} {singular, select, true{yêu cầu tải lên đã lưu trữ} other{yêu cầu tải lên đã lưu trữ}} không được xóa.",
+        "INFO": "{number} {singular, select, true{yêu cầu tải lên đã lưu trữ} other{yêu cầu tải lên đã lưu trữ}} đã được xóa."
       }
     }
   }

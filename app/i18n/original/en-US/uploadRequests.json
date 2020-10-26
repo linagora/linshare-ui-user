@@ -127,6 +127,10 @@
           "CONFIRM": "Yes",
           "CANCEL": "No"
         }
+      },
+      "DELETE_ARCHIVED": {
+        "TITLE": "Delete archived upload request",
+        "TEXT": "You are about to delete {singular, select, true{an archived upload request} other{{nbItems} archived upload requests}} ! Beware, this action cannot be undone."
       }
     },
     "TOAST_ALERT": {
@@ -141,6 +145,10 @@
       "ARCHIVE": {
         "ERROR": "Upload request has not been archived.",
         "INFO": "Upload request has been archived."
+      },
+      "DELETE_ARCHIVED": {
+        "ERROR": "{number} {singular, select, true{archived upload request has} other{archived upload requests have}} not been deleted.",
+        "INFO": "{number} {singular, select, true{archived upload request has} other{archived upload requests have}} been deleted."
       }
     }
   }

@@ -22,7 +22,6 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     create: create,
     get: get,
     list: list,
-    remove: remove,
     update: update,
     updateStatus: updateStatus,
     listUploadRequests: listUploadRequests
@@ -71,19 +70,6 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
       .all(restUrl)
       .getList({ status })
       .then(Restangular.stripRestangular));
-  }
-
-  /**
-   *  @name remove
-   *  @desc remove a UploadRequest object
-   *  @param {object} uploadRequestdto - The UploadRequest object
-   *  @returns {promise} server response
-   *  @memberof linshare.uploadRequests.uploadRequestGroupRestService
-   */
-  function remove(uploadRequestDto) {
-    $log.debug('uploadRequestGroupRestService : remove', uploadRequestDto);
-
-    return handler(Restangular.one(restUrl, uploadRequestDto.uuid).remove());
   }
 
   /**

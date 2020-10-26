@@ -68,6 +68,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.toggleSearchState = toggleSearchState;
     uploadRequestGroupsVm.currentSelectedDocument = {};
     uploadRequestGroupsVm.openUploadRequestGroup = openUploadRequestGroup;
+    uploadRequestGroupsVm.removeArchivedUploadRequest = removeArchivedUploadRequest;
     uploadRequestGroupsVm.fabButton = {
       toolbar: {
         activate: true,
@@ -297,6 +298,40 @@ function uploadRequestGroupsController(
       }).catch(err => {
         if (err) {
           showToastAlertFor('archive', 'error');
+        }
+      });
+  }
+
+  function removeArchivedUploadRequest(uploadRequests) {
+    openWarningDialogFor('delete_archived', uploadRequests)
+      .then(() => $q.allSettled(
+        uploadRequests.map(
+          request => uploadRequestGroupRestService.updateStatus(request.uuid, 'DELETED')
+        )
+      ))
+      .then(promises => {
+        const removedRequests = promises
+          .filter(promise => promise.state === 'fulfilled')
+          .map(promise => promise.value);
+        const notRemovedRequests = promises
+          .filter(promise => promise.state === 'rejected')
+          .map(reject => reject.reason);
+
+        _.remove(uploadRequestGroupsVm.itemsList, item => removedRequests.some(request => request.uuid === item.uuid));
+        _.remove(uploadRequestGroupsVm.selectedUploadRequests, selected => removedRequests.some(request => request.uuid === selected.uuid));
+
+        uploadRequestGroupsVm.tableParams.reload();
+
+        return {
+          removedRequests,
+          notRemovedRequests
+        };
+      })
+      .then(({ removedRequests, notRemovedRequests }) => {
+        if (notRemovedRequests.length) {
+          showToastAlertFor('delete_archived', 'error', notRemovedRequests);
+        } else {
+          showToastAlertFor('delete_archived', 'info', removedRequests);
         }
       });
   }
