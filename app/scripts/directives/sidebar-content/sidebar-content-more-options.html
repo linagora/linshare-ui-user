@@ -7,7 +7,7 @@
   </span>
 </div>
 <div class="card col-xs-12 m-t-2em" id="content-ctn-sidebar" x-ng-style="sizeSidebarRight">
-  <form class="form-sidebar">
+  <form name="moreShareOptions" class="form-sidebar">
     <div class="form-group m-b-20">
       <label class="m-b-10">{{"RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate}} :</label>
       <textarea class="form-control comment" x-ng-model="shareActionVm.newShare.sharingNote" rows="5"
@@ -56,35 +56,50 @@
           </label>
         </div>
       </div>
-      <div data-ng-show="shareActionVm.newShare.enableUSDA.value && shareActionVm.newShare.enableUSDA.enable && shareActionVm.newShare.enableUSDA.canOverride &&
-           shareActionVm.newShare.notificationDateForUSDA.canOverride"
-           class="col-xs-12 field-ctn indented-form-dependency" id="dateField">
-        <label for="notificationDate">
+      <div
+        ng-show="
+          shareActionVm.newShare.enableUSDA.value &&
+          shareActionVm.newShare.enableUSDA.enable &&
+          shareActionVm.newShare.enableUSDA.canOverride &&
+          shareActionVm.newShare.notificationDateForUSDA.canOverride
+        "
+        class="col-xs-12 field-ctn indented-form-dependency"
+        ng-class="{ 'has-error': moreShareOptions.notificationDateIfUndownloaded.$invalid }"
+        id="dateField"
+      >
+        <label for="notificationDateIfUndownloaded">
           {{"RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate}}:
         </label>
         <!--
           TODO: The directive shall be refactored with a proper template and passing different options.
                 See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
         -->
-        <div class="datepicker-border-fix date-picker dp-blue"
-            data--ng-class="{'is-opened': opened2 === true}">
-          <div class="fg-line datepicker-ctn" data-ng-class="{'fg-toggled': opened2 == true}">
+        <div
+          class="datepicker-border-fix date-picker dp-blue col-xs-6"
+          ng-class="{'is-opened': !!opened2 === true}">
+          <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': !!opened2 === true}">
             <div class="form-inline">
-              <input working-date-picker data-ng-click="open($event, 'opened2')" type="text"
-                    class="form-control date-picker-input" uib-datepicker-popup
-                    show-weeks="false"
-                    is-open="opened2"
-                    datepicker-options="::{minDate: shareActionVm.newShare.getMinDate(),
-                                          maxDate: shareActionVm.newShare.notificationDateForUSDA.value}"
-                    data-ng-required="true"
-                    placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'medium'}}"
-                    min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
-                    max="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'fullDate'}}"
-                    data-ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
-                    data-ng-model="shareActionVm.newShare.notificationDateForUSDA.value"/>
+              <input
+                working-date-picker
+                type="text"
+                class="form-control date-picker-input"
+                uib-datepicker-popup show-weeks="false" is-open="opened2"
+                datepicker-options="::{
+                  minDate: shareActionVm.newShare.getMinDate(),
+                  maxDate: shareActionVm.newShare.notificationDateForUSDA.value
+                }"
+                min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
+                max="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'fullDate'}}"
+                name="notificationDateIfUndownloaded"
+                ng-click="open($event, 'opened2')"
+                ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
+                ng-model="shareActionVm.newShare.notificationDateForUSDA.value"
+                placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'YYYY-MM-DD'}}"
+                required/>
             </div>
           </div>
         </div>
+        <span class="float-right" ng-show="moreShareOptions.notificationDateIfUndownloaded.$invalid" translate>RIGHT_PANEL.SHARE_OPTIONS.ERROR.INVALID_DATE</span>
       </div>
     </div>
     <div
@@ -101,7 +116,7 @@
             for="ForceAnonymousSharing"
             translate
           >
-            RIGHT_PANEL.SHARE_OPTIONS.FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS 
+            RIGHT_PANEL.SHARE_OPTIONS.FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS
           </label>
           <label class="checkbox checkbox-inline m-r-0">
             <input
