@@ -323,7 +323,7 @@
                             <i class="ls-add-user-sm"></i>
                           </a>
                         </li>
-                        <li ng-if="['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status)">
+                        <li ng-if="['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status) && uploadRequestGroup.collective">
                           <a translate-attr="{title: 'ACTION.DOWNLOAD'}" event-propagation-stop>
                             <i class="zmdi zmdi-download"></i>
                           </a>
@@ -364,7 +364,7 @@
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status) }">
+                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status) || !uploadRequestGroup.collective }">
                               <a href="">
                                 <i class="zmdi zmdi-download"></i>
                                 <span translate>ACTION.DOWNLOAD</span>
