@@ -54,7 +54,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.showDetails = showDetails;
     uploadRequestGroupsVm.cancelUploadRequestGroups = cancelUploadRequestGroups;
     uploadRequestGroupsVm.closeUploadRequestGroups = closeUploadRequestGroups;
-    uploadRequestGroupsVm.archiveUploadRequest = archiveUploadRequest;
+    uploadRequestGroupsVm.archiveUploadRequestGroup = archiveUploadRequestGroup;
     uploadRequestGroupsVm.uploadRequestGroupCreate = lsAppConfig.uploadRequestGroupCreate;
     uploadRequestGroupsVm.uploadRequestGroupDetails = lsAppConfig.uploadRequestGroupDetails;
     uploadRequestGroupsVm.getOwnerName = contactsListsService.getOwnerName;
@@ -68,7 +68,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.toggleSearchState = toggleSearchState;
     uploadRequestGroupsVm.currentSelectedDocument = {};
     uploadRequestGroupsVm.openUploadRequestGroup = openUploadRequestGroup;
-    uploadRequestGroupsVm.removeArchivedUploadRequest = removeArchivedUploadRequest;
+    uploadRequestGroupsVm.removeArchivedUploadRequestGroups = removeArchivedUploadRequestGroups;
     uploadRequestGroupsVm.fabButton = {
       toolbar: {
         activate: true,
@@ -91,16 +91,16 @@ function uploadRequestGroupsController(
     tableParamsService.initTableParams(uploadRequestGroupsVm.itemsList, uploadRequestGroupsVm.paramFilter)
       .then(() => {
         uploadRequestGroupsVm.tableParamsService = tableParamsService;
-        uploadRequestGroupsVm.resetSelectedUploadRequests = tableParamsService.resetSelectedItems;
-        uploadRequestGroupsVm.selectUploadRequestsOnCurrentPage = tableParamsService.tableSelectAll;
-        uploadRequestGroupsVm.addSelectedUploadRequest = tableParamsService.toggleItemSelection;
+        uploadRequestGroupsVm.resetSelectedUploadRequestGroups = tableParamsService.resetSelectedItems;
+        uploadRequestGroupsVm.selectUploadRequestGroupsOnCurrentPage = tableParamsService.tableSelectAll;
+        uploadRequestGroupsVm.addSelectedUploadRequestGroup = tableParamsService.toggleItemSelection;
         uploadRequestGroupsVm.sortDropdownSetActive = tableParamsService.tableSort;
-        uploadRequestGroupsVm.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
-        uploadRequestGroupsVm.selectedUploadRequests = tableParamsService.getSelectedItemsList();
+        uploadRequestGroupsVm.toggleFilterBySelectedItems = tableParamsService.isolateSelection;
+        uploadRequestGroupsVm.selectedUploadRequestGroups = tableParamsService.getSelectedItemsList();
         uploadRequestGroupsVm.tableParams = tableParamsService.getTableParams();
         uploadRequestGroupsVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
         uploadRequestGroupsVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
-        uploadRequestGroupsVm.canCloseSelectedUploadRequests = () => uploadRequestGroupsVm.selectedUploadRequests.every(request => request.status === 'ENABLED');
+        uploadRequestGroupsVm.canCloseSelectedUploadRequests = () => uploadRequestGroupsVm.selectedUploadRequestGroups.every(request => request.status === 'ENABLED');
       });
   }
 
@@ -227,7 +227,7 @@ function uploadRequestGroupsController(
           .map(reject => reject.reason);
 
         _.remove(uploadRequestGroupsVm.itemsList, item => canceledRequests.some(request => request.uuid === item.uuid));
-        _.remove(uploadRequestGroupsVm.selectedUploadRequests, selected => canceledRequests.some(request => request.uuid === selected.uuid));
+        _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => canceledRequests.some(request => request.uuid === selected.uuid));
 
         uploadRequestGroupsVm.tableParams.reload();
 
@@ -284,13 +284,13 @@ function uploadRequestGroupsController(
       });
   }
 
-  function archiveUploadRequest(uploadRequest) {
-    openWarningDialogFor('archive', uploadRequest)
+  function archiveUploadRequestGroup(uploadRequestGroup) {
+    openWarningDialogFor('archive', uploadRequestGroup)
       .then(isConfirmed => isConfirmed ? archiveConfirmOptionDialog() : $q.reject())
-      .then(isCopied => uploadRequestGroupRestService.updateStatus(uploadRequest.uuid, 'ARCHIVED', {copy: !!isCopied }))
+      .then(isCopied => uploadRequestGroupRestService.updateStatus(uploadRequestGroup.uuid, 'ARCHIVED', {copy: !!isCopied }))
       .then(archivedRequest => {
         _.remove(uploadRequestGroupsVm.itemsList, item => archivedRequest.uuid === item.uuid);
-        _.remove(uploadRequestGroupsVm.selectedUploadRequests, selected => archivedRequest.uuid === selected.uuid);
+        _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => archivedRequest.uuid === selected.uuid);
 
         uploadRequestGroupsVm.tableParams.reload();
 
@@ -302,10 +302,10 @@ function uploadRequestGroupsController(
       });
   }
 
-  function removeArchivedUploadRequest(uploadRequests) {
-    openWarningDialogFor('delete_archived', uploadRequests)
+  function removeArchivedUploadRequestGroups(uploadRequestGroups) {
+    openWarningDialogFor('delete_archived', uploadRequestGroups)
       .then(() => $q.allSettled(
-        uploadRequests.map(
+        uploadRequestGroups.map(
           request => uploadRequestGroupRestService.updateStatus(request.uuid, 'DELETED')
         )
       ))
@@ -318,7 +318,7 @@ function uploadRequestGroupsController(
           .map(reject => reject.reason);
 
         _.remove(uploadRequestGroupsVm.itemsList, item => removedRequests.some(request => request.uuid === item.uuid));
-        _.remove(uploadRequestGroupsVm.selectedUploadRequests, selected => removedRequests.some(request => request.uuid === selected.uuid));
+        _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => removedRequests.some(request => request.uuid === selected.uuid));
 
         uploadRequestGroupsVm.tableParams.reload();
 

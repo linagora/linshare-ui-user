@@ -15,7 +15,7 @@
               <li role="menuitem">
                 <a uib-tooltip="{{'UPLOAD_REQUESTS.CREATION_TYPE.COLLECTIVE_TOOLTIP' | translate}}"
                   tooltip-append-to-body="true"
-                  tooltip-placement="top" 
+                  tooltip-placement="top"
                   ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, true)"
                 >
                   <i class="ls-upload-request-alt"></i>
@@ -27,7 +27,7 @@
                 <a
                   uib-tooltip="{{'UPLOAD_REQUESTS.CREATION_TYPE.INDIVIDUAL_TOOLTIP' | translate}}"
                   tooltip-append-to-body="true"
-                  tooltip-placement="top" 
+                  tooltip-placement="top"
                   ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, false)"
                 >
                   <i class="ls-upload-request-2"></i>
@@ -56,7 +56,7 @@
               <span ng-click="showCheckboxes = !showCheckboxes" class="visible-xs toolbar-mobile-item col-xs-3">
                 <a class="select-all-items plain-txt-btn">
                   <i class="ls-multi-select" ng-class="{'active-link': showCheckboxes}"
-                    ng-click="uploadRequestGroupsVm.resetSelectedUploadRequests()"></i>
+                    ng-click="uploadRequestGroupsVm.resetSelectedUploadRequestGroups()"></i>
                 </a>
               </span>
 
@@ -256,87 +256,87 @@
           <div class="table-responsive">
             <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
               ng-table="uploadRequestGroupsVm.tableParams" show-filter="true">
-              <tr check-table-height ls-item-selection ng-repeat="uploadRequest in $data"
-                data-selected-documents="uploadRequestGroupsVm.selectedUploadRequests"
-                data-document-file="uploadRequest"
+              <tr check-table-height ls-item-selection ng-repeat="uploadRequestGroup in $data"
+                data-selected-documents="uploadRequestGroupsVm.selectedUploadRequestGroups"
+                data-document-file="uploadRequestGroup"
                 data-current-selected-Document="uploadRequestGroupsVm.currentSelectedDocument"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()"
                 ng-class="{
-                  'highlight-list-elem': uploadRequest.isSelected,
-                  'current-vis': uploadRequestGroupsVm.currentSelectedDocument.current.uuid === uploadRequest.uuid
+                  'highlight-list-elem': uploadRequestGroup.isSelected,
+                  'current-vis': uploadRequestGroupsVm.currentSelectedDocument.current.uuid === uploadRequestGroup.uuid
                 }"
-                ng-dblclick="uploadRequestGroupsVm.openUploadRequestGroup(uploadRequest)"
+                ng-dblclick="uploadRequestGroupsVm.openUploadRequestGroup(uploadRequestGroup)"
                 class="p-b-5 double-row item-container">
                 <td data-header="'checkboxheader.html'" class="set-content-left thumb-type-item thumb-groups-preview-ls"
                   header-class="'col-2 checkbox-col'">
-                  <a ng-click="showCheckboxes ? uploadRequestGroupsVm.addSelectedUploadRequest(uploadRequest) : null"
+                  <a ng-click="showCheckboxes ? uploadRequestGroupsVm.addSelectedUploadRequestGroup(uploadRequestGroup) : null"
                     class="visible-xs">
                     <div ng-class="{ 'invisible' : showCheckboxes}">
                       <i class="m-r-10"
-                        ng-class="uploadRequest.collective ? 'ls-upload-request-alt' : 'ls-upload-request-2'"></i>
+                        ng-class="uploadRequestGroup.collective ? 'ls-upload-request-alt' : 'ls-upload-request-2'"></i>
                     </div>
                     <div class="checkbox-ctn-thumb"
-                      ng-class="{'maintain-vis': uploadRequest.isSelected , 'hidden-xs' : !showCheckboxes}">
+                      ng-class="{'maintain-vis': uploadRequestGroup.isSelected , 'hidden-xs' : !showCheckboxes}">
                     </div>
                   </a>
 
-                  <a ng-click="uploadRequestGroupsVm.addSelectedUploadRequest(uploadRequest)" class="hidden-xs">
+                  <a ng-click="uploadRequestGroupsVm.addSelectedUploadRequestGroup(uploadRequestGroup)" class="hidden-xs">
                     <div ng-class="{ 'invisible' : showCheckboxes}">
                       <i class="m-r-10"
-                        ng-class="uploadRequest.collective ? 'ls-upload-request-alt' : 'ls-upload-request-2'"></i>
+                        ng-class="uploadRequestGroup.collective ? 'ls-upload-request-alt' : 'ls-upload-request-2'"></i>
                     </div>
                     <div class="checkbox-ctn-thumb"
-                      ng-class="{'maintain-vis': uploadRequest.isSelected , 'hidden-xs' : !showCheckboxes}">
+                      ng-class="{'maintain-vis': uploadRequestGroup.isSelected , 'hidden-xs' : !showCheckboxes}">
                     </div>
                   </a>
                 </td>
 
                 <td data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.LABEL' | translate" class="row show-li-actions col-3"
-                  data-sortable="'label'" uuid={{::uploadRequest.uuid}} header-class="'col-3 flexible-table-col'">
+                  data-sortable="'label'" uuid={{::uploadRequestGroup.uuid}} header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <span
                         class="file-name-disp single-line click-enabled"
-                        ng-click="uploadRequestGroupsVm.openUploadRequestGroup(uploadRequest)"
+                        ng-click="uploadRequestGroupsVm.openUploadRequestGroup(uploadRequestGroup)"
                       >
-                        {{::uploadRequest.label}}
+                        {{::uploadRequestGroup.label}}
                       </span>
                       <div class="upload-request-status" ng-if="uploadRequestGroupsVm.status === 'activeClosed'">
-                        <i class="zmdi zmdi-circle" ng-class="{ 'closed': uploadRequest.status === 'CLOSED'}"></i>
+                        <i class="zmdi zmdi-circle" ng-class="{ 'closed': uploadRequestGroup.status === 'CLOSED'}"></i>
                         <small translate
-                          ng-if="uploadRequest.status === 'ENABLED'">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
+                          ng-if="uploadRequestGroup.status === 'ENABLED'">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
                         <small translate
-                          ng-if="uploadRequest.status === 'CLOSED'">UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</small>
+                          ng-if="uploadRequestGroup.status === 'CLOSED'">UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</small>
                       </div>
 
                     </span>
 
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
                       <ul class="actions pull-right" ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
-                        <li ng-click="uploadRequestGroupsVm.showDetails(uploadRequest)">
+                        <li ng-click="uploadRequestGroupsVm.showDetails(uploadRequestGroup)">
                           <a class="set-col-12" translate-attr="{title: 'ACTION.INFORMATION'}" href="">
                             <i class="zmdi zmdi-info"></i>
                           </a>
                         </li>
-                        <li ng-if="['ENABLED', 'CREATED'].includes(uploadRequest.status)">
+                        <li ng-if="['ENABLED', 'CREATED'].includes(uploadRequestGroup.status)">
                           <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS'}" href="">
                             <i class="ls-add-user-sm"></i>
                           </a>
                         </li>
-                        <li ng-if="['ENABLED', 'CLOSED'].includes(uploadRequest.status)">
+                        <li ng-if="['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status)">
                           <a translate-attr="{title: 'ACTION.DOWNLOAD'}" event-propagation-stop>
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
-                        <li ng-if="uploadRequest.status === 'CLOSED'">
+                        <li ng-if="uploadRequestGroup.status === 'CLOSED'">
                           <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE'}" href=""
-                            ng-click="uploadRequestGroupsVm.archiveUploadRequest(uploadRequest)">
+                            ng-click="uploadRequestGroupsVm.archiveUploadRequestGroup(uploadRequestGroup)">
                             <i class="zmdi zmdi-archive"></i>
                           </a>
                         </li>
-                        <li ng-if="uploadRequest.status === 'ARCHIVED'">
+                        <li ng-if="uploadRequestGroup.status === 'ARCHIVED'">
                           <a translate-attr="{title: 'ACTION.DELETE'}" href=""
-                            ng-click="uploadRequestGroupsVm.removeArchivedUploadRequest([uploadRequest])">
+                            ng-click="uploadRequestGroupsVm.removeArchivedUploadRequestGroups([uploadRequestGroup])">
                             <i class="zmdi zmdi-delete"></i>
                           </a>
                         </li>
@@ -352,59 +352,59 @@
                           </a>
                           <ul uib-dropdown-menu ng-class="{'open':isOpenItem}" class="uib-dropdown-menu dropdown-menu-right dm-icon
                                   dropdown-divided dropdown-content-left">
-                            <li ng-click="uploadRequestGroupsVm.showDetails(uploadRequest)">
+                            <li ng-click="uploadRequestGroupsVm.showDetails(uploadRequestGroup)">
                               <a href="">
                                 <i class="zmdi zmdi-info"></i>
                                 <span translate>ACTION.INFORMATION</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequest.status) }">
+                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }">
                               <a href="">
                                 <i class="zmdi ls-add-user-sm"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CLOSED'].includes(uploadRequest.status) }">
+                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status) }">
                               <a href="">
                                 <i class="zmdi zmdi-download"></i>
                                 <span translate>ACTION.DOWNLOAD</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequest.status) }">
+                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }">
                               <a href="">
                                 <i class="zmdi zmdi-edit"></i>
                                 <span translate>EDIT</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequest.status) }">
+                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }">
                               <a href="">
                                 <i class="zmdi zmdi-edit"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.GLOBAL_EDIT</span>
                               </a>
                             </li>
                             <li class="divider"></li>
-                            <li ng-if="uploadRequest.status === 'ENABLED'"
-                              ng-class="{ 'disable-link': uploadRequest.status === 'CLOSED' }">
-                              <a href="" ng-click="uploadRequestGroupsVm.closeUploadRequestGroups([uploadRequest])">
+                            <li ng-if="uploadRequestGroup.status === 'ENABLED'"
+                              ng-class="{ 'disable-link': uploadRequestGroup.status === 'CLOSED' }">
+                              <a href="" ng-click="uploadRequestGroupsVm.closeUploadRequestGroups([uploadRequestGroup])">
                                 <i class="zmdi zmdi-close-circle"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.CLOSE</span>
                               </a>
                             </li>
-                            <li ng-if="uploadRequest.status === 'CREATED'">
-                              <a href="" ng-click="uploadRequestGroupsVm.cancelUploadRequestGroups([uploadRequest])">
+                            <li ng-if="uploadRequestGroup.status === 'CREATED'">
+                              <a href="" ng-click="uploadRequestGroupsVm.cancelUploadRequestGroups([uploadRequestGroup])">
                                 <i class="zmdi zmdi-close-circle"></i>
                                 <span translate>NAVIGATION.CANCEL</span>
                               </a>
                             </li>
                             <li ng-if="uploadRequest.status === 'ARCHIVED'">
-                              <a href="" ng-click="uploadRequestGroupsVm.removeArchivedUploadRequest([uploadRequest])">
+                              <a href="" ng-click="uploadRequestGroupsVm.removeArchivedUploadRequestGroups([uploadRequestGroup])">
                                 <i class="zmdi zmdi-delete"></i>
                                 <span translate>ACTION.DELETE</span>
                               </a>
                             </li>
                             <li
-                              ng-class="{ 'disable-link' : uploadRequest.status !== 'CLOSED' }">
-                              <a href="" ng-click="uploadRequestGroupsVm.archiveUploadRequest(uploadRequest)">
+                              ng-class="{ 'disable-link' : uploadRequestGroup.status !== 'CLOSED' }">
+                              <a href="" ng-click="uploadRequestGroupsVm.archiveUploadRequestGroup(uploadRequestGroup)">
                                 <i class="zmdi zmdi-archive"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE</span>
                               </a>
@@ -419,25 +419,25 @@
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ACTIVATION_DATE' | translate"
                   data-sortable="'activationDate'" header-class="'col-4'">
-                  {{uploadRequest.activationDate | lsDate: 'mediumDate'}}
+                  {{uploadRequestGroup.activationDate | lsDate: 'mediumDate'}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status !== 'archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION_DATE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
-                  {{uploadRequest.expiryDate | lsDate: 'mediumDate'}}
+                  {{uploadRequestGroup.expiryDate | lsDate: 'mediumDate'}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status === 'archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ARCHIVE_DATE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
-                  {{uploadRequest.modificationDate | lsDate: 'mediumDate'}}
+                  {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate'}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status !== 'pending'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.FILES' | translate" data-sortable="'fileCount'"
                   header-class="'col-4'">
-                  {{ uploadRequest.fileCount || 'N/A' }}
+                  {{ uploadRequestGroup.fileCount || 'N/A' }}
                 </td>
               </tr>
             </table>
@@ -447,9 +447,9 @@
         <!-- SELECTION HEADER -->
 
         <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
-          ng-class="{'show-multi-menu': uploadRequestGroupsVm.selectedUploadRequests.length > 0}">
+          ng-class="{'show-multi-menu': uploadRequestGroupsVm.selectedUploadRequestGroups.length > 0}">
           <div class="toggle-checkbox-toolbar"
-            ng-click="uploadRequestGroupsVm.selectUploadRequestsOnCurrentPage(uploadRequestGroupsVm.tableParams.data, uploadRequestGroupsVm.tableParams.page())">
+            ng-click="uploadRequestGroupsVm.selectUploadRequestGroupsOnCurrentPage(uploadRequestGroupsVm.tableParams.data, uploadRequestGroupsVm.tableParams.page())">
             <a ng-if="!uploadRequestGroupsVm.flagsOnSelectedPages[uploadRequestGroupsVm.tableParams.page()]"
               class="select-all-items plain-text-button ng-scope">
               <i class="fa ls-check-o checkbox-table"></i>
@@ -459,7 +459,7 @@
               <i class="ls-check-checked"></i>
             </a>
           </div>
-          <div class="exit-selection actions" ng-click="uploadRequestGroupsVm.resetSelectedUploadRequests()"
+          <div class="exit-selection actions" ng-click="uploadRequestGroupsVm.resetSelectedUploadRequestGroups()"
             translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
             <a>
               <i class="zmdi zmdi-close"></i>
@@ -468,9 +468,9 @@
           <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
             <div class="pull-left"
               ng-class="{'active-button-show-selection': uploadRequestGroupsVm.tableParamsService.getSelectionIsIsolated()}"
-              ng-click="uploadRequestGroupsVm.toggleFilterBySelectedFiles()">
+              ng-click="uploadRequestGroupsVm.toggleFilterBySelectedItems()">
               <p>
-                <span>{{uploadRequestGroupsVm.selectedUploadRequests.length}}</span>
+                <span>{{uploadRequestGroupsVm.selectedUploadRequestGroups.length}}</span>
                 <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
               </p>
               <div class="pull-left view-icons-ctn groups-view">
@@ -480,14 +480,14 @@
                   ng-show="!uploadRequestGroupsVm.tableParamsService.getSelectionIsIsolated()"></i>
               </div>
             </div>
-            <div class="pull-left view-icons-ctn reset-icon" ng-click="uploadRequestGroupsVm.resetSelectedUploadRequests()">
+            <div class="pull-left view-icons-ctn reset-icon" ng-click="uploadRequestGroupsVm.resetSelectedUploadRequestGroups()">
               <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span ng-if="uploadRequestGroupsVm.status === 'pending'">
               <a class="plain-text-button share-link" translate-attr="{title: 'NAVIGATION.CANCEL'}"
-                ng-click="uploadRequestGroupsVm.cancelUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequests)">
+                ng-click="uploadRequestGroupsVm.cancelUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequestGroups)">
                 <i class="zmdi zmdi-close-circle"></i>
                 <span translate>NAVIGATION.CANCEL</span>
               </a>
@@ -495,7 +495,7 @@
 
             <span ng-if="uploadRequestGroupsVm.status === 'activeClosed'"
               ng-class="{ 'disable-link': !uploadRequestGroupsVm.canCloseSelectedUploadRequests()}"
-              ng-click="uploadRequestGroupsVm.closeUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequests)"
+              ng-click="uploadRequestGroupsVm.closeUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequestGroups)"
             >
               <a
                 class="plain-text-button share-link"
@@ -507,7 +507,7 @@
             </span>
 
             <span ng-if="uploadRequestGroupsVm.status === 'archived'"
-              ng-click="uploadRequestGroupsVm.removeArchivedUploadRequest(uploadRequestGroupsVm.selectedUploadRequests)"
+              ng-click="uploadRequestGroupsVm.removeArchivedUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequestGroups)"
             >
               <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
                 <i class="zmdi zmdi-delete"></i>
@@ -525,7 +525,7 @@
 </div>
 
 <script type="text/ng-template" id="checkboxheader.html">
-  <span ng-click="uploadRequestGroupsVm.selectUploadRequestsOnCurrentPage(tableParams.data, tableParams.page())"
+  <span ng-click="uploadRequestGroupsVm.selectUploadRequestGroupsOnCurrentPage(tableParams.data, tableParams.page())"
         role="button" tabindex="0" class="display-block center">
     <a ng-if="!uploadRequestGroupsVm.flagsOnSelectedPages[uploadRequestGroupsVm.tableParams.page()]"
        class="select-all-items plain-text-button checkboxCtn">
