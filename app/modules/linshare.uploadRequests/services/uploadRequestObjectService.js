@@ -138,7 +138,6 @@
 
           allowedToActivation = clonedData;
           allowedToActivation.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-          allowedToActivation.mindate = new Date();
           allowedToActivation.original = clonedData.value;
           allowedToActivation.value = (_.isUndefined(clonedData.value) || _.isUndefined(clonedData.unit)) ? undefined : moment()
             .add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
@@ -149,7 +148,6 @@
           allowedToExpiration = clonedData;
           allowedToExpiration.canOverride =
             _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-          allowedToExpiration.minDate = new Date();
           allowedToExpiration.original = clonedData.value;
           allowedToExpiration.value = (_.isUndefined(clonedData.value) || _.isUndefined(clonedData.unit)) ? undefined : (allowedToActivation && allowedToActivation.value ? moment(allowedToActivation.value) : moment())
             .add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
@@ -160,7 +158,6 @@
           allowedToExpiryNotification = clonedData;
           allowedToExpiryNotification.canOverride =
           _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-          allowedToExpiryNotification.minDate = new Date();
           allowedToExpiryNotification.original = clonedData.value;
           allowedToExpiryNotification.value = (_.isUndefined(clonedData.value) || _.isUndefined(clonedData.unit)) ? undefined : (allowedToExpiration && allowedToExpiration.value && moment(allowedToExpiration.value)
             .subtract(clonedData.value, clonedData.unit.toLowerCase()).toDate());
@@ -462,7 +459,7 @@
 
     function calculateDatePickerOptions() {
       self.expirationDateOptions = {
-        minDate: self.allowedToExpiration.minDate,
+        minDate: self.activationDate,
         maxDate: self.getMaxDateOfExpiration()
       };
       self.activationDateOptions = {
