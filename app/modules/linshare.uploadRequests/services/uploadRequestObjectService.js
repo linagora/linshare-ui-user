@@ -451,7 +451,7 @@
         currentUnit = self.maxSizeOfAFile.unit;
       }
       if (isFormatted) {
-        return `${self.allowedToTotalSizeOfFiles.value} ${formatUnit(self.allowedToTotalSizeOfFiles.unit)}`;
+        return `${configValue} ${formatUnit(configUnit)}`;
       } else {
         return configValue * convertBase(currentUnit, configUnit);
       }
