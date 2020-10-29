@@ -32,8 +32,8 @@ angular.module('linshare.share')
       }
     }
 
-    function submitShare(shareCreationDto, selectedDocuments, selectedUploads) {
-      if (handleErrors(shareCreationDto, selectedDocuments, selectedUploads)) {
+    function submitShare(shareCreationDto, selectedDocuments, selectedUploads, form) {
+      if (handleErrors(shareCreationDto, selectedDocuments, selectedUploads) || (form && !form.$valid)) {
         return;
       }
       selectedUploads = selectedUploads || {};

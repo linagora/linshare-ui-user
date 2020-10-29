@@ -191,7 +191,7 @@
           mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
           mainVm.sidebar.getData().checkSharableFiles(shareActionVm.submitShare, shareActionVm.newShare) :
           shareActionVm.submitShare(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments,
-                      mainVm.sidebar.getData().selectedUploads)">
+                      mainVm.sidebar.getData().selectedUploads, shareSettings)">
     {{"NAVIGATION.SHARE" | translate}}
   </button>
 </div>
