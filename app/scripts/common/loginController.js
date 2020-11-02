@@ -31,6 +31,7 @@
     loginVm.password = '';
     loginVm.submitForm = submitForm;
     loginVm.loginSSO = loginSSO;
+    loginVm.oidcEnabled = lsAppConfig.oidcEnabled;
 
     activate();
 

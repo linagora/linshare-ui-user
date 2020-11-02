@@ -78,9 +78,11 @@
             </div>
             <a ui-sref="reset" class="pull-right mdp-forgotten">{{'LOGIN.FORGOTTEN_PASSWORD' | translate}}</a>
             <div class="clearfix"></div>
-            <button type='submit' class="btn bgm-lightblue btn-block conexion">{{'LOGIN.CONNECTION_LINK' | translate}}</button>
-            <div class="login-sso-separate" translate>LOGIN.OR</div>
-            <button type='button' ng-click="loginVm.loginSSO()" class="btn login-sso-btn btn-block" translate>LOGIN.CONTINUE_WITH_SSO</button>
+            <button type='submit' class="btn bgm-lightblue btn-block conexion" translate>LOGIN.CONNECTION_LINK</button>
+            <div ng-if="loginVm.oidcEnabled">
+              <div class="login-sso-separate" translate>LOGIN.OR</div>
+              <button type='button' ng-click="loginVm.loginSSO()" class="btn login-sso-btn btn-block" translate>LOGIN.CONTINUE_WITH_SSO</button>
+            </div>
           </form>
         </div>
       </div>

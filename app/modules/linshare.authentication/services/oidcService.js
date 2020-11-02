@@ -1,4 +1,4 @@
-const Oidc = require('oidc-client');
+const { UserManager } = require('oidc-client');
 
 /**
  * Authentication oidc service
@@ -9,10 +9,10 @@ angular
   .module('linshare.authentication')
   .factory('oidcService', oidcService);
 
-oidcService.$inject = ['OIDC_SETTINGS'];
+oidcService.$inject = ['lsAppConfig'];
 
-function oidcService(OIDC_SETTINGS) {
-  let manager = new Oidc.UserManager(OIDC_SETTINGS);
+function oidcService(lsAppConfig) {
+  let manager = new UserManager(lsAppConfig.oidcSetting);
 
   function signInRedirect() {
     return manager.signinRedirect();

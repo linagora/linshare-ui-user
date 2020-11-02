@@ -45,7 +45,7 @@
   function authenticationUtilsService(_) {
     return {
       buildHeader: buildHeader,
-      buildAccessTokenHeader: buildAccessTokenHeader,
+      buildBearerTokenHeader: buildBearerTokenHeader,
       findError: findError
     };
 
@@ -63,7 +63,7 @@
       return otp ? _.assign(header, { 'x-linShare-2fa-pin': otp }) : header;
     }
 
-    function buildAccessTokenHeader(token) {
+    function buildBearerTokenHeader(token) {
       return { Authorization: 'Bearer ' + token };
     }
   }

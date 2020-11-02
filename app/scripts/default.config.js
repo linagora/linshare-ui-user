@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
  * linshareUiUserApp Constant
  * @namespace linshareUiUserApp
@@ -136,6 +137,17 @@
           'ru': ''
         }
       },
+
+      oidcSetting: {
+        authority: 'http://localhost:8888/auth/realms/master',
+        client_id: 'linshare',
+        client_secret: '2884caa9-1b45-465f-bc3f-7ca5c3a22537',
+        redirect_uri: window.location.origin + '/#!/oidc',
+        post_logout_redirect_uri: window.location.origin + '/#!/login',
+        response_type: 'code',
+        scope: 'openid email profile'
+      },
+      oidcEnabled: true,
 
       /* Define the default role selected when adding a new member to a workgroup
        * Possible value:

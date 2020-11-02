@@ -150,17 +150,17 @@
       deferred = $q.defer();
       $log.debug('AuthenticationRestService : loginSSO');
 
-      var headers = authenticationUtilsService.buildAccessTokenHeader(token);
-      var action = Restangular.all(restUrl)
+      const headers = authenticationUtilsService.buildBearerTokenHeader(token);
+      const action = Restangular.all(restUrl)
         .withHttpConfig({ ignoreAuthModule: true })
         .customGET('authorized', {}, headers);
 
-      handler(action, null, true).then(function(user) {
+      handler(action, null, true).then(user => {
         authService.loginConfirmed(user);
 
         return deferred.resolve(user);
-      }).catch(function(error) {
-        var foundError = authenticationUtilsService.findError(error);
+      }).catch(error => {
+        const foundError = authenticationUtilsService.findError(error);
 
         if (foundError) {
           toastService[foundError.notificationType]({ key: foundError.message });
