@@ -109,6 +109,7 @@
       "AT_LEAST_ONE_RECIPIENT": "Vui lòng nhập ít nhất một người nhận hoặc danh sách liên hệ để chia sẻ",
       "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Vui lòng nhập ít nhất một người nhận",
       "AT_LEAST_ONE_DOCUMENT": "Không có tệp nào được chọn",
+      "EMAIL_ALREADY_IN_UPLOAD_REQUEST": "Một email đã tồn tại trong danh sách người nhận",
       "CONTACT_STILL_EXISTS" : "đã có trong danh sách",
       "ELEMENTS_NOT_DELETED": "(các) thành phần chưa được xóa",
       "ELEMENTS_NOT_DELETED_SINGULAR": "1 mục chưa bị xóa.",

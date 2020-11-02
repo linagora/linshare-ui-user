@@ -140,6 +140,10 @@
       "DELETE_ARCHIVED": {
         "TITLE": "Xóa yêu cầu tải lên đã lưu trữ",
         "TEXT": "Bạn chuẩn bị xóa {singular, select, true{yêu cầu tải lên đã lưu trữ} other{{nbItems} yêu cầu tải lên đã lưu trữ}} ! Hãy cẩn thận, hành động này không thể hoàn tác."
+      },
+      "ADD_RECIPIENTS": {
+        "TITLE": "Thêm người nhận",
+        "TEXT": "Bạn chuẩn bị thêm {singular, select, true {người nhận} other{{nbItems} người nhận}} vào yêu cầu tải lên này ! Hãy cẩn thận, hành động này không thể hoàn tác."
       }
     },
     "TOAST_ALERT": {
@@ -158,6 +162,16 @@
       "DELETE_ARCHIVED": {
         "ERROR": "{number} {singular, select, true{yêu cầu tải lên đã lưu trữ} other{yêu cầu tải lên đã lưu trữ}} không được xóa.",
         "INFO": "{number} {singular, select, true{yêu cầu tải lên đã lưu trữ} other{yêu cầu tải lên đã lưu trữ}} đã được xóa."
+      },
+      "ADD_RECIPIENTS": {
+        "ERROR": "{number} {singular, select, true{người nhận} other{người nhận}} chưa được thêm vào yêu cầu tải lên.",
+        "INFO": "{number} {singular, select, true{người nhận} other{người nhận}} đã được thêm vào yêu cầu tải lên."
+      }
+    },
+    "SIDE_BAR": {
+      "ADD_RECIPIENTS": {
+        "ADD": "Thêm",
+        "CANCEL": "Huỷ"
       }
     }
   }

@@ -140,6 +140,10 @@
       "DELETE_ARCHIVED": {
         "TITLE": "Demande de téléchargement archivée supprimée",
         "TEXT": "Vous êtes sur le point de supprimer {singular, select, true{une demande de téléchargement archivée} other{{nbItems} demandes de téléchargement archivées}} ! Attention, cette action ne peut pas être annulée."
+      },
+      "ADD_RECIPIENTS": {
+        "TITLE": "Ajouter des destinataires",
+        "TEXT": "Vous êtes sur le point d'ajouter {singular, select, true {un destinataire} other{{nbItems} destinataires}} à cette demande de téléchargement ! Attention, cette action ne peut pas être annulée."
       }
     },
     "TOAST_ALERT": {
@@ -158,6 +162,16 @@
       "DELETE_ARCHIVE": {
         "ERROR": "{number} {singular, select, true{demande de téléchargement archivée n'a} other{demandes de téléchargement archivées n'ont}} pas été supprimée.",
         "INFO": "{number} {singular, select, true{demande de téléchargement archivée a} other{demandes de téléchargement archivées ont}} été supprimées."
+      },
+      "ADD_RECIPIENTS": {
+        "ERROR": "{number} {singular, select, true{destinataire n'a} other{destinataires n'ont}} pas été ajoutés à la demande de téléchargement.",
+        "INFO": "{number} {singular, select, true{destinataire a} other{destinataires ont}} été ajouté à la demande de téléchargement."
+      }
+    },
+    "SIDE_BAR": {
+      "ADD_RECIPIENTS": {
+        "ADD": "Ajouter",
+        "CANCEL": "Annuler"
       }
     }
   }
