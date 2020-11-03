@@ -7,9 +7,13 @@ uploadRequestEntriesController.$inject = [
   '$state',
   'tableParamsService',
   'uploadRequest',
+  'sidebarService',
   'uploadRequestGroup',
   'uploadRequestRestService',
-  'UPLOAD_REQUESTS_STATE_STATUS_MAPPING'
+  'UPLOAD_REQUESTS_STATE_STATUS_MAPPING',
+  'UploadRequestObjectService',
+  'uploadRequestUtilsService',
+  'uploadRequestGroupRestService'
 ];
 
 
@@ -18,17 +22,23 @@ function uploadRequestEntriesController(
   $state,
   tableParamsService,
   uploadRequest,
+  sidebarService,
   uploadRequestGroup,
   uploadRequestRestService,
-  UPLOAD_REQUESTS_STATE_STATUS_MAPPING
+  UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
+  UploadRequestObjectService,
+  uploadRequestUtilsService,
+  uploadRequestGroupRestService
 ) {
   const uploadRequestEntriesVm = this;
 
   uploadRequestEntriesVm.$onInit = onInit;
   uploadRequestEntriesVm.goBack = goBack;
   uploadRequestEntriesVm.uploadRequest = uploadRequest;
+  uploadRequestEntriesVm.uploadRequestGroup = uploadRequestGroup;
   uploadRequestEntriesVm.isArchived = uploadRequest.status === 'ARCHIVED';
   uploadRequestEntriesVm.backgroundContent = getBackgroundContent();
+  uploadRequestEntriesVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
   uploadRequestEntriesVm.paramFilter = { name: '' };
   uploadRequestEntriesVm.fabButton = {
     toolbar: {
@@ -110,5 +120,21 @@ function uploadRequestEntriesController(
 
     return content;
   }
-}
 
+  function openAddingRecipientsSideBar(uploadRequest = {}) {
+    uploadRequest.recipients = [];
+
+    uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
+      .then(uploadRequests => uploadRequests.forEach(item => uploadRequest.recipients.push(...item.recipients)))
+      .then(() => {
+        const uploadRequestObject = new UploadRequestObjectService(uploadRequest, {
+          submitRecipientsCallback: () => {
+            sidebarService.hide();
+          }
+        });
+
+        uploadRequestEntriesVm.currentSelectedUploadRequest = uploadRequest;
+        uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
+      });
+  }
+}

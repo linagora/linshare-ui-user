@@ -18,7 +18,9 @@
             <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided" uib-dropdown-menu=""
               ng-class="{'open':isOpenNew}">
               <li role="menuitem">
-                <a>
+                <a
+                  ng-class="{'disable-link': !uploadRequestEntriesVm.uploadRequestGroup.collective}"
+                  ng-click="uploadRequestEntriesVm.openAddingRecipientsSideBar(uploadRequestEntriesVm.uploadRequestGroup)">
                   <i class="ls-add-user-sm"></i>
                   <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS</span>
                 </a>

@@ -313,7 +313,9 @@
                             <i class="zmdi zmdi-info"></i>
                           </a>
                         </li>
-                        <li ng-if="['ENABLED', 'CREATED'].includes(uploadRequestGroup.status)">
+                        <li
+                          ng-if="['ENABLED', 'CREATED'].includes(uploadRequestGroup.status)"
+                          ng-click="uploadRequestGroupsVm.openAddingRecipientsSideBar(uploadRequestGroup)">
                           <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS'}" href="">
                             <i class="ls-add-user-sm"></i>
                           </a>
@@ -353,7 +355,10 @@
                                 <span translate>ACTION.INFORMATION</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }">
+                            <li
+                              ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }"
+                              ng-click="uploadRequestGroupsVm.openAddingRecipientsSideBar(uploadRequestGroup)"
+                              >
                               <a href="">
                                 <i class="zmdi ls-add-user-sm"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS</span>

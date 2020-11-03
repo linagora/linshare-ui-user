@@ -10,7 +10,14 @@
     .factory('UploadRequestObjectService', UploadRequestObjectService);
 
   UploadRequestObjectService.$inject = [
-    '_', '$q', 'functionalityRestService', 'uploadRequestGroupRestService', 'moment', '$log'
+    '_',
+    '$q',
+    'functionalityRestService',
+    'uploadRequestGroupRestService',
+    'moment',
+    '$log',
+    'toastService',
+    'uploadRequestUtilsService'
   ];
 
   /**
@@ -18,7 +25,18 @@
    *  @desc Manipulation of uploadRequest object front/back
    *  @memberOf LinShare.uploadRequest
    */
-  function UploadRequestObjectService(_, $q, functionalityRestService, uploadRequestGroupRestService, moment, $log) {
+  function UploadRequestObjectService(
+    _,
+    $q,
+    functionalityRestService,
+    uploadRequestGroupRestService,
+    moment,
+    $log,
+    toastService,
+    uploadRequestUtilsService
+  ) {
+
+    const { showToastAlertFor, openWarningDialogFor } = uploadRequestUtilsService;
 
     var
       allowedToActivation = {},
@@ -61,7 +79,7 @@
      *  @param {Object} jsonObject - Json object for constructing a uploadRequest object
      *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
      */
-    function UploadRequestObject(jsonObject) {
+    function UploadRequestObject(jsonObject, options = {}) {
       self = this;
       jsonObject = jsonObject || {};
       checkFunctionalities().then(function() {
@@ -95,9 +113,11 @@
         self.allowDeletion = setPropertyValue(jsonObject.allowDeletion, allowedToDeletion.value);
         self.notificationLanguage = setPropertyValue(jsonObject.notificationLanguage, allowedToNotificationLanguage.value);
         self.mail = setPropertyValue(jsonObject.mail, '');
+        self.label = setPropertyValue(jsonObject.label, '');
         self.groupMode = setPropertyValue(jsonObject.groupMode, false);
         self.message = setPropertyValue(jsonObject.message, '');
         self.recipients = setPropertyValue(jsonObject.recipients, []);
+        self.newRecipients = [];
         self.mailingListUuid = setPropertyValue(jsonObject.mailingListUuid, []);
         self.mailingList = setPropertyValue(jsonObject.mailingList, []);
         self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
@@ -106,7 +126,9 @@
         self.toDTO = toDTO;
         self.addRecipient = addRecipient;
         self.removeRecipient = removeRecipient;
+        self.removeNewRecipient = removeNewRecipient;
         self.getRecipients = getRecipients;
+        self.getNewRecipients = getNewRecipients;
         self.getMailingListUuid = getMailingListUuid;
         self.getMailingList = getMailingList;
         self.removeMailingList = removeMailingList;
@@ -116,6 +138,8 @@
         self.getMaxDateOfNotification = getMaxDateOfNotification;
         self.calculateDatePickerOptions = calculateDatePickerOptions;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
+        self.submitRecipients = submitRecipients;
+        self.submitRecipientsCallback = options.submitRecipientsCallback;
         calculateDatePickerOptions();
         setFormValue().then(function(formData) {
           self.form = formData;
@@ -251,7 +275,7 @@
       dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
       dto.label = self.mail;
       dto.body = self.message;
-      dto.contactList = self.recipients.map(recipient => recipient.mail);
+      dto.contactList = self.newRecipients.map(recipient => recipient.mail);
       dto.maxFileCount = self.maxNumberOfFiles;
       dto.maxDepositSize = convertToByte(self.totalSizeOfFiles);
       dto.maxFileSize = convertToByte(self.maxSizeOfAFile);
@@ -359,6 +383,16 @@
           }
           break;
         case 'user':
+          const uniqueInitialRecipients = _.uniqBy(self.recipients, 'mail');
+
+          uniqueInitialRecipients.forEach(initialRecipient => {
+            if (initialRecipient.mail === contact.mail) {
+              exists = true;
+              toastService.error({key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST'});
+              $log.info('The user ' + contact.mail + ' is already in the upload request');
+            }
+          });
+
           angular.forEach(self.recipients, function (elem) {
             if (elem.mail === contact.mail && elem.domain === contact.domain) {
               exists = true;
@@ -366,7 +400,9 @@
             }
           });
           if (!exists) {
-            self.recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
+            const { firstName, lastName, mail } = contact;
+
+            self.newRecipients.push({ firstName, lastName, mail });
           }
           break;
         case 'mailinglist':
@@ -388,9 +424,17 @@
       self.recipients.splice(index, 1);
     };
 
+    function removeNewRecipient(index) {
+      self.newRecipients.splice(index, 1);
+    };
+
     function getRecipients() {
       return self.recipients;
     };
+
+    function getNewRecipients() {
+      return self.newRecipients;
+    }
 
     function getMailingListUuid() {
       return self.mailingListUuid;
@@ -470,6 +514,32 @@
         minDate: self.getMinDateOfActivation(),
         maxDate: self.getMaxDateOfNotification()
       };
+    }
+
+    function submitRecipients() {
+      if (self.getNewRecipients().length === 0) {
+        toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST'});
+
+        return;
+      }
+
+      return openWarningDialogFor('add_recipients', self.newRecipients)
+        .then(() => uploadRequestGroupRestService.addRecipients(self.uuid, self.newRecipients))
+        .then(() => {
+          showToastAlertFor('add_recipients', 'info', self.newRecipients);
+
+          if (self.submitRecipientsCallback) {
+            self.submitRecipientsCallback();
+          }
+
+          self.recipients = [...self.recipients, ...self.newRecipients];
+          self.newRecipients = [];
+
+        }).catch(err => {
+          if (err) {
+            showToastAlertFor('add_recipients', 'error', self.recipients);
+          }
+        });
     }
 
     // Helper

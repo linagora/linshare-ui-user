@@ -11,8 +11,10 @@ uploadRequestsController.$inject = [
   'uploadRequestGroup',
   'uploadRequestGroupRestService',
   'uploadRequestRestService',
+  'UPLOAD_REQUESTS_STATE_STATUS_MAPPING',
+  'sidebarService',
   'uploadRequestUtilsService',
-  'UPLOAD_REQUESTS_STATE_STATUS_MAPPING'
+  'UploadRequestObjectService'
 ];
 
 
@@ -25,8 +27,10 @@ function uploadRequestsController(
   uploadRequestGroup,
   uploadRequestGroupRestService,
   uploadRequestRestService,
+  UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
+  sidebarService,
   uploadRequestUtilsService,
-  UPLOAD_REQUESTS_STATE_STATUS_MAPPING
+  UploadRequestObjectService
 ) {
   const uploadRequestsVm = this;
   const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
@@ -36,6 +40,7 @@ function uploadRequestsController(
   uploadRequestsVm.uploadRequestGroup = uploadRequestGroup;
   uploadRequestsVm.openUploadRequest = openUploadRequest;
   uploadRequestsVm.allSelectedHasStatusOf = allSelectedHasStatusOf;
+  uploadRequestsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
   uploadRequestsVm.paramFilter = { recipientEmail: '' };
   uploadRequestsVm.fabButton = {
     toolbar: {
@@ -94,6 +99,25 @@ function uploadRequestsController(
               }
             };
           });
+      });
+  }
+
+  function reset() {
+    return uploadRequestGroupRestService.listUploadRequests(uploadRequestGroup.uuid)
+      .then(uploadRequests => {
+        if (uploadRequestGroup.collective) {
+          return $state.go('uploadRequestEntries', {
+            uploadRequestUuid: uploadRequests[0].uuid
+          });
+        }
+
+        uploadRequestsVm.itemsList = uploadRequests.map(request => {
+          request.recipientEmail = request.recipients[0].mail;
+
+          return request;
+        });
+
+        tableParamsService.reloadTableParams(uploadRequestsVm.itemsList);
       });
   }
 
@@ -239,5 +263,19 @@ function uploadRequestsController(
       }
     });
   }
-}
 
+  function openAddingRecipientsSideBar(uploadRequest = {}) {
+    uploadRequest.recipients = uploadRequestsVm.itemsList
+      .map(item => item.recipients && item.recipients[0]).filter(Boolean);
+
+    const uploadRequestObject = new UploadRequestObjectService(uploadRequest, {
+      submitRecipientsCallback: () => {
+        reset();
+        sidebarService.hide();
+      }
+    });
+
+    uploadRequestsVm.currentSelectedUploadRequest = uploadRequest;
+    uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
+  }
+}

@@ -1,0 +1,81 @@
+<div class="header-sidebar">
+  <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mainVm.sidebar.hide()"></i>
+  <h2 class="header-more-options set-ellipsis"> {{ mainVm.sidebar.getData().uploadRequestObject.label }} </h2>
+  <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
+    <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+  </span>
+</div>
+
+<div class="card col-xs-12 form-within-sidebar create-share scrollable-sidebar-area" id="content-ctn-sidebar">
+  <div class="custom-list-container clearfix">
+    <div class="recipients-form-sections clearfix">
+      <h2 class="pull-left headerSubCtn">
+        <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS</span>
+        <span class="required-field-hint">*</span>
+      </h2>
+    </div>
+    <form role="form" class="clearfix">
+      <div class="form-group fg-line">
+        <div
+          ls-autocomplete-user="SHARING"
+          on-select-function="mainVm.sidebar.getData().uploadRequestObject.addRecipient"
+          with-guest="true"
+        >
+        </div>
+      </div>
+    </form>
+    <div class="custom-list-body col-xs-12 ">
+      <div class="custom-list-item"
+        ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestObject.newRecipients | orderBy : '-' as results"
+        tooltip-placement="bottom" tooltip-popup-delay="700"
+        uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
+        <p class="pull-left circle-ctn">
+          <span ng-show="recipient.domain" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
+          <span ng-show="!recipient.domain" class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
+        </p>
+        <div class="pull-left name-recipients-ctn">
+          <p ng-show="recipient.domain" class="pull-left inner-text-li">
+            {{recipient.firstName + ' ' + recipient.lastName}}
+          </p>
+          <p ng-show="!recipient.domain" class="pull-left inner-text-li">
+            {{recipient.mail}}
+          </p>
+          <p class="close-list-icone-btn pull-right"
+            ng-click="mainVm.sidebar.getData().uploadRequestObject.removeNewRecipient(results.length - $index -1)">
+              <i class="zmdi zmdi-close "></i>
+            </p>
+        </div>
+      </div>
+      <div class="custom-list-item" ng-repeat="list in mainVm.sidebar.getData().uploadRequestObject.getMailingList()"
+        tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip=""
+        owner-label
+        owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
+        owner-label-attr="uib-tooltip">
+        <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
+        <div class="pull-left name-recipients-ctn">
+          <p class="pull-left inner-text-li">{{list.listName}}</p>
+          <p class=" close-list-icone-btn pull-right" ng-click="mainVm.sidebar.getData().uploadRequestObject.removeMailingList($index)">
+            <i class="zmdi zmdi-close"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
+  <button class="btn btn-default col-xs-6"
+    ng-click="mainVm.sidebar.getData().closeDropdown($event);
+    !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments();"
+    >
+      <span translate>UPLOAD_REQUESTS.SIDE_BAR.ADD_RECIPIENTS.CANCEL</span>
+  </button>
+  <button
+    class="btn btn-primary col-xs-6"
+    ng-click="mainVm.sidebar.getData().uploadRequestObject.submitRecipients()"
+    >
+      <span translate>UPLOAD_REQUESTS.SIDE_BAR.ADD_RECIPIENTS.ADD</span>
+  </button>
+</div>
+
+  

@@ -24,8 +24,9 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     list: list,
     update: update,
     updateStatus: updateStatus,
-    listUploadRequests: listUploadRequests
-  };;
+    listUploadRequests: listUploadRequests,
+    addRecipients: addRecipients
+  };
 
   ////////////
 
@@ -96,5 +97,11 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     $log.debug('uploadRequestGroupRestService : listUploadRequests', uuid);
 
     return handler(Restangular.one(restUrl, uuid).getList('upload_requests'));
+  }
+
+  function addRecipients(uuid, payload) {
+    $log.debug('uploadRequestGroupRestService : addRecipients', uuid, payload);
+
+    return handler(Restangular.one(restUrl, uuid).post('recipients', payload));
   }
 }

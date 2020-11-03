@@ -199,6 +199,7 @@
       workgroupNode: 'workgroup-node',
       uploadRequestGroupCreate: 'uploadrequest-create',
       uploadRequestGroupDetails: 'uploadrequest-details',
+      uploadRequestGroupAddRecipients: 'uploadrequest-add-recipients',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,
       thumbnailEngineActivated: true

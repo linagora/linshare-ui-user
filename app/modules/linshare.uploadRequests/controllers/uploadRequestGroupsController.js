@@ -13,7 +13,6 @@ uploadRequestGroupsController.$inject = [
   '$q',
   '$scope',
   '$state',
-  '$stateParams',
   'contactsListsService',
   'lsAppConfig',
   'toastService',
@@ -21,7 +20,8 @@ uploadRequestGroupsController.$inject = [
   'UploadRequestObjectService',
   'uploadRequestGroups',
   'uploadRequestGroupRestService',
-  'uploadRequestUtilsService'
+  'uploadRequestUtilsService',
+  'sidebarService'
 ];
 
 /**
@@ -34,7 +34,6 @@ function uploadRequestGroupsController(
   $q,
   $scope,
   $state,
-  $stateParams,
   contactsListsService,
   lsAppConfig,
   toastService,
@@ -42,7 +41,8 @@ function uploadRequestGroupsController(
   UploadRequestObjectService,
   uploadRequestGroups,
   uploadRequestGroupRestService,
-  uploadRequestUtilsService
+  uploadRequestUtilsService,
+  sidebarService
 ) {
   const uploadRequestGroupsVm = this;
   const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
@@ -52,6 +52,7 @@ function uploadRequestGroupsController(
   function onInit() {
     uploadRequestGroupsVm.loadSidebarContent = loadSidebarContent;
     uploadRequestGroupsVm.showDetails = showDetails;
+    uploadRequestGroupsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
     uploadRequestGroupsVm.cancelUploadRequestGroups = cancelUploadRequestGroups;
     uploadRequestGroupsVm.closeUploadRequestGroups = closeUploadRequestGroups;
     uploadRequestGroupsVm.archiveUploadRequestGroup = archiveUploadRequestGroup;
@@ -178,7 +179,7 @@ function uploadRequestGroupsController(
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
   function handleErrors(uploadRequestObject) {
-    if (uploadRequestObject.getRecipients().length === 0) {
+    if (uploadRequestObject.getNewRecipients().length === 0) {
       toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST'});
 
       return true;
@@ -205,6 +206,23 @@ function uploadRequestGroupsController(
 
       loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true);
     });
+  }
+
+  function openAddingRecipientsSideBar(uploadRequest = {}) {
+    uploadRequest.recipients = [];
+
+    uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
+      .then(uploadRequests => uploadRequests.forEach(item => uploadRequest.recipients.push(...item.recipients)))
+      .then(() => {
+        const uploadRequestObject = new UploadRequestObjectService(uploadRequest, {
+          submitRecipientsCallback: () => {
+            sidebarService.hide();
+          }
+        });
+
+        uploadRequestGroupsVm.currentSelectedUploadRequest = uploadRequest;
+        uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
+      });
   }
 
   function toggleSearchState() {

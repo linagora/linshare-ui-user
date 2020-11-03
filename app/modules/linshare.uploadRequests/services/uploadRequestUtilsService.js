@@ -2,14 +2,29 @@ angular
   .module('linshare.uploadRequests')
   .factory('uploadRequestUtilsService', uploadRequestUtilsService);
 
-uploadRequestUtilsService.$inject = ['$timeout', '$q', '$translate', 'dialogService', 'toastService'];
+uploadRequestUtilsService.$inject = [
+  'sidebarService',
+  '$q',
+  '$translate',
+  'dialogService',
+  'toastService',
+  'lsAppConfig'
+];
 
-function uploadRequestUtilsService($timeout, $q, $translate, dialogService, toastService) {
+function uploadRequestUtilsService(
+  sidebarService,
+  $q,
+  $translate,
+  dialogService,
+  toastService,
+  lsAppConfig
+) {
 
   return {
-    openWarningDialogFor: openWarningDialogFor,
-    showToastAlertFor: showToastAlertFor,
-    archiveConfirmOptionDialog: archiveConfirmOptionDialog
+    openWarningDialogFor,
+    showToastAlertFor,
+    archiveConfirmOptionDialog,
+    openAddingRecipientsSideBar
   };
 
   ////////////
@@ -73,5 +88,12 @@ function uploadRequestUtilsService($timeout, $q, $translate, dialogService, toas
         }
       });
     }
+  }
+
+  function openAddingRecipientsSideBar(uploadRequestGroupObject) {
+    sidebarService.setData({ uploadRequestObject: uploadRequestGroupObject });
+    sidebarService.setContent(lsAppConfig.uploadRequestGroupAddRecipients);
+    sidebarService.show();
+    setTimeout(() => angular.element('#focusInputShare').trigger('focus'));
   }
 }
