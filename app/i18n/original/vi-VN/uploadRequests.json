@@ -108,7 +108,9 @@
       "ALLOW_DELETION": "Cho phép xóa",
       "ALLOW_CLOSURE": "Cho phép đóng",
       "NOTIFICATION_DATE": "Ngày thông báo",
-      "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo"
+      "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo",
+      "RECIPIENTS": "Người nhận",
+      "SHOW_BUTTON": "xem"
     },
     "DIALOG": {
       "CANCELLATION": {

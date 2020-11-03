@@ -194,8 +194,17 @@ function uploadRequestGroupsController(
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
   function showDetails(uploadRequest = {}) {
-    uploadRequestGroupRestService.get(uploadRequest.uuid).then(data => {
-      uploadRequestGroupsVm.currentSelected = data;
+    $q.all([
+      uploadRequestGroupRestService.get(uploadRequest.uuid),
+      uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
+    ]).then(([uploadRequestGroup, uploadRequests]) => {
+      uploadRequestGroupsVm.currentSelected = uploadRequestGroup;
+      uploadRequestGroupsVm.currentSelected.recipients = [];
+
+      uploadRequests.forEach(uploadRequest => {
+        uploadRequestGroupsVm.currentSelected.recipients.push(...uploadRequest.recipients.map(recipient => recipient.mail));
+      });
+
       loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true);
     });
   }

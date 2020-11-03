@@ -108,7 +108,9 @@
       "ALLOW_DELETION": "Allow deletion",
       "ALLOW_CLOSURE": "Allow closure",
       "NOTIFICATION_DATE": "Notification date",
-      "NOTIFICATION_LANGUAGE": "Notification language"
+      "NOTIFICATION_LANGUAGE": "Notification language",
+      "RECIPIENTS": "Recipients",
+      "SHOW_BUTTON": "view"
     },
     "DIALOG": {
       "CANCELLATION": {

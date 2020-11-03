@@ -20,4 +20,17 @@
       }
     }
   }
+
+  .recipient-list {
+    .recipientsAutocomplete {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+
+      .recipientsInfo {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
 }

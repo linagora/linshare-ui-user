@@ -108,7 +108,9 @@
       "ALLOW_DELETION": "Разрешить удаление",
       "ALLOW_CLOSURE": "Разрешить закрытие",
       "NOTIFICATION_DATE": "Дата уведомления",
-      "NOTIFICATION_LANGUAGE": "Язык уведомлений"
+      "NOTIFICATION_LANGUAGE": "Язык уведомлений",
+      "RECIPIENTS": "Получатели",
+      "SHOW_BUTTON": "Посмотреть"
     },
     "DIALOG": {
       "CANCELLATION": {

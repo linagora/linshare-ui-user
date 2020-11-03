@@ -333,6 +333,18 @@ md-content #content-ctn-sidebar {
       }
     }
   }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    text-transform: lowercase;
+    font-size: 11px;
+    font-weight: 400;
+
+    &.right {
+      float: right;
+    }
+  }
 }
 
 /**********************
@@ -452,6 +464,8 @@ md-content #content-ctn-sidebar {
 /* detail view in sidebars */
 .meta-data-ctn {
   margin-left: 1.33em;
+  margin-right: 1.33em;
+
   .subheader {
     font-size: 1.05em;
     margin-bottom: 0.8em;
