@@ -8,8 +8,9 @@ angular
 
 require('./route');
 require('./constants');
-require('./controllers/uploadRequestGroupsController');
 require('./controllers/uploadRequestController');
+require('./controllers/uploadRequestGroupController');
+require('./controllers/uploadRequestGroupsController');
 require('./services/uploadRequestRestService');
 require('./services/uploadRequestObjectService');
 require('./services/uploadRequestUtilsService');

@@ -48,6 +48,7 @@
     },
     "TABLE": {
       "SEARCH_BY_LABEL": "Tìm bởi nhãn",
+      "SEARCH_BY_RECIPIENT": "Tìm bởi người nhận",
       "FILTER_BY": {
         "ALL": "Tất cả"
       },
@@ -61,13 +62,15 @@
         "TYPE": "Loại",
         "CREATION_DATE": "Ngày tạo",
         "SIZE": "Kích cỡ",
-        "EMAIL": "Email"
+        "EMAIL": "Email",
+        "RECIPIENT": "Người nhận"
       },
       "OPTIONS": {
         "ADD_RECIPIENTS": "Thêm người nhận",
         "GLOBAL_EDIT": "Sửa tất cả",
         "ACTIVATE": "Kích hoạt",
         "CLOSE": "Đóng",
+        "CANCEL_OR_CLOSE": "Hủy/Đóng",
         "ARCHIVE": "Lưu trữ",
         "VIEW_IN_MY_SPACE": "Xem ở không gian của tôi"
       },
@@ -85,6 +88,10 @@
         "ENTRY_LIST_ARCHIVED": {
           "TITLE": "Yêu cầu đã được lưu trữ",
           "MESSAGE": "Tập tin tải lên đã được xóa hoặc sao chép vào không gian của bạn"
+        },
+        "UPLOAD_REQUEST": {
+          "TITLE": "Người nhận yêu cầu tải lên",
+          "MESSAGE": "Đây là những người nhận trong yêu cầu tải lên của bạn"
         }
       }
     },

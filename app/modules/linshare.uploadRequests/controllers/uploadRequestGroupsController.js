@@ -352,5 +352,7 @@ function uploadRequestGroupsController(
           $state.go('uploadRequest', { uuid: requests[0].uuid });
         });
     }
+
+    $state.go('uploadRequestGroup', { uuid: uploadRequest.uuid });
   }
 }

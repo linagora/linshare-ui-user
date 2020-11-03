@@ -48,6 +48,7 @@
     },
     "TABLE": {
       "SEARCH_BY_LABEL": "Recherche par libellé",
+      "SEARCH_BY_RECIPIENT": "Recherche par destinataire",
       "FILTER_BY": {
         "ALL": "Tout"
       },
@@ -61,13 +62,15 @@
         "TYPE": "Type",
         "CREATION_DATE": "Date de création",
         "SIZE": "Taille",
-        "EMAIL": "Email"
+        "EMAIL": "Email",
+        "RECIPIENT": "Destinataires"
       },
       "OPTIONS": {
         "ADD_RECIPIENTS": "Ajouter des destinataires",
         "GLOBAL_EDIT": "Modification globale",
         "ACTIVATE": "Activer",
         "CLOSE": "Fermer",
+        "CANCEL_OR_CLOSE": "Annuler/Fermer",
         "ARCHIVE": "Archiver",
         "VIEW_IN_MY_SPACE": "Voir dans mon espace"
       },
@@ -85,6 +88,10 @@
         "ENTRY_LIST_ARCHIVED": {
           "TITLE": "Invitation de depôt archivée",
           "MESSAGE": "Les fichiers déposés sont soit supprimés, soit copiés dans votre espace personnel"
+        },
+        "UPLOAD_REQUEST": {
+          "TITLE": "Destinataires de l'invitation de depôt",
+          "MESSAGE": "Ce sont des destinataires individuels de votre invitation de depôt"
         }
       }
     },

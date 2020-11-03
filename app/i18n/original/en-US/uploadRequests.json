@@ -48,6 +48,7 @@
     },
     "TABLE": {
       "SEARCH_BY_LABEL": "Search by label",
+      "SEARCH_BY_RECIPIENT": "Search by recipient",
       "FILTER_BY": {
         "ALL": "All"
       },
@@ -61,13 +62,15 @@
         "TYPE": "Type",
         "CREATION_DATE": "Creation date",
         "SIZE": "Size",
-        "EMAIL": "Email"
+        "EMAIL": "Email",
+        "RECIPIENT": "Recipient"
       },
       "OPTIONS": {
         "ADD_RECIPIENTS": "Add recipients",
         "GLOBAL_EDIT": "Global edit",
         "ACTIVATE": "Activate",
         "CLOSE": "Close",
+        "CANCEL_OR_CLOSE": "Cancel/Close",
         "ARCHIVE": "Archive",
         "VIEW_IN_MY_SPACE": "View in my space"
       },
@@ -85,6 +88,10 @@
         "ENTRY_LIST_ARCHIVED": {
           "TITLE": "Archived upload request",
           "MESSAGE": "Uploaded files are either removed or copied to your personal space"
+        },
+        "UPLOAD_REQUEST": {
+          "TITLE": "Upload request recipients",
+          "MESSAGE": "These are individual recipients of your created upload request"
         }
       }
     },

@@ -31,6 +31,25 @@ function uploadRequestsConfig($stateProvider) {
       controller: 'uploadRequestGroupsController',
       controllerAs: 'uploadRequestGroupsVm',
     })
+    .state('uploadRequestGroup', {
+      parent: 'common',
+      url: '/uploadRequestGroups/:uuid',
+      template: require('./views/uploadRequestGroup.html'),
+      resolve: {
+        uploadRequestGroup: function($transition$, $state, $stateParams, uploadRequestGroupRestService) {
+          return uploadRequestGroupRestService.get($stateParams.uuid).then(uploadRequestGroup => {
+            if (uploadRequestGroup.collective) {
+              $transition$.abort();
+              $state.go('home');
+            }
+
+            return uploadRequestGroup;
+          });
+        }
+      },
+      controller: 'uploadRequestGroupController',
+      controllerAs: 'uploadRequestGroupVm',
+    })
     .state('uploadRequest', {
       parent: 'common',
       url: '/uploadRequests/:uuid',
