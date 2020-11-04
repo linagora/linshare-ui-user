@@ -25,6 +25,7 @@ function uploadRequestsController(
   uploadRequestsVm.$onInit = onInit;
   uploadRequestsVm.goBack = goBack;
   uploadRequestsVm.uploadRequestGroup = uploadRequestGroup;
+  uploadRequestsVm.openUploadRequest = openUploadRequest;
   uploadRequestsVm.allSelectedHasStatusOf = allSelectedHasStatusOf;
   uploadRequestsVm.paramFilter = { recipientEmail: '' };
   uploadRequestsVm.fabButton = {
@@ -79,7 +80,7 @@ function uploadRequestsController(
       state => state.includes(uploadRequestGroup.status)
     );
 
-    $state.go('uploadRequestGroups', { status }, { reload: true });
+    $state.go(`uploadRequestGroups.${status}`, { reload: true });
   }
 
   function toggleSearchState() {
@@ -96,6 +97,10 @@ function uploadRequestsController(
   function allSelectedHasStatusOf(status) {
     return uploadRequestsVm.selectedUploadRequests &&
       uploadRequestsVm.selectedUploadRequests.every(uploadRequest => uploadRequest.status === status);
+  }
+
+  function openUploadRequest(uploadRequest) {
+    $state.go('uploadRequestEntries', { uploadRequestUuid: uploadRequest.uuid });
   }
 }
 

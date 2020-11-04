@@ -7,6 +7,7 @@ uploadRequestEntriesController.$inject = [
   '$state',
   'tableParamsService',
   'uploadRequest',
+  'uploadRequestGroup',
   'uploadRequestRestService',
   'UPLOAD_REQUESTS_STATE_STATUS_MAPPING'
 ];
@@ -17,13 +18,14 @@ function uploadRequestEntriesController(
   $state,
   tableParamsService,
   uploadRequest,
+  uploadRequestGroup,
   uploadRequestRestService,
   UPLOAD_REQUESTS_STATE_STATUS_MAPPING
 ) {
   const uploadRequestEntriesVm = this;
 
   uploadRequestEntriesVm.$onInit = onInit;
-  uploadRequestEntriesVm.goToUploadRequestGroups = goToUploadRequestGroups;
+  uploadRequestEntriesVm.goBack = goBack;
   uploadRequestEntriesVm.uploadRequest = uploadRequest;
   uploadRequestEntriesVm.isArchived = uploadRequest.status === 'ARCHIVED';
   uploadRequestEntriesVm.backgroundContent = getBackgroundContent();
@@ -64,13 +66,19 @@ function uploadRequestEntriesController(
       });
   }
 
-  function goToUploadRequestGroups() {
-    const status = _.findKey(
-      UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
-      state => state.includes(uploadRequest.status)
-    );
+  function goBack() {
+    if (uploadRequest.collective) {
+      const status = _.findKey(
+        UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
+        state => state.includes(uploadRequest.status)
+      );
 
-    $state.go(`uploadRequestGroups.${status}`, { reload: true });
+      return $state.go(`uploadRequestGroups.${status}`, { reload: true });
+    }
+
+    $state.go('uploadRequests', {
+      uploadRequestGroupUuid: uploadRequestGroup.uuid
+    }, { reload: true });
   }
 
   function toggleSearchState() {

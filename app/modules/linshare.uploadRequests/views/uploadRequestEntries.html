@@ -29,7 +29,7 @@
           <div class="breadcrumbs-ctn hidden-xs">
             <div
               class="left-arrow actions"
-              ng-click="uploadRequestEntriesVm.goToUploadRequestGroups()">
+              ng-click="uploadRequestEntriesVm.goBack()">
               <a>
                 <i class="ls-previous-caret"></i>
               </a>
@@ -428,7 +428,7 @@
   <div class="header-sidebar append-to-body visible-xs workgroup-header-nav">
     <a
       class="zmdi zmdi-chevron-left zmdi-hc-2x"
-      ng-click="uploadRequestEntriesVm.goToUploadRequestGroups()"></a>
+      ng-click="uploadRequestEntriesVm.goBack()"></a>
     <h2 class="header-more-options set-ellipsis">
       {{::uploadRequestEntriesVm.uploadRequest.label}}
     </h2>
