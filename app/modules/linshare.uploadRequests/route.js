@@ -8,58 +8,72 @@ function uploadRequestsConfig($stateProvider) {
   $stateProvider
     .state('uploadRequestGroups', {
       parent: 'common',
-      url: '/uploadRequestGroups?status',
-      template: require('./views/uploadRequestGroups.html'),
+      url: '/upload_request_groups',
+      redirectTo: 'uploadRequestGroups.activeClosed',
       resolve: {
         functionality: function($transition$, $state, functionalities) {
           if (!functionalities.UPLOAD_REQUEST.enable) {
             $transition$.abort();
             $state.go('home');
           }
-        },
-        uploadRequestGroups: function($transition$, $state, $stateParams, uploadRequestGroupRestService, UPLOAD_REQUESTS_STATE_STATUS_MAPPING) {
-          const requestStatus = UPLOAD_REQUESTS_STATE_STATUS_MAPPING[$stateParams.status];
-
-          if (requestStatus) {
-            return uploadRequestGroupRestService.list(requestStatus);
-          }
-
-          $transition$.abort();
-          $state.go('home');
+        }
+      }
+    })
+    .state('uploadRequestGroups.activeClosed', {
+      url: '/activeClosed',
+      template: require('./views/uploadRequestGroups.html'),
+      resolve: {
+        uploadRequestGroups: function(uploadRequestGroupRestService) {
+          return uploadRequestGroupRestService.list(['ENABLED', 'CLOSED']);
         }
       },
       controller: 'uploadRequestGroupsController',
       controllerAs: 'uploadRequestGroupsVm',
     })
-    .state('uploadRequestGroup', {
-      parent: 'common',
-      url: '/uploadRequestGroups/:uuid',
-      template: require('./views/uploadRequestGroup.html'),
+    .state('uploadRequestGroups.pending', {
+      url: '/pending',
+      template: require('./views/uploadRequestGroups.html'),
       resolve: {
-        uploadRequestGroup: function($transition$, $state, $stateParams, uploadRequestGroupRestService) {
-          return uploadRequestGroupRestService.get($stateParams.uuid).then(uploadRequestGroup => {
-            if (uploadRequestGroup.collective) {
-              $transition$.abort();
-              $state.go('home');
-            }
-
-            return uploadRequestGroup;
-          });
+        uploadRequestGroups: function(uploadRequestGroupRestService) {
+          return uploadRequestGroupRestService.list('CREATED');
         }
       },
-      controller: 'uploadRequestGroupController',
-      controllerAs: 'uploadRequestGroupVm',
+      controller: 'uploadRequestGroupsController',
+      controllerAs: 'uploadRequestGroupsVm',
     })
-    .state('uploadRequest', {
-      parent: 'common',
-      url: '/uploadRequests/:uuid',
-      template: require('./views/uploadRequest.html'),
+    .state('uploadRequestGroups.archived', {
+      url: '/archived',
+      template: require('./views/uploadRequestGroups.html'),
+      resolve: {
+        uploadRequestGroups: function(uploadRequestGroupRestService) {
+          return uploadRequestGroupRestService.list('ARCHIVED');
+        }
+      },
+      controller: 'uploadRequestGroupsController',
+      controllerAs: 'uploadRequestGroupsVm',
+    })
+    .state('uploadRequests', {
+      parent: 'uploadRequestGroups',
+      url: '/upload_request_groups/:uploadRequestGroupUuid/upload_requests',
+      template: require('./views/uploadRequests.html'),
+      resolve: {
+        uploadRequestGroup: function($stateParams, uploadRequestGroupRestService) {
+          return uploadRequestGroupRestService.get($stateParams.uploadRequestGroupUuid);
+        }
+      },
+      controller: 'uploadRequestsController',
+      controllerAs: 'uploadRequestsVm',
+    })
+    .state('uploadRequestEntries', {
+      parent: 'uploadRequests',
+      url: '/:uploadRequestUuid/entries',
+      template: require('./views/uploadRequestEntries.html'),
       resolve: {
         uploadRequest: function($stateParams, uploadRequestRestService) {
-          return uploadRequestRestService.get($stateParams.uuid);
+          return uploadRequestRestService.get($stateParams.uploadRequestUuid);
         }
       },
-      controller: 'uploadRequestController',
-      controllerAs: 'uploadRequestVm'
+      controller: 'uploadRequestEntriesController',
+      controllerAs: 'uploadRequestEntriesVm'
     });
 }

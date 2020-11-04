@@ -238,25 +238,13 @@
         name: uploadRequestsMenuName,
         links: [{
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.PENDING',
-          link: 'uploadRequestGroups({ status: "pending" })',
-          state: 'uploadRequestGroups',
-          params: {
-            status: 'pending'
-          }
+          link: 'uploadRequestGroups.pending'
         }, {
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED',
-          link: 'uploadRequestGroups({ status: "activeClosed" })',
-          state: 'uploadRequestGroups',
-          params: {
-            status: 'activeClosed'
-          }
+          link: 'uploadRequestGroups.activeClosed'
         }, {
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES',
-          link: 'uploadRequestGroups({ status: "archived" })',
-          state: 'uploadRequestGroups',
-          params: {
-            status: 'archived'
-          }
+          link: 'uploadRequestGroups.archived'
         }],
         icon: 'zmdi zmdi-pin-account',
         hide: false

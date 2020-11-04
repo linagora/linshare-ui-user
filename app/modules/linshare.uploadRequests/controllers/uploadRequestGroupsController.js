@@ -18,8 +18,8 @@ uploadRequestGroupsController.$inject = [
   'lsAppConfig',
   'toastService',
   'tableParamsService',
-  'uploadRequestGroups',
   'UploadRequestObjectService',
+  'uploadRequestGroups',
   'uploadRequestGroupRestService',
   'uploadRequestUtilsService'
 ];
@@ -39,8 +39,8 @@ function uploadRequestGroupsController(
   lsAppConfig,
   toastService,
   tableParamsService,
-  uploadRequestGroups,
   UploadRequestObjectService,
+  uploadRequestGroups,
   uploadRequestGroupRestService,
   uploadRequestUtilsService
 ) {
@@ -62,13 +62,13 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.toggleMoreOptions = toggleMoreOptions;
     uploadRequestGroupsVm.setSubmitted = setSubmitted;
     uploadRequestGroupsVm.createUploadRequestGroup = createUploadRequestGroup;
-    uploadRequestGroupsVm.itemsList = uploadRequestGroups;
-    uploadRequestGroupsVm.status = $stateParams.status;
+    uploadRequestGroupsVm.currentStateName = $state.current.name;
     uploadRequestGroupsVm.paramFilter = { label: '' };
     uploadRequestGroupsVm.toggleSearchState = toggleSearchState;
     uploadRequestGroupsVm.currentSelectedDocument = {};
     uploadRequestGroupsVm.openUploadRequestGroup = openUploadRequestGroup;
     uploadRequestGroupsVm.removeArchivedUploadRequestGroups = removeArchivedUploadRequestGroups;
+    uploadRequestGroupsVm.itemsList = uploadRequestGroups;
     uploadRequestGroupsVm.fabButton = {
       toolbar: {
         activate: true,
@@ -88,7 +88,7 @@ function uploadRequestGroupsController(
       ]
     };
 
-    tableParamsService.initTableParams(uploadRequestGroupsVm.itemsList, uploadRequestGroupsVm.paramFilter)
+    return tableParamsService.initTableParams(uploadRequestGroupsVm.itemsList, uploadRequestGroupsVm.paramFilter)
       .then(() => {
         uploadRequestGroupsVm.tableParamsService = tableParamsService;
         uploadRequestGroupsVm.resetSelectedUploadRequestGroups = tableParamsService.resetSelectedItems;
@@ -144,16 +144,14 @@ function uploadRequestGroupsController(
         toastService.success({key: 'UPLOAD_REQUESTS.FORM_CREATE.SUCCESS'});
 
         if (
-          uploadRequestGroupsVm.status === 'pending' && request.status === 'CREATED' ||
-          uploadRequestGroupsVm.status === 'activeClosed' && request.status === 'ENABLED'
+          uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.pending' && request.status === 'CREATED' ||
+          uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed' && request.status === 'ENABLED'
         ) {
           uploadRequestGroupsVm.itemsList.push(request);
           uploadRequestGroupsVm.tableParams.reload();
         }
 
-        $state.go('uploadRequestGroups', {
-          status: request.status === 'CREATED' ? 'pending' : 'activeClosed'
-        });
+        $state.go(`uploadRequestGroups.${request.status === 'CREATED' ? 'pending' : 'activeClosed'}`);
       });
     }
   }
@@ -345,14 +343,19 @@ function uploadRequestGroupsController(
       });
   }
 
-  function openUploadRequestGroup(uploadRequest) {
-    if (uploadRequest.collective) {
-      return uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
+  function openUploadRequestGroup(uploadRequestGroup) {
+    if (uploadRequestGroup.collective) {
+      return uploadRequestGroupRestService.listUploadRequests(uploadRequestGroup.uuid)
         .then(requests => {
-          $state.go('uploadRequest', { uuid: requests[0].uuid });
+          if (requests && requests.length === 1) {
+            $state.go('uploadRequestEntries', {
+              uploadRequestUuid: requests[0].uuid,
+              uploadRequestGroupUuid: uploadRequestGroup.uuid
+            }, { inherit: false });
+          }
         });
     }
 
-    $state.go('uploadRequestGroup', { uuid: uploadRequest.uuid });
+    $state.go('uploadRequests', { uploadRequestGroupUuid: uploadRequestGroup.uuid }, { inherit: false });
   }
 }

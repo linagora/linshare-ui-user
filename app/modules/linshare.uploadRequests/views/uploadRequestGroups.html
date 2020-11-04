@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
-          <div ng-if="uploadRequestGroupsVm.status !== 'archived'" class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
+          <div ng-if="uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.archived'" class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
             auto-close="always" tooltip-placement="bottom" tooltip-popup-delay="500" is-open="isOpenNew"
             ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle>
@@ -43,10 +43,10 @@
               <span translate>UPLOAD_REQUESTS.TITLE</span>
             </a>
             <a href="javascript:void(0)">
-              <span ng-switch="uploadRequestGroupsVm.status"> |
-                <span ng-switch-when="pending" translate> UPLOAD_REQUESTS.MENU_ENTRIES.PENDING</span>
-                <span ng-switch-when="activeClosed" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED</span>
-                <span ng-switch-when="archived" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES</span>
+              <span ng-switch="uploadRequestGroupsVm.currentStateName"> |
+                <span ng-switch-when="uploadRequestGroups.pending" translate> UPLOAD_REQUESTS.MENU_ENTRIES.PENDING</span>
+                <span ng-switch-when="uploadRequestGroups.activeClosed" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED</span>
+                <span ng-switch-when="uploadRequestGroups.archived" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES</span>
               </span>
             </a>
           </div>
@@ -176,7 +176,7 @@
               </div>
             </div>
 
-            <div class="pull-right hidden-xs toggle-view-dropdown" ng-if="uploadRequestGroupsVm.status === 'activeClosed'"
+            <div class="pull-right hidden-xs toggle-view-dropdown" ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed'"
               ng-init="uploadRequestGroupsVm.currentFilter = 'UPLOAD_REQUESTS.TABLE.FILTER_BY.ALL'">
               <span class="filter-views ng-binding pull-left">
                 <span translate>FILTER_COMPONENT.FILTER_BY</span>:
@@ -301,7 +301,7 @@
                       >
                         {{::uploadRequestGroup.label}}
                       </span>
-                      <div class="upload-request-status" ng-if="uploadRequestGroupsVm.status === 'activeClosed'">
+                      <div class="upload-request-status" ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed'">
                         <i class="zmdi zmdi-circle" ng-class="{ 'closed': uploadRequestGroup.status === 'CLOSED'}"></i>
                         <small translate
                           ng-if="uploadRequestGroup.status === 'ENABLED'">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
@@ -422,19 +422,19 @@
                   {{uploadRequestGroup.activationDate | lsDate: 'mediumDate'}}
                 </td>
 
-                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status !== 'archived'"
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION_DATE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
                   {{uploadRequestGroup.expiryDate | lsDate: 'mediumDate'}}
                 </td>
 
-                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status === 'archived'"
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ARCHIVE_DATE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
                   {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate'}}
                 </td>
 
-                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.status !== 'pending'"
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.pending'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.FILES' | translate" data-sortable="'fileCount'"
                   header-class="'col-4'">
                   {{ uploadRequestGroup.fileCount || 'N/A' }}
@@ -485,7 +485,7 @@
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
-            <span ng-if="uploadRequestGroupsVm.status === 'pending'">
+            <span ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.pending'">
               <a class="plain-text-button share-link" translate-attr="{title: 'NAVIGATION.CANCEL'}"
                 ng-click="uploadRequestGroupsVm.cancelUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequestGroups)">
                 <i class="zmdi zmdi-close-circle"></i>
@@ -493,7 +493,7 @@
               </a>
             </span>
 
-            <span ng-if="uploadRequestGroupsVm.status === 'activeClosed'"
+            <span ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed'"
               ng-class="{ 'disable-link': !uploadRequestGroupsVm.canCloseSelectedUploadRequests()}"
               ng-click="uploadRequestGroupsVm.closeUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequestGroups)"
             >
@@ -506,7 +506,7 @@
               </a>
             </span>
 
-            <span ng-if="uploadRequestGroupsVm.status === 'archived'"
+            <span ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.archived'"
               ng-click="uploadRequestGroupsVm.removeArchivedUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequestGroups)"
             >
               <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
