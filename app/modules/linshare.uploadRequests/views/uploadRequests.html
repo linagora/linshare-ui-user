@@ -49,7 +49,10 @@
             </div>
 
             <div class="upload-request-status" ng-switch="uploadRequestsVm.uploadRequestGroup.status">
-              <i class="zmdi zmdi-circle" ng-class="{ 'closed': ['CLOSED', 'ARCHIVED', 'CREATED'].includes(uploadRequestsVm.uploadRequestGroup.status) }"></i>
+              <i class="zmdi zmdi-circle" ng-class="{
+                'closed': ['CLOSED', 'CREATED'].includes(uploadRequestsVm.uploadRequestGroup.status),
+                'archived': uploadRequestsVm.uploadRequestGroup.status === 'ARCHIVED'
+              }"></i>
               <small translate ng-switch-when="CREATED">UPLOAD_REQUESTS.STATUS.PENDING</small>
               <small translate ng-switch-when="ENABLED">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
               <small translate ng-switch-when="CLOSED">UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</small>
@@ -295,7 +298,10 @@
                         {{::uploadRequest.recipientEmail}}
                       </span>
                       <div class="upload-request-status">
-                        <i class="zmdi zmdi-circle" ng-class="{ 'closed': uploadRequest.status === 'CLOSED'}"></i>
+                        <i class="zmdi zmdi-circle" ng-class="{
+                          'closed': ['CLOSED', 'CREATED'].includes(uploadRequest.status),
+                          'archived': uploadRequest.status === 'ARCHIVED'
+                        }"></i>
                         <small translate
                           ng-if="uploadRequest.status === 'ENABLED'">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
                         <small translate
