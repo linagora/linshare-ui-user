@@ -1,0 +1,10 @@
+<div class="upload-request-status" ng-switch="$ctrl.uploadRequest.status">
+  <i class="zmdi zmdi-circle" ng-class="{
+    'closed': ['CLOSED', 'CREATED'].includes($ctrl.uploadRequest.status),
+    'archived': $ctrl.uploadRequest.status === 'ARCHIVED'
+  }"></i>
+  <small translate ng-switch-when="CREATED">UPLOAD_REQUESTS.STATUS.PENDING</small>
+  <small translate ng-switch-when="ENABLED">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
+  <small translate ng-switch-when="CLOSED">UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</small>
+  <small translate ng-switch-when="ARCHIVED">UPLOAD_REQUESTS.STATUS.ARCHIVED</small>
+</div>

@@ -8,23 +8,6 @@
     color : #99a2a7;
   }
 
-  .upload-request-status {
-    text-transform: none;
-    font-weight: 400;
-
-    i {
-      color: #43A047;
-
-      &.closed {
-        color: #696969
-      }
-
-      &.archived {
-        color: #bebebe
-      }
-    }
-  }
-
   .recipient-list {
     .recipientsAutocomplete {
       display: flex;
@@ -35,6 +18,23 @@
         display: flex;
         align-items: center;
       }
+    }
+  }
+}
+
+.upload-request-status {
+  text-transform: none;
+  font-weight: 400;
+
+  i {
+    color: #43A047;
+
+    &.closed {
+      color: #696969;
+    }
+
+    &.archived {
+      color: #bebebe;
     }
   }
 }

@@ -301,14 +301,9 @@
                       >
                         {{::uploadRequestGroup.label}}
                       </span>
-                      <div class="upload-request-status" ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed'">
-                        <i class="zmdi zmdi-circle" ng-class="{ 'closed': uploadRequestGroup.status === 'CLOSED'}"></i>
-                        <small translate
-                          ng-if="uploadRequestGroup.status === 'ENABLED'">UPLOAD_REQUESTS.STATUS.ACTIVE</small>
-                        <small translate
-                          ng-if="uploadRequestGroup.status === 'CLOSED'">UPLOAD_REQUESTS.STATUS.EXPIRED_CLOSED</small>
+                      <div ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed'">
+                        <upload-request-status upload-request="uploadRequestGroup"></upload-request-status>
                       </div>
-
                     </span>
 
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
