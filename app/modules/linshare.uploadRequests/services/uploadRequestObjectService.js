@@ -1,13 +1,50 @@
-/**
- * UploadRequestObjectService Factory
- * @namespace LinShare.uploadRequests
- */
-(function() {
-  'use strict';
+angular
+  .module('linshare.uploadRequests')
+  .factory('UploadRequestObjectService', UploadRequestObjectService);
 
-  angular
-    .module('linshare.uploadRequests')
-    .factory('UploadRequestObjectService', UploadRequestObjectService);
+UploadRequestObjectService.$inject = [
+  '_', '$q', 'functionalityRestService', 'uploadRequestGroupRestService', 'moment', '$log'
+];
+
+/**
+ *  @namespace UploadRequestObjectService
+ *  @desc Manipulation of uploadRequest object front/back
+ *  @memberOf LinShare.uploadRequest
+ */
+function UploadRequestObjectService(_, $q, functionalityRestService, uploadRequestGroupRestService, moment, $log) {
+
+  var
+    allowedToActivation = {},
+    allowedToExpiration = {},
+    allowedToExpiryNotification = {},
+    allowedToTotalSizeOfFiles = {},
+    allowedToMaxSizeOfAFile = {},
+    allowedToMaxNumberOfFiles = {},
+    allowedToPasswordProtected = {},
+    allowedToDeletion = {},
+    allowedToClosure = {},
+    allowedToNotificationLanguage = {},
+    form = {
+      expirationDate: null,
+      totalSizeOfFiles: {
+        value: 0,
+        unit: 'KB'
+      },
+      maxNumberOfFiles: 0,
+      maxSizeOfAFile: {
+        value: 0,
+        unit: 'KB'
+      },
+      activationDate: null,
+      passwordProtected: false,
+      allowDeletion: false,
+      allowClosure: false,
+      notificationDate: null,
+      notificationLanguage: 'us'
+    },
+    self;
+
+  return UploadRequestObject;
 
   UploadRequestObjectService.$inject = [
     '_',
@@ -21,9 +58,9 @@
   ];
 
   /**
-   *  @namespace UploadRequestObjectService
-   *  @desc Manipulation of uploadRequest object front/back
-   *  @memberOf LinShare.uploadRequest
+   *  @name checkFunctionalities
+   *  @desc Check the different rights relative to the uploadRequest
+   *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
    */
   function UploadRequestObjectService(
     _,
@@ -38,205 +75,6 @@
 
     const { showToastAlertFor, openWarningDialogFor } = uploadRequestUtilsService;
 
-    var
-      allowedToActivation = {},
-      allowedToExpiration = {},
-      allowedToExpiryNotification = {},
-      allowedToTotalSizeOfFiles = {},
-      allowedToMaxSizeOfAFile = {},
-      allowedToMaxNumberOfFiles = {},
-      allowedToPasswordProtected = {},
-      allowedToDeletion = {},
-      allowedToClosure = {},
-      allowedToNotificationLanguage = {},
-      form = {
-        expirationDate: null,
-        totalSizeOfFiles: {
-          value: 0,
-          unit: 'KB'
-        },
-        maxNumberOfFiles: 0,
-        maxSizeOfAFile: {
-          value: 0,
-          unit: 'KB'
-        },
-        activationDate: null,
-        passwordProtected: false,
-        allowDeletion: false,
-        allowClosure: false,
-        notificationDate: null,
-        notificationLanguage: 'us'
-      },
-      self;
-
-    return UploadRequestObject;
-
-    ////////////
-
-    /**
-     *  @name UploadRequestObject
-     *  @desc Constructor of the uploadRequest object
-     *  @param {Object} jsonObject - Json object for constructing a uploadRequest object
-     *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
-     */
-    function UploadRequestObject(jsonObject, options = {}) {
-      self = this;
-      jsonObject = jsonObject || {};
-      checkFunctionalities().then(function() {
-        self.allowedToActivation = _.cloneDeep(allowedToActivation);
-        self.allowedToExpiration = _.cloneDeep(allowedToExpiration);
-        self.allowedToExpiryNotification = _.cloneDeep(allowedToExpiryNotification);
-        self.allowedToTotalSizeOfFiles = _.cloneDeep(allowedToTotalSizeOfFiles);
-        self.allowedToMaxSizeOfAFile = _.cloneDeep(allowedToMaxSizeOfAFile);
-        self.allowedToMaxNumberOfFiles = _.cloneDeep(allowedToMaxNumberOfFiles);
-        self.allowedToPasswordProtected = _.cloneDeep(allowedToPasswordProtected);
-        self.allowedToDeletion = _.cloneDeep(allowedToDeletion);
-        self.allowedToClosure = _.cloneDeep(allowedToClosure);
-        self.allowedToNotificationLanguage = _.cloneDeep(allowedToNotificationLanguage);
-        self.create = create;
-        self.creationDate = setPropertyValue(jsonObject.creationDate, '');
-        self.domain = setPropertyValue(jsonObject.domain, '');
-        self.activationDate = setPropertyValue(jsonObject.activationDate, allowedToActivation.value);
-        self.expirationDate = setPropertyValue(jsonObject.expirationDate, allowedToExpiration.value);
-        self.notificationDate = setPropertyValue(jsonObject.notificationDate, allowedToExpiryNotification.value);
-        self.maxSizeOfAFile = {
-          value: setPropertyValue(jsonObject.maxSizeOfAFile && jsonObject.maxSizeOfAFile.value, allowedToMaxSizeOfAFile.value),
-          unit: setPropertyValue(jsonObject.maxSizeOfAFile && jsonObject.maxSizeOfAFile.unit, allowedToMaxSizeOfAFile.unit)
-        };
-        self.totalSizeOfFiles = {
-          value: setPropertyValue(jsonObject.totalSizeOfFiles && jsonObject.totalSizeOfFiles.value, allowedToTotalSizeOfFiles.value),
-          unit: setPropertyValue(jsonObject.totalSizeOfFiles && jsonObject.totalSizeOfFiles.unit, allowedToTotalSizeOfFiles.unit),
-        };
-        self.maxNumberOfFiles = setPropertyValue(jsonObject.maxNumberOfFiles, allowedToMaxNumberOfFiles.value);
-        self.passwordProtected = setPropertyValue(jsonObject.passwordProtected, allowedToPasswordProtected.value);
-        self.allowClosure = setPropertyValue(jsonObject.allowClosure, allowedToClosure.value);
-        self.allowDeletion = setPropertyValue(jsonObject.allowDeletion, allowedToDeletion.value);
-        self.notificationLanguage = setPropertyValue(jsonObject.notificationLanguage, allowedToNotificationLanguage.value);
-        self.mail = setPropertyValue(jsonObject.mail, '');
-        self.label = setPropertyValue(jsonObject.label, '');
-        self.groupMode = setPropertyValue(jsonObject.groupMode, false);
-        self.message = setPropertyValue(jsonObject.message, '');
-        self.recipients = setPropertyValue(jsonObject.recipients, []);
-        self.newRecipients = [];
-        self.mailingListUuid = setPropertyValue(jsonObject.mailingListUuid, []);
-        self.mailingList = setPropertyValue(jsonObject.mailingList, []);
-        self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
-        self.reset = reset;
-        self.update = update;
-        self.toDTO = toDTO;
-        self.addRecipient = addRecipient;
-        self.removeRecipient = removeRecipient;
-        self.removeNewRecipient = removeNewRecipient;
-        self.getRecipients = getRecipients;
-        self.getNewRecipients = getNewRecipients;
-        self.getMailingListUuid = getMailingListUuid;
-        self.getMailingList = getMailingList;
-        self.removeMailingList = removeMailingList;
-        self.getMaxDateOfExpiration = getMaxDateOfExpiration;
-        self.getMinDateOfActivation = getMinDateOfActivation;
-        self.getMaxSize = getMaxSize;
-        self.getMaxDateOfNotification = getMaxDateOfNotification;
-        self.calculateDatePickerOptions = calculateDatePickerOptions;
-        self.uuid = setPropertyValue(jsonObject.uuid, undefined);
-        self.submitRecipients = submitRecipients;
-        self.submitRecipientsCallback = options.submitRecipientsCallback;
-        calculateDatePickerOptions();
-        setFormValue().then(function(formData) {
-          self.form = formData;
-          if (!_.isUndefined(self.uuid)) {
-            // TODO: Handle for update
-          }
-        });
-      });
-    }
-
-    /**
-     *  @name checkFunctionalities
-     *  @desc Check the different rights relative to the uploadRequest
-     *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
-     */
-    function checkFunctionalities() {
-      return $q.all([
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_ACTIVATION').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToActivation = clonedData;
-          allowedToActivation.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-          allowedToActivation.original = clonedData.value;
-          allowedToActivation.value = (_.isUndefined(clonedData.value) || _.isUndefined(clonedData.unit)) ? undefined : moment()
-            .add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_EXPIRATION').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToExpiration = clonedData;
-          allowedToExpiration.canOverride =
-            _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-          allowedToExpiration.original = clonedData.value;
-          allowedToExpiration.value = (_.isUndefined(clonedData.value) || _.isUndefined(clonedData.unit)) ? undefined : (allowedToActivation && allowedToActivation.value ? moment(allowedToActivation.value) : moment())
-            .add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_NOTIFICATION').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToExpiryNotification = clonedData;
-          allowedToExpiryNotification.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-          allowedToExpiryNotification.original = clonedData.value;
-          allowedToExpiryNotification.value = (_.isUndefined(clonedData.value) || _.isUndefined(clonedData.unit)) ? undefined : (allowedToExpiration && allowedToExpiration.value && moment(allowedToExpiration.value)
-            .subtract(clonedData.value, clonedData.unit.toLowerCase()).toDate());
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_DEPOSIT_SIZE').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToTotalSizeOfFiles = clonedData;
-          allowedToTotalSizeOfFiles.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_SIZE').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToMaxSizeOfAFile = clonedData;
-          allowedToMaxSizeOfAFile.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_COUNT').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToMaxNumberOfFiles = clonedData;
-          allowedToMaxNumberOfFiles.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__SECURED_URL').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToPasswordProtected = clonedData;
-          allowedToPasswordProtected.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__CAN_DELETE').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToDeletion = clonedData;
-          allowedToDeletion.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__CAN_CLOSE').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToClosure = clonedData;
-          allowedToClosure.canOverride =
-          _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
-        }),
-        functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__NOTIFICATION_LANGUAGE').then(function(data) {
-          var clonedData = _.cloneDeep(data || {});
-
-          allowedToNotificationLanguage = clonedData;
-          allowedToNotificationLanguage.canOverride = !!clonedData.canOverride;
-        })
-      ]);
-    }
-
     /**
      *  @name create
      *  @desc Create the instatiated object by the API
@@ -244,15 +82,122 @@
      *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
      */
     function create() {
-      /* jshint validthis:true */
       self = this;
       var
-        deferred = $q.defer(),
-        uploadRequestDTO = self.toDTO();
+        allowedToActivation = {},
+        allowedToExpiration = {},
+        allowedToExpiryNotification = {},
+        allowedToTotalSizeOfFiles = {},
+        allowedToMaxSizeOfAFile = {},
+        allowedToMaxNumberOfFiles = {},
+        allowedToPasswordProtected = {},
+        allowedToDeletion = {},
+        allowedToClosure = {},
+        allowedToNotificationLanguage = {},
+        form = {
+          expirationDate: null,
+          totalSizeOfFiles: {
+            value: 0,
+            unit: 'KB'
+          },
+          maxNumberOfFiles: 0,
+          maxSizeOfAFile: {
+            value: 0,
+            unit: 'KB'
+          },
+          activationDate: null,
+          passwordProtected: false,
+          allowDeletion: false,
+          allowClosure: false,
+          notificationDate: null,
+          notificationLanguage: 'us'
+        },
+        self;
 
-      uploadRequestGroupRestService.create(uploadRequestDTO, { groupMode: self.groupMode }).then(function(data) {
+      return UploadRequestObject;
+
+      ////////////
+
+      /**
+       *  @name UploadRequestObject
+       *  @desc Constructor of the uploadRequest object
+       *  @param {Object} jsonObject - Json object for constructing a uploadRequest object
+       *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
+       */
+      function UploadRequestObject(jsonObject, options = {}) {
+        self = this;
+        jsonObject = jsonObject || {};
+        checkFunctionalities().then(function () {
+          self.allowedToActivation = _.cloneDeep(allowedToActivation);
+          self.allowedToExpiration = _.cloneDeep(allowedToExpiration);
+          self.allowedToExpiryNotification = _.cloneDeep(allowedToExpiryNotification);
+          self.allowedToTotalSizeOfFiles = _.cloneDeep(allowedToTotalSizeOfFiles);
+          self.allowedToMaxSizeOfAFile = _.cloneDeep(allowedToMaxSizeOfAFile);
+          self.allowedToMaxNumberOfFiles = _.cloneDeep(allowedToMaxNumberOfFiles);
+          self.allowedToPasswordProtected = _.cloneDeep(allowedToPasswordProtected);
+          self.allowedToDeletion = _.cloneDeep(allowedToDeletion);
+          self.allowedToClosure = _.cloneDeep(allowedToClosure);
+          self.allowedToNotificationLanguage = _.cloneDeep(allowedToNotificationLanguage);
+          self.create = create;
+          self.creationDate = setPropertyValue(jsonObject.creationDate, '');
+          self.domain = setPropertyValue(jsonObject.domain, '');
+          self.activationDate = setPropertyValue(jsonObject.activationDate, allowedToActivation.value);
+          self.expirationDate = setPropertyValue(jsonObject.expirationDate, allowedToExpiration.value);
+          self.notificationDate = setPropertyValue(jsonObject.notificationDate, allowedToExpiryNotification.value);
+          self.maxSizeOfAFile = {
+            value: setPropertyValue(jsonObject.maxSizeOfAFile && jsonObject.maxSizeOfAFile.value, allowedToMaxSizeOfAFile.value),
+            unit: setPropertyValue(jsonObject.maxSizeOfAFile && jsonObject.maxSizeOfAFile.unit, allowedToMaxSizeOfAFile.unit)
+          };
+          self.totalSizeOfFiles = {
+            value: setPropertyValue(jsonObject.totalSizeOfFiles && jsonObject.totalSizeOfFiles.value, allowedToTotalSizeOfFiles.value),
+            unit: setPropertyValue(jsonObject.totalSizeOfFiles && jsonObject.totalSizeOfFiles.unit, allowedToTotalSizeOfFiles.unit),
+          };
+          self.maxNumberOfFiles = setPropertyValue(jsonObject.maxNumberOfFiles, allowedToMaxNumberOfFiles.value);
+          self.passwordProtected = setPropertyValue(jsonObject.passwordProtected, allowedToPasswordProtected.value);
+          self.allowClosure = setPropertyValue(jsonObject.allowClosure, allowedToClosure.value);
+          self.allowDeletion = setPropertyValue(jsonObject.allowDeletion, allowedToDeletion.value);
+          self.notificationLanguage = setPropertyValue(jsonObject.notificationLanguage, allowedToNotificationLanguage.value);
+          self.mail = setPropertyValue(jsonObject.mail, '');
+          self.label = setPropertyValue(jsonObject.label, '');
+          self.groupMode = setPropertyValue(jsonObject.groupMode, false);
+          self.message = setPropertyValue(jsonObject.message, '');
+          self.recipients = setPropertyValue(jsonObject.recipients, []);
+          self.newRecipients = [];
+          self.mailingListUuid = setPropertyValue(jsonObject.mailingListUuid, []);
+          self.mailingList = setPropertyValue(jsonObject.mailingList, []);
+          self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
+          self.reset = reset;
+          self.update = update;
+          self.toDTO = toDTO;
+          self.addRecipient = addRecipient;
+          self.removeRecipient = removeRecipient;
+          self.removeNewRecipient = removeNewRecipient;
+          self.getRecipients = getRecipients;
+          self.getNewRecipients = getNewRecipients;
+          self.getMailingListUuid = getMailingListUuid;
+          self.getMailingList = getMailingList;
+          self.removeMailingList = removeMailingList;
+          self.getMaxDateOfExpiration = getMaxDateOfExpiration;
+          self.getMinDateOfActivation = getMinDateOfActivation;
+          self.getMaxSize = getMaxSize;
+          self.getMaxDateOfNotification = getMaxDateOfNotification;
+          self.calculateDatePickerOptions = calculateDatePickerOptions;
+          self.uuid = setPropertyValue(jsonObject.uuid, undefined);
+          self.submitRecipients = submitRecipients;
+          self.submitRecipientsCallback = options.submitRecipientsCallback;
+          calculateDatePickerOptions();
+          setFormValue().then(function (formData) {
+            self.form = formData;
+            if (!_.isUndefined(self.uuid)) {
+              // TODO: Handle for update
+            }
+          });
+        });
+      }
+
+      uploadRequestGroupRestService.create(uploadRequestDTO, { groupMode: self.groupMode }).then(data => {
         deferred.resolve(data);
-      }).catch(function(error) {
+      }).catch(error => {
         deferred.reject(error);
       });
 
@@ -290,33 +235,6 @@
     }
 
     /**
-     *  @name reset
-     *  @desc Reset the instatiated object to the default values
-     *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
-     */
-    function reset() {
-      /* jshint validthis:true */
-      self = this;
-      self.activationDate = allowedToActivation.value;
-      self.expirationDate = allowedToExpiration.value;
-      self.notificationDate = allowedToExpiryNotification.value;
-      self.maxSizeOfAFile = {
-        value: allowedToMaxSizeOfAFile.value,
-        unit: allowedToMaxSizeOfAFile.unit
-      };
-      self.totalSizeOfFiles = {
-        value: allowedToTotalSizeOfFiles.value,
-        unit: allowedToTotalSizeOfFiles.unit
-      };
-      self.maxNumberOfFiles = allowedToMaxNumberOfFiles.value;
-      self.passwordProtected = allowedToPasswordProtected.value;
-      self.allowClosure = allowedToClosure.value;
-      self.allowDeletion = allowedToDeletion.value;
-      self.mail = '';
-      self.message = '';
-    }
-
-    /**
      *  @name setFormValue
      *  @desc Set form element value depending on ithe object property
      *  @returns {Promise}
@@ -349,15 +267,14 @@
      *  @memberOf LinShare.uploadRequests.UploadRequestObjectService
      */
     function update() {
-      /* jshint validthis:true */
       self = this;
       var
         deferred = $q.defer(),
         uploadRequestDTO = self;
 
-      uploadRequestGroupRestService.update(uploadRequestDTO.uuid, uploadRequestDTO).then(function(data) {
+      uploadRequestGroupRestService.update(uploadRequestDTO.uuid, uploadRequestDTO).then(data => {
         deferred.resolve(data);
-      }).catch(function(error) {
+      }).catch(error => {
         deferred.reject(error);
       });
 
@@ -375,20 +292,15 @@
             if (elem.mail === contact.identifier) {
               exists = true;
               $log.info('The user ' + contact.identifier + ' is already in the recipients list');
+              break;
             }
-          });
-          if (!exists) {
-            contact.mail = contact.identifier;
-            self.recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
-          }
-          break;
         case 'user':
           const uniqueInitialRecipients = _.uniqBy(self.recipients, 'mail');
 
           uniqueInitialRecipients.forEach(initialRecipient => {
             if (initialRecipient.mail === contact.mail) {
               exists = true;
-              toastService.error({key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST'});
+              toastService.error({ key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST' });
               $log.info('The user ' + contact.mail + ' is already in the upload request');
             }
           });
@@ -404,143 +316,147 @@
 
             self.newRecipients.push({ firstName, lastName, mail });
           }
-          break;
-        case 'mailinglist':
-          _.forEach(self.mailingListUuid, function(element) {
-            if (element.identifier === contact.identifier) {
-              exists = true;
-              $log.info('The list ' + contact.listName + ' is already in the mailinglist');
-            }
-          });
-          if (!exists) {
-            self.mailingListUuid.push(contact.identifier);
-            self.mailingList.push(_.omit(contact, 'display', 'identifier'));
-          }
-          break;
+      });
+      if (!exists) {
+        self.recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
       }
+      break;
+      case 'mailinglist':
+      _.forEach(self.mailingListUuid, function (element) {
+        if (element.identifier === contact.identifier) {
+          exists = true;
+          $log.info('The list ' + contact.listName + ' is already in the mailinglist');
+        }
+      });
+      if (!exists) {
+        self.mailingListUuid.push(contact.identifier);
+        self.mailingList.push(_.omit(contact, 'display', 'identifier'));
+      }
+      break;
+    }
+  };
+
+  function removeRecipient(index) {
+    self.recipients.splice(index, 1);
+  };
+
+  function removeNewRecipient(index) {
+    self.newRecipients.splice(index, 1);
+  };
+
+  function getRecipients() {
+    return self.recipients;
+  };
+
+  function getNewRecipients() {
+    return self.newRecipients;
+  }
+
+  function getMailingListUuid() {
+    return self.mailingListUuid;
+  };
+
+  function getMailingList() {
+    return self.mailingList;
+  };
+
+  function removeMailingList(index) {
+    self.mailingListUuid.splice(index, 1);
+    self.mailingList.splice(index, 1);
+  };
+
+  function getMaxDateOfExpiration(isFormatted) {
+    const activationDate = self.activationDate ? moment(self.activationDate) : moment();
+    const maxDate = !_.isUndefined(self.allowedToExpiration.maxValue)
+      && self.allowedToExpiration.unit
+      && activationDate.add(self.allowedToExpiration.maxValue, self.allowedToExpiration.unit.toLowerCase());
+
+    if (!isFormatted) {
+      return maxDate && maxDate.toDate();
     };
 
-    function removeRecipient(index) {
-      self.recipients.splice(index, 1);
-    };
+    return maxDate && maxDate.format('DD MMM YYYY');
+  };
 
-    function removeNewRecipient(index) {
-      self.newRecipients.splice(index, 1);
-    };
+  function getMinDateOfActivation(isFormatted) {
+    const minDate = !_.isUndefined(self.allowedToActivation.maxValue) && self.allowedToActivation.unit
+      ? moment().add(self.allowedToActivation.maxValue, self.allowedToActivation.unit.toLowerCase())
+      : moment();
 
-    function getRecipients() {
-      return self.recipients;
-    };
-
-    function getNewRecipients() {
-      return self.newRecipients;
+    if (!isFormatted) {
+      return minDate.toDate();
     }
 
-    function getMailingListUuid() {
-      return self.mailingListUuid;
-    };
+    return minDate.format('DD MMM YYYY');
+  }
 
-    function getMailingList() {
-      return self.mailingList;
-    };
+  function getMaxDateOfNotification(isFormatted) {
+    const expirationDate = self.expirationDate && moment(self.expirationDate);
+    const maxDate = !_.isUndefined(self.allowedToExpiryNotification.maxValue)
+      && self.allowedToExpiryNotification.unit
+      && expirationDate
+      && expirationDate.subtract(self.allowedToExpiryNotification.maxValue, self.allowedToExpiryNotification.unit.toLowerCase());
 
-    function removeMailingList(index) {
-      self.mailingListUuid.splice(index, 1);
-      self.mailingList.splice(index, 1);
-    };
-
-    function getMaxDateOfExpiration(isFormatted) {
-      var maxDate = (_.isUndefined(self.allowedToExpiration.original) || _.isUndefined(self.allowedToExpiration.unit)) ? undefined :
-        (self.activationDate ? moment(self.activationDate) : moment()).add(self.allowedToExpiration.original, self.allowedToExpiration.unit.toLowerCase());
-
-      if (!isFormatted) {
-        return maxDate ? maxDate.toDate() : undefined;
-      };
-
-      return maxDate ? maxDate.format('DD MMM YYYY') : undefined;
-    };
-
-    function getMinDateOfActivation(isFormatted) {
-      var minDate = (_.isUndefined(self.allowedToActivation.original) || _.isUndefined(self.allowedToActivation.unit)) ? moment() :
-        moment().add(self.allowedToActivation.original, self.allowedToActivation.unit.toLowerCase());
-
-      if (!isFormatted) {
-        return minDate.toDate();
-      }
-
-      return minDate.format('DD MMM YYYY');
+    if (!isFormatted) {
+      return maxDate && maxDate.toDate();
     }
 
-    function getMaxDateOfNotification(isFormatted) {
-      var maxDate = (_.isUndefined(self.allowedToExpiryNotification.original) || _.isUndefined(self.allowedToExpiryNotification.unit)) ? undefined :
-        (self.expirationDate && moment(self.expirationDate).subtract(self.allowedToExpiryNotification.original, self.allowedToExpiryNotification.unit.toLowerCase()));
+    return maxDate && maxDate.format('DD MMM YYYY');
+  }
 
-      if (!isFormatted) {
-        return maxDate ? maxDate.toDate() : undefined;
-      }
+  function getMaxSize(type, isFormatted) {
+    var configMaxValue, configUnit, currentUnit;
 
-      return maxDate ? maxDate.format('DD MMM YYYY') : undefined;
+    if (type === 'total') {
+      configMaxValue = self.allowedToTotalSizeOfFiles.maxValue;
+      configUnit = self.allowedToTotalSizeOfFiles.unit;
+      currentUnit = self.totalSizeOfFiles.unit;
+    } else if (type === 'one') {
+      configMaxValue = self.allowedToMaxSizeOfAFile.maxValue;
+      configUnit = self.allowedToMaxSizeOfAFile.unit;
+      currentUnit = self.maxSizeOfAFile.unit;
     }
 
-    function getMaxSize(type, isFormatted) {
-      var configValue, configUnit, currentUnit;
+    const maxValue = configMaxValue * convertBase(currentUnit, configUnit);
 
-      if (type === 'total') {
-        configValue = self.allowedToTotalSizeOfFiles.value;
-        configUnit = self.allowedToTotalSizeOfFiles.unit;
-        currentUnit = self.totalSizeOfFiles.unit;
-      } else if (type === 'one') {
-        configValue = self.allowedToMaxSizeOfAFile.value;
-        configUnit = self.allowedToMaxSizeOfAFile.unit;
-        currentUnit = self.maxSizeOfAFile.unit;
-      }
-      if (isFormatted) {
-        return `${configValue} ${formatUnit(configUnit)}`;
-      } else {
-        return configValue * convertBase(currentUnit, configUnit);
-      }
+    if (isFormatted) {
+      return `${maxValue} ${formatUnit(configUnit)}`;
+    } else {
+      return maxValue;
+    }
+  }
+
+  function submitRecipients() {
+    if (self.getNewRecipients().length === 0) {
+      toastService.error({ key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST' });
+
+      return;
     }
 
-    function calculateDatePickerOptions() {
-      self.expirationDateOptions = {
-        minDate: self.activationDate,
-        maxDate: self.getMaxDateOfExpiration()
-      };
-      self.activationDateOptions = {
-        minDate: self.getMinDateOfActivation(),
-        maxDate: self.expirationDate
-      };
-      self.notificationDateOptions = {
-        minDate: self.getMinDateOfActivation(),
-        maxDate: self.getMaxDateOfNotification()
-      };
-    }
+    return openWarningDialogFor('add_recipients', self.newRecipients)
+      .then(() => uploadRequestGroupRestService.addRecipients(self.uuid, self.newRecipients))
+      .then(() => {
+        showToastAlertFor('add_recipients', 'info', self.newRecipients);
 
-    function submitRecipients() {
-      if (self.getNewRecipients().length === 0) {
-        toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST'});
+        if (self.submitRecipientsCallback) {
+          self.submitRecipientsCallback();
+        }
 
-        return;
-      }
+        self.recipients = [...self.recipients, ...self.newRecipients];
+        self.newRecipients = [];
 
-      return openWarningDialogFor('add_recipients', self.newRecipients)
-        .then(() => uploadRequestGroupRestService.addRecipients(self.uuid, self.newRecipients))
-        .then(() => {
-          showToastAlertFor('add_recipients', 'info', self.newRecipients);
+      }).catch(err => {
+        if (err) {
+          showToastAlertFor('add_recipients', 'error', self.recipients);
+        }
+      });
+  }
 
-          if (self.submitRecipientsCallback) {
-            self.submitRecipientsCallback();
-          }
-
-          self.recipients = [...self.recipients, ...self.newRecipients];
-          self.newRecipients = [];
-
-        }).catch(err => {
-          if (err) {
-            showToastAlertFor('add_recipients', 'error', self.recipients);
-          }
-        });
-    }
+  // Helper
+  function convertToByte(obj) {
+    const sizes = ['Bytes', 'KILO', 'MEGA', 'GIGA'];
+    const indexInSizes = sizes.indexOf(obj.unit);
+    const base = 1024;
 
     // Helper
     function convertToByte(obj) {
@@ -555,7 +471,7 @@
       return 0;
     }
 
-    function convertBase (currentUnit, configUnit) {
+    function convertBase(currentUnit, configUnit) {
       const mapping = {
         'KILO': 1,
         'MEGA': 1024,
@@ -577,5 +493,4 @@
           return 'MB';
       }
     }
-  }
-})();
+  };

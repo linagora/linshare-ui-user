@@ -232,7 +232,7 @@
                         <input
                           name="maxNumberOfFiles"
                           required
-                          max="{{::mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.value}}"
+                          max="{{::mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.maxValue}}"
                           ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.canOverride"
                           class="form-control custom-bordered-input custom-single-input"
                           ng-model="mainVm.sidebar.getData().uploadRequestObject.maxNumberOfFiles" type="number" />
