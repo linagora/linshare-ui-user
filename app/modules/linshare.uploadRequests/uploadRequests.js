@@ -12,6 +12,7 @@ require('./components/uploadRequestStatus/uploadRequestStatusComponent');
 require('./controllers/uploadRequestEntriesController');
 require('./controllers/uploadRequestsController');
 require('./controllers/uploadRequestGroupsController');
+require('./services/uploadRequestEntryRestService');
 require('./services/uploadRequestRestService');
 require('./services/uploadRequestGroupObjectService');
 require('./services/uploadRequestUtilsService');

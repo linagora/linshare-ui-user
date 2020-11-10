@@ -5,10 +5,12 @@ angular
 uploadRequestEntriesController.$inject = [
   '_',
   '$state',
+  'documentUtilsService',
   'tableParamsService',
   'uploadRequest',
   'sidebarService',
   'uploadRequestGroup',
+  'uploadRequestEntryRestService',
   'uploadRequestRestService',
   'UPLOAD_REQUESTS_STATE_STATUS_MAPPING',
   'UploadRequestGroupObjectService',
@@ -20,10 +22,12 @@ uploadRequestEntriesController.$inject = [
 function uploadRequestEntriesController(
   _,
   $state,
+  documentUtilsService,
   tableParamsService,
   uploadRequest,
   sidebarService,
   uploadRequestGroup,
+  uploadRequestEntryRestService,
   uploadRequestRestService,
   UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
   UploadRequestGroupObjectService,
@@ -72,6 +76,7 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.tableParams = tableParamsService.getTableParams();
             uploadRequestEntriesVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
             uploadRequestEntriesVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
+            uploadRequestEntriesVm.downloadEntry = downloadEntry;
           });
       });
   }
@@ -119,6 +124,12 @@ function uploadRequestEntriesController(
     }
 
     return content;
+  }
+
+  function downloadEntry(entry) {
+    const url = uploadRequestEntryRestService.getDownloadUrl(entry.uuid);
+
+    documentUtilsService.download(url, entry.name);
   }
 
   function openAddingRecipientsSideBar(uploadRequest = {}) {

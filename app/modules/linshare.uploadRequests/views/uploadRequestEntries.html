@@ -276,7 +276,11 @@
                           </a>
                         </li>
                         <li ng-if="!uploadRequestEntriesVm.isArchived">
-                          <a translate-attr="{title: 'ACTION.DOWNLOAD'}" event-propagation-stop>
+                          <a
+                            translate-attr="{title: 'ACTION.DOWNLOAD'}"
+                            ng-click="uploadRequestEntriesVm.downloadEntry(entry)"
+                            event-propagation-stop
+                          >
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
@@ -315,7 +319,10 @@
                               </a>
                             </li>
                             <li ng-if="!uploadRequestEntriesVm.isArchived">
-                              <a href="">
+                              <a
+                                href=""
+                                ng-click="uploadRequestEntriesVm.downloadEntry(entry)"
+                              >
                                 <i class="zmdi zmdi-download"></i>
                                 <span translate>ACTION.DOWNLOAD</span>
                               </a>
