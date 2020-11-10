@@ -144,6 +144,10 @@
       "ADD_RECIPIENTS": {
         "TITLE": "Ajouter des destinataires",
         "TEXT": "Vous êtes sur le point d'ajouter {singular, select, true {un destinataire} other{{nbItems} destinataires}} à cette demande de téléchargement ! Attention, cette action ne peut pas être annulée."
+      },
+      "DELETE_ENTRIES": {
+        "TITLE": "Supprimer les fichiers déposés",
+        "TEXT": "Vous êtes sur le point de supprimer {singular, select, true{un fichier téléchargé} other {{nbItems} fichiers téléchargés}}! Attention, cette action ne peut pas être annulée."
       }
     },
     "TOAST_ALERT": {
@@ -166,6 +170,14 @@
       "ADD_RECIPIENTS": {
         "ERROR": "{number} {singular, select, true{destinataire n'a} other{destinataires n'ont}} pas été ajoutés à la demande de téléchargement.",
         "INFO": "{number} {singular, select, true{destinataire a} other{destinataires ont}} été ajouté à la demande de téléchargement."
+      },
+      "DELETE_ENTRIES": {
+        "ERROR": "{number} {singular, select, true{fichier téléchargé n'a} other{fichiers téléchargés n'ont}} pas été supprimé.",
+        "INFO": "{number} {singular, select, true{fichier téléchargé a} other{fichiers téléchargés ont}} été supprimé."
+      },
+      "COPY_ENTRIES": {
+        "ERROR": "Échec de la copie de {number} {singular, select, true{fichier} other{fichiers}} dans mon espace.",
+        "INFO": "Copié {number} {singular, select, true{fichier} other{fichiers}} dans mon espace."
       }
     },
     "SIDE_BAR": {

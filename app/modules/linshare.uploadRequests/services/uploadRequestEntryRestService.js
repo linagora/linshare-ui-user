@@ -6,7 +6,8 @@ uploadRequestEntryRestService.$inject = ['$log', 'Restangular', 'ServerManagerSe
 
 function uploadRequestEntryRestService($log, Restangular) {
   return {
-    getDownloadUrl
+    getDownloadUrl,
+    remove
   };
 
   ////////////
@@ -15,5 +16,11 @@ function uploadRequestEntryRestService($log, Restangular) {
     $log.debug('uploadRequestEntryRestService : getDownloadUrl', uuid);
 
     return Restangular.all('upload_request_entries').one(uuid, 'download').getRequestedUrl();
+  }
+
+  function remove(uuid) {
+    $log.debug('uploadRequestEntryRestService : remove', uuid);
+
+    return Restangular.all('upload_request_entries').one(uuid).remove();
   }
 }

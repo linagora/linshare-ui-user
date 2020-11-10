@@ -144,6 +144,10 @@
       "ADD_RECIPIENTS": {
         "TITLE": "Add recipients",
         "TEXT": "You are about to add {singular, select, true {a recipient} other{{nbItems} recipients}} to this upload request ! Beware, this action cannot be undone."
+      },
+      "DELETE_ENTRIES": {
+        "TITLE": "Delete uploaded files",
+        "TEXT": "You are about to delete {singular, select, true{a uploaded files} other {{nbItems} uploaded files}}! Beware, this action cannot be undone."
       }
     },
     "TOAST_ALERT": {
@@ -166,6 +170,14 @@
       "ADD_RECIPIENTS": {
         "ERROR": "{number} {singular, select, true{recipient has} other{recipients have}} not been added to the upload request.",
         "INFO": "{number} {singular, select, true{recipient has} other{recipients have}} been added to the upload request."
+      },
+      "DELETE_ENTRIES": {
+        "ERROR": "{number} {singular, select, true{uploaded file has} other{uploaded files have}} not been deleted.",
+        "INFO": "{number} {singular, select, true{uploaded file has} other{uploaded file have}} been deleted."
+      },
+      "COPY_ENTRIES": {
+        "ERROR": "Failed to copy {number} {singular, select, true{file} other{files}} to My Space.",
+        "INFO": "Copied {number} {singular, select, true{file} other{files}} to My Space."
       }
     },
     "SIDE_BAR": {

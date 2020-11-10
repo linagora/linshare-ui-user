@@ -4,37 +4,41 @@ angular
 
 uploadRequestEntriesController.$inject = [
   '_',
+  '$q',
+  '$log',
   '$state',
   'documentUtilsService',
   'tableParamsService',
   'uploadRequest',
   'sidebarService',
-  'uploadRequestGroup',
   'uploadRequestEntryRestService',
-  'uploadRequestRestService',
-  'UPLOAD_REQUESTS_STATE_STATUS_MAPPING',
+  'uploadRequestGroup',
   'UploadRequestGroupObjectService',
+  'uploadRequestGroupRestService',
+  'uploadRequestRestService',
   'uploadRequestUtilsService',
-  'uploadRequestGroupRestService'
+  'UPLOAD_REQUESTS_STATE_STATUS_MAPPING'
 ];
-
 
 function uploadRequestEntriesController(
   _,
+  $q,
+  $log,
   $state,
   documentUtilsService,
   tableParamsService,
   uploadRequest,
   sidebarService,
-  uploadRequestGroup,
   uploadRequestEntryRestService,
-  uploadRequestRestService,
-  UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
+  uploadRequestGroup,
   UploadRequestGroupObjectService,
+  uploadRequestGroupRestService,
+  uploadRequestRestService,
   uploadRequestUtilsService,
-  uploadRequestGroupRestService
+  UPLOAD_REQUESTS_STATE_STATUS_MAPPING
 ) {
   const uploadRequestEntriesVm = this;
+  const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;
 
   uploadRequestEntriesVm.$onInit = onInit;
   uploadRequestEntriesVm.goBack = goBack;
@@ -77,6 +81,7 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
             uploadRequestEntriesVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
             uploadRequestEntriesVm.downloadEntry = downloadEntry;
+            uploadRequestEntriesVm.deleteEntries = deleteEntries;
           });
       });
   }
@@ -130,6 +135,35 @@ function uploadRequestEntriesController(
     const url = uploadRequestEntryRestService.getDownloadUrl(entry.uuid);
 
     documentUtilsService.download(url, entry.name);
+  }
+
+  function deleteEntries(entries) {
+    openWarningDialogFor('delete_entries', entries)
+      .then(() => $q.allSettled(
+        entries.map(entry => uploadRequestEntryRestService.remove(entry.uuid))
+      ))
+      .then(promises => {
+        const deletedEntries = promises
+          .filter(promise => promise.state === 'fulfilled')
+          .map(promise => promise.value);
+        const notDeletedEntries = promises
+          .filter(promise => promise.state === 'rejected')
+          .map(promise => promise.reason);
+
+        _.remove(uploadRequestEntriesVm.itemsList, item => deletedEntries.some(request => request.uuid === item.uuid));
+        _.remove(uploadRequestEntriesVm.selectedEntries, selected => deletedEntries.some(request => request.uuid === selected.uuid));
+
+        uploadRequestEntriesVm.tableParams.reload();
+
+        if (notDeletedEntries.length) {
+          showToastAlertFor('delete_entries', 'error', notDeletedEntries);
+        } else {
+          showToastAlertFor('delete_entries', 'info', deletedEntries);
+        }
+      })
+      .catch(error => {
+        if (error) { $log.error(error); }
+      });
   }
 
   function openAddingRecipientsSideBar(uploadRequest = {}) {

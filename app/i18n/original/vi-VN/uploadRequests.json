@@ -144,6 +144,10 @@
       "ADD_RECIPIENTS": {
         "TITLE": "Thêm người nhận",
         "TEXT": "Bạn chuẩn bị thêm {singular, select, true {người nhận} other{{nbItems} người nhận}} vào yêu cầu tải lên này ! Hãy cẩn thận, hành động này không thể hoàn tác."
+      },
+      "DELETE_ENTRIES": {
+        "TITLE": "Xóa tập tin tải lên",
+        "TEXT": "Bạn chuẩn bị xóa {singular, select, true{1 tập tin} other {{nbItems} tập tin}}! Hãy cẩn thận, hành động này không thể hoàn tác."
       }
     },
     "TOAST_ALERT": {
@@ -166,6 +170,14 @@
       "ADD_RECIPIENTS": {
         "ERROR": "{number} {singular, select, true{người nhận} other{người nhận}} chưa được thêm vào yêu cầu tải lên.",
         "INFO": "{number} {singular, select, true{người nhận} other{người nhận}} đã được thêm vào yêu cầu tải lên."
+      },
+      "DELETE_ENTRIES": {
+        "ERROR": "{number} {singular, select, true{tập tin} other{tập tin}} không được xóa.",
+        "INFO": "{number} {singular, select, true{tập tin} other{tập tin}} đã được xóa."
+      },
+      "COPY_ENTRIES": {
+        "ERROR": "Sao chép thất bại {number} {singular, select, true{tập tin} other{tập tin}} đến thư mục cá nhân.",
+        "INFO": "Sao chép {number} {singular, select, true{tập tin} other{tập tin}} đến thư mục cá nhân."
       }
     },
     "SIDE_BAR": {

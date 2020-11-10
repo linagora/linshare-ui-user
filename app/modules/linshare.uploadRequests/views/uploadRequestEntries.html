@@ -284,8 +284,12 @@
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
-                        <li ng-if="!uploadRequestEntriesVm.isArchived">
-                          <a translate-attr="{title: 'ACTION.DELETE'}" href="">
+                        <li ng-if="['CLOSED', 'ARCHIVED'].includes(uploadRequestEntriesVm.uploadRequest.status)">
+                          <a
+                            href=""
+                            translate-attr="{title: 'ACTION.DELETE'}"
+                            ng-click="uploadRequestEntriesVm.deleteEntries([entry])"
+                          >
                             <i class="zmdi zmdi-delete"></i>
                           </a>
                         </li>
@@ -327,8 +331,14 @@
                                 <span translate>ACTION.DOWNLOAD</span>
                               </a>
                             </li>
-                            <li ng-if="!uploadRequestEntriesVm.isArchived">
-                              <a href="">
+                            <li
+                              ng-if="!uploadRequestEntriesVm.isArchived"
+                              ng-class="{'disable-link': !['CLOSED', 'ARCHIVED'].includes(uploadRequestEntriesVm.uploadRequest.status)}"
+                            >
+                              <a
+                                href=""
+                                ng-click="uploadRequestEntriesVm.deleteEntries([entry])"
+                              >
                                 <i class="zmdi zmdi-delete"></i>
                                 <span translate>ACTION.DELETE</span>
                               </a>
@@ -428,9 +438,13 @@
               </a>
             </span>
 
-            <span>
-              <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
-                <i class="zmdi zmdi-close-circle"></i>
+            <span ng-class="{'disable-link': !['CLOSED', 'ARCHIVED'].includes(uploadRequestEntriesVm.uploadRequest.status)}">
+              <a
+                class="plain-text-button share-link"
+                translate-attr="{title: 'ACTION.DELETE'}"
+                ng-click="uploadRequestEntriesVm.deleteEntries(uploadRequestEntriesVm.selectedEntries)"
+              >
+                <i class="zmdi zmdi-delete"></i>
                 <span translate>ACTION.DELETE</span>
               </a>
             </span>
@@ -490,7 +504,11 @@
       <div class="col-xs-2">
         <i class="zmdi zmdi-share"></i>
       </div>
-      <div class="col-xs-2">
+      <div
+        class="col-xs-2"
+        ng-class="{ 'hide': !['CLOSED', 'ARCHIVED'].includes(uploadRequestEntriesVm.uploadRequest.status) }"
+        ng-click="uploadRequestEntriesVm.deleteEntries(uploadRequestEntriesVm.selectedEntries)"
+      >
         <i class="zmdi zmdi-delete"></i>
       </div>
     </div>

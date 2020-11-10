@@ -144,6 +144,10 @@
       "ADD_RECIPIENTS": {
         "TITLE": "Добавить получателей",
         "TEXT": "Вы собираетесь добавить {singular, select, true {получателя} other{{nbItems} получателя}} к этому запросу на загрузку ! Осторожно, это действие не может быть отменено."
+      },
+      "DELETE_ENTRIES": {
+        "TITLE": "Удалить загруженные файлы",
+        "TEXT": "Вы собираетесь удалить {singular, select, true{загруженный файла} other {{nbItems} загруженных файла}}! Осторожно, это действие не может быть отменено."
       }
     },
     "TOAST_ALERT": {
@@ -166,6 +170,14 @@
       "ADD_RECIPIENTS": {
         "ERROR": "{number} {singular, select, true{получатель} other{получателя}} не были добавлены в запрос на загрузку.",
         "INFO": "В запрос на загрузку добавлен {number} {singular, select, true{получатель} other{получателя}}."
+      },
+      "DELETE_ENTRIES": {
+        "ERROR": "{number} {singular, select, true{загруженный файл} other{загруженных файла}} не был удален.",
+        "INFO": "{number} {singular, select, true{загруженный файл} other{загруженных файла}} был удален."
+      },
+      "COPY_ENTRIES": {
+        "ERROR": "Не удалось скопировать {number} {singular, select, true{файл} other{файла}} в мою подборку.",
+        "INFO": "Скопировал {number} {singular, select, true{файл} other{файла}} в мою подборку."
       }
     },
     "SIDE_BAR": {
