@@ -11,7 +11,7 @@ uploadRequestEntriesController.$inject = [
   'uploadRequestGroup',
   'uploadRequestRestService',
   'UPLOAD_REQUESTS_STATE_STATUS_MAPPING',
-  'UploadRequestObjectService',
+  'UploadRequestGroupObjectService',
   'uploadRequestUtilsService',
   'uploadRequestGroupRestService'
 ];
@@ -26,7 +26,7 @@ function uploadRequestEntriesController(
   uploadRequestGroup,
   uploadRequestRestService,
   UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
-  UploadRequestObjectService,
+  UploadRequestGroupObjectService,
   uploadRequestUtilsService,
   uploadRequestGroupRestService
 ) {
@@ -127,7 +127,7 @@ function uploadRequestEntriesController(
     uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
       .then(uploadRequests => uploadRequests.forEach(item => uploadRequest.recipients.push(...item.recipients)))
       .then(() => {
-        const uploadRequestObject = new UploadRequestObjectService(uploadRequest, {
+        const uploadRequestObject = new UploadRequestGroupObjectService(uploadRequest, {
           submitRecipientsCallback: () => {
             sidebarService.hide();
           }

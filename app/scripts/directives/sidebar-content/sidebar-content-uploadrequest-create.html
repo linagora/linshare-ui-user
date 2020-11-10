@@ -21,7 +21,7 @@
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
     <span class="header-action-link waves-effect text-uppercase visible-xs"
-      ng-click="mainVm.sidebar.getData().createUploadRequestGroup(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)">
+      ng-click="mainVm.sidebar.getData().createUploadRequestGroup(uploadRequestForm, mainVm.sidebar.getData().uploadRequestGroupObject)">
       <span class="zmdi zmdi-check"></span>
       <span translate>SIDEBAR.BUTTON.CREATE</span>
     </span>
@@ -67,13 +67,13 @@
                     </div>
                     <form role="form" class="clearfix">
                       <div class="form-group fg-line">
-                        <div ls-autocomplete-user="USERS" data-on-select-function="mainVm.sidebar.getData().uploadRequestObject.addRecipient">
+                        <div ls-autocomplete-user="USERS" data-on-select-function="mainVm.sidebar.getData().uploadRequestGroupObject.addRecipient">
                         </div>
                       </div>
                     </form>
                     <div class="custom-list-body col-xs-12 ">
                       <div class="custom-list-item"
-                        ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestObject.getNewRecipients() | orderBy : '-' as results"
+                        ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestGroupObject.getNewRecipients() | orderBy : '-' as results"
                         tooltip-placement="bottom" tooltip-popup-delay="700"
                         uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
                         <p class="pull-left circle-ctn">
@@ -90,12 +90,12 @@
                             {{recipient.mail}}
                           </p>
                           <p class="close-list-icone-btn pull-right"
-                            ng-click="mainVm.sidebar.getData().uploadRequestObject.removeNewRecipient(results.length - $index -1)">
+                            ng-click="mainVm.sidebar.getData().uploadRequestGroupObject.removeNewRecipient(results.length - $index -1)">
                             <i class="zmdi zmdi-close "></i>
                           </p>
                         </div>
                       </div>
-                      <div class="custom-list-item" ng-repeat="list in mainvm.sidebar.getData().uploadRequestObject.getMailingList()"
+                      <div class="custom-list-item" ng-repeat="list in mainvm.sidebar.getData().uploadRequestGroupObject.getMailingList()"
                         tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip="" owner-label
                         owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
                         owner-label-attr="uib-tooltip">
@@ -104,7 +104,7 @@
                         <div class="pull-left name-recipients-ctn">
                           <p class="pull-left inner-text-li">{{list.listName}}</p>
                           <p class=" close-list-icone-btn pull-right"
-                            ng-click="mainVm.sidebar.getData().uploadRequestObject.removeMailingList($index)">
+                            ng-click="mainVm.sidebar.getData().uploadRequestGroupObject.removeMailingList($index)">
                             <i class="zmdi zmdi-close"></i>
                           </p>
                         </div>
@@ -123,7 +123,7 @@
                       <div class="form-group col-xs-12 addNote no-padding">
                         <div class="form-group fg-line" ng-class="{'has-error' : ((uploadRequestForm.mail.$touched ||uploadRequestForm.$submitted)
                         && uploadRequestForm.mail.$invalid)}">
-                          <textarea type="text" name="mail" class="form-control input-sm" ng-model="mainVm.sidebar.getData().uploadRequestObject.mail"
+                          <textarea type="text" name="mail" class="form-control input-sm" ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.mail"
                             placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}"
                             required
                           >
@@ -135,7 +135,7 @@
                         <div class="form-group fg-line">
                           <textarea class="form-control comment" rows="5"
                             placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
-                            ng-model="mainVm.sidebar.getData().uploadRequestObject.message"
+                            ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.message"
                             name="message"
                           >
                           </textarea>
@@ -154,7 +154,7 @@
                         RIGHT_PANEL.SHARE.MORE_OPTIONS
                       </a>
                     </div>
-                    <div ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToExpiration.enable"
+                    <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToExpiration.enable"
                       class="col-xs-12 field-ctn clearfix">
                       <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                         RIGHT_PANEL.DETAILS.EXPIRATION_DATE
@@ -165,23 +165,23 @@
                           && uploadRequestForm.expiration.$invalid)}">
                           <div class="form-inline">
                             <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                              ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToExpiration.canOverride"
+                              ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToExpiration.canOverride"
                               class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                               is-open="opened"
                               required
-                              datepicker-options="::mainVm.sidebar.getData().uploadRequestObject.expirationDateOptions"
-                              min="{{::mainVm.sidebar.getData().uploadRequestObject.expirationDateOptions.minDate}}"
-                              max="{{::mainVm.sidebar.getData().uploadRequestObject.expirationDateOptions.maxDate}}"
+                              datepicker-options="::mainVm.sidebar.getData().uploadRequestGroupObject.expirationDateOptions"
+                              min="{{::mainVm.sidebar.getData().uploadRequestGroupObject.expirationDateOptions.minDate}}"
+                              max="{{::mainVm.sidebar.getData().uploadRequestGroupObject.expirationDateOptions.maxDate}}"
                               name='expiration'
-                              ng-model="mainVm.sidebar.getData().uploadRequestObject.expirationDate"
-                              ng-change="mainVm.sidebar.getData().uploadRequestObject.calculateDatePickerOptions()"
+                              ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.expirationDate"
+                              ng-change="mainVm.sidebar.getData().uploadRequestGroupObject.calculateDatePickerOptions()"
                             />
                           </div>
                           <span
                             ng-show="uploadRequestForm.expiration.$invalid"
                             translate
                             translate-interpolation="messageformat"
-                            translate-values="{ value: mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfExpiration(true) }"
+                            translate-values="{ value: mainVm.sidebar.getData().uploadRequestGroupObject.getMaxDateOfExpiration(true) }"
                           >
                             UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
                           </span>
@@ -189,24 +189,24 @@
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
-                      ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToTotalSizeOfFiles.enable">
+                      ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToTotalSizeOfFiles.enable">
                       <label for="comment" class="label-muted col-xs-6 no-padding" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.TOTAL_SIZE_OF_FILES
                       </label>
                       <div class="col-xs-6 flex-combine-input">
                         <input
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToTotalSizeOfFiles.canOverride"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToTotalSizeOfFiles.canOverride"
                           class="form-control custom-bordered-input"
                           required
                           min="0"
-                          max="{{::mainVm.sidebar.getData().uploadRequestObject.getMaxSize('total')}}"
+                          max="{{::mainVm.sidebar.getData().uploadRequestGroupObject.getMaxSize('total')}}"
                           name="totalSizeOfFiles"
-                          ng-model="mainVm.sidebar.getData().uploadRequestObject.totalSizeOfFiles.value" type="number" />
+                          ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.totalSizeOfFiles.value" type="number" />
                         <md-select class="form-control custom-bordered-select m-0"
-                          ng-model="mainVm.sidebar.getData().uploadRequestObject.totalSizeOfFiles.unit"
+                          ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.totalSizeOfFiles.unit"
                           name="totalSizeOfFilesUnit"
                           required
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToTotalSizeOfFiles.canOverride">
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToTotalSizeOfFiles.canOverride">
                           <md-option value="KILO">KB</md-option>
                           <md-option value="MEGA">MB</md-option>
                           <md-option value="GIGA">GB</md-option>
@@ -217,14 +217,14 @@
                           || uploadRequestForm.totalSizeOfFilesUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
-                          translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.getMaxSize('total', true) }"
+                          translate-values="{ max: mainVm.sidebar.getData().uploadRequestGroupObject.getMaxSize('total', true) }"
                         >
                           UPLOAD_REQUESTS.ERROR.TOTAL_SIZE_OF_FILES_REQUIRED
                         </span>
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
-                      ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.enable">
+                      ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToMaxNumberOfFiles.enable">
                       <label for="comment" class="label-muted col-xs-6 no-padding" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES
                       </label>
@@ -232,39 +232,39 @@
                         <input
                           name="maxNumberOfFiles"
                           required
-                          max="{{::mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.maxValue}}"
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.canOverride"
+                          max="{{::mainVm.sidebar.getData().uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue}}"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToMaxNumberOfFiles.canOverride"
                           class="form-control custom-bordered-input custom-single-input"
-                          ng-model="mainVm.sidebar.getData().uploadRequestObject.maxNumberOfFiles" type="number" />
+                          ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.maxNumberOfFiles" type="number" />
                       </div>
                       <div class="has-error">
                         <span ng-show="uploadRequestForm.maxNumberOfFiles.$invalid"
                           translate
                           translate-interpolation="messageformat"
-                          translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.allowedToMaxNumberOfFiles.value}"
+                          translate-values="{ max: mainVm.sidebar.getData().uploadRequestGroupObject.allowedToMaxNumberOfFiles.value}"
                         >
                           UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED
                         </span>
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
-                      ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToMaxSizeOfAFile.enable">
+                      ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToMaxSizeOfAFile.enable">
                       <label for="comment" class="label-muted col-xs-6 no-padding" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.MAX_SIZE_OF_A_FILE
                       </label>
                       <div class="col-xs-6 flex-combine-input">
                         <input
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToMaxSizeOfAFile.canOverride"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToMaxSizeOfAFile.canOverride"
                           class="form-control custom-bordered-input"
                           name="maxSizeOfAFile"
-                          max="{{::mainVm.sidebar.getData().uploadRequestObject.getMaxSize('one')}}"
+                          max="{{::mainVm.sidebar.getData().uploadRequestGroupObject.getMaxSize('one')}}"
                           required
-                          ng-model="mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile.value" type="number" />
+                          ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.maxSizeOfAFile.value" type="number" />
                         <md-select class="form-control m-0 custom-bordered-select"
-                          ng-model="mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile.unit"
+                          ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.maxSizeOfAFile.unit"
                           name="maxSizeOfAFileUnit"
                           required
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToMaxSizeOfAFile.canOverride"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToMaxSizeOfAFile.canOverride"
                         >
                           <md-option value="KILO">KB</md-option>
                           <md-option value="MEGA">MB</md-option>
@@ -275,7 +275,7 @@
                         <span ng-show="uploadRequestForm.maxSizeOfAFile.$invalid || uploadRequestForm.maxSizeOfAFileUnit.$invalid"
                           translate
                           translate-interpolation="messageformat"
-                          translate-values="{ max: mainVm.sidebar.getData().uploadRequestObject.getMaxSize('one', true) }"
+                          translate-values="{ max: mainVm.sidebar.getData().uploadRequestGroupObject.getMaxSize('one', true) }"
                         >
                           UPLOAD_REQUESTS.ERROR.MAX_SIZE_OF_A_FILE_REQUIRED
                         </span>
@@ -295,7 +295,7 @@
                         RIGHT_PANEL.SHARE.SETTINGS
                       </h2>
                     </div>
-                    <div ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToActivation.enable"
+                    <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToActivation.enable"
                       class="col-xs-12 field-ctn clearfix">
                       <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
@@ -306,22 +306,22 @@
                           && uploadRequestForm.activation.$invalid)}">
                           <div class="form-inline">
                             <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                              ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToActivation.canOverride"
+                              ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToActivation.canOverride"
                               class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                               is-open="opened" ng-required="true"
                               name="activation"
-                              datepicker-options="::mainVm.sidebar.getData().uploadRequestObject.activationDateOptions"
-                              min="{{::mainVm.sidebar.getData().uploadRequestObject.activationDateOptions.minDate}}"
-                              max="{{::mainVm.sidebar.getData().uploadRequestObject.activationDateOptions.maxDate}}"
-                              ng-model="mainVm.sidebar.getData().uploadRequestObject.activationDate"
-                              ng-change="mainVm.sidebar.getData().uploadRequestObject.calculateDatePickerOptions()"
+                              datepicker-options="::mainVm.sidebar.getData().uploadRequestGroupObject.activationDateOptions"
+                              min="{{::mainVm.sidebar.getData().uploadRequestGroupObject.activationDateOptions.minDate}}"
+                              max="{{::mainVm.sidebar.getData().uploadRequestGroupObject.activationDateOptions.maxDate}}"
+                              ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.activationDate"
+                              ng-change="mainVm.sidebar.getData().uploadRequestGroupObject.calculateDatePickerOptions()"
                             />
                           </div>
                           <span
                             ng-show="uploadRequestForm.activation.$invalid"
                             translate
                             translate-interpolation="messageformat"
-                            translate-values="{ value: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(true) }"
+                            translate-values="{ value: mainVm.sidebar.getData().uploadRequestGroupObject.getMinDateOfActivation(true) }"
                           >
                             UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
                           </span>
@@ -329,42 +329,42 @@
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
-                      ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToPasswordProtected.enable">
+                      ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToPasswordProtected.enable">
                       <label for="comment" class="label-muted col-xs-6 no-padding" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.PASSWORD_PROTECTED
                       </label>
                       <div class="col-xs-6 flex-combine-input">
-                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestObject.passwordProtected"
-                          name="passwordProtected" ng-model="mainVm.sidebar.getData().uploadRequestObject.passwordProtected"
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToPasswordProtected.canOverride" />
+                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestGroupObject.passwordProtected"
+                          name="passwordProtected" ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.passwordProtected"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToPasswordProtected.canOverride" />
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
-                      ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToDeletion.enable">
+                      ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToDeletion.enable">
                       <label for="comment" class="label-muted col-xs-6 no-padding" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.ALLOW_DELETION
                       </label>
                       <div class="col-xs-6 flex-combine-input">
-                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestObject.allowDeletion"
-                          name="allowDeletion" ng-model="mainVm.sidebar.getData().uploadRequestObject.allowDeletion"
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToDeletion.canOverride">
+                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestGroupObject.allowDeletion"
+                          name="allowDeletion" ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.allowDeletion"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToDeletion.canOverride">
                       </div>
                     </div>
                     <div class="col-xs-12 field-ctn clearfix"
-                      ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToClosure.enable">
+                      ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToClosure.enable">
                       <label for="comment" class="label-muted col-xs-6 no-padding" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE
                       </label>
                       <div class="col-xs-6 flex-combine-input">
-                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestObject.allowClosure"
-                          name="allowClosure" ng-model="mainVm.sidebar.getData().uploadRequestObject.allowClosure"
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToClosure.canOverride"
+                        <input type="checkbox" ng-checked="mainVm.sidebar.getData().uploadRequestGroupObject.allowClosure"
+                          name="allowClosure" ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.allowClosure"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToClosure.canOverride"
                         >
                       </div>
                     </div>
                     <div
                       class="col-xs-12 field-ctn clearfix"
-                      ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToExpiryNotification.enable"
+                      ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToExpiryNotification.enable"
                     >
                       <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE
@@ -375,23 +375,23 @@
                         && uploadRequestForm.notificationDate.$invalid)}">
                           <div class="form-inline">
                             <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                              ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToExpiryNotification.canOverride"
+                              ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToExpiryNotification.canOverride"
                               class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                               is-open="opened" ng-required="true"
                               name='notificationDate'
-                              datepicker-options="::mainVm.sidebar.getData().uploadRequestObject.notificationDateOptions"
-                              min="{{::mainVm.sidebar.getData().uploadRequestObject.notificationDateOptions.minDate}}"
-                              max="{{::mainVm.sidebar.getData().uploadRequestObject.notificationDateOptions.maxDate}}"
-                              ng-model="mainVm.sidebar.getData().uploadRequestObject.notificationDate"
-                              ng-change="mainVm.sidebar.getData().uploadRequestObject.calculateDatePickerOptions()"
+                              datepicker-options="::mainVm.sidebar.getData().uploadRequestGroupObject.notificationDateOptions"
+                              min="{{::mainVm.sidebar.getData().uploadRequestGroupObject.notificationDateOptions.minDate}}"
+                              max="{{::mainVm.sidebar.getData().uploadRequestGroupObject.notificationDateOptions.maxDate}}"
+                              ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate"
+                              ng-change="mainVm.sidebar.getData().uploadRequestGroupObject.calculateDatePickerOptions()"
                             />
                           </div>
                           <span
                             ng-show="uploadRequestForm.notificationDate.$invalid"
                             translate
                             translate-interpolation="messageformat"
-                            translate-values="{ min: mainVm.sidebar.getData().uploadRequestObject.getMinDateOfActivation(true),
-                              max: mainVm.sidebar.getData().uploadRequestObject.getMaxDateOfNotification(true)  }"
+                            translate-values="{ min: mainVm.sidebar.getData().uploadRequestGroupObject.getMinDateOfActivation(true),
+                              max: mainVm.sidebar.getData().uploadRequestGroupObject.getMaxDateOfNotification(true)  }"
                           >
                             UPLOAD_REQUESTS.ERROR.INVALID_NOTIFICATION_DATE
                           </span>
@@ -399,17 +399,17 @@
                       </div>
                     </div>
 
-                    <div class="col-xs-12 field-ctn clearfix" ng-if="mainVm.sidebar.getData().uploadRequestObject.allowedToNotificationLanguage.enable">
+                    <div class="col-xs-12 field-ctn clearfix" ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.allowedToNotificationLanguage.enable">
                       <label for="comment" class="label-muted col-xs-6 no-padding" translate>
                         UPLOAD_REQUESTS.FORM_CREATE.NOTIFICATION_LANGUAGE
                       </label>
                       <div class="col-xs-6 flex-combine-input">
                         <md-select
                           class="form-control m-0 custom-bordered-lang-select"
-                          ng-disabled="!mainVm.sidebar.getData().uploadRequestObject.allowedToNotificationLanguage.canOverride"
-                          ng-model="mainVm.sidebar.getData().uploadRequestObject.notificationLanguage"
+                          ng-disabled="!mainVm.sidebar.getData().uploadRequestGroupObject.allowedToNotificationLanguage.canOverride"
+                          ng-model="mainVm.sidebar.getData().uploadRequestGroupObject.notificationLanguage"
                         >
-                          <md-option ng-repeat="unit in mainVm.sidebar.getData().uploadRequestObject.allowedToNotificationLanguage.units" ng-value="unit">{{::unit}}</md-option>
+                          <md-option ng-repeat="unit in mainVm.sidebar.getData().uploadRequestGroupObject.allowedToNotificationLanguage.units" ng-value="unit">{{::unit}}</md-option>
                         </md-select>
                       </div>
                     </div>
@@ -430,7 +430,7 @@
   </button>
   <button
     class="btn btn-primary col-xs-6"
-    ng-click="mainVm.sidebar.getData().createUploadRequestGroup(uploadRequestForm, mainVm.sidebar.getData().uploadRequestObject)"
+    ng-click="mainVm.sidebar.getData().createUploadRequestGroup(uploadRequestForm, mainVm.sidebar.getData().uploadRequestGroupObject)"
     translate
   >
     NAVIGATION.CREATE

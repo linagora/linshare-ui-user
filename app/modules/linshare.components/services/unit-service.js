@@ -54,6 +54,8 @@
       byteTo: byteTo,
       find: find,
       toByte: toByte,
+      convertBase,
+      formatUnit,
       units: units
     };
 
@@ -139,6 +141,7 @@
      * @desc Convert a number with a defined unit to a Byte number
      * @param {string} value - Value to convert
      * @param {string} unit - Unit of the value
+     * @param {boolean} showUnit - Determine if the unit should be displayed with the value
      * @returns {int} Value converted to requested unit
      * @memberOf linshare.components.uniteService
      */
@@ -152,6 +155,31 @@
       result = (result % 1 === 0) ? result : result.toFixed(2);
       
       return showUnit ? result + units.B : result;
+    }
+  
+    function convertBase (currentUnit, configUnit) {
+      const mapping = {
+        'KILO': 1,
+        'MEGA': 1024,
+        'GIGA': 1048576
+      };
+  
+      return mapping[configUnit] / mapping[currentUnit];
+    }
+  
+    function formatUnit(unit) {
+      switch (unit) {
+        case 'KILO':
+          return 'KB';
+        case 'MEGA':
+          return 'MB';
+        case 'GIGA':
+          return 'GB';
+        case 'Bytes':
+          return 'B';
+        default:
+          return 'MB';
+      }
     }
   }
 })();

@@ -135,11 +135,11 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
-                    <p>{{(mainVm.sidebar.getData().currentSelected.maxDepositSize | readableSize) || 'N/A'}}</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxDepositSize | readableSize: true) || 'N/A'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{(mainVm.sidebar.getData().currentSelected.maxFileSize | readableSize) || 'N/A'}}</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxFileSize | readableSize: true) || 'N/A'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>

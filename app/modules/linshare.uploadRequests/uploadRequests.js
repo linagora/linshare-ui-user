@@ -13,6 +13,6 @@ require('./controllers/uploadRequestEntriesController');
 require('./controllers/uploadRequestsController');
 require('./controllers/uploadRequestGroupsController');
 require('./services/uploadRequestRestService');
-require('./services/uploadRequestObjectService');
+require('./services/uploadRequestGroupObjectService');
 require('./services/uploadRequestUtilsService');
 require('./services/uploadRequestGroupRestService');

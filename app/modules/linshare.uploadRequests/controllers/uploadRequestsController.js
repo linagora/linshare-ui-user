@@ -14,7 +14,7 @@ uploadRequestsController.$inject = [
   'UPLOAD_REQUESTS_STATE_STATUS_MAPPING',
   'sidebarService',
   'uploadRequestUtilsService',
-  'UploadRequestObjectService'
+  'UploadRequestGroupObjectService'
 ];
 
 
@@ -30,7 +30,7 @@ function uploadRequestsController(
   UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
   sidebarService,
   uploadRequestUtilsService,
-  UploadRequestObjectService
+  UploadRequestGroupObjectService
 ) {
   const uploadRequestsVm = this;
   const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
@@ -268,7 +268,7 @@ function uploadRequestsController(
     uploadRequest.recipients = uploadRequestsVm.itemsList
       .map(item => item.recipients && item.recipients[0]).filter(Boolean);
 
-    const uploadRequestObject = new UploadRequestObjectService(uploadRequest, {
+    const uploadRequestObject = new UploadRequestGroupObjectService(uploadRequest, {
       submitRecipientsCallback: () => {
         reset();
         sidebarService.hide();

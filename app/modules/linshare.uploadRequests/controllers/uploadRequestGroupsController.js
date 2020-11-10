@@ -17,7 +17,7 @@ uploadRequestGroupsController.$inject = [
   'lsAppConfig',
   'toastService',
   'tableParamsService',
-  'UploadRequestObjectService',
+  'UploadRequestGroupObjectService',
   'uploadRequestGroups',
   'uploadRequestGroupRestService',
   'uploadRequestUtilsService',
@@ -38,7 +38,7 @@ function uploadRequestGroupsController(
   lsAppConfig,
   toastService,
   tableParamsService,
-  UploadRequestObjectService,
+  UploadRequestGroupObjectService,
   uploadRequestGroups,
   uploadRequestGroupRestService,
   uploadRequestUtilsService,
@@ -114,7 +114,7 @@ function uploadRequestGroupsController(
    */
   function loadSidebarContent(content, groupMode) {
     uploadRequestGroupsVm.groupMode = groupMode;
-    uploadRequestGroupsVm.uploadRequestObject = new UploadRequestObjectService({ groupMode });
+    uploadRequestGroupsVm.uploadRequestGroupObject = new UploadRequestGroupObjectService({ groupMode });
     $scope.mainVm.sidebar.setData(uploadRequestGroupsVm);
     $scope.mainVm.sidebar.setContent(content || lsAppConfig.uploadRequestGroupCreate);
     $scope.mainVm.sidebar.show();
@@ -132,7 +132,7 @@ function uploadRequestGroupsController(
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
   function createUploadRequestGroup(form, newUploadRequest) {
-    if (handleErrors(uploadRequestGroupsVm.uploadRequestObject)) {
+    if (handleErrors(uploadRequestGroupsVm.uploadRequestGroupObject)) {
       return;
     }
 
@@ -175,11 +175,11 @@ function uploadRequestGroupsController(
   /**
    *  @name handleErrors
    *  @desc handle custom validation errors
-   *  @param {Object} uploadRequestObject - Object contains data of upload requests
+   *  @param {Object} uploadRequestGroupObject - Object contains data of upload requests
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
-  function handleErrors(uploadRequestObject) {
-    if (uploadRequestObject.getNewRecipients().length === 0) {
+  function handleErrors(uploadRequestGroupObject) {
+    if (uploadRequestGroupObject.getNewRecipients().length === 0) {
       toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST'});
 
       return true;
@@ -214,7 +214,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
       .then(uploadRequests => uploadRequests.forEach(item => uploadRequest.recipients.push(...item.recipients)))
       .then(() => {
-        const uploadRequestObject = new UploadRequestObjectService(uploadRequest, {
+        const uploadRequestObject = new UploadRequestGroupObjectService(uploadRequest, {
           submitRecipientsCallback: () => {
             sidebarService.hide();
           }
