@@ -72,7 +72,7 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.tableParamsService = tableParamsService;
             uploadRequestEntriesVm.resetSelectedEntries = tableParamsService.resetSelectedItems;
             uploadRequestEntriesVm.selectEntriesOnCurrentPage = tableParamsService.tableSelectAll;
-            uploadRequestEntriesVm.addSelectedEntry = tableParamsService.toggleItemSelection;
+            uploadRequestEntriesVm.toggleEntrySelection = tableParamsService.toggleItemSelection;
             uploadRequestEntriesVm.sortDropdownSetActive = tableParamsService.tableSort;
             uploadRequestEntriesVm.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
             uploadRequestEntriesVm.toggleSearchState = toggleSearchState;
@@ -82,6 +82,7 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
             uploadRequestEntriesVm.downloadEntry = downloadEntry;
             uploadRequestEntriesVm.deleteEntries = deleteEntries;
+            uploadRequestEntriesVm.copyEntriesToMySpace = copyEntriesToMySpace;
           });
       });
   }
@@ -163,6 +164,34 @@ function uploadRequestEntriesController(
       })
       .catch(error => {
         if (error) { $log.error(error); }
+      });
+  }
+
+  function copyEntriesToMySpace(entries) {
+    $q.allSettled(entries.map(entry => uploadRequestEntryRestService.copyToMySpace(entry.uuid)))
+      .then(promises => {
+        const copied = promises
+          .filter(promise => promise.state === 'fulfilled')
+          .map(promise => promise.value);
+        const rejectedPromises = promises
+          .filter(promise => promise.state === 'rejected')
+          .map(promise => promise.reason);
+
+        entries
+          .map(entry => entry.uuid)
+          .forEach(entryUuid => {
+            const selectedEntry = uploadRequestEntriesVm.selectedEntries.find(entry => entry.uuid === entryUuid);
+
+            if (selectedEntry) {
+              uploadRequestEntriesVm.toggleEntrySelection(selectedEntry);
+            }
+          });
+
+        if (rejectedPromises.length) {
+          showToastAlertFor('copy_entries', 'error', rejectedPromises);
+        } else {
+          showToastAlertFor('copy_entries', 'info', copied);
+        }
       });
   }
 

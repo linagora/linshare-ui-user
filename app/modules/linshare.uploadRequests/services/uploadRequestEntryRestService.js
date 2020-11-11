@@ -7,7 +7,8 @@ uploadRequestEntryRestService.$inject = ['$log', 'Restangular', 'ServerManagerSe
 function uploadRequestEntryRestService($log, Restangular) {
   return {
     getDownloadUrl,
-    remove
+    remove,
+    copyToMySpace
   };
 
   ////////////
@@ -22,5 +23,11 @@ function uploadRequestEntryRestService($log, Restangular) {
     $log.debug('uploadRequestEntryRestService : remove', uuid);
 
     return Restangular.all('upload_request_entries').one(uuid).remove();
+  }
+
+  function copyToMySpace(uuid) {
+    $log.debug('uploadRequestEntryRestService : remove', uuid);
+
+    return Restangular.all('upload_request_entries').one(uuid, 'copy').post();
   }
 }

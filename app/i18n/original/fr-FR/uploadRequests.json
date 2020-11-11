@@ -177,7 +177,7 @@
       },
       "COPY_ENTRIES": {
         "ERROR": "Échec de la copie de {number} {singular, select, true{fichier} other{fichiers}} dans mon espace.",
-        "INFO": "Copié {number} {singular, select, true{fichier} other{fichiers}} dans mon espace."
+        "INFO": "{number} {singular, select, true{fichier copié} other {fichiers copiés}} dans mon espace."
       }
     },
     "SIDE_BAR": {
