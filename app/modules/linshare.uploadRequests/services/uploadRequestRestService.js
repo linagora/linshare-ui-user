@@ -9,7 +9,8 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
 
   return {
     get,
-    listEntries
+    listEntries,
+    updateStatus
   };;
 
   ////////////
@@ -24,5 +25,11 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
     $log.debug('uploadRequestRestService: listEntries', uuid);
 
     return handler(Restangular.one('upload_requests', uuid).getList('entries'));
+  }
+
+  function updateStatus(uuid, status, query) {
+    $log.debug('uploadRequestRestService: updateStatus');
+
+    return handler(Restangular.one('upload_requests', uuid).one('status', status).put(query));
   }
 }

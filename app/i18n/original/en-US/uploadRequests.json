@@ -126,11 +126,11 @@
       },
       "CLOSE": {
         "TITLE": "Upload request close",
-        "TEXT": "You are about to close {singular, select, true{an upload request} other{{nbItems} upload requests}} ! Beware, this action cannot be undone."
+        "TEXT": "You are about to close {singular, select, true{a upload request} other{{nbItems} upload requests}} ! Beware, this action cannot be undone."
       },
       "ARCHIVE": {
         "TITLE": "Upload request archive",
-        "TEXT": "You are about to archive an upload request. Beware, this action cannot be undone.",
+        "TEXT": "You are about to archive a upload request. Beware, this action cannot be undone.",
         "OPTION_TEXT": "After archiving, all files will be deleted. Do you want to copy files to your personal space?",
         "COPY": {
           "CONFIRM": "Yes",
