@@ -147,7 +147,7 @@
         response_type: 'code',
         scope: 'openid email profile'
       },
-      oidcEnabled: true,
+      oidcEnabled: false,
 
       /* Define the default role selected when adding a new member to a workgroup
        * Possible value:
