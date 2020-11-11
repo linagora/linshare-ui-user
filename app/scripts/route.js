@@ -93,7 +93,8 @@
         template: require('../modules/linshare.document/views/documentsList.html'),
         controller: 'documentController',
         params: {
-          uploadedFileUuid: null
+          uploadedFileUuid: null,
+          shareFileUuid: null
         },
         resolve: {
           functionality: function($state, $transition$, user) {
@@ -274,7 +275,7 @@
           redirect: function(currentFolder, $state, $stateParams, $transition$) {
             if(currentFolder.type === 'DOCUMENT') {
               $transition$.abort();
-              
+
               return $state.go('sharedspace.workgroups.version', {
                 workgroupUuid: $stateParams.workgroupUuid,
                 workgroupName: $stateParams.workgroupName,
@@ -483,7 +484,7 @@
               Params: $state.params
             };
 
-            
+
             return currentStateData;
           },
           shareIndex: function($transition$) {

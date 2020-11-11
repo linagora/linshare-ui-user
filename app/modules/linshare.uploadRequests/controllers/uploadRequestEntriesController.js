@@ -83,6 +83,7 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.downloadEntry = downloadEntry;
             uploadRequestEntriesVm.deleteEntries = deleteEntries;
             uploadRequestEntriesVm.copyEntriesToMySpace = copyEntriesToMySpace;
+            uploadRequestEntriesVm.shareEntry = shareEntry;
           });
       });
   }
@@ -191,6 +192,20 @@ function uploadRequestEntriesController(
           showToastAlertFor('copy_entries', 'error', rejectedPromises);
         } else {
           showToastAlertFor('copy_entries', 'info', copied);
+        }
+      });
+  }
+
+  function shareEntry(entry) {
+    uploadRequestEntryRestService.copyToMySpace(entry.uuid)
+      .then(copied => {
+        $state.go('documents.files', {
+          shareFileUuid: copied[0].uuid
+        });
+      })
+      .catch(error => {
+        if (error) {
+          showToastAlertFor('copy_entries', 'error', [entry]);
         }
       });
   }

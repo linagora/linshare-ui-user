@@ -8,18 +8,38 @@
     }])
     .controller('documentController', documentController);
 
+  documentController.$inject = [
+    '_',
+    '$log',
+    '$q',
+    '$scope',
+    '$state',
+    '$timeout',
+    '$transition$',
+    '$translate',
+    'auditDetailsService',
+    'browseService',
+    'documentPreviewService',
+    'documentsList',
+    'documentUtilsService',
+    'flowUploadService',
+    'functionalities',
+    'LinshareShareService',
+    'LinshareDocumentRestService',
+    'lsAppConfig',
+    'toastService',
+    'tableParamsService'
+  ];
+
   // TODO: Should dispatch some function to other service or controller
-  /* jshint maxparams: false, maxstatements: false */
   function documentController(
     _,
-    $filter,
     $log,
     $q,
     $scope,
     $state,
     $timeout,
     $transition$,
-    $transitions,
     $translate,
     auditDetailsService,
     browseService,
@@ -366,7 +386,7 @@
             pluralization: true,
             params: {singular: true}
           });
-          
+
           return LinshareDocumentRestService.restangularize(documents[0]).get();
         }).then(function(document) {
           $scope.documentsList.push(document);
@@ -407,7 +427,7 @@
     function getDetails(item, list, index) {
       index = index || 0;
       list = Array.isArray(list) && list.length ? list : [item];
-      
+
       return $scope.showCurrentFile(item, null, { index, list });
     }
 
@@ -450,6 +470,17 @@
               if (!$scope.isMobile) {
                 $scope.showCurrentFile(data.itemToSelect);
               }
+            }
+          }
+
+          if ($transition$.params().shareFileUuid) {
+            const documentToSelect = $scope.documentsList.find(document => document.uuid === $transition$.params().shareFileUuid);
+
+            if (documentToSelect) {
+              $scope.addSelectedDocument(documentToSelect);
+              $scope.onShare(documentToSelect);
+            } else {
+              toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
             }
           }
         });
@@ -619,7 +650,6 @@
       return function(share) {
         var name = share.recipient.firstName + ' ' + share.recipient.lastName;
 
-        
         return name.toLowerCase().indexOf(searchShareUsersInput.toLowerCase()) !== -1;
       };
     }
@@ -705,7 +735,7 @@
           });
       });
       deferred.resolve($scope.currentSelectedDocument.current);
-      
+
       return deferred.promise;
     }
 

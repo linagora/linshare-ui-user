@@ -346,8 +346,14 @@
 
                             <li class="divider"></li>
 
-                            <li ng-if="!uploadRequestEntriesVm.isArchived">
-                              <a href="">
+                            <li
+                              ng-if="!uploadRequestEntriesVm.isArchived"
+                              ng-class="{'disable-link': !['CLOSED', 'ENABLED'].includes(uploadRequestEntriesVm.uploadRequest.status)}"
+                            >
+                              <a
+                                href=""
+                                ng-click="uploadRequestEntriesVm.shareEntry(entry)"
+                              >
                                 <i class="zmdi zmdi-share"></i>
                                 <span translate>ACTION.SHARE</span>
                               </a>
