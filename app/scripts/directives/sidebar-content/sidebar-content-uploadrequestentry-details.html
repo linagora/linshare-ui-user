@@ -1,0 +1,87 @@
+<div id="member-sidebar">
+  <div class="header-sidebar">
+    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mainVm.sidebar.hide()"></i>
+    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelectedEntry.name}} </h2>
+    <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
+      <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+    </span>
+  </div>
+
+  <div ng-cloak class="tabs-demo-static-tabs tab-nav-detail two-tabs">
+    <md-content>
+      <md-tabs md-selected="mainVm.sidebar.getData().data.selectedIndex"  md-dynamic-height="" md-border-bottom="">
+        <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 no-padding">
+          <md-content>
+            <div ng-show="mainVm.sidebar.getData().currentSelectedEntry.name">
+              <div id="profile-main" class="detail-guest">
+
+                <div class="content-detail-area">
+                  <div class="flex-ctn detail-info-ctn">
+                    <div class="item-l">
+                      <span class="first-letter user-info text-uppercase">
+                        {{mainVm.sidebar.getData().currentSelectedEntry.recipient.mail.charAt(0)}}
+                      </span>
+                      </span>
+                    </div>
+
+                    <div class="item-mid">
+                      <div class="name">
+                        {{mainVm.sidebar.getData().currentSelectedEntry.recipient.mail}}
+                      </div>
+                      <div
+                        class="info-item-member"
+                        tooltip-placement="bottom"
+                        tooltip-popup-delay="500"
+                        uib-tooltip="{{mainVm.sidebar.getData().currentSelectedEntry.modificationDate | lsDate:'medium'}}">
+                        <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
+                          {{mainVm.sidebar.getData().currentSelectedEntry.modificationDate | lsDate:'longDate'}}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="item-r actions">
+                      <span>{{mainVm.sidebar.getData().currentSelectedEntry.size | readableSize: true}}</span>
+                      <span class="seperator-inline">|</span>
+                      <span title="{{mainVm.sidebar.getData().currentSelectedEntry.type}}" class="set-ellipsis">
+                          {{mainVm.sidebar.getData().currentSelectedEntry.name | getextension}}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="meta-data-ctn">
+                    <h2 class="subheader">
+                      <i class="fa fa-file-text" aria-hidden="true"></i>
+                      {{'INFORMATION_TAB.META_DATA' | translate}}
+                    </h2>
+                    <div class="meta-data-content">
+                      <div>
+                        <p translate>
+                          UPLOAD_REQUESTS.TABLE.HEADERS.CREATION_DATE
+                        </p>
+                        <p
+                          tooltip-placement="bottom"
+                          tooltip-popup-delay="500"
+                          uib-tooltip="{{mainVm.sidebar.getData().currentSelectedEntry.creationDate | lsDate:'medium'}}"
+                        >
+                          {{mainVm.sidebar.getData().currentSelectedEntry.creationDate | lsDate:'longDate'}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </md-content>
+        </md-tab>
+
+        <md-tab
+          id="tab2"
+          label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}"
+          class="col-xs-4 no-padding"
+          ng-disabled="true"
+        >
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
+</div>

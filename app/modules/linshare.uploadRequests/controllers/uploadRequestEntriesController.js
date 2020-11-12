@@ -8,9 +8,10 @@ uploadRequestEntriesController.$inject = [
   '$log',
   '$state',
   'documentUtilsService',
+  'lsAppConfig',
+  'sidebarService',
   'tableParamsService',
   'uploadRequest',
-  'sidebarService',
   'uploadRequestEntryRestService',
   'uploadRequestGroup',
   'UploadRequestGroupObjectService',
@@ -26,9 +27,10 @@ function uploadRequestEntriesController(
   $log,
   $state,
   documentUtilsService,
+  lsAppConfig,
+  sidebarService,
   tableParamsService,
   uploadRequest,
-  sidebarService,
   uploadRequestEntryRestService,
   uploadRequestGroup,
   UploadRequestGroupObjectService,
@@ -84,6 +86,7 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.deleteEntries = deleteEntries;
             uploadRequestEntriesVm.copyEntriesToMySpace = copyEntriesToMySpace;
             uploadRequestEntriesVm.shareEntry = shareEntry;
+            uploadRequestEntriesVm.showEntryDetails = showEntryDetails;
           });
       });
   }
@@ -208,6 +211,14 @@ function uploadRequestEntriesController(
           showToastAlertFor('copy_entries', 'error', [entry]);
         }
       });
+  }
+
+  function showEntryDetails(entry) {
+    uploadRequestEntriesVm.currentSelectedEntry = entry;
+
+    sidebarService.setContent(lsAppConfig.uploadRequestEntryDetails);
+    sidebarService.setData(uploadRequestEntriesVm);
+    sidebarService.show();
   }
 
   function openAddingRecipientsSideBar(uploadRequest = {}) {
