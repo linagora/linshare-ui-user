@@ -17,3 +17,4 @@ require('./services/uploadRequestRestService');
 require('./services/uploadRequestGroupObjectService');
 require('./services/uploadRequestUtilsService');
 require('./services/uploadRequestGroupRestService');
+require('./services/uploadRequestObjectService');

@@ -198,9 +198,10 @@
       shareDetails: 'share-details',
       workgroupNode: 'workgroup-node',
       uploadRequestGroupCreate: 'uploadrequest-create',
-      uploadRequestGroupDetails: 'uploadrequest-details',
       uploadRequestGroupAddRecipients: 'uploadrequest-add-recipients',
       uploadRequestEntryDetails: 'uploadrequestentry-details',
+      uploadRequestGroupDetails: 'uploadrequestgroup-details',
+      uploadRequestDetails: 'uploadrequest-details',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,
       thumbnailEngineActivated: true

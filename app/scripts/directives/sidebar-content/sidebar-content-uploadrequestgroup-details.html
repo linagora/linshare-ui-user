@@ -29,7 +29,7 @@
               <div class="description-ctn form-sidebar"
                   ng-class="{'show-full-comment': commentFocused}"
                   ng-init="commentFocused = false">
-                <span class="comment">{{mainVm.sidebar.getData().currentSelected.message || 'N/A'}}</span>
+                <span class="comment">{{mainVm.sidebar.getData().currentSelected.body || 'N/A'}}</span>
                 <div class="edit-description click-enabled">
                   <i class="zmdi zmdi-eye"></i>
                 </div>
@@ -40,15 +40,15 @@
                 <div class="item-l">
                   <span class="first-letter user-info">
                   {{mainVm.sidebar.getData().currentSelected.owner ?
-                    mainVm.sidebar.getData().currentSelected.getOwnerNameOrEmail().charAt(0) :
+                    mainVm.sidebar.getData().getOwnerName(mainVm.sidebar.getData().currentSelected) :
                     'UNKNOWN_FIRST_LETTER' | translate | limitTo:1 | uppercase}}
                   </span>
                 </div>
                 <div class="item-mid">
                   <div class="name">
                     {{mainVm.sidebar.getData().currentSelected.owner ?
-                    mainVm.sidebar.getData().currentSelected.getOwnerNameOrEmail()
-                    : 'UNKNOWN_USER' | translate}}
+                    mainVm.sidebar.getData().getOwnerName(mainVm.sidebar.getData().currentSelected) :
+                    'UNKNOWN_USER' | translate}}
                   </div>
                   <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                       uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate |
@@ -66,6 +66,41 @@
               </div>
               <div class="meta-data-ctn">
                 <h2 class="subheader">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <span translate>UPLOAD_REQUESTS.DETAIL_TAB.RECIPIENTS</span>
+                  <div
+                    class="sidebar-link right"
+                    ng-class="{ 'animate-chevron' : showRecipients }"
+                    ng-click="showRecipients = !showRecipients"
+                  >
+                    <a href="" translate>
+                      UPLOAD_REQUESTS.DETAIL_TAB.SHOW_BUTTON
+                    </a>
+                    <i class="zmdi zmdi-chevron-down toggle-chevron m-l-5"></i>
+                  </div>
+                </h2>
+                <div
+                  class="recipient-list"
+                  ng-show="showRecipients"
+                >
+                  <div
+                    class="recipientsAutocomplete"
+                    ng-repeat="recipient in mainVm.sidebar.getData().currentSelected.recipients"
+                  >
+                    <span class="firstLetterFormat">
+                      {{ ::recipient.charAt(0) }}
+                    </span>
+
+                    <p class="recipientsInfo">
+                      <span class="user-full-name">
+                        <strong>{{ ::recipient }}</strong>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="meta-data-ctn">
+                <h2 class="subheader">
                   <i class="fa fa-file-text" aria-hidden="true"></i>
                   <span translate>UPLOAD_REQUESTS.DETAIL_TAB.META_DATA</span>
                 </h2>
@@ -73,7 +108,7 @@
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.CREATED_AT</p>
                     <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.creationDate |
+                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate |
                         lsDate:'medium'}}">
                       {{mainVm.sidebar.getData().currentSelected.creationDate | lsDate:'longDate'}}
                     </p>
@@ -94,13 +129,17 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || '0'}}</p>
                   </div>
-                  <div ng-if="Number.isInteger(mainVm.sidebar.getData().currentSelected.maxNumberOfFiles)">
+                  <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxNumberOfFiles || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxFileCount || 'N/A'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxSizeOfAFile > 0">
+                  <div>
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxDepositSize | readableSize: true) || 'N/A'}}</p>
+                  </div>
+                  <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{(mainVm.sidebar.getData().currentSelected.maxSizeOfAFile | readableSize: true) || 'N/A'}}</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxFileSize | readableSize: true) || 'N/A'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
@@ -108,19 +147,19 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.allowDeletion ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.canDeleteDocument ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.allowClosure ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.canClose ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.notificationDate | lsDate:'longDate'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.notificationLanguage">
+                  <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.notificationLanguage || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.locale || 'N/A'}}</p>
                   </div>
                 </div>
               </div>

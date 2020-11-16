@@ -7,8 +7,11 @@ uploadRequestsController.$inject = [
   '$q',
   '$log',
   '$state',
+  'Restangular',
+  'lsAppConfig',
   'tableParamsService',
   'uploadRequestGroup',
+  'UploadRequestObjectService',
   'uploadRequestGroupRestService',
   'uploadRequestRestService',
   'UPLOAD_REQUESTS_STATE_STATUS_MAPPING',
@@ -23,8 +26,11 @@ function uploadRequestsController(
   $q,
   $log,
   $state,
+  Restangular,
+  lsAppConfig,
   tableParamsService,
   uploadRequestGroup,
+  UploadRequestObjectService,
   uploadRequestGroupRestService,
   uploadRequestRestService,
   UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
@@ -41,6 +47,7 @@ function uploadRequestsController(
   uploadRequestsVm.openUploadRequest = openUploadRequest;
   uploadRequestsVm.allSelectedHasStatusOf = allSelectedHasStatusOf;
   uploadRequestsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
+  uploadRequestsVm.showDetails = showDetails;
   uploadRequestsVm.paramFilter = { recipientEmail: '' };
   uploadRequestsVm.fabButton = {
     toolbar: {
@@ -261,6 +268,30 @@ function uploadRequestsController(
       if (target) {
         uploadRequestsVm.toggleUploadRequestSelection(target);
       }
+    });
+  }
+
+  function showDetails(uploadRequest) {
+    // TODO: remove uploadRequestRestService.listEntries when the UR API includes the number of uploaded files.
+    $q.all([
+      uploadRequestRestService.get(uploadRequest.uuid),
+      uploadRequestRestService.listEntries(uploadRequest.uuid)
+    ]).then(([responseUploadRequest, entries]) => {
+      const { body, canClose, canDelete, locale } = uploadRequestsVm.uploadRequestGroup;
+
+      responseUploadRequest = Restangular.stripRestangular(responseUploadRequest);
+      uploadRequestsVm.currentSelected = new UploadRequestObjectService({
+        ...responseUploadRequest,
+        body,
+        canClose,
+        canDelete,
+        locale,
+        filesUploaded: entries.length
+      });
+
+      sidebarService.setData(uploadRequestsVm);
+      sidebarService.setContent(lsAppConfig.uploadRequestDetails);
+      sidebarService.show();
     });
   }
 
