@@ -29,7 +29,11 @@
       "EXPIRY_NOTIFICATION_DATE": "Ngày thông báo hết hạn",
       "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo",
       "SUCCESS": "Yêu cầu tải lên đã được tạo thành công!",
-      "FORM_INVALID": "Biểu mẫu không hợp lệ. Vui lòng kiểm tra kỹ đầu vào của bạn."
+      "FORM_INVALID": "Biểu mẫu không hợp lệ. Vui lòng kiểm tra kỹ đầu vào của bạn.",
+      "BACK": "quay lại"
+    },
+    "FORM_UPDATE": {
+      "SUCCESS": "Yêu cầu tải lên đã được cập nhật thành công!"
     },
     "ERROR": {
       "SUBJECT_REQUIRED": "Chủ đề của email là bắt buộc",

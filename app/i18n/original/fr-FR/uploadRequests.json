@@ -29,7 +29,11 @@
       "EXPIRY_NOTIFICATION_DATE": "Date de notification d'expiration",
       "NOTIFICATION_LANGUAGE": "Langue de notification",
       "SUCCESS": "L'invitation de dépôt a été créé avec succès!",
-      "FORM_INVALID": "Le formulaire n'est pas valide. Veuillez vérifier attentivement vos entrées."
+      "FORM_INVALID": "Le formulaire n'est pas valide. Veuillez vérifier attentivement vos entrées.",
+      "BACK": "retour"
+    },
+    "FORM_UPDATE": {
+      "SUCCESS": "L'invitation de dépôt a été jour avec succès!"
     },
     "ERROR": {
       "SUBJECT_REQUIRED": "L'objet du courriel est obligatoire",
