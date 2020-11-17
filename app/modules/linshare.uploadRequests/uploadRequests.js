@@ -9,6 +9,8 @@ angular
 require('./route');
 require('./constants');
 require('./components/uploadRequestStatus/uploadRequestStatusComponent');
+require('./components/uploadRequestGroupForm/uploadRequestGroupForm');
+require('./components/uploadRequestGroupForm/uploadRequestGroupFormController');
 require('./controllers/uploadRequestEntriesController');
 require('./controllers/uploadRequestsController');
 require('./controllers/uploadRequestGroupsController');
