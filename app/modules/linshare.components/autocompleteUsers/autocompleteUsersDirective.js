@@ -9,7 +9,7 @@
     .module('linshare.components')
     .directive('lsAutocompleteUser', lsAutocompleteUser);
 
-  lsAutocompleteUser.$inject = ['_'];
+  lsAutocompleteUser.$inject = ['_', '$timeout'];
 
   /**
    *  @namespace lsAutocompleteUser
@@ -21,7 +21,7 @@
    * <x-ng-form name="editors" role="form" class="clearfix">
    *   <div class="form-group fg-line">
    */
-  function lsAutocompleteUser(_) {
+  function lsAutocompleteUser(_, $timeout) {
     var directive = {
       restrict: 'A',
       scope: {
@@ -67,6 +67,10 @@
           }
         }
       });
+
+      if (attrs.autoFocusInput === '') {
+        $timeout(() => elm.find('#focusInputShare').trigger('focus'));
+      }
     }
   }
 })();
