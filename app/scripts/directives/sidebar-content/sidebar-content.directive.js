@@ -58,8 +58,8 @@
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-node-details.html', require('./sidebar-content-workgroup-node-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-node.html', require('./sidebar-content-workgroup-node.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup.html', require('./sidebar-content-workgroup.html'));
-    $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequest-create.html', require('./sidebar-content-uploadrequest-create.html'));
-    $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequest-details.html', require('./sidebar-content-uploadrequest-details.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequestgroup-create.html', require('./sidebar-content-uploadrequestgroup-create.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequestgroup-details.html', require('./sidebar-content-uploadrequestgroup-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequest-add-recipients.html', require('./sidebar-content-uploadrequest-add-recipients.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequestentry-details.html', require('./sidebar-content-uploadrequestentry-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequestgroup-details.html', require('./sidebar-content-uploadrequestgroup-details.html'));

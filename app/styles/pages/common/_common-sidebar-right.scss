@@ -889,6 +889,11 @@ MOBILE RESPONSIVE SIDEBAR MECHANISM
   #chat.setSidebarRightMobileState md-tabs.md-dynamic-height md-tabs-content-wrapper {
     margin-top: 47px;
   }
+
+  #chat.setSidebarRightMobileState .tabs-update-sidebar md-tabs.md-dynamic-height md-tabs-content-wrapper {
+    margin-top: 15px;
+  }
+
   #chat.toggled, #chat.sidebar-right.toggled {
     z-index: 11;
   }

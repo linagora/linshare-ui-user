@@ -59,10 +59,9 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.uploadRequestGroupCreate = lsAppConfig.uploadRequestGroupCreate;
     uploadRequestGroupsVm.uploadRequestGroupDetails = lsAppConfig.uploadRequestGroupDetails;
     uploadRequestGroupsVm.getOwnerName = contactsListsService.getOwnerName;
-    uploadRequestGroupsVm.mdTabsSelection = { selectedIndex: 0 };
-    uploadRequestGroupsVm.toggleMoreOptions = toggleMoreOptions;
     uploadRequestGroupsVm.setSubmitted = setSubmitted;
     uploadRequestGroupsVm.createUploadRequestGroup = createUploadRequestGroup;
+    uploadRequestGroupsVm.updateUploadRequestGroup = updateUploadRequestGroup;
     uploadRequestGroupsVm.currentStateName = $state.current.name;
     uploadRequestGroupsVm.paramFilter = { label: '' };
     uploadRequestGroupsVm.toggleSearchState = toggleSearchState;
@@ -70,6 +69,9 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.openUploadRequestGroup = openUploadRequestGroup;
     uploadRequestGroupsVm.removeArchivedUploadRequestGroups = removeArchivedUploadRequestGroups;
     uploadRequestGroupsVm.itemsList = uploadRequestGroups;
+    uploadRequestGroupsVm.formTabIndex = 0;
+    uploadRequestGroupsVm.selectedIndex = 0;
+    uploadRequestGroupsVm.reset = reset;
     uploadRequestGroupsVm.fabButton = {
       toolbar: {
         activate: true,
@@ -112,16 +114,12 @@ function uploadRequestGroupsController(
    *                           See app/views/includes/sidebar-right.html for possible values
    * @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
-  function loadSidebarContent(content, groupMode) {
+  function loadSidebarContent(content, groupMode, uploadRequestGroupObject) {
     uploadRequestGroupsVm.groupMode = groupMode;
-    uploadRequestGroupsVm.uploadRequestGroupObject = new UploadRequestGroupObjectService({ groupMode });
+    uploadRequestGroupsVm.uploadRequestGroupObject = new UploadRequestGroupObjectService( uploadRequestGroupObject || { groupMode });
     $scope.mainVm.sidebar.setData(uploadRequestGroupsVm);
     $scope.mainVm.sidebar.setContent(content || lsAppConfig.uploadRequestGroupCreate);
     $scope.mainVm.sidebar.show();
-  }
-
-  function toggleMoreOptions(state) {
-    uploadRequestGroupsVm.mdTabsSelection.selectedIndex = state ? 1 : 0;
   }
 
   /**
@@ -153,6 +151,30 @@ function uploadRequestGroupsController(
         }
 
         $state.go(`uploadRequestGroups.${request.status === 'CREATED' ? 'pending' : 'activeClosed'}`);
+      });
+    }
+  }
+
+  /**
+   *  @name updateUploadRequestGroup
+   *  @desc Valid the object and call the method save on object UploadRequest
+   *  @param {Object} form - An Object representing the form
+   *  @param {Object} newUploadRequest - An object containing all informations of the uploadRequest
+   *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
+   */
+  function updateUploadRequestGroup(form, newUploadRequest) {
+    if (!form.$valid) {
+      uploadRequestGroupsVm.setSubmitted(form);
+      toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
+    } else {
+      newUploadRequest.update().then(request => {
+        $scope.mainVm.sidebar.hide(newUploadRequest);
+        toastService.success({key: 'UPLOAD_REQUESTS.FORM_UPDATE.SUCCESS'});
+
+        const updatedItem = uploadRequestGroupsVm.itemsList.find(item => item.uuid === request.uuid);
+        
+        Object.assign(updatedItem, request);
+        uploadRequestGroupsVm.tableParams.reload();
       });
     }
   }
@@ -192,7 +214,7 @@ function uploadRequestGroupsController(
    *  @param {Object} uploadRequest - Object contains data of upload requests
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
-  function showDetails(uploadRequest = {}) {
+  function showDetails(uploadRequest = {}, options = {}) {
     $q.all([
       uploadRequestGroupRestService.get(uploadRequest.uuid),
       uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
@@ -204,7 +226,10 @@ function uploadRequestGroupsController(
         uploadRequestGroupsVm.currentSelected.recipients.push(...uploadRequest.recipients.map(recipient => recipient.mail));
       });
 
-      loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true);
+      uploadRequestGroupsVm.formTabIndex = options.formTabIndex || uploadRequestGroupsVm.formTabIndex;
+      uploadRequestGroupsVm.selectedIndex = options.selectedIndex || uploadRequestGroupsVm.selectedIndex;
+
+      loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
     });
   }
 
@@ -375,5 +400,15 @@ function uploadRequestGroupsController(
     }
 
     $state.go('uploadRequests', { uploadRequestGroupUuid: uploadRequestGroup.uuid }, { inherit: false });
+  }
+
+  function reset() {
+    if (uploadRequestGroupsVm.form) {
+      uploadRequestGroupsVm.form.$setUntouched();
+      uploadRequestGroupsVm.form.$setPristine();
+    }
+    
+    uploadRequestGroupsVm.formTabIndex = 0;
+    uploadRequestGroupsVm.selectedIndex = 0;
   }
 }

@@ -299,7 +299,7 @@
                         class="file-name-disp single-line click-enabled"
                         ng-click="uploadRequestGroupsVm.openUploadRequestGroup(uploadRequestGroup)"
                       >
-                        {{::uploadRequestGroup.label}}
+                        {{uploadRequestGroup.label}}
                       </span>
                       <div ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed'">
                         <upload-request-status upload-request="uploadRequestGroup"></upload-request-status>
@@ -370,16 +370,13 @@
                                 <span translate>ACTION.DOWNLOAD</span>
                               </a>
                             </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }">
+                            <li
+                              ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }"
+                              ng-click="uploadRequestGroupsVm.showDetails(uploadRequestGroup, {formTabIndex: 0, selectedIndex: 1})"
+                            >
                               <a href="">
                                 <i class="zmdi zmdi-edit"></i>
                                 <span translate>EDIT</span>
-                              </a>
-                            </li>
-                            <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequestGroup.status) }">
-                              <a href="">
-                                <i class="zmdi zmdi-edit"></i>
-                                <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.GLOBAL_EDIT</span>
                               </a>
                             </li>
                             <li class="divider"></li>

@@ -67,10 +67,11 @@ function UploadRequestGroupObjectService(
       self.allowedToClosure = _.cloneDeep(allowedToClosure);
       self.allowedToNotificationLanguage = _.cloneDeep(allowedToNotificationLanguage);
       self.create = create;
+      self.update = update;
       self.creationDate = setPropertyValue(jsonObject.creationDate, '');
       self.domain = setPropertyValue(jsonObject.domain, '');
       self.activationDate = setPropertyValue(jsonObject.activationDate, allowedToActivation.value);
-      self.expirationDate = setPropertyValue(jsonObject.expirationDate, allowedToExpiration.value);
+      self.expiryDate = setPropertyValue(jsonObject.expiryDate, allowedToExpiration.value);
       self.notificationDate = setPropertyValue(jsonObject.notificationDate, allowedToExpiryNotification.value);
       self.maxSizeOfAFile = {
         value: setPropertyValue(jsonObject.maxSizeOfAFile && jsonObject.maxSizeOfAFile.value, allowedToMaxSizeOfAFile.value),
@@ -81,18 +82,18 @@ function UploadRequestGroupObjectService(
         unit: setPropertyValue(jsonObject.totalSizeOfFiles && jsonObject.totalSizeOfFiles.unit, allowedToTotalSizeOfFiles.unit),
       };
       self.maxNumberOfFiles = setPropertyValue(jsonObject.maxNumberOfFiles, allowedToMaxNumberOfFiles.value);
-      self.passwordProtected = setPropertyValue(jsonObject.passwordProtected, allowedToPasswordProtected.value);
+      self.secured = setPropertyValue(jsonObject.secured, allowedToPasswordProtected.value);
       self.allowClosure = setPropertyValue(jsonObject.allowClosure, allowedToClosure.value);
       self.allowDeletion = setPropertyValue(jsonObject.allowDeletion, allowedToDeletion.value);
       self.notificationLanguage = setPropertyValue(jsonObject.notificationLanguage, allowedToNotificationLanguage.value);
-      self.mail = setPropertyValue(jsonObject.mail, '');
       self.label = setPropertyValue(jsonObject.label, '');
       self.groupMode = setPropertyValue(jsonObject.groupMode, false);
-      self.message = setPropertyValue(jsonObject.message, '');
+      self.body = setPropertyValue(jsonObject.body, '');
       self.recipients = setPropertyValue(jsonObject.recipients, []);
       self.newRecipients = [];
       self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
       self.toDTO = toDTO;
+      self.toUpdateDTO = toUpdateDTO;
       self.addRecipient = addRecipient;
       self.removeRecipient = removeRecipient;
       self.removeNewRecipient = removeNewRecipient;
@@ -130,7 +131,7 @@ function UploadRequestGroupObjectService(
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_EXPIRATION').then(data => {
         const clonedData = _.cloneDeep(data || {});
         const defaultActivationDate = allowedToActivation && allowedToActivation.value ? moment(allowedToActivation.value) : moment();
-
+        
         allowedToExpiration = clonedData;
         allowedToExpiration.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         allowedToExpiration.value = !_.isUndefined(clonedData.value)
@@ -206,29 +207,71 @@ function UploadRequestGroupObjectService(
   }
 
   /**
+   *  @name update
+   *  @desc Update the instatiated object by the API
+   *  @returns {Object} result promise
+   *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
+   */
+  function update() {
+    self = this;
+    const dto = self.toUpdateDTO();
+
+    return uploadRequestGroupRestService.update(dto.uuid, dto);
+  }
+
+  /**
    *  @name toDTO
-   *  @desc Build a guest DTO object from the curent guest object
-   *  @returns {Object} Return a guest DTO object
-   *  @memberOf LinShare.guests.GuestObjectService
+   *  @desc Build a urg DTO object from the curent urg object
+   *  @returns {Object} Return a urg DTO object
+   *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
    */
   function toDTO() {
     self = this;
     const dto = {};
 
+    dto.uuid = self.uuid;
     dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
-    dto.expiryDate = self.expirationDate && moment(self.expirationDate).valueOf();
+    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf();
     dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
-    dto.label = self.mail;
-    dto.body = self.message;
+    dto.label = self.label;
+    dto.body = self.body;
     dto.contactList = self.newRecipients.map(recipient => recipient.mail);
     dto.maxFileCount = self.maxNumberOfFiles;
     dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, unitService.formatUnit(self.totalSizeOfFiles.unit));
     dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, unitService.formatUnit(self.maxSizeOfAFile.unit));
     dto.canDelete = self.allowDeletion;
     dto.canClose = self.allowClosure;
-    dto.secured = self.passwordProtected;
+    dto.secured = self.secured;
     dto.enableNotification = true;
     dto.dirty = true;
+    dto.locale = self.notificationLanguage;
+
+    return dto;
+  }
+
+  /**
+   *  @name toUpdateDTO
+   *  @desc Build a DTO object from the curent object for updating
+   *  @returns {Object} Return a DTO object
+   *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
+   */
+  function toUpdateDTO() {
+    self = this;
+    const dto = {};
+
+    dto.uuid = self.uuid;
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
+    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf();
+    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
+    dto.label = self.label;
+    dto.body = self.body;
+    dto.maxFileCount = self.maxNumberOfFiles;
+    dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, unitService.formatUnit(self.totalSizeOfFiles.unit));
+    dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, unitService.formatUnit(self.maxSizeOfAFile.unit));
+    dto.canDelete = self.allowDeletion;
+    dto.canClose = self.allowClosure;
+    dto.secured = self.secured;
+    dto.enableNotification = true;
     dto.locale = self.notificationLanguage;
 
     return dto;
@@ -308,6 +351,10 @@ function UploadRequestGroupObjectService(
   }
 
   function getMaxDateOfExpiration(isFormatted) {
+    if (self.allowedToExpiration.maxValue < 0) {
+      return;
+    }
+
     const activationDate = self.activationDate ? moment(self.activationDate) : moment();
     const maxDate = !_.isUndefined(self.allowedToExpiration.maxValue) 
       && self.allowedToExpiration.unit
@@ -321,6 +368,10 @@ function UploadRequestGroupObjectService(
   };
 
   function getMinDateOfActivation(isFormatted) {
+    if (self.allowedToActivation.maxValue < 0) {
+      return;
+    }
+
     const minDate = !_.isUndefined(self.allowedToActivation.maxValue) && self.allowedToActivation.unit 
       ? moment().add(self.allowedToActivation.maxValue, self.allowedToActivation.unit.toLowerCase())
       : moment();
@@ -333,7 +384,7 @@ function UploadRequestGroupObjectService(
   }
 
   function getMaxDateOfNotification(isFormatted) {
-    const expirationDate = self.expirationDate && moment(self.expirationDate);
+    const expirationDate = self.expiryDate && moment(self.expiryDate);
     const maxDate = !_.isUndefined(self.allowedToExpiryNotification.maxValue) 
       && self.allowedToExpiryNotification.unit 
       && expirationDate
@@ -375,7 +426,7 @@ function UploadRequestGroupObjectService(
     };
     self.activationDateOptions = {
       minDate: self.getMinDateOfActivation(),
-      maxDate: self.expirationDate
+      maxDate: self.expiryDate
     };
     self.notificationDateOptions = {
       minDate: self.getMinDateOfActivation(),
