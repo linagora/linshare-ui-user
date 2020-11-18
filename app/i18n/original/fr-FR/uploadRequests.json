@@ -32,9 +32,6 @@
       "FORM_INVALID": "Le formulaire n'est pas valide. Veuillez vérifier attentivement vos entrées.",
       "BACK": "retour"
     },
-    "FORM_UPDATE": {
-      "SUCCESS": "L'invitation de dépôt a été jour avec succès!"
-    },
     "ERROR": {
       "SUBJECT_REQUIRED": "L'objet du courriel est obligatoire",
       "BODY_REQUIRED": "Le corps du courriel est obligatoire",
@@ -182,6 +179,10 @@
       "COPY_ENTRIES": {
         "ERROR": "Échec de la copie de {number} {singular, select, true{fichier} other{fichiers}} dans mon espace.",
         "INFO": "{number} {singular, select, true{fichier copié} other {fichiers copiés}} dans mon espace."
+      },
+      "UPDATE": {
+        "ERROR": "L'invitation de dépôt n'a pas été mise à jour.",
+        "INFO": "L'invitation de dépôt a été jour avec succès!"
       }
     },
     "SIDE_BAR": {

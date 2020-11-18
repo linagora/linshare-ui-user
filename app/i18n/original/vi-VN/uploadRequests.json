@@ -32,9 +32,6 @@
       "FORM_INVALID": "Biểu mẫu không hợp lệ. Vui lòng kiểm tra kỹ đầu vào của bạn.",
       "BACK": "quay lại"
     },
-    "FORM_UPDATE": {
-      "SUCCESS": "Yêu cầu tải lên đã được cập nhật thành công!"
-    },
     "ERROR": {
       "SUBJECT_REQUIRED": "Chủ đề của email là bắt buộc",
       "BODY_REQUIRED": "Nội dung của email là bắt buộc",
@@ -182,6 +179,10 @@
       "COPY_ENTRIES": {
         "ERROR": "Sao chép thất bại {number} {singular, select, true{tập tin} other{tập tin}} đến thư mục cá nhân.",
         "INFO": "Sao chép {number} {singular, select, true{tập tin} other{tập tin}} đến thư mục cá nhân."
+      },
+      "UPDATE": {
+        "ERROR": "Yêu cầu tải lên chưa được cập nhật thành công.",
+        "INFO": "Yêu cầu tải lên cập nhật thành công!"
       }
     },
     "SIDE_BAR": {

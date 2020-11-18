@@ -131,7 +131,7 @@ function UploadRequestGroupObjectService(
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_EXPIRATION').then(data => {
         const clonedData = _.cloneDeep(data || {});
         const defaultActivationDate = allowedToActivation && allowedToActivation.value ? moment(allowedToActivation.value) : moment();
-        
+
         allowedToExpiration = clonedData;
         allowedToExpiration.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         allowedToExpiration.value = !_.isUndefined(clonedData.value)
@@ -214,14 +214,13 @@ function UploadRequestGroupObjectService(
    */
   function update() {
     self = this;
-    const dto = self.toUpdateDTO();
 
-    return uploadRequestGroupRestService.update(dto.uuid, dto);
+    return uploadRequestGroupRestService.update(self.uuid, self.toUpdateDTO());
   }
 
   /**
    *  @name toDTO
-   *  @desc Build a urg DTO object from the curent urg object
+   *  @desc Build an upload request group DTO from the current upload request group object
    *  @returns {Object} Return a urg DTO object
    *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
    */
@@ -229,7 +228,6 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    dto.uuid = self.uuid;
     dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
     dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf();
     dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
@@ -251,7 +249,7 @@ function UploadRequestGroupObjectService(
 
   /**
    *  @name toUpdateDTO
-   *  @desc Build a DTO object from the curent object for updating
+   *  @desc Build a DTO object from the current object for updating
    *  @returns {Object} Return a DTO object
    *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
    */
@@ -259,7 +257,6 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    dto.uuid = self.uuid;
     dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
     dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf();
     dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();

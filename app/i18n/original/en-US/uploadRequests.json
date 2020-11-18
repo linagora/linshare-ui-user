@@ -32,9 +32,6 @@
       "FORM_INVALID": "Form is invalid. Please check your inputs carefully.",
       "BACK": "back"
     },
-    "FORM_UPDATE": {
-      "SUCCESS": "The upload request has been updated successfully!"
-    },
     "ERROR": {
       "SUBJECT_REQUIRED": "Email subject is required",
       "BODY_REQUIRED": "Email body is required",
@@ -182,6 +179,10 @@
       "COPY_ENTRIES": {
         "ERROR": "Failed to copy {number} {singular, select, true{file} other{files}} to My Space.",
         "INFO": "Copied {number} {singular, select, true{file} other{files}} to My Space."
+      },
+      "UPDATE": {
+        "ERROR": "Upload request has not been updated.",
+        "INFO": "The upload request has been updated successfully!"
       }
     },
     "SIDE_BAR": {

@@ -2,9 +2,6 @@ angular
   .module('linshare.uploadRequests')
   .controller('uploadRequestGroupFormController', uploadRequestGroupFormController);
 
-uploadRequestGroupFormController.$inject = [];
-
-
 function uploadRequestGroupFormController() {
   const uploadRequestGroupFormVm = this;
 

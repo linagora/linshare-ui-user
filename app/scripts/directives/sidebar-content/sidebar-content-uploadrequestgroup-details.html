@@ -115,7 +115,7 @@
                   </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.maxFileCount >= 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxNumberOfFiles}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxFileCount}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.maxDepositSize >= 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
@@ -123,7 +123,7 @@
                   </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.maxFileSize >= 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{(mainVm.sidebar.getData().currentSelected.maxSizeOfAFile | readableSize: true)}}</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxFileSize | readableSize: true)}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
@@ -151,15 +151,17 @@
           </div>
         </md-tab>
         <md-tab id="tab2" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding">
-          <upload-request-group-form
-            upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
-            selected-tab-index="mainVm.sidebar.getData().formTabIndex"
-            linshare-mode-production="mainVm.sidebar.getData().linshareModeProduction"
-            close-dropdown="mainVm.sidebar.getData().closeDropdown"
-            create-recipient-list="mainVm.sidebar.getData().createRecipientList"
-            form="mainVm.sidebar.getData().form"
-            operation="update"
-          />
+          <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
+            <md-content>
+              <upload-request-group-form
+                upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
+                selected-tab-index="mainVm.sidebar.getData().formTabIndex"
+                create-recipient-list="mainVm.sidebar.getData().createRecipientList"
+                form="mainVm.sidebar.getData().form"
+                operation="update"
+              />
+            </md-content>
+          </div>
         </md-tab>
         <md-tab ng-disabled="true" id="tab3" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.ACTIVITIES' | translate}}" class="col-xs-4 no-padding"></md-tab>
       </md-tabs>

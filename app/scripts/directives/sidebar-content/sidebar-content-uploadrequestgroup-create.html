@@ -31,14 +31,14 @@
     </span>
   </div>
 
-  <upload-request-group-form
-    upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
-    selected-tab-index="mainVm.sidebar.getData().formTabIndex"
-    linshare-mode-production="mainVm.sidebar.getData().linshareModeProduction"
-    close-dropdown="mainVm.sidebar.getData().closeDropdown"
-    create-recipient-list="mainVm.sidebar.getData().createRecipientList"
-    form="mainVm.sidebar.getData().form"
-  />
+  <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
+    <upload-request-group-form
+      upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
+      selected-tab-index="mainVm.sidebar.getData().formTabIndex"
+      create-recipient-list="mainVm.sidebar.getData().createRecipientList"
+      form="mainVm.sidebar.getData().form"
+    />
+  </div>
 </div>
 <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
   <button class="btn btn-default col-xs-6" ng-click="mainVm.sidebar.hide(); mainVm.sidebar.getData().reset();" translate>

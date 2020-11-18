@@ -4,8 +4,6 @@ angular
     template: require('./uploadRequestGroupForm.html'),
     bindings: {
       uploadRequestGroupObject: '=',
-      linshareModeProduction: '<',
-      closeDropdown: '=',
       createRecipientList: '=',
       selectedTabIndex: '=',
       form: '=',

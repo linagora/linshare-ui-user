@@ -167,15 +167,21 @@ function uploadRequestGroupsController(
       uploadRequestGroupsVm.setSubmitted(form);
       toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
     } else {
-      newUploadRequest.update().then(request => {
-        $scope.mainVm.sidebar.hide(newUploadRequest);
-        toastService.success({key: 'UPLOAD_REQUESTS.FORM_UPDATE.SUCCESS'});
+      newUploadRequest.update()
+        .then(request => {
+          sidebarService.hide();
+          showToastAlertFor('update', 'info');
 
-        const updatedItem = uploadRequestGroupsVm.itemsList.find(item => item.uuid === request.uuid);
-        
-        Object.assign(updatedItem, request);
-        uploadRequestGroupsVm.tableParams.reload();
-      });
+          const updatedItem = uploadRequestGroupsVm.itemsList.find(item => item.uuid === request.uuid);
+          
+          Object.assign(updatedItem, request);
+          uploadRequestGroupsVm.tableParams.reload();
+        })
+        .catch(error => {
+          if (error) {
+            showToastAlertFor('update', 'error');
+          }
+        });
     }
   }
 
@@ -214,7 +220,7 @@ function uploadRequestGroupsController(
    *  @param {Object} uploadRequest - Object contains data of upload requests
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
-  function showDetails(uploadRequest = {}, options = {}) {
+  function showDetails(uploadRequest = {}, { formTabIndex = 0, selectedIndex = 0 } = {}) {
     $q.all([
       uploadRequestGroupRestService.get(uploadRequest.uuid),
       uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
@@ -226,8 +232,8 @@ function uploadRequestGroupsController(
         uploadRequestGroupsVm.currentSelected.recipients.push(...uploadRequest.recipients.map(recipient => recipient.mail));
       });
 
-      uploadRequestGroupsVm.formTabIndex = options.formTabIndex || uploadRequestGroupsVm.formTabIndex;
-      uploadRequestGroupsVm.selectedIndex = options.selectedIndex || uploadRequestGroupsVm.selectedIndex;
+      uploadRequestGroupsVm.formTabIndex = formTabIndex >= 0 ? formTabIndex : uploadRequestGroupsVm.formTabIndex;
+      uploadRequestGroupsVm.selectedIndex = selectedIndex >= 0 ? selectedIndex : uploadRequestGroupsVm.selectedIndex;
 
       loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
     });
