@@ -153,7 +153,7 @@
             <label class="checkbox checkbox-inline">
               <input id="user-space" name="user-space" type="checkbox"
                      x-ng-checked="guestObject.form.activateUserSpace"
-                     x-ng-click="guestObject.form.activateUserSpace = !guestObject.form.activateUserSpace"
+                     ng-click="toggleAdvancedOptions(guestObject)"
                      x-ng-model="guestObject.canUpload"
                      x-ng-disabled="!guestObject.allowedToUpload.canOverride"/>
               <i class="input-helper"></i>
@@ -167,17 +167,16 @@
             <label for="restrict-contact" class="p-b-10">
               {{"SIDEBAR.LABEL.RESTRICT_CONTACTS" | translate}}:
             </label>
-            <label class="checkbox checkbox-inline">
+            <label class="checkbox checkbox-inline" ng-class="disabled: !guestObject.restricted">
               <input id="restrict-contact" name="restrict-contact" type="checkbox"
                      x-ng-checked="guestObject.form.activateRestricted"
-                     x-ng-click="guestObject.form.activateRestricted = !guestObject.form.activateRestricted"
                      x-ng-model="guestObject.restricted"
-                     x-ng-disabled="!guestObject.allowedToRestrict.canOverride"/>
+                     ng-disabled="!guestObject.allowedToRestrict.canOverride || !guestObject.canUpload"/>
               <i class="input-helper"></i>
             </label>
           </div>
         </div>
-        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!guestObject.form.activateRestricted">
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!guestObject.form.activateRestricted || !guestObject.restricted">
           <x-ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
             <div class="form-group fg-line">
               <div ls-autocomplete-user="USERS" disabled="!guestObject.allowedToRestrict.canOverride" data-selected-users-list="guestObject.restrictedContacts"

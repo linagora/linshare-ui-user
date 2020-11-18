@@ -42,6 +42,10 @@
       scope.formName = _.isUndefined(scope.formName) ?
         'guestForm' + Math.random().toString(36).match(/[a-z]+/g).join('') : scope.formName;
       scope.linshareModeProduction = scope.$root.linshareModeProduction;
+      scope.toggleAdvancedOptions = function(guestObject) {
+        guestObject.form.activateUserSpace = !guestObject.form.activateUserSpace;
+        guestObject.restricted = !guestObject.form.activateUserSpace ? false : guestObject.restricted;
+      };
     }
   }
 })();
