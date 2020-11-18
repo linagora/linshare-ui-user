@@ -308,8 +308,8 @@
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
                       </div>
                       <span ng-show="$ctrl.form.notificationDate.$invalid" translate
-                        translate-interpolation="messageformat" translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfActivation(true),
-                            max: $ctrl.uploadRequestGroupObject.getMaxDateOfNotification(true)  }">
+                        translate-interpolation="messageformat" translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfNotification(true),
+                            max: $ctrl.uploadRequestGroupObject.getMaxDateOfNotification(true) }">
                         UPLOAD_REQUESTS.ERROR.INVALID_NOTIFICATION_DATE
                       </span>
                     </div>

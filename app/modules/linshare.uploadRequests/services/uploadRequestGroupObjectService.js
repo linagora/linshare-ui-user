@@ -103,6 +103,7 @@ function UploadRequestGroupObjectService(
       self.getMaxDateOfExpiration = getMaxDateOfExpiration;
       self.getMinDateOfActivation = getMinDateOfActivation;
       self.getMaxSize = getMaxSize;
+      self.getMinDateOfNotification = getMinDateOfNotification;
       self.getMaxDateOfNotification = getMaxDateOfNotification;
       self.calculateDatePickerOptions = calculateDatePickerOptions;
       self.uuid = setPropertyValue(jsonObject.uuid, null);
@@ -386,24 +387,39 @@ function UploadRequestGroupObjectService(
     return minDate.format('DD MMM YYYY');
   }
 
-  function getMaxDateOfNotification(isFormatted) {
+  function getMinDateOfNotification(isFormatted) {
     const expirationDate = self.expiryDate && moment(self.expiryDate);
+    const activationDate = self.activationDate ? moment(self.activationDate) : moment();
 
     if (self.allowedToExpiryNotification.maxValue <= 0) {
-      return !isFormatted ? (expirationDate && expirationDate.toDate())
-        : (expirationDate && expirationDate.format('DD MMM YYYY'));
+      return !isFormatted ? (activationDate && activationDate.toDate())
+        : (activationDate && activationDate.format('DD MMM YYYY'));
     }
 
-    const maxDate = !_.isUndefined(self.allowedToExpiryNotification.maxValue) 
+    let minDate = !_.isUndefined(self.allowedToExpiryNotification.maxValue) 
       && self.allowedToExpiryNotification.unit 
       && expirationDate
       && expirationDate.subtract(self.allowedToExpiryNotification.maxValue, self.allowedToExpiryNotification.unit.toLowerCase());
 
-    if (!isFormatted) {
-      return maxDate && maxDate.toDate();
+    if (minDate.valueOf() < activationDate.valueOf()) {
+      minDate = activationDate;
     }
 
-    return maxDate && maxDate.format('DD MMM YYYY');
+    if (!isFormatted) {
+      return minDate && minDate.toDate();
+    }
+
+    return minDate && minDate.format('DD MMM YYYY');
+  }
+
+  function getMaxDateOfNotification(isFormatted) {
+    const expirationDate = self.expiryDate ? moment(self.expiryDate) : moment(self.getMaxDateOfExpiration());
+
+    if (!isFormatted) {
+      return expirationDate && expirationDate.toDate();
+    }
+
+    return expirationDate && expirationDate.format('DD MMM YYYY');
   }
 
   function getMaxSize(type, isFormatted) {
@@ -438,7 +454,7 @@ function UploadRequestGroupObjectService(
       maxDate: self.expiryDate
     };
     self.notificationDateOptions = {
-      minDate: self.getMinDateOfActivation(),
+      minDate: self.getMinDateOfNotification(),
       maxDate: self.getMaxDateOfNotification()
     };
   }

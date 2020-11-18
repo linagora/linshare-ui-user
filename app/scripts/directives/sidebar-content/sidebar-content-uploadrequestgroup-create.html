@@ -32,12 +32,14 @@
   </div>
 
   <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
-    <upload-request-group-form
-      upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
-      selected-tab-index="mainVm.sidebar.getData().formTabIndex"
-      create-recipient-list="mainVm.sidebar.getData().createRecipientList"
-      form="mainVm.sidebar.getData().form"
-    />
+    <md-content>
+      <upload-request-group-form
+        upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
+        selected-tab-index="mainVm.sidebar.getData().formTabIndex"
+        create-recipient-list="mainVm.sidebar.getData().createRecipientList"
+        form="mainVm.sidebar.getData().form"
+      />
+    </md-content>
   </div>
 </div>
 <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
