@@ -1,7 +1,7 @@
 <div id="member-sidebar" class="upload-requests">
   <div class="header-sidebar">
     <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mainVm.sidebar.hide()"></i>
-    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelected.label}} </h2>
+    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelected.recipients[0].mail}} </h2>
     <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
@@ -29,7 +29,7 @@
               <div class="description-ctn form-sidebar"
                   ng-class="{'show-full-comment': commentFocused}"
                   ng-init="commentFocused = false">
-                <span class="comment">{{mainVm.sidebar.getData().currentSelected.message || 'N/A'}}</span>
+                <span class="comment">{{mainVm.sidebar.getData().currentSelected.body || 'N/A'}}</span>
                 <div class="edit-description click-enabled">
                   <i class="zmdi zmdi-eye"></i>
                 </div>
@@ -44,19 +44,23 @@
                     'UNKNOWN_FIRST_LETTER' | translate | limitTo:1 | uppercase}}
                   </span>
                 </div>
-                <div class="item-mid">
+                <div class="item-mid vertical-center">
                   <div class="name">
                     {{mainVm.sidebar.getData().currentSelected.owner ?
                     mainVm.sidebar.getData().currentSelected.getOwnerNameOrEmail()
                     : 'UNKNOWN_USER' | translate}}
                   </div>
-                  <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate |
-                      lsDate:'medium'}}">
-                      <span>
-                        {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
-                        {{mainVm.sidebar.getData().currentSelected.modificationDate | lsDate:'longDate'}}
-                      </span>
+                  <div 
+                    class="info-item-member" 
+                    tooltip-placement="bottom" 
+                    tooltip-popup-delay="500"
+                    uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate | lsDate:'medium'}}"
+                    ng-if="mainVm.sidebar.getData().currentSelected.modificationDate"
+                  >
+                    <span>
+                      {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
+                      {{mainVm.sidebar.getData().currentSelected.modificationDate | lsDate:'longDate'}}
+                    </span>
                   </div>
                 </div>
                 <div class="item-r actions"
@@ -70,7 +74,7 @@
                   <span translate>UPLOAD_REQUESTS.DETAIL_TAB.META_DATA</span>
                 </h2>
                 <div class="meta-data-content">
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.creationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.CREATED_AT</p>
                     <p tooltip-placement="bottom" tooltip-popup-delay="500"
                       uib-tooltip="{{mainVm.sidebar.getData().currentSelected.creationDate |
@@ -78,11 +82,11 @@
                       {{mainVm.sidebar.getData().currentSelected.creationDate | lsDate:'longDate'}}
                     </p>
                   </div>
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.activationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ACTIVATED_AT</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.activationDate | lsDate:'longDate'}}</p>
                   </div>
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.expiryDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.EXPIRATION_DATE</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.expiryDate | lsDate:'longDate'}}</p>
                   </div>
@@ -94,13 +98,13 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || '0'}}</p>
                   </div>
-                  <div ng-if="Number.isInteger(mainVm.sidebar.getData().currentSelected.maxNumberOfFiles)">
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxNumberOfFiles > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxNumberOfFiles || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxNumberOfFiles}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.maxSizeOfAFile > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{(mainVm.sidebar.getData().currentSelected.maxSizeOfAFile | readableSize: true) || 'N/A'}}</p>
+                    <p>{{(mainVm.sidebar.getData().currentSelected.maxSizeOfAFile | readableSize: true)}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
@@ -114,13 +118,13 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
                     <p translate>{{mainVm.sidebar.getData().currentSelected.allowClosure ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.notificationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.notificationDate | lsDate:'longDate'}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.notificationLanguage">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.notificationLanguage || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.notificationLanguage}}</p>
                   </div>
                 </div>
               </div>

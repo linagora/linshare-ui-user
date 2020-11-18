@@ -201,7 +201,6 @@
       uploadRequestGroupDetails: 'uploadrequestgroup-details',
       uploadRequestGroupAddRecipients: 'uploadrequest-add-recipients',
       uploadRequestEntryDetails: 'uploadrequestentry-details',
-      uploadRequestGroupDetails: 'uploadrequestgroup-details',
       uploadRequestDetails: 'uploadrequest-details',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,

@@ -14,7 +14,7 @@
         <a><i class="zmdi zmdi-close zmdi-hc-lg mdi-close-mobile"></i></a>
       </span>
     </div>
-    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().currentSelected.label}} </h2>
+    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().uploadRequestGroupObject.label}} </h2>
     <span class="hidden-xs hidden-sm actions" ng-click="mainVm.sidebar.hide(); mainVm.sidebar.getData().reset();">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
@@ -37,7 +37,7 @@
                 <div class="flex-ctn detail-info-ctn p-0 p-t-10">
                   <div class="item-l m-b-10">
                     <span class="first-letter user-info">
-                      <span class="temp-size">{{mainVm.sidebar.getData().currentSelected.filesUploaded || 0}}</span>
+                      <span class="temp-size">{{mainVm.sidebar.getData().uploadRequestGroupObject.filesUploaded || 0}}</span>
                     </span>
                   </div>
                   <p class="m-b-0" translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
@@ -48,7 +48,7 @@
               <div class="description-ctn form-sidebar"
                   ng-class="{'show-full-comment': commentFocused}"
                   ng-init="commentFocused = false">
-                <span class="comment">{{mainVm.sidebar.getData().currentSelected.message || 'N/A'}}</span>
+                <span class="comment">{{mainVm.sidebar.getData().uploadRequestGroupObject.body || 'N/A'}}</span>
                 <div class="edit-description click-enabled">
                   <i class="zmdi zmdi-eye"></i>
                 </div>
@@ -58,28 +58,32 @@
               <div class="flex-ctn detail-info-ctn">
                 <div class="item-l">
                   <span class="first-letter user-info">
-                  {{mainVm.sidebar.getData().currentSelected.owner ?
-                    mainVm.sidebar.getData().currentSelected.getOwnerNameOrEmail().charAt(0) :
+                  {{mainVm.sidebar.getData().uploadRequestGroupObject.owner ?
+                    mainVm.sidebar.getData().uploadRequestGroupObject.getOwnerNameOrEmail().charAt(0) :
                     'UNKNOWN_FIRST_LETTER' | translate | limitTo:1 | uppercase}}
                   </span>
                 </div>
-                <div class="item-mid">
+                <div class="item-mid vertical-center">
                   <div class="name">
-                    {{mainVm.sidebar.getData().currentSelected.owner ?
-                    mainVm.sidebar.getData().currentSelected.getOwnerNameOrEmail()
+                    {{mainVm.sidebar.getData().uploadRequestGroupObject.owner ?
+                    mainVm.sidebar.getData().uploadRequestGroupObject.getOwnerNameOrEmail()
                     : 'UNKNOWN_USER' | translate}}
                   </div>
-                  <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate |
-                      lsDate:'medium'}}">
-                      <span>
-                        {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
-                        {{mainVm.sidebar.getData().currentSelected.modificationDate | lsDate:'longDate'}}
-                      </span>
+                  <div
+                    class="info-item-member"
+                    tooltip-placement="bottom"
+                    tooltip-popup-delay="500"
+                    uib-tooltip="{{mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate | lsDate:'medium'}}"
+                    ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate"
+                    >
+                    <span>
+                      {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
+                      {{mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate | lsDate:'longDate'}}
+                    </span>
                   </div>
                 </div>
                 <div class="item-r actions"
-                    ng-show="mainVm.sidebar.getData().currentSelected.owner.uuid === userLogged.uuid" translate>
+                    ng-show="mainVm.sidebar.getData().uploadRequestGroupObject.owner.uuid === userLogged.uuid" translate>
                   <span translate>CONTACTS_LISTS_DETAILS.OWNER</span>
                 </div>
               </div>
@@ -89,61 +93,61 @@
                   <span translate>UPLOAD_REQUESTS.DETAIL_TAB.META_DATA</span>
                 </h2>
                 <div class="meta-data-content">
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.creationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.CREATED_AT</p>
                     <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                      uib-tooltip="{{mainVm.sidebar.getData().currentSelected.creationDate |
+                      uib-tooltip="{{mainVm.sidebar.getData().uploadRequestGroupObject.creationDate |
                         lsDate:'medium'}}">
-                      {{mainVm.sidebar.getData().currentSelected.creationDate | lsDate:'longDate'}}
+                      {{mainVm.sidebar.getData().uploadRequestGroupObject.creationDate | lsDate:'longDate'}}
                     </p>
                   </div>
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.activationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ACTIVATED_AT</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.activationDate | lsDate:'longDate'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.activationDate | lsDate:'longDate'}}</p>
                   </div>
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.expiryDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.EXPIRATION_DATE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.expiryDate | lsDate:'longDate'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.expiryDate | lsDate:'longDate'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.GROUP</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.collective ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.collective ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || '0'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.filesUploaded || '0'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxFileCount >= 0">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.maxFileCount > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxFileCount}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.maxFileCount}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxDepositSize >= 0">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.maxDepositSize > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
-                    <p>{{(mainVm.sidebar.getData().currentSelected.maxDepositSize | readableSize: true)}}</p>
+                    <p>{{(mainVm.sidebar.getData().uploadRequestGroupObject.maxDepositSize | readableSize: true)}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxFileSize >= 0">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.maxFileSize > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{(mainVm.sidebar.getData().currentSelected.maxFileSize | readableSize: true)}}</p>
+                    <p>{{(mainVm.sidebar.getData().uploadRequestGroupObject.maxFileSize | readableSize: true)}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.protectedByPassword ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.protectedByPassword ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.allowDeletion ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.allowDeletion ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.allowClosure ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.allowClosure ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
-                  <div>
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.notificationDate | lsDate:'longDate'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate | lsDate:'longDate'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.notificationLanguage">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.notificationLanguage">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.notificationLanguage || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.notificationLanguage || 'N/A'}}</p>
                   </div>
                 </div>
               </div>

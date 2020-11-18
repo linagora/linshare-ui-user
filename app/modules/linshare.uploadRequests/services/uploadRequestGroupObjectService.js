@@ -87,6 +87,7 @@ function UploadRequestGroupObjectService(
       self.allowDeletion = setPropertyValue(jsonObject.allowDeletion, allowedToDeletion.value);
       self.notificationLanguage = setPropertyValue(jsonObject.notificationLanguage, allowedToNotificationLanguage.value);
       self.label = setPropertyValue(jsonObject.label, '');
+      self.owner = setPropertyValue(jsonObject.owner, {});
       self.groupMode = setPropertyValue(jsonObject.groupMode, false);
       self.body = setPropertyValue(jsonObject.body, '');
       self.recipients = setPropertyValue(jsonObject.recipients, []);
@@ -106,6 +107,7 @@ function UploadRequestGroupObjectService(
       self.calculateDatePickerOptions = calculateDatePickerOptions;
       self.uuid = setPropertyValue(jsonObject.uuid, null);
       self.submitRecipients = submitRecipients;
+      self.getOwnerNameOrEmail = getOwnerNameOrEmail;
       self.submitRecipientsCallback = options.submitRecipientsCallback;
 
       calculateDatePickerOptions();
@@ -467,4 +469,11 @@ function UploadRequestGroupObjectService(
       });
   }
 
+  function getOwnerNameOrEmail() {
+    if (self.owner.firstName && self.owner.lastName) {
+      return `${self.owner.firstName}  ${self.owner.lastName}`;
+    }
+
+    return self.owner.mail;
+  }
 }

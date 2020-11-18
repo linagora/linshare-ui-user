@@ -188,6 +188,10 @@ label.required::before {
       text-transform: inherit;
     }
   }
+  .vertical-center {
+    display: flex;
+    align-items: center;
+  }
   .item-r {
     display: flex;
     justify-content: center;

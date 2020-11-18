@@ -77,9 +77,10 @@ function UploadRequestObjectService(
       self.allowClosure = setPropertyValue(jsonObject.canClose, allowedToClosure.value);
       self.allowDeletion = setPropertyValue(jsonObject.canDelete, allowedToDeletion.value);
       self.notificationLanguage = setPropertyValue(jsonObject.locale, allowedToNotificationLanguage.value);
-      self.mail = setPropertyValue(jsonObject.mail, '');
       self.groupMode = setPropertyValue(jsonObject.groupMode, false);
-      self.message = setPropertyValue(jsonObject.body, '');
+      self.body = setPropertyValue(jsonObject.body, '');
+      self.label = setPropertyValue(jsonObject.label, '');
+      self.recipients = setPropertyValue(jsonObject.recipients, []);
       self.owner = setPropertyValue(jsonObject.owner, []);
       self.toDTO = toDTO;
       self.getOwnerNameOrEmail = getOwnerNameOrEmail;
@@ -187,8 +188,8 @@ function UploadRequestObjectService(
     dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
     dto.expiryDate = self.expirationDate && moment(self.expirationDate).valueOf();
     dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
-    dto.label = self.mail;
-    dto.body = self.message;
+    dto.label = self.label;
+    dto.body = self.body;
     dto.maxFileCount = self.maxNumberOfFiles;
     dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, unitService.formatUnit(self.totalSizeOfFiles.unit));
     dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, unitService.formatUnit(self.maxSizeOfAFile.unit));
