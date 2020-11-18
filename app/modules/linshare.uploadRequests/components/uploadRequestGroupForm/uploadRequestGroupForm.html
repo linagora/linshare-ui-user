@@ -134,11 +134,17 @@
                     </md-select>
                   </div>
                   <div class="has-error">
-                    <span ng-show="$ctrl.form.totalSizeOfFiles.$invalid
-                        || $ctrl.form.totalSizeOfFilesUnit.$invalid" translate
+                    <span ng-show="($ctrl.form.totalSizeOfFiles.$invalid
+                        || $ctrl.form.totalSizeOfFilesUnit.$invalid) && $ctrl.uploadRequestGroupObject.getMaxSize('total')"
+                      translate
                       translate-interpolation="messageformat"
                       translate-values="{ max: $ctrl.uploadRequestGroupObject.getMaxSize('total', true) }">
                       UPLOAD_REQUESTS.ERROR.TOTAL_SIZE_OF_FILES_REQUIRED
+                    </span>
+                    <span ng-show="($ctrl.form.totalSizeOfFiles.$invalid
+                        || $ctrl.form.totalSizeOfFilesUnit.$invalid) && !$ctrl.uploadRequestGroupObject.getMaxSize('total')"
+                      translate>
+                      UPLOAD_REQUESTS.ERROR.TOTAL_SIZE_OF_FILES_REQUIRED_ONLY
                     </span>
                   </div>
                 </div>
@@ -155,10 +161,15 @@
                       ng-model="$ctrl.uploadRequestGroupObject.maxNumberOfFiles" type="number" />
                   </div>
                   <div class="has-error">
-                    <span ng-show="$ctrl.form.maxNumberOfFiles.$invalid" translate
+                    <span ng-show="$ctrl.form.maxNumberOfFiles.$invalid && $ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue"
+                      translate
                       translate-interpolation="messageformat"
                       translate-values="{ max: $ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue}">
                       UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED
+                    </span>
+                    <span ng-show="$ctrl.form.maxNumberOfFiles.$invalid && !$ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue"
+                      translate>
+                      UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED_ONLY
                     </span>
                   </div>
                 </div>
@@ -184,10 +195,18 @@
                   </div>
                   <div class="has-error">
                     <span
-                      ng-show="$ctrl.form.maxSizeOfAFile.$invalid || $ctrl.form.maxSizeOfAFileUnit.$invalid"
-                      translate translate-interpolation="messageformat"
-                      translate-values="{ max: $ctrl.uploadRequestGroupObject.getMaxSize('one', true) }">
+                      ng-show="($ctrl.form.maxSizeOfAFile.$invalid || $ctrl.form.maxSizeOfAFileUnit.$invalid) && $ctrl.uploadRequestGroupObject.getMaxSize('one')"
+                      translate
+                      translate-interpolation="messageformat"
+                      translate-values="{ max: $ctrl.uploadRequestGroupObject.getMaxSize('one', true) }"
+                    >
                       UPLOAD_REQUESTS.ERROR.MAX_SIZE_OF_A_FILE_REQUIRED
+                    </span>
+                    <span
+                      ng-show="($ctrl.form.maxSizeOfAFile.$invalid || $ctrl.form.maxSizeOfAFileUnit.$invalid) && !$ctrl.uploadRequestGroupObject.getMaxSize('one')"
+                      translate
+                    >
+                      UPLOAD_REQUESTS.ERROR.MAX_SIZE_OF_A_FILE_REQUIRED_ONLY
                     </span>
                   </div>
                 </div>

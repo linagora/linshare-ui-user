@@ -39,8 +39,11 @@
       "INVALID_ACTIVATION_DATE": "La date d'activation doit être comprise entre la date d'expiration et {value}",
       "INVALID_NOTIFICATION_DATE": "La date de notification doit être comprise entre {min} et {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED": "La taille totale des fichiers est requise et inférieure à {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "La taille totale des fichiers",
       "MAX_NUMBER_OF_FILES_REQUIRED": "Le nombre maximal de fichiers est requis et inférieur à {max}",
-      "MAX_SIZE_OF_A_FILE_REQUIRED": "La taille maximale d'un fichier est requise et inférieure à {max}"
+      "MAX_NUMBER_OF_FILES_REQUIRED_ONLY": "Le nombre maximal de fichiers",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "La taille maximale d'un fichier est requise et inférieure à {max}",
+      "MAX_SIZE_OF_A_FILE_REQUIRED_ONLY": "La taille maximale d'un fichier"
     },
     "MENU_ENTRIES": {
       "PENDING": "En attente",

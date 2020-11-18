@@ -153,18 +153,22 @@ function UploadRequestGroupObjectService(
         const clonedData = _.cloneDeep(data || {});
 
         allowedToTotalSizeOfFiles = clonedData;
+        allowedToTotalSizeOfFiles.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
         allowedToTotalSizeOfFiles.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_SIZE').then(data => {
         const clonedData = _.cloneDeep(data || {});
 
         allowedToMaxSizeOfAFile = clonedData;
+        allowedToMaxSizeOfAFile.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
+        allowedToMaxSizeOfAFile.maxValue = null;
         allowedToMaxSizeOfAFile.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_COUNT').then(data => {
         const clonedData = _.cloneDeep(data || {});
 
         allowedToMaxNumberOfFiles = clonedData;
+        allowedToMaxNumberOfFiles.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
         allowedToMaxNumberOfFiles.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__SECURED_URL').then(data => {
@@ -366,7 +370,7 @@ function UploadRequestGroupObjectService(
 
   function getMinDateOfActivation(isFormatted) {
     if (self.allowedToActivation.maxValue < 0) {
-      return;
+      return !isFormatted ? new Date() : moment().format('DD MMM YYYY');
     }
 
     const minDate = !_.isUndefined(self.allowedToActivation.maxValue) && self.allowedToActivation.unit 
@@ -382,6 +386,12 @@ function UploadRequestGroupObjectService(
 
   function getMaxDateOfNotification(isFormatted) {
     const expirationDate = self.expiryDate && moment(self.expiryDate);
+
+    if (self.allowedToExpiryNotification.maxValue <= 0) {
+      return !isFormatted ? (expirationDate && expirationDate.toDate())
+        : (expirationDate && expirationDate.format('DD MMM YYYY'));
+    }
+
     const maxDate = !_.isUndefined(self.allowedToExpiryNotification.maxValue) 
       && self.allowedToExpiryNotification.unit 
       && expirationDate
@@ -407,7 +417,7 @@ function UploadRequestGroupObjectService(
       currentUnit = self.maxSizeOfAFile.unit;
     }
 
-    const maxValue = configMaxValue * unitService.convertBase(currentUnit, configUnit);
+    const maxValue = configMaxValue && configUnit && currentUnit ? configMaxValue * unitService.convertBase(currentUnit, configUnit) : null;
 
     if (isFormatted) {
       return `${maxValue} ${unitService.formatUnit(configUnit)}`;

@@ -39,8 +39,11 @@
       "INVALID_ACTIVATION_DATE": "Дата активации должна быть между датой истечения срока действия и {value}",
       "INVALID_NOTIFICATION_DATE": "Дата уведомления должна быть между {min} и {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED": "Общий размер файлов должен быть меньше {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "Требуется общий размер файлов",
       "MAX_NUMBER_OF_FILES_REQUIRED": "Требуется максимальное количество файлов меньше {max}",
-      "MAX_SIZE_OF_A_FILE_REQUIRED": "Требуется максимальный размер файла, который меньше {max}"
+      "MAX_NUMBER_OF_FILES_REQUIRED_ONLY": "Требуется максимальное количество файлов",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "Требуется максимальный размер файла, который меньше {max}",
+      "MAX_SIZE_OF_A_FILE_REQUIRED_ONLY": "Требуется максимальный размер файла"
     },
     "MENU_ENTRIES": {
       "PENDING": "В ожидании",
