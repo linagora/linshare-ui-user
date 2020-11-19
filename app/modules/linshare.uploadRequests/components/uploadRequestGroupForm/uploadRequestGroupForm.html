@@ -91,12 +91,13 @@
                             && $ctrl.form.expiration.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                          ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiration.canOverride"
-                          class="form-control date-picker-input" uib-datepicker-popup show-weeks="false" is-open="opened"
-                          required datepicker-options="::$ctrl.uploadRequestGroupObject.expirationDateOptions"
-                          min="{{::$ctrl.uploadRequestGroupObject.expirationDateOptions.minDate}}"
-                          max="{{::$ctrl.uploadRequestGroupObject.expirationDateOptions.maxDate}}" name='expiration'
-                          ng-model="$ctrl.uploadRequestGroupObject.expiryDate"
+                          ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToExpiration.canOverride"
+                          class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                          is-open="opened" required
+                          datepicker-options="$ctrl.uploadRequestGroupObject.expirationDateOptions"
+                          min="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.expirationDateOptions.minDate)}}"
+                          max="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.expirationDateOptions.maxDate)}}"
+                          name='expiration' ng-model="$ctrl.uploadRequestGroupObject.expiryDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
                       </div>
                       <span ng-show="$ctrl.form.expiration.$invalid" translate translate-interpolation="messageformat"
@@ -222,12 +223,12 @@
                             && $ctrl.form.activation.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                          ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfActivation.canOverride"
-                          class="form-control date-picker-input" uib-datepicker-popup show-weeks="false" is-open="opened"
-                          ng-required="true" name="activation"
-                          datepicker-options="::$ctrl.uploadRequestGroupObject.activationDateOptions"
-                          min="{{::$ctrl.uploadRequestGroupObject.activationDateOptions.minDate}}"
-                          max="{{::$ctrl.uploadRequestGroupObject.activationDateOptions.maxDate}}"
+                          ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToActivation.canOverride"
+                          class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                          is-open="opened" ng-required="true" name="activation"
+                          datepicker-options="$ctrl.uploadRequestGroupObject.activationDateOptions"
+                          min="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.activationDateOptions.minDate)}}"
+                          max="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.activationDateOptions.maxDate)}}"
                           ng-model="$ctrl.uploadRequestGroupObject.activationDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
                       </div>
@@ -281,12 +282,12 @@
                           && $ctrl.form.notificationDate.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                          ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.canOverride"
-                          class="form-control date-picker-input" uib-datepicker-popup show-weeks="false" is-open="opened"
-                          ng-required="true" name='notificationDate'
-                          datepicker-options="::$ctrl.uploadRequestGroupObject.notificationDateOptions"
-                          min="{{::$ctrl.uploadRequestGroupObject.notificationDateOptions.minDate}}"
-                          max="{{::$ctrl.uploadRequestGroupObject.notificationDateOptions.maxDate}}"
+                          ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToExpiryNotification.canOverride"
+                          class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                          is-open="opened" ng-required="true" name='notificationDate'
+                          datepicker-options="$ctrl.uploadRequestGroupObject.notificationDateOptions"
+                          min="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.notificationDateOptions.minDate)}}"
+                          max="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.notificationDateOptions.maxDate)}}"
                           ng-model="$ctrl.uploadRequestGroupObject.notificationDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
                       </div>
