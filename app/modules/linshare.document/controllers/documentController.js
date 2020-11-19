@@ -106,6 +106,7 @@
     $scope.updateDocument = updateDocument;
     $scope.functionalities = functionalities;
     $scope.canCopyInWorkGroup = functionalities.WORK_GROUP && functionalities.WORK_GROUP.enable;
+    $scope.canCreateContactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
 
     activate();
 

@@ -86,7 +86,7 @@
   </div>
 </div>
 <div
+  ng-if="mainVm.sidebar.getData().canCreateContactsList && mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
   create-contacts-list
   create-contacts-list-contacts-to-be-added="mainVm.sidebar.getData().currentSelectedDocument.recipients"
-  data-ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.shared > 0"
 ></div>
