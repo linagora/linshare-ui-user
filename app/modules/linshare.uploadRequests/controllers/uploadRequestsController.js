@@ -10,6 +10,7 @@ uploadRequestsController.$inject = [
   'Restangular',
   'lsAppConfig',
   'tableParamsService',
+  'toastService',
   'uploadRequestGroup',
   'UploadRequestObjectService',
   'uploadRequestGroupRestService',
@@ -29,6 +30,7 @@ function uploadRequestsController(
   Restangular,
   lsAppConfig,
   tableParamsService,
+  toastService,
   uploadRequestGroup,
   UploadRequestObjectService,
   uploadRequestGroupRestService,
@@ -49,6 +51,7 @@ function uploadRequestsController(
   uploadRequestsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
   uploadRequestsVm.showDetails = showDetails;
   uploadRequestsVm.paramFilter = { recipientEmail: '' };
+  uploadRequestsVm.selectedIndex = 0;
   uploadRequestsVm.fabButton = {
     toolbar: {
       activate: true,
@@ -92,6 +95,7 @@ function uploadRequestsController(
             uploadRequestsVm.closeUploadRequests = closeUploadRequests;
             uploadRequestsVm.archiveUploadRequest = archiveUploadRequest;
             uploadRequestsVm.removeArchivedUploadRequests = removeArchivedUploadRequests;
+            uploadRequestsVm.updateUploadRequest = updateUploadRequest;
             uploadRequestsVm.selectedUploadRequests = tableParamsService.getSelectedItemsList();
             uploadRequestsVm.tableParams = tableParamsService.getTableParams();
             uploadRequestsVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
@@ -271,23 +275,20 @@ function uploadRequestsController(
     });
   }
 
-  function showDetails(uploadRequest) {
+  function showDetails(uploadRequest, { selectedIndex = 0 } = {}) {
     // TODO: remove uploadRequestRestService.listEntries when the UR API includes the number of uploaded files.
     $q.all([
       uploadRequestRestService.get(uploadRequest.uuid),
       uploadRequestRestService.listEntries(uploadRequest.uuid)
     ]).then(([responseUploadRequest, entries]) => {
-      const { body, canClose, canDelete, locale } = uploadRequestsVm.uploadRequestGroup;
-
       responseUploadRequest = Restangular.stripRestangular(responseUploadRequest);
+
       uploadRequestsVm.currentSelected = new UploadRequestObjectService({
         ...responseUploadRequest,
-        body,
-        canClose,
-        canDelete,
-        locale,
         filesUploaded: entries.length
       });
+
+      uploadRequestsVm.selectedIndex = selectedIndex;
 
       sidebarService.setData(uploadRequestsVm);
       sidebarService.setContent(lsAppConfig.uploadRequestDetails);
@@ -308,5 +309,39 @@ function uploadRequestsController(
 
     uploadRequestsVm.currentSelectedUploadRequest = uploadRequest;
     uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
+  }
+
+  function setSubmitted(form) {
+    form.$setSubmitted();
+    angular.forEach(form, function(item) {
+      if (item && item.$$parentForm === form && item.$setSubmitted) {
+        setSubmitted(item);
+      }
+    });
+  }
+
+  function updateUploadRequest(form, uploadRequest) {
+    if (!form.$valid) {
+      setSubmitted(form);
+      toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
+
+      return;
+    }
+
+    uploadRequest
+      .update()
+      .then(updated => {
+        const itemIndex = uploadRequestsVm.itemsList.findIndex(item => item.uuid === updated.uuid);
+
+        if (itemIndex >= 0) {
+          uploadRequestsVm.itemsList[itemIndex] = _.assign(uploadRequestsVm.itemsList[itemIndex], updated);
+        }
+
+        uploadRequestsVm.tableParams.reload();
+        sidebarService.hide();
+
+        showToastAlertFor('update', 'info');
+      })
+      .catch(error => (error && showToastAlertFor('update', 'error')));
   }
 }

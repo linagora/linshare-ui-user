@@ -141,19 +141,19 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION</p>
-                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.allowDeletion ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.canDelete ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
-                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.allowClosure ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().uploadRequestGroupObject.canClose ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
                     <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate | lsDate:'longDate'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.notificationLanguage">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.locale">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE</p>
-                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.notificationLanguage || 'N/A'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.locale}}</p>
                   </div>
                 </div>
               </div>

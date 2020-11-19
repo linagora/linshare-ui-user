@@ -313,7 +313,11 @@
                           </a>
                         </li>
                         <li ng-if="['CREATED', 'ENABLED'].includes(uploadRequest.status)">
-                          <a translate-attr="{title: 'EDIT'}" href="">
+                          <a
+                            translate-attr="{title: 'EDIT'}"
+                            href=""
+                            ng-click="uploadRequestsVm.showDetails(uploadRequest, { selectedIndex: 1 })"
+                          >
                             <i class="zmdi zmdi-edit"></i>
                           </a>
                         </li>
@@ -348,7 +352,10 @@
                               </a>
                             </li>
                             <li ng-class="{ 'disable-link' : !['ENABLED', 'CREATED'].includes(uploadRequest.status) }">
-                              <a href="">
+                              <a
+                                href=""
+                                ng-click="uploadRequestsVm.showDetails(uploadRequest, { selectedIndex: 1 })"
+                              >
                                 <i class="zmdi zmdi-edit"></i>
                                 <span translate>EDIT</span>
                               </a>

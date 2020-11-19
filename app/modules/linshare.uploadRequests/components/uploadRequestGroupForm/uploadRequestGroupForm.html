@@ -259,8 +259,8 @@
                     UPLOAD_REQUESTS.FORM_CREATE.ALLOW_DELETION
                   </label>
                   <div class="col-xs-6 flex-combine-input">
-                    <input type="checkbox" ng-checked="$ctrl.uploadRequestGroupObject.allowDeletion" name="allowDeletion"
-                      ng-model="$ctrl.uploadRequestGroupObject.allowDeletion"
+                    <input type="checkbox" ng-checked="$ctrl.uploadRequestGroupObject.canDelete" name="canDelete"
+                      ng-model="$ctrl.uploadRequestGroupObject.canDelete"
                       ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfDeletion.canOverride">
                   </div>
                 </div>
@@ -270,8 +270,8 @@
                     UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE
                   </label>
                   <div class="col-xs-6 flex-combine-input">
-                    <input type="checkbox" ng-checked="$ctrl.uploadRequestGroupObject.allowClosure" name="allowClosure"
-                      ng-model="$ctrl.uploadRequestGroupObject.allowClosure"
+                    <input type="checkbox" ng-checked="$ctrl.uploadRequestGroupObject.canClose" name="canClose"
+                      ng-model="$ctrl.uploadRequestGroupObject.canClose"
                       ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfClosure.canOverride">
                   </div>
                 </div>
@@ -311,7 +311,7 @@
                   <div class="col-xs-6 flex-combine-input">
                     <md-select class="form-control m-0 custom-bordered-lang-select"
                       ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfNotificationLanguage.canOverride"
-                      ng-model="$ctrl.uploadRequestGroupObject.notificationLanguage">
+                      ng-model="$ctrl.uploadRequestGroupObject.locale">
                       <md-option
                         ng-repeat="unit in $ctrl.uploadRequestGroupObject.functionalityOfNotificationLanguage.units"
                         ng-value="unit">{{::unit}}</md-option>

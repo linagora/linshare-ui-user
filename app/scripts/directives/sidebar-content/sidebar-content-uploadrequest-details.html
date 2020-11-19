@@ -9,8 +9,8 @@
 
   <div class="tabs-demo-static-tabs tab-nav-detail">
     <md-content>
-      <md-tabs md-dynamic-height="" md-border-bottom="">
-        <md-tab id="tab1" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.DETAILS' | translate}}" class="col-xs-4 no-padding">
+      <md-tabs md-dynamic-height md-border-bottom md-selected="mainVm.sidebar.getData().selectedIndex">
+        <md-tab label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.DETAILS' | translate}}" class="col-xs-4 no-padding">
           <div id="profile-main" class="detail-guest">
             <div class="p-relative img-preview-ctn p-0">
               <div class="dark-overlay"></div>
@@ -50,9 +50,9 @@
                     mainVm.sidebar.getData().currentSelected.getOwnerNameOrEmail()
                     : 'UNKNOWN_USER' | translate}}
                   </div>
-                  <div 
-                    class="info-item-member" 
-                    tooltip-placement="bottom" 
+                  <div
+                    class="info-item-member"
+                    tooltip-placement="bottom"
                     tooltip-popup-delay="500"
                     uib-tooltip="{{mainVm.sidebar.getData().currentSelected.modificationDate | lsDate:'medium'}}"
                     ng-if="mainVm.sidebar.getData().currentSelected.modificationDate"
@@ -98,9 +98,9 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || '0'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxNumberOfFiles > 0">
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxFileCount > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.maxNumberOfFiles}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.maxFileCount}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.maxSizeOfAFile > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
@@ -112,26 +112,274 @@
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.allowDeletion ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.canDeleteDocument ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE</p>
-                    <p translate>{{mainVm.sidebar.getData().currentSelected.allowClosure ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
+                    <p translate>{{mainVm.sidebar.getData().currentSelected.canClose ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.notificationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.notificationDate | lsDate:'longDate'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.notificationLanguage">
+                <div ng-if="mainVm.sidebar.getData().currentSelected.locale">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.notificationLanguage}}</p>
+                    <p>{{mainVm.sidebar.getData().currentSelected.locale}}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </md-tab>
+
+        <md-tab label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding">
+          <div class="card col-xs-12 form-within-sidebar" id="content-ctn-sidebar">
+            <form name="uploadRequestForm">
+              <div class="create-upload-request">
+                <div class="recipients-form-sections clearfix">
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfExpiration.enable"
+                    class="col-xs-12 field-ctn clearfix">
+                    <label for="expiration" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                      RIGHT_PANEL.DETAILS.EXPIRATION_DATE
+                    </label>
+                    <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+                      ng-class="{'is-opened': opened == true}">
+                      <div class="fg-line datepicker-ctn" ng-class="
+                        {
+                          'fg-toggled': opened == true,
+                          'has-error' : (uploadRequestForm.expiration.$touched ||uploadRequestForm.$submitted) && uploadRequestForm.expiration.$invalid
+                        }">
+                        <div class="form-inline">
+                          <input working-date-picker ng-click="open($event, 'opened')" type="text"
+                            ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfExpiration.canOverride"
+                            class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                            is-open="opened" required
+                            datepicker-options="mainVm.sidebar.getData().currentSelected.expirationDateOptions"
+                            min="{{mainVm.sidebar.getData().currentSelected.expirationDateOptions.minDate}}"
+                            max="{{mainVm.sidebar.getData().currentSelected.expirationDateOptions.maxHTMLDate}}"
+                            name='expiration' ng-model="mainVm.sidebar.getData().currentSelected.expiryDate"
+                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions()" />
+                        </div>
+                        <span ng-show="uploadRequestForm.expiration.$invalid" translate
+                          translate-interpolation="messageformat"
+                          translate-values="{ value: mainVm.sidebar.getData().currentSelected.getMaxDateOfExpiration('DD MMM YYYY') }">
+                          UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 field-ctn clearfix"
+                    ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfTotalSizeOfFiles.enable">
+                    <label for="totalSizeOfFiles" class="label-muted col-xs-6 no-padding" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.TOTAL_SIZE_OF_FILES
+                    </label>
+                    <div class="col-xs-6 flex-combine-input">
+                      <input ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfTotalSizeOfFiles.canOverride"
+                        class="form-control custom-bordered-input"
+                        min="0"
+                        max="{{mainVm.sidebar.getData().currentSelected.totalSizeOfFiles.maxValue}}" name="totalSizeOfFiles"
+                        ng-model="mainVm.sidebar.getData().currentSelected.totalSizeOfFiles.value" type="number" required/>
+                      <md-select class="form-control custom-bordered-select m-0"
+                        ng-model="mainVm.sidebar.getData().currentSelected.totalSizeOfFiles.unit" name="totalSizeOfFilesUnit"
+                        ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfTotalSizeOfFiles.canOverride"
+                        ng-change="mainVm.sidebar.getData().currentSelected.calculateMaxSize('total')"
+                        required>
+                        <md-option value="KB">KB</md-option>
+                        <md-option value="MB">MB</md-option>
+                        <md-option value="GB">GB</md-option>
+                      </md-select>
+                    </div>
+                    <div class="has-error">
+                      <span
+                        ng-show="(uploadRequestForm.totalSizeOfFiles.$invalid
+                          || uploadRequestForm.totalSizeOfFilesUnit.$invalid) && mainVm.sidebar.getData().currentSelected.getMaxSize('total')"
+                        translate translate-interpolation="messageformat"
+                        translate-values="{ max: mainVm.sidebar.getData().currentSelected.getMaxSize('total', true) }">
+                        UPLOAD_REQUESTS.ERROR.TOTAL_SIZE_OF_FILES_REQUIRED
+                      </span>
+                      <span
+                        ng-show="(uploadRequestForm.totalSizeOfFiles.$invalid
+                          || uploadRequestForm.totalSizeOfFilesUnit.$invalid) && !mainVm.sidebar.getData().currentSelected.getMaxSize('total')"
+                        translate>
+                        UPLOAD_REQUESTS.ERROR.TOTAL_SIZE_OF_FILES_REQUIRED_ONLY
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 field-ctn clearfix"
+                    ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.enable">
+                    <label for="maxFileCount" class="label-muted col-xs-6 no-padding" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES
+                    </label>
+                    <div class="col-xs-6 flex-combine-input">
+                      <input name="maxFileCount" required
+                        max="{{mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.maxValue}}"
+                        ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.canOverride"
+                        class="form-control custom-bordered-input custom-single-input"
+                        ng-model="mainVm.sidebar.getData().currentSelected.maxFileCount" type="number" />
+                    </div>
+                    <div class="has-error">
+                      <span
+                        ng-show="uploadRequestForm.maxFileCount.$invalid && mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.maxValue"
+                        translate translate-interpolation="messageformat"
+                        translate-values="{ max: mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.maxValue}">
+                        UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED
+                      </span>
+                      <span
+                        ng-show="uploadRequestForm.maxFileCount.$invalid && !mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.maxValue"
+                        translate>
+                        UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED_ONLY
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 field-ctn clearfix"
+                    ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfMaxSizeOfAFile.enable">
+                    <label for="maxSizeOfAFile" class="label-muted col-xs-6 no-padding" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.MAX_SIZE_OF_A_FILE
+                    </label>
+                    <div class="col-xs-6 flex-combine-input">
+                      <input ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfMaxSizeOfAFile.canOverride"
+                        class="form-control custom-bordered-input" name="maxSizeOfAFile"
+                        max="{{mainVm.sidebar.getData().currentSelected.maxSizeOfAFile.maxValue}}" required
+                        ng-model="mainVm.sidebar.getData().currentSelected.maxSizeOfAFile.value" type="number" />
+                      <md-select class="form-control m-0 custom-bordered-select"
+                        ng-model="mainVm.sidebar.getData().currentSelected.maxSizeOfAFile.unit" name="maxSizeOfAFileUnit"
+                        required ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfMaxSizeOfAFile.canOverride"
+                        ng-change="mainVm.sidebar.getData().currentSelected.calculateMaxSize('one')">
+                        <md-option value="KB">KB</md-option>
+                        <md-option value="MB">MB</md-option>
+                        <md-option value="GB">GB</md-option>
+                      </md-select>
+                    </div>
+                    <div class="has-error">
+                      <span
+                        ng-show="(uploadRequestForm.maxSizeOfAFile.$invalid || uploadRequestForm.maxSizeOfAFileUnit.$invalid) && mainVm.sidebar.getData().currentSelected.getMaxSize('one')"
+                        translate translate-interpolation="messageformat"
+                        translate-values="{ max: mainVm.sidebar.getData().currentSelected.getMaxSize('one', true) }">
+                        UPLOAD_REQUESTS.ERROR.MAX_SIZE_OF_A_FILE_REQUIRED
+                      </span>
+                      <span
+                        ng-show="(uploadRequestForm.maxSizeOfAFile.$invalid || uploadRequestForm.maxSizeOfAFileUnit.$invalid) && !mainVm.sidebar.getData().currentSelected.getMaxSize('one')"
+                        translate>
+                        UPLOAD_REQUESTS.ERROR.MAX_SIZE_OF_A_FILE_REQUIRED_ONLY
+                      </span>
+                    </div>
+                  </div>
+
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfActivation.enable"
+                    class="col-xs-12 field-ctn clearfix">
+                    <label for="activation" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
+                    </label>
+                    <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+                      ng-class="{'is-opened': opened == true}">
+                      <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((uploadRequestForm.activation.$touched ||uploadRequestForm.$submitted)
+                          && uploadRequestForm.activation.$invalid)}">
+                        <div class="form-inline">
+                          <input working-date-picker ng-click="open($event, 'opened')" type="text"
+                            ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfActivation.canOverride"
+                            class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                            is-open="opened" ng-required="true" name="activation"
+                            datepicker-options="mainVm.sidebar.getData().currentSelected.activationDateOptions"
+                            min="{{mainVm.sidebar.getData().currentSelected.activationDateOptions.minHTMLDate}}"
+                            max="{{mainVm.sidebar.getData().currentSelected.activationDateOptions.maxHTMLDate}}"
+                            ng-model="mainVm.sidebar.getData().currentSelected.activationDate"
+                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions()" />
+                        </div>
+                        <span ng-show="uploadRequestForm.activation.$invalid" translate
+                          translate-interpolation="messageformat"
+                          translate-values="{ value: mainVm.sidebar.getData().currentSelected.getMinDateOfActivation('DD MMM YYYY') }">
+                          UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 field-ctn clearfix"
+                    ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfDeletion.enable">
+                    <label for="canDeleteDocument" class="label-muted col-xs-6 no-padding" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.ALLOW_DELETION
+                    </label>
+                    <div class="col-xs-6 flex-combine-input">
+                      <input type="checkbox" ng-checked="mainVm.sidebar.getData().currentSelected.canDeleteDocument"
+                        name="canDeleteDocument" ng-model="mainVm.sidebar.getData().currentSelected.canDeleteDocument"
+                        ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfDeletion.canOverride">
+                    </div>
+                  </div>
+                  <div class="col-xs-12 field-ctn clearfix"
+                    ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfClosure.enable">
+                    <label for="canClose" class="label-muted col-xs-6 no-padding" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE
+                    </label>
+                    <div class="col-xs-6 flex-combine-input">
+                      <input type="checkbox" ng-checked="mainVm.sidebar.getData().currentSelected.canClose"
+                        name="canClose" ng-model="mainVm.sidebar.getData().currentSelected.canClose"
+                        ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfClosure.canOverride">
+                    </div>
+                  </div>
+                  <div class="col-xs-12 field-ctn clearfix"
+                    ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfExpiryNotification.enable">
+                    <label for="notificationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE
+                    </label>
+                    <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+                      ng-class="{'is-opened': opened == true}">
+                      <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : ((uploadRequestForm.notificationDate.$touched ||uploadRequestForm.$submitted)
+                        && uploadRequestForm.notificationDate.$invalid)}">
+                        <div class="form-inline">
+                          <input working-date-picker ng-click="open($event, 'opened')" type="text"
+                            ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfExpiryNotification.canOverride"
+                            class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                            is-open="opened" ng-required="true" name='notificationDate'
+                            datepicker-options="mainVm.sidebar.getData().currentSelected.notificationDateOptions"
+                            min="{{mainVm.sidebar.getData().currentSelected.notificationDateOptions.minHTMLDate}}"
+                            max="{{mainVm.sidebar.getData().currentSelected.notificationDateOptions.maxHTMLDate}}"
+                            ng-model="mainVm.sidebar.getData().currentSelected.notificationDate"
+                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions()" />
+                        </div>
+                        <span ng-show="uploadRequestForm.notificationDate.$invalid" translate
+                          translate-interpolation="messageformat" translate-values="{ min: mainVm.sidebar.getData().currentSelected.getMinDateOfNotification('DD MMM YYYY'),
+                              max: mainVm.sidebar.getData().currentSelected.getMaxDateOfNotification('DD MMM YYYY')  }">
+                          UPLOAD_REQUESTS.ERROR.INVALID_NOTIFICATION_DATE
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 field-ctn clearfix"
+                    ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfNotificationLanguage.enable">
+                    <label class="label-muted col-xs-6 no-padding" translate>
+                      UPLOAD_REQUESTS.FORM_CREATE.NOTIFICATION_LANGUAGE
+                    </label>
+                    <div class="col-xs-6 flex-combine-input">
+                      <md-select class="form-control m-0 custom-bordered-lang-select"
+                        ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfNotificationLanguage.canOverride"
+                        ng-model="mainVm.sidebar.getData().currentSelected.locale">
+                        <md-option
+                          ng-repeat="unit in mainVm.sidebar.getData().currentSelected.functionalityOfNotificationLanguage.units"
+                          ng-value="unit">{{unit}}</md-option>
+                      </md-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </md-tab>
+
+        <md-tab label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.ACTIVITIES' | translate}}" ng-disabled="true"
+          class="col-xs-4 no-padding"></md-tab>
       </md-tabs>
     </md-content>
+  </div>
+
+  <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn" ng-if="mainVm.sidebar.getData().selectedIndex === 1">
+    <button class="btn btn-default col-xs-6" ng-click="mainVm.sidebar.hide()" translate>
+      NAVIGATION.CANCEL
+    </button>
+    <button
+      class="btn btn-primary col-xs-6"
+      ng-click="mainVm.sidebar.getData().updateUploadRequest(uploadRequestForm, mainVm.sidebar.getData().currentSelected)"
+      translate
+    >
+      ACTION.SAVE
+    </button>
   </div>
 </div>

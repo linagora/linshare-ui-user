@@ -33,7 +33,7 @@ function UploadRequestObjectCoreService(
     functionalityOfDeletion = {},
     functionalityOfClosure = {},
     functionalityOfNotificationLanguage = {},
-    core = {};
+    self = {};
 
   return uploadRequestObjectCore;
 
@@ -43,49 +43,51 @@ function UploadRequestObjectCoreService(
    *  @param {Object} jsonObject - Json object for constructing a uploadRequestCore object
    *  @memberOf LinShare.uploadRequests.UploadRequestObjectCoreService
    */
-  function uploadRequestObjectCore(jsonObject) {
-    jsonObject = jsonObject || {};
+  function uploadRequestObjectCore(jsonObject = {}) {
+    self = this;
 
-    return checkFunctionalities().then(function() {
-      core.functionalityOfActivation = _.cloneDeep(functionalityOfActivation);
-      core.functionalityOfExpiration = _.cloneDeep(functionalityOfExpiration);
-      core.functionalityOfExpiryNotification = _.cloneDeep(functionalityOfExpiryNotification);
-      core.functionalityOfTotalSizeOfFiles = _.cloneDeep(functionalityOfTotalSizeOfFiles);
-      core.functionalityOfMaxSizeOfAFile = _.cloneDeep(functionalityOfMaxSizeOfAFile);
-      core.functionalityOfMaxNumberOfFiles = _.cloneDeep(functionalityOfMaxNumberOfFiles);
-      core.functionalityOfPasswordProtected = _.cloneDeep(functionalityOfPasswordProtected);
-      core.functionalityOfDeletion = _.cloneDeep(functionalityOfDeletion);
-      core.functionalityOfClosure = _.cloneDeep(functionalityOfClosure);
-      core.functionalityOfNotificationLanguage = _.cloneDeep(functionalityOfNotificationLanguage);
-      core.creationDate = setPropertyValue(jsonObject.creationDate, '');
-      core.activationDate = setPropertyValue(jsonObject.activationDate, functionalityOfActivation.value);
-      core.expiryDate = setPropertyValue(jsonObject.expiryDate, functionalityOfExpiration.value);
-      core.notificationDate = setPropertyValue(jsonObject.notificationDate, functionalityOfExpiryNotification.value);
-      core.maxFileCount = setPropertyValue(jsonObject.maxFileCount, functionalityOfMaxNumberOfFiles.value);
-      core.secured = setPropertyValue(jsonObject.secured, functionalityOfPasswordProtected.value);
-      core.allowClosure = setPropertyValue(jsonObject.allowClosure, functionalityOfClosure.value);
-      core.allowDeletion = setPropertyValue(jsonObject.allowDeletion, functionalityOfDeletion.value);
-      core.notificationLanguage = setPropertyValue(jsonObject.notificationLanguage, functionalityOfNotificationLanguage.value);
-      core.label = setPropertyValue(jsonObject.label, '');
-      core.owner = setPropertyValue(jsonObject.owner, {});
-      core.groupMode = setPropertyValue(jsonObject.groupMode, false);
-      core.body = setPropertyValue(jsonObject.body, '');
-      core.recipients = setPropertyValue(jsonObject.recipients, []);
-      core.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
-      core.maxSizeOfAFile = setAppropriateSize(jsonObject.maxFileSize) || functionalityOfMaxSizeOfAFile;
-      core.totalSizeOfFiles = setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
-      core.getMaxDateOfExpiration = getMaxDateOfExpiration;
-      core.getMinDateOfActivation = getMinDateOfActivation;
-      core.getMaxSize = getMaxSize;
-      core.getMinDateOfNotification = getMinDateOfNotification;
-      core.getMaxDateOfNotification = getMaxDateOfNotification;
-      core.calculateDatePickerOptions = calculateDatePickerOptions;
-      core.uuid = setPropertyValue(jsonObject.uuid, null);
-      core.getOwnerNameOrEmail = getOwnerNameOrEmail;
+    checkFunctionalities().then(function() {
+      self.functionalityOfActivation = _.cloneDeep(functionalityOfActivation);
+      self.functionalityOfExpiration = _.cloneDeep(functionalityOfExpiration);
+      self.functionalityOfExpiryNotification = _.cloneDeep(functionalityOfExpiryNotification);
+      self.functionalityOfTotalSizeOfFiles = _.cloneDeep(functionalityOfTotalSizeOfFiles);
+      self.functionalityOfMaxSizeOfAFile = _.cloneDeep(functionalityOfMaxSizeOfAFile);
+      self.functionalityOfMaxNumberOfFiles = _.cloneDeep(functionalityOfMaxNumberOfFiles);
+      self.functionalityOfPasswordProtected = _.cloneDeep(functionalityOfPasswordProtected);
+      self.functionalityOfDeletion = _.cloneDeep(functionalityOfDeletion);
+      self.functionalityOfClosure = _.cloneDeep(functionalityOfClosure);
+      self.functionalityOfNotificationLanguage = _.cloneDeep(functionalityOfNotificationLanguage);
+      self.creationDate = setPropertyValue(jsonObject.creationDate, '');
+      self.activationDate = setPropertyValue(jsonObject.activationDate, functionalityOfActivation.value);
+      self.expiryDate = setPropertyValue(jsonObject.expiryDate, functionalityOfExpiration.value);
+      self.notificationDate = setPropertyValue(jsonObject.notificationDate, functionalityOfExpiryNotification.value);
+      self.maxFileCount = setPropertyValue(jsonObject.maxFileCount, functionalityOfMaxNumberOfFiles.value);
+      self.secured = setPropertyValue(jsonObject.secured, functionalityOfPasswordProtected.value);
+      self.canClose = setPropertyValue(jsonObject.canClose, functionalityOfClosure.value);
+      self.canDelete = setPropertyValue(jsonObject.canDelete, functionalityOfDeletion.value);
+      self.canDeleteDocument = setPropertyValue(jsonObject.canDeleteDocument, functionalityOfDeletion.value);
+      self.locale = setPropertyValue(jsonObject.locale, functionalityOfNotificationLanguage.value);
+      self.label = setPropertyValue(jsonObject.label, '');
+      self.owner = setPropertyValue(jsonObject.owner, {});
+      self.groupMode = setPropertyValue(jsonObject.groupMode, false);
+      self.body = setPropertyValue(jsonObject.body, '');
+      self.recipients = setPropertyValue(jsonObject.recipients, []);
+      self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
+      self.maxSizeOfAFile = setAppropriateSize(jsonObject.maxFileSize) || functionalityOfMaxSizeOfAFile;
+      self.totalSizeOfFiles = setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
+      self.getMaxDateOfExpiration = getMaxDateOfExpiration;
+      self.getMinDateOfActivation = getMinDateOfActivation;
+      self.getMaxSize = getMaxSize;
+      self.getMinDateOfNotification = getMinDateOfNotification;
+      self.getMaxDateOfNotification = getMaxDateOfNotification;
+      self.calculateDatePickerOptions = calculateDatePickerOptions;
+      self.uuid = setPropertyValue(jsonObject.uuid, null);
+      self.getOwnerNameOrEmail = getOwnerNameOrEmail;
+      self.calculateMaxSize = calculateMaxSize;
 
       calculateDatePickerOptions();
-
-      return core;
+      calculateMaxSize('total');
+      calculateMaxSize('one');
     });
   }
 
@@ -188,117 +190,142 @@ function UploadRequestObjectCoreService(
     return _.cloneDeep(_.isUndefined(value) ? defaultValue : value);
   }
 
-  function getMaxDateOfExpiration(isFormatted) {
-    if (core.functionalityOfExpiration.maxValue < 0) {
+  function getMaxDateOfExpiration(format) {
+    if (self.functionalityOfExpiration.maxValue < 0) {
       return;
     }
 
-    const activationDate = core.activationDate ? moment(core.activationDate) : moment();
-    const maxDate = !_.isUndefined(core.functionalityOfExpiration.maxValue)
-      && core.functionalityOfExpiration.unit
-      && activationDate.add(core.functionalityOfExpiration.maxValue, core.functionalityOfExpiration.unit.toLowerCase());
+    const activationDate = self.activationDate ? moment(self.activationDate) : moment();
+    const maxDate = !_.isUndefined(self.functionalityOfExpiration.maxValue)
+      && self.functionalityOfExpiration.unit
+      && activationDate.add(self.functionalityOfExpiration.maxValue, self.functionalityOfExpiration.unit.toLowerCase());
 
-    if (!isFormatted) {
+    if (!format) {
       return maxDate && maxDate.toDate();
     };
 
-    return maxDate && maxDate.format('DD MMM YYYY');
+    return maxDate && maxDate.format(format);
   };
 
-  function getMinDateOfActivation(isFormatted) {
-    if (core.functionalityOfActivation.maxValue < 0) {
-      return !isFormatted ? new Date() : moment().format('DD MMM YYYY');
+  function getMinDateOfActivation(format) {
+    if (self.functionalityOfActivation.maxValue < 0) {
+      return !format ? new Date() : moment().format(format);
     }
 
-    const minDate = !_.isUndefined(core.functionalityOfActivation.maxValue) && core.functionalityOfActivation.unit
-      ? moment().add(core.functionalityOfActivation.maxValue, core.functionalityOfActivation.unit.toLowerCase())
+    const minDate = !_.isUndefined(self.functionalityOfActivation.maxValue) && self.functionalityOfActivation.unit
+      ? moment().add(self.functionalityOfActivation.maxValue, self.functionalityOfActivation.unit.toLowerCase())
       : moment();
 
-    if (!isFormatted) {
+    if (!format) {
       return minDate.toDate();
     }
 
-    return minDate.format('DD MMM YYYY');
+    return minDate.format(format);
   }
 
-  function getMinDateOfNotification(isFormatted) {
-    const expirationDate = core.expiryDate && moment(core.expiryDate);
-    const activationDate = core.activationDate ? moment(core.activationDate) : moment();
+  function getMinDateOfNotification(format) {
+    const expirationDate = self.expiryDate && moment(self.expiryDate);
+    const activationDate = self.activationDate ? moment(self.activationDate) : moment();
 
-    if (core.functionalityOfExpiryNotification.maxValue <= 0) {
-      return !isFormatted ? (activationDate && activationDate.toDate())
-        : (activationDate && activationDate.format('DD MMM YYYY'));
+    if (self.functionalityOfExpiryNotification.maxValue <= 0) {
+      let minDate = activationDate;
+
+      if (minDate.valueOf() < moment().valueOf()) {
+        minDate = moment();
+      }
+
+      return !format ? minDate.toDate() : minDate.format(format);
     }
 
-    let minDate = !_.isUndefined(core.functionalityOfExpiryNotification.maxValue)
-      && core.functionalityOfExpiryNotification.unit
+    let minDate = !_.isUndefined(self.functionalityOfExpiryNotification.maxValue)
+      && self.functionalityOfExpiryNotification.unit
       && expirationDate
-      && expirationDate.subtract(core.functionalityOfExpiryNotification.maxValue, core.functionalityOfExpiryNotification.unit.toLowerCase());
+      && expirationDate.subtract(self.functionalityOfExpiryNotification.maxValue, self.functionalityOfExpiryNotification.unit.toLowerCase());
 
     if (minDate.valueOf() < activationDate.valueOf()) {
       minDate = activationDate;
     }
 
-    if (!isFormatted) {
+    if (minDate.valueOf() < moment().valueOf()) {
+      minDate = moment();
+    }
+
+    if (!format) {
       return minDate && minDate.toDate();
     }
 
-    return minDate && minDate.format('DD MMM YYYY');
+    return minDate && minDate.format(format);
   }
 
-  function getMaxDateOfNotification(isFormatted) {
-    const expirationDate = core.expiryDate ? moment(core.expiryDate) : moment(core.getMaxDateOfExpiration());
+  function getMaxDateOfNotification(format) {
+    const expirationDate = self.expiryDate ? moment(self.expiryDate) : moment(self.getMaxDateOfExpiration());
 
-    if (!isFormatted) {
+    if (!format) {
       return expirationDate && expirationDate.toDate();
     }
 
-    return expirationDate && expirationDate.format('DD MMM YYYY');
+    return expirationDate && expirationDate.format(format);
+  }
+
+  function calculateMaxSize(type) {
+    if (type === 'total') {
+      self.totalSizeOfFiles.maxValue = getMaxSize('total');
+    }
+
+    if (type === 'one') {
+      self.maxSizeOfAFile.maxValue = getMaxSize('one');
+    }
   }
 
   function getMaxSize(type, isFormatted) {
     let configMaxValue, configUnit, currentUnit;
 
     if (type === 'total') {
-      configMaxValue = core.functionalityOfTotalSizeOfFiles.maxValue;
-      configUnit = core.functionalityOfTotalSizeOfFiles.unit;
-      currentUnit = core.totalSizeOfFiles.unit;
+      configMaxValue = self.functionalityOfTotalSizeOfFiles.maxValue;
+      configUnit = self.functionalityOfTotalSizeOfFiles.unit;
+      currentUnit = self.totalSizeOfFiles.unit;
     } else if (type === 'one') {
-      configMaxValue = core.functionalityOfMaxSizeOfAFile.maxValue;
-      configUnit = core.functionalityOfMaxSizeOfAFile.unit;
-      currentUnit = core.maxSizeOfAFile.unit;
+      configMaxValue = self.functionalityOfMaxSizeOfAFile.maxValue;
+      configUnit = self.functionalityOfMaxSizeOfAFile.unit;
+      currentUnit = self.maxSizeOfAFile.unit;
     }
 
     const maxValue = configMaxValue && configUnit && currentUnit ? configMaxValue * unitService.convertBase(currentUnit, configUnit) : null;
 
     if (isFormatted) {
-      return `${maxValue} ${unitService.formatUnit(configUnit)}`;
+      return `${maxValue} ${currentUnit}`;
     } else {
       return maxValue;
     }
   }
 
   function calculateDatePickerOptions() {
-    core.expirationDateOptions = {
-      minDate: core.activationDate,
-      maxDate: core.getMaxDateOfExpiration()
+    self.expirationDateOptions = {
+      minDate: self.activationDate,
+      maxDate: self.getMaxDateOfExpiration(),
+      minHTMLDate: moment(self.activationDate).format('YYYY-MM-DD'),
+      maxHTMLDate: self.getMaxDateOfExpiration('YYYY-MM-DD')
     };
-    core.activationDateOptions = {
-      minDate: core.getMinDateOfActivation(),
-      maxDate: core.expiryDate
+    self.activationDateOptions = {
+      minDate: self.getMinDateOfActivation(),
+      maxDate: self.expiryDate,
+      minHTMLDate: self.getMinDateOfActivation('YYYY-MM-DD'),
+      maxHTMLDate: self.expiryDate && moment(self.expiryDate).format('YYYY-MM-DD'),
     };
-    core.notificationDateOptions = {
-      minDate: core.getMinDateOfNotification(),
-      maxDate: core.getMaxDateOfNotification()
+    self.notificationDateOptions = {
+      minDate: self.getMinDateOfNotification(),
+      maxDate: self.getMaxDateOfNotification(),
+      minHTMLDate: self.getMinDateOfNotification('YYYY-MM-DD'),
+      maxHTMLDate: self.getMaxDateOfNotification('YYYY-MM-DD')
     };
   }
 
   function getOwnerNameOrEmail() {
-    if (core.owner.firstName && core.owner.lastName) {
-      return `${core.owner.firstName}  ${core.owner.lastName}`;
+    if (self.owner.firstName && self.owner.lastName) {
+      return `${self.owner.firstName}  ${self.owner.lastName}`;
     }
 
-    return core.owner.mail;
+    return self.owner.mail;
   }
 
   function setAppropriateSize(value) {

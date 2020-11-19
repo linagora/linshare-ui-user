@@ -104,12 +104,12 @@ function UploadRequestGroupObjectService(
     dto.maxFileCount = self.maxFileCount;
     dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, self.totalSizeOfFiles.unit);
     dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, self.maxSizeOfAFile.unit);
-    dto.canDelete = self.allowDeletion;
-    dto.canClose = self.allowClosure;
+    dto.canDelete = self.canDelete;
+    dto.canClose = self.canClose;
     dto.secured = self.secured;
     dto.enableNotification = true;
     dto.dirty = true;
-    dto.locale = self.notificationLanguage;
+    dto.locale = self.locale;
 
     return dto;
   }
@@ -132,11 +132,11 @@ function UploadRequestGroupObjectService(
     dto.maxFileCount = self.maxFileCount;
     dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, self.totalSizeOfFiles.unit);
     dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, self.maxSizeOfAFile.unit);
-    dto.canDelete = self.allowDeletion;
-    dto.canClose = self.allowClosure;
+    dto.canDelete = self.canDelete;
+    dto.canClose = self.canClose;
     dto.secured = self.secured;
     dto.enableNotification = true;
-    dto.locale = self.notificationLanguage;
+    dto.locale = self.locale;
 
     return dto;
   }

@@ -73,7 +73,7 @@ function uploadRequestUtilsService(
       }, 'warning'));
   }
 
-  function showToastAlertFor(action, type, items) {
+  function showToastAlertFor(action, type, items = []) {
     if (action === 'archive' && (type === 'error' || type === 'info')) {
       toastService[type]({
         key: `UPLOAD_REQUESTS.TOAST_ALERT.ARCHIVE.${type.toUpperCase()}`,
