@@ -161,17 +161,13 @@
           </div>
         </md-tab>
         <md-tab id="tab2" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding">
-          <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
-            <md-content>
-              <upload-request-group-form
-                upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
-                selected-tab-index="mainVm.sidebar.getData().formTabIndex"
-                create-recipient-list="mainVm.sidebar.getData().createRecipientList"
-                form="mainVm.sidebar.getData().form"
-                operation="update"
-              />
-            </md-content>
-          </div>
+          <upload-request-group-form
+            upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
+            selected-tab-index="mainVm.sidebar.getData().formTabIndex"
+            create-recipient-list="mainVm.sidebar.getData().createRecipientList"
+            form="mainVm.sidebar.getData().form"
+            operation="update"
+          />
         </md-tab>
         <md-tab ng-disabled="true" id="tab3" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.ACTIVITIES' | translate}}" class="col-xs-4 no-padding"></md-tab>
       </md-tabs>
