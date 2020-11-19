@@ -170,12 +170,10 @@ function uploadRequestGroupsController(
       newUploadRequest.update()
         .then(request => {
           sidebarService.hide();
-          showToastAlertFor('update', 'info');
-
-          const updatedItem = uploadRequestGroupsVm.itemsList.find(item => item.uuid === request.uuid);
-          
-          Object.assign(updatedItem, request);
+          uploadRequestGroupsVm.itemsList = uploadRequestGroupsVm.itemsList.map(item =>
+            item.uuid === request.uuid ? Object.assign(item, request) : item);
           uploadRequestGroupsVm.tableParams.reload();
+          showToastAlertFor('update', 'info', []);
         })
         .catch(error => {
           if (error) {
@@ -413,7 +411,7 @@ function uploadRequestGroupsController(
       uploadRequestGroupsVm.form.$setUntouched();
       uploadRequestGroupsVm.form.$setPristine();
     }
-    
+
     uploadRequestGroupsVm.formTabIndex = 0;
     uploadRequestGroupsVm.selectedIndex = 0;
   }
