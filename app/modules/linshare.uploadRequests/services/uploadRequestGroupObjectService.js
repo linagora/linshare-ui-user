@@ -74,14 +74,16 @@ function UploadRequestGroupObjectService(
       self.expiryDate = setPropertyValue(jsonObject.expiryDate, allowedToExpiration.value);
       self.notificationDate = setPropertyValue(jsonObject.notificationDate, allowedToExpiryNotification.value);
       self.maxSizeOfAFile = {
-        value: setPropertyValue(jsonObject.maxSizeOfAFile && jsonObject.maxSizeOfAFile.value, allowedToMaxSizeOfAFile.value),
-        unit: setPropertyValue(jsonObject.maxSizeOfAFile && jsonObject.maxSizeOfAFile.unit, allowedToMaxSizeOfAFile.unit)
+        value: setPropertyValue(jsonObject.maxFileSize &&
+          unitService.byteTo(jsonObject.maxFileSize, unitService.formatUnit(allowedToMaxSizeOfAFile.unit)), allowedToMaxSizeOfAFile.value),
+        unit: setPropertyValue(unitService.formatUnit(allowedToMaxSizeOfAFile.unit))
       };
       self.totalSizeOfFiles = {
-        value: setPropertyValue(jsonObject.totalSizeOfFiles && jsonObject.totalSizeOfFiles.value, allowedToTotalSizeOfFiles.value),
-        unit: setPropertyValue(jsonObject.totalSizeOfFiles && jsonObject.totalSizeOfFiles.unit, allowedToTotalSizeOfFiles.unit),
+        value: setPropertyValue(jsonObject.maxDepositSize &&
+          unitService.byteTo(jsonObject.maxDepositSize, unitService.formatUnit(allowedToTotalSizeOfFiles.unit)), allowedToTotalSizeOfFiles.value),
+        unit: setPropertyValue(unitService.formatUnit(allowedToTotalSizeOfFiles.unit)),
       };
-      self.maxNumberOfFiles = setPropertyValue(jsonObject.maxNumberOfFiles, allowedToMaxNumberOfFiles.value);
+      self.maxFileCount = setPropertyValue(jsonObject.maxFileCount, allowedToMaxNumberOfFiles.value);
       self.secured = setPropertyValue(jsonObject.secured, allowedToPasswordProtected.value);
       self.allowClosure = setPropertyValue(jsonObject.allowClosure, allowedToClosure.value);
       self.allowDeletion = setPropertyValue(jsonObject.allowDeletion, allowedToDeletion.value);
@@ -128,7 +130,7 @@ function UploadRequestGroupObjectService(
         allowedToActivation = clonedData;
         allowedToActivation.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         allowedToActivation.value = !_.isUndefined(clonedData.value)
-          && clonedData.unit 
+          && clonedData.unit
           && moment().add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_EXPIRATION').then(data => {
@@ -138,7 +140,7 @@ function UploadRequestGroupObjectService(
         allowedToExpiration = clonedData;
         allowedToExpiration.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         allowedToExpiration.value = !_.isUndefined(clonedData.value)
-          && clonedData.unit 
+          && clonedData.unit
           && defaultActivationDate.add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_NOTIFICATION').then(data => {
@@ -156,6 +158,7 @@ function UploadRequestGroupObjectService(
         const clonedData = _.cloneDeep(data || {});
 
         allowedToTotalSizeOfFiles = clonedData;
+        allowedToTotalSizeOfFiles.unit = unitService.formatUnit(clonedData.unit);
         allowedToTotalSizeOfFiles.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
         allowedToTotalSizeOfFiles.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
@@ -163,8 +166,8 @@ function UploadRequestGroupObjectService(
         const clonedData = _.cloneDeep(data || {});
 
         allowedToMaxSizeOfAFile = clonedData;
+        allowedToMaxSizeOfAFile.unit = unitService.formatUnit(clonedData.unit);
         allowedToMaxSizeOfAFile.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
-        allowedToMaxSizeOfAFile.maxValue = null;
         allowedToMaxSizeOfAFile.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_COUNT').then(data => {
@@ -241,9 +244,9 @@ function UploadRequestGroupObjectService(
     dto.label = self.label;
     dto.body = self.body;
     dto.contactList = self.newRecipients.map(recipient => recipient.mail);
-    dto.maxFileCount = self.maxNumberOfFiles;
-    dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, unitService.formatUnit(self.totalSizeOfFiles.unit));
-    dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, unitService.formatUnit(self.maxSizeOfAFile.unit));
+    dto.maxFileCount = self.maxFileCount;
+    dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, self.totalSizeOfFiles.unit);
+    dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, self.maxSizeOfAFile.unit);
     dto.canDelete = self.allowDeletion;
     dto.canClose = self.allowClosure;
     dto.secured = self.secured;
@@ -269,9 +272,9 @@ function UploadRequestGroupObjectService(
     dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
     dto.label = self.label;
     dto.body = self.body;
-    dto.maxFileCount = self.maxNumberOfFiles;
-    dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, unitService.formatUnit(self.totalSizeOfFiles.unit));
-    dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, unitService.formatUnit(self.maxSizeOfAFile.unit));
+    dto.maxFileCount = self.maxFileCount;
+    dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, self.totalSizeOfFiles.unit);
+    dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, self.maxSizeOfAFile.unit);
     dto.canDelete = self.allowDeletion;
     dto.canClose = self.allowClosure;
     dto.secured = self.secured;
@@ -360,7 +363,7 @@ function UploadRequestGroupObjectService(
     }
 
     const activationDate = self.activationDate ? moment(self.activationDate) : moment();
-    const maxDate = !_.isUndefined(self.allowedToExpiration.maxValue) 
+    const maxDate = !_.isUndefined(self.allowedToExpiration.maxValue)
       && self.allowedToExpiration.unit
       && activationDate.add(self.allowedToExpiration.maxValue, self.allowedToExpiration.unit.toLowerCase());
 
@@ -376,7 +379,7 @@ function UploadRequestGroupObjectService(
       return !isFormatted ? new Date() : moment().format('DD MMM YYYY');
     }
 
-    const minDate = !_.isUndefined(self.allowedToActivation.maxValue) && self.allowedToActivation.unit 
+    const minDate = !_.isUndefined(self.allowedToActivation.maxValue) && self.allowedToActivation.unit
       ? moment().add(self.allowedToActivation.maxValue, self.allowedToActivation.unit.toLowerCase())
       : moment();
 
@@ -396,8 +399,8 @@ function UploadRequestGroupObjectService(
         : (activationDate && activationDate.format('DD MMM YYYY'));
     }
 
-    let minDate = !_.isUndefined(self.allowedToExpiryNotification.maxValue) 
-      && self.allowedToExpiryNotification.unit 
+    let minDate = !_.isUndefined(self.allowedToExpiryNotification.maxValue)
+      && self.allowedToExpiryNotification.unit
       && expirationDate
       && expirationDate.subtract(self.allowedToExpiryNotification.maxValue, self.allowedToExpiryNotification.unit.toLowerCase());
 
@@ -438,7 +441,7 @@ function UploadRequestGroupObjectService(
     const maxValue = configMaxValue && configUnit && currentUnit ? configMaxValue * unitService.convertBase(currentUnit, configUnit) : null;
 
     if (isFormatted) {
-      return `${maxValue} ${unitService.formatUnit(configUnit)}`;
+      return `${maxValue} ${configUnit}`;
     } else {
       return maxValue;
     }

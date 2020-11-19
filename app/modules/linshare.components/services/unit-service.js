@@ -82,7 +82,7 @@
 
       result = value / Math.pow(10, units[unit].factor);
       result = (result % 1 === 0) ? result : result.toFixed(2);
-      
+
       return showUnit ? result + ' ' + unit : result;
     }
 
@@ -153,20 +153,23 @@
       }
       result = value * Math.pow(10, units[unit].factor);
       result = (result % 1 === 0) ? result : result.toFixed(2);
-      
+
       return showUnit ? result + units.B : result;
     }
-  
+
     function convertBase (currentUnit, configUnit) {
       const mapping = {
         'KILO': 1,
+        'KB': 1,
         'MEGA': 1024,
-        'GIGA': 1048576
+        'MB': 1024,
+        'GIGA': 1048576,
+        'GB': 1048576
       };
-  
+
       return mapping[configUnit] / mapping[currentUnit];
     }
-  
+
     function formatUnit(unit) {
       switch (unit) {
         case 'KILO':

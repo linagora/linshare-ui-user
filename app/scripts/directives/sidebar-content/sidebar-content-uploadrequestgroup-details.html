@@ -121,13 +121,19 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
                     <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.maxFileCount}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.maxDepositSize > 0">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.totalSizeOfFiles.value > 0 && mainVm.sidebar.getData().uploadRequestGroupObject.totalSizeOfFiles.unit">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
-                    <p>{{(mainVm.sidebar.getData().uploadRequestGroupObject.maxDepositSize | readableSize: true)}}</p>
+                    <p>
+                      <span>{{mainVm.sidebar.getData().uploadRequestGroupObject.totalSizeOfFiles.value}}</span>
+                      <span>{{mainVm.sidebar.getData().uploadRequestGroupObject.totalSizeOfFiles.unit}}</span>
+                    </p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.maxFileSize > 0">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.maxSizeOfAFile.value > 0 && mainVm.sidebar.getData().uploadRequestGroupObject.maxSizeOfAFile.unit">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{(mainVm.sidebar.getData().uploadRequestGroupObject.maxFileSize | readableSize: true)}}</p>
+                    <p>
+                      <span>{{mainVm.sidebar.getData().uploadRequestGroupObject.maxSizeOfAFile.value}}</span>
+                      <span>{{mainVm.sidebar.getData().uploadRequestGroupObject.maxSizeOfAFile.unit}}</span>
+                    </p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>

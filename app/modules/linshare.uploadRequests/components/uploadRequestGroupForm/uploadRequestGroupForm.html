@@ -128,9 +128,9 @@
                       ng-model="$ctrl.uploadRequestGroupObject.totalSizeOfFiles.unit"
                       name="totalSizeOfFilesUnit" required
                       ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToTotalSizeOfFiles.canOverride">
-                      <md-option value="KILO">KB</md-option>
-                      <md-option value="MEGA">MB</md-option>
-                      <md-option value="GIGA">GB</md-option>
+                      <md-option value="KB">KB</md-option>
+                      <md-option value="MB">MB</md-option>
+                      <md-option value="GB">GB</md-option>
                     </md-select>
                   </div>
                   <div class="has-error">
@@ -154,20 +154,20 @@
                     UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES
                   </label>
                   <div class="col-xs-6 flex-combine-input">
-                    <input name="maxNumberOfFiles" required
+                    <input name="maxFileCount" required
                       max="{{$ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue}}"
                       ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.canOverride"
                       class="form-control custom-bordered-input custom-single-input"
-                      ng-model="$ctrl.uploadRequestGroupObject.maxNumberOfFiles" type="number" />
+                      ng-model="$ctrl.uploadRequestGroupObject.maxFileCount" type="number" />
                   </div>
                   <div class="has-error">
-                    <span ng-show="$ctrl.form.maxNumberOfFiles.$invalid && $ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue"
+                    <span ng-show="$ctrl.form.maxFileCount.$invalid && $ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue"
                       translate
                       translate-interpolation="messageformat"
                       translate-values="{ max: $ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue}">
                       UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED
                     </span>
-                    <span ng-show="$ctrl.form.maxNumberOfFiles.$invalid && !$ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue"
+                    <span ng-show="$ctrl.form.maxFileCount.$invalid && !$ctrl.uploadRequestGroupObject.allowedToMaxNumberOfFiles.maxValue"
                       translate>
                       UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED_ONLY
                     </span>
@@ -188,9 +188,9 @@
                       ng-model="$ctrl.uploadRequestGroupObject.maxSizeOfAFile.unit"
                       name="maxSizeOfAFileUnit" required
                       ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToMaxSizeOfAFile.canOverride">
-                      <md-option value="KILO">KB</md-option>
-                      <md-option value="MEGA">MB</md-option>
-                      <md-option value="GIGA">GB</md-option>
+                      <md-option value="KB">KB</md-option>
+                      <md-option value="MB">MB</md-option>
+                      <md-option value="GB">GB</md-option>
                     </md-select>
                   </div>
                   <div class="has-error">
