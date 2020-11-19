@@ -107,7 +107,7 @@
             openBrowser([item]);
           },
           showItemDetails: function (item) {
-            showCurrentFile(item, undefined, true);
+            showCurrentFile(item, undefined, { openDetailsSidebar : true });
           }
         }
       );
