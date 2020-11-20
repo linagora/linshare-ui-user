@@ -39,26 +39,24 @@ function UploadRequestGroupObjectService(
    *  @param {Object} jsonObject - Json object for constructing a uploadRequest object
    *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
    */
-  function uploadRequestGroupObject(jsonObject, options = {}) {
+  function uploadRequestGroupObject(jsonObject = {}, options = {}) {
     self = this;
-    jsonObject = jsonObject || {};
-    UploadRequestObjectCoreService(jsonObject).then(core => {
-      Object.assign(self, core);
 
-      self.create = create;
-      self.update = update;
-      self.toDTO = toDTO;
-      self.toUpdateDTO = toUpdateDTO;
+    UploadRequestObjectCoreService.call(self, jsonObject);
 
-      self.newRecipients = [];
-      self.addRecipient = addRecipient;
-      self.removeRecipient = removeRecipient;
-      self.removeNewRecipient = removeNewRecipient;
-      self.getRecipients = getRecipients;
-      self.getNewRecipients = getNewRecipients;
-      self.submitRecipients = submitRecipients;
-      self.submitRecipientsCallback = options.submitRecipientsCallback;
-    });
+    self.create = create;
+    self.update = update;
+    self.toDTO = toDTO;
+    self.toUpdateDTO = toUpdateDTO;
+
+    self.newRecipients = [];
+    self.addRecipient = addRecipient;
+    self.removeRecipient = removeRecipient;
+    self.removeNewRecipient = removeNewRecipient;
+    self.getRecipients = getRecipients;
+    self.getNewRecipients = getNewRecipients;
+    self.submitRecipients = submitRecipients;
+    self.submitRecipientsCallback = options.submitRecipientsCallback;
   }
 
   /**

@@ -1,5 +1,5 @@
 <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
-  <md-content>
+  <md-content id='upload-request-edit'>
     <form name="$ctrl.form" class="custom-height-form">
       <md-tabs class="custom-height-md-tabs" md-selected="$ctrl.selectedTabIndex" md-border-bottom="">
         <md-tab id="tab1" label="1" class="col-xs-4 noPadding">
@@ -94,17 +94,17 @@
                             && $ctrl.form.expiration.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                          ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToExpiration.canOverride"
+                          ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiration.canOverride"
                           class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                           is-open="opened" required
                           datepicker-options="$ctrl.uploadRequestGroupObject.expirationDateOptions"
-                          min="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.expirationDateOptions.minDate)}}"
-                          max="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.expirationDateOptions.maxDate)}}"
+                          min="{{$ctrl.uploadRequestGroupObject.expirationDateOptions.minHTMLDate}}"
+                          max="{{$ctrl.uploadRequestGroupObject.expirationDateOptions.maxHTMLDate}}"
                           name='expiration' ng-model="$ctrl.uploadRequestGroupObject.expiryDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
                       </div>
                       <span ng-show="$ctrl.form.expiration.$invalid" translate translate-interpolation="messageformat"
-                        translate-values="{ value: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration(true) }">
+                        translate-values="{ value: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration('DD MMM YYYY') }">
                         UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
                       </span>
                     </div>
@@ -118,11 +118,12 @@
                   <div class="col-xs-6 flex-combine-input">
                     <input ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfTotalSizeOfFiles.canOverride"
                       class="form-control custom-bordered-input" required min="0"
-                      max="{{::$ctrl.uploadRequestGroupObject.getMaxSize('total')}}" name="totalSizeOfFiles"
+                      max="{{$ctrl.uploadRequestGroupObject.totalSizeOfFiles.maxValue}}" name="totalSizeOfFiles"
                       ng-model="$ctrl.uploadRequestGroupObject.totalSizeOfFiles.value" type="number" />
                     <md-select class="form-control custom-bordered-select m-0"
                       ng-model="$ctrl.uploadRequestGroupObject.totalSizeOfFiles.unit" name="totalSizeOfFilesUnit" required
-                      ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfTotalSizeOfFiles.canOverride">
+                      ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfTotalSizeOfFiles.canOverride"
+                      ng-change="$ctrl.uploadRequestGroupObject.calculateMaxSize('total')">
                       <md-option value="KB">KB</md-option>
                       <md-option value="MB">MB</md-option>
                       <md-option value="GB">GB</md-option>
@@ -178,11 +179,12 @@
                   <div class="col-xs-6 flex-combine-input">
                     <input ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfMaxSizeOfAFile.canOverride"
                       class="form-control custom-bordered-input" name="maxSizeOfAFile"
-                      max="{{::$ctrl.uploadRequestGroupObject.getMaxSize('one')}}" required
+                      max="{{$ctrl.uploadRequestGroupObject.maxSizeOfAFile.maxValue}}" required
                       ng-model="$ctrl.uploadRequestGroupObject.maxSizeOfAFile.value" type="number" />
                     <md-select class="form-control m-0 custom-bordered-select"
                       ng-model="$ctrl.uploadRequestGroupObject.maxSizeOfAFile.unit" name="maxSizeOfAFileUnit" required
-                      ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfMaxSizeOfAFile.canOverride">
+                      ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfMaxSizeOfAFile.canOverride"
+                      ng-change="$ctrl.uploadRequestGroupObject.calculateMaxSize('one')">
                       <md-option value="KB">KB</md-option>
                       <md-option value="MB">MB</md-option>
                       <md-option value="GB">GB</md-option>
@@ -226,17 +228,17 @@
                             && $ctrl.form.activation.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                          ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToActivation.canOverride"
+                          ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfActivation.canOverride"
                           class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                           is-open="opened" ng-required="true" name="activation"
                           datepicker-options="$ctrl.uploadRequestGroupObject.activationDateOptions"
-                          min="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.activationDateOptions.minDate)}}"
-                          max="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.activationDateOptions.maxDate)}}"
+                          min="{{$ctrl.uploadRequestGroupObject.activationDateOptions.minHTMLDate}}"
+                          max="{{$ctrl.uploadRequestGroupObject.activationDateOptions.maxHTMLDate}}"
                           ng-model="$ctrl.uploadRequestGroupObject.activationDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
                       </div>
                       <span ng-show="$ctrl.form.activation.$invalid" translate translate-interpolation="messageformat"
-                        translate-values="{ value: $ctrl.uploadRequestGroupObject.getMinDateOfActivation(true) }">
+                        translate-values="{ value: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('DD MMM YYYY') }">
                         UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
                       </span>
                     </div>
@@ -285,18 +287,18 @@
                           && $ctrl.form.notificationDate.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                          ng-disabled="!$ctrl.uploadRequestGroupObject.allowedToExpiryNotification.canOverride"
+                          ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.canOverride"
                           class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                           is-open="opened" ng-required="true" name='notificationDate'
                           datepicker-options="$ctrl.uploadRequestGroupObject.notificationDateOptions"
-                          min="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.notificationDateOptions.minDate)}}"
-                          max="{{$ctrl.formatDateForDatepicker($ctrl.uploadRequestGroupObject.notificationDateOptions.maxDate)}}"
+                          min="{{$ctrl.uploadRequestGroupObject.notificationDateOptions.minHTMLDate}}"
+                          max="{{$ctrl.uploadRequestGroupObject.notificationDateOptions.maxHTMLDate}}"
                           ng-model="$ctrl.uploadRequestGroupObject.notificationDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
                       </div>
                       <span ng-show="$ctrl.form.notificationDate.$invalid" translate
-                        translate-interpolation="messageformat" translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfNotification(true),
-                            max: $ctrl.uploadRequestGroupObject.getMaxDateOfNotification(true) }">
+                        translate-interpolation="messageformat" translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfNotification('DD MMM YYYY'),
+                            max: $ctrl.uploadRequestGroupObject.getMaxDateOfNotification('DD MMM YYYY') }">
                         UPLOAD_REQUESTS.ERROR.INVALID_NOTIFICATION_DATE
                       </span>
                     </div>
