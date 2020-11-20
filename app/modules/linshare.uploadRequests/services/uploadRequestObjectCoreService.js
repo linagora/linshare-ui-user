@@ -293,7 +293,7 @@ function UploadRequestObjectCoreService(
     const maxValue = configMaxValue && configUnit && currentUnit ? configMaxValue * unitService.convertBase(currentUnit, configUnit) : null;
 
     if (isFormatted) {
-      return `${maxValue} ${currentUnit}`;
+      return `${configMaxValue} ${configUnit}`;
     } else {
       return maxValue;
     }

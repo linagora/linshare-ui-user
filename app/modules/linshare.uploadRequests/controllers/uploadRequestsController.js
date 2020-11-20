@@ -313,7 +313,7 @@ function uploadRequestsController(
 
   function setSubmitted(form) {
     form.$setSubmitted();
-    angular.forEach(form, function(item) {
+    form.forEach(item => {
       if (item && item.$$parentForm === form && item.$setSubmitted) {
         setSubmitted(item);
       }
