@@ -15,7 +15,10 @@
       <i class="zmdi zmdi-download zmdi-hc-lg"></i>
     </a>
   </md-button>
-  <div uib-dropdown>
+  <div
+    ng-if="$ctrl.scope.item.type !== $ctrl.scope.TYPE_FOLDER"
+    uib-dropdown
+  >
     <md-button
       class="md-icon-button actions white-inline-link"
       data-ng-class="{'visible-xs': !($ctrl.scope.canCopyToMySpace || $ctrl.scope.canCopyToWorkGroup)}"
