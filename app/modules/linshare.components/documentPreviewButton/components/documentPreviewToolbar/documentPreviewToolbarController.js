@@ -32,6 +32,7 @@
     documentPreviewToolbarVm.download = documentPreviewService.download;
     documentPreviewToolbarVm.executeAndClose = documentPreviewService.executeAndClose;
     documentPreviewToolbarVm.showItemDetails = documentPreviewService.showItemDetails;
+    documentPreviewToolbarVm.TYPE_FOLDER = 'FOLDER';
 
     ////////////
 
