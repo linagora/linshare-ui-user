@@ -65,13 +65,33 @@
         uib-dropdown-menu=""
       >
         <li
-          class="zmdi zmdi-download col-xs-12"
-          data-ng-click="multiDownload()"
+          class="col-xs-12"
+          ng-click="copyDocuments(selectedDocuments)"
         >
+          <i class="zmdi zmdi-copy"></i>
+          <span translate>ACTION.DUPLICATE</span>
+        </li>
+        <li
+          class="col-xs-12"
+          ng-click="openBrowser(selectedDocuments)"
+        >
+          <i class="zmdi zmdi-accounts"></i>
+          <span translate>ACTION.COPY_IN_WORKGROUP</span>
+        </li>
+        <li
+          class="col-xs-12"
+          ng-click="multiDownload()"
+        >
+          <i class="zmdi zmdi-download"></i>
           <span translate>ACTION.DOWNLOAD</span>
         </li>
-        <li class="zmdi zmdi-copy col-xs-12">
-          <span translate>ACTION.COPY</span>
+        <li
+          class="col-xs-12"
+          ng-click="showCurrentFile(selectedDocuments[0], $event, { openDetailsSidebar: true})"
+          ng-class="{'disable-link': selectedDocuments.length > 1}"
+        >
+          <i class="zmdi zmdi-info"></i>
+          <span translate>ACTION.INFORMATION</span>
         </li>
       </ul>
     </span>
