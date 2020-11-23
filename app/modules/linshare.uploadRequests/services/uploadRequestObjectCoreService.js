@@ -134,6 +134,7 @@ function UploadRequestObjectCoreService(
         functionalityOfTotalSizeOfFiles = clonedData;
         functionalityOfTotalSizeOfFiles.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
         functionalityOfTotalSizeOfFiles.unit = unitService.formatUnit(clonedData.unit);
+        functionalityOfTotalSizeOfFiles.maxUnit = unitService.formatUnit(clonedData.maxUnit);
         functionalityOfTotalSizeOfFiles.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_SIZE').then(data => {
@@ -142,6 +143,7 @@ function UploadRequestObjectCoreService(
         functionalityOfMaxSizeOfAFile = clonedData;
         functionalityOfMaxSizeOfAFile.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
         functionalityOfMaxSizeOfAFile.unit = unitService.formatUnit(clonedData.unit);
+        functionalityOfMaxSizeOfAFile.maxUnit = unitService.formatUnit(clonedData.maxUnit);
         functionalityOfMaxSizeOfAFile.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_FILE_COUNT').then(data => {
@@ -197,8 +199,8 @@ function UploadRequestObjectCoreService(
 
     const activationDate = self.activationDate ? moment(self.activationDate) : moment();
     const maxDate = !_.isUndefined(self.functionalityOfExpiration.maxValue)
-      && self.functionalityOfExpiration.unit
-      && activationDate.add(self.functionalityOfExpiration.maxValue, self.functionalityOfExpiration.unit.toLowerCase());
+      && self.functionalityOfExpiration.maxUnit
+      && activationDate.add(self.functionalityOfExpiration.maxValue, self.functionalityOfExpiration.maxUnit.toLowerCase());
 
     if (!format) {
       return maxDate && maxDate.toDate();
@@ -212,8 +214,8 @@ function UploadRequestObjectCoreService(
       return !format ? new Date() : moment().format(format);
     }
 
-    const minDate = !_.isUndefined(self.functionalityOfActivation.maxValue) && self.functionalityOfActivation.unit
-      ? moment().add(self.functionalityOfActivation.maxValue, self.functionalityOfActivation.unit.toLowerCase())
+    const minDate = !_.isUndefined(self.functionalityOfActivation.maxValue) && self.functionalityOfActivation.maxUnit
+      ? moment().add(self.functionalityOfActivation.maxValue, self.functionalityOfActivation.maxUnit.toLowerCase())
       : moment();
 
     if (!format) {
@@ -238,9 +240,9 @@ function UploadRequestObjectCoreService(
     }
 
     let minDate = !_.isUndefined(self.functionalityOfExpiryNotification.maxValue)
-      && self.functionalityOfExpiryNotification.unit
+      && self.functionalityOfExpiryNotification.maxUnit
       && expirationDate
-      && expirationDate.subtract(self.functionalityOfExpiryNotification.maxValue, self.functionalityOfExpiryNotification.unit.toLowerCase());
+      && expirationDate.subtract(self.functionalityOfExpiryNotification.maxValue, self.functionalityOfExpiryNotification.maxUnit.toLowerCase());
 
     if (minDate.valueOf() < activationDate.valueOf()) {
       minDate = activationDate;
@@ -282,11 +284,11 @@ function UploadRequestObjectCoreService(
 
     if (type === 'total') {
       configMaxValue = self.functionalityOfTotalSizeOfFiles.maxValue;
-      configUnit = self.functionalityOfTotalSizeOfFiles.unit;
+      configUnit = self.functionalityOfTotalSizeOfFiles.maxUnit;
       currentUnit = self.totalSizeOfFiles.unit;
     } else if (type === 'one') {
       configMaxValue = self.functionalityOfMaxSizeOfAFile.maxValue;
-      configUnit = self.functionalityOfMaxSizeOfAFile.unit;
+      configUnit = self.functionalityOfMaxSizeOfAFile.maxUnit;
       currentUnit = self.maxSizeOfAFile.unit;
     }
 
