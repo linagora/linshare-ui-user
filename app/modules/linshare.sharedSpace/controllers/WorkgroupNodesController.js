@@ -41,6 +41,7 @@
     'workgroupNodesRestService',
     'workgroupPermissions',
     'workgroupRestService',
+    'unitService'
   ];
   /**
    * @namespace WorkgroupNodesController
@@ -75,7 +76,8 @@
     workgroupMembersRestService,
     workgroupNodesRestService,
     workgroupPermissions,
-    workgroupRestService
+    workgroupRestService,
+    unitService
   )
   {
     /* jshint validthis:true */
@@ -147,10 +149,13 @@
           workgroupNodesVm.canDownloadArchive = functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
           workgroupNodesVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable &&
             functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
+          functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.maxRawSize =
+            unitService.toByte(functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue,
+              unitService.formatUnit(functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
 
           workgroupNodesVm.downloadArchiveThreshold = !functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.enable
             ? 0
-            : functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.rawSize;
+            : functionalities.WORK_GROUP__DOWNLOAD_ARCHIVE.maxRawSize;
         });
 
       Object.assign(
@@ -227,7 +232,7 @@
       var _nodeType = nodeType || TYPE_DOCUMENT;
       var _nodesList = nodesList || workgroupNodesVm.selectedDocuments;
 
-      
+
       return _.every(_nodesList, {'type': _nodeType});
     }
 
@@ -1151,7 +1156,7 @@
             });
           });
         }
-        
+
         return foldersTreeError;
       }
 
@@ -1218,7 +1223,7 @@
                         return _.assign(parent, nodes);
                       });
                   }
-                  
+
                   return parent;
                 }).then(function(parent) {
                   newDir.parent = parent.uuid;
@@ -1249,7 +1254,7 @@
             foldersTree[current] = newDir;
           }
         });
-        
+
         return {promises: promises, tree: foldersTree};
 
         ////////////
@@ -1265,7 +1270,7 @@
           return workgroupNodesRestService
             .create(folderDetails.workgroupUuid, _.omit(node, ['_deferred'])).then(function(data) {
               data._created = true;
-              
+
               return data;
             }).catch(function(error) {
               return {error: error, node: node};
@@ -1296,7 +1301,7 @@
             if (nodeData._created) {
               parent.push(nodeData);
             }
-            
+
             return nodeData;
           }).catch(function(error) {
             return {error: error, node: node};

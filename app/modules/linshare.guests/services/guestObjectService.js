@@ -128,6 +128,11 @@
             .add(clonedData.value, clonedData.unit)
             .subtract(1, 'days')
             .valueOf();
+          allowedToExpiration.maxValue = moment()
+            .endOf('day')
+            .add(clonedData.maxValue, clonedData.maxUnit)
+            .subtract(1, 'days')
+            .valueOf();
         }),
         functionalityRestService.getFunctionalityParams('GUESTS__EXPIRATION_ALLOW_PROLONGATION')
           .then(function(data) {
@@ -200,7 +205,7 @@
       }).catch(function(error) {
         deferred.reject(error);
       });
-      
+
       return deferred.promise;
     }
 
@@ -239,7 +244,7 @@
       //  form.activateEditors = _.clone(allowedToRestrict.value);
       form.activateRestricted = setPropertyValue(self.restricted, allowedToRestrict.value);
       form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
-      form.datepicker.options.maxDate = _.clone(allowedToExpiration.value);
+      form.datepicker.options.maxDate = _.clone(allowedToExpiration.maxValue);
       form.activateMoreOptions = !form.activateUserSpace;
 
       form.datepicker.isEditable = true;
@@ -248,16 +253,16 @@
       }
 
       if (!allowedToProlongExpiration.enable) {
-        form.datepicker.options.maxDate = _.clone(allowedToExpiration.value);
+        form.datepicker.options.maxDate = _.clone(allowedToExpiration.maxValue);
       } else {
         const startOfDay = moment().startOf('day').valueOf();
         const diffTime = startOfDay > self.creationDate ? startOfDay - self.creationDate : 0;
 
-        form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.value).add(diffTime, 'ms'));
+        form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.maxValue).add(diffTime, 'ms'));
       }
 
       deferred.resolve(_.cloneDeep(form));
-      
+
       return deferred.promise;
     }
 
@@ -340,7 +345,7 @@
       //} else {
       //  guestDTO.editorsContacts = null;
       //}
-      
+
       return guestDTO;
     }
 
@@ -362,7 +367,7 @@
       }).catch(function(error) {
         deferred.reject(error);
       });
-      
+
       return deferred.promise;
     }
   }

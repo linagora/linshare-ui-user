@@ -71,6 +71,7 @@
         autocompleteUsersVm.functionality = functionalities.COMPLETION;
         autocompleteUsersVm.canCreateGuest = functionalities.GUESTS.enable;
         autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
+        autocompleteUsersVm.functionality.maxValue = autocompleteUsersVm.functionality.maxValue || 3;
         if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
           autocompleteUsersVm.withEmail = false;
         }
@@ -96,7 +97,7 @@
 
       if (errors) {
         $log.error('Error in Function addElements:' + errors);
-        
+
         return;
       }
 
@@ -152,7 +153,7 @@
         if (_.isUndefined(selectedUsersList)) {
           errorMsg += '\n\t- var selectedUsersList is not defined';
         }
-        
+
         return errorMsg;
       }
     }
@@ -166,10 +167,10 @@
     function onErrorEmail() {
       var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
 
-      
+
       return autocompleteUsersVm.withEmail
         && !_.isUndefined(viewValue)
-        && viewValue.length >= autocompleteUsersVm.functionality.value
+        && viewValue.length >= autocompleteUsersVm.functionality.maxValue
         && !regexpEmail.test(viewValue);
     }
 
@@ -224,7 +225,7 @@
 
       var deferred = $q.defer();
 
-      if (pattern.length >= autocompleteUsersVm.functionality.value) {
+      if (pattern.length >= autocompleteUsersVm.functionality.maxValue) {
         autocompleteUsersVm.currentPattern = pattern;
 
         autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid)
@@ -247,11 +248,11 @@
                 return item.type !== 'mailinglist';
               })
               : data;
-              
+
             deferred.resolve(usersAccounts);
           });
       }
-      
+
       return deferred.promise;
     }
 

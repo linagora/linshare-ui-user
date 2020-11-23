@@ -86,10 +86,10 @@
                 uib-datepicker-popup show-weeks="false" is-open="opened2"
                 datepicker-options="::{
                   minDate: shareActionVm.newShare.getMinDate(),
-                  maxDate: shareActionVm.newShare.notificationDateForUSDA.value
+                  maxDate: shareActionVm.newShare.notificationDateForUSDA.maxValue
                 }"
                 min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
-                max="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'fullDate'}}"
+                max="{{shareActionVm.newShare.notificationDateForUSDA.maxValue | lsDate: 'fullDate'}}"
                 name="notificationDateIfUndownloaded"
                 ng-click="open($event, 'opened2')"
                 ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"

@@ -31,6 +31,7 @@ angular.module('linshare.share')
 
           angular.extend(notificationDateForUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION);
           notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
+          notificationDateForUSDA.maxValue = moment().add(notificationDateForUSDA.maxValue, 'days').valueOf();
           angular.extend(enableUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
           angular.extend(creationAcknowledgement,functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
           angular.extend(expirationDate, functionalities.SHARE_EXPIRATION);
@@ -70,12 +71,13 @@ angular.module('linshare.share')
       self.waitingUploadIdentifiers = _.defaultTo(shareJson.waitingUploadIdentifiers, []);
       self.uploadingDocuments = [];
       self.getMinDate = () => moment().endOf('day').valueOf();
-      self.getMaxDate = () => moment().endOf('day').add(expirationDate.value, expirationDate.unit).subtract(1, 'days').valueOf();
+      self.getMaxDate = () => moment().endOf('day').add(expirationDate.maxValue, expirationDate.maxUnit).subtract(1, 'days').valueOf();
+      self.getDefaultDate = () => moment().endOf('day').add(expirationDate.value, expirationDate.unit).subtract(1, 'days').valueOf();
 
       getFunctionalities().then(function() {
         self.secured = _.defaultTo(shareJson.secured, secured);
         self.creationAcknowledgement = _.defaultTo(shareJson.creationAcknowledgement, creationAcknowledgement);
-        self.expirationDate =_.defaultTo(shareJson.expirationDate, _.assign({}, expirationDate, { value: self.getMaxDate() }));
+        self.expirationDate =_.defaultTo(shareJson.expirationDate, _.assign({}, expirationDate, { value: self.getDefaultDate() }));
         self.enableUSDA = _.defaultTo(shareJson.enableUSDA, enableUSDA);
         self.notificationDateForUSDA =  _.defaultTo(shareJson.notificationDateForUSDA, notificationDateForUSDA);
         self.forceAnonymousSharing = _.defaultTo(
@@ -273,7 +275,7 @@ angular.module('linshare.share')
       this.secured = secured;
       this.creationAcknowledgement = creationAcknowledgement;
 
-      this.expirationDate = _.assign({}, expirationDate, { value: this.getMaxDate() });
+      this.expirationDate = _.assign({}, expirationDate, { value: this.getDefaultDate() });
       this.enableUSDA = enableUSDA;
       this.notificationDateForUSDA = notificationDateForUSDA;
 
