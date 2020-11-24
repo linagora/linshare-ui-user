@@ -93,9 +93,9 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
-    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf();
-    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || null;
+    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf() || null;
+    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf() || null;
     dto.label = self.label;
     dto.body = self.body;
     dto.contactList = self.newRecipients.map(recipient => recipient.mail);
@@ -122,9 +122,9 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf();
-    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf();
-    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf();
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || null;
+    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf() || null;
+    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf() || null;
     dto.label = self.label;
     dto.body = self.body;
     dto.maxFileCount = self.maxFileCount;
