@@ -84,7 +84,8 @@
         self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
         self.owner = setPropertyValue(jsonObject.owner, {});
         self.reset = reset;
-        self.restricted = setPropertyValue(jsonObject.restricted, _.clone(allowedToRestrict.value));
+        self.restricted = setPropertyValue(jsonObject.restricted, _.clone((!self.allowedToUpload.value && !self.allowedToUpload.canOverride)
+          || !self.canUpload ? false : allowedToRestrict.value));
         self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(contacts));
         self.toDTO = toDTO;
         self.update = update;
