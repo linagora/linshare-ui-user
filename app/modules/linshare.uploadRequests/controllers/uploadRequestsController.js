@@ -11,6 +11,7 @@ uploadRequestsController.$inject = [
   'lsAppConfig',
   'tableParamsService',
   'toastService',
+  'documentUtilsService',
   'uploadRequestGroup',
   'UploadRequestObjectService',
   'uploadRequestGroupRestService',
@@ -31,6 +32,7 @@ function uploadRequestsController(
   lsAppConfig,
   tableParamsService,
   toastService,
+  documentUtilsService,
   uploadRequestGroup,
   UploadRequestObjectService,
   uploadRequestGroupRestService,
@@ -94,6 +96,7 @@ function uploadRequestsController(
             uploadRequestsVm.cancelUploadRequests = cancelUploadRequests;
             uploadRequestsVm.closeUploadRequests = closeUploadRequests;
             uploadRequestsVm.archiveUploadRequest = archiveUploadRequest;
+            uploadRequestsVm.downloadEntries = downloadEntries;
             uploadRequestsVm.removeArchivedUploadRequests = removeArchivedUploadRequests;
             uploadRequestsVm.updateUploadRequest = updateUploadRequest;
             uploadRequestsVm.selectedUploadRequests = tableParamsService.getSelectedItemsList();
@@ -343,5 +346,11 @@ function uploadRequestsController(
         showToastAlertFor('update', 'info');
       })
       .catch(error => (error && showToastAlertFor('update', 'error')));
+  }
+
+  function downloadEntries(uploadRequest) {
+    const url = uploadRequestGroupRestService.getDownloadEntriesUrl(uploadRequestGroup.uuid, uploadRequest.uuid);
+
+    documentUtilsService.download(url, uploadRequestGroup.label);
   }
 }

@@ -14,6 +14,7 @@ uploadRequestGroupsController.$inject = [
   '$scope',
   '$state',
   'contactsListsService',
+  'documentUtilsService',
   'lsAppConfig',
   'toastService',
   'tableParamsService',
@@ -35,6 +36,7 @@ function uploadRequestGroupsController(
   $scope,
   $state,
   contactsListsService,
+  documentUtilsService,
   lsAppConfig,
   toastService,
   tableParamsService,
@@ -62,6 +64,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.setSubmitted = setSubmitted;
     uploadRequestGroupsVm.createUploadRequestGroup = createUploadRequestGroup;
     uploadRequestGroupsVm.updateUploadRequestGroup = updateUploadRequestGroup;
+    uploadRequestGroupsVm.downloadEntries = downloadEntries;
     uploadRequestGroupsVm.currentStateName = $state.current.name;
     uploadRequestGroupsVm.paramFilter = { label: '' };
     uploadRequestGroupsVm.toggleSearchState = toggleSearchState;
@@ -414,5 +417,11 @@ function uploadRequestGroupsController(
 
     uploadRequestGroupsVm.formTabIndex = 0;
     uploadRequestGroupsVm.selectedIndex = 0;
+  }
+
+  function downloadEntries(uploadRequestGroup) {
+    const url = uploadRequestGroupRestService.getDownloadEntriesUrl(uploadRequestGroup.uuid);
+
+    documentUtilsService.download(url, uploadRequestGroup.label);
   }
 }

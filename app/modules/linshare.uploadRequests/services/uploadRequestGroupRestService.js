@@ -19,13 +19,14 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     restUrl = 'upload_request_groups';
 
   return {
-    create: create,
-    get: get,
-    list: list,
-    update: update,
-    updateStatus: updateStatus,
-    listUploadRequests: listUploadRequests,
-    addRecipients: addRecipients
+    addRecipients,
+    create,
+    get,
+    getDownloadEntriesUrl,
+    list,
+    listUploadRequests,
+    update,
+    updateStatus
   };
 
   ////////////
@@ -103,5 +104,13 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     $log.debug('uploadRequestGroupRestService : addRecipients', uuid, payload);
 
     return handler(Restangular.one(restUrl, uuid).post('recipients', payload));
+  }
+
+  function getDownloadEntriesUrl(uuid, uploadRequestUuid) {
+    $log.debug('uploadRequestEntryRestService : getDownloadEntriesUrl', uuid, uploadRequestUuid);
+
+    const url =  Restangular.one(restUrl, uuid).one('download').getRestangularUrl();
+
+    return uploadRequestUuid ? `${url}?requestUuid=${uploadRequestUuid}` : url;
   }
 }

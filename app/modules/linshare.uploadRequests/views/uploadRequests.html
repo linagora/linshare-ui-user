@@ -302,7 +302,11 @@
                           </a>
                         </li>
                         <li ng-if="['ENABLED', 'CLOSED'].includes(uploadRequest.status)">
-                          <a translate-attr="{title: 'ACTION.DOWNLOAD'}" event-propagation-stop>
+                          <a
+                            ng-click="uploadRequestsVm.downloadEntries(uploadRequest)"
+                            translate-attr="{title: 'ACTION.DOWNLOAD'}"
+                            event-propagation-stop
+                          >
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
@@ -346,7 +350,7 @@
                               </a>
                             </li>
                             <li ng-class="{ 'disable-link' : !['ENABLED', 'CLOSED'].includes(uploadRequest.status)}">
-                              <a href="">
+                              <a href="" ng-click="uploadRequestsVm.downloadEntries(uploadRequest)">
                                 <i class="zmdi zmdi-download"></i>
                                 <span translate>ACTION.DOWNLOAD</span>
                               </a>

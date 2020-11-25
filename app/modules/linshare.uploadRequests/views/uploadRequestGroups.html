@@ -321,7 +321,11 @@
                           </a>
                         </li>
                         <li ng-if="['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status) && uploadRequestGroup.collective">
-                          <a translate-attr="{title: 'ACTION.DOWNLOAD'}" event-propagation-stop>
+                          <a
+                            ng-click="uploadRequestGroupsVm.downloadEntries(uploadRequestGroup)"
+                            translate-attr="{title: 'ACTION.DOWNLOAD'}"
+                            event-propagation-stop
+                          >
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
@@ -365,7 +369,7 @@
                               </a>
                             </li>
                             <li ng-class="{ 'disable-link' : !['ENABLED', 'CLOSED'].includes(uploadRequestGroup.status) || !uploadRequestGroup.collective }">
-                              <a href="">
+                              <a href="" ng-click="uploadRequestGroupsVm.downloadEntries(uploadRequestGroup)">
                                 <i class="zmdi zmdi-download"></i>
                                 <span translate>ACTION.DOWNLOAD</span>
                               </a>
