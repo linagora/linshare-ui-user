@@ -76,7 +76,7 @@ function UploadRequestObjectCoreService(
       self.maxSizeOfAFile = setAppropriateSize(jsonObject.maxFileSize) || functionalityOfMaxSizeOfAFile;
       self.totalSizeOfFiles = setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
       self.getMaxDateOfExpiration = getMaxDateOfExpiration;
-      self.getMinDateOfActivation = getMinDateOfActivation;
+      self.getMaxDateOfActivation = getMaxDateOfActivation;
       self.getMaxSize = getMaxSize;
       self.getMinDateOfNotification = getMinDateOfNotification;
       self.getMaxDateOfNotification = getMaxDateOfNotification;
@@ -209,20 +209,25 @@ function UploadRequestObjectCoreService(
     return maxDate && maxDate.format(format);
   };
 
-  function getMinDateOfActivation(format) {
+  function getMaxDateOfActivation(format) {
     if (self.functionalityOfActivation.maxValue < 0) {
-      return !format ? new Date() : moment().format(format);
+      return;
     }
 
-    const minDate = !_.isUndefined(self.functionalityOfActivation.maxValue) && self.functionalityOfActivation.maxUnit
+    const expiryDate = self.expiryDate && moment(self.expiryDate).format('YYYY-MM-DD');
+    const maxDate = !_.isUndefined(self.functionalityOfActivation.maxValue) && self.functionalityOfActivation.maxUnit
       ? moment().add(self.functionalityOfActivation.maxValue, self.functionalityOfActivation.maxUnit.toLowerCase())
-      : moment();
+      : expiryDate;
+
+    if (expiryDate && maxDate && maxDate.valueOf() > expiryDate.valueOf()) {
+      maxDate = expiryDate;
+    }
 
     if (!format) {
-      return minDate.toDate();
+      return maxDate.toDate();
     }
 
-    return minDate.format(format);
+    return maxDate.format(format);
   }
 
   function getMinDateOfNotification(format) {
@@ -309,10 +314,10 @@ function UploadRequestObjectCoreService(
       maxHTMLDate: self.getMaxDateOfExpiration('YYYY-MM-DD')
     };
     self.activationDateOptions = {
-      minDate: self.getMinDateOfActivation(),
-      maxDate: self.expiryDate,
-      minHTMLDate: self.getMinDateOfActivation('YYYY-MM-DD'),
-      maxHTMLDate: self.expiryDate && moment(self.expiryDate).format('YYYY-MM-DD'),
+      minDate: moment(),
+      maxDate: self.getMaxDateOfActivation(),
+      minHTMLDate: moment().format('YYYY-MM-DD'),
+      maxHTMLDate: self.getMaxDateOfActivation('YYYY-MM-DD'),
     };
     self.notificationDateOptions = {
       minDate: self.getMinDateOfNotification(),
