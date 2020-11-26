@@ -176,7 +176,7 @@
                     <div class="col-xs-6 flex-combine-input">
                       <input ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfTotalSizeOfFiles.canOverride"
                         class="form-control custom-bordered-input"
-                        min="0"
+                        min="1"
                         max="{{mainVm.sidebar.getData().currentSelected.totalSizeOfFiles.maxValue}}" name="totalSizeOfFiles"
                         ng-model="mainVm.sidebar.getData().currentSelected.totalSizeOfFiles.value" type="number" required/>
                       <md-select class="form-control custom-bordered-select m-0"
@@ -212,6 +212,7 @@
                     </label>
                     <div class="col-xs-6 flex-combine-input">
                       <input name="maxFileCount" required
+                        min="1"
                         max="{{mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.maxValue}}"
                         ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfMaxNumberOfFiles.canOverride"
                         class="form-control custom-bordered-input custom-single-input"
@@ -239,6 +240,7 @@
                     <div class="col-xs-6 flex-combine-input">
                       <input ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfMaxSizeOfAFile.canOverride"
                         class="form-control custom-bordered-input" name="maxSizeOfAFile"
+                        min="1"
                         max="{{mainVm.sidebar.getData().currentSelected.maxSizeOfAFile.maxValue}}" required
                         ng-model="mainVm.sidebar.getData().currentSelected.maxSizeOfAFile.value" type="number" />
                       <md-select class="form-control m-0 custom-bordered-select"

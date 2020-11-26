@@ -117,7 +117,8 @@
                   </label>
                   <div class="col-xs-6 flex-combine-input">
                     <input ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfTotalSizeOfFiles.canOverride"
-                      class="form-control custom-bordered-input" required min="0"
+                      class="form-control custom-bordered-input" required
+                      min="1"
                       max="{{$ctrl.uploadRequestGroupObject.totalSizeOfFiles.maxValue}}" name="totalSizeOfFiles"
                       ng-model="$ctrl.uploadRequestGroupObject.totalSizeOfFiles.value" type="number" />
                     <md-select class="form-control custom-bordered-select m-0"
@@ -152,6 +153,7 @@
                   </label>
                   <div class="col-xs-6 flex-combine-input">
                     <input name="maxFileCount" required
+                      min="1"
                       max="{{$ctrl.uploadRequestGroupObject.functionalityOfMaxNumberOfFiles.maxValue}}"
                       ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfMaxNumberOfFiles.canOverride"
                       class="form-control custom-bordered-input custom-single-input"
@@ -179,6 +181,7 @@
                   <div class="col-xs-6 flex-combine-input">
                     <input ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfMaxSizeOfAFile.canOverride"
                       class="form-control custom-bordered-input" name="maxSizeOfAFile"
+                      min="1"
                       max="{{$ctrl.uploadRequestGroupObject.maxSizeOfAFile.maxValue}}" required
                       ng-model="$ctrl.uploadRequestGroupObject.maxSizeOfAFile.value" type="number" />
                     <md-select class="form-control m-0 custom-bordered-select"
