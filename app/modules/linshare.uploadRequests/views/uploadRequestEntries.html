@@ -435,7 +435,7 @@
               </a>
             </span>
 
-            <span>
+            <span ng-if="uploadRequestEntriesVm.uploadRequest.status !== 'ARCHIVED'">
               <a
                 class="plain-text-button share-link"
                 translate-attr="{title: 'ACTION.COPY_IN_MY_FILES'}"
