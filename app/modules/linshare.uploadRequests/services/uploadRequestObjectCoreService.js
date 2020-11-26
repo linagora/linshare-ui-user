@@ -127,6 +127,7 @@ function UploadRequestObjectCoreService(
           && clonedData.unit
           && defaultExpirationDate
           && defaultExpirationDate.subtract(clonedData.value, clonedData.unit.toLowerCase()).toDate();
+        functionalityOfExpiryNotification.enable = functionalityOfExpiration.enable ? functionalityOfExpiryNotification.enable : false;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_DEPOSIT_SIZE').then(data => {
         const clonedData = _.cloneDeep(data || {});
