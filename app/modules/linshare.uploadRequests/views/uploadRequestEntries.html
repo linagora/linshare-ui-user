@@ -9,7 +9,7 @@
             tooltip-placement="bottom"
             tooltip-popup-delay="500"
             is-open="isOpenNew"
-            ng-if="['ENABLED', 'CREATED'].includes(uploadRequestEntriesVm.uploadRequest.status) && uploadRequestEntriesVm.uploadRequestGroup.collective"
+            ng-if="['CREATED','ENABLED'].includes(uploadRequestEntriesVm.uploadRequest.status) && uploadRequestEntriesVm.uploadRequestGroup.collective"
             ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle>
               <i class="zmdi zmdi-plus"></i>
