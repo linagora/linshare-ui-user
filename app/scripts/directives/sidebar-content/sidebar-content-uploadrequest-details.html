@@ -30,8 +30,9 @@
                   ng-class="{'show-full-comment': commentFocused}"
                   ng-init="commentFocused = false">
                 <span class="comment">{{mainVm.sidebar.getData().currentSelected.body || 'N/A'}}</span>
-                <div class="edit-description click-enabled">
-                  <i class="zmdi zmdi-eye"></i>
+                <div class="edit-description click-enabled" ng-click="commentFocused = !commentFocused">
+                  <i class="zmdi zmdi-eye" ng-if="!commentFocused"></i>
+                  <i class="zmdi zmdi-close" ng-if="commentFocused"></i>
                 </div>
               </div>
             </div>
