@@ -90,6 +90,33 @@
               </div>
               <div class="meta-data-ctn">
                 <h2 class="subheader">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <span translate>UPLOAD_REQUESTS.DETAIL_TAB.RECIPIENTS</span>
+                  <div class="sidebar-link right" ng-class="{ 'animate-chevron' : showRecipients }"
+                    ng-click="showRecipients = !showRecipients">
+                    <a href="" translate>
+                      UPLOAD_REQUESTS.DETAIL_TAB.SHOW_BUTTON
+                    </a>
+                    <i class="zmdi zmdi-chevron-down toggle-chevron m-l-5"></i>
+                  </div>
+                </h2>
+                <div class="recipient-list" ng-show="showRecipients">
+                  <div class="recipientsAutocomplete" ng-repeat="recipient in mainVm.sidebar.getData().currentSelected.recipients">
+                    <span class="firstLetterFormat">
+                      {{ ::recipient.charAt(0) }}
+                    </span>
+
+                    <p class="recipientsInfo">
+                      <span class="user-full-name">
+                        <strong>{{ ::recipient }}</strong>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="meta-data-ctn">
+                <h2 class="subheader">
                   <i class="fa fa-file-text" aria-hidden="true"></i>
                   <span translate>UPLOAD_REQUESTS.DETAIL_TAB.META_DATA</span>
                 </h2>
