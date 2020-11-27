@@ -289,7 +289,7 @@
                             <i class="zmdi zmdi-download"></i>
                           </a>
                         </li>
-                        <li ng-if="['CLOSED', 'ARCHIVED'].includes(uploadRequestEntriesVm.uploadRequest.status)">
+                        <li ng-if="['CLOSED', 'ENABLED'].includes(uploadRequestEntriesVm.uploadRequest.status)">
                           <a
                             href=""
                             translate-attr="{title: 'ACTION.DELETE'}"
@@ -330,7 +330,7 @@
                             </li>
                             <li
                               ng-if="!uploadRequestEntriesVm.isArchived"
-                              ng-class="{'disable-link': !['CLOSED', 'ARCHIVED'].includes(uploadRequestEntriesVm.uploadRequest.status)}"
+                              ng-class="{'disable-link': !['CLOSED', 'ENABLED'].includes(uploadRequestEntriesVm.uploadRequest.status)}"
                             >
                               <a
                                 href=""
@@ -446,7 +446,8 @@
               </a>
             </span>
 
-            <span ng-class="{'disable-link': !['CLOSED', 'ARCHIVED'].includes(uploadRequestEntriesVm.uploadRequest.status)}">
+            <span ng-if="uploadRequestEntriesVm.uploadRequest.status !== 'ARCHIVED'"
+              ng-class="{'disable-link': !['ENABLED', 'CLOSED'].includes(uploadRequestEntriesVm.uploadRequest.status)}">
               <a
                 class="plain-text-button share-link"
                 translate-attr="{title: 'ACTION.DELETE'}"
