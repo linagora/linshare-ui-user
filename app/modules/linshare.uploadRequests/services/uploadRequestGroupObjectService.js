@@ -140,46 +140,29 @@ function UploadRequestGroupObjectService(
   }
 
   function addRecipient() {
-    var contact = this.selectedUser;
-    var exists = false;
+    const contact = this.selectedUser;
+    const uniqueInitialRecipients = _.uniqBy(self.recipients, 'mail');
+    let exists = false;
 
-    switch (contact.type) {
-      case 'simple':
-        angular.forEach(self.recipients, function (elem) {
-          if (elem.mail === contact.identifier) {
-            exists = true;
-            $log.info('The user ' + contact.identifier + ' is already in the recipients list');
-          }
-        });
-        if (!exists) {
-          contact.mail = contact.identifier;
-          self.recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
-        }
-        break;
-      case 'user':
-        const uniqueInitialRecipients = _.uniqBy(self.recipients, 'mail');
+    uniqueInitialRecipients.forEach(initialRecipient => {
+      if (initialRecipient.mail === contact.mail) {
+        exists = true;
+        toastService.error({key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST'});
+        $log.info('The user ' + contact.mail + ' is already in the upload request');
+      }
+    });
 
-        uniqueInitialRecipients.forEach(initialRecipient => {
-          if (initialRecipient.mail === contact.mail) {
-            exists = true;
-            toastService.error({key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST'});
-            $log.info('The user ' + contact.mail + ' is already in the upload request');
-          }
-        });
+    self.newRecipients.forEach(newRecipient => {
+      if (newRecipient.mail === contact.mail) {
+        exists = true;
+        $log.info('The user ' + contact.mail + ' is already in the recipients list');
+      }
+    });
 
-        self.newRecipients.forEach(newRecipient => {
-          if (newRecipient.mail === contact.mail) {
-            exists = true;
-            $log.info('The user ' + contact.mail + ' is already in the recipients list');
-          }
-        });
+    if (!exists) {
+      const { firstName, lastName, mail } = contact;
 
-        if (!exists) {
-          const { firstName, lastName, mail } = contact;
-
-          self.newRecipients.push({ firstName, lastName, mail });
-        }
-        break;
+      self.newRecipients.push({ firstName, lastName, mail });
     }
   };
 
