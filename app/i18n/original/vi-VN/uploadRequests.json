@@ -186,6 +186,9 @@
       "UPDATE": {
         "ERROR": "Yêu cầu tải lên chưa được cập nhật thành công.",
         "INFO": "Yêu cầu tải lên cập nhật thành công!"
+      },
+      "SHOW_UNEXPECTED_ALERT": {
+        "ERROR": "Đã xảy ra lỗi không mong muốn."
       }
     },
     "SIDE_BAR": {

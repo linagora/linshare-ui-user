@@ -186,6 +186,9 @@
       "UPDATE": {
         "ERROR": "L'invitation de dépôt n'a pas été mise à jour.",
         "INFO": "L'invitation de dépôt a été jour avec succès!"
+      },
+      "SHOW_UNEXPECTED_ALERT": {
+        "ERROR": "Une erreur inattendue s'est produite."
       }
     },
     "SIDE_BAR": {

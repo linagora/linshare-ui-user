@@ -186,6 +186,9 @@
       "UPDATE": {
         "ERROR": "Upload request has not been updated.",
         "INFO": "The upload request has been updated successfully!"
+      },
+      "SHOW_UNEXPECTED_ALERT": {
+        "ERROR": "An unexpected error happened."
       }
     },
     "SIDE_BAR": {

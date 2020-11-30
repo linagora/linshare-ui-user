@@ -338,6 +338,11 @@ function uploadRequestGroupsController(
         } else {
           showToastAlertFor('close', 'info', closedRequests);
         }
+      })
+      .catch(err => {
+        if (err) {
+          showToastAlertFor('show_unexpected_error');
+        }
       });
   }
 
