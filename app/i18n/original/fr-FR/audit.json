@@ -508,6 +508,28 @@
           }
         }
       },
+      "UPLOAD_REQUEST_GROUP": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez créé un nouveau groupe de demandes de téléchargement : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez modifié le groupe de demandes de téléchargement: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "UPLOAD_REQUEST_URL": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Un e-mail de demande de téléchargement a été envoyé à : {{resourceName}}",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        }
+      },
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {

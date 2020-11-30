@@ -22,6 +22,7 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     addRecipients,
     create,
     get,
+    getAudit,
     getDownloadEntriesUrl,
     list,
     listUploadRequests,
@@ -56,6 +57,12 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     $log.debug('uploadRequestGroupRestService : get', uuid);
 
     return handler(Restangular.all(restUrl).one(uuid).get());
+  }
+
+  function getAudit(uuid) {
+    $log.debug('uploadRequestGroupRestService: getAudit, uuid');
+
+    return handler(Restangular.one(restUrl, uuid).getList('audit'));
   }
 
   /**

@@ -52,7 +52,9 @@
         'WORKGROUP_DOCUMENT': 'zmdi zmdi-file',
         'WORKGROUP_FOLDER': 'ls-folder',
         'WORKGROUP_MEMBER': 'ls-user',
-        'JWT_PERMANENT_TOKEN': 'zmdi zmdi-badge-check'
+        'JWT_PERMANENT_TOKEN': 'zmdi zmdi-badge-check',
+        'UPLOAD_REQUEST_GROUP': 'zmdi zmdi-pin-account',
+        'UPLOAD_REQUEST_URL': 'zmdi zmdi-link'
       },
       TYPES_KEY = {
         ANONYMOUS_SHARE_ENTRY: 'ANONYMOUS_SHARE_ENTRY',
@@ -66,7 +68,9 @@
         WORKGROUP_DOCUMENT: 'WORKGROUP_DOCUMENT',
         WORKGROUP_FOLDER: 'WORKGROUP_FOLDER',
         WORKGROUP_MEMBER: 'WORKGROUP_MEMBER',
-        JWT_PERMANENT_TOKEN: 'JWT_PERMANENT_TOKEN'
+        JWT_PERMANENT_TOKEN: 'JWT_PERMANENT_TOKEN',
+        UPLOAD_REQUEST_GROUP: 'UPLOAD_REQUEST_GROUP',
+        UPLOAD_REQUEST_URL: 'UPLOAD_REQUEST_URL'
       },
       UPDATE_FIELDS_KEY = {
         'canCreateGuest': 'CAN_CREATE_GUEST',

@@ -22,7 +22,8 @@ uploadRequestGroupsController.$inject = [
   'uploadRequestGroups',
   'uploadRequestGroupRestService',
   'uploadRequestUtilsService',
-  'sidebarService'
+  'sidebarService',
+  'auditDetailsService'
 ];
 
 /**
@@ -44,7 +45,8 @@ function uploadRequestGroupsController(
   uploadRequestGroups,
   uploadRequestGroupRestService,
   uploadRequestUtilsService,
-  sidebarService
+  sidebarService,
+  auditDetailsService
 ) {
   const uploadRequestGroupsVm = this;
   const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
@@ -224,8 +226,17 @@ function uploadRequestGroupsController(
   function showDetails(uploadRequest = {}, { formTabIndex = 0, selectedIndex = 0 } = {}) {
     $q.all([
       uploadRequestGroupRestService.get(uploadRequest.uuid),
-      uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid)
-    ]).then(([uploadRequestGroup, uploadRequests]) => {
+      uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid),
+      uploadRequestGroupRestService.getAudit(uploadRequest.uuid)
+    ]).then(([uploadRequestGroup, uploadRequests, auditLogs]) => {
+      const normalizedAudit = auditLogs.plain().map(log => ({
+        ...log,
+        resource: {
+          ...log.resource,
+          label: log.resource.contactMail || uploadRequestGroup.label
+        }
+      }));
+
       uploadRequestGroupsVm.currentSelected = uploadRequestGroup;
       uploadRequestGroupsVm.currentSelected.recipients = [];
 
@@ -236,7 +247,11 @@ function uploadRequestGroupsController(
       uploadRequestGroupsVm.formTabIndex = formTabIndex >= 0 ? formTabIndex : uploadRequestGroupsVm.formTabIndex;
       uploadRequestGroupsVm.selectedIndex = selectedIndex >= 0 ? selectedIndex : uploadRequestGroupsVm.selectedIndex;
 
-      loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
+      auditDetailsService.generateAllDetails($scope.userLogged.uuid, normalizedAudit)
+        .then(auditActions => {
+          uploadRequestGroupsVm.currentSelected.auditActions = auditActions;
+          loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
+        });
     });
   }
 

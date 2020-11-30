@@ -508,6 +508,28 @@
             }
           }
         },
+        "UPLOAD_REQUEST_GROUP": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали группу запросов на загрузку : {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы отредактировали группу запросов на загрузку: {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
+        "UPLOAD_REQUEST_URL": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Электронное письмо с запросом на загрузку было отправлено на адрес : {{resourceName}}",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          }
+        },
         "WORKGROUP": {
           "CREATE": {
             "AUTHOR": {

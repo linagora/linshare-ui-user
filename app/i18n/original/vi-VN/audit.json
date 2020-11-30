@@ -444,6 +444,28 @@
           }
         }
       },
+      "UPLOAD_REQUEST_GROUP": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tạo một yêu cầu tải lên mới : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã chỉnh sửa yêu cầu tải lên: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "UPLOAD_REQUEST_URL": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Một email yêu cầu tải lên đã được gửi đến : {{resourceName}}",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        }
+      },
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {
@@ -688,7 +710,7 @@
       "ADDITION": "Add on",
       "ALL": "Tất cả các",
       "COPY": "Sao chép",
-      "CREATE": "Sự sáng tạo",
+      "CREATE": "Tạo",
       "CREATE_SHARE": "Đã gửi chia sẻ",
       "DELETE": "Xóa",
       "DELETE_REVISION": "Создание ревизии",

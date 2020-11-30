@@ -508,6 +508,28 @@
           }
         }
       },
+      "UPLOAD_REQUEST_GROUP": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have created a new Upload request group : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have edited the Upload request group: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "UPLOAD_REQUEST_URL": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "An upload request email has been sent to : {{resourceName}}",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        }
+      },
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {
