@@ -64,11 +64,8 @@
 </div>
 
 <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
-  <button class="btn btn-default col-xs-6"
-    ng-click="mainVm.sidebar.getData().closeDropdown($event);
-    !mainVm.sidebar.getData().showCheckboxes && mainVm.sidebar.getData().resetSelectedDocuments();"
-    >
-      <span translate>UPLOAD_REQUESTS.SIDE_BAR.ADD_RECIPIENTS.CANCEL</span>
+  <button class="btn btn-default col-xs-6" ng-click="mainVm.sidebar.hide()">
+    <span translate>UPLOAD_REQUESTS.SIDE_BAR.ADD_RECIPIENTS.CANCEL</span>
   </button>
   <button
     class="btn btn-primary col-xs-6"
