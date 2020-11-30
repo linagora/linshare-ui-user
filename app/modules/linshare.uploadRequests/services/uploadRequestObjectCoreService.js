@@ -77,6 +77,7 @@ function UploadRequestObjectCoreService(
       self.totalSizeOfFiles = setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
       self.getMaxDateOfExpiration = getMaxDateOfExpiration;
       self.getMaxDateOfActivation = getMaxDateOfActivation;
+      self.getMinDateOfActivation = getMinDateOfActivation;
       self.getMaxSize = getMaxSize;
       self.getMinDateOfNotification = getMinDateOfNotification;
       self.getMaxDateOfNotification = getMaxDateOfNotification;
@@ -209,6 +210,10 @@ function UploadRequestObjectCoreService(
 
     return maxDate && maxDate.format(format);
   };
+
+  function getMinDateOfActivation(format) {
+    return format ? moment().format(format) : moment();
+  }
 
   function getMaxDateOfActivation(format) {
     if (self.functionalityOfActivation.maxValue < 0) {
