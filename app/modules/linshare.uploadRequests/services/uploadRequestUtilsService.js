@@ -74,12 +74,12 @@ function uploadRequestUtilsService(
   }
 
   function showToastAlertFor(action, type, items = []) {
-    if (action === 'archive' && (type === 'error' || type === 'info')) {
+    if (action === 'archive') {
       toastService[type]({
         key: `UPLOAD_REQUESTS.TOAST_ALERT.ARCHIVE.${type.toUpperCase()}`
       });
-    } else if (action === 'show_unexpected_error') {
-      toastService['error']({
+    } else if (action === 'unexpected_error') {
+      toastService.error({
         key: 'UPLOAD_REQUESTS.TOAST_ALERT.SHOW_UNEXPECTED_ERROR'
       });
     } else {

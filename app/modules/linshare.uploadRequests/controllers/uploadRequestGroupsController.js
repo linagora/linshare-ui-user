@@ -341,7 +341,7 @@ function uploadRequestGroupsController(
       })
       .catch(err => {
         if (err) {
-          showToastAlertFor('show_unexpected_error');
+          showToastAlertFor('unexpected_error');
         }
       });
   }
