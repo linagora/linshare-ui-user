@@ -188,7 +188,7 @@
         "INFO": "L'invitation de dépôt a été jour avec succès!"
       },
       "SHOW_UNEXPECTED_ALERT": {
-        "ERROR": "Une erreur inattendue s'est produite."
+        "ERROR": "Une erreur inattendue est survenue."
       }
     },
     "SIDE_BAR": {
