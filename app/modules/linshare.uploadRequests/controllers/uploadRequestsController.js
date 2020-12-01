@@ -5,6 +5,7 @@ angular
 uploadRequestsController.$inject = [
   '_',
   '$q',
+  '$timeout',
   '$log',
   '$state',
   'Restangular',
@@ -26,6 +27,7 @@ uploadRequestsController.$inject = [
 function uploadRequestsController(
   _,
   $q,
+  $timeout,
   $log,
   $state,
   Restangular,
@@ -52,6 +54,7 @@ function uploadRequestsController(
   uploadRequestsVm.allSelectedHasStatusOf = allSelectedHasStatusOf;
   uploadRequestsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
   uploadRequestsVm.showDetails = showDetails;
+  uploadRequestsVm.revalidateDateFields = revalidateDateFields;
   uploadRequestsVm.paramFilter = { recipientEmail: '' };
   uploadRequestsVm.selectedIndex = 0;
   uploadRequestsVm.fabButton = {
@@ -352,5 +355,13 @@ function uploadRequestsController(
     const url = uploadRequestGroupRestService.getDownloadEntriesUrl(uploadRequestGroup.uuid, uploadRequest.uuid);
 
     documentUtilsService.download(url, uploadRequestGroup.label);
+  }
+
+  function revalidateDateFields(form) {
+    $timeout(() => {
+      form.notificationDate.$validate();
+      form.expirationDate.$validate();
+      form.activationDate.$validate();
+    });
   }
 }

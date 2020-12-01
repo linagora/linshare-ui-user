@@ -86,7 +86,7 @@
                 </div>
                 <div ng-if="$ctrl.uploadRequestGroupObject.functionalityOfExpiration.enable"
                   class="col-xs-12 field-ctn clearfix">
-                  <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                  <label for="expirationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                     RIGHT_PANEL.DETAILS.EXPIRATION_DATE
                   </label>
                   <div class="datepicker-border-fix date-picker dp-blue col-xs-6" ng-class="{'is-opened': opened == true}">
@@ -100,8 +100,8 @@
                           datepicker-options="$ctrl.uploadRequestGroupObject.expirationDateOptions"
                           min="{{$ctrl.uploadRequestGroupObject.expirationDateOptions.minHTMLDate}}"
                           max="{{$ctrl.uploadRequestGroupObject.expirationDateOptions.maxHTMLDate}}"
-                          name='expiration' ng-model="$ctrl.uploadRequestGroupObject.expiryDate"
-                          ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
+                          name='expirationDate' ng-model="$ctrl.uploadRequestGroupObject.expiryDate"
+                          ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
                       </div>
                       <span ng-show="$ctrl.form.expiration.$invalid" translate translate-interpolation="messageformat"
                         translate-values="{ value: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration('DD MMM YYYY') }">
@@ -112,7 +112,7 @@
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
                   ng-if="$ctrl.uploadRequestGroupObject.functionalityOfTotalSizeOfFiles.enable">
-                  <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                  <label for="totalSizeOfFiles" class="label-muted col-xs-6 no-padding" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.TOTAL_SIZE_OF_FILES
                   </label>
                   <div class="col-xs-6 flex-combine-input">
@@ -148,7 +148,7 @@
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
                   ng-if="$ctrl.uploadRequestGroupObject.functionalityOfMaxNumberOfFiles.enable">
-                  <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                  <label for="maxFileCount" class="label-muted col-xs-6 no-padding" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES
                   </label>
                   <div class="col-xs-6 flex-combine-input">
@@ -175,7 +175,7 @@
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
                   ng-if="$ctrl.uploadRequestGroupObject.functionalityOfMaxSizeOfAFile.enable">
-                  <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                  <label for="maxSizeOfAFile" class="label-muted col-xs-6 no-padding" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.MAX_SIZE_OF_A_FILE
                   </label>
                   <div class="col-xs-6 flex-combine-input">
@@ -223,7 +223,7 @@
                 </div>
                 <div ng-if="$ctrl.uploadRequestGroupObject.functionalityOfActivation.enable"
                   class="col-xs-12 field-ctn clearfix">
-                  <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                  <label for="activationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
                   </label>
                   <div class="datepicker-border-fix date-picker dp-blue col-xs-6" ng-class="{'is-opened': opened == true}">
@@ -233,12 +233,12 @@
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
                           ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfActivation.canOverride"
                           class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
-                          is-open="opened" ng-required="true" name="activation"
+                          is-open="opened" ng-required="true" name="activationDate"
                           datepicker-options="$ctrl.uploadRequestGroupObject.activationDateOptions"
                           min="{{$ctrl.uploadRequestGroupObject.activationDateOptions.minHTMLDate}}"
                           max="{{$ctrl.uploadRequestGroupObject.activationDateOptions.maxHTMLDate}}"
                           ng-model="$ctrl.uploadRequestGroupObject.activationDate"
-                          ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
+                          ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
                       </div>
                       <span ng-show="$ctrl.form.activation.$invalid" translate translate-interpolation="messageformat"
                         translate-values="{ value: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('DD MMM YYYY') }">
@@ -249,7 +249,7 @@
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
                   ng-if="$ctrl.uploadRequestGroupObject.functionalityOfPasswordProtected.enable">
-                  <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                  <label for="secured" class="label-muted col-xs-6 no-padding" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.PASSWORD_PROTECTED
                   </label>
                   <div class="col-xs-6 flex-combine-input">
@@ -260,7 +260,7 @@
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
                   ng-if="$ctrl.uploadRequestGroupObject.functionalityOfDeletion.enable">
-                  <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                  <label for="canDelete" class="label-muted col-xs-6 no-padding" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.ALLOW_DELETION
                   </label>
                   <div class="col-xs-6 flex-combine-input">
@@ -271,7 +271,7 @@
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
                   ng-if="$ctrl.uploadRequestGroupObject.functionalityOfClosure.enable">
-                  <label for="comment" class="label-muted col-xs-6 no-padding" translate>
+                  <label for="canClose" class="label-muted col-xs-6 no-padding" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE
                   </label>
                   <div class="col-xs-6 flex-combine-input">
@@ -282,7 +282,7 @@
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
                   ng-if="$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.enable">
-                  <label for="comment" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                  <label for="notificationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE
                   </label>
                   <div class="datepicker-border-fix date-picker dp-blue col-xs-6" ng-class="{'is-opened': opened == true}">
@@ -297,7 +297,7 @@
                           min="{{$ctrl.uploadRequestGroupObject.notificationDateOptions.minHTMLDate}}"
                           max="{{$ctrl.uploadRequestGroupObject.notificationDateOptions.maxHTMLDate}}"
                           ng-model="$ctrl.uploadRequestGroupObject.notificationDate"
-                          ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions()" />
+                          ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
                       </div>
                       <span ng-show="$ctrl.form.notificationDate.$invalid" translate
                         translate-interpolation="messageformat" translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfNotification('DD MMM YYYY'),

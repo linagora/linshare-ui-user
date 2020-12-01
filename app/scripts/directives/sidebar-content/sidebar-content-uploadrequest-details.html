@@ -140,7 +140,7 @@
                 <div class="recipients-form-sections clearfix">
                   <div ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfExpiration.enable"
                     class="col-xs-12 field-ctn clearfix">
-                    <label for="expiration" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                    <label for="expirationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                       RIGHT_PANEL.DETAILS.EXPIRATION_DATE
                     </label>
                     <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
@@ -158,8 +158,9 @@
                             datepicker-options="mainVm.sidebar.getData().currentSelected.expirationDateOptions"
                             min="{{mainVm.sidebar.getData().currentSelected.expirationDateOptions.minDate}}"
                             max="{{mainVm.sidebar.getData().currentSelected.expirationDateOptions.maxHTMLDate}}"
-                            name='expiration' ng-model="mainVm.sidebar.getData().currentSelected.expiryDate"
-                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions()" />
+                            name='expirationDate' ng-model="mainVm.sidebar.getData().currentSelected.expiryDate"
+                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions();
+                              mainVm.sidebar.getData().revalidateDateFields(uploadRequestForm)" />
                         </div>
                         <span ng-show="uploadRequestForm.expiration.$invalid" translate
                           translate-interpolation="messageformat"
@@ -270,7 +271,7 @@
 
                   <div ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfActivation.enable"
                     class="col-xs-12 field-ctn clearfix">
-                    <label for="activation" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+                    <label for="activationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                       UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
                     </label>
                     <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
@@ -281,12 +282,13 @@
                           <input working-date-picker ng-click="open($event, 'opened')" type="text"
                             ng-disabled="!mainVm.sidebar.getData().currentSelected.functionalityOfActivation.canOverride"
                             class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
-                            is-open="opened" ng-required="true" name="activation"
+                            is-open="opened" ng-required="true" name="activationDate"
                             datepicker-options="mainVm.sidebar.getData().currentSelected.activationDateOptions"
                             min="{{mainVm.sidebar.getData().currentSelected.activationDateOptions.minHTMLDate}}"
                             max="{{mainVm.sidebar.getData().currentSelected.activationDateOptions.maxHTMLDate}}"
                             ng-model="mainVm.sidebar.getData().currentSelected.activationDate"
-                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions()" />
+                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions();
+                              mainVm.sidebar.getData().revalidateDateFields(uploadRequestForm)" />
                         </div>
                         <span ng-show="uploadRequestForm.activation.$invalid" translate
                           translate-interpolation="messageformat"
@@ -336,7 +338,8 @@
                             min="{{mainVm.sidebar.getData().currentSelected.notificationDateOptions.minHTMLDate}}"
                             max="{{mainVm.sidebar.getData().currentSelected.notificationDateOptions.maxHTMLDate}}"
                             ng-model="mainVm.sidebar.getData().currentSelected.notificationDate"
-                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions()" />
+                            ng-change="mainVm.sidebar.getData().currentSelected.calculateDatePickerOptions();
+                              mainVm.sidebar.getData().revalidateDateFields(uploadRequestForm)" />
                         </div>
                         <span ng-show="uploadRequestForm.notificationDate.$invalid" translate
                           translate-interpolation="messageformat" translate-values="{ min: mainVm.sidebar.getData().currentSelected.getMinDateOfNotification('DD MMM YYYY'),
