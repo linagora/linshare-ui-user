@@ -354,7 +354,7 @@ md-content #content-ctn-sidebar {
 /* add Description component  */
 .description-ctn.form-sidebar {
   position: relative;
-  height: 35px;
+  max-height: 35px;
   overflow: hidden;
   padding-left: 1.33em;
   border: 1px solid #e0e0e0;
@@ -410,7 +410,7 @@ md-content #content-ctn-sidebar {
 
 .description-ctn.form-sidebar.show-full-comment {
   background-color: #fff;
-  height: 112px !important;
+  max-height: 800px;
   cursor: text;
   .comment {
     line-height: 18px;
