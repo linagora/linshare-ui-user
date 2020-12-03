@@ -427,7 +427,7 @@
             </div>
           </div>
           <div id="toolbar-actions" class="hidden-xs">
-            <span>
+            <span ng-if="uploadRequestEntriesVm.uploadRequest.status !== 'ARCHIVED'">
               <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.SHARE'}">
                 <i class="zmdi zmdi-share"></i>
                 <span translate>ACTION.SHARE</span>
