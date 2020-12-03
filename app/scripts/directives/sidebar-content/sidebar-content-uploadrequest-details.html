@@ -269,7 +269,8 @@
                     </div>
                   </div>
 
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfActivation.enable"
+                  <div ng-if="mainVm.sidebar.getData().currentSelected.functionalityOfActivation.enable
+                   && (mainVm.sidebar.getData().currentSelected !== 'ENABLED' && mainVm.sidebar.getData().currentSelected.operation === 'update')"
                     class="col-xs-12 field-ctn clearfix">
                     <label for="activationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                       UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE

@@ -83,6 +83,7 @@ function UploadRequestObjectCoreService(
       self.getMaxDateOfNotification = getMaxDateOfNotification;
       self.calculateDatePickerOptions = calculateDatePickerOptions;
       self.uuid = setPropertyValue(jsonObject.uuid, null);
+      self.status = jsonObject.status;
       self.getOwnerNameOrEmail = getOwnerNameOrEmail;
       self.calculateMaxSize = calculateMaxSize;
 
