@@ -52,7 +52,6 @@ function UploadRequestObjectService(
     dto.canDeleteDocument = self.canDeleteDocument;
     dto.canClose = self.canClose;
     dto.enableNotification = true;
-    dto.dirty = true;
     dto.locale = self.locale;
 
     return dto;

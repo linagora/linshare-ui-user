@@ -108,7 +108,6 @@ function UploadRequestGroupObjectService(
     dto.canClose = self.canClose;
     dto.secured = self.secured;
     dto.enableNotification = true;
-    dto.dirty = true;
     dto.locale = self.locale;
 
     return dto;
