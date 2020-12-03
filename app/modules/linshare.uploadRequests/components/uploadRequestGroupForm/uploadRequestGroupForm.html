@@ -90,8 +90,8 @@
                     RIGHT_PANEL.DETAILS.EXPIRATION_DATE
                   </label>
                   <div class="datepicker-border-fix date-picker dp-blue col-xs-6" ng-class="{'is-opened': opened == true}">
-                    <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.expiration.$touched ||$ctrl.form.$submitted)
-                            && $ctrl.form.expiration.$invalid)}">
+                    <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.expirationDate.$touched ||$ctrl.form.$submitted)
+                            && $ctrl.form.expirationDate.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
                           ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiration.canOverride"
@@ -103,7 +103,7 @@
                           name='expirationDate' ng-model="$ctrl.uploadRequestGroupObject.expiryDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
                       </div>
-                      <span ng-show="$ctrl.form.expiration.$invalid" translate translate-interpolation="messageformat"
+                      <span ng-show="$ctrl.form.expirationDate.$invalid" translate translate-interpolation="messageformat"
                         translate-values="{ value: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration('DD MMM YYYY') }">
                         UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
                       </span>
@@ -228,8 +228,8 @@
                     UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
                   </label>
                   <div class="datepicker-border-fix date-picker dp-blue col-xs-6" ng-class="{'is-opened': opened == true}">
-                    <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.activation.$touched ||$ctrl.form.$submitted)
-                            && $ctrl.form.activation.$invalid)}">
+                    <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.activationDate.$touched ||$ctrl.form.$submitted)
+                            && $ctrl.form.activationDate.$invalid)}">
                       <div class="form-inline">
                         <input working-date-picker ng-click="open($event, 'opened')" type="text"
                           ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfActivation.canOverride"
@@ -241,7 +241,7 @@
                           ng-model="$ctrl.uploadRequestGroupObject.activationDate"
                           ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
                       </div>
-                      <span ng-show="$ctrl.form.activation.$invalid" translate translate-interpolation="messageformat"
+                      <span ng-show="$ctrl.form.activationDate.$invalid" translate translate-interpolation="messageformat"
                         translate-values="{ value: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('DD MMM YYYY') }">
                         UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
                       </span>

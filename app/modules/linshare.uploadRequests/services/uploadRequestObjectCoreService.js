@@ -213,7 +213,9 @@ function UploadRequestObjectCoreService(
   };
 
   function getMinDateOfActivation(format) {
-    return format ? moment().format(format) : moment();
+    const minDate = self.uuid ? moment().add(1, 'day') : moment();
+
+    return format ? minDate.format(format) : minDate;
   }
 
   function getMaxDateOfActivation(format) {
@@ -321,9 +323,9 @@ function UploadRequestObjectCoreService(
       maxHTMLDate: self.getMaxDateOfExpiration('YYYY-MM-DD')
     };
     self.activationDateOptions = {
-      minDate: moment(),
+      minDate: self.getMinDateOfActivation(),
       maxDate: self.getMaxDateOfActivation(),
-      minHTMLDate: moment().format('YYYY-MM-DD'),
+      minHTMLDate: self.getMinDateOfActivation('YYYY-MM-DD'),
       maxHTMLDate: self.getMaxDateOfActivation('YYYY-MM-DD'),
     };
     self.notificationDateOptions = {
