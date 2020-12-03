@@ -9,7 +9,7 @@
             tooltip-placement="bottom"
             tooltip-popup-delay="500"
             is-open="isOpenNew"
-            ng-if="uploadRequestEntriesVm.uploadRequest.status === 'ENABLED'"
+            ng-if="['ENABLED', 'CREATED'].includes(uploadRequestEntriesVm.uploadRequest.status) && uploadRequestEntriesVm.uploadRequestGroup.collective"
             ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle>
               <i class="zmdi zmdi-plus"></i>
@@ -19,7 +19,6 @@
               ng-class="{'open':isOpenNew}">
               <li role="menuitem">
                 <a
-                  ng-class="{'disable-link': !uploadRequestEntriesVm.uploadRequestGroup.collective}"
                   ng-click="uploadRequestEntriesVm.openAddingRecipientsSideBar(uploadRequestEntriesVm.uploadRequestGroup)">
                   <i class="ls-add-user-sm"></i>
                   <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS</span>
