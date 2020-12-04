@@ -526,16 +526,24 @@
                    show-filter="true"
                    data-ng-class="::{'col-4-table' : !linshareModeProduction}">
               <tr data-ng-repeat="($index, nodeItem) in $data track by nodeItem.uuid"
-                  ls-item-selection data-selected-documents="workgroupNodesVm.selectedDocuments"
-                  data-document-file="nodeItem"
-                  data-current-selected-document="workgroupNodesVm.currentSelectedDocument"
-                  data-details-function="workgroupNodesVm.getNodeDetails"
-                  data-right-sidebar-open="mainVm.sidebar.isVisible()"
-                  data-ng-click="backToSidebarContentDetails()"
-                  data-ng-class="{'highlight-list-elem': nodeItem.isSelected ,
-                   'current-vis': workgroupNodesVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
-                   'item-container': !workgroupNodesVm.isDocument(nodeItem.type)}" class="p-b-5" data-ng-dblclick="workgroupNodesVm.goToFolder(nodeItem)"
-                check-table-height>
+                ls-item-selection data-selected-documents="workgroupNodesVm.selectedDocuments"
+                data-document-file="nodeItem"
+                data-current-selected-document="workgroupNodesVm.currentSelectedDocument"
+                data-details-function="workgroupNodesVm.getNodeDetails"
+                data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                ng-click="backToSidebarContentDetails()"
+                ng-class="{'highlight-list-elem': nodeItem.isSelected ,
+                  'current-vis': workgroupNodesVm.currentSelectedDocument.current.uuid === nodeItem.uuid,
+                  'item-container': !workgroupNodesVm.isDocument(nodeItem.type)}"
+                class="p-b-5"
+                ng-dblclick="workgroupNodesVm.goToFolder(nodeItem)"
+                check-table-height
+                jqyoui-draggable="{animate: true, onStart: 'workgroupNodesVm.onStartDragging(nodeItem)'}"
+                jqyoui-droppable="{beforeDrop: 'workgroupNodesVm.onBeforeDropFile', onDrop: 'workgroupNodesVm.onDrop(nodeItem)'}"
+                data-drag="true"
+                data-drop="nodeItem.type === 'FOLDER'"
+                data-jqyoui-options="{revert: 'invalid', revertDuration: 200, hoverClass: 'ui-state-highlight'}"
+              >
                 <td data-header="'favoritsheader.html'" ng-if="::!linshareModeProduction" class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
                   data-title="" header-class="'set-content-right favorits-header col-1 hidden-xs'">
                   <div>
@@ -796,7 +804,7 @@
                   </div>
                 </td>
                 <td
-                  class="hidden-xs"
+                  class="hidden-xs draggable-column-time"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate"
                   data-sortable="'modificationDate'"
@@ -805,7 +813,7 @@
                   {{nodeItem.modificationDate | relativeTime}}
                 </td>
                 <td
-                  class="hidden-xs"
+                  class="hidden-xs draggable-column-size"
                   data-ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
                   data-title="::'TABLE_HEADER.SIZE' | translate"
                   data-sortable="'size'"

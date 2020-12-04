@@ -214,6 +214,27 @@
   tr:hover {
     width: 100% !important;
   }
+  tr.ui-draggable-dragging {
+    width: 300px;
+    border: 1px solid #737373;
+    &:hover {
+      width: 300px !important;
+    }
+    .ctn-name-actions .actions-list-ctn {
+      display: none;
+    }
+    .draggable-column-size {
+      display: none;
+    }
+    .draggable-column-time {
+      display: none;
+    }
+  }
+  tr.ui-state-highlight {
+    border: 1px solid $primary-color;
+    border-radius: 2px;
+    background-color: #e6f7ff !important;
+  }
   > thead > tr > th:first-child,
   > tbody > tr > th:first-child,
   > tfoot > tr > th:first-child,
@@ -263,6 +284,7 @@
     display: block;
     width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     tr {
       height: 48px;
       max-height: 48px;

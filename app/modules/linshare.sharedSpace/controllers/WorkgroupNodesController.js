@@ -1334,5 +1334,72 @@
       }
       workgroupNodesVm.searchMobileDropdown = !workgroupNodesVm.searchMobileDropdown;
     }
+
+    workgroupNodesVm.onBeforeDropFile = onBeforeDropFile;
+
+    function onBeforeDropFile() {
+      workgroupNodesVm.oldNodesList = workgroupNodesVm.nodesList;
+      workgroupNodesVm.oldSelectedDocuments = workgroupNodesVm.selectedDocuments;
+
+      workgroupNodesVm.nodesList = workgroupNodesVm.nodesList.filter((node) => {
+        return node.uuid !== workgroupNodesVm.draggingItem.uuid;
+      });
+
+      workgroupNodesVm.selectedDocuments = workgroupNodesVm.selectedDocuments.filter((node) => {
+        return node.uuid !== workgroupNodesVm.draggingItem.uuid;
+      });
+
+      workgroupNodesVm.tableParamsService.reloadTableParams(workgroupNodesVm.nodesList);
+
+      return $q.resolve();
+    }
+
+    workgroupNodesVm.onStartDragging = onStartDragging;
+
+    function onStartDragging(event, ui, source) {
+      workgroupNodesVm.draggingItem = source;
+    }
+
+    workgroupNodesVm.onDrop = onDrop;
+
+    function onDrop(event, ui, target) {
+      moveNode(workgroupNodesVm.draggingItem, target.uuid)
+        .then(() => {
+          toastService.success({
+            key: 'TOAST_ALERT.ACTION.BROWSER_ACTION',
+            pluralization: true,
+            params: {
+              singular: 'true',
+              action: 'moved',
+              folderName: target.name
+            }
+          });
+        })
+        .catch(() => {
+          workgroupNodesVm.nodesList = workgroupNodesVm.oldNodesList;
+          workgroupNodesVm.selectedDocuments = workgroupNodesVm.oldSelectedDocuments;
+          workgroupNodesVm.tableParamsService.reloadTableParams(workgroupNodesVm.nodesList);
+          toastService.error({
+            key: 'TOAST_ALERT.ERROR.BROWSER_ACTION',
+            pluralization: true,
+            params: {
+              action: 'moved',
+              nbNodes: 1,
+              singular: 'true'
+            }
+          });
+        });
+    }
+
+    /**
+     * @name moveNode
+     * @desc Move the node
+     * @memberOf linshare.components.BrowseController
+     */
+    function moveNode(source, target) {
+      source.parent = target;
+
+      return workgroupNodesRestService.update(source.workGroup, source);
+    }
   }
 })();

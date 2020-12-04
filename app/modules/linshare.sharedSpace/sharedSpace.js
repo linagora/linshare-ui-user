@@ -7,6 +7,7 @@
       [
         'linshare.utils',
         'pascalprecht.translate',
+        'ngDragDrop'
       ]);
 
 })();
