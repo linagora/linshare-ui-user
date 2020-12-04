@@ -12,14 +12,9 @@
   BrowseController.$inject = [
     '_',
     '$q',
-    '$scope',
-    '$timeout',
     '$transitions',
-    '$translate',
     'functionalityRestService',
     'itemUtilsService',
-    'lsErrorCode',
-    'toastService',
     'workgroupNodesRestService',
     'workgroupPermissionsService',
     'workgroupRestService',
@@ -36,14 +31,9 @@
   function BrowseController(
     _,
     $q,
-    $scope,
-    $timeout,
     $transitions,
-    $translate,
     functionalityRestService,
     itemUtilsService,
-    lsErrorCode,
-    toastService,
     workgroupNodesRestService,
     workgroupPermissionsService,
     workgroupRestService,
@@ -354,8 +344,8 @@
         }, browseVm.currentFolder.workGroup);
 
         browseVm.restService.create(browseVm.currentFolder.workGroup, newFolderObject, false)
-          .then(() => {
-            browseVm.currentList.unshift(newFolderObject);
+          .then(newlyCreatedFolder => {
+            browseVm.currentList.unshift(newlyCreatedFolder);
             hideCreateFolderInput();
           });
       }
