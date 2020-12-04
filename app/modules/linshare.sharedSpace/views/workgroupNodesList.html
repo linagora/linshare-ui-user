@@ -544,7 +544,7 @@
                   </div>
                 </td>
                 <td data-header="'checkboxheader.html'" class="center set-content-left thumb-type-item thumb-groups-preview-ls" header-class="'col-2 checkbox-col'">
-                  <a data-ng-click="(showCheckboxes || !isMobile) ? workgroupNodesVm.addSelectedDocument(nodeItem) : null">
+                  <a ng-click="isDesktop || isTablet || showCheckboxes ? workgroupNodesVm.addSelectedDocument(nodeItem) : null">
                     <div data-ng-class="{ 'invisible' : showCheckboxes && isMobile}">
                       <i data-ng-if="::workgroupNodesVm.isDocument(nodeItem.type)" data-ng-class="'{{::nodeItem.mimeType | mimetypeIcone}}'"></i>
                       <i data-ng-if="::!workgroupNodesVm.isDocument(nodeItem.type)" class="ls-folder"></i>

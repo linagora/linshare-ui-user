@@ -77,6 +77,8 @@
 
     //TODO Mobile Device Detector
     $rootScope.isMobile = deviceDetector.isMobile();
+    $rootScope.isTablet = deviceDetector.isTablet();
+    $rootScope.isDesktop = deviceDetector.isDesktop();
     $rootScope.mobileWidthBreakpoint = 768;
     $rootScope.sidebarLeftWidth = 268;
     $rootScope.sidebarRightWidth = 350;
