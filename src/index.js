@@ -22,6 +22,7 @@ require('angular-ui-bootstrap/dist/ui-bootstrap-tpls');
 require('@uirouter/angularjs/release/angular-ui-router');
 require('jquery/dist/jquery');
 require('jqueryui/jquery-ui.min.js');
+require('jquery-ui-touch-punch/jquery.ui.touch-punch.min.js');
 require('bootstrap/dist/js/bootstrap');
 require('js-base64/base64');
 require('lodash/lodash');
