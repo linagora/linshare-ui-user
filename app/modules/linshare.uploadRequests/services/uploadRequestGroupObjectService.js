@@ -109,6 +109,7 @@ function UploadRequestGroupObjectService(
     dto.secured = self.secured;
     dto.enableNotification = true;
     dto.locale = self.locale;
+    dto.dirty = false;
 
     return dto;
   }
@@ -138,6 +139,7 @@ function UploadRequestGroupObjectService(
     dto.secured = self.secured;
     dto.enableNotification = true;
     dto.locale = self.locale;
+    dto.dirty = true;
 
     return dto;
   }
