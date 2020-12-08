@@ -511,13 +511,13 @@
       "UPLOAD_REQUEST_GROUP": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez créé un nouveau groupe de demandes de téléchargement : {{resourceName}}.",
+            "SENTENCE": "Vous avez créé un nouveau groupe de demande de dépôt : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez modifié le groupe de demandes de téléchargement: {{resourceName}}.",
+            "SENTENCE": "La demande de téléchargement {{resourceName}} a été modifiée.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -775,6 +775,15 @@
       "ADMIN": "Administrateur",
       "WRITE": "Écriture",
       "READ": "Lecture"
+    },
+    "UPDATED_FIELDS_UPLOAD_REQUEST_GROUP": {
+      "STATUS_TITLE": "statut",
+      "STATUS": {
+        "ARCHIVED": "archivé",
+        "ENABLED": "activé",
+        "CLOSED": "fermé",
+        "CREATED": "en attente"
+      }
     }
   },
   "DISABLED": "Désactivé",

@@ -453,7 +453,7 @@
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã chỉnh sửa yêu cầu tải lên: {{resourceName}}.",
+            "SENTENCE": "Yêu cầu tải lên {{resourceName}} đã được chỉnh sửa.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -701,6 +701,15 @@
       "ADMIN": "Người quản lý",
       "WRITE": "Viết",
       "READ": "Đọc"
+    },
+    "UPDATED_FIELDS_UPLOAD_REQUEST_GROUP": {
+      "STATUS_TITLE": "Trạng thái",
+      "STATUS": {
+        "ARCHIVED": "lưu trữ",
+        "ENABLED": "mở",
+        "CLOSED": "đóng",
+        "CREATED": "đang chờ"
+      }
     }
   },
   "DISABLED": "Tắt",

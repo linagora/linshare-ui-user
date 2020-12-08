@@ -517,7 +517,7 @@
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "You have edited the Upload request group: {{resourceName}}.",
+            "SENTENCE": "Upload request {{resourceName}} has been edited.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -775,6 +775,15 @@
       "ADMIN": "Administrator",
       "WRITE": "Write",
       "READ": "Read"
+    },
+    "UPDATED_FIELDS_UPLOAD_REQUEST_GROUP": {
+      "STATUS_TITLE": "Status",
+      "STATUS": {
+        "ARCHIVED": "archived",
+        "ENABLED": "active",
+        "CLOSED": "closed",
+        "CREATED": "pending"
+      }
     }
   },
   "DISABLED": "Disabled",

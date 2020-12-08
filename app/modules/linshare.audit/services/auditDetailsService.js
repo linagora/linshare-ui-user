@@ -83,12 +83,15 @@
         'mail': 'NAME',
         'restricted': 'RESTRICTED',
         'right': 'RIGHT',
-        'folder': 'FOLDER'
+        'folder': 'FOLDER',
+        'uploadRequestStatusTitle': 'STATUS_TITLE',
+        'uploadRequestStatus': 'STATUS'
       },
       UPDATE_FIELDS_KEYS_PREFIX = 'DETAILS_POPUP.UPDATED_FIELDS.',
       UPDATE_FIELDS_RIGHTS_KEYS_PREFIX = 'DETAILS_POPUP.UPDATED_FIELDS_RIGHTS.',
       UPDATE_FIELDS_TO_CHECK = ['canCreateGuest', 'canUpload', 'expirationDate', 'firstName', 'identifier', 'lastName',
-        'mail', 'name', 'restricted', 'folder'];
+        'mail', 'name', 'restricted', 'folder'],
+      UPDATE_FILEDS_UPLOAD_REQUEST_GROUP_PREFIX = 'DETAILS_POPUP.UPDATED_FIELDS_UPLOAD_REQUEST_GROUP';
 
     var
       authorMe,
@@ -483,6 +486,7 @@
         setUpdatedValuesGuestExpirationDate(auditAction, updatedValues);
         setUpdatedValuesWorkgroupDocument(auditAction, updatedValues);
         setUpdatedValuesWorkgroupMember(auditAction, updatedValues);
+        setUpdatedValuesUploadRequestGroup(auditAction, updatedValues);
       }
       
       return updatedValues;
@@ -531,6 +535,28 @@
             newValue: $filter('date')(newDate, 'shortDate'),
             oldValueFull: $filter('date')(oldDate, 'medium'),
             newValueFull: $filter('date')(newDate, 'medium')
+          };
+        }
+      }
+    }
+
+    /**
+     * @name setUpdatedValuesUploadRequestGroup
+     * @desc Set upload request group updates's audit values
+     * @param {Object} auditAction - One audit action
+     * @param {Object} updatedValues - Object to fill with updated values
+     * @memberOf LinShare.audit.auditDetailsService
+     */
+    function setUpdatedValuesUploadRequestGroup(auditAction, updatedValues) {
+      if (auditAction.type === TYPES_KEY.UPLOAD_REQUEST_GROUP) {
+        const oldObject = auditAction.resource;
+        const updatedObject = auditAction.resourceUpdated;
+
+        if (oldObject.status !== updatedObject.status) {
+          updatedValues.status = {
+            keyName:  `${UPDATE_FILEDS_UPLOAD_REQUEST_GROUP_PREFIX}.${UPDATE_FIELDS_KEY.uploadRequestStatusTitle}`,
+            oldValue: `${UPDATE_FILEDS_UPLOAD_REQUEST_GROUP_PREFIX}.${UPDATE_FIELDS_KEY.uploadRequestStatus}.${oldObject.status}`,
+            newValue: `${UPDATE_FILEDS_UPLOAD_REQUEST_GROUP_PREFIX}.${UPDATE_FIELDS_KEY.uploadRequestStatus}.${updatedObject.status}`
           };
         }
       }
