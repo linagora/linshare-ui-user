@@ -3,9 +3,9 @@
     "TITLE": "Authentification double facteur",
     "SHARED_KEY_CREATION": {
       "REQUIRED": "L'activation de l'authentification double facteur est requise, vous devez l'activer pour continuer à utiliser LinShare",
-      "INSTRUCTION": "Pour activer un second facteur d'authentification pour votre compte:",
+      "INSTRUCTION": "Pour activer un second facteur d'authentification pour votre compte :",
       "STEP_1": "Téléchargez et installez l'application d'authentification FreeOTP en scannant le QR code ou en suivant les liens.",
-      "STEP_2": "Générez la clé partagée et utilisez l'application FreeOTP pour scanner le QR code ou ajoutez la clé comme suit:",
+      "STEP_2": "Générez la clé partagée et utilisez l'application FreeOTP pour scanner le QR code ou ajoutez la clé comme suit :",
       "APPSTORE_LINK": "FreeOTP sur App Store",
       "GOOGLEPLAY_LINK": "FreeOTP sur Google Play",
       "GENERATE_KEY": "Générer une clé partagée",
