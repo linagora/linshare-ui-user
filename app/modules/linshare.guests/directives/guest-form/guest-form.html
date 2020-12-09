@@ -176,7 +176,7 @@
             </label>
           </div>
         </div>
-        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!guestObject.form.activateRestricted || !guestObject.restricted">
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!guestObject.restricted">
           <x-ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
             <div class="form-group fg-line">
               <div ls-autocomplete-user="USERS" disabled="!guestObject.allowedToRestrict.canOverride" data-selected-users-list="guestObject.restrictedContacts"
