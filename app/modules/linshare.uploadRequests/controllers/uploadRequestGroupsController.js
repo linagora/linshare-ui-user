@@ -117,9 +117,9 @@ function uploadRequestGroupsController(
    *                           See app/views/includes/sidebar-right.html for possible values
    * @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
-  function loadSidebarContent(content, groupMode, uploadRequestGroupObject) {
-    uploadRequestGroupsVm.groupMode = groupMode;
-    uploadRequestGroupsVm.uploadRequestGroupObject = new UploadRequestGroupObjectService( uploadRequestGroupObject || { groupMode });
+  function loadSidebarContent(content, collective, uploadRequestGroupObject) {
+    uploadRequestGroupsVm.collective = collective;
+    uploadRequestGroupsVm.uploadRequestGroupObject = new UploadRequestGroupObjectService( uploadRequestGroupObject || { collective });
     $scope.mainVm.sidebar.setData(uploadRequestGroupsVm);
     $scope.mainVm.sidebar.setContent(content || lsAppConfig.uploadRequestGroupCreate);
     $scope.mainVm.sidebar.show();

@@ -68,7 +68,7 @@ function UploadRequestGroupObjectService(
   function create() {
     self = this;
 
-    return uploadRequestGroupRestService.create(self.toDTO(), { groupMode: self.groupMode });
+    return uploadRequestGroupRestService.create(self.toDTO(), { collective: self.collective });
   }
 
   /**

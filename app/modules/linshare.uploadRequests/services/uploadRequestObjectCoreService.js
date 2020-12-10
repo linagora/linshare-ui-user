@@ -69,7 +69,7 @@ function UploadRequestObjectCoreService(
       self.locale = setPropertyValue(jsonObject.locale, functionalityOfNotificationLanguage.value);
       self.label = setPropertyValue(jsonObject.label, '');
       self.owner = setPropertyValue(jsonObject.owner, {});
-      self.groupMode = setPropertyValue(jsonObject.groupMode, false);
+      self.collective = setPropertyValue(jsonObject.collective, false);
       self.body = setPropertyValue(jsonObject.body, '');
       self.recipients = setPropertyValue(jsonObject.recipients, []);
       self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');

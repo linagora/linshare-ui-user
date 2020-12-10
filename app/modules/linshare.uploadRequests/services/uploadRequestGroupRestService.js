@@ -42,7 +42,7 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
   function create(uploadRequestDto, options) {
     $log.debug('uploadRequestGroupRestService : create', uploadRequestDto);
 
-    return handler(Restangular.all(restUrl).post(uploadRequestDto, { groupMode: !!options.groupMode }));
+    return handler(Restangular.all(restUrl).post(uploadRequestDto, { collective: !!options.collective }));
   }
 
   /**
