@@ -10,18 +10,19 @@
     .module('linshare.authentication')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$log', 'authenticationRestService'];
+  AuthenticationController.$inject = ['$scope', '$state', '$window', 'authenticationRestService', 'lsAppConfig', 'lsUserConfig'];
 
   /**
    * @namespace AuthenticationController
    * @desc Application authentication system controller
    * @memberOf LinShare.Authentication
    */
-  function AuthenticationController($scope, $log, authenticationRestService) {
-    /* jshint validthis: true */
+  function AuthenticationController($scope, $state, $window, authenticationRestService, lsAppConfig, lsUserConfig) {
     var authenticationVm = this;
 
     authenticationVm.logout = logout;
+    authenticationVm.goToChangePassword = goToChangePassword;
+    authenticationVm.changePasswordUrl = lsUserConfig.changePasswordUrl || lsAppConfig.changePasswordUrl;
 
     ////////////
 
@@ -32,6 +33,14 @@
      */
     function logout() {
       authenticationRestService.logout();
+    }
+
+    function goToChangePassword() {
+      if ($scope.loggedUser.accountType === 'GUEST') {
+        $state.go('changePassword');
+      } else if ($scope.loggedUser.accountType === 'INTERNAL') {
+        $window.open(authenticationVm.changePasswordUrl);
+      }
     }
   }
 })();

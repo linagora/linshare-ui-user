@@ -121,14 +121,14 @@
                 </div>
               </div>
             </li>
-            <li class="dropdown hidden-xs" uib-dropdown>
+            <li ng-controller="AuthenticationController as authenticationVm" class="dropdown hidden-xs" uib-dropdown>
               <a uib-dropdown-toggle href=""><i class="tm-icon ls-my-profile"></i></a>
               <ul class="dropdown-menu dm-icon pull-right">
                 <li>
                   <a href="">{{::loggedUser.firstName}} {{::loggedUser.lastName}}</a>
                 </li>
-                <li ng-if="loggedUser.accountType === 'GUEST'">
-                  <a href="" ui-sref="changePassword">
+                <li ng-if="['GUEST', 'INTERNAL'].includes(loggedUser.accountType)">
+                  <a ng-click="authenticationVm.goToChangePassword()">
                     <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
                   </a>
                 </li>
@@ -144,7 +144,7 @@
                   <a href=""><i class="zmdi ls-settings"></i> <span translate>HEADER.SETTINGS</span></a>
                 </li>
                 <li>
-                  <a data-ng-controller="AuthenticationController as authenticationVm" data-ng-click="authenticationVm.logout(); $flow.cancel()">
+                  <a data-ng-click="authenticationVm.logout(); $flow.cancel()">
                     <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
                   </a>
                 </li>

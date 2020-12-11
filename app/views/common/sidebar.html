@@ -23,14 +23,16 @@
         </div>
       </div>
     </div>
-  <div id="navigation">
+  <div id="navigation" ng-controller="AuthenticationController as authenticationVm">
     <ul class="main-menu profile-menu-links" ng-class="{'show-menu-links' : toggleSlide}">
       <li>
-        <a data-ng-controller="AuthenticationController as authenticationVm"
-           data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
+        <a data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
           <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
         </a>
-        <a ui-sref="changePassword" ng-if="loggedUser.accountType === 'GUEST'">
+        <a
+          ng-if="['INTERNAL', 'GUEST'].includes(loggedUser.accountType)"
+          ng-click="authenticationVm.goToChangePassword()""
+        >
           <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
         </a>
         <a ui-sref="secondFactorAuthentication" ng-if="mainVm.show2FA">

@@ -17,6 +17,7 @@
       //Warning: the following parameter will not be use if you defined a logout url via
       //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
       postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
+      changePasswordUrl: null, //default : null, custom the url of identity service to change password for internal user. Example 'https://www.my.fake.page.com'
       applicationLogo : {
         small : require('../images/common/linshare-logo-white.png').default,
         large : require('../images/ls-logo-big.png').default
