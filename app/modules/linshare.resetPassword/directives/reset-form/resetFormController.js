@@ -12,9 +12,9 @@
     }])
     .controller('ResetFormController', ResetFormController);
 
-  ResetFormController.$inject = ['_', '$scope', '$translate', 'languageService'];
+  ResetFormController.$inject = ['_', '$scope', '$translate', 'languageService', 'lsUserConfig', 'lsAppConfig'];
 
-  function ResetFormController(_, $scope, $translate, languageService) {
+  function ResetFormController(_, $scope, $translate, languageService, lsUserConfig, lsAppConfig) {
     /* jshint validthis:true */
     var resetFormVm = this;
 
@@ -24,6 +24,7 @@
       resetFormVm.getFormData = getFormData;
       resetFormVm.languageService = languageService;
       resetFormVm.resetSubmit = resetSubmit;
+      resetFormVm.changePasswordUrl = lsUserConfig.changePasswordUrl || lsAppConfig.changePasswordUrl;
       resetFormVm.message = {
         key: 'RESET.FORM.INFO.' + resetFormVm.resetType.toUpperCase(),
         params: resetFormVm.resetData

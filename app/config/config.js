@@ -15,6 +15,8 @@
       debug: false,
       localPath: 'i18n/original', // custom your i18n folder path
 
+      changePasswordUrl: null, // custom the url of identity service to change password for internal user
+
       // To override the application logo set the url of the image corresponding
       // to the sizes (small 155x29 and big 500x192)
       applicationLogo : {
