@@ -10,19 +10,19 @@
     .module('linshare.authentication')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$state', '$window', 'authenticationRestService', 'lsAppConfig', 'lsUserConfig'];
+  AuthenticationController.$inject = ['$scope', '$state', '$window', 'authenticationRestService', 'lsAppConfig'];
 
   /**
    * @namespace AuthenticationController
    * @desc Application authentication system controller
    * @memberOf LinShare.Authentication
    */
-  function AuthenticationController($scope, $state, $window, authenticationRestService, lsAppConfig, lsUserConfig) {
+  function AuthenticationController($scope, $state, $window, authenticationRestService, lsAppConfig) {
     var authenticationVm = this;
 
     authenticationVm.logout = logout;
     authenticationVm.goToChangePassword = goToChangePassword;
-    authenticationVm.changePasswordUrl = lsUserConfig.changePasswordUrl || lsAppConfig.changePasswordUrl;
+    authenticationVm.changePasswordUrl = lsAppConfig.changePasswordUrl;
 
     ////////////
 
