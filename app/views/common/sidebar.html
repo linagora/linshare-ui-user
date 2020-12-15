@@ -30,7 +30,7 @@
           <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
         </a>
         <a
-          ng-if="['INTERNAL', 'GUEST'].includes(loggedUser.accountType)"
+          ng-if="authenticationVm.canChangePassword()"
           ng-click="authenticationVm.goToChangePassword()""
         >
           <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
