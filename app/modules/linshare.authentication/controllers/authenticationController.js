@@ -22,6 +22,7 @@
 
     authenticationVm.logout = logout;
     authenticationVm.goToChangePassword = goToChangePassword;
+    authenticationVm.canChangePassword = canChangePassword;
     authenticationVm.changePasswordUrl = lsAppConfig.changePasswordUrl;
 
     ////////////
@@ -33,6 +34,10 @@
      */
     function logout() {
       authenticationRestService.logout();
+    }
+
+    function canChangePassword() {
+      return $scope.loggedUser.accountType === 'GUEST' || authenticationVm.changePasswordUrl;
     }
 
     function goToChangePassword() {

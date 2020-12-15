@@ -127,7 +127,7 @@
                 <li>
                   <a href="">{{::loggedUser.firstName}} {{::loggedUser.lastName}}</a>
                 </li>
-                <li ng-if="['GUEST', 'INTERNAL'].includes(loggedUser.accountType)">
+                <li ng-if="authenticationVm.canChangePassword()">
                   <a ng-click="authenticationVm.goToChangePassword()">
                     <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
                   </a>
