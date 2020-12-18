@@ -447,7 +447,7 @@
       "UPLOAD_REQUEST_GROUP": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã tạo một yêu cầu tải lên mới : {{resourceName}}.",
+            "SENTENCE": "Bạn đã tạo một yêu cầu tải lên mới có tên {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
@@ -747,8 +747,8 @@
       "SHARE_ENTRY": "Chia sẻ",
       "USER": "Người dùng",
       "UPLOAD_REQUEST": "Yêu cầu tải lên",
-      "UPLOAD_REQUEST_GROUP": "Yêu cầu tải lên nhóm",
-      "UPLOAD_REQUEST_URL": "URL yêu cầu tải lên",
+      "UPLOAD_REQUEST_GROUP": "Nhóm yêu cầu tải lên",
+      "UPLOAD_REQUEST_URL": "Đường dẫn yêu cầu tải lên",
       "WORKGROUP": "Nhóm làm việc",
       "WORKGROUP_DOCUMENT": "Tệp nhóm làm việc",
       "WORKGROUP_FOLDER": "Thư mục nhóm làm việc",

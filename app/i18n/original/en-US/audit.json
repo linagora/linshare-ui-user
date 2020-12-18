@@ -511,7 +511,7 @@
       "UPLOAD_REQUEST_GROUP": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "You have created a new Upload request group : {{resourceName}}.",
+            "SENTENCE": "You have created a new upload request named {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
@@ -824,8 +824,8 @@
       "SHARE_ENTRY": "Share",
       "USER": "User",
       "UPLOAD_REQUEST": "Upload request",
-      "UPLOAD_REQUEST_GROUP": "Upload request group",
-      "UPLOAD_REQUEST_URL": "Upload request URL",
+      "UPLOAD_REQUEST_GROUP": "Set of upload requests",
+      "UPLOAD_REQUEST_URL": "Upload request link",
       "WORKGROUP": "Workgroup",
       "WORKGROUP_DOCUMENT": "Workgroup file",
       "WORKGROUP_FOLDER": "Workgroup folder",

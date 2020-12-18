@@ -511,7 +511,7 @@
         "UPLOAD_REQUEST_GROUP": {
           "CREATE": {
             "AUTHOR": {
-              "SENTENCE": "Вы создали группу запросов на загрузку : {{resourceName}}.",
+              "SENTENCE": "Вы создали новый запрос на загрузку под названием {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
             }
           },
@@ -824,8 +824,8 @@
         "SHARE_ENTRY": "Общий доступ",
         "USER": "Пользователь",
         "UPLOAD_REQUEST": "Запрос на отправку",
-        "UPLOAD_REQUEST_GROUP": "Группа запросов на загрузку",
-        "UPLOAD_REQUEST_URL": "URL запроса на загрузку",
+        "UPLOAD_REQUEST_GROUP": "Набор запросов на загрузку",
+        "UPLOAD_REQUEST_URL": "ссылка на запрос загрузки",
         "WORKGROUP": "Рабочая группа",
         "WORKGROUP_DOCUMENT": "Рабочая группа - Файл",
         "WORKGROUP_FOLDER": "Рабочая группа - Папка",

@@ -511,13 +511,13 @@
       "UPLOAD_REQUEST_GROUP": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez créé un nouveau groupe de demande de dépôt : {{resourceName}}.",
+            "SENTENCE": "Vous avez créé une nouvelle invitation de dépôt nommée {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "La demande de téléchargement {{resourceName}} a été modifiée.",
+            "SENTENCE": "La invitation de dépôt {{resourceName}} a été modifiée.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
@@ -823,9 +823,9 @@
       "JWT_PERMANENT_TOKEN": "Jeton d'accès permanent (JWT)",
       "SHARE_ENTRY": "Partage",
       "USER": "Utilisateur",
-      "UPLOAD_REQUEST": "Inv. de dépot",
-      "UPLOAD_REQUEST_GROUP": "Inv. de dépot de groupe",
-      "UPLOAD_REQUEST_URL": "Inv. de dépot URL",
+      "UPLOAD_REQUEST": "Invitation de dépôt",
+      "UPLOAD_REQUEST_GROUP": "Ensemble de invitation de dépôt",
+      "UPLOAD_REQUEST_URL": "Invitation de dépôt lien",
       "WORKGROUP": "Groupe de Travail",
       "WORKGROUP_DOCUMENT": "Groupe de Travail - Fichier",
       "WORKGROUP_FOLDER": "Groupe de Travail - Dossier",
