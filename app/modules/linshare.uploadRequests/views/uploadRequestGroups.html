@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
-          <div ng-if="uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.archived'" class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
+          <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
             auto-close="always" tooltip-placement="bottom" tooltip-popup-delay="500" is-open="isOpenNew"
             ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle>
@@ -41,7 +41,7 @@
               <i class="zmdi zmdi-pin-account"></i>
               <span translate>UPLOAD_REQUESTS.TITLE</span>
             </a>
-            <a href="javascript:void(0)">
+            <a class="click-disabled">
               <span ng-switch="uploadRequestGroupsVm.currentStateName"> |
                 <span ng-switch-when="uploadRequestGroups.pending" translate> UPLOAD_REQUESTS.MENU_ENTRIES.PENDING</span>
                 <span ng-switch-when="uploadRequestGroups.activeClosed" translate> UPLOAD_REQUESTS.MENU_ENTRIES.ACTIVE_CLOSED</span>
