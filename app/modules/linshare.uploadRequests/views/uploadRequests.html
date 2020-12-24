@@ -35,7 +35,16 @@
               </a>
             </div>
 
-            <div id="root-level" class="upload-request-label m-r-5">
+            <div id="page-root-link" ng-click="uploadRequestsVm.goBack()">
+              <a>
+                <i class="ls-upload-request"></i>
+              </a>
+              <span class="sub-category-chevron">
+                <i class="zmdi zmdi-chevron-right"></i>
+              </span>
+            </div>
+
+            <div id="root-level" class="upload-request-label">
               <a
                 class="set-ellipsis"
                 tooltip-placement="bottom"
@@ -43,13 +52,16 @@
                 tooltip-popup-delay="1200"
                 uib-tooltip="{{::uploadRequestsVm.uploadRequest.label}}"
               >
-                <i class="ls-upload-request-alt"></i>
                 {{::uploadRequestsVm.uploadRequestGroup.label}}
               </a>
             </div>
 
-            <upload-request-status upload-request="uploadRequestsVm.uploadRequestGroup"></upload-request-status>
           </div>
+
+          <upload-request-status
+            class="m-l-10 hidden-xs"
+            upload-request="uploadRequestsVm.uploadRequestGroup">
+          </upload-request-status>
 
           <div id="action-header" class="upload-request-action-header">
             <div class="fg-line toolbar-actions-items">

@@ -115,7 +115,7 @@
         color: $primary-color !important;
       }
     }
-    div.folder-level {
+    .folder-level {
       &:last-child a:last-of-type {
         cursor: default;
         color: $primary-color !important;

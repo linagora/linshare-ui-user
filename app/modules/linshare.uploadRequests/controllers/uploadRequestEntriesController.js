@@ -91,8 +91,12 @@ function uploadRequestEntriesController(
       });
   }
 
-  function goBack() {
+  function goBack(options = { toUploadRequestGroup: false }) {
     if (uploadRequest.collective) {
+      options.toUploadRequestGroup = true;
+    }
+
+    if (options.toUploadRequestGroup) {
       const status = _.findKey(
         UPLOAD_REQUESTS_STATE_STATUS_MAPPING,
         state => state.includes(uploadRequest.status)

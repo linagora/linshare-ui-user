@@ -25,9 +25,13 @@
 .upload-request-status {
   text-transform: none;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  height: 100%;
 
   i {
     color: #43A047;
+    margin-right: 3px;
 
     &.closed {
       color: #696969;

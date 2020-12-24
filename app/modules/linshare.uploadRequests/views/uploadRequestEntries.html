@@ -29,7 +29,7 @@
 
           <div
             class="breadcrumbs-ctn hidden-xs"
-            ng-class="{ 'lv2-break': !uploadRequestEntriesVm.uploadRequest.collective }"
+            ng-class="{ 'lv1-break': !uploadRequestEntriesVm.uploadRequest.collective }"
           >
             <div
               class="left-arrow actions"
@@ -38,13 +38,38 @@
                 <i class="ls-previous-caret"></i>
               </a>
             </div>
-            <div id="root-level">
+
+            <div id="page-root-link" ng-click="uploadRequestEntriesVm.goBack({ toUploadRequestGroup: true })">
+              <a>
+                <i class="ls-upload-request"></i>
+              </a>
+            </div>
+
+            <div
+              id="root-level"
+              tooltip-placement="bottom"
+              tooltip-append-to-body="true"
+              tooltip-popup-delay="1200"
+              uib-tooltip="{{::uploadRequestEntriesVm.uploadRequest.label}}"
+            >
+              <span class="sub-category-chevron">
+                <i class="zmdi zmdi-chevron-right"></i>
+              </span>
               <a
                 class="set-ellipsis"
-                tooltip-placement="bottom"
-                tooltip-append-to-body="true"
-                tooltip-popup-delay="1200"
-                uib-tooltip="{{::uploadRequestEntriesVm.uploadRequest.label}}"
+                ng-if="!uploadRequestEntriesVm.uploadRequest.collective"
+                ui-sref="uploadRequests"
+                ui-sref-opts="{
+                  uploadRequestGroupUuid: uploadRequestEntriesVm.uploadRequestGroup.uuid,
+                  reload: true
+                }"
+              >
+                {{::uploadRequestEntriesVm.uploadRequest.label}}
+              </a>
+
+              <a
+                class="set-ellipsis"
+                ng-if="uploadRequestEntriesVm.uploadRequest.collective"
               >
                 <i class="ls-upload-request-alt"></i>
                 {{::uploadRequestEntriesVm.uploadRequest.label}}
@@ -68,11 +93,12 @@
                 {{::uploadRequestEntriesVm.uploadRequest.recipients[0].mail}}
               </a>
             </div>
-
-            <div class="m-l-5">
-              <upload-request-status upload-request="uploadRequestEntriesVm.uploadRequest"></upload-request-status>
-            </div>
           </div>
+
+          <upload-request-status
+            class="m-l-10 hidden-xs"
+            upload-request="uploadRequestEntriesVm.uploadRequest">
+          </upload-request-status>
 
           <div id="action-header">
             <div class="fg-line toolbar-actions-items">
