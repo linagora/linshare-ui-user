@@ -13,8 +13,8 @@
             <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided" uib-dropdown-menu=""
               ng-class="{'open':isOpenNew}">
               <li role="menuitem">
-                <a uib-tooltip="{{'UPLOAD_REQUESTS.CREATION_TYPE.COLLECTIVE_TOOLTIP' | translate}}"
-                  tooltip-append-to-body="true"
+                <a
+                  uib-tooltip="{{'UPLOAD_REQUESTS.CREATION_TYPE.COLLECTIVE_TOOLTIP' | translate}}"
                   tooltip-placement="top"
                   ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, true)"
                 >
@@ -26,7 +26,6 @@
               <li role="menuitem">
                 <a
                   uib-tooltip="{{'UPLOAD_REQUESTS.CREATION_TYPE.INDIVIDUAL_TOOLTIP' | translate}}"
-                  tooltip-append-to-body="true"
                   tooltip-placement="top"
                   ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, false)"
                 >
