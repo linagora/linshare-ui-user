@@ -221,17 +221,21 @@
                     RIGHT_PANEL.SHARE.SETTINGS
                   </h2>
                 </div>
-                <div ng-if="$ctrl.uploadRequestGroupObject.functionalityOfActivation.enable
-                  && ($ctrl.uploadRequestGroupObject.status !== 'ENABLED' && $ctrl.operation === 'update' || $ctrl.operation !== 'update')"
+                <div ng-if="$ctrl.uploadRequestGroupObject.functionalityOfActivation.enable"
                   class="col-xs-12 field-ctn clearfix">
                   <label for="activationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
                   </label>
-                  <div class="datepicker-border-fix date-picker dp-blue col-xs-6" ng-class="{'is-opened': opened == true}">
+                  <div
+                    class="datepicker-border-fix date-picker dp-blue col-xs-6"
+                    ng-class="{'is-opened': opened == true}"
+                    ng-if="$ctrl.uploadRequestGroupObject.status !== 'ENABLED' && $ctrl.operation === 'update' || $ctrl.operation !== 'update'"
+                  >
                     <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.activationDate.$touched ||$ctrl.form.$submitted)
                             && $ctrl.form.activationDate.$invalid)}">
                       <div class="form-inline">
-                        <input working-date-picker ng-click="open($event, 'opened')" type="text"
+                        <input
+                          working-date-picker ng-click="open($event, 'opened')" type="text"
                           ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfActivation.canOverride"
                           class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                           is-open="opened" ng-required="true" name="activationDate"
@@ -246,6 +250,11 @@
                         UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
                       </span>
                     </div>
+                  </div>
+                  <div class="text-right" ng-if="$ctrl.uploadRequestGroupObject.status === 'ENABLED' && $ctrl.operation === 'update'">
+                    <span>
+                      {{ $ctrl.uploadRequestGroupObject.activationDate | lsDate:'longDate' }}
+                    </span>
                   </div>
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
