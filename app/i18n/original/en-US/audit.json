@@ -522,6 +522,20 @@
           }
         }
       },
+      "UPLOAD_REQUEST": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Upload request has been created.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Upload request has been updated.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "UPLOAD_REQUEST_URL": {
         "CREATE": {
           "AUTHOR": {

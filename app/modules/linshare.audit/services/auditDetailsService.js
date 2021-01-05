@@ -54,6 +54,7 @@
         'WORKGROUP_MEMBER': 'ls-user',
         'JWT_PERMANENT_TOKEN': 'zmdi zmdi-badge-check',
         'UPLOAD_REQUEST_GROUP': 'zmdi zmdi-pin-account',
+        'UPLOAD_REQUEST': 'zmdi zmdi-pin-account',
         'UPLOAD_REQUEST_URL': 'zmdi zmdi-link'
       },
       TYPES_KEY = {
@@ -69,6 +70,7 @@
         WORKGROUP_FOLDER: 'WORKGROUP_FOLDER',
         WORKGROUP_MEMBER: 'WORKGROUP_MEMBER',
         JWT_PERMANENT_TOKEN: 'JWT_PERMANENT_TOKEN',
+        UPLOAD_REQUEST: 'UPLOAD_REQUEST',
         UPLOAD_REQUEST_GROUP: 'UPLOAD_REQUEST_GROUP',
         UPLOAD_REQUEST_URL: 'UPLOAD_REQUEST_URL'
       },
@@ -296,6 +298,10 @@
         resourceName = (auditAction.resource.uuid === loggedUserUuid) ? authorMe : setFullName(auditAction.resource);
       } else if (auditAction.resource.label) {
         resourceName = auditAction.resource.label;
+      } else if (auditAction.type === 'UPLOAD_REQUEST') {
+        resourceName = auditAction.resource.subject;
+      } else if (auditAction.type === 'UPLOAD_REQUEST_URL') {
+        resourceName = auditAction.resource.contactMail;
       } else {
         resourceName = auditAction.resource.name;
         if (auditAction.copiedTo) {
@@ -486,7 +492,7 @@
         setUpdatedValuesGuestExpirationDate(auditAction, updatedValues);
         setUpdatedValuesWorkgroupDocument(auditAction, updatedValues);
         setUpdatedValuesWorkgroupMember(auditAction, updatedValues);
-        setUpdatedValuesUploadRequestGroup(auditAction, updatedValues);
+        setUpdatedValuesUploadRequest(auditAction, updatedValues);
       }
       
       return updatedValues;
@@ -541,14 +547,14 @@
     }
 
     /**
-     * @name setUpdatedValuesUploadRequestGroup
-     * @desc Set upload request group updates's audit values
+     * @name setUpdatedValuesUploadRequest
+     * @desc Set upload request group and upload request updated audit values
      * @param {Object} auditAction - One audit action
      * @param {Object} updatedValues - Object to fill with updated values
      * @memberOf LinShare.audit.auditDetailsService
      */
-    function setUpdatedValuesUploadRequestGroup(auditAction, updatedValues) {
-      if (auditAction.type === TYPES_KEY.UPLOAD_REQUEST_GROUP) {
+    function setUpdatedValuesUploadRequest(auditAction, updatedValues) {
+      if ([TYPES_KEY.UPLOAD_REQUEST_GROUP, TYPES_KEY.UPLOAD_REQUEST].includes(auditAction.type)) {
         const oldObject = auditAction.resource;
         const updatedObject = auditAction.resourceUpdated;
 

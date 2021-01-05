@@ -296,7 +296,6 @@ function uploadRequestsController(
       });
 
       uploadRequestsVm.selectedIndex = selectedIndex;
-
       sidebarService.setData(uploadRequestsVm);
       sidebarService.setContent(lsAppConfig.uploadRequestDetails);
       sidebarService.show();

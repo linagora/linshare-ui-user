@@ -458,10 +458,24 @@
           }
         }
       },
+      "UPLOAD_REQUEST": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Đã tạo yêu cầu tải lên.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Yêu cầu tải lên đã được cập nhật.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        }
+      },
       "UPLOAD_REQUEST_URL": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Một email yêu cầu tải lên đã được gửi đến : {{resourceName}}",
+            "SENTENCE": "Email yêu cầu tải lên đã được gửi đến : {{resourceName}}",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         }

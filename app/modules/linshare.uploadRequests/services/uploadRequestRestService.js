@@ -9,6 +9,7 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
 
   return {
     get,
+    getAudit,
     listEntries,
     update,
     updateStatus
@@ -38,5 +39,11 @@ function uploadRequestRestService($log, Restangular, ServerManagerService) {
     $log.debug('uploadRequestRestService: update');
 
     return handler(Restangular.one('upload_requests', uuid).customPUT(uploadRequestDto));
+  }
+
+  function getAudit(uuid) {
+    $log.debug('uploadRequestRestService: getAudit, uuid');
+
+    return handler(Restangular.one('upload_requests', uuid).getList('audit'));
   }
 }

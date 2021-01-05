@@ -22,8 +22,7 @@ uploadRequestGroupsController.$inject = [
   'uploadRequestGroups',
   'uploadRequestGroupRestService',
   'uploadRequestUtilsService',
-  'sidebarService',
-  'auditDetailsService'
+  'sidebarService'
 ];
 
 /**
@@ -45,8 +44,7 @@ function uploadRequestGroupsController(
   uploadRequestGroups,
   uploadRequestGroupRestService,
   uploadRequestUtilsService,
-  sidebarService,
-  auditDetailsService
+  sidebarService
 ) {
   const uploadRequestGroupsVm = this;
   const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;

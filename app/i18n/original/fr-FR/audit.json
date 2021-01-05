@@ -522,6 +522,20 @@
           }
         }
       },
+      "UPLOAD_REQUEST": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "La invitation de dépôt a été créée.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "La invitation de dépôt a été mise à jour.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "UPLOAD_REQUEST_URL": {
         "CREATE": {
           "AUTHOR": {

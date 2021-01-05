@@ -522,6 +522,20 @@
             }
           }
         },
+        "UPLOAD_REQUEST": {
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Запрос на загрузку создан.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          },
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Запрос на загрузку обновлен.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
         "UPLOAD_REQUEST_URL": {
           "CREATE": {
             "AUTHOR": {

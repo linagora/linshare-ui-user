@@ -13,6 +13,7 @@
     '$log',
     '$q',
     'workgroupRestService',
+    'uploadRequestRestService',
     'auditDetailsService',
     'authenticationRestService'
   ];
@@ -21,13 +22,17 @@
     $log,
     $q,
     workgroupRestService,
+    uploadRequestRestService,
     auditDetailsService,
     authenticationRestService
   ) {
     /* jshint validthis: true */
     var sidebarAuditActionsTabVm = this;
     var deferred;
-    var getter = { workgroup: workgroupRestService.getAudit };
+    var getter = {
+      workgroup: workgroupRestService.getAudit,
+      uploadRequest: uploadRequestRestService.getAudit
+    };
 
     sidebarAuditActionsTabVm.$onInit = $onInit;
     sidebarAuditActionsTabVm.$onChanges = $onChanges;
