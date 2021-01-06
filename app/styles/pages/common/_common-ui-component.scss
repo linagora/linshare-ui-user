@@ -54,6 +54,7 @@ md-tooltip .md-content {
 
 .recipientsAutocomplete {
   height: 33px;
+
   .firstLetterFormat {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 2px 1px rgba(0, 0, 0, 0.12);
     width: 26px;
@@ -692,6 +693,10 @@ li.dp-actions {
   }
   .dropdown{
     width: 100%;
+  }
+
+  .uib-typeahead-match.active {
+    background-color: $primary-alt-color9;
   }
 }
 

@@ -46,6 +46,7 @@ $primary-alt-color5:darken($primary-color, 2.16) !default;
 $primary-alt-color6:darken($primary-color, 19.02) !default;
 $primary-alt-color7:darken(desaturate($primary-color, 9.52), 13.92) !default;
 $primary-alt-color8:darken(desaturate($primary-color, 5.62), 16.08) !default;
+$primary-alt-color9:lighten($primary-color, 40%) !default;
 
 $component-wip-msg-info-color: lighten(desaturate($primary-color, 27.59), 20.59) !default;
 
