@@ -69,7 +69,7 @@
       });
 
       if (attrs.autoFocusInput === '') {
-        $timeout(() => elm.find('#focusInputShare').trigger('focus'));
+        $timeout(() => elm.find('#focusInputShare').trigger('focus'), 300);
       }
     }
   }
