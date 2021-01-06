@@ -46,6 +46,7 @@ function uploadRequestsController(
 ) {
   const uploadRequestsVm = this;
   const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
+  const filterDeletedUploadRequest = uploadRequests => uploadRequests.filter(request => request.status !== 'DELETED');
 
   uploadRequestsVm.$onInit = onInit;
   uploadRequestsVm.goBack = goBack;
@@ -72,7 +73,7 @@ function uploadRequestsController(
 
   function onInit() {
     return uploadRequestGroupRestService.listUploadRequests(uploadRequestGroup.uuid)
-      .then(uploadRequests => uploadRequests.filter(request => request.status !== 'DELETED'))
+      .then(filterDeletedUploadRequest)
       .then(uploadRequests => {
         if (uploadRequestGroup.collective) {
           return $state.go('uploadRequestEntries', {
@@ -121,6 +122,7 @@ function uploadRequestsController(
 
   function reset() {
     return uploadRequestGroupRestService.listUploadRequests(uploadRequestGroup.uuid)
+      .then(filterDeletedUploadRequest)
       .then(uploadRequests => {
         if (uploadRequestGroup.collective) {
           return $state.go('uploadRequestEntries', {
