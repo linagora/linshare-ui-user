@@ -398,7 +398,7 @@
                                 <span translate>NAVIGATION.CANCEL</span>
                               </a>
                             </li>
-                            <li ng-if="uploadRequest.status === 'ARCHIVED'">
+                            <li ng-if="uploadRequestGroup.status === 'ARCHIVED'">
                               <a href="" ng-click="uploadRequestGroupsVm.removeArchivedUploadRequestGroups([uploadRequestGroup])">
                                 <i class="zmdi zmdi-delete"></i>
                                 <span translate>ACTION.DELETE</span>
