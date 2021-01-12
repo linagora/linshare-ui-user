@@ -136,7 +136,6 @@ function UploadRequestGroupObjectService(
     dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, self.maxSizeOfAFile.unit);
     dto.canDelete = self.canDelete;
     dto.canClose = self.canClose;
-    dto.secured = self.secured;
     dto.enableNotification = true;
     dto.locale = self.locale;
 

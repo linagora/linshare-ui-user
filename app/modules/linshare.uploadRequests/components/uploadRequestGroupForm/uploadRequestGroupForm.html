@@ -258,7 +258,7 @@
                   </div>
                 </div>
                 <div class="col-xs-12 field-ctn clearfix"
-                  ng-if="$ctrl.uploadRequestGroupObject.functionalityOfPasswordProtected.enable">
+                  ng-if="$ctrl.uploadRequestGroupObject.functionalityOfPasswordProtected.enable && $ctrl.operation !== 'update'">
                   <label for="secured" class="label-muted col-xs-6 no-padding" translate>
                     UPLOAD_REQUESTS.FORM_CREATE.PASSWORD_PROTECTED
                   </label>
