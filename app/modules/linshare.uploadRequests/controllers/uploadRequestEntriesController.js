@@ -163,6 +163,7 @@ function uploadRequestEntriesController(
         _.remove(uploadRequestEntriesVm.selectedEntries, selected => deletedEntries.some(request => request.uuid === selected.uuid));
 
         uploadRequestEntriesVm.tableParams.reload();
+        uploadRequestEntriesVm.resetSelectedEntries();
 
         if (notDeletedEntries.length) {
           showToastAlertFor('delete_entries', 'error', notDeletedEntries);
