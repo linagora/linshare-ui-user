@@ -145,8 +145,10 @@
           </div>
         </div>
       </div>
-      <div class="m-b-30 col-xs-12 field-ctn"
-           data-ng-show="guestObject.allowedToUpload.enable && guestObject.allowedToUpload.canOverride">
+      <div
+        class="m-b-30 col-xs-12 field-ctn"
+        ng-if="guestObject.allowedToUpload.enable"
+      >
         <div class="fg-line">
           <div class="form-inline">
             <label for="user-space">{{"SIDEBAR.LABEL.ACTIVATE_USER_SPACE" | translate}} :</label>
