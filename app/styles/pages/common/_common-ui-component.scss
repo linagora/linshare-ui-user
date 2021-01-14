@@ -794,3 +794,11 @@ li.dp-actions {
     border: 2px solid #a9a9a9;
   }
 }
+
+/**********************
+ MD-CHECKBOX FIX
+***********************/
+
+md-checkbox.md-checked .md-icon {
+  background-color: $primary-color;
+}
