@@ -148,10 +148,20 @@ function UploadRequestGroupObjectService(
     let exists = false;
 
     uniqueInitialRecipients.forEach(initialRecipient => {
-      if (initialRecipient.mail === contact.mail) {
-        exists = true;
-        toastService.error({key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST'});
-        $log.info('The user ' + contact.mail + ' is already in the upload request');
+      if (contact.type === 'simple') {
+        if (initialRecipient.mail === contact.identifier) {
+          exists = true;
+          toastService.error({key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST'});
+          $log.info('The user ' + contact.identifier + ' is already in the upload request');
+        } else {
+          contact.mail = contact.identifier;
+        }
+      } else {
+        if (initialRecipient.mail === contact.mail) {
+          exists = true;
+          toastService.error({key: 'TOAST_ALERT.WARNING.EMAIL_ALREADY_IN_UPLOAD_REQUEST'});
+          $log.info('The user ' + contact.mail + ' is already in the upload request');
+        }
       }
     });
 
