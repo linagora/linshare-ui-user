@@ -49,7 +49,7 @@ function uploadRequestGroupsController(
   auditDetailsService
 ) {
   const uploadRequestGroupsVm = this;
-  const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
+  const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;
 
   uploadRequestGroupsVm.$onInit = onInit;
 
@@ -363,7 +363,6 @@ function uploadRequestGroupsController(
 
   function archiveUploadRequestGroup(uploadRequestGroup) {
     openWarningDialogFor('archive', uploadRequestGroup)
-      .then(isConfirmed => isConfirmed ? archiveConfirmOptionDialog() : $q.reject())
       .then(isCopied => uploadRequestGroupRestService.updateStatus(uploadRequestGroup.uuid, 'ARCHIVED', {copy: !!isCopied }))
       .then(archivedRequest => {
         _.remove(uploadRequestGroupsVm.itemsList, item => archivedRequest.uuid === item.uuid);

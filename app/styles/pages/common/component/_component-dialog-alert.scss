@@ -23,7 +23,6 @@
       font-size: 15px;
       line-height: normal;
       text-align: inherit;
-      margin: 0;
     }
     .swal-text {
       background-color: #ffffff;
@@ -294,16 +293,43 @@ FILE DIRECTORY DIALOG
 }
 
 md-dialog.custom-dialog {
-  min-width: 360px;
+  &.warning {
+    width: 360px;
+
+    .md-dialog-content {
+      .content-title {
+        color: rgba(0,0,0,.65);
+        font-weight: bold;
+        margin-bottom: 25px;
+        font-size: 15px;
+      }
+
+      .content-text {
+        color: #797979;
+        font-size: 14px;
+      }
+    }
+  }
   md-toolbar {
     min-height: 55px;
     max-height: 55px;
     flex: 0 0 55px;
 
+    &.no-height-limit {
+      min-height: unset;
+      max-height: unset;
+
+      .md-toolbar-tools {
+        height: unset;
+        max-height: unset;
+      }
+    }
+
     .md-toolbar-tools {
       background-color: $primary-color;
       width: 100%;
       padding: 0 14px;
+
       h2 {
         color: #fff;
         font-size: 0.85em;
@@ -318,6 +344,7 @@ md-dialog.custom-dialog {
     background-color: #fff;
 
     button {
+      background: inherit;
       border-radius: 3px;
       text-transform: uppercase;
       width: 49%;
@@ -339,11 +366,24 @@ md-dialog.custom-dialog {
   .cancel {
     border: none;
     box-shadow: none;
+    background-color: $btnDefaultBg;
+    color: $btnDefaultTxt;
     border-right: solid 1px #eee;
+
+    &:hover {
+      background-color: transparent;
+      color: $btnDefaultTxtHover;
+    }
+
   }
 
   .confirm {
     border: none;
+    color: $component-dialog-alert-confirm-color;
+
+    &:hover{
+      color: $component-dialog-alert-confirm-hover-color;
+    }
   }
 }
 

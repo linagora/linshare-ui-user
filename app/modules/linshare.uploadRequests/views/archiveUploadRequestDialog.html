@@ -1,0 +1,27 @@
+<md-dialog class="custom-dialog warning">
+  <md-toolbar class="no-height-limit">
+    <div class="md-toolbar-tools">
+      <!-- NOTE: refactor these styles in case of removing sweetalert -->
+      <div class="swal-icon swal-icon--warning">
+        <span class="swal-icon--warning__body">
+          <span class="swal-icon--warning__dot"></span>
+        </span>
+      </div>
+    </div>
+  </md-toolbar>
+  <md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">
+    <div class="content-title" translate>UPLOAD_REQUESTS.DIALOG.ARCHIVE.TITLE</div>
+    <div class="content-text" translate>UPLOAD_REQUESTS.DIALOG.ARCHIVE.TEXT</div>
+    <md-checkbox ng-model="archiveUploadRequestDialogVm.copyFiles" class="m-t-10">
+      <span translate>UPLOAD_REQUESTS.DIALOG.ARCHIVE.CHECK_BOX</span>
+    </md-checkbox>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <button class="cancel" ng-click="archiveUploadRequestDialogVm.abort()" translate>
+      UPLOAD_REQUESTS.DIALOG.ARCHIVE.CANCEL
+    </button>
+    <button class="confirm" ng-click="archiveUploadRequestDialogVm.hide()" translate>
+      UPLOAD_REQUESTS.DIALOG.ARCHIVE.CONFIRM
+    </button>
+  </md-dialog-actions>
+</md-dialog>

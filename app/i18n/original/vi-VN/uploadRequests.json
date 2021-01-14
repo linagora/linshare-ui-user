@@ -135,11 +135,9 @@
       "ARCHIVE": {
         "TITLE": "Lưu trữ yêu cầu tải lên",
         "TEXT": "Bạn chuẩn bị lưu trữ 1 yêu cầu tải lên. Hãy cẩn thận, hành động này không thể hoàn tác.",
-        "OPTION_TEXT": "Sau khi lưu trữ, tất cả các tệp sẽ bị xóa. Bạn có muốn sao chép tệp vào không gian cá nhân của mình không?",
-        "COPY": {
-          "CONFIRM": "Có",
-          "CANCEL": "Không"
-        }
+        "CHECK_BOX": "Sao chép tệp vào không gian cá nhân của mình",
+        "CONFIRM": "Đồng ý",
+        "CANCEL": "Không"
       },
       "DELETE_ARCHIVED": {
         "TITLE": "Xóa yêu cầu tải lên đã lưu trữ",

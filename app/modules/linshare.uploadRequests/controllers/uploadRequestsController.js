@@ -45,7 +45,7 @@ function uploadRequestsController(
   UploadRequestGroupObjectService
 ) {
   const uploadRequestsVm = this;
-  const { openWarningDialogFor, showToastAlertFor, archiveConfirmOptionDialog } = uploadRequestUtilsService;
+  const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;
   const filterDeletedUploadRequest = uploadRequests => uploadRequests.filter(request => request.status !== 'DELETED');
 
   uploadRequestsVm.$onInit = onInit;
@@ -221,7 +221,6 @@ function uploadRequestsController(
 
   function archiveUploadRequest(uploadRequest) {
     openWarningDialogFor('archive', uploadRequest)
-      .then(isConfirmed => isConfirmed ? archiveConfirmOptionDialog() : $q.reject())
       .then(isCopied => uploadRequestRestService.updateStatus(uploadRequest.uuid, 'ARCHIVED', {copy: !!isCopied }))
       .then(archivedRequest => {
         removeFromSelected([archivedRequest]);

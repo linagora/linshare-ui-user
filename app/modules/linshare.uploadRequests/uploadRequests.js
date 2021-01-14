@@ -14,6 +14,7 @@ require('./components/uploadRequestGroupForm/uploadRequestGroupFormController');
 require('./controllers/uploadRequestEntriesController');
 require('./controllers/uploadRequestsController');
 require('./controllers/uploadRequestGroupsController');
+require('./controllers/archiveUploadRequestDialogController');
 require('./services/uploadRequestObjectCoreService');
 require('./services/uploadRequestEntryRestService');
 require('./services/uploadRequestRestService');

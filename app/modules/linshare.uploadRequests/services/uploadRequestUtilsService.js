@@ -5,6 +5,7 @@ angular
 uploadRequestUtilsService.$inject = [
   'sidebarService',
   '$q',
+  '$mdDialog',
   '$translate',
   'dialogService',
   'toastService',
@@ -14,6 +15,7 @@ uploadRequestUtilsService.$inject = [
 function uploadRequestUtilsService(
   sidebarService,
   $q,
+  $mdDialog,
   $translate,
   dialogService,
   toastService,
@@ -23,13 +25,15 @@ function uploadRequestUtilsService(
   return {
     openWarningDialogFor,
     showToastAlertFor,
-    archiveConfirmOptionDialog,
     openAddingRecipientsSideBar
   };
-
   ////////////
 
   function openWarningDialogFor(action, uploadRequests) {
+    if (action === 'archive') {
+      return promptArchiveDialog();
+    }
+
     return $q.all([
       $translate(
         `UPLOAD_REQUESTS.DIALOG.${action.toUpperCase()}.TEXT`,
@@ -54,23 +58,6 @@ function uploadRequestUtilsService(
         }
       }, 'warning'))
       .then(isConfirmed => !!isConfirmed || $q.reject());
-  }
-
-  function archiveConfirmOptionDialog() {
-    return $translate([
-      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.OPTION_TEXT',
-      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.TITLE',
-      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CONFIRM',
-      'UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CANCEL'
-    ])
-      .then(result => dialogService.dialogConfirmation({
-        text: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.OPTION_TEXT'],
-        title: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.TITLE'],
-        buttons: {
-          confirm: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CONFIRM'],
-          cancel: result['UPLOAD_REQUESTS.DIALOG.ARCHIVE.COPY.CANCEL']
-        }
-      }, 'warning'));
   }
 
   function showToastAlertFor(action, type, items = []) {
@@ -99,5 +86,13 @@ function uploadRequestUtilsService(
     sidebarService.setContent(lsAppConfig.uploadRequestGroupAddRecipients);
     sidebarService.show();
     setTimeout(() => angular.element('#focusInputShare').trigger('focus'));
+  }
+
+  function promptArchiveDialog() {
+    return $mdDialog.show({
+      template: require('../views/archiveUploadRequestDialog.html'),
+      controller: 'archiveUploadRequestDialogController',
+      controllerAs: 'archiveUploadRequestDialogVm',
+    });
   }
 }

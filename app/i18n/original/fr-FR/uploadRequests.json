@@ -135,12 +135,11 @@
       "ARCHIVE": {
         "TITLE": "Archive de l'invitation de dépôt",
         "TEXT": "Vous êtes sur le point d'archiver un invitation de dépot. Attention, cette action ne peut pas être annulée.",
-        "OPTION_TEXT": "Après l'archivage, tous les fichiers seront supprimés. Vous souhaitez copier des fichiers dans votre espace personnel?",
-        "COPY": {
-          "CONFIRM": "Oui",
-          "CANCEL": "Non"
-        }
+        "CHECK_BOX": "Copiez tous les fichiers dans votre espace personnel avant l'archivage",
+        "CONFIRM": "Oui, archiver",
+        "CANCEL": "Non"
       },
+
       "DELETE_ARCHIVED": {
         "TITLE": "Demande de téléchargement archivée supprimée",
         "TEXT": "Vous êtes sur le point de supprimer {singular, select, true{une demande de téléchargement archivée} other{{nbItems} demandes de téléchargement archivées}} ! Attention, cette action ne peut pas être annulée."
