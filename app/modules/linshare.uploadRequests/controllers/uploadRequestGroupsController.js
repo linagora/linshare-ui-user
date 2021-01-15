@@ -225,31 +225,15 @@ function uploadRequestGroupsController(
     $q.all([
       uploadRequestGroupRestService.get(uploadRequest.uuid),
       uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid),
-      uploadRequestGroupRestService.getAudit(uploadRequest.uuid)
-    ]).then(([uploadRequestGroup, uploadRequests, auditLogs]) => {
-      const normalizedAudit = auditLogs.plain().map(log => ({
-        ...log,
-        resource: {
-          ...log.resource,
-          label: log.resource.contactMail || uploadRequestGroup.label
-        }
-      }));
-
+    ]).then(([uploadRequestGroup, uploadRequests]) => {
       uploadRequestGroupsVm.currentSelected = uploadRequestGroup;
       uploadRequestGroupsVm.currentSelected.recipients = [];
-
       uploadRequests.forEach(uploadRequest => {
         uploadRequestGroupsVm.currentSelected.recipients.push(...uploadRequest.recipients.map(recipient => recipient.mail));
       });
-
       uploadRequestGroupsVm.formTabIndex = formTabIndex >= 0 ? formTabIndex : uploadRequestGroupsVm.formTabIndex;
       uploadRequestGroupsVm.selectedIndex = selectedIndex >= 0 ? selectedIndex : uploadRequestGroupsVm.selectedIndex;
-
-      auditDetailsService.generateAllDetails($scope.userLogged.uuid, normalizedAudit)
-        .then(auditActions => {
-          uploadRequestGroupsVm.currentSelected.auditActions = auditActions;
-          loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
-        });
+      loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
     });
   }
 

@@ -298,7 +298,7 @@
         resourceName = (auditAction.resource.uuid === loggedUserUuid) ? authorMe : setFullName(auditAction.resource);
       } else if (auditAction.resource.label) {
         resourceName = auditAction.resource.label;
-      } else if (auditAction.type === 'UPLOAD_REQUEST') {
+      } else if (['UPLOAD_REQUEST', 'UPLOAD_REQUEST_GROUP'].includes(auditAction.type)) {
         resourceName = auditAction.resource.subject;
       } else if (auditAction.type === 'UPLOAD_REQUEST_URL') {
         resourceName = auditAction.resource.contactMail;

@@ -57,7 +57,6 @@ function UploadRequestGroupObjectService(
     self.getNewRecipients = getNewRecipients;
     self.submitRecipients = submitRecipients;
     self.submitRecipientsCallback = options.submitRecipientsCallback;
-    self.auditActions = jsonObject.auditActions || [];
   }
 
   /**

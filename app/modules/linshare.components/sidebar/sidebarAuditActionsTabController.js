@@ -14,6 +14,7 @@
     '$q',
     'workgroupRestService',
     'uploadRequestRestService',
+    'uploadRequestGroupRestService',
     'auditDetailsService',
     'authenticationRestService'
   ];
@@ -23,6 +24,7 @@
     $q,
     workgroupRestService,
     uploadRequestRestService,
+    uploadRequestGroupRestService,
     auditDetailsService,
     authenticationRestService
   ) {
@@ -31,7 +33,8 @@
     var deferred;
     var getter = {
       workgroup: workgroupRestService.getAudit,
-      uploadRequest: uploadRequestRestService.getAudit
+      uploadRequest: uploadRequestRestService.getAudit,
+      uploadRequestGroup: uploadRequestGroupRestService.getAudit
     };
 
     sidebarAuditActionsTabVm.$onInit = $onInit;
