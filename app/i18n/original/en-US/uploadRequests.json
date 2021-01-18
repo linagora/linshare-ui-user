@@ -38,12 +38,12 @@
       "INVALID_EXPIRATION_DATE": "Expiration date must be between current date and {value}",
       "INVALID_ACTIVATION_DATE": "Activation date must be between expiration date and {value}",
       "INVALID_NOTIFICATION_DATE": "Notification date must be between {min} and {max}",
-      "TOTAL_SIZE_OF_FILES_REQUIRED": "Total size of files is required and smaller than {max}",
-      "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "Total size of files is required",
-      "MAX_NUMBER_OF_FILES_REQUIRED": "Max number of files is required and smaller than {max}",
-      "MAX_NUMBER_OF_FILES_REQUIRED_ONLY": "Max number of files is required",
-      "MAX_SIZE_OF_A_FILE_REQUIRED": "Max size of a file is required and smaller than {max}",
-      "MAX_SIZE_OF_A_FILE_REQUIRED_ONLY": "Max size of a file is required"
+      "TOTAL_SIZE_OF_FILES_REQUIRED": "Total size of files must be set and smaller than {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "Total size of files must be set",
+      "MAX_NUMBER_OF_FILES_REQUIRED": "Max number of files must be set and smaller than {max}",
+      "MAX_NUMBER_OF_FILES_REQUIRED_ONLY": "Max number of files must be set",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "Max size of a file must be set and smaller than {max}",
+      "MAX_SIZE_OF_A_FILE_REQUIRED_ONLY": "Max size of a file must be set"
     },
     "MENU_ENTRIES": {
       "PENDING": "Pending",
