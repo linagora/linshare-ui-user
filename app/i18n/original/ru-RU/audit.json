@@ -268,6 +268,12 @@
               "SENTENCE": "{{authorName}} отредактировал файл {{resourceName}} из личного пространства.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
+          },
+          "COPY": {
+            "AUTHOR": {
+              "SENTENCE": "вы скопировали документ {{resourceName}}, находящийся в вашем личном пространстве.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
           }
         },
         "DRIVE": {

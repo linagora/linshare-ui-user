@@ -278,6 +278,12 @@
             "SENTENCE": "TRANSLATE ME! => {{authorName}} has edited the file : {{resourceName}} from his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
+        },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} từ Không gian cá nhân của bạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
         }
       },
       "GUEST": {

@@ -268,6 +268,12 @@
             "SENTENCE": "{{authorName}} a modifié le document : {{resourceName}} dans son Espace Personnel.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
+        },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez copié le document : {{resourceName}} dans votre Espace Personnel.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
         }
       },
       "DRIVE": {
