@@ -196,6 +196,8 @@ function uploadRequestEntriesController(
             }
           });
 
+        uploadRequestEntriesVm.resetSelectedEntries();
+
         if (rejectedPromises.length) {
           showToastAlertFor('copy_entries', 'error', rejectedPromises);
         } else {
