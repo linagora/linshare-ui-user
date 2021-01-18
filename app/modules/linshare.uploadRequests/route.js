@@ -54,7 +54,7 @@ function uploadRequestsConfig($stateProvider) {
     })
     .state('uploadRequests', {
       parent: 'uploadRequestGroups',
-      url: '/upload_request_groups/:uploadRequestGroupUuid/upload_requests',
+      url: '/:uploadRequestGroupUuid/upload_requests',
       template: require('./views/uploadRequests.html'),
       resolve: {
         uploadRequestGroup: function($stateParams, uploadRequestGroupRestService) {
@@ -66,7 +66,7 @@ function uploadRequestsConfig($stateProvider) {
     })
     .state('uploadRequestEntries', {
       parent: 'uploadRequests',
-      url: '/:uploadRequestUuid/entries',
+      url: '/:uploadRequestUuid/entries?entryUuid',
       template: require('./views/uploadRequestEntries.html'),
       resolve: {
         uploadRequest: function($stateParams, uploadRequestRestService) {

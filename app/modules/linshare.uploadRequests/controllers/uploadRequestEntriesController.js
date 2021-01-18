@@ -7,10 +7,12 @@ uploadRequestEntriesController.$inject = [
   '$q',
   '$log',
   '$state',
+  '$transition$',
   'documentUtilsService',
   'lsAppConfig',
   'sidebarService',
   'tableParamsService',
+  'toastService',
   'uploadRequest',
   'uploadRequestEntryRestService',
   'uploadRequestGroup',
@@ -26,10 +28,12 @@ function uploadRequestEntriesController(
   $q,
   $log,
   $state,
+  $transition$,
   documentUtilsService,
   lsAppConfig,
   sidebarService,
   tableParamsService,
+  toastService,
   uploadRequest,
   uploadRequestEntryRestService,
   uploadRequestGroup,
@@ -41,6 +45,7 @@ function uploadRequestEntriesController(
 ) {
   const uploadRequestEntriesVm = this;
   const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;
+  const entryToSelect = $transition$.params().entryUuid;
 
   uploadRequestEntriesVm.$onInit = onInit;
   uploadRequestEntriesVm.goBack = goBack;
@@ -68,8 +73,8 @@ function uploadRequestEntriesController(
       .then(entries => {
         uploadRequestEntriesVm.itemsList = entries;
 
-        tableParamsService.initTableParams(uploadRequestEntriesVm.itemsList, uploadRequestEntriesVm.paramFilter)
-          .then(() => {
+        tableParamsService.initTableParams(uploadRequestEntriesVm.itemsList, uploadRequestEntriesVm.paramFilter, entryToSelect)
+          .then(data => {
             uploadRequestEntriesVm.currentSelectedEntry = {};
             uploadRequestEntriesVm.tableParamsService = tableParamsService;
             uploadRequestEntriesVm.resetSelectedEntries = tableParamsService.resetSelectedItems;
@@ -87,6 +92,10 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.copyEntriesToMySpace = copyEntriesToMySpace;
             uploadRequestEntriesVm.shareEntry = shareEntry;
             uploadRequestEntriesVm.showEntryDetails = showEntryDetails;
+
+            if (entryToSelect && !data.itemToSelect) {
+              toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
+            }
           });
       });
   }
