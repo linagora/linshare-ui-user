@@ -7,12 +7,9 @@ uploadRequestGroupFormController.$inject = ['$timeout'];
 function uploadRequestGroupFormController($timeout) {
   const uploadRequestGroupFormVm = this;
 
-  uploadRequestGroupFormVm.$onInit = onInit;
   uploadRequestGroupFormVm.revalidateDateFields = revalidateDateFields;
-
-  function onInit() {
-    uploadRequestGroupFormVm.selectedTabIndex = uploadRequestGroupFormVm.selectedTabIndex || 0;
-  }
+  uploadRequestGroupFormVm.displayAdvancedOptions = false;
+  uploadRequestGroupFormVm.toggleDisplayAdvancedOptions = toggleDisplayAdvancedOptions;
 
   function revalidateDateFields() {
     $timeout(() => {
@@ -20,5 +17,19 @@ function uploadRequestGroupFormController($timeout) {
       uploadRequestGroupFormVm.form.expirationDate.$validate();
       uploadRequestGroupFormVm.form.activationDate.$validate();
     });
+  }
+
+  function toggleDisplayAdvancedOptions() {
+    if (uploadRequestGroupFormVm.displayAdvancedOptions) {
+      uploadRequestGroupFormVm.displayAdvancedOptions = false;
+    } else {
+      uploadRequestGroupFormVm.displayAdvancedOptions = true;
+      $('#upload-request-edit').animate(
+        {
+          scrollTop: $('#advanced-options-anchor').offset().top
+        },
+        400
+      );
+    }
   }
 }

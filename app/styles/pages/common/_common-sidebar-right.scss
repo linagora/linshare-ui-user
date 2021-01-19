@@ -554,8 +554,9 @@ STANDARD CONTENT
     }
   }
   .more-options {
-    display: inline-block;
-    float: right;
+    display: flex;
+    align-items: center;
+    text-transform: none !important;
   }
   .sidebar-link {
     text-transform: lowercase;
@@ -1159,8 +1160,23 @@ MOBILE RESPONSIVE  SIDEBAR CONTENT
   }
 }
 
-#upload-request-edit md-tab-content {
-  min-height: 400px;
+#upload-request-edit {
+  overflow-y: auto !important;
+
+  md-tab-content {
+    min-height: 400px;
+  }
+
+  .advanced-options {
+    margin-top: 20px;
+    overflow: hidden;
+    transition: 0.25s all ease-in-out;
+    max-height: 0px;
+  }
+
+  .advanced-options-visible {
+    max-height: 500px;
+  }
 }
 
 #member-sidebar.create-upload-request-sidebar {

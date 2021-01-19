@@ -88,6 +88,7 @@
         "SHOW_SELECTED_FILES": "отменить выбор",
         "SETTINGS": "Настройки",
         "MORE_OPTIONS": "Расширенные опции",
+        "ADVANCED_OPTIONS": "Расширенные настройки",
         "RECIPIENTS": "Добавить получателей",
         "CREATE_MAILING_LIST": "Сохранить",
         "CREATE_MAILING_LIST_ALT": "Создать список рассылки"

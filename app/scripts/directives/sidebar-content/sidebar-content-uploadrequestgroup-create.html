@@ -1,19 +1,5 @@
 <div id="member-sidebar" class="create-upload-request-sidebar">
   <div class="header-sidebar form-sidebar header-show-action">
-    <i ng-if="mainVm.sidebar.getData().formTabIndex === 1"
-      class="zmdi zmdi-chevron-left zmdi-hc-2x hidden-xs hidden-sm"
-      ng-click="mainVm.sidebar.getData().formTabIndex = 0">
-    </i>
-    <div class="hidden-md hidden-lg hidden-xl">
-      <i ng-if="mainVm.sidebar.getData().formTabIndex === 1"
-        class="zmdi zmdi-chevron-left zmdi-hc-2x mdi-back-mobile"
-        ng-click="mainVm.sidebar.getData().formTabIndex = 0">
-      </i>
-      <span ng-if="mainVm.sidebar.getData().formTabIndex === 0" class="actions"
-        ng-click="mainVm.sidebar.hide(); mainVm.sidebar.getData().reset();">
-        <a><i class="zmdi zmdi-close zmdi-hc-lg mdi-close-mobile"></i></a>
-      </span>
-    </div>
     <h2 class="header-more-options setEllipsis">
       <span translate>UPLOAD_REQUESTS.FORM_CREATE.SINGULAR_TITLE</span>
       <span> - </span>
