@@ -104,7 +104,9 @@
                       ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
                   </div>
                   <span ng-show="$ctrl.form.activationDate.$invalid" translate translate-interpolation="messageformat"
-                    translate-values="{ value: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('DD MMM YYYY') }">
+                    translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('YYYY-MM-DD'),
+                      max: $ctrl.uploadRequestGroupObject.getMaxDateOfActivation('YYYY-MM-DD')
+                    }">
                     UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
                   </span>
                 </div>
@@ -135,7 +137,8 @@
                       ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
                   </div>
                   <span ng-show="$ctrl.form.expirationDate.$invalid" translate translate-interpolation="messageformat"
-                    translate-values="{ value: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration('DD MMM YYYY') }">
+                    translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfExpiration('YYYY-MM-DD'),
+                      max: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration('YYYY-MM-DD') }">
                     UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
                   </span>
                 </div>

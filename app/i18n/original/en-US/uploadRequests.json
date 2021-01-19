@@ -35,8 +35,8 @@
     "ERROR": {
       "SUBJECT_REQUIRED": "Email subject is required",
       "BODY_REQUIRED": "Email body is required",
-      "INVALID_EXPIRATION_DATE": "Expiration date must be between current date and {value}",
-      "INVALID_ACTIVATION_DATE": "Activation date must be between expiration date and {value}",
+      "INVALID_EXPIRATION_DATE": "Expiration date must be between {min} and {max}",
+      "INVALID_ACTIVATION_DATE": "Activation date must be between {min} and {max}",
       "INVALID_NOTIFICATION_DATE": "Notification date must be between {min} and {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED": "Total size of files must be set and smaller than {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "Total size of files must be set",

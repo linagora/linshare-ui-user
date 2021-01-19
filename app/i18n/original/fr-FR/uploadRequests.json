@@ -35,8 +35,8 @@
     "ERROR": {
       "SUBJECT_REQUIRED": "L'objet du courriel est obligatoire",
       "BODY_REQUIRED": "Le corps du courriel est obligatoire",
-      "INVALID_EXPIRATION_DATE": "La date d'expiration doit être comprise entre la date actuelle et {value}",
-      "INVALID_ACTIVATION_DATE": "La date d'activation doit être comprise entre la date d'expiration et {value}",
+      "INVALID_EXPIRATION_DATE": "La date d'expiration doit être comprise entre {min} et {max}",
+      "INVALID_ACTIVATION_DATE": "La date d'activation doit être comprise entre {min} et {max}",
       "INVALID_NOTIFICATION_DATE": "La date de notification doit être comprise entre {min} et {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED": "La taille totale des fichiers doit être définie et inférieure à {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "La taille totale des fichiers doit être définie",

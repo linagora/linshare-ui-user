@@ -35,8 +35,8 @@
     "ERROR": {
       "SUBJECT_REQUIRED": "Chủ đề của email là bắt buộc",
       "BODY_REQUIRED": "Nội dung của email là bắt buộc",
-      "INVALID_EXPIRATION_DATE": "Ngày hết hạn phải nằm giữa ngày hiện tại và ngày {value}",
-      "INVALID_ACTIVATION_DATE": "Ngày kích hoạt phải nằm giữa ngày hết hạn và ngày {value}",
+      "INVALID_EXPIRATION_DATE": "Ngày hết hạn phải nằm giữa ngày {min} và ngày {max}",
+      "INVALID_ACTIVATION_DATE": "Ngày kích hoạt phải nằm giữa ngày {min} và ngày {max}",
       "INVALID_NOTIFICATION_DATE": "Ngày thông báo phải nằm giữa ngày {min} và ngày {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED": "Tổng kích thước các tệp là bắt buộc và phải nhỏ hơn {max}",
       "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "Tổng kích thước các tệp là bắt buộc",

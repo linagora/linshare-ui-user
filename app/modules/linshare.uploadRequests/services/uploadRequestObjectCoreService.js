@@ -76,6 +76,7 @@ function UploadRequestObjectCoreService(
       self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
       self.maxSizeOfAFile = setAppropriateSize(jsonObject.maxFileSize) || functionalityOfMaxSizeOfAFile;
       self.totalSizeOfFiles = setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
+      self.getMinDateOfExpiration = getMinDateOfExpiration;
       self.getMaxDateOfExpiration = getMaxDateOfExpiration;
       self.getMaxDateOfActivation = getMaxDateOfActivation;
       self.getMinDateOfActivation = getMinDateOfActivation;
@@ -194,6 +195,10 @@ function UploadRequestObjectCoreService(
    */
   function setPropertyValue(value, defaultValue) {
     return _.cloneDeep(_.isUndefined(value) ? defaultValue : value);
+  }
+
+  function getMinDateOfExpiration(format) {
+    return format ? moment(self.activationDate).format(format) : self.activationDate;
   }
 
   function getMaxDateOfExpiration(format) {
