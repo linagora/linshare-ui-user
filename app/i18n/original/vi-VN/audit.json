@@ -486,6 +486,20 @@
           }
         }
       },
+      "UPLOAD_REQUEST_ENTRY": {
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tải về file : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "CREATE": {
+          "VIEWER": {
+            "SENTENCE": "File {{resourceName}} đã được tải lên.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        }
+      },
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {
@@ -769,6 +783,7 @@
       "UPLOAD_REQUEST": "Yêu cầu tải lên",
       "UPLOAD_REQUEST_GROUP": "Nhóm yêu cầu tải lên",
       "UPLOAD_REQUEST_URL": "Đường dẫn yêu cầu tải lên",
+      "UPLOAD_REQUEST_ENTRY": "Tập tin yêu cầu tải lên",
       "WORKGROUP": "Nhóm làm việc",
       "WORKGROUP_DOCUMENT": "Tệp nhóm làm việc",
       "WORKGROUP_FOLDER": "Thư mục nhóm làm việc",

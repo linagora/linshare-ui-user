@@ -550,6 +550,20 @@
           }
         }
       },
+      "UPLOAD_REQUEST_ENTRY": {
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez téléchargé le fichier : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "CREATE": {
+          "VIEWER": {
+            "SENTENCE": "Le fichier {{resourceName}} a été déposé.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        }
+      },
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {
@@ -844,8 +858,9 @@
       "SHARE_ENTRY": "Partage",
       "USER": "Utilisateur",
       "UPLOAD_REQUEST": "Invitation de dépôt",
-      "UPLOAD_REQUEST_GROUP": "Ensemble de invitation de dépôt",
-      "UPLOAD_REQUEST_URL": "Invitation de dépôt lien",
+      "UPLOAD_REQUEST_GROUP": "Invitation de dépôt - Paramétrage collectif",
+      "UPLOAD_REQUEST_URL": "Invitation de dépôt - Lien",
+      "UPLOAD_REQUEST_ENTRY": "Invitation de dépôt - Document",
       "WORKGROUP": "Groupe de Travail",
       "WORKGROUP_DOCUMENT": "Groupe de Travail - Fichier",
       "WORKGROUP_FOLDER": "Groupe de Travail - Dossier",

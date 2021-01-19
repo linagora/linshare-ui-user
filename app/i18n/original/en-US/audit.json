@@ -550,6 +550,20 @@
           }
         }
       },
+      "UPLOAD_REQUEST_ENTRY": {
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "You have downloaded the file : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "CREATE": {
+          "VIEWER": {
+            "SENTENCE": "File {{resourceName}} has been uploaded.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        }
+      },
       "WORKGROUP": {
         "CREATE": {
           "AUTHOR": {
@@ -846,6 +860,7 @@
       "UPLOAD_REQUEST": "Upload request",
       "UPLOAD_REQUEST_GROUP": "Set of upload requests",
       "UPLOAD_REQUEST_URL": "Upload request link",
+      "UPLOAD_REQUEST_ENTRY": "Upload request entry",
       "WORKGROUP": "Workgroup",
       "WORKGROUP_DOCUMENT": "Workgroup file",
       "WORKGROUP_FOLDER": "Workgroup folder",

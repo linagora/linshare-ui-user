@@ -550,6 +550,20 @@
             }
           }
         },
+        "UPLOAD_REQUEST_ENTRY": {
+          "DOWNLOAD": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скачали файл: {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+            }
+          },
+          "CREATE": {
+            "VIEWER": {
+              "SENTENCE": "Файл {{resourceName}} загружен.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+            }
+          }
+        },
         "WORKGROUP": {
           "CREATE": {
             "AUTHOR": {
@@ -846,6 +860,7 @@
         "UPLOAD_REQUEST": "Запрос на отправку",
         "UPLOAD_REQUEST_GROUP": "Набор запросов на загрузку",
         "UPLOAD_REQUEST_URL": "ссылка на запрос загрузки",
+        "UPLOAD_REQUEST_ENTRY": "Запись запроса на загрузку",
         "WORKGROUP": "Рабочая группа",
         "WORKGROUP_DOCUMENT": "Рабочая группа - Файл",
         "WORKGROUP_FOLDER": "Рабочая группа - Папка",

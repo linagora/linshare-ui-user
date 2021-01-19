@@ -74,13 +74,11 @@
           </md-content>
         </md-tab>
 
-        <md-tab
-          id="tab2"
-          label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}"
-          class="col-xs-4 no-padding"
-          ng-disabled="true"
+        <sidebar-audit-actions-tab
+          uuid="mainVm.sidebar.getData().currentSelectedEntry.uuid"
+          type="'uploadRequestEntry'"
         >
-        </md-tab>
+        </sidebar-audit-actions-tab>
       </md-tabs>
     </md-content>
   </div>

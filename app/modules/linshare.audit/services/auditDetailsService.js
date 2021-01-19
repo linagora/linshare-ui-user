@@ -253,7 +253,7 @@
       } else {
         fullName = (user.firstName || user.lastName) ? user.firstName + ' ' + user.lastName : user.mail;
       }
-      
+
       return fullName;
     }
 
@@ -302,13 +302,15 @@
         resourceName = auditAction.resource.subject;
       } else if (auditAction.type === 'UPLOAD_REQUEST_URL') {
         resourceName = auditAction.resource.contactMail;
+      } else if (auditAction.type === 'UPLOAD_REQUEST_ENTRY'){
+        resourceName = auditAction.resource.document.name;
       } else {
         resourceName = auditAction.resource.name;
         if (auditAction.copiedTo) {
           resourceName = auditAction.copiedTo.name;
         }
       }
-      
+
       return resourceName;
     }
 
@@ -344,7 +346,7 @@
       } else if (auditAction.list) {
         resourceNameVarious = auditAction.list.name;
       }
-      
+
       return resourceNameVarious;
     }
 
@@ -361,7 +363,7 @@
         if (copied.contextUuid === auditAction.workGroup.uuid) {
           return workgroup.current;
         }
-        
+
         return workgroup.another;
       } else {
         return copied.contextName;
@@ -422,7 +424,7 @@
             authorMe : setFullName(auditAction.resource.recipient);
         }
       }
-      
+
       return shareRecipient;
     }
 
@@ -494,7 +496,7 @@
         setUpdatedValuesWorkgroupMember(auditAction, updatedValues);
         setUpdatedValuesUploadRequest(auditAction, updatedValues);
       }
-      
+
       return updatedValues;
     }
 
@@ -646,7 +648,7 @@
       } else if (auditAction.recipientMail) {
         userVarious = auditAction.recipientMail;
       }
-      
+
       return userVarious;
     }
 

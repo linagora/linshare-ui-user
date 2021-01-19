@@ -13,6 +13,7 @@
     '$log',
     '$q',
     'workgroupRestService',
+    'uploadRequestEntryRestService',
     'uploadRequestRestService',
     'uploadRequestGroupRestService',
     'auditDetailsService',
@@ -23,18 +24,19 @@
     $log,
     $q,
     workgroupRestService,
+    uploadRequestEntryRestService,
     uploadRequestRestService,
     uploadRequestGroupRestService,
     auditDetailsService,
     authenticationRestService
   ) {
-    /* jshint validthis: true */
-    var sidebarAuditActionsTabVm = this;
-    var deferred;
-    var getter = {
+    let deferred;
+    const sidebarAuditActionsTabVm = this;
+    const getters = {
       workgroup: workgroupRestService.getAudit,
       uploadRequest: uploadRequestRestService.getAudit,
-      uploadRequestGroup: uploadRequestGroupRestService.getAudit
+      uploadRequestGroup: uploadRequestGroupRestService.getAudit,
+      uploadRequestEntry: uploadRequestEntryRestService.getAudit,
     };
 
     sidebarAuditActionsTabVm.$onInit = $onInit;
@@ -72,7 +74,7 @@
 
       deferred = $q.defer();
 
-      getter[sidebarAuditActionsTabVm.type](uuid)
+      getters[sidebarAuditActionsTabVm.type](uuid)
         .then(function(auditData) {
           return auditDetailsService.generateAllDetails(sidebarAuditActionsTabVm.userLogged.uuid, auditData.plain());
         })
