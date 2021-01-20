@@ -229,7 +229,7 @@ function UploadRequestObjectCoreService(
       return;
     }
 
-    const expiryDate = self.expiryDate && moment(self.expiryDate).format('YYYY-MM-DD');
+    const expiryDate = self.expiryDate && moment(self.expiryDate);
     const maxDate = !_.isUndefined(self.functionalityOfActivation.maxValue) && self.functionalityOfActivation.maxUnit
       ? moment().add(self.functionalityOfActivation.maxValue, self.functionalityOfActivation.maxUnit.toLowerCase())
       : expiryDate;
