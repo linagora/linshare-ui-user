@@ -62,7 +62,6 @@ function UploadRequestObjectCoreService(
       self.expiryDate = setPropertyValue(jsonObject.expiryDate, functionalityOfExpiration.value);
       self.notificationDate = setPropertyValue(jsonObject.notificationDate, functionalityOfExpiryNotification.value);
       self.maxFileCount = setPropertyValue(jsonObject.maxFileCount, functionalityOfMaxNumberOfFiles.value);
-      self.secured = setPropertyValue(jsonObject.secured, functionalityOfPasswordProtected.value);
       self.protectedByPassword = setPropertyValue(jsonObject.protectedByPassword, functionalityOfPasswordProtected.value);
       self.canClose = setPropertyValue(jsonObject.canClose, functionalityOfClosure.value);
       self.canDelete = setPropertyValue(jsonObject.canDelete, functionalityOfDeletion.value);
