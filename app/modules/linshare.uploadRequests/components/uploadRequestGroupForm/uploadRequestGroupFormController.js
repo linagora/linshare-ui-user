@@ -8,8 +8,12 @@ function uploadRequestGroupFormController($timeout) {
   const uploadRequestGroupFormVm = this;
 
   uploadRequestGroupFormVm.revalidateDateFields = revalidateDateFields;
-  uploadRequestGroupFormVm.displayAdvancedOptions = false;
+  uploadRequestGroupFormVm.$onInit = onInit;
   uploadRequestGroupFormVm.toggleDisplayAdvancedOptions = toggleDisplayAdvancedOptions;
+
+  function onInit() {
+    uploadRequestGroupFormVm.displayAdvancedOptions = uploadRequestGroupFormVm.displayAdvancedOptions || false;
+  }
 
   function revalidateDateFields() {
     $timeout(() => {

@@ -5,8 +5,8 @@ angular
     bindings: {
       uploadRequestGroupObject: '=',
       createRecipientList: '=',
-      selectedTabIndex: '=',
       form: '=',
+      displayAdvancedOptions: '=',
       operation: '@'
     },
     controller: 'uploadRequestGroupFormController'

@@ -74,6 +74,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.itemsList = uploadRequestGroups;
     uploadRequestGroupsVm.formTabIndex = 0;
     uploadRequestGroupsVm.selectedIndex = 0;
+    uploadRequestGroupsVm.displayAdvancedOptions = false;
     uploadRequestGroupsVm.reset = reset;
     uploadRequestGroupsVm.fabButton = {
       toolbar: {
@@ -139,7 +140,7 @@ function uploadRequestGroupsController(
 
     if (!form.$valid) {
       uploadRequestGroupsVm.setSubmitted(form);
-      toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
+      scrollToError(form);
     } else {
       newUploadRequest.create().then(request => {
         $scope.mainVm.sidebar.hide(newUploadRequest);
@@ -168,7 +169,7 @@ function uploadRequestGroupsController(
   function updateUploadRequestGroup(form, newUploadRequest) {
     if (!form.$valid) {
       uploadRequestGroupsVm.setSubmitted(form);
-      toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
+      scrollToError(form);
     } else {
       newUploadRequest.update()
         .then(request => {
@@ -424,5 +425,20 @@ function uploadRequestGroupsController(
     const url = uploadRequestGroupRestService.getDownloadEntriesUrl(uploadRequestGroup.uuid);
 
     documentUtilsService.download(url, uploadRequestGroup.label);
+  }
+
+  function scrollToError (form) {
+    const invalidInputs = $('input.ng-invalid');
+
+    if (invalidInputs.length) {
+      if (form.notificationDate.$invalid || form.totalSizeOfFiles.$invalid || form.secured.$invalid || form.canDelete.$invalid || form.canClose.$invalid) {
+        uploadRequestGroupsVm.displayAdvancedOptions = true;
+      }
+
+      invalidInputs.first().trigger('focus');
+      $('#upload-request-edit').animate({
+        scrollTop: invalidInputs.first().offset().top
+      }, 300);
+    }
   }
 }
