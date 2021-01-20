@@ -174,11 +174,19 @@
       switch (unit) {
         case 'KILO':
           return 'KB';
+        case 'KB':
+          return 'KB';
         case 'MEGA':
+          return 'MB';
+        case 'MB':
           return 'MB';
         case 'GIGA':
           return 'GB';
+        case 'GB':
+          return 'GB';
         case 'Bytes':
+          return 'B';
+        case 'B':
           return 'B';
         default:
           return 'MB';
