@@ -378,7 +378,7 @@
                             </li>
                             <li class="divider"></li>
                             <li ng-if="uploadRequest.status === 'CREATED'">
-                              <a href="">
+                              <a href="" ng-click="uploadRequestsVm.cancelUploadRequests([uploadRequest])">
                                 <i class="zmdi zmdi-close-circle"></i>
                                 <span translate>NAVIGATION.CANCEL</span>
                               </a>

@@ -85,7 +85,7 @@ function uploadRequestsController(
           request.recipientEmail = request.recipients[0].mail;
 
           return request;
-        });
+        }).filter(request => request.status !== 'CANCELED');
 
         tableParamsService.initTableParams(uploadRequestsVm.itemsList, uploadRequestsVm.paramFilter)
           .then(() => {
@@ -184,6 +184,8 @@ function uploadRequestsController(
 
         removeFromSelected(canceledRequests);
         updateUploadRequestStatuses(canceledRequests, 'CANCELED');
+        _.remove(uploadRequestsVm.itemsList, item => canceledRequests.some(request => request.uuid === item.uuid));
+        uploadRequestsVm.tableParams.reload();
 
         if (notCanceledRequests.length) {
           showToastAlertFor('cancellation', 'error', notCanceledRequests);
