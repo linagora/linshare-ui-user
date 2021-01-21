@@ -285,6 +285,10 @@ function uploadRequestGroupsController(
           .filter(promise => promise.state === 'rejected')
           .map(reject => reject.reason);
 
+        if (removedRequests.some(request => request.uuid === uploadRequestGroupsVm.currentSelected.uuid)) {
+          sidebarService.hide();
+        }
+
         _.remove(uploadRequestGroupsVm.itemsList, item => removedRequests.some(request => request.uuid === item.uuid));
         _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => removedRequests.some(request => request.uuid === selected.uuid));
 
