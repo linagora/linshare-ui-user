@@ -282,15 +282,15 @@
               class="col-xs-12 field-ctn clearfix"
               ng-if="$ctrl.uploadRequestGroupObject.functionalityOfPasswordProtected.enable"
             >
-              <label for="secured" class="label-muted col-xs-6 no-padding" translate>
+              <label for="protectedByPassword" class="label-muted col-xs-6 no-padding" translate>
                 UPLOAD_REQUESTS.FORM_CREATE.PASSWORD_PROTECTED
               </label>
               <div class="col-xs-6 flex-combine-input">
-                <input ng-if="$ctrl.operation !== 'update'" type="checkbox" ng-checked="$ctrl.uploadRequestGroupObject.secured" name="secured"
-                  ng-model="$ctrl.uploadRequestGroupObject.secured"
+                <input ng-if="$ctrl.operation !== 'update'" type="checkbox" ng-checked="$ctrl.uploadRequestGroupObject.protectedByPassword" name="protectedByPassword"
+                  ng-model="$ctrl.uploadRequestGroupObject.protectedByPassword"
                   ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfPasswordProtected.canOverride" />
                 <span ng-if="$ctrl.operation === 'update'" translate>
-                  {{$ctrl.uploadRequestGroupObject.secured ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}
+                  {{$ctrl.uploadRequestGroupObject.protectedByPassword ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}
                 </span>
               </div>
             </div>
