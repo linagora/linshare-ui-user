@@ -49,6 +49,7 @@
     browseVm.displayCreateInput = false;
     browseVm.newFolderName = '';
     browseVm.createFolder = createFolder;
+    browseVm.createFolderByEnter = createFolderByEnter;
     browseVm.disableFolder = disableFolder;
     browseVm.goToFolder = goToFolder;
     browseVm.handleActionOnNodeSelection = handleActionOnNodeSelection;
@@ -348,6 +349,13 @@
             browseVm.currentList.unshift(newlyCreatedFolder);
             hideCreateFolderInput();
           });
+      }
+    }
+
+    function createFolderByEnter($event) {
+      if ($event.charCode === 13) {
+        $event.preventDefault();
+        createFolder();
       }
     }
   }
