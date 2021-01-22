@@ -47,6 +47,18 @@ function UploadRequestObjectCoreService(
     self = this;
 
     checkFunctionalities().then(function() {
+      /**
+   *  @name setPropertyValue
+   *  @desc Set element value depending on object retrieved property
+   *  @param {Object} value - Value wanted to be setted
+   *  @param {Object} defaultValue - The defaultValue if no object is retrieved
+   *  @returns {Object} the final value to set
+   *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
+   */
+      function setPropertyValue(value, defaultValue) {
+        return _.cloneDeep(_.isUndefined(jsonObject.uuid) ? defaultValue : value);
+      }
+
       self.functionalityOfActivation = _.cloneDeep(functionalityOfActivation);
       self.functionalityOfExpiration = _.cloneDeep(functionalityOfExpiration);
       self.functionalityOfExpiryNotification = _.cloneDeep(functionalityOfExpiryNotification);
@@ -69,7 +81,7 @@ function UploadRequestObjectCoreService(
       self.locale = setPropertyValue(jsonObject.locale, functionalityOfNotificationLanguage.value);
       self.label = setPropertyValue(jsonObject.label, '');
       self.owner = setPropertyValue(jsonObject.owner, {});
-      self.collective = setPropertyValue(jsonObject.collective, false);
+      self.collective = jsonObject.collective || false;
       self.body = setPropertyValue(jsonObject.body, '');
       self.recipients = setPropertyValue(jsonObject.recipients, []);
       self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
@@ -183,18 +195,6 @@ function UploadRequestObjectCoreService(
         functionalityOfNotificationLanguage.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       })
     ]);
-  }
-
-  /**
-   *  @name setPropertyValue
-   *  @desc Set element value depending on object retrieved property
-   *  @param {Object} value - Value wanted to be setted
-   *  @param {Object} defaultValue - The defaultValue if no object is retrieved
-   *  @returns {Object} the final value to set
-   *  @memberOf LinShare.uploadRequests.UploadRequestGroupObjectService
-   */
-  function setPropertyValue(value, defaultValue) {
-    return _.cloneDeep(_.isUndefined(value) ? defaultValue : value);
   }
 
   function getMinDateOfExpiration(format) {
