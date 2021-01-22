@@ -553,14 +553,14 @@ STANDARD CONTENT
       margin-bottom: 1em;
     }
   }
-  .more-options {
+  .sidebar-link {
     display: flex;
     align-items: center;
-    text-transform: none !important;
-  }
-  .sidebar-link {
-    text-transform: lowercase;
     font-size: 11px;
+
+    &.right {
+      float: right;
+    }
   }
   h2 {
     text-align: left;
