@@ -89,16 +89,6 @@
                           <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.LABEL</span>
                         </a>
                       </li>
-                      <li role="menuitem">
-                        <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('fileCount', $event)">
-                          <span class="caret-area">
-                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
-                                          'zmdi-caret-down' :
-                                          'zmdi-caret-up'" class="zmdi"></i>
-                          </span>
-                          <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.FILES</span>
-                        </a>
-                      </li>
                       <li role="menuitem"> <a href=""
                           ng-click="uploadRequestGroupsVm.sortDropdownSetActive('status', $event)">
                           <span class="caret-area">
@@ -436,11 +426,6 @@
                   {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate'}}
                 </td>
 
-                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.pending'"
-                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.FILES' | translate" data-sortable="'fileCount'"
-                  header-class="'col-4'">
-                  {{ uploadRequestGroup.fileCount || 'N/A' }}
-                </td>
               </tr>
             </table>
           </div>

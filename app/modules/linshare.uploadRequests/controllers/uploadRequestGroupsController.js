@@ -232,6 +232,8 @@ function uploadRequestGroupsController(
       uploadRequests.forEach(uploadRequest => {
         uploadRequestGroupsVm.currentSelected.recipients.push(...uploadRequest.recipients.map(recipient => recipient.mail));
       });
+      uploadRequestGroupsVm.currentSelected.nbrUploadedFiles =
+        uploadRequests.reduce((total, uploadRequest) => total + uploadRequest.nbrUploadedFiles, 0);
       uploadRequestGroupsVm.formTabIndex = formTabIndex >= 0 ? formTabIndex : uploadRequestGroupsVm.formTabIndex;
       uploadRequestGroupsVm.selectedIndex = selectedIndex >= 0 ? selectedIndex : uploadRequestGroupsVm.selectedIndex;
       loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);

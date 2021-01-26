@@ -285,17 +285,10 @@ function uploadRequestsController(
   }
 
   function showDetails(uploadRequest, { selectedIndex = 0 } = {}) {
-    // TODO: remove uploadRequestRestService.listEntries when the UR API includes the number of uploaded files.
-    $q.all([
-      uploadRequestRestService.get(uploadRequest.uuid),
-      uploadRequestRestService.listEntries(uploadRequest.uuid)
-    ]).then(([responseUploadRequest, entries]) => {
-      responseUploadRequest = Restangular.stripRestangular(responseUploadRequest);
+    uploadRequestRestService.get(uploadRequest.uuid).then(responseUploadRequest => {
+      const uploadRequest = Restangular.stripRestangular(responseUploadRequest);
 
-      uploadRequestsVm.currentSelected = new UploadRequestObjectService({
-        ...responseUploadRequest,
-        filesUploaded: entries.length
-      });
+      uploadRequestsVm.currentSelected = new UploadRequestObjectService(uploadRequest);
 
       uploadRequestsVm.selectedIndex = selectedIndex;
       sidebarService.setData(uploadRequestsVm);

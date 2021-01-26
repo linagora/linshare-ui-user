@@ -103,7 +103,7 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" ng-click="uploadRequestsVm.sortDropdownSetActive('fileCount', $event)">
+                        <a href="" ng-click="uploadRequestsVm.sortDropdownSetActive('nbrUploadedFiles', $event)">
                           <span class="caret-area">
                             <i ng-class="uploadRequestsVm.tableParamsService.getToggleSelectedSort() ?
                                           'zmdi-caret-down' :
@@ -417,7 +417,7 @@
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.FILES' | translate" data-sortable="'fileCount'"
                   header-class="'col-4'">
-                  {{ uploadRequest.fileCount || 'N/A' }}
+                  {{ uploadRequest.nbrUploadedFiles || 'N/A' }}
                 </td>
               </tr>
             </table>

@@ -75,6 +75,7 @@ function UploadRequestObjectCoreService(
       self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
       self.maxSizeOfAFile = setAppropriateSize(jsonObject.maxFileSize) || functionalityOfMaxSizeOfAFile;
       self.totalSizeOfFiles = setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
+      self.nbrUploadedFiles = setPropertyValue(jsonObject.nbrUploadedFiles, 0);
       self.getMinDateOfExpiration = getMinDateOfExpiration;
       self.getMaxDateOfExpiration = getMaxDateOfExpiration;
       self.getMaxDateOfActivation = getMaxDateOfActivation;
