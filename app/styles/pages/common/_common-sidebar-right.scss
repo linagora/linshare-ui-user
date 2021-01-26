@@ -28,10 +28,14 @@ SIDEBAR RIGHT CONTAINER
   overflow-y: auto;
   padding-top: 0;
   box-shadow: none;
-  border-left: solid 1px #ddd;
   transition: all;
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
+
+  @media (min-width: 768px) {
+    border-left: solid 1px #ddd;
+  }
+
   .container {
     height: 100%;
     overflow-x: hidden;
