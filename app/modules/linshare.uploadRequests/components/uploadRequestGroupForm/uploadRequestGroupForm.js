@@ -3,11 +3,9 @@ angular
   .component('uploadRequestGroupForm', {
     template: require('./uploadRequestGroupForm.html'),
     bindings: {
-      uploadRequestGroupObject: '=',
-      createRecipientList: '=',
       form: '=',
-      displayAdvancedOptions: '=',
-      operation: '@'
+      operation: '@',
+      uploadRequestGroupObject: '='
     },
     controller: 'uploadRequestGroupFormController'
   });

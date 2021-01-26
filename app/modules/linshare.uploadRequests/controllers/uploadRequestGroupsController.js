@@ -61,9 +61,8 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.uploadRequestGroupCreate = lsAppConfig.uploadRequestGroupCreate;
     uploadRequestGroupsVm.uploadRequestGroupDetails = lsAppConfig.uploadRequestGroupDetails;
     uploadRequestGroupsVm.getOwnerName = contactsListsService.getOwnerName;
-    uploadRequestGroupsVm.setSubmitted = setSubmitted;
-    uploadRequestGroupsVm.createUploadRequestGroup = createUploadRequestGroup;
-    uploadRequestGroupsVm.updateUploadRequestGroup = updateUploadRequestGroup;
+    uploadRequestGroupsVm.onCreateSuccess = onCreateSuccess;
+    uploadRequestGroupsVm.onUpdateSuccess = onUpdateSuccess;
     uploadRequestGroupsVm.downloadEntries = downloadEntries;
     uploadRequestGroupsVm.currentStateName = $state.current.name;
     uploadRequestGroupsVm.paramFilter = { label: '' };
@@ -72,7 +71,6 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.openUploadRequestGroup = openUploadRequestGroup;
     uploadRequestGroupsVm.removeArchivedUploadRequestGroups = removeArchivedUploadRequestGroups;
     uploadRequestGroupsVm.itemsList = uploadRequestGroups;
-    uploadRequestGroupsVm.formTabIndex = 0;
     uploadRequestGroupsVm.selectedIndex = 0;
     uploadRequestGroupsVm.displayAdvancedOptions = false;
     uploadRequestGroupsVm.reset = reset;
@@ -127,102 +125,12 @@ function uploadRequestGroupsController(
   }
 
   /**
-   *  @name createUploadRequestGroup
-   *  @desc Valid the object and call the method save on object UploadRequest
-   *  @param {Object} form - An Object representing the form
-   *  @param {Object} newUploadRequest - An object containing all informations of the uploadRequest
-   *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
-   */
-  function createUploadRequestGroup(form, newUploadRequest) {
-    if (handleErrors(uploadRequestGroupsVm.uploadRequestGroupObject)) {
-      return;
-    }
-
-    if (!form.$valid) {
-      uploadRequestGroupsVm.setSubmitted(form);
-      scrollToError(form);
-    } else {
-      newUploadRequest.create().then(request => {
-        $scope.mainVm.sidebar.hide(newUploadRequest);
-        toastService.success({key: 'UPLOAD_REQUESTS.FORM_CREATE.SUCCESS'});
-
-        if (
-          uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.pending' && request.status === 'CREATED' ||
-          uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed' && request.status === 'ENABLED'
-        ) {
-          uploadRequestGroupsVm.itemsList.push(request);
-          uploadRequestGroupsVm.tableParams.reload();
-        }
-
-        $state.go(`uploadRequestGroups.${request.status === 'CREATED' ? 'pending' : 'activeClosed'}`);
-      });
-    }
-  }
-
-  /**
-   *  @name updateUploadRequestGroup
-   *  @desc Valid the object and call the method save on object UploadRequest
-   *  @param {Object} form - An Object representing the form
-   *  @param {Object} newUploadRequest - An object containing all informations of the uploadRequest
-   *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
-   */
-  function updateUploadRequestGroup(form, newUploadRequest) {
-    if (!form.$valid) {
-      uploadRequestGroupsVm.setSubmitted(form);
-      scrollToError(form);
-    } else {
-      newUploadRequest.update()
-        .then(request => {
-          sidebarService.hide();
-          uploadRequestGroupsVm.itemsList = uploadRequestGroupsVm.itemsList.map(item =>
-            item.uuid === request.uuid ? Object.assign(item, request) : item);
-          uploadRequestGroupsVm.tableParams.reload();
-          showToastAlertFor('update', 'info', []);
-        })
-        .catch(error => {
-          if (error) {
-            showToastAlertFor('update', 'error');
-          }
-        });
-    }
-  }
-
-  /**
-   *  @name setSubmitted
-   *  @desc Set a form & subform to the state 'submitted'
-   *  @param {DOM Object} form - The form to set to submitted state
-   *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
-   */
-  function setSubmitted(form) {
-    form.$setSubmitted();
-    angular.forEach(form, function(item) {
-      if (item && item.$$parentForm === form && item.$setSubmitted) {
-        setSubmitted(item);
-      }
-    });
-  }
-
-  /**
-   *  @name handleErrors
-   *  @desc handle custom validation errors
-   *  @param {Object} uploadRequestGroupObject - Object contains data of upload requests
-   *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
-   */
-  function handleErrors(uploadRequestGroupObject) {
-    if (uploadRequestGroupObject.getNewRecipients().length === 0) {
-      toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST'});
-
-      return true;
-    }
-  }
-
-  /**
    *  @name showDetails
    *  @desc open sidebar tabs to show detail information of upload request
    *  @param {Object} uploadRequest - Object contains data of upload requests
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
-  function showDetails(uploadRequest = {}, { formTabIndex = 0, selectedIndex = 0 } = {}) {
+  function showDetails(uploadRequest = {}, { selectedIndex = 0 } = {}) {
     $q.all([
       uploadRequestGroupRestService.get(uploadRequest.uuid),
       uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid),
@@ -234,7 +142,6 @@ function uploadRequestGroupsController(
       });
       uploadRequestGroupsVm.currentSelected.nbrUploadedFiles =
         uploadRequests.reduce((total, uploadRequest) => total + uploadRequest.nbrUploadedFiles, 0);
-      uploadRequestGroupsVm.formTabIndex = formTabIndex >= 0 ? formTabIndex : uploadRequestGroupsVm.formTabIndex;
       uploadRequestGroupsVm.selectedIndex = selectedIndex >= 0 ? selectedIndex : uploadRequestGroupsVm.selectedIndex;
       loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
     });
@@ -419,7 +326,6 @@ function uploadRequestGroupsController(
       uploadRequestGroupsVm.form.$setPristine();
     }
 
-    uploadRequestGroupsVm.formTabIndex = 0;
     uploadRequestGroupsVm.selectedIndex = 0;
   }
 
@@ -429,18 +335,26 @@ function uploadRequestGroupsController(
     documentUtilsService.download(url, uploadRequestGroup.label);
   }
 
-  function scrollToError (form) {
-    const invalidInputs = $('input.ng-invalid');
+  function onUpdateSuccess(updated) {
+    sidebarService.hide();
+    const itemIndex = uploadRequestGroupsVm.itemsList.findIndex(item => item.uuid === updated.uuid);
 
-    if (invalidInputs.length) {
-      if (form.notificationDate.$invalid || form.totalSizeOfFiles.$invalid || form.secured.$invalid || form.canDelete.$invalid || form.canClose.$invalid) {
-        uploadRequestGroupsVm.displayAdvancedOptions = true;
-      }
+    if (itemIndex >= 0) {
+      uploadRequestGroupsVm.itemsList[itemIndex] = _.assign(uploadRequestGroupsVm.itemsList[itemIndex], updated);
+      uploadRequestGroupsVm.tableParams.reload();
+    }
+  }
 
-      invalidInputs.first().trigger('focus');
-      $('#upload-request-edit').animate({
-        scrollTop: invalidInputs.first().offset().top
-      }, 300);
+  function onCreateSuccess(created) {
+    sidebarService.hide();
+    if (
+      uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.pending' && created.status === 'CREATED' ||
+      uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed' && created.status === 'ENABLED'
+    ) {
+      uploadRequestGroupsVm.itemsList.push(created);
+      uploadRequestGroupsVm.tableParams.reload();
+    } else {
+      $state.go(`uploadRequestGroups.${created.status === 'CREATED' ? 'pending' : 'activeClosed'}`);
     }
   }
 }

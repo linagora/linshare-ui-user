@@ -28,7 +28,6 @@
       "ALLOW_CLOSURE": "Cho phép đóng",
       "EXPIRY_NOTIFICATION_DATE": "Ngày thông báo hết hạn",
       "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo",
-      "SUCCESS": "Yêu cầu tải lên đã được tạo thành công!",
       "FORM_INVALID": "Biểu mẫu không hợp lệ. Vui lòng kiểm tra kỹ đầu vào của bạn.",
       "BACK": "quay lại"
     },
@@ -158,6 +157,10 @@
       }
     },
     "TOAST_ALERT": {
+      "CREATE": {
+        "ERROR": "Không thể tạo được yêu cầu tải lên.",
+        "INFO": "Yêu cầu tải lên đã được tạo thành công!"
+      },
       "CANCELLATION": {
         "ERROR": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} không được hủy.",
         "INFO": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} đã được hủy."

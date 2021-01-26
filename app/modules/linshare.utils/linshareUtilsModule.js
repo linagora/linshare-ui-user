@@ -17,3 +17,4 @@ require('./document/documentUtilsService');
 require('./filters/lsDateFilter');
 require('./item/itemUtilsConstant');
 require('./item/itemUtilsService');
+require('./form/formUtilsService');

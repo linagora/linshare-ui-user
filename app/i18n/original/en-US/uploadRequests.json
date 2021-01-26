@@ -28,7 +28,6 @@
       "ALLOW_CLOSURE": "Allow closure",
       "EXPIRY_NOTIFICATION_DATE": "Expiry notification date",
       "NOTIFICATION_LANGUAGE": "Notification language",
-      "SUCCESS": "The upload request has been created successfully!",
       "FORM_INVALID": "Form is invalid. Please check your inputs carefully.",
       "BACK": "back"
     },
@@ -158,6 +157,10 @@
       }
     },
     "TOAST_ALERT": {
+      "CREATE": {
+        "ERROR": "Failed to create upload request.",
+        "INFO": "The upload request has been created successfully!"
+      },
       "CANCELLATION": {
         "ERROR": "{number} {singular, select, true{upload request has} other{upload requests have}} not been canceled.",
         "INFO": "{number} {singular, select, true{upload request has} other{upload requests have}} been canceled."

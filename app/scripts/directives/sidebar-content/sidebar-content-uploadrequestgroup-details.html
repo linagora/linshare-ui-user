@@ -1,26 +1,16 @@
-<div id="member-sidebar" class="upload-requests">
+<div id="member-sidebar">
   <div class="header-sidebar form-sidebar header-show-action">
-    <i ng-if="mainVm.sidebar.getData().formTabIndex === 1"
-      class="zmdi zmdi-chevron-left zmdi-hc-2x hidden-xs hidden-sm"
-      ng-click="mainVm.sidebar.getData().formTabIndex = 0">
-    </i>
-    <div class="hidden-md hidden-lg hidden-xl">
-      <i ng-if="mainVm.sidebar.getData().formTabIndex === 1"
-        class="zmdi zmdi-chevron-left zmdi-hc-2x mdi-back-mobile"
-        ng-click="mainVm.sidebar.getData().formTabIndex = 0">
-      </i>
-      <span ng-if="mainVm.sidebar.getData().formTabIndex === 0" class="actions"
-        ng-click="mainVm.sidebar.hide(); mainVm.sidebar.getData().reset();">
-        <a><i class="zmdi zmdi-close zmdi-hc-lg mdi-close-mobile"></i></a>
-      </span>
-    </div>
+    <a
+      class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
+      ng-click="mainVm.sidebar.hide()"
+    ></a>
     <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().uploadRequestGroupObject.label}} </h2>
-    <span class="hidden-xs hidden-sm actions" ng-click="mainVm.sidebar.hide(); mainVm.sidebar.getData().reset();">
+    <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide(); mainVm.sidebar.getData().reset();">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
     <span class="header-action-link waves-effect text-uppercase visible-xs"
-      ng-click="mainVm.sidebar.getData().updateUploadRequestGroup(mainVm.sidebar.getData().form,
-      mainVm.sidebar.getData().uploadRequestGroupObject)">
+      ng-if="mainVm.sidebar.getData().selectedIndex === 1"
+      ng-click="mainVm.sidebar.getData().updateUploadRequestGroup()">
       <span class="zmdi zmdi-check"></span>
       <span translate>ACTION.SAVE</span>
     </span>
@@ -101,7 +91,7 @@
                   </div>
                 </h2>
                 <div class="recipient-list" ng-show="showRecipients">
-                  <div class="recipientsAutocomplete" ng-repeat="recipient in mainVm.sidebar.getData().currentSelected.recipients">
+                  <div class="recipientsAutocomplete" ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestGroupObject.recipients">
                     <span class="firstLetterFormat">
                       {{ ::recipient.charAt(0) }}
                     </span>
@@ -187,15 +177,12 @@
         <md-tab id="tab2" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding">
           <upload-request-group-form
             upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
-            selected-tab-index="mainVm.sidebar.getData().formTabIndex"
-            create-recipient-list="mainVm.sidebar.getData().createRecipientList"
-            display-advanced-options="mainVm.sidebar.getData().displayAdvancedOptions"
             form="mainVm.sidebar.getData().form"
             operation="update"
           />
         </md-tab>
         <sidebar-audit-actions-tab
-          uuid="mainVm.sidebar.getData().currentSelected.uuid"
+          uuid="mainVm.sidebar.getData().uploadRequestGroupObject.uuid"
           type="'uploadRequestGroup'"
         >
         </sidebar-audit-actions-tab>
@@ -207,8 +194,7 @@
       NAVIGATION.CANCEL
     </button>
     <button class="btn btn-primary col-xs-6"
-      ng-click="mainVm.sidebar.getData().updateUploadRequestGroup(mainVm.sidebar.getData().form,
-        mainVm.sidebar.getData().uploadRequestGroupObject)"
+      ng-click="mainVm.sidebar.getData().updateUploadRequestGroup()"
       translate>
       ACTION.SAVE
     </button>
