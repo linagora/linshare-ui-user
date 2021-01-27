@@ -425,7 +425,7 @@
         }
       }
 
-      return shareRecipient;
+      return shareRecipient || '';
     }
 
     /**
