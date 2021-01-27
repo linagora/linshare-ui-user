@@ -59,12 +59,17 @@
       "HEADERS": {
         "LABEL": "Этикетка",
         "ACTIVATION_DATE": "Дата активации",
+        "ACTIVATION": "Активация",
         "ARCHIVE_DATE": "Дата архивации",
+        "ARCHIVE": "Архив",
         "EXPIRATION_DATE": "Срок годности",
+        "EXPIRATION": "Срок действия",
         "FILES": "Файлы",
         "STATUS": "Статус",
         "TYPE": "Тип",
         "CREATION_DATE": "Дата создания",
+        "MODIFICATION_DATE": "Дата изменения",
+        "MODIFICATION": "Модификация",
         "SIZE": "размер",
         "EMAIL": "Эл. адрес",
         "RECIPIENT": "получатели"

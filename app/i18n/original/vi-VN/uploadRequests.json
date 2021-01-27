@@ -59,12 +59,17 @@
       "HEADERS": {
         "LABEL": "Nhãn",
         "ACTIVATION_DATE": "Ngày kích hoạt",
+        "ACTIVATION": "Kích hoạt",
         "ARCHIVE_DATE": "Ngày lưu trữ",
+        "ARCHIVE": "Lưu trữ",
         "EXPIRATION_DATE": "Ngày hết hạn",
+        "EXPIRATION": "Hết hạn",
         "FILES": "Số file",
         "STATUS": "Trạng thái",
         "TYPE": "Loại",
         "CREATION_DATE": "Ngày tạo",
+        "MODIFICATION_DATE": "Ngày sửa đổi",
+        "MODIFICATION": "Sửa đổi",
         "SIZE": "Kích cỡ",
         "EMAIL": "Email",
         "RECIPIENT": "Người nhận"

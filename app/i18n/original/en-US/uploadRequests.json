@@ -59,12 +59,17 @@
       "HEADERS": {
         "LABEL": "Label",
         "ACTIVATION_DATE": "Activation date",
+        "ACTIVATION": "Activation",
         "ARCHIVE_DATE": "Archive date",
+        "ARCHIVE": "Archive",
         "EXPIRATION_DATE": "Expiration date",
+        "EXPIRATION": "Expiration",
         "FILES": "Files",
         "STATUS": "Status",
         "TYPE": "Type",
         "CREATION_DATE": "Creation date",
+        "MODIFICATION_DATE": "Modification date",
+        "MODIFICATION": "Modification",
         "SIZE": "Size",
         "EMAIL": "Email",
         "RECIPIENT": "Recipient"

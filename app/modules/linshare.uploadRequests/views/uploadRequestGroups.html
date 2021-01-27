@@ -79,7 +79,7 @@
                       <!-- SORT OPTIONS -->
 
                       <li role="menuitem">
-                        <a href="" class="ng-binding selected-sorting"
+                        <a href="" class="ng-binding"
                           ng-click="uploadRequestGroupsVm.sortDropdownSetActive('label', $event)">
                           <span class="caret-area">
                             <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
@@ -119,7 +119,7 @@
                           <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.ACTIVATION_DATE</span>
                         </a>
                       </li>
-                      <li role="menuitem">
+                      <li role="menuitem" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.archived'">
                         <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('expiryDate', $event)">
                           <span class="caret-area">
                             <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
@@ -127,6 +127,26 @@
                                           'zmdi-caret-up'" class="zmdi"></i>
                           </span>
                           <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION_DATE</span>
+                        </a>
+                      </li>
+                      <li role="menuitem" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.archived'">
+                        <a href="" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('modificationDate', $event)">
+                          <span class="caret-area">
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
+                                          'zmdi-caret-down' :
+                                          'zmdi-caret-up'" class="zmdi"></i>
+                          </span>
+                          <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.ARCHIVE_DATE</span>
+                        </a>
+                      </li>
+                      <li role="menuitem">
+                        <a href="" class="selected-sorting" ng-click="uploadRequestGroupsVm.sortDropdownSetActive('modificationDate', $event)">
+                          <span class="caret-area">
+                            <i ng-class="uploadRequestGroupsVm.tableParamsService.getToggleSelectedSort() ?
+                                          'zmdi-caret-down' :
+                                          'zmdi-caret-up'" class="zmdi"></i>
+                          </span>
+                          <span translate>UPLOAD_REQUESTS.TABLE.HEADERS.MODIFICATION_DATE</span>
                         </a>
                       </li>
                       <li role="menuitem">
@@ -409,19 +429,25 @@
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
-                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ACTIVATION_DATE' | translate"
+                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ACTIVATION' | translate"
                   data-sortable="'activationDate'" header-class="'col-4'">
                   {{uploadRequestGroup.activationDate | lsDate: 'mediumDate'}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.archived'"
-                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION_DATE' | translate"
-                  data-sortable="'modificationDate'" header-class="'col-4'">
+                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION' | translate"
+                  data-sortable="'expiryDate'" header-class="'col-4'">
                   {{uploadRequestGroup.expiryDate | lsDate: 'mediumDate'}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.archived'"
-                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ARCHIVE_DATE' | translate"
+                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ARCHIVE' | translate"
+                  data-sortable="'modificationDate'" header-class="'col-4'">
+                  {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate'}}
+                </td>
+
+                <td class="hidden-xs"
+                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.MODIFICATION' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
                   {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate'}}
                 </td>
