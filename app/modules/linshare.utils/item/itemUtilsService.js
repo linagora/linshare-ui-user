@@ -132,8 +132,10 @@
 
           return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
         })
-        .then(function() {
-          callback(items);
+        .then(confirmation => {
+          if (confirmation) {
+            callback(items);
+          }
         });
     }
 
