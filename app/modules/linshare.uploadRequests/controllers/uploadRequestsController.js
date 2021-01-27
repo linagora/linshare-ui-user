@@ -55,7 +55,7 @@ function uploadRequestsController(
   uploadRequestsVm.allSelectedHasStatusOf = allSelectedHasStatusOf;
   uploadRequestsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
   uploadRequestsVm.showDetails = showDetails;
-  uploadRequestsVm.revalidateDateFields = revalidateDateFields;
+  uploadRequestsVm.onUpdateSuccess = onUpdateSuccess;
   uploadRequestsVm.showUploadRequestGroupDetails = showUploadRequestGroupDetails;
   uploadRequestsVm.paramFilter = { recipientEmail: '' };
   uploadRequestsVm.selectedIndex = 0;
@@ -103,7 +103,6 @@ function uploadRequestsController(
             uploadRequestsVm.archiveUploadRequest = archiveUploadRequest;
             uploadRequestsVm.downloadEntries = downloadEntries;
             uploadRequestsVm.removeArchivedUploadRequests = removeArchivedUploadRequests;
-            uploadRequestsVm.updateUploadRequest = updateUploadRequest;
             uploadRequestsVm.selectedUploadRequests = tableParamsService.getSelectedItemsList();
             uploadRequestsVm.tableParams = tableParamsService.getTableParams();
             uploadRequestsVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
@@ -312,52 +311,21 @@ function uploadRequestsController(
     uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
   }
 
-  function setSubmitted(form) {
-    form.$setSubmitted();
-    form.forEach(item => {
-      if (item && item.$$parentForm === form && item.$setSubmitted) {
-        setSubmitted(item);
-      }
-    });
-  }
+  function onUpdateSuccess(updated) {
+    const itemIndex = uploadRequestsVm.itemsList.findIndex(item => item.uuid === updated.uuid);
 
-  function updateUploadRequest(form, uploadRequest) {
-    if (!form.$valid) {
-      setSubmitted(form);
-      toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
-
-      return;
+    if (itemIndex >= 0) {
+      uploadRequestsVm.itemsList[itemIndex] = _.assign(uploadRequestsVm.itemsList[itemIndex], updated);
     }
 
-    uploadRequest
-      .update()
-      .then(updated => {
-        const itemIndex = uploadRequestsVm.itemsList.findIndex(item => item.uuid === updated.uuid);
-
-        if (itemIndex >= 0) {
-          uploadRequestsVm.itemsList[itemIndex] = _.assign(uploadRequestsVm.itemsList[itemIndex], updated);
-        }
-
-        uploadRequestsVm.tableParams.reload();
-        sidebarService.hide();
-
-        showToastAlertFor('update', 'info');
-      })
-      .catch(error => (error && showToastAlertFor('update', 'error')));
+    uploadRequestsVm.tableParams.reload();
+    sidebarService.hide();
   }
 
   function downloadEntries(uploadRequest) {
     const url = uploadRequestGroupRestService.getDownloadEntriesUrl(uploadRequestGroup.uuid, uploadRequest.uuid);
 
     documentUtilsService.download(url, uploadRequestGroup.label);
-  }
-
-  function revalidateDateFields(form) {
-    $timeout(() => {
-      form.notificationDate.$validate();
-      form.expirationDate.$validate();
-      form.activationDate.$validate();
-    });
   }
 
   function showUploadRequestGroupDetails() {

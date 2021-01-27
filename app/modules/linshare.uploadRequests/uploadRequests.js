@@ -11,6 +11,8 @@ require('./constants');
 require('./components/uploadRequestStatus/uploadRequestStatusComponent');
 require('./components/uploadRequestGroupForm/uploadRequestGroupForm');
 require('./components/uploadRequestGroupForm/uploadRequestGroupFormController');
+require('./components/uploadRequestForm/uploadRequestForm');
+require('./components/uploadRequestForm/uploadRequestFormController');
 require('./controllers/uploadRequestEntriesController');
 require('./controllers/uploadRequestsController');
 require('./controllers/uploadRequestGroupsController');

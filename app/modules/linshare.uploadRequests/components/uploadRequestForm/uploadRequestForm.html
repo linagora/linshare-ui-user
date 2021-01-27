@@ -1,0 +1,233 @@
+<form name="$ctrl.form">
+  <div class="create-upload-request">
+    <div class="recipients-form-sections clearfix">
+      <div ng-if="$ctrl.uploadRequestObject.functionalityOfExpiration.enable"
+        class="col-xs-12 field-ctn clearfix">
+        <label for="expirationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+          RIGHT_PANEL.DETAILS.EXPIRATION_DATE
+        </label>
+        <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+          ng-class="{'is-opened': opened == true}">
+          <div class="fg-line datepicker-ctn" ng-class="
+            {
+              'fg-toggled': opened == true,
+              'has-error' : ($ctrl.form.expiration.$touched ||$ctrl.form.$submitted) && $ctrl.form.expiration.$invalid
+            }">
+            <div class="form-inline">
+              <input working-date-picker ng-click="open($event, 'opened')" type="text"
+                ng-disabled="!$ctrl.uploadRequestObject.functionalityOfExpiration.canOverride"
+                class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                is-open="opened" required
+                datepicker-options="$ctrl.uploadRequestObject.expirationDateOptions"
+                min="{{$ctrl.uploadRequestObject.expirationDateOptions.minDate}}"
+                max="{{$ctrl.uploadRequestObject.expirationDateOptions.maxHTMLDate}}"
+                name='expirationDate' ng-model="$ctrl.uploadRequestObject.expiryDate"
+                ng-change="$ctrl.uploadRequestObject.calculateDatePickerOptions();
+                  $ctrl.revalidateDateFields($ctrl.form)" />
+            </div>
+            <span ng-show="$ctrl.form.expiration.$invalid" translate
+              translate-interpolation="messageformat"
+              translate-values="{ value: $ctrl.uploadRequestObject.getMaxDateOfExpiration('DD MMM YYYY') }">
+              UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 field-ctn clearfix"
+        ng-if="$ctrl.uploadRequestObject.functionalityOfTotalSizeOfFiles.enable">
+        <label for="totalSizeOfFiles" class="label-muted col-xs-6 no-padding" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.TOTAL_SIZE_OF_FILES
+        </label>
+        <div class="col-xs-6 flex-combine-input">
+          <input ng-disabled="!$ctrl.uploadRequestObject.functionalityOfTotalSizeOfFiles.canOverride"
+            class="form-control custom-bordered-input"
+            min="1"
+            max="{{$ctrl.uploadRequestObject.totalSizeOfFiles.maxValue}}" name="totalSizeOfFiles"
+            ng-model="$ctrl.uploadRequestObject.totalSizeOfFiles.value" type="number" required/>
+          <md-select class="form-control custom-bordered-select m-0"
+            ng-model="$ctrl.uploadRequestObject.totalSizeOfFiles.unit" name="totalSizeOfFilesUnit"
+            ng-disabled="!$ctrl.uploadRequestObject.functionalityOfTotalSizeOfFiles.canOverride"
+            ng-change="$ctrl.uploadRequestObject.calculateMaxSize('total')"
+            required>
+            <md-option value="KB">KB</md-option>
+            <md-option value="MB">MB</md-option>
+            <md-option value="GB">GB</md-option>
+          </md-select>
+        </div>
+        <div class="has-error">
+          <span
+            ng-show="($ctrl.form.totalSizeOfFiles.$invalid
+              || $ctrl.form.totalSizeOfFilesUnit.$invalid) && $ctrl.uploadRequestObject.getMaxSize('total')"
+            translate translate-interpolation="messageformat"
+            translate-values="{ max: $ctrl.uploadRequestObject.getMaxSize('total', true) }">
+            UPLOAD_REQUESTS.ERROR.TOTAL_SIZE_OF_FILES_REQUIRED
+          </span>
+          <span
+            ng-show="($ctrl.form.totalSizeOfFiles.$invalid
+              || $ctrl.form.totalSizeOfFilesUnit.$invalid) && !$ctrl.uploadRequestObject.getMaxSize('total')"
+            translate>
+            UPLOAD_REQUESTS.ERROR.TOTAL_SIZE_OF_FILES_REQUIRED_ONLY
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-12 field-ctn clearfix"
+        ng-if="$ctrl.uploadRequestObject.functionalityOfMaxNumberOfFiles.enable">
+        <label for="maxFileCount" class="label-muted col-xs-6 no-padding" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.MAX_NUMBER_OF_FILES
+        </label>
+        <div class="col-xs-6 flex-combine-input">
+          <input name="maxFileCount" required
+            min="1"
+            max="{{$ctrl.uploadRequestObject.functionalityOfMaxNumberOfFiles.maxValue}}"
+            ng-disabled="!$ctrl.uploadRequestObject.functionalityOfMaxNumberOfFiles.canOverride"
+            class="form-control custom-bordered-input custom-single-input"
+            ng-model="$ctrl.uploadRequestObject.maxFileCount" type="number" />
+        </div>
+        <div class="has-error">
+          <span
+            ng-show="$ctrl.form.maxFileCount.$invalid && $ctrl.uploadRequestObject.functionalityOfMaxNumberOfFiles.maxValue"
+            translate translate-interpolation="messageformat"
+            translate-values="{ max: $ctrl.uploadRequestObject.functionalityOfMaxNumberOfFiles.maxValue}">
+            UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED
+          </span>
+          <span
+            ng-show="$ctrl.form.maxFileCount.$invalid && !$ctrl.uploadRequestObject.functionalityOfMaxNumberOfFiles.maxValue"
+            translate>
+            UPLOAD_REQUESTS.ERROR.MAX_NUMBER_OF_FILES_REQUIRED_ONLY
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-12 field-ctn clearfix"
+        ng-if="$ctrl.uploadRequestObject.functionalityOfMaxSizeOfAFile.enable">
+        <label for="maxSizeOfAFile" class="label-muted col-xs-6 no-padding" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.MAX_SIZE_OF_A_FILE
+        </label>
+        <div class="col-xs-6 flex-combine-input">
+          <input ng-disabled="!$ctrl.uploadRequestObject.functionalityOfMaxSizeOfAFile.canOverride"
+            class="form-control custom-bordered-input" name="maxSizeOfAFile"
+            min="1"
+            max="{{$ctrl.uploadRequestObject.maxSizeOfAFile.maxValue}}" required
+            ng-model="$ctrl.uploadRequestObject.maxSizeOfAFile.value" type="number" />
+          <md-select class="form-control m-0 custom-bordered-select"
+            ng-model="$ctrl.uploadRequestObject.maxSizeOfAFile.unit" name="maxSizeOfAFileUnit"
+            required ng-disabled="!$ctrl.uploadRequestObject.functionalityOfMaxSizeOfAFile.canOverride"
+            ng-change="$ctrl.uploadRequestObject.calculateMaxSize('one')">
+            <md-option value="KB">KB</md-option>
+            <md-option value="MB">MB</md-option>
+            <md-option value="GB">GB</md-option>
+          </md-select>
+        </div>
+        <div class="has-error">
+          <span
+            ng-show="($ctrl.form.maxSizeOfAFile.$invalid || $ctrl.form.maxSizeOfAFileUnit.$invalid) && $ctrl.uploadRequestObject.getMaxSize('one')"
+            translate translate-interpolation="messageformat"
+            translate-values="{ max: $ctrl.uploadRequestObject.getMaxSize('one', true) }">
+            UPLOAD_REQUESTS.ERROR.MAX_SIZE_OF_A_FILE_REQUIRED
+          </span>
+          <span
+            ng-show="($ctrl.form.maxSizeOfAFile.$invalid || $ctrl.form.maxSizeOfAFileUnit.$invalid) && !$ctrl.uploadRequestObject.getMaxSize('one')"
+            translate>
+            UPLOAD_REQUESTS.ERROR.MAX_SIZE_OF_A_FILE_REQUIRED_ONLY
+          </span>
+        </div>
+      </div>
+
+      <div ng-if="$ctrl.uploadRequestObject.functionalityOfActivation.enable
+       && ($ctrl.uploadRequestObject !== 'ENABLED' && $ctrl.uploadRequestObject.operation === 'update')"
+        class="col-xs-12 field-ctn clearfix">
+        <label for="activationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
+        </label>
+        <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+          ng-class="{'is-opened': opened == true}">
+          <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.activation.$touched ||$ctrl.form.$submitted)
+              && $ctrl.form.activation.$invalid)}">
+            <div class="form-inline">
+              <input working-date-picker ng-click="open($event, 'opened')" type="text"
+                ng-disabled="!$ctrl.uploadRequestObject.functionalityOfActivation.canOverride"
+                class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                is-open="opened" ng-required="true" name="activationDate"
+                datepicker-options="$ctrl.uploadRequestObject.activationDateOptions"
+                min="{{$ctrl.uploadRequestObject.activationDateOptions.minHTMLDate}}"
+                max="{{$ctrl.uploadRequestObject.activationDateOptions.maxHTMLDate}}"
+                ng-model="$ctrl.uploadRequestObject.activationDate"
+                ng-change="$ctrl.uploadRequestObject.calculateDatePickerOptions();
+                  $ctrl.revalidateDateFields($ctrl.form)" />
+            </div>
+            <span ng-show="$ctrl.form.activation.$invalid" translate
+              translate-interpolation="messageformat"
+              translate-values="{ value: $ctrl.uploadRequestObject.getMinDateOfActivation('DD MMM YYYY') }">
+              UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 field-ctn clearfix"
+        ng-if="$ctrl.uploadRequestObject.functionalityOfDeletion.enable">
+        <label for="canDeleteDocument" class="label-muted col-xs-6 no-padding" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.ALLOW_DELETION
+        </label>
+        <div class="col-xs-6 flex-combine-input">
+          <input type="checkbox" ng-checked="$ctrl.uploadRequestObject.canDeleteDocument"
+            name="canDeleteDocument" ng-model="$ctrl.uploadRequestObject.canDeleteDocument"
+            ng-disabled="!$ctrl.uploadRequestObject.functionalityOfDeletion.canOverride">
+        </div>
+      </div>
+      <div class="col-xs-12 field-ctn clearfix"
+        ng-if="$ctrl.uploadRequestObject.functionalityOfClosure.enable">
+        <label for="canClose" class="label-muted col-xs-6 no-padding" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.ALLOW_CLOSURE
+        </label>
+        <div class="col-xs-6 flex-combine-input">
+          <input type="checkbox" ng-checked="$ctrl.uploadRequestObject.canClose"
+            name="canClose" ng-model="$ctrl.uploadRequestObject.canClose"
+            ng-disabled="!$ctrl.uploadRequestObject.functionalityOfClosure.canOverride">
+        </div>
+      </div>
+      <div class="col-xs-12 field-ctn clearfix"
+        ng-if="$ctrl.uploadRequestObject.functionalityOfExpiryNotification.enable">
+        <label for="notificationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE
+        </label>
+        <div class="datepicker-border-fix date-picker dp-blue col-xs-6"
+          ng-class="{'is-opened': opened == true}">
+          <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.notificationDate.$touched ||$ctrl.form.$submitted)
+            && $ctrl.form.notificationDate.$invalid)}">
+            <div class="form-inline">
+              <input working-date-picker ng-click="open($event, 'opened')" type="text"
+                ng-disabled="!$ctrl.uploadRequestObject.functionalityOfExpiryNotification.canOverride"
+                class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
+                is-open="opened" ng-required="true" name='notificationDate'
+                datepicker-options="$ctrl.uploadRequestObject.notificationDateOptions"
+                min="{{$ctrl.uploadRequestObject.notificationDateOptions.minHTMLDate}}"
+                max="{{$ctrl.uploadRequestObject.notificationDateOptions.maxHTMLDate}}"
+                ng-model="$ctrl.uploadRequestObject.notificationDate"
+                ng-change="$ctrl.uploadRequestObject.calculateDatePickerOptions();
+                  $ctrl.revalidateDateFields($ctrl.form)" />
+            </div>
+            <span ng-show="$ctrl.form.notificationDate.$invalid" translate
+              translate-interpolation="messageformat" translate-values="{ min: $ctrl.uploadRequestObject.getMinDateOfNotification('DD MMM YYYY'),
+                  max: $ctrl.uploadRequestObject.getMaxDateOfNotification('DD MMM YYYY')  }">
+              UPLOAD_REQUESTS.ERROR.INVALID_NOTIFICATION_DATE
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 field-ctn clearfix"
+        ng-if="$ctrl.uploadRequestObject.functionalityOfNotificationLanguage.enable">
+        <label class="label-muted col-xs-6 no-padding" translate>
+          UPLOAD_REQUESTS.FORM_CREATE.NOTIFICATION_LANGUAGE
+        </label>
+        <div class="col-xs-6 flex-combine-input">
+          <md-select class="form-control m-0 custom-bordered-lang-select"
+            ng-disabled="!$ctrl.uploadRequestObject.functionalityOfNotificationLanguage.canOverride"
+            ng-model="$ctrl.uploadRequestObject.locale">
+            <md-option
+              ng-repeat="unit in $ctrl.uploadRequestObject.functionalityOfNotificationLanguage.units"
+              ng-value="unit">{{unit}}</md-option>
+          </md-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
