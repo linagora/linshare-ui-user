@@ -81,7 +81,7 @@
       var unit = _.isUndefined(selectedUnit) ? find(value) : selectedUnit;
 
       result = value / Math.pow(10, units[unit].factor);
-      result = (result % 1 === 0) ? result : result.toFixed(2);
+      result = (result % 1 === 0) ? result : Number(result.toFixed(2));
 
       return showUnit ? result + ' ' + unit : result;
     }
@@ -93,9 +93,12 @@
      * @returns {string} The most apropriate unit
      * @memberOf linshare.components.unitService
      */
-    function find(value) {
+    function find(value, options) {
+      const { upperbound, lowerbound } = options;
+
       var
         length = value.toString().length,
+        unit,
         multiple3 = {
           1: 3,
           2: 3,
@@ -115,14 +118,14 @@
           23: 24,
         },
         size = {
-          3: units.B.value,
-          6: units.KB.value,
-          9: units.MB.value,
-          12: units.GB.value,
-          15: units.TB.value,
-          18: units.PB.value,
-          21: units.EB.value,
-          24: units.ZB.value
+          3: units.B,
+          6: units.KB,
+          9: units.MB,
+          12: units.GB,
+          15: units.TB,
+          18: units.PB,
+          21: units.EB,
+          24: units.ZB
         };
 
       if (multiple3.hasOwnProperty(length)) {
@@ -130,7 +133,32 @@
       }
 
       if (size.hasOwnProperty(length)) {
-        return size[length];
+        unit = size[length];
+
+        let upperboundLimit = 24, lowerboundLimit = 9;
+
+        Object.keys(size).map(item => {
+          if (size[item].value === upperbound) {
+            upperboundLimit = item;
+          }
+          if (size[item].value === lowerbound) {
+            lowerboundLimit = item;
+          }
+        });
+
+        while (length > lowerboundLimit) {
+          const convertedValue = Number(byteTo(value, unit.value));
+
+          if (convertedValue * Math.pow(10, unit.factor) !== value || length > upperboundLimit) {
+            length -= 3;
+            unit = size[length];
+          } else {
+            break;
+          }
+        };
+
+        return unit.value;
+
       } else {
         return units.YB.value;
       }
@@ -162,10 +190,10 @@
       const mapping = {
         'KILO': 1,
         'KB': 1,
-        'MEGA': 1024,
-        'MB': 1024,
-        'GIGA': 1048576,
-        'GB': 1048576
+        'MEGA': 1000,
+        'MB': 1000,
+        'GIGA': 1000000,
+        'GB': 1000000
       };
 
       return mapping[configUnit] / mapping[currentUnit];

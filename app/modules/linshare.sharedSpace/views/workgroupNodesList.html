@@ -819,7 +819,7 @@
                   data-sortable="'size'"
                   header-class="'col-5 hide-if-toggled-sidebar'"
                 >
-                  {{::workgroupNodesVm.isDocument(nodeItem.type) ? (nodeItem.size | readableSize: true) : ''}}
+                  {{::workgroupNodesVm.isDocument(nodeItem.type) ? (nodeItem.size | readableSize) : ''}}
                 </td>
               </tr>
             </table>

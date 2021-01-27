@@ -84,7 +84,7 @@
                           </a>
                           <span>
                             <p class="mobile-list-item-info visible-xs">
-                              {{::documentFile.size | readableSize: true}}
+                              {{::documentFile.size | readableSize}}
                             </p>
                           </span>
                         </span>
@@ -104,7 +104,7 @@
                     <td class="hidden-xs"
                         data-ng-if="!mainVm.isVisible()"
                         data-title="'TABLE_HEADER.SIZE' | translate" data-sortable="'size'">
-                        {{::documentFile.size | readableSize: true}}
+                        {{::documentFile.size | readableSize}}
                     </td>
                   </tr>
                 </table>

@@ -40,7 +40,7 @@
                     <span>&nbsp;| <span translate>UPLOAD_DESTINATION</span> :
                       {{::file.folderDetails.workgroupName | uppercase}} >> {{::file.folderDetails.folderName}}</span>
                   </small>
-                  <small class="lv-small pull-right clearfix">{{::file.size | readableSize: true}}</small>
+                  <small class="lv-small pull-right clearfix">{{::file.size | readableSize}}</small>
                   <div class="clearfix"></div>
                   <uib-progressbar data-ng-class="{
                   'progress-striped active upload-server-state' : file.doingAsyncUpload,
@@ -54,7 +54,7 @@
                 <ul class="lv-actions actions align-list-icons">
                   <li data-ng-if="!file.paused && !file.error" data-ng-hide="file.isComplete()">
                     <a href="" data-ng-click="uploadQueueVm.pauseFile(file)" event-propagation-stop>
-                      <i 
+                      <i
                         class="zmdi zmdi-pause"
                         translate-attr="{title: 'SELECTION_TOOLBAR.PAUSE'}"
                       >

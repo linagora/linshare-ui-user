@@ -447,7 +447,7 @@
                       </p>
                       <span class="secondary-info-ctn">
                         <p class="mobile-list-item-info visible-xs">
-                          {{nodeItem.creationDate | relativeTime}} {{::', '+(nodeItem.size | readableSize: true)}}
+                          {{nodeItem.creationDate | relativeTime}} {{::', '+(nodeItem.size | readableSize)}}
                         </p>
                       </span>
                     </span>
@@ -684,7 +684,7 @@
                   data-title="::'TABLE_HEADER.SIZE' | translate"
                   header-class="'col-5 hide-if-toggled-sidebar cursor-default'"
                 >
-                  {{::nodeItem.size | readableSize: true}}
+                  {{::nodeItem.size | readableSize}}
                 </td>
               </tr>
             </table>

@@ -354,7 +354,7 @@ function UploadRequestObjectCoreService(
     if (!value) {
       return;
     }
-    const appropriateUnit = unitService.find(value);
+    const appropriateUnit = unitService.find(value, { upperbound: 'GB', lowerbound: 'KB' });
     const convertedValue = unitService.byteTo(value, appropriateUnit);
 
     return {
