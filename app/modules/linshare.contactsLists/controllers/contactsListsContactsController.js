@@ -11,10 +11,10 @@
     }])
     .controller('contactsListsContactsController', contactsListsContactsController);
 
-  contactsListsContactsController.$inject = ['_', '$filter', '$scope', '$timeout', '$transition$', '$transitions',
+  contactsListsContactsController.$inject = ['_', '$filter', '$scope', '$timeout', '$transition$',
     '$translate', 'contactsListsContacts', 'contactsListsListRestService',
     'contactsListsContactsRestService', 'contactsListsService', 'documentUtilsService', 'itemUtilsService',
-    'lsAppConfig', 'NgTableParams', 'toastService'
+    'lsAppConfig', 'NgTableParams', 'toastService', 'formUtilsService'
   ];
 
   /**
@@ -23,10 +23,10 @@
    * @memberOf LinShare.contactsLists
    */
   // TODO: Should dispatch some function to other service or controller
-  function contactsListsContactsController(_, $filter, $scope, $timeout, $transition$, $transitions, $translate,
+  function contactsListsContactsController(_, $filter, $scope, $timeout, $transition$, $translate,
     contactsListsContacts, contactsListsListRestService,
     contactsListsContactsRestService, contactsListsService, documentUtilsService, itemUtilsService, lsAppConfig,
-    NgTableParams, toastService) {
+    NgTableParams, toastService, formUtilsService) {
     var contactsListsContactsVm = this;
     var stillExists;
 
@@ -54,7 +54,6 @@
     contactsListsContactsVm.saveContact = saveContact;
     contactsListsContactsVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     contactsListsContactsVm.selectedContacts = [];
-    contactsListsContactsVm.setSubmitted = setSubmitted;
     contactsListsContactsVm.showItemDetails = showItemDetails;
     contactsListsContactsVm.sortDropdownSetActive = sortDropdownSetActive;
     contactsListsContactsVm.tableApplyFilter = tableApplyFilter;
@@ -239,7 +238,7 @@
 
           params.total(contactsListsContacts.length);
           params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-          
+
           return (contactsListsContacts.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
@@ -369,22 +368,6 @@
     }
 
     /**
-     * @name setSubmitted
-     * @desc description
-     * @param {DOM} form - form to validate
-     * @memberOf LinShare.contactsLists.contactsListsContactsController
-     */
-    // TODO : guest same method to refactor
-    function setSubmitted(form) {
-      form.$setSubmitted();
-      _.forEach(form, function(item) {
-        if (item && item.$$parentForm === form && item.$setSubmitted) {
-          setSubmitted(item);
-        }
-      });
-    }
-
-    /**
      * @name showItemDetails
      * @desc Get selected contactsList's details and open right sidebar with these details
      * @param {Object} item - contactsList
@@ -508,7 +491,7 @@
             $scope.mainVm.sidebar.hide();
           });
       } else {
-        contactsListsContactsVm.setSubmitted(form);
+        formUtilsService.setSubmitted(form);
       }
     }
     /**

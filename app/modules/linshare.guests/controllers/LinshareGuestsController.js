@@ -19,7 +19,6 @@
     '_',
     '$filter',
     '$scope',
-    '$transitions',
     '$translate',
     'GuestObjectService',
     'guestRestService',
@@ -27,7 +26,8 @@
     'lsAppConfig',
     'NgTableParams',
     'toastService',
-    'withEmail'
+    'withEmail',
+    'formUtilsService'
   ];
 
   /**
@@ -36,12 +36,10 @@
    * @memberOf LinShare.Guests
    */
   // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
-  /* jshint maxparams: false, maxstatements: false */
   function LinshareGuestsController(
     _,
     $filter,
     $scope,
-    $transitions,
     $translate,
     GuestObjectService,
     guestRestService,
@@ -49,7 +47,8 @@
     lsAppConfig,
     NgTableParams,
     toastService,
-    withEmail
+    withEmail,
+    formUtilsService
   ) {
     /* jshint validthis: true */
     var guestVm = this;
@@ -73,7 +72,6 @@
     guestVm.paramFilter = {};
     guestVm.selectedGuest = {};
     guestVm.selectedGuests = [];
-    guestVm.setSubmitted = setSubmitted;
     guestVm.showGuestDetails = showGuestDetails;
     guestVm.tableAddSelectedGuest = tableAddSelectedGuest;
     guestVm.tableApplyFilter = tableApplyFilter;
@@ -136,7 +134,7 @@
           guestVm.tableParams.reload();
         });
       } else {
-        guestVm.setSubmitted(form);
+        formUtilsService.setSubmitted(form);
       }
     }
 
@@ -226,7 +224,7 @@
             var files = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 
             params.total(files.length);
-            
+
             return files.slice((params.page() - 1) * params.count(), params.page() * params.count());
           });
         }
@@ -244,22 +242,6 @@
       $scope.mainVm.sidebar.setData(guestVm);
       $scope.mainVm.sidebar.setContent(content || lsAppConfig.guestDetails);
       $scope.mainVm.sidebar.show();
-    }
-
-    /**
-     *  @name setSubmitted
-     *  @desc Set a form & subform to the state 'submitted'
-     *  @param {DOM Object} form - The form to set to submitted state
-     *  @memberOf LinShare.Guests.LinshareGuestsController
-     */
-    //TODO - KLE: To be put in a service utils
-    function setSubmitted(form) {
-      form.$setSubmitted();
-      angular.forEach(form, function(item) {
-        if (item && item.$$parentForm === form && item.$setSubmitted) {
-          setSubmitted(item);
-        }
-      });
     }
 
     /**
@@ -408,7 +390,7 @@
           guestVm.tableParams.reload();
         });
       } else {
-        guestVm.setSubmitted(form);
+        formUtilsService.setSubmitted(form);
       }
     }
 
