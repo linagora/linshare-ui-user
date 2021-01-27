@@ -18,6 +18,7 @@ uploadRequestEntriesController.$inject = [
   'uploadRequestGroup',
   'UploadRequestGroupObjectService',
   'uploadRequestGroupRestService',
+  'UploadRequestObjectService',
   'uploadRequestRestService',
   'uploadRequestUtilsService',
   'UPLOAD_REQUESTS_STATE_STATUS_MAPPING'
@@ -39,6 +40,7 @@ function uploadRequestEntriesController(
   uploadRequestGroup,
   UploadRequestGroupObjectService,
   uploadRequestGroupRestService,
+  UploadRequestObjectService,
   uploadRequestRestService,
   uploadRequestUtilsService,
   UPLOAD_REQUESTS_STATE_STATUS_MAPPING
@@ -54,6 +56,7 @@ function uploadRequestEntriesController(
   uploadRequestEntriesVm.isArchived = uploadRequest.status === 'ARCHIVED';
   uploadRequestEntriesVm.backgroundContent = getBackgroundContent();
   uploadRequestEntriesVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
+  uploadRequestEntriesVm.showUploadRequestDetails = showUploadRequestDetails;
   uploadRequestEntriesVm.paramFilter = { name: '' };
   uploadRequestEntriesVm.fabButton = {
     toolbar: {
@@ -252,5 +255,40 @@ function uploadRequestEntriesController(
         uploadRequestEntriesVm.currentSelectedUploadRequest = uploadRequest;
         uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
       });
+  }
+
+  function showUploadRequestDetails() {
+    const data = {
+      onUpdateSuccess() {
+        sidebarService.hide();
+        $state.reload();
+      }
+    };
+    const content = uploadRequest.collective ?
+      lsAppConfig.uploadRequestGroupDetails :
+      lsAppConfig.uploadRequestDetails;
+    const fetchers = uploadRequest.collective ?
+      [
+        uploadRequestGroupRestService.get(uploadRequestGroup.uuid),
+        uploadRequestGroupRestService.listUploadRequests(uploadRequestGroup.uuid)
+      ] :
+      [
+        uploadRequestRestService.get(uploadRequest.uuid)
+      ];
+
+    $q.all(fetchers).then(results => {
+      if (uploadRequest.collective) {
+        data.uploadRequestGroupObject = new UploadRequestGroupObjectService({
+          ...results[0],
+          recipients: results[1][0].recipients.map(recipient => recipient.mail)
+        });
+      } else {
+        data.uploadRequestObject = new UploadRequestObjectService(results[0]);
+      }
+
+      sidebarService.setData(data);
+      sidebarService.setContent(content);
+      sidebarService.show();
+    });
   }
 }

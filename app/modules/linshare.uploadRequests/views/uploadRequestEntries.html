@@ -110,6 +110,18 @@
                 </a>
               </span>
 
+              <a
+                href=""
+                class="hidden-xs pull-left"
+                tooltip-popup-delay="350"
+                tooltip-placement="bottom"
+                uib-tooltip="{{'UPLOAD_REQUESTS.TABLE.INFO' | translate}}"
+                tooltip-append-to-body="true"
+                ng-click="uploadRequestEntriesVm.showUploadRequestDetails()"
+              >
+                <i class="ls-upload-request"></i>
+              </a>
+
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
                 <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body
                   is-open="isOpenOrder" ng-class="{'open':isOpenOrder}">
@@ -509,8 +521,17 @@
       class="zmdi zmdi-chevron-left zmdi-hc-2x"
       ng-click="uploadRequestEntriesVm.goBack()"></a>
     <h2 class="header-more-options set-ellipsis">
-      {{::uploadRequestEntriesVm.uploadRequest.label}}
+      {{
+        uploadRequestEntriesVm.uploadRequest.collective ?
+          uploadRequestEntriesVm.uploadRequest.label :
+          uploadRequestEntriesVm.uploadRequest.recipients[0].mail
+      }}
     </h2>
+    <a
+      class="pull-right action-icon ls-upload-request"
+      ng-click="uploadRequestEntriesVm.showUploadRequestDetails()"
+    >
+    </a>
   </div>
 
   <!-- MULTIPLE ACTION MOBILE -->
