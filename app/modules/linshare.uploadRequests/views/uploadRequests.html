@@ -72,6 +72,18 @@
                 </a>
               </span>
 
+              <a
+                href=""
+                class="hidden-xs pull-left"
+                tooltip-popup-delay="350"
+                tooltip-placement="bottom"
+                uib-tooltip="{{'UPLOAD_REQUESTS.TABLE.INFO' | translate}}"
+                tooltip-append-to-body="true"
+                ng-click="uploadRequestsVm.showUploadRequestGroupDetails()"
+              >
+                <i class="ls-upload-request"></i>
+              </a>
+
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
                 <div class="dropdown dropdown-standard  toolbar-mobile-item" uib-dropdown="" dropdown-append-to-body
                   is-open="isOpenOrder" ng-class="{'open':isOpenOrder}">
@@ -521,6 +533,11 @@
     <h2 class="header-more-options set-ellipsis">
       {{::uploadRequestsVm.uploadRequestGroup.label}}
     </h2>
+    <a
+      class="pull-right action-icon ls-upload-request"
+      ng-click="uploadRequestsVm.showUploadRequestGroupDetails()"
+    >
+    </a>
   </div>
 
   <!-- MULTIPLE ACTION MOBILE -->

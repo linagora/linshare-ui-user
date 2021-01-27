@@ -52,6 +52,7 @@
     "TABLE": {
       "SEARCH_BY_LABEL": "Tìm bởi nhãn",
       "SEARCH_BY_RECIPIENT": "Tìm bởi người nhận",
+      "INFO": "Xem thông tin yêu cầu tải lên",
       "FILTER_BY": {
         "ALL": "Tất cả"
       },

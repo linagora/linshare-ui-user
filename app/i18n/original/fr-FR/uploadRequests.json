@@ -52,6 +52,7 @@
     "TABLE": {
       "SEARCH_BY_LABEL": "Recherche par libellé",
       "SEARCH_BY_RECIPIENT": "Recherche par destinataire",
+      "INFO": "Afficher le détail de l'invitation de dépôt",
       "FILTER_BY": {
         "ALL": "Tout"
       },

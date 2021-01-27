@@ -56,6 +56,7 @@ function uploadRequestsController(
   uploadRequestsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
   uploadRequestsVm.showDetails = showDetails;
   uploadRequestsVm.revalidateDateFields = revalidateDateFields;
+  uploadRequestsVm.showUploadRequestGroupDetails = showUploadRequestGroupDetails;
   uploadRequestsVm.paramFilter = { recipientEmail: '' };
   uploadRequestsVm.selectedIndex = 0;
   uploadRequestsVm.fabButton = {
@@ -286,11 +287,10 @@ function uploadRequestsController(
 
   function showDetails(uploadRequest, { selectedIndex = 0 } = {}) {
     uploadRequestRestService.get(uploadRequest.uuid).then(responseUploadRequest => {
-      const uploadRequest = Restangular.stripRestangular(responseUploadRequest);
-
-      uploadRequestsVm.currentSelected = new UploadRequestObjectService(uploadRequest);
-
+      uploadRequestsVm.currentSelected = uploadRequest;
       uploadRequestsVm.selectedIndex = selectedIndex;
+      uploadRequestsVm.uploadRequestObject = new UploadRequestObjectService(responseUploadRequest);
+
       sidebarService.setData(uploadRequestsVm);
       sidebarService.setContent(lsAppConfig.uploadRequestDetails);
       sidebarService.show();
@@ -357,6 +357,27 @@ function uploadRequestsController(
       form.notificationDate.$validate();
       form.expirationDate.$validate();
       form.activationDate.$validate();
+    });
+  }
+
+  function showUploadRequestGroupDetails() {
+    $q.all([
+      uploadRequestGroupRestService.get(uploadRequestGroup.uuid),
+      uploadRequestGroupRestService.listUploadRequests(uploadRequestGroup.uuid),
+    ]).then(([uploadRequestGroup, uploadRequests]) => {
+      const recipients = [];
+
+      uploadRequests.forEach(uploadRequest => recipients.push(...uploadRequest.recipients.map(recipient => recipient.mail)));
+
+      sidebarService.setData({
+        uploadRequestGroupObject: new UploadRequestGroupObjectService({...uploadRequestGroup, recipients}),
+        onUpdateSuccess() {
+          sidebarService.hide();
+          $state.reload();
+        }
+      });
+      sidebarService.setContent(lsAppConfig.uploadRequestGroupDetails);
+      sidebarService.show();
     });
   }
 }
