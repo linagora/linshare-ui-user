@@ -95,10 +95,6 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.GROUP</p>
                     <p translate>{{mainVm.sidebar.getData().currentSelected.collective ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
-                  <div>
-                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
-                    <p>{{mainVm.sidebar.getData().currentSelected.filesUploaded || '0'}}</p>
-                  </div>
                   <div ng-if="mainVm.sidebar.getData().currentSelected.maxFileCount > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
                     <p>{{mainVm.sidebar.getData().currentSelected.maxFileCount}}</p>
