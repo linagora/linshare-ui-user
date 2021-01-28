@@ -415,9 +415,9 @@
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
-                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.FILES' | translate" data-sortable="'fileCount'"
+                  data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.FILES' | translate" data-sortable="'nbrUploadedFiles'"
                   header-class="'col-4'">
-                  {{ uploadRequest.nbrUploadedFiles || 'N/A' }}
+                  {{ uploadRequest.nbrUploadedFiles }}
                 </td>
               </tr>
             </table>
