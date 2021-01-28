@@ -113,7 +113,7 @@
                   <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
                     <!-- FILTER COMPONENT  -->
-                    <filter-box class="clearfix" filter-box-size="true" filter-box-date="true" filter-box-user="true" filter-box-items="documentsList"
+                    <filter-box ng-if="tableParams" class="clearfix" filter-box-size="true" filter-box-date="true" filter-box-user="true" filter-box-items="documentsList"
                       filter-box-table="tableParams">
                     </filter-box>
                   </ul>
@@ -349,13 +349,13 @@
                               >
                                 <span translate>ACTION.PREVIEW</span>
                               </document-preview-button>
-                            </li>                           
+                            </li>
                             <li ng-if="canCopyInWorkGroup">
                               <a data-ng-href="" data-ng-click="openBrowser([documentFile])" event-propagation-stop>
                                 <i class="zmdi groups-home-workgroup"></i>
                                 <span translate>ACTION.COPY_IN_WORKGROUP</span>
                               </a>
-                            </li>                            
+                            </li>
                             <li data-ng-if="::!linshareModeProduction">
                               <a href="" event-propagation-stop>
                                 <i class="zmdi zmdi-share"></i>
