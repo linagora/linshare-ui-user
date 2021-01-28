@@ -146,11 +146,12 @@
      * @memberOf linshare.components.uniteService
      */
     function toByte(value, unit, showUnit) {
-      var result = 0;
-
       if (_.isUndefined(value) || value === null || isNaN(value)) {
-        return result;
+        return value;
       }
+
+      let result;
+
       result = value * Math.pow(10, units[unit].factor);
       result = (result % 1 === 0) ? result : result.toFixed(2);
 
