@@ -379,6 +379,7 @@
 
             mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
             mainVm.show2FA = functionalities.SECOND_FACTOR_AUTHENTICATION.enable;
+            mainVm.showTokenManagement = functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable;
 
             $scope.loggedUser.setUser(user);
             user.firstLetter = user.firstName.charAt(0);
