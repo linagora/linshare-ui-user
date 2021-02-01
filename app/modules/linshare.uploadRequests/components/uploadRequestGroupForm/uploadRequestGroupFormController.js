@@ -76,7 +76,7 @@ function uploadRequestGroupFormController(
       if (
         ( form.notificationDate && form.notificationDate.$invalid ) ||
         ( form.totalSizeOfFiles && form.totalSizeOfFiles.$invalid ) ||
-        ( form.secured && form.secured.$invalid ) ||
+        ( form.protectedByPassword && form.protectedByPassword.$invalid ) ||
         ( form.canDelete && form.canDelete.$invalid ) ||
         ( form.canClose && form.canClose.$invalid )
       ) {
