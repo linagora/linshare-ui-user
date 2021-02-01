@@ -525,6 +525,10 @@
             "AUTHOR": {
               "SENTENCE": "Запрос на загрузку {{resourceName}} был отредактирован.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "Запрос на загрузку {{resourceName}} был отредактирован.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           }
         },

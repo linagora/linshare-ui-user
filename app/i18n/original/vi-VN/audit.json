@@ -461,6 +461,10 @@
           "AUTHOR": {
             "SENTENCE": "Yêu cầu tải lên {{resourceName}} đã được chỉnh sửa.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "Yêu cầu tải lên {{resourceName}} đã được chỉnh sửa.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
       },
