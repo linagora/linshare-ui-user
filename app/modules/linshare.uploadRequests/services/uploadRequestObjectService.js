@@ -41,11 +41,9 @@ function UploadRequestObjectService(
     self = this;
     const dto = {};
 
-    const startedTime = { hour: 0, minute: 0, second: 0, millisecond: 0 };
-
-    dto.activationDate = self.activationDate && moment(self.activationDate).utcOffset(0).set(startedTime).valueOf() || null;
-    dto.expiryDate = self.expiryDate && moment(self.expiryDate).utcOffset(0).set(startedTime).valueOf() || null;
-    dto.notificationDate = self.notificationDate && moment(self.notificationDate).utcOffset(0).set(startedTime).valueOf() || null;
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || null;
+    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf() || null;
+    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf() || null;
     dto.maxFileCount = self.maxFileCount;
     dto.maxDepositSize = unitService.toByte(self.totalSizeOfFiles.value, unitService.formatUnit(self.totalSizeOfFiles.unit));
     dto.maxFileSize = unitService.toByte(self.maxSizeOfAFile.value, unitService.formatUnit(self.maxSizeOfAFile.unit));

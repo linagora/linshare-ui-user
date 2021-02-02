@@ -93,11 +93,9 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    const startedTime = { hour: 0, minute: 0, second: 0, millisecond: 0 };
-
-    dto.activationDate = self.activationDate && moment(self.activationDate).utcOffset(0).set(startedTime).valueOf() || null;
-    dto.expiryDate = self.expiryDate && moment(self.expiryDate).utcOffset(0).set(startedTime).valueOf() || null;
-    dto.notificationDate = self.notificationDate && moment(self.notificationDate).utcOffset(0).set(startedTime).valueOf() || null;
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || null;
+    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf() || null;
+    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf() || null;
     dto.label = self.label;
     dto.body = self.body;
     dto.contactList = self.newRecipients.map(recipient => recipient.mail);
@@ -123,11 +121,9 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    const startedTime = { hour: 0, minute: 0, second: 0, millisecond: 0 };
-
-    dto.activationDate = self.activationDate && moment(self.activationDate).utcOffset(0).set(startedTime).valueOf() || null;
-    dto.expiryDate = self.expiryDate && moment(self.expiryDate).utcOffset(0).set(startedTime).valueOf() || null;
-    dto.notificationDate = self.notificationDate && moment(self.notificationDate).utcOffset(0).set(startedTime).valueOf() || null;
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || null;
+    dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf() || null;
+    dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf() || null;
     dto.label = self.label;
     dto.body = self.body;
     dto.maxFileCount = self.maxFileCount;
