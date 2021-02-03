@@ -38,6 +38,9 @@
         <a ui-sref="secondFactorAuthentication" ng-if="mainVm.show2FA">
           <i class="zmdi zmdi-shield-security"></i> <span translate>SECOND_FACTOR_AUTH.TITLE</span>
         </a>
+        <a ui-sref="tokenManagement" ng-if="mainVm.showTokenManagement">
+          <i class="zmdi zmdi-key"></i> <span translate>TOKEN_MANAGEMENT.TITLE</span>
+        </a>
       </li>
     </ul>
 
