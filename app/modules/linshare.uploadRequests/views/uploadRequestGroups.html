@@ -4,7 +4,7 @@
       <div class="card-header">
         <div id="breadcrumb-wrap">
           <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
-            auto-close="always" tooltip-placement="bottom" tooltip-popup-delay="500" is-open="isOpenNew"
+            auto-close="always" is-open="isOpenNew"
             ng-class="{'open':isOpenNew}">
             <a class="add-menu-group" uib-dropdown-toggle>
               <i class="zmdi zmdi-plus"></i>
@@ -14,6 +14,7 @@
               ng-class="{'open':isOpenNew}">
               <li role="menuitem">
                 <a
+                  class="upload-request-tooltip-trigger"
                   uib-tooltip="{{'UPLOAD_REQUESTS.CREATION_TYPE.COLLECTIVE_TOOLTIP' | translate}}"
                   tooltip-placement="top"
                   ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, true)"
@@ -25,6 +26,7 @@
 
               <li role="menuitem">
                 <a
+                  class="upload-request-tooltip-trigger"
                   uib-tooltip="{{'UPLOAD_REQUESTS.CREATION_TYPE.INDIVIDUAL_TOOLTIP' | translate}}"
                   tooltip-placement="top"
                   ng-click="uploadRequestGroupsVm.loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupCreate, false)"

@@ -122,6 +122,9 @@ function uploadRequestGroupsController(
     $scope.mainVm.sidebar.setData(uploadRequestGroupsVm);
     $scope.mainVm.sidebar.setContent(content || lsAppConfig.uploadRequestGroupCreate);
     $scope.mainVm.sidebar.show();
+
+    // Make tooltips disappear after showing sidebar
+    $('.upload-request-tooltip-trigger').trigger('mouseleave');
   }
 
   /**
