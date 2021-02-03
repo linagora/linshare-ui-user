@@ -7,3 +7,5 @@ angular
   }]);
 
 require('./route');
+require('./controllers/tokenManagementController');
+require('./services/jwtRestService');

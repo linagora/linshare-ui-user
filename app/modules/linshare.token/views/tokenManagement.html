@@ -1,0 +1,290 @@
+<div ui-view="" ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}">
+  <div class="container files">
+    <div class="card">
+      <div class="card-header">
+        <div id="breadcrumb-wrap">
+          <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown">
+            <a class="add-menu-group" uib-dropdown-toggle>
+              <i class="zmdi zmdi-plus"></i>
+            </a>
+          </div>
+
+          <div class="breadcrumbs-ctn hidden-xs">
+            <a class="click-disabled">
+              <i class="zmdi zmdi-key"></i>
+              <span translate>TOKEN_MANAGEMENT.TITLE</span>
+            </a>
+          </div>
+
+          <div id="action-header">
+            <div class="fg-line toolbar-actions-items">
+              <span ng-click="showCheckboxes = !showCheckboxes" class="visible-xs toolbar-mobile-item col-xs-3">
+                <a class="select-all-items plain-txt-btn">
+                  <i class="ls-multi-select" ng-class="{'active-link': showCheckboxes}"
+                    ng-click="tokenManagementVm.resetSelectedTokens()"></i>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="drop-area">
+        <!-- BACKGROUND CONTENT -->
+
+        <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height"
+          ng-class="{'show-bg-drop' : tokenManagementVm.itemsList.length === 0}">
+          <div class="drag-and-drop-content">
+            <div class="drag-icon-ctn ">
+              <div class="bordered-circle">&nbsp;</div>
+              <span class="grey-clr bg-info-icon">
+                <span class="ls-token"></span>
+              </span>
+            </div>
+            <div class="dnd-txt-content">
+              <h1 translate>TOKEN_MANAGEMENT.TABLE.BACKGROUND_CONTENT.TITLE</h1>
+              <p translate>TOKEN_MANAGEMENT.TABLE.BACKGROUND_CONTENT.MESSAGE</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body collapsible-content">
+          <div class="table-responsive">
+            <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
+              ng-table="tokenManagementVm.tableParams" show-filter="true">
+              <tr
+                check-table-height
+                ls-item-selection
+                ng-repeat="token in $data track by token.uuid"
+                data-selected-documents="tokenManagementVm.selectedTokens"
+                data-document-file="token"
+                data-current-selected-document="tokenManagementVm.currentSelectedDocument"
+                data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                ng-class="{
+                  'highlight-list-elem': token.isSelected,
+                  'current-vis': tokenManagementVm.currentSelectedDocument.current.uuid === token.uuid
+                }"
+                class="p-b-5 double-row item-container"
+              >
+                <td data-header="'checkboxheader.html'" class="set-content-left thumb-type-item thumb-groups-preview-ls"
+                  header-class="'col-2 checkbox-col'">
+                  <a ng-click="showCheckboxes ? tokenManagementVm.toggleTokenSelection(token) : null"
+                    class="visible-xs">
+                    <div ng-class="{ 'invisible' : showCheckboxes}">
+                      <i class="m-r-10 iconcolor-text ls-token-item"></i>
+                    </div>
+                    <div class="checkbox-ctn-thumb"
+                      ng-class="{'maintain-vis': token.isSelected , 'hidden-xs' : !showCheckboxes}">
+                    </div>
+                  </a>
+
+                  <a ng-click="tokenManagementVm.toggleTokenSelection(token)" class="hidden-xs">
+                    <div ng-class="{ 'invisible' : showCheckboxes}">
+                      <i class="m-r-10 iconcolor-text ls-token-item"></i>
+                    </div>
+                    <div class="checkbox-ctn-thumb"
+                      ng-class="{'maintain-vis': token.isSelected , 'hidden-xs' : !showCheckboxes}">
+                    </div>
+                  </a>
+                </td>
+
+                <td data-title="::'TOKEN_MANAGEMENT.TABLE.HEADERS.LABEL' | translate" class="row show-li-actions col-3"
+                  data-sortable="'label'" uuid={{::token.uuid}} header-class="'col-3 flexible-table-col'">
+                  <div class="ctn-name-actions">
+                    <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                      <span
+                        class="file-name-disp single-line click-enabled"
+                        ng-click="tokenManagementVm.opentoken(token)"
+                      >
+                        {{token.label}}
+                      </span>
+                    </span>
+
+                    <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
+                      <ul class="actions pull-right" ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
+                        <li ng-click="tokenManagementVm.showDetails(token)">
+                          <a class="set-col-12" translate-attr="{title: 'ACTION.INFORMATION'}" href="">
+                            <i class="zmdi zmdi-info"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a translate-attr="{title: 'ACTION.EDIT'}" href="">
+                            <i class="zmdi zmdi-edit"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a translate-attr="{title: 'ACTION.DELETE'}" href=""
+                            ng-click="tokenManagementVm.removeArchivedtokens([token])">
+                            <i class="zmdi zmdi-delete"></i>
+                          </a>
+                        </li>
+
+                        <!-- DROPDOWN-OPTIONS -->
+
+                        <li
+                          uib-dropdown
+                          check-dropdown-position
+                          dropdown-append-to-body
+                          auto-close="always"
+                          is-open="isOpenItem"
+                          class="dropdown set-col-6 no-padding"
+                          ng-class="{'open':isOpenItem}"
+                        >
+                          <a class="set-col-12" translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
+                            uib-dropdown-toggle event-propagation-stop href="">
+                            <i class="zmdi zmdi-more"></i>
+                          </a>
+                          <ul uib-dropdown-menu ng-class="{'open':isOpenItem}" class="uib-dropdown-menu dropdown-menu-right dm-icon
+                                  dropdown-divided dropdown-content-left">
+                            <li>
+                              <a href="">
+                                <i class="zmdi zmdi-info"></i>
+                                <span translate>ACTION.INFORMATION</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="">
+                                <i class="zmdi zmdi-edit"></i>
+                                <span translate>EDIT</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="">
+                                <i class="zmdi zmdi-delete"></i>
+                                <span translate>ACTION.DELETE</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
+                </td>
+
+                <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
+                  data-title="::'TOKEN_MANAGEMENT.TABLE.HEADERS.CREATION_DATE' | translate"
+                  data-sortable="'creationDate'" header-class="'col-4'">
+                  {{token.expiryDate | lsDate: 'mediumDate'}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- SELECTION HEADER -->
+
+        <div
+          id="selection-actions"
+          class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
+          ng-class="{'show-multi-menu': tokenManagementVm.selectedTokens.length > 0}"
+        >
+          <div class="toggle-checkbox-toolbar"
+            ng-click="tokenManagementVm.selectTokensOnCurrentPage(tokenManagementVm.tableParams.data, tokenManagementVm.tableParams.page())">
+            <a ng-if="!tokenManagementVm.flagsOnSelectedPages[tokenManagementVm.tableParams.page()]"
+              class="select-all-items plain-text-button ng-scope">
+              <i class="fa ls-check-o checkbox-table"></i>
+            </a>
+            <a ng-if="tokenManagementVm.flagsOnSelectedPages[tokenManagementVm.tableParams.page()]"
+              class="select-all-items plain-text-button ng-scope">
+              <i class="ls-check-checked"></i>
+            </a>
+          </div>
+          <div class="exit-selection actions" ng-click="tokenManagementVm.resetSelectedTokens()"
+            translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
+            <a>
+              <i class="zmdi zmdi-close"></i>
+            </a>
+          </div>
+          <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
+            <div class="pull-left"
+              ng-class="{'active-button-show-selection': tokenManagementVm.tableParamsService.getSelectionIsIsolated()}"
+              ng-click="tokenManagementVm.toggleFilterBySelectedItems()">
+              <p>
+                <span>{{tokenManagementVm.selectedTokens.length}}</span>
+                <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
+              </p>
+              <div class="pull-left view-icons-ctn groups-view">
+                <i class="fa fa-eye-slash" aria-hidden="true"
+                  ng-show="tokenManagementVm.tableParamsService.getSelectionIsIsolated()"></i>
+                <i class="fa fa-eye" aria-hidden="true"
+                  ng-show="!tokenManagementVm.tableParamsService.getSelectionIsIsolated()"></i>
+              </div>
+            </div>
+            <div class="pull-left view-icons-ctn reset-icon" ng-click="tokenManagementVm.resetSelectedTokens()">
+              <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
+            </div>
+          </div>
+          <div id="toolbar-actions" class="hidden-xs">
+            <span>
+              <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
+                <i class="zmdi zmdi-delete"></i>
+                <span translate>ACTION.DELETE</span>
+              </a>
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="fabButtonCtn"
+          fab-button
+          fab-button-actions="tokenManagementVm.fabButton.actions"
+          fab-button-toolbar="tokenManagementVm.fabButton.toolbar"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <section
+    class="row multi-select-mobile visible-xs"
+    data-ng-class="{'showMobileMultiMenu': tokenManagementVm.selectedTokens.length > 0}"
+  >
+    <div class="col-xs-2 ctn-mobile-select-count">
+      <span class="number-of-files">{{tokenManagementVm.selectedTokens.length}}</span>
+      <span
+        class="file-multi-select-label"
+        translate
+      >
+        SELECTION_TOOLBAR.ELEMENTS
+      </span>
+    </div>
+    <div class="col-xs-8">
+      <div ng-click="tokenManagementVm.selectTokensOnCurrentPage(tokenManagementVm.tableParams.data, tokenManagementVm.tableParams.page())"
+           class="visible-xs toolbar-mobile-item col-xs-3">
+        <i
+          class="ls-check-checked select-all-items p-r-10"
+          ng-if="!tokenManagementVm.flagsOnSelectedPages[tokenManagementVm.tableParams.page()]">
+        </i>
+        <i
+          class="ls-check-o select-all-items p-r-10"
+          ng-if="tokenManagementVm.flagsOnSelectedPages[tokenManagementVm.tableParams.page()]">
+        </i>
+      </div>
+      <div
+        class="col-xs-2"
+      >
+        <i class="zmdi zmdi-delete"></i>
+      </div>
+    </div>
+    <div class="col-xs-1 pull-right" ng-click="tokenManagementVm.resetSelectedTokens()">
+      <i class="zmdi zmdi zmdi-close"></i>
+    </div>
+  </section>
+</div>
+
+<script type="text/ng-template" id="checkboxheader.html">
+  <span
+    ng-click="tokenManagementVm.selectTokensOnCurrentPage(tableParams.data, tableParams.page())"
+    role="button"
+    tabindex="0"
+    class="display-block center"
+  >
+    <a ng-if="!tokenManagementVm.flagsOnSelectedPages[tokenManagementVm.tableParams.page()]"
+       class="select-all-items plain-text-button checkboxCtn">
+      <i class="ls-check-o checkbox-table"></i>
+    </a>
+    <a ng-if="tokenManagementVm.flagsOnSelectedPages[tokenManagementVm.tableParams.page()]"
+       class="select-all-items plain-text-button">
+      <i class="ls-check-checked"></i>
+    </a>
+  </span>
+</script>

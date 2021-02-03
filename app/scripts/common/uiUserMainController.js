@@ -379,7 +379,7 @@
 
             mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
             mainVm.show2FA = functionalities.SECOND_FACTOR_AUTHENTICATION.enable;
-            mainVm.showTokenManagement = functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable;
+            mainVm.showTokenManagement = functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable && !lsAppConfig.production;
 
             $scope.loggedUser.setUser(user);
             user.firstLetter = user.firstName.charAt(0);
@@ -402,7 +402,7 @@
         window.onbeforeunload = function() {
           return $scope.preventExitMessage;
         };
-        
+
         return;
       }
 
@@ -453,7 +453,7 @@
         shareObject =
         _.find(shareArray, function(element) {
           _.remove(element.documents, _.isUndefined);
-          
+
           return _.find(element.documents, function(doc) {
             return doc.uniqueIdentifier === flowFile.uniqueIdentifier;
           });

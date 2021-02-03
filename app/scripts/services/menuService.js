@@ -47,6 +47,7 @@
       uploadRequest,
       uploadRequests,
       secondFactorAuthentication,
+      tokenManagement,
       service = {
         build: build,
         getAvailableTabs: getAvailableTabs,
@@ -256,6 +257,12 @@
         hide: true
       };
 
+      tokenManagement = {
+        name: 'TOKEN_MANAGEMENT.TITLE',
+        link: 'tokenManagement',
+        hide: true
+      };
+
       tabs = [
         changePassword,
         myUploads,
@@ -269,7 +276,8 @@
         audit,
         safeDetails,
         secondFactorAuthentication,
-        externalLink
+        externalLink,
+        tokenManagement
       ];
 
       if (!lsAppConfig.hideHomeMenuLink) {

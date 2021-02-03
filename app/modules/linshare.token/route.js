@@ -10,10 +10,11 @@ function routes($stateProvider) {
       parent: 'common',
       url: '/token',
       template: require('./views/tokenManagement.html'),
-      controllerAs: 'tokenVm',
+      controller: 'tokenManagementController',
+      controllerAs: 'tokenManagementVm',
       resolve: {
-        functionality: function($transition$, $state, functionalities) {
-          if (!functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable) {
+        functionality: function($transition$, $state, functionalities, lsAppConfig) {
+          if (!functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable || lsAppConfig.production) {
             $transition$.abort();
             $state.go('home');
           }

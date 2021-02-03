@@ -1,5 +1,16 @@
 {
   "TOKEN_MANAGEMENT": {
-    "TITLE": "Token Management"
+    "TITLE": "Token Management",
+    "CREATE": "Create token",
+    "TABLE": {
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Create new tokens here",
+        "MESSAGE": "Create and manage your tokens"
+      },
+      "HEADERS": {
+        "LABEL": "Label",
+        "CREATION_DATE": "Creation date"
+      }
+    }
   }
 }

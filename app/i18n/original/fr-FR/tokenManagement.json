@@ -1,5 +1,16 @@
 {
   "TOKEN_MANAGEMENT": {
-    "TITLE": "Administration des jetons d'accès"
+    "TITLE": "Administration des jetons d'accès",
+    "CREATE": "Créer un jeton d'accès",
+    "TABLE": {
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Créez de nouveaux jetons d'accès ici",
+        "MESSAGE": "Crées et gérez vos jetons d'accès"
+      },
+      "HEADERS": {
+        "LABEL": "Etiquette",
+        "CREATION_DATE": "Date de création"
+      }
+    }
   }
 }

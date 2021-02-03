@@ -1,5 +1,16 @@
 {
   "TOKEN_MANAGEMENT": {
-    "TITLE": "Quản lý token"
+    "TITLE": "Quản lý token",
+    "CREATE": "Tạo token",
+    "TABLE": {
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Tạo token mới tại đây",
+        "MESSAGE": "Tạo và quản lý token"
+      },
+      "HEADERS": {
+        "LABEL": "Nhãn",
+        "CREATION_DATE": "Ngày tạo"
+      }
+    }
   }
 }
