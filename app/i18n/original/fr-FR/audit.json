@@ -570,6 +570,12 @@
             "SENTENCE": "Le fichier {{resourceName}} a été déposé.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
+        },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "Le fichier {{resourceName}} a été copié dans votre espace personnel.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
         }
       },
       "WORKGROUP": {

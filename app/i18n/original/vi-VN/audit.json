@@ -506,6 +506,12 @@
             "SENTENCE": "File {{resourceName}} đã được tải lên.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
+        },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "File {{resourceName}} đã được sao chép vào không gian cá nhân của bạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
         }
       },
       "WORKGROUP": {

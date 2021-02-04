@@ -570,6 +570,12 @@
             "SENTENCE": "File {{resourceName}} has been uploaded.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
+        },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "File {{resourceName}} has been copied to your space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
         }
       },
       "WORKGROUP": {

@@ -570,6 +570,12 @@
               "SENTENCE": "Файл {{resourceName}} загружен.",
               "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
             }
+          },
+          "COPY": {
+            "AUTHOR": {
+              "SENTENCE": "Файл {{resourceName}} скопирован в вашу подборку.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
           }
         },
         "WORKGROUP": {
