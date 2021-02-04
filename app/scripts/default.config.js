@@ -209,6 +209,7 @@
       uploadRequestGroupAddRecipients: 'uploadrequest-add-recipients',
       uploadRequestEntryDetails: 'uploadrequestentry-details',
       uploadRequestDetails: 'uploadrequest-details',
+      tokenCreate: 'token-create',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,
       thumbnailEngineActivated: true,

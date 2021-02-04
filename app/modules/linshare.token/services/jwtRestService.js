@@ -9,7 +9,8 @@ function jwtRestService($log, Restangular, ServerManagerService) {
 
   return {
     list,
-    remove
+    remove,
+    create
   };
 
   ////////////
@@ -24,5 +25,11 @@ function jwtRestService($log, Restangular, ServerManagerService) {
     $log.debug('jwtRestService: remove');
 
     return handler(Restangular.one('jwt', uuid).remove());
+  }
+
+  function create(payload) {
+    $log.debug('jwtRestService: create');
+
+    return handler(Restangular.all('jwt').post(payload));
   }
 }

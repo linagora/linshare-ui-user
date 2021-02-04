@@ -13,16 +13,33 @@
       }
     },
     "DIALOG": {
+      "CREATED": {
+        "TITLE": "You have created a new token",
+        "TEXT": "Beware, the token is only shown once and cannot be restored. Please save the token before closing:",
+        "CLOSE": "Close"
+      },
       "DELETE": {
         "TITLE": "Delete token",
         "TEXT": "You are about to delete {singular, select, true{a token} other{{numberOfTokens} tokens}} ! Beware, this action cannot be undone."
       }
     },
     "TOAST_ALERT": {
+      "CREATE": {
+        "SUCCESS": "A new token has been created.",
+        "ERROR": "An error occurred while creating a new token."
+      },
       "DELETE": {
         "ERROR": "{number} {singular, select, true{token has} other{tokens have}} not been deleted.",
         "INFO": "{number} {singular, select, true{token has} other{tokens have}} been deleted."
       }
+    },
+    "FORM": {
+      "TITLE": "Create token",
+      "NAME": "Token name",
+      "DESCRIPTION": "Add a description"
+    },
+    "ERROR": {
+      "LABEL_REQUIRED": "Name cannot be empty"
     }
   }
 }

@@ -13,16 +13,33 @@
       }
     },
     "DIALOG": {
+      "CREATED": {
+        "TITLE": "Bạn đã tạo một token mới",
+        "TEXT": "Hãy lưu ý, token chỉ được hiển thị một lần và không thể khôi phục. Vui lòng lưu token trước khi đóng:",
+        "CLOSE": "Đóng"
+      },
       "DELETE": {
         "TITLE": "Xóa token",
         "TEXT": "Bạn chuẩn bị xóa {numberOfTokens} token ! Hãy cẩn thận, hành động này không thể hoàn tác."
       }
     },
     "TOAST_ALERT": {
+      "CREATE": {
+        "SUCCESS": "Một token mới đã được tạo.",
+        "ERROR": "Đã xảy ra lỗi khi tạo token mới."
+      },
       "DELETE": {
         "ERROR": "{number} token xóa thất bại.",
         "INFO": "{number} token đã được xóa."
       }
+    },
+    "FORM": {
+      "TITLE": "Tạo token",
+      "NAME": "Tên token",
+      "DESCRIPTION": "Thêm một mô tả"
+    },
+    "ERROR": {
+      "LABEL_REQUIRED": "Tên không được để trống"
     }
   }
 }

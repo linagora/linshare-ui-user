@@ -13,16 +13,33 @@
       }
     },
     "DIALOG": {
+      "CREATED": {
+        "TITLE": "Vous avez créé un nouveau jeton",
+        "TEXT": "Attention, le token n'est affiché qu'une seule fois et ne peut pas être restauré. Veuillez enregistrer le jeton avant de fermer:",
+        "CLOSE": "Fermer"
+      },
       "DELETE": {
         "TITLE": "Supprimer le jeton d'accès ",
         "TEXT": "Vous êtes sur le point de supprimer {singular, select, true{un jeton d'accès} other{{numberOfTokens} jetons d'accès}}. Attention ! cette action ne peut pas être annulée."
       }
     },
     "TOAST_ALERT": {
+      "CREATE": {
+        "SUCCESS": "Un nouveau jeton a été créé.",
+        "ERROR": "Une erreur s'est produite lors de la création d'un nouveau jeton."
+      },
       "DELETE": {
         "ERROR": "{number} {singular, select, true{jeton d'accès n'a} other{jetons d'accès n'ont}} pas été {singular, select, true{supprimé} other{supprimés}}.",
         "INFO": "{number} {singular, select, true{jeton d'accès a} other{jetons d'accès ont}} pas été {singular, select, true{supprimé} other{supprimés}}."
       }
+    },
+    "FORM": {
+      "TITLE": "Créer un jeton",
+      "NAME": "Nom du jeton",
+      "DESCRIPTION": "Ajouter une description"
+    },
+    "ERROR": {
+      "LABEL_REQUIRED": "Le nom ne peut pas être vide"
     }
   }
 }

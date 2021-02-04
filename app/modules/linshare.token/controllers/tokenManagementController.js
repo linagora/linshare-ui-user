@@ -12,6 +12,8 @@ tokenManagementController.$inject = [
   'tableParamsService',
   'toastService',
   'sidebarService',
+  '$scope',
+  'lsAppConfig'
 ];
 
 function tokenManagementController(
@@ -23,7 +25,9 @@ function tokenManagementController(
   jwtRestService,
   tableParamsService,
   toastService,
-  sidebarService
+  sidebarService,
+  $scope,
+  lsAppConfig
 ) {
   const tokenManagementVm = this;
 
@@ -36,6 +40,9 @@ function tokenManagementController(
     },
     actions: [
       {
+        action: () => {
+          tokenManagementVm.openCreatingTokenSidebar();
+        },
         label: 'TOKEN_MANAGEMENT.CREATE',
         icon: 'ls-token',
       }
@@ -60,6 +67,10 @@ function tokenManagementController(
         tokenManagementVm.tableParams = tableParamsService.getTableParams();
         tokenManagementVm.removeTokens = removeTokens;
         tokenManagementVm.loading = false;
+        tokenManagementVm.loadSidebarContent = loadSidebarContent;
+        tokenManagementVm.openCreatingTokenSidebar = openCreatingTokenSidebar;
+        tokenManagementVm.tokenCreate = lsAppConfig.tokenCreate;
+        tokenManagementVm.onCreateSuccess = onCreateSuccess;
       })
       .catch(error => {
         $log.error('Failed to init table', error);
@@ -148,5 +159,22 @@ function tokenManagementController(
         number: tokens.length
       }
     });
+  }
+
+  function loadSidebarContent(content, tokenObject = {}) {
+    tokenManagementVm.tokenObject = tokenObject;
+    $scope.mainVm.sidebar.setData(tokenManagementVm);
+    $scope.mainVm.sidebar.setContent(content);
+    $scope.mainVm.sidebar.show();
+  }
+
+  function openCreatingTokenSidebar() {
+    tokenManagementVm.loadSidebarContent(tokenManagementVm.tokenCreate);
+  }
+
+  function onCreateSuccess(created) {
+    $scope.mainVm.sidebar.hide();
+    tokenManagementVm.itemsList.unshift(created);
+    tokenManagementVm.tableParams.reload();
   }
 }

@@ -335,6 +335,17 @@ md-dialog.custom-dialog {
         font-size: 0.85em;
       }
     }
+
+    .dialog-icon {
+      width: 100px;
+      height: auto;
+      margin: 30px;
+      justify-content: center;
+    
+      img {
+        width: 100%;
+      }
+    }
   }
 
   md-dialog-actions {
@@ -431,3 +442,4 @@ md-dialog.custom-dialog {
     }
   }
 }
+

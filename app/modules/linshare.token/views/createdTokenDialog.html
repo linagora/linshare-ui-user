@@ -1,0 +1,29 @@
+<md-dialog class="custom-dialog warning">
+    <md-toolbar class="no-height-limit">
+      <div class="md-toolbar-tools horizontal-center">
+        <div class="dialog-icon">
+          <img src="../images/token-dialog-icon.svg"/>
+        </div>
+      </div>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">
+      <div class="content-title" translate>TOKEN_MANAGEMENT.DIALOG.CREATED.TITLE</div>
+      <div class="content-text" translate>TOKEN_MANAGEMENT.DIALOG.CREATED.TEXT</div>
+      <div class="token-secret">
+        <input disabled value="{{::createdTokenDialogVm.token}}"></input>
+        <button
+          class="btn btn-primary"
+          type="button"
+          ngclipboard
+          data-clipboard-text="{{::createdTokenDialogVm.token}}"
+        >
+          {{ 'ACTION.COPY' | translate }}
+        </button>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <button class="confirm" ng-click="createdTokenDialogVm.hide()" translate>
+        TOKEN_MANAGEMENT.DIALOG.CREATED.CLOSE
+      </button>
+    </md-dialog-actions>
+  </md-dialog>

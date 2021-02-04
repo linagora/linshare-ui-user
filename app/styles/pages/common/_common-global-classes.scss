@@ -191,6 +191,11 @@
   display: block;
 }
 
+.horizontal-center {
+  justify-content: center;
+  display: flex;
+}
+
 .truncate{
   white-space: nowrap;
   overflow: hidden;

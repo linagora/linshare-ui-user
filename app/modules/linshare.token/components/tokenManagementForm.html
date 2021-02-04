@@ -1,0 +1,35 @@
+<form name="tokenForm" class="custom-height-form">
+  <div class="card col-xs-12 form-within-sidebar" id="content-ctn-sidebar">
+    <div class="form-padding">
+      <div class="custom-list-container clearfix">
+        <div class="recipients-form-sections clearfix">
+          <div class="form-sidebar">
+            <div class="form-group col-xs-12 addNote no-padding">
+              <div
+                class="form-group fg-line"
+                ng-class="{'has-error' : ((tokenForm.label.$touched || tokenForm.label.$submitted)
+                && tokenForm.label.$invalid)}">
+                <textarea
+                  id="tokenLabel"
+                  type="text" name="label" class="form-control input-sm"
+                  ng-model="$ctrl.tokenObject.label"
+                  placeholder="{{'TOKEN_MANAGEMENT.FORM.NAME' | translate}}" required>
+                </textarea>
+                <span ng-show="(tokenForm.label.$touched ||tokenForm.label$submitted) && tokenForm.label.$invalid"
+                  translate>
+                  TOKEN_MANAGEMENT.ERROR.LABEL_REQUIRED
+                </span>
+              </div>
+              <div class="form-group fg-line">
+                <textarea class="form-control comment" rows="5"
+                  placeholder="{{'TOKEN_MANAGEMENT.FORM.DESCRIPTION' | translate}}"
+                  ng-model="$ctrl.tokenObject.description" name="description">
+                </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
