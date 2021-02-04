@@ -11,6 +11,18 @@
         "LABEL": "метка",
         "CREATION_DATE": "Дата создания"
       }
+    },
+    "DIALOG": {
+      "DELETE": {
+        "TITLE": "Удалить токен",
+        "TEXT": "Вы собираетесь удалить {singular, select, true{токен} other{{numberOfTokens} токена}} ! Осторожно, это действие нельзя отменить."
+      }
+    },
+    "TOAST_ALERT": {
+      "DELETE": {
+        "ERROR": "{number} {singular, select, true{токен не} other{токена не}} удален.",
+        "INFO": "{number} {singular, select, true{токен был} other{токена были}} удалены."
+      }
     }
   }
 }

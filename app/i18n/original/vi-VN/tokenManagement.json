@@ -11,6 +11,18 @@
         "LABEL": "Nhãn",
         "CREATION_DATE": "Ngày tạo"
       }
+    },
+    "DIALOG": {
+      "DELETE": {
+        "TITLE": "Xóa token",
+        "TEXT": "Bạn chuẩn bị xóa {numberOfTokens} token ! Hãy cẩn thận, hành động này không thể hoàn tác."
+      }
+    },
+    "TOAST_ALERT": {
+      "DELETE": {
+        "ERROR": "{number} token xóa thất bại.",
+        "INFO": "{number} token đã được xóa."
+      }
     }
   }
 }

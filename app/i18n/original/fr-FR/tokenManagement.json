@@ -11,6 +11,18 @@
         "LABEL": "Etiquette",
         "CREATION_DATE": "Date de création"
       }
+    },
+    "DIALOG": {
+      "DELETE": {
+        "TITLE": "Supprimer le jeton d'accès ",
+        "TEXT": "Vous êtes sur le point de supprimer {singular, select, true{un jeton d'accès} other{{numberOfTokens} jetons d'accès}}. Attention ! cette action ne peut pas être annulée."
+      }
+    },
+    "TOAST_ALERT": {
+      "DELETE": {
+        "ERROR": "{number} {singular, select, true{jeton d'accès n'a} other{jetons d'accès n'ont}} pas été {singular, select, true{supprimé} other{supprimés}}.",
+        "INFO": "{number} {singular, select, true{jeton d'accès a} other{jetons d'accès ont}} pas été {singular, select, true{supprimé} other{supprimés}}."
+      }
     }
   }
 }

@@ -11,6 +11,18 @@
         "LABEL": "Label",
         "CREATION_DATE": "Creation date"
       }
+    },
+    "DIALOG": {
+      "DELETE": {
+        "TITLE": "Delete token",
+        "TEXT": "You are about to delete {singular, select, true{a token} other{{numberOfTokens} tokens}} ! Beware, this action cannot be undone."
+      }
+    },
+    "TOAST_ALERT": {
+      "DELETE": {
+        "ERROR": "{number} {singular, select, true{token has} other{tokens have}} not been deleted.",
+        "INFO": "{number} {singular, select, true{token has} other{tokens have}} been deleted."
+      }
     }
   }
 }

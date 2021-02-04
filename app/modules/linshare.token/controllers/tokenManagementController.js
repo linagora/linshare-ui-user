@@ -3,15 +3,27 @@ angular
   .controller('tokenManagementController', tokenManagementController);
 
 tokenManagementController.$inject = [
+  '_',
+  '$q',
   '$log',
+  '$translate',
+  'dialogService',
   'jwtRestService',
-  'tableParamsService'
+  'tableParamsService',
+  'toastService',
+  'sidebarService',
 ];
 
 function tokenManagementController(
+  _,
+  $q,
   $log,
+  $translate,
+  dialogService,
   jwtRestService,
-  tableParamsService
+  tableParamsService,
+  toastService,
+  sidebarService
 ) {
   const tokenManagementVm = this;
 
@@ -46,6 +58,7 @@ function tokenManagementController(
         tokenManagementVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
         tokenManagementVm.selectedTokens = tableParamsService.getSelectedItemsList();
         tokenManagementVm.tableParams = tableParamsService.getTableParams();
+        tokenManagementVm.removeTokens = removeTokens;
         tokenManagementVm.loading = false;
       })
       .catch(error => {
@@ -61,5 +74,79 @@ function tokenManagementController(
 
         return [];
       });
+  }
+
+  function removeTokens(tokens) {
+    return confirmTokensDeletion(tokens)
+      .then(() => $q.allSettled(tokens.map(token => jwtRestService.remove(token.uuid))))
+      .then(promises => {
+        const removedTokens = promises
+          .filter(promise => promise.state === 'fulfilled')
+          .map(promise => promise.value);
+        const notRemovedTokens = promises
+          .filter(promise => promise.state === 'rejected')
+          .map(reject => reject.reason);
+
+        if (removedTokens.some(token => token.uuid === tokenManagementVm.currentSelectedDocument.current.uuid)) {
+          sidebarService.hide();
+        }
+
+
+        _.remove(tokenManagementVm.itemsList, item => removedTokens.some(request => request.uuid === item.uuid));
+        _.remove(tokenManagementVm.selectedTokens, selected => removedTokens.some(request => request.uuid === selected.uuid));
+
+        tokenManagementVm.tableParams.reload();
+
+        return {
+          removedTokens,
+          notRemovedTokens
+        };
+      })
+      .then(({ removedTokens, notRemovedTokens }) => {
+        if (notRemovedTokens.length) {
+          alertDeteledTokens('error', notRemovedTokens);
+        } else {
+          alertDeteledTokens('info', removedTokens);
+        }
+      });
+  }
+
+  function confirmTokensDeletion(tokens) {
+    return $q.all([
+      $translate(
+        'TOKEN_MANAGEMENT.DIALOG.DELETE.TEXT',
+        {
+          numberOfTokens: tokens.length,
+          singular: tokens.length <= 1 ? 'true' : 'other'
+        },
+        'messageformat'
+      ),
+      $translate([
+        'TOKEN_MANAGEMENT.DIALOG.DELETE.TITLE',
+        'ACTION.PROCEED',
+        'NAVIGATION.CANCEL'
+      ])
+    ])
+      .then(promises => dialogService.dialogConfirmation({
+        text: promises[0],
+        title: promises[1]['TOKEN_MANAGEMENT.DIALOG.DELETE.TITLE'],
+        buttons: {
+          confirm: promises[1]['ACTION.PROCEED'],
+          cancel: promises[1]['NAVIGATION.CANCEL']
+        }
+      }, 'warning'))
+      .then(confirmed => !!confirmed || $q.reject())
+      .catch(error => error && $log.error(error));
+  }
+
+  function alertDeteledTokens(type, tokens) {
+    toastService[type]({
+      key: `TOKEN_MANAGEMENT.TOAST_ALERT.DELETE.${type.toUpperCase()}`,
+      pluralization: true,
+      params: {
+        singular: tokens.length === 1,
+        number: tokens.length
+      }
+    });
   }
 }

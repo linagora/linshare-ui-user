@@ -118,7 +118,7 @@
                         </li>
                         <li>
                           <a translate-attr="{title: 'ACTION.DELETE'}" href=""
-                            ng-click="tokenManagementVm.removeArchivedtokens([token])">
+                            ng-click="tokenManagementVm.removeTokens([token])">
                             <i class="zmdi zmdi-delete"></i>
                           </a>
                         </li>
@@ -153,7 +153,7 @@
                               </a>
                             </li>
                             <li>
-                              <a href="">
+                              <a href="" ng-click="tokenManagementVm.removeTokens([token])">
                                 <i class="zmdi zmdi-delete"></i>
                                 <span translate>ACTION.DELETE</span>
                               </a>
@@ -220,7 +220,11 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span>
-              <a class="plain-text-button share-link" translate-attr="{title: 'ACTION.DELETE'}">
+              <a
+                class="plain-text-button share-link"
+                translate-attr="{title: 'ACTION.DELETE'}"
+                ng-click="tokenManagementVm.removeTokens(tokenManagementVm.selectedTokens)"
+              >
                 <i class="zmdi zmdi-delete"></i>
                 <span translate>ACTION.DELETE</span>
               </a>
@@ -265,6 +269,7 @@
       </div>
       <div
         class="col-xs-2"
+        ng-click="tokenManagementVm.removeTokens(tokenManagementVm.selectedTokens)"
       >
         <i class="zmdi zmdi-delete"></i>
       </div>
