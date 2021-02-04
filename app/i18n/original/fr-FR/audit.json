@@ -543,6 +543,10 @@
           "AUTHOR": {
             "SENTENCE": "La invitation de dépôt a été mise à jour.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "La invitation de dépôt a été mise à jour.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
       },

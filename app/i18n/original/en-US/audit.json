@@ -543,6 +543,10 @@
           "AUTHOR": {
             "SENTENCE": "Upload request has been updated.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "Upload request has been updated.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
       },

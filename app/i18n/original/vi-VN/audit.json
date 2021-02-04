@@ -478,6 +478,10 @@
             "AUTHOR": {
               "SENTENCE": "Yêu cầu tải lên đã được cập nhật.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "Yêu cầu tải lên đã được cập nhật.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           }
         }

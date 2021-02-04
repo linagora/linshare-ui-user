@@ -543,6 +543,10 @@
             "AUTHOR": {
               "SENTENCE": "Запрос на загрузку обновлен.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "Запрос на загрузку обновлен.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           }
         },
