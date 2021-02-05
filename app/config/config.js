@@ -14,7 +14,7 @@
       // from the browser console to your software vendor
       debug: false,
       localPath: 'i18n/original', // custom your i18n folder path
-      production: false,
+
       /** Define external URLs of changing/reseting password for1 internal user
        * - changePasswordUrl: shows to internal user when logged in
        * - resetPasswordUrl: shows to user in reset password form (forgotten password)
