@@ -197,7 +197,8 @@
     "LOGIN_HEADER": "Đang truy cập",
     "NOTIFICATION": {
       "SUCCESS": "Chào mừng {{firstName}}",
-      "ERROR": "Xác thực không thành công, email hoặc mật khẩu không hợp lệ"
+      "ERROR": "Xác thực không thành công, email hoặc mật khẩu không hợp lệ",
+      "ERROR_OIDC": "Xác thực SSO không thành công"
     },
     "PASSWORD_PLACEHOLDER": "Mật khẩu",
     "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở",

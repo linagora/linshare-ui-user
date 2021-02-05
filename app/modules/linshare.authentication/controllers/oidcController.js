@@ -7,27 +7,37 @@ angular
   .controller('oidcController', oidcController);
 
 oidcController.$inject = [
-  'oidcService',
-  'authenticationRestService',
-  'toastService',
+  '$q',
   '$state',
-  '$q'
+  'authenticationRestService',
+  'lsAppConfig',
+  'oidcService',
+  'toastService'
 ];
 
-function oidcController(oidcService, authenticationRestService, toastService, $q) {
-  oidcService.endSigninMainWindow().then(user => {
-    if (user && user.access_token) {
-      return submitToken(user.access_token);
-    } else {
-      return $q.reject();
-    }
-  }).catch(() => {
-    toastService.error({
-      key: 'LOGIN.NOTIFICATION.ERROR'
+function oidcController(
+  $q,
+  $state,
+  authenticationRestService,
+  lsAppConfig,
+  oidcService,
+  toastService
+) {
+  oidcService.endSigninMainWindow()
+    .then(user => {
+      if (user && user.access_token) {
+        return submitToken(user.access_token);
+      } else {
+        return $q.reject();
+      }
+    })
+    .then(() => {
+      $state.go(lsAppConfig.homePage || 'home');
+    })
+    .catch(() => {
+      toastService.error({ key: 'LOGIN.NOTIFICATION.ERROR_OIDC' });
+      $state.go('login');
     });
-  }).finally(() => {
-    window.location.href = window.location.origin;
-  });
 
   function submitToken(token) {
     return authenticationRestService.loginWithAccessToken(token)

@@ -198,7 +198,8 @@
     "LOGIN_HEADER": "Welcome",
     "NOTIFICATION": {
       "SUCCESS": "Welcome {{firstName}}",
-      "ERROR": "Authentication failed, either the email or the password is invalid"
+      "ERROR": "Authentication failed, either the email or the password is invalid",
+      "ERROR_OIDC": "SSO authentication failed"
     },
     "PASSWORD_PLACEHOLDER": "Password",
     "TAGLINE": "Secure file sharing app in open source",
