@@ -179,6 +179,12 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
+        "COPY_FROM_UPLOAD_REQUEST": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez copié le document : {{resourceName}} depuis l'invitation de dépôt {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
         "COPY_FROM_RECEIVED_SHARE": {
           "AUTHOR": {
             "SENTENCE": "Vous avez copié le document : {{resourceName}} dans votre Espace Personnel depuis un partage reçus.",
@@ -571,9 +577,9 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
-        "COPY": {
+        "COPY_TO_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Le fichier {{resourceName}} a été copié dans votre espace personnel.",
+            "SENTENCE": "Vous avez copié le document: {{resourceName}} dans votre Espace Personnel",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         }

@@ -179,6 +179,12 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
             }
           },
+          "COPY_FROM_UPLOAD_REQUEST": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скопировали документ: {{resourceName}} из своего запроса загрузки {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
           "COPY_FROM_RECEIVED_SHARE": {
             "AUTHOR": {
               "SENTENCE": "вы скопировали полученный документ {{resourceName}} в Моё пространство.",
@@ -571,9 +577,9 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
             }
           },
-          "COPY": {
+          "COPY_TO_PERSONAL_SPACE": {
             "AUTHOR": {
-              "SENTENCE": "Файл {{resourceName}} скопирован в вашу подборку.",
+              "SENTENCE": "Вы скопировали документ: {{resourceName}} в свой личный аккаунт.",
               "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
             }
           }

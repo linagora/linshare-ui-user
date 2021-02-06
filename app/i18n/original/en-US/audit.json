@@ -179,6 +179,12 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
+        "COPY_FROM_UPLOAD_REQUEST": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} from your Upload Request {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
         "COPY_FROM_RECEIVED_SHARE": {
           "AUTHOR": {
             "SENTENCE": "You have copied a new file : {{resourceName}} from a received share.",
@@ -571,9 +577,9 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
-        "COPY": {
+        "COPY_TO_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "File {{resourceName}} has been copied to your space.",
+            "SENTENCE": "You have copied the document : {{resourceName}} into your Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         }

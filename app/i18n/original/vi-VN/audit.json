@@ -189,6 +189,12 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
+        "COPY_FROM_UPLOAD_REQUEST": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} từ yêu cầu tải lên {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
         "COPY_FROM_RECEIVED_SHARE": {
           "AUTHOR": {
             "SENTENCE": "Bạn đã sao chép một tệp mới: {{resourceName}} từ một chia sẻ đã nhận.",
@@ -507,9 +513,9 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
-        "COPY": {
+        "COPY_TO_PERSONAL_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "File {{resourceName}} đã được sao chép vào không gian cá nhân của bạn.",
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} vào không gian cá nhân của bạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         }
