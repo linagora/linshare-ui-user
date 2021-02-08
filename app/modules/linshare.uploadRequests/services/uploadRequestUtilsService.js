@@ -82,10 +82,9 @@ function uploadRequestUtilsService(
   }
 
   function openAddingRecipientsSideBar(uploadRequestGroupObject) {
-    sidebarService.setData({ uploadRequestObject: uploadRequestGroupObject });
+    sidebarService.setData({ uploadRequestGroupObject });
     sidebarService.setContent(lsAppConfig.uploadRequestGroupAddRecipients);
     sidebarService.show();
-    setTimeout(() => angular.element('#focusInputShare').trigger('focus'));
   }
 
   function promptArchiveDialog() {

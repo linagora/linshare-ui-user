@@ -1,8 +1,15 @@
-<div class="header-sidebar">
+<div class="header-sidebar form-sidebar header-show-action">
   <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mainVm.sidebar.hide()"></i>
-  <h2 class="header-more-options set-ellipsis"> {{ mainVm.sidebar.getData().uploadRequestObject.label }} </h2>
+  <h2 class="header-more-options set-ellipsis"> {{ mainVm.sidebar.getData().uploadRequestGroupObject.label }} </h2>
   <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
     <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+  </span>
+  <span
+    class="header-action-link waves-effect text-uppercase visible-xs"
+    ng-click="mainVm.sidebar.getData().uploadRequestGroupObject.submitRecipients()"
+  >
+    <span class="zmdi zmdi-check"></span>
+    <span translate>UPLOAD_REQUESTS.SIDE_BAR.ADD_RECIPIENTS.ADD</span>
   </span>
 </div>
 
@@ -18,15 +25,15 @@
       <div class="form-group fg-line">
         <div
           ls-autocomplete-user="SHARING"
-          on-select-function="mainVm.sidebar.getData().uploadRequestObject.addRecipient"
-          with-guest="true"
+          on-select-function="mainVm.sidebar.getData().uploadRequestGroupObject.addRecipient"
+          auto-focus-input
         >
         </div>
       </div>
     </form>
     <div class="custom-list-body col-xs-12 ">
       <div class="custom-list-item"
-        ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestObject.newRecipients | orderBy : '-' as results"
+        ng-repeat="recipient in mainVm.sidebar.getData().uploadRequestGroupObject.newRecipients | orderBy : '-' as results"
         tooltip-placement="bottom" tooltip-popup-delay="700"
         uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
         <p class="pull-left circle-ctn">
@@ -41,12 +48,12 @@
             {{recipient.mail}}
           </p>
           <p class="close-list-icone-btn pull-right"
-            ng-click="mainVm.sidebar.getData().uploadRequestObject.removeNewRecipient(results.length - $index -1)">
+            ng-click="mainVm.sidebar.getData().uploadRequestGroupObject.removeNewRecipient(results.length - $index -1)">
               <i class="zmdi zmdi-close "></i>
             </p>
         </div>
       </div>
-      <div class="custom-list-item" ng-repeat="list in mainVm.sidebar.getData().uploadRequestObject.getMailingList()"
+      <div class="custom-list-item" ng-repeat="list in mainVm.sidebar.getData().uploadRequestGroupObject.getMailingList()"
         tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip=""
         owner-label
         owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
@@ -54,7 +61,7 @@
         <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
         <div class="pull-left name-recipients-ctn">
           <p class="pull-left inner-text-li">{{list.listName}}</p>
-          <p class=" close-list-icone-btn pull-right" ng-click="mainVm.sidebar.getData().uploadRequestObject.removeMailingList($index)">
+          <p class=" close-list-icone-btn pull-right" ng-click="mainVm.sidebar.getData().uploadRequestGroupObject.removeMailingList($index)">
             <i class="zmdi zmdi-close"></i>
           </p>
         </div>
@@ -69,10 +76,9 @@
   </button>
   <button
     class="btn btn-primary col-xs-6"
-    ng-click="mainVm.sidebar.getData().uploadRequestObject.submitRecipients()"
+    ng-click="mainVm.sidebar.getData().uploadRequestGroupObject.submitRecipients()"
     >
       <span translate>UPLOAD_REQUESTS.SIDE_BAR.ADD_RECIPIENTS.ADD</span>
   </button>
 </div>
 
-  

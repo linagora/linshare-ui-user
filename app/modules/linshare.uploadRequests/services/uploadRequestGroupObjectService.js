@@ -206,7 +206,7 @@ function UploadRequestGroupObjectService(
 
       }).catch(err => {
         if (err) {
-          showToastAlertFor('add_recipients', 'error', self.recipients);
+          showToastAlertFor('add_recipients', 'error', self.newRecipients);
         }
       });
   }

@@ -5,13 +5,10 @@ angular
 uploadRequestsController.$inject = [
   '_',
   '$q',
-  '$timeout',
   '$log',
   '$state',
-  'Restangular',
   'lsAppConfig',
   'tableParamsService',
-  'toastService',
   'documentUtilsService',
   'uploadRequestGroup',
   'UploadRequestObjectService',
@@ -27,13 +24,10 @@ uploadRequestsController.$inject = [
 function uploadRequestsController(
   _,
   $q,
-  $timeout,
   $log,
   $state,
-  Restangular,
   lsAppConfig,
   tableParamsService,
-  toastService,
   documentUtilsService,
   uploadRequestGroup,
   UploadRequestObjectService,
@@ -45,7 +39,7 @@ function uploadRequestsController(
   UploadRequestGroupObjectService
 ) {
   const uploadRequestsVm = this;
-  const { openWarningDialogFor, showToastAlertFor } = uploadRequestUtilsService;
+  const { openWarningDialogFor, showToastAlertFor, openAddingRecipientsSideBar } = uploadRequestUtilsService;
   const filterDeletedUploadRequest = uploadRequests => uploadRequests.filter(request => request.status !== 'DELETED');
 
   uploadRequestsVm.$onInit = onInit;
@@ -53,7 +47,7 @@ function uploadRequestsController(
   uploadRequestsVm.uploadRequestGroup = uploadRequestGroup;
   uploadRequestsVm.openUploadRequest = openUploadRequest;
   uploadRequestsVm.allSelectedHasStatusOf = allSelectedHasStatusOf;
-  uploadRequestsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
+  uploadRequestsVm.addRecipients = addRecipients;
   uploadRequestsVm.showDetails = showDetails;
   uploadRequestsVm.onUpdateSuccess = onUpdateSuccess;
   uploadRequestsVm.showUploadRequestGroupDetails = showUploadRequestGroupDetails;
@@ -68,6 +62,7 @@ function uploadRequestsController(
       {
         label: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ADD_RECIPIENTS',
         icon: 'ls-add-user-sm',
+        action: addRecipients
       }
     ]
   };
@@ -296,19 +291,18 @@ function uploadRequestsController(
     });
   }
 
-  function openAddingRecipientsSideBar(uploadRequest = {}) {
-    uploadRequest.recipients = uploadRequestsVm.itemsList
-      .map(item => item.recipients && item.recipients[0]).filter(Boolean);
-
-    const uploadRequestObject = new UploadRequestGroupObjectService(uploadRequest, {
+  function addRecipients() {
+    const uploadRequestObject = new UploadRequestGroupObjectService({
+      ...uploadRequestsVm.uploadRequestGroup,
+      recipients: uploadRequestsVm.itemsList.map(item => item.recipients && item.recipients[0]).filter(Boolean)
+    }, {
       submitRecipientsCallback: () => {
         reset();
         sidebarService.hide();
       }
     });
 
-    uploadRequestsVm.currentSelectedUploadRequest = uploadRequest;
-    uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
+    openAddingRecipientsSideBar(uploadRequestObject);
   }
 
   function onUpdateSuccess(updated) {
