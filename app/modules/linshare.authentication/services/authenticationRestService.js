@@ -11,13 +11,13 @@
   authenticationRestService.$inject = [
     '$state',
     '_',
-    '$cookies',
     '$location',
     '$log',
     '$q',
     '$window',
     'authService',
     'lsAppConfig',
+    'oidcService',
     'Restangular',
     'ServerManagerService',
     'toastService',
@@ -32,13 +32,13 @@
   function authenticationRestService(
     $state,
     _,
-    $cookies,
     $location,
     $log,
     $q,
     $window,
     authService,
     lsAppConfig,
+    oidcService,
     Restangular,
     ServerManagerService,
     toastService,
@@ -70,18 +70,18 @@
      */
     function checkAuthentication(hideError, ignoreAuthModule) {
       $log.debug('AuthenticationRestService : checkAuthentication');
-      
+
       return handler(Restangular.all(restUrl).withHttpConfig({
         ignoreAuthModule: ignoreAuthModule
       }).customGET('authorized'), undefined, hideError)
         .then(function(userLoggedIn) {
           deferred.resolve(userLoggedIn);
-          
+
           return (userLoggedIn);
         }).catch(function(error) {
           deferred.reject(error);
           $log.debug('current user not authenticated', error);
-          
+
           return error;
         });
     }
@@ -94,7 +94,7 @@
      */
     function getCurrentUser() {
       $log.debug('AuthenticationRestService : getCurrentUser');
-      
+
       return deferred.promise;
     }
 
@@ -181,14 +181,19 @@
       $log.debug('AuthenticationRestService : logout');
 
       $q.all([
+        getCurrentUser(),
         ServerManagerService.getHeaders(),
         handler(Restangular.all(restUrl).withHttpConfig().customGET('logout'))
       ])
-        .then(function(promises) {
-          var
-            headers = promises[0],
-            headersLogoutUrl = headers['x-linshare-post-logout-url'],
-            location;
+        .then(([loggedUser, headers]) => {
+          const headersLogoutUrl = headers['x-linshare-post-logout-url'];
+          let location;
+
+          if (loggedUser.authWithOIDC) {
+            $log.debug('AuthenticationRestService : logout - Initiate logout for OIDC authenticated user');
+
+            return oidcService.signOut();
+          }
 
           if (headersLogoutUrl) {
             if (_.startsWith(headersLogoutUrl, 'http')) {
@@ -223,7 +228,7 @@
      */
     function version() {
       $log.debug('AuthenticationRestService : version');
-      
+
       return handler(Restangular.one(restUrl, 'version').get());
     }
   }
