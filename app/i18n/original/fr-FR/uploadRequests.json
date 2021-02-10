@@ -9,8 +9,8 @@
       "PENDING": "En attente"
     },
     "CREATION_TYPE": {
-      "COLLECTIVE": "Téléchargement collectif",
-      "INDIVIDUAL": "Téléchargement individuel",
+      "COLLECTIVE": "Invitation collective",
+      "INDIVIDUAL": "Invitation individuelle",
       "COLLECTIVE_TOOLTIP": "Dans une invitation de dépôt partagée, les destinataires partagent le même espace de téléchargement et peuvent ainsi voir les documents des autres membres.",
       "INDIVIDUAL_TOOLTIP": "Dans un Dans une invitation de dépôt individuelle de masse, chaque destinataire dispose de son propre espace de téléchargement auquel les autres membres n'ont pas accès."
     },
