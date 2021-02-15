@@ -247,7 +247,7 @@
           name: 'UPLOAD_REQUESTS.MENU_ENTRIES.ARCHIVES',
           link: 'uploadRequestGroups.archived'
         }],
-        icon: 'zmdi zmdi-pin-account',
+        icon: 'ls-upload-request',
         hide: false
       };
 

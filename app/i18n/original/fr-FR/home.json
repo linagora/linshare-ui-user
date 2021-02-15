@@ -6,7 +6,7 @@
   "UPLOAD_REQUEST": "Invitation de dépot",
   "UPLOAD_SHARE_MSG": "Partagez des fichiers depuis votre espace personnel.",
   "UPLOAD_GROUP_MSG": "Collaborez avec vos partenaires en déposant des fichiers dans l'espace commun.",
-  "UPLOAD_REQUEST_MSG": "Invitez des collaborateurs externes à déposer des fichiers dans votre espace.",
+  "UPLOAD_REQUEST_MSG": "Invitez des collaborateurs externes à vous envoyer des fichiers.",
   "MY_FILES_SPACE_MSG": "Visualisez vos fichiers dans votre espace personnel.",
   "RECEIVE_SHARES": "Partages reçus",
   "RECEIVE_SHARES_MSG": "Visualisez vos fichiers reçus. Ces partages sont des liens temporaires vers des fichiers, envoyés et hébergés par vos contacts.",

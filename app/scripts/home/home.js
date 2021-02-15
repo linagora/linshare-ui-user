@@ -57,6 +57,7 @@
       $scope.cards.uploadGroup = functionalities.WORK_GROUP.enable;
       $scope.cards.uploadShare = ($scope.cards.myFilesSpace || $scope.cards.uploadGroup);
       $scope.cards.receivedShare = !functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;
+      $scope.cards.uploadRequest = functionalities.UPLOAD_REQUEST.enable;
       $scope.fabButton = {
         toolbar: {
           activate: true,
