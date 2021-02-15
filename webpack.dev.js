@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const LINSHARE_BACKEND_URL = process.env.LINSHARE_BACKEND_URL || 'http://localhost:28080';
+const DISABLE_HOST_CHECK = process.env.DISABLE_HOST_CHECK === 'true' ? true : false;
 
 module.exports = merge(common, {
   mode: 'development',
@@ -12,6 +13,7 @@ module.exports = merge(common, {
     compress: true,
     port: 20081,
     host: '0.0.0.0',
+    disableHostCheck: DISABLE_HOST_CHECK,
     proxy: [
       {
         context: [
