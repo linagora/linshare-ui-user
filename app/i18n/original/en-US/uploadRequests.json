@@ -52,7 +52,7 @@
     "TABLE": {
       "SEARCH_BY_LABEL": "Search by label",
       "SEARCH_BY_RECIPIENT": "Search by recipient",
-      "INFO": "View upload request info",
+      "INFO": "Show upload request details",
       "FILTER_BY": {
         "ALL": "All"
       },
