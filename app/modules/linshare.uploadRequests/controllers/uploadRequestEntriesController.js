@@ -10,6 +10,7 @@ uploadRequestEntriesController.$inject = [
   '$transition$',
   'documentUtilsService',
   'lsAppConfig',
+  'LinshareDocumentRestService',
   'sidebarService',
   'tableParamsService',
   'toastService',
@@ -32,6 +33,7 @@ function uploadRequestEntriesController(
   $transition$,
   documentUtilsService,
   lsAppConfig,
+  LinshareDocumentRestService,
   sidebarService,
   tableParamsService,
   toastService,
@@ -189,7 +191,7 @@ function uploadRequestEntriesController(
   }
 
   function copyEntriesToMySpace(entries) {
-    $q.allSettled(entries.map(entry => uploadRequestEntryRestService.copyToMySpace(entry.uuid)))
+    $q.allSettled(entries.map(entry => LinshareDocumentRestService.copy(entry.uuid, 'UPLOAD_REQUEST')))
       .then(promises => {
         const copied = promises
           .filter(promise => promise.state === 'fulfilled')

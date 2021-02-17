@@ -8,8 +8,7 @@ function uploadRequestEntryRestService($log, Restangular) {
   return {
     getAudit,
     getDownloadUrl,
-    remove,
-    copyToMySpace
+    remove
   };
 
   ////////////
@@ -24,15 +23,6 @@ function uploadRequestEntryRestService($log, Restangular) {
     $log.debug('uploadRequestEntryRestService : remove', uuid);
 
     return Restangular.all('upload_request_entries').one(uuid).remove();
-  }
-
-  function copyToMySpace(uuid) {
-    $log.debug('uploadRequestEntryRestService : copy', uuid);
-    return Restangular.one('documents').all('copy')
-      .post({
-        kind: 'UPLOAD_REQUEST',
-        uuid: uuid,
-      });
   }
 
   function getAudit(uuid) {
