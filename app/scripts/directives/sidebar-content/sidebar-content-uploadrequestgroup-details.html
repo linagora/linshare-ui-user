@@ -19,7 +19,7 @@
   <div class="tabs-demo-static-tabs tab-nav-detail tabs-update-sidebar">
     <md-content>
       <md-tabs md-dynamic-height="" md-border-bottom="" md-selected="mainVm.sidebar.getData().selectedIndex">
-        <md-tab id="tab1" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.DETAILS' | translate}}" class="col-xs-4 no-padding">
+        <md-tab label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.DETAILS' | translate}}" class="col-xs-4 no-padding">
           <div id="profile-main" class="detail-guest">
             <div class="p-relative img-preview-ctn p-0">
               <div class="dark-overlay"></div>
@@ -174,7 +174,11 @@
             </div>
           </div>
         </md-tab>
-        <md-tab id="tab2" label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding">
+        <md-tab
+          ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.canEdit()"
+          label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}"
+          class="col-xs-4 no-padding"
+        >
           <upload-request-group-form
             upload-request-group-object="mainVm.sidebar.getData().uploadRequestGroupObject"
             form="mainVm.sidebar.getData().form"

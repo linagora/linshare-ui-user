@@ -135,7 +135,11 @@
           </div>
         </md-tab>
 
-        <md-tab label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}" class="col-xs-4 no-padding">
+        <md-tab
+          ng-if="mainVm.sidebar.getData().uploadRequestObject.canEdit()"
+          label="{{'UPLOAD_REQUESTS.RIGHT_PANEL.EDIT' | translate}}"
+          class="col-xs-4 no-padding"
+        >
           <div class="card col-xs-12 form-within-sidebar" id="content-ctn-sidebar">
             <upload-request-form
               form="mainVm.sidebar.getData().form"

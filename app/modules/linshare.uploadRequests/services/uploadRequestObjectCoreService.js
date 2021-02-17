@@ -100,6 +100,7 @@ function UploadRequestObjectCoreService(
       self.status = jsonObject.status;
       self.getOwnerNameOrEmail = getOwnerNameOrEmail;
       self.calculateMaxSize = calculateMaxSize;
+      self.canEdit = canEdit;
 
       calculateDatePickerOptions();
       calculateMaxSize('total');
@@ -361,5 +362,9 @@ function UploadRequestObjectCoreService(
       value: convertedValue,
       unit: appropriateUnit
     };
+  }
+
+  function canEdit() {
+    return self.status && !['ARCHIVED', 'CLOSED', 'CANCELLED'].includes(self.status);
   }
 }
