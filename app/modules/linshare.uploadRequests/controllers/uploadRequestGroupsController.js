@@ -16,7 +16,6 @@ uploadRequestGroupsController.$inject = [
   'contactsListsService',
   'documentUtilsService',
   'lsAppConfig',
-  'toastService',
   'tableParamsService',
   'UploadRequestGroupObjectService',
   'uploadRequestGroups',
@@ -38,7 +37,6 @@ function uploadRequestGroupsController(
   contactsListsService,
   documentUtilsService,
   lsAppConfig,
-  toastService,
   tableParamsService,
   UploadRequestGroupObjectService,
   uploadRequestGroups,
@@ -134,19 +132,21 @@ function uploadRequestGroupsController(
    *  @memberOf LinShare.UploadRequests.uploadRequestGroupsController
    */
   function showDetails(uploadRequest = {}, { selectedIndex = 0 } = {}) {
+    uploadRequestGroupsVm.currentSelectedDocument.current = uploadRequest;
+
     $q.all([
       uploadRequestGroupRestService.get(uploadRequest.uuid),
       uploadRequestGroupRestService.listUploadRequests(uploadRequest.uuid),
     ]).then(([uploadRequestGroup, uploadRequests]) => {
-      uploadRequestGroupsVm.currentSelected = uploadRequestGroup;
-      uploadRequestGroupsVm.currentSelected.recipients = [];
-      uploadRequests.forEach(uploadRequest => {
-        uploadRequestGroupsVm.currentSelected.recipients.push(...uploadRequest.recipients.map(recipient => recipient.mail));
+      uploadRequestGroup.recipients = [];
+      uploadRequestGroup.nbrUploadedFiles = 0;
+
+      uploadRequests.forEach(request => {
+        uploadRequestGroup.recipients.push(...request.recipients.map(recipient => recipient.mail));
+        uploadRequestGroup.nbrUploadedFiles += request.nbrUploadedFiles;
       });
-      uploadRequestGroupsVm.currentSelected.nbrUploadedFiles =
-        uploadRequests.reduce((total, uploadRequest) => total + uploadRequest.nbrUploadedFiles, 0);
       uploadRequestGroupsVm.selectedIndex = selectedIndex >= 0 ? selectedIndex : uploadRequestGroupsVm.selectedIndex;
-      loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroupsVm.currentSelected);
+      loadSidebarContent(uploadRequestGroupsVm.uploadRequestGroupDetails, true, uploadRequestGroup);
     });
   }
 
@@ -162,7 +162,7 @@ function uploadRequestGroupsController(
           }
         });
 
-        uploadRequestGroupsVm.currentSelectedUploadRequest = uploadRequest;
+        uploadRequestGroupsVm.currentSelectedDocument.current = uploadRequest;
         uploadRequestUtilsService.openAddingRecipientsSideBar(uploadRequestObject);
       });
   }
@@ -196,6 +196,12 @@ function uploadRequestGroupsController(
         _.remove(uploadRequestGroupsVm.itemsList, item => canceledRequests.some(request => request.uuid === item.uuid));
         _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => canceledRequests.some(request => request.uuid === selected.uuid));
 
+        if (canceledRequests.includes(
+          request => uploadRequestGroupsVm.currentSelectedDocument.current && uploadRequestGroupsVm.currentSelectedDocument.current.uuid === request.uuid)
+        ) {
+          sidebarService.hide();
+        }
+
         uploadRequestGroupsVm.tableParams.reload();
 
         return {
@@ -228,10 +234,18 @@ function uploadRequestGroupsController(
           .map(reject => reject.reason);
 
         uploadRequestGroupsVm.itemsList.forEach((item, index) => {
-          const isFound = closedRequests.find(request => request.uuid === item.uuid);
+          const updated = closedRequests.find(request => request.uuid === item.uuid);
 
-          if (isFound) {
+          if (updated) {
             uploadRequestGroupsVm.itemsList[index].status = 'CLOSED';
+          }
+
+          if (
+            updated &&
+            uploadRequestGroupsVm.currentSelectedDocument.current &&
+            uploadRequestGroupsVm.currentSelectedDocument.current.uuid === item.uuid
+          ) {
+            sidebarService.hide();
           }
         });
 
@@ -263,6 +277,10 @@ function uploadRequestGroupsController(
         _.remove(uploadRequestGroupsVm.itemsList, item => archivedRequest.uuid === item.uuid);
         _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => archivedRequest.uuid === selected.uuid);
 
+        if (uploadRequestGroupsVm.currentSelectedDocument.current && archivedRequest.uuid === uploadRequestGroupsVm.currentSelectedDocument.current.uuid) {
+          sidebarService.hide();
+        }
+
         uploadRequestGroupsVm.tableParams.reload();
 
         showToastAlertFor('archive', 'info', [archivedRequest]);
@@ -288,7 +306,9 @@ function uploadRequestGroupsController(
           .filter(promise => promise.state === 'rejected')
           .map(reject => reject.reason);
 
-        if (removedRequests.some(request => request.uuid === uploadRequestGroupsVm.currentSelected.uuid)) {
+        if (removedRequests.some(
+          request => uploadRequestGroupsVm.currentSelectedDocument.current && request.uuid === uploadRequestGroupsVm.currentSelectedDocument.current.uuid)
+        ) {
           sidebarService.hide();
         }
 

@@ -179,6 +179,13 @@ function uploadRequestsController(
 
         removeFromSelected(canceledRequests);
         updateUploadRequestStatuses(canceledRequests, 'CANCELED');
+
+        if (canceledRequests.some(
+          request => uploadRequestsVm.currentSelectedUploadRequest.current && uploadRequestsVm.currentSelectedUploadRequest.current.uuid === request.uuid)
+        ) {
+          sidebarService.hide();
+        }
+
         _.remove(uploadRequestsVm.itemsList, item => canceledRequests.some(request => request.uuid === item.uuid));
         uploadRequestsVm.tableParams.reload();
 
@@ -208,6 +215,12 @@ function uploadRequestsController(
         removeFromSelected(closedRequests);
         updateUploadRequestStatuses(closedRequests, 'CLOSED');
 
+        if (closedRequests.some(
+          request => uploadRequestsVm.currentSelectedUploadRequest.current && uploadRequestsVm.currentSelectedUploadRequest.current.uuid === request.uuid)
+        ) {
+          sidebarService.hide();
+        }
+
         if (notClosedRequests.length) {
           showToastAlertFor('close', 'error', notClosedRequests);
         } else {
@@ -220,6 +233,10 @@ function uploadRequestsController(
     openWarningDialogFor('archive', uploadRequest)
       .then(isCopied => uploadRequestRestService.updateStatus(uploadRequest.uuid, 'ARCHIVED', {copy: !!isCopied }))
       .then(archivedRequest => {
+        if (uploadRequestsVm.currentSelectedUploadRequest.current && uploadRequestsVm.currentSelectedUploadRequest.current.uuid === archivedRequest.uuid) {
+          sidebarService.hide();
+        }
+
         removeFromSelected([archivedRequest]);
         updateUploadRequestStatuses([archivedRequest], 'ARCHIVED');
         showToastAlertFor('archive', 'info', [archivedRequest]);
@@ -247,6 +264,12 @@ function uploadRequestsController(
         _.remove(uploadRequestsVm.selectedUploadRequests, selected => removedRequests.some(request => request.uuid === selected.uuid));
 
         uploadRequestsVm.tableParams.reload();
+
+        if (removedRequests.some(
+          request => uploadRequestsVm.currentSelectedUploadRequest.current && uploadRequestsVm.currentSelectedUploadRequest.current.uuid === request.uuid)
+        ) {
+          sidebarService.hide();
+        }
 
         if (notRemovedRequests.length) {
           showToastAlertFor('delete_archived', 'error', notRemovedRequests);
@@ -281,7 +304,7 @@ function uploadRequestsController(
 
   function showDetails(uploadRequest, { selectedIndex = 0 } = {}) {
     uploadRequestRestService.get(uploadRequest.uuid).then(responseUploadRequest => {
-      uploadRequestsVm.currentSelected = uploadRequest;
+      uploadRequestsVm.currentSelectedUploadRequest.current = uploadRequest;
       uploadRequestsVm.selectedIndex = selectedIndex;
       uploadRequestsVm.uploadRequestObject = new UploadRequestObjectService(responseUploadRequest);
 
