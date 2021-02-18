@@ -50,3 +50,38 @@
 .upload-request-label {
   display: block !important;
 }
+
+#content-ctn-sidebar {
+  .datetimepicker-border-fix {
+    margin-top: -10px;
+    width: 130px;
+
+    .datepicker-input-ctn {
+      display: flex;
+      align-items: center;
+
+      .form-control {
+        height: 30px;
+      }
+
+      .upload-request-hour-picker-ctn {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 10px;
+
+        .upload-request-hour-picker {
+          width: 70px;
+          float: right;
+          height: auto;
+          border-bottom: 0px;
+
+          &:focus {
+            .md-select-value {
+              border-bottom: 0px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
