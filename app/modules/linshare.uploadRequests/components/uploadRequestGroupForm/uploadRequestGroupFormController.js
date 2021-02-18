@@ -3,17 +3,15 @@ angular
   .controller('uploadRequestGroupFormController', uploadRequestGroupFormController);
 
 uploadRequestGroupFormController.$inject = [
-  'moment',
   '$timeout',
   'formUtilsService',
   'lsAppConfig',
   'sidebarService',
   'toastService',
-  'uploadRequestUtilsService',
+  'uploadRequestUtilsService'
 ];
 
 function uploadRequestGroupFormController(
-  moment,
   $timeout,
   formUtilsService,
   lsAppConfig,
@@ -36,7 +34,6 @@ function uploadRequestGroupFormController(
   uploadRequestGroupFormVm.toggleDisplayAdvancedOptions = toggleDisplayAdvancedOptions;
   uploadRequestGroupFormVm.disableEditValueOfDate = disableEditValueOfDate;
   uploadRequestGroupFormVm.enableEditValueOfDate = enableEditValueOfDate;
-  uploadRequestGroupFormVm.changeHour = changeHour;
   uploadRequestGroupFormVm.enableEditActivationDate = true;
   uploadRequestGroupFormVm.enableEditExpirationDate = true;
   uploadRequestGroupFormVm.enableEditNotificationDate = true;
@@ -181,19 +178,5 @@ function uploadRequestGroupFormController(
     uploadRequestGroupFormVm.uploadRequestGroupObject.setDefaultValueOfDate(dateType);
     uploadRequestGroupFormVm.uploadRequestGroupObject.calculateDatePickerOptions();
     revalidateDateFields();
-  }
-
-  function changeHour(hour, dateType) {
-    switch (dateType) {
-      case 'activationDate':
-        uploadRequestGroupFormVm.uploadRequestGroupObject.activationDate = moment(uploadRequestGroupFormVm.uploadRequestGroupObject.activationDate).set({ hour }).toDate();
-        break;
-      case 'expirationDate':
-        uploadRequestGroupFormVm.uploadRequestGroupObject.expiryDate = moment(uploadRequestGroupFormVm.uploadRequestGroupObject.expiryDate).set({ hour }).toDate();
-        break;
-      case 'notificationDate':
-        uploadRequestGroupFormVm.uploadRequestGroupObject.notificationDate = moment(uploadRequestGroupFormVm.uploadRequestGroupObject.notificationDate).set({ hour }).toDate();
-        break;
-    }
   }
 }

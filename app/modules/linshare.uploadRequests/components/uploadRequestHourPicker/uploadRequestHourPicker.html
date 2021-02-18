@@ -1,7 +1,7 @@
 <div class="upload-request-hour-picker-ctn">
   <md-select class="form-control upload-request-hour-picker m-0"
     ng-model="$ctrl.hour"
-    ng-change="$ctrl.onChangeHour($ctrl.hour, $ctrl.dateType)"
+    ng-change="$ctrl.changeHour()"
   >
     <md-option ng-value="0">00:00</md-option>
     <md-option ng-value="1">01:00</md-option>

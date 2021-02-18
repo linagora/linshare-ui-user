@@ -26,6 +26,11 @@ function uploadRequestFormController(
 
   uploadRequestFormVm.revalidateDateFields = revalidateDateFields;
   uploadRequestFormVm.$onInit = onInit;
+  uploadRequestFormVm.enableEditValueOfDate = enableEditValueOfDate;
+  uploadRequestFormVm.disableEditValueOfDate = disableEditValueOfDate;
+  uploadRequestFormVm.enableEditActivationDate = true;
+  uploadRequestFormVm.enableEditExpirationDate = true;
+  uploadRequestFormVm.enableEditNotificationDate = true;
 
   function onInit() {
     if (sidebarService.getContent() === lsAppConfig.uploadRequestDetails) {
@@ -35,9 +40,17 @@ function uploadRequestFormController(
 
   function revalidateDateFields() {
     $timeout(() => {
-      uploadRequestFormVm.form.notificationDate.$validate();
-      uploadRequestFormVm.form.expirationDate.$validate();
-      uploadRequestFormVm.form.activationDate.$validate();
+      if (uploadRequestFormVm.form.notificationDate) {
+        uploadRequestFormVm.form.notificationDate.$validate();
+      }
+
+      if (uploadRequestFormVm.form.expirationDate) {
+        uploadRequestFormVm.form.expirationDate.$validate();
+      }
+
+      if (uploadRequestFormVm.form.activationDate) {
+        uploadRequestFormVm.form.activationDate.$validate();
+      }
     });
   }
 
@@ -50,13 +63,51 @@ function uploadRequestFormController(
         .then(updated => {
           showToastAlertFor('update', 'info');
 
-          return onUpdateSuccess(updated);
+          return onUpdateSuccess && onUpdateSuccess(updated);
         })
         .catch(error => {
           showToastAlertFor('update', 'error');
 
-          return onUpdateError(error);
+          return onUpdateError && onUpdateError(error);
         });
     }
+  }
+
+  function disableEditValueOfDate(dateType) {
+    switch (dateType) {
+      case 'activationDate':
+        uploadRequestFormVm.uploadRequestObject.activationDate = undefined;
+        uploadRequestFormVm.uploadRequestObject.enableEditActivationDate = false;
+        break;
+      case 'expirationDate':
+        uploadRequestFormVm.uploadRequestObject.expiryDate = undefined;
+        uploadRequestFormVm.uploadRequestObject.enableEditExpirationDate = false;
+        break;
+      case 'notificationDate':
+        uploadRequestFormVm.uploadRequestObject.notificationDate = undefined;
+        uploadRequestFormVm.uploadRequestObject.enableEditNotificationDate = false;
+        break;
+    }
+
+    uploadRequestFormVm.uploadRequestObject.calculateDatePickerOptions();
+    revalidateDateFields();
+  }
+
+  function enableEditValueOfDate(dateType) {
+    switch (dateType) {
+      case 'activationDate':
+        uploadRequestFormVm.enableEditActivationDate = true;
+        break;
+      case 'expirationDate':
+        uploadRequestFormVm.enableEditExpirationDate = true;
+        break;
+      case 'notificationDate':
+        uploadRequestFormVm.enableEditNotificationDate = true;
+        break;
+    }
+
+    uploadRequestFormVm.uploadRequestObject.setDefaultValueOfDate(dateType);
+    uploadRequestFormVm.uploadRequestObject.calculateDatePickerOptions();
+    revalidateDateFields();
   }
 }

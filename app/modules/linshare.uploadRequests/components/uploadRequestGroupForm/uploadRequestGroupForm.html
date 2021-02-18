@@ -109,13 +109,10 @@
 
                     <div>
                       <upload-request-hour-picker
-                        hour="$ctrl.uploadRequestGroupObject.activationHour"
-                        on-change-hour="$ctrl.changeHour"
-                        date-type="activationDate"
+                        datetime="$ctrl.uploadRequestGroupObject.activationDate"
                       />
                     </div>
                   </div>
-
                   <span ng-show="$ctrl.form.activationDate.$invalid" translate translate-interpolation="messageformat"
                     translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('YYYY-MM-DD'),
                       max: $ctrl.uploadRequestGroupObject.getMaxDateOfActivation('YYYY-MM-DD')
@@ -162,9 +159,7 @@
                     </div>
                     <div>
                       <upload-request-hour-picker
-                        hour="$ctrl.uploadRequestGroupObject.expirationHour"
-                        on-change-hour="$ctrl.changeHour"
-                        date-type="expirationDate"
+                        datetime="$ctrl.uploadRequestGroupObject.expiryDate"
                       />
                     </div>
                   </div>
@@ -278,9 +273,7 @@
                     </div>
                     <div>
                       <upload-request-hour-picker
-                        hour="$ctrl.uploadRequestGroupObject.notificationHour"
-                        on-change-hour="$ctrl.changeHour"
-                        date-type="notificationDate"
+                        datetime="$ctrl.uploadRequestGroupObject.notificationDate"
                       />
                     </div>
                   </div>
