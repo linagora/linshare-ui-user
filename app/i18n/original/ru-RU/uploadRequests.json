@@ -8,6 +8,11 @@
       "ARCHIVED": "Архивы",
       "PENDING": "В ожидании"
     },
+    "LOCALE": {
+      "ENGLISH": "Английский",
+      "FRENCH": "Французский",
+      "RUSSIAN": "Русский"
+    },
     "CREATION_TYPE": {
       "COLLECTIVE": "Коллективная загрузка",
       "INDIVIDUAL": "Индивидуальная загрузка",

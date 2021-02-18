@@ -8,6 +8,11 @@
       "ARCHIVED": "Lưu trữ",
       "PENDING": "Đang chờ"
     },
+    "LOCALE": {
+      "ENGLISH": "Tiếng Anh",
+      "FRENCH": "Tiếng Pháp",
+      "RUSSIAN": "Tiếng Nga"
+    },
     "CREATION_TYPE": {
       "COLLECTIVE": "Tải lên nhóm",
       "INDIVIDUAL": "Tải lên cá nhân",

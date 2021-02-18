@@ -328,7 +328,7 @@
                   ng-model="$ctrl.uploadRequestGroupObject.locale">
                   <md-option
                     ng-repeat="unit in $ctrl.uploadRequestGroupObject.functionalityOfNotificationLanguage.units"
-                    ng-value="unit">{{::unit}}</md-option>
+                    ng-value="unit">{{ ('UPLOAD_REQUESTS.LOCALE.' + unit) | translate }}</md-option>
                 </md-select>
               </div>
             </div>

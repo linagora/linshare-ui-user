@@ -8,6 +8,11 @@
       "ARCHIVED": "Archived",
       "PENDING": "Pending"
     },
+    "LOCALE": {
+      "ENGLISH": "English",
+      "FRENCH": "French",
+      "RUSSIAN": "Russian"
+    },
     "CREATION_TYPE": {
       "COLLECTIVE": "Collective upload",
       "INDIVIDUAL": "Individual upload",

@@ -8,6 +8,11 @@
       "ARCHIVED": "Archivée",
       "PENDING": "En attente"
     },
+    "LOCALE": {
+      "ENGLISH": "Anglais",
+      "FRENCH": "Français",
+      "RUSSIAN": "Russe"
+    },
     "CREATION_TYPE": {
       "COLLECTIVE": "Invitation collective",
       "INDIVIDUAL": "Invitation individuelle",
