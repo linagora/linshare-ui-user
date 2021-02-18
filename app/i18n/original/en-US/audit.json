@@ -836,7 +836,8 @@
         "ARCHIVED": "archived",
         "ENABLED": "active",
         "CLOSED": "closed",
-        "CREATED": "pending"
+        "CREATED": "pending",
+        "DELETED": "deleted"
       }
     }
   },

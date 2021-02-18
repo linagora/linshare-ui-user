@@ -762,7 +762,8 @@
         "ARCHIVED": "lưu trữ",
         "ENABLED": "mở",
         "CLOSED": "đóng",
-        "CREATED": "đang chờ"
+        "CREATED": "đang chờ",
+        "DELETED": "đã xóa"
       }
     }
   },
