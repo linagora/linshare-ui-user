@@ -56,11 +56,18 @@ function uploadRequestGroupFormController(
   }
 
   function revalidateDateFields() {
-    console.log('hello');
     $timeout(() => {
-      uploadRequestGroupFormVm.form.notificationDate.$validate();
-      uploadRequestGroupFormVm.form.expirationDate.$validate();
-      uploadRequestGroupFormVm.form.activationDate.$validate();
+      if (uploadRequestGroupFormVm.form.notificationDate) {
+        uploadRequestGroupFormVm.form.notificationDate.$validate();
+      }
+
+      if (uploadRequestGroupFormVm.form.expirationDate) {
+        uploadRequestGroupFormVm.form.expirationDate.$validate();
+      }
+
+      if (uploadRequestGroupFormVm.form.activationDate) {
+        uploadRequestGroupFormVm.form.activationDate.$validate();
+      }
     });
   }
 
@@ -109,12 +116,12 @@ function uploadRequestGroupFormController(
         .then(created => {
           showToastAlertFor('create', 'info');
 
-          return onCreateSuccess(created);
+          return onCreateSuccess && onCreateSuccess(created);
         })
         .catch(error => {
           showToastAlertFor('create', 'error');
 
-          return onCreateError(error);
+          return onCreateError && onCreateError(error);
         });
     }
   }
@@ -128,12 +135,12 @@ function uploadRequestGroupFormController(
         .then(updated => {
           showToastAlertFor('update', 'info');
 
-          return onUpdateSuccess(updated);
+          return onUpdateSuccess && onUpdateSuccess(updated);
         })
         .catch(error => {
           showToastAlertFor('update', 'error');
 
-          return onUpdateError(error);
+          return onUpdateError && onUpdateError(error);
         });
     }
   }
