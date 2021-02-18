@@ -71,8 +71,14 @@ function UploadRequestObjectCoreService(
       self.functionalityOfNotificationLanguage = _.cloneDeep(functionalityOfNotificationLanguage);
       self.creationDate = setPropertyValue(jsonObject.creationDate, '');
       self.activationDate = setPropertyValue(jsonObject.activationDate, functionalityOfActivation.value);
+      self.activationHour = self.activationDate ? moment(self.activationDate).hour() : moment().add(1, 'hour').hour();
       self.expiryDate = setPropertyValue(jsonObject.expiryDate, functionalityOfExpiration.value);
+      self.expirationHour = self.expiryDate ? moment(self.expiryDate).hour() : moment().add(1, 'hour').hour();
       self.notificationDate = setPropertyValue(jsonObject.notificationDate, functionalityOfExpiryNotification.value);
+      self.notificationHour = self.notificationDate ? moment(self.notificationDate).hour() : moment().add(1, 'hour').hour();
+      self.defaultActivationDate = setPropertyValue(jsonObject.activationDate, functionalityOfActivation.value);
+      self.defaultExpiryDate = setPropertyValue(jsonObject.expiryDate, functionalityOfExpiration.value);
+      self.defaultNotificationDate = setPropertyValue(jsonObject.notificationDate, functionalityOfExpiryNotification.value);
       self.maxFileCount = setPropertyValue(jsonObject.maxFileCount, functionalityOfMaxNumberOfFiles.value);
       self.protectedByPassword = setPropertyValue(jsonObject.protectedByPassword, functionalityOfPasswordProtected.value);
       self.canClose = setPropertyValue(jsonObject.canClose, functionalityOfClosure.value);
@@ -96,6 +102,7 @@ function UploadRequestObjectCoreService(
       self.getMinDateOfNotification = getMinDateOfNotification;
       self.getMaxDateOfNotification = getMaxDateOfNotification;
       self.calculateDatePickerOptions = calculateDatePickerOptions;
+      self.setDefaultValueOfDate = setDefaultValueOfDate;
       self.uuid = setPropertyValue(jsonObject.uuid, null);
       self.status = jsonObject.status;
       self.getOwnerNameOrEmail = getOwnerNameOrEmail;
@@ -122,7 +129,7 @@ function UploadRequestObjectCoreService(
         functionalityOfActivation.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         functionalityOfActivation.value = !_.isUndefined(clonedData.value)
           && clonedData.unit
-          && moment().add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
+          && moment().add(clonedData.value, clonedData.unit.toLowerCase()).add(1, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).toDate();
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_EXPIRATION').then(data => {
         const clonedData = _.cloneDeep(data || {});
@@ -132,7 +139,7 @@ function UploadRequestObjectCoreService(
         functionalityOfExpiration.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         functionalityOfExpiration.value = !_.isUndefined(clonedData.value)
           && clonedData.unit
-          && defaultActivationDate.add(clonedData.value, clonedData.unit.toLowerCase()).toDate();
+          && defaultActivationDate.add(clonedData.value, clonedData.unit.toLowerCase()).set({ minute: 0, second: 0, millisecond: 0 }).toDate();
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_NOTIFICATION').then(data => {
         const clonedData = _.cloneDeep(data || {});
@@ -143,7 +150,7 @@ function UploadRequestObjectCoreService(
         functionalityOfExpiryNotification.value = !_.isUndefined(clonedData.value)
           && clonedData.unit
           && defaultExpirationDate
-          && defaultExpirationDate.subtract(clonedData.value, clonedData.unit.toLowerCase()).toDate();
+          && defaultExpirationDate.subtract(clonedData.value, clonedData.unit.toLowerCase()).set({ minute: 0, second: 0, millisecond: 0 }).toDate();
         functionalityOfExpiryNotification.enable = functionalityOfExpiration.enable ? functionalityOfExpiryNotification.enable : false;
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__MAXIMUM_DEPOSIT_SIZE').then(data => {
@@ -199,7 +206,9 @@ function UploadRequestObjectCoreService(
   }
 
   function getMinDateOfExpiration(format) {
-    return format ? moment(self.activationDate).format(format) : self.activationDate;
+    const minDate = self.activationDate ? moment(self.activationDate) : moment().add(1, 'day');
+
+    return format ? minDate.format(format) : minDate;
   }
 
   function getMaxDateOfExpiration(format) {
@@ -226,12 +235,9 @@ function UploadRequestObjectCoreService(
   }
 
   function getMaxDateOfActivation(format) {
-    if (self.functionalityOfActivation.maxValue < 0) {
-      return;
-    }
+    const expiryDate = self.expiryDate ? moment(self.expiryDate) : moment(self.defaultExpiryDate);
 
-    const expiryDate = self.expiryDate && moment(self.expiryDate);
-    let maxDate = !_.isUndefined(self.functionalityOfActivation.maxValue) && self.functionalityOfActivation.maxUnit
+    let maxDate = self.functionalityOfActivation.maxValue >= 0 && self.functionalityOfActivation.maxUnit
       ? moment().add(self.functionalityOfActivation.maxValue, self.functionalityOfActivation.maxUnit.toLowerCase())
       : expiryDate;
 
@@ -247,13 +253,13 @@ function UploadRequestObjectCoreService(
   }
 
   function getMinDateOfNotification(format) {
-    const expirationDate = self.expiryDate && moment(self.expiryDate);
+    const expirationDate = self.expiryDate ? moment(self.expiryDate) : moment(self.defaultExpiryDate);
     const activationDate = self.activationDate ? moment(self.activationDate) : moment();
 
     if (self.functionalityOfExpiryNotification.maxValue <= 0) {
       let minDate = activationDate;
 
-      if (minDate.valueOf() < moment().valueOf()) {
+      if (!minDate || minDate.valueOf() < moment().valueOf()) {
         minDate = moment();
       }
 
@@ -265,11 +271,11 @@ function UploadRequestObjectCoreService(
       && expirationDate
       && expirationDate.subtract(self.functionalityOfExpiryNotification.maxValue, self.functionalityOfExpiryNotification.maxUnit.toLowerCase());
 
-    if (minDate.valueOf() < activationDate.valueOf()) {
+    if (activationDate && minDate && minDate.valueOf() < activationDate.valueOf()) {
       minDate = activationDate;
     }
 
-    if (minDate.valueOf() < moment().valueOf()) {
+    if (!minDate || minDate.valueOf() < moment().valueOf()) {
       minDate = moment();
     }
 
@@ -281,7 +287,8 @@ function UploadRequestObjectCoreService(
   }
 
   function getMaxDateOfNotification(format) {
-    const expirationDate = self.expiryDate ? moment(self.expiryDate) : moment(self.getMaxDateOfExpiration());
+    const expirationDate = self.expiryDate ? moment(self.expiryDate) :
+      (self.getMaxDateOfExpiration() ? moment(self.getMaxDateOfExpiration()) : moment(self.defaultExpiryDate));
 
     if (!format) {
       return expirationDate && expirationDate.toDate();
@@ -366,5 +373,19 @@ function UploadRequestObjectCoreService(
 
   function canEdit() {
     return self.status && !['ARCHIVED', 'CLOSED', 'CANCELLED'].includes(self.status);
+  }
+
+  function setDefaultValueOfDate(dateType) {
+    switch (dateType) {
+      case 'activationDate':
+        self.activationDate = self.defaultActivationDate;
+        break;
+      case 'expirationDate':
+        self.expiryDate = self.defaultExpiryDate;
+        break;
+      case 'notificationDate':
+        self.notificationDate = self.defaultNotificationDate;
+        break;
+    }
   }
 }

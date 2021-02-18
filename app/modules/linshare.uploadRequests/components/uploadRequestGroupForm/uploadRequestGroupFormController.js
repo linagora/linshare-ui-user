@@ -3,15 +3,17 @@ angular
   .controller('uploadRequestGroupFormController', uploadRequestGroupFormController);
 
 uploadRequestGroupFormController.$inject = [
+  'moment',
   '$timeout',
   'formUtilsService',
   'lsAppConfig',
   'sidebarService',
   'toastService',
-  'uploadRequestUtilsService'
+  'uploadRequestUtilsService',
 ];
 
 function uploadRequestGroupFormController(
+  moment,
   $timeout,
   formUtilsService,
   lsAppConfig,
@@ -32,6 +34,12 @@ function uploadRequestGroupFormController(
   uploadRequestGroupFormVm.revalidateDateFields = revalidateDateFields;
   uploadRequestGroupFormVm.$onInit = onInit;
   uploadRequestGroupFormVm.toggleDisplayAdvancedOptions = toggleDisplayAdvancedOptions;
+  uploadRequestGroupFormVm.disableEditValueOfDate = disableEditValueOfDate;
+  uploadRequestGroupFormVm.enableEditValueOfDate = enableEditValueOfDate;
+  uploadRequestGroupFormVm.changeHour = changeHour;
+  uploadRequestGroupFormVm.enableEditActivationDate = true;
+  uploadRequestGroupFormVm.enableEditExpirationDate = true;
+  uploadRequestGroupFormVm.enableEditNotificationDate = true;
 
   function onInit() {
     uploadRequestGroupFormVm.dsplayAdvancedOptions = uploadRequestGroupFormVm.displayAdvancedOptions || false;
@@ -48,6 +56,7 @@ function uploadRequestGroupFormController(
   }
 
   function revalidateDateFields() {
+    console.log('hello');
     $timeout(() => {
       uploadRequestGroupFormVm.form.notificationDate.$validate();
       uploadRequestGroupFormVm.form.expirationDate.$validate();
@@ -126,6 +135,58 @@ function uploadRequestGroupFormController(
 
           return onUpdateError(error);
         });
+    }
+  }
+
+  function disableEditValueOfDate(dateType) {
+    switch (dateType) {
+      case 'activationDate':
+        uploadRequestGroupFormVm.uploadRequestGroupObject.activationDate = undefined;
+        uploadRequestGroupFormVm.enableEditActivationDate = false;
+        break;
+      case 'expirationDate':
+        uploadRequestGroupFormVm.uploadRequestGroupObject.expiryDate = undefined;
+        uploadRequestGroupFormVm.enableEditExpirationDate = false;
+        break;
+      case 'notificationDate':
+        uploadRequestGroupFormVm.uploadRequestGroupObject.notificationDate = undefined;
+        uploadRequestGroupFormVm.enableEditNotificationDate = false;
+        break;
+    }
+
+    uploadRequestGroupFormVm.uploadRequestGroupObject.calculateDatePickerOptions();
+    revalidateDateFields();
+  }
+
+  function enableEditValueOfDate(dateType) {
+    switch (dateType) {
+      case 'activationDate':
+        uploadRequestGroupFormVm.enableEditActivationDate = true;
+        break;
+      case 'expirationDate':
+        uploadRequestGroupFormVm.enableEditExpirationDate = true;
+        break;
+      case 'notificationDate':
+        uploadRequestGroupFormVm.enableEditNotificationDate = true;
+        break;
+    }
+
+    uploadRequestGroupFormVm.uploadRequestGroupObject.setDefaultValueOfDate(dateType);
+    uploadRequestGroupFormVm.uploadRequestGroupObject.calculateDatePickerOptions();
+    revalidateDateFields();
+  }
+
+  function changeHour(hour, dateType) {
+    switch (dateType) {
+      case 'activationDate':
+        uploadRequestGroupFormVm.uploadRequestGroupObject.activationDate = moment(uploadRequestGroupFormVm.uploadRequestGroupObject.activationDate).set({ hour }).toDate();
+        break;
+      case 'expirationDate':
+        uploadRequestGroupFormVm.uploadRequestGroupObject.expiryDate = moment(uploadRequestGroupFormVm.uploadRequestGroupObject.expiryDate).set({ hour }).toDate();
+        break;
+      case 'notificationDate':
+        uploadRequestGroupFormVm.uploadRequestGroupObject.notificationDate = moment(uploadRequestGroupFormVm.uploadRequestGroupObject.notificationDate).set({ hour }).toDate();
+        break;
     }
   }
 }
