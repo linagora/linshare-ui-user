@@ -763,7 +763,8 @@
         "ENABLED": "mở",
         "CLOSED": "đóng",
         "CREATED": "đang chờ",
-        "DELETED": "đã xóa"
+        "DELETED": "đã xóa",
+        "CANCELED": "đã hủy"
       }
     }
   },

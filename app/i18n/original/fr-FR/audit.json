@@ -837,7 +837,8 @@
         "ENABLED": "activée",
         "CLOSED": "fermée",
         "CREATED": "en attente",
-        "DELETED": "supprimé"
+        "DELETED": "supprimée",
+        "CANCELED": "annulée"
       }
     }
   },
