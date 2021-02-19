@@ -215,7 +215,13 @@ function uploadRequestEntriesController(
         if (rejectedPromises.length) {
           showToastAlertFor('copy_entries', 'error', rejectedPromises);
         } else {
-          showToastAlertFor('copy_entries', 'info', copied);
+          showToastAlertFor('copy_entries', 'info', copied).then(response => {
+            if (response.actionClicked) {
+              const copiedFileUuid = copied.length === 1 ? copied[0][0].uuid : null;
+
+              $state.go('documents.files', { uploadedFileUuid: copiedFileUuid });
+            }
+          });
         }
       });
   }

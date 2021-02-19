@@ -70,14 +70,14 @@ function uploadRequestUtilsService(
         key: 'UPLOAD_REQUESTS.TOAST_ALERT.SHOW_UNEXPECTED_ERROR'
       });
     } else {
-      toastService[type]({
+      return toastService[type]({
         key: `UPLOAD_REQUESTS.TOAST_ALERT.${action.toUpperCase()}.${type.toUpperCase()}`,
         pluralization: true,
         params: {
           singular: items.length === 1,
           number: items.length
         }
-      });
+      }, action === 'copy_entries' && 'TOAST_ALERT.ACTION_BUTTON');
     }
   }
 
