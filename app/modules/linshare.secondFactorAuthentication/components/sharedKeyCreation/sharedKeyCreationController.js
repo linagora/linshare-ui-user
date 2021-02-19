@@ -11,9 +11,9 @@
 
   sharedKeyCreationController.$inject = [
     '$timeout',
+    'lsAppConfig',
     'secondFactorAuthenticationRestService',
     'secondFactorAuthenticationTransitionService',
-    'FREEOTP_CONFIGURATION'
   ];
 
   /**
@@ -24,9 +24,9 @@
 
   function sharedKeyCreationController(
     $timeout,
+    lsAppConfig,
     secondFactorAuthenticationRestService,
-    secondFactorAuthenticationTransitionService,
-    FREEOTP_CONFIGURATION
+    secondFactorAuthenticationTransitionService
   ) {
     /* jshint validthis:true */
     var secondFactorControllerVm = this;
@@ -44,7 +44,7 @@
           secondFactorControllerVm.freeOTPConfig = angular.extend({
             account: secondFactorControllerVm.user.mail,
             secret: secondFA.sharedKey
-          }, FREEOTP_CONFIGURATION);
+          }, lsAppConfig.otpConfig);
           secondFactorControllerVm.freeOTPUri = makeFreeOTPUri(secondFactorControllerVm.freeOTPConfig);
           secondFactorAuthenticationTransitionService.deregisterHook();
           $timeout();

@@ -211,6 +211,19 @@
       uploadRequestDetails: 'uploadrequest-details',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,
-      thumbnailEngineActivated: true
+      thumbnailEngineActivated: true,
+
+      /*
+        Define configuration for the OTP uri generator.
+        - type, digits, algorithm, period: need to match with linshare-core configuration
+        - issuer: will determine the name of OTP entry in authentication mobile app
+      */
+      otpConfig: {
+        type: 'totp',
+        digits: 6,
+        issuer: 'LinShare',
+        algorithm: 'SHA1',
+        period: 30
+      }
     });
 })();
