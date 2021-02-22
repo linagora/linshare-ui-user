@@ -2,6 +2,7 @@
   "UPLOAD_REQUESTS": {
     "TITLE": "Upload requests",
     "TITLE_SINGULAR": "Upload request",
+    "SYSTEM_ACCOUNT": "Upload request system",
     "STATUS": {
       "ACTIVE": "Active",
       "EXPIRED_CLOSED": "Expired | Closed",

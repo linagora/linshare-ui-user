@@ -2,6 +2,7 @@
   "UPLOAD_REQUESTS": {
     "TITLE": "Invitations de dépot",
     "TITLE_SINGULAR": "Invitation de dépot",
+    "SYSTEM_ACCOUNT": "Invitation de dépot système",
     "STATUS": {
       "ACTIVE": "Active",
       "EXPIRED_CLOSED": "Expirée | Fermée",

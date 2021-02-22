@@ -2,6 +2,7 @@
   "UPLOAD_REQUESTS": {
     "TITLE": "Запросы на загрузку",
     "TITLE_SINGULAR": "запрос на загрузку",
+    "SYSTEM_ACCOUNT": "Система запросов на загрузку",
     "STATUS": {
       "ACTIVE": "Активный",
       "EXPIRED_CLOSED": "Истекло | Закрыто",

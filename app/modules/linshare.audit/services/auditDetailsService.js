@@ -250,6 +250,8 @@
         fullName = authorSystem;
       } else if (user.role === lsAppConfig.accountType.superadmin) {
         fullName = authorSuperadmin;
+      } else if (user.name === 'system-account-uploadrequest') {
+        fullName = 'UPLOAD_REQUESTS.SYSTEM_ACCOUNT';
       } else if (user.name) {
         fullName = user.name;
       } else {
