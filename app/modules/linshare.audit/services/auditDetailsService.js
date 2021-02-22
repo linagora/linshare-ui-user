@@ -182,6 +182,8 @@
       auditAction.updatedValues = setUpdatedValues(auditAction);
       auditAction.actionKey = setKeyVar(auditAction.action, 'ACTION.');
       auditAction.typeKey = setKeyVar(auditAction.type, 'TYPE.');
+      auditAction.translatedAction = $filter('translate')(auditAction.actionKey);
+      auditAction.translatedType = $filter('translate')(auditAction.typeKey);
       auditAction.fileSize = setFileSize(auditAction);
     }
 
