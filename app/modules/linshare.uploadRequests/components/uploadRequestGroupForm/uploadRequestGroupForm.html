@@ -127,7 +127,7 @@
               </div>
               <div class="pull-right" ng-if="!$ctrl.enableEditActivationDate">
                 <div>{{ $ctrl.uploadRequestGroupObject.defaultActivationDate | lsDate: 'YYYY-MM-DD HH:mm' }}</div>
-                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('activationDate')">EDIT</a>
+                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('activationDate')">SET</a>
               </div>
               <div class="text-right" ng-if="$ctrl.uploadRequestGroupObject.status === 'ENABLED' && $ctrl.operation === 'update'">
                 <span>
@@ -176,7 +176,7 @@
               </div>
               <div class="pull-right" ng-if="!$ctrl.enableEditExpirationDate">
                 <div>{{ $ctrl.uploadRequestGroupObject.defaultExpiryDate | lsDate: 'YYYY-MM-DD HH:mm' }}</div>
-                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('expirationDate')">EDIT</a>
+                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('expirationDate')">SET</a>
               </div>
             </div>
             <div class="col-xs-12 field-ctn clearfix"
@@ -291,7 +291,7 @@
               </div>
               <div class="pull-right" ng-if="!$ctrl.enableEditNotificationDate">
                 <div>{{ $ctrl.uploadRequestGroupObject.defaultNotificationDate | lsDate: 'YYYY-MM-DD HH:mm' }}</div>
-                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('notificationDate')">EDIT</a>
+                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('notificationDate')">SET</a>
               </div>
             </div>
             <div class="col-xs-12 field-ctn clearfix"
