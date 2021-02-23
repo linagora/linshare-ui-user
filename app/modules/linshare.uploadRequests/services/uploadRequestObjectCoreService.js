@@ -70,9 +70,9 @@ function UploadRequestObjectCoreService(
       self.functionalityOfClosure = _.cloneDeep(functionalityOfClosure);
       self.functionalityOfNotificationLanguage = _.cloneDeep(functionalityOfNotificationLanguage);
       self.creationDate = setPropertyValue(jsonObject.creationDate, '');
-      self.activationDate = setPropertyValue(jsonObject.activationDate, functionalityOfActivation.value);
-      self.expiryDate = setPropertyValue(jsonObject.expiryDate, functionalityOfExpiration.value);
-      self.notificationDate = setPropertyValue(jsonObject.notificationDate, functionalityOfExpiryNotification.value);
+      self.activationDate = setPropertyValue(jsonObject.activationDate, null);
+      self.expiryDate = setPropertyValue(jsonObject.expiryDate, null);
+      self.notificationDate = setPropertyValue(jsonObject.notificationDate, null);
       self.defaultActivationDate = setPropertyValue(jsonObject.activationDate, functionalityOfActivation.value);
       self.defaultExpiryDate = setPropertyValue(jsonObject.expiryDate, functionalityOfExpiration.value);
       self.defaultNotificationDate = setPropertyValue(jsonObject.notificationDate, functionalityOfExpiryNotification.value);

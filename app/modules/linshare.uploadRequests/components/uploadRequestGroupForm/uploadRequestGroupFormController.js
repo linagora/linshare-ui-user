@@ -34,12 +34,12 @@ function uploadRequestGroupFormController(
   uploadRequestGroupFormVm.toggleDisplayAdvancedOptions = toggleDisplayAdvancedOptions;
   uploadRequestGroupFormVm.disableEditValueOfDate = disableEditValueOfDate;
   uploadRequestGroupFormVm.enableEditValueOfDate = enableEditValueOfDate;
-  uploadRequestGroupFormVm.enableEditActivationDate = true;
-  uploadRequestGroupFormVm.enableEditExpirationDate = true;
-  uploadRequestGroupFormVm.enableEditNotificationDate = true;
 
   function onInit() {
     uploadRequestGroupFormVm.dsplayAdvancedOptions = uploadRequestGroupFormVm.displayAdvancedOptions || false;
+    uploadRequestGroupFormVm.enableEditActivationDate = !!uploadRequestGroupFormVm.uploadRequestGroupObject.activationDate;
+    uploadRequestGroupFormVm.enableEditExpirationDate = !!uploadRequestGroupFormVm.uploadRequestGroupObject.expiryDate;
+    uploadRequestGroupFormVm.enableEditNotificationDate = !!uploadRequestGroupFormVm.uploadRequestGroupObject.notificationDate;
 
     switch (sidebarService.getContent()) {
       case lsAppConfig.uploadRequestGroupCreate:
