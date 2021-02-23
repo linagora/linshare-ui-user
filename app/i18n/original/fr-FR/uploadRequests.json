@@ -32,7 +32,7 @@
       "PASSWORD_PROTECTED": "Protégé par mot de passe",
       "ALLOW_DELETION": "Autoriser la suppression",
       "ALLOW_CLOSURE": "Permettre la clôture",
-      "EXPIRY_NOTIFICATION_DATE": "Date de notification d'expiration",
+      "EXPIRY_NOTIFICATION_DATE": "Date de rappel",
       "NOTIFICATION_LANGUAGE": "Langue de notification",
       "FORM_INVALID": "Le formulaire n'est pas valide. Veuillez vérifier attentivement vos entrées.",
       "BACK": "retour"

@@ -32,7 +32,7 @@
       "PASSWORD_PROTECTED": "Password protected",
       "ALLOW_DELETION": "Allow deletion",
       "ALLOW_CLOSURE": "Allow closure",
-      "EXPIRY_NOTIFICATION_DATE": "Expiry notification date",
+      "EXPIRY_NOTIFICATION_DATE": "Reminder date",
       "NOTIFICATION_LANGUAGE": "Notification language",
       "FORM_INVALID": "Form is invalid. Please check your inputs carefully.",
       "BACK": "back"

@@ -32,7 +32,7 @@
       "PASSWORD_PROTECTED": "Пароль защищен",
       "ALLOW_DELETION": "Разрешить удаление",
       "ALLOW_CLOSURE": "Разрешить закрытие",
-      "EXPIRY_NOTIFICATION_DATE": "Дата уведомления об истечении срока действия",
+      "EXPIRY_NOTIFICATION_DATE": "Дата напоминания",
       "NOTIFICATION_LANGUAGE": "Язык уведомлений",
       "FORM_INVALID": "Форма недействительна. Пожалуйста, внимательно проверьте вводимые данные.",
       "BACK": "назад"
