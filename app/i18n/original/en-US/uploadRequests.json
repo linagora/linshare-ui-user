@@ -33,6 +33,7 @@
       "ALLOW_DELETION": "Allow deletion",
       "ALLOW_CLOSURE": "Allow closure",
       "EXPIRY_NOTIFICATION_DATE": "Reminder date",
+      "REMINDER_DATE_TOOLTIP": "Notification emails sent to remind about expiration.",
       "NOTIFICATION_LANGUAGE": "Notification language",
       "FORM_INVALID": "Form is invalid. Please check your inputs carefully.",
       "BACK": "back"

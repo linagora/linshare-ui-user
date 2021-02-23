@@ -33,6 +33,7 @@
       "ALLOW_DELETION": "Autoriser la suppression",
       "ALLOW_CLOSURE": "Permettre la clôture",
       "EXPIRY_NOTIFICATION_DATE": "Date de rappel",
+      "REMINDER_DATE_TOOLTIP": "Notification envoyée pour rappeler l'expiration.",
       "NOTIFICATION_LANGUAGE": "Langue de notification",
       "FORM_INVALID": "Le formulaire n'est pas valide. Veuillez vérifier attentivement vos entrées.",
       "BACK": "retour"

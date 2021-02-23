@@ -33,6 +33,7 @@
       "ALLOW_DELETION": "Cho phép xóa",
       "ALLOW_CLOSURE": "Cho phép đóng",
       "EXPIRY_NOTIFICATION_DATE": "Ngày thông báo hết hạn",
+      "REMINDER_DATE_TOOLTIP": "Thông báo để nhắc nhở về việc hết hạn.",
       "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo",
       "FORM_INVALID": "Biểu mẫu không hợp lệ. Vui lòng kiểm tra kỹ đầu vào của bạn.",
       "BACK": "quay lại"

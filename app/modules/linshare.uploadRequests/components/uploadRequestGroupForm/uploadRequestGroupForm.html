@@ -252,8 +252,13 @@
           <div class="advanced-options" id="advanced-options-container" ng-class="{ 'advanced-options-visible': $ctrl.displayAdvancedOptions}">
             <div class="col-xs-12 field-ctn clearfix"
               ng-if="$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.enable">
-              <label for="notificationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
-                UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE
+              <label
+                for="notificationDate"
+                class="labelDateExpiration col-xs-6 no-padding label-muted"
+                uib-tooltip="{{'UPLOAD_REQUESTS.FORM_CREATE.REMINDER_DATE_TOOLTIP' | translate}}"
+                tooltip-placement="top"
+              >
+                {{ 'UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE' | translate }} &#9432;
               </label>
               <div class="datepicker-border-fix datetimepicker-border-fix date-picker dp-blue col-xs-6"
                 ng-class="{'is-opened': opened == true}"
