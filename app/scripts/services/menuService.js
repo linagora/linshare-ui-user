@@ -43,7 +43,6 @@
       tabs,
       receivedShares,
       safeDetails,
-      uploads,
       uploadRequest,
       uploadRequests,
       secondFactorAuthentication,
@@ -220,21 +219,6 @@
         hide: !lsAppConfig.enableSafeDetails
       };
 
-      uploads = {
-        name: 'MENU_TITLE.UPLOAD_MANAGMENT',
-        icon: 'ls-upload-request',
-        hide: lsAppConfig.production,
-        links: [{
-          name: 'MENU_TITLE.UPLOAD_PROPOSITIONS',
-          link: 'upload_request.propositions',
-          hide: lsAppConfig.production
-        }, {
-          name: 'MENU_TITLE.UPLOAD_REQUESTS',
-          link: 'upload_request.requests',
-          hide: lsAppConfig.production
-        }]
-      };
-
       uploadRequests = {
         name: uploadRequestsMenuName,
         links: [{
@@ -272,7 +256,6 @@
         uploadRequest,
         uploadRequests,
         administrations,
-        uploads,
         audit,
         safeDetails,
         secondFactorAuthentication,
