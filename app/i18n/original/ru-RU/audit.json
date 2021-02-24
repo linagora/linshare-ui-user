@@ -582,6 +582,12 @@
               "SENTENCE": "Вы скопировали документ: {{resourceName}} в свой личный аккаунт.",
               "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
             }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили файл : {{resourceName}}",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
           }
         },
         "WORKGROUP": {

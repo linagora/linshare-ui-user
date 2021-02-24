@@ -582,6 +582,12 @@
             "SENTENCE": "You have copied the document : {{resourceName}} into your Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "You have deleted the document : {{resourceName}}",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
         }
       },
       "WORKGROUP": {

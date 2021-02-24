@@ -518,6 +518,12 @@
             "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} vào không gian cá nhân của bạn.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa tài liệu : {{resourceName}}",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
         }
       },
       "WORKGROUP": {
