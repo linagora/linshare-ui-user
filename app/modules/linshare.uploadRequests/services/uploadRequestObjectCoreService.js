@@ -226,7 +226,8 @@ function UploadRequestObjectCoreService(
   };
 
   function getMinDateOfActivation(format) {
-    const minDate = self.uuid ? moment().add(1, 'day') : moment();
+    const minDate = self.uuid && moment(self.defaultActivationDate).format('DD/MM/YYYY') !== moment().format('DD/MM/YYYY') ?
+      moment().add(1, 'day') : moment();
 
     return format ? minDate.format(format) : minDate;
   }
