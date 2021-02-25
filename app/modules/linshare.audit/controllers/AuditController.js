@@ -62,7 +62,7 @@
       generateTableFilterSelect(auditVm.tableFilterType, 'type');
       generateTableFilterSelect(auditVm.tableFilterAction, 'action');
 
-      if(auditVm.itemsList[0].authorName) {
+      if(auditVm.itemsList[0] && auditVm.itemsList[0].authorName) {
         _.forEach(auditVm.itemsList, function(item) {
           item.authorNameTranslated = $filter('translate')(item.authorName);
         });
@@ -103,7 +103,7 @@
         generateTableFilterSelect(auditVm.tableFilterType, 'type');
         generateTableFilterSelect(auditVm.tableFilterAction, 'action');
 
-        if(auditVm.itemsList[0].authorName) {
+        if(auditVm.itemsList[0] && auditVm.itemsList[0].authorName) {
           _.forEach(auditVm.itemsList, function(item) {
             item.authorNameTranslated = $filter('translate')(item.authorName);
           });
