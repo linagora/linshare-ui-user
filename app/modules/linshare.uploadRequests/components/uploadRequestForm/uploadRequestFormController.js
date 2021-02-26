@@ -77,15 +77,15 @@ function uploadRequestFormController(
     switch (dateType) {
       case 'activationDate':
         uploadRequestFormVm.uploadRequestObject.activationDate = undefined;
-        uploadRequestFormVm.uploadRequestObject.enableEditActivationDate = false;
+        uploadRequestFormVm.enableEditActivationDate = false;
         break;
       case 'expirationDate':
         uploadRequestFormVm.uploadRequestObject.expiryDate = undefined;
-        uploadRequestFormVm.uploadRequestObject.enableEditExpirationDate = false;
+        uploadRequestFormVm.enableEditExpirationDate = false;
         break;
       case 'notificationDate':
         uploadRequestFormVm.uploadRequestObject.notificationDate = undefined;
-        uploadRequestFormVm.uploadRequestObject.enableEditNotificationDate = false;
+        uploadRequestFormVm.enableEditNotificationDate = false;
         break;
     }
 
