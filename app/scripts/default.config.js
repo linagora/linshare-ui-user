@@ -210,6 +210,7 @@
       uploadRequestEntryDetails: 'uploadrequestentry-details',
       uploadRequestDetails: 'uploadrequest-details',
       tokenCreate: 'token-create',
+      tokenDetails: 'token-details',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,
       thumbnailEngineActivated: true,

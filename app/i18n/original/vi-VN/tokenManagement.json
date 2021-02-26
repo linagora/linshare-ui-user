@@ -40,6 +40,10 @@
     },
     "ERROR": {
       "LABEL_REQUIRED": "Tên không được để trống"
+    },
+    "DETAILS": {
+      "LABEL": "Nhãn của token",
+      "CREATED": "Được tạo vào"
     }
   }
 }

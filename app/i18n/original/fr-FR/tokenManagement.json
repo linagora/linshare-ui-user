@@ -40,6 +40,10 @@
     },
     "ERROR": {
       "LABEL_REQUIRED": "Le nom ne peut pas être vide"
+    },
+    "DETAILS": {
+      "LABEL": "Nom du jeton",
+      "CREATED": "Créé le"
     }
   }
 }

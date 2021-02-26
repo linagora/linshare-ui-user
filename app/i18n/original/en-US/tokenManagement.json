@@ -40,6 +40,10 @@
     },
     "ERROR": {
       "LABEL_REQUIRED": "Name cannot be empty"
+    },
+    "DETAILS": {
+      "LABEL": "Token label",
+      "CREATED": "Created at"
     }
   }
 }

@@ -66,11 +66,11 @@ function tokenManagementController(
         tokenManagementVm.selectedTokens = tableParamsService.getSelectedItemsList();
         tokenManagementVm.tableParams = tableParamsService.getTableParams();
         tokenManagementVm.removeTokens = removeTokens;
-        tokenManagementVm.loading = false;
         tokenManagementVm.loadSidebarContent = loadSidebarContent;
         tokenManagementVm.openCreatingTokenSidebar = openCreatingTokenSidebar;
-        tokenManagementVm.tokenCreate = lsAppConfig.tokenCreate;
         tokenManagementVm.onCreateSuccess = onCreateSuccess;
+        tokenManagementVm.showDetails = showDetails;
+        tokenManagementVm.loading = false;
       })
       .catch(error => {
         $log.error('Failed to init table', error);
@@ -168,8 +168,12 @@ function tokenManagementController(
     $scope.mainVm.sidebar.show();
   }
 
+  function showDetails(token) {
+    loadSidebarContent(lsAppConfig.tokenDetails, token);
+  }
+
   function openCreatingTokenSidebar() {
-    tokenManagementVm.loadSidebarContent(tokenManagementVm.tokenCreate);
+    loadSidebarContent(lsAppConfig.tokenCreate);
   }
 
   function onCreateSuccess(created) {
