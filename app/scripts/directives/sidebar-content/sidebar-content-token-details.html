@@ -5,6 +5,12 @@
     <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
+    <span class="header-action-link waves-effect text-uppercase visible-xs"
+      ng-if="mainVm.sidebar.getData().selectedIndex === 1"
+      ng-click="mainVm.sidebar.getData().updateToken()">
+      <span class="zmdi zmdi-check"></span>
+      <span translate>ACTION.SAVE</span>
+    </span>
   </div>
 
   <div class="tabs-demo-static-tabs tab-nav-detail">
@@ -81,7 +87,29 @@
             </div>
           </div>
         </md-tab>
+        <md-tab label="{{'TOKEN_MANAGEMENT.FORM.EDIT' | translate }}" class="col-xs-4 no-padding">
+          <div class="tabs-demo-static-tabs tab-nav-detail">
+            <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
+              <md-content>
+                <token-management-form
+                  token-object="mainVm.sidebar.getData().tokenObject"
+                />
+              </md-content>
+            </div>
+          </div>
+        </md-tab>
       </md-tabs>
     </md-content>
+  </div>
+
+  <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn" ng-if="mainVm.sidebar.getData().selectedIndex === 1">
+    <button class="btn btn-default col-xs-6" ng-click="mainVm.sidebar.hide()" translate>
+      NAVIGATION.CANCEL
+    </button>
+    <button class="btn btn-primary col-xs-6"
+      ng-click="mainVm.sidebar.getData().updateToken()"
+      translate>
+      ACTION.SAVE
+    </button>
   </div>
 </div>

@@ -28,6 +28,10 @@
         "SUCCESS": "A new token has been created.",
         "ERROR": "An error occurred while creating a new token."
       },
+      "UPDATE": {
+        "SUCCESS": "Token has been updated.",
+        "ERROR": "An error occurred while updating a new token."
+      },
       "DELETE": {
         "ERROR": "{number} {singular, select, true{token has} other{tokens have}} not been deleted.",
         "INFO": "{number} {singular, select, true{token has} other{tokens have}} been deleted."
@@ -35,6 +39,7 @@
     },
     "FORM": {
       "TITLE": "Create token",
+      "EDIT": "Edit token",
       "NAME": "Token name",
       "DESCRIPTION": "Add a description"
     },

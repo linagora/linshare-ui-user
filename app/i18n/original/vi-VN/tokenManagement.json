@@ -28,6 +28,10 @@
         "SUCCESS": "Một token mới đã được tạo.",
         "ERROR": "Đã xảy ra lỗi khi tạo token mới."
       },
+      "UPDATE": {
+        "SUCCESS": "Token đã được cập nhật.",
+        "ERROR": "Đã xảy ra lỗi khi cập nhật token."
+      },
       "DELETE": {
         "ERROR": "{number} token xóa thất bại.",
         "INFO": "{number} token đã được xóa."
@@ -35,6 +39,7 @@
     },
     "FORM": {
       "TITLE": "Tạo token",
+      "EDIT": "Chỉnh sửa token",
       "NAME": "Tên token",
       "DESCRIPTION": "Thêm một mô tả"
     },

@@ -114,7 +114,7 @@
                             <i class="zmdi zmdi-info"></i>
                           </a>
                         </li>
-                        <li>
+                        <li ng-click="tokenManagementVm.openEditingTokenSidebar(token)">
                           <a translate-attr="{title: 'EDIT'}" href="">
                             <i class="zmdi zmdi-edit"></i>
                           </a>
@@ -150,7 +150,7 @@
                               </a>
                             </li>
                             <li>
-                              <a href="">
+                              <a href="" ng-click="tokenManagementVm.openEditingTokenSidebar(token)">
                                 <i class="zmdi zmdi-edit"></i>
                                 <span translate>EDIT</span>
                               </a>

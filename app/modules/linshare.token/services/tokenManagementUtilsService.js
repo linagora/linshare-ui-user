@@ -36,5 +36,11 @@ function tokenManagementUtilsService(
         key: `TOKEN_MANAGEMENT.TOAST_ALERT.CREATE.${type.toUpperCase()}`
       });
     }
+
+    if (action === 'update') {
+      toastService[type]({
+        key: `TOKEN_MANAGEMENT.TOAST_ALERT.UPDATE.${type.toUpperCase()}`
+      });
+    }
   }
 }

@@ -68,9 +68,12 @@ function tokenManagementController(
         tokenManagementVm.removeTokens = removeTokens;
         tokenManagementVm.loadSidebarContent = loadSidebarContent;
         tokenManagementVm.openCreatingTokenSidebar = openCreatingTokenSidebar;
-        tokenManagementVm.onCreateSuccess = onCreateSuccess;
+        tokenManagementVm.openEditingTokenSidebar = openEditingTokenSidebar;
         tokenManagementVm.showDetails = showDetails;
+        tokenManagementVm.onCreateSuccess = onCreateSuccess;
+        tokenManagementVm.onUpdateSuccess = onUpdateSuccess;
         tokenManagementVm.loading = false;
+        tokenManagementVm.selectedIndex = 0;
       })
       .catch(error => {
         $log.error('Failed to init table', error);
@@ -162,7 +165,7 @@ function tokenManagementController(
   }
 
   function loadSidebarContent(content, tokenObject = {}) {
-    tokenManagementVm.tokenObject = tokenObject;
+    tokenManagementVm.tokenObject = angular.copy(tokenObject);
     $scope.mainVm.sidebar.setData(tokenManagementVm);
     $scope.mainVm.sidebar.setContent(content);
     $scope.mainVm.sidebar.show();
@@ -176,9 +179,25 @@ function tokenManagementController(
     loadSidebarContent(lsAppConfig.tokenCreate);
   }
 
+  function openEditingTokenSidebar(token) {
+    tokenManagementVm.selectedIndex = 1;
+    showDetails(token);
+  }
+
   function onCreateSuccess(created) {
-    $scope.mainVm.sidebar.hide();
+    sidebarService.hide();
     tokenManagementVm.itemsList.unshift(created);
     tokenManagementVm.tableParams.reload();
+  }
+
+  function onUpdateSuccess(updated) {
+    sidebarService.hide();
+
+    const itemIndex = tokenManagementVm.itemsList.findIndex(item => item.uuid === updated.uuid);
+
+    if (itemIndex >= 0) {
+      tokenManagementVm.itemsList[itemIndex] = updated;
+      tokenManagementVm.tableParams.reload();
+    }
   }
 }

@@ -10,7 +10,8 @@ function jwtRestService($log, Restangular, ServerManagerService) {
   return {
     list,
     remove,
-    create
+    create,
+    update
   };
 
   ////////////
@@ -31,5 +32,11 @@ function jwtRestService($log, Restangular, ServerManagerService) {
     $log.debug('jwtRestService: create');
 
     return handler(Restangular.all('jwt').post(payload));
+  }
+
+  function update(payload, uuid) {
+    $log.debug('jwtRestService: create');
+
+    return handler(Restangular.one('jwt', uuid).customPUT(payload));
   }
 }
