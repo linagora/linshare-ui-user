@@ -13,8 +13,8 @@ function routes($stateProvider) {
       controller: 'tokenManagementController',
       controllerAs: 'tokenManagementVm',
       resolve: {
-        functionality: function($transition$, $state, functionalities, lsAppConfig) {
-          if (!functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable || lsAppConfig.production) {
+        functionality: function($transition$, $state, functionalities) {
+          if (!functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable) {
             $transition$.abort();
             $state.go('home');
           }
