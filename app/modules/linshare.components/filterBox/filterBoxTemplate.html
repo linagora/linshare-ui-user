@@ -55,11 +55,14 @@
       <!--CHECKBOX INIT-->
       <div class="col-sm-1">
         <label class="checkbox checkbox-inline">
-          <input type="checkbox" data-ng-checked="true" name="check"
-                 data-ng-checked="filterBoxVm.showUnit()"
-                 data-ng-model="filterBoxVm.showUnit"
-                 data-ng-model-options="{ getterSetter: true }"
-                 data-ng-init="filterBoxVm.showUnit(filterBoxSize)">
+          <input
+            type="checkbox"
+            name="isUnitActive"
+            ng-checked="filterBoxVm.showUnit()"
+            ng-model="filterBoxVm.showUnit"
+            ng-model-options="{ getterSetter: true }"
+            ng-init="filterBoxVm.showUnit(true)"
+          >
           <i class="input-helper"></i>
         </label>
       </div>
@@ -69,7 +72,7 @@
       <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_DATE.HEADER</label>
       <div class="clearfix"></div>
       <!--TAG SELECT DATE -->
-      <div data-ng-init="filterBoxVm.showDateRange(filterBoxDate)">
+      <div ng-init="filterBoxVm.showDateRange(true)">
         <!--DATE START -->
         <div class="col-sm-4 p-l-0">
           <div class="date-picker input-group dp-blue" data-ng-class="{'is-opened': dateStartOpened}">
@@ -126,10 +129,13 @@
         <!--CHECKBOX INIT -->
         <div class="col-sm-1">
           <label class="checkbox checkbox-inline">
-            <input type="checkbox" name="isDateActive" name="check"
-                   data-ng-checked="filterBoxVm.showDateRange()"
-                   data-ng-model="filterBoxVm.showDateRange"
-                   data-ng-model-options="{ getterSetter: true }" />
+            <input
+              type="checkbox"
+              name="isDateActive"
+              ng-checked="filterBoxVm.showDateRange()"
+              ng-model="filterBoxVm.showDateRange"
+              ng-model-options="{ getterSetter: true }"
+            />
             <i class="input-helper"></i>
           </label>
         </div>
@@ -140,7 +146,7 @@
       <label class="title-label" translate>FILTER_COMPONENT.FILTER_BY_RECIPIENT.HEADER</label>
       <div class="clearfix"></div>
       <div class="col-sm-7 p-l-0">
-        <div class="input-group" data-ng-init="filterBoxVm.showRecipients(filterBoxUser)">
+        <div class="input-group" ng-init="filterBoxVm.showRecipients(true)">
           <span class="input-group-addon icon-size-fix">
             <i class="zmdi zmdi-account" data-ng-class="{disabledIcon: !filterBoxVm.showRecipients()}"></i>
           </span>
@@ -167,10 +173,13 @@
       <!--CHECKBOX -->
       <div class="col-sm-1 pull-right">
         <label class="checkbox checkbox-inline">
-          <input type="checkbox" name="isDestinatairesActive"
-                 data-ng-checked="filterBoxVm.showRecipients()"
-                 data-ng-model="filterBoxVm.showRecipients"
-                 data-ng-model-options="{ getterSetter: true }"/>
+          <input
+            type="checkbox"
+            name="isDestinatairesActive"
+            ng-checked="filterBoxVm.showRecipients()"
+            ng-model="filterBoxVm.showRecipients"
+            ng-model-options="{ getterSetter: true }"
+          />
           <i class="input-helper"></i>
         </label>
       </div>
