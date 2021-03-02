@@ -50,7 +50,7 @@
      */
     function getSetDateFilter(value) {
       dateFilter = !_.isNil(value) ? value : dateFilter;
-      
+
       return dateFilter;
     }
 
@@ -67,7 +67,7 @@
         itemsShowed = _.cloneDeep(value);
         items =  value;
       }
-      
+
       return items;
     }
 
@@ -80,7 +80,7 @@
      */
     function getSetRecipientsFilter(value) {
       recipientsFilter = !_.isNil(value) ? value : recipientsFilter;
-      
+
       return recipientsFilter;
     }
 
@@ -93,7 +93,7 @@
      */
     function getSetTable(value) {
       table = !_.isNil(value) ? value : table;
-      
+
       return table;
     }
 
@@ -106,7 +106,7 @@
      */
     function getSetUnitFilter(value) {
       unitFilter = !_.isNil(value) ? value : unitFilter;
-      
+
       return unitFilter;
     }
 
@@ -119,7 +119,7 @@
       table.reload().then(function(data) {
         var params = table._params;
 
-        itemsShowed = (items.slice((params.page - 1) * params.count, params.page *
+        itemsShowed = (table.data.slice((params.page - 1) * params.count, params.page *
                                                            params.count));
         if (!_.isEqual(data.length, itemsShowed.length)) {
           $timeout(function() {
