@@ -266,15 +266,21 @@ function uploadRequestEntriesController(
   }
 
   function showUploadRequestDetails() {
+    const content = uploadRequest.collective ?
+      lsAppConfig.uploadRequestGroupDetails :
+      lsAppConfig.uploadRequestDetails;
+
+    if (
+      sidebarService.isVisible() &&
+      sidebarService.getContent() === content
+    ) { return ;}
+
     const data = {
       onUpdateSuccess() {
         sidebarService.hide();
         $state.reload();
       }
     };
-    const content = uploadRequest.collective ?
-      lsAppConfig.uploadRequestGroupDetails :
-      lsAppConfig.uploadRequestDetails;
     const fetchers = uploadRequest.collective ?
       [
         uploadRequestGroupRestService.get(uploadRequestGroup.uuid),

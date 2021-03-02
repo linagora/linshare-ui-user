@@ -346,6 +346,11 @@ function uploadRequestsController(
   }
 
   function showUploadRequestGroupDetails() {
+    if (
+      sidebarService.isVisible() &&
+      sidebarService.getContent() === lsAppConfig.uploadRequestGroupDetails
+    ) { return; }
+
     $q.all([
       uploadRequestGroupRestService.get(uploadRequestGroup.uuid),
       uploadRequestGroupRestService.listUploadRequests(uploadRequestGroup.uuid),
