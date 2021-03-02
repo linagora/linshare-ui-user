@@ -227,7 +227,7 @@ function uploadRequestEntriesController(
   }
 
   function shareEntry(entry) {
-    uploadRequestEntryRestService.copyToMySpace(entry.uuid)
+    LinshareDocumentRestService.copy(entry.uuid, 'UPLOAD_REQUEST')
       .then(copied => {
         $state.go('documents.files', {
           shareFileUuid: copied[0].uuid
