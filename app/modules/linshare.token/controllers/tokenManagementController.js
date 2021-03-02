@@ -122,7 +122,8 @@ function tokenManagementController(
         } else {
           alertDeteledTokens('info', removedTokens);
         }
-      });
+      })
+      .catch(error => error && $log.error(error));;
   }
 
   function confirmTokensDeletion(tokens) {
@@ -149,8 +150,7 @@ function tokenManagementController(
           cancel: promises[1]['NAVIGATION.CANCEL']
         }
       }, 'warning'))
-      .then(confirmed => !!confirmed || $q.reject())
-      .catch(error => error && $log.error(error));
+      .then(confirmed => !!confirmed || $q.reject());
   }
 
   function alertDeteledTokens(type, tokens) {
