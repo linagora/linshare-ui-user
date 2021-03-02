@@ -11,22 +11,16 @@
             <h2 class="box-title"><a translate>MY_FILES_SPACE</a></h2>
             <p class="box-txt" translate>MY_FILES_SPACE_MSG</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
-               data-ng-click="isChecked = !isChecked"
-               data-ng-if="::!lsAppConfig.production && !isMobile">
-            <a href="" data-ng-show="!isChecked">
+          <div class="set-homepage-ctn" event-propagation-stop
+               ng-click="toggleUserConfiguredHomePage('documents.files')"
+               ng-if="!isMobile">
+            <a href="" ng-show="homePage !== 'documents.files'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
-            <a href="" data-ng-show="isChecked">
+            <a href="" ng-show="homePage === 'documents.files'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
           </div>
         </div>
@@ -42,22 +36,16 @@
               <a translate>UPLOAD_SHARE</a></h2>
             <p class="box-txt" translate>UPLOAD_SHARE_MSG</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
-               data-ng-click="isChecked = !isChecked"
-               data-ng-if="::!lsAppConfig.production && !isMobile">
-            <a href="" data-ng-show="!isChecked">
+          <div class="set-homepage-ctn" event-propagation-stop
+               ng-click="toggleUserConfiguredHomePage('documents.upload')"
+               ng-if="!isMobile">
+            <a href="" ng-show="homePage !== 'documents.upload'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
-            <a href="" data-ng-show="isChecked">
+            <a href="" ng-show="homePage === 'documents.upload'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
           </div>
         </div>
@@ -72,22 +60,16 @@
             <h2 class="box-title" translate><a>RECEIVE_SHARES</a></h2>
             <p class="box-txt" translate>RECEIVE_SHARES_MSG</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
-               data-ng-click="isChecked = !isChecked"
-               data-ng-if="::!lsAppConfig.production && !isMobile">
-            <a href="" data-ng-show="!isChecked">
+          <div class="set-homepage-ctn" event-propagation-stop
+               ng-click="toggleUserConfiguredHomePage('documents.received')"
+               ng-if="!isMobile">
+            <a href="" ng-show="homePage !== 'documents.received'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
-            <a href="" data-ng-show="isChecked" >
+            <a href="" ng-show="homePage === 'documents.received'" >
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
           </div>
         </div>
@@ -102,22 +84,16 @@
             <h2 class="box-title"><a translate>UPLOAD_GROUP</a></h2>
             <p class="box-txt" translate>UPLOAD_GROUP_MSG</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
-               data-ng-click="isChecked = !isChecked"
-               data-ng-if="::!lsAppConfig.production && !isMobile">
-            <a href="" data-ng-show="!isChecked">
+          <div class="set-homepage-ctn" event-propagation-stop
+               ng-click="toggleUserConfiguredHomePage('sharedspace.all')"
+               ng-if="!isMobile">
+            <a href="" ng-show="homePage !== 'sharedspace.all'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
-            <a href="" data-ng-show="isChecked">
+            <a href="" ng-show="homePage === 'sharedspace.all'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
           </div>
         </div>
@@ -132,22 +108,16 @@
             <h2 flow-btn class="box-title"><a translate>UPLOAD_REQUEST</a></h2>
             <p class="box-txt" translate>UPLOAD_REQUEST_MSG</p>
           </div>
-          <div class="set-homepage-ctn" event-propagation-stop data-ng-init="isChecked = false;"
-               data-ng-click="isChecked = !isChecked"
-               data-ng-if="::!lsAppConfig.production && !isMobile">
-            <a href="" data-ng-show="!isChecked">
+          <div class="set-homepage-ctn" event-propagation-stop
+               ng-click="toggleUserConfiguredHomePage('uploadRequestGroups')"
+               ng-if="!isMobile">
+            <a href="" ng-show="homePage !== 'uploadRequestGroups'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
-            <a href="" data-ng-show="isChecked">
+            <a href="" ng-show="homePage === 'uploadRequestGroups'">
               <span translate>SET_AS_HOMEPAGE</span>
               <i class="fa fa fa-check-square-o"></i>
-              <md-tooltip md-direction="bottom">
-                <span transalte>WIP</span>
-              </md-tooltip>
             </a>
           </div>
         </div>

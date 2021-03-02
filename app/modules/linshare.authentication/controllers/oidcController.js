@@ -12,7 +12,8 @@ oidcController.$inject = [
   'authenticationRestService',
   'lsAppConfig',
   'oidcService',
-  'toastService'
+  'toastService',
+  'homePageService'
 ];
 
 function oidcController(
@@ -21,7 +22,8 @@ function oidcController(
   authenticationRestService,
   lsAppConfig,
   oidcService,
-  toastService
+  toastService,
+  homePageService
 ) {
   oidcService.endSigninMainWindow()
     .then(user => {
@@ -32,7 +34,7 @@ function oidcController(
       }
     })
     .then(() => {
-      $state.go(lsAppConfig.homePage || 'home');
+      $state.go(homePageService.getHomePage());
     })
     .catch(() => {
       toastService.error({ key: 'LOGIN.NOTIFICATION.ERROR_OIDC' });

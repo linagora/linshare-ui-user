@@ -18,6 +18,7 @@
     'functionalities',
     'lsAppConfig',
     'user',
+    'homePageService'
   ];
 
   /**
@@ -30,9 +31,12 @@
     $scope,
     functionalities,
     lsAppConfig,
-    user
+    user,
+    homePageService
   )
   {
+    const { getHomePage, setUserConfiguredHomePage, unsetUserConfiguredHomePage } = homePageService;
+
     $scope.lsAppConfig = lsAppConfig;
 
     activate();
@@ -52,6 +56,8 @@
         uploadGroup: false,
         uploadRequest: false
       };
+
+      $scope.homePage = getHomePage();
 
       $scope.cards.myFilesSpace = user.canUpload;
       $scope.cards.uploadGroup = functionalities.WORK_GROUP.enable;
@@ -80,6 +86,16 @@
           disabled: true,
           hide: lsAppConfig.linshareModeProduction
         }]
+      };
+
+      $scope.toggleUserConfiguredHomePage = homePage => {
+        if ($scope.homePage === homePage) {
+          unsetUserConfiguredHomePage();
+        } else {
+          setUserConfiguredHomePage(homePage);
+        }
+
+        $scope.homePage = getHomePage();
       };
     }
   }

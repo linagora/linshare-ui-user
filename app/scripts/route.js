@@ -23,29 +23,29 @@
         '$state',
         'authenticationRestService',
         'languageService',
-        'lsAppConfig',
+        'homePageService',
         function(
           $window,
           $state,
           authenticationRestService,
           languageService,
-          lsAppConfig
+          homePageService
         ) {
           var language = $window.location.hash.split('/').pop();
 
           languageService.changeLocale(language);
-          authRedirect($state, null, authenticationRestService, lsAppConfig.homePage);
+          authRedirect($state, null, authenticationRestService, homePageService.getHomePage());
         }]).otherwise(function($injector) {
         $injector.invoke([
           '$state',
           'authenticationRestService',
-          'lsAppConfig',
+          'homePageService',
           function(
             $state,
             authenticationRestService,
-            lsAppConfig
+            homePageService
           ) {
-            authRedirect($state, null, authenticationRestService, lsAppConfig.homePage);
+            authRedirect($state, null, authenticationRestService, homePageService.getHomePage());
           }
         ]);
       });
@@ -74,10 +74,10 @@
           loginRequired: false
         },
         resolve: {
-          authentication: function($state, $transition$, authenticationRestService, lsAppConfig) {
+          authentication: function($state, $transition$, authenticationRestService, homePageService) {
             if (!$transition$.params().loginRequired) {
               $transition$.abort();
-              authRedirect($state, $transition$, authenticationRestService, lsAppConfig.homePage);
+              authRedirect($state, $transition$, authenticationRestService, homePageService.getHomePage());
             }
           }
         }

@@ -36,7 +36,8 @@
     'ShareObjectService',
     'sidebarService',
     'toastService',
-    'uploadRestService'
+    'uploadRestService',
+    'homePageService'
   ];
 
   function UiUserMainController(
@@ -63,12 +64,13 @@
     ShareObjectService,
     sidebarService,
     toastService,
-    uploadRestService
+    uploadRestService,
+    homePageService
   ) {
     /* jshint validthis:true */
     var mainVm = this;
 
-    const URL_HOME = lsAppConfig.homePage;
+    const URL_HOME = homePageService.getHomePage();
     const URL_LOGIN = 'login';
     const TYPE_REVISION = 'DOCUMENT_REVISION';
 
