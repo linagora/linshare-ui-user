@@ -175,7 +175,7 @@ function UploadRequestObjectCoreService(
         functionalityOfMaxNumberOfFiles.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
         functionalityOfMaxNumberOfFiles.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
       }),
-      functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__SECURED_URL').then(data => {
+      functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__PROTECTED_BY_PASSWORD').then(data => {
         const clonedData = _.cloneDeep(data || {});
 
         functionalityOfPasswordProtected = clonedData;
