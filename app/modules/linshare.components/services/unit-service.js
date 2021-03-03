@@ -56,6 +56,7 @@
       toByte: toByte,
       convertBase,
       formatUnit,
+      setAppropriateSize,
       units: units
     };
 
@@ -220,6 +221,19 @@
         default:
           return 'MB';
       }
+    }
+
+    function setAppropriateSize(value) {
+      if (!value) {
+        return;
+      }
+      const appropriateUnit = find(value, { upperbound: 'GB', lowerbound: 'KB' });
+      const convertedValue = byteTo(value, appropriateUnit);
+
+      return {
+        value: convertedValue,
+        unit: appropriateUnit
+      };
     }
   }
 })();

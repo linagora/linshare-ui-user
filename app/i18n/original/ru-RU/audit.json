@@ -845,7 +845,9 @@
           "CREATED": "в ожидании",
           "DELETED": "удалено",
           "CANCELED": "отменен"
-        }
+        },
+        "LABEL_UPDATED": "Ярлык обновлен",
+        "MESSAGE_UPDATED": "Сообщение обновлено"
       }
     },
     "DISABLED": "Отключенный",

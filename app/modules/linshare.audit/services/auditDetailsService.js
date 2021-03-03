@@ -12,14 +12,14 @@
     }])
     .factory('auditDetailsService', auditDetailsService);
 
-  auditDetailsService.$inject = ['_', '$filter', '$q', '$translate', 'lsAppConfig'];
+  auditDetailsService.$inject = ['_', '$filter', '$q', '$translate', 'lsAppConfig', 'unitService'];
 
   /**
    * @namespace auditDetailsService
    * @desc Service to interact with Audit actions to generate all details
    * @memberOf LinShare.audit
    */
-  function auditDetailsService(_, $filter, $q, $translate, lsAppConfig) {
+  function auditDetailsService(_, $filter, $q, $translate, lsAppConfig, unitService) {
     const
       ACTIONS_KEY = {
         ADDITION: 'ADDITION',
@@ -567,6 +567,104 @@
             keyName:  `${UPDATE_FILEDS_UPLOAD_REQUEST_GROUP_PREFIX}.${UPDATE_FIELDS_KEY.uploadRequestStatusTitle}`,
             oldValue: `${UPDATE_FILEDS_UPLOAD_REQUEST_GROUP_PREFIX}.${UPDATE_FIELDS_KEY.uploadRequestStatus}.${oldObject.status}`,
             newValue: `${UPDATE_FILEDS_UPLOAD_REQUEST_GROUP_PREFIX}.${UPDATE_FIELDS_KEY.uploadRequestStatus}.${updatedObject.status}`
+          };
+        }
+
+        if (oldObject.locale !== updatedObject.locale) {
+          updatedValues.locale = {
+            keyName:  'UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE',
+            oldValue: `UPLOAD_REQUESTS.LOCALE.${oldObject.status}`,
+            newValue: `UPLOAD_REQUESTS.LOCALE.${updatedObject.status}`
+          };
+        }
+
+        if (oldObject.canDelete !== updatedObject.canDelete) {
+          updatedValues.canDelete = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_DELETION',
+            oldValue: oldObject.canDelete ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO',
+            newValue: updatedObject.canDelete ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'
+          };
+        }
+
+        if (oldObject.canClose !== updatedObject.canClose) {
+          updatedValues.canClose = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.ALLOW_CLOSURE',
+            oldValue: oldObject.canClose ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO',
+            newValue: updatedObject.canClose ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'
+          };
+        }
+
+        if (oldObject.protectedByPassword !== updatedObject.protectedByPassword) {
+          updatedValues.protectedByPassword = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED',
+            oldValue: oldObject.protectedByPassword ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO',
+            newValue: updatedObject.protectedByPassword ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'
+          };
+        }
+
+        if (oldObject.maxFileCount !== updatedObject.maxFileCount) {
+          updatedValues.maxFileCount = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES',
+            oldValue: oldObject.maxFileCount || 'N/a',
+            newValue: updatedObject.maxFileCount
+          };
+        }
+
+        if (oldObject.maxFileSize !== updatedObject.maxFileSize) {
+          const oldMaxFileSize = unitService.setAppropriateSize(oldObject.maxFileSize) || { value: 'N/a', unit: '' };
+          const newMaxFileSize = unitService.setAppropriateSize(updatedObject.maxFileSize) || { value: 'N/a', unit: '' };
+
+          updatedValues.maxFileSize = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE',
+            oldValue: `${oldMaxFileSize.value} ${oldMaxFileSize.unit}`,
+            newValue: `${newMaxFileSize.value} ${newMaxFileSize.unit}`
+          };
+        }
+
+        if (oldObject.maxDepositSize !== updatedObject.maxDepositSize) {
+          const oldMaxDepositFileSize = unitService.setAppropriateSize(oldObject.maxDepositSize) || { value: 'N/a', unit: '' };
+          const newMaxDepositFileSize = unitService.setAppropriateSize(updatedObject.maxDepositSize) || { value: 'N/a', unit: '' };
+
+          updatedValues.maxDepositSize = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE',
+            oldValue: `${oldMaxDepositFileSize.value} ${oldMaxDepositFileSize.unit}`,
+            newValue: `${newMaxDepositFileSize.value} ${newMaxDepositFileSize.unit}`
+          };
+        }
+
+        if (oldObject.activationDate !== updatedObject.activationDate) {
+          updatedValues.activationDate = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.ACTIVATED_AT',
+            oldValue: $filter('lsDate')(oldObject.activationDate, 'YYYY-MM-DD HH:mm'),
+            newValue: $filter('lsDate')(updatedObject.activationDate, 'YYYY-MM-DD HH:mm')
+          };
+        }
+
+        if (oldObject.expiryDate !== updatedObject.expiryDate) {
+          updatedValues.expiryDate = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.EXPIRATION_DATE',
+            oldValue: $filter('lsDate')(oldObject.expiryDate, 'YYYY-MM-DD HH:mm'),
+            newValue: $filter('lsDate')(updatedObject.expiryDate, 'YYYY-MM-DD HH:mm')
+          };
+        }
+
+        if (oldObject.notificationDate !== updatedObject.notificationDate) {
+          updatedValues.notificationDate = {
+            keyName: 'UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE',
+            oldValue: $filter('lsDate')(oldObject.notificationDate, 'YYYY-MM-DD HH:mm'),
+            newValue: $filter('lsDate')(updatedObject.notificationDate, 'YYYY-MM-DD HH:mm')
+          };
+        }
+
+        if (oldObject.subject !== updatedObject.subject) {
+          updatedValues.label = {
+            keyName: 'DETAILS_POPUP.UPDATED_FIELDS_UPLOAD_REQUEST_GROUP.LABEL_UPDATED'
+          };
+        }
+
+        if (oldObject.body !== updatedObject.body) {
+          updatedValues.body = {
+            keyName: 'DETAILS_POPUP.UPDATED_FIELDS_UPLOAD_REQUEST_GROUP.MESSAGE_UPDATED'
           };
         }
       }

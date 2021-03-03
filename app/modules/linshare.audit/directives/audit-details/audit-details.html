@@ -14,8 +14,9 @@
     <span translate translate-values="auditAction.sentenceVars">{{::auditAction.sentenceKey}}</span>
   </p>
   <div data-ng-if="::auditAction.updatedValues" data-ng-repeat="updatedValue in auditAction.updatedValues">
-    <p class="activity-fields-renamed-label" translate>{{updatedValue.keyName}} :</p>
-    <p class="activity-fields-renamed-ctn">
+    <p class="activity-fields-renamed-label">
+      <span translate>{{updatedValue.keyName}}</span> <span>{{updatedValue.oldValue !== undefined && updatedValue.newValue !== undefined ? ':' : ''}}</span></p>
+    <p class="activity-fields-renamed-ctn" ng-if="updatedValue.oldValue !== undefined && updatedValue.newValue !== undefined">
       <span translate tooltip-popup-delay='550' tooltip-placement="bottom"
             uib-tooltip="{{::updatedValue.oldValueFull ? updatedValue.oldValueFull :
             updatedValue.oldValue | translateIf:updatedValue.rightsUpdate}}">

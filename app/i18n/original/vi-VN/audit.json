@@ -771,7 +771,9 @@
         "CREATED": "đang chờ",
         "DELETED": "đã xóa",
         "CANCELED": "đã hủy"
-      }
+      },
+      "LABEL_UPDATED": "Tiêu đề đã được cập nhật",
+      "MESSAGE_UPDATED": "Nội dung tin nhắn đã được cập nhật"
     }
   },
   "DISABLED": "Tắt",

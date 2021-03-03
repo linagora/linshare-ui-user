@@ -88,8 +88,8 @@ function UploadRequestObjectCoreService(
       self.body = setPropertyValue(jsonObject.body, '');
       self.recipients = setPropertyValue(jsonObject.recipients, []);
       self.modificationDate = setPropertyValue(jsonObject.modificationDate, '');
-      self.maxSizeOfAFile = setAppropriateSize(jsonObject.maxFileSize) || functionalityOfMaxSizeOfAFile;
-      self.totalSizeOfFiles = setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
+      self.maxSizeOfAFile = unitService.setAppropriateSize(jsonObject.maxFileSize) || functionalityOfMaxSizeOfAFile;
+      self.totalSizeOfFiles = unitService.setAppropriateSize(jsonObject.maxDepositSize) || functionalityOfTotalSizeOfFiles;
       self.nbrUploadedFiles = setPropertyValue(jsonObject.nbrUploadedFiles, 0);
       self.getMinDateOfExpiration = getMinDateOfExpiration;
       self.getMaxDateOfExpiration = getMaxDateOfExpiration;
@@ -354,19 +354,6 @@ function UploadRequestObjectCoreService(
     }
 
     return self.owner.mail;
-  }
-
-  function setAppropriateSize(value) {
-    if (!value) {
-      return;
-    }
-    const appropriateUnit = unitService.find(value, { upperbound: 'GB', lowerbound: 'KB' });
-    const convertedValue = unitService.byteTo(value, appropriateUnit);
-
-    return {
-      value: convertedValue,
-      unit: appropriateUnit
-    };
   }
 
   function canEdit() {

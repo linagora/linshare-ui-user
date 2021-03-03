@@ -845,7 +845,9 @@
         "CREATED": "pending",
         "DELETED": "deleted",
         "CANCELED": "canceled"
-      }
+      },
+      "LABEL_UPDATED": "Label has been updated",
+      "MESSAGE_UPDATED": "Message has been updated"
     }
   },
   "DISABLED": "Disabled",
