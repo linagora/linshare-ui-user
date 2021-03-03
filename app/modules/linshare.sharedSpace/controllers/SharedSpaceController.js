@@ -60,7 +60,7 @@ angular.module('linshare.sharedSpace')
 
         params.total(workgroups.length);
         params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-        
+
         return (workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
@@ -327,12 +327,12 @@ angular.module('linshare.sharedSpace')
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           thisctrl.canCreate = true;
-          
+
           return workgroupRestService.get(item.uuid, true, true);
         })
         .then(function(newItemDetailsWithRole) {
           item = _.assign(item, newItemDetailsWithRole);
-          
+
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         })
         .then(function(workgroupsPermissions) {
@@ -366,10 +366,18 @@ angular.module('linshare.sharedSpace')
         });
 
         thisctrl.canCreate = false;
-        popDialogAndCreateFolder(workgroup).then(() => {
-          thisctrl.itemsList.push(workgroup);
-          thisctrl.tableParams.reload();
+        popDialogAndCreateFolder(workgroup).then(created => {
+          thisctrl.itemsList.push(created);
+
+          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
+        }).then(workgroupsPermissions => {
+          thisctrl.permissions = Object.assign(
+            {},
+            thisctrl.permissions,
+            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
+          );
         }).finally(() => {
+          thisctrl.tableParams.reload();
           thisctrl.canCreate = true;
         });
       }
@@ -381,20 +389,8 @@ angular.module('linshare.sharedSpace')
       )
         .then(newItemDetails => {
           item = _.assign(item, newItemDetails);
-          
+
           return workgroupRestService.get(item.uuid, true, true);
-        })
-        .then(newItemDetailsWithRole => {
-          item = _.assign(item, newItemDetailsWithRole);
-          
-          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
-        })
-        .then(workgroupsPermissions => {
-          thisctrl.permissions = Object.assign(
-            {},
-            thisctrl.permissions,
-            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
-          );
         });
     }
   });
