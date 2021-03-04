@@ -16,7 +16,7 @@ function uploadRequesetHourPickerController(moment, $scope) {
     hourPickerVm.hour = moment(hourPickerVm.datetime).hour();
 
     unwatchDateTime = $scope.$watch(() => hourPickerVm.datetime, (newValue, oldValue) => {
-      if (newValue && (!oldValue || (newValue.getTime() !== oldValue.getTime()))) {
+      if (newValue && (!oldValue || (new Date(newValue).getTime() !== new Date(oldValue).getTime()))) {
         changeHour();
       }
     });
