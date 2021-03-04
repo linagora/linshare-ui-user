@@ -262,6 +262,7 @@ function uploadRequestsController(
 
         _.remove(uploadRequestsVm.itemsList, item => removedRequests.some(request => request.uuid === item.uuid));
         _.remove(uploadRequestsVm.selectedUploadRequests, selected => removedRequests.some(request => request.uuid === selected.uuid));
+        removeFromSelected(removedRequests);
 
         uploadRequestsVm.tableParams.reload();
 
@@ -300,6 +301,10 @@ function uploadRequestsController(
         uploadRequestsVm.toggleUploadRequestSelection(target);
       }
     });
+
+    if (uploadRequestsVm.selectedUploadRequests.length === 0) {
+      tableParamsService.resetFlagsOnSelectedPages();
+    }
   }
 
   function showDetails(uploadRequest, { selectedIndex = 0 } = {}) {
