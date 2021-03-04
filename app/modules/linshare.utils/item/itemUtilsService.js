@@ -14,6 +14,7 @@
     '$filter',
     '$q',
     '$sce',
+    '$log',
     '$translate',
     'authenticationRestService',
     'deviceDetector',
@@ -35,6 +36,7 @@
     $filter,
     $q,
     $sce,
+    $log,
     $translate,
     authenticationRestService,
     deviceDetector,
@@ -303,9 +305,9 @@
         title: 'ACTION.RENAME',
         initialValue: initialName
       })
+        .catch(error => error && $log.error('Error when open dialog input', error))
         .then(result => result.trim())
-        .then(check)
-        .catch(() => reset(item));
+        .then(check);
 
       function check(newName) {
         if (newName !== initialName || !item.uuid) {
@@ -342,7 +344,7 @@
             itemElement.text(initialName);
             item.name = initialName;
 
-            return error;
+            throw error;
           });
       }
     }

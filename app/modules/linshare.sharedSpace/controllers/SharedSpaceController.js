@@ -371,8 +371,7 @@ angular.module('linshare.sharedSpace')
 
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         }).then(workgroupsPermissions => {
-          thisctrl.permissions = Object.assign(
-            {},
+          Object.assign(
             thisctrl.permissions,
             workgroupPermissionsService.formatPermissions(workgroupsPermissions)
           );

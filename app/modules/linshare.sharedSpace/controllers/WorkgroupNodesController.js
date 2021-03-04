@@ -919,41 +919,23 @@
     /**
      * @name renameNode
      * @desc Rename node name
-     * @param {object} nodeToRename - Node to rename
-     * @param {string} itemNameElem - Name of the item in view which is in edition mode
+     * @param {object} node - Node to rename
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function renameNode(nodeToRename, itemNameElem) {
-      itemNameElem = itemNameElem || 'td[uuid=' + nodeToRename.uuid + '] .file-name-disp';
-      documentUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
-        var changedNodePos = _.findIndex(workgroupNodesVm.nodesList, nodeToRename);
-
-        workgroupNodesVm.nodesList[changedNodePos] = data;
-        if (nodeToRename.name !== data.name) {
-          $timeout(function() {
-            renameNode(data, 'td[uuid=' + data.uuid + '] .file-name-disp');
+    function renameNode(node) {
+      documentUtilsService
+        .rename(node)
+        .catch(error => {
+          if (
+            error &&
+            error.data &&
+            error.data.errCode &&
+            [26445, 28005].includes(error.data.errCode)
+          ) {
             toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
-          }, 0);
-        } else {
-          workgroupNodesVm.canCreateFolder = true;
-        }
-      }).catch(function(error) {
-        switch(error.data.errCode) {
-          case 26445 :
-          case 28005 :
-            toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
-            renameNode(nodeToRename, itemNameElem);
-            break;
-          case lsErrorCode.CANCELLED_BY_USER:
-            if (!nodeToRename.uuid) {
-              workgroupNodesVm.nodesList.splice(_.findIndex(workgroupNodesVm.nodesList, nodeToRename), 1);
-            }
-            workgroupNodesVm.canCreateFolder = true;
-            break;
-        }
-      }).finally(function() {
-        workgroupNodesVm.tableParamsService.reloadTableParams();
-      });
+          }
+        })
+        .finally(() => workgroupNodesVm.tableParamsService.reloadTableParams());
     }
 
     /**
