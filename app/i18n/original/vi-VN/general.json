@@ -80,8 +80,8 @@
       "INPUT_PLACEHOLDER": "Thêm người",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Tìm kiếm thành viên",
       "INVALID_EMAIL": "địa chỉ email không hợp lệ",
-      "TBT__INVALID_EMPTY": "TRANSLATE ME!",
-      "TBT__CREATE_GUEST": "TRANSLATE ME!"
+      "INVALID_EMPTY": "Người dùng không xác định",
+      "CREATE_GUEST": "Mời với tư cách là khách?"
     },
     "DATE_PICKER": {
       "SUN": "CN",
