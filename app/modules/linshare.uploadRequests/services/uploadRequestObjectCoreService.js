@@ -329,9 +329,9 @@ function UploadRequestObjectCoreService(
 
   function calculateDatePickerOptions() {
     self.expirationDateOptions = {
-      minDate: self.activationDate,
+      minDate: self.activationDate || self.defaultActivationDate,
       maxDate: self.getMaxDateOfExpiration(),
-      minHTMLDate: moment(self.activationDate).format('YYYY-MM-DD'),
+      minHTMLDate: moment(self.activationDate || self.defaultActivationDate).format('YYYY-MM-DD'),
       maxHTMLDate: self.getMaxDateOfExpiration('YYYY-MM-DD')
     };
     self.activationDateOptions = {

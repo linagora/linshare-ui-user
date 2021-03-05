@@ -21,7 +21,7 @@
                   class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
                   is-open="opened" required
                   datepicker-options="$ctrl.uploadRequestObject.expirationDateOptions"
-                  min="{{$ctrl.uploadRequestObject.expirationDateOptions.minDate}}"
+                  min="{{$ctrl.uploadRequestObject.expirationDateOptions.minHTMLDate}}"
                   max="{{$ctrl.uploadRequestObject.expirationDateOptions.maxHTMLDate}}"
                   name='expirationDate' ng-model="$ctrl.uploadRequestObject.expiryDate"
                   ng-change="$ctrl.uploadRequestObject.calculateDatePickerOptions();
