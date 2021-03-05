@@ -21,6 +21,21 @@ function changePasswordController(
   changePasswordVm.rules = rules;
   changePasswordVm.changePassword = changePassword;
 
+  const errorHandlers = {
+    2000: form => {
+      form.oldPassword.$valid = false;
+      form.oldPassword.$invalid = true;
+    },
+    28411: () => {
+      changePasswordVm.newPassword = '';
+      changePasswordVm.newPasswordRetype = '';
+      toastService.error({key: 'CHANGE_PASSWORD.NOTIFICATION.ERROR.USED_PASSWORD'});
+    },
+    default: () => {
+      toastService.error({key: 'CHANGE_PASSWORD.NOTIFICATION.ERROR.DEFAULT'});
+    }
+  };
+
   function changePassword(form) {
     changePasswordRestService.update(changePasswordVm.oldPassword, changePasswordVm.newPassword)
       .then(() => {
@@ -32,13 +47,17 @@ function changePasswordController(
         form.$setPristine(true);
       })
       .catch(error => {
-        toastService.error({key: 'CHANGE_PASSWORD.NOTIFICATION.ERROR'});
         form.$invalid = true;
 
-        if (error.data && error.data.errCode === 2000) {
-          form.oldPassword.$valid = false;
-          form.oldPassword.$invalid = true;
+        if (
+          error.data &&
+          error.data.errCode &&
+          errorHandlers[error.data.errCode]
+        ) {
+          return errorHandlers[error.data.errCode](form);
         }
+
+        errorHandlers.default(form);
       });
   }
 }
