@@ -30,6 +30,12 @@ angular.module('linshare.share')
 
         return true;
       }
+
+      if (!shareActionVm.newShare.checkValidNotificationDateForUSDA()) {
+        toastService.error({ key: 'RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE_INVALID'});
+
+        return true;
+      }
     }
 
     function submitShare(shareCreationDto, selectedDocuments, selectedUploads, form) {

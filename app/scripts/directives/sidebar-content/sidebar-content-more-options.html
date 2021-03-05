@@ -84,16 +84,17 @@
                 type="text"
                 class="form-control date-picker-input"
                 uib-datepicker-popup show-weeks="false" is-open="opened2"
-                datepicker-options="::{
+                datepicker-options="{
                   minDate: shareActionVm.newShare.getMinDate(),
-                  maxDate: shareActionVm.newShare.notificationDateForUSDA.maxValue
+                  maxDate: shareActionVm.newShare.getMaxUSDADate()
                 }"
                 min="{{shareActionVm.newShare.getMinDate() | lsDate: 'fullDate'}}"
-                max="{{shareActionVm.newShare.notificationDateForUSDA.maxValue | lsDate: 'fullDate'}}"
+                max="{{shareActionVm.newShare.getMaxUSDADate() | lsDate: 'fullDate'}}"
                 name="notificationDateIfUndownloaded"
                 ng-click="open($event, 'opened2')"
                 ng-disabled="!shareActionVm.newShare.notificationDateForUSDA.canOverride"
                 ng-model="shareActionVm.newShare.notificationDateForUSDA.value"
+                ng-model-options="{ allowInvalid: true }"
                 placeholder="{{shareActionVm.newShare.notificationDateForUSDA.value | lsDate: 'YYYY-MM-DD'}}"
                 required/>
             </div>

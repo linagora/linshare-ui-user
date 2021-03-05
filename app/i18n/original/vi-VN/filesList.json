@@ -85,6 +85,7 @@
       "SHARING_ACKNOWLEDGEMENT": "Chứng nhận đã chia sẻ",
       "USDA": "Chứng nhận không tải về sau khi chia sẻ",
       "NOTIFICATION_DATE": "Thông báo từ chối truy cập tệp",
+      "NOTIFCATION_DATE_INVALID": "Ngày thông báo từ chối truy cập tệp không hợp lệ.",
       "ATTACH_EMAIL": "Tùy chỉnh thư điện tử",
       "ATTACHED_EMAIL_SUBJECT": "Chủ đề thư điện tử",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Nhập văn bản",

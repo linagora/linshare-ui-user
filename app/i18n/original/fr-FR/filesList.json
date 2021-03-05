@@ -102,6 +102,7 @@
       "SHARING_ACKNOWLEDGEMENT": "Recevoir un accusé de partage",
       "USDA": "Recevoir un accusé de non-téléchargement",
       "NOTIFICATION_DATE": "Notification de non-téléchargement le ",
+      "NOTIFICATION_DATE_INVALID": "La date de notification de non téléchargement n'est pas valide.",
       "ATTACH_EMAIL": "Personnaliser le courriel",
       "ATTACHED_EMAIL_SUBJECT": "Sujet du courriel",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message de courriel",

@@ -31,7 +31,7 @@ angular.module('linshare.share')
 
           angular.extend(notificationDateForUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION);
           notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
-          notificationDateForUSDA.maxValue = moment().add(notificationDateForUSDA.maxValue, 'days').valueOf();
+          notificationDateForUSDA.maxValue = notificationDateForUSDA.maxValue ? moment().add(notificationDateForUSDA.maxValue, 'days').valueOf() : undefined;
           angular.extend(enableUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
           angular.extend(creationAcknowledgement,functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
           angular.extend(expirationDate, functionalities.SHARE_EXPIRATION);
@@ -73,6 +73,35 @@ angular.module('linshare.share')
       self.getMinDate = () => moment().endOf('day').valueOf();
       self.getMaxDate = () => moment().endOf('day').add(expirationDate.maxValue, expirationDate.maxUnit).subtract(1, 'days').valueOf();
       self.getDefaultDate = () => moment().endOf('day').add(expirationDate.value, expirationDate.unit).subtract(1, 'days').valueOf();
+      self.getMaxUSDADate = () => {
+        let maxDate;
+
+        if (notificationDateForUSDA.maxValue) {
+          maxDate = notificationDateForUSDA.maxValue;
+        }
+        if (self.expirationDate && self.expirationDate.value) {
+          if (!maxDate || moment(maxDate).valueOf() > moment(self.expirationDate.value).valueOf()) {
+            maxDate = self.expirationDate.value;
+          }
+        }
+
+        return maxDate;
+      };
+      self.checkValidNotificationDateForUSDA = () => {
+        if (self.notificationDateForUSDA && self.notificationDateForUSDA.value) {
+          const notiDateForUSDAValue = moment(self.notificationDateForUSDA.value).valueOf();
+
+          if (notiDateForUSDAValue < self.getMinDate()) {
+            return false;
+          }
+
+          if (self.getMaxUSDADate() && notiDateForUSDAValue > self.getMaxUSDADate()) {
+            return false;
+          }
+        }
+
+        return true;
+      };
 
       getFunctionalities().then(function() {
         self.secured = _.defaultTo(shareJson.secured, secured);
