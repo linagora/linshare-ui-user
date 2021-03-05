@@ -1,12 +1,11 @@
-(function() {
-  'use strict';
-
-  angular
-    .module('linshare.changePassword', [
-      'pascalprecht.translate',
-      'linshare.components'
-    ]);
-})();
+angular
+  .module('linshare.changePassword', [
+    'pascalprecht.translate',
+    'linshare.components'
+  ])
+  .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart('changePassword');
+  }]);
 
 require('./route');
 require('./controller/changePasswordController');
