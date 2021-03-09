@@ -352,9 +352,12 @@ function uploadRequestsController(
 
   function showUploadRequestGroupDetails() {
     if (
+      uploadRequestsVm.fetchingDetails ||
       sidebarService.isVisible() &&
       sidebarService.getContent() === lsAppConfig.uploadRequestGroupDetails
     ) { return; }
+
+    uploadRequestsVm.fetchingDetails = true;
 
     $q.all([
       uploadRequestGroupRestService.get(uploadRequestGroup.uuid),
@@ -373,6 +376,12 @@ function uploadRequestsController(
       });
       sidebarService.setContent(lsAppConfig.uploadRequestGroupDetails);
       sidebarService.show();
+    }).catch(error=> {
+      if (error) {
+        $log.error('Fail to fetch upload request group details', error);
+      }
+    }).finally(() => {
+      uploadRequestsVm.fetchingDetails = false;
     });
   }
 }

@@ -271,6 +271,7 @@ function uploadRequestEntriesController(
       lsAppConfig.uploadRequestDetails;
 
     if (
+      uploadRequestEntriesVm.fetchingDetails ||
       sidebarService.isVisible() &&
       sidebarService.getContent() === content
     ) { return ;}
@@ -290,6 +291,8 @@ function uploadRequestEntriesController(
         uploadRequestRestService.get(uploadRequest.uuid)
       ];
 
+    uploadRequestEntriesVm.fetchingDetails = true;
+
     $q.all(fetchers).then(results => {
       if (uploadRequest.collective) {
         data.uploadRequestGroupObject = new UploadRequestGroupObjectService({
@@ -303,6 +306,12 @@ function uploadRequestEntriesController(
       sidebarService.setData(data);
       sidebarService.setContent(content);
       sidebarService.show();
+    }).catch(error => {
+      if (error) {
+        $log.error('Failed to load upload request details');
+      }
+    }).finally(() => {
+      uploadRequestEntriesVm.fetchingDetails = false;
     });
   }
 }
