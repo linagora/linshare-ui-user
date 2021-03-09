@@ -141,7 +141,7 @@
             lastName: member.lastName
           }
         });
-        
+
         return;
       }
 
@@ -212,12 +212,16 @@
         };
 
         return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
-      }).then(function() {
-        return workgroupMembersRestService.remove(
-          workgroupMemberVm.currentWorkGroup.current.uuid,
-          member.uuid
-        );
-      }).then(function() {
+      }).then(confirmed => {
+        if (confirmed) {
+          return workgroupMembersRestService.remove(
+            workgroupMemberVm.currentWorkGroup.current.uuid,
+            member.uuid
+          );
+        } else {
+          return $q.reject();
+        }
+      }).then(() => {
         _.remove(workgroupMemberVm.members, member);
         toastService.success({
           key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
@@ -227,7 +231,7 @@
           }
         });
 
-      });
+      }).catch(error => error && $log.error('Failed to remove member', error));
     }
 
     /**
