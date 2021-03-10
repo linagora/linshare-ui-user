@@ -220,14 +220,15 @@
                     uib-datepicker-popup show-weeks="false" is-open="opened2"
                     datepicker-options="::{
                       minDate: quickShareVm.shareObject.getMinDate(),
-                      maxDate: quickShareVm.shareObject.notificationDateForUSDA.maxValue
+                      maxDate: quickShareVm.shareObject.getMaxUSDADate()
                     }"
                     min="{{quickShareVm.shareObject.getMinDate() | lsDate: 'fullDate'}}"
-                    max="{{quickShareVm.shareObject.notificationDateForUSDA.maxValue | lsDate: 'fullDate'}}"
+                    max="{{quickShareVm.shareObject.getMaxUSDADate() | lsDate: 'fullDate'}}"
                     name="notificationDateIfUndownloaded"
                     ng-click="open($event, 'opened2')"
                     ng-disabled="!quickShareVm.shareObject.notificationDateForUSDA.canOverride"
                     ng-model="quickShareVm.shareObject.notificationDateForUSDA.value"
+                    ng-model-options="{ allowInvalid: true }"
                     placeholder="{{quickShareVm.shareObject.notificationDateForUSDA.value | lsDate: 'YYYY-MM-DD'}}"
                     required/>
                 </div>

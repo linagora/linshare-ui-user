@@ -49,7 +49,6 @@
     $templateCache.put('directives/sidebar-content/sidebar-content-guest-details-read.html', require('./sidebar-content-guest-details-read.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-guest-details-update.html', require('./sidebar-content-guest-details-update.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-guest-details.html', require('./sidebar-content-guest-details.html'));
-    $templateCache.put('directives/sidebar-content/sidebar-content-more-options.html', require('./sidebar-content-more-options.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-share-details.html', require('./sidebar-content-share-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-share-recipients-list.html', require('./sidebar-content-share-recipients-list.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-share.html', require('./sidebar-content-share.html'));
@@ -65,5 +64,7 @@
     $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequest-details.html', require('./sidebar-content-uploadrequest-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-token-create.html', require('./sidebar-content-token-create.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-token-details.html', require('./sidebar-content-token-details.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-token-details.html', require('./sidebar-content-token-details.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-forward.html', require('./sidebar-content-forward.html'));
   }
 })();

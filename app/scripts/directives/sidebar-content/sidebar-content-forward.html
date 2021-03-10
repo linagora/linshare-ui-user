@@ -7,7 +7,7 @@
   <span class="hidden-xs actions" data-ng-click="shareActionVm.closeSideBar()">
     <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
   </span>
-  <h2 class="header-more-options" translate>RIGHT_PANEL.DETAILS.QUICK_SHARE</h2>
+  <h2 class="header-more-options" translate>RIGHT_PANEL.DETAILS.FORWARD</h2>
   <span class="hidden-xs actions"
         data-ng-click="
           mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
@@ -28,7 +28,7 @@
 </div>
 
 <div class="num-items-section-ctn">
-  <span>{{mainVm.sidebar.getData().lengthOfSelectedDocuments()}}</span>
+  <span>{{mainVm.sidebar.getData().tableParamsService.lengthOfSelectedDocuments()}}</span>
   {{"RIGHT_PANEL.SHARE.SELECTED_FILES" | translate}}
   <a class="pull-right sidebar-link hidden-xs" href=""
      x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; mainVm.sidebar.getData().toggleFilterBySelectedFiles()"
@@ -44,6 +44,7 @@
 
 <quick-share
   share-object="shareActionVm.newShare"
+  on-after-share="shareActionVm.onAfterShare"
 ></quick-share>
 
 <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn">
@@ -54,11 +55,7 @@
     {{"NAVIGATION.CANCEL" | translate}}
   </button>
   <button class="btn btn-primary col-xs-6"
-          x-ng-click="
-          mainVm.sidebar.getData().currentPage === shareActionVm.uploadPage ?
-          mainVm.sidebar.getData().checkSharableFiles(shareActionVm.submitShare, shareActionVm.newShare) :
-          shareActionVm.submitShare(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments,
-                      mainVm.sidebar.getData().selectedUploads, shareSettings)">
+          ng-click="mainVm.sidebar.getData().submitForward(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments)">
     {{"NAVIGATION.SHARE" | translate}}
   </button>
 </div>
