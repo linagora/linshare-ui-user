@@ -10,6 +10,7 @@ angular.module('linshare.share')
     shareActionVm.newShare = new ShareObjectService();
     shareActionVm.selectedContact = {};
     shareActionVm.submitShare = submitShare;
+    shareActionVm.onAfterShare = onAfterShare;
 
     ////////////////
 
@@ -67,12 +68,7 @@ angular.module('linshare.share')
 
       shareActionVm.newShare.addDocuments(selectedDocuments);
       shareActionVm.newShare.share().then(function() {
-        $scope.$emit('linshare-share-done');
-        documentUtilsService.setReloadDocumentsList(true);
-        $scope.mainVm.sidebar.hide();
-        $scope.shareArray.push(angular.copy(shareActionVm.newShare.getObjectCopy()));
-        shareActionVm.newShare.resetForm();
-        $scope.mainVm.sidebar.getData().resetSelectedDocuments();
+        onAfterShare();
         for (var upload in currentUploads) {
           if (currentUploads.hasOwnProperty(upload)) {
             delete $scope.selectedUploads[upload];
@@ -99,5 +95,14 @@ angular.module('linshare.share')
           toastService.error({key: 'TOAST_ALERT.ACTION.SHARE_FAILED'});
         }
       });
+    }
+
+    function onAfterShare() {
+      $scope.$emit('linshare-share-done');
+      documentUtilsService.setReloadDocumentsList(true);
+      $scope.mainVm.sidebar.hide();
+      $scope.shareArray.push(angular.copy(shareActionVm.newShare.getObjectCopy()));
+      shareActionVm.newShare.resetForm();
+      $scope.mainVm.sidebar.getData().resetSelectedDocuments();
     }
   });

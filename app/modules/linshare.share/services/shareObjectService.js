@@ -243,29 +243,33 @@ angular.module('linshare.share')
       };
     };
 
-    ShareObjectForm.prototype.share = function() {
-      var self = this;
-      var deferred = $q.defer();
+    ShareObjectForm.prototype.share = function(toast = true) {
+      const self = this;
+      const deferred = $q.defer();
 
       if (this.waitingUploadIdentifiers.length === 0) {
         if(this.documents.indexOf(undefined) === -1) {
           return LinshareShareService.create(_.omit(this.getFormObj(), 'mailingList')).then(function() {
-            toastService.success({
-              key: 'TOAST_ALERT.ACTION.SHARE',
-              params: {
-                shareName: self.name,
-                singular: self.documents.length<2
-              }
-            });
+            if (toast) {
+              toastService.success({
+                key: 'TOAST_ALERT.ACTION.SHARE',
+                params: {
+                  shareName: self.name,
+                  singular: self.documents.length<2
+                }
+              });
+            }
           });
         } else {
           $log.debug('SHARE FAILED -', 'file(s) upload error');
-          toastService.error({
-            key: 'TOAST_ALERT.ACTION.SHARE_FAILED',
-            params: {
-              shareName: self.name
-            }
-          });
+          if (toast) {
+            toastService.error({
+              key: 'TOAST_ALERT.ACTION.SHARE_FAILED',
+              params: {
+                shareName: self.name
+              }
+            });
+          }
           deferred.reject({statusText: 'file(s) upload error'});
         }
       } else {

@@ -1,11 +1,12 @@
 <div class="container" data-ng-controller="LinshareShareActionController as shareActionVm">
   <div data-ng-if="mainVm.sidebar.getContent() === 'share'" sidebar-content="share"></div>
+  <div data-ng-if="mainVm.sidebar.getContent() === 'forward'" sidebar-content="forward"></div>
   <div data-ng-if="mainVm.sidebar.getContent() === 'more-options'" sidebar-content="more-options"></div>
   <div data-ng-if="mainVm.sidebar.getContent() === 'share-details'" sidebar-content="share-details"></div>
   <div data-ng-if="mainVm.sidebar.getContent() === 'active-share-details'" sidebar-content="active-share-details"></div>
+  <!--Not using shareActionVm-->
   <div data-ng-if="mainVm.sidebar.getContent() === 'guest-create'" sidebar-content="guest-create"></div>
   <div data-ng-if="mainVm.sidebar.getContent() === 'guest-details'" sidebar-content="guest-details"></div>
-  <!--Not using shareActionVm-->
   <div data-ng-if="mainVm.sidebar.getContent() === 'details'" sidebar-content="details"></div>
   <div data-ng-if="mainVm.sidebar.getContent() === 'workgroup'" sidebar-content="workgroup"></div>
   <div data-ng-if="mainVm.sidebar.getContent() === 'workgroup-node'" sidebar-content="workgroup-node"></div>
