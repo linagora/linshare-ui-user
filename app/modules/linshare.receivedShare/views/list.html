@@ -210,6 +210,13 @@
                     <span translate>ACTION.COPY_IN_WORKGROUP</span>
                   </a>
                 </li>
+                <li class="divider"></li>
+                <li ng-click="onForward()">
+                  <a href="">
+                    <i class="zmdi zmdi-forward"></i>
+                    <span translate>ACTION.FORWARD</span>
+                  </a>
+                </li>
               </ul>
             </span>
           </div>
@@ -367,6 +374,12 @@
                               <a href="" x-ng-click="deleteDocuments(documentFile)">
                                 <i class="zmdi zmdi-delete" aria-hidden="true"></i>
                                 <span translate>ACTION.DELETE</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="" ng-click="onForward(documentFile)">
+                                <i class="zmdi zmdi-forward" aria-hidden="true"></i>
+                                <span translate>ACTION.FORWARD</span>
                               </a>
                             </li>
                           </ul>
