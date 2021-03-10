@@ -91,3 +91,5 @@ require('./controllers/shareListController');
 require('./services/sharableDocumentService');
 require('./services/shareObjectService');
 require('./services/shareRestService');
+require('./components/quickShareComponent');
+require('./components/quickShareController');

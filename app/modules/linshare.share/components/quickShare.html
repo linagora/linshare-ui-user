@@ -1,0 +1,273 @@
+<div class="card col-xs-12 form-within-sidebar create-share scrollable-sidebar-area" id="content-ctn-sidebar">
+  <md-content id="sidebar-forward" class='p-b-30'>
+    <form name="quickShareVm.form" class="form-sidebar">
+      <div class="custom-list-container clearfix">
+        <div class="recipients-form-sections clearfix">
+          <h2 class="pull-left headerSubCtn" translate>
+            RIGHT_PANEL.SHARE.RECIPIENTS</h2><span class="required-field-hint">*</span>
+
+           <!-- Create mailing list section here -->
+          <div x-ng-if="!quickShareVm.linshareModeProduction"
+              class="dropdown dropdown-standard popOverForm savelistBtn" uib-dropdown is-open="false"
+              on-toggle="toggled()">
+            <a href="" class="dropdown-toggle sidebar-link" uib-dropdown-toggle x-ng-disabled="disabled"
+              alt="{{'RIGHT_PANEL.SHARE.CREATE_MAILING_LIST_ALT' | translate}}"
+              translate
+            >
+              RIGHT_PANEL.SHARE.CREATE_MAILING_LIST
+            </a>
+            <div class="dropdown-menu pull-right">
+              <div class="stop-propagate">
+                <p class="labelListCtn">
+                  <input type="email" class="form-control input-sm" id="labelList"
+                        placeholder="Saisissez le nom de votre liste">
+                </p>
+                <md-divider></md-divider>
+              </div>
+              <div>
+                <button class="btn btn-default col-xs-6" translate>
+                  NAVIGATION.CANCEL
+                </button>
+                <button class="btn btn-primary col-xs-6" translate>
+                  NAVIGATION.SEND
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group fg-line">
+          <div
+            ls-autocomplete-user="SHARING"
+            on-select-function="quickShareVm.shareObject.addRecipient"
+            data-with-guest="true"
+          >
+          </div>
+        </div>
+        <div class="custom-list-body col-xs-12 ">
+          <div class="custom-list-item"
+              x-ng-repeat="recipient in quickShareVm.shareObject.getRecipients() | orderBy : '-' as results"
+              tooltip-placement="bottom" tooltip-popup-delay="700"
+              uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
+            <p class="pull-left circle-ctn">
+              <span x-ng-show="recipient.domain" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
+              <span x-ng-show="!recipient.domain" class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
+            </p>
+            <div class="pull-left name-recipients-ctn">
+              <p x-ng-show="recipient.domain" class="pull-left inner-text-li">
+                {{recipient.firstName + ' ' + recipient.lastName}}
+              </p>
+              <p x-ng-show="!recipient.domain" class="pull-left inner-text-li">
+                {{recipient.mail}}
+              </p>
+              <p class="close-list-icone-btn pull-right"
+                x-ng-click="quickShareVm.shareObject.removeRecipient(results.length - $index -1)">
+                <i class="zmdi zmdi-close "></i>
+              </p>
+            </div>
+          </div>
+          <div class="custom-list-item" x-ng-repeat="list in quickShareVm.shareObject.getMailingList()"
+              tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip=""
+              owner-label
+              owner-label-user="{firstName: list.ownerFirstName, lastName: list.ownerLastName, mail: list.ownerMail}"
+              owner-label-attr="uib-tooltip">
+            <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
+            <div class="pull-left name-recipients-ctn">
+              <p class="pull-left inner-text-li">{{list.listName}}</p>
+              <p class=" close-list-icone-btn pull-right" x-ng-click="quickShareVm.shareObject.removeMailingList($index)">
+                <i class="zmdi zmdi-close"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="recipients-form-sections clearfix">
+        <div class="custom-header-list">
+          <h2 class="pull-left headerSubCtn">
+            {{"RIGHT_PANEL.SHARE.SETTINGS" | translate}}
+          </h2>
+        </div>
+
+
+        <div ng-show="quickShareVm.shareObject.expirationDate.enable && quickShareVm.shareObject.expirationDate.canOverride"
+          ng-class="{ 'has-error': quickShareVm.form.expirationDate.$invalid }"
+          class="col-xs-12 field-ctn clearfix" id="dateField">
+          <label for="expirationDate" class="labelDateExpiration col-xs-6 no-padding">
+            {{"RIGHT_PANEL.DETAILS.EXPIRATION_DATE" | translate}}:
+          </label>
+          <div class="datepicker-border-fix date-picker dp-blue col-xs-6" x-ng-class="{'is-opened': opened == true}">
+            <div class="fg-line datepicker-ctn" x-ng-class="{'fg-toggled': opened == true}">
+              <div class="form-inline">
+                <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
+                  class="form-control date-picker-input" uib-datepicker-popup show-weeks="false" is-open="opened"
+                  datepicker-options="::{
+                    minDate: quickShareVm.shareObject.getMinDate(),
+                    maxDate: quickShareVm.shareObject.getMaxDate()
+                  }"
+                  placeholder="{{quickShareVm.shareObject.expirationDate.value | lsDate: 'YYYY-MM-DD'}}"
+                  min="{{quickShareVm.shareObject.getMinDate() | lsDate: 'fullDate' }}"
+                  max="{{quickShareVm.shareObject.getMaxDate() | lsDate: 'fullDate' }}"
+                  ng-disabled="!quickShareVm.shareObject.expirationDate.canOverride"
+                  ng-model="quickShareVm.shareObject.expirationDate.value"
+                  name="expirationDate"
+                  required/>
+              </div>
+            </div>
+          </div>
+          <span class="float-right" ng-show="quickShareVm.form.expirationDate.$invalid" translate>RIGHT_PANEL.SHARE_OPTIONS.ERROR.INVALID_DATE</span>
+        </div>
+        <div class="form-sidebar">
+          <div class="form-group col-xs-12 addNote no-padding">
+            <div class="form-group fg-line">
+              <textarea type="text" class="form-control input-sm" x-ng-model="quickShareVm.shareObject.subject"
+                placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_SUBJECT' | translate}}">
+              </textarea>
+            </div>
+            <textarea class="form-control comment" rows="5"
+              placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ATTACHED_EMAIL_BODY_PLACEHOLDER' | translate}}"
+              x-ng-model="quickShareVm.shareObject.message">
+            </textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="more-options sidebar-link" ng-class="{ 'animate-chevron' : quickShareVm.displayAdvancedOptions }"
+        ng-click="quickShareVm.toggleDisplayAdvancedOptions()">
+        <a href="" translate>
+          RIGHT_PANEL.SHARE.MORE_OPTIONS
+        </a>
+        <i class="zmdi zmdi-chevron-down toggle-chevron m-l-5"></i>
+      </div>
+
+      <div class="advanced-options p-l-5 p-r-5" id="advanced-options-container" ng-class="{ 'advanced-options-visible': quickShareVm.displayAdvancedOptions}">
+        <div class="form-group m-b-20">
+          <label class="m-b-10 label-muted">{{"RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE" | translate}} :</label>
+          <textarea class="form-control comment" x-ng-model="quickShareVm.shareObject.sharingNote" rows="5"
+                    placeholder="{{'RIGHT_PANEL.SHARE_OPTIONS.ADD_NOTE_PLACEHOLDER' | translate}}">
+          </textarea>
+        </div>
+
+        <div data-ng-if="quickShareVm.shareObject.secured.enable && quickShareVm.shareObject.secured.canOverride" class="col-xs-12 field-ctn">
+          <div class="fg-line">
+            <div class="form-inline">
+              <label class="label-muted" for="secureSharing">{{"RIGHT_PANEL.SHARE_OPTIONS.SECURE_SHARING" | translate}}:</label>
+              <label class="checkbox checkbox-inline m-r-0">
+                <input type="checkbox" name="secureSharing"
+                      x-ng-disabled="!quickShareVm.shareObject.secured.canOverride"
+                      x-ng-model="quickShareVm.shareObject.secured.value"/>
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div data-ng-show="quickShareVm.shareObject.creationAcknowledgement.enable &&
+            quickShareVm.shareObject.creationAcknowledgement.canOverride" class="col-xs-12 field-ctn">
+          <div class="fg-line date-picker input-group dp-blue"
+              x-ng-class="{'is-opened': mainVm.sidebar.getData().dateStartOpened}">
+            <div class="form-inline">
+              <label class="label-muted" for="SharingNotification">{{"RIGHT_PANEL.SHARE_OPTIONS.SHARING_ACKNOWLEDGEMENT" | translate}}:</label>
+              <label class="checkbox checkbox-inline m-r-0">
+                <input type="checkbox" name="SharingNotification"
+                      x-ng-disabled="!quickShareVm.shareObject.creationAcknowledgement.canOverride"
+                      x-ng-model="quickShareVm.shareObject.creationAcknowledgement.value"/>
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div data-ng-show="quickShareVm.shareObject.enableUSDA.enable && quickShareVm.shareObject.enableUSDA.canOverride"
+            class="col-xs-12 field-ctn">
+          <div class="fg-line">
+            <div class="form-inline">
+              <label class="label-muted" for="nonDownloadedNotification">{{"RIGHT_PANEL.SHARE_OPTIONS.USDA" | translate}}:</label>
+              <label class="checkbox checkbox-inline m-r-0">
+                <input type="checkbox" name="nonDownloadedNotification"
+                      x-ng-disabled="!quickShareVm.shareObject.enableUSDA.canOverride"
+                      x-ng-model="quickShareVm.shareObject.enableUSDA.value"/>
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </div>
+          <div
+            ng-show="
+              quickShareVm.shareObject.enableUSDA.value &&
+              quickShareVm.shareObject.enableUSDA.enable &&
+              quickShareVm.shareObject.enableUSDA.canOverride &&
+              quickShareVm.shareObject.notificationDateForUSDA.canOverride
+            "
+            class="col-xs-12 field-ctn indented-form-dependency"
+            ng-class="{ 'has-error': quickShareVm.form.notificationDateIfUndownloaded.$invalid }"
+            id="dateField"
+          >
+            <label class="label-muted" for="notificationDateIfUndownloaded">
+              {{"RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate}}:
+            </label>
+            <!--
+              TODO: The directive shall be refactored with a proper template and passing different options.
+                    See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+            -->
+            <div
+              class="datepicker-border-fix date-picker dp-blue col-xs-6"
+              ng-class="{'is-opened': !!opened2 === true}">
+              <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': !!opened2 === true}">
+                <div class="form-inline">
+                  <input
+                    working-date-picker
+                    type="text"
+                    class="form-control date-picker-input"
+                    uib-datepicker-popup show-weeks="false" is-open="opened2"
+                    datepicker-options="::{
+                      minDate: quickShareVm.shareObject.getMinDate(),
+                      maxDate: quickShareVm.shareObject.notificationDateForUSDA.maxValue
+                    }"
+                    min="{{quickShareVm.shareObject.getMinDate() | lsDate: 'fullDate'}}"
+                    max="{{quickShareVm.shareObject.notificationDateForUSDA.maxValue | lsDate: 'fullDate'}}"
+                    name="notificationDateIfUndownloaded"
+                    ng-click="open($event, 'opened2')"
+                    ng-disabled="!quickShareVm.shareObject.notificationDateForUSDA.canOverride"
+                    ng-model="quickShareVm.shareObject.notificationDateForUSDA.value"
+                    placeholder="{{quickShareVm.shareObject.notificationDateForUSDA.value | lsDate: 'YYYY-MM-DD'}}"
+                    required/>
+                </div>
+              </div>
+            </div>
+            <span class="float-right" ng-show="quickShareVm.form.notificationDateIfUndownloaded.$invalid" translate>RIGHT_PANEL.SHARE_OPTIONS.ERROR.INVALID_DATE</span>
+          </div>
+        </div>
+        <div
+          class="col-xs-12 field-ctn"
+          data-ng-show="quickShareVm.shareObject.forceAnonymousSharing.enable &&
+            quickShareVm.shareObject.forceAnonymousSharing.canOverride"
+        >
+          <div
+            class="fg-line date-picker input-group dp-blue"
+            data-ng-class="{'is-opened': mainVm.sidebar.getData().dateStartOpened}"
+          >
+            <div class="form-inline">
+              <label
+                for="ForceAnonymousSharing"
+                translate
+                class="label-muted"
+              >
+                RIGHT_PANEL.SHARE_OPTIONS.FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS
+              </label>
+              <label class="checkbox checkbox-inline m-r-0">
+                <input
+                  type="checkbox"
+                  name="ForceAnonymousSharing"
+                  data-ng-disabled="!quickShareVm.shareObject.forceAnonymousSharing.canOverride"
+                  data-ng-model="quickShareVm.shareObject.forceAnonymousSharing.value"
+                />
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="advanced-options-anchor"></div>
+      </div>
+    </form>
+  </md-content>
+</div>

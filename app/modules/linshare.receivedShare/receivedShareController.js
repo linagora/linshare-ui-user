@@ -13,28 +13,21 @@
   // TODO: Should dispatch some function to other service or controller in order to valid the maxparams linter
   /* jshint maxparams: false, maxstatements: false */
     .controller('ReceivedController', function(
-      $filter,
       $log,
       $q,
       $scope,
       $state,
-      $timeout,
       $transitions,
-      $translate,
-      $window,
       _,
       auditDetailsService,
       authenticationRestService,
-      autocompleteUserRestService,
       browseService,
       documentsToIsolate,
       documentUtilsService,
       files,
       functionalities,
       lsAppConfig,
-      NgTableParams,
       receivedShareRestService,
-      ServerManagerService,
       toastService,
       documentPreviewService,
       tableParamsService
@@ -64,7 +57,7 @@
       $scope.flagsOnSelectedPages = {};
       $scope.canCopyInWorkGroup = functionalities.WORK_GROUP && functionalities.WORK_GROUP.enable;
 
-      activate();
+      this.$onInit = activate;
 
       ////////////
 
