@@ -36,6 +36,7 @@
       "DESCRIPTION": "Miêu tả",
       "EXPIRATION_DATE": "Ngày hết hạn",
       "EXPIRATION_DATE_LABEL": "Ngày hết hạn:",
+      "FORWARD": "Chuyển tiếp",
       "UNSET_SHARED_FILE_EXPIRRATION_DATE": "Ngày hết hạn sẽ hiển thị khi các liên kết chia sẻ tập tin bị xóa hoặc hết hạn",
       "INPUT_LIST_NAME": "Nhập tên của danh sách",
       "MODIFICATION_DATE": "Ngày thay đổi",

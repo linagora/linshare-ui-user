@@ -73,7 +73,14 @@
         "SHARE_DELETED": "Ваш файл, отправленный {{recipient}} был успешно удален.",
         "SHARE_ASYNC": "Ваш общий ресурс будет отправлен после загрузки всех файлов.",
         "SHARE_FAILED": "Во время рассылки файла {{shareName ? shareName + ' ': ''}} произошла ошибка.",
-        "UPDATE": "Элемент был обновлён успешно."
+        "UPDATE": "Элемент был обновлён успешно.",
+        "FORWARD": {
+          "ERROR": "Не удалось переслать {nbItems} {singular, select, true{файл} other{файлы}}.",
+          "INFO": "Успешно перенаправлены {nbItems} {singular, select, true{файл} other{файлы}}."
+        },
+        "COPY_BEFORE_FORWARD": {
+          "INFO": "{singular, select, true{Файл был} other{{nbItems} файлами}} скопированы в вашу Личную область, но не могут быть переданы другим."
+        }
       },
       "ACTION_BUTTON": "Посмотреть",
       "ACTION_REFRESH": "Обновить",

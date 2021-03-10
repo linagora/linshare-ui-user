@@ -73,7 +73,14 @@
       "SHARE_DELETED": "Chia sẻ tệp của bạn với {{recipient}} đã được xóa thành công.",
       "SHARE_ASYNC": "Chia sẻ tệp của bạn sẽ được gửi sau khi tải lên tất cả các tệp.",
       "SHARE_FAILED": "Tệp của bạn {{shareName? shareName + '': ''}} chia sẻ không thành công.",
-      "UPDATE": "Mục đã được cập nhật thành công."
+      "UPDATE": "Mục đã được cập nhật thành công.",
+      "FORWARD": {
+        "ERROR": "Không thể chuyển tiếp {nbItems} {singular, select, true{tập tin} other{tập tin}}.",
+        "INFO": "Chuyển tiếp thành công {nbItems} {singular, select, true{tập tin} other{tập tin}}."
+      },
+      "COPY_BEFORE_FORWARD": {
+        "INFO": "{singular, select, true{Tập tin đã được} other{{nbItems} tập tin đã được}} sao chép vào không gian cá nhân nhưng không thể chia sẻ."
+      }
     },
     "ACTION_BUTTON": "Lượt xem",
     "ACTION_REFRESH": "Làm mới",

@@ -37,6 +37,7 @@
       "DESCRIPTION": "Description",
       "EXPIRATION_DATE": "Expire le",
       "EXPIRATION_DATE_LABEL": "Date d'expiration:",
+      "FORWARD": "Transférer",
       "UNSET_SHARED_FILE_EXPIRRATION_DATE": "La date d'expiration ne sera définie que lors que tous les partages seront supprimés ou expirés",
       "INPUT_LIST_NAME": "Saisissez le nom de votre liste",
       "MODIFICATION_DATE": "Modifié le",

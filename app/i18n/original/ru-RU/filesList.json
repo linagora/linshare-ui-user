@@ -37,6 +37,7 @@
         "DESCRIPTION": "Описание",
         "EXPIRATION_DATE": "Дата окончания действия",
         "EXPIRATION_DATE_LABEL": "Истечение срока:",
+        "FORWARD": "Вперед",
         "UNSET_SHARED_FILE_EXPIRRATION_DATE": "Дата истечения срока действия будет определена после удаления или истечения срока действия всех связанных файлов",
         "INPUT_LIST_NAME": "Введите название списка",
         "MODIFICATION_DATE": "Изменено: ",

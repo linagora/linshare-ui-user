@@ -73,7 +73,14 @@
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
       "SHARE_DELETED": "Votre partage avec {{recipient}} a été supprimé avec succès.",
       "SHARE_FAILED": "Votre partage {{shareName ? shareName + ' ': ''}}de fichiers a échoué.",
-      "UPDATE": "L'élément a été mise à jour avec succès."
+      "UPDATE": "L'élément a été mise à jour avec succès.",
+      "FORWARD": {
+        "ERROR": "Impossible de transférer {nbItems} {singular, select, true{déposer} other{des dossiers}}.",
+        "INFO": "{nbItems} {singular, select, true{déposer} other{des dossiers}} transmis avec succès."
+      },
+      "COPY_BEFORE_FORWARD": {
+        "INFO": "{singular, select, true{Le fichier a été copié dans votre espace personnel mais ne peut pas être partagé.} other{{nbItems} fichiers ont été copiés dans votre espace personnel mais ne peuvent pas être partagés.}}"
+      }
     },
     "ACTION_BUTTON": "Voir",
     "ACTION_REFRESH": "Actualiser",

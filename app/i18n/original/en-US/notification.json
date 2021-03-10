@@ -73,7 +73,14 @@
       "SHARE_ASYNC": "Your file share will be sent after the upload of all files.",
       "SHARE_FAILED": "Your file {{shareName ? shareName + ' ': ''}}share has failed.",
       "UPDATE": "The item was updated successfully.",
-      "RESTORE": "The version has been restored sucessfully."
+      "RESTORE": "The version has been restored sucessfully.",
+      "FORWARD": {
+        "ERROR": "Failed to forward {nbItems} {singular, select, true{file} other{files}}.",
+        "INFO": "Successfully forwarded {nbItems} {singular, select, true{file} other{files}}."
+      },
+      "COPY_BEFORE_FORWARD": {
+        "INFO": "{singular, select, true{The file has been} other{{nbItems} files have been}} copied into your Personal Space but cannot be shared."
+      }
     },
     "ACTION_BUTTON": "View",
     "ACTION_REFRESH": "Refresh",
