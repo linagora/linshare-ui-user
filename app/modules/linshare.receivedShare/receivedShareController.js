@@ -36,9 +36,9 @@
       receivedShareRestService,
       ServerManagerService,
       toastService,
-      documentPreviewService
+      documentPreviewService,
+      tableParamsService
     ) {
-      $scope.addSelectedDocument = addSelectedDocument;
       $scope.copyIntoFiles = copyIntoFiles;
       $scope.deleteDocuments = deleteDocuments;
       $scope.documentsList = files;
@@ -46,13 +46,10 @@
       $scope.loadSidebarContent = loadSidebarContent;
       $scope.multiDownload = multiDownload;
       $scope.openBrowser = openBrowser;
-      $scope.resetSelectedDocuments = resetSelectedDocuments;
       $scope.selectDocuments = selectDocuments;
-      $scope.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
       $scope.showCurrentFile = showCurrentFile;
-      $scope.sortDropdownSetActive =sortDropdownSetActive;
-      $scope.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
       $scope.toggleSearchState = toggleSearchState;
+      $scope.onForward = onForward;
       $scope.functionalities = functionalities;
 
       $scope.advancedFilterBool = false;
@@ -94,21 +91,19 @@
 
         $q
           .all([
-            loadTable(),
+            launchTableParamsInitiation(),
             authenticationRestService.getCurrentUser(),
           ])
           .then(function(promises) {
-            var tableData = promises[0];
             var userData = promises[1];
 
-            $scope.tableParams = tableData;
             $scope.canUpload = userData.canUpload;
 
 
             if (documentsToIsolate !== null) {
               selectDocuments(
                 documentsToIsolate,
-                tableData
+                $scope.tableParams
               );
 
               $scope.toggleFilterBySelectedFiles();
@@ -125,19 +120,6 @@
         $transitions.onSuccess({}, function() {
           angular.element('.multi-select-mobile').appendTo('body');
         });
-      }
-
-      /**
-       * @name addSelectedDocument
-       * @desc add contacts to list of new contacts to create
-       * @param {Object} document - document to add to the list of selected documents
-       * @memberOf LinShare.receivedShare.ReceivedController
-       */
-      function addSelectedDocument(document) {
-        documentUtilsService.selectDocument(
-          $scope.selectedDocuments,
-          document
-        );
       }
 
       /**
@@ -213,7 +195,7 @@
                 $scope.selectedDocuments,
                 restangularizedItem
               );
-              $scope.tableParams.reload();
+              tableParamsService.reloadTableParams($scope.documentsList);
               $scope.flagsOnSelectedPages = {};
               toastService.success({ key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR' });
             });
@@ -283,48 +265,22 @@
         $scope.mainVm.sidebar.show();
       }
 
-      /**
-       * @name loadTable
-       * @desc Load the table
-       * @memberOf LinShare.receivedShare.ReceivedController
-       */
-      function loadTable() {
-        return $q(function(resolve) {
-          resolve(
-            new NgTableParams({
-              page: 1,
-              sorting: {
-                modificationDate: 'desc'
-              },
-              count: 25,
-              filter: $scope.paramFilter
-            }, {
-              getData: function(params) {
-                var filteredData = params.filter() ?
-                  $filter('filter')(
-                    $scope.documentsList,
-                    params.filter()
-                  ) :
-                  $scope.documentsList;
-                var orderedData = params.sorting() ?
-                  $filter('orderBy')(
-                    filteredData,
-                    params.orderBy()
-                  ) :
-                  filteredData;
+      function launchTableParamsInitiation() {
+        tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter)
+          .then(function() {
+            $scope.tableParamsService = tableParamsService;
+            $scope.tableParams = tableParamsService.getTableParams();
+            $scope.lengthOfSelectedDocuments = tableParamsService.lengthOfSelectedDocuments;
+            $scope.resetSelectedDocuments = tableParamsService.resetSelectedItems;
+            $scope.selectedDocuments = tableParamsService.getSelectedItemsList();
+            $scope.selectDocumentsOnCurrentPage = tableParamsService.tableSelectAll;
+            $scope.addSelectedDocument = tableParamsService.toggleItemSelection;
+            $scope.sortDropdownSetActive = tableParamsService.tableSort;
+            $scope.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
+            $scope.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
+            $scope.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
 
-                params.total(orderedData.length);
-
-                return (
-                  orderedData.slice(
-                    (params.page() - 1) * params.count(),
-                    params.page() * params.count()
-                  )
-                );
-              }
-            })
-          );
-        });
+          });
       }
 
       /**
@@ -444,25 +400,6 @@
       }
 
       /**
-       * @name resetSelectedDocuments
-       * @desc clear the array of selected documents
-       * @memberOf LinShare.receivedShare.ReceivedController
-       */
-      function resetSelectedDocuments() {
-        delete $scope.tableParams.filter().isSelected;
-
-        angular.forEach(
-          $scope.selectedDocuments,
-          function(selectedDoc) {
-            selectedDoc.isSelected = false;
-          }
-        );
-
-        $scope.selectedDocuments = [];
-        $scope.flagsOnSelectedPages = {};
-      }
-
-      /**
        * @name selectDocuments
        * @desc trigger selected documents and selected pages
        * @param {Object} documents - selected documents
@@ -489,53 +426,6 @@
           $scope.flagsOnSelectedPages,
           documentsAndFlagsIsolated.flagsOnSelectedPages
         );
-      }
-
-      /**
-       * @name selectDocumentsOnCurrentPage
-       * @desc Helper to select all element of the current table page
-       * @param {Array<Object>} data - List of element to be selected
-       * @param {Integer} page - Page number of the table
-       * @param {Boolean} selectFlag - element selected or not
-       * @memberOf LinShare.receivedShare.ReceivedController
-       */
-      function selectDocumentsOnCurrentPage(data, page, selectFlag) {
-        var currentPage = page;
-        var dataOnPage = data;
-        var select = selectFlag;
-
-        if (!select) {
-          angular.forEach(
-            dataOnPage,
-            function(element) {
-              if (!element.isSelected) {
-                element.isSelected = true;
-
-                $scope.selectedDocuments.push(element);
-              }
-            }
-          );
-
-          $scope.flagsOnSelectedPages[currentPage] = true;
-        } else {
-          angular.forEach(
-            dataOnPage,
-            function(element) {
-              if (element.isSelected) {
-                element.isSelected = false;
-
-                _.remove(
-                  $scope.selectedDocuments,
-                  function(n) {
-                    return n.uuid === element.uuid;
-                  }
-                );
-              }
-            }
-          );
-
-          $scope.flagsOnSelectedPages[currentPage] = false;
-        }
       }
 
       /**
@@ -628,7 +518,7 @@
           resolve($scope.currentSelectedDocument.current);
 
           getReceivedShareAudit($scope.currentSelectedDocument.current).then(function() {
-            $scope.loadSidebarContent(lsAppConfig.details);
+            loadSidebarContent(lsAppConfig.details);
 
             if (!_.isUndefined(event)) {
               var currElm = event.currentTarget;
@@ -638,25 +528,6 @@
               });
             }
           });
-        });
-      }
-
-      /**
-       * @name sortDropdownSetActive
-       * @desc change ordonnation of the table
-       * @param {Object} sortField - contact to add
-       * @param {Object} $event - event handle
-       * @memberOf LinShare.receivedShare.ReceivedController
-       */
-      function sortDropdownSetActive(sortField, $event) {
-        var currTarget = $event.currentTarget;
-
-        $scope.toggleSelectedSort = !$scope.toggleSelectedSort;
-
-        $scope.tableParams.sorting(sortField, $scope.toggleSelectedSort ? 'desc' : 'asc');
-
-        angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
-          angular.element(currTarget).addClass('selected-sorting');
         });
       }
 
@@ -676,25 +547,6 @@
 
         $scope.searchMobileDropdown = !$scope.searchMobileDropdown;
       }
-      /**
-       * @name toggleFilterBySelectedFiles
-       * @desc isolate selected elements
-       * @memberOf LinShare.receivedShare.ReceivedController
-       */
-      function toggleFilterBySelectedFiles() {
-        selectDocuments(
-          $scope.selectedDocuments,
-          $scope.tableParams
-        );
-
-        $scope.activeBtnShowSelection = !$scope.activeBtnShowSelection;
-
-        if ($scope.tableParams.filter().isSelected) {
-          delete $scope.tableParams.filter().isSelected;
-        } else {
-          $scope.tableParams.filter().isSelected = true;
-        }
-      }
 
       /**
        * @name triggerIsolateToast
@@ -709,6 +561,27 @@
         }
 
         return toastService.isolate({ key: 'TOAST_ALERT.WARNING.ISOLATED_FILE' });
+      }
+
+      /**
+       * @name onForward
+       * @desc open sidebar content for forwarding files
+       * @param {object} documentFile - document
+       * @memberOf LinShare.receivedShare.receivedShareController
+       */
+      function onForward(document) {
+        if (document) {
+          var index = $scope.selectedDocuments.indexOf(document);
+
+          if (index === -1) {
+            document.isSelected = true;
+            $scope.selectedDocuments.push(document);
+          } else {
+            $log.debug('addItem - item is already in the list');
+          }
+        }
+
+        loadSidebarContent(lsAppConfig.forward);
       }
     });
 })();
