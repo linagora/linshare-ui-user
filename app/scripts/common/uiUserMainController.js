@@ -373,23 +373,21 @@
        * @memberOf linshareUiUserApp.UiUserMainController
        */
       function setVisualElement() {
-        $q.all([authenticationRestService.getCurrentUser(), functionalityRestService.getAll()])
-          .then(function(promises) {
-            var
-              user = promises[0],
-              functionalities = promises[1];
-
+        $q.all([
+          authenticationRestService.getCurrentUser(),
+          functionalityRestService.getAll()
+        ])
+          .then(([user, functionalities]) => {
             mainVm.showTransfert = (user.canUpload || functionalities.WORK_GROUP.enable);
             mainVm.show2FA = functionalities.SECOND_FACTOR_AUTHENTICATION.enable;
-            mainVm.showTokenManagement = functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable;
+            mainVm.showTokenManagement = functionalities.JWT_PERMANENT_TOKEN.enable && functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable;
 
-            $scope.loggedUser.setUser(user);
             user.firstLetter = user.firstName.charAt(0);
+            $scope.loggedUser.setUser(user);
             $scope.userLogged = user;
             getUserQuotas();
-          }).catch(function(error) {
-            $log.debug(error);
-          });
+          })
+          .catch(error => $log.debug(error));
       }
     }
 
