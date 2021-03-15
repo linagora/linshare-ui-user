@@ -89,6 +89,10 @@
      * @memberOf LinShare.Audit.AuditController
      */
     function findAuditActionsByDate() {
+      if (!auditVm.beginDate || !auditVm.endDate) {
+        return;
+      }
+
       auditVm.beginDate.setHours(0, 0, 0, 0);
       auditVm.endDate.setHours(24, 0, 0, 0);
 
