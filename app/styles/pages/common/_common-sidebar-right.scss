@@ -414,7 +414,7 @@ md-content #content-ctn-sidebar {
 
 .description-ctn.form-sidebar.show-full-comment {
   background-color: #fff;
-  max-height: 800px;
+  max-height: unset;
   cursor: text;
   .comment {
     line-height: 18px;
