@@ -157,7 +157,7 @@
     </md-content>
   </div>
 
-  <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn" ng-if="mainVm.sidebar.getData().selectedIndex === 1">
+  <div class="bottom-sidebar-btn form-within-sidebar" id="bottom-sidebar-ctn" ng-if="mainVm.sidebar.getData().uploadRequestObject.canEdit() && mainVm.sidebar.getData().selectedIndex === 1">
     <button class="btn btn-default col-xs-6" ng-click="mainVm.sidebar.hide()" translate>
       NAVIGATION.CANCEL
     </button>
