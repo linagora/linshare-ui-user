@@ -25,12 +25,17 @@
               <div class="dark-overlay"></div>
               <div class="user-preview-ctn">
                 <div class="flex-ctn detail-info-ctn p-0 p-t-10">
-                  <div class="item-l m-b-10">
-                    <span class="first-letter user-info">
-                      <span class="temp-size">{{mainVm.sidebar.getData().uploadRequestGroupObject.nbrUploadedFiles || 0}}</span>
+                  <div class="item-l m-b-10"
+                  uib-tooltip="{{mainVm.sidebar.getData().uploadRequestGroupObject.collective ? 'UPLOAD_REQUESTS.FORM_CREATE.COLLECTIVE' : 'UPLOAD_REQUESTS.FORM_CREATE.INDIVIDUAL' | translate}}"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="top">
+                    <span class="first-letter user-info vertical-center horizontal-center">
+                      <i class="sidebar-upload-request-icon" ng-class="mainVm.sidebar.getData().uploadRequestGroupObject.collective ? 'ls-upload-request-alt' : 'ls-upload-request-2'"></i>
                     </span>
                   </div>
-                  <p class="m-b-0" translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
+                  <p class="m-b-0 text-lowercase">
+                    {{mainVm.sidebar.getData().uploadRequestGroupObject.nbrUploadedFiles || 0}} {{'UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED' | translate}}
+                  </p>
                 </div>
               </div>
             </div>
