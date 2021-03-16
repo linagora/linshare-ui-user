@@ -72,7 +72,7 @@ angular.module('linshare.share')
       self.uploadingDocuments = [];
       self.getMinDate = () => moment().endOf('day').valueOf();
       self.getMaxDate = () => moment().endOf('day').add(expirationDate.maxValue, expirationDate.maxUnit).subtract(1, 'days').valueOf();
-      self.getDefaultDate = () => moment().endOf('day').add(expirationDate.value, expirationDate.unit).subtract(1, 'days').valueOf();
+      self.getDefaultDate = () => moment().endOf('day').add(expirationDate.value, expirationDate.unit).valueOf();
       self.getMaxUSDADate = () => {
         let maxDate;
 
