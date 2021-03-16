@@ -573,8 +573,8 @@
         if (oldObject.locale !== updatedObject.locale) {
           updatedValues.locale = {
             keyName:  'UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE',
-            oldValue: `UPLOAD_REQUESTS.LOCALE.${oldObject.status}`,
-            newValue: `UPLOAD_REQUESTS.LOCALE.${updatedObject.status}`
+            oldValue: `UPLOAD_REQUESTS.LOCALE.${oldObject.locale}`,
+            newValue: `UPLOAD_REQUESTS.LOCALE.${updatedObject.locale}`
           };
         }
 
