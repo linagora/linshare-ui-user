@@ -11,9 +11,9 @@ module.exports = {
   entry: {
     app: './src/index.js',
     config: './app/config/config.js',
-    theme: './app/styles/theme.default.scss',
-    themeRed: './app/styles/theme.red.scss',
-    themeDarkGreen: './app/styles/theme.darkgreen.scss'
+    'theme.default': './app/styles/theme.default.scss',
+    'theme.red': './app/styles/theme.red.scss',
+    'theme.darkgreen': './app/styles/theme.darkgreen.scss'
   },
   output: {
     filename: (pathData) => {
