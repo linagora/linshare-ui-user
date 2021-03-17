@@ -341,7 +341,7 @@ md-dialog.custom-dialog {
       height: auto;
       margin: 30px;
       justify-content: center;
-    
+
       img {
         width: 100%;
       }
@@ -395,6 +395,10 @@ md-dialog.custom-dialog {
     &:hover{
       color: $component-dialog-alert-confirm-hover-color;
     }
+  }
+
+  .toolbar-full-height {
+    flex: 1;
   }
 }
 
