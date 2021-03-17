@@ -97,7 +97,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: './index.html',
-      excludeChunks: ['themeDarkGreen', 'themeRed']
+      excludeChunks: ['theme.red', 'theme.darkgreen']
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
