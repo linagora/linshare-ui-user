@@ -34,7 +34,10 @@
                     </span>
                   </div>
                   <p class="m-b-0 text-lowercase">
-                    {{mainVm.sidebar.getData().uploadRequestGroupObject.nbrUploadedFiles || 0}} {{'UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED' | translate}}
+                    <span>{{mainVm.sidebar.getData().uploadRequestGroupObject.nbrUploadedFiles || 0}}&nbsp;</span>
+                    <span translate translate-values="{
+                      singular: mainVm.sidebar.getData().uploadRequestGroupObject.nbrUploadedFiles <= 1 ? 'true' : 'other'
+                    }" translate-interpolation="messageformat">UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</span>
                   </p>
                 </div>
               </div>

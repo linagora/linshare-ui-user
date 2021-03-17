@@ -27,7 +27,11 @@
                       <span class="temp-size">{{mainVm.sidebar.getData().uploadRequestObject.nbrUploadedFiles || 0}}</span>
                     </span>
                   </div>
-                  <p class="m-b-0" translate>UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</p>
+                  <p class="m-b-0">
+                    <span translate translate-values="{
+                      singular: mainVm.sidebar.getData().uploadRequestObject.nbrUploadedFiles <= 1 ? 'true' : 'other'
+                    }" translate-interpolation="messageformat">UPLOAD_REQUESTS.DETAIL_TAB.FILES_UPLOADED</span>
+                  </p>
                 </div>
               </div>
             </div>

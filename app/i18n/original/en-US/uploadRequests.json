@@ -123,7 +123,7 @@
       "ACTIVATED_AT": "Activated at",
       "EXPIRATION_DATE": "Expiration date",
       "GROUP": "Collective",
-      "FILES_UPLOADED": "Files uploaded",
+      "FILES_UPLOADED": "{singular, select, true {File} other {Files}} uploaded",
       "MAX_NUMBER_OF_FILES": "Max. number of files",
       "MAX_TOTAL_FILE_SIZE": "Max. total file size",
       "MAX_SIZE_PER_FILE": "Max. size per file",

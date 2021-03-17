@@ -123,7 +123,7 @@
       "ACTIVATED_AT": "Activée",
       "EXPIRATION_DATE": "Date d'expiration",
       "GROUP": "Collective",
-      "FILES_UPLOADED": "Fichiers téléversés",
+      "FILES_UPLOADED": "{singular, select, true {Fichier téléversé} other {Fichiers téléversés}}",
       "MAX_NUMBER_OF_FILES": "Nombre maximum de fichiers",
       "MAX_TOTAL_FILE_SIZE": "Taille totale maximale des fichiers déposés",
       "MAX_SIZE_PER_FILE": "Taille max par fichier",

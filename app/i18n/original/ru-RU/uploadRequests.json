@@ -123,7 +123,7 @@
       "ACTIVATED_AT": "Активировано в",
       "EXPIRATION_DATE": "Срок годности",
       "GROUP": "Коллектив",
-      "FILES_UPLOADED": "Файлы загружены",
+      "FILES_UPLOADED": "{singular, select, true {Файл загружен} other {Файлы загружены}}",
       "MAX_NUMBER_OF_FILES": "Максимальное количество файлов",
       "MAX_TOTAL_FILE_SIZE": "Максимальный общий размер файла",
       "MAX_SIZE_PER_FILE": "Максимальный размер файла",
