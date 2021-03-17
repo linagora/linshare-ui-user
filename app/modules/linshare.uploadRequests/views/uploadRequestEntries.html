@@ -387,7 +387,7 @@
                             >
                               <a
                                 href=""
-                                ng-click="uploadRequestEntriesVm.shareEntry(entry)"
+                                ng-click="uploadRequestEntriesVm.shareEntries([entry])"
                               >
                                 <i class="zmdi zmdi-share"></i>
                                 <span translate>ACTION.SHARE</span>
@@ -470,8 +470,8 @@
               <a
                 translate-attr="{title: 'ACTION.SHARE'}"
                 class="plain-text-button share-link"
-                ng-class="{'disable-link': uploadRequestEntriesVm.selectedEntries.length !== 1}"
-                ng-click="uploadRequestEntriesVm.shareEntry(uploadRequestEntriesVm.selectedEntries[0])"
+                ng-class="{ 'disable-link': uploadRequestEntriesVm.copyingEntriesBeforeShare }"
+                ng-click="uploadRequestEntriesVm.shareEntries(uploadRequestEntriesVm.selectedEntries)"
                 >
                 <i class="zmdi zmdi-share"></i>
                 <span translate>ACTION.SHARE</span>
@@ -568,8 +568,8 @@
       </div>
       <div
         class="col-xs-2"
-        ng-class="{'hide' : (uploadRequestEntriesVm.selectedEntries.length > 1)}"
-        ng-click="uploadRequestEntriesVm.shareEntry(uploadRequestEntriesVm.selectedEntries[0])"
+        ng-class="{ 'disable-link': uploadRequestEntriesVm.copyingEntriesBeforeShare }"
+        ng-click="uploadRequestEntriesVm.shareEntries(uploadRequestEntriesVm.selectedEntries)"
         >
         <i class="zmdi zmdi-share"></i>
       </div>

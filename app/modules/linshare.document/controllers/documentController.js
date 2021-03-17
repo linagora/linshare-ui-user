@@ -474,15 +474,22 @@
             }
           }
 
-          if ($transition$.params().shareFileUuid) {
-            const documentToSelect = $scope.documentsList.find(document => document.uuid === $transition$.params().shareFileUuid);
+          if (
+            $transition$.params().shareFileUuids &&
+            $transition$.params().shareFileUuids.length > 0
+          ) {
+            const uuids = $transition$.params().shareFileUuids;
 
-            if (documentToSelect) {
-              $scope.addSelectedDocument(documentToSelect);
-              $scope.onShare(documentToSelect);
-            } else {
-              toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
-            }
+            uuids.forEach(uuid => {
+              const document = $scope.documentsList.find(document => document.uuid === uuid);
+
+              if (document) {
+                $scope.addSelectedDocument(document);
+              }
+            });
+
+            $scope.toggleFilterBySelectedFiles();
+            $scope.onShare();
           }
         });
     }

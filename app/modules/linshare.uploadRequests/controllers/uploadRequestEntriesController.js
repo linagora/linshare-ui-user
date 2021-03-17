@@ -95,7 +95,7 @@ function uploadRequestEntriesController(
             uploadRequestEntriesVm.downloadEntry = downloadEntry;
             uploadRequestEntriesVm.deleteEntries = deleteEntries;
             uploadRequestEntriesVm.copyEntriesToMySpace = copyEntriesToMySpace;
-            uploadRequestEntriesVm.shareEntry = shareEntry;
+            uploadRequestEntriesVm.shareEntries = shareEntries;
             uploadRequestEntriesVm.showEntryDetails = showEntryDetails;
 
             if (entryToSelect && !data.itemToSelect) {
@@ -226,17 +226,33 @@ function uploadRequestEntriesController(
       });
   }
 
-  function shareEntry(entry) {
-    LinshareDocumentRestService.copy(entry.uuid, 'UPLOAD_REQUEST')
-      .then(copied => {
-        $state.go('documents.files', {
-          shareFileUuid: copied[0].uuid
-        });
-      })
-      .catch(error => {
-        if (error) {
-          showToastAlertFor('copy_entries', 'error', [entry]);
+  function shareEntries(entries) {
+    if (uploadRequestEntriesVm.copyingEntriesBeforeShare) {
+      return;
+    }
+
+    uploadRequestEntriesVm.copyingEntriesBeforeShare = true;
+
+    $q.allSettled(
+      entries.map(entry => LinshareDocumentRestService.copy(entry.uuid, 'UPLOAD_REQUEST'))
+    )
+      .then(promises => {
+        const failures = promises.filter(promise => promise.state === 'rejected');
+        const copiedFileUuid = promises
+          .filter(promise => promise.state === 'fulfilled')
+          .map(promise => promise.value && promise.value[0] && promise.value[0].uuid)
+          .filter(Boolean);
+
+        if (failures.length > 0) {
+          showToastAlertFor('copy_entries', 'error', failures);
+
+          return;
         }
+
+        $state.go('documents.files', { shareFileUuids: copiedFileUuid});
+      })
+      .finally(() => {
+        uploadRequestEntriesVm.copyingEntriesBeforeShare = false;
       });
   }
 

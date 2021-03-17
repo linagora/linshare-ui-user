@@ -94,7 +94,7 @@
         controller: 'documentController',
         params: {
           uploadedFileUuid: null,
-          shareFileUuid: null
+          shareFileUuids: null
         },
         resolve: {
           functionality: function($state, $transition$, user) {
