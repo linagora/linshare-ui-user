@@ -69,28 +69,59 @@ angular.module('linshare.sharedSpace')
       selectedIndex: 0
     };
 
-    var swalNewWorkGroupName;
-
-    $translate(['ACTION.NEW_WORKGROUP'])
+    $translate(['ACTION.NEW_WORKGROUP', 'ACTION.NEW_DRIVE'])
       .then(function(translations) {
-        swalNewWorkGroupName = translations['ACTION.NEW_WORKGROUP'];
+        thisctrl.NODE_TYPE_PROPERTIES = {
+          WORK_GROUP: {
+            title: 'CREATE_NEW_WORKGROUP',
+            icon: 'ls-workgroup',
+            defaultTitle: translations['ACTION.NEW_WORKGROUP']
+          },
+          DRIVE: {
+            title: 'CREATE_NEW_DRIVE',
+            icon: 'ls-project',
+            defaultTitle: translations['ACTION.NEW_DRIVE']
+          }
+        };
       });
 
-    thisctrl.createWorkGroup = function() {
-      if (thisctrl.itemsList.length !== thisctrl.itemsListCopy.length) {
-        thisctrl.itemsList = thisctrl.itemsListCopy;
+    thisctrl.createSharedSpace = function(nodeType) {
+      if (thisctrl.canCreate) {
+        thisctrl.canCreate = false;
+
+        if (thisctrl.itemsList.length !== thisctrl.itemsListCopy.length) {
+          thisctrl.itemsList = thisctrl.itemsListCopy;
+        }
+
+        filterBoxService.getSetDateFilter(false);
+        filterBoxService.resetTableList();
+
+        thisctrl.paramFilter.name = '';
+        thisctrl.tableParams.reload();
+
+        const defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, thisctrl.NODE_TYPE_PROPERTIES[nodeType].defaultTitle);
+        const defaultName = defaultNamePos > 0 ?
+          thisctrl.NODE_TYPE_PROPERTIES[nodeType].defaultTitle + ' (' + defaultNamePos + ')' : thisctrl.NODE_TYPE_PROPERTIES[nodeType].defaultTitle;
+
+        const sharedSpace = workgroupRestService.restangularize({
+          name: defaultName.trim(),
+          nodeType
+        });
+
+        popDialogAndCreateFolder(sharedSpace, thisctrl.NODE_TYPE_PROPERTIES[nodeType].title).then(created => {
+          thisctrl.itemsList.push(created);
+
+          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
+        }).then(workgroupsPermissions => {
+          Object.assign(
+            thisctrl.permissions,
+            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
+          );
+        }).finally(() => {
+          thisctrl.tableParams.reload();
+          thisctrl.canCreate = true;
+        });
       }
-
-      filterBoxService.getSetDateFilter(false);
-      filterBoxService.resetTableList();
-
-      thisctrl.paramFilter.name = '';
-      this.tableParams.reload();
-      var defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, swalNewWorkGroupName);
-      var defaultName = defaultNamePos > 0 ?
-        swalNewWorkGroupName + ' (' + defaultNamePos + ')' : swalNewWorkGroupName;
-
-      createFolder(defaultName);
     };
 
     thisctrl.renameFolder = renameFolder;
@@ -365,35 +396,9 @@ angular.module('linshare.sharedSpace')
         .finally(() => thisctrl.tableParams.reload());
     }
 
-    function createFolder(folderName) {
-      if (thisctrl.canCreate) {
-        var workgroup = workgroupRestService.restangularize({
-          name: folderName.trim(),
-          nodeType: 'WORK_GROUP'
-        });
-
-        thisctrl.canCreate = false;
-        popDialogAndCreateFolder(workgroup).then(created => {
-          thisctrl.itemsList.push(created);
-          thisctrl.itemsListCopy = thisctrl.itemsList;
-          filterBoxService.getSetItems(thisctrl.itemsList);
-
-          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
-        }).then(workgroupsPermissions => {
-          Object.assign(
-            thisctrl.permissions,
-            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
-          );
-        }).finally(() => {
-          thisctrl.tableParams.reload();
-          thisctrl.canCreate = true;
-        });
-      }
-    }
-
-    function popDialogAndCreateFolder(item) {
+    function popDialogAndCreateFolder(item, title) {
       return itemUtilsService.popDialogAndCreate(
-        Object.assign(item), 'CREATE_NEW_WORKGROUP'
+        Object.assign(item), title
       )
         .then(newItemDetails => {
           item = _.assign(item, newItemDetails);

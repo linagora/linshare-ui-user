@@ -5,29 +5,35 @@
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap" class="deep-nav">
-          <div
-            class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
-            uib-dropdown
-            dropdown-append-to-body
-            auto-close="always"
-            tooltip-placement="bottom"
-            tooltip-popup-delay="500"
-            translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}"
-            is-open="isOpenNew" data-ng-class="{
+          <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
+            auto-close="always" tooltip-placement="bottom" tooltip-popup-delay="500"
+            ng-if="vm.functionalities.workgroup || vm.functionalities.drive"
+            translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}" is-open="isOpenNew" data-ng-class="{
             'open':isOpenNew,
             'disabled': !(vm.canCreate && vm.functionalities.workgroup)
-            }"
-          >
-            <a
-              class="add-menu-group"
-              data-ng-click="vm.createWorkGroup()"
-              data-ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup)}"
-            >
-              <i
-                class="zmdi zmdi-plus"
-                data-ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup)}">
-              </i>
+            }">
+            <a class="add-menu-group" uib-dropdown-toggle>
+              <i class="zmdi zmdi-plus"></i>
             </a>
+
+            <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided" uib-dropdown-menu=""
+              ng-class="{'open':isOpenNew}">
+              <li role="menuitem">
+                <a ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup)}"
+                  ng-click="vm.createSharedSpace('WORK_GROUP')">
+                  <i ng-class="[vm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon, {'disabled': !(vm.canCreate && vm.functionalities.workgroup)}]"></i>
+                  <span translate>WORKGROUP</span>
+                </a>
+              </li>
+
+              <li role="menuitem">
+                <a ng-class="{'disabled': !(vm.canCreate && vm.functionalities.drive)}"
+                  ng-click="vm.createSharedSpace('DRIVE')">
+                  <i ng-class="[vm.NODE_TYPE_PROPERTIES.DRIVE.icon, {'disabled': !(vm.canCreate && vm.functionalities.drive)}]"></i>
+                  <span translate>DRIVE</span>
+                </a>
+              </li>
+            </ul>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
             <div class="left-arrow actions disabled">
@@ -36,7 +42,7 @@
             <div id="root-level">
               <a>
                 <i class="ls-shared-space"></i>
-                <span class="text-uppercase" translate>BREADCRUMB_TITLE_WORKGROUP</span>
+                <span class="text-uppercase" translate>MENU_TITLE.SHARED_SPACE</span>
               </a>
             </div>
           </div>
@@ -45,22 +51,21 @@
               <!-- TODO: If the button id clicked for the second time (disabled) then the selected items should be deselected cf resetSelectedDocuments() -->
               <!-- TODO: DOES NOT WORK : the variable showcheckboxes should set the visibility of the checkboxers to toggle
               cf document list first td -->
-              <span x-ng-click="showCheckboxes = !showCheckboxes"
-                    class="visible-xs toolbar-mobile-item col-xs-3" >
-               <a  class="select-all-items plain-txt-btn">
-                 <i class="ls-multi-select" data-ng-class="{'active-link': showCheckboxes}"
+              <span x-ng-click="showCheckboxes = !showCheckboxes" class="visible-xs toolbar-mobile-item col-xs-3">
+                <a class="select-all-items plain-txt-btn">
+                  <i class="ls-multi-select" data-ng-class="{'active-link': showCheckboxes}"
                     data-ng-click="vm.resetSelectedDocuments()"></i>
-               </a>
+                </a>
               </span>
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
-                <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                     is-open="isOpenOrder" data-ng-class="{'open':isOpenOrder}">
+                <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding" is-open="isOpenOrder"
+                  data-ng-class="{'open':isOpenOrder}">
                   <div class="actions">
                     <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                       <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                     </a>
                     <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown stop-propagate"
-                        data-ng-class="{'open':isOpenOrder}" uib-dropdown-menu="">
+                      data-ng-class="{'open':isOpenOrder}" uib-dropdown-menu="">
                       <li role="menuitem">
                         <a href="" class="center">
                           <span translate>SELECTION_TOOLBAR.ORDER_BY</span>
@@ -68,31 +73,29 @@
                       </li>
                       <li role="menuitem">
                         <a href="" class="ng-binding selected-sorting"
-                           x-ng-click="vm.sortDropdownSetActive('modificationDate',$event)">
+                          x-ng-click="vm.sortDropdownSetActive('modificationDate',$event)">
                           <span class="caret-area">
-                          <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
                           <span translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</span>
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding"
-                           x-ng-click="vm.sortDropdownSetActive('creationDate', $event)">
+                        <a href="" class="ng-binding" x-ng-click="vm.sortDropdownSetActive('creationDate', $event)">
                           <span class="caret-area">
-                          <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                          <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
                           </span>
                           <span translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</span>
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding"
-                           x-ng-click="vm.sortDropdownSetActive('name', $event)">
-                            <span class="caret-area">
-                              <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                              <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
-                            </span>
+                        <a href="" class="ng-binding" x-ng-click="vm.sortDropdownSetActive('name', $event)">
+                          <span class="caret-area">
+                            <i x-ng-show="vm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
+                            <i x-ng-show="!vm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                          </span>
                           <span translate>FILTER_COMPONENT.ORDER_BY_NAME</span>
                         </a>
                       </li>
@@ -103,11 +106,9 @@
               <a class="list-view toolbar-mobile-item col-xs-3 disabled-work-in-progress">
                 <i class="fa fa-th-large" aria-hidden="true"></i>
               </a>
-              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs"
-                   x-ng-click="vm.toggleSearchState()">
+              <div id="top-search" class="toolbar-mobile-item col-xs-3 visible-xs" x-ng-click="vm.toggleSearchState()">
                 <a href="javascript:void(0)">
-                  <i class="tm-icon zmdi zmdi-search"
-                     data-ng-class="{'active-link': searchMobileDropdown}"></i>
+                  <i class="tm-icon zmdi zmdi-search" data-ng-class="{'active-link': searchMobileDropdown}"></i>
                 </a>
               </div>
             </div>
@@ -115,29 +116,23 @@
               <div id="search-field-ctn">
                 <div class="search-style">
                   <div class="fg-line">
-                    <input type="text" class="form-control"
-                           autocomplete="off"
-                           x-ng-model="vm.paramFilter['name']"
-                           translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
-                           x-ng-change="updateParams()">
+                    <input type="text" class="form-control" autocomplete="off" x-ng-model="vm.paramFilter['name']"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+                      x-ng-change="updateParams()">
                   </div>
                 </div>
               </div>
               <div class="actions">
-                <a uib-dropdown dropdown-append-to-body
-                   auto-close="outsideClick" is-open="isOpenFilter" data-ng-class="{'open':isOpenFilter}"
-                   class="input-group-addon last clickable dropdown"
-                   x-ng-click="advancedFilterBool = !advancedFilterBool"
-                   uib-dropdown-toggle
-                   translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}">
+                <a uib-dropdown dropdown-append-to-body auto-close="outsideClick" is-open="isOpenFilter"
+                  data-ng-class="{'open':isOpenFilter}" class="input-group-addon last clickable dropdown"
+                  x-ng-click="advancedFilterBool = !advancedFilterBool" uib-dropdown-toggle
+                  translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}">
                   <i class="zmdi hidden-xs clickable ls-settings"></i>
                   <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                     dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
                     <!-- FILTER COMPONENT  -->
-                    <filter-box class="clearfix"
-                                filter-box-date="true"
-                                filter-box-items="vm.itemsList"
-                                filter-box-table="vm.tableParams">
+                    <filter-box class="clearfix" filter-box-date="true" filter-box-items="vm.itemsList"
+                      filter-box-table="vm.tableParams">
                     </filter-box>
                   </ul>
                 </a>
@@ -151,40 +146,37 @@
         <div id="top-search-wrap">
           <i id="top-search-close" x-ng-click="vm.toggleSearchState()">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
-                 translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
-                 x-ng-change="updateParams()" x-ng-model="vm.paramFilter['name']"
-                 aria-invalid="false">
+            translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}" x-ng-change="updateParams()"
+            x-ng-model="vm.paramFilter['name']" aria-invalid="false">
         </div>
 
         <!-- DROP AREA WHEN FILES ARE SELECTED -->
         <div id="selection-actions" class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
-             x-ng-class="{'show-multi-menu': vm.selectedDocuments.length > 0}">
+          x-ng-class="{'show-multi-menu': vm.selectedDocuments.length > 0}">
           <div class="toggle-checkbox-toolbar"
-               x-ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())">
+            x-ng-click="vm.selectDocumentsOnCurrentPage(vm.tableParams.data, vm.tableParams.page())">
             <a x-ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]"
-
-               class="select-all-items plain-text-button ng-scope">
+              class="select-all-items plain-text-button ng-scope">
               <i class="fa ls-check-o checkbox-table"></i>
             </a>
             <a x-ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]"
-               class="select-all-items plain-text-button ng-scope">
+              class="select-all-items plain-text-button ng-scope">
               <i class="ls-check-checked"></i>
             </a>
           </div>
           <div class="exit-selection actions" x-ng-click="vm.resetSelectedDocuments()"
-               translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
+            translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
             <a><i class="zmdi zmdi-close"></i></a>
           </div>
           <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
             <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}"
-                 x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; vm.toggleFilterBySelectedFiles()">
+              x-ng-click="activeBtnShowSelection = !activeBtnShowSelection; vm.toggleFilterBySelectedFiles()">
               <p>
                 <span>{{vm.selectedDocuments.length}}</span>
                 <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
               </p>
               <div class="pull-left view-icons-ctn groups-view">
-                <i class="fa fa-eye-slash" aria-hidden="true"
-                   x-ng-show=" activeBtnShowSelection"></i>
+                <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show=" activeBtnShowSelection"></i>
                 <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
               </div>
             </div>
@@ -194,57 +186,43 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span data-ng-class="{'disable-link' : vm.selectedDocuments.length > 1}">
-              <a
-                class="plain-text-button share-link"
+              <a class="plain-text-button share-link"
                 data-ng-class="{'disable-link' : !vm.permissions[vm.selectedDocuments[0].uuid].MEMBER.CREATE}"
                 translate-attr="{title: 'ACTION.ADD_MEMBER'}"
-                data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true, true)"
-              >
+                data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true, true)">
                 <i class="ls-add-user-sm"></i>
                 <span translate>ACTION.ADD_MEMBER</span>
               </a>
             </span>
             <span data-ng-if="vm.selectedDocuments.length > 0">
-              <a
-                class="plain-text-button share-link"
-                data-ng-class="{'disable-link': !vm.canDeleteWorkgroups}"
+              <a class="plain-text-button share-link" data-ng-class="{'disable-link': !vm.canDeleteWorkgroups}"
                 data-ng-click="vm.deleteWorkGroup(vm.selectedDocuments)"
-                translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
-              >
+                translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}">
                 <i class="zmdi zmdi-delete"></i>
                 <span translate>SELECTION_TOOLBAR.DELETE</span>
               </a>
             </span>
-            <span class="dropdown link-dropdown" uib-dropdown=""
-              is-open="isOpenToolbarMore" data-ng-class="{'open': isOpenToolbarMore}">
-              <a
-                data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
-                class="plain-text-button share-link"
-                uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
-              >
+            <span class="dropdown link-dropdown" uib-dropdown="" is-open="isOpenToolbarMore"
+              data-ng-class="{'open': isOpenToolbarMore}">
+              <a data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}" class="plain-text-button share-link"
+                uib-dropdown-toggle translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}">
                 <i class="zmdi zmdi-more"></i>
                 <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
-                uib-dropdown-menu  data-ng-class="{'open': isOpenToolbarMore}">
-                <li
-                  class="hidden-xs"
-                  data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
-                  x-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true)"
-                >
+                uib-dropdown-menu data-ng-class="{'open': isOpenToolbarMore}">
+                <li class="hidden-xs" data-ng-class="{'disable-link': vm.selectedDocuments.length > 1}"
+                  x-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true)">
                   <a href="">
                     <i class="zmdi zmdi-info "></i>
                     <span translate>ACTION.INFORMATION</span>
                   </a>
                 </li>
                 <li class="divider" data-ng-show="vm.selectedDocuments.length === 1"></li>
-                <li
-                  data-ng-class="{
+                <li data-ng-class="{
                   'disable-link' : !vm.permissions[vm.selectedDocuments[0].uuid].WORKGROUP.UPDATE ||
                   vm.selectedDocuments.length > 1
-                  }"
-                  data-ng-click="vm.renameFolder(vm.selectedDocuments[0])"
-                >
+                  }" data-ng-click="vm.renameFolder(vm.selectedDocuments[0])">
                   <a>
                     <i class="zmdi zmdi-border-color"></i>
                     <span translate>ACTION.RENAME</span>
@@ -255,7 +233,7 @@
           </div>
         </div>
         <div class="drag-and-drop-ctn reset-content-width collapsible-content drag-n-drop-height" check-table-height
-             data-ng-class="{'show-bg-drop' : vm.itemsList.length === 0}">
+          data-ng-class="{'show-bg-drop' : vm.itemsList.length === 0}">
           <div class="drag-and-drop-content">
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
@@ -290,174 +268,126 @@
         <div class="card-body collapsible-content">
           <div class="table-responsive">
             <table id="file-list-table" class="table table-vmiddle wider-first-col fixed-activity-table-height"
-                   data-ng-table="vm.tableParams" show-filter="true"
-                   data-ng-class="::{'col-4-table' : linshareModeProduction == false}">
-              <tr
-                class="p-b-5 item-container"
-                x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
+              data-ng-table="vm.tableParams" show-filter="true"
+              data-ng-class="::{'col-4-table' : linshareModeProduction == false}">
+              <tr class="p-b-5 item-container" x-ng-class="{'highlight-list-elem': documentFile.isSelected ,
                  'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid}"
-                x-ng-repeat="documentFile in $data"
-                ls-item-selection=""
-                data-selected-documents="vm.selectedDocuments"
-                data-document-file="documentFile"
-                data-current-selected-Document="vm.currentSelectedDocument"
+                x-ng-repeat="documentFile in $data" ls-item-selection="" data-selected-documents="vm.selectedDocuments"
+                data-document-file="documentFile" data-current-selected-Document="vm.currentSelectedDocument"
                 data-ng-click="vm.showItemDetails(documentFile.uuid)"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()"
                 x-ng-dblclick="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)"
-                check-table-height
-              >
+                check-table-height>
                 <td data-header="'favoritsheader.html'" ng-if="::linshareModeProduction == false"
-                    class="hidden-xs col-1 set-content-right thumb-type-item col-favorits"
-                    data-title=""
-                    header-class="'set-content-right favorits-header col-1 hidden-xs'">
+                  class="hidden-xs col-1 set-content-right thumb-type-item col-favorits" data-title=""
+                  header-class="'set-content-right favorits-header col-1 hidden-xs'">
                   <div>
                     <i class="zmdi zmdi-star"></i>
                     <i class="zmdi zmdi-star yellow-star"></i>
                   </div>
                 </td>
                 <td data-header="'checkboxheader.html'"
-                    class="center set-content-left thumb-type-item thumb-groups-preview-ls"
-                    header-class="'col-2 checkbox-col'">
+                  class="center set-content-left thumb-type-item thumb-groups-preview-ls"
+                  header-class="'col-2 checkbox-col'">
                   <a x-ng-click="showCheckboxes ? vm.addSelectedDocument(documentFile) : null" class="visible-xs">
                     <div x-ng-class="{ 'invisible' : showCheckboxes}">
-                      <span class="ls-workgroup"></span>
+                      <span ng-class="vm.NODE_TYPE_PROPERTIES[documentFile.nodeType].icon"></span>
                     </div>
                     <div class="checkbox-ctn-thumb"
-                         x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
+                      x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
                     </div>
                   </a>
                   <a x-ng-click="vm.addSelectedDocument(documentFile)" class="hidden-xs">
                     <div x-ng-class="{ 'invisible' : showCheckboxes}">
-                      <span class="ls-workgroup"></span>
+                      <span ng-class="vm.NODE_TYPE_PROPERTIES[documentFile.nodeType].icon"></span>
                     </div>
                     <div class="checkbox-ctn-thumb"
-                         x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
+                      x-ng-class="{'maintain-vis': documentFile.isSelected , 'hidden-xs' : !showCheckboxes}">
                     </div>
                   </a>
                 </td>
 
-                <td data-title="::'TABLE_HEADER.NAME' | translate"
-                    class="row show-li-actions col-3"
-                    data-sortable="'name'" uuid={{::documentFile.uuid}} header-class="'col-3 flexible-table-col'">
+                <td data-title="::'TABLE_HEADER.NAME' | translate" class="row show-li-actions col-3"
+                  data-sortable="'name'" uuid={{::documentFile.uuid}} header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
-                      <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                        <span class="file-name-disp single-line" contenteditable="false" spellcheck="false"
-                              data-ng-click="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)">
-                          <span>
-                            {{documentFile.name}}
-                          </span>
-                        </span>
-                        <span class="secondary-info-ctn">
-                          <p class="mobile-list-item-info visible-xs">
-                            {{documentFile.modificationDate | relativeTime}}
-                          </p>
+                    <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+                      <span class="file-name-disp single-line" contenteditable="false" spellcheck="false"
+                        data-ng-click="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)">
+                        <span>
+                          {{documentFile.name}}
                         </span>
                       </span>
+                      <span class="secondary-info-ctn">
+                        <p class="mobile-list-item-info visible-xs">
+                          {{documentFile.modificationDate | relativeTime}}
+                        </p>
+                      </span>
+                    </span>
                     <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
-                        <ul class="actions pull-right"
-                            x-ng-class="{'open-r': (mainVm.sidebar.isVisible()) &&
+                      <ul class="actions pull-right" x-ng-class="{'open-r': (mainVm.sidebar.isVisible()) &&
                                           ((mainVm.sidebar.getContent() === lsAppConfig.details) ||
                                           (mainVm.sidebar.getContent() === lsAppConfig.shareDetails))}">
-                          <li
-                            class="set-col-6"
-                            x-ng-click="vm.showItemDetails(documentFile.uuid, true)"
-                            event-propagation-stop
-                          >
-                            <a
-                              href=""
-                              translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}"
-                              class="set-col-12"
-                            >
-                              <i class="zmdi zmdi-info"></i>
-                            </a>
-                          </li>
-                          <li
-                            class="hidden-xs"
-                            x-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
-                            data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].MEMBER.READ}"
-                            event-propagation-stop
-                          >
-                            <a
-                              href=""
-                              translate-attr="{title: 'WORKGROUPS_LIST.MEMBER'}"
-                            >
-                              <i><span class="ls-member"></span></i>
-                            </a>
-                          </li>
-                          <li check-dropdown-position uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding"
-                              auto-close="always" is-open="isOpenItem" data-ng-class="{'open':isOpenItem}">
-                            <a
-                              href=""
-                              translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
-                              uib-dropdown-toggle
-                              event-propagation-stop
-                              class="set-col-12"
-                            >
-                              <i class="zmdi zmdi-more"></i>
-                            </a>
-                            <ul
-                              uib-dropdown-menu
-                              data-ng-class="{'open':isOpenItem}"
-                              class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided
-                              dropdown-content-left"
-                            >
-                              <li>
-                                <a
-                                  href=""
-                                  x-ng-click="vm.showItemDetails(documentFile.uuid, true)"
-                                >
-                                  <i class="zmdi zmdi-info "></i>
-                                  <span translate>ACTION.INFORMATION</span>
-                                </a>
-                              </li>
-                              <li
-                                class="divider"
-                                data-ng-class="{'disable-link' : false}"
-                              >
-                              </li>
-                              <li
-                                data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].MEMBER.CREATE}"
-                                data-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
-                              >
-                                <a href="">
-                                  <i class="groups-add-member align-style"></i>
-                                  <span translate>ACTION.ADD_MEMBER</span>
-                                </a>
-                              </li>
-                              <li
-                                data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].WORKGROUP.UPDATE}"
-                              >
-                                <a x-ng-click="vm.renameFolder(documentFile)">
-                                  <i class="zmdi zmdi-border-color"></i>
-                                  <span translate>ACTION.RENAME</span>
-                                </a>
-                              </li>
-                              <li
-                                data-ng-class="{'disable-link' : false}"
-                              >
-                              </li>
-                              <li class="divider"></li>
-                              <li
-                                data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].WORKGROUP.DELETE}"
-                              >
-                                <a href="" x-ng-click="vm.deleteWorkGroup(documentFile)">
-                                  <i
-                                    class="zmdi zmdi-delete"
-                                    aria-hidden="true"></i>
-                                  <span translate>ACTION.DELETE</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </span>
+                        <li class="set-col-6" x-ng-click="vm.showItemDetails(documentFile.uuid, true)"
+                          event-propagation-stop>
+                          <a href="" translate-attr="{title: 'BOUTON_LABEL_TITLE.INFO'}" class="set-col-12">
+                            <i class="zmdi zmdi-info"></i>
+                          </a>
+                        </li>
+                        <li class="hidden-xs" x-ng-click="vm.showItemDetails(documentFile.uuid, true, true)"
+                          data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].MEMBER.READ}"
+                          event-propagation-stop>
+                          <a href="" translate-attr="{title: 'WORKGROUPS_LIST.MEMBER'}">
+                            <i><span class="ls-member"></span></i>
+                          </a>
+                        </li>
+                        <li check-dropdown-position uib-dropdown dropdown-append-to-body
+                          class="dropdown set-col-6 no-padding" auto-close="always" is-open="isOpenItem"
+                          data-ng-class="{'open':isOpenItem}">
+                          <a href="" translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}" uib-dropdown-toggle
+                            event-propagation-stop class="set-col-12">
+                            <i class="zmdi zmdi-more"></i>
+                          </a>
+                          <ul uib-dropdown-menu data-ng-class="{'open':isOpenItem}" class="uib-dropdown-menu dropdown-menu-right dm-icon dropdown-divided
+                              dropdown-content-left">
+                            <li>
+                              <a href="" x-ng-click="vm.showItemDetails(documentFile.uuid, true)">
+                                <i class="zmdi zmdi-info "></i>
+                                <span translate>ACTION.INFORMATION</span>
+                              </a>
+                            </li>
+                            <li class="divider" data-ng-class="{'disable-link' : false}">
+                            </li>
+                            <li data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].MEMBER.CREATE}"
+                              data-ng-click="vm.showItemDetails(documentFile.uuid, true, true)">
+                              <a href="">
+                                <i class="groups-add-member align-style"></i>
+                                <span translate>ACTION.ADD_MEMBER</span>
+                              </a>
+                            </li>
+                            <li data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].WORKGROUP.UPDATE}">
+                              <a x-ng-click="vm.renameFolder(documentFile)">
+                                <i class="zmdi zmdi-border-color"></i>
+                                <span translate>ACTION.RENAME</span>
+                              </a>
+                            </li>
+                            <li data-ng-class="{'disable-link' : false}">
+                            </li>
+                            <li class="divider"></li>
+                            <li data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].WORKGROUP.DELETE}">
+                              <a href="" x-ng-click="vm.deleteWorkGroup(documentFile)">
+                                <i class="zmdi zmdi-delete" aria-hidden="true"></i>
+                                <span translate>ACTION.DELETE</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </span>
                   </div>
                 </td>
-                <td class="hidden-xs"
-                    ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
-                    data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate"
-                    data-sortable="'modificationDate'"
-                    header-class="'col-4 hide-if-toggled-sidebar'">
+                <td class="hidden-xs" ng-class="{'hide-if-toggled-sidebar': mainVm.sidebar.isVisible()}"
+                  data-title="::'TABLE_HEADER.MODIFICATION_DATE' | translate" data-sortable="'modificationDate'"
+                  header-class="'col-4 hide-if-toggled-sidebar'">
                   {{documentFile.modificationDate | relativeTime}}
                 </td>
               </tr>
@@ -467,46 +397,33 @@
       </div>
     </div>
   </div>
-  <div
-    id="fabButtonCtn"
-    data-ng-if="vm.fabButton"
-    fab-button
-    fab-button-actions="vm.fabButton.actions"
-    fab-button-flow="$flow"
-    fab-button-toolbar="vm.fabButton.toolbar">
+  <div id="fabButtonCtn" data-ng-if="vm.fabButton" fab-button fab-button-actions="vm.fabButton.actions"
+    fab-button-flow="$flow" fab-button-toolbar="vm.fabButton.toolbar">
   </div>
 </div>
 <!-- TODO: does not display  -->
 <section class="row multi-select-mobile visible-xs"
-         x-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
-         x-ng-show="vm.currentPage === vm.lsAppConfig.workgroupList">
+  x-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
+  x-ng-show="vm.currentPage === vm.lsAppConfig.workgroupList">
   <div class="col-xs-2 ctn-mobile-select-count">
     <span class="number-of-files">{{vm.selectedDocuments.length}}</span>
     <span class="file-multi-select-label" translate>SELECTION_TOOLBAR.ELEMENTS</span>
   </div>
   <div class="col-xs-8">
-     <div x-ng-click="vm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
-           class="visible-xs toolbar-mobile-item col-xs-3" >
-      <i class="ls-check-checked select-all-items p-r-10"
-         x-ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]">
+    <div x-ng-click="vm.selectDocumentsOnCurrentPage(tableParams.data, tableParams.page())"
+      class="visible-xs toolbar-mobile-item col-xs-3">
+      <i class="ls-check-checked select-all-items p-r-10" x-ng-if="!vm.flagsOnSelectedPages[vm.tableParams.page()]">
       </i>
-      <i class="ls-check-o select-all-items p-r-10"
-         x-ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]">
+      <i class="ls-check-o select-all-items p-r-10" x-ng-if="vm.flagsOnSelectedPages[vm.tableParams.page()]">
       </i>
     </div>
-    <i
-      class="groups-add-member col-xs-2"
-      data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true, true)"
+    <i class="groups-add-member col-xs-2" data-ng-click="vm.showItemDetails(vm.selectedDocuments[0].uuid, true, true)"
       data-ng-class="{
       'disabled' : !vm.permissions[vm.selectedDocuments[0].uuid].MEMBER.CREATE || vm.selectedDocuments.length > 1
-      }"
-    >
+      }">
     </i>
-    <i
-      class="zmdi zmdi-delete col-xs-2"
-      data-ng-click="vm.deleteWorkGroup(vm.slectedDocuments)"
-      data-ng-class="{'disabled': !vm.canDeleteWorkgroups}"
-    ></i>
+    <i class="zmdi zmdi-delete col-xs-2" data-ng-click="vm.deleteWorkGroup(vm.slectedDocuments)"
+      data-ng-class="{'disabled': !vm.canDeleteWorkgroups}"></i>
   </div>
   <div class="col-xs-1 pull-right" x-ng-click="vm.resetSelectedDocuments()">
     <i class="zmdi zmdi zmdi-close"></i>
