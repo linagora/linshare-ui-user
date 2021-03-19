@@ -10,13 +10,9 @@ angular.module('linshare.sharedSpace')
     _,
     $filter,
     $log,
-    $q,
     $scope,
     $state,
-    $timeout,
-    $transitions,
     $translate,
-    auditDetailsService,
     documentUtilsService,
     filterBoxService,
     functionalityRestService,
@@ -25,186 +21,194 @@ angular.module('linshare.sharedSpace')
     lsErrorCode,
     NgTableParams,
     toastService,
-    workgroupMembersRestService,
     workgroupPermissionsService,
     workgroupRestService,
     workgroups,
     workgroupsPermissions
   ) {
-    var thisctrl = this;
+    const sharedSpaceVm = this;
 
-    thisctrl.functionalities = {};
-    thisctrl.permissions = workgroupsPermissions;
-    thisctrl.canDeleteWorkgroups = false;
-    thisctrl.canCreate = true;
-    thisctrl.goToSharedSpaceTarget = goToSharedSpaceTarget;
-    thisctrl.lsAppConfig = lsAppConfig;
-    thisctrl.currentSelectedDocument = {};
-    thisctrl.itemsList = workgroups;
-    thisctrl.itemsListCopy = thisctrl.itemsList;
-    thisctrl.selectedDocuments = [];
-    thisctrl.addSelectedDocument = addSelectedDocument;
-    thisctrl.showItemDetails = showItemDetails;
-    thisctrl.paramFilter = {name: ''};
-    thisctrl.currentWorkgroupMember = {};
-    thisctrl.tableParams = new NgTableParams({
-      page: 1,
-      sorting: {modificationDate: 'desc'},
-      count: 20,
-      filter: thisctrl.paramFilter
-    }, {
-      getData: function(params) {
-        var filteredData =
-          params.filter() ? $filter('filter')(thisctrl.itemsList, params.filter()) : thisctrl.itemsList;
-        var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+    sharedSpaceVm.$onInit = $onInit;
 
-        params.total(workgroups.length);
-        params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
+    function $onInit() {
+      sharedSpaceVm.functionalities = {};
+      sharedSpaceVm.permissions = workgroupsPermissions;
+      sharedSpaceVm.canDeleteWorkgroups = false;
+      sharedSpaceVm.canCreate = true;
+      sharedSpaceVm.lsAppConfig = lsAppConfig;
+      sharedSpaceVm.currentSelectedDocument = {};
+      sharedSpaceVm.itemsList = workgroups;
+      sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
+      sharedSpaceVm.selectedDocuments = [];
+      sharedSpaceVm.paramFilter = {name: ''};
+      sharedSpaceVm.currentWorkgroupMember = {};
+      sharedSpaceVm.mdtabsSelection = {
+        selectedIndex: 0
+      };
+      sharedSpaceVm.flagsOnSelectedPages = {};
+      sharedSpaceVm.currentPage = 'group_list';
+      sharedSpaceVm.deleteWorkGroup = deleteWorkGroup;
+      sharedSpaceVm.goToSharedSpaceTarget = goToSharedSpaceTarget;
+      sharedSpaceVm.addSelectedDocument = addSelectedDocument;
+      sharedSpaceVm.showItemDetails = showItemDetails;
+      sharedSpaceVm.createSharedSpace = createSharedSpace;
+      sharedSpaceVm.renameFolder = renameFolder;
+      sharedSpaceVm.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
+      sharedSpaceVm.sortDropdownSetActive = sortDropdownSetActive;
+      sharedSpaceVm.resetSelectedDocuments = resetSelectedDocuments;
+      sharedSpaceVm.toggleSearchState = toggleSearchState;
+      sharedSpaceVm.sortDropdownSetActive = sortDropdownSetActive;
+      sharedSpaceVm.loadSidebarContent = loadSidebarContent;
+      sharedSpaceVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
 
-        return (workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-      }
-    });
-    thisctrl.deleteWorkGroup = deleteWorkGroup;
-    thisctrl.mdtabsSelection = {
-      selectedIndex: 0
-    };
+      sharedSpaceVm.tableParams = new NgTableParams({
+        page: 1,
+        sorting: {modificationDate: 'desc'},
+        count: 20,
+        filter: sharedSpaceVm.paramFilter
+      }, {
+        getData: params => {
+          var filteredData =
+            params.filter() ? $filter('filter')(sharedSpaceVm.itemsList, params.filter()) : sharedSpaceVm.itemsList;
+          var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 
-    $translate(['ACTION.NEW_WORKGROUP', 'ACTION.NEW_DRIVE'])
-      .then(function(translations) {
-        thisctrl.NODE_TYPE_PROPERTIES = {
-          WORK_GROUP: {
-            title: 'CREATE_NEW_WORKGROUP',
-            icon: 'ls-workgroup',
-            defaultTitle: translations['ACTION.NEW_WORKGROUP']
-          },
-          DRIVE: {
-            title: 'CREATE_NEW_DRIVE',
-            icon: 'ls-project',
-            defaultTitle: translations['ACTION.NEW_DRIVE']
-          }
-        };
+          params.total(workgroups.length);
+          params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
+
+          return (workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
       });
 
-    thisctrl.createSharedSpace = function(nodeType) {
-      if (thisctrl.canCreate) {
-        thisctrl.canCreate = false;
+      $translate(['ACTION.NEW_WORKGROUP', 'ACTION.NEW_DRIVE'])
+        .then(translations => {
+          sharedSpaceVm.NODE_TYPE_PROPERTIES = {
+            WORK_GROUP: {
+              creationDialogTitle: 'CREATE_NEW_WORKGROUP',
+              icon: 'ls-workgroup',
+              defaultName: translations['ACTION.NEW_WORKGROUP']
+            },
+            DRIVE: {
+              creationDialogTitle: 'CREATE_NEW_DRIVE',
+              icon: 'ls-project',
+              defaultName: translations['ACTION.NEW_DRIVE']
+            }
+          };
+        }).then(() => {
+          functionalityRestService.getAll().then(functionalities => {
+            sharedSpaceVm.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
+            sharedSpaceVm.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
+            sharedSpaceVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
+            sharedSpaceVm.functionalities.drive = functionalities.DRIVE.enable && functionalities.DRIVE__CREATION_RIGHT.enable;
 
-        if (thisctrl.itemsList.length !== thisctrl.itemsListCopy.length) {
-          thisctrl.itemsList = thisctrl.itemsListCopy;
-        }
+            if (sharedSpaceVm.functionalities.workgroup || sharedSpaceVm.functionalities.drive) {
+              sharedSpaceVm.fabButton = {
+                toolbar: {
+                  activate: true,
+                  label: 'MENU_TITLE.SHARED_SPACE'
+                },
+                actions: []
+              };
 
-        filterBoxService.getSetDateFilter(false);
-        filterBoxService.resetTableList();
+              if (sharedSpaceVm.functionalities.workgroup) {
+                sharedSpaceVm.fabButton.actions.push({
+                  action: () => sharedSpaceVm.createSharedSpace('WORK_GROUP'),
+                  label: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.defaultName,
+                  icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon,
+                });
+              }
 
-        thisctrl.paramFilter.name = '';
-        thisctrl.tableParams.reload();
+              if (sharedSpaceVm.functionalities.drive) {
+                sharedSpaceVm.fabButton.actions.push({
+                  action: () => sharedSpaceVm.createSharedSpace('DRIVE'),
+                  label: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.defaultName,
+                  icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.icon,
+                });
+              }
+            }
+          });
+        });
+    }
 
-        const defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, thisctrl.NODE_TYPE_PROPERTIES[nodeType].defaultTitle);
+    function createSharedSpace(nodeType) {
+      if (sharedSpaceVm.canCreate) {
+        sharedSpaceVm.canCreate = false;
+        filterBoxService.setFilters(false);
+        sharedSpaceVm.paramFilter.name = '';
+        const defaultNamePos = itemUtilsService.itemNumber(sharedSpaceVm.itemsList, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName);
         const defaultName = defaultNamePos > 0 ?
-          thisctrl.NODE_TYPE_PROPERTIES[nodeType].defaultTitle + ' (' + defaultNamePos + ')' : thisctrl.NODE_TYPE_PROPERTIES[nodeType].defaultTitle;
+          `${sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName} (${defaultNamePos})`
+          : sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName;
 
         const sharedSpace = workgroupRestService.restangularize({
           name: defaultName.trim(),
           nodeType
         });
 
-        popDialogAndCreateFolder(sharedSpace, thisctrl.NODE_TYPE_PROPERTIES[nodeType].title).then(created => {
-          thisctrl.itemsList.push(created);
+        popDialogAndCreateFolder(sharedSpace, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].creationDialogTitle).then(created => {
+          sharedSpaceVm.itemsList.push(created);
 
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         }).then(workgroupsPermissions => {
           Object.assign(
-            thisctrl.permissions,
+            sharedSpaceVm.permissions,
             workgroupPermissionsService.formatPermissions(workgroupsPermissions)
           );
         }).finally(() => {
-          thisctrl.tableParams.reload();
-          thisctrl.canCreate = true;
+          sharedSpaceVm.tableParams.reload();
+          sharedSpaceVm.canCreate = true;
         });
       }
     };
 
-    thisctrl.renameFolder = renameFolder;
-
-    thisctrl.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
-
-    thisctrl.sortDropdownSetActive = function($event) {
-      thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
+    function sortDropdownSetActive($event) {
+      sharedSpaceVm.toggleSelectedSort = !sharedSpaceVm.toggleSelectedSort;
       var currTarget = $event.currentTarget;
 
-      angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
+      angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(() => {
         angular.element(currTarget).addClass('selected-sorting');
       });
     };
 
-    thisctrl.resetSelectedDocuments = function() {
-      delete thisctrl.tableParams.filter().isSelected;
-      documentUtilsService.resetItemSelection(thisctrl.selectedDocuments);
+    function resetSelectedDocuments() {
+      delete sharedSpaceVm.tableParams.filter().isSelected;
+      documentUtilsService.resetItemSelection(sharedSpaceVm.selectedDocuments);
     };
 
-    var openSearch = function() {
+    function openSearch() {
       angular.element('#drop-area').addClass('search-toggled');
       angular.element('#top-search-wrap input').focus();
     };
-    var closeSearch = function() {
+
+    function closeSearch() {
       angular.element('#drop-area').removeClass('search-toggled');
       angular.element('#searchInMobileFiles').val('').trigger('change');
     };
 
-    thisctrl.toggleSearchState = function() {
-      if (!thisctrl.searchMobileDropdown) {
+    function toggleSearchState() {
+      if (!sharedSpaceVm.searchMobileDropdown) {
         openSearch();
       } else {
         closeSearch();
       }
-      thisctrl.searchMobileDropdown = !thisctrl.searchMobileDropdown;
+      sharedSpaceVm.searchMobileDropdown = !sharedSpaceVm.searchMobileDropdown;
     };
 
-    functionalityRestService.getAll().then(function(functionalities) {
-      thisctrl.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
-      thisctrl.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
-      thisctrl.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
-
-      if (functionalities.WORK_GROUP__CREATION_RIGHT.enable) {
-        thisctrl.fabButton = {
-          actions: [{
-            action: function() {
-              return thisctrl.createWorkGroup();
-            },
-            label: 'WORKGROUPS_LIST.SHARED_FOLDER',
-            icon: 'zmdi zmdi-plus',
-          }]
-        };
-      }
-    });
-
-
-    thisctrl.currentPage = 'group_list';
-
-    thisctrl.sortDropdownSetActive = function(sortField, $event) {
-      thisctrl.toggleSelectedSort = !thisctrl.toggleSelectedSort;
-      thisctrl.tableParams.sorting(sortField, thisctrl.toggleSelectedSort ? 'desc' : 'asc');
+    function sortDropdownSetActive(sortField, $event) {
+      sharedSpaceVm.toggleSelectedSort = !sharedSpaceVm.toggleSelectedSort;
+      sharedSpaceVm.tableParams.sorting(sortField, sharedSpaceVm.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
 
-      angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
+      angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(() => {
         angular.element(currTarget).addClass('selected-sorting');
       });
     };
 
-    thisctrl.loadSidebarContent = function(content) {
-      $scope.mainVm.sidebar.setData(thisctrl);
+    function loadSidebarContent(content) {
+      $scope.mainVm.sidebar.setData(sharedSpaceVm);
       $scope.mainVm.sidebar.setContent(content);
       $scope.mainVm.sidebar.show();
     };
 
-    /**
-     * @name goToSharedSpaceTarget
-     * @desc routing to the workgroup or files inside a workgroup
-     * @param {object} event - event handle
-     * @param {string} workgroupUuid - Uuid of the Workgroup
-     * @param {string} name - name of workgroup
-     * @memberOf Linshare.shareSpace.SareSpaceController
-    */
     function goToSharedSpaceTarget(event, workgroupUuid, name) {
       event.stopPropagation();
       var element = angular.element($('td[uuid=' + workgroupUuid + ']').find('.file-name-disp'));
@@ -214,36 +218,36 @@ angular.module('linshare.sharedSpace')
       }
     }
 
-    thisctrl.flagsOnSelectedPages = {};
 
-    thisctrl.selectDocumentsOnCurrentPage = function(data, page, selectFlag) {
-      var currentPage = page || thisctrl.tableParams.page();
-      var dataOnPage = data || thisctrl.tableParams.data;
-      var select = selectFlag || thisctrl.flagsOnSelectedPages[currentPage];
+
+    function selectDocumentsOnCurrentPage(data, page, selectFlag) {
+      var currentPage = page || sharedSpaceVm.tableParams.page();
+      var dataOnPage = data || sharedSpaceVm.tableParams.data;
+      var select = selectFlag || sharedSpaceVm.flagsOnSelectedPages[currentPage];
 
       if (!select) {
-        angular.forEach(dataOnPage, function(element) {
+        angular.forEach(dataOnPage, element => {
           if (!element.isSelected) {
             element.isSelected = true;
-            thisctrl.selectedDocuments.push(element);
+            sharedSpaceVm.selectedDocuments.push(element);
           }
         });
 
-        thisctrl.flagsOnSelectedPages[currentPage] = true;
+        sharedSpaceVm.flagsOnSelectedPages[currentPage] = true;
       } else {
-        thisctrl.selectedDocuments = _.xor(thisctrl.selectedDocuments, dataOnPage);
-        angular.forEach(dataOnPage, function(element) {
+        sharedSpaceVm.selectedDocuments = _.xor(sharedSpaceVm.selectedDocuments, dataOnPage);
+        angular.forEach(dataOnPage, element => {
           if (element.isSelected) {
             element.isSelected = false;
-            _.remove(thisctrl.selectedDocuments, function(n) {
+            _.remove(sharedSpaceVm.selectedDocuments, n => {
               return n.uuid === element.uuid;
             });
           }
         });
-        thisctrl.flagsOnSelectedPages[currentPage] = false;
+        sharedSpaceVm.flagsOnSelectedPages[currentPage] = false;
       }
 
-      thisctrl.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(thisctrl.selectedDocuments, thisctrl.permissions);
+      sharedSpaceVm.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(sharedSpaceVm.selectedDocuments, sharedSpaceVm.permissions);
     };
 
     function deleteWorkGroup(workgroups) {
@@ -252,14 +256,14 @@ angular.module('linshare.sharedSpace')
 
     // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
     function deleteCallback(items) {
-      angular.forEach(items, function(restangularizedItem) {
+      angular.forEach(items, restangularizedItem => {
         $log.debug('value to delete', restangularizedItem);
-        restangularizedItem.remove().then(function() {
+        restangularizedItem.remove().then(() => {
           toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
-          _.remove(thisctrl.itemsList, restangularizedItem);
-          _.remove(thisctrl.selectedDocuments, restangularizedItem);
-          thisctrl.itemsListCopy = thisctrl.itemsList; // I keep a copy of the data for the filter module
-          thisctrl.tableParams.reload();
+          _.remove(sharedSpaceVm.itemsList, restangularizedItem);
+          _.remove(sharedSpaceVm.selectedDocuments, restangularizedItem);
+          sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList; // I keep a copy of the data for the filter module
+          sharedSpaceVm.tableParams.reload();
           $scope.mainVm.sidebar.hide(items);
 
           updateFlagsOnSelectedPages();
@@ -268,69 +272,55 @@ angular.module('linshare.sharedSpace')
     }
 
     function addSelectedDocument(document) {
-      documentUtilsService.selectDocument(thisctrl.selectedDocuments, document);
+      documentUtilsService.selectDocument(sharedSpaceVm.selectedDocuments, document);
 
       updateFlagsOnSelectedPages();
 
-      thisctrl.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(thisctrl.selectedDocuments, thisctrl.permissions);
+      sharedSpaceVm.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(sharedSpaceVm.selectedDocuments, sharedSpaceVm.permissions);
     }
 
-    /**
-     * @name updateFlagsOnSelectedPages
-     * @desc update flag according to the selected pages
-     * @returns {Void}
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
     function updateFlagsOnSelectedPages() {
-      if (!thisctrl.itemsList.length) {
-        thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] = false;
+      if (!sharedSpaceVm.itemsList.length) {
+        sharedSpaceVm.flagsOnSelectedPages[sharedSpaceVm.tableParams.page()] = false;
 
         return;
       }
 
-      if (!thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] &&
-        (thisctrl.itemsList.length === thisctrl.selectedDocuments.length)) {
-        thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] = true;
+      if (!sharedSpaceVm.flagsOnSelectedPages[sharedSpaceVm.tableParams.page()] &&
+        (sharedSpaceVm.itemsList.length === sharedSpaceVm.selectedDocuments.length)) {
+        sharedSpaceVm.flagsOnSelectedPages[sharedSpaceVm.tableParams.page()] = true;
       }
 
-      if (thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] &&
-        (thisctrl.itemsList.length !== thisctrl.selectedDocuments.length)) {
-        thisctrl.flagsOnSelectedPages[thisctrl.tableParams.page()] = false;
+      if (sharedSpaceVm.flagsOnSelectedPages[sharedSpaceVm.tableParams.page()] &&
+        (sharedSpaceVm.itemsList.length !== sharedSpaceVm.selectedDocuments.length)) {
+        sharedSpaceVm.flagsOnSelectedPages[sharedSpaceVm.tableParams.page()] = false;
       }
     }
 
     function toggleFilterBySelectedFiles() {
-      if (thisctrl.tableParams.filter().isSelected) {
-        delete thisctrl.tableParams.filter().isSelected;
+      if (sharedSpaceVm.tableParams.filter().isSelected) {
+        delete sharedSpaceVm.tableParams.filter().isSelected;
       } else {
-        thisctrl.tableParams.filter().isSelected = true;
+        sharedSpaceVm.tableParams.filter().isSelected = true;
       }
     }
 
-    /**
-     * @name showItemDetails
-     * @desc Get details of a Workgroup and show them in right sidebar
-     * @param {string} workgroupUuid - Uuid of the Workgroup
-     * @param {boolean} loadAction - Event happening
-     * @param {boolean} memberTab - Open member tab
-     * @memberOf LinShare.sharedSpace.SharedSpaceController
-     */
     function showItemDetails(workgroupUuid, loadAction, memberTab) {
       workgroupRestService
         .get(workgroupUuid, true, true)
-        .then(function(workgroup) {
-          thisctrl.currentSelectedDocument.current = Object.assign({}, workgroup);
-          thisctrl.currentSelectedDocument.original = Object.assign({}, workgroup);
+        .then(workgroup => {
+          sharedSpaceVm.currentSelectedDocument.current = Object.assign({}, workgroup);
+          sharedSpaceVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
           return workgroupRestService
-            .getQuota(thisctrl.currentSelectedDocument.current.quotaUuid);
+            .getQuota(sharedSpaceVm.currentSelectedDocument.current.quotaUuid);
         })
-        .then(function(quota) {
-          thisctrl.currentSelectedDocument.quotas = Object.assign({}, quota);
+        .then(quota => {
+          sharedSpaceVm.currentSelectedDocument.quotas = Object.assign({}, quota);
 
           if (loadAction) {
             openMemberTab(memberTab);
-            thisctrl.loadSidebarContent(lsAppConfig.workgroupPage);
+            sharedSpaceVm.loadSidebarContent(lsAppConfig.workgroupPage);
           }
         });
 
@@ -342,11 +332,11 @@ angular.module('linshare.sharedSpace')
        */
       function openMemberTab(ifMemberTab) {
         if (ifMemberTab) {
-          thisctrl.mdtabsSelection.selectedIndex = 1;
+          sharedSpaceVm.mdtabsSelection.selectedIndex = 1;
           //TODO Don't Use angular.element, Do a component/directive
           angular.element('#focusInputShare').focus();
         } else {
-          thisctrl.mdtabsSelection.selectedIndex = 0;
+          sharedSpaceVm.mdtabsSelection.selectedIndex = 0;
         }
       }
     }
@@ -355,45 +345,45 @@ angular.module('linshare.sharedSpace')
       var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
 
       return workgroupRestService.get(item.uuid)
-        .then(function(itemDetails) {
+        .then(itemDetails => {
           return item.uuid ?
             itemUtilsService.rename(
               Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement
             ) :
             itemUtilsService.rename(item, itemNameElement);
         })
-        .then(function(newItemDetails) {
+        .then(newItemDetails => {
           item = _.assign(item, newItemDetails);
-          thisctrl.canCreate = true;
+          sharedSpaceVm.canCreate = true;
 
           return workgroupRestService.get(item.uuid, true, true);
         })
-        .then(function(newItemDetailsWithRole) {
+        .then(newItemDetailsWithRole => {
           item = _.assign(item, newItemDetailsWithRole);
 
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         })
-        .then(function(workgroupsPermissions) {
-          thisctrl.permissions = Object.assign(
+        .then(workgroupsPermissions => {
+          sharedSpaceVm.permissions = Object.assign(
             {},
-            thisctrl.permissions,
+            sharedSpaceVm.permissions,
             workgroupPermissionsService.formatPermissions(workgroupsPermissions)
           );
         })
-        .catch(function(response) {
+        .catch(response => {
           //TODO - Manage error from back
           var data = response.data;
 
           if (data.errCode === lsErrorCode.CANCELLED_BY_USER) {
             if (!item.uuid) {
-              var itemListIndex = _.findIndex(thisctrl.itemsList, item);
+              var itemListIndex = _.findIndex(sharedSpaceVm.itemsList, item);
 
-              thisctrl.itemsList.splice(itemListIndex, 1);
+              sharedSpaceVm.itemsList.splice(itemListIndex, 1);
             }
-            thisctrl.canCreate = true;
+            sharedSpaceVm.canCreate = true;
           }
         })
-        .finally(() => thisctrl.tableParams.reload());
+        .finally(() => sharedSpaceVm.tableParams.reload());
     }
 
     function popDialogAndCreateFolder(item, title) {
