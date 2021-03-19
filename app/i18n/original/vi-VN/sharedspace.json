@@ -51,5 +51,8 @@
     "COMMENT_VERSION": "Tải lên các phiên bản cho tập tin của bạn và xem trên lịch sử của tập tin"
   },
   "CREATE_NEW_WORKGROUP": "Tạo nhóm làm việc mới",
-  "CREATE_NEW_FOLDER": "Tạo thư mục mới"
+  "CREATE_NEW_FOLDER": "Tạo thư mục mới",
+  "CREATE_NEW_DRIVE": "Tạo ổ đĩa mới",
+  "WORKGROUP": "Nhóm làm việc",
+  "DRIVE": "Ổ đĩa"
 }

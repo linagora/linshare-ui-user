@@ -49,5 +49,8 @@
     "COMMENT_VERSION": "Ajoutez vos versions et suivez l'historique de votre fichier."
   },
   "CREATE_NEW_WORKGROUP": "Créer un nouveau groupe de travail",
-  "CREATE_NEW_FOLDER": "Créer un nouveau dossier"
+  "CREATE_NEW_FOLDER": "Créer un nouveau dossier",
+  "CREATE_NEW_DRIVE": "Créer un nouveau Drive",
+  "WORKGROUP": "Groupe de travail",
+  "DRIVE": "Drive"
 }

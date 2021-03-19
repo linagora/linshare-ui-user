@@ -50,5 +50,8 @@
     "COMMENT_VERSION": "Upload your file's versions and see your file history."
   },
   "CREATE_NEW_WORKGROUP": "Create new workgroup",
-  "CREATE_NEW_FOLDER": "Create new folder"
+  "CREATE_NEW_FOLDER": "Create new folder",
+  "CREATE_NEW_DRIVE": "Create new drive",
+  "WORKGROUP": "Workgroup",
+  "DRIVE": "Drive"
 }

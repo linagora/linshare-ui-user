@@ -49,5 +49,8 @@
       "COMMENT_VERSION": "Загрузить версии и посмотреть историю файла"
     },
     "CREATE_NEW_WORKGROUP": "Создать новую рабочую группу",
-    "CREATE_NEW_FOLDER": "Создать новую папку"
+    "CREATE_NEW_FOLDER": "Создать новую папку",
+    "CREATE_NEW_DRIVE": "Создать новый диск",
+    "WORKGROUP": "Рабочая группа",
+    "DRIVE": "Привод"
   }
