@@ -89,7 +89,7 @@ angular.module('linshare.sharedSpace')
             },
             DRIVE: {
               creationDialogTitle: 'CREATE_NEW_DRIVE',
-              icon: 'ls-project',
+              icon: 'ls-drive',
               defaultName: translations['ACTION.NEW_DRIVE']
             }
           };
