@@ -9,6 +9,12 @@
   li {
     position: relative;
   }
+  .dropdown-menu-section-title {
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
 }
 #content-ctn-sidebar h2.headerSubCtn.existing-member {
   margin-bottom: 0.75em;
@@ -28,7 +34,11 @@
 }
 
 .fields-add-member .autocomplete-search-ctn ul.dropdown-menu{
- left: -55px !important;
+  left: -55px !important;
+}
+
+.fields-add-member .autocomplete-full-width.autocomplete-search-ctn ul.dropdown-menu{
+  left: 0px !important;
 }
 
 /**********************
@@ -74,6 +84,13 @@
   }
   > div {
     float: left;
+  }
+
+  .member-dropdown-ctn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
   }
 }
 

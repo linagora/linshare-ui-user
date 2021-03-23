@@ -81,9 +81,10 @@
     function activate() {
       workgroupMemberVm.currentWorkGroup = $scope.mainVm.sidebar.getData().currentSelectedDocument;
 
-      workgroupRolesRestService.getList().then(function(roles) {
+      workgroupRolesRestService.getList(workgroupMemberVm.currentWorkGroup.current.nodeType).then(function(roles) {
         var defaultConfiguredRoleIndex = roles.findIndex(function(role){
-          return role.name === lsAppConfig.defaultWorkgroupMemberRole;
+          return role.name === (workgroupMemberVm.currentWorkGroup.current.nodeType === 'WORK_GROUP' ?
+            lsAppConfig.defaultWorkgroupMemberRole : lsAppConfig.defaultDriveMemberRole );
         });
 
         workgroupMemberVm.membersRights = roles.sort((a, b) => {
@@ -91,6 +92,25 @@
         });
         workgroupMemberVm.memberRole = workgroupMemberVm.membersRights[defaultConfiguredRoleIndex];
       });
+
+      if (workgroupMemberVm.currentWorkGroup.current.nodeType === 'DRIVE') {
+        workgroupRolesRestService.getList('WORK_GROUP').then(function(roles) {
+          var defaultConfiguredRoleIndex = roles.findIndex(function(role){
+            return role.name === lsAppConfig.defaultWorkgroupMemberRole;
+          });
+
+          workgroupMemberVm.workgroupMembersRights =
+            defaultConfiguredRoleIndex === 0 || defaultConfiguredRoleIndex === -1
+              ? roles
+              : [].concat(
+                roles[defaultConfiguredRoleIndex],
+                roles.slice(0, defaultConfiguredRoleIndex),
+                roles.slice(defaultConfiguredRoleIndex + 1, roles.length)
+              );
+          workgroupMemberVm.workgroupDefaultRole = workgroupMemberVm.workgroupMembersRights[0];
+        });
+      }
+
       // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
       $scope.$watch(function() {
         return $scope.mainVm.sidebar.getData().currentSelectedDocument.current;
@@ -127,12 +147,14 @@
      */
     function addMember(member, workgroupMembers) {
       var currentWorkgroupMember = workgroupMembers.filter(function(workgroupMember) {
-        return workgroupMember.userUuid === member.userUuid;
+        return workgroupMember.account && workgroupMember.account.uuid === member.userUuid;
       });
 
       if (currentWorkgroupMember.length !== 0) {
         toastService.error({
-          key: 'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_WORKGROUP',
+          key: workgroupMemberVm.currentWorkGroup.current.nodeType === 'WORK_GROUP' ?
+            'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_WORKGROUP' :
+            'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_DRIVE',
           params: {
             firstName: member.firstName,
             lastName: member.lastName
@@ -147,7 +169,8 @@
           formatWorkgroupMember(
             workgroupMemberVm.currentWorkGroup.current,
             member,
-            workgroupMemberVm.memberRole
+            workgroupMemberVm.memberRole,
+            workgroupMemberVm.workgroupDefaultRole
           )
         )
         .then(function(data) {
@@ -238,15 +261,20 @@
      * @param {Role} role - A {@link Role} object.
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
-    function updateMember(member, role) {
+    function updateMember(member, role, isNestedRole) {
       //TODO Nice side-effect here!
-      member.role = role;
+      if (isNestedRole) {
+        member.nestedRole = role;
+      } else {
+        member.role = role;
+      }
 
       workgroupMembersRestService.update(
         formatWorkgroupMember(
           workgroupMemberVm.currentWorkGroup.current,
           member,
-          role
+          member.role,
+          member.nestedRole
         )
       );
     }
@@ -260,7 +288,7 @@
      * @returns {WorkgroupMember} A {@link WorkgroupMember} object.
      * @memberOf LinShare.sharedSpace.workGroupMembersController
      */
-    function formatWorkgroupMember(workgroup, member, role) {
+    function formatWorkgroupMember(workgroup, member, role, nestedRole) {
       return {
         role: {
           uuid: role.uuid
@@ -270,7 +298,11 @@
         },
         account: {
           uuid: member.account ? member.account.uuid : member.userUuid
-        }
+        },
+        nestedRole: nestedRole && nestedRole.uuid && {
+          uuid: nestedRole.uuid
+        },
+        type: nestedRole && 'DRIVE'
       };
     }
 

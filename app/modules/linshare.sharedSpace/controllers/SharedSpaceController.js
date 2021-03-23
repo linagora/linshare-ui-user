@@ -323,8 +323,10 @@ angular.module('linshare.sharedSpace')
           sharedSpaceVm.currentSelectedDocument.current = Object.assign({}, workgroup);
           sharedSpaceVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
-          return workgroupRestService
-            .getQuota(sharedSpaceVm.currentSelectedDocument.current.quotaUuid);
+          if (sharedSpaceVm.currentSelectedDocument.current.quotaUuid) {
+            return workgroupRestService
+              .getQuota(sharedSpaceVm.currentSelectedDocument.current.quotaUuid);
+          }
         })
         .then(quota => {
           sharedSpaceVm.currentSelectedDocument.quotas = Object.assign({}, quota);

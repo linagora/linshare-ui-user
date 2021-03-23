@@ -31,7 +31,9 @@
         >
           <md-content
             class="md-padding"
-            data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-members.html'"
+            data-ng-include="mainVm.sidebar.getData().currentSelectedDocument.current.nodeType === 'WORK_GROUP' ?
+              'directives/sidebar-content/sidebar-content-workgroup-members.html'
+              : 'directives/sidebar-content/sidebar-content-workgroup-drive-members.html'"
           >
           </md-content>
         </md-tab>

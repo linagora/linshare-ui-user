@@ -166,6 +166,15 @@
        * If any other unknown value to system is set, the default order will be set (same as the list above)
        */
       defaultWorkgroupMemberRole: 'READER',
+      /* Define the default role selected when adding a new member to a drive
+       * Possible value:
+       *  - DRIVE_ADMIN
+       *  - DRIVE_WRITER
+       *  - DRIVE_READER
+       *
+       * If any other unknown value to system is set, the default order will be set (same as the list above)
+       */
+      defaultDriveMemberRole: 'DRIVE_READER',
 
       /* Define the Application home page, can be undefined for default behavior or one of the following:
        * documents.files

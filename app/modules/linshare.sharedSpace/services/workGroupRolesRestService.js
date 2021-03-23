@@ -46,7 +46,7 @@
      */
     function get(roleUuid) {
       $log.debug('workgroupRolesRestService :  get', roleUuid);
-      
+
       return handler(Restangular.one(restUrl, roleUuid).get());
     }
 
@@ -56,10 +56,10 @@
      *  @returns {Promise<Array<Role>>} server response
      *  @roleOf LinShare.sharedSpace.workgroupRolesRestService
      */
-    function getList() {
+    function getList(nodeType) {
       $log.debug('workgroupRolesRestService :  getList');
-      
-      return handler(Restangular.one(restUrl).getList());
+
+      return handler(Restangular.all(restUrl).getList({ nodeType }));
     }
 
     /**
@@ -71,7 +71,7 @@
      */
     function getPermissions(roleUuid) {
       $log.debug('workgroupRolesRestService :  getPermissions', roleUuid);
-      
+
       return handler(Restangular.one(restUrl, roleUuid).one('permissions').get());
     }
   }
