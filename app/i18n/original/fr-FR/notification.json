@@ -112,6 +112,7 @@
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} est déjà membre de ce groupe de travail.",
+      "MEMBER_ALREADY_IN_DRIVE": "{{firstName}} {{lastName}} est déjà membre de ce Drive.",
       "RESTORE": "Erreur lors de la restoration de version"
     },
     "WARNING": {

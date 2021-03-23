@@ -112,6 +112,7 @@
       },
       "NO_RESPONSE_ERROR": "Lỗi khi không có phản hồi của máy chủ, xem nhật ký.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} đã là thành viên của Nhóm làm việc này.",
+      "MEMBER_ALREADY_IN_DRIVE": "{{firstName}} {{lastName}} đã là thành viên của ổ đĩa này.",
       "RESTORE": "Có lỗi xảy ra khi khôi phục phiên bản."
     },
     "WARNING": {

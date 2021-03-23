@@ -112,6 +112,7 @@
         },
         "NO_RESPONSE_ERROR": "Ошибка без ответа сервера, см. logs.",
         "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} уже является участником этой рабочей группы.",
+        "MEMBER_ALREADY_IN_DRIVE": "{{firstName}} {{lastName}} уже является участником этого диска.",
         "RESTORE": "Во время восстановления документа произошла ошибка"
       },
       "WARNING": {
