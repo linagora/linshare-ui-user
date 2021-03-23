@@ -190,9 +190,14 @@
       workgroupMemberVm.propertyOrderBy = orderParam;
       workgroupMemberVm.propertyOrderByAsc =
         workgroupMemberVm.propertyOrderBy === orderParam ? !workgroupMemberVm.propertyOrderByAsc : true;
-      workgroupMemberVm.currentWorkGroup.current.members =
-        $filter('orderBy')(workgroupMemberVm.currentWorkGroup.current.members, orderParam,
-          workgroupMemberVm.propertyOrderByAsc);
+
+      const mappingOrderFields = {
+        firstName: 'account.firstName',
+        lastName: 'account.lastName',
+        role: 'role.name'
+      };
+
+      workgroupMemberVm.members = _.orderBy(workgroupMemberVm.members, [mappingOrderFields[orderParam]], [workgroupMemberVm.propertyOrderByAsc ? 'asc' : 'desc']);
       angular.element('.sort-dropdown a').removeClass('selected-sorting').promise().done(function() {
         angular.element($event.currentTarget).addClass('selected-sorting');
       });
