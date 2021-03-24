@@ -59,10 +59,10 @@ function uploadRequestGroupRestService($log, Restangular, ServerManagerService) 
     return handler(Restangular.all(restUrl).one(uuid).get());
   }
 
-  function getAudit(uuid) {
+  function getAudit(uuid, getAll = true) {
     $log.debug('uploadRequestGroupRestService: getAudit, uuid');
 
-    return handler(Restangular.one(restUrl, uuid).getList('audit'));
+    return handler(Restangular.one(restUrl, uuid).getList('audit', { all: getAll }));
   }
 
   /**
