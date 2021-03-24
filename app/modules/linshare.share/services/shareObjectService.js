@@ -88,7 +88,7 @@ angular.module('linshare.share')
         return maxDate;
       };
       self.checkValidNotificationDateForUSDA = () => {
-        if (self.notificationDateForUSDA && self.notificationDateForUSDA.value) {
+        if (self.enableUSDA.enable && self.notificationDateForUSDA && self.notificationDateForUSDA.value) {
           const notiDateForUSDAValue = moment(self.notificationDateForUSDA.value).valueOf();
 
           if (notiDateForUSDAValue < self.getMinDate()) {
