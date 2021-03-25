@@ -18,7 +18,7 @@ require('./controllers/WorkgroupNodesController');
 require('./controllers/WorkgroupVersionsController');
 require('./controllers/workGroupMembersController');
 require('./filters/canDeleteNodesFilter');
-require('./filters/canDeleteWorkgroupsFilter');
+require('./filters/canDeleteSharedSpacesFilter');
 require('./services/workGroupMemberRestService');
 require('./services/workGroupNodesRestService');
 require('./services/workGroupPermissionsService');

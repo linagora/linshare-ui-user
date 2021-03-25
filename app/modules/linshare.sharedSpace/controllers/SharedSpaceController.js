@@ -33,7 +33,7 @@ angular.module('linshare.sharedSpace')
     function $onInit() {
       sharedSpaceVm.functionalities = {};
       sharedSpaceVm.permissions = workgroupsPermissions;
-      sharedSpaceVm.canDeleteWorkgroups = false;
+      sharedSpaceVm.canDeleteSharedSpaces = false;
       sharedSpaceVm.canCreate = true;
       sharedSpaceVm.lsAppConfig = lsAppConfig;
       sharedSpaceVm.currentSelectedDocument = {};
@@ -47,7 +47,7 @@ angular.module('linshare.sharedSpace')
       };
       sharedSpaceVm.flagsOnSelectedPages = {};
       sharedSpaceVm.currentPage = 'group_list';
-      sharedSpaceVm.deleteWorkGroup = deleteWorkGroup;
+      sharedSpaceVm.deleteSharedSpace = deleteSharedSpace;
       sharedSpaceVm.goToSharedSpaceTarget = goToSharedSpaceTarget;
       sharedSpaceVm.addSelectedDocument = addSelectedDocument;
       sharedSpaceVm.showItemDetails = showItemDetails;
@@ -247,11 +247,22 @@ angular.module('linshare.sharedSpace')
         sharedSpaceVm.flagsOnSelectedPages[currentPage] = false;
       }
 
-      sharedSpaceVm.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(sharedSpaceVm.selectedDocuments, sharedSpaceVm.permissions);
+      sharedSpaceVm.canDeleteSharedSpaces = $filter('canDeleteSharedSpaces')(sharedSpaceVm.selectedDocuments, sharedSpaceVm.permissions);
     };
 
-    function deleteWorkGroup(workgroups) {
-      itemUtilsService.deleteItem(workgroups, itemUtilsService.itemUtilsConstant.WORKGROUP, deleteCallback);
+    function deleteSharedSpace(sharedSpaces) {
+      let messageKey;
+      const nodeTypes = (!_.isArray(sharedSpaces) ? [sharedSpaces] : sharedSpaces).map(sharedSpace => sharedSpace.nodeType);
+
+      if (nodeTypes.indexOf('WORK_GROUP') >= 0 && nodeTypes.indexOf('DRIVE') >= 0) {
+        messageKey = itemUtilsService.itemUtilsConstant.WORKGROUP_AND_DRIVE;
+      } else if (nodeTypes.indexOf('WORK_GROUP') >= 0) {
+        messageKey = itemUtilsService.itemUtilsConstant.WORKGROUP;
+      } else {
+        messageKey = itemUtilsService.itemUtilsConstant.DRIVE;
+      }
+
+      itemUtilsService.deleteItem(sharedSpaces, messageKey, deleteCallback);
     }
 
     // TODO : show a single callback toast for multiple deleted items, and check if it needs to be plural or not
@@ -276,7 +287,7 @@ angular.module('linshare.sharedSpace')
 
       updateFlagsOnSelectedPages();
 
-      sharedSpaceVm.canDeleteWorkgroups = $filter('canDeleteWorkgroups')(sharedSpaceVm.selectedDocuments, sharedSpaceVm.permissions);
+      sharedSpaceVm.canDeleteSharedSpaces = $filter('canDeleteSharedSpaces')(sharedSpaceVm.selectedDocuments, sharedSpaceVm.permissions);
     }
 
     function updateFlagsOnSelectedPages() {
