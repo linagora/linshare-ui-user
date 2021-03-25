@@ -16,6 +16,8 @@
         "GUEST": "Bạn sắp xoá {singular, select, true{một khách} other{{nbItems} khách}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "RECEIVED_SHARE": "Bạn sắp xoá {singular, select, true{một tệp chia sẻ} other{{nbItems} tệp chia sẻ}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "WORKGROUP": "Bạn sắp xoá {singular, select, true{một nhóm làm việc} other{{nbItems} làm việc}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "DRIVE": "Bạn sắp xoá {singular, select, true{một ổ đĩa} other{{nbItems} ổ đĩa}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "WORKGROUP_AND_DRIVE": "Bạn sắp xoá {nbItems} nhóm làm việc và ổ đĩa ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "WORKGROUP_NODE": "Bạn sắp xoá {singular, select, true{một tài liệu hoặc thư mục} other{{nbItems} tài liêụ hoặc thư mục}} ! Hãy cẩn thận, hành động này không thể hoàn tác.",
         "WORKGROUP_VERSION": "Bạn muốn xóa {singular, select, true{phiên bản} other{{nbItems} phiên bản}} ! Cẩn thận, hành động này không thể hoàn tác.",
         "WORKGROUP_VERSION_LAST": "Đây là lần sửa đổi cuối cùng, bạn muốn xóa tập tin! Cẩn thận, hành động này không thể hoàn tác.",

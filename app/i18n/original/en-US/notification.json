@@ -16,6 +16,8 @@
         "GUEST": "You are about to remove {singular, select, true{a guest} other{{nbItems} guests}} ! Beware, this action cannot be undone.",
         "RECEIVED_SHARE": "You are about to remove {singular, select, true{a file share} other{{nbItems} files share}} ! Beware, this action cannot be undone.",
         "WORKGROUP": "You are about to remove {singular, select, true{a workgroup} other{{nbItems} workgroups}} ! Beware, this action cannot be undone.",
+        "DRIVE": "You are about to remove {singular, select, true{a drive} other{{nbItems} drives}} ! Beware, this action cannot be undone.",
+        "WORKGROUP_AND_DRIVE": "You are about to remove {nbItems} workgroups and drives ! Beware, this action cannot be undone.",
         "WORKGROUP_NODE": "You are about to remove {singular, select, true{a document or folder} other{{nbItems} documents or folders}} ! Beware, this action cannot be undone.",
         "WORKGROUP_VERSION":"You are about to remove {singular, select, true{a version} other{{nbItems} versions}} ! Beware, this action cannot be undone.",
         "WORKGROUP_VERSION_LAST": "This is the last version, you are about to delete the file! Beware, this action cannot be undone.",
