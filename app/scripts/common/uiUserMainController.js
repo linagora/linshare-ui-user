@@ -101,6 +101,7 @@
     mainVm.flowUploadService = flowUploadService;
     mainVm.removeShareDocument = removeShareDocument;
     mainVm.resizeDragNDropCtn = resizeDragNDropCtn;
+    mainVm.goToHomePage = goToHomePage;
 
     activate();
 
@@ -495,6 +496,10 @@
       var quotaBuilt = quotaService.buildQuota(quotaData);
 
       $scope.userQuotas = quotaBuilt;
+    }
+
+    function goToHomePage() {
+      $state.go(homePageService.getHomePage());
     }
   }
 })();
