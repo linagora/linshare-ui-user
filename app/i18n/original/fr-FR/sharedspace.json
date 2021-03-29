@@ -1,6 +1,7 @@
 {
   "MEMBER_TAB": {
     "ADD_MEMBER": "Ajouter des membres :",
+    "ADD_DRIVE_MEMBER": "Ajouter des membres de drive avec les rôles suivants:",
     "NUM_MEMBER": "Membres existants :",
     "TITLE": "Membres",
     "ADD": "Ajouter",
@@ -23,8 +24,8 @@
     "DRIVE_ADMIN_RIGHTS": "Droit d'administration du drive",
     "DRIVE_WRITER_RIGHTS": "Droit d'administration des groupes de travail",
     "DRIVE_READER_RIGHTS": "Droit de lecture sur les groupes de travail",
-    "DRIVE_ROLE": "Drive rôle",
-    "DEFAULT_WORKGROUP_ROLE": "Rôle de groupe de travail par défaut",
+    "DRIVE_ROLE": "Dans ce drive",
+    "DEFAULT_WORKGROUP_ROLE": "Rôle par défaut dans les groupes de travail ",
     "WORKGROUP_ROLE": "Rôle du groupe de travail",
     "MULTI_SELECT": "Edition multiple",
     "JOINING_DATE": "Date d'ajout",
@@ -37,7 +38,11 @@
       "LASTNAME": "Nom",
       "RIGHT": "Rôle"
     },
-    "MY_RIGHTS": "Mes droits"
+    "MY_RIGHTS": "Mes droits",
+    "TOOLTIPS": {
+      "DRIVE_ROLE": "Le rôle du membre pour ce drive",
+      "DEFAULT_WORKGROUP_ROLE": "Le rôle par défaut du membre pour tous les groupes de travail dans ce Drive"
+    }
   },
   "DETAILS": {
     "FULL_SIZE": "Taille totale ",

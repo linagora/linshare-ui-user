@@ -1,7 +1,8 @@
 {
   "MEMBER_TAB": {
     "ADD_MEMBER": "Add team members :",
-    "NUM_MEMBER": "Existing members :",
+    "ADD_DRIVE_MEMBER": "Add drive members with following roles:",
+    "NUM_MEMBER": "Existing members:",
     "TITLE": "Members",
     "ADD": "Add",
     "UPDATE": "Update",
@@ -24,8 +25,8 @@
     "DRIVE_ADMIN_RIGHTS": "Drive admin rights",
     "DRIVE_WRITER_RIGHTS": "Drive writer rights",
     "DRIVE_READER_RIGHTS": "Drive reader rights",
-    "DRIVE_ROLE": "Drive role",
-    "DEFAULT_WORKGROUP_ROLE": "Default workgroup role",
+    "DRIVE_ROLE": "In this drive",
+    "DEFAULT_WORKGROUP_ROLE": "Default in workgroups",
     "WORKGROUP_ROLE": "Workgroup role",
     "MULTI_SELECT": "multi-select",
     "JOINING_DATE": "Joining date",
@@ -38,7 +39,11 @@
       "LASTNAME": "Last name",
       "RIGHT": "Role"
     },
-    "MY_RIGHTS": "My rights"
+    "MY_RIGHTS": "My rights",
+    "TOOLTIPS": {
+      "DRIVE_ROLE": "The member’s role of this drive",
+      "DEFAULT_WORKGROUP_ROLE": "The member’s default role of all workgroups inside this drive"
+    }
   },
   "DETAILS": {
     "FULL_SIZE": "Full size",

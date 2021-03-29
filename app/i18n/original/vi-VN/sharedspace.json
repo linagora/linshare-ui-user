@@ -1,6 +1,7 @@
 {
   "MEMBER_TAB": {
     "ADD_MEMBER": "Thêm thành viên:",
+    "ADD_DRIVE_MEMBER": "Thêm thành viên vào ổ đĩa với quyền:",
     "NUM_MEMBER": "Thành viên hiện có:",
     "TITLE": "Các thành viên",
     "ADD": "Thêm",
@@ -24,8 +25,8 @@
     "DRIVE_ADMIN_RIGHTS": "Quyền quản trị",
     "DRIVE_WRITER_RIGHTS": "Quyền chỉnh sửa",
     "DRIVE_READER_RIGHTS": "Quyền xem",
-    "DRIVE_ROLE": "Quyền với ổ đĩa",
-    "DEFAULT_WORKGROUP_ROLE": "Quyền mặc định nhóm làm việc",
+    "DRIVE_ROLE": "Trong ổ đĩa này",
+    "DEFAULT_WORKGROUP_ROLE": "Quyền mặc định trong nhóm làm việc",
     "WORKGROUP_ROLE": "Quyền với nhóm làm việc",
     "MULTI_SELECT": "nhiều lựa chọn",
     "JOINING_DATE": "Ngày tham gia",
@@ -38,7 +39,11 @@
       "LASTNAME": "Họ",
       "RIGHT": "Vai trò"
     },
-    "MY_RIGHTS": "Quyền của tôi"
+    "MY_RIGHTS": "Quyền của tôi",
+    "TOOLTIPS": {
+      "DRIVE_ROLE": "Vai trò của thành viên trong ổ đĩa này",
+      "DEFAULT_WORKGROUP_ROLE": "Vai trò mặc định của thành viên đối với tất cả các nhóm làm việc bên trong ổ đĩa này"
+    }
   },
   "DETAILS": {
     "FULL_SIZE": "Kích thước đầy đủ",
