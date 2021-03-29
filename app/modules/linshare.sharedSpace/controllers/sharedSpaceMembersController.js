@@ -1,0 +1,308 @@
+/**
+ * sharedSpaceMembersController Controller
+ * @namespace LinShare.sharedSpace
+ */
+
+angular
+  .module('linshare.sharedSpace')
+  .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart('notification');
+  }])
+  .controller('sharedSpaceMembersController', sharedSpaceMembersController);
+
+sharedSpaceMembersController.$inject = [
+  '_',
+  '$q',
+  '$log',
+  '$scope',
+  '$translate',
+  'authenticationRestService',
+  'dialogService',
+  'lsAppConfig',
+  'toastService',
+  'sidebarService',
+  'workgroupMembersRestService',
+  'workgroupRolesRestService'
+];
+
+/**
+ * @namespace sharedSpaceMembersController
+ * @desc Application home management system controller
+ * @memberOf LinShare.sharedSpace
+ */
+function sharedSpaceMembersController(
+  _,
+  $q,
+  $log,
+  $scope,
+  $translate,
+  authenticationRestService,
+  dialogService,
+  lsAppConfig,
+  toastService,
+  sidebarService,
+  workgroupMembersRestService,
+  workgroupRolesRestService
+) {
+  const sharedSpaceMembersVm = this;
+  const DEFAULT_WORKGROUP_ROLE_ORDERS = ['ADMIN', 'WRITER', 'CONTRIBUTOR', 'READER'];
+
+  sharedSpaceMembersVm.addMember = addMember;
+  sharedSpaceMembersVm.updateRoleFilterOnCurrentMembers = updateRoleFilterOnCurrentMembers;
+  sharedSpaceMembersVm.changePropertyOrderBy = changePropertyOrderBy;
+  sharedSpaceMembersVm.removeMember = removeMember;
+  sharedSpaceMembersVm.updateMember = updateMember;
+
+  sharedSpaceMembersVm.membersRights = {};
+  sharedSpaceMembersVm.searchMemberInput = '';
+  sharedSpaceMembersVm.membersSearchFilter = {
+    role: {
+      uuid: undefined
+    }
+  };
+  sharedSpaceMembersVm.propertyFilter = '';
+  sharedSpaceMembersVm.propertyOrderBy = 'firstName';
+  sharedSpaceMembersVm.propertyOrderByAsc = true;
+  sharedSpaceMembersVm.members = [];
+
+  sharedSpaceMembersVm.$onInit = $onInit;
+
+  ////////////
+
+  function $onInit() {
+    sharedSpaceMembersVm.currentWorkGroup = sidebarService.getData().currentSelectedDocument;
+
+    workgroupRolesRestService.getList(sharedSpaceMembersVm.currentWorkGroup.current.nodeType).then(roles => {
+      const defaultConfiguredRoleIndex = roles.findIndex(role =>
+        role.name === (sharedSpaceMembersVm.currentWorkGroup.current.nodeType === 'WORK_GROUP' ?
+          lsAppConfig.defaultWorkgroupMemberRole :
+          lsAppConfig.defaultDriveMemberRole )
+      );
+
+      sharedSpaceMembersVm.membersRights = roles.sort((a, b) => {
+        return DEFAULT_WORKGROUP_ROLE_ORDERS.indexOf(a.name) - DEFAULT_WORKGROUP_ROLE_ORDERS.indexOf(b.name);
+      });
+      sharedSpaceMembersVm.memberRole = sharedSpaceMembersVm.membersRights[defaultConfiguredRoleIndex];
+    });
+
+    if (sharedSpaceMembersVm.currentWorkGroup.current.nodeType === 'DRIVE') {
+      workgroupRolesRestService.getList('WORK_GROUP').then(roles => {
+        const defaultConfiguredRoleIndex = roles.findIndex(role => role.name === lsAppConfig.defaultWorkgroupMemberRole);
+
+        sharedSpaceMembersVm.workgroupMembersRights =
+            defaultConfiguredRoleIndex === 0 || defaultConfiguredRoleIndex === -1
+              ? roles
+              : [].concat(
+                roles[defaultConfiguredRoleIndex],
+                roles.slice(0, defaultConfiguredRoleIndex),
+                roles.slice(defaultConfiguredRoleIndex + 1, roles.length)
+              );
+        sharedSpaceMembersVm.workgroupDefaultRole = sharedSpaceMembersVm.workgroupMembersRights[0];
+      });
+    }
+
+    // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
+    $scope.$watch(function() {
+      return sidebarService.getData().currentSelectedDocument.current;
+    }, function(currentWorkGroup) {
+      return $q
+        .all([
+          authenticationRestService.getCurrentUser(),
+          workgroupMembersRestService.getList(currentWorkGroup.uuid)
+        ])
+        .then(([loggedUser, members]) => {
+          const currentMember = _.find(members, {'uuid': loggedUser.uuid});
+
+          sharedSpaceMembersVm.currentWorkgroupMember = currentMember;
+          sharedSpaceMembersVm.members = members;
+
+          // TODO SideEffect Power!
+          sidebarService.addData('currentWorkgroupMember', currentMember );
+        })
+        .catch(error => {
+          $log.debug(error);
+        });
+
+    }, true);
+  }
+
+  /**
+   * @name addMember
+   * @desc Add member to members's list
+   * @param {Object} member - Member to add
+   * @param {Array<Object>} workgroupMembers - List of members of workgroup
+   * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
+   */
+  function addMember(member, workgroupMembers) {
+    var currentWorkgroupMember = workgroupMembers.filter(function(workgroupMember) {
+      return workgroupMember.account && workgroupMember.account.uuid === member.userUuid;
+    });
+
+    if (currentWorkgroupMember.length !== 0) {
+      toastService.error({
+        key: sharedSpaceMembersVm.currentWorkGroup.current.nodeType === 'WORK_GROUP' ?
+          'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_WORKGROUP' :
+          'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_DRIVE',
+        params: {
+          firstName: member.firstName,
+          lastName: member.lastName
+        }
+      });
+
+      return;
+    }
+
+    workgroupMembersRestService
+      .create(
+        formatWorkgroupMember(
+          sharedSpaceMembersVm.currentWorkGroup.current,
+          member,
+          sharedSpaceMembersVm.memberRole,
+          sharedSpaceMembersVm.workgroupDefaultRole
+        )
+      )
+      .then(function(data) {
+        workgroupMembers.push(data.plain());
+      });
+  }
+
+  /**
+   * @name changePropertyOrderBy
+   * @desc Manage order options
+   * @param {string} orderParam - which order to apply
+   * @param {jQuery.Event} $event - Event bound to the change
+   * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
+   */
+  // TODO : When a directive/service will be done for this type of orderBy, apply it here
+  function changePropertyOrderBy(orderParam, $event) {
+    sharedSpaceMembersVm.propertyOrderBy = orderParam;
+    sharedSpaceMembersVm.propertyOrderByAsc =
+        sharedSpaceMembersVm.propertyOrderBy === orderParam ? !sharedSpaceMembersVm.propertyOrderByAsc : true;
+
+    const mappingOrderFields = {
+      firstName: 'account.firstName',
+      lastName: 'account.lastName',
+      role: 'role.name'
+    };
+
+    sharedSpaceMembersVm.members = _.orderBy(sharedSpaceMembersVm.members, [mappingOrderFields[orderParam]], [sharedSpaceMembersVm.propertyOrderByAsc ? 'asc' : 'desc']);
+    angular.element('.sort-dropdown a').removeClass('selected-sorting').promise().done(function() {
+      angular.element($event.currentTarget).addClass('selected-sorting');
+    });
+  }
+
+  /**
+   * @name removeMember
+   * @desc Remove member from workgroup members's list
+   * @param {Object} member - The member to remove from workgroup members's list
+   * @param {Object} currentWorkgroup - The current workgroup from which the member is removed.
+   * @returns {Promise} Response of the server
+   * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
+   */
+  function removeMember(currentWorkgroup, member) {
+    $q.all([
+      $translate(
+        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TEXT',
+        {
+          firstName: member.firstName,
+          lastName: member.lastName,
+          workgroupName: currentWorkgroup.name
+        }
+      ),
+      $translate([
+        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE',
+        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON',
+        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON'
+      ])
+    ]).then(function(translations) {
+      const sentences = {
+        text: translations[0],
+        title: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE'],
+        buttons: {
+          cancel: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON'],
+          confirm: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON']
+        }
+      };
+
+      return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
+    }).then(confirmed => {
+      if (confirmed) {
+        return workgroupMembersRestService.remove(
+          sharedSpaceMembersVm.currentWorkGroup.current.uuid,
+          member.uuid
+        );
+      }
+
+      return $q.reject();
+    }).then(() => {
+      _.remove(sharedSpaceMembersVm.members, member);
+      toastService.success({
+        key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
+        params: {
+          firstName: member.firstName,
+          lastName: member.lastName,
+        }
+      });
+
+    }).catch(error => error && $log.error('Failed to remove member', error));
+  }
+
+  /**
+   * @name updateMember
+   * @desc Update member
+   * @param {Object} member - Member to update
+   * @param {Role} role - A {@link Role} object.
+   * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
+   */
+  function updateMember(member, role, isNestedRole) {
+    //TODO Nice side-effect here!
+    if (isNestedRole) {
+      member.nestedRole = role;
+    } else {
+      member.role = role;
+    }
+
+    workgroupMembersRestService.update(
+      formatWorkgroupMember(
+        sharedSpaceMembersVm.currentWorkGroup.current,
+        member,
+        member.role,
+        member.nestedRole
+      )
+    );
+  }
+
+  /**
+   * @name formatWorkgroupMember
+   * @desc Update member
+   * @param {Object} workgroup - Current workgroup
+   * @param {Object} member - Member to update
+   * @param {Role} role - A {@link Role} object.
+   * @returns {WorkgroupMember} A {@link WorkgroupMember} object.
+   * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
+   */
+  function formatWorkgroupMember(workgroup, member, role, nestedRole) {
+    return {
+      role: {
+        uuid: role.uuid
+      },
+      node: {
+        uuid: sharedSpaceMembersVm.currentWorkGroup.current.uuid
+      },
+      account: {
+        uuid: member.account ? member.account.uuid : member.userUuid
+      },
+      nestedRole: nestedRole && nestedRole.uuid && {
+        uuid: nestedRole.uuid
+      },
+      type: nestedRole && 'DRIVE'
+    };
+  }
+
+  // TODO DOC
+  function updateRoleFilterOnCurrentMembers(role) {
+    sharedSpaceMembersVm.membersSearchFilter.role.uuid = sharedSpaceMembersVm.membersSearchFilter.role.uuid === role.uuid ?
+      undefined :
+      sharedSpaceMembersVm.membersSearchFilter.role.uuid = role.uuid;
+  }
+}

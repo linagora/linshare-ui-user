@@ -537,7 +537,7 @@ function WorkgroupNodesController(
    * @memberOf LinShare.sharedSpace.WorkgroupNodesController
    */
   function getNodeDetails(nodeItem) {
-    // TODO : change the watcher method in activate() of workgroupMembersController, then do it better
+    // TODO : change the watcher method in activate() of sharedSpaceMembersController, then do it better
     $scope.mainVm.sidebar.setContent(workgroupNodesVm.workgroupNode);
 
     return $q

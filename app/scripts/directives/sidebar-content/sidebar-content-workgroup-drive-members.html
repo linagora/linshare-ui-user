@@ -1,6 +1,6 @@
 <div
   class="flex-column-content lv-body stop-propagate contacts-list-block-scroll"
-  data-ng-controller="WorkGroupMembersController as workgroupMemberVm"
+  data-ng-controller="sharedSpaceMembersController as sharedSpaceMembersVm"
 >
   <div class="lv-item">
     <div class="card col-xs-12" id="content-ctn-sidebar">
@@ -44,18 +44,18 @@
                   class="btn waves-effect"
                   uib-dropdown-toggle
                 >
-                  <span>{{"MEMBER_TAB." + workgroupMemberVm.memberRole.name | translate}}</span>
+                  <span>{{"MEMBER_TAB." + sharedSpaceMembersVm.memberRole.name | translate}}</span>
                   <span class="caret"></span>
                 </button>
                 <ul
                   uib-dropdown-menu
                   class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown"
                 >
-                  <li data-ng-repeat="role in workgroupMemberVm.membersRights">
+                  <li data-ng-repeat="role in sharedSpaceMembersVm.membersRights">
                     <a
                       href=""
-                      data-ng-click="workgroupMemberVm.memberRole = role"
-                      data-ng-class="{'active-check': workgroupMemberVm.memberRole.uuid === role.uuid }"
+                      data-ng-click="sharedSpaceMembersVm.memberRole = role"
+                      data-ng-class="{'active-check': sharedSpaceMembersVm.memberRole.uuid === role.uuid }"
                     >
                       {{"MEMBER_TAB." + role.name | translate}}
                     </a>
@@ -88,18 +88,18 @@
                   class="btn waves-effect"
                   uib-dropdown-toggle
                 >
-                  <span>{{"MEMBER_TAB." + workgroupMemberVm.workgroupDefaultRole.name | translate}}</span>
+                  <span>{{"MEMBER_TAB." + sharedSpaceMembersVm.workgroupDefaultRole.name | translate}}</span>
                   <span class="caret"></span>
                 </button>
                 <ul
                   uib-dropdown-menu
                   class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown"
                 >
-                  <li data-ng-repeat="role in workgroupMemberVm.workgroupMembersRights">
+                  <li data-ng-repeat="role in sharedSpaceMembersVm.workgroupMembersRights">
                     <a
                       href=""
-                      data-ng-click="workgroupMemberVm.workgroupDefaultRole = role"
-                      data-ng-class="{'active-check': workgroupMemberVm.workgroupDefaultRole.uuid === role.uuid }"
+                      data-ng-click="sharedSpaceMembersVm.workgroupDefaultRole = role"
+                      data-ng-class="{'active-check': sharedSpaceMembersVm.workgroupDefaultRole.uuid === role.uuid }"
                     >
                       {{"MEMBER_TAB." + role.name | translate}}
                     </a>
@@ -113,8 +113,8 @@
               ls-autocomplete-user="THREAD_MEMBERS"
               data-with-email="false"
               data-ls-complete-thread-uuid="{{mainVm.sidebar.getData().currentSelectedDocument.current.uuid}}"
-              data-on-select-function="workgroupMemberVm.addMember"
-              data-selected-users-list="workgroupMemberVm.members"
+              data-on-select-function="sharedSpaceMembersVm.addMember"
+              data-selected-users-list="sharedSpaceMembersVm.members"
               data-with-guest="true"
             >
             </div>
@@ -137,7 +137,7 @@
         <div class="custom-header-list">
           <h2 class="pull-left headerSubCtn existing-member">
             <span translate>MEMBER_TAB.NUM_MEMBER</span>
-            <span>{{workgroupMemberVm.members.length}}</span>
+            <span>{{sharedSpaceMembersVm.members.length}}</span>
             <span
               class="pull-right actions members-options-toggle"
               data-ng-click="advancedMemberSearchOptions = !advancedMemberSearchOptions"
@@ -160,7 +160,7 @@
                   type="text"
                   class="form-control"
                   autocomplete="off"
-                  data-ng-model="workgroupMemberVm.searchMemberInput"
+                  data-ng-model="sharedSpaceMembersVm.searchMemberInput"
                   placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER_EXISTING_MEMBERS' | translate}}"
                 >
               </div>
@@ -190,17 +190,17 @@
                     <ul class="dropdown-menu dm-icon sort-menu">
                       <li role="menuitem">
                         <a
-                          data-ng-click="workgroupMemberVm.changePropertyOrderBy('firstName', $event)"
+                          data-ng-click="sharedSpaceMembersVm.changePropertyOrderBy('firstName', $event)"
                           class="selected-sorting"
                         >
                           <span class="caret-area">
                             <i
-                              data-ng-show="!workgroupMemberVm.propertyOrderByAsc"
+                              data-ng-show="!sharedSpaceMembersVm.propertyOrderByAsc"
                               class="zmdi zmdi-caret-down"
                             >
                             </i>
                             <i
-                              data-ng-show="workgroupMemberVm.propertyOrderByAsc"
+                              data-ng-show="sharedSpaceMembersVm.propertyOrderByAsc"
                               class="zmdi zmdi-caret-up"
                             >
                             </i>
@@ -209,15 +209,15 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a data-ng-click="workgroupMemberVm.changePropertyOrderBy('lastName', $event)">
+                        <a data-ng-click="sharedSpaceMembersVm.changePropertyOrderBy('lastName', $event)">
                           <span class="caret-area">
                             <i
-                              data-ng-show="!workgroupMemberVm.propertyOrderByAsc"
+                              data-ng-show="!sharedSpaceMembersVm.propertyOrderByAsc"
                               class="zmdi zmdi-caret-down"
                             >
                             </i>
                             <i
-                              data-ng-show="workgroupMemberVm.propertyOrderByAsc"
+                              data-ng-show="sharedSpaceMembersVm.propertyOrderByAsc"
                               class="zmdi zmdi-caret-up"
                             >
                             </i>
@@ -226,15 +226,15 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a data-ng-click="workgroupMemberVm.changePropertyOrderBy('role', $event)">
+                        <a data-ng-click="sharedSpaceMembersVm.changePropertyOrderBy('role', $event)">
                           <span class="caret-area">
                             <i
-                              data-ng-show="!workgroupMemberVm.propertyOrderByAsc"
+                              data-ng-show="!sharedSpaceMembersVm.propertyOrderByAsc"
                               class="zmdi zmdi-caret-down"
                             >
                             </i>
                             <i
-                              data-ng-show="workgroupMemberVm.propertyOrderByAsc"
+                              data-ng-show="sharedSpaceMembersVm.propertyOrderByAsc"
                               class="zmdi zmdi-caret-up"
                             >
                             </i>
@@ -248,13 +248,13 @@
                     <p>{{"MEMBER_TAB.FILTER_BY" | translate}}</p>
                     <ul
                       class="dropdown-menu dm-icon filter-menu"
-                      data-ng-repeat="role in workgroupMemberVm.membersRights"
+                      data-ng-repeat="role in sharedSpaceMembersVm.membersRights"
                     >
                       <li>
                         <a
                           href=""
-                          data-ng-class="{'active-check': workgroupMemberVm.membersSearchFilter.role.uuid === role.uuid}"
-                          data-ng-click="workgroupMemberVm.updateRoleFilterOnCurrentMembers(role)"
+                          data-ng-class="{'active-check': sharedSpaceMembersVm.membersSearchFilter.role.uuid === role.uuid}"
+                          data-ng-click="sharedSpaceMembersVm.updateRoleFilterOnCurrentMembers(role)"
                         >
                           {{"MEMBER_TAB." + role.name + "_RIGHTS" | translate}}
                         </a>
@@ -269,8 +269,8 @@
         <div class="existing-member-list-ctn">
           <div
             class="flex-ctn"
-            data-ng-repeat="workgroupMember in workgroupMemberVm.members |
-            filter: workgroupMemberVm.searchMemberInput | filter: workgroupMemberVm.membersSearchFilter | orderBy: '-' "
+            data-ng-repeat="workgroupMember in sharedSpaceMembersVm.members |
+            filter: sharedSpaceMembersVm.searchMemberInput | filter: sharedSpaceMembersVm.membersSearchFilter | orderBy: '-' "
           >
             <div class="item-l">
               <span class="first-letter text-uppercase">
@@ -322,20 +322,20 @@
                   class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown"
                 >
                   <li class="dropdown-menu-section-title">MEMBER_TAB.DRIVE_ROLE</li>
-                  <li data-ng-repeat="role in workgroupMemberVm.membersRights">
+                  <li data-ng-repeat="role in sharedSpaceMembersVm.membersRights">
                     <a
                       href=""
-                      data-ng-click="workgroupMemberVm.updateMember(workgroupMember, role)"
+                      data-ng-click="sharedSpaceMembersVm.updateMember(workgroupMember, role)"
                       data-ng-class="{'active-check': workgroupMember.role.uuid === role.uuid }"
                     >
                       {{"MEMBER_TAB." + role.name | translate}}
                     </a>
                   </li>
                   <li class="dropdown-menu-section-title">MEMBER_TAB.WORKGROUP_ROLE</li>
-                  <li data-ng-repeat="role in workgroupMemberVm.workgroupMembersRights">
+                  <li data-ng-repeat="role in sharedSpaceMembersVm.workgroupMembersRights">
                     <a
                       href=""
-                      data-ng-click="workgroupMemberVm.updateMember(workgroupMember, role, true)"
+                      data-ng-click="sharedSpaceMembersVm.updateMember(workgroupMember, role, true)"
                       data-ng-class="{'active-check': workgroupMember.nestedRole.uuid === role.uuid }"
                     >
                       {{"MEMBER_TAB." + role.name | translate}}
@@ -348,7 +348,7 @@
                 mainVm.sidebar.getData().currentSelectedDocument.current.uuid
                 ].MEMBER.DELETE || mainVm.sidebar.getData().permissions.MEMBER.DELETE"
                 href="javascript:void(0)"
-                data-ng-click="workgroupMemberVm.removeMember(
+                data-ng-click="sharedSpaceMembersVm.removeMember(
                 mainVm.sidebar.getData().currentSelectedDocument.current, workgroupMember
                 )"
                 title="{{'MEMBER_TAB.REMOVE_TEAM_MEMBER' | translate}}"
@@ -364,7 +364,7 @@
   <div
     data-ng-if="mainVm.sidebar.getData().functionalities.contactsList"
     create-contacts-list
-    create-contacts-list-contacts-to-be-added="workgroupMemberVm.members"
+    create-contacts-list-contacts-to-be-added="sharedSpaceMembersVm.members"
   >
   </div>
 </div>

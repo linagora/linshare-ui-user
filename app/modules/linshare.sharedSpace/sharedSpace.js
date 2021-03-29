@@ -16,7 +16,7 @@ require('./constants');
 require('./controllers/SharedSpaceController');
 require('./controllers/WorkgroupNodesController');
 require('./controllers/WorkgroupVersionsController');
-require('./controllers/workGroupMembersController');
+require('./controllers/sharedSpaceMembersController');
 require('./filters/canDeleteNodesFilter');
 require('./filters/canDeleteSharedSpacesFilter');
 require('./services/workGroupMemberRestService');

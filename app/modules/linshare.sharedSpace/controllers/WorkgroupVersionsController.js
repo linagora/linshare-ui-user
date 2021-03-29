@@ -266,7 +266,7 @@
     }
 
     function getNodeDetails(nodeItem) {
-      // TODO : change the watcher method in activate() of workgroupMembersController, then do it better
+      // TODO : change the watcher method in activate() of sharedSpaceMembersController, then do it better
       $scope.mainVm.sidebar.setContent(workgroupVersionsVm.workgroupNode);
 
       return $q
@@ -535,7 +535,7 @@
         removedVersions = _.map(versions, function(version) {
           delete version.versionNumber;
           delete version.isDifferentNameThanPrevious;
-          
+
           return version.remove();
         });
       }
