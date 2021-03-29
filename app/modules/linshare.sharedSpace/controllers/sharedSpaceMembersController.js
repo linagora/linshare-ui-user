@@ -204,8 +204,8 @@ function sharedSpaceMembersController(
       $translate(
         'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TEXT',
         {
-          firstName: member.firstName,
-          lastName: member.lastName,
+          firstName: member.account.firstName,
+          lastName: member.account.lastName,
           workgroupName: currentWorkgroup.name
         }
       ),
@@ -214,37 +214,34 @@ function sharedSpaceMembersController(
         'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON',
         'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON'
       ])
-    ]).then(function(translations) {
-      const sentences = {
-        text: translations[0],
-        title: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE'],
-        buttons: {
-          cancel: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON'],
-          confirm: translations[1]['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON']
-        }
-      };
+    ])
+      .then(([text, translations]) => dialogService.dialogConfirmation(
+        {
+          text,
+          title: translations['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE'],
+          buttons: {
+            cancel: translations['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON'],
+            confirm: translations['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON']
+          }
+        },
+        dialogService.dialogType.warning
+      ))
+      .then(confirmed => !confirmed ? $q.reject() : workgroupMembersRestService.remove(
+        sharedSpaceMembersVm.currentWorkGroup.current.uuid,
+        member.uuid
+      ))
+      .then(() => {
+        _.remove(sharedSpaceMembersVm.members, member);
 
-      return dialogService.dialogConfirmation(sentences, dialogService.dialogType.warning);
-    }).then(confirmed => {
-      if (confirmed) {
-        return workgroupMembersRestService.remove(
-          sharedSpaceMembersVm.currentWorkGroup.current.uuid,
-          member.uuid
-        );
-      }
-
-      return $q.reject();
-    }).then(() => {
-      _.remove(sharedSpaceMembersVm.members, member);
-      toastService.success({
-        key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
-        params: {
-          firstName: member.firstName,
-          lastName: member.lastName,
-        }
-      });
-
-    }).catch(error => error && $log.error('Failed to remove member', error));
+        toastService.success({
+          key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
+          params: {
+            firstName: member.acount.firstName,
+            lastName: member.account.lastName,
+          }
+        });
+      })
+      .catch(error => error && $log.error('Failed to remove member', error));
   }
 
   /**
