@@ -177,7 +177,7 @@
             </div>
           </div>
         </div>
-        <div data-ng-show="quickShareVm.shareObject.enableUSDA.enable && quickShareVm.shareObject.enableUSDA.canOverride"
+        <div ng-if="quickShareVm.shareObject.enableUSDA.enable && quickShareVm.shareObject.enableUSDA.canOverride"
             class="col-xs-12 field-ctn">
           <div class="fg-line">
             <div class="form-inline">
@@ -191,7 +191,7 @@
             </div>
           </div>
           <div
-            ng-show="
+            ng-if="
               quickShareVm.shareObject.enableUSDA.value &&
               quickShareVm.shareObject.enableUSDA.enable &&
               quickShareVm.shareObject.enableUSDA.canOverride &&
