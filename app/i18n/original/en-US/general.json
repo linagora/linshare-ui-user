@@ -247,7 +247,8 @@
     "SEND": "Send",
     "SHARE": "Share",
     "STOP": "Stop",
-    "CREATE": "Create"
+    "CREATE": "Create",
+    "FORWARD": "Forward"
   },
   "NO_ACTION_AVAILABLE": "No action available",
   "PENDING_UPLOADS": "pending",

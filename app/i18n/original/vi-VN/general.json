@@ -246,7 +246,8 @@
     "SEND": "Gửi",
     "SHARE": "Chia sẻ",
     "STOP": "Dừng",
-    "CREATE": "Tạo"
+    "CREATE": "Tạo",
+    "FORWARD": "Chuyển tiếp"
   },
   "NO_ACTION_AVAILABLE": "Không có hành động nào",
   "PENDING_UPLOADS": "đang chờ xử lý",
