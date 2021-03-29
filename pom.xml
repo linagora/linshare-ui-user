@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.linagora.linshare</groupId>
   <artifactId>linshare-ui-user</artifactId>
-  <version>FB-90-SNAPSHOT</version>
+  <version>0.0.0-FB-90-SNAPSHOT</version>
   <name>linshare-ui-user</name>
   <url>http://linshare.org</url>
   <build>
