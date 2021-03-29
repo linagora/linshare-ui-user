@@ -18,7 +18,7 @@
                 label="{{'INFORMATION_TAB.TITLE' | translate}}"
                 class="col-xs-4 noPadding">
           <md-content>
-            <div data-ng-include="'directives/sidebar-content/sidebar-content-workgroup-details.html'"></div>
+            <div ng-include="'directives/sidebar-content/sidebar-content-sharedspace-details.html'"></div>
           </md-content>
         </md-tab>
         <md-tab
@@ -33,7 +33,7 @@
             class="md-padding"
             data-ng-include="mainVm.sidebar.getData().currentSelectedDocument.current.nodeType === 'WORK_GROUP' ?
               'directives/sidebar-content/sidebar-content-workgroup-members.html'
-              : 'directives/sidebar-content/sidebar-content-workgroup-drive-members.html'"
+              : 'directives/sidebar-content/sidebar-content-drive-members.html'"
           >
           </md-content>
         </md-tab>

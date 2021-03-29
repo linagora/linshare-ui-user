@@ -52,9 +52,9 @@
     $templateCache.put('directives/sidebar-content/sidebar-content-share-details.html', require('./sidebar-content-share-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-share-recipients-list.html', require('./sidebar-content-share-recipients-list.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-share.html', require('./sidebar-content-share.html'));
-    $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-details.html', require('./sidebar-content-workgroup-details.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-sharedspace-details.html', require('./sidebar-content-sharedspace-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-members.html', require('./sidebar-content-workgroup-members.html'));
-    $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-drive-members.html', require('./sidebar-content-workgroup-drive-members.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-drive-members.html', require('./sidebar-content-drive-members.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-node-details.html', require('./sidebar-content-workgroup-node-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup-node.html', require('./sidebar-content-workgroup-node.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-workgroup.html', require('./sidebar-content-workgroup.html'));
