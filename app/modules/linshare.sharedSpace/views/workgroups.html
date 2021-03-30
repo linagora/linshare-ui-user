@@ -10,7 +10,7 @@
             ng-if="vm.functionalities.workgroup || vm.functionalities.drive"
             translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}" is-open="isOpenNew" data-ng-class="{
             'open':isOpenNew,
-            'disabled': !(vm.canCreate && vm.functionalities.workgroup)
+            'disabled': !vm.canCreate || (!vm.functionalities.workgroup && !vm.functionalities.drive)
             }">
             <a class="add-menu-group" uib-dropdown-toggle>
               <i class="zmdi zmdi-plus"></i>
@@ -26,7 +26,7 @@
                 </a>
               </li>
 
-              <li role="menuitem">
+              <li role="menuitem" ng-if="!vm.isDriveState">
                 <a ng-class="{'disabled': !(vm.canCreate && vm.functionalities.drive)}"
                   ng-click="vm.createSharedSpace('DRIVE')">
                   <i ng-class="[vm.NODE_TYPE_PROPERTIES.DRIVE.icon, {'disabled': !(vm.canCreate && vm.functionalities.drive)}]"></i>
@@ -36,7 +36,7 @@
             </ul>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
-            <div class="left-arrow actions disabled">
+            <div class="left-arrow actions" ng-class="{'disabled': !vm.isDriveState}" ng-click="vm.goToPreviousFolder()">
               <a><i class="ls-previous-caret"></i></a>
             </div>
             <div id="root-level">
@@ -122,7 +122,7 @@
                   </div>
                 </div>
               </div>
-              <div class="actions">
+              <div class="actions" ng-if="vm.tableParams">
                 <a uib-dropdown dropdown-append-to-body auto-close="outsideClick" is-open="isOpenFilter"
                   data-ng-class="{'open':isOpenFilter}" class="input-group-addon last clickable dropdown"
                   x-ng-click="advancedFilterBool = !advancedFilterBool" uib-dropdown-toggle
@@ -142,7 +142,11 @@
         </div>
       </div>
 
-      <div id="drop-area">
+
+      <div id="loading-bar-spinner" ng-if="vm.status === 'loading'">
+        <div class="spinner-icon"></div>
+      </div>
+      <div id="drop-area" ng-if="vm.status === 'loaded'">
         <div id="top-search-wrap">
           <i id="top-search-close" x-ng-click="vm.toggleSearchState()">&times;</i>
           <input type="text" id="searchInMobileFiles" class="form-control ng-pristine ng-untouched ng-valid"
@@ -235,12 +239,12 @@
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
               <span class="grey-clr bg-info-icon">
-                <span class="ls-workgroup"></span>
+                <span ng-class="vm.isDriveState ? vm.NODE_TYPE_PROPERTIES.DRIVE.icon : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon"></span>
               </span>
             </div>
             <div class="dnd-txt-content">
-              <h1 translate>BACKGROUND_WORKGROUP_TITLE_MSG</h1>
-              <p translate>BACKGROUND_WORKGROUP_MSG</p>
+              <h1 translate>{{vm.isDriveState ? vm.NODE_TYPE_PROPERTIES.DRIVE.backgroundTitle : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.backgroundTitle }}</h1>
+              <p translate>{{vm.isDriveState ? vm.NODE_TYPE_PROPERTIES.DRIVE.backgroundMessage : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.backgroundMessage}}</p>
             </div>
           </div>
         </div>
@@ -273,7 +277,7 @@
                 data-document-file="documentFile" data-current-selected-Document="vm.currentSelectedDocument"
                 data-ng-click="vm.showItemDetails(documentFile.uuid)"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()"
-                x-ng-dblclick="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)"
+                x-ng-dblclick="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name, documentFile.nodeType)"
                 check-table-height>
                 <td data-header="'favoritsheader.html'" ng-if="::linshareModeProduction == false"
                   class="hidden-xs col-1 set-content-right thumb-type-item col-favorits" data-title=""

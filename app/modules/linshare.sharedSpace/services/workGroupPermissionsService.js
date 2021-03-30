@@ -86,7 +86,7 @@
       const getPermissionsMemoize = _.memoize(workgroupRolesRestService.getPermissions);
       const workgroupsRole = _.map(workgroups, function(workgroup) {
         return {
-          roleUuid: workgroup.role.uuid,
+          roleUuid: workgroup.role && workgroup.role.uuid,
           nodeUuid: workgroup.uuid
         };
       });
@@ -145,7 +145,7 @@
             }, {});
 
           accumulator[workgroupUuid] = resourcesActions;
-          
+
           return accumulator;
 
           //TODO: Minifier is **SHIT**, can't minify awesome syntax!

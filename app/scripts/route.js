@@ -186,18 +186,11 @@
         url: '/list',
         template: require('../modules/linshare.sharedSpace/views/workgroups.html'),
         controller: 'SharedSpaceController as vm',
-        resolve: {
-          workgroups: function(workgroupRestService) {
-            return workgroupRestService.getList(true);
-          },
-          workgroupsPermissions: function(workgroups, workgroupPermissionsService) {
-            return workgroupPermissionsService
-              .getWorkgroupsPermissions(workgroups)
-              .then(function(workgroupsPermissions) {
-                return workgroupPermissionsService.formatPermissions(workgroupsPermissions);
-              });
-          }
-        }
+      })
+      .state('sharedspace.drive', {
+        url: '/drive/:driveUuid',
+        template: require('../modules/linshare.sharedSpace/views/workgroups.html'),
+        controller: 'SharedSpaceController as vm',
       })
       .state('sharedspace.workgroups', {
         abstract: true,

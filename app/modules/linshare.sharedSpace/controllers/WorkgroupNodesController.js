@@ -124,6 +124,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.canCopyNodeToPersonalSpace = user.canUpload;
   workgroupNodesVm.canDownloadSelectedFiles = canDownloadSelectedFiles;
   workgroupNodesVm.selectMultipleWithAtLeastOneFolder = selectMultipleWithAtLeastOneFolder;
+  workgroupNodesVm.driveUuid = $state.params && $state.params.driveUuid;
 
   workgroupNodesVm.$onInit = $onInit;
 
@@ -655,15 +656,19 @@ function WorkgroupNodesController(
   }
 
   /**
-     * @name goToPreviousFolder
-     * @desc Enter inside the parent folder or Workgroups page if current folder is root
-     * @param {boolean} goToWorkgroupPage - Go to Workgroups page
-     * @param {object} folder - Folder where to enter
-     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-     */
+   * @name goToPreviousFolder
+   * @desc Enter inside the parent folder or Workgroups page if current folder is root
+   * @param {boolean} goToWorkgroupPage - Go to Workgroups page
+   * @param {object} folder - Folder where to enter
+   * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+   */
   function goToPreviousFolder(goToWorkgroupPage, folder) {
     if (goToWorkgroupPage) {
-      $state.go('sharedspace.all');
+      if (workgroup && workgroup.parentUuid && $state.current.name === 'sharedspace.workgroups.root') {
+        $state.go('sharedspace.drive', {driveUuid: workgroup.parentUuid});
+      } else {
+        $state.go('sharedspace.all');
+      }
     } else {
       workgroupNodesVm.goToFolder(folder, true);
     }

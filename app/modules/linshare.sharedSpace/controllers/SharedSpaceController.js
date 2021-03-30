@@ -19,26 +19,23 @@ angular.module('linshare.sharedSpace')
     itemUtilsService,
     lsAppConfig,
     lsErrorCode,
-    NgTableParams,
     toastService,
     workgroupPermissionsService,
     workgroupRestService,
-    workgroups,
-    workgroupsPermissions
+    tableParamsService
   ) {
     const sharedSpaceVm = this;
+    let sharedSpaces, sharedSpacePermissions;
 
     sharedSpaceVm.$onInit = $onInit;
 
     function $onInit() {
       sharedSpaceVm.functionalities = {};
-      sharedSpaceVm.permissions = workgroupsPermissions;
       sharedSpaceVm.canDeleteSharedSpaces = false;
       sharedSpaceVm.canCreate = true;
       sharedSpaceVm.lsAppConfig = lsAppConfig;
       sharedSpaceVm.currentSelectedDocument = {};
-      sharedSpaceVm.itemsList = workgroups;
-      sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
+
       sharedSpaceVm.selectedDocuments = [];
       sharedSpaceVm.paramFilter = {name: ''};
       sharedSpaceVm.currentWorkgroupMember = {};
@@ -61,74 +58,110 @@ angular.module('linshare.sharedSpace')
       sharedSpaceVm.loadSidebarContent = loadSidebarContent;
       sharedSpaceVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
       sharedSpaceVm.canRenameSharedSpace = canRenameSharedSpace;
+      sharedSpaceVm.goToPreviousFolder = goToPreviousFolder;
+      sharedSpaceVm.driveUuid = $state.params && $state.params.driveUuid;
+      sharedSpaceVm.isDriveState = $state.current.name === 'sharedspace.drive';
+      sharedSpaceVm.status = 'loading';
 
-      sharedSpaceVm.tableParams = new NgTableParams({
-        page: 1,
-        sorting: {modificationDate: 'desc'},
-        count: 20,
-        filter: sharedSpaceVm.paramFilter
-      }, {
-        getData: params => {
-          var filteredData =
-            params.filter() ? $filter('filter')(sharedSpaceVm.itemsList, params.filter()) : sharedSpaceVm.itemsList;
-          var workgroups = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+      fetchSharedSpacesAndPermissions().then(() => {
+        sharedSpaceVm.itemsList = sharedSpaces;
+        sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
+        sharedSpaceVm.permissions = sharedSpacePermissions;
+        sharedSpaceVm.status = 'loaded';
 
-          params.total(workgroups.length);
-          params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-
-          return (workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
+        initTableParams()
+          .then(translateAndInitNodeProperties)
+          .then(fetchFunctionalities)
+          .then(initFabButtons);
       });
+    }
 
-      $translate(['ACTION.NEW_WORKGROUP', 'ACTION.NEW_DRIVE'])
-        .then(translations => {
-          sharedSpaceVm.NODE_TYPE_PROPERTIES = {
-            WORK_GROUP: {
-              creationDialogTitle: 'CREATE_NEW_WORKGROUP',
-              icon: 'ls-workgroup',
-              defaultName: translations['ACTION.NEW_WORKGROUP']
-            },
-            DRIVE: {
-              creationDialogTitle: 'CREATE_NEW_DRIVE',
-              icon: 'ls-drive',
-              defaultName: translations['ACTION.NEW_DRIVE']
-            }
-          };
-        }).then(() => {
-          functionalityRestService.getAll().then(functionalities => {
-            sharedSpaceVm.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
-            sharedSpaceVm.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
-            sharedSpaceVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
-            sharedSpaceVm.functionalities.drive = functionalities.DRIVE.enable && functionalities.DRIVE__CREATION_RIGHT.enable;
+    function fetchSharedSpacesAndPermissions () {
+      let listWorkgroupsPromise;
 
-            if (sharedSpaceVm.functionalities.workgroup || sharedSpaceVm.functionalities.drive) {
-              sharedSpaceVm.fabButton = {
-                toolbar: {
-                  activate: true,
-                  label: 'MENU_TITLE.SHARED_SPACE'
-                },
-                actions: []
-              };
+      if (sharedSpaceVm.isDriveState && sharedSpaceVm.driveUuid) {
+        listWorkgroupsPromise = workgroupRestService.getList(true, sharedSpaceVm.driveUuid);
+      } else {
+        listWorkgroupsPromise = workgroupRestService.getList(true);
+      }
 
-              if (sharedSpaceVm.functionalities.workgroup) {
-                sharedSpaceVm.fabButton.actions.push({
-                  action: () => sharedSpaceVm.createSharedSpace('WORK_GROUP'),
-                  label: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.defaultName,
-                  icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon,
-                });
-              }
+      return listWorkgroupsPromise.then(data => {
+        sharedSpaces = data;
 
-              if (sharedSpaceVm.functionalities.drive) {
-                sharedSpaceVm.fabButton.actions.push({
-                  action: () => sharedSpaceVm.createSharedSpace('DRIVE'),
-                  label: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.defaultName,
-                  icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.icon,
-                });
-              }
-            }
-          });
+        return workgroupPermissionsService
+          .getWorkgroupsPermissions(sharedSpaces)
+          .then(permissions => workgroupPermissionsService.formatPermissions(permissions));
+      }).then(formattedPermissions => {
+        sharedSpacePermissions = formattedPermissions;
+      });
+    }
+
+    function initTableParams () {
+      return tableParamsService.initTableParams(sharedSpaceVm.itemsList, sharedSpaceVm.paramFilter)
+        .then(() => {
+          sharedSpaceVm.tableParamsService = tableParamsService;
+          sharedSpaceVm.tableParams = tableParamsService.getTableParams();
         });
     }
+
+    function translateAndInitNodeProperties () {
+      return $translate(['ACTION.NEW_WORKGROUP', 'ACTION.NEW_DRIVE']).then(translations => {
+        sharedSpaceVm.NODE_TYPE_PROPERTIES = {
+          WORK_GROUP: {
+            creationDialogTitle: 'CREATE_NEW_WORKGROUP',
+            icon: 'ls-workgroup',
+            defaultName: translations['ACTION.NEW_WORKGROUP'],
+            backgroundTitle: 'BACKGROUND_SHARED_SPACE_TITLE_MSG',
+            backgroundMessage: 'BACKGROUND_SHARED_SPACE_MSG'
+          },
+          DRIVE: {
+            creationDialogTitle: 'CREATE_NEW_DRIVE',
+            icon: 'ls-drive',
+            defaultName: translations['ACTION.NEW_DRIVE'],
+            backgroundTitle: 'BACKGROUND_WORKGROUP_TITLE_MSG',
+            backgroundMessage: 'BACKGROUND_WORKGROUP_MSG'
+          }
+        };
+      });
+    }
+
+    function fetchFunctionalities () {
+      return functionalityRestService.getAll().then(functionalities => {
+        sharedSpaceVm.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
+        sharedSpaceVm.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
+        sharedSpaceVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
+        sharedSpaceVm.functionalities.drive = functionalities.DRIVE.enable && functionalities.DRIVE__CREATION_RIGHT.enable;
+      });
+    }
+
+    function initFabButtons () {
+      if (sharedSpaceVm.functionalities.workgroup || sharedSpaceVm.functionalities.drive) {
+        sharedSpaceVm.fabButton = {
+          toolbar: {
+            activate: true,
+            label: sharedSpaceVm.isDriveState ? 'MENU_TITLE.DRIVE' : 'MENU_TITLE.SHARED_SPACE'
+          },
+          actions: []
+        };
+
+        if (sharedSpaceVm.functionalities.workgroup) {
+          sharedSpaceVm.fabButton.actions.push({
+            action: () => sharedSpaceVm.createSharedSpace('WORK_GROUP'),
+            label: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.defaultName,
+            icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon,
+          });
+        }
+
+        if (sharedSpaceVm.functionalities.drive && !sharedSpaceVm.isDriveState) {
+          sharedSpaceVm.fabButton.actions.push({
+            action: () => sharedSpaceVm.createSharedSpace('DRIVE'),
+            label: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.defaultName,
+            icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.icon,
+          });
+        }
+      }
+    }
+
 
     function createSharedSpace(nodeType) {
       if (sharedSpaceVm.canCreate) {
@@ -148,11 +181,11 @@ angular.module('linshare.sharedSpace')
         popDialogAndCreateFolder(sharedSpace, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].creationDialogTitle).then(created => {
           sharedSpaceVm.itemsList.push(created);
 
-          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
-        }).then(workgroupsPermissions => {
+          return workgroupPermissionsService.getWorkgroupsPermissions(sharedSpaces);
+        }).then(sharedSpacePermissions => {
           Object.assign(
             sharedSpaceVm.permissions,
-            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
+            workgroupPermissionsService.formatPermissions(sharedSpacePermissions)
           );
         }).finally(() => {
           sharedSpaceVm.tableParams.reload();
@@ -210,16 +243,22 @@ angular.module('linshare.sharedSpace')
       $scope.mainVm.sidebar.show();
     };
 
-    function goToSharedSpaceTarget(event, workgroupUuid, name) {
+    function goToSharedSpaceTarget(event, uuid, name, nodeType) {
       event.stopPropagation();
-      var element = angular.element($('td[uuid=' + workgroupUuid + ']').find('.file-name-disp'));
+      var element = angular.element($('td[uuid=' + uuid + ']').find('.file-name-disp'));
 
       if (element.attr('contenteditable') === 'false') {
-        $state.go('sharedspace.workgroups.root', {workgroupUuid: workgroupUuid, workgroupName: name.trim()});
+        if (nodeType === 'WORK_GROUP') {
+          $state.go('sharedspace.workgroups.root', {workgroupUuid: uuid, workgroupName: name.trim()});
+        } else if (nodeType === 'DRIVE') {
+          $state.go('sharedspace.drive', {driveUuid: uuid});
+        }
       }
     }
 
-
+    function goToPreviousFolder() {
+      $state.go('sharedspace.all');
+    }
 
     function selectDocumentsOnCurrentPage(data, page, selectFlag) {
       var currentPage = page || sharedSpaceVm.tableParams.page();
@@ -330,7 +369,9 @@ angular.module('linshare.sharedSpace')
           }
         })
         .then(quota => {
-          sharedSpaceVm.currentSelectedDocument.quotas = Object.assign({}, quota);
+          if (quota) {
+            sharedSpaceVm.currentSelectedDocument.quotas = Object.assign({}, quota);
+          }
 
           if (loadAction) {
             openMemberTab(memberTab);
@@ -375,13 +416,13 @@ angular.module('linshare.sharedSpace')
         .then(newItemDetailsWithRole => {
           item = _.assign(item, newItemDetailsWithRole);
 
-          return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
+          return workgroupPermissionsService.getWorkgroupsPermissions(sharedSpaces);
         })
-        .then(workgroupsPermissions => {
+        .then(sharedSpacePermissions => {
           sharedSpaceVm.permissions = Object.assign(
             {},
             sharedSpaceVm.permissions,
-            workgroupPermissionsService.formatPermissions(workgroupsPermissions)
+            workgroupPermissionsService.formatPermissions(sharedSpacePermissions)
           );
         })
         .catch(response => {
@@ -402,7 +443,7 @@ angular.module('linshare.sharedSpace')
 
     function popDialogAndCreateFolder(item, title) {
       return itemUtilsService.popDialogAndCreate(
-        Object.assign(item), title
+        Object.assign(item, { parentUuid: sharedSpaceVm.driveUuid }), title
       )
         .then(newItemDetails => {
           item = _.assign(item, newItemDetails);
