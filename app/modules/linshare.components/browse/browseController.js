@@ -261,12 +261,25 @@ function BrowseController(
       var deferred = $q.defer();
 
       nodeItem.parent = browseVm.currentFolder.uuid;
-      nodeItem.save().then(function(newNode) {
-        deferred.resolve(newNode);
-      }).catch(function(error) {
-        failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
-        deferred.reject(error);
-      });
+      if (nodeItem.workGroup === browseVm.currentFolder.workgroupUUid) {
+        browseVm.restService.update(nodeItem.workGroup, nodeItem).then(newNode => {
+          deferred.resolve(newNode);
+        }).catch(function(error) {
+          failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
+          deferred.reject(error);
+        });
+      } else {
+        browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem.uuid,
+          browseVm.currentFolder.uuid, browseVm.kind).then((newNode) => {
+          nodeItem.remove().then(() => {
+            deferred.resolve(newNode);
+          });
+        }).catch(function(error) {
+          failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
+          deferred.reject(error);
+        });
+      }
+
       promises.push(deferred.promise);
     });
 
