@@ -10,7 +10,9 @@
     "AUTHOR": "Author"
   },
   "BACKGROUND_WORKGROUP_TITLE_MSG": "WORKGROUPS",
+  "BACKGROUND_SHARED_SPACE_TITLE_MSG": "SHARED SPACES",
   "BACKGROUND_WORKGROUP_MSG": "Create a workgroup in order to exchange files between your colleagues",
+  "BACKGROUND_SHARED_SPACE_MSG": "Create a shared space in order to exchange files between your colleagues",
   "BREADCRUMB_ISOLATE": "Isolation mode",
   "BREADCRUMB_TITLE": "My files",
   "FILE_DIRECTORY_DIALOG": {

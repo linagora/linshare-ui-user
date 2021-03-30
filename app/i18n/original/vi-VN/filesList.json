@@ -11,7 +11,9 @@
   "BREADCRUMB_ISOLATE": "Chế độ cách ly",
   "BREADCRUMB_TITLE": "Tập tin của tôi",
   "BACKGROUND_WORKGROUP_TITLE_MSG": "NHÓM",
+  "BACKGROUND_SHARED_SPACE_TITLE_MSG": "KHÔNG GIAN CHIA SẺ",
   "BACKGROUND_WORKGROUP_MSG": "Tạo một nhóm để trao đổi tệp giữa các đồng nghiệp",
+  "BACKGROUND_SHARED_SPACE_MSG": "Tạo một không gian chia sẻ để trao đổi tệp giữa các đồng nghiệp",
   "FILE_DIRECTORY_DIALOG": {
     "ENTER_FOLDER_NAME": "Nhập tên thư mục của bạn tại đây",
     "CANCEL": "Hủy",

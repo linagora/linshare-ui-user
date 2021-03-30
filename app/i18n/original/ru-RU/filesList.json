@@ -12,7 +12,9 @@
     "BREADCRUMB_ISOLATE": "Изолированный режим",
     "BREADCRUMB_TITLE": "Мои файлы",
     "BACKGROUND_WORKGROUP_TITLE_MSG": "Рабочие группы",
+    "BACKGROUND_SHARED_SPACE_TITLE_MSG": "ОБЩИЕ ПОМЕЩЕНИЯ",
     "BACKGROUND_WORKGROUP_MSG": "Создавайте рабочие группы для обмена файлами с вашими коллегами",
+    "BACKGROUND_SHARED_SPACE_MSG": "Создайте общее пространство для обмена файлами между коллегами",
     "FILE_DIRECTORY_DIALOG": {
       "ENTER_FOLDER_NAME": "Введите здесь имя вашей папки",
       "CANCEL": "Отменить",
