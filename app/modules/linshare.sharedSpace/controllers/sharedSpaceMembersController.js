@@ -102,28 +102,22 @@ function sharedSpaceMembersController(
     }
 
     // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
-    $scope.$watch(function() {
-      return sidebarService.getData().currentSelectedDocument.current;
-    }, function(currentWorkGroup) {
-      return $q
-        .all([
-          authenticationRestService.getCurrentUser(),
-          workgroupMembersRestService.getList(currentWorkGroup.uuid)
-        ])
-        .then(([loggedUser, members]) => {
-          const currentMember = _.find(members, {'uuid': loggedUser.uuid});
+    $scope.$watch(
+      () => sidebarService.getData().currentSelectedDocument.current.uuid,
+      sharedSpaceUuid => $q.all([
+        authenticationRestService.getCurrentUser(),
+        workgroupMembersRestService.getList(sharedSpaceUuid)
+      ]).then(([loggedUser, members]) => {
+        const currentMember = _.find(members, {'uuid': loggedUser.uuid});
 
-          sharedSpaceMembersVm.currentWorkgroupMember = currentMember;
-          sharedSpaceMembersVm.members = members;
+        sharedSpaceMembersVm.currentWorkgroupMember = currentMember;
+        sharedSpaceMembersVm.members = members;
 
-          // TODO SideEffect Power!
-          sidebarService.addData('currentWorkgroupMember', currentMember );
-        })
-        .catch(error => {
-          $log.debug(error);
-        });
-
-    }, true);
+        // TODO SideEffect Power!
+        sidebarService.addData('currentWorkgroupMember', currentMember );
+      }).catch(error => $log.debug(error)),
+      true
+    );
   }
 
   /**
