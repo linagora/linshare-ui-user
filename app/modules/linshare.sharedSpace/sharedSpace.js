@@ -19,7 +19,7 @@ require('./controllers/WorkgroupVersionsController');
 require('./controllers/sharedSpaceMembersController');
 require('./filters/canDeleteNodesFilter');
 require('./filters/canDeleteSharedSpacesFilter');
-require('./services/workGroupMemberRestService');
+require('./services/sharedSpacesMemberRestService');
 require('./services/workGroupNodesRestService');
 require('./services/workGroupPermissionsService');
 require('./services/workGroupRolesRestService');

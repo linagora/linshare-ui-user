@@ -33,7 +33,7 @@ WorkgroupNodesController.$inject = [
   'tableParamsService',
   'toastService',
   'workgroup',
-  'workgroupMembersRestService',
+  'sharedSpaceMembersRestService',
   'workgroupNodesRestService',
   'workgroupPermissions',
   'workgroupRestService',
@@ -67,7 +67,7 @@ function WorkgroupNodesController(
   tableParamsService,
   toastService,
   workgroup,
-  workgroupMembersRestService,
+  sharedSpaceMembersRestService,
   workgroupNodesRestService,
   workgroupPermissions,
   workgroupRestService,
@@ -583,12 +583,12 @@ function WorkgroupNodesController(
   }
 
   /**
-     * @name getWorkgroupMemberDetails
-     * @desc Get current workgroup member details
-     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-     */
+   * @name getWorkgroupMemberDetails
+   * @desc Get current workgroup member details
+   * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+   */
   function getWorkgroupMemberDetails() {
-    workgroupMembersRestService.get(workgroupNodesVm.folderDetails.workgroupUuid)
+    sharedSpaceMembersRestService.get(workgroupNodesVm.folderDetails.workgroupUuid)
       .then(function(members) {
         workgroupNodesVm.currentWorkgroupMember = members.length === 1 ?
           members[0] :

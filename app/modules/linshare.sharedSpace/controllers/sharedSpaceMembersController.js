@@ -21,7 +21,7 @@ sharedSpaceMembersController.$inject = [
   'lsAppConfig',
   'toastService',
   'sidebarService',
-  'workgroupMembersRestService',
+  'sharedSpaceMembersRestService',
   'workgroupRolesRestService'
 ];
 
@@ -41,7 +41,7 @@ function sharedSpaceMembersController(
   lsAppConfig,
   toastService,
   sidebarService,
-  workgroupMembersRestService,
+  sharedSpaceMembersRestService,
   workgroupRolesRestService
 ) {
   const sharedSpaceMembersVm = this;
@@ -106,7 +106,7 @@ function sharedSpaceMembersController(
       () => sidebarService.getData().currentSelectedDocument.current.uuid,
       sharedSpaceUuid => $q.all([
         authenticationRestService.getCurrentUser(),
-        workgroupMembersRestService.getList(sharedSpaceUuid)
+        sharedSpaceMembersRestService.getList(sharedSpaceUuid)
       ]).then(([loggedUser, members]) => {
         const currentMember = _.find(members, {'uuid': loggedUser.uuid});
 
@@ -146,7 +146,7 @@ function sharedSpaceMembersController(
       return;
     }
 
-    workgroupMembersRestService
+    sharedSpaceMembersRestService
       .create(
         formatWorkgroupMember(
           sharedSpaceMembersVm.currentWorkGroup.current,
@@ -220,7 +220,7 @@ function sharedSpaceMembersController(
         },
         dialogService.dialogType.warning
       ))
-      .then(confirmed => !confirmed ? $q.reject() : workgroupMembersRestService.remove(
+      .then(confirmed => !confirmed ? $q.reject() : sharedSpaceMembersRestService.remove(
         sharedSpaceMembersVm.currentWorkGroup.current.uuid,
         member.uuid
       ))
@@ -253,7 +253,7 @@ function sharedSpaceMembersController(
       member.role = role;
     }
 
-    workgroupMembersRestService.update(
+    sharedSpaceMembersRestService.update(
       formatWorkgroupMember(
         sharedSpaceMembersVm.currentWorkGroup.current,
         member,
