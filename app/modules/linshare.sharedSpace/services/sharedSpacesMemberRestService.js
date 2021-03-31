@@ -119,14 +119,14 @@ function sharedSpaceMembersRestService($log, Restangular, ServerManagerService) 
    *  @returns {Promise<WorkgroupMember>} server response
    *  @memberOf LinShare.sharedSpace.sharedSpaceMembersRestService
    */
-  function update(workgroupMemberDto) {
+  function update(workgroupMemberDto, force = false) {
     $log.debug('sharedSpaceMembersRestService : update', workgroupMemberDto);
 
     return handler(
       Restangular
         .one(restUrl, workgroupMemberDto.node.uuid)
         .one(restParam, workgroupMemberDto.account.uuid)
-        .customPUT(workgroupMemberDto)
+        .customPUT(workgroupMemberDto, '', { force })
     );
   }
 }

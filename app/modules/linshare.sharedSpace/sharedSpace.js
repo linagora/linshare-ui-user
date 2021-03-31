@@ -17,6 +17,7 @@ require('./controllers/SharedSpaceController');
 require('./controllers/WorkgroupNodesController');
 require('./controllers/WorkgroupVersionsController');
 require('./controllers/sharedSpaceMembersController');
+require('./components/updateDefaultWorkgroupsRoleDialog/updateDefaultWorkgroupsRoleDialogController');
 require('./filters/canDeleteNodesFilter');
 require('./filters/canDeleteSharedSpacesFilter');
 require('./services/sharedSpacesMemberRestService');

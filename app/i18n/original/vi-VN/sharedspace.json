@@ -68,5 +68,15 @@
   "CREATE_NEW_FOLDER": "Tạo thư mục mới",
   "CREATE_NEW_DRIVE": "Tạo ổ đĩa mới",
   "WORKGROUP": "Nhóm làm việc",
-  "DRIVE": "Ổ đĩa"
+  "DRIVE": "Ổ đĩa",
+  "SHARED_SPACE_DIALOGS": {
+    "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
+      "TITLE": "Chỉnh sửa vai trò nhóm làm việc mặc định.",
+      "MESSAGE": "Bạn sắp cập nhật vai trò mặc định của thành viên cho tất cả các nhóm làm việc bên trong ổ đĩa <b>{{driveName}}</b>.",
+      "ACTION": "Ghi đè vai trò này cho tất cả các nhóm làm việc hiện có.",
+      "BUTTONS": {
+        "CONFIRM": "Cập nhật"
+      }
+    }
+  }
 }

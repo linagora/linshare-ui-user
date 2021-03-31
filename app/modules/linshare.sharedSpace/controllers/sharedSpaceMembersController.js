@@ -15,6 +15,7 @@ sharedSpaceMembersController.$inject = [
   '$q',
   '$log',
   '$scope',
+  '$mdDialog',
   '$translate',
   'authenticationRestService',
   'dialogService',
@@ -35,6 +36,7 @@ function sharedSpaceMembersController(
   $q,
   $log,
   $scope,
+  $mdDialog,
   $translate,
   authenticationRestService,
   dialogService,
@@ -52,6 +54,7 @@ function sharedSpaceMembersController(
   sharedSpaceMembersVm.changePropertyOrderBy = changePropertyOrderBy;
   sharedSpaceMembersVm.removeMember = removeMember;
   sharedSpaceMembersVm.updateMember = updateMember;
+  sharedSpaceMembersVm.updateDefaultWorkroupsRole = updateDefaultWorkroupsRole;
 
   sharedSpaceMembersVm.membersRights = {};
   sharedSpaceMembersVm.searchMemberInput = '';
@@ -242,11 +245,12 @@ function sharedSpaceMembersController(
    * @name updateMember
    * @desc Update member
    * @param {Object} member - Member to update
+   * @param {Boolean} isNestedRole - True if thehe role to be update is nested
+   * @param {Boolean} forceOverride - Force to override all the nested shared space with given role
    * @param {Role} role - A {@link Role} object.
    * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
    */
-  function updateMember(member, role, isNestedRole) {
-    //TODO Nice side-effect here!
+  function updateMember(member, role, isNestedRole = false, forceOverride = false) {
     if (isNestedRole) {
       member.nestedRole = role;
     } else {
@@ -259,7 +263,8 @@ function sharedSpaceMembersController(
         member,
         member.role,
         member.nestedRole
-      )
+      ),
+      forceOverride
     );
   }
 
@@ -269,6 +274,7 @@ function sharedSpaceMembersController(
    * @param {Object} workgroup - Current workgroup
    * @param {Object} member - Member to update
    * @param {Role} role - A {@link Role} object.
+   * @param {Role} nestedRole - A {@link Role} object
    * @returns {WorkgroupMember} A {@link WorkgroupMember} object.
    * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
    */
@@ -278,7 +284,7 @@ function sharedSpaceMembersController(
         uuid: role.uuid
       },
       node: {
-        uuid: sharedSpaceMembersVm.currentWorkGroup.current.uuid
+        uuid: workgroup.uuid
       },
       account: {
         uuid: member.account ? member.account.uuid : member.userUuid
@@ -290,10 +296,25 @@ function sharedSpaceMembersController(
     };
   }
 
-  // TODO DOC
   function updateRoleFilterOnCurrentMembers(role) {
     sharedSpaceMembersVm.membersSearchFilter.role.uuid = sharedSpaceMembersVm.membersSearchFilter.role.uuid === role.uuid ?
       undefined :
       sharedSpaceMembersVm.membersSearchFilter.role.uuid = role.uuid;
+  }
+
+  function updateDefaultWorkroupsRole(member) {
+    $mdDialog
+      .show({
+        template: require('../components/updateDefaultWorkgroupsRoleDialog/updateDefaultWorkgroupsRoleDialog.html'),
+        controller: 'updateDefaultWorkgroupsRoleDialogController',
+        controllerAs: 'vm',
+        locals: {
+          sharedSpace: sharedSpaceMembersVm.currentWorkGroup.current,
+          workgroupRoles: sharedSpaceMembersVm.workgroupMembersRights,
+          initialRole: member.nestedRole
+        }
+      })
+      .then(({ forceOverride, role}) => updateMember(member, role, true, forceOverride))
+      .catch(error => error && $log.error(error));
   }
 }

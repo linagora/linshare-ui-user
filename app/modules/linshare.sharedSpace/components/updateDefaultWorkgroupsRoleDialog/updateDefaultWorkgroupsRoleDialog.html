@@ -1,0 +1,48 @@
+<md-dialog class="custom-dialog warning">
+  <md-toolbar class="no-height-limit">
+    <div class="md-toolbar-tools horizontal-center">
+      <div class="dialog-icon">
+        <i class="ls-workgroup"></i>
+      </div>
+    </div>
+  </md-toolbar>
+  <md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">
+    <div
+      class="content-title"
+      translate
+    >
+      SHARED_SPACE_DIALOGS.UPDATE_DEFAULT_WORKGROUPS_ROLE.TITLE
+    </div>
+    <div
+      class="content-text"
+      translate
+      translate-values="{ driveName: vm.sharedSpace.name}"
+    >
+      SHARED_SPACE_DIALOGS.UPDATE_DEFAULT_WORKGROUPS_ROLE.MESSAGE
+    </div>
+
+    <md-input-container>
+      <md-select
+        class="form-control custom-bordered-select"
+        ng-model="vm.selectedRole"
+        ng-model-options="{ trackBy: '$value.uuid' }"
+      >
+        <md-option ng-repeat="role in vm.workgroupRoles" ng-value="role">
+          {{'MEMBER_TAB.' + role.name | translate}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+
+    <md-checkbox ng-model="vm.override" class="m-t-10">
+      <span translate>SHARED_SPACE_DIALOGS.UPDATE_DEFAULT_WORKGROUPS_ROLE.ACTION</span>
+    </md-checkbox>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <button class="cancel" ng-click="vm.abort()" translate>
+      NAVIGATION.CANCEL
+    </button>
+    <button class="confirm" ng-click="vm.proceed()" translate>
+      SHARED_SPACE_DIALOGS.UPDATE_DEFAULT_WORKGROUPS_ROLE.BUTTONS.CONFIRM
+    </button>
+  </md-dialog-actions>
+</md-dialog>

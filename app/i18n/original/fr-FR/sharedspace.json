@@ -66,5 +66,15 @@
   "CREATE_NEW_FOLDER": "Créer un nouveau dossier",
   "CREATE_NEW_DRIVE": "Créer un nouveau Drive",
   "WORKGROUP": "Groupe de travail",
-  "DRIVE": "Drive"
+  "DRIVE": "Drive",
+  "SHARED_SPACE_DIALOGS": {
+    "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
+      "TITLE": "Modifier le rôle par défaut des groupes de travail",
+      "MESSAGE": "Vous êtes sur le point de mettre à jour le rôle par défaut de ce membre dans tous les groupes de travail au sein du Drive <b>{{driveName}}</b>.",
+      "ACTION": "Forcer l'utilisation de ce role pour tous les groupes de travail existants",
+      "BUTTONS": {
+        "CONFIRM": "Mettre à jour"
+      }
+    }
+  }
 }

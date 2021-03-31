@@ -339,11 +339,15 @@ md-dialog.custom-dialog {
     .dialog-icon {
       width: 100px;
       height: auto;
-      margin: 30px;
+      margin: 20px;
       justify-content: center;
 
       img {
         width: 100%;
+      }
+
+      i {
+        font-size: 5em;
       }
     }
   }

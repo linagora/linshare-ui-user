@@ -17,7 +17,7 @@
         </div>
         <form
           role="form"
-          class="clearfix fields-add-member no-right-inline-btn m-b-40"
+          class="clearfix fields-add-member no-right-inline-btn"
         >
           <div class="form-group fg-line group-member-field-ctn col-xs-12 no-padding">
             <div class="member-dropdown-ctn m-t-10'">
@@ -31,20 +31,20 @@
                   tooltip-placement="bottom"
                 ></i>
               </div>
-              <span
+              <div
                 uib-dropdown
                 dropdown-append-to-body
-                class="dropdown link-dropdown actions col-xs-5"
+                class="dropdown link-dropdown actions m-r-10"
                 auto-close="always"
                 is-open="isOpenMemberRights"
                 data-ng-class="{'open':isOpenMemberRights}"
               >
                 <button
                   type="button"
-                  class="btn waves-effect"
+                  class="btn btn-link waves-effect"
                   uib-dropdown-toggle
                 >
-                  <span>{{"MEMBER_TAB." + sharedSpaceMembersVm.memberRole.name | translate}}</span>
+                  <span class="set-ellipsis" translate>{{'MEMBER_TAB.' + sharedSpaceMembersVm.memberRole.name}}</span>
                   <span class="caret"></span>
                 </button>
                 <ul
@@ -56,12 +56,13 @@
                       href=""
                       data-ng-click="sharedSpaceMembersVm.memberRole = role"
                       data-ng-class="{'active-check': sharedSpaceMembersVm.memberRole.uuid === role.uuid }"
+                      translate
                     >
-                      {{"MEMBER_TAB." + role.name | translate}}
+                      {{'MEMBER_TAB.' + role.name}}
                     </a>
                   </li>
                 </ul>
-              </span>
+              </div>
             </div>
 
             <div class="member-dropdown-ctn m-t-10" >
@@ -75,20 +76,20 @@
                   tooltip-placement="bottom"
                 ></i>
               </div>
-              <span
+              <div
                 uib-dropdown
                 dropdown-append-to-body
-                class="dropdown link-dropdown actions col-xs-5"
                 auto-close="always"
+                class="dropdown link-dropdown actions m-r-10"
                 is-open="isOpenDefaultWorkgroupMemberRights"
                 data-ng-class="{'open':isOpenDefaultWorkgroupMemberRights}"
               >
                 <button
                   type="button"
-                  class="btn waves-effect"
+                  class="btn btn-link waves-effect"
                   uib-dropdown-toggle
                 >
-                  <span>{{"MEMBER_TAB." + sharedSpaceMembersVm.workgroupDefaultRole.name | translate}}</span>
+                  <span class="set-ellipsis" translate>{{'MEMBER_TAB.' + sharedSpaceMembersVm.workgroupDefaultRole.name}}</span>
                   <span class="caret"></span>
                 </button>
                 <ul
@@ -100,12 +101,13 @@
                       href=""
                       data-ng-click="sharedSpaceMembersVm.workgroupDefaultRole = role"
                       data-ng-class="{'active-check': sharedSpaceMembersVm.workgroupDefaultRole.uuid === role.uuid }"
+                      translate
                     >
-                      {{"MEMBER_TAB." + role.name | translate}}
+                      {{::'MEMBER_TAB.' + role.name}}
                     </a>
                   </li>
                 </ul>
-              </span>
+              </div>
             </div>
 
             <div
@@ -122,14 +124,16 @@
           <button
             class="btn btn-primary add-btn btn-block"
             data-ng-if="mainVm.sidebar.getData().isExistingMember === false"
+            translate
           >
-            {{'MEMBER_TAB.ADD' | translate}}
+            MEMBER_TAB.ADD
           </button>
           <button
             class="btn btn-primary update-btn btn-block"
             data-ng-if="mainVm.sidebar.getData().isExistingMember === true"
+            translate
           >
-            {{'MEMBER_TAB.UPDATE' | translate}}
+            MEMBER_TAB.UPDATE
           </button>
         </form>
       </div>
@@ -161,7 +165,7 @@
                   class="form-control"
                   autocomplete="off"
                   data-ng-model="sharedSpaceMembersVm.searchMemberInput"
-                  placeholder="{{'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER_EXISTING_MEMBERS' | translate}}"
+                  translate-attr="{'placeholder': 'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER_EXISTING_MEMBERS'}"
                 >
               </div>
             </div>
@@ -186,7 +190,7 @@
                   data-ng-class="{'open':isOpenMemberOrder}"
                 >
                   <div class="list-menu sort-dropdown">
-                    <p>{{"MEMBER_TAB.SORT_BY" | translate}}</p>
+                    <p translate>MEMBER_TAB.SORT_BY</p>
                     <ul class="dropdown-menu dm-icon sort-menu">
                       <li role="menuitem">
                         <a
@@ -245,7 +249,7 @@
                     </ul>
                   </div>
                   <div class="list-menu">
-                    <p>{{"MEMBER_TAB.FILTER_BY" | translate}}</p>
+                    <p translate>MEMBER_TAB.FILTER_BY</p>
                     <ul
                       class="dropdown-menu dm-icon filter-menu"
                       data-ng-repeat="role in sharedSpaceMembersVm.membersRights"
@@ -255,8 +259,9 @@
                           href=""
                           data-ng-class="{'active-check': sharedSpaceMembersVm.membersSearchFilter.role.uuid === role.uuid}"
                           data-ng-click="sharedSpaceMembersVm.updateRoleFilterOnCurrentMembers(role)"
+                          translate
                         >
-                          {{"MEMBER_TAB." + role.name + "_RIGHTS" | translate}}
+                          {{'MEMBER_TAB.' + role.name + '_RIGHTS'}}
                         </a>
                       </li>
                     </ul>
@@ -270,79 +275,77 @@
           <div
             class="flex-ctn"
             data-ng-repeat="workgroupMember in sharedSpaceMembersVm.members |
-            filter: sharedSpaceMembersVm.searchMemberInput | filter: sharedSpaceMembersVm.membersSearchFilter | orderBy: '-' "
+            filter: sharedSpaceMembersVm.searchMemberInput | filter: sharedSpaceMembersVm.membersSearchFilter | orderBy: '-'"
           >
             <div class="item-l">
               <span class="first-letter text-uppercase">
-                {{workgroupMember.account.firstName ?
-                workgroupMember.account.firstName.charAt(0) :
-                workgroupMember.account.mail}}
+                {{
+                  ::workgroupMember.account.firstName ?
+                    workgroupMember.account.firstName.charAt(0) :
+                    workgroupMember.account.mail
+                }}
               </span>
             </div>
             <div class="item-mid">
               <div class="name">
-                {{workgroupMember.account.name}}
+                {{::workgroupMember.account.name}}
               </div>
-              <div class="info-item-member">
-                <i class="zmdi zmdi-accounts"></i>
-                <span>
-                  {{"MEMBER_TAB." + workgroupMember.role.name | translate}}
-                </span>
-              </div>
-              <div class="info-item-member">
-                <i class="zmdi zmdi-account"></i>
-                <span>
-                  {{"MEMBER_TAB." + workgroupMember.nestedRole.name | translate}}
-                </span>
-              </div>
-            </div>
-            <div
-              class="item-r actions"
-            >
-              <span
+
+              <div
+                class="info-item-member"
+                ng-class="mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE ||
+                    mainVm.sidebar.getData().permissions.MEMBER.UPDATE ? 'clickable' : 'click-disabled'"
                 uib-dropdown
                 dropdown-append-to-body
-                class="dropdown link-dropdown actions"
+                uib-dropdown-toggle
                 auto-close="always"
-                is-open="isOpenRights"
-                data-ng-class="{'open':isOpenRights}"
-                data-ng-if="mainVm.sidebar.getData().permissions[
-                mainVm.sidebar.getData().currentSelectedDocument.current.uuid
-                ].MEMBER.UPDATE || mainVm.sidebar.getData().permissions.MEMBER.UPDATE"
               >
-                <a
-                  class="plain-text-button share-link"
-                  href="javascript:void(0)"
-                  uib-dropdown-toggle title="{{'MEMBER_TAB.EDIT_RIGHTS' | translate}}"
-                >
-                  <i class="zmdi zmdi-edit"></i>
-                </a>
+                <i class="zmdi zmdi-accounts"></i>
+                <span translate>
+                  {{::'MEMBER_TAB.' + workgroupMember.role.name}}
+                </span>
+                <i
+                  ng-if="mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE ||
+                  mainVm.sidebar.getData().permissions.MEMBER.UPDATE"
+                  class="zmdi zmdi-edit">
+                </i>
                 <ul
                   uib-dropdown-menu
                   class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown"
                 >
-                  <li class="dropdown-menu-section-title">MEMBER_TAB.DRIVE_ROLE</li>
-                  <li data-ng-repeat="role in sharedSpaceMembersVm.membersRights">
+                  <li ng-repeat="role in sharedSpaceMembersVm.membersRights">
                     <a
-                      href=""
-                      data-ng-click="sharedSpaceMembersVm.updateMember(workgroupMember, role)"
-                      data-ng-class="{'active-check': workgroupMember.role.uuid === role.uuid }"
+                      class="text-left"
+                      ng-click="sharedSpaceMembersVm.updateMember(workgroupMember, role)"
+                      ng-class="{'active-check': workgroupMember.role.uuid === role.uuid }"
+                      translate
                     >
-                      {{"MEMBER_TAB." + role.name | translate}}
-                    </a>
-                  </li>
-                  <li class="dropdown-menu-section-title">MEMBER_TAB.WORKGROUP_ROLE</li>
-                  <li data-ng-repeat="role in sharedSpaceMembersVm.workgroupMembersRights">
-                    <a
-                      href=""
-                      data-ng-click="sharedSpaceMembersVm.updateMember(workgroupMember, role, true)"
-                      data-ng-class="{'active-check': workgroupMember.nestedRole.uuid === role.uuid }"
-                    >
-                      {{"MEMBER_TAB." + role.name | translate}}
+                      {{::'MEMBER_TAB.' + role.name}}
                     </a>
                   </li>
                 </ul>
-              </span>
+
+              </div>
+              <div
+                class="info-item-member"
+                ng-class="{
+                  'click-disabled': !mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE &&
+                    !mainVm.sidebar.getData().permissions.MEMBER.UPDATE
+                }"
+                ng-click="sharedSpaceMembersVm.updateDefaultWorkroupsRole(workgroupMember)"
+              >
+                <i class="zmdi zmdi-account"></i>
+                <span translate>
+                  {{::'MEMBER_TAB.' + workgroupMember.nestedRole.name}}
+                </span>
+                <i
+                  class="zmdi zmdi-edit"
+                  ng-if="mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE ||
+                  mainVm.sidebar.getData().permissions.MEMBER.UPDATE"
+                ></i>
+              </div>
+            </div>
+            <div class="item-r actions">
               <a
                 data-ng-if="mainVm.sidebar.getData().permissions[
                 mainVm.sidebar.getData().currentSelectedDocument.current.uuid
@@ -351,7 +354,7 @@
                 data-ng-click="sharedSpaceMembersVm.removeMember(
                 mainVm.sidebar.getData().currentSelectedDocument.current, workgroupMember
                 )"
-                title="{{'MEMBER_TAB.REMOVE_TEAM_MEMBER' | translate}}"
+                translate-attr="{'title': 'MEMBER_TAB.REMOVE_TEAM_MEMBER'}"
               >
                 <i class="zmdi zmdi-close"></i>
               </a>

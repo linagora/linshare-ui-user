@@ -7990,7 +7990,7 @@ body:not(.sw-toggled) #sidebar {
   right: 0;
   left: auto;
 }
-.dropdown-menu.dropdown-menu-right > li > a {
+.dropdown-menu.dropdown-menu-right > li > a:not(.text-left) {
   text-align: right;
 }
 .dropdown-menu.dm-icon > li > a > .zmdi {
