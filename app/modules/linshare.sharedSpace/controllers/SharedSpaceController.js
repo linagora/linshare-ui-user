@@ -60,6 +60,7 @@ angular.module('linshare.sharedSpace')
       sharedSpaceVm.sortDropdownSetActive = sortDropdownSetActive;
       sharedSpaceVm.loadSidebarContent = loadSidebarContent;
       sharedSpaceVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
+      sharedSpaceVm.canRenameSharedSpace = canRenameSharedSpace;
 
       sharedSpaceVm.tableParams = new NgTableParams({
         page: 1,
@@ -408,5 +409,19 @@ angular.module('linshare.sharedSpace')
 
           return workgroupRestService.get(item.uuid, true, true);
         });
+    }
+
+    function canRenameSharedSpace(sharedSpace, isSelected = false) {
+      if (!sharedSpace || (sharedSpaceVm.selectedDocuments.length > 1 && isSelected)) {
+        return false;
+      }
+
+      if (sharedSpace.nodeType === 'WORK_GROUP' && sharedSpaceVm.permissions[sharedSpace.uuid].WORKGROUP.UPDATE) {
+        return true;
+      } else if (sharedSpace.nodeType === 'DRIVE' && sharedSpaceVm.permissions[sharedSpace.uuid].DRIVE.UPDATE) {
+        return true;
+      }
+
+      return false;
     }
   });

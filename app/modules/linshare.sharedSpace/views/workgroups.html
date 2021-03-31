@@ -219,10 +219,7 @@
                   </a>
                 </li>
                 <li class="divider" data-ng-show="vm.selectedDocuments.length === 1"></li>
-                <li data-ng-class="{
-                  'disable-link' : !vm.permissions[vm.selectedDocuments[0].uuid].WORKGROUP.UPDATE ||
-                  vm.selectedDocuments.length > 1
-                  }" data-ng-click="vm.renameFolder(vm.selectedDocuments[0])">
+                <li data-ng-class="{'disable-link' : !vm.canRenameSharedSpace(vm.selectedDocuments[0], true)}" data-ng-click="vm.renameFolder(vm.selectedDocuments[0])">
                   <a>
                     <i class="zmdi zmdi-border-color"></i>
                     <span translate>ACTION.RENAME</span>
@@ -364,7 +361,7 @@
                                 <span translate>ACTION.ADD_MEMBER</span>
                               </a>
                             </li>
-                            <li data-ng-class="{'disable-link' : !vm.permissions[documentFile.uuid].WORKGROUP.UPDATE}">
+                            <li data-ng-class="{'disable-link' : !vm.canRenameSharedSpace(documentFile)}">
                               <a x-ng-click="vm.renameFolder(documentFile)">
                                 <i class="zmdi zmdi-border-color"></i>
                                 <span translate>ACTION.RENAME</span>
