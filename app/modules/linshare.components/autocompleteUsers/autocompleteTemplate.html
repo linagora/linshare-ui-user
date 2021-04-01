@@ -30,7 +30,7 @@
       type="text"
       ng-disabled="autocompleteUsersVm.disabled"
       class="form-control"
-      placeholder="{{::'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER ' | translate}}"
+      translate-attr="{'placeholder': 'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER'}"
       autocomplete="off"
       data-ng-model="autocompleteUsersVm.selectedUser"
       data-ng-blur="autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail()"
