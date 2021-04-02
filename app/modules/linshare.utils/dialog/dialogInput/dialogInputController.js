@@ -7,11 +7,13 @@ dialogInputController.$inject = ['$mdDialog', '$mdConstant', '$timeout'];
 function dialogInputController($mdDialog, $mdConstant, $timeout) {
   const self = this;
 
-  if (self.initialValue) {
-    self.result = self.initialValue;
+  self.$onInit = () => {
+    if (self.initialValue) {
+      self.result = self.initialValue;
 
-    $timeout(() => angular.element('.custom-dialog .md-input').trigger('select'));
-  }
+      $timeout(() => angular.element('.custom-dialog .md-input').trigger('select'));
+    }
+  };
 
   self.hide = function() {
     $mdDialog.hide(self.result);
