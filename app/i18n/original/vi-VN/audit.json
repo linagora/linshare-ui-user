@@ -292,6 +292,70 @@
           }
         }
       },
+      "DRIVE": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tạo một ổ đĩa mới: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã tạo một ổ đĩa: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa một ổ đĩa: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã xóa ổ đĩa: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã chỉnh sửa một ổ đĩa: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã chỉnh sửa ổ đĩa: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "DRIVE_MEMBER": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã thêm một thành viên: {{resourceName}} vào ổ đĩa {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã thêm một thành viên mới: {{resourceName}} vào ổ đĩa {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa thành viên: {{resourceName}} khỏi ổ đĩa {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã xóa thành viên: {{resourceName}} khỏi ổ đĩa {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã chỉnh sửa thành viên: {{resourceName}} trong ổ đĩa {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã chỉnh sửa thành viên: {{resourceName}} trong ổ đĩa {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "GUEST": {
         "CREATE": {
           "AUTHOR": {
