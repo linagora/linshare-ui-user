@@ -14,3 +14,4 @@
 require('./preventDefault/preventDefaultDirective');
 require('./otpInput/otpInputDirective');
 require('./customRange/customMin');
+require('./autoFocus/autoFocus');
