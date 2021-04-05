@@ -12,7 +12,7 @@
   sidebarAuditActionsTabController.$inject = [
     '$log',
     '$q',
-    'workgroupRestService',
+    'sharedSpaceRestService',
     'uploadRequestEntryRestService',
     'uploadRequestRestService',
     'uploadRequestGroupRestService',
@@ -23,7 +23,7 @@
   function sidebarAuditActionsTabController(
     $log,
     $q,
-    workgroupRestService,
+    sharedSpaceRestService,
     uploadRequestEntryRestService,
     uploadRequestRestService,
     uploadRequestGroupRestService,
@@ -33,7 +33,7 @@
     let deferred;
     const sidebarAuditActionsTabVm = this;
     const getters = {
-      workgroup: workgroupRestService.getAudit,
+      workgroup: sharedSpaceRestService.getAudit,
       uploadRequest: uploadRequestRestService.getAudit,
       uploadRequestGroup: uploadRequestGroupRestService.getAudit,
       uploadRequestEntry: uploadRequestEntryRestService.getAudit,

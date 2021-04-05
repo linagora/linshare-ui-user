@@ -184,12 +184,12 @@
       })
       .state('sharedspace.all', {
         url: '/list',
-        template: require('../modules/linshare.sharedSpace/views/workgroups.html'),
+        template: require('../modules/linshare.sharedSpace/views/sharedSpaces.html'),
         controller: 'SharedSpaceController as vm',
       })
       .state('sharedspace.drive', {
         url: '/drive/:driveUuid',
-        template: require('../modules/linshare.sharedSpace/views/workgroups.html'),
+        template: require('../modules/linshare.sharedSpace/views/sharedSpaces.html'),
         controller: 'SharedSpaceController as vm',
       })
       .state('sharedspace.workgroups', {
@@ -204,7 +204,6 @@
         params: {
           uploadedFileUuid: null,
           parentUuid: null,
-          driveUuid: null,
           workgroupName: ''
         },
         resolve: {
@@ -221,8 +220,8 @@
                 $transition$.abort();
               });
           },
-          workgroup: function(currentFolder, nodesList, $transition$, workgroupRestService) {
-            return workgroupRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
+          workgroup: function(currentFolder, nodesList, $transition$, sharedSpaceRestService) {
+            return sharedSpaceRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
               return workgroup;
             }).catch(() => {
               $transition$.abort();
@@ -284,8 +283,8 @@
             return workgroupNodesRestService.getList(
               $transition$.params().workgroupUuid, $transition$.params().folderUuid);
           },
-          workgroup: function($transition$, workgroupRestService) {
-            return workgroupRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
+          workgroup: function($transition$, sharedSpaceRestService) {
+            return sharedSpaceRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
               return workgroup;
             });
           },
@@ -339,8 +338,8 @@
             return workgroupNodesRestService.getList(
               $transition$.params().workgroupUuid, $transition$.params().fileUuid);
           },
-          workgroup: function($transition$, workgroupRestService) {
-            return workgroupRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
+          workgroup: function($transition$, sharedSpaceRestService) {
+            return sharedSpaceRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
               return workgroup;
             });
           },

@@ -15,7 +15,7 @@ BrowseController.$inject = [
   'itemUtilsService',
   'workgroupNodesRestService',
   'workgroupPermissionsService',
-  'workgroupRestService',
+  'sharedSpaceRestService',
   'workgroupVersionsRestService'
 ];
 
@@ -33,7 +33,7 @@ function BrowseController(
   itemUtilsService,
   workgroupNodesRestService,
   workgroupPermissionsService,
-  workgroupRestService,
+  sharedSpaceRestService,
   workgroupVersionsRestService
 ) {
   const browseVm = this;
@@ -220,7 +220,7 @@ function BrowseController(
   function loadBrowseList() {
     if (_.isNil(browseVm.currentFolder) || _.isNil(browseVm.currentFolder.role)) {
       browseVm.currentFolder = {};
-      browseVm.restService = workgroupRestService;
+      browseVm.restService = sharedSpaceRestService;
       browseVm.isSharedSpace = true;
 
       browseVm.restService.getList(true)

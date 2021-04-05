@@ -26,7 +26,7 @@
     'lsErrorCode',
     'uploadRestService',
     'workgroupNodesRestService',
-    'workgroupRestService'
+    'sharedSpaceRestService'
   ];
 
   /**
@@ -49,7 +49,7 @@
     lsErrorCode,
     uploadRestService,
     workgroupNodesRestService,
-    workgroupRestService
+    sharedSpaceRestService
   ) {
 
     const
@@ -123,7 +123,7 @@
           flowFile.asyncUploadDeferred.reject(file);
         });
       }
-      
+
       return flowFile.asyncUploadDeferred.promise;
     }
 
@@ -179,7 +179,7 @@
           return timerGetAsyncUploadDetails(flowFile);
         }
       });
-      
+
       return flowFile.asyncUploadDeferred.promise;
     }
 
@@ -195,7 +195,7 @@
       _.forEach(flowFiles, function(flowFile) {
         var fromMySpace = _.isUndefined(flowFile.folderDetails);
         var quotasToCheck = fromMySpace ? uploadRestService.getQuota(userQuotaUuid) :
-          workgroupRestService.getQuota(flowFile.folderDetails.quotaUuid);
+          sharedSpaceRestService.getQuota(flowFile.folderDetails.quotaUuid);
 
         quotasToCheck.then(function(quotas) {
           flowFile.quotas = quotas.plain();
@@ -290,7 +290,7 @@
       $timeout(function() {
         flowFile.errorAgain = true;
       }, 200);
-      
+
       return $q
         .when(flowFile.asyncUploadDeferred)
         .then(function(defer) {
@@ -323,7 +323,7 @@
       flowFile.errorAgain = false;
       $log.debug('Error during upload, need to retry file : ', flowFile.name);
       flowFile.asyncUploadDeferred.reject(flowFile);
-      
+
       return flowFile.asyncUploadDeferred.promise;
     }
 
@@ -343,7 +343,7 @@
         flowFile.linshareDocument = document;
         flowFile.asyncUploadDeferred.resolve(flowFile);
       });
-      
+
       return flowFile.asyncUploadDeferred.promise;
     }
 

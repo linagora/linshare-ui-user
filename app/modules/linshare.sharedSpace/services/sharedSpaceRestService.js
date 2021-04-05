@@ -1,5 +1,5 @@
 /**
- * workgroupRestService factory
+ * sharedSpaceRestService factory
  * @namespace LinShare.sharedSpace
  */
 (function() {
@@ -7,16 +7,16 @@
 
   angular
     .module('linshare.sharedSpace')
-    .factory('workgroupRestService', workgroupRestService);
+    .factory('sharedSpaceRestService', sharedSpaceRestService);
 
-  workgroupRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
+  sharedSpaceRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
 
   /**
-   * @namespace workgroupRestService
+   * @namespace sharedSpaceRestService
    * @descService to interact with Workgroup object by REST
    * @memberOf LinShare.sharedSpace
    */
-  function workgroupRestService($log, Restangular, ServerManagerService) {
+  function sharedSpaceRestService($log, Restangular, ServerManagerService) {
     var
       handler = ServerManagerService.responseHandler,
       restUrl = 'shared_spaces',
@@ -40,10 +40,10 @@
      * @desc Create a Workgroup object
      * @param {Object} workgroupDto - The Workgroup object
      * @returns {Promise} server response
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function create(workgroupDto) {
-      $log.debug('workgroupRestService : create', workgroupDto);
+      $log.debug('sharedSpaceRestService : create', workgroupDto);
 
       return handler(Restangular.all(restUrl).post(workgroupDto));
     }
@@ -54,10 +54,10 @@
      * @param {String} workgroupUuid - The id of a Workgroup object
      * @param {boolean} withMembers - Get members in this same request
      * @returns {Promise} server response
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function get(workgroupUuid, withMembers, withRole) {
-      $log.debug('workgroupRestService : get', workgroupUuid);
+      $log.debug('sharedSpaceRestService : get', workgroupUuid);
 
       return handler(Restangular.one(restUrl, workgroupUuid).get({
         members: withMembers,
@@ -71,10 +71,10 @@
      * @param {string} workgroupUuid - The uuid of the Workgroup object
      * @param {string} nodeUuid - The uuid of the Workgroup Node object
      * @returns {Promise} server response
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function getAudit(workgroupUuid, nodeUuid) {
-      $log.debug('workgroupRestService : getAudit', workgroupUuid, nodeUuid);
+      $log.debug('sharedSpaceRestService : getAudit', workgroupUuid, nodeUuid);
 
       return handler(Restangular.one('shared_spaces', workgroupUuid).one('audit').get());
     }
@@ -84,10 +84,10 @@
      * @desc Get quota of workgroup
      * @param {string} quotaUuid - The uuid of workgroup's quota
      * @returns {Promise} server response
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function getQuota(quotaUuid) {
-      $log.debug('workgroupRestService - getQuota', quotaUuid);
+      $log.debug('sharedSpaceRestService - getQuota', quotaUuid);
 
       return handler(Restangular.one('quota', quotaUuid).get());
     }
@@ -97,10 +97,10 @@
      * @desc Get the list of Workgroup object
      * @param {boolean} withRole - Get Role of current user per workgroup
      * @returns {Promise} server response
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function getList(withRole, parent) {
-      $log.debug('workgroupRestService : getList');
+      $log.debug('sharedSpaceRestService : getList');
 
       return handler(Restangular.all(restUrl).getList({ withRole, parent }));
     }
@@ -110,10 +110,10 @@
      * @desc Remove a Workgroup object
      * @param {String} workgroupUuid - The id of a Workgroup object
      * @returns {Promise} server response
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function remove(workgroupUuid) {
-      $log.debug('workgroupRestService : remove', workgroupUuid);
+      $log.debug('sharedSpaceRestService : remove', workgroupUuid);
 
       return handler(Restangular.one(restUrl, workgroupUuid).remove());
     }
@@ -123,10 +123,10 @@
      * @desc Restangularize an item
      * @param {Object} item - Item to be restangularized
      * @returns {Object} Restangualr object
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function restangularize(item) {
-      $log.debug('workgroupRestService : restangularize', item);
+      $log.debug('sharedSpaceRestService : restangularize', item);
 
       return Restangular.restangularizeElement(null, item, restUrl);
     }
@@ -136,10 +136,10 @@
      * @desc Update a Workgroup object
      * @param {Object} workgroupDto - The Workgroup object
      * @returns {Promise} server response
-     * @memberOf LinShare.sharedSpace.workgroupRestService
+     * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
     function update(workgroupDto) {
-      $log.debug('workgroupRestService : update', workgroupDto);
+      $log.debug('sharedSpaceRestService : update', workgroupDto);
 
       return handler(Restangular.one(restUrl, workgroupDto.uuid).customPUT(workgroupDto));
     }

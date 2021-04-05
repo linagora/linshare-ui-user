@@ -21,7 +21,7 @@ angular.module('linshare.sharedSpace')
     lsErrorCode,
     toastService,
     workgroupPermissionsService,
-    workgroupRestService,
+    sharedSpaceRestService,
     tableParamsService
   ) {
     const sharedSpaceVm = this;
@@ -80,9 +80,9 @@ angular.module('linshare.sharedSpace')
       let listWorkgroupsPromise;
 
       if (sharedSpaceVm.isDriveState && sharedSpaceVm.driveUuid) {
-        listWorkgroupsPromise = workgroupRestService.getList(true, sharedSpaceVm.driveUuid);
+        listWorkgroupsPromise = sharedSpaceRestService.getList(true, sharedSpaceVm.driveUuid);
       } else {
-        listWorkgroupsPromise = workgroupRestService.getList(true);
+        listWorkgroupsPromise = sharedSpaceRestService.getList(true);
       }
 
       return listWorkgroupsPromise.then(data => {
@@ -173,7 +173,7 @@ angular.module('linshare.sharedSpace')
           `${sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName} (${defaultNamePos})`
           : sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName;
 
-        const sharedSpace = workgroupRestService.restangularize({
+        const sharedSpace = sharedSpaceRestService.restangularize({
           name: defaultName.trim(),
           nodeType
         });
@@ -357,14 +357,14 @@ angular.module('linshare.sharedSpace')
     }
 
     function showItemDetails(workgroupUuid, loadAction, memberTab) {
-      workgroupRestService
+      sharedSpaceRestService
         .get(workgroupUuid, true, true)
         .then(workgroup => {
           sharedSpaceVm.currentSelectedDocument.current = Object.assign({}, workgroup);
           sharedSpaceVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
           if (sharedSpaceVm.currentSelectedDocument.current.quotaUuid) {
-            return workgroupRestService
+            return sharedSpaceRestService
               .getQuota(sharedSpaceVm.currentSelectedDocument.current.quotaUuid);
           }
         })
@@ -399,7 +399,7 @@ angular.module('linshare.sharedSpace')
     function renameFolder(item, itemNameElem) {
       var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
 
-      return workgroupRestService.get(item.uuid)
+      return sharedSpaceRestService.get(item.uuid)
         .then(itemDetails => {
           return item.uuid ?
             itemUtilsService.rename(
@@ -411,7 +411,7 @@ angular.module('linshare.sharedSpace')
           item = _.assign(item, newItemDetails);
           sharedSpaceVm.canCreate = true;
 
-          return workgroupRestService.get(item.uuid, true, true);
+          return sharedSpaceRestService.get(item.uuid, true, true);
         })
         .then(newItemDetailsWithRole => {
           item = _.assign(item, newItemDetailsWithRole);
@@ -448,7 +448,7 @@ angular.module('linshare.sharedSpace')
         .then(newItemDetails => {
           item = _.assign(item, newItemDetails);
 
-          return workgroupRestService.get(item.uuid, true, true);
+          return sharedSpaceRestService.get(item.uuid, true, true);
         });
     }
 

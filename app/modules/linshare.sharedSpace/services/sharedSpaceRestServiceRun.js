@@ -1,5 +1,5 @@
 /**
- * workgroupRestServiceRun
+ * sharedSpaceRestServiceRun
  * @namespace LinShare.sharedSpace
  */
 (function() {
@@ -7,16 +7,16 @@
 
   angular
     .module('linshare.sharedSpace')
-    .run(workgroupRestServiceRun);
+    .run(sharedSpaceRestServiceRun);
 
-  workgroupRestServiceRun.$inject = ['documentModelRestService'];
+  sharedSpaceRestServiceRun.$inject = ['documentModelRestService'];
 
   /**
-   * @namespace workgroupRestServiceRun
+   * @namespace sharedSpaceRestServiceRun
    * @desc Run function for extending nodes model
    * @memberOf LinShare.sharedSpace
    */
-  function workgroupRestServiceRun(documentModelRestService) {
+  function sharedSpaceRestServiceRun(documentModelRestService) {
     documentModelRestService.launchExtendModel('nodes');
   }
 })();

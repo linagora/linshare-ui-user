@@ -36,7 +36,7 @@ WorkgroupNodesController.$inject = [
   'sharedSpaceMembersRestService',
   'workgroupNodesRestService',
   'workgroupPermissions',
-  'workgroupRestService',
+  'sharedSpaceRestService',
   'unitService'
 ];
 /**
@@ -70,7 +70,7 @@ function WorkgroupNodesController(
   sharedSpaceMembersRestService,
   workgroupNodesRestService,
   workgroupPermissions,
-  workgroupRestService,
+  sharedSpaceRestService,
   unitService
 )
 {
@@ -1005,7 +1005,7 @@ function WorkgroupNodesController(
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
   function showWorkgroupDetails(showMemberTab) {
-    workgroupRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true, true)
+    sharedSpaceRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true, true)
       .then(workgroup => {
         // TODO : remove the map once the property userMail will be changed to mail
         workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
@@ -1020,7 +1020,7 @@ function WorkgroupNodesController(
 
         return workgroup;
       })
-      .then(() => workgroupRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid))
+      .then(() => sharedSpaceRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid))
       .then(quotas => {
         workgroupNodesVm.currentSelectedDocument.quotas = quotas;
         workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;

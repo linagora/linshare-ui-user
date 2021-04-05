@@ -24,6 +24,6 @@ require('./services/sharedSpacesMemberRestService');
 require('./services/workGroupNodesRestService');
 require('./services/workGroupPermissionsService');
 require('./services/workGroupRolesRestService');
-require('./services/workGroupRestService');
-require('./services/workgroupRestServiceRun');
+require('./services/sharedSpaceRestService');
+require('./services/sharedSpaceRestServiceRun');
 require('./services/workgroupVersionsRestService');
