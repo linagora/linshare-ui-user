@@ -323,8 +323,8 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span
-              data-ng-if="workgroupNodesVm.selectedDocuments.length === 1"
-              data-ng-class="{'disable-link': !workgroupNodesVm.permissions.FILE.READ}">
+              ng-if="workgroupNodesVm.selectedDocuments.length === 1"
+              ng-class="{ 'disable-link': !workgroupNodesVm.canDownloadSelectedFiles() }">
               <a data-ng-href=""
                  data-ng-click="workgroupNodesVm.downloadFile(workgroupNodesVm.selectedDocuments[0])"
                  event-propagation-stop
@@ -334,8 +334,8 @@
               </a>
             </span>
             <span
-              data-ng-if="workgroupNodesVm.selectedDocuments.length > 1"
-              data-ng-class="{'disable-link': !(workgroupNodesVm.permissions.FILE.READ)}"
+              ng-if="workgroupNodesVm.selectedDocuments.length > 1"
+              ng-class="{ 'disable-link': !workgroupNodesVm.canDownloadSelectedFiles() }"
             >
               <a
                 class="plain-text-button"
@@ -895,7 +895,7 @@
     </div>
     <i
       class="zmdi zmdi-download col-xs-2"
-      data-ng-class="{'disabled': !workgroupNodesVm.permissions.FILE.READ}"
+      data-ng-class="{ 'disabled': !workgroupNodesVm.canDownloadSelectedFiles() }"
       data-ng-click="workgroupNodesVm.multiDownload()"
     >
     </i>

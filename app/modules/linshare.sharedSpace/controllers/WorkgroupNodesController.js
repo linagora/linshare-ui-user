@@ -122,6 +122,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.workgroupNode = lsAppConfig.workgroupNode;
   workgroupNodesVm.thumbnailEngineActivated = lsAppConfig.thumbnailEngineActivated;
   workgroupNodesVm.canCopyNodeToPersonalSpace = user.canUpload;
+  workgroupNodesVm.canDownloadSelectedFiles = canDownloadSelectedFiles;
   workgroupNodesVm.selectMultipleWithAtLeastOneFolder = selectMultipleWithAtLeastOneFolder;
 
   workgroupNodesVm.$onInit = $onInit;
@@ -142,9 +143,9 @@ function WorkgroupNodesController(
         workgroupNodesVm.canDownloadArchive = WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
         workgroupNodesVm.functionalities.canOverrideVersioning = WORK_GROUP.enable && WORK_GROUP__FILE_VERSIONING.canOverride;
 
-        WORK_GROUP__DOWNLOAD_ARCHIVE.maxRawSize = unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
-
-        workgroupNodesVm.downloadArchiveThreshold = !WORK_GROUP__DOWNLOAD_ARCHIVE.enable ? 0 : WORK_GROUP__DOWNLOAD_ARCHIVE.maxRawSize;
+        workgroupNodesVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue < 0 ?
+          Infinity :
+          unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
       });
 
     Object.assign(
@@ -486,6 +487,18 @@ function WorkgroupNodesController(
     };
 
     nodeTypeDownloadFunction[fileDocument.type]();
+  }
+
+  function canDownloadSelectedFiles() {
+    if (!workgroupNodesVm.permissions.FILE.READ) {
+      return false;
+    }
+
+    if (workgroupNodesVm.selectedDocuments.some(file => file.type === TYPE_FOLDER)) {
+      return workgroupNodesVm.canDownloadArchive;
+    }
+
+    return true;
   }
 
   /**
