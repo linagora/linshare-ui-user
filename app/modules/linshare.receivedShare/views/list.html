@@ -30,7 +30,7 @@
                     <a uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                       <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                     </a>
-                    <ul data-ng-class="{'open':isOpenOrder}" class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown stop-propagate"
+                    <ul data-ng-class="{'open':isOpenOrder}" class="uib-dropdown-menu dropdown-menu dropdown-menu-right labeled-dropdown sort-dropdown stop-propagate"
                       uib-dropdown-menu="">
                       <li role="menuitem">
                         <a href="" class="center">
@@ -41,8 +41,11 @@
                       <li role="menuitem">
                         <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('name', $event)">
                           <span class="caret-area">
-                            <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              class="zmdi"
+                              ng-class="getToggleSelectedSort() ? 'zmdi-caret-down' : 'zmdi-caret-up'"
+                            >
+                            </i>
                           </span>
                           <span translate>FILTER_COMPONENT.ORDER_BY_NAME</span>
                         </a>
@@ -50,8 +53,11 @@
                       <li role="menuitem">
                         <a href="" class="ng-binding" data-ng-click="sortDropdownSetActive('sender.firstName', $event)">
                           <span class="caret-area">
-                            <i data-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                            <i data-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              class="zmdi"
+                              ng-class="getToggleSelectedSort() ? 'zmdi-caret-down' : 'zmdi-caret-up'"
+                            >
+                            </i>
                           </span>
                           <span translate>FILTER.ORDER_BY_SENDER</span>
                         </a>
@@ -59,8 +65,11 @@
                       <li role="menuitem">
                         <a href="" class="ng-binding selected-sorting" x-ng-click="sortDropdownSetActive('modificationDate', $event)">
                           <span class="caret-area">
-                            <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              class="zmdi"
+                              ng-class="getToggleSelectedSort() ? 'zmdi-caret-down' : 'zmdi-caret-up'"
+                            >
+                            </i>
                           </span>
                           <span translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</span>
                         </a>
@@ -68,8 +77,11 @@
                       <li role="menuitem">
                         <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('creationDate', $event)">
                           <span class="caret-area">
-                            <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              class="zmdi"
+                              ng-class="getToggleSelectedSort() ? 'zmdi-caret-down' : 'zmdi-caret-up'"
+                            >
+                            </i>
                           </span>
                           <span translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</span>
                         </a>
@@ -77,8 +89,11 @@
                       <li role="menuitem">
                         <a href="" class="ng-binding" x-ng-click="sortDropdownSetActive('size', $event)">
                           <span class="caret-area">
-                            <i x-ng-show="toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
-                            <i x-ng-show="!toggleSelectedSort" class="zmdi zmdi-caret-up"></i>
+                            <i
+                              class="zmdi"
+                              ng-class="getToggleSelectedSort() ? 'zmdi-caret-down' : 'zmdi-caret-up'"
+                            >
+                            </i>
                           </span>
                           <span translate>FILTER_COMPONENT.BY_SIZE</span>
                         </a>

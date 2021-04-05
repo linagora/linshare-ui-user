@@ -260,7 +260,7 @@ angular
           $scope.sortDropdownSetActive = tableParamsService.tableSort;
           $scope.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
           $scope.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
-          $scope.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
+          $scope.getToggleSelectedSort = tableParamsService.getToggleSelectedSort;
         });
     }
 
