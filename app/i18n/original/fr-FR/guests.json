@@ -49,7 +49,7 @@
       "UPDATE": "Editer"
     },
     "ERROR": {
-      "INVALID_DATE": "La date saisit doit être supérieur à la date d'aujourd'hui et inférieur à la date maximal du :",
+      "INVALID_DATE": "La date saisit doit être supérieur à la date d'aujourd'hui et inférieur à la date maximal du: {{date}}",
       "INVALID_EMAIL": "Format d'adresse électronique invalide.",
       "INVALID_EMPTY_FIELD": "Ce champ ne peut être vide."
     },

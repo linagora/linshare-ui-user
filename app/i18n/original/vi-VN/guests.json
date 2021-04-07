@@ -50,7 +50,7 @@
       "UPDATE": "Cập nhật"
     },
     "ERROR": {
-      "INVALID_DATE": "Ngày cần phải lớn hơn ngày hôm nay và không thể vượt quá ngày hết hạntối đa là",
+      "INVALID_DATE": "Ngày cần phải lớn hơn ngày hôm nay và không thể vượt quá ngày hết hạn tối đa là: {{date}}",
       "INVALID_EMAIL": "Địa chỉ email không hợp lệ.",
       "INVALID_EMPTY_FIELD": "Trường này không thể để trống."
     },

@@ -14,18 +14,29 @@
         <span translate>SIDEBAR.BUTTON.CREATE</span>
   </span>
 </div>
-<div ls-guest-form x-guest-object="mainVm.sidebar.getData().guestObject" x-form-name="createGuest"
+<guest-form
+  class="form-within-sidebar"
+  form="mainVm.sidebar.getData().form"
+  guest-object="mainVm.sidebar.getData().guestObject"
+>
+</guest-form>
+<!-- <div ls-guest-form x-guest-object="mainVm.sidebar.getData().guestObject" x-form-name="createGuest"
      class="form-within-sidebar">
-</div>
+</div> -->
 <!-- UPDATE BTN links-->
 <div class="bottom-sidebar-btn form-within-sidebar">
-  <button class="btn btn-default col-xs-6"
-          x-ng-click="mainVm.sidebar.hide(mainVm.sidebar.getData().guestObject);
-                      mainVm.sidebar.getData().closeDropdown($event)">
-    {{"SIDEBAR.BUTTON.CANCEL" | translate}}
+  <button
+    class="btn btn-default col-xs-6"
+    ng-click="mainVm.sidebar.hide(mainVm.sidebar.getData().guestObject); mainVm.sidebar.getData().closeDropdown($event)"
+    translate
+  >
+    SIDEBAR.BUTTON.CANCEL
   </button>
-  <button class="btn btn-primary col-xs-6"
-          x-ng-click="mainVm.sidebar.getData().addGuest(createGuest, mainVm.sidebar.getData().guestObject)">
-    {{"SIDEBAR.BUTTON.CREATE" | translate}}
+  <button
+    class="btn btn-primary col-xs-6"
+    ng-click="mainVm.sidebar.getData().createGuest()"
+    translate
+  >
+    SIDEBAR.BUTTON.CREATE
   </button>
 </div>

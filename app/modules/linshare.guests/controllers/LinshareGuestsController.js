@@ -27,7 +27,8 @@
     'NgTableParams',
     'toastService',
     'withEmail',
-    'formUtilsService'
+    'formUtilsService',
+    'sidebarService'
   ];
 
   /**
@@ -48,12 +49,12 @@
     NgTableParams,
     toastService,
     withEmail,
-    formUtilsService
+    formUtilsService,
+    sidebarService
   ) {
     /* jshint validthis: true */
     var guestVm = this;
 
-    guestVm.addGuest = addGuest;
     guestVm.currentPage = lsAppConfig.guestsList;
     //TODO: To be deleted one ngTable directive is corrected
     guestVm.currentSelectedGuest = {
@@ -80,7 +81,8 @@
     guestVm.tableSelectAll = tableSelectAll;
     guestVm.tableSort = tableSort;
     guestVm.toggleSelectedSort = true;
-    guestVm.updateGuest = updateGuest;
+    guestVm.onUpdatedGuest = onUpdatedGuest;
+    guestVm.onCreatedGuest = onCreatedGuest;
     guestVm.withEmail = withEmail;
 
     activate();
@@ -119,23 +121,10 @@
       }
     }
 
-    /**
-     *  @name addGuest
-     *  @desc Valid the object and call the method save on object Guest
-     *  @param {Object} form - An Object representing the form
-     *  @param {Object} newGuest - An object containing all informations of the guest
-     *  @memberOf LinShare.Guests.LinshareGuestsController
-     */
-    function addGuest(form, newGuest) {
-      if (form.$valid) {
-        newGuest.create().then(function() {
-          $scope.mainVm.sidebar.hide(newGuest);
-          toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.CREATE'});
-          guestVm.tableParams.reload();
-        });
-      } else {
-        formUtilsService.setSubmitted(form);
-      }
+    function onCreatedGuest() {
+      sidebarService.hide(guestVm.guestObject);
+      toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.CREATE'});
+      guestVm.tableParams.reload();
     }
 
     /**
@@ -152,7 +141,7 @@
               _.remove(guestVm.selectedGuests, {'uuid': guestObject.uuid});})
             .then(function() {
               guestVm.tableParams.reload();
-              $scope.mainVm.sidebar.hide(guestObjects);
+              sidebarService.hide(guestObjects);
               toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.DELETE'});
             });
         });
@@ -239,9 +228,9 @@
      * @memberOf LinShare.Guests.LinshareGuestsController
      */
     function loadSidebarContent(content) {
-      $scope.mainVm.sidebar.setData(guestVm);
-      $scope.mainVm.sidebar.setContent(content || lsAppConfig.guestDetails);
-      $scope.mainVm.sidebar.show();
+      sidebarService.setData(guestVm);
+      sidebarService.setContent(content || lsAppConfig.guestDetails);
+      sidebarService.show();
     }
 
     /**
@@ -382,16 +371,10 @@
      *  @param {Object} guestObject - An object containing all informations of the guest
      *  @memberOf LinShare.Guests.LinshareGuestsController
      */
-    function updateGuest(form, guestObject) {
-      if (form.$valid) {
-        guestObject.update().then(function() {
-          $scope.mainVm.sidebar.hide(guestObject);
-          toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.UPDATE'});
-          guestVm.tableParams.reload();
-        });
-      } else {
-        formUtilsService.setSubmitted(form);
-      }
+    function onUpdatedGuest() {
+      sidebarService.hide(guestVm.guestObject);
+      toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.UPDATE'});
+      guestVm.tableParams.reload();
     }
 
     ////=====> FROM HERE LIES TERROR YOU NEVER SAW, BE PREPARED AND DIE WATCHING

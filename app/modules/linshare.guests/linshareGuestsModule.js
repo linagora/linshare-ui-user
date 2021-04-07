@@ -9,6 +9,7 @@ angular.module(
 
 require('./constants');
 require('./controllers/LinshareGuestsController');
-require('./directives/guest-form/guest-form.directive');
+require('./components/guestForm/guestForm');
+require('./components/guestForm/guestFormController');
 require('./services/guestObjectService');
 require('./services/guestsRestService');

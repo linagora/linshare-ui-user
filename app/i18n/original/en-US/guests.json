@@ -50,7 +50,7 @@
       "UPDATE": "Update"
     },
     "ERROR": {
-      "INVALID_DATE": "The date needs to be greater than today's date and cannot exceed the maximum expiry date being the : ",
+      "INVALID_DATE": "The date needs to be greater than today's date and cannot exceed the maximum expiry date being the: {{date}}",
       "INVALID_EMAIL": "Email address is invalid.",
       "INVALID_EMPTY_FIELD": "This field cannot be empty."
     },

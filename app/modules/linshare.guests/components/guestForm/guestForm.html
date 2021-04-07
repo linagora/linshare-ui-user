@@ -1,0 +1,328 @@
+<div
+  id="content-ctn-sidebar"
+  class="card col-xs-12 m-t-2em form-guests"
+  ng-class="{'form-create-guests': !formVm.guestObject.uuid}"
+>
+  <form class="form-sidebar" name="formVm.form">
+    <div class="form-group fg-float m-b-30">
+      <div
+        class="fg-line"
+        ng-class="{
+          'has-error' : ((formVm.form.firstname.$touched || formVm.form.$submitted) && formVm.form.firstname.$invalid),
+          'fg-toggled' : firstNameFocus,
+          'fg-not-empty' : !formVm.form.firstname.$error.required
+        }"
+      >
+        <input
+          id="firstname"
+          class="input-sm form-control fg-input"
+          type="text"
+          name="firstname"
+          ng-model="formVm.guestObject.firstName"
+          ng-focus="firstNameFocus=true"
+          ng-blur="firstNameFocus=false"
+          auto-focus
+          required
+        >
+        <label class="fg-label required" for="firstname" translate>SIDEBAR.LABEL.FIRSTNAME</label>
+        <span
+          ng-show="(formVm.form.firstname.$touched || formVm.form.$submitted) && formVm.form.firstname.$invalid"
+          translate
+        >
+          SIDEBAR.ERROR.INVALID_EMPTY_FIELD
+        </span>
+      </div>
+    </div>
+    <div class="form-group fg-float m-b-30">
+      <div
+        class="fg-line"
+        ng-class="{
+          'has-error' : ((formVm.form.lastname.$touched || formVm.form.$submitted) && formVm.form.lastname.$invalid),
+          'fg-toggled' : lastNameFocus,
+          'fg-not-empty' : !formVm.form.lastname.$error.required
+        }"
+      >
+        <input
+          id="lastname"
+          type="text"
+          name="lastname"
+          class="input-sm form-control fg-input"
+          required ng-model="formVm.guestObject.lastName"
+          ng-focus="lastNameFocus=true"
+          ng-blur="lastNameFocus=false"
+        >
+        <label class="fg-label required" for="lastname" translate>SIDEBAR.LABEL.LASTNAME</label>
+        <span ng-show="(formVm.form.lastname.$touched || formVm.form.$submitted) && formVm.form.lastname.$invalid">
+          <span translate>SIDEBAR.ERROR.INVALID_EMPTY_FIELD</span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group fg-float m-b-30">
+      <div
+        class="fg-line"
+        ng-class="{
+          'has-error' : ((formVm.form.email.$touched || formVm.form.$submitted) && formVm.form.email.$invalid),
+          'fg-toggled' : emailFocus,
+          'fg-not-empty' : !formVm.form.email.$error.required
+        }"
+      >
+        <input
+          id="email"
+          type="email"
+          class="input-sm form-control fg-input"
+          name="email"
+          ng-model="formVm.guestObject.mail"
+          ng-focus="emailFocus=true"
+          ng-blur="emailFocus=false"
+          required
+        >
+        <label class="fg-label required" for="email" translate>SIDEBAR.LABEL.EMAIL</label>
+        <span ng-show="(formVm.form.email.$touched || formVm.form.$submitted) && formVm.form.email.$invalid" translate>
+          SIDEBAR.ERROR.INVALID_EMAIL
+        </span>
+      </div>
+    </div>
+    <div
+      class="m-b-30 col-xs-12 field-ctn"
+      id="dateField"
+      ng-show="formVm.guestObject.allowedToExpiration.enable"
+      ng-class="{
+        'has-error' : ((formVm.form.expirationDate.$touched || formVm.form.$submitted) &&
+                      (formVm.form.expirationDate.$invalid || formVm.form.expirationDate.$error.invalidDate))
+      }"
+    >
+      <label for="expirationDate" translate>
+        SIDEBAR.LABEL.EXP_DATE
+      </label>
+      <!--
+        TODO: The directive shall be refactored with a proper template and passing different options.
+              See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
+      -->
+      <div
+        class="datepicker-border-fix date-picker dp-blue"
+        ng-class="{'is-opened': opened2}"
+      >
+        <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened2}">
+          <div class="form-inline clearfix">
+            <input
+              type="text"
+              class="form-control date-picker-input"
+              name="expirationDate"
+              id="expirationDate"
+              placeholder="{{formVm.guestObject.expirationDate.value | lsDate: 'fullDate'}}"
+              working-date-picker
+              ng-click="open($event, 'opened2')"
+              uib-datepicker-popup
+              datepicker-options="formVm.guestObject.form.datepicker.options"
+              show-weeks="false"
+              is-open="opened2"
+              min="{{formVm.guestObject.form.datepicker.minDate | lsDate:'yyyy-MM-dd'}}"
+              max="{{formVm.guestObject.form.datepicker.maxDate | lsDate:'yyyy-MM-dd'}}"
+              ng-model="formVm.guestObject.expirationDate"
+              ng-disabled="!formVm.guestObject.form.datepicker.isEditable"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <span
+        ng-show="(formVm.form.expirationDate.$touched || formVm.form.$submitted) && (formVm.form.expirationDate.$invalid || formVm.form.expirationDate.$error.invalidDate)"
+        translate
+        translate-values="{
+          date: (formVm.guestObject.form.datepicker.maxDate | lsDate: 'fullDate')
+        }"
+      >
+        SIDEBAR.ERROR.INVALID_DATE
+      </span>
+    </div>
+    <!--TODO: Once the back allow email edition change the ng-show value with "allowedToEmail.enable"-->
+    <div class="m-b-30 form-group" ng-show="!formVm.productionMode">
+      <h5>{{"WIP" | translate}}</h5>
+      <label for="message" class="p-b-10">{{"SIDEBAR.LABEL.ADD_EMAIL" | translate}} :</label>
+      <!-- TODO: Once the back allow email edition change the disabled with
+                 'ng-disabled="!allowedToEmail.canOverride"'-->
+      <textarea class="form-control comment" id="message" name="message" rows="5" disabled
+                placeholder="{{'SIDEBAR.LABEL.ENTER_EMAIL' | translate}}" ng-model="formVm.guestObject.message">
+      </textarea>
+    </div>
+    <p
+      ng-click="formVm.guestObject.form.activateMoreOptions = !formVm.guestObject.form.activateMoreOptions"
+      ng-class="{'animate-chevron' : formVm.guestObject.form.activateMoreOptions}"
+      class="clearfix m-b-20"
+    >
+      <a href="" translate>SIDEBAR.LABEL.ADVANCED_OPTIONS</a>
+      <i class="zmdi zmdi-chevron-down toggle-chevron pull-right"></i>
+    </p>
+    <div ng-hide="!formVm.guestObject.form.activateMoreOptions">
+      <!--TODO: Once the back allow editors change the ng-show value with "allowedToAddEditors.enable"-->
+      <div class="m-b-20 col-xs-12 field-ctn" ng-show="!formVm.productionMode">
+        <h5>{{"WIP" | translate}}</h5>
+        <div class="fg-line input-group dp-blue">
+          <div class="form-inline">
+            <label for="allow-editors" class="p-b-10">{{"SIDEBAR.LABEL.ALLOW_MODIFICATORS" | translate}} :</label>
+            <label class="checkbox checkbox-inline">
+              <!-- TODO: Once the back allow editors change the disabled with
+                         'ng-disabled="!allowedToAddEditors.canOverride"'-->
+              <input
+                disabled
+                type="checkbox"
+                name="allow-editors"
+                id="allow-editors"
+                ng-checked="formVm.guestObject.form.activateEditors"
+                ng-click="formVm.guestObject.form.activateEditors = !formVm.guestObject.form.activateEditors"
+                ng-model="formVm.guestObject.form.editors"
+              />
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!formVm.guestObject.form.activateEditors">
+          <ng-form name="editors" role="form" class="clearfix no-right-inline-btn">
+            <div class="form-group fg-line">
+              <div ls-autocomplete-user="USERS" data-selected-users-list="formVm.guestObject.editorsContacts">
+              </div>
+            </div>
+          </ng-form>
+          <div class="custom-list-body col-xs-12 m-0 p-0">
+            <div
+              class="custom-list-item"
+              ng-repeat="editor in formVm.guestObject.editorsContacts | orderBy : '-' as results"
+              tooltip-placement="bottom"
+              tooltip-popup-delay="700"
+              uib-tooltip="{{::editor.firstName + ' ' + editor.lastName +' : '+editor.domain || editor.mail}}"
+            >
+              <p class="pull-left circle-ctn">
+                <span class="circle user-bg" ng-show="editor.domain">{{::editor.firstName.charAt(0)}}</span>
+                <span class="circle user-bg" ng-show="!editor.domain">{{::editor.mail.charAt(0).toUpperCase()}}</span>
+              </p>
+              <div class="pull-left name-recipients-ctn">
+                <p class="pull-left inner-text-li" ng-show="::editor.domain">
+                  {{::editor.firstName + ' ' + editor.lastName}}
+                </p>
+                <p class="pull-left inner-text-li" ng-show="!::editor.domain">
+                  {{::editor.mail}}
+                </p>
+                <p class="close-list-icone-btn pull-right"
+                   ng-click="formVm.guestObject.editorsContacts.splice(results.length - $index -1, 1)">
+                  <i class="zmdi zmdi-close"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="m-b-30 col-xs-12 field-ctn"
+        ng-if="::formVm.guestObject.allowedToUpload.enable"
+      >
+        <div class="fg-line">
+          <div class="form-inline">
+            <label for="user-space">{{"SIDEBAR.LABEL.ACTIVATE_USER_SPACE" | translate}}:</label>
+            <label class="checkbox checkbox-inline">
+              <input
+                id="user-space"
+                name="user-space"
+                type="checkbox"
+                ng-checked="formVm.guestObject.form.activateUserSpace"
+                ng-click="formVm.toggleAdvancedOptions()"
+                ng-model="formVm.guestObject.canUpload"
+                ng-disabled="!formVm.guestObject.allowedToUpload.canOverride"
+              />
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn" ng-show="::formVm.guestObject.allowedToRestrict.enable">
+        <div class="fg-line">
+          <div class="form-inline">
+            <label for="restrict-contact" class="p-b-10">
+              {{"SIDEBAR.LABEL.RESTRICT_CONTACTS" | translate}}:
+            </label>
+            <label class="checkbox checkbox-inline">
+              <input
+                id="restrict-contact"
+                name="restrict-contact"
+                type="checkbox"
+                ng-checked="formVm.guestObject.form.activateRestricted"
+                ng-model="formVm.guestObject.restricted"
+                ng-disabled="!formVm.guestObject.allowedToRestrict.canOverride || !formVm.guestObject.canUpload"
+              />
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!formVm.guestObject.restricted">
+          <ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
+            <div class="form-group fg-line">
+              <div
+                ls-autocomplete-user="USERS"
+                disabled="!formVm.guestObject.allowedToRestrict.canOverride"
+                data-selected-users-list="formVm.guestObject.restrictedContacts"
+                data-is-required="formVm.guestObject.form.activateUserSpace && formVm.guestObject.form.activateRestricted"
+                data-with-email="false"
+              >
+              </div>
+            </div>
+          </ng-form>
+          <div class="custom-list-body col-xs-12 m-0 p-0">
+            <div
+              class="custom-list-item"
+              ng-repeat="restrictedContact in formVm.guestObject.restrictedContacts | orderBy : '-' as results"
+            >
+              <p class="pull-left circle-ctn">
+                <span class="circle  user-bg" ng-if="restrictedContact.domain">
+                  {{::restrictedContact.firstName.charAt(0)}}
+                </span>
+                <span class="circle  user-bg" ng-if="!restrictedContact.domain">
+                  {{::restrictedContact.mail.charAt(0).toUpperCase()}}
+                </span>
+              </p>
+              <div class="pull-left name-recipients-ctn">
+                <p class="pull-left inner-text-li" ng-show="restrictedContact.domain">
+                  {{::restrictedContact.firstName + ' ' + restrictedContact.lastName}}
+                </p>
+                <p class="pull-left inner-text-li" ng-show="!restrictedContact.domain">
+                  {{::restrictedContact.mail}}
+                </p>
+                <p
+                  class="close-list-icone-btn pull-right"
+                  ng-click="formVm.guestObject.restrictedContacts.splice(results.length - $index -1, 1)"
+                >
+                  <i class="zmdi zmdi-close"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn guest-description" ng-hide="::formVm.guestObject.uuid !== undefined">
+        <div class="form-inline p-b-10">
+          <label for="activate-description">{{"SIDEBAR.LABEL.ADD_DESCRIPTION" | translate}}:</label>
+          <label class="checkbox checkbox-inline">
+            <input
+              type="checkbox"
+              id="activate-description"
+              name="activate-description"
+              ng-checked="formVm.guestObject.form.activateDescription"
+              ng-click="formVm.guestObject.form.activateDescription = !formVm.guestObject.form.activateDescription"
+            />
+            <i class="input-helper"></i>
+          </label>
+        </div>
+        <div
+          class="css-slide-up form-group"
+          ng-hide="!formVm.guestObject.form.activateDescription"
+        >
+          <textarea
+            class="form-control comment"
+            name="comment"
+            rows="3"
+            translate-attr="{'placeholder': 'SIDEBAR.LABEL.ENTER_DESCRIPTION' }"
+            ng-model="formVm.guestObject.comment"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
