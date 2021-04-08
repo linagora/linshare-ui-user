@@ -94,7 +94,7 @@
                        aria-haspopup="true" aria-expanded="false">
                       <i class="zmdi zmdi-sort-asc" aria-hidden="true"></i>
                     </a>
-                    <ul data-ng-class="{'open':isOpenOrder}" class="dropdown-menu-right uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown"
+                    <ul data-ng-class="{'open':isOpenOrder}" class="sort-dropdown dropdown-menu-right uib-dropdown-menu dropdown-menu pull-right dm-icon stop-propagate labeled-dropdown"
                         uib-dropdown-menu>
                       <li role="menuitem">
                         <a href="" class="center">
@@ -139,7 +139,7 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding selected-sorting"
+                        <a href="" class="ng-binding"
                            x-ng-click="guestVm.tableSort('expirationDate', $event)">
                           <span class="caret-area">
                             <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
@@ -149,7 +149,7 @@
                         </a>
                       </li>
                       <li role="menuitem">
-                        <a href="" class="ng-binding" x-ng-click="guestVm.tableSort('modificationDate', $event)">
+                        <a href="" class="ng-binding selected-sorting" ng-click="guestVm.tableSort('modificationDate', $event)">
                           <span class="caret-area">
                               <i x-ng-show="guestVm.toggleSelectedSort" class="zmdi zmdi-caret-down"></i>
                               <i x-ng-show="!guestVm.toggleSelectedSort" class="zmdi zmdi-caret-up"></i>

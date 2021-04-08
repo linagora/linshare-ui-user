@@ -359,7 +359,7 @@
       guestVm.tableParams.sorting(sortField, guestVm.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
 
-      angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
+      angular.element('ul.sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });
     }
