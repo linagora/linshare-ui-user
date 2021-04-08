@@ -262,6 +262,8 @@
       } else {
         _.pull(selectedItems, item);
       }
+
+      updateFlagsOnSelectedPages();
     }
 
     /**
@@ -404,5 +406,25 @@
     guestVm.singleEventFab = function($event) {
       $event.stopPropagation();
     };
+
+    //TODO this is for calculate selected all when toggling selection of item
+    //need to check when refactor this controller fwith tableParamsService
+    function updateFlagsOnSelectedPages() {
+      if (guestVm.tableParams && !guestVm.tableParams.data.length) {
+        guestVm.flagsOnSelectedPages[guestVm.tableParams.page()] = false;
+
+        return;
+      }
+
+      if (!guestVm.flagsOnSelectedPages[guestVm.tableParams.page()] &&
+        (guestVm.tableParams.data.length === guestVm.selectedGuests.length)) {
+        guestVm.flagsOnSelectedPages[guestVm.tableParams.page()] = true;
+      }
+
+      if (guestVm.flagsOnSelectedPages[guestVm.tableParams.page()] &&
+        (guestVm.tableParams.data.length !== guestVm.selectedGuests.length)) {
+        guestVm.flagsOnSelectedPages[guestVm.tableParams.page()] = false;
+      }
+    }
   }
 })();
