@@ -216,15 +216,14 @@
      *  @memberOf LinShare.guests.GuestObjectService
      */
     function reset() {
-      /* jshint validthis:true */
       self = this;
-      self.canUpload = _.clone(allowedToUpload.value);
       self.comment = '';
-      self.expirationDate = _.clone(form.datepicker.options.maxDate);
       self.firstName = '';
-      self.form = _.cloneDeep(form);
       self.lastName = '';
       self.mail = '';
+      self.form = _.cloneDeep(form);
+      self.canUpload = _.clone(allowedToUpload.value);
+      self.expirationDate = _.clone(allowedToExpiration.value);
       self.restricted = _.clone(allowedToRestrict.value);
       self.restrictedContacts = _.cloneDeep(contacts);
       //self.editors = false;
