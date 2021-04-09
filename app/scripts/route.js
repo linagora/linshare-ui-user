@@ -118,17 +118,6 @@
           },
           files: function(receivedShareRestService) {
             return receivedShareRestService.getList();
-          },
-          documentsToIsolate: function($transition$, files) {
-            var documentsToFind = $transition$.params().fileUuid;
-
-            if (_.isUndefined(documentsToFind)) {
-              return null;
-            }
-
-            return _.filter(files, function(doc) {
-              return _.includes(documentsToFind, doc.uuid);
-            });
           }
         }
       })

@@ -17,7 +17,6 @@ angular
     auditDetailsService,
     authenticationRestService,
     browseService,
-    documentsToIsolate,
     documentUtilsService,
     files,
     functionalities,
@@ -25,7 +24,8 @@ angular
     receivedShareRestService,
     toastService,
     documentPreviewService,
-    tableParamsService
+    tableParamsService,
+    $stateParams
   ) {
     $scope.copyIntoFiles = copyIntoFiles;
     $scope.deleteDocuments = deleteDocuments;
@@ -79,16 +79,6 @@ angular
 
       authenticationRestService.getCurrentUser().then(userData => {
         $scope.canUpload = userData.canUpload;
-
-
-        if (documentsToIsolate !== null) {
-          selectDocuments(
-            documentsToIsolate,
-            $scope.tableParams
-          );
-
-          $scope.toggleFilterBySelectedFiles();
-        }
 
         if (!$scope.isMobile && $scope.selectedDocuments.length === 1) {
           $scope.showCurrentFile($scope.selectedDocuments[0]);
@@ -248,8 +238,10 @@ angular
     }
 
     function launchTableParamsInitiation() {
-      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter)
-        .then(function() {
+      var fileToSelect = $stateParams.fileUuid;
+
+      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, fileToSelect)
+        .then(function(data) {
           $scope.tableParamsService = tableParamsService;
           $scope.tableParams = tableParamsService.getTableParams();
           $scope.lengthOfSelectedDocuments = tableParamsService.lengthOfSelectedDocuments;
@@ -261,6 +253,19 @@ angular
           $scope.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
           $scope.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
           $scope.getToggleSelectedSort = tableParamsService.getToggleSelectedSort;
+
+          if ($stateParams.fileUuid) {
+            if (_.isNil(data.itemToSelect)) {
+              toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
+            } else {
+              toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
+              $scope.addSelectedDocument(data.itemToSelect);
+              $scope.toggleFilterBySelectedFiles();
+              if (!$scope.isMobile) {
+                $scope.showCurrentFile(data.itemToSelect);
+              }
+            }
+          }
         });
     }
 
