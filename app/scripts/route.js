@@ -216,23 +216,34 @@
         resolve: {
           currentFolder: function(workgroupNodesRestService, $transition$) {
             return workgroupNodesRestService.get(
-              $transition$.params().workgroupUuid, $transition$.params().workgroupUuid, true);
+              $transition$.params().workgroupUuid, $transition$.params().workgroupUuid, true)
+              .catch(() => {
+                $transition$.abort();
+              });
           },
           nodesList: function(currentFolder, workgroupNodesRestService, $transition$) {
-            return workgroupNodesRestService.getList($transition$.params().workgroupUuid);
+            return workgroupNodesRestService.getList($transition$.params().workgroupUuid)
+              .catch(() => {
+                $transition$.abort();
+              });
           },
           workgroup: function(currentFolder, nodesList, $transition$, workgroupRestService) {
             return workgroupRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
               return workgroup;
+            }).catch(() => {
+              $transition$.abort();
             });
           },
-          workgroupPermissions: function(workgroup, workgroupPermissionsService) {
+          workgroupPermissions: function(workgroup, workgroupPermissionsService, $transition$) {
             return workgroupPermissionsService
               .getWorkgroupsPermissions([workgroup])
               .then(function(workgroupPermissions) {
                 const permissions = workgroupPermissionsService.formatPermissions(workgroupPermissions);
 
                 return permissions[Object.keys(permissions)[0]];
+              })
+              .catch(() => {
+                $transition$.abort();
               });
           },
         }
