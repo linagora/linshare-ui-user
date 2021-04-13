@@ -131,15 +131,20 @@
           <i class="groups-user-group"></i> {{'GUEST_DETAILS.AVAILABLE_CONTACTS' | translate}}
         </h2>
         <div class="meta-data-content m-t-20">
-          <div x-ng-repeat="restrictedContact in mainVm.sidebar.getData().selectedGuest.restrictedContacts"
-               class="custom-list-item" tooltip-placement="bottom" tooltip-popup-delay="700"
-               uib-tooltip="restrictedContact.firstName restrictedContact.lastName : restrictedContact.domain">
+          <div
+            ng-repeat="restrictedContact in mainVm.sidebar.getData().selectedGuest.restrictedContacts track by restrictedContact.uuid"
+            class="custom-list-item"
+            tooltip-placement="top"
+            tooltip-popup-delay="700"
+            tooltip-append-to-body="true"
+            uib-tooltip="{{ ::((restrictedContact.firstName || '') + ' ' + (restrictedContact.lastName || '')).trim() }}"
+          >
             <p class="pull-left circle-ctn">
-              <span class="circle user-bg">{{restrictedContact.firstName[0]}}</span>
+              <span class="circle user-bg">{{::restrictedContact.firstName[0]}}</span>
             </p>
             <div class="pull-left name-recipients-ctn">
               <p class="pull-left inner-text-li">
-                {{restrictedContact.firstName}} {{restrictedContact.lastName}}
+                {{ ::((restrictedContact.firstName || '') + ' ' + (restrictedContact.lastName || '')).trim() }}
               </p>
             </div>
           </div>
