@@ -33,7 +33,8 @@
         "28405": "The guest restricted contacts list is empty",
         "28406": "The search for guests is invalid",
         "38400": "The guest expiration date is invalid",
-        "46011": "The account quota has been reached"
+        "46011": "The account quota has been reached",
+        "62005": "You are not authorized to use this service"
       },
       "UPLOAD_ERROR": {
         "NONE": "An error occurred during upload",

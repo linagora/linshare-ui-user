@@ -33,7 +33,8 @@
         "28405": "La liste de contact restreint de l'invité est vide",
         "28406": "La recherche pour les invités est invalide",
         "38400": "La date d'expiration de l'invité est invalide",
-        "46011": "Le quota du compte a été atteint"
+        "46011": "Le quota du compte a été atteint",
+        "62005": "You are not authorized to use this service"
       },
       "UPLOAD_ERROR": {
         "NONE": "Une erreur est survenue pendant l'envoi du fichier",

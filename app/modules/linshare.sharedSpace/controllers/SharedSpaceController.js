@@ -309,14 +309,13 @@ angular.module('linshare.sharedSpace')
     function deleteCallback(items) {
       angular.forEach(items, restangularizedItem => {
         $log.debug('value to delete', restangularizedItem);
-        restangularizedItem.remove().then(() => {
+        sharedSpaceRestService.remove(restangularizedItem.uuid).then(() => {
           toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
           _.remove(sharedSpaceVm.itemsList, restangularizedItem);
           _.remove(sharedSpaceVm.selectedDocuments, restangularizedItem);
           sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList; // I keep a copy of the data for the filter module
           sharedSpaceVm.tableParams.reload();
           $scope.mainVm.sidebar.hide(items);
-
           updateFlagsOnSelectedPages();
         });
       });
