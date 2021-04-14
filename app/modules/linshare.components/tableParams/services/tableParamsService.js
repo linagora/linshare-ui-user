@@ -74,10 +74,10 @@
       if (!_.isNil(itemToSelectUuid)) {
         var items = getDisplayedData(itemsList, filter, sorting);
 
-        
+
         return Math.floor(_.findIndex(items, {'uuid': itemToSelectUuid}) / paramCount) + 1;
       }
-      
+
       return 1;
     }
 
@@ -103,7 +103,7 @@
     function getDisplayedData(data, filter, sort) {
       var filteredData = filter ? $filter('filter')(data, filter) : data;
 
-      
+
       return sort ? $filter('orderBy')(filteredData, sort) : filteredData;
     }
 
@@ -117,7 +117,7 @@
     function getItemToSelect(itemsList, itemToSelectUuid) {
       var itemToSelect = _.find(itemsList, {'uuid': itemToSelectUuid});
 
-      
+
       return !_.isNil(itemToSelect) ? itemToSelect : null;
     }
 
@@ -141,7 +141,7 @@
       var sortProperty = Object.keys(paramSorting)[0];
       var sortPrefix = paramSorting[sortProperty] === 'desc' ? '-' : '';
 
-      
+
       return sortPrefix + sortProperty;
     }
 
@@ -236,7 +236,7 @@
               toggleItemSelection(resolveObjects.itemToSelect);
               selectOneItem = false;
             }
-            
+
             return (items.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           }
         });
@@ -302,7 +302,7 @@
       if (!_.isNil(tableList)) {
         itemsList = tableList;
       }
-      
+
       return tableParams.reload();
     }
 
@@ -376,7 +376,7 @@
             element.isSelected = false;
             _.remove(selectedItemsList, function(item) {
               removeItemFromSelectedItemsList(item);
-              
+
               return item.uuid === element.uuid;
             });
           }
@@ -411,14 +411,19 @@
      */
     function toggleItemSelection(itemToSelect) {
       itemToSelect.isSelected = !itemToSelect.isSelected;
+
       if (itemToSelect.isSelected) {
         selectedItemsList.push(itemToSelect);
+
+        flagsOnSelectedPages[tableParams.page()] = tableParams.data.every(item => item.isSelected);
       } else {
-        var index = selectedItemsList.indexOf(itemToSelect);
+        const index = selectedItemsList.indexOf(itemToSelect);
 
         if (index > -1) {
           selectedItemsList.splice(index, 1);
         }
+
+        flagsOnSelectedPages[tableParams.page()] = false;
       }
     }
   }
