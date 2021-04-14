@@ -27,11 +27,12 @@ function uploadRequestUtilsService(
     showToastAlertFor,
     openAddingRecipientsSideBar
   };
+
   ////////////
 
   function openWarningDialogFor(action, uploadRequests) {
     if (action === 'archive') {
-      return promptArchiveDialog();
+      return promptArchiveDialog(uploadRequests);
     }
 
     return $q.all([
@@ -61,11 +62,7 @@ function uploadRequestUtilsService(
   }
 
   function showToastAlertFor(action, type, items = []) {
-    if (action === 'archive') {
-      toastService[type]({
-        key: `UPLOAD_REQUESTS.TOAST_ALERT.ARCHIVE.${type.toUpperCase()}`
-      });
-    } else if (action === 'unexpected_error') {
+    if (action === 'unexpected_error') {
       toastService.error({
         key: 'UPLOAD_REQUESTS.TOAST_ALERT.SHOW_UNEXPECTED_ERROR'
       });
@@ -87,11 +84,13 @@ function uploadRequestUtilsService(
     sidebarService.show();
   }
 
-  function promptArchiveDialog() {
+  function promptArchiveDialog(uploadRequests = []) {
     return $mdDialog.show({
       template: require('../views/archiveUploadRequestDialog.html'),
       controller: 'archiveUploadRequestDialogController',
       controllerAs: 'archiveUploadRequestDialogVm',
+      bindToController: true,
+      numberUploadRequests: uploadRequests.length
     });
   }
 }

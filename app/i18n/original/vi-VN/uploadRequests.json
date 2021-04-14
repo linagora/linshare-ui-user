@@ -146,7 +146,7 @@
       },
       "ARCHIVE": {
         "TITLE": "Lưu trữ yêu cầu tải lên",
-        "TEXT": "Bạn chuẩn bị lưu trữ 1 yêu cầu tải lên. Hãy cẩn thận, hành động này không thể hoàn tác.",
+        "TEXT": "Bạn chuẩn bị lưu trữ {singular, select, true{yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}}. Hãy cẩn thận, hành động này không thể hoàn tác.",
         "CHECK_BOX": "Sao chép tệp vào không gian cá nhân của mình",
         "CONFIRM": "Đồng ý",
         "CANCEL": "Không"
@@ -178,8 +178,8 @@
         "INFO": "{number} {singular, select, true{yêu cầu tải lên} other{yêu cầu tải lên}} đã được đóng."
       },
       "ARCHIVE": {
-        "ERROR": "Yêu cầu tải lên không được lưu trữ.",
-        "INFO": "Yêu cầu tải lên đã được lưu trữ."
+        "ERROR": "{singular, select, true{yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} tải lên không được lưu trữ.",
+        "INFO": "{singular, select, true{yêu cầu tải lên} other{{nbItems} yêu cầu tải lên}} đã được lưu trữ."
       },
       "DELETE_ARCHIVED": {
         "ERROR": "{number} {singular, select, true{yêu cầu tải lên đã lưu trữ} other{yêu cầu tải lên đã lưu trữ}} không được xóa.",

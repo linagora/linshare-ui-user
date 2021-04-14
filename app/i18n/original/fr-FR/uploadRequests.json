@@ -146,7 +146,7 @@
       },
       "ARCHIVE": {
         "TITLE": "Archive de l'invitation de dépôt",
-        "TEXT": "Vous êtes sur le point d'archiver un invitation de dépot. Attention, cette action ne peut pas être annulée.",
+        "TEXT": "Vous êtes sur le point d'archiver {singular, select, true{un invitation de dépot} other{{nbItems} invitations de dépot}}. Attention, cette action ne peut pas être annulée.",
         "CHECK_BOX": "Copiez tous les fichiers dans votre espace personnel avant l'archivage",
         "CONFIRM": "Oui, archiver",
         "CANCEL": "Non"
@@ -179,8 +179,8 @@
         "INFO": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} a été fermée."
       },
       "ARCHIVE": {
-        "ERROR": "Invitation de dépot n'a pas été archivé.",
-        "INFO": "Invitation de dépot a été archivé."
+        "ERROR": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} n'a pas été archivé.",
+        "INFO": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} a été archivé."
       },
       "DELETE_ARCHIVE": {
         "ERROR": "{number} {singular, select, true{invitation de dépôt archivée n'a} other{invitations de dépôt archivées n'ont}} pas été supprimée.",

@@ -55,7 +55,7 @@ function uploadRequestGroupsController(
     uploadRequestGroupsVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
     uploadRequestGroupsVm.cancelUploadRequestGroups = cancelUploadRequestGroups;
     uploadRequestGroupsVm.closeUploadRequestGroups = closeUploadRequestGroups;
-    uploadRequestGroupsVm.archiveUploadRequestGroup = archiveUploadRequestGroup;
+    uploadRequestGroupsVm.archiveUploadRequestGroups = archiveUploadRequestGroups;
     uploadRequestGroupsVm.uploadRequestGroupCreate = lsAppConfig.uploadRequestGroupCreate;
     uploadRequestGroupsVm.uploadRequestGroupDetails = lsAppConfig.uploadRequestGroupDetails;
     uploadRequestGroupsVm.getOwnerName = contactsListsService.getOwnerName;
@@ -104,6 +104,7 @@ function uploadRequestGroupsController(
         uploadRequestGroupsVm.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
         uploadRequestGroupsVm.toggleSelectedSort = tableParamsService.getToggleSelectedSort();
         uploadRequestGroupsVm.canCloseSelectedUploadRequests = () => uploadRequestGroupsVm.selectedUploadRequestGroups.every(request => request.status === 'ENABLED');
+        uploadRequestGroupsVm.canArchiveSelectedUploadRequests = () => uploadRequestGroupsVm.selectedUploadRequestGroups.every(request => request.status === 'CLOSED');
       });
   }
 
@@ -276,23 +277,36 @@ function uploadRequestGroupsController(
       });
   }
 
-  function archiveUploadRequestGroup(uploadRequestGroup) {
-    openWarningDialogFor('archive', uploadRequestGroup)
-      .then(isCopied => uploadRequestGroupRestService.updateStatus(uploadRequestGroup.uuid, 'ARCHIVED', {copy: !!isCopied }))
-      .then(archivedRequest => {
-        _.remove(uploadRequestGroupsVm.itemsList, item => archivedRequest.uuid === item.uuid);
-        _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => archivedRequest.uuid === selected.uuid);
+  function archiveUploadRequestGroups(uploadRequestGroups) {
+    openWarningDialogFor('archive', uploadRequestGroups)
+      .then(isCopied => $q.allSettled(uploadRequestGroups.map(
+        uploadRequestGroup => uploadRequestGroupRestService.updateStatus(uploadRequestGroup.uuid, 'ARCHIVED', {copy: !!isCopied })
+      )))
+      .then(promises => {
+        const archivedRequests = promises.filter(promise => promise.state === 'fulfilled').map(resolved => resolved.value);
+        const notArchivedRequests = promises.filter(promise => promise.state === 'rejected').map(rejection => rejection.reason);
 
-        if (uploadRequestGroupsVm.currentSelectedDocument.current && archivedRequest.uuid === uploadRequestGroupsVm.currentSelectedDocument.current.uuid) {
+        if (archivedRequests.some(
+          request => uploadRequestGroupsVm.currentSelectedDocument.current && request.uuid === uploadRequestGroupsVm.currentSelectedDocument.current.uuid)
+        ) {
           sidebarService.hide();
         }
 
+        _.remove(uploadRequestGroupsVm.itemsList, item => archivedRequests.some(request => request.uuid === item.uuid));
+        _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => archivedRequests.some(request => request.uuid === selected.uuid));
+
         uploadRequestGroupsVm.tableParams.reload();
 
-        showToastAlertFor('archive', 'info', [archivedRequest]);
-      }).catch(err => {
-        if (err) {
-          showToastAlertFor('archive', 'error');
+        return {
+          archivedRequests,
+          notArchivedRequests
+        };
+      })
+      .then(({ archivedRequests, notArchivedRequests }) => {
+        if (notArchivedRequests.length) {
+          showToastAlertFor('archive', 'error', notArchivedRequests);
+        } else {
+          showToastAlertFor('archive', 'info', archivedRequests);
         }
       });
   }

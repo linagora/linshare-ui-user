@@ -11,7 +11,17 @@
   </md-toolbar>
   <md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">
     <div class="content-title" translate>UPLOAD_REQUESTS.DIALOG.ARCHIVE.TITLE</div>
-    <div class="content-text" translate>UPLOAD_REQUESTS.DIALOG.ARCHIVE.TEXT</div>
+    <div
+      class="content-text"
+      translate
+      translate-interpolation="messageformat"
+      translate-values="{
+        singular: {{::archiveUploadRequestDialogVm.numberUploadRequests === 1 ? 'true' : 'other'}},
+        nbItems: {{::archiveUploadRequestDialogVm.numberUploadRequests}}
+      }"
+    >
+      UPLOAD_REQUESTS.DIALOG.ARCHIVE.TEXT
+    </div>
     <md-checkbox ng-model="archiveUploadRequestDialogVm.copyFiles" class="m-t-10">
       <span translate>UPLOAD_REQUESTS.DIALOG.ARCHIVE.CHECK_BOX</span>
     </md-checkbox>

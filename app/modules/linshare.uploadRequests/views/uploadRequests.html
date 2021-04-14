@@ -68,7 +68,7 @@
               <span ng-click="showCheckboxes = !showCheckboxes" class="visible-xs toolbar-mobile-item col-xs-3">
                 <a class="select-all-items plain-txt-btn">
                   <i class="ls-multi-select" ng-class="{'active-link': showCheckboxes}"
-                    ng-click="uploadRequestsVm.resetselectedUploadRequests()"></i>
+                    ng-click="uploadRequestsVm.resetSelectedUploadRequests()"></i>
                 </a>
               </span>
 
@@ -336,7 +336,7 @@
                         </li>
                         <li ng-if="uploadRequest.status === 'CLOSED'">
                           <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE'}" href=""
-                            ng-click="uploadRequestsVm.archiveUploadRequest(uploadRequest)">
+                            ng-click="uploadRequestsVm.archiveUploadRequests([uploadRequest])">
                             <i class="zmdi zmdi-archive"></i>
                           </a>
                         </li>
@@ -402,7 +402,7 @@
                               </a>
                             </li>
                             <li ng-class="{ 'disable-link' : uploadRequest.status !== 'CLOSED' }">
-                              <a href="" ng-click="uploadRequestsVm.archiveUploadRequest(uploadRequest)">
+                              <a href="" ng-click="uploadRequestsVm.archiveUploadRequests([uploadRequest])">
                                 <i class="zmdi zmdi-archive"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE</span>
                               </a>
@@ -491,11 +491,11 @@
             </span>
 
             <span
-              ng-class="{ 'disable-link': !uploadRequestsVm.allSelectedHasStatusOf('CLOSED') || uploadRequestsVm.selectedUploadRequests.length > 1}"
+              ng-class="{ 'disable-link': !uploadRequestsVm.allSelectedHasStatusOf('CLOSED') }"
             >
               <a
                 class="plain-text-button share-link"
-                ng-click="uploadRequestsVm.archiveUploadRequest(uploadRequestsVm.selectedUploadRequests[0])"
+                ng-click="uploadRequestsVm.archiveUploadRequests(uploadRequestsVm.selectedUploadRequests)"
                 translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE'}"
               >
                 <i class="zmdi zmdi-archive"></i>
@@ -574,8 +574,8 @@
       </div>
       <div
         class="col-xs-2"
-        ng-class="{ 'hide': !uploadRequestsVm.allSelectedHasStatusOf('CLOSED') || uploadRequestsVm.selectedUploadRequests.length > 1}"
-        ng-click="uploadRequestsVm.archiveUploadRequest(uploadRequestsVm.selectedUploadRequests[0])"
+        ng-class="{ 'hide': !uploadRequestsVm.allSelectedHasStatusOf('CLOSED') }"
+        ng-click="uploadRequestsVm.archiveUploadRequests(uploadRequestsVm.selectedUploadRequests)"
       >
         <i class="zmdi zmdi-archive"></i>
       </div>

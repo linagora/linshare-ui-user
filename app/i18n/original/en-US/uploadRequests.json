@@ -146,7 +146,7 @@
       },
       "ARCHIVE": {
         "TITLE": "Archive upload request",
-        "TEXT": "You are about to archive an upload request. Beware, this action cannot be undone.",
+        "TEXT": "You are about to archive {singular, select, true{a upload request} other{{nbItems} upload requests}}. Beware, this action cannot be undone.",
         "CHECK_BOX": "Copy all files to my personal space before archiving",
         "CONFIRM": "Yes, Archive",
         "CANCEL": "Cancel"
@@ -178,8 +178,8 @@
         "INFO": "{number} {singular, select, true{upload request has} other{upload requests have}} been closed."
       },
       "ARCHIVE": {
-        "ERROR": "Upload request has not been archived.",
-        "INFO": "Upload request has been archived."
+        "ERROR": "{number} {singular, select, true{upload request has} other{upload requests have}} not been archived.",
+        "INFO": "{number} {singular, select, true{upload request has} other{upload requests have}} been archived."
       },
       "DELETE_ARCHIVED": {
         "ERROR": "{number} {singular, select, true{archived upload request has} other{archived upload requests have}} not been deleted.",

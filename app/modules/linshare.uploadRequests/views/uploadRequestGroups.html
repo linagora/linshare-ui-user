@@ -344,7 +344,7 @@
                         </li>
                         <li ng-if="uploadRequestGroup.status === 'CLOSED'">
                           <a translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE'}" href=""
-                            ng-click="uploadRequestGroupsVm.archiveUploadRequestGroup(uploadRequestGroup)">
+                            ng-click="uploadRequestGroupsVm.archiveUploadRequestGroups([uploadRequestGroup])">
                             <i class="zmdi zmdi-archive"></i>
                           </a>
                         </li>
@@ -418,7 +418,7 @@
                             </li>
                             <li
                               ng-class="{ 'disable-link' : uploadRequestGroup.status !== 'CLOSED' }">
-                              <a href="" ng-click="uploadRequestGroupsVm.archiveUploadRequestGroup(uploadRequestGroup)">
+                              <a href="" ng-click="uploadRequestGroupsVm.archiveUploadRequestGroups([uploadRequestGroup])">
                                 <i class="zmdi zmdi-archive"></i>
                                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE</span>
                               </a>
@@ -518,6 +518,17 @@
               >
                 <i class="zmdi zmdi-close-circle"></i>
                 <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.CLOSE</span>
+              </a>
+            </span>
+
+            <span
+              ng-if="uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.activeClosed'"
+              ng-class="{ 'disable-link': !uploadRequestGroupsVm.canArchiveSelectedUploadRequests()}"
+            >
+              <a class="plain-text-button share-link" translate-attr="{title: 'UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE'}"
+                ng-click="uploadRequestGroupsVm.archiveUploadRequestGroups(uploadRequestGroupsVm.selectedUploadRequestGroups)">
+                <i class="zmdi zmdi-archive"></i>
+                <span translate>UPLOAD_REQUESTS.TABLE.OPTIONS.ARCHIVE</span>
               </a>
             </span>
 

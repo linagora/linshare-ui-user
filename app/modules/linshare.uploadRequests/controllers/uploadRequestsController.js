@@ -95,7 +95,7 @@ function uploadRequestsController(
             uploadRequestsVm.toggleSearchState = toggleSearchState;
             uploadRequestsVm.cancelUploadRequests = cancelUploadRequests;
             uploadRequestsVm.closeUploadRequests = closeUploadRequests;
-            uploadRequestsVm.archiveUploadRequest = archiveUploadRequest;
+            uploadRequestsVm.archiveUploadRequests = archiveUploadRequests;
             uploadRequestsVm.downloadEntries = downloadEntries;
             uploadRequestsVm.removeArchivedUploadRequests = removeArchivedUploadRequests;
             uploadRequestsVm.selectedUploadRequests = tableParamsService.getSelectedItemsList();
@@ -235,20 +235,29 @@ function uploadRequestsController(
       });
   }
 
-  function archiveUploadRequest(uploadRequest) {
-    openWarningDialogFor('archive', uploadRequest)
-      .then(isCopied => uploadRequestRestService.updateStatus(uploadRequest.uuid, 'ARCHIVED', {copy: !!isCopied }))
-      .then(archivedRequest => {
-        if (uploadRequestsVm.currentSelectedUploadRequest.current && uploadRequestsVm.currentSelectedUploadRequest.current.uuid === archivedRequest.uuid) {
+  function archiveUploadRequests(uploadRequests) {
+    openWarningDialogFor('archive', uploadRequests)
+      .then(isCopied => $q.allSettled(uploadRequests.map(uploadRequest => {
+        return uploadRequestRestService.updateStatus(uploadRequest.uuid, 'ARCHIVED', {copy: !!isCopied });
+      })))
+      .then(promises => {
+        const archivedRequests = promises.filter(promise => promise.state === 'fulfilled').map(resolved => resolved.value);
+        const notArchivedRequests = promises.filter(promise => promise.state === 'rejected').map(rejection => rejection.reason);
+
+        if (
+          uploadRequestsVm.currentSelectedUploadRequest.current &&
+          archivedRequests.some(request => uploadRequestsVm.currentSelectedUploadRequest.current.uuid === request.uuid)
+        ) {
           sidebarService.hide();
         }
 
-        removeFromSelected([archivedRequest]);
-        updateUploadRequestStatuses([archivedRequest], 'ARCHIVED');
-        showToastAlertFor('archive', 'info', [archivedRequest]);
-      }).catch(err => {
-        if (err) {
-          showToastAlertFor('archive', 'error');
+        removeFromSelected(archivedRequests);
+        updateUploadRequestStatuses(archivedRequests, 'ARCHIVED');
+
+        if (notArchivedRequests.length) {
+          showToastAlertFor('archive', 'error', notArchivedRequests);
+        } else {
+          showToastAlertFor('archive', 'info', archivedRequests);
         }
       });
   }
