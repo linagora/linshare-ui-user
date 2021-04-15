@@ -1,7 +1,7 @@
 <div id="member-sidebar">
   <div class="header-sidebar form-sidebar header-show-action">
     <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" ng-click="mainVm.sidebar.hide()"></i>
-    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().tokenObject.label}} </h2>
+    <h2 class="header-more-options set-ellipsis"> {{mainVm.sidebar.getData().selectedToken.label}} </h2>
     <span class="hidden-xs actions" ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
@@ -22,10 +22,9 @@
               <div class="description-ctn form-sidebar"
                   ng-class="{'show-full-comment': commentFocused}"
                   ng-init="commentFocused = false">
-                <span class="comment">{{mainVm.sidebar.getData().tokenObject.description || 'N/A'}}</span>
+                <span class="comment">{{mainVm.sidebar.getData().selectedToken.description || 'N/A'}}</span>
                 <div class="edit-description click-enabled" ng-click="commentFocused = !commentFocused">
-                  <i class="zmdi zmdi-eye" ng-if="!commentFocused"></i>
-                  <i class="zmdi zmdi-close" ng-if="commentFocused"></i>
+                  <i class="zmdi zmdi-eye" ng-class="commentFocused ? 'zmdi-close' : 'zmdi-eye'"></i>
                 </div>
               </div>
             </div>
@@ -34,9 +33,9 @@
                 <div class="item-l">
                   <span class="first-letter user-info">
                     {{
-                      mainVm.sidebar.getData().tokenObject.actor &&
-                      mainVm.sidebar.getData().tokenObject.actor.name ?
-                        mainVm.sidebar.getData().tokenObject.actor.name.charAt(0) :
+                      mainVm.sidebar.getData().selectedToken.actor &&
+                      mainVm.sidebar.getData().selectedToken.actor.name ?
+                        mainVm.sidebar.getData().selectedToken.actor.name.charAt(0) :
                         'UNKNOWN_FIRST_LETTER' | translate | limitTo:1 | uppercase
                     }}
                   </span>
@@ -44,9 +43,9 @@
                 <div class="item-mid vertical-center">
                   <div class="name">
                     {{
-                      mainVm.sidebar.getData().tokenObject.actor &&
-                      mainVm.sidebar.getData().tokenObject.actor.name ?
-                        mainVm.sidebar.getData().tokenObject.actor.name :
+                      mainVm.sidebar.getData().selectedToken.actor &&
+                      mainVm.sidebar.getData().selectedToken.actor.name ?
+                        mainVm.sidebar.getData().selectedToken.actor.name :
                         'UNKNOWN_USER' | translate
                     }}
                   </div>
@@ -54,12 +53,12 @@
                     class="info-item-member"
                     tooltip-placement="bottom"
                     tooltip-popup-delay="500"
-                    uib-tooltip="{{mainVm.sidebar.getData().tokenObject.modificationDate | lsDate: 'medium'}}"
-                    ng-if="mainVm.sidebar.getData().tokenObject.modificationDate"
+                    uib-tooltip="{{mainVm.sidebar.getData().selectedToken.modificationDate | lsDate: 'medium'}}"
+                    ng-if="mainVm.sidebar.getData().selectedToken.modificationDate"
                   >
                     <span>
                       {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
-                      {{mainVm.sidebar.getData().tokenObject.modificationDate | lsDate:'longDate'}}
+                      {{mainVm.sidebar.getData().selectedToken.modificationDate | lsDate:'longDate'}}
                     </span>
                   </div>
                 </div>
@@ -72,14 +71,14 @@
                 <div class="meta-data-content">
                   <div>
                     <p translate>TOKEN_MANAGEMENT.DETAILS.LABEL</p>
-                    <p>{{mainVm.sidebar.getData().tokenObject.label}}</p>
+                    <p>{{mainVm.sidebar.getData().selectedToken.label}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.CREATED_AT</p>
                     <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                      uib-tooltip="{{mainVm.sidebar.getData().tokenObject.creationDate |
+                      uib-tooltip="{{mainVm.sidebar.getData().selectedToken.creationDate |
                         lsDate:'medium'}}">
-                      {{mainVm.sidebar.getData().tokenObject.creationDate | lsDate:'longDate'}}
+                      {{mainVm.sidebar.getData().selectedToken.creationDate | lsDate:'longDate'}}
                     </p>
                   </div>
                 </div>
@@ -92,7 +91,7 @@
             <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs hidden-tabs-header">
               <md-content>
                 <token-management-form
-                  token-object="mainVm.sidebar.getData().tokenObject"
+                  token-object="mainVm.sidebar.getData().selectedToken"
                 />
               </md-content>
             </div>

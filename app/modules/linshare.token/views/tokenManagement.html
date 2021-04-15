@@ -61,15 +61,11 @@
               ng-table="tokenManagementVm.tableParams" show-filter="true">
               <tr
                 check-table-height
-                ls-item-selection
                 ng-repeat="token in $data track by token.uuid"
-                data-selected-documents="tokenManagementVm.selectedTokens"
-                data-document-file="token"
-                data-current-selected-document="tokenManagementVm.currentSelectedDocument"
-                data-right-sidebar-open="mainVm.sidebar.isVisible()"
+                ng-click="tokenManagementVm.selectToken(token)"
                 ng-class="{
                   'highlight-list-elem': token.isSelected,
-                  'current-vis': tokenManagementVm.currentSelectedDocument.current.uuid === token.uuid
+                  'current-vis': tokenManagementVm.selectedToken.uuid === token.uuid
                 }"
                 class="p-b-5 double-row item-container"
               >

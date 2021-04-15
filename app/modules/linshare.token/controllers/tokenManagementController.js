@@ -32,7 +32,8 @@ function tokenManagementController(
   const tokenManagementVm = this;
 
   tokenManagementVm.$onInit = onInit;
-  tokenManagementVm.currentSelectedDocument = {};
+  tokenManagementVm.selectedToken = {};
+  tokenManagementVm.selectedIndex = 0;
   tokenManagementVm.fabButton = {
     toolbar: {
       activate: true,
@@ -70,13 +71,15 @@ function tokenManagementController(
         tokenManagementVm.openCreatingTokenSidebar = openCreatingTokenSidebar;
         tokenManagementVm.openEditingTokenSidebar = openEditingTokenSidebar;
         tokenManagementVm.showDetails = showDetails;
+        tokenManagementVm.selectToken = selectToken;
         tokenManagementVm.onCreateSuccess = onCreateSuccess;
         tokenManagementVm.onUpdateSuccess = onUpdateSuccess;
-        tokenManagementVm.loading = false;
-        tokenManagementVm.selectedIndex = 0;
       })
       .catch(error => {
         $log.error('Failed to init table', error);
+      })
+      .finally(() => {
+        tokenManagementVm.loading = false;
       });
   }
 
@@ -101,7 +104,7 @@ function tokenManagementController(
           .filter(promise => promise.state === 'rejected')
           .map(reject => reject.reason);
 
-        if (removedTokens.some(token => token.uuid === tokenManagementVm.currentSelectedDocument.current.uuid)) {
+        if (removedTokens.some(token => token.uuid === tokenManagementVm.selectedToken.uuid)) {
           sidebarService.hide();
         }
 
@@ -124,6 +127,10 @@ function tokenManagementController(
         }
       })
       .catch(error => error && $log.error(error));;
+  }
+
+  function selectToken(token) {
+    tokenManagementVm.selectedToken = angular.copy(token);
   }
 
   function confirmTokensDeletion(tokens) {
@@ -164,8 +171,7 @@ function tokenManagementController(
     });
   }
 
-  function loadSidebarContent(content, tokenObject = {}) {
-    tokenManagementVm.tokenObject = angular.copy(tokenObject);
+  function loadSidebarContent(content) {
     $scope.mainVm.sidebar.setData(tokenManagementVm);
     $scope.mainVm.sidebar.setContent(content);
     $scope.mainVm.sidebar.show();
