@@ -166,8 +166,14 @@ angular.module('linshare.sharedSpace')
     function createSharedSpace(nodeType) {
       if (sharedSpaceVm.canCreate) {
         sharedSpaceVm.canCreate = false;
-        filterBoxService.setFilters(false);
+        if (sharedSpaceVm.itemsList.length !== sharedSpaceVm.itemsListCopy.length) {
+          sharedSpaceVm.itemsList = sharedSpaceVm.itemsListCopy;
+        }
+
+        filterBoxService.getSetDateFilter(false);
+        filterBoxService.resetTableList();
         sharedSpaceVm.paramFilter.name = '';
+        sharedSpaceVm.tableParams.reload();
         const defaultNamePos = itemUtilsService.itemNumber(sharedSpaceVm.itemsList, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName);
         const defaultName = defaultNamePos > 0 ?
           `${sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName} (${defaultNamePos})`
@@ -180,6 +186,8 @@ angular.module('linshare.sharedSpace')
 
         popDialogAndCreateFolder(sharedSpace, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].creationDialogTitle).then(created => {
           sharedSpaceVm.itemsList.push(created);
+          sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
+          filterBoxService.getSetItems(sharedSpaceVm.itemsList);
 
           return workgroupPermissionsService.getWorkgroupsPermissions(sharedSpaces);
         }).then(sharedSpacePermissions => {
