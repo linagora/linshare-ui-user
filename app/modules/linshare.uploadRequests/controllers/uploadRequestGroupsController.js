@@ -249,6 +249,12 @@ function uploadRequestGroupsController(
           }
         });
 
+        for(let i = 0; i < uploadRequestGroupsVm.selectedUploadRequestGroups.length; i++) {
+          if (closedRequests.some(request => request.uuid === uploadRequestGroupsVm.selectedUploadRequestGroups[i].uuid)) {
+            tableParamsService.toggleItemSelection(uploadRequestGroupsVm.selectedUploadRequestGroups[i]);
+          }
+        }
+
         uploadRequestGroupsVm.tableParams.reload();
 
         return {

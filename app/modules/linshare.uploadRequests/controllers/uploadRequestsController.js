@@ -221,6 +221,12 @@ function uploadRequestsController(
           sidebarService.hide();
         }
 
+        for(let i = 0; i < uploadRequestsVm.selectedUploadRequests.length; i++) {
+          if (closedRequests.some(request => request.uuid === uploadRequestsVm.selectedUploadRequests[i].uuid)) {
+            tableParamsService.toggleItemSelection(uploadRequestsVm.selectedUploadRequests[i]);
+          }
+        }
+
         if (notClosedRequests.length) {
           showToastAlertFor('close', 'error', notClosedRequests);
         } else {
