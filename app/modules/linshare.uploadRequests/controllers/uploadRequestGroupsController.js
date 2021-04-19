@@ -250,11 +250,7 @@ function uploadRequestGroupsController(
           }
         });
 
-        for(let i = 0; i < uploadRequestGroupsVm.selectedUploadRequestGroups.length; i++) {
-          if (closedRequests.some(request => request.uuid === uploadRequestGroupsVm.selectedUploadRequestGroups[i].uuid)) {
-            tableParamsService.toggleItemSelection(uploadRequestGroupsVm.selectedUploadRequestGroups[i]);
-          }
-        }
+        removeFromSelected(closedRequests);
 
         uploadRequestGroupsVm.tableParams.reload();
 
@@ -402,6 +398,20 @@ function uploadRequestGroupsController(
       uploadRequestGroupsVm.tableParams.reload();
     } else {
       $state.go(`uploadRequestGroups.${created.status === 'CREATED' ? 'pending' : 'activeClosed'}`);
+    }
+  }
+
+  function removeFromSelected(list) {
+    list.forEach(uploadRequest => {
+      const target = uploadRequestGroupsVm.selectedUploadRequestGroups.find(selected => selected.uuid === uploadRequest.uuid);
+
+      if (target) {
+        tableParamsService.toggleItemSelection(target);
+      }
+    });
+
+    if (uploadRequestGroupsVm.selectedUploadRequestGroups.length === 0) {
+      tableParamsService.resetFlagsOnSelectedPages();
     }
   }
 }
