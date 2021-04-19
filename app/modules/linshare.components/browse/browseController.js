@@ -261,7 +261,7 @@ function BrowseController(
       var deferred = $q.defer();
 
       nodeItem.parent = browseVm.currentFolder.uuid;
-      if (nodeItem.workGroup === browseVm.currentFolder.workgroupUUid) {
+      if (nodeItem.workGroup === browseVm.currentFolder.workGroup) {
         browseVm.restService.update(nodeItem.workGroup, nodeItem).then(newNode => {
           deferred.resolve(newNode);
         }).catch(function(error) {
