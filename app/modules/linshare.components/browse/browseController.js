@@ -209,7 +209,7 @@
       if (browseVm.canDisplayFiles) {
         return _.clone(list);
       }
-      
+
       return _.filter(list, {'type': TYPE_FOLDER});
     }
 
@@ -271,7 +271,7 @@
         browseVm.restService.getList(true)
           .then(function(currentList) {
             browseVm.currentList = _.orderBy(currentList, 'modificationDate', 'desc');
-            
+
             return workgroupPermissionsService.getWorkgroupsPermissions(currentList);
           })
           .then(function(workgroupsPermissions) {
@@ -305,13 +305,18 @@
       _.forEach(browseVm.nodeItems, function(nodeItem) {
         var deferred = $q.defer();
 
+        const currentWorkGroup = nodeItem.workGroup;
+
         nodeItem.parent = browseVm.currentFolder.uuid;
-        nodeItem.save().then(function(newNode) {
+        nodeItem.workGroup = browseVm.currentFolder.workGroup;
+
+        browseVm.restService.update(currentWorkGroup, nodeItem).then(newNode => {
           deferred.resolve(newNode);
         }).catch(function(error) {
           failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
           deferred.reject(error);
         });
+
         promises.push(deferred.promise);
       });
 
