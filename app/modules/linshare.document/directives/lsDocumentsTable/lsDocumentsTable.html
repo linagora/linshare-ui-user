@@ -46,7 +46,7 @@
         <!-- TODO: on a mobile , Default action should redirect toward the detail sidebar of the current
          document -->
         <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-          <p class="main-name-row">
+          <p class="main-name-row display-flex">
             <span class="file-name-disp single-line" spellcheck="false">{{::documentFile.name}}</span>
             <span x-ng-show="documentFile.shared > 0" class="shared-activated hidden-xs"
                   x-ng-click="showCurrentFile(documentFile, $event, { openDetailsSidebar: true, tabIndex: 1 })" event-propagation-stop>

@@ -139,6 +139,10 @@
       .main-name-row {
         margin: 0;
         max-width: 100%;
+
+        &.display-flex {
+          display: flex;
+        }
       }
     }
     .ctn-name-actions {
