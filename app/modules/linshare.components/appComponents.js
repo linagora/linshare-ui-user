@@ -1,15 +1,4 @@
-(function() {
-  'use strict';
-
-  angular
-    .module(
-      'linshare.components',
-      [
-        'ngMaterial',
-        'linshare.utils'
-      ]
-    );
-})();
+angular.module('linshare.components', ['ngMaterial', 'linshare.utils']);
 
 require('./constants');
 require('./appendToBody/appendToBody');
@@ -57,3 +46,6 @@ require('./tableParams/services/tableParamsService');
 require('./toast/toastController');
 require('./toast/toastService');
 require('./working-date-picker/working-date-picker.directive');
+require('./dateTimePicker/dateTimePicker');
+require('./dateTimePicker/dateTimePickerController');
+require('./dateTimePicker/hourPickerValidator');

@@ -1,0 +1,51 @@
+<div
+  class="datepicker-border-fix datetimepicker-border-fix date-picker dp-blue"
+  ng-class="{'is-opened': opened === true}"
+>
+  <div
+    class="fg-line datepicker-ctn"
+    ng-class="{'
+      fg-toggled': opened === true
+    }"
+  >
+    <div class="datepicker-input-ctn">
+      <div class="form-inline">
+        <input
+          working-date-picker
+          type="text"
+          class="form-control date-picker-input"
+          ng-click="open($event, 'opened')"
+          ng-disabled="dateTimeVm.disabled"
+          uib-datepicker-popup
+          show-weeks="false"
+          is-open="opened"
+          name="date"
+          ng-require="dateTimeVm.required"
+          datepicker-options="dateTimeVm.options"
+          min="{{dateTimeVm.options.minHTMLDate}}"
+          max="{{dateTimeVm.options.maxHTMLDate}}"
+          ng-model="dateTimeVm.datetime"
+          ng-change="dateTimeVm.onChange(dateTimeVm.datetime)"
+        />
+      </div>
+
+      <div class="hour-picker-ctn">
+        <md-select class="form-control upload-request-hour-picker m-0"
+          hour-picker-validator
+          name="hour"
+          min-hour="dateTimeVm.options.minHour"
+          max-hour="dateTimeVm.options.maxHour"
+          ng-model="dateTimeVm.hour"
+          ng-change="dateTimeVm.updateHourOfDatetime()"
+        >
+          <md-option
+            ng-repeat="hour in dateTimeVm.hours"
+            ng-value="hour.value"
+          >
+            {{ hour.key }}
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+  </div>
+</div>

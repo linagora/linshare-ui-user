@@ -1,0 +1,41 @@
+#content-ctn-sidebar {
+  .datepicker-border-fix.datetimepicker-border-fix {
+    margin-top: -10px;
+    width: 130px;
+
+    .datepicker-input-ctn {
+      display: flex;
+      align-items: center;
+
+      .form-control {
+        height: 30px;
+      }
+
+      .hour-picker-ctn {
+        display: flex;
+        justify-content: flex-end;
+
+        .upload-request-hour-picker {
+          width: 60px;
+          float: right;
+          height: auto;
+          border-bottom: 0px;
+
+          .md-select-value {
+            min-width: 60px;
+          }
+
+          .md-select-icon {
+            width: auto;
+          }
+
+          &:focus {
+            .md-select-value {
+              border-bottom: 0px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

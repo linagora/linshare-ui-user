@@ -29,8 +29,10 @@ function uploadRequestGroupFormController(
   } = sidebarService.getData();
   const { showToastAlertFor } = uploadRequestUtilsService;
 
-  uploadRequestGroupFormVm.revalidateDateFields = revalidateDateFields;
   uploadRequestGroupFormVm.$onInit = onInit;
+  uploadRequestGroupFormVm.onActivationDateChange = handleChangeOf('activationDate');
+  uploadRequestGroupFormVm.onExpiryDateChange = handleChangeOf('expiryDate');
+  uploadRequestGroupFormVm.onNotificationDateChange = handleChangeOf('notificationDate');
   uploadRequestGroupFormVm.toggleDisplayAdvancedOptions = toggleDisplayAdvancedOptions;
   uploadRequestGroupFormVm.disableEditValueOfDate = disableEditValueOfDate;
   uploadRequestGroupFormVm.enableEditValueOfDate = enableEditValueOfDate;
@@ -50,22 +52,6 @@ function uploadRequestGroupFormController(
         sidebarService.addData('updateUploadRequestGroup', updateUploadRequestGroup);
         break;
     }
-  }
-
-  function revalidateDateFields() {
-    $timeout(() => {
-      if (uploadRequestGroupFormVm.form.notificationDate) {
-        uploadRequestGroupFormVm.form.notificationDate.$validate();
-      }
-
-      if (uploadRequestGroupFormVm.form.expirationDate) {
-        uploadRequestGroupFormVm.form.expirationDate.$validate();
-      }
-
-      if (uploadRequestGroupFormVm.form.activationDate) {
-        uploadRequestGroupFormVm.form.activationDate.$validate();
-      }
-    });
   }
 
   function toggleDisplayAdvancedOptions() {
@@ -105,6 +91,8 @@ function uploadRequestGroupFormController(
       return toastService.error({key: 'TOAST_ALERT.WARNING.AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST'});;
     }
 
+    validateAllDatetimeFields();
+
     if (!uploadRequestGroupFormVm.form.$valid) {
       setSubmitted(uploadRequestGroupFormVm.form);
       focusToError(uploadRequestGroupFormVm.form);
@@ -124,6 +112,8 @@ function uploadRequestGroupFormController(
   }
 
   function updateUploadRequestGroup() {
+    validateAllDatetimeFields();
+
     if (!uploadRequestGroupFormVm.form.$valid) {
       setSubmitted(uploadRequestGroupFormVm.form);
       focusToError(uploadRequestGroupFormVm.form);
@@ -148,7 +138,7 @@ function uploadRequestGroupFormController(
         uploadRequestGroupFormVm.uploadRequestGroupObject.activationDate = undefined;
         uploadRequestGroupFormVm.enableEditActivationDate = false;
         break;
-      case 'expirationDate':
+      case 'expiryDate':
         uploadRequestGroupFormVm.uploadRequestGroupObject.expiryDate = undefined;
         uploadRequestGroupFormVm.enableEditExpirationDate = false;
         break;
@@ -158,8 +148,7 @@ function uploadRequestGroupFormController(
         break;
     }
 
-    uploadRequestGroupFormVm.uploadRequestGroupObject.calculateDatePickerOptions();
-    revalidateDateFields();
+    validateAllDatetimeFields();
   }
 
   function enableEditValueOfDate(dateType) {
@@ -167,7 +156,7 @@ function uploadRequestGroupFormController(
       case 'activationDate':
         uploadRequestGroupFormVm.enableEditActivationDate = true;
         break;
-      case 'expirationDate':
+      case 'expiryDate':
         uploadRequestGroupFormVm.enableEditExpirationDate = true;
         break;
       case 'notificationDate':
@@ -176,7 +165,46 @@ function uploadRequestGroupFormController(
     }
 
     uploadRequestGroupFormVm.uploadRequestGroupObject.setDefaultValueOfDate(dateType);
-    uploadRequestGroupFormVm.uploadRequestGroupObject.calculateDatePickerOptions();
-    revalidateDateFields();
+    validateAllDatetimeFields();
+  }
+
+  function validateAllDatetimeFields()  {
+    $timeout(() => {
+      uploadRequestGroupFormVm.uploadRequestGroupObject.calculateDatePickerOptions();
+
+      if (
+        uploadRequestGroupFormVm.form.notificationDate &&
+        uploadRequestGroupFormVm.form.notificationDate.date &&
+        uploadRequestGroupFormVm.form.notificationDate.hour
+      ) {
+        uploadRequestGroupFormVm.form.notificationDate.date.$validate();
+        uploadRequestGroupFormVm.form.notificationDate.hour.$validate();
+      }
+
+      if (
+        uploadRequestGroupFormVm.form.expiryDate &&
+        uploadRequestGroupFormVm.form.expiryDate.date &&
+        uploadRequestGroupFormVm.form.expiryDate.hour
+      ) {
+        uploadRequestGroupFormVm.form.expiryDate.date.$validate();
+        uploadRequestGroupFormVm.form.expiryDate.hour.$validate();
+      }
+
+      if (
+        uploadRequestGroupFormVm.form.activationDate &&
+        uploadRequestGroupFormVm.form.activationDate.date &&
+        uploadRequestGroupFormVm.form.activationDate.hour
+      ) {
+        uploadRequestGroupFormVm.form.activationDate.date.$validate();
+        uploadRequestGroupFormVm.form.activationDate.hour.$validate();
+      }
+    });
+  }
+
+  function handleChangeOf(dateType) {
+    return value => {
+      uploadRequestGroupFormVm.uploadRequestGroupObject[dateType] = value;
+      validateAllDatetimeFields();
+    };
   }
 }

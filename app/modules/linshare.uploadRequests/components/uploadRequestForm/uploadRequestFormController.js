@@ -24,8 +24,11 @@ function uploadRequestFormController(
   const { onUpdateSuccess, onUpdateError } = sidebarService.getData();
   const { showToastAlertFor } = uploadRequestUtilsService;
 
-  uploadRequestFormVm.revalidateDateFields = revalidateDateFields;
   uploadRequestFormVm.$onInit = onInit;
+  uploadRequestFormVm.onActivationDateChange = handleChangeOf('activationDate');
+  uploadRequestFormVm.onExpiryDateChange = handleChangeOf('expiryDate');
+  uploadRequestFormVm.onNotificationDateChange = handleChangeOf('notificationDate');
+  uploadRequestFormVm.validateAllDatetimeFields = validateAllDatetimeFields;
   uploadRequestFormVm.enableEditValueOfDate = enableEditValueOfDate;
   uploadRequestFormVm.disableEditValueOfDate = disableEditValueOfDate;
   uploadRequestFormVm.enableEditActivationDate = true;
@@ -38,39 +41,27 @@ function uploadRequestFormController(
     }
   }
 
-  function revalidateDateFields() {
-    $timeout(() => {
-      if (uploadRequestFormVm.form.notificationDate) {
-        uploadRequestFormVm.form.notificationDate.$validate();
-      }
-
-      if (uploadRequestFormVm.form.expirationDate) {
-        uploadRequestFormVm.form.expirationDate.$validate();
-      }
-
-      if (uploadRequestFormVm.form.activationDate) {
-        uploadRequestFormVm.form.activationDate.$validate();
-      }
-    });
-  }
-
   function updateUploadRequest() {
+    validateAllDatetimeFields();
+
     if (!uploadRequestFormVm.form.$valid) {
       setSubmitted(uploadRequestFormVm.form);
       toastService.error({ key: 'UPLOAD_REQUESTS.FORM_CREATE.FORM_INVALID'});
-    } else {
-      uploadRequestFormVm.uploadRequestObject.update()
-        .then(updated => {
-          showToastAlertFor('update', 'info');
 
-          return onUpdateSuccess && onUpdateSuccess(updated);
-        })
-        .catch(error => {
-          showToastAlertFor('update', 'error');
-
-          return onUpdateError && onUpdateError(error);
-        });
+      return;
     }
+
+    uploadRequestFormVm.uploadRequestObject.update()
+      .then(updated => {
+        showToastAlertFor('update', 'info');
+
+        return onUpdateSuccess && onUpdateSuccess(updated);
+      })
+      .catch(error => {
+        showToastAlertFor('update', 'error');
+
+        return onUpdateError && onUpdateError(error);
+      });
   }
 
   function disableEditValueOfDate(dateType) {
@@ -79,7 +70,7 @@ function uploadRequestFormController(
         uploadRequestFormVm.uploadRequestObject.activationDate = undefined;
         uploadRequestFormVm.enableEditActivationDate = false;
         break;
-      case 'expirationDate':
+      case 'expiryDate':
         uploadRequestFormVm.uploadRequestObject.expiryDate = undefined;
         uploadRequestFormVm.enableEditExpirationDate = false;
         break;
@@ -89,8 +80,7 @@ function uploadRequestFormController(
         break;
     }
 
-    uploadRequestFormVm.uploadRequestObject.calculateDatePickerOptions();
-    revalidateDateFields();
+    validateAllDatetimeFields();
   }
 
   function enableEditValueOfDate(dateType) {
@@ -98,7 +88,7 @@ function uploadRequestFormController(
       case 'activationDate':
         uploadRequestFormVm.enableEditActivationDate = true;
         break;
-      case 'expirationDate':
+      case 'expiryDate':
         uploadRequestFormVm.enableEditExpirationDate = true;
         break;
       case 'notificationDate':
@@ -107,7 +97,46 @@ function uploadRequestFormController(
     }
 
     uploadRequestFormVm.uploadRequestObject.setDefaultValueOfDate(dateType);
-    uploadRequestFormVm.uploadRequestObject.calculateDatePickerOptions();
-    revalidateDateFields();
+    validateAllDatetimeFields();
+  }
+
+  function validateAllDatetimeFields()  {
+    $timeout(() => {
+      uploadRequestFormVm.uploadRequestObject.calculateDatePickerOptions();
+
+      if (
+        uploadRequestFormVm.form.notificationDate &&
+        uploadRequestFormVm.form.notificationDate.date &&
+        uploadRequestFormVm.form.notificationDate.hour
+      ) {
+        uploadRequestFormVm.form.notificationDate.date.$validate();
+        uploadRequestFormVm.form.notificationDate.hour.$validate();
+      }
+
+      if (
+        uploadRequestFormVm.form.expiryDate &&
+        uploadRequestFormVm.form.expiryDate.date &&
+        uploadRequestFormVm.form.expiryDate.hour
+      ) {
+        uploadRequestFormVm.form.expiryDate.date.$validate();
+        uploadRequestFormVm.form.expiryDate.hour.$validate();
+      }
+
+      if (
+        uploadRequestFormVm.form.activationDate &&
+        uploadRequestFormVm.form.activationDate.date &&
+        uploadRequestFormVm.form.activationDate.hour
+      ) {
+        uploadRequestFormVm.form.activationDate.date.$validate();
+        uploadRequestFormVm.form.activationDate.hour.$validate();
+      }
+    });
+  }
+
+  function handleChangeOf(dateType) {
+    return value => {
+      uploadRequestFormVm.uploadRequestObject[dateType] = value;
+      validateAllDatetimeFields();
+    };
   }
 }

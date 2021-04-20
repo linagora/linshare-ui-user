@@ -223,7 +223,17 @@ function UploadRequestObjectCoreService(
     };
 
     return maxDate && maxDate.format(format);
-  };
+  }
+
+  function getMinHourOfExpiration() {
+    if (moment().format('YYYYMMDD') === moment(self.expiryDate).format('YYYYMMDD')) {
+      return moment().hours() + 1;
+    }
+
+    if (moment(self.activationDate).format('YYYYMMDD') === moment(self.expiryDate).format('YYYYMMDD')) {
+      return moment(self.activationDate).hours() + 1;
+    }
+  }
 
   function getMinDateOfActivation(format) {
     const minDate = self.uuid && moment(self.defaultActivationDate).format('DD/MM/YYYY') !== moment().format('DD/MM/YYYY') ?
@@ -248,6 +258,12 @@ function UploadRequestObjectCoreService(
     }
 
     return maxDate.format(format);
+  }
+
+  function getMinHourOfActivation() {
+    if (moment().format('YYYYMMDD') === moment(self.activationDate).format('YYYYMMDD')) {
+      return moment().hours() + 1;
+    }
   }
 
   function getMinDateOfNotification(format) {
@@ -295,6 +311,18 @@ function UploadRequestObjectCoreService(
     return expirationDate && expirationDate.format(format);
   }
 
+  function getMinHourOfNotification() {
+    if (moment(self.notificationDate).format('YYYYMMDD') === getMinDateOfNotification('YYYYMMDD')) {
+      return getMinDateOfNotification().getHours() + 1;
+    }
+  }
+
+  function getMaxHourOfNotification() {
+    if (moment(self.notificationDate).format('YYYYMMDD') === getMaxDateOfNotification('YYYYMMDD')) {
+      return getMaxDateOfNotification().getHours() - 1;
+    }
+  }
+
   function calculateMaxSize(type) {
     if (type === 'total') {
       self.totalSizeOfFiles.maxValue = getMaxSize('total');
@@ -328,23 +356,27 @@ function UploadRequestObjectCoreService(
   }
 
   function calculateDatePickerOptions() {
-    self.expirationDateOptions = {
+    self.expiryDateOptions = {
       minDate: self.activationDate || self.defaultActivationDate,
       maxDate: self.getMaxDateOfExpiration(),
       minHTMLDate: moment(self.activationDate || self.defaultActivationDate).format('YYYY-MM-DD'),
-      maxHTMLDate: self.getMaxDateOfExpiration('YYYY-MM-DD')
+      maxHTMLDate: self.getMaxDateOfExpiration('YYYY-MM-DD'),
+      minHour: getMinHourOfExpiration()
     };
     self.activationDateOptions = {
       minDate: self.getMinDateOfActivation(),
       maxDate: self.getMaxDateOfActivation(),
       minHTMLDate: self.getMinDateOfActivation('YYYY-MM-DD'),
       maxHTMLDate: self.getMaxDateOfActivation('YYYY-MM-DD'),
+      minHour: getMinHourOfActivation(),
     };
     self.notificationDateOptions = {
       minDate: self.getMinDateOfNotification(),
       maxDate: self.getMaxDateOfNotification(),
       minHTMLDate: self.getMinDateOfNotification('YYYY-MM-DD'),
-      maxHTMLDate: self.getMaxDateOfNotification('YYYY-MM-DD')
+      maxHTMLDate: self.getMaxDateOfNotification('YYYY-MM-DD'),
+      minHour: getMinHourOfNotification(),
+      maxHour: getMaxHourOfNotification()
     };
   }
 
@@ -365,7 +397,7 @@ function UploadRequestObjectCoreService(
       case 'activationDate':
         self.activationDate = self.defaultActivationDate;
         break;
-      case 'expirationDate':
+      case 'expiryDate':
         self.expiryDate = self.defaultExpiryDate;
         break;
       case 'notificationDate':

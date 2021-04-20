@@ -79,104 +79,100 @@
                 RIGHT_PANEL.SHARE.SETTINGS
               </h2>
             </div>
-            <div ng-if="$ctrl.uploadRequestGroupObject.functionalityOfActivation.enable"
-              class="col-xs-12 field-ctn clearfix">
-              <label for="activationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+            <div
+              class="col-xs-12 field-ctn clearfix"
+              ng-if="$ctrl.uploadRequestGroupObject.functionalityOfActivation.enable"
+            >
+              <label
+                class="labelDateExpiration col-xs-6 no-padding label-muted"
+                translate
+              >
                 UPLOAD_REQUESTS.FORM_CREATE.ACTIVATION_DATE
               </label>
               <div
-                class="datepicker-border-fix datetimepicker-border-fix date-picker dp-blue col-xs-6"
-                ng-class="{'is-opened': opened == true}"
                 ng-if="$ctrl.enableEditActivationDate &&
-                  ($ctrl.uploadRequestGroupObject.status !== 'ENABLED' && $ctrl.operation === 'update' || $ctrl.operation !== 'update')"
+              ($ctrl.uploadRequestGroupObject.status !== 'ENABLED' && $ctrl.operation === 'update' || $ctrl.operation !== 'update')"
+                ng-class="{ 'has-error': $ctrl.form.activationDate.$invalid }"
               >
-                <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.activationDate.$touched ||$ctrl.form.$submitted)
-                        && $ctrl.form.activationDate.$invalid)}">
-                  <div class="datepicker-input-ctn">
-                    <div class="form-inline">
-                      <input
-                        working-date-picker ng-click="open($event, 'opened')" type="text"
-                        ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfActivation.canOverride"
-                        class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
-                        is-open="opened" ng-required="true" name="activationDate"
-                        datepicker-options="$ctrl.uploadRequestGroupObject.activationDateOptions"
-                        min="{{$ctrl.uploadRequestGroupObject.activationDateOptions.minHTMLDate}}"
-                        max="{{$ctrl.uploadRequestGroupObject.activationDateOptions.maxHTMLDate}}"
-                        ng-model="$ctrl.uploadRequestGroupObject.activationDate"
-                        ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()"
-                      />
-                    </div>
 
-                    <div>
-                      <upload-request-hour-picker
-                        datetime="$ctrl.uploadRequestGroupObject.activationDate"
-                      />
-                    </div>
-                  </div>
-                  <span ng-show="$ctrl.form.activationDate.$invalid" translate translate-interpolation="messageformat"
-                    translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('YYYY-MM-DD'),
-                      max: $ctrl.uploadRequestGroupObject.getMaxDateOfActivation('YYYY-MM-DD')
-                    }">
-                    UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
-                  </span>
-                </div>
+                <date-time-picker
+                  ng-form="activationDate"
+                  datetime="$ctrl.uploadRequestGroupObject.activationDate"
+                  disabled="!$ctrl.uploadRequestGroupObject.functionalityOfActivation.canOverride"
+                  options="$ctrl.uploadRequestGroupObject.activationDateOptions"
+                  on-change="$ctrl.onActivationDateChange"
+                ></date-time-picker>
 
-                <div class="m-t-5">
+                <span
+                  translate
+                  ng-show="$ctrl.form.activationDate.$invalid"
+                  translate-interpolation="messageformat"
+                  translate-values="{
+                    min: $ctrl.uploadRequestGroupObject.getMinDateOfActivation('YYYY-MM-DD HH:mm'),
+                    max: $ctrl.uploadRequestGroupObject.getMaxDateOfActivation('YYYY-MM-DD HH:mm')
+                  }"
+                >
+                  UPLOAD_REQUESTS.ERROR.INVALID_ACTIVATION_DATE
+                </span>
+
+                <div class="pull-right m-t-5">
                   <a translate ng-click="$ctrl.disableEditValueOfDate('activationDate')">REMOVE</a>
                 </div>
               </div>
+
               <div class="pull-right" ng-if="!$ctrl.enableEditActivationDate">
                 <div>{{ $ctrl.uploadRequestGroupObject.defaultActivationDate | lsDate: 'YYYY-MM-DD HH:mm':locale }}</div>
                 <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('activationDate')">SET</a>
               </div>
+
               <div class="text-right" ng-if="$ctrl.uploadRequestGroupObject.status === 'ENABLED' && $ctrl.operation === 'update'">
                 <span>
                   {{ $ctrl.uploadRequestGroupObject.activationDate | lsDate:'YYYY-MM-DD':locale }}
                 </span>
               </div>
             </div>
+
             <div ng-if="$ctrl.uploadRequestGroupObject.functionalityOfExpiration.enable"
               class="col-xs-12 field-ctn clearfix">
-              <label for="expirationDate" class="labelDateExpiration col-xs-6 no-padding label-muted" translate>
+
+              <label
+                class="labelDateExpiration col-xs-6 no-padding label-muted"
+                translate
+              >
                 RIGHT_PANEL.DETAILS.EXPIRATION_DATE
               </label>
-              <div class="datepicker-border-fix datetimepicker-border-fix date-picker dp-blue col-xs-6"
-                ng-class="{'is-opened': opened == true}"
+
+              <div
                 ng-if="$ctrl.enableEditExpirationDate"
+                ng-class="{ 'has-error': $ctrl.form.expiryDate.$invalid }"
               >
-                <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.expirationDate.$touched ||$ctrl.form.$submitted)
-                        && $ctrl.form.expirationDate.$invalid)}">
-                  <div class="datepicker-input-ctn">
-                    <div class="form-inline">
-                      <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                        ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiration.canOverride"
-                        class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
-                        is-open="opened" required
-                        datepicker-options="$ctrl.uploadRequestGroupObject.expirationDateOptions"
-                        min="{{$ctrl.uploadRequestGroupObject.expirationDateOptions.minHTMLDate}}"
-                        max="{{$ctrl.uploadRequestGroupObject.expirationDateOptions.maxHTMLDate}}"
-                        name='expirationDate' ng-model="$ctrl.uploadRequestGroupObject.expiryDate"
-                        ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions(); $ctrl.revalidateDateFields()" />
-                    </div>
-                    <div>
-                      <upload-request-hour-picker
-                        datetime="$ctrl.uploadRequestGroupObject.expiryDate"
-                      />
-                    </div>
-                  </div>
-                  <span ng-show="$ctrl.form.expirationDate.$invalid" translate translate-interpolation="messageformat"
-                    translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfExpiration('YYYY-MM-DD'),
-                      max: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration('YYYY-MM-DD') }">
-                    UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
-                  </span>
-                </div>
-                <div class="m-t-5">
-                  <a translate ng-click="$ctrl.disableEditValueOfDate('expirationDate')">REMOVE</a>
+                <date-time-picker
+                  ng-form="expiryDate"
+                  datetime="$ctrl.uploadRequestGroupObject.expiryDate"
+                  disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiration.canOverride"
+                  options="$ctrl.uploadRequestGroupObject.expiryDateOptions"
+                  on-change="$ctrl.onExpiryDateChange"
+                ></date-time-picker>
+
+                <span
+                  translate
+                  ng-show="$ctrl.form.expiryDate.$invalid"
+                  translate-interpolation="messageformat"
+                  translate-values="{
+                    min: $ctrl.uploadRequestGroupObject.getMinDateOfExpiration('YYYY-MM-DD HH:mm'),
+                    max: $ctrl.uploadRequestGroupObject.getMaxDateOfExpiration('YYYY-MM-DD HH:mm')
+                  }"
+                >
+                  UPLOAD_REQUESTS.ERROR.INVALID_EXPIRATION_DATE
+                </span>
+
+                <div class="pull-right m-t-5">
+                  <a translate ng-click="$ctrl.disableEditValueOfDate('expiryDate')">REMOVE</a>
                 </div>
               </div>
               <div class="pull-right" ng-if="!$ctrl.enableEditExpirationDate">
                 <div>{{ $ctrl.uploadRequestGroupObject.defaultExpiryDate | lsDate: 'YYYY-MM-DD HH:mm':locale }}</div>
-                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('expirationDate')">SET</a>
+                <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('expiryDate')">SET</a>
               </div>
             </div>
             <div class="col-xs-12 field-ctn clearfix"
@@ -250,55 +246,53 @@
           </div>
 
           <div class="advanced-options" id="advanced-options-container" ng-class="{ 'advanced-options-visible': $ctrl.displayAdvancedOptions}">
-            <div class="col-xs-12 field-ctn clearfix"
-              ng-if="$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.enable">
+
+            <div
+              class="col-xs-12 field-ctn clearfix"
+              ng-if="$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.enable"
+            >
               <label
-                for="notificationDate"
                 class="labelDateExpiration col-xs-6 no-padding label-muted"
-                uib-tooltip="{{'UPLOAD_REQUESTS.FORM_CREATE.REMINDER_DATE_TOOLTIP' | translate}}"
-                tooltip-placement="top"
+                translate
               >
-                {{ 'UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE' | translate }} &#9432;
+                UPLOAD_REQUESTS.FORM_CREATE.EXPIRY_NOTIFICATION_DATE
               </label>
-              <div class="datepicker-border-fix datetimepicker-border-fix date-picker dp-blue col-xs-6"
-                ng-class="{'is-opened': opened == true}"
+              <div
                 ng-if="$ctrl.enableEditNotificationDate"
+                ng-class="{ 'has-error': $ctrl.form.notificationDate.$invalid }"
               >
-                <div class="fg-line datepicker-ctn" ng-class="{'fg-toggled': opened == true, 'has-error' : (($ctrl.form.notificationDate.$touched ||$ctrl.form.$submitted)
-                      && $ctrl.form.notificationDate.$invalid)}">
-                  <div class="datepicker-input-ctn">
-                    <div class="form-inline">
-                      <input working-date-picker ng-click="open($event, 'opened')" type="text"
-                        ng-disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.canOverride"
-                        class="form-control date-picker-input" uib-datepicker-popup show-weeks="false"
-                        is-open="opened" ng-required="true" name='notificationDate'
-                        datepicker-options="$ctrl.uploadRequestGroupObject.notificationDateOptions"
-                        min="{{$ctrl.uploadRequestGroupObject.notificationDateOptions.minHTMLDate}}"
-                        max="{{$ctrl.uploadRequestGroupObject.notificationDateOptions.maxHTMLDate}}"
-                        ng-model="$ctrl.uploadRequestGroupObject.notificationDate"
-                        ng-change="$ctrl.uploadRequestGroupObject.calculateDatePickerOptions();" />
-                    </div>
-                    <div>
-                      <upload-request-hour-picker
-                        datetime="$ctrl.uploadRequestGroupObject.notificationDate"
-                      />
-                    </div>
-                  </div>
-                  <span ng-show="$ctrl.form.notificationDate.$invalid" translate
-                    translate-interpolation="messageformat" translate-values="{ min: $ctrl.uploadRequestGroupObject.getMinDateOfNotification('DD MMM YYYY'),
-                        max: $ctrl.uploadRequestGroupObject.getMaxDateOfNotification('DD MMM YYYY') }">
-                    UPLOAD_REQUESTS.ERROR.INVALID_NOTIFICATION_DATE
-                  </span>
-                </div>
-                <div class="m-t-5">
+
+                <date-time-picker
+                  ng-form="notificationDate"
+                  datetime="$ctrl.uploadRequestGroupObject.notificationDate"
+                  disabled="!$ctrl.uploadRequestGroupObject.functionalityOfExpiryNotification.canOverride"
+                  options="$ctrl.uploadRequestGroupObject.notificationDateOptions"
+                  on-change="$ctrl.onNotificationDateChange"
+                ></date-time-picker>
+
+                <span
+                  translate
+                  ng-show="$ctrl.form.notificationDate.$invalid"
+                  translate-interpolation="messageformat"
+                  translate-values="{
+                    min: $ctrl.uploadRequestGroupObject.getMinDateOfNotification('YYYY-MM-DD HH:mm'),
+                    max: $ctrl.uploadRequestGroupObject.getMaxDateOfNotification('YYYY-MM-DD HH:mm')
+                  }"
+                >
+                  UPLOAD_REQUESTS.ERROR.INVALID_NOTIFICATION_DATE
+                </span>
+
+                <div class="pull-right m-t-5">
                   <a translate ng-click="$ctrl.disableEditValueOfDate('notificationDate')">REMOVE</a>
                 </div>
               </div>
+
               <div class="pull-right" ng-if="!$ctrl.enableEditNotificationDate">
                 <div>{{ $ctrl.uploadRequestGroupObject.defaultNotificationDate | lsDate: 'YYYY-MM-DD HH:mm':locale }}</div>
                 <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('notificationDate')">SET</a>
               </div>
             </div>
+
             <div class="col-xs-12 field-ctn clearfix"
               ng-if="$ctrl.uploadRequestGroupObject.functionalityOfTotalSizeOfFiles.enable">
               <label for="totalSizeOfFiles" class="label-muted col-xs-6 no-padding" translate>
