@@ -128,7 +128,8 @@
       "ERROR_400": "Error {{errCode}} - The request couldn't be achieved",
       "ERROR_500": "Error {{errCode}} - Server error",
       "INVALID_EMAIL": "Invalid email",
-      "ISOLATED_FILE": "You are currently viewing a restricted file selection."
+      "ISOLATED_FILE": "You are currently viewing a restricted file selection.",
+      "ENTER_TOKEN_NAME": "Please enter the token name"
     }
   }
 }

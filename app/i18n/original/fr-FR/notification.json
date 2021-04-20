@@ -128,7 +128,8 @@
       "ERROR_400": "Erreur {{errCode}} - Suppression impossible",
       "ERROR_500": "Erreur {{errCode}} - Erreur du serveur",
       "INVALID_EMAIL": "Courriel invalide",
-      "ISOLATED_FILE": "Vous visualisez une selection restreinte de fichiers."
+      "ISOLATED_FILE": "Vous visualisez une selection restreinte de fichiers.",
+      "ENTER_TOKEN_NAME": "veuillez saisir le nom du token"
     }
   }
 }

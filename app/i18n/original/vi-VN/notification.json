@@ -128,7 +128,8 @@
       "ERROR_400": "Lỗi {{errCode}} - Không thể đạt được yêu cầu",
       "ERROR_500": "Lỗi {{errCode}} - Lỗi máy chủ",
       "INVALID_EMAIL": "Email không hợp lệ",
-      "ISOLATED_FILE": "Bạn hiện đang xem một lựa chọn tệp bị hạn chế."
+      "ISOLATED_FILE": "Bạn hiện đang xem một lựa chọn tệp bị hạn chế.",
+      "ENTER_TOKEN_NAME": "Vui lòng nhập tên token"
     }
   }
 }
