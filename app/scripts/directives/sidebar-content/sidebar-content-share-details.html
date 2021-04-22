@@ -36,7 +36,7 @@
             <div class="action-share-details-row clearfix actions">
               <small>{{'RIGHT_PANEL.DETAIL_SHARE.SHARED_DATE' | translate}}</small>
               <p class="data">
-                {{mainVm.sidebar.getData().recipientShareDetails.current.creationDate | lsDate:'medium'}}
+                {{mainVm.sidebar.getData().recipientShareDetails.current.creationDate | lsDate:'medium':locale}}
               </p>
               <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.RESEND' | translate}}" class="disabled">
                 <i class="fa fa-share" aria-hidden="true"></i>
@@ -45,7 +45,7 @@
             <div class="action-share-details-row clearfix actions">
               <small>{{'RIGHT_PANEL.DETAIL_SHARE.EXPIRATION_DATE' | translate}}</small>
               <p class="data">{{mainVm.sidebar.getData().recipientShareDetails.current.expirationDate |
-                lsDate:'medium'}}</p>
+                lsDate:'medium':locale}}</p>
               <a href="" title="{{'RIGHT_PANEL.DETAIL_SHARE.EDIT' | translate}}" x-ng-init="isDatepickerOpened=false"
                 class="disabled"
                 x-ng-click="isDatepickerOpened = !isDatepickerOpened">
@@ -72,7 +72,7 @@
                       uib-datepicker-popup show-weeks="false" is-open="opened"
                       datepicker-options="::{minDate: shareActionVm.newShare.getMinDate()}"
                       x-ng-required="true"
-                      placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate'}}"
+                      placeholder="{{shareActionVm.newShare.expirationDate.value | lsDate: 'fullDate':locale}}"
                       x-ng-disabled="!shareActionVm.newShare.expirationDate.userCanOverride"
                       x-ng-model="shareActionVm.newShare.expirationDate.value"/>
                     </div>

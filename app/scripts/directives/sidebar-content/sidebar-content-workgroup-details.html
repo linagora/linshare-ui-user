@@ -107,9 +107,9 @@
             <div class="name">{{'UNKNOWN_USER' | translate}}</div>
             <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                  uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
-                 lsDate:'medium'}}">
+                 lsDate:'medium':locale}}">
                  <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}}
-                   : {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | lsDate:'longDate'}}
+                   : {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | lsDate:'longDate':locale}}
                  </span>
             </div>
           </div>
@@ -131,8 +131,8 @@
               </p>
               <p tooltip-placement="bottom" tooltip-popup-delay="500"
                  uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate |
-                 lsDate:'medium'}}">
-                {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate'}}
+                 lsDate:'medium':locale}}">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate':locale}}
               </p>
             </div>
             <div>

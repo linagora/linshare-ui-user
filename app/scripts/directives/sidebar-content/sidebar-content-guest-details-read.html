@@ -55,10 +55,10 @@
             {{mainVm.sidebar.getData().selectedGuest.owner.lastName}}
           </div>
           <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'medium'}}">
+               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'medium':locale}}">
             <span>
                 {{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                {{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'longDate'}}
+                {{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'longDate':locale}}
               </span>
           </div>
         </div>
@@ -76,15 +76,15 @@
           <div>
             <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.creationDate | lsDate:'medium'}}">
-              {{mainVm.sidebar.getData().selectedGuest.creationDate | lsDate:'longDate'}}
+               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.creationDate | lsDate:'medium':locale}}">
+              {{mainVm.sidebar.getData().selectedGuest.creationDate | lsDate:'longDate':locale}}
             </p>
           </div>
           <div>
             <p>{{'GUEST_DETAILS.EXPIRE_THE' | translate}}</p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.expirationDate | lsDate:'medium'}}">
-              {{mainVm.sidebar.getData().selectedGuest.expirationDate | lsDate:'longDate'}}
+               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.expirationDate | lsDate:'medium':locale}}">
+              {{mainVm.sidebar.getData().selectedGuest.expirationDate | lsDate:'longDate':locale}}
             </p>
           </div>
           <div>

@@ -32,9 +32,9 @@
                         class="info-item-member"
                         tooltip-placement="bottom"
                         tooltip-popup-delay="500"
-                        uib-tooltip="{{mainVm.sidebar.getData().currentSelectedEntry.modificationDate | lsDate:'medium'}}">
+                        uib-tooltip="{{mainVm.sidebar.getData().currentSelectedEntry.modificationDate | lsDate:'medium':locale}}">
                         <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                          {{mainVm.sidebar.getData().currentSelectedEntry.modificationDate | lsDate:'longDate'}}
+                          {{mainVm.sidebar.getData().currentSelectedEntry.modificationDate | lsDate:'longDate':locale}}
                         </span>
                       </div>
                     </div>
@@ -61,9 +61,9 @@
                         <p
                           tooltip-placement="bottom"
                           tooltip-popup-delay="500"
-                          uib-tooltip="{{mainVm.sidebar.getData().currentSelectedEntry.creationDate | lsDate:'medium'}}"
+                          uib-tooltip="{{mainVm.sidebar.getData().currentSelectedEntry.creationDate | lsDate:'medium':locale}}"
                         >
-                          {{mainVm.sidebar.getData().currentSelectedEntry.creationDate | lsDate:'longDate'}}
+                          {{mainVm.sidebar.getData().currentSelectedEntry.creationDate | lsDate:'longDate':locale}}
                         </p>
                       </div>
                     </div>

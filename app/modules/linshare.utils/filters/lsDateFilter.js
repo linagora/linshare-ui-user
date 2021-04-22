@@ -29,7 +29,11 @@
      * @returns {string} Date formatted
      * @memberOf LinShare.utils.linshareDateFilter
      */
-    function linshareDate(date, format) {
+    function linshareDate(date, format, language) {
+      if (language) {
+        moment.locale(language.key);
+      }
+
       const dateFormat = {
         shortDate: 'l',
         medium: 'lll',

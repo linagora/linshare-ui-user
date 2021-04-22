@@ -53,12 +53,12 @@
                     class="info-item-member"
                     tooltip-placement="bottom"
                     tooltip-popup-delay="500"
-                    uib-tooltip="{{mainVm.sidebar.getData().selectedToken.modificationDate | lsDate: 'medium'}}"
+                    uib-tooltip="{{mainVm.sidebar.getData().selectedToken.modificationDate | lsDate: 'medium':locale}}"
                     ng-if="mainVm.sidebar.getData().selectedToken.modificationDate"
                   >
                     <span>
                       {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
-                      {{mainVm.sidebar.getData().selectedToken.modificationDate | lsDate:'longDate'}}
+                      {{mainVm.sidebar.getData().selectedToken.modificationDate | lsDate:'longDate':locale}}
                     </span>
                   </div>
                 </div>

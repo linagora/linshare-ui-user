@@ -412,7 +412,7 @@
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
                   data-title="::'FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
-                  {{entry.modificationDate | lsDate: 'mediumDate'}}
+                  {{entry.modificationDate | lsDate: 'mediumDate':locale}}
                 </td>
 
                 <td class="hidden-xs"

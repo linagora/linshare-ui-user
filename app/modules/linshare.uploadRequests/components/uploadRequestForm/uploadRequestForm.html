@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="pull-right" ng-if="!$ctrl.enableEditExpirationDate">
-          <div>{{ $ctrl.uploadRequestObject.defaultExpiryDate | lsDate: 'YYYY-MM-DD HH:mm' }}</div>
+          <div>{{ $ctrl.uploadRequestObject.defaultExpiryDate | lsDate: 'YYYY-MM-DD HH:mm':locale }}</div>
           <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('expirationDate')">SET</a>
         </div>
       </div>
@@ -188,7 +188,7 @@
           </div>
         </div>
         <div class="pull-right" ng-if="!$ctrl.enableEditActivationDate">
-          <div>{{ $ctrl.uploadRequestObject.defaultActivationDate | lsDate: 'YYYY-MM-DD HH:mm' }}</div>
+          <div>{{ $ctrl.uploadRequestObject.defaultActivationDate | lsDate: 'YYYY-MM-DD HH:mm':locale }}</div>
           <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('activationDate')">SET</a>
         </div>
       </div>
@@ -257,7 +257,7 @@
           </div>
         </div>
         <div class="pull-right" ng-if="!$ctrl.enableEditNotificationDate">
-          <div>{{ $ctrl.uploadRequestObject.defaultNotificationDate | lsDate: 'YYYY-MM-DD HH:mm' }}</div>
+          <div>{{ $ctrl.uploadRequestObject.defaultNotificationDate | lsDate: 'YYYY-MM-DD HH:mm':locale }}</div>
           <a class="pull-right" translate ng-click="$ctrl.enableEditValueOfDate('notificationDate')">SET</a>
         </div>
       </div>

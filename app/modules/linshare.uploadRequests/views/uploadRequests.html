@@ -423,7 +423,7 @@
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION_DATE' | translate"
                   data-sortable="'expiryDate'" header-class="'col-4'">
-                  {{uploadRequest.expiryDate | lsDate: 'mediumDate'}}
+                  {{uploadRequest.expiryDate | lsDate: 'mediumDate':locale}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"

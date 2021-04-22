@@ -167,10 +167,10 @@
                       </div>
                       <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                            uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
-                            lsDate:'medium'}}">
+                            lsDate:'medium':locale}}">
                         <span class="ng-binding">{{'INFORMATION_TAB.UPTADED_THE' | translate}} :
                           {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
-                          lsDate:'longDate'}}
+                          lsDate:'longDate':locale}}
                         </span>
                       </div>
                     </div>
@@ -198,8 +198,8 @@
                           {{'RIGHT_PANEL.DETAILS.SHARING_DATE' | translate}}:
                         </p>
                         <p tooltip-placement="bottom" tooltip-popup-delay="500"
-                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'medium'}}">
-                          {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate'}}
+                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'medium':locale}}">
+                          {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate':locale}}
                         </p>
                       </div>
                       <div data-ng-if="mainVm.sidebar.getData().functionalities.DOCUMENT_EXPIRATION.enable">
@@ -209,11 +209,11 @@
                           tooltip-placement="bottom"
                           tooltip-popup-delay="500"
                           uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate
-                          | lsDate:'medium'}}"
+                          | lsDate:'medium':locale}}"
                         >
                           <span>
                             {{
-                            mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate | lsDate:'longDate'
+                            mainVm.sidebar.getData().currentSelectedDocument.current.expirationDate | lsDate:'longDate':locale
                             }}
                           </span>
                         </p>

@@ -433,25 +433,25 @@
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible()"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ACTIVATION' | translate"
                   data-sortable="'activationDate'" header-class="'col-4'">
-                  {{uploadRequestGroup.activationDate | lsDate: 'mediumDate'}}
+                  {{uploadRequestGroup.activationDate | lsDate: 'mediumDate':locale}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName !== 'uploadRequestGroups.archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.EXPIRATION' | translate"
                   data-sortable="'expiryDate'" header-class="'col-4'">
-                  {{uploadRequestGroup.expiryDate | lsDate: 'mediumDate'}}
+                  {{uploadRequestGroup.expiryDate | lsDate: 'mediumDate':locale}}
                 </td>
 
                 <td class="hidden-xs" ng-if="!mainVm.sidebar.isVisible() && uploadRequestGroupsVm.currentStateName === 'uploadRequestGroups.archived'"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.ARCHIVE' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
-                  {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate'}}
+                  {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate':locale}}
                 </td>
 
                 <td class="hidden-xs"
                   data-title="::'UPLOAD_REQUESTS.TABLE.HEADERS.MODIFICATION' | translate"
                   data-sortable="'modificationDate'" header-class="'col-4'">
-                  {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate'}}
+                  {{uploadRequestGroup.modificationDate | lsDate: 'mediumDate':locale}}
                 </td>
 
               </tr>

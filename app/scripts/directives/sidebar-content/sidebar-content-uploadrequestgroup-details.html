@@ -72,12 +72,12 @@
                     class="info-item-member"
                     tooltip-placement="bottom"
                     tooltip-popup-delay="500"
-                    uib-tooltip="{{mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate | lsDate:'medium'}}"
+                    uib-tooltip="{{mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate | lsDate:'medium':locale}}"
                     ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate"
                     >
                     <span>
                       {{'UPLOAD_REQUESTS.DETAIL_TAB.UPDATED_AT' | translate}} :
-                      {{mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate | lsDate:'longDate'}}
+                      {{mainVm.sidebar.getData().uploadRequestGroupObject.modificationDate | lsDate:'longDate':locale}}
                     </span>
                   </div>
                 </div>
@@ -123,17 +123,17 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.CREATED_AT</p>
                     <p tooltip-placement="bottom" tooltip-popup-delay="500"
                       uib-tooltip="{{mainVm.sidebar.getData().uploadRequestGroupObject.creationDate |
-                        lsDate:'medium'}}">
-                      {{mainVm.sidebar.getData().uploadRequestGroupObject.creationDate | lsDate:'longDate'}}
+                        lsDate:'medium':locale}}">
+                      {{mainVm.sidebar.getData().uploadRequestGroupObject.creationDate | lsDate:'longDate':locale}}
                     </p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.activationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.ACTIVATED_AT</p>
-                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.activationDate | lsDate:'longDate'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.activationDate | lsDate:'longDate':locale}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.expiryDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.EXPIRATION_DATE</p>
-                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.expiryDate | lsDate:'longDate'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.expiryDate | lsDate:'longDate':locale}}</p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.GROUP</p>
@@ -171,7 +171,7 @@
                   </div>
                   <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_DATE</p>
-                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate | lsDate:'longDate'}}</p>
+                    <p>{{mainVm.sidebar.getData().uploadRequestGroupObject.notificationDate | lsDate:'longDate':locale}}</p>
                   </div>
                   <div ng-if="mainVm.sidebar.getData().uploadRequestGroupObject.locale">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.NOTIFICATION_LANGUAGE</p>

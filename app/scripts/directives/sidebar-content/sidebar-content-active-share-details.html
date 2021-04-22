@@ -75,7 +75,7 @@
             </div>
             <div class="media-body">
               <div class="lv-title">
-                {{mainVm.sidebar.getData().shareListVm.currentShare.expirationDate | lsDate:'medium'}}
+                {{mainVm.sidebar.getData().shareListVm.currentShare.expirationDate | lsDate:'medium':locale}}
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@
             </div>
             <div class="media-body">
               <div class="lv-title">
-                {{mainVm.sidebar.getData().shareListVm.currentShare.notificationDateForUSDA | lsDate:'medium'}}
+                {{mainVm.sidebar.getData().shareListVm.currentShare.notificationDateForUSDA | lsDate:'medium':locale}}
               </div>
             </div>
           </div>

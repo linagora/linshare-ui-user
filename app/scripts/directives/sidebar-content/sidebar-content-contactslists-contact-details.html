@@ -32,8 +32,8 @@
               {{'INFORMATION_TAB.CREATED_THE' | translate}}:
             </p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'medium'}}">
-              {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate'}}
+               uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'medium':locale}}">
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate':locale}}
             </p>
           </div>
           <div>
@@ -42,8 +42,8 @@
             </p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
                uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate
-               | lsDate:'medium'}}">
-              {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | lsDate:'longDate'}}
+               | lsDate:'medium':locale}}">
+              {{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate | lsDate:'longDate':locale}}
             </p>
           </div>
         </div>

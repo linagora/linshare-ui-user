@@ -10,7 +10,7 @@
             {{::loggedUser.firstName}} {{::loggedUser.lastName}}<i class="zmdi zmdi-chevron-down"></i>
             <span class="user-expiration-date" data-ng-if="::loggedUser.expirationDate">
               <span translate>EXPIRE_THE</span>
-              <span>{{::loggedUser.expirationDate | lsDate: 'longDate'}}</span>
+              <span>{{loggedUser.expirationDate | lsDate: 'longDate':locale}}</span>
             </span>
           </p>
           <p class="hidden-xs username-display">
@@ -18,7 +18,7 @@
           </p>
           <span class="user-expiration-date" data-ng-if="::loggedUser.expirationDate">
               <span translate>EXPIRE_THE</span>
-              <span>{{::loggedUser.expirationDate | lsDate: 'longDate'}}</span>
+              <span>{{loggedUser.expirationDate | lsDate: 'longDate':locale}}</span>
           </span>
         </div>
       </div>
