@@ -18,8 +18,8 @@
                        'fg-not-empty' : !updateContactForm.firstname.$error.required}">
               <input type="text" x-ng-focus="firstnameFocus=true" x-ng-blur="firstnameFocus=false"
                      required class="form-control" name="firstname" id="firstname"
-                     data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.firstNameModel"
-                     data-ng-model-options="{getterSetter: true}">
+                     ng-model="mainVm.sidebar.getData().currentSelectedDocument.current._firstName"
+                     >
               <label class="fg-label required" for="firstname">
                 {{"CONTACTS_LISTS_ACTION.ORDER_BY.FIRST_NAME" | translate}}
               </label>
@@ -40,8 +40,7 @@
                      'fg-not-empty' : !updateContactForm.lastname.$error.required}">
               <input type="text" data-ng-focus="lastnameFocus=true" data-ng-blur="lastnameFocus=false"
                      required class="input-sm form-control fg-input"
-                     data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.lastNameModel"
-                     data-ng-model-options="{getterSetter: true}"
+                     ng-model="mainVm.sidebar.getData().currentSelectedDocument.current._lastName"
                      name="lastname" id="lastname">
               <label class="fg-label required" for="lastname">{{"CONTACTS_LISTS_ACTION.ORDER_BY.LAST_NAME" |
                 translate}}</label>
@@ -60,7 +59,7 @@
                         'fg-not-empty' : !updateContactForm.mail.$error.required}">
               <input type="email" x-ng-focus="emailFocus=true" x-ng-blur="emailFocus=false"
                      required ng-required="true" class="input-sm form-control fg-input" name="mail"
-                     x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.mailModel" data-ng-model-options="{getterSetter: true}" id="mail">
+                     ng-model="mainVm.sidebar.getData().currentSelectedDocument.current._mail" id="mail">
               <label class="fg-label required" for="mail">{{"CONTACTS_LISTS_ACTION.ORDER_BY.MAIL" | translate}}</label>
               <span
                 x-ng-show="(updateContactForm.mail.$touched || updateContactForm.$submitted) && (updateContactForm.mail.$invalid)">

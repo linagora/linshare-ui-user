@@ -353,17 +353,8 @@
        */
       function getSetModel(item) {
         item._firstName = _.clone(item.firstName);
-        item.firstNameModel = function getSetFirstNameModel(value) {
-          return _.isUndefined(value) ? item._firstName : item._firstName = value;
-        };
         item._lastName = _.clone(item.lastName);
-        item.lastNameModel = function getSetLastNameModel(value) {
-          return _.isUndefined(value) ? item._lastName : item._lastName = value;
-        };
         item._mail = _.clone(item.mail);
-        item.mailModel = function getSetMailModel(value) {
-          return _.isUndefined(value) ? item._mail : item._mail = value;
-        };
       }
     }
 
