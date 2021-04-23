@@ -486,7 +486,6 @@ md-content #content-ctn-sidebar {
     padding: 0 1.3em;
     flex-wrap: wrap;
     > div {
-      display: flex;
       flex: 0 0 50%;
       margin-bottom: 1em;
       p {
@@ -500,6 +499,7 @@ md-content #content-ctn-sidebar {
       }
     }
     .custom-list-item {
+      display: flex;
       flex: 0 0 45%;
     }
   }
