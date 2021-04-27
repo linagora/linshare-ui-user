@@ -67,6 +67,8 @@
     workgroupMemberVm.propertyOrderByAsc = true;
     workgroupMemberVm.members = [];
 
+    const DEFAULT_WORKGROUP_ROLE_ORDERS = ['ADMIN', 'WRITER', 'CONTRIBUTOR', 'READER'];
+
     activate();
 
     ////////////
@@ -84,15 +86,10 @@
           return role.name === lsAppConfig.defaultWorkgroupMemberRole;
         });
 
-        workgroupMemberVm.membersRights =
-          defaultConfiguredRoleIndex === 0 || defaultConfiguredRoleIndex === -1
-            ? roles
-            : [].concat(
-              roles[defaultConfiguredRoleIndex],
-              roles.slice(0, defaultConfiguredRoleIndex),
-              roles.slice(defaultConfiguredRoleIndex + 1, roles.length)
-            );
-        workgroupMemberVm.memberRole = workgroupMemberVm.membersRights[0];
+        workgroupMemberVm.membersRights = roles.sort((a, b) => {
+          return DEFAULT_WORKGROUP_ROLE_ORDERS.indexOf(a.name) - DEFAULT_WORKGROUP_ROLE_ORDERS.indexOf(b.name);
+        });
+        workgroupMemberVm.memberRole = workgroupMemberVm.membersRights[defaultConfiguredRoleIndex];
       });
       // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
       $scope.$watch(function() {
