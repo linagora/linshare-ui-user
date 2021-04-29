@@ -217,11 +217,11 @@
           },
           "COPY_TO_SHARED_SPACE": {
             "AUTHOR": {
-              "SENTENCE": "вы создали документ {{resourceName}} в {{resourceNameVarious}}.",
+              "SENTENCE": "вы создали документ {{resourceName}} в Рабочая группа {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} создал документ {{resourceName}} в {{resourceNameVarious}}.",
+              "SENTENCE": "{{authorName}} создал документ {{resourceName}} в Рабочая группа {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
             }
           },

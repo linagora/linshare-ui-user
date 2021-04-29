@@ -227,11 +227,11 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã tạo một tệp mới: {{resourceName}} vào {{resourceNameVarious}}.",
+            "SENTENCE": "Bạn đã sao chép một tệp mới: {{resourceName}} vào Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã tạo tài liệu: {{resourceName}} vào {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} vào Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
