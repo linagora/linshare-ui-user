@@ -138,11 +138,9 @@
       if (_.isNil(itemsInit)) {
         return;
       }
-      if (table.data.length !== itemsShowed.length) {
+      if (table.data.length > itemsShowed.length) {
         _.pullAllBy(itemsInit, itemsShowed, 'uuid');
-        if (table.data.length > 0) {
-          itemsInit = _.uniqBy(itemsInit.concat(table.data), 'uuid');
-        }
+        itemsInit = _.uniqBy(itemsInit.concat(table.data), 'uuid');
       } else if (table.data.length > itemsInit.length ) {
         itemsInit = _.uniqBy(itemsInit.concat(table.data), 'uuid');
       }

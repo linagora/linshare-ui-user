@@ -77,8 +77,15 @@ angular.module('linshare.sharedSpace')
       });
 
     thisctrl.createWorkGroup = function() {
-      filterBoxService.setFilters(false);
+      if (thisctrl.itemsList.length !== thisctrl.itemsListCopy.length) {
+        thisctrl.itemsList = thisctrl.itemsListCopy;
+      }
+
+      filterBoxService.getSetDateFilter(false);
+      filterBoxService.resetTableList();
+
       thisctrl.paramFilter.name = '';
+      this.tableParams.reload();
       var defaultNamePos = itemUtilsService.itemNumber(thisctrl.itemsList, swalNewWorkGroupName);
       var defaultName = defaultNamePos > 0 ?
         swalNewWorkGroupName + ' (' + defaultNamePos + ')' : swalNewWorkGroupName;
@@ -368,6 +375,8 @@ angular.module('linshare.sharedSpace')
         thisctrl.canCreate = false;
         popDialogAndCreateFolder(workgroup).then(created => {
           thisctrl.itemsList.push(created);
+          thisctrl.itemsListCopy = thisctrl.itemsList;
+          filterBoxService.getSetItems(thisctrl.itemsList);
 
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         }).then(workgroupsPermissions => {
