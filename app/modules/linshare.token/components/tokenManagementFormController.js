@@ -21,11 +21,11 @@ function tokenManagementFormController(
   const { promptCreatedToken, showToastAlertFor } = tokenManagementUtilsService;
   const { onCreateSuccess, onUpdateSuccess } = sidebarService.getData();
 
-  tokenManagementFormVm.$onInit = onInit;
+  tokenManagementFormVm.$onInit = $onInit;
   tokenManagementFormController.createToken = createToken;
   tokenManagementFormController.updateToken = updateToken;
 
-  function onInit() {
+  function $onInit() {
     if (sidebarService.getContent() === lsAppConfig.tokenCreate) {
       sidebarService.addData('createToken', createToken);
     }
@@ -38,15 +38,17 @@ function tokenManagementFormController(
   }
 
   function createToken() {
-    if (!tokenManagementFormVm.tokenObject.label) {
+    if (!tokenManagementFormVm.tokenObject || !tokenManagementFormVm.tokenObject.label) {
       return toastService.error({ key: 'TOAST_ALERT.WARNING.ENTER_TOKEN_NAME' });
     }
+
     jwtRestService.create(tokenManagementFormVm.tokenObject)
       .then(created => {
         promptCreatedToken(created.token);
         showToastAlertFor('create', 'success');
         onCreateSuccess(created);
-      }).catch(error => {
+      })
+      .catch(error => {
         if (error) {
           showToastAlertFor('create', 'error');
         }
@@ -58,7 +60,8 @@ function tokenManagementFormController(
       .then(updated => {
         showToastAlertFor('update', 'success');
         onUpdateSuccess(updated);
-      }).catch(error => {
+      })
+      .catch(error => {
         if(error) {
           showToastAlertFor('update', 'error');
         }

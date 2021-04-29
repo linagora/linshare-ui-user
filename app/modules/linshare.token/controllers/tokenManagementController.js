@@ -182,6 +182,7 @@ function tokenManagementController(
   }
 
   function openCreatingTokenSidebar() {
+    tokenManagementVm.tokenObject = {};
     loadSidebarContent(lsAppConfig.tokenCreate);
   }
 
