@@ -221,7 +221,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied item : {{resourceName}} into Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into Workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
