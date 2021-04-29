@@ -269,6 +269,9 @@
             <div
               class="custom-list-item"
               ng-repeat="restrictedContact in formVm.guestObject.restrictedContacts | orderBy : '-' as results"
+              tooltip-placement="bottom"
+              tooltip-popup-delay="700"
+              uib-tooltip="{{::((restrictedContact.firstName || '') + ' ' + (restrictedContact.lastName || '')).trim()}}"
             >
               <p class="pull-left circle-ctn">
                 <span class="circle  user-bg" ng-if="restrictedContact.domain">
