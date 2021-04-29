@@ -217,7 +217,7 @@
         },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "You have copied item : {{resourceName}} into Workgroup {{resourceNameVarious}}.",
+            "SENTENCE": "You have copied the document : {{resourceName}} into Workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
