@@ -109,7 +109,7 @@
               class="form-control date-picker-input"
               name="expirationDate"
               id="expirationDate"
-              placeholder="{{formVm.guestObject.expirationDate.value | lsDate: 'fullDate':locale}}"
+              placeholder="{{formVm.guestObject.expirationDate.value | lsDate: 'yyyy-MM-DD':locale}}"
               working-date-picker
               ng-click="open($event, 'opened2')"
               uib-datepicker-popup
@@ -129,7 +129,7 @@
         ng-show="(formVm.form.expirationDate.$touched || formVm.form.$submitted) && (formVm.form.expirationDate.$invalid || formVm.form.expirationDate.$error.invalidDate)"
         translate
         translate-values="{
-          date: (formVm.guestObject.form.datepicker.maxDate | lsDate: 'fullDate':locale)
+          date: (formVm.guestObject.form.datepicker.maxDate | lsDate: 'yyyy-MM-DD':locale)
         }"
       >
         SIDEBAR.ERROR.INVALID_DATE
