@@ -60,7 +60,8 @@
         "46403": "Server configuration error, upload impossible"
       },
       "WORKGROUP_NODES_ERROR": {
-        "26444": "You do not have the rights to write in this workgroup"
+        "26444": "You do not have the rights to write in this workgroup",
+        "46010": "The file size is greater than the max file size allowed"
       }
     }
   }

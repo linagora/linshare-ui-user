@@ -60,7 +60,8 @@
         "46403": "Lỗi cấu hình máy chủ, không thể tải lên"
       },
       "WORKGROUP_NODES_ERROR": {
-        "26444": "Bạn không có quyền sửa đổi trong nhóm làm việc này"
+        "26444": "Bạn không có quyền sửa đổi trong nhóm làm việc này",
+        "46010": "Kích thước tệp lớn hơn kích thước tệp tối đa được cho phép"
       }
     }
   }

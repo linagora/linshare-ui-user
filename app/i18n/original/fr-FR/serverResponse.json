@@ -60,7 +60,8 @@
         "46403": "Erreur de configuration serveur, dépôt impossible"
       },
       "WORKGROUP_NODES_ERROR": {
-        "26444": "Vous ne possédez pas les droits d'écriture"
+        "26444": "Vous ne possédez pas les droits d'écriture",
+        "46010": "La taille du fichier dépasse la taille maximale autorisée"
       }
     }
   }
