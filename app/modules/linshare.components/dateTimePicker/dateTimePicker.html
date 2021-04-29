@@ -1,5 +1,5 @@
 <div
-  class="datepicker-border-fix datetimepicker-border-fix date-picker dp-blue"
+  class="datepicker-border-fix datetimepicker-border-fix date-picker"
   ng-class="{'is-opened': opened === true}"
 >
   <div
@@ -20,6 +20,7 @@
           show-weeks="false"
           is-open="opened"
           name="date"
+          datepicker-append-to-body="true"
           ng-require="dateTimeVm.required"
           datepicker-options="dateTimeVm.options"
           min="{{dateTimeVm.options.minHTMLDate}}"
