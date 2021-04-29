@@ -24,7 +24,7 @@
     "FORWARD": "Chuyển tiếp",
     "GO_TO_TRASH": "Chuyển đến thùng rác",
     "INFO_WORKGROUP": "Xem chi tiết nhóm làm việc",
-    "INFO_FILE": "Translate ME!!!",
+    "INFO_FILE": "Xem thông tin tập tin",
     "INFORMATION": "Chi tiết",
     "LOCK": "Khóa",
     "MOVE": "Di chuyển",
@@ -186,7 +186,7 @@
     "UPTADED_THE": "Đã cập nhật",
     "VERSIONS": "Cập nhật",
     "MAX_FILE_SIZE": "Kích thước tệp tối đa",
-    "VERSIONING_ACTIVATION": "TRANSLATE ME!"
+    "VERSIONING_ACTIVATION": "Bật lưu lại phiên bản"
   },
   "LINK_DISABLED": "Đường dẫn không hoạt động",
   "LOGIN": {
@@ -280,7 +280,7 @@
     "PLAY_ALL": "Chơi tất cả",
     "ORDER_BY": "Đặt bởi",
     "RESET": "Cài lại",
-    "TBT__RESTORE": "TRANSLATE ME!",
+    "RESTORE": "Khôi phục",
     "RETRY": "Thử lại",
     "RETRY_ALL": "Thử lại tất cả",
     "SELECT_ALL": "Chọn tất cả",

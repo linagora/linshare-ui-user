@@ -729,7 +729,7 @@
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
-            "SENTENCE": "The document was restore with the version {{resourceName}}.",
+            "SENTENCE": "The document was restored with the version {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
           }
         },

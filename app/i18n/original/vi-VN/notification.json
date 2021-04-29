@@ -68,7 +68,7 @@
       "DETAILS": "Chi tiết",
       "INSERT": "Mục đã được thêm thành công.",
       "REFRESH": "Bạn phải làm mới ứng dụng để đưa hành động này vào tài khoản",
-      "TBT__RESTORE": "TRANSLATE ME!",
+      "RESTORE": "Phiên bản đã được khôi phục thành công.",
       "SHARE": "{{singular ? 'Tệp' : 'Các tệp'}} của bạn {{shareName ? shareName + ' ': ''}}{{singular ? 'đã' : 'đã'}} gửi thành công.",
       "SHARE_DELETED": "Chia sẻ tệp của bạn với {{recipient}} đã được xóa thành công.",
       "SHARE_ASYNC": "Chia sẻ tệp của bạn sẽ được gửi sau khi tải lên tất cả các tệp.",
@@ -110,7 +110,7 @@
       },
       "NO_RESPONSE_ERROR": "Lỗi khi không có phản hồi của máy chủ, xem nhật ký.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} đã là thành viên của Nhóm làm việc này.",
-      "TBT__RESTORE": "TRANSLATE ME!"
+      "RESTORE": "Có lỗi xảy ra khi khôi phục phiên bản."
     },
     "WARNING": {
       "AT_LEAST_ONE_RECIPIENT": "Vui lòng nhập ít nhất một người nhận hoặc danh sách liên hệ để chia sẻ",

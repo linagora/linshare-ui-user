@@ -42,13 +42,13 @@
   "TBT__VERSION": "",
   "FILE_NAME": "Tên tệp",
   "VERSION": "Bản sửa đổi ",
-  "VERSION_VIEW": "translate me!!",
-  "VERSION_NAME_UPDATE": "translate me!!",
+  "VERSION_VIEW": "Bạn hiện tại đang xem các phiên bản của {{filename}}",
+  "VERSION_NAME_UPDATE": "tên phiên bản đã được thay đổi thành {{filename}}",
   "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
     "TITLE": "Tải tệp của bạn lên",
     "COMMENT": "Tải lên và thêm thành viên, để cộng tác với họ.",
-    "TITLE_VERSION": "TRANSLATE ME!",
-    "COMMENT_VERSION": "TRANSLATE ME!"
+    "TITLE_VERSION": "Tải lên phiên bản của tập tin",
+    "COMMENT_VERSION": "Tải lên các phiên bản cho tập tin của bạn và xem trên lịch sử của tập tin"
   },
   "CREATE_NEW_WORKGROUP": "Tạo nhóm làm việc mới",
   "CREATE_NEW_FOLDER": "Tạo thư mục mới"
