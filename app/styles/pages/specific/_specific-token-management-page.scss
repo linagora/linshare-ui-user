@@ -1,34 +1,41 @@
 .token-secret {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
+  input {
+    color: #696969;
+    background-color: #eeeeee;
+    border: 0;
+    padding: 6px;
+    width: 240px;
+    height: 30px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  button {
+    border-radius: 2px;
+    box-shadow: none !important;
+    margin-top: 15px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
     input {
-      color: #696969;
-      background-color: #eeeeee;
-      border: 0;
-      padding: 6px;
-      width: 240px;
-      height: 30px;
-      margin-top: 15px;
-      border-radius: 5px;
-      font-size: 13px;
-      line-height: 15px;
+      width: 160px;
     }
 
     button {
-      border-radius: 2px;
-      box-shadow: none !important;
-      margin-top: 15px;
-      font-size: 13px;
-    }
-  
-    @media (max-width: 768px) {
-      input {
-        width: 160px;
-      }
-
-      button {
-        width: 80px;
-      }
+      width: 80px;
     }
   }
+}
+
+.token-management-page {
+  #file-list-table.ng-table th:nth-child(2),
+  #file-list-table.ng-table td:nth-child(2) {
+    width: 78.5%;
+  }
+}
