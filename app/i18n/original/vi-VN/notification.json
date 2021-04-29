@@ -90,7 +90,7 @@
         "DEFAULT": "{singular, select, true{Một tệp} other{{nbItems} tệp}} có thể không được sao chép.",
         "26444": "Bạn không có đủ quyền để thực hiện thao tác này"
       },
-      "TBT__DOWNLOAD_FOLDER": "Please Translate this => Cannot download the selected folder, the archive size is too big",
+      "DOWNLOAD_FOLDER": "Không thể tải xuống thư mục, kích cỡ thư mục lớn hơn cho phép",
       "FILE_NOT_FOUND": "Không tìm thấy tệp đã chọn",
       "FILE_UPLOAD": "Tải lên không thành công",
       "503": "dịch vụ Không sẵn có",
