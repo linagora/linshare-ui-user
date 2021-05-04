@@ -466,7 +466,7 @@ angular.module('linshare.sharedSpace')
 
       if (sharedSpace.nodeType === 'WORK_GROUP' && sharedSpaceVm.permissions[sharedSpace.uuid].WORKGROUP.UPDATE) {
         return true;
-      } else if (sharedSpace.nodeType === 'DRIVE' && sharedSpaceVm.permissions[sharedSpace.uuid].DRIVE.UPDATE) {
+      } else if (sharedSpace.nodeType === 'DRIVE' && sharedSpace.role && sharedSpace.role.name === 'DRIVE_ADMIN') {
         return true;
       }
 
