@@ -6,16 +6,14 @@ tokenManagementFormController.$inject = [
   'lsAppConfig',
   'jwtRestService',
   'sidebarService',
-  'tokenManagementUtilsService',
-  'toastService'
+  'tokenManagementUtilsService'
 ];
 
 function tokenManagementFormController(
   lsAppConfig,
   jwtRestService,
   sidebarService,
-  tokenManagementUtilsService,
-  toastService
+  tokenManagementUtilsService
 ) {
   const tokenManagementFormVm = this;
   const { promptCreatedToken, showToastAlertFor } = tokenManagementUtilsService;
@@ -39,7 +37,7 @@ function tokenManagementFormController(
 
   function createToken() {
     if (!tokenManagementFormVm.tokenObject || !tokenManagementFormVm.tokenObject.label) {
-      return toastService.error({ key: 'TOAST_ALERT.WARNING.ENTER_TOKEN_NAME' });
+      return;
     }
 
     jwtRestService.create(tokenManagementFormVm.tokenObject)
@@ -56,6 +54,10 @@ function tokenManagementFormController(
   }
 
   function updateToken() {
+    if (!tokenManagementFormVm.tokenObject || !tokenManagementFormVm.tokenObject.label) {
+      return;
+    }
+
     jwtRestService.update(tokenManagementFormVm.tokenObject, tokenManagementFormVm.tokenObject.uuid)
       .then(updated => {
         showToastAlertFor('update', 'success');
