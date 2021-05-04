@@ -322,6 +322,7 @@ angular.module('linshare.sharedSpace')
           _.remove(sharedSpaceVm.itemsList, restangularizedItem);
           _.remove(sharedSpaceVm.selectedDocuments, restangularizedItem);
           sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList; // I keep a copy of the data for the filter module
+          filterBoxService.getSetItems(sharedSpaceVm.itemsList);
           sharedSpaceVm.tableParams.reload();
           $scope.mainVm.sidebar.hide(items);
           updateFlagsOnSelectedPages();
