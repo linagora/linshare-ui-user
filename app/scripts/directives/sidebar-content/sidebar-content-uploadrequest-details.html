@@ -105,13 +105,23 @@
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.GROUP</p>
                     <p translate>{{mainVm.sidebar.getData().uploadRequestObject.collective ? 'RIGHT_PANEL.DETAILS.CIPHERED_YES' : 'RIGHT_PANEL.DETAILS.CIPHERED_NO'}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().currentSelected.maxFileCount > 0">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestObject.maxFileCount > 0">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_NUMBER_OF_FILES</p>
                     <p>{{mainVm.sidebar.getData().uploadRequestObject.maxFileCount}}</p>
                   </div>
-                  <div ng-if="mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile > 0">
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestObject.totalSizeOfFiles.value > 0 && mainVm.sidebar.getData().uploadRequestObject.totalSizeOfFiles.unit">
+                    <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_TOTAL_FILE_SIZE</p>
+                    <p>
+                      <span>{{mainVm.sidebar.getData().uploadRequestObject.totalSizeOfFiles.value}}</span>
+                      <span>{{mainVm.sidebar.getData().uploadRequestObject.totalSizeOfFiles.unit}}</span>
+                    </p>
+                  </div>
+                  <div ng-if="mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile.value > 0 && mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile.unit">
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.MAX_SIZE_PER_FILE</p>
-                    <p>{{(mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile | readableSize)}}</p>
+                    <p>
+                      <span>{{mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile.value}}</span>
+                      <span>{{mainVm.sidebar.getData().uploadRequestObject.maxSizeOfAFile.unit}}</span>
+                    </p>
                   </div>
                   <div>
                     <p translate>UPLOAD_REQUESTS.DETAIL_TAB.PASSWORD_PROTECTED</p>
