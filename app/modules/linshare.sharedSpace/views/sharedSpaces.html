@@ -275,9 +275,7 @@
                  'current-vis': vm.currentSelectedDocument.current.uuid === documentFile.uuid}"
                 x-ng-repeat="documentFile in $data" ls-item-selection="" data-selected-documents="vm.selectedDocuments"
                 data-document-file="documentFile" data-current-selected-Document="vm.currentSelectedDocument"
-                data-ng-click="vm.showItemDetails(documentFile.uuid)"
                 data-right-sidebar-open="mainVm.sidebar.isVisible()"
-                x-ng-dblclick="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name, documentFile.nodeType)"
                 check-table-height>
                 <td data-header="'favoritsheader.html'" ng-if="::linshareModeProduction == false"
                   class="hidden-xs col-1 set-content-right thumb-type-item col-favorits" data-title=""
@@ -313,7 +311,7 @@
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <span class="file-name-disp single-line" contenteditable="false" spellcheck="false"
-                        data-ng-click="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name)">
+                        ng-click="vm.goToSharedSpaceTarget($event, documentFile.uuid, documentFile.name, documentFile.nodeType)">
                         <span>
                           {{documentFile.name}}
                         </span>
