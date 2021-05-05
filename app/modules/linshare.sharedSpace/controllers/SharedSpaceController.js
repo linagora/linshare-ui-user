@@ -63,6 +63,23 @@ angular.module('linshare.sharedSpace')
       sharedSpaceVm.driveUuid = $state.params && $state.params.driveUuid;
       sharedSpaceVm.isDriveState = $state.current.name === 'sharedspace.drive';
       sharedSpaceVm.status = 'loading';
+      sharedSpaceVm.NODE_TYPE_PROPERTIES = {
+        WORK_GROUP: {
+          creationDialogTitle: 'CREATE_NEW_WORKGROUP',
+          icon: 'ls-workgroup',
+          defaultName: 'ACTION.NEW_WORKGROUP',
+          backgroundTitle: 'BACKGROUND_SHARED_SPACE_TITLE_MSG',
+          backgroundMessage: 'BACKGROUND_SHARED_SPACE_MSG'
+        },
+        DRIVE: {
+          creationDialogTitle: 'CREATE_NEW_DRIVE',
+          icon: 'ls-drive',
+          defaultName: 'ACTION.NEW_DRIVE',
+          backgroundTitle: 'BACKGROUND_WORKGROUP_TITLE_MSG',
+          backgroundMessage: 'BACKGROUND_WORKGROUP_MSG'
+        }
+      };
+
 
       fetchSharedSpacesAndPermissions().then(() => {
         sharedSpaceVm.itemsList = sharedSpaces;
@@ -71,7 +88,6 @@ angular.module('linshare.sharedSpace')
         sharedSpaceVm.status = 'loaded';
 
         initTableParams()
-          .then(translateAndInitNodeProperties)
           .then(fetchFunctionalities)
           .then(initFabButtons);
       });
@@ -103,27 +119,6 @@ angular.module('linshare.sharedSpace')
           sharedSpaceVm.tableParamsService = tableParamsService;
           sharedSpaceVm.tableParams = tableParamsService.getTableParams();
         });
-    }
-
-    function translateAndInitNodeProperties () {
-      return $translate(['ACTION.NEW_WORKGROUP', 'ACTION.NEW_DRIVE']).then(translations => {
-        sharedSpaceVm.NODE_TYPE_PROPERTIES = {
-          WORK_GROUP: {
-            creationDialogTitle: 'CREATE_NEW_WORKGROUP',
-            icon: 'ls-workgroup',
-            defaultName: translations['ACTION.NEW_WORKGROUP'],
-            backgroundTitle: 'BACKGROUND_SHARED_SPACE_TITLE_MSG',
-            backgroundMessage: 'BACKGROUND_SHARED_SPACE_MSG'
-          },
-          DRIVE: {
-            creationDialogTitle: 'CREATE_NEW_DRIVE',
-            icon: 'ls-drive',
-            defaultName: translations['ACTION.NEW_DRIVE'],
-            backgroundTitle: 'BACKGROUND_WORKGROUP_TITLE_MSG',
-            backgroundMessage: 'BACKGROUND_WORKGROUP_MSG'
-          }
-        };
-      });
     }
 
     function fetchFunctionalities () {
@@ -175,31 +170,34 @@ angular.module('linshare.sharedSpace')
         filterBoxService.resetTableList();
         sharedSpaceVm.paramFilter.name = '';
         sharedSpaceVm.tableParams.reload();
-        const defaultNamePos = itemUtilsService.itemNumber(sharedSpaceVm.itemsList, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName);
+
+        const translatedDefaultPrefix = $translate.instant(sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName);
+        const defaultNamePos = itemUtilsService.itemNumber(sharedSpaceVm.itemsList, translatedDefaultPrefix);
         const defaultName = defaultNamePos > 0 ?
-          `${sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName} (${defaultNamePos})`
-          : sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].defaultName;
+          `${translatedDefaultPrefix} (${defaultNamePos})`
+          : translatedDefaultPrefix;
 
         const sharedSpace = sharedSpaceRestService.restangularize({
           name: defaultName.trim(),
           nodeType
         });
 
-        popDialogAndCreateFolder(sharedSpace, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].creationDialogTitle).then(created => {
-          sharedSpaceVm.itemsList.push(created);
-          sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
-          filterBoxService.getSetItems(sharedSpaceVm.itemsList);
+        popDialogAndCreateFolder(sharedSpace, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].creationDialogTitle)
+          .then(created => {
+            sharedSpaceVm.itemsList.push(created);
+            sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
+            filterBoxService.getSetItems(sharedSpaceVm.itemsList);
 
-          return workgroupPermissionsService.getWorkgroupsPermissions(sharedSpaces);
-        }).then(sharedSpacePermissions => {
-          Object.assign(
-            sharedSpaceVm.permissions,
-            workgroupPermissionsService.formatPermissions(sharedSpacePermissions)
-          );
-        }).finally(() => {
-          sharedSpaceVm.tableParams.reload();
-          sharedSpaceVm.canCreate = true;
-        });
+            return workgroupPermissionsService.getWorkgroupsPermissions(sharedSpaces);
+          }).then(sharedSpacePermissions => {
+            Object.assign(
+              sharedSpaceVm.permissions,
+              workgroupPermissionsService.formatPermissions(sharedSpacePermissions)
+            );
+          }).finally(() => {
+            sharedSpaceVm.tableParams.reload();
+            sharedSpaceVm.canCreate = true;
+          });
       }
     };
 
