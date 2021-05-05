@@ -1,35 +1,43 @@
 <div data-ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}">
   <div class="container files">
-    <!--  ACTIONS ON DOCUMENTS  -->
-    <!-- contextmenu -->
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap" class="deep-nav">
-          <div class="menu-popover-ctn hidden-xs clickable waves-effect dropdown" uib-dropdown dropdown-append-to-body
-            auto-close="always" tooltip-placement="bottom" tooltip-popup-delay="500"
-            ng-if="vm.functionalities.workgroup || vm.functionalities.drive"
-            translate-attr="{'uib-tooltip': 'ACTION.NEW_ITEM'}" is-open="isOpenNew" data-ng-class="{
-            'open':isOpenNew,
-            'disabled': !vm.canCreate || (!vm.functionalities.workgroup && !vm.functionalities.drive)
-            }">
+          <div
+            class="menu-popover-ctn hidden-xs clickable waves-effect dropdown"
+            uib-dropdown
+            dropdown-append-to-body
+            is-open="isOpenNew"
+            ng-class="{
+              'open': isOpenNew
+            }"
+          >
             <a class="add-menu-group" uib-dropdown-toggle>
               <i class="zmdi zmdi-plus"></i>
             </a>
 
-            <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided" uib-dropdown-menu=""
-              ng-class="{'open':isOpenNew}">
-              <li role="menuitem">
-                <a ng-class="{'disabled': !(vm.canCreate && vm.functionalities.workgroup)}"
-                  ng-click="vm.createSharedSpace('WORK_GROUP')">
-                  <i ng-class="[vm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon, {'disabled': !(vm.canCreate && vm.functionalities.workgroup)}]"></i>
+            <ul
+              class="uib-dropdown-menu dropdown-menu dropdown-menu-left dm-icon dropdown-divided"
+              uib-dropdown-menu
+              ng-class="{'open':isOpenNew}"
+            >
+              <li
+                role="menuitem"
+                ng-class="{'disable-link': !vm.canCreateSharedSpace('WORK_GROUP')}"
+              >
+                <a ng-click="vm.createSharedSpace('WORK_GROUP')">
+                  <i ng-class="::vm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon"></i>
                   <span translate>WORKGROUP</span>
                 </a>
               </li>
 
-              <li role="menuitem" ng-if="!vm.isDriveState">
-                <a ng-class="{'disabled': !(vm.canCreate && vm.functionalities.drive)}"
-                  ng-click="vm.createSharedSpace('DRIVE')">
-                  <i ng-class="[vm.NODE_TYPE_PROPERTIES.DRIVE.icon, {'disabled': !(vm.canCreate && vm.functionalities.drive)}]"></i>
+              <li
+                role="menuitem"
+                ng-if="!vm.isDriveState"
+                ng-class="{'disable-link': !vm.canCreateSharedSpace('DRIVE')}"
+              >
+                <a ng-click="vm.createSharedSpace('DRIVE')">
+                  <i ng-class="::vm.NODE_TYPE_PROPERTIES.DRIVE.icon"></i>
                   <span translate>DRIVE</span>
                 </a>
               </li>

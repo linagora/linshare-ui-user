@@ -9,6 +9,7 @@ angular.module('linshare.sharedSpace')
 SharedSpaceController.$inject = [
   '_',
   '$timeout',
+  '$q',
   '$filter',
   '$log',
   '$scope',
@@ -29,6 +30,7 @@ SharedSpaceController.$inject = [
 function SharedSpaceController(
   _,
   $timeout,
+  $q,
   $filter,
   $log,
   $scope,
@@ -46,7 +48,7 @@ function SharedSpaceController(
   tableParamsService
 ) {
   const sharedSpaceVm = this;
-  let sharedSpaces, sharedSpacePermissions;
+  let sharedSpaces;
 
   sharedSpaceVm.$onInit = $onInit;
 
@@ -56,7 +58,6 @@ function SharedSpaceController(
     sharedSpaceVm.canCreate = true;
     sharedSpaceVm.lsAppConfig = lsAppConfig;
     sharedSpaceVm.currentSelectedDocument = {};
-
     sharedSpaceVm.selectedDocuments = [];
     sharedSpaceVm.paramFilter = {name: ''};
     sharedSpaceVm.currentWorkgroupMember = {};
@@ -79,6 +80,7 @@ function SharedSpaceController(
     sharedSpaceVm.loadSidebarContent = loadSidebarContent;
     sharedSpaceVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     sharedSpaceVm.canRenameSharedSpace = canRenameSharedSpace;
+    sharedSpaceVm.canCreateSharedSpace = canCreateSharedSpace;
     sharedSpaceVm.goToPreviousFolder = goToPreviousFolder;
     sharedSpaceVm.driveUuid = $state.params && $state.params.driveUuid;
     sharedSpaceVm.isDriveState = $state.current.name === 'sharedspace.drive';
@@ -101,36 +103,42 @@ function SharedSpaceController(
     };
 
 
-    fetchSharedSpacesAndPermissions().then(() => {
-      sharedSpaceVm.itemsList = sharedSpaces;
-      sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
-      sharedSpaceVm.permissions = sharedSpacePermissions;
-      sharedSpaceVm.status = 'loaded';
+    return fetchSharedSpaces()
+      .then(fetchSharedSpacePermissions)
+      .then(initTableParams)
+      .then(fetchFunctionalities)
+      .then(setFabBehavior)
+      .finally(() => {
+        sharedSpaceVm.status = 'loaded';
+      });
+  }
 
-      initTableParams()
-        .then(fetchFunctionalities)
-        .then(initFabButtons);
+  function fetchSharedSpaces () {
+    let fetchingSharedSpaces = [];
+
+    if (sharedSpaceVm.isDriveState && sharedSpaceVm.driveUuid) {
+      fetchingSharedSpaces.push(
+        sharedSpaceRestService.getList(true, sharedSpaceVm.driveUuid),
+        sharedSpaceRestService.get(sharedSpaceVm.driveUuid, null, true)
+      );
+    } else {
+      fetchingSharedSpaces.push(sharedSpaceRestService.getList(true));
+    }
+
+    return $q.all(fetchingSharedSpaces).then(results => {
+      sharedSpaceVm.itemsList = results[0];
+      sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
+      sharedSpaceVm.currentDrive = results[1];
     });
   }
 
-  function fetchSharedSpacesAndPermissions () {
-    let listWorkgroupsPromise;
-
-    if (sharedSpaceVm.isDriveState && sharedSpaceVm.driveUuid) {
-      listWorkgroupsPromise = sharedSpaceRestService.getList(true, sharedSpaceVm.driveUuid);
-    } else {
-      listWorkgroupsPromise = sharedSpaceRestService.getList(true);
-    }
-
-    return listWorkgroupsPromise.then(data => {
-      sharedSpaces = data;
-
-      return workgroupPermissionsService
-        .getWorkgroupsPermissions(sharedSpaces)
-        .then(permissions => workgroupPermissionsService.formatPermissions(permissions));
-    }).then(formattedPermissions => {
-      sharedSpacePermissions = formattedPermissions;
-    });
+  function fetchSharedSpacePermissions() {
+    return workgroupPermissionsService
+      .getWorkgroupsPermissions([...sharedSpaceVm.itemsList, sharedSpaceVm.currentDrive].filter(Boolean))
+      .then(permissions => workgroupPermissionsService.formatPermissions(permissions))
+      .then(formattedPermissions => {
+        sharedSpaceVm.permissions = formattedPermissions;
+      });
   }
 
   function initTableParams () {
@@ -150,7 +158,7 @@ function SharedSpaceController(
     });
   }
 
-  function initFabButtons () {
+  function setFabBehavior () {
     if (sharedSpaceVm.functionalities.workgroup || sharedSpaceVm.functionalities.drive) {
       sharedSpaceVm.fabButton = {
         toolbar: {
@@ -439,16 +447,8 @@ function SharedSpaceController(
       })
       .then(newItemDetailsWithRole => {
         item = _.assign(item, newItemDetailsWithRole);
-
-        return workgroupPermissionsService.getWorkgroupsPermissions(sharedSpaces);
       })
-      .then(sharedSpacePermissions => {
-        sharedSpaceVm.permissions = Object.assign(
-          {},
-          sharedSpaceVm.permissions,
-          workgroupPermissionsService.formatPermissions(sharedSpacePermissions)
-        );
-      })
+      .then(fetchSharedSpacePermissions)
       .catch(response => {
         //TODO - Manage error from back
         var data = response.data;
@@ -486,7 +486,27 @@ function SharedSpaceController(
     } else if (sharedSpace.nodeType === 'DRIVE' && sharedSpace.role && sharedSpace.role.name === 'DRIVE_ADMIN') {
       return true;
     }
+  }
 
-    return false;
+  function canCreateSharedSpace(type) {
+    if (sharedSpaceVm.status !== 'loaded') {
+      return false;
+    }
+
+    if (type === 'WORK_GROUP' && sharedSpaceVm.isDriveState) {
+      return sharedSpaceVm.canCreate &&
+        sharedSpaceVm.functionalities.workgroup &&
+        sharedSpaceVm.permissions[sharedSpaceVm.driveUuid] &&
+        sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP &&
+        sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP.CREATE;
+    }
+
+    if (type === 'WORK_GROUP' && !sharedSpaceVm.isDriveState) {
+      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.workgroup;
+    }
+
+    if (type === 'DRIVE') {
+      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.drive;
+    }
   }
 }
