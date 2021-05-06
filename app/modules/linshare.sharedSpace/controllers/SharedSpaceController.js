@@ -321,16 +321,14 @@ angular.module('linshare.sharedSpace')
       }
     }
 
-    function renameFolder(item, itemNameElem) {
-      var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
-
+    function renameFolder(item) {
       return workgroupRestService.get(item.uuid)
-        .then(function(itemDetails) {
+        .then(itemDetails => {
           return item.uuid ?
             itemUtilsService.rename(
-              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement
+              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), workgroupRestService.update
             ) :
-            itemUtilsService.rename(item, itemNameElement);
+            itemUtilsService.rename(item, workgroupRestService.update);
         })
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);

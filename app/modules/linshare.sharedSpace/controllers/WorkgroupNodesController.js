@@ -930,7 +930,7 @@ function WorkgroupNodesController(
      */
   function renameNode(node) {
     documentUtilsService
-      .rename(node)
+      .rename(node, node => workgroupNodesRestService.update(node.workGroup, node))
       .catch(error => {
         if (
           error &&
