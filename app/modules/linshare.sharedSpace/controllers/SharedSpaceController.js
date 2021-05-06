@@ -404,16 +404,14 @@ angular.module('linshare.sharedSpace')
       }
     }
 
-    function renameFolder(item, itemNameElem) {
-      var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
-
+    function renameFolder(item) {
       return sharedSpaceRestService.get(item.uuid)
         .then(itemDetails => {
           return item.uuid ?
             itemUtilsService.rename(
-              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement
+              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), sharedSpaceRestService.update
             ) :
-            itemUtilsService.rename(item, itemNameElement);
+            itemUtilsService.rename(item, sharedSpaceRestService.update);
         })
         .then(newItemDetails => {
           item = _.assign(item, newItemDetails);
