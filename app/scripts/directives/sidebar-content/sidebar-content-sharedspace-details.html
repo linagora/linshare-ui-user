@@ -161,6 +161,7 @@
             </div>
             <div
               class="field-ctn"
+              ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.nodeType === 'WORK_GROUP'"
               data-ng-class="{
               disabled: !(mainVm.sidebar.getData().functionalities.canOverrideVersioning &&
               (mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.original.uuid]
