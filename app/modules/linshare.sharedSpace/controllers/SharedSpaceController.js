@@ -8,6 +8,7 @@ angular.module('linshare.sharedSpace')
   /* jshint maxparams: false, maxstatements: false */
   .controller('SharedSpaceController', function(
     _,
+    $timeout,
     $filter,
     $log,
     $scope,
@@ -396,8 +397,7 @@ angular.module('linshare.sharedSpace')
       function openMemberTab(ifMemberTab) {
         if (ifMemberTab) {
           sharedSpaceVm.mdtabsSelection.selectedIndex = 1;
-          //TODO Don't Use angular.element, Do a component/directive
-          angular.element('#focusInputShare').focus();
+          $timeout(() => angular.element('#focusInputShare').trigger('focus'), 300);
         } else {
           sharedSpaceVm.mdtabsSelection.selectedIndex = 0;
         }
