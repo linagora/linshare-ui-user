@@ -233,7 +233,7 @@ function sharedSpaceMembersController(
         toastService.success({
           key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
           params: {
-            firstName: member.acount.firstName,
+            firstName: member.account.firstName,
             lastName: member.account.lastName,
           }
         });
