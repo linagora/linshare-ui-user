@@ -438,7 +438,7 @@
           params.settings({
             counts: filteredData.length > 10 ? [10, 25, 50, 100] : []
           });
-          
+
           return (contactsListsList.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
@@ -463,12 +463,11 @@
      * @returns {Promise} Response of the server
      * @memberOf LinShare.contactsLists.contactsListsListController
      */
-    function renameContactsList(item, itemNameElem) {
+    function renameContactsList(item) {
       // Set fromServer to true to prevent sending POST request instead of PUT request ( with duplicated contact list )
       item.fromServer = !!item.uuid;
-      itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
       itemUtilsService
-        .rename(item, itemNameElem)
+        .rename(item, contactsListsListRestService.update)
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           contactsListsListVm.canCreate = true;
@@ -478,7 +477,7 @@
 
           if (data.errCode === 25001) {
             toastService.error({ key: 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST' });
-            renameContactsList(item, itemNameElem);
+            renameContactsList(item);
           }
           if (data.errCode === lsErrorCode.CANCELLED_BY_USER) {
             if (!item.uuid) {
@@ -589,7 +588,7 @@
     function showItemDetails(item, event) {
       return $q.when(contactsListsListRestService.get(item.uuid)).then(function(data) {
         contactsListsListVm.currentSelectedDocument.current = data;
-        
+
         return getContactsListAudit(contactsListsListVm.currentSelectedDocument.current);
       }).then(function() {
         contactsListsListVm.loadSidebarContent(lsAppConfig.contactslists);
@@ -601,7 +600,7 @@
             angular.element(currElm).addClass('activeActionButton');
           });
         }
-        
+
         return contactsListsListVm.currentSelectedDocument.current;
       });
     }

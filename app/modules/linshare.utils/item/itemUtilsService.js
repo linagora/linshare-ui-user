@@ -291,9 +291,8 @@
      * @param {string} selector - Query selector of the item to rename
      * @memberOf linshare.utils.itemUtilsService
      */
-    function rename(item, selector) {
+    function rename(item, handler) {
       const initialName = item.name.trim();
-      const itemElement = angular.element(document.querySelector('body')).find(selector);
 
       return dialogService.dialogInput({
         title: 'ACTION.RENAME',
@@ -327,15 +326,14 @@
         }
 
         item.name = name;
+        const promise = item.fromServer ? handler(item) : item.save();
 
-        return item.save()
+        return promise
           .then(data => {
-            itemElement.text(name);
 
             return Object.assign(item, data);
           })
           .catch(error => {
-            itemElement.text(initialName);
             item.name = initialName;
 
             return error;

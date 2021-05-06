@@ -84,6 +84,7 @@
     $scope.slideUpTextarea = slideUpTextarea;
     $scope.toggleSearchState = toggleSearchState;
     $scope.updateDocument = updateDocument;
+    $scope.rename = rename;
     $scope.functionalities = functionalities;
     $scope.canCopyInWorkGroup = functionalities.WORK_GROUP && functionalities.WORK_GROUP.enable;
 
@@ -747,6 +748,10 @@
             $scope.currentSelectedDocument.current.description = documentServer.description;
           });
         });
+    }
+
+    function rename(item) {
+      return documentUtilsService.rename(item, document => LinshareDocumentRestService.update(document.uuid, document));
     }
   }
 })();

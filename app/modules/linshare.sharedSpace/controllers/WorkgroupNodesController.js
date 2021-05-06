@@ -227,7 +227,7 @@
       var _nodeType = nodeType || TYPE_DOCUMENT;
       var _nodesList = nodesList || workgroupNodesVm.selectedDocuments;
 
-      
+
       return _.every(_nodesList, {'type': _nodeType});
     }
 
@@ -907,9 +907,8 @@
      * @param {string} itemNameElem - Name of the item in view which is in edition mode
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
-    function renameNode(nodeToRename, itemNameElem) {
-      itemNameElem = itemNameElem || 'td[uuid=' + nodeToRename.uuid + '] .file-name-disp';
-      documentUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
+    function renameNode(nodeToRename) {
+      documentUtilsService.rename(nodeToRename, node => workgroupNodesRestService.update(node.workGroup, node)).then(function(data) {
         var changedNodePos = _.findIndex(workgroupNodesVm.nodesList, nodeToRename);
 
         workgroupNodesVm.nodesList[changedNodePos] = data;
@@ -926,7 +925,7 @@
           case 26445 :
           case 28005 :
             toastService.error({key: 'TOAST_ALERT.ERROR.RENAME_NODE'});
-            renameNode(nodeToRename, itemNameElem);
+            renameNode(nodeToRename);
             break;
           case lsErrorCode.CANCELLED_BY_USER:
             if (!nodeToRename.uuid) {
@@ -1140,7 +1139,7 @@
             });
           });
         }
-        
+
         return foldersTreeError;
       }
 
@@ -1207,7 +1206,7 @@
                         return _.assign(parent, nodes);
                       });
                   }
-                  
+
                   return parent;
                 }).then(function(parent) {
                   newDir.parent = parent.uuid;
@@ -1238,7 +1237,7 @@
             foldersTree[current] = newDir;
           }
         });
-        
+
         return {promises: promises, tree: foldersTree};
 
         ////////////
@@ -1254,7 +1253,7 @@
           return workgroupNodesRestService
             .create(folderDetails.workgroupUuid, _.omit(node, ['_deferred'])).then(function(data) {
               data._created = true;
-              
+
               return data;
             }).catch(function(error) {
               return {error: error, node: node};
@@ -1285,7 +1284,7 @@
             if (nodeData._created) {
               parent.push(nodeData);
             }
-            
+
             return nodeData;
           }).catch(function(error) {
             return {error: error, node: node};

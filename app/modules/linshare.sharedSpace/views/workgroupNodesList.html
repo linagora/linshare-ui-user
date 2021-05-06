@@ -558,7 +558,7 @@
                   header-class="'col-3 flexible-table-col'">
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
-                      <span class="file-name-disp single-line" spellcheck="false" contenteditable="false" data-ng-click="workgroupNodesVm.goToFolder(nodeItem)">{{::nodeItem.name}}</span>
+                      <span class="file-name-disp single-line" spellcheck="false" contenteditable="false" data-ng-click="workgroupNodesVm.goToFolder(nodeItem)">{{nodeItem.name}}</span>
                       <span class="secondary-info-ctn">
                         <p class="mobile-list-item-info visible-xs">
                           {{nodeItem.modificationDate | relativeTime}} {{::workgroupNodesVm.isDocument(nodeItem.type) ? ', '+(nodeItem.size | readableSize:

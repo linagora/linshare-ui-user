@@ -60,7 +60,7 @@ angular.module('linshare.sharedSpace')
 
         params.total(workgroups.length);
         params.settings({counts: filteredData.length > 10 ? [10, 25, 50, 100] : []});
-        
+
         return (workgroups.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
@@ -313,26 +313,25 @@ angular.module('linshare.sharedSpace')
       }
     }
 
-    function renameFolder(item, itemNameElem) {
-      var itemNameElement = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
+    function renameFolder(item) {
 
       return workgroupRestService.get(item.uuid)
         .then(function(itemDetails) {
           return item.uuid ?
             itemUtilsService.rename(
-              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement
+              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), workgroupRestService.update
             ) :
-            itemUtilsService.rename(item, itemNameElement);
+            itemUtilsService.rename(item, workgroupRestService.update);
         })
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           thisctrl.canCreate = true;
-          
+
           return workgroupRestService.get(item.uuid, true, true);
         })
         .then(function(newItemDetailsWithRole) {
           item = _.assign(item, newItemDetailsWithRole);
-          
+
           return workgroupPermissionsService.getWorkgroupsPermissions(workgroups);
         })
         .then(function(workgroupsPermissions) {
