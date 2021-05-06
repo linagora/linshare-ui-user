@@ -237,13 +237,16 @@ function WorkgroupNodesController(
 
     _.forEach(nodeItems, function(nodeItem) {
       promises.push(workgroupNodesRestService.copy(workgroupNodesVm.folderDetails.workgroupUuid, nodeItem.uuid,
-        workgroupNodesVm.folderDetails.folderUuid).then(function(newNode) {
-        var restangularizedNode = workgroupNodesRestService.restangularize(newNode[0],
-          workgroupNodesVm.folderDetails.workgroupUuid);
+        workgroupNodesVm.folderDetails.folderUuid)
+        .then(newNode => {
+          if (newNode && newNode[0]) {
+            newNode = workgroupNodesRestService.restangularizeCollection(newNode, nodeItem.parentResource);
+            addNewItemInTableParams(newNode[0]);
 
-        restangularizedNode.fromServer = true;
-        addNewItemInTableParams(restangularizedNode);
-      }));
+            return newNode[0];
+          }
+        })
+      );
     });
 
     $q.all(promises).then(function(nodeItems) {
