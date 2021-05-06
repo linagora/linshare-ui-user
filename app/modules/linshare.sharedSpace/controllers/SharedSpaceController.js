@@ -339,9 +339,9 @@ angular.module('linshare.sharedSpace')
         .then(function(itemDetails) {
           return item.uuid ?
             itemUtilsService.rename(
-              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement
+              Object.assign(item, { versioningParameters: itemDetails.versioningParameters}), itemNameElement, workgroupRestService.update
             ) :
-            itemUtilsService.rename(item, itemNameElement);
+            itemUtilsService.rename(item, itemNameElement, workgroupRestService.update);
         })
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);

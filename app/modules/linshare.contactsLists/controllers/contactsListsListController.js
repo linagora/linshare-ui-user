@@ -457,7 +457,7 @@
     function renameContactsList(item, itemNameElem) {
       itemNameElem = itemNameElem || 'td[uuid=' + item.uuid + '] .file-name-disp';
       itemUtilsService
-        .rename(item, itemNameElem)
+        .rename(item, itemNameElem, contactsListsListRestService.update)
         .then(function(newItemDetails) {
           item = _.assign(item, newItemDetails);
           contactsListsListVm.canCreate = true;
@@ -467,7 +467,7 @@
 
           if (data.errCode === 25001) {
             toastService.error({ key: 'TOAST_ALERT.ERROR.RENAME_CONTACTS_LIST' });
-            renameContactsList(item, itemNameElem);
+            renameContactsList(item);
           }
           if (data.errCode === lsErrorCode.CANCELLED_BY_USER) {
             if (!item.uuid) {

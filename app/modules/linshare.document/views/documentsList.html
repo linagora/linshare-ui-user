@@ -42,7 +42,7 @@
     <i
       class="zmdi zmdi-border-color col-xs-2"
       data-ng-class="{'disabled': selectedDocuments.length > 1}"
-      data-ng-click="documentUtilsService.rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')"></i>
+      data-ng-click="rename(selectedDocuments[0], 'td[uuid='+selectedDocuments[0].uuid+'] .file-name-disp')"></i>
     <span
       class="dropdown col-xs-2 no-padding"
       data-ng-class="{'open':isOpenItem}"

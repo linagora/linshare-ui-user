@@ -894,7 +894,7 @@
      */
     function renameNode(nodeToRename, itemNameElem) {
       itemNameElem = itemNameElem || 'td[uuid=' + nodeToRename.uuid + '] .file-name-disp';
-      documentUtilsService.rename(nodeToRename, itemNameElem).then(function(data) {
+      documentUtilsService.rename(nodeToRename, itemNameElem,  function(node) { return workgroupNodesRestService.update(node.workGroup, node) }).then(function(data) {
         var changedNodePos = _.findIndex(workgroupNodesVm.nodesList, nodeToRename);
         workgroupNodesVm.nodesList[changedNodePos] = data;
         if (nodeToRename.name !== data.name) {

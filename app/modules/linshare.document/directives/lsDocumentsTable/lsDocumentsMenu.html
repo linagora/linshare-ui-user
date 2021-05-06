@@ -42,7 +42,7 @@
             <span translate>ACTION.DOWNLOAD</span>
           </a>
         </li>
-        <li data-ng-click="documentUtilsService.rename(documentFile, 'td[uuid='+documentFile.uuid+'] .file-name-disp')">
+        <li data-ng-click="rename(documentFile, 'td[uuid='+documentFile.uuid+'] .file-name-disp')">
           <a href="">
             <i class="zmdi zmdi-border-color"></i>
             <span translate>ACTION.RENAME</span>
@@ -68,7 +68,7 @@
             <i class="zmdi groups-home-workgroup"></i>
             <span translate>ACTION.COPY_IN_WORKGROUP</span>
           </a>
-        </li>        
+        </li>
         <li class="divider"></li>
         <li>
           <a href="" data-ng-click="deleteDocuments([documentFile])">

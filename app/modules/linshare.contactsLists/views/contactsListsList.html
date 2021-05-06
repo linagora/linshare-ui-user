@@ -504,16 +504,16 @@
                               data-ng-click="contactsListsListVm.goToContactsListTarget(contactsList.uuid,
                                 contactsList.name)">
                           <span>
-                            {{::contactsList.name}}
+                            {{contactsList.name}}
                           </span>
                         </span>
                         <span class="secondary-info-ctn">
                           <p class="secondary-list-item-info hidden-xs">
-                            <span translate>BY</span> 
+                            <span translate>BY</span>
                             {{::contactsListsListVm.getOwnerName(contactsList, userLogged.uuid)}}
                           </p>
                           <p class="mobile-list-item-info visible-xs">
-                            <span translate>BY</span> 
+                            <span translate>BY</span>
                             {{::contactsListsListVm.getOwnerName(contactsList, userLogged.uuid)}}
                           </p>
                         </span>
@@ -606,7 +606,7 @@
                                   <i class="zmdi zmdi-delete"></i>
                                   <span translate>CONTACTS_LISTS_ACTION.MORE.DELETE</span>
                                 </a>
-                              </li>                              
+                              </li>
                               <li x-ng-show="::!linshareModeProduction">
                                 <a href="" x-ng-click="">
                                   <i class="fa fa-sign-out"></i>

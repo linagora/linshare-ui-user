@@ -284,7 +284,7 @@
      * @param {string} selector - Query selector of the item to rename
      * @memberOf linshare.utils.itemUtilsService
      */
-    function rename(item, selector) {
+    function rename(item, selector, handler) {
       var done = false,
         deferred = $q.defer(),
         initialName = item.name.trim(),
@@ -327,7 +327,7 @@
       function check(initialName, e) {
         var newName = angular.element(e.target).text();
         if (newName !== initialName || !item.uuid) {
-          save(newName, item);
+          save(newName, item, handler);
         } else {
           reset(item);
         }
@@ -371,12 +371,14 @@
        * @param {Object} item - Item manipulated
        * @memberOf itemUtilsService.rename
        */
-      function save(name, item) {
+      function save(name, item, handler) {
         name = name.trim();
         if (isNameValid(name)) {
           done = true;
           item.name = name;
-          item.save().then(function(data) {
+
+          const promise = item.fromServer ? handler(item) : item.save();
+          promise.then(function(data) {
             Object.assign(
               item,
               data

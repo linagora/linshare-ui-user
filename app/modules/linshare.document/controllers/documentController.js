@@ -84,6 +84,7 @@
     $scope.slideUpTextarea = slideUpTextarea;
     $scope.toggleSearchState = toggleSearchState;
     $scope.updateDocument = updateDocument;
+    $scope.rename = rename;
 
     activate();
 
@@ -734,6 +735,10 @@
             $scope.currentSelectedDocument.current.description = documentServer.description;
           });
         });
+    }
+
+    function rename(item, selector) {
+      return documentUtilsService.rename(item, selector, function(document) { return LinshareDocumentRestService.update(document.uuid, document) });
     }
   }
 })();
