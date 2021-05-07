@@ -63,16 +63,15 @@
       multipleDownloadThreshold = deviceDetector.isMobile() ? 5 : 10,
       regex = new RegExp('[\\' + lsAppConfig.rejectedChar.join('-').replace(new RegExp('-', 'g'), '\\') + ']'),
       service = {
-        canShowMultipleDownloadConfirmationDialog: canShowMultipleDownloadConfirmationDialog,
-        deleteItem: deleteItem,
-        download: download,
-        generateFileUrlForPdf: generateFileUrlForPdf,
-        isNameValid: isNameValid,
-        itemNumber: itemNumber,
-        itemUtilsConstant: itemUtilsConstant,
-        rename: rename,
-        popDialogAndCreate: popDialogAndCreate,
-        create: create
+        canShowMultipleDownloadConfirmationDialog,
+        deleteItem,
+        download,
+        generateFileUrlForPdf,
+        isNameValid,
+        itemNumber,
+        itemUtilsConstant,
+        rename,
+        enterItemName
       };
 
     return service;
@@ -344,39 +343,20 @@
       }
     }
 
-    /**
-     * @name popDialogAndCreate
-     * @desc pop out a dialog to enter input and create item if input is valid
-     * @param {Object} item - Item manipulated
-     * @param {string} selector - Query selector of the item to rename
-     * @memberOf linshare.utils.itemUtilsService
-     */
-    function popDialogAndCreate(item, dialogName) {
-      const initialName = item.name.trim();
+    function enterItemName(item, dialogTitle) {
+      const initialValue = item && item.name && item.name.trim() || '';
 
       return dialogService.dialogInput({
-        title: dialogName,
-        initialValue: initialName
+        title: dialogTitle,
+        initialValue
       })
-        .then(result => create(result.trim(), item));
-    }
+        .then(newName => {
+          if (!isNameValid(newName)) {
+            return $q.reject();
+          }
 
-    /**
-     * @name create
-     * @desc create item if name is valid
-     * @param {string} name - Item name
-     * @param {Object} item - Item manipulated
-     * @memberOf linshare.utils.itemUtilsService
-     */
-    function create(name, item) {
-      if (isNameValid(name)) {
-        item.name = name;
-
-        return item.save()
-          .then(data => Object.assign(item, data));
-      } else {
-        return $q.reject();
-      }
+          return newName;
+        });
     }
   }
 })();

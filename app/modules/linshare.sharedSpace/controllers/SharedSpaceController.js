@@ -1,4 +1,5 @@
-angular.module('linshare.sharedSpace')
+angular
+  .module('linshare.sharedSpace')
   .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart('filesList');
     $translatePartialLoaderProvider.addPart('sharedspace');
@@ -8,8 +9,8 @@ angular.module('linshare.sharedSpace')
 
 SharedSpaceController.$inject = [
   '_',
-  '$timeout',
   '$q',
+  '$timeout',
   '$filter',
   '$log',
   '$scope',
@@ -29,8 +30,8 @@ SharedSpaceController.$inject = [
 
 function SharedSpaceController(
   _,
-  $timeout,
   $q,
+  $timeout,
   $filter,
   $log,
   $scope,
@@ -48,7 +49,6 @@ function SharedSpaceController(
   tableParamsService
 ) {
   const sharedSpaceVm = this;
-  let sharedSpaces;
 
   sharedSpaceVm.$onInit = $onInit;
 
@@ -207,22 +207,24 @@ function SharedSpaceController(
 
       const sharedSpace = sharedSpaceRestService.restangularize({
         name: defaultName.trim(),
+        parentUuid: sharedSpaceVm.driveUuid,
         nodeType
       });
 
-      popDialogAndCreateFolder(sharedSpace, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].creationDialogTitle)
-        .then(created => {
-          sharedSpaceVm.itemsList.push(created);
+      itemUtilsService
+        .enterItemName(sharedSpace, sharedSpaceVm.NODE_TYPE_PROPERTIES[nodeType].creationDialogTitle)
+        .then(newName => sharedSpaceRestService.create({
+          ...sharedSpace,
+          name: newName
+        }))
+        .then(item => sharedSpaceRestService.get(item.uuid, true, true))
+        .then(itemWithRole => {
+          sharedSpaceVm.itemsList.push(itemWithRole);
           sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
           filterBoxService.getSetItems(sharedSpaceVm.itemsList);
-
-          return workgroupPermissionsService.getWorkgroupsPermissions(sharedSpaces);
-        }).then(sharedSpacePermissions => {
-          Object.assign(
-            sharedSpaceVm.permissions,
-            workgroupPermissionsService.formatPermissions(sharedSpacePermissions)
-          );
-        }).finally(() => {
+        })
+        .then(fetchSharedSpacePermissions)
+        .finally(() => {
           sharedSpaceVm.tableParams.reload();
           sharedSpaceVm.canCreate = true;
         });
@@ -423,6 +425,7 @@ function SharedSpaceController(
     function openMemberTab(ifMemberTab) {
       if (ifMemberTab) {
         sharedSpaceVm.mdtabsSelection.selectedIndex = 1;
+        //TODO Don't Use angular.element, Do a component/directive
         $timeout(() => angular.element('#focusInputShare').trigger('focus'), 300);
       } else {
         sharedSpaceVm.mdtabsSelection.selectedIndex = 0;
@@ -463,17 +466,6 @@ function SharedSpaceController(
         }
       })
       .finally(() => sharedSpaceVm.tableParams.reload());
-  }
-
-  function popDialogAndCreateFolder(item, title) {
-    return itemUtilsService.popDialogAndCreate(
-      Object.assign(item, { parentUuid: sharedSpaceVm.driveUuid }), title
-    )
-      .then(newItemDetails => {
-        item = _.assign(item, newItemDetails);
-
-        return sharedSpaceRestService.get(item.uuid, true, true);
-      });
   }
 
   function canRenameSharedSpace(sharedSpace, isSelected = false) {

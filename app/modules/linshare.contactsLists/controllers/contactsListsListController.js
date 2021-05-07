@@ -237,13 +237,15 @@
         });
 
         contactsListsListVm.canCreate = false;
-        popDialogAndCreateContactList(item).then(() => {
-          contactsListsListVm.itemsList.push(item);
-          contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
-          contactsListsListVm.tableParams.reload();
-        }).finally(() => {
-          contactsListsListVm.canCreate = true;
-        });
+        popDialogAndCreateContactList(item)
+          .then(createdItem => {
+            contactsListsListVm.itemsList.push(createdItem);
+            contactsListsListVm.tableParams.sorting('modificationDate', 'desc');
+            contactsListsListVm.tableParams.reload();
+          })
+          .finally(() => {
+            contactsListsListVm.canCreate = true;
+          });
       }
     }
 
@@ -501,10 +503,11 @@
      */
     function popDialogAndCreateContactList(item) {
       return itemUtilsService
-        .popDialogAndCreate(item, 'CONTACTS_LISTS_ACTION.CREATE_NEW')
-        .then(function(newItemDetails) {
-          item = _.assign(item, newItemDetails);
-        });
+        .enterItemName(item, 'CONTACTS_LISTS_ACTION.CREATE_NEW')
+        .then(newName => contactsListsListRestService.create({
+          ...item,
+          name: newName
+        }));
     }
 
     /**

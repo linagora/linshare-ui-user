@@ -80,8 +80,6 @@ function WorkgroupNodesController(
   const TYPE_FOLDER = 'FOLDER';
   const TYPE_VERSION = 'DOCUMENT_REVISION';
 
-  let newFolderName;
-
   workgroupNodesVm.functionalities = {};
   workgroupNodesVm.canDeleteNodes = false;
   workgroupNodesVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
@@ -164,12 +162,6 @@ function WorkgroupNodesController(
         }
       }
     );
-
-    $translate.refresh().then(function() {
-      $translate('ACTION.NEW_FOLDER').then(function(translationOfNewFolder) {
-        newFolderName = translationOfNewFolder;
-      });
-    });
 
     workgroupNodesVm.folderDetails.workgroupName = workgroup.name;
     workgroupNodesVm.folderDetails.quotaUuid = workgroup.quotaUuid;
@@ -296,35 +288,28 @@ function WorkgroupNodesController(
       workgroupNodesVm.canCreateFolder = false;
       workgroupNodesVm.paramFilter.name = '';
       filterBoxService.setFilters(false);
-      var newFolderObject = workgroupNodesRestService.restangularize({
-        name: newFolderName,
-        parent: workgroupNodesVm.folderDetails.folderUuid,
-        type: TYPE_FOLDER
-      }, workgroupNodesVm.folderDetails.workgroupUuid);
 
-      workgroupNodesRestService.create(workgroupNodesVm.folderDetails.workgroupUuid, newFolderObject, true)
-        .then(function(data) {
-          newFolderObject.name = data.name;
-          newFolderObject.parent = data.parent;
-          newFolderObject.type = data.type;
-          popDialogAndCreateFolder(newFolderObject, 'CREATE_NEW_FOLDER').then(() => {
-            workgroupNodesVm.nodesList.push(newFolderObject);
-            workgroupNodesVm.tableParamsService.reloadTableParams();
-          });
+      const { workgroupUuid, folderUuid } = workgroupNodesVm.folderDetails;
+      const newFolder = {
+        name: $translate.instant('ACTION.NEW_FOLDER'),
+        parent: folderUuid,
+        type: TYPE_FOLDER
+      };
+
+      workgroupNodesRestService.create(workgroupUuid, newFolder, true)
+        .then(folder => documentUtilsService.enterItemName(folder, 'CREATE_NEW_FOLDER'))
+        .then(newName => workgroupNodesRestService.create(workgroupUuid, {
+          ...newFolder,
+          name: newName
+        }))
+        .then(createdFolder => {
+          workgroupNodesVm.nodesList.push(createdFolder);
+          workgroupNodesVm.tableParamsService.reloadTableParams();
         })
         .finally(() => {
           workgroupNodesVm.canCreateFolder = true;
         });
     }
-  }
-
-  /**
-       * @name popDialogAndCreateFolder
-       * @desc pop dialog and create a folder
-       * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-       */
-  function popDialogAndCreateFolder(item) {
-    return documentUtilsService.popDialogAndCreate(item, 'CREATE_NEW_FOLDER');
   }
 
   /**
