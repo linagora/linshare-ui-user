@@ -34,7 +34,8 @@
         "28406": "Tìm kiếm khách không hợp lệ",
         "38400": "Ngày hết hạn của khách không hợp lệ",
         "46011": "Đã đạt đến dung lượng tài khoản",
-        "62005": "Bạn không được phép sử dụng dịch vụ này"
+        "62005": "Bạn không được phép sử dụng dịch vụ này",
+        "55505": "Bạn không được phép tạo"
       },
       "UPLOAD_ERROR": {
         "NONE": "Đã xảy ra lỗi khi tải lên",
