@@ -221,7 +221,14 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setAuthorName(auditAction) {
-      return auditAction.isAuthor ? 'AUTHOR_ME' : setFullName(auditAction.authUser);
+      if (auditAction.isAuthor) {
+        return 'AUTHOR_ME';
+      }
+      if (auditAction.authUser && (auditAction.authUser.role === 'ADMIN' || auditAction.authUser.role === 'SUPERADMIN')) {
+        return setFullName(auditAction.authUser);
+      }
+
+      return setFullName(auditAction.actor);
     }
 
     /**
