@@ -10,7 +10,7 @@
     .controller('loginController', loginController);
 
   loginController.$inject = [
-    '$translate',
+    '$log',
     'authenticationRestService',
     'lsAppConfig',
     'toastService',
@@ -22,9 +22,8 @@
    * @desc Manage login page
    * @memberOf linshareUiUserApp
    */
-  function loginController($translate, authenticationRestService, lsAppConfig, toastService, oidcService) {
-    /* jshint validthis: true */
-    var loginVm = this;
+  function loginController($log, authenticationRestService, lsAppConfig, toastService, oidcService) {
+    const loginVm = this;
 
     loginVm.email = '';
     loginVm.lsAppConfig = lsAppConfig;
@@ -53,14 +52,13 @@
      */
     function submitForm() {
       authenticationRestService.login(loginVm.email, loginVm.password)
-        .then(function(user) {
-          toastService.info({
-            key: 'LOGIN.NOTIFICATION.SUCCESS',
-            params: {
-              firstName: user.firstName
-            }
-          });
-        });
+        .then(user => toastService.info({
+          key: 'LOGIN.NOTIFICATION.SUCCESS',
+          params: {
+            firstName: user.firstName
+          }
+        }))
+        .catch(error => $log.debug('login error', error));
     }
 
     function loginSSO() {

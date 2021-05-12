@@ -10,7 +10,7 @@
 
   authenticationUtilsService.$inject = ['_'];
 
-  var loginErrors = [
+  const loginErrors = [
     {
       code: '1001',
       status: 401,
@@ -44,17 +44,13 @@
    */
   function authenticationUtilsService(_) {
     return {
-      buildHeader: buildHeader,
-      buildBearerTokenHeader: buildBearerTokenHeader,
-      findError: findError
+      buildHeader,
+      buildBearerTokenHeader,
+      checkAuthError
     };
 
-    function findError(error) {
-      var foundError = _.find(loginErrors, function(loginError) {
-        return loginError.code === error.headers('x-linshare-auth-error-code');
-      });
-
-      return foundError;
+    function checkAuthError(error) {
+      return loginErrors.find(loginError => loginError.code === error.headers('x-linshare-auth-error-code'));
     }
 
     function buildHeader(email, password, otp) {
