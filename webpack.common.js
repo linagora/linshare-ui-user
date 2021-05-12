@@ -2,10 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
-
-const isProductionBuild = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: {
@@ -17,9 +14,17 @@ module.exports = {
   },
   output: {
     filename: (pathData) => {
-      return pathData.chunk.name === 'config' ?
-        'config/config.js' :
-        '[name].[hash].js';
+      if (pathData.chunk.name === 'config') {
+        return 'config/config.js';
+      }
+
+      else if (pathData.chunk.name.indexOf('theme') >= 0) {
+        return 'styles/[name].[hash].js';
+      }
+
+      else {
+        return '[name].[hash].js';
+      }
     },
     chunkFilename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist')
@@ -51,10 +56,7 @@ module.exports = {
     }, {
       test: /\.(sa|sc|c)ss$/,
       use: [{
-        loader: 'style-loader',
-        loader: isProductionBuild
-          ? MiniCssExtractPlugin.loader
-          : 'style-loader'
+        loader: 'style-loader'
       }, {
         loader: 'css-loader',
         options: {
@@ -113,21 +115,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css'
-    }),
-    new ImageminPlugin({
-      maxFileSize: 10000, // Only apply this one to files equal to or under 10kb
-      disable: !isProductionBuild,
-      test: /\.(png|jpg|jpeg|gif|svg)$/,
-      pngquant: {
-        quality: '95-100'
-      },
-      jpegtran: {
-        progressive: false
-      },
-      gifsicle: {
-        interlaced: false,
-        optimizationLevel: 1
-      }
     }),
     new CopyPlugin({
       patterns: [
