@@ -34,10 +34,11 @@
     Restangular,
     toastService
   ) {
-    var service = {
-      getHeaders: getHeaders,
-      multiResponsesHanlder: multiResponsesHanlder,
-      responseHandler: responseHandler
+    const service = {
+      getErrorMessage,
+      getHeaders,
+      multiResponsesHanlder,
+      responseHandler
     };
 
     return service;
@@ -45,19 +46,18 @@
     ////////////
 
     /**
-     * @name errorHandler
-     * @desc Manage message response on a error
+     * @name getErrorMessage
+     * @desc get error message from server error response
      * @param {Object} error - Server response error
      * @param {String} messagePrefix - The key of errors's type to show
      * @returns {Promise} The computed error response
      * @memberOf linshareUiUserApp.ServerManagerService
      */
-    function errorHandler(error, messagePrefix) {
-      var
-        errCode,
-        errorMessageHttpCodes = 'SERVER_RESPONSE.HTTP_CODES.',
-        errorMessageDetails = 'SERVER_RESPONSE.DETAILS.' + messagePrefix + '.';
-      const ERRROS_HTTP = {
+    function getErrorMessage(error, messagePrefix = 'DEFAULT') {
+      let errCode;
+      let errorMessageHttpCodes = 'SERVER_RESPONSE.HTTP_CODES.';
+      let errorMessageDetails = 'SERVER_RESPONSE.DETAILS.' + messagePrefix + '.';
+      const HTTP_ERRORS = {
         400: 'ERROR_400',
         401: 'ERROR_401',
         403: 'ERROR_403',
@@ -73,7 +73,7 @@
 
       $log.debug('ServerManagerService - responseHandler:' + error);
 
-      errorMessageHttpCodes += ERRROS_HTTP.hasOwnProperty(error.status) ? ERRROS_HTTP[error.status] : 'ERROR_DEFAULT';
+      errorMessageHttpCodes += HTTP_ERRORS.hasOwnProperty(error.status) ? HTTP_ERRORS[error.status] : 'ERROR_DEFAULT';
       errCode = _.isNil(error.data) ? null : error.data.errCode;
       if (error.status === 404 || error.status === 503) {
         errCode = errCode || 'SERVER';
@@ -141,17 +141,13 @@
      * @returns {Promise} The array of rejected promise or array of all promises resolved
      * @memberOf linshareUiUserApp.ServerManagerService
      */
-    function multiResponsesHanlder(elements, translation, isSilent) {
+    function multiResponsesHanlder(elements = [], translation = {}, isSilent = false) {
       var
         successResponses = [],
         errorResponses = [],
         objectsReferences = _.map(elements, 'object'),
         responses = [];
 
-      isSilent = _.isNil(isSilent) ? false : isSilent;
-      translation.messagePrefix = _.isUndefined(translation.messagePrefix) ? 'DEFAULT' : translation.messagePrefix;
-
-      elements = elements || [];
       if (elements.length === 0 ) {
         return $q.resolve(elements);
       }
@@ -168,7 +164,7 @@
         responses = _.map(errorResponses, function(responseItems) {
           var objectInError = _.find(objectsReferences, {'uuid': responseItems.reason.config.data.uuid});
 
-          return errorHandler(responseItems.reason, translation.messagePrefix).then(function(message) {
+          return getErrorMessage(responseItems.reason, translation.messagePrefix).then(function(message) {
             var currentResponse = {
               title: objectInError.name,
               message: {
@@ -210,18 +206,15 @@
      * @returns {Promise} The promise in resolve/reject of the function called
      * @memberOf linshareUiUserApp.ServerManagerService
      */
-    function responseHandler(action, messagePrefix, isSilent) {
-      isSilent = _.isNil(isSilent) ? false : isSilent;
-      messagePrefix = _.isUndefined(messagePrefix) ? 'DEFAULT' : messagePrefix;
+    function responseHandler(action, messagePrefix = 'DEFAULT', isSilent = false) {
+      return action.catch(error => {
+        if (isSilent) {
+          return $q.reject(error);
+        }
 
-      return action.then(function(data) {
-        return $q.resolve(data);
-      }).catch(function(error) {
-        return errorHandler(error, messagePrefix).then(function(message) {
-          if (!isSilent) {
-            notify(true, {key:message});
-          }
-          
+        return getErrorMessage(error, messagePrefix).then(message => {
+          notify(true, { key: message });
+
           return $q.reject(error);
         });
       });

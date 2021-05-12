@@ -44,20 +44,18 @@
     toastService,
     authenticationUtilsService
   ) {
-    var
-      deferred = $q.defer(),
-      handler = ServerManagerService.responseHandler,
-      restUrl = 'authentication',
-      service = {
-        checkAuthentication: checkAuthentication,
-        getCurrentUser: getCurrentUser,
-        login: login,
-        loginWithAccessToken: loginWithAccessToken,
-        logout: logout,
-        version: version
-      };
+    let deferred = $q.defer();
+    const { responseHandler, getErrorMessage } = ServerManagerService;
+    const restUrl = 'authentication';
 
-    return service;
+    return {
+      checkAuthentication,
+      getCurrentUser,
+      login,
+      loginWithAccessToken,
+      logout,
+      version
+    };
 
     ////////////
 
@@ -71,7 +69,7 @@
     function checkAuthentication(hideError, ignoreAuthModule) {
       $log.debug('AuthenticationRestService : checkAuthentication');
 
-      return handler(Restangular.all(restUrl).withHttpConfig({
+      return responseHandler(Restangular.all(restUrl).withHttpConfig({
         ignoreAuthModule: ignoreAuthModule
       }).customGET('authorized'), undefined, hideError)
         .then(function(userLoggedIn) {
@@ -111,30 +109,17 @@
       deferred = $q.defer();
       $log.debug('AuthenticationRestService : login');
 
-      var headers = authenticationUtilsService.buildHeader(login, password, otp);
-      var action = Restangular.all(restUrl)
+      const headers = authenticationUtilsService.buildHeader(login, password, otp);
+
+      Restangular.all(restUrl)
         .withHttpConfig({ ignoreAuthModule: true })
-        .customGET('authorized', {}, headers);
-
-      handler(action, null, true).then(function(user) {
-        authService.loginConfirmed(user);
-
-        return deferred.resolve(user);
-      }).catch(function(error) {
-        var foundError = authenticationUtilsService.findError(error);
-
-        if (foundError) {
-          toastService[foundError.notificationType]({ key: foundError.message });
-
-          if (foundError.code === '1002') {
-            return $state.go('secondFactorAuthenticationLogin', {
-              loginInfo: { login: login, password: password }
-            });
-          }
-        }
-
-        return deferred.reject(foundError);
-      });
+        .customGET('authorized', {}, headers)
+        .then(user => {
+          authService.loginConfirmed(user);
+          deferred.resolve(user);
+        })
+        .catch(error => handleAuthError(error, { handle2FA: true, login, password }))
+        .catch(deferred.reject);
 
       return deferred.promise;
     }
@@ -151,25 +136,38 @@
       $log.debug('AuthenticationRestService : loginSSO');
 
       const headers = authenticationUtilsService.buildBearerTokenHeader(token);
-      const action = Restangular.all(restUrl)
+
+      Restangular.all(restUrl)
         .withHttpConfig({ ignoreAuthModule: true })
-        .customGET('authorized', {}, headers);
-
-      handler(action, null, true).then(user => {
-        authService.loginConfirmed(user);
-
-        return deferred.resolve(user);
-      }).catch(error => {
-        const foundError = authenticationUtilsService.findError(error);
-
-        if (foundError) {
-          toastService[foundError.notificationType]({ key: foundError.message });
-        }
-
-        return deferred.reject(foundError);
-      });
+        .customGET('authorized', {}, headers)
+        .then(user => {
+          authService.loginConfirmed(user);
+          deferred.resolve(user);
+        })
+        .catch(handleAuthError)
+        .catch(deferred.reject);
 
       return deferred.promise;
+    }
+
+    function handleAuthError(error, options = {}) {
+      const authError = authenticationUtilsService.checkAuthError(error);
+      const { handle2FA, login, password } = options;
+
+      if (authError) {
+        toastService[authError.notificationType]({ key: authError.message });
+
+        if (authError.code === '1002' && handle2FA)  {
+          $state.go('secondFactorAuthenticationLogin', { loginInfo: { login: login, password }});
+        }
+
+        return $q.reject(error);
+      }
+
+      return getErrorMessage(error)
+        .then(message => toastService.error({ key: message }))
+        .then(() => $q.reject(error))
+        .catch(() => $q.reject(error));
     }
 
     /**
@@ -183,7 +181,7 @@
       $q.all([
         getCurrentUser(),
         ServerManagerService.getHeaders(),
-        handler(Restangular.all(restUrl).withHttpConfig().customGET('logout'))
+        responseHandler(Restangular.all(restUrl).withHttpConfig().customGET('logout'))
       ])
         .then(([loggedUser, headers]) => {
           const headersLogoutUrl = headers['x-linshare-post-logout-url'];
@@ -229,7 +227,7 @@
     function version() {
       $log.debug('AuthenticationRestService : version');
 
-      return handler(Restangular.one(restUrl, 'version').get());
+      return responseHandler(Restangular.one(restUrl, 'version').get());
     }
   }
 })();
