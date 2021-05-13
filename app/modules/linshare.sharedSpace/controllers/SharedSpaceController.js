@@ -154,7 +154,8 @@ function SharedSpaceController(
       sharedSpaceVm.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
       sharedSpaceVm.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
       sharedSpaceVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
-      sharedSpaceVm.functionalities.drive = functionalities.DRIVE.enable && functionalities.DRIVE__CREATION_RIGHT.enable;
+      sharedSpaceVm.functionalities.drive = functionalities.DRIVE.enable;
+      sharedSpaceVm.functionalities.driveCreationRight = functionalities.DRIVE__CREATION_RIGHT.enable;
     });
   }
 
@@ -176,7 +177,7 @@ function SharedSpaceController(
         });
       }
 
-      if (sharedSpaceVm.functionalities.drive && !sharedSpaceVm.isDriveState) {
+      if (sharedSpaceVm.functionalities.drive && sharedSpaceVm.functionalities.driveCreationRight && !sharedSpaceVm.isDriveState) {
         sharedSpaceVm.fabButton.actions.push({
           action: () => sharedSpaceVm.createSharedSpace('DRIVE'),
           label: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.defaultName,
@@ -498,7 +499,7 @@ function SharedSpaceController(
     }
 
     if (type === 'DRIVE') {
-      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.drive;
+      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.drive && sharedSpaceVm.functionalities.driveCreationRight;
     }
   }
 }

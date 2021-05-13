@@ -33,7 +33,7 @@
 
               <li
                 role="menuitem"
-                ng-if="!vm.isDriveState"
+                ng-if="!vm.isDriveState && vm.functionalities.drive"
                 ng-class="{'disable-link': !vm.canCreateSharedSpace('DRIVE')}"
               >
                 <a ng-click="vm.createSharedSpace('DRIVE')">
