@@ -755,35 +755,20 @@ function WorkgroupNodesController(
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
   function openBrowser(nodeItems, isMove, canDisplayFiles) {
-    var currentFolder = null;
+    let currentFolder;
 
     if(workgroupPermissions.FOLDER.CREATE) {
       currentFolder = _.cloneDeep(workgroupNodesVm.currentFolder);
     }
 
-    var nodeList = canDisplayFiles ? _.clone(workgroupNodesVm.nodesList) : _.filter(
-      workgroupNodesVm.nodesList,
-      {'type': TYPE_FOLDER}
-    );
-
     browseService.show({
-      currentFolder: currentFolder,
-      currentList: _.orderBy(
-        nodeList,
-        'modificationDate',
-        'desc'
-      ),
-      nodeItems: nodeItems,
-      isMove: isMove,
-      canDisplayFiles: canDisplayFiles,
-      hasFolder:  _.some(nodeItems, {'type': TYPE_FOLDER}),
-      hasFile:  _.some(nodeItems, {'type': TYPE_DOCUMENT}),
-      restService: workgroupNodesRestService
-    }).then(function(data) {
-      openBrowserNotify(data, isMove);
-    }).finally(function() {
-      reloadTableParamsDatas();
-    });
+      currentFolder,
+      nodeItems,
+      isMove,
+      canDisplayFiles
+    })
+      .then(data => openBrowserNotify(data, isMove))
+      .finally(reloadTableParamsDatas);
   }
 
 
@@ -866,14 +851,14 @@ function WorkgroupNodesController(
         action: isMove ? 'moved' : '',
         folderName: data.folder.name
       }
-    }, 'TOAST_ALERT.ACTION_BUTTON').then(function(response) {
-      if (!_.isUndefined(response)) {
-        if (response.actionClicked) {
-          var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
-
-          workgroupNodesVm.goToFolder(data.folder, true, nodeToSelectUuid);
-        }
+    }, 'TOAST_ALERT.ACTION_BUTTON').then(response => {
+      if (!response || !response.actionClicked) {
+        return;
       }
+
+      const nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
+
+      workgroupNodesVm.goToFolder(data.folder, true, nodeToSelectUuid);
     });
   }
 

@@ -10,6 +10,7 @@ angular
 BrowseController.$inject = [
   '_',
   '$q',
+  '$filter',
   '$transitions',
   'functionalityRestService',
   'itemUtilsService',
@@ -28,6 +29,7 @@ BrowseController.$inject = [
 function BrowseController(
   _,
   $q,
+  $filter,
   $transitions,
   functionalityRestService,
   itemUtilsService,
@@ -37,6 +39,8 @@ function BrowseController(
   workgroupVersionsRestService
 ) {
   const browseVm = this;
+  const TYPE_WORKGROUP = 'WORK_GROUP';
+  const TYPE_DRIVE = 'DRIVE';
   const TYPE_FOLDER = 'FOLDER';
   const TYPE_DOCUMENT = 'DOCUMENT';
 
@@ -46,33 +50,37 @@ function BrowseController(
   browseVm.newFolderName = '';
   browseVm.createFolder = createFolder;
   browseVm.createFolderByEnter = createFolderByEnter;
-  browseVm.disableFolder = disableFolder;
-  browseVm.goToFolder = goToFolder;
+  browseVm.disableNode = disableNode;
+  browseVm.loadNode = loadNode;
+  browseVm.getNodeIcon = getNodeIcon;
   browseVm.handleActionOnNodeSelection = handleActionOnNodeSelection;
   browseVm.showCreateFolderInput = showCreateFolderInput;
   browseVm.hideCreateFolderInput = hideCreateFolderInput;
+  browseVm.canCreateFolder = canCreateFolder;
+  browseVm.canPerformAction = canPerformAction;
+  browseVm.loadParentNode = loadParentNode;
 
   browseVm.$onInit = $onInit;
 
   ////////////
 
   function $onInit() {
+    browseVm.breadcrumbs = [];
     browseVm.permissions = {};
-    browseVm.isSharedSpace = false;
-    browseVm.canCreateFolder = false;
+    browseVm.performAction = browseVm.isMove ? moveNode : copyNode;
+    browseVm.canDisplayFiles = browseVm.canDisplayFiles
+      && browseVm.nodeItems
+      && browseVm.nodeItems.length === 1; // Cannot add version with multiple nodes
 
-    // Cannot add version with multiple nodes
-    browseVm.canDisplayFiles = browseVm.canDisplayFiles && browseVm.nodeItems && browseVm.nodeItems.length === 1;
+    if (browseVm.currentFolder) {
+      browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
+    }
 
     functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
-      .then(function(creationRight) {
+      .then(creationRight => {
         browseVm.canCreateWorkGroup = creationRight.enable;
-        browseVm.canCreateFolder =
-            (browseVm.isSharedSpace && browseVm.canCreateWorkGroup) ||
-            (!browseVm.isSharedSpace);
-      });
-
-    loadBrowseList();
+      })
+      .then(listSharedSpaces);
 
     $transitions.onStart({}, function() {
       browseVm.$mdDialog.cancel();
@@ -111,140 +119,130 @@ function BrowseController(
    * @memberOf linshare.components.BrowseController
    */
   function copyNode() {
-    var failedNodes = [],
-      nodeItems = [],
-      promises = [];
+    const destination = {
+      name: browseVm.currentWorkgroup.name,
+      parent: browseVm.currentWorkgroup.uuid,
+      workgroupUuid: browseVm.currentWorkgroup.uuid,
+      workgroupName: browseVm.currentWorkgroup.name
+    };
 
-    _.forEach(browseVm.nodeItems, function(nodeItem) {
-      var deferred = $q.defer();
+    if (
+      browseVm.breadcrumbs.length &&
+      _.last(browseVm.breadcrumbs).type === TYPE_FOLDER
+    ) {
+      _.assign(destination, _.last(browseVm.breadcrumbs));
+    }
 
-      browseVm.restService.copy(browseVm.currentFolder.workGroup, nodeItem.uuid,
-        browseVm.currentFolder.uuid, browseVm.kind).then(function(newNode) {
-        var _newNode = browseVm.restService.restangularize(newNode[0]);
+    const promises = browseVm.nodeItems.map(
+      node => workgroupNodesRestService.copy(
+        destination.workgroupUuid,
+        node.uuid,
+        destination.uuid,
+        browseVm.kind
+      )
+    );
 
-        deferred.resolve(_newNode);
-      }).catch(function(error) {
-        failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
-        deferred.reject(error);
-      });
-      promises.push(deferred.promise);
-    });
-
-    $q.all(promises).then(function(_nodeItems) {
-      nodeItems = _nodeItems;
-    }).finally(function() {
-      browseVm.$mdDialog.hide({
-        nodeItems: nodeItems,
-        failedNodes: failedNodes,
-        folder: browseVm.currentFolder
-      });
-    });
+    $q.allSettled(promises)
+      .then(results => ({
+        nodeItems: results.filter(promise => promise.state === 'fulfilled').map(promise => workgroupNodesRestService.restangularize(promise.value[0])),
+        failedNodes: results.filter(promise => promise.state === 'rejected').map(promise => promise.reason)
+      }))
+      .then(({ nodeItems, failedNodes }) => browseVm.$mdDialog.hide({
+        nodeItems,
+        failedNodes,
+        folder: destination
+      }));
   }
 
   /**
-   * @name disableFolder
-   * @desc Check if folder is in list of selected items and disable it to prevent from moving a folder inside itself
+   * @name disableNode
+   * @desc Check if node should be disabled
+   * node is disabled when there is no FILE READ permission for Workgroup and
+   * being one of the selected node for Folder
    * @param {Object} folder - Folder to check
    * @memberOf linshare.components.BrowseController
    */
-  function disableFolder(folder) {
-    return _.find(browseVm.nodeItems, folder);
-  }
-
-  /**
-   * @name filterNodeListByType
-   * @desc Filter out files from list if browser can't display files
-   * @return {Array<Object>} list - list to filter
-   * @return {Array<Object>} list - copy of list param with files filtered out if canDisplayFiles is false
-   * @memberOf linshare.components.BrowseController
-   */
-  function filterNodeListByType(list) {
-    if (browseVm.canDisplayFiles) {
-      return _.clone(list);
+  function disableNode(node) {
+    if (node.nodeType === TYPE_WORKGROUP) {
+      return !(browseVm.permissions &&
+        browseVm.permissions[node.uuid] &&
+        browseVm.permissions[node.uuid].FILE &&
+        browseVm.permissions[node.uuid].FILE.CREATE);
     }
 
-    return _.filter(list, {'type': TYPE_FOLDER});
+    return !!_.find(browseVm.nodeItems, node);
   }
 
-  /**
-   * @name goToFolder
-   * @desc Enter inside a folder
-   * @param {Object} selectedFolder - Folder where to enter
-   * @param {boolean} goToParent - Enter in parent folder with previous arrow button
-   * @memberOf linshare.components.BrowseController
-   */
-  function goToFolder(selectedFolder, goToParent) {
-    if (!browseVm.canCreateFolder) {
+  function listSharedSpaces(drive = {}) {
+    return sharedSpaceRestService.getList(true, drive.uuid)
+      .then(orderNodesByModificationDate)
+      .then(list => {
+        browseVm.currentList = list;
+
+        return list;
+      })
+      .then(workgroupPermissionsService.getWorkgroupsPermissions)
+      .then(workgroupPermissionsService.formatPermissions)
+      .then(formattedPermissions => {
+        browseVm.permissions = formattedPermissions;
+      });
+  }
+
+  function listSharedSpaceNodes(parent = {}) {
+    const nodeType = !browseVm.canDisplayFiles ? TYPE_FOLDER : null;
+
+    return workgroupNodesRestService.getList(browseVm.currentWorkgroup.uuid, parent.uuid, nodeType)
+      .then(orderNodesByModificationDate)
+      .then(list => {
+        browseVm.currentList = list;
+      });
+  }
+
+  function loadParentNode() {
+    if (!browseVm.breadcrumbs.length) {
       return;
     }
 
     hideCreateFolderInput();
+    browseVm.breadcrumbs.pop();
 
-    if (browseVm.isSharedSpace) {
-      browseVm.restService = workgroupNodesRestService;
-      browseVm.restService.get(selectedFolder.uuid, selectedFolder.uuid, true, true).then(function(currentFolder) {
-        browseVm.currentFolder = currentFolder;
-        browseVm.currentFolder.workgroupUuid = currentFolder.workGroup;
-        browseVm.currentFolder.workgroupName = currentFolder.name;
-        browseVm.restService.getList(currentFolder.workGroup).then(function(currentList) {
-          browseVm.currentList = _.orderBy(filterNodeListByType(currentList), 'modificationDate', 'desc');
-          browseVm.isSharedSpace = false;
-        });
-      });
-    } else if (goToParent && browseVm.currentFolder.parent === browseVm.currentFolder.workGroup) {
-      browseVm.currentFolder = null;
-      loadBrowseList();
-    } else if (browseVm.canCreateFolder) {
-      var folderUuid = goToParent ? selectedFolder.parent : selectedFolder.uuid;
-      var type = !browseVm.canDisplayFiles ? TYPE_FOLDER : undefined;
+    const parentNode = _.last(browseVm.breadcrumbs);
 
-      browseVm.restService.getList(selectedFolder.workGroup, folderUuid, type).then(function(folders) {
-        browseVm.currentList = _.orderBy(folders, 'modificationDate', 'desc');
-      });
+    if (!parentNode) {
+      browseVm.currentWorkgroup = {};
 
-      if (!goToParent) {
-        _.assign(browseVm.currentFolder, selectedFolder);
-      } else {
-        browseVm.restService.get(selectedFolder.workGroup, folderUuid).then(function(parentFolder) {
-          _.assign(browseVm.currentFolder, parentFolder);
-        });
-      }
+      return listSharedSpaces();
     }
+
+    if (parentNode.nodeType === TYPE_DRIVE) {
+      browseVm.currentWorkgroup = {};
+
+      return listSharedSpaces(parentNode);
+    }
+
+    if (parentNode.nodeType === TYPE_WORKGROUP) {
+      return listSharedSpaceNodes();
+    }
+
+    return listSharedSpaceNodes(parentNode);
   }
 
-  /**
-   * @name loadBrowseList
-   * @desc Load browse list from Workgroup root folder or child folder
-   * @memberOf linshare.components.BrowseController
-   */
-  function loadBrowseList() {
-    if (_.isNil(browseVm.currentFolder) || _.isNil(browseVm.currentFolder.role)) {
-      browseVm.currentFolder = {};
-      browseVm.restService = sharedSpaceRestService;
-      browseVm.isSharedSpace = true;
+  function loadNode(selectedFolder) {
+    hideCreateFolderInput();
 
-      browseVm.restService.getList(true)
-        .then(function(currentList) {
-          browseVm.currentList = _.orderBy(currentList, 'modificationDate', 'desc');
+    browseVm.breadcrumbs.push(selectedFolder);
 
-          return workgroupPermissionsService.getWorkgroupsPermissions(currentList);
-        })
-        .then(function(workgroupsPermissions) {
-          browseVm.permissions = workgroupPermissionsService.formatPermissions(workgroupsPermissions);
-        });
-    } else {
-      browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
-      browseVm.isSharedSpace = false;
-
-      workgroupPermissionsService
-        .getWorkgroupsPermissions(
-          [{ uuid: browseVm.currentFolder.workGroup }]
-        )
-        .then(function(workgroupsPermissions) {
-          browseVm.permissions = workgroupPermissionsService.formatPermissions(workgroupsPermissions);
-        });
+    if (selectedFolder.nodeType === TYPE_DRIVE) {
+      return listSharedSpaces(selectedFolder);
     }
-    browseVm.validateAction = browseVm.isMove ? moveNode : copyNode;
+
+    if (selectedFolder.nodeType === TYPE_WORKGROUP) {
+      browseVm.currentWorkgroup = selectedFolder;
+
+      return listSharedSpaceNodes();
+    }
+
+    return listSharedSpaceNodes(selectedFolder);
   }
 
   /**
@@ -253,37 +251,40 @@ function BrowseController(
    * @memberOf linshare.components.BrowseController
    */
   function moveNode() {
-    var failedNodes = [],
-      nodeItems = [],
-      promises = [];
+    const destination = {
+      uuid: browseVm.currentWorkgroup.uuid,
+      name: browseVm.currentWorkgroup.name,
+      parent: browseVm.currentWorkgroup.uuid,
+      workgroupName: browseVm.currentWorkgroup.name,
+      workgroupUuid: browseVm.currentWorkgroup.uuid
+    };
 
-    _.forEach(browseVm.nodeItems, function(nodeItem) {
-      var deferred = $q.defer();
 
-      const currentWorkGroup = nodeItem.workGroup;
+    if (
+      browseVm.breadcrumbs.length &&
+      _.last(browseVm.breadcrumbs).type === TYPE_FOLDER
+    ) {
+      _.assign(destination, _.last(browseVm.breadcrumbs));
+    }
 
-      nodeItem.parent = browseVm.currentFolder.uuid;
-      nodeItem.workGroup = browseVm.currentFolder.workGroup;
+    const promises = browseVm.nodeItems.map(
+      node => workgroupNodesRestService.update(node.workGroup, {
+        ...node,
+        parent: destination.uuid,
+        workGroup: destination.workgroupUuid
+      })
+    );
 
-      browseVm.restService.update(currentWorkGroup, nodeItem).then(newNode => {
-        deferred.resolve(newNode);
-      }).catch(function(error) {
-        failedNodes.push(_.assign(error, {nodeItem: nodeItem}));
-        deferred.reject(error);
-      });
-
-      promises.push(deferred.promise);
-    });
-
-    $q.all(promises).then(function(_nodeItems) {
-      nodeItems = _nodeItems;
-    }).finally(function() {
-      browseVm.$mdDialog.hide({
-        nodeItems: nodeItems,
-        failedNodes: failedNodes,
-        folder: browseVm.currentFolder
-      });
-    });
+    $q.allSettled(promises)
+      .then(results => ({
+        nodeItems: results.filter(promise => promise.state === 'fulfilled').map(promise => promise.value),
+        failedNodes: results.filter(promise => promise.state === 'rejected').map(promise => promise.reason)
+      }))
+      .then(({ nodeItems, failedNodes }) => browseVm.$mdDialog.hide({
+        nodeItems,
+        failedNodes,
+        folder: destination
+      }));
   }
 
   /**
@@ -296,7 +297,7 @@ function BrowseController(
     if (node.type === TYPE_DOCUMENT) {
       addVersion(node);
     } else {
-      goToFolder(node);
+      loadNode(node);
     }
   }
 
@@ -333,14 +334,14 @@ function BrowseController(
    * @memberOf linshare.components.BrowseController
    */
   function createFolder() {
-    if (browseVm.canCreateFolder && itemUtilsService.isNameValid(browseVm.newFolderName)) {
-      const newFolderObject = browseVm.restService.restangularize({
+    if (browseVm.canCreateFolder() && itemUtilsService.isNameValid(browseVm.newFolderName)) {
+      const newFolderObject = {
         name: browseVm.newFolderName,
-        parent: browseVm.currentFolder.uuid,
+        parent: _.last(browseVm.breadcrumbs).uuid,
         type: TYPE_FOLDER
-      }, browseVm.currentFolder.workGroup);
+      };
 
-      browseVm.restService.create(browseVm.currentFolder.workGroup, newFolderObject, false)
+      workgroupNodesRestService.create(browseVm.currentWorkgroup.uuid, newFolderObject, false)
         .then(newlyCreatedFolder => {
           browseVm.currentList.unshift(newlyCreatedFolder);
           hideCreateFolderInput();
@@ -352,6 +353,52 @@ function BrowseController(
     if ($event.charCode === 13) {
       $event.preventDefault();
       createFolder();
+    }
+  }
+
+  function orderNodesByModificationDate(list) {
+    return _.orderBy(list, 'modificationDate', 'desc');
+  }
+
+  function getNodeIcon (node) {
+    if (node.nodeType === TYPE_WORKGROUP) {
+      return 'ls-workgroup';
+    }
+
+    if (node.nodeType === TYPE_DRIVE) {
+      return 'ls-drive';
+    }
+
+    if (node.type === TYPE_FOLDER) {
+      return 'ls-folder';
+    }
+
+    if (node.type === TYPE_DOCUMENT) {
+      return $filter('mimetypeIcone')(node.mimeType);
+    }
+  }
+
+  function canPerformAction() {
+    if (!browseVm.breadcrumbs.length || _.last(browseVm.breadcrumbs).nodeType === TYPE_DRIVE) {
+      return false;
+    }
+
+    if (browseVm.isMove) {
+      return _.last(browseVm.breadcrumbs).uuid !== browseVm.sourceFolder.uuid;
+    }
+
+    return true;
+  }
+
+  function canCreateFolder() {
+    if (browseVm.displayCreateInput) {
+      return false;
+    }
+
+    if (browseVm.currentWorkgroup && browseVm.permissions) {
+      return browseVm.permissions[browseVm.currentWorkgroup.uuid] &&
+        browseVm.permissions[browseVm.currentWorkgroup.uuid].FOLDER &&
+        browseVm.permissions[browseVm.currentWorkgroup.uuid].FOLDER.CREATE;
     }
   }
 }

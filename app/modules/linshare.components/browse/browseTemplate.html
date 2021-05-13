@@ -14,32 +14,43 @@
     <div id="lv-dialog-content-ctn">
       <div class="lv-header-dialog">
         <div class="lv-col-1 center actions">
-          <a data-ng-class="{'disabled': browseVm.isSharedSpace ||
-          browseVm.currentFolder.parent === browseVm.currentFolder.workGroup && browseVm.isMove}"
-          data-ng-click="browseVm.goToFolder(browseVm.currentFolder, true)">
+          <a
+            ng-class="{'disabled': browseVm.breadcrumbs.length === 0 }"
+            ng-click="browseVm.loadParentNode()"
+          >
             <i class="zmdi zmdi-chevron-left"></i>
           </a>
         </div>
         <div class="lv-col-2">
-          <span data-ng-if="!browseVm.isSharedSpace">{{browseVm.currentFolder.name}}</span>
-          <span data-ng-if="browseVm.isSharedSpace" translate>FILE_DIRECTORY_DIALOG.SHARED_SPACE</span>
+          <span ng-show="browseVm.breadcrumbs[browseVm.breadcrumbs.length - 1]" >
+            {{browseVm.breadcrumbs[browseVm.breadcrumbs.length - 1].name}}
+          </span>
+          <span ng-show="browseVm.breadcrumbs.length === 0" translate>FILE_DIRECTORY_DIALOG.SHARED_SPACE</span>
         </div>
         <div
           class="lv-col-3 center waves-effect add-btn"
-          data-ng-click="browseVm.showCreateFolderInput()"
-          data-ng-class="{
-          'disabled': browseVm.displayCreateInput || browseVm.isSharedSpace ||
-          !(!browseVm.isSharedSpace && browseVm.canCreateFolder &&
-          browseVm.permissions[browseVm.currentFolder.workGroup].FOLDER.CREATE)
-          }"
+          ng-click="browseVm.showCreateFolderInput()"
+          ng-class="{ 'disabled': !browseVm.canCreateFolder() }"
         >
           <i class="zmdi zmdi-plus"></i>
         </div>
       </div>
-      <p class="empty-res center" data-ng-if="browseVm.currentList.length === 0 && browseVm.isSharedSpace">
+      <p
+        class="empty-res center"
+        ng-if="
+          !browseVm.currentList.length &&
+          (
+            !browseVm.breadcrumbs.length ||
+            (
+              browseVm.breadcrumbs.length === 1 &&
+              browseVm.breadcrumbs[0].nodeType === 'DRIVE'
+            )
+          )
+        "
+      >
         <i class="zmdi zmdi-info"></i>
-        <span data-ng-if="browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP</span>
-        <span data-ng-if="!browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP_TO_COPY_TO</span>
+        <span ng-if="browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP</span>
+        <span ng-if="!browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP_TO_COPY_TO</span>
       </p>
       <div class="lv-ctn">
         <div
@@ -49,7 +60,7 @@
           <div class="lv-icon-ctn lv-col-1 center">
             <span class="ls-folder"></span>
           </div>
-          <div class="lv-name lv-col-2 file-name-disp single-line" spellcheck="false" contenteditable="false">
+          <div class="lv-name lv-col-2 file-name-disp single-line">
             <input
               class="lv-create-input"
               ng-model='browseVm.newFolderName'
@@ -64,24 +75,21 @@
         </div>
         <div
           class="lv-tem"
-          data-ng-repeat="node in browseVm.currentList"
-          data-ng-click="browseVm.handleActionOnNodeSelection(node)"
-          data-ng-class="{
-          'disabled' : browseVm.disableFolder(node) ||
-          (browseVm.isSharedSpace && !browseVm.isMove
-          && !browseVm.permissions[node.uuid].FILE.CREATE)
-          }"
+          ng-repeat="node in browseVm.currentList"
+          ng-click="browseVm.handleActionOnNodeSelection(node)"
+          ng-class="{ 'disabled' : browseVm.disableNode(node) }"
           uuid={{::node.uuid}}
         >
           <div class="lv-icon-ctn lv-col-1 center">
-            <span data-ng-class="'{{::node.mimeType | mimetypeIcone}}'" data-ng-if="!browseVm.isSharedSpace && node.type === browseVm.TYPE_DOCUMENT"></span>
-            <span class="ls-folder" data-ng-if="!browseVm.isSharedSpace && node.type === browseVm.TYPE_FOLDER"></span>
-            <span class="ls-workgroup" data-ng-if="browseVm.isSharedSpace"></span>
+            <span ng-class="::browseVm.getNodeIcon(node)"></span>
           </div>
-          <div class="lv-name lv-col-2 file-name-disp single-line" spellcheck="false" contenteditable="false">
+          <div class="lv-name lv-col-2 file-name-disp single-line">
             <p class="set-ellipsis">{{::node.name}}</p>
           </div>
-          <div data-ng-if="browseVm.isSharedSpace && node.type !== browseVm.TYPE_DOCUMENT" class="lv-actions-link lv-col-3 center">
+          <div
+            class="lv-actions-link lv-col-3 center"
+            ng-if="node.type !== browseVm.TYPE_DOCUMENT"
+          >
             <span class="zmdi zmdi-chevron-right"></span>
           </div>
         </div>
@@ -95,10 +103,12 @@
       >
         FILE_DIRECTORY_DIALOG.CANCEL
       </button>
-      <button class="confirm"
-              translate data-ng-class="{'disabled': browseVm.isSharedSpace ||
-              (browseVm.isMove && (browseVm.currentFolder.uuid === browseVm.sourceFolder.uuid))}"
-              data-ng-click="browseVm.validateAction()">
+      <button
+        translate
+        class="confirm"
+        ng-click="browseVm.performAction()"
+        ng-class="{ 'disabled': !browseVm.canPerformAction() }"
+      >
         {{::browseVm.isMove ? 'FILE_DIRECTORY_DIALOG.MOVE_HERE' : 'FILE_DIRECTORY_DIALOG.COPY_HERE'}}
       </button>
     </md-dialog-actions>
