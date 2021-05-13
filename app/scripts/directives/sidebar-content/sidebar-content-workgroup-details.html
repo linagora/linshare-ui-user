@@ -174,9 +174,9 @@
                     <input
                       type="checkbox"
                       name="versioningParameters"
-                      data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.original.versioningParameters.enable"
-                      data-ng-click="mainVm.sidebar.getData().currentSelectedDocument.original.save()"
-                      data-ng-disabled="!mainVm.sidebar.getData().functionalities.canOverrideVersioning"
+                      ng-model="mainVm.sidebar.getData().currentSelectedDocument.original.versioningParameters.enable"
+                      ng-change="mainVm.sidebar.getData().updateVersioningParameter()"
+                      ng-disabled="!mainVm.sidebar.getData().functionalities.canOverrideVersioning"
                     />
                     <i class="input-helper"></i>
                   </label>

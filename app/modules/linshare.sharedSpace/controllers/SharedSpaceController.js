@@ -45,6 +45,7 @@ angular.module('linshare.sharedSpace')
     thisctrl.selectedDocuments = [];
     thisctrl.addSelectedDocument = addSelectedDocument;
     thisctrl.showItemDetails = showItemDetails;
+    thisctrl.updateVersioningParameter = updateVersioningParameter;
     thisctrl.paramFilter = {name: ''};
     thisctrl.currentWorkgroupMember = {};
     thisctrl.tableParams = new NgTableParams({
@@ -400,5 +401,11 @@ angular.module('linshare.sharedSpace')
 
           return workgroupRestService.get(item.uuid, true, true);
         });
+    }
+
+    function updateVersioningParameter () {
+      if (thisctrl.currentSelectedDocument && thisctrl.currentSelectedDocument.original) {
+        workgroupRestService.update(thisctrl.currentSelectedDocument.original.plain());
+      }
     }
   });
