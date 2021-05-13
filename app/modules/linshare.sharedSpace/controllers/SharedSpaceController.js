@@ -82,6 +82,7 @@ function SharedSpaceController(
     sharedSpaceVm.canRenameSharedSpace = canRenameSharedSpace;
     sharedSpaceVm.canCreateSharedSpace = canCreateSharedSpace;
     sharedSpaceVm.goToPreviousFolder = goToPreviousFolder;
+    sharedSpaceVm.updateVersioningParameter = updateVersioningParameter;
     sharedSpaceVm.driveUuid = $state.params && $state.params.driveUuid;
     sharedSpaceVm.isDriveState = $state.current.name === 'sharedspace.drive';
     sharedSpaceVm.status = 'loading';
@@ -500,6 +501,12 @@ function SharedSpaceController(
 
     if (type === 'DRIVE') {
       return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.drive && sharedSpaceVm.functionalities.driveCreationRight;
+    }
+  }
+
+  function updateVersioningParameter () {
+    if (sharedSpaceVm.currentSelectedDocument && sharedSpaceVm.currentSelectedDocument.original) {
+      sharedSpaceRestService.update(sharedSpaceVm.currentSelectedDocument.original.plain());
     }
   }
 }
