@@ -83,6 +83,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.functionalities = {};
   workgroupNodesVm.canDeleteNodes = false;
   workgroupNodesVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
+  workgroupNodesVm.TYPE_FOLDER = TYPE_FOLDER;
   workgroupNodesVm.permissions = workgroupPermissions;
   workgroupNodesVm.addUploadedDocument = addUploadedDocument;
   workgroupNodesVm.areAllSameType = areAllSameType;
