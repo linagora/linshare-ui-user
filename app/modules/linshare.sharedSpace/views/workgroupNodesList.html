@@ -628,7 +628,7 @@
                                 <span translate>ACTION.RENAME</span>
                               </a>
                             </li>
-                            <li>
+                            <li ng-if="nodeItem.type !== workgroupNodesVm.TYPE_FOLDER">
                               <document-preview-button
                                 data-ng-if="workgroupNodesVm.thumbnailEngineActivated"
                                 item-index="$index"
