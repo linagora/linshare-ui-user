@@ -102,6 +102,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.getNodeDetails = getNodeDetails;
   workgroupNodesVm.goToFolder = goToFolder;
   workgroupNodesVm.goToPreviousFolder = goToPreviousFolder;
+  workgroupNodesVm.goToDrive = goToDrive;
   workgroupNodesVm.isDocument = isDocument;
   workgroupNodesVm.loadSidebarContent = loadSidebarContent;
   workgroupNodesVm.mdtabsSelection = {
@@ -146,6 +147,12 @@ function WorkgroupNodesController(
         workgroupNodesVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue < 0 ?
           Infinity :
           unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
+
+        if (workgroup.parentUuid) {
+          sharedSpaceRestService.get(workgroup.parentUuid, null, true).then(drive => {
+            workgroupNodesVm.drive = drive;
+          });
+        }
       });
 
     Object.assign(
@@ -1378,5 +1385,11 @@ function WorkgroupNodesController(
     source.parent = target;
 
     return workgroupNodesRestService.update(source.workGroup, source);
+  }
+
+  function goToDrive() {
+    if (workgroupNodesVm.drive) {
+      $state.go('sharedspace.drive', {driveUuid: workgroupNodesVm.drive.uuid});
+    }
   }
 }

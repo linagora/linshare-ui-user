@@ -121,6 +121,18 @@
               </a>
             </div>
             <div id="root-level">
+              <span ng-if="workgroupNodesVm.drive" class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+              <a
+                class="set-ellipsis drive-breadcrumb"
+                ng-if="workgroupNodesVm.drive"
+                tooltip-placement="bottom"
+                tooltip-append-to-body="true"
+                tooltip-popup-delay="1200"
+                uib-tooltip="{{::workgroupNodesVm.drive.name}}"
+                ng-click="workgroupNodesVm.goToDrive()"
+              >
+                {{::workgroupNodesVm.drive.name}}
+              </a>
               <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
               <a
                 class="set-ellipsis"

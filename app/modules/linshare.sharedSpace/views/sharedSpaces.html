@@ -50,7 +50,8 @@
             <div id="root-level">
               <a>
                 <i class="ls-shared-space"></i>
-                <span class="text-uppercase" translate>MENU_TITLE.SHARED_SPACE</span>
+                <span ng-if="vm.currentDrive && vm.currentDrive.name" class="text-uppercase">{{ vm.currentDrive && vm.currentDrive.name }}</span>
+                <span ng-if="!vm.currentDrive || !vm.currentDrive.name" class="text-uppercase" translate>MENU_TITLE.SHARED_SPACE</span>
               </a>
             </div>
           </div>

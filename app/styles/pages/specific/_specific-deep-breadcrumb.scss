@@ -87,6 +87,14 @@
       color: $primary-color !important;
       cursor: default;
     }
+
+    #root-level .drive-breadcrumb {
+      cursor: pointer;
+      color: #4a4a4a !important;
+      &:hover {
+        color: $primary-color !important;
+      }
+    }
   }
 }
 
