@@ -619,8 +619,11 @@
                           </a>
                           <ul class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
                                 dropdown-divided dropdown-submenu" data-ng-class="{'open':isOpenItem}" uib-dropdown-menu="">
-                            <li event-propagation-stop data-ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem, $data, $index)">
-                              <a href="">
+                            <li>
+                              <a
+                                ng-click="workgroupNodesVm.showSelectedNodeDetails(nodeItem, $data, $index)"
+                                href=""
+                              >
                                 <i class="zmdi zmdi-info"></i>
                                 <span translate>ACTION.INFORMATION</span>
                               </a>
