@@ -231,6 +231,7 @@
                 <span>
                   {{"MEMBER_TAB." + workgroupMember.role.name | translate}}
                 </span>
+                <span ng-if="workgroupMember.nested" class="info-item-drive-member-type" translate>{{ sharedSpaceMembersVm.driveMembers.includes(workgroupMember.account.mail) ? 'MEMBER_TAB.DRIVE_MEMBER' : 'MEMBER_TAB.EXTERNAL_USER' }}</span>
               </div>
             </div>
             <div
@@ -270,11 +271,9 @@
                 </ul>
               </span>
               <a
-                data-ng-if="mainVm.sidebar.getData().permissions[
-                mainVm.sidebar.getData().currentSelectedDocument.current.uuid
-                ].MEMBER.DELETE || mainVm.sidebar.getData().permissions.MEMBER.DELETE"
+                ng-if="mainVm.sidebar.getData().canDeleteSharedSpaceMember() && !sharedSpaceMembersVm.driveMembers.includes(workgroupMember.account.mail)"
                 href="javascript:void(0)"
-                data-ng-click="sharedSpaceMembersVm.removeMember(
+                ng-click="sharedSpaceMembersVm.removeMember(
                   mainVm.sidebar.getData().currentSelectedDocument.current,
                   workgroupMember
                 )"

@@ -43,7 +43,9 @@
     "TOOLTIPS": {
       "DRIVE_ROLE": "The member’s role of this drive",
       "DEFAULT_WORKGROUP_ROLE": "The member’s default role of all workgroups inside this drive"
-    }
+    },
+    "DRIVE_MEMBER": "Drive member",
+    "EXTERNAL_USER": "External user"
   },
   "DETAILS": {
     "FULL_SIZE": "Full size",

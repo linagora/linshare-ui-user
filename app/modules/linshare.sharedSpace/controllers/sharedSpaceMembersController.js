@@ -74,6 +74,16 @@ function sharedSpaceMembersController(
 
   function $onInit() {
     sharedSpaceMembersVm.currentWorkGroup = sidebarService.getData().currentSelectedDocument;
+    sharedSpaceMembersVm.currentDrive = sidebarService.getData().currentDrive;
+    if (sharedSpaceMembersVm.currentDrive && sharedSpaceMembersVm.currentDrive.uuid) {
+      sharedSpaceMembersRestService.getList(sharedSpaceMembersVm.currentDrive.uuid)
+        .then(driveMembers => {
+          sharedSpaceMembersVm.driveMembers = driveMembers.plain().map(member => member.account && member.account.mail).filter(Boolean);
+        })
+        .catch(() => {
+          sharedSpaceMembersVm.driveMembers = [];
+        });
+    }
 
     workgroupRolesRestService.getList(sharedSpaceMembersVm.currentWorkGroup.current.nodeType).then(roles => {
       const defaultConfiguredRoleIndex = roles.findIndex(role =>
@@ -197,6 +207,12 @@ function sharedSpaceMembersController(
    * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
    */
   function removeMember(currentWorkgroup, member) {
+    if (sharedSpaceMembersVm.driveMembers.includes(member.account.mail)) {
+      $log.error('This member is a part of the drive');
+
+      return;
+    }
+
     $q.all([
       $translate(
         'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TEXT',

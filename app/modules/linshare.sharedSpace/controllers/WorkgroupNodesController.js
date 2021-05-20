@@ -996,12 +996,15 @@ function WorkgroupNodesController(
           }
         );
 
+        return fetchDriveOfWorkgroup(workgroup);
+      })
+      .then(workgroup => {
+        workgroupNodesVm.currentDrive = workgroup.drive;
         workgroupNodesVm.currentSelectedDocument.current = Object.assign({}, workgroup);
         workgroupNodesVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
-        return workgroup;
+        return sharedSpaceRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid);
       })
-      .then(() => sharedSpaceRestService.getQuota(workgroupNodesVm.currentSelectedDocument.current.quotaUuid))
       .then(quotas => {
         workgroupNodesVm.currentSelectedDocument.quotas = quotas;
         workgroupNodesVm.mdtabsSelection.selectedIndex = showMemberTab ? 1 : 0;
@@ -1375,6 +1378,14 @@ function WorkgroupNodesController(
   function goToDrive() {
     if (workgroupNodesVm.drive) {
       $state.go('sharedspace.drive', {driveUuid: workgroupNodesVm.drive.uuid});
+    }
+  }
+
+  function fetchDriveOfWorkgroup (workgroup) {
+    if (workgroup && workgroup.parentUuid) {
+      return sharedSpaceRestService.get(workgroup.parentUuid, null, true).then(drive => ({...workgroup, drive}));
+    } else {
+      return $q.resolve(workgroup);
     }
   }
 }

@@ -43,7 +43,9 @@
     "TOOLTIPS": {
       "DRIVE_ROLE": "Vai trò của thành viên trong ổ đĩa này",
       "DEFAULT_WORKGROUP_ROLE": "Vai trò mặc định của thành viên đối với tất cả các nhóm làm việc bên trong ổ đĩa này"
-    }
+    },
+    "DRIVE_MEMBER": "Thành viên ổ đĩa",
+    "EXTERNAL_USER": "Người dùng ngoài"
   },
   "DETAILS": {
     "FULL_SIZE": "Kích thước đầy đủ",

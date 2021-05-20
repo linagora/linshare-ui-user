@@ -42,7 +42,9 @@
     "TOOLTIPS": {
       "DRIVE_ROLE": "Le rôle du membre pour ce drive",
       "DEFAULT_WORKGROUP_ROLE": "Le rôle par défaut du membre pour tous les groupes de travail dans ce Drive"
-    }
+    },
+    "DRIVE_MEMBER": "Membre du drive",
+    "EXTERNAL_USER": "Utilisateur externe"
   },
   "DETAILS": {
     "FULL_SIZE": "Taille totale ",
