@@ -224,11 +224,11 @@
       if (auditAction.isAuthor) {
         return 'AUTHOR_ME';
       }
-      if (auditAction.authUser && (auditAction.authUser.role === 'ADMIN' || auditAction.authUser.role === 'SUPERADMIN')) {
-        return setFullName(auditAction.authUser);
+      if (auditAction.authUser && auditAction.authUser.accountType === 'SYSTEM') {
+        return setFullName(auditAction.actor);
       }
 
-      return setFullName(auditAction.actor);
+      return setFullName(auditAction.authUser);
     }
 
     /**
