@@ -46,8 +46,12 @@ function BrowseController(
 
   browseVm.TYPE_FOLDER = TYPE_FOLDER;
   browseVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
+  browseVm.TYPE_WORKGROUP = TYPE_WORKGROUP;
+  browseVm.TYPE_DRIVE = TYPE_DRIVE;
   browseVm.displayCreateInput = false;
   browseVm.newFolderName = '';
+  browseVm.displayFilterInput = false;
+  browseVm.filterText = '';
   browseVm.createFolder = createFolder;
   browseVm.createFolderByEnter = createFolderByEnter;
   browseVm.disableNode = disableNode;
@@ -56,6 +60,8 @@ function BrowseController(
   browseVm.handleActionOnNodeSelection = handleActionOnNodeSelection;
   browseVm.showCreateFolderInput = showCreateFolderInput;
   browseVm.hideCreateFolderInput = hideCreateFolderInput;
+  browseVm.showFilterInput = showFilterInput;
+  browseVm.hideFilterInput = hideFilterInput;
   browseVm.canCreateFolder = canCreateFolder;
   browseVm.canPerformAction = canPerformAction;
   browseVm.loadParentNode = loadParentNode;
@@ -204,6 +210,8 @@ function BrowseController(
     }
 
     hideCreateFolderInput();
+    hideFilterInput();
+
     browseVm.breadcrumbs.pop();
 
     const parentNode = _.last(browseVm.breadcrumbs);
@@ -229,6 +237,7 @@ function BrowseController(
 
   function loadNode(selectedFolder) {
     hideCreateFolderInput();
+    hideFilterInput();
 
     browseVm.breadcrumbs.push(selectedFolder);
 
@@ -308,14 +317,7 @@ function BrowseController(
    */
   function showCreateFolderInput() {
     browseVm.displayCreateInput = true;
-    const offsetTop = $('#js-lv-create-new-folder').offset().top;
-
-    if (offsetTop < 0) {
-      $('#lv-dialog-content-ctn .lv-ctn').animate({
-        'scrollTop': $('#js-lv-create-new-folder').offset().top
-      }, 300);
-    }
-    $('#js-lv-create-new-folder input').trigger('focus');
+    scrollAndFocusTo('#js-lv-create-new-folder');
   }
 
   /**
@@ -326,6 +328,28 @@ function BrowseController(
   function hideCreateFolderInput() {
     browseVm.newFolderName = '';
     browseVm.displayCreateInput = false;
+  }
+
+  function showFilterInput() {
+    browseVm.displayFilterInput = true;
+    scrollAndFocusTo('#js-filter-workgroup-input');
+  }
+
+  function hideFilterInput() {
+    browseVm.filterText = '';
+    browseVm.displayFilterInput = false;
+  }
+
+  function scrollAndFocusTo(field) {
+    const offsetTop = $(field).offset().top;
+
+    if (offsetTop < 0) {
+      $('#lv-dialog-content-ctn .lv-ctn').animate({
+        'scrollTop': $(field).offset().top
+      }, 300);
+    }
+
+    setTimeout(() => $(`${field} input`).trigger('focus'));
   }
 
   /**

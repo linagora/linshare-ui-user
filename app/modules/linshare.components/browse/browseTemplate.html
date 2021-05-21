@@ -31,8 +31,22 @@
           class="lv-col-3 center waves-effect add-btn"
           ng-click="browseVm.showCreateFolderInput()"
           ng-class="{ 'disabled': !browseVm.canCreateFolder() }"
+          ng-show="
+            browseVm.breadcrumbs.length &&
+            browseVm.breadcrumbs[browseVm.breadcrumbs.length - 1].nodeType !== browseVm.TYPE_DRIVE
+          "
         >
           <i class="zmdi zmdi-plus"></i>
+        </div>
+        <div
+          class="lv-col-3 center waves-effect add-btn"
+          ng-click="browseVm.showFilterInput()"
+          ng-show="
+            !browseVm.breadcrumbs.length ||
+            browseVm.breadcrumbs[browseVm.breadcrumbs.length - 1].nodeType === browseVm.TYPE_DRIVE
+          "
+        >
+          <i class="zmdi zmdi-search"></i>
         </div>
       </div>
       <p
@@ -43,7 +57,7 @@
             !browseVm.breadcrumbs.length ||
             (
               browseVm.breadcrumbs.length === 1 &&
-              browseVm.breadcrumbs[0].nodeType === 'DRIVE'
+              browseVm.breadcrumbs[0].nodeType === browseVm.TYPE_DRIVE
             )
           )
         "
@@ -55,14 +69,14 @@
       <div class="lv-ctn">
         <div
           id="js-lv-create-new-folder"
-          class="lv-tem lv-create-item-container"
-          ng-class="browseVm.displayCreateInput ? 'lv-create-item-container-show': 'lv-create-item-container-hide'">
+          class="lv-tem lv-input-field-container"
+          ng-class="browseVm.displayCreateInput ? 'lv-input-field-container-show': 'lv-input-field-container-hide'">
           <div class="lv-icon-ctn lv-col-1 center">
             <span class="ls-folder"></span>
           </div>
           <div class="lv-name lv-col-2 file-name-disp single-line">
             <input
-              class="lv-create-input"
+              class="lv-input-field"
               ng-model='browseVm.newFolderName'
               ng-keypress="browseVm.createFolderByEnter($event)"
               translate-attr="{'placeholder': 'FILE_DIRECTORY_DIALOG.ENTER_FOLDER_NAME'}"
@@ -74,8 +88,24 @@
           </div>
         </div>
         <div
+          id="js-filter-workgroup-input"
+          class="lv-tem lv-input-field-container"
+          ng-class="browseVm.displayFilterInput ? 'lv-input-field-container-show': 'lv-input-field-container-hide'"
+        >
+          <div class="lv-icon-ctn lv-col-1 center">
+            <i class="zmdi zmdi-close" ng-click="browseVm.hideFilterInput()"></i>
+          </div>
+          <div class="lv-name lv-col-2 single-line">
+            <input
+              class="lv-input-field"
+              ng-model='browseVm.filterText'
+              translate-attr="{'placeholder': 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+            />
+          </div>
+        </div>
+        <div
           class="lv-tem"
-          ng-repeat="node in browseVm.currentList"
+          ng-repeat="node in browseVm.currentList | filter : { name: browseVm.filterText}"
           ng-click="browseVm.handleActionOnNodeSelection(node)"
           ng-class="{ 'disabled' : browseVm.disableNode(node) }"
           uuid={{::node.uuid}}

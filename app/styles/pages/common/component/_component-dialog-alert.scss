@@ -197,20 +197,20 @@ FILE DIRECTORY DIALOG
         font-size: 0.9em;
       }
     }
-    .lv-create-input {
+    .lv-input-field {
       border: 0;
       outline: none;
       background: inherit;
       width: 100%;
     }
-    .lv-create-item-container {
+    .lv-input-field-container {
       cursor: auto;
       transition: all 0.1s ease-in-out;
     }
-    .lv-create-item-container-show {
+    .lv-input-field-container-show {
       height: 35px;
     }
-    .lv-create-item-container-hide {
+    .lv-input-field-container-hide {
       height: 0 !important;
       overflow: hidden;
     }
