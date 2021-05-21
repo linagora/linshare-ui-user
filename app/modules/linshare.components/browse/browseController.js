@@ -74,23 +74,23 @@ function BrowseController(
     browseVm.breadcrumbs = [];
     browseVm.permissions = {};
     browseVm.performAction = browseVm.isMove ? moveNode : copyNode;
+    browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
     browseVm.canDisplayFiles = browseVm.canDisplayFiles
       && browseVm.nodeItems
       && browseVm.nodeItems.length === 1; // Cannot add version with multiple nodes
 
-    if (browseVm.currentFolder) {
-      browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
-    }
+    $transitions.onStart({}, function() {
+      browseVm.$mdDialog.cancel();
+    });
 
     functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
       .then(creationRight => {
         browseVm.canCreateWorkGroup = creationRight.enable;
       })
-      .then(listSharedSpaces);
-
-    $transitions.onStart({}, function() {
-      browseVm.$mdDialog.cancel();
-    });
+      .then(() => browseVm.currentFolder ?
+        loadFolderThenList(browseVm.currentFolder) :
+        listSharedSpaces()
+      );
   }
 
   /**
@@ -177,6 +177,35 @@ function BrowseController(
     }
 
     return !!_.find(browseVm.nodeItems, node);
+  }
+
+  function loadFolderThenList(folder) {
+    sharedSpaceRestService.get(folder.workGroup, null, true)
+      .then(workgroup => {
+        browseVm.currentWorkgroup = workgroup;
+        browseVm.breadcrumbs.push(workgroup);
+
+        if (!workgroup.parentUuid) {
+          return $q.when([workgroup]);
+        }
+
+        return sharedSpaceRestService.get(workgroup.parentUuid, null, true).then(drive => {
+          browseVm.breadcrumbs.unshift(drive);
+
+          return [workgroup, drive];
+        });
+      })
+      .then(workgroupPermissionsService.getWorkgroupsPermissions)
+      .then(workgroupPermissionsService.formatPermissions)
+      .then(formattedPermissions => {
+        browseVm.permissions = formattedPermissions;
+      })
+      .then(() => workgroupNodesRestService.get(browseVm.currentWorkgroup.uuid, folder.uuid, true))
+      .then(currentFolder => {
+        browseVm.breadcrumbs.push(...currentFolder.treePath.slice(1), currentFolder);
+
+        return listSharedSpaceNodes(currentFolder);
+      });
   }
 
   function listSharedSpaces(drive = {}) {
