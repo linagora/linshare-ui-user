@@ -712,6 +712,12 @@
               "SENTENCE": "{{authorName}} изменил файл {{resourceName}} в рабочей группе {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
+          },
+          "MOVE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы переместили файл: {{resourceName}} из Рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
           }
         },
         "WORKGROUP_DOCUMENT_REVISION": {

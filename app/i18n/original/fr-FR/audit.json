@@ -712,6 +712,12 @@
             "SENTENCE": "{{authorName}} a modifié le fichier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
+        },
+        "MOVE": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez déplacé le fichier : {{resourceName}} du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
         }
       },
       "WORKGROUP_DOCUMENT_REVISION": {
