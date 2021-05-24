@@ -155,7 +155,10 @@
                 </span>
               </p>
             </div>
-            <div ng-if="mainVm.sidebar.getData().currentSelectedDocument.quotas.maxFileSize">
+            <div ng-if="
+              mainVm.sidebar.getData().currentSelectedDocument.current.nodeType === 'WORK_GROUP' &&
+              mainVm.sidebar.getData().currentSelectedDocument.quotas.maxFileSize
+            ">
               <p translate> INFORMATION_TAB.MAX_FILE_SIZE </p>
               <p> {{::mainVm.sidebar.getData().currentSelectedDocument.quotas.maxFileSize | readableSize:true}}</p>
             </div>
