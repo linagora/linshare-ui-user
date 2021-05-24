@@ -712,6 +712,12 @@
             "SENTENCE": "{{authorName}} has edited the file : {{resourceName}} from the Workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
+        },
+        "MOVE": {
+          "AUTHOR": {
+            "SENTENCE": "You have moved the file : {{resourceName}} away from the Workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
         }
       },
       "WORKGROUP_DOCUMENT_REVISION": {

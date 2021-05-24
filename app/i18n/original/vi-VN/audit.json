@@ -712,6 +712,12 @@
             "SENTENCE": "{{authorName}} đã chỉnh sửa tệp: {{resourceName}} từ Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
+        },
+        "MOVE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã di chuyển tệp: {{resourceName}} ra khỏi Nhóm làm việc {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
         }
       },
       "WORKGROUP_DOCUMENT_REVISION": {
