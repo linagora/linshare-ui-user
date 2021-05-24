@@ -66,6 +66,16 @@
                     data-ng-click="vm.resetSelectedDocuments()"></i>
                 </a>
               </span>
+              <a href=""
+                 ng-if="vm.currentDrive"
+                 class="hidden-xs pull-left"
+                 tooltip-popup-delay="350"
+                 tooltip-placement="bottom"
+                 uib-tooltip="{{'ACTION.INFO_DRIVE' | translate}}"
+                 tooltip-append-to-body="true"
+                 ng-click="vm.showItemDetails(vm.currentDrive.uuid, true)">
+                <i class="groups-home-workgroup" aria-hidden="true"></i>
+              </a>
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
                 <div uib-dropdown dropdown-append-to-body class="dropdown set-col-6 no-padding" is-open="isOpenOrder"
                   data-ng-class="{'open':isOpenOrder}">
@@ -410,6 +420,23 @@
     fab-button-flow="$flow" fab-button-toolbar="vm.fabButton.toolbar">
   </div>
 </div>
+
+<div class="header-sidebar append-to-body visible-xs workgroup-header-nav" ng-if="vm.currentDrive">
+  <h2 class="header-more-options set-ellipsis">
+    {{::vm.currentDrive.name}}
+  </h2>
+  <a
+    class="pull-right action-icon groups-home-workgroup"
+    ng-click="vm.showItemDetails(vm.currentDrive.uuid, true)"
+  >
+  </a>
+  <a
+    class="pull-right action-icon zmdi zmdi-format-valign-top"
+    ui-sref="sharedspace.all"
+  >
+  </a>
+</div>
+
 <!-- TODO: does not display  -->
 <section class="row multi-select-mobile visible-xs"
   x-ng-class="{'showMobileMultiMenu': vm.selectedDocuments.length > 0}"
