@@ -67,6 +67,7 @@ function sharedSpaceMembersController(
   sharedSpaceMembersVm.propertyOrderBy = 'firstName';
   sharedSpaceMembersVm.propertyOrderByAsc = true;
   sharedSpaceMembersVm.members = [];
+  sharedSpaceMembersVm.driveMembers = [];
 
   sharedSpaceMembersVm.$onInit = $onInit;
 
@@ -159,6 +160,12 @@ function sharedSpaceMembersController(
       return;
     }
 
+    if (sharedSpaceMembersVm.isAddingMember) {
+      return;
+    }
+
+    sharedSpaceMembersVm.isAddingMember = true;
+
     sharedSpaceMembersRestService
       .create(
         formatWorkgroupMember(
@@ -170,6 +177,9 @@ function sharedSpaceMembersController(
       )
       .then(function(data) {
         workgroupMembers.push(data.plain());
+      })
+      .finally(() => {
+        sharedSpaceMembersVm.isAddingMember = false;
       });
   }
 
