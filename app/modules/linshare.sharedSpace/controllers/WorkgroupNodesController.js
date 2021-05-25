@@ -357,6 +357,7 @@ function WorkgroupNodesController(
           return isDocumentContainedInCollection(deletedNodes, selectedDocument);
         });
 
+        filterBoxService.getSetItems(workgroupNodesVm.nodesList);
         workgroupNodesVm.tableParamsService.reloadTableParams();
         $scope.mainVm.sidebar.hide(nodes);
 
