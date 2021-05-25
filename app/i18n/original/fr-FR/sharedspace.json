@@ -67,8 +67,10 @@
   "CREATE_NEW_WORKGROUP": "Créer un nouveau groupe de travail",
   "CREATE_NEW_FOLDER": "Créer un nouveau dossier",
   "CREATE_NEW_DRIVE": "Créer un nouveau Drive",
-  "WORKGROUP": "Groupe de travail",
-  "DRIVE": "Drive",
+  "SHARED_SPACE_TYPE": {
+    "WORKGROUP": "Groupe de travail",
+    "DRIVE": "Drive"
+  },
   "SHARED_SPACE_DIALOGS": {
     "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
       "TITLE": "Modifier le rôle par défaut des groupes de travail",

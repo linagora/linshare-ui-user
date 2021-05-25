@@ -69,8 +69,10 @@
   "CREATE_NEW_WORKGROUP": "Tạo nhóm làm việc mới",
   "CREATE_NEW_FOLDER": "Tạo thư mục mới",
   "CREATE_NEW_DRIVE": "Tạo ổ đĩa mới",
-  "WORKGROUP": "Nhóm làm việc",
-  "DRIVE": "Ổ đĩa",
+  "SHARED_SPACE_TYPE": {
+    "WORKGROUP": "Nhóm làm việc",
+    "DRIVE": "Ổ đĩa"
+  },
   "SHARED_SPACE_DIALOGS": {
     "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
       "TITLE": "Chỉnh sửa vai trò nhóm làm việc mặc định.",

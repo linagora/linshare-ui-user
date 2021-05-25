@@ -68,8 +68,10 @@
   "CREATE_NEW_WORKGROUP": "Create new workgroup",
   "CREATE_NEW_FOLDER": "Create new folder",
   "CREATE_NEW_DRIVE": "Create new drive",
-  "WORKGROUP": "Workgroup",
-  "DRIVE": "Drive",
+  "SHARED_SPACE_TYPE": {
+    "WORKGROUP": "Workgroup",
+    "DRIVE": "Drive"
+  },
   "SHARED_SPACE_DIALOGS": {
     "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
       "TITLE": "Edit default workgroup role",

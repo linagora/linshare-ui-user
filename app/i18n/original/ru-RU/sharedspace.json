@@ -67,8 +67,10 @@
     "CREATE_NEW_WORKGROUP": "Создать новую рабочую группу",
     "CREATE_NEW_FOLDER": "Создать новую папку",
     "CREATE_NEW_DRIVE": "Создать новый диск",
-    "WORKGROUP": "Рабочая группа",
-    "DRIVE": "Привод",
+    "SHARED_SPACE_TYPE": {
+      "WORKGROUP": "Рабочая группа",
+      "DRIVE": "Привод"
+    },
     "SHARED_SPACE_DIALOGS": {
       "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
         "TITLE": "Изменить роль рабочей группы по умолчанию.",
