@@ -80,5 +80,9 @@
         "CONFIRM": "Mettre à jour"
       }
     }
+  },
+  "SHARED_SPACE_TOOLTIPS": {
+    "DRIVE": "Un Drive ne contient que des groupes de travail, il vous permettra de définir une liste de membres par défaut pour tous les groupes de travail imbriqués.",
+    "WORKGROUP": "Un groupe de travail est un espace de collaboration qui peut être géré par des utilisateurs internes ou des invités. Un groupe de travail peut être à l'intérieur d'un lecteur ou autonome."
   }
 }
