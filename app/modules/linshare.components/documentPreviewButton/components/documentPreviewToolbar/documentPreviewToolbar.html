@@ -4,6 +4,6 @@
       {{documentPreviewToolbarVm.item.name}}
     </h2>
     <span flex></span>
-    <document-preview-toolbar-buttons scope="documentPreviewToolbarVm" />
+    <document-preview-toolbar-buttons scope="documentPreviewToolbarVm" ng-if="documentPreviewToolbarVm.item.uuid"/>
   </div>
 </md-toolbar>
