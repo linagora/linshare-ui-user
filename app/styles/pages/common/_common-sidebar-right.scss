@@ -361,7 +361,7 @@ md-content #content-ctn-sidebar {
 /* add Description component  */
 .description-ctn.form-sidebar {
   position: relative;
-  max-height: 35px;
+  height: 35px;
   overflow: hidden;
   padding-left: 1.33em;
   border: 1px solid #e0e0e0;
@@ -372,6 +372,7 @@ md-content #content-ctn-sidebar {
   -moz-transition: all 400ms ease-out;
   transition: all 400ms ease-out;
   cursor: pointer;
+
   .comment {
     word-break: break-all;
     overflow: hidden;
@@ -417,8 +418,9 @@ md-content #content-ctn-sidebar {
 
 .description-ctn.form-sidebar.show-full-comment {
   background-color: #fff;
-  max-height: unset;
+  height: 120px;
   cursor: text;
+
   .comment {
     line-height: 18px;
     height: inherit;

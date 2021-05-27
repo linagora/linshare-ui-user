@@ -42,6 +42,7 @@ require('./services/unit-service');
 require('./sidebar/sidebarAuditActionsTabComponent');
 require('./sidebar/sidebarAuditActionsTabController');
 require('./sidebar/sidebarService');
+require('./sidebar/sidebarDescriptionInput');
 require('./tableParams/services/tableParamsService');
 require('./toast/toastController');
 require('./toast/toastService');

@@ -7,34 +7,13 @@
           <p>{{"RIGHT_PANEL.DETAILS.NO_PREVIEW_AVAILABLE" | translate}}</p>
         </div>
       </div>
-      <div title="{{'WIP' | translate}}" class="m-b-10">
-        <div class="description-ctn form-sidebar disabled"
-             data-ng-class="{'show-full-comment': commentFocused}"
-             data-ng-init="commentFocused = false">
-          <!-- TODO : implement good update method on ng-change when description will be implemented -->
-          <textarea title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"
-                    class="comment"
-                    spellcheck="false"
-                    name="description"
-                    id="description"
-                    data-ng-attr-placeholder="{{'INFORMATION_TAB.INSERT_DESCRIPTION' | translate}}"
-                    data-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.description"
-                    data-ng-bind="mainVm.sidebar.getData().currentSelectedDocument.current.description"
-                    data-ng-change=""
-                    data-ng-model-options="{updateOn: 'blur'}"
-                    data-ng-init="commentFocused = false"
-                    data-ng-focus="commentFocused = true"
-                    data-ng-blur="commentFocused = false">
-                </textarea>
-          <span
-            data-ng-if="(((!commentFocused) && (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
-          <div class="edit-description click-enabled" data-ng-click="commentFocused = !commentFocused">
-            <i class="zmdi zmdi-edit" data-ng-if="!commentFocused"
-               title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
-            <i class="zmdi zmdi-close" data-ng-if="commentFocused"
-               title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
-          </div>
-        </div>
+      <div class="m-b-10">
+        <sidebar-description-input
+          description="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+          on-change="mainVm.sidebar.getData().updateSharedSpaceDescription"
+          readonly="!mainVm.sidebar.getData().canUpdateSharedSpaceDescription(mainVm.sidebar.getData().currentSelectedDocument.current)"
+          placeholder="INFORMATION_TAB.EDIT_DESCRIPTION"
+        ></sidebar-description-input>
       </div>
       <!-- TODO: Set the appropriate action links -->
       <div

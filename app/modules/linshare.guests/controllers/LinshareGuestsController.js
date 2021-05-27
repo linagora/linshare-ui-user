@@ -84,6 +84,7 @@
     guestVm.onUpdatedGuest = onUpdatedGuest;
     guestVm.onCreatedGuest = onCreatedGuest;
     guestVm.withEmail = withEmail;
+    guestVm.updateCommentOnSelectedGuest = updateCommentOnSelectedGuest;
 
     activate();
 
@@ -425,6 +426,15 @@
         (guestVm.tableParams.data.length !== guestVm.selectedGuests.length)) {
         guestVm.flagsOnSelectedPages[guestVm.tableParams.page()] = false;
       }
+    }
+
+    function updateCommentOnSelectedGuest(comment) {
+      const originalComment = guestVm.selectedGuest.comment;
+
+      guestVm.selectedGuest.comment = comment;
+      guestVm.selectedGuest.update().catch(() => {
+        guestVm.selectedGuest.comment = originalComment;
+      });
     }
   }
 })();

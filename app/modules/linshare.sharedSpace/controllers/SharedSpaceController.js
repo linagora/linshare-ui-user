@@ -61,9 +61,7 @@ function SharedSpaceController(
     sharedSpaceVm.selectedDocuments = [];
     sharedSpaceVm.paramFilter = {name: ''};
     sharedSpaceVm.currentWorkgroupMember = {};
-    sharedSpaceVm.mdtabsSelection = {
-      selectedIndex: 0
-    };
+    sharedSpaceVm.mdtabsSelection = { selectedIndex: 0 };
     sharedSpaceVm.flagsOnSelectedPages = {};
     sharedSpaceVm.currentPage = 'group_list';
     sharedSpaceVm.deleteSharedSpace = deleteSharedSpace;
@@ -84,6 +82,8 @@ function SharedSpaceController(
     sharedSpaceVm.canDeleteSharedSpaceMember = canDeleteSharedSpaceMember;
     sharedSpaceVm.goToPreviousFolder = goToPreviousFolder;
     sharedSpaceVm.updateVersioningParameter = updateVersioningParameter;
+    sharedSpaceVm.updateSharedSpaceDescription = updateSharedSpaceDescription;
+    sharedSpaceVm.canUpdateSharedSpace = canUpdateSharedSpace;
     sharedSpaceVm.driveUuid = $state.params && $state.params.driveUuid;
     sharedSpaceVm.isDriveState = $state.current.name === 'sharedspace.drive';
     sharedSpaceVm.status = 'loading';
@@ -476,10 +476,20 @@ function SharedSpaceController(
       return false;
     }
 
-    if (sharedSpace.nodeType === 'WORK_GROUP' && sharedSpaceVm.permissions[sharedSpace.uuid].WORKGROUP.UPDATE) {
-      return true;
-    } else if (sharedSpace.nodeType === 'DRIVE' && sharedSpace.role && sharedSpace.role.name === 'DRIVE_ADMIN') {
-      return true;
+    return canUpdateSharedSpace(sharedSpace);
+  }
+
+  function canUpdateSharedSpace(sharedSpace) {
+    if (sharedSpace.nodeType === 'WORK_GROUP') {
+      return sharedSpaceVm.permissions[sharedSpace.uuid] &&
+        sharedSpaceVm.permissions[sharedSpace.uuid].WORKGROUP &&
+        sharedSpaceVm.permissions[sharedSpace.uuid].WORKGROUP.UPDATE;
+    }
+
+    if (sharedSpace.nodeType === 'DRIVE') {
+      return sharedSpaceVm.permissions[sharedSpace.uuid] &&
+      sharedSpaceVm.permissions[sharedSpace.uuid].DRIVE &&
+      sharedSpaceVm.permissions[sharedSpace.uuid].DRIVE.UPDATE;
     }
   }
 
@@ -512,7 +522,26 @@ function SharedSpaceController(
   }
 
   function canDeleteSharedSpaceMember () {
-    return (sharedSpaceVm.permissions[sharedSpaceVm.currentSelectedDocument.current.uuid].MEMBER.DELETE
-      || sharedSpaceVm.permissions.MEMBER.DELETE);
+    return sharedSpaceVm.permissions[sharedSpaceVm.currentSelectedDocument.current.uuid].MEMBER.DELETE ||
+    (
+      sharedSpaceVm.permissions &&
+      sharedSpaceVm.permissions.MEMBER &&
+      sharedSpaceVm.permissions.MEMBER.DELETE
+    );
+  }
+
+  function updateSharedSpaceDescription(description) {
+    const targetSharedSpace = _.clone(sharedSpaceVm.currentSelectedDocument.current);
+
+    sharedSpaceVm.currentSelectedDocument.current.description = $translate.instant('SAVING');
+
+    sharedSpaceRestService
+      .update({ ...targetSharedSpace, description })
+      .then(() => {
+        sharedSpaceVm.currentSelectedDocument.current.description = description;
+      })
+      .catch(() => {
+        sharedSpaceVm.currentSelectedDocument.current.description = targetSharedSpace.description;
+      });
   }
 }

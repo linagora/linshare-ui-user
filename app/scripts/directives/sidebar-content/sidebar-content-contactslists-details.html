@@ -16,34 +16,10 @@
         </div>
       </div>
       <div title="{{'WIP' | translate}}">
-        <div class="description-ctn form-sidebar disabled-work-in-progress"
-             x-ng-class="{'show-full-comment': commentFocused}"
-             x-ng-init="commentFocused = false">
-          <textarea title="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
-            class="comment"
-            spellcheck="false"
-            name="description"
-            id="description"
-            x-ng-attr-placeholder="{{'CONTACTS_LISTS_ACTION.ADD_DESCRIPTION' | translate}}"
-            x-ng-model="mainVm.sidebar.getData().currentSelectedDocument.current.description"
-            x-ng-bind="mainVm.sidebar.getData().currentSelectedDocument.current.description"
-            x-ng-change="
-            mainVm.sidebar.getData().updateDocument(mainVm.sidebar.getData().currentSelectedDocument.current)"
-            x-ng-model-options="{updateOn: 'blur'}"
-            x-ng-init="commentFocused = false"
-            x-ng-focus="commentFocused = true"
-            x-ng-blur="commentFocused = false">
-          </textarea>
-          <span
-            x-ng-if="(((!commentFocused) &&
-            (mainVm.sidebar.getData().currentSelectedDocument.current.description.length > 54)));">...</span>
-          <div class="edit-description click-enabled" x-ng-click="commentFocused = !commentFocused">
-            <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
-               title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
-            <i class="zmdi zmdi-close" x-ng-if="commentFocused"
-               title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
-          </div>
-        </div>
+        <sidebar-description-input
+          placeholder="INFORMATION_TAB.NO_DESCRIPTION"
+          readonly="true"
+        ></sidebar-description-input>
       </div>
       <div class="content-detail-area">
         <div class="flex-ctn detail-info-ctn">

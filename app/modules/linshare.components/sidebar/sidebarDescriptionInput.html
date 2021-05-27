@@ -1,0 +1,36 @@
+<div
+  class="description-ctn form-sidebar"
+  ng-init="showFullComment = false"
+  ng-class="{
+    'show-full-comment': showFullComment,
+    'disabled-work-in-progress': $ctrl.readonly && !$ctrl.description.length
+  }"
+>
+  <textarea
+    class="comment"
+    spellcheck="false"
+    name="description"
+    id="description"
+    translate-attr="{ 'placeholder': $ctrl.placeholder }"
+    translate-attr="{ 'title': $ctrl.readonly ? '' : INFORMATION_TAB.EDIT_DESCRIPTION' }"
+    ng-model="$ctrl.description"
+    ng-bind="$ctrl.description"
+    ng-change="$ctrl.onChange($ctrl.description)"
+    ng-model-options="{updateOn: 'blur'}"
+    ng-init="showFullComment = false"
+    ng-focus="showFullComment = true"
+    ng-blur="showFullComment = false"
+    ng-readonly="$ctrl.readonly"
+  >
+
+  </textarea>
+  <span ng-if="!showFullComment && $ctrl.description.length > 54">...</span>
+  <div class="edit-description" ng-click="showFullComment = !showFullComment">
+    <i
+      class="zmdi" ng-show="!showFullComment"
+      ng-class="$ctrl.readonly ? 'zmdi-eye' : 'zmdi-edit'"
+      translate-attr="{ 'title': 'INFORMATION_TAB.EDIT_DESCRIPTION' }"
+    ></i>
+    <i class="zmdi zmdi-close" ng-show="showFullComment"></i>
+  </div>
+</div>

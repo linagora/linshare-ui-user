@@ -19,26 +19,10 @@
       </div>
     </div>
     <div class="m-b-10">
-      <div class="description-ctn form-sidebar" data-ng-class="{'show-full-comment': commentFocused}"
-           x-ng-init="commentFocused = false">
-      <textarea title="{{'GUEST_DETAILS.COMMENT.TITLE' | translate}}" class="comment" spellcheck="false"
-                name="comment" id="comment"
-                x-ng-attr-placeholder="{{'GUEST_DETAILS.COMMENT.EMPTY' | translate}}"
-                x-ng-model="mainVm.sidebar.getData().selectedGuest.comment"
-                x-ng-model-options="{updateOn: 'blur'}"
-                x-ng-change="mainVm.sidebar.getData().selectedGuest.update()"
-                x-ng-bind="mainVm.sidebar.getData().selectedGuest.comment"
-                x-ng-init="commentFocused = false" x-ng-focus="commentFocused = true"
-                x-ng-blur="commentFocused = false">
-      </textarea>
-        <span x-ng-if="!commentFocused && mainVm.sidebar.getData().selectedGuest.comment.length > 54">...</span>
-        <div class="edit-description click-enabled" x-ng-click="commentFocused = !commentFocused">
-          <i class="zmdi zmdi-edit" x-ng-if="!commentFocused"
-             title="{{'INFORMATION_TAB.EDIT_DESCRIPTION' | translate}}"></i>
-          <i class="zmdi zmdi-close" x-ng-if="commentFocused"
-             title="{{'INFORMATION_TAB.ABORT_EDIT' | translate}}"></i>
-        </div>
-      </div>
+      <sidebar-description-input
+        description="mainVm.sidebar.getData().selectedGuest.comment"
+        on-change="mainVm.sidebar.getData().updateCommentOnSelectedGuest"
+      ></sidebar-description-input>
     </div>
     <div class="content-detail-area">
       <div class="flex-ctn detail-info-ctn">

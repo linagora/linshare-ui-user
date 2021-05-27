@@ -19,14 +19,11 @@
         <md-tab label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 no-padding">
           <div id="profile-main" class="detail-guest">
             <div>
-              <div class="description-ctn form-sidebar"
-                  ng-class="{'show-full-comment': commentFocused}"
-                  ng-init="commentFocused = false">
-                <span class="comment">{{mainVm.sidebar.getData().selectedToken.description || 'N/A'}}</span>
-                <div class="edit-description click-enabled" ng-click="commentFocused = !commentFocused">
-                  <i class="zmdi zmdi-eye" ng-class="commentFocused ? 'zmdi-close' : 'zmdi-eye'"></i>
-                </div>
-              </div>
+              <sidebar-description-input
+                description="mainVm.sidebar.getData().selectedToken.description"
+                readonly="true"
+                placeholder="INFORMATION_TAB.NO_DESCRIPTION"
+              ></sidebar-description-input>
             </div>
             <div class="content-detail-area">
               <div class="flex-ctn detail-info-ctn">

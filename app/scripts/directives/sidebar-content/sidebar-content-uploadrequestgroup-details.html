@@ -43,15 +43,11 @@
               </div>
             </div>
             <div>
-              <div class="description-ctn form-sidebar"
-                  ng-class="{'show-full-comment': commentFocused}"
-                  ng-init="commentFocused = false">
-                <span class="comment">{{mainVm.sidebar.getData().uploadRequestGroupObject.body || 'N/A'}}</span>
-                <div class="edit-description click-enabled" ng-click="commentFocused = !commentFocused">
-                  <i class="zmdi zmdi-eye" ng-if="!commentFocused"></i>
-                  <i class="zmdi zmdi-close" ng-if="commentFocused"></i>
-                </div>
-              </div>
+              <sidebar-description-input
+                description="mainVm.sidebar.getData().uploadRequestGroupObject.body"
+                readonly="true"
+                placeholder="N/A"
+              ></sidebar-description-input>
             </div>
             <div class="content-detail-area">
               <div class="flex-ctn detail-info-ctn">

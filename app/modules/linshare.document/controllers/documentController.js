@@ -773,18 +773,17 @@
      * Update a document
      * @param document
      */
-    function updateDocument(document) {
-      var documentServer = _.omit(_.cloneDeep(document), ['thumbnailUnloadable']);
+    function updateDocument(description) {
+      const targetDocument = _.omit(_.cloneDeep($scope.currentSelectedDocument.current), ['thumbnailUnloadable']);
 
-      $translate(['SAVING'])
-        .then(function(translations) {
-          /* jshint sub: true */
-          var swalSaving = translations['SAVING'];
+      $translate('SAVING')
+        .then(saving => {
+          $scope.currentSelectedDocument.current.description = saving;
 
-          $scope.currentSelectedDocument.current.description = swalSaving;
-          LinshareDocumentRestService.update(documentServer.uuid, documentServer).then(function() {
-            $scope.currentSelectedDocument.current.description = documentServer.description;
-          });
+          LinshareDocumentRestService.update(targetDocument.uuid, { ...targetDocument, description })
+            .then(() => {
+              $scope.currentSelectedDocument.current.description = description;
+            });
         });
     }
 
