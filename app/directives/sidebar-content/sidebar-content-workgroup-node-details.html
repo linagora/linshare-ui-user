@@ -4,6 +4,7 @@
       item-index="mainVm.sidebar.getData().currentSelectedDocument.current.index"
       items="mainVm.sidebar.getData().currentSelectedDocument.list"
       icon="true"
+      disabled="mainVm.sidebar.getData().currentSelectedDocument.current.type === mainVm.sidebar.getData().TYPE_FOLDER"
     >
       <p x-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail &&
         !mainVm.sidebar.getData().currentSelectedDocument.current.thumbnailUnloadable">
