@@ -9,7 +9,8 @@
   </md-button>
   <md-button
     class="md-icon-button actions white-inline-link hidden-xs"
-    data-ng-click="$ctrl.scope.download($ctrl.scope.item)"
+    ng-show="$ctrl.scope.canDownloadItem($ctrl.scope.item)"
+    ng-click="$ctrl.scope.download($ctrl.scope.item)"
   >
     <a>
       <i class="zmdi zmdi-download zmdi-hc-lg"></i>
@@ -48,7 +49,8 @@
           </li>
           <li
             class="visible-xs"
-            data-ng-click="$ctrl.scope.download($ctrl.scope.item)"
+            ng-show="$ctrl.scope.canDownloadItem($ctrl.scope.item)"
+            ng-click="$ctrl.scope.download($ctrl.scope.item)"
           >
             <a href="">
               <i class="zmdi zmdi-download zmdi-hc-lg"></i>
