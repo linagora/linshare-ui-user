@@ -31,6 +31,10 @@
      * @namespace linshare.components.documentPreviewButtonController
      */
     function showDocumentPreviewDialog(scope) {
+      if (scope.disabled) {
+        return;
+      }
+
       //TODO - PREVIEW: How to be pure?
       documentPreviewService.setItem(
         scope.itemIndex,

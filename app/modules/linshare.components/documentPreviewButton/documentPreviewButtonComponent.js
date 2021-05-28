@@ -15,7 +15,8 @@
       bindings: {
         itemIndex: '<',
         items: '<',
-        icon: '<'
+        icon: '<',
+        disabled: '<'
       }
     });
 })();
