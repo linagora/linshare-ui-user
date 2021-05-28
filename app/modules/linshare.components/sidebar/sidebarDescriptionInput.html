@@ -24,7 +24,7 @@
   >
 
   </textarea>
-  <span ng-if="!showFullComment && $ctrl.description.length > 54">...</span>
+  <span class="description-ellipsis" ng-if="!showFullComment && $ctrl.description.length > 54">...</span>
   <div class="edit-description" ng-click="showFullComment = !showFullComment">
     <i
       class="zmdi" ng-show="!showFullComment"

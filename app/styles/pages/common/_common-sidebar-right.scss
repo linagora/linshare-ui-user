@@ -380,11 +380,12 @@ md-content #content-ctn-sidebar {
     border: none;
     background-color: transparent;
     line-height: 20px;
-    width: 81%;
+    width: 100%;
     color: #858585;
     font-size: 0.90em;
     font-style: italic;
     padding: 10px 0 0 0;
+    padding-right: 19%;
     &[readonly] {
       cursor: default;
     }
@@ -396,6 +397,11 @@ md-content #content-ctn-sidebar {
     line-height: 18px;
     margin-left: -5px;
     display: inline-block;
+  }
+  .description-ellipsis {
+    position: absolute;
+    bottom: 4px;
+    left: 83%;
   }
   .edit-description {
     position: absolute;
@@ -425,8 +431,9 @@ md-content #content-ctn-sidebar {
     line-height: 18px;
     height: inherit;
     text-overflow: inherit;
-    width: 90%;
-    padding-right: 0.85em;
+    width: 100%;
+    padding-right: 10%;
+    overflow-y: scroll;
     div {
       display: block;
     }
@@ -436,6 +443,7 @@ md-content #content-ctn-sidebar {
     background-color: #fff;
     width: 30px;
     height: 30px;
+    right: 6px;
   }
 }
 
