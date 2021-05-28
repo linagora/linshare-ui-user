@@ -83,7 +83,7 @@
     }
   },
   "SHARED_SPACE_TOOLTIPS": {
-    "DRIVE": "A Drive contains only Workgroups, a Drive will allow you to define a list of default members for all nested Workgroups",
-    "WORKGROUP": "A workgroup is a collaborating space that that can be managed by internal users or guests. A workgroup can be inside a drive or standalone."
+    "DRIVE": "A Drive contains only Workgroups, a Drive will allow you to define a list of default members for all nested Workgroups with their default role (browse, create, etc)",
+    "WORKGROUP": "A workgroup is a collaborating space where you can add members like internal or guest users. These members will be able to browse, create, update or delete files and folders inside the workgroup according to their roles."
   }
 }

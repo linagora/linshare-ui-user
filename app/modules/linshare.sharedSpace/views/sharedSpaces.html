@@ -28,7 +28,8 @@
                 <a
                   ng-click="vm.createSharedSpace('WORK_GROUP')"
                   uib-tooltip="{{'SHARED_SPACE_TOOLTIPS.WORKGROUP' | translate}}"
-                  tooltip-placement="top"
+                  tooltip-append-to-body="true"
+                  tooltip-popup-delay="700"
                 >
                   <i ng-class="::vm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon"></i>
                   <span translate>SHARED_SPACE_TYPE.WORKGROUP</span>
@@ -43,7 +44,8 @@
                 <a
                   ng-click="vm.createSharedSpace('DRIVE')"
                   uib-tooltip="{{'SHARED_SPACE_TOOLTIPS.DRIVE' | translate}}"
-                  tooltip-placement="top"
+                  tooltip-append-to-body="true"
+                  tooltip-popup-delay="700"
                 >
                   <i ng-class="::vm.NODE_TYPE_PROPERTIES.DRIVE.icon"></i>
                   <span translate>SHARED_SPACE_TYPE.DRIVE</span>

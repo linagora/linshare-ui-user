@@ -84,7 +84,7 @@
     }
   },
   "SHARED_SPACE_TOOLTIPS": {
-    "DRIVE": "Ổ đĩa chỉ chứa Nhóm làm việc, Ổ đĩa sẽ cho phép bạn xác định danh sách các thành viên mặc định cho tất cả các Nhóm làm việc lồng nhau.",
-    "WORKGROUP": "Nhóm làm việc là không gian cộng tác có thể được quản lý bởi người dùng nội bộ hoặc khách. Một nhóm làm việc có thể nằm trong ổ đĩa hoặc độc lập."
+    "DRIVE": "Ổ đĩa chỉ chứa Nhóm làm việc, Ổ đĩa sẽ cho phép bạn xác định danh sách các thành viên mặc định cho tất cả các Nhóm làm việc bên trong nó.",
+    "WORKGROUP": "Nhóm làm việc là một không gian cộng tác, nơi bạn có thể thêm các thành viên như người dùng nội bộ hoặc khách. Các thành viên này sẽ có thể duyệt, tạo, cập nhật hoặc xóa các tệp và thư mục bên trong nhóm làm việc theo vai trò của họ."
   }
 }
