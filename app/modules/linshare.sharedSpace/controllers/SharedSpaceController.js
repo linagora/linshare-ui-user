@@ -191,6 +191,8 @@ function SharedSpaceController(
 
 
   function createSharedSpace(nodeType) {
+    $('.shared-space-tooltip-trigger').trigger('mouseleave');
+
     if (sharedSpaceVm.canCreate) {
       sharedSpaceVm.canCreate = false;
       if (sharedSpaceVm.itemsList.length !== sharedSpaceVm.itemsListCopy.length) {

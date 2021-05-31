@@ -26,8 +26,10 @@
                 ng-class="{'disable-link': !vm.canCreateSharedSpace('WORK_GROUP')}"
               >
                 <a
+                  class="shared-space-tooltip-trigger"
                   ng-click="vm.createSharedSpace('WORK_GROUP')"
-                  uib-tooltip="{{'SHARED_SPACE_TOOLTIPS.WORKGROUP' | translate}}"
+                  uib-tooltip="{{::'SHARED_SPACE_TOOLTIPS.WORKGROUP' | translate}}"
+                  tooltip-placement="right"
                   tooltip-append-to-body="true"
                   tooltip-popup-delay="700"
                 >
@@ -42,8 +44,10 @@
                 ng-class="{'disable-link': !vm.canCreateSharedSpace('DRIVE')}"
               >
                 <a
+                  class="shared-space-tooltip-trigger"
                   ng-click="vm.createSharedSpace('DRIVE')"
-                  uib-tooltip="{{'SHARED_SPACE_TOOLTIPS.DRIVE' | translate}}"
+                  uib-tooltip="{{::'SHARED_SPACE_TOOLTIPS.DRIVE' | translate}}"
+                  tooltip-placement="right"
                   tooltip-append-to-body="true"
                   tooltip-popup-delay="700"
                 >
