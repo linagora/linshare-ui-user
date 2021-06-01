@@ -444,10 +444,6 @@ function BrowseController(
   }
 
   function canCreateFolder() {
-    if (browseVm.displayCreateInput) {
-      return false;
-    }
-
     if (browseVm.currentWorkgroup && browseVm.permissions) {
       return browseVm.permissions[browseVm.currentWorkgroup.uuid] &&
         browseVm.permissions[browseVm.currentWorkgroup.uuid].FOLDER &&

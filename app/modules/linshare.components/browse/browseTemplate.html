@@ -30,7 +30,7 @@
         <div
           class="lv-col-3 center waves-effect add-btn"
           ng-click="browseVm.showCreateFolderInput()"
-          ng-class="{ 'disabled': !browseVm.canCreateFolder() }"
+          ng-class="{ 'disabled': browseVm.displayCreateInput || !browseVm.canCreateFolder() }"
           ng-show="
             browseVm.breadcrumbs.length &&
             browseVm.breadcrumbs[browseVm.breadcrumbs.length - 1].nodeType !== browseVm.TYPE_DRIVE
