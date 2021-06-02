@@ -34,7 +34,6 @@ angular
     $scope.loadSidebarContent = loadSidebarContent;
     $scope.multiDownload = multiDownload;
     $scope.openBrowser = openBrowser;
-    $scope.selectDocuments = selectDocuments;
     $scope.showCurrentFile = showCurrentFile;
     $scope.toggleSearchState = toggleSearchState;
     $scope.onForward = onForward;
@@ -77,15 +76,13 @@ angular
         }
       );
 
-      authenticationRestService.getCurrentUser().then(userData => {
-        $scope.canUpload = userData.canUpload;
-
-        if (!$scope.isMobile && $scope.selectedDocuments.length === 1) {
-          $scope.showCurrentFile($scope.selectedDocuments[0]);
-        }
-      })
+      authenticationRestService.getCurrentUser()
+        .then(userData => {
+          $scope.canUpload = userData.canUpload;
+        })
         .then(launchTableParamsInitiation)
-        .catch(function(error) {
+        .then(selectAndIsolateFiles)
+        .catch(error => {
           $log.debug(error);
         });
 
@@ -238,10 +235,8 @@ angular
     }
 
     function launchTableParamsInitiation() {
-      var fileToSelect = $stateParams.fileUuid;
-
-      tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter, fileToSelect)
-        .then(function(data) {
+      return tableParamsService.initTableParams($scope.documentsList, $scope.paramFilter)
+        .then(() => {
           $scope.tableParamsService = tableParamsService;
           $scope.tableParams = tableParamsService.getTableParams();
           $scope.lengthOfSelectedDocuments = tableParamsService.lengthOfSelectedDocuments;
@@ -253,20 +248,30 @@ angular
           $scope.toggleFilterBySelectedFiles = tableParamsService.isolateSelection;
           $scope.flagsOnSelectedPages = tableParamsService.getFlagsOnSelectedPages();
           $scope.getToggleSelectedSort = tableParamsService.getToggleSelectedSort;
-
-          if ($stateParams.fileUuid) {
-            if (_.isNil(data.itemToSelect)) {
-              toastService.error({key: 'TOAST_ALERT.ERROR.FILE_NOT_FOUND'});
-            } else {
-              toastService.isolate({key: 'TOAST_ALERT.WARNING.ISOLATED_FILE'});
-              $scope.addSelectedDocument(data.itemToSelect);
-              $scope.toggleFilterBySelectedFiles();
-              if (!$scope.isMobile) {
-                $scope.showCurrentFile(data.itemToSelect);
-              }
-            }
-          }
+          $scope.getSelectionIsIsolated = tableParamsService.getSelectionIsIsolated;
         });
+    }
+
+    function selectAndIsolateFiles() {
+      if (!$stateParams.fileUuid) {
+        return;
+      }
+
+      const filesToSelect = _.filter($scope.documentsList, document => {
+        if ($stateParams.fileUuid.length) {
+          return $stateParams.fileUuid.includes(document.uuid);
+        }
+
+        return $stateParams.fileUuid === document.uuid;
+      });
+
+      filesToSelect.forEach(tableParamsService.toggleItemSelection);
+      tableParamsService.isolateSelection();
+      triggerIsolateToast(filesToSelect);
+
+      if (!$scope.isMobile && $scope.selectedDocuments.length === 1) {
+        showCurrentFile($scope.selectedDocuments[0]);
+      }
     }
 
     /**
@@ -383,95 +388,6 @@ angular
           notifyBrowseActionSuccess(data);
         }
       });
-    }
-
-    /**
-     * @name selectDocuments
-     * @desc trigger selected documents and selected pages
-     * @param {Object} documents - selected documents
-     * @param {Object} tableParams - table params
-     * @memberOf LinShare.receivedShare.ReceivedController
-     */
-    //TODO Avoid mutation!
-    function selectDocuments(documents, tableParams){
-      var documentsAndFlagsIsolated = setIsolateMode(
-        documents,
-        tableParams.page()
-      );
-
-      /* All of below should be in setIsolateMode when the mutation Pattern is corrected */
-      $scope.documentsList = _.union(
-        $scope.documentsList,
-        documentsAndFlagsIsolated.selectedDocuments
-      );
-      $scope.selectedDocuments = _.union(
-        $scope.selectedDocuments,
-        documentsAndFlagsIsolated.selectedDocuments
-      );
-      $scope.flagsOnSelectedPages = _.union(
-        $scope.flagsOnSelectedPages,
-        documentsAndFlagsIsolated.flagsOnSelectedPages
-      );
-    }
-
-    /**
-     * @name setDocumentsAsSelected
-     * @desc Return a new array with given documents property `ìsSelected` to true
-     * @param {Object[]} documentsToSelect - An array of Document file object
-     * @returns {Object[]} An array of Document file object set to `isSelected` to true
-     * @memberOf LinShare.receivedShare.ReceivedController
-     */
-    function setDocumentsAsSelected(documentsToSelect) {
-      return _.map(
-        documentsToSelect,
-        function(document) {
-          return Object.assign(
-            document,
-            { isSelected: true }
-          );
-        }
-      );
-    }
-
-    /**
-     *  @name setDocumentsAndFlagAsSelected
-     *  @desc Set documents and flags of current page as selected
-     *  @param {string[]} filesToIsolate - Array of document uuid to select
-     *  @param {number} pageNumber - Page number of element to be selected
-     *  @returns {Object} Contains documents and element per page selected
-     *  @returns {Object.selectedDocuments} Array of document selected
-     *  @returns {Object.flagsOnSelectedPages} elements per page selected
-     *  @memberOf LinShare.receivedShare.receivedShareController
-     */
-    function setDocumentsAndFlagAsSelected(filesToSelect, pageNumber) {
-      /* I LOVE ES6 ... */
-      var flag = {};
-
-      flag[pageNumber] = true;
-
-      var documentsAndFlagsSelected = {
-        selectedDocuments: setDocumentsAsSelected(filesToSelect),
-        flagsOnSelectedPages: flag
-      };
-
-      return documentsAndFlagsSelected;
-    }
-
-    /**
-     *  @name setIsolateMode
-     *  @desc select documents and flags to isolate and trigger toast `isolation`
-     *  @param {string[]} filesToIsolate - Array of document uuid to select
-     *  @param {number} pageNumber - Page number of element to be selected
-     */
-    function setIsolateMode(documentsToIsolate, pageNumber) {
-      var documentsAndFlagsSelected = setDocumentsAndFlagAsSelected(
-        documentsToIsolate,
-        pageNumber
-      );
-
-      triggerIsolateToast(documentsAndFlagsSelected.selectedDocuments);
-
-      return documentsAndFlagsSelected;
     }
 
     /**
