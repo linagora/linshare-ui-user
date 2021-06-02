@@ -8,8 +8,8 @@
               <i class="groups-received-files"></i>
               <span translate>BREADCRUMB_TITLE_RECEIVED_SHARES</span>
             </a>
-            <span class="sub-category-chevron pipe-separator" x-ng-if="activeBtnShowSelection">|</span>
-            <a href="javascript:void(0)" class="click-disabled" x-ng-if="activeBtnShowSelection">
+            <span class="sub-category-chevron pipe-separator" ng-show="getSelectionIsIsolated()">|</span>
+            <a href="javascript:void(0)" class="click-disabled" ng-show="getSelectionIsIsolated()">
               <span translate>BREADCRUMB_ISOLATE</span>
             </a>
           </div>
@@ -165,14 +165,14 @@
             </a>
           </div>
           <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
-            <div class="pull-left" x-ng-class="{'active-button-show-selection': activeBtnShowSelection}" x-ng-click="toggleFilterBySelectedFiles()">
+            <div class="pull-left" ng-class="{'active-button-show-selection': getSelectionIsIsolated()}" ng-click="toggleFilterBySelectedFiles()">
               <p>
                 <span>{{selectedDocuments.length}}</span>
                 <span translate>SELECTION_TOOLBAR.SELECTED_FILES</span>
               </p>
               <div class="pull-left view-icons-ctn groups-view">
-                <i class="fa fa-eye-slash" aria-hidden="true" x-ng-show="activeBtnShowSelection"></i>
-                <i class="fa fa-eye" aria-hidden="true" x-ng-show="!activeBtnShowSelection"></i>
+                <i class="fa fa-eye-slash" aria-hidden="true" ng-show="getSelectionIsIsolated()"></i>
+                <i class="fa fa-eye" aria-hidden="true" ng-show="!getSelectionIsIsolated()"></i>
               </div>
             </div>
             <div class="pull-left view-icons-ctn reset-icon" x-ng-click="resetSelectedDocuments()">
