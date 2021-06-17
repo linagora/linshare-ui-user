@@ -1,10 +1,17 @@
 angular
-  .module('linshare.uploadRequests', [
-    'pascalprecht.translate'
-  ])
+  .module('linshare.uploadRequests', [ 'pascalprecht.translate' ])
   .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart('uploadRequests');
-  }]);
+  }])
+  .run(extendUploadRequestEntryModel);;
+
+extendUploadRequestEntryModel.$inject = ['documentModelRestService'];
+
+function extendUploadRequestEntryModel(documentModelRestService) {
+  documentModelRestService.launchExtendModel('entries', {
+    useCustomRoute: item => `upload_request_entries/${item.uuid}`
+  });
+}
 
 require('./route');
 require('./constants');

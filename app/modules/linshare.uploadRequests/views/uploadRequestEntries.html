@@ -357,6 +357,14 @@
                                 <span translate>ACTION.INFORMATION</span>
                               </a>
                             </li>
+                            <li>
+                              <document-preview-button
+                                ng-if="uploadRequestEntriesVm.thumbnailEngineActivated"
+                                item-index="0"
+                                items="[entry]">
+                                <span translate>ACTION.PREVIEW</span>
+                              </document-preview-button>
+                            </li>
                             <li ng-if="!uploadRequestEntriesVm.isArchived">
                               <a
                                 href=""

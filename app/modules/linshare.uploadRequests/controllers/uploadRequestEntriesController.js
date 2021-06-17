@@ -59,6 +59,7 @@ function uploadRequestEntriesController(
   uploadRequestEntriesVm.backgroundContent = getBackgroundContent();
   uploadRequestEntriesVm.openAddingRecipientsSideBar = openAddingRecipientsSideBar;
   uploadRequestEntriesVm.showUploadRequestDetails = showUploadRequestDetails;
+  uploadRequestEntriesVm.thumbnailEngineActivated = lsAppConfig.thumbnailEngineActivated;
   uploadRequestEntriesVm.paramFilter = { name: '' };
   uploadRequestEntriesVm.fabButton = {
     toolbar: {
@@ -257,11 +258,23 @@ function uploadRequestEntriesController(
   }
 
   function showEntryDetails(entry) {
-    uploadRequestEntriesVm.currentSelectedEntry = entry;
-
-    sidebarService.setContent(lsAppConfig.uploadRequestEntryDetails);
-    sidebarService.setData(uploadRequestEntriesVm);
-    sidebarService.show();
+    documentUtilsService.loadItemThumbnail(
+      entry,
+      uploadRequestEntryRestService.thumbnail.bind(null, entry.uuid),
+      { force: true }
+    )
+      .then(item => {
+        uploadRequestEntriesVm.currentSelectedEntry = item;
+      })
+      .catch(error => {
+        $log.error('Failed to load entry thumbnail', error);
+        uploadRequestEntriesVm.currentSelectedEntry = entry;
+      })
+      .finally(() => {
+        sidebarService.setContent(lsAppConfig.uploadRequestEntryDetails);
+        sidebarService.setData(uploadRequestEntriesVm);
+        sidebarService.show();
+      });
   }
 
   function openAddingRecipientsSideBar(uploadRequest = {}) {

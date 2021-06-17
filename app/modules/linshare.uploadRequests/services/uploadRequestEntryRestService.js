@@ -4,11 +4,14 @@ angular
 
 uploadRequestEntryRestService.$inject = ['$log', 'Restangular', 'ServerManagerService'];
 
-function uploadRequestEntryRestService($log, Restangular) {
+function uploadRequestEntryRestService($log, Restangular, ServerManagerService) {
+  const handler = ServerManagerService.responseHandler;
+
   return {
     getAudit,
     getDownloadUrl,
-    remove
+    remove,
+    thumbnail
   };
 
   ////////////
@@ -22,12 +25,20 @@ function uploadRequestEntryRestService($log, Restangular) {
   function remove(uuid) {
     $log.debug('uploadRequestEntryRestService : remove', uuid);
 
-    return Restangular.all('upload_request_entries').one(uuid).remove();
+    return handler(Restangular.all('upload_request_entries').one(uuid).remove());
   }
 
   function getAudit(uuid) {
     $log.debug('uploadRequestEntryRestService : getAudit', uuid);
 
-    return Restangular.all('upload_request_entries').one(uuid, 'audit').get();
+    return handler(Restangular.all('upload_request_entries').one(uuid, 'audit').get());
+  }
+
+  function thumbnail(uuid) {
+    $log.debug('uploadRequestEntryRestService : thumbnail', uuid);
+
+    return Restangular.all('upload_request_entries').one(uuid, 'thumbnail').get({
+      base64: true
+    });
   }
 }

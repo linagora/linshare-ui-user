@@ -13,7 +13,32 @@
         <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 no-padding">
           <md-content>
             <div ng-show="mainVm.sidebar.getData().currentSelectedEntry.name">
-              <div id="profile-main" class="detail-guest">
+              <div id="profile-main">
+                <div class="p-relative m-b-20 img-preview-ctn">
+                  <document-preview-button
+                    item-index="0"
+                    items="[mainVm.sidebar.getData().currentSelectedEntry]"
+                    icon="true"
+                  >
+                    <p ng-show="mainVm.sidebar.getData().currentSelectedEntry.hasThumbnail &&
+                      !mainVm.sidebar.getData().currentSelectedEntry.thumbnailUnloadable">
+                      <img class="img-responsive"
+                          ng-src="data:image/png;base64,{{mainVm.sidebar.getData().currentSelectedEntry.thumbnail}}" alt=""/>
+                    </p>
+                    <div class="np-preview-ctn"
+                        ng-hide="mainVm.sidebar.getData().currentSelectedEntry.hasThumbnail === true">
+                      <i class="fa fa-eye-slash no-preview" aria-hidden="true"></i>
+                      <p ng-if="mainVm.sidebar.getData().currentSelectedEntry.thumbnailUnloadable"
+                        translate>
+                        RIGHT_PANEL.DETAILS.PREVIEW_NOT_LOADABLE
+                      </p>
+                      <p ng-if="!mainVm.sidebar.getData().currentSelectedEntry.thumbnailUnloadable"
+                        translate>
+                        RIGHT_PANEL.DETAILS.NO_PREVIEW_AVAILABLE
+                      </p>
+                    </div>
+                  </document-preview-button>
+                </div>
 
                 <div class="content-detail-area">
                   <div class="flex-ctn detail-info-ctn">

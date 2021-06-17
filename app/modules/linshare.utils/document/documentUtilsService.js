@@ -41,8 +41,13 @@
      * @param {promise} getThumbnail - Promise which supplies the thumbnail
      * @memberOf linshare.utils.documentUtilsService
      */
-    function loadItemThumbnail(item, getThumbnail) {
-      if ((item.type && item.type === 'FOLDER') || !item.hasThumbnail) {
+    function loadItemThumbnail(item, getThumbnail, { force = false } = {}) {
+      if (
+        !force && (
+          (item.type && item.type === 'FOLDER') ||
+          !item.hasThumbnail
+        )
+      ) {
         return $q.when(item);
       }
 
@@ -53,6 +58,7 @@
           item.thumbnailUnloadable = true;
           item.hasThumbnail = false;
         } else {
+          item.hasThumbnail = true;
           item.thumbnail = thumbnail;
         }
 
@@ -90,7 +96,7 @@
       if (index > -1) {
         collection.splice(index, 1);
       }
-      
+
       return collection;
     }
 

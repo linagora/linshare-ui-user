@@ -35,9 +35,11 @@
      * @name launchExtendModel
      * @desc Extends document model
      * @param {string} modelRoute - Restangular route for current model
+     * @param {Object} options - available options are
+     * - useCustomRoute: a custom route generator from the restangular objevct
      * @memberOf LinShare.utils.documentModelRestService
      */
-    function launchExtendModel(modelRoute) {
+    function launchExtendModel(modelRoute, { useCustomRoute } = {}) {
       Restangular.extendModel(modelRoute, function (model) {
         model.getPreview = getPreview;
 
@@ -62,20 +64,25 @@
          * @name getFullRoute
          * @desc Get the full API source of the given resource
          * @param {Object} item - Document type object which shall contains: parentResource and route
-         * @param {string} action - The Action request
          * @return {string} The full route
          * @memberOf LinShare.utils.documentModelRestService
          */
         function getFullRoute(item) {
-          var isItemContainBothUuidAndRoute = item && item.uuid && item.route;
+          const itemContainsUuidAndRoute = item && item.uuid && item.route;
 
-          if(!isItemContainBothUuidAndRoute){
-            return '';
-          } else {
-            var itemFullRoute = item.route + '/' + item.uuid + '/';
-
-            return item.parentResource ? getFullRoute(item.parentResource) + '/' + itemFullRoute : itemFullRoute;
+          if (useCustomRoute) {
+            return useCustomRoute(item);
           }
+
+          if (itemContainsUuidAndRoute){
+            const itemRoute = `${item.route}/${item.uuid}/`;
+
+            return item.parentResource ?
+              `${getFullRoute(item.parentResource)}/${itemRoute}` :
+              itemRoute;
+          }
+
+          return '';
         }
 
         /**
