@@ -11,13 +11,13 @@
 
   DocumentPreviewToolbarController.$inject = [
     '_',
-    '$timeout',
+    'authenticationRestService',
     'documentPreviewService'
   ];
 
   function DocumentPreviewToolbarController(
     _,
-    $timeout,
+    authenticationRestService,
     documentPreviewService
   ) {
     var documentPreviewToolbarVm = this;
@@ -39,8 +39,10 @@
      * @namespace linshare.components.documentPreviewButton.components.DocumentPreviewToolbarController
      */
     function $onInit() {
-      documentPreviewToolbarVm.canCopyToMySpace = !_.isNil(documentPreviewService.copyToMySpace);
-      documentPreviewToolbarVm.canCopyToWorkgroup = !_.isNil(documentPreviewService.copyToWorkgroup);
+      authenticationRestService.getCurrentUser().then(function(user) {
+        documentPreviewToolbarVm.canCopyToMySpace = user.canUpload && !_.isNil(documentPreviewService.copyToMySpace);
+        documentPreviewToolbarVm.canCopyToWorkgroup = !_.isNil(documentPreviewService.copyToWorkgroup);
+      })
     }
 
     /**
