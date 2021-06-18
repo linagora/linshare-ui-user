@@ -9,14 +9,18 @@ angular
 
 DocumentPreviewToolbarController.$inject = [
   '_',
+  '$q',
   'documentPreviewService',
-  'functionalityRestService'
+  'functionalityRestService',
+  'authenticationRestService'
 ];
 
 function DocumentPreviewToolbarController(
   _,
+  $q,
   documentPreviewService,
-  functionalityRestService
+  functionalityRestService,
+  authenticationRestService
 ) {
   const documentPreviewToolbarVm = this;
 
@@ -39,18 +43,14 @@ function DocumentPreviewToolbarController(
    * @namespace linshare.components.documentPreviewButton.components.DocumentPreviewToolbarController
    */
   function $onInit() {
-    documentPreviewToolbarVm.canCopyToMySpace = !_.isNil(documentPreviewService.copyToMySpace);
-
-
-    functionalityRestService
-      .getAll()
-      .then(({
-        WORK_GROUP,
-        WORK_GROUP__DOWNLOAD_ARCHIVE
-      }) => {
-        documentPreviewToolbarVm.canCopyToWorkGroup = !_.isNil(documentPreviewService.copyToWorkgroup) && WORK_GROUP && WORK_GROUP.enable;
-        documentPreviewToolbarVm.downloadFolderEnabled = WORK_GROUP__DOWNLOAD_ARCHIVE && WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
-      });
+    $q.all([
+      authenticationRestService.getCurrentUser(),
+      functionalityRestService.getAll()
+    ]).then(([user, { WORK_GROUP, WORK_GROUP__DOWNLOAD_ARCHIVE}]) => {
+      documentPreviewToolbarVm.canCopyToMySpace = user.canUpload && !_.isNil(documentPreviewService.copyToMySpace);
+      documentPreviewToolbarVm.canCopyToWorkGroup = !_.isNil(documentPreviewService.copyToWorkgroup) && WORK_GROUP && WORK_GROUP.enable;
+      documentPreviewToolbarVm.downloadFolderEnabled = WORK_GROUP__DOWNLOAD_ARCHIVE && WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
+    });
   }
 
   /**
