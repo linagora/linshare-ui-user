@@ -503,6 +503,7 @@ function SharedSpaceController(
     if (type === 'WORK_GROUP' && sharedSpaceVm.isDriveState) {
       return sharedSpaceVm.canCreate &&
         sharedSpaceVm.functionalities.workgroup &&
+        sharedSpaceVm.functionalities.driveCreationRight &&
         sharedSpaceVm.permissions[sharedSpaceVm.driveUuid] &&
         sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP &&
         sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP.CREATE;
@@ -512,8 +513,12 @@ function SharedSpaceController(
       return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.workgroup;
     }
 
-    if (type === 'DRIVE') {
+    if (type === 'DRIVE' && !sharedSpaceVm.isDriveState) {
       return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.drive && sharedSpaceVm.functionalities.driveCreationRight;
+    }
+
+    if (type === 'DRIVE' && sharedSpaceVm.isDriveState) {
+      return false;
     }
   }
 

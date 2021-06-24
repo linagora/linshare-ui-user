@@ -253,6 +253,16 @@ div.menu-popover-flyout-ctn.popover.bottom {
         pointer-events: none;
       }
     }
+
+    &.disable-link {
+      pointer-events: none;
+
+      .add-menu-group {
+        i {
+          color: #C9C9C9;
+        }
+      }
+    }
   }
 }
 

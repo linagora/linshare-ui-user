@@ -9,10 +9,13 @@
             dropdown-append-to-body
             is-open="isOpenNew"
             ng-class="{
-              'open': isOpenNew
+              'open': isOpenNew,
+              'disable-link': !vm.canCreateSharedSpace('DRIVE') && !vm.canCreateSharedSpace('WORK_GROUP')
             }"
           >
-            <a class="add-menu-group" uib-dropdown-toggle>
+            <a class="add-menu-group"
+              uib-dropdown-toggle
+            >
               <i class="zmdi zmdi-plus"></i>
             </a>
 
