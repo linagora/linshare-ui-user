@@ -78,12 +78,12 @@
       <div class="content-detail-area">
         <div class="flex-ctn detail-info-ctn">
           <div class="item-l">
-                      <span class="first-letter user-info">
-                       {{'UNKNOWN_FIRST_LETTER' | translate}}
-                      </span>
+              <span class="first-letter user-info">
+                {{mainVm.sidebar.getData().currentSelectedDocument.current.author.name.charAt(0) || ('UNKNOWN_FIRST_LETTER' | translate)}}
+              </span>
           </div>
           <div class="item-mid">
-            <div class="name">{{'UNKNOWN_USER' | translate}}</div>
+            <div class="name">{{mainVm.sidebar.getData().currentSelectedDocument.current.author.name || ('UNKNOWN_USER' | translate)}}</div>
             <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                  uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
                  lsDate:'medium':locale}}">
@@ -92,7 +92,7 @@
                  </span>
             </div>
           </div>
-          <div class="item-r actions">
+          <div class="item-r actions" ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.nodeType === 'WORK_GROUP'">
             <span title="{{::'DETAILS.USED_SPACE' | translate}}">
               {{mainVm.sidebar.getData().currentSelectedDocument.quotas.usedSpace | readableSize:true}}
             </span>
