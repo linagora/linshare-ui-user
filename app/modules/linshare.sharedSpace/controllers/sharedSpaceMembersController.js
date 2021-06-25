@@ -23,7 +23,8 @@ sharedSpaceMembersController.$inject = [
   'toastService',
   'sidebarService',
   'sharedSpaceMembersRestService',
-  'workgroupRolesRestService'
+  'workgroupRolesRestService',
+  'workgroupPermissionsService'
 ];
 
 /**
@@ -44,7 +45,8 @@ function sharedSpaceMembersController(
   toastService,
   sidebarService,
   sharedSpaceMembersRestService,
-  workgroupRolesRestService
+  workgroupRolesRestService,
+  workgroupPermissionsService
 ) {
   const sharedSpaceMembersVm = this;
   const DEFAULT_WORKGROUP_ROLE_ORDERS = ['ADMIN', 'WRITER', 'CONTRIBUTOR', 'READER'];
@@ -55,6 +57,7 @@ function sharedSpaceMembersController(
   sharedSpaceMembersVm.removeMember = removeMember;
   sharedSpaceMembersVm.updateMember = updateMember;
   sharedSpaceMembersVm.updateDefaultWorkroupsRole = updateDefaultWorkroupsRole;
+  sharedSpaceMembersVm.canDeleteSharedSpaceMember = canDeleteSharedSpaceMember;
 
   sharedSpaceMembersVm.membersRights = {};
   sharedSpaceMembersVm.searchMemberInput = '';
@@ -120,7 +123,8 @@ function sharedSpaceMembersController(
       () => sidebarService.getData().currentSelectedDocument.current.uuid,
       sharedSpaceUuid => $q.all([
         authenticationRestService.getCurrentUser(),
-        sharedSpaceMembersRestService.getList(sharedSpaceUuid)
+        sharedSpaceMembersRestService.getList(sharedSpaceUuid),
+        fetchSharedSpacePermissions(sidebarService.getData().currentSelectedDocument.current)
       ]).then(([loggedUser, members]) => {
         const currentMember = _.find(members, {'uuid': loggedUser.uuid});
 
@@ -217,7 +221,7 @@ function sharedSpaceMembersController(
    * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
    */
   function removeMember(currentWorkgroup, member) {
-    if (sharedSpaceMembersVm.driveMembers.includes(member.account.mail)) {
+    if (currentWorkgroup.nodeType === 'WORK_GROUP' && sharedSpaceMembersVm.driveMembers.includes(member.account.mail)) {
       $log.error('This member is a part of the drive');
 
       return;
@@ -342,5 +346,20 @@ function sharedSpaceMembersController(
       })
       .then(({ forceOverride, role}) => updateMember(member, role, true, forceOverride))
       .catch(error => error && $log.error(error));
+  }
+
+  function fetchSharedSpacePermissions(workgroup) {
+    return workgroupPermissionsService
+      .getWorkgroupsPermissions([workgroup].filter(Boolean))
+      .then(permissions => workgroupPermissionsService.formatPermissions(permissions))
+      .then(formattedPermissions => {
+        sharedSpaceMembersVm.permission = formattedPermissions && formattedPermissions[workgroup.uuid];
+      });
+  }
+
+  function canDeleteSharedSpaceMember () {
+    return sharedSpaceMembersVm.permission &&
+          sharedSpaceMembersVm.permission.MEMBER &&
+          sharedSpaceMembersVm.permission.MEMBER.DELETE;
   }
 }

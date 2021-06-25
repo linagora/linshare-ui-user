@@ -79,7 +79,6 @@ function SharedSpaceController(
     sharedSpaceVm.selectDocumentsOnCurrentPage = selectDocumentsOnCurrentPage;
     sharedSpaceVm.canRenameSharedSpace = canRenameSharedSpace;
     sharedSpaceVm.canCreateSharedSpace = canCreateSharedSpace;
-    sharedSpaceVm.canDeleteSharedSpaceMember = canDeleteSharedSpaceMember;
     sharedSpaceVm.goToPreviousFolder = goToPreviousFolder;
     sharedSpaceVm.updateVersioningParameter = updateVersioningParameter;
     sharedSpaceVm.updateSharedSpaceDescription = updateSharedSpaceDescription;
@@ -526,15 +525,6 @@ function SharedSpaceController(
     if (sharedSpaceVm.currentSelectedDocument && sharedSpaceVm.currentSelectedDocument.original) {
       sharedSpaceRestService.update(sharedSpaceVm.currentSelectedDocument.original.plain());
     }
-  }
-
-  function canDeleteSharedSpaceMember () {
-    return sharedSpaceVm.permissions[sharedSpaceVm.currentSelectedDocument.current.uuid].MEMBER.DELETE ||
-    (
-      sharedSpaceVm.permissions &&
-      sharedSpaceVm.permissions.MEMBER &&
-      sharedSpaceVm.permissions.MEMBER.DELETE
-    );
   }
 
   function updateSharedSpaceDescription(description) {

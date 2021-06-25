@@ -271,7 +271,7 @@
                 </ul>
               </span>
               <a
-                ng-if="mainVm.sidebar.getData().canDeleteSharedSpaceMember() && !sharedSpaceMembersVm.driveMembers.includes(workgroupMember.account.mail)"
+                ng-if="sharedSpaceMembersVm.canDeleteSharedSpaceMember() && !sharedSpaceMembersVm.driveMembers.includes(workgroupMember.account.mail)"
                 href="javascript:void(0)"
                 ng-click="sharedSpaceMembersVm.removeMember(
                   mainVm.sidebar.getData().currentSelectedDocument.current,
