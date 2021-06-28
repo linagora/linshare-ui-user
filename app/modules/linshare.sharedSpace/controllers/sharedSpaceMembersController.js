@@ -220,41 +220,44 @@ function sharedSpaceMembersController(
    * @returns {Promise} Response of the server
    * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
    */
-  function removeMember(currentWorkgroup, member) {
-    if (currentWorkgroup.nodeType === 'WORK_GROUP' && sharedSpaceMembersVm.driveMembers.includes(member.account.mail)) {
+  function removeMember(currentSharedSpace, member) {
+    if (currentSharedSpace.nodeType === 'WORK_GROUP' && sharedSpaceMembersVm.driveMembers.includes(member.account.mail)) {
       $log.error('This member is a part of the drive');
 
       return;
     }
 
+    const translationPrefix = currentSharedSpace.nodeType === 'DRIVE' ? 'SWEET_ALERT.ON_DRIVE_MEMBER_DELETE' : 'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE';
+
     $q.all([
       $translate(
-        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TEXT',
+        `${translationPrefix}.TEXT`,
         {
           firstName: member.account.firstName,
           lastName: member.account.lastName,
-          workgroupName: currentWorkgroup.name
+          workgroupName: currentSharedSpace.name,
+          driveName: currentSharedSpace.name
         }
       ),
       $translate([
-        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE',
-        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON',
-        'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON'
+        `${translationPrefix}.TITLE`,
+        `${translationPrefix}.CANCEL_BUTTON`,
+        `${translationPrefix}.CONFIRM_BUTTON`
       ])
     ])
       .then(([text, translations]) => dialogService.dialogConfirmation(
         {
           text,
-          title: translations['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.TITLE'],
+          title: translations[`${translationPrefix}.TITLE`],
           buttons: {
-            cancel: translations['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CANCEL_BUTTON'],
-            confirm: translations['SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE.CONFIRM_BUTTON']
+            cancel: translations[`${translationPrefix}.CANCEL_BUTTON`],
+            confirm: translations[`${translationPrefix}.CONFIRM_BUTTON`]
           }
         },
         dialogService.dialogType.warning
       ))
       .then(confirmed => !confirmed ? $q.reject() : sharedSpaceMembersRestService.remove(
-        sharedSpaceMembersVm.currentWorkGroup.current.uuid,
+        sharedSpaceMembersVm.currentSharedSpace.current.uuid,
         member.uuid
       ))
       .then(() => {

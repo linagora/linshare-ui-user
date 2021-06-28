@@ -50,6 +50,12 @@
       "CONFIRM_BUTTON": "Yes, delete",
       "TITLE": "Member deletion",
       "TEXT": "You are about to remove {{firstName}} {{lastName}} from the workgroup {{workgroupName}}."
+    },
+    "ON_DRIVE_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Cancel",
+      "CONFIRM_BUTTON": "Yes, delete",
+      "TITLE": "Member deletion",
+      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the drive {{driveName}} and all related workgroups."
     }
   },
   "TOAST_ALERT": {

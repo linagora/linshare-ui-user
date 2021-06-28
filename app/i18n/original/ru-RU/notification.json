@@ -50,6 +50,12 @@
         "CONFIRM_BUTTON": "Да, удалить",
         "TITLE": "Удаление участника",
         "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} из рабочей группы {{workgroupName}}."
+      },
+      "ON_DRIVE_MEMBER_DELETE": {
+        "CANCEL_BUTTON": "Отменить",
+        "CONFIRM_BUTTON": "Да, удалить",
+        "TITLE": "Удаление участника",
+        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} с диска {{driveName}} и всех связанных рабочих групп."
       }
     },
     "TOAST_ALERT": {

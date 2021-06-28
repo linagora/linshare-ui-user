@@ -50,6 +50,12 @@
       "CONFIRM_BUTTON": "Có, xóa",
       "TITLE": "Xóa thành viên",
       "TEXT": "Bạn sắp xóa {{firstName}} {{lastName}} khỏi nhóm làm việc {{workgroupName}}."
+    },
+    "ON_DRIVE_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Hủy bỏ",
+      "CONFIRM_BUTTON": "Có, xóa",
+      "TITLE": "Xóa thành viên",
+      "TEXT": "Bạn sắp xóa {{firstName}} {{lastName}} khỏi ổ đĩa {{driveName}} và tất cả các nhóm làm việc liên quan."
     }
   },
   "TOAST_ALERT": {

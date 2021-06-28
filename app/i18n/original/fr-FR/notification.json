@@ -50,6 +50,12 @@
       "CONFIRM_BUTTON": "Oui, supprimer",
       "TITLE": "Êtes-vous sûr?",
       "TEXT": "Vous êtes sur le point de supprimer {{firstName}} {{lastName}} du groupe de travail {{workgroupName}}."
+    },
+    "ON_DRIVE_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Annuler",
+      "CONFIRM_BUTTON": "Oui, supprimer",
+      "TITLE": "Êtes-vous sûr?",
+      "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} du Drive {{driveName}} et  par conséquent de tous les groupes de travail au sein de celui-ci."
     }
   },
   "TOAST_ALERT": {
