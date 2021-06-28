@@ -73,6 +73,7 @@
       "DELETE_SINGULAR_VERSION": "The version was deleted successfully.",
       "DELETE_PLURAL_VERSION": "The versions were deleted successfully.",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} has been removed successfully from the Workgroup",
+      "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} has been removed successfully from the Drive",
       "DETAILS": "Details",
       "INSERT": "The item was added successfully.",
       "REFRESH": "You must refresh the application to take this action into account",

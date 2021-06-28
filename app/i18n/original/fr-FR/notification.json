@@ -73,6 +73,7 @@
       "DELETE_SINGULAR_VERSION": "La version a été supprimée avec succès.",
       "DELETE_PLURAL_VERSION": "Les versions ont été supprimées avec succès.",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} a été supprimé du groupe de travail.",
+      "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} a été supprimé du Drive",
       "DETAILS": "Détails",
       "INSERT": "L'élément a été ajouté avec succès.",
       "REFRESH": "Vous devez rafraichir l'application pour prendre cette action en compte",

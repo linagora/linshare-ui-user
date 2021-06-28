@@ -73,6 +73,7 @@
         "DELETE_SINGULAR_VERSION": "Версия успешно удалена.",
         "DELETE_PLURAL_VERSION": "Версии успешно удалены.",
         "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} был успешно удалён из рабочей группы",
+        "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} успешно удалено Drive",
         "DETAILS": "Информация",
         "INSERT": "Элемент был добавлен успешно.",
         "REFRESH": "Вы должны обновить приложение, чтобы принять это действие во внимание",

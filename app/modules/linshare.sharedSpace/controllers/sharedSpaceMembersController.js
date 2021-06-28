@@ -264,7 +264,7 @@ function sharedSpaceMembersController(
         _.remove(sharedSpaceMembersVm.members, member);
 
         toastService.success({
-          key: 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER',
+          key: currentSharedSpace.nodeType === 'WORK_GROUP' ? 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER' : 'TOAST_ALERT.ACTION.DELETE_DRIVE_MEMBER',
           params: {
             firstName: member.account.firstName,
             lastName: member.account.lastName,

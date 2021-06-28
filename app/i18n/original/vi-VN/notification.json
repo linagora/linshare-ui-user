@@ -73,6 +73,7 @@
       "TBT__DELETE_SINGULAR_VERSION": "",
       "TBT__DELETE_PLURAL_VERSION": "",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} đã được xóa thành công khỏi Nhóm làm việc",
+      "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} đã được xóa thành công khỏi ổ đĩa",
       "DETAILS": "Chi tiết",
       "INSERT": "Mục đã được thêm thành công.",
       "REFRESH": "Bạn phải làm mới ứng dụng để đưa hành động này vào tài khoản",
