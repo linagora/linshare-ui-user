@@ -74,7 +74,7 @@
         var dateEnd = filterBoxVm.dateEnd ?
           moment(filterBoxVm.dateEnd).add('day', +1) : moment().add('day', +1);
 
-        
+
         return {dateStart: dateStart, dateEnd: dateEnd};
       }
     }
@@ -107,7 +107,6 @@
         var sizeEnd = filterBoxVm.sizeEnd ?
           filterBoxVm.unitService.toByte(filterBoxVm.sizeEnd, filterBoxVm.unitSize.value, false) : 999999999999;
 
-        
         return {sizeStart: sizeStart, sizeEnd: sizeEnd};
       }
     }
@@ -141,7 +140,7 @@
 
           dateIsValid = (date >= dateValues.dateStart && date <= dateValues.dateEnd);
         }
-        
+
         return !(sizeIsValid && dateIsValid);
       });
 

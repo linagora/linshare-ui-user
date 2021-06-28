@@ -44,7 +44,8 @@
     "VIEW_VERSIONING": "View previous updates",
     "SEE_VERSIONS": "Manage version",
     "PROCEED": "Proceed",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "GO_TO_DESTINATION": "Go to destination"
   },
   "ACTIVITIES": "Activities",
   "ADD_FILES_DROPDOWN": {

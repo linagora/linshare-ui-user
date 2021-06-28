@@ -103,6 +103,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.goToFolder = goToFolder;
   workgroupNodesVm.goToPreviousFolder = goToPreviousFolder;
   workgroupNodesVm.goToDrive = goToDrive;
+  workgroupNodesVm.goToSearchPage = goToSearchPage;
   workgroupNodesVm.isDocument = isDocument;
   workgroupNodesVm.loadSidebarContent = loadSidebarContent;
   workgroupNodesVm.mdtabsSelection = {
@@ -652,13 +653,16 @@ function WorkgroupNodesController(
   }
 
   /**
-     * @name launchTableParamsInitiation
-     * @desc Initialize tableParams and related functions
-     * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-     */
+   * @name launchTableParamsInitiation
+   * @desc Initialize tableParams and related functions
+   * @memberOf LinShare.sharedSpace.WorkgroupNodesController
+   */
   function launchTableParamsInitiation() {
-    tableParamsService.initTableParams(workgroupNodesVm.nodesList, workgroupNodesVm.paramFilter,
-      workgroupNodesVm.folderDetails.uploadedFileUuid)
+    tableParamsService.initTableParams(
+      workgroupNodesVm.nodesList,
+      workgroupNodesVm.paramFilter,
+      workgroupNodesVm.folderDetails.uploadedFileUuid
+    )
       .then(function(data) {
         workgroupNodesVm.tableParamsService = tableParamsService;
         workgroupNodesVm.tableParams = tableParamsService.getTableParams();
@@ -1370,5 +1374,13 @@ function WorkgroupNodesController(
     } else {
       return $q.resolve(workgroup);
     }
+  }
+
+  function goToSearchPage(searchParams) {
+    $state.go('sharedspace.search', {
+      sharedSpace: workgroupNodesVm.folderDetails.workgroupUuid,
+      folder: workgroupNodesVm.folderDetails.folderUuid,
+      searchParams
+    });
   }
 }

@@ -574,6 +574,10 @@
     .secondary-info-ctn {
       display: flex;
       flex: auto;
+
+      .highlight-info {
+        color: $primary-alt-color1;
+      }
     }
     .secondary-list-item-info {
       font-size: 0.85em;

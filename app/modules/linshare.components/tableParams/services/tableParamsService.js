@@ -38,23 +38,24 @@
       /* @property {boolean} toggleSelectedSort - True when sorting is activated in tableParams */
       toggleSelectedSort,
       service = {
-        getCurrentPage: getCurrentPage,
-        getFlagsOnSelectedPages: getFlagsOnSelectedPages,
-        getSelectedItemsList: getSelectedItemsList,
-        getSelectionIsIsolated: getSelectionIsIsolated,
-        getTableParams: getTableParams,
-        getToggleSelectedSort: getToggleSelectedSort,
-        initTableParams: initTableParams,
-        isItemAddedOnCurrentPage: isItemAddedOnCurrentPage,
-        isolateSelection: isolateSelection,
-        lengthOfSelectedDocuments: lengthOfSelectedDocuments,
-        reloadTableParams: reloadTableParams,
-        resetSelectedItems: resetSelectedItems,
-        resetFlagsOnSelectedPages: resetFlagsOnSelectedPages,
-        tableApplyFilter: tableApplyFilter,
-        tableSelectAll: tableSelectAll,
-        tableSort: tableSort,
-        toggleItemSelection: toggleItemSelection
+        getCurrentPage,
+        getFlagsOnSelectedPages,
+        getSelectedItemsList,
+        getSelectionIsIsolated,
+        getTableParams,
+        getToggleSelectedSort,
+        initTableParams,
+        initTableParamsWithFetcher,
+        isItemAddedOnCurrentPage,
+        isolateSelection,
+        lengthOfSelectedDocuments,
+        reloadTableParams,
+        resetSelectedItems,
+        resetFlagsOnSelectedPages,
+        tableApplyFilter,
+        tableSelectAll,
+        tableSort,
+        toggleItemSelection
       };
 
     return service;
@@ -201,6 +202,22 @@
       selectionIsIsolated = false;
       tableParams = null;
       toggleSelectedSort = true;
+    }
+
+    function initTableParamsWithFetcher(fetcher) {
+      initVariables();
+
+      tableParams = new NgTableParams({
+        count: paramCount,
+        sorting: paramSorting,
+        filter: paramFilter
+      }, {
+        getData: params => fetcher(params).then(data => {
+          itemsList = data;
+
+          return data;
+        })
+      });
     }
 
     /**

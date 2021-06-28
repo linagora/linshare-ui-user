@@ -39,7 +39,7 @@ angular
         delete element.typeImage;
         delete element.info;
       }
-      
+
       return element;
     });
     RestangularProvider.addElementTransformer('nodes', true, function (nodes) {
@@ -81,7 +81,7 @@ angular
           workGroupParentNodeUuid: parentUuidParam
         };
 
-        
+
         return flowParams;
       },
       headers: {'WWW-No-Authenticate' : 'linshare'}
@@ -171,11 +171,11 @@ angular
             $log.debug('response', response);
             $log.debug('responseHandler', responseHandler);
             deferred.resolve(false);
-            
+
             return false;
           }
       }
-      
+
       return true;
     });
 
@@ -185,7 +185,7 @@ angular
       if (response.status === 401) {
         $rootScope.$emit('lsIntercept401');
       }
-      
+
       return data;
     });
 
@@ -237,6 +237,6 @@ angular
 function validate(str) {
   str = str.trim();
   str = str.replace(/^\/|\/$/g, ''); //remove first and last slash if present
-  
+
   return str;
 }

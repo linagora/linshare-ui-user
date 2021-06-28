@@ -225,3 +225,51 @@ html:not(.ie9) .formsearch .select::before {
     min-width: 668px;
   }
 }
+
+.advanced-search-box {
+  height: auto;
+  max-width: 500px;
+  margin: 0;
+  padding: 0 15px;
+
+  &__title {
+    color: #292929;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-bottom: solid 1px #e3e1e1;
+    font-size: 1.4em;
+    font-weight: normal;
+    line-height: 1.8em;
+  }
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+
+    label {
+      flex-basis: 100%;
+      font-weight: normal;
+      font-size: 1em;
+      margin-bottom: 1em;
+      margin-top: 1.5em;
+      color: #3a3a3a;
+    }
+
+    md-input-container {
+      margin: 0;
+    }
+
+    &-input {
+      flex: 1;
+    }
+
+    &-checkbox {
+      flex: 0 105px;
+    }
+  }
+
+  .icon-size-fix {
+    padding: 0 10px 0 0;
+    max-width: 22px;
+  }
+}

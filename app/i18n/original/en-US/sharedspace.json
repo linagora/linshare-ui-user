@@ -85,5 +85,35 @@
   "SHARED_SPACE_TOOLTIPS": {
     "DRIVE": "A Drive contains only Workgroups, a Drive will allow you to define a list of default members for all nested Workgroups with their default role (browse, create, etc)",
     "WORKGROUP": "A workgroup is a collaborating space where you can add members like internal or guest users. These members will be able to browse, create, update or delete files and folders inside the workgroup according to their roles."
+  },
+  "WORKGROUP_SEARCH_BOX": {
+    "LAST_AUTHOR": "Last author",
+    "FILE_TYPES": "File types",
+    "NODE_TYPES": {
+      "LABEL": "Types",
+      "DOCUMENT": "Files",
+      "FOLDER": "Folders",
+      "REVISION": "Revisions"
+    },
+    "TYPES": {
+      "ANY": "Any types",
+      "DOCUMENT": "Document",
+      "PDF": "PDF",
+      "SPREADSHEET": "Spreadsheet",
+      "IMAGE": "Image",
+      "AUDIO": "Audio",
+      "ARCHIVE": "Archive",
+      "OTHER": "Other"
+    }
+  },
+  "WORKGROUP_SEARCH_PAGE": {
+    "BACKGROUND_NO_RESULT": {
+      "MESSAGE": "No matches found",
+      "SUBMESSAGE": "Try another search or open the search box to find by file types, author or more"
+    },
+    "BACKGROUND": {
+      "MESSAGE": "Workgroup search",
+      "SUBMESSAGE": "Searching for all files and folders inside workgroup"
+    }
   }
 }

@@ -261,37 +261,11 @@
                 </a>
               </div>
             </div>
-            <div class="input-group search-bar hidden-xs">
-              <div id="search-field-ctn">
-                <div class="search-style">
-                  <div class="fg-line">
-                    <input type="text" class="form-control" autocomplete="off" data-ng-model="workgroupNodesVm.paramFilter['name']" translate-attr="{placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
-                      data-ng-change="updateParams()">
-                  </div>
-                </div>
-              </div>
-              <div class="actions">
-                <a uib-dropdown dropdown-append-to-body
-                   auto-close="outsideClick"
-                   is-open="isOpenFilter"
-                   data-ng-class="{'open':isOpenFilter}"
-                   class="input-group-addon last clickable dropdown"
-                   data-ng-click="advancedFilterBool = !advancedFilterBool"
-                   uib-dropdown-toggle translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}">
-                  <i class="zmdi hidden-xs clickable ls-settings"></i>
-                  <ul uib-dropdown-menu="" class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon
-                    dropdown-divided dropdown-content-left" data-ng-class="{'open':isOpenFilter}">
-                    <!-- FILTER COMPONENT -->
-                    <filter-box class="clearfix"
-                      ng-if="workgroupNodesVm.tableParams"
-                      filter-box-size="true"
-                      filter-box-date="true"
-                      filter-box-items="workgroupNodesVm.nodesList"
-                      filter-box-table="workgroupNodesVm.tableParams">
-                    </filter-box>
-                  </ul>
-                </a>
-              </div>
+            <div>
+              <workgroup-search-box
+                workgroup="workgroupNodesVm.folderDetails.workgroupUuid"
+                on-submit="workgroupNodesVm.goToSearchPage"
+              />
             </div>
           </div>
         </div>

@@ -826,3 +826,7 @@ li.dp-actions {
 md-checkbox.md-checked .md-icon {
   background-color: $primary-color;
 }
+
+.md-checkbox-enabled[selected] .md-icon {
+  background-color: $primary-color;
+}

@@ -26,19 +26,20 @@
       },
       restParam = 'nodes',
       service = {
-        copy: copy,
-        copyToMySpace: copyToMySpace,
-        create: create,
-        download: download,
-        metadata: metadata,
-        get: get,
-        getAudit: getAudit,
-        getList: getList,
-        remove: remove,
-        restangularize: restangularize,
-        restangularizeCollection: restangularizeCollection,
-        thumbnail: thumbnail,
-        update: update
+        copy,
+        copyToMySpace,
+        create,
+        download,
+        metadata,
+        get,
+        getAudit,
+        getList,
+        remove,
+        restangularize,
+        restangularizeCollection,
+        search,
+        thumbnail,
+        update
       };
 
     activate();
@@ -300,6 +301,12 @@
 
     function restangularizeCollection(items, parent) {
       return Restangular.restangularizeCollection(parent, items, restParam);
+    }
+
+    function search(workgroupUuid, params) {
+      $log.debug('workgroupNodesRestService : search', workgroupUuid, params);
+
+      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).all(restParam).one('search').get(params));
     }
   }
 })();

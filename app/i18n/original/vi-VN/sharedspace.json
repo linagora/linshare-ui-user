@@ -86,5 +86,35 @@
   "SHARED_SPACE_TOOLTIPS": {
     "DRIVE": "Ổ đĩa chỉ chứa Nhóm làm việc, Ổ đĩa sẽ cho phép bạn xác định danh sách các thành viên mặc định cho tất cả các Nhóm làm việc bên trong nó.",
     "WORKGROUP": "Nhóm làm việc là một không gian cộng tác, nơi bạn có thể thêm các thành viên như người dùng nội bộ hoặc khách. Các thành viên này sẽ có thể duyệt, tạo, cập nhật hoặc xóa các tệp và thư mục bên trong nhóm làm việc theo vai trò của họ."
+  },
+  "WORKGROUP_SEARCH_BOX": {
+    "LAST_AUTHOR": "Người sửa cuối cùng",
+    "FILE_TYPES": "Loại tệp",
+    "NODE_TYPES": {
+      "LABEL": "Loại",
+      "DOCUMENT": "Tệp",
+      "FOLDER": "Thư mục",
+      "REVISION": "Phiên bản"
+    },
+    "TYPES": {
+      "ANY": "Mọi loại",
+      "DOCUMENT": "Tài liệu",
+      "PDF": "PDF",
+      "SPREADSHEET": "Bảng tính",
+      "IMAGE": "Hình ảnh",
+      "AUDIO": "Âm thanh",
+      "ARCHIVE": "Lưu trữ",
+      "OTHER": "Khác"
+    }
+  },
+  "WORKGROUP_SEARCH_PAGE": {
+    "BACKGROUND_NO_RESULT": {
+      "MESSAGE": "Không tìm thấy kết quả phù hợp",
+      "SUBMESSAGE": "Vui lòng thử tìm kiếm khác hoặc mở hộp tìm kiếm để tìm theo loại tệp,  người sửa,..."
+    },
+    "BACKGROUND": {
+      "MESSAGE": "Tìm kiếm nhóm làm việc",
+      "SUBMESSAGE": "Tìm kiếm tất cả các tệp và thư mục bên trong nhóm làm việc"
+    }
   }
 }

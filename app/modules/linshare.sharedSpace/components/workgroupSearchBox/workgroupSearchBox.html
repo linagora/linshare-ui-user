@@ -1,0 +1,286 @@
+<div class="input-group search-bar hidden-xs">
+  <div id="search-field-ctn">
+    <div class="search-style">
+      <div class="fg-line">
+        <input
+          type="text"
+          class="form-control"
+          autocomplete="off"
+          ng-model="workgroupSearchBoxVm.params.pattern"
+          ng-keypress="workgroupSearchBoxVm.submitOnEnter($event)"
+          translate-attr="{ placeholder: 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME '}"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <a uib-dropdown dropdown-append-to-body
+       auto-close="outsideClick"
+       is-open="isOpenFilter"
+       data-ng-class="{'open':isOpenFilter}"
+       class="input-group-addon last clickable dropdown"
+       uib-dropdown-toggle translate-attr="{'data-original-title': 'TOOLTIP.ADVANCED_FILTER'}">
+      <i class="zmdi hidden-xs clickable ls-settings"></i>
+      <ul
+        uib-dropdown-menu
+        class="uib-dropdown-menu dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-content-left"
+        ng-class="{'open':isOpenFilter}"
+      >
+        <div class="advanced-search-box">
+          <h2 class="advanced-search-box__title">
+            <i class="ls-settings m-r-10"></i>
+            <span translate>FILTER_COMPONENT.ADVANCED_SEARCH_TITLE</span>
+          </h2>
+
+          <div class="advanced-search-box__form hidden-xs m-t-10">
+
+            <!-- TYPES SELECT -->
+            <div class="advanced-search-box__field">
+              <label translate>WORKGROUP_SEARCH_BOX.NODE_TYPES.LABEL</label>
+
+              <md-checkbox
+                class="advanced-search-box__field-checkbox"
+                aria-label="Files"
+                ng-model="workgroupSearchBoxVm.searchFiles"
+                ng-change="workgroupSearchBoxVm.updateTypesList('DOCUMENT', workgroupSearchBoxVm.searchFiles)"
+              >
+                {{'WORKGROUP_SEARCH_BOX.NODE_TYPES.DOCUMENT' | translate}}
+              </md-checkbox>
+              <md-checkbox
+                class="advanced-search-box__field-checkbox"
+                aria-label="Files"
+                ng-model="workgroupSearchBoxVm.searchFolders"
+                ng-change="workgroupSearchBoxVm.updateTypesList('FOLDER', workgroupSearchBoxVm.searchFolders)"
+              >
+                {{'WORKGROUP_SEARCH_BOX.NODE_TYPES.FOLDER' | translate}}
+              </md-checkbox>
+              <md-checkbox
+                class="advanced-search-box__field-checkbox"
+                aria-label="Files"
+                name="type"
+                ng-model="workgroupSearchBoxVm.searchRevisions"
+                ng-change="workgroupSearchBoxVm.updateTypesList('DOCUMENT_REVISION', workgroupSearchBoxVm.searchRevisions)"
+              >
+                {{'WORKGROUP_SEARCH_BOX.NODE_TYPES.REVISION' | translate}}
+              </md-checkbox>
+            </div>
+
+            <!-- DOCUMENT TYPES SELECT -->
+
+            <div class="advanced-search-box__field">
+              <label translate>WORKGROUP_SEARCH_BOX.FILE_TYPES</label>
+
+              <md-input-container class="advanced-search-box__field-input">
+                <md-select
+                  class="form-control"
+                  ng-model="workgroupSearchBoxVm.params.kind"
+                  multiple="true"
+                  md-selected-text="workgroupSearchBoxVm.getSelectedFileKinds()"
+                >
+                  <md-option value="DOCUMENT">{{'WORKGROUP_SEARCH_BOX.TYPES.DOCUMENT' | translate}}</md-option>
+                  <md-option value="PDF">{{'WORKGROUP_SEARCH_BOX.TYPES.PDF' | translate}}</md-option>
+                  <md-option value="SPREADSHEET">{{'WORKGROUP_SEARCH_BOX.TYPES.SPREADSHEET' | translate}}</md-option>
+                  <md-option value="IMAGE">{{'WORKGROUP_SEARCH_BOX.TYPES.IMAGE' | translate}}</md-option>
+                  <md-option value="AUDIO">{{'WORKGROUP_SEARCH_BOX.TYPES.AUDIO' | translate}}</md-option>
+                  <md-option value="ARCHIVE">{{'WORKGROUP_SEARCH_BOX.TYPES.ARCHIVE' | translate}}</md-option>
+                  <md-option value="OTHER">{{'WORKGROUP_SEARCH_BOX.TYPES.OTHER' | translate}}</md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+
+            <!-- SIZE INPUT -->
+
+            <div class="advanced-search-box__field">
+              <label translate>FILTER_COMPONENT.FILTER_BY_SIZE.HEADER</label>
+              <!-- SIZE START -->
+              <div class="advanced-search-box__field-input">
+                <div class="input-group">
+                  <span class="input-group-addon icon-size-fix">
+                    <i class="zmdi zmdi-trending-down""></i>
+                  </span>
+                  <div class="fg-line">
+                    <input type="number"  class="form-control" maxlengh="3"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_SIZE.MINIMUM'}"
+                      ng-model="workgroupSearchBoxVm.params.sizeStart">
+                  </div>
+                </div>
+              </div>
+              <!-- SIZE END -->
+              <div class="advanced-search-box__field-input">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="zmdi zmdi-trending-up"></i>
+                  </span>
+                  <div class="fg-line">
+                    <input type="number" class="form-control"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_SIZE.MAXIMUM'}" ng-model="workgroupSearchBoxVm.params.sizeEnd"
+                      maxlengh="3" />
+                  </div>
+                </div>
+              </div>
+              <!--SIZE UNITY -->
+              <div class="advanced-search-box__field-input">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-database"></i>
+                  </span>
+                  <div class="fg-line">
+                    <md-select
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.UNIT'}"
+                      ng-model="workgroupSearchBoxVm.params.sizeUnit"
+                      class="form-control"
+                    >
+                      <md-option ng-repeat="unit in workgroupSearchBoxVm.unitService.units track by unit.value" ng-value="unit">
+                        {{ ::unit.value }}
+                      </md-option>
+                    </md-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--CREATION DATE-->
+
+            <div class="advanced-search-box__field">
+              <label translate>FILTER_COMPONENT.FILTER_BY_DATE.CREATION_DATE</label>
+              <!--DATE START -->
+              <div class="advanced-search-box__field-input">
+                <div class="date-picker input-group dp-blue" ng-class="{'is-opened': creationDateAfter}">
+                  <span class="input-group-addon icon-size-fix">
+                    <i class="zmdi zmdi-calendar-check ma-icon"></i>
+                  </span>
+                  <div class="fg-line" ng-class="{'fg-toggled': creationDateAfter}">
+                    <input
+                      working-date-picker
+                      uib-datepicker-popup
+                      show-weeks="false"
+                      is-open="creationDateAfter"
+                      datepicker-options="{ maxDate: workgroupSearchBoxVm.params.creationDateBefore || workgroupSearchBoxVm.maxDate }"
+                      type="text"
+                      class="form-control"
+                      ng-click="open($event, 'creationDateAfter')"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE'}"
+                      ng-model="workgroupSearchBoxVm.params.creationDateAfter"/>
+                  </div>
+                </div>
+              </div>
+              <!--DATE END -->
+              <div class="advanced-search-box__field-input">
+                <div class="date-picker input-group dp-blue" ng-class="{'is-opened': creationDateBefore}">
+                  <span class="input-group-addon icon-size-fix">
+                    <i class="zmdi zmdi-calendar-check ma-icon"></i>
+                  </span>
+                  <div class="fg-line" ng-class="{'fg-toggled': creationDateBefore}">
+                    <input
+                      working-date-picker
+                      uib-datepicker-popup
+                      show-weeks="false"
+                      is-open="creationDateBefore"
+                      datepicker-options="{
+                        minDate: workgroupSearchBoxVm.params.creationDateAfter,
+                        maxDate: workgroupSearchBoxVm.maxDate
+                      }"
+                      type="text"
+                      class="form-control"
+                      ng-click="open($event, 'creationDateBefore')"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE'}"
+                      ng-model="workgroupSearchBoxVm.params.creationDateBefore"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MODIFICATION DATE -->
+
+            <div class="advanced-search-box__field">
+              <label translate>FILTER_COMPONENT.FILTER_BY_DATE.MODIFICATION_DATE</label>
+              <!--DATE START -->
+              <div class="advanced-search-box__field-input">
+                <div class="date-picker input-group dp-blue" ng-class="{'is-opened': modificationDateAfter}">
+                  <span class="input-group-addon icon-size-fix">
+                    <i class="zmdi zmdi-calendar-check ma-icon"></i>
+                  </span>
+                  <div class="fg-line" ng-class="{'fg-toggled': modificationDateAfter}">
+                    <input
+                      working-date-picker
+                      uib-datepicker-popup
+                      show-weeks="false"
+                      is-open="modificationDateAfter"
+                      datepicker-options="{ maxDate: workgroupSearchBoxVm.params.modificationDateBefore || workgroupSearchBoxVm.maxDate }"da
+                      type="text"
+                      class="form-control"
+                      ng-click="open($event, 'modificationDateAfter')"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE'}"
+                      ng-model="workgroupSearchBoxVm.params.modificationDateAfter"/>
+                  </div>
+                </div>
+              </div>
+              <!--DATE END -->
+              <div class="advanced-search-box__field-input">
+                <div class="date-picker input-group dp-blue" ng-class="{'is-opened': modificationDateBefore}">
+                  <span class="input-group-addon icon-size-fix">
+                    <i class="zmdi zmdi-calendar-check ma-icon"></i>
+                  </span>
+                  <div class="fg-line" ng-class="{'fg-toggled': modificationDateBefore}">
+                    <input
+                      working-date-picker
+                      uib-datepicker-popup
+                      show-weeks="false"
+                      is-open="modificationDateBefore"
+                      datepicker-options="{
+                        minDate: workgroupSearchBoxVm.params.modificationDateAfter,
+                        maxDate: workgroupSearchBoxVm.maxDate
+                      }"
+                      type="text"
+                      class="form-control"
+                      ng-click="open($event, 'modificationDateBefore')"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_DATE.ENDING_DATE'}"
+                      ng-model="workgroupSearchBoxVm.params.modificationDateBefore"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--AUTHOR -->
+
+            <div class="advanced-search-box__field">
+              <label translate>WORKGROUP_SEARCH_BOX.LAST_AUTHOR</label>
+              <div class="clearfix"></div>
+              <div class="advanced-search-box__field-input">
+                <div class="input-group">
+                  <span class="input-group-addon icon-size-fix">
+                    <i class="zmdi zmdi-account"></i>
+                  </span>
+                  <div class="fg-line">
+                    <input
+                      type="text""
+                      autocomplete="off"
+                      class="form-control"
+                      translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER'}"
+                      ng-model="workgroupSearchBoxVm.params.lastAuthor"
+                      typeahead-min-length="3"
+                      typeahead-wait-ms="30"
+                      typeahead-input-formatter="workgroupSearchBoxVm.formatLabel(workgroupSearchBoxVm.params.lastAuthor)"
+                      uib-typeahead="u as workgroupSearchBoxVm.userRepresentation(u) for u in workgroupSearchBoxVm.autocompleteUserRestService.search($viewValue, 'THREAD_MEMBERS', workgroupSearchBoxVm.workgroup.uuid) | limitTo:3"
+                      dpopover-trigger="mouseenter"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--VALIDATE-->
+            <div class="m-t-50 m-b-20 p-l-0 pull-right">
+              <button class="btn bgm-white waves-effect m-r-10" ng-click="workgroupSearchBoxVm.reset()" translate>
+                FILTER_COMPONENT.REINITIALIZE
+              </button>
+              <button class="btn bgm-blue waves-effect" ng-click="workgroupSearchBoxVm.submit()" translate>
+                FILTER_COMPONENT.SUBMIT
+              </button>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </ul>
+    </a>
+  </div>
+</div>

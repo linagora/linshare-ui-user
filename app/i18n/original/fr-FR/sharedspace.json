@@ -84,5 +84,35 @@
   "SHARED_SPACE_TOOLTIPS": {
     "DRIVE": "Un Drive ne contient que des groupes de travail, il permet de définir une liste de membres par défaut, avec leur role par défaut, pour tous les groupes de travail qui seront créés au sein de ce Drive.",
     "WORKGROUP": "Un groupe de travail est un espace de collaboration où il est possible d'ajouter des utilisateurs internes ou des invités. Les members seront alors capable de parcourir, créer, éditer et supprimer des fichiers et des dossiers au sein du groupe de travail en fonction de leur role."
+  },
+  "WORKGROUP_SEARCH_BOX": {
+    "LAST_AUTHOR": "Auteur de la modification",
+    "FILE_TYPES": "Type fichiers (Mime)",
+    "NODE_TYPES": {
+      "LABEL": "Types",
+      "DOCUMENT": "Fichiers",
+      "FOLDER": "Dossiers",
+      "REVISION": "Revisions"
+    },
+    "TYPES": {
+      "ANY": "Tous",
+      "DOCUMENT": "Document",
+      "PDF": "PDF",
+      "SPREADSHEET": "Tableau",
+      "IMAGE": "Image",
+      "AUDIO": "Audio",
+      "ARCHIVE": "Archive",
+      "OTHER": "Autre"
+    }
+  },
+  "WORKGROUP_SEARCH_PAGE": {
+    "BACKGROUND_NO_RESULT": {
+      "MESSAGE": "Aucun résultat trouvé",
+      "SUBMESSAGE": "Essayez d'effectuer une nouvelle recherche en utilisant d'autres critères"
+    },
+    "BACKGROUND": {
+      "MESSAGE": "Recherche au sein du groupe de travail",
+      "SUBMESSAGE": "Recherche de fichiers et de dossiers au sein du groupe de travail"
+    }
   }
 }
