@@ -352,12 +352,12 @@ angular
         if (!_.isUndefined(response)) {
           if (response.actionClicked) {
             var nodeToSelectUuid = data.nodeItems.length === 1 ? data.nodeItems[0].uuid : null;
-            var routeStateSuffix = data.folder.parent === data.folder.workGroup ? 'root' : 'folder';
+            var routeStateSuffix = data.folder.parent === data.folder.workgroupUuid ? 'root' : 'folder';
 
             $state.go(
               'sharedspace.workgroups.' + routeStateSuffix,
               {
-                workgroupUuid: data.folder.workGroup,
+                workgroupUuid: data.folder.workgroupUuid,
                 workgroupName: data.folder.workgroupName,
                 parentUuid: data.folder.parent,
                 folderUuid: data.folder.uuid,
