@@ -56,13 +56,13 @@
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
-    function get(workgroupUuid, withMembers, withRole) {
+    function get(workgroupUuid, withMembers, withRole, isSilent) {
       $log.debug('sharedSpaceRestService : get', workgroupUuid);
 
       return handler(Restangular.one(restUrl, workgroupUuid).get({
         members: withMembers,
         withRole: withRole
-      }));
+      }), null ,isSilent);
     }
 
     /**

@@ -149,7 +149,7 @@ function WorkgroupNodesController(
           unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
 
         if (workgroup.parentUuid) {
-          sharedSpaceRestService.get(workgroup.parentUuid, null, true).then(drive => {
+          sharedSpaceRestService.get(workgroup.parentUuid, null, true, true).then(drive => {
             workgroupNodesVm.drive = drive;
           });
         }
@@ -661,7 +661,7 @@ function WorkgroupNodesController(
    */
   function goToPreviousFolder(goToWorkgroupPage, folder) {
     if (goToWorkgroupPage) {
-      if (workgroup && workgroup.parentUuid && $state.current.name === 'sharedspace.workgroups.root') {
+      if (workgroup && workgroup.parentUuid && workgroupNodesVm.drive && $state.current.name === 'sharedspace.workgroups.root') {
         $state.go('sharedspace.drive', {driveUuid: workgroup.parentUuid});
       } else {
         $state.go('sharedspace.all');
@@ -1384,7 +1384,9 @@ function WorkgroupNodesController(
 
   function fetchDriveOfWorkgroup (workgroup) {
     if (workgroup && workgroup.parentUuid) {
-      return sharedSpaceRestService.get(workgroup.parentUuid, null, true).then(drive => ({...workgroup, drive}));
+      return sharedSpaceRestService.get(workgroup.parentUuid, null, true, true)
+        .then(drive => ({...workgroup, drive}))
+        .catch(() => workgroup);
     } else {
       return $q.resolve(workgroup);
     }
