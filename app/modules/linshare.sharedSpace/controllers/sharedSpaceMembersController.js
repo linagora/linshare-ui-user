@@ -257,7 +257,7 @@ function sharedSpaceMembersController(
         dialogService.dialogType.warning
       ))
       .then(confirmed => !confirmed ? $q.reject() : sharedSpaceMembersRestService.remove(
-        sharedSpaceMembersVm.currentSharedSpace.current.uuid,
+        sharedSpaceMembersVm.currentWorkGroup.current.uuid,
         member.uuid
       ))
       .then(() => {
