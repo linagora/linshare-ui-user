@@ -512,6 +512,9 @@ md-content #content-ctn-sidebar {
       display: flex;
       flex: 0 0 45%;
     }
+    > .full-width-list-item {
+      flex: 1;
+    }
   }
 }
 

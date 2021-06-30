@@ -142,7 +142,7 @@
               <p> {{::mainVm.sidebar.getData().currentSelectedDocument.quotas.maxFileSize | readableSize:true}}</p>
             </div>
             <div
-              class="field-ctn"
+              class="field-ctn full-width-list-item"
               ng-if="mainVm.sidebar.getData().currentSelectedDocument.current.nodeType === 'WORK_GROUP'"
               data-ng-class="{
               disabled: !(mainVm.sidebar.getData().functionalities.canOverrideVersioning &&
@@ -150,20 +150,18 @@
               .WORKGROUP.UPDATE || mainVm.sidebar.getData().permissions.WORKGROUP.UPDATE))
               }"
             >
-              <div class="fg-line">
-                <div>
-                  <label for="versioningParameters" translate>INFORMATION_TAB.VERSIONING_ACTIVATION</label>
-                  <label class="checkbox checkbox-inline m-r-0 pull-right">
-                    <input
-                      type="checkbox"
-                      name="versioningParameters"
-                      ng-model="mainVm.sidebar.getData().currentSelectedDocument.original.versioningParameters.enable"
-                      ng-change="mainVm.sidebar.getData().updateVersioningParameter()"
-                      ng-disabled="!mainVm.sidebar.getData().functionalities.canOverrideVersioning"
-                    />
-                    <i class="input-helper"></i>
-                  </label>
-                </div>
+              <div>
+                <label for="versioningParameters" translate>INFORMATION_TAB.VERSIONING_ACTIVATION</label>
+                <label class="checkbox checkbox-inline m-l-5">
+                  <input
+                    type="checkbox"
+                    name="versioningParameters"
+                    ng-model="mainVm.sidebar.getData().currentSelectedDocument.original.versioningParameters.enable"
+                    ng-change="mainVm.sidebar.getData().updateVersioningParameter()"
+                    ng-disabled="!mainVm.sidebar.getData().functionalities.canOverrideVersioning"
+                  />
+                  <i class="input-helper"></i>
+                </label>
               </div>
             </div>
           </div>
