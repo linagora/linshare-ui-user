@@ -247,6 +247,7 @@ function SharedSpaceController(
   function resetSelectedDocuments() {
     delete sharedSpaceVm.tableParams.filter().isSelected;
     documentUtilsService.resetItemSelection(sharedSpaceVm.selectedDocuments);
+    sharedSpaceVm.tableParamsService.resetSelectedItems();
   };
 
   function openSearch() {
