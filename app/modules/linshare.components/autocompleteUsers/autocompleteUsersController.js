@@ -46,7 +46,7 @@
       autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
       autocompleteUsersVm.isEmail = true;
       autocompleteUsersVm.onErrorEmail = onErrorEmail;
-      autocompleteUsersVm.onSelect = onSelect;
+      autocompleteUsersVm.onSelect = _.debounce(onSelect, 200);
       autocompleteUsersVm.required = required;
       autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
       autocompleteUsersVm.userRepresentation = userRepresentation;
@@ -181,8 +181,9 @@
      */
     function onSelect() {
       if (autocompleteUsersVm.selectedUser) {
-        autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser,
+        autocompleteUsersVm.dealWithSelectedUser(_.cloneDeep(autocompleteUsersVm.selectedUser),
           autocompleteUsersVm.selectedUsersList);
+        autocompleteUsersVm.selectedUser = null;
       } else {
         var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
 
@@ -191,8 +192,9 @@
             autocompleteUsersVm.searchUsersAccount(viewValue)
               .then(function(data) {
                 autocompleteUsersVm.selectedUser = data[0];
-                autocompleteUsersVm.dealWithSelectedUser(autocompleteUsersVm.selectedUser,
+                autocompleteUsersVm.dealWithSelectedUser(_.cloneDeep(autocompleteUsersVm.selectedUser),
                   autocompleteUsersVm.selectedUsersList);
+                autocompleteUsersVm.selectedUser = null;
               });
           } else {
             autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
