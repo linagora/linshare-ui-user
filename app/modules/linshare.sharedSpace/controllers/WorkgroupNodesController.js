@@ -742,9 +742,8 @@ function WorkgroupNodesController(
      */
   function multiDownload() {
     documentUtilsService
-      .canShowMultipleDownloadConfirmationDialog(workgroupNodesVm.selectedDocuments).then(function() {
-        downloadSelectedFiles(workgroupNodesVm.selectedDocuments);
-      });
+      .canShowMultipleDownloadConfirmationDialog(workgroupNodesVm.selectedDocuments)
+      .then(result => result && downloadSelectedFiles(workgroupNodesVm.selectedDocuments));
   }
 
   /**

@@ -281,9 +281,8 @@ angular
      */
     function multiDownload() {
       documentUtilsService
-        .canShowMultipleDownloadConfirmationDialog($scope.selectedDocuments).then(function() {
-          downloadSelectedFiles($scope.selectedDocuments);
-        });
+        .canShowMultipleDownloadConfirmationDialog($scope.selectedDocuments)
+        .then(result => result && downloadSelectedFiles($scope.selectedDocuments));
     }
 
     /**

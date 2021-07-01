@@ -90,7 +90,7 @@
         return multipleDownloadConfirmationDialog(items);
       }
 
-      return $q.resolve();
+      return $q.resolve(true);
     }
 
     /**
