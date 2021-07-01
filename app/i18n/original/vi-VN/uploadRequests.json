@@ -130,7 +130,7 @@
       "PASSWORD_PROTECTED": "Bảo vệ mật khẩu",
       "ALLOW_DELETION": "Cho phép xóa",
       "ALLOW_CLOSURE": "Cho phép đóng",
-      "NOTIFICATION_DATE": "Ngày thông báo",
+      "NOTIFICATION_DATE": "Ngày thông báo hết hạn",
       "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo",
       "RECIPIENTS": "Người nhận",
       "SHOW_BUTTON": "xem"

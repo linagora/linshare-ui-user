@@ -130,7 +130,7 @@
       "PASSWORD_PROTECTED": "Protégé par mot de passe",
       "ALLOW_DELETION": "Autoriser la suppression",
       "ALLOW_CLOSURE": "Permettre la clôture",
-      "NOTIFICATION_DATE": "Date de notification",
+      "NOTIFICATION_DATE": "Date de rappel",
       "NOTIFICATION_LANGUAGE": "Langue de notification",
       "RECIPIENTS": "Destinataires",
       "SHOW_BUTTON": "voir"

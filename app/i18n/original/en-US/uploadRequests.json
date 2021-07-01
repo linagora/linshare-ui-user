@@ -130,7 +130,7 @@
       "PASSWORD_PROTECTED": "Password protected",
       "ALLOW_DELETION": "Allow deletion",
       "ALLOW_CLOSURE": "Allow closure",
-      "NOTIFICATION_DATE": "Notification date",
+      "NOTIFICATION_DATE": "Reminder date",
       "NOTIFICATION_LANGUAGE": "Notification language",
       "RECIPIENTS": "Recipients",
       "SHOW_BUTTON": "view"
