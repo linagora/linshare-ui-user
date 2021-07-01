@@ -69,7 +69,7 @@ function uploadRequestGroupFormController(
   }
 
   function focusToError(form) {
-    const invalidFields = $('input.ng-invalid, textarea.ng-invalid');
+    const invalidFields = $('input.ng-invalid, textarea.ng-invalid, date-time-picker.ng-invalid input');
 
     if (invalidFields.length) {
       if (
