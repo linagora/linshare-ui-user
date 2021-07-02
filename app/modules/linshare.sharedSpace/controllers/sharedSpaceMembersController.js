@@ -298,7 +298,13 @@ function sharedSpaceMembersController(
         member.nestedRole
       ),
       forceOverride
-    );
+    ).then(() => {
+      sharedSpaceMembersVm.currentWorkGroup.current.role = {
+        uuid: member.role.uuid,
+        name: member.role.name
+      };
+      fetchSharedSpacePermissions(sharedSpaceMembersVm.currentWorkGroup.current);
+    });
   }
 
   /**
@@ -351,12 +357,12 @@ function sharedSpaceMembersController(
       .catch(error => error && $log.error(error));
   }
 
-  function fetchSharedSpacePermissions(workgroup) {
+  function fetchSharedSpacePermissions(sharedSpace) {
     return workgroupPermissionsService
-      .getWorkgroupsPermissions([workgroup].filter(Boolean))
+      .getWorkgroupsPermissions([sharedSpace].filter(Boolean))
       .then(permissions => workgroupPermissionsService.formatPermissions(permissions))
       .then(formattedPermissions => {
-        sharedSpaceMembersVm.permission = formattedPermissions && formattedPermissions[workgroup.uuid];
+        sharedSpaceMembersVm.permission = formattedPermissions && formattedPermissions[sharedSpace.uuid];
       });
   }
 

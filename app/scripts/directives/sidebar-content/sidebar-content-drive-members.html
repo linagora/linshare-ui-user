@@ -5,9 +5,7 @@
   <div class="lv-item">
     <div class="card col-xs-12" id="content-ctn-sidebar">
       <div
-        data-ng-if="mainVm.sidebar.getData().permissions[
-        mainVm.sidebar.getData().currentSelectedDocument.current.uuid
-        ].MEMBER.CREATE || mainVm.sidebar.getData().permissions.MEMBER.CREATE"
+        ng-if="sharedSpaceMembersVm.permission.MEMBER.CREATE"
         class="custom-list-container clearfix"
       >
         <div class="recipients-form-sections m-t-30 clearfix">
@@ -292,8 +290,7 @@
 
               <div
                 class="info-item-member"
-                ng-class="mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE ||
-                    mainVm.sidebar.getData().permissions.MEMBER.UPDATE ? 'clickable' : 'click-disabled'"
+                ng-class="sharedSpaceMembersVm.permission.MEMBER.UPDATE ? 'clickable' : 'click-disabled'"
                 uib-dropdown
                 dropdown-append-to-body
                 uib-dropdown-toggle
@@ -304,8 +301,7 @@
                   {{'MEMBER_TAB.' + workgroupMember.role.name}}
                 </span>
                 <i
-                  ng-if="mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE ||
-                  mainVm.sidebar.getData().permissions.MEMBER.UPDATE"
+                  ng-if="sharedSpaceMembersVm.permission.MEMBER.UPDATE"
                   class="zmdi zmdi-edit">
                 </i>
                 <ul
@@ -328,8 +324,7 @@
               <div
                 class="info-item-member"
                 ng-class="{
-                  'click-disabled': !mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE &&
-                    !mainVm.sidebar.getData().permissions.MEMBER.UPDATE
+                  'click-disabled': !sharedSpaceMembersVm.permission.MEMBER.UPDATE
                 }"
                 ng-click="sharedSpaceMembersVm.updateDefaultWorkroupsRole(workgroupMember)"
               >
@@ -339,16 +334,13 @@
                 </span>
                 <i
                   class="zmdi zmdi-edit"
-                  ng-if="mainVm.sidebar.getData().permissions[mainVm.sidebar.getData().currentSelectedDocument.current.uuid].MEMBER.UPDATE ||
-                  mainVm.sidebar.getData().permissions.MEMBER.UPDATE"
+                  ng-if="sharedSpaceMembersVm.permission.MEMBER.UPDATE"
                 ></i>
               </div>
             </div>
             <div class="item-r actions">
               <a
-                data-ng-if="mainVm.sidebar.getData().permissions[
-                mainVm.sidebar.getData().currentSelectedDocument.current.uuid
-                ].MEMBER.DELETE || mainVm.sidebar.getData().permissions.MEMBER.DELETE"
+                ng-if="sharedSpaceMembersVm.canDeleteSharedSpaceMember()"
                 href="javascript:void(0)"
                 data-ng-click="sharedSpaceMembersVm.removeMember(
                 mainVm.sidebar.getData().currentSelectedDocument.current, workgroupMember

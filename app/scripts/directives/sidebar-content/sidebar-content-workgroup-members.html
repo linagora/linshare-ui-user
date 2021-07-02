@@ -5,9 +5,7 @@
   <div class="lv-item">
     <div class="card col-xs-12" id="content-ctn-sidebar">
       <div
-        data-ng-if="mainVm.sidebar.getData().permissions[
-        mainVm.sidebar.getData().currentSelectedDocument.current.uuid
-        ].MEMBER.CREATE || mainVm.sidebar.getData().permissions.MEMBER.CREATE"
+        ng-if="sharedSpaceMembersVm.permission.MEMBER.CREATE"
         class="custom-list-container clearfix"
       >
         <div class="recipients-form-sections m-t-30 clearfix">
@@ -244,9 +242,7 @@
                 auto-close="always"
                 is-open="isOpenRights"
                 data-ng-class="{'open':isOpenRights}"
-                data-ng-if="mainVm.sidebar.getData().permissions[
-                mainVm.sidebar.getData().currentSelectedDocument.current.uuid
-                ].MEMBER.UPDATE || mainVm.sidebar.getData().permissions.MEMBER.UPDATE"
+                ng-if="sharedSpaceMembersVm.permission.MEMBER.UPDATE"
               >
                 <a
                   class="plain-text-button share-link"
