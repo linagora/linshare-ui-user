@@ -49,13 +49,15 @@
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
       "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Vous êtes sur le point de supprimer {{firstName}} {{lastName}} du groupe de travail {{workgroupName}}."
+      "TEXT": "Vous êtes sur le point de supprimer {{firstName}} {{lastName}} du groupe de travail {{workgroupName}}.",
+      "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du groupe de travail {{sharedSpaceName}}. Vous n'aurez plus accès à ce groupe de travail."
     },
     "ON_DRIVE_MEMBER_DELETE": {
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
       "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} du Drive {{driveName}} et  par conséquent de tous les groupes de travail au sein de celui-ci."
+      "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} du Drive {{driveName}} et  par conséquent de tous les groupes de travail au sein de celui-ci.",
+      "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du drive {{sharedSpaceName}}. Vous n'aurez plus accès à ce drive."
     }
   },
   "TOAST_ALERT": {

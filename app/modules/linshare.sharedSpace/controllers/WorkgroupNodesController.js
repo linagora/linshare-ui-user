@@ -125,6 +125,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.canDownloadSelectedFiles = canDownloadSelectedFiles;
   workgroupNodesVm.selectMultipleWithAtLeastOneFolder = selectMultipleWithAtLeastOneFolder;
   workgroupNodesVm.driveUuid = $state.params && $state.params.driveUuid;
+  workgroupNodesVm.onSelfRemoveFromSharedSpace = () => $state.go('sharedspace.all');
 
   workgroupNodesVm.$onInit = $onInit;
 

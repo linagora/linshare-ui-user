@@ -25,6 +25,7 @@ SharedSpaceController.$inject = [
   'toastService',
   'workgroupPermissionsService',
   'sharedSpaceRestService',
+  'sidebarService',
   'tableParamsService'
 ];
 
@@ -46,6 +47,7 @@ function SharedSpaceController(
   toastService,
   workgroupPermissionsService,
   sharedSpaceRestService,
+  sidebarService,
   tableParamsService
 ) {
   const sharedSpaceVm = this;
@@ -82,6 +84,7 @@ function SharedSpaceController(
     sharedSpaceVm.updateVersioningParameter = updateVersioningParameter;
     sharedSpaceVm.updateSharedSpaceDescription = updateSharedSpaceDescription;
     sharedSpaceVm.canUpdateSharedSpace = canUpdateSharedSpace;
+    sharedSpaceVm.onSelfRemoveFromSharedSpace = onSelfRemoveFromSharedSpace;
     sharedSpaceVm.driveUuid = $state.params && $state.params.driveUuid;
     sharedSpaceVm.isDriveState = $state.current.name === 'sharedspace.drive';
     sharedSpaceVm.status = 'loading';
@@ -279,9 +282,9 @@ function SharedSpaceController(
   };
 
   function loadSidebarContent(content) {
-    $scope.mainVm.sidebar.setData(sharedSpaceVm);
-    $scope.mainVm.sidebar.setContent(content);
-    $scope.mainVm.sidebar.show();
+    sidebarService.setData(sharedSpaceVm);
+    sidebarService.setContent(content);
+    sidebarService.show();
   };
 
   function goToSharedSpaceTarget(event, uuid, name, nodeType) {
@@ -357,7 +360,7 @@ function SharedSpaceController(
         sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList; // I keep a copy of the data for the filter module
         filterBoxService.getSetItems(sharedSpaceVm.itemsList);
         sharedSpaceVm.tableParams.reload();
-        $scope.mainVm.sidebar.hide(items);
+        sidebarService.hide(items);
         updateFlagsOnSelectedPages();
       });
     });
@@ -540,5 +543,19 @@ function SharedSpaceController(
       .catch(() => {
         sharedSpaceVm.currentSelectedDocument.current.description = targetSharedSpace.description;
       });
+  }
+
+  function onSelfRemoveFromSharedSpace(sharedSpace) {
+    if (sharedSpaceVm.isDriveState && sharedSpace.uuid === sharedSpaceVm.driveUuid) {
+      return $state.go('sharedspace.all');
+    }
+
+    _.remove(sharedSpaceVm.itemsList, item => item.uuid === sharedSpace.uuid);
+    _.remove(sharedSpaceVm.selectedDocuments, item => item.uuid === sharedSpace.uuid);
+    sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
+    filterBoxService.getSetItems(sharedSpaceVm.itemsList);
+    sharedSpaceVm.tableParams.reload();
+    sidebarService.hide();
+    updateFlagsOnSelectedPages();
   }
 }

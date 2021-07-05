@@ -49,13 +49,15 @@
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",
       "TITLE": "Member deletion",
-      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the workgroup {{workgroupName}}."
+      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the workgroup {{sharedSpaceName}}.",
+      "SELF_REMOVE_TEXT": "You are about to remove yourself from the workgroup {{sharedSpaceName}}. You will no longer have access to this workgroup."
     },
     "ON_DRIVE_MEMBER_DELETE": {
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",
       "TITLE": "Member deletion",
-      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the drive {{driveName}} and all related workgroups."
+      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the drive {{sharedSpaceName}} and all related workgroups.",
+      "SELF_REMOVE_TEXT": "You are about to remove yourself from the drive {{sharedSpaceName}}. You will no longer have access to this drive."
     }
   },
   "TOAST_ALERT": {

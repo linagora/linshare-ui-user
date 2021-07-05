@@ -50,6 +50,7 @@ function sharedSpaceMembersController(
 ) {
   const sharedSpaceMembersVm = this;
   const DEFAULT_WORKGROUP_ROLE_ORDERS = ['ADMIN', 'WRITER', 'CONTRIBUTOR', 'READER'];
+  let onSelfRemoveFromSharedSpace;
 
   sharedSpaceMembersVm.addMember = addMember;
   sharedSpaceMembersVm.updateRoleFilterOnCurrentMembers = updateRoleFilterOnCurrentMembers;
@@ -77,6 +78,7 @@ function sharedSpaceMembersController(
   ////////////
 
   function $onInit() {
+    onSelfRemoveFromSharedSpace = sidebarService.getData().onSelfRemoveFromSharedSpace;
     sharedSpaceMembersVm.currentWorkGroup = sidebarService.getData().currentSelectedDocument;
     sharedSpaceMembersVm.currentDrive = sidebarService.getData().currentDrive;
 
@@ -223,17 +225,14 @@ function sharedSpaceMembersController(
     }
 
     const translationPrefix = currentSharedSpace.nodeType === 'DRIVE' ? 'SWEET_ALERT.ON_DRIVE_MEMBER_DELETE' : 'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE';
+    const selfRemove = member && member.account && member.account.uuid === sharedSpaceMembersVm.loggedUser.uuid;
 
     $q.all([
-      $translate(
-        `${translationPrefix}.TEXT`,
-        {
-          firstName: member.account.firstName,
-          lastName: member.account.lastName,
-          workgroupName: currentSharedSpace.name,
-          driveName: currentSharedSpace.name
-        }
-      ),
+      $translate(selfRemove ? `${translationPrefix}.SELF_REMOVE_TEXT` : `${translationPrefix}.TEXT`, {
+        firstName: member.account.firstName,
+        lastName: member.account.lastName,
+        sharedSpaceName: currentSharedSpace.name,
+      }),
       $translate([
         `${translationPrefix}.TITLE`,
         `${translationPrefix}.CANCEL_BUTTON`,
@@ -257,6 +256,10 @@ function sharedSpaceMembersController(
       ))
       .then(() => {
         _.remove(sharedSpaceMembersVm.members, member);
+
+        if (selfRemove && onSelfRemoveFromSharedSpace) {
+          onSelfRemoveFromSharedSpace(sharedSpaceMembersVm.currentWorkGroup.current);
+        }
 
         toastService.success({
           key: currentSharedSpace.nodeType === 'WORK_GROUP' ? 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER' : 'TOAST_ALERT.ACTION.DELETE_DRIVE_MEMBER',

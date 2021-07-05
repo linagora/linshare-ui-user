@@ -49,13 +49,15 @@
         "CANCEL_BUTTON": "Отменить",
         "CONFIRM_BUTTON": "Да, удалить",
         "TITLE": "Удаление участника",
-        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} из рабочей группы {{workgroupName}}."
+        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} из рабочей группы {{workgroupName}}.",
+        "SELF_REMOVE_TEXT": "Вы собираетесь удалить себя из рабочей группы {{sharedSpaceName}}. У вас больше не будет доступа к этой рабочей группе."
       },
       "ON_DRIVE_MEMBER_DELETE": {
         "CANCEL_BUTTON": "Отменить",
         "CONFIRM_BUTTON": "Да, удалить",
         "TITLE": "Удаление участника",
-        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} с диска {{driveName}} и всех связанных рабочих групп."
+        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} с диска {{driveName}} и всех связанных рабочих групп.",
+        "SELF_REMOVE_TEXT": "Вы собираетесь удалить себя с диска {{sharedSpaceName}}. У вас больше не будет доступа к этому диску."
       }
     },
     "TOAST_ALERT": {
