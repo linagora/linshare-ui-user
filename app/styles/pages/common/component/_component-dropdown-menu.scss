@@ -177,6 +177,8 @@ DROPDOWN ANIMATION FIX
   .list-menu {
     position: relative;
     border-bottom: solid 1px #e4e4e4;
+    max-height: 400px;
+    overflow-y: auto;
     p {
       text-align: center;
       margin: 0;
