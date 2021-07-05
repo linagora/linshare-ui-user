@@ -177,7 +177,6 @@ function WorkgroupNodesController(
 
     getBreadcrumb();
     setFabConfig();
-    getWorkgroupMemberDetails();
     launchTableParamsInitiation();
   }
 
@@ -581,37 +580,6 @@ function WorkgroupNodesController(
   }
 
   /**
-   * @name getWorkgroupMemberDetails
-   * @desc Get current workgroup member details
-   * @memberOf LinShare.sharedSpace.WorkgroupNodesController
-   */
-  function getWorkgroupMemberDetails() {
-    sharedSpaceMembersRestService.get(workgroupNodesVm.folderDetails.workgroupUuid)
-      .then(function(members) {
-        workgroupNodesVm.currentWorkgroupMember = members.length === 1 ?
-          members[0] :
-          _.find(members, function(member) {
-            return member.account.uuid === $scope.userLogged.uuid;
-          });
-
-        workgroupNodesVm.fabButton.actions.push({
-          action: null,
-          flowDirectory: true,
-          hide: !workgroupNodesVm.permissions.FOLDER.CREATE,
-          icon: 'groups-upload-file',
-          label: 'WORKGROUPS_LIST.UPLOAD_FOLDER'
-        },{
-          action: null,
-          flowBtn: true,
-          hide: !workgroupNodesVm.permissions.FILE.CREATE,
-          icon: 'ls-upload-fill',
-          label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE'
-        }
-        );
-      });
-  }
-
-  /**
      * @name goToFolder
      * @desc Enter inside a folder
      * @param {object} folder - Folder where to enter
@@ -951,6 +919,18 @@ function WorkgroupNodesController(
         label: 'WORKGROUPS_LIST.FOLDER',
         icon: 'ls-folder',
         hide: !workgroupNodesVm.permissions.FOLDER.CREATE,
+      }, {
+        action: null,
+        flowDirectory: true,
+        hide: !workgroupNodesVm.permissions.FOLDER.CREATE,
+        icon: 'groups-upload-file',
+        label: 'WORKGROUPS_LIST.UPLOAD_FOLDER'
+      },{
+        action: null,
+        flowBtn: true,
+        hide: !workgroupNodesVm.permissions.FILE.CREATE,
+        icon: 'ls-upload-fill',
+        label: 'ADD_FILES_DROPDOWN.UPLOAD_FILE'
       }]
     };
   }

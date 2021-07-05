@@ -79,6 +79,7 @@ function sharedSpaceMembersController(
   function $onInit() {
     sharedSpaceMembersVm.currentWorkGroup = sidebarService.getData().currentSelectedDocument;
     sharedSpaceMembersVm.currentDrive = sidebarService.getData().currentDrive;
+
     if (sharedSpaceMembersVm.currentDrive && sharedSpaceMembersVm.currentDrive.uuid) {
       sharedSpaceMembersRestService.getList(sharedSpaceMembersVm.currentDrive.uuid)
         .then(driveMembers => {
@@ -118,24 +119,18 @@ function sharedSpaceMembersController(
       });
     }
 
-    // TODO : I added the if to work around, the watcher solution is very bad, need to change it !
-    $scope.$watch(
-      () => sidebarService.getData().currentSelectedDocument.current.uuid,
-      sharedSpaceUuid => $q.all([
-        authenticationRestService.getCurrentUser(),
-        sharedSpaceMembersRestService.getList(sharedSpaceUuid),
-        fetchSharedSpacePermissions(sidebarService.getData().currentSelectedDocument.current)
-      ]).then(([loggedUser, members]) => {
-        const currentMember = _.find(members, {'uuid': loggedUser.uuid});
+    authenticationRestService.getCurrentUser().then(loggedUser => {
+      sharedSpaceMembersVm.loggedUser = loggedUser;
 
-        sharedSpaceMembersVm.currentWorkgroupMember = currentMember;
-        sharedSpaceMembersVm.members = members;
-
-        // TODO SideEffect Power!
-        sidebarService.addData('currentWorkgroupMember', currentMember );
-      }).catch(error => $log.debug(error)),
-      true
-    );
+      $scope.$watch(
+        () => sidebarService.getData().currentSelectedDocument.current.uuid,
+        sharedSpaceUuid => sharedSpaceMembersRestService.getList(sharedSpaceUuid)
+          .then(members => sharedSpaceMembersVm.members = members)
+          .then(fetchPermissionsOnCurrentSharedSpace)
+          .catch(error => $log.debug(error)),
+        true
+      );
+    });
   }
 
   /**
@@ -303,7 +298,7 @@ function sharedSpaceMembersController(
         uuid: member.role.uuid,
         name: member.role.name
       };
-      fetchSharedSpacePermissions(sharedSpaceMembersVm.currentWorkGroup.current);
+      fetchPermissionsOnCurrentSharedSpace();
     });
   }
 
@@ -357,12 +352,14 @@ function sharedSpaceMembersController(
       .catch(error => error && $log.error(error));
   }
 
-  function fetchSharedSpacePermissions(sharedSpace) {
+  function fetchPermissionsOnCurrentSharedSpace() {
+    const currentSharedSpace = sidebarService.getData().currentSelectedDocument.current;
+
     return workgroupPermissionsService
-      .getWorkgroupsPermissions([sharedSpace].filter(Boolean))
-      .then(permissions => workgroupPermissionsService.formatPermissions(permissions))
+      .getWorkgroupsPermissions([currentSharedSpace].filter(Boolean))
+      .then(workgroupPermissionsService.formatPermissions)
       .then(formattedPermissions => {
-        sharedSpaceMembersVm.permission = formattedPermissions && formattedPermissions[sharedSpace.uuid];
+        sharedSpaceMembersVm.permission = formattedPermissions && formattedPermissions[currentSharedSpace.uuid];
       });
   }
 

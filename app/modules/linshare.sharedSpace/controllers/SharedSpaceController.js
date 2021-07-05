@@ -60,7 +60,6 @@ function SharedSpaceController(
     sharedSpaceVm.currentSelectedDocument = {};
     sharedSpaceVm.selectedDocuments = [];
     sharedSpaceVm.paramFilter = {name: ''};
-    sharedSpaceVm.currentWorkgroupMember = {};
     sharedSpaceVm.mdtabsSelection = { selectedIndex: 0 };
     sharedSpaceVm.flagsOnSelectedPages = {};
     sharedSpaceVm.currentPage = 'group_list';
