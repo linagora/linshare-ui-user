@@ -261,7 +261,7 @@
                       typeahead-min-length="3"
                       typeahead-wait-ms="30"
                       typeahead-input-formatter="workgroupSearchBoxVm.formatLabel(workgroupSearchBoxVm.params.lastAuthor)"
-                      uib-typeahead="u as workgroupSearchBoxVm.userRepresentation(u) for u in workgroupSearchBoxVm.autocompleteUserRestService.search($viewValue, 'THREAD_MEMBERS', workgroupSearchBoxVm.workgroup.uuid) | limitTo:3"
+                      uib-typeahead="u as workgroupSearchBoxVm.userRepresentation(u) for u in workgroupSearchBoxVm.autocompleteUserRestService.search($viewValue, 'WORKGROUP_AUTHORS', workgroupSearchBoxVm.workgroup.uuid) | limitTo:3"
                       dpopover-trigger="mouseenter"
                     />
                   </div>

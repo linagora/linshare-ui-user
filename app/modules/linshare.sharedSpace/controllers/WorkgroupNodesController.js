@@ -92,6 +92,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.copyNode = copyNode;
   workgroupNodesVm.copyNodeToPersonalSpace = copyNodeToPersonalSpace;
   workgroupNodesVm.createFolder = createFolder;
+  workgroupNodesVm.currentWorkgroup = workgroup;
   workgroupNodesVm.currentFolder = currentFolder;
   workgroupNodesVm.currentPage = 'workgroup_nodes';
   workgroupNodesVm.currentSelectedDocument = {};
