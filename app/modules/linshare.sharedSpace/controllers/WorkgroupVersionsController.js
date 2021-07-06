@@ -587,11 +587,10 @@
      * @memberOf LinShare.sharedSpace.WorkgroupVersionsController
      */
     function downloadMultiVersions() {
-      documentUtilsService.canShowMultipleDownloadConfirmationDialog(workgroupVersionsVm.selectedDocuments).then(function() {
-        _.forEach(workgroupVersionsVm.selectedDocuments, function(version) {
+      documentUtilsService.canShowMultipleDownloadConfirmationDialog(workgroupVersionsVm.selectedDocuments)
+        .then(result => result && _.forEach(workgroupVersionsVm.selectedDocuments, function(version) {
           workgroupVersionsVm.downloadVersion(version);
-        });
-      });
+        }));
     }
 
     /**

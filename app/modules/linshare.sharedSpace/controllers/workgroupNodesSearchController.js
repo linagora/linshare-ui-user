@@ -302,7 +302,7 @@ function workgroupNodesSearchController(
   function multiDownload() {
     documentUtilsService
       .canShowMultipleDownloadConfirmationDialog(workgroupSearchVm.selectedDocuments)
-      .then(() => _.forEach(workgroupSearchVm.selectedDocuments, downloadNode));
+      .then(result => result && _.forEach(workgroupSearchVm.selectedDocuments, downloadNode));
   }
 
   function showSelectedNodeDetails(selectedNode, list, index) {
