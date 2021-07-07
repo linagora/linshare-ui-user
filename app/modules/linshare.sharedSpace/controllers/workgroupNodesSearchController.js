@@ -299,8 +299,11 @@ function workgroupNodesSearchController(
   function updateSearchParams(params) {
     workgroupSearchVm.searchParams = params;
 
-    workgroupSearchVm.tableParams.reload();
-    workgroupSearchVm.tableParams.page(1);
+    if (workgroupSearchVm.tableParams.page() === 1) {
+      workgroupSearchVm.tableParams.reload();
+    } else {
+      workgroupSearchVm.tableParams.page(1);
+    }
   }
 
   function multiDownload() {
