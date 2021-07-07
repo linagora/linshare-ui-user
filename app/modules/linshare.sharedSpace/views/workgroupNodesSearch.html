@@ -282,7 +282,13 @@
               ng-table="workgroupSearchVm.tableParams"
               show-filter="true"
             >
-              <tr ng-repeat="($index, nodeItem) in $data track by nodeItem.uuid"
+              <div id="loading-bar-spinner" ng-show="workgroupSearchVm.loading">
+                <div class="spinner-icon"></div>
+              </div>
+
+              <tr
+                ng-show="!workgroupSearchVm.loading"
+                ng-repeat="($index, nodeItem) in $data track by nodeItem.uuid"
                 ls-item-selection
                 data-selected-documents="workgroupSearchVm.selectedDocuments"
                 data-document-file="nodeItem"

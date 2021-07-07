@@ -12274,11 +12274,6 @@ body.login-content:before {
 #loading-bar-spinner {
   pointer-events: none;
   -webkit-pointer-events: none;
-  -webkit-transition: linear all;
-  -o-transition: linear all;
-  transition: linear all;
-  -webkit-transition-duration: 350ms;
-  transition-duration: 350ms;
 }
 #loading-bar.ng-enter,
 #loading-bar.ng-leave.ng-leave-active,

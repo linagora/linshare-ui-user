@@ -54,7 +54,7 @@ function workgroupNodesSearchController(
 
   workgroupSearchVm.mdtabsSelection = { selectedIndex: 0 };
   workgroupSearchVm.functionalities = {};
-  workgroupSearchVm.canDeleteNodes = false;
+  workgroupSearchVm.loading = false;
   workgroupSearchVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
   workgroupSearchVm.TYPE_FOLDER = TYPE_FOLDER;
   workgroupSearchVm.TYPE_REVISION = TYPE_REVISION;
@@ -146,6 +146,8 @@ function workgroupNodesSearchController(
   }
 
   function nodesFetcher(tableParams) {
+    workgroupSearchVm.loading = true;
+
     return workgroupNodesRestService.search($stateParams.sharedSpace, {
       tree: true,
       parent: $stateParams.parent,
@@ -155,6 +157,8 @@ function workgroupNodesSearchController(
       tableParams.total(+headers('total-elements'));
 
       return data;
+    }).finally(() => {
+      workgroupSearchVm.loading = false;
     });
 
     function getTableParams() {
