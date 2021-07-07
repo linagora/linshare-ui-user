@@ -8,7 +8,7 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   const workgroupSearchBoxVm = this;
   const DEFAULT_PARAMS = {
     pattern: '',
-    type: ['DOCUMENT', 'FOLDER', 'DOCUMENT_REVISION'],
+    type: ['DOCUMENT', 'FOLDER'],
     kind: [],
     lastAuthor: null,
     creationDateAfter: null,
