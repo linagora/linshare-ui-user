@@ -86,7 +86,7 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
     }
 
     if (_.isObject(user)) {
-      return `<span>${user.firstName} ${user.lastName}</span> <span><i class="zmdi zmdi-email"></i> &nbsp;${user.mail}'</span>`;
+      return `<span>${user.display}</span> <span><i class="zmdi zmdi-email"></i> &nbsp;${user.mail}'</span>`;
     }
   }
 
