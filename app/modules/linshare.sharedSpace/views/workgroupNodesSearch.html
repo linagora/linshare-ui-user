@@ -229,7 +229,7 @@
                 class="plain-text-button"
                 translate-attr="{ 'title': 'BOUTON_LABEL_TITLE.DOWNLOAD' }"
                 ng-click="workgroupSearchVm.selectedDocuments.length > 1 ?
-                  workgroupSearchVm.multiDownload()
+                  workgroupSearchVm.multiDownload() :
                   workgroupSearchVm.downloadNode(workgroupNodesVm.selectedDocuments[0])"
               >
                 <i class="zmdi zmdi-download"></i>
