@@ -1,8 +1,10 @@
 angular
   .module('linshare.sharedSpace')
-  .run(getFullResponseForSearchResults);
+  .run(getFullResponseForSearchResults)
+  .run(extendSharedSpaceNodeModel);
 
 getFullResponseForSearchResults.$inject = ['Restangular'];
+extendSharedSpaceNodeModel.$inject = ['documentModelRestService'];
 
 function getFullResponseForSearchResults(Restangular) {
   Restangular.addResponseInterceptor(function(data, operation, what, url, response) {
@@ -12,4 +14,8 @@ function getFullResponseForSearchResults(Restangular) {
 
     return data;
   });
+}
+
+function extendSharedSpaceNodeModel(documentModelRestService) {
+  documentModelRestService.launchExtendModel('nodes');
 }

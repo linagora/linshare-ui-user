@@ -23,7 +23,6 @@ require('./services/workGroupNodesRestService');
 require('./services/workGroupPermissionsService');
 require('./services/workGroupRolesRestService');
 require('./services/sharedSpaceRestService');
-require('./services/sharedSpaceRestServiceRun');
 require('./services/workgroupVersionsRestService');
 require('./components/workgroupSearchBox/workgroupSearchBox');
 require('./components/workgroupSearchBox/workgroupSearchBoxController');

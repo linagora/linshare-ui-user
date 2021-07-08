@@ -306,7 +306,16 @@
     function search(workgroupUuid, params) {
       $log.debug('workgroupNodesRestService : search', workgroupUuid, params);
 
-      return handler(Restangular.one(restUrl.workgroup, workgroupUuid).all(restParam).one('search').get(params));
+      return handler(Restangular
+        .one(restUrl.workgroup, workgroupUuid)
+        .all(restParam).one('search')
+        .get(params)
+        .then(response => {
+          response.data = Restangular.restangularizeCollection(response.parentResource.parentResource, response.data, restParam, true);
+
+          return response;
+        })
+      );
     }
   }
 })();
