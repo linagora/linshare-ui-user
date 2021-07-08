@@ -322,10 +322,19 @@ er set-content-left thumb-type-item thumb-groups-preview-ls" header-class="'col-
                   <div class="ctn-name-actions">
                     <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
                       <p class="main-name-row display-flex">
-                        <span class="file-name-disp single-line" ng-click="workgroupSearchVm.goToNodeDestination(nodeItem)"> {{nodeItem.name}}</span>
-                        <span ng-if="nodeItem.type === workgroupSearchVm.TYPE_REVISION" class="shared-activated">
-                          <span class="zmdi zmdi-link"></span>
-                          <span>{{::nodeItem.modificationDate | lsDate:'shortDate'}}</span>
+                        <span class="file-name-disp single-line" ng-click="workgroupSearchVm.goToNodeDestination(nodeItem)">
+                          {{::nodeItem.name}}
+                        </span>
+                        <span
+                          ng-if="nodeItem.type === workgroupSearchVm.TYPE_REVISION"
+                          class="shared-activated"
+                          uib-tooltip="{{nodeItem.modificationDate | lsDate: 'LL LTS': locale}}"
+                          tooltip-placement="top"
+                          tooltip-append-to-body="true"
+                          tooltip-popup-delay="300"
+                        >
+                          <i class="zmdi zmdi-link"></i>
+                          <span>{{::nodeItem.modificationDate | lsDate: 'shortDate'}}</span>
                         </span>
                       </p>
                       <span class="secondary-info-ctn hidden-xs">
