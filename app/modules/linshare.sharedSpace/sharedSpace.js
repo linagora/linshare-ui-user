@@ -8,7 +8,6 @@ angular
     ]);
 
 require('./constants');
-require('./route');
 require('./run');
 require('./controllers/SharedSpaceController');
 require('./controllers/WorkgroupNodesController');
