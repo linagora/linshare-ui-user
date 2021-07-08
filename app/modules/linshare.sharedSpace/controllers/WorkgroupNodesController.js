@@ -25,7 +25,6 @@ WorkgroupNodesController.$inject = [
   'currentFolder',
   'documentPreviewService',
   'documentUtilsService',
-  'filterBoxService',
   'flowUploadService',
   'functionalityRestService',
   'lsAppConfig',
@@ -33,7 +32,6 @@ WorkgroupNodesController.$inject = [
   'tableParamsService',
   'toastService',
   'workgroup',
-  'sharedSpaceMembersRestService',
   'workgroupNodesRestService',
   'workgroupPermissions',
   'sharedSpaceRestService',
@@ -59,7 +57,6 @@ function WorkgroupNodesController(
   currentFolder,
   documentPreviewService,
   documentUtilsService,
-  filterBoxService,
   flowUploadService,
   functionalityRestService,
   lsAppConfig,
@@ -67,7 +64,6 @@ function WorkgroupNodesController(
   tableParamsService,
   toastService,
   workgroup,
-  sharedSpaceMembersRestService,
   workgroupNodesRestService,
   workgroupPermissions,
   sharedSpaceRestService,
@@ -297,7 +293,6 @@ function WorkgroupNodesController(
     if (workgroupNodesVm.canCreateFolder) {
       workgroupNodesVm.canCreateFolder = false;
       workgroupNodesVm.paramFilter.name = '';
-      filterBoxService.setFilters(false);
 
       const { workgroupUuid, folderUuid } = workgroupNodesVm.folderDetails;
       const newFolder = {
@@ -359,7 +354,6 @@ function WorkgroupNodesController(
           return isDocumentContainedInCollection(deletedNodes, selectedDocument);
         });
 
-        filterBoxService.getSetItems(workgroupNodesVm.nodesList);
         workgroupNodesVm.tableParamsService.reloadTableParams();
         $scope.mainVm.sidebar.hide(nodes);
 
