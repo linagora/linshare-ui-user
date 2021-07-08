@@ -1,11 +1,14 @@
-(function() {
-  'use strict';
-
-  /* jshint undef: true */
-  /* global _:false, swal:false, moment:false */
-  angular
-    .module('linshare.sharedSpace')
-    .constant('swal', swal)
-    .constant('moment', moment)
-    .constant('_', _);
-})();
+angular
+  .module('linshare.sharedSpace')
+  .constant('WORKGROUP_SEARCH_DEFAULT_PARAMS',  {
+    pattern: '',
+    type: ['DOCUMENT', 'FOLDER'],
+    kind: [],
+    lastAuthor: null,
+    creationDateAfter: null,
+    creationDateBefore: null,
+    modificationDateAfter: null,
+    modificationDateBefore: null,
+    sizeStart: null,
+    sizeEnd: null
+  });

@@ -2,23 +2,10 @@ angular
   .module('linshare.sharedSpace')
   .controller('workgroupSearchBoxController', workgroupSearchBoxController);
 
-workgroupSearchBoxController.$inject = ['_', '$translate', 'moment', 'unitService', 'autocompleteUserRestService'];
+workgroupSearchBoxController.$inject = ['_', '$translate', 'moment', 'unitService', 'autocompleteUserRestService', 'WORKGROUP_SEARCH_DEFAULT_PARAMS'];
 
-function workgroupSearchBoxController (_, $translate, moment, unitService, autocompleteUserRestService) {
+function workgroupSearchBoxController (_, $translate, moment, unitService, autocompleteUserRestService, WORKGROUP_SEARCH_DEFAULT_PARAMS) {
   const workgroupSearchBoxVm = this;
-  const DEFAULT_PARAMS = {
-    pattern: '',
-    type: ['DOCUMENT', 'FOLDER'],
-    kind: [],
-    lastAuthor: null,
-    creationDateAfter: null,
-    creationDateBefore: null,
-    modificationDateAfter: null,
-    modificationDateBefore: null,
-    sizeStart: null,
-    sizeEnd: null,
-    sizeUnit: unitService.units.MB
-  };
 
   workgroupSearchBoxVm.$onInit = $onInit;
   workgroupSearchBoxVm.unitService = unitService;
@@ -34,7 +21,8 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   function $onInit() {
     workgroupSearchBoxVm.maxDate = moment().add(1, 'day').hours(23).minutes(59).seconds(59);
     workgroupSearchBoxVm.params = {
-      ...DEFAULT_PARAMS,
+      sizeUnit: unitService.units.MB,
+      ...WORKGROUP_SEARCH_DEFAULT_PARAMS,
       ...workgroupSearchBoxVm.params,
     };
 
@@ -48,7 +36,7 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   }
 
   function reset() {
-    Object.assign(workgroupSearchBoxVm.params, DEFAULT_PARAMS);
+    Object.assign(workgroupSearchBoxVm.params, WORKGROUP_SEARCH_DEFAULT_PARAMS);
     submit();
   }
 

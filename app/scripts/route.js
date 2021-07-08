@@ -249,7 +249,7 @@
         params: {
           sharedSpace: null,
           folder: null,
-          searchParams: {}
+          searchParams: null
         },
         resolve: {
           sharedSpace: ($stateParams, sharedSpaceRestService) => sharedSpaceRestService.get($stateParams.sharedSpace, false, true),

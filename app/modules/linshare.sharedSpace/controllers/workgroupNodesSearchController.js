@@ -21,7 +21,8 @@ workgroupNodesSearchController.$inject = [
   'unitService',
   'sharedSpace',
   'folder',
-  'permissions'
+  'permissions',
+  'WORKGROUP_SEARCH_DEFAULT_PARAMS'
 ];
 
 function workgroupNodesSearchController(
@@ -43,7 +44,8 @@ function workgroupNodesSearchController(
   unitService,
   sharedSpace,
   folder,
-  permissions
+  permissions,
+  WORKGROUP_SEARCH_DEFAULT_PARAMS
 )
 {
   const workgroupSearchVm = this;
@@ -52,24 +54,23 @@ function workgroupNodesSearchController(
   const TYPE_FOLDER = 'FOLDER';
   const TYPE_REVISION = 'DOCUMENT_REVISION';
 
-  workgroupSearchVm.mdtabsSelection = { selectedIndex: 0 };
-  workgroupSearchVm.functionalities = {};
-  workgroupSearchVm.loading = false;
   workgroupSearchVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
   workgroupSearchVm.TYPE_FOLDER = TYPE_FOLDER;
   workgroupSearchVm.TYPE_REVISION = TYPE_REVISION;
+  workgroupSearchVm.loading = false;
+  workgroupSearchVm.mdtabsSelection = { selectedIndex: 0 };
+  workgroupSearchVm.functionalities = {};
+  workgroupSearchVm.breadcrumb = [];
+  workgroupSearchVm.currentSelectedDocument = {};
   workgroupSearchVm.searchParams = $stateParams.searchParams;
   workgroupSearchVm.sharedSpace = sharedSpace;
   workgroupSearchVm.permissions = permissions;
-  workgroupSearchVm.breadcrumb = [];
-  workgroupSearchVm.currentSelectedDocument = {};
   workgroupSearchVm.downloadNode = downloadNode;
   workgroupSearchVm.getNodeDetails = getNodeDetails;
   workgroupSearchVm.goToFolder = goToFolder;
   workgroupSearchVm.goToDrive = goToDrive;
   workgroupSearchVm.goToNodeDestination = goToNodeDestination;
   workgroupSearchVm.goToPreviousFolder = goToPreviousFolder;
-  workgroupSearchVm.isDocument = isDocument;
   workgroupSearchVm.multiDownload = multiDownload;
   workgroupSearchVm.showSelectedNodeDetails = showSelectedNodeDetails;
   workgroupSearchVm.showWorkgroupDetails = showWorkgroupDetails;
@@ -77,7 +78,10 @@ function workgroupNodesSearchController(
   workgroupSearchVm.canDownloadSelectedNodes = canDownloadSelectedNodes;
   workgroupSearchVm.driveUuid = $state.params && $state.params.driveUuid;
   workgroupSearchVm.updateSearchParams = updateSearchParams;
+
   workgroupSearchVm.getNodePath = node => node.treePath.slice(1).map(e => e.name).join('/');
+  workgroupSearchVm.isDocument = nodeType => nodeType === TYPE_DOCUMENT || nodeType === TYPE_REVISION;
+
 
   workgroupSearchVm.$onInit = $onInit;
 
@@ -173,7 +177,7 @@ function workgroupNodesSearchController(
     }
 
     function getSearchParams() {
-      const searchParams = workgroupSearchVm.searchParams;
+      const searchParams = workgroupSearchVm.searchParams || WORKGROUP_SEARCH_DEFAULT_PARAMS;
 
       return {
         pattern: searchParams.pattern,
@@ -290,10 +294,6 @@ function workgroupNodesSearchController(
     } else {
       workgroupSearchVm.goToFolder(folder);
     }
-  }
-
-  function isDocument(nodeType) {
-    return (nodeType === TYPE_DOCUMENT || nodeType === TYPE_REVISION);
   }
 
   function updateSearchParams(params) {
