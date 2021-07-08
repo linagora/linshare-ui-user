@@ -357,6 +357,11 @@ function SharedSpaceController(
         toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
         _.remove(sharedSpaceVm.itemsList, restangularizedItem);
         _.remove(sharedSpaceVm.selectedDocuments, restangularizedItem);
+
+        if (sharedSpaceVm.tableParams.data.length === 1 && sharedSpaceVm.tableParams.page() !== 1) {
+          sharedSpaceVm.tableParams.page(sharedSpaceVm.tableParams.page() - 1);
+        }
+
         sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList; // I keep a copy of the data for the filter module
         filterBoxService.getSetItems(sharedSpaceVm.itemsList);
         sharedSpaceVm.tableParams.reload();
