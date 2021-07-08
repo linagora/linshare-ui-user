@@ -417,12 +417,12 @@ er set-content-left thumb-type-item thumb-groups-preview-ls" header-class="'col-
                             >
                               <a
                                 translate-attr="{title: 'ACTION.SEE_VERSIONS'}"
-                                data-ui-sref="sharedspace.workgroups.version({
-                                  workgroupUuid: sharedSpace.uuidrkgroupUuid,
+                                ui-sref="sharedspace.workgroups.version({
+                                  workgroupUuid: workgroupSearchVm.sharedSpace.uuid,
                                   workgroupName: workgroupSearchVm.sharedSpace.name,
                                   fileUuid: nodeItem.uuid,
                                   fileName: nodeItem.name
-                                  })"
+                                })"
                                 >
                               <i class="zmdi zmdi-time-restore"></i>
                                 <span translate>ACTION.SEE_VERSIONS</span>
