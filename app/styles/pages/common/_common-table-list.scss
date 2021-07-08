@@ -574,6 +574,7 @@
     .secondary-info-ctn {
       display: flex;
       flex: auto;
+      max-width: 100%;
 
       .highlight-info {
         color: $primary-alt-color1;
