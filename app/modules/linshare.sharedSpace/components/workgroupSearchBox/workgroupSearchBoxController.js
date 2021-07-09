@@ -15,8 +15,8 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   workgroupSearchBoxVm.updateTypesList = updateTypesList;
   workgroupSearchBoxVm.getSelectedFileKinds = getSelectedFileKinds;
   workgroupSearchBoxVm.userRepresentation = userRepresentation;
-  workgroupSearchBoxVm.formatLabel = formatLabel;
   workgroupSearchBoxVm.autocompleteUserRestService = autocompleteUserRestService;
+  workgroupSearchBoxVm.formatLabel = user => user && (user.display || user.mail);
 
   function $onInit() {
     workgroupSearchBoxVm.maxDate = moment().add(1, 'day').hours(23).minutes(59).seconds(59);
@@ -83,12 +83,6 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
 
     if (_.isObject(user)) {
       return `<span>${user.display}</span> <span><i class="zmdi zmdi-email"></i> &nbsp;${user.mail}'</span>`;
-    }
-  }
-
-  function formatLabel(user) {
-    if (user) {
-      return `${user.firstName} ${user.lastName}`;
     }
   }
 }
