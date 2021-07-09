@@ -45,9 +45,6 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
 
 .dropdown-menu {
   z-index: 12 !important;
-  padding: 0;
-  max-height: 70vh;
-  overflow-y: scroll;
 
   .disabled {
     display: none;

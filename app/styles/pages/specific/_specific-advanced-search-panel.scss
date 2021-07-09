@@ -226,6 +226,12 @@ html:not(.ie9) .formsearch .select::before {
   }
 }
 
+.advanced-search-box-dropdown-menu {
+  padding: 0;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
 .advanced-search-box {
   height: auto;
   max-width: 500px;
