@@ -46,10 +46,11 @@
       autocompleteUsersVm.dealWithSelectedUser = autocompleteUsersVm.onSelectFunction || addElements;
       autocompleteUsersVm.isEmail = true;
       autocompleteUsersVm.onErrorEmail = onErrorEmail;
-      autocompleteUsersVm.onSelect = _.debounce(onSelect, 200);
+      autocompleteUsersVm.onSelect = onSelect;
       autocompleteUsersVm.required = required;
       autocompleteUsersVm.searchUsersAccount = searchUsersAccount;
       autocompleteUsersVm.userRepresentation = userRepresentation;
+      autocompleteUsersVm.handlingUserSelection = false;
 
       activate();
     }
@@ -180,10 +181,16 @@
      *  @memberOf LinShare.components.AutocompleteUsersController
      */
     function onSelect() {
+      if (autocompleteUsersVm.handlingUserSelection) {
+        return;
+      }
+
+      autocompleteUsersVm.handlingUserSelection = true;
       if (autocompleteUsersVm.selectedUser) {
         autocompleteUsersVm.dealWithSelectedUser(_.cloneDeep(autocompleteUsersVm.selectedUser),
           autocompleteUsersVm.selectedUsersList);
         autocompleteUsersVm.selectedUser = null;
+        autocompleteUsersVm.handlingUserSelection = false;
       } else {
         var viewValue = autocompleteUsersVm.form[autocompleteUsersVm.name].$viewValue;
 
@@ -195,9 +202,13 @@
                 autocompleteUsersVm.dealWithSelectedUser(_.cloneDeep(autocompleteUsersVm.selectedUser),
                   autocompleteUsersVm.selectedUsersList);
                 autocompleteUsersVm.selectedUser = null;
+              })
+              .finally(() => {
+                autocompleteUsersVm.handlingUserSelection = false;
               });
           } else {
             autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail();
+            autocompleteUsersVm.handlingUserSelection = false;
           }
         }
       }
