@@ -222,7 +222,6 @@
           </div>
           <div id="toolbar-actions" class="hidden-xs">
             <span
-              ng-if="workgroupSearchVm.selectedDocuments.length > 1"
               ng-class="{ 'disable-link': !workgroupSearchVm.canDownloadSelectedNodes() }"
             >
               <a
@@ -237,7 +236,7 @@
               </a>
             </span>
             <span
-              ng-class="{ 'disable-link': !workgroupSearchVm.canDownloadSelectedNodes() }"
+              ng-class="{ 'disable-link': workgroupSearchVm.selectedDocuments.length > 1 }"
             >
               <a
                 class="plain-text-button"
