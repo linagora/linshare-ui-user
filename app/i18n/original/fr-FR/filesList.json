@@ -22,8 +22,11 @@
     "MOVE_HERE": "Déplacer ici",
     "SHARED_SPACE": "Espace commun",
     "TITLE": "Choisissez la destination",
-    "NO_WORKGROUP": "Vous n'avez pas encore de Groupe de travail. Allez dans <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#!/sharedspace/list' translate>Espace commun</a> pour en créer un.",
-    "NO_WORKGROUP_TO_COPY_TO": "Vous n'avez pas de groupe de travail. Demander à un administrateur de vous en créer un ou de vous y ajouter en tant que contributeur"
+    "NO_SHARED_SPACE": "Il n'y a pas d'espace partagé. S'il vous plaît aller dans <a href='#!/sharedspace/list'>liste des espaces partagés</a> et en créer un.",
+    "NO_SHARED_SPACE_NO_PERMISSION": "Il n'y a pas d'espace partagé. Demandez à un administrateur de créer un pour vous ou d'être ajouté dans l'une comme contributeur.",
+    "NO_WORKGROUP": "Il n'y a pas de groupe de travail à l'intérieur du lecteur <b>{{driveName}}</b>. S'il vous plaît aller à <a href='#!/sharedspace/drive/{{driveUuid}}'>{{driveName}}</a> et en créer un.",
+    "NO_WORKGROUP_NO_PERMISSION": "Il n'y a pas de groupe de travail à l'intérieur du lecteur <b>{{driveName}}</b>. Demandez à un administrateur de créer un pour vous ou d'être ajouté dans un comme contributeur",
+    "EMPTY_FOLDER": "Le dossier est vide"
    },
   "RIGHT_PANEL": {
     "EMPTY": "Aucun fichier sélectionné",

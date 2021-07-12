@@ -31,42 +31,58 @@
           class="lv-col-3 center waves-effect add-btn"
           ng-click="browseVm.showCreateFolderInput()"
           ng-class="{ 'disabled': browseVm.displayCreateInput || !browseVm.canCreateFolder() }"
-          ng-show="
-            browseVm.breadcrumbs.length &&
-            browseVm.breadcrumbs[browseVm.breadcrumbs.length - 1].nodeType !== browseVm.TYPE_DRIVE
-          "
+          ng-show="!browseVm.isListingSharedSpaces()"
         >
           <i class="zmdi zmdi-plus"></i>
         </div>
         <div
           class="lv-col-3 center waves-effect add-btn"
           ng-click="browseVm.showFilterInput()"
-          ng-show="
-            !browseVm.breadcrumbs.length ||
-            browseVm.breadcrumbs[browseVm.breadcrumbs.length - 1].nodeType === browseVm.TYPE_DRIVE
-          "
+          ng-show="browseVm.isListingSharedSpaces()"
         >
           <i class="zmdi zmdi-search"></i>
         </div>
       </div>
       <p
         class="empty-res center"
-        ng-if="
-          !browseVm.currentList.length &&
-          (
-            !browseVm.breadcrumbs.length ||
-            (
-              browseVm.breadcrumbs.length === 1 &&
-              browseVm.breadcrumbs[0].nodeType === browseVm.TYPE_DRIVE
-            )
-          )
-        "
+        ng-show="!browseVm.currentList.length && !browseVm.displayCreateInput"
       >
         <i class="zmdi zmdi-info"></i>
-        <span ng-if="browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP</span>
-        <span ng-if="!browseVm.canCreateWorkGroup" translate>FILE_DIRECTORY_DIALOG.NO_WORKGROUP_TO_COPY_TO</span>
+        <span
+          ng-show="!browseVm.isListingSharedSpaces()"
+          translate
+        >
+          FILE_DIRECTORY_DIALOG.EMPTY_FOLDER
+        </span>
+
+        <span
+          ng-show="browseVm.isListingSharedSpaces() && browseVm.breadcrumbs.length === 1 && browseVm.breadcrumbs[0].nodeType === browseVm.TYPE_DRIVE"
+          translate
+          translate-values="{
+            driveName: browseVm.breadcrumbs[0].name,
+            driveUuid: browseVm.breadcrumbs[0].uuid
+          }"
+        >
+          {{
+            browseVm.haveSharedSpaceCreatePermission() ?
+              'FILE_DIRECTORY_DIALOG.NO_WORKGROUP' :
+              'FILE_DIRECTORY_DIALOG.NO_WORKGROUP_NO_PERMISSION'
+          }}
+        </span>
+
+        <span
+          ng-show="browseVm.isListingSharedSpaces() && !browseVm.breadcrumbs.length"
+          translate
+        >
+          {{
+            browseVm.haveSharedSpaceCreatePermission() ?
+              'FILE_DIRECTORY_DIALOG.NO_SHARED_SPACE' :
+              'FILE_DIRECTORY_DIALOG.NO_SHARED_SPACE_NO_PERMISSION'
+          }}
+        </span>
       </p>
-      <div class="lv-ctn">
+
+      <div class="lv-ctn" ng-show="browseVm.currentList.length || browseVm.displayCreateInput">
         <div
           id="js-lv-create-new-folder"
           class="lv-tem lv-input-field-container"

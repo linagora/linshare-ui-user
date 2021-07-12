@@ -22,9 +22,12 @@
     "MOVE_HERE": "Move here",
     "SHARED_SPACE": "Shared space",
     "TITLE": "Pick the destination",
-    "NO_WORKGROUP": "You do not have any workgroup, please go in <a class='ng-scope ng-binding' data-ui-sref='sharedspace.all' data-ng-class=''::{'disabled': tab.disabled }'' href='#!/sharedspace/list' translate>Shared space</a> and create one.",
-    "NO_WORKGROUP_TO_COPY_TO": "You do not have any workgroup. Ask an administrator to create one for you or to be added in one as a contributor"
-    },
+    "NO_SHARED_SPACE": "There is no shared space. Please go in <a href='#!/sharedspace/list'>shared spaces list</a> and create one.",
+    "NO_SHARED_SPACE_NO_PERMISSION": "There is no shared space. Ask an administrator to create one for you or to be added in one as a contributor.",
+    "NO_WORKGROUP": "There is no workgroup inside drive <b>{{driveName}}</b>. Please go in <a href='#!/sharedspace/drive/{{driveUuid}}'>{{driveName}}</a> and create one.",
+    "NO_WORKGROUP_NO_PERMISSION": "There is no workgroup inside drive <b>{{driveName}}</b>. Ask an administrator to create one for you or to be added in one as a contributor.",
+    "EMPTY_FOLDER": "Folder is empty"
+  },
   "RIGHT_PANEL": {
     "EMPTY": "no file is selected",
     "DETAILS": {

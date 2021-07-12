@@ -38,6 +38,7 @@ function BrowseController(
   sharedSpaceRestService,
   workgroupVersionsRestService
 ) {
+  let workgroupCreatePermission;
   const browseVm = this;
   const TYPE_WORKGROUP = 'WORK_GROUP';
   const TYPE_DRIVE = 'DRIVE';
@@ -65,6 +66,8 @@ function BrowseController(
   browseVm.canCreateFolder = canCreateFolder;
   browseVm.canPerformAction = canPerformAction;
   browseVm.loadParentNode = loadParentNode;
+  browseVm.haveSharedSpaceCreatePermission = haveSharedSpaceCreatePermission;
+  browseVm.isListingSharedSpaces = isListingSharedSpaces;
 
   browseVm.$onInit = $onInit;
 
@@ -83,9 +86,9 @@ function BrowseController(
       browseVm.$mdDialog.cancel();
     });
 
-    functionalityRestService.getFunctionalityParams('WORK_GROUP__CREATION_RIGHT')
-      .then(creationRight => {
-        browseVm.canCreateWorkGroup = creationRight.enable;
+    functionalityRestService.getAll()
+      .then(({ WORK_GROUP__CREATION_RIGHT }) => {
+        workgroupCreatePermission = WORK_GROUP__CREATION_RIGHT.enable;
       })
       .then(() => browseVm.currentFolder ?
         loadFolderThenList(browseVm.currentFolder) :
@@ -214,7 +217,7 @@ function BrowseController(
       .then(list => {
         browseVm.currentList = list;
 
-        return list;
+        return [drive, ...list].filter(item => !!item.role);
       })
       .then(workgroupPermissionsService.getWorkgroupsPermissions)
       .then(workgroupPermissionsService.formatPermissions)
@@ -448,6 +451,26 @@ function BrowseController(
       return browseVm.permissions[browseVm.currentWorkgroup.uuid] &&
         browseVm.permissions[browseVm.currentWorkgroup.uuid].FOLDER &&
         browseVm.permissions[browseVm.currentWorkgroup.uuid].FOLDER.CREATE;
+    }
+  }
+
+  function isListingSharedSpaces() {
+    return !browseVm.breadcrumbs.length || (
+      browseVm.breadcrumbs.length === 1 &&
+      browseVm.breadcrumbs[0].nodeType === TYPE_DRIVE
+    );
+  }
+
+  function haveSharedSpaceCreatePermission() {
+    if (!browseVm.breadcrumbs.length) {
+      return workgroupCreatePermission;
+    }
+
+    if (browseVm.breadcrumbs.length === 1 && browseVm.breadcrumbs[0].nodeType === TYPE_DRIVE) {
+      return workgroupCreatePermission &&
+        browseVm.permissions[browseVm.breadcrumbs[0].uuid] &&
+        browseVm.permissions[browseVm.breadcrumbs[0].uuid].WORKGROUP &&
+        browseVm.permissions[browseVm.breadcrumbs[0].uuid].WORKGROUP.CREATE;
     }
   }
 }
