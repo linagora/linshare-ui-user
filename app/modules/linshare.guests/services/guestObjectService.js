@@ -319,7 +319,7 @@
       guestDTO.mail = _.defaultTo(self.mail, '');
       guestDTO.restricted = setFunctionalityValue(self.restricted, allowedToRestrict);
       if (guestDTO.canUpload) {
-        if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
+        if (allowedToRestrict.enable) {
           guestDTO.restrictedContacts =
             _.uniq(_.defaultTo(self.restrictedContacts, contacts));
         } else {
