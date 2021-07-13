@@ -14,6 +14,7 @@ uploadRequestEntriesController.$inject = [
   'sidebarService',
   'tableParamsService',
   'toastService',
+  'user',
   'uploadRequest',
   'uploadRequestEntryRestService',
   'uploadRequestGroup',
@@ -37,6 +38,7 @@ function uploadRequestEntriesController(
   sidebarService,
   tableParamsService,
   toastService,
+  user,
   uploadRequest,
   uploadRequestEntryRestService,
   uploadRequestGroup,
@@ -53,6 +55,7 @@ function uploadRequestEntriesController(
 
   uploadRequestEntriesVm.$onInit = onInit;
   uploadRequestEntriesVm.goBack = goBack;
+  uploadRequestEntriesVm.currentUser = user;
   uploadRequestEntriesVm.uploadRequest = uploadRequest;
   uploadRequestEntriesVm.uploadRequestGroup = uploadRequestGroup;
   uploadRequestEntriesVm.isArchived = uploadRequest.status === 'ARCHIVED';
