@@ -393,7 +393,7 @@
                                 <span translate>ACTION.SHARE</span>
                               </a>
                             </li>
-                            <li ng-if="!uploadRequestEntriesVm.isArchived">
+                            <li ng-if="!uploadRequestEntriesVm.isArchived && uploadRequestEntriesVm.currentUser.canUpload">
                               <a
                                 href=""
                                 ng-click="uploadRequestEntriesVm.copyEntriesToMySpace([entry])"
