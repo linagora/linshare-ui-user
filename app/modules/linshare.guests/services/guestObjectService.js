@@ -144,7 +144,7 @@
           allowedToRestrict = clonedData;
           allowedToRestrict.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
           allowedToRestrict.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
-          if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
+          if (allowedToRestrict.enable) {
             var myself = {
               firstName: loggedUser.firstName,
               lastName: loggedUser.lastName,

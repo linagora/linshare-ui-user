@@ -208,8 +208,11 @@
                 <p class="pull-left inner-text-li" x-ng-show="!restrictedContact.domain">
                   {{restrictedContact.mail}}
                 </p>
-                <p class="close-list-icone-btn pull-right"
-                   x-ng-click="guestObject.restrictedContacts.splice(results.length - $index -1, 1)">
+                <p
+                  class="close-list-icone-btn pull-right"
+                  ng-if="guestObject.allowedToRestrict.canOverride"
+                  ng-click="guestObject.restrictedContacts.splice(results.length - $index -1, 1)"
+                >
                   <i class="zmdi zmdi-close"></i>
                 </p>
               </div>
