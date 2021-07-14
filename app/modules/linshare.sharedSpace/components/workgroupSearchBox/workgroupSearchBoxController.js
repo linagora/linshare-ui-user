@@ -2,9 +2,9 @@ angular
   .module('linshare.sharedSpace')
   .controller('workgroupSearchBoxController', workgroupSearchBoxController);
 
-workgroupSearchBoxController.$inject = ['_', '$translate', 'moment', 'unitService', 'autocompleteUserRestService', 'WORKGROUP_SEARCH_DEFAULT_PARAMS'];
+workgroupSearchBoxController.$inject = ['_', '$translate', 'moment', 'unitService', 'autocompleteUserRestService', 'WORKGROUP_SEARCH_DEFAULT_PARAMS', 'toastService'];
 
-function workgroupSearchBoxController (_, $translate, moment, unitService, autocompleteUserRestService, WORKGROUP_SEARCH_DEFAULT_PARAMS) {
+function workgroupSearchBoxController (_, $translate, moment, unitService, autocompleteUserRestService, WORKGROUP_SEARCH_DEFAULT_PARAMS, toastService) {
   const workgroupSearchBoxVm = this;
 
   workgroupSearchBoxVm.$onInit = $onInit;
@@ -14,9 +14,10 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   workgroupSearchBoxVm.submitOnEnter = submitOnEnter;
   workgroupSearchBoxVm.updateTypesList = updateTypesList;
   workgroupSearchBoxVm.getSelectedFileKinds = getSelectedFileKinds;
+  workgroupSearchBoxVm.addLastAuthor = addLastAuthor;
+  workgroupSearchBoxVm.removeAuthor = removeAuthor;
   workgroupSearchBoxVm.userRepresentation = userRepresentation;
   workgroupSearchBoxVm.autocompleteUserRestService = autocompleteUserRestService;
-  workgroupSearchBoxVm.formatLabel = user => user && (user.display || user.mail);
 
   function $onInit() {
     workgroupSearchBoxVm.maxDate = moment().add(1, 'day').hours(23).minutes(59).seconds(59);
@@ -25,7 +26,6 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
       ...WORKGROUP_SEARCH_DEFAULT_PARAMS,
       ...workgroupSearchBoxVm.params,
     };
-
     workgroupSearchBoxVm.searchFiles = workgroupSearchBoxVm.params.type.includes('DOCUMENT');
     workgroupSearchBoxVm.searchFolders = workgroupSearchBoxVm.params.type.includes('FOLDER');
     workgroupSearchBoxVm.searchRevisions = workgroupSearchBoxVm.params.type.includes('DOCUMENT_REVISION');
@@ -83,6 +83,29 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
 
     if (_.isObject(user)) {
       return `<span>${user.display}</span> <span><i class="zmdi zmdi-email"></i> &nbsp;${user.mail}'</span>`;
+    }
+  }
+
+  function addLastAuthor() {
+    if (!workgroupSearchBoxVm.lastAuthorModel ||
+        workgroupSearchBoxVm.params.lastAuthor.map(author => author.accountUuid).includes(workgroupSearchBoxVm.lastAuthorModel.accountUuid)) {
+      toastService.error({key: 'TOAST_ALERT.WARNING.AUTHOR_ALREADY_EXISTS'});
+      workgroupSearchBoxVm.lastAuthorModel =  null;
+
+      return;
+    }
+
+    workgroupSearchBoxVm.params.lastAuthor.push(workgroupSearchBoxVm.lastAuthorModel);
+    workgroupSearchBoxVm.lastAuthorModel =  null;
+  }
+
+  function removeAuthor(event, mail) {
+    event.stopPropagation();
+
+    const selectedIndex = workgroupSearchBoxVm.params.lastAuthor.map(author => author.mail).indexOf(mail);
+
+    if (selectedIndex >= 0) {
+      workgroupSearchBoxVm.params.lastAuthor.splice(selectedIndex, 1);
     }
   }
 }

@@ -129,6 +129,7 @@
         "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Пожалуйста, введите хотя бы одного получателя",
         "AT_LEAST_ONE_DOCUMENT": "Файл не выбран",
         "EMAIL_ALREADY_IN_UPLOAD_REQUEST": "Электронный адрес уже существует в списке получателей",
+        "AUTHOR_ALREADY_EXISTS": "Автор уже есть в списке",
         "CONTACT_STILL_EXISTS" : "уже в списке",
         "ELEMENTS_NOT_DELETED": "Элементы(ы) не были удалены",
         "ELEMENTS_NOT_DELETED_SINGULAR": "1 элемент не был удалён.",

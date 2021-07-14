@@ -228,7 +228,7 @@ html:not(.ie9) .formsearch .select::before {
 
 .advanced-search-box-dropdown-menu {
   padding: 0;
-  max-height: 70vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
 
@@ -277,5 +277,74 @@ html:not(.ie9) .formsearch .select::before {
   .icon-size-fix {
     padding: 0 10px 0 0;
     max-width: 22px;
+  }
+}
+
+.advanced-search-box__account-list {
+  width: 100%;
+  padding: 15px;
+
+  &__item {
+    padding: 0;
+    margin: 0 0 1em;
+    width: 139px;
+    overflow: hidden;
+    background-color: #ECECEC;
+    height: 24px;
+    border-radius: 25px;
+    float: left;
+    cursor: default;
+    &.readonly {
+      pointer-events: none;
+      .inner-text-li {
+        font-size: 0.91em;
+        padding: 5px 8px 0 7px;
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: default;
+      }
+    }
+    &:nth-child(odd) {
+      margin-right: 15px;
+    }
+    .inner-text-li {
+      padding: 4px 8px 0 7px;
+      font-size: 0.9em;
+      width: 87px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .close-list-icone-btn {
+      padding-top: 3px;
+      padding-left: 4px;
+      padding-right: 12px;
+      font-size: 1.2em;
+      margin-bottom: 0;
+      width: 25px;
+    }
+    .circle-ctn {
+      min-width: 24px;
+      margin-bottom: 0;
+      cursor: default;
+      .circle {
+        border-radius: 50%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        padding: 3px;
+        font-size: 0.9em;
+        color: #fff;
+        width: 24px;
+        height: 24px;
+        .ls-contact-list-item {
+          font-size: 1.25em;
+          line-height: 1.4em;
+        }
+      }
+    }
   }
 }

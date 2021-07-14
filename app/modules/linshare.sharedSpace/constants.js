@@ -4,7 +4,7 @@ angular
     pattern: '',
     type: ['DOCUMENT', 'FOLDER'],
     kind: [],
-    lastAuthor: null,
+    lastAuthor: [],
     creationDateAfter: null,
     creationDateBefore: null,
     modificationDateAfter: null,

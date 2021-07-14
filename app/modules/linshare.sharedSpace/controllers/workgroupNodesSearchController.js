@@ -183,7 +183,7 @@ function workgroupNodesSearchController(
         pattern: searchParams.pattern,
         type: searchParams.type,
         kind: searchParams.kind,
-        lastAuthor: searchParams.lastAuthor && searchParams.lastAuthor.identifier || null,
+        lastAuthor: searchParams.lastAuthor && searchParams.lastAuthor.map(author => author.identifier) || [],
         minSize: searchParams.sizeUnit && searchParams.sizeStart && unitService.toByte(searchParams.sizeStart, searchParams.sizeUnit.value),
         maxSize: searchParams.sizeUnit && searchParams.sizeEnd && unitService.toByte(searchParams.sizeEnd, searchParams.sizeUnit.value),
         creationDateAfter: searchParams.creationDateAfter,

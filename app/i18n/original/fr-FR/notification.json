@@ -129,6 +129,7 @@
       "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Saisissez au moins un destinaire",
       "AT_LEAST_ONE_DOCUMENT": "Aucun fichier n'est sélectionné",
       "EMAIL_ALREADY_IN_UPLOAD_REQUEST": "L'utilisateur existe déjà dans la liste des destinataires",
+      "AUTHOR_ALREADY_EXISTS": "The author already exists in the list",
       "CONTACT_STILL_EXISTS" : "est déjà dans la liste",
       "ELEMENTS_NOT_DELETED": "élément(s) non supprimé(s)",
       "ELEMENTS_NOT_DELETED_SINGULAR": "Un élément n'a pu être supprimé.",

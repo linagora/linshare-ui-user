@@ -253,17 +253,34 @@
                   </span>
                   <div class="fg-line">
                     <input
-                      type="text""
+                      type="text"
                       autocomplete="off"
                       class="form-control"
                       translate-attr="{placeholder: 'FILTER_COMPONENT.FILTER_BY_RECIPIENT.PLACEHOLDER'}"
-                      ng-model="workgroupSearchBoxVm.params.lastAuthor"
+                      ng-model="workgroupSearchBoxVm.lastAuthorModel"
+                      typeahead-on-select="workgroupSearchBoxVm.addLastAuthor()"
                       typeahead-min-length="3"
                       typeahead-wait-ms="30"
-                      typeahead-input-formatter="workgroupSearchBoxVm.formatLabel(workgroupSearchBoxVm.params.lastAuthor)"
                       uib-typeahead="u as workgroupSearchBoxVm.userRepresentation(u) for u in workgroupSearchBoxVm.autocompleteUserRestService.search($viewValue, 'WORKGROUP_AUTHORS', workgroupSearchBoxVm.workgroup.uuid) | limitTo:3"
                       dpopover-trigger="mouseenter"
                     />
+                  </div>
+                </div>
+              </div>
+              <div class="advanced-search-box__account-list">
+                <div class="advanced-search-box__account-list__item"
+                  ng-repeat="author in workgroupSearchBoxVm.params.lastAuthor">
+                  <p class="pull-left circle-ctn">
+                    <span class="circle user-bg">{{author.mail && author.mail.charAt(0).toUpperCase()}}</span>
+                  </p>
+                  <div class="pull-left name-authors-ctn">
+                    <p class="pull-left inner-text-li">
+                      {{author.display || author.mail}}
+                    </p>
+                    <p class="close-list-icone-btn pull-right"
+                      ng-click="workgroupSearchBoxVm.removeAuthor($event, author.mail)">
+                      <i class="zmdi zmdi-close"></i>
+                    </p>
                   </div>
                 </div>
               </div>
