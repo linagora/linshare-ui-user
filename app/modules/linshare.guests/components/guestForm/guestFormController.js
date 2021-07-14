@@ -10,9 +10,16 @@ function guestFormController(lsAppConfig, sidebarService, formUtilsService) {
 
   formVm.productionMode = lsAppConfig.production;
   formVm.toggleAdvancedOptions = toggleAdvancedOptions;
+  formVm.onRestrictedChange = onRestrictedChange;
   formVm.$onInit = $onInit;
 
   ///////
+
+  function onRestrictedChange() {
+    if (formVm.guestObject.restricted && !formVm.guestObject.restrictedContacts.length ) {
+      formVm.guestObject.restrictedContacts = [...formVm.guestObject.defaultRestrictedContacts];
+    }
+  }
 
   function $onInit() {
     if (sidebarService.getContent() === lsAppConfig.guestDetails) {
