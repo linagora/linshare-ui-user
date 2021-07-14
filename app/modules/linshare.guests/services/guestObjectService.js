@@ -26,7 +26,7 @@
       allowedToProlongExpiration = {},
       allowedToRestrict = {},
       allowedToUpload = {},
-      contacts = [],
+      defaultRestrictedContacts = [],
       form = {
         activateDescription: false,
         activateEditors: false,
@@ -59,9 +59,8 @@
      *  @param {Object} jsonObject - Json object for constructing a guest object
      *  @memberOf LinShare.guests.GuestObjectService
      */
-    function GuestObject(jsonObject) {
+    function GuestObject(jsonObject = {}) {
       self = this;
-      jsonObject = jsonObject || {};
       checkFunctionalities().then(function() {
         self.allowedToAddEditors = _.cloneDeep(allowedToAddEditors);
         self.allowedToExpiration = _.cloneDeep(allowedToExpiration);
@@ -86,7 +85,8 @@
         self.reset = reset;
         self.restricted = setPropertyValue(jsonObject.restricted, _.clone((!self.allowedToUpload.value && !self.allowedToUpload.canOverride)
           || !self.canUpload ? false : allowedToRestrict.value));
-        self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(contacts));
+        self.defaultRestrictedContacts = defaultRestrictedContacts;
+        self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(defaultRestrictedContacts));
         self.toDTO = toDTO;
         self.update = update;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
@@ -158,8 +158,8 @@
               mail: loggedUser.mail
             };
 
-            if (_.isUndefined(_.find(contacts, myself))) {
-              contacts.push(myself);
+            if (_.isUndefined(_.find(defaultRestrictedContacts, myself))) {
+              defaultRestrictedContacts.push(myself);
             }
           }
         })
@@ -225,7 +225,7 @@
       self.canUpload = _.clone(allowedToUpload.value);
       self.expirationDate = _.clone(allowedToExpiration.value);
       self.restricted = _.clone(allowedToRestrict.value);
-      self.restrictedContacts = _.cloneDeep(contacts);
+      self.restrictedContacts = _.cloneDeep(defaultRestrictedContacts);
       //self.editors = false;
       //self.editorsContacts = [];
       //self.message = '';
@@ -326,7 +326,7 @@
       if (guestDTO.canUpload) {
         if (allowedToRestrict.enable) {
           guestDTO.restrictedContacts =
-            _.uniq(_.defaultTo(self.restrictedContacts, contacts));
+            _.uniq(_.defaultTo(self.restrictedContacts, defaultRestrictedContacts));
         } else {
           guestDTO.restrictedContacts = null;
         }

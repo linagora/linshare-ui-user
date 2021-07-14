@@ -245,6 +245,7 @@
                 name="restrict-contact"
                 type="checkbox"
                 ng-checked="formVm.guestObject.form.activateRestricted"
+                ng-change="formVm.onRestrictedChange()"
                 ng-model="formVm.guestObject.restricted"
                 ng-disabled="!formVm.guestObject.allowedToRestrict.canOverride || !formVm.guestObject.canUpload"
               />
