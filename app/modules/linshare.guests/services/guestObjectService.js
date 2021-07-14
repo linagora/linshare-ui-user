@@ -26,7 +26,7 @@
       allowedToProlongExpiration = {},
       allowedToRestrict = {},
       allowedToUpload = {},
-      contacts = [],
+      defaultRestrictedContacts = [],
       form = {
         activateDescription: false,
         activateEditors: false,
@@ -85,9 +85,10 @@
         self.owner = setPropertyValue(jsonObject.owner, {});
         self.reset = reset;
         self.restricted = setPropertyValue(jsonObject.restricted, _.clone(allowedToRestrict.value));
-        self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(contacts));
+        self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(defaultRestrictedContacts));
         self.toDTO = toDTO;
         self.update = update;
+        self.onRestrictedUpdate = onRestrictedUpdate;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
         setFormValue().then(function(formData) {
           self.form = formData;
@@ -152,8 +153,8 @@
               mail: loggedUser.mail
             };
 
-            if (_.isUndefined(_.find(contacts, myself))) {
-              contacts.push(myself);
+            if (_.isUndefined(_.find(defaultRestrictedContacts, myself))) {
+              defaultRestrictedContacts.push(myself);
             }
           }
         })
@@ -220,7 +221,7 @@
       self.lastName = '';
       self.mail = '';
       self.restricted = _.clone(allowedToRestrict.value);
-      self.restrictedContacts = _.cloneDeep(contacts);
+      self.restrictedContacts = _.cloneDeep(defaultRestrictedContacts);
       //self.editors = false;
       //self.editorsContacts = [];
       //self.message = '';
@@ -321,7 +322,7 @@
       if (guestDTO.canUpload) {
         if (allowedToRestrict.enable) {
           guestDTO.restrictedContacts =
-            _.uniq(_.defaultTo(self.restrictedContacts, contacts));
+            _.uniq(_.defaultTo(self.restrictedContacts, defaultRestrictedContacts));
         } else {
           guestDTO.restrictedContacts = null;
         }
@@ -362,8 +363,16 @@
       }).catch(function(error) {
         deferred.reject(error);
       });
-      
+
       return deferred.promise;
+    }
+
+    function onRestrictedUpdate() {
+      self = this;
+
+      if (self.restricted && !self.restrictedContacts.length) {
+        self.restrictedContacts = _.clone(defaultRestrictedContacts);
+      }
     }
   }
 })();

@@ -171,6 +171,7 @@
               <input id="restrict-contact" name="restrict-contact" type="checkbox"
                      x-ng-checked="guestObject.form.activateRestricted"
                      x-ng-click="guestObject.form.activateRestricted = !guestObject.form.activateRestricted"
+                     ng-change="guestObject.onRestrictedUpdate()"
                      x-ng-model="guestObject.restricted"
                      x-ng-disabled="!guestObject.allowedToRestrict.canOverride"/>
               <i class="input-helper"></i>
