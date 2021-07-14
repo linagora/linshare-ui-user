@@ -154,7 +154,7 @@ function workgroupNodesSearchController(
 
     return workgroupNodesRestService.search($stateParams.sharedSpace, {
       tree: true,
-      parent: $stateParams.parent,
+      parent: $stateParams.folder,
       ...getTableParams(),
       ...getSearchParams()
     }).then(({ data, headers }) => {
