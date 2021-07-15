@@ -52,7 +52,8 @@
     "ERROR": {
       "INVALID_DATE": "The date needs to be greater than today's date and cannot exceed the maximum expiry date being the: {{date}}",
       "INVALID_EMAIL": "Email address is invalid.",
-      "INVALID_EMPTY_FIELD": "This field cannot be empty."
+      "INVALID_EMPTY_FIELD": "This field cannot be empty.",
+      "RESTRICTED_CONTACTS_REQUIRED": "Restricted guest requires at least one contact."
     },
     "LABEL": {
       "ACTIVATE_USER_SPACE": "Activate user space",

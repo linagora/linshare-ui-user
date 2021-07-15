@@ -11,6 +11,7 @@ function guestFormController(lsAppConfig, sidebarService, formUtilsService) {
   formVm.productionMode = lsAppConfig.production;
   formVm.toggleAdvancedOptions = toggleAdvancedOptions;
   formVm.onRestrictedChange = onRestrictedChange;
+  formVm.getRestrictedContactsValidity = getRestrictedContactsValidity;
   formVm.$onInit = $onInit;
 
   ///////
@@ -50,5 +51,13 @@ function guestFormController(lsAppConfig, sidebarService, formUtilsService) {
     } else {
       formUtilsService.setSubmitted(formVm.form);
     }
+  }
+
+  function getRestrictedContactsValidity() {
+    const validity = formVm.guestObject.restricted && formVm.guestObject.restrictedContacts.length > 0;
+
+    formVm.form.$setValidity('restrictedContactsRequired', validity);
+
+    return validity;
   }
 }
