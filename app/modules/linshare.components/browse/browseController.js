@@ -205,7 +205,11 @@ function BrowseController(
       })
       .then(() => workgroupNodesRestService.get(browseVm.currentWorkgroup.uuid, folder.uuid, true))
       .then(currentFolder => {
-        browseVm.breadcrumbs.push(...currentFolder.treePath.slice(1), currentFolder);
+        browseVm.breadcrumbs.push(...currentFolder.treePath.slice(1));
+
+        if (currentFolder.type !== 'ROOT_FOLDER') {
+          browseVm.breadcrumbs.push(currentFolder);
+        }
 
         return listSharedSpaceNodes(currentFolder);
       });
