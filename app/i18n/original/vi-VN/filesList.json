@@ -23,7 +23,7 @@
     "TITLE": "Chọn điểm đến",
     "NO_SHARED_SPACE": "Không có không gian chung. Vui lòng vào <a href='#!/sharedspace/list'>danh sách không gian chia sẻ</a> và tạo một không gian chung.",
     "NO_SHARED_SPACE_NO_PERMISSION": "Không có không gian chung. Yêu cầu quản trị viên tạo một cho bạn hoặc được thêm vào trong một với tư cách là người đóng góp.",
-    "NO_WORKGROUP": "Không có nhóm làm việc bên trong ổ đĩa <b>{{driveName}}</b>. Vui lòng vào <a href='#!/sharedspace/drive/{{driveUuid}}'>{{driveName}}</a> và tạo một nhóm làm việc.",
+    "NO_WORKGROUP": "Không có nhóm làm việc bên trong ổ đĩa <b>{{driveName}}</b>. Vui lòng vào <a ui-sref='sharedspace.drive({ driveUuid: \"{{driveUuid}}\" })' ui-sref-opts='{ reload: true }'>{{driveName}}</a> và tạo một nhóm làm việc.",
     "NO_WORKGROUP_NO_PERMISSION": "Không có nhóm làm việc bên trong ổ đĩa <b>{{drivename}}</b>. Yêu cầu quản trị viên tạo cho bạn hoặc được thêm vào trong một với tư cách là người đóng góp.",
     "EMPTY_FOLDER": "Thư mục rỗng"
   },

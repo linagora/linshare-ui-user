@@ -58,6 +58,7 @@
         <span
           ng-show="browseVm.isListingSharedSpaces() && browseVm.breadcrumbs.length === 1 && browseVm.breadcrumbs[0].nodeType === browseVm.TYPE_DRIVE"
           translate
+          translate-compile
           translate-values="{
             driveName: browseVm.breadcrumbs[0].name,
             driveUuid: browseVm.breadcrumbs[0].uuid

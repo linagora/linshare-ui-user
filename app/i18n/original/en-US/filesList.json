@@ -24,7 +24,7 @@
     "TITLE": "Pick the destination",
     "NO_SHARED_SPACE": "There is no shared space. Please go in <a href='#!/sharedspace/list'>shared spaces list</a> and create one.",
     "NO_SHARED_SPACE_NO_PERMISSION": "There is no shared space. Ask an administrator to create one for you or to be added in one as a contributor.",
-    "NO_WORKGROUP": "There is no workgroup inside drive <b>{{driveName}}</b>. Please go in <a href='#!/sharedspace/drive/{{driveUuid}}'>{{driveName}}</a> and create one.",
+    "NO_WORKGROUP": "There is no workgroup inside drive <b>{{driveName}}</b>. Please go in <a ui-sref='sharedspace.drive({ driveUuid: \"{{driveUuid}}\" })' ui-sref-opts='{ reload: true }'>{{driveName}}</a> and create one.",
     "NO_WORKGROUP_NO_PERMISSION": "There is no workgroup inside drive <b>{{driveName}}</b>. Ask an administrator to create one for you or to be added in one as a contributor.",
     "EMPTY_FOLDER": "Folder is empty"
   },
