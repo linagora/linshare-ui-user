@@ -32,6 +32,15 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   }
 
   function submit() {
+    // Set end date hour to end of day
+    if (workgroupSearchBoxVm.params.modificationDateBefore) {
+      workgroupSearchBoxVm.params.modificationDateBefore.setHours(23, 59, 59, 999);
+    }
+
+    if (workgroupSearchBoxVm.params.creationDateBefore) {
+      workgroupSearchBoxVm.params.creationDateBefore.setHours(23, 59, 59, 999);
+    }
+
     workgroupSearchBoxVm.onSubmit(workgroupSearchBoxVm.params);
   }
 
