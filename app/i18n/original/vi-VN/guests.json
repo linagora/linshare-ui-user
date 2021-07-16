@@ -52,7 +52,8 @@
     "ERROR": {
       "INVALID_DATE": "Ngày cần phải lớn hơn ngày hôm nay và không thể vượt quá ngày hết hạntối đa là",
       "INVALID_EMAIL": "Địa chỉ email không hợp lệ.",
-      "INVALID_EMPTY_FIELD": "Trường này không thể để trống."
+      "INVALID_EMPTY_FIELD": "Trường này không thể để trống.",
+      "RESTRICTED_CONTACTS_REQUIRED": "Khách bị hạn chế yêu cầu ít nhất một địa chỉ liên hệ."
     },
     "LABEL": {
       "ACTIVATE_USER_SPACE": "Kích hoạt không gian người dùng",

@@ -89,6 +89,7 @@
         self.toDTO = toDTO;
         self.update = update;
         self.onRestrictedUpdate = onRestrictedUpdate;
+        self.getRestrictedContactsValidity = getRestrictedContactsValidity;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
         setFormValue().then(function(formData) {
           self.form = formData;
@@ -201,7 +202,7 @@
       }).catch(function(error) {
         deferred.reject(error);
       });
-      
+
       return deferred.promise;
     }
 
@@ -258,7 +259,7 @@
       }
 
       deferred.resolve(_.cloneDeep(form));
-      
+
       return deferred.promise;
     }
 
@@ -341,7 +342,7 @@
       //} else {
       //  guestDTO.editorsContacts = null;
       //}
-      
+
       return guestDTO;
     }
 
@@ -373,6 +374,16 @@
       if (self.restricted && !self.restrictedContacts.length) {
         self.restrictedContacts = _.clone(defaultRestrictedContacts);
       }
+    }
+
+    function getRestrictedContactsValidity(formObject) {
+      self = this;
+
+      const validity = self.restricted && self.restrictedContacts.length > 0;
+
+      formObject.$setValidity('restrictedContactsRequired', validity);
+
+      return validity;
     }
   }
 })();
