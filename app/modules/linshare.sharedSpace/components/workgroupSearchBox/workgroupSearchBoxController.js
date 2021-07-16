@@ -26,9 +26,9 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
       ...WORKGROUP_SEARCH_DEFAULT_PARAMS,
       ...workgroupSearchBoxVm.params,
     };
-    workgroupSearchBoxVm.searchFiles = workgroupSearchBoxVm.params.type.includes('DOCUMENT');
-    workgroupSearchBoxVm.searchFolders = workgroupSearchBoxVm.params.type.includes('FOLDER');
-    workgroupSearchBoxVm.searchRevisions = workgroupSearchBoxVm.params.type.includes('DOCUMENT_REVISION');
+    workgroupSearchBoxVm.searchFiles = workgroupSearchBoxVm.params.types.includes('DOCUMENT');
+    workgroupSearchBoxVm.searchFolders = workgroupSearchBoxVm.params.types.includes('FOLDER');
+    workgroupSearchBoxVm.searchRevisions = workgroupSearchBoxVm.params.types.includes('DOCUMENT_REVISION');
   }
 
   function submit() {
@@ -41,9 +41,9 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
       ...WORKGROUP_SEARCH_DEFAULT_PARAMS
     };
 
-    workgroupSearchBoxVm.searchFiles = workgroupSearchBoxVm.params.type.includes('DOCUMENT');
-    workgroupSearchBoxVm.searchFolders = workgroupSearchBoxVm.params.type.includes('FOLDER');
-    workgroupSearchBoxVm.searchRevisions = workgroupSearchBoxVm.params.type.includes('DOCUMENT_REVISION');
+    workgroupSearchBoxVm.searchFiles = workgroupSearchBoxVm.params.types.includes('DOCUMENT');
+    workgroupSearchBoxVm.searchFolders = workgroupSearchBoxVm.params.types.includes('FOLDER');
+    workgroupSearchBoxVm.searchRevisions = workgroupSearchBoxVm.params.types.includes('DOCUMENT_REVISION');
 
     submit();
   }
@@ -55,23 +55,23 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   }
 
   function updateTypesList(type, addToList) {
-    const typeIndex = workgroupSearchBoxVm.params.type.indexOf(type);
+    const typeIndex = workgroupSearchBoxVm.params.types.indexOf(type);
 
     if (addToList && typeIndex === -1) {
-      workgroupSearchBoxVm.params.type =  [...workgroupSearchBoxVm.params.type, type];
+      workgroupSearchBoxVm.params.types =  [...workgroupSearchBoxVm.params.types, type];
     }
 
     if (!addToList && typeIndex !== -1) {
-      workgroupSearchBoxVm.params.type.splice(typeIndex, 1);
+      workgroupSearchBoxVm.params.types.splice(typeIndex, 1);
     }
   }
 
   function getSelectedFileKinds() {
-    if (workgroupSearchBoxVm.params.kind.length === 0) {
+    if (workgroupSearchBoxVm.params.kinds.length === 0) {
       return $translate.instant('WORKGROUP_SEARCH_BOX.TYPES.ANY');
     }
 
-    return workgroupSearchBoxVm.params.kind
+    return workgroupSearchBoxVm.params.kinds
       .map(kind => $translate.instant(`WORKGROUP_SEARCH_BOX.TYPES.${kind}`))
       .join(', ');
   }
@@ -87,25 +87,27 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   }
 
   function addLastAuthor() {
-    if (!workgroupSearchBoxVm.lastAuthorModel ||
-        workgroupSearchBoxVm.params.lastAuthor.map(author => author.accountUuid).includes(workgroupSearchBoxVm.lastAuthorModel.accountUuid)) {
+    if (
+      !workgroupSearchBoxVm.lastAuthorModel ||
+      workgroupSearchBoxVm.params.lastAuthors.some(author => author.accountUuid === workgroupSearchBoxVm.lastAuthorModel.accountUuid)
+    ) {
       toastService.error({key: 'TOAST_ALERT.WARNING.AUTHOR_ALREADY_EXISTS'});
       workgroupSearchBoxVm.lastAuthorModel =  null;
 
       return;
     }
 
-    workgroupSearchBoxVm.params.lastAuthor.push(workgroupSearchBoxVm.lastAuthorModel);
+    workgroupSearchBoxVm.params.lastAuthors.push(workgroupSearchBoxVm.lastAuthorModel);
     workgroupSearchBoxVm.lastAuthorModel =  null;
   }
 
   function removeAuthor(event, mail) {
     event.stopPropagation();
 
-    const selectedIndex = workgroupSearchBoxVm.params.lastAuthor.map(author => author.mail).indexOf(mail);
+    const selectedIndex = workgroupSearchBoxVm.params.lastAuthors.map(author => author.mail).indexOf(mail);
 
     if (selectedIndex >= 0) {
-      workgroupSearchBoxVm.params.lastAuthor.splice(selectedIndex, 1);
+      workgroupSearchBoxVm.params.lastAuthors.splice(selectedIndex, 1);
     }
   }
 }

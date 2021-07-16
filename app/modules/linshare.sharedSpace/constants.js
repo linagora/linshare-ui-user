@@ -2,9 +2,9 @@ angular
   .module('linshare.sharedSpace')
   .constant('WORKGROUP_SEARCH_DEFAULT_PARAMS',  {
     pattern: '',
-    type: ['DOCUMENT', 'FOLDER'],
-    kind: [],
-    lastAuthor: [],
+    types: ['DOCUMENT', 'FOLDER'],
+    kinds: [],
+    lastAuthors: [],
     creationDateAfter: null,
     creationDateBefore: null,
     modificationDateAfter: null,

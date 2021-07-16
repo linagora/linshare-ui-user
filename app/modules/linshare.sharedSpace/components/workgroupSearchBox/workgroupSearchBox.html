@@ -73,7 +73,7 @@
               <md-input-container class="advanced-search-box__field-input">
                 <md-select
                   class="form-control"
-                  ng-model="workgroupSearchBoxVm.params.kind"
+                  ng-model="workgroupSearchBoxVm.params.kinds"
                   multiple="true"
                   md-selected-text="workgroupSearchBoxVm.getSelectedFileKinds()"
                 >
@@ -269,7 +269,7 @@
               </div>
               <div class="advanced-search-box__account-list">
                 <div class="advanced-search-box__account-list__item"
-                  ng-repeat="author in workgroupSearchBoxVm.params.lastAuthor">
+                  ng-repeat="author in workgroupSearchBoxVm.params.lastAuthors">
                   <p class="pull-left circle-ctn">
                     <span class="circle user-bg">{{author.mail && author.mail.charAt(0).toUpperCase()}}</span>
                   </p>
