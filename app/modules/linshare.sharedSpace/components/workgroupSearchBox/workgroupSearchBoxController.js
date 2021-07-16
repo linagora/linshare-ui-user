@@ -42,6 +42,10 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
       workgroupSearchBoxVm.params.creationDateBefore.setHours(23, 59, 59, 999);
     }
 
+    if (!workgroupSearchBoxVm.searchFiles) {
+      workgroupSearchBoxVm.params.kinds = [];
+    }
+
     workgroupSearchBoxVm.onSubmit(workgroupSearchBoxVm.params);
   }
 
