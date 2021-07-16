@@ -354,5 +354,15 @@
         self.restrictedContacts = _.clone(defaultRestrictedContacts);
       }
     }
+
+    function getRestrictedContactsValidity(formObject) {
+      self = this;
+
+      var validity = self.restricted && self.restrictedContacts.length > 0;
+
+      formObject.$setValidity('restrictedContactsRequired', validity);
+
+      return validity;
+    }
   }
 })();

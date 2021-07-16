@@ -218,6 +218,12 @@
               </div>
             </div>
           </div>
+          <div
+            ng-show="!guestObject.getRestrictedContactsValidity(formName)"
+            class="has-error"
+          >
+            <span translate>SIDEBAR.ERROR.RESTRICTED_CONTACTS_REQUIRED</span>
+          </div>
         </div>
       </div>
       <div class="m-b-30 col-xs-12 field-ctn guest-description" x-ng-hide="guestObject.uuid !== undefined">
