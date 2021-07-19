@@ -74,6 +74,7 @@
           ng-model="formVm.guestObject.mail"
           ng-focus="emailFocus=true"
           ng-blur="emailFocus=false"
+          ng-disabled="formVm.guestObject.uuid"
           required
         >
         <label class="fg-label required" for="email" translate>SIDEBAR.LABEL.EMAIL</label>
