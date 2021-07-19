@@ -8,6 +8,7 @@ uploadRequestEntriesController.$inject = [
   '$log',
   '$state',
   '$transition$',
+  'documentPreviewService',
   'documentUtilsService',
   'lsAppConfig',
   'LinshareDocumentRestService',
@@ -32,6 +33,7 @@ function uploadRequestEntriesController(
   $log,
   $state,
   $transition$,
+  documentPreviewService,
   documentUtilsService,
   lsAppConfig,
   LinshareDocumentRestService,
@@ -78,6 +80,12 @@ function uploadRequestEntriesController(
   };
 
   function onInit() {
+    Object.assign(documentPreviewService, {
+      copyToMySpace: entry => copyEntriesToMySpace([entry]),
+      download: downloadEntry,
+      showItemDetails: showEntryDetails
+    });
+
     return uploadRequestRestService.listEntries(uploadRequest.uuid)
       .then(entries => {
         uploadRequestEntriesVm.itemsList = entries;
