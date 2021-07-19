@@ -17,6 +17,7 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   workgroupSearchBoxVm.addLastAuthor = addLastAuthor;
   workgroupSearchBoxVm.removeAuthor = removeAuthor;
   workgroupSearchBoxVm.userRepresentation = userRepresentation;
+  workgroupSearchBoxVm.canFilterByFileTypes = canFilterByFileTypes;
   workgroupSearchBoxVm.autocompleteUserRestService = autocompleteUserRestService;
 
   function $onInit() {
@@ -43,7 +44,7 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
       workgroupSearchBoxVm.params.creationDateBefore.setHours(23, 59, 59, 999);
     }
 
-    if (!workgroupSearchBoxVm.searchFiles) {
+    if (!workgroupSearchBoxVm.canFilterByFileTypes()) {
       workgroupSearchBoxVm.params.kinds = [];
     }
 
@@ -126,5 +127,9 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
     if (selectedIndex >= 0) {
       workgroupSearchBoxVm.params.lastAuthors.splice(selectedIndex, 1);
     }
+  }
+
+  function canFilterByFileTypes() {
+    return (workgroupSearchBoxVm.searchFiles || workgroupSearchBoxVm.searchRevisions) && !workgroupSearchBoxVm.searchFolders;
   }
 }
