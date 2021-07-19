@@ -25,7 +25,8 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
       sizeUnit: unitService.units.MB,
       ...WORKGROUP_SEARCH_DEFAULT_PARAMS,
       ...workgroupSearchBoxVm.params,
-      types: workgroupSearchBoxVm.params && workgroupSearchBoxVm.params.types || [...WORKGROUP_SEARCH_DEFAULT_PARAMS.types]
+      types: workgroupSearchBoxVm.params && workgroupSearchBoxVm.params.types || [...WORKGROUP_SEARCH_DEFAULT_PARAMS.types],
+      lastAuthors: workgroupSearchBoxVm.param && workgroupSearchBoxVm.param.lastAuthors || [...WORKGROUP_SEARCH_DEFAULT_PARAMS.lastAuthors]
     };
     workgroupSearchBoxVm.searchFiles = workgroupSearchBoxVm.params.types.includes('DOCUMENT');
     workgroupSearchBoxVm.searchFolders = workgroupSearchBoxVm.params.types.includes('FOLDER');
@@ -53,7 +54,8 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
     workgroupSearchBoxVm.params = {
       sizeUnit: unitService.units.MB,
       ...WORKGROUP_SEARCH_DEFAULT_PARAMS,
-      types: [...WORKGROUP_SEARCH_DEFAULT_PARAMS.types]
+      types: [...WORKGROUP_SEARCH_DEFAULT_PARAMS.types],
+      lastAuthors: [...WORKGROUP_SEARCH_DEFAULT_PARAMS.lastAuthors]
     };
 
     workgroupSearchBoxVm.searchFiles = workgroupSearchBoxVm.params.types.includes('DOCUMENT');
