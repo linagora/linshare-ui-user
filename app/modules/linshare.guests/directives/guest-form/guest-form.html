@@ -36,7 +36,7 @@
                                         'fg-not-empty' : !formName.email.$error.required}">
         <input type="email" class="input-sm form-control fg-input" name="email" id="email"
                required x-ng-model="guestObject.mail"
-               x-ng-focus="emailFocus=true" x-ng-blur="emailFocus=false">
+               x-ng-focus="emailFocus=true" x-ng-blur="emailFocus=false" ng-disabled="guestObject.uuid">
         <label class="fg-label required" for="email">{{"SIDEBAR.LABEL.EMAIL" | translate}}</label>
         <span x-ng-show="(formName.email.$touched || formName.$submitted) && formName.email.$invalid">
          {{"SIDEBAR.ERROR.INVALID_EMAIL" | translate}}
