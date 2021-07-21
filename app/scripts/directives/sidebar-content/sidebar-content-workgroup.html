@@ -3,7 +3,11 @@
     <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
        data-ng-click="mainVm.sidebar.hide()">
     </i>
-    <h2 class="header-more-options setEllipsis"> {{mainVm.sidebar.getData().currentSelectedDocument.current.name}}</h2>
+    <h2
+      class="header-more-options set-ellipsis"
+      uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.name}}"
+      tooltip-placement="bottom"
+    >{{mainVm.sidebar.getData().currentSelectedDocument.current.name}}</h2>
     <span class="hidden-xs actions" data-ng-click="mainVm.sidebar.hide()">
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
