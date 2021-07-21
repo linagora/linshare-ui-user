@@ -438,7 +438,11 @@ function SharedSpaceController(
       if (ifMemberTab) {
         sharedSpaceVm.mdtabsSelection.selectedIndex = 1;
         //TODO Don't Use angular.element, Do a component/directive
-        $timeout(() => angular.element('#focusInputShare').trigger('focus'), 300);
+        $timeout(() => {
+          if (sharedSpaceVm.mdtabsSelection.selectedIndex === 1) {
+            angular.element('#focusInputShare').trigger('focus');
+          }
+        }, 500);
       } else {
         sharedSpaceVm.mdtabsSelection.selectedIndex = 0;
       }
