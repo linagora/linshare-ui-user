@@ -130,6 +130,6 @@ function workgroupSearchBoxController (_, $translate, moment, unitService, autoc
   }
 
   function canFilterByFileTypes() {
-    return (workgroupSearchBoxVm.searchFiles || workgroupSearchBoxVm.searchRevisions) && !workgroupSearchBoxVm.searchFolders;
+    return workgroupSearchBoxVm.searchFiles || workgroupSearchBoxVm.searchRevisions;
   }
 }
