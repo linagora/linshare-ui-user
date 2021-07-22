@@ -89,6 +89,7 @@
         self.toDTO = toDTO;
         self.update = update;
         self.onRestrictedUpdate = onRestrictedUpdate;
+        self.getRestrictedContactsValidity = getRestrictedContactsValidity;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
         setFormValue().then(function(formData) {
           self.form = formData;
@@ -141,7 +142,7 @@
           allowedToRestrict = clonedData;
           allowedToRestrict.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
           allowedToRestrict.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
-          if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
+          if (allowedToRestrict.enable) {
             var myself = {
               firstName: loggedUser.firstName,
               lastName: loggedUser.lastName,
@@ -303,7 +304,7 @@
       guestDTO.mail = _.defaultTo(self.mail, '');
       guestDTO.restricted = setFunctionalityValue(self.restricted, allowedToRestrict);
       if (guestDTO.canUpload) {
-        if (allowedToRestrict.enable && allowedToRestrict.canOverride) {
+        if (allowedToRestrict.enable) {
           guestDTO.restrictedContacts =
             _.uniq(_.defaultTo(self.restrictedContacts, defaultRestrictedContacts));
         } else {
