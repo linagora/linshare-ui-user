@@ -359,7 +359,7 @@
     function getRestrictedContactsValidity(formObject) {
       self = this;
 
-      var validity = self.restricted && self.restrictedContacts.length > 0;
+      var validity = !self.canUpload || !self.restricted || (self.restricted && self.restrictedContacts.length > 0);
 
       formObject.$setValidity('restrictedContactsRequired', validity);
 
