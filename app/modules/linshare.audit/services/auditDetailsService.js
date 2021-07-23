@@ -368,15 +368,11 @@
      * @memberOf LinShare.audit.auditDetailsService
      */
     function setRessourceNameVariousForCopied(auditAction, copied) {
-      if (auditAction.workGroup) {
-        if (copied.contextUuid === auditAction.workGroup.uuid) {
-          return workgroup.current;
-        }
-
-        return workgroup.another;
-      } else {
-        return copied.contextName;
+      if (auditAction.workGroup && copied.contextUuid === auditAction.workGroup.uuid) {
+        return workgroup.current;
       }
+
+      return copied.contextName;
     }
 
     /**
