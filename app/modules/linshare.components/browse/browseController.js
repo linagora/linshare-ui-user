@@ -50,8 +50,9 @@ function BrowseController(
   browseVm.TYPE_WORKGROUP = TYPE_WORKGROUP;
   browseVm.TYPE_DRIVE = TYPE_DRIVE;
   browseVm.displayCreateInput = false;
-  browseVm.newFolderName = '';
   browseVm.displayFilterInput = false;
+  browseVm.loading = true;
+  browseVm.newFolderName = '';
   browseVm.filterText = '';
   browseVm.createFolder = createFolder;
   browseVm.createFolderByEnter = createFolderByEnter;
@@ -216,6 +217,8 @@ function BrowseController(
   }
 
   function listSharedSpaces(drive = {}) {
+    browseVm.loading = true;
+
     return sharedSpaceRestService.getList(true, drive.uuid)
       .then(orderNodesByModificationDate)
       .then(list => {
@@ -227,17 +230,24 @@ function BrowseController(
       .then(workgroupPermissionsService.formatPermissions)
       .then(formattedPermissions => {
         browseVm.permissions = formattedPermissions;
+      })
+      .finally(() => {
+        browseVm.loading = false;
       });
   }
 
   function listSharedSpaceNodes(parent = {}) {
+    browseVm.loading = true;
     const nodeType = !browseVm.canDisplayFiles ? TYPE_FOLDER : null;
 
     return workgroupNodesRestService.getList(browseVm.currentWorkgroup.uuid, parent.uuid, nodeType)
       .then(orderNodesByModificationDate)
       .then(list => {
         browseVm.currentList = list;
-      });
+      })
+      .finally(() => {
+        browseVm.loading = false;
+      });;
   }
 
   function loadParentNode() {

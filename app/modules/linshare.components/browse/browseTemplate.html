@@ -15,7 +15,7 @@
       <div class="lv-header-dialog">
         <div class="lv-col-1 center actions">
           <a
-            ng-class="{'disabled': browseVm.breadcrumbs.length === 0 }"
+            ng-class="{'disabled': browseVm.breadcrumbs.length === 0 || browseVm.loading }"
             ng-click="browseVm.loadParentNode()"
           >
             <i class="zmdi zmdi-chevron-left"></i>
@@ -30,22 +30,28 @@
         <div
           class="lv-col-3 center waves-effect add-btn"
           ng-click="browseVm.showCreateFolderInput()"
-          ng-class="{ 'disabled': browseVm.displayCreateInput || !browseVm.canCreateFolder() }"
+          ng-class="{ 'disabled': browseVm.displayCreateInput || browseVm.loading || !browseVm.canCreateFolder() }"
           ng-show="!browseVm.isListingSharedSpaces()"
         >
           <i class="zmdi zmdi-plus"></i>
         </div>
         <div
           class="lv-col-3 center waves-effect add-btn"
+          ng-class="{ 'disabled': browseVm.loading }"
           ng-click="browseVm.showFilterInput()"
           ng-show="browseVm.isListingSharedSpaces()"
         >
           <i class="zmdi zmdi-search"></i>
         </div>
       </div>
+
+      <div id="loading-bar-spinner" ng-show="browseVm.loading">
+        <div class="spinner-icon"></div>
+      </div>
+
       <p
         class="empty-res center"
-        ng-show="!browseVm.currentList.length && !browseVm.displayCreateInput"
+        ng-show="!browseVm.loading && !browseVm.currentList.length && !browseVm.displayCreateInput"
       >
         <i class="zmdi zmdi-info"></i>
         <span
@@ -83,7 +89,7 @@
         </span>
       </p>
 
-      <div class="lv-ctn" ng-show="browseVm.currentList.length || browseVm.displayCreateInput">
+      <div class="lv-ctn" ng-show="!browseVm.loading && (browseVm.currentList.length || browseVm.displayCreateInput)">
         <div
           id="js-lv-create-new-folder"
           class="lv-tem lv-input-field-container"
