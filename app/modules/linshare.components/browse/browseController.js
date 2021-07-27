@@ -44,6 +44,7 @@ function BrowseController(
   const TYPE_DRIVE = 'DRIVE';
   const TYPE_FOLDER = 'FOLDER';
   const TYPE_DOCUMENT = 'DOCUMENT';
+  const TYPE_ROOT_FOLDER = 'ROOT_FOLDER';
 
   browseVm.TYPE_FOLDER = TYPE_FOLDER;
   browseVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
@@ -78,7 +79,11 @@ function BrowseController(
     browseVm.breadcrumbs = [];
     browseVm.permissions = {};
     browseVm.performAction = browseVm.isMove ? moveNode : copyNode;
-    browseVm.sourceFolder = _.cloneDeep(browseVm.currentFolder);
+
+    browseVm.sourceFolderUuid = browseVm.currentFolder.type === TYPE_ROOT_FOLDER ?
+      browseVm.currentFolder.workGroup :
+      browseVm.currentFolder.uuid;
+
     browseVm.canDisplayFiles = browseVm.canDisplayFiles
       && browseVm.nodeItems
       && browseVm.nodeItems.length === 1; // Cannot add version with multiple nodes
@@ -208,7 +213,7 @@ function BrowseController(
       .then(currentFolder => {
         browseVm.breadcrumbs.push(...currentFolder.treePath.slice(1));
 
-        if (currentFolder.type !== 'ROOT_FOLDER') {
+        if (currentFolder.type !== TYPE_ROOT_FOLDER) {
           browseVm.breadcrumbs.push(currentFolder);
         }
 
@@ -454,7 +459,7 @@ function BrowseController(
     }
 
     if (browseVm.isMove) {
-      return _.last(browseVm.breadcrumbs).uuid !== browseVm.sourceFolder.uuid;
+      return _.last(browseVm.breadcrumbs).uuid !== browseVm.sourceFolderUuid;
     }
 
     return true;
