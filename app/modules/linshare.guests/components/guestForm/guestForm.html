@@ -225,7 +225,7 @@
                 name="user-space"
                 type="checkbox"
                 ng-checked="formVm.guestObject.form.activateUserSpace"
-                ng-click="formVm.toggleAdvancedOptions()"
+                ng-change="formVm.toggleRestrictedField()"
                 ng-model="formVm.guestObject.canUpload"
                 ng-disabled="!formVm.guestObject.allowedToUpload.canOverride"
               />
@@ -259,10 +259,10 @@
             <div class="form-group fg-line">
               <div
                 ls-autocomplete-user="USERS"
-                disabled="!formVm.guestObject.allowedToRestrict.canOverride"
-                data-selected-users-list="formVm.guestObject.restrictedContacts"
-                data-is-required="formVm.guestObject.form.activateUserSpace && formVm.guestObject.form.activateRestricted"
-                data-with-email="false"
+                disabled="!formVm.guestObject.restricted || !formVm.guestObject.canUpload"
+                selected-users-list="formVm.guestObject.restrictedContacts"
+                is-required="formVm.guestObject.form.activateUserSpace && formVm.guestObject.form.activateRestricted"
+                with-email="false"
               >
               </div>
             </div>
@@ -292,7 +292,7 @@
                 </p>
                 <p
                   class="close-list-icone-btn pull-right"
-                  ng-if="formVm.guestObject.allowedToRestrict.canOverride"
+                  ng-show="formVm.guestObject.restricted && formVm.guestObject.canUpload"
                   ng-click="formVm.guestObject.restrictedContacts.splice(results.length - $index -1, 1)"
                 >
                   <i class="zmdi zmdi-close"></i>

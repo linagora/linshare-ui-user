@@ -9,7 +9,7 @@ function guestFormController(lsAppConfig, sidebarService, formUtilsService) {
   const { onUpdatedGuest, onCreatedGuest } = sidebarService.getData();
 
   formVm.productionMode = lsAppConfig.production;
-  formVm.toggleAdvancedOptions = toggleAdvancedOptions;
+  formVm.toggleRestrictedField = toggleRestrictedField;
   formVm.onRestrictedChange = onRestrictedChange;
   formVm.getRestrictedContactsValidity = getRestrictedContactsValidity;
   formVm.$onInit = $onInit;
@@ -32,7 +32,7 @@ function guestFormController(lsAppConfig, sidebarService, formUtilsService) {
     }
   }
 
-  function toggleAdvancedOptions() {
+  function toggleRestrictedField() {
     formVm.guestObject.form.activateUserSpace = !formVm.guestObject.form.activateUserSpace;
     formVm.guestObject.restricted = !formVm.guestObject.form.activateUserSpace ? false : formVm.guestObject.restricted;
   }
@@ -54,7 +54,12 @@ function guestFormController(lsAppConfig, sidebarService, formUtilsService) {
   }
 
   function getRestrictedContactsValidity() {
-    const validity = formVm.guestObject.restricted && formVm.guestObject.restrictedContacts.length > 0;
+    const validity = !formVm.guestObject.canUpload ||
+      !formVm.guestObject.restricted ||
+      (
+        formVm.guestObject.restricted &&
+        formVm.guestObject.restrictedContacts.length > 0
+      );
 
     formVm.form.$setValidity('restrictedContactsRequired', validity);
 
