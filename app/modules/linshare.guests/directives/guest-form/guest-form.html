@@ -145,23 +145,21 @@
           </div>
         </div>
       </div>
-      <div class="m-b-30 col-xs-12 field-ctn"
-           data-ng-show="guestObject.allowedToUpload.enable && guestObject.allowedToUpload.canOverride">
+      <div class="m-b-30 col-xs-12 field-ctn" ng-if="::guestObject.allowedToUpload.enable">
         <div class="fg-line">
           <div class="form-inline">
             <label for="user-space">{{"SIDEBAR.LABEL.ACTIVATE_USER_SPACE" | translate}} :</label>
             <label class="checkbox checkbox-inline">
               <input id="user-space" name="user-space" type="checkbox"
-                     x-ng-checked="guestObject.form.activateUserSpace"
-                     x-ng-click="guestObject.form.activateUserSpace = !guestObject.form.activateUserSpace"
-                     x-ng-model="guestObject.canUpload"
-                     x-ng-disabled="!guestObject.allowedToUpload.canOverride"/>
+                ng-change="guestObject.onCanUploadUpdate()"
+                ng-model="guestObject.canUpload"
+                ng-disabled="!guestObject.allowedToUpload.canOverride"/>
               <i class="input-helper"></i>
             </label>
           </div>
         </div>
       </div>
-      <div class="m-b-30 col-xs-12 field-ctn" x-ng-show="guestObject.allowedToRestrict.enable">
+      <div class="m-b-30 col-xs-12 field-ctn" ng-show="::guestObject.allowedToRestrict.enable">
         <div class="fg-line">
           <div class="form-inline">
             <label for="restrict-contact" class="p-b-10">
@@ -169,21 +167,22 @@
             </label>
             <label class="checkbox checkbox-inline">
               <input id="restrict-contact" name="restrict-contact" type="checkbox"
-                     x-ng-checked="guestObject.form.activateRestricted"
-                     x-ng-click="guestObject.form.activateRestricted = !guestObject.form.activateRestricted"
-                     ng-change="guestObject.onRestrictedUpdate()"
-                     x-ng-model="guestObject.restricted"
-                     x-ng-disabled="!guestObject.allowedToRestrict.canOverride"/>
+                ng-change="guestObject.onRestrictedUpdate()"
+                ng-model="guestObject.restricted"
+                ng-disabled="!guestObject.allowedToRestrict.canOverride || !guestObject.canUpload"/>
               <i class="input-helper"></i>
             </label>
           </div>
         </div>
-        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" x-ng-hide="!guestObject.form.activateRestricted">
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!guestObject.restricted">
           <x-ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
             <div class="form-group fg-line">
-              <div ls-autocomplete-user="USERS" disabled="!guestObject.allowedToRestrict.canOverride" data-selected-users-list="guestObject.restrictedContacts"
-                   data-is-required="guestObject.form.activateUserSpace && guestObject.form.activateRestricted"
-                   data-with-email="false">
+              <div
+                ls-autocomplete-user="USERS"
+                data-selected-users-list="guestObject.restrictedContacts"
+                data-is-required="guestObject.canUpload && guestObject.restricted"
+                data-with-email="false"
+              >
               </div>
             </div>
           </x-ng-form>
@@ -211,7 +210,6 @@
                 </p>
                 <p
                   class="close-list-icone-btn pull-right"
-                  ng-if="guestObject.allowedToRestrict.canOverride"
                   ng-click="guestObject.restrictedContacts.splice(results.length - $index -1, 1)"
                 >
                   <i class="zmdi zmdi-close"></i>

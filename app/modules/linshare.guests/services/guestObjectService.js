@@ -90,6 +90,7 @@
         self.update = update;
         self.onRestrictedUpdate = onRestrictedUpdate;
         self.getRestrictedContactsValidity = getRestrictedContactsValidity;
+        self.onCanUploadUpdate = onCanUploadUpdate;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
         setFormValue().then(function(formData) {
           self.form = formData;
@@ -353,7 +354,6 @@
      *  @memberOf LinShare.guests.GuestObjectService
      */
     function update() {
-      /* jshint validthis:true */
       self = this;
       var
         deferred = $q.defer(),
@@ -376,10 +376,19 @@
       }
     }
 
+    function onCanUploadUpdate() {
+      self = this;
+
+      self.restricted = !self.canUpload ? false : self.restricted;
+    }
+
     function getRestrictedContactsValidity(formObject) {
       self = this;
 
-      const validity = self.restricted && self.restrictedContacts.length > 0;
+      const validity = !self.canUpload || !self.restricted || (
+        self.restricted &&
+        self.restrictedContacts.length > 0
+      );
 
       formObject.$setValidity('restrictedContactsRequired', validity);
 
