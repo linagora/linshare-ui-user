@@ -65,6 +65,63 @@ md-tooltip .md-content {
 /**********************
  RECIPIENTS AUTOCOMPLETE
 ***********************/
+#user-autocomplete {
+  input {
+    font-size: 12px;
+    padding-left: 0;
+  }
+
+  md-autocomplete-wrap {
+    box-shadow: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+
+.autocomplete-custom-template .md-autocomplete-suggestion {
+  border-bottom: 1px solid #e0e0e0;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  white-space: normal;
+  line-height: unset;
+}
+
+.user-autocomplete-result {
+  display: flex;
+  flex-direction: column;
+
+  &--information {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &--action {
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  &--fist-letter {
+    width: 26px;
+    height: 26px;
+    background-color: $primary-color;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 27px;
+    margin-right: 10px;
+  }
+
+  &--label {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+
+    small {
+      margin-top: 2px;
+    }
+  }
+}
 
 .recipientsAutocomplete {
   height: 33px;
@@ -820,7 +877,7 @@ li.dp-actions {
 }
 
 /**********************
- MD-CHECKBOX FIX
+Angular Material Override
 ***********************/
 
 md-checkbox.md-checked .md-icon {
@@ -828,5 +885,9 @@ md-checkbox.md-checked .md-icon {
 }
 
 .md-checkbox-enabled[selected] .md-icon {
+  background-color: $primary-color;
+}
+
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
   background-color: $primary-color;
 }

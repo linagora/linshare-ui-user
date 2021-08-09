@@ -36,29 +36,34 @@
           </div>
         </div>
 
-        <div class="form-group fg-line">
-          <div
-            ls-autocomplete-user="SHARING"
-            on-select-function="quickShareVm.shareObject.addRecipient"
-            data-with-guest="true"
-            auto-focus-input
-          >
-          </div>
+        <div class="form-group">
+          <user-autocomplete-input
+            search-type="SHARING"
+            placeholder="RIGHT_PANEL.SHARE.RECIPIENTS_PLACEHOLDER"
+            on-select="quickShareVm.shareObject.addRecipient"
+            allow-creating-guest="true"
+            allow-adding-email="true"
+          />
         </div>
+
         <div class="custom-list-body col-xs-12 ">
           <div class="custom-list-item"
               x-ng-repeat="recipient in quickShareVm.shareObject.getRecipients() | orderBy : '-' as results"
               tooltip-placement="bottom" tooltip-popup-delay="700"
-              uib-tooltip="{{recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail || recipient.domain}}">
+              uib-tooltip="{{
+                recipient.firstName ?
+                  recipient.firstName + ' ' + recipient.lastName +' : '+recipient.mail :
+                  recipient.mail
+              }}">
             <p class="pull-left circle-ctn">
-              <span x-ng-show="recipient.domain" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
-              <span x-ng-show="!recipient.domain" class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
+              <span x-ng-show="recipient.firstName" class="circle  user-bg">{{recipient.firstName.charAt(0)}}</span>
+              <span x-ng-show="!recipient.firstName" class="circle  user-bg">{{recipient.mail.charAt(0).toUpperCase()}}</span>
             </p>
             <div class="pull-left name-recipients-ctn">
-              <p x-ng-show="recipient.domain" class="pull-left inner-text-li">
+              <p x-ng-show="recipient.firstName" class="pull-left inner-text-li">
                 {{recipient.firstName + ' ' + recipient.lastName}}
               </p>
-              <p x-ng-show="!recipient.domain" class="pull-left inner-text-li">
+              <p x-ng-show="!recipient.firstName" class="pull-left inner-text-li">
                 {{recipient.mail}}
               </p>
               <p class="close-list-icone-btn pull-right"

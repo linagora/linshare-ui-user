@@ -1,0 +1,42 @@
+<div ng-cloak>
+  <md-autocomplete
+    id="user-autocomplete"
+    placeholder="{{inputVm.placeholder || 'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER' | translate }}"
+    ng-disabled="inputVm.disabled"
+    md-clear-button="false"
+    md-delay="300"
+    md-items="item in inputVm.searchUsers()"
+    md-search-text-change="inputVm.searchUsers(inputVm.searcPattern)"
+    md-search-text="inputVm.searchPattern"
+    md-selected-item-change="inputVm.onSelectedItemChange(item)"
+    md-menu-class="autocomplete-custom-template"
+    md-min-length="0"
+    md-mode="standard"
+    md-no-cache="true"
+    input-aria-label="user autocomplete"
+  >
+    <md-item-template>
+      <div class="user-autocomplete-result">
+        <div class="user-autocomplete-result--information">
+          <span class="user-autocomplete-result--fist-letter"> {{::item.label.firstLetter}} </span>
+          <span class="user-autocomplete-result--label">
+            <span class="set-ellipsis" title="{{::item.label.name}}">{{::item.label.name}}</span>
+            <small class="set-ellipsis">{{::item.label.info}}</small>
+          </span>
+        </div>
+
+        <div class="user-autocomplete-result--action">
+          <a
+            href=""
+            ng-if="::item.canCreateGuest"
+            ng-click="inputVm.createGuestFromMail(item.mail)"
+            event-propagation-stop
+            translate
+          >
+            RIGHT_PANEL.SHARE.CREATE_GUEST_ACCOUNT
+          </a>
+        </div>
+      </div>
+    </md-item-template>
+  </md-autocomplete>
+</div>

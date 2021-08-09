@@ -80,7 +80,9 @@
       "MORE_OPTIONS": "Thêm lựa chọn",
       "ADVANCED_OPTIONS": "Tùy chọn nâng cao",
       "RECIPIENTS": "Thêm người nhận",
-      "CREATE_MAILING_LIST": "Tạo danh sách người nhận"
+      "RECIPIENTS_PLACEHOLDER": "Tìm người nhận chia sẻ",
+      "CREATE_MAILING_LIST": "Tạo danh sách người nhận",
+      "CREATE_GUEST_ACCOUNT": "Tạo tài khoản khách?"
     },
     "SHARE_OPTIONS": {
       "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Buộc chia sẻ ẩn danh cho tất cả người nhận",

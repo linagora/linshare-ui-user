@@ -96,8 +96,10 @@
         "MORE_OPTIONS": "Расширенные опции",
         "ADVANCED_OPTIONS": "Расширенные настройки",
         "RECIPIENTS": "Добавить получателей",
+        "RECIPIENTS_PLACEHOLDER": "Поиск получателей общего доступа",
         "CREATE_MAILING_LIST": "Сохранить",
-        "CREATE_MAILING_LIST_ALT": "Создать список рассылки"
+        "CREATE_MAILING_LIST_ALT": "Создать список рассылки",
+        "CREATE_GUEST_ACCOUNT": "Создать гостевую учетную запись?"
       },
       "SHARE_OPTIONS": {
         "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Принудительный анонимный доступ для всех получателей",

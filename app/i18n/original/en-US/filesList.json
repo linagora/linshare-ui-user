@@ -97,8 +97,10 @@
       "MORE_OPTIONS": "more options",
       "ADVANCED_OPTIONS": "Advanced options",
       "RECIPIENTS": "Add recipients",
+      "RECIPIENTS_PLACEHOLDER": "Search for share recipients",
       "CREATE_MAILING_LIST": "Save",
-      "CREATE_MAILING_LIST_ALT": "Create a mailing list"
+      "CREATE_MAILING_LIST_ALT": "Create a mailing list",
+      "CREATE_GUEST_ACCOUNT": "Create guest account?"
     },
     "SHARE_OPTIONS": {
       "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Force anonymous share for all recipients",

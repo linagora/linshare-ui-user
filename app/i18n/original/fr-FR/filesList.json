@@ -96,8 +96,10 @@
       "MORE_OPTIONS": "plus d'options",
       "ADVANCED_OPTIONS": "Paramètres avancés",
       "RECIPIENTS": "Ajouter des destinataires",
+      "RECIPIENTS_PLACEHOLDER": "Rechercher des destinataires de partage",
       "CREATE_MAILING_LIST": "Sauvegarder",
-      "CREATE_MAILING_LIST_ALT": "Créer une liste d'envoi"
+      "CREATE_MAILING_LIST_ALT": "Créer une liste d'envoi",
+      "CREATE_GUEST_ACCOUNT": "Créer un compte invité ?"
     },
     "SHARE_OPTIONS": {
       "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Forcer le partage anonyme pour tous les destinataires",

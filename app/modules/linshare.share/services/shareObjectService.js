@@ -118,45 +118,25 @@ angular.module('linshare.share')
       });
     }
 
-    //TODO: shouldn't exist same as app/modules/linshare.components/autocompleteUsers/autocompleteUsersController.js
-    ShareObjectForm.prototype.addRecipient = function() {
-      var contact = this.selectedUser;
-      var exists = false;
-
-      switch (contact.type) {
+    ShareObjectForm.prototype.addRecipient = function(recipient = {}) {
+      switch (recipient.type) {
         case 'simple':
-          angular.forEach(recipients, function (elem) {
-            if (elem.mail === contact.identifier) {
-              exists = true;
-              $log.info('The user ' + contact.identifier + ' is already in the recipients list');
-            }
-          });
-          if (!exists) {
-            contact.mail = contact.identifier;
-            recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
+          if (!recipients.some(existed => existed.mail === recipient.identifier)) {
+            recipient.mail = recipient.identifier;
+            recipients.push(_.omit(recipient, 'restrictedContacts', 'type', 'display', 'identifier', 'label'));
           }
           break;
+
         case 'user':
-          angular.forEach(recipients, function (elem) {
-            if (elem.mail === contact.mail && elem.domain === contact.domain) {
-              exists = true;
-              $log.info('The user ' + contact.mail + ' is already in the recipients list');
-            }
-          });
-          if (!exists) {
-            recipients.push(_.omit(contact, 'restrictedContacts', 'type', 'display', 'identifier'));
+          if (!recipients.some(existed => existed.mail === recipient.mail && existed.domain === recipient.domain)) {
+            recipients.push(_.omit(recipient, 'restrictedContacts', 'type', 'display', 'identifier', 'label'));
           }
           break;
+
         case 'mailinglist':
-          _.forEach(mailingListUuid, function(element) {
-            if (element.identifier === contact.identifier) {
-              exists = true;
-              $log.info('The list ' + contact.listName + ' is already in the mailinglist');
-            }
-          });
-          if (!exists) {
-            mailingListUuid.push(contact.identifier);
-            mailingList.push(_.omit(contact, 'display', 'identifier'));
+          if (!mailingListUuid.some(existed => existed.identifier === recipient.identifier)) {
+            mailingListUuid.push(recipient.identifier);
+            mailingList.push(_.omit(recipient, 'display', 'identifier', 'label'));
           }
           break;
       }

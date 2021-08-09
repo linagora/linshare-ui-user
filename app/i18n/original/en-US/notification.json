@@ -58,6 +58,12 @@
       "TITLE": "Member deletion",
       "TEXT": "You are about to remove {{firstName}} {{lastName}} from the drive {{sharedSpaceName}} and all related workgroups.",
       "SELF_REMOVE_TEXT": "You are about to remove yourself from the drive {{sharedSpaceName}}. You will no longer have access to this drive."
+    },
+    "ON_GUEST_QUICK_CREATE": {
+      "CANCEL_BUTTON": "No",
+      "CONFIRM_BUTTON": "Yes",
+      "TITLE": "Create guest?",
+      "TEXT": "You will invite {{mail}} to be a guest."
     }
   },
   "TOAST_ALERT": {

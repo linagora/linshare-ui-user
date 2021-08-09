@@ -50,3 +50,5 @@ require('./working-date-picker/working-date-picker.directive');
 require('./dateTimePicker/dateTimePicker');
 require('./dateTimePicker/dateTimePickerController');
 require('./dateTimePicker/hourPickerValidator');
+require('./userAutocompleteInput/userAutocompleteInput');
+require('./userAutocompleteInput/userAutocompleteInputController');

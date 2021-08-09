@@ -58,6 +58,12 @@
       "TITLE": "Êtes-vous sûr?",
       "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} du Drive {{driveName}} et  par conséquent de tous les groupes de travail au sein de celui-ci.",
       "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du drive {{sharedSpaceName}}. Vous n'aurez plus accès à ce drive."
+    },
+    "ON_GUEST_QUICK_CREATE": {
+      "CANCEL_BUTTON": "Non",
+      "CONFIRM_BUTTON": "Oui",
+      "TITLE": "Créer un invité ?",
+      "TEXT": "Vous inviterez {{mail}} en tant qu'invité."
     }
   },
   "TOAST_ALERT": {

@@ -58,6 +58,12 @@
       "TITLE": "Xóa thành viên",
       "TEXT": "Bạn sắp xóa {{firstName}} {{lastName}} khỏi ổ đĩa {{driveName}} và tất cả các nhóm làm việc liên quan.",
       "SELF_REMOVE_TEXT": "Bạn sắp xóa chính mình khỏi ổ đĩa {{sharedSpaceName}}. Bạn sẽ không có quyền truy cập vào ổ đĩa này nữa."
+    },
+    "ON_GUEST_QUICK_CREATE": {
+      "CANCEL_BUTTON": "Không",
+      "CONFIRM_BUTTON": "Đồng ý",
+      "TITLE": "Tạo khách?",
+      "TEXT": "Bạn sẽ mời {{mail}} làm khách."
     }
   },
   "TOAST_ALERT": {
