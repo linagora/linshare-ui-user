@@ -89,6 +89,7 @@ md-tooltip .md-content {
 .user-autocomplete-result {
   display: flex;
   flex-direction: column;
+  height: 35px;
 
   &--information {
     display: flex;
@@ -890,4 +891,8 @@ md-checkbox.md-checked .md-icon {
 
 md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
   background-color: $primary-color;
+}
+
+.md-autocomplete-suggestions-container .md-autocomplete-suggestion.selected {
+  background-color: $primary-alt-color9
 }
