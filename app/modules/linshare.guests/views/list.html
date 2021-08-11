@@ -434,7 +434,7 @@
               <a x-ng-click="showCheckboxes ? guestVm.tableAddSelectedGuest(guestVm.selectedGuests, guestData) : null"
                  class="visible-xs">
                 <div class="item-l" x-ng-class="{'invisible' : showCheckboxes}">
-                  <span class="first-letter guest-account-li">{{::guestData.firstName.charAt(0)}}</span>
+                  <span class="first-letter guest-account-li">{{ guestData.firstName ? guestData.firstName.charAt(0) : guestData.mail.charAt(0) }}</span>
                 </div>
                 <div class="checkbox-ctn-thumb" x-ng-class="{'maintain-vis': guestData.isSelected,
                                       'hidden-xs' : !showCheckboxes}">
@@ -442,7 +442,7 @@
               </a>
               <a x-ng-click="guestVm.tableAddSelectedGuest(guestVm.selectedGuests, guestData)" class="hidden-xs">
                 <div class="item-l" x-ng-class="{'invisible' : showCheckboxes}">
-                  <span class="first-letter guest-account-li">{{::guestData.firstName.charAt(0)}}</span>
+                  <span class="first-letter guest-account-li">{{ guestData.firstName ? guestData.firstName.charAt(0) : guestData.mail.charAt(0) }}</span>
                 </div>
                 <div class="checkbox-ctn-thumb"
                      x-ng-class="{'maintain-vis': guestData.isSelected, 'hidden-xs' : !showCheckboxes}">

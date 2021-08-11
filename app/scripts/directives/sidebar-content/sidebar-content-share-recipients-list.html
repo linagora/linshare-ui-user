@@ -36,13 +36,13 @@
     >
       <span
         class="firstLetterFormat"
-        data-ng-show="!shareElement.recipient.external"
+        data-ng-show="!shareElement.recipient.external && shareElement.recipient.firstName"
       >
         {{shareElement.recipient.firstName.charAt(0)}}
       </span>
       <span
         class="firstLetterFormat"
-        data-ng-show="shareElement.recipient.external"
+        data-ng-show="shareElement.recipient.external || !shareElement.recipient.firstName"
       >
         {{shareElement.recipient.mail.charAt(0)}}
       </span>
@@ -50,7 +50,7 @@
       <p class="recipientsInfo">
         <span
           class="user-full-name"
-          data-ng-show="!shareElement.recipient.external"
+          data-ng-show="!shareElement.recipient.external && shareElement.recipient.firstName"
         >
           <strong>
             {{shareElement.recipient.firstName}}
@@ -61,7 +61,7 @@
         </span>
         <span
           class="user-full-name"
-          data-ng-show="shareElement.recipient.external"
+          data-ng-show="shareElement.recipient.external || !shareElement.recipient.firstName"
         >
           <strong>{{shareElement.recipient.mail}}</strong>
         </span>
