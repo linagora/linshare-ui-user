@@ -123,7 +123,7 @@ angular.module('linshare.share')
         case 'simple':
           if (!recipients.some(existed => existed.mail === recipient.identifier)) {
             recipient.mail = recipient.identifier;
-            recipients.push(_.omit(recipient, 'restrictedContacts', 'type', 'display', 'identifier', 'label'));
+            recipients.push(_.omit(recipient, 'restrictedContacts', 'type', 'display', 'identifier', 'label', 'canCreateGuest'));
           }
           break;
 
