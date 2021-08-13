@@ -25,10 +25,9 @@
           </span>
         </div>
 
-        <div class="user-autocomplete-result--action">
+        <div class="user-autocomplete-result--action" ng-if="::item.canCreateGuest">
           <a
             href=""
-            ng-if="::item.canCreateGuest"
             ng-click="inputVm.createGuestFromMail(item.mail)"
             event-propagation-stop
             translate
