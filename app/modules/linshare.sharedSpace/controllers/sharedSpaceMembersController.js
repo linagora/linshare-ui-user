@@ -297,11 +297,13 @@ function sharedSpaceMembersController(
       ),
       forceOverride
     ).then(() => {
-      sharedSpaceMembersVm.currentWorkGroup.current.role = {
-        uuid: member.role.uuid,
-        name: member.role.name
-      };
-      fetchPermissionsOnCurrentSharedSpace();
+      if (member.account && member.account.uuid === sharedSpaceMembersVm.loggedUser.uuid) {
+        sharedSpaceMembersVm.currentWorkGroup.current.role = {
+          uuid: member.role.uuid,
+          name: member.role.name
+        };
+        fetchPermissionsOnCurrentSharedSpace();
+      }
     });
   }
 
