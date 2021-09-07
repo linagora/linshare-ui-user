@@ -723,14 +723,8 @@ function WorkgroupNodesController(
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
   function openBrowser(nodeItems, isMove, canDisplayFiles) {
-    let currentFolder;
-
-    if(workgroupPermissions.FOLDER.CREATE) {
-      currentFolder = _.cloneDeep(workgroupNodesVm.currentFolder);
-    }
-
     browseService.show({
-      currentFolder,
+      currentFolder: _.cloneDeep(workgroupNodesVm.currentFolder),
       nodeItems,
       isMove,
       canDisplayFiles

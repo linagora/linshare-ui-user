@@ -80,9 +80,11 @@ function BrowseController(
     browseVm.permissions = {};
     browseVm.performAction = browseVm.isMove ? moveNode : copyNode;
 
-    browseVm.sourceFolderUuid = browseVm.currentFolder.type === TYPE_ROOT_FOLDER ?
-      browseVm.currentFolder.workGroup :
-      browseVm.currentFolder.uuid;
+    if (browseVm.currentFolder && browseVm.currentFolder.type) {
+      browseVm.sourceFolderUuid = browseVm.currentFolder.type === TYPE_ROOT_FOLDER ?
+        browseVm.currentFolder.workGroup :
+        browseVm.currentFolder.uuid;
+    }
 
     browseVm.canDisplayFiles = browseVm.canDisplayFiles
       && browseVm.nodeItems
