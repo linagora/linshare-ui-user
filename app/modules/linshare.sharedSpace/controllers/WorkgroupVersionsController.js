@@ -64,10 +64,8 @@
     workgroupPermissions,
     workgroupVersionsRestService
   ) {
-    var workgroupVersionsVm = this;
+    const workgroupVersionsVm = this;
     const TYPE_VERSION = 'DOCUMENT_REVISION';
-    const TYPE_DOCUMENT = 'DOCUMENT';
-    const TYPE_FOLDER = 'FOLDER';
 
     workgroupVersionsVm.canCopyVersionToPersonalSpace = user.canUpload;
     workgroupVersionsVm.canDeleteNodes = false;
@@ -335,11 +333,7 @@
      */
     function openBrowser(nodeItems) {
       browseService.show({
-        currentList: [],
-        nodeItems: nodeItems,
-        hasFolder:  _.some(nodeItems, {'type': TYPE_FOLDER}),
-        hasFile:  _.some(nodeItems, {'type': TYPE_DOCUMENT}),
-        restService: workgroupNodesRestService
+        nodeItems
       }).then(function(data) {
         openBrowserNotify(data);
       }).finally(function() {
