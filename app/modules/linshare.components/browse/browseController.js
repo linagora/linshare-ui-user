@@ -191,20 +191,15 @@ function BrowseController(
   }
 
   function loadFolderThenList(folder) {
-    sharedSpaceRestService.get(folder.workGroup, null, true)
+    sharedSpaceRestService.get(folder.workGroup, {
+      withRole: true,
+      populateDrive: true
+    })
       .then(workgroup => {
         browseVm.currentWorkgroup = workgroup;
         browseVm.breadcrumbs.push(workgroup);
 
-        if (!workgroup.parentUuid) {
-          return $q.when([workgroup]);
-        }
-
-        return sharedSpaceRestService.get(workgroup.parentUuid, null, true).then(drive => {
-          browseVm.breadcrumbs.unshift(drive);
-
-          return [workgroup, drive];
-        });
+        return [workgroup, workgroup.drive].filter(Boolean);
       })
       .then(workgroupPermissionsService.getWorkgroupsPermissions)
       .then(workgroupPermissionsService.formatPermissions)

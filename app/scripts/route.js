@@ -221,8 +221,9 @@
               });
           },
           workgroup: function(currentFolder, nodesList, $transition$, sharedSpaceRestService) {
-            return sharedSpaceRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
-              return workgroup;
+            return sharedSpaceRestService.get($transition$.params().workgroupUuid, {
+              withRole: true,
+              populateDrive: true
             }).catch(() => {
               $transition$.abort();
             });
@@ -252,7 +253,10 @@
           searchParams: null
         },
         resolve: {
-          sharedSpace: ($stateParams, sharedSpaceRestService) => sharedSpaceRestService.get($stateParams.sharedSpace, false, true),
+          sharedSpace: ($stateParams, sharedSpaceRestService) => sharedSpaceRestService.get($stateParams.sharedSpace, {
+            withRole: true,
+            populateDrive: true
+          }),
           folder: ($stateParams, workgroupNodesRestService) => workgroupNodesRestService.get(
             $stateParams.sharedSpace, $stateParams.folder, true),
           permissions: (sharedSpace, workgroupPermissionsService) => {
@@ -307,8 +311,8 @@
               $transition$.params().workgroupUuid, $transition$.params().folderUuid);
           },
           workgroup: function($transition$, sharedSpaceRestService) {
-            return sharedSpaceRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
-              return workgroup;
+            return sharedSpaceRestService.get($transition$.params().workgroupUuid, {
+              withRole: true
             });
           },
           workgroupPermissions: function(workgroup, workgroupPermissionsService) {
@@ -363,9 +367,7 @@
               $transition$.params().workgroupUuid, $transition$.params().fileUuid);
           },
           workgroup: function($transition$, sharedSpaceRestService) {
-            return sharedSpaceRestService.get($transition$.params().workgroupUuid, false, true).then(function(workgroup) {
-              return workgroup;
-            });
+            return sharedSpaceRestService.get($transition$.params().workgroupUuid, { withRole: true });
           },
           workgroupPermissions: function(workgroup, workgroupPermissionsService) {
             return workgroupPermissionsService

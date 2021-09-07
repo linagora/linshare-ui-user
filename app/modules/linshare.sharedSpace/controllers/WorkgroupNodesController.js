@@ -146,12 +146,6 @@ function WorkgroupNodesController(
         workgroupNodesVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue < 0 ?
           Infinity :
           unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
-
-        if (workgroup.parentUuid) {
-          sharedSpaceRestService.get(workgroup.parentUuid, null, true, true).then(drive => {
-            workgroupNodesVm.drive = drive;
-          });
-        }
       });
 
     Object.assign(
@@ -960,7 +954,11 @@ function WorkgroupNodesController(
      * @memberOf LinShare.sharedSpace.WorkgroupNodesController
      */
   function showWorkgroupDetails(showMemberTab) {
-    sharedSpaceRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, true, true)
+    sharedSpaceRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, {
+      withRole: true,
+      withMembers: true,
+      populateDrive: true
+    })
       .then(workgroup => {
         // TODO : remove the map once the property userMail will be changed to mail
         workgroupNodesVm.currentSelectedDocument.membersForContactsList = _.map(
@@ -969,8 +967,6 @@ function WorkgroupNodesController(
             return { mail: member.userMail };
           }
         );
-
-        return fetchDriveOfWorkgroup(workgroup);
       })
       .then(workgroup => {
         workgroupNodesVm.currentDrive = workgroup.drive;
@@ -1352,16 +1348,6 @@ function WorkgroupNodesController(
   function goToDrive() {
     if (workgroupNodesVm.drive) {
       $state.go('sharedspace.drive', {driveUuid: workgroupNodesVm.drive.uuid});
-    }
-  }
-
-  function fetchDriveOfWorkgroup (workgroup) {
-    if (workgroup && workgroup.parentUuid) {
-      return sharedSpaceRestService.get(workgroup.parentUuid, null, true, true)
-        .then(drive => ({...workgroup, drive}))
-        .catch(() => workgroup);
-    } else {
-      return $q.resolve(workgroup);
     }
   }
 
