@@ -73,7 +73,8 @@
         autocompleteUsersVm.canCreateGuest = functionalities.GUESTS.enable;
         autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
         autocompleteUsersVm.functionality.maxValue = autocompleteUsersVm.functionality.maxValue || 3;
-        if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
+
+        if (promises[1].restricted) {
           autocompleteUsersVm.withEmail = false;
         }
       }).catch(function(error) {
