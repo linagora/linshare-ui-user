@@ -25,26 +25,37 @@ angular.module('linshare.share')
      * @memberOf linshare.share.ShareObjectService
      */
     function getFunctionalities() {
-      return $q.all([functionalityRestService.getAll(), authenticationRestService.getCurrentUser()])
-        .then(function(promises) {
-          var functionalities = promises[0];
+      return $q.all([
+        functionalityRestService.getAll(),
+        authenticationRestService.getCurrentUser()
+      ]).then(([
+        {
+          ANONYMOUS_URL,
+          ANONYMOUS_URL__FORCE_ANONYMOUS_SHARING,
+          UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION,
+          UNDOWNLOADED_SHARED_DOCUMENTS_ALERT,
+          SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER,
+          SHARE_EXPIRATION
+        },
+        currentUser
+      ]) => {
+        angular.extend(notificationDateForUSDA, UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION);
+        notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
+        notificationDateForUSDA.maxValue = notificationDateForUSDA.maxValue ? moment().add(notificationDateForUSDA.maxValue, 'days').valueOf() : undefined;
+        angular.extend(enableUSDA, UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
+        angular.extend(creationAcknowledgement,SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
+        angular.extend(expirationDate, SHARE_EXPIRATION);
+        angular.extend(secured, ANONYMOUS_URL);
 
-          angular.extend(notificationDateForUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT__DURATION);
-          notificationDateForUSDA.value = moment().add(notificationDateForUSDA.value, 'days').valueOf();
-          notificationDateForUSDA.maxValue = notificationDateForUSDA.maxValue ? moment().add(notificationDateForUSDA.maxValue, 'days').valueOf() : undefined;
-          angular.extend(enableUSDA, functionalities.UNDOWNLOADED_SHARED_DOCUMENTS_ALERT);
-          angular.extend(creationAcknowledgement,functionalities.SHARE_CREATION_ACKNOWLEDGEMENT_FOR_OWNER);
-          angular.extend(expirationDate, functionalities.SHARE_EXPIRATION);
-          angular.extend(secured, functionalities.ANONYMOUS_URL);
-          if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
-            secured.enable = false;
-          }
+        if (currentUser.restricted) {
+          secured.enable = false;
+        }
 
-          forceAnonymousSharing = Object.assign(
-            {},
-            functionalities.ANONYMOUS_URL__FORCE_ANONYMOUS_SHARING
-          );
-        });
+        forceAnonymousSharing = Object.assign(
+          {},
+          ANONYMOUS_URL__FORCE_ANONYMOUS_SHARING
+        );
+      });
     }
 
     function ShareObjectForm(shareJson) {

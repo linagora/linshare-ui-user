@@ -50,7 +50,7 @@ function userAutocompleteInputController(
         ...COMPLETION
       };
 
-      if (loggedUser.accountType === lsAppConfig.accountType.guest && loggedUser.restricted) {
+      if (loggedUser.restricted) {
         inputVm.allowAddingEmail = false;
       }
     });
