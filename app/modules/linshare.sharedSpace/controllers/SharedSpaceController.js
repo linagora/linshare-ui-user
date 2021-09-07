@@ -122,7 +122,7 @@ function SharedSpaceController(
     if (sharedSpaceVm.isDriveState && sharedSpaceVm.driveUuid) {
       fetchingSharedSpaces.push(
         sharedSpaceRestService.getList(true, sharedSpaceVm.driveUuid),
-        sharedSpaceRestService.get(sharedSpaceVm.driveUuid, null, true)
+        sharedSpaceRestService.get(sharedSpaceVm.driveUuid, { withRole: true })
       );
     } else {
       fetchingSharedSpaces.push(sharedSpaceRestService.getList(true));
@@ -223,7 +223,10 @@ function SharedSpaceController(
           ...sharedSpace,
           name: newName
         }))
-        .then(item => sharedSpaceRestService.get(item.uuid, true, true))
+        .then(item => sharedSpaceRestService.get(item.uuid, {
+          withRole: true,
+          withMembers: true
+        }))
         .then(itemWithRole => {
           sharedSpaceVm.itemsList.push(itemWithRole);
           sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
@@ -462,7 +465,10 @@ function SharedSpaceController(
         item = _.assign(item, newItemDetails);
         sharedSpaceVm.canCreate = true;
 
-        return sharedSpaceRestService.get(item.uuid, true, true);
+        return sharedSpaceRestService.get(item.uuid, {
+          withMembers: true,
+          withRole: true
+        });
       })
       .then(newItemDetailsWithRole => {
         item = _.assign(item, newItemDetailsWithRole);

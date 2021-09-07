@@ -76,7 +76,6 @@ function workgroupNodesSearchController(
   workgroupSearchVm.showWorkgroupDetails = showWorkgroupDetails;
   workgroupSearchVm.thumbnailEngineActivated = lsAppConfig.thumbnailEngineActivated;
   workgroupSearchVm.canDownloadSelectedNodes = canDownloadSelectedNodes;
-  workgroupSearchVm.driveUuid = $state.params && $state.params.driveUuid;
   workgroupSearchVm.updateSearchParams = updateSearchParams;
 
   workgroupSearchVm.getNodePath = node => node.treePath.slice(1).map(e => e.name).join('/');
@@ -102,12 +101,6 @@ function workgroupNodesSearchController(
       workgroupSearchVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue < 0 ?
         Infinity :
         unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
-
-      if (sharedSpace.parentUuid) {
-        sharedSpaceRestService.get(sharedSpace.parentUuid, null, true).then(drive => {
-          workgroupSearchVm.drive = drive;
-        });
-      }
     });
 
     Object.assign(
@@ -286,7 +279,7 @@ function workgroupNodesSearchController(
 
   function goToPreviousFolder(goToWorkgroupPage, folder) {
     if (goToWorkgroupPage) {
-      if (sharedSpace && sharedSpace.parentUuid) {
+      if (sharedSpace && sharedSpace.parentUuid && workgroupSearchVm.drive) {
         $state.go('sharedspace.drive', { driveUuid: sharedSpace.parentUuid });
       } else {
         $state.go('sharedspace.all');
@@ -324,8 +317,11 @@ function workgroupNodesSearchController(
   }
 
   function showWorkgroupDetails(showMemberTab) {
-    sharedSpaceRestService.get(sharedSpace.uuid, true, true)
-      .then(_fetchDriveOfWorkgroup)
+    sharedSpaceRestService.get(sharedSpace.uuid, {
+      withRole: true,
+      withMembers: true,
+      populateDrive: true
+    })
       .then(workgroup => {
         workgroupSearchVm.currentDrive = workgroup.drive;
         workgroupSearchVm.currentSelectedDocument.current = Object.assign({}, workgroup);
@@ -347,15 +343,6 @@ function workgroupNodesSearchController(
     if (workgroupSearchVm.drive) {
       $state.go('sharedspace.drive', {driveUuid: workgroupSearchVm.drive.uuid});
     }
-  }
-
-  function _fetchDriveOfWorkgroup(workgroup) {
-    if (workgroup && workgroup.parentUuid) {
-      return sharedSpaceRestService.get(workgroup.parentUuid, null, true)
-        .then(drive => ({...workgroup, drive}));
-    }
-
-    return $q.resolve(workgroup);
   }
 
   function _loadSidebarContent(content) {

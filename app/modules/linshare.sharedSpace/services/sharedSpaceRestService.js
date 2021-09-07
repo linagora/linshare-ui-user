@@ -50,19 +50,44 @@
 
     /**
      * @name get
-     * @desc Get a Workgroup object
-     * @param {String} workgroupUuid - The id of a Workgroup object
-     * @param {boolean} withMembers - Get members in this same request
+     * @desc Get a sharedspace object
+     * @param {String} uuid - The id of a Workgroup object
+     * @param {Object} options
+     * - withMembers: includes members
+     * - withRole: includes role
+     * - populateDrive: populate drive field if exists
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
-    function get(workgroupUuid, withMembers, withRole, isSilent) {
-      $log.debug('sharedSpaceRestService : get', workgroupUuid);
+    function get(
+      uuid,
+      {
+        withMembers = false,
+        withRole = false,
+        populateDrive = false
+      } = {}
+    ) {
+      $log.debug('sharedSpaceRestService : get', uuid);
 
-      return handler(Restangular.one(restUrl, workgroupUuid).get({
-        members: withMembers,
-        withRole: withRole
-      }), null ,isSilent);
+      return _fetchSharedSpace(uuid, false)
+        .then(sharedSpace => {
+          if (!sharedSpace.parentUuid || !populateDrive) {
+            return sharedSpace;
+          }
+
+          return _fetchSharedSpace(sharedSpace.parentUuid, true).then(drive => {
+            sharedSpace.drive = drive;
+
+            return sharedSpace;
+          }).catch(() => sharedSpace);
+        });
+
+      function _fetchSharedSpace(uuid, silent) {
+        return handler(Restangular.one(restUrl, uuid).get({
+          members: withMembers,
+          withRole: withRole
+        }), null, silent);
+      }
     }
 
     /**
