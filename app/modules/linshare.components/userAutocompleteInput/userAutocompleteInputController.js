@@ -44,10 +44,7 @@ function userAutocompleteInputController(
       functionalityRestService.getAll()
     ]).then(([loggedUser, { COMPLETION, GUESTS }]) => {
       inputVm.canCreateGuest =  GUESTS.enable && inputVm.allowCreatingGuest;
-      inputVm.functionality = {
-        value: 3,
-        ...COMPLETION
-      };
+      inputVm.textLengthToTriggerSearch = COMPLETION.value;
 
       if (loggedUser.restricted) {
         inputVm.allowAddingEmail = false;
@@ -90,10 +87,6 @@ function userAutocompleteInputController(
   }
 
   function searchUsers() {
-    if (inputVm.searchPattern.length < inputVm.functionality.value) {
-      return $q.resolve([]);
-    }
-
     return autocompleteUserRestService.search(inputVm.searchPattern, inputVm.searchType)
       .then(checkEmptyResult)
       .then(generateLabels);
