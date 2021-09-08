@@ -156,7 +156,7 @@ function WorkgroupNodesController(
           copyNodeToPersonalSpace([item]);
         },
         copyToWorkgroup: function(item) {
-          openBrowser([item]);
+          openBrowser([item], false, true);
         },
         showItemDetails: function(item) {
           showSelectedNodeDetails(item);
