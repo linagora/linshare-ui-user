@@ -409,34 +409,34 @@ function SharedSpaceController(
   }
 
   function showItemDetails(workgroupUuid, loadAction, memberTab) {
-    sharedSpaceRestService
-      .get(workgroupUuid, true, true)
-      .then(workgroup => {
-        sharedSpaceVm.currentSelectedDocument.current = Object.assign({}, workgroup);
-        sharedSpaceVm.currentSelectedDocument.original = Object.assign({}, workgroup);
+    sharedSpaceRestService.get(workgroupUuid, {
+      withMembers: true,
+      withRole: true
+    }).then(workgroup => {
+      sharedSpaceVm.currentSelectedDocument.current = Object.assign({}, workgroup);
+      sharedSpaceVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
-        if (sharedSpaceVm.currentSelectedDocument.current.quotaUuid) {
-          return sharedSpaceRestService
-            .getQuota(sharedSpaceVm.currentSelectedDocument.current.quotaUuid);
-        }
-      })
-      .then(quota => {
-        if (quota) {
-          sharedSpaceVm.currentSelectedDocument.quotas = Object.assign({}, quota);
-        }
+      if (sharedSpaceVm.currentSelectedDocument.current.quotaUuid) {
+        return sharedSpaceRestService
+          .getQuota(sharedSpaceVm.currentSelectedDocument.current.quotaUuid);
+      }
+    }).then(quota => {
+      if (quota) {
+        sharedSpaceVm.currentSelectedDocument.quotas = Object.assign({}, quota);
+      }
 
-        if (loadAction) {
-          openMemberTab(memberTab);
-          sharedSpaceVm.loadSidebarContent(lsAppConfig.workgroupPage);
-        }
-      });
+      if (loadAction) {
+        openMemberTab(memberTab);
+        sharedSpaceVm.loadSidebarContent(lsAppConfig.workgroupPage);
+      }
+    });
 
     /**
-       * @name openMemberTab
-       * @desc Check if we have to be on member tab on sidebar opening
-       * @param {boolean} ifMemberTab - Open member tab
-       * @memberOf LinShare.sharedSpace.SharedSpaceController
-       */
+     * @name openMemberTab
+     * @desc Check if we have to be on member tab on sidebar opening
+     * @param {boolean} ifMemberTab - Open member tab
+     * @memberOf LinShare.sharedSpace.SharedSpaceController
+     */
     function openMemberTab(ifMemberTab) {
       if (ifMemberTab) {
         sharedSpaceVm.mdtabsSelection.selectedIndex = 1;
