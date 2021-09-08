@@ -20,7 +20,6 @@
     '$state',
     '$timeout',
     '$transition$',
-    '$transitions',
     '$translate',
     'auditDetailsService',
     'contactsListsList',
@@ -51,7 +50,6 @@
     $state,
     $timeout,
     $transition$,
-    $transitions,
     $translate,
     auditDetailsService,
     contactsListsList,
@@ -67,9 +65,7 @@
     NgTableParams,
     toastService
   ) {
-
-    /* jshint validthis:true */
-    var contactsListsListVm = this;
+    const contactsListsListVm = this;
 
     var
       copySuffix,
@@ -117,6 +113,7 @@
     contactsListsListVm.switchVisibility = switchVisibility;
     contactsListsListVm.toggleFilterBySelectedFiles = toggleFilterBySelectedFiles;
     contactsListsListVm.toggleSearchState = toggleSearchState;
+    contactsListsListVm.updateContactsListDescription = updateContactsListDescription;
 
     activate();
 
@@ -683,6 +680,20 @@
         closeSearch();
       }
       contactsListsListVm.searchMobileDropdown = !contactsListsListVm.searchMobileDropdown;
+    }
+
+    function updateContactsListDescription(description) {
+      const targetSharedSpace = _.clone(contactsListsListVm.currentSelectedDocument.current);
+
+      contactsListsListVm.currentSelectedDocument.current.description = $translate.instant('SAVING');
+
+      contactsListsListRestService.update({ ...targetSharedSpace, description })
+        .then(() => {
+          contactsListsListVm.currentSelectedDocument.current.description = description;
+        })
+        .catch(() => {
+          contactsListsListVm.currentSelectedDocument.current.description = targetSharedSpace.description;
+        });
     }
   }
 })();

@@ -15,12 +15,11 @@
           </div>
         </div>
       </div>
-      <div title="{{'WIP' | translate}}">
-        <sidebar-description-input
-          placeholder="INFORMATION_TAB.NO_DESCRIPTION"
-          readonly="true"
-        ></sidebar-description-input>
-      </div>
+      <sidebar-description-input
+        placeholder="INFORMATION_TAB.NO_DESCRIPTION".
+        description="mainVm.sidebar.getData().currentSelectedDocument.current.description"
+        on-change="mainVm.sidebar.getData().updateContactsListDescription"
+      ></sidebar-description-input>
       <div class="content-detail-area">
         <div class="flex-ctn detail-info-ctn">
           <div class="item-l">
