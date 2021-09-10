@@ -967,6 +967,8 @@ function WorkgroupNodesController(
             return { mail: member.userMail };
           }
         );
+
+        return workgroup;
       })
       .then(workgroup => {
         workgroupNodesVm.currentDrive = workgroup.drive;
