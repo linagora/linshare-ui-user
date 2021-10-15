@@ -104,12 +104,12 @@
                 <input working-date-picker x-ng-click="open($event, 'opened')" type="text"
                   class="form-control date-picker-input" uib-datepicker-popup show-weeks="false" is-open="opened"
                   datepicker-options="::{
-                    minDate: quickShareVm.shareObject.getMinDate(),
-                    maxDate: quickShareVm.shareObject.getMaxDate()
+                    minDate: quickShareVm.shareObject.getMinExpirationDate(),
+                    maxDate: quickShareVm.shareObject.getMaxExpirationDate()
                   }"
-                  placeholder="{{quickShareVm.shareObject.expirationDate.value | lsDate: 'YYYY-MM-DD':locale}}"
-                  min="{{quickShareVm.shareObject.getMinDate() | lsDate: 'fullDate':locale }}"
-                  max="{{quickShareVm.shareObject.getMaxDate() | lsDate: 'fullDate':locale }}"
+                  placeholder="{{quickShareVm.shareObject.expirationDate.getDefaultExpirationDate() | lsDate: 'YYYY-MM-DD':locale}}"
+                  min="{{quickShareVm.shareObject.getMinExpirationDate() | lsDate: 'fullDate':locale }}"
+                  max="{{quickShareVm.shareObject.getMaxExpirationDate() | lsDate: 'fullDate':locale }}"
                   ng-disabled="!quickShareVm.shareObject.expirationDate.canOverride"
                   ng-model="quickShareVm.shareObject.expirationDate.value"
                   name="expirationDate"
@@ -205,10 +205,6 @@
             <label class="label-muted" for="notificationDateIfUndownloaded">
               {{"RIGHT_PANEL.SHARE_OPTIONS.NOTIFICATION_DATE" | translate}}:
             </label>
-            <!--
-              TODO: The directive shall be refactored with a proper template and passing different options.
-                    See app/modules/linshare.components/fileSearchComponent/fileSearchDirective.js for working-date-picker
-            -->
             <div
               class="datepicker-border-fix date-picker dp-blue col-xs-6"
               ng-class="{'is-opened': !!opened2 === true}">
@@ -219,12 +215,12 @@
                     type="text"
                     class="form-control date-picker-input"
                     uib-datepicker-popup show-weeks="false" is-open="opened2"
-                    datepicker-options="::{
-                      minDate: quickShareVm.shareObject.getMinDate(),
-                      maxDate: quickShareVm.shareObject.getMaxUSDADate()
+                    datepicker-options="{
+                      minDate: quickShareVm.shareObject.getMinNotificationDate(),
+                      maxDate: quickShareVm.shareObject.getMaxNotificationDate()
                     }"
-                    min="{{quickShareVm.shareObject.getMinDate() | lsDate: 'fullDate':locale}}"
-                    max="{{quickShareVm.shareObject.getMaxUSDADate() | lsDate: 'fullDate':locale}}"
+                    min="{{quickShareVm.shareObject.getMinNotificationDate() | lsDate: 'fullDate':locale}}"
+                    max="{{quickShareVm.shareObject.getMaxNotificationDate() | lsDate: 'fullDate':locale}}"
                     name="notificationDateIfUndownloaded"
                     ng-click="open($event, 'opened2')"
                     ng-disabled="!quickShareVm.shareObject.notificationDateForUSDA.canOverride"
