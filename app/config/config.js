@@ -67,7 +67,8 @@
         name: {
           'fr-FR': 'Nom',
           'en-US': 'Name',
-          'vi-VN': 'Tên'
+          'vi-VN': 'Tên',
+          'ru-RU': 'Имя'
         }
       },
 
