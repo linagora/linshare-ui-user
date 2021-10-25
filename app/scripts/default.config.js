@@ -130,10 +130,10 @@
         icon: 'zmdi zmdi-home',
         href: '',
         name: {
-          'fr': '',
-          'en': '',
-          'vi': '',
-          'ru': ''
+          'fr-FR': 'Nom',
+          'en-US': 'Name',
+          'vi-VN': 'Tên',
+          'ru-RU': 'Имя'
         }
       },
 
