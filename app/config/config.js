@@ -14,6 +14,9 @@
       // from the browser console to your software vendor
       debug: false,
       localPath: 'i18n/original', // custom your i18n folder path
+      //Warning: the following parameter will not be use if you defined a logout url via
+      //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
+      postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
 
       /** Define external URLs of changing/reseting password for1 internal user
        * - changePasswordUrl: shows to internal user when logged in
@@ -55,9 +58,6 @@
           country: 'Pусский'
         }
       },
-      //Warning: the following parameter will not be use if you defined a logout url via
-      //the HEADERS - X-LINSHARE-POST-LOGOUT-URL
-      postLogoutUrl: null, // default : null, example 'http://my.fake.page.for.sso'
 
       extLink: {
         enable: false,
@@ -72,6 +72,17 @@
         }
       },
 
+      oidcEnabled: false,
+      oidcSetting: {
+        authority: 'https://auth.linshare.local/',
+        client_id: 'linshare',
+        client_secret: 'linshare',
+        redirect_uri: window.location.origin + '/#!/oidc',
+        post_logout_redirect_uri: window.location.origin + '/#!/login',
+        response_type: 'code',
+        scope: 'openid email profile'
+      },
+
       /* Define the default role selected when adding a new member to a workgroup
        * Possible value:
        *  - ADMIN
@@ -82,6 +93,15 @@
        * If any other unknown value to system is set, the default order will be set (same as the list above)
        */
       defaultWorkgroupMemberRole: 'READER',
+      /* Define the default role selected when adding a new member to a drive
+       * Possible value:
+       *  - DRIVE_ADMIN
+       *  - DRIVE_WRITER
+       *  - DRIVE_READER
+       *
+       * If any other unknown value to system is set, the default order will be set (same as the list above)
+       */
+      defaultDriveMemberRole: 'DRIVE_READER',
 
       /* Define custom behavior for menu element in the main sidebar
        * suffix - object: Determine the suffix to add to menu element name if it is disabled
@@ -115,6 +135,19 @@
        */
       homePage: 'home',
       /* Determine show/hide of home link in sidebar menu */
-      hideHomeMenuLink: false
+      hideHomeMenuLink: false,
+
+      /*
+        Define configuration for the OTP uri generator.
+        - type, digits, algorithm, period: need to match with linshare-core configuration
+        - issuer: will determine the name of OTP entry in authentication mobile app
+      */
+      otpConfig: {
+        type: 'totp',
+        digits: 6,
+        issuer: 'LinShare',
+        algorithm: 'SHA1',
+        period: 30
+      }
     });
 })();
