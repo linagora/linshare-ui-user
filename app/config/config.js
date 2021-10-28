@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
  * lsUserConfig Constant
  * @namespace linshareUiUserApp
@@ -79,6 +80,16 @@
         client_secret: 'linshare',
         redirect_uri: window.location.origin + '/#!/oidc',
         post_logout_redirect_uri: window.location.origin + '/#!/login',
+        response_type: 'code',
+        scope: 'openid email profile'
+      },
+
+      mobileOidcEnabled: false,
+      mobileOidcSetting: {
+        authority: 'https://auth.linshare.local/',
+        client_id: 'linshare-mobile',
+        redirect_url: 'linshare.mobile://oauthredirect',
+        post_logout_redirect_uri: 'linshare.mobile://oauthredirect',
         response_type: 'code',
         scope: 'openid email profile'
       },
