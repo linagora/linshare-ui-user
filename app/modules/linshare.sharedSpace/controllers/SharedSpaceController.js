@@ -519,8 +519,6 @@ function SharedSpaceController(
 
     if (type === 'WORK_GROUP' && sharedSpaceVm.isDriveState) {
       return sharedSpaceVm.canCreate &&
-        sharedSpaceVm.functionalities.workgroup &&
-        sharedSpaceVm.functionalities.driveCreationRight &&
         sharedSpaceVm.permissions[sharedSpaceVm.driveUuid] &&
         sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP &&
         sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP.CREATE;
