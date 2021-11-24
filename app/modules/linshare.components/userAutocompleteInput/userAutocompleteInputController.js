@@ -11,7 +11,6 @@ userAutocompleteInputController.$inject = [
   'dialogService',
   'functionalityRestService',
   'guestRestService',
-  'lsAppConfig',
   'ownerLabel',
   'toastService'
 ];

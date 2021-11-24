@@ -17,7 +17,7 @@
     <md-item-template>
       <div class="user-autocomplete-result">
         <div class="user-autocomplete-result--information">
-          <span class="user-autocomplete-result--fist-letter"> {{::item.label.firstLetter}} </span>
+          <span class="user-autocomplete-result--fist-letter" ng-class="item.label.style"> {{::item.label.firstLetter}} </span>
           <span class="user-autocomplete-result--label">
             <span class="set-ellipsis" title="{{::item.label.name}}">{{::item.label.name}}</span>
             <small class="set-ellipsis">{{::item.label.info}}</small>
