@@ -9,6 +9,7 @@ module.exports = {
     app: './src/index.js',
     config: './app/config/config.js',
     'theme.default': './app/styles/theme.default.scss',
+    'theme.original': './app/styles/theme.original.scss',
     'theme.red': './app/styles/theme.red.scss',
     'theme.darkgreen': './app/styles/theme.darkgreen.scss'
   },
@@ -99,7 +100,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: './index.html',
-      excludeChunks: ['theme.red', 'theme.darkgreen']
+      excludeChunks: ['theme.red', 'theme.darkgreen', 'theme.original']
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',

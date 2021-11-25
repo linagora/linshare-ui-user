@@ -258,11 +258,9 @@
   }
 
   button {
-    $btnBlue: #2195f3;
-
     border: none;
     background-color: #ffffff;
-    color: #2195f3;
+    color: $primary-color;
     display: inline-block;
     font-size: 13.65px;
     font-weight: 400;
@@ -272,7 +270,7 @@
     width: 322px;
 
     &:hover {
-      color: darken(#2195f3, 5%);
+      color: darken($primary-color, 5%);
     }
   }
 }

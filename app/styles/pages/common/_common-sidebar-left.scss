@@ -1,5 +1,3 @@
-
-
 /**********************
    SIDEBAR LEFT DEFAULT STYLING
 ***********************/
@@ -139,7 +137,7 @@ body:not(.sw-toggled) #sidebar {
       &:hover{
         background-color: rgb(238, 238, 238);
         a {
-          color: #2195f3;
+          color: $primary-color;
           span.disabled i {
             color: #B6B6B6
           }
