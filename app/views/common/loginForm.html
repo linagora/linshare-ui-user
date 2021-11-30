@@ -41,7 +41,7 @@
           <div class="header-login-form">
             <h1>{{'LOGIN.LOGIN_HEADER' | translate}}</h1>
           </div>
-          <form class="form-horizontal" data-ng-submit="loginVm.submitForm()" role="form">
+          <form ng-if="loginVm.lsAppConfig.showLoginForm" class="form-horizontal" data-ng-submit="loginVm.submitForm()" role="form">
             <div class="form-group">
               <label class="sr-only" for="inputEmail"></label>
               <div class="input-group m-b-30">
@@ -79,11 +79,12 @@
             <a ui-sref="reset" class="pull-right mdp-forgotten">{{'LOGIN.FORGOTTEN_PASSWORD' | translate}}</a>
             <div class="clearfix"></div>
             <button type='submit' class="btn bgm-lightblue btn-block conexion" translate>LOGIN.CONNECTION_LINK</button>
-            <div ng-if="loginVm.oidcEnabled">
-              <div class="login-sso-separate" translate>LOGIN.OR</div>
-              <button type='button' ng-click="loginVm.loginSSO()" class="btn login-sso-btn btn-block" translate>LOGIN.CONTINUE_WITH_SSO</button>
-            </div>
           </form>
+
+          <div ng-if="loginVm.oidcEnabled" class="login-sso">
+            <div ng-if="loginVm.lsAppConfig.showLoginForm" class="login-sso__separate" translate>LOGIN.OR</div>
+            <button type='button' ng-click="loginVm.loginSSO()" class="btn login-sso__btn btn-block" translate>LOGIN.CONTINUE_WITH_SSO</button>
+          </div>
         </div>
       </div>
     </div>

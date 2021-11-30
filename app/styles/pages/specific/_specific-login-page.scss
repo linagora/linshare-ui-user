@@ -81,7 +81,7 @@
       color: #535050;
       font-size: 20px;
     }
-  }  
+  }
 
   /**********************
     COPYRIGHTS
@@ -247,17 +247,21 @@ div {
     background-color: $primary-color !important;
   }
 
-  .login-sso-btn {
-    font-size: 1.3em;
-    padding: 12px;
-    border-radius: 5px;
-    background-color: #fff;
-    margin-bottom: 1.2em;
-  }
+  .login-sso {
+    padding: 0 25px 15px;
 
-  .login-sso-separate {
-    padding: 10px;
-    font-size: 14px;
+    &__btn {
+      font-size: 1.3em;
+      padding: 12px;
+      border-radius: 5px;
+      background-color: #fff;
+      margin-bottom: 1.2em;
+    }
+
+    &__separate {
+      padding: 10px;
+      font-size: 14px;
+    }
   }
 
   .header-login-form {

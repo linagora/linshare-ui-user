@@ -94,6 +94,14 @@
         scope: 'openid email profile'
       },
 
+      /**
+       * Allow users to login with email and password.
+       * If false:
+       *  - Login form for email and password will be hidden
+       *  - Keep logged in and Reset password buttons will also be hidden
+       */
+      showLoginForm: true,
+
       /* Define the default role selected when adding a new member to a workgroup
        * Possible value:
        *  - ADMIN
