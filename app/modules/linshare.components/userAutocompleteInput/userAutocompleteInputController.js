@@ -118,7 +118,6 @@ function userAutocompleteInputController(
         case 'simple':
           result.label.firstLetter = result.identifier.charAt(0).toUpperCase();
           result.label.name = result.identifier;
-          result.label.info = result.identifier;
           break;
 
         case 'mailinglist':
