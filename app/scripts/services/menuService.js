@@ -112,14 +112,14 @@
           files.disabled = lsAppConfig.menuLinks.disable[filesMenuName] && !user.canUpload;
 
           sharedSpace.hide = !lsAppConfig.menuLinks.disable[sharedSpaceMenuName] &&
-            !functionalities.WORK_GROUP.enable;
+            !functionalities.SHARED_SPACE.enable;
           sharedSpace.disabled = lsAppConfig.menuLinks.disable[sharedSpaceMenuName] &&
-            !functionalities.WORK_GROUP.enable;
+            !functionalities.SHARED_SPACE.enable;
 
           myUploads.hide = !lsAppConfig.menuLinks.disable[myUploadMenuName] &&
-            !(functionalities.WORK_GROUP.enable || user.canUpload);
+            !(functionalities.SHARED_SPACE.enable || user.canUpload);
           myUploads.disabled = lsAppConfig.menuLinks.disable[myUploadMenuName] &&
-            !(functionalities.WORK_GROUP.enable || user.canUpload);
+            !(functionalities.SHARED_SPACE.enable || user.canUpload);
 
           receivedShares.hide = !lsAppConfig.menuLinks.disable[receivedShareMenuName] &&
             functionalities.ANONYMOUS_URL__HIDE_RECEIVED_SHARE_MENU.enable;

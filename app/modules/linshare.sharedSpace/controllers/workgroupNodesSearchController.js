@@ -90,14 +90,14 @@ function workgroupNodesSearchController(
 
     functionalityRestService.getAll().then(({
       CONTACTS_LIST__CREATION_RIGHT,
-      WORK_GROUP,
+      SHARED_SPACE,
       WORK_GROUP__DOWNLOAD_ARCHIVE,
       WORK_GROUP__FILE_VERSIONING
     }) => {
       workgroupSearchVm.functionalities.contactsList = CONTACTS_LIST__CREATION_RIGHT;
       workgroupSearchVm.canAddVersion = WORK_GROUP__FILE_VERSIONING.enable;
       workgroupSearchVm.canDownloadArchive = WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
-      workgroupSearchVm.functionalities.canOverrideVersioning = WORK_GROUP.enable && WORK_GROUP__FILE_VERSIONING.canOverride;
+      workgroupSearchVm.functionalities.canOverrideVersioning = SHARED_SPACE.enable && WORK_GROUP__FILE_VERSIONING.canOverride;
       workgroupSearchVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue < 0 ?
         Infinity :
         unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));

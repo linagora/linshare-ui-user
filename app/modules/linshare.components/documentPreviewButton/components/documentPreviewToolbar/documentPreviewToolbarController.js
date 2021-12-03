@@ -46,9 +46,9 @@ function DocumentPreviewToolbarController(
     $q.all([
       authenticationRestService.getCurrentUser(),
       functionalityRestService.getAll()
-    ]).then(([user, { WORK_GROUP, WORK_GROUP__DOWNLOAD_ARCHIVE}]) => {
+    ]).then(([user, { SHARED_SPACE, WORK_GROUP__DOWNLOAD_ARCHIVE}]) => {
       documentPreviewToolbarVm.canCopyToMySpace = user.canUpload && !_.isNil(documentPreviewService.copyToMySpace);
-      documentPreviewToolbarVm.canCopyToWorkGroup = !_.isNil(documentPreviewService.copyToWorkgroup) && WORK_GROUP && WORK_GROUP.enable;
+      documentPreviewToolbarVm.canCopyToWorkGroup = !_.isNil(documentPreviewService.copyToWorkgroup) && SHARED_SPACE && SHARED_SPACE.enable;
       documentPreviewToolbarVm.downloadFolderEnabled = WORK_GROUP__DOWNLOAD_ARCHIVE && WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
     });
   }

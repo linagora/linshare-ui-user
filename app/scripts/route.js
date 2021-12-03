@@ -133,7 +133,7 @@
         controllerAs: 'uploadQueueVm',
         resolve: {
           functionality: function($state, $transition$, functionalities, user) {
-            if (!functionalities.WORK_GROUP.enable && !user.canUpload) {
+            if (!functionalities.SHARED_SPACE.enable && !user.canUpload) {
               $transition$.abort();
               $state.go('home');
             }
@@ -143,7 +143,7 @@
               case lsAppConfig.mySpacePage:
                 if (!user.canUpload) {
                   $transition$.abort();
-                  if (!functionalities.WORK_GROUP.enable) {
+                  if (!functionalities.SHARED_SPACE.enable) {
                     $state.go('home');
                   } else {
                     $state.go('documents.upload', {from: lsAppConfig.workgroupPage});
@@ -151,7 +151,7 @@
                 }
                 break;
               case lsAppConfig.workgroupPage:
-                if (!functionalities.WORK_GROUP.enable) {
+                if (!functionalities.SHARED_SPACE.enable) {
                   $transition$.abort();
                   if (!user.canUpload) {
                     $state.go('home');
@@ -175,7 +175,7 @@
         template: '<div ui-view></div>',
         resolve: {
           functionality: function($state, $transition$, functionalities) {
-            if (!functionalities.WORK_GROUP.enable) {
+            if (!functionalities.SHARED_SPACE.enable) {
               $transition$.abort();
               $state.go('home');
             }

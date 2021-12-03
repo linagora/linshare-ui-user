@@ -155,7 +155,7 @@
             functionalities = promises[1];
 
           uploadQueueVm.location.mySpace = user.canUpload;
-          uploadQueueVm.location.workgroup = functionalities.WORK_GROUP.enable;
+          uploadQueueVm.location.workgroup = functionalities.SHARED_SPACE.enable;
         }).catch(function(error) {
           $log.debug(error);
         });
@@ -404,7 +404,7 @@
         });
       }
       deferred.resolve();
-      
+
       return deferred.promise;
     }
 

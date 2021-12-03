@@ -49,7 +49,7 @@ angular
       current: ''
     };
     $scope.flagsOnSelectedPages = {};
-    $scope.canCopyInWorkGroup = functionalities.WORK_GROUP && functionalities.WORK_GROUP.enable;
+    $scope.canCopyInWorkGroup = functionalities.SHARED_SPACE && functionalities.SHARED_SPACE.enable;
 
     this.$onInit = activate;
 

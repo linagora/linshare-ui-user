@@ -134,14 +134,14 @@ function WorkgroupNodesController(
       .getAll()
       .then(({
         CONTACTS_LIST__CREATION_RIGHT,
-        WORK_GROUP,
+        SHARED_SPACE,
         WORK_GROUP__DOWNLOAD_ARCHIVE,
         WORK_GROUP__FILE_VERSIONING
       }) => {
         workgroupNodesVm.functionalities.contactsList = CONTACTS_LIST__CREATION_RIGHT;
         workgroupNodesVm.canAddVersion = WORK_GROUP__FILE_VERSIONING.enable;
         workgroupNodesVm.canDownloadArchive = WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
-        workgroupNodesVm.functionalities.canOverrideVersioning = WORK_GROUP.enable && WORK_GROUP__FILE_VERSIONING.canOverride;
+        workgroupNodesVm.functionalities.canOverrideVersioning = SHARED_SPACE.enable && WORK_GROUP__FILE_VERSIONING.canOverride;
 
         workgroupNodesVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue < 0 ?
           Infinity :

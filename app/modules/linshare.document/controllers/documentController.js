@@ -106,7 +106,7 @@
     $scope.updateDocument = updateDocument;
     $scope.rename = rename;
     $scope.functionalities = functionalities;
-    $scope.canCopyInWorkGroup = functionalities.WORK_GROUP && functionalities.WORK_GROUP.enable;
+    $scope.canCopyInWorkGroup = functionalities.SHARED_SPACE && functionalities.SHARED_SPACE.enable;
     $scope.canCreateContactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
 
     activate();

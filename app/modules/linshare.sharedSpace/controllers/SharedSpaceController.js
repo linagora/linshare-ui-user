@@ -153,17 +153,18 @@ function SharedSpaceController(
   }
 
   function fetchFunctionalities () {
-    return functionalityRestService.getAll().then(functionalities => {
-      sharedSpaceVm.functionalities.contactsList = functionalities.CONTACTS_LIST.enable && functionalities.CONTACTS_LIST__CREATION_RIGHT.enable;
-      sharedSpaceVm.functionalities.workgroup = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__CREATION_RIGHT.enable;
-      sharedSpaceVm.functionalities.canOverrideVersioning = functionalities.WORK_GROUP.enable && functionalities.WORK_GROUP__FILE_VERSIONING.canOverride;
-      sharedSpaceVm.functionalities.drive = functionalities.DRIVE.enable;
-      sharedSpaceVm.functionalities.driveCreationRight = functionalities.DRIVE__CREATION_RIGHT.enable;
+    return functionalityRestService.getAll().then(({
+      CONTACTS_LIST, CONTACTS_LIST__CREATION_RIGHT, SHARED_SPACE, WORK_GROUP__CREATION_RIGHT, WORK_GROUP__FILE_VERSIONING, DRIVE__CREATION_RIGHT }) => {
+      sharedSpaceVm.functionalities.contactsList = CONTACTS_LIST.enable && CONTACTS_LIST__CREATION_RIGHT.enable;
+      sharedSpaceVm.functionalities.sharedSpace = SHARED_SPACE.enable;
+      sharedSpaceVm.functionalities.wrokgroupCreationRight = WORK_GROUP__CREATION_RIGHT.enable;
+      sharedSpaceVm.functionalities.canOverrideVersioning = WORK_GROUP__FILE_VERSIONING.canOverride;
+      sharedSpaceVm.functionalities.driveCreationRight = DRIVE__CREATION_RIGHT.enable;
     });
   }
 
   function setFabBehavior () {
-    if (sharedSpaceVm.functionalities.workgroup || sharedSpaceVm.functionalities.drive) {
+    if (sharedSpaceVm.functionalities.sharedSpace) {
       sharedSpaceVm.fabButton = {
         toolbar: {
           activate: true,
@@ -172,7 +173,7 @@ function SharedSpaceController(
         actions: []
       };
 
-      if (sharedSpaceVm.functionalities.workgroup) {
+      if (sharedSpaceVm.functionalities.wrokgroupCreationRight) {
         sharedSpaceVm.fabButton.actions.push({
           action: () => sharedSpaceVm.createSharedSpace('WORK_GROUP'),
           label: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.defaultName,
@@ -180,7 +181,7 @@ function SharedSpaceController(
         });
       }
 
-      if (sharedSpaceVm.functionalities.drive && sharedSpaceVm.functionalities.driveCreationRight && !sharedSpaceVm.isDriveState) {
+      if (sharedSpaceVm.functionalities.driveCreationRight && !sharedSpaceVm.isDriveState) {
         sharedSpaceVm.fabButton.actions.push({
           action: () => sharedSpaceVm.createSharedSpace('DRIVE'),
           label: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.defaultName,
@@ -525,11 +526,11 @@ function SharedSpaceController(
     }
 
     if (type === 'WORK_GROUP' && !sharedSpaceVm.isDriveState) {
-      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.workgroup;
+      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.wrokgroupCreationRight;
     }
 
     if (type === 'DRIVE' && !sharedSpaceVm.isDriveState) {
-      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.drive && sharedSpaceVm.functionalities.driveCreationRight;
+      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.driveCreationRight;
     }
 
     if (type === 'DRIVE' && sharedSpaceVm.isDriveState) {
