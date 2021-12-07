@@ -1,45 +1,45 @@
-/**
- * oidcController Controller
- * @namespace linshareUiUserApp
- */
 angular
   .module('linshare.authentication')
-  .controller('oidcController', oidcController);
+  .controller('oidcCallbackController', oidcCallbackController);
 
-oidcController.$inject = [
+oidcCallbackController.$inject = [
   '$q',
   '$state',
+  '$log',
   'authenticationRestService',
-  'lsAppConfig',
   'oidcService',
   'toastService',
-  'homePageService'
+  'homePageService',
+  'lsAppConfig'
 ];
 
-function oidcController(
+function oidcCallbackController(
   $q,
   $state,
+  $log,
   authenticationRestService,
-  lsAppConfig,
   oidcService,
   toastService,
-  homePageService
+  lsAppConfig
 ) {
-  oidcService.endSigninMainWindow()
+
+  oidcService.signinRedirectCallback()
     .then(user => {
       if (user && user.access_token) {
         return submitToken(user.access_token);
-      } else {
-        return $q.reject();
       }
+
+      return $q.reject();
     })
-    .then(() => {
-      $state.go(homePageService.getHomePage());
-    })
-    .catch(() => {
+    .catch(error => {
+      $log.error(error);
       toastService.error({ key: 'LOGIN.NOTIFICATION.ERROR_OIDC' });
-      $state.go('login');
+
+      if (!lsAppConfig.oidcForceRedirection) {
+        $state.go('login');
+      }
     });
+
 
   function submitToken(token) {
     return authenticationRestService.loginWithAccessToken(token)

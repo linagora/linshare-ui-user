@@ -13,10 +13,9 @@ angular
     });
   });
 
-require('./routes');
 require('./constants');
 require('./controllers/authenticationController');
-require('./controllers/oidcController');
+require('./controllers/oidcCallbackController');
 require('./services/authenticationRestService');
 require('./services/authenticationUtilsService');
 require('./services/oidcService');

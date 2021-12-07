@@ -31,6 +31,7 @@
           languageService,
           homePageService
         ) {
+          //NOTE this language switching is currently not working
           var language = $window.location.hash.split('/').pop();
 
           languageService.changeLocale(language);
@@ -74,13 +75,41 @@
           loginRequired: false
         },
         resolve: {
+          checkOidc: function($state, $transition$) {
+            if (
+              $transition$.params().loginRequired &&
+              lsAppConfig.oidcEnabled &&
+              lsAppConfig.oidcForceRedirection
+            ) {
+              $transition$.abort();
+
+              $state.go('oidc.signin');
+            }
+          },
           authentication: function($state, $transition$, authenticationRestService, homePageService) {
             if (!$transition$.params().loginRequired) {
               $transition$.abort();
+
               authRedirect($state, $transition$, authenticationRestService, homePageService.getHomePage());
             }
           }
         }
+      })
+      .state('oidc', {
+        url: '/oidc',
+        template: '<div ui-view></div>',
+      })
+      .state('oidc.signin', {
+        url: '/signin',
+        template: require('../views/common/loading.html'),
+        controller: function(oidcService) {
+          oidcService.signInRedirect();
+        }
+      })
+      .state('oidc.callback', {
+        url: '/callback',
+        template: require('../views/common/loading.html'),
+        controller: 'oidcCallbackController'
       })
       .state('documents', {
         parent: 'common',

@@ -73,14 +73,18 @@
         }
       },
 
+      /**
+       * Configuration for OIDC authentication
+       * - oidcForceRedirection: upon unauthenticated user event,
+       * the page will be redirected directly to OIDC authentication portal,
+       * skipping the login page
+       */
       oidcEnabled: false,
+      oidcForceRedirection: false,
       oidcSetting: {
         authority: 'https://auth.linshare.local/',
         client_id: 'linshare',
         client_secret: 'linshare',
-        redirect_uri: window.location.origin + '/#!/oidc',
-        post_logout_redirect_uri: window.location.origin + '/#!/login',
-        response_type: 'code',
         scope: 'openid email profile'
       },
 
