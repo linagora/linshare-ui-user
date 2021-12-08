@@ -121,6 +121,7 @@ module.exports = {
       patterns: [
         { from: 'app/i18n/original', to: 'i18n/original' },
         { from: 'app/favicon.ico', to: 'favicon.ico' },
+        { from: 'app/images/common', to: 'images' },
         { from: 'package.json', to: 'about.json' },
         { from: 'error-pages', to: 'error-pages' }
       ]
