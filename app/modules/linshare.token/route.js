@@ -14,10 +14,7 @@ function routes($stateProvider) {
       controllerAs: 'tokenManagementVm',
       resolve: {
         functionality: function($transition$, $state, functionalities) {
-          if (
-            !functionalities.JWT_PERMANENT_TOKEN.enable ||
-            !functionalities.JWT_PERMANENT_TOKEN__USER_MANAGEMENT.enable
-          ) {
+          if (!functionalities.JWT_PERMANENT_TOKEN.enable) {
             $transition$.abort();
             $state.go('home');
           }
