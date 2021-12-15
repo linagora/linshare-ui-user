@@ -419,7 +419,7 @@ angular
         resolve($scope.currentSelectedDocument.current);
 
         getReceivedShareAudit($scope.currentSelectedDocument.current).then(function() {
-          loadSidebarContent(lsAppConfig.details);
+          loadSidebarContent(lsAppConfig.receivedShare);
 
           if (!_.isUndefined(event)) {
             var currElm = event.currentTarget;

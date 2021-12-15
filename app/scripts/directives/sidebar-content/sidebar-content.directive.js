@@ -65,7 +65,7 @@
     $templateCache.put('directives/sidebar-content/sidebar-content-uploadrequest-details.html', require('./sidebar-content-uploadrequest-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-token-create.html', require('./sidebar-content-token-create.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-token-details.html', require('./sidebar-content-token-details.html'));
-    $templateCache.put('directives/sidebar-content/sidebar-content-token-details.html', require('./sidebar-content-token-details.html'));
     $templateCache.put('directives/sidebar-content/sidebar-content-forward.html', require('./sidebar-content-forward.html'));
+    $templateCache.put('directives/sidebar-content/sidebar-content-received-share.html', require('./sidebar-content-received-share.html'));
   }
 })();

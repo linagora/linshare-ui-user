@@ -7,7 +7,7 @@
     </span>
   </div>
 
-  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail">
+  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail two-tabs">
     <md-content>
       <md-tabs md-selected="mainVm.sidebar.getData().data.selectedIndex"  md-dynamic-height="" md-border-bottom="">
         <md-tab id="tab1" label="{{'RIGHT_PANEL.DETAILS.TITLE' | translate}}" class="col-xs-4 no-padding">
@@ -16,8 +16,8 @@
               <div id="profile-main" class="detail-workgroup">
                 <div class="p-relative m-b-20 img-preview-ctn">
                   <document-preview-button
-                    item-index="mainVm.sidebar.getData().currentSelectedDocument.index"
-                    items="mainVm.sidebar.getData().currentList"
+                    item-index="0"
+                    items="[mainVm.sidebar.getData().currentSelectedDocument.current]"
                     icon="true"
                   >
                     <p data-ng-show="mainVm.sidebar.getData().currentSelectedDocument.current.hasThumbnail &&
@@ -46,7 +46,8 @@
                   <sidebar-description-input
                     description="mainVm.sidebar.getData().currentSelectedDocument.current.description"
                     on-change="mainVm.sidebar.getData().updateDocument"
-                    placeholder="INFORMATION_TAB.EDIT_DESCRIPTION"
+                    readonly="true"
+                    placeholder="INFORMATION_TAB.NO_DESCRIPTION"
                   ></sidebar-description-input>
                 </div>
                 <div
@@ -54,28 +55,30 @@
                   class="visible-xs clearfix sidebar-toolbar"
                 >
                   <ul class="actions col-xs-12">
-                    <li data-ng-click="mainVm.sidebar.getData().deleteDocuments(
-                                                mainVm.sidebar.getData().currentSelectedDocument.current)"
-                        event-propagation-stop class="col-xs-3">
+                    <li event-propagation-stop class="col-xs-3" x-ng-click="mainVm.sidebar.getData().deleteDocuments(
+                                      mainVm.sidebar.getData().currentSelectedDocument.current)">
                       <a href=""
                          title="{{'ACTION.DELETE' | translate}}">
                         <i class="zmdi zmdi-delete"></i>
                       </a>
                     </li>
-                    <li class="col-xs-3" x-ng-click="mainVm.sidebar.getData().onShare()">
-                      <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}">
-                        <i class="zmdi zmdi-share"></i>
+                    <li class="col-xs-3">
+                      <a href="" title="{{'BOUTON_LABEL_TITLE.SHARE' | translate}}" event-propagation-stop="true"
+                         class="disabled-work-in-progress">
+                        <i class="zmdi zmdi-swap"></i>
                       </a>
                     </li>
                     <li class="col-xs-3" x-ng-click="mainVm.sidebar.getData().downloadFile(
                                       mainVm.sidebar.getData().currentSelectedDocument.current)">
-                      <a title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
+                      <a x-ng-href=""
+                         title="{{'BOUTON_LABEL_TITLE.DOWNLOAD' | translate}}">
                         <i class="zmdi zmdi-download"></i>
                       </a>
                     </li>
-                    <li class="col-xs-3" >
-                      <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}" uib-dropdown-toggle
-                         event-propagation-stop class="disabled-work-in-progress">
+                    <li class="col-xs-3"
+                        x-ng-click="mainVm.sidebar.getData().copyIntoFiles(
+                                    mainVm.sidebar.getData().currentSelectedDocument.current)">
+                      <a href="" title="{{'ACTION.COPY_IN_GROUP' | translate}}">
                         <i class="zmdi zmdi-copy"></i>
                       </a>
                     </li>
@@ -86,12 +89,17 @@
                   <div class="flex-ctn detail-info-ctn">
                     <div class="item-l">
                       <span class="first-letter user-info text-uppercase">
-                        {{loggedUser.firstName ? loggedUser.firstName.charAt(0) : loggedUser.mail.charAt(0)}}
+                        {{mainVm.sidebar.getData().currentSelectedDocument.current.sender.firstName ?
+                          mainVm.sidebar.getData().currentSelectedDocument.current.sender.firstName.charAt(0)
+                          : mainVm.sidebar.getData().currentSelectedDocument.current.sender.mail.charAt(0)}}
                       </span>
                     </div>
 
                     <div class="item-mid">
-                      <div class="name" translate>ME</div>
+                      <div class="name">
+                        {{mainVm.sidebar.getData().currentSelectedDocument.current.sender.firstName}}
+                        {{mainVm.sidebar.getData().currentSelectedDocument.current.sender.lastName}}
+                      </div>
                       <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
                            uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.modificationDate |
                             lsDate:'medium':locale}}">
@@ -118,9 +126,7 @@
                     </h2>
                     <div class="meta-data-content">
                       <div>
-                        <p>
-                          {{'RIGHT_PANEL.DETAILS.CREATION_DATE' | translate}}:
-                        </p>
+                        <p translate>RIGHT_PANEL.DETAILS.SHARING_DATE</p>
                         <p tooltip-placement="bottom" tooltip-popup-delay="500"
                            uib-tooltip="{{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'medium':locale}}">
                           {{mainVm.sidebar.getData().currentSelectedDocument.current.creationDate | lsDate:'longDate':locale}}
@@ -152,14 +158,6 @@
                           </span>
                         </p>
                       </div>
-                      <div>
-                        <p>{{'RIGHT_PANEL.DETAILS.SHARED_WITH' | translate}}</p>
-                        <p x-ng-click="mainVm.sidebar.getData().nextTab()">
-                          <a>{{mainVm.sidebar.getData().currentSelectedDocument.current.shared}}
-                            {{'RIGHT_PANEL.DETAILS.PEOPLE_SHARED_WITH' | translate}}
-                          </a>
-                        </p>
-                      </div>
                       <div x-ng-show="mainVm.sidebar.getData().linshareModeProduction == false">
                         <p>{{'RIGHT_PANEL.DETAILS.CIPHERED' | translate}}:</p>
                         <p>
@@ -182,13 +180,6 @@
             <div x-ng-hide="mainVm.sidebar.getData().currentSelectedDocument.current.name" class="p-l-10 p-r-10">
               {{"RIGHT_PANEL.EMPTY" | translate}}
             </div>
-          </md-content>
-        </md-tab>
-        <md-tab id="tab2" label="{{'RIGHT_PANEL.RECIPIENTS.TITLE' | translate}}"class="col-xs-4 no-padding">
-          <md-content
-            class="md-padding"
-            data-ng-include="'directives/sidebar-content/sidebar-content-share-recipients-list.html'"
-          >
           </md-content>
         </md-tab>
         <md-tab id="tab3" label="{{'RIGHT_PANEL.ACTIVITIES.TITLE' | translate}}" class="col-xs-4 no-padding disabled">

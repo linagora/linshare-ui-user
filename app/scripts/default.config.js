@@ -256,6 +256,7 @@
       uploadRequestDetails: 'uploadrequest-details',
       tokenCreate: 'token-create',
       tokenDetails: 'token-details',
+      receivedShare: 'received-share',
       hideOnNonAdmin: false,
       hideOnReadOnly: false,
       thumbnailEngineActivated: true,
