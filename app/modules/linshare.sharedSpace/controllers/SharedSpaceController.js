@@ -85,8 +85,8 @@ function SharedSpaceController(
     sharedSpaceVm.updateSharedSpaceDescription = updateSharedSpaceDescription;
     sharedSpaceVm.canUpdateSharedSpace = canUpdateSharedSpace;
     sharedSpaceVm.onSelfRemoveFromSharedSpace = onSelfRemoveFromSharedSpace;
-    sharedSpaceVm.driveUuid = $state.params && $state.params.driveUuid;
-    sharedSpaceVm.isDriveState = $state.current.name === 'sharedspace.drive';
+    sharedSpaceVm.workspaceUuid = $state.params && $state.params.workspaceUuid;
+    sharedSpaceVm.isWorkspaceState = $state.current.name === 'sharedspace.workspace';
     sharedSpaceVm.status = 'loading';
     sharedSpaceVm.NODE_TYPE_PROPERTIES = {
       WORK_GROUP: {
@@ -96,10 +96,10 @@ function SharedSpaceController(
         backgroundTitle: 'BACKGROUND_SHARED_SPACE_TITLE_MSG',
         backgroundMessage: 'BACKGROUND_SHARED_SPACE_MSG'
       },
-      DRIVE: {
-        creationDialogTitle: 'CREATE_NEW_DRIVE',
-        icon: 'ls-drive',
-        defaultName: 'ACTION.NEW_DRIVE',
+      WORK_SPACE: {
+        creationDialogTitle: 'CREATE_NEW_WORKSPACE',
+        icon: 'ls-workspace',
+        defaultName: 'ACTION.NEW_WORKSPACE',
         backgroundTitle: 'BACKGROUND_WORKGROUP_TITLE_MSG',
         backgroundMessage: 'BACKGROUND_WORKGROUP_MSG'
       }
@@ -119,10 +119,10 @@ function SharedSpaceController(
   function fetchSharedSpaces () {
     let fetchingSharedSpaces = [];
 
-    if (sharedSpaceVm.isDriveState && sharedSpaceVm.driveUuid) {
+    if (sharedSpaceVm.isWorkspaceState && sharedSpaceVm.workspaceUuid) {
       fetchingSharedSpaces.push(
-        sharedSpaceRestService.getList(true, sharedSpaceVm.driveUuid),
-        sharedSpaceRestService.get(sharedSpaceVm.driveUuid, { withRole: true })
+        sharedSpaceRestService.getList(true, sharedSpaceVm.workspaceUuid),
+        sharedSpaceRestService.get(sharedSpaceVm.workspaceUuid, { withRole: true })
       );
     } else {
       fetchingSharedSpaces.push(sharedSpaceRestService.getList(true));
@@ -131,13 +131,13 @@ function SharedSpaceController(
     return $q.all(fetchingSharedSpaces).then(results => {
       sharedSpaceVm.itemsList = results[0];
       sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList;
-      sharedSpaceVm.currentDrive = results[1];
+      sharedSpaceVm.currentWorkspace = results[1];
     });
   }
 
   function fetchSharedSpacePermissions() {
     return workgroupPermissionsService
-      .getWorkgroupsPermissions([...sharedSpaceVm.itemsList, sharedSpaceVm.currentDrive].filter(Boolean))
+      .getWorkgroupsPermissions([...sharedSpaceVm.itemsList, sharedSpaceVm.currentWorkspace].filter(Boolean))
       .then(permissions => workgroupPermissionsService.formatPermissions(permissions))
       .then(formattedPermissions => {
         sharedSpaceVm.permissions = formattedPermissions;
@@ -154,12 +154,12 @@ function SharedSpaceController(
 
   function fetchFunctionalities () {
     return functionalityRestService.getAll().then(({
-      CONTACTS_LIST, CONTACTS_LIST__CREATION_RIGHT, SHARED_SPACE, WORK_GROUP__CREATION_RIGHT, WORK_GROUP__FILE_VERSIONING, DRIVE__CREATION_RIGHT }) => {
+      CONTACTS_LIST, CONTACTS_LIST__CREATION_RIGHT, SHARED_SPACE, WORK_GROUP__CREATION_RIGHT, WORK_GROUP__FILE_VERSIONING, WORK_SPACE__CREATION_RIGHT }) => {
       sharedSpaceVm.functionalities.contactsList = CONTACTS_LIST.enable && CONTACTS_LIST__CREATION_RIGHT.enable;
       sharedSpaceVm.functionalities.sharedSpace = SHARED_SPACE.enable;
-      sharedSpaceVm.functionalities.wrokgroupCreationRight = WORK_GROUP__CREATION_RIGHT.enable;
+      sharedSpaceVm.functionalities.workgroupCreationRight = WORK_GROUP__CREATION_RIGHT.enable;
       sharedSpaceVm.functionalities.canOverrideVersioning = WORK_GROUP__FILE_VERSIONING.canOverride;
-      sharedSpaceVm.functionalities.driveCreationRight = DRIVE__CREATION_RIGHT.enable;
+      sharedSpaceVm.functionalities.workspaceCreationRight = WORK_SPACE__CREATION_RIGHT.enable;
     });
   }
 
@@ -168,12 +168,12 @@ function SharedSpaceController(
       sharedSpaceVm.fabButton = {
         toolbar: {
           activate: true,
-          label: sharedSpaceVm.isDriveState ? 'MENU_TITLE.DRIVE' : 'MENU_TITLE.SHARED_SPACE'
+          label: sharedSpaceVm.isWorkspaceState ? 'MENU_TITLE.WORKSPACE' : 'MENU_TITLE.SHARED_SPACE'
         },
         actions: []
       };
 
-      if (sharedSpaceVm.functionalities.wrokgroupCreationRight) {
+      if (sharedSpaceVm.functionalities.workgroupCreationRight) {
         sharedSpaceVm.fabButton.actions.push({
           action: () => sharedSpaceVm.createSharedSpace('WORK_GROUP'),
           label: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_GROUP.defaultName,
@@ -181,11 +181,11 @@ function SharedSpaceController(
         });
       }
 
-      if (sharedSpaceVm.functionalities.driveCreationRight && !sharedSpaceVm.isDriveState) {
+      if (sharedSpaceVm.functionalities.workspaceCreationRight && !sharedSpaceVm.isWorkspaceState) {
         sharedSpaceVm.fabButton.actions.push({
-          action: () => sharedSpaceVm.createSharedSpace('DRIVE'),
-          label: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.defaultName,
-          icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.DRIVE.icon,
+          action: () => sharedSpaceVm.createSharedSpace('WORK_SPACE'),
+          label: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_SPACE.defaultName,
+          icon: sharedSpaceVm.NODE_TYPE_PROPERTIES.WORK_SPACE.icon,
         });
       }
     }
@@ -214,7 +214,7 @@ function SharedSpaceController(
 
       const sharedSpace = sharedSpaceRestService.restangularize({
         name: defaultName.trim(),
-        parentUuid: sharedSpaceVm.driveUuid,
+        parentUuid: sharedSpaceVm.workspaceUuid,
         nodeType
       });
 
@@ -298,8 +298,8 @@ function SharedSpaceController(
     if (element.attr('contenteditable') === 'false') {
       if (nodeType === 'WORK_GROUP') {
         $state.go('sharedspace.workgroups.root', {workgroupUuid: uuid, workgroupName: name.trim()});
-      } else if (nodeType === 'DRIVE') {
-        $state.go('sharedspace.drive', {driveUuid: uuid});
+      } else if (nodeType === 'WORK_SPACE') {
+        $state.go('sharedspace.workspace', {workspaceUuid: uuid});
       }
     }
   }
@@ -342,12 +342,12 @@ function SharedSpaceController(
     let messageKey;
     const nodeTypes = (!_.isArray(sharedSpaces) ? [sharedSpaces] : sharedSpaces).map(sharedSpace => sharedSpace.nodeType);
 
-    if (nodeTypes.indexOf('WORK_GROUP') >= 0 && nodeTypes.indexOf('DRIVE') >= 0) {
-      messageKey = itemUtilsService.itemUtilsConstant.WORKGROUP_AND_DRIVE;
+    if (nodeTypes.indexOf('WORK_GROUP') >= 0 && nodeTypes.indexOf('WORK_SPACE') >= 0) {
+      messageKey = itemUtilsService.itemUtilsConstant.WORKGROUP_AND_WORKSPACE;
     } else if (nodeTypes.indexOf('WORK_GROUP') >= 0) {
       messageKey = itemUtilsService.itemUtilsConstant.WORKGROUP;
     } else {
-      messageKey = itemUtilsService.itemUtilsConstant.DRIVE;
+      messageKey = itemUtilsService.itemUtilsConstant.WORKSPACE;
     }
 
     itemUtilsService.deleteItem(sharedSpaces, messageKey, deleteCallback);
@@ -502,14 +502,14 @@ function SharedSpaceController(
   function canUpdateSharedSpace(sharedSpace) {
     if (sharedSpace.nodeType === 'WORK_GROUP') {
       return sharedSpaceVm.permissions[sharedSpace.uuid] &&
-        sharedSpaceVm.permissions[sharedSpace.uuid].WORKGROUP &&
-        sharedSpaceVm.permissions[sharedSpace.uuid].WORKGROUP.UPDATE;
+        sharedSpaceVm.permissions[sharedSpace.uuid].WORK_GROUP &&
+        sharedSpaceVm.permissions[sharedSpace.uuid].WORK_GROUP.UPDATE;
     }
 
-    if (sharedSpace.nodeType === 'DRIVE') {
+    if (sharedSpace.nodeType === 'WORK_SPACE') {
       return sharedSpaceVm.permissions[sharedSpace.uuid] &&
-      sharedSpaceVm.permissions[sharedSpace.uuid].DRIVE &&
-      sharedSpaceVm.permissions[sharedSpace.uuid].DRIVE.UPDATE;
+      sharedSpaceVm.permissions[sharedSpace.uuid].WORK_SPACE &&
+      sharedSpaceVm.permissions[sharedSpace.uuid].WORK_SPACE.UPDATE;
     }
   }
 
@@ -518,22 +518,22 @@ function SharedSpaceController(
       return false;
     }
 
-    if (type === 'WORK_GROUP' && sharedSpaceVm.isDriveState) {
+    if (type === 'WORK_GROUP' && sharedSpaceVm.isWorkspaceState) {
       return sharedSpaceVm.canCreate &&
-        sharedSpaceVm.permissions[sharedSpaceVm.driveUuid] &&
-        sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP &&
-        sharedSpaceVm.permissions[sharedSpaceVm.driveUuid].WORKGROUP.CREATE;
+        sharedSpaceVm.permissions[sharedSpaceVm.workspaceUuid] &&
+        sharedSpaceVm.permissions[sharedSpaceVm.workspaceUuid].WORK_GROUP &&
+        sharedSpaceVm.permissions[sharedSpaceVm.workspaceUuid].WORK_GROUP.CREATE;
     }
 
-    if (type === 'WORK_GROUP' && !sharedSpaceVm.isDriveState) {
-      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.wrokgroupCreationRight;
+    if (type === 'WORK_GROUP' && !sharedSpaceVm.isWorkspaceState) {
+      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.workgroupCreationRight;
     }
 
-    if (type === 'DRIVE' && !sharedSpaceVm.isDriveState) {
-      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.driveCreationRight;
+    if (type === 'WORK_SPACE' && !sharedSpaceVm.isWorkspaceState) {
+      return sharedSpaceVm.canCreate && sharedSpaceVm.functionalities.workspaceCreationRight;
     }
 
-    if (type === 'DRIVE' && sharedSpaceVm.isDriveState) {
+    if (type === 'WORK_SPACE' && sharedSpaceVm.isWorkspaceState) {
       return false;
     }
   }
@@ -560,7 +560,7 @@ function SharedSpaceController(
   }
 
   function onSelfRemoveFromSharedSpace(sharedSpace) {
-    if (sharedSpaceVm.isDriveState && sharedSpace.uuid === sharedSpaceVm.driveUuid) {
+    if (sharedSpaceVm.isWorkspaceState && sharedSpace.uuid === sharedSpaceVm.workspaceUuid) {
       return $state.go('sharedspace.all');
     }
 

@@ -62,12 +62,12 @@
         </span>
 
         <span
-          ng-show="browseVm.isListingSharedSpaces() && browseVm.breadcrumbs.length === 1 && browseVm.breadcrumbs[0].nodeType === browseVm.TYPE_DRIVE"
+          ng-show="browseVm.isListingSharedSpaces() && browseVm.breadcrumbs.length === 1 && browseVm.breadcrumbs[0].nodeType === browseVm.TYPE_WORKSPACE"
           translate
           translate-compile
           translate-values="{
-            driveName: browseVm.breadcrumbs[0].name,
-            driveUuid: browseVm.breadcrumbs[0].uuid
+            workspaceName: browseVm.breadcrumbs[0].name,
+            workspaceUuid: browseVm.breadcrumbs[0].uuid
           }"
         >
           {{

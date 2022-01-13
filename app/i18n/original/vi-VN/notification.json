@@ -16,8 +16,8 @@
         "GUEST": "Bạn sắp xoá {singular, select, true{một khách} other{{nbItems} khách}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "RECEIVED_SHARE": "Bạn sắp xoá {singular, select, true{một tệp chia sẻ} other{{nbItems} tệp chia sẻ}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "WORKGROUP": "Bạn sắp xoá {singular, select, true{một nhóm làm việc} other{{nbItems} làm việc}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
-        "DRIVE": "Bạn sắp xoá {singular, select, true{một ổ đĩa} other{{nbItems} ổ đĩa}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
-        "WORKGROUP_AND_DRIVE": "Bạn sắp xoá {nbItems} nhóm làm việc và ổ đĩa ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "WORKSPACE": "Bạn sắp xoá {singular, select, true{một không gian làm việc} other{{nbItems} không gian làm việc}} ! Hãy cẩn thận, hành động này không thể hoàn tác",
+        "WORKGROUP_AND_WORKSPACE": "Bạn sắp xoá {nbItems} nhóm làm việc và không gian làm việc ! Hãy cẩn thận, hành động này không thể hoàn tác",
         "WORKGROUP_NODE": "Bạn sắp xoá {singular, select, true{một tài liệu hoặc thư mục} other{{nbItems} tài liêụ hoặc thư mục}} ! Hãy cẩn thận, hành động này không thể hoàn tác.",
         "WORKGROUP_VERSION": "Bạn muốn xóa {singular, select, true{phiên bản} other{{nbItems} phiên bản}} ! Cẩn thận, hành động này không thể hoàn tác.",
         "WORKGROUP_VERSION_LAST": "Đây là lần sửa đổi cuối cùng, bạn muốn xóa tập tin! Cẩn thận, hành động này không thể hoàn tác.",
@@ -52,12 +52,12 @@
       "TEXT": "Bạn sắp xóa {{firstName}} {{lastName}} khỏi nhóm làm việc {{workgroupName}}.",
       "SELF_REMOVE_TEXT": "Bạn sắp xóa chính mình khỏi nhóm làm việc {{sharedSpaceName}}. Bạn sẽ không có quyền truy cập vào nhóm làm việc này nữa."
     },
-    "ON_DRIVE_MEMBER_DELETE": {
+    "ON_WORKSPACE_MEMBER_DELETE": {
       "CANCEL_BUTTON": "Hủy bỏ",
       "CONFIRM_BUTTON": "Có, xóa",
       "TITLE": "Xóa thành viên",
-      "TEXT": "Bạn sắp xóa {{firstName}} {{lastName}} khỏi ổ đĩa {{driveName}} và tất cả các nhóm làm việc liên quan.",
-      "SELF_REMOVE_TEXT": "Bạn sắp xóa chính mình khỏi ổ đĩa {{sharedSpaceName}}. Bạn sẽ không có quyền truy cập vào ổ đĩa này nữa."
+      "TEXT": "Bạn sắp xóa {{firstName}} {{lastName}} khỏi không gian làm việc {{workspaceName}} và tất cả các nhóm làm việc liên quan.",
+      "SELF_REMOVE_TEXT": "Bạn sắp xóa chính mình khỏi không gian làm việc {{sharedSpaceName}}. Bạn sẽ không có quyền truy cập vào không gian làm việc này nữa."
     },
     "ON_GUEST_QUICK_CREATE": {
       "CANCEL_BUTTON": "Không",
@@ -81,7 +81,7 @@
       "TBT__DELETE_SINGULAR_VERSION": "",
       "TBT__DELETE_PLURAL_VERSION": "",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} đã được xóa thành công khỏi Nhóm làm việc",
-      "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} đã được xóa thành công khỏi ổ đĩa",
+      "DELETE_WORKSPACE_MEMBER": "{{firstName}} {{lastName}} đã được xóa thành công khỏi không gian làm việc",
       "DETAILS": "Chi tiết",
       "INSERT": "Mục đã được thêm thành công.",
       "REFRESH": "Bạn phải làm mới ứng dụng để đưa hành động này vào tài khoản",
@@ -127,7 +127,7 @@
       },
       "NO_RESPONSE_ERROR": "Lỗi khi không có phản hồi của máy chủ, xem nhật ký.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} đã là thành viên của Nhóm làm việc này.",
-      "MEMBER_ALREADY_IN_DRIVE": "{{firstName}} {{lastName}} đã là thành viên của ổ đĩa này.",
+      "MEMBER_ALREADY_IN_WORKSPACE": "{{firstName}} {{lastName}} đã là thành viên của không gian làm việc này.",
       "RESTORE": "Có lỗi xảy ra khi khôi phục phiên bản."
     },
     "WARNING": {

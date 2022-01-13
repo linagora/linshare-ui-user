@@ -1,7 +1,7 @@
 {
   "MEMBER_TAB": {
     "ADD_MEMBER": "Ajouter des membres :",
-    "ADD_DRIVE_MEMBER": "Ajouter des membres de drive avec les rôles suivants:",
+    "ADD_WORKSPACE_MEMBER": "Ajouter des membres de espace de travail avec les rôles suivants:",
     "NUM_MEMBER": "Membres existants :",
     "TITLE": "Membres",
     "ADD": "Ajouter",
@@ -14,17 +14,17 @@
     "CONTRIBUTOR": "Contributeur",
     "WRITER": "Ecriture",
     "READER": "Lecture",
-    "DRIVE_ADMIN": "Admin du Drive ",
-    "DRIVE_WRITER": "Manager du Drive",
-    "DRIVE_READER": "Drive lecture",
+    "WORK_SPACE_ADMIN": "Admin d'espace de travail",
+    "WORK_SPACE_WRITER": "Manager d'espace de travail",
+    "WORK_SPACE_READER": "Espace de travail lecture",
     "ADMIN_RIGHTS": "Droit d'admin",
     "CONTRIBUTOR_RIGHTS": "Droit de contribution",
     "WRITER_RIGHTS": "Droit d'écriture",
     "READER_RIGHTS": "Droit de lecture",
-    "DRIVE_ADMIN_RIGHTS": "Droit d'administration du drive",
-    "DRIVE_WRITER_RIGHTS": "Droit d'administration des groupes de travail",
-    "DRIVE_READER_RIGHTS": "Droit de lecture sur les groupes de travail",
-    "DRIVE_ROLE": "Dans ce drive",
+    "WORK_SPACE_ADMIN_RIGHTS": "Droit d'administration d'espace de travail",
+    "WORK_SPACE_WRITER_RIGHTS": "Droit d'administration des groupes de travail",
+    "WORK_SPACE_READER_RIGHTS": "Droit de lecture sur les groupes de travail",
+    "WORKSPACE_ROLE": "Dans ce espace de travail",
     "DEFAULT_WORKGROUP_ROLE": "Rôle par défaut dans les groupes de travail ",
     "WORKGROUP_ROLE": "Rôle du groupe de travail",
     "MULTI_SELECT": "Edition multiple",
@@ -40,10 +40,10 @@
     },
     "MY_RIGHTS": "Mes droits",
     "TOOLTIPS": {
-      "DRIVE_ROLE": "Le rôle du membre pour ce drive",
-      "DEFAULT_WORKGROUP_ROLE": "Le rôle par défaut du membre pour tous les groupes de travail dans ce Drive"
+      "WORKSPACE_ROLE": "Le rôle du membre pour ce espace de travail",
+      "DEFAULT_WORKGROUP_ROLE": "Le rôle par défaut du membre pour tous les groupes de travail dans ce Espace de travail"
     },
-    "DRIVE_MEMBER": "Membre du drive",
+    "WORKSPACE_MEMBER": "Membre d'espace de travail",
     "EXTERNAL_USER": "Utilisateur externe"
   },
   "DETAILS": {
@@ -66,15 +66,15 @@
   },
   "CREATE_NEW_WORKGROUP": "Créer un nouveau groupe de travail",
   "CREATE_NEW_FOLDER": "Créer un nouveau dossier",
-  "CREATE_NEW_DRIVE": "Créer un nouveau Drive",
+  "CREATE_NEW_WORKSPACE": "Créer un nouveau Espace de travail",
   "SHARED_SPACE_TYPE": {
     "WORKGROUP": "Groupe de travail",
-    "DRIVE": "Drive"
+    "WORKSPACE": "Espace de travail"
   },
   "SHARED_SPACE_DIALOGS": {
     "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
       "TITLE": "Modifier le rôle par défaut des groupes de travail",
-      "MESSAGE": "Vous êtes sur le point de mettre à jour le rôle par défaut de ce membre dans tous les groupes de travail au sein du Drive <b>{{driveName}}</b>.",
+      "MESSAGE": "Vous êtes sur le point de mettre à jour le rôle par défaut de ce membre dans tous les groupes de travail au sein d'Espace de travail <b>{{workspaceName}}</b>.",
       "ACTION": "Forcer l'utilisation de ce role pour tous les groupes de travail existants",
       "BUTTONS": {
         "CONFIRM": "Mettre à jour"
@@ -82,7 +82,7 @@
     }
   },
   "SHARED_SPACE_TOOLTIPS": {
-    "DRIVE": "Un Drive ne contient que des groupes de travail, il permet de définir une liste de membres par défaut, avec leur role par défaut, pour tous les groupes de travail qui seront créés au sein de ce Drive.",
+    "WORKSPACE": "Un espace de travail ne contient que des groupes de travail, il permet de définir une liste de membres par défaut, avec leur role par défaut, pour tous les groupes de travail qui seront créés au sein de cet espace de travail.",
     "WORKGROUP": "Un groupe de travail est un espace de collaboration où il est possible d'ajouter des utilisateurs internes ou des invités. Les members seront alors capable de parcourir, créer, éditer et supprimer des fichiers et des dossiers au sein du groupe de travail en fonction de leur role."
   },
   "WORKGROUP_SEARCH_BOX": {

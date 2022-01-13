@@ -216,8 +216,8 @@
         template: require('../modules/linshare.sharedSpace/views/sharedSpaces.html'),
         controller: 'SharedSpaceController as vm',
       })
-      .state('sharedspace.drive', {
-        url: '/drive/:driveUuid',
+      .state('sharedspace.workspace', {
+        url: '/workspace/:workspaceUuid',
         template: require('../modules/linshare.sharedSpace/views/sharedSpaces.html'),
         controller: 'SharedSpaceController as vm',
       })
@@ -252,7 +252,7 @@
           workgroup: function(currentFolder, nodesList, $transition$, sharedSpaceRestService) {
             return sharedSpaceRestService.get($transition$.params().workgroupUuid, {
               withRole: true,
-              populateDrive: true
+              populateWorkspace: true
             }).catch(() => {
               $transition$.abort();
             });
@@ -284,7 +284,7 @@
         resolve: {
           sharedSpace: ($stateParams, sharedSpaceRestService) => sharedSpaceRestService.get($stateParams.sharedSpace, {
             withRole: true,
-            populateDrive: true
+            populateWorkspace: true
           }),
           folder: ($stateParams, workgroupNodesRestService) => workgroupNodesRestService.get(
             $stateParams.sharedSpace, $stateParams.folder, true),

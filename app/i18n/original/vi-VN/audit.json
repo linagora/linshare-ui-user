@@ -292,76 +292,76 @@
           }
         }
       },
-      "DRIVE": {
+      "WORK_SPACE": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã tạo một ổ đĩa mới: {{resourceName}}.",
+            "SENTENCE": "Bạn đã tạo một không gian làm việc mới: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã tạo một ổ đĩa: {{resourceName}}.",
+            "SENTENCE": "{{authorName}} đã tạo một không gian làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã xóa một ổ đĩa: {{resourceName}}.",
+            "SENTENCE": "Bạn đã xóa một không gian làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã xóa ổ đĩa: {{resourceName}}.",
+            "SENTENCE": "{{authorName}} đã xóa không gian làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã chỉnh sửa một ổ đĩa: {{resourceName}}.",
+            "SENTENCE": "Bạn đã chỉnh sửa một không gian làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã chỉnh sửa ổ đĩa: {{resourceName}}.",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa không gian làm việc: {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
       },
-      "DRIVE_MEMBER": {
+      "WORK_SPACE_MEMBER": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã thêm một thành viên: {{resourceName}} vào ổ đĩa {{resourceNameVarious}}.",
+            "SENTENCE": "Bạn đã thêm một thành viên: {{resourceName}} vào không gian làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã thêm một thành viên mới: {{resourceName}} vào ổ đĩa {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} đã thêm một thành viên mới: {{resourceName}} vào không gian làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã xóa thành viên: {{resourceName}} khỏi ổ đĩa {{resourceNameVarious}}.",
+            "SENTENCE": "Bạn đã xóa thành viên: {{resourceName}} khỏi không gian làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã xóa thành viên: {{resourceName}} khỏi ổ đĩa {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} đã xóa thành viên: {{resourceName}} khỏi không gian làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã chỉnh sửa thành viên: {{resourceName}} trong ổ đĩa {{resourceNameVarious}}.",
+            "SENTENCE": "Bạn đã chỉnh sửa thành viên: {{resourceName}} trong không gian làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã chỉnh sửa thành viên: {{resourceName}} trong ổ đĩa {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} đã chỉnh sửa thành viên: {{resourceName}} trong không gian làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "DRIVE_DELETION": {
+        "WORKSPACE_DELETION": {
           "AUTHOR": {
-            "SENTENCE": "Bạn đã xóa một ổ đĩa: {{resourceNameVarious}}.",
+            "SENTENCE": "Bạn đã xóa một không gian làm việc: {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} đã xóa ổ đĩa: {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} đã xóa không gian làm việc: {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         }

@@ -24,8 +24,8 @@
       "TITLE": "Выберите пункт назначения",
       "NO_SHARED_SPACE": "Там нет общего пространства. Пожалуйста, перейдите в <a href='#!/sharedspace/list'>список общих пробелов</a> и создайте один.",
       "NO_SHARED_SPACE_NO_PERMISSION": "Там нет общего пространства. Попросите администратора создать один для вас или быть добавленным в один в качестве вкладчика.",
-      "NO_WORKGROUP": "Внутри <b>{{driveName}}</b> года нет рабочей группы. Пожалуйста, выйдите в <a ui-sref='sharedspace.drive({ driveUuid: \"{{driveUuid}}\" })' ui-sref-opts='{ reload: true }'>{{driveName}}</a> и создайте один.",
-      "NO_WORKGROUP_NO_PERMISSION": "Внутри привода нет рабочей группы <b>{{driveName}}}</b>. Попросите администратора создать один для вас или быть добавленным в один в качестве вкладчика. ",
+      "NO_WORKGROUP": "Внутри <b>{{workspaceName}}</b> года нет рабочей группы. Пожалуйста, выйдите в <a ui-sref='sharedspace.workspace({ workspaceUuid: \"{{workspaceUuid}}\" })' ui-sref-opts='{ reload: true }'>{{workspaceName}}</a> и создайте один.",
+      "NO_WORKGROUP_NO_PERMISSION": "Внутри привода нет рабочей группы <b>{{workspaceName}}}</b>. Попросите администратора создать один для вас или быть добавленным в один в качестве вкладчика. ",
       "EMPTY_FOLDER": "Папка пуста"
      },
     "RIGHT_PANEL": {

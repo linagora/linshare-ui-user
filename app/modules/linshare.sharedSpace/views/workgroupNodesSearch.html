@@ -32,18 +32,18 @@
               </a>
             </div>
             <div id="root-level">
-              <span ng-if="workgroupSearchVm.drive" class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+              <span ng-if="workgroupSearchVm.workspace" class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
               <a
-                class="set-ellipsis drive-breadcrumb"
-                ng-if="workgroupSearchVm.drive"
+                class="set-ellipsis workspace-breadcrumb"
+                ng-if="workgroupSearchVm.workspace"
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
                 tooltip-popup-delay="1200"
-                uib-tooltip="{{::workgroupSearchVm.drive.name}}"
-                ng-click="workgroupSearchVm.goToDrive()"
-                ui-sref="sharedspace.drive"
+                uib-tooltip="{{::workgroupSearchVm.workspace.name}}"
+                ng-click="workgroupSearchVm.goToWorkspace()"
+                ui-sref="sharedspace.workspace"
               >
-                {{::workgroupSearchVm.drive.name}}
+                {{::workgroupSearchVm.workspace.name}}
               </a>
               <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
               <a

@@ -71,7 +71,7 @@ function sharedSpaceMembersController(
   sharedSpaceMembersVm.propertyOrderBy = 'firstName';
   sharedSpaceMembersVm.propertyOrderByAsc = true;
   sharedSpaceMembersVm.members = [];
-  sharedSpaceMembersVm.driveMembers = [];
+  sharedSpaceMembersVm.workspaceMembers = [];
 
   sharedSpaceMembersVm.$onInit = $onInit;
 
@@ -80,15 +80,15 @@ function sharedSpaceMembersController(
   function $onInit() {
     onSelfRemoveFromSharedSpace = sidebarService.getData().onSelfRemoveFromSharedSpace;
     sharedSpaceMembersVm.currentWorkGroup = sidebarService.getData().currentSelectedDocument;
-    sharedSpaceMembersVm.currentDrive = sidebarService.getData().currentDrive;
+    sharedSpaceMembersVm.currentWorkspace = sidebarService.getData().currentWorkspace;
 
-    if (sharedSpaceMembersVm.currentDrive && sharedSpaceMembersVm.currentDrive.uuid) {
-      sharedSpaceMembersRestService.getList(sharedSpaceMembersVm.currentDrive.uuid)
-        .then(driveMembers => {
-          sharedSpaceMembersVm.driveMembers = driveMembers.plain().map(member => member.account && member.account.mail).filter(Boolean);
+    if (sharedSpaceMembersVm.currentWorkspace && sharedSpaceMembersVm.currentWorkspace.uuid) {
+      sharedSpaceMembersRestService.getList(sharedSpaceMembersVm.currentWorkspace.uuid)
+        .then(workspaceMembers => {
+          sharedSpaceMembersVm.workspaceMembers = workspaceMembers.plain().map(member => member.account && member.account.mail).filter(Boolean);
         })
         .catch(() => {
-          sharedSpaceMembersVm.driveMembers = [];
+          sharedSpaceMembersVm.workspaceMembers = [];
         });
     }
 
@@ -96,7 +96,7 @@ function sharedSpaceMembersController(
       const defaultConfiguredRoleIndex = roles.findIndex(role =>
         role.name === (sharedSpaceMembersVm.currentWorkGroup.current.nodeType === 'WORK_GROUP' ?
           lsAppConfig.defaultWorkgroupMemberRole :
-          lsAppConfig.defaultDriveMemberRole )
+          lsAppConfig.defaultWorkspaceMemberRole )
       );
 
       sharedSpaceMembersVm.membersRights = roles.sort((a, b) => {
@@ -105,7 +105,7 @@ function sharedSpaceMembersController(
       sharedSpaceMembersVm.memberRole = sharedSpaceMembersVm.membersRights[defaultConfiguredRoleIndex];
     });
 
-    if (sharedSpaceMembersVm.currentWorkGroup.current.nodeType === 'DRIVE') {
+    if (sharedSpaceMembersVm.currentWorkGroup.current.nodeType === 'WORK_SPACE') {
       workgroupRolesRestService.getList('WORK_GROUP').then(roles => {
         const defaultConfiguredRoleIndex = roles.findIndex(role => role.name === lsAppConfig.defaultWorkgroupMemberRole);
 
@@ -151,7 +151,7 @@ function sharedSpaceMembersController(
       toastService.error({
         key: sharedSpaceMembersVm.currentWorkGroup.current.nodeType === 'WORK_GROUP' ?
           'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_WORKGROUP' :
-          'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_DRIVE',
+          'TOAST_ALERT.ERROR.MEMBER_ALREADY_IN_WORKSPACE',
         params: {
           firstName: member.firstName,
           lastName: member.lastName
@@ -218,13 +218,13 @@ function sharedSpaceMembersController(
    * @memberOf LinShare.sharedSpace.sharedSpaceMembersController
    */
   function removeMember(currentSharedSpace, member) {
-    if (currentSharedSpace.nodeType === 'WORK_GROUP' && sharedSpaceMembersVm.driveMembers.includes(member.account.mail)) {
-      $log.error('This member is a part of the drive');
+    if (currentSharedSpace.nodeType === 'WORK_GROUP' && sharedSpaceMembersVm.workspaceMembers.includes(member.account.mail)) {
+      $log.error('This member is a part of the workspace');
 
       return;
     }
 
-    const translationPrefix = currentSharedSpace.nodeType === 'DRIVE' ? 'SWEET_ALERT.ON_DRIVE_MEMBER_DELETE' : 'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE';
+    const translationPrefix = currentSharedSpace.nodeType === 'WORK_SPACE' ? 'SWEET_ALERT.ON_WORKSPACE_MEMBER_DELETE' : 'SWEET_ALERT.ON_WORKGROUP_MEMBER_DELETE';
     const selfRemove = member && member.account && member.account.uuid === sharedSpaceMembersVm.loggedUser.uuid;
 
     $q.all([
@@ -262,7 +262,7 @@ function sharedSpaceMembersController(
         }
 
         toastService.success({
-          key: currentSharedSpace.nodeType === 'WORK_GROUP' ? 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER' : 'TOAST_ALERT.ACTION.DELETE_DRIVE_MEMBER',
+          key: currentSharedSpace.nodeType === 'WORK_GROUP' ? 'TOAST_ALERT.ACTION.DELETE_WORKGROUP_MEMBER' : 'TOAST_ALERT.ACTION.DELETE_WORKSPACE_MEMBER',
           params: {
             firstName: member.account.firstName,
             lastName: member.account.lastName,
@@ -331,7 +331,7 @@ function sharedSpaceMembersController(
       nestedRole: nestedRole && nestedRole.uuid && {
         uuid: nestedRole.uuid
       },
-      type: nestedRole && 'DRIVE'
+      type: nestedRole && 'WORK_SPACE'
     };
   }
 

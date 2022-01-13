@@ -282,76 +282,76 @@
             }
           }
         },
-        "DRIVE": {
+        "WORKSPACE": {
           "CREATE": {
             "AUTHOR": {
-              "SENTENCE": "вы создали новый DRIVE {{resourceName}}.",
+              "SENTENCE": "вы создали новый Рабочее пространство {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} создал новый DRIVE {{resourceName}}.",
+              "SENTENCE": "{{authorName}} создал новый Рабочее пространство {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
             }
           },
           "DELETE": {
             "AUTHOR": {
-              "SENTENCE": "вы удалили DRIVE {{resourceName}}",
+              "SENTENCE": "вы удалили Рабочее пространство {{resourceName}}",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} удалил DRIVE {{resourceName}}.",
+              "SENTENCE": "{{authorName}} удалил Рабочее пространство {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             }
           },
           "UPDATE": {
             "AUTHOR": {
-              "SENTENCE": "вы изменили DRIVE {{resourceName}}.",
+              "SENTENCE": "вы изменили Рабочее пространство {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} изменил DRIVE {{resourceName}}.",
+              "SENTENCE": "{{authorName}} изменил Рабочее пространство {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           }
         },
-        "DRIVE_MEMBER": {
+        "WORK_SPACE_MEMBER": {
           "CREATE": {
             "AUTHOR": {
-              "SENTENCE": "вы добавили нового участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "вы добавили нового участника {{resourceName}} в Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} добавил нового участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "{{authorName}} добавил нового участника {{resourceName}} в Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
             }
           },
           "DELETE": {
             "AUTHOR": {
-              "SENTENCE": "вы удалили участника {{resourceName}} из DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "вы удалили участника {{resourceName}} из Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} удалил участника {{resourceName}} из DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "{{authorName}} удалил участника {{resourceName}} из Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             }
           },
           "UPDATE": {
             "AUTHOR": {
-              "SENTENCE": "вы изменили участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "вы изменили участника {{resourceName}} в Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} изменил участника {{resourceName}} в DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "{{authorName}} изменил участника {{resourceName}} в Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           },
-          "DRIVE_DELETION": {
+          "WORKSPACE_DELETION": {
             "AUTHOR": {
-              "SENTENCE": "вы удалили DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "вы удалили Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             },
             "VIEWER": {
-              "SENTENCE": "{{authorName}} удалил DRIVE {{resourceNameVarious}}.",
+              "SENTENCE": "{{authorName}} удалил Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             }
           }
@@ -907,8 +907,8 @@
         "CONTACTS_LISTS": "Список контактов",
         "CONTACTS_LISTS_CONTACTS": "Контакт",
         "DOCUMENT_ENTRY": "Моё пространство",
-        "DRIVE" : "Drive",
-        "DRIVE_MEMBER" : "Drive - участник",
+        "WORKSPACE" : "Рабочее пространство",
+        "WORKSPACE_MEMBER" : "Рабочее пространство - участник",
         "GUEST": "Гостевой аккаунт",
         "JWT_PERMANENT_TOKEN": "токен постоянного доступа",
         "SHARE_ENTRY": "Общий доступ",

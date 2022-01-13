@@ -282,76 +282,76 @@
           }
         }
       },
-      "DRIVE": {
+      "WORKSPACE": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez créé un nouveau DRIVE : {{resourceName}}.",
+            "SENTENCE": "Vous avez créé un nouveau espace de travail : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a créé un nouveau DRIVE : {{resourceName}}.",
+            "SENTENCE": "{{authorName}} a créé un nouveau espace de travail : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez supprimé le DRIVE : {{resourceName}}.",
+            "SENTENCE": "Vous avez supprimé l'espace de travail : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a supprimé le DRIVE : {{resourceName}}.",
+            "SENTENCE": "{{authorName}} a supprimé l'espace de travail : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez modifié le DRIVE : {{resourceName}}.",
+            "SENTENCE": "Vous avez modifié l'espace de travail : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a modifié le DRIVE : {{resourceName}}.",
+            "SENTENCE": "{{authorName}} a modifié l'espace de travail : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         }
       },
-      "DRIVE_MEMBER": {
+      "WORK_SPACE_MEMBER": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez ajouté un nouveau membre : {{resourceName}} au DRIVE {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez ajouté un nouveau membre : {{resourceName}} au espace de travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a ajouté un nouveau membre : {{resourceName}} au DRIVE {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a ajouté un nouveau membre : {{resourceName}} au espace de travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           }
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez supprimé le membre : {{resourceName}} du DRIVE {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez supprimé le membre : {{resourceName}} d'espace de travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a supprimé le membre : {{resourceName}} du DRIVE {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a supprimé le membre : {{resourceName}} d'espace de travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
         "UPDATE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez modifié le membre : {{resourceName}} du DRIVE {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez modifié le membre : {{resourceName}} d'espace de travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a modifié le membre : {{resourceName}} du DRIVE {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a modifié le membre : {{resourceName}} d'espace de travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "DRIVE_DELETION": {
+        "WORKSPACE_DELETION": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez supprimé le DRIVE : {{resourceNameVarious}}.",
+            "SENTENCE": "Vous avez supprimé l'espace de travail : {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a supprimé le DRIVE : {{resourceNameVarious}}.",
+            "SENTENCE": "{{authorName}} a supprimé l'espace de travail : {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         }
@@ -907,8 +907,8 @@
       "CONTACTS_LISTS": "Liste de Contact",
       "CONTACTS_LISTS_CONTACTS": "Contact",
       "DOCUMENT_ENTRY": "Espace Personnel",
-      "DRIVE" : "Drive",
-      "DRIVE_MEMBER" : "Drive - Membre",
+      "WORKSPACE" : "Espace de travail",
+      "WORKSPACE_MEMBER" : "Espace de travail - Membre",
       "GUEST": "Compte Invité",
       "JWT_PERMANENT_TOKEN": "Jeton d'accès permanent (JWT)",
       "SHARE_ENTRY": "Partage",

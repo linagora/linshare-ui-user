@@ -41,7 +41,7 @@ function BrowseController(
   let workgroupCreatePermission;
   const browseVm = this;
   const TYPE_WORKGROUP = 'WORK_GROUP';
-  const TYPE_DRIVE = 'DRIVE';
+  const TYPE_WORKSPACE = 'WORK_SPACE';
   const TYPE_FOLDER = 'FOLDER';
   const TYPE_DOCUMENT = 'DOCUMENT';
   const TYPE_ROOT_FOLDER = 'ROOT_FOLDER';
@@ -49,7 +49,7 @@ function BrowseController(
   browseVm.TYPE_FOLDER = TYPE_FOLDER;
   browseVm.TYPE_DOCUMENT = TYPE_DOCUMENT;
   browseVm.TYPE_WORKGROUP = TYPE_WORKGROUP;
-  browseVm.TYPE_DRIVE = TYPE_DRIVE;
+  browseVm.TYPE_WORKSPACE = TYPE_WORKSPACE;
   browseVm.displayCreateInput = false;
   browseVm.displayFilterInput = false;
   browseVm.loading = true;
@@ -193,13 +193,13 @@ function BrowseController(
   function loadFolderThenList(folder) {
     sharedSpaceRestService.get(folder.workGroup, {
       withRole: true,
-      populateDrive: true
+      populateWorkspace: true
     })
       .then(workgroup => {
         browseVm.currentWorkgroup = workgroup;
         browseVm.breadcrumbs.push(workgroup);
 
-        return [workgroup, workgroup.drive].filter(Boolean);
+        return [workgroup, workgroup.workspace].filter(Boolean);
       })
       .then(workgroupPermissionsService.getWorkgroupsPermissions)
       .then(workgroupPermissionsService.formatPermissions)
@@ -218,15 +218,15 @@ function BrowseController(
       });
   }
 
-  function listSharedSpaces(drive = {}) {
+  function listSharedSpaces(workspace = {}) {
     browseVm.loading = true;
 
-    return sharedSpaceRestService.getList(true, drive.uuid)
+    return sharedSpaceRestService.getList(true, workspace.uuid)
       .then(orderNodesByModificationDate)
       .then(list => {
         browseVm.currentList = list;
 
-        return [drive, ...list].filter(item => !!item.role);
+        return [workspace, ...list].filter(item => !!item.role);
       })
       .then(workgroupPermissionsService.getWorkgroupsPermissions)
       .then(workgroupPermissionsService.formatPermissions)
@@ -270,7 +270,7 @@ function BrowseController(
       return listSharedSpaces();
     }
 
-    if (parentNode.nodeType === TYPE_DRIVE) {
+    if (parentNode.nodeType === TYPE_WORKSPACE) {
       browseVm.currentWorkgroup = {};
 
       return listSharedSpaces(parentNode);
@@ -289,7 +289,7 @@ function BrowseController(
 
     browseVm.breadcrumbs.push(selectedFolder);
 
-    if (selectedFolder.nodeType === TYPE_DRIVE) {
+    if (selectedFolder.nodeType === TYPE_WORKSPACE) {
       return listSharedSpaces(selectedFolder);
     }
 
@@ -437,8 +437,8 @@ function BrowseController(
       return 'ls-workgroup';
     }
 
-    if (node.nodeType === TYPE_DRIVE) {
-      return 'ls-drive';
+    if (node.nodeType === TYPE_WORKSPACE) {
+      return 'ls-workspace';
     }
 
     if (node.type === TYPE_FOLDER) {
@@ -451,7 +451,7 @@ function BrowseController(
   }
 
   function canPerformAction() {
-    if (!browseVm.breadcrumbs.length || _.last(browseVm.breadcrumbs).nodeType === TYPE_DRIVE) {
+    if (!browseVm.breadcrumbs.length || _.last(browseVm.breadcrumbs).nodeType === TYPE_WORKSPACE) {
       return false;
     }
 
@@ -473,7 +473,7 @@ function BrowseController(
   function isListingSharedSpaces() {
     return !browseVm.breadcrumbs.length || (
       browseVm.breadcrumbs.length === 1 &&
-      browseVm.breadcrumbs[0].nodeType === TYPE_DRIVE
+      browseVm.breadcrumbs[0].nodeType === TYPE_WORKSPACE
     );
   }
 
@@ -482,11 +482,11 @@ function BrowseController(
       return workgroupCreatePermission;
     }
 
-    if (browseVm.breadcrumbs.length === 1 && browseVm.breadcrumbs[0].nodeType === TYPE_DRIVE) {
+    if (browseVm.breadcrumbs.length === 1 && browseVm.breadcrumbs[0].nodeType === TYPE_WORKSPACE) {
       return workgroupCreatePermission &&
         browseVm.permissions[browseVm.breadcrumbs[0].uuid] &&
-        browseVm.permissions[browseVm.breadcrumbs[0].uuid].WORKGROUP &&
-        browseVm.permissions[browseVm.breadcrumbs[0].uuid].WORKGROUP.CREATE;
+        browseVm.permissions[browseVm.breadcrumbs[0].uuid].WORK_GROUP &&
+        browseVm.permissions[browseVm.breadcrumbs[0].uuid].WORK_GROUP.CREATE;
     }
   }
 }

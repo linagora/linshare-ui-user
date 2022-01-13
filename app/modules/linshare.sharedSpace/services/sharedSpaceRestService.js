@@ -55,7 +55,7 @@
      * @param {Object} options
      * - withMembers: includes members
      * - withRole: includes role
-     * - populateDrive: populate drive field if exists
+     * - populateWorkspace: populate workspace field if exists
      * @returns {Promise} server response
      * @memberOf LinShare.sharedSpace.sharedSpaceRestService
      */
@@ -64,19 +64,19 @@
       {
         withMembers = false,
         withRole = false,
-        populateDrive = false
+        populateWorkspace = false
       } = {}
     ) {
       $log.debug('sharedSpaceRestService : get', uuid);
 
       return _fetchSharedSpace(uuid, false)
         .then(sharedSpace => {
-          if (!sharedSpace.parentUuid || !populateDrive) {
+          if (!sharedSpace.parentUuid || !populateWorkspace) {
             return sharedSpace;
           }
 
-          return _fetchSharedSpace(sharedSpace.parentUuid, true).then(drive => {
-            sharedSpace.drive = drive;
+          return _fetchSharedSpace(sharedSpace.parentUuid, true).then(workspace => {
+            sharedSpace.workspace = workspace;
 
             return sharedSpace;
           }).catch(() => sharedSpace);

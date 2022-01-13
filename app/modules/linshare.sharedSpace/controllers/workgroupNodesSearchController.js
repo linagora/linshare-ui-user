@@ -68,7 +68,7 @@ function workgroupNodesSearchController(
   workgroupSearchVm.downloadNode = downloadNode;
   workgroupSearchVm.getNodeDetails = getNodeDetails;
   workgroupSearchVm.goToFolder = goToFolder;
-  workgroupSearchVm.goToDrive = goToDrive;
+  workgroupSearchVm.goToWorkspace = goToWorkspace;
   workgroupSearchVm.goToNodeDestination = goToNodeDestination;
   workgroupSearchVm.goToPreviousFolder = goToPreviousFolder;
   workgroupSearchVm.multiDownload = multiDownload;
@@ -279,8 +279,8 @@ function workgroupNodesSearchController(
 
   function goToPreviousFolder(goToWorkgroupPage, folder) {
     if (goToWorkgroupPage) {
-      if (sharedSpace && sharedSpace.parentUuid && workgroupSearchVm.drive) {
-        $state.go('sharedspace.drive', { driveUuid: sharedSpace.parentUuid });
+      if (sharedSpace && sharedSpace.parentUuid && workgroupSearchVm.workspace) {
+        $state.go('sharedspace.workspace', { workspaceUuid: sharedSpace.parentUuid });
       } else {
         $state.go('sharedspace.all');
       }
@@ -320,10 +320,10 @@ function workgroupNodesSearchController(
     sharedSpaceRestService.get(sharedSpace.uuid, {
       withRole: true,
       withMembers: true,
-      populateDrive: true
+      populateWorkspace: true
     })
       .then(workgroup => {
-        workgroupSearchVm.currentDrive = workgroup.drive;
+        workgroupSearchVm.currentWorkspace = workgroup.workspace;
         workgroupSearchVm.currentSelectedDocument.current = Object.assign({}, workgroup);
         workgroupSearchVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
@@ -339,9 +339,9 @@ function workgroupNodesSearchController(
   }
 
 
-  function goToDrive() {
-    if (workgroupSearchVm.drive) {
-      $state.go('sharedspace.drive', {driveUuid: workgroupSearchVm.drive.uuid});
+  function goToWorkspace() {
+    if (workgroupSearchVm.workspace) {
+      $state.go('sharedspace.workspace', {workspaceUuid: workgroupSearchVm.workspace.uuid});
     }
   }
 

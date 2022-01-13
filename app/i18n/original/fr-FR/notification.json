@@ -16,8 +16,8 @@
         "GUEST": "Vous êtes sur le point de supprimer {singular, select, true{un compte invité} other{{nbItems} comptes invités}}. Attention, cette action est irreversible.",
         "RECEIVED_SHARE": "Vous êtes sur le point de supprimer {singular, select, true{un partage} other{{nbItems} partages}}. Attention, cette action est irreversible.",
         "WORKGROUP": "Vous êtes sur le point de supprimer {singular, select, true{un groupe de travail} other{{nbItems} groupes de travail}}. Attention, cette action est irreversible.",
-        "DRIVE": "Vous êtes sur le point de supprimer {singular, select, true{un drive} other{{nbItems} drives}} ! Attention, cette action est irreversible.",
-        "WORKGROUP_AND_DRIVE": "Vous êtes sur le point de supprimer {nbItems} drives et groupes de travail ! Attention, cette action est irreversible.",
+        "WORKSPACE": "Vous êtes sur le point de supprimer {singular, select, true{un espace de travail} other{{nbItems} espaces de travail}} ! Attention, cette action est irreversible.",
+        "WORKGROUP_AND_WORKSPACE": "Vous êtes sur le point de supprimer {nbItems} espaces de travail et groupes de travail ! Attention, cette action est irreversible.",
         "WORKGROUP_NODE": "Vous êtes sur le point de supprimer {singular, select, true{un document ou dossier} other{{nbItems} documents ou dossiers}}! Attention, cette action est irreversible.",
         "WORKGROUP_VERSION": "Vous êtes sur le point de supprimer {singular, select, true{une version} other{{nbItems} des versions}}! Attention, cette action est irreversible.",
         "WORKGROUP_VERSION_LAST": "Il s'agit de la dernière version, vous êtes sur le point de supprimer le fichier! Attention, cette action est irreversible.",
@@ -52,17 +52,17 @@
       "TEXT": "Vous êtes sur le point de supprimer {{firstName}} {{lastName}} du groupe de travail {{workgroupName}}.",
       "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du groupe de travail {{sharedSpaceName}}. Vous n'aurez plus accès à ce groupe de travail."
     },
-    "ON_DRIVE_MEMBER_DELETE": {
+    "ON_WORKSPACE_MEMBER_DELETE": {
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
       "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} du Drive {{driveName}} et  par conséquent de tous les groupes de travail au sein de celui-ci.",
-      "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du drive {{sharedSpaceName}}. Vous n'aurez plus accès à ce drive."
+      "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} du espace de travail {{workspaceName}} et  par conséquent de tous les groupes de travail au sein de celui-ci.",
+      "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du espace de travail {{sharedSpaceName}}. Vous n'aurez plus accès à ce espace de travail."
     },
     "ON_GUEST_QUICK_CREATE": {
       "CANCEL_BUTTON": "Non",
       "CONFIRM_BUTTON": "Oui",
-      "TITLE": "Créer un invité ?",
+      "TITLE": "Créer un invité ?",
       "TEXT": "Vous inviterez {{mail}} en tant qu'invité."
     }
   },
@@ -81,7 +81,7 @@
       "DELETE_SINGULAR_VERSION": "La version a été supprimée avec succès.",
       "DELETE_PLURAL_VERSION": "Les versions ont été supprimées avec succès.",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} a été supprimé du groupe de travail.",
-      "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} a été supprimé du Drive",
+      "DELETE_WORKSPACE_MEMBER": "{{firstName}} {{lastName}} a été supprimé du espace de travail",
       "DETAILS": "Détails",
       "INSERT": "L'élément a été ajouté avec succès.",
       "REFRESH": "Vous devez rafraichir l'application pour prendre cette action en compte",
@@ -127,7 +127,7 @@
       },
       "NO_RESPONSE_ERROR": "Erreur sans réponse du serveur, voir les logs.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} est déjà membre de ce groupe de travail.",
-      "MEMBER_ALREADY_IN_DRIVE": "{{firstName}} {{lastName}} est déjà membre de ce Drive.",
+      "MEMBER_ALREADY_IN_WORKSPACE": "{{firstName}} {{lastName}} est déjà membre de ce espace de travail.",
       "RESTORE": "Erreur lors de la restoration de version"
     },
     "WARNING": {

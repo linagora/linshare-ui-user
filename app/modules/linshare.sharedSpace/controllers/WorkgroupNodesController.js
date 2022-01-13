@@ -99,7 +99,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.getNodeDetails = getNodeDetails;
   workgroupNodesVm.goToFolder = goToFolder;
   workgroupNodesVm.goToPreviousFolder = goToPreviousFolder;
-  workgroupNodesVm.goToDrive = goToDrive;
+  workgroupNodesVm.goToWorkspace = goToWorkspace;
   workgroupNodesVm.goToSearchPage = goToSearchPage;
   workgroupNodesVm.isDocument = isDocument;
   workgroupNodesVm.loadSidebarContent = loadSidebarContent;
@@ -122,7 +122,7 @@ function WorkgroupNodesController(
   workgroupNodesVm.canCopyNodeToPersonalSpace = user.canUpload;
   workgroupNodesVm.canDownloadSelectedFiles = canDownloadSelectedFiles;
   workgroupNodesVm.selectMultipleWithAtLeastOneFolder = selectMultipleWithAtLeastOneFolder;
-  workgroupNodesVm.driveUuid = $state.params && $state.params.driveUuid;
+  workgroupNodesVm.workspaceUuid = $state.params && $state.params.workspaceUuid;
   workgroupNodesVm.onSelfRemoveFromSharedSpace = () => $state.go('sharedspace.all');
 
   workgroupNodesVm.$onInit = $onInit;
@@ -620,8 +620,8 @@ function WorkgroupNodesController(
    */
   function goToPreviousFolder(goToWorkgroupPage, folder) {
     if (goToWorkgroupPage) {
-      if (workgroup && workgroup.parentUuid && workgroupNodesVm.drive && $state.current.name === 'sharedspace.workgroups.root') {
-        $state.go('sharedspace.drive', {driveUuid: workgroup.parentUuid});
+      if (workgroup && workgroup.parentUuid && workgroupNodesVm.workspace && $state.current.name === 'sharedspace.workgroups.root') {
+        $state.go('sharedspace.workspace', {workspaceUuid: workgroup.parentUuid});
       } else {
         $state.go('sharedspace.all');
       }
@@ -957,7 +957,7 @@ function WorkgroupNodesController(
     sharedSpaceRestService.get(workgroupNodesVm.folderDetails.workgroupUuid, {
       withRole: true,
       withMembers: true,
-      populateDrive: true
+      populateWorkspace: true
     })
       .then(workgroup => {
         // TODO : remove the map once the property userMail will be changed to mail
@@ -971,7 +971,7 @@ function WorkgroupNodesController(
         return workgroup;
       })
       .then(workgroup => {
-        workgroupNodesVm.currentDrive = workgroup.drive;
+        workgroupNodesVm.currentWorkspace = workgroup.workspace;
         workgroupNodesVm.currentSelectedDocument.current = Object.assign({}, workgroup);
         workgroupNodesVm.currentSelectedDocument.original = Object.assign({}, workgroup);
 
@@ -1347,9 +1347,9 @@ function WorkgroupNodesController(
     return workgroupNodesRestService.update(source.workGroup, source);
   }
 
-  function goToDrive() {
-    if (workgroupNodesVm.drive) {
-      $state.go('sharedspace.drive', {driveUuid: workgroupNodesVm.drive.uuid});
+  function goToWorkspace() {
+    if (workgroupNodesVm.workspace) {
+      $state.go('sharedspace.workspace', {workspaceUuid: workgroupNodesVm.workspace.uuid});
     }
   }
 

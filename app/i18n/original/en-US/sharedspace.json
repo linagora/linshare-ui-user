@@ -1,7 +1,7 @@
 {
   "MEMBER_TAB": {
     "ADD_MEMBER": "Add team members :",
-    "ADD_DRIVE_MEMBER": "Add drive members with following roles:",
+    "ADD_WORKSPACE_MEMBER": "Add workspace members with following roles:",
     "NUM_MEMBER": "Existing members:",
     "TITLE": "Members",
     "ADD": "Add",
@@ -15,17 +15,17 @@
     "CONTRIBUTOR": "Contributor",
     "WRITER": "Writer",
     "READER": "Reader",
-    "DRIVE_ADMIN": "Drive admin",
-    "DRIVE_WRITER": "Drive writer",
-    "DRIVE_READER": "Drive reader",
+    "WORK_SPACE_ADMIN": "Workspace admin",
+    "WORK_SPACE_WRITER": "Workspace writer",
+    "WORK_SPACE_READER": "Workspace reader",
     "ADMIN_RIGHTS": "Admin rights",
     "CONTRIBUTOR_RIGHTS": "Contributor rights",
     "WRITER_RIGHTS": "Writer rights",
     "READER_RIGHTS": "Reader rights",
-    "DRIVE_ADMIN_RIGHTS": "Drive admin rights",
-    "DRIVE_WRITER_RIGHTS": "Drive writer rights",
-    "DRIVE_READER_RIGHTS": "Drive reader rights",
-    "DRIVE_ROLE": "In this drive",
+    "WORK_SPACE_ADMIN_RIGHTS": "Workspace admin rights",
+    "WORK_SPACE_WRITER_RIGHTS": "Workspace writer rights",
+    "WORK_SPACE_READER_RIGHTS": "Workspace reader rights",
+    "WORKSPACE_ROLE": "In this workspace",
     "DEFAULT_WORKGROUP_ROLE": "Default in workgroups",
     "WORKGROUP_ROLE": "Workgroup role",
     "MULTI_SELECT": "multi-select",
@@ -41,10 +41,10 @@
     },
     "MY_RIGHTS": "My rights",
     "TOOLTIPS": {
-      "DRIVE_ROLE": "The member’s role of this drive",
-      "DEFAULT_WORKGROUP_ROLE": "The member’s default role of all workgroups inside this drive"
+      "WORKSPACE_ROLE": "The member's role of this workspace",
+      "DEFAULT_WORKGROUP_ROLE": "The member's default role of all workgroups inside this workspace"
     },
-    "DRIVE_MEMBER": "Drive member",
+    "WORKSPACE_MEMBER": "Workspace member",
     "EXTERNAL_USER": "External user"
   },
   "DETAILS": {
@@ -67,15 +67,15 @@
   },
   "CREATE_NEW_WORKGROUP": "Create new workgroup",
   "CREATE_NEW_FOLDER": "Create new folder",
-  "CREATE_NEW_DRIVE": "Create new drive",
+  "CREATE_NEW_WORKSPACE": "Create new workspace",
   "SHARED_SPACE_TYPE": {
     "WORKGROUP": "Workgroup",
-    "DRIVE": "Drive"
+    "WORKSPACE": "Workspace"
   },
   "SHARED_SPACE_DIALOGS": {
     "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
       "TITLE": "Edit default workgroup role",
-      "MESSAGE": "You are about to update member's default role to all workgroups inside the drive <b>{{driveName}}</b>.",
+      "MESSAGE": "You are about to update member's default role to all workgroups inside the workspace <b>{{workspaceName}}</b>.",
       "ACTION": "Override this role for all existing workgroups",
       "BUTTONS": {
         "CONFIRM": "UPDATE"
@@ -83,7 +83,7 @@
     }
   },
   "SHARED_SPACE_TOOLTIPS": {
-    "DRIVE": "A Drive contains only Workgroups, a Drive will allow you to define a list of default members for all nested Workgroups with their default role (browse, create, etc)",
+    "WORKSPACE": "A Workspace contains only Workgroups, a Workspace will allow you to define a list of default members for all nested Workgroups with their default role (browse, create, etc)",
     "WORKGROUP": "A workgroup is a collaborating space where you can add members like internal or guest users. These members will be able to browse, create, update or delete files and folders inside the workgroup according to their roles."
   },
   "WORKGROUP_SEARCH_BOX": {

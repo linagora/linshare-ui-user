@@ -16,8 +16,8 @@
         "GUEST": "You are about to remove {singular, select, true{a guest} other{{nbItems} guests}} ! Beware, this action cannot be undone.",
         "RECEIVED_SHARE": "You are about to remove {singular, select, true{a file share} other{{nbItems} files share}} ! Beware, this action cannot be undone.",
         "WORKGROUP": "You are about to remove {singular, select, true{a workgroup} other{{nbItems} workgroups}} ! Beware, this action cannot be undone.",
-        "DRIVE": "You are about to remove {singular, select, true{a drive} other{{nbItems} drives}} ! Beware, this action cannot be undone.",
-        "WORKGROUP_AND_DRIVE": "You are about to remove {nbItems} workgroups and drives ! Beware, this action cannot be undone.",
+        "WORKSPACE": "You are about to remove {singular, select, true{a workspace} other{{nbItems} workspaces}} ! Beware, this action cannot be undone.",
+        "WORKGROUP_AND_WORKSPACE": "You are about to remove {nbItems} workgroups and workspaces ! Beware, this action cannot be undone.",
         "WORKGROUP_NODE": "You are about to remove {singular, select, true{a document or folder} other{{nbItems} documents or folders}} ! Beware, this action cannot be undone.",
         "WORKGROUP_VERSION":"You are about to remove {singular, select, true{a version} other{{nbItems} versions}} ! Beware, this action cannot be undone.",
         "WORKGROUP_VERSION_LAST": "This is the last version, you are about to delete the file! Beware, this action cannot be undone.",
@@ -52,12 +52,12 @@
       "TEXT": "You are about to remove {{firstName}} {{lastName}} from the workgroup {{sharedSpaceName}}.",
       "SELF_REMOVE_TEXT": "You are about to remove yourself from the workgroup {{sharedSpaceName}}. You will no longer have access to this workgroup."
     },
-    "ON_DRIVE_MEMBER_DELETE": {
+    "ON_WORKSPACE_MEMBER_DELETE": {
       "CANCEL_BUTTON": "Cancel",
       "CONFIRM_BUTTON": "Yes, delete",
       "TITLE": "Member deletion",
-      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the drive {{sharedSpaceName}} and all related workgroups.",
-      "SELF_REMOVE_TEXT": "You are about to remove yourself from the drive {{sharedSpaceName}}. You will no longer have access to this drive."
+      "TEXT": "You are about to remove {{firstName}} {{lastName}} from the workspace {{sharedSpaceName}} and all related workgroups.",
+      "SELF_REMOVE_TEXT": "You are about to remove yourself from the workspace {{sharedSpaceName}}. You will no longer have access to this workspace."
     },
     "ON_GUEST_QUICK_CREATE": {
       "CANCEL_BUTTON": "No",
@@ -81,7 +81,7 @@
       "DELETE_SINGULAR_VERSION": "The version was deleted successfully.",
       "DELETE_PLURAL_VERSION": "The versions were deleted successfully.",
       "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} has been removed successfully from the Workgroup",
-      "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} has been removed successfully from the Drive",
+      "DELETE_WORKSPACE_MEMBER": "{{firstName}} {{lastName}} has been removed successfully from the Workspace",
       "DETAILS": "Details",
       "INSERT": "The item was added successfully.",
       "REFRESH": "You must refresh the application to take this action into account",
@@ -127,7 +127,7 @@
       },
       "NO_RESPONSE_ERROR": "Error without server response, see logs.",
       "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} is already a member of this Workgroup.",
-      "MEMBER_ALREADY_IN_DRIVE": "{{firstName}} {{lastName}} is already a member of this drive.",
+      "MEMBER_ALREADY_IN_WORKSPACE": "{{firstName}} {{lastName}} is already a member of this Workspace.",
       "RESTORE": "Error occured while restoring the version."
     },
     "WARNING": {

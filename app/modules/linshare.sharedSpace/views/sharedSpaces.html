@@ -10,7 +10,7 @@
             is-open="isOpenNew"
             ng-class="{
               'open': isOpenNew,
-              'disable-link': !vm.canCreateSharedSpace('DRIVE') && !vm.canCreateSharedSpace('WORK_GROUP')
+              'disable-link': !vm.canCreateSharedSpace('WORK_SPACE') && !vm.canCreateSharedSpace('WORK_GROUP')
             }"
           >
             <a class="add-menu-group"
@@ -43,32 +43,32 @@
 
               <li
                 role="menuitem"
-                ng-if="!vm.isDriveState"
-                ng-class="{'disable-link': !vm.canCreateSharedSpace('DRIVE')}"
+                ng-if="!vm.isWorkspaceState"
+                ng-class="{'disable-link': !vm.canCreateSharedSpace('WORK_SPACE')}"
               >
                 <a
                   class="shared-space-tooltip-trigger"
-                  ng-click="vm.createSharedSpace('DRIVE')"
-                  uib-tooltip="{{::'SHARED_SPACE_TOOLTIPS.DRIVE' | translate}}"
+                  ng-click="vm.createSharedSpace('WORK_SPACE')"
+                  uib-tooltip="{{::'SHARED_SPACE_TOOLTIPS.WORKSPACE' | translate}}"
                   tooltip-placement="right"
                   tooltip-append-to-body="true"
                   tooltip-popup-delay="700"
                 >
-                  <i ng-class="::vm.NODE_TYPE_PROPERTIES.DRIVE.icon"></i>
-                  <span translate>SHARED_SPACE_TYPE.DRIVE</span>
+                  <i ng-class="::vm.NODE_TYPE_PROPERTIES.WORK_SPACE.icon"></i>
+                  <span translate>SHARED_SPACE_TYPE.WORKSPACE</span>
                 </a>
               </li>
             </ul>
           </div>
           <div class="breadcrumbs-ctn hidden-xs">
-            <div class="left-arrow actions" ng-class="{'disabled': !vm.isDriveState}" ng-click="vm.goToPreviousFolder()">
+            <div class="left-arrow actions" ng-class="{'disabled': !vm.isWorkspaceState}" ng-click="vm.goToPreviousFolder()">
               <a><i class="ls-previous-caret"></i></a>
             </div>
             <div id="root-level">
               <a>
                 <i class="ls-shared-space"></i>
-                <span ng-if="vm.currentDrive && vm.currentDrive.name" class="text-uppercase">{{ vm.currentDrive && vm.currentDrive.name }}</span>
-                <span ng-if="!vm.currentDrive || !vm.currentDrive.name" class="text-uppercase" translate>MENU_TITLE.SHARED_SPACE</span>
+                <span ng-if="vm.currentWorkspace && vm.currentWorkspace.name" class="text-uppercase">{{ vm.currentWorkspace && vm.currentWorkspace.name }}</span>
+                <span ng-if="!vm.currentWorkspace || !vm.currentWorkspace.name" class="text-uppercase" translate>MENU_TITLE.SHARED_SPACE</span>
               </a>
             </div>
           </div>
@@ -84,13 +84,13 @@
                 </a>
               </span>
               <a href=""
-                 ng-if="vm.currentDrive"
+                 ng-if="vm.currentWorkspace"
                  class="hidden-xs pull-left"
                  tooltip-popup-delay="350"
                  tooltip-placement="bottom"
-                 uib-tooltip="{{'ACTION.INFO_DRIVE' | translate}}"
+                 uib-tooltip="{{'ACTION.INFO_WORKSPACE' | translate}}"
                  tooltip-append-to-body="true"
-                 ng-click="vm.showItemDetails(vm.currentDrive.uuid, true)">
+                 ng-click="vm.showItemDetails(vm.currentWorkspace.uuid, true)">
                 <i class="groups-home-workgroup" aria-hidden="true"></i>
               </a>
               <div class="sort-dropdown col-xs-3 toolbar-mobile-item">
@@ -275,12 +275,12 @@
             <div class="drag-icon-ctn ">
               <div class="bordered-circle">&nbsp;</div>
               <span class="grey-clr bg-info-icon">
-                <span ng-class="vm.isDriveState ? vm.NODE_TYPE_PROPERTIES.DRIVE.icon : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon"></span>
+                <span ng-class="vm.isWorkspaceState ? vm.NODE_TYPE_PROPERTIES.WORK_SPACE.icon : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.icon"></span>
               </span>
             </div>
             <div class="dnd-txt-content">
-              <h1 translate>{{vm.isDriveState ? vm.NODE_TYPE_PROPERTIES.DRIVE.backgroundTitle : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.backgroundTitle }}</h1>
-              <p translate>{{vm.isDriveState ? vm.NODE_TYPE_PROPERTIES.DRIVE.backgroundMessage : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.backgroundMessage}}</p>
+              <h1 translate>{{vm.isWorkspaceState ? vm.NODE_TYPE_PROPERTIES.WORK_SPACE.backgroundTitle : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.backgroundTitle }}</h1>
+              <p translate>{{vm.isWorkspaceState ? vm.NODE_TYPE_PROPERTIES.WORK_SPACE.backgroundMessage : vm.NODE_TYPE_PROPERTIES.WORK_GROUP.backgroundMessage}}</p>
             </div>
           </div>
         </div>
@@ -409,7 +409,7 @@
                             </li>
                             <li class="divider"></li>
                             <li data-ng-class="{'disable-link' : documentFile.nodeType === 'WORK_GROUP' ?
-                              !vm.permissions[documentFile.uuid].WORKGROUP.DELETE : !vm.permissions[documentFile.uuid].DRIVE.DELETE}">
+                              !vm.permissions[documentFile.uuid].WORK_GROUP.DELETE : !vm.permissions[documentFile.uuid].WORK_SPACE.DELETE}">
                               <a href="" x-ng-click="vm.deleteSharedSpace(documentFile)">
                                 <i class="zmdi zmdi-delete" aria-hidden="true"></i>
                                 <span translate>ACTION.DELETE</span>
@@ -438,13 +438,13 @@
   </div>
 </div>
 
-<div class="header-sidebar append-to-body visible-xs workgroup-header-nav" ng-if="vm.currentDrive">
+<div class="header-sidebar append-to-body visible-xs workgroup-header-nav" ng-if="vm.currentWorkspace">
   <h2 class="header-more-options set-ellipsis">
-    {{::vm.currentDrive.name}}
+    {{::vm.currentWorkspace.name}}
   </h2>
   <a
     class="pull-right action-icon groups-home-workgroup"
-    ng-click="vm.showItemDetails(vm.currentDrive.uuid, true)"
+    ng-click="vm.showItemDetails(vm.currentWorkspace.uuid, true)"
   >
   </a>
   <a

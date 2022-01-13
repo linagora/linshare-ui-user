@@ -35,9 +35,9 @@
     function canDeleteSharedSpaces(workgroups, permissions) {
       const canDeleteSharedSpaces = !_.some(workgroups, function(workgroup) {
         if (workgroup.nodeType === 'WORK_GROUP') {
-          return !permissions[workgroup.uuid].WORKGROUP.DELETE;
+          return !permissions[workgroup.uuid].WORK_GROUP.DELETE;
         } else {
-          return !permissions[workgroup.uuid].DRIVE.DELETE;
+          return !permissions[workgroup.uuid].WORK_SPACE.DELETE;
         }
 
       });

@@ -180,7 +180,7 @@
      * @param {string} workgroupUuid - The uuid of the Workgroup object
      * @param {string} nodeUuid - The uuid of the Workgroup Node object
      * @param {string} withStorageSize - Define if the storage size should be computed
-                                         Storage size is the real size used on the hard drive
+                                         Storage size is the real size used on the hard workspace
      * @returns {Promise<WorkgroupNodeMetadata>} - The {@link WorkgroupNodeMetadata} object
      * @memberOf LinShare.sharedSpace.workgroupNodesRestService
      */

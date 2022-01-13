@@ -46,7 +46,7 @@
     /**
      * The Resource Permission object.
      * @typedef {Object} ResourcePermission
-     * @type {String} key - The resource type either DRIVE|WORKGROUP|FOLDER|FILE|MEMBER
+     * @type {String} key - The resource type either WORK_SPACE|WORK_GROUP|FOLDER|FILE|MEMBER
      * @type {Object} value - {@link ActionPermission} object
      */
 

@@ -121,17 +121,17 @@
               </a>
             </div>
             <div id="root-level">
-              <span ng-if="workgroupNodesVm.drive" class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
+              <span ng-if="workgroupNodesVm.workspace" class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
               <a
-                class="set-ellipsis drive-breadcrumb"
-                ng-if="workgroupNodesVm.drive"
+                class="set-ellipsis workspace-breadcrumb"
+                ng-if="workgroupNodesVm.workspace"
                 tooltip-placement="bottom"
                 tooltip-append-to-body="true"
                 tooltip-popup-delay="1200"
-                uib-tooltip="{{::workgroupNodesVm.drive.name}}"
-                ng-click="workgroupNodesVm.goToDrive()"
+                uib-tooltip="{{::workgroupNodesVm.workspace.name}}"
+                ng-click="workgroupNodesVm.goToWorkspace()"
               >
-                {{::workgroupNodesVm.drive.name}}
+                {{::workgroupNodesVm.workspace.name}}
               </a>
               <span class="sub-category-chevron"><i class="zmdi zmdi-chevron-right"></i></span>
               <a

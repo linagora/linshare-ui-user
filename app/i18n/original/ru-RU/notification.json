@@ -16,8 +16,8 @@
           "GUEST": "Вы собираетесь удалить {singular, select, true{гостя} other{{nbItems} гостей}}. Осторожно, это действие не может быть отменено.",
           "RECEIVED_SHARE": "Вы собираетесь удалить {singular, select, true{полученный файл} other{{nbItems} полученные файлы}}. Осторожно, это действие не может быть отменено.",
           "WORKGROUP": "Вы собираетесь удалить {singular, select, true{рабочую группу} other{{nbItems} рабочие группы}}. Осторожно, это действие не может быть отменено.",
-          "DRIVE": "Вы собираетесь удалить {singular, select, true {a drive} other {{nbItems} drive}}! Остерегайтесь, это действие нельзя отменить.",
-          "WORKGROUP_AND_DRIVE": "Вы собираетесь удалить рабочие группы и диски {nbItems}! Осторожно, это действие нельзя отменить.",
+          "WORKSPACE": "Вы собираетесь удалить {singular, select, true {рабочую область.} other {{nbItems} рабочих области}}! Остерегайтесь, это действие нельзя отменить.",
+          "WORKGROUP_AND_WORKSPACE": "Вы собираетесь удалить рабочие группы и диски {nbItems}! Осторожно, это действие нельзя отменить.",
           "WORKGROUP_NODE": "Вы собираетесь удалить {singular, select, true{документ или папку} other{{nbItems} документы или папки}}. Осторожно, это действие не может быть отменено.",
           "WORKGROUP_VERSION": "Вы собираетесь удалить {singular, select, true{версию} other {{nbItems} версии}}! Осторожно, это действие нельзя отменить.",
           "WORKGROUP_VERSION_LAST": "Это последнее предупреждение, вы собираетесь удалить файл! Осторожно, это действие нельзя отменить.",
@@ -52,11 +52,11 @@
         "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} из рабочей группы {{workgroupName}}.",
         "SELF_REMOVE_TEXT": "Вы собираетесь удалить себя из рабочей группы {{sharedSpaceName}}. У вас больше не будет доступа к этой рабочей группе."
       },
-      "ON_DRIVE_MEMBER_DELETE": {
+      "ON_WORKSPACE_MEMBER_DELETE": {
         "CANCEL_BUTTON": "Отменить",
         "CONFIRM_BUTTON": "Да, удалить",
         "TITLE": "Удаление участника",
-        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} с диска {{driveName}} и всех связанных рабочих групп.",
+        "TEXT": "Вы собираетесь удалить {{firstName}} {{lastName}} с диска {{workspaceName}} и всех связанных рабочих групп.",
         "SELF_REMOVE_TEXT": "Вы собираетесь удалить себя с диска {{sharedSpaceName}}. У вас больше не будет доступа к этому диску."
       },
       "ON_GUEST_QUICK_CREATE": {
@@ -81,7 +81,7 @@
         "DELETE_SINGULAR_VERSION": "Версия успешно удалена.",
         "DELETE_PLURAL_VERSION": "Версии успешно удалены.",
         "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} был успешно удалён из рабочей группы",
-        "DELETE_DRIVE_MEMBER": "{{firstName}} {{lastName}} успешно удалено Drive",
+        "DELETE_WORKSPACE_MEMBER": "{{firstName}} {{lastName}} успешно удален из рабочей области",
         "DETAILS": "Информация",
         "INSERT": "Элемент был добавлен успешно.",
         "REFRESH": "Вы должны обновить приложение, чтобы принять это действие во внимание",
@@ -127,7 +127,7 @@
         },
         "NO_RESPONSE_ERROR": "Ошибка без ответа сервера, см. logs.",
         "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} уже является участником этой рабочей группы.",
-        "MEMBER_ALREADY_IN_DRIVE": "{{firstName}} {{lastName}} уже является участником этого диска.",
+        "MEMBER_ALREADY_IN_WORKSPACE": "{{firstName}} {{lastName}} уже является участником этой рабочей области.",
         "RESTORE": "Во время восстановления документа произошла ошибка"
       },
       "WARNING": {

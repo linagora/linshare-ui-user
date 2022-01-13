@@ -9,7 +9,7 @@
   angular
     .module('linshareUiUserApp')
     .constant('lsUserConfig', {
-      baseRestUrl: 'linshare/webservice/rest/user/v4',
+      baseRestUrl: 'linshare/webservice/rest/user/v5',
       // The debug mode, allow to get more information while doing any interraction in the APP.
       // It is recommended to set it to 'true' when having any trouble for reporting information
       // from the browser console to your software vendor
@@ -116,15 +116,15 @@
        * If any other unknown value to system is set, the default order will be set (same as the list above)
        */
       defaultWorkgroupMemberRole: 'READER',
-      /* Define the default role selected when adding a new member to a drive
+      /* Define the default role selected when adding a new member to a workspace
        * Possible value:
-       *  - DRIVE_ADMIN
-       *  - DRIVE_WRITER
-       *  - DRIVE_READER
+       *  - WORK_SPACE_ADMIN
+       *  - WORK_SPACE_WRITER
+       *  - WORK_SPACE_READER
        *
        * If any other unknown value to system is set, the default order will be set (same as the list above)
        */
-      defaultDriveMemberRole: 'DRIVE_READER',
+      defaultWorkspaceMemberRole: 'WORK_SPACE_READER',
 
       /* Define custom behavior for menu element in the main sidebar
        * suffix - object: Determine the suffix to add to menu element name if it is disabled
