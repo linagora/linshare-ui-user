@@ -31,14 +31,14 @@
       // To override the application logo set the url of the image corresponding
       // to the sizes (small 155x29 and big 500x192)
       applicationLogo : {
-        small : require('../images/common/linshare-logo-white.png').default,
-        large : require('../images/ls-logo-big.png').default
+        small: 'images/linshare-logo-white.png',
+        large : 'images/ls-logo-big.png'
       },
-      communityWhiteLogo: require('../images/community-white.png').default,
-      communityBlueLogo: require('../images/common/community.png').default,
+      communityWhiteLogo: 'images/community-white.png',
+      communityBlueLogo: 'images/community.png',
       communitySlogan: 'Libre & Free',
       // To override the background image of the login screen set the url of the image
-      loginBackground : require('../images/bg-linshare-desktop.png').default,
+      loginBackground : 'images/bg-linshare-desktop.png',
 
       // For application configuration
       accountType: {

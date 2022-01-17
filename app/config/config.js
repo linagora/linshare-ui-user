@@ -29,12 +29,12 @@
       // To override the application logo set the url of the image corresponding
       // to the sizes (small 155x29 and big 500x192)
       applicationLogo : {
-        small: 'app/images/common/linshare-logo-white.png',
-        large : 'app/images/ls-logo-big.png'
+        small: 'images/linshare-logo-white.png',
+        large : 'images/ls-logo-big.png'
       },
 
       // To override the background image of the login screen set the url of the image
-      loginBackground : 'app/images/bg-linshare-desktop.png',
+      loginBackground : 'images/bg-linshare-desktop.png',
 
       // Manage language handle by the application, see documentation.
       languages: {
