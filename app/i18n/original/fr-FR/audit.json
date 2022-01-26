@@ -282,7 +282,7 @@
           }
         }
       },
-      "WORKSPACE": {
+      "WORK_SPACE": {
         "CREATE": {
           "AUTHOR": {
             "SENTENCE": "Vous avez créé un nouveau espace de travail : {{resourceName}}.",
@@ -345,7 +345,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "WORKSPACE_DELETION": {
+        "DRIVE_DELETION": {
           "AUTHOR": {
             "SENTENCE": "Vous avez supprimé l'espace de travail : {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
@@ -600,7 +600,7 @@
           }
         }
       },
-      "WORKGROUP": {
+      "WORK_GROUP": {
         "CREATE": {
           "AUTHOR": {
             "SENTENCE": "Vous avez créé un nouveau Groupe de Travail : {{resourceName}}.",
@@ -907,8 +907,6 @@
       "CONTACTS_LISTS": "Liste de Contact",
       "CONTACTS_LISTS_CONTACTS": "Contact",
       "DOCUMENT_ENTRY": "Espace Personnel",
-      "WORKSPACE" : "Espace de travail",
-      "WORKSPACE_MEMBER" : "Espace de travail - Membre",
       "GUEST": "Compte Invité",
       "JWT_PERMANENT_TOKEN": "Jeton d'accès permanent (JWT)",
       "SHARE_ENTRY": "Partage",
@@ -917,11 +915,13 @@
       "UPLOAD_REQUEST_GROUP": "Invitation de dépôt - Paramétrage collectif",
       "UPLOAD_REQUEST_URL": "Invitation de dépôt - Lien",
       "UPLOAD_REQUEST_ENTRY": "Invitation de dépôt - Document",
-      "WORKGROUP": "Groupe de Travail",
+      "WORK_GROUP": "Groupe de Travail",
       "WORKGROUP_DOCUMENT": "Groupe de Travail - Fichier",
       "WORKGROUP_FOLDER": "Groupe de Travail - Dossier",
       "WORKGROUP_MEMBER": "Groupe de Travail - Membre",
-      "WORKGROUP_DOCUMENT_REVISION": "Groupe de Travail - Fichier (Révision)"
+      "WORKGROUP_DOCUMENT_REVISION": "Groupe de Travail - Fichier (Révision)",
+      "WORK_SPACE" : "Espace de travail",
+      "WORK_SPACE_MEMBER" : "Espace de travail - Membre"
     }
   },
   "NO_AUDIT": "Cette ressource n'a pas encore d'historique d'activité",

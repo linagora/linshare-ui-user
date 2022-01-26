@@ -345,7 +345,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "WORKSPACE_DELETION": {
+        "DRIVE_DELETION": {
           "AUTHOR": {
             "SENTENCE": "You have deleted the Workspace : {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
@@ -600,7 +600,7 @@
           }
         }
       },
-      "WORKGROUP": {
+      "WORK_GROUP": {
         "CREATE": {
           "AUTHOR": {
             "SENTENCE": "You have created a new Workgroup : {{resourceName}}.",
@@ -907,8 +907,6 @@
       "CONTACTS_LISTS": "Contact List",
       "CONTACTS_LISTS_CONTACTS": "Contact",
       "DOCUMENT_ENTRY": "File",
-      "WORKSPACE" : "Workspace",
-      "WORKSPACE_MEMBER" : "Workspace - Member",
       "GUEST": "Guest account",
       "JWT_PERMANENT_TOKEN": "Permanent access token (JWT)",
       "SHARE_ENTRY": "Share",
@@ -917,11 +915,13 @@
       "UPLOAD_REQUEST_GROUP": "Set of upload requests",
       "UPLOAD_REQUEST_URL": "Upload request link",
       "UPLOAD_REQUEST_ENTRY": "Upload request entry",
-      "WORKGROUP": "Workgroup",
+      "WORK_GROUP": "Workgroup",
       "WORKGROUP_DOCUMENT": "Workgroup file",
       "WORKGROUP_FOLDER": "Workgroup folder",
       "WORKGROUP_MEMBER": "Workgroup member",
-      "WORKGROUP_DOCUMENT_REVISION": "Workgroup file (Version)"
+      "WORKGROUP_DOCUMENT_REVISION": "Workgroup file (Version)",
+      "WORK_SPACE" : "Workspace",
+      "WORK_SPACE_MEMBER" : "Workspace - Member"
     }
   },
   "NO_AUDIT": "No audit for this resource yet",

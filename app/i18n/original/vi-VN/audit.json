@@ -355,7 +355,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "WORKSPACE_DELETION": {
+        "DRIVE_DELETION": {
           "AUTHOR": {
             "SENTENCE": "Bạn đã xóa một không gian làm việc: {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
@@ -600,7 +600,7 @@
           }
         }
       },
-      "WORKGROUP": {
+      "WORK_GROUP": {
         "CREATE": {
           "AUTHOR": {
             "SENTENCE": "Bạn đã tạo một Nhóm làm việc mới: {{resourceName}}.",
@@ -876,7 +876,7 @@
       "CREATE": "Tạo",
       "CREATE_SHARE": "Đã gửi chia sẻ",
       "DELETE": "Xóa",
-      "DELETE_REVISION": "Создание ревизии",
+      "DELETE_REVISION": "Phiên bản đã bị xóa",
       "DOWNLOAD": "Tải về",
       "FAILURE": "Đăng nhập thất bại",
       "READ": "Đọc",
@@ -904,11 +904,13 @@
       "UPLOAD_REQUEST_GROUP": "Nhóm yêu cầu tải lên",
       "UPLOAD_REQUEST_URL": "Đường dẫn yêu cầu tải lên",
       "UPLOAD_REQUEST_ENTRY": "Tập tin yêu cầu tải lên",
-      "WORKGROUP": "Nhóm làm việc",
+      "WORK_GROUP": "Nhóm làm việc",
       "WORKGROUP_DOCUMENT": "Tệp nhóm làm việc",
       "WORKGROUP_FOLDER": "Thư mục nhóm làm việc",
       "WORKGROUP_MEMBER": "Thành viên nhóm làm việc",
-      "WORKGROUP_DOCUMENT_REVISION": "Tệp nhóm làm việc (sửa đổi)"
+      "WORKGROUP_DOCUMENT_REVISION": "Tệp nhóm làm việc (sửa đổi)",
+      "WORK_SPACE": "Không gian làm việc",
+      "WORK_SPACE_MEMBER": "Không gian làm việc - Thành viên"
     }
   },
   "NO_AUDIT": "Chưa có kiểm toán cho tài nguyên này",

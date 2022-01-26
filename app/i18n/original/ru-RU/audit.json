@@ -282,7 +282,7 @@
             }
           }
         },
-        "WORKSPACE": {
+        "WORK_SPACE": {
           "CREATE": {
             "AUTHOR": {
               "SENTENCE": "вы создали новый Рабочее пространство {{resourceName}}.",
@@ -345,7 +345,7 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           },
-          "WORKSPACE_DELETION": {
+          "DRIVE_DELETION": {
             "AUTHOR": {
               "SENTENCE": "вы удалили Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
@@ -600,7 +600,7 @@
             }
           }
         },
-        "WORKGROUP": {
+        "WORK_GROUP": {
           "CREATE": {
             "AUTHOR": {
               "SENTENCE": "Вы создали новую рабочую группу {{resourceName}}.",
@@ -907,8 +907,6 @@
         "CONTACTS_LISTS": "Список контактов",
         "CONTACTS_LISTS_CONTACTS": "Контакт",
         "DOCUMENT_ENTRY": "Моё пространство",
-        "WORKSPACE" : "Рабочее пространство",
-        "WORKSPACE_MEMBER" : "Рабочее пространство - участник",
         "GUEST": "Гостевой аккаунт",
         "JWT_PERMANENT_TOKEN": "токен постоянного доступа",
         "SHARE_ENTRY": "Общий доступ",
@@ -917,12 +915,13 @@
         "UPLOAD_REQUEST_GROUP": "Набор запросов на загрузку",
         "UPLOAD_REQUEST_URL": "ссылка на запрос загрузки",
         "UPLOAD_REQUEST_ENTRY": "Запись запроса на загрузку",
-        "WORKGROUP": "Рабочая группа",
+        "WORK_GROUP": "Рабочая группа",
         "WORKGROUP_DOCUMENT": "Рабочая группа - Файл",
         "WORKGROUP_FOLDER": "Рабочая группа - Папка",
         "WORKGROUP_MEMBER": "Рабочая группа - Участник",
-        "WORKGROUP_DOCUMENT_REVISION": "Рабочая группа - Файл (пересмотр)"
-
+        "WORKGROUP_DOCUMENT_REVISION": "Рабочая группа - Файл (пересмотр)",
+        "WORK_SPACE" : "Рабочее пространство",
+        "WORK_SPACE_MEMBER" : "Рабочее пространство - участник"
       }
     },
     "NO_AUDIT": "У этого файла еще нет истории",
