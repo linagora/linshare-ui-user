@@ -171,6 +171,21 @@
         issuer: 'LinShare',
         algorithm: 'SHA1',
         period: 30
+      },
+
+      /**
+       * Define configuration for support link
+       */
+      supportLink: {
+        enable: false,
+        url: 'https://go.crisp.chat/chat/embed/?website_id=your-website-id',
+        provider: 'crisp',
+        name: {
+          'fr-FR': 'Assistance par chatbot',
+          'en-US': 'Support via chatbot',
+          'vi-VN': 'Hỗ trợ qua chatbot',
+          'ru-RU': 'Поддержка через чат-бот'
+        }
       }
     });
 })();

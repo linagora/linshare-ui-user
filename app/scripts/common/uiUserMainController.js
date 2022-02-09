@@ -37,7 +37,8 @@
     'sidebarService',
     'toastService',
     'uploadRestService',
-    'homePageService'
+    'homePageService',
+    'supportLinkService'
   ];
 
   function UiUserMainController(
@@ -65,10 +66,10 @@
     sidebarService,
     toastService,
     uploadRestService,
-    homePageService
+    homePageService,
+    supportLinkService
   ) {
-    /* jshint validthis:true */
-    var mainVm = this;
+    const mainVm = this;
 
     const URL_HOME = homePageService.getHomePage();
     const URL_LOGIN = 'login';
@@ -382,6 +383,9 @@
             mainVm.showTransfert = (user.canUpload || functionalities.SHARED_SPACE.enable);
             mainVm.show2FA = functionalities.SECOND_FACTOR_AUTHENTICATION.enable;
             mainVm.showTokenManagement = functionalities.JWT_PERMANENT_TOKEN.enable;
+            mainVm.showSupportLink = supportLinkService.isEnable();
+            mainVm.supportLinkName = supportLinkService.getLinkName();
+            mainVm.openSupportLink = supportLinkService.openSupportLink;
 
             user.firstLetter = user.firstName.charAt(0);
             $scope.loggedUser.setUser(user);

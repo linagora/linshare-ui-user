@@ -142,6 +142,11 @@
                     <i class="zmdi zmdi-shield-security"></i> <span translate>SECOND_FACTOR_AUTH.TITLE</span>
                   </a>
                 </li>
+                <li ng-if="mainVm.showSupportLink">
+                  <a href="" ng-click="mainVm.openSupportLink()">
+                    <i class="zmdi zmdi-pin-help"></i> <span>{{mainVm.supportLinkName[locale.fullKey]}}</span>
+                  </a>
+                </li>
                 <li>
                   <debug-mode-switcher />
                 </li>

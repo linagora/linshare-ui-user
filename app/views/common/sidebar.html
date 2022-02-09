@@ -41,6 +41,9 @@
         <a ui-sref="tokenManagement" ng-if="mainVm.showTokenManagement">
           <i class="zmdi zmdi-key"></i> <span translate>TOKEN_MANAGEMENT.TITLE</span>
         </a>
+        <a ng-if="mainVm.showSupportLink" ng-click="mainVm.openSupportLink()">
+          <i class="zmdi zmdi-pin-help"></i> <span translate>{{mainVm.supportLinkName[locale.fullKey]}}</span>
+        </a>
       </li>
     </ul>
 
