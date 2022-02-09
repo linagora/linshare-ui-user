@@ -61,6 +61,7 @@ require('./services/serverManagerService');
 require('./services/translateLoadFailureHandlerService');
 require('./services/welcomeMessageService');
 require('./services/homePageService');
+require('./services/supoprtLinkService');
 require('./directives/checkTableHeight/check-table-height.directive');
 require('./directives/checkTableHeight/checkTableHeightController');
 require('./directives/checkTableHeight/checkTableHeightService');
