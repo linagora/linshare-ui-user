@@ -1,28 +1,31 @@
-/**
- * AnonymousHomeController Controller
- * @namespace LinShare.anonymousUrl
- */
-(function() {
-  'use strict';
 
-  angular
-    .module('linshare.anonymousUrl')
-    .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
-      $translatePartialLoaderProvider.addPart('anonymousUrl');
-    }])
-    .controller('AnonymousHomeController', AnonymousHomeController);
+angular
+  .module('linshare.anonymousUrl')
+  .config(['$translatePartialLoaderProvider', function($translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart('anonymousUrl');
+  }])
+  .controller('AnonymousHomeController', AnonymousHomeController)
+  .controller('AnonymousHomeMessageModal', AnonymousHomeMessageModal);
 
-  AnonymousHomeController.$inject = ['$scope', 'message'];
+AnonymousHomeController.$inject = ['message', '$mdDialog'];
+AnonymousHomeMessageModal.$inject = ['$state', 'message', '$mdDialog'];
 
-  /**
-   *  @namespace AnonymousHomeController
-   *  @desc Controller to manage the Home of anonymous url
-   *  @memberOf LinShare.anonymousUrl
-   */
-  function AnonymousHomeController($scope, message) {
-    /* jshint validthis: true */
-    var anonymousHomeVm = this;
+function AnonymousHomeController(message, $mdDialog) {
+  $mdDialog.show({
+    template: require('../views/messageModal.html'),
+    controllerAs: 'messageModalVm',
+    controller: 'AnonymousHomeMessageModal',
+    clickOutsideToClose: false,
+    locals: { message }
+  });
+}
 
-    anonymousHomeVm.message = message;
-  }
-})();
+function AnonymousHomeMessageModal ($state, message, $mdDialog) {
+  const messageModalVm = this;
+
+  messageModalVm.message = message;
+  messageModalVm.backToHome = () => {
+    $mdDialog.hide();
+    $state.go('home');
+  };
+}

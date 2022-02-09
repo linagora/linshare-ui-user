@@ -15,7 +15,8 @@
     },
     "HOME": {
       "404": "Url bạn đã cố truy cập không hợp lệ",
-      "MESSAGE": "Bạn cần một url hợp lệ để truy cập vào tài liệu được chia sẻ"
+      "MESSAGE": "Bạn cần một url hợp lệ để truy cập vào tài liệu được chia sẻ",
+      "BACK_TO_HOME": "Quay về trang chủ"
     }
   }
 }
