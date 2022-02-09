@@ -1,0 +1,20 @@
+<md-dialog class="custom-dialog warning">
+  <md-toolbar class="no-height-limit toolbar-full-height">
+    <div class="md-toolbar-tools">
+      <!-- NOTE: refactor these styles in case of removing sweetalert -->
+      <div class="swal-icon swal-icon--warning">
+        <span class="swal-icon--warning__body">
+          <span class="swal-icon--warning__dot"></span>
+        </span>
+      </div>
+    </div>
+  </md-toolbar>
+  <md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">
+    <span translate>{{messageModalVm.message}}</span>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <button class="confirm" translate ng-click="messageModalVm.backToHome()">
+      ANONYMOUS_URL.HOME.BACK_TO_HOME
+    </button>
+  </md-dialog-actions>
+</md-dialog>
