@@ -72,7 +72,7 @@
         autocompleteUsersVm.functionality = functionalities.COMPLETION;
         autocompleteUsersVm.canCreateGuest = functionalities.GUESTS.enable;
         autocompleteUsersVm.functionality.value = autocompleteUsersVm.functionality.value || 3;
-        autocompleteUsersVm.functionality.maxValue = autocompleteUsersVm.functionality.maxValue || 3;
+
         if (promises[1].accountType === lsAppConfig.accountType.guest && promises[1].restricted) {
           autocompleteUsersVm.withEmail = false;
         }
@@ -171,7 +171,7 @@
 
       return autocompleteUsersVm.withEmail
         && !_.isUndefined(viewValue)
-        && viewValue.length >= autocompleteUsersVm.functionality.maxValue
+        && viewValue.length >= autocompleteUsersVm.functionality.value
         && !regexpEmail.test(viewValue);
     }
 
@@ -238,7 +238,7 @@
 
       var deferred = $q.defer();
 
-      if (pattern.length >= autocompleteUsersVm.functionality.maxValue) {
+      if (pattern.length >= autocompleteUsersVm.functionality.value) {
         autocompleteUsersVm.currentPattern = pattern;
 
         autocompleteUserRestService.search(pattern, $scope.completeType, $scope.completeThreadUuid)
