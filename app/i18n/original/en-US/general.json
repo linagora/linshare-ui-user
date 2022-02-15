@@ -195,7 +195,7 @@
   "LINK_DISABLED": "Link disabled",
   "LOGIN": {
     "CONNECTION_LINK": "Log in",
-    "COPYRIGHT": "You are using the Open Source and free version of <a href='http://linshare.org' target='_blank'>LinShare™</a>, powered by <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2020. Contribute to LinShare R&D by subscribing to an Enterprise offer.",
+    "COPYRIGHT": "You are using the Open Source and free version of <a href='http://linshare.org' target='_blank'>LinShare™</a>, powered by <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2022. Contribute to LinShare R&D by subscribing to an Enterprise offer.",
     "EMAIL_PLACEHOLDER": "Email",
     "FORGOTTEN_PASSWORD": "Forgotten password ?",
     "KEEP_SIGNED": "Keep me signed in",
