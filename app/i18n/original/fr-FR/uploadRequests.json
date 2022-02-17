@@ -64,19 +64,19 @@
         "ALL": "Tout"
       },
       "HEADERS": {
-        "LABEL": "Label",
+        "LABEL": "Sujet",
         "ACTIVATION_DATE": "Date d'activation",
-        "ACTIVATION": "Activation",
+        "ACTIVATION": "Date d'activation",
         "ARCHIVE_DATE": "Date d'archivage",
         "ARCHIVE": "Archiver",
         "EXPIRATION_DATE": "Date d'expiration",
-        "EXPIRATION": "Expiration",
+        "EXPIRATION": "Date d'expiration",
         "FILES": "Fichiers",
         "STATUS": "Statut",
         "TYPE": "Type",
         "CREATION_DATE": "Date de création",
         "MODIFICATION_DATE": "Date de modification",
-        "MODIFICATION": "Modification",
+        "MODIFICATION": "Date de modification",
         "SIZE": "Taille",
         "EMAIL": "Email",
         "RECIPIENT": "Destinataires"
