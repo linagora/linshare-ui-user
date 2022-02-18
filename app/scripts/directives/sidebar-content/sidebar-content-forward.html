@@ -54,8 +54,12 @@
           shareActionVm.newShare.resetForm()">
     {{"NAVIGATION.CANCEL" | translate}}
   </button>
-  <button class="btn btn-primary col-xs-6"
-          ng-click="mainVm.sidebar.getData().submitForward(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments)">
-    {{"NAVIGATION.FORWARD" | translate}}
-  </button>
+
+  <sidebar-primary-button
+    on-click="mainVm.sidebar.getData().submitForward(shareActionVm.newShare, mainVm.sidebar.getData().selectedDocuments)"
+    disabled="shareActionVm.newShare.sharing"
+    loading="shareActionVm.newShare.sharing"
+  >
+    {{ "NAVIGATION.FORWARD" | translate }}
+  </sidebar-primary-button>
 </div>

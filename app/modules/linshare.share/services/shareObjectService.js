@@ -71,6 +71,7 @@ angular.module('linshare.share')
       self.sharingNote = _.defaultTo(shareJson.sharingNote, '');
       self.subject = _.defaultTo(shareJson.subject, '');
       self.message = _.defaultTo(shareJson.message, '');
+      self.sharing = false;
 
       self.asyncShare = _.defaultTo(shareJson.asyncShare, false);
       self.setAsyncShare = function(state) {
@@ -239,7 +240,9 @@ angular.module('linshare.share')
 
       if (this.waitingUploadIdentifiers.length === 0) {
         if(this.documents.indexOf(undefined) === -1) {
-          return LinshareShareService.create(_.omit(this.getFormObj(), 'mailingList')).then(function() {
+          self.sharing = true;
+
+          return LinshareShareService.create(_.omit(this.getFormObj(), 'mailingList')).then(() => {
             if (toast) {
               toastService.success({
                 key: 'TOAST_ALERT.ACTION.SHARE',
@@ -249,6 +252,12 @@ angular.module('linshare.share')
                 }
               });
             }
+
+            self.sharing = false;
+          }).catch(error => {
+            self.sharing = false;
+
+            return error;
           });
         } else {
           $log.debug('SHARE FAILED -', 'file(s) upload error');
@@ -305,6 +314,7 @@ angular.module('linshare.share')
       this.sharingNote = '';
       this.subject = '';
       this.message = '';
+      this.sharing = false;
 
       this.asyncShare = false;
       this.setAsyncShare = function(state) {

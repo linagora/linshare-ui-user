@@ -67,6 +67,8 @@ $common-header-toolbar-file-listing-display-num-selected-items-active-view-icons
 
 $common-layout-styles-btn-primary-color: $primary-alt-color1 !default;
 $common-layout-styles-btn-primary-hover-color: $primary-alt-color2 !default;
+$common-layout-styles-btn-primary-focus-color: $primary-alt-color1 !default;
+$common-layout-styles-btn-primary-disabled-color: $primary-alt-color4 !default;
 $common-layout-styles-a-color:darken(desaturate(adjust-hue($primary-color, 8), 23.58), 6.08) !default;
 $common-layout-styles-a-hover-color: lighten(saturate($common-layout-styles-a-color, 13.3), 9.2) !default;
 $common-layout-styles-blue-btn-background-color: $primary-alt-color1 !default;
