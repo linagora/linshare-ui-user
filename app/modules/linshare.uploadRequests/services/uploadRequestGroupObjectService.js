@@ -57,6 +57,7 @@ function UploadRequestGroupObjectService(
     self.getNewRecipients = getNewRecipients;
     self.submitRecipients = submitRecipients;
     self.submitRecipientsCallback = options.submitRecipientsCallback;
+    self.submitting = false;
   }
 
   /**
@@ -67,8 +68,19 @@ function UploadRequestGroupObjectService(
    */
   function create() {
     self = this;
+    self.submitting = true;
 
-    return uploadRequestGroupRestService.create(self.toDTO(), { collective: self.collective });
+    return uploadRequestGroupRestService.create(self.toDTO(), { collective: self.collective })
+      .then(data => {
+        self.submitting = false;
+
+        return data;
+      })
+      .catch(error => {
+        self.submitting = false;
+
+        return error;
+      });
   }
 
   /**
@@ -79,8 +91,19 @@ function UploadRequestGroupObjectService(
    */
   function update() {
     self = this;
+    self.submitting = true;
 
-    return uploadRequestGroupRestService.update(self.uuid, self.toUpdateDTO());
+    return uploadRequestGroupRestService.update(self.uuid, self.toUpdateDTO())
+      .then(data => {
+        self.submitting = false;
+
+        return data;
+      })
+      .catch(error => {
+        self.submitting = false;
+
+        return error;
+      });;
   }
 
   /**

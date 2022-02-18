@@ -171,12 +171,12 @@
     <button class="btn btn-default col-xs-6" ng-click="mainVm.sidebar.hide()" translate>
       NAVIGATION.CANCEL
     </button>
-    <button
-      class="btn btn-primary col-xs-6"
-      ng-click="mainVm.sidebar.getData().updateUploadRequest()"
-      translate
+    <sidebar-primary-button
+      on-click="mainVm.sidebar.getData().updateUploadRequest()"
+      loading="mainVm.sidebar.getData().uploadRequestObject.submitting"
+      disabled="mainVm.sidebar.getData().uploadRequestObject.submitting"
     >
-      ACTION.SAVE
-    </button>
+      {{"ACTION.SAVE" | translate}}
+    </sidebar-primary-button>
   </div>
 </div>

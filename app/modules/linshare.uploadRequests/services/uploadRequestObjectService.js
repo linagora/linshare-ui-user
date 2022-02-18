@@ -28,6 +28,7 @@ function UploadRequestObjectService(
 
     UploadRequestObjectCoreService.call(self, jsonObject);
 
+    self.submitting = false;
     self.toDTO = toDTO;
     self.update = update;
   }
@@ -57,7 +58,18 @@ function UploadRequestObjectService(
 
   function update() {
     self = this;
+    self.submitting = true;
 
-    return uploadRequestRestService.update(self.uuid, self.toDTO());
+    return uploadRequestRestService.update(self.uuid, self.toDTO())
+      .then(data => {
+        self.submitting = false;
+
+        return data;
+      })
+      .catch(error => {
+        self.submitting = false;
+
+        return error;
+      });;
   }
 }

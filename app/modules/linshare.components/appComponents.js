@@ -43,6 +43,7 @@ require('./sidebar/sidebarAuditActionsTabComponent');
 require('./sidebar/sidebarAuditActionsTabController');
 require('./sidebar/sidebarService');
 require('./sidebar/sidebarDescriptionInput');
+require('./sidebar/sidebarPrimaryButton');
 require('./tableParams/services/tableParamsService');
 require('./toast/toastController');
 require('./toast/toastService');

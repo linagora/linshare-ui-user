@@ -598,11 +598,24 @@ $material-color: lighten(desaturate(adjust-hue($primary-color, 8), 10.26), 3.14)
 .btn-primary {
   color: $btnPrimaryTxt;
   background-color: $common-layout-styles-btn-primary-color;
+
   &:hover {
     &:hover {
       background-color: $common-layout-styles-btn-primary-hover-color;
       color: $btnPrimaryTxtHover;
     }
+  }
+
+  &:focus {
+    &:focus {
+      background-color: $common-layout-styles-btn-primary-focus-color;
+      color: $btnPrimaryTxtHover;
+    }
+  }
+
+  &[disabled] {
+    background-color: $common-layout-styles-btn-primary-disabled-color;
+    border-color: $common-layout-styles-btn-primary-disabled-color;
   }
 }
 

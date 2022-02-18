@@ -61,6 +61,7 @@ function quickShareController(tableParamsService, lsAppConfig, toastService, $q,
 
       return;
     }
+    shareCreationDto.sharing = true;
 
     return copyItemsToMySpace(selectedDocuments).then(data => {
       data = data || {};
@@ -79,6 +80,7 @@ function quickShareController(tableParamsService, lsAppConfig, toastService, $q,
       }
 
       if (rejectedItems && rejectedItems.length) {
+        shareCreationDto.sharing = false;
         showToastAlertFor('forward', 'error', rejectedItems);
       }
     });

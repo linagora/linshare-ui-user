@@ -812,9 +812,19 @@ STANDARD CONTENT
   position: absolute;
   bottom: 0;
   width: 100%;
+
   button {
     height: 50px;
     font-size: 1.1em;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% {  transform: rotate(359deg); }
+  }
+
+  .spinner {
+    animation: spin 1s linear infinite;
   }
 }
 
