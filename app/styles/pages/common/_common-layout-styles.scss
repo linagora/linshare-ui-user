@@ -227,7 +227,7 @@ label.required::before {
 .files {
   .card .card-header .fg-line .form-control:not(:disabled), .card .card-header html:not(.ie9) .select:before {
     background-color: transparent;
-    font-family: roboto, sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 400;
   }
   .card .card-header {
@@ -265,14 +265,14 @@ html:not(.ie9) .select::before {
 */
 
 body *, button {
-  font-family: roboto, sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 body {
   background-color: #ffffff;
   padding-top: 50px;
   padding-bottom: 0;
-  font-family: roboto, sans-serif;
+  font-family: Inter, sans-serif;
   overflow: hidden;
   #content {
     padding: 0;
