@@ -113,7 +113,6 @@
     "node-waves": "0.7.5",
     "oidc-client": "1.10.1",
     "restangular": "1.6.1",
-    "roboto-fontface": "0.10.0",
     "sweetalert": "2.1.2",
     "uuid": "8.3.2"
   }

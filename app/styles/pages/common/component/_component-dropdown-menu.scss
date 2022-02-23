@@ -68,7 +68,7 @@ body.ng-scope > .dropdown.clearfix .dropdown-menu {
   li a, li span {
     transition: background-color;
     transition-duration: 250ms;
-    font-family: roboto , 'sans-serif';
+    font-family: Inter, 'sans-serif';
     font-size: 1.035em;
   }
   &:not([class*="bgm-"]) li a, li span {
