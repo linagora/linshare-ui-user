@@ -35,7 +35,7 @@
       data-ng-model="autocompleteUsersVm.selectedUser"
       data-ng-blur="autocompleteUsersVm.isEmail = !autocompleteUsersVm.onErrorEmail()"
       data-ng-required="autocompleteUsersVm.required()"
-      data-typeahead-min-length="3"
+      data-typeahead-min-length="autocompleteUsersVm.functionality.value"
       data-typeahead-on-select="autocompleteUsersVm.onSelect()"
       data-typeahead-wait-ms="30"
       data-typeahead-loading="searchingContact"
