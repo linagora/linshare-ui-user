@@ -1,0 +1,216 @@
+{
+  "UPLOAD_REQUESTS": {
+    "TITLE": "Richieste di caricamento",
+    "TITLE_SINGULAR": "Richiesta di caricamento",
+    "SYSTEM_ACCOUNT": "Sistema di richiesta di caricamento",
+    "STATUS": {
+      "ACTIVE": "Attivo",
+      "EXPIRED_CLOSED": "Scaduto | Chiuso",
+      "ARCHIVED": "Archiviato",
+      "PENDING": "Pendente"
+    },
+    "LOCALE": {
+      "ENGLISH": "English",
+      "FRENCH": "French",
+      "RUSSIAN": "Russian",
+      "ITALIAN": "Italian"
+    },
+    "CREATION_TYPE": {
+      "COLLECTIVE": "Caricamento collettivo",
+      "INDIVIDUAL": "Caricamento individuale",
+      "COLLECTIVE_TOOLTIP": "In una richiesta di caricamento condiviso, i destinatari condividono lo spazio di caricamento e possono quindi vedere i documenti degli altri membri.",
+      "INDIVIDUAL_TOOLTIP": "In una richiesta di caricamento individuale di massa, ogni destinatario ha il suo spazio personale di caricamento a cui gli altri membri non hanno accesso."
+    },
+    "FORM_CREATE": {
+      "SINGULAR_TITLE": "Richiesta di caricamento",
+      "COLLECTIVE": "Collettivo",
+      "INDIVIDUAL": "Individuale",
+      "EMAIL_MESSAGE": "Messaggio Email",
+      "TOTAL_SIZE_OF_FILES": "Dimensioni totali dei file",
+      "MAX_NUMBER_OF_FILES": "Numero max di file",
+      "MAX_SIZE_OF_A_FILE": "Dimensione max di un file",
+      "ACTIVATION_DATE": "Data attivazione",
+      "PASSWORD_PROTECTED": "Protetto da password",
+      "ALLOW_DELETION": "Permetti eliminazione",
+      "ALLOW_CLOSURE": "Permetti chiusura",
+      "EXPIRY_NOTIFICATION_DATE": "Data del promemoria",
+      "REMINDER_DATE_TOOLTIP": "Email di notifica inviata per ricordare la scadenza.",
+      "NOTIFICATION_LANGUAGE": "Lingua di notifica",
+      "FORM_INVALID": "Il modulo non è valido. Si prega di controllare attentamente i dati inseriti.",
+      "BACK": "indietro"
+    },
+    "ERROR": {
+      "SUBJECT_REQUIRED": "L'oggetto dell'email è richiesto",
+      "BODY_REQUIRED": "Il corpo dell'e-mail è richiesto",
+      "INVALID_EXPIRATION_DATE": "La data di scadenza deve essere compresa tra {min} e {max}",
+      "INVALID_ACTIVATION_DATE": "La data di attivazione deve essere compresa tra {min} e {max}",
+      "INVALID_NOTIFICATION_DATE": "La data di notifica deve essere compresa tra {min} e {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED": "La dimensione totale dei file deve essere impostata e inferiore a {max}",
+      "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "La dimensione totale dei file deve essere impostata",
+      "MAX_NUMBER_OF_FILES_REQUIRED": "Il numero massimo di file deve essere impostato e inferiore a {max}",
+      "MAX_NUMBER_OF_FILES_REQUIRED_ONLY": "Il numero massimo di file deve essere impostato",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "La dimensione massima di un file deve essere impostata e inferiore a {max}",
+      "MAX_SIZE_OF_A_FILE_REQUIRED_ONLY": "La dimensione massima di un file deve essere impostata"
+    },
+    "MENU_ENTRIES": {
+      "PENDING": "In attesa",
+      "ACTIVE_CLOSED": "Attivo / Chiuso",
+      "ARCHIVES": "Archiviato"
+    },
+    "TABLE": {
+      "SEARCH_BY_LABEL": "Cerca per etichetta",
+      "SEARCH_BY_RECIPIENT": "Ricerca per destinatario",
+      "INFO": "Mostra i dettagli della richiesta di caricamento",
+      "FILTER_BY": {
+        "ALL": "Tutti"
+      },
+      "HEADERS": {
+        "LABEL": "Etichetta",
+        "ACTIVATION_DATE": "Data attivazione",
+        "ACTIVATION": "Attivazione",
+        "ARCHIVE_DATE": "Data dell'archivio",
+        "ARCHIVE": "Archivio",
+        "EXPIRATION_DATE": "Data scadenza",
+        "EXPIRATION": "Scadenza",
+        "FILES": "Files",
+        "STATUS": "Stato",
+        "TYPE": "Tipo",
+        "CREATION_DATE": "Data Creazione",
+        "MODIFICATION_DATE": "Data modifica",
+        "MODIFICATION": "Modifica",
+        "SIZE": "Dimensione",
+        "EMAIL": "Email",
+        "RECIPIENT": "Destinatario"
+      },
+      "OPTIONS": {
+        "ADD_RECIPIENTS": "Aggiungere destinatari",
+        "GLOBAL_EDIT": "Modifica globale",
+        "ACTIVATE": "Attiva",
+        "CLOSE": "Chiuso",
+        "CANCEL_OR_CLOSE": "Annulla/Chiudi",
+        "ARCHIVE": "Archivio",
+        "VIEW_IN_MY_SPACE": "Vista sul mio spazio"
+      },
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Crea richieste di caricamento",
+        "MESSAGE": "Queste richieste permettono ad altri utenti di caricare file sul tuo spazio",
+        "ENTRY_LIST": {
+          "TITLE": "File caricati",
+          "MESSAGE": "Questi file sono caricati dai destinatari della tua richiesta di caricamento"
+        },
+        "ENTRY_LIST_PENDING": {
+          "TITLE": "Nessun file caricato",
+          "MESSAGE": "La richiesta di caricamento non è ancora attivata, i destinatari non possono caricare i file al momento"
+        },
+        "ENTRY_LIST_ARCHIVED": {
+          "TITLE": "Richiesta di caricamento archiviata",
+          "MESSAGE": "I file caricati vengono rimossi o copiati nel tuo spazio personale"
+        },
+        "UPLOAD_REQUEST": {
+          "TITLE": "Carica i destinatari della richiesta",
+          "MESSAGE": "Questi sono i singoli destinatari della tua richiesta di caricamento creata"
+        }
+      }
+    },
+    "RIGHT_PANEL": {
+      "EDIT": "Modifica",
+      "DETAILS": "Dettagli",
+      "ACTIVITIES": "Attività"
+    },
+    "DETAIL_TAB": {
+      "META_DATA": "Meta-data",
+      "UPDATED_AT": "Aggiornato il",
+      "CREATED_AT": "Creato il",
+      "ACTIVATED_AT": "Attivato il",
+      "EXPIRATION_DATE": "Data scadenza",
+      "GROUP": "Collectivo",
+      "FILES_UPLOADED": "{singular, select, true {File caricato } other {File caricati }}",
+      "MAX_NUMBER_OF_FILES": "Max. numero di file",
+      "MAX_TOTAL_FILE_SIZE": "Max. dimensione totale dei file",
+      "MAX_SIZE_PER_FILE": "Max. dimensione per file",
+      "PASSWORD_PROTECTED": "Protetto da password",
+      "ALLOW_DELETION": "Consentire l'eliminazione",
+      "ALLOW_CLOSURE": "Consentire la chiusura",
+      "NOTIFICATION_DATE": "Data del promemoria",
+      "NOTIFICATION_LANGUAGE": "Lingua della notifica",
+      "RECIPIENTS": "Destinatari",
+      "SHOW_BUTTON": "visualizza"
+    },
+    "DIALOG": {
+      "CANCELLATION": {
+        "TITLE": "Annullamento della richiesta di caricamento",
+        "TEXT": "Stai per cancellare {singular, select, true{una richiesta di caricamento} other{{nbItems} richieste di caricamento}} ! Attenzione, questa azione non può essere annullata."
+      },
+      "CLOSE": {
+        "TITLE": "Chiusura della richiesta di caricamento",
+        "TEXT": "Stai per chiudere {singular, select, true{una richiesta di caricamento} other{{nbItems} richieste di caricamento}} ! Attenzione, questa azione non può essere annullata."
+      },
+      "ARCHIVE": {
+        "TITLE": "Richiesta di archiviazione del caricamento",
+        "TEXT": "Stai per archiviare {singular, select, true{una richiesta di caricamento} other{{nbItems} richieste di caricamento}}. Attenzione, questa azione non può essere annullata.",
+        "CHECK_BOX": "Copiare tutti i file nel mio spazio personale prima di archiviare",
+        "CONFIRM": "Si, Archivia",
+        "CANCEL": "Cancella"
+      },
+      "DELETE_ARCHIVED": {
+        "TITLE": "Cancella la richiesta di caricamento archiviata",
+        "TEXT": "Stai per cancellare {singular, select, true{una richiesta di caricamento archiviata} other{{nbItems} richieste di caricamento archiviate}} ! Attenzione, questa azione non può essere annullata."
+      },
+      "ADD_RECIPIENTS": {
+        "TITLE": "Aggiungere destinatari",
+        "TEXT": "Stai per aggiungere {singular, select, true {un destinatario} other{{nbItems} destinatari}} a questa richiesta di caricamento ! Attenzione, questa azione non può essere annullata."
+      },
+      "DELETE_ENTRIES": {
+        "TITLE": "Cancellare i file caricati",
+        "TEXT": "Stai per cancellare {singular, select, true{un file caricato} other {{nbItems} file caricati}}! Attenzione, questa azione non può essere annullata."
+      }
+    },
+    "TOAST_ALERT": {
+      "CREATE": {
+        "ERROR": "Impossibile creare una richiesta di caricamento.",
+        "INFO": "La richiesta di caricamento è stata creata con successo!"
+      },
+      "CANCELLATION": {
+        "ERROR": "{number} {singular, select, true{la richiesta di caricamento non è stata cancellata} other{le richieste di caricamento non sono state cancellate}} .",
+        "INFO": "{number} {singular, select, true{la richiesta di caricamento è stata cancellata} other{le richieste di caricamento sono state cancellate}} ."
+      },
+      "CLOSE": {
+        "ERROR": "{number} {singular, select, true{la richiesta di caricamento non è stata chiusa} other{le richieste di caricamento non sono state chiuse}} .",
+        "INFO": "{number} {singular, select, true{la richiesta di caricamento è stata chiusa} other{le richieste di caricamento sono state chiuse}} ."
+      },
+      "ARCHIVE": {
+        "ERROR": "{number} {singular, select, true{la richiesta di caricamento non è stata archiviata} other{le richieste di caricamento non sono state archiviate}} .",
+        "INFO": "{number} {singular, select, true{la richiesta di caricamento è stata archiviata} other{le richieste di caricamento sono state archiviate}} ."
+      },
+      "DELETE_ARCHIVED": {
+        "ERROR": "{number} {singular, select, true{la richiesta di caricamento archiviata non è stata cancellata} other{le richieste di caricamento archiviate non sono state cancellate}} .",
+        "INFO": "{number} {singular, select, true{la richiesta di caricamento archiviata è stata cancellata} other{le richieste di caricamento archiviate sono state cancellate}} ."
+      },
+      "ADD_RECIPIENTS": {
+        "ERROR": "{number} {singular, select, true{il destinatario non è stato aggiunto alla richiesta di caricamento} other{i destinatari non sono stati aggiunti alla richiesta di caricamento}} .",
+        "INFO": "{number} {singular, select, true{il destinatario è stato aggiunto alla richiesta di caricamento} other{i destinatari sono stati aggiunti alla richiesta di caricamento}} ."
+      },
+      "DELETE_ENTRIES": {
+        "ERROR": "{number} {singular, select, true{il file caricato non è stato cancellato} other{i file caricati non sono stati cancellati}} .",
+        "INFO": "{number} {singular, select, true{il file caricato è stato cancellato} other{i file caricati sono stati cancellati}} ."
+      },
+      "COPY_ENTRIES": {
+        "ERROR": "Impossibile copiare {number} {singular, select, true{file} other{files}} in Mio Spazio.",
+        "INFO": "Copiati {number} {singular, select, true{file} other{file}} in Mio Spazio."
+      },
+      "UPDATE": {
+        "ERROR": "La richiesta di caricamento non è stata aggiornata.",
+        "INFO": "La richiesta di caricamento è stata aggiornata con successo!"
+      },
+      "SHOW_UNEXPECTED_ALERT": {
+        "ERROR": "Si è verificato un errore inaspettato."
+      }
+    },
+    "SIDE_BAR": {
+      "ADD_RECIPIENTS": {
+        "ADD": "Aggiungi",
+        "CANCEL": "Cancella"
+      }
+    }
+  }
+}
