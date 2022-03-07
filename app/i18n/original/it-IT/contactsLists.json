@@ -1,0 +1,65 @@
+{
+  "BACKGROUND_CONTACTS_MSG": "Aggiungi e modifica i dettagli dei tuoi contatti.",
+  "BACKGROUND_CONTACTS_TITLE_MSG": "Aggiungi nuovi contatti",
+  "BACKGROUND_CONTACTS_LIST_MSG": "Questi elenchi ti permettono di salvare e organizzare i tuoi contatti",
+  "BACKGROUND_CONTACTS_LIST_TITLE_MSG": "Crea il tuo elenco di contatti",
+  "CONTACTS_LISTS_ACTION": {
+    "ADD_DESCRIPTION": "Aggiungi una descrizione",
+    "CREATE_CONTACTS_LIST": "Crea un Elenco di Contatti",
+    "CREATE_NEW": "Crea un nuovo Elenco di Contatti",
+    "FILTER_BY": {
+      "ALL_LISTS": "Tutte gli elenchi",
+      "MY_LISTS": "Il mio elenco",
+      "OTHER_LISTS": "Altri elenchi"
+    },
+    "MORE": {
+      "ADD_CONTACT": "Aggiungi contatto",
+      "DELETE": "Elimina",
+      "DUPLICATE_LIST": "Elenco duplicato",
+      "EDIT": "Modifica",
+      "EXPORT_CSV": "Esporta CSV",
+      "IMPORT_CSV": "Importa CSV",
+      "INFORMATION": "Dettagli",
+      "RENAME": "Rinomina",
+      "SHOW_CONTACTS": "Mostra Contatti"
+    },
+    "ORDER_BY": {
+      "CREATION_DATE": "Data creazione",
+      "MAIL": "Email",
+      "FIRST_NAME": "Nome",
+      "LAST_NAME": "Cognome",
+      "LIST_NAME": "Nome Elenco",
+      "MODIFICATION_DATE": "Data di modifica",
+      "OWNER_FIRST_NAME": "Nome del proprietario",
+      "OWNER_LAST_NAME": "Cognome del proprietario",
+      "OWNER_MAIL": "Email del proprietario",
+      "PRIVATE_PUBLIC": "Privato/pubblico"
+    },
+    "SEARCH_BY_NAME": "Ricerca per nome"
+  },
+  "CONTACTS_LISTS_DETAILS": {
+    "CONTACT": "Contatto",
+    "CONTACTS": "Contatti",
+    "CONTACTS_LIST": "Elenco contatti",
+    "CONTACTS_LIST_DUPLICATED": "Elenco dei contatti duplicata con successo",
+    "CONTACTS_LISTS": "Elenco contatti",
+    "OWNER": "Propietario",
+    "OWNED_BY": "Di proprietà di",
+    "ME": "Io",
+    "PRIVATE": "Privato",
+    "PUBLIC": "Pubblico",
+    "UNCOMPLETE_PROFILE": "Profilo incompleto",
+    "UPDATE_CONTACT_INFORMATIONS": "Aggiornare le informazioni di contatto",
+    "UPDATE_CONTACT_IMPOSSIBLE": "Non sei autorizzato a modificare questo contatto",
+    "VISIBILITY": "Visibilità"
+  },
+  "CREATE_CONTACTS_LIST": {
+    "CREATE": "Crea",
+    "CREATE_FROM_THESE_CONTACTS": "Creare una elenco di contatti da questi contatti ?",
+    "INPUT_PLACEHOLDER": "Nome Elenco dei Contatti"
+  },
+  "FORMS_MESSAGES": {
+    "INVALID_EMAIL": "L'indirizzo e-mail non è valido.",
+    "INVALID_EMPTY_FIELD": "Questo campo non può essere vuoto."
+  }
+}
