@@ -57,6 +57,11 @@
           key: 'ru',
           fullKey: 'ru-RU',
           country: 'Pусский'
+        },
+        it: {
+          key: 'it',
+          fullKey: 'it-IT',
+          country: 'Italia'
         }
       },
 
