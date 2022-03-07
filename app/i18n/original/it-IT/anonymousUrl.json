@@ -1,0 +1,22 @@
+{
+  "ANONYMOUS_URL": {
+    "FIND_OUT": "Scoprite di più su LinShare!",
+    "FORM": {
+      "CANCEL": "Cancella",
+      "EMPTY": "La password è necessaria per accedere alla condivisione anonima",
+      "INVALID": "La password fornita non è valida",
+      "LABEL": "Password",
+      "SUBMIT": "Invia",
+      "TITLE": "Questa condivisione è protetta da una password",
+      "MSG" : "Inserisci la password fornita nell'e-mail di invito alla condivisione dello scaricamento."
+    },
+    "HEADER": {
+      "TITLE": "PORTALE URL ANONIMO"
+    },
+    "HOME": {
+      "404": "L'url a cui hai cercato di accedere non è valido",
+      "MESSAGE": "Hai bisogno di un url valido per accedere ai documenti condivisi",
+      "BACK_TO_HOME": "Ritorna alla home"
+    }
+  }
+}
