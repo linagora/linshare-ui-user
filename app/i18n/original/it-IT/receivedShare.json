@@ -1,0 +1,24 @@
+{
+  "BACKGROUND_RECEIVED_SHARES_MSG": "Queste condivisioni sono collegamenti temporanei di file, inviati e ospitati dai tuoi contatti.",
+  "BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "Visualizza le condivisioni ricevute",
+  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Condivisioni ricevute",
+  "FILTER" : {
+    "ORDER_BY_SENDER": "Mittente"
+  },
+  "TOOLTIP" : {
+    "ADVANCED_FILTER" : "Mostra filtri avanzati",
+    "REMOVE_FILES" : "Rimuovi i file selezionati",
+    "DOWNLOAD_FILES" : "Scarica i file selezionati",
+    "SHOW_MORE_OPTIONS" : "Mostra più opzioni",
+    "DATE_OF_MODIFICATION" :"Data di modifica",
+    "DATE_OF_CREATION" :"Data di creazione"
+  },
+  "TABLE_HEADER": {
+    "NAME": "Nome",
+    "TYPE": "Tipo",
+    "MODIFICATION_DATE": "Ultima modifica",
+    "CREATION_DATE": "Data creazione",
+    "SIZE": "Dimensione",
+    "ACTION": "Azioni"
+  }
+}
