@@ -1,0 +1,947 @@
+{
+  "ACTIONS": {
+    "INFO": "Dettagli"
+  },
+  "AUTHOR_ME": "Io",
+  "AUTHOR_SUPERADMIN": "Super amministratore",
+  "AUTHOR_SYSTEM": "Il sistema",
+  "BREADCRUMB_TITLE_AUDIT": "Registri delle attività",
+  "DETAILS_POPUP": {
+    "BY": "da",
+    "MODIFICATIONS": "Modifica(e)",
+    "SENTENCES": {
+      "ANONYMOUS_SHARE_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai condiviso il file : {{resourceName}} con {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha condiviso il file : {{resourceName}} con te.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai cancellato la condivisione del file : {{resourceName}}, destinato a {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha cancellato la condivisione del file : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha scaricato il tuo file condiviso : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "ADMIN": {
+            "SENTENCE": "{{authorName}} ha scaricato il file condiviso : {{resourceName}}, inviato da {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "SENTENCE": "La tua condivisione del file : {{resourceName}} destinata a {{userVarious}} è scaduta.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "La condivisione del file di {{authorName}} : {{resourceName}} destinata a {{userVarious}} è scaduta.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "READ": {
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha visualizzato il tuo file condiviso inviato il {{dateVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.READ"
+          },
+          "ADMIN": {
+            "SENTENCE": "{{authorName}} ha visualizzato il file condiviso inviato il {{dateVarious}}, da {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.READ"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato il file condiviso : {{resourceName}}, destinato a {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato il file condiviso : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        }
+      },
+      "AUTHENTICATION": {
+        "FAILURE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai provato ad accedere con credenziali errate.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha cercato di accedere con credenziali errate.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+          }
+        },
+        "SUCCESS": {
+          "AUTHOR": {
+            "SENTENCE": "Hai effettuato l'accesso con successo.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha effettuato l'accesso con successo.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+          }
+        }
+      },
+      "CONTACTS_LISTS": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato un nuovo Elenco di Contatti : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato un nuovo Elenco di Contatti : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai cancellato l'Elenco dei Contatti : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha cancellato l'Elenco dei Contatti : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato l'Elenco dei Contatti : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato l'Elenco dei Contatti : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "CONTACTS_LISTS_CONTACTS": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai aggiunto : {{resourceName}} all'Elenco dei Contatti {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha aggiunto : {{resourceName}} all'Elenco dei Contatti {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai rimosso : {{resourceName}} dall'Elenco dei Contatti {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha rimosso : {{resourceName}} dall'Elenco dei Contatti {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato : {{resourceName}} dall'Elenco dei Contatti {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato : {{resourceName}} dall'Elenco dei Contatti {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "DOCUMENT_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai caricato un nuovo file : {{resourceName}} nel tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha caricato un nuovo file : {{resourceName}} nel suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        },
+        "COPY_FROM_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} dal vostro Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha copiato il documento : {{resourceName}} dal suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_UPLOAD_REQUEST": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} dalla tua Richiesta di Caricamento {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_RECEIVED_SHARE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato un nuovo file : {{resourceName}} da una condivisione ricevuta.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha copiato il documento : {{resourceName}} da una condivisione ricevuta.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha copiato il documento : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} nel tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha copiato il documento : {{resourceName}} nel suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} nel Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha copiato il documento : {{resourceName}} nel Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il file : {{resourceName}} dal tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato il file : {{resourceName}} dal suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Hai scaricato il file : {{resourceName}} dal tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha scaricato il file : {{resourceName}} dal suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "SENTENCE": "Il tuo documento : {{resourceName}} è stato rimosso dal tuo Spazio Personale poiché il file è scaduto.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "Il documento di {{authorName}} : {{resourceName}} è stato rimosso dallo Spazio Personale poiché il file è scaduto.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "INCONSISTENCY": {
+          "AUTHOR": {
+            "SENTENCE": "Il documento : {{resourceName}} è stato rimosso dal tuo Spazio Personale perché il file non è stato trovato.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "Il documento di {{userVarious}} : {{resourceName}} è stato rimosso dallo Spazio Personale perché il file non è stato trovato.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato il file : {{resourceName}} nel tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato il file : {{resourceName}} nel suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} nel tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        }
+      },
+      "WORK_SPACE": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato un nuovo Gruppo di Lavoro: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato un nuovo Gruppo di Lavoro: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il Gruppo di Lavoro: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato il Gruppo di Lavoro: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato il Gruppo di Lavoro: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato il Gruppo di Lavoro: {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "WORK_SPACE_MEMBER": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai aggiunto un nuovo utente: {{resourceName}} al Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha aggiunto un nuovo utente: {{resourceName}} al Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato l'utente: {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato l'utente: {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato l'utente: {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato l'utente: {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        },
+        "WORKSPACE_DELETION": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il Gruppo di Lavoro : {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato il Gruppo di Lavoro : {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        }
+      },
+      "GUEST": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato un nuovo Account Ospite per : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato un nuovo Account Ospite per : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato l'Account Ospite per : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato l'Account Ospite per : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "SENTENCE": "L'Account Ospite di : {{userVarious}} è scaduto.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "Account Ospite di {{authorName}} : {{userVarious}} è scaduto.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato l'Account Ospite di : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato l'Account Ospite di : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "CHANGE_PASSWORD": {
+        "AUTHOR": {
+          "SENTENCE": "Hai cambiato la password del tuo account.",
+          "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+        },
+        "VIEWER": {
+          "SENTENCE": "{{authorName}} ha cambiato la password del suo account.",
+          "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+        }
+      },
+      "JWT_PERMANENT_TOKEN": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato il token di accesso permanente : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato il token di accesso permanente : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il token di accesso permanente : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato il token di accesso permanente : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai aggiornato il token di accesso permanente : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha aggiornato il token di accesso permanente : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "SHARE_ENTRY": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai condiviso il file : {{resourceName}} con {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha condiviso il file : {{resourceName}} con te.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE_SHARE"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} di {{userVarious}} nel tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha copiato il documento : {{resourceName}} nel suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato il documento : {{resourceName}} di {{userVarious}} in {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato il documento : {{resourceName}} in {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il file condiviso : {{resourceName}}, destinato a {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato il file condiviso : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Hai scaricato il file condiviso : {{resourceName}}, inviato da {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha scaricato il tuo file condiviso : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "EXPIRATION": {
+          "AUTHOR": {
+            "SENTENCE": "Il tuo file condiviso : {{resourceName}} destinato a {{userVarious}} è scaduto.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "Il file condiviso di {{authorName}} : {{resourceName}} destinato a {{userVarious}} è scaduto.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato il file condiviso : {{resourceName}}, destinato a {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato il file condiviso : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "USER": {
+        "SECOND_FACTOR_SHARED_KEY_CREATE": {
+          "AUTHOR": {
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+            "SENTENCE": "Hai abilitato l'autenticazione a Secondo Fattore (chiave condivisa creata)"
+          }
+        },
+        "SECOND_FACTOR_SHARED_KEY_DELETE": {
+          "AUTHOR": {
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+            "SENTENCE": "Hai disabilitato l'autenticazione a Secondo Fattore (chiave condivisa eliminata)"
+          },
+          "VIEWER": {
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
+            "SENTENCE": "Un amministratore ha disabilitato l'autenticazione a Secondo Fattore (chiave condivisa eliminata)"
+          }
+        }
+      },
+      "UPLOAD_REQUEST_GROUP": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Avete creato una nuova richiesta di caricamento chiamata {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "La richiesta di caricamento {{resourceName}} è stata modificata.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "La richiesta di caricamento {{resourceName}} è stata modificata.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "UPLOAD_REQUEST": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "La richiesta di caricamento è stata creata.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "La richiesta di caricamento è stata aggiornata.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "La richiesta di caricamento è stata aggiornata.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "UPLOAD_REQUEST_URL": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Un'e-mail di richiesta di caricamento è stata inviata a : {{resourceName}}",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        }
+      },
+      "UPLOAD_REQUEST_ENTRY": {
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Hai scaricato il file : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "CREATE": {
+          "VIEWER": {
+            "SENTENCE": "Il file {{resourceName}} è stato caricato.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} nel tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il documento : {{resourceName}}",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        }
+      },
+      "WORK_GROUP": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato un nuovo Gruppo di Lavoro : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato un nuovo Gruppo di Lavoro : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il Gruppo di Lavoro : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato il Gruppo di Lavoro : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato il Gruppo di Lavoro : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato il Gruppo di Lavoro : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "WORKGROUP_DOCUMENT": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai caricato un nuovo file : {{resourceName}} nel Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha caricato un nuovo file : {{resourceName}} nel Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD"
+          }
+        },
+        "COPY_FROM_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato il documento : {{resourceName}} in {{resourceNameVarious}}, dal tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato il documento : {{resourceName}} in {{resourceNameVarious}}, dal suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_RECEIVED_SHARE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato il documento : {{resourceName}} in {{resourceNameVarious}}, da una condivisione ricevuta.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato il documento : {{resourceName}} in {{resourceNameVarious}}, dal suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato questo file copiando : {{resourceNameCopy}} da {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato questo file copiando : {{resourceNameCopy}} da {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_PERSONAL_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai copiato il documento : {{resourceName}} nel tuo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha copiato il documento : {{resourceName}} nel suo Spazio Personale.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "COPY_TO_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato un duplicato di questo file in {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato un duplicato di questo file in {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai cancellato il file : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha cancellato il file : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Hai scaricato il file : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha scaricato il file : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato il file : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato il file : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        },
+        "MOVE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai spostato il file : {{resourceName}} via dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        }
+      },
+      "WORKGROUP_DOCUMENT_REVISION": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Una versione del file {{resourceName}} è stata aggiunta al Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "La versione del file {{resourceName}} è stata eliminata dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+          }
+        },
+        "COPY_FROM_SHARED_SPACE": {
+          "AUTHOR": {
+            "SENTENCE": "Il documento è stato ripristinato con la versione {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Hai scaricato la versione : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha scaricato la versione : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+          }
+        }
+      },
+      "WORKGROUP_FOLDER": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai creato una nuova cartella : {{resourceName}} nel Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha creato una nuova cartella : {{resourceName}} nel Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CREATE"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai cancellato la cartella : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha cancellato la cartella : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Hai scaricato la cartella : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha scaricato la cartella : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato la cartella : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato la cartella : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
+      "WORKGROUP_MEMBER": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai aggiunto un nuovo utente : {{resourceName}} al Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha aggiunto un nuovo utente : {{resourceName}} al Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato l'utente : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato l'utente : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Hai modificato l'utente : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha modificato l'utente : {{resourceName}} dal Gruppo di Lavoro {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        },
+        "WORKGROUP_DELETION": {
+          "AUTHOR": {
+            "SENTENCE": "Hai eliminato il Gruppo di Lavoro : {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} ha eliminato il Gruppo di Lavoro : {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        }
+      }
+    },
+    "UPDATED_FIELDS": {
+      "CAN_CREATE_GUEST": "Può creare un ospite",
+      "CAN_UPLOAD": "Può caricare",
+      "EXPIRATION_DATE": "Data di scadenza",
+      "FIRST_NAME": "Nome",
+      "FOLDER": "Cartella",
+      "LAST_NAME": "Cognome",
+      "MAIL": "Email",
+      "NAME": "Nome",
+      "RIGHT": "Diritti utente",
+      "RESTRICTED": "Limitazione dei contatti"
+    },
+    "UPDATED_FIELDS_RIGHTS": {
+      "ADMIN": "Amministratore",
+      "WRITE": "Scrivere",
+      "READ": "Leggere"
+    },
+    "UPDATED_FIELDS_UPLOAD_REQUEST_GROUP": {
+      "STATUS_TITLE": "Stato",
+      "STATUS": {
+        "ARCHIVED": "archiviato",
+        "ENABLED": "attivo",
+        "CLOSED": "chiuso",
+        "CREATED": "pendente",
+        "DELETED": "eliminato",
+        "CANCELED": "cancellato"
+      },
+      "LABEL_UPDATED": "L'etichetta è stata aggiornata",
+      "MESSAGE_UPDATED": "Il messaggio è stato aggiornato"
+    }
+  },
+  "DISABLED": "Disabilitato",
+  "ENABLED": "Abilitato",
+  "FILTERS_SELECT": {
+    "ACTION": {
+      "ADDITION": "Aggiunta",
+      "ALL": "Tutti",
+      "COPY": "Copia",
+      "CREATE": "Creazione",
+      "CREATE_SHARE": "Condivisione inviata",
+      "DELETE": "Cancellazione",
+      "DELETE_REVISION": "Versione cancellata",
+      "DOWNLOAD": "Scaricamento",
+      "DOWNLOAD_REVISION": "Versione scaricata",
+      "FAILURE": "Errore di accesso",
+      "READ": "Leggere",
+      "RECEIVE_SHARE": "Condivisione ricevuta",
+      "RESTORE_REVISION": "Versione ripristinata",
+      "SUCCESS": "Accesso effettuato",
+      "TRANSFER": "Trasferimento",
+      "UPDATE": "Aggiornamento",
+      "UPLOAD": "Caricamento file",
+      "UPLOAD_REVISION":"Versione caricata",
+      "VIEWED": "Visualizzato"
+    },
+    "TYPE": {
+      "ALL": "Tutti",
+      "ANONYMOUS_SHARE_ENTRY": "Condividi",
+      "AUTHENTICATION": "Autenticazione",
+      "CONTACTS_LISTS": "Elenco dei contatti",
+      "CONTACTS_LISTS_CONTACTS": "Contatto",
+      "DOCUMENT_ENTRY": "File",
+      "GUEST": "Account ospite",
+      "JWT_PERMANENT_TOKEN": "Token di accesso permanente (JWT)",
+      "SHARE_ENTRY": "Condividi",
+      "USER": "Utente",
+      "UPLOAD_REQUEST": "Richiesta di caricamento",
+      "UPLOAD_REQUEST_GROUP": "Insieme di richieste di caricamento",
+      "UPLOAD_REQUEST_URL": "Carica il link della richiesta",
+      "UPLOAD_REQUEST_ENTRY": "Carica la voce della richiesta",
+      "WORK_GROUP": "Gruppo di Lavoro",
+      "WORKGROUP_DOCUMENT": "File del Gruppo di Lavoro",
+      "WORKGROUP_FOLDER": "Cartella del Gruppo di Lavoro",
+      "WORKGROUP_MEMBER": "Utente del Gruppo di Lavoro",
+      "WORKGROUP_DOCUMENT_REVISION": "File del Gruppo di Lavoro (Versione)",
+      "WORK_SPACE" : "Spazio di lavoro",
+      "WORK_SPACE_MEMBER" : "Utenti - Spazio di lavoro"
+    }
+  },
+  "NO_AUDIT": "Nessun controllo per questa risorsa ancora",
+  "TABLE_HEADER": {
+    "ACTION": "Azione",
+    "ACTOR": "Attore",
+    "DATE": "Data",
+    "DETAIL": "Dettagli",
+    "RECIPIENT": "Destinatario",
+    "RESOURCE_NAME": "Nome della risorsa",
+    "RESOURCE_TYPE": "Tipo della risorsa"
+  },
+  "TOOLBAR": {
+    "ORDER_BY": "Ordina per",
+    "FILTER_BEGINNING_DATE": "Data di inizio",
+    "FILTER_ENDING_DATE": "Data di fine",
+    "SEARCH": "Ricerca"
+  },
+  "WORKGROUP": {
+    "ANOTHER": "un altro Gruppo di Lavoro",
+    "CURRENT" : "il Gruppo di Lavoro attuale"
+  }
+}
