@@ -1,0 +1,34 @@
+{
+  "SECOND_FACTOR_AUTH": {
+    "TITLE": "Autenticazione a secondo Fattore",
+    "SHARED_KEY_CREATION": {
+      "REQUIRED": "L'autenticazione con secondo fattore è richiesta per il tuo account. Abilita l'autenticazione con secondo fattore per continuare ad usare LinShare.",
+      "INSTRUCTION": "Per abilitare l'autenticazione con secondo fattore per il tuo account:",
+      "STEP_1": "Scarica e installa l'app di autenticazione FreeOTP scansionando il codice QR o seguendo i link",
+      "STEP_2": "Genera la chiave condivisa e usa l'app FreeOTP per scansionare il codice QR o aggiungi la chiave come segue:",
+      "APPSTORE_LINK": "FreeOTP su App Store",
+      "GOOGLEPLAY_LINK": "FreeOTP su Google Play",
+      "GENERATE_KEY": "Generare la Chiave Condivisa",
+      "KEY_CREATED_ON": "Chiave condivisa creata il {{date}}",
+      "CAN_NOT_SCAN": "Non riesci a scansionarlo?"
+    },
+    "SHARED_KEY_REMOVAL": {
+      "NOTICE": "La chiave condivisa non può essere rimossa perché è richiesta l'Autenticazione con Secondo Fattore per il tuo account. Contatta il supporto per maggiori informazioni.",
+      "INSTRUCTION": "Rimuovi la chiave condivisa per disabilitare l'Autenticazione a Secondo Fattore per il tuo account:",
+      "REMOVE_KEY": "Rimuovi Chiave Condivisa",
+      "REMOVAL_SUCCESS": "La chiave condivisa è stata cancellata con successo."
+    },
+    "MANUAL_SETUP": {
+      "LABEL": "Non riesci a scansionare il codice a barre?",
+      "STEP_1": "1. Nell'app FreeOTP seleziona l'icona Aggiungi chiave.",
+      "STEP_2": "2. Inserire l'Emittente e l'Account come segue:",
+      "STEP_3": "3. Inserisci la chiave segreta come segue:",
+      "STEP_4": "4. Assicuratevi che gli elementi seguenti siano configurati come:",
+      "STEP_5": "5. Premi il pulsante Aggiungi per finire.",
+      "TYPE": "Tipo: ",
+      "DIGITS": "Cifre: ",
+      "ALGORITHM": "Algoritmo: ",
+      "INTERVAL": "Intervallo: "
+    }
+  }
+}
