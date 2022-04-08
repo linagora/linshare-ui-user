@@ -394,17 +394,6 @@ body {
   margin: auto;
 }
 
-/* TABS DEFAULT STYLING  */
-md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
-  color: $primary-color !important;
-  background: $primary-color !important;
-}
-
-md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-ripple-container {
-  color: rgb(248, 187, 208);
-  display: none;
-}
-
 /*
 ** RESPONSIVE
 */

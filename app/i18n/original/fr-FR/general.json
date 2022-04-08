@@ -317,5 +317,10 @@
   "WORK_IN_PROGRESS": {
     "WORK_IN_PROGRESS_INFO": "Cette section est actuellement indisponible",
     "WORK_IN_PROGRESS_MSG": "EN COURS DE CONSTRUCTION"
+  },
+  "LOCALE": {
+    "ENGLISH": "Anglais",
+    "FRENCH": "Français",
+    "RUSSIAN": "Russe"
   }
 }

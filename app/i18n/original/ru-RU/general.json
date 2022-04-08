@@ -1,320 +1,325 @@
 {
-    "ACTION": {
-      "ADD_MEMBER": "Добавить участника",
-      "COPY": "Копировать",
-      "COPY_ADJ": "Копия",
-      "COPY_DROPDOWN": {
-        "COPY_AND_SHARE": "Копировать и Поделиться",
-        "PERSONAL_SPACE": "Моё пространство",
-        "SHARED_SPACE": "Рабочие группы"
-      },
-      "COPY_IN_MY_FILES": "Копировать в моё пространство",
-      "COPY_IN_WORKGROUP": "Копировать в рабочую группу",
-      "COPY_INTO_THE_SHARED_SPACE": "Копировать в Рабочие группы",
-      "COPY_TO": "Копировать как...",
-      "COPY_TO_SHARED_SPACE": "Копировать в Рабочие группы",
-      "DELETE": "Удалить",
-      "DELETE_ALL": "Удалить всё",
-      "DISPLAY": "Показать",
-      "DOWNLOAD": "Скачать",
-      "DUPLICATE": "Копировать",
-      "EXTERNAL_EDIT": "Скачать и заблокировать",
-      "FAVORITES": "Избранное",
-      "FORWARD": "Вперед",
-      "GO_TO_TRASH": "Посмотреть корзину",
-      "INFO_WORKGROUP": "Информация о рабочей группе",
-      "INFO_WORKSPACE": "Просмотр сведений о рабочей области",
-      "INFO_FILE": "Просмотреть информацию о файле",
-      "INFORMATION": "Информация",
-      "LOCK": "Заблокировать",
-      "MOVE": "Перенести",
-      "NEW_CONTACTS_LIST": "Новый список контактов",
-      "NEW_FOLDER": "Новая папка",
-      "NEW_ITEM": "Новый",
-      "NEW_WORKGROUP": "Новая рабочая группа",
-      "NEW_WORKSPACE": "Новое рабочее пространство",
-      "NEW_VERSION": "Новая версия",
-      "PREVIEW": "Предварительный просмотр",
-      "REFRESH": "Актуализировать",
-      "RENAME": "Переименовать",
-      "RESTORE": "Сделать эту версию последней",
-      "SHARE": "Отправить",
-      "SILENCE": "Тишина",
-      "VIEW_VERSIONING": "Просмотреть историю",
-      "SEE_VERSIONS": "Управлять версиями",
-      "PROCEED": "Продолжить",
-      "SAVE": "хранить",
-      "GO_TO_DESTINATION": "К месту назначения"
+  "ACTION": {
+    "ADD_MEMBER": "Добавить участника",
+    "COPY": "Копировать",
+    "COPY_ADJ": "Копия",
+    "COPY_DROPDOWN": {
+      "COPY_AND_SHARE": "Копировать и Поделиться",
+      "PERSONAL_SPACE": "Моё пространство",
+      "SHARED_SPACE": "Рабочие группы"
     },
-    "ACTIVITIES": "Действия",
-    "ADD_FILES_DROPDOWN": {
-      "UPLOAD_AND_SHARE": "Отправить и поделиться",
-      "UPLOAD_FILE": "Отправить файл",
-      "UPLOAD_IN_GROUP": "Отправить в рабочую группу",
-      "UPLOAD_IN_MY_FILES": "В моих файлах",
-      "UPLOAD_IN_WORKGROUP": "В рабочей группе",
-      "UPLOAD_SHARE": "Загрузить и поделиться"
-    },
-    "ANONYMOUS_URL": {
-      "HELLO": "Добрый день, <span>{{externalEmail}}</span>,",
-      "MSG_PLURAL": "Общие <b>{{num}} fichiers</b> с <b>{{creationDate}}</b>, которые будут доступны до <b>{{expiryDate}}</b>.",
-      "MSG_SINGULAR": "Поделился файлом на <b>{{creationDate}}</b>, который будет доступен до <b>{{expiryDate}}</b>."
-    },
-    "APPLICATION_NAME": "LinShare",
-    "BOUTON_ADD_FILE_TITLE": "Добавить",
-    "BOUTON_LABEL_TITLE": {
-      "COPY": "Копировать",
-      "DELETE": "Удалить",
-      "DOWNLOAD": "Скачать",
-      "INFO": "Информация",
-      "MORE_ACTIONS": "Действия",
-      "MULTIPLE_SELECT": "Множественный доступ",
-      "SHARE": "Поделиться",
-      "SHARED": "Отправлено"
-    },
-    "BY": "По",
-    "COMMON": {
-      "SIDEBAR": {
-        "CORE_VERSION": "Основная версия",
-        "PRODUCT_VERSION": "Версия продукта"
-      }
-    },
-    "COMPONENTS": {
-      "AUTOCOMPLETE_USERS": {
-        "INPUT_PLACEHOLDER": "Добавить пользователей",
-        "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Поиск участников",
-        "INVALID_EMAIL": "Введен неверный адрес электронной почты",
-        "INVALID_EMPTY": "Неизвестный пользователь",
-        "CREATE_GUEST": "Пригласить в качестве гостя?"
-      },
-      "DATE_PICKER": {
-        "SUN": "ВС",
-        "MON": "ПН",
-        "TUE": "ВТ",
-        "WED": "СР",
-        "THU": "ЧТ",
-        "FRI": "ПТ",
-        "SAT": "СБ",
-        "JANUARY": "ЯНВАРЬ",
-        "FEBRUARY": "ФЕВРАЛЬ",
-        "MARCH": "МАРТ",
-        "APRIL": "АПРЕЛЬ",
-        "MAY": "МАЙ",
-        "JUNE": "ИЮНЬ",
-        "JULY": "ИЮЛЬ",
-        "AUGUST": "АВГУСТ",
-        "SEPTEMBER": "СЕНТЯБРЬ",
-        "OCTOBER": "ОКТЯБРЬ",
-        "NOVEMBER": "НОЯБРЬ",
-        "DECEMBER": "ДЕКАБРЬ"
-      }
-    },
-    "DOMAIN": "Сфера",
+    "COPY_IN_MY_FILES": "Копировать в моё пространство",
+    "COPY_IN_WORKGROUP": "Копировать в рабочую группу",
+    "COPY_INTO_THE_SHARED_SPACE": "Копировать в Рабочие группы",
+    "COPY_TO": "Копировать как...",
+    "COPY_TO_SHARED_SPACE": "Копировать в Рабочие группы",
+    "DELETE": "Удалить",
+    "DELETE_ALL": "Удалить всё",
+    "DISPLAY": "Показать",
     "DOWNLOAD": "Скачать",
-    "EDIT": "Изменить",
-    "SET": "Набор",
-    "EXPIRE_THE": "Истекает: ",
-    "EXTENSIONS": {
-      "ARCHIVE": "Архив",
-      "AUDIO": "Аудио",
-      "CODE": "Код",
-      "EXCEL": "Excel",
-      "IMAGE": "Картинка",
-      "PDF": "PDF",
-      "POWERPOINT": "PowerPoint",
-      "TEXT": "Texte",
-      "VIDEO": "Видео",
-      "WORD": "Word"
-    },
-    "FILTER_COMPONENT": {
-      "ADVANCED_SEARCH_TITLE": "Расширенный поиск",
-      "BY_SIZE": "Размер",
-      "FILTER_BY": "Фильтрация по",
-      "FILTER_BY_SIZE": {
-        "HEADER": "Фильтр по размеру",
-        "MINIMUM": "минимум",
-        "MAXIMUM": "максимум"
-      },
-      "FILTER_BY_DATE": {
-        "BEGINNING_DATE": "Дата создания",
-        "CREATION_DATE": "Дата создания",
-        "ENDING_DATE": "Дата окончания",
-        "HEADER": "Фильтр по дате",
-        "MODIFICATION_DATE": "Дата изменения"
-      },
-      "FILTER_BY_RECIPIENT": {
-        "HEADER": "Фильтр по эмитенту",
-        "PLACEHOLDER": "Введите адрес электронной почты, имя или фамилию"
-      },
-      "IS_SHARED": "Отправленные",
-      "ORDER_BY_NAME": "Название",
-      "PLACEHOLDER_FILE_NAME": "Поиск",
-      "REINITIALIZE": "Сбросить",
-      "SUBMIT": "Применить",
-      "UNIT": "Единица",
-      "DATE": "Дата"
-    },
-    "HEADER": {
-      "CLEAR_LOCAL_STORAGE": "Очистить локальное хранилище",
-      "DEBUG_MODE": "Режим debug",
-      "FILES_TO_SHARE": "Файлы для обмена",
-      "FULL_SCREEN": "Полный экран",
-      "LOGOUT": "Выход",
-      "NO_SHARES": "В данный момент файлы отсутствуют.",
-      "SETTINGS": "Параметры",
-      "SHARING_PROGRESS": {
-        "SHARE_DONE": "Готово",
-        "SHARE_IN_PROGRESS": "в процессе ..."
-      },
-      "UPLOAD_PROGRESS": {
-        "FOOTER": "Увидеть все",
-        "TITLE": "Прогресс отправки",
-        "TO_COMMON_SPACE": "В Рабочие группы",
-        "TO_MY_SPACE": "В моё личное пространство",
-        "UPLOAD_DONE": "Готово",
-        "UPLOAD_ERROR": "Ошибка",
-        "UPLOAD_PAUSED": "На паузе",
-        "UPLOAD_SERVER": "Загрузка файла"
-      }
-    },
-    "INFORMATION_TAB": {
-      "ABORT_EDIT": "Отменить изменение",
-      "CREATED_THE": "Создано: ",
-      "EDIT_DESCRIPTION": "Изменить описание",
-      "INSERT_DESCRIPTION": "Добавить описание",
-      "META_DATA": "Свойства",
-      "NO_DESCRIPTION": "Ни одного описания",
-      "PREVIOUS_UPDATE": "История",
-      "TITLE": "Информация",
-      "UPTADED_THE": "Изменено: ",
-      "VERSIONS": "Обновление",
-      "MAX_FILE_SIZE": "Максимальный размер файла",
-      "VERSIONING_ACTIVATION": "Управление версиями:"
-    },
-    "LINK_DISABLED": "Неактивная ссылка",
-    "LOGIN": {
-      "CONNECTION_LINK": "Подключиться",
-      "COPYRIGHT": "Вы используете бесплатную и открытую версию <a href='http://linshare.org' target='_blank'>LinShare™</a>, разработанную <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2022. Внесите вклад в исследование и разработку продукта, вступив в сообщество компании.",
-      "EMAIL_PLACEHOLDER": "E-mail",
-      "FORGOTTEN_PASSWORD": "Забыли пароль ?",
-      "KEEP_SIGNED": "Запомнить пароль",
-      "LINSHARE_LINK_ALT": "Linshare: Безопасное совместное использование файлов с открытым исходным кодом",
-      "LOGIN_HEADER": "Подключение",
-      "NOTIFICATION": {
-        "SUCCESS": "Добро пожаловать, {{firstName}}",
-        "ERROR": "Ошибка входа, неправильный пароль или e-mail",
-        "ERROR_OIDC": "Ошибка аутентификации SSO"
-      },
-      "PASSWORD_PLACEHOLDER": "Пароль",
-      "TAGLINE": "Открытое программное обеспечение для надежного обмена файлами",
-      "CONTINUE_WITH_SSO": "Продолжайте свой SSO",
-      "OR": "или"
-    },
-    "SECOND_FA_LOGIN": {
-      "LOGIN_HEADER": "Двухфакторная аутентификация",
-      "USAGE": "Введите 6-значный код из вашего FreeOTP приложения",
-      "NOTIFICATION": {
-        "OTP": "Необходима двухфакторная аутентификация",
-        "OTP_ERROR": "Одноразовый пароль неправильный или срок его действия истек",
-        "ACCOUNT_LOCKED": "Ваш аккаунт был заблокирован из-за неудачных попыток входа в систему"
-      }
-    },
-    "ME": "Я",
-    "MENU_TITLE": {
-      "ADMIN": "Контакты",
-      "AUDIT": "История",
-      "AUDIT_GLOBAL": "Глобальные действия",
-      "AUDIT_UPLOAD_REQUEST": "Деятельность отправленных приглашений",
-      "CONTACTS_LISTS": "Список контактов",
-      "WORKSPACE": "Рабочее пространство",
-      "FILES": "Моё пространство",
-      "GROUP_MEMBERS": "Мои группы",
-      "GUESTS": "Гостевой аккаунт",
-      "HOME": "Главная",
-      "MY_FILES": "Мои файлы",
-      "UPLOAD_AND_SHARE": "Загрузка в процессе",
-      "RECEIVED_SHARES": "Полученные файлы",
-      "SAFE_DETAILS": "Выписка с аккаунта",
-      "SHARED_SPACE": "Рабочие группы",
-      "SHARES": "Мои отправленные файлы",
-      "UPLOAD_QUEUE": "Мои отправки",
-      "USERS": "Пользователи"
-    },
-    "NAVIGATION": {
-      "CANCEL": "Отменить",
-      "NEXT": "Слудующий",
-      "PAUSE": "Пауза",
-      "PLAY": "Продолжить",
-      "PREVIOUS": "Предыдущий",
-      "REPLAY": "Заново",
-      "SEND": "Отправить",
-      "SHARE": "Отправить",
-      "STOP": "Остановить",
-      "CREATE": "Создать",
-      "FORWARD": "Вперед"
-    },
-    "NO_ACTION_AVAILABLE": "Нет доступных действий",
-    "PENDING_UPLOADS": "в ожидании",
-    "POPOVER": {
-      "ISOLATED": {
-        "TEXT": "Нажмите сюда чтобы показать все файлы",
-        "BUTTON": "Я это знал !"
-      }
-    },
-    "REMOVE": "Удалить",
-    "SAVING": "Сохранение в процессе...",
-    "SELECTION": {
-      "NUM_ITEM_SELECTED": "Выбранные файлы"
-    },
-    "SELECTION_TOOLBAR": {
-      "CANCEL": "Отменить",
-      "CANCEL_ALL": "Отменить всё",
-      "CLEAR": "Очистить",
-      "CLEAR_INFO": "Очистить законченные файлы",
-      "CLEAR_ALL": "Очистить всё",
-      "COPY": "Копировать",
-      "DELETE": "Удалить",
-      "DELETE_ALL": "Удалть всё",
-      "DESELECT_ALL": "Отменить выбор",
-      "ELEMENTS": "Элементы",
-      "FILES": "Файлы",
-      "PAUSE": "Пауза",
-      "PAUSE_ALL": "Всё поставить на паузу",
-      "PLAY": "Запустить",
-      "PLAY_ALL": "Всё запустить",
-      "ORDER_BY": "Сортировать по",
-      "RESET": "Отменить выбор",
-      "RESTORE": "Сделать эту версию последней",
-      "RETRY": "Попробовать еще раз",
-      "RETRY_ALL": "Попробовать еще раз всё",
-      "SELECT_ALL": "Выбрать всё",
-      "SELECTED_ELEMENTS": "выбранных файла(-ов)",
-      "SELECTED_FILES": "Файл(ы) выбран(ы)",
-      "SHARE": "Отправить",
-      "SHOW_IN_FILES": "Смотреть в моих файлах",
-      "SHOW_SELECTION": "Показать только выбранные файлы",
-      "STOP": "Остановить"
-    },
-    "TRANSFERS_DROPDOWN": {
-      "BEFORE_SENDINGS": "перед отправкой",
-      "SHARE": "Обмен",
-      "SHARE_NUMBER": "Обмен",
-      "UPLOADS": "Загрузка"
-    },
-    "UNKNOWN_USER": "Неизвестный пользователь",
-    "UNKNOWN_FIRST_LETTER": "N.C.",
-    "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> был успешно загружен} other{Файлы были успешно загружены}}",
-    "UPLOAD_VERSION_DONE": "Новая версия {addFilename, select, true{<b>{fileName}</b>} other{файла}} успешно загружена",
-    "USER_QUOTAS": {
-      "DOMAIN": "Используемый домен",
-      "MAX_FILE_SIZE": "Максимальный размер файла.",
-      "REMAINING_OVER": "доступно из",
-      "USED": "Использовано"
-    },
-    "VALIDATE": "Подтвердить",
-    "WIP": "В процессе создания",
-    "WORK_IN_PROGRESS": {
-      "WORK_IN_PROGRESS_INFO": "Этот раздел в настоящее время недоступен",
-      "WORK_IN_PROGRESS_MSG": "В процессе создания"
+    "DUPLICATE": "Копировать",
+    "EXTERNAL_EDIT": "Скачать и заблокировать",
+    "FAVORITES": "Избранное",
+    "FORWARD": "Вперед",
+    "GO_TO_TRASH": "Посмотреть корзину",
+    "INFO_WORKGROUP": "Информация о рабочей группе",
+    "INFO_WORKSPACE": "Просмотр сведений о рабочей области",
+    "INFO_FILE": "Просмотреть информацию о файле",
+    "INFORMATION": "Информация",
+    "LOCK": "Заблокировать",
+    "MOVE": "Перенести",
+    "NEW_CONTACTS_LIST": "Новый список контактов",
+    "NEW_FOLDER": "Новая папка",
+    "NEW_ITEM": "Новый",
+    "NEW_WORKGROUP": "Новая рабочая группа",
+    "NEW_WORKSPACE": "Новое рабочее пространство",
+    "NEW_VERSION": "Новая версия",
+    "PREVIEW": "Предварительный просмотр",
+    "REFRESH": "Актуализировать",
+    "RENAME": "Переименовать",
+    "RESTORE": "Сделать эту версию последней",
+    "SHARE": "Отправить",
+    "SILENCE": "Тишина",
+    "VIEW_VERSIONING": "Просмотреть историю",
+    "SEE_VERSIONS": "Управлять версиями",
+    "PROCEED": "Продолжить",
+    "SAVE": "хранить",
+    "GO_TO_DESTINATION": "К месту назначения"
+  },
+  "ACTIVITIES": "Действия",
+  "ADD_FILES_DROPDOWN": {
+    "UPLOAD_AND_SHARE": "Отправить и поделиться",
+    "UPLOAD_FILE": "Отправить файл",
+    "UPLOAD_IN_GROUP": "Отправить в рабочую группу",
+    "UPLOAD_IN_MY_FILES": "В моих файлах",
+    "UPLOAD_IN_WORKGROUP": "В рабочей группе",
+    "UPLOAD_SHARE": "Загрузить и поделиться"
+  },
+  "ANONYMOUS_URL": {
+    "HELLO": "Добрый день, <span>{{externalEmail}}</span>,",
+    "MSG_PLURAL": "Общие <b>{{num}} fichiers</b> с <b>{{creationDate}}</b>, которые будут доступны до <b>{{expiryDate}}</b>.",
+    "MSG_SINGULAR": "Поделился файлом на <b>{{creationDate}}</b>, который будет доступен до <b>{{expiryDate}}</b>."
+  },
+  "APPLICATION_NAME": "LinShare",
+  "BOUTON_ADD_FILE_TITLE": "Добавить",
+  "BOUTON_LABEL_TITLE": {
+    "COPY": "Копировать",
+    "DELETE": "Удалить",
+    "DOWNLOAD": "Скачать",
+    "INFO": "Информация",
+    "MORE_ACTIONS": "Действия",
+    "MULTIPLE_SELECT": "Множественный доступ",
+    "SHARE": "Поделиться",
+    "SHARED": "Отправлено"
+  },
+  "BY": "По",
+  "COMMON": {
+    "SIDEBAR": {
+      "CORE_VERSION": "Основная версия",
+      "PRODUCT_VERSION": "Версия продукта"
     }
+  },
+  "COMPONENTS": {
+    "AUTOCOMPLETE_USERS": {
+      "INPUT_PLACEHOLDER": "Добавить пользователей",
+      "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Поиск участников",
+      "INVALID_EMAIL": "Введен неверный адрес электронной почты",
+      "INVALID_EMPTY": "Неизвестный пользователь",
+      "CREATE_GUEST": "Пригласить в качестве гостя?"
+    },
+    "DATE_PICKER": {
+      "SUN": "ВС",
+      "MON": "ПН",
+      "TUE": "ВТ",
+      "WED": "СР",
+      "THU": "ЧТ",
+      "FRI": "ПТ",
+      "SAT": "СБ",
+      "JANUARY": "ЯНВАРЬ",
+      "FEBRUARY": "ФЕВРАЛЬ",
+      "MARCH": "МАРТ",
+      "APRIL": "АПРЕЛЬ",
+      "MAY": "МАЙ",
+      "JUNE": "ИЮНЬ",
+      "JULY": "ИЮЛЬ",
+      "AUGUST": "АВГУСТ",
+      "SEPTEMBER": "СЕНТЯБРЬ",
+      "OCTOBER": "ОКТЯБРЬ",
+      "NOVEMBER": "НОЯБРЬ",
+      "DECEMBER": "ДЕКАБРЬ"
+    }
+  },
+  "DOMAIN": "Сфера",
+  "DOWNLOAD": "Скачать",
+  "EDIT": "Изменить",
+  "SET": "Набор",
+  "EXPIRE_THE": "Истекает: ",
+  "EXTENSIONS": {
+    "ARCHIVE": "Архив",
+    "AUDIO": "Аудио",
+    "CODE": "Код",
+    "EXCEL": "Excel",
+    "IMAGE": "Картинка",
+    "PDF": "PDF",
+    "POWERPOINT": "PowerPoint",
+    "TEXT": "Texte",
+    "VIDEO": "Видео",
+    "WORD": "Word"
+  },
+  "FILTER_COMPONENT": {
+    "ADVANCED_SEARCH_TITLE": "Расширенный поиск",
+    "BY_SIZE": "Размер",
+    "FILTER_BY": "Фильтрация по",
+    "FILTER_BY_SIZE": {
+      "HEADER": "Фильтр по размеру",
+      "MINIMUM": "минимум",
+      "MAXIMUM": "максимум"
+    },
+    "FILTER_BY_DATE": {
+      "BEGINNING_DATE": "Дата создания",
+      "CREATION_DATE": "Дата создания",
+      "ENDING_DATE": "Дата окончания",
+      "HEADER": "Фильтр по дате",
+      "MODIFICATION_DATE": "Дата изменения"
+    },
+    "FILTER_BY_RECIPIENT": {
+      "HEADER": "Фильтр по эмитенту",
+      "PLACEHOLDER": "Введите адрес электронной почты, имя или фамилию"
+    },
+    "IS_SHARED": "Отправленные",
+    "ORDER_BY_NAME": "Название",
+    "PLACEHOLDER_FILE_NAME": "Поиск",
+    "REINITIALIZE": "Сбросить",
+    "SUBMIT": "Применить",
+    "UNIT": "Единица",
+    "DATE": "Дата"
+  },
+  "HEADER": {
+    "CLEAR_LOCAL_STORAGE": "Очистить локальное хранилище",
+    "DEBUG_MODE": "Режим debug",
+    "FILES_TO_SHARE": "Файлы для обмена",
+    "FULL_SCREEN": "Полный экран",
+    "LOGOUT": "Выход",
+    "NO_SHARES": "В данный момент файлы отсутствуют.",
+    "SETTINGS": "Параметры",
+    "SHARING_PROGRESS": {
+      "SHARE_DONE": "Готово",
+      "SHARE_IN_PROGRESS": "в процессе ..."
+    },
+    "UPLOAD_PROGRESS": {
+      "FOOTER": "Увидеть все",
+      "TITLE": "Прогресс отправки",
+      "TO_COMMON_SPACE": "В Рабочие группы",
+      "TO_MY_SPACE": "В моё личное пространство",
+      "UPLOAD_DONE": "Готово",
+      "UPLOAD_ERROR": "Ошибка",
+      "UPLOAD_PAUSED": "На паузе",
+      "UPLOAD_SERVER": "Загрузка файла"
+    }
+  },
+  "INFORMATION_TAB": {
+    "ABORT_EDIT": "Отменить изменение",
+    "CREATED_THE": "Создано: ",
+    "EDIT_DESCRIPTION": "Изменить описание",
+    "INSERT_DESCRIPTION": "Добавить описание",
+    "META_DATA": "Свойства",
+    "NO_DESCRIPTION": "Ни одного описания",
+    "PREVIOUS_UPDATE": "История",
+    "TITLE": "Информация",
+    "UPTADED_THE": "Изменено: ",
+    "VERSIONS": "Обновление",
+    "MAX_FILE_SIZE": "Максимальный размер файла",
+    "VERSIONING_ACTIVATION": "Управление версиями:"
+  },
+  "LINK_DISABLED": "Неактивная ссылка",
+  "LOGIN": {
+    "CONNECTION_LINK": "Подключиться",
+    "COPYRIGHT": "Вы используете бесплатную и открытую версию <a href='http://linshare.org' target='_blank'>LinShare™</a>, разработанную <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2022. Внесите вклад в исследование и разработку продукта, вступив в сообщество компании.",
+    "EMAIL_PLACEHOLDER": "E-mail",
+    "FORGOTTEN_PASSWORD": "Забыли пароль ?",
+    "KEEP_SIGNED": "Запомнить пароль",
+    "LINSHARE_LINK_ALT": "Linshare: Безопасное совместное использование файлов с открытым исходным кодом",
+    "LOGIN_HEADER": "Подключение",
+    "NOTIFICATION": {
+      "SUCCESS": "Добро пожаловать, {{firstName}}",
+      "ERROR": "Ошибка входа, неправильный пароль или e-mail",
+      "ERROR_OIDC": "Ошибка аутентификации SSO"
+    },
+    "PASSWORD_PLACEHOLDER": "Пароль",
+    "TAGLINE": "Открытое программное обеспечение для надежного обмена файлами",
+    "CONTINUE_WITH_SSO": "Продолжайте свой SSO",
+    "OR": "или"
+  },
+  "SECOND_FA_LOGIN": {
+    "LOGIN_HEADER": "Двухфакторная аутентификация",
+    "USAGE": "Введите 6-значный код из вашего FreeOTP приложения",
+    "NOTIFICATION": {
+      "OTP": "Необходима двухфакторная аутентификация",
+      "OTP_ERROR": "Одноразовый пароль неправильный или срок его действия истек",
+      "ACCOUNT_LOCKED": "Ваш аккаунт был заблокирован из-за неудачных попыток входа в систему"
+    }
+  },
+  "ME": "Я",
+  "MENU_TITLE": {
+    "ADMIN": "Контакты",
+    "AUDIT": "История",
+    "AUDIT_GLOBAL": "Глобальные действия",
+    "AUDIT_UPLOAD_REQUEST": "Деятельность отправленных приглашений",
+    "CONTACTS_LISTS": "Список контактов",
+    "WORKSPACE": "Рабочее пространство",
+    "FILES": "Моё пространство",
+    "GROUP_MEMBERS": "Мои группы",
+    "GUESTS": "Гостевой аккаунт",
+    "HOME": "Главная",
+    "MY_FILES": "Мои файлы",
+    "UPLOAD_AND_SHARE": "Загрузка в процессе",
+    "RECEIVED_SHARES": "Полученные файлы",
+    "SAFE_DETAILS": "Выписка с аккаунта",
+    "SHARED_SPACE": "Рабочие группы",
+    "SHARES": "Мои отправленные файлы",
+    "UPLOAD_QUEUE": "Мои отправки",
+    "USERS": "Пользователи"
+  },
+  "NAVIGATION": {
+    "CANCEL": "Отменить",
+    "NEXT": "Слудующий",
+    "PAUSE": "Пауза",
+    "PLAY": "Продолжить",
+    "PREVIOUS": "Предыдущий",
+    "REPLAY": "Заново",
+    "SEND": "Отправить",
+    "SHARE": "Отправить",
+    "STOP": "Остановить",
+    "CREATE": "Создать",
+    "FORWARD": "Вперед"
+  },
+  "NO_ACTION_AVAILABLE": "Нет доступных действий",
+  "PENDING_UPLOADS": "в ожидании",
+  "POPOVER": {
+    "ISOLATED": {
+      "TEXT": "Нажмите сюда чтобы показать все файлы",
+      "BUTTON": "Я это знал !"
+    }
+  },
+  "REMOVE": "Удалить",
+  "SAVING": "Сохранение в процессе...",
+  "SELECTION": {
+    "NUM_ITEM_SELECTED": "Выбранные файлы"
+  },
+  "SELECTION_TOOLBAR": {
+    "CANCEL": "Отменить",
+    "CANCEL_ALL": "Отменить всё",
+    "CLEAR": "Очистить",
+    "CLEAR_INFO": "Очистить законченные файлы",
+    "CLEAR_ALL": "Очистить всё",
+    "COPY": "Копировать",
+    "DELETE": "Удалить",
+    "DELETE_ALL": "Удалть всё",
+    "DESELECT_ALL": "Отменить выбор",
+    "ELEMENTS": "Элементы",
+    "FILES": "Файлы",
+    "PAUSE": "Пауза",
+    "PAUSE_ALL": "Всё поставить на паузу",
+    "PLAY": "Запустить",
+    "PLAY_ALL": "Всё запустить",
+    "ORDER_BY": "Сортировать по",
+    "RESET": "Отменить выбор",
+    "RESTORE": "Сделать эту версию последней",
+    "RETRY": "Попробовать еще раз",
+    "RETRY_ALL": "Попробовать еще раз всё",
+    "SELECT_ALL": "Выбрать всё",
+    "SELECTED_ELEMENTS": "выбранных файла(-ов)",
+    "SELECTED_FILES": "Файл(ы) выбран(ы)",
+    "SHARE": "Отправить",
+    "SHOW_IN_FILES": "Смотреть в моих файлах",
+    "SHOW_SELECTION": "Показать только выбранные файлы",
+    "STOP": "Остановить"
+  },
+  "TRANSFERS_DROPDOWN": {
+    "BEFORE_SENDINGS": "перед отправкой",
+    "SHARE": "Обмен",
+    "SHARE_NUMBER": "Обмен",
+    "UPLOADS": "Загрузка"
+  },
+  "UNKNOWN_USER": "Неизвестный пользователь",
+  "UNKNOWN_FIRST_LETTER": "N.C.",
+  "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> был успешно загружен} other{Файлы были успешно загружены}}",
+  "UPLOAD_VERSION_DONE": "Новая версия {addFilename, select, true{<b>{fileName}</b>} other{файла}} успешно загружена",
+  "USER_QUOTAS": {
+    "DOMAIN": "Используемый домен",
+    "MAX_FILE_SIZE": "Максимальный размер файла.",
+    "REMAINING_OVER": "доступно из",
+    "USED": "Использовано"
+  },
+  "VALIDATE": "Подтвердить",
+  "WIP": "В процессе создания",
+  "WORK_IN_PROGRESS": {
+    "WORK_IN_PROGRESS_INFO": "Этот раздел в настоящее время недоступен",
+    "WORK_IN_PROGRESS_MSG": "В процессе создания"
+  },
+  "LOCALE": {
+    "ENGLISH": "Английский",
+    "FRENCH": "Французский",
+    "RUSSIAN": "Русский"
   }
+}

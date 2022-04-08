@@ -1,0 +1,27 @@
+{
+  "USER_PROFILE": {
+    "TITLE": "Мой профиль",
+    "ALERT": {
+      "UPDATE_SUCCESS": "Профиль обновлен"
+    },
+    "INFO": {
+      "FIRSTNAME": "Имя",
+      "LASTNAME": "Фамилия",
+      "EMAIL": "Электронная почта",
+      "NOTIFICATION_LANGUAGE": "Язык уведомлений",
+      "MODIFICATION_DATE": "Дата изменения",
+      "CREATION_DATE": "Дата создания",
+      "EXPIRATION_DATE": "Срок действия",
+      "CREATOR": "Создатель"
+    },
+    "TABS": {
+      "FAVOURITE_RECIPIENTS": "Избранные получатели",
+      "RESTRICTED_CONTACTS": "Ограниченные контакты"
+    },
+    "SORTERS": {
+      "FIRSTNAME": "Сортировать по имени",
+      "LASTNAME": "Сортировать по фамилии",
+      "MAIL": "Сортировать по электронной почте"
+    }
+  }
+}

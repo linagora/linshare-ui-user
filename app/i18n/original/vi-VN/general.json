@@ -316,5 +316,10 @@
   "WORK_IN_PROGRESS": {
     "WORK_IN_PROGRESS_INFO": "Trang này hiện không hoạt động",
     "WORK_IN_PROGRESS_MSG": "ĐANG HOÀN THIỆN"
+  },
+  "LOCALE": {
+    "ENGLISH": "Tiếng Anh",
+    "FRENCH": "Tiếng Pháp",
+    "RUSSIAN": "Tiếng Nga"
   }
 }

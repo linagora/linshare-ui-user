@@ -60,7 +60,7 @@ require('../app/modules/linshare.resetPassword/resetPasswordModule');
 require('../app/modules/linshare.share/share');
 require('../app/modules/linshare.sharedSpace/sharedSpace');
 require('../app/modules/linshare.upload/linshareUploadModule');
-require('../app/modules/linshare.user/userProfile');
+require('../app/modules/linshare.user');
 require('../app/modules/linshare.utils/linshareUtilsModule');
 require('../app/modules/linshare.safeDetails/linshareSafeDetailsModule');
 require('../app/modules/linshare.changePassword/changePasswordModule');

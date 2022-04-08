@@ -317,5 +317,10 @@
   "WORK_IN_PROGRESS": {
     "WORK_IN_PROGRESS_INFO": "This page is currently unavailable",
     "WORK_IN_PROGRESS_MSG": "CURRENTLY UNDER CONSTRUCTION"
+  },
+  "LOCALE": {
+    "ENGLISH": "English",
+    "FRENCH": "French",
+    "RUSSIAN": "Russian"
   }
 }

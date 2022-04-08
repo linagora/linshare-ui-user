@@ -1,0 +1,27 @@
+{
+  "USER_PROFILE": {
+    "TITLE": "My profile",
+    "ALERT": {
+      "UPDATE_SUCCESS": "Profile updated"
+    },
+    "INFO": {
+      "FIRSTNAME": "First name",
+      "LASTNAME": "Last name",
+      "EMAIL": "Email",
+      "NOTIFICATION_LANGUAGE": "Notification language",
+      "MODIFICATION_DATE": "Modification date",
+      "CREATION_DATE": "Creation date",
+      "EXPIRATION_DATE": "Expiration date",
+      "CREATOR": "Creator"
+    },
+    "TABS": {
+      "FAVOURITE_RECIPIENTS": "Favourite recipients",
+      "RESTRICTED_CONTACTS": "Restricted contacts"
+    },
+    "SORTERS": {
+      "FIRSTNAME": "Sort by first name",
+      "LASTNAME": "Sort by last name",
+      "MAIL": "Sort by email"
+    }
+  }
+}

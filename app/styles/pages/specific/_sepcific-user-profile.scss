@@ -1,0 +1,67 @@
+/*********************
+  USER PROFILE PAGE
+*********************/
+
+.user-profile {
+  .card-body {
+    padding: 20px;
+    margin-top: 15px;
+  }
+
+  .info-block-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    .info-block {
+      padding: 10px;
+      margin: 10px 0;
+      flex: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      align-items: center;
+
+      &__title {
+        font-weight: 500;
+        flex: 50%;
+        margin-right: 10px;
+      }
+
+      &__value {
+        flex: 50%;
+      }
+    }
+  }
+
+  .header {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  md-tabs .md-tab.md-active {
+    color: #464646;
+  }
+
+  .recipientsAutocomplete {
+    height: 40px;
+    margin-top: 5px;
+    border-bottom: solid 1px #e4e4e4;
+  }
+
+  @media (min-width: 767px) {
+    .card-body {
+      overflow-y: auto;
+      max-height: calc(100vh - 147px);
+      padding: 40px;
+    }
+
+    .info-block-container .info-block {
+      flex: 0 50%;
+
+      &__title {
+        text-align: end;
+      }
+    }
+  }
+}

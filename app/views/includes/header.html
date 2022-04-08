@@ -127,6 +127,11 @@
                 <li>
                   <a href="">{{::loggedUser.firstName}} {{::loggedUser.lastName}}</a>
                 </li>
+                <li>
+                  <a ui-sref="userProfile">
+                    <i class="zmdi zmdi-account"></i> <span translate>USER_PROFILE.TITLE</span>
+                  </a>
+                </li>
                 <li ng-if="mainVm.showTokenManagement">
                   <a ui-sref="tokenManagement">
                     <i class="zmdi zmdi-key"></i> <span translate>TOKEN_MANAGEMENT.TITLE</span>
