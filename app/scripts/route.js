@@ -570,6 +570,10 @@
      * @memberOf LinShareUiUserApp.routerConfiguration
      */
     function authRedirect($state, $transition$, authenticationRestService, homePage) {
+      if ($state.is('oidc.callback') || $state.is('oidc.signin')) {
+        return;
+      }
+      
       authenticationRestService.checkAuthentication(true, true).then(function(data) {
         if (_.isUndefined(data.status)) {
           if ($transition$) {
