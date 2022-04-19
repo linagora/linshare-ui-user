@@ -33,7 +33,7 @@
     }
   }
 
-  .header {
+  .contacts-list-sort {
     margin: 20px 0;
     display: flex;
     justify-content: flex-end;
@@ -62,6 +62,36 @@
       &__title {
         text-align: end;
       }
+    }
+  }
+}
+
+.user-recipients-list {
+  .recipients-search {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .first-letter.favourite-recipient {
+    background-color: #f4f4f4;
+    color: #7c7c7c;
+    line-height: 26px;
+    border: solid 1px #c4c4c4;
+    font-size: 14px;
+  }
+
+  #selection-actions {
+    top: 70px;
+  }
+
+  #file-list-table.ng-table {
+    th:nth-child(2), td:nth-child(2) {
+      width: calc(100% - 53px);
+    }
+
+    .checkbox-ctn-thumb {
+      bottom: 0;
     }
   }
 }

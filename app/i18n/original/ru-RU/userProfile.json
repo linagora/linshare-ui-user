@@ -22,6 +22,20 @@
       "FIRSTNAME": "Сортировать по имени",
       "LASTNAME": "Сортировать по фамилии",
       "MAIL": "Сортировать по электронной почте"
+    },
+    "FAVOURITE_RECIPIENTS": {
+      "DIALOG": {
+        "DELETE": {
+          "TITLE": "Удалить избранных получателей",
+          "TEXT": "Вы собираетесь удалить {singular, select, true{получателя} other{{nbItems} получателей}}! Учтите, что это действие нельзя отменить."
+        }
+      },
+      "TOAST_ALERT": {
+        "DELETE": {
+          "ERROR": "{number} {singular, select, true{получатель не удален.} other{получателя не удалены.}}",
+          "INFO": "{number} {singular, select, true{получатель удален.} other{получателя удалены.}}"
+        }
+      }
     }
   }
 }

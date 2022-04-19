@@ -22,6 +22,20 @@
       "FIRSTNAME": "Sort by first name",
       "LASTNAME": "Sort by last name",
       "MAIL": "Sort by email"
+    },
+    "FAVOURITE_RECIPIENTS": {
+      "DIALOG": {
+        "DELETE": {
+          "TITLE": "Delete favourite recipients",
+          "TEXT": "You are about to delete {singular, select, true{a recipient} other{{nbItems} recipients}} ! Beware, this action cannot be undone."
+        }
+      },
+      "TOAST_ALERT": {
+        "DELETE": {
+          "ERROR": "{singular, select, true{a recipient has} other{{number} recipients have}} not been deleted.",
+          "INFO": "{singular, select, true{a recipient has} other{{number} recipients have}} been deleted."
+        }
+      }
     }
   }
 }

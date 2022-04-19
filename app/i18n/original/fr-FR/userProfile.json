@@ -22,6 +22,20 @@
       "FIRSTNAME": "Trier par prénom",
       "LASTNAME": "Trier par nom de famille",
       "MAIL": "Trier par email"
+    },
+    "FAVOURITE_RECIPIENTS": {
+      "DIALOG": {
+        "DELETE": {
+          "TITLE": "Supprimer les destinataires favoris",
+          "TEXT": "Vous êtes sur le point de supprimer {singular, select, true{un destinataire} other{{nbItems} destinataires}} ! Attention, cette action est irréversible."
+        }
+      },
+      "TOAST_ALERT": {
+        "DELETE": {
+          "ERROR": "{singular, select, true{un destinataire n'a pas} other{{number} destinataires n'ont pas}} été supprimé.",
+          "INFO": "{singular, select, true{un destinataire a} other{{number} destinataires ont}} été supprimé."
+        }
+      }
     }
   }
 }

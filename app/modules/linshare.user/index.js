@@ -8,3 +8,5 @@ require('./route');
 require('./controllers/userProfileController');
 require('./services/LinShareUserService');
 require('./services/meRestService');
+require('./components/userRecipientsList/userRecipientsListController');
+require('./components/userRecipientsList/userRecipientsList');

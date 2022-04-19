@@ -22,6 +22,21 @@
       "FIRSTNAME": "Sắp xếp theo tên",
       "LASTNAME": "Sắp xếp theo họ",
       "MAIL": "Sắp xếp theo email"
+    },
+    "FAVOURITE_RECIPIENTS": {
+      "DIALOG": {
+        "DELETE": {
+          "TITLE": "Xóa người nhận yêu thích",
+          "TEXT": "Bạn sắp xóa {nbItems} người nhận! Hãy lưu ý, hành động này không thể hoàn tác."
+        }
+      },
+      "TOAST_ALERT": {
+        "DELETE": {
+          "ERROR": "{number} người nhận chưa bị xóa.",
+          "INFO": "{number} người nhận đã bị xóa."
+        }
+      }
     }
+
   }
 }

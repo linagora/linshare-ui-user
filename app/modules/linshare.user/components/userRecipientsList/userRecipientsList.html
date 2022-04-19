@@ -1,0 +1,150 @@
+<div class="user-recipients-list">
+  <div class="recipients-search">
+    <div class="input-group search-bar">
+      <div id="search-field-ctn">
+        <div class="search-style">
+          <div class="fg-line">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              ng-model="userRecipientsListVm.paramFilter.recipient"
+              translate-attr="{'placeholder': 'FILTER_COMPONENT.PLACEHOLDER_FILE_NAME'}"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table id="file-list-table" class="table table-vmiddle fixed-activity-table-height"
+    ng-table="userRecipientsListVm.tableParams" show-filter="true">
+      <tr
+        ng-repeat="item in $data"
+        data-selected-documents="userRecipientsListVm.selectedRecipients"
+        data-document-file="item"
+        data-right-sidebar-open="mainVm.sidebar.isVisible()"
+        ng-class="{ 'highlight-list-elem': item.isSelected }"
+        class="p-b-5 item-container">
+
+        <td
+          data-header="'checkboxheader.html'"
+          class="center set-content-left thumb-type-item"
+          header-class="'col-2 checkbox-col'">
+
+          <a
+            ng-click="showCheckboxes && userRecipientsListVm.toggleSelection(item)"
+            class="visible-xs"
+          >
+            <div ng-class="{'invisible' : showCheckboxes}">
+              <span class="first-letter favourite-recipient">{{ item.recipient.charAt(0) }}</span>
+            </div>
+            <div class="checkbox-ctn-thumb" ng-class="{'maintain-vis': item.isSelected, 'hidden-xs' : !showCheckboxes}">
+            </div>
+          </a>
+
+          <a ng-click="userRecipientsListVm.toggleSelection(item)" class="hidden-xs">
+            <div ng-class="{'invisible' : showCheckboxes}">
+              <span class="first-letter favourite-recipient">{{ item.recipient.charAt(0) }}</span>
+            </div>
+            <div
+              class="checkbox-ctn-thumb"
+              ng-class="{'maintain-vis': item.isSelected, 'hidden-xs' : !showCheckboxes}"
+            >
+            </div>
+          </a>
+        </td>
+
+        <td
+          data-title="::'FILTER_COMPONENT.ORDER_BY_NAME' | translate"
+          class="row show-li-actions col-10"
+          sortable="'recipient'"
+          uuid={{::item.recipient}}
+          header-class="'col-10 flexible-table-col'">
+          <div class="ctn-name-actions">
+            <span class="col-xs-9 col-sm-7 col-md-8 file-name-col">
+              <span class="file-name-disp single-line">
+                {{::item.recipient}}
+              </span>
+            </span>
+
+            <span class="col-xs-2 col-sm-5 col-md-4 actions-list-ctn pull-right">
+              <ul class="actions pull-right" ng-class="{'open-r': (mainVm.sidebar.isVisible())}">
+                <li class="set-col-6" ng-click="userRecipientsListVm.remove([item])" event-propagation-stop>
+                  <a href="" class="set-col-12">
+                    <i class="zmdi zmdi-delete"></i>
+                  </a>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div
+      id="selection-actions"
+      class="default-multi-toolbar-state multi-btns collapsible-actions-toolbar"
+      ng-class="{'show-multi-menu': userRecipientsListVm.selectedRecipients.length > 0}"
+    >
+      <div class="toggle-checkbox-toolbar"
+        ng-click="userRecipientsListVm.selectAllOnCurrentPage()">
+        <a ng-if="!userRecipientsListVm.flagsOnSelectedPages[userRecipientsListVm.tableParams.page()]"
+          class="select-all-items plain-text-button ng-scope">
+          <i class="fa ls-check-o checkbox-table"></i>
+        </a>
+        <a ng-if="userRecipientsListVm.flagsOnSelectedPages[userRecipientsListVm.tableParams.page()]"
+          class="select-all-items plain-text-button ng-scope">
+          <i class="ls-check-checked"></i>
+        </a>
+      </div>
+      <div class="exit-selection actions" ng-click="userRecipientsListVm.resetSelectedItems()"
+        translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}">
+        <a>
+          <i class="zmdi zmdi-close"></i>
+        </a>
+      </div>
+      <div class="display-num-selected-items" translate-attr="{title: 'SELECTION_TOOLBAR.SHOW_SELECTION'}">
+        <div class="pull-left" ng-click="userRecipientsListVm.toggleFilterBySelectedItems()">
+          <p>
+            <span>{{userRecipientsListVm.selectedRecipients.length}}</span>
+            <span translate>SELECTION_TOOLBAR.SELECTED_ELEMENTS</span>
+          </p>
+        </div>
+        <div class="pull-left view-icons-ctn reset-icon" ng-click="userRecipientsListVm.resetSelectedItems()">
+          <i class="fa fa-undo" translate-attr="{title: 'SELECTION_TOOLBAR.RESET'}"></i>
+        </div>
+      </div>
+
+      <div id="toolbar-actions" class="hidden-xs">
+        <span>
+          <a
+            class="plain-text-button share-link"
+            translate-attr="{title: 'ACTION.DELETE'}"
+            ng-click="userRecipientsListVm.remove(userRecipientsListVm.selectedRecipients)"
+          >
+            <i class="zmdi zmdi-delete"></i>
+            <span translate>ACTION.DELETE</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<script type="text/ng-template" id="checkboxheader.html">
+  <span ng-click="userRecipientsListVm.selectAllOnCurrentPage()"
+        role="button" tabindex="0" class="display-block center">
+    <a ng-if="!userRecipientsListVm.flagsOnSelectedPages[userRecipientsListVm.tableParams.page()]"
+       class="select-all-items plain-text-button checkboxCtn">
+      <i class="ls-check-o checkbox-table"></i>
+    </a>
+    <a ng-if="userRecipientsListVm.flagsOnSelectedPages[userRecipientsListVm.tableParams.page()]"
+       class="select-all-items plain-text-button">
+      <i class="ls-check-checked"></i>
+    </a>
+  </span>
+</script>

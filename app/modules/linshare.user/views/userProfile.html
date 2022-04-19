@@ -1,5 +1,5 @@
 <div ui-view="" class="user-profile" ng-class="{'right-sidebar-toggled': mainVm.sidebar.isVisible()}">
-  <div class="container files token-management-page">
+  <div class="container files">
     <div class="card">
       <div class="card-header">
         <div id="breadcrumb-wrap">
@@ -15,146 +15,146 @@
       </div>
 
       <div class="card-body collapsible-content">
-          <div class="info-block-container">
-            <div class="info-block">
-              <span class="info-block__title" translate>
-                USER_PROFILE.INFO.FIRSTNAME
-              </span>
+        <div class="info-block-container">
+          <div class="info-block">
+            <span class="info-block__title" translate>
+              USER_PROFILE.INFO.FIRSTNAME
+            </span>
 
-              <div class="info-block__value">
-                {{userProfileVm.profile.firstName}}
-              </div>
-            </div>
-
-            <div class="info-block">
-              <span class="info-block__title" translate>
-                USER_PROFILE.INFO.LASTNAME
-              </span>
-
-              <span class="info-block__value">
-                {{userProfileVm.profile.lastName}}
-              </span>
-            </div>
-
-            <div class="info-block">
-              <span class="info-block__title" translate="">
-                USER_PROFILE.INFO.EMAIL
-              </span>
-
-              <span class="info-block__value">
-                {{userProfileVm.profile.mail}}
-              </span>
-            </div>
-
-            <div class="info-block">
-              <span class="info-block__title" translate>
-                USER_PROFILE.INFO.CREATION_DATE
-              </span>
-
-              <span class="info-block__value">
-                {{userProfileVm.profile.creationDate | lsDate: 'mediumDate':locale}}
-              </span>
-            </div>
-
-            <div class="info-block">
-              <span class="info-block__title" translate>
-                USER_PROFILE.INFO.MODIFICATION_DATE
-              </span>
-
-              <span class="info-block__value">
-                {{userProfileVm.profile.modificationDate | lsDate: 'mediumDate':locale}}
-              </span>
-            </div>
-
-            <div class="info-block" ng-if="userProfileVm.profile.expirationDate">
-              <span class="info-block__title" translate>
-                USER_PROFILE.INFO.EXPIRATION_DATE
-              </span>
-
-              <span class="info-block__value">
-                {{userProfileVm.profile.expirationDate | lsDate: 'mediumDate':locale}}
-              </span>
-            </div>
-
-            <div class="info-block" ng-if="userProfileVm.profile.author">
-              <span class="info-block__title" translate>
-                USER_PROFILE.INFO.CREATOR
-              </span>
-
-              <span class="info-block__value"
-                uib-tooltip="{{userProfileVm.profile.author.mail}}"
-                tooltip-append-to-body="true"
-                tooltip-placement="top-left"
-              >
-                <a ng-href="mailto:{{userProfileVm.profile.author.mail}}">{{ (userProfileVm.profile.author.firstName || '') + ' ' + (userProfileVm.profile.author.lastName || '') }}</a>
-              </span>
+            <div class="info-block__value">
+              {{userProfileVm.profile.firstName}}
             </div>
           </div>
 
-          <div class="info-block-container">
-            <div class="info-block">
-              <span class="info-block__title" translate>
-                USER_PROFILE.INFO.NOTIFICATION_LANGUAGE
-              </span>
+          <div class="info-block">
+            <span class="info-block__title" translate>
+              USER_PROFILE.INFO.LASTNAME
+            </span>
 
-              <div class="info-block__value">
-                <md-select
-                  ng-model="userProfileVm.profile.locale"
-                  ng-change="userProfileVm.updateProfile()"
-                >
-                  <md-option value="ENGLISH" translate>
-                    LOCALE.ENGLISH
-                  </md-option>
-                  <md-option value="FRENCH" translate>
-                    LOCALE.FRENCH
-                  </md-option>
-                  <md-option value="RUSSIAN" translate>
-                    LOCALE.RUSSIAN
-                  </md-option>
-                </md-select>
-              </div>
-            </div>
+            <span class="info-block__value">
+              {{userProfileVm.profile.lastName}}
+            </span>
           </div>
 
-          <md-tabs md-dynamic-height md-border-bottom>
-            <md-tab label="{{ 'USER_PROFILE.TABS.FAVOURITE_RECIPIENTS' | translate }}">
-            </md-tab>
+          <div class="info-block">
+            <span class="info-block__title" translate="">
+              USER_PROFILE.INFO.EMAIL
+            </span>
 
-            <md-tab ng-if="userProfileVm.isRestricted" label="{{ 'USER_PROFILE.TABS.RESTRICTED_CONTACTS' | translate }}">
+            <span class="info-block__value">
+              {{userProfileVm.profile.mail}}
+            </span>
+          </div>
 
-              <div class="header">
-                <md-select style="width: 200px;" ng-model="userProfileVm.sorterKey">
-                  <md-option value="firstName" translate>USER_PROFILE.SORTERS.FIRSTNAME</md-option>
-                  <md-option value="lastName" translate>USER_PROFILE.SORTERS.LASTNAME</md-option>
-                  <md-option value="mail" translate>USER_PROFILE.SORTERS.MAIL</md-option>
-                </md-select>
+          <div class="info-block">
+            <span class="info-block__title" translate>
+              USER_PROFILE.INFO.CREATION_DATE
+            </span>
 
-                <md-button class="md-icon-button" ng-click="userProfileVm.sortAsc = !userProfileVm.sortAsc">
-                  <i class="zmdi" ng-class="userProfileVm.sortAsc ? 'zmdi-sort-asc' : 'zmdi-sort-desc'"></i>
-                </md-button>
-              </div>
+            <span class="info-block__value">
+              {{userProfileVm.profile.creationDate | lsDate: 'mediumDate':locale}}
+            </span>
+          </div>
 
-              <div
-                class="recipientsAutocomplete"
-                ng-repeat="contact in userProfileVm.restrictedContacts | orderBy: (userProfileVm.sortAsc ? '+' : '-') + userProfileVm.sorterKey"
+          <div class="info-block">
+            <span class="info-block__title" translate>
+              USER_PROFILE.INFO.MODIFICATION_DATE
+            </span>
+
+            <span class="info-block__value">
+              {{userProfileVm.profile.modificationDate | lsDate: 'mediumDate':locale}}
+            </span>
+          </div>
+
+          <div class="info-block" ng-if="userProfileVm.profile.expirationDate">
+            <span class="info-block__title" translate>
+              USER_PROFILE.INFO.EXPIRATION_DATE
+            </span>
+
+            <span class="info-block__value">
+              {{userProfileVm.profile.expirationDate | lsDate: 'mediumDate':locale}}
+            </span>
+          </div>
+
+          <div class="info-block" ng-if="userProfileVm.profile.author">
+            <span class="info-block__title" translate>
+              USER_PROFILE.INFO.CREATOR
+            </span>
+
+            <span class="info-block__value"
+              uib-tooltip="{{userProfileVm.profile.author.mail}}"
+              tooltip-append-to-body="true"
+              tooltip-placement="top-left"
+            >
+              <a ng-href="mailto:{{userProfileVm.profile.author.mail}}">{{ (userProfileVm.profile.author.firstName || '') + ' ' + (userProfileVm.profile.author.lastName || '') }}</a>
+            </span>
+          </div>
+        </div>
+
+        <div class="info-block-container">
+          <div class="info-block">
+            <span class="info-block__title" translate>
+              USER_PROFILE.INFO.NOTIFICATION_LANGUAGE
+            </span>
+
+            <div class="info-block__value">
+              <md-select
+                ng-model="userProfileVm.profile.locale"
+                ng-change="userProfileVm.updateProfile()"
               >
-                <span class="firstLetterFormat">
-                  {{contact.firstName.charAt(0)}}
+                <md-option value="ENGLISH" translate>
+                  LOCALE.ENGLISH
+                </md-option>
+                <md-option value="FRENCH" translate>
+                  LOCALE.FRENCH
+                </md-option>
+                <md-option value="RUSSIAN" translate>
+                  LOCALE.RUSSIAN
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+        </div>
+
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="{{ 'USER_PROFILE.TABS.FAVOURITE_RECIPIENTS' | translate }}">
+            <user-recipients-list></user-recipients-list>
+          </md-tab>
+
+          <md-tab ng-if="userProfileVm.isRestricted" label="{{ 'USER_PROFILE.TABS.RESTRICTED_CONTACTS' | translate }}">
+            <div class="contacts-list-sort">
+              <md-select style="width: 200px;" ng-model="userProfileVm.sorterKey">
+                <md-option value="firstName" translate>USER_PROFILE.SORTERS.FIRSTNAME</md-option>
+                <md-option value="lastName" translate>USER_PROFILE.SORTERS.LASTNAME</md-option>
+                <md-option value="mail" translate>USER_PROFILE.SORTERS.MAIL</md-option>
+              </md-select>
+
+              <md-button class="md-icon-button" ng-click="userProfileVm.sortAsc = !userProfileVm.sortAsc">
+                <i class="zmdi" ng-class="userProfileVm.sortAsc ? 'zmdi-sort-asc' : 'zmdi-sort-desc'"></i>
+              </md-button>
+            </div>
+
+            <div
+              class="recipientsAutocomplete"
+              ng-repeat="contact in userProfileVm.restrictedContacts | orderBy: (userProfileVm.sortAsc ? '+' : '-') + userProfileVm.sorterKey"
+            >
+              <span class="firstLetterFormat">
+                {{contact.firstName.charAt(0)}}
+              </span>
+
+              <p class="recipientsInfo">
+                <span class="user-full-name">
+                  <strong>
+                    {{ (contact.firstName || '') + ' ' + (contact.lastName || '') }}
+                  </strong>
                 </span>
-
-                <p class="recipientsInfo">
-                  <span class="user-full-name">
-                    <strong>
-                      {{ (contact.firstName || '') + ' ' + (contact.lastName || '') }}
-                    </strong>
-                  </span>
-                  <span class="email">
-                    {{contact.mail}}
-                  </span>
-                </p>
-              </div>
-            </md-tab>
-          </md-tabs>
+                <span class="email">
+                  {{contact.mail}}
+                </span>
+              </p>
+            </div>
+          </md-tab>
+        </md-tabs>
       </div>
     </div>
   </div>
