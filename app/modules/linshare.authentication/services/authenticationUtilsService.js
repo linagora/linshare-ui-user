@@ -34,6 +34,19 @@
       status: 401,
       message: 'SECOND_FA_LOGIN.NOTIFICATION.ACCOUNT_LOCKED',
       notificationType: 'error'
+    },
+    {
+      code: '1009',
+      status: 401,
+      message: 'LOGIN.NOTIFICATION.ERROR_OIDC_MULTIPLE_DOMAIN',
+      notificationType: 'error'
+    },
+    {
+      codes: ['1006', '1007', '1008'],
+      status: 401,
+      message: 'LOGIN.NOTIFICATION.ERROR_OIDC_UNKNOWN',
+      appendMessage: true,
+      notificationType: 'error'
     }
   ];
 
@@ -50,7 +63,23 @@
     };
 
     function checkAuthError(error) {
-      return loginErrors.find(loginError => loginError.code === error.headers('x-linshare-auth-error-code'));
+      const errorCode = error.headers('x-linshare-auth-error-code');
+      const errorMessage = error.headers('x-linshare-auth-error-msg');
+      const authError = loginErrors.find(loginError => {
+        if (loginError.code) {
+          return errorCode === loginError.code;
+        }
+
+        if (loginError.codes) {
+          return loginError.codes.includes(errorCode);
+        }
+      });
+
+      if (authError.appendMessage) {
+        authError.details = errorMessage;
+      }
+
+      return authError;
     }
 
     function buildHeader(email, password, otp) {

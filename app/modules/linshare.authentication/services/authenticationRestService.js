@@ -155,10 +155,13 @@
       const { handle2FA, login, password } = options;
 
       if (authError) {
-        toastService[authError.notificationType]({ key: authError.message });
+        toastService[authError.notificationType](authError.appendMessage ?
+          { key: authError.message, params: { details: authError.details } } :
+          { key: authError.message }
+        );
 
         if (authError.code === '1002' && handle2FA)  {
-          $state.go('secondFactorAuthenticationLogin', { loginInfo: { login: login, password }});
+          $state.go('secondFactorAuthenticationLogin', { loginInfo: { login, password }});
         }
 
         return $q.reject(error);

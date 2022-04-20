@@ -204,7 +204,9 @@
     "NOTIFICATION": {
       "SUCCESS": "Bonjour {{firstName}}",
       "ERROR": "L'authentification a échoué, l'email ou le mot de passe est incorrect",
-      "ERROR_OIDC": "L' authentication de SSO a échoué"
+      "ERROR_OIDC": "L'authentication de SSO a échoué",
+      "ERROR_OIDC_MULTIPLE_DOMAIN": "Plusieurs domaines trouvés",
+      "ERROR_OIDC_UNKNOWN": "L'authentication de SSO a échoué: {{details}}"
     },
     "PASSWORD_PLACEHOLDER": "Mot de passe",
     "TAGLINE": "Partage sécurisé de fichiers en open source",

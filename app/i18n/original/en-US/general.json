@@ -204,7 +204,9 @@
     "NOTIFICATION": {
       "SUCCESS": "Welcome {{firstName}}",
       "ERROR": "Authentication failed, either the email or the password is invalid",
-      "ERROR_OIDC": "SSO authentication failed"
+      "ERROR_OIDC": "SSO authentication failed",
+      "ERROR_OIDC_MULTIPLE_DOMAIN": "Multiple domain found",
+      "ERROR_OIDC_UNKNOWN": "SSO authentication failed: {{details}}"
     },
     "PASSWORD_PLACEHOLDER": "Password",
     "TAGLINE": "Secure file sharing app in open source",
