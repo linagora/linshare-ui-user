@@ -203,7 +203,9 @@
     "NOTIFICATION": {
       "SUCCESS": "Chào mừng {{firstName}}",
       "ERROR": "Xác thực không thành công, email hoặc mật khẩu không hợp lệ",
-      "ERROR_OIDC": "Xác thực SSO không thành công"
+      "ERROR_OIDC": "Xác thực SSO không thành công",
+      "ERROR_OIDC_MULTIPLE_DOMAIN": "Nhiều miền được tìm thấy",
+      "ERROR_OIDC_UNKNOWN": "Xác thực SSO không thành công: {{details}}"
     },
     "PASSWORD_PLACEHOLDER": "Mật khẩu",
     "TAGLINE": "Phần mềm chia sẻ dữ liệu bảo mật bằng công nghệ nguồn mở",

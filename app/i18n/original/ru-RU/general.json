@@ -203,7 +203,9 @@
     "NOTIFICATION": {
       "SUCCESS": "Добро пожаловать, {{firstName}}",
       "ERROR": "Ошибка входа, неправильный пароль или e-mail",
-      "ERROR_OIDC": "Ошибка аутентификации SSO"
+      "ERROR_OIDC": "Ошибка аутентификации SSO",
+      "ERROR_OIDC_MULTIPLE_DOMAIN": "Найдено несколько доменов",
+      "ERROR_OIDC_UNKNOWN": "Ошибка аутентификации SSO: {{details}}"
     },
     "PASSWORD_PLACEHOLDER": "Пароль",
     "TAGLINE": "Открытое программное обеспечение для надежного обмена файлами",
