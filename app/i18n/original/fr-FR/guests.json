@@ -78,5 +78,17 @@
     "TITLE": {
       "CREATE": "Ajouter compte invité"
     }
+  },
+  "GUEST_MODERATOR": {
+    "TAB_TITLE": "Modérateurs",
+    "LABEL": "Modérateurs existants : <b>{{number}}</b>",
+    "MODERATOR_ROLE": "Rôle du modérateur",
+    "ROLE": {
+      "ADMIN": "Administrateur",
+      "SIMPLE": "Modérateur"
+    },
+    "FILTER": {
+      "NAME_PLACEHOLDER": "Rechercher des modérateurs par nom"
+    }
   }
 }

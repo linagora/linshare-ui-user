@@ -1,20 +1,34 @@
 <div id="member-sidebar">
-  <div class="form-sidebar header-sidebar" data-ng-class="{'header-show-action': mainVm.sidebar.getData().selectedTab === 1}">
-    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 0"
-       data-ng-click="mainVm.sidebar.hide(mainVm.sidebar.getData().selectedGuest);
-                      mainVm.sidebar.getData().closeDropdown($event)">
-    </i>
-    <i class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 1"
-       data-ng-click="mainVm.sidebar.getData().selectedTab = 0">
-    </i>
-    <h2 class="header-more-options set-ellipsis visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 0">
-      {{'GUEST_DETAILS.DETAIL_OF_GUEST_ACCOUNT' | translate}}
+  <div
+    class="form-sidebar header-sidebar"
+    ng-class="{'header-show-action': mainVm.sidebar.getData().selectedTab === 1}"
+  >
+    <i
+      class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
+      ng-show="mainVm.sidebar.getData().selectedTab === 0"
+      ng-click="mainVm.sidebar.hide(mainVm.sidebar.getData().selectedGuest); mainVm.sidebar.getData().closeDropdown($event)"
+    ></i>
+    <i
+      class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
+      ng-show="mainVm.sidebar.getData().selectedTab === 1"
+      ng-click="mainVm.sidebar.getData().selectedTab = 0"
+    ></i>
+    <i
+      class="zmdi zmdi-chevron-left zmdi-hc-2x visible-xs"
+      ng-show="mainVm.sidebar.getData().selectedTab === 2"
+      ng-click="mainVm.sidebar.getData().selectedTab = 1"
+    ></i>
+    <h2 class="header-more-options set-ellipsis visible-xs" ng-show="mainVm.sidebar.getData().selectedTab === 0" translate>
+      GUEST_DETAILS.DETAIL_OF_GUEST_ACCOUNT
     </h2>
-    <h2 class="header-more-options set-ellipsis visible-xs" data-ng-if="mainVm.sidebar.getData().selectedTab === 1">
-      {{'GUEST_DETAILS.UPDATE_OF_GUEST_ACCOUNT' | translate}}
+    <h2 class="header-more-options set-ellipsis visible-xs" ng-show="mainVm.sidebar.getData().selectedTab === 1" translate>
+      GUEST_DETAILS.UPDATE_OF_GUEST_ACCOUNT
+    </h2>
+    <h2 class="header-more-options set-ellipsis visible-xs" ng-show="mainVm.sidebar.getData().selectedTab === 2" translate>
+      GUEST_MODERATOR.TAB_TITLE
     </h2>
     <span class="header-action-link waves-effect text-uppercase visible-xs"
-          data-ng-click="mainVm.sidebar.getData().updateGuest(updateGuest, mainVm.sidebar.getData().selectedGuest)">
+          ng-click="mainVm.sidebar.getData().updateGuest(updateGuest, mainVm.sidebar.getData().selectedGuest)">
           <span class="zmdi zmdi-check"></span>
           <span translate>SIDEBAR.BUTTON.UPDATE</span>
     </span>
@@ -26,21 +40,22 @@
       <a><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
     </span>
   </div>
-  <div x-ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail"
-       x-ng-class="{'two-tabs': mainVm.sidebar.getData().currentPage === 'guests-list'}">
+  <div ng-cloak="" class="tabs-demo-static-tabs tab-nav-detail">
     <md-content>
-      <md-tabs md-border-bottom="" md-selected="mainVm.sidebar.getData().selectedTab">
-        <md-tab id="tab1" x-ng-if="mainVm.sidebar.getData().currentPage === 'guests-list'"
-                label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 no-padding"
-                data-ng-click="showActionLink = false">
+      <md-tabs md-border-bottom="" md-dynamic-height="" md-selected="mainVm.sidebar.getData().selectedTab">
+        <md-tab id="tab1" label="{{'INFORMATION_TAB.TITLE' | translate}}" class="col-xs-4 no-padding">
           <md-content>
-            <div x-ng-include="'directives/sidebar-content/sidebar-content-guest-details-read.html'"></div>
+            <div ng-include="'directives/sidebar-content/sidebar-content-guest-details-read.html'"></div>
           </md-content>
         </md-tab>
-        <md-tab id="tab2" label="{{'GUEST_DETAILS.EDIT_GUEST' | translate}}"
-                class="col-xs-4 no-padding disabled">
-          <md-content  class="bottom-action-form">
-            <div x-ng-include="'directives/sidebar-content/sidebar-content-guest-details-update.html'"></div>
+        <md-tab id="tab2" label="{{'GUEST_DETAILS.EDIT_GUEST' | translate}}" class="col-xs-4 no-padding disabled">
+          <md-content>
+            <div ng-include="'directives/sidebar-content/sidebar-content-guest-details-update.html'"></div>
+          </md-content>
+        </md-tab>
+        <md-tab id="tab3" label="{{'GUEST_MODERATOR.TAB_TITLE' | translate}}" class="col-xs-4 no-padding">
+          <md-content class="md-padding">
+            <guest-moderators guest="mainVm.sidebar.getData().selectedGuest"></guest-moderators>
           </md-content>
         </md-tab>
       </md-tabs>

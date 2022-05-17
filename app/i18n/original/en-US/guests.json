@@ -79,5 +79,17 @@
     "TITLE": {
       "CREATE": "CREATE GUEST ACCOUNT"
     }
+  },
+  "GUEST_MODERATOR": {
+    "TAB_TITLE": "Moderators",
+    "LABEL": "Existing moderators: <b>{{number}}</b>",
+    "MODERATOR_ROLE": "Moderator role",
+    "ROLE": {
+      "ADMIN": "Administrator",
+      "SIMPLE": "Moderator"
+    },
+    "FILTER": {
+      "NAME_PLACEHOLDER": "Search moderators by name"
+    }
   }
 }

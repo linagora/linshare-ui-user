@@ -85,6 +85,28 @@
 }
 
 /**********************
+  SIDEBAR GUEST MODERATOR
+***********************/
+
+.guest-moderators {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &__label {
+      color: #676767;
+      font-size: 1.1em;
+
+      a {
+        color: #676767;
+      }
+    }
+  }
+}
+
+/**********************
   MOBILE RESPONSIVE
 ***********************/
 

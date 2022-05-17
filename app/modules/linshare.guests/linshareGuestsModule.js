@@ -13,3 +13,5 @@ require('./components/guestForm/guestForm');
 require('./components/guestForm/guestFormController');
 require('./services/guestObjectService');
 require('./services/guestsRestService');
+require('./components/guestModerators/guestModerators');
+require('./components/guestModerators/guestModeratorsController');

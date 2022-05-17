@@ -79,5 +79,17 @@
     "TITLE": {
       "CREATE": "TẠO TÀI KHOẢN GUEST"
     }
+  },
+  "GUEST_MODERATOR": {
+    "TAB_TITLE": "Người kiểm duyệt",
+    "LABEL": "Người kiểm duyệt hiện tại: <b> {{number}} </b>",
+    "MODERATOR_ROLE": "Vai trò người kiểm duyệt",
+    "ROLE": {
+      "ADMIN": "Quản trị viên",
+      "SIMPLE": "Người kiểm duyệt"
+    },
+    "FILTER": {
+      "NAME_PLACEHOLDER": "Tìm kiếm người kiểm duyệt theo tên"
+    }
   }
 }
