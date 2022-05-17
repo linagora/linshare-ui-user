@@ -61,7 +61,9 @@ function guestFormController(lsAppConfig, sidebarService, formUtilsService) {
         formVm.guestObject.restrictedContacts.length > 0
       );
 
-    formVm.form.$setValidity('restrictedContactsRequired', validity);
+    if (formVm.form) {
+      formVm.form.$setValidity('restrictedContactsRequired', validity);
+    }
 
     return validity;
   }
