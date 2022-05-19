@@ -89,6 +89,9 @@
     },
     "FILTER": {
       "NAME_PLACEHOLDER": "Rechercher des modérateurs par nom"
+    },
+    "FORM": {
+      "AUTOCOMPLETE_PLACEHOLDER": "Rechercher des utilisateurs à ajouter"
     }
   }
 }

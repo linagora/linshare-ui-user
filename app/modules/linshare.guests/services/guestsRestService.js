@@ -22,6 +22,7 @@
       restUrl = 'guests',
       service = {
         create,
+        createGuestModerator,
         get,
         getList,
         listGuestModerator,
@@ -105,6 +106,12 @@
       $log.debug('LinshareGuestRestService : listGuestModerator', guestUuid);
 
       return handler(Restangular.one(restUrl, guestUuid).all('moderators').getList().then(res => Restangular.stripRestangular(res)));
+    }
+
+    function createGuestModerator(moderator) {
+      $log.debug('LinshareGuestRestService : createGuestModerator', moderator);
+
+      return handler(Restangular.one(restUrl, moderator.guest.uuid).all('moderators').post(moderator).then(res => Restangular.stripRestangular(res)));
     }
   }
 })();

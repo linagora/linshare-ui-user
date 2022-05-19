@@ -1,14 +1,13 @@
 <div
   id="content-ctn-sidebar"
   class="card col-xs-12 m-t-2em form-guests"
-  ng-class="{'form-create-guests': !formVm.guestObject.uuid}"
 >
   <form class="form-sidebar" name="formVm.form">
     <div class="form-group fg-float m-b-30">
       <div
         class="fg-line"
         ng-class="{
-          'has-error' : ((formVm.form.firstname.$touched || formVm.form.$submitted) && formVm.form.firstname.$invalid),
+          'has-error' : ((formVm.form.firstname.$touched || formVm.form.$submitted) && formVm.form.firstname.$invalid),
           'fg-toggled' : firstNameFocus,
           'fg-not-empty' : !formVm.form.firstname.$error.required
         }"
@@ -26,7 +25,7 @@
         >
         <label class="fg-label required" for="firstname" translate>SIDEBAR.LABEL.FIRSTNAME</label>
         <span
-          ng-show="(formVm.form.firstname.$touched || formVm.form.$submitted) && formVm.form.firstname.$invalid"
+          ng-show="(formVm.form.firstname.$touched || formVm.form.$submitted) && formVm.form.firstname.$invalid"
           translate
         >
           SIDEBAR.ERROR.INVALID_EMPTY_FIELD
@@ -37,7 +36,7 @@
       <div
         class="fg-line"
         ng-class="{
-          'has-error' : ((formVm.form.lastname.$touched || formVm.form.$submitted) && formVm.form.lastname.$invalid),
+          'has-error' : ((formVm.form.lastname.$touched || formVm.form.$submitted) && formVm.form.lastname.$invalid),
           'fg-toggled' : lastNameFocus,
           'fg-not-empty' : !formVm.form.lastname.$error.required
         }"
@@ -52,7 +51,7 @@
           ng-blur="lastNameFocus=false"
         >
         <label class="fg-label required" for="lastname" translate>SIDEBAR.LABEL.LASTNAME</label>
-        <span ng-show="(formVm.form.lastname.$touched || formVm.form.$submitted) && formVm.form.lastname.$invalid">
+        <span ng-show="(formVm.form.lastname.$touched || formVm.form.$submitted) && formVm.form.lastname.$invalid">
           <span translate>SIDEBAR.ERROR.INVALID_EMPTY_FIELD</span>
         </span>
       </div>
@@ -61,7 +60,7 @@
       <div
         class="fg-line"
         ng-class="{
-          'has-error' : ((formVm.form.email.$touched || formVm.form.$submitted) && formVm.form.email.$invalid),
+          'has-error' : ((formVm.form.email.$touched || formVm.form.$submitted) && formVm.form.email.$invalid),
           'fg-toggled' : emailFocus,
           'fg-not-empty' : !formVm.form.email.$error.required
         }"
@@ -78,7 +77,7 @@
           required
         >
         <label class="fg-label required" for="email" translate>SIDEBAR.LABEL.EMAIL</label>
-        <span ng-show="(formVm.form.email.$touched || formVm.form.$submitted) && formVm.form.email.$invalid" translate>
+        <span ng-show="(formVm.form.email.$touched || formVm.form.$submitted) && formVm.form.email.$invalid" translate>
           SIDEBAR.ERROR.INVALID_EMAIL
         </span>
       </div>
@@ -88,7 +87,7 @@
       id="dateField"
       ng-show="formVm.guestObject.allowedToExpiration.enable"
       ng-class="{
-        'has-error' : ((formVm.form.expirationDate.$touched || formVm.form.$submitted) &&
+        'has-error' : ((formVm.form.expirationDate.$touched || formVm.form.$submitted) &&
                       (formVm.form.expirationDate.$invalid || formVm.form.expirationDate.$error.invalidDate))
       }"
     >
@@ -127,7 +126,7 @@
         </div>
       </div>
       <span
-        ng-show="(formVm.form.expirationDate.$touched || formVm.form.$submitted) && (formVm.form.expirationDate.$invalid || formVm.form.expirationDate.$error.invalidDate)"
+        ng-show="(formVm.form.expirationDate.$touched || formVm.form.$submitted) && (formVm.form.expirationDate.$invalid || formVm.form.expirationDate.$error.invalidDate)"
         translate
         translate-values="{
           date: (formVm.guestObject.form.datepicker.maxDate | lsDate: 'yyyy-MM-DD':locale)
@@ -136,6 +135,94 @@
         SIDEBAR.ERROR.INVALID_DATE
       </span>
     </div>
+
+    <div class="m-b-30 col-xs-12 field-ctn" ng-if="!formVm.guestObject.uuid">
+      <label translate>GUEST_MODERATOR.TAB_TITLE</label>
+
+      <div class="guest-moderators-selection">
+        <div class="guest-moderators-selection__add">
+          <md-select
+            class="guest-moderators-selection__add__role-select"
+            ng-model="formVm.selectedRole"
+          >
+            <md-option
+              ng-repeat="role in formVm.GUEST_MODERATOR_ROLES"
+              value="{{role}}"
+            >
+              {{'GUEST_MODERATOR.ROLE.' + role | translate}}
+            </md-option>
+          </md-select>
+
+          <user-autocomplete-input
+            class="guest-moderators-selection__add__user-autocomplete"
+            placeholder="GUEST_MODERATOR.FORM.AUTOCOMPLETE_PLACEHOLDER"
+            search-type="USERS"
+            on-select="formVm.addGuestModerator"
+          />
+        </div>
+
+        <div class="guest-moderators-selection__list">
+          <div
+            class="flex-ctn"
+            ng-repeat="moderator in formVm.moderators | filter: formVm.moderatorFilter track by moderator.account.uuid"
+          >
+            <div class="item-l">
+              <span class="first-letter text-uppercase">
+                {{moderator.account.name.charAt(0)}}
+              </span>
+            </div>
+            <div class="item-mid">
+              <div class="name">
+                {{moderator.account.name}}
+              </div>
+              <div class="info-item-member">
+                <i class="zmdi zmdi-account"></i>
+                <span translate>
+                  {{'GUEST_MODERATOR.ROLE.' + moderator.role}}
+                </span>
+              </div>
+            </div>
+            <div class="item-r actions">
+              <span
+                uib-dropdown
+                dropdown-append-to-body
+                class="dropdown link-dropdown actions"
+                auto-close="always"
+                is-open="isOpenRights"
+                ng-class="{'open':isOpenRights}"
+                ng-if="!$first"
+              >
+                <a class="plain-text-button share-link" uib-dropdown-toggle>
+                  <i class="zmdi zmdi-edit"></i>
+                </a>
+                <ul
+                  uib-dropdown-menu
+                  class="dropdown-menu dropdown-menu-right dm-icon user-rights-dropdown"
+                >
+                  <li ng-repeat="role in formVm.GUEST_MODERATOR_ROLES track by role">
+                    <a
+                      href=""
+                      ng-click="moderator.role = role"
+                      ng-class="{'active-check': moderator.role === role }"
+                      translate
+                    >
+                      {{'GUEST_MODERATOR.ROLE.' + role}}
+                    </a>
+                  </li>
+                </ul>
+              </span>
+              <a
+                ng-if="!$first"
+                ng-click="formVm.removeGuestModerator(moderator)"
+              >
+                <i class="zmdi zmdi-close"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!--TODO: Once the back allow email edition change the ng-show value with "allowedToEmail.enable"-->
     <div class="m-b-30 form-group" ng-show="!formVm.productionMode">
       <h5>{{"WIP" | translate}}</h5>

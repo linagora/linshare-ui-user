@@ -90,6 +90,9 @@
     },
     "FILTER": {
       "NAME_PLACEHOLDER": "Search moderators by name"
+    },
+    "FORM": {
+      "AUTOCOMPLETE_PLACEHOLDER": "Search users to add"
     }
   }
 }

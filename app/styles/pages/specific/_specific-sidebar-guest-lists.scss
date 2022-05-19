@@ -4,16 +4,40 @@
   SIDEBAR GUEST LIST
 ***********************/
 
-#content-ctn-sidebar.form-guests.form-create-guests{
-  height: calc(100% - 200px);
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-#content-ctn-sidebar.form-guests{
+#content-ctn-sidebar.form-guests {
   height: calc(100% - 100px);
   margin-bottom: 0;
   padding-bottom: 0;
+
+  .guest-moderators-selection {
+    display: flex;
+    flex-direction: column;
+
+    &__add {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      &__role-select {
+        flex: 0 100px;
+        margin-right: 10px;
+        height: 40px;
+
+        .md-select-value {
+          margin-bottom: unset;
+        }
+      }
+
+      &__user-autocomplete {
+        flex: 1;
+      }
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 .guest-description {

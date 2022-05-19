@@ -90,6 +90,9 @@
     },
     "FILTER": {
       "NAME_PLACEHOLDER": "Tìm kiếm người kiểm duyệt theo tên"
+    },
+    "FORM": {
+      "AUTOCOMPLETE_PLACEHOLDER": "Tìm kiếm người dùng để thêm"
     }
   }
 }

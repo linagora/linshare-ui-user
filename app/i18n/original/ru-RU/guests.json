@@ -89,6 +89,9 @@
     },
     "FILTER": {
       "NAME_PLACEHOLDER": "Поиск модераторов по имени"
+    },
+    "FORM": {
+      "AUTOCOMPLETE_PLACEHOLDER": "Поиск пользователей для добавления"
     }
   }
 }
