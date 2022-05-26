@@ -6,7 +6,7 @@
 </div>
 
 <div class="guest-moderators" ng-if="guestModeratorsVm.status === 'loaded'">
-  <div ng-if="guestModeratorsVm.MODERATOR_ROLES.includes(guestModeratorsVm.currentUserRole)">
+  <div ng-if="guestModeratorsVm.currentUserRole !== 'NONE'">
     <div class="guest-moderators__header">
       <span
         class="guest-moderators__header__label"
@@ -161,7 +161,7 @@
             <li ng-repeat="role in guestModeratorsVm.MODERATOR_ROLES track by role">
               <a
                 href=""
-                ng-click="guestModeratorsVm.updateModerator(workgroupMember, role)"
+                ng-click="guestModeratorsVm.updateModeratorRole(moderator, role)"
                 ng-class="{'active-check': moderator.role === role }"
                 translate
               >

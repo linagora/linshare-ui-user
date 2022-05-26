@@ -27,7 +27,9 @@
         getList,
         listGuestModerator,
         remove,
-        update
+        removeGuestModerator,
+        update,
+        updateGuestModerator
       };
 
     return service;
@@ -112,6 +114,27 @@
       $log.debug('LinshareGuestRestService : createGuestModerator', moderator);
 
       return handler(Restangular.one(restUrl, moderator.guest.uuid).all('moderators').post(moderator).then(res => Restangular.stripRestangular(res)));
+    }
+
+    function updateGuestModerator(moderator) {
+      $log.debug('LinshareGuestRestService : updateGuestModerator', moderator);
+
+      return handler(Restangular
+        .one(restUrl, moderator.guest.uuid)
+        .one('moderators',moderator.uuid)
+        .customPUT(moderator)
+        .then(res => Restangular.stripRestangular(res))
+      );
+    }
+
+    function removeGuestModerator(moderator) {
+      $log.debug('LinshareGuestRestService : removeGuestModerator', moderator);
+
+      return handler(Restangular
+        .one(restUrl, moderator.guest.uuid)
+        .one('moderators', moderator.uuid)
+        .remove()
+      );
     }
   }
 })();

@@ -90,6 +90,7 @@
         self.toDTO = toDTO;
         self.update = update;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
+        self.myRole = setPropertyValue(jsonObject.myRole, undefined);
         setFormValue().then(function(formData) {
           self.form = formData;
           self.form.isRestrictedContact = _.some(self.restrictedContacts, {
