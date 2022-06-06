@@ -209,34 +209,52 @@
                     <span translate>{{guestVm.currentView}}</span>
                     <div><b></b></div>
                   </a>
-                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right dm-icon double-drop toggle-views"
-                       data-ng-class="{'open': isOpenType}">
+                  <div
+                    uib-dropdown-menu
+                    class="dropdown-menu dropdown-menu-right dm-icon double-drop toggle-views"
+                    ng-class="{'open': isOpenType}"
+                  >
                     <div class="list-menu">
                       <p><span translate>FILTER_COMPONENT.FILTER_BY</span></p>
-                      <ul class="dropdown-menu dm-icon filter-menu dropdown-menu-right">
+                      <ul
+                        class="dropdown-menu dm-icon filter-menu dropdown-menu-right dropdown-submenu"
+                      >
                         <li>
-                          <!-- TODO : KLE Translation needed-->
-                          <a x-ng-class="{'active-check': guestVm.isMineGuest}"
-                             x-ng-click="guestVm.currentView = 'HEADER_GUEST.SLIDER.MY_GUEST';
-                                         guestVm.isMineGuest = true;
-                                         guestVm.tableParams.reload();
-                                         mainVm.sidebar.hide()">
-                            <span translate>HEADER_GUEST.SLIDER.MY_GUEST</span>
+                          <a
+                            translate
+                            ng-class="{'active-check':!guestVm.guestFilter}"
+                            ng-click="guestVm.switchGuestFilter()">
+                            HEADER_GUEST.SLIDER.ALL
                           </a>
                         </li>
                         <li>
-                          <a x-ng-class="{'active-check':!guestVm.isMineGuest}"
-                             x-ng-click="guestVm.currentView = 'HEADER_GUEST.SLIDER.OTHER_GUEST';
-                                         guestVm.isMineGuest = false;
-                                         guestVm.tableParams.reload();
-                                         mainVm.sidebar.hide()">
-                            <span translate>HEADER_GUEST.SLIDER.OTHER_GUEST</span>
+                          <a
+                            translate
+                            ng-class="{'active-check':guestVm.guestFilter === 'ALL'}"
+                            ng-click="guestVm.switchGuestFilter('ALL')">
+                            HEADER_GUEST.SLIDER.MY_GUESTS_ALL
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            translate
+                            ng-class="{'active-check':guestVm.guestFilter === 'SIMPLE'}"
+                            ng-click="guestVm.switchGuestFilter('SIMPLE')">
+                            HEADER_GUEST.SLIDER.MY_GUESTS_SIMPLE
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            translate
+                            ng-class="{'active-check':guestVm.guestFilter === 'ADMIN'}"
+                            ng-click="guestVm.switchGuestFilter('ADMIN')">
+                            HEADER_GUEST.SLIDER.MY_GUESTS_ADMIN
                           </a>
                         </li>
                       </ul>
                     </div>
                   </div>
-                 </span>
+                </span>
               </div>
             </div>
           </div>

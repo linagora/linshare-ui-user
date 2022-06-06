@@ -31,8 +31,10 @@
   "HEADER_GUEST": {
     "DOMAIN": "Domaine",
     "SLIDER" : {
-      "MY_GUEST": "Mes invités",
-      "OTHER_GUEST": "Autre invités"
+      "ALL": "Tous les invités",
+      "MY_GUESTS_ALL": "Tous mes invités",
+      "MY_GUESTS_SIMPLE": "Mes invités : Modérateur",
+      "MY_GUESTS_ADMIN": "Mes invités : Aministrateur"
     }
   },
   "NC": "N.C.",

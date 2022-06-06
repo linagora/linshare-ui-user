@@ -31,8 +31,10 @@
   "HEADER_GUEST": {
     "DOMAIN": "Домен",
     "SLIDER": {
-      "MY_GUEST": "Список моих гостей",
-      "OTHER_GUEST": "Другие гости"
+      "ALL": "All guests",
+      "MY_GUESTS_ALL": "All of my guests",
+      "MY_GUESTS_SIMPLE": "My guests: Moderator",
+      "MY_GUESTS_ADMIN": "My guests: Administrator"
     }
   },
   "NC": "N.C.",

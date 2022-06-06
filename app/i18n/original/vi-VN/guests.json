@@ -31,8 +31,10 @@
   "HEADER_GUEST": {
     "DOMAIN": "Miền",
     "SLIDER": {
-      "MY_GUEST": "Khách của tôi",
-      "OTHER_GUEST": "Các khách khác"
+      "ALL": "Все гости",
+      "MY_GUESTS_ALL": "Все мои гости",
+      "MY_GUESTS_SIMPLE": "Мои гости: Модератор",
+      "MY_GUESTS_ADMIN": "Мои гости: Администратор"
     }
 
   },

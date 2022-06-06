@@ -65,15 +65,15 @@
     /**
      *  @name getList
      *  @desc Get list of the guest object
-     *  @param {Boolean} allGuest - Query param value for requesting all guest or not
+     *  @param {String} role - Query param value for requesting guests by certain roles
      *  @returns {Promise} server response
      *  @memberof LinShare.guests.guestRestService
      */
     //TODO - KLE: Doc & Query Param shall be updated one the back allow other guest instead of all guest
-    function getList(allGuest) {
-      $log.debug('LinshareGuestRestService : getList', allGuest);
+    function getList(role) {
+      $log.debug('LinshareGuestRestService : getList', role);
 
-      return handler(Restangular.all(restUrl).getList({'mine': allGuest}));
+      return handler(Restangular.all(restUrl).getList({ role }));
     }
 
     /**

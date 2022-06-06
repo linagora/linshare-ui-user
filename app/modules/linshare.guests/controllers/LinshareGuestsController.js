@@ -65,7 +65,7 @@
     guestVm.flagsOnSelectedPages = {};
     guestVm.getGuestDetails = getGuestDetails;
     guestVm.guestDetails = lsAppConfig.guestDetails;
-    guestVm.isMineGuest = true;
+    guestVm.currentView = 'HEADER_GUEST.SLIDER.ALL';
     guestVm.loadSidebarContent = loadSidebarContent;
     guestVm.loadTable = loadTable;
     guestVm.loggedUser = $scope.loggedUser;
@@ -85,6 +85,7 @@
     guestVm.onCreatedGuest = onCreatedGuest;
     guestVm.withEmail = withEmail;
     guestVm.updateCommentOnSelectedGuest = updateCommentOnSelectedGuest;
+    guestVm.switchGuestFilter = switchGuestFilter;
 
     activate();
 
@@ -97,15 +98,6 @@
      */
     function activate() {
       guestVm.guestObject = new GuestObjectService({mail: guestVm.withEmail});
-      $translate.refresh().then(function() {
-        $translate([
-          'HEADER_GUEST.SLIDER.MY_GUEST',
-          'HEADER_GUEST.SLIDER.OTHER_GUEST'
-        ]).then(function(translations) {
-          guestVm.currentView = guestVm.isMineGuest ?
-            translations['HEADER_GUEST.SLIDER.MY_GUEST'] : translations['HEADER_GUEST.SLIDER.OTHER_GUEST'];
-        });
-      });
       guestVm.tableParams = guestVm.loadTable();
       guestVm.fabButton = {
         actions: [{
@@ -191,7 +183,7 @@
         filter: guestVm.paramFilter
       }, {
         getData: function(params) {
-          return guestRestService.getList(guestVm.isMineGuest).then(function(data) {
+          return guestRestService.getList(guestVm.guestFilter).then(function(data) {
             var filteredData = [];
 
             switch (params.filter().operator) {
@@ -435,6 +427,17 @@
       guestVm.selectedGuest.update().catch(() => {
         guestVm.selectedGuest.comment = originalComment;
       });
+    }
+
+    function switchGuestFilter(filter) {
+      if (!filter) {
+        guestVm.currentView = 'HEADER_GUEST.SLIDER.ALL';
+      } else {
+        guestVm.currentView = `HEADER_GUEST.SLIDER.MY_GUESTS_${filter}`;
+      }
+      guestVm.guestFilter = filter;
+      guestVm.tableParams.reload();
+      sidebarService.hide();
     }
   }
 })();
