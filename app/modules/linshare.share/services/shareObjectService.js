@@ -92,7 +92,7 @@ angular.module('linshare.share')
         .valueOf();
       self.getMaxNotificationDate = () => moment(self.expirationDate.value).subtract(1, 'day').endOf('day').valueOf();
       self.getMaxExpirationDate = () => {
-        if (expirationDate.maxValue === -1) {
+        if (expirationDate.unlimited) {
           return null;
         }
 

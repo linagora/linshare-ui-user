@@ -143,7 +143,7 @@ function WorkgroupNodesController(
         workgroupNodesVm.canDownloadArchive = WORK_GROUP__DOWNLOAD_ARCHIVE.enable;
         workgroupNodesVm.functionalities.canOverrideVersioning = SHARED_SPACE.enable && WORK_GROUP__FILE_VERSIONING.canOverride;
 
-        workgroupNodesVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue < 0 ?
+        workgroupNodesVm.downloadArchiveThreshold = WORK_GROUP__DOWNLOAD_ARCHIVE.unlimited ?
           Infinity :
           unitService.toByte(WORK_GROUP__DOWNLOAD_ARCHIVE.maxValue, unitService.formatUnit(WORK_GROUP__DOWNLOAD_ARCHIVE.maxUnit));
       });
