@@ -154,7 +154,7 @@ function UploadRequestObjectCoreService(
         const clonedData = _.cloneDeep(data || {});
 
         functionalityOfTotalSizeOfFiles = clonedData;
-        functionalityOfTotalSizeOfFiles.maxValue = clonedData.maxValue > 0 ? clonedData.maxValue : null;
+        functionalityOfTotalSizeOfFiles.maxValue = clonedData.unlimited ? null : clonedData.maxValue;
         functionalityOfTotalSizeOfFiles.unit = unitService.formatUnit(clonedData.unit);
         functionalityOfTotalSizeOfFiles.maxUnit = unitService.formatUnit(clonedData.maxUnit);
         functionalityOfTotalSizeOfFiles.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
@@ -209,7 +209,7 @@ function UploadRequestObjectCoreService(
   }
 
   function getMaxDateOfExpiration(format) {
-    if (self.functionalityOfExpiration.maxValue < 0) {
+    if (self.functionalityOfExpiration.unlimited) {
       return;
     }
 
@@ -270,7 +270,7 @@ function UploadRequestObjectCoreService(
     const expirationDate = self.expiryDate ? moment(self.expiryDate) : moment(self.defaultExpiryDate);
     const activationDate = self.activationDate ? moment(self.activationDate) : moment();
 
-    if (self.functionalityOfExpiryNotification.maxValue <= 0) {
+    if (self.functionalityOfExpiryNotification.unlimited || self.functionalityOfExpiryNotification.maxValue === 0) {
       let minDate = activationDate;
 
       if (!minDate || minDate.valueOf() < moment().valueOf()) {
