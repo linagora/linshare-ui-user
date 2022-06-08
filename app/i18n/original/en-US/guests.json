@@ -31,10 +31,10 @@
   "HEADER_GUEST": {
     "DOMAIN": "Domain",
     "SLIDER": {
-      "ALL": "All guests",
-      "MY_GUESTS_ALL": "All of my guests",
-      "MY_GUESTS_SIMPLE": "My guests: Moderator",
-      "MY_GUESTS_ADMIN": "My guests: Administrator"
+      "ALL": "Tất cả khách",
+      "MY_GUESTS_ALL": "Tất cả khách của tôi",
+      "MY_GUESTS_SIMPLE": "Khách của tôi: Người điều hành",
+      "MY_GUESTS_ADMIN": "Khách của tôi: Quản trị viên"
     }
 
   },

@@ -22,11 +22,11 @@
               <span class="v-center" translate>BREADCRUMB_TITLE_GUEST</span>
             </a>
             <span class="sub-category-chevron pipe-separator">|</span>
-            <a x-ng-if="guestVm.isMineGuest" class="click-disabled">
-              <span translate>HEADER_GUEST.SLIDER.MY_GUEST</span>
+            <a ng-if="!guestVm.guestFilter" class="click-disabled">
+              <span translate>HEADER_GUEST.SLIDER.ALL</span>
             </a>
-            <a x-ng-if="!guestVm.isMineGuest" class="click-disabled">
-              <span translate>HEADER_GUEST.SLIDER.OTHER_GUEST</span>
+            <a ng-if="guestVm.guestFilter" class="click-disabled">
+              <span translate>{{'HEADER_GUEST.SLIDER.MY_GUESTS_' + guestVm.guestFilter}}</span>
             </a>
           </div>
           <div id="action-header">
