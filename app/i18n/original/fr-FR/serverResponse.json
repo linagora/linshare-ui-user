@@ -35,7 +35,8 @@
         "38400": "La date d'expiration de l'invité est invalide",
         "46011": "Le quota du compte a été atteint",
         "62005": "Vous n'êtes pas autorisé à utiliser ce service",
-        "55505": "Vous n'êtes pas autorisé à créer une entrée"
+        "55505": "Vous n'êtes pas autorisé à créer une entrée",
+        "50016": "Vous avez atteint le nombre maximum d'espaces de travail"
       },
       "UPLOAD_ERROR": {
         "NONE": "Une erreur est survenue pendant l'envoi du fichier",

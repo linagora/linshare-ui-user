@@ -35,7 +35,8 @@
         "38400": "The guest expiration date is invalid",
         "46011": "The account quota has been reached",
         "62005": "You are not authorized to use this service",
-        "55505": "You are not authorized to create an entry"
+        "55505": "You are not authorized to create an entry",
+        "50016": "You have reached maximum number of workspaces"
       },
       "UPLOAD_ERROR": {
         "NONE": "An error occurred during upload",
