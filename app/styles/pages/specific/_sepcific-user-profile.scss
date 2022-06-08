@@ -14,21 +14,14 @@
 
     .info-block {
       padding: 10px;
-      margin: 10px 0;
       flex: 100%;
       display: flex;
-      justify-content: center;
       flex-direction: row;
       align-items: center;
 
       &__title {
         font-weight: 500;
-        flex: 50%;
         margin-right: 10px;
-      }
-
-      &__value {
-        flex: 50%;
       }
     }
   }
