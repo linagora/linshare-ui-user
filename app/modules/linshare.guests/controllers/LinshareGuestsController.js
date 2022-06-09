@@ -86,6 +86,7 @@
     guestVm.withEmail = withEmail;
     guestVm.updateCommentOnSelectedGuest = updateCommentOnSelectedGuest;
     guestVm.switchGuestFilter = switchGuestFilter;
+    guestVm.canDeleteGuests = (guests) => guests.every(guest => guest.myRole === 'ADMIN');
 
     activate();
 

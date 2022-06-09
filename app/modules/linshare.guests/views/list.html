@@ -348,10 +348,12 @@
             <span translate>EDIT</span>
           </a>
         </span>
-        <span x-ng-hide="guestVm.selectedGuests.myRole !== 'NONE'">
+        <span
+          ng-class="{'disable-link' : !guestVm.canDeleteGuests(guestVm.selectedGuests)}"
+        >
           <a
             class="plain-txt-btn partage-link"
-            data-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
+            ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
             translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
           >
             <i class="zmdi zmdi-delete"></i><span>
@@ -489,7 +491,7 @@
                       <i class="zmdi zmdi-edit"></i>
                       </a>
                     </li>
-                    <li data-ng-hide="guestData.myRole === 'NONE'" data-ng-click="guestVm.deleteGuests(guestData)"
+                    <li ng-hide="guestData.myRole !== 'ADMIN'" data-ng-click="guestVm.deleteGuests(guestData)"
                         class="hidden-xs hidden-action-links">
                       <a
                         event-propagation-stop="true"
@@ -529,7 +531,7 @@
                           </a>
                         </li>
                         <li class="divider"></li>
-                        <li x-ng-hide="guestData.myRole === 'NONE'"
+                        <li ng-hide="guestData.myRole !== 'ADMIN'"
                             x-ng-click="guestVm.deleteGuests(guestData)">
                           <a href="">
                             <i class="zmdi zmdi-delete"></i>
@@ -603,7 +605,8 @@
   <span>
     <a
       class="plain-txt-btn partage-link"
-      data-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
+      ng-class="{'hide' : !guestVm.canDeleteGuests(guestVm.selectedGuests)}"
+      ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
       translate-attr="{title: 'SELECTION_TOOLBAR.DELETE'}"
     >
       <i class="zmdi zmdi-delete"></i><span translate>SELECTION_TOOLBAR.DELETE</span>
@@ -671,7 +674,11 @@
     </div>
     <i class="zmdi zmdi-edit col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
-    <i class="zmdi zmdi-delete col-xs-2" x-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"></i>
+    <i
+      class="zmdi zmdi-delete col-xs-2"
+      ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
+      ng-class="{'disabled-work-in-progress' : !guestVm.canDeleteGuests(guestVm.selectedGuests)}"
+    ></i>
     <i class="zmdi zmdi-info col-xs-2" x-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0])"
        x-ng-class="{'disabled-work-in-progress': guestVm.selectedGuests.length > 1}"></i>
     <span class="dropdown col-xs-2 dropdown-standard" uib-dropdown="" x-ng-show="::!linshareModeProduction">
