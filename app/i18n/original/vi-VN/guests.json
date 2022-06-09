@@ -31,12 +31,11 @@
   "HEADER_GUEST": {
     "DOMAIN": "Miền",
     "SLIDER": {
-      "ALL": "Все гости",
-      "MY_GUESTS_ALL": "Все мои гости",
-      "MY_GUESTS_SIMPLE": "Мои гости: Модератор",
-      "MY_GUESTS_ADMIN": "Мои гости: Администратор"
+      "ALL": "Tất cả khách",
+      "MY_GUESTS_ALL": "Tất cả khách của tôi",
+      "MY_GUESTS_SIMPLE": "Khách của tôi: Người điều hành",
+      "MY_GUESTS_ADMIN": "Khách của tôi: Quản trị viên"
     }
-
   },
   "NC": "N.C.",
   "ORDER_BY": {

@@ -1,6 +1,11 @@
+<p class="empty-res" ng-if="formVm.guestObject.myRole === 'NONE'">
+  <i class="zmdi zmdi-info"></i><span translate>SIDEBAR.ADMIN_RIGHT</span>
+</p>
+
 <div
   id="content-ctn-sidebar"
   class="card col-xs-12 m-t-2em form-guests"
+  ng-if="formVm.guestObject.myRole !== 'NONE'"
 >
   <form class="form-sidebar" name="formVm.form">
     <div class="form-group fg-float m-b-30">

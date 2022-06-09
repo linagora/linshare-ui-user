@@ -63,26 +63,41 @@
                       </p>
                       <ul class="dropdown-menu dropdown-menu-right dm-icon filter-menu">
                         <li>
-                          <a href=""
-                             x-ng-class="{'active-check':guestVm.isMineGuest}"
-                             x-ng-click="guestVm.isMineGuest = true;
-                                         guestVm.tableParams.reload();
-                                         mainVm.sidebar.hide()">
-                            <span translate>HEADER_GUEST.SLIDER.MY_GUEST</span>
+                          <a
+                            translate
+                            ng-class="{'active-check':!guestVm.guestFilter}"
+                            ng-click="guestVm.switchGuestFilter()">
+                            HEADER_GUEST.SLIDER.ALL
                           </a>
-                          </li>
-                          <li>
-                            <a href="" x-ng-class="{'active-check':!guestVm.isMineGuest}"
-                               x-ng-click="guestVm.isMineGuest = false;
-                                           guestVm.tableParams.reload();
-                                           mainVm.sidebar.hide()">
-                              <span translate>HEADER_GUEST.SLIDER.OTHER_GUEST</span>
-                            </a>
-                          </li>
-                          </ul>
-                        </div>
-                      </div>
-                 </span>
+                        </li>
+                        <li>
+                          <a
+                            translate
+                            ng-class="{'active-check':guestVm.guestFilter === 'ALL'}"
+                            ng-click="guestVm.switchGuestFilter('ALL')">
+                            HEADER_GUEST.SLIDER.MY_GUESTS_ALL
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            translate
+                            ng-class="{'active-check':guestVm.guestFilter === 'SIMPLE'}"
+                            ng-click="guestVm.switchGuestFilter('SIMPLE')">
+                            HEADER_GUEST.SLIDER.MY_GUESTS_SIMPLE
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            translate
+                            ng-class="{'active-check':guestVm.guestFilter === 'ADMIN'}"
+                            ng-click="guestVm.switchGuestFilter('ADMIN')">
+                            HEADER_GUEST.SLIDER.MY_GUESTS_ADMIN
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </span>
               </div>
 
               <!-- Please enable the filtering feature according to the appropriate labels-->
@@ -265,7 +280,7 @@
        x-ng-class="{'search-toggled': searchMobileDropdown}">
     <div id="top-search-wrap">
       <i id="top-search-close" x-ng-click="searchMobileDropdown = !searchMobileDropdown">&times;</i>
-      <input
+      <input`
         class="form-control ng-pristine ng-untouched ng-valid"
         aria-invalid="false"
         data-ng-change="guestVm.tableParams.reload()"
@@ -321,8 +336,9 @@
         </div>
       </div>
       <div id="toolbar-actions" class="hidden-xs">
-        <span x-ng-hide="!guestVm.isMineGuest"
-              data-ng-class="{'disable-link' : guestVm.selectedGuests.length > 1}">
+        <span
+          ng-hide="guestVm.selectedGuests.myRole !== 'NONE'"
+          data-ng-class="{'disable-link' : guestVm.selectedGuests.length > 1}">
            <a
             class="plain-txt-btn partage-link"
             data-ng-click="guestVm.showGuestDetails(guestVm.selectedGuests[0], 1)"
@@ -332,7 +348,7 @@
             <span translate>EDIT</span>
           </a>
         </span>
-        <span x-ng-hide="!guestVm.isMineGuest">
+        <span x-ng-hide="guestVm.selectedGuests.myRole !== 'NONE'">
           <a
             class="plain-txt-btn partage-link"
             data-ng-click="guestVm.deleteGuests(guestVm.selectedGuests)"
@@ -354,43 +370,6 @@
               <span translate>ACTION.INFORMATION</span>
             </span>
           </a>
-        </span>
-        <span x-ng-hide="::linshareModeProduction" class="dropdown link-dropdown" uib-dropdown>
-          <a
-            class="plain-txt-btn partage-link"
-            uib-dropdown-toggle
-            translate-attr="{title: 'BOUTON_LABEL_TITLE.MORE_ACTIONS'}"
-          >
-            <i class="zmdi zmdi-more"></i>
-            <span>
-              <span translate>BOUTON_LABEL_TITLE.MORE_ACTIONS</span>
-            </span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right dm-icon dropdown-divided dropdown-submenu" uib-dropdown-menu="">
-            <li>
-              <a href="" event-propagation-stop>
-                <i class="fa fa-pencil-square-o"></i>
-                <span translate>ACTION.ADMIN_REQUEST</span>
-              </a>
-            </li>
-            <li>
-              <a href="" event-propagation-stop>
-                <i class="zmdi zmdi-accounts-list"></i>
-                <span translate>ACTION.JOIN_RESTRICTED_CONTACTS</span>
-              </a>
-            </li>
-            <li x-ng-hide="!guestVm.isMineGuest">
-              <a href="">
-                <i class="groups-shared-folder">
-                    <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
-                </i>
-                <span translate>ACTION.ADD_TO_WORKGROUPS</span>
-              </a>
-            </li>
-          </ul>
-        </span>
-        <span x-ng-show="::linshareModeProduction && !guestVm.isMineGuest && guestVm.selectedGuests.length > 1">
-          <span translate>NO_ACTION_AVAILABLE</span>
         </span>
       </div>
     </div>
@@ -500,13 +479,17 @@
                       <i class="zmdi zmdi-info"></i>
                       </a>
                     </li>
-                    <li x-ng-hide="!guestVm.isMineGuest" x-ng-click="guestVm.showGuestDetails(guestData, 1)"
-                        event-propagation-stop class="hidden-xs hidden-action-links">
+                    <li
+                      ng-hide="guestData.myRole === 'NONE'"
+                      ng-click="guestVm.showGuestDetails(guestData, 1)"
+                      event-propagation-stop
+                      class="hidden-xs hidden-action-links"
+                    >
                       <a translate-attr="{title: 'EDIT'}">
                       <i class="zmdi zmdi-edit"></i>
                       </a>
                     </li>
-                    <li data-ng-hide="!guestVm.isMineGuest" data-ng-click="guestVm.deleteGuests(guestData)"
+                    <li data-ng-hide="guestData.myRole === 'NONE'" data-ng-click="guestVm.deleteGuests(guestData)"
                         class="hidden-xs hidden-action-links">
                       <a
                         event-propagation-stop="true"
@@ -538,7 +521,7 @@
                           </a>
                         </li>
                         <li class="divider"></li>
-                        <li x-ng-hide="!guestVm.isMineGuest"
+                        <li x-ng-hide="guestData.myRole === 'NONE'"
                             x-ng-click="guestVm.showGuestDetails(guestData, 1)">
                           <a href="" >
                             <i class="zmdi zmdi-edit"></i>
@@ -546,7 +529,7 @@
                           </a>
                         </li>
                         <li class="divider"></li>
-                        <li x-ng-hide="!guestVm.isMineGuest"
+                        <li x-ng-hide="guestData.myRole === 'NONE'"
                             x-ng-click="guestVm.deleteGuests(guestData)">
                           <a href="">
                             <i class="zmdi zmdi-delete"></i>

@@ -1,29 +1,22 @@
-<div ng-hide="!mainVm.sidebar.getData().isMineGuest">
-  <guest-form
-    class="form-within-sidebar guest-edit"
-    form="mainVm.sidebar.getData().form"
-    guest-object="mainVm.sidebar.getData().selectedGuest"
-  ></guest-form>
-  <!-- UPDATE BTN links-->
-  <div class="bottom-sidebar-btn form-within-sidebar">
-    <button
-      class="btn btn-default col-xs-6"
-      ng-click="mainVm.sidebar.hide(mainVm.sidebar.getData().selectedGuest); mainVm.sidebar.getData().closeDropdown($event)"
-      translate
-    >
-      SIDEBAR.BUTTON.CANCEL
-    </button>
-    <button
-      class="btn btn-primary col-xs-6"
-      ng-click="mainVm.sidebar.getData().updateGuest(updateGuest, mainVm.sidebar.getData().selectedGuest)"
-      translate
-    >
-      SIDEBAR.BUTTON.UPDATE
-    </button>
-  </div>
-</div>
-<div ng-hide="mainVm.sidebar.getData().isMineGuest">
-  <p class="empty-res">
-    <i class="zmdi zmdi-info"></i><span translate>SIDEBAR.ADMIN_RIGHT</span>
-  </p>
+<guest-form
+  class="form-within-sidebar guest-edit"
+  form="mainVm.sidebar.getData().form"
+  guest-object="mainVm.sidebar.getData().selectedGuest"
+></guest-form>
+<!-- UPDATE BTN links-->
+<div class="bottom-sidebar-btn form-within-sidebar" ng-if="mainVm.sidebar.getData().selectedGuest.myRole !== 'NONE'">
+  <button
+    class="btn btn-default col-xs-6"
+    ng-click="mainVm.sidebar.hide(mainVm.sidebar.getData().selectedGuest); mainVm.sidebar.getData().closeDropdown($event)"
+    translate
+  >
+    SIDEBAR.BUTTON.CANCEL
+  </button>
+  <button
+    class="btn btn-primary col-xs-6"
+    ng-click="mainVm.sidebar.getData().updateGuest(updateGuest, mainVm.sidebar.getData().selectedGuest)"
+    translate
+  >
+    SIDEBAR.BUTTON.UPDATE
+  </button>
 </div>
