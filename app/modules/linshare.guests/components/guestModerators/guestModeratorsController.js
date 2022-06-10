@@ -13,8 +13,10 @@ function guestModeratorsController(_, $q, guestRestService, authenticationRestSe
   guestModeratorsVm.toggleRoleFilter = toggleRoleFilter;
   guestModeratorsVm.updateModeratorRole = updateModeratorRole;
   guestModeratorsVm.removeModerator = removeModerator;
+  guestModeratorsVm.addGuestModerator = addGuestModerator;
   guestModeratorsVm.moderatorFilter = { account: { name: '' } };
   guestModeratorsVm.MODERATOR_ROLES = GUEST_MODERATOR_ROLES;
+  guestModeratorsVm.selectedRole = GUEST_MODERATOR_ROLES[0];
 
   function $onInit() {
     return authenticationRestService.getCurrentUser()
@@ -95,7 +97,28 @@ function guestModeratorsController(_, $q, guestRestService, authenticationRestSe
         guestModeratorsVm.moderators = [];
       }
 
-      _.remove(guestModeratorsVm.moderators, moderator => moderator.uuid === deleted.uui);
+      _.remove(guestModeratorsVm.moderators, moderator => moderator.uuid === deleted.uuid);
     });
+  }
+
+  function addGuestModerator(autocompleteResult) {
+    const alreadyAdded = guestModeratorsVm.moderators.findIndex(moderator => moderator.account.uuid === autocompleteResult.identifier);
+
+    if (alreadyAdded > 0 && guestModeratorsVm.moderators[alreadyAdded].role !== guestModeratorsVm.selectedRole) {
+      updateModeratorRole(guestModeratorsVm.moderators[alreadyAdded], guestModeratorsVm.selectedRole);
+    } else {
+      guestRestService.createGuestModerator({
+        role: guestModeratorsVm.selectedRole,
+        guest: {
+          uuid: guestModeratorsVm.guest.uuid
+        },
+        account: {
+          uuid: autocompleteResult.identifier,
+          name: autocompleteResult.label.name,
+        }
+      }).then(moderator => {
+        guestModeratorsVm.moderators.push(moderator);
+      });
+    }
   }
 }

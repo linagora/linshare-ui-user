@@ -6,6 +6,38 @@
 </div>
 
 <div class="guest-moderators" ng-if="guestModeratorsVm.status === 'loaded'">
+  <div ng-if="guestModeratorsVm.currentUserRole === 'ADMIN'">
+    <div class="guest-moderators__header">
+      <span
+        class="guest-moderators__header__label"
+        translate
+      >
+        GUEST_MODERATOR.LABEL_ADD
+      </span>
+    </div>
+
+    <div class="guest-moderators__add">
+      <md-select
+        class="guest-moderators__add__role-select"
+        ng-model="guestModeratorsVm.selectedRole"
+      >
+        <md-option
+          ng-repeat="role in guestModeratorsVm.MODERATOR_ROLES"
+          value="{{role}}"
+        >
+          {{'GUEST_MODERATOR.ROLE.' + role | translate}}
+        </md-option>
+      </md-select>
+
+      <user-autocomplete-input
+        class="guest-moderators__add__user-autocomplete"
+        placeholder="GUEST_MODERATOR.FORM.AUTOCOMPLETE_PLACEHOLDER"
+        search-type="USERS"
+        on-select="guestModeratorsVm.addGuestModerator"
+      />
+    </div>
+  </div>
+
   <div ng-if="guestModeratorsVm.currentUserRole !== 'NONE'">
     <div class="guest-moderators__header">
       <span

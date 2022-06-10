@@ -84,6 +84,7 @@
   "GUEST_MODERATOR": {
     "TAB_TITLE": "Người kiểm duyệt",
     "LABEL": "Người kiểm duyệt hiện tại: <b> {{number}} </b>",
+    "LABEL_ADD": "Thêm người kiểm duyệt",
     "MODERATOR_ROLE": "Vai trò người kiểm duyệt",
     "ROLE": {
       "ADMIN": "Quản trị viên",

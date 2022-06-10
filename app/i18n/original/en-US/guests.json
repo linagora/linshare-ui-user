@@ -84,6 +84,7 @@
   "GUEST_MODERATOR": {
     "TAB_TITLE": "Moderators",
     "LABEL": "Existing moderators: <b>{{number}}</b>",
+    "LABEL_ADD": "Add moderators",
     "MODERATOR_ROLE": "Moderator role",
     "ROLE": {
       "ADMIN": "Administrator",

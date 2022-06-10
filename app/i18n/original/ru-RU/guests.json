@@ -84,6 +84,7 @@
   "GUEST_MODERATOR": {
     "TAB_TITLE": "Модераторы",
     "LABEL": "Существующие модераторы: <b>{{number}}</b>",
+    "LABEL_ADD": "Добавить модераторов",
     "MODERATOR_ROLE": "Роль модератора",
     "ROLE": {
       "ADMIN": "Администратор",
