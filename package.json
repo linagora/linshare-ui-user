@@ -111,7 +111,7 @@
     "ng-table": "4.0.0",
     "ngclipboard": "2.0.0",
     "node-waves": "0.7.5",
-    "oidc-client": "1.10.1",
+    "oidc-client": "1.11.5",
     "restangular": "1.6.1",
     "sweetalert": "2.1.2",
     "uuid": "8.3.2"
