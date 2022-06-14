@@ -36,7 +36,14 @@
         "46011": "The account quota has been reached",
         "62005": "You are not authorized to use this service",
         "55505": "You are not authorized to create an entry",
-        "50016": "You have reached maximum number of workspaces"
+        "50016": "Your domain has reached maximum number of workspace allowed",
+        "55508": "Your domain has creached maximum number of nested workgroups",
+        "31416": "Your domain has reached maxium number of upload requests allowed"
+      },
+      "SAAS_ERROR": {
+        "50016": "Maximum number of workpaces reached. Please contact your company owner for an upgrade at <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "55508": "Maximum number of nested workgroups reached. Please contact your company owner for an upgrade at <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "31416": "Maximum number of upload requests reached. Please contact your company owner for an upgrade at <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>"
       },
       "UPLOAD_ERROR": {
         "NONE": "An error occurred during upload",

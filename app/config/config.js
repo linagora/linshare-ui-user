@@ -186,6 +186,17 @@
           'vi-VN': 'Hỗ trợ qua chatbot',
           'ru-RU': 'Поддержка через чат-бот'
         }
+      },
+
+      /**
+       * Enable saas mode,
+       * Some api errors will have different message that contains a link to console app
+       */
+
+      saasMode: {
+        enable: false,
+        consoleUrl: 'https://console.your.app',
+        errorCodes: [50016, 55508, 31416]
       }
     });
 })();

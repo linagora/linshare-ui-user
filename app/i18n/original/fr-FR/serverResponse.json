@@ -36,7 +36,14 @@
         "46011": "Le quota du compte a été atteint",
         "62005": "Vous n'êtes pas autorisé à utiliser ce service",
         "55505": "Vous n'êtes pas autorisé à créer une entrée",
-        "50016": "Vous avez atteint le nombre maximum d'espaces de travail"
+        "50016": "Votre domaine à atteint le nombre maximum d'espaces de travail autorisés",
+        "55508": "Votre domaine a atteint le nombre maximum de groupes de travail imbriqués",
+        "31416": "Votre domaine a atteint le nombre maximum de invitation de dépôt autorisées"
+      },
+      "SAAS_ERROR": {
+        "50016": "Nombre maximal d'espaces de travail atteint. Veuillez contacter le propriétaire de votre entreprise pour une mise à jour via <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">la console</a>",
+        "55508": "Nombre maximal de groupes de travail imbriqués atteint. Veuillez contacter le propriétaire de votre entreprise pour une mise à niveau sur <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">la console</a>",
+        "31416": "Nombre maximum de demandes de téléchargement atteint. Veuillez contacter le propriétaire de votre entreprise pour une mise à niveau sur <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">la console</a>"
       },
       "UPLOAD_ERROR": {
         "NONE": "Une erreur est survenue pendant l'envoi du fichier",

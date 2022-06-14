@@ -18,7 +18,8 @@
     '$q',
     '$translate',
     'Restangular',
-    'toastService'
+    'toastService',
+    'lsAppConfig'
   ];
 
   /**
@@ -32,7 +33,8 @@
     $q,
     $translate,
     Restangular,
-    toastService
+    toastService,
+    lsAppConfig
   ) {
     const service = {
       getErrorMessage,
@@ -54,9 +56,8 @@
      * @memberOf linshareUiUserApp.ServerManagerService
      */
     function getErrorMessage(error, messagePrefix = 'DEFAULT') {
-      let errCode;
-      let errorMessageHttpCodes = 'SERVER_RESPONSE.HTTP_CODES.';
-      let errorMessageDetails = 'SERVER_RESPONSE.DETAILS.' + messagePrefix + '.';
+      $log.debug('ServerManagerService - responseHandler:' + error);
+
       const HTTP_ERRORS = {
         400: 'ERROR_400',
         401: 'ERROR_401',
@@ -70,30 +71,37 @@
         503: 'ERROR_503',
         520: 'ERROR_520'
       };
+      let errCode = _.isNil(error.data) ? null : error.data.errCode;
 
-      $log.debug('ServerManagerService - responseHandler:' + error);
-
-      errorMessageHttpCodes += HTTP_ERRORS.hasOwnProperty(error.status) ? HTTP_ERRORS[error.status] : 'ERROR_DEFAULT';
-      errCode = _.isNil(error.data) ? null : error.data.errCode;
       if (error.status === 404 || error.status === 503) {
         errCode = errCode || 'SERVER';
       }
-      errorMessageDetails += _.isNil(errCode) ? 'NONE' : errCode;
 
-      return $translate.refresh().then(function() {
-        return $translate([errorMessageHttpCodes, errorMessageDetails]);
-      }).then(function(translations) {
-        if (!(translations[errorMessageHttpCodes] === errorMessageHttpCodes ||
-              translations[errorMessageDetails] === errorMessageDetails)) {
-          return translations[errorMessageHttpCodes] + ': ' + translations[errorMessageDetails];
-        } else {
-          if (_.isUndefined(errCode)) {
-            return error.statusText;
+      const errorMessageHttpCodes = `SERVER_RESPONSE.HTTP_CODES.${HTTP_ERRORS.hasOwnProperty(error.status) ? HTTP_ERRORS[error.status] : 'ERROR_DEFAULT'}`;
+
+
+      if (lsAppConfig.saasMode.enable && lsAppConfig.saasMode.errorCodes.includes(errCode)) {
+        return $translate(`SERVER_RESPONSE.DETAILS.SAAS_ERROR.${errCode}`, { url: lsAppConfig.saasMode.consoleUrl }).then(message => message || error.data.message);
+      }
+
+      const errorMessageDetails = `SERVER_RESPONSE.DETAILS.${messagePrefix}.${_.isNil(errCode) ? 'NONE' : errCode}`;
+
+      return $translate.refresh()
+        .then(() => $translate([errorMessageHttpCodes, errorMessageDetails]))
+        .then((translations) => {
+          if (
+            !(
+              translations[errorMessageHttpCodes] === errorMessageHttpCodes ||
+            translations[errorMessageDetails] === errorMessageDetails
+            )
+          ) {
+            return `${translations[errorMessageHttpCodes]}: ${translations[errorMessageDetails]}`;
           } else {
-            return error.statusText, errCode + ': ' + error.data.message;
+            return _.isUndefined(errCode)
+              ? error.statusText
+              : `${error.statusText} ${errCode}:${error.data.message}`;
           }
-        }
-      });
+        });
     }
 
     function getHeaders() {

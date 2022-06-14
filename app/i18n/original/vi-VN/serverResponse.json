@@ -36,7 +36,14 @@
         "46011": "Đã đạt đến dung lượng tài khoản",
         "62005": "Bạn không được phép sử dụng dịch vụ này",
         "55505": "Bạn không được phép tạo",
-        "50016": "Bạn đã đạt đến số lượng không gian làm việc tối đa."
+        "50016": "Miền của bạn đã đạt đến số lượng không gian làm việc tối đa được phép",
+        "55508": "Miền của bạn đã tạo số lượng nhóm làm việc lồng nhau tối đa",
+        "31416": "Miền của bạn đã đạt đến số lượng yêu cầu tải lên tối đa được phép"
+      },
+      "SAAS_ERROR": {
+        "50016": "Đã đạt đến số lượng không gian làm việc tối đa. Vui lòng liên hệ với chủ sở hữu công ty của bạn để được nâng cấp tại <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "55508": "Đã đạt đến số lượng nhóm làm việc lồng nhau tối đa. Vui lòng liên hệ với chủ sở hữu công ty của bạn để được nâng cấp tại <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "31416": "Đã đạt đến số lượng yêu cầu tải lên tối đa. Vui lòng liên hệ với chủ sở hữu công ty của bạn để được nâng cấp tại <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>"
       },
       "UPLOAD_ERROR": {
         "NONE": "Đã xảy ra lỗi khi tải lên",
