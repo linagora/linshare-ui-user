@@ -69,7 +69,7 @@ function UploadRequestObjectService(
       .catch(error => {
         self.submitting = false;
 
-        return error;
+        throw error;
       });;
   }
 }

@@ -79,7 +79,7 @@ function UploadRequestGroupObjectService(
       .catch(error => {
         self.submitting = false;
 
-        return error;
+        throw error;
       });
   }
 
@@ -102,7 +102,7 @@ function UploadRequestGroupObjectService(
       .catch(error => {
         self.submitting = false;
 
-        return error;
+        throw error;
       });;
   }
 
