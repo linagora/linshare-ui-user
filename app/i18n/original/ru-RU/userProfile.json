@@ -9,6 +9,7 @@
       "LASTNAME": "Фамилия",
       "EMAIL": "Электронная почта",
       "NOTIFICATION_LANGUAGE": "Язык уведомлений",
+      "NOTIFICATION_LANGUAGE_EXTERNAL": "Язык уведомлений внешних пользователей",
       "MODIFICATION_DATE": "Дата изменения",
       "CREATION_DATE": "Дата создания",
       "EXPIRATION_DATE": "Срок действия",

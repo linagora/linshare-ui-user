@@ -16,7 +16,7 @@
 
       <div class="card-body collapsible-content">
         <div class="row">
-          <div class="col-sm-12 col-md-8 col-xl-6">
+          <div class="col-sm-12 col-md-10 col-lg-8">
             <div class="info-block-container">
               <div class="info-block">
                 <span class="info-block__title" translate>
@@ -104,6 +104,29 @@
                 <div class="info-block__value">
                   <md-select
                     ng-model="userProfileVm.profile.mailLocale"
+                    ng-change="userProfileVm.updateProfile()"
+                  >
+                    <md-option value="ENGLISH" translate>
+                      LOCALE.ENGLISH
+                    </md-option>
+                    <md-option value="FRENCH" translate>
+                      LOCALE.FRENCH
+                    </md-option>
+                    <md-option value="RUSSIAN" translate>
+                      LOCALE.RUSSIAN
+                    </md-option>
+                  </md-select>
+                </div>
+              </div>
+
+              <div class="info-block">
+                <span class="info-block__title" translate>
+                  USER_PROFILE.INFO.NOTIFICATION_LANGUAGE_EXTERNAL
+                </span>
+
+                <div class="info-block__value">
+                  <md-select
+                    ng-model="userProfileVm.profile.externalMailLocale"
                     ng-change="userProfileVm.updateProfile()"
                   >
                     <md-option value="ENGLISH" translate>

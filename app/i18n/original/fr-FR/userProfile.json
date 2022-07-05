@@ -9,6 +9,7 @@
       "LASTNAME": "Nom de famille",
       "EMAIL": "Courriel",
       "NOTIFICATION_LANGUAGE": "Langue des notifications",
+      "NOTIFICATION_LANGUAGE_EXTERNAL": "Langue de notification des utilisateurs externes",
       "MODIFICATION_DATE": "Date de modification",
       "CREATION_DATE": "Date de création",
       "EXPIRATION_DATE": "Date d'expiration",

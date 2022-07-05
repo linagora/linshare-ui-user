@@ -9,6 +9,7 @@
       "LASTNAME": "Họ",
       "EMAIL": "Email",
       "NOTIFICATION_LANGUAGE": "Ngôn ngữ thông báo",
+      "NOTIFICATION_LANGUAGE_EXTERNAL": "Ngôn ngữ thông báo cho người dùng bên ngoài",
       "MODIFICATION_DATE": "Ngày sửa đổi",
       "CREATION_DATE": "Ngày tạo",
       "EXPIRATION_DATE": "Ngày hết hạn",
