@@ -65,7 +65,8 @@
     guestVm.flagsOnSelectedPages = {};
     guestVm.getGuestDetails = getGuestDetails;
     guestVm.guestDetails = lsAppConfig.guestDetails;
-    guestVm.currentView = 'HEADER_GUEST.SLIDER.ALL';
+    guestVm.currentView = 'HEADER_GUEST.SLIDER.MY_GUESTS_ALL';
+    guestVm.guestFilter = 'ALL';
     guestVm.loadSidebarContent = loadSidebarContent;
     guestVm.loadTable = loadTable;
     guestVm.loggedUser = $scope.loggedUser;
