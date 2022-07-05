@@ -6,6 +6,12 @@
 </div>
 
 <div class="guest-moderators" ng-if="guestModeratorsVm.status === 'loaded'">
+  <div ng-if="guestModeratorsVm.currentUserRole === 'NONE'">
+    <p class="empty-res">
+      <i class="zmdi zmdi-info"></i><span translate>SIDEBAR.NO_MODERATOR_RIGHT</span>
+    </p>
+  </div>
+
   <div ng-if="guestModeratorsVm.currentUserRole === 'ADMIN'">
     <div class="guest-moderators__header">
       <span

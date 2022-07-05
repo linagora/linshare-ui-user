@@ -1,6 +1,8 @@
-<p class="empty-res" ng-if="formVm.guestObject.myRole === 'NONE'">
-  <i class="zmdi zmdi-info"></i><span translate>SIDEBAR.ADMIN_RIGHT</span>
-</p>
+<md-content class="md-padding" ng-if="formVm.guestObject.myRole === 'NONE'">
+  <p class="empty-res">
+    <i class="zmdi zmdi-info"></i><span translate>SIDEBAR.NO_MODERATOR_RIGHT</span>
+  </p>
+</md-content>
 
 <div
   id="content-ctn-sidebar"

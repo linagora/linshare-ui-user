@@ -44,7 +44,7 @@
     "DOMAIN_NAME": "Nom de domaine"
   },
   "SIDEBAR": {
-    "ADMIN_RIGHT": "Vous n'avez pas les droits d'aministration pour mettre à jour cet invité",
+    "NO_MODERATOR_RIGHT": "Vous n'avez pas le droit de modérateur pour modifier cet invité",
     "BUTTON": {
       "CREATE": "Créer",
       "CANCEL": "Annuler",

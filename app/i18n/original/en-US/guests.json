@@ -44,7 +44,7 @@
     "DOMAIN_NAME": "Domain name"
   },
   "SIDEBAR": {
-    "ADMIN_RIGHT": "You don't have the administrator rights to update this guest",
+    "NO_MODERATOR_RIGHT": "You don't have moderator right to edit this guest",
     "BUTTON": {
       "CREATE": "Create",
       "CANCEL": "Cancel",
