@@ -735,6 +735,10 @@
           "AUTHOR": {
             "SENTENCE": "A version of the file {{resourceName}} has been added in the workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "A version of the file {{resourceName}} has been added in the workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
           }
         },
         "DELETE": {

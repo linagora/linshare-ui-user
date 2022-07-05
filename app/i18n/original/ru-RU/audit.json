@@ -735,6 +735,10 @@
             "AUTHOR": {
               "SENTENCE": "Редакция файла {{resourceName}} была добавлена в рабочую группу {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+            },
+            "VIEWER": {
+              "SENTENCE": "Редакция файла {{resourceName}} была добавлена в рабочую группу {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
             }
           },
           "DELETE": {

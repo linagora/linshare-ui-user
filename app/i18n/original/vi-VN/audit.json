@@ -735,6 +735,10 @@
           "AUTHOR": {
             "SENTENCE": "Bản sửa đổi của tệp {{resourceName}} đã bị xóa khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "Bản sửa đổi của tệp {{resourceName}} đã bị xóa khỏi Nhóm làm việc {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
           }
         },
         "DELETE": {

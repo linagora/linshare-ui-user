@@ -733,7 +733,11 @@
       "WORKGROUP_DOCUMENT_REVISION": {
         "CREATE": {
           "AUTHOR": {
-            "SENTENCE": "Une version du fichier {{resourceName}} à été ajoutée dans le Groupe de Travail {{resourceNameVarious}}.",
+            "SENTENCE": "Une version du fichier {{resourceName}} a été ajoutée dans le Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "Une version du fichier {{resourceName}} a été ajoutée dans le Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPLOAD_REVISION"
           }
         },
