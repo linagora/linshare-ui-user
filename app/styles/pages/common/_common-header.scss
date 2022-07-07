@@ -241,6 +241,11 @@ header > ul.header-inner > li.pull-right > ul.top-menu > li > a {
     > li.pull-right > ul.top-menu > li > a {
       color: #fff;
       text-align: center;
+
+      &:hover i {
+        color: #fff;
+      }
+
       > i {
         vertical-align: text-top;
         &.ls-uploads{
