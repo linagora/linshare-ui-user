@@ -1,0 +1,19 @@
+{
+  "ACTION": {
+    "GO_TO_MY_SAFE": "Vai a La mia Cassaforte",
+    "VIEW_SAFE_DETAIL": "Vedi dettaglio sicurezza"
+  },
+  "BREADCRUMB_TITLE_SAFE_DETAILS": "Dettagli sicurezza",
+  "POPOVER": {
+    "TITLE": "Dettagli sicurezza",
+    "INFORMATION": "Per favore, copiatela e inviatela al provider."
+  },
+  "TABLE_HEADER": {
+    "ACTIONS": "Azioni",
+    "CONTROL_KEY": "Chiave di controllo",
+    "COUNTRY_CODE": "Codice paese",
+    "CREATION_DATE": "Data creazione",
+    "IUFSC": "IUFSC",
+    "USER_KEY": "Chiave utente"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "UPLOAD_DESTINATION": "Dest.",
+  "UPLOAD_SHARE_ALERT": {
+    "CANCEL": "Cancella",
+    "MAIN_DIALOG_BUTTON_TITLE": "Condividi",
+    "MESSAGE": "${nbErrorFilesSelected} file(s) non può essere condiviso, continuo ?",
+    "MESSAGE_SINGULAR": "Un file all'interno della tua selezione contiene errori e sarà rimosso dalla condivisione. Vuoi ancora condividere i file rimanenti ?",
+    "MESSAGE_PLURAL": "Alcuni file della tua selezione contengono errori e saranno rimossi dalla condivisione. Vuoi ancora condividere i file rimanenti ?",
+    "NO_SHAREABLE_FILE_SELECTED": "I file selezionati contengono errori e non possono essere condivisi",
+    "NO_SHAREABLE_FILE_SELECTED_SINGULAR": "Il file selezionato contiene errori e non può essere condiviso",
+    "TITLE_SINGULAR": "Un file non può essere condiviso.",
+    "TITLE_PLURAL": "${nbErrorFilesSelected} non possono essere condivisi."
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Caricamenti",
+    "SELECT_INFO": "Carica e seleziona i file per condividerli in modo asincrono"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Lascia qui i tuoi file",
+    "COMMENT": "Trascina i tuoi file qui per caricarli",
+    "TITLE_VERSION": "Lascia qui la tua versione",
+    "COMMENT_VERSION": "Trascina qui la tua versione per caricarla",
+    "TITLE_VERSION_NO_RIGHTS": "Non puoi caricare una nuova versione",
+    "COMMENT_VERSION_NO_RIGHTS": "Non hai il diritto necessario"
+  },
+  "DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Condivisione asincrona",
+    "COMMENT": "Carica e condividi i tuoi file senza ritardi."
+  }
+}

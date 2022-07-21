@@ -1,0 +1,83 @@
+{
+  "BACKGROUND_GUEST_MSG": "Creando un account ospite temporaneo, il tuo contatto sarà in grado di scambiare file all'interno di LinShare.",
+  "BACKGROUND_GUESTS_TITLE_MSG": "Creazione di account ospiti",
+  "ACTION": {
+    "ADD_TO_WORKGROUPS": "Aggiungi ai gruppi di lavoro"
+  },
+  "BOUTON_LABEL_TITLE": {
+    "EDIT": "Modifica",
+    "DELETE": "Elimina",
+    "GUEST": "Ospite(i)"
+  },
+  "BREADCRUMB_TITLE_GUEST": "Account Ospite",
+  "GUEST_DETAILS": {
+    "ACTIVATED": "Attivato",
+    "ADMIN": "Amministratore",
+    "ALREADY_A_MEMBER": "Già membro",
+    "AVAILABLE_CONTACTS": "Elenco dei contatti disponibili",
+    "COMMENT": {
+      "EMPTY": "Nessun commento",
+      "TITLE": "Commento"
+    },
+    "DEACTIVATED": "Disattivato",
+    "DETAIL_OF_GUEST_ACCOUNT": "Dettagli account ospite",
+    "DOMAIN": "Dominio",
+    "EDIT_GUEST": "Modifica",
+    "EXPIRE_THE": "Scade il",
+    "MY_SPACE": "Mio spazio",
+    "RESTRICTED_CONTACTS": "Contatti riservati",
+    "UPDATE_OF_GUEST_ACCOUNT": "Modifica account ospite"
+  },
+  "HEADER_GUEST": {
+    "DOMAIN": "Dominio",
+    "SLIDER": {
+      "MY_GUEST": "I miei ospiti",
+      "OTHER_GUEST": "Altri ospiti"
+    }
+
+  },
+  "NC": "N.C.",
+  "ORDER_BY": {
+    "EXPIRATION_DATE": "Data scadenza",
+    "EMAIL": "Email",
+    "DOMAIN_NAME": "Nome dominio"
+  },
+  "SIDEBAR": {
+    "ADMIN_RIGHT": "Non hai i diritti di amministratore per aggiornare questo ospite",
+    "BUTTON": {
+      "CREATE": "Crea",
+      "CANCEL": "Cancella",
+      "UPDATE": "Aggiorna"
+    },
+    "ERROR": {
+      "INVALID_DATE": "La data deve essere maggiore di quella odierna e non può superare la data di scadenza massima che è il: {{date}}",
+      "INVALID_EMAIL": "L'indirizzo e-mail non è valido.",
+      "INVALID_EMPTY_FIELD": "Questo campo non può essere vuoto",
+      "RESTRICTED_CONTACTS_REQUIRED": "L'ospite riservato richiede almeno un contatto."
+    },
+    "LABEL": {
+      "ACTIVATE_USER_SPACE": "Attiva lo spazio utente",
+      "ADD_DESCRIPTION": "Aggiungi la descrizione dell'utente",
+      "ADD_EMAIL": "Aggiungi un messaggio",
+      "ADVANCED_OPTIONS": "Opzioni avanzate",
+      "ALLOW_MODIFICATORS": "Permettere ad altri utenti di modificare questo account",
+      "EMAIL": "Email",
+      "ENTER_DESCRIPTION": "Inserisci la tua descrizione",
+      "ENTER_EMAIL": "Inserisci il tuo messaggio",
+      "EXP_DATE": "Data scadenza",
+      "FIRSTNAME": "Nome",
+      "LASTNAME": "Cognome",
+      "RESTRICT_CONTACTS": "Elenco contatti riservati"
+    },
+    "NOTIFICATION": {
+      "SUCCESS": {
+        "CREATE": "L'account ospite è stato creato con successo",
+        "DELETE": "L'account ospite è stato eliminato con successo",
+        "UPDATE": "L'account ospite è stato aggiornato con successo"
+      }
+    },
+    "TITLE": {
+      "CREATE": "CREA UN ACCOUNT OSPITE"
+    }
+  }
+}

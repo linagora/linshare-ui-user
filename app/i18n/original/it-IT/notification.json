@@ -1,0 +1,154 @@
+{
+  "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "CANCEL_BUTTON": "Cancella!",
+      "CONFIRM_BUTTON": "Copia",
+      "TEXT": "Stai per copiare {singular, select, true{un documento ricevuto} other{{nbItems} documenti ricevuti}} per un totale di {totalSize} nei tuoi file.",
+      "TITLE": "Copia File"
+    },
+    "ON_ITEM_DELETE": {
+      "CANCEL_BUTTON": "Cancella",
+      "CONFIRM_BUTTON": "Si, elimina",
+      "TEXT": {
+        "CONTACTS_LIST": "Stai per rimuovere {singular, select, true{un elenco di contatti} other{{nbItems} elechi di contatti}} ! Attenzione, questa azione non può essere annullata.",
+        "CONTACTS_LIST_CONTACT": "Stai per rimuovere {singular, select, true{un contatto} other{{nbItems} contatti}} ! Attenzione, questa azione non può essere annullata.",
+        "DOCUMENT": "Stai per rimuovere {singular, select, true{un documento} other{{nbItems} documenti}} ! Attenzione, questa azione non può essere annullata.",
+        "GUEST": "Stai per rimuovere {singular, select, true{un ospite} other{{nbItems} ospiti}} ! Attenzione, questa azione non può essere annullata.",
+        "RECEIVED_SHARE": "Stai per rimuovere {singular, select, true{un file condiviso} other{{nbItems} file condivisi}} ! Attenzione, questa azione non può essere annullata.",
+        "WORKGROUP": "Stai per rimuovere {singular, select, true{un gruppo di lavoro} other{{nbItems} gruppi di lavoro}} ! Attenzione, questa azione non può essere annullata.",
+        "WORKSPACE": "Stai per rimuovere {singular, select, true{uno spazio di lavoro} other{{nbItems} spazi di lavoro}} ! Attenzione, questa azione non può essere annullata.",
+        "WORKGROUP_AND_WORKSPACE": "Stai per rimuovere {nbItems} gruppi di lavoro e spazi di lavoro ! Attenzione, questa azione non può essere annullata.",
+        "WORKGROUP_NODE": "Stai per rimuovere {singular, select, true{un documento o cartella} other{{nbItems} documenti o cartelle}} ! Attenzione, questa azione non può essere annullata.",
+        "WORKGROUP_VERSION":"Stai per rimuovere {singular, select, true{una versione} other{{nbItems} versioni}} ! Attenzione, questa azione non può essere annullata.",
+        "WORKGROUP_VERSION_LAST": "Questa è l'ultima versione, stai per cancellare il file! Attenzione, questa azione non può essere annullata.",
+        "WORKGROUP_VERSION_ALL": "Hai selezionato tutte le versioni esistenti, stai per cancellare il file! Attenzione, questa azione non può essere annullata.",
+        "2FA_SHARED_KEY": "Stai per rimuovere la chiave condivisa ! Attenzione, questa azione non può essere annullata."
+      },
+      "TITLE": "Eliminazione"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "Sei sicuro?",
+      "TEXT": "Tutti i valori LocalStorage salvati saranno rimossi",
+      "CONFIRM_BUTTON": "Sì, cancellalo!",
+      "DONE": "Fatto",
+      "IS_CLEARED": "LocalStorage è cancellato"
+    },
+    "ON_MULTIPLE_DOWNLOAD": {
+      "CANCEL_BUTTON": "CANCELLA",
+      "CONFIRM_BUTTON": "OK",
+      "TEXT": "Stai per scaricare {{nbFiles}} file (dimensione totale : {{totalSize}})",
+      "TITLE": "Download Multiplo"
+    },
+    "ON_SHARE_DELETE": {
+      "CANCEL_BUTTON": "Cancella!",
+      "CONFIRM_BUTTON": "Elimina",
+      "TEXT": "Stai per rimuovere una condivisione !",
+      "TITLE": "Sei sicuro?"
+    },
+    "ON_WORKGROUP_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Cancella",
+      "CONFIRM_BUTTON": "Sì, cancella",
+      "TITLE": "Cancellazione di un utente",
+      "TEXT": "Stai per rimuovere {{firstName}} {{lastName}} dal gruppo di lavoro {{sharedSpaceName}}.",
+      "SELF_REMOVE_TEXT": "Stai per rimuoverti dal gruppo di lavoro {{sharedSpaceName}}. Non avrai più accesso a questo gruppo di lavoro."
+    },
+    "ON_WORKSPACE_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Cancella",
+      "CONFIRM_BUTTON": "Si cancella",
+      "TITLE": "Cancellazione di un utente",
+      "TEXT": "Stai per rimuovere {{firstName}} {{lastName}} dallo spazio di lavoro {{sharedSpaceName}} e tutti i gruppi di lavoro correlati.",
+      "SELF_REMOVE_TEXT": "Stai per rimuovere te stesso dall'area di lavoro {{sharedSpaceName}}. Non avrai più accesso a questo spazio di lavoro."
+    },
+    "ON_GUEST_QUICK_CREATE": {
+      "CANCEL_BUTTON": "No",
+      "CONFIRM_BUTTON": "Si",
+      "TITLE": "Crea ospite?",
+      "TEXT": "Inviterai {{mail}} come ospite."
+    }
+  },
+  "TOAST_ALERT": {
+    "ACTION": {
+      "BROWSER_ACTION": "{singular, select, true{Il file o la cartella è stato} other{i file o le cartelle sono stati}} {action, select, moved{spostato(i)} other{copiato(i)}} in : {folderName}.",
+      "CLOSE": "Chiudi",
+      "CONTACTS_LIST_CREATION": "La lista di contatti {{contactsListName}} è stata creata con successo.",
+      "COPY": "{singular, select, true{Il file è stato copiato} other{{nbItems} i file sono stati copiati}} nel tuo Spazio Personale.",
+      "COPY_SAME_FOLDER": "{singular, select, true{Il file è stato copiato} other{I file sono stati copiati}} con successo.",
+      "COPY_VERSION": "Una nuova versione di {{targetNodeName}} è stata aggiunta con successo.",
+      "DELETE": "Eliminazione riuscita",
+      "DELETE_SINGULAR": "L'elemento è stato eliminato con successo.",
+      "DELETE_PLURAL": "Gli elementi sono stati eliminati con successo.",
+      "DELETE_LAST_VERSION":"Il file è stato eliminato con successo.",
+      "DELETE_SINGULAR_VERSION": "La versione è stata eliminata con successo.",
+      "DELETE_PLURAL_VERSION": "Le versioni sono state eliminate con successo.",
+      "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} è stato rimosso con successo dal Gruppo di Lavoro",
+      "DELETE_WORKSPACE_MEMBER": "{{firstName}} {{lastName}} è stato rimosso con successo dallo Spazio di Lavoro",
+      "DETAILS": "Dettagli",
+      "INSERT": "L'elemento' è stata aggiunto con successo.",
+      "REFRESH": "È necessario aggiornare l'applicazione per fare questa azione nell'account",
+      "SHARE": "Il tuo {{singular ? 'file' : 'files'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'è stato inviato' : 'sono stati inviati'}} con successo.",
+      "SHARE_DELETED": "La tua condivisione di file con {{recipient}} è stata rimossa con successo.",
+      "SHARE_ASYNC": "La tua condivisione dei file sarà inviata dopo il caricamento di tutti i file.",
+      "SHARE_FAILED": "La tua condivisione di file {{shareName ? shareName + ' ': ''}}è fallita.",
+      "UPDATE": "L'elemento è stato aggiornato con successo.",
+      "RESTORE": "La versione è stata ripristinata con successo.",
+      "FORWARD": {
+        "ERROR": "Fallito l'inoltro di {nbItems} {singular, select, true{file} other{file}}.",
+        "INFO": "Inoltrato con successo {nbItems} {singular, select, true{file} other{file}}."
+      },
+      "COPY_BEFORE_FORWARD": {
+        "INFO": "{singular, select, true{Il file è stato copiato} other{{nbItems} file sono stati copiati}} nel tuo Spazio Personale ma non può essere condiviso."
+      }
+    },
+    "ACTION_BUTTON": "Visualizza",
+    "ACTION_REFRESH": "Aggiorna",
+    "ERROR": {
+      "BROWSER_ACTION": "{nbNodes} {singular, select, true{file o cartella non può} other{file o cartelle non possono}} essere {action, select, moved{spostato(i)} other{copiato(i)}}",
+      "COPY": {
+        "DEFAULT": "{singular, select, true{Un file non può} other{{nbItems} file non possono}} essere copiato(i)",
+        "26444": "Non hai i diritti sufficienti per eseguire questa operazione"
+      },
+      "DOWNLOAD_FOLDER": "Impossibile scaricare la cartella selezionata, la dimensione dell'archivio è troppo grande",
+      "FILE_NOT_FOUND": "Il file selezionato non è stato trovato",
+      "FILE_UPLOAD": "Il caricamento non è riuscito",
+      "503": "Servizio Indisponibile",
+      "RENAME_NODE": "Un file o una cartella con lo stesso nome esiste già",
+      "RENAME_CONTACTS_LIST": "Esiste già un elenco di contatti con lo stesso nome",
+      "RENAME_INVALID": {
+        "EMPTY": "Il nome non può essere vuoto",
+        "ENDING_POINT": "Il nome non può terminare con il carattere '.'",
+        "REJECTED_CHAR": "Il nome non è valido, non puoi usare i seguenti caratteri: '{{rejectedChar}}'"
+      },
+      "DELETE_ERROR": {
+        "error": "Si è verificato un errore durante l'eliminazione",
+        "26006": "La rimozione di una cartella non vuota non è ancora supportata",
+        "26444": "Non possiedi i diritti per eliminare",
+        "26448": "La versione non è stata trovata",
+        "26449": "Non puoi cancellare l'ultima versione, prova a cancellare l'intero documento"
+      },
+      "NO_RESPONSE_ERROR": "Errore senza risposta del server, vedere i registri.",
+      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} è già membro di questo Gruppo di Lavoro.",
+      "MEMBER_ALREADY_IN_WORKSPACE": "{{firstName}} {{lastName}} è già membro di questo Spazio di Lavoro.",
+      "RESTORE": "Si è verificato un errore durante il ripristino della versione."
+    },
+    "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Inserisci almeno un destinatario o una lista di contatti con cui condividere",
+      "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Si prega di inserire almeno un destinatario",
+      "AT_LEAST_ONE_DOCUMENT": "Nessun file selezionato",
+      "EMAIL_ALREADY_IN_UPLOAD_REQUEST": "Un'email esiste già nell'elenco' dei destinatari",
+      "AUTHOR_ALREADY_EXISTS": "L'autore esiste già nell'elenco'",
+      "CONTACT_STILL_EXISTS" : "è già nell'elenco",
+      "ELEMENTS_NOT_DELETED": "gli elementi non sono stati cancellati",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "1 elemento non è stato eliminato.",
+      "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} elementi non sono stati eliminati.",
+      "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{l'elemento non è stato caricato} other{non sono stati caricati}} .",
+      "ERROR": "Errore :",
+      "ERROR_404": "Errore {{errCode}} - Elemento non trovato",
+      "ERROR_403": "Errore {{errCode}} - Non sei autorizzato a cancellare questo documento",
+      "ERROR_400": "Errore {{errCode}} - La richiesta non può essere realizzata",
+      "ERROR_500": "Errore {{errCode}} - Errore Server",
+      "INVALID_EMAIL": "Email non valida",
+      "ISOLATED_FILE": "Stai visualizzando una selezione di file riservati.",
+      "ENTER_TOKEN_NAME": "Inserisci il nome del token"
+    }
+  }
+}

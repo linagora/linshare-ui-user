@@ -1,0 +1,70 @@
+{
+  "SERVER_RESPONSE": {
+    "HTTP_CODES": {
+      "ERROR_400": "RICHIESTA SBAGLIATA",
+      "ERROR_401": "NON AUTORIZZATO",
+      "ERROR_403": "PROIBITO",
+      "ERROR_404": "NON TROVATO",
+      "ERROR_405": "METODO NON CONSENTITO",
+      "ERROR_408": "TIME OUT RICHIESTA",
+      "ERROR_500": "ERRORE INTERNO DEL SERVER",
+      "ERROR_501": "NON IMPLEMENTATO",
+      "ERROR_502": "BAD GATEWAY",
+      "ERROR_503": "SERVIZIO NON DISPONIBILE",
+      "ERROR_520": "IL SERVER WEB STA RESTITUENDO UN ERRORE SCONOSCIUTO",
+      "ERROR_DEFAULT": "ERRORE NON GESTITO"
+    },
+    "DETAILS": {
+      "DEFAULT": {
+        "NONE": "",
+        "SERVER": "Il server temporaneamente non risponde",
+        "1000": "Errore sconosciuto",
+        "2000": "Errore di autenticazione",
+        "2203": "Non sei autorizzato a cancellare questo ospite",
+        "2204": "Non sei autorizzato ad aggiornare questo ospite",
+        "20000": "Si è verificato un errore con il database",
+        "20001": "Non sei autorizzato a usare questo servizio",
+        "26000": "Il gruppo di lavoro non esiste o è stato rimosso",
+        "26007": "Cartella{{folderName}} non trovata",
+        "26444": "Non avete i diritti",
+        "28000": "L'ospite non è stato trovato",
+        "28001": "L'ospite già esiste",
+        "28403": "Non sei autorizzato ad accedere a questo ospite",
+        "28405": "L'elenco dei contatti riservati agli ospiti è vuoto",
+        "28406": "La ricerca per ospiti non è valida",
+        "38400": "La data di scadenza dell'ospite non è valida",
+        "46011": "La quota dell'account è stata raggiunta",
+        "62005": "Non sei autorizzato a usare questo servizio",
+        "55505": "Non sei autorizzato a creare una voce"
+      },
+      "UPLOAD_ERROR": {
+        "NONE": "Si è verificato un errore durante il caricamento",
+        "200": "Il documento non contiene dati (dimensione = 0 byte)",
+        "3000": "Questo tipo di file è vietato (mime type)",
+        "3002": "Questo tipo di file è vietato",
+        "3003": "Il file è stato rifiutato perché è stato trovato un virus",
+        "3007": "Il file non può essere scansionato",
+        "26007": "Impossibile caricare il file, la cartella non esiste o è stata rimossa",
+        "26444": "Non possiedi i diritti per caricare il file",
+        "39001": "I caricamenti sono attualmente disabilitati poiché è stata attivata la modalità di manutenzione",
+        "40403": "Lo stato del file caricato non può essere trovato",
+        "40404": "Lo stato del file caricato non può essere trovato",
+        "46001": "Errore di configurazione del server, caricamento impossibile",
+        "46002": "Errore di configurazione del server, caricamento impossibile",
+        "46003": "Errore di configurazione del server, caricamento impossibile",
+        "46004": "Errore di configurazione del server, caricamento impossibile",
+        "46010": "La dimensione del file è superiore alla dimensione massima autorizzata ({{maxFileSize}})",
+        "46011": "Non c'è più spazio disponibile sul server, riprova più tardi",
+        "46012": "Non c'è più spazio disponibile sul server, riprova più tardi",
+        "46013": "Non c'è più spazio disponibile sul server, riprova più tardi",
+        "46014": "Non c'è più spazio disponibile sul server ({{quotaAttempt}}), libera spazio e riprova",
+        "46015": "Non c'è più spazio disponibile sul server, riprova più tardi",
+        "46403": "Errore di configurazione del server, caricamento impossibile"
+      },
+      "WORKGROUP_NODES_ERROR": {
+        "26444": "Non hai i diritti per scrivere in questo gruppo di lavoro",
+        "46010": "La dimensione del file è superiore alla dimensione massima consentita"
+      }
+    }
+  }
+}
