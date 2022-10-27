@@ -4,10 +4,8 @@
     "SHARED_KEY_CREATION": {
       "REQUIRED": "Для вашего аккаунта необходима двухфакторная аутентификация. Пожалуйста, активируйте двухфакторную аутентификацию, чтобы продолжить пользоваться LinShare.",
       "INSTRUCTION": "Для активации двухфакторной аутентификации вашего аккаунта:",
-      "STEP_1": "Скачайте и установите приложение FreeOTP, отсканировав QR-код или перейдя по ссылкам",
+      "STEP_1": "Загрузите и установите ваш любимый OTP Authenticator.\nДля Android на Google Play Store или для F-Droid : Freeotp+, Google Authenticator, Microsoft Authenticator, Authy, Aegis или TOTP Authenticator.\nДля IOS на App Store : Freeotp, Google Authenticator, Microsoft Authenticator, Authy или TOTP Authenticator.",
       "STEP_2": "Сгенерируйте ключ совместного пользования, отсканировав QR-код с помощью приложения или используйте ключ, указанный ниже:",
-      "APPSTORE_LINK": "FreeOTP в App Store",
-      "GOOGLEPLAY_LINK": "FreeOTP в Google Play",
       "GENERATE_KEY": "Сгенерируйте ключ совместного пользования",
       "KEY_CREATED_ON": "Ключ совместного пользования создан {{date}}",
       "CAN_NOT_SCAN": "Не можете отсканировать??"
@@ -20,7 +18,7 @@
     },
     "MANUAL_SETUP": {
       "LABEL": "Не можете отсканировать штрих-код?",
-      "STEP_1": "1. В приложении выберите иконку Добавить ключ.",
+      "STEP_1": "1. В любимом приложении OTP Authenticator выберите значок Добавить ключ",
       "STEP_2": "2. Введите эмитента и аккаунт, как указано ниже:",
       "STEP_3": "3. Введите секретный код, указанный ниже:",
       "STEP_4": "4. Убедитесь, что данные настроены правильно:",

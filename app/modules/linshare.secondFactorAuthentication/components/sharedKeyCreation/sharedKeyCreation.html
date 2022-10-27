@@ -10,30 +10,6 @@
     <span class="numbering">1</span>
     <span translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.STEP_1</span>
   </div>
-
-  <div class="instruction-app-install">
-
-    <div class="app-install-links ios">
-      <qrcode
-        text="https://apps.apple.com/us/app/freeotp-authenticator/id872559395?mt=8"
-        logo-image-src="app/modules/linshare.secondFactorAuthentication/images/app-store.svg"
-        size="160"
-      ></qrcode>
-
-      <a target="_blank" href="https://apps.apple.com/us/app/freeotp-authenticator/id872559395" translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.APPSTORE_LINK</a>
-    </div>
-
-    <div class="app-install-links android">
-      <qrcode
-        text="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp"
-        logo-image-src="app/modules/linshare.secondFactorAuthentication/images/google-play.svg"
-        size="160"
-      ></qrcode>
-
-      <a target="_blank" href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp" translate>SECOND_FACTOR_AUTH.SHARED_KEY_CREATION.GOOGLEPLAY_LINK</a>
-    </div>
-
-  </div>
 </div>
 
 <div class="instruction-step">
@@ -64,7 +40,6 @@
       </p>
       <qrcode
         text="{{::sharedKeyCreationVm.freeOTPUri}}"
-        logo-image-src="app/modules/linshare.secondFactorAuthentication/images/freeotp.svg"
         size="160"
       ></qrcode>
 

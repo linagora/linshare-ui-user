@@ -21,7 +21,3 @@ require('./components/sharedKeyRemoval/sharedKeyRemoval');
 require('./components/sharedKeyRemoval/sharedKeyRemovalController');
 require('./controllers/secondFactorAuthenticationController');
 require('./controllers/secondFactorAuthenticationLoginController');
-
-require('./images/app-store.svg');
-require('./images/google-play.svg');
-require('./images/freeotp.svg');

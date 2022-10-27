@@ -4,10 +4,8 @@
     "SHARED_KEY_CREATION": {
       "REQUIRED": "Tài khoản của bạn bắt buộc phải sử dụng yếu tố xác thực thứ 2. Vui lòng bật chức năng này trước khi sử dụng các tính năng khác của LinShare",
       "INSTRUCTION": "Để bật yếu tố xác thực thứ 2:",
-      "STEP_1": "Tải và cài đặt ứng dụng FreeOTP bằng cách quét mã QR hoặc bấm vào link dưới đây",
-      "STEP_2": "Tạo khóa chung, sau đó quét mã QR bằng ứng dụng FreeOTP hoặc thêm khóa mới bằng tay:",
-      "APPSTORE_LINK": "FreeOTP trên App Store",
-      "GOOGLEPLAY_LINK": "FreeOTP trên Google Play",
+      "STEP_1": "Tải xuống và cài đặt của bạn yêu thích OTP Authenticator ứng dụng. \n Đối với Android trên Cửa hàng Google Play hoặc F-Droid: Freeotp +, Google Authenticator, Microsoft Authenticator, Authy, Aegis hoặc TOTP Authenticator. \n Đối với iOS trên App Store: Freeotp, Google Authenticator , Microsoft Authenticator, Authy hoặc TOTP Authenticator.",
+      "STEP_2": "Tạo khóa chung, sau đó quét mã QR bằng ứng dụng OTP Authenticator hoặc thêm khóa mới bằng tay:",
       "GENERATE_KEY": "Tạo Khóa Chung",
       "KEY_CREATED_ON": "Khóa chung được tạo vào {{date}}",
       "CAN_NOT_SCAN": "Bạn không thể quét mã?"
@@ -20,7 +18,7 @@
     },
     "MANUAL_SETUP": {
       "LABEL": "Nếu bạn không thể quét mã?",
-      "STEP_1": "1. Ở trong ứng dụng FreeOTP, chọn ký hiệu thêm khóa",
+      "STEP_1": "1. Ở Trong ứng dụng OTP Authenticator yêu thích, chọn Thêm biểu tượng chìa khóa.",
       "STEP_2": "2. Nhập Bên xác thực và Tài khoản như sau:",
       "STEP_3": "3. Nhập khóa bí mật như sau:",
       "STEP_4": "4. Sử dụng các cấu hình:",

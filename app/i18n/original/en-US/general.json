@@ -215,7 +215,7 @@
   },
   "SECOND_FA_LOGIN": {
     "LOGIN_HEADER": "Second factor authentication",
-    "USAGE": "Input the 6-digit code from your FreeOTP app",
+    "USAGE": "Input the 6-digit code from your favorite OTP Authenticator app",
     "NOTIFICATION": {
       "OTP": "Second factor authentication required",
       "OTP_ERROR": "OTP is wrong or expired",
