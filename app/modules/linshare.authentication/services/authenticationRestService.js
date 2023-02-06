@@ -71,7 +71,7 @@
 
       return responseHandler(Restangular.all(restUrl).withHttpConfig({
         ignoreAuthModule: ignoreAuthModule
-      }).customGET('authorized'), undefined, hideError)
+      }).customGET('authorized', {}, {'X-LinShare-Client-App' : 'Linshare-Web'}), undefined, hideError)
         .then(function(userLoggedIn) {
           deferred.resolve(userLoggedIn);
 
@@ -131,11 +131,13 @@
      * @return {Promise} server response
      * @memberOf Linshare.authentication.authenticationRestService
      */
-    function loginWithAccessToken(token) {
+    function loginWithAccessToken(token, idToken) {
       deferred = $q.defer();
       $log.debug('AuthenticationRestService : loginSSO');
 
       const headers = authenticationUtilsService.buildBearerTokenHeader(token);
+
+      headers['X-LinShare-ID-Token'] = idToken;
 
       Restangular.all(restUrl)
         .withHttpConfig({ ignoreAuthModule: true })

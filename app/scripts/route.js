@@ -9,14 +9,15 @@
     .module('linshareUiUserApp')
     .config(routerConfiguration);
 
-  routerConfiguration.$inject = ['_', '$stateProvider', '$urlRouterProvider', 'lsAppConfig'];
+  routerConfiguration.$inject = ['_', '$stateProvider', '$urlRouterProvider', 'lsAppConfig', '$locationProvider'];
 
   /**
    * @namespace routerConfiguration
    * @desc Router configuration for the LinShare APP
    * @memberOf LinShareUiUserApp
    */
-  function routerConfiguration(_, $stateProvider, $urlRouterProvider, lsAppConfig) {
+  function routerConfiguration(_, $stateProvider, $urlRouterProvider, lsAppConfig, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $urlRouterProvider
       .when(/language\/.*/i, [
         '$window',
@@ -573,7 +574,7 @@
       if ($state.is('oidc.callback') || $state.is('oidc.signin')) {
         return;
       }
-      
+
       authenticationRestService.checkAuthentication(true, true).then(function(data) {
         if (_.isUndefined(data.status)) {
           if ($transition$) {

@@ -89,7 +89,7 @@
     }
 
     function buildBearerTokenHeader(token) {
-      return { Authorization: 'Bearer ' + token };
+      return { Authorization: 'Bearer ' + token, 'X-LinShare-Client-App' : 'Linshare-Web' };
     }
   }
 })();

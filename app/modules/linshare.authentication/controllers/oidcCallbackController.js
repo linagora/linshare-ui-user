@@ -26,7 +26,7 @@ function oidcCallbackController(
   oidcService.signinRedirectCallback()
     .then(user => {
       if (user && user.access_token) {
-        return submitToken(user.access_token);
+        return submitToken(user.access_token, user.id_token);
       }
 
       return $q.reject();
@@ -41,8 +41,8 @@ function oidcCallbackController(
     });
 
 
-  function submitToken(token) {
-    return authenticationRestService.loginWithAccessToken(token)
+  function submitToken(token, idToken) {
+    return authenticationRestService.loginWithAccessToken(token, idToken)
       .then(user => {
         toastService.info({
           key: 'LOGIN.NOTIFICATION.SUCCESS',

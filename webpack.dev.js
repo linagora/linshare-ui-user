@@ -9,10 +9,13 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
+    historyApiFallback: {
+      index: 'index.html'
+    },
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 20081,
-    host: '0.0.0.0',
+    port: 3000,
+    host: 'localhost',
     disableHostCheck: DISABLE_HOST_CHECK,
     proxy: [
       {
