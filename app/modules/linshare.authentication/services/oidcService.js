@@ -16,7 +16,8 @@ function oidcService(lsAppConfig) {
     scope: lsAppConfig.oidcSetting.scope,
     redirect_uri: `${window.location.origin}/oidc/callback`,
     post_logout_redirect_uri: `${window.location.origin}/`,
-    response_type: 'code'
+    response_type: 'code',
+    loadUserInfo: lsAppConfig.oidcSetting.loadUserInfo
   });
 
   return {

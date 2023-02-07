@@ -85,7 +85,8 @@
         authority: 'https://auth.linshare.local/',
         client_id: 'linshare',
         client_secret: 'linshare',
-        scope: 'openid email profile'
+        scope: 'openid email profile',
+        loadUserInfo: false
       },
 
       mobileOidcEnabled: false,
@@ -95,7 +96,8 @@
         redirect_url: 'linshare.mobile://oauthredirect',
         post_logout_redirect_uri: 'linshare.mobile://oauthredirect',
         response_type: 'code',
-        scope: 'openid email profile'
+        scope: 'openid email profile',
+        loadUserInfo: false
       },
 
       /**
