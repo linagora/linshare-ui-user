@@ -56,6 +56,10 @@ function guestFormController(
         account: {
           uuid: loggedUser.uuid,
           name: `${loggedUser.firstName} ${loggedUser.lastName}`,
+          email: loggedUser.mail,
+          domain: {
+            uuid: loggedUser.domain
+          }
         }
       }];
     }

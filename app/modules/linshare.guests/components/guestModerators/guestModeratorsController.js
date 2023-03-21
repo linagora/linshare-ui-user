@@ -115,6 +115,10 @@ function guestModeratorsController(_, $q, guestRestService, authenticationRestSe
         account: {
           uuid: autocompleteResult.identifier,
           name: autocompleteResult.label.name,
+          email: autocompleteResult.mail,
+          domain: {
+            uuid: autocompleteResult.domain
+          }
         }
       }).then(moderator => {
         guestModeratorsVm.moderators.push(moderator);
