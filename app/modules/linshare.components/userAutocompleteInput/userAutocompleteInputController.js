@@ -86,7 +86,7 @@ function userAutocompleteInputController(
   }
 
   function searchUsers() {
-    return autocompleteUserRestService.search(inputVm.searchPattern, inputVm.searchType)
+    return autocompleteUserRestService.search(inputVm.searchPattern, inputVm.searchType, inputVm.accountType)
       .then(checkEmptyResult)
       .then(generateLabels);
   }

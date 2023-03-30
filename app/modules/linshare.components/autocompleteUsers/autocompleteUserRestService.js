@@ -33,15 +33,17 @@
      *  @desc search a User object
      *  @param {String} pattern - The pattern used for search
      *  @param {String} searchType - Type of the search
+     *  @param {String} accountType - Type of account (INTERNAL or GUESTS)
      *  @param {String} threadUuid - The uuid of the User object
      *  @returns {Promise} server response
      *  @memberof LinShare.components.autocompleteUserRestService
      */
-    function search(pattern, searchType, threadUuid) {
-      $log.debug('autocompleteUserRestService : search', pattern, searchType, threadUuid);
+    function search(pattern, searchType, accountType, threadUuid) {
+      $log.debug('autocompleteUserRestService : search', pattern, searchType, accountType, threadUuid);
 
       return handler(Restangular.all(restUrl).one(encodeURIComponent(pattern)).get({
         type: searchType,
+        accountType: accountType,
         threadUuid: threadUuid
       }));
     }

@@ -6,6 +6,7 @@ angular
     controllerAs: 'inputVm',
     bindings: {
       searchType: '@',
+      accountType: '@?',
       placeholder: '@',
       onSelect: '<',
       allowCreatingGuest: '<',
