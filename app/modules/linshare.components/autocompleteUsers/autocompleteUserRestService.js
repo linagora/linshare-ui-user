@@ -38,13 +38,13 @@
      *  @returns {Promise} server response
      *  @memberof LinShare.components.autocompleteUserRestService
      */
-    function search(pattern, searchType, accountType, threadUuid) {
-      $log.debug('autocompleteUserRestService : search', pattern, searchType, accountType, threadUuid);
+    function search(pattern, searchType, threadUuid, accountType) {
+      $log.debug('autocompleteUserRestService : search', pattern, searchType, threadUuid, accountType);
 
       return handler(Restangular.all(restUrl).one(encodeURIComponent(pattern)).get({
         type: searchType,
-        accountType: accountType,
-        threadUuid: threadUuid
+        threadUuid: threadUuid,
+        accountType: accountType
       }));
     }
   }
