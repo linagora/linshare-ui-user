@@ -75,7 +75,15 @@
         downloadLink.setAttribute('download', documentFile.name);
       }
 
-      downloadLink.click();
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+
+        event.initEvent('click', false, true);
+        downloadLink.dispatchEvent(event);
+      } else {
+        downloadLink.click();
+        event.stopPropagation();
+      }
       downloadLinkParent.removeChild(downloadLink);
     }
 
