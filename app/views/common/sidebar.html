@@ -26,12 +26,15 @@
   <div id="navigation" ng-controller="AuthenticationController as authenticationVm">
     <ul class="main-menu profile-menu-links" ng-class="{'show-menu-links' : toggleSlide}">
       <li>
+        <a ui-sref="userProfile">
+          <i class="zmdi zmdi-account"></i> <span translate>USER_PROFILE.TITLE</span>
+        </a>
         <a data-ng-click="authenticationVm.logout(); $flow.cancel()" ui-sref="login">
           <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
         </a>
         <a
           ng-if="authenticationVm.canChangePassword()"
-          ng-click="authenticationVm.goToChangePassword()""
+          ng-click="authenticationVm.goToChangePassword()"
         >
           <i class="zmdi zmdi-lock"></i> <span translate>CHANGE_PASSWORD.TITLE</span>
         </a>
