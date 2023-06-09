@@ -4,7 +4,7 @@
     "SHARED_KEY_CREATION": {
       "REQUIRED": "L'activation de l'authentification double facteur est requise, vous devez l'activer pour continuer à utiliser LinShare",
       "INSTRUCTION": "Pour activer un second facteur d'authentification pour votre compte :",
-      "STEP_1": "Téléchargez et installez l'application d'authentification OTP de votre choix.\nPour Android sur le Google Play Store ou sur le F-Droid : Freeotp+, Google Authenticator, Microsoft Authenticator, Authy, Aegis ou TOTP Authenticator.\nPour IOS sur l'App Store : Freeotp, Google Authenticator, Microsoft Authenticator, Authy ou TOTP Authenticator.",
+      "STEP_1": "Téléchargez et installez l'application d'authentification OTP de votre choix.\nPour Android sur le Google Play Store ou sur F-Droid : FreeOTP+, Google Authenticator, Microsoft Authenticator ou Aegis Authenticator.\nPour iOS sur l'App Store : FreeOTP, Google Authenticator ou Microsoft Authenticator.",
       "STEP_2": "Générez la clé partagée et utilisez votre application d'authentification OTP favorite pour scanner le QR code ou ajoutez la clé comme suit :",
       "GENERATE_KEY": "Générer une clé partagée",
       "KEY_CREATED_ON": "Clé partagée créée le {{date}}",

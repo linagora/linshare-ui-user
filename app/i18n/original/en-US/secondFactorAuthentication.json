@@ -4,7 +4,7 @@
     "SHARED_KEY_CREATION": {
       "REQUIRED": "Second Factor Authentication is required for your account. Please enable Second Factor Authentication to continue using LinShare.",
       "INSTRUCTION": "To enable Second Factor Authentication for your account:",
-      "STEP_1": "Download and install the OTP Authenticator app of your choice.\nFor Android on the Google Play Store or the F-Droid : Freeotp+, Google Authenticator, Microsoft Authenticator, Authy, Aegis or TOTP Authenticator.\nFor IOS on the App Store : Freeotp, Google Authenticator, Microsoft Authenticator, Authy or TOTP Authenticator.",
+      "STEP_1": "Download and install the OTP Authenticator app of your choice.\nFor Android on the Google Play Store or F-Droid : FreeOTP+, Google Authenticator, Microsoft Authenticator or Aegis Authenticator.\nFor iOS on the App Store : FreeOTP, Google Authenticator or Microsoft Authenticator.",
       "STEP_2": "Generate shared key and use your favorite OTP Authenticator app to scan the QR code or add the key as below:",
       "GENERATE_KEY": "Generate Shared Key",
       "KEY_CREATED_ON": "Shared key created on {{date}}",
