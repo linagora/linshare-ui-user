@@ -134,6 +134,10 @@ function guestFormController(
       account: {
         uuid: autocompleteResult.identifier,
         name: autocompleteResult.label.name,
+        email: autocompleteResult.mail,
+        domain: {
+          uuid: autocompleteResult.domain
+        }
       }
     };
 
