@@ -912,6 +912,7 @@
       "CONTACTS_LISTS_CONTACTS": "Contact",
       "DOCUMENT_ENTRY": "Espace Personnel",
       "GUEST": "Compte Invité",
+      "GUEST_MODERATOR": "Modérateurs d’invité",
       "JWT_PERMANENT_TOKEN": "Jeton d'accès permanent (JWT)",
       "SHARE_ENTRY": "Partage",
       "USER": "Utilisateur",

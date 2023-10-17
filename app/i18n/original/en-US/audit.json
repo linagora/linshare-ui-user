@@ -398,6 +398,38 @@
           }
         }
       },
+      "GUEST_MODERATOR": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have created a new Guest Moderator for : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has created a new Guest Moderator for : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "You have deleted the Guest Moderator of : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has deleted the Guest Moderator of : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have edited the Guest Moderator of : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has edited the Guest Moderator of : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "CHANGE_PASSWORD": {
         "AUTHOR": {
           "SENTENCE": "You have changed your account's password.",
@@ -912,6 +944,7 @@
       "CONTACTS_LISTS_CONTACTS": "Contact",
       "DOCUMENT_ENTRY": "File",
       "GUEST": "Guest account",
+      "GUEST_MODERATOR": "Guest moderators",
       "JWT_PERMANENT_TOKEN": "Permanent access token (JWT)",
       "SHARE_ENTRY": "Share",
       "USER": "User",

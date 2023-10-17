@@ -313,6 +313,8 @@
         resourceName = auditAction.resource.subject;
       } else if (auditAction.type === 'UPLOAD_REQUEST_URL') {
         resourceName = auditAction.resource.contactMail;
+      } else if (auditAction.type === 'GUEST_MODERATOR') {
+        resourceName = setFullName(auditAction.resource.guest);
       } else {
         resourceName = auditAction.resource.name;
         if (auditAction.copiedTo) {

@@ -901,6 +901,7 @@
       "CONTACTS_LISTS_CONTACTS": "Tiếp xúc",
       "DOCUMENT_ENTRY": "Tập tin",
       "GUEST": "Tài khoản khách",
+      "GUEST_MODERATOR": "Người kiểm duyệt khách",
       "JWT_PERMANENT_TOKEN": "Mã thông báo truy cập vĩnh viễn (JWT)",
       "SHARE_ENTRY": "Chia sẻ",
       "USER": "Người dùng",

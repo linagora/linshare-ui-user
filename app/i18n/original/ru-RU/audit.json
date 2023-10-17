@@ -912,6 +912,7 @@
         "CONTACTS_LISTS_CONTACTS": "Контакт",
         "DOCUMENT_ENTRY": "Моё пространство",
         "GUEST": "Гостевой аккаунт",
+        "GUEST_MODERATOR": "Приглашенные модераторы",
         "JWT_PERMANENT_TOKEN": "токен постоянного доступа",
         "SHARE_ENTRY": "Общий доступ",
         "USER": "Пользователь",
