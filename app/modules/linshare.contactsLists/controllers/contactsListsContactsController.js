@@ -112,15 +112,26 @@
      * @memberOf LinShare.contactsLists.contactsListsContactsController
      */
     function addRecipientToCreateUsersList(contact) {
-      var itemsListContact = _.find(contactsListsContactsVm.itemsList, {'mail': contact.mail});
+      var itemsListContact = _.find(contactsListsContactsVm.itemsList, {'mail': contact.mail||contact.identifier});
 
       if (_.isUndefined(itemsListContact)) {
-        var newContact = {
-          firstName: contact.firstName || contact.mail.substring(0, contact.mail.indexOf('@')),
-          lastName: contact.lastName || '',
-          mail: contact.mail,
-          mailingListUuid: contactsListsContactsVm.contactsListUuid,
-        };
+        var newContact = null;
+        if (_.isUndefined(contact.mail)) {
+          newContact = {
+            firstName: contact.firstName || contact.identifier.substring(0, contact.identifier.indexOf('@')),
+            lastName: contact.lastName || '',
+            mail: contact.identifier,
+            mailingListUuid: contactsListsContactsVm.contactsListUuid,
+          };
+        }
+        else {
+          newContact = {
+            firstName: contact.firstName || contact.mail.substring(0, contact.mail.indexOf('@')),
+            lastName: contact.lastName || '',
+            mail: contact.mail,
+            mailingListUuid: contactsListsContactsVm.contactsListUuid,
+          };
+        }
 
         saveContact(newContact);
       } else {
