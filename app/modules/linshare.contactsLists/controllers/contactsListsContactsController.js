@@ -182,7 +182,12 @@
           _.remove(contactsListsContactsVm.selectedContacts, restangularizedItem);
           // I keep a copy of the data for the filter module
           contactsListsContactsVm.itemsListCopy = contactsListsContactsVm.itemsList;
-          contactsListsContactsVm.tableParams.reload();
+          contactsListsContactsVm.tableParams.reload().then(function(data) {
+            if (data.length === 0 && contactsListsContactsVm.tableParams.total() > 0) {
+              contactsListsContactsVm.tableParams.page(contactsListsContactsVm.tableParams.page() - 1);
+              contactsListsContactsVm.tableParams.reload();
+            };
+          });
           $scope.mainVm.sidebar.hide(items);
         });
       });
