@@ -61,10 +61,17 @@ function userRecipientsListController(
           .filter(promise => promise.state === 'rejected')
           .map(promise => promise.reason);
 
-        _.remove(userRecipientsListVm.list, item => deleted.some(request => request.uuid === item.uuid));
-        _.remove(userRecipientsListVm.selectedRecipients, selected => deleted.some(request => request.uuid === selected.uuid));
+        _.remove(userRecipientsListVm.list, (item) =>
+          deleted.some((request) => request.recipient === item.uuid)
+        );
 
-        userRecipientsListVm.tableParams.reload();
+        _.remove(userRecipientsListVm.selectedRecipients, (selected) =>
+          deleted.some((request) => request.recipient === selected.uuid)
+        );
+
+        userRecipientsListVm.tableParamsService.reloadTableParams(
+          userRecipientsListVm.list
+        );
         userRecipientsListVm.resetSelectedItems();
 
         if (nondeleted.length) {
