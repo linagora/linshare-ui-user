@@ -116,6 +116,7 @@
 
       if (_.isUndefined(itemsListContact)) {
         var newContact = null;
+
         if (_.isUndefined(contact.mail)) {
           newContact = {
             firstName: contact.firstName || contact.identifier.substring(0, contact.identifier.indexOf('@')),
