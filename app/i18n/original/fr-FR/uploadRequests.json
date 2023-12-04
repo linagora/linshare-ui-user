@@ -12,7 +12,8 @@
     "LOCALE": {
       "ENGLISH": "Anglais",
       "FRENCH": "Français",
-      "RUSSIAN": "Russe"
+      "RUSSIAN": "Russe",
+      "VIETNAMESE": "Vietnamien"
     },
     "CREATION_TYPE": {
       "COLLECTIVE": "Invitation collective",

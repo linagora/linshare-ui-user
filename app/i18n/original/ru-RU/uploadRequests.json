@@ -12,7 +12,8 @@
     "LOCALE": {
       "ENGLISH": "Английский",
       "FRENCH": "Французский",
-      "RUSSIAN": "Русский"
+      "RUSSIAN": "Русский",
+      "VIETNAMESE": "вьетнамский"
     },
     "CREATION_TYPE": {
       "COLLECTIVE": "Коллективная загрузка",
