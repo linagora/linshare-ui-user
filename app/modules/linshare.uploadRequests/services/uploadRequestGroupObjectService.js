@@ -116,7 +116,7 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || undefined;
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || self.defaultActivationDate && moment(self.defaultActivationDate).valueOf() || undefined;
     dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf() || undefined;
     dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf() || undefined;
     dto.label = self.label;
@@ -144,7 +144,7 @@ function UploadRequestGroupObjectService(
     self = this;
     const dto = {};
 
-    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || undefined;
+    dto.activationDate = self.activationDate && moment(self.activationDate).valueOf() || self.defaultActivationDate && moment(self.defaultActivationDate).valueOf() || undefined;
     dto.expiryDate = self.expiryDate && moment(self.expiryDate).valueOf() || undefined;
     dto.notificationDate = self.notificationDate && moment(self.notificationDate).valueOf() || undefined;
     dto.label = self.label;
