@@ -633,7 +633,7 @@
       contactsListsListVm.tableParams.sorting(sortField, contactsListsListVm.toggleSelectedSort ? 'desc' : 'asc');
       var currTarget = $event.currentTarget;
 
-      angular.element('.files .sort-dropdown a ').removeClass('selected-sorting').promise().done(function() {
+      angular.element('.labeled-dropdown.open a').removeClass('selected-sorting').promise().done(function() {
         angular.element(currTarget).addClass('selected-sorting');
       });
     }
