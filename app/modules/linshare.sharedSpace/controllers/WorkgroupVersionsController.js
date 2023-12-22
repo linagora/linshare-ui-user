@@ -493,22 +493,18 @@
       var messageKey = documentUtilsService.itemUtilsConstant.WORKGROUP_VERSION;
       var isLastVersion = false;
 
-      if(workgroupVersionsVm.versionsList.length === versions.length) {
-        isLastVersion = true;
-        messageKey = versions.length === 1
-          ? documentUtilsService.itemUtilsConstant.WORKGROUP_VERSION_LAST
-          : documentUtilsService.itemUtilsConstant.WORKGROUP_VERSION_ALL;
-      }
-
       documentUtilsService.deleteItem(
         versions,
         messageKey,
-        function(versions) {
-          doDeleteVersion(versions, isLastVersion).then(function(deleteVersionsResponse){
+        function (versions) {
+          doDeleteVersion(versions, isLastVersion).then(function (
+            deleteVersionsResponse
+          ) {
             showNotifications(deleteVersionsResponse);
             refreshTable();
           });
-        });
+        }
+      );
     }
 
     // TODO Add a service for delete nodes to avoid the huge duplication in versions and nodes controller
