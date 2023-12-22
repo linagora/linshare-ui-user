@@ -331,7 +331,12 @@ function uploadRequestGroupsController(
         _.remove(uploadRequestGroupsVm.itemsList, item => removedRequests.some(request => request.uuid === item.uuid));
         _.remove(uploadRequestGroupsVm.selectedUploadRequestGroups, selected => removedRequests.some(request => request.uuid === selected.uuid));
 
-        uploadRequestGroupsVm.tableParams.reload();
+        uploadRequestGroupsVm.tableParams.reload().then(function(data) {
+          if (data.length === 0 && uploadRequestGroupsVm.tableParams.total() > 0) {
+            uploadRequestGroupsVm.tableParams.page(uploadRequestGroupsVm.tableParams.page() - 1);
+            uploadRequestGroupsVm.tableParams.reload();
+          };
+        });
 
         return {
           removedRequests,

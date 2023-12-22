@@ -259,7 +259,12 @@
           toastService.success({key: 'TOAST_ALERT.ACTION.DELETE_SINGULAR'});
           _.remove(contactsListsListVm.itemsList, restangularizedItem);
           _.remove(contactsListsListVm.selectedContactsLists, restangularizedItem);
-          contactsListsListVm.tableParams.reload();
+          contactsListsListVm.tableParams.reload().then(function(data) {
+            if (data.length === 0 && contactsListsListVm.tableParams.total() > 0) {
+              contactsListsListVm.tableParams.page(contactsListsListVm.tableParams.page() - 1);
+              contactsListsListVm.tableParams.reload();
+            };
+          });
           $scope.mainVm.sidebar.hide(items);
         });
       });

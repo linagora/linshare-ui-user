@@ -188,7 +188,12 @@ function uploadRequestEntriesController(
         _.remove(uploadRequestEntriesVm.itemsList, item => deletedEntries.some(request => request.uuid === item.uuid));
         _.remove(uploadRequestEntriesVm.selectedEntries, selected => deletedEntries.some(request => request.uuid === selected.uuid));
 
-        uploadRequestEntriesVm.tableParams.reload();
+        uploadRequestEntriesVm.tableParams.reload().then(function(data) {
+          if (data.length === 0 && uploadRequestEntriesVm.tableParams.total() > 0) {
+            uploadRequestEntriesVm.tableParams.page(uploadRequestEntriesVm.tableParams.page() - 1);
+            uploadRequestEntriesVm.tableParams.reload();
+          };
+        });
         uploadRequestEntriesVm.resetSelectedEntries();
 
         if (notDeletedEntries.length) {

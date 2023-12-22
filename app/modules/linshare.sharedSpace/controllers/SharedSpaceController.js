@@ -368,7 +368,12 @@ function SharedSpaceController(
 
         sharedSpaceVm.itemsListCopy = sharedSpaceVm.itemsList; // I keep a copy of the data for the filter module
         filterBoxService.getSetItems(sharedSpaceVm.itemsList);
-        sharedSpaceVm.tableParams.reload();
+        sharedSpaceVm.tableParams.reload().then(function(data) {
+          if (data.length === 0 && sharedSpaceVm.tableParams.total() > 0) {
+            sharedSpaceVm.tableParams.page(sharedSpaceVm.tableParams.page() - 1);
+            sharedSpaceVm.tableParams.reload();
+          };
+        });
         sidebarService.hide(items);
         updateFlagsOnSelectedPages();
       });

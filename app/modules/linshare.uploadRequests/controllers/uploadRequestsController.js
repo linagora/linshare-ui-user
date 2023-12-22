@@ -279,7 +279,12 @@ function uploadRequestsController(
         _.remove(uploadRequestsVm.selectedUploadRequests, selected => removedRequests.some(request => request.uuid === selected.uuid));
         removeFromSelected(removedRequests);
 
-        uploadRequestsVm.tableParams.reload();
+        uploadRequestsVm.tableParams.reload().then(function(data) {
+          if (data.length === 0 && uploadRequestsVm.tableParams.total() > 0) {
+            uploadRequestsVm.tableParams.page(uploadRequestsVm.tableParams.page() - 1);
+            uploadRequestsVm.tableParams.reload();
+          };
+        });
 
         if (removedRequests.some(
           request => uploadRequestsVm.currentSelectedUploadRequest.current && uploadRequestsVm.currentSelectedUploadRequest.current.uuid === request.uuid)

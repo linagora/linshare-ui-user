@@ -112,7 +112,12 @@ function tokenManagementController(
         _.remove(tokenManagementVm.itemsList, item => removedTokens.some(request => request.uuid === item.uuid));
         _.remove(tokenManagementVm.selectedTokens, selected => removedTokens.some(request => request.uuid === selected.uuid));
 
-        tokenManagementVm.tableParams.reload();
+        tokenManagementVm.tableParams.reload().then(function(data) {
+          if (data.length === 0 && tokenManagementVm.tableParams.total() > 0) {
+            tokenManagementVm.tableParams.page(tokenManagementVm.tableParams.page() - 1);
+            tokenManagementVm.tableParams.reload();
+          };
+        });
 
         return {
           removedTokens,

@@ -135,7 +135,12 @@
             .then(function() {
               _.remove(guestVm.selectedGuests, {'uuid': guestObject.uuid});})
             .then(function() {
-              guestVm.tableParams.reload();
+              guestVm.tableParams.reload().then(function(data) {
+                if (data.length === 0 && guestVm.tableParams.total() > 0) {
+                  guestVm.tableParams.page(guestVm.tableParams.page() - 1);
+                  guestVm.tableParams.reload();
+                };
+              });
               sidebarService.hide(guestObjects);
               toastService.success({key: 'SIDEBAR.NOTIFICATION.SUCCESS.DELETE'});
             });

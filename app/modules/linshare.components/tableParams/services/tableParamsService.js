@@ -320,7 +320,12 @@
         itemsList = tableList;
       }
 
-      return tableParams.reload();
+      return tableParams.reload().then(function(data) {
+        if (data.length === 0 && tableParams.total() > 0) {
+          tableParams.page(tableParams.page() - 1);
+          tableParams.reload();
+        };
+      });
     }
 
     /**
