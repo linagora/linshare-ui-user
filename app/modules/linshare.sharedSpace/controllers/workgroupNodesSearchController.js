@@ -39,6 +39,7 @@ function workgroupNodesSearchController(
   tableParamsService,
   toastService,
   sidebarService,
+  workgroup,
   workgroupNodesRestService,
   sharedSpaceRestService,
   unitService,
@@ -110,6 +111,8 @@ function workgroupNodesSearchController(
         showItemDetails: item => showSelectedNodeDetails(item)
       }
     );
+
+    workgroupSearchVm.workspace = workgroup.workspace;
 
     buildBreadcrumbs();
     initializeTable();

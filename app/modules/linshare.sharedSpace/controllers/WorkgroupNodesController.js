@@ -167,6 +167,7 @@ function WorkgroupNodesController(
     workgroupNodesVm.folderDetails.workgroupName = workgroup.name;
     workgroupNodesVm.folderDetails.quotaUuid = workgroup.quotaUuid;
     workgroupNodesVm.folderDetails.folderName = currentFolder.name;
+    workgroupNodesVm.workspace = workgroup.workspace;
 
     getBreadcrumb();
     setFabConfig();
