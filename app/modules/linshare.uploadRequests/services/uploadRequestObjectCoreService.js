@@ -126,7 +126,7 @@ function UploadRequestObjectCoreService(
         functionalityOfActivation.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
         functionalityOfActivation.value = !_.isUndefined(clonedData.value)
           && clonedData.unit
-          && moment().add(clonedData.value, clonedData.unit.toLowerCase()).add(1, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).toDate();
+          && moment().add(clonedData.value, clonedData.unit.toLowerCase()).set({ minute: 0, second: 0, millisecond: 0 }).toDate();
       }),
       functionalityRestService.getFunctionalityParams('UPLOAD_REQUEST__DELAY_BEFORE_EXPIRATION').then(data => {
         const clonedData = _.cloneDeep(data || {});
@@ -227,11 +227,11 @@ function UploadRequestObjectCoreService(
 
   function getMinHourOfExpiration() {
     if (moment().format('YYYYMMDD') === moment(self.expiryDate).format('YYYYMMDD')) {
-      return moment().hours() + 1;
+      return moment().hours();
     }
 
     if (moment(self.activationDate).format('YYYYMMDD') === moment(self.expiryDate).format('YYYYMMDD')) {
-      return moment(self.activationDate).hours() + 1;
+      return moment(self.activationDate).hours();
     }
   }
 
@@ -262,7 +262,7 @@ function UploadRequestObjectCoreService(
 
   function getMinHourOfActivation() {
     if (moment().format('YYYYMMDD') === moment(self.activationDate).format('YYYYMMDD')) {
-      return moment().hours() + 1;
+      return moment().hours();
     }
   }
 
