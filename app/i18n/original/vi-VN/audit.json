@@ -408,6 +408,60 @@
           }
         }
       },
+      "GUEST_CONVERTING": {
+        "CONVERT": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã chuyển đổi từ Khách sang Tài khoản nội bộ : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã chuyển đổi từ Khách sang Tài khoản nội bộ : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa Tài khoản khách của : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã xóa Tài khoản khách của : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        }
+      },
+      "GUEST_MODERATOR": {
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tạo Người điều hành khách mới cho : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã tạo Người điều hành khách mới cho : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa Người điều hành khách của : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã xóa Người điều hành khách của : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã chỉnh sửa Người điều hành khách của : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã chỉnh sửa Người điều hành khách của : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "JWT_PERMANENT_TOKEN": {
         "CREATE": {
           "AUTHOR": {
@@ -891,7 +945,8 @@
       "UPDATE": "Cập nhật",
       "UPLOAD": "Tải lên tệp",
       "UPLOAD_REVISION":"Tạo bản sửa đổi",
-      "VIEWED": "Đã xem"
+      "VIEWED": "Đã xem",
+      "CONVERT": "Chuyển đổi"
     },
     "TYPE": {
       "ALL": "Tất cả các",
@@ -902,6 +957,7 @@
       "DOCUMENT_ENTRY": "Tập tin",
       "GUEST": "Tài khoản khách",
       "GUEST_MODERATOR": "Người kiểm duyệt khách",
+      "GUEST_CONVERTING": "Khách chuyển đổi",
       "JWT_PERMANENT_TOKEN": "Mã thông báo truy cập vĩnh viễn (JWT)",
       "SHARE_ENTRY": "Chia sẻ",
       "USER": "Người dùng",

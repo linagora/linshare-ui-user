@@ -398,6 +398,28 @@
           }
         }
       },
+      "GUEST_CONVERTING": {
+        "CONVERT": {
+          "AUTHOR": {
+            "SENTENCE": "You have converted from Guest to Internal Account : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has converted from Guest to Internal Account : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "You have deleted the Guest Account of : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has deleted the Guest Account of : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        }
+      },
       "GUEST_MODERATOR": {
         "CREATE": {
           "AUTHOR": {
@@ -934,7 +956,8 @@
       "UPDATE": "Update",
       "UPLOAD": "File upload",
       "UPLOAD_REVISION":"Version uploaded",
-      "VIEWED": "Viewed"
+      "VIEWED": "Viewed",
+      "CONVERT": "Convert"
     },
     "TYPE": {
       "ALL": "All",
@@ -945,6 +968,7 @@
       "DOCUMENT_ENTRY": "File",
       "GUEST": "Guest account",
       "GUEST_MODERATOR": "Guest moderators",
+      "GUEST_CONVERTING": "Guest converting",
       "JWT_PERMANENT_TOKEN": "Permanent access token (JWT)",
       "SHARE_ENTRY": "Share",
       "USER": "User",
