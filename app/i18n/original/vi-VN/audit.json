@@ -462,6 +462,18 @@
           }
         }
       },
+      "USER_UPDATE": {
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Bạn đã chỉnh sửa Tài khoản người dùng của: {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} đã chỉnh sửa Tài khoản Người dùng của: {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
       "JWT_PERMANENT_TOKEN": {
         "CREATE": {
           "AUTHOR": {
@@ -971,7 +983,8 @@
       "WORKGROUP_MEMBER": "Thành viên nhóm làm việc",
       "WORKGROUP_DOCUMENT_REVISION": "Tệp nhóm làm việc (sửa đổi)",
       "WORK_SPACE": "Không gian làm việc",
-      "WORK_SPACE_MEMBER": "Không gian làm việc - Thành viên"
+      "WORK_SPACE_MEMBER": "Không gian làm việc - Thành viên",
+      "USER_UPDATE": "Sửa đổi người dùng"
     }
   },
   "NO_AUDIT": "Chưa có kiểm toán cho tài nguyên này",

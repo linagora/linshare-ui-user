@@ -462,6 +462,18 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
+        "USER_UPDATE": {
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы изменили гостевой Выбрано {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} изменил гостевой Выбрано {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          }
+        },
         "JWT_PERMANENT_TOKEN": {
           "CREATE": {
             "AUTHOR": {
@@ -982,7 +994,8 @@
         "WORKGROUP_MEMBER": "Рабочая группа - Участник",
         "WORKGROUP_DOCUMENT_REVISION": "Рабочая группа - Файл (пересмотр)",
         "WORK_SPACE" : "Рабочее пространство",
-        "WORK_SPACE_MEMBER" : "Рабочее пространство - участник"
+        "WORK_SPACE_MEMBER" : "Рабочее пространство - участник",
+        "USER_UPDATE": "Пользовательские модификации"
       }
     },
     "NO_AUDIT": "У этого файла еще нет истории",

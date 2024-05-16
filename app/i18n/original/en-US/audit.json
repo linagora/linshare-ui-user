@@ -462,6 +462,18 @@
           "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
         }
       },
+      "USER_UPDATE": {
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "You have edited the User Account of : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has edited the User Account of : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "JWT_PERMANENT_TOKEN": {
         "CREATE": {
           "AUTHOR": {
@@ -982,7 +994,8 @@
       "WORKGROUP_MEMBER": "Workgroup member",
       "WORKGROUP_DOCUMENT_REVISION": "Workgroup file (Version)",
       "WORK_SPACE" : "Workspace",
-      "WORK_SPACE_MEMBER" : "Workspace - Member"
+      "WORK_SPACE_MEMBER" : "Workspace - Member",
+      "USER_UPDATE": "User modifications"
     }
   },
   "NO_AUDIT": "No audit for this resource yet",

@@ -462,6 +462,18 @@
           "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
         }
       },
+      "USER_UPDATE": {
+        "UPDATE": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez modifié l'Utilisateur Invité de : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} a modifié l'Utilisateur Invité de : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        }
+      },
       "JWT_PERMANENT_TOKEN": {
         "CREATE": {
           "AUTHOR": {
@@ -982,7 +994,8 @@
       "WORKGROUP_MEMBER": "Groupe de Travail - Membre",
       "WORKGROUP_DOCUMENT_REVISION": "Groupe de Travail - Fichier (Révision)",
       "WORK_SPACE" : "Espace de travail",
-      "WORK_SPACE_MEMBER" : "Espace de travail - Membre"
+      "WORK_SPACE_MEMBER" : "Espace de travail - Membre",
+      "USER_UPDATE": "Modifications Utilisateur"
     }
   },
   "NO_AUDIT": "Cette ressource n'a pas encore d'historique d'activité",
