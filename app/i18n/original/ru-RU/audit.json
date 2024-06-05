@@ -345,7 +345,7 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           },
-          "WORKSPACE_DELETION": {
+          "WORK_SPACE_DELETION": {
             "AUTHOR": {
               "SENTENCE": "вы удалили Рабочее пространство {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
@@ -449,6 +449,16 @@
             "VIEWER": {
               "SENTENCE": "Пользователь {{authorName}} отредактировал гостевого модератора : {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
+          },
+          "GUEST_DELETION": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили гостевого модератора : {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил гостевого модератора : {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             }
           }
         },
@@ -593,6 +603,26 @@
             "VIEWER": {
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
               "SENTENCE": "Администратор отключил двухфакторную аутентификацию (ключ совместного пользования удален)"
+            }
+          },
+          "DELETE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы удалили учетную запись пользователя из {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} удалил учетную запись пользователя из {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+            }
+          },
+          "CREATE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы создали новую учетную запись пользователя для : {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} создал новую учетную запись пользователя для: {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
             }
           }
         },
@@ -903,7 +933,7 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
             }
           },
-          "WORKGROUP_DELETION": {
+          "WORK_GROUP_DELETION": {
             "AUTHOR": {
               "SENTENCE": "Вы удалили рабочую группу {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"

@@ -355,7 +355,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "WORKSPACE_DELETION": {
+        "WORK_SPACE_DELETION": {
           "AUTHOR": {
             "SENTENCE": "Bạn đã xóa một không gian làm việc: {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
@@ -459,6 +459,16 @@
           "VIEWER": {
             "SENTENCE": "{{authorName}} đã chỉnh sửa Người điều hành khách của : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+          }
+        },
+        "GUEST_MODERATOR": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa Người điều hành khách của : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã xóa Người điều hành khách của : {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         }
       },
@@ -593,6 +603,26 @@
           "VIEWER": {
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
             "SENTENCE": "Quản trị viên đã tắt yếu tố xác thực thứ hai của bạn (khóa đã xóa)"
+          }
+        },
+        "DELETE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã xóa Tài khoản người dùng của: {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã xóa Tài khoản người dùng của: {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
+          }
+        },
+        "CREATE": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tạo Tài khoản người dùng mới cho : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã tạo Tài khoản người dùng mới cho: {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.ADDITION"
           }
         }
       },
@@ -893,7 +923,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "WORKGROUP_DELETION": {
+        "WORK_GROUP_DELETION": {
           "AUTHOR": {
             "SENTENCE": "Bạn đã xóa Nhóm làm việc: {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
