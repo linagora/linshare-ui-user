@@ -943,6 +943,28 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
             }
           }
+        },
+        "RESET_PASSWORD": {
+          "FAILURE": {
+            "AUTHOR": {
+              "SENTENCE": "Вы пытались сбросить пароль.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} попытался сбросить пароль.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+            }
+          },
+          "SUCCESS": {
+            "AUTHOR": {
+              "SENTENCE": "Вы успешно сбросили пароль.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} успешно сбросил пароль.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+            }
+          }
         }
       },
       "UPDATED_FIELDS": {
@@ -1025,7 +1047,8 @@
         "WORKGROUP_DOCUMENT_REVISION": "Рабочая группа - Файл (пересмотр)",
         "WORK_SPACE" : "Рабочее пространство",
         "WORK_SPACE_MEMBER" : "Рабочее пространство - участник",
-        "USER_UPDATE": "Пользовательские модификации"
+        "USER_UPDATE": "Пользовательские модификации",
+        "RESET_PASSWORD": "Сбросить пароль"
       }
     },
     "NO_AUDIT": "У этого файла еще нет истории",

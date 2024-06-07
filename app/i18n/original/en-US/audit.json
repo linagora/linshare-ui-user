@@ -943,6 +943,28 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         }
+      },
+      "RESET_PASSWORD": {
+        "FAILURE": {
+          "AUTHOR": {
+            "SENTENCE": "You have tried to reset your password.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has tried to reset the password.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.FAILURE"
+          }
+        },
+        "SUCCESS": {
+          "AUTHOR": {
+            "SENTENCE": "You have successfully reset your password.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has successfully reset the password.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.SUCCESS"
+          }
+        }
       }
     },
     "UPDATED_FIELDS": {
@@ -1025,7 +1047,8 @@
       "WORKGROUP_DOCUMENT_REVISION": "Workgroup file (Version)",
       "WORK_SPACE" : "Workspace",
       "WORK_SPACE_MEMBER" : "Workspace - Member",
-      "USER_UPDATE": "User modifications"
+      "USER_UPDATE": "User modifications",
+      "RESET_PASSWORD": "Reset password"
     }
   },
   "NO_AUDIT": "No audit for this resource yet",
