@@ -604,25 +604,13 @@
           }
         },
         "GUEST_CONVERTING": {
-          "CONVERT": {
-            "AUTHOR": {
-              "SENTENCE": "You avez converti le Compte Invité en Compte Interne : {{userVarious}}.",
-              "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
-            },
-            "VIEWER": {
-              "SENTENCE": "{{authorName}} a converti le Compte Invité en Compte Interne : {{userVarious}}.",
-              "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
-            }
+          "AUTHOR": {
+            "SENTENCE": "You avez converti le Compte Invité en Compte Interne : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
           },
-          "DELETE": {
-            "AUTHOR": {
-              "SENTENCE": "Vous avez supprimé le Compte Invité de : {{userVarious}}.",
-              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
-            },
-            "VIEWER": {
-              "SENTENCE": "{{authorName}} a supprimé le Compte Invité de : {{userVarious}}.",
-              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
-            }
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} a converti le Compte Invité en Compte Interne : {{userVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
           }
         }
       },
