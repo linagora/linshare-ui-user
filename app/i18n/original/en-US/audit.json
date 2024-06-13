@@ -211,7 +211,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} has copied copied the document : {{resourceName}} into his Personal Space.",
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into his Personal Space.",
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },

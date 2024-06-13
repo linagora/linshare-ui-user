@@ -186,8 +186,17 @@ function uploadRequestsController(
           sidebarService.hide();
         }
 
-        _.remove(uploadRequestsVm.itemsList, item => canceledRequests.some(request => request.uuid === item.uuid));
-        uploadRequestsVm.tableParams.reload();
+        _.remove(uploadRequestsVm.itemsList, (item) =>
+          canceledRequests.some((request) => request.uuid === item.uuid)
+        );
+        uploadRequestsVm.tableParams.reload().then(function (data) {
+          if (data.length === 0 && uploadRequestsVm.tableParams.total() > 0) {
+            uploadRequestsVm.tableParams.page(
+              uploadRequestsVm.tableParams.page() - 1
+            );
+            uploadRequestsVm.tableParams.reload();
+          }
+        });
 
         if (notCanceledRequests.length) {
           showToastAlertFor('cancellation', 'error', notCanceledRequests);
