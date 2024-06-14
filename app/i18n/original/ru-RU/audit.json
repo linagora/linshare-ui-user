@@ -450,18 +450,6 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
           }
         },
-        "USER_UPDATE": {
-          "UPDATE": {
-            "AUTHOR": {
-              "SENTENCE": "Вы изменили гостевой Выбрано {{userVarious}}.",
-              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
-            },
-            "VIEWER": {
-              "SENTENCE": "{{authorName}} изменил гостевой Выбрано {{userVarious}}.",
-              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
-            }
-          }
-        },
         "JWT_PERMANENT_TOKEN": {
           "CREATE": {
             "AUTHOR": {
@@ -611,6 +599,18 @@
             "VIEWER": {
               "SENTENCE": "{{authorName}} преобразовал гостевую учетную запись во внутреннюю : {{userVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
+            }
+          },
+          "USER_UPDATE": {
+            "UPDATE": {
+              "AUTHOR": {
+                "SENTENCE": "Вы изменили гостевой Выбрано {{userVarious}}.",
+                "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+              },
+              "VIEWER": {
+                "SENTENCE": "{{authorName}} изменил гостевой Выбрано {{userVarious}}.",
+                "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+              }
             }
           }
         },

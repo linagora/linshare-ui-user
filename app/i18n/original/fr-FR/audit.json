@@ -450,18 +450,6 @@
           "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
         }
       },
-      "USER_UPDATE": {
-        "UPDATE": {
-          "AUTHOR": {
-            "SENTENCE": "Vous avez modifié l'Utilisateur Invité de : {{userVarious}}.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
-          },
-          "VIEWER": {
-            "SENTENCE": "{{authorName}} a modifié l'Utilisateur Invité de : {{userVarious}}.",
-            "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
-          }
-        }
-      },
       "JWT_PERMANENT_TOKEN": {
         "CREATE": {
           "AUTHOR": {
@@ -611,6 +599,18 @@
           "VIEWER": {
             "SENTENCE": "{{authorName}} a converti le Compte Invité en Compte Interne : {{userVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.CONVERT"
+          }
+        },
+        "USER_UPDATE": {
+          "UPDATE": {
+            "AUTHOR": {
+              "SENTENCE": "Vous avez modifié l'Utilisateur Invité de : {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} a modifié l'Utilisateur Invité de : {{userVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE"
+            }
           }
         }
       },
