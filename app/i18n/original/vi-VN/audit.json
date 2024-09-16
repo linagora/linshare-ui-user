@@ -836,6 +836,16 @@
             "SENTENCE": "Tập tin đã được khôi phục tới phiên bản: {{resourceName}}.  ",
             "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
           }
+        },
+        "DOWNLOAD": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã tải xuống phiên bản: {resourceName} từ Nhóm làm việc {resourceNameVarious}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "{authorName} đã tải xuống phiên bản: {resourceName} từ Nhóm làm việc {resourceNameVarious}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DOWNLOAD_REVISION"
+          }
         }
       },
       "WORKGROUP_FOLDER": {
