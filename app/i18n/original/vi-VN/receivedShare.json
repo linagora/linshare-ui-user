@@ -11,13 +11,13 @@
     "DOWNLOAD_FILES" : "Tải xuống các tệp đã chọn",
     "SHOW_MORE_OPTIONS" : "Hiển thị thêm tùy chọn",
     "DATE_OF_MODIFICATION" : "Ngày sửa đổi",
-    "DATE_OF_CREATION" : "Ngày thành lập"
+    "DATE_OF_CREATION" : "Ngày tạo"
   },
   "TABLE_HEADER": {
     "NAME": "Tên",
     "TYPE": "Kiểu",
     "MODIFICATION_DATE": "Ngày cập nhật",
-    "CREATION_DATE": "Ngày thành lập",
+    "CREATION_DATE": "Ngày tạo",
     "SIZE": "Kích thước",
     "ACTION": "Hành động"
   }

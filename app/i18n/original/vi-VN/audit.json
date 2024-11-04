@@ -1041,7 +1041,7 @@
   "NO_AUDIT": "Chưa có kiểm toán cho tài nguyên này",
   "TABLE_HEADER": {
     "ACTION": "Hoạt động",
-    "ACTOR": "Diễn viên",
+    "ACTOR": "Người thực hiện",
     "DATE": "Ngày",
     "DETAIL": "Chi tiết",
     "RECIPIENT": "Người nhận",
@@ -1049,7 +1049,7 @@
     "RESOURCE_TYPE": "Loại tài nguyên"
   },
   "TOOLBAR": {
-    "ORDER_BY": "Đặt bởi",
+    "ORDER_BY": "Sắp xếp theo",
     "FILTER_BEGINNING_DATE": "Ngày bắt đầu",
     "FILTER_ENDING_DATE": "Ngày kết thúc",
     "SEARCH": "Tìm kiếm"

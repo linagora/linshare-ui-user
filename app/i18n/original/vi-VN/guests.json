@@ -46,7 +46,7 @@
   "SIDEBAR": {
     "NO_MODERATOR_RIGHT": "Bạn không có quyền người điều hành để chỉnh sửa khách này",
     "BUTTON": {
-      "CREATE": "Tạo nên",
+      "CREATE": "Tạo",
       "CANCEL": "Hủy bỏ",
       "UPDATE": "Cập nhật"
     },
@@ -66,7 +66,7 @@
       "ENTER_DESCRIPTION": "Nhập mô tả của bạn",
       "ENTER_EMAIL": "Nhập tin nhắn của bạn",
       "EXP_DATE": "Ngày hết hạn",
-      "FIRSTNAME": "Tên đầu tiên",
+      "FIRSTNAME": "Tên",
       "LASTNAME": "Họ",
       "RESTRICT_CONTACTS": "Giới hạn danh sách liên hệ"
     },

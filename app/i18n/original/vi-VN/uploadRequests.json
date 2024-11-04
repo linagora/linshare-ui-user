@@ -4,7 +4,7 @@
     "TITLE_SINGULAR": "Yêu cầu tải lên",
     "SYSTEM_ACCOUNT": "Hệ thống yêu cầu tải lên",
     "STATUS": {
-      "ACTIVE": "Mở",
+      "ACTIVE": "Đang hoạt động",
       "EXPIRED_CLOSED": "Hết hạn | Đóng",
       "ARCHIVED": "Lưu trữ",
       "PENDING": "Đang chờ"
@@ -54,18 +54,18 @@
     },
     "MENU_ENTRIES": {
       "PENDING": "Đang chờ",
-      "ACTIVE_CLOSED": "Mở / Đóng",
+      "ACTIVE_CLOSED": "Đang hoạt động / Đã đóng",
       "ARCHIVES": "Lưu trữ"
     },
     "TABLE": {
-      "SEARCH_BY_LABEL": "Tìm bởi nhãn",
+      "SEARCH_BY_LABEL": "Tìm bởi tên",
       "SEARCH_BY_RECIPIENT": "Tìm bởi người nhận",
       "INFO": "Xem thông tin yêu cầu tải lên",
       "FILTER_BY": {
         "ALL": "Tất cả"
       },
       "HEADERS": {
-        "LABEL": "Nhãn",
+        "LABEL": "Tên",
         "ACTIVATION_DATE": "Ngày kích hoạt",
         "ACTIVATION": "Kích hoạt",
         "ARCHIVE_DATE": "Ngày lưu trữ",
