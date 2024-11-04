@@ -64,12 +64,28 @@
       "UNDEFINED": "Chưa xác định",
       "UPLOAD_DATE": "Ngày tải lên"
     },
-    "TBT__DETAIL_SHARE": {
-      "TBT__SHARE_DESCRIPTION": "",
-      "TBT__NO_DESCRIPTION" : ""
+    "DETAIL_SHARE": {
+      "TITLE": "Đã chia sẻ vào",
+      "SHARED_DATE": "Shared on the",
+      "EXPIRATION_DATE": " Hết hạn vào",
+      "DOWNLOADED": "Đã tải",
+      "TIMES": "lần",
+      "EDIT": "Chỉnh sửa",
+      "VIEW_MORE": "Xem chi tiết",
+      "RESEND": "Gửi lại",
+      "ABORT_SHARE": "Hủy chia sẻ",
+      "SHARE_DESCRIPTION": "Mô tả :",
+      "NO_DESCRIPTION": "Không có mô tả"
     },
     "ACTIVITIES": {
       "TITLE": "Lịch sử hoạt động"
+    },
+    "RECIPIENTS": {
+      "TITLE": "Chia sẻ",
+      "DOWNLOADED": "Đã tải",
+      "NOT_DOWNLOADED": "Chưa được tải",
+      "SEARCH_USERS": "Tìm người nhận",
+      "NO_SHARES": "ệp chưa được chia sẻ."
     },
     "SHARE": {
       "TITLE": "CHIA SẺ",
