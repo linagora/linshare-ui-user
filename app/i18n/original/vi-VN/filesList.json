@@ -4,6 +4,7 @@
     "NAME": "Tên",
     "MODIFICATION_DATE": "Lần thay đổi cuối cùng",
     "CREATION_DATE": "Ngày tạo",
+    "EXPIRATION_DATE": "Ngày hết hạn",
     "SIZE": "Kích cỡ",
     "ACTION": "Tác vụ",
     "AUTHOR": "Người tải lên"
