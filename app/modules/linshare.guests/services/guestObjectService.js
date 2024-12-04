@@ -25,13 +25,16 @@
       allowedToExpiration = {},
       allowedToProlongExpiration = {},
       allowedToRestrict = {},
+      allowedToRestrictContact = {},
       allowedToUpload = {},
       defaultRestrictedContacts = [],
+      defaultRestrictedContactList = [],
       form = {
         activateDescription: false,
         activateEditors: false,
         activateMoreOptions: false,
         activateRestricted: false,
+        activateRestrictedContact: false,
         activateUserSpace: false,
         datepicker: {
           isEditable: false,
@@ -66,6 +69,7 @@
         self.allowedToExpiration = _.cloneDeep(allowedToExpiration);
         self.allowedToProlongExpiration = _.cloneDeep(allowedToProlongExpiration);
         self.allowedToRestrict = _.cloneDeep(allowedToRestrict);
+        self.allowedToRestrictContact = _.cloneDeep(allowedToRestrictContact);
         self.allowedToUpload = _.cloneDeep(allowedToUpload);
         self.canUpload = setPropertyValue(jsonObject.canUpload, _.clone(allowedToUpload.value));
         self.comment = setPropertyValue(jsonObject.comment, '');
@@ -87,6 +91,10 @@
           || !self.canUpload ? false : allowedToRestrict.value));
         self.defaultRestrictedContacts = defaultRestrictedContacts;
         self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(defaultRestrictedContacts));
+        self.restrictedContact = setPropertyValue(jsonObject.restrictedContact, _.clone((!self.allowedToUpload.value && !self.allowedToUpload.canOverride)
+          || !self.canUpload ? false : allowedToRestrictContact.value));
+        self.defaultRestrictedContactList = defaultRestrictedContactList;
+        self.restrictedContactList = setPropertyValue(jsonObject.restrictedContactList, _.cloneDeep(defaultRestrictedContactList));
         self.toDTO = toDTO;
         self.update = update;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
@@ -163,6 +171,13 @@
               defaultRestrictedContacts.push(myself);
             }
           }
+        }),
+        functionalityRestService.getFunctionalityParams('GUESTS__CONTACT_LISTS').then(function(data) {
+          var clonedData = _.cloneDeep(data);
+
+          allowedToRestrictContact = clonedData;
+          allowedToRestrictContact.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
+          allowedToRestrictContact.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
         })
         //TODO: To be put once the back allow editors
         //functionalityRestService.getFunctionalityParams('GUESTS__CAN_ALLOW_EDITORS').then(function(data) {
@@ -227,6 +242,8 @@
       self.expirationDate = _.clone(allowedToExpiration.value);
       self.restricted = _.clone(allowedToRestrict.value);
       self.restrictedContacts = _.cloneDeep(defaultRestrictedContacts);
+      self.restrictedContact = _.clone(allowedToRestrictContact.value);
+      self.restrictedContactList = _.cloneDeep(defaultRestrictedContactList);
       //self.editors = false;
       //self.editorsContacts = [];
       //self.message = '';
@@ -244,6 +261,7 @@
       form.activateDescription = !(_.isUndefined(self.comment) || self.comment === '' || self.comment === null);
       //  form.activateEditors = _.clone(allowedToRestrict.value);
       form.activateRestricted = setPropertyValue(self.restricted, allowedToRestrict.value);
+      form.activateRestrictedContact = setPropertyValue(self.restrictedContact, allowedToRestrictContact.value);
       form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
       form.datepicker.options.maxDate = _.clone(allowedToExpiration.maxValue);
       form.activateMoreOptions = !form.activateUserSpace;
@@ -324,6 +342,7 @@
       guestDTO.lastName = _.defaultTo(self.lastName, '');
       guestDTO.mail = _.defaultTo(self.mail, '');
       guestDTO.restricted = setFunctionalityValue(self.restricted, allowedToRestrict);
+      // guestDTO.restrictedContact = setFunctionalityValue(self.restrictedContact, allowedToRestrictContact);
       if (guestDTO.canUpload) {
         if (allowedToRestrict.enable) {
           guestDTO.restrictedContacts =
@@ -331,9 +350,17 @@
         } else {
           guestDTO.restrictedContacts = null;
         }
+        if (allowedToRestrictContact.enable) {
+          guestDTO.restrictedContactList =
+            _.uniq(_.defaultTo(self.restrictedContactList, defaultRestrictedContactList));
+        } else {
+          guestDTO.restrictedContactList = null;
+        }
       } else {
         guestDTO.restricted = false;
         guestDTO.restrictedContacts = null;
+        guestDTO.restrictedContact = false;
+        guestDTO.restrictedContactList = null;
       }
       if (!_.isUndefined(self.uuid)) {
         guestDTO.uuid = self.uuid;

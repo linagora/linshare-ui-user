@@ -138,6 +138,25 @@
           </div>
         </div>
       </div>
+      <div class="meta-data-ctn" x-ng-show="mainVm.sidebar.getData().selectedGuest.owner.mail === mainVm.sidebar.getData().loggedUser.mail
+                            && mainVm.sidebar.getData().selectedGuest.restrictedContact ">
+        <h2 class="subheader">
+          <i class="ls-contact-list-item"></i> {{'GUEST_DETAILS.AVAILABLE_CONTACTS_LIST' | translate}}
+        </h2>
+        <div class="meta-data-content m-t-20">
+          <div
+            ng-repeat="restrictedContact in mainVm.sidebar.getData().selectedGuest.restrictedContactList track by restrictedContact.uuid"
+            class="custom-list-item" tooltip-placement="top" tooltip-popup-delay="700" tooltip-append-to-body="true"
+            uib-tooltip="{{ ::(restrictedContact.name || '').trim() }}">
+            <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
+            <div class="pull-left name-recipients-ctn">
+              <p class="pull-left inner-text-li">
+                {{ ::(restrictedContact.name || '').trim() }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

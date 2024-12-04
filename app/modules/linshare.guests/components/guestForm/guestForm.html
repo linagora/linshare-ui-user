@@ -340,7 +340,7 @@
                 name="restrict-contact"
                 type="checkbox"
                 ng-checked="formVm.guestObject.form.activateRestricted"
-                ng-change="formVm.onRestrictedChange()"
+                ng-change="formVm.onRestrictedContactsChange()"
                 ng-model="formVm.guestObject.restricted"
                 ng-disabled="!formVm.guestObject.allowedToRestrict.canOverride || !formVm.guestObject.canUpload"
               />
@@ -370,10 +370,10 @@
               uib-tooltip="{{::((restrictedContact.firstName || '') + ' ' + (restrictedContact.lastName || '')).trim()}}"
             >
               <p class="pull-left circle-ctn">
-                <span class="circle  user-bg" ng-if="restrictedContact.domain">
+                <span class="circle user-bg" ng-if="restrictedContact.domain">
                   {{::restrictedContact.firstName.charAt(0)}}
                 </span>
-                <span class="circle  user-bg" ng-if="!restrictedContact.domain">
+                <span class="circle user-bg" ng-if="!restrictedContact.domain">
                   {{::restrictedContact.mail.charAt(0).toUpperCase()}}
                 </span>
               </p>
@@ -398,6 +398,53 @@
             ng-show="!formVm.getRestrictedContactsValidity()"
             class="has-error"
           >
+            <span translate>SIDEBAR.ERROR.RESTRICTED_CONTACTS_REQUIRED</span>
+          </div>
+        </div>
+      </div>
+      <div class="m-b-30 col-xs-12 field-ctn" ng-show="::formVm.guestObject.allowedToRestrictContact.enable">
+        <div class="fg-line">
+          <div class="form-inline">
+            <label for="restrict-contact" class="p-b-10">
+               {{"SIDEBAR.LABEL.RESTRICT_CONTACTS_LIST" | translate}}:
+            </label>
+            <label class="checkbox checkbox-inline">
+              <input id="restrict-contact" name="restrict-contact" type="checkbox"
+                ng-checked="formVm.guestObject.form.activateRestrictedContact" ng-change="formVm.onRestrictedContactsListChange()"
+                ng-model="formVm.guestObject.restrictedContact"
+               ng-disabled="!formVm.guestObject.allowedToRestrictContact.canOverride || !formVm.guestObject.canUpload" />
+              <i class="input-helper"></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!formVm.guestObject.restrictedContact">
+          <ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
+            <div class="form-group fg-line">
+              <div ls-autocomplete-user="SHARING" disabled="!formVm.guestObject.restrictedContact || !formVm.guestObject.canUpload"
+                on-select-function="formVm.addRestrictedContactList"
+                is-required="formVm.guestObject.form.activateUserSpace && formVm.guestObject.form.activateRestrictedContact">
+              </div>
+            </div>
+          </ng-form>
+          <div class="custom-list-body col-xs-12 m-0 p-0">
+            <div class="custom-list-item"
+              ng-repeat="restrictedContact in formVm.guestObject.restrictedContactList | orderBy : '-' as results"
+              tooltip-placement="bottom" tooltip-popup-delay="700"
+              uib-tooltip="{{::(restrictedContact.name || '').trim()}}">
+              <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
+              <div class="pull-left name-recipients-ctn">
+                <p class="pull-left inner-text-li">
+                  {{::restrictedContact.name}}
+                </p>
+                <p class="close-list-icone-btn pull-right"
+                  ng-show="formVm.guestObject.restrictedContact && formVm.guestObject.canUpload"
+                  ng-click="formVm.guestObject.restrictedContactList.splice(results.length - $index -1, 1)">
+                  <i class="zmdi zmdi-close"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div ng-show="!formVm.getRestrictedContactListValidity()" class="has-error">
             <span translate>SIDEBAR.ERROR.RESTRICTED_CONTACTS_REQUIRED</span>
           </div>
         </div>

@@ -14,7 +14,8 @@
     "ACTIVATED": "Activated",
     "ADMIN": "Administrator",
     "ALREADY_A_MEMBER": "Already a member",
-    "AVAILABLE_CONTACTS": "Available contacts list",
+    "AVAILABLE_CONTACTS": "Available contacts",
+    "AVAILABLE_CONTACTS_LIST": "Available contacts list",
     "COMMENT": {
       "EMPTY": "No comment",
       "TITLE": "Comment"
@@ -68,7 +69,9 @@
       "EXP_DATE": "Expiration date",
       "FIRSTNAME": "Firstname",
       "LASTNAME": "Lastname",
-      "RESTRICT_CONTACTS": "Restrict contact list"
+      "RESTRICT_CONTACTS": "Restrict contacts",
+      "RESTRICT_CONTACTS_LIST": "Restrict contacts list",
+      "HIDE_CONTACTS_LIST_MEMBER": "Hide contacts list member"
     },
     "NOTIFICATION": {
       "SUCCESS": {

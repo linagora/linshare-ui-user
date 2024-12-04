@@ -14,7 +14,8 @@
     "ACTIVATED": "Активировано",
     "ADMIN": "Администратор",
     "ALREADY_A_MEMBER": "Уже участник",
-    "AVAILABLE_CONTACTS": "Список доступных контактов",
+    "AVAILABLE_CONTACTS": "Доступные контакты",
+    "AVAILABLE_CONTACTS_LIST": "Список доступных контактов",
     "COMMENT": {
       "EMPTY": "Нет комментариев",
       "TITLE": "Комментарий"
@@ -68,7 +69,9 @@
       "EXP_DATE": "Дата закрытия аккаунта",
       "FIRSTNAME": "Имя",
       "LASTNAME": "Фамилия",
-      "RESTRICT_CONTACTS": "Ограничить список контактов"
+      "RESTRICT_CONTACTS": "Ограничить контакты",
+      "RESTRICT_CONTACTS_LIST": "Ограничить список контактов",
+      "HIDE_CONTACTS_LIST_MEMBER": "Скрыть список контактов участника"
     },
     "NOTIFICATION": {
       "SUCCESS": {

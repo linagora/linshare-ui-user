@@ -14,7 +14,8 @@
     "ACTIVATED": "Activé",
     "ADMIN": "Administrateur",
     "ALREADY_A_MEMBER": "Déjà membre",
-    "AVAILABLE_CONTACTS": "Liste de contacts disponible",
+    "AVAILABLE_CONTACTS": "Contacts disponibles",
+    "AVAILABLE_CONTACTS_LIST": "Liste des contacts disponibles",
     "COMMENT": {
       "EMPTY": "Pas de commentaire",
       "TITLE": "Commentaire"
@@ -30,7 +31,7 @@
   },
   "HEADER_GUEST": {
     "DOMAIN": "Domaine",
-    "SLIDER" : {
+    "SLIDER": {
       "ALL": "Tous les invités",
       "MY_GUESTS_ALL": "Tous mes invités",
       "MY_GUESTS_SIMPLE": "Mes invités : Modérateur",
@@ -68,7 +69,9 @@
       "EXP_DATE": "Date d'expiration",
       "FIRSTNAME": "Prénom",
       "LASTNAME": "Nom",
-      "RESTRICT_CONTACTS": "Restreindre la liste de contact"
+      "RESTRICT_CONTACTS": "Restreindre les contacts",
+      "RESTRICT_CONTACTS_LIST": "Restreindre la liste des contacts",
+      "HIDE_CONTACTS_LIST_MEMBER": "Masquer les membres de la liste des contacts"
     },
     "NOTIFICATION": {
       "SUCCESS": {

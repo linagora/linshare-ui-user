@@ -4,6 +4,7 @@ angular
 
 guestFormController.$inject = [
   '$q',
+  '$log',
   'authenticationRestService',
   'formUtilsService',
   'guestRestService',
@@ -14,6 +15,7 @@ guestFormController.$inject = [
 
 function guestFormController(
   $q,
+  $log,
   authenticationRestService,
   formUtilsService,
   guestRestService,
@@ -30,7 +32,11 @@ function guestFormController(
   formVm.addGuestModerator = addGuestModerator;
   formVm.removeGuestModerator = removeGuestModerator;
   formVm.getRestrictedContactsValidity = getRestrictedContactsValidity;
-  formVm.onRestrictedChange = onRestrictedChange;
+  formVm.getRestrictedContactListValidity = getRestrictedContactListValidity;
+  formVm.onRestrictedContactsChange = onRestrictedContactsChange;
+  formVm.addRestrictedContactList = addRestrictedContactList;
+  formVm.onRestrictedContactsListChange = onRestrictedContactsListChange;
+  formVm.onHideContactsListMemberChange = onHideContactsListMemberChange;
   formVm.toggleRestrictedField = toggleRestrictedField;
   formVm.productionMode = lsAppConfig.production;
   formVm.selectedRole = GUEST_MODERATOR_ROLES[0];
@@ -38,10 +44,19 @@ function guestFormController(
 
   ///////
 
-  function onRestrictedChange() {
+  function onRestrictedContactsChange() {
     if (formVm.guestObject.restricted && !formVm.guestObject.restrictedContacts.length ) {
       formVm.guestObject.restrictedContacts = [...formVm.guestObject.defaultRestrictedContacts];
     }
+  }
+
+  function onRestrictedContactsListChange() {
+    if (formVm.guestObject.restrictedContact && !formVm.guestObject.restrictedContactList.length ) {
+      formVm.guestObject.restrictedContactList = [...formVm.guestObject.defaultRestrictedContactList];
+    }
+  }
+
+  function onHideContactsListMemberChange() {
   }
 
   function $onInit() {
@@ -68,6 +83,7 @@ function guestFormController(
   function toggleRestrictedField() {
     formVm.guestObject.form.activateUserSpace = !formVm.guestObject.form.activateUserSpace;
     formVm.guestObject.restricted = !formVm.guestObject.form.activateUserSpace ? false : formVm.guestObject.restricted;
+    formVm.guestObject.restrictedContact = !formVm.guestObject.form.activateUserSpace ? false : formVm.guestObject.restrictedContact;
   }
 
   function updateGuest() {
@@ -101,6 +117,39 @@ function guestFormController(
     }
 
     return validity;
+  }
+
+  function getRestrictedContactListValidity() {
+    const validity = !formVm.guestObject.canUpload ||
+      !formVm.guestObject.restrictedContact ||
+      (
+        formVm.guestObject.restrictedContact &&
+        formVm.guestObject.restrictedContactList.length > 0
+      );
+
+    if (formVm.form) {
+      formVm.form.$setValidity('restrictedContactListRequired', validity);
+    }
+
+    return validity;
+  }
+
+  function addRestrictedContactList(selectedContactList) {
+    var
+      exists = false,
+      restrictedContactList = formVm.guestObject.restrictedContactList;
+
+    angular.forEach(restrictedContactList, function(element) {
+      if (element.uuid === selectedContactList.identifier) {
+        exists = true;
+        $log.info('The list ' + selectedContactList.listName + ' is already in the mailinglist');
+      }
+    });
+    if (!exists) {
+      restrictedContactList.push( {'name': selectedContactList.listName, 'uuid': selectedContactList.identifier } );
+    }
+
+    return restrictedContactList;
   }
 
   function createGuestModerators(createdGuest) {

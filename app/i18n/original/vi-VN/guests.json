@@ -14,7 +14,8 @@
     "ACTIVATED": "Đã kích hoạt",
     "ADMIN": "Người quản lý",
     "ALREADY_A_MEMBER": "Đã là thành viên hay chưa",
-    "AVAILABLE_CONTACTS": "Danh sách liên hệ khả dụng",
+    "AVAILABLE_CONTACTS": "Danh bạ khả dụng",
+    "AVAILABLE_CONTACTS_LIST": "Danh sách danh bạ khả dụng",
     "COMMENT": {
       "EMPTY": "Miễn bình luận",
       "TITLE": "Bình luận"
@@ -68,7 +69,9 @@
       "EXP_DATE": "Ngày hết hạn",
       "FIRSTNAME": "Tên",
       "LASTNAME": "Họ",
-      "RESTRICT_CONTACTS": "Giới hạn danh sách liên hệ"
+      "RESTRICT_CONTACTS": "Hạn chế danh bạ",
+      "RESTRICT_CONTACTS_LIST": "Hạn chế danh sách liên lạc",
+      "HIDE_CONTACTS_LIST_MEMBER": "Ẩn thành viên danh sách liên lạc"
     },
     "NOTIFICATION": {
       "SUCCESS": {
