@@ -82,6 +82,7 @@
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Добавить пользователей",
+      "INPUT_PLACEHOLDER_CONTACT_LIST": "Добавить списки контактов",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Поиск участников",
       "INVALID_EMAIL": "Введен неверный адрес электронной почты",
       "INVALID_EMPTY": "Неизвестный пользователь",

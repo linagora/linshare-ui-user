@@ -82,6 +82,7 @@
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Thêm người",
+      "INPUT_PLACEHOLDER_CONTACT_LIST": "Thêm danh sách liên hệ",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Tìm kiếm thành viên",
       "INVALID_EMAIL": "địa chỉ email không hợp lệ",
       "INVALID_EMPTY": "Người dùng không xác định",

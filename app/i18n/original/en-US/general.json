@@ -83,6 +83,7 @@
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Add People",
+      "INPUT_PLACEHOLDER_CONTACT_LIST": "Add Contact lists",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Search Member",
       "INVALID_EMAIL": "The email address is invalid",
       "INVALID_EMPTY": "Unknown user",

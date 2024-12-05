@@ -83,6 +83,7 @@
   "COMPONENTS": {
     "AUTOCOMPLETE_USERS": {
       "INPUT_PLACEHOLDER": "Ajouter des utilisateurs",
+      "INPUT_PLACEHOLDER_CONTACT_LIST": "Ajouter des listes de contacts",
       "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Rechercher des membres",
       "INVALID_EMAIL": "L'adresse de courriel saisie est invalide",
       "INVALID_EMPTY": "Aucun utilisateur correspondant",

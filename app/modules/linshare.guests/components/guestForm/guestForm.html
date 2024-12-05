@@ -420,9 +420,11 @@
         <div class="col-xs-12 m-0 p-0 p-l-5 p-r-5" ng-hide="!formVm.guestObject.restrictedContact">
           <ng-form name="restrict" role="form" class="clearfix m-0 no-right-inline-btn ">
             <div class="form-group fg-line">
-              <div ls-autocomplete-user="SHARING" disabled="!formVm.guestObject.restrictedContact || !formVm.guestObject.canUpload"
+              <div ls-autocomplete-user="CONTACT_LIST" disabled="!formVm.guestObject.restrictedContact || !formVm.guestObject.canUpload"
                 on-select-function="formVm.addRestrictedContactList"
-                is-required="formVm.guestObject.form.activateUserSpace && formVm.guestObject.form.activateRestrictedContact">
+                is-required="formVm.guestObject.form.activateUserSpace && formVm.guestObject.form.activateRestrictedContact"
+                placeholder="COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER_CONTACT_LIST"
+                >
               </div>
             </div>
           </ng-form>

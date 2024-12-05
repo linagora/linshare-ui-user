@@ -30,7 +30,8 @@
         onSelectFunction: '=',
         selectedUsersList: '=',
         withEmail: '=?',
-        withGuest: '=?'
+        withGuest: '=?',
+        placeholder: '=?',
       },
       template: require('./autocompleteTemplate.html'),
       controller: 'AutocompleteUsersController',
@@ -57,6 +58,7 @@
       scope.autocompleteUsersVm.form = form;
       scope.autocompleteUsersVm.withEmail =
         (_.isUndefined(scope.autocompleteUsersVm.withEmail)) ? true : scope.autocompleteUsersVm.withEmail;
+      scope.autocompleteUsersVm.placeholder = (_.isUndefined(attrs.placeholder)) ? 'COMPONENTS.AUTOCOMPLETE_USERS.INPUT_PLACEHOLDER' : attrs.placeholder;
       scope.completeType = attrs.lsAutocompleteUser;
       scope.completeThreadUuid = attrs.lsCompleteThreadUuid;
       elm.bind('keypress', function(event) {
