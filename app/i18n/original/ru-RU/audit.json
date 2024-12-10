@@ -829,10 +829,18 @@
             "AUTHOR": {
               "SENTENCE": "Редакция файла {{resourceName}} удалена из рабочей группы {{resourceNameVarious}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+            },
+            "VIEWER": {
+              "SENTENCE": "Редакция файла {{resourceName}} удалена из рабочей группы {{resourceNameVarious}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
             }
           },
           "COPY_FROM_SHARED_SPACE": {
             "AUTHOR": {
+              "SENTENCE": "Документ был восстановлен с версии {{resourceName}}.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+            },
+            "VIEWER": {
               "SENTENCE": "Документ был восстановлен с версии {{resourceName}}.",
               "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
             }

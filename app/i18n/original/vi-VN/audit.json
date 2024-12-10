@@ -558,7 +558,7 @@
         "SECOND_FACTOR_SHARED_KEY_CREATE": {
           "AUTHOR": {
             "ACTION": "@:FILTERS_SELECT.ACTION.UPDATE",
-            "SENTENCE":"Bạn đã bật yếu tố xác thực thứ hai (khóa đã tạo)"
+            "SENTENCE": "Bạn đã bật yếu tố xác thực thứ hai (khóa đã tạo)"
           }
         },
         "SECOND_FACTOR_SHARED_KEY_DELETE": {
@@ -829,10 +829,18 @@
           "AUTHOR": {
             "SENTENCE": "Bản sửa đổi của tệp {{resourceName}} đã bị xóa khỏi Nhóm làm việc {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "Bản sửa đổi của tệp {{resourceName}} đã bị xóa khỏi Nhóm làm việc {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
+            "SENTENCE": "Tập tin đã được khôi phục tới phiên bản: {{resourceName}}.  ",
+            "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          },
+          "VIEWER": {
             "SENTENCE": "Tập tin đã được khôi phục tới phiên bản: {{resourceName}}.  ",
             "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
           }
@@ -1006,7 +1014,7 @@
       "TRANSFER": "chuyển khoản",
       "UPDATE": "Cập nhật",
       "UPLOAD": "Tải lên tệp",
-      "UPLOAD_REVISION":"Tạo bản sửa đổi",
+      "UPLOAD_REVISION": "Tạo bản sửa đổi",
       "VIEWED": "Đã xem",
       "CONVERT": "Chuyển đổi"
     },
@@ -1056,6 +1064,6 @@
   },
   "WORKGROUP": {
     "ANOTHER": "một nhóm wokgroup khác",
-    "CURRENT" : "nhóm làm việc hiện tại"
+    "CURRENT": "nhóm làm việc hiện tại"
   }
 }

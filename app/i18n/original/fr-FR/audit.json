@@ -829,10 +829,18 @@
           "AUTHOR": {
             "SENTENCE": "La version du fichier {{resourceName}} à été supprimée du Groupe de Travail {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "La version du fichier {{resourceName}} à été supprimée du Groupe de Travail {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
+            "SENTENCE": "Le document à été restaurée à partir de {{resourceName}} ",
+            "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          },
+          "VIEWER": {
             "SENTENCE": "Le document à été restaurée à partir de {{resourceName}} ",
             "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
           }
@@ -1007,7 +1015,7 @@
       "TRANSFER": "Transfert",
       "UPDATE": "Edition",
       "UPLOAD": "Dépôt de fichier",
-      "UPLOAD_REVISION":"Création d'une version",
+      "UPLOAD_REVISION": "Création d'une version",
       "VIEWED": "Vu",
       "CONVERT": "Convertir"
     },
@@ -1033,8 +1041,8 @@
       "WORKGROUP_FOLDER": "Groupe de Travail - Dossier",
       "WORKGROUP_MEMBER": "Groupe de Travail - Membre",
       "WORKGROUP_DOCUMENT_REVISION": "Groupe de Travail - Fichier (Révision)",
-      "WORK_SPACE" : "Espace de travail",
-      "WORK_SPACE_MEMBER" : "Espace de travail - Membre",
+      "WORK_SPACE": "Espace de travail",
+      "WORK_SPACE_MEMBER": "Espace de travail - Membre",
       "USER_UPDATE": "Modifications Utilisateur",
       "RESET_PASSWORD": " Réinitialisation du mot de passe"
     }
@@ -1057,6 +1065,6 @@
   },
   "WORKGROUP": {
     "ANOTHER": "un autre Groupe de Travail",
-    "CURRENT" : "le Groupe de Travail courant"
+    "CURRENT": "le Groupe de Travail courant"
   }
 }

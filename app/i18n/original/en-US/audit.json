@@ -829,10 +829,18 @@
           "AUTHOR": {
             "SENTENCE": "The version of the file {{resourceName}} had been removed from the workgroup {{resourceNameVarious}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
+          },
+          "VIEWER": {
+            "SENTENCE": "The version of the file {{resourceName}} had been removed from the workgroup {{resourceNameVarious}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.DELETE_REVISION"
           }
         },
         "COPY_FROM_SHARED_SPACE": {
           "AUTHOR": {
+            "SENTENCE": "The document was restored with the version {{resourceName}}.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
+          },
+          "VIEWER": {
             "SENTENCE": "The document was restored with the version {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.RESTORE_REVISION"
           }
