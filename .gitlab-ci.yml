@@ -6,25 +6,25 @@ image: docker-registry.linagora.com:5000/linshare-snapshots/linshare-build-helpe
 stages:
   - build
 
-check_author:
-  image: docker-registry.linagora.com:5000/lgs-releases/gitlab-integrity-checks:latest
-  stage: build
-  variables:
-    GIT_DEPTH: "1"
-  tags:
-    - docker
-  script:
-    - check_author.py check "$GITLAB_USER_EMAIL" "$GITLAB_USER_NAME" --no-accents
-  except:
-    refs:
-      - master@linagora/lgs/linshare/products/linshare-ui-user
-      - tags@linagora/lgs/linshare/products/linshare-ui-user
-      - /^release-.*/@linagora/lgs/linshare/products/linshare-ui-user
-  retry:
-    max: 2
-    when:
-      - runner_system_failure
-      - stuck_or_timeout_failure
+#check_author:
+  #image: docker-registry.linagora.com:5000/lgs-releases/gitlab-integrity-checks:latest
+  #stage: build
+  #variables:
+    #GIT_DEPTH: "1"
+  #tags:
+    #- docker
+  #script:
+    #- check_author.py check "$GITLAB_USER_EMAIL" "$GITLAB_USER_NAME" --no-accents
+  #except:
+    #refs:
+      #- master@linagora/lgs/linshare/products/linshare-ui-user
+      #- tags@linagora/lgs/linshare/products/linshare-ui-user
+      #- /^release-.*/@linagora/lgs/linshare/products/linshare-ui-user
+  #retry:
+    #max: 2
+    #when:
+      #- runner_system_failure
+      #- stuck_or_timeout_failure
 
 build:
   stage: build
