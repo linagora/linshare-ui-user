@@ -24,6 +24,7 @@
     authenticationVm.goToChangePassword = goToChangePassword;
     authenticationVm.canChangePassword = canChangePassword;
     authenticationVm.changePasswordUrl = lsAppConfig.changePasswordUrl;
+    authenticationVm.hideLogout = lsAppConfig.hideLogout;
 
     ////////////
 

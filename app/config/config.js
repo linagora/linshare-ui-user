@@ -25,6 +25,7 @@
        */
       changePasswordUrl: null,
       resetPasswordUrl: null,
+      hideLogout: false,
 
       // To override the application logo set the url of the image corresponding
       // to the sizes (small 155x29 and big 500x192)

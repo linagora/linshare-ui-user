@@ -158,7 +158,7 @@
                 <li data-ng-if="::!linshareModeProduction">
                   <a href=""><i class="zmdi ls-settings"></i> <span translate>HEADER.SETTINGS</span></a>
                 </li>
-                <li>
+                <li ng-if="!authenticationVm.hideLogout">
                   <a data-ng-click="authenticationVm.logout(); $flow.cancel()">
                     <i class="zmdi zmdi-run"></i> <span translate>HEADER.LOGOUT</span>
                   </a>
