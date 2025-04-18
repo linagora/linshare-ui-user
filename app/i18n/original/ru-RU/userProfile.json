@@ -17,10 +17,12 @@
     },
     "TABS": {
       "FAVOURITE_RECIPIENTS": "Избранные получатели",
-      "RESTRICTED_CONTACTS": "Ограниченные контакты"
+      "RESTRICTED_CONTACTS": "Ограниченные контакты",
+      "RESTRICTED CONTACTS LISTS": "Ограниченные списки контактов"
     },
     "SORTERS": {
       "FIRSTNAME": "Сортировать по имени",
+      "NAME": "Сортировать по имени",
       "LASTNAME": "Сортировать по фамилии",
       "MAIL": "Сортировать по электронной почте"
     },

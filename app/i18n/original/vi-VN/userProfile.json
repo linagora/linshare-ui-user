@@ -17,10 +17,12 @@
     },
     "TABS": {
       "FAVOURITE_RECIPIENTS": "Người nhận yêu thích",
-      "RESTRICTED_CONTACTS": "Địa chỉ liên hệ bị hạn chế"
+      "RESTRICTED_CONTACTS": "Địa chỉ liên hệ bị hạn chế",
+      "RESTRICTED CONTACTS": "Danh sách liên hệ bị hạn chế"
     },
     "SORTERS": {
       "FIRSTNAME": "Sắp xếp theo tên",
+      "NAME": "Sắp xếp theo tên",
       "LASTNAME": "Sắp xếp theo họ",
       "MAIL": "Sắp xếp theo email"
     },

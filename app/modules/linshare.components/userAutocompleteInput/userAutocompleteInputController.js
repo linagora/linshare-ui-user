@@ -45,7 +45,7 @@ function userAutocompleteInputController(
       inputVm.canCreateGuest =  GUESTS.enable && inputVm.allowCreatingGuest;
       inputVm.textLengthToTriggerSearch = COMPLETION.value;
 
-      if (loggedUser.restricted) {
+      if (loggedUser.restricted || loggedUser.restrictedContacts) {
         inputVm.allowAddingEmail = false;
       }
     });

@@ -45,7 +45,7 @@ angular.module('linshare.share')
         angular.extend(expirationDate, SHARE_EXPIRATION);
         angular.extend(secured, ANONYMOUS_URL);
 
-        if (currentUser.restricted) {
+        if (currentUser.restricted || currentUser.restrictedContacts) {
           secured.enable = false;
         }
 

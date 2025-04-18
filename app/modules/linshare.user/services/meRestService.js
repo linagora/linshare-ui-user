@@ -36,7 +36,7 @@ function meRestService($log, Restangular, ServerManagerService) {
   }
 
   function getFavouriteRecipients() {
-    $log.debug('meRestService: getRestrictedContacts');
+    $log.debug('meRestService: getFavouriteRecipients');
 
     return handler(Restangular.all('me').get('favourite_recipients'));
   }

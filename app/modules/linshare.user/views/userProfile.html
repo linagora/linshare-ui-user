@@ -85,12 +85,10 @@
                   USER_PROFILE.INFO.CREATOR
                 </span>
 
-                <span class="info-block__value"
-                  uib-tooltip="{{userProfileVm.profile.author.mail}}"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="top-left"
-                >
-                  <a ng-href="mailto:{{userProfileVm.profile.author.mail}}">{{ (userProfileVm.profile.author.firstName || '') + ' ' + (userProfileVm.profile.author.lastName || '') }}</a>
+                <span class="info-block__value" uib-tooltip="{{userProfileVm.profile.author.mail}}"
+                  tooltip-append-to-body="true" tooltip-placement="top-left">
+                  <a ng-href="mailto:{{userProfileVm.profile.author.mail}}">{{ (userProfileVm.profile.author.firstName
+                    || '') + ' ' + (userProfileVm.profile.author.lastName || '') }}</a>
                 </span>
               </div>
             </div>
@@ -102,10 +100,7 @@
                 </span>
 
                 <div class="info-block__value">
-                  <md-select
-                    ng-model="userProfileVm.profile.mailLocale"
-                    ng-change="userProfileVm.updateProfile()"
-                  >
+                  <md-select ng-model="userProfileVm.profile.mailLocale" ng-change="userProfileVm.updateProfile()">
                     <md-option value="ENGLISH" translate>
                       LOCALE.ENGLISH
                     </md-option>
@@ -128,10 +123,8 @@
                 </span>
 
                 <div class="info-block__value">
-                  <md-select
-                    ng-model="userProfileVm.profile.externalMailLocale"
-                    ng-change="userProfileVm.updateProfile()"
-                  >
+                  <md-select ng-model="userProfileVm.profile.externalMailLocale"
+                    ng-change="userProfileVm.updateProfile()">
                     <md-option value="ENGLISH" translate>
                       LOCALE.ENGLISH
                     </md-option>
@@ -157,7 +150,8 @@
               <user-recipients-list></user-recipients-list>
             </md-tab>
 
-            <md-tab ng-if="userProfileVm.isRestricted" label="{{ 'USER_PROFILE.TABS.RESTRICTED_CONTACTS' | translate }}">
+            <md-tab ng-if="userProfileVm.isRestricted"
+              label="{{ 'USER_PROFILE.TABS.RESTRICTED_CONTACTS' | translate }}">
               <div class="contacts-list-sort">
                 <md-select style="width: 200px;" ng-model="userProfileVm.sorterKey">
                   <md-option value="firstName" translate>USER_PROFILE.SORTERS.FIRSTNAME</md-option>
@@ -170,10 +164,8 @@
                 </md-button>
               </div>
 
-              <div
-                class="recipientsAutocomplete"
-                ng-repeat="contact in userProfileVm.restrictedContacts | orderBy: (userProfileVm.sortAsc ? '+' : '-') + userProfileVm.sorterKey"
-              >
+              <div class="recipientsAutocomplete"
+                ng-repeat="contact in userProfileVm.restrictedContacts | orderBy: (userProfileVm.sortAsc ? '+' : '-') + userProfileVm.sorterKey">
                 <span class="firstLetterFormat">
                   {{contact.firstName.charAt(0)}}
                 </span>
@@ -186,6 +178,38 @@
                   </span>
                   <span class="email">
                     {{contact.mail}}
+                  </span>
+                </p>
+              </div>
+            </md-tab>
+            <md-tab ng-if="userProfileVm.restrictedContactsLists.length > 0"
+              label="{{ 'USER_PROFILE.TABS.RESTRICTED_CONTACTSLISTS' | translate }}">
+              <div class="contacts-list-sort">
+                <md-select style="width: 200px;" ng-model="userProfileVm.sorterKeyRestrictedContactsList">
+                  <md-option value="name" translate>USER_PROFILE.SORTERS.NAME</md-option>
+                  <md-option value="email" translate>USER_PROFILE.SORTERS.MAIL</md-option>
+                </md-select>
+
+                <md-button class="md-icon-button" ng-click="userProfileVm.sortAsc = !userProfileVm.sortAsc">
+                  <i class="zmdi" ng-class="userProfileVm.sortAsc ? 'zmdi-sort-asc' : 'zmdi-sort-desc'"></i>
+                </md-button>
+              </div>
+
+              <div class="recipientsAutocomplete"
+                ng-repeat="contactList in userProfileVm.restrictedContactsLists | orderBy: (userProfileVm.sortAsc ? '+' : '-') + userProfileVm.sorterKeyRestrictedContactsList">
+                <span class="firstLetterFormat">
+                  <i class="zmdi ls-contact-list-item v-center"></i>
+                </span>
+
+                <p class="recipientsInfo">
+                  <span class="user-full-name">
+                    <strong>
+                      {{ (contactList.name || '') }}
+                    </strong>
+                  </span>
+                  <span class="email">
+                    <span translate>BY</span>
+                    {{::userProfileVm.getOwnerName(contactList, userProfileVm.profile.uuid)}}
                   </span>
                 </p>
               </div>

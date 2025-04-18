@@ -17,10 +17,12 @@
     },
     "TABS": {
       "FAVOURITE_RECIPIENTS": "Destinataires favoris",
-      "RESTRICTED_CONTACTS": "Contacts restreints"
+      "RESTRICTED_CONTACTS": "Contacts restreints",
+      "RESTRICTED_CONTACTSLISTS": "Listes de contacts restreints"
     },
     "SORTERS": {
       "FIRSTNAME": "Trier par prénom",
+      "NOM": "Trier par nom",
       "LASTNAME": "Trier par nom de famille",
       "MAIL": "Trier par email"
     },

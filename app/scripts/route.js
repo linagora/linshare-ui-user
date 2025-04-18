@@ -57,7 +57,7 @@
         template: require('../views/common/common.html'),
         resolve: {
           authentication: function(authenticationRestService) {
-            return authenticationRestService.checkAuthentication();
+            return authenticationRestService.checkAuthentication(true, false);
           },
           user: function(authenticationRestService) {
             return authenticationRestService.getCurrentUser();

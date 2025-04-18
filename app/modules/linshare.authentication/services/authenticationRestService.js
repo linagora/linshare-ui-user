@@ -21,7 +21,8 @@
     'Restangular',
     'ServerManagerService',
     'toastService',
-    'authenticationUtilsService'
+    'authenticationUtilsService',
+    'guestRestService'
   ];
 
   /**
@@ -42,7 +43,8 @@
     Restangular,
     ServerManagerService,
     toastService,
-    authenticationUtilsService
+    authenticationUtilsService,
+    guestRestService
   ) {
     let deferred = $q.defer();
     const { responseHandler, getErrorMessage } = ServerManagerService;
@@ -69,13 +71,31 @@
     function checkAuthentication(hideError, ignoreAuthModule) {
       $log.debug('AuthenticationRestService : checkAuthentication');
 
-      return responseHandler(Restangular.all(restUrl).withHttpConfig({
+      return responseHandler(Restangular.all().withHttpConfig({
         ignoreAuthModule: ignoreAuthModule
       }).customGET('authorized', {}, {'X-LinShare-Client-App' : 'Linshare-Web'}), undefined, hideError)
-        .then(function(userLoggedIn) {
-          deferred.resolve(userLoggedIn);
+        .then(function (userLoggedIn) {
+          if (userLoggedIn.accountType === lsAppConfig.accountType.guest) {
+            guestRestService.listGuestRestrictContactslist(userLoggedIn.uuid)
+              .then(contactsLists => {
+                userLoggedIn.restrictedContactsLists = contactsLists;
+                userLoggedIn.restrictedContacts = contactsLists.length > 0 ? true : false;
 
-          return (userLoggedIn);
+                deferred.resolve(userLoggedIn);
+
+                return (userLoggedIn);
+              })
+              .catch(function (error) {
+                deferred.reject(error);
+                $log.debug('current guest not authenticated', error);
+
+                return error;
+              });
+          } else {
+            deferred.resolve(userLoggedIn);
+
+            return (userLoggedIn);
+          }
         }).catch(function(error) {
           deferred.reject(error);
           $log.debug('current user not authenticated', error);
@@ -115,8 +135,25 @@
         .withHttpConfig({ ignoreAuthModule: true })
         .customGET('authorized', {}, headers)
         .then(user => {
-          authService.loginConfirmed(user);
-          deferred.resolve(user);
+          if (user.accountType === lsAppConfig.accountType.guest) {
+            guestRestService.listGuestRestrictContactslist(user.uuid)
+              .then(contactsLists => {
+                user.restrictedContactsLists = contactsLists;
+                user.restrictedContacts = contactsLists.length > 0 ? true : false;
+
+                authService.loginConfirmed(user);
+                deferred.resolve(user);
+              })
+              .catch(function (error) {
+                deferred.reject(error);
+                $log.debug('current guest not authenticated', error);
+
+                return error;
+              });
+          } else {
+            authService.loginConfirmed(user);
+            deferred.resolve(user);
+          }
         })
         .catch(error => handleAuthError(error, { handle2FA: true, login, password }))
         .catch(deferred.reject);
@@ -143,8 +180,25 @@
         .withHttpConfig({ ignoreAuthModule: true })
         .customGET('authorized', {}, headers)
         .then(user => {
-          authService.loginConfirmed(user);
-          deferred.resolve(user);
+          if (user.accountType === lsAppConfig.accountType.guest) {
+            guestRestService.listGuestRestrictContactslist(user.uuid)
+              .then(contactsLists => {
+                user.restrictedContactsLists = contactsLists;
+                user.restrictedContacts = contactsLists.length > 0 ? true : false;
+
+                authService.loginConfirmed(user);
+                deferred.resolve(user);
+              })
+              .catch(function (error) {
+                deferred.reject(error);
+                $log.debug('current guest not authenticated', error);
+
+                return error;
+              });
+          } else {
+            authService.loginConfirmed(user);
+            deferred.resolve(user);
+          }
         })
         .catch(handleAuthError)
         .catch(deferred.reject);

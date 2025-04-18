@@ -29,7 +29,8 @@
         remove,
         removeGuestModerator,
         update,
-        updateGuestModerator
+        updateGuestModerator,
+        listGuestRestrictContactslist
       };
 
     return service;
@@ -135,6 +136,12 @@
         .one('moderators', moderator.uuid)
         .remove()
       );
+    }
+
+    function listGuestRestrictContactslist(guestUuid) {
+      $log.debug('LinshareGuestRestService : listGuestRestrictContactslist', guestUuid);
+
+      return handler(Restangular.one(restUrl, guestUuid).all('contactLists').getList().then(res => Restangular.stripRestangular(res)));
     }
   }
 })();
