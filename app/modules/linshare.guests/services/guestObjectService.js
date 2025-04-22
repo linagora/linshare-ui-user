@@ -274,10 +274,14 @@
       if (!allowedToProlongExpiration.enable) {
         form.datepicker.options.maxDate = _.clone(allowedToExpiration.maxValue);
       } else {
-        const startOfDay = moment().startOf('day').valueOf();
-        const diffTime = startOfDay > self.creationDate ? startOfDay - self.creationDate : 0;
+        if (self.creationDate === '') {
+          form.datepicker.options.maxDate = _.clone(allowedToExpiration.maxValue);
+        } else {
+          const startOfDay = moment().startOf('day').valueOf();
+          const diffTime = startOfDay > self.creationDate ? startOfDay - self.creationDate : 0;
 
-        form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.maxValue).add(diffTime, 'ms'));
+          form.datepicker.options.maxDate = _.clone(moment(allowedToExpiration.maxValue).add(diffTime, 'ms'));
+        }
       }
 
       deferred.resolve(_.cloneDeep(form));
