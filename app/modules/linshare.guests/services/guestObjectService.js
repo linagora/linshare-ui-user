@@ -91,7 +91,7 @@
           || !self.canUpload ? false : allowedToRestrict.value));
         self.defaultRestrictedContacts = defaultRestrictedContacts;
         self.restrictedContacts = setPropertyValue(jsonObject.restrictedContacts, _.cloneDeep(defaultRestrictedContacts));
-        self.restrictedContact = setPropertyValue(jsonObject.restrictedContact, _.clone((!self.allowedToUpload.value && !self.allowedToUpload.canOverride)
+        self.restrictedContact = setPropertyValue(_.isUndefined(jsonObject.restrictedContactList) || jsonObject.restrictedContactList.length > 0, _.clone((!self.allowedToUpload.value && !self.allowedToUpload.canOverride)
           || !self.canUpload ? false : allowedToRestrictContact.value));
         self.defaultRestrictedContactList = defaultRestrictedContactList;
         self.restrictedContactList = setPropertyValue(jsonObject.restrictedContactList, _.cloneDeep(defaultRestrictedContactList));
