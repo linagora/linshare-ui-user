@@ -71,7 +71,7 @@
     function checkAuthentication(hideError, ignoreAuthModule) {
       $log.debug('AuthenticationRestService : checkAuthentication');
 
-      return responseHandler(Restangular.all().withHttpConfig({
+      return responseHandler(Restangular.all(restUrl).withHttpConfig({
         ignoreAuthModule: ignoreAuthModule
       }).customGET('authorized', {}, {'X-LinShare-Client-App' : 'Linshare-Web'}), undefined, hideError)
         .then(function (userLoggedIn) {
