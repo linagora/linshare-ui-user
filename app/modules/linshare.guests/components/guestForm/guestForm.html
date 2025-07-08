@@ -248,7 +248,7 @@
       <a href="" translate>SIDEBAR.LABEL.ADVANCED_OPTIONS</a>
       <i class="zmdi zmdi-chevron-down toggle-chevron pull-right"></i>
     </p>
-    <div ng-hide="!formVm.guestObject.form.activateMoreOptions">
+    <div ng-show="formVm.guestObject.form.activateMoreOptions || !formVm.getRestrictedContactListValidity() || !formVm.getRestrictedContactsValidity()">
       <!--TODO: Once the back allow editors change the ng-show value with "allowedToAddEditors.enable"-->
       <div class="m-b-20 col-xs-12 field-ctn" ng-show="!formVm.productionMode">
         <h5>{{"WIP" | translate}}</h5>

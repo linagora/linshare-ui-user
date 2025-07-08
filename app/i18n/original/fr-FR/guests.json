@@ -55,7 +55,8 @@
       "INVALID_DATE": "La date saisit doit être supérieur à la date d'aujourd'hui et inférieur à la date maximal du: {{date}}",
       "INVALID_EMAIL": "Format d'adresse électronique invalide.",
       "INVALID_EMPTY_FIELD": "Ce champ ne peut être vide.",
-      "RESTRICTED_CONTACTS_REQUIRED": "L'invité restreint nécessite au moins un contact."
+      "RESTRICTED_CONTACTS_REQUIRED": "L'invité restreint nécessite au moins un contact.",
+      "RESTRICTED_CONTACTS_LIST_REQUIRED": "L'invité restreint nécessite au moins une liste de contacts."
     },
     "LABEL": {
       "ACTIVATE_USER_SPACE": "Activer l'espace personnel ",
