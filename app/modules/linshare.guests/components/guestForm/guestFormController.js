@@ -57,6 +57,7 @@ function guestFormController(
       formVm.guestObject.restrictedContactList = [...formVm.guestObject.defaultRestrictedContactList];
     } else {
       formVm.guestObject.restrictedContactList = [];
+      formVm.guestObject.contactListViewPermissions = {};
     }
   }
 

@@ -14,14 +14,19 @@
           <div class="dash-widget-header">
             <div class="design-content">
               <span class="firstLetterFormat"
-                    x-ng-if="mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
+                    x-ng-if="mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName && !mainVm.sidebar.getData().recipientShareDetails.current.hideRecipientDetails">
                 {{mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName.charAt(0)}}
               </span>
               <span class="firstLetterFormat"
-                    x-ng-if="!mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName">
+                    x-ng-if="!mainVm.sidebar.getData().recipientShareDetails.current.recipient.firstName && !mainVm.sidebar.getData().recipientShareDetails.current.hideRecipientDetails">
                 {{mainVm.sidebar.getData().recipientShareDetails.current.recipient.mail.charAt(0)}}
               </span>
-              <p>{{mainVm.sidebar.getData().recipientShareDetails.current.recipient.mail}}</p>
+              <span class="firstLetterFormat"
+                x-ng-if="mainVm.sidebar.getData().recipientShareDetails.current.hideRecipientDetails">
+                {{mainVm.sidebar.getData().recipientShareDetails.current.contactListName.charAt(0)}}
+              </span>
+              <p x-ng-if="!mainVm.sidebar.getData().recipientShareDetails.current.hideRecipientDetails">{{mainVm.sidebar.getData().recipientShareDetails.current.recipient.mail}}</p>
+              <p x-ng-if="mainVm.sidebar.getData().recipientShareDetails.current.hideRecipientDetails">{{mainVm.sidebar.getData().recipientShareDetails.current.contactListName}}</p>
             </div>
             <div class="p-20 bg-design">
               <div class="dash-widget-visits"></div>
