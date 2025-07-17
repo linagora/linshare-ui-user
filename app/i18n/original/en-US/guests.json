@@ -64,6 +64,8 @@
       "ADD_EMAIL": "Add a message",
       "ADVANCED_OPTIONS": "Advanced options",
       "ALLOW_MODIFICATORS": "Allow other users to modify this account",
+      "HIDE_CONTACTS_LIST_MEMBERS": "Hide contacts list members to this guest",
+      "DISPLAY_CONTACTS_LIST_MEMBERS": "Display contacts list members to this guest",
       "EMAIL": "Email",
       "ENTER_DESCRIPTION": "Enter your description",
       "ENTER_EMAIL": "Enter your message",

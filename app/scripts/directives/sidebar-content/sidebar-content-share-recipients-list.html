@@ -33,18 +33,25 @@
       data-ng-repeat="shareElement in mainVm.sidebar.getData().currentSelectedDocument.current.shares |
         filter:mainVm.sidebar.getData().searchShareUsers(mainVm.sidebar.getData().searchShareUsersInput)"
       title="{{shareElement.recipient.domain}}"
+      data-ng-disabled="!shareElement.hideRecipientDetails"
     >
       <span
         class="firstLetterFormat"
-        data-ng-show="!shareElement.recipient.external && shareElement.recipient.firstName"
+        data-ng-show="!shareElement.recipient.external && shareElement.recipient.firstName && shareElement.hideRecipientDetails"
       >
         {{shareElement.recipient.firstName.charAt(0)}}
       </span>
       <span
         class="firstLetterFormat"
-        data-ng-show="shareElement.recipient.external || !shareElement.recipient.firstName"
+        data-ng-show="(shareElement.recipient.external || !shareElement.recipient.firstName) && shareElement.hideRecipientDetails"
       >
         {{shareElement.recipient.mail.charAt(0)}}
+      </span>
+      <span
+        class="firstLetterFormat"
+        data-ng-show="!shareElement.hideRecipientDetails"
+      >
+        {{shareElement.contactListName.charAt(0)}}
       </span>
 
       <p class="recipientsInfo">
@@ -61,9 +68,15 @@
         </span>
         <span
           class="user-full-name"
-          data-ng-show="shareElement.recipient.external || !shareElement.recipient.firstName"
+          data-ng-show="(shareElement.recipient.external || !shareElement.recipient.firstName) && shareElement.hideRecipientDetails"
         >
           <strong>{{shareElement.recipient.mail}}</strong>
+        </span>
+        <span
+          class="user-full-name"
+          data-ng-show="!shareElement.hideRecipientDetails"
+        >
+          <strong>{{shareElement.contactListName}}</strong>
         </span>
         <span
           class="email"

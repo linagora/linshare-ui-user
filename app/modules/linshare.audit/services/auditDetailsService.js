@@ -426,6 +426,8 @@
       if (auditAction.type === TYPES_KEY.ANONYMOUS_SHARE_ENTRY || auditAction.type === TYPES_KEY.SHARE_ENTRY) {
         if (!auditAction.resource.recipient) {
           shareRecipient = auditAction.recipientMail;
+        } else if (auditAction.fromContactList) {
+          shareRecipient = auditAction.contactListMail;
         } else {
           shareRecipient = (auditAction.resource.recipient.uuid === loggedUserUuid) ?
             authorMe : setFullName(auditAction.resource.recipient);

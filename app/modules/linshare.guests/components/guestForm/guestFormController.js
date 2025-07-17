@@ -3,6 +3,7 @@ angular
   .controller('guestFormController', guestFormController);
 
 guestFormController.$inject = [
+  '_',
   '$q',
   '$log',
   'authenticationRestService',
@@ -14,6 +15,7 @@ guestFormController.$inject = [
 ];
 
 function guestFormController(
+  _,
   $q,
   $log,
   authenticationRestService,
@@ -36,7 +38,7 @@ function guestFormController(
   formVm.onRestrictedContactsChange = onRestrictedContactsChange;
   formVm.addRestrictedContactList = addRestrictedContactList;
   formVm.onRestrictedContactsListChange = onRestrictedContactsListChange;
-  formVm.onHideContactsListMemberChange = onHideContactsListMemberChange;
+  formVm.onHideContactsListMembersChange = onHideContactsListMembersChange;
   formVm.toggleRestrictedField = toggleRestrictedField;
   formVm.productionMode = lsAppConfig.production;
   formVm.selectedRole = GUEST_MODERATOR_ROLES[0];
@@ -58,7 +60,16 @@ function guestFormController(
     }
   }
 
-  function onHideContactsListMemberChange() {
+  function onHideContactsListMembersChange(key) {
+    if (formVm.guestObject.contactListViewPermissions.hasOwnProperty(key)) {
+      formVm.guestObject.contactListViewPermissions[key] = !formVm.guestObject.contactListViewPermissions[key];
+    } else if (formVm.guestObject.contactListViewPermissions.hasOwnProperty(key) && _.isUndefined(formVm.guestObject.contactListViewPermissions[key])) {
+      delete formVm.guestObject.contactListViewPermissions[key];
+    } else {
+      formVm.guestObject.contactListViewPermissions[key] = false;
+    }
+
+    return formVm.guestObject.contactListViewPermissions;
   }
 
   function $onInit() {
@@ -148,7 +159,8 @@ function guestFormController(
       }
     });
     if (!exists) {
-      restrictedContactList.push( {'name': selectedContactList.listName, 'uuid': selectedContactList.identifier } );
+      restrictedContactList.push({ 'name': selectedContactList.listName, 'uuid': selectedContactList.identifier });
+      formVm.guestObject.contactListViewPermissions = onHideContactsListMembersChange(selectedContactList.identifier);
     }
 
     return restrictedContactList;

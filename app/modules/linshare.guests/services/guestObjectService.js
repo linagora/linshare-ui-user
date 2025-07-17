@@ -26,15 +26,18 @@
       allowedToProlongExpiration = {},
       allowedToRestrict = {},
       allowedToRestrictContact = {},
+      allowedToHideMembersRestrictContact = {},
       allowedToUpload = {},
       defaultRestrictedContacts = [],
       defaultRestrictedContactList = [],
+      defaultHideMembersRestrictContact = {},
       form = {
         activateDescription: false,
         activateEditors: false,
         activateMoreOptions: false,
         activateRestricted: false,
         activateRestrictedContact: false,
+        activateHideMembersRestrictContact: false,
         activateUserSpace: false,
         datepicker: {
           isEditable: false,
@@ -70,6 +73,7 @@
         self.allowedToProlongExpiration = _.cloneDeep(allowedToProlongExpiration);
         self.allowedToRestrict = _.cloneDeep(allowedToRestrict);
         self.allowedToRestrictContact = _.cloneDeep(allowedToRestrictContact);
+        self.allowedToHideMembersRestrictContact = _.cloneDeep(allowedToHideMembersRestrictContact);
         self.allowedToUpload = _.cloneDeep(allowedToUpload);
         self.canUpload = setPropertyValue(jsonObject.canUpload, _.clone(allowedToUpload.value));
         self.comment = setPropertyValue(jsonObject.comment, '');
@@ -95,10 +99,12 @@
           || !self.canUpload ? false : allowedToRestrictContact.value));
         self.defaultRestrictedContactList = defaultRestrictedContactList;
         self.restrictedContactList = setPropertyValue(jsonObject.restrictedContactList, _.cloneDeep(defaultRestrictedContactList));
+        self.contactListViewPermissions = setPropertyValue(jsonObject.contactListViewPermissions, _.cloneDeep(defaultHideMembersRestrictContact));
         self.toDTO = toDTO;
         self.update = update;
         self.uuid = setPropertyValue(jsonObject.uuid, undefined);
         self.myRole = setPropertyValue(jsonObject.myRole, undefined);
+        self.activateMoreOptions = false;
         setFormValue().then(function(formData) {
           self.form = formData;
           self.form.isRestrictedContact = _.some(self.restrictedContacts, {
@@ -106,6 +112,7 @@
           });
           if (!_.isUndefined(self.uuid)) {
             self.form.activateMoreOptions = true;
+            self.activateMoreOptions = false;
             self.form.display.firstName = _.clone(self.firstName);
             self.form.display.lastName = _.clone(self.lastName);
           }
@@ -178,6 +185,13 @@
           allowedToRestrictContact = clonedData;
           allowedToRestrictContact.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
           allowedToRestrictContact.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
+        }),
+        functionalityRestService.getFunctionalityParams('GUESTS__HIDE_MEMBERS').then(function(data) {
+          var clonedData = _.cloneDeep(data);
+
+          allowedToHideMembersRestrictContact = clonedData;
+          allowedToHideMembersRestrictContact.canOverride = _.isUndefined(clonedData.canOverride) ? false : clonedData.canOverride;
+          allowedToHideMembersRestrictContact.value = _.isUndefined(clonedData.value) ? false : clonedData.value;
         })
         //TODO: To be put once the back allow editors
         //functionalityRestService.getFunctionalityParams('GUESTS__CAN_ALLOW_EDITORS').then(function(data) {
@@ -244,6 +258,8 @@
       self.restrictedContacts = _.cloneDeep(defaultRestrictedContacts);
       self.restrictedContact = _.clone(allowedToRestrictContact.value);
       self.restrictedContactList = _.cloneDeep(defaultRestrictedContactList);
+      self.contactListViewPermissions = _.cloneDeep(allowedToHideMembersRestrictContact.value);
+      self.contactListViewPermissions = _.cloneDeep(defaultHideMembersRestrictContact);
       //self.editors = false;
       //self.editorsContacts = [];
       //self.message = '';
@@ -265,6 +281,7 @@
       form.activateUserSpace = setPropertyValue(self.canUpload, allowedToUpload.value);
       form.datepicker.options.maxDate = _.clone(allowedToExpiration.maxValue);
       form.activateMoreOptions = !form.activateUserSpace;
+      self.activateMoreOptions = false;
 
       form.datepicker.isEditable = true;
       if (!allowedToExpiration.canOverride) {
@@ -359,6 +376,12 @@
             _.uniq(_.defaultTo(self.restrictedContactList, defaultRestrictedContactList));
         } else {
           guestDTO.restrictedContactList = null;
+        }
+        if (allowedToHideMembersRestrictContact.enable) {
+          guestDTO.contactListViewPermissions =
+            _.defaultTo(self.contactListViewPermissions, defaultHideMembersRestrictContact);
+        } else {
+          guestDTO.contactListViewPermissions = null;
         }
       } else {
         guestDTO.restricted = false;

@@ -429,25 +429,35 @@
             </div>
           </ng-form>
           <div class="custom-list-body col-xs-12 m-0 p-0">
-            <div class="custom-list-item"
+            <div class="custom-contactlist-item"
               ng-repeat="restrictedContact in formVm.guestObject.restrictedContactList | orderBy : '-' as results"
-              tooltip-placement="bottom" tooltip-popup-delay="700"
-              uib-tooltip="{{::(restrictedContact.name || '').trim()}}">
+              >
               <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
               <div class="pull-left name-recipients-ctn">
-                <p class="pull-left inner-text-li">
+                <p class="pull-left inner-text-li" tooltip-placement="bottom" tooltip-popup-delay="700"
+              uib-tooltip="{{::(restrictedContact.name || '').trim()}}">
                   {{::restrictedContact.name}}
                 </p>
                 <p class="close-list-icone-btn pull-right"
                   ng-show="formVm.guestObject.restrictedContact && formVm.guestObject.canUpload"
-                  ng-click="formVm.guestObject.restrictedContactList.splice(results.length - $index -1, 1)">
+                  ng-click="formVm.guestObject.restrictedContactList.splice(results.length - $index -1, 1);formVm.guestObject.contactListViewPermissions.splice(results.length - $index -1, 1)">
                   <i class="zmdi zmdi-close"></i>
+                </p>
+                <p class="eye-list-icone-btn pull-right"
+                  ng-show="formVm.guestObject.restrictedContact && formVm.guestObject.allowedToRestrictContact.enable && formVm.guestObject.canUpload && formVm.guestObject.allowedToHideMembersRestrictContact.enable"
+                  ng-class="{ 'disabled' : !formVm.guestObject.allowedToHideMembersRestrictContact.canOverride }"
+                  ng-click="formVm.onHideContactsListMembersChange(formVm.guestObject.restrictedContactList[$index].uuid)"
+                  >
+                    <i class="fa fa-eye-slash" ng-show="!formVm.guestObject.contactListViewPermissions[formVm.guestObject.restrictedContactList[$index].uuid]" aria-hidden="true"
+                    tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip="{{::'SIDEBAR.LABEL.HIDE_CONTACTS_LIST_MEMBERS' | translate}}"></i>
+                    <i class="fa fa-eye" aria-hidden="true" ng-show="formVm.guestObject.contactListViewPermissions[formVm.guestObject.restrictedContactList[$index].uuid]" tooltip-placement="bottom" tooltip-popup-delay="700"
+              uib-tooltip="{{::'SIDEBAR.LABEL.DISPLAY_CONTACTS_LIST_MEMBERS' | translate}}"></i>
                 </p>
               </div>
             </div>
           </div>
           <div ng-show="!formVm.getRestrictedContactListValidity()" class="has-error">
-            <span translate>SIDEBAR.ERROR.RESTRICTED_CONTACTS_REQUIRED</span>
+            <span translate>SIDEBAR.ERROR.RESTRICTED_CONTACTS_LIST_REQUIRED</span>
           </div>
         </div>
       </div>

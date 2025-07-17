@@ -508,7 +508,7 @@ md-content #content-ctn-sidebar {
       p:nth-child(2) {
       }
     }
-    .custom-list-item {
+    .custom-list-item, .custom-contactlist-item {
       display: flex;
       flex: 0 0 45%;
     }
@@ -730,6 +730,99 @@ STANDARD CONTENT
       top: -7px;
     }
   }
+
+  .custom-contactlist-item {
+    padding: 0;
+    margin: 0 0 1em;
+    width: 100%;
+    overflow: hidden;
+    background-color: #ECECEC;
+    height: 24px;
+    border-radius: 25px;
+    float: left;
+    cursor: default;
+    flex: 1 0 100%;
+
+    &.readonly {
+      pointer-events: none;
+
+      .inner-text-li {
+        font-size: 0.91em;
+        padding: 5px 8px 0 7px;
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: default;
+      }
+    }
+
+    &:nth-child(odd) {
+      margin-right: 15px;
+    }
+
+    .inner-text-li {
+      padding: 4px 8px 0 7px;
+      font-size: 0.9em;
+      width: 210px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .close-list-icone-btn {
+      padding-top: 3px;
+      padding-left: 4px;
+      padding-right: 12px;
+      font-size: 1.2em;
+      margin-bottom: 0;
+      width: 25px;
+    }
+
+    .eye-list-icone-btn {
+      padding-top: 2px;
+      padding-left: 4px;
+      padding-right: 12px;
+      font-size: 1.2em;
+      margin-bottom: 0;
+      width: 30px;
+    }
+
+    .circle-ctn {
+      min-width: 24px;
+      margin-bottom: 0;
+      cursor: default;
+
+      .circle {
+        border-radius: 50%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        padding: 3px;
+        font-size: 0.9em;
+        color: #fff;
+        width: 24px;
+        height: 24px;
+
+        .ls-contact-list-item {
+          font-size: 1.25em;
+          line-height: 1.4em;
+        }
+      }
+    }
+
+    .name-recipients-ctn {
+      width: 270px;
+    }
+
+    .savelistBtn {
+      float: right;
+      padding-top: 2px;
+      top: -7px;
+    }
+  }
+
   .custom-list-body {
     padding: 0 !important;
   }

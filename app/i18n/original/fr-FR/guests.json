@@ -64,6 +64,8 @@
       "ADD_EMAIL": "Ajouter un message par email",
       "ADVANCED_OPTIONS": "Options avançées",
       "ALLOW_MODIFICATORS": "Autoriser d'autres utilisateurs à modifier ce compte",
+      "HIDE_CONTACTS_LIST_MEMBERS": "Masquer les membres de la liste de contacts pour cet invité",
+      "DISPLAY_CONTACTS_LIST_MEMBERS": "Afficher les membres de la liste de contacts pour cet invité",
       "EMAIL": "Adresse électronique",
       "ENTER_DESCRIPTION": "Saisissez votre description",
       "ENTER_EMAIL": "Saisissez votre message",

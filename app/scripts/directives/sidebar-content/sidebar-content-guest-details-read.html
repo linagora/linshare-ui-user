@@ -19,18 +19,16 @@
       </div>
     </div>
     <div class="m-b-10">
-      <sidebar-description-input
-        description="mainVm.sidebar.getData().selectedGuest.comment"
-        on-change="mainVm.sidebar.getData().updateCommentOnSelectedGuest"
-      ></sidebar-description-input>
+      <sidebar-description-input description="mainVm.sidebar.getData().selectedGuest.comment"
+        on-change="mainVm.sidebar.getData().updateCommentOnSelectedGuest"></sidebar-description-input>
     </div>
     <div class="content-detail-area">
       <div class="flex-ctn detail-info-ctn">
         <div class="item-l">
           <span class="first-letter user-info text-uppercase">
             {{mainVm.sidebar.getData().selectedGuest.owner.firstName ?
-              mainVm.sidebar.getData().selectedGuest.owner.firstName.charAt(0) :
-              mainVm.sidebar.getData().selectedGuest.owner.mail.charAt(0)}}
+            mainVm.sidebar.getData().selectedGuest.owner.firstName.charAt(0) :
+            mainVm.sidebar.getData().selectedGuest.owner.mail.charAt(0)}}
           </span>
         </div>
         <div class="item-mid">
@@ -39,17 +37,17 @@
             {{mainVm.sidebar.getData().selectedGuest.owner.lastName}}
           </div>
           <div class="info-item-member" tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'medium':locale}}">
+            uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'medium':locale}}">
             <span>
-                {{'INFORMATION_TAB.UPTADED_THE' | translate}} :
-                {{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'longDate':locale}}
-              </span>
+              {{'INFORMATION_TAB.UPTADED_THE' | translate}} :
+              {{mainVm.sidebar.getData().selectedGuest.modificationDate | lsDate:'longDate':locale}}
+            </span>
           </div>
         </div>
         <div class="item-r actions">
           <span title="{{'GUEST_DETAILS.ADMIN' | translate}}">
-             {{'GUEST_DETAILS.ADMIN' | translate}}
-            </span>
+            {{'GUEST_DETAILS.ADMIN' | translate}}
+          </span>
         </div>
       </div>
       <div class="meta-data-ctn">
@@ -60,14 +58,14 @@
           <div>
             <p>{{'INFORMATION_TAB.CREATED_THE' | translate}}:</p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.creationDate | lsDate:'medium':locale}}">
+              uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.creationDate | lsDate:'medium':locale}}">
               {{mainVm.sidebar.getData().selectedGuest.creationDate | lsDate:'longDate':locale}}
             </p>
           </div>
           <div>
             <p>{{'GUEST_DETAILS.EXPIRE_THE' | translate}}</p>
             <p tooltip-placement="bottom" tooltip-popup-delay="500"
-               uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.expirationDate | lsDate:'medium':locale}}">
+              uib-tooltip="{{mainVm.sidebar.getData().selectedGuest.expirationDate | lsDate:'medium':locale}}">
               {{mainVm.sidebar.getData().selectedGuest.expirationDate | lsDate:'longDate':locale}}
             </p>
           </div>
@@ -107,13 +105,27 @@
             </p>
           </div>
           <div>
+            <p>
+              {{'SIDEBAR.LABEL.RESTRICT_CONTACTS_LIST' | translate}}:
+            </p>
+            <p x-ng-if="mainVm.sidebar.getData().selectedGuest.restrictedContact">
+              <a>
+                {{'GUEST_DETAILS.ACTIVATED' | translate}}
+              </a>
+            </p>
+            <p x-ng-if="!mainVm.sidebar.getData().selectedGuest.restrictedContact">
+              {{'GUEST_DETAILS.DEACTIVATED' | translate}}
+            </p>
+
+          </div>
+          <div>
             <p translate>GUEST_MODERATOR.TAB_TITLE</p>
-            <p><a href="" ng-click="mainVm.sidebar.getData().selectedTab = 2" translate>GUEST_MODERATOR.TAB_TITLE</a></p>
+            <p><a href="" ng-click="mainVm.sidebar.getData().selectedTab = 2" translate>GUEST_MODERATOR.TAB_TITLE</a>
+            </p>
           </div>
         </div>
       </div>
-      <div class="meta-data-ctn"
-           x-ng-show="mainVm.sidebar.getData().selectedGuest.owner.mail === mainVm.sidebar.getData().loggedUser.mail
+      <div class="meta-data-ctn" x-ng-show="mainVm.sidebar.getData().selectedGuest.owner.mail === mainVm.sidebar.getData().loggedUser.mail
                       && mainVm.sidebar.getData().selectedGuest.restricted ">
         <h2 class="subheader">
           <i class="groups-user-group"></i> {{'GUEST_DETAILS.AVAILABLE_CONTACTS' | translate}}
@@ -121,12 +133,8 @@
         <div class="meta-data-content m-t-20">
           <div
             ng-repeat="restrictedContact in mainVm.sidebar.getData().selectedGuest.restrictedContacts track by restrictedContact.uuid"
-            class="custom-list-item"
-            tooltip-placement="top"
-            tooltip-popup-delay="700"
-            tooltip-append-to-body="true"
-            uib-tooltip="{{ ::((restrictedContact.firstName || '') + ' ' + (restrictedContact.lastName || '')).trim() }}"
-          >
+            class="custom-list-item" tooltip-placement="top" tooltip-popup-delay="700" tooltip-append-to-body="true"
+            uib-tooltip="{{ ::((restrictedContact.firstName || '') + ' ' + (restrictedContact.lastName || '')).trim() }}">
             <p class="pull-left circle-ctn">
               <span class="circle user-bg">{{::restrictedContact.firstName[0]}}</span>
             </p>
@@ -146,13 +154,18 @@
         <div class="meta-data-content m-t-20">
           <div
             ng-repeat="restrictedContact in mainVm.sidebar.getData().selectedGuest.restrictedContactList track by restrictedContact.uuid"
-            class="custom-list-item" tooltip-placement="top" tooltip-popup-delay="700" tooltip-append-to-body="true"
+            class="custom-contactlist-item" tooltip-placement="top" tooltip-popup-delay="700" tooltip-append-to-body="true"
             uib-tooltip="{{ ::(restrictedContact.name || '').trim() }}">
             <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
             <div class="pull-left name-recipients-ctn">
               <p class="pull-left inner-text-li">
                 {{ ::(restrictedContact.name || '').trim() }}
               </p>
+              <p class="eye-list-icone-btn pull-right">
+                <i class="fa fa-eye-slash"
+                  ng-show="!mainVm.sidebar.getData().selectedGuest.contactListViewPermissions[restrictedContact.uuid]"></i>
+                <i class="fa fa-eye" aria-hidden="true"
+                  ng-show="mainVm.sidebar.getData().selectedGuest.contactListViewPermissions[restrictedContact.uuid]"></i>
             </div>
           </div>
         </div>
