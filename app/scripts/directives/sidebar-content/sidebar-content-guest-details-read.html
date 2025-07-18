@@ -154,15 +154,15 @@
         <div class="meta-data-content m-t-20">
           <div
             ng-repeat="restrictedContact in mainVm.sidebar.getData().selectedGuest.restrictedContactList track by restrictedContact.uuid"
-            class="custom-contactlist-item" tooltip-placement="top" tooltip-popup-delay="700" tooltip-append-to-body="true"
-            uib-tooltip="{{ ::(restrictedContact.name || '').trim() }}">
+            class="custom-contactlist-item" tooltip-placement="top" tooltip-popup-delay="700"
+            tooltip-append-to-body="true" uib-tooltip="{{ ::(restrictedContact.name || '').trim() }}">
             <p class="pull-left circle-ctn"><span class="circle user-bg"><i class="ls-contact-list-item"></i></span></p>
             <div class="pull-left name-recipients-ctn">
               <p class="pull-left inner-text-li">
                 {{ ::(restrictedContact.name || '').trim() }}
               </p>
               <p class="eye-list-icone-btn pull-right">
-                <i class="fa fa-eye-slash"
+                <i class="fa fa-eye-slash" aria-hidden="true"
                   ng-show="!mainVm.sidebar.getData().selectedGuest.contactListViewPermissions[restrictedContact.uuid]"></i>
                 <i class="fa fa-eye" aria-hidden="true"
                   ng-show="mainVm.sidebar.getData().selectedGuest.contactListViewPermissions[restrictedContact.uuid]"></i>

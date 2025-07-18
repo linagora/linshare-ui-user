@@ -187,7 +187,6 @@
               <div class="contacts-list-sort">
                 <md-select style="width: 200px;" ng-model="userProfileVm.sorterKeyRestrictedContactsList">
                   <md-option value="name" translate>USER_PROFILE.SORTERS.NAME</md-option>
-                  <md-option value="email" translate>USER_PROFILE.SORTERS.MAIL</md-option>
                 </md-select>
 
                 <md-button class="md-icon-button" ng-click="userProfileVm.sortAsc = !userProfileVm.sortAsc">
@@ -201,15 +200,11 @@
                   <i class="zmdi ls-contact-list-item v-center"></i>
                 </span>
 
-                <p class="recipientsInfo">
+                <p class="contactsListRecipientsInfo">
                   <span class="user-full-name">
                     <strong>
                       {{ (contactList.name || '') }}
                     </strong>
-                  </span>
-                  <span class="email">
-                    <span translate>BY</span>
-                    {{::userProfileVm.getOwnerName(contactList, userProfileVm.profile.uuid)}}
                   </span>
                 </p>
               </div>

@@ -446,11 +446,11 @@
                 <p class="eye-list-icone-btn pull-right"
                   ng-show="formVm.guestObject.restrictedContact && formVm.guestObject.allowedToRestrictContact.enable && formVm.guestObject.canUpload && formVm.guestObject.allowedToHideMembersRestrictContact.enable"
                   ng-class="{ 'disabled' : !formVm.guestObject.allowedToHideMembersRestrictContact.canOverride }"
-                  ng-click="formVm.onHideContactsListMembersChange(formVm.guestObject.restrictedContactList[$index].uuid)"
+                  ng-click="formVm.onHideContactsListMembersChange(restrictedContact.uuid)"
                   >
-                    <i class="fa fa-eye-slash" ng-show="!formVm.guestObject.contactListViewPermissions[formVm.guestObject.restrictedContactList[$index].uuid]" aria-hidden="true"
+                    <i class="fa fa-eye-slash" ng-show="!formVm.guestObject.contactListViewPermissions[restrictedContact.uuid]" aria-hidden="true"
                     tooltip-placement="bottom" tooltip-popup-delay="700" uib-tooltip="{{::'SIDEBAR.LABEL.HIDE_CONTACTS_LIST_MEMBERS' | translate}}"></i>
-                    <i class="fa fa-eye" aria-hidden="true" ng-show="formVm.guestObject.contactListViewPermissions[formVm.guestObject.restrictedContactList[$index].uuid]" tooltip-placement="bottom" tooltip-popup-delay="700"
+                    <i class="fa fa-eye" aria-hidden="true" ng-show="formVm.guestObject.contactListViewPermissions[restrictedContact.uuid]" tooltip-placement="bottom" tooltip-popup-delay="700"
               uib-tooltip="{{::'SIDEBAR.LABEL.DISPLAY_CONTACTS_LIST_MEMBERS' | translate}}"></i>
                 </p>
               </div>
