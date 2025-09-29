@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": "3",
+        "targets": {
+          "browsers": [
+            "last 5 versions",
+            "ie >= 11",
+            "Firefox ESR",
+            "Firefox >= 38",
+            "Edge >= 38"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "angularjs-annotate"
+  ]
+}

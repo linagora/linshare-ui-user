@@ -125,6 +125,16 @@ module.exports = {
         { from: 'package.json', to: 'about.json' },
         { from: 'error-pages', to: 'error-pages' }
       ]
+    }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
     })
-  ]
+  ],
+  resolve: {
+    fallback: {
+      assert: require.resolve("assert/"),
+      util: require.resolve("util/"),
+      process: require.resolve("process/browser")
+    }
+  }
 };
