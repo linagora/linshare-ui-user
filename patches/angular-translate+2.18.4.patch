@@ -1,0 +1,30 @@
+diff --git a/node_modules/angular-translate/dist/angular-translate.js b/node_modules/angular-translate/dist/angular-translate.js
+index 6c804ec..03f242e 100644
+--- a/node_modules/angular-translate/dist/angular-translate.js
++++ b/node_modules/angular-translate/dist/angular-translate.js
+@@ -34,7 +34,24 @@ translateAttrDirective.$inject = ['$translate', '$rootScope'];
+ translateCloakDirective.$inject = ['$translate', '$rootScope'];
+ translateFilterFactory.$inject = ['$parse', '$translate'];
+ $translationCache.$inject = ['$cacheFactory'];
+-angular.module('pascalprecht.translate', ['ng'])
++  angular.module('pascalprecht.translate', ['ng'])
++  // BEGIN defensive patch: guard interpolation input size
++  .run(['$translate', function($translate){
++     try {
++       if ($translate && $translate.instant) {
++         var _origInstant = $translate.instant;
++         $translate.instant = function(key, params, interpolationId) {
++           if (typeof key === 'string' && key.length > 2000) {
++             key = key.substr(0, 2000);
++           }
++           return _origInstant.call(this, key, params, interpolationId);
++         };
++       }
++     } catch(e){
++       console.warn('angular-translate defensive patch failed', e && e.message);
++     }
++   }])
++   // END defensive patch
+   .run(runTranslate);
+ 
+ function runTranslate($translate) {

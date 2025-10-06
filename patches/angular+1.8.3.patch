@@ -1,0 +1,38 @@
+diff --git a/node_modules/angular/angular.js b/node_modules/angular/angular.js
+index a598d93..8e75513 100644
+--- a/node_modules/angular/angular.js
++++ b/node_modules/angular/angular.js
+@@ -36595,6 +36595,33 @@ $provide.value("$locale", {
+     angularInit(window.document, bootstrap);
+   });
+   
++  /* ===== BEGIN defensive patch: mitigate ReDoS / huge inputs ===== */
++  (function(){
++    try {
++      var MAX_LEN = 2000;
++      if (window && window.angular) {
++        if (typeof angular.copy === 'function') {
++          var _origCopy = angular.copy;
++          angular.copy = function(src, dest) {
++            try {
++              if (typeof src === 'string' && src.length > MAX_LEN) {
++                // truncate to avoid ReDoS / perf issue
++                return _origCopy.call(this, src.substr(0, MAX_LEN), dest);
++              }
++            } catch (e) {
++              try { return _origCopy.apply(this, arguments); } 
++              catch(e2) { return src; }
++            }
++            return _origCopy.apply(this, arguments);
++          };
++        }
++      }
++    } catch (e) {
++      console.warn('angular defensive patch failed', e && e.message);
++    }
++  })();
++  /* ===== END defensive patch ===== */
++
+ })(window);
+ 
+ !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend(window.angular.element('<style>').text('@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}'));

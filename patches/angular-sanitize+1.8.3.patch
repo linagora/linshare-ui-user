@@ -1,0 +1,47 @@
+diff --git a/node_modules/angular-sanitize/angular-sanitize.js b/node_modules/angular-sanitize/angular-sanitize.js
+index 33b4645..cf9eefa 100644
+--- a/node_modules/angular-sanitize/angular-sanitize.js
++++ b/node_modules/angular-sanitize/angular-sanitize.js
+@@ -888,4 +888,42 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
+ }]);
+ 
+  
++   // BEGIN defensive patch: guard $sanitize inputs
++   (function(){
++     try {
++       var MAX_ATTR_VALUE = 2000;
++       if (window && window.angular && angular.module) {
++         var ngSanitize = angular.module('ngSanitize');
++         if (ngSanitize) {
++           ngSanitize.run(['$injector', function($injector) {
++             try {
++               var $sanitize = $injector.get('$sanitize');
++               if ($sanitize && typeof $sanitize === 'function') {
++                 var _origSanitize = $sanitize;
++                 $injector.get = (function(origGet){
++                   return function(name) {
++                     var val = origGet.apply(this, arguments);
++                     if (name === '$sanitize' && typeof val === 'function') {
++                       return function(html) {
++                         try {
++                           if (typeof html === 'string' && html.length > MAX_ATTR_VALUE) {
++                             html = html.substr(0, MAX_ATTR_VALUE);
++                           }
++                         } catch(e){}
++                         return val.call(this, html);
++                       };
++                     }
++                     return val;
++                   };
++                 })($injector.get);
++               }
++             } catch(e){}
++           }]);
++         }
++       }
++     } catch(e) {
++       console.warn('angular-sanitize defensive patch failed', e && e.message);
++     }
++   })();
++   // END defensive patch
+ })(window, window.angular);
