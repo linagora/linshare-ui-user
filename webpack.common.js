@@ -20,15 +20,16 @@ module.exports = {
       }
 
       else if (pathData.chunk.name.indexOf('theme') >= 0) {
-        return 'styles/[name].[hash].js';
+        return 'styles/[name].[contenthash].js';
       }
 
       else {
-        return '[name].[hash].js';
+        return '[name].[contenthash].js';
       }
     },
-    chunkFilename: '[name].[hash].js',
-    path: path.resolve(__dirname, 'dist')
+    chunkFilename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
   module: {
     rules: [{
@@ -43,58 +44,45 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/,
       use: [{
-        loader: 'ng-annotate-loader',
+        loader: 'babel-loader',
         options: {
-          ngAnnotate: 'ng-annotate-patched',
-          es6: true,
-          explicitOnly: false
-        }
-      }, {
-        loader: 'babel-loader'
+            plugins: ['angularjs-annotate']
+          }
       }, {
         loader: 'eslint-loader'
       }]
     }, {
       test: /\.(sa|sc|c)ss$/,
-      use: [{
-        loader: 'style-loader'
-      }, {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true,
-          importLoaders: 1
+      use: [
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            importLoaders: 1
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: true
+          }
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
+          }
         }
-      }, {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          plugins: [
-            require('autoprefixer')({
-              browsers: [
-                'last 5 version',
-                'ie >= 11',
-                'Firefox ESR',
-                'Firefox >= 38',
-                'Edge >= 38'
-              ]
-            })
-          ]
-        }
-      }, {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: true
-        }
-      }]
+      ]
     }, {
       test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]',
+      type: 'asset/resource',
+        generator: {
+          filename: '[path][name][ext]'
         }
-      }]
-    }]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -112,10 +100,9 @@ module.exports = {
       Flow: '@flowjs/flow.js/dist/flow',
       uuid: 'uuid'
     }),
-    new webpack.HashedModuleIdsPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css'
+      filename: '[name].[fullhash].css',
+      chunkFilename: '[id].[fullhash].css'
     }),
     new CopyPlugin({
       patterns: [
@@ -125,16 +112,11 @@ module.exports = {
         { from: 'package.json', to: 'about.json' },
         { from: 'error-pages', to: 'error-pages' }
       ]
-    }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
     })
   ],
   resolve: {
     fallback: {
-      assert: require.resolve("assert/"),
-      util: require.resolve("util/"),
-      process: require.resolve("process/browser")
+      assert: require.resolve("assert/")
     }
   }
 };

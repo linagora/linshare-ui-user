@@ -2,7 +2,9 @@ const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const CompressionPlugin = require("compression-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
@@ -16,24 +18,62 @@ module.exports = merge(common, {
         exclude: /config.js/,
         parallel: true
       }),
-      new CssMinimizerPlugin()
-    ]
+      new CssMinimizerPlugin(),
+    ],
+    splitChunks: {
+      chunks: "all",
+      minSize: 30 * 1024,
+      maxAsyncRequests: 20,
+      maxInitialRequests: 30,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+    runtimeChunk: "single",
   },
   plugins: [
-    new ImageminPlugin({
-      maxFileSize: 10000, // Only apply this one to files equal to or under 10kb
-      test: /\.(png|jpg|jpeg|gif|svg)$/,
-      pngquant: {
-        quality: '95-100'
-      },
-      jpegtran: {
-        progressive: false
-      },
-      gifsicle: {
-        interlaced: false,
-        optimizationLevel: 1
-      }
+    new ImageMinimizerPlugin({
+      test: /\.(png|jpe?g|gif|svg)$/i,
+      minimizer: [
+        {
+          implementation: ImageMinimizerPlugin.sharpMinify,
+          options: {
+            encodeOptions: {
+              jpeg: { quality: 80 },
+              png: { quality: 80 },
+              webp: { quality: 80 },
+              avif: { quality: 50 },
+            },
+          },
+        },
+        {
+          implementation: ImageMinimizerPlugin.svgoMinify,
+          options: {
+            plugins: [
+              {
+                name: "preset-default",
+                params: {
+                  overrides: { removeViewBox: false },
+                },
+              },
+              "removeDimensions",
+            ],
+          },
+        },
+      ],
+      severityError: "warning",
+      loader: false,
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new CompressionPlugin({
+      algorithm: "brotliCompress",
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10 * 1024, // > 10kb
+      minRatio: 0.8,
+    }),
   ]
 });

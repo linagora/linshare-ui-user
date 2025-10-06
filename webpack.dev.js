@@ -12,18 +12,19 @@ module.exports = merge(common, {
     historyApiFallback: {
       index: 'index.html'
     },
-    contentBase: path.join(__dirname, 'dist'),
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
     compress: true,
     port: 3000,
     host: 'localhost',
-    disableHostCheck: DISABLE_HOST_CHECK,
+    allowedHosts: DISABLE_HOST_CHECK ? 'all' : 'auto',
     proxy: [
       {
         context: [
           '/linshare/webservice/'
         ],
         target: LINSHARE_BACKEND_URL,
-        disableHostCheck: true,
         secure: true,
         changeOrigin: true,
         withCredentials: true
