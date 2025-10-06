@@ -6,6 +6,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 const common = require('./webpack.common.js');
+const webpack = require('webpack');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -74,6 +75,11 @@ module.exports = merge(common, {
       test: /\.(js|css|html|svg)$/,
       threshold: 10 * 1024, // > 10kb
       minRatio: 0.8,
+    }),
+    new webpack.DefinePlugin({
+      'BOOTSTRAP_NO_TOOLTIP_DATA_API': JSON.stringify(true),
+      'BOOTSTRAP_NO_POPPER': JSON.stringify(true),
+      'BOOTSTRAP_NO_JQUERY': JSON.stringify(true),
     }),
   ]
 });
