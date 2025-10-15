@@ -143,9 +143,6 @@
         template: require('../modules/linshare.receivedShare/views/list.html'),
         controller: 'ReceivedController',
         resolve: {
-          user: function(user) {
-            return user;
-          },
           files: function(receivedShareRestService) {
             return receivedShareRestService.getList();
           }
