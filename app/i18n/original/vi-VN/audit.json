@@ -503,6 +503,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "Bạn đã sao chép tài liệu: {{resourceName}} của {{userVarious}} vào Không gian cá nhân của bạn.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} đã sao chép tài liệu: {{resourceName}} vào Không gian cá nhân của anh ấy.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
             "SENTENCE": "Bạn đã tạo tài liệu: {{resourceName}} của {{userVarious}} vào {{resourceNameVarious}}.",
@@ -1046,6 +1056,7 @@
       "RESET_PASSWORD": "Đặt lại mật khẩu"
     }
   },
+  "MEMBER_OF": "Thành viên của",
   "NO_AUDIT": "Chưa có kiểm toán cho tài nguyên này",
   "TABLE_HEADER": {
     "ACTION": "Hoạt động",

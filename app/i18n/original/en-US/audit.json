@@ -503,6 +503,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "You have copied the document : {{resourceName}} of {{userVarious}} into your Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} has copied the document : {{resourceName}} into his Personal Space.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
             "SENTENCE": "You have created the document : {{resourceName}} of {{userVarious}} into {{resourceNameVarious}}.",
@@ -1047,6 +1057,7 @@
       "RESET_PASSWORD": "Reset password"
     }
   },
+  "MEMBER_OF": "Member of",
   "NO_AUDIT": "No audit for this resource yet",
   "TABLE_HEADER": {
     "ACTION": "Action",

@@ -503,6 +503,16 @@
               "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
             }
           },
+          "COPY": {
+            "AUTHOR": {
+              "SENTENCE": "Вы скопировали файл {{resourceName}} из {{userVarious}} в Моё пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            },
+            "VIEWER": {
+              "SENTENCE": "{{authorName}} скопировал файл {{resourceName}} в свое личное пространство.",
+              "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+            }
+          },
           "COPY_TO_SHARED_SPACE": {
             "AUTHOR": {
               "SENTENCE": "Вы создали файл {{resourceName}} {{userVarious}} в {{resourceNameVarious}}.",
@@ -1047,6 +1057,7 @@
         "RESET_PASSWORD": "Сбросить пароль"
       }
     },
+    "MEMBER_OF": "Участник",
     "NO_AUDIT": "У этого файла еще нет истории",
     "TABLE_HEADER": {
       "ACTION": "Действие",

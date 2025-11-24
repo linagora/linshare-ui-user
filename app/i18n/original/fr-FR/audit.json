@@ -503,6 +503,16 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
           }
         },
+        "COPY": {
+          "AUTHOR": {
+            "SENTENCE": "Vous avez copié le document : {{resourceName}} de {{userVarious}} dans votre Espace Personnel.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          },
+          "VIEWER": {
+            "SENTENCE": "{{authorName}} a copié le document : {{resourceName}} dans son Espace Personnel.",
+            "ACTION": "@:FILTERS_SELECT.ACTION.COPY"
+          }
+        },
         "COPY_TO_SHARED_SPACE": {
           "AUTHOR": {
             "SENTENCE": "Vous avez créé le document : {{resourceName}} de {{userVarious}} dans {{resourceNameVarious}}.",
@@ -1047,6 +1057,7 @@
       "RESET_PASSWORD": " Réinitialisation du mot de passe"
     }
   },
+  "MEMBER_OF": "Membre de",
   "NO_AUDIT": "Cette ressource n'a pas encore d'historique d'activité",
   "TABLE_HEADER": {
     "ACTION": "Action",
