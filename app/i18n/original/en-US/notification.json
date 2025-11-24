@@ -87,6 +87,7 @@
       "REFRESH": "You must refresh the application to take this action into account",
       "SHARE": "Your {{singular ? 'file' : 'files'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'was' : 'were'}} successfully sent.",
       "SHARE_DELETED": "Your file share with {{recipient}} was removed successfully.",
+      "SHARE_CANCELED": "Your file shared was canceled successfully.",
       "SHARE_ASYNC": "Your file share will be sent after the upload of all files.",
       "SHARE_FAILED": "Your file {{shareName ? shareName + ' ': ''}}share has failed.",
       "UPDATE": "The item was updated successfully.",

@@ -685,12 +685,9 @@
         $scope.mainVm.sidebar.getData().loadSidebarContent($scope.mainVm.sidebar.getData().lsAppConfig.details);
         _.remove($scope.mainVm.sidebar.getData().currentSelectedDocument.current.shares, {'uuid': shareUuid});
         _.assignIn(_.find($scope.documentsList, {'uuid': data.document.uuid}), data.document);
-        var recipient = data.recipient.firstName ? data.recipient.firstName + ' ' + data.recipient.lastName :
-          data.recipient.mail;
 
         toastService.success({
-          key: 'TOAST_ALERT.ACTION.SHARE_DELETED',
-          params: {recipient: recipient}
+          key: 'TOAST_ALERT.ACTION.SHARE_CANCELED'
         });
       });
     }

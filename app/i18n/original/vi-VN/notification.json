@@ -88,6 +88,7 @@
       "RESTORE": "Phiên bản đã được khôi phục thành công.",
       "SHARE": "{{singular ? 'Tệp' : 'Các tệp'}} của bạn {{shareName ? shareName + ' ': ''}}{{singular ? 'đã' : 'đã'}} gửi thành công.",
       "SHARE_DELETED": "Chia sẻ tệp của bạn với {{recipient}} đã được xóa thành công.",
+      "SHARE_CANCELED": "Tệp bạn chia sẻ đã bị hủy thành công.",
       "SHARE_ASYNC": "Chia sẻ tệp của bạn sẽ được gửi sau khi tải lên tất cả các tệp.",
       "SHARE_FAILED": "Tệp của bạn {{shareName? shareName + '': ''}} chia sẻ không thành công.",
       "UPDATE": "Mục đã được cập nhật thành công.",

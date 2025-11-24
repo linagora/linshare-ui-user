@@ -89,6 +89,7 @@
       "SHARE": "{{singular ? 'Votre fichier' : 'Vos fichiers'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'a' : 'ont'}} été envoyé avec succès.",
       "SHARE_ASYNC": "Le partage sera envoyé quand tous les fichiers seront transférés.",
       "SHARE_DELETED": "Votre partage avec {{recipient}} a été supprimé avec succès.",
+      "SHARE_CANCELED": "Le partage de votre fichier a été annulé avec succès",
       "SHARE_FAILED": "Votre partage {{shareName ? shareName + ' ': ''}}de fichiers a échoué.",
       "UPDATE": "L'élément a été mise à jour avec succès.",
       "FORWARD": {
