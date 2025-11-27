@@ -224,7 +224,7 @@
       if (auditAction.isAuthor) {
         return 'AUTHOR_ME';
       }
-      if (auditAction.resource && auditAction.resource.recipient === null && auditAction.contactListName) {
+      if (auditAction.resource && _.isEmpty(auditAction.resource.recipient) && auditAction.contactListName) {
         return $filter('translate')('MEMBER_OF') + ` ${auditAction.contactListName}`;
       } else if(auditAction.authUser && auditAction.authUser.accountType === 'SYSTEM') {
         return setFullName(auditAction.actor);
@@ -255,7 +255,7 @@
     function setFullName(user) {
       var fullName;
 
-      if (user === null || user === undefined) {
+      if (_.isEmpty(user) || user === undefined) {
         return '';
       }
 
@@ -430,7 +430,7 @@
       // TODO : no need first check when recipient will be added for ANONYMOUS-CREATE audit
 
       if (auditAction.type === TYPES_KEY.ANONYMOUS_SHARE_ENTRY || auditAction.type === TYPES_KEY.SHARE_ENTRY) {
-        if (auditAction.resource && auditAction.resource.recipient === null && auditAction.contactListName) {
+        if (auditAction.resource && _.isEmpty(auditAction.resource.recipient) && auditAction.contactListName) {
           shareRecipient =  $filter('translate')('MEMBER_OF') + ` ${auditAction.contactListName}`;
         } else if (!auditAction.resource.recipient ) {
           shareRecipient = auditAction.recipientMail;
