@@ -755,7 +755,7 @@
       } else if (auditAction.resource.sender && auditAction.actor && (auditAction.resource.sender.uuid !== auditAction.actor.uuid)) {
         userVarious = (auditAction.resource.sender.uuid === loggedUserUuid) ?
           authorMe : setFullName(auditAction.resource.sender);
-      } else if (auditAction.resource.recipient) {
+      } else if (!_.isEmpty(auditAction.resource.recipient)) {
         userVarious = (auditAction.resource.recipient.uuid === loggedUserUuid) ?
           authorMe : setFullName(auditAction.resource.recipient);
       } else if (auditAction.recipientMail) {
