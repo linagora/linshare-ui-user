@@ -47,7 +47,7 @@ function guestFormController(
   ///////
 
   function onRestrictedContactsChange() {
-    if (formVm.guestObject.restricted && !formVm.guestObject.restrictedContacts.length ) {
+    if (!formVm.guestObject.restrictedContacts.length) {
       formVm.guestObject.restrictedContacts = [...formVm.guestObject.defaultRestrictedContacts];
     }
   }
