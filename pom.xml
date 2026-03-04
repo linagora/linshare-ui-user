@@ -334,7 +334,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-scm-plugin</artifactId>
-            <version>1.9.4</version>
+            <version>1.11.3</version>
             <executions>
               <execution>
                 <id>package.json</id>
