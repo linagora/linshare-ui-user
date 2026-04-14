@@ -1,6 +1,6 @@
 # linshare-ui-user
 
-This project is a restfull user interface angular app for Linshare-core project
+This project is a Restfull user interface angular app for Linshare-core project
 
 ## Setup
 
