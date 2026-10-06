@@ -74,6 +74,7 @@
     "serve:prod": "webpack serve --env prod",
     "build:dev": "webpack --env dev",
     "build:prod": "webpack --env prod --progress",
+    "check:i18n": "node scripts/check-i18n.js",
     "postinstall": "patch-package"
   },
   "engines": {
