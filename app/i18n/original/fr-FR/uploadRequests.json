@@ -183,9 +183,9 @@
         "ERROR": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} n'a pas été archivé.",
         "INFO": "{number} {singular, select, true{invitation de dépot} other{invitations de dépot}} a été archivé."
       },
-      "DELETE_ARCHIVE": {
-        "ERROR": "{number} {singular, select, true{invitation de dépôt archivée n'a} other{invitations de dépôt archivées n'ont}} pas été supprimée.",
-        "INFO": "{number} {singular, select, true{invitation de dépôt archivée a} other{invitations de dépôt archivées ont}} été supprimées."
+      "DELETE_ARCHIVED": {
+        "ERROR": "{number} {singular, select, true{invitation de dépôt archivée n'a pas été supprimée} other{invitations de dépôt archivées n'ont pas été supprimées}}.",
+        "INFO": "{number} {singular, select, true{invitation de dépôt archivée a été supprimée} other{invitations de dépôt archivées ont été supprimées}}."
       },
       "ADD_RECIPIENTS": {
         "ERROR": "{number} {singular, select, true{destinataire n'a} other{destinataires n'ont}} pas été ajoutés à la invitation de dépôt.",

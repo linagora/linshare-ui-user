@@ -49,14 +49,14 @@
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
       "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Vous êtes sur le point de supprimer {{firstName}} {{lastName}} du groupe de travail {{workgroupName}}.",
+      "TEXT": "Vous êtes sur le point de supprimer {{firstName}} {{lastName}} du groupe de travail {{sharedSpaceName}}.",
       "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du groupe de travail {{sharedSpaceName}}. Vous n'aurez plus accès à ce groupe de travail."
     },
     "ON_WORKSPACE_MEMBER_DELETE": {
       "CANCEL_BUTTON": "Annuler",
       "CONFIRM_BUTTON": "Oui, supprimer",
       "TITLE": "Êtes-vous sûr?",
-      "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} du espace de travail {{workspaceName}} et  par conséquent de tous les groupes de travail au sein de celui-ci.",
+      "TEXT": "Vous êtes sur le point de retirer {{firstName}} {{lastName}} de l'espace de travail {{sharedSpaceName}} et par conséquent de tous les groupes de travail au sein de celui-ci.",
       "SELF_REMOVE_TEXT": "Vous êtes sur le point de vous retirer du espace de travail {{sharedSpaceName}}. Vous n'aurez plus accès à ce espace de travail."
     },
     "ON_GUEST_QUICK_CREATE": {
