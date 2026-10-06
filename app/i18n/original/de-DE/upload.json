@@ -1,0 +1,30 @@
+{
+  "UPLOAD_DESTINATION": "Ziel",
+  "UPLOAD_SHARE_ALERT": {
+    "CANCEL": "Abbrechen",
+    "MAIN_DIALOG_BUTTON_TITLE": "Freigeben",
+    "MESSAGE": "${nbErrorFilesSelected} Datei(en) können nicht freigegeben werden. Fortfahren?",
+    "MESSAGE_SINGULAR": "Eine Datei in Ihrer Auswahl enthält Fehler und wird aus der Freigabe entfernt. Möchten Sie die übrigen Dateien trotzdem freigeben?",
+    "MESSAGE_PLURAL": "Einige Dateien in Ihrer Auswahl enthalten Fehler und werden aus der Freigabe entfernt. Möchten Sie die übrigen Dateien trotzdem freigeben?",
+    "NO_SHAREABLE_FILE_SELECTED": "Die ausgewählten Dateien enthalten Fehler und können nicht freigegeben werden",
+    "NO_SHAREABLE_FILE_SELECTED_SINGULAR": "Die ausgewählte Datei enthält Fehler und kann nicht freigegeben werden",
+    "TITLE_SINGULAR": "Eine Datei kann nicht freigegeben werden.",
+    "TITLE_PLURAL": "${nbErrorFilesSelected} Dateien können nicht freigegeben werden."
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Hochgeladene Dateien",
+    "SELECT_INFO": "Laden Sie Dateien hoch und wählen Sie sie aus, um sie asynchron freizugeben"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Dateien hier ablegen",
+    "COMMENT": "Ziehen Sie Ihre Dateien hierher, um sie hochzuladen",
+    "TITLE_VERSION": "Version hier ablegen",
+    "COMMENT_VERSION": "Ziehen Sie Ihre Version hierher, um sie hochzuladen",
+    "TITLE_VERSION_NO_RIGHTS": "Sie können keine neue Version hochladen",
+    "COMMENT_VERSION_NO_RIGHTS": "Sie haben nicht die erforderliche Berechtigung"
+  },
+  "DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Asynchrone Freigabe",
+    "COMMENT": "Laden Sie Ihre Dateien hoch und geben Sie sie ohne Verzögerung frei."
+  }
+}

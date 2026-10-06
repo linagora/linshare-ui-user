@@ -1,0 +1,119 @@
+{
+  "MEMBER_TAB": {
+    "ADD_MEMBER": "Aggiungi membri del team:",
+    "ADD_WORKSPACE_MEMBER": "Aggiungi membri dello spazio di lavoro con i seguenti ruoli:",
+    "NUM_MEMBER": "Membri esistenti:",
+    "TITLE": "Membri",
+    "ADD": "Aggiungi",
+    "UPDATE": "Aggiorna",
+    "EDIT_RIGHTS": "Modifica i diritti dell'utente",
+    "EDIT_RIGHT": "Modifica diritto",
+    "REMOVE_TEAM_MEMBER": "Rimuovi membro del team",
+    "ACTIVATED": "Attivato",
+    "NOTIFICATION_ACTIVATED": "notifica attivata",
+    "ADMIN": "Amministratore",
+    "CONTRIBUTOR": "Collaboratore",
+    "WRITER": "Redattore",
+    "READER": "Lettore",
+    "WORK_SPACE_ADMIN": "Amministratore dello spazio di lavoro",
+    "WORK_SPACE_WRITER": "Redattore dello spazio di lavoro",
+    "WORK_SPACE_READER": "Lettore dello spazio di lavoro",
+    "ADMIN_RIGHTS": "Diritti di amministratore",
+    "CONTRIBUTOR_RIGHTS": "Diritti di collaboratore",
+    "WRITER_RIGHTS": "Diritti di redattore",
+    "READER_RIGHTS": "Diritti di lettore",
+    "WORK_SPACE_ADMIN_RIGHTS": "Diritti di amministratore dello spazio di lavoro",
+    "WORK_SPACE_WRITER_RIGHTS": "Diritti di redattore dello spazio di lavoro",
+    "WORK_SPACE_READER_RIGHTS": "Diritti di lettore dello spazio di lavoro",
+    "WORKSPACE_ROLE": "In questo spazio di lavoro",
+    "DEFAULT_WORKGROUP_ROLE": "Predefinito nei gruppi di lavoro",
+    "WORKGROUP_ROLE": "Ruolo nel gruppo di lavoro",
+    "MULTI_SELECT": "selezione multipla",
+    "JOINING_DATE": "Data di adesione",
+    "USER_NAME": "Nome utente",
+    "USER_RIGHTS": "Diritti dell'utente",
+    "SORT_BY": "Ordina per",
+    "FILTER_BY": "Filtra per",
+    "SORT_MEMBER": {
+      "FIRSTNAME": "Nome",
+      "LASTNAME": "Cognome",
+      "RIGHT": "Ruolo"
+    },
+    "MY_RIGHTS": "I miei diritti",
+    "TOOLTIPS": {
+      "WORKSPACE_ROLE": "Il ruolo del membro in questo spazio di lavoro",
+      "DEFAULT_WORKGROUP_ROLE": "Il ruolo predefinito del membro in tutti i gruppi di lavoro di questo spazio di lavoro"
+    },
+    "WORKSPACE_MEMBER": "Membro dello spazio di lavoro",
+    "EXTERNAL_USER": "Utente esterno"
+  },
+  "DETAILS": {
+    "FULL_SIZE": "Dimensione totale",
+    "TRASH_FULL_SIZE": "Dimensione del cestino",
+    "USED_SPACE": "Spazio utilizzato"
+  },
+  "BREADCRUMB_TITLE_WORKGROUP": "Gruppi di lavoro",
+  "BREADCRUMB_TITLE_WORKGROUP_FILES": "File",
+  "BREADCRUMB_UPPER_LEVEL": "Cartelle superiori",
+  "VERSION": "Versione",
+  "FILE_NAME": "Nome del file",
+  "VERSION_VIEW": "Stai visualizzando la versione di {{filename}}",
+  "VERSION_NAME_UPDATE": "il nome della versione è stato cambiato in {{filename}}",
+  "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Carica i tuoi file",
+    "COMMENT": "Carica dei file e aggiungi membri per collaborare con loro.",
+    "TITLE_VERSION": "Carica le versioni del tuo file",
+    "COMMENT_VERSION": "Carica le versioni del tuo file e consulta la sua cronologia."
+  },
+  "CREATE_NEW_WORKGROUP": "Crea un nuovo gruppo di lavoro",
+  "CREATE_NEW_FOLDER": "Crea una nuova cartella",
+  "CREATE_NEW_WORKSPACE": "Crea un nuovo spazio di lavoro",
+  "SHARED_SPACE_TYPE": {
+    "WORKGROUP": "Gruppo di lavoro",
+    "WORKSPACE": "Spazio di lavoro"
+  },
+  "SHARED_SPACE_DIALOGS": {
+    "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
+      "TITLE": "Modifica il ruolo predefinito nei gruppi di lavoro",
+      "MESSAGE": "Stai per aggiornare il ruolo predefinito del membro in tutti i gruppi di lavoro dello spazio di lavoro <b>{{workspaceName}}</b>.",
+      "ACTION": "Applica questo ruolo a tutti i gruppi di lavoro esistenti",
+      "BUTTONS": {
+        "CONFIRM": "AGGIORNA"
+      }
+    }
+  },
+  "SHARED_SPACE_TOOLTIPS": {
+    "WORKSPACE": "Uno spazio di lavoro contiene solo gruppi di lavoro e ti permette di definire un elenco di membri predefiniti per tutti i gruppi di lavoro annidati, con il loro ruolo predefinito (consultare, creare, ecc.)",
+    "WORKGROUP": "Un gruppo di lavoro è uno spazio di collaborazione a cui puoi aggiungere membri, come utenti interni od ospiti. Questi membri potranno consultare, creare, aggiornare o eliminare file e cartelle nel gruppo di lavoro in base al loro ruolo."
+  },
+  "WORKGROUP_SEARCH_BOX": {
+    "LAST_AUTHOR": "Ultimo autore",
+    "FILE_TYPES": "Tipi di file",
+    "NODE_TYPES": {
+      "LABEL": "Tipi",
+      "DOCUMENT": "File",
+      "FOLDER": "Cartelle",
+      "REVISION": "Versioni"
+    },
+    "TYPES": {
+      "ANY": "Tutti i tipi",
+      "DOCUMENT": "Documento",
+      "PDF": "PDF",
+      "SPREADSHEET": "Foglio di calcolo",
+      "IMAGE": "Immagine",
+      "AUDIO": "Audio",
+      "ARCHIVE": "Archivio",
+      "OTHER": "Altro"
+    }
+  },
+  "WORKGROUP_SEARCH_PAGE": {
+    "BACKGROUND_NO_RESULT": {
+      "MESSAGE": "Nessun risultato trovato",
+      "SUBMESSAGE": "Prova un'altra ricerca o apri la casella di ricerca per filtrare per tipo di file, autore e altro"
+    },
+    "BACKGROUND": {
+      "MESSAGE": "Ricerca nel gruppo di lavoro",
+      "SUBMESSAGE": "Ricerca in tutti i file e le cartelle del gruppo di lavoro"
+    }
+  }
+}

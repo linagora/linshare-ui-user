@@ -1,0 +1,330 @@
+{
+  "ACTION": {
+    "PREVENT_EXIT": "Aún quedan archivos por cargar. ¿Desea salir de la aplicación?",
+    "ADD_MEMBER": "Añadir un miembro",
+    "COPY": "Copiar",
+    "COPY_ADJ": "Copia",
+    "COPY_DROPDOWN": {
+      "COPY_AND_SHARE": "Copiar y compartir",
+      "PERSONAL_SPACE": "Mi espacio",
+      "SHARED_SPACE": "Espacio compartido"
+    },
+    "COPY_IN_MY_FILES": "Copiar en Mi espacio",
+    "COPY_IN_WORKGROUP": "Copiar en un grupo de trabajo",
+    "COPY_INTO_THE_SHARED_SPACE": "Copiar en el espacio compartido",
+    "COPY_TO": "Copiar en",
+    "COPY_TO_SHARED_SPACE": "Espacio compartido",
+    "DELETE": "Eliminar",
+    "DELETE_ALL": "Eliminar todo",
+    "DISPLAY": "Mostrar",
+    "DOWNLOAD": "Descargar",
+    "DUPLICATE": "Duplicar",
+    "EXTERNAL_EDIT": "Descargar y bloquear",
+    "FAVORITES": "Favoritos",
+    "FORWARD": "Reenviar",
+    "GO_TO_TRASH": "Ir a la papelera",
+    "INFO_WORKGROUP": "Ver los detalles del grupo de trabajo",
+    "INFO_WORKSPACE": "Ver los detalles del espacio de trabajo",
+    "INFO_FILE": "Ver los detalles del archivo",
+    "INFORMATION": "Detalles",
+    "LOCK": "Bloquear",
+    "MOVE": "Mover",
+    "NEW_CONTACTS_LIST": "Nueva lista de contactos",
+    "NEW_FOLDER": "Nueva carpeta",
+    "NEW_ITEM": "Nuevo",
+    "NEW_WORKGROUP": "Nuevo grupo de trabajo",
+    "NEW_WORKSPACE": "Nuevo espacio de trabajo",
+    "NEW_VERSION": "Nueva versión",
+    "PREVIEW": "Vista previa",
+    "REFRESH": "Actualizar",
+    "RENAME": "Cambiar nombre",
+    "RESTORE": "Restaurar",
+    "SHARE": "Compartir",
+    "SILENCE": "Silenciar",
+    "VIEW_VERSIONING": "Ver las actualizaciones anteriores",
+    "SEE_VERSIONS": "Gestionar versiones",
+    "PROCEED": "Continuar",
+    "SAVE": "Guardar",
+    "GO_TO_DESTINATION": "Ir al destino"
+  },
+  "ACTIVITIES": "Actividades",
+  "ADD_FILES_DROPDOWN": {
+    "UPLOAD_AND_SHARE": "Cargar y compartir",
+    "UPLOAD_FILE": "Cargar archivo",
+    "UPLOAD_IN_GROUP": "Cargar en un grupo",
+    "UPLOAD_IN_MY_FILES": "En mis archivos",
+    "UPLOAD_IN_WORKGROUP": "Cargar en un grupo de trabajo",
+    "UPLOAD_SHARE": "Cargar y compartir"
+  },
+  "ANONYMOUS_URL": {
+    "HELLO": "Hola, <span>{{externalEmail}}</span>:",
+    "MSG_PLURAL": "ha compartido con usted <b>{{num}} archivos </b>el <b>{{creationDate}}</b>, disponibles hasta el <b>{{expiryDate}}</b>.",
+    "MSG_SINGULAR": "ha compartido con usted un archivo el <b>{{creationDate}}</b>, disponible hasta el <b>{{expiryDate}}</b>."
+  },
+  "APPLICATION_NAME": "Linshare",
+  "BOUTON_ADD_FILE_TITLE": "Añadir",
+  "BOUTON_LABEL_TITLE": {
+    "COPY": "copiar",
+    "DELETE": "eliminar",
+    "DOWNLOAD": "descargar",
+    "INFO": "Detalle",
+    "MORE_ACTIONS": "más acciones",
+    "MULTIPLE_SELECT": "selección múltiple",
+    "SHARE": "compartir",
+    "SHARED": "Compartido"
+  },
+  "BY": "Por",
+  "COMMON": {
+    "SIDEBAR": {
+      "CORE_VERSION": "Versión del núcleo",
+      "PRODUCT_VERSION": "Versión del producto"
+    }
+  },
+  "COMPONENTS": {
+    "AUTOCOMPLETE_USERS": {
+      "INPUT_PLACEHOLDER": "Añadir personas",
+      "INPUT_PLACEHOLDER_CONTACT_LIST": "Añadir listas de contactos",
+      "INPUT_PLACEHOLDER_EXISTING_MEMBERS": "Buscar miembro",
+      "INVALID_EMAIL": "La dirección de correo electrónico no es válida",
+      "INVALID_EMPTY": "Usuario desconocido",
+      "CREATE_GUEST": "¿Invitarlo como invitado?"
+    },
+    "DATE_PICKER": {
+      "SUN": "DOM",
+      "MON": "LUN",
+      "TUE": "MAR",
+      "WED": "MIÉ",
+      "THU": "JUE",
+      "FRI": "VIE",
+      "SAT": "SÁB",
+      "JANUARY": "ENERO",
+      "FEBRUARY": "FEBRERO",
+      "MARCH": "MARZO",
+      "APRIL": "ABRIL",
+      "MAY": "MAYO",
+      "JUNE": "JUNIO",
+      "JULY": "JULIO",
+      "AUGUST": "AGOSTO",
+      "SEPTEMBER": "SEPTIEMBRE",
+      "OCTOBER": "OCTUBRE",
+      "NOVEMBER": "NOVIEMBRE",
+      "DECEMBER": "DICIEMBRE"
+    }
+  },
+  "DOMAIN": "Dominio",
+  "DOWNLOAD": "Descargar",
+  "EDIT": "Editar",
+  "SET": "Definir",
+  "EXPIRE_THE": "Caduca el",
+  "EXTENSIONS": {
+    "ARCHIVE": "Archivo comprimido",
+    "AUDIO": "Audio",
+    "CODE": "Código",
+    "EXCEL": "Excel",
+    "IMAGE": "Imagen",
+    "PDF": "PDF",
+    "POWERPOINT": "PowerPoint",
+    "TEXT": "Texto",
+    "VIDEO": "Vídeo",
+    "WORD": "Word"
+  },
+  "FILTER_COMPONENT": {
+    "ADVANCED_SEARCH_TITLE": "Ajustes de búsqueda avanzada",
+    "BY_SIZE": "Tamaño",
+    "FILTER_BY": "Filtrar por",
+    "FILTER_BY_SIZE": {
+      "HEADER": "Filtrar por tamaño",
+      "MINIMUM": "mín.",
+      "MAXIMUM": "máx."
+    },
+    "FILTER_BY_DATE": {
+      "BEGINNING_DATE": "Fecha de inicio",
+      "CREATION_DATE": "Fecha de creación",
+      "ENDING_DATE": "Fecha de fin",
+      "HEADER": "Filtrar por fecha",
+      "MODIFICATION_DATE": "Fecha de modificación"
+    },
+    "FILTER_BY_RECIPIENT": {
+      "HEADER": "Filtrar por remitente",
+      "PLACEHOLDER": "Introduzca un correo electrónico, un nombre o unos apellidos"
+    },
+    "IS_SHARED": "Compartido",
+    "ORDER_BY_NAME": "Nombre",
+    "PLACEHOLDER_FILE_NAME": "Buscar por nombre",
+    "REINITIALIZE": "RESTABLECER",
+    "SUBMIT": "Filtrar",
+    "UNIT": "Unidad",
+    "DATE": "Fecha"
+  },
+  "HEADER": {
+    "CLEAR_LOCAL_STORAGE": "Vaciar el almacenamiento local",
+    "DEBUG_MODE": "Modo de depuración",
+    "FILES_TO_SHARE": "Archivos destinados a compartirse",
+    "FULL_SCREEN": "Pantalla completa",
+    "LOGOUT": "Cerrar sesión",
+    "NO_SHARES": "Actualmente no tiene recursos compartidos.",
+    "SETTINGS": "Mis ajustes",
+    "SHARING_PROGRESS": {
+      "SHARE_DONE": "completado",
+      "SHARE_IN_PROGRESS": "en curso..."
+    },
+    "UPLOAD_PROGRESS": {
+      "FOOTER": "Ver todo",
+      "TITLE": "Progreso de la carga",
+      "TO_COMMON_SPACE": "En el espacio común",
+      "TO_MY_SPACE": "En mi espacio",
+      "UPLOAD_DONE": "terminado",
+      "UPLOAD_ERROR": "fallido",
+      "UPLOAD_PAUSED": "en pausa",
+      "UPLOAD_SERVER": "procesando en el servidor"
+    }
+  },
+  "INFORMATION_TAB": {
+    "ABORT_EDIT": "Cancelar la edición",
+    "CREATED_THE": "Creado el",
+    "EDIT_DESCRIPTION": "Editar la descripción",
+    "INSERT_DESCRIPTION": "Añadir una descripción del archivo",
+    "META_DATA": "Metadatos",
+    "NO_DESCRIPTION": "Sin descripción",
+    "PREVIOUS_UPDATE": "Actualizaciones anteriores",
+    "TITLE": "DETALLES",
+    "UPTADED_THE": "Actualizado el ",
+    "VERSIONS": "Actualizaciones",
+    "MAX_FILE_SIZE": "Tamaño máximo de archivo",
+    "VERSIONING_ACTIVATION": "Control de versiones activado: "
+  },
+  "LINK_DISABLED": "Enlace desactivado",
+  "LOGIN": {
+    "CONNECTION_LINK": "Iniciar sesión",
+    "COPYRIGHT": "Está usando la versión libre y de código abierto de <a href='http://linshare.org' target='_blank'>LinShare™</a>, desarrollada por <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2023. Contribuya a la I+D de LinShare suscribiéndose a una oferta Enterprise.",
+    "EMAIL_PLACEHOLDER": "Correo",
+    "FORGOTTEN_PASSWORD": "¿Ha olvidado su contraseña?",
+    "KEEP_SIGNED": "Mantener la sesión iniciada",
+    "LINSHARE_LINK_ALT": "Linshare: aplicación de código abierto para compartir archivos de forma segura",
+    "LOGIN_HEADER": "Bienvenido/a",
+    "NOTIFICATION": {
+      "SUCCESS": "Bienvenido/a, {{firstName}}",
+      "ERROR": "Error de autenticación: el correo electrónico o la contraseña no son válidos",
+      "ERROR_OIDC": "Error de autenticación SSO",
+      "ERROR_OIDC_MULTIPLE_DOMAIN": "Se han encontrado varios dominios",
+      "ERROR_OIDC_UNKNOWN": "Error de autenticación SSO: {{details}}"
+    },
+    "PASSWORD_PLACEHOLDER": "Contraseña",
+    "TAGLINE": "Aplicación de código abierto para compartir archivos de forma segura",
+    "CONTINUE_WITH_SSO": "Continuar con su SSO",
+    "OR": "O"
+  },
+  "SECOND_FA_LOGIN": {
+    "LOGIN_HEADER": "Autenticación de dos factores",
+    "USAGE": "Introduzca el código de 6 dígitos de su aplicación de autenticación OTP preferida",
+    "NOTIFICATION": {
+      "OTP": "Se requiere la autenticación de dos factores",
+      "OTP_ERROR": "El código OTP es incorrecto o ha caducado",
+      "ACCOUNT_LOCKED": "Su cuenta se ha bloqueado debido a varios intentos de inicio de sesión fallidos"
+    }
+  },
+  "ME": "Yo",
+  "MENU_TITLE": {
+    "ADMIN": "Contactos",
+    "AUDIT": "Registros de actividad",
+    "AUDIT_GLOBAL": "Actividad global",
+    "AUDIT_UPLOAD_REQUEST": "Actividad de las solicitudes de carga",
+    "CONTACTS_LISTS": "Listas de contactos",
+    "WORKSPACE": "Espacio de trabajo",
+    "FILES": "Mi espacio",
+    "GROUP_MEMBERS": "Grupos",
+    "GUESTS": "Invitados",
+    "HOME": "Inicio",
+    "MY_FILES": "Mis archivos",
+    "UPLOAD_AND_SHARE": "Cargas en curso",
+    "RECEIVED_SHARES": "Recursos compartidos recibidos",
+    "SAFE_DETAILS": "Detalles de la caja fuerte",
+    "SHARED_SPACE": "Espacio compartido",
+    "SHARES": "Archivos compartidos",
+    "UPLOAD_QUEUE": "Cargas",
+    "USERS": "Usuarios"
+  },
+  "NAVIGATION": {
+    "CANCEL": "Cancelar",
+    "NEXT": "Siguiente",
+    "PAUSE": "Pausa",
+    "PLAY": "Reanudar",
+    "PREVIOUS": "Anterior",
+    "REPLAY": "Reiniciar",
+    "SEND": "Enviar",
+    "SHARE": "Compartir",
+    "STOP": "Detener",
+    "CREATE": "Crear",
+    "FORWARD": "Reenviar"
+  },
+  "NO_ACTION_AVAILABLE": "No hay ninguna acción disponible",
+  "PENDING_UPLOADS": "pendiente",
+  "POPOVER": {
+    "ISOLATED": {
+      "TEXT": "Haga clic aquí para mostrar todos los archivos",
+      "BUTTON": "¡Entendido!"
+    }
+  },
+  "REMOVE": "Quitar",
+  "SAVING": "Guardando...",
+  "SELECTION": {
+    "NUM_ITEM_SELECTED": "Archivos seleccionados"
+  },
+  "SELECTION_TOOLBAR": {
+    "CANCEL": "Cancelar",
+    "CANCEL_ALL": "Cancelar todo",
+    "CLEAR": "Borrar",
+    "CLEAR_INFO": "Borrar solo los archivos terminados",
+    "CLEAR_ALL": "Borrar todo",
+    "COPY": "Copiar",
+    "DELETE": "Eliminar",
+    "DELETE_ALL": "Eliminar todo",
+    "DESELECT_ALL": "Deseleccionar todo",
+    "ELEMENTS": "Elementos",
+    "FILES": "Archivos",
+    "PAUSE": "Pausa",
+    "PAUSE_ALL": "Pausar todo",
+    "PLAY": "Reanudar",
+    "PLAY_ALL": "Reanudar todo",
+    "ORDER_BY": "Ordenar por",
+    "RESET": "Restablecer",
+    "RESTORE": "Restaurar",
+    "RETRY": "Reintentar",
+    "RETRY_ALL": "Reintentar todo",
+    "SELECT_ALL": "Seleccionar todo",
+    "SELECTED_ELEMENTS": "elemento(s) seleccionado(s)",
+    "SELECTED_FILES": "archivo(s) seleccionado(s)",
+    "SHARE": "Compartir",
+    "SHOW_IN_FILES": "Mostrar en los archivos",
+    "SHOW_SELECTION": "Mostrar la selección",
+    "STOP": "Detener"
+  },
+  "TRANSFERS_DROPDOWN": {
+    "BEFORE_SENDINGS": "antes del envío",
+    "SHARE": "Recursos compartidos",
+    "SHARE_NUMBER": "Recurso compartido",
+    "UPLOADS": "Cargas"
+  },
+  "UNKNOWN_USER": "Usuario desconocido",
+  "UNKNOWN_FIRST_LETTER": "DES",
+  "UPLOAD_DONE": "{singular, select, true{<b>{fileName}</b> se ha cargado} other{Algunos archivos se han cargado}} correctamente",
+  "UPLOAD_VERSION_DONE": "Se ha cargado correctamente una nueva versión{addFilename, select, true{ de <b>{fileName}</b>} other{}}",
+  "USER_QUOTAS": {
+    "DOMAIN": "Dominio utilizado",
+    "MAX_FILE_SIZE": "Tamaño máximo de archivo",
+    "REMAINING_OVER": "restante de",
+    "USED": "Utilizado"
+  },
+  "VALIDATE": "Validar",
+  "WIP": "Trabajo en curso",
+  "WORK_IN_PROGRESS": {
+    "WORK_IN_PROGRESS_INFO": "Esta página no está disponible por el momento",
+    "WORK_IN_PROGRESS_MSG": "EN CONSTRUCCIÓN"
+  },
+  "LOCALE": {
+    "ENGLISH": "Inglés",
+    "FRENCH": "Francés",
+    "RUSSIAN": "Ruso",
+    "VIETNAMESE": "Vietnamita"
+  }
+}

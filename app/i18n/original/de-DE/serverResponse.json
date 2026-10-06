@@ -1,0 +1,78 @@
+{
+  "SERVER_RESPONSE": {
+    "HTTP_CODES": {
+      "ERROR_400": "UNGÜLTIGE ANFRAGE",
+      "ERROR_401": "NICHT AUTORISIERT",
+      "ERROR_403": "VERBOTEN",
+      "ERROR_404": "NICHT GEFUNDEN",
+      "ERROR_405": "METHODE NICHT ERLAUBT",
+      "ERROR_408": "ZEITÜBERSCHREITUNG DER ANFRAGE",
+      "ERROR_500": "INTERNER SERVERFEHLER",
+      "ERROR_501": "NICHT IMPLEMENTIERT",
+      "ERROR_502": "FEHLERHAFTES GATEWAY",
+      "ERROR_503": "DIENST NICHT VERFÜGBAR",
+      "ERROR_520": "DER WEBSERVER MELDET EINEN UNBEKANNTEN FEHLER",
+      "ERROR_DEFAULT": "NICHT BEHANDELTER FEHLER"
+    },
+    "DETAILS": {
+      "DEFAULT": {
+        "1000": "Unbekannter Fehler",
+        "2000": "Authentifizierungsfehler",
+        "2203": "Sie sind nicht berechtigt, diesen Gast zu löschen",
+        "2204": "Sie sind nicht berechtigt, diesen Gast zu aktualisieren",
+        "20000": "Bei der Datenbank ist ein Fehler aufgetreten",
+        "20001": "Sie sind nicht berechtigt, diesen Dienst zu nutzen",
+        "26000": "Die Arbeitsgruppe existiert nicht oder wurde entfernt",
+        "26007": "Ordner {{folderName}} nicht gefunden",
+        "26444": "Sie haben nicht die erforderlichen Rechte",
+        "28000": "Der Gast wurde nicht gefunden",
+        "28001": "Der Gast existiert bereits",
+        "28403": "Sie sind nicht berechtigt, auf diesen Gast zuzugreifen",
+        "28405": "Die Liste der eingeschränkten Kontakte des Gastes ist leer",
+        "28406": "Die Suche nach Gästen ist ungültig",
+        "31416": "Ihre Domain hat die maximal zulässige Anzahl an Upload-Anfragen erreicht",
+        "38400": "Das Ablaufdatum des Gastes ist ungültig",
+        "46011": "Das Speicherkontingent des Kontos ist erreicht",
+        "50016": "Ihre Domain hat die maximal zulässige Anzahl an Arbeitsbereichen erreicht",
+        "55505": "Sie sind nicht berechtigt, einen Eintrag zu erstellen",
+        "55508": "Ihre Domain hat die maximale Anzahl an verschachtelten Arbeitsgruppen erreicht",
+        "62005": "Sie sind nicht berechtigt, diesen Dienst zu nutzen",
+        "NONE": "",
+        "SERVER": "Der Server antwortet vorübergehend nicht"
+      },
+      "SAAS_ERROR": {
+        "31416": "Maximale Anzahl an Upload-Anfragen erreicht. Bitte wenden Sie sich für ein Upgrade an den Inhaber Ihres Unternehmens unter <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "50016": "Maximale Anzahl an Arbeitsbereichen erreicht. Bitte wenden Sie sich für ein Upgrade an den Inhaber Ihres Unternehmens unter <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "55508": "Maximale Anzahl an verschachtelten Arbeitsgruppen erreicht. Bitte wenden Sie sich für ein Upgrade an den Inhaber Ihres Unternehmens unter <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>"
+      },
+      "UPLOAD_ERROR": {
+        "200": "Das Dokument enthält keine Daten (Größe = 0 Byte)",
+        "3000": "Dieser Dateityp ist nicht erlaubt (MIME-Typ)",
+        "3002": "Dieser Dateityp ist nicht erlaubt",
+        "3003": "Die Datei wurde abgelehnt, weil ein Virus gefunden wurde",
+        "3007": "Die Datei konnte nicht gescannt werden",
+        "26007": "Die Datei kann nicht hochgeladen werden, da der Ordner nicht existiert oder entfernt wurde",
+        "26444": "Sie haben keine Berechtigung zum Hochladen von Dateien",
+        "39001": "Uploads sind derzeit deaktiviert, da der Wartungsmodus aktiviert wurde",
+        "40403": "Der Status der hochgeladenen Datei wurde nicht gefunden",
+        "40404": "Der Status der hochgeladenen Datei wurde nicht gefunden",
+        "46001": "Fehler in der Serverkonfiguration, Hochladen nicht möglich",
+        "46002": "Fehler in der Serverkonfiguration, Hochladen nicht möglich",
+        "46003": "Fehler in der Serverkonfiguration, Hochladen nicht möglich",
+        "46004": "Fehler in der Serverkonfiguration, Hochladen nicht möglich",
+        "46010": "Die Datei ist größer als die maximal zulässige Dateigröße ({{maxFileSize}})",
+        "46011": "Auf dem Server ist kein Speicherplatz mehr verfügbar, bitte versuchen Sie es später erneut",
+        "46012": "Auf dem Server ist kein Speicherplatz mehr verfügbar, bitte versuchen Sie es später erneut",
+        "46013": "Auf dem Server ist kein Speicherplatz mehr verfügbar, bitte versuchen Sie es später erneut",
+        "46014": "Auf dem Server ist kein Speicherplatz mehr verfügbar ({{quotaAttempt}}), geben Sie Speicherplatz frei und versuchen Sie es erneut",
+        "46015": "Auf dem Server ist kein Speicherplatz mehr verfügbar, bitte versuchen Sie es später erneut",
+        "46403": "Fehler in der Serverkonfiguration, Hochladen nicht möglich",
+        "NONE": "Beim Hochladen ist ein Fehler aufgetreten"
+      },
+      "WORKGROUP_NODES_ERROR": {
+        "26444": "Sie haben keine Schreibrechte in dieser Arbeitsgruppe",
+        "46010": "Die Datei ist größer als die maximal zulässige Dateigröße"
+      }
+    }
+  }
+}

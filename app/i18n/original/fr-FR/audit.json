@@ -261,7 +261,7 @@
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "Le document : {{resourceName}}, de {{authorName}} a été supprimé de son Espace Personnel car il est introuvable sur le serveur.",
+            "SENTENCE": "Le document : {{resourceName}} de {{userVarious}} a été supprimé de son Espace Personnel car il est introuvable sur le serveur.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },
@@ -583,11 +583,11 @@
         },
         "DELETE": {
           "AUTHOR": {
-            "SENTENCE": "Vous avez supprimé le Compte Utilisateur de : {{userVarious}}.",
+            "SENTENCE": "Vous avez supprimé le Compte Utilisateur de : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           },
           "VIEWER": {
-            "SENTENCE": "{{authorName}} a supprimé le Compte Utilisateur de : {{userVarious}}.",
+            "SENTENCE": "{{authorName}} a supprimé le Compte Utilisateur de : {{resourceName}}.",
             "ACTION": "@:FILTERS_SELECT.ACTION.DELETE"
           }
         },

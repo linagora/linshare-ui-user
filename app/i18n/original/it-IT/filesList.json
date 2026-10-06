@@ -1,0 +1,169 @@
+{
+  "PAGE_FILE_TITLE": "Elenco dei file",
+  "TABLE_HEADER": {
+    "NAME": "Nome",
+    "MODIFICATION_DATE": "Ultima modifica",
+    "CREATION_DATE": "Data di creazione",
+    "EXPIRATION_DATE": "Data di scadenza",
+    "SIZE": "Dimensione",
+    "ACTION": "Azioni",
+    "AUTHOR": "Autore"
+  },
+  "BACKGROUND_WORKGROUP_TITLE_MSG": "GRUPPI DI LAVORO",
+  "BACKGROUND_SHARED_SPACE_TITLE_MSG": "SPAZI CONDIVISI",
+  "BACKGROUND_WORKGROUP_MSG": "Crea un gruppo di lavoro per scambiare file con i tuoi colleghi",
+  "BACKGROUND_SHARED_SPACE_MSG": "Crea uno spazio condiviso per scambiare file con i tuoi colleghi",
+  "BREADCRUMB_ISOLATE": "Modalità isolamento",
+  "BREADCRUMB_TITLE": "I miei file",
+  "FILE_DIRECTORY_DIALOG": {
+    "ENTER_FOLDER_NAME": "Inserisci qui il nome della cartella",
+    "CANCEL": "Annulla",
+    "COPY_HERE": "Copia qui",
+    "MOVE_HERE": "Sposta qui",
+    "SHARED_SPACE": "Spazio condiviso",
+    "TITLE": "Scegli la destinazione",
+    "NO_SHARED_SPACE": "Non c'è nessuno spazio condiviso. Vai all'<a href='#!/sharedspace/list'>elenco degli spazi condivisi</a> e creane uno.",
+    "NO_SHARED_SPACE_NO_PERMISSION": "Non c'è nessuno spazio condiviso. Chiedi a un amministratore di crearne uno per te o di aggiungerti a uno come collaboratore.",
+    "NO_WORKGROUP": "Non c'è nessun gruppo di lavoro nello spazio di lavoro <b>{{workspaceName}}</b>. Vai su <a ui-sref='sharedspace.workspace({ workspaceUuid: \"{{workspaceUuid}}\" })' ui-sref-opts='{ reload: true }'>{{workspaceName}}</a> e creane uno.",
+    "NO_WORKGROUP_NO_PERMISSION": "Non c'è nessun gruppo di lavoro nello spazio di lavoro <b>{{workspaceName}}</b>. Chiedi a un amministratore di crearne uno per te o di aggiungerti a uno come collaboratore.",
+    "EMPTY_FOLDER": "La cartella è vuota"
+  },
+  "RIGHT_PANEL": {
+    "EMPTY": "nessun file selezionato",
+    "DETAILS": {
+      "ADVANCED_SHARE": "Condivisione avanzata",
+      "CANCEL": "Annulla",
+      "CIPHERED": "Cifrato",
+      "CIPHERED_NO": "No",
+      "CIPHERED_YES": "Sì",
+      "CREATE": "Crea",
+      "CREATE_LIST": "Crea una lista",
+      "CREATION_DATE": "Creato il",
+      "DESCRIPTION": "Descrizione",
+      "EXPIRATION_DATE": "Data di scadenza",
+      "EXPIRATION_DATE_LABEL": "Data di scadenza:",
+      "FORWARD": "Inoltra",
+      "UNSET_SHARED_FILE_EXPIRRATION_DATE": "La data di scadenza verrà definita quando tutte le condivisioni collegate saranno state rimosse o saranno scadute",
+      "INPUT_LIST_NAME": "Inserisci il nome della tua lista",
+      "MODIFICATION_DATE": "Data di modifica",
+      "NO_PREVIEW_AVAILABLE": "Nessuna anteprima disponibile",
+      "PARAMETERS": "Parametri",
+      "PEOPLE_SHARED_WITH": "contatto/i",
+      "PREVIEW_NOT_LOADABLE": "Anteprima non valida",
+      "QUICK_SHARE": "Condivisione rapida",
+      "RECIPIENTS_SELECTION": "Selezione dei destinatari",
+      "SELECTED_FILES": "File selezionati",
+      "SHARE": "Condividi",
+      "SHARE_PLACEHOLDER": "indirizzi email dei destinatari",
+      "SHARED_BY": "Condiviso da:",
+      "SHARED_WITH": "Condiviso con:",
+      "SHARING_DATE": "Data di condivisione",
+      "SIZE": "Dimensione",
+      "THUMBNAIL": "Miniatura di ",
+      "TITLE": "DETTAGLI",
+      "TYPE": "Tipo",
+      "UNDEFINED": "Non definito",
+      "UPLOAD_DATE": "Data di caricamento"
+    },
+    "DETAIL_SHARE": {
+      "TITLE": "Dettaglio della condivisione",
+      "SHARED_DATE": "Condiviso il",
+      "EXPIRATION_DATE": " Scade il",
+      "DOWNLOADED": "Scaricato",
+      "TIMES": "volte",
+      "EDIT": "modifica",
+      "VIEW_MORE": "visualizza dettagli",
+      "RESEND": "Invia di nuovo",
+      "ABORT_SHARE": "Annulla la condivisione",
+      "SHARE_DESCRIPTION": "Descrizione della condivisione:",
+      "NO_DESCRIPTION": "Nessuna descrizione"
+    },
+    "ACTIVITIES": {
+      "TITLE": "ATTIVITÀ"
+    },
+    "RECIPIENTS": {
+      "TITLE": "CONDIVISIONI",
+      "DOWNLOADED": "Scaricato",
+      "NOT_DOWNLOADED": "Non scaricato",
+      "SEARCH_USERS": "Cerca per destinatari",
+      "NO_SHARES": "Al momento non hai condivisioni."
+    },
+    "SHARE": {
+      "TITLE": "CONDIVISIONE",
+      "SELECTED_FILES": "file selezionato/i",
+      "UNHIDE_FILES": "mostra tutto",
+      "SHOW_SELECTED_FILES": "isola la selezione",
+      "SETTINGS": "Impostazioni",
+      "MORE_OPTIONS": "altre opzioni",
+      "ADVANCED_OPTIONS": "Opzioni avanzate",
+      "RECIPIENTS": "Aggiungi destinatari",
+      "RECIPIENTS_PLACEHOLDER": "Cerca i destinatari della condivisione",
+      "CREATE_MAILING_LIST": "Salva",
+      "CREATE_MAILING_LIST_ALT": "Crea una lista di distribuzione",
+      "CREATE_GUEST_ACCOUNT": "Creare un account ospite?"
+    },
+    "SHARE_OPTIONS": {
+      "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Forza la condivisione anonima per tutti i destinatari",
+      "TITLE": "Opzioni di condivisione",
+      "ADD_NOTE": "Aggiungi una descrizione alla condivisione",
+      "ADD_NOTE_PLACEHOLDER": "Inserisci una nota per la condivisione",
+      "SECURE_SHARING": "Proteggi la condivisione",
+      "SHARING_ACKNOWLEDGEMENT": "Conferma di condivisione",
+      "USDA": "Avviso di documento non scaricato",
+      "NOTIFICATION_DATE": "Notifica di file non scaricato",
+      "NOTIFICATION_DATE_INVALID": "La data di notifica per i file non scaricati non è valida.",
+      "ATTACH_EMAIL": "Personalizza l'email",
+      "ATTACHED_EMAIL_SUBJECT": "Oggetto dell'email",
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Inserisci il messaggio dell'email",
+      "GO_TO_UPLOAD_FILES": "Torna ai caricamenti",
+      "ERROR": {
+        "INVALID_DATE": "La data non è valida"
+      }
+    },
+    "CURRENT_SHARE_DETAIL": {
+      "TITLE": "Dettagli della condivisione",
+      "RECIPIENTS": "Destinatari",
+      "SHARE_PARAMS": "Impostazioni della condivisione",
+      "NOTE": "Messaggio",
+      "MAIL_CONTENT": "Contenuto dell'email",
+      "CUSTOM_MAIL_TEMPLATE": "Modello di email personalizzato",
+      "SHARE_OPTIONS": "Annulla la condivisione"
+    }
+  },
+  "SELECTED_FILES": {
+    "BREADCRUMB_TITLE": "File selezionati",
+    "BACK_TO_ALL_FILES": "Torna ai miei file",
+    "SHOW_DETAILS": "Mostra dettagli"
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Caricamenti",
+    "UPLOAD_FILES_BUTTON": "Nuovo caricamento",
+    "SELECT_INFO": "Seleziona i file da condividere"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Trascina qui i tuoi file",
+    "COMMENT": "Trascina e rilascia qui i tuoi file per caricarli"
+  },
+  "DRAG_DROP_BACKGROUND_MOBILE_MY_FILES": {
+    "TITLE": "Carica e condividi",
+    "COMMENT": "Carica e condividi i tuoi file."
+  },
+  "DRAG_DROP_BACKGROUND_ON_DRAG": {
+    "TITLE": "Trascina qui i tuoi file",
+    "COMMENT": "Trascina e rilascia qui i tuoi file per caricarli"
+  },
+  "PREVIEW_MODE": {
+    "PDF_DOWNLOAD": "Fai clic qui per scaricare il file PDF",
+    "NO_PDF_VIEWER": "Impossibile caricare l'anteprima del PDF",
+    "NO_PREVIEW_AVAILABLE": "Nessuna anteprima disponibile"
+  },
+  "WORKGROUPS_LIST": {
+    "PROJECT": "Progetto",
+    "FOLDER": "Cartella",
+    "SHARED_FOLDER": "Gruppo di lavoro",
+    "UPLOAD_FILE": "Caricamento di file",
+    "UPLOAD_FOLDER": "Caricamento di cartella",
+    "UPLOAD_REQUEST": "Richiesta di caricamento",
+    "MEMBER": "Membri"
+  }
+}

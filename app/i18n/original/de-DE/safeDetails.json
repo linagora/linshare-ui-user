@@ -1,0 +1,19 @@
+{
+  "ACTION": {
+    "GO_TO_MY_SAFE": "Zu meinem Tresor",
+    "VIEW_SAFE_DETAIL": "Tresordetails anzeigen"
+  },
+  "BREADCRUMB_TITLE_SAFE_DETAILS": "Tresordetails",
+  "POPOVER": {
+    "TITLE": "Tresordetail",
+    "INFORMATION": "Bitte kopieren Sie es und senden Sie es an den Anbieter."
+  },
+  "TABLE_HEADER": {
+    "ACTIONS": "Aktionen",
+    "CONTROL_KEY": "Kontrollschlüssel",
+    "COUNTRY_CODE": "Ländercode",
+    "CREATION_DATE": "Erstellungsdatum",
+    "IUFSC": "IUFSC",
+    "USER_KEY": "Benutzerschlüssel"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "USER_PROFILE": {
+    "TITLE": "Mein Profil",
+    "ALERT": {
+      "UPDATE_SUCCESS": "Profil aktualisiert"
+    },
+    "INFO": {
+      "FIRSTNAME": "Vorname",
+      "LASTNAME": "Nachname",
+      "EMAIL": "E-Mail",
+      "NOTIFICATION_LANGUAGE": "Meine Benachrichtigungssprache",
+      "NOTIFICATION_LANGUAGE_EXTERNAL": "Benachrichtigungssprache externer Benutzer",
+      "MODIFICATION_DATE": "Änderungsdatum",
+      "CREATION_DATE": "Erstellungsdatum",
+      "EXPIRATION_DATE": "Ablaufdatum",
+      "CREATOR": "Ersteller"
+    },
+    "TABS": {
+      "FAVOURITE_RECIPIENTS": "Bevorzugte Empfänger",
+      "RESTRICTED_CONTACTS": "Eingeschränkte Kontakte",
+      "RESTRICTED_CONTACTSLISTS": "Eingeschränkte Kontaktlisten"
+    },
+    "SORTERS": {
+      "FIRSTNAME": "Nach Vorname sortieren",
+      "LASTNAME": "Nach Nachname sortieren",
+      "NAME": "Nach Name sortieren",
+      "MAIL": "Nach E-Mail sortieren"
+    },
+    "FAVOURITE_RECIPIENTS": {
+      "DIALOG": {
+        "DELETE": {
+          "TITLE": "Bevorzugte Empfänger löschen",
+          "TEXT": "Sie sind dabei, {singular, select, true{einen Empfänger} other{{nbItems} Empfänger}} zu löschen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden."
+        }
+      },
+      "TOAST_ALERT": {
+        "DELETE": {
+          "ERROR": "{singular, select, true{Ein Empfänger wurde} other{{number} Empfänger wurden}} nicht gelöscht.",
+          "INFO": "{singular, select, true{Ein Empfänger wurde} other{{number} Empfänger wurden}} gelöscht."
+        }
+      }
+    }
+  }
+}

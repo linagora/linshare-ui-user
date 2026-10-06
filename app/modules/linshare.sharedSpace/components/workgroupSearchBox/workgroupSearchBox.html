@@ -40,7 +40,7 @@
 
               <md-checkbox
                 class="advanced-search-box__field-checkbox"
-                aria-label="Files"
+                aria-label="{{'WORKGROUP_SEARCH_BOX.NODE_TYPES.DOCUMENT' | translate}}"
                 ng-model="workgroupSearchBoxVm.searchFiles"
                 ng-change="workgroupSearchBoxVm.updateTypesList('DOCUMENT', workgroupSearchBoxVm.searchFiles)"
               >
@@ -48,7 +48,7 @@
               </md-checkbox>
               <md-checkbox
                 class="advanced-search-box__field-checkbox"
-                aria-label="Files"
+                aria-label="{{'WORKGROUP_SEARCH_BOX.NODE_TYPES.FOLDER' | translate}}"
                 ng-model="workgroupSearchBoxVm.searchFolders"
                 ng-change="workgroupSearchBoxVm.updateTypesList('FOLDER', workgroupSearchBoxVm.searchFolders)"
               >
@@ -56,7 +56,7 @@
               </md-checkbox>
               <md-checkbox
                 class="advanced-search-box__field-checkbox"
-                aria-label="Files"
+                aria-label="{{'WORKGROUP_SEARCH_BOX.NODE_TYPES.REVISION' | translate}}"
                 name="type"
                 ng-model="workgroupSearchBoxVm.searchRevisions"
                 ng-change="workgroupSearchBoxVm.updateTypesList('DOCUMENT_REVISION', workgroupSearchBoxVm.searchRevisions)"

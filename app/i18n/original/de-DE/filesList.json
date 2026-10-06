@@ -1,0 +1,169 @@
+{
+  "PAGE_FILE_TITLE": "Dateiliste",
+  "TABLE_HEADER": {
+    "NAME": "Name",
+    "MODIFICATION_DATE": "Letzte Änderung",
+    "CREATION_DATE": "Erstellungsdatum",
+    "EXPIRATION_DATE": "Ablaufdatum",
+    "SIZE": "Größe",
+    "ACTION": "Aktionen",
+    "AUTHOR": "Autor"
+  },
+  "BACKGROUND_WORKGROUP_TITLE_MSG": "ARBEITSGRUPPEN",
+  "BACKGROUND_SHARED_SPACE_TITLE_MSG": "GEMEINSAME BEREICHE",
+  "BACKGROUND_WORKGROUP_MSG": "Erstellen Sie eine Arbeitsgruppe, um Dateien mit Ihren Kollegen auszutauschen",
+  "BACKGROUND_SHARED_SPACE_MSG": "Erstellen Sie einen gemeinsamen Bereich, um Dateien mit Ihren Kollegen auszutauschen",
+  "BREADCRUMB_ISOLATE": "Isolationsmodus",
+  "BREADCRUMB_TITLE": "Meine Dateien",
+  "FILE_DIRECTORY_DIALOG": {
+    "ENTER_FOLDER_NAME": "Geben Sie hier den Ordnernamen ein",
+    "CANCEL": "Abbrechen",
+    "COPY_HERE": "Hierher kopieren",
+    "MOVE_HERE": "Hierher verschieben",
+    "SHARED_SPACE": "Gemeinsamer Bereich",
+    "TITLE": "Ziel auswählen",
+    "NO_SHARED_SPACE": "Es gibt keinen gemeinsamen Bereich. Bitte öffnen Sie die <a href='#!/sharedspace/list'>Liste der gemeinsamen Bereiche</a> und erstellen Sie einen.",
+    "NO_SHARED_SPACE_NO_PERMISSION": "Es gibt keinen gemeinsamen Bereich. Bitten Sie einen Administrator, einen für Sie zu erstellen oder Sie als Mitwirkenden zu einem hinzuzufügen.",
+    "NO_WORKGROUP": "Im Arbeitsbereich <b>{{workspaceName}}</b> gibt es keine Arbeitsgruppe. Bitte öffnen Sie <a ui-sref='sharedspace.workspace({ workspaceUuid: \"{{workspaceUuid}}\" })' ui-sref-opts='{ reload: true }'>{{workspaceName}}</a> und erstellen Sie eine.",
+    "NO_WORKGROUP_NO_PERMISSION": "Im Arbeitsbereich <b>{{workspaceName}}</b> gibt es keine Arbeitsgruppe. Bitten Sie einen Administrator, eine für Sie zu erstellen oder Sie als Mitwirkenden zu einer hinzuzufügen.",
+    "EMPTY_FOLDER": "Der Ordner ist leer"
+  },
+  "RIGHT_PANEL": {
+    "EMPTY": "keine Datei ausgewählt",
+    "DETAILS": {
+      "ADVANCED_SHARE": "Erweiterte Freigabe",
+      "CANCEL": "Abbrechen",
+      "CIPHERED": "Verschlüsselt",
+      "CIPHERED_NO": "Nein",
+      "CIPHERED_YES": "Ja",
+      "CREATE": "Erstellen",
+      "CREATE_LIST": "Liste erstellen",
+      "CREATION_DATE": "Erstellt am",
+      "DESCRIPTION": "Beschreibung",
+      "EXPIRATION_DATE": "Ablaufdatum",
+      "EXPIRATION_DATE_LABEL": "Ablaufdatum:",
+      "FORWARD": "Weiterleiten",
+      "UNSET_SHARED_FILE_EXPIRRATION_DATE": "Das Ablaufdatum wird festgelegt, sobald alle zugehörigen Freigaben entfernt oder abgelaufen sind",
+      "INPUT_LIST_NAME": "Geben Sie den Namen Ihrer Liste ein",
+      "MODIFICATION_DATE": "Änderungsdatum",
+      "NO_PREVIEW_AVAILABLE": "Keine Vorschau verfügbar",
+      "PARAMETERS": "Parameter",
+      "PEOPLE_SHARED_WITH": "Kontakt(e)",
+      "PREVIEW_NOT_LOADABLE": "Ungültige Vorschau",
+      "QUICK_SHARE": "Schnellfreigabe",
+      "RECIPIENTS_SELECTION": "Auswahl der Empfänger",
+      "SELECTED_FILES": "Ausgewählte Dateien",
+      "SHARE": "Freigeben",
+      "SHARE_PLACEHOLDER": "E-Mail-Adressen der Empfänger",
+      "SHARED_BY": "Freigegeben von:",
+      "SHARED_WITH": "Freigegeben für:",
+      "SHARING_DATE": "Freigabedatum",
+      "SIZE": "Größe",
+      "THUMBNAIL": "Miniaturansicht von ",
+      "TITLE": "DETAILANSICHT",
+      "TYPE": "Typ",
+      "UNDEFINED": "Nicht festgelegt",
+      "UPLOAD_DATE": "Hochladedatum"
+    },
+    "DETAIL_SHARE": {
+      "TITLE": "Freigabedetail",
+      "SHARED_DATE": "Freigegeben am",
+      "EXPIRATION_DATE": " Läuft ab am",
+      "DOWNLOADED": "Heruntergeladen",
+      "TIMES": "Mal",
+      "EDIT": "bearbeiten",
+      "VIEW_MORE": "Details anzeigen",
+      "RESEND": "Erneut senden",
+      "ABORT_SHARE": "Freigabe aufheben",
+      "SHARE_DESCRIPTION": "Beschreibung der Freigabe:",
+      "NO_DESCRIPTION": "Keine Beschreibung"
+    },
+    "ACTIVITIES": {
+      "TITLE": "AKTIVITÄTEN"
+    },
+    "RECIPIENTS": {
+      "TITLE": "FREIGABEN",
+      "DOWNLOADED": "Heruntergeladen",
+      "NOT_DOWNLOADED": "Nicht heruntergeladen",
+      "SEARCH_USERS": "Nach Empfängern suchen",
+      "NO_SHARES": "Sie haben derzeit keine Freigaben."
+    },
+    "SHARE": {
+      "TITLE": "FREIGABE",
+      "SELECTED_FILES": "ausgewählte Datei(en)",
+      "UNHIDE_FILES": "alle anzeigen",
+      "SHOW_SELECTED_FILES": "Auswahl isolieren",
+      "SETTINGS": "Einstellungen",
+      "MORE_OPTIONS": "weitere Optionen",
+      "ADVANCED_OPTIONS": "Erweiterte Optionen",
+      "RECIPIENTS": "Empfänger hinzufügen",
+      "RECIPIENTS_PLACEHOLDER": "Empfänger der Freigabe suchen",
+      "CREATE_MAILING_LIST": "Speichern",
+      "CREATE_MAILING_LIST_ALT": "Verteilerliste erstellen",
+      "CREATE_GUEST_ACCOUNT": "Gastkonto erstellen?"
+    },
+    "SHARE_OPTIONS": {
+      "FORCE_ANONYMOUS_SHARE_FOR_ALL_RECIPIENTS": "Anonyme Freigabe für alle Empfänger erzwingen",
+      "TITLE": "Freigabeoptionen",
+      "ADD_NOTE": "Beschreibung zur Freigabe hinzufügen",
+      "ADD_NOTE_PLACEHOLDER": "Geben Sie eine Notiz zur Freigabe ein",
+      "SECURE_SHARING": "Freigabe absichern",
+      "SHARING_ACKNOWLEDGEMENT": "Freigabebestätigung",
+      "USDA": "Warnung bei nicht heruntergeladenem Dokument",
+      "NOTIFICATION_DATE": "Benachrichtigung bei nicht heruntergeladener Datei",
+      "NOTIFICATION_DATE_INVALID": "Das Benachrichtigungsdatum für nicht heruntergeladene Dateien ist ungültig.",
+      "ATTACH_EMAIL": "E-Mail anpassen",
+      "ATTACHED_EMAIL_SUBJECT": "E-Mail-Betreff",
+      "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Geben Sie Ihre E-Mail-Nachricht ein",
+      "GO_TO_UPLOAD_FILES": "Zurück zu den Uploads",
+      "ERROR": {
+        "INVALID_DATE": "Das Datum ist ungültig"
+      }
+    },
+    "CURRENT_SHARE_DETAIL": {
+      "TITLE": "Freigabedetails",
+      "RECIPIENTS": "Empfänger",
+      "SHARE_PARAMS": "Freigabeeinstellungen",
+      "NOTE": "Nachricht",
+      "MAIL_CONTENT": "Inhalt der E-Mail",
+      "CUSTOM_MAIL_TEMPLATE": "Benutzerdefinierte E-Mail-Vorlage",
+      "SHARE_OPTIONS": "Freigabe aufheben"
+    }
+  },
+  "SELECTED_FILES": {
+    "BREADCRUMB_TITLE": "Ausgewählte Dateien",
+    "BACK_TO_ALL_FILES": "Zurück zu meinen Dateien",
+    "SHOW_DETAILS": "Details anzeigen"
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Hochgeladene Dateien",
+    "UPLOAD_FILES_BUTTON": "Neuer Upload",
+    "SELECT_INFO": "Wählen Sie die freizugebenden Dateien aus"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Dateien hier ablegen",
+    "COMMENT": "Ziehen Sie Ihre Dateien hierher, um sie hochzuladen"
+  },
+  "DRAG_DROP_BACKGROUND_MOBILE_MY_FILES": {
+    "TITLE": "Hochladen und freigeben",
+    "COMMENT": "Laden Sie Ihre Dateien hoch und geben Sie sie frei."
+  },
+  "DRAG_DROP_BACKGROUND_ON_DRAG": {
+    "TITLE": "Dateien hier ablegen",
+    "COMMENT": "Ziehen Sie Ihre Dateien hierher, um sie hochzuladen"
+  },
+  "PREVIEW_MODE": {
+    "PDF_DOWNLOAD": "Klicken Sie hier, um die PDF-Datei herunterzuladen",
+    "NO_PDF_VIEWER": "PDF-Vorschau kann nicht geladen werden",
+    "NO_PREVIEW_AVAILABLE": "Keine Vorschau verfügbar"
+  },
+  "WORKGROUPS_LIST": {
+    "PROJECT": "Projekt",
+    "FOLDER": "Ordner",
+    "SHARED_FOLDER": "Arbeitsgruppe",
+    "UPLOAD_FILE": "Datei hochladen",
+    "UPLOAD_FOLDER": "Ordner hochladen",
+    "UPLOAD_REQUEST": "Upload-Anfrage",
+    "MEMBER": "Mitglieder"
+  }
+}
