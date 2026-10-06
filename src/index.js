@@ -42,6 +42,9 @@ require('uuid');
 require('moment/locale/fr');
 require('moment/locale/vi');
 require('moment/locale/ru');
+require('moment/locale/es');
+require('moment/locale/de');
+require('moment/locale/it');
 
 // Internal modules
 require('../app/scripts/app');
