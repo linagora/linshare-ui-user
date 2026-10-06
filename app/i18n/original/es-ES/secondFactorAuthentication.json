@@ -1,0 +1,32 @@
+{
+  "SECOND_FACTOR_AUTH": {
+    "TITLE": "Autenticación de dos factores",
+    "SHARED_KEY_CREATION": {
+      "REQUIRED": "La autenticación de dos factores es obligatoria para su cuenta. Active la autenticación de dos factores para seguir usando LinShare.",
+      "INSTRUCTION": "Para activar la autenticación de dos factores en su cuenta:",
+      "STEP_1": "Descargue e instale la aplicación de autenticación OTP que prefiera.\nPara Android, en Google Play Store o F-Droid: FreeOTP+, Google Authenticator, Microsoft Authenticator o Aegis Authenticator.\nPara iOS, en App Store: FreeOTP, Google Authenticator o Microsoft Authenticator.",
+      "STEP_2": "Genere la clave compartida y use su aplicación de autenticación OTP preferida para escanear el código QR o añadir la clave como se indica a continuación:",
+      "GENERATE_KEY": "Generar clave compartida",
+      "KEY_CREATED_ON": "Clave compartida creada el {{date}}",
+      "CAN_NOT_SCAN": "¿No puede escanearlo?"
+    },
+    "SHARED_KEY_REMOVAL": {
+      "NOTICE": "La clave compartida no se puede eliminar porque la autenticación de dos factores es obligatoria para su cuenta. Póngase en contacto con el soporte para obtener más información.",
+      "INSTRUCTION": "Elimine la clave compartida para desactivar la autenticación de dos factores en su cuenta:",
+      "REMOVE_KEY": "Eliminar clave compartida",
+      "REMOVAL_SUCCESS": "La clave compartida se ha eliminado correctamente."
+    },
+    "MANUAL_SETUP": {
+      "LABEL": "¿No puede escanear el código?",
+      "STEP_1": "1. En su aplicación de autenticación OTP preferida, seleccione el icono para añadir una clave.",
+      "STEP_2": "2. Introduzca el emisor y la cuenta como se indica a continuación:",
+      "STEP_3": "3. Introduzca la clave secreta como se indica a continuación:",
+      "STEP_4": "4. Asegúrese de que los siguientes campos estén configurados así:",
+      "STEP_5": "5. Pulse el botón Añadir para terminar.",
+      "TYPE": "Tipo: ",
+      "DIGITS": "Dígitos: ",
+      "ALGORITHM": "Algoritmo: ",
+      "INTERVAL": "Intervalo: "
+    }
+  }
+}

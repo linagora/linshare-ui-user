@@ -1,0 +1,155 @@
+{
+  "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "CANCEL_BUTTON": "¡Cancelar!",
+      "CONFIRM_BUTTON": "Copiar",
+      "TEXT": "Está a punto de copiar {singular, select, true{un documento recibido} other{{nbItems} documentos recibidos}}, con un tamaño total de {totalSize}, en sus propios archivos.",
+      "TITLE": "Copia de archivo"
+    },
+    "ON_ITEM_DELETE": {
+      "CANCEL_BUTTON": "Cancelar",
+      "CONFIRM_BUTTON": "Sí, eliminar",
+      "TEXT": {
+        "CONTACTS_LIST": "Está a punto de eliminar {singular, select, true{una lista de contactos} other{{nbItems} listas de contactos}}. Atención: esta acción no se puede deshacer.",
+        "CONTACTS_LIST_CONTACT": "Está a punto de eliminar {singular, select, true{un contacto} other{{nbItems} contactos}}. Atención: esta acción no se puede deshacer.",
+        "DOCUMENT": "Está a punto de eliminar {singular, select, true{un documento} other{{nbItems} documentos}}. Atención: esta acción no se puede deshacer.",
+        "GUEST": "Está a punto de eliminar {singular, select, true{un invitado} other{{nbItems} invitados}}. Atención: esta acción no se puede deshacer.",
+        "RECEIVED_SHARE": "Está a punto de eliminar {singular, select, true{un archivo compartido} other{{nbItems} archivos compartidos}}. Atención: esta acción no se puede deshacer.",
+        "WORKGROUP": "Está a punto de eliminar {singular, select, true{un grupo de trabajo} other{{nbItems} grupos de trabajo}}. Atención: esta acción no se puede deshacer.",
+        "WORKSPACE": "Está a punto de eliminar {singular, select, true{un espacio de trabajo} other{{nbItems} espacios de trabajo}}. Atención: esta acción no se puede deshacer.",
+        "WORKGROUP_AND_WORKSPACE": "Está a punto de eliminar {nbItems} grupos de trabajo y espacios de trabajo. Atención: esta acción no se puede deshacer.",
+        "WORKGROUP_NODE": "Está a punto de eliminar {singular, select, true{un documento o carpeta} other{{nbItems} documentos o carpetas}}. Atención: esta acción no se puede deshacer.",
+        "WORKGROUP_VERSION": "Está a punto de eliminar {singular, select, true{una versión} other{{nbItems} versiones}}. Atención: esta acción no se puede deshacer.",
+        "WORKGROUP_VERSION_LAST": "Esta es la última versión: ¡está a punto de eliminar el archivo! Atención: esta acción no se puede deshacer.",
+        "WORKGROUP_VERSION_ALL": "Ha seleccionado todas las versiones existentes: ¡está a punto de eliminar el archivo! Atención: esta acción no se puede deshacer.",
+        "2FA_SHARED_KEY": "Está a punto de eliminar la clave compartida. Atención: esta acción no se puede deshacer."
+      },
+      "TITLE": "Eliminación"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "¿Está seguro?",
+      "TEXT": "Se eliminarán todos los valores guardados en el localStorage",
+      "CONFIRM_BUTTON": "¡Sí, eliminarlos!",
+      "DONE": "Hecho",
+      "IS_CLEARED": "Se ha vaciado el localStorage"
+    },
+    "ON_MULTIPLE_DOWNLOAD": {
+      "CANCEL_BUTTON": "CANCELAR",
+      "CONFIRM_BUTTON": "OK",
+      "TEXT": "Va a descargar {{nbFiles}} archivos (tamaño total: {{totalSize}})",
+      "TITLE": "Descarga múltiple"
+    },
+    "ON_SHARE_DELETE": {
+      "CANCEL_BUTTON": "¡Cancelar!",
+      "CONFIRM_BUTTON": "Eliminar",
+      "TEXT": "¡Está a punto de eliminar un recurso compartido!",
+      "TITLE": "¿Está seguro?"
+    },
+    "ON_WORKGROUP_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Cancelar",
+      "CONFIRM_BUTTON": "Sí, eliminar",
+      "TITLE": "Eliminación de miembro",
+      "TEXT": "Está a punto de quitar a {{firstName}} {{lastName}} del grupo de trabajo {{sharedSpaceName}}.",
+      "SELF_REMOVE_TEXT": "Está a punto de salir del grupo de trabajo {{sharedSpaceName}}. Ya no tendrá acceso a este grupo de trabajo."
+    },
+    "ON_WORKSPACE_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Cancelar",
+      "CONFIRM_BUTTON": "Sí, eliminar",
+      "TITLE": "Eliminación de miembro",
+      "TEXT": "Está a punto de quitar a {{firstName}} {{lastName}} del espacio de trabajo {{sharedSpaceName}} y de todos sus grupos de trabajo.",
+      "SELF_REMOVE_TEXT": "Está a punto de salir del espacio de trabajo {{sharedSpaceName}}. Ya no tendrá acceso a este espacio de trabajo."
+    },
+    "ON_GUEST_QUICK_CREATE": {
+      "CANCEL_BUTTON": "No",
+      "CONFIRM_BUTTON": "Sí",
+      "TITLE": "¿Crear invitado?",
+      "TEXT": "Va a invitar a {{mail}} como invitado."
+    }
+  },
+  "TOAST_ALERT": {
+    "ACTION": {
+      "BROWSER_ACTION": "{singular, select, true{El archivo o la carpeta se ha} other{Los archivos o carpetas se han}} {action, select, moved{movido} other{copiado}} a: {folderName}.",
+      "CLOSE": "Cerrar",
+      "CONTACTS_LIST_CREATION": "La lista de contactos {{contactsListName}} se ha creado correctamente.",
+      "COPY": "{singular, select, true{El archivo se ha copiado} other{Se han copiado {nbItems} archivos}} en su espacio personal.",
+      "COPY_SAME_FOLDER": "{singular, select, true{El archivo se ha copiado} other{Los archivos se han copiado}} correctamente.",
+      "COPY_VERSION": "Se ha añadido correctamente una nueva versión de {{targetNodeName}}.",
+      "DELETE": "Eliminación realizada",
+      "DELETE_SINGULAR": "El elemento se ha eliminado correctamente.",
+      "DELETE_PLURAL": "Los elementos se han eliminado correctamente.",
+      "DELETE_LAST_VERSION": "El archivo se ha eliminado correctamente",
+      "DELETE_SINGULAR_VERSION": "La versión se ha eliminado correctamente.",
+      "DELETE_PLURAL_VERSION": "Las versiones se han eliminado correctamente.",
+      "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} se ha quitado correctamente del grupo de trabajo",
+      "DELETE_WORKSPACE_MEMBER": "{{firstName}} {{lastName}} se ha quitado correctamente del espacio de trabajo",
+      "DETAILS": "Detalles",
+      "INSERT": "El elemento se ha añadido correctamente.",
+      "REFRESH": "Debe actualizar la aplicación para que se tenga en cuenta esta acción",
+      "SHARE": "{{singular ? 'Su archivo' : 'Sus archivos'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'se ha' : 'se han'}} enviado correctamente.",
+      "SHARE_DELETED": "Su recurso compartido con {{recipient}} se ha eliminado correctamente.",
+      "SHARE_CANCELED": "Su recurso compartido se ha cancelado correctamente.",
+      "SHARE_ASYNC": "Su recurso compartido se enviará cuando se hayan cargado todos los archivos.",
+      "SHARE_FAILED": "Su recurso compartido {{shareName ? shareName + ' ': ''}}ha fallado.",
+      "UPDATE": "El elemento se ha actualizado correctamente.",
+      "RESTORE": "La versión se ha restaurado correctamente.",
+      "FORWARD": {
+        "ERROR": "No se pudo reenviar {nbItems} {singular, select, true{archivo} other{archivos}}.",
+        "INFO": "{singular, select, true{Se ha reenviado correctamente {nbItems} archivo} other{Se han reenviado correctamente {nbItems} archivos}}."
+      },
+      "COPY_BEFORE_FORWARD": {
+        "INFO": "{singular, select, true{El archivo se ha copiado} other{Se han copiado {nbItems} archivos}} en su espacio personal, pero no se puede compartir."
+      }
+    },
+    "ACTION_BUTTON": "Ver",
+    "ACTION_REFRESH": "Actualizar",
+    "ERROR": {
+      "503": "Servicio no disponible",
+      "BROWSER_ACTION": "{nbNodes} {singular, select, true{archivo o carpeta no se ha podido} other{archivos o carpetas no se han podido}} {action, select, moved{mover} other{copiar}}",
+      "COPY": {
+        "26444": "No tiene permisos suficientes para realizar esta operación",
+        "DEFAULT": "{singular, select, true{No se ha podido copiar un archivo} other{No se han podido copiar {nbItems} archivos}}"
+      },
+      "DOWNLOAD_FOLDER": "No se puede descargar la carpeta seleccionada: el archivo comprimido es demasiado grande",
+      "FILE_NOT_FOUND": "No se ha encontrado el archivo seleccionado",
+      "FILE_UPLOAD": "La carga ha fallado",
+      "RENAME_NODE": "Ya existe un archivo o una carpeta con el mismo nombre",
+      "RENAME_CONTACTS_LIST": "Ya existe una lista de contactos con el mismo nombre",
+      "RENAME_INVALID": {
+        "EMPTY": "El nombre no puede estar vacío",
+        "ENDING_POINT": "El nombre no puede terminar con el carácter '.'",
+        "REJECTED_CHAR": "El nombre no es válido; no puede utilizar los siguientes caracteres: '{{rejectedChar}}'"
+      },
+      "DELETE_ERROR": {
+        "26006": "Todavía no se admite la eliminación de una carpeta que no esté vacía",
+        "26444": "No tiene permiso para eliminar",
+        "26448": "No se ha encontrado la versión",
+        "26449": "No puede eliminar la última versión; intente eliminar el documento completo",
+        "error": "Se ha producido un error durante la eliminación"
+      },
+      "NO_RESPONSE_ERROR": "Error sin respuesta del servidor; consulte los registros.",
+      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} ya es miembro de este grupo de trabajo.",
+      "MEMBER_ALREADY_IN_WORKSPACE": "{{firstName}} {{lastName}} ya es miembro de este espacio de trabajo.",
+      "RESTORE": "Se ha producido un error al restaurar la versión."
+    },
+    "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Introduzca al menos un destinatario o una lista de contactos con quien compartir",
+      "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Introduzca al menos un destinatario",
+      "AT_LEAST_ONE_DOCUMENT": "No hay ningún archivo seleccionado",
+      "EMAIL_ALREADY_IN_UPLOAD_REQUEST": "Una dirección de correo electrónico ya figura en la lista de destinatarios",
+      "AUTHOR_ALREADY_EXISTS": "El autor ya figura en la lista",
+      "CONTACT_STILL_EXISTS": "ya está en la lista",
+      "ELEMENTS_NOT_DELETED": "elemento(s) no se han eliminado",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "1 elemento no se ha eliminado.",
+      "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} elementos no se han eliminado.",
+      "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{elemento no se ha cargado} other{elementos no se han cargado}}.",
+      "ERROR": "Error:",
+      "ERROR_404": "Error {{errCode}}: elemento no encontrado",
+      "ERROR_403": "Error {{errCode}}: no está autorizado a eliminar este documento",
+      "ERROR_400": "Error {{errCode}}: no se ha podido completar la solicitud",
+      "ERROR_500": "Error {{errCode}}: error del servidor",
+      "INVALID_EMAIL": "Correo electrónico no válido",
+      "ISOLATED_FILE": "Está viendo una selección restringida de archivos.",
+      "ENTER_TOKEN_NAME": "Introduzca el nombre del token"
+    }
+  }
+}

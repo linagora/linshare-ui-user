@@ -1,0 +1,54 @@
+{
+  "TOKEN_MANAGEMENT": {
+    "TITLE": "Gestión de tokens",
+    "CREATE": "Crear token",
+    "TABLE": {
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Cree nuevos tokens aquí",
+        "MESSAGE": "Cree y gestione sus tokens"
+      },
+      "HEADERS": {
+        "LABEL": "Etiqueta",
+        "CREATION_DATE": "Fecha de creación"
+      }
+    },
+    "DIALOG": {
+      "CREATED": {
+        "TITLE": "Ha creado un nuevo token",
+        "TEXT": "Atención: el token solo se muestra una vez y no se puede recuperar. Guárdelo antes de cerrar:",
+        "CLOSE": "Cerrar"
+      },
+      "DELETE": {
+        "TITLE": "Eliminar token",
+        "TEXT": "Está a punto de eliminar {singular, select, true{un token} other{{numberOfTokens} tokens}}. Atención: esta acción no se puede deshacer."
+      }
+    },
+    "TOAST_ALERT": {
+      "CREATE": {
+        "SUCCESS": "Se ha creado un nuevo token.",
+        "ERROR": "Se ha producido un error al crear el token."
+      },
+      "UPDATE": {
+        "SUCCESS": "El token se ha actualizado.",
+        "ERROR": "Se ha producido un error al actualizar el token."
+      },
+      "DELETE": {
+        "ERROR": "{number} {singular, select, true{token no se ha eliminado} other{tokens no se han eliminado}}.",
+        "INFO": "{number} {singular, select, true{token se ha eliminado} other{tokens se han eliminado}}."
+      }
+    },
+    "FORM": {
+      "TITLE": "Crear token",
+      "EDIT": "Editar token",
+      "NAME": "Nombre del token",
+      "DESCRIPTION": "Añadir una descripción"
+    },
+    "ERROR": {
+      "LABEL_REQUIRED": "El nombre no puede estar vacío"
+    },
+    "DETAILS": {
+      "LABEL": "Etiqueta del token",
+      "CREATED": "Creado el"
+    }
+  }
+}

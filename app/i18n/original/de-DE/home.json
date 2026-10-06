@@ -1,0 +1,15 @@
+{
+  "UPLOAD": "Hochladen",
+  "UPLOAD_SHARE": "Hochladen und freigeben",
+  "UPLOAD_GROUP": "In eine Gruppe hochladen",
+  "MY_FILES_SPACE": "Ihre Dateien speichern",
+  "UPLOAD_REQUEST": "Upload-Anfrage",
+  "UPLOAD_SHARE_MSG": "Geben Sie Dateien aus Ihrem persönlichen Bereich frei.",
+  "UPLOAD_GROUP_MSG": "Laden Sie Dateien in den gemeinsamen Bereich hoch, um mit Ihrem Team zusammenzuarbeiten.",
+  "UPLOAD_REQUEST_MSG": "Bitten Sie externe Mitarbeiter, Ihnen Dateien hochzuladen.",
+  "MY_FILES_SPACE_MSG": "Alle in Ihrem persönlichen Bereich gespeicherten Dateien anzeigen.",
+  "RECEIVE_SHARES": "Empfangene Freigaben",
+  "RECEIVE_SHARES_MSG": "Zeigen Sie Ihre empfangenen Freigaben an. Diese Freigaben sind temporäre Links zu Dateien, die von Ihren Kontakten gesendet und gespeichert werden.",
+  "SET_AS_HOMEPAGE": "Als Standard-Startseite festlegen",
+  "NO_NOTIFICATION": "Sie haben derzeit keine Benachrichtigungen."
+}

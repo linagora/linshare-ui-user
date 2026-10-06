@@ -1,0 +1,78 @@
+{
+  "SERVER_RESPONSE": {
+    "HTTP_CODES": {
+      "ERROR_400": "SOLICITUD INCORRECTA",
+      "ERROR_401": "NO AUTORIZADO",
+      "ERROR_403": "PROHIBIDO",
+      "ERROR_404": "NO ENCONTRADO",
+      "ERROR_405": "MÉTODO NO PERMITIDO",
+      "ERROR_408": "TIEMPO DE ESPERA DE LA SOLICITUD AGOTADO",
+      "ERROR_500": "ERROR INTERNO DEL SERVIDOR",
+      "ERROR_501": "NO IMPLEMENTADO",
+      "ERROR_502": "PUERTA DE ENLACE INCORRECTA",
+      "ERROR_503": "SERVICIO NO DISPONIBLE",
+      "ERROR_520": "EL SERVIDOR WEB DEVUELVE UN ERROR DESCONOCIDO",
+      "ERROR_DEFAULT": "ERROR NO GESTIONADO"
+    },
+    "DETAILS": {
+      "DEFAULT": {
+        "1000": "Error desconocido",
+        "2000": "Error de autenticación",
+        "2203": "No está autorizado a eliminar este invitado",
+        "2204": "No está autorizado a actualizar este invitado",
+        "20000": "Se ha producido un error con la base de datos",
+        "20001": "No está autorizado a utilizar este servicio",
+        "26000": "El grupo de trabajo no existe o se ha eliminado",
+        "26007": "Carpeta {{folderName}} no encontrada",
+        "26444": "No tiene los permisos necesarios",
+        "28000": "No se ha encontrado el invitado",
+        "28001": "El invitado ya existe",
+        "28403": "No está autorizado a acceder a este invitado",
+        "28405": "La lista de contactos restringidos del invitado está vacía",
+        "28406": "La búsqueda de invitados no es válida",
+        "31416": "Su dominio ha alcanzado el número máximo de solicitudes de carga permitidas",
+        "38400": "La fecha de caducidad del invitado no es válida",
+        "46011": "Se ha alcanzado la cuota de la cuenta",
+        "50016": "Su dominio ha alcanzado el número máximo de espacios de trabajo permitidos",
+        "55505": "No está autorizado a crear una entrada",
+        "55508": "Su dominio ha alcanzado el número máximo de grupos de trabajo anidados",
+        "62005": "No está autorizado a utilizar este servicio",
+        "NONE": "",
+        "SERVER": "El servidor no responde temporalmente"
+      },
+      "SAAS_ERROR": {
+        "31416": "Se ha alcanzado el número máximo de solicitudes de carga. Póngase en contacto con el propietario de su empresa para ampliar el plan en <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "50016": "Se ha alcanzado el número máximo de espacios de trabajo. Póngase en contacto con el propietario de su empresa para ampliar el plan en <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>",
+        "55508": "Se ha alcanzado el número máximo de grupos de trabajo anidados. Póngase en contacto con el propietario de su empresa para ampliar el plan en <a class=\"toast-inline-link\" target=\"_blank\" href=\"{{url}}\">Console</a>"
+      },
+      "UPLOAD_ERROR": {
+        "200": "El documento no contiene datos (tamaño = 0 bytes)",
+        "3000": "Este tipo de archivo está prohibido (tipo MIME)",
+        "3002": "Este tipo de archivo está prohibido",
+        "3003": "El archivo se ha rechazado porque contiene un virus",
+        "3007": "No se ha podido analizar el archivo",
+        "26007": "No se puede cargar el archivo: la carpeta no existe o se ha eliminado",
+        "26444": "No tiene permiso para cargar archivos",
+        "39001": "Las cargas están desactivadas porque se ha activado el modo de mantenimiento",
+        "40403": "No se encuentra el estado del archivo cargado",
+        "40404": "No se encuentra el estado del archivo cargado",
+        "46001": "Error de configuración del servidor, no es posible cargar",
+        "46002": "Error de configuración del servidor, no es posible cargar",
+        "46003": "Error de configuración del servidor, no es posible cargar",
+        "46004": "Error de configuración del servidor, no es posible cargar",
+        "46010": "El tamaño del archivo supera el tamaño máximo autorizado ({{maxFileSize}})",
+        "46011": "No queda espacio disponible en el servidor; vuelva a intentarlo más tarde",
+        "46012": "No queda espacio disponible en el servidor; vuelva a intentarlo más tarde",
+        "46013": "No queda espacio disponible en el servidor; vuelva a intentarlo más tarde",
+        "46014": "No queda espacio disponible en el servidor ({{quotaAttempt}}); libere espacio y vuelva a intentarlo",
+        "46015": "No queda espacio disponible en el servidor; vuelva a intentarlo más tarde",
+        "46403": "Error de configuración del servidor, no es posible cargar",
+        "NONE": "Se ha producido un error durante la carga"
+      },
+      "WORKGROUP_NODES_ERROR": {
+        "26444": "No tiene permiso para escribir en este grupo de trabajo",
+        "46010": "El tamaño del archivo supera el tamaño máximo permitido"
+      }
+    }
+  }
+}

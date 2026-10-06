@@ -1,0 +1,44 @@
+{
+  "USER_PROFILE": {
+    "TITLE": "Il mio profilo",
+    "ALERT": {
+      "UPDATE_SUCCESS": "Profilo aggiornato"
+    },
+    "INFO": {
+      "FIRSTNAME": "Nome",
+      "LASTNAME": "Cognome",
+      "EMAIL": "Email",
+      "NOTIFICATION_LANGUAGE": "La mia lingua per le notifiche",
+      "NOTIFICATION_LANGUAGE_EXTERNAL": "Lingua delle notifiche per gli utenti esterni",
+      "MODIFICATION_DATE": "Data di modifica",
+      "CREATION_DATE": "Data di creazione",
+      "EXPIRATION_DATE": "Data di scadenza",
+      "CREATOR": "Creatore"
+    },
+    "TABS": {
+      "FAVOURITE_RECIPIENTS": "Destinatari preferiti",
+      "RESTRICTED_CONTACTS": "Contatti limitati",
+      "RESTRICTED_CONTACTSLISTS": "Liste di contatti limitate"
+    },
+    "SORTERS": {
+      "FIRSTNAME": "Ordina per nome",
+      "LASTNAME": "Ordina per cognome",
+      "NAME": "Ordina per nome completo",
+      "MAIL": "Ordina per email"
+    },
+    "FAVOURITE_RECIPIENTS": {
+      "DIALOG": {
+        "DELETE": {
+          "TITLE": "Elimina destinatari preferiti",
+          "TEXT": "Stai per eliminare {singular, select, true{un destinatario} other{{nbItems} destinatari}}! Attenzione: questa azione non può essere annullata."
+        }
+      },
+      "TOAST_ALERT": {
+        "DELETE": {
+          "ERROR": "{singular, select, true{Un destinatario non è stato eliminato} other{{number} destinatari non sono stati eliminati}}.",
+          "INFO": "{singular, select, true{Un destinatario è stato eliminato} other{{number} destinatari sono stati eliminati}}."
+        }
+      }
+    }
+  }
+}

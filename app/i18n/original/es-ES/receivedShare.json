@@ -1,0 +1,24 @@
+{
+  "BACKGROUND_RECEIVED_SHARES_MSG": "Estos recursos compartidos son enlaces temporales a archivos enviados y alojados por sus contactos.",
+  "BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "Consulte los recursos compartidos recibidos",
+  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Recursos compartidos recibidos",
+  "FILTER": {
+    "ORDER_BY_SENDER": "Remitente"
+  },
+  "TOOLTIP": {
+    "ADVANCED_FILTER": "Mostrar filtros avanzados",
+    "REMOVE_FILES": "Eliminar los archivos seleccionados",
+    "DOWNLOAD_FILES": "Descargar los archivos seleccionados",
+    "SHOW_MORE_OPTIONS": "Mostrar más opciones",
+    "DATE_OF_MODIFICATION": "Fecha de modificación",
+    "DATE_OF_CREATION": "Fecha de creación"
+  },
+  "TABLE_HEADER": {
+    "NAME": "Nombre",
+    "TYPE": "Tipo",
+    "MODIFICATION_DATE": "Última modificación",
+    "CREATION_DATE": "Fecha de creación",
+    "SIZE": "Tamaño",
+    "ACTION": "Acciones"
+  }
+}

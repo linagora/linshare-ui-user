@@ -1,0 +1,216 @@
+{
+  "UPLOAD_REQUESTS": {
+    "TITLE": "Upload-Anfragen",
+    "TITLE_SINGULAR": "Upload-Anfrage",
+    "SYSTEM_ACCOUNT": "Upload-Anfragen-System",
+    "STATUS": {
+      "ACTIVE": "Aktiv",
+      "EXPIRED_CLOSED": "Abgelaufen | Geschlossen",
+      "ARCHIVED": "Archiviert",
+      "PENDING": "Ausstehend"
+    },
+    "LOCALE": {
+      "ENGLISH": "Englisch",
+      "FRENCH": "Französisch",
+      "RUSSIAN": "Russisch",
+      "VIETNAMESE": "Vietnamesisch"
+    },
+    "CREATION_TYPE": {
+      "COLLECTIVE": "Gemeinsamer Upload",
+      "INDIVIDUAL": "Individueller Upload",
+      "COLLECTIVE_TOOLTIP": "Bei einer gemeinsamen Upload-Anfrage teilen sich die Empfänger den Upload-Bereich und können daher die Dokumente der anderen Mitglieder sehen.",
+      "INDIVIDUAL_TOOLTIP": "Bei einer individuellen Massen-Upload-Anfrage hat jeder Empfänger einen eigenen persönlichen Upload-Bereich, auf den die anderen Mitglieder keinen Zugriff haben."
+    },
+    "FORM_CREATE": {
+      "SINGULAR_TITLE": "Upload-Anfrage",
+      "COLLECTIVE": "Gemeinsam",
+      "INDIVIDUAL": "Individuell",
+      "EMAIL_MESSAGE": "E-Mail-Nachricht",
+      "TOTAL_SIZE_OF_FILES": "Gesamtgröße der Dateien",
+      "MAX_NUMBER_OF_FILES": "Maximale Anzahl an Dateien",
+      "MAX_SIZE_OF_A_FILE": "Maximale Größe pro Datei",
+      "ACTIVATION_DATE": "Aktivierungsdatum",
+      "PASSWORD_PROTECTED": "Passwortgeschützt",
+      "ALLOW_DELETION": "Löschen erlauben",
+      "ALLOW_CLOSURE": "Schließen erlauben",
+      "EXPIRY_NOTIFICATION_DATE": "Erinnerungsdatum",
+      "REMINDER_DATE_TOOLTIP": "Benachrichtigungs-E-Mails, die an den Ablauf erinnern.",
+      "NOTIFICATION_LANGUAGE": "Benachrichtigungssprache",
+      "FORM_INVALID": "Das Formular ist ungültig. Bitte überprüfen Sie Ihre Eingaben sorgfältig.",
+      "BACK": "zurück"
+    },
+    "ERROR": {
+      "SUBJECT_REQUIRED": "Der E-Mail-Betreff ist erforderlich",
+      "BODY_REQUIRED": "Der E-Mail-Text ist erforderlich",
+      "INVALID_EXPIRATION_DATE": "Das Ablaufdatum muss zwischen {min} und {max} liegen",
+      "INVALID_ACTIVATION_DATE": "Das Aktivierungsdatum muss zwischen {min} und {max} liegen",
+      "INVALID_NOTIFICATION_DATE": "Das Benachrichtigungsdatum muss zwischen {min} und {max} liegen",
+      "TOTAL_SIZE_OF_FILES_REQUIRED": "Die Gesamtgröße der Dateien muss angegeben werden und kleiner als {max} sein",
+      "TOTAL_SIZE_OF_FILES_REQUIRED_ONLY": "Die Gesamtgröße der Dateien muss angegeben werden",
+      "MAX_NUMBER_OF_FILES_REQUIRED": "Die maximale Anzahl an Dateien muss angegeben werden und kleiner als {max} sein",
+      "MAX_NUMBER_OF_FILES_REQUIRED_ONLY": "Die maximale Anzahl an Dateien muss angegeben werden",
+      "MAX_SIZE_OF_A_FILE_REQUIRED": "Die maximale Größe pro Datei muss angegeben werden und kleiner als {max} sein",
+      "MAX_SIZE_OF_A_FILE_REQUIRED_ONLY": "Die maximale Größe pro Datei muss angegeben werden"
+    },
+    "MENU_ENTRIES": {
+      "PENDING": "Ausstehend",
+      "ACTIVE_CLOSED": "Aktiv / Geschlossen",
+      "ARCHIVES": "Archiviert"
+    },
+    "TABLE": {
+      "SEARCH_BY_LABEL": "Nach Bezeichnung suchen",
+      "SEARCH_BY_RECIPIENT": "Nach Empfänger suchen",
+      "INFO": "Details der Upload-Anfrage anzeigen",
+      "FILTER_BY": {
+        "ALL": "Alle"
+      },
+      "HEADERS": {
+        "LABEL": "Bezeichnung",
+        "ACTIVATION_DATE": "Aktivierungsdatum",
+        "ACTIVATION": "Aktivierung",
+        "ARCHIVE_DATE": "Archivierungsdatum",
+        "ARCHIVE": "Archivierung",
+        "EXPIRATION_DATE": "Ablaufdatum",
+        "EXPIRATION": "Ablauf",
+        "FILES": "Dateien",
+        "STATUS": "Zustand",
+        "TYPE": "Typ",
+        "CREATION_DATE": "Erstellungsdatum",
+        "MODIFICATION_DATE": "Änderungsdatum",
+        "MODIFICATION": "Änderung",
+        "SIZE": "Größe",
+        "EMAIL": "E-Mail",
+        "RECIPIENT": "Empfänger"
+      },
+      "OPTIONS": {
+        "ADD_RECIPIENTS": "Empfänger hinzufügen",
+        "GLOBAL_EDIT": "Gesamtbearbeitung",
+        "ACTIVATE": "Aktivieren",
+        "CLOSE": "Schließen",
+        "CANCEL_OR_CLOSE": "Abbrechen/Schließen",
+        "ARCHIVE": "Archivieren",
+        "VIEW_IN_MY_SPACE": "In meinem Bereich anzeigen"
+      },
+      "BACKGROUND_CONTENT": {
+        "TITLE": "Upload-Anfragen erstellen",
+        "MESSAGE": "Mit diesen Anfragen können andere Benutzer Dateien in Ihren Speicher hochladen",
+        "ENTRY_LIST": {
+          "TITLE": "Hochgeladene Dateien",
+          "MESSAGE": "Diese Dateien wurden von den Empfängern Ihrer Upload-Anfrage hochgeladen"
+        },
+        "ENTRY_LIST_PENDING": {
+          "TITLE": "Keine Datei hochgeladen",
+          "MESSAGE": "Die Upload-Anfrage ist noch nicht aktiviert, die Empfänger können derzeit keine Dateien hochladen"
+        },
+        "ENTRY_LIST_ARCHIVED": {
+          "TITLE": "Archivierte Upload-Anfrage",
+          "MESSAGE": "Die hochgeladenen Dateien wurden entweder entfernt oder in Ihren persönlichen Bereich kopiert"
+        },
+        "UPLOAD_REQUEST": {
+          "TITLE": "Empfänger der Upload-Anfrage",
+          "MESSAGE": "Dies sind die einzelnen Empfänger der von Ihnen erstellten Upload-Anfrage"
+        }
+      }
+    },
+    "RIGHT_PANEL": {
+      "EDIT": "Bearbeiten",
+      "DETAILS": "Informationen",
+      "ACTIVITIES": "Aktivitäten"
+    },
+    "DETAIL_TAB": {
+      "META_DATA": "Metadaten",
+      "UPDATED_AT": "Aktualisiert am",
+      "CREATED_AT": "Erstellt am",
+      "ACTIVATED_AT": "Aktiviert am",
+      "EXPIRATION_DATE": "Ablaufdatum",
+      "GROUP": "Gemeinsam",
+      "FILES_UPLOADED": "{singular, select, true {Datei} other {Dateien}} hochgeladen",
+      "MAX_NUMBER_OF_FILES": "Max. Anzahl an Dateien",
+      "MAX_TOTAL_FILE_SIZE": "Max. Gesamtgröße der Dateien",
+      "MAX_SIZE_PER_FILE": "Max. Größe pro Datei",
+      "PASSWORD_PROTECTED": "Passwortgeschützt",
+      "ALLOW_DELETION": "Löschen erlauben",
+      "ALLOW_CLOSURE": "Schließen erlauben",
+      "NOTIFICATION_DATE": "Erinnerungsdatum",
+      "NOTIFICATION_LANGUAGE": "Benachrichtigungssprache",
+      "RECIPIENTS": "Empfänger",
+      "SHOW_BUTTON": "anzeigen"
+    },
+    "DIALOG": {
+      "CANCELLATION": {
+        "TITLE": "Upload-Anfrage abbrechen",
+        "TEXT": "Sie sind dabei, {singular, select, true{eine Upload-Anfrage} other{{nbItems} Upload-Anfragen}} abzubrechen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden."
+      },
+      "CLOSE": {
+        "TITLE": "Upload-Anfrage schließen",
+        "TEXT": "Sie sind dabei, {singular, select, true{eine Upload-Anfrage} other{{nbItems} Upload-Anfragen}} zu schließen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden."
+      },
+      "ARCHIVE": {
+        "TITLE": "Upload-Anfrage archivieren",
+        "TEXT": "Sie sind dabei, {singular, select, true{eine Upload-Anfrage} other{{nbItems} Upload-Anfragen}} zu archivieren. Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "CHECK_BOX": "Vor dem Archivieren alle Dateien in meinen persönlichen Bereich kopieren",
+        "CONFIRM": "Ja, archivieren",
+        "CANCEL": "Abbrechen"
+      },
+      "DELETE_ARCHIVED": {
+        "TITLE": "Archivierte Upload-Anfrage löschen",
+        "TEXT": "Sie sind dabei, {singular, select, true{eine archivierte Upload-Anfrage} other{{nbItems} archivierte Upload-Anfragen}} zu löschen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden."
+      },
+      "ADD_RECIPIENTS": {
+        "TITLE": "Empfänger hinzufügen",
+        "TEXT": "Sie sind dabei, dieser Upload-Anfrage {singular, select, true {einen Empfänger} other{{nbItems} Empfänger}} hinzuzufügen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden."
+      },
+      "DELETE_ENTRIES": {
+        "TITLE": "Hochgeladene Dateien löschen",
+        "TEXT": "Sie sind dabei, {singular, select, true{eine hochgeladene Datei} other {{nbItems} hochgeladene Dateien}} zu löschen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden."
+      }
+    },
+    "TOAST_ALERT": {
+      "CREATE": {
+        "ERROR": "Die Upload-Anfrage konnte nicht erstellt werden.",
+        "INFO": "Die Upload-Anfrage wurde erfolgreich erstellt!"
+      },
+      "CANCELLATION": {
+        "ERROR": "{number} {singular, select, true{Upload-Anfrage wurde} other{Upload-Anfragen wurden}} nicht abgebrochen.",
+        "INFO": "{number} {singular, select, true{Upload-Anfrage wurde} other{Upload-Anfragen wurden}} abgebrochen."
+      },
+      "CLOSE": {
+        "ERROR": "{number} {singular, select, true{Upload-Anfrage wurde} other{Upload-Anfragen wurden}} nicht geschlossen.",
+        "INFO": "{number} {singular, select, true{Upload-Anfrage wurde} other{Upload-Anfragen wurden}} geschlossen."
+      },
+      "ARCHIVE": {
+        "ERROR": "{number} {singular, select, true{Upload-Anfrage wurde} other{Upload-Anfragen wurden}} nicht archiviert.",
+        "INFO": "{number} {singular, select, true{Upload-Anfrage wurde} other{Upload-Anfragen wurden}} archiviert."
+      },
+      "DELETE_ARCHIVED": {
+        "ERROR": "{number} {singular, select, true{archivierte Upload-Anfrage wurde} other{archivierte Upload-Anfragen wurden}} nicht gelöscht.",
+        "INFO": "{number} {singular, select, true{archivierte Upload-Anfrage wurde} other{archivierte Upload-Anfragen wurden}} gelöscht."
+      },
+      "ADD_RECIPIENTS": {
+        "ERROR": "{number} {singular, select, true{Empfänger wurde} other{Empfänger wurden}} nicht zur Upload-Anfrage hinzugefügt.",
+        "INFO": "{number} {singular, select, true{Empfänger wurde} other{Empfänger wurden}} zur Upload-Anfrage hinzugefügt."
+      },
+      "DELETE_ENTRIES": {
+        "ERROR": "{number} {singular, select, true{hochgeladene Datei wurde} other{hochgeladene Dateien wurden}} nicht gelöscht.",
+        "INFO": "{number} {singular, select, true{hochgeladene Datei wurde} other{hochgeladene Dateien wurden}} gelöscht."
+      },
+      "COPY_ENTRIES": {
+        "ERROR": "{number} {singular, select, true{Datei konnte} other{Dateien konnten}} nicht in „Mein Bereich“ kopiert werden.",
+        "INFO": "{number} {singular, select, true{Datei wurde} other{Dateien wurden}} in „Mein Bereich“ kopiert."
+      },
+      "UPDATE": {
+        "ERROR": "Die Upload-Anfrage wurde nicht aktualisiert.",
+        "INFO": "Die Upload-Anfrage wurde erfolgreich aktualisiert!"
+      },
+      "SHOW_UNEXPECTED_ALERT": {
+        "ERROR": "Ein unerwarteter Fehler ist aufgetreten."
+      }
+    },
+    "SIDE_BAR": {
+      "ADD_RECIPIENTS": {
+        "ADD": "Hinzufügen",
+        "CANCEL": "Abbrechen"
+      }
+    }
+  }
+}
