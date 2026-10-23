@@ -77,7 +77,7 @@
     "postinstall": "patch-package"
   },
   "engines": {
-    "node": ">=18.20.3"
+    "node": ">=24.22.1"
   },
   "dependencies": {
     "@flowjs/flow.js": "2.14.1",

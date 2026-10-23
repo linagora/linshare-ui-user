@@ -14,8 +14,8 @@ Most of the dependencies are also available by your OS packet manager
   For Ubuntu:
   ```bash
   # DON'T FORGET to take the latest version
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-  nvm install 12
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+  nvm install 24
   ```
 
 ## Build & development
