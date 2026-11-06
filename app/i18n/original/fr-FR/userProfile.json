@@ -22,7 +22,7 @@
     },
     "SORTERS": {
       "FIRSTNAME": "Trier par prénom",
-      "NOM": "Trier par nom",
+      "NAME": "Trier par nom",
       "LASTNAME": "Trier par nom de famille",
       "MAIL": "Trier par email"
     },

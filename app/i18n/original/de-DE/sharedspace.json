@@ -1,0 +1,119 @@
+{
+  "MEMBER_TAB": {
+    "ADD_MEMBER": "Teammitglieder hinzufügen:",
+    "ADD_WORKSPACE_MEMBER": "Mitglieder des Arbeitsbereichs mit folgenden Rollen hinzufügen:",
+    "NUM_MEMBER": "Vorhandene Mitglieder:",
+    "TITLE": "Mitglieder",
+    "ADD": "Hinzufügen",
+    "UPDATE": "Aktualisieren",
+    "EDIT_RIGHTS": "Benutzerrechte bearbeiten",
+    "EDIT_RIGHT": "Recht bearbeiten",
+    "REMOVE_TEAM_MEMBER": "Teammitglied entfernen",
+    "ACTIVATED": "Aktiviert",
+    "NOTIFICATION_ACTIVATED": "Benachrichtigung aktiviert",
+    "ADMIN": "Administrator",
+    "CONTRIBUTOR": "Mitwirkender",
+    "WRITER": "Bearbeiter",
+    "READER": "Leser",
+    "WORK_SPACE_ADMIN": "Administrator des Arbeitsbereichs",
+    "WORK_SPACE_WRITER": "Bearbeiter des Arbeitsbereichs",
+    "WORK_SPACE_READER": "Leser des Arbeitsbereichs",
+    "ADMIN_RIGHTS": "Administratorrechte",
+    "CONTRIBUTOR_RIGHTS": "Mitwirkendenrechte",
+    "WRITER_RIGHTS": "Bearbeiterrechte",
+    "READER_RIGHTS": "Leserechte",
+    "WORK_SPACE_ADMIN_RIGHTS": "Administratorrechte für den Arbeitsbereich",
+    "WORK_SPACE_WRITER_RIGHTS": "Bearbeiterrechte für den Arbeitsbereich",
+    "WORK_SPACE_READER_RIGHTS": "Leserechte für den Arbeitsbereich",
+    "WORKSPACE_ROLE": "In diesem Arbeitsbereich",
+    "DEFAULT_WORKGROUP_ROLE": "Standard in Arbeitsgruppen",
+    "WORKGROUP_ROLE": "Rolle in der Arbeitsgruppe",
+    "MULTI_SELECT": "Mehrfachauswahl",
+    "JOINING_DATE": "Beitrittsdatum",
+    "USER_NAME": "Benutzername",
+    "USER_RIGHTS": "Benutzerrechte",
+    "SORT_BY": "Sortieren nach",
+    "FILTER_BY": "Filtern nach",
+    "SORT_MEMBER": {
+      "FIRSTNAME": "Vorname",
+      "LASTNAME": "Nachname",
+      "RIGHT": "Rolle"
+    },
+    "MY_RIGHTS": "Meine Rechte",
+    "TOOLTIPS": {
+      "WORKSPACE_ROLE": "Die Rolle des Mitglieds in diesem Arbeitsbereich",
+      "DEFAULT_WORKGROUP_ROLE": "Die Standardrolle des Mitglieds in allen Arbeitsgruppen dieses Arbeitsbereichs"
+    },
+    "WORKSPACE_MEMBER": "Mitglied des Arbeitsbereichs",
+    "EXTERNAL_USER": "Externer Benutzer"
+  },
+  "DETAILS": {
+    "FULL_SIZE": "Gesamtgröße",
+    "TRASH_FULL_SIZE": "Größe des Papierkorbs",
+    "USED_SPACE": "Belegter Speicherplatz"
+  },
+  "BREADCRUMB_TITLE_WORKGROUP": "Arbeitsgruppen",
+  "BREADCRUMB_TITLE_WORKGROUP_FILES": "Dateien",
+  "BREADCRUMB_UPPER_LEVEL": "Übergeordnete Ordner",
+  "VERSION": "Version",
+  "FILE_NAME": "Dateiname",
+  "VERSION_VIEW": "Sie sehen gerade die Version von {{filename}}",
+  "VERSION_NAME_UPDATE": "Der Name der Version wurde in {{filename}} geändert",
+  "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Laden Sie Ihre Dateien hoch",
+    "COMMENT": "Laden Sie Dateien hoch und fügen Sie Mitglieder hinzu, um mit ihnen zusammenzuarbeiten.",
+    "TITLE_VERSION": "Laden Sie die Versionen Ihrer Datei hoch",
+    "COMMENT_VERSION": "Laden Sie die Versionen Ihrer Datei hoch und sehen Sie sich deren Verlauf an."
+  },
+  "CREATE_NEW_WORKGROUP": "Neue Arbeitsgruppe erstellen",
+  "CREATE_NEW_FOLDER": "Neuen Ordner erstellen",
+  "CREATE_NEW_WORKSPACE": "Neuen Arbeitsbereich erstellen",
+  "SHARED_SPACE_TYPE": {
+    "WORKGROUP": "Arbeitsgruppe",
+    "WORKSPACE": "Arbeitsbereich"
+  },
+  "SHARED_SPACE_DIALOGS": {
+    "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
+      "TITLE": "Standardrolle für Arbeitsgruppen bearbeiten",
+      "MESSAGE": "Sie sind dabei, die Standardrolle des Mitglieds für alle Arbeitsgruppen im Arbeitsbereich <b>{{workspaceName}}</b> zu aktualisieren.",
+      "ACTION": "Diese Rolle für alle vorhandenen Arbeitsgruppen übernehmen",
+      "BUTTONS": {
+        "CONFIRM": "AKTUALISIEREN"
+      }
+    }
+  },
+  "SHARED_SPACE_TOOLTIPS": {
+    "WORKSPACE": "Ein Arbeitsbereich enthält nur Arbeitsgruppen. Damit können Sie eine Liste von Standardmitgliedern für alle enthaltenen Arbeitsgruppen mit ihrer Standardrolle festlegen (durchsuchen, erstellen usw.)",
+    "WORKGROUP": "Eine Arbeitsgruppe ist ein Bereich für die Zusammenarbeit, dem Sie Mitglieder wie interne Benutzer oder Gäste hinzufügen können. Diese Mitglieder können je nach Rolle Dateien und Ordner in der Arbeitsgruppe durchsuchen, erstellen, aktualisieren oder löschen."
+  },
+  "WORKGROUP_SEARCH_BOX": {
+    "LAST_AUTHOR": "Letzter Autor",
+    "FILE_TYPES": "Dateitypen",
+    "NODE_TYPES": {
+      "LABEL": "Typen",
+      "DOCUMENT": "Dateien",
+      "FOLDER": "Ordner",
+      "REVISION": "Versionen"
+    },
+    "TYPES": {
+      "ANY": "Alle Typen",
+      "DOCUMENT": "Dokument",
+      "PDF": "PDF",
+      "SPREADSHEET": "Tabelle",
+      "IMAGE": "Bild",
+      "AUDIO": "Audio",
+      "ARCHIVE": "Archiv",
+      "OTHER": "Sonstiges"
+    }
+  },
+  "WORKGROUP_SEARCH_PAGE": {
+    "BACKGROUND_NO_RESULT": {
+      "MESSAGE": "Keine Treffer gefunden",
+      "SUBMESSAGE": "Versuchen Sie eine andere Suche oder öffnen Sie das Suchfeld, um nach Dateityp, Autor und mehr zu suchen"
+    },
+    "BACKGROUND": {
+      "MESSAGE": "Suche in der Arbeitsgruppe",
+      "SUBMESSAGE": "Suche in allen Dateien und Ordnern der Arbeitsgruppe"
+    }
+  }
+}

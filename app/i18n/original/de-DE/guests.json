@@ -1,0 +1,106 @@
+{
+  "BACKGROUND_GUEST_MSG": "Wenn Sie ein temporäres Gastkonto erstellen, kann Ihr Kontakt Dateien in LinShare austauschen.",
+  "BACKGROUND_GUESTS_TITLE_MSG": "Gastkonten erstellen",
+  "ACTION": {
+    "ADD_TO_WORKGROUPS": "Zu Arbeitsgruppen hinzufügen"
+  },
+  "BOUTON_LABEL_TITLE": {
+    "EDIT": "Bearbeiten",
+    "DELETE": "Löschen",
+    "GUEST": "Gast/Gäste"
+  },
+  "BREADCRUMB_TITLE_GUEST": "Gastkonten",
+  "GUEST_DETAILS": {
+    "ACTIVATED": "Aktiviert",
+    "ADMIN": "Administrator",
+    "ALREADY_A_MEMBER": "Bereits Mitglied",
+    "AVAILABLE_CONTACTS": "Verfügbare Kontakte",
+    "AVAILABLE_CONTACTS_LIST": "Verfügbare Kontaktlisten",
+    "COMMENT": {
+      "EMPTY": "Kein Kommentar",
+      "TITLE": "Kommentar"
+    },
+    "DEACTIVATED": "Deaktiviert",
+    "DETAIL_OF_GUEST_ACCOUNT": "Details des Gastkontos",
+    "DOMAIN": "Domain",
+    "EDIT_GUEST": "Bearbeiten",
+    "EXPIRE_THE": "Läuft ab am",
+    "MY_SPACE": "Mein Bereich",
+    "RESTRICTED_CONTACTS": "Eingeschränkte Kontakte",
+    "UPDATE_OF_GUEST_ACCOUNT": "Gastkonto bearbeiten"
+  },
+  "HEADER_GUEST": {
+    "DOMAIN": "Domain",
+    "SLIDER": {
+      "ALL": "Alle Gäste",
+      "MY_GUESTS_ALL": "Alle meine Gäste",
+      "MY_GUESTS_SIMPLE": "Meine Gäste: Moderator",
+      "MY_GUESTS_ADMIN": "Meine Gäste: Administrator"
+    }
+  },
+  "NC": "k. A.",
+  "ORDER_BY": {
+    "EXPIRATION_DATE": "Ablaufdatum",
+    "EMAIL": "E-Mail",
+    "DOMAIN_NAME": "Domainname"
+  },
+  "SIDEBAR": {
+    "NO_MODERATOR_RIGHT": "Sie haben keine Moderatorrechte, um diesen Gast zu bearbeiten",
+    "BUTTON": {
+      "CREATE": "Erstellen",
+      "CANCEL": "Abbrechen",
+      "UPDATE": "Aktualisieren"
+    },
+    "ERROR": {
+      "INVALID_DATE": "Das Datum muss nach dem heutigen Datum liegen und darf das maximale Ablaufdatum nicht überschreiten: {{date}}",
+      "INVALID_EMAIL": "Die E-Mail-Adresse ist ungültig.",
+      "INVALID_EMPTY_FIELD": "Dieses Feld darf nicht leer sein.",
+      "RESTRICTED_CONTACTS_REQUIRED": "Ein eingeschränkter Gast benötigt mindestens einen Kontakt.",
+      "RESTRICTED_CONTACTS_LIST_REQUIRED": "Ein eingeschränkter Gast benötigt mindestens eine Kontaktliste."
+    },
+    "LABEL": {
+      "ACTIVATE_USER_SPACE": "Benutzerbereich aktivieren",
+      "ADD_DESCRIPTION": "Benutzerbeschreibung hinzufügen",
+      "ADD_EMAIL": "Nachricht hinzufügen",
+      "ADVANCED_OPTIONS": "Erweiterte Optionen",
+      "ALLOW_MODIFICATORS": "Anderen Benutzern erlauben, dieses Konto zu ändern",
+      "HIDE_CONTACTS_LIST_MEMBERS": "Mitglieder der Kontaktlisten für diesen Gast ausblenden",
+      "DISPLAY_CONTACTS_LIST_MEMBERS": "Mitglieder der Kontaktlisten für diesen Gast anzeigen",
+      "EMAIL": "E-Mail",
+      "ENTER_DESCRIPTION": "Geben Sie Ihre Beschreibung ein",
+      "ENTER_EMAIL": "Geben Sie Ihre Nachricht ein",
+      "EXP_DATE": "Ablaufdatum",
+      "FIRSTNAME": "Vorname",
+      "LASTNAME": "Nachname",
+      "RESTRICT_CONTACTS": "Kontakte einschränken",
+      "RESTRICT_CONTACTS_LIST": "Kontaktlisten einschränken",
+      "HIDE_CONTACTS_LIST_MEMBER": "Mitglieder der Kontaktlisten ausblenden"
+    },
+    "NOTIFICATION": {
+      "SUCCESS": {
+        "CREATE": "Das Gastkonto wurde erfolgreich erstellt",
+        "DELETE": "Das Gastkonto wurde erfolgreich gelöscht",
+        "UPDATE": "Das Gastkonto wurde erfolgreich aktualisiert"
+      }
+    },
+    "TITLE": {
+      "CREATE": "GASTKONTO ERSTELLEN"
+    }
+  },
+  "GUEST_MODERATOR": {
+    "TAB_TITLE": "Moderatoren",
+    "LABEL": "Vorhandene Moderatoren: <b>{{number}}</b>",
+    "LABEL_ADD": "Moderatoren hinzufügen",
+    "MODERATOR_ROLE": "Moderatorrolle",
+    "ROLE": {
+      "ADMIN": "Administrator",
+      "SIMPLE": "Moderator"
+    },
+    "FILTER": {
+      "NAME_PLACEHOLDER": "Moderatoren nach Name suchen"
+    },
+    "FORM": {
+      "AUTOCOMPLETE_PLACEHOLDER": "Hinzuzufügende Benutzer suchen"
+    }
+  }
+}

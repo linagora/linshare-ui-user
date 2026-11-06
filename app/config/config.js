@@ -58,6 +58,21 @@
           key: 'ru',
           fullKey: 'ru-RU',
           country: 'Pусский'
+        },
+        es: {
+          key: 'es',
+          fullKey: 'es-ES',
+          country: 'Español'
+        },
+        de: {
+          key: 'de',
+          fullKey: 'de-DE',
+          country: 'Deutsch'
+        },
+        it: {
+          key: 'it',
+          fullKey: 'it-IT',
+          country: 'Italiano'
         }
       },
 
@@ -70,7 +85,10 @@
           'fr-FR': 'Nom',
           'en-US': 'Name',
           'vi-VN': 'Tên',
-          'ru-RU': 'Имя'
+          'ru-RU': 'Имя',
+          'es-ES': 'Nombre',
+          'de-DE': 'Name',
+          'it-IT': 'Nome'
         }
       },
 
@@ -138,7 +156,10 @@
         suffix:{
           'fr-FR': '',
           'en-US': '',
-          'vi-VN': ''
+          'vi-VN': '',
+          'es-ES': '',
+          'de-DE': '',
+          'it-IT': ''
         },
         disable: {
           'MENU_TITLE.CONTACTS_LISTS': false,
@@ -187,7 +208,10 @@
           'fr-FR': 'Assistance par chatbot',
           'en-US': 'Support via chatbot',
           'vi-VN': 'Hỗ trợ qua chatbot',
-          'ru-RU': 'Поддержка через чат-бот'
+          'ru-RU': 'Поддержка через чат-бот',
+          'es-ES': 'Asistencia mediante chatbot',
+          'de-DE': 'Support per Chatbot',
+          'it-IT': 'Assistenza tramite chatbot'
         }
       },
 

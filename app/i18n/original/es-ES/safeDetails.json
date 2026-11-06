@@ -1,0 +1,19 @@
+{
+  "ACTION": {
+    "GO_TO_MY_SAFE": "Ir a mi caja fuerte",
+    "VIEW_SAFE_DETAIL": "Ver detalles de la caja fuerte"
+  },
+  "BREADCRUMB_TITLE_SAFE_DETAILS": "Detalles de la caja fuerte",
+  "POPOVER": {
+    "TITLE": "Detalle de la caja fuerte",
+    "INFORMATION": "Cópielo y envíelo al proveedor."
+  },
+  "TABLE_HEADER": {
+    "ACTIONS": "Acciones",
+    "CONTROL_KEY": "Clave de control",
+    "COUNTRY_CODE": "Código de país",
+    "CREATION_DATE": "Fecha de creación",
+    "IUFSC": "IUFSC",
+    "USER_KEY": "Clave de usuario"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "ANONYMOUS_URL": {
+    "FIND_OUT": "Erfahren Sie mehr über LinShare!",
+    "FORM": {
+      "CANCEL": "Abbrechen",
+      "EMPTY": "Für den Zugriff auf die anonyme Freigabe ist ein Passwort erforderlich",
+      "INVALID": "Das angegebene Passwort ist ungültig",
+      "LABEL": "Passwort",
+      "SUBMIT": "Senden",
+      "TITLE": "Diese Freigabe ist durch ein Passwort geschützt",
+      "MSG": "Geben Sie das Passwort ein, das Sie mit der E-Mail-Einladung zum Download erhalten haben."
+    },
+    "HEADER": {
+      "TITLE": "PORTAL FÜR ANONYME LINKS"
+    },
+    "HOME": {
+      "404": "Die aufgerufene URL ist ungültig",
+      "MESSAGE": "Sie benötigen eine gültige URL, um auf die freigegebenen Dokumente zuzugreifen",
+      "BACK_TO_HOME": "Zurück zur Startseite"
+    }
+  }
+}

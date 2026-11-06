@@ -31,6 +31,10 @@
             case 'ru-RU':
               WELCOME_MESSAGE = welcomeMessageData['RUSSIAN'];
               break;
+            default:
+              // Languages not yet supported by linshare-core welcome messages
+              WELCOME_MESSAGE = welcomeMessageData['ENGLISH'];
+              break;
           }
 
           return WELCOME_MESSAGE;

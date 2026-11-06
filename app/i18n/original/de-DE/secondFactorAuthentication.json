@@ -1,0 +1,32 @@
+{
+  "SECOND_FACTOR_AUTH": {
+    "TITLE": "Zwei-Faktor-Authentifizierung",
+    "SHARED_KEY_CREATION": {
+      "REQUIRED": "Für Ihr Konto ist die Zwei-Faktor-Authentifizierung erforderlich. Bitte aktivieren Sie die Zwei-Faktor-Authentifizierung, um LinShare weiter zu nutzen.",
+      "INSTRUCTION": "So aktivieren Sie die Zwei-Faktor-Authentifizierung für Ihr Konto:",
+      "STEP_1": "Laden Sie eine OTP-Authenticator-App Ihrer Wahl herunter und installieren Sie sie.\nFür Android im Google Play Store oder bei F-Droid: FreeOTP+, Google Authenticator, Microsoft Authenticator oder Aegis Authenticator.\nFür iOS im App Store: FreeOTP, Google Authenticator oder Microsoft Authenticator.",
+      "STEP_2": "Erzeugen Sie den gemeinsamen Schlüssel und scannen Sie mit Ihrer bevorzugten OTP-Authenticator-App den QR-Code oder fügen Sie den Schlüssel wie folgt hinzu:",
+      "GENERATE_KEY": "Gemeinsamen Schlüssel erzeugen",
+      "KEY_CREATED_ON": "Gemeinsamer Schlüssel erstellt am {{date}}",
+      "CAN_NOT_SCAN": "Scannen nicht möglich?"
+    },
+    "SHARED_KEY_REMOVAL": {
+      "NOTICE": "Der gemeinsame Schlüssel kann nicht entfernt werden, da für Ihr Konto die Zwei-Faktor-Authentifizierung erforderlich ist. Weitere Informationen erhalten Sie vom Support.",
+      "INSTRUCTION": "Entfernen Sie den gemeinsamen Schlüssel, um die Zwei-Faktor-Authentifizierung für Ihr Konto zu deaktivieren:",
+      "REMOVE_KEY": "Gemeinsamen Schlüssel entfernen",
+      "REMOVAL_SUCCESS": "Der gemeinsame Schlüssel wurde erfolgreich gelöscht."
+    },
+    "MANUAL_SETUP": {
+      "LABEL": "Sie können den Code nicht scannen?",
+      "STEP_1": "1. Wählen Sie in Ihrer bevorzugten OTP-Authenticator-App das Symbol zum Hinzufügen eines Schlüssels.",
+      "STEP_2": "2. Geben Sie Aussteller und Konto wie folgt ein:",
+      "STEP_3": "3. Geben Sie den geheimen Schlüssel wie folgt ein:",
+      "STEP_4": "4. Stellen Sie sicher, dass die folgenden Felder so konfiguriert sind:",
+      "STEP_5": "5. Tippen Sie zum Abschließen auf „Hinzufügen“.",
+      "TYPE": "Typ: ",
+      "DIGITS": "Stellen: ",
+      "ALGORITHM": "Algorithmus: ",
+      "INTERVAL": "Intervall: "
+    }
+  }
+}

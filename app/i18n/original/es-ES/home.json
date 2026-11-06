@@ -1,0 +1,15 @@
+{
+  "UPLOAD": "Cargar",
+  "UPLOAD_SHARE": "Cargar y compartir",
+  "UPLOAD_GROUP": "Cargar en un grupo",
+  "MY_FILES_SPACE": "Aloje sus archivos",
+  "UPLOAD_REQUEST": "Solicitud de carga",
+  "UPLOAD_SHARE_MSG": "Comparta sus archivos desde su espacio personal.",
+  "UPLOAD_GROUP_MSG": "Cargue archivos en el espacio compartido para colaborar con su equipo.",
+  "UPLOAD_REQUEST_MSG": "Pida a colaboradores externos que le carguen archivos.",
+  "MY_FILES_SPACE_MSG": "Consulte todos los archivos alojados en su espacio personal.",
+  "RECEIVE_SHARES": "Recursos compartidos recibidos",
+  "RECEIVE_SHARES_MSG": "Consulte los recursos compartidos que ha recibido. Son enlaces temporales a archivos enviados y alojados por sus contactos.",
+  "SET_AS_HOMEPAGE": "Establecer como página de inicio predeterminada",
+  "NO_NOTIFICATION": "Actualmente no tiene notificaciones."
+}

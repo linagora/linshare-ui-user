@@ -89,6 +89,7 @@
       "NO_SHARES": "Vous n'avez aucun partage en cours."
     },
     "SHARE": {
+      "TITLE": "PARTAGE",
       "SELECTED_FILES": "fichier(s) sélectionné(s)",
       "UNHIDE_FILES": "afficher tout",
       "SHOW_SELECTED_FILES": "isoler sélection",
@@ -114,7 +115,6 @@
       "ATTACH_EMAIL": "Personnaliser le courriel",
       "ATTACHED_EMAIL_SUBJECT": "Sujet du courriel",
       "ATTACHED_EMAIL_BODY_PLACEHOLDER": "Saisissez votre message de courriel",
-      "SHOW_SELECTED_FILES": "Voir les fichiers",
       "GO_TO_UPLOAD_FILES": "Retour vers les dépots",
       "ERROR": {
         "INVALID_DATE": "La date n'est pas valide"

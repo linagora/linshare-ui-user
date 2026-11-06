@@ -1,0 +1,155 @@
+{
+  "SWEET_ALERT": {
+    "ON_FILE_COPY": {
+      "CANCEL_BUTTON": "Abbrechen!",
+      "CONFIRM_BUTTON": "Kopieren",
+      "TEXT": "Sie sind dabei, {singular, select, true{ein empfangenes Dokument} other{{nbItems} empfangene Dokumente}} mit einer Gesamtgröße von {totalSize} in Ihre eigenen Dateien zu kopieren.",
+      "TITLE": "Datei kopieren"
+    },
+    "ON_ITEM_DELETE": {
+      "CANCEL_BUTTON": "Abbrechen",
+      "CONFIRM_BUTTON": "Ja, löschen",
+      "TEXT": {
+        "CONTACTS_LIST": "Sie sind dabei, {singular, select, true{eine Kontaktliste} other{{nbItems} Kontaktlisten}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "CONTACTS_LIST_CONTACT": "Sie sind dabei, {singular, select, true{einen Kontakt} other{{nbItems} Kontakte}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "DOCUMENT": "Sie sind dabei, {singular, select, true{ein Dokument} other{{nbItems} Dokumente}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "GUEST": "Sie sind dabei, {singular, select, true{einen Gast} other{{nbItems} Gäste}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "RECEIVED_SHARE": "Sie sind dabei, {singular, select, true{eine Dateifreigabe} other{{nbItems} Dateifreigaben}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "WORKGROUP": "Sie sind dabei, {singular, select, true{eine Arbeitsgruppe} other{{nbItems} Arbeitsgruppen}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "WORKSPACE": "Sie sind dabei, {singular, select, true{einen Arbeitsbereich} other{{nbItems} Arbeitsbereiche}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "WORKGROUP_AND_WORKSPACE": "Sie sind dabei, {nbItems} Arbeitsgruppen und Arbeitsbereiche zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "WORKGROUP_NODE": "Sie sind dabei, {singular, select, true{ein Dokument oder einen Ordner} other{{nbItems} Dokumente oder Ordner}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "WORKGROUP_VERSION": "Sie sind dabei, {singular, select, true{eine Version} other{{nbItems} Versionen}} zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "WORKGROUP_VERSION_LAST": "Dies ist die letzte Version, Sie sind dabei, die Datei zu löschen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "WORKGROUP_VERSION_ALL": "Sie haben alle vorhandenen Versionen ausgewählt, Sie sind dabei, die Datei zu löschen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden.",
+        "2FA_SHARED_KEY": "Sie sind dabei, den gemeinsamen Schlüssel zu entfernen! Achtung: Diese Aktion kann nicht rückgängig gemacht werden."
+      },
+      "TITLE": "Löschen"
+    },
+    "ON_LOCALSTORAGE_DELETE": {
+      "TITLE": "Sind Sie sicher?",
+      "TEXT": "Alle im localStorage gespeicherten Werte werden entfernt",
+      "CONFIRM_BUTTON": "Ja, löschen!",
+      "DONE": "Fertig",
+      "IS_CLEARED": "Der localStorage wurde geleert"
+    },
+    "ON_MULTIPLE_DOWNLOAD": {
+      "CANCEL_BUTTON": "ABBRECHEN",
+      "CONFIRM_BUTTON": "OK",
+      "TEXT": "Sie laden {{nbFiles}} Dateien herunter (Gesamtgröße: {{totalSize}})",
+      "TITLE": "Mehrfach-Download"
+    },
+    "ON_SHARE_DELETE": {
+      "CANCEL_BUTTON": "Abbrechen!",
+      "CONFIRM_BUTTON": "Löschen",
+      "TEXT": "Sie sind dabei, eine Freigabe zu entfernen!",
+      "TITLE": "Sind Sie sicher?"
+    },
+    "ON_WORKGROUP_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Abbrechen",
+      "CONFIRM_BUTTON": "Ja, löschen",
+      "TITLE": "Mitglied entfernen",
+      "TEXT": "Sie sind dabei, {{firstName}} {{lastName}} aus der Arbeitsgruppe {{sharedSpaceName}} zu entfernen.",
+      "SELF_REMOVE_TEXT": "Sie sind dabei, sich selbst aus der Arbeitsgruppe {{sharedSpaceName}} zu entfernen. Sie haben dann keinen Zugriff mehr auf diese Arbeitsgruppe."
+    },
+    "ON_WORKSPACE_MEMBER_DELETE": {
+      "CANCEL_BUTTON": "Abbrechen",
+      "CONFIRM_BUTTON": "Ja, löschen",
+      "TITLE": "Mitglied entfernen",
+      "TEXT": "Sie sind dabei, {{firstName}} {{lastName}} aus dem Arbeitsbereich {{sharedSpaceName}} und allen zugehörigen Arbeitsgruppen zu entfernen.",
+      "SELF_REMOVE_TEXT": "Sie sind dabei, sich selbst aus dem Arbeitsbereich {{sharedSpaceName}} zu entfernen. Sie haben dann keinen Zugriff mehr auf diesen Arbeitsbereich."
+    },
+    "ON_GUEST_QUICK_CREATE": {
+      "CANCEL_BUTTON": "Nein",
+      "CONFIRM_BUTTON": "Ja",
+      "TITLE": "Gast erstellen?",
+      "TEXT": "Sie laden {{mail}} als Gast ein."
+    }
+  },
+  "TOAST_ALERT": {
+    "ACTION": {
+      "BROWSER_ACTION": "{singular, select, true{Die Datei oder der Ordner wurde} other{Die Dateien oder Ordner wurden}} nach {folderName} {action, select, moved{verschoben} other{kopiert}}.",
+      "CLOSE": "Schließen",
+      "CONTACTS_LIST_CREATION": "Die Kontaktliste {{contactsListName}} wurde erfolgreich erstellt.",
+      "COPY": "{singular, select, true{Die Datei wurde} other{{nbItems} Dateien wurden}} in Ihren persönlichen Bereich kopiert.",
+      "COPY_SAME_FOLDER": "{singular, select, true{Die Datei wurde} other{Die Dateien wurden}} erfolgreich kopiert.",
+      "COPY_VERSION": "Eine neue Version von {{targetNodeName}} wurde erfolgreich hinzugefügt.",
+      "DELETE": "Löschen erfolgreich",
+      "DELETE_SINGULAR": "Das Element wurde erfolgreich gelöscht.",
+      "DELETE_PLURAL": "Die Elemente wurden erfolgreich gelöscht.",
+      "DELETE_LAST_VERSION": "Die Datei wurde erfolgreich gelöscht",
+      "DELETE_SINGULAR_VERSION": "Die Version wurde erfolgreich gelöscht.",
+      "DELETE_PLURAL_VERSION": "Die Versionen wurden erfolgreich gelöscht.",
+      "DELETE_WORKGROUP_MEMBER": "{{firstName}} {{lastName}} wurde erfolgreich aus der Arbeitsgruppe entfernt",
+      "DELETE_WORKSPACE_MEMBER": "{{firstName}} {{lastName}} wurde erfolgreich aus dem Arbeitsbereich entfernt",
+      "DETAILS": "Informationen",
+      "INSERT": "Das Element wurde erfolgreich hinzugefügt.",
+      "REFRESH": "Sie müssen die Anwendung neu laden, damit diese Aktion wirksam wird",
+      "SHARE": "{{singular ? 'Ihre Datei' : 'Ihre Dateien'}} {{shareName ? shareName + ' ': ''}}{{singular ? 'wurde' : 'wurden'}} erfolgreich gesendet.",
+      "SHARE_DELETED": "Ihre Dateifreigabe für {{recipient}} wurde erfolgreich entfernt.",
+      "SHARE_CANCELED": "Ihre Dateifreigabe wurde erfolgreich aufgehoben.",
+      "SHARE_ASYNC": "Ihre Dateifreigabe wird gesendet, sobald alle Dateien hochgeladen sind.",
+      "SHARE_FAILED": "Ihre Dateifreigabe {{shareName ? shareName + ' ': ''}}ist fehlgeschlagen.",
+      "UPDATE": "Das Element wurde erfolgreich aktualisiert.",
+      "RESTORE": "Die Version wurde erfolgreich wiederhergestellt.",
+      "FORWARD": {
+        "ERROR": "{nbItems} {singular, select, true{Datei konnte} other{Dateien konnten}} nicht weitergeleitet werden.",
+        "INFO": "{nbItems} {singular, select, true{Datei wurde} other{Dateien wurden}} erfolgreich weitergeleitet."
+      },
+      "COPY_BEFORE_FORWARD": {
+        "INFO": "{singular, select, true{Die Datei wurde in Ihren persönlichen Bereich kopiert, kann aber nicht freigegeben werden} other{{nbItems} Dateien wurden in Ihren persönlichen Bereich kopiert, können aber nicht freigegeben werden}}."
+      }
+    },
+    "ACTION_BUTTON": "Anzeigen",
+    "ACTION_REFRESH": "Aktualisieren",
+    "ERROR": {
+      "503": "Dienst nicht verfügbar",
+      "BROWSER_ACTION": "{nbNodes} {singular, select, true{Datei oder Ordner konnte} other{Dateien oder Ordner konnten}} nicht {action, select, moved{verschoben} other{kopiert}} werden",
+      "COPY": {
+        "26444": "Sie haben nicht die erforderlichen Rechte für diesen Vorgang",
+        "DEFAULT": "{singular, select, true{Eine Datei konnte} other{{nbItems} Dateien konnten}} nicht kopiert werden"
+      },
+      "DOWNLOAD_FOLDER": "Der ausgewählte Ordner kann nicht heruntergeladen werden, das Archiv ist zu groß",
+      "FILE_NOT_FOUND": "Die ausgewählte Datei wurde nicht gefunden",
+      "FILE_UPLOAD": "Das Hochladen ist fehlgeschlagen",
+      "RENAME_NODE": "Eine Datei oder ein Ordner mit demselben Namen existiert bereits",
+      "RENAME_CONTACTS_LIST": "Eine Kontaktliste mit demselben Namen existiert bereits",
+      "RENAME_INVALID": {
+        "EMPTY": "Der Name darf nicht leer sein",
+        "ENDING_POINT": "Der Name darf nicht mit dem Zeichen '.' enden",
+        "REJECTED_CHAR": "Der Name ist ungültig, folgende Zeichen sind nicht erlaubt: '{{rejectedChar}}'"
+      },
+      "DELETE_ERROR": {
+        "26006": "Das Löschen eines nicht leeren Ordners wird noch nicht unterstützt",
+        "26444": "Sie haben keine Berechtigung zum Löschen",
+        "26448": "Die Version wurde nicht gefunden",
+        "26449": "Sie können die letzte Version nicht löschen, versuchen Sie, das gesamte Dokument zu löschen",
+        "error": "Beim Löschen ist ein Fehler aufgetreten"
+      },
+      "NO_RESPONSE_ERROR": "Fehler ohne Serverantwort, siehe Protokolle.",
+      "MEMBER_ALREADY_IN_WORKGROUP": "{{firstName}} {{lastName}} ist bereits Mitglied dieser Arbeitsgruppe.",
+      "MEMBER_ALREADY_IN_WORKSPACE": "{{firstName}} {{lastName}} ist bereits Mitglied dieses Arbeitsbereichs.",
+      "RESTORE": "Beim Wiederherstellen der Version ist ein Fehler aufgetreten."
+    },
+    "WARNING": {
+      "AT_LEAST_ONE_RECIPIENT": "Bitte geben Sie mindestens einen Empfänger oder eine Kontaktliste für die Freigabe ein",
+      "AT_LEAST_ONE_RECIPIENT_UPLOAD_REQUEST": "Bitte geben Sie mindestens einen Empfänger ein",
+      "AT_LEAST_ONE_DOCUMENT": "Keine Datei ausgewählt",
+      "EMAIL_ALREADY_IN_UPLOAD_REQUEST": "Eine E-Mail-Adresse ist bereits in der Empfängerliste vorhanden",
+      "AUTHOR_ALREADY_EXISTS": "Der Autor ist bereits in der Liste vorhanden",
+      "CONTACT_STILL_EXISTS": "ist bereits in der Liste",
+      "ELEMENTS_NOT_DELETED": "Element(e) wurden nicht gelöscht",
+      "ELEMENTS_NOT_DELETED_SINGULAR": "1 Element wurde nicht gelöscht.",
+      "ELEMENTS_NOT_DELETED_PLURAL": "{{number}} Elemente wurden nicht gelöscht.",
+      "ELEMENTS_NOT_UPLOADED": "{number} {singular, select, true{Element wurde} other{Elemente wurden}} nicht hochgeladen.",
+      "ERROR": "Fehler:",
+      "ERROR_404": "Fehler {{errCode}} - Element nicht gefunden",
+      "ERROR_403": "Fehler {{errCode}} - Sie sind nicht berechtigt, dieses Dokument zu löschen",
+      "ERROR_400": "Fehler {{errCode}} - Die Anfrage konnte nicht ausgeführt werden",
+      "ERROR_500": "Fehler {{errCode}} - Serverfehler",
+      "INVALID_EMAIL": "Ungültige E-Mail-Adresse",
+      "ISOLATED_FILE": "Sie sehen gerade eine eingeschränkte Dateiauswahl.",
+      "ENTER_TOKEN_NAME": "Bitte geben Sie den Namen des Tokens ein"
+    }
+  }
+}

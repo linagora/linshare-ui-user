@@ -1,0 +1,30 @@
+{
+  "UPLOAD_DESTINATION": "Destino",
+  "UPLOAD_SHARE_ALERT": {
+    "CANCEL": "Cancelar",
+    "MAIN_DIALOG_BUTTON_TITLE": "Compartir",
+    "MESSAGE": "${nbErrorFilesSelected} archivo(s) no se pueden compartir. ¿Desea continuar?",
+    "MESSAGE_SINGULAR": "Un archivo de su selección contiene errores y se excluirá del recurso compartido. ¿Desea compartir de todos modos los archivos restantes?",
+    "MESSAGE_PLURAL": "Algunos archivos de su selección contienen errores y se excluirán del recurso compartido. ¿Desea compartir de todos modos los archivos restantes?",
+    "NO_SHAREABLE_FILE_SELECTED": "Los archivos seleccionados contienen errores y no se pueden compartir",
+    "NO_SHAREABLE_FILE_SELECTED_SINGULAR": "El archivo seleccionado contiene errores y no se puede compartir",
+    "TITLE_SINGULAR": "Un archivo no se puede compartir.",
+    "TITLE_PLURAL": "${nbErrorFilesSelected} archivos no se pueden compartir."
+  },
+  "UPLOADED_FILES": {
+    "BREADCRUMB_TITLE": "Cargas",
+    "SELECT_INFO": "Cargue y seleccione archivos para compartirlos de forma asíncrona"
+  },
+  "DRAG_DROP_BACKGROUND": {
+    "TITLE": "Suelte sus archivos aquí",
+    "COMMENT": "Arrastre y suelte sus archivos aquí para cargarlos",
+    "TITLE_VERSION": "Suelte su versión aquí",
+    "COMMENT_VERSION": "Arrastre y suelte su versión aquí para cargarla",
+    "TITLE_VERSION_NO_RIGHTS": "No puede cargar una nueva versión",
+    "COMMENT_VERSION_NO_RIGHTS": "No tiene el permiso necesario"
+  },
+  "DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Uso compartido asíncrono",
+    "COMMENT": "Cargue y comparta sus archivos sin esperar."
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "BACKGROUND_GUEST_MSG": "Al crear una cuenta de invitado temporal, su contacto podrá intercambiar archivos en LinShare.",
+  "BACKGROUND_GUESTS_TITLE_MSG": "Crear cuentas de invitado",
+  "ACTION": {
+    "ADD_TO_WORKGROUPS": "Añadir a grupos de trabajo"
+  },
+  "BOUTON_LABEL_TITLE": {
+    "EDIT": "Editar",
+    "DELETE": "Eliminar",
+    "GUEST": "Invitado(s)"
+  },
+  "BREADCRUMB_TITLE_GUEST": "Cuentas de invitado",
+  "GUEST_DETAILS": {
+    "ACTIVATED": "Activado",
+    "ADMIN": "Administrador",
+    "ALREADY_A_MEMBER": "Ya es miembro",
+    "AVAILABLE_CONTACTS": "Contactos disponibles",
+    "AVAILABLE_CONTACTS_LIST": "Listas de contactos disponibles",
+    "COMMENT": {
+      "EMPTY": "Sin comentarios",
+      "TITLE": "Comentario"
+    },
+    "DEACTIVATED": "Desactivado",
+    "DETAIL_OF_GUEST_ACCOUNT": "Detalles de la cuenta de invitado",
+    "DOMAIN": "Dominio",
+    "EDIT_GUEST": "Editar",
+    "EXPIRE_THE": "Caduca el",
+    "MY_SPACE": "Mi espacio",
+    "RESTRICTED_CONTACTS": "Contactos restringidos",
+    "UPDATE_OF_GUEST_ACCOUNT": "Editar cuenta de invitado"
+  },
+  "HEADER_GUEST": {
+    "DOMAIN": "Dominio",
+    "SLIDER": {
+      "ALL": "Todos los invitados",
+      "MY_GUESTS_ALL": "Todos mis invitados",
+      "MY_GUESTS_SIMPLE": "Mis invitados: moderador",
+      "MY_GUESTS_ADMIN": "Mis invitados: administrador"
+    }
+  },
+  "NC": "N.C.",
+  "ORDER_BY": {
+    "EXPIRATION_DATE": "Fecha de caducidad",
+    "EMAIL": "Correo",
+    "DOMAIN_NAME": "Nombre de dominio"
+  },
+  "SIDEBAR": {
+    "NO_MODERATOR_RIGHT": "No tiene derechos de moderador para editar este invitado",
+    "BUTTON": {
+      "CREATE": "Crear",
+      "CANCEL": "Cancelar",
+      "UPDATE": "Actualizar"
+    },
+    "ERROR": {
+      "INVALID_DATE": "La fecha debe ser posterior a la de hoy y no puede superar la fecha de caducidad máxima, que es: {{date}}",
+      "INVALID_EMAIL": "La dirección de correo electrónico no es válida.",
+      "INVALID_EMPTY_FIELD": "Este campo no puede estar vacío.",
+      "RESTRICTED_CONTACTS_REQUIRED": "Un invitado restringido requiere al menos un contacto.",
+      "RESTRICTED_CONTACTS_LIST_REQUIRED": "Un invitado restringido requiere al menos una lista de contactos."
+    },
+    "LABEL": {
+      "ACTIVATE_USER_SPACE": "Activar el espacio de usuario",
+      "ADD_DESCRIPTION": "Añadir una descripción del usuario",
+      "ADD_EMAIL": "Añadir un mensaje",
+      "ADVANCED_OPTIONS": "Opciones avanzadas",
+      "ALLOW_MODIFICATORS": "Permitir que otros usuarios modifiquen esta cuenta",
+      "HIDE_CONTACTS_LIST_MEMBERS": "Ocultar a este invitado los miembros de las listas de contactos",
+      "DISPLAY_CONTACTS_LIST_MEMBERS": "Mostrar a este invitado los miembros de las listas de contactos",
+      "EMAIL": "Correo",
+      "ENTER_DESCRIPTION": "Introduzca su descripción",
+      "ENTER_EMAIL": "Introduzca su mensaje",
+      "EXP_DATE": "Fecha de caducidad",
+      "FIRSTNAME": "Nombre",
+      "LASTNAME": "Apellidos",
+      "RESTRICT_CONTACTS": "Restringir contactos",
+      "RESTRICT_CONTACTS_LIST": "Restringir listas de contactos",
+      "HIDE_CONTACTS_LIST_MEMBER": "Ocultar los miembros de las listas de contactos"
+    },
+    "NOTIFICATION": {
+      "SUCCESS": {
+        "CREATE": "La cuenta de invitado se ha creado correctamente",
+        "DELETE": "La cuenta de invitado se ha eliminado correctamente",
+        "UPDATE": "La cuenta de invitado se ha actualizado correctamente"
+      }
+    },
+    "TITLE": {
+      "CREATE": "CREAR CUENTA DE INVITADO"
+    }
+  },
+  "GUEST_MODERATOR": {
+    "TAB_TITLE": "Moderadores",
+    "LABEL": "Moderadores existentes: <b>{{number}}</b>",
+    "LABEL_ADD": "Añadir moderadores",
+    "MODERATOR_ROLE": "Rol de moderador",
+    "ROLE": {
+      "ADMIN": "Administrador",
+      "SIMPLE": "Moderador"
+    },
+    "FILTER": {
+      "NAME_PLACEHOLDER": "Buscar moderadores por nombre"
+    },
+    "FORM": {
+      "AUTOCOMPLETE_PLACEHOLDER": "Buscar usuarios para añadir"
+    }
+  }
+}

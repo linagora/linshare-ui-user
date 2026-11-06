@@ -1,0 +1,106 @@
+{
+  "BACKGROUND_GUEST_MSG": "Creando un account ospite temporaneo, il tuo contatto potrà scambiare file su LinShare.",
+  "BACKGROUND_GUESTS_TITLE_MSG": "Crea account ospite",
+  "ACTION": {
+    "ADD_TO_WORKGROUPS": "Aggiungi ai gruppi di lavoro"
+  },
+  "BOUTON_LABEL_TITLE": {
+    "EDIT": "Modifica",
+    "DELETE": "Elimina",
+    "GUEST": "Ospite/i"
+  },
+  "BREADCRUMB_TITLE_GUEST": "Account ospite",
+  "GUEST_DETAILS": {
+    "ACTIVATED": "Attivato",
+    "ADMIN": "Amministratore",
+    "ALREADY_A_MEMBER": "Già membro",
+    "AVAILABLE_CONTACTS": "Contatti disponibili",
+    "AVAILABLE_CONTACTS_LIST": "Liste di contatti disponibili",
+    "COMMENT": {
+      "EMPTY": "Nessun commento",
+      "TITLE": "Commento"
+    },
+    "DEACTIVATED": "Disattivato",
+    "DETAIL_OF_GUEST_ACCOUNT": "Dettagli dell'account ospite",
+    "DOMAIN": "Dominio",
+    "EDIT_GUEST": "Modifica",
+    "EXPIRE_THE": "Scade il",
+    "MY_SPACE": "Il mio spazio",
+    "RESTRICTED_CONTACTS": "Contatti limitati",
+    "UPDATE_OF_GUEST_ACCOUNT": "Modifica account ospite"
+  },
+  "HEADER_GUEST": {
+    "DOMAIN": "Dominio",
+    "SLIDER": {
+      "ALL": "Tutti gli ospiti",
+      "MY_GUESTS_ALL": "Tutti i miei ospiti",
+      "MY_GUESTS_SIMPLE": "I miei ospiti: moderatore",
+      "MY_GUESTS_ADMIN": "I miei ospiti: amministratore"
+    }
+  },
+  "NC": "N.D.",
+  "ORDER_BY": {
+    "EXPIRATION_DATE": "Data di scadenza",
+    "EMAIL": "Indirizzo email",
+    "DOMAIN_NAME": "Nome del dominio"
+  },
+  "SIDEBAR": {
+    "NO_MODERATOR_RIGHT": "Non hai i diritti di moderatore per modificare questo ospite",
+    "BUTTON": {
+      "CREATE": "Crea",
+      "CANCEL": "Annulla",
+      "UPDATE": "Aggiorna"
+    },
+    "ERROR": {
+      "INVALID_DATE": "La data deve essere successiva a oggi e non può superare la data di scadenza massima, ovvero: {{date}}",
+      "INVALID_EMAIL": "L'indirizzo email non è valido.",
+      "INVALID_EMPTY_FIELD": "Questo campo non può essere vuoto.",
+      "RESTRICTED_CONTACTS_REQUIRED": "Un ospite limitato richiede almeno un contatto.",
+      "RESTRICTED_CONTACTS_LIST_REQUIRED": "Un ospite limitato richiede almeno una lista di contatti."
+    },
+    "LABEL": {
+      "ACTIVATE_USER_SPACE": "Attiva lo spazio utente",
+      "ADD_DESCRIPTION": "Aggiungi una descrizione dell'utente",
+      "ADD_EMAIL": "Aggiungi un messaggio",
+      "ADVANCED_OPTIONS": "Opzioni avanzate",
+      "ALLOW_MODIFICATORS": "Consenti ad altri utenti di modificare questo account",
+      "HIDE_CONTACTS_LIST_MEMBERS": "Nascondi a questo ospite i membri delle liste di contatti",
+      "DISPLAY_CONTACTS_LIST_MEMBERS": "Mostra a questo ospite i membri delle liste di contatti",
+      "EMAIL": "Indirizzo email",
+      "ENTER_DESCRIPTION": "Inserisci la descrizione",
+      "ENTER_EMAIL": "Inserisci il messaggio",
+      "EXP_DATE": "Data di scadenza",
+      "FIRSTNAME": "Nome",
+      "LASTNAME": "Cognome",
+      "RESTRICT_CONTACTS": "Limita i contatti",
+      "RESTRICT_CONTACTS_LIST": "Limita le liste di contatti",
+      "HIDE_CONTACTS_LIST_MEMBER": "Nascondi i membri delle liste di contatti"
+    },
+    "NOTIFICATION": {
+      "SUCCESS": {
+        "CREATE": "L'account ospite è stato creato correttamente",
+        "DELETE": "L'account ospite è stato eliminato correttamente",
+        "UPDATE": "L'account ospite è stato aggiornato correttamente"
+      }
+    },
+    "TITLE": {
+      "CREATE": "CREA ACCOUNT OSPITE"
+    }
+  },
+  "GUEST_MODERATOR": {
+    "TAB_TITLE": "Moderatori",
+    "LABEL": "Moderatori esistenti: <b>{{number}}</b>",
+    "LABEL_ADD": "Aggiungi moderatori",
+    "MODERATOR_ROLE": "Ruolo di moderatore",
+    "ROLE": {
+      "ADMIN": "Amministratore",
+      "SIMPLE": "Moderatore"
+    },
+    "FILTER": {
+      "NAME_PLACEHOLDER": "Cerca moderatori per nome"
+    },
+    "FORM": {
+      "AUTOCOMPLETE_PLACEHOLDER": "Cerca utenti da aggiungere"
+    }
+  }
+}

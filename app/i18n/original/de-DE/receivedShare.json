@@ -1,0 +1,24 @@
+{
+  "BACKGROUND_RECEIVED_SHARES_MSG": "Diese Freigaben sind temporäre Links zu Dateien, die von Ihren Kontakten gesendet und gespeichert werden.",
+  "BACKGROUND_RECEIVED_SHARES_TITLE_MSG": "Empfangene Freigaben anzeigen",
+  "BREADCRUMB_TITLE_RECEIVED_SHARES": "Empfangene Freigaben",
+  "FILTER": {
+    "ORDER_BY_SENDER": "Absender"
+  },
+  "TOOLTIP": {
+    "ADVANCED_FILTER": "Erweiterte Filter anzeigen",
+    "REMOVE_FILES": "Ausgewählte Dateien entfernen",
+    "DOWNLOAD_FILES": "Ausgewählte Dateien herunterladen",
+    "SHOW_MORE_OPTIONS": "Weitere Optionen anzeigen",
+    "DATE_OF_MODIFICATION": "Änderungsdatum",
+    "DATE_OF_CREATION": "Erstellungsdatum"
+  },
+  "TABLE_HEADER": {
+    "NAME": "Dateiname",
+    "TYPE": "Typ",
+    "MODIFICATION_DATE": "Letzte Änderung",
+    "CREATION_DATE": "Erstellungsdatum",
+    "SIZE": "Größe",
+    "ACTION": "Aktionen"
+  }
+}

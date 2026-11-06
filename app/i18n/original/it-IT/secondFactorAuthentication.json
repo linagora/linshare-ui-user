@@ -1,0 +1,32 @@
+{
+  "SECOND_FACTOR_AUTH": {
+    "TITLE": "Autenticazione a due fattori",
+    "SHARED_KEY_CREATION": {
+      "REQUIRED": "L'autenticazione a due fattori è obbligatoria per il tuo account. Attiva l'autenticazione a due fattori per continuare a usare LinShare.",
+      "INSTRUCTION": "Per attivare l'autenticazione a due fattori sul tuo account:",
+      "STEP_1": "Scarica e installa l'app di autenticazione OTP che preferisci.\nPer Android, su Google Play Store o F-Droid: FreeOTP+, Google Authenticator, Microsoft Authenticator o Aegis Authenticator.\nPer iOS, su App Store: FreeOTP, Google Authenticator o Microsoft Authenticator.",
+      "STEP_2": "Genera la chiave condivisa e usa la tua app di autenticazione OTP preferita per scansionare il codice QR o aggiungere la chiave come indicato di seguito:",
+      "GENERATE_KEY": "Genera chiave condivisa",
+      "KEY_CREATED_ON": "Chiave condivisa creata il {{date}}",
+      "CAN_NOT_SCAN": "Non riesci a scansionarlo?"
+    },
+    "SHARED_KEY_REMOVAL": {
+      "NOTICE": "La chiave condivisa non può essere rimossa perché l'autenticazione a due fattori è obbligatoria per il tuo account. Contatta l'assistenza per maggiori informazioni.",
+      "INSTRUCTION": "Rimuovi la chiave condivisa per disattivare l'autenticazione a due fattori sul tuo account:",
+      "REMOVE_KEY": "Rimuovi chiave condivisa",
+      "REMOVAL_SUCCESS": "La chiave condivisa è stata eliminata correttamente."
+    },
+    "MANUAL_SETUP": {
+      "LABEL": "Non riesci a scansionare il codice?",
+      "STEP_1": "1. Nella tua app di autenticazione OTP preferita, seleziona l'icona per aggiungere una chiave.",
+      "STEP_2": "2. Inserisci emittente e account come indicato di seguito:",
+      "STEP_3": "3. Inserisci la chiave segreta come indicato di seguito:",
+      "STEP_4": "4. Assicurati che i campi seguenti siano configurati così:",
+      "STEP_5": "5. Tocca il pulsante Aggiungi per terminare.",
+      "TYPE": "Tipo: ",
+      "DIGITS": "Cifre: ",
+      "ALGORITHM": "Algoritmo: ",
+      "INTERVAL": "Intervallo: "
+    }
+  }
+}

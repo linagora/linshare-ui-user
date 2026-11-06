@@ -1,0 +1,119 @@
+{
+  "MEMBER_TAB": {
+    "ADD_MEMBER": "Añadir miembros del equipo:",
+    "ADD_WORKSPACE_MEMBER": "Añadir miembros del espacio de trabajo con los siguientes roles:",
+    "NUM_MEMBER": "Miembros existentes:",
+    "TITLE": "Miembros",
+    "ADD": "Añadir",
+    "UPDATE": "Actualizar",
+    "EDIT_RIGHTS": "Editar los permisos del usuario",
+    "EDIT_RIGHT": "Editar permiso",
+    "REMOVE_TEAM_MEMBER": "Quitar miembro del equipo",
+    "ACTIVATED": "Activado",
+    "NOTIFICATION_ACTIVATED": "notificación activada",
+    "ADMIN": "Administrador",
+    "CONTRIBUTOR": "Colaborador",
+    "WRITER": "Editor",
+    "READER": "Lector",
+    "WORK_SPACE_ADMIN": "Administrador del espacio de trabajo",
+    "WORK_SPACE_WRITER": "Editor del espacio de trabajo",
+    "WORK_SPACE_READER": "Lector del espacio de trabajo",
+    "ADMIN_RIGHTS": "Permisos de administrador",
+    "CONTRIBUTOR_RIGHTS": "Permisos de colaborador",
+    "WRITER_RIGHTS": "Permisos de editor",
+    "READER_RIGHTS": "Permisos de lector",
+    "WORK_SPACE_ADMIN_RIGHTS": "Permisos de administrador del espacio de trabajo",
+    "WORK_SPACE_WRITER_RIGHTS": "Permisos de editor del espacio de trabajo",
+    "WORK_SPACE_READER_RIGHTS": "Permisos de lector del espacio de trabajo",
+    "WORKSPACE_ROLE": "En este espacio de trabajo",
+    "DEFAULT_WORKGROUP_ROLE": "Predeterminado en los grupos de trabajo",
+    "WORKGROUP_ROLE": "Rol en el grupo de trabajo",
+    "MULTI_SELECT": "selección múltiple",
+    "JOINING_DATE": "Fecha de incorporación",
+    "USER_NAME": "Nombre de usuario",
+    "USER_RIGHTS": "Permisos del usuario",
+    "SORT_BY": "Ordenar por",
+    "FILTER_BY": "Filtrar por",
+    "SORT_MEMBER": {
+      "FIRSTNAME": "Nombre",
+      "LASTNAME": "Apellidos",
+      "RIGHT": "Rol"
+    },
+    "MY_RIGHTS": "Mis permisos",
+    "TOOLTIPS": {
+      "WORKSPACE_ROLE": "El rol del miembro en este espacio de trabajo",
+      "DEFAULT_WORKGROUP_ROLE": "El rol predeterminado del miembro en todos los grupos de trabajo de este espacio de trabajo"
+    },
+    "WORKSPACE_MEMBER": "Miembro del espacio de trabajo",
+    "EXTERNAL_USER": "Usuario externo"
+  },
+  "DETAILS": {
+    "FULL_SIZE": "Tamaño total",
+    "TRASH_FULL_SIZE": "Tamaño de la papelera",
+    "USED_SPACE": "Espacio utilizado"
+  },
+  "BREADCRUMB_TITLE_WORKGROUP": "Grupos de trabajo",
+  "BREADCRUMB_TITLE_WORKGROUP_FILES": "Archivos",
+  "BREADCRUMB_UPPER_LEVEL": "Carpetas superiores",
+  "VERSION": "Versión",
+  "FILE_NAME": "Nombre del archivo",
+  "VERSION_VIEW": "Está viendo la versión de {{filename}}",
+  "VERSION_NAME_UPDATE": "el nombre de la versión ha cambiado a {{filename}}",
+  "WORKGROUP_DRAG_DROP_BACKGROUND_MOBILE": {
+    "TITLE": "Cargue sus archivos",
+    "COMMENT": "Cargue archivos y añada miembros para colaborar con ellos.",
+    "TITLE_VERSION": "Cargue las versiones de su archivo",
+    "COMMENT_VERSION": "Cargue las versiones de su archivo y consulte su historial."
+  },
+  "CREATE_NEW_WORKGROUP": "Crear un nuevo grupo de trabajo",
+  "CREATE_NEW_FOLDER": "Crear una nueva carpeta",
+  "CREATE_NEW_WORKSPACE": "Crear un nuevo espacio de trabajo",
+  "SHARED_SPACE_TYPE": {
+    "WORKGROUP": "Grupo de trabajo",
+    "WORKSPACE": "Espacio de trabajo"
+  },
+  "SHARED_SPACE_DIALOGS": {
+    "UPDATE_DEFAULT_WORKGROUPS_ROLE": {
+      "TITLE": "Editar el rol predeterminado en los grupos de trabajo",
+      "MESSAGE": "Está a punto de actualizar el rol predeterminado del miembro en todos los grupos de trabajo del espacio de trabajo <b>{{workspaceName}}</b>.",
+      "ACTION": "Aplicar este rol a todos los grupos de trabajo existentes",
+      "BUTTONS": {
+        "CONFIRM": "ACTUALIZAR"
+      }
+    }
+  },
+  "SHARED_SPACE_TOOLTIPS": {
+    "WORKSPACE": "Un espacio de trabajo solo contiene grupos de trabajo. Le permite definir una lista de miembros predeterminados para todos los grupos de trabajo anidados, con su rol predeterminado (consultar, crear, etc.)",
+    "WORKGROUP": "Un grupo de trabajo es un espacio de colaboración al que puede añadir miembros, como usuarios internos o invitados. Estos miembros podrán consultar, crear, actualizar o eliminar archivos y carpetas del grupo de trabajo según su rol."
+  },
+  "WORKGROUP_SEARCH_BOX": {
+    "LAST_AUTHOR": "Último autor",
+    "FILE_TYPES": "Tipos de archivo",
+    "NODE_TYPES": {
+      "LABEL": "Tipos",
+      "DOCUMENT": "Archivos",
+      "FOLDER": "Carpetas",
+      "REVISION": "Versiones"
+    },
+    "TYPES": {
+      "ANY": "Todos los tipos",
+      "DOCUMENT": "Documento",
+      "PDF": "PDF",
+      "SPREADSHEET": "Hoja de cálculo",
+      "IMAGE": "Imagen",
+      "AUDIO": "Audio",
+      "ARCHIVE": "Archivo comprimido",
+      "OTHER": "Otro"
+    }
+  },
+  "WORKGROUP_SEARCH_PAGE": {
+    "BACKGROUND_NO_RESULT": {
+      "MESSAGE": "No se han encontrado resultados",
+      "SUBMESSAGE": "Pruebe otra búsqueda o abra el cuadro de búsqueda para filtrar por tipo de archivo, autor y más"
+    },
+    "BACKGROUND": {
+      "MESSAGE": "Búsqueda en el grupo de trabajo",
+      "SUBMESSAGE": "Búsqueda en todos los archivos y carpetas del grupo de trabajo"
+    }
+  }
+}
